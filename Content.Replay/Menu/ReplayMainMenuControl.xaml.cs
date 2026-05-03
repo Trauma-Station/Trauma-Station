@@ -32,7 +32,7 @@ public sealed partial class ReplayMainMenuControl : Control
         LayoutContainer.SetMarginTop(VBox, 30);
         LayoutContainer.SetGrowHorizontal(VBox, LayoutContainer.GrowDirection.Begin);
 
-        Subtext.FontOverride = resCache.NotoStack2ElectricBoogaloo("/Fonts/_Trauma/ScienceGothicDisplay-Bold.ttf", 24); // Goobstation - ZH text support
+        Subtext.FontOverride = resCache.NotoStack2ElectricBoogaloo("/Fonts/NotoSans/NotoSans/Display-Bold.ttf", 24); // Goobstation - ZH text support
         var logoTexture = resCache.GetResource<TextureResource>("/Textures/Logo/logo.png");
         Logo.Texture = logoTexture;
 
