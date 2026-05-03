@@ -45,7 +45,7 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
         Coordinates = coordinates;
 
         // Load fonts
-        // <Trauma>
+        // <Trauma> - switch to ScienceGothic
         var headerFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Bold.ttf"), 11);
         var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDisplay-Regular.ttf"), 11);
         var smallFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 10);
