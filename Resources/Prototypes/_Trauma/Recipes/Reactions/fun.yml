@@ -13,3 +13,21 @@
       amount: 1
     CapsaicinOil:
       amount: 1
+
+- type: reaction
+  id: Crabon
+  reactants:
+    GroundCrab: # you need crab for the crabs
+      amount: 1
+    Carbon: # so the name makes sense
+      amount: 1
+    UnstableMutagen: # mutate them into existance
+      amount: 1
+    CoconutFlesh: # coconut crab
+      amount: 1
+    CoconutWater: # coconut crab
+      amount: 1
+    Fentanyl: # make it harder to get
+      amount: 1
+  products:
+    Crabon: 3

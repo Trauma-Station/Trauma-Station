@@ -419,7 +419,6 @@
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    attackRate: 0.6
     damage:
       types:
         Blunt: 10
@@ -483,6 +482,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.5
     baseSprintSpeed: 1.5
+  - type: MeleeWeapon
+    attackRate: 0.6
   - type: SlowOnDamage
     speedModifierThresholds:
       999: 1
@@ -492,6 +493,25 @@
     damageModifierSet: CoconutCrab
   - type: MobPrice
     price: 500 # The fact that a test requires me to add this is fucking stupid
+
+- type: entity
+  parent: MobCoconutCrabShellless
+  id: MobCoconutCrabFloofy
+  suffix: Silly, AI
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    layers:
+      - state: floofycrab
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    attackRate: 0.5
+    damage:
+      types:
+        Blunt: 20
+        Structural: 20
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat]
@@ -525,12 +545,12 @@
       reagents:
       - ReagentId: CopperBlood
         Quantity: 10
-  - type: HTNE
+  - type: HTN
     rootTask:
       task: SimpleHostileCompound
   - type: NpcFactionMember
     factions:
-    - AllHostile # THY END IS NOW
+    - CrabFaction # This is crabtually insane
   - type: ZombieImmune
   - type: MobPrice
     price: 10
@@ -558,7 +578,8 @@
   parent: MobCrabTinyBase
   id: MobBotanyCoconutCrab
   name: coconut crab
-  suffix: botany
+  description: Not to be confused with the Coconut Crab... oh, I see the problem now.
+  suffix: botany, AI
   components:
   - type: SolutionContainerManager
     solutions:
@@ -582,6 +603,11 @@
         recursive: false
       - !type:SpillBehavior
         solution: food
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCoconutHalf:
+            min: 0
+            max: 1
 
 - type: entity
   parent: MobCrabTinyBase
@@ -604,3 +630,17 @@
       types:
         Blunt: 2.5
         Piercing: 2.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatCrab:
+            min: 0
+            max: 1

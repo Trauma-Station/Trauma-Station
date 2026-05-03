@@ -114,4 +114,4 @@
       rolls: 4, 8
       children:
       - id: MobCoconutCrab
-      - id: MobCrab
+      - id: MobCrabTiny
