@@ -39,6 +39,7 @@
   id: NotoSansDisplayBoldItalic
   path: /Fonts/_Trauma/ScienceGothicDisplay-BoldItalic.ttf
 # </Trauma>
+
 - type: font
   id: BoxRound
   path: /Fonts/Boxfont-round/Boxfont Round.ttf
