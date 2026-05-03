@@ -95,9 +95,7 @@ public partial class MapGridControl : LayoutContainer
         ActualRadarRange = range;
 
         var cache = IoCManager.Resolve<IResourceCache>();
-        // <Trauma>
-        _largerFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 16);
-        // </Trauma>
+        _largerFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 16); // Trauma
     }
 
     public void ForceRecenter()
