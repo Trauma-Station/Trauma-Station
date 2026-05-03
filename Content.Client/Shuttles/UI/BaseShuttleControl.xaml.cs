@@ -47,7 +47,7 @@ public partial class BaseShuttleControl : MapGridControl
     {
         RobustXamlLoader.Load(this);
         Maps = EntManager.System<SharedMapSystem>();
-        Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 12); // <Trauma>
+        Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 12); // Trauma
         _drawJob = new GridDrawJob()
         {
             ScaledVertices = _allVertices,
