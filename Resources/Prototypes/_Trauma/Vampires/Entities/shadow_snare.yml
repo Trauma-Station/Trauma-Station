@@ -1,0 +1,67 @@
+- type: entity
+  id: ShadowSnare
+  name: Shadow Snare
+  description: A weird tentacle.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi # TODO: Change
+    state: bar
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      shadowsnare:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - MobMask
+        layer:
+        - Impassable
+  # These triggers handle entity effects on collision
+  - type: TriggerOnCollide
+    keysIn:
+    - effects
+    fixtureID: shadowsnare
+  - type: EntityEffectOnTrigger
+    keyOut: effects
+    targetUser: true
+    effects:
+    - !type:GenericStatusEffect
+      key: TemporaryBlindness
+      component: TemporaryBlindness
+      time: 15
+      type: Add
+    - !type:RelayInventory # Note: modsuit lights are borked, im not bothering fixing them. Works for helmets
+      effect: !type:NestedEffect
+        proto: ShadowSnare
+      slotFlags: All
+    - !type:RelayHands
+      effect: !type:NestedEffect
+        proto: ShadowSnare
+
+  # Below is handling damaging the shadow snare
+  - type: DamagedByFlashing
+    flashDamage:
+      types:
+        Heat: 10
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+  - type: Damageable
+    damageContainer: ShadowHaze # Same because they literally both get destroyed by flash
+
+  # Shadow Snares get deleted when exposes to light for more than 5 seconds
+  - type: LightDetection
+  - type: DeleteOnLightExposure
+    onLightLevel: 3
+    duration: 5

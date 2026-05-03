@@ -5,7 +5,7 @@ using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Removes bolas from the target entity.

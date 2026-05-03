@@ -35,6 +35,25 @@
       time: null
       type: Remove
 
+# Shadow Snare
+- type: entity
+  parent: BaseVampireAction
+  id: ActionShadowSnare
+  name: Shadow Snare
+  description: Shadow Snare
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 10
+  - type: WorldTargetAction
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: ShadowSnare
+
 # Dark Passage
 - type: entity
   parent: [BaseVampireAction, ActionBlink]

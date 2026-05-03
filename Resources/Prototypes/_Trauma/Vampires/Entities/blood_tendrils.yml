@@ -25,7 +25,7 @@
           bounds: "-0.1,-0.2,0.1,0.2"
         hard: false
         mask:
-        - Opaque
+        - MobMask
         layer:
         - Impassable
   - type: TriggerOnCollide

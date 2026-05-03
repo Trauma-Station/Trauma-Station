@@ -1,0 +1,9 @@
+- type: entityEffect
+  id: ShadowSnare
+  effects:
+  - !type:SetHandheldLight
+    toggle: false
+    quiet: false
+  - !type:SetUnpoweredFlashlight
+    toggle: false
+    quiet: false
