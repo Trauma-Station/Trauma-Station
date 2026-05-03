@@ -399,7 +399,7 @@
   - type: ComplexInteraction
   - type: NpcFactionMember
     factions:
-    - SimpleHostile
+    - CrabFaction
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -504,6 +504,21 @@
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
       - state: floofycrab
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      999: 1
+      0: 1
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: CoconutCrab
+  - type: VentCrawler
+  - type: GhostRole
+    name: ghost-role-coconutcrab-name
+    description: ghost-role-ratma-desc
+    rules: ghost-role-information-antagonist-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
