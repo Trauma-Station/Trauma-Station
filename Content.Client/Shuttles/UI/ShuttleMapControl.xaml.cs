@@ -80,7 +80,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         var cache = IoCManager.Resolve<IResourceCache>();
 
         _physicsQuery = EntManager.GetEntityQuery<PhysicsComponent>();
-        
+
         _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 10); // Trauma
     }
 
