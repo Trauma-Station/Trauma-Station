@@ -69,7 +69,6 @@
   - type: RevPropaganda
     conversionDuration: 5
     consumesCharges: 1
-    applyFlashEffect: false
     userWhitelist:
       components:
       - HeadRevolutionary
