@@ -7819,3 +7819,10 @@ Entries:
   id: 903
   time: '2026-05-03T13:32:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2382
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Electropack now has an internal self-charging battery
+  id: 904
+  time: '2026-05-03T19:52:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2389
