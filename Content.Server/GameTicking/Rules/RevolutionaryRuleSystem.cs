@@ -1,12 +1,8 @@
 // <Trauma>
-using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Shared.Revolutionary;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
-using Content.Server.Speech.Components;
-using Content.Trauma.Common.Revolutionary;
-using Content.Shared.Speech.Muting;
 using System.Linq;
 // </Trauma>
 using Content.Server.Administration.Logs;
@@ -57,7 +53,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    //[Dependency] private readonly MobStateSystem _mobState = default!; // Trauma - no longer used
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RoleSystem _role = default!;
@@ -74,7 +70,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         base.Initialize();
         SubscribeLocalEvent<CommandStaffComponent, MobStateChangedEvent>(OnCommandMobStateChanged);
 
-        SubscribeLocalEvent<HeadRevolutionaryComponent, AfterRevolutionaryConvertedEvent>(OnPostConvert); // Einstein Engines - Revolutionary Manifesto
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnTryCallEvac); // goob edit
         SubscribeLocalEvent<HeadRevolutionaryComponent, MobStateChangedEvent>(OnHeadRevMobStateChanged);
 
@@ -171,96 +166,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         args.Append(Loc.GetString(head ? "head-rev-briefing" : "rev-briefing"));
     }
 
-    /// <summary>
-    /// Called when a Head Rev uses a Revolutionary Manifesto to convert somebody else.
-    /// </summary>
-    private void OnPostConvert(EntityUid uid, HeadRevolutionaryComponent comp, ref AfterRevolutionaryConvertedEvent ev)
-    {
-        // Einstein Engines - Revolutionary Manifesto - Use RevolutionaryConverterSystem instead of hardcoding flashes
-        // GoobStation - check if headRev's ability enabled
-        if (!comp.ConvertAbilityEnabled)
-            return;
-
-        // Goobstation - Something something check for 30 conditions of mute or otherwise speech impeding shit that makes book pointless
-        if (HasComp<MumbleAccentComponent>(uid) // Muzzles to bypass speech is bad
-            || HasComp<MutedComponent>(uid)) // No speech = No convert
-            return;
-        // Goob edit end (for now)
-
-        if (uid != ev.User)
-            return;
-
-        var alwaysConvertible = HasComp<AlwaysRevolutionaryConvertibleComponent>(ev.Target);
-
-        if (!_mind.TryGetMind(ev.Target, out var mindId, out var mind))
-            return;
-
-        // goob - event instead of whatever the fuck the hascomp obelisk below is (whoever did this needs to be flogged)
-        var convEv = new BeforeConversionEvent();
-        RaiseLocalEvent(ev.Target, ref convEv);
-
-        if (HasComp<RevolutionaryComponent>(ev.Target) ||
-            HasComp<MindShieldComponent>(ev.Target) ||
-            !HasComp<HumanoidProfileComponent>(ev.Target) &&
-            !alwaysConvertible ||
-            !_mobState.IsAlive(ev.Target) ||
-            HasComp<ZombieComponent>(ev.Target) ||
-            HasComp<AntagImmuneComponent>(ev.Target) || // Trauma - Antag immune MEANS antag immune.
-            !HasComp<RevolutionaryConverterComponent>(ev.Used))
-        {
-            if (ev.User != null)
-                _popup.PopupEntity("The conversion failed!", ev.User.Value, ev.User.Value);
-
-            return;
-        }
-
-        // goob - event start
-        if (convEv.Blocked)
-        {
-            if (ev.User != null)
-                _popup.PopupEntity("The conversion failed!", ev.User.Value, ev.User.Value);
-
-            return;
-        }
-        // goob - event end
-
-        if (HasComp<RevolutionEnemyComponent>(ev.Target))
-            RemComp<RevolutionEnemyComponent>(ev.Target);
-
-        _npcFaction.AddFaction(ev.Target, RevolutionaryNpcFaction);
-        var revComp = EnsureComp<RevolutionaryComponent>(ev.Target);
-
-        if (ev.User != null)
-        {
-            _adminLogManager.Add(LogType.Mind,
-                LogImpact.Medium,
-                $"{ToPrettyString(ev.User.Value)} converted {ToPrettyString(ev.Target)} into a Revolutionary");
-
-            if (_mind.TryGetMind(ev.User.Value, out var revMindId, out _))
-            {
-                if (_role.MindHasRole<RevolutionaryRoleComponent>(revMindId, out var role))
-                {
-                    role.Value.Comp2.ConvertedCount++;
-                    Dirty(role.Value.Owner, role.Value.Comp2);
-                }
-            }
-        }
-
-        if (mindId == default || !_role.MindHasRole<RevolutionaryRoleComponent>(mindId))
-        {
-            _role.MindAddRole(mindId, "MindRoleRevolutionary");
-        }
-
-        if (mind is { UserId: not null } && _player.TryGetSessionById(mind.UserId, out var session))
-            _antag.SendBriefing(session, Loc.GetString("rev-role-greeting"), Color.Red, revComp.RevStartSound);
-
-        // Goobstation - Check lose if command was converted
-        if (!TryComp<CommandStaffComponent>(ev.Target, out var commandComp))
-            return;
-
-        commandComp.Enabled = false;
-        CheckCommandLose();
-    }
+    // Trauma - nuked conversion shitcode its not used
 
     //~~TODO: Enemies of the revolution~~
     // goob edit: too bad wizden goob did it first :trollface:
@@ -273,7 +179,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     /// <summary>
     /// Checks if all of command is dead and if so will remove all sec and command jobs if there were any left.
     /// </summary>
-    private bool CheckCommandLose()
+    public bool CheckCommandLose() // Trauma - made public
     {
         var commandList = new List<EntityUid>();
 

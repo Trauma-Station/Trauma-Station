@@ -69,7 +69,23 @@
   - type: RevPropaganda
     conversionDuration: 5
     consumesCharges: 1
-    applyFlashEffect: false
+    userWhitelist:
+      components:
+      - HeadRevolutionary
+    userBlacklist:
+      components:
+      - MumbleAccent # cant use it while muzzled...
+    whitelist:
+      components:
+      - HumanoidProfile
+      - AlwaysRevolutionaryConvertible
+    blacklist:
+      components:
+      - MindShield
+      - Revolutionary # no wasting propaganda on someone already converted
+      - Deaf # have to hear the headrevs words
+      - Zombie
+      - AntagImmune
   - type: UseDelay
     delay: 5
   - type: LimitedCharges
