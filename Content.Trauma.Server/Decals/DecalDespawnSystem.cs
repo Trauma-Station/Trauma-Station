@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Decals;
 using Content.Shared.GameTicking;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Decals;
@@ -17,7 +16,6 @@ namespace Content.Trauma.Server.Decals;
 /// </summary>
 public sealed class DecalDespawnSystem : EntitySystem
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 

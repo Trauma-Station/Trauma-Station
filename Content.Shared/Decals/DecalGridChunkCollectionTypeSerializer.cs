@@ -111,7 +111,7 @@ public sealed partial class DecalGridChunkCollectionTypeSerializer : ITypeSerial
             var lookupNode = new MappingDataNode { { "node", serializationManager.WriteValue(data, alwaysWrite, context) } };
             var decks = new SequenceDataNode();
 
-            positions.Sort();
+            positions.Sort((a, b) => a.X.CompareTo(b.X));
 
             foreach (var pos in positions)
             {
