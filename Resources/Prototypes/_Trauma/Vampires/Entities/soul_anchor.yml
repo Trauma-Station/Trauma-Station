@@ -1,0 +1,11 @@
+- type: entity
+  id: ShadowAnchor
+  name: Shadow Anchor
+  description: a shadow anchor.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi # TODO: Change
+    state: bar
+  - type: Physics
+    bodyType: Static

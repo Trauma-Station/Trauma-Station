@@ -54,12 +54,34 @@
       prototypes:
       - id: ShadowSnare
 
+# Shadow Anchor
+- type: entity
+  parent: BaseVampireAction
+  id: ActionShadowAnchor
+  name: Shadow Anchor
+  description: Shadow Anchor
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:ShadowAnchorActionEvent
+  - type: ActionShadowAnchor
+    effectsOnFakeRecall:
+    - !type:PopupMessage
+      type: Local
+      messages:
+      - You fake a recall!
+
+
 # Dark Passage
 - type: entity
   parent: [BaseVampireAction, ActionBlink]
   id: ActionDarkPassage
-  name: Blood Eruption
-  description: Blood Eruption
+  name: DarkPassage
+  description: DarkPassage
   components:
   - type: Action
     useDelay: 1
@@ -67,3 +89,60 @@
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
       state: icon
+
+# Extinguish
+- type: entity
+  parent: BaseVampireAction
+  id: ActionExtinguish
+  name: Extinguish
+  description: Extinguish
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 2
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: PointLight
+      range: 10
+      effect: !type:NestedEffect
+        proto: Extinguish
+
+
+# Shadow Boxing
+- type: entity
+  parent: BaseVampireAction
+  id: ActionShadowBoxing
+  name: Shadow Boxing
+  description: Shadow Boxing
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Body
+    event: !type:ShadowBoxingActionEvent
+  - type: ActionShadowBoxing
+    update: 0.5
+    targetEffects:
+    - !type:HealthChange
+      damage:
+        types:
+          Blunt: 3
+          Slash: 3
+          Piercing: 2
+    - !type:SpawnEntity
+      entity: WeaponArcPunch

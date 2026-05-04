@@ -31,7 +31,7 @@
     keyOut: effects
     targetUser: true
     effects:
-    - !type:GenericStatusEffect
+    - !type:GenericStatusEffect # TODO: replace with new status effects when it gets merged
       key: TemporaryBlindness
       component: TemporaryBlindness
       time: 15
@@ -60,8 +60,8 @@
   - type: Damageable
     damageContainer: ShadowHaze # Same because they literally both get destroyed by flash
 
-  # Shadow Snares get deleted when exposes to light for more than 5 seconds
+  # Shadow Snares get deleted when exposed to light for more than 5 seconds
   - type: LightDetection
   - type: DeleteOnLightExposure
-    onLightLevel: 3
+    lightLevel: 1.5
     duration: 5

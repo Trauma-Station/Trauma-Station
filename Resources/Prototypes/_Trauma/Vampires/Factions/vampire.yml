@@ -1,0 +1,12 @@
+- type: npcFaction
+  id: VampireFaction
+  hostile:
+  - Syndicate
+  - Zombie
+  - Revolutionary
+  - Heretic
+  - Wizard
+  - Blob
+  - Insurgent
+  - SimpleHostile
+  - SimpleNeutral

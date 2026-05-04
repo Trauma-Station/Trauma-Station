@@ -12,6 +12,18 @@ namespace Content.Trauma.Shared.LightDetection;
 public sealed partial class DeleteOnLightExposureComponent : Component
 {
     /// <summary>
+    /// Minimum light level required for the <see cref="Update"/> to start counting.
+    /// </summary>
+    [DataField]
+    public float LightLevel = 0.5f;
+
+    /// <summary>
+    /// If its active, and we are on light.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Active;
+
+    /// <summary>
     /// How long the entity must be on light to trigger the deletion.
     /// </summary>
     [DataField]

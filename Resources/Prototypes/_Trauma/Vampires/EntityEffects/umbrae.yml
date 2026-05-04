@@ -1,9 +1,12 @@
 - type: entityEffect
   id: ShadowSnare
   effects:
+  - !type:SetHandheldLight        # False by default
+  - !type:SetUnpoweredFlashlight  # False by default
+
+- type: entityEffect
+  id: Extinguish
+  effects:
   - !type:SetHandheldLight
-    toggle: false
-    quiet: false
   - !type:SetUnpoweredFlashlight
-    toggle: false
-    quiet: false
+  - !type:DestroyLightBulb

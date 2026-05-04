@@ -1,0 +1,31 @@
+- type: cloningSettings
+  id: ShadowCloneSettings
+  copyStatusEffects: false
+  components:
+  - WeakToHoly
+  - AlwaysTakeHoly
+  - HumanoidProfile
+
+- type: entity
+  id: ShadowCloneAdd
+  components:
+  - type: TimedDespawn
+    lifetime: 30
+  - type: NpcFactionMember
+    factions:
+    - VampireFaction
+  - type: HTN
+    rootTask:
+      task: IllusionCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+
+- type: entity
+  id: ShadowCloneRemove
+  components:
+  - type: MindContainer
+  - type: MindExaminable
+  - type: Hands
