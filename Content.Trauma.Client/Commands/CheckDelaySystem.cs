@@ -1,12 +1,9 @@
 using Content.Trauma.Shared.Commands;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Commands;
 
 public sealed class CheckDelaySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-
     private bool _waiting; // no malf server / duplicate packets spamming console
 
     public override void Initialize()
@@ -22,7 +19,7 @@ public sealed class CheckDelaySystem : EntitySystem
             return;
 
         _waiting = false;
-        var now = _timing.CurTime;
+        var now = DateTime.UtcNow;
         var c2s = args.Received - args.Sent;
         var s2c = now - args.Received;
         var ping = c2s + s2c;
@@ -38,6 +35,6 @@ public sealed class CheckDelaySystem : EntitySystem
 
         Log.Info("Checking delay to server...");
         _waiting = true;
-        RaiseNetworkEvent(new CheckDelayEvent(_timing.CurTime));
+        RaiseNetworkEvent(new CheckDelayEvent(DateTime.UtcNow));
     }
 }
