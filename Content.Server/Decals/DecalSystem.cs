@@ -116,7 +116,7 @@ public sealed class DecalSystem : SharedDecalSystem
         if (!coordinates.IsValid(EntityManager))
             return;
 
-        var gridId = Transform.GetGrid(coordinates);
+        var gridId = Xform.GetGrid(coordinates);
 
         if (gridId == null)
             return;

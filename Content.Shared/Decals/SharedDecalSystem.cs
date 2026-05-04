@@ -18,7 +18,7 @@ public abstract class SharedDecalSystem : EntitySystem
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
     [Dependency] protected readonly SharedMapSystem Map = default!;
-    [Dependency] protected readonly SharedTransformSystem Transform = default!;
+    [Dependency] protected readonly SharedTransformSystem Xform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly EntityQuery<DecalComponent> _query = default!;
     [Dependency] protected readonly EntityQuery<DecalGridComponent> GridQuery = default!;
@@ -146,7 +146,7 @@ public abstract class SharedDecalSystem : EntitySystem
             return false;
         }
 
-        var gridId = Transform.GetGrid(coordinates);
+        var gridId = Xform.GetGrid(coordinates);
         if (!MapGridQuery.TryComp(gridId, out var grid))
             return false;
 
@@ -167,7 +167,7 @@ public abstract class SharedDecalSystem : EntitySystem
         // maps and all code that adds decals have coords as the bottom left of the tile, move it to the center
         var coords = new EntityCoordinates(grid, decal.Coordinates + new Vector2(0.5f, 0.5f));
         var decalId = PredictedSpawnAtPosition(DecalEntity, coords);
-        Transform.SetLocalRotation(decalId, decal.Angle);
+        Xform.SetLocalRotation(decalId, decal.Angle);
         chunk.Decals.Add(decal);
 
         var decalComp = _query.Comp(decalId);
