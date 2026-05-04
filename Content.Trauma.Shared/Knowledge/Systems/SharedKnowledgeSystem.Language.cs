@@ -250,15 +250,15 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
     {
-        if (args.Source == ent.Owner || GetActiveLanguage(args.Source) is not { } language || Prototype(language) is not { } proto)
-            return; // Same person, no need. Also, if no language proto, the code won't work.
+        if (args.Source == ent.Owner)
+            return; // Same person, no need.
 
         // Already Obfuscating.
 
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
-        AddExperience(brain, proto, Math.Min(args.Message.Length / 10, 8));
+        AddExperience(brain, args.Language.Id, Math.Min(args.Message.Length / 10, 8));
     }
 
     public EntityUid? GetActiveLanguage(EntityUid target)

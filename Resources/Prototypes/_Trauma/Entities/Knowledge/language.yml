@@ -305,4 +305,3 @@
   components:
   - type: LanguageKnowledge
     languageId: Codespeak
-  - type: Knowledge
