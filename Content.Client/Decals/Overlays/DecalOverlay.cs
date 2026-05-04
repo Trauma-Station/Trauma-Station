@@ -52,7 +52,7 @@ public sealed class DecalOverlay : GridOverlay
 
         var gridAABB = xformSystem.GetInvWorldMatrix(xform).TransformBox(args.WorldBounds.Enlarged(1f));
         _decals.Clear();
-        var query = _entMan.EntityQueryEnumerator<DecalComponent, TransformComponent>();
+        var query = _entMan.AllEntityQueryEnumerator<DecalComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var decalXform))
         {
             if (comp.Data != default && gridAABB.Contains(decalXform.Coordinates.Position))
