@@ -5,6 +5,18 @@
   name: glowstick
   description: Useful for raves and emergencies.
   components:
+  # <Trauma>
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  # </Trauma>
   - type: SpaceGarbage
   - type: ExpendableLight
     glowDuration: 900 # time in seconds
@@ -101,6 +113,7 @@
   id: GlowstickBlue
   name: blue glowstick
   components:
+
   - type: ExpendableLight
     spentName: expendable-light-spent-blue-glowstick-name
     glowColorLit: "#0000FF"

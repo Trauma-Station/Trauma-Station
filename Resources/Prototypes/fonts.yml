@@ -1,42 +1,36 @@
-# SPDX-FileCopyrightText: 2023 /ʊniɹɑː/ <onoira@psiko.zone>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Julian Giebel <juliangiebel@live.de>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
+# <Trauma> - Switched NotoSans to ScienceGothic
 - type: font
   id: Default
-  path: /Fonts/NotoSans/NotoSans-Regular.ttf
+  path: /Fonts/_Trauma/ScienceGothic-Regular.ttf
 
 - type: font
   id: DefaultItalic
-  path: /Fonts/NotoSans/NotoSans-Italic.ttf
+  path: /Fonts/_Trauma/ScienceGothic-Italic.ttf
 
 - type: font
   id: DefaultBold
-  path: /Fonts/NotoSans/NotoSans-Bold.ttf
+  path: /Fonts/_Trauma/ScienceGothic-Bold.ttf
 
 - type: font
   id: DefaultBoldItalic
-  path: /Fonts/NotoSans/NotoSans-BoldItalic.ttf
+  path: /Fonts/_Trauma/ScienceGothic-BoldItalic.ttf
 
 - type: font
   id: NotoSansDisplay
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Regular.ttf
+  path: /Fonts/_Trauma/ScienceGothicDisplay-Regular.ttf
 
 - type: font
   id: NotoSansDisplayItalic
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Italic.ttf
+  path: /Fonts/_Trauma/ScienceGothicDisplay-Italic.ttf
 
 - type: font
   id: NotoSansDisplayBold
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf
+  path: /Fonts/_Trauma/ScienceGothicDisplay-Bold.ttf
 
 - type: font
   id: NotoSansDisplayBoldItalic
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-BoldItalic.ttf
+  path: /Fonts/_Trauma/ScienceGothicDisplay-BoldItalic.ttf
+# </Trauma>
 
 - type: font
   id: BoxRound
