@@ -18,6 +18,29 @@
     - blue
     - yellow
 
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: GunSafeEmptyBlue
+  name: gun safe
+  suffix: Blue
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: GunSafeEmptyRed
+  name: gun safe
+  suffix: Red
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - blue
+    - yellow
+
 - type: entityTable
   id: FillLockerWardenTrauma
   table: !type:AllSelector

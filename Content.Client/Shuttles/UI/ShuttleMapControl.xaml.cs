@@ -81,7 +81,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
         _physicsQuery = EntManager.GetEntityQuery<PhysicsComponent>();
 
-        _font = new VectorFont(cache.GetResource<FontResource>("/EngineFonts/NotoSans/NotoSans-Regular.ttf"), 10);
+        _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 10); // Trauma
     }
 
     public void SetMap(MapId mapId, Vector2 offset, bool recentering = false)
