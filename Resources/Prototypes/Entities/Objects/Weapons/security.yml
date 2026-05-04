@@ -196,6 +196,7 @@
       aoeFlashDuration: 6.0
       meleeStunDuration: 2.5
       slowTo: 1.5 # Goobstation End - Total Flash Death
+    - type: RevolutionaryConverter
     - type: LimitedCharges
       maxCharges: 5
     - type: MeleeWeapon

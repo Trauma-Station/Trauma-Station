@@ -1,3 +1,8 @@
+// <Trauma>
+using Content.Client.Light.Visualizers;
+using Content.Client.PowerCell;
+using Content.Client.Weapons.Ranged.Components;
+// </Trauma>
 using Content.Client.Effects;
 using Content.Client.Smoking;
 using Content.Shared.Chemistry.Components;
@@ -32,6 +37,11 @@ public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
         CopyComp<GenericVisualizerComponent>(ent);
         CopyComp<SolutionContainerVisualsComponent>(ent);
         CopyComp<BurnStateVisualsComponent>(ent);
+        // <Trauma>
+        CopyComp<PowerChargerVisualsComponent>(ent);
+        CopyComp<MagazineVisualsComponent>(ent);
+        CopyComp<PoweredLightVisualsComponent>(ent);
+        // </Trauma>
 
         // reload appearance to hopefully prevent any invisible layers
         if (_appearanceQuery.TryComp(ent, out var appearance))

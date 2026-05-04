@@ -5,7 +5,7 @@ using Content.Server.Antag.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 
-namespace Content.Goobstation.Server.PendingAntag;
+namespace Content.Trauma.Server.PendingAntag;
 
 public sealed class PendingAntagSystem : EntitySystem
 {

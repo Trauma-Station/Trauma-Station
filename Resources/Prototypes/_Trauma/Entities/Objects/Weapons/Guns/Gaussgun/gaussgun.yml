@@ -35,7 +35,10 @@
     soundGunshot:
       path: /Audio/_Trauma/Weapons/Guns/railgun/railgunshot.ogg
     defaultDirection: 1, 0
-  - type: MagazineAmmoProvider
+  - type: MultiMagazineAmmoProvider
+    slots:
+      gun_magazine: null # Use ammo provied by gun magazine
+      gun_magazine_cell: 0.34 # Don't use battery projectiles, multiply fire cost by 0.34 (45 shots for high-cap cell)
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -51,7 +54,7 @@
           tags:
             - MagazineGaussgun
         whitelistFailPopup: gun-magazine-whitelist-fail
-      power_cell:
+      gun_magazine_cell:
         ejectOnInteract: false
         name: power-cell-slot-component-slot-name-default
         whitelist:
@@ -63,12 +66,11 @@
           - PotatoBattery
         whitelistFailPopup: gun-magazine-whitelist-fail
   - type: PowerCellSlot
-    cellSlotId: power_cell
+    cellSlotId: gun_magazine_cell
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-      power_cell: !type:ContainerSlot
+      gun_magazine_cell: !type:ContainerSlot
   - type: Appearance
 
 - type: entity

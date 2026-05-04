@@ -243,23 +243,6 @@
       - MindRoleBlob
 
 - type: entity
-  id: BlobSpawn
-  parent: BaseGameRule
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: StationEvent
-    weight: 1
-    duration: 1
-    earliestStart: 75
-    minimumPlayers: 20
-    maxOccurrences: 2
-  - type: BlobSpawnRule
-    carrierBlobProtos:
-    - SpawnPointGhostBlobRat
-    playersPerCarrierBlob: 30
-    maxCarrierBlob: 1
-
-- type: entity
   parent: BaseNukeopsRule
   id: Honkops
   components:

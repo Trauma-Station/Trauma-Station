@@ -4,6 +4,7 @@
   parent: BaseGameRule
   id: LoneAbductorSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 70
@@ -26,6 +27,8 @@
       max: 1
       pickPlayer: false
       startingGear: LoneAbductorGear
+      prefRoles:
+        - LoneAbductorAntag
       briefing:
         text: abductor-role-greeting
         color: Green
@@ -90,6 +93,7 @@
   parent: LoneAbductorSpawn
   id: DuoAbductorSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     minimumPlayers: 20
   - type: AntagSelection
@@ -99,6 +103,8 @@
       max: 1
       pickPlayer: false
       startingGear: AbductorScientistGear
+      prefRoles:
+        - AbductorScientistAntag
       briefing:
         text: abductor-role-greeting
         color: Green
@@ -144,6 +150,8 @@
       max: 1
       pickPlayer: false
       startingGear: AbductorAgentGear
+      prefRoles:
+        - AbductorAgentAntag
       briefing:
         text: abductor-role-greeting
         color: Green

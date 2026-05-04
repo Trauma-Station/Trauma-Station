@@ -190,16 +190,16 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
     /// Helper called by fields when destroyed
     /// </summary>
     /// <param name="ent"></param>
-    public void FieldDestroyed(Entity<GenericFieldGeneratorComponent> ent)
+    public void FieldDestroyed(Entity<GenericFieldGeneratorComponent?> ent)
     {
-        if (ent.Comp.ConnectedGenerator is not { } pair)
+        if (!_genQuery.Resolve(ent, ref ent.Comp) || ent.Comp.ConnectedGenerator is not { } pair)
             return;
 
-        if (TryComp<BatteryComponent>(ent, out var batteryComponent))
-            _battery.UseCharge(ent.Owner, batteryComponent.MaxCharge); // Batery being drained disables the field anyway so we don't call it again.
+        if (TryComp<BatteryComponent>(ent, out var battery))
+            _battery.UseCharge((ent.Owner, battery), battery.MaxCharge); // Batery being drained disables the field anyway so we don't call it again.
 
-        if (TryComp<BatteryComponent>(pair, out var pairBatteryComponent))
-            _battery.UseCharge(pair.Owner, pairBatteryComponent.MaxCharge);
+        if (TryComp<BatteryComponent>(pair, out battery))
+            _battery.UseCharge((pair.Owner, battery), battery.MaxCharge);
     }
 
     private void OnChargeChanged(Entity<GenericFieldGeneratorComponent> ent, ref ChargeChangedEvent args)
@@ -295,7 +295,8 @@ public sealed class GenericFieldGeneratorSystem : EntitySystem
             fieldList.Add(newField);
             currentOffset += dirVec;
 
-            if (!TryComp<GenericFieldComponent>(newField, out var fieldComp)) continue;
+            if (!TryComp<GenericFieldComponent>(newField, out var fieldComp))
+                continue;
             fieldComp.SourceGen = firstGen;
             Dirty(newField, fieldComp);
         }

@@ -38,7 +38,7 @@ public sealed partial class XenomorphsRuleComponent : Component
         new SoundPathSpecifier("/Audio/_Goobstation/Music/Black_Swarm_Short.ogg")
         {
             Params = AudioParams.Default
-                .WithVolume(-8f)
+                .WithVolume(-16f)
         };
 
     [DataField]
@@ -46,7 +46,7 @@ public sealed partial class XenomorphsRuleComponent : Component
         new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg")
         {
             Params = AudioParams.Default
-                .WithVolume(-8f)
+                .WithVolume(-14f)
         };
 
     [DataField]

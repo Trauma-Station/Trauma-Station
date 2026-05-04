@@ -19,17 +19,14 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// </summary>
     [DataField]
     public int TeleportAttempts = 10;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // TODO
 }
 
 public sealed class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
 {
-    [Dependency] private readonly SharedRandomTeleportSystem _teleport = default!;
+    [Dependency] private readonly RandomTeleportSystem _teleport = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<RandomTeleport> args)
     {
-        _teleport.RandomTeleport(ent, args.Effect.Radius, args.Effect.TeleportAttempts);
+        _teleport.RandomTeleport(ent, args.Effect.Radius, args.Effect.TeleportAttempts, user: args.User);
     }
 }

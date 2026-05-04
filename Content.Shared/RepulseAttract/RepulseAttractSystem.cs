@@ -19,13 +19,13 @@ public sealed class RepulseAttractSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xForm = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+
     private HashSet<EntityUid> _entSet = new();
+
     public override void Initialize()
     {
         base.Initialize();
-
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
         SubscribeLocalEvent<RepulseAttractComponent, MeleeHitEvent>(OnMeleeAttempt, before: [typeof(UseDelayOnMeleeHitSystem)], after: [typeof(SharedWieldableSystem)]);
     }
@@ -36,6 +36,17 @@ public sealed class RepulseAttractSystem : EntitySystem
 
         TryRepulseAttract(ent, args.User);
     }
+
+    /* Trauma - wasn't cherry picked, TODO
+    private void OnRepulseAttractAction(Entity<RepulseAttractComponent> ent, ref RepulseAttractActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var position = _xForm.GetMapCoordinates(args.Performer);
+        args.Handled = TryRepulseAttract(position, args.Performer, ent.Comp.Speed, ent.Comp.Range, ent.Comp.Whitelist, ent.Comp.CollisionMask);
+    }
+    */
 
     public bool TryRepulseAttract(Entity<RepulseAttractComponent> ent, EntityUid user)
     {

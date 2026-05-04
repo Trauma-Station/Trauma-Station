@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "created by asardonicsailor, shelled variant by taro_varne (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "coconutcrab",
+      "directions": 4
+    },
+    {
+      "name": "coconutcrabnoshell",
+      "directions": 4
+    }
+  ]
+}

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Antag;
@@ -46,7 +45,7 @@ using Content.Shared.Speech.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Server.Knowledge;
-using Content.Trauma.Shared.Teleportation.Systems;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
@@ -80,7 +79,6 @@ public sealed class SpellsSystem : SharedSpellsSystem
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedRandomTeleportSystem _teleport = default!;
     [Dependency] private readonly NpcFactionSystem _faction = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -624,12 +622,5 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
         PopupCharged(uid, ev.Performer, false);
         return true;
-    }
-
-    protected override void Blink(BlinkSpellEvent ev)
-    {
-        base.Blink(ev);
-
-        _teleport.RandomTeleport(ev.Performer, ev.Radius);
     }
 }

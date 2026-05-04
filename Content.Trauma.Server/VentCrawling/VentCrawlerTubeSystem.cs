@@ -1,23 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Server.Inventory;
 using Content.Server.Construction.Completions;
 using Content.Server.Popups;
-using Content.Shared.VentCrawler.Tube.Components;
-using Content.Trauma.Shared.VentCrawling.Components;
-using Content.Shared.Tools.Components;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Movement.Systems;
-using Content.Trauma.Shared.VentCrawling;
+using Content.Shared.Tools.Components;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.VentCrawling;
+using Content.Trauma.Shared.VentCrawling;
+using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Content.Server.Inventory;
-using Content.Shared.Hands.EntitySystems;
-using Content.Trauma.Common.VentCrawling;
 
 namespace Content.Trauma.Server.VentCrawling;
 

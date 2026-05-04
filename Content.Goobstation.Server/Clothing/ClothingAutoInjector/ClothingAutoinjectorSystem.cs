@@ -95,7 +95,7 @@ public sealed partial class ClothingAutoinjectorSystem : EntitySystem
     private void OnUnequipped(EntityUid uid, ClothingAutoInjectComponent component, ref GotUnequippedEvent args)
     {
         if (component.AutoInjectOnAbility)
-            _actions.RemoveProvidedActions(args.Equipee, uid);
+            _actions.RemoveProvidedActions(args.EquipTarget, uid);
     }
 
     private void OnExamined(EntityUid uid, ClothingAutoInjectComponent component, ref ExaminedEvent args)
