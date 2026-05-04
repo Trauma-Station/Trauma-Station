@@ -21,7 +21,7 @@ public sealed class DecalDespawnSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private TimedRingBuffer<(EntityUid, uint)> _buffer = default!;
+    private TimedRingBuffer<EntityUid> _buffer = default!;
 
     private int _limit;
     private TimeSpan _despawnTime;
@@ -44,13 +44,14 @@ public sealed class DecalDespawnSystem : EntitySystem
         base.Update(frameTime);
 
         // only removes 1 per tick max because of the timed buffer, basically 0 cost
-        if (_buffer.PopNext(out var next) && Exists(next.Item1))
-            _decal.RemoveDecal(next.Item1, next.Item2);
+        // TODO: make this generic it has nothing to do with decals now
+        if (_buffer.PopNext(out var next) && Exists(next))
+            Del(next);
     }
 
     private void OnDecalSpawned(Entity<DespawningDecalSpawnerComponent> ent, ref DecalSpawnedEvent args)
     {
-        QueueDespawn(args.Grid, args.Decal);
+        QueueDespawn(args.Decal);
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent args)
@@ -72,10 +73,9 @@ public sealed class DecalDespawnSystem : EntitySystem
     /// Queue the despawning of a given decal on a grid.
     /// If there are too many decals despawning at once, the oldest one will be immediately removed.
     /// </summary>
-    public void QueueDespawn(EntityUid grid, uint decal)
+    public void QueueDespawn(EntityUid decal)
     {
-        DebugTools.Assert(HasComp<MapGridComponent>(grid), $"{ToPrettyString(grid)} is not a grid!");
-        if (_buffer.Push((grid, decal), out var old) && Exists(old.Item1))
-            _decal.RemoveDecal(old.Item1, old.Item2);
+        if (_buffer.Push(decal, out var old) && Exists(old))
+            Del(old);
     }
 }
