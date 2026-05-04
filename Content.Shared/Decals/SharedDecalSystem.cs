@@ -17,6 +17,7 @@ public abstract class SharedDecalSystem : EntitySystem
 {
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] protected readonly IMapManager MapManager = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] protected readonly SharedMapSystem Map = default!;
     [Dependency] protected readonly SharedTransformSystem Xform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -39,7 +40,7 @@ public abstract class SharedDecalSystem : EntitySystem
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
         SubscribeLocalEvent<DecalGridComponent, ComponentStartup>(OnGridStartup);
         SubscribeLocalEvent<DecalComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<DecalComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<DecalComponent, EntityTerminatingEvent>(OnTerminating);
     }
 
     private void OnGridInitialize(GridInitializeEvent msg)
@@ -90,16 +91,23 @@ public abstract class SharedDecalSystem : EntitySystem
         if (ent.Comp.Data == default)
             return; // not initialized yet
 
+        // dont want clients to detach them for performance
+        _meta.AddFlag(ent.Owner, MetaDataFlags.Undetachable);
+
         var data = ent.Comp.Data;
         data.Ent = ent;
 
-        GetChunk(ent, create: true)?.Decals.Add(data);
+        var chunk = GetChunk(ent, create: true);
+        chunk?.Decals.Add(data);
     }
 
-    private void OnShutdown(Entity<DecalComponent> ent, ref ComponentShutdown args)
+    private void OnTerminating(Entity<DecalComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (ent.Comp.Data != default)
-            GetChunk(ent)?.Decals.Remove(ent.Comp.Data);
+        if (ent.Comp.Data == default)
+            return;
+
+        var chunk = GetChunk(ent);
+        chunk?.Decals.Remove(ent.Comp.Data);
     }
 
     protected DecalChunk? GetChunk(Entity<DecalComponent> decal, bool create = false)
@@ -109,8 +117,8 @@ public abstract class SharedDecalSystem : EntitySystem
             !GridQuery.TryComp(gridUid, out var grid))
             return null;
 
-        var indices = GetChunkIndices(xform.Coordinates.Position);
         var chunks = grid.ChunkCollection.ChunkCollection;
+        var indices = decal.Comp.Chunk;
         if (chunks.TryGetValue(indices, out var chunk))
             return chunk;
 
@@ -122,7 +130,7 @@ public abstract class SharedDecalSystem : EntitySystem
 
     protected Dictionary<Vector2i, DecalChunk>? ChunkCollection(EntityUid gridEuid, DecalGridComponent? comp = null)
     {
-        if (!Resolve(gridEuid, ref comp))
+        if (!GridQuery.Resolve(gridEuid, ref comp, false))
             return null;
 
         return comp.ChunkCollection.ChunkCollection;
@@ -195,7 +203,13 @@ public abstract class SharedDecalSystem : EntitySystem
         foreach (var decal in chunk.Decals)
         {
             var ent = decal.Ent;
-            var decalPos = Transform(ent).Coordinates.Position;
+            if (!TryComp(ent, out TransformComponent? xform))
+            {
+                Log.Error($"Deleted decal {ent} found in chunk {chunkIndices} of {ToPrettyString(gridId)}!");
+                continue;
+            }
+
+            var decalPos = xform.Coordinates.Position;
             if ((position - decalPos).LengthSquared() > dist2)
                 continue;
 

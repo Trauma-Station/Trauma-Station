@@ -12,4 +12,4 @@ max_announcement_length = 512
 cooldown = 5
 
 [net]
-encryption_thread_channel_size = 128 # overkill but should prevent funny?
+pvs_enter_budget = 300 # 200 by default

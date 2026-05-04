@@ -69,7 +69,7 @@ public sealed class DecalOverlay : GridOverlay
             if (zComp != 0)
                 return zComp;
 
-            return x.Id.CompareTo(y.Id);
+            return x.Ent.Owner.CompareTo(y.Ent.Owner);
         });
 
         var (_, worldRot, worldMatrix) = xformSystem.GetWorldPositionRotationMatrix(xform);
