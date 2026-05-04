@@ -152,7 +152,7 @@ public sealed class FootprintSystem : EntitySystem
         if (!_decal.TryAddDecal(id, coords, out var decal, color, rot, zIndex: 1, cleanable: true))
             return; // failed to add it somehow...
 
-        _despawn.QueueDespawn(decal);
+        _despawn.QueueDespawn(grid, decal);
 
         // consume the step, it got placed
         ent.Comp.Steps = step;

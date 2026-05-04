@@ -329,18 +329,49 @@ public sealed partial class LavalandSystem
         // Spawn decals
         if (TryComp<DecalGridComponent>(grid.Owner, out var loadedDecals))
         {
-            // TODO: why is this completely copypasted from dungeon
             EnsureComp<DecalGridComponent>(lavaland);
-            foreach (var decal in _decals.GetDecalsIntersecting(grid.Owner, box, loadedDecals))
+            foreach (var (_, decal) in _decals.GetDecalsIntersecting(grid.Owner, box, loadedDecals))
             {
-                var position = Transform(decal).Coordinates.Position;
-                position = Vector2.Transform(position - center, roomTransform);
+                // Offset by 0.5 because decals are offset from bot-left corner
+                // So we convert it to center of tile then convert it back again after transform.
+                // Do these shenanigans because 32x32 decals assume as they are centered on bottom-left of tiles.
+                var position = Vector2.Transform(decal.Coordinates + grid.Comp.TileSizeHalfVector - center,
+                    roomTransform);
+                position -= grid.Comp.TileSizeHalfVector;
 
                 if (reservedTiles?.Contains(position.Floored()) == true)
                     continue;
 
-                var data = decal.Comp.Data;
-                var angle = data.Angle.Reduced();
+                // Umm uhh I love decals so uhhhh idk what to do about this
+                var angle = decal.Angle.Reduced();
+
+                // Adjust because 32x32 so we can't rotate cleanly
+                // Yeah idk about the uhh vectors here but it looked visually okay but they may still be off by 1.
+                // Also EyeManager.PixelsPerMeter should really be in shared.
+                if (angle.Equals(Math.PI))
+                {
+                    position += new Vector2(-1f / 32f, 1f / 32f);
+                }
+                else if (angle.Equals(-Math.PI / 2f))
+                {
+                    position += new Vector2(-1f / 32f, 0f);
+                }
+                else if (angle.Equals(Math.PI / 2f))
+                {
+                    position += new Vector2(0f, 1f / 32f);
+                }
+                else if (angle.Equals(Math.PI * 1.5f))
+                {
+                    // I hate this but decals are bottom-left rather than center position and doing the
+                    // matrix ops is a PITA hence this workaround for now; I also don't want to add a stupid
+                    // field for 1 specific op on decals
+                    if (decal.Id != "DiagonalCheckerAOverlay" &&
+                        decal.Id != "DiagonalCheckerBOverlay")
+                    {
+                        position += new Vector2(-1f / 32f, 0f);
+                    }
+                }
+
                 var tilePos = position.Floored();
 
                 // Fallback because uhhhhhhhh yeah, a corner tile might look valid on the original
@@ -354,13 +385,13 @@ public sealed partial class LavalandSystem
                 }
 
                 _decals.TryAddDecal(
-                    data.Id,
+                    decal.Id,
                     new EntityCoordinates(grid, position),
                     out _,
-                    data.Color,
+                    decal.Color,
                     angle,
-                    data.ZIndex,
-                    data.Cleanable);
+                    decal.ZIndex,
+                    decal.Cleanable);
             }
         }
 

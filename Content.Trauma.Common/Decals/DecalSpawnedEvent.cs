@@ -6,4 +6,4 @@ namespace Content.Trauma.Common.Decals;
 /// Event raised on a random decal spawner when spawning a decal.
 /// </summary>
 [ByRefEvent]
-public record struct DecalSpawnedEvent(EntityUid Decal);
+public record struct DecalSpawnedEvent(EntityUid Grid, uint Decal);

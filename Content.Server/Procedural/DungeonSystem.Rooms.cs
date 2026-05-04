@@ -203,22 +203,20 @@ public sealed partial class DungeonSystem
         {
             EnsureComp<DecalGridComponent>(gridUid);
 
-            foreach (var decal in _decals.GetDecalsIntersecting(templateMapUid, bounds, loadedDecals)) // Trauma - decal entities
+            foreach (var (_, decal) in _decals.GetDecalsIntersecting(templateMapUid, bounds, loadedDecals))
             {
-                // <Trauma> - replaces offset slop
-                var position = Transform(decal).Coordinates.Position;
-                position = Vector2.Transform(position + grid.TileSizeHalfVector - roomCenter, roomTransform);
-                // </Trauma>
+                // Offset by 0.5 because decals are offset from bot-left corner
+                // So we convert it to center of tile then convert it back again after transform.
+                // Do these shenanigans because 32x32 decals assume as they are centered on bottom-left of tiles.
+                var position = Vector2.Transform(decal.Coordinates + grid.TileSizeHalfVector - roomCenter, roomTransform);
+                position -= grid.TileSizeHalfVector;
 
                 if (!clearExisting && reservedTiles?.Contains(position.Floored()) == true)
                     continue;
 
-                // <Trauma> - use decal data stored on the component
-                var data = decal.Comp.Data;
-                var angle = (data.Angle + finalRoomRotation).Reduced();
-                // </Trauma>
+                // Umm uhh I love decals so uhhhh idk what to do about this
+                var angle = (decal.Angle + finalRoomRotation).Reduced();
 
-                /* Trauma - dont need this shit
                 // Adjust because 32x32 so we can't rotate cleanly
                 // Yeah idk about the uhh vectors here but it looked visually okay but they may still be off by 1.
                 // Also EyeManager.PixelsPerMeter should really be in shared.
@@ -245,7 +243,6 @@ public sealed partial class DungeonSystem
                         position += new Vector2(-1f / 32f, 0f);
                     }
                 }
-                */
 
                 var tilePos = position.Floored();
 
@@ -256,16 +253,14 @@ public sealed partial class DungeonSystem
                     _maps.SetTile(gridUid, grid, tilePos, _tile.GetVariantTile((ContentTileDefinition)_tileDefManager[FallbackTileId], _random.GetRandom()));
                 }
 
-                // <Trauma> - use decal data stored on the component
                 var result = _decals.TryAddDecal(
-                    data.Id,
+                    decal.Id,
                     new EntityCoordinates(gridUid, position),
                     out _,
-                    data.Color,
+                    decal.Color,
                     angle,
-                    data.ZIndex,
-                    data.Cleanable);
-                // </Trauma>
+                    decal.ZIndex,
+                    decal.Cleanable);
 
                 DebugTools.Assert(result);
             }

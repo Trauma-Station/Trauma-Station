@@ -1,8 +1,0 @@
-- type: entity
-  save: false # DecalGrid does it
-  id: Decal
-  name: decal
-  components:
-  - type: Transform
-    anchored: True
-  - type: Decal

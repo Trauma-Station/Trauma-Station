@@ -844,7 +844,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         }
 
         // Decals
-        var loadedDecals = new Dictionary<EntityUid, Vector2i>(); // Trauma - decal entities, uint -> EntityUid
+        var loadedDecals = new Dictionary<uint, Vector2i>();
         component.LoadedDecals.Add(chunk, loadedDecals);
 
         for (var x = 0; x < ChunkSize; x++)
@@ -919,11 +919,10 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         foreach (var (dec, indices) in component.LoadedDecals[chunk])
         {
             // If we couldn't remove it then flag the tile to never be touched.
-            // <Trauma> - delete if it exists, flag otherwise
-            if (Exists(dec))
-                Del(dec);
-            else
+            if (!_decals.RemoveDecal(gridUid, dec))
+            {
                 modified.Add(indices);
+            }
         }
 
         component.LoadedDecals.Remove(chunk);

@@ -44,13 +44,13 @@ public sealed partial class CleanDecalsReaction : ITileReaction
 
         foreach (var decal in decals)
         {
-            if (!decal.Comp.Data.Cleanable) // Trauma - decal entities
+            if (!decal.Decal.Cleanable)
                 continue;
 
             if (amount + CleanCost > reactVolume)
                 break;
 
-            entityManager.QueueDeleteEntity(decal); // Trauma - decal entities, just delete it
+            decalSystem.RemoveDecal(tile.GridUid, decal.Index, decalGrid);
             amount += CleanCost;
         }
 

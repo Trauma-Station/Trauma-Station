@@ -239,9 +239,9 @@ public sealed class TileSystem : EntitySystem
 
         variant ??= PickVariant(replacementTile);
         var decals = _decal.GetDecalsInRange(tileref.GridUid, _turf.GetTileCenter(tileref).Position, 0.5f);
-        foreach (var decal in decals) // Trauma - decal entities
+        foreach (var (id, _) in decals)
         {
-            PredictedQueueDel(decal); // Trauma - just delete the decal entity
+            _decal.RemoveDecal(tileref.GridUid, id);
         }
 
         _maps.SetTile(grid, component, tileref.GridIndices, new Tile(replacementTile.TileId, 0, variant.Value));
@@ -315,9 +315,9 @@ public sealed class TileSystem : EntitySystem
 
         //Destroy any decals on the tile
         var decals = _decal.GetDecalsInRange(gridUid, coordinates.SnapToGrid(EntityManager, _mapManager).Position, 0.5f);
-        foreach (var decal in decals) // Trauma - decal entities
+        foreach (var (id, _) in decals)
         {
-            PredictedQueueDel(decal); // Trauma - just delete the decal entity
+            _decal.RemoveDecal(tileRef.GridUid, id);
         }
 
         //Replace tile with the one it was placed on

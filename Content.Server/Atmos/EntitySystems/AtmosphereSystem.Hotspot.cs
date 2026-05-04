@@ -114,7 +114,7 @@ public sealed partial class AtmosphereSystem
 
             foreach (var set in tileDecals)
             {
-                if (Array.IndexOf(_burntDecals, set.Comp.Data.Id) == -1) // Trauma - decal entities
+                if (Array.IndexOf(_burntDecals, set.Decal.Id) == -1)
                     continue;
 
                 tileBurntDecals++;

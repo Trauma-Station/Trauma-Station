@@ -102,7 +102,7 @@ public sealed class SprayPainterSystem : SharedSprayPainterSystem
 
             foreach (var decal in decals)
             {
-                Del(decal); // Trauma - decal entities, just delete it
+                _decals.RemoveDecal(grid, decal.Index, decalGridComp);
             }
         }
 
@@ -212,7 +212,7 @@ public sealed class SprayPainterSystem : SharedSprayPainterSystem
             return;
         }
 
-        var closestDecal = decals.MinBy(d => Vector2.Distance(Transform(d).Coordinates.Position, clickPos)).Comp.Data; // Trauma - use decal entity's position
+        var closestDecal = decals.MinBy(d => Vector2.Distance(d.Decal.Coordinates, clickPos)).Decal;
 
         _popup.PopupEntity(Loc.GetString("spray-painter-interact-color-picked", ("id", closestDecal.Id)), args.User, args.User);
 

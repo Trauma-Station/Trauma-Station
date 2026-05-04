@@ -124,7 +124,7 @@ public sealed class RandomDecalSpawnerSystem : EntitySystem
                 cleanable
             );
             // <Trauma>
-            var ev = new DecalSpawnedEvent(decal);
+            var ev = new DecalSpawnedEvent(xform.GridUid.Value, decal);
             RaiseLocalEvent(ent, ref ev);
             // </Trauma>
 

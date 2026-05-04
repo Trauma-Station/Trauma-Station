@@ -46,7 +46,7 @@ public sealed partial class BiomeComponent : Component
     /// Decals that have been loaded as a part of this biome.
     /// </summary>
     [DataField("decals")]
-    public Dictionary<Vector2i, Dictionary<EntityUid, Vector2i>> LoadedDecals = new(); // Trauma - decal entities, uint -> EntityUid
+    public Dictionary<Vector2i, Dictionary<uint, Vector2i>> LoadedDecals = new();
 
     [DataField("entities")]
     public Dictionary<Vector2i, Dictionary<EntityUid, Vector2i>> LoadedEntities = new();

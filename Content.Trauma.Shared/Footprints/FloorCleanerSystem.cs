@@ -40,12 +40,12 @@ public sealed class FloorCleanerSystem : EntitySystem
         var decals = _decal.GetDecalsInRange(grid, pos, ent.Comp.Radius);
         var cleaned = false;
 
+        // actually clean them. not predicted since decal shitcode is serverside
         foreach (var decal in decals)
         {
-            if (!decal.Comp.Data.Cleanable)
+            if (!decal.Decal.Cleanable)
                 continue;
-
-            PredictedDel(decal.Owner);
+            _decal.RemoveDecal(grid, decal.Index);
             cleaned = true;
         }
 
