@@ -6,10 +6,9 @@
   - !type:RemoveComponents
     guidebookText: entity-effect-guidebook-remove-reactive
     components:
-    - type: Reactive # prevent double dipping
-  - !type:AddTag
-    tag: Trash
-    guidebookText: entity-effect-guidebook-add-trash-tag
+    - type: Reactive # prevent double dipping if it somehow reacts again in the same tick
+  - !type:Delete
+    queued: true # needs to still exist for most effects to work properly
   - !type:PlaySoundEffect
     sound: /Audio/Effects/Chemistry/bubbles.ogg
 
