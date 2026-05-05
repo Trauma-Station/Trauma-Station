@@ -42,8 +42,15 @@
 - type: entityEffect
   id: XenobioExtractReagent
   effects:
-  - !type:NestedEffect
-    proto: XenobioExtractBase
+  - !type:RemoveComponents
+    guidebookText: entity-effect-guidebook-remove-reactive
+    components:
+    - type: Reactive # prevent double dipping if it somehow reacts again in the same tick
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/Chemistry/bubbles.ogg
+  - !type:AddTag
+    tag: Trash
+    guidebookText: entity-effect-guidebook-add-trash-tag
   - !type:PopupMessage
     type: Pvs
     messages: [ "xeno-extract-reaction-reagent" ]
