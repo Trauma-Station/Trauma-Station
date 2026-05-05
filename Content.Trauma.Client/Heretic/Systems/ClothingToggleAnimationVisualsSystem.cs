@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Clothing;
 using Content.Client.Items.Systems;
 using Content.Shared.Clothing;

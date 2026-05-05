@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.Heretic.Components.Side;
