@@ -21,6 +21,7 @@
   - type: AntagLoadProfileRule
     speciesHardOverride: Abductor
   - type: AntagSelection
+    agentName: abductor-round-end-agent-name
     definitions:
     - spawnerPrototype: LoneAbductorSpawner
       min: 1
