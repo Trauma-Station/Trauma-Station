@@ -102,8 +102,6 @@
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
       state: icon
-  - type: TargetAction
-    range: 2
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -146,3 +144,40 @@
           Piercing: 2
     - !type:SpawnEntity
       entity: WeaponArcPunch
+
+# Eternal Darkness
+- type: entity
+  parent: BaseVampireAction
+  id: ActionEternalDarkness
+  name: Eternal Darkness
+  description: Eternal Darkness
+  components:
+  - type: Action
+    # useDelay: 20
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggleConditions: # we must have at least 10 usable blood, ensures we don't attach the effect 4noraisin
+    - !type:HasVampireBlood
+      amount: 10
+    onToggle:
+    - !type:PopupMessage # TODO: Play music
+      type: Local
+      messages:
+      - The darkness begins!
+    - !type:ModifyStatusEffect
+      effectProto: EternalDarknessStatusEffect
+      time: null
+      type: Add
+    offToggle:
+    - !type:ModifyStatusEffect
+      effectProto: EternalDarknessStatusEffect
+      time: null
+      type: Remove
+    - !type:PopupMessage
+      type: Local
+      messages:
+      - The darkness stops...

@@ -10,3 +10,33 @@
   - !type:SetHandheldLight
   - !type:SetUnpoweredFlashlight
   - !type:DestroyLightBulb
+
+- type: entityEffect
+  id: EternalDarkness
+  effects:
+  - !type:RelayNearby
+    compName: Temperature
+    range: 8
+    effect: !type:NestedEffect
+      proto: EternalDarknessTemp
+  - !type:RelayNearby # TODO: make status effect instead
+    compName: Hands
+    range: 8
+    effect: !type:NestedEffect
+      proto: EternalDarknessProj
+  - !type:ConsumeVampireBlood
+    amount: 2 # 6 every 2 seconds
+
+- type: entityEffect
+  id: EternalDarknessTemp
+  effects:
+  - !type:AdjustTemperature
+    amount: -5000
+
+- type: entityEffect
+  id: EternalDarknessProj
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: EternalDarknessProjectileStatusEffect
+    time: 6
+    type: Set
