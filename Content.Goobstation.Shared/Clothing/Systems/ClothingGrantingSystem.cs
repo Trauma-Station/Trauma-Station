@@ -49,7 +49,6 @@ public sealed class ClothingGrantingSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
-        var user = args.Equipee;
         var target = args.EquipTarget;
         foreach (var name in component.Active)
         {

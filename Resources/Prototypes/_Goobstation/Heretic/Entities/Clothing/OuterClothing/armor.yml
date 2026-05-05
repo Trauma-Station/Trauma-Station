@@ -48,6 +48,7 @@
   - type: FireProtection
     reduction: 0.2
   - type: HideHereticAura
+  - type: HereticClothing
 
 - type: entity
   parent: ClothingOuterArmorHeretic
@@ -83,6 +84,7 @@
     onUse: false
     wieldToggle: false
   - type: ToggleAnimation
+    continueReverseAnimation: true
     toggleOnTime: 2.3
     toggleOffTime: 1.4
   - type: ClothingToggleAnimationVisuals

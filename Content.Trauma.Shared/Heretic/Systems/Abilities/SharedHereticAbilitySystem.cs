@@ -304,7 +304,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
         if (toHeal != null)
         {
-            _dmg.TryChangeDamage((uid, uid.Comp1),
+            _dmg.ChangeDamage((uid, uid.Comp1),
                 toHeal,
                 true,
                 false,

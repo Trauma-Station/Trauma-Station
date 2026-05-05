@@ -145,6 +145,14 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // Heavy attack.
         if (altDown == BoundKeyState.Down)
         {
+            // <Trauma>
+            if (weapon.AltClickAttack)
+            {
+                ClientLightAttack(entity, mousePos, coordinates, weaponUid, weapon, false);
+                return;
+            }
+            // </Trauma>
+
             // If it's an unarmed attack then do a disarm
             if (weapon.AltDisarm && weaponUid == entity)
             {
@@ -239,7 +247,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         RaisePredictiveEvent(new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(coordinates)));
     }
 
-    private void ClientLightAttack(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates, EntityUid weaponUid, MeleeWeaponComponent meleeComponent)
+    private void ClientLightAttack(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates, EntityUid weaponUid, MeleeWeaponComponent meleeComponent, bool isLeftClick = true) // Trauma - added isLeftClick
     {
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
 
@@ -263,7 +271,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (Interaction.CombatModeCanHandInteract(attacker, target))
             return;
 
-        RaisePredictiveEvent(new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(coordinates)));
+        RaisePredictiveEvent(new LightAttackEvent(GetNetEntity(target), GetNetEntity(weaponUid), GetNetCoordinates(coordinates), isLeftClick)); // Trauma - isLeftClick
     }
 
     private void OnMeleeLunge(MeleeLungeEvent ev)

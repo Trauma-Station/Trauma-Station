@@ -186,11 +186,11 @@
   id: HereticAshPath6
   name: knowledge-path-ash-s6-name
   description: knowledge-path-ash-s6-desc
-  icon: { sprite: _Goobstation/Heretic/mad_mask.rsi, state: icon }
+  icon: { sprite: _Goobstation/Heretic/Entities/lantern.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - MaskOfMadness
+    - CrackedLantern
   cost:
     KnowledgePoint: 2
   categories:

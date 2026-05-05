@@ -1,4 +1,6 @@
-using Content.Goobstation.Common.Examine; // Goob
+// <Trauma>
+using Content.Goobstation.Common.Examine;
+// </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
@@ -33,9 +35,16 @@ public sealed class HealthExaminableSystem : EntitySystem
             Act = () =>
             {
                 var markup = CreateMarkup(uid, component, damage);
-                _examineSystem.SendExamineTooltip(args.User, uid, markup, false, false);
-                var examineCompletedEvent = new ExamineCompletedEvent(markup, uid, args.User, true); // Goobstation
-                RaiseLocalEvent(uid, examineCompletedEvent); // Goobstation
+                // <Trauma>
+                var userEv = new UserExaminedEvent(markup, uid);
+                RaiseLocalEvent(args.User, ref userEv);
+                markup = userEv.Message;
+                // </Trauma>
+                _examineSystem.SendExamineTooltip(args.User, uid, userEv.Message, false, false);
+                // <Trauma>
+                var examineCompletedEvent = new ExamineCompletedEvent(markup, uid, args.User, true);
+                RaiseLocalEvent(uid, ref examineCompletedEvent);
+                // </Trauma>
             },
             Text = Loc.GetString("health-examinable-verb-text"),
             Category = VerbCategory.Examine,

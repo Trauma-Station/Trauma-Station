@@ -24,6 +24,13 @@ public sealed partial class ToggleAnimationComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
     public TimeSpan ToggleStartTime = TimeSpan.Zero;
+
+    /// <summary>
+    /// Whether this supports stopping toggling on/of animation and switching it to reverse
+    /// when entity gets activated/deactivated
+    /// </summary>
+    [DataField]
+    public bool ContinueReverseAnimation;
 }
 
 [Serializable, NetSerializable]

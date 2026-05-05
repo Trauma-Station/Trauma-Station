@@ -58,6 +58,7 @@
     onUse: false
     wieldToggle: false
   - type: ToggleAnimation
+    continueReverseAnimation: true
     toggleOnTime: 2.3
     toggleOffTime: 1.4
   - type: ClothingToggleAnimationVisuals

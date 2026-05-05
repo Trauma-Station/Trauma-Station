@@ -53,13 +53,16 @@ knowledge-path-ash-armor-desc =
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.
 
-knowledge-path-ash-s6-name = Mask of Madness
+knowledge-path-ash-s6-name = Cracked Lantern
 knowledge-path-ash-s6-desc =
     The Nightwatcher was lost. That's what the Watch believed. Yet he walked the world, unnoticed by the masses.
 
-    Allows you to transmute any mask, a flare, a stun baton, and a liver to create a Mask of Madness.
-    The mask instills fear into heathens who witness it, causing stamina damage, hallucinations, and insanity.
-    It can also be forced onto a heathen, to make them unable to take it off...
+    Allows you to transmute a lantern or a flashlight, a flare, a pile of ash and a lighter to create a Cracked Lantern.
+    The lantern works as a flash that also ignites victims.
+    It is a home to Hint, a creature that reveals itself when you hold lantern in your hand.
+    Hint follows behind you and attacks enemies when nearby.
+    You can hit a person with the lantern, which will force Hint to follow that person.
+    After taking enough damage or moving too far away from the lantern, hint will return to you.
 
 knowledge-path-ash-s7-name = Fiery Blade
 knowledge-path-ash-s7-desc =

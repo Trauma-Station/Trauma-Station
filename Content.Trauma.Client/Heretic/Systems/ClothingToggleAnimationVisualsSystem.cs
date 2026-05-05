@@ -37,15 +37,12 @@ public sealed class ClothingToggleAnimationVisualsSystem : EntitySystem
 
         var key = $"{state.ToString()}-{ClientClothingSystem.TemporarySlotMap[args.Slot]}";
         args.Layers.Add((key, new PrototypeLayerData { Loop = false, RsiPath = clothing.RsiPath, State = key }));
-        args.LayersAnimationTime[key] = MathF.Max(0f, (float) (_timing.CurTime - animation.ToggleStartTime).TotalSeconds);
+        args.LayersAnimationTime[key] =
+            MathF.Max(0f, (float) (_timing.CurTime - animation.ToggleStartTime).TotalSeconds);
     }
 
     private void OnAppearanceChange(Entity<ClothingToggleAnimationVisualsComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (!_appearance.TryGetData(ent, ToggleAnimationVisuals.ToggleState, out ToggleAnimationState state, args.Component) ||
-            !TryComp(ent, out ToggleAnimationComponent? animation) || animation.CurState != state && animation.NextState != state)
-            return;
-
         _item.VisualsChanged(ent);
     }
 }

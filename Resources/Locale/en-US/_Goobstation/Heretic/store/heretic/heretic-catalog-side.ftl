@@ -9,13 +9,6 @@ knowledge-path-side-knowledge-desc =
     Unlocks tier 3 passive ability upgrade when performed.
 
 ## T1
-knowledge-path-side-t1-armor-name = Armorer’s Ritual
-knowledge-path-side-t1-armor-desc =
-    The Rusted Hills welcomed the Blacksmith in their generosity. And the Blacksmith returned their generosity in kind.
-
-    Allows you to transmute a table and a gas mask to create Eldritch Armor.
-    Eldritch Armor provides great protection while also acting as a focus when hooded.
-
 knowledge-path-side-t1-flask-name = Priest's Ritual
 knowledge-path-side-t1-flask-desc =
     This is an old recipe. The Owl whispered it to me. Created by the Priest - the Liquid that both was and is not.
@@ -42,7 +35,7 @@ knowledge-path-side-t1-shark-name = Scorching Shark
 knowledge-path-side-t1-shark-desc =
     The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators.
 
-    Allows you to transmute three pools of ash, a liver, and three sheets of plasma into three Fire Sharks.
+    Allows you to transmute three piles of ash, a liver, and three sheets of plasma into three Fire Sharks.
     Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks.
     Fire Sharks ignite their victims and drop plasma sheet once they die.
     You can only create six at a time.
@@ -73,6 +66,16 @@ knowledge-path-side-t1-envy-desc =
     Envy's Knife changes your appearance and name to whoever you stabbed with it.
     You can revert back to your identity at will.
     Ascension reveals your true identity and prevents you from using the knife.
+
+knowledge-path-side-t1-mask-name = Mask of Madness
+knowledge-path-side-t1-mask-desc =
+    Fear pierces you to your core, every instinct screams to tear your gaze away, but it is too late...
+    A single thought drowns out all reason, bursting forth from the depth of your mind:
+    "Why? Why was I cursed with sight to witness this?"
+
+    Allows you to transmute any mask, a stun baton, and a liver to create a Mask of Madness.
+    The mask protects you from bright flashes and instills extreme fear into heathens who witness it.
+    It can also be forced onto a heathen, to make them unable to take it off...
 
 ## T2
 knowledge-path-side-t2-ice-spear-name = Mysteries of Creation

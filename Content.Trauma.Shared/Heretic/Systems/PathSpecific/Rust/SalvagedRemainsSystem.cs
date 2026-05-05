@@ -4,6 +4,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Tackle;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Rust;
 
@@ -25,6 +26,18 @@ public sealed class SalvagedRemainsSystem : EntitySystem
 
         SubscribeLocalEvent<SalvagedRemainsComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<SalvagedRemainsComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
+
+        Subs.SubscribeWithRelay<SalvagedRemainsComponent, CalculateTackleModifierEvent>(OnCalculateTackleModifier,
+            baseEvent: false,
+            held: false);
+    }
+
+    private void OnCalculateTackleModifier(Entity<SalvagedRemainsComponent> ent, ref CalculateTackleModifierEvent args)
+    {
+        if (!_toggle.IsActivated(ent.Owner))
+            return;
+
+        args.CanTackle = false;
     }
 
     private void OnGotUnequipped(Entity<SalvagedRemainsComponent> ent, ref ClothingGotUnequippedEvent args)

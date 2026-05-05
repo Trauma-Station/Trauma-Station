@@ -133,6 +133,11 @@
       components:
       - IdCard
     name: heretic-ritual-ingredient-id-card
+  - whitelist:
+      tags:
+      - Lantern
+      - Flashlight
+    name: heretic-ritual-ingredient-lantern-flashlight
 
 - type: ritualIngredientDataset
   id: KnowledgeRitualHard

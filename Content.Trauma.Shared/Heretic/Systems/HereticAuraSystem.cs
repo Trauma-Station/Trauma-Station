@@ -1,5 +1,5 @@
+using Content.Shared.Clothing;
 using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Heretic.Components;
@@ -14,7 +14,6 @@ public sealed class HereticAuraSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
-
     public override void Initialize()
     {
         base.Initialize();
@@ -22,9 +21,10 @@ public sealed class HereticAuraSystem : EntitySystem
         SubscribeLocalEvent<HideHereticAuraComponent, ComponentStartup>((uid, _, _) => _heretic.RemoveAura(uid));
         SubscribeLocalEvent<HideHereticAuraComponent, ComponentShutdown>((uid, _, _) =>
             _heretic.UpdateHereticAura(uid));
-        SubscribeLocalEvent<HideHereticAuraComponent, GotEquippedEvent>((_, _, ev) => _heretic.RemoveAura(ev.Equipee));
-        SubscribeLocalEvent<HideHereticAuraComponent, GotUnequippedEvent>((_, _, ev) =>
-            _heretic.UpdateHereticAura(ev.Equipee));
+        SubscribeLocalEvent<HideHereticAuraComponent, ClothingGotEquippedEvent>((_, _, ev) =>
+            _heretic.RemoveAura(ev.Wearer));
+        SubscribeLocalEvent<HideHereticAuraComponent, ClothingGotUnequippedEvent>((_, _, ev) =>
+            _heretic.UpdateHereticAura(ev.Wearer));
 
         Subs.SubscribeWithRelay<HideHereticAuraComponent, ShouldHideHereticAuraEvent>(OnHide, held: false);
 
@@ -40,7 +40,8 @@ public sealed class HereticAuraSystem : EntitySystem
             _heretic.UpdateHereticAura(ev.Target));
     }
 
-    private void OnStatusHide(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRelayedEvent<ShouldHideHereticAuraEvent> args)
+    private void OnStatusHide(Entity<HideHereticAuraStatusEffectComponent> ent,
+        ref StatusEffectRelayedEvent<ShouldHideHereticAuraEvent> args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;

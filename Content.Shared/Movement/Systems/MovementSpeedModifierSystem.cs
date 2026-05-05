@@ -1,11 +1,13 @@
+// <Trauma>
+using Content.Goobstation.Common.Movement;
+using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Standing;
 using Robust.Shared.Configuration;
-using Content.Goobstation.Common.Movement; // Goobstation
-using Content.Goobstation.Common.CCVar;
-using Content.Trauma.Common.Heretic; // Goobstation
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Movement.Systems

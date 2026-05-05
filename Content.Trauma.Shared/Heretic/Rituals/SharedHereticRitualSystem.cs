@@ -302,7 +302,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
     public void RitualSuccess(EntityUid ent, EntityUid user, bool predicted)
     {
-        _audio.PlayPredicted(RitualSuccessSound, ent, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
+        _audio.PlayPredicted(RitualSuccessSound, Transform(ent).Coordinates, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
         var popup = Loc.GetString("heretic-ritual-success");
         _popup.PopupPredicted(popup, ent, predicted ? user : null, Filter.Entities(user), false);
         PredictedSpawnAttachedTo("HereticRuneRitualAnimation", ent.ToCoordinates());

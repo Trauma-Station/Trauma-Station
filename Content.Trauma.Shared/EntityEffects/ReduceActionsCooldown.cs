@@ -53,7 +53,7 @@ public sealed partial class ReduceActionsCooldownSystem : EntityEffectSystem<Tra
             if (reduction > args.Effect.MaxReduction)
                 reduction = args.Effect.MaxReduction;
 
-            _actions.SetCooldown(action.AsNullable(), cd.Start, cd.End + curCd - reduction);
+            _actions.SetCooldown(action.AsNullable(), cd.Start, cd.End - reduction);
         }
     }
 }

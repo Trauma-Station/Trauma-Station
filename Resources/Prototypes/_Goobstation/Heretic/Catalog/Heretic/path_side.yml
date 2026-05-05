@@ -152,6 +152,25 @@
     stage: 3
 
 - type: listing
+  id: HereticBladeT1Mask
+  name: knowledge-path-side-t1-mask-name
+  description: knowledge-path-side-t1-mask-desc
+  icon: { sprite: _Goobstation/Heretic/mad_mask.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MaskOfMadness
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSideT1
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 3
+
+- type: listing
   id: HereticSideT2RustWalker
   name: knowledge-path-side-t2-rustwalker-name
   description: knowledge-path-side-t2-rustwalker-desc

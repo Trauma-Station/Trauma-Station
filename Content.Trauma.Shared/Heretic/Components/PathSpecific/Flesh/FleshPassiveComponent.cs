@@ -18,7 +18,7 @@ public sealed partial class FleshPassiveComponent : Component
     public EntityUid? Stomach;
 
     [DataField]
-    public float Heal = -4;
+    public float Heal = -1;
 
     [DataField]
     public float BloodHeal = 3f;

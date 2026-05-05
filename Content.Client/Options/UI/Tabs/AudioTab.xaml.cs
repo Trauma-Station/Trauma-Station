@@ -32,12 +32,17 @@ public sealed partial class AudioTab : Control
             scale: ContentAudioSystem.MasterVolumeMultiplier);
         masterVolume.ImmediateValueChanged += OnMasterVolumeSliderChanged;
 
-        // Goob Station - Barks-start
+        // <Trauma>
         Control.AddOptionPercentSlider(
             GoobCVars.BarksVolume,
             SliderVolumeBarks,
             scale: 3f);
-        // Goob Station - Barks-end
+
+        Control.AddOptionPercentSlider(
+            TraumaCVars.SpecialAudioVolume,
+            SliderVolumeSpecial,
+            scale: 1f);
+        // </Trauma>
 
         Control.AddOptionPercentSlider(
             CVars.MidiVolume,

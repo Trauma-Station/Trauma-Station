@@ -119,6 +119,9 @@
   id: IngotWorkableSteel
 
 - type: Tag
+  id: Lantern
+
+- type: Tag
   id: MagazineGaussgun
 
 - type: Tag

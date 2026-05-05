@@ -106,11 +106,11 @@
   passiveLevel: 3
 
 - type: hereticKnowledge
-  id: MaskOfMadness
+  id: CrackedLantern
   path: Ash
   stage: 6
   ritualPrototypes:
-  - RitualMaskOfMadness
+  - RitualCrackedLantern
 
 - type: hereticKnowledge
   id: FieryBlade
@@ -776,6 +776,12 @@
   stage: 4
   ritualPrototypes:
   - RitualEnvyKnife
+
+- type: hereticKnowledge
+  id: MaskOfMadness
+  stage: 4
+  ritualPrototypes:
+  - RitualMaskOfMadness
 
 ## T2
 - type: hereticKnowledge

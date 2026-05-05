@@ -62,38 +62,67 @@ public sealed class ToggleAnimationSystem : EntitySystem
 
         var (uid, comp) = ent;
 
-        if (args.Activated)
-        {
-            if (comp.CurState == ToggleAnimationState.TogglingOn)
-                return;
+        var now = _timing.CurTime;
 
-            if (comp.CurState == ToggleAnimationState.TogglingOff)
-            {
+        switch (args.Activated)
+        {
+            case true when comp.CurState == ToggleAnimationState.TogglingOn:
+                return;
+            case true when comp.CurState == ToggleAnimationState.TogglingOff:
+                if (comp.ContinueReverseAnimation &&
+                    comp.ToggleOffTime > TimeSpan.Zero && comp.ToggleOnTime > TimeSpan.Zero)
+                {
+                    _appearance.SetData(uid, ToggleAnimationVisuals.ToggleState, ToggleAnimationState.TogglingOn);
+                    comp.CurState = ToggleAnimationState.TogglingOn;
+                    comp.NextState = ToggleAnimationState.On;
+
+                    var factor = (float) (comp.ToggleOffTime.TotalSeconds / comp.ToggleOnTime.TotalSeconds);
+                    var progress = InverseLerp(comp.ToggleStartTime.TotalSeconds,
+                        comp.ToggleEndTime.TotalSeconds,
+                        now.TotalSeconds);
+                    var invProgress = 1f - progress;
+
+                    comp.ToggleStartTime = now - MathF.Pow(invProgress, factor) * comp.ToggleOnTime;
+                    comp.ToggleEndTime = now + MathF.Pow(progress, factor) * comp.ToggleOnTime;
+                    Dirty(ent);
+                    return;
+                }
                 _appearance.SetData(uid, ToggleAnimationVisuals.ToggleState, ToggleAnimationState.On);
-                comp.NextState = ToggleAnimationState.On;
+                comp.CurState = ToggleAnimationState.On;
                 comp.NextState = ToggleAnimationState.On;
                 comp.ToggleStartTime = TimeSpan.Zero;
                 comp.ToggleEndTime = TimeSpan.Zero;
                 Dirty(ent);
                 return;
-            }
-        }
-
-        if (!args.Activated)
-        {
-            if (comp.CurState == ToggleAnimationState.TogglingOff)
+            case false when comp.CurState == ToggleAnimationState.TogglingOff:
                 return;
+            case false when comp.CurState == ToggleAnimationState.TogglingOn:
+                if (comp.ContinueReverseAnimation &&
+                    comp.ToggleOffTime > TimeSpan.Zero && comp.ToggleOnTime > TimeSpan.Zero)
+                {
+                    _appearance.SetData(uid, ToggleAnimationVisuals.ToggleState, ToggleAnimationState.TogglingOff);
 
-            if (comp.CurState == ToggleAnimationState.TogglingOn)
-            {
+                    comp.CurState = ToggleAnimationState.TogglingOff;
+                    comp.NextState = ToggleAnimationState.Off;
+
+                    var factor = (float) (comp.ToggleOnTime.TotalSeconds / comp.ToggleOffTime.TotalSeconds);
+                    var progress = InverseLerp(comp.ToggleStartTime.TotalSeconds,
+                        comp.ToggleEndTime.TotalSeconds,
+                        now.TotalSeconds);
+                    var invProgress = 1f - progress;
+
+                    comp.ToggleStartTime = now - MathF.Pow(invProgress, factor) * comp.ToggleOffTime;
+                    comp.ToggleEndTime = now + MathF.Pow(progress, factor) * comp.ToggleOffTime;
+                    Dirty(ent);
+                    return;
+                }
                 _appearance.SetData(uid, ToggleAnimationVisuals.ToggleState, ToggleAnimationState.Off);
-                comp.NextState = ToggleAnimationState.Off;
+                comp.CurState = ToggleAnimationState.Off;
                 comp.NextState = ToggleAnimationState.Off;
                 comp.ToggleStartTime = TimeSpan.Zero;
                 comp.ToggleEndTime = TimeSpan.Zero;
                 Dirty(ent);
                 return;
-            }
         }
 
         var (state, timer, nextState) = args.Activated
@@ -103,8 +132,13 @@ public sealed class ToggleAnimationSystem : EntitySystem
         _appearance.SetData(uid, ToggleAnimationVisuals.ToggleState, state);
         ent.Comp.CurState = state;
         ent.Comp.NextState = nextState;
-        ent.Comp.ToggleStartTime = _timing.CurTime;
-        ent.Comp.ToggleEndTime = comp.ToggleStartTime + timer;
+        ent.Comp.ToggleStartTime = now;
+        ent.Comp.ToggleEndTime = now + timer;
         Dirty(ent);
+    }
+
+    private float InverseLerp(double min, double max, double value)
+    {
+        return max <= min ? 1f : (float) Math.Clamp((value - min) / (max - min), 0f, 1f);
     }
 }

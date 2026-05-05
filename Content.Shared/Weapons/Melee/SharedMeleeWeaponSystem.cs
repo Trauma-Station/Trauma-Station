@@ -455,6 +455,23 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 if (weaponUid == target)
                     return false;
 
+                // <Trauma>
+                if (target is not { } t)
+                {
+                    if (!weapon.CanMiss)
+                        return false;
+                }
+                else
+                {
+                    if (!weapon.CanMiss && (TerminatingOrDeleted(t) || !HasComp<DamageableComponent>(t)))
+                        return false;
+
+                    var whitelist = light.IsLeftClick ? weapon.ClickAttackWhitelist : weapon.AltClickAttackWhitelist;
+                    if (_whitelist.IsWhitelistFail(whitelist, t))
+                        return false;
+                }
+                // </Trauma>
+
                 // Goobstation start
                 var specialEv = new LightAttackSpecialInteractionEvent(target, user, weapon.Range);
                 RaiseLocalEvent(weaponUid, ref specialEv);

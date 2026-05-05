@@ -56,6 +56,12 @@ public record struct CanStandWhileImmobileEvent(bool CanStand = false);
 public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier);
 
 [ByRefEvent]
+public record struct GetExamineRangeEvent(float Range);
+
+[ByRefEvent]
+public record struct ShouldBlockContextMenuEvent(EntityUid Target, bool ShouldBlock = false);
+
+[ByRefEvent]
 public record struct GetFirestackPassiveModifierEvent(bool OnFire, bool Resisting, float Modifier) : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;
