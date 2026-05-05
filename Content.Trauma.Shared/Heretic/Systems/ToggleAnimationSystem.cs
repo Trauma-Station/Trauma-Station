@@ -17,7 +17,7 @@ public sealed class ToggleAnimationSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ToggleAnimationComponent, ItemToggledEvent>(OnToggle);
-        SubscribeLocalEvent<ToggleAnimationComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<ToggleAnimationComponent, MapInitEvent>(OnMapInit);
     }
 
     public override void Update(float frameTime)
@@ -44,7 +44,7 @@ public sealed class ToggleAnimationSystem : EntitySystem
         }
     }
 
-    private void OnStartup(Entity<ToggleAnimationComponent> ent, ref ComponentStartup args)
+    private void OnMapInit(Entity<ToggleAnimationComponent> ent, ref MapInitEvent args)
     {
         var state = TryComp(ent, out ItemToggleComponent? toggle) && toggle.Activated
             ? ToggleAnimationState.On

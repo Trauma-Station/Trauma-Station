@@ -31,7 +31,7 @@ public sealed class HereticRitualSystem : SharedHereticRitualSystem
 
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<PolymorphRitualEffect>>(OnPolymorph);
 
-        SubscribeLocalEvent<HereticKnowledgeRitualComponent, ComponentStartup>(OnKnowledgeStartup);
+        SubscribeLocalEvent<HereticKnowledgeRitualComponent, MapInitEvent>(OnKnowledgeInit);
         SubscribeLocalEvent<HereticKnowledgeRitualComponent, HereticRitualOwnerSetEvent>(OnSetOwner);
     }
 
@@ -57,7 +57,7 @@ public sealed class HereticRitualSystem : SharedHereticRitualSystem
         return (_commandQuery.HasComp(uid), _secQuery.HasComp(uid));
     }
 
-    private void OnKnowledgeStartup(Entity<HereticKnowledgeRitualComponent> ent, ref ComponentStartup args)
+    private void OnKnowledgeInit(Entity<HereticKnowledgeRitualComponent> ent, ref MapInitEvent args)
     {
         SelectKnowledgeIngredients(ent);
     }

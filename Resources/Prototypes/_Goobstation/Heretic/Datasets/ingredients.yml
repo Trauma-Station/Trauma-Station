@@ -183,9 +183,9 @@
       components:
       - FlashImmunity
       - Clothing
-      blacklist:
-        components:
-        - BreathMask
-        - IngestionBlocker
-        - Blindfold
+    blacklist:
+      components:
+      - BreathMask
+      - IngestionBlocker
+      - Blindfold
     name: heretic-ritual-ingredient-sunglasses
