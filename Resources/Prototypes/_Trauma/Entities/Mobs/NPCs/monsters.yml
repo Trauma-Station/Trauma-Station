@@ -596,6 +596,38 @@
   description: Not to be confused with the Coconut Crab... oh, I see the problem now.
   suffix: botany, AI
   components:
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.15
+    - reagents: [ Blood ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.25
+          Burn: -0.25
+    - reagents: [ RobustHarvest ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -1
+          Burn: -1
+    - reagents: [ WeedKiller, PlantBGone ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 1
   - type: SolutionContainerManager
     solutions:
       food:
@@ -611,7 +643,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 11
+        damage: 30
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
@@ -621,8 +653,18 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodCoconutHalf:
-            min: 0
-            max: 1
+            min: 1
+            max: 2
+  - type: PassiveDamage # Cooler than other options, lives for 120s
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Blunt: 0.25
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: CoconutCrab
+  - type: WeakToHoly
 
 - type: entity
   parent: MobCrabTinyBase

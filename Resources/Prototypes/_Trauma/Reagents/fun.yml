@@ -6,6 +6,8 @@
   physicalDesc: reagent-physical-desc-crabby
   flavor: crabby
   color: "#94363a"
+  slipData:
+    requiredSlipSpeed: 3.5
 
 - type: reagent
   id: Crabon
@@ -16,6 +18,8 @@
   contrabandSeverity: Major
   flavor: crabby
   color: "#94363a"
+  slipData:
+    requiredSlipSpeed: 3.5
   tileReactions:
   - !type:CreateEntityTileReaction
     entity: MobCrabTiny
