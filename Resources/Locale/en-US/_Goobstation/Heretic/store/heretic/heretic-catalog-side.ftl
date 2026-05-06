@@ -1,50 +1,47 @@
+knowledge-passive-upgrade-name-2 = Upgrade passive ability (Tier 2)
+knowledge-passive-upgrade-name-3 = Upgrade passive ability (Tier 3)
+
 knowledge-path-side-knowledge-name = Ritual of Knowledge
 knowledge-path-side-knowledge-desc =
     Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise.
 
-    You learn a special, one-time-only ritual that requires 4 different items. Performing this ritual instantly grants you 4 knowledge points.
+    You learn a special, one-time-only ritual that requires 3 different items. Performing this ritual instantly grants you 4 knowledge points.
+    Unlocks tier 3 passive ability upgrade when performed.
 
-## stage 4
-knowledge-path-side-s4-armor-name = Armorer’s Ritual
-knowledge-path-side-s4-armor-desc =
-    The Rusted Hills welcomed the Blacksmith in their generosity. And the Blacksmith returned their generosity in kind.
-
-    Allows you to transmute a table and a gas mask to create Eldritch Armor.
-    Eldritch Armor provides great protection while also acting as a focus when hooded.
-
-knowledge-path-side-s4-flask-name = Priest's Ritual
-knowledge-path-side-s4-flask-desc =
+## T1
+knowledge-path-side-t1-flask-name = Priest's Ritual
+knowledge-path-side-t1-flask-desc =
     This is an old recipe. The Owl whispered it to me. Created by the Priest - the Liquid that both was and is not.
 
-    Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence.
+    Allows you to transmute a tank of water or welding fuel and a glass shard into a Flask of Eldritch Essence.
     Eldritch water can be consumed for potent healing.
 
-knowledge-path-side-s4-ashen-eyes-name = Ashen Eyes
-knowledge-path-side-s4-ashen-eyes-desc =
+knowledge-path-side-t1-ashen-eyes-name = Ashen Eyes
+knowledge-path-side-t1-ashen-eyes-desc =
     Piercing eyes guided them through the mundane. Neither darkness nor terror could stop them.
 
     Allows you to transmute a pair of eyes, a flare, and a glass shard into an Eldritch Medallion.
     The Eldritch Medallion grants you thermal vision while worn, and also functions as a focus.
 
-knowledge-path-side-s4-void-cloak-name = Void Cloak
-knowledge-path-side-s4-void-cloak-desc =
+knowledge-path-side-t1-void-cloak-name = Void Cloak
+knowledge-path-side-t1-void-cloak-desc =
     The Owl is the keeper of things that are not quite in practice, but in theory are. Many things are.
 
     Allows you to transmute a glass shard, a bedsheet, and any winter coat to create a Void Cloak.
     While the hood is down, the cloak functions as a focus and provides low pressure and low temperature protection, and while the hood is up, the cloak is completely invisible.
     It also provides decent armor and has pockets which can hold one of your blades, various ritual components (such as organs), and small heretical trinkets.
 
-knowledge-path-side-s4-shark-name = Scorching Shark
-knowledge-path-side-s4-shark-desc =
+knowledge-path-side-t1-shark-name = Scorching Shark
+knowledge-path-side-t1-shark-desc =
     The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators.
 
-    Allows you to transmute three pools of ash, a liver, and three sheets of plasma into three Fire Sharks.
+    Allows you to transmute three piles of ash, a liver, and three sheets of plasma into three Fire Sharks.
     Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks.
     Fire Sharks ignite their victims and drop plasma sheet once they die.
     You can only create six at a time.
 
-knowledge-path-side-s4-ether-name = Ether Of The Newborn
-knowledge-path-side-s4-ether-desc =
+knowledge-path-side-t1-ether-name = Ether Of The Newborn
+knowledge-path-side-t1-ether-desc =
     Vision and thought grow hazy as the fumes of this ichor swirl up to meet me.
     Through the haze, I find myself staring back in relief, or something grossly resembling my visage.
     It is this wretched thing that I consign to my fate, and whose own that I snatch through the haze of dreams. Fools that we are.
@@ -53,16 +50,16 @@ knowledge-path-side-s4-ether-desc =
     drinking it will remove any sort of abnormality from your body including diseases and traumas.
     on top of restoring it to full health, at the cost of losing consciousness for an entire minute.
 
-knowledge-path-side-s4-realignment-name = Realignment
-knowledge-path-side-s4-realignment-desc =
+knowledge-path-side-t1-realignment-name = Realignment
+knowledge-path-side-t1-realignment-desc =
     Seven times seven techniques were made in Eternal War. These parts of the doctrine contain enough to crush anyone.
 
     Grants you Realignment a spell that will remove stuns, knockdowns and restraints from you and realign your body rapidly for a short period.
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
     Doesn't require focus to cast.
 
-knowledge-path-side-s4-envy-name = Rite of Stolen Faces
-knowledge-path-side-s4-envy-desc =
+knowledge-path-side-t1-envy-name = Rite of Stolen Faces
+knowledge-path-side-t1-envy-desc =
     One day, a thief grew tired of stealing gold, so he began stealing something far more valuable: identities.
 
     Transmute a knife, a heart and a mask of a clown or a mime to create Envy's Knife.
@@ -70,31 +67,41 @@ knowledge-path-side-s4-envy-desc =
     You can revert back to your identity at will.
     Ascension reveals your true identity and prevents you from using the knife.
 
-## stage 6
-knowledge-path-side-s6-ice-spear-name = Mysteries of Creation
-knowledge-path-side-s6-ice-spear-desc =
+knowledge-path-side-t1-mask-name = Mask of Madness
+knowledge-path-side-t1-mask-desc =
+    Fear pierces you to your core, every instinct screams to tear your gaze away, but it is too late...
+    A single thought drowns out all reason, bursting forth from the depth of your mind:
+    "Why? Why was I cursed with sight to witness this?"
+
+    Allows you to transmute any mask, a stun baton, and a liver to create a Mask of Madness.
+    The mask protects you from bright flashes and instills extreme fear into heathens who witness it.
+    It can also be forced onto a heathen, to make them unable to take it off...
+
+## T2
+knowledge-path-side-t2-ice-spear-name = Mysteries of Creation
+knowledge-path-side-t2-ice-spear-desc =
     Artifacts linked to the Winter Dawn exude unnatural stillness. Time slows around them. Fires choke. Thoughts become brittle. Proximity breeds hallucinations of endless white fields, a sky with no sun, and a voice that speaks only in cracking ice.
 
     Grants you Mysteries of Creation, a spell that allows you to summon the Glacier Spear at will. This magical spear chills victims upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube. If the spear is destroyed, activating this ability will create a new one, otherwise it will summon the existing spear into your hand.
 
-knowledge-path-side-s6-rustwalker-name = Rusted Ritual
-knowledge-path-side-s6-rustwalker-desc =
+knowledge-path-side-t2-rustwalker-name = Rusted Ritual
+knowledge-path-side-t2-rustwalker-desc =
     I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out.
 
     Allows you to transmute a pool of vomit, 15 cable coil, and 10 sheets of iron into a Rust Walker.
     Rust Walkers excel at spreading rust and are moderately strong in combat.
     You can only create four at a time.
 
-knowledge-path-side-s6-knife-name = Carving Knife
-knowledge-path-side-s6-knife-desc =
+knowledge-path-side-t2-knife-name = Carving Knife
+knowledge-path-side-t2-knife-desc =
     Etched, carved... eternal. There is power hidden in everything. I can unveil it! I can carve the monolith to reveal the chains!
 
     Allows you to transmute a knife, a shard of glass, and a piece of paper to create a Carving Knife.
     The Carving Knife allows you to etch difficult to see traps that trigger on heathens who walk overhead.
     Also makes for a handy throwing weapon.
 
-knowledge-path-side-s6-morbus-name = Codex Morbus
-knowledge-path-side-s6-morbus-desc =
+knowledge-path-side-t2-morbus-name = Codex Morbus
+knowledge-path-side-t2-morbus-desc =
     The spine of this leather-bound tome creaks with an eerily pained sigh.
     To ply page from place takes considerable effort, and I dare not linger on the suggestions the book makes for longer than necessary.
     It speaks of coming plagues, of waiting supplicants of dead and forgotten gods, and the undoing of mortal kind.
@@ -104,8 +111,8 @@ knowledge-path-side-s6-morbus-desc =
     It draws runes and siphons essences faster.
     Alt-Click on a rune with open codex to curse crewmembers, the target's blood or DNA (blood has greater effect) is required to be on the rune for a curse to take effect (Best combined with Phylactery Of Damnation).
 
-knowledge-path-side-s6-greaves-name = Greaves Of The Prophet
-knowledge-path-side-s6-greaves-desc =
+knowledge-path-side-t2-greaves-name = Greaves Of The Prophet
+knowledge-path-side-t2-greaves-desc =
     Gristle churns into joint, a pop, and the fool twists a blackened foot from the jaws of another.
     At their game for centuries, this mangled tree of limbs twists,
     thrashing snares buried into snarling gums, seeking to shred the weight of grafted neighbors.
@@ -114,11 +121,11 @@ knowledge-path-side-s6-greaves-desc =
     Their rhythms keep the feud fresh with indifference to barrier or border.
     Pulling more into their turmoil as they waltz.
 
-    Allows you to combine a pair of magboots, a pair of combat boots of any kind and 2 bars of silver into a pair of Armored Greaves,
+    Allows you to combine a pair of magboots or combat boots of any kind and 2 bars of silver into a pair of Armored Greaves,
     they confer to the user full immunity to slips and act as magboots and jackboots.
 
-knowledge-path-side-s6-shattered-ritual-name = Shattered Ritual
-knowledge-path-side-s6-shattered-ritual-desc =
+knowledge-path-side-t2-shattered-ritual-name = Shattered Ritual
+knowledge-path-side-t2-shattered-ritual-desc =
     I witnessed a cold, rending force drag this corpse back to near-life.
     When it moves, it crunches like broken glass.
     Its hands are no longer recognizable as human - each clenched fist contains a brutal nest of sharp bone-shards instead.
@@ -128,16 +135,16 @@ knowledge-path-side-s6-shattered-ritual-desc =
     instead having two brutal weapons for hands.
     You can only create one at a time.
 
-knowledge-path-side-s6-crucible-name = Mawed Crucible
-knowledge-path-side-s6-crucible-desc =
+knowledge-path-side-t2-crucible-name = Mawed Crucible
+knowledge-path-side-t2-crucible-desc =
     This is pure agony. I wasn't able to summon the figure of the Aristocrat,
     but with the Priest's attention I stumbled upon a different recipe...
 
-    Allows you to transmute a portable water tank and a table to create a Mawed Crucible.
+    Allows you to transmute a portable water or fuel tank and a table to create a Mawed Crucible.
     The Mawed Crucible can brew powerful potions for combat and utility, but must be fed bodyparts and organs between uses.
 
-knowledge-path-side-s6-sword-name = Through the Boundary
-knowledge-path-side-s6-sword-desc =
+knowledge-path-side-t2-sword-name = Through the Boundary
+knowledge-path-side-t2-sword-desc =
     “There are no locked doors, no sealed gates; no cages, no captives,”
     whispered the Steward, standing at the edge of the Well of Secrets.
     “Only those who stare too long into the abyss.”
@@ -150,9 +157,9 @@ knowledge-path-side-s6-sword-desc =
     More importantly, attacking with the sword will mark the target with combat mark of any Path of Decay.
     The sword cannot trigger the mark by itself - best used in combination with heretic blade.
 
-## stage 8
-knowledge-path-side-s8-grasp-name = Mind Grasp
-knowledge-path-side-s8-grasp-desc =
+## T3
+knowledge-path-side-t3-grasp-name = Mind Grasp
+knowledge-path-side-t3-grasp-desc =
     You believe that your mind is a fortress.
     You picture walls of reason, towers of will, and a sanctum to which you hold the key.
     A comforting lie. The walls are only shadows cast by the light of their own fragile understanding.
@@ -163,21 +170,21 @@ knowledge-path-side-s8-grasp-desc =
     The longer you channel it - the higher the range will be. Channeling can be stopped early by activating grasp again.
     Area of effect grasp suffers increased cooldown, scaled by range and the number of victims.
 
-knowledge-path-side-s8-cleave-name = Crimson Cleave
-knowledge-path-side-s8-cleave-desc =
+knowledge-path-side-t3-cleave-name = Crimson Cleave
+knowledge-path-side-t3-cleave-desc =
     At first I didn't understand these instruments of war, but the Priest told me to use them regardless. Soon, he said, I would know them well.
 
     Grants you Crimson Cleave, a targeted spell which siphons health in a small AOE. Cleanses all wounds upon casting
 
-knowledge-path-side-s8-space-phase-name = Space Phase
-knowledge-path-side-s8-space-phase-desc =
+knowledge-path-side-t3-space-phase-name = Space Phase
+knowledge-path-side-t3-space-phase-desc =
     You feel like your body can move through space as if you where dust.
 
     Grants you Space Phase, a spell that allows you to move freely through space.
     You can only phase in and out when you are in space or outdoor low pressure area like lavaland.
 
-knowledge-path-side-s8-maid-name = Maid in the Mirror
-knowledge-path-side-s8-maid-desc =
+knowledge-path-side-t3-maid-name = Maid in the Mirror
+knowledge-path-side-t3-maid-desc =
     Within each reflection, lies a gateway into an unimaginable world of colors never seen and people never met.
     The ascent is glass, and the walls are knives. Each step is blood, if you do not have a guide.
 
@@ -185,8 +192,8 @@ knowledge-path-side-s8-maid-desc =
     Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, serving as powerful scouts and ambushers.
     Their attacks also apply a stack of void chill.
 
-knowledge-path-side-s8-admonitions-name = Forest Admonitions
-knowledge-path-side-s8-admonitions-desc =
+knowledge-path-side-t3-admonitions-name = Forest Admonitions
+knowledge-path-side-t3-admonitions-desc =
     Where the pale fog covers the woods, we go unnoticed, until we are ready.
 
     Replaces your Cloak of Shadow ability with Forest Admonitions.

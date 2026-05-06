@@ -4,8 +4,6 @@ using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
-using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Wounds;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Hands.Systems;
@@ -17,7 +15,6 @@ using Content.Server.Roles;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Body;
-using Content.Shared.Body.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -87,10 +84,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly HolyFlammableSystem _holyFlam = default!;
     [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-
-    [Dependency] private readonly EntityQuery<BrainComponent> _brainQuery = default!;
-    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     public override void Initialize()
     {
@@ -415,22 +408,6 @@ public sealed class GhoulSystem : SharedGhoulSystem
         }
 
         GiveGhoulWeapon(ent);
-    }
-
-    /// <summary>
-    /// Required to prevent heretic from farming organs from ghouls
-    /// </summary>
-    private void MakeOrgansFragile(EntityUid uid)
-    {
-        foreach (var organ in _body.GetOrgans(uid))
-        {
-            // Don't curse brain and torso
-            if (_brainQuery.HasComp(organ) || _woundableQuery.TryComp(organ, out var woundable) &&
-                woundable.RootWoundable == organ.Owner)
-                continue;
-
-            EnsureComp<FragileOrganComponent>(organ);
-        }
     }
 
     private void SendBriefing(Entity<HereticMinionComponent?> ent)

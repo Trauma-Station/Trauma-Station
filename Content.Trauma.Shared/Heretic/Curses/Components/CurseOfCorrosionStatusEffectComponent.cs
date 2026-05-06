@@ -2,13 +2,14 @@
 
 using System.Numerics;
 using Content.Shared.Damage;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Curses.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class CurseOfCorrosionStatusEffectComponent : Component
 {
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextVomit = TimeSpan.Zero;
 
     [DataField]

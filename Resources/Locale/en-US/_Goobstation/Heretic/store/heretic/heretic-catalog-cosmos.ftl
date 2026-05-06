@@ -1,3 +1,6 @@
+knowledge-path-cosmos-passive-desc-2 = Cosmic fields now block explosions, disrupt grenades or signalers from being activated and turn off already primed grenades.
+knowledge-path-cosmos-passive-desc-3 = Cosmic fields now slow projectiles down.
+
 knowledge-path-cosmos-s1-name = Eternal Gate
 knowledge-path-cosmos-s1-desc =
     A nebula appeared in the sky, its infernal birth shone upon me. This was the start of a great transcendence.
@@ -31,21 +34,31 @@ knowledge-path-cosmos-s4-desc =
     However, people with a star mark will get transported along with another person using the rune.
     Heathens, who try to teleport using the runes, will be star marked on arrival.
 
-knowledge-path-cosmos-s5-name = Star Touch
+knowledge-path-cosmos-s5-name = Star Blast
 knowledge-path-cosmos-s5-desc =
-    After waking in a cold sweat I felt a palm on my scalp, a sigil burned onto me. My veins now emitted a strange purple glow, the Beast knows I will surpass its expectations.
-
-    Grants you Star Touch, a spell which places a star mark upon your target and creates a cosmic field at your feet and to the turfs next to you.
-    Targets which already have a star mark will be connected to you with a cosmic ray, giving them a cosmic trail and allowing you to hit them at range using your cosmic blade.
-    Tethered victims cannot teleport by any means.
-    If the tether remains unbroken for 8 seconds, they will be put to sleep, star marked and teleported to you.
-
-knowledge-path-cosmos-s6-name = Star Blast
-knowledge-path-cosmos-s6-desc =
     The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me.
 
     Fires a projectile that moves very slowly, raising a short-lived wall of cosmic fields where it goes.
     When recasted, you will be teleported to the projectile, and cosmic fields will generate from your current position and from teleport locations, pulling nearby heathens into it.
+
+knowledge-path-cosmos-armor-name = Starwoven Cloak
+knowledge-path-cosmos-armor-desc =
+    Like radiant cords, the stars shone in union across the silken shape of a billowing cloak, that at once does and does not drape my shoulders.
+    The eyes of the Beast rested upon me, and through me.
+
+    Allows you to transmute a table (or a suit), a mask and a sheet of plasma to create a Starwoven Cloak,
+    grants protection from the hazards of space while granting to the user the ability to move freely in no gravity.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
+
+knowledge-path-cosmos-s6-name = Star Touch
+knowledge-path-cosmos-s6-desc =
+    After waking in a cold sweat I felt a palm on my scalp, a sigil burned onto me. My veins now emitted a strange purple glow, the Beast knows I will surpass its expectations.
+
+    Grants you Star Touch, a spell which places a star mark upon your target and creates a cosmic field at your feet and to the turfs next to you.
+    Targets which already have a star mark will be connected to you with a cosmic ray, blinding them, giving them a cosmic trail and allowing you to hit them at range using your cosmic blade.
+    Tethered victims cannot teleport by any means.
+    If the tether remains unbroken for 8 seconds, they will be put to sleep, star marked and teleported to you.
 
 knowledge-path-cosmos-s7-name = Cosmic Blade
 knowledge-path-cosmos-s7-desc =
@@ -55,7 +68,6 @@ knowledge-path-cosmos-s7-desc =
     Your attacks will chain bonus damage to up to two previous victims.
     The combo is reset after two seconds without making an attack, or if you attack someone already marked.
     If you combo more than two attacks you will receive a cosmic trail and increase your combo timer up to ten seconds.
-    Cosmic fields now block explosions, disrupt grenades or signalers from being activated and turn off already primed grenades.
 
 knowledge-path-cosmos-s8-name = Cosmic Expansion
 knowledge-path-cosmos-s8-desc =
@@ -73,5 +85,4 @@ knowledge-path-cosmos-s9-desc =
     The Star Gazer has an aura that will heal you.
     Star Touch can now teleport you to the Star Gazer when activated in your hand.
     Your cosmic expansion spell and your blades also become greatly empowered.
-    You gain x-ray vision as well as immunity to extreme pressure and temperature.
-    Cosmic fields now slow projectiles down.
+    You gain x-ray vision as well as immunity to hazards of space.

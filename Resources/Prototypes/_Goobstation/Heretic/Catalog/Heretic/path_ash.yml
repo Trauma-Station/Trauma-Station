@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
@@ -123,16 +113,84 @@
     whitelist:
     - Ash
 
+- type: listing
+  id: HereticAshArmor
+  name: knowledge-path-ash-armor-name
+  description: knowledge-path-ash-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/ashen_armor.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ArmorAsh
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Ash
+
+- type: listing
+  id: HereticAshPassiveT2
+  name: knowledge-passive-upgrade-name-2
+  description: knowledge-path-ash-passive-desc-2
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_ash.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AshPassiveT2
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 2
+    stage: 5
+    whitelist:
+    - Ash
+
+- type: listing
+  id: HereticAshPassiveT3
+  name: knowledge-passive-upgrade-name-3
+  description: knowledge-path-ash-passive-desc-3
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_ash.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - AshPassiveT3
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 3
+    stage: 5
+    whitelist:
+    - Ash
+  - !type:BuyBeforeCondition
+    whitelist:
+    - HereticAshPassiveT2
+
 # side
 - type: listing
   id: HereticAshPath6
   name: knowledge-path-ash-s6-name
   description: knowledge-path-ash-s6-desc
-  icon: { sprite: _Goobstation/Heretic/mad_mask.rsi, state: icon }
+  icon: { sprite: _Goobstation/Heretic/Entities/lantern.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - MaskOfMadness
+    - CrackedLantern
   cost:
     KnowledgePoint: 2
   categories:

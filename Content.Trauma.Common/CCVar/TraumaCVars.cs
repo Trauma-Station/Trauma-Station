@@ -215,4 +215,14 @@ public sealed partial class TraumaCVars
         CVarDef.Create("particles.global_budget", 8000, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     #endregion
+
+    #region Audio
+
+    /// <summary>
+    /// Special audio volume like fear sounds.
+    /// </summary>
+    public static readonly CVarDef<float> SpecialAudioVolume =
+        CVarDef.Create("trauma.special_audio_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    #endregion
 }

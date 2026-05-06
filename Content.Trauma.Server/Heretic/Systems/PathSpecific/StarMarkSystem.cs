@@ -15,7 +15,7 @@ public sealed class StarMarkSystem : SharedStarMarkSystem
     {
         base.InitializeCosmicField(field, strength);
 
-        if (strength < 7) // Cosmic blade level
+        if (strength < 2)
             return;
 
         var airtight = EnsureComp<AirtightComponent>(field);

@@ -57,7 +57,14 @@ public sealed class TouchSpellSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
+        if (args.HitEntities.Count == 1)
+        {
+            args.Handled = TryUseTouchSpell(ent, args.User, args.HitEntities[0]);
+            return;
+        }
+
         UseTouchSpellMultiTarget(ent, args.User, args.HitEntities);
+        args.Handled = true;
     }
 
     private void OnAfterInteract(Entity<TouchSpellComponent> ent, ref AfterInteractEvent args)
@@ -65,8 +72,7 @@ public sealed class TouchSpellSystem : EntitySystem
         if (args is not { Handled: false, CanReach: true, Target: { } target })
             return;
 
-        TryUseTouchSpell(ent, args.User, target);
-        args.Handled = true;
+        args.Handled = TryUseTouchSpell(ent, args.User, target);
     }
 
     public bool TryUseTouchSpell(Entity<TouchSpellComponent> ent, EntityUid user, EntityUid target)

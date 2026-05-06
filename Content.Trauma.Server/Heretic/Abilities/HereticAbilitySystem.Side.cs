@@ -102,10 +102,9 @@ public sealed partial class HereticAbilitySystem
     {
         if (TryComp(uid, out PolymorphedEntityComponent? morphed) && HasComp<SpectralComponent>(uid))
             _poly.Revert((uid, morphed));
-        else if (TryUseAbility(args))
-            _poly.PolymorphEntity(uid, polymorph);
-        else
+        else if (!TryUseAbility(args) || _poly.PolymorphEntity(uid, polymorph) == null)
             return false;
+
         return true;
     }
 

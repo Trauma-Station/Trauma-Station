@@ -10,12 +10,16 @@ public abstract partial class SharedHereticAbilitySystem
     protected virtual void SubscribeLock()
     {
         SubscribeLocalEvent<HereticAscensionLockEvent>(OnAscensionLock);
+        SubscribeLocalEvent<HereticXRayVisionEvent>(OnXray);
+    }
+
+    private void OnXray(HereticXRayVisionEvent args)
+    {
+        _eye.SetDrawFov(args.Heretic, args.Negative);
     }
 
     private void OnAscensionLock(HereticAscensionLockEvent args)
     {
-        _eye.SetDrawFov(args.Heretic, args.Negative);
-
         var collectiveMind = EnsureComp<CollectiveMindComponent>(args.Heretic);
         if (args.Negative)
             collectiveMind.Channels.Remove(MansusLinkMind);

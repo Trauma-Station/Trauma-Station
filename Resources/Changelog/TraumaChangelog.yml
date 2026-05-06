@@ -7963,3 +7963,46 @@ Entries:
   id: 921
   time: '2026-05-06T00:44:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2437
+- author: Aviu
+  changes:
+  - type: Fix
+    message: A ton of heretic bugfixes.
+  - type: Add
+    message: Heretic armor now moved to midstage special ritual.
+  - type: Add
+    message: Heretic armor has unique effects and stats for each path.
+  - type: Add
+    message: >-
+      Every path now has progressive passive ability not related to main
+      knowledge research.
+  - type: Add
+    message: >-
+      Mask of madness moved to t1 side with different effect, replaced by
+      cracked lantern for ashen path.
+  - type: Add
+    message: Ashen path mark effect changed.
+  - type: Add
+    message: You can draw runes with crayon.
+  - type: Add
+    message: Crucible and eldritch flask support fuel tanks for ritual now.
+  - type: Tweak
+    message: Ash jaunt cooldown increased.
+  - type: Tweak
+    message: >-
+      Star touch and Star blast swapped places in progression, star touch now
+      also blinds target.
+  - type: Tweak
+    message: Cosmic expansion summons hollow 5x5 field box instead of filled one.
+  - type: Tweak
+    message: >-
+      Touch spells cannot be used on mobs via context menu but they are easier
+      to use in combat mode.
+  - type: Tweak
+    message: Relentless heartbeat recipe changed.
+  - type: Remove
+    message: Decapoid can't be heretic (need 2 hands to draw the rune)
+  - type: Add
+    message: Heretic guidebook updated, read for details.
+  id: 922
+  time: '2026-05-06T10:54:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2418
