@@ -383,6 +383,7 @@
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/daniels.rsi
 
+
 - type: entity
   parent: ClothingNeckBase
   id: PatreonCatdere
