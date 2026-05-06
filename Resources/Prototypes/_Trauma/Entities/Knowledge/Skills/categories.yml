@@ -84,7 +84,7 @@
   id: BaseLanguageKnowledgeAntag
   abstract: true
   components:
-  - type: Knowledge
+  - type: Skill
     complex: true
 
 - type: entity

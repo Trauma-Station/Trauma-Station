@@ -43,35 +43,8 @@ public sealed partial class AttributeTab : Control
         AttributeBox.SeparationOverride = 10;
         foreach (var (groupId, conditions) in doohickeys)
         {
-            var boxContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            };
-
-            var attributeName = new RichTextLabel
-            {
-                Text = conditions.Name,
-                SetWidth = 100,
-                HorizontalAlignment = HAlignment.Left,
-            };
-
-            var firstPart = new RichTextLabel
-            {
-                Text = $"{conditions.Inherent.Int()}",
-                SetWidth = 100,
-            };
-
-            var secondPart = new RichTextLabel
-            {
-                Text = $"{conditions.Inherent - conditions.Inherent.Int()}",
-                SetWidth = 100,
-            };
-
-            boxContainer.AddChild(attributeName);
-            boxContainer.AddChild(firstPart);
-            boxContainer.AddChild(secondPart);
-
-            AttributeBox.AddChild(boxContainer);
+            var attributeBox = new AttributeTabControl(conditions);
+            AttributeBox.AddChild(attributeBox);
         }
     }
 }

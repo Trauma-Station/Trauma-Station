@@ -2,7 +2,6 @@
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Common.Parry;
 using Content.Trauma.Common.Weapons;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;

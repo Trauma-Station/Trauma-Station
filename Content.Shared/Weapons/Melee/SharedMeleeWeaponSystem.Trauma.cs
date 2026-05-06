@@ -10,6 +10,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Contests;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;

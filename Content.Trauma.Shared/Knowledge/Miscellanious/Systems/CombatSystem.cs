@@ -19,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Miscellanious.Systems;
 
-public sealed partial class MiscAttributeSystem : EntitySystem
+public sealed partial class CombatSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;

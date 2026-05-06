@@ -1,0 +1,16 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    Orientation="Horizontal">
+    <TextureRect Name="TextRect" Margin="0, 8, 0, 0" />
+
+    <BoxContainer Name="HorizontalContainer" Orientation="Horizontal">
+        <RichTextLabel Name="SkillBox" SetWidth="325" HorizontalAlignment="Left" />
+
+        <RichTextLabel Name="ModifierBox" MinSize="200 20"/>
+    </BoxContainer>
+</BoxContainer>

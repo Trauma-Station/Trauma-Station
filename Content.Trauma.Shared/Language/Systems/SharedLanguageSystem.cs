@@ -42,7 +42,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
     {
         _builder.Clear();
         var ratio = 1.0f;
-        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetSkill(brain, _knowledge.LanguageUnit(language)) is { } skill)
         {
             if (_knowledge.GetMastery(skill.Comp) > 1)
                 ratio = 0.0f;

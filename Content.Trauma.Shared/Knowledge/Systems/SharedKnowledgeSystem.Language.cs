@@ -215,7 +215,7 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
-            if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
+            if (GetSkill(brain, LanguageUnit(lang)) is { } existing)
                 continue;
 
             // Add if you don't know shit.
