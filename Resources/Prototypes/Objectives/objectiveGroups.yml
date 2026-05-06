@@ -57,7 +57,7 @@
 - type: weightedRandom
   id: TraitorObjectiveGroupOther
   weights:
-    HijackTradeStationObjective: 1
+    HijackTradeStationObjective: 0.1 # Trauma, was 1, showed up every round
 
 
 #Thief groups
