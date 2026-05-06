@@ -390,10 +390,10 @@
   description: I killed three men in 1997.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Patreon/Catdere.rsi
+    sprite: _Trauma/Objects/Patreon/catdere.rsi
   - type: Clothing
     quickEquip: true
-    sprite: _Trauma/Objects/Patreon/Catdere.rsi
+    sprite: _Trauma/Objects/Patreon/catdere.rsi
 
 - type: entity
   parent: BaseFigurine
