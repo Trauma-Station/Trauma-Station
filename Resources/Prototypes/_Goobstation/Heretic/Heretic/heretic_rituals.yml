@@ -1772,9 +1772,13 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
-            tags:
-            - WaterTank
-          name: heretic-ritual-ingredient-water-tank
+            components:
+            - ReagentTank
+          blacklist:
+           components:
+           - Toilet
+           - Drain
+          name: heretic-ritual-ingredient-tank
         - whitelist:
             tags:
             - GlassShard
@@ -2296,20 +2300,11 @@
         - whitelist:
             components:
             - Magboots
-          blacklist:
-            tags:
-            - HereticItem
-          name: heretic-ritual-ingredient-magboots
-        - whitelist:
-            requireAll: true
-            components:
-            - Clothing
             - ClothingSlowOnDamageModifier
-            - ModifyStandingUpTime
           blacklist:
             tags:
             - HereticItem
-          name: heretic-ritual-ingredient-combat-boots
+          name: heretic-ritual-ingredient-combat-boots-magboots
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -2418,9 +2413,13 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
-            tags:
-            - WaterTank
-          name: heretic-ritual-ingredient-water-tank
+            components:
+            - ReagentTank
+          blacklist:
+           components:
+           - Toilet
+           - Drain
+          name: heretic-ritual-ingredient-tank
         - whitelist:
             tags:
             - Table

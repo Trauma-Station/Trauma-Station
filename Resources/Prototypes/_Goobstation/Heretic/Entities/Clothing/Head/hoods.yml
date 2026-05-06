@@ -42,6 +42,7 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.5
+  - type: IdentityBlocker
 
 - type: entity
   parent: ClothingHeadHatHoodHeretic
@@ -167,6 +168,11 @@
     state: icon
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/Head/lock_hood.rsi
+  - type: VoiceMask
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
 
 - type: entity
   parent: ClothingHeadBase

@@ -2,9 +2,9 @@
 
 using Content.Shared.Whitelist;
 
-namespace Content.Trauma.Client.Heretic;
+namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class BlockContextMenuComponent : Component
 {
     [DataField]

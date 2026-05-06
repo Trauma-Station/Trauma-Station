@@ -365,7 +365,6 @@
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
   components:
-  - type: ArmorPointBlank
   - type: UnholyItem
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi

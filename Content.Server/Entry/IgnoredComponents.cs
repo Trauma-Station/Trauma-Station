@@ -10,7 +10,6 @@ namespace Content.Server.Entry
             "HideClothingLayerClothing",
             "MultiShaderSprite",
             "ItemSlotRenderer",
-            "BlockContextMenu",
             // </Trauma>
             "ConstructionGhost",
             "IconSmooth",

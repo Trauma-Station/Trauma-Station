@@ -46,6 +46,7 @@ public sealed class ComponentTogglerSystem : EntitySystem
 
             component.Target = target;
 
+            EntityManager.RemoveComponents(target, component.DeactivateComponents); // Trauma
             EntityManager.AddComponents(target, component.Components);
         }
         else

@@ -2,6 +2,7 @@
 
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Shared.Heretic.Components;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 

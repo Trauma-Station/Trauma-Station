@@ -22,7 +22,7 @@ public sealed class RitualKnowledgeTests : GameTest
 
         var tagSys = server.System<TagSystem>();
         var protoMan = server.ResolveDependency<IPrototypeManager>();
-        var compFactory = server.ResolveDependency<IComponentFactory>();
+        var compFactory = server.EntMan.ComponentFactory;
 
         await server.WaitAssertion(() =>
         {

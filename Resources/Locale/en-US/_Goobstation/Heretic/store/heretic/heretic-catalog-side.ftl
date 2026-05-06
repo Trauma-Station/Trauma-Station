@@ -13,7 +13,7 @@ knowledge-path-side-t1-flask-name = Priest's Ritual
 knowledge-path-side-t1-flask-desc =
     This is an old recipe. The Owl whispered it to me. Created by the Priest - the Liquid that both was and is not.
 
-    Allows you to transmute a tank of water and a glass shard into a Flask of Eldritch Essence.
+    Allows you to transmute a tank of water or welding fuel and a glass shard into a Flask of Eldritch Essence.
     Eldritch water can be consumed for potent healing.
 
 knowledge-path-side-t1-ashen-eyes-name = Ashen Eyes
@@ -121,7 +121,7 @@ knowledge-path-side-t2-greaves-desc =
     Their rhythms keep the feud fresh with indifference to barrier or border.
     Pulling more into their turmoil as they waltz.
 
-    Allows you to combine a pair of magboots, a pair of combat boots of any kind and 2 bars of silver into a pair of Armored Greaves,
+    Allows you to combine a pair of magboots or combat boots of any kind and 2 bars of silver into a pair of Armored Greaves,
     they confer to the user full immunity to slips and act as magboots and jackboots.
 
 knowledge-path-side-t2-shattered-ritual-name = Shattered Ritual
@@ -140,7 +140,7 @@ knowledge-path-side-t2-crucible-desc =
     This is pure agony. I wasn't able to summon the figure of the Aristocrat,
     but with the Priest's attention I stumbled upon a different recipe...
 
-    Allows you to transmute a portable water tank and a table to create a Mawed Crucible.
+    Allows you to transmute a portable water or fuel tank and a table to create a Mawed Crucible.
     The Mawed Crucible can brew powerful potions for combat and utility, but must be fed bodyparts and organs between uses.
 
 knowledge-path-side-t2-sword-name = Through the Boundary

@@ -7,9 +7,9 @@ namespace Content.Trauma.Shared.Heretic.Prototypes;
 [Prototype]
 public sealed partial class RitualIngredientDatasetPrototype : IPrototype
 {
-    [ViewVariables, IdDataField]
+    [IdDataField]
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public IReadOnlyList<RitualIngredient> Ingredients = default!;
+    public RitualIngredient[] Ingredients = default!;
 }
