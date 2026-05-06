@@ -1218,6 +1218,13 @@
           blacklist:
             components:
             - GhoulDeconvert
+      - !type:RemoveComponents
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 40
+        components:
+        - type: VampireThrall
       # </Trauma>
       - !type:SatiateThirst
         factor: 3

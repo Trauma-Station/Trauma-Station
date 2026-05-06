@@ -51,6 +51,14 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
 
         var target = args.HitEntities.First();
 
+        var attemptEv = new BloodsuckingAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.Cancelled)
+        {
+            _popup.PopupClient("This target cannot be drained!", ent.Owner, PopupType.MediumCaution);
+            return;
+        }
+
         // Target must be alive and be drainable,
         // plus we must meet the requirements
         if (!_mobState.IsAlive(target) || !_drainableQuery.HasComp(target) || !CanBloodSuck(ent.Owner))

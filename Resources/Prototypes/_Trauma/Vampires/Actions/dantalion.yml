@@ -1,0 +1,28 @@
+# Enthrall
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDanEnthrall
+  name: Enthrall
+  components:
+  - type: Action
+    raiseOnAction: false # this action requires VampireThrallsComponent which is stored in the body
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Body
+    blacklist:
+      components:
+      - Mindshielded  # parity?
+      - BibleUser     # makes sense
+      - VampireThrall # cant thrall other thralls or already thralled
+      tags:
+      - VimPilot      # no thralling monkeys
+    event: !type:DanEnthrallActionEvent
+  - type: DoAfterArgs
+    delay: 2 # TODO: 15
+    breakOnMove: true

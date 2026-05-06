@@ -6,7 +6,7 @@ using Content.Shared.EntityEffects;
 namespace Content.Trauma.Shared.Vampires;
 
 /// <summary>
-/// <inheritdoc cref="VampireGlareSystem"/>
+/// <inheritdoc cref="VampireGlareSystem"/> TODO: make this a component
 /// </summary>
 public sealed partial class VampireGlareEvent : InstantActionEvent
 {

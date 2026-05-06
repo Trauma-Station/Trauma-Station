@@ -41,6 +41,8 @@ public sealed class VampireGlareSystem : EntitySystem
     {
         var performer = args.Performer;
 
+        // TODO: Ignore thralls
+
         // Check if we are blindfolded
         var ev = new CanSeeAttemptEvent();
         RaiseLocalEvent(performer, ev);
@@ -64,6 +66,11 @@ public sealed class VampireGlareSystem : EntitySystem
         foreach (var target in _statusEffects)
         {
             if (target.Owner == performer)
+                continue;
+
+            var attemptEv = new GlareAttemptEvent();
+            RaiseLocalEvent(target, ref attemptEv);
+            if (attemptEv.Cancelled)
                 continue;
 
             if (isStunned)
@@ -137,3 +144,9 @@ public enum Deviation : byte
     Partial,
     Full
 }
+
+/// <summary>
+/// Raised on the target before a glare happens, in case we want to cancel it for them.
+/// </summary>
+[ByRefEvent]
+public record struct GlareAttemptEvent(bool Cancelled = false);

@@ -36,3 +36,9 @@ public sealed partial class BloodSuckDoAfterEvent : SimpleDoAfterEvent;
 /// <param name="BloodRemoved"></param>The blood that was removed from the target during the bloodsucking sequence.
 [ByRefEvent]
 public record struct BloodsuckingSuccessEvent(int BloodRemoved);
+
+/// <summary>
+/// Raised on the target to validate whether they can be drained of their blood.
+/// </summary>
+[ByRefEvent]
+public record struct BloodsuckingAttemptEvent(bool Cancelled = false);
