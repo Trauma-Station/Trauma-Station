@@ -615,7 +615,7 @@
     size: Ginormous
   - type: MultiHandedItem
   - type: CanEscapeInventory
-    baseResistTime: 3 
+    baseResistTime: 3
   - type: Produce
     seedId: CoconutCrabPlant
   - type: Damageable
