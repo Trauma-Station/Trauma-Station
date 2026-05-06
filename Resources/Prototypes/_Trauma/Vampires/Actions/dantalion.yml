@@ -5,7 +5,8 @@
   name: Enthrall
   components:
   - type: Action
-    raiseOnAction: false # this action requires VampireThrallsComponent which is stored in the body
+    raiseOnAction: false
+    raiseOnUser: true # this action requires VampireThrallsComponent which is stored in the body
     icon:
       sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
       state: icon
@@ -26,3 +27,110 @@
   - type: DoAfterArgs
     delay: 2 # TODO: 15
     breakOnMove: true
+
+# Pacify
+- type: entity
+  parent: BaseVampireAction
+  id: ActionPacify
+  name: Pacify
+  description: Pacify
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 7
+    checkCanAccess: false
+  - type: EntityTargetAction
+    event: !type:EffectTargetActionEvent
+  - type: EffectAction
+    effects:
+    - !type:GenericStatusEffect # TODO: use new status effects when its ported from upstream
+      key: Pacified
+      component: Pacified
+      time: 40
+
+# Subspace Swap
+- type: entity
+  parent: BaseVampireAction
+  id: ActionSubspaceSwap
+  name: Subspace Swap
+  description: Subspace Swap
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 7
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Body
+    event: !type:SubspaceSwapActionEvent
+
+# Subspace Swap
+- type: entity
+  parent: BaseVampireAction
+  id: ActionSubspaceSwap
+  name: Subspace Swap
+  description: Subspace Swap
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: TargetAction
+    range: 7
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Body
+    event: !type:SubspaceSwapActionEvent
+
+# Deploy Decoy
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDeployDecoy
+  name: Deploy Decoy
+  description: Subspace Swap
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: ForcedStealthStatusEffect # its 0 by default
+      time: 6
+    - !type:SpawnShadowClone
+
+# Rally Thralls
+- type: entity
+  parent: BaseVampireAction
+  id: ActionRallyThralls
+  name: Rally Thralls
+  description: Subspace Swap
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: VampireThrall
+      range: 7
+      effect: !NestedEffect
+        proto: VampireRejuvII

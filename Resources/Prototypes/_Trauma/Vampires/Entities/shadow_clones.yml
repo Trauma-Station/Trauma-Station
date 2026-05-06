@@ -16,7 +16,7 @@
     - VampireFaction
   - type: HTN
     rootTask:
-      task: IllusionCompound
+      task: IdleCompound
     blackboard:
       NavClimb: !type:Bool
         true
