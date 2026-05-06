@@ -69,9 +69,6 @@
   - type: RevPropaganda
     conversionDuration: 5
     consumesCharges: 1
-    userWhitelist:
-      components:
-      - HeadRevolutionary
     userBlacklist:
       components:
       - MumbleAccent # cant use it while muzzled...

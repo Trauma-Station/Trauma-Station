@@ -4,7 +4,7 @@ reinforcement-sec-name = Reinforcement Officer
 reinforcement-sec-desc = A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of three minutes.
 
 reinforcement-sec-express-name = Express Reinforcement Officer
-reinforcement-sec-express-desc = A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of ten seconds.
+reinforcement-sec-express-desc = A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of thirty seconds.
 
 reinforcement-sec-specialist-name = Specialist Reinforcement Officer
 reinforcement-sec-specialist-desc = A reinforcement officer, this one is armored and armed. Minimum arrival time of three minutes.

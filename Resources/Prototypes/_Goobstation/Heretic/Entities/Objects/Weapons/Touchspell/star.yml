@@ -24,8 +24,22 @@
     targetWhitelist:
       components:
       - MobState
+  - type: BlockContextMenu
+    whitelist:
+      components:
+      - MobState
   - type: MeleeWeapon
-    canHeavyAttack: false
+    clickAttackWhitelist:
+      components:
+      - MobState
+    altClickAttackWhitelist:
+      components:
+      - MobState
+    resetOnHandSelected: false
+    altClickAttack: true
+    canMiss: false
+    canParryLight: false
+    canParryWide: false
     damage:
       types:
         Heat: 0

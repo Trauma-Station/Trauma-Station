@@ -8,6 +8,7 @@ using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Whitelist;
 using Content.Trauma.Common.Contests;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -24,6 +25,8 @@ public abstract partial class SharedMeleeWeaponSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 

@@ -2,14 +2,14 @@
 
 using System.Linq;
 using System.Text;
+using Content.Shared.GameTicking;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
-using Content.Shared.GameTicking;
-using Content.Trauma.Shared.Knowledge.Systems;
-using Content.Trauma.Common.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Language.Systems;
 
@@ -42,7 +42,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
     {
         _builder.Clear();
         var ratio = 1.0f;
-        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetSkill(brain, _knowledge.LanguageUnit(language)) is { } skill)
+        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
         {
             if (_knowledge.GetMastery(skill.Comp) > 1)
                 ratio = 0.0f;

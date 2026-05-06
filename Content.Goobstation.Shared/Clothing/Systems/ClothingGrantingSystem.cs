@@ -4,12 +4,14 @@ using Content.Goobstation.Shared.Clothing.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Tag;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
 public sealed class ClothingGrantingSystem : EntitySystem
 {
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -24,6 +26,9 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
     private void OnCompEquip(EntityUid uid, ClothingGrantComponentComponent component, GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!TryComp<ClothingComponent>(uid, out var clothing)) return;
 
         if (!clothing.Slots.HasFlag(args.SlotFlags)) return;
@@ -41,6 +46,9 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
     private void OnCompUnequip(EntityUid uid, ClothingGrantComponentComponent component, GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var target = args.EquipTarget;
         foreach (var name in component.Active)
         {
@@ -53,6 +61,9 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
     private void OnTagEquip(EntityUid uid, ClothingGrantTagComponent component, GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!TryComp<ClothingComponent>(uid, out var clothing))
             return;
 
@@ -69,6 +80,9 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
     private void OnTagUnequip(EntityUid uid, ClothingGrantTagComponent component, GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!component.IsActive)
             return;
 

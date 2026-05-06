@@ -1,0 +1,191 @@
+- type: ritualIngredientDataset
+  id: KnowledgeRitualOrgans
+  ingredients:
+  - whitelist:
+      components:
+      - Eyes
+    name: heretic-ritual-ingredient-eyes
+  - whitelist:
+      components:
+      - Stomach
+    name: heretic-ritual-ingredient-stomach
+  - whitelist:
+      components:
+      - Lung
+    name: heretic-ritual-ingredient-lung
+  - whitelist:
+      components:
+      - Heart
+    name: heretic-ritual-ingredient-heart
+  - whitelist:
+      components:
+      - Liver
+    name: heretic-ritual-ingredient-liver
+  - whitelist:
+      components:
+      - Arm
+    name: heretic-ritual-ingredient-arm
+  - whitelist:
+      components:
+      - Leg
+    name: heretic-ritual-ingredient-leg
+
+- type: ritualIngredientDataset
+  id: KnowledgeRitualEasy
+  ingredients:
+  - whitelist:
+      tags:
+      - Book
+    name: heretic-ritual-ingredient-book
+  - whitelist:
+      tags:
+      - Pen
+    name: heretic-ritual-ingredient-pen
+  - whitelist:
+      components:
+      - SuitSensor
+    name: heretic-ritual-ingredient-suit-sensors
+  - whitelist:
+      components:
+      - Crayon
+    name: heretic-ritual-ingredient-crayon
+  - whitelist:
+      tags:
+      - WoodPlank
+    name: heretic-ritual-ingredient-wood-plank
+  - whitelist:
+      tags:
+      - Multitool
+    name: heretic-ritual-ingredient-multitool
+  - whitelist:
+      tags:
+      - Knife
+    name: heretic-ritual-ingredient-knife
+  - whitelist:
+      tags:
+      - Matchstick
+    name: heretic-ritual-ingredient-matchstick
+  - whitelist:
+      tags:
+      - Table
+    name: heretic-ritual-ingredient-table
+  - whitelist:
+      tags:
+      - Chair
+    name: heretic-ritual-ingredient-chair
+  - whitelist:
+      tags:
+      - GasMask
+    name: heretic-ritual-ingredient-gas-mask
+  - whitelist:
+      tags:
+      - Flare
+    name: heretic-ritual-ingredient-flare
+  - whitelist:
+      tags:
+      - SilverBar
+    name: heretic-ritual-ingredient-silver
+  - whitelist:
+      tags:
+      - GoldBar
+    name: heretic-ritual-ingredient-gold
+  - whitelist:
+      tags:
+      - Muzzle
+    name: heretic-ritual-ingredient-muzzle
+  - whitelist:
+      tags:
+      - Trash
+    name: heretic-ritual-ingredient-trash
+  - whitelist:
+      tags:
+      - SheetPlasma
+    name: heretic-ritual-ingredient-plasma-sheet
+  - whitelist:
+      tags:
+      - Crowbar
+    name: heretic-ritual-ingredient-crowbar
+  - whitelist:
+      components:
+      - Door
+    name: heretic-ritual-ingredient-door
+  - whitelist:
+      tags:
+      - GlassShard
+    name: heretic-ritual-ingredient-glass-shard
+  - whitelist:
+      tags:
+      - Bedsheet
+    name: heretic-ritual-ingredient-bedsheet
+  - whitelist:
+      tags:
+      - WinterCoat
+    name: heretic-ritual-ingredient-winter-coat
+  - whitelist:
+      tags:
+      - Ash
+    name: heretic-ritual-ingredient-ash
+  - whitelist:
+      tags:
+      - Paper
+    name: heretic-ritual-ingredient-paper
+  - whitelist:
+      components:
+      - IdCard
+    name: heretic-ritual-ingredient-id-card
+  - whitelist:
+      tags:
+      - Lantern
+      - Flashlight
+    name: heretic-ritual-ingredient-lantern-flashlight
+
+- type: ritualIngredientDataset
+  id: KnowledgeRitualHard
+  ingredients:
+  - whitelist:
+      components:
+      - Stunbaton
+    name: heretic-ritual-ingredient-stun-baton
+  - whitelist:
+      tags:
+      - GlovesLatex
+      - GlovesNitrile
+    name: heretic-ritual-ingredient-gloves-medical
+  - whitelist:
+      components:
+      - Magboots
+    name: heretic-ritual-ingredient-magboots
+  - whitelist:
+      requireAll: true
+      components:
+      - Clothing
+      - ClothingSlowOnDamageModifier
+      - ModifyStandingUpTime
+    name: heretic-ritual-ingredient-combat-boots
+  - whitelist:
+      requireAll: true
+      components:
+      - Insulated
+      - Clothing
+      - FingerprintMask
+    name: heretic-ritual-ingredient-insuls
+  - whitelist:
+      tags:
+      - CircularSaw
+    name: heretic-ritual-ingredient-circular-saw
+  - whitelist:
+      tags:
+      - MimeMask
+      - ClownMask
+    name: heretic-ritual-ingredient-mime-clown-mask
+  - whitelist:
+      requireAll: true
+      components:
+      - FlashImmunity
+      - Clothing
+    blacklist:
+      components:
+      - BreathMask
+      - IngestionBlocker
+      - Blindfold
+    name: heretic-ritual-ingredient-sunglasses

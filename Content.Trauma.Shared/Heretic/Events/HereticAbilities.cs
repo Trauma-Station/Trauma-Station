@@ -133,6 +133,12 @@ public sealed partial class EventHereticAshenShift : InstantActionEvent
 {
     [DataField]
     public ProtoId<PolymorphPrototype> Jaunt = "AshJaunt";
+
+    [DataField]
+    public ProtoId<PolymorphPrototype> JauntEmpowered = "AshJauntLong";
+
+    [DataField]
+    public EntProtoId Effect = "PolymorphAshJauntAnimation";
 }
 
 public sealed partial class EventHereticVolcanoBlast : InstantActionEvent
@@ -163,6 +169,9 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
 
     [DataField]
     public EntProtoId Effect = "NightwatcherEffect";
+
+    [DataField]
+    public float EmpoweredMultiplier = 1.5f;
 }
 
 public sealed partial class EventHereticFlames : InstantActionEvent;
@@ -269,10 +278,23 @@ public sealed partial class EventHereticDomainExpansion : InstantActionEvent
     public EntProtoId<BladeArenaComponent> Arena = "HereticArena";
 }
 
+public sealed partial class HereticBladePassiveRiposteEvent : HereticKnowledgeEvent
+{
+    [DataField(required: true)]
+    public float Cooldown;
+
+    [DataField]
+    public string RiposteDataId = "HereticBlade";
+}
+
 // lock
 public sealed partial class EventHereticBulglarFinesse : EntityTargetActionEvent;
 
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
+
+public sealed partial class HereticXRayVisionEvent : HereticKnowledgeEvent;
+
+public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 
 // rust
 public sealed partial class EventHereticRustConstruction : WorldTargetActionEvent
@@ -474,10 +496,6 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
     [DataField]
     public TimeSpan EffectTime = TimeSpan.FromSeconds(10);
 }
-
-// ascensions
-public sealed partial class HereticAscensionCosmosEvent : HereticKnowledgeEvent;
-public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 #endregion
 
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;

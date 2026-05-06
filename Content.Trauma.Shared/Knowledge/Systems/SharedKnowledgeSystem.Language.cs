@@ -19,7 +19,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MetaDataSystem _meta = default!;
-
     [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
     // [Dependency] private readonly DamageableSystem _damageable = default!;
 
@@ -216,12 +215,11 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
-            var level = 26;
-            if (GetSkill(brain, LanguageUnit(lang)) is { } existing)
-                level += existing.Comp.LearnedLevel;
+            if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
+                continue;
 
             // Add if you don't know shit.
-            if (EnsureKnowledge<SkillComponent>(brain, LanguageUnit(lang), level) is not { } unit)
+            if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
                 continue;
@@ -251,54 +249,22 @@ public abstract partial class SharedKnowledgeSystem
         var comp = _langQuery.Comp(unit);
 
         var now = _timing.CurTime;
-        if (now < comp.LastSpoken)
-            return; // on cooldown for xp
 
-        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn.
+        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn. Doesn't award anything for small sentences. Already does auto xp shit.
 
-        comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
     }
 
     private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
     {
-        if (args.Source == ent.Owner || GetActiveLanguage(args.Source) is not { } language || Prototype(language) is not { } proto)
-            return; // Same person, no need. Also, if no language proto, the code won't work.
+        if (args.Source == ent.Owner)
+            return; // Same person, no need.
 
         // Already Obfuscating.
 
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
-        AddExperience(brain, proto, Math.Min(args.Message.Length / 10, 8));
-
-        /*
-        if (!TryComp<SkillComponent>(language, out var speakerSkill))
-            return; // No skill, no curse.
-
-        // curse of 220
-        if (GetMastery(speakerSkill) >= 5 && ContainsCursedWord(args.Message))
-        {
-            _damageable.TryChangeDamage(ent.Owner, _curseDamage, ignoreResistances: false, interruptsDoAfters: false,
-                ignoreBlockers: true, targetPart: TargetBodyPart.Head, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-            // FIXME: this doesnt exist...
-            //_status.TryAddStatusEffect(hearer, "Deafness", out _, TimeSpan.FromSeconds(modifier));
-            _popup.PopupEntity(Loc.GetString("language-curse-pain"), ent, ent, PopupType.SmallCaution);
-        }
-        */
+        AddExperience(brain, args.Language.Id, Math.Min(args.Message.Length / 10, 8));
     }
-
-    public EntityUid? GetActiveLanguage(EntityUid target)
-        => GetContainer(target)?.Comp.ActiveLanguage;
-
-    /*
-    private static readonly Regex CursedRegex = new(
-        @"\b(" + string.Join("|", CursedWords.Select(Regex.Escape)) + @")\b",
-        RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-    private bool ContainsCursedWord(string message)
-    {
-        return CursedRegex.IsMatch(message);
-    }
-    */
 }

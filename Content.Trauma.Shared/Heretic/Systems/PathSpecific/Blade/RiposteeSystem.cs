@@ -8,8 +8,8 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Robust.Shared.Audio.Systems;
@@ -164,7 +164,7 @@ public sealed class RiposteeSystem : EntitySystem
             if (!_blocker.CanAttack(ent, args.User, weapon.Value))
                 continue;
 
-            args.Cancel();
+            args.Cancelled = true;
 
             if (data.Cooldown > 0f)
                 data.CanRiposte = false;

@@ -4,7 +4,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Physics;
 using Content.Goobstation.Common.Weapons;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Components;
@@ -16,10 +15,13 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Teleportation;
@@ -48,6 +50,7 @@ public sealed class HereticBladeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSanguineStrikeSystem _sanguine = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -126,14 +129,16 @@ public sealed class HereticBladeSystem : EntitySystem
         if (args.Target == null)
             return;
 
-        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
+        var user = args.User;
+
+        if (!_heretic.TryGetHereticComponent(user, out var heretic, out _))
             return;
 
-        if (ent.Comp.Path != heretic.CurrentPath || heretic.PathStage < 7)
+        if (ent.Comp.Path != heretic.CurrentPath)
             return;
 
         // Required for seeking blade, client weapon code should send attack event regardless of distance
-        if (heretic.CurrentPath == HereticPath.Void)
+        if (heretic.CurrentPath == HereticPath.Void && heretic.PathStage >= 7)
         {
             if (_net.IsServer)
                 return;
@@ -146,7 +151,7 @@ public sealed class HereticBladeSystem : EntitySystem
         if (heretic.CurrentPath != HereticPath.Cosmos)
             return;
 
-        if (HasComp<Trauma.Shared.Heretic.Components.PathSpecific.Cosmos.StarMarkComponent>(args.Target.Value))
+        if (HasComp<StarMarkComponent>(args.Target.Value) && heretic.PathStage >= 7)
         {
             if (heretic.Ascended)
             {
@@ -157,11 +162,8 @@ public sealed class HereticBladeSystem : EntitySystem
             args.Range = Math.Max(args.Range, 2.5f);
         }
 
-        var netEnt = GetNetEntity(args.User);
-        var id = SharedStarTouchSystem.StarTouchBeamDataId;
-
-        if (TryComp(args.Target.Value, out ComplexJointVisualsComponent? joint) &&
-            joint.Data.Any(kvp => kvp.Key == netEnt && kvp.Value.Id == id))
+        if (_status.TryEffectsWithComp<StarTouchedStatusEffectComponent>(args.Target.Value, out var effects) &&
+            effects.Any(x => x.Comp1.User == user))
             args.Range = Math.Max(args.Range, 3.5f);
     }
 

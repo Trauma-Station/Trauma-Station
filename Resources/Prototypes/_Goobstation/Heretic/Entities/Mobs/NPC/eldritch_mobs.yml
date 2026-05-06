@@ -471,6 +471,7 @@
   - MobFlammable
   - MobAtmosExposed
   - MobPolymorphable
+  abstract: true
   id: MobGhoulRustWalkerBase
   name: rust walker
   description: A grinding, clanking construct which leaches life from its surroundings with every armoured step.

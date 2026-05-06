@@ -23,11 +23,11 @@ public sealed partial class RevPropagandaComponent : Component
     /// <summary>
     /// Whitelist checked against the headrev.
     /// </summary>
-    [DataField(required: true)]
-    public EntityWhitelist UserWhitelist = default!;
+    [DataField]
+    public EntityWhitelist? UserWhitelist;
 
-    [DataField(required: true)]
-    public EntityWhitelist UserBlacklist = default!;
+    [DataField]
+    public EntityWhitelist? UserBlacklist;
 
     /// <summary>
     /// Whitelist checked against the target mob.

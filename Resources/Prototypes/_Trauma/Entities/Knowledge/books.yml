@@ -196,7 +196,7 @@
 - type: entity
   parent: [BookSkillbook, BaseMinorContraband]
   id: BookShootingPrinted
-  name: Ancienct Chinese Shooting Techniques and you
+  name: Ancient Chinese Shooting Techniques and you
   suffix: melee
   description: You need to become ancient and Chinese.
   components:

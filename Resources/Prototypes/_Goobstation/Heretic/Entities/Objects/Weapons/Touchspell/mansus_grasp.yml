@@ -18,8 +18,19 @@
       - HereticRitualRune # This is handled by HereticRitualSystem, blacklisting rune makes it so grasp doesn't disappear when interacting with it.
       - MawedCrucible # Requires for anchoring/unanchoring of the crucible with a grasp
   - type: MansusGrasp
+  - type: BlockContextMenu
+    whitelist:
+      components:
+      - MobState
   - type: MeleeWeapon
-    canHeavyAttack: false
+    clickAttackWhitelist:
+      components:
+      - MobState
+    resetOnHandSelected: false
+    altClickAttack: true
+    canMiss: false
+    canParryLight: false
+    canParryWide: false
     damage:
       types:
         Heat: 0
@@ -40,6 +51,7 @@
   - type: Tag
     tags:
     - AnchorHereticStructure
+  - type: UseDelayBlockMelee
   # Used for extracting organs
   - type: Hemostat
     speed: 1.5

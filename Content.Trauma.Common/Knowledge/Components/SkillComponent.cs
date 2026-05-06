@@ -98,4 +98,10 @@ public sealed partial class SkillComponent : Component
     /// </summary>
     [DataField(required: true)]
     public int? Cost = null;
+
+    /// <summary>
+    /// Determines if the skill can be learned by doing or if it needs formal training.
+    /// </summary>
+    [DataField]
+    public bool Complex = false;
 }
