@@ -1,0 +1,5 @@
+<controls1:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client">
+
+</controls1:FancyWindow>

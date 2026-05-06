@@ -20,6 +20,7 @@ namespace Content.Trauma.Shared.Vampires;
 public sealed class VampireBloodsuckingSystem : EntitySystem
 {
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -51,6 +52,11 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
 
         var target = args.HitEntities.First();
 
+        // Target must be alive and be drainable,
+        // plus we must meet the requirements
+        if (!_mobState.IsAlive(target) || !_drainableQuery.HasComp(target) || !CanBloodSuck(ent.Owner))
+            return;
+
         var attemptEv = new BloodsuckingAttemptEvent();
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
@@ -59,9 +65,7 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
             return;
         }
 
-        // Target must be alive and be drainable,
-        // plus we must meet the requirements
-        if (!_mobState.IsAlive(target) || !_drainableQuery.HasComp(target) || !CanBloodSuck(ent.Owner))
+        if (!_ingestion.HasMouthAvailable(target, ent.Owner))
             return;
 
         BloodSuck(ent, target);
