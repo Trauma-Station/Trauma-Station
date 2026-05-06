@@ -39,8 +39,6 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/turbo.rsi
-    slots:
-    - NECK
 
 - type: entity
   parent: [BasePlushie,BaseMajorContraband]
