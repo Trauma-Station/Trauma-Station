@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Timing;
+// </Trauma>
 using Content.Shared.Item.ItemToggle.Components;
 
 namespace Content.Shared.Item.ItemToggle;
@@ -7,6 +10,9 @@ namespace Content.Shared.Item.ItemToggle;
 /// </summary>
 public sealed class ComponentTogglerSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly IGameTiming _timing = default!;
+    // </Trauma>
     public override void Initialize()
     {
         base.Initialize();
@@ -22,6 +28,11 @@ public sealed class ComponentTogglerSystem : EntitySystem
     // Goobstation - Make this system more flexible
     public void ToggleComponent(EntityUid uid, bool activate)
     {
+        // <Trauma>
+        if (_timing.ApplyingState)
+            return;
+        // </Trauma>
+
         if (!TryComp<ComponentTogglerComponent>(uid, out var component))
             return;
 
@@ -35,6 +46,7 @@ public sealed class ComponentTogglerSystem : EntitySystem
 
             component.Target = target;
 
+            EntityManager.RemoveComponents(target, component.DeactivateComponents); // Trauma
             EntityManager.AddComponents(target, component.Components);
         }
         else
@@ -46,6 +58,7 @@ public sealed class ComponentTogglerSystem : EntitySystem
                 return;
 
             EntityManager.RemoveComponents(component.Target.Value, component.RemoveComponents ?? component.Components);
+            EntityManager.AddComponents(component.Target.Value, component.DeactivateComponents); // Trauma
         }
     }
 }

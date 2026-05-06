@@ -49,22 +49,43 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Grants a spell that gives you total damage immunity and some damage reflect for 5 seconds, takes 1 second to start up. Cannot attack while active.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Wolves Among Sheep</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Furious Steel</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons giant arena, forcing everyone trapped inside to fight each other in order to escape.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons three flying blades to protect you.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Empowered Blades</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You can attack with two blades at once, you can also use your grasp to empower blades.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Furious Steel</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Wolves Among Sheep</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons three flying blades to protect you.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons giant arena, forcing everyone trapped inside to fight each other in order to escape.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Maelstrom of Silver</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three headless corpses</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You gain a regenerating ring of blades. Your Furious Steel ability cooldown is halved. You deal more damage with your blades and have lifesteal on attacks. Knockdown and stun time is halved, you also become immune to disarms.</Box></ColorBox>
   </Table>
+
+
+  ## Armor and Passive Ability
+
+  <Table Columns="2">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Effect</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You can perform a riposte every 20 seconds while wielding your blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Shattered Panoply</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to electrical shocks and stun baton knockdown.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to having your limbs dismembered, as well as wound resistance below 50% hp.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Riposte cooldown lowered to 10 seconds.</Box></ColorBox>
+  </Table>
+
 
   ## Tips
 

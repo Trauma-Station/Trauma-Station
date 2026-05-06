@@ -10,36 +10,18 @@
   cost:
     KnowledgePoint: 1
   categories:
-  - HereticPathSideSpecial
+  - HereticPathSpecial
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 0
+    stage: 5
+    minPassiveLevel: 2
 
 - type: listing
-  id: HereticSidePath4Armor
-  name: knowledge-path-side-s4-armor-name
-  description: knowledge-path-side-s4-armor-desc
-  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - ArmorerRitual
-  cost:
-    KnowledgePoint: 1
-  categories:
-  - HereticPathSideT1
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 3
-
-- type: listing
-  id: HereticSidePath4Flask
-  name: knowledge-path-side-s4-flask-name
-  description: knowledge-path-side-s4-flask-desc
+  id: HereticSideT1Flask
+  name: knowledge-path-side-t1-flask-name
+  description: knowledge-path-side-t1-flask-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: eldritch_flask }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -56,9 +38,9 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath4AshenEyes
-  name: knowledge-path-side-s4-ashen-eyes-name
-  description: knowledge-path-side-s4-ashen-eyes-desc
+  id: HereticSideT1AshenEyes
+  name: knowledge-path-side-t1-ashen-eyes-name
+  description: knowledge-path-side-t1-ashen-eyes-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_medalion.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -75,9 +57,9 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath4VoidCloak
-  name: knowledge-path-side-s4-void-cloak-name
-  description: knowledge-path-side-s4-void-cloak-desc
+  id: HereticSideT1VoidCloak
+  name: knowledge-path-side-t1-void-cloak-name
+  description: knowledge-path-side-t1-void-cloak-desc
   icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -94,9 +76,9 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath4Shark
-  name: knowledge-path-side-s4-shark-name
-  description: knowledge-path-side-s4-shark-desc
+  id: HereticSideT1Shark
+  name: knowledge-path-side-t1-shark-name
+  description: knowledge-path-side-t1-shark-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: fire_shark_icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -113,9 +95,9 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath4Ether
-  name: knowledge-path-side-s4-ether-name
-  description: knowledge-path-side-s4-ether-desc
+  id: HereticSideT1Ether
+  name: knowledge-path-side-t1-ether-name
+  description: knowledge-path-side-t1-ether-desc
   icon: { sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -132,9 +114,9 @@
     stage: 3
 
 - type: listing
-  id: HereticBladePath4Realignment
-  name: knowledge-path-side-s4-realignment-name
-  description: knowledge-path-side-s4-realignment-desc
+  id: HereticBladeT1Realignment
+  name: knowledge-path-side-t1-realignment-name
+  description: knowledge-path-side-t1-realignment-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: realignment }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -151,9 +133,9 @@
     stage: 3
 
 - type: listing
-  id: HereticBladePath4EnvyKnife
-  name: knowledge-path-side-s4-envy-name
-  description: knowledge-path-side-s4-envy-desc
+  id: HereticBladeT1EnvyKnife
+  name: knowledge-path-side-t1-envy-name
+  description: knowledge-path-side-t1-envy-desc
   icon: { sprite: _Goobstation/Heretic/Entities/envy_knife.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -170,9 +152,28 @@
     stage: 3
 
 - type: listing
-  id: HereticSidePath6RustWalker
-  name: knowledge-path-side-s6-rustwalker-name
-  description: knowledge-path-side-s6-rustwalker-desc
+  id: HereticBladeT1Mask
+  name: knowledge-path-side-t1-mask-name
+  description: knowledge-path-side-t1-mask-desc
+  icon: { sprite: _Goobstation/Heretic/mad_mask.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MaskOfMadness
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSideT1
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 3
+
+- type: listing
+  id: HereticSideT2RustWalker
+  name: knowledge-path-side-t2-rustwalker-name
+  description: knowledge-path-side-t2-rustwalker-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: rust_walker }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -186,12 +187,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6CarvingKnife
-  name: knowledge-path-side-s6-knife-name
-  description: knowledge-path-side-s6-knife-desc
+  id: HereticSideT2CarvingKnife
+  name: knowledge-path-side-t2-knife-name
+  description: knowledge-path-side-t2-knife-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: rune_carver }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -205,12 +206,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6IceSpear
-  name: knowledge-path-side-s6-ice-spear-name
-  description: knowledge-path-side-s6-ice-spear-desc
+  id: HereticSideT2IceSpear
+  name: knowledge-path-side-t2-ice-spear-name
+  description: knowledge-path-side-t2-ice-spear-desc
   icon: { sprite: _Goobstation/Heretic/Entities/ice_spear.rsi, state: spear }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -224,12 +225,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6Morbus
-  name: knowledge-path-side-s6-morbus-name
-  description: knowledge-path-side-s6-morbus-desc
+  id: HereticSideT2Morbus
+  name: knowledge-path-side-t2-morbus-name
+  description: knowledge-path-side-t2-morbus-desc
   icon: { sprite: _Goobstation/Heretic/book_morbus.rsi, state: icon-on }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -243,12 +244,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6Greaves
-  name: knowledge-path-side-s6-greaves-name
-  description: knowledge-path-side-s6-greaves-desc
+  id: HereticSideT2Greaves
+  name: knowledge-path-side-t2-greaves-name
+  description: knowledge-path-side-t2-greaves-desc
   icon: { sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -262,12 +263,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6Shattered
-  name: knowledge-path-side-s6-shattered-ritual-name
-  description: knowledge-path-side-s6-shattered-ritual-desc
+  id: HereticSideT2Shattered
+  name: knowledge-path-side-t2-shattered-ritual-name
+  description: knowledge-path-side-t2-shattered-ritual-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: ghoul_shattered }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -281,12 +282,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6Crucible
-  name: knowledge-path-side-s6-crucible-name
-  description: knowledge-path-side-s6-crucible-desc
+  id: HereticSideT2Crucible
+  name: knowledge-path-side-t2-crucible-name
+  description: knowledge-path-side-t2-crucible-desc
   icon: { sprite: _Goobstation/Heretic/items.rsi, state: crucible }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -300,12 +301,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath6Sword
-  name: knowledge-path-side-s6-sword-name
-  description: knowledge-path-side-s6-sword-desc
+  id: HereticSideT2Sword
+  name: knowledge-path-side-t2-sword-name
+  description: knowledge-path-side-t2-sword-desc
   icon: { sprite: _Goobstation/Heretic/Entities/sword.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -319,12 +320,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 5
+    stage: 4
 
 - type: listing
-  id: HereticSidePath8Grasp
-  name: knowledge-path-side-s8-grasp-name
-  description: knowledge-path-side-s8-grasp-desc
+  id: HereticSideT3Grasp
+  name: knowledge-path-side-t3-grasp-name
+  description: knowledge-path-side-t3-grasp-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: grasp_mind }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -338,12 +339,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 7
+    stage: 6
 
 - type: listing
-  id: HereticSidePath8Cleave
-  name: knowledge-path-side-s8-cleave-name
-  description: knowledge-path-side-s8-cleave-desc
+  id: HereticSideT3Cleave
+  name: knowledge-path-side-t3-cleave-name
+  description: knowledge-path-side-t3-cleave-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: blood_siphon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -357,12 +358,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 7
+    stage: 6
 
 - type: listing
-  id: HereticSidePath8SpacePhase
-  name: knowledge-path-side-s8-space-phase-name
-  description: knowledge-path-side-s8-space-phase-desc
+  id: HereticSideT3SpacePhase
+  name: knowledge-path-side-t3-space-phase-name
+  description: knowledge-path-side-t3-space-phase-desc
   icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: space_phase }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -376,12 +377,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 7
+    stage: 6
 
 - type: listing
-  id: HereticSidePath8Maid
-  name: knowledge-path-side-s8-maid-name
-  description: knowledge-path-side-s8-maid-desc
+  id: HereticSideT3Maid
+  name: knowledge-path-side-t3-maid-name
+  description: knowledge-path-side-t3-maid-desc
   icon: { sprite: _Goobstation/Heretic/eldritch_mobs.rsi, state: maid }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -395,12 +396,12 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 7
+    stage: 6
 
 - type: listing
-  id: HereticSidePath8Admonitions
-  name: knowledge-path-side-s8-admonitions-name
-  description: knowledge-path-side-s8-admonitions-desc
+  id: HereticSideT3Admonitions
+  name: knowledge-path-side-t3-admonitions-name
+  description: knowledge-path-side-t3-admonitions-desc
   icon: { sprite: _Goobstation/Heretic/Effects/effects.rsi, state: pale }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
@@ -414,4 +415,4 @@
   - !type:ListingLimitedStockCondition
     stock: 1
   - !type:HereticPathCondition
-    stage: 7
+    stage: 6

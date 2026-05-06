@@ -109,12 +109,16 @@
         ingredients:
         - whitelist:
             tags:
-            - Paper
-          name: heretic-ritual-ingredient-paper
+            - Book
+          name: heretic-ritual-ingredient-book
         - whitelist:
             tags:
             - Pen
           name: heretic-ritual-ingredient-pen
+        - whitelist:
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-suit-sensors
         - whitelist:
             components:
             - Heart
@@ -254,12 +258,12 @@
         to: 3
 
 - type: entity
-  id: RitualMaskOfMadness
-  name: Mask of Madness
+  id: RitualArmorAsh
+  name: Scorched Mantle
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Goobstation/Heretic/mad_mask.rsi
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/ashen_armor.rsi
     state: icon
   - type: HereticRitual
     effects:
@@ -275,9 +279,57 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
+            tags:
+            - Table
             components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
             - Mask
+            - BreathMask
           name: heretic-ritual-ingredient-mask
+        - whitelist:
+            tags:
+            - Matchstick
+          name: heretic-ritual-ingredient-matchstick
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticAsh: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
+
+- type: entity
+  id: RitualCrackedLantern
+  name: Cracked Lantern
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/lantern.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Lantern
+            - Flashlight
+          name: heretic-ritual-ingredient-lantern-flashlight
         - whitelist:
             tags:
             - Flare
@@ -290,10 +342,6 @@
             tags:
             - Ash
           name: heretic-ritual-ingredient-ash
-        - whitelist:
-            components:
-            - Stunbaton
-          name: heretic-ritual-ingredient-stun-baton
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -301,7 +349,7 @@
     - !type:SpawnRitualEffect
       applyOn: Platform
       output:
-        ClothingMaskMadHeretic: 1
+        LanternHeretic: 1
 
 - type: entity
   id: RitualAscensionAsh
@@ -415,6 +463,53 @@
   - type: Tag
     tags:
     - RitualBladeBlade
+
+- type: entity
+  id: RitualArmorBlade
+  name: Shattered Panoply
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+        - whitelist:
+            tags:
+            - SilverBar
+          name: heretic-ritual-ingredient-silver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticBlade: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualAscensionBlade
@@ -544,6 +639,67 @@
       - !type:TryApplyEffectSequenceCondition
         from: 0
         to: 5
+
+- type: entity
+  id: RitualArmorFlesh
+  name: Writhing Embrace
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/flesh_armor.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SaveResultRitualEffect
+      applyOn: Look
+      result: Puddles
+      individualConditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Puddle
+      - !type:ReagentsCondition
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:InputCountCondition
+        applyOn: Puddles
+        result: Delete2
+        min: 1
+        cancelLoc: heretic-ritual-fail-reagent-blood
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:EffectsRitualEffect
+      applyOn: Delete2
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticFlesh: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualImperfect
@@ -844,6 +1000,54 @@
         to: 3
 
 - type: entity
+  id: RitualArmorVoid
+  name: Hollow Weave
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_armor.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticVoid: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
+
+- type: entity
   id: RitualAscensionVoid
   name: Waltz at the End of Time
   categories: [ HideSpawnMenu ]
@@ -959,6 +1163,53 @@
       - !type:TryApplyEffectSequenceCondition
         from: 0
         to: 3
+
+- type: entity
+  id: RitualArmorRust
+  name: Salvaged Remains
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+        - whitelist:
+            tags:
+            - Trash
+          name: heretic-ritual-ingredient-trash
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticRust: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualAscensionRust
@@ -1082,6 +1333,53 @@
         to: 3
 
 - type: entity
+  id: RitualArmorCosmos
+  name: Starwoven Cloak
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/cosmos_armor.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+        - whitelist:
+            tags:
+            - SheetPlasma
+          name: heretic-ritual-ingredient-plasma-sheet
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticCosmos: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
+
+- type: entity
   id: RitualAscensionCosmos
   name: Creators's Gift
   categories: [ HideSpawnMenu ]
@@ -1195,6 +1493,53 @@
       - !type:TryApplyEffectSequenceCondition
         from: 0
         to: 3
+
+- type: entity
+  id: RitualArmorLock
+  name: Shifting Guise
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/lock_armor.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Table
+            components:
+            - SuitSensor
+          name: heretic-ritual-ingredient-table-suit
+        - whitelist:
+            tags:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+        - whitelist:
+            tags:
+            - Crowbar
+          name: heretic-ritual-ingredient-crowbar
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingOuterArmorHereticLock: 1
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
 
 - type: entity
   id: RitualEldritchId
@@ -1359,7 +1704,7 @@
     tags:
     - RitualAscension
 
-### side knowledge
+### special knowledge
 - type: entity
   id: RitualKnowledge
   name: Ritual of Knowledge
@@ -1373,40 +1718,6 @@
     - !type:LookupRitualEffect
       applyOn: Platform
       result: Look
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-      conditions:
-      - !type:FilterKnowledgeTagsCondition
-        applyOn: Look
-        result: Delete
-    - !type:RemoveRitualsEffect
-      applyOn: Mind
-      ritualTags:
-      - RitualKnowledge
-    - !type:UpdateKnowledgeEffect
-      applyOn: Mind
-      amount: 4
-  - type: HereticKnowledgeRitual
-  - type: Tag
-    tags:
-    - RitualKnowledge
-
-## stage 3
-- type: entity
-  id: RitualArmorer
-  name: Armorer's Ritual
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi
-    state: icon
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
     - !type:SplitIngredientsRitualEffect
       applyOn: Split
       conditions:
@@ -1414,31 +1725,31 @@
         applyOn: Look
         deleteEntitiesKey: Delete
         splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            tags:
-            - Table
-          name: heretic-ritual-ingredient-table
-        - whitelist:
-            tags:
-            - GasMask
-          name: heretic-ritual-ingredient-gas-mask
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
       - !type:Delete
-    - !type:PathBasedSpawnEffect
-      applyOn: Platform
-      fallbackOutput: ClothingOuterArmorHeretic
-      output:
-        Ash: ClothingOuterArmorHereticAsh
-        Void: ClothingOuterArmorHereticVoid
-        Flesh: ClothingOuterArmorHereticFlesh
-        Blade: ClothingOuterArmorHereticBlade
-        Cosmos: ClothingOuterArmorHereticCosmos
-        Lock: ClothingOuterArmorHereticLock
-        Rust: ClothingOuterArmorHeretic
+    - !type:RemoveRitualsEffect
+      applyOn: Mind
+      ritualTags:
+      - RitualKnowledge
+    - !type:UpdateKnowledgeEffect
+      applyOn: Mind
+      amount: 4
+    - !type:SetHereticAvailablePassiveLevelEffect
+      applyOn: Mind
+      level: 3
+  - type: HereticKnowledgeRitual
+    datasets:
+      KnowledgeRitualOrgans: 1
+      KnowledgeRitualEasy: 1
+      KnowledgeRitualHard: 1
+  - type: Tag
+    tags:
+    - RitualKnowledge
 
+### side knowledge
+## T1
 - type: entity
   id: RitualPriest
   name: Priest's Ritual
@@ -1461,9 +1772,13 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
-            tags:
-            - WaterTank
-          name: heretic-ritual-ingredient-water-tank
+            components:
+            - ReagentTank
+          blacklist:
+           components:
+           - Toilet
+           - Drain
+          name: heretic-ritual-ingredient-tank
         - whitelist:
             tags:
             - GlassShard
@@ -1755,7 +2070,50 @@
       output:
         EnvyKnife: 1
 
-## stage 6
+- type: entity
+  id: RitualMaskOfMadness
+  name: Mask of Madness
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/mad_mask.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Mask
+            - BreathMask
+          name: heretic-ritual-ingredient-mask
+        - whitelist:
+            components:
+            - Liver
+          name: heretic-ritual-ingredient-liver
+        - whitelist:
+            components:
+            - Stunbaton
+          name: heretic-ritual-ingredient-stun-baton
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingMaskMadHeretic: 1
+
+## T2
 - type: entity
   id: RitualRusted
   name: Rusted Ritual
@@ -1942,20 +2300,11 @@
         - whitelist:
             components:
             - Magboots
-          blacklist:
-            tags:
-            - HereticItem
-          name: heretic-ritual-ingredient-magboots
-        - whitelist:
-            requireAll: true
-            components:
-            - Clothing
             - ClothingSlowOnDamageModifier
-            - ModifyStandingUpTime
           blacklist:
             tags:
             - HereticItem
-          name: heretic-ritual-ingredient-combat-boots
+          name: heretic-ritual-ingredient-combat-boots-magboots
     - !type:EffectsRitualEffect
       applyOn: Delete
       effects:
@@ -2064,9 +2413,13 @@
         splitEntitiesKey: Split
         ingredients:
         - whitelist:
-            tags:
-            - WaterTank
-          name: heretic-ritual-ingredient-water-tank
+            components:
+            - ReagentTank
+          blacklist:
+           components:
+           - Toilet
+           - Drain
+          name: heretic-ritual-ingredient-tank
         - whitelist:
             tags:
             - Table
@@ -2125,7 +2478,7 @@
       output:
         RaggedSword: 1
 
-# stage 8
+# T3
 - type: entity
   id: RitualMaidInTheMirror
   name: Maid in the Mirror

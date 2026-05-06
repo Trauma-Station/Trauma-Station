@@ -35,7 +35,7 @@
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Grasp of Flesh</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp can raise the dead as loyal ghouls. Additionally you grow stronger from eating raw meat and organs, as well as become immune to poison.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp can raise the dead as loyal ghouls.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of Flesh</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
@@ -55,7 +55,7 @@
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Bleeding Steel</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your bloody blades now cause heavy bleeding on attack. Ghoul limit increased.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your bloody blades now cause heavy bleeding on attack.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Lonely Ritual</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Heart, Stomach, Lung, Pen</Box></ColorBox>
@@ -65,6 +65,27 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Four corpses</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You can now shapeshift into extremely powerful creature. Ghoul limit increased. Knit Flesh can now be used in hand to heal ghouls in area.</Box></ColorBox>
   </Table>
+
+
+  ## Armor and Passive Ability
+
+  <Table Columns="2">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Effect</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"> You heal from eating raw meat and organs, as well as become immune to diseases and damage from poisons.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Writhing Embrace</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Chance to split into loyal flesh mimic upon taking damage.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Ghoul limit increased.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Medical hud.</Box></ColorBox>
+  </Table>
+
 
   ## Tips
 

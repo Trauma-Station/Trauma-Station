@@ -26,14 +26,42 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<EffectsRitualEffect>>(OnEffects);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<UpdateKnowledgeEffect>>(OnUpdateKnowledge);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<RemoveRitualsEffect>>(OnRemoveRituals);
+        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<SetHereticAvailablePassiveLevelEffect>>(
+            OnSetPassiveLevel);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<SplitIngredientsRitualEffect>>(OnSplit);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<IfElseRitualEffect>>(OnIfElse);
 
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<NestedRitualEffect>>(OnNested);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SpawnCosmicField>>(OnCosmicField);
-        SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SetBlackboardValuesRitualEffect>>(OnBlackboard);
+        SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SetBlackboardValuesRitualEffect>>(
+            OnBlackboard);
         SubscribeLocalEvent<RustGraspComponent, HereticRitualEffectEvent<ResetRustGraspDelayEffect>>(OnRustDelay);
         SubscribeLocalEvent<GhoulComponent, HereticRitualEffectEvent<AddToFleshGhoulLimit>>(OnAddToFleshLimit);
+    }
+
+    private void OnSetPassiveLevel(Entity<HereticComponent> ent,
+        ref HereticRitualEffectEvent<SetHereticAvailablePassiveLevelEffect> args)
+    {
+        var couldBreak = ent.Comp.CanBreakBlade;
+        var hadAura = ent.Comp.ShouldShowAura;
+        ent.Comp.AvailablePassiveLevel = Math.Max(ent.Comp.AvailablePassiveLevel, args.Effect.Level);
+        Dirty(ent);
+        var canBreak = ent.Comp.CanBreakBlade;
+        var showAura = ent.Comp.ShouldShowAura;
+
+        if (!TryGetValue(args.Ritual, Performer, out EntityUid uid))
+            return;
+
+        _store.UpdateUserInterface(uid, ent.Owner);
+
+        if (!_player.TryGetSessionById(CompOrNull<MindComponent>(ent)?.UserId, out var session))
+            return;
+
+        if (!canBreak && couldBreak)
+            _heretic.SendNoBreakBladeMessage(ent.Comp, session);
+
+        if (!hadAura && showAura)
+            _heretic.ShowAura(ent.Comp, uid, session, true);
     }
 
     private void OnAddToFleshLimit(Entity<GhoulComponent> ent, ref HereticRitualEffectEvent<AddToFleshGhoulLimit> args)
@@ -46,7 +74,8 @@ public abstract partial class SharedHereticRitualSystem
         Dirty(mind, fleshMind);
     }
 
-    private void OnBlackboard(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<SetBlackboardValuesRitualEffect> args)
+    private void OnBlackboard(Entity<TransformComponent> ent,
+        ref HereticRitualEffectEvent<SetBlackboardValuesRitualEffect> args)
     {
         foreach (var (key, value) in args.Effect.Values)
         {
@@ -54,7 +83,8 @@ public abstract partial class SharedHereticRitualSystem
         }
     }
 
-    private void OnRustDelay(Entity<RustGraspComponent> ent, ref HereticRitualEffectEvent<ResetRustGraspDelayEffect> args)
+    private void OnRustDelay(Entity<RustGraspComponent> ent,
+        ref HereticRitualEffectEvent<ResetRustGraspDelayEffect> args)
     {
         if (!TryComp(ent, out UseDelayComponent? delay))
             return;
@@ -261,7 +291,7 @@ public abstract partial class SharedHereticRitualSystem
 
         var knowledgeGain = 0f;
         var (isCommand, isSec) = IsCommandOrSec(ent);
-        var isHeretic = _heretic.TryGetHereticComponent(ent.Owner, out _, out _);
+        var isHeretic = _heretic.TryGetHereticComponent(ent.Owner, out var otherHeretic, out var otherMind);
         knowledgeGain += isHeretic || IsSacrificeTarget((mind, heretic), ent)
             ? isCommand || isSec || isHeretic ? 3f : 2f
             : 0f;
@@ -276,6 +306,9 @@ public abstract partial class SharedHereticRitualSystem
             var ev2 = new IncrementHereticObjectiveProgressEvent(args.Effect.SacrificeHeadObjective);
             RaiseLocalEvent(mind, ref ev2);
         }
+
+        if (otherHeretic != null)
+            RemCompDeferred(otherMind, otherHeretic);
 
         if (knowledgeGain == 0)
             return;

@@ -388,6 +388,7 @@ namespace Content.IntegrationTests.Tests
                 "Area", // map tests spawn ~every area anyway, this fails from trying to spawn an area in space
                 "StatusEffect", // doesnt make sense to spawn unattached, fails test with weather schedulers
                 "GasTank", // maxcaps blow up duh
+                "AshJaunt", // spawns jaunt end animation
                 // </Trauma>
             };
 

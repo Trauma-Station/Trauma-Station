@@ -26,8 +26,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
@@ -35,7 +35,6 @@ using Content.Trauma.Server.Abductor;
 using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
-using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
@@ -63,8 +62,11 @@ public sealed class HereticSystem : SharedHereticSystem
     [Dependency] private readonly HereticRuleSystem _rule = default!;
     [Dependency] private readonly HumanoidProfileSystem _profile = default!;
     [Dependency] private readonly AbductorVestDisguiseSystem _disguise = default!;
+    [Dependency] private readonly SharedHereticRitualSystem _ritual = default!;
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly IChatManager _chatMan = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+
     [Dependency] private readonly EntityQuery<HereticMinionComponent> _minionQuery = default!;
 
     private float _timer;
@@ -96,9 +98,6 @@ public sealed class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
         SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
         SubscribeLocalEvent<MobStateChangedEvent>(OnStateChanged);
-
-        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectAppliedEvent>(OnApply);
-        SubscribeLocalEvent<HideHereticAuraStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
     }
 
     private void OnStateChanged(MobStateChangedEvent args)
@@ -117,16 +116,6 @@ public sealed class HereticSystem : SharedHereticSystem
         {
             RaiseLocalEvent(minion, ref ev);
         }
-    }
-
-    private void OnRemove(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
-    {
-        UpdateHereticAura(args.Target);
-    }
-
-    private void OnApply(Entity<HideHereticAuraStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        RemCompDeferred<HereticAuraComponent>(args.Target);
     }
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
@@ -161,6 +150,7 @@ public sealed class HereticSystem : SharedHereticSystem
             {
                 RaiseLocalEvent(minion, ref ev);
             }
+
             ent.Comp.IsActive = newActive;
         }
 
@@ -221,7 +211,7 @@ public sealed class HereticSystem : SharedHereticSystem
         RaiseLocalEvent(uid, (object) ev, true);
     }
 
-    protected override void SpawnRituals(HereticComponent heretic,
+    protected override void SpawnRituals(Entity<HereticComponent> heretic,
         List<EntProtoId<HereticRitualComponent>> rituals,
         ICommonSession session)
     {
@@ -230,7 +220,8 @@ public sealed class HereticSystem : SharedHereticSystem
         foreach (var ritual in rituals)
         {
             var ritUid = Spawn(ritual);
-            Container.Insert(ritUid, heretic.RitualContainer);
+            Container.Insert(ritUid, heretic.Comp.RitualContainer);
+            _ritual.SetOwner(ritUid, heretic);
         }
     }
 
@@ -306,12 +297,16 @@ public sealed class HereticSystem : SharedHereticSystem
             return;
 
         if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
+        {
+            heretic.KnowledgeTracker += amount;
+            Dirty(mindId, heretic);
             return;
+        }
 
         if (showText)
         {
             var baseMessage = heretic.InfluenceGainBaseMessage;
-            var message = Loc.GetString(_rand.Pick(heretic.InfluenceGainMessages));
+            var message = _rand.Pick(_proto.Index(heretic.InfluenceGainMessages));
             var size = heretic.InfluenceGainTextFontSize;
             var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
             SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
@@ -330,37 +325,57 @@ public sealed class HereticSystem : SharedHereticSystem
         var couldBreak = heretic.CanBreakBlade;
         var hadAura = heretic.ShouldShowAura;
         heretic.KnowledgeTracker += amount;
+        Dirty(mindId, heretic);
         var canBreak = heretic.CanBreakBlade;
         var showAura = heretic.ShouldShowAura;
 
         if (!canBreak && couldBreak)
-        {
-            var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
-            _chatMan.ChatMessageToOne(ChatChannel.Server,
-                msg,
-                msg,
-                default,
-                false,
-                session.Channel,
-                Color.Red);
-        }
+            SendNoBreakBladeMessage(heretic, session);
 
         if (!hadAura && showAura)
-        {
-            if (uid != null)
-                Status.TryUpdateStatusEffectDuration(uid.Value, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
+            ShowAura(heretic, uid, session, false);
+    }
 
-            var msg = Loc.GetString(heretic.AuraVisibleMessage);
-            _chatMan.ChatMessageToOne(ChatChannel.Server,
-                msg,
-                msg,
-                default,
-                false,
-                session.Channel,
-                Color.Red);
+    public override void SendNoBreakBladeMessage(HereticComponent heretic, ICommonSession session)
+    {
+        base.SendNoBreakBladeMessage(heretic, session);
+
+        if (heretic.CanBreakBlade)
+            return;
+
+        var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
+        _chatMan.ChatMessageToOne(ChatChannel.Server,
+            msg,
+            msg,
+            default,
+            false,
+            session.Channel,
+            Color.Red);
+    }
+
+    public override void ShowAura(HereticComponent heretic, EntityUid? body, ICommonSession session, bool immediate)
+    {
+        base.ShowAura(heretic, body, session, immediate);
+
+        if (!heretic.ShouldShowAura)
+            return;
+
+        if (body is { } uid)
+        {
+            if (immediate)
+                UpdateHereticAura(uid);
+            else
+                Status.TryUpdateStatusEffectDuration(uid, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
         }
 
-        Dirty(mindId, heretic);
+        var msg = Loc.GetString(immediate ? heretic.AuraVisibleMessageImmediate : heretic.AuraVisibleMessage);
+        _chatMan.ChatMessageToOne(ChatChannel.Server,
+            msg,
+            msg,
+            default,
+            false,
+            session.Channel,
+            Color.Red);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)

@@ -45,11 +45,10 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
         Coordinates = coordinates;
 
         // Load fonts
-        // <Trauma> - switch to ScienceGothic
-        var headerFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Bold.ttf"), 11);
-        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDisplay-Regular.ttf"), 11);
-        var smallFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothic-Regular.ttf"), 10);
-        // </Trauma>
+        var headerFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), 11);
+        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSansDisplay/NotoSansDisplay-Regular.ttf"), 11);
+        var smallFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 10);
+
         // Set fonts
         TemperatureHeaderLabel.FontOverride = headerFont;
         PressureHeaderLabel.FontOverride = headerFont;
@@ -72,7 +71,8 @@ public sealed partial class AtmosAlarmEntryContainer : BoxContainer
         Coordinates = _entManager.GetCoordinates(entry.Coordinates);
 
         // Load fonts
-        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/_Trauma/ScienceGothicDisplay-Regular.ttf"), 11); // Trauma
+        var normalFont = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSansDisplay/NotoSansDisplay-Regular.ttf"), 11);
+
         // Update alarm state
         if (!_alarmStrings.TryGetValue(entry.AlarmState, out var alarmString))
             alarmString = "atmos-alerts-window-invalid-state";

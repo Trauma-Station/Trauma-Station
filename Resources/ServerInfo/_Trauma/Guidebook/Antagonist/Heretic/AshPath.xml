@@ -11,7 +11,7 @@
 
   - Very potent even from the beginning of the path.
   - Easy access to a mobility spells.
-  - Very powerful mark effect.
+  - Strong mark effect.
 
   ## Cons
 
@@ -36,7 +36,7 @@
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of Ash</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the ashen mark, burning, dealing stamina damage, and hopping to a nearby target when activated.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the ashen mark, burning the target, reducing all your spell cooldowns, and hopping to a nearby target when activated.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Ashen Shift</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
@@ -46,9 +46,9 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Fires a flaming beam to a nearby target, burning and setting them ablaze, if they do not extinguish themself, it will spread to others.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mask of Madness</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Mask, Ash, Lighter, Stun baton, Liver</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates an abyssal mask; a mask that causes insanity in heathens, and protects you from fire and heat. Heathens cannot remove it without help.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Cracked Lantern</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Lantern, Flare, Ash, Lighter</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates cracked lantern that acts as a flash which burns victims in area. Summons Hint when holding it in your hand.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Fiery Blade</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
@@ -64,10 +64,30 @@
   </Table>
 
 
+  ## Armor and Passive Ability
+
+  <Table Columns="2">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Effect</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to high temperatures. Having 3 fire stacks or more on yourself will empower your ash spells</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Scorched Mantle</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to fire. Passive fire stack generation when already on fire.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Ash storm immunity</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Temporary blindness and vision blur immunity</Box></ColorBox>
+  </Table>
+
+
   ## Tips
 
-  - Your Mansus Grasp applies a short blind and a mark that puts your opponent into stamina crit when triggered by your blade. The mark can spread to nearby opponents.
-  - Selecting this path does not make you immune to fires. Remember, that your can still burn! If you want to protect yourself from your own fire, wear a Mask of Madness or carry a water bottle with you.
+  - Your Mansus Grasp applies a short blind and a mark that deals some heat damage and refreshes all your spells, either by 5 seconds or 20%, whichever is less. The mark can spread to nearby opponents.
+  - Selecting this path does not make you immune to fires. Remember, that your can still burn! If you want to protect yourself from your own fire, wear Scorched Mantle or carry a water bottle with you.
   - All fire stacks applied by your abilities and blades have some fire protection penetration, allowing you to deal with fire-insulated enemies to some extent.
   - Volcano blast can make short work of your enemies, should they be foolish enough to stick close to each other. Burn the heathens to ashes!
   - Make sure to set as many enemies on fire as you possibly can! Nightwatcher's Rebirth will heal you and have its cooldown reduced based on how many mobs you siphon.

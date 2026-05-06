@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage.Components;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Robust.Shared.Timing;
 
@@ -23,7 +24,7 @@ public sealed class HealingAuraSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var query = EntityQueryEnumerator<Components.HealingAuraComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<HealingAuraComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var aura, out var xform))
         {
             aura.Accumulator += frameTime;
@@ -43,12 +44,13 @@ public sealed class HealingAuraSystem : EntitySystem
                 _heretic.IHateWoundMed((ent, damageable, null),
                     aura.ToHeal * multiplier,
                     aura.BloodHeal * multiplier,
-                    aura.BleedHeal * multiplier);
+                    aura.BleedHeal * multiplier,
+                    aura.BoneHeal * multiplier);
             }
         }
     }
 
-    private float GetHealMultiplier(EntityUid toHeal, Entity<Components.HealingAuraComponent> ent)
+    private float GetHealMultiplier(EntityUid toHeal, Entity<HealingAuraComponent> ent)
     {
         var (uid, aura) = ent;
 

@@ -66,6 +66,7 @@
       collection: FootstepHull
   - type: Tag
     tags:
+    - Table # Trauma
     - ForceFixRotations
   - type: RequireProjectileTarget # Goobstation - Crawling
     ignoreThrow: true

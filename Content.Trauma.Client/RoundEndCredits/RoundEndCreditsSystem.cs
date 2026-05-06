@@ -81,10 +81,13 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             return;
 
         base.FrameUpdate(frameTime);
-        _timer += frameTime;
+
+        var clampedTime = Math.Min(frameTime, 0.1f);
+        _timer += clampedTime;
+
         var scroll = _creditsContainer.GetScrollValue();
         var scrollSpeed = GetScrollingSpeed(TimeSpan.FromSeconds(_timer));
-        _creditsContainer.SetScrollValue(scroll + new Vector2(0f, scrollSpeed * frameTime));
+        _creditsContainer.SetScrollValue(scroll + new Vector2(0f, scrollSpeed * clampedTime));
     }
 
     public float GetScrollingSpeed(TimeSpan time)

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
+using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Shared.Body;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -49,6 +50,18 @@ public sealed class LeechingWalkSystem : EntitySystem
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<LeechingWalkComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(Entity<LeechingWalkComponent> ent, ref MapInitEvent args)
+    {
+        RemCompDeferred<DiseaseCarrierComponent>(ent);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -68,31 +81,35 @@ public sealed class LeechingWalkSystem : EntitySystem
 
             _damageableQuery.TryComp(uid, out var damageable);
 
-            var multiplier = 1.5f;
+            var multiplier = 1f;
             var shouldHeal = true;
+            var boneHeal = FixedPoint2.Zero;
             if (_hereticQuery.TryComp(mindContainer.Mind, out var heretic))
             {
-                if (heretic.PathStage >= 7)
+                multiplier += heretic.PassiveLevel * 0.5f;
+                if (heretic is { Ascended: true, CurrentPath: HereticPath.Rust })
                 {
-                    if (heretic is {Ascended: true, CurrentPath: HereticPath.Rust})
+                    if (_respiratorQuery.TryComp(uid, out var respirator))
                     {
-                        multiplier = 3.5f;
-                        if (_respiratorQuery.TryComp(uid, out var respirator))
-                        {
-                            _respirator.UpdateSaturation(uid,
-                                respirator.MaxSaturation - respirator.MinSaturation,
-                                respirator);
-                        }
-
-                        if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
-                        {
-                            if (_bodyQuery.TryComp(uid, out var body))
-                                _bodyRestore.RestoreBody((uid, body));
-                            shouldHeal = false;
-                        }
+                        _respirator.UpdateSaturation(uid,
+                            respirator.MaxSaturation - respirator.MinSaturation,
+                            respirator);
                     }
-                    else
-                        multiplier = 2f;
+
+                    multiplier += 1.5f;
+                }
+
+                if (heretic.PassiveLevel >= 2)
+                    boneHeal = leech.BoneHeal * heretic.PassiveLevel;
+
+                if (heretic.PassiveLevel >= 3)
+                {
+                    if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
+                    {
+                        if (_bodyQuery.TryComp(uid, out var body))
+                            _bodyRestore.RestoreBody((uid, body));
+                        shouldHeal = false;
+                    }
                 }
             }
             else if (_ghoulQuery.HasComp(uid))
@@ -107,7 +124,8 @@ public sealed class LeechingWalkSystem : EntitySystem
                 _ability.IHateWoundMed((uid, damageable, null),
                     toHeal,
                     leech.BloodHeal * multiplier,
-                    null);
+                    null,
+                    boneHeal);
             }
 
             if (_bloodQuery.TryComp(uid, out var blood))
