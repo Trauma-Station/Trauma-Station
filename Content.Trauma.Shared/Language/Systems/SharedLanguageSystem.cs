@@ -95,7 +95,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
-        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && !HasComp<KnowledgeHolderComponent>(ent);
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language);
     }
 
     public bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
