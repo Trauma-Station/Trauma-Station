@@ -28,6 +28,8 @@ public sealed class RevsTest : InteractionTest
     public static readonly EntProtoId MindShieldImplanter = "MindShieldImplanter";
     public static readonly EntProtoId DefaultRevsRule = "Revolutionary";
 
+    protected override string PlayerPrototype => Urist; // needs to have a tongue to speak
+
     /// <summary>
     /// Checks that using propaganda on:
     /// - a player as a non-rev fails
@@ -76,7 +78,7 @@ public sealed class RevsTest : InteractionTest
             var blocker = SEntMan.System<ActionBlockerSystem>();
             var whitelist = SEntMan.System<EntityWhitelistSystem>();
             // individual checks are easier to understand than blanket "no it dont work"
-            Assert.That(SEntMan.GetComponent<HeadRevolutionaryComponent>(target).ConvertAbilityEnabled, "Headrev must not be mindshielded");
+            Assert.That(SEntMan.GetComponent<HeadRevolutionaryComponent>(user).ConvertAbilityEnabled, "Headrev must not be mindshielded");
             Assert.That(SEntMan.GetComponent<MindContainerComponent>(target).HasMind, "Target player must have a mind");
             Assert.That(blocker.CanSpeak(user), "Head rev must be able to speak");
             Assert.That(whitelist.IsWhitelistFailOrNull(comp.UserBlacklist, user), $"User blacklist passed for {SEntMan.ToPrettyString(user)}");
