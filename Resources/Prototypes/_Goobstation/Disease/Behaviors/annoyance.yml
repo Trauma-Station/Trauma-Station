@@ -46,14 +46,13 @@
   description: Gives you headaches, which may make working more difficult.
   components:
   - type: DiseaseEffect
-    complexity: 8 # very annoying
+    complexity: 7 # annoying
   - type: DiseasePopupEffect
     string: disease-effect-popup-headache
+    popupType: LargeCaution
   - type: DiseasePeriodicCondition
     delayMin: 3
     delayMax: 12
-  - type: DiseaseFlashEffect
-    timeScale: false
 
 - type: entity
   id: DiseaseBehaviorGravitosisA

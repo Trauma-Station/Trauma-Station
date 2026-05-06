@@ -92,8 +92,8 @@
       - heretic-lock-unlocked
   - !type:SetBlackboardValuesRitualEffect
     conditions:
-    - !type:HereticMinStageCondition
-      minStage: 7
+    - !type:HereticMinPassiveLevelCondition
+      minLevel: 2
     values:
       InvokeGrasp: false
       ApplyGraspDefaultEffects: false
@@ -148,14 +148,15 @@
 - type: entityEffect
   id: HereticMarkAsh
   effects:
-  - !type:TakeStaminaDamage
-    amount: 6
-    immediate: true
-    ignoreResist: true
+  - !type:ReduceActionsCooldown
+    actionWhitelist:
+      components:
+      - HereticAction
+    targetUser: true
   - !type:HealthChange
     damage:
       types:
-        Heat: 3
+        Heat: 15
     targetPart: Vital
 
 - type: entityEffect
@@ -165,6 +166,11 @@
 
 - type: entityEffect
   id: HereticMarkFlesh
+  conditions:
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Ghoul
   effects:
   - !type:CreateFleshMimic
 

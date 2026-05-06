@@ -2,7 +2,7 @@
 
 using Content.Shared.Alert;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
@@ -60,15 +60,14 @@ public sealed partial class HereticGraspUpgradeEvent : EntityEventArgs
 }
 
 [DataDefinition]
-public sealed partial class HereticAddMindComponentsEvent
+public sealed partial class HereticAddMindComponentsEvent : EntityEventArgs
 {
     [DataField(required: true)]
     public ComponentRegistry AddedComponents = new();
 }
 
-
 [DataDefinition]
-public sealed partial class IncreaseFleshGhoulLimitEvent
+public sealed partial class IncreaseFleshGhoulLimitEvent : EntityEventArgs
 {
     [DataField(required: true)]
     public int GhoulLimitIncrease;
@@ -151,7 +150,7 @@ public partial class HereticBladeBonusDamageEvent : HereticBladeBonusEvent
 public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEvent
 {
     /// <summary>
-    /// Path stage -? bonus
+    /// Path stage -> bonus
     /// </summary>
     [DataField(required: true)]
     public Dictionary<int, float> WoundingBonus = default!;
@@ -160,3 +159,9 @@ public sealed partial class HereticBladeBonusWoundingEvent : HereticBladeBonusEv
 public sealed partial class CosmosBladeBonusEvent : HereticBladeBonusDamageEvent;
 
 public sealed partial class BladeBladeBonusEvent : HereticBladeBonusDamageEvent;
+
+[ByRefEvent]
+public record struct ShouldHideHereticAuraEvent(bool Hide) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+}

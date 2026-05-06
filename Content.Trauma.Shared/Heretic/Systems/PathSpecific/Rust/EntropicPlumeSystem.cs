@@ -24,7 +24,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Rust;
 
-public abstract class EntropicPlumeSystem : EntitySystem
+public sealed class EntropicPlumeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;

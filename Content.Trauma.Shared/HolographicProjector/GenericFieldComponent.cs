@@ -4,15 +4,15 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.HolographicProjector;
 
-[RegisterComponent]
-[AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class GenericFieldComponent : Component
 {
     /// <summary>
-    /// What made this entity?
+    /// The generator that made this field
     /// </summary>
-    [ViewVariables]
-    public Entity<GenericFieldGeneratorComponent>? SourceGen;
+    [DataField, AutoNetworkedField]
+    public EntityUid? SourceGen;
 
     /// <summary>
     /// how much damage to heal per second

@@ -9,10 +9,10 @@ using Content.Shared.Input;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Reflect;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -222,7 +222,7 @@ public sealed class ProtectiveBladeSystem : EntitySystem
 
         _audio.PlayPvs(BladeBlockSound, ent);
 
-        args.Cancel();
+        args.Cancelled = true;
     }
 
     private void OnTakeDamage(Entity<ProtectiveBladesComponent> ent, ref BeforeDamageChangedEvent args)

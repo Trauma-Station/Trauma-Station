@@ -570,7 +570,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // The chat message wrapped in a "x says y" string.
         var wrappedMessage = WrapPublicMessage(source, name, message, speech, language: language, colorOverride);
         // The chat message obfuscated via language obfuscation.
-        var obfuscated = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
+        var obfuscated = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language, source), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
         (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
         || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en"));
         // The language-obfuscated message wrapped in a "x says y" string.
@@ -662,7 +662,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
         }
 
-        var languageObfuscatedMessage = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
+        var languageObfuscatedMessage = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language, source), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
         (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
         || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en")); // Einstein Engines - Language
 

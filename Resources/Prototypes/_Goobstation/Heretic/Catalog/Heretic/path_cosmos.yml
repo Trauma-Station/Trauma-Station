@@ -93,11 +93,11 @@
   id: HereticCosmosPath5
   name: knowledge-path-cosmos-s5-name
   description: knowledge-path-cosmos-s5-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: star_touch }
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: star_blast }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - StarTouch
+    - StarBlast
   cost:
     KnowledgePoint: 2
   categories:
@@ -111,14 +111,82 @@
     - Cosmos
 
 - type: listing
-  id: HereticCosmosPath6
-  name: knowledge-path-cosmos-s6-name
-  description: knowledge-path-cosmos-s6-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: star_blast }
+  id: HereticCosmosArmor
+  name: knowledge-path-cosmos-armor-name
+  description: knowledge-path-cosmos-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/cosmos_armor.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - StarBlast
+    - ArmorCosmos
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Cosmos
+
+- type: listing
+  id: HereticCosmosPassiveT2
+  name: knowledge-passive-upgrade-name-2
+  description: knowledge-path-cosmos-passive-desc-2
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_cosmos.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - CosmosPassiveT2
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 2
+    stage: 5
+    whitelist:
+    - Cosmos
+
+- type: listing
+  id: HereticCosmosPassiveT3
+  name: knowledge-passive-upgrade-name-3
+  description: knowledge-path-cosmos-passive-desc-3
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_cosmos.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - CosmosPassiveT3
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 3
+    stage: 5
+    whitelist:
+    - Cosmos
+  - !type:BuyBeforeCondition
+    whitelist:
+    - HereticCosmosPassiveT2
+
+- type: listing
+  id: HereticCosmosPath6
+  name: knowledge-path-cosmos-s6-name
+  description: knowledge-path-cosmos-s6-desc
+  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: star_touch }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - StarTouch
   cost:
     KnowledgePoint: 2
   categories:

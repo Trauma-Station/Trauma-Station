@@ -1,3 +1,6 @@
+knowledge-path-flesh-passive-desc-2 = You can create two more ghouls and one more Voiceless Dead.
+knowledge-path-flesh-passive-desc-3 = Grants you medical hud.
+
 knowledge-path-flesh-s1-name = Principle of Hunger
 knowledge-path-flesh-s1-desc =
     Hundreds of us starved, but not me... I found strength in my greed.
@@ -12,12 +15,13 @@ knowledge-path-flesh-s2-desc =
 
     Your Mansus Grasp gains the ability to create a ghoul out of corpse.
     Ghouls have only 50 health and look like husks to the heathens' eyes.
-    All ghouls get their own Bloody Blade that cannot be shattered and disappears on ghoul death.
-    You are now able to consume raw flesh. Eating meat, organs and body parts will empower and heal you temporarily, the effect scales with your path stage.
-    You also become immune to damage from poisons.
     You can only create three at a time.
-    Risen ghouls become normal on death but cann be risen again using your grasp.
+    All ghouls get their own Bloody Blade that cannot be shattered and disappears on ghoul death.
+    Risen ghouls become normal on death but can be risen again using your grasp.
     You can recall any creature summoned by you by alt-clicking ritual rune using your mansus grasp.
+
+    You are now able to consume raw flesh. Eating meat, organs and body parts will heal you.
+    You also become immune to damage from poisons as well as diseases.
 
 knowledge-path-flesh-s3-name = Mark of Flesh
 knowledge-path-flesh-s3-desc =
@@ -44,6 +48,17 @@ knowledge-path-flesh-s5-desc =
     Grants you the spell Knit Flesh. This touch spell acts as a great surgery tool that bypasses surgery steps, clothing, doesn't cause pain and doesn't deal poison damage. Also acts as medical hud and health analyzer.
     This spell also allows you to heal your minions and summons.
 
+knowledge-path-flesh-armor-name = Writhing Embrace
+knowledge-path-flesh-armor-desc =
+    I tugged these wretched, slothing things about me, like one might a warm blanket.
+    With eyes-not-mine, they will witness. With teeth-not-mine, they will clench. With limbs-not-mine, they will break.
+
+    Allows you to transmute a table (or a suit), a mask and a pool of blood to create a writhing embrace.
+    It grants you the ability to detect the health condition of other living (and non-living).
+    Additionally, upon taking damage, it has a chance to spawn a loyal flesh mimic of yourself.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
+
 knowledge-path-flesh-s6-name = Raw Ritual
 knowledge-path-flesh-s6-desc =
     I could not continue alone. I was able to summon The Uncanny Man to help me see more.
@@ -60,7 +75,6 @@ knowledge-path-flesh-s7-desc =
     I finally began to understand. And then, blood rained from the heavens.
 
     Your Bloody Blade now causes enemies to bleed heavily on attack.
-    Additionally, you can summon two more Ghouls and one more Voiceless Dead.
 
 knowledge-path-flesh-s8-name = Lonely Ritual
 knowledge-path-flesh-s8-desc =
@@ -77,3 +91,4 @@ knowledge-path-flesh-s9-desc =
     Just the act of transforming causes nearby heathens great fear and trauma.
     While in the Lord of the Night form, you can consume arms to heal and regain segments.
     Additionally, you can summon six more Ghouls and four more Voiceless Dead.
+    Your Knit Flesh spell can now heal your minions in an area around you when using it in hand, at an increased cooldown.

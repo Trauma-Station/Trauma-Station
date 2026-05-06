@@ -4,6 +4,7 @@
   parent: BaseGameRule
   id: LoneAbductorSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 70
@@ -20,6 +21,7 @@
   - type: AntagLoadProfileRule
     speciesHardOverride: Abductor
   - type: AntagSelection
+    agentName: abductor-round-end-agent-name
     definitions:
     - spawnerPrototype: LoneAbductorSpawner
       min: 1
@@ -92,6 +94,7 @@
   parent: LoneAbductorSpawn
   id: DuoAbductorSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     minimumPlayers: 20
   - type: AntagSelection

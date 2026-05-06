@@ -69,7 +69,7 @@ public sealed class BackStabSystem : EntitySystem
 
         var xform = Transform(target);
         var userXform = Transform(user);
-        var a1 = -_transform.GetWorldRotation(xform) + MathHelper.PiOver2;
+        var a1 = (_transform.GetWorldRotation(xform) + MathHelper.PiOver2).Reduced();
         var a2 = new Angle(_transform.GetWorldPosition(userXform) - _transform.GetWorldPosition(xform));
         // when you are facing the same direction as the target (their back is turned)
         // angle is close to 0, when you are facing eachother the angle is close to 180
