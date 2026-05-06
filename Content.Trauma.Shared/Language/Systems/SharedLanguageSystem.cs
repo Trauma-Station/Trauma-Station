@@ -54,11 +54,11 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         }
         else
         {
-            // In case source does not have a knowledge holder then speaks in perfect tongue.
+            // In case source does not have a knowledge holder then it speaks/listens in perfect tongue.
             ratio = 0.0f;
         }
 
-        // Catch incase obfuscation method doesn't use a ratio.
+        // Catch incase obfuscation method doesn't use a ratio. Very important, do not remove.
         if (ratio <= 0.0f)
             return message;
 
