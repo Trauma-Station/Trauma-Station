@@ -7,9 +7,6 @@ ascension_requires_objectives = false
 
 [infolinks]
 github = "https://github.com/Trauma-Station/Trauma-Station"
-
-[trauma]
-station_traits_enabled = false
 # </Trauma>
 
 [game]
