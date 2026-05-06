@@ -108,8 +108,6 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/owenCarpenter.rsi
-    slots:
-    - NECK
 
 - type: entity
   parent: ClothingHeadBase
@@ -386,8 +384,6 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/daniels.rsi
-    slots:
-    - NECK
 
 - type: entity
   parent: ClothingNeckBase
@@ -400,8 +396,6 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/Catdere.rsi
-    slots:
-    - NECK
 
 - type: entity
   parent: BaseFigurine
@@ -410,7 +404,7 @@
   description: Tweaks!
   components:
   - type: Sprite
-    sprite: _Trauma\Objects\Patreon\supermage.rsi
+    sprite: _Trauma/Objects/Patreon/supermage.rsi
     state: icon
   - type: SpeakOnTrigger
     pack: FigurinesTweaking
