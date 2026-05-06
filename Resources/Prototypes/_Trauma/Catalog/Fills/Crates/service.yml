@@ -9,3 +9,18 @@
       entity_storage:
         id: RotaryPhoneFlatPack
         amount: 5
+
+- type: entity
+  parent: CrateHydroSecure
+  id: CrateServiceCoconutCrab
+  name: coconut crab crate
+  description: This is crabtually insane!
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MobCoconutCrab
+          amount: 2
+        - id: MobCrabTiny
+          amount: 6

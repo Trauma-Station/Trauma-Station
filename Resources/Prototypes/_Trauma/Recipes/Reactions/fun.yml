@@ -35,7 +35,5 @@
       amount: 1
     TheSunAlsoRises: # annoying
       amount: 1
-    BuzzochloricBees: # make it harder to get
-      amount: 1
   products:
-    Crabon: 10
+    Crabon: 3

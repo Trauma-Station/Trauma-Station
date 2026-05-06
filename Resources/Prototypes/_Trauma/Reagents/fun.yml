@@ -28,6 +28,9 @@
     randomOffsetMax: 0.3
     maxOnTileWhitelist:
       tags: [ Crab ]
+  plantMetabolism:
+  - !type:PlantMutateChemicals
+    randomPickBotanyReagent: CrabonFillSolution
   metabolisms:
     Bloodstream:
       effects:

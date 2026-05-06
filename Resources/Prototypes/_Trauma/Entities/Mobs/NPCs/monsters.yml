@@ -363,7 +363,6 @@
     layers:
       - state: coconutcrabnoshell
   - type: NoSlip
-  - type: FlashImmunity # Does nothing because not ghostrole p sure but just incase
   - type: Puller # Ditto
     needsHands: false
   - type: Tag
@@ -414,14 +413,14 @@
         Bloodloss:
           -0.25
   - type: MovementSpeedModifier
-    baseWalkSpeed: 3
-    baseSprintSpeed: 3
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 3.5
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
     damage:
       types:
-        Blunt: 10
+        Blunt: 12
         Structural: 15
   - type: MeleeThrowOnHit
     distance: 5
@@ -522,15 +521,113 @@
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    attackRate: 0.5
     damage:
       types:
-        Blunt: 20
-        Structural: 20
+        Blunt: 15
+        Structural: 15
+
+- type: entity
+  parent: MobCoconutCrabShellless
+  id: MobBotanyCoconutCrab
+  name: coconut crab
+  description: Not to be confused with the Coconut Crab... oh, I see the problem now.
+  suffix: botany, AI
+  components:
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.15
+    - reagents: [ Blood ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.25
+          Burn: -0.25
+    - reagents: [ RobustHarvest ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -1
+          Burn: -1
+    - reagents: [ WeedKiller, PlantBGone ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 40
+        reagents:
+        - ReagentId: CoconutFlesh
+          Quantity: 20
+        - ReagentId: GroundCrab
+          Quantity: 10
+        - ReagentId: CoconutWater
+          Quantity: 10
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+      - !type:SpillBehavior
+        solution: food
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodCoconutHalf:
+            min: 1
+            max: 2
+  - type: PassiveDamage # Cooler than other options, lives for 120s
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Blunt: 0.25
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2
+    baseSprintSpeed : 2
+  - type: MeleeWeapon
+    attackRate: 0.6
+  - type: MeleeThrowOnHit
+    distance: 0
+    speed: 0
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CoconutFlesh
+        Quantity: 25
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: CanEscapeInventory
+    baseResistTime: 3 
+  - type: Produce
+    seedId: CoconutCrabPlant
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: CoconutCrab
+  - type: MobPrice
+    price: 1000
+  - type: PotencyVisuals
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat]
-  id: MobCrabTinyBase
+  id: MobCrabTinyBase # base incase something else wants to be a tiny crab, was gonna be used for the botany ones but not anymore
   abstract: true
   components:
   - type: MovementSpeedModifier
@@ -588,83 +685,6 @@
       - !type:GibBehavior
         deleteGibs: true
         recursive: false
-
-- type: entity
-  parent: MobCrabTinyBase
-  id: MobBotanyCoconutCrab
-  name: coconut crab
-  description: Not to be confused with the Coconut Crab... oh, I see the problem now.
-  suffix: botany, AI
-  components:
-  - type: Reactive
-    groups:
-      Flammable: [ Touch ]
-      Extinguish: [ Touch ]
-    reactions:
-    - reagents: [ Water ]
-      methods: [ Touch ]
-      effects:
-      - !type:EvenHealthChange
-        damage:
-          Brute: -0.15
-    - reagents: [ Blood ]
-      methods: [ Touch ]
-      effects:
-      - !type:EvenHealthChange
-        damage:
-          Brute: -0.25
-          Burn: -0.25
-    - reagents: [ RobustHarvest ]
-      methods: [ Touch ]
-      effects:
-      - !type:EvenHealthChange
-        damage:
-          Brute: -1
-          Burn: -1
-    - reagents: [ WeedKiller, PlantBGone ]
-      methods: [ Touch ]
-      effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Heat: 1
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 40
-        reagents:
-        - ReagentId: CoconutFlesh
-          Quantity: 20
-        - ReagentId: GroundCrab
-          Quantity: 10
-        - ReagentId: CoconutWater
-          Quantity: 10
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 30
-      behaviors:
-      - !type:GibBehavior
-        deleteGibs: true
-        recursive: false
-      - !type:SpillBehavior
-        solution: food
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          FoodCoconutHalf:
-            min: 1
-            max: 2
-  - type: PassiveDamage # Cooler than other options, lives for 120s
-    allowedStates:
-    - Alive
-    damage:
-      types:
-        Blunt: 0.25
-  - type: Damageable
-    damageContainer: Biological
-    damageModifierSet: CoconutCrab
-  - type: WeakToHoly
 
 - type: entity
   parent: MobCrabTinyBase

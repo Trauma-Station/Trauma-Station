@@ -44,7 +44,6 @@
     Slash: 0.75
     Piercing: 0.75
     Heat: 0.5
-    Cold: 0.5
     Caustic: 2
     Holy: 2
   flatReductions:
