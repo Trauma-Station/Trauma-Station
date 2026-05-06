@@ -9,6 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -30,6 +31,8 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -48,11 +51,13 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedHereticCurseSystem _curse = default!;
     [Dependency] private readonly FleshGraspSystem _fleshGrasp = default!;
+    [Dependency] private readonly SharedStoreSystem _store = default!;
+
     [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
-    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
 
-    public static SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
+    public static SoundSpecifier RitualSuccessSound =
+        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
 
     public const string Performer = "Performer";
     public const string Mind = "Mind";
@@ -75,6 +80,18 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     }
 
     #region Helpers
+
+    public void SetOwner(Entity<HereticRitualComponent?> ent, EntityUid owner)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.RitualOwner = owner;
+        Dirty(ent);
+
+        var ev = new HereticRitualOwnerSetEvent(owner);
+        RaiseLocalEvent(ent, ref ev);
+    }
 
     protected virtual (bool isCommand, bool isSec) IsCommandOrSec(EntityUid uid)
     {
@@ -174,7 +191,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
             !HasComp<FleshHereticMindComponent>(mind))
             return null;
 
-        if (!TryComp(item, out FleshGraspComponent? fleshGrasp))
+        if (!HasComp<FleshGraspComponent>(item))
             return null;
 
         AlternativeVerb verb = new()
@@ -246,7 +263,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
-        if (!HasComp<Components.MansusGraspComponent>(args.Used))
+        if (!HasComp<MansusGraspComponent>(args.Used))
             return;
 
         if (!TryComp(heretic.ChosenRitual, out HereticRitualComponent? ritual))
@@ -285,7 +302,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
     public void RitualSuccess(EntityUid ent, EntityUid user, bool predicted)
     {
-        _audio.PlayPredicted(RitualSuccessSound, ent, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
+        _audio.PlayPredicted(RitualSuccessSound, Transform(ent).Coordinates, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
         var popup = Loc.GetString("heretic-ritual-success");
         _popup.PopupPredicted(popup, ent, predicted ? user : null, Filter.Entities(user), false);
         PredictedSpawnAttachedTo("HereticRuneRitualAnimation", ent.ToCoordinates());

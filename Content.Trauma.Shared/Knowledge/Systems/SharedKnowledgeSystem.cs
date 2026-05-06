@@ -270,6 +270,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         if (GetKnowledge(ent, id) is not { } unit)
         {
+            // Can't add it with experience if you can't comprehend complexity.
+            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+                return;
+
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
                 EnsureKnowledge(ent, id, 0, popup);

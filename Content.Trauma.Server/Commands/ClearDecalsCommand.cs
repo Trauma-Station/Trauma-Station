@@ -17,8 +17,7 @@ public sealed class ClearDecalsCommand : IConsoleCommand
     public string Description => "Clear all decals in the game, including uncleanable ones";
     public string Help => "cleardecals";
 
-    private DecalSystem? _decal;
-    private List<uint> _decals = new();
+    private List<EntityUid> _decals = new();
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -27,21 +26,18 @@ public sealed class ClearDecalsCommand : IConsoleCommand
             shell.WriteLine("This command does not accept any arguments");
             return;
         }
-        _decal ??= _entMan.System<DecalSystem>();
 
-        var query = _entMan.EntityQueryEnumerator<DecalGridComponent>();
-        while (query.MoveNext(out var gridUid, out var decal))
+        _decals.Clear();
+        var query = _entMan.EntityQueryEnumerator<DecalComponent>();
+        while (query.MoveNext(out var uid, out _))
         {
-            _decals.Clear();
-            foreach (var id in decal.DecalIndex.Keys)
-            {
-                _decals.Add(id);
-            }
+            // TODO: could have an option to leave uncleanable ones
+            _decals.Add(uid);
+        }
 
-            foreach (var id in _decals)
-            {
-                _decal.RemoveDecal(gridUid, id, decal);
-            }
+        foreach (var uid in _decals)
+        {
+            _entMan.DeleteEntity(uid);
         }
     }
 }

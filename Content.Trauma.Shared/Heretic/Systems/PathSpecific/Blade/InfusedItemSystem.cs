@@ -90,7 +90,7 @@ public sealed class InfusedItemSystem : EntitySystem
         raiser.Blackboard[SharedHereticRitualSystem.Mind] = mind;
 
         _effects.TryApplyEffect(target, ent.Comp.InfusedHitEffect, (ent, raiser), args.User);
-        _grasp.ApplyMark(target, path, heretic.PathStage);
+        _grasp.ApplyMark(target, path, heretic.PassiveLevel);
 
         raiser.Blackboard.Clear();
         SpendInfusionCharges(ent);

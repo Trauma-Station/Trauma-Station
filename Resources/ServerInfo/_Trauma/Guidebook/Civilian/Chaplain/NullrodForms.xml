@@ -22,14 +22,6 @@
     <GuideEntityEmbed Entity="FoodMeatBacon"/>
   </Box>
 
-  ## Atheist Fedora
-  Truely the thinking man's nullrod form. When thrown will recall to the user like an improved boomerang, but can still fail to get to you, so don't run off without a thought.
-  <Box>
-    <GuideEntityEmbed Entity="AtheistFedora"/>
-    <GuideEntityEmbed Entity="AltarNanotrasen"/>
-    <GuideEntityEmbed Entity="SheetPlasteel1"/>
-  </Box>
-
   ## Bulwark
   Stand as the lord protector. A truely powerful shield capable of blocking all hostile attacks when positioned on a tile. Additonally can be used to dash a short distance periodically, which will knockback and harm anyone hit along the way.
   <Box>

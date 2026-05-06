@@ -31,7 +31,9 @@ public sealed partial class RiposteData(
     BaseRiposteCheckEvent? canRiposteEvent)
 {
     // Default values for blade heretic
-    public RiposteData() : this(20f,
+    public RiposteData() : this(20f) { }
+
+    public RiposteData(float cooldown) : this(cooldown,
         true,
         new() { Tags = new() { "HereticBlade", }, },
         true,

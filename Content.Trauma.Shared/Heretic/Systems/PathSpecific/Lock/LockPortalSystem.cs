@@ -13,7 +13,6 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Teleportation;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
@@ -30,8 +29,13 @@ public sealed class LockPortalSystem : EntitySystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedHereticSystem _heretic = default!;
     [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private readonly EntityLookupSystem _look = default!;
+
+    private readonly List<Entity<DoorComponent, TransformComponent>> _possibleDestinations = new();
+    private readonly HashSet<Entity<PhysicsComponent>> _intersecting = new();
 
     public const int LockPortalMask = (int) CollisionGroup.InteractImpassable;
+    public const int BlockerTeleportMask = (int) CollisionGroup.Impassable;
 
     public override void Initialize()
     {
@@ -135,8 +139,6 @@ public sealed class LockPortalSystem : EntitySystem
         Entity<DoorComponent?, TransformComponent?, DoorBoltComponent?> destination,
         bool addTimeout)
     {
-        var coords = Transform(uid).Coordinates;
-
         if (!Resolve(destination, ref destination.Comp1, ref destination.Comp2, false))
             return;
 
@@ -155,6 +157,19 @@ public sealed class LockPortalSystem : EntitySystem
             _door.SetBoltsDown((destination, destination.Comp3), false);
 
         _door.StartOpening(destination, destination.Comp1);
+
+        _intersecting.Clear();
+        _look.GetEntitiesInRange(to, 0.1f, _intersecting, LookupFlags.Static);
+        foreach (var (blocker, body) in _intersecting)
+        {
+            if (blocker == destination.Owner)
+                continue;
+
+            if ((body.CollisionLayer & BlockerTeleportMask) == 0)
+                continue;
+
+            PredictedQueueDel(blocker);
+        }
 
         if (addTimeout)
         {
@@ -192,17 +207,18 @@ public sealed class LockPortalSystem : EntitySystem
             return null;
 
         var query = EntityQueryEnumerator<DoorComponent, PhysicsComponent, TransformComponent>();
-        List<Entity<DoorComponent, TransformComponent>> possibleDestinations = new();
+        _possibleDestinations.Clear();
         while (query.MoveNext(out var uid, out var door, out var body, out var xform))
         {
-            if ((body.CollisionLayer & LockPortalMask) == 0 || uid == ourAirlock ||
+            if (!door.BumpOpen && !door.ClickOpen ||
+                (body.CollisionLayer & LockPortalMask) == 0 || uid == ourAirlock ||
                 xform.MapID != ourXform.MapID ||
                 xform.GridUid != ourXform.GridUid)
                 continue;
 
-            possibleDestinations.Add((uid, door, xform));
+            _possibleDestinations.Add((uid, door, xform));
         }
 
-        return possibleDestinations.Count == 0 ? null : _random.Pick(possibleDestinations);
+        return _possibleDestinations.Count == 0 ? null : _random.Pick(_possibleDestinations);
     }
 }

@@ -123,7 +123,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         if (_player.LocalSession?.AttachedEntity is not { } entity)
             return;
 
-        var ev = new RefreshEquipmentHudEvent<T>(TargetSlots, WorksInHands); // Goob edit
+        var ev = new RefreshEquipmentHudEvent<T>(TargetSlots, entity, WorksInHands); // Trauma - added entity and WorksInHands
         RaiseLocalEvent(entity, ref ev);
 
         if (ev.Active)

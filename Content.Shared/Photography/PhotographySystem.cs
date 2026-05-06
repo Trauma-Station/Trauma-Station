@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using Content.Shared.EntityTable;
 using Content.Shared.Examine;
 using Content.Shared.Flash;
@@ -79,6 +82,16 @@ public sealed class PhotographySystem : EntitySystem
                 description = null;
                 nameText = Loc.GetString("photograph-name-text-photograph");
             }
+
+            // <Trauma>
+            var ev = new CanSeeOnCameraEvent(target.Value);
+            RaiseLocalEvent(target.Value, ref ev);
+            if (ev.Cancelled)
+            {
+                description = null;
+                nameText = null;
+            }
+            // </Trauma>
         }
 
         foreach (var prototype in tableResult)

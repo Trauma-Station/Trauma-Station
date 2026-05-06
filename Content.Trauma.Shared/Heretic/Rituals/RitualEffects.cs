@@ -158,6 +158,13 @@ public sealed partial class UpdateKnowledgeEffect : BaseRitualEffect<UpdateKnowl
     public float Amount;
 }
 
+public sealed partial class
+    SetHereticAvailablePassiveLevelEffect : BaseRitualEffect<SetHereticAvailablePassiveLevelEffect>
+{
+    [DataField]
+    public int Level = 2;
+}
+
 public sealed partial class RemoveRitualsEffect : BaseRitualEffect<RemoveRitualsEffect>
 {
     [DataField(required: true)]

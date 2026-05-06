@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Common.Heretic;
@@ -50,3 +51,36 @@ public record struct GetGrabMovespeedEvent(float Speed);
 
 [ByRefEvent]
 public record struct CanStandWhileImmobileEvent(bool CanStand = false);
+
+[ByRefEvent]
+public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier);
+
+[ByRefEvent]
+public record struct GetExamineRangeEvent(float Range);
+
+[ByRefEvent]
+public record struct ShouldBlockContextMenuEvent(EntityUid Target, bool ShouldBlock = false);
+
+[ByRefEvent]
+public record struct GetFirestackPassiveModifierEvent(bool OnFire, bool Resisting, float Modifier) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;
+}
+
+[ByRefEvent]
+public record struct ShouldExtinguishInSpaceEvent(bool Cancelled = false) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;
+}
+
+[ByRefEvent]
+public record struct NoFirestacksUpdateEvent(EntityUid Uid, bool Handled = false) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;
+}
+
+[ByRefEvent]
+public record struct CanSeeOnCameraEvent(EntityUid Uid, bool Cancelled = false) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;
+}
