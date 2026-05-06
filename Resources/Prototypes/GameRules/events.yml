@@ -40,6 +40,7 @@
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
     - id: SpiderSpawnHorde
+    - id: CoconutCrabSpawn
     - !type:NestedSelector
       tableId: BasicAntagEventsTrauma
     # </Trauma>
@@ -205,6 +206,7 @@
   parent: BaseGameRule
   id: DragonSpawn
   components:
+  - type: GhostroleAlert # Trauma
   - type: StationEvent
     weight: 1 # Trauma - Was 3
     earliestStart: 50 # Trauma, was 30
@@ -238,6 +240,7 @@
   id: NinjaSpawn
   components:
   # <Trauma>
+  - type: GhostroleAlert
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
@@ -601,6 +604,7 @@
   parent: BaseNukeopsRule
   id: LoneOpsSpawn
   components:
+  - type: GhostroleAlert # Trauma
   - type: StationEvent
     earliestStart: 50 # trauma, was 35
     weight: 1 # Trauma - was 5.5

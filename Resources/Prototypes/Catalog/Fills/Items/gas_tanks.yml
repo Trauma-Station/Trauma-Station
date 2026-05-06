@@ -1,25 +1,3 @@
-# SPDX-FileCopyrightText: 2021 Kara D <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Fooberticus Bazly <34943053+fooberticus@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Myctai <108953437+Myctai@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 fooberticus <fooberticus@protonmail.com>
-# SPDX-FileCopyrightText: 2023 Danger Revolution! <142105406+DangerRevolution@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 DangerRevoltion <142105406+DangerRevoltion@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Errant <35878406+dmnct@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Kevin Zheng <kevinz5000@gmail.com>
-# SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 sneb <96957003+snebl@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
 # Moles calculation
 #
 #   moles = 1000 / (8.31446261 * 293.15 / volume)
@@ -48,7 +26,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 31 minutes
       volume: 5
@@ -62,7 +40,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 4 minutes
       volume: 0.66
@@ -76,7 +54,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 4 minutes
       volume: 0.66
@@ -91,7 +69,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 9 minutes
       volume: 1.5
@@ -105,7 +83,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 9 minutes
       volume: 1.5
@@ -120,7 +98,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 15 minutes
       volume: 2.5
@@ -134,7 +112,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 21.3
+    releasePressure: 21.3
     air:
       # 15 minutes
       volume: 2.5
@@ -148,7 +126,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 22.4
+    releasePressure: 22.4
     air:
       # 4 minutes
       volume: 0.66
@@ -164,7 +142,7 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 101.3
+    releasePressure: 101.3
     air:
       # 6 minutes due to output pressure
       volume: 5
@@ -200,7 +178,7 @@
     #  * 101.325 | one atmosphere
     # __________
     #    30.3975   optimal output pressure
-    outputPressure: 30.4
+    releasePressure: 30.4
     air:
       # only 22 minutes due to pressure
       volume: 5
@@ -217,10 +195,95 @@
   suffix: Filled
   components:
   - type: GasTank
-    outputPressure: 5.325
+    releasePressure: 5.325 # Trauma - was 101.3, plasmamen can use it now so lower
     air:
       # 125.2 minutes with plasmaman lungs
       volume: 5
       moles:
         Plasma: 2.051379050
       temperature: 293.15
+
+- type: entity
+  parent: AirTank
+  id: MaxCap # As of currently writing, tanks have an explosion intensity of about 125, which is about as powerful as an explosive grenade.
+  suffix: DEBUG, Max Cap
+  components:
+  - type: GasTank
+    air:
+      volume: 5
+      moles:
+        Oxygen: 1.0 # If trit fire burn ratio is ever changed, this value will need to be adjusted.
+        Tritium: 0.5
+      temperature: 373.149
+
+- type: entity
+  parent: EmergencyOxygenTank
+  id: MaxCapSmall # As of currently writing, mini tanks have an explosion intensity of about 40.
+  suffix: DEBUG, Max Cap
+  components:
+  - type: GasTank
+    air:
+      volume: 0.66
+      moles:
+        Oxygen: 0.1 # If trit fire burn ratio is ever changed, this value will need to be adjusted.
+        Tritium: 0.05
+        Plasma: 0.06 # High mass to slow flow rate
+      temperature: 373.149
+
+- type: entity
+  parent: ExtendedEmergencyOxygenTank
+  id: MaxCapSmallEx # As of currently writing, extended tanks currently have an explosive intensity of about 65
+  suffix: DEBUG, Max Cap
+  components:
+  - type: GasTank
+    air:
+      volume: 1.5
+      moles:
+        Oxygen: 0.41027581
+        Tritium: 0.205137905
+      temperature: 373.149
+
+- type: entity
+  parent: DoubleEmergencyOxygenTank
+  id: MaxCapSmallDouble # As of currently writing, extended tanks currently have an explosive intensity of about 85
+  suffix: DEBUG, Max Cap
+  components:
+  - type: GasTank
+    air:
+      volume: 2.5
+      moles:
+        Oxygen:  0.68379301666
+        Tritium: 0.34189650833
+      temperature: 373.149
+
+- type: entity
+  parent: AirTank
+  id: MaxCapSilly
+  name: max cap
+  suffix: DEBUG, Max Cap, Impossible
+  components:
+  - type: GasTank
+    air:
+      volume: 5
+      moles:
+        Oxygen: 6
+        Tritium: 3
+      temperature: 373.149
+
+- type: entity
+  parent: AirTank
+  id: MaxCapBluespace
+  name: max cap
+  suffix: DEBUG, Max Cap, Canister
+  components:
+  - type: Explosive
+    maxIntensity: 200
+  - type: GasTank
+    safetyPressure: 5066.25
+    overpressure: 15198.75
+    air:
+      volume: 1500
+      moles:
+        Oxygen: 1400
+        Tritium: 700
+      temperature: 373.149

@@ -78,5 +78,8 @@
     FoodDonutHomer: 12
     FoodBoxDonut: 2
     #box evidence
-  emaggedInventory: # Goobstation
-    SarinGasGrenade: 1
+  # <Trauma>
+  emaggedInventory:
+    SarinGasGrenade: 2
+    EmpGrenade: 2
+  # </Trauma>

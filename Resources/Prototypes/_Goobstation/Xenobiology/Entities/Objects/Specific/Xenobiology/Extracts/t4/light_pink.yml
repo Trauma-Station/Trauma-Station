@@ -14,7 +14,7 @@
       methods: [ Touch, Injection ]
       effects:
       - !type:NestedEffect
-        proto: XenobioExtractReagent
+        proto: XenobioExtractReaction
       - !type:DoSmokeEffect
         duration: 15
         spreadAmount: 50

@@ -58,7 +58,11 @@
         length: 2.5
   - type: Item
     heldPrefix: off
-    size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # </Trauma>
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunprod.rsi
     quickEquip: false

@@ -36,9 +36,7 @@ public sealed class GenericFieldSystem : EntitySystem
 
     private void OnShutdown(Entity<GenericFieldComponent> field, ref ComponentShutdown args)
     {
-        if (field.Comp.SourceGen == null)
-            return;
-
-        _generator.FieldDestroyed(field.Comp.SourceGen.Value);
+        if (field.Comp.SourceGen is {} source)
+            _generator.FieldDestroyed(source);
     }
 }

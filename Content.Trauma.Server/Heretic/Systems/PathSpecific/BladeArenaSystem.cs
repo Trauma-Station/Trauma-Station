@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
-using Content.Goobstation.Server.Wizard.Systems;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Wounds;
 using Content.Server.Antag;
@@ -21,6 +20,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Content.Trauma.Server.Heretic.Components.PathSpecific;
+using Content.Trauma.Server.Wizard.Systems;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Events;

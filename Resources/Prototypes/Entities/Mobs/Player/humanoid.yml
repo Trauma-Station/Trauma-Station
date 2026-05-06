@@ -11,6 +11,7 @@
   - IPC # Your EMP (when you're nukie, DS or ninja) can easily kill you. TODO: Make EMPImmune component for these roles?
   - Diona # Lack of legs makes it weaker than other species in combat
   - Plasmaman # Do i need to fucking say it?
+  - Decapoid
   # </Trauma>
   components:
     - type: RandomHumanoidAppearance

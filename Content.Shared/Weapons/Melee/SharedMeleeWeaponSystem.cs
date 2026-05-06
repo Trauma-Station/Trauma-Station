@@ -1,12 +1,11 @@
 // <Trauma>
-using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Common.Parry;
+using Content.Trauma.Common.Weapons;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
 using Content.Shared.Coordinates;
-using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -76,6 +75,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
+
+    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
 
     public const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque); // WD EDIT: private -> public
 
@@ -454,6 +455,23 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 if (weaponUid == target)
                     return false;
 
+                // <Trauma>
+                if (target is not { } t)
+                {
+                    if (!weapon.CanMiss)
+                        return false;
+                }
+                else
+                {
+                    if (!weapon.CanMiss && (TerminatingOrDeleted(t) || !HasComp<DamageableComponent>(t)))
+                        return false;
+
+                    var whitelist = light.IsLeftClick ? weapon.ClickAttackWhitelist : weapon.AltClickAttackWhitelist;
+                    if (_whitelist.IsWhitelistFail(whitelist, t))
+                        return false;
+                }
+                // </Trauma>
+
                 // Goobstation start
                 var specialEv = new LightAttackSpecialInteractionEvent(target, user, weapon.Range);
                 RaiseLocalEvent(weaponUid, ref specialEv);
@@ -615,8 +633,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         // Goobstation start
-        var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.Harm);
-        RaiseLocalEvent(target.Value, beforeEvent);
+        var beforeEvent = new BeforeHarmfulActionEvent(user, target.Value, HarmfulActionType.Harm);
+        RaiseLocalEvent(target.Value, ref beforeEvent);
         if (beforeEvent.Cancelled)
             return;
         // Goobstation end
@@ -771,17 +789,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         var targets = new List<EntityUid>();
-        var damageQuery = GetEntityQuery<DamageableComponent>();
-
         foreach (var entity in entities)
         {
             if (entity == user ||
-                !damageQuery.HasComponent(entity))
+                !_damageQuery.HasComponent(entity))
                 continue;
 
             // Goobstation start
-            var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.Harm);
-            RaiseLocalEvent(entity, beforeEvent);
+            var beforeEvent = new BeforeHarmfulActionEvent(user, entity, HarmfulActionType.Harm);
+            RaiseLocalEvent(entity, ref beforeEvent);
             if (beforeEvent.Cancelled)
                 continue;
             // Goobstation end
@@ -1039,8 +1055,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return false;
 
         // Goobstation start
-        var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.Disarm);
-        RaiseLocalEvent(target, beforeEvent);
+        var beforeEvent = new BeforeHarmfulActionEvent(user, target, HarmfulActionType.Disarm);
+        RaiseLocalEvent(target, ref beforeEvent);
         if (beforeEvent.Cancelled)
             return false;
 

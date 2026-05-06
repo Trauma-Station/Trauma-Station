@@ -2,6 +2,7 @@
   parent: BaseXenomorphsRule
   id: XenomorphsInfestation
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 1.5
     duration: null

@@ -2,6 +2,7 @@
 
 using Content.Shared.Body;
 using Content.Shared.Chat;
+using Content.Shared.Speech;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
@@ -15,7 +16,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private readonly MetaDataSystem _meta = default!;
-
     [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     private void InitializeLanguage()
@@ -32,7 +32,8 @@ public abstract partial class SharedKnowledgeSystem
             after: [ typeof(InitialBodySystem) ]);
 
         // Experience methods
-        SubscribeLocalEvent<LanguageSpeakerComponent, EntitySpokeEvent>(OnLanguageSpoke);
+        SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ListenEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -145,6 +146,12 @@ public abstract partial class SharedKnowledgeSystem
 
         // We add the intrinsically known languages first so other systems can manipulate them easily
         var lang = args.Language;
+        if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
+        {
+            UpdateEntityLanguages(ent);
+            return;
+        }
+
         EnsureKnowledge(brain, LanguageUnit(args.Language), 26);
 
         UpdateEntityLanguages(ent);
@@ -201,6 +208,10 @@ public abstract partial class SharedKnowledgeSystem
 
         foreach (var (lang, speaks) in allLanguages)
         {
+            if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
+                continue;
+
+            // Add if you don't know shit.
             if (EnsureKnowledge(brain, LanguageUnit(lang), 26) is not { } unit)
             {
                 Log.Error($"Failed to add language knowledge {lang} to {ToPrettyString(ent)}!");
@@ -216,7 +227,7 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageSpoke(Entity<LanguageSpeakerComponent> ent, ref EntitySpokeEvent args)
+    public void OnLanguageSpoke(Entity<KnowledgeHolderComponent> ent, ref EntitySpokeEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
             return;
@@ -231,12 +242,25 @@ public abstract partial class SharedKnowledgeSystem
         var comp = _langQuery.Comp(unit);
 
         var now = _timing.CurTime;
-        if (now < comp.LastSpoken)
-            return; // on cooldown for xp
 
-        AddExperience(unit.AsNullable(), ent, (int) Math.Clamp((now - comp.LastSpoken).TotalSeconds, 0, 4));
+        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn. Doesn't award anything for small sentences. Already does auto xp shit.
 
-        comp.LastSpoken = now + TimeSpan.FromSeconds(5);
         Dirty(unit, comp);
     }
+
+    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
+    {
+        if (args.Source == ent.Owner)
+            return; // Same person, no need.
+
+        // Already Obfuscating.
+
+        if (GetContainer(ent.Owner) is not { } brain)
+            return;
+
+        AddExperience(brain, args.Language.Id, Math.Min(args.Message.Length / 10, 8));
+    }
+
+    public EntityUid? GetActiveLanguage(EntityUid target)
+        => GetContainer(target)?.Comp.ActiveLanguage;
 }

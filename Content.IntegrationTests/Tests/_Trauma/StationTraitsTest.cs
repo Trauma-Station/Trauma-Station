@@ -8,7 +8,6 @@ using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-[TestFixture]
 public sealed class StationTraitsTest : GameTest
 {
     /// <summary>

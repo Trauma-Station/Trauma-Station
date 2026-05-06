@@ -26,15 +26,15 @@
         Slash: 0.5
         Piercing: 0.5
         Heat: 0.5
-        Caustic: 0.5
+        Caustic: 0.8
     traumaDeductions:
-      Dismemberment: 0.5
-      OrganDamage: 0.5
-      BoneDamage: 0.5
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
       VeinsDamage: 0.0
   - type: ExplosionResistance
-    damageCoefficient: 0.25
-  - type: ToggleableClothing # Goobstation - Modsuits change
+    damageCoefficient: 0.65
+  - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHeretic
   - type: ModifyDelayedKnockdown
@@ -46,14 +46,109 @@
     hiddenSlots:
     - jumpsuit
   - type: FireProtection
-    reduction: 0.4
-  - type: TemperatureProtection
-    heatingCoefficient: 0.5
-    coolingCoefficient: 0.5
+    reduction: 0.2
+  - type: HideHereticAura
+  - type: HereticClothing
+
+- type: entity
+  parent: ClothingOuterArmorHeretic
+  id: ClothingOuterArmorHereticRust
+  name: salvaged remains
+  description: Touching the folds of this plain robe seem to fill you with unease. Even looking fills you with a sense of vertigo. Some pulse threatening to pull you within.
+  suffix: Rust
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHatHoodHereticRust
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.7
+        Caustic: 0.7
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+  - type: FireProtection
+    reduction: 0.3
+  - type: SalvagedRemains
+  - type: Appearance
+  - type: ItemToggle
+    onActivate: false
+    onUse: false
+    wieldToggle: false
+  - type: ToggleAnimation
+    continueReverseAnimation: true
+    toggleOnTime: 2.3
+    toggleOffTime: 1.4
+  - type: ClothingToggleAnimationVisuals
+    state:
+    - TogglingOn
+    - On
+    - TogglingOff
+  - type: ComponentToggler
+    components:
+    - type: Armor
+      coverage:
+      - Torso
+      - Arm
+      - Hand
+      - Leg
+      - Foot
+      - Tail
+      modifiers:
+        coefficients:
+          Blunt: 0.4
+          Slash: 0.4
+          Piercing: 0.4
+          Heat: 0.4
+          Caustic: 0.4
+      traumaDeductions:
+        Dismemberment: 0.4
+        OrganDamage: 0.4
+        BoneDamage: 0.4
+        VeinsDamage: 0.0
+    - type: ExplosionResistance
+      damageCoefficient: 0
+    - type: FireProtection
+      reduction: 0.6
+    deactivateComponents:
+    - type: Armor
+      coverage:
+      - Torso
+      - Arm
+      - Hand
+      - Leg
+      - Foot
+      - Tail
+      modifiers:
+        coefficients:
+          Blunt: 0.7
+          Slash: 0.7
+          Piercing: 0.7
+          Heat: 0.7
+          Caustic: 0.7
+      traumaDeductions:
+        Dismemberment: 0.2
+        OrganDamage: 0.2
+        BoneDamage: 0.2
+        VeinsDamage: 0.0
+    - type: ExplosionResistance
+      damageCoefficient: 0.50
+    - type: FireProtection
+      reduction: 0.3
 
 - type: entity
   parent: ClothingOuterArmorHeretic
   id: ClothingOuterArmorHereticVoid
+  name: hollow weave
+  description: At first, the empty canvas of this robe seems to shimmer with a faint, cold light. Yet upon tracking the shape of the folds more carefully, it is better to describe it as the absence of such a thing.
   suffix: Void
   components:
   - type: Sprite
@@ -64,10 +159,34 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticVoid
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.5
+        Caustic: 0.6
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0.0
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+  - type: FireProtection
+    reduction: 0.4
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
+  - type: HollowWeave
+  - type: TemperatureProtection
+    coolingCoefficient: 0.01
 
 - type: entity
   parent: ClothingOuterArmorHeretic
   id: ClothingOuterArmorHereticAsh
+  name: scorched mantle
+  description: Left to burn to tatters, what remains is naught but a blackened echo of the mantle of the Watch. Yet the soot-choked folds turn blade and flame from the form within. A brief reprieve before its gaze turns inwards.
   suffix: Ash
   components:
   - type: Sprite
@@ -78,10 +197,29 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticAsh
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.4
+        Heat: 0.5
+        Caustic: 0.8
+  - type: FireProtection
+    reduction: 1
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+  - type: TemperatureProtection
+    heatingCoefficient: 0.01
+  - type: ScorchedMantle
 
 - type: entity
   parent: ClothingOuterArmorHeretic
   id: ClothingOuterArmorHereticFlesh
+  name: writhing embrace
+  description: A rotten carcass, or perhaps several, twisted into fleshy polyps, knotted intestines and cracked bone. How one 'wears' this baffles reasonable understanding. It moves when it believes itself unobserved.
   suffix: Flesh
   components:
   - type: Sprite
@@ -89,13 +227,42 @@
     state: icon
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/flesh_armor.rsi
+    equipSound:
+      collection: OrganInteraction
+    unequipSound:
+      collection: OrganInteraction
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticFlesh
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.6
+        Heat: 0.7
+        Caustic: 0
+  - type: FireProtection
+    reduction: 0
+  - type: Storage
+    storageOpenSound:
+      collection: OrganInteraction
+  - type: EmitSoundOnPickup
+    sound:
+      collection: OrganInteraction
+  - type: EmitSoundOnDrop
+    sound:
+      collection: OrganInteraction
+  - type: EmitSoundOnLand
+    sound:
+      collection: OrganInteraction
+  - type: SpawnMimicsOnDamage
 
 - type: entity
   parent: ClothingOuterArmorHeretic
   id: ClothingOuterArmorHereticBlade
+  name: shattered panoply
+  description: The sharpened edges of this ancient suit of armor assert a revelation known to aspirants of battle; a true warrior can not be distinguished from the blade they wield.
   suffix: Blade
   components:
   - type: Sprite
@@ -106,10 +273,34 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticBlade
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.5
+        Caustic: 0.5
+    traumaDeductions:
+      Dismemberment: 0.5
+      OrganDamage: 0.5
+      BoneDamage: 0.5
+      VeinsDamage: 0.0
+  - type: Insulated
+  - type: FireProtection
+    reduction: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    cancel: true
+  - type: StaminaResistance
+    damageCoefficient: 0.3
 
 - type: entity
   parent: ClothingOuterArmorHeretic
   id: ClothingOuterArmorHereticCosmos
+  name: starwoven cloak
+  description: Gleaming gems conjure forth wisps of power, turning about to illuminate the wearer in a dim radiance. Gazing upon the robe, you cannot help but feel noticed.
   suffix: Cosmos
   components:
   - type: Sprite
@@ -120,10 +311,24 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticCosmos
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.6
+        Heat: 0.4
+        Caustic: 0.8
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
+  - type: MovementIgnoreGravityClothing
+  - type: TemperatureProtection
+    coolingCoefficient: 0.01
 
 - type: entity
   parent: ClothingOuterArmorHeretic
   id: ClothingOuterArmorHereticLock
+  name: shifting guise
   suffix: Lock
   components:
   - type: Sprite
@@ -134,6 +339,25 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticLock
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.6
+        Caustic: 0.6
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0.0
+  - type: DigitalCamouflage
+  - type: ClothingGrantComponent
+    component:
+    # This thing is hardcoded to either shoes or entity itself in mover controller
+    - type: FootstepModifier
+      footstepSoundCollection: null
 
 - type: entity
   parent: [ ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseMagicalContraband ]
@@ -171,7 +395,7 @@
       VeinsDamage: 0.0
   - type: ExplosionResistance
     damageCoefficient: 0.7
-  - type: ToggleableClothing # Goobstation - Modsuits change
+  - type: ToggleableClothing
     stripDelay: null
     clothingPrototypes:
       head: ClothingHeadHatHoodVoidCloakHeretic
@@ -180,8 +404,8 @@
     knockdownTimeDelta: -2
   - type: StaminaResistance
     damageCoefficient: 0.7
-  - type: HideContrabandContent #Goobstation Contraband detector
-  - type: UndetectableContraband #Goobstation Contraband detector
+  - type: HideContrabandContent
+  - type: UndetectableContraband
   - type: Storage
     storageOpenSound: null
     maxItemSize: Normal

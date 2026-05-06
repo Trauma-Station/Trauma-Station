@@ -18,7 +18,7 @@ public sealed class TriggerCosmicMarkEffectSystem : EntityEffectSystem<HereticCo
         ref EntityEffectEvent<TriggerCosmicMark> args)
     {
         var targetCoords = Transform(ent).Coordinates;
-        _starMark.SpawnCosmicField(targetCoords, ent.Comp.PathStage, predicted: false);
+        _starMark.SpawnCosmicField(targetCoords, ent.Comp.PassiveLevel, predicted: false);
 
         if (ent.Comp.CosmicDiamondUid is not {} dest || TerminatingOrDeleted(dest))
             return;

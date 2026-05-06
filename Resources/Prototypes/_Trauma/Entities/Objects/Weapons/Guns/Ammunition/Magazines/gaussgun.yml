@@ -1,0 +1,65 @@
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: BaseMagazineGaussgun
+  name: gauss magazine
+  suffix: Full
+  description:  15 round magazine for Gaussguns, can contain a variety of ammo types.
+  components:
+  - type: Tag
+    tags:
+    - MagazineGaussgun
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeGaussgun
+    proto: CartridgeBallBearing
+    capacity: 15
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/gaussgun.rsi
+    state: icon
+
+- type: entity
+  parent: [ BaseMagazineGaussgun ]
+  id: MagazineGaussgun
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: [ BaseMagazineGaussgun ]
+  id: MagazineGaussgunImprov
+  name: improvised gauss magazine
+  description: A low quality magazine for gauss guns, it will work in a pinch.
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+    capacity: 8
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/gaussgunimprov.rsi
+    state: icon
+  - type: Construction
+    graph: GaussImprovMagazineGraph
+    node: finish
+
+# Crafting
+
+- type: entity
+  parent: [BaseItem, BaseMajorContraband]
+  id: CraftingGaussMagazineImprov
+  name: unfinished improvised magazine
+  description: An unfinished magazine for a gauss weapon.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/mug_metal.rsi
+    state: icon
+  - type: Construction
+    graph: GaussImprovMagazineGraph
+    node: 1

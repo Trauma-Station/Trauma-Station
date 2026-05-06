@@ -39,3 +39,8 @@
 
     BoxLethalshot: 6
     BoxShotgunPractice: 3
+  # <Trauma>
+  emaggedInventory:
+    WeaponShotgunKammerer: 1
+    ClothingBeltBandolier: 1
+  # </Trauma>

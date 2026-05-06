@@ -1,27 +1,5 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+knowledge-path-ash-passive-desc-2 = Grants you immunity to ash storms.
+knowledge-path-ash-passive-desc-3 = Grants you immunity temporary blindness and vision blur.
 
 knowledge-path-ash-s1-name = Nightwatcher's Secret
 knowledge-path-ash-s1-desc =
@@ -36,6 +14,8 @@ knowledge-path-ash-s2-desc =
     The Nightwatcher was the first of them, his treason started it all. Their lantern, expired to ash - their watch, absent.
 
     Your Mansus Grasp will burn the eyes of the victim, damaging them and blurring their vision.
+    You become immune to high temperatures.
+    Upon reaching 4 fire stacks on your body, your spells will become empowered.
 
 knowledge-path-ash-s3-name = Mark of Ash
 knowledge-path-ash-s3-desc =
@@ -44,14 +24,15 @@ knowledge-path-ash-s3-desc =
     He shone brightly in the darkness, until the blaze begin to die.
 
     Your Mansus Grasp now applies the Mark of Ash. The mark is triggered from an attack with your Ashen Blade.
-    When triggered, the victim takes additional stamina and burn damage, and the mark is transferred to a nearby heathen.
+    When triggered, all your spells have their cooldown slightly reduced, the victim takes additional burn damage, and the mark is transferred to a nearby heathen.
     Damage dealt is decreased with each transfer.
 
-knowledge-path-ash-s4-name = Ashen Shift
+knowledge-path-ash-s4-name = Ashen Passsage
 knowledge-path-ash-s4-desc =
     He knew how to walk between the planes.
 
-    Grants you Ashen Passage, a spell that lets you phase out of reality and traverse a very short distance, passing though any walls.
+    Grants you Ashen Passage, a spell that lets you phase out of reality, allowing you to traverse a short distance, passing though any walls.
+    When empowered, it will break you out of any stuns and restraints, and will have a longer range.
 
 knowledge-path-ash-s5-name = Volcano Blast
 knowledge-path-ash-s5-desc =
@@ -60,15 +41,28 @@ knowledge-path-ash-s5-desc =
     Grants you Volcano Blast, a spell that - after a short charge - fires off a beam of energy at a nearby enemy,
     setting them on fire and burning them.
     If they do not extinguish themselves, the beam will continue to another target.
+    When empowered, lasts enemies with more flames.
 
-knowledge-path-ash-s6-name = Mask of Madness
+knowledge-path-ash-armor-name = Scorched Mantle
+knowledge-path-ash-armor-desc =
+    The Watch remain as they fell, crumbling away from sight.
+    Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen.
+
+    Allows you to transmute a table (or a suit), a mask and a match to create a Scorched Mantle.
+    It provides completes protection from fire, and is able to produce more flames passively if you are already on fire.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
+
+knowledge-path-ash-s6-name = Cracked Lantern
 knowledge-path-ash-s6-desc =
     The Nightwatcher was lost. That's what the Watch believed. Yet he walked the world, unnoticed by the masses.
 
-    Allows you to transmute any mask, a flare, a pool of ash, a lighter, a stun baton, and a liver to create a Mask of Madness.
-    The mask instills fear into heathens who witness it, causing stamina damage, hallucinations, and insanity.
-    It can also be forced onto a heathen, to make them unable to take it off...
-    Additionally, the mask grants you protection from fires and high temperature when worn.
+    Allows you to transmute a lantern or a flashlight, a flare, a pile of ash and a lighter to create a Cracked Lantern.
+    The lantern works as a flash that also ignites victims.
+    It is a home to Hint, a creature that reveals itself when you hold lantern in your hand.
+    Hint follows behind you and attacks enemies when nearby.
+    You can hit a person with the lantern, which will force Hint to follow that person.
+    After taking enough damage or moving too far away from the lantern, hint will return to you.
 
 knowledge-path-ash-s7-name = Fiery Blade
 knowledge-path-ash-s7-desc =
@@ -83,6 +77,7 @@ knowledge-path-ash-s8-desc =
 
     Grants you Nightwatcher's Rebirth, a spell that extinguishes you and burns all nearby heathens who are currently on fire, healing you for every victim afflicted.
     If any victims afflicted are in critical condition, they will also instantly die.
+    When empowered, damage and heal is increased.
 
 knowledge-path-ash-s9-name = Ashlord's Rite
 knowledge-path-ash-s9-desc =

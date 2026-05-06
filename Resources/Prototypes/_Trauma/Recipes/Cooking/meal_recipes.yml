@@ -152,3 +152,95 @@
   group: Savory
   solids:
     FoodBurgerBig: 10
+
+# Organic chocolate duped recipes -- if only we had tags
+- type: microwaveMealRecipe
+  id: RecipeOrganicCocoTart
+  name: chocolate lava tart recipe
+  result: FoodTartCoco
+  time: 15
+  group: Pie
+  reagents:
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughPie: 1
+    FoodSnackChocolateBarOrganic: 3
+    FoodPlateTin: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOrganicCookie
+  name: cookie recipe
+  result: FoodBakedCookie
+  time: 5
+  group: BarsAndCookies
+  reagents:
+    Flour: 5
+    Sugar: 5
+  solids:
+    FoodButterSlice: 1
+    FoodSnackChocolateBarOrganic: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOrganicChocolateChipPancake
+  name: chocolate chip pancake recipe
+  result: FoodBakedPancakeCc
+  time: 5
+  group: BarsAndCookies
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+  solids:
+    FoodSnackChocolateBarOrganic: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOrganicChocolateCake
+  name: chocolate cake recipe
+  result: FoodCakeChocolate
+  time: 5
+  group: Cake
+  solids:
+    FoodCakePlain: 1
+    FoodSnackChocolateBarOrganic: 2
+
+- type: microwaveMealRecipe
+  id: RecipeOrganicBrownies
+  name: brownie recipe
+  result: FoodBakedBrownieBatch
+  time: 25
+  group: BarsAndCookies
+  reagents:
+    Flour: 15
+    Sugar: 30
+    Egg: 18
+  solids:
+    FoodButter: 2
+    FoodSnackChocolateBarOrganic: 2
+
+- type: microwaveMealRecipe
+  id: RecipeMuffinOrganicChocolate
+  name: chocolate muffin recipe
+  result: FoodBakedMuffinChocolate
+  time: 15
+  group: Dessert
+  solids:
+    FoodPlateMuffinTin: 1
+    FoodDoughSlice: 1
+    FoodSnackChocolateBarOrganic: 1
+  reagents:
+    Sugar: 10
+
+- type: microwaveMealRecipe
+  id: RecipeOrganicCannabisBrownies
+  name: cannabis brownie recipe
+  result: FoodBakedCannabisBrownieBatch
+  time: 25
+  group: BarsAndCookies
+  reagents:
+    Flour: 15
+    Sugar: 30
+    Egg: 18
+  solids:
+    FoodCannabisButter: 2
+    FoodSnackChocolateBarOrganic: 2

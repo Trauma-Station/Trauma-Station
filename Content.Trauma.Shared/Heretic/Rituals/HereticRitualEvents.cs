@@ -27,3 +27,6 @@ public record struct HereticRitualConditionEvent<T>(T Condition, Entity<HereticR
 
     public readonly Entity<HereticRitualRaiserComponent> Ritual = Ritual;
 }
+
+[ByRefEvent]
+public readonly record struct HereticRitualOwnerSetEvent(EntityUid Owner);

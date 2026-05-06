@@ -5,7 +5,7 @@ using Content.Trauma.Shared.Silicon.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
 
-namespace Content.Goobstation.Shared.Emp;
+namespace Content.Trauma.Shared.Emp;
 
 public sealed class EmpStunSystem : EntitySystem
 {

@@ -8,6 +8,15 @@
     },
     "states": [
         {
+            "name": "flames"
+        },
+        {
+            "name": "flames_on"
+        },
+        {
+            "name": "worm_contract"
+        },
+        {
             "name": "hook_on"
         },
         {

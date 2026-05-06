@@ -133,6 +133,11 @@ namespace Content.Client.ContextMenu.UI
                 args.Function == ContentKeyFunctions.TryPullObject ||
                 args.Function == ContentKeyFunctions.MovePulledObject)
             {
+                // <Trauma>
+                if (!ShouldContextMenuClick(args.Function, entity.Value))
+                    return;
+                // </Trauma>
+
                 var inputSys = _systemManager.GetEntitySystem<InputSystem>();
 
                 var func = args.Function;
