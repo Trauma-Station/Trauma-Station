@@ -42,14 +42,23 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
     {
         _builder.Clear();
         var ratio = 1.0f;
-        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+        if (_knowledge.GetContainer(messageSource) is { } brain)
         {
-            if (_knowledge.GetMastery(skill.Comp) > 1)
-                ratio = 0.0f;
-            else
-                ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+            if (_knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+            {
+                if (_knowledge.GetMastery(skill.Comp) > 1)
+                    ratio = 0.0f;
+                else
+                    ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+            }
+        }
+        else
+        {
+            // In case source does not have a knowledge holder then speaks in perfect tongue.
+            ratio = 0.0f;
         }
 
+        // Catch incase obfuscation method doesn't use a ratio.
         if (ratio <= 0.0f)
             return message;
 
@@ -99,6 +108,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
+        // Kind of important that knowledge holders don't understand everything so they use the obfuscation logic override.
         return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && !HasComp<KnowledgeHolderComponent>(ent);
     }
 
