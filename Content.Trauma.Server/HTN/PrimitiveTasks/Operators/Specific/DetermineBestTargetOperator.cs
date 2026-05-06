@@ -10,7 +10,6 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Emag.Components;
-using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Security.Components;
@@ -22,7 +21,7 @@ using Robust.Shared.Audio.Systems;
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 [DataDefinition]
-public sealed partial class PickNearbyTargetOperator : HTNOperator
+public sealed partial class DetermineBestTargetOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
     private EntityLookupSystem _lookup = default!;
@@ -79,47 +78,14 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
         var ownerCoords = owner.ToCoordinates();
+        var targetLists = blackboard.GetValue<List<EntityUid>>(NPCBlackboard.TargetList);
 
-        var range = 12f;
-        List<EntityUid> entityList = new();
-
-        _entities.Clear();
-        _lookup.GetEntitiesInRange(ownerCoords, range, _entities);
-
-        int baseThreat = 0;
-        bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
-        if (isEmagged)
-            baseThreat += 10;
-
-        foreach (var entity in _entities)
-        {
-            // Is target a living target?
-            if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
-                continue;
-
-            int threatLevel = 0;
-            if (entity.Comp.StatusIcon == CriminalStatus)
-                threatLevel += 2;
-
-            threatLevel += _contra.FindContraband(entity.Owner).Count;
-
-            // Is target a threat?
-            if (threatLevel <= 0)
-                continue;
-
-            // Is threat brought to order
-            if (_cuffableQuery.TryComp(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
-                continue;
-
-            entityList.Add(entity.Owner);
-        }
-
-        if (entityList.Count <= 0)
+        if (targetLists.Count <= 0)
             return (false, null);
 
-        return (true, new Dictionary<string, object>()
+        foreach (var entity in targetLists)
         {
-            {NPCBlackboard.TargetList, entityList},
-        });
+
+        }
     }
 }
