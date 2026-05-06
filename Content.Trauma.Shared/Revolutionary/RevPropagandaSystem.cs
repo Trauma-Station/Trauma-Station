@@ -163,7 +163,7 @@ public sealed class RevPropagandaSystem : EntitySystem
             return;
         }
 
-        SpeakPropaganda(converter, user)
+        SpeakPropaganda(converter, user);
 
         if (converter.Comp.ConversionDuration == TimeSpan.Zero)
         {
