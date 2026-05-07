@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 heretic-influence-start = Draining influence...
 heretic-influence-require-drainer = You need a codex to drain influences.
 
@@ -16,6 +7,7 @@ heretic-knowledge-gain = You've learned something
 heretic-knowledge-loss = You're forgotten something
 
 heretic-clothing-component-fail = Cannot wear this!
+heretic-clothing-component-equip = You can feel yourself unravelling while you equip the {$item}!
 
 heretic-protective-blade-component-no-targets = No targets!
 
@@ -63,3 +55,8 @@ influence-heretic-examine-message =
         [3] for half the cost
         *[other] for free
     } upon reaching the required path stage.[/color]
+
+
+ui-options-special-volume = Special volume:
+
+block-context-menu-message = You cannot interact with {$entity} via context menu using {$item}!

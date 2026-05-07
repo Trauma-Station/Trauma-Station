@@ -49,13 +49,13 @@
     - state: star_ball
       shader: unshaded
   - type: Physics
-    canCollide: false
     bodyType: Dynamic
     linearDamping: 0
     angularDamping: 0
   - type: Reflective
     reflective: None
   - type: Projectile
+    penetrate: true
     impactEffect: EffectCosmicExplosion
     damage:
       types:

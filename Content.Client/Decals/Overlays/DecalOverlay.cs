@@ -50,12 +50,12 @@ public sealed class DecalOverlay : GridOverlay
         var xformSystem = _entMan.System<TransformSystem>();
         var eyeAngle = args.Viewport.Eye?.Rotation ?? Angle.Zero;
 
-        var gridAABB = xformSystem.GetInvWorldMatrix(xform).TransformBox(args.WorldBounds.Enlarged(1f));
+        var bounds = args.WorldBounds.Enlarged(1f);
         _decals.Clear();
         var query = _entMan.AllEntityQueryEnumerator<DecalComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var decalXform))
         {
-            if (comp.Data != default && gridAABB.Contains(decalXform.Coordinates.Position))
+            if (comp.Data != default && decalXform.MapID == args.MapId && bounds.Contains(xformSystem.GetWorldPosition(decalXform)))
                 _decals.Add(comp.Data);
         }
 

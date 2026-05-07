@@ -73,25 +73,6 @@
   - MicroBombImplanter
 
 - type: selectableSet
-  id: SyndicateSpecialForcesSet
-  name: selectable-set-syndicate-special-forces-name
-  description: selectable-set-syndicate-special-forces-description
-  sprite:
-    sprite: Structures/Storage/closet.rsi
-    state: cardboard
-  content:
-  - HoloCigar
-  - CigPackSyndicate
-  - EncryptionKeySyndie
-  - CQCManual
-  - ClothingHandsGlovesGorilla
-  - ClothingHeadHatSolidHeadband
-  - ClothingUniformJumpsuitOliveDrabs
-  - ClothingShoesBootsJackFilled
-  - StealthBox
-  - ClothingOuterArmourInvisibleSyndie
-
-- type: selectableSet
   id: SyndicateEngineerSet
   name: selectable-set-syndicate-engineer-name
   description: selectable-set-syndicate-engineer-description

@@ -21,6 +21,7 @@
   - type: AntagLoadProfileRule
     speciesHardOverride: Abductor
   - type: AntagSelection
+    agentName: abductor-round-end-agent-name
     definitions:
     - spawnerPrototype: LoneAbductorSpawner
       min: 1
@@ -96,6 +97,8 @@
   - type: GhostroleAlert
   - type: StationEvent
     minimumPlayers: 20
+    earliestStart: 45
+    weight: 3
   - type: AntagSelection
     definitions:
     - spawnerPrototype: AbductorScientistSpawner

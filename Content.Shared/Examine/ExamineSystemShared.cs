@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.Examine;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Eye.Blinding.Components;
@@ -154,7 +155,12 @@ namespace Content.Shared.Examine
                 if (TryComp<BlurryVisionComponent>(examiner, out var blurry))
                     return Math.Clamp(ExamineRange - blurry.Magnitude * ExamineBlurrinessMult, 2, ExamineRange);
             }
-            return ExamineRange;
+
+            // <Trauma>
+            var ev = new GetExamineRangeEvent(ExamineRange);
+            RaiseLocalEvent(examiner, ref ev);
+            return ev.Range;
+            // </Trauma>
         }
 
         /// <summary>
@@ -284,9 +290,13 @@ namespace Content.Shared.Examine
 
             var newMessage = examinedEvent.GetTotalMessage();
 
-            // Goobstation Change: I dont seem to have a way to get the event of examination to happen after EVERYTHING else, so fuck it.
+            // <Trauma> I dont seem to have a way to get the event of examination to happen after EVERYTHING else, so fuck it.
             var examineCompletedEvent = new ExamineCompletedEvent(newMessage, entity, examiner.Value);
-            RaiseLocalEvent(entity, examineCompletedEvent);
+            RaiseLocalEvent(entity, ref examineCompletedEvent);
+            var userEv = new UserExaminedEvent(newMessage, entity);
+            RaiseLocalEvent(examiner.Value, ref userEv);
+            newMessage = userEv.Message;
+            // </Trauma>
             // pop color tag
             newMessage.Pop();
 

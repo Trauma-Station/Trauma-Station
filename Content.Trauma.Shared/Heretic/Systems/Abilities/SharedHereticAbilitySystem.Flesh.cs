@@ -4,8 +4,7 @@ using Content.Medical.Common.Surgery;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
+using Content.Shared.Rejuvenate;
 using Content.Trauma.Common.Damage;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
@@ -47,15 +46,22 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnPoisonImmune(Entity<FleshPassiveComponent> ent, ref OnHealthChangeEvent args)
     {
-        args.Damage.ClampMax(0);
+        foreach (var (key, value) in args.Damage.DamageDict)
+        {
+            if (!ent.Comp.HealthChangeImmuneDamageTypes.Contains(key))
+                continue;
+
+            if (value > FixedPoint2.Zero)
+                args.Damage.DamageDict[key] = FixedPoint2.Zero;
+        }
     }
 
     private void OnTouchSpellUsed(Entity<FleshSurgeryComponent> ent, ref TouchSpellUsedEvent args)
     {
-        if (!HasComp<GhoulComponent>(args.Target))
+        if (!TryComp(args.Target, out GhoulComponent? ghoul))
             return;
         args.Invoke = true;
-        HealGhoul(args.Target, args.User);
+        HealGhoul((args.Target, ghoul));
     }
 
     private void OnIgnore(Entity<FleshSurgeryComponent> ent, ref HeldRelayedEvent<SurgeryIgnorePreviousStepsEvent> args)
@@ -68,13 +74,15 @@ public abstract partial class SharedHereticAbilitySystem
         args.Args.Cancelled = true;
     }
 
-    private void HealGhoul(EntityUid target, EntityUid user)
+    private void HealGhoul(Entity<GhoulComponent> target)
     {
-        IHateWoundMed(target, null, null, null);
-        if (TryComp(target, out MobStateComponent? mob))
-            _mobState.ChangeMobState(target, MobState.Alive, mob, user);
+        var ev = new RejuvenateEvent(false, false);
+        RaiseLocalEvent(target, ev);
         if (_mind.TryGetMind(target, out var mindId, out var mind))
             _mind.UnVisit(mindId, mind);
+        // In case some organs were restored after rejuvenate
+        if (target.Comp.DeathBehavior is not (GhoulDeathBehavior.Gib or GhoulDeathBehavior.GibOrgans))
+            _ghoul.MakeOrgansFragile(target);
     }
 
     private void OnFleshSurgeryUse(Entity<FleshSurgeryComponent> ent, ref UseInHandEvent args)
@@ -92,7 +100,7 @@ public abstract partial class SharedHereticAbilitySystem
         Lookup.GetEntitiesInRange(coords, ent.Comp.AreaHealRange, _lookupGhouls, LookupFlags.Dynamic);
         foreach (var ghoul in _lookupGhouls)
         {
-            HealGhoul(ghoul, args.User);
+            HealGhoul(ghoul);
         }
 
         var cd = _grasp.CalculateAreaGraspCooldown((float) touchSpell.Cooldown.TotalSeconds,
@@ -115,11 +123,12 @@ public abstract partial class SharedHereticAbilitySystem
 
     public virtual EntityUid? CreateFleshMimic(EntityUid uid,
         EntityUid user,
-        EntityUid userMind,
+        int minionId,
         bool giveBlade,
         bool makeGhostRole,
         FixedPoint2 hp,
-        EntityUid? hostile)
+        EntityUid? hostile,
+        bool hostileToUser)
     {
         return null;
     }

@@ -38,6 +38,9 @@
   id: Cement
 
 - type: Tag
+  id: CircularSaw
+
+- type: Tag
   id: CookedEgg
 
 - type: Tag
@@ -114,6 +117,9 @@
 
 - type: Tag
   id: IngotWorkableSteel
+
+- type: Tag
+  id: Lantern
 
 - type: Tag
   id: MagazineGaussgun

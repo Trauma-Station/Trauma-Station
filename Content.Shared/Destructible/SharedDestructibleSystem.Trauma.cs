@@ -82,6 +82,6 @@ public abstract partial class SharedDestructibleSystem
                 }
             }
         }
-        return damageNeeded;
+        return damageNeeded * destructible.Scale;
     }
 }

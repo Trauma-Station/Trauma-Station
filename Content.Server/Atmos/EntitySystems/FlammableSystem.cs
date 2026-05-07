@@ -3,6 +3,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Flammability;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Wizard;
 using Robust.Shared.Configuration;
 // </Trauma>
@@ -46,6 +47,7 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly CommonSpellbladeSystem _spellblade = default!;
         [Dependency] private readonly BodySystem _body = default!;
+        [Dependency] private readonly EntityQuery<FireImmunityComponent> _fireImmuneQuery = default!;
         // </Trauma>
         [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
@@ -482,6 +484,12 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (!flammable.OnFire)
                 {
+                    // <Trauma>
+                    var noFireEvent = new NoFirestacksUpdateEvent(uid);
+                    RaiseLocalEvent(uid, ref noFireEvent);
+                    if (noFireEvent.Handled)
+                        continue;
+                    // <Trauma>
                     _alertsSystem.ClearAlert(uid, flammable.FireAlert);
                     // Goobstation - from EE at 7b0949568d07df81b298251c6fce9be4d7d03f18 (https://github.com/Simple-Station/Einstein-Engines/pull/2462)
                     RemCompDeferred<OnFireComponent>(uid);
@@ -490,17 +498,17 @@ namespace Content.Server.Atmos.EntitySystems
 
                 _alertsSystem.ShowAlert(uid, flammable.FireAlert);
 
-                // goob edit - fire immunity
-                if (HasComp<FireImmunityComponent>(uid))
-                    continue;
-                // goob edit end
-
                 if (flammable.FireStacks > 0)
                 {
                     var air = _atmosphereSystem.GetContainingMixture(uid);
 
+                    // <Trauma>
+                    var spaceEv = new ShouldExtinguishInSpaceEvent();
+                    RaiseLocalEvent(uid, ref spaceEv);
+                    // </Trauma>
+
                     // If we're in an oxygenless environment, put the fire out.
-                    if (air == null || air.GetMoles(Gas.Oxygen) < 1f)
+                    if (!spaceEv.Cancelled && (air == null || air.GetMoles(Gas.Oxygen) < 1f)) // Trauma - spaceEv
                     {
                         Extinguish(uid, flammable);
                         continue;
@@ -509,10 +517,10 @@ namespace Content.Server.Atmos.EntitySystems
                     var source = EnsureComp<IgnitionSourceComponent>(uid);
                     _ignitionSourceSystem.SetIgnited((uid, source));
 
-                    if (TryComp(uid, out TemperatureComponent? temp))
+                    var isImmune = _fireImmuneQuery.HasComp(uid); // Trauma
+                    if (!isImmune && TryComp(uid, out TemperatureComponent? temp)) // Trauma - isImmune
                         _temperatureSystem.ChangeHeat(uid, _addHeatFirestack * flammable.FireStacks, false, temp); // goob edit: 12500 -> 1500
 
-                    var multiplier = 1f; // Goob
                     var ev = new GetFireProtectionEvent(uid); // Goobstation
                     // let the thing on fire handle it
                     RaiseLocalEvent(uid, ref ev);
@@ -520,17 +528,27 @@ namespace Content.Server.Atmos.EntitySystems
                     if (_inventoryQuery.TryComp(uid, out var inv))
                         _inventory.RelayEvent((uid, inv), ref ev);
 
-                    multiplier = Math.Clamp(ev.Multiplier + flammable.FireProtectionPenetration, 0f, 1f); // Goob
+                    var multiplier = Math.Clamp(ev.Multiplier + flammable.FireProtectionPenetration, 0f, 1f); // Goob
                     multiplier *= _body.GetVitalBodyPartRatio(uid); // Goob
 
-                    if (multiplier > 0f && !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid)) // Goob edit
+                    if (!isImmune && multiplier > 0f && !_spellblade.IsHoldingItemWithFireSpellbladeEnchantmentComponent(uid)) // Goob edit
                         _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks * multiplier, interruptsDoAfters: false, targetPart: TargetBodyPart.All, partMultiplier: 2f); // Lavaland: Nerf fire delimbing
 
-                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 15f : 1f), flammable, flammable.OnFire);
+                    // <Trauma>
+                    var fade = flammable.FirestackFade * (flammable.Resisting ? 15f : 1f);
+                    var modifierEv = new GetFirestackPassiveModifierEvent(flammable.OnFire, flammable.Resisting, fade);
+                    RaiseLocalEvent(uid, ref modifierEv);
+                    AdjustFireStacks(uid, modifierEv.Modifier, flammable, flammable.OnFire);
+                    // </Trauma>
                 }
                 else
                 {
-                    Extinguish(uid, flammable);
+                    // <Trauma>
+                    var noFireEvent = new NoFirestacksUpdateEvent(uid);
+                    RaiseLocalEvent(uid, ref noFireEvent);
+                    if (!noFireEvent.Handled)
+                        Extinguish(uid, flammable);
+                    // </Trauma>
                 }
             }
         }

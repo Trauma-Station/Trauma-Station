@@ -40,12 +40,14 @@ public sealed partial class BlockingComponent : Component
     /// The damage modifer to use while passively blocking
     /// </summary>
     [DataField("passiveBlockModifier", required: true)]
+    [AutoNetworkedField] // Trauma
     public DamageModifierSet PassiveBlockDamageModifer = default!;
 
     /// <summary>
     /// The damage modifier to use while actively blocking.
     /// </summary>
     [DataField("activeBlockModifier", required: true)]
+    [AutoNetworkedField] // Trauma
     public DamageModifierSet ActiveBlockDamageModifier = default!;
 
     [DataField]
@@ -68,6 +70,7 @@ public sealed partial class BlockingComponent : Component
     /// when not blocking
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Trauma
     public float PassiveBlockFraction = 0.5f;
 
     /// <summary>
@@ -75,5 +78,6 @@ public sealed partial class BlockingComponent : Component
     /// when blocking
     /// </summary>
     [DataField]
+    [AutoNetworkedField] // Trauma
     public float ActiveBlockFraction = 1.0f;
 }

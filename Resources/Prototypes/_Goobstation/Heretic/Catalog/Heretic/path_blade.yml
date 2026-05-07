@@ -111,6 +111,74 @@
     whitelist:
     - Blade
 
+- type: listing
+  id: HereticBladeArmor
+  name: knowledge-path-blade-armor-name
+  description: knowledge-path-blade-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ArmorBlade
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Blade
+
+- type: listing
+  id: HereticBladePassiveT2
+  name: knowledge-passive-upgrade-name-2
+  description: knowledge-path-blade-passive-desc-2
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_blade.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - BladePassiveT2
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 2
+    stage: 5
+    whitelist:
+    - Blade
+
+- type: listing
+  id: HereticBladePassiveT3
+  name: knowledge-passive-upgrade-name-3
+  description: knowledge-path-blade-passive-desc-3
+  icon: { sprite: _Goobstation/Heretic/Blades/blade_blade.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - BladePassiveT3
+  cost:
+    KnowledgePoint: 0
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    minPassiveLevel: 3
+    stage: 5
+    whitelist:
+    - Blade
+  - !type:BuyBeforeCondition
+    whitelist:
+    - HereticBladePassiveT2
+
 # side
 - type: listing
   id: HereticBladePath6

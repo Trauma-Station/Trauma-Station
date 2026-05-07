@@ -89,8 +89,8 @@ public sealed partial class ProcessIngredientsCondition : BaseRitualCondition<Pr
 {
     public override bool ForceApplyOnRitual => true;
 
-    [DataField(required: true)]
-    public RitualIngredient[] Ingredients = default!;
+    [DataField]
+    public List<RitualIngredient> Ingredients = new();
 
     [DataField(required: true)]
     public string DeleteEntitiesKey;
@@ -102,14 +102,6 @@ public sealed partial class ProcessIngredientsCondition : BaseRitualCondition<Pr
 public sealed partial class CanAscendCondition : BaseRitualCondition<CanAscendCondition>;
 
 public sealed partial class ObjectivesCompleteCondition : BaseRitualCondition<ObjectivesCompleteCondition>;
-
-public sealed partial class FilterKnowledgeTagsCondition : BaseRitualCondition<FilterKnowledgeTagsCondition>
-{
-    public override bool ForceApplyOnRitual => true;
-
-    [DataField(required: true)]
-    public string Result;
-}
 
 public sealed partial class TryApplyEffectSequenceCondition : BaseRitualCondition<TryApplyEffectSequenceCondition>
 {
@@ -138,6 +130,18 @@ public sealed partial class HereticMinStageCondition : EntityConditionBase<Heret
 {
     [DataField(required: true)]
     public int MinStage;
+
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
+    {
+        return string.Empty;
+    }
+}
+
+public sealed partial class HereticMinPassiveLevelCondition : EntityConditionBase<HereticMinPassiveLevelCondition>,
+    IHereticRitualEntry
+{
+    [DataField(required: true)]
+    public int MinLevel;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
     {

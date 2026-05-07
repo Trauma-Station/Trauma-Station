@@ -10,6 +10,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
+using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
@@ -33,6 +34,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatMan = default!;
     [Dependency] private readonly IPlayerManager _playerMan = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -71,7 +73,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
         _audio.PlayGlobal(ent.Comp.ExamineSound, session);
 
         var baseMessage = ent.Comp.ExamineBaseMessage;
-        var message = Loc.GetString(_random.Pick(ent.Comp.HeathenExamineMessages));
+        var message = _random.Pick(_proto.Index(ent.Comp.HeathenExamineMessages));
         var size = ent.Comp.FontSize;
         var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
         SharedChatSystem.UpdateFontSize(size, ref message, ref loc);

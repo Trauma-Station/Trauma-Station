@@ -16,47 +16,47 @@
     - to: gear
       steps:
       - tool: Hammering
-        doAfter: 5
+        doAfter: 1
       - tool: Welding
-        doAfter: 5
+        doAfter: 1
       - tool: Cutting
-        doAfter: 5
+        doAfter: 1
       - tool: Hammering
-        doAfter: 5
+        doAfter: 1
       - material: Steel
         amount: 4
       - tool: Welding
-        doAfter: 5
+        doAfter: 1
     - to: bolt
       steps:
       - tool: Cutting
-        doAfter: 5
+        doAfter: 1
       - tool: Hammering
-        doAfter: 5
+        doAfter: 1
       - tool: Cutting
-        doAfter: 5
+        doAfter: 1
       - material: Steel # extra steel welded to the top
         amount: 2
       - tool: Hammering
-        doAfter: 5
+        doAfter: 1
       - tool: Welding
-        doAfter: 5
+        doAfter: 1
       - tool: Anchoring
-        doAfter: 3
+        doAfter: 1
     - to: nut
       steps:
       - tool: Screwing
-        doAfter: 5
+        doAfter: 1
       - tool: Anchoring
-        doAfter: 5
+        doAfter: 1
       - tool: Hammering
-        doAfter: 5
+        doAfter: 1
       - tool: Cutting
-        doAfter: 4
+        doAfter: 1
       - tool: Hammering
-        doAfter: 6
+        doAfter: 1
       - tool: Anchoring
-        doAfter: 5
+        doAfter: 1
   - node: gear
     entity: RevGear
   - node: bolt

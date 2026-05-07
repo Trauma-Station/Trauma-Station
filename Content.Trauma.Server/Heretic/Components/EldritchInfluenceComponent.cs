@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Dataset;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Server.Heretic.Systems;
 using Robust.Shared.Audio;
@@ -31,26 +32,7 @@ public sealed partial class EldritchInfluenceComponent : Component
     public int FontSize = 22;
 
     [DataField]
-    public List<LocId> HeathenExamineMessages = new()
-    {
-        "fracture-examine-message-1",
-        "fracture-examine-message-2",
-        "fracture-examine-message-3",
-        "fracture-examine-message-4",
-        "fracture-examine-message-5",
-        "fracture-examine-message-6",
-        "fracture-examine-message-7",
-        "fracture-examine-message-7",
-        "fracture-examine-message-8",
-        "fracture-examine-message-9",
-        "fracture-examine-message-10",
-        "fracture-examine-message-11",
-        "fracture-examine-message-12",
-        "fracture-examine-message-13",
-        "fracture-examine-message-14",
-        "fracture-examine-message-15",
-        "fracture-examine-message-16",
-    };
+    public ProtoId<LocalizedDatasetPrototype> HeathenExamineMessages = "FractureHeathenExamineMessages";
 
     [DataField]
     public List<EntityEffect[]> PossibleExamineEffects = new();

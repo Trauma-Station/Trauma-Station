@@ -601,9 +601,6 @@
   id: WallLight
 
 - type: Tag
-  id: WaterTank
-
-- type: Tag
   id: WeaponDisabler
 
 - type: Tag
