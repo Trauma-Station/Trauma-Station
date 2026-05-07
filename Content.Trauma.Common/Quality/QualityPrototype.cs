@@ -23,8 +23,12 @@ public sealed partial class QualityPrototype : IPrototype
     [DataField]
     public float StaminaResist = 0.87f;
 
+    /// <summary>
+    /// Used for destructible scale e.g. for walls
+    /// Default is 250% health at +5 quality, 40% at -5
+    /// </summary>
     [DataField]
-    public float Health = 0.8f;
+    public float Health = 1.201f;
 
     [DataField]
     public float SelfDamage = 0.87f;

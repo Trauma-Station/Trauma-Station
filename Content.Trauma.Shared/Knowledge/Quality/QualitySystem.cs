@@ -124,7 +124,6 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnDestructibleApplyQuality(Entity<DestructibleComponent> ent, ref ApplyQualityEvent args)
     {
-        // 250% health at +5 quality
         var modifier = args.Modifier(args.Proto.Health);
         ent.Comp.Scale = modifier;
         Dirty(ent);
