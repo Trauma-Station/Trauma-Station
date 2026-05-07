@@ -135,10 +135,10 @@
     - TauCetiBasic
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase, AllowSuitStorageClothingGasTanks]
   id: PatreonGungeonologist
-  name: bomber jacket
-  description: A green bomber jacket, dont ask what it's made out of.
+  name: bloodied bomber jacket
+  description: A worn bomber jacket with a number of aged blood stains. The inside of the collar has the word "Gunderaan" printed on it.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
@@ -148,7 +148,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: PatreonGungeonologist2
-  name: cup goggles
+  name: surgical goggles
   description: Good for keeping sand out of your eyes.
   components:
   - type: Sprite
@@ -372,17 +372,23 @@
     sprite: _Trauma/Objects/Patreon/droktober.rsi
 
 - type: entity
-  parent: ClothingNeckBase
+  parent: [ClothingNeckBase, BaseToggleClothing]
   id: PatreonDaniels
   name: time cloak
   description: The clock on the back is broken...
   components:
+  - type: ToggleClothing
+    action: ActionBecomeValid
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: KillSign
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/daniels.rsi
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/daniels.rsi
-
 
 - type: entity
   parent: ClothingNeckBase
@@ -398,7 +404,7 @@
 
 - type: entity
   parent: BaseFigurine
-  id: PatreonSupermage
+  id: PatreonSuperMage
   name: tweaking mouse
   description: Tweaks!
   components:
