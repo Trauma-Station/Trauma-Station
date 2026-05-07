@@ -761,10 +761,26 @@ namespace Content.Server.GameTicking
             var ev = new RoundRestartCleanupEvent();
             RaiseLocalEvent(ev);
 
-            // So clients' entity systems can clean up too...
-            RaiseNetworkEvent(ev);
+            // <Trauma> - wrap these in try-catch and log exceptions
+            try
+            {
+                // So clients' entity systems can clean up too...
+                RaiseNetworkEvent(ev);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception in RoundRestartCleanup: {e}");
+            }
 
-            EntityManager.FlushEntities();
+            try
+            {
+                EntityManager.FlushEntities();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while flushing entities for round restart: {e}");
+            }
+            // </Trauma>
 
             _mapManager.Restart();
 

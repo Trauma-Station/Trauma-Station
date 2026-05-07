@@ -38,7 +38,13 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     public TimeSpan DoAfter = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// If true, you will instantly gain all the skills then the item is ashed.
+    /// If true, you will instantly gain all the skills when used instead of a doafter.
+    /// </summary>
+    [DataField]
+    public bool Instant = true;
+
+    /// <summary>
+    /// If true and <see cref="Instant"/> is true, the item is ashed after using it.
     /// Only <see cref="Skills"/> is used, <see cref="Experience"/> is ignored.
     /// </summary>
     [DataField]

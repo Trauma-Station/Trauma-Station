@@ -46,7 +46,7 @@ public sealed class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponen
                 continue;
 
             var coords = xform.Coordinates; // areas should always be parented to a grid, just round the coords
-            var tile = new Vector2i((int) coords.X, (int) coords.Y);
+            var tile = new Vector2i((int) MathF.Floor(coords.X), (int) MathF.Floor(coords.Y));
             if (_atmos.IsTileAirBlockedCached(grid, tile))
                 continue;
 

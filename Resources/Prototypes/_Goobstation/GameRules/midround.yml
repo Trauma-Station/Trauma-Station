@@ -162,6 +162,7 @@
   parent: BaseGameRule
   id: BlobMidround
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 1
     earliestStart: 45
@@ -413,7 +414,7 @@
     prototype: MobVoxRaider
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/_Goobstation/Shuttles/VoxRaiderShuttle.yml
+    gridPath: /Maps/_Trauma/Shuttles/VoxRaidersShuttleNew.yml
   - type: AntagSelection
     agentName: ghost-role-information-vox-raider-name
     definitions:
@@ -459,6 +460,7 @@
   parent: BaseGameRule
   id: SlasherSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 3
     duration: null

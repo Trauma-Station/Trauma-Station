@@ -10,9 +10,6 @@
     materialComposition:
       Steel: 25
       Glass: 125
-  - type: Tag
-    tags:
-    - DroneUsable
   # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Janitorial/light_replacer.rsi
@@ -30,6 +27,10 @@
   - type: ContainerContainer
     containers:
       light_replacer_storage: !type:Container
+  - type: Tag
+    tags:
+    - DroneUsable # Trauma
+    - LightReplacer
 
 - type: entity
   parent: LightReplacer

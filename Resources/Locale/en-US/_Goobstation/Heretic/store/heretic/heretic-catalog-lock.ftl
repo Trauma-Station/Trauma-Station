@@ -1,3 +1,6 @@
+knowledge-path-lock-passive-desc-2 = Your grasp no longer goes on cooldown when used to open a door or locker.
+knowledge-path-lock-passive-desc-3 = Grants you x-ray vision.
+
 knowledge-path-lock-s1-name = A Steward's Secret
 knowledge-path-lock-s1-desc =
     The Locked Labyrinth leads to freedom. But only the trapped Stewards know the correct path.
@@ -44,6 +47,17 @@ knowledge-path-lock-s5-desc =
     Allows you to transmute a crayon, a wooden plank, and a multitool to create a Labyrinth Handbook.
     It can materialize a barricade at range that noone can pass. Has 5 charges which regenerate over time.
 
+knowledge-path-lock-armor-name = Shifting Guise
+knowledge-path-lock-armor-desc =
+    While stewards are known to the Concierge,
+    they still consort between one another and with outsiders under shaded cloaks and drawn hoods.
+    Familiarity is treachery, even to oneself.
+
+    Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise.
+    It grants you camouflage from cameras, hides your voice and muffles your footsteps.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
+
 knowledge-path-lock-s6-name = Burglar's Finesse
 knowledge-path-lock-s6-desc =
     Consorting with Burglar spirits is frowned upon, but a Steward will always want to learn about new doors.
@@ -56,7 +70,6 @@ knowledge-path-lock-s7-desc =
     The Pilgrim-Surgeon was not an Steward. Nonetheless, its blades and sutures proved a match for their keys.
 
     Your blade has better wounding and a chance to cause a weeping avulsion on attack.
-    Your grasp no longer goes on cooldown when used to open a door or locker.
 
 knowledge-path-lock-s8-name = Caretaker's Last Refuge
 knowledge-path-lock-s8-desc =
@@ -73,4 +86,4 @@ knowledge-path-lock-s9-desc =
     When completed, you gain the ability to transform into empowered eldritch creatures and your keyblades will become even deadlier.
     In addition, you will create a tear to the Labyrinth's heart; a tear in reality located at the site of this ritual.
     Eldritch creatures will endlessly pour from this rift who are bound to obey your instructions.
-    You also gain x-ray vision, mansus link hivemind access as well as immunity to extreme pressure and temperature.
+    You also gain mansus link hivemind access as well as immunity to hazards of space.

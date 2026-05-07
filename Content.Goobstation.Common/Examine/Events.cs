@@ -4,18 +4,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Common.Examine;
 
-public sealed class ExamineCompletedEvent : EntityEventArgs
-{
-    public FormattedMessage Message { get; }
-    public EntityUid Examined { get; }
-    public EntityUid Examiner { get; }
-    public bool IsSecondaryInfo { get; }
+[ByRefEvent]
+public record struct ExamineCompletedEvent(
+    FormattedMessage Message,
+    EntityUid Examined,
+    EntityUid Examiner,
+    bool IsSecondaryInfo = false);
 
-    public ExamineCompletedEvent(FormattedMessage message, EntityUid examined, EntityUid examiner, bool isSecondaryInfo = false)
-    {
-        Message = message;
-        Examined = examined;
-        Examiner = examiner;
-        IsSecondaryInfo = isSecondaryInfo;
-    }
-}
+[ByRefEvent]
+public record struct UserExaminedEvent(FormattedMessage Message, EntityUid Examined);
+
+[ByRefEvent]
+public record struct GetExamineNameEvent(Entity<MetaDataComponent> Ent, string? Result = null);

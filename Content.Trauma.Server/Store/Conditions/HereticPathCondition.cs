@@ -20,6 +20,9 @@ public sealed partial class HereticPathCondition : ListingCondition
     [DataField]
     public bool RequiresCanAscend;
 
+    [DataField]
+    public int MinPassiveLevel;
+
     public override bool Condition(ListingConditionArgs args)
     {
         var ent = args.EntityManager;
@@ -27,6 +30,9 @@ public sealed partial class HereticPathCondition : ListingCondition
 
         if (!hereticSys.TryGetHereticComponent(args.Buyer, out var hereticComp, out _) &&
             !ent.TryGetComponent(args.Buyer, out hereticComp))
+            return false;
+
+        if (hereticComp.AvailablePassiveLevel < MinPassiveLevel)
             return false;
 
         if (RequiresCanAscend && !hereticComp.CanAscend)

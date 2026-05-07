@@ -71,7 +71,7 @@ public sealed class StationReportSystem : EntitySystem
     public string CreateReport(EntityUid station)
     {
         _sb.Clear();
-        var date = DateTime.UtcNow.AddYears(_years).ToString("ddd, MMM dd, YYYY");
+        var date = DateTime.UtcNow.AddYears(_years).ToString("ddd, MMM dd, yyyy");
         _sb.AppendLine($"[bolditalic]Nanotrasen Department of Intelligence Threat Advisory, Sol Sector, TCD {date}:[/bolditalic]\n");
 
         // TODO: actual dynamic gamemode reports lol

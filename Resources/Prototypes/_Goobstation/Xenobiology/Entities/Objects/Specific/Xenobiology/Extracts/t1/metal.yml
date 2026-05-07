@@ -15,7 +15,7 @@
       methods: [ Touch, Injection ]
       effects:
       - !type:NestedEffect
-        proto: XenobioExtractReagent
+        proto: XenobioExtractReaction
       - !type:SpawnEntity
         entity: SheetGlass15
       - !type:SpawnEntity

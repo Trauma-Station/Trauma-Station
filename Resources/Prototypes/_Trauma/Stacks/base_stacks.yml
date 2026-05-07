@@ -1,4 +1,4 @@
 - type: stack
   abstract: true
-  id: BaseIngotStack
+  id: BaseTinyStack
   maxCount: 1

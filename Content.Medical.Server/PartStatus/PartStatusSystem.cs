@@ -95,9 +95,12 @@ public sealed class PartStatusSystem : EntitySystem
             Act = () =>
             {
                 var markup = CreateMarkup(uid, args.User, component, damage);
+                var userEv = new UserExaminedEvent(markup, uid);
+                RaiseLocalEvent(args.User, ref userEv);
+                markup = userEv.Message;
                 _examine.SendExamineTooltip(args.User, uid, markup, false, false);
-                var examineCompletedEvent = new ExamineCompletedEvent(markup, uid, args.User, true); // Goobstation
-                RaiseLocalEvent(uid, examineCompletedEvent); // Goobstation
+                var examineCompletedEvent = new ExamineCompletedEvent(markup, uid, args.User, true);
+                RaiseLocalEvent(uid, ref examineCompletedEvent);
             },
             Text = Loc.GetString("health-examinable-verb-text"),
             Category = VerbCategory.Examine,

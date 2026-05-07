@@ -16,7 +16,7 @@ using Content.Trauma.Shared.Wizard.EventSpells;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class GlobalTileMovementSystem : EntitySystem
 {

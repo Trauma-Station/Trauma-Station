@@ -4,7 +4,7 @@
   components:
   - type: StationEvent
     weight: 1
-    earliestStart: 40
+    earliestStart: 50 # Trauma, was 40
     reoccurrenceDelay: 30
     minimumPlayers: 40
     duration: null

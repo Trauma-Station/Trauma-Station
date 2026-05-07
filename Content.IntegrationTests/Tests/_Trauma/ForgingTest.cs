@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-[TestFixture]
 public sealed class ForgingTest : GameTest
 {
     /// <summary>

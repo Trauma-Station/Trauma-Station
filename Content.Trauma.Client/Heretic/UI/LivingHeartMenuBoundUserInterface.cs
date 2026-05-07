@@ -39,35 +39,19 @@ public sealed class LivingHeartMenuBoundUserInterface(EntityUid owner, Enum uiKe
         _menu.Open();
     }
 
-    private IEnumerable<RadialMenuActionOption<NetEntity>> ConvertToButtons( IReadOnlyList<SacrificeTargetData> datas)
+    private IEnumerable<RadialMenuActionOption<NetEntity>> ConvertToButtons(IReadOnlyList<SacrificeTargetData> datas)
     {
         var models = new RadialMenuActionOption<NetEntity>[datas.Count];
         for (var i = 0; i < datas.Count; i++)
         {
             var data = datas[i];
 
-            SpriteView texture;
-            if (EntMan.TryGetEntity(data.Entity, out var ent) && EntMan.EntityExists(ent))
-            {
-                texture = new SpriteView(ent.Value, EntMan)
-                {
-                    OverrideDirection = Direction.South,
-                    VerticalAlignment = Control.VAlignment.Center,
-                    SetSize = new Vector2(64, 64),
-                    VerticalExpand = true,
-                    Stretch = SpriteView.StretchMode.Fill,
-                };
-            }
-            else
-            {
-                var view = new ProfilePreviewSpriteView();
-                view.LoadPreview(data.Profile, _proto.Index(data.Job));
-                texture = view;
-            }
+            var view = new ProfilePreviewSpriteView();
+            view.LoadPreview(data.Profile, _proto.Index(data.Job));
 
             models[i] = new RadialMenuActionOption<NetEntity>(HandleRadialMenuClick, data.Entity)
             {
-                IconSpecifier = new RadialMenuEntityIconSpecifier(texture.Entity.GetValueOrDefault()),
+                IconSpecifier = new RadialMenuEntityIconSpecifier(view.Entity.GetValueOrDefault()),
                 ToolTip = data.Profile.Name,
             };
         }

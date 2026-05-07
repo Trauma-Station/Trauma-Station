@@ -35,7 +35,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -46,7 +46,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -57,7 +57,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -68,7 +68,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -79,5 +79,5 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1
   # </Trauma>

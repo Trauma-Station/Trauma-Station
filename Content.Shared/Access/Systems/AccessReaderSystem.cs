@@ -44,6 +44,7 @@ public sealed partial class AccessReaderSystem : EntitySystem // Trauma - made p
     {
         base.Initialize();
 
+        SubscribeLocalEvent<AccessReaderComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AccessReaderComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<AccessReaderComponent, GotEmaggedEvent>(OnEmagged);
         SubscribeLocalEvent<AccessReaderComponent, LinkAttemptEvent>(OnLinkAttempt);
@@ -55,12 +56,17 @@ public sealed partial class AccessReaderSystem : EntitySystem // Trauma - made p
         SubscribeLocalEvent<AccessReaderComponent, ComponentHandleState>(OnHandleState);
     }
 
+    private void OnMapInit(Entity<AccessReaderComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.AccessListsOriginal ??= [.. ent.Comp.AccessLists];
+        Dirty(ent);
+    }
+
     private void OnExamined(Entity<AccessReaderComponent> ent, ref ExaminedEvent args)
     {
-        if (!GetMainAccessReader(ent, out var mainAccessReader))
+        if (!GetMainAccessReader(ent, out var mainAccessReader) ||
+            mainAccessReader.Value.Comp.AccessListsOriginal == null)
             return;
-
-        mainAccessReader.Value.Comp.AccessListsOriginal ??= new(mainAccessReader.Value.Comp.AccessLists);
 
         var accessHasBeenModified = mainAccessReader.Value.Comp.AccessLists.Count != mainAccessReader.Value.Comp.AccessListsOriginal.Count;
 

@@ -129,6 +129,8 @@ public sealed class SelectableAmmoSystem : CommonSelectableAmmoSystem
             // this will never have a rounding error TRUST
             battery.Shots = (int) Math.Round(battery.Shots * fireCostRatio);
             battery.Capacity = (int) Math.Round(battery.Capacity * fireCostRatio);
+            battery.ShotsFloat *= fireCostRatio;
+            battery.CapacityFloat *= fireCostRatio;
             Dirty(uid, battery);
             return true;
         }

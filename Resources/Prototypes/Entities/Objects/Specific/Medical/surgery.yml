@@ -287,6 +287,8 @@
   - type: Tool
     qualities:
       - Sawing
+    useSound: # Trauma
+      path: /Audio/_Shitmed/Medical/Surgery/bone_saw.ogg
   # Shitmed Change
   - type: BoneSaw
   - type: SurgeryTool
@@ -322,6 +324,12 @@
   parent: [Saw, MetalToolDurabilityStrong]
   description: For heavy duty cutting.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - CircularSaw
+  # </Trauma>
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/circular-saw.rsi
     state: circular-saw
@@ -336,6 +344,8 @@
       path: /Audio/Items/drill_hit.ogg
   - type: Tool
     speedModifier: 1.5
+    useSound: # Trauma
+      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: BoneSaw # Shitmed
     speed: 1.5
   - type: SurgeryTool

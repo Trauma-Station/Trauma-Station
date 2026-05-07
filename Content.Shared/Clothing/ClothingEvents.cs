@@ -8,6 +8,10 @@ namespace Content.Shared.Clothing;
 /// </summary>
 public sealed class GetEquipmentVisualsEvent : EntityEventArgs
 {
+    // <Trauma>
+    public Dictionary<string, float> LayersAnimationTime = new();
+    // </Trauma>
+
     /// <summary>
     ///     Entity that is wearing the item.
     /// </summary>

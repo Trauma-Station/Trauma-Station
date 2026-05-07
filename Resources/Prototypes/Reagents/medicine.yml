@@ -1249,10 +1249,6 @@
       - !type:HolyIgnite
         stacks: 3
         conditions:
-        - !type:WhitelistCondition
-          blacklist:
-            components:
-            - GhoulDeconvert
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
@@ -1498,13 +1494,14 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:HealthChange #Goobstation
+      # <Trauma>
+      - !type:HealthChange
         damage:
           types:
-            Radiation: -0.25 #Goobend
-      - !type:GenericStatusEffect
-        key: RadiationProtection
-        component: RadiationProtection
+            Radiation: -0.25
+      # </Trauma>
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectRadiationProtection
         time: 2
         type: Add
       - !type:HealthChange

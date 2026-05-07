@@ -1,3 +1,9 @@
+knowledge-path-blade-passive-desc-2 =
+    Grants you immunity to having limbs dismembered.
+    Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds.
+
+knowledge-path-blade-passive-desc-3 = Riposte cooldown is halved.
+
 knowledge-path-blade-s1-name = The Cutting Edge
 knowledge-path-blade-s1-desc =
     Our great ancestors forged swords and practiced sparring on the eve of great battles.
@@ -32,6 +38,16 @@ knowledge-path-blade-s4-desc =
     You cannot attack with your blade that is actively hooking someone.
     Hook gets broken when victim stands up.
 
+knowledge-path-blade-armor-name = Shattered Panoply
+knowledge-path-blade-armor-desc =
+    The echoing, directionless cacophony of violence reverberates about me.
+    Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers.
+
+    Allows you to transmute a table (or a suit), a mask and a bar of silver to create a Shattered Panoply.
+    Provides baton resistance and shock insulation while worn.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
+
 knowledge-path-blade-s5-name = Sacraments of Power
 knowledge-path-blade-s5-desc =
     His general wished to end the war, but the Champion knew there could be no life without death. He would slay the coward himself, and anyone who tried to run.
@@ -54,9 +70,6 @@ knowledge-path-blade-s7-desc =
     The second blow will be slightly weaker.
     You are able to infuse your mansus grasp directly into your blades, and your blades are more effective against structures.
     Actively hooking a victim using Champion Hook ability will allow you to attack them at a quickened rate with your offhand blade.
-
-    Grants immunity to having your limbs dismembered, as well as resistance to bloodloss and damage slowdown.
-    Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds and resistance to batons.
 
 knowledge-path-blade-s8-name = Wolves Among Sheep
 knowledge-path-blade-s8-desc =

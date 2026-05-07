@@ -1,26 +1,5 @@
-# SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 DamianX <DamianX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 Visne <vincefvanwijk@gmail.com>
-# SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 RemberBL <timmermanrembrandt@gmail.com>
-# SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+knowledge-path-void-passive-desc-2 = You no longer need to breathe.
+knowledge-path-void-passive-desc-3 = Grants you partial resistance to all slowdowns.
 
 knowledge-path-void-s1-name = Glimmer of Winter
 knowledge-path-void-s1-desc =
@@ -54,22 +33,6 @@ knowledge-path-void-s4-desc =
     Grants you Void Phase, a long range targeted teleport spell.
     Additionally causes damage to heathens around your original and target destination.
 
-#knowledge-path-void-s3-name = Aristocrat's Way
-#knowledge-path-void-s3-desc =
-#    I found a thread of cold breath. It lead me to a strange shrine, all made of crystals.
-#    Translucent and white, a depiction of a nobleman stood before me.
-#
-#    Grants you immunity to cold temperatures, and removes your need to breathe.
-#    You can still take damage due to a lack of pressure.
-
-#knowledge-path-void-s5-name = Void Blast
-#knowledge-path-void-s5-desc =
-#    Every door I open racks my body. I am afraid of what is behind them. Someone is expecting me,
-#    and my legs start to drag. Is that... snow?
-#
-#    Grants you Void Blast, a spell that shoots out a freezing blast in a cone in front of you,
-#    freezing the ground and cursing any victims within.
-
 knowledge-path-void-s5-name = Void Prison
 knowledge-path-void-s5-desc =
     At first, I see myself, waltzing along a snow-laden street.
@@ -78,6 +41,18 @@ knowledge-path-void-s5-desc =
     My smiling face turns to regard me, reflecting back in glassy eyes the empty path I have been lead down.
 
     Grants you Void Prison, a spell that places your victim into a ball, making them unable to do anything or speak. Applies void chill afterwards.
+
+knowledge-path-void-armor-name = Hollow Weave
+knowledge-path-void-armor-desc =
+    Stepping through the cold air, I am shocked by a new sensation.
+    Thousands of almost imperceivable threads cling to my form.
+    I am left adrift with every step.
+    Even as I hear the crunch of snow as I plant my foot to the ground, I feel nothing.
+
+    Allows you to transmute a table (or a suit) and a mask in sub-zero temperatures to create a Hollow Weave,
+    this armor grants protection from the hazards of space and will periodically nullify attacks and grant you a short stealth camouflage to reposition yourself.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
 
 knowledge-path-void-s6-name = Void Pull
 knowledge-path-void-s6-desc =
@@ -91,7 +66,6 @@ knowledge-path-void-s7-desc =
     Fleeting memories, fleeting feet. I mark my way with frozen blood upon the snow. Covered and forgotten.
 
     Your blade now freezes enemies. Additionally, you can now attack distant targets with your Void Blade, teleporting directly next to them.
-    You no longer need to breathe
 
 knowledge-path-void-s8-name = Void Conduit
 knowledge-path-void-s8-desc =

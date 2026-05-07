@@ -123,6 +123,7 @@
   - CameraBug
   - StealthBox
   - SyndicateJawsOfLife
+  - FakeMindShieldImplanter
 
 - type: selectableSet
   id: SyndicateHitmanSet
@@ -134,10 +135,10 @@
   content:
   - EncryptionKeySyndie
   - WeaponPistolCobra
-  - MagazinePistolCaselessRifle
-  - MagazinePistolCaselessRifle
-  - MagazinePistolCaselessRifle
-  - MagazinePistolCaselessRifle
+  - MagazinePistolCaselessRifle # 1
+  - MagazinePistolCaselessRifle # 2
+  - MagazinePistolCaselessRifle # 3
+  - MagazinePistolCaselessRifle # 4
   - CapoeiraManual
   - EnergyDaggerBox
   - ClothingOuterArmourInvisibleSyndie
@@ -223,9 +224,9 @@
   content:
   - ClothingHeadsetAltSyndicate
   - WeaponSubMachineGunC20r
-  - MagazinePistolSubMachineGun
-  - MagazinePistolSubMachineGun
-  - MagazinePistolSubMachineGun
+  - MagazinePistolSubMachineGun # 1
+  - MagazinePistolSubMachineGun # 2
+  - MagazinePistolSubMachineGun # 3
   - EnergyShield
   - JetpackBlackFilled
   - ClothingBackpackDuffelSyndicateHardsuitBundle
@@ -243,21 +244,25 @@
     sprite: _Goobstation/Interface/Misc/job_icons.rsi
     state: Mindcontrolled
   content:
-    - EncryptionKeySyndie
-    - EncryptionKeySyndie
-    - EncryptionKeySyndie
-    - EncryptionKeySyndie
-    - EncryptionKeySyndie
+    - EncryptionKeySyndie # 1
+    - EncryptionKeySyndie # 2
+    - EncryptionKeySyndie # 3
+    - EncryptionKeySyndie # 4
+    - EncryptionKeySyndie # 5
     - ContractorBaton
     - Handcuffs
-    - MindcontrolImplanter
-    - MindcontrolImplanter
-    - MindcontrolImplanter
-    - MindcontrolImplanter
-    - WeaponSniperMosin
-    - WeaponSniperMosin
-    - WeaponSniperMosin
-    - WeaponSniperMosin
+    - MindcontrolImplanter # 1
+    - MindcontrolImplanter # 2
+    - MindcontrolImplanter # 3
+    - MindcontrolImplanter # 4
+    - WeaponSniperMosin # 1
+    - WeaponSniperMosin # 2
+    - WeaponSniperMosin # 3
+    - WeaponSniperMosin # 4
+    - WeaponRifleAk
+    - MagazineLightRifle # 1
+    - MagazineLightRifle # 2
+    - MagazineBoxLightRifle
 
 - type: selectableSet
   id: SyndicateCarpSet

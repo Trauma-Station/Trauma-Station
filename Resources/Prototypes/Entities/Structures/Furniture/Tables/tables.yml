@@ -241,9 +241,6 @@
   - type: Construction
     graph: Table
     node: Table
-  - type: Tag # goob edit
-    tags:
-    - Table
 
 - type: entity
   id: TableReinforced
@@ -979,9 +976,6 @@
   description: PUT ON THEM CODERSOCKS!!
   suffix: DEBUG
   components:
-  - type: Tag # Goob
-    tags:
-    - Table
   - type: Sprite
     sprite: Structures/Furniture/Tables/debug.rsi
   - type: Icon

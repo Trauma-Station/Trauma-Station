@@ -126,14 +126,14 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     #region Equipment Pickup
     private void OnGotCosmicItemEquipped(Entity<CosmicEquipmentComponent> ent, ref GotEquippedEvent args)
     {
-        if (EntityIsCultist(args.Equipee)) return;
-
-        EnsureComp<CosmicDegenComponent>(args.Equipee);
+        var target = args.EquipTarget;
+        if (!EntityIsCultist(target))
+            EnsureComp<CosmicDegenComponent>(target);
     }
 
     private void OnGotCosmicItemUnequipped(Entity<CosmicEquipmentComponent> ent, ref GotUnequippedEvent args)
     {
-        RemComp<CosmicDegenComponent>(args.Equipee); // Cultists shouldn't have it in the first place so we don't check if entity is a cultist
+        RemComp<CosmicDegenComponent>(args.EquipTarget); // Cultists shouldn't have it in the first place so we don't check if entity is a cultist
     }
 
     private void OnGotHeld(Entity<CosmicEquipmentComponent> ent, ref GotEquippedHandEvent args)
@@ -151,37 +151,39 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 
     private void OnGotSpeechOverrideEquipped(Entity<SpeechOverrideComponent> ent, ref GotEquippedEvent args)
     {
-        if (ent.Comp.EmoteIDs is { } emoteIDs && TryComp<VocalComponent>(args.Equipee, out var vocalComp))
+        var target = args.EquipTarget;
+        if (ent.Comp.EmoteIDs is { } emoteIDs && TryComp<VocalComponent>(target, out var vocalComp))
         {
             ent.Comp.EmoteStoredIDs = vocalComp.Sounds;
             vocalComp.Sounds = emoteIDs;
             var ev = new EmoteSoundsChangedEvent();
-            RaiseLocalEvent(args.Equipee, ref ev);
+            RaiseLocalEvent(target, ref ev);
         }
-        if (ent.Comp.SpeechIDs is { } speechIDs && TryComp<SpeechComponent>(args.Equipee, out var speechComp))
+        if (ent.Comp.SpeechIDs is { } speechIDs && TryComp<SpeechComponent>(target, out var speechComp))
         {
             ent.Comp.SpeechStoredIDs = speechComp.SpeechSounds;
             speechComp.SpeechSounds = speechIDs;
             var ev = new SpeechSoundsChangedEvent();
-            RaiseLocalEvent(args.Equipee, ref ev);
+            RaiseLocalEvent(target, ref ev);
         }
     }
 
     private void OnGotSpeechOverrideUnequipped(Entity<SpeechOverrideComponent> ent, ref GotUnequippedEvent args)
     {
-        if (ent.Comp.EmoteStoredIDs is { } emoteIDs && TryComp<VocalComponent>(args.Equipee, out var vocalComp))
+        var target = args.EquipTarget;
+        if (ent.Comp.EmoteStoredIDs is { } emoteIDs && TryComp<VocalComponent>(target, out var vocalComp))
         {
             ent.Comp.EmoteStoredIDs = null;
             vocalComp.Sounds = emoteIDs;
             var ev = new EmoteSoundsChangedEvent();
-            RaiseLocalEvent(args.Equipee, ref ev);
+            RaiseLocalEvent(target, ref ev);
         }
-        if (ent.Comp.SpeechStoredIDs is { } speechIDs && TryComp<SpeechComponent>(args.Equipee, out var speechComp))
+        if (ent.Comp.SpeechStoredIDs is { } speechIDs && TryComp<SpeechComponent>(target, out var speechComp))
         {
             ent.Comp.SpeechStoredIDs = null;
             speechComp.SpeechSounds = speechIDs;
             var ev = new SpeechSoundsChangedEvent();
-            RaiseLocalEvent(args.Equipee, ref ev);
+            RaiseLocalEvent(target, ref ev);
         }
     }
     #endregion

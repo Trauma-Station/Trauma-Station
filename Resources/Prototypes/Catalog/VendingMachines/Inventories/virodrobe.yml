@@ -23,3 +23,8 @@
     ClothingBackpackSatchelVirology: 2
     ClothingBackpackDuffelVirology: 2
     ClothingBackpackMessengerVirology: 2 # Frontier
+  # <Trauma>
+  emaggedInventory:
+    ClothingOuterStraightjacket: 1
+    MobMouseCancer: 1
+  # </Trauma>

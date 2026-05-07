@@ -60,9 +60,9 @@ public sealed class IgniteFromGasSystem : EntitySystem
     }
 
     private void OnIgniteFromGasImmunityEquipped(Entity<IgniteFromGasImmunityComponent> ent, ref GotEquippedEvent args) =>
-        UpdateIgniteImmunity(args.Equipee);
+        UpdateIgniteImmunity(args.EquipTarget);
     private void OnIgniteFromGasImmunityUnequipped(Entity<IgniteFromGasImmunityComponent> ent, ref GotUnequippedEvent args) =>
-        UpdateIgniteImmunity(args.Equipee);
+        UpdateIgniteImmunity(args.EquipTarget);
 
     public void UpdateIgniteImmunity(Entity<IgniteFromGasComponent?, InventoryComponent?> ent)
     {

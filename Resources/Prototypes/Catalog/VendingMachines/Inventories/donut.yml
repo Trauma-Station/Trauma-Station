@@ -16,4 +16,8 @@
   contrabandInventory:
     FoodBagel: 2
     FoodBagelPoppy: 2
-    FoodDonutPoison: 1
+    FoodDonutPoison: 2 # Trauma - was 1
+  # <Trauma>
+  emaggedInventory:
+    SyndicateSponge: 1
+  # </Trauma>

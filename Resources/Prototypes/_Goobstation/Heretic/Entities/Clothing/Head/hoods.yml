@@ -24,20 +24,86 @@
     coverage:
     - Head
     modifiers:
+      # Resists are so high because regular helmets have insanely high resists
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Caustic: 0.5
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.2
+        Heat: 0.3
+        Caustic: 0.3
     traumaDeductions:
       Dismemberment: 0.5
       OrganDamage: 0.5
       BoneDamage: 0.5
-      VeinsDamage: 0.0
-  - type: FireProtection
-    reduction: 0.1
+      VeinsDamage: 0
   - type: FaceHuggerBlocker
+  - type: PressureProtection
+    highPressureMultiplier: 0.1
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadHatHoodHeretic
+  id: ClothingHeadHatHoodHereticRust
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/Head/rust_hood.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Goobstation/Heretic/Clothing/Head/rust_hood.rsi
+  - type: Appearance
+  - type: ItemToggle
+    onActivate: false
+    onUse: false
+    wieldToggle: false
+  - type: ToggleAnimation
+    continueReverseAnimation: true
+    toggleOnTime: 2.3
+    toggleOffTime: 1.4
+  - type: ClothingToggleAnimationVisuals
+    state:
+    - TogglingOn
+    - On
+    - TogglingOff
+  - type: ComponentToggler
+    components:
+    - type: Armor
+      coverage:
+      - Head
+      modifiers:
+        coefficients:
+          Blunt: 0.15
+          Slash: 0.15
+          Piercing: 0.1
+          Heat: 0.15
+          Caustic: 0.15
+      traumaDeductions:
+        Dismemberment: 0.7
+        OrganDamage: 0.7
+        BoneDamage: 0.7
+        VeinsDamage: 0
+    - type: ExplosionResistance
+      damageCoefficient: 0
+    deactivateComponents:
+    - type: Armor
+      coverage:
+      - Head
+      modifiers:
+        coefficients:
+          Blunt: 0.3
+          Slash: 0.3
+          Piercing: 0.1
+          Heat: 0.3
+          Caustic: 0.3
+      traumaDeductions:
+        Dismemberment: 0.5
+        OrganDamage: 0.5
+        BoneDamage: 0.5
+        VeinsDamage: 0
+    - type: ExplosionResistance
+      damageCoefficient: 0.5
 
 - type: entity
   parent: ClothingHeadHatHoodHeretic
@@ -68,6 +134,10 @@
     state: icon
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/Head/flesh_hood.rsi
+    equipSound:
+      collection: OrganInteraction
+    unequipSound:
+      collection: OrganInteraction
 
 - type: entity
   parent: ClothingHeadHatHoodHeretic
@@ -98,6 +168,11 @@
     state: icon
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/Head/lock_hood.rsi
+  - type: VoiceMask
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
 
 - type: entity
   parent: ClothingHeadBase
@@ -111,7 +186,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/Head/void_cloak_hood.rsi
   - type: Tag
-    tags: [ ]
+    tags: []
   - type: StripMenuInvisible
   - type: VoidCloakHood
   - type: Armor
@@ -119,14 +194,16 @@
     - Head
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.7
-        Caustic: 0.7
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.4
+        Heat: 0.5
+        Caustic: 0.5
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0.0
   - type: FaceHuggerBlocker
+  - type: ExplosionResistance
+    damageCoefficient: 0.7

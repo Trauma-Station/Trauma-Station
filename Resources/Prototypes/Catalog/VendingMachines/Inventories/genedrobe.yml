@@ -10,3 +10,9 @@
     ClothingOuterWinterGen: 2
     ClothingShoesColorWhite: 2
     ClothingBackpackMessengerGenetics: 2 # Frontier
+  # <Trauma>
+  emaggedInventory:
+    Handcuffs: 1
+    DClassIDCard: 1
+    ClothingUniformJumpsuitPrisoner: 1
+  # </Trauma>

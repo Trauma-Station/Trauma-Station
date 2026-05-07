@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 whateverusername0 <whateveremail>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -17,7 +8,7 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 15
+    useDelay: 25
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -125,3 +116,22 @@
     requireMagicItem: true
   - type: SpeakOnAction
     sentence: heretic-speech-ash-cascade
+
+- type: entity
+  parent: BaseToggleAction
+  id: ActionHereticScorchedMantleToggleFlames
+  name: Toggle Flames
+  description: Toggles passive fire stack generation.
+  components:
+  - type: Action
+    checkCanInteract: false
+    checkConsciousness: false
+    raiseOnAction: true
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: flames
+    iconOn:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: flames_on
+  - type: ToggleAction
