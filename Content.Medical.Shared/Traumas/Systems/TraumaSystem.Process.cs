@@ -650,6 +650,10 @@ public partial class TraumaSystem
 
             switch (trauma)
             {
+                case TraumaType.BoneDamage:
+                    ApplyBoneTrauma(targetChosen.Value, target, inflicter, severity);
+                    break;
+
                 case TraumaType.OrganDamage:
                     var traumaEnt = AddTrauma(targetChosen.Value, target, inflicter, TraumaType.OrganDamage, severity);
 
