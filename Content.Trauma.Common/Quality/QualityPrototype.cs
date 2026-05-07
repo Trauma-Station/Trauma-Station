@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Trauma.Common.Quality;
 
 [Prototype]
@@ -39,9 +38,15 @@ public sealed partial class QualityPrototype : IPrototype
     [DataField]
     public float Durability = 1.12f;
 
+    /// <summary>
+    /// Used for damage done to shields when protecting you, should be < 1
+    /// </summary>
     [DataField]
-    public float Shield = 1.12f;
+    public float Shield = 0.89f;
 
+    /// <summary>
+    /// Used for how much damage shields protect you from, should be > 1
+    /// </summary>
     [DataField]
     public float ShieldFlat = 1.12f;
 
