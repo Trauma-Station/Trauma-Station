@@ -5,7 +5,6 @@ using Content.Shared.Blocking;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
-using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.Explosion.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
