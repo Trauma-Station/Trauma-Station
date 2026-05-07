@@ -8029,3 +8029,12 @@ Entries:
   id: 925
   time: '2026-05-07T00:48:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2447
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix bones not breaking.
+  - type: Fix
+    message: Fix wounds not healing sometimes.
+  id: 926
+  time: '2026-05-07T01:33:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2459
