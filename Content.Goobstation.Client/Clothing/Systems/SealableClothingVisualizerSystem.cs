@@ -9,7 +9,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Robust.Client.GameObjects;
 
-namespace Content.Goobstation.Client.Clothing.EntitySystems;
+namespace Content.Goobstation.Client.Clothing.Systems;
 
 public sealed class SealableClothingVisualizerSystem : VisualizerSystem<SealableClothingVisualsComponent>
 {
