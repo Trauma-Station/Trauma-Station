@@ -179,7 +179,7 @@
   whitelist:
     tags:
     - WorkingJoe
-  
+
 - type: emote
   id: WorkingJoeAbandoningSearchRoutines
   name: emote-name-workingjoe-abandoningsearchroutines
