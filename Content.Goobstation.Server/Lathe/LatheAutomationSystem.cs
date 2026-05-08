@@ -27,9 +27,6 @@ public sealed class LatheAutomationSystem : EntitySystem
 
     private void OnSignalReceived(Entity<LatheAutomationComponent> ent, ref SignalReceivedEvent args)
     {
-        if (!_automation.IsAutomated(ent))
-            return;
-
         if (args.Port != ent.Comp.PrintPort)
             return;
 
