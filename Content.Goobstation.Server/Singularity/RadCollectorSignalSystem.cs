@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Factory;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Singularity.Components;
@@ -9,7 +8,6 @@ namespace Content.Goobstation.Server.Singularity;
 
 public sealed class RadCollectorSignalSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationSystem _automation = default!;
     [Dependency] private readonly DeviceLinkSystem _device = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
