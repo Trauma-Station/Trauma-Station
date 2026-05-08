@@ -8013,3 +8013,80 @@ Entries:
   id: 923
   time: '2026-05-06T16:16:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2444
+- author: TurboTrackerss14
+  changes:
+  - type: Remove
+    message: Syndicate Special Forces Bundle from Undertermined Crate sets.
+  - type: Tweak
+    message: Undertermined Crate set returned to only roll 3 sets instead of buffed 4.
+  id: 924
+  time: '2026-05-06T22:10:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2455
+- author: Armok
+  changes:
+  - type: Add
+    message: New patreon items
+  id: 925
+  time: '2026-05-07T00:48:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2447
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix bones not breaking.
+  - type: Fix
+    message: Fix wounds not healing sometimes.
+  id: 926
+  time: '2026-05-07T01:33:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2459
+- author: Asardonicsailor
+  changes:
+  - type: Tweak
+    message: All incend ammo loses its heat damage and some pierce damage
+  - type: Tweak
+    message: All uranium ammo loses its radiation damage and some pierce damage
+  - type: Tweak
+    message: All uranium ammo gains bonus AP
+  - type: Tweak
+    message: Burner firerate 3 > 2
+  - type: Tweak
+    message: Hristov stam damage 115 > 50
+  - type: Tweak
+    message: Hristov firerate 0.8 > 0.4
+  - type: Tweak
+    message: cobra damage 25 > 14
+  - type: Tweak
+    message: cobra ap -0.3 > -0.5
+  - type: Tweak
+    message: light rifle damage 19 > 15
+  - type: Tweak
+    message: magnum damage 35 > 20
+  - type: Tweak
+    message: pistol damage 16 > 11
+  - type: Tweak
+    message: heavy rifle damage 17 > 13
+  - type: Tweak
+    message: shotgun pellet damage 10 > 7
+  - type: Tweak
+    message: Python firerate 1.5 > 2
+  - type: Tweak
+    message: Lecter firerate 5 > 4
+  - type: Tweak
+    message: C20-R spread increased significantly
+  - type: Tweak
+    message: Drozd burst cooldown 0.375 > 0.75
+  - type: Tweak
+    message: WT550 firerate 5 > 4
+  id: 927
+  time: '2026-05-07T06:25:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2465
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed higher quality making shields and structures worse and vice versa.
+  - type: Fix
+    message: >-
+      Fixed quality shield examine not being predicted and not rounding the
+      numbers.
+  id: 928
+  time: '2026-05-07T12:26:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2467

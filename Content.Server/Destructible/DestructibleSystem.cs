@@ -50,7 +50,7 @@ namespace Content.Server.Destructible
 
             foreach (var threshold in component.Thresholds)
             {
-                if (Triggered(threshold, (uid, args.Damageable)))
+                if (Triggered(threshold, (uid, args.Damageable), component.Scale)) // Trauma - add scale
                 {
                     RaiseLocalEvent(uid, new DamageThresholdReached(component, threshold), true);
 
@@ -102,7 +102,8 @@ namespace Content.Server.Destructible
         /// <summary>
         /// Check if the given threshold should trigger.
         /// </summary>
-        public bool Triggered(DamageThreshold threshold, Entity<Shared.Damage.Components.DamageableComponent> owner)
+        public bool Triggered(DamageThreshold threshold, Entity<Shared.Damage.Components.DamageableComponent> owner,
+            FixedPoint2 scale) // Trauma
         {
             if (threshold.Trigger == null)
                 return false;
@@ -112,11 +113,11 @@ namespace Content.Server.Destructible
 
             if (threshold.OldTriggered)
             {
-                threshold.OldTriggered = threshold.Trigger.Reached(owner, this);
+                threshold.OldTriggered = threshold.Trigger.Reached(owner, this, scale); // Trauma - add scale
                 return false;
             }
 
-            if (!threshold.Trigger.Reached(owner, this))
+            if (!threshold.Trigger.Reached(owner, this, scale)) // Trauma - add scale
                 return false;
 
             threshold.OldTriggered = true;
@@ -126,12 +127,13 @@ namespace Content.Server.Destructible
         /// <summary>
         /// Check if the conditions for the given threshold are currently true.
         /// </summary>
-        public bool Reached(DamageThreshold threshold, Entity<Shared.Damage.Components.DamageableComponent> owner)
+        public bool Reached(DamageThreshold threshold, Entity<Shared.Damage.Components.DamageableComponent> owner,
+            FixedPoint2 scale) // Trauma
         {
             if (threshold.Trigger == null)
                 return false;
 
-            return threshold.Trigger.Reached(owner, this);
+            return threshold.Trigger.Reached(owner, this, scale); // Trauma - add scale
         }
 
         /// <summary>

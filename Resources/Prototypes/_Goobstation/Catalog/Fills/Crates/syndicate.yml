@@ -119,7 +119,6 @@
     possibleSets:
     - SyndicateLawyerSet
     - SyndicateNoRussianSet
-    - SyndicateSpecialForcesSet
     - SyndicatePirateCaptainSet
     - SyndicateEngineerSet
     - SyndicateDoorKickerSet
@@ -135,7 +134,7 @@
     - SyndicateCarpSet
     - SyndicateSusSet
 #    - SyndicateBuilderSet - Requires Rework pending Miner Removal
-    setsToSelect: 4
+    setsToSelect: 3
     spawnedStoragePrototype: CrateSyndicate
     spawnedStorageContainer: entity_storage
     openSpawnedStorage: true
