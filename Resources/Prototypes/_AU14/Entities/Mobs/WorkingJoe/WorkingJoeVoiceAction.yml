@@ -1,0 +1,10 @@
+- type: entity
+  id: ActionWorkingJoeVoice
+  name: action-name-workingjoe-voice
+  components:
+  - type: Action
+    icon:
+      sprite: Interface/Actions/voice-mask.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:WorkingJoeVoiceActionEvent {}

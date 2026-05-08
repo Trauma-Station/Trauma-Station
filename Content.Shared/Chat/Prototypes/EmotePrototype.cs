@@ -86,5 +86,11 @@ public enum EmoteCategory : byte
     Vocal = 1 << 0,
     Hands = 1 << 1,
     Farts = 1 << 2, // Goobstation - Fart Emotes
+    Farewell = 1 << 2,
+    Greeting = 1 << 3,
+    Question = 1 << 4,
+    RestrictedArea = 1 << 5,
+    TaskUpdate = 1 << 6,
+    Warning = 1 << 7,
     General = byte.MaxValue
 }

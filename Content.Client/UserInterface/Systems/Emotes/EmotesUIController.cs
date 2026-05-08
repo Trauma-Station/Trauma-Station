@@ -35,6 +35,12 @@ public sealed class EmotesUIController : UIController, IOnStateChanged<GameplayS
             [EmoteCategory.Vocal] = ("emote-menu-category-vocal",
                 new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
             [EmoteCategory.Farts] = ("emote-menu-category-farts", new SpriteSpecifier.Texture(new("/Textures/_Goobstation/Interface/Emotes/fart.png"))), // Goobstation (obviously)
+            [EmoteCategory.Farewell] = ("emote-menu-category-farefell", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
+            [EmoteCategory.Greeting] = ("emote-menu-category-greeting", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
+            [EmoteCategory.Question] = ("emote-menu-category-question", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
+            [EmoteCategory.RestrictedArea] = ("emote-menu-category-restrictedarea", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
+            [EmoteCategory.TaskUpdate] = ("emote-menu-category-taskupdate", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
+            [EmoteCategory.Warning] = ("emote-menu-category-warning", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Emotes/vocal.png"))),
         };
 
     public void OnStateEntered(GameplayState state)

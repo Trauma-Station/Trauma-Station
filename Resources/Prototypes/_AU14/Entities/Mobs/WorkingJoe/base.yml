@@ -1,0 +1,52 @@
+- type: entity
+  parent: MobHuman
+  id: AU14MobWorkingJoe
+  name: Working Joe
+  suffix: AU14, civilian
+  components:
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    reregister: false
+    name: au14-job-name-workingjoe
+    description: au14-job-description-workingjoe
+    raffle:
+      settings: short
+  - type: Icon
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: full
+  - type: WorkingJoeVoice
+  - type: UserInterface
+    interfaces:
+      enum.WorkingJoeVoiceUiKey.Key:
+        type: WorkingJoeVoiceBui
+  - type: Vocal
+    sounds:
+      Male: AU14WorkingJoeSounds
+      Female: AU14WorkingJoeSounds
+      Unsexed: AU14WorkingJoeSounds
+  - type: TypingIndicator
+    proto: joe
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - AI
+    - Common
+  - type: ActiveRadio
+    channels:
+    - AI
+    - Common
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/punch1.ogg
+    angle: 30
+    animation: WeaponArcFist
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 15
+  - type: Tag
+    tags:
+    - WorkingJoe
