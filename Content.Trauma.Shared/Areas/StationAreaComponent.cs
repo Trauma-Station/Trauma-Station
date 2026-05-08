@@ -3,8 +3,7 @@
 namespace Content.Trauma.Shared.Areas;
 
 /// <summary>
-/// Marker component for all areas, used for area lookup.
+/// Marker component for areas belonging to the station.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[EntityCategory("Areas")]
-public sealed partial class AreaComponent : Component;
+public sealed partial class StationAreaComponent : Component;

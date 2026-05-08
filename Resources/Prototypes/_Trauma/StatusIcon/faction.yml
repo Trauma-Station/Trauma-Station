@@ -10,3 +10,16 @@
   icon:
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: Mindcontrolled
+
+- type: factionIcon
+  id: RevolutionEnemy
+  isShaded: true
+  priority: 12
+  showTo:
+    components:
+    - ShowAntagIcons
+    - RevolutionEnemy # know your homies
+    - Revolutionary # you will be hunted
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: RevolutionEnemy

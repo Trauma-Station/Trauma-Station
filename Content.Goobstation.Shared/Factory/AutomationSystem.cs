@@ -11,9 +11,7 @@ public sealed class AutomationSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-
-    private EntityQuery<AutomationSlotsComponent> _slotsQuery;
-    private EntityQuery<AutomatedComponent> _automatedQuery;
+    [Dependency] private readonly EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
 
     private List<EntProtoId> _automatable = new();
     /// <summary>
@@ -25,13 +23,10 @@ public sealed class AutomationSystem : EntitySystem
     {
         base.Initialize();
 
-        _slotsQuery = GetEntityQuery<AutomationSlotsComponent>();
-        _automatedQuery = GetEntityQuery<AutomatedComponent>();
-
         SubscribeLocalEvent<AutomationSlotsComponent, ComponentInit>(OnInit);
 
-        SubscribeLocalEvent<AutomatedComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<AutomatedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<AutomationSlotsComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AutomationSlotsComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<PhysicsComponent, AnchorStateChangedEvent>(OnAnchorChanged);
 
@@ -48,23 +43,21 @@ public sealed class AutomationSystem : EntitySystem
         }
     }
 
-    private void OnMapInit(Entity<AutomatedComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<AutomationSlotsComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<AutomationSlotsComponent>(ent, out var comp))
-            return;
-
-        foreach (var slot in comp.Slots)
+        foreach (var slot in ent.Comp.Slots)
         {
             slot.AddPorts();
         }
     }
 
-    private void OnShutdown(Entity<AutomatedComponent> ent, ref ComponentShutdown args)
+    private void OnShutdown(Entity<AutomationSlotsComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp<AutomationSlotsComponent>(ent, out var comp))
+        // don't care if the entity is being deleted
+        if (TerminatingOrDeleted(ent))
             return;
 
-        foreach (var slot in comp.Slots)
+        foreach (var slot in ent.Comp.Slots)
         {
             slot.RemovePorts();
         }
@@ -107,10 +100,6 @@ public sealed class AutomationSystem : EntitySystem
         if (!_slotsQuery.Resolve(ent, ref ent.Comp, false))
             return null;
 
-        // automation isn't enabled
-        if (!IsAutomated(ent))
-            return null;
-
         foreach (var slot in ent.Comp.Slots)
         {
             string? id = input ? slot.Input : slot.Output;
@@ -120,8 +109,6 @@ public sealed class AutomationSystem : EntitySystem
 
         return null;
     }
-
-    public bool IsAutomated(EntityUid uid) => _automatedQuery.HasComp(uid);
 
     public bool HasSlot(Entity<AutomationSlotsComponent?> ent, string port, bool input)
     {

@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Clothing;
 using Content.Medical.Common.Clothing;
+using Content.Trauma.Common.Clothing;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Actions;
@@ -24,6 +25,10 @@ namespace Content.Shared.Clothing.EntitySystems;
 // GOOBSTATION - MODSUITS - THIS SYSTEM FULLY CHANGED
 public sealed class ToggleableClothingSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly ClothingSystem _clothing = default!;
+    // </Trauma>
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
@@ -33,14 +38,12 @@ public sealed class ToggleableClothingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedStrippableSystem _strippable = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ToggleableClothingComponent, ComponentInit>(OnToggleableInit);
+        SubscribeLocalEvent<ToggleableClothingComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ToggleableClothingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ToggleableClothingComponent, ToggleClothingEvent>(OnToggleClothingAction);
         SubscribeLocalEvent<ToggleableClothingComponent, GetItemActionsEvent>(OnGetActions);
@@ -424,28 +427,24 @@ public sealed class ToggleableClothingSystem : EntitySystem
 
         // As unequipped gets called in the middle of container removal, we cannot call a container-insert without causing issues.
         // So we delay it and process it during a system update:
+        // <Trauma>
         if (!toggleableComp.ClothingUids.ContainsKey(attached.Owner))
             return;
 
         if (!toggleableComp.ClothingUids.TryGetValue(attached.Owner, out var slot))
             return;
-        // I'm just assuming any toggleable backslot is a modsuit and deffering sanity checks there
-        if (TryComp<ClothingComponent>(comp.AttachedUid, out var clothingComp) &&
-        (clothingComp.Slots & SlotFlags.BACK) != 0)
-        {
-            var ev = new OnToggleableUnequipAttemptEvent(comp.AttachedUid, attached.Owner, args.EquipTarget, false);
-            RaiseLocalEvent(comp.AttachedUid, ev);
-            // I fucking hate these naming schemes but im not changing them at this point
-            // AttachedUid = Toggleable Part
-            // Owner       = Toggled Part
-
-        }
+        var ev = new AttachedClothingRemovedEvent(attached);
+        RaiseLocalEvent(comp.AttachedUid, ref ev);
 
         // Handle re-equipping contained items
         UnequipClothing(args.EquipTarget, (comp.AttachedUid, toggleableComp), attached.Owner, slot);
 
         if (toggleableComp.Container is {} container && !TerminatingOrDeleted(container.Owner))
-            _containerSystem.Insert(attached.Owner, container);
+        {
+            var succ = _containerSystem.Insert(attached.Owner, container, force: true);
+            Log.Debug($"Trying to insert {ToPrettyString(attached)} into {ToPrettyString(container.Owner)}: {succ}");
+        }
+        // </Trauma>
     }
 
     /// <summary>
@@ -595,14 +594,15 @@ public sealed class ToggleableClothingSystem : EntitySystem
         }
 
         // If attached have clothing in container - equip it
-        if (!TryComp<AttachedClothingComponent>(clothing, out var attachedComp) || attachedComp.ClothingContainer == null)
+        // <Trauma> - rewrote shitcode
+        if (CompOrNull<AttachedClothingComponent>(clothing)?.ClothingContainer?.ContainedEntity is not {} stored)
             return;
 
-        var storedClothing = attachedComp.ClothingContainer.ContainedEntity;
-
-        if (storedClothing != null)
-            _inventorySystem.TryEquip(parent, storedClothing.Value, slot, force: true, triggerHandContact: true, silent:true);
+        if (!_inventorySystem.TryEquip(parent, stored, slot, force: true, triggerHandContact: true, silent: true))
+            _containerSystem.TryRemoveFromContainer(stored); // don't just keep it inside the attached piece if equipping fails
+        // </Trauma>
     }
+
     public bool EquipClothing(EntityUid user, Entity<ToggleableClothingComponent> toggleable, EntityUid clothing, string slot, bool silent = false) // Goobstation
     {
         var parent = Transform(toggleable.Owner).ParentUid;
@@ -642,7 +642,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         args.AddAction(comp.ActionEntity.Value);
     }
 
-    private void OnToggleableInit(Entity<ToggleableClothingComponent> toggleable, ref ComponentInit args)
+    private void OnInit(Entity<ToggleableClothingComponent> toggleable, ref ComponentInit args)
     {
         var comp = toggleable.Comp;
 
@@ -825,20 +825,6 @@ public sealed class OnAttachedUnequipAttemptEvent(
     public EntityUid UnEquipTarget { get; } = unequiptarget;
     public bool Multiple { get; } = multiple;
 }
-
-public sealed class OnToggleableUnequipAttemptEvent(
-    EntityUid toggleable,
-    EntityUid attached,
-    EntityUid unequiptarget,
-    bool multiple)
-    : CancellableEntityEventArgs
-{
-    public EntityUid Toggleable { get; } = toggleable;
-    public EntityUid Attached { get; } = attached;
-    public EntityUid UnEquipTarget { get; } = unequiptarget;
-    public bool Multiple { get; } = multiple;
-}
-
 
 /// <summary>
 /// Raised when a toggleable clothing BACK part is fully unequipped and inserted into its container.

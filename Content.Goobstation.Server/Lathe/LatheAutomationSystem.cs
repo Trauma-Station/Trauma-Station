@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Factory;
 using Content.Server.Lathe;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Lathe;
@@ -9,7 +8,6 @@ namespace Content.Goobstation.Server.Lathe;
 
 public sealed class LatheAutomationSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationSystem _automation = default!;
     [Dependency] private readonly LatheSystem _lathe = default!;
 
     public override void Initialize()
@@ -27,9 +25,6 @@ public sealed class LatheAutomationSystem : EntitySystem
 
     private void OnSignalReceived(Entity<LatheAutomationComponent> ent, ref SignalReceivedEvent args)
     {
-        if (!_automation.IsAutomated(ent))
-            return;
-
         if (args.Port != ent.Comp.PrintPort)
             return;
 
