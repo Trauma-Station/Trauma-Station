@@ -9,7 +9,7 @@
   - type: DarknessStealthStatusEffect
     triggerAt: 0.9
     visibility: 0.5
-  - type: DamageModifyStatusEffect
+  - type: DamageModifierStatusEffect
     modifiers:
       coefficients:
         Heat: 1.1

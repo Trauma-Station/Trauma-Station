@@ -21,6 +21,7 @@
       - Mindshielded  # parity?
       - BibleUser     # makes sense
       - VampireThrall # cant thrall other thralls or already thralled
+      - Vampire       # makes sense
       tags:
       - VimPilot      # no thralling monkeys
     event: !type:DanEnthrallActionEvent
@@ -51,26 +52,11 @@
       key: Pacified
       component: Pacified
       time: 40
-
-# Subspace Swap
-- type: entity
-  parent: BaseVampireAction
-  id: ActionSubspaceSwap
-  name: Subspace Swap
-  description: Subspace Swap
-  components:
-  - type: Action
-    # useDelay: 2
-    icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
-  - type: TargetAction
-    range: 7
-  - type: EntityTargetAction
-    whitelist:
-      components:
-      - Body
-    event: !type:SubspaceSwapActionEvent
+    - !type:PopupMessage
+      messages:
+      - You pacify them
+      type: Local
+      visualType: Large
 
 # Subspace Swap
 - type: entity
@@ -97,7 +83,7 @@
   parent: BaseVampireAction
   id: ActionDeployDecoy
   name: Deploy Decoy
-  description: Subspace Swap
+  description: Deploy Decoy
   components:
   - type: Action
     # useDelay: 2
@@ -118,7 +104,45 @@
   parent: BaseVampireAction
   id: ActionRallyThralls
   name: Rally Thralls
-  description: Subspace Swap
+  description: Rally Thralls
+  components:
+  - type: Action
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayVampireThralls
+      range: 7
+      effect: !type:NestedEffect
+        proto: VampireRejuvII
+
+# Blood Bond
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodBond
+  name: Blood Bond
+  description: Blood Bond
+  components:
+  - type: Action
+    raiseOnAction: false # requires thralls to use
+    raiseOnUser: true
+    # useDelay: 2
+    icon:
+      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:BloodBondActionEvent
+
+# Mass Hysteria
+- type: entity # TODO: test with different clients
+  parent: BaseVampireAction
+  id: ActionMassHysteria
+  name: Mass Hysteria
+  description: Mass Hysteria
   components:
   - type: Action
     # useDelay: 2
@@ -130,7 +154,12 @@
   - type: EffectAction
     effects:
     - !type:RelayNearby
-      compName: VampireThrall
-      range: 7
-      effect: !NestedEffect
-        proto: VampireRejuvII
+      compName: StatusEffects
+      range: 8
+      effect: !type:NestedEffect
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+              - VampireThrall
+        proto: MassHysteria

@@ -10,15 +10,12 @@ namespace Content.Trauma.Shared.StatusEffects;
 
 public sealed class ProjectileModifyStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly EntityQuery<ProjectileComponent> _projQuery = default!;
     [Dependency] private readonly EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<StatusEffectContainerComponent, AmmoShotUserEvent>(_status.RelayEvent);
 
         SubscribeLocalEvent<ProjectileModifyStatusEffectComponent, StatusEffectRelayedEvent<AmmoShotUserEvent>>(OnAmmoShot);
     }

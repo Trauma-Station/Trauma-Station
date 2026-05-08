@@ -6,7 +6,7 @@
   components:
   - type: StaminaModifierStatusEffect
     modifier: 1.5
-  - type: DamageModifyStatusEffect
+  - type: DamageModifierStatusEffect
     modifiers:
       coefficients:
         Blunt: 0.4

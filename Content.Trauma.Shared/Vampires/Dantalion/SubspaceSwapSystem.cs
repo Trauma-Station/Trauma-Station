@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 /// </summary>
 public sealed class SubspaceSwapSystem : EntitySystem
 {
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -24,11 +24,7 @@ public sealed class SubspaceSwapSystem : EntitySystem
         var performer = args.Performer;
         var target = args.Target;
 
-        var xformPerformer = Transform(performer);
-        var xformTarget = Transform(target);
-
-        _teleport.Teleport(performer, xformTarget.Coordinates, performer);
-        _teleport.Teleport(target, xformPerformer.Coordinates, performer);
+        _transform.SwapPositions(performer, target);
     }
 }
 

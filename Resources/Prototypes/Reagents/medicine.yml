@@ -1206,11 +1206,6 @@
     Digestion:
       effects:
       # <Trauma>
-      - !type:DeconvertGhoul
-        conditions:
-        - !type:ReagentCondition
-          reagent: Holywater
-          min: 20
       - !type:HolyIgnite
         stacks: 3
         conditions:

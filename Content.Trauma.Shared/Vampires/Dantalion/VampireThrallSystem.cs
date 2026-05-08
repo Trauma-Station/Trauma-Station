@@ -2,6 +2,7 @@
 
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Dantalion;
 
@@ -11,7 +12,9 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 public sealed class VampireThrallSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+
+    [Dependency] private readonly IGameTiming _timing = default!;
+    // [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly EntityQuery<VampireThrallsComponent> _thrallsQuery = default!;
 
     public override void Initialize()
@@ -31,11 +34,11 @@ public sealed class VampireThrallSystem : EntitySystem
         var user = ent.Owner;
         var cap = ent.Comp.ThrallCap;
 
-        if (!_mind.TryGetMind(target, out _, out _))
+        /*if (!_mind.TryGetMind(target, out _, out _))
         {
             _popup.PopupClient("The target has no mind!", user, PopupType.MediumCaution);
             return;
-        }
+        } TODO: Uncomment when done testing */
 
         if (ent.Comp.Thralls.Count == cap)
         {
@@ -67,9 +70,11 @@ public sealed class VampireThrallSystem : EntitySystem
 
     private void OnShutdown(Entity<VampireThrallComponent> ent, ref ComponentShutdown args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         // Remove ourselves from the vampire
         var vampire = ent.Comp.Vampire;
-
         if (!_thrallsQuery.TryComp(vampire, out var thralls))
             return;
 
