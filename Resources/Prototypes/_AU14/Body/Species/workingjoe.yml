@@ -1,4 +1,4 @@
-- type: speciesBaseSprites
+- type: SpeciesBaseSprites
   id: MobWorkingJoeSprites
   sprites:
     Head: MobWorkingJoeHead
