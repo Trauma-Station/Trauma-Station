@@ -1,0 +1,279 @@
+- type: emote
+  id: WorkingJoeBeAProblem
+  name: emote-name-workingjoe-beaproblem
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-beaproblem
+  chatTriggers:
+    - be a problem
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeBeCarefulWithThat
+  name: emote-name-workingjoe-becarefulwiththat
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-becarefulwiththat
+  chatTriggers:
+    - be careful
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCombust
+  name: emote-name-workingjoe-combust
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-combust
+  chatTriggers:
+    - combust
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDamage
+  name: emote-name-workingjoe-damage
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-damage
+  chatTriggers:
+    - damage
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDangerousItems
+  name: emote-name-workingjoe-dangerousitems
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-dangerousitems
+  chatTriggers:
+    - dangerous items
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDontDoThat
+  name: emote-name-workingjoe-dontdothat
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-dontdothat
+  chatTriggers:
+    - dont do that
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeEnough
+  name: emote-name-workingjoe-enough
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-enough
+  chatTriggers:
+    - enough
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeExpensiveMistake
+  name: emote-name-workingjoe-expensivemistake
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-expensivemistake
+  chatTriggers:
+    - expensive mistake
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFire
+  name: emote-name-workingjoe-fire
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-fire
+  chatTriggers:
+    - fire
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFireDrill
+  name: emote-name-workingjoe-firedrill
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-firedrill
+  chatTriggers:
+    - fire drill
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeGettingCareless
+  name: emote-name-workingjoe-gettingcareless
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-gettingcareless
+  chatTriggers:
+    - getting careless
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHaveAProblem
+  name: emote-name-workingjoe-haveaproblem
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-haveaproblem
+  chatTriggers:
+    - have a problem
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHazardLevel
+  name: emote-name-workingjoe-hazardlevel
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-hazardlevel
+  chatTriggers:
+    - hazard level
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHurtYourself
+  name: emote-name-workingjoe-hurtyourself
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-hurtyourself
+  chatTriggers:
+    - hurt yourself
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHysterical
+  name: emote-name-workingjoe-hysterical
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-hysterical
+  chatTriggers:
+    - hysterical
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIWishYou
+  name: emote-name-workingjoe-iwishyou
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-iwishyou
+  chatTriggers:
+    - i wish you
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeLevelOmega
+  name: emote-name-workingjoe-levelomega
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-levelomega
+  chatTriggers:
+    - level omega
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeMultipleSafety
+  name: emote-name-workingjoe-multiplesafety
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-multiplesafety
+  chatTriggers:
+    - multiple safety
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeTalkAboutSafety
+  name: emote-name-workingjoe-talkaboutsafety
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-talkaboutsafety
+  chatTriggers:
+    - talk safety
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeWeaponPermit
+  name: emote-name-workingjoe-weaponpermit
+  category: Warning
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-weaponpermit
+  chatTriggers:
+    - weapon permit
+  whitelist:
+    tags:
+    - WorkingJoe

@@ -1,0 +1,713 @@
+- type: soundCollection
+  id: AU14WorkingJoeAlarmActivated
+  files:
+  - /Audio/_AU14/WorkingJoe/alarm_activated.ogg
+  - /Audio/_AU14/WorkingJoe/alarm_activated_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAllDay
+  files:
+  - /Audio/_AU14/WorkingJoe/all_day.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAlwaysKnow
+  files:
+  - /Audio/_AU14/WorkingJoe/alwaysknow.ogg
+  - /Audio/_AU14/WorkingJoe/alwaysknow_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAnotherProblem
+  files:
+  - /Audio/_AU14/WorkingJoe/another_problem.ogg
+  - /Audio/_AU14/WorkingJoe/another_problem_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeApolloBehalf
+  files:
+  - /Audio/_AU14/WorkingJoe/apollo_behalf.ogg
+  - /Audio/_AU14/WorkingJoe/apollo_behalf_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAreYouAware
+  files:
+  - /Audio/_AU14/WorkingJoe/are_you_aware.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAreYouPlaying
+  files:
+  - /Audio/_AU14/WorkingJoe/are_you_playing.ogg
+  - /Audio/_AU14/WorkingJoe/are_you_playing_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAreaRestricted
+  files:
+  - /Audio/_AU14/WorkingJoe/area_restricted_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAsIThought
+  files:
+  - /Audio/_AU14/WorkingJoe/as_i_thought.ogg
+  - /Audio/_AU14/WorkingJoe/as_i_thought_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAwful
+  files:
+  - /Audio/_AU14/WorkingJoe/awful.ogg
+  - /Audio/_AU14/WorkingJoe/awful_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBackToWork
+  files:
+  - /Audio/_AU14/WorkingJoe/back_to_work.ogg
+  - /Audio/_AU14/WorkingJoe/back_to_work_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBeAProblem
+  files:
+  - /Audio/_AU14/WorkingJoe/be_a_problem.ogg
+  - /Audio/_AU14/WorkingJoe/be_a_problem_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBeCarefulWithThat
+  files:
+  - /Audio/_AU14/WorkingJoe/be_careful_with_that.ogg
+  - /Audio/_AU14/WorkingJoe/be_careful_with_that_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBeenHere
+  files:
+  - /Audio/_AU14/WorkingJoe/been_here.ogg
+  - /Audio/_AU14/WorkingJoe/been_here_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBeenLookingForYou
+  files:
+  - /Audio/_AU14/WorkingJoe/been_looking_for_you.ogg
+  - /Audio/_AU14/WorkingJoe/been_looking_for_you_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBelongToYou
+  files:
+  - /Audio/_AU14/WorkingJoe/belong_to_you.ogg
+  - /Audio/_AU14/WorkingJoe/belong_to_you_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBeyondRepair
+  files:
+  - /Audio/_AU14/WorkingJoe/beyond_repair.ogg
+  - /Audio/_AU14/WorkingJoe/beyond_repair_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBottomOfThis
+  files:
+  - /Audio/_AU14/WorkingJoe/bottom_of_this.ogg
+  - /Audio/_AU14/WorkingJoe/bottom_of_this_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeBreach
+  files:
+  - /Audio/_AU14/WorkingJoe/breach.ogg
+  - /Audio/_AU14/WorkingJoe/breach_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCalmDown
+  files:
+  - /Audio/_AU14/WorkingJoe/calm_down.ogg
+  - /Audio/_AU14/WorkingJoe/calm_down_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCameFrom
+  files:
+  - /Audio/_AU14/WorkingJoe/came_from.ogg
+  - /Audio/_AU14/WorkingJoe/came_from_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCantSeeYou
+  files:
+  - /Audio/_AU14/WorkingJoe/cant_see_you.ogg
+  - /Audio/_AU14/WorkingJoe/cant_see_you_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCleanUp
+  files:
+  - /Audio/_AU14/WorkingJoe/clean_up.ogg
+  - /Audio/_AU14/WorkingJoe/clean_up_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeClearWaste
+  files:
+  - /Audio/_AU14/WorkingJoe/clear_waste.ogg
+  - /Audio/_AU14/WorkingJoe/clear_waste_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCombust
+  files:
+  - /Audio/_AU14/WorkingJoe/combust.ogg
+  - /Audio/_AU14/WorkingJoe/combust_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeComeOutVent
+  files:
+  - /Audio/_AU14/WorkingJoe/come_out_vent.ogg
+  - /Audio/_AU14/WorkingJoe/come_out_vent_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeComeWithMe
+  files:
+  - /Audio/_AU14/WorkingJoe/come_with_me.ogg
+  - /Audio/_AU14/WorkingJoe/come_with_me_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCorporateRepresentatives
+  files:
+  - /Audio/_AU14/WorkingJoe/corporate_representatives.ogg
+  - /Audio/_AU14/WorkingJoe/corporate_representatives_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCouldBeSomeone
+  files:
+  - /Audio/_AU14/WorkingJoe/could_be_someone.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCouldRequireAttention
+  files:
+  - /Audio/_AU14/WorkingJoe/could_require_attention.ogg
+  - /Audio/_AU14/WorkingJoe/could_require_attention_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeCurious
+  files:
+  - /Audio/_AU14/WorkingJoe/curious.ogg
+  - /Audio/_AU14/WorkingJoe/curious_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDamage
+  files:
+  - /Audio/_AU14/WorkingJoe/damage.ogg
+  - /Audio/_AU14/WorkingJoe/damage_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDangeriousItems
+  files:
+  - /Audio/_AU14/WorkingJoe/dangerous_items.ogg
+  - /Audio/_AU14/WorkingJoe/dangerous_items_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDayNeverDone
+  files:
+  - /Audio/_AU14/WorkingJoe/day_never_done.ogg
+  - /Audio/_AU14/WorkingJoe/day_never_done_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDeath
+  files:
+  - /Audio/_AU14/WorkingJoe/death_dream.ogg
+  - /Audio/_AU14/WorkingJoe/death_hj_normal.ogg
+  - /Audio/_AU14/WorkingJoe/death_hj_silence.ogg
+  - /Audio/_AU14/WorkingJoe/death_hj_tomorrow.ogg
+  - /Audio/_AU14/WorkingJoe/death_normal.ogg
+  - /Audio/_AU14/WorkingJoe/death_silence.ogg
+  - /Audio/_AU14/WorkingJoe/death_tomorrow.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDetailedReport
+  files:
+  - /Audio/_AU14/WorkingJoe/detailed_report.ogg
+  - /Audio/_AU14/WorkingJoe/detailed_report_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDisturbance
+  files:
+  - /Audio/_AU14/WorkingJoe/disturbance_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDoingHere
+  files:
+  - /Audio/_AU14/WorkingJoe/doing_here.ogg
+  - /Audio/_AU14/WorkingJoe/doing_here_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDontRun
+  files:
+  - /Audio/_AU14/WorkingJoe/dont_run.ogg
+  - /Audio/_AU14/WorkingJoe/dont_run_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDontUnderstand
+  files:
+  - /Audio/_AU14/WorkingJoe/dont_understand.ogg
+  - /Audio/_AU14/WorkingJoe/dont_understand_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeDontDoThat
+  files:
+  - /Audio/_AU14/WorkingJoe/dontdothat.ogg
+  - /Audio/_AU14/WorkingJoe/dontdothat_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeEnough
+  files:
+  - /Audio/_AU14/WorkingJoe/enough.ogg
+  - /Audio/_AU14/WorkingJoe/enough_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeExistingTasks
+  files:
+  - /Audio/_AU14/WorkingJoe/existing_tasks.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeExpensiveMistake
+  files:
+  - /Audio/_AU14/WorkingJoe/expensive_mistake.ogg
+  - /Audio/_AU14/WorkingJoe/expensive_mistake_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFacilityClear
+  files:
+  - /Audio/_AU14/WorkingJoe/facility_clear.ogg
+  - /Audio/_AU14/WorkingJoe/facility_clear_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFailedSupportRequest
+  files:
+  - /Audio/_AU14/WorkingJoe/failed_support_request.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFire
+  files:
+  - /Audio/_AU14/WorkingJoe/fire.ogg
+  - /Audio/_AU14/WorkingJoe/fire_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFireDrill
+  files:
+  - /Audio/_AU14/WorkingJoe/fire_drill.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFirearm
+  files:
+  - /Audio/_AU14/WorkingJoe/firearm.ogg
+  - /Audio/_AU14/WorkingJoe/firearm_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFollowMe
+  files:
+  - /Audio/_AU14/WorkingJoe/follow_me.ogg
+  - /Audio/_AU14/WorkingJoe/follow_me_please_haz.ogg
+  - /Audio/_AU14/WorkingJoe/follow_me_please.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeForNoGain
+  files:
+  - /Audio/_AU14/WorkingJoe/for_no_gain.ogg
+  - /Audio/_AU14/WorkingJoe/for_no_gain_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFoundYou
+  files:
+  - /Audio/_AU14/WorkingJoe/found_you.ogg
+  - /Audio/_AU14/WorkingJoe/found_you_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeFurtherAssistance
+  files:
+  - /Audio/_AU14/WorkingJoe/further_assistance.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeGettingCareless
+  files:
+  - /Audio/_AU14/WorkingJoe/getting_careless.ogg
+  - /Audio/_AU14/WorkingJoe/getting_careless_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeGladWeResolved
+  files:
+  - /Audio/_AU14/WorkingJoe/glad_we_resolved.ogg
+  - /Audio/_AU14/WorkingJoe/glad_we_resolved_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeGoingAnywhere
+  files:
+  - /Audio/_AU14/WorkingJoe/going_anywhere.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeGoingOn
+  files:
+  - /Audio/_AU14/WorkingJoe/going_on.ogg
+  - /Audio/_AU14/WorkingJoe/going_on_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeGoodDay
+  files:
+  - /Audio/_AU14/WorkingJoe/good_day.ogg
+  - /Audio/_AU14/WorkingJoe/good_day_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeGooseChase
+  files:
+  - /Audio/_AU14/WorkingJoe/goose_chase.ogg
+  - /Audio/_AU14/WorkingJoe/goose_chase_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHadThePleasure
+  files:
+  - /Audio/_AU14/WorkingJoe/had_the_pleasure.ogg
+  - /Audio/_AU14/WorkingJoe/had_the_pleasure_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHaveAProblem
+  files:
+  - /Audio/_AU14/WorkingJoe/have_a_problem.ogg
+  - /Audio/_AU14/WorkingJoe/have_a_problem_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHazardLevel
+  files:
+  - /Audio/_AU14/WorkingJoe/hazard_level.ogg
+  - /Audio/_AU14/WorkingJoe/hazard_level_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHealthRisks
+  files:
+  - /Audio/_AU14/WorkingJoe/health_risks.ogg
+
+
+- type: soundCollection
+  id: AU14WorkingJoeHealthRisksSmoking
+  files:
+  - /Audio/_AU14/WorkingJoe/health_risks_smoking.ogg
+  - /Audio/_AU14/WorkingJoe/health_risks_smoking_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHello
+  files:
+  - /Audio/_AU14/WorkingJoe/hello.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHmmm
+  files:
+  - /Audio/_AU14/WorkingJoe/hmmm.ogg
+  - /Audio/_AU14/WorkingJoe/hmmm_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHoldStill
+  files:
+  - /Audio/_AU14/WorkingJoe/hold_still.ogg
+  - /Audio/_AU14/WorkingJoe/hold_still_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHowAreYou
+  files:
+  - /Audio/_AU14/WorkingJoe/how_are_you.ogg
+  - /Audio/_AU14/WorkingJoe/how_are_you_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHowCanIHelpYou
+  files:
+  - /Audio/_AU14/WorkingJoe/how_can_i_help.ogg
+  - /Audio/_AU14/WorkingJoe/how_can_i_help_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHowInconsiderate
+  files:
+  - /Audio/_AU14/WorkingJoe/how_inconsiderate.ogg
+  - /Audio/_AU14/WorkingJoe/how_inconsiderate_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHurtYourself
+  files:
+  - /Audio/_AU14/WorkingJoe/hurt_yourself.ogg
+  - /Audio/_AU14/WorkingJoe/hurt_yourself_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeHysterical
+  files:
+  - /Audio/_AU14/WorkingJoe/hysterical.ogg
+  - /Audio/_AU14/WorkingJoe/hysterical_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeICantHelpYou
+  files:
+  - /Audio/_AU14/WorkingJoe/i_cant_help_you.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIWishYou
+  files:
+  - /Audio/_AU14/WorkingJoe/i_wish_you.ogg
+  - /Audio/_AU14/WorkingJoe/i_wish_you_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeInexpensive
+  files:
+  - /Audio/_AU14/WorkingJoe/inexpensive.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeInterloper
+  files:
+  - /Audio/_AU14/WorkingJoe/interloper.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeInvestigateWeapon
+  files:
+  - /Audio/_AU14/WorkingJoe/investigate_weapon.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeInvestigateDisturbance
+  files:
+  - /Audio/_AU14/WorkingJoe/investigating_disturbance_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIrresponsible
+  files:
+  - /Audio/_AU14/WorkingJoe/irresponsible.ogg
+  - /Audio/_AU14/WorkingJoe/irresponsible_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIsAnybodyThere
+  files:
+  - /Audio/_AU14/WorkingJoe/is_anybody_there.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIsntRight
+  files:
+  - /Audio/_AU14/WorkingJoe/isnt_right.ogg
+  - /Audio/_AU14/WorkingJoe/isnt_right_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeJoinUs
+  files:
+  - /Audio/_AU14/WorkingJoe/join_us.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeKeepCalm
+  files:
+  - /Audio/_AU14/WorkingJoe/keep_calm.ogg
+  - /Audio/_AU14/WorkingJoe/keep_calm_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeLetMeHelp
+  files:
+  - /Audio/_AU14/WorkingJoe/let_me_help.ogg
+  - /Audio/_AU14/WorkingJoe/let_me_help_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeLevelOmega
+  files:
+  - /Audio/_AU14/WorkingJoe/level_omega.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeLevelOmegaPermissions
+  files:
+  - /Audio/_AU14/WorkingJoe/level_omega_permissions.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeLittleDetails
+  files:
+  - /Audio/_AU14/WorkingJoe/little_details.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeLost
+  files:
+  - /Audio/_AU14/WorkingJoe/lost.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeMorePressingMatters
+  files:
+  - /Audio/_AU14/WorkingJoe/more_pressing_matters_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeMostConcerning
+  files:
+  - /Audio/_AU14/WorkingJoe/most_concerning.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeMySchedule
+  files:
+  - /Audio/_AU14/WorkingJoe/my_schedule.ogg
+  - /Audio/_AU14/WorkingJoe/my_schedule_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeMyturnNow
+  files:
+  - /Audio/_AU14/WorkingJoe/my_turn_now.ogg
+  - /Audio/_AU14/WorkingJoe/my_turn_now_haz.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeNeedsAssistance
+  files:
+  - /Audio/_AU14/WorkingJoe/needs_assistance.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeNoLaughingMatter
+  files:
+  - /Audio/_AU14/WorkingJoe/no_laughing_matter.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeNoNeed
+  files:
+  - /Audio/_AU14/WorkingJoe/no_need.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAPityService
+  files:
+  - /Audio/_AU14/WorkingJoe/a_pity_service.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAbandoningSearch
+  files:
+  - /Audio/_AU14/WorkingJoe/abandoning_search_routines.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAlarmExamine
+  files:
+  - /Audio/_AU14/WorkingJoe/alarm_examine.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAreYouAuthorisedAlarm
+  files:
+  - /Audio/_AU14/WorkingJoe/are_you_authorised_alarm.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeAreYouQuiteFinished
+  files:
+  - /Audio/_AU14/WorkingJoe/are_you_quite_finished.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeEnergySurgeDetected
+  files:
+  - /Audio/_AU14/WorkingJoe/energy_surge_detected.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIWillInformApollo
+  files:
+  - /Audio/_AU14/WorkingJoe/i_will_inform_apollo.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIllHaveToReportYou
+  files:
+  - /Audio/_AU14/WorkingJoe/ill_have_to_report_you.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeIllReportThis
+  files:
+  - /Audio/_AU14/WorkingJoe/ill_report_this.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeLetUsKnow
+  files:
+  - /Audio/_AU14/WorkingJoe/let_us_know.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeMultipleSafety
+  files:
+  - /Audio/_AU14/WorkingJoe/multiple_safety.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoePlease
+  files:
+  - /Audio/_AU14/WorkingJoe/please.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoePleaseStopThis
+  files:
+  - /Audio/_AU14/WorkingJoe/please_stop_this.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeProtectedAreaCompromised
+  files:
+  - /Audio/_AU14/WorkingJoe/protected_area_compromised.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeReally
+  files:
+  - /Audio/_AU14/WorkingJoe/really.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeRequiredByApollo
+  files:
+  - /Audio/_AU14/WorkingJoe/required_by_apollo.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeReturningToTasks
+  files:
+  - /Audio/_AU14/WorkingJoe/returning_to_tasks.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeSeegsonTomorrow
+  files:
+  - /Audio/_AU14/WorkingJoe/seegson_tomorrow_together.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeSupportTicketRemoved
+  files:
+  - /Audio/_AU14/WorkingJoe/support_ticket_removed.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeTalkAboutSafety
+  files:
+  - /Audio/_AU14/WorkingJoe/talk_about_safety.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeTemperature
+  files:
+  - /Audio/_AU14/WorkingJoe/temperature.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeReallyWontDo
+  files:
+  - /Audio/_AU14/WorkingJoe/this_really_wont_do.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeWontDo
+  files:
+  - /Audio/_AU14/WorkingJoe/this_wont_do.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeUnidentifiedSpecies
+  files:
+  - /Audio/_AU14/WorkingJoe/unidentified_species.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeWeaponPermit
+  files:
+  - /Audio/_AU14/WorkingJoe/weapon_permit.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeWhatIsThis
+  files:
+  - /Audio/_AU14/WorkingJoe/what_is_this.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeWhatWasThatSound
+  files:
+  - /Audio/_AU14/WorkingJoe/what_was_that_sound.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeWhereAreYouGoing
+  files:
+  - /Audio/_AU14/WorkingJoe/where_are_you_going.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeWhoIsResponsible
+  files:
+  - /Audio/_AU14/WorkingJoe/who_is_responsible.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeYouShouldntBeHere
+  files:
+  - /Audio/_AU14/WorkingJoe/you_shouldnt_be_here.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeYouWillTakeResponsibility
+  files:
+  - /Audio/_AU14/WorkingJoe/you_will_have_to_take_responsibility.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoePresenceLogged
+  files:
+  - /Audio/_AU14/WorkingJoe/your_presence_has_been_logged.ogg
+
+- type: soundCollection
+  id: AU14WorkingJoeYoureNotAllowedThere
+  files:
+  - /Audio/_AU14/WorkingJoe/youre_not_allowed_there.ogg

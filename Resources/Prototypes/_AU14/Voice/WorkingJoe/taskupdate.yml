@@ -1,0 +1,265 @@
+- type: emote
+  id: WorkingJoeAlarmActivated
+  name: emote-name-workingjoe-alarmactivated
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-alarmactivated
+  chatTriggers:
+    - alarm activated
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeBottomOfThis
+  name: emote-name-workingjoe-bottomofthis
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-bottomofthis
+  chatTriggers:
+    - bottom of this
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCleanUp
+  name: emote-name-workingjoe-cleanup
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-cleanup
+  chatTriggers:
+    - clean up
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCouldBeSomeone
+  name: emote-name-workingjoe-couldbesome
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-couldbesome
+  chatTriggers:
+    - could be someone
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCouldRequireAttention
+  name: emote-name-workingjoe-couldrequireattention
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-couldrequireattention
+  chatTriggers:
+    - require attention
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDayNeverDone
+  name: emote-name-workingjoe-dayneverdone
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-dayneverdone
+  chatTriggers:
+    - day never done
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDisturbance
+  name: emote-name-workingjoe-disturbance
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-disturbance
+  chatTriggers:
+    - disturbance
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeExistingTasks
+  name: emote-name-workingjoe-existingtasks
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-existingtasks
+  chatTriggers:
+    - existing tasks
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeInvestigateWeapon
+  name: emote-name-workingjoe-investigateweapon
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-investigateweapon
+  chatTriggers:
+    - investigate weapon
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeInvestigateDisturbance
+  name: emote-name-workingjoe-investigatedisturbance
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-investigatedisturbance
+  chatTriggers:
+    - investigate disturbance
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeMySchedule
+  name: emote-name-workingjoe-myschedule
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-myschedule
+  chatTriggers:
+    - my schedule
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeMyTurnNow
+  name: emote-name-workingjoe-myturnnow
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-myturnnow
+  chatTriggers:
+    - my turn now
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeICantHelpYou
+  name: emote-name-workingjoe-icanthelpyou
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-icanthelpyou
+  chatTriggers:
+    - cant help you
+  whitelist:
+    tags:
+    - WorkingJoe
+  
+- type: emote
+  id: WorkingJoeAbandoningSearchRoutines
+  name: emote-name-workingjoe-abandoningsearchroutines
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-abandoningsearchroutines
+  chatTriggers:
+    - search routines
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAlarmExamine
+  name: emote-name-workingjoe-alarmexamine
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-alarmexamine
+  chatTriggers:
+    - alarm examine
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeEnergySurgeDetected
+  name: emote-name-workingjoe-energysurgedetected
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-energysurgedetected
+  chatTriggers:
+    - energy surge
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeRequiredByApollo
+  name: emote-name-workingjoe-requiredbyapollo
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-requiredbyapollo
+  chatTriggers:
+    - required by apollo
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeReturningToTasks
+  name: emote-name-workingjoe-returningtotasks
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-returningtotasks
+  chatTriggers:
+    - returning to tasks
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeSupportTicketRemoved
+  name: emote-name-workingjoe-supportticketremoved
+  category: TaskUpdate
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-supportticketremoved
+  chatTriggers:
+    - ticket removed
+  whitelist:
+    tags:
+    - WorkingJoe

@@ -1,0 +1,259 @@
+- type: emoteSounds
+  id: AU14WorkingJoeSounds
+  sounds:
+    WorkingJoeAlarmActivated:
+      collection: AU14WorkingJoeAlarmActivated
+    WorkingJoeAllDay:
+      collection: AU14WorkingJoeAllDay
+    WorkingJoeAlwaysKnow:
+      collection: AU14WorkingJoeAlwaysKnow
+    WorkingJoeAnotherProblem:
+      collection: AU14WorkingJoeAnotherProblem
+    WorkingJoeApolloBehalf:
+      collection: AU14WorkingJoeApolloBehalf
+    WorkingJoeAreYouAware:
+      collection: AU14WorkingJoeAreYouAware
+    WorkingJoeAreYouPlaying:
+      collection: AU14WorkingJoeAreYouPlaying
+    WorkingJoeAreaRestricted:
+      collection: AU14WorkingJoeAreaRestricted
+    WorkingJoeAsIThought:
+      collection: AU14WorkingJoeAsIThought
+    WorkingJoeAwful:
+      collection: AU14WorkingJoeAwful
+    WorkingJoeBackToWork:
+      collection: AU14WorkingJoeBackToWork
+    WorkingJoeBeAProblem:
+      collection: AU14WorkingJoeBeAProblem
+    WorkingJoeBeCarefulWithThat:
+      collection: AU14WorkingJoeBeCarefulWithThat
+    WorkingJoeBeenHere:
+      collection: AU14WorkingJoeBeenHere
+    WorkingJoeBeenLookingForYou:
+      collection: AU14WorkingJoeBeenLookingForYou
+    WorkingJoeBelongToYou:
+      collection: AU14WorkingJoeBelongToYou
+    WorkingJoeBeyondRepair:
+      collection: AU14WorkingJoeBeyondRepair
+    WorkingJoeBottomOfThis:
+      collection: AU14WorkingJoeBottomOfThis
+    WorkingJoeBreach:
+      collection: AU14WorkingJoeBreach
+    WorkingJoeCalmDown:
+      collection: AU14WorkingJoeCalmDown
+    WorkingJoeCameFrom:
+      collection: AU14WorkingJoeCameFrom
+    WorkingJoeCantSeeYou:
+      collection: AU14WorkingJoeCantSeeYou
+    WorkingJoeCleanUp:
+      collection: AU14WorkingJoeCleanUp
+    WorkingJoeClearWaste:
+      collection: AU14WorkingJoeClearWaste
+    WorkingJoeCombust:
+      collection: AU14WorkingJoeCombust
+    WorkingJoeComeOutVent:
+      collection: AU14WorkingJoeComeOutVent
+    WorkingJoeComeWithMe:
+      collection: AU14WorkingJoeComeWithMe
+    WorkingJoeCorporateRepresentatives:
+      collection: AU14WorkingJoeCorporateRepresentatives
+    WorkingJoeCouldBeSomeone:
+      collection: AU14WorkingJoeCouldBeSomeone
+    WorkingJoeCouldRequireAttention:
+      collection: AU14WorkingJoeCouldRequireAttention
+    WorkingJoeCurious:
+      collection: AU14WorkingJoeCurious
+    WorkingJoeDamage:
+      collection: AU14WorkingJoeDamage
+    WorkingJoeDangerousItems:
+      collection: AU14WorkingJoeDangeriousItems
+    WorkingJoeDayNeverDone:
+      collection: AU14WorkingJoeDayNeverDone
+    WorkingJoeDetailedReport:
+      collection: AU14WorkingJoeDetailedReport
+    WorkingJoeDisturbance:
+      collection: AU14WorkingJoeDisturbance
+    WorkingJoeDoingHere:
+      collection: AU14WorkingJoeDoingHere
+    WorkingJoeDontRun:
+      collection: AU14WorkingJoeDontRun
+    WorkingJoeDontUnderstand:
+      collection: AU14WorkingJoeDontUnderstand
+    WorkingJoeDontDoThat:
+      collection: AU14WorkingJoeDontDoThat
+    WorkingJoeEnough:
+      collection: AU14WorkingJoeEnough
+    WorkingJoeExistingTasks:
+      collection: AU14WorkingJoeExistingTasks
+    WorkingJoeExpensiveMistake:
+      collection: AU14WorkingJoeExpensiveMistake
+    WorkingJoeFacilityClear:
+      collection: AU14WorkingJoeFacilityClear
+    WorkingJoeFailedSupportRequest:
+      collection: AU14WorkingJoeFailedSupportRequest
+    WorkingJoeFire:
+      collection: AU14WorkingJoeFire
+    WorkingJoeFireDrill:
+      collection: AU14WorkingJoeFireDrill
+    WorkingJoeFirearm:
+      collection: AU14WorkingJoeFirearm
+    WorkingJoeFollowMe:
+      collection: AU14WorkingJoeFollowMe
+    WorkingJoeForNoGain:
+      collection: AU14WorkingJoeForNoGain
+    WorkingJoeFoundYou:
+      collection: AU14WorkingJoeFoundYou
+    WorkingJoeFurtherAssistance:
+      collection: AU14WorkingJoeFurtherAssistance
+    WorkingJoeGettingCareless:
+      collection: AU14WorkingJoeGettingCareless
+    WorkingJoeGladWeResolved:
+      collection: AU14WorkingJoeGladWeResolved
+    WorkingJoeGoingAnywhere:
+      collection: AU14WorkingJoeGoingAnywhere
+    WorkingJoeGoingOn:
+      collection: AU14WorkingJoeGoingOn
+    WorkingJoeGoodDay:
+      collection: AU14WorkingJoeGoodDay
+    WorkingJoeGooseChase:
+      collection: AU14WorkingJoeGooseChase
+    WorkingJoeHadThePleasure:
+      collection: AU14WorkingJoeHadThePleasure
+    WorkingJoeHaveAProblem:
+      collection: AU14WorkingJoeHaveAProblem
+    WorkingJoeHazardLevel:
+      collection: AU14WorkingJoeHazardLevel
+    WorkingJoeHealthRisks:
+      collection: AU14WorkingJoeHealthRisks
+    WorkingJoeHealthRisksSmoking:
+      collection: AU14WorkingJoeHealthRisksSmoking
+    WorkingJoeHello:
+      collection: AU14WorkingJoeHello
+    WorkingJoeHmmm:
+      collection: AU14WorkingJoeHmmm
+    WorkingJoeHoldStill:
+      collection: AU14WorkingJoeHoldStill
+    WorkingJoeHowAreYou:
+      collection: AU14WorkingJoeHowAreYou
+    WorkingJoeHowCanIHelpYou:
+      collection: AU14WorkingJoeHowCanIHelpYou
+    WorkingJoeHowInconsiderate:
+      collection: AU14WorkingJoeHowInconsiderate
+    WorkingJoeHurtYourself:
+      collection: AU14WorkingJoeHurtYourself
+    WorkingJoeHysterical:
+      collection: AU14WorkingJoeHysterical
+    WorkingJoeICantHelpYou:
+      collection: AU14WorkingJoeICantHelpYou
+    WorkingJoeIWishYou:
+      collection: AU14WorkingJoeIWishYou
+    WorkingJoeInexpensive:
+      collection: AU14WorkingJoeInexpensive
+    WorkingJoeInterloper:
+      collection: AU14WorkingJoeInterloper
+    WorkingJoeInvestigateWeapon:
+      collection: AU14WorkingJoeInvestigateWeapon
+    WorkingJoeInvestigateDisturbance:
+      collection: AU14WorkingJoeInvestigateDisturbance
+    WorkingJoeIrresponsible:
+      collection: AU14WorkingJoeIrresponsible
+    WorkingJoeIsAnybodyThere:
+      collection: AU14WorkingJoeIsAnybodyThere
+    WorkingJoeIsntRight:
+      collection: AU14WorkingJoeIsntRight
+    WorkingJoeJoinUs:
+      collection: AU14WorkingJoeJoinUs
+    WorkingJoeKeepCalm:
+      collection: AU14WorkingJoeKeepCalm
+    WorkingJoeLetMeHelp:
+      collection: AU14WorkingJoeLetMeHelp
+    WorkingJoeLevelOmega:
+      collection: AU14WorkingJoeLevelOmega
+    WorkingJoeLevelOmegaPermissions:
+      collection: AU14WorkingJoeLevelOmegaPermissions
+    WorkingJoeLittleDetails:
+      collection: AU14WorkingJoeLittleDetails
+    WorkingJoeLost:
+      collection: AU14WorkingJoeLost
+    WorkingJoeMorePressingMatters:
+      collection: AU14WorkingJoeMorePressingMatters
+    WorkingJoeMostConcerning:
+      collection: AU14WorkingJoeMostConcerning
+    WorkingJoeMySchedule:
+      collection: AU14WorkingJoeMySchedule
+    WorkingJoeMyTurnNow:
+      collection: AU14WorkingJoeMyturnNow
+    WorkingJoeNeedsAssistance:
+      collection: AU14WorkingJoeNeedsAssistance
+    WorkingJoeNoLaughingMatter:
+      collection: AU14WorkingJoeNoLaughingMatter
+    WorkingJoeNoNeed:
+      collection: AU14WorkingJoeNoNeed
+    WorkingJoeAPityService:
+      collection: AU14WorkingJoeAPityService
+    WorkingJoeAbandoningSearchRoutines:
+      collection: AU14WorkingJoeAbandoningSearch
+    WorkingJoeAlarmExamine:
+      collection: AU14WorkingJoeAlarmExamine
+    WorkingJoeAreYouAuthorisedAlarm:
+      collection: AU14WorkingJoeAreYouAuthorisedAlarm
+    WorkingJoeAreYouQuiteFinished:
+      collection: AU14WorkingJoeAreYouQuiteFinished
+    WorkingJoeEnergySurgeDetected:
+      collection: AU14WorkingJoeEnergySurgeDetected
+    WorkingJoeIWillInformApollo:
+      collection: AU14WorkingJoeIWillInformApollo
+    WorkingJoeIllHaveToReportYou:
+      collection: AU14WorkingJoeIllHaveToReportYou
+    WorkingJoeIllReportThis:
+      collection: AU14WorkingJoeIllReportThis
+    WorkingJoeLetUsKnow:
+      collection: AU14WorkingJoeLetUsKnow
+    WorkingJoeMultipleSafety:
+      collection: AU14WorkingJoeMultipleSafety
+    WorkingJoePlease:
+      collection: AU14WorkingJoePlease
+    WorkingJoePleaseStopThis:
+      collection: AU14WorkingJoePleaseStopThis
+    WorkingJoeProtectedAreaCompromised:
+      collection: AU14WorkingJoeProtectedAreaCompromised
+    WorkingJoeReally:
+      collection: AU14WorkingJoeReally
+    WorkingJoeRequiredByApollo:
+      collection: AU14WorkingJoeRequiredByApollo
+    WorkingJoeReturningToTasks:
+      collection: AU14WorkingJoeReturningToTasks
+    WorkingJoeSeegsonTomorrow:
+      collection: AU14WorkingJoeSeegsonTomorrow
+    WorkingJoeSupportTicketRemoved:
+      collection: AU14WorkingJoeSupportTicketRemoved
+    WorkingJoeTalkAboutSafety:
+      collection: AU14WorkingJoeTalkAboutSafety
+    WorkingJoeTemperature:
+      collection: AU14WorkingJoeTemperature
+    WorkingJoeReallyWontDo:
+      collection: AU14WorkingJoeReallyWontDo
+    WorkingJoeWontDo:
+      collection: AU14WorkingJoeWontDo
+    WorkingJoeUnidentifiedSpecies:
+      collection: AU14WorkingJoeUnidentifiedSpecies
+    WorkingJoeWeaponPermit:
+      collection: AU14WorkingJoeWeaponPermit
+    WorkingJoeWhatIsThis:
+      collection: AU14WorkingJoeWhatIsThis
+    WorkingJoeWhatWasThatSound:
+      collection: AU14WorkingJoeWhatWasThatSound
+    WorkingJoeWhereAreYouGoing:
+      collection: AU14WorkingJoeWhereAreYouGoing
+    WorkingJoeWhoIsResponsible:
+      collection: AU14WorkingJoeWhoIsResponsible
+    WorkingJoeYouShouldntBeHere:
+      collection: AU14WorkingJoeYouShouldntBeHere
+    WorkingJoeYouWillTakeResponsibility:
+      collection: AU14WorkingJoeYouWillTakeResponsibility
+    WorkingJoePresenceLogged:
+      collection: AU14WorkingJoePresenceLogged
+    WorkingJoeYoureNotAllowedThere:
+      collection: AU14WorkingJoeYoureNotAllowedThere
+    DefaultDeathgasp:
+      collection: AU14WorkingJoeDeath

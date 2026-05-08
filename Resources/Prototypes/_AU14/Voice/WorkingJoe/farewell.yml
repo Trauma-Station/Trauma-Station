@@ -1,0 +1,111 @@
+- type: emote
+  id: WorkingJoeBackToWork
+  name: emote-name-workingjoe-backtowork
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-backtowork
+  chatTriggers:
+    - back to work
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFurtherAssistance
+  name: emote-name-workingjoe-furtherassistance
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-furtherassistance
+  chatTriggers:
+    - further assistance
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeGladWeResolved
+  name: emote-name-workingjoe-gladweresolved
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-gladweresolved
+  chatTriggers:
+    - glad we resolved
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeGoingAnywhere
+  name: emote-name-workingjoe-goinganywhere
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-goinganywhere
+  chatTriggers:
+    - going anywhere
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHadThePleasure
+  name: emote-name-workingjoe-hadthepleasure
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-hadthepleasure
+  chatTriggers:
+    - had the pleasure
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeMorePressingMatters
+  name: emote-name-workingjoe-morepressingmatters
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-morepressingmatters
+  chatTriggers:
+    - more pressing matters
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAPityService
+  name: emote-name-workingjoe-apityservice
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-apityservice
+  chatTriggers:
+    - pity service
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeLetUsKnow
+  name: emote-name-workingjoe-letusknow
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-letusknow
+  chatTriggers:
+    - let me know
+  whitelist:
+    tags:
+    - WorkingJoe

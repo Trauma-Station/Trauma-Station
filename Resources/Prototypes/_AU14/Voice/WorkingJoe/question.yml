@@ -1,0 +1,251 @@
+- type: emote
+  id: WorkingJoeAreYouAware
+  name: emote-name-workingjoe-areyouaware
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-areyouaware
+  chatTriggers:
+    - are you aware
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAreYouPlaying
+  name: emote-name-workingjoe-areyouplaying
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-areyouplaying
+  chatTriggers:
+    - are you playing
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeBelongToYou
+  name: emote-name-workingjoe-belongtoyou
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-belongtoyou
+  chatTriggers:
+    - belong to you
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCameFrom
+  name: emote-name-workingjoe-camefrom
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-camefrom
+  chatTriggers:
+    - came from
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDoingHere
+  name: emote-name-workingjoe-doinghere
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-doinghere
+  chatTriggers:
+    - doing here
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeGoingOn
+  name: emote-name-workingjoe-goingon
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-goingon
+  chatTriggers:
+    - going on
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHowAreYou
+  name: emote-name-workingjoe-howareyou
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-howareyou
+  chatTriggers:
+    - how are you
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIsAnybodyThere
+  name: emote-name-workingjoe-isanybodythere
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-isanybodythere
+  chatTriggers:
+    - is anybody there
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeLost
+  name: emote-name-workingjoe-lost
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-lost
+  chatTriggers:
+    - lost
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeNeedsAssistance
+  name: emote-name-workingjoe-needsassistance
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-needsassistance
+  chatTriggers:
+    - needs assistance
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCantSeeYou
+  name: emote-name-workingjoe-cantseeyou
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-cantseeyou
+  chatTriggers:
+    - cant see you
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAreYouAuthorisedAlarm
+  name: emote-name-workingjoe-areyouauthorisedalarm
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-areyouauthorisedalarm
+  chatTriggers:
+    - authorised alarm
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAreYouQuiteFinished
+  name: emote-name-workingjoe-areyouquitefinished
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-areyouquitefinished
+  chatTriggers:
+    - quite finished
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeReally
+  name: emote-name-workingjoe-really
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-really
+  chatTriggers:
+    - really
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeWhatIsThis
+  name: emote-name-workingjoe-whatisthis
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-whatisthis
+  chatTriggers:
+    - what is this
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeWhatWasThatSound
+  name: emote-name-workingjoe-whatwasthatsound
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-whatwasthatsound
+  chatTriggers:
+    - what was that sound
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeWhereAreYouGoing
+  name: emote-name-workingjoe-whereareyougoing
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-whereareyougoing
+  chatTriggers:
+    - where are you going
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeWhoIsResponsible
+  name: emote-name-workingjoe-whoisresponsible
+  category: Question
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-whoisresponsible
+  chatTriggers:
+    - who is responsible
+  whitelist:
+    tags:
+    - WorkingJoe

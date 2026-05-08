@@ -1,0 +1,265 @@
+- type: emote
+  id: WorkingJoeAlwaysKnow
+  name: emote-name-workingjoe-alwaysknow
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-alwaysknow
+  chatTriggers:
+    - always know
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAsIThought
+  name: emote-name-workingjoe-asithought
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-asithought
+  chatTriggers:
+    - as i thought
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAwful
+  name: emote-name-workingjoe-awful
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-awful
+  chatTriggers:
+    - awful
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeClearWaste
+  name: emote-name-workingjoe-clearwaste
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-clearwaste
+  chatTriggers:
+    - clear waste
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCorporateRepresentatives
+  name: emote-name-workingjoe-corporaterepresentatives
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-corporaterepresentatives
+  chatTriggers:
+    - corporate representatives
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCurious
+  name: emote-name-workingjoe-curious
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-curious
+  chatTriggers:
+    - curious
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDontUnderstand
+  name: emote-name-workingjoe-dontunderstand
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-dontunderstand
+  chatTriggers:
+    - dont understand
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeForNoGain
+  name: emote-name-workingjoe-fornogain
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-fornogain
+  chatTriggers:
+    - for no gain
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFoundYou
+  name: emote-name-workingjoe-foundyou
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-foundyou
+  chatTriggers:
+    - found you
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeGooseChase
+  name: emote-name-workingjoe-goosechase
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-goosechase
+  chatTriggers:
+    - goose chase
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHmmm
+  name: emote-name-workingjoe-hmmm
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-hmmm
+  chatTriggers:
+    - hmmm
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeInexpensive
+  name: emote-name-workingjoe-inexpensive
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-inexpensive
+  chatTriggers:
+    - inexpensive
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeJoinUs
+  name: emote-name-workingjoe-joinus
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-joinus
+  chatTriggers:
+    - join us
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeLittleDetails
+  name: emote-name-workingjoe-littledetails
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-littledetails
+  chatTriggers:
+    - little details
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeNoLaughingMatter
+  name: emote-name-workingjoe-nolaughingmatter
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-nolaughingmatter
+  chatTriggers:
+    - no laughing
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoePlease
+  name: emote-name-workingjoe-please
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-please
+  chatTriggers:
+    - please
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoePleaseStopThis
+  name: emote-name-workingjoe-pleasestopthis
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-pleasestopthis
+  chatTriggers:
+    - please stop this
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeSeegsonTomorrow
+  name: emote-name-workingjoe-seegsontomorrow
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-seegsontomorrow
+  chatTriggers:
+    - seegson tomorrow
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeTemperature
+  name: emote-name-workingjoe-temperature
+  category: General
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-temperature
+  chatTriggers:
+    - temperature
+  whitelist:
+    tags:
+    - WorkingJoe

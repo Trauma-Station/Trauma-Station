@@ -1,0 +1,349 @@
+- type: emote
+  id: WorkingJoeAllDay
+  name: emote-name-workingjoe-allday
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-allday
+  chatTriggers:
+    - all day
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeAnotherProblem
+  name: emote-name-workingjoe-anotherproblem
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-anotherproblem
+  chatTriggers:
+    - another problem
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeApolloBehalf
+  name: emote-name-workingjoe-apollobehalf
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-apollobehalf
+  chatTriggers:
+    - apollo behalf
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeBeenHere
+  name: emote-name-workingjoe-beenhere
+  category: Farewell
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-beenhere
+  chatTriggers:
+    - been here
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeBeyondRepair
+  name: emote-name-workingjoe-beyondrepair
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-beyondrepair
+  chatTriggers:
+    - beyond repair
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeBreach
+  name: emote-name-workingjoe-breach
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-breach
+  chatTriggers:
+    - breach
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeCalmDown
+  name: emote-name-workingjoe-calmdown
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-calmdown
+  chatTriggers:
+    - calm down
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDetailedReport
+  name: emote-name-workingjoe-detailedreport
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-detailedreport
+  chatTriggers:
+    - detailed report
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFacilityClear
+  name: emote-name-workingjoe-facilityclear
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-facilityclear
+  chatTriggers:
+    - facility clear
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFailedSupportRequest
+  name: emote-name-workingjoe-failedsupportrequest
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-failedsupportrequest
+  chatTriggers:
+    - failed support
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFirearm
+  name: emote-name-workingjoe-firearm
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-firearm
+  chatTriggers:
+    - firearm
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeFollowMe
+  name: emote-name-workingjoe-followme
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-followme
+  chatTriggers:
+    - follow me
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIrresponsible
+  name: emote-name-workingjoe-irresponsible
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-irresponsible
+  chatTriggers:
+    - irresponsible
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIsntRight
+  name: emote-name-workingjoe-isntright
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-isntright
+  chatTriggers:
+    - isnt right
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeKeepCalm
+  name: emote-name-workingjoe-keepcalm
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-keepcalm
+  chatTriggers:
+    - keep calm
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeMostConcerning
+  name: emote-name-workingjoe-mostconcerning
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-mostconcerning
+  chatTriggers:
+    - most concerning
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeNoNeed
+  name: emote-name-workingjoe-noneed
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-noneed
+  chatTriggers:
+    - no need
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHowInconsiderate
+  name: emote-name-workingjoe-howinconsiderate
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-howinconsiderate
+  chatTriggers:
+    - how inconsiderate
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHealthRisks
+  name: emote-name-workingjoe-healthrisks
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-healthrisks
+  chatTriggers:
+    - health risks
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHealthRisksSmoking
+  name: emote-name-workingjoe-healthriskssmoking
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-healthriskssmoking
+  chatTriggers:
+    - health risks smoking
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIWillInformApollo
+  name: emote-name-workingjoe-iwillinformapollo
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-iwillinformapollo
+  chatTriggers:
+    - inform apollo
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIllHaveToReportYou
+  name: emote-name-workingjoe-illhavetoreportyou
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-illhavetoreportyou
+  chatTriggers:
+    - report you
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeIllReportThis
+  name: emote-name-workingjoe-illreportthis
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-illreportthis
+  chatTriggers:
+    - report this
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeReallyWontDo
+  name: emote-name-workingjoe-reallywontdo
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-reallywontdo
+  chatTriggers:
+    - really wont do
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeWontDo
+  name: emote-name-workingjoe-wontdo
+  category: Vocal
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-wontdo
+  chatTriggers:
+    - wont do
+  whitelist:
+    tags:
+    - WorkingJoe

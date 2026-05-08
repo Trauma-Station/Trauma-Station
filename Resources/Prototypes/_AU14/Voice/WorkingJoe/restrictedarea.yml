@@ -1,0 +1,181 @@
+- type: emote
+  id: WorkingJoeAreaRestricted
+  name: emote-name-workingjoe-arearestricted
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-arearestricted
+  chatTriggers:
+    - area restricted
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeComeWithMe
+  name: emote-name-workingjoe-comewithme
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-comewithme
+  chatTriggers:
+    - come with me
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeDontRun
+  name: emote-name-workingjoe-dontrun
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-dontrun
+  chatTriggers:
+    - dont run
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHoldStill
+  name: emote-name-workingjoe-holdstill
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-holdstill
+  chatTriggers:
+    - hold still
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeInterloper
+  name: emote-name-workingjoe-interloper
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-interloper
+  chatTriggers:
+    - interloper
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeLevelOmegaPermissions
+  name: emote-name-workingjoe-levelomegapermissions
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-levelomegapermissions
+  chatTriggers:
+    - level omega permissions
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeComeOutVent
+  name: emote-name-workingjoe-comeoutvent
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-comeoutvent
+  chatTriggers:
+    - come out vent
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeProtectedAreaCompromised
+  name: emote-name-workingjoe-protectedareacompromised
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-protectedareacompromised
+  chatTriggers:
+    - area compromised
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeUnidentifiedSpecies
+  name: emote-name-workingjoe-unidentifiedspecies
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-unidentifiedspecies
+  chatTriggers:
+    - unidentified species
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeYouShouldntBeHere
+  name: emote-name-workingjoe-youshouldntbehere
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-youshouldntbehere
+  chatTriggers:
+    - you shouldnt be here
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeYouWillTakeResponsibility
+  name: emote-name-workingjoe-youwilltakeresponsibility
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-youwilltakeresponsibility
+  chatTriggers:
+    - you will take responsibility
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoePresenceLogged
+  name: emote-name-workingjoe-presencelogged
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-presencelogged
+  chatTriggers:
+    - presence logged
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeYoureNotAllowedThere
+  name: emote-name-workingjoe-yourenotallowedthere
+  category: RestrictedArea
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-yourenotallowedthere
+  chatTriggers:
+    - youre not allowed there
+  whitelist:
+    tags:
+    - WorkingJoe

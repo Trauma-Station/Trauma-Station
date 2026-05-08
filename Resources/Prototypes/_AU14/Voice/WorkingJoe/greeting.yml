@@ -1,0 +1,70 @@
+- type: emote
+  id: WorkingJoeBeenLookingForYou
+  name: emote-name-workingjoe-beenlookingforyou
+  category: Greeting
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-beenlookingforyou
+  chatTriggers:
+    - been looking for you
+  whitelist:
+    tags:
+      - WorkingJoe
+
+- type: emote
+  id: WorkingJoeGoodDay
+  name: emote-name-workingjoe-goodday
+  category: Greeting
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-goodday
+  chatTriggers:
+    - good day
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHello
+  name: emote-name-workingjoe-hello
+  category: Greeting
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-hello
+  chatTriggers:
+    - hello
+    - hello.
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeHowCanIHelpYou
+  name: emote-name-workingjoe-howcanihelpyou
+  category: Greeting
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-howcanihelpyou
+  chatTriggers:
+    - how can i help
+  whitelist:
+    tags:
+    - WorkingJoe
+
+- type: emote
+  id: WorkingJoeLetMeHelp
+  name: emote-name-workingjoe-letmehelp
+  category: Greeting
+  icon: Interface/Emotes/scream.png
+  available: false
+  chatMessages:
+    - emote-name-workingjoe-letmehelp
+  chatTriggers:
+    - let me help
+  whitelist:
+    tags:
+    - WorkingJoe

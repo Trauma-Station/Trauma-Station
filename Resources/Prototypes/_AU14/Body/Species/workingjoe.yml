@@ -1,0 +1,116 @@
+- type: speciesBaseSprites
+  id: MobWorkingJoeSprites
+  sprites:
+    Head: MobWorkingJoeHead
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
+    Chest: MobWorkingJoeTorso
+    Eyes: MobHumanoidEyes
+    LArm: MobWorkingJoeLArm
+    RArm: MobWorkingJoeRArm
+    LHand: MobWorkingJoeLHand
+    RHand: MobWorkingJoeRHand
+    LLeg: MobWorkingJoeLLeg
+    RLeg: MobWorkingJoeRLeg
+    LFoot: MobWorkingJoeLFoot
+    RFoot: MobWorkingJoeRFoot
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeHead
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeHeadMale
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeHeadFemale
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeTorso
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeTorsoMale
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeTorsoFemale
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeLLeg
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeLHand
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeLArm
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeLFoot
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeRLeg
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeRHand
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeRArm
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobWorkingJoeRFoot
+  matchSkin: false
+  baseSprite:
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+    state: r_foot
