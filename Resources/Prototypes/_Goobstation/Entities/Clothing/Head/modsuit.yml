@@ -3,10 +3,13 @@
 - type: entity
   abstract: true
   # Used to put pressureProtection, layers blocker and etc components into ComponentToggler
+  parent: BaseItem
   id: BaseClothingModsuitHelmet
   name: base modsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  - type: Item
+    heldPrefix: off
   - type: Appearance
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Modsuits/standard.rsi

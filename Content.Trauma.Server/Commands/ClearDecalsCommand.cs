@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration;
-using Content.Server.Decals;
 using Content.Shared.Administration;
 using Content.Shared.Decals;
 using Robust.Shared.Console;

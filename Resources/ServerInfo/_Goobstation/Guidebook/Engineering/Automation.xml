@@ -22,15 +22,13 @@ It has a [italic]Moved[/italic] signal port which is invoked after an item is mo
 
 ## Automated Machines
 
-A variety of machines can be automated by installing an [bold]Automation Upgrade[/bold] on them.
-
-This can unlock:
+A variety of machines can be automated using a multitool and special ports:
 - signal ports to control the machine by linking it to buttons, logic gates, etc.
 - signal ports that get invoked when the machine does something, like a disposal unit being ready to flush
 - item automation ports for the [bold]robotic arm[/bold] to use
 - a combination of both
 
-Here is every machine that accepts automation upgrades:
+Here is every machine that can be automated:
 
 <GuideAutomationSlotsEmbed/>
 

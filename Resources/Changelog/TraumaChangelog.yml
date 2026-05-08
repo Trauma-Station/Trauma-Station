@@ -8090,3 +8090,65 @@ Entries:
   id: 928
   time: '2026-05-07T12:26:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2467
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed traitor undetermined crate slop, be creative and actually make a
+      build..?
+  id: 929
+  time: '2026-05-08T07:21:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2475
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Automatable machines no longer need an automation upgrade kit to be
+      linked.
+  id: 930
+  time: '2026-05-08T11:15:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2487
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed modsuit eating your original clothes if you get gibbed.
+  id: 931
+  time: '2026-05-08T16:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2491
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dragons can now only spawn rifts inside station areas.
+  id: 932
+  time: '2026-05-08T16:35:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2494
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Enemy of the revolution now has its own red skull icon instead of
+      literally reusing rev icon.
+  id: 933
+  time: '2026-05-08T17:25:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2497
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed midround shadowling not working.
+  id: 934
+  time: '2026-05-08T19:02:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2498
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio volatile organ making you stop metabolizing chemicals.
+  id: 935
+  time: '2026-05-08T19:29:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2499
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed random empty category on cargo request console
+  id: 936
+  time: '2026-05-08T21:33:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2482
