@@ -111,8 +111,8 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
     /// </summary>
     public static readonly string[] IgnoredStrings = new[]
     {
-        // ignore state error spam for deleted entities referenced in a component, engine "maintainer" is a chud and won't do anything about it
-        "Can't resolve \"Robust.Shared.GameObjects.MetaDataComponent\" on entity",
+        // ignore state error spam for deleted entities referenced in a component
+        "Tried to network deleted", // TODO: make separate thing that just tracks every failure and reports it once or on demand
         // upstream issue nobody cares about with prometheus
         "Exception in metrics listener"
     };

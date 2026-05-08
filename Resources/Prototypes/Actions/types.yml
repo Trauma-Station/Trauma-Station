@@ -164,6 +164,8 @@
   name: Activate EMP
   description: Triggers a small EMP pulse around you
   components:
+  - type: LimitedCharges
+    maxCharges: 3
   - type: Action
     checkCanInteract: false
     useDelay: 5  # Trauma, was 30
@@ -172,8 +174,6 @@
     icon:
       sprite: Objects/Weapons/Grenades/empgrenade.rsi
       state: icon
-  - type: LimitedCharges # Trauma
-    maxCharges: 3
 
 - type: entity
   parent: BaseImplantAction

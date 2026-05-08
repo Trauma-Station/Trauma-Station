@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Shared._AU14.WorkingJoe;
 using Content.Shared.Chat.Prototypes;
 
