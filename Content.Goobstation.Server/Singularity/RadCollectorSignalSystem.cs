@@ -24,9 +24,6 @@ public sealed class RadCollectorSignalSystem : EntitySystem
         var query = EntityQueryEnumerator<RadCollectorSignalComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!_automation.IsAutomated(uid))
-                continue;
-
             _appearance.TryGetData<int>(uid, RadiationCollectorVisuals.PressureState, out var rawState);
             var state = rawState switch
             {
