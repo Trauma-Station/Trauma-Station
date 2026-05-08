@@ -8,6 +8,8 @@
   name: base modsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  - type: Item
+    heldPrefix: off
   - type: Appearance
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Modsuits/standard.rsi
