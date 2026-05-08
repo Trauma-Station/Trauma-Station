@@ -1,0 +1,32 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseGrudgeObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-nanotrasen
+  - type: GrudgeCondition
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeBeatObjectiveAccuser
+  name: Make the company rich
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeItemCondition
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeBeatObjectiveAccused
+  name: Make the company rich
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeItemCondition
