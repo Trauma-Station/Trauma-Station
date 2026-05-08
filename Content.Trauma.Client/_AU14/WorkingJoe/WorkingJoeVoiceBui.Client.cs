@@ -1,10 +1,5 @@
-using Content.Trauma.Client._AU14.WorkingJoe;
 using Content.Trauma.Shared._AU14.WorkingJoe;
 using Content.Shared.Chat.Prototypes;
-using Robust.Client.GameObjects;
-using Robust.Client.UserInterface;
-using Robust.Shared.Localization;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client._AU14.WorkingJoe;
 

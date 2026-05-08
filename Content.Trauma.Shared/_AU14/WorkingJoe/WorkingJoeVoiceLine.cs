@@ -1,6 +1,3 @@
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
-
 namespace Content.Trauma.Shared._AU14.WorkingJoe;
 
 [Serializable, NetSerializable]
