@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Humanoid.Prototypes;
 
 namespace Content.Trauma.Server.Grudges;
