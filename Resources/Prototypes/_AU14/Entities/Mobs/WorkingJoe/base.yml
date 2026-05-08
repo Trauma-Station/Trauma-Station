@@ -71,13 +71,13 @@
       FootLeft: OrganWorkingJoeFootLeft
       FootRight: OrganWorkingJoeFootRight
       Brain: OrganHumanBrain
-      Eyes: OrganHumanEyes
+      Eyes: OrganCyberneticEyes
       Tongue: OrganHumanTongue
       Appendix: OrganHumanAppendix
       Ears: OrganHumanEars
-      Lungs: OrganHumanLungs
-      Heart: OrganHumanHeart
+      Heart: OrganCarpHeart
       Stomach: OrganHumanStomach
+      Lungs: OrganCarpLungs
       Liver: OrganHumanLiver
       Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
@@ -85,24 +85,36 @@
 
 - type: entity
   parent:
-  - AppearanceWorkingJoe
   - BaseSpeciesMobOrganic
+  - AppearanceWorkingJoe
   id: AU14MobWorkingJoe
   name: Working Joe
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: IPC
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
     allowMovement: true
     reregister: false
-    name: au14-job-name-workingjoe
-    description: au14-job-description-workingjoe
+    name: job-name-workingjoe
+    description: job-description-workingjoe
     raffle:
       settings: short
   - type: Icon
     sprite: _AU14/Mobs/WorkingJoe/parts.rsi
     state: full
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: SyntheticBlood
+        Quantity: 300
   - type: WorkingJoeVoice
   - type: UserInterface
     interfaces:
@@ -113,20 +125,23 @@
       Male: AU14WorkingJoeSounds
       Female: AU14WorkingJoeSounds
       Unsexed: AU14WorkingJoeSounds
-  - type: TypingIndicator
-    proto: joe
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
-    - AI
     - Common
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
   - type: ActiveRadio
     channels:
-    - AI
     - Common
   - type: MeleeWeapon
     soundHit:
-      path: /Audio/Effects/punch1.ogg
+      path: /Audio/Weapons/punch1.ogg
     angle: 30
     animation: WeaponArcFist
     attackRate: 1

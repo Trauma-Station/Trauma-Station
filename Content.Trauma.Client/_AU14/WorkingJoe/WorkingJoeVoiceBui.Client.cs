@@ -28,7 +28,6 @@ public sealed class WorkingJoeVoiceBui : BoundUserInterface
         _window.OnClose += Close;
         _window.OnLineSelected += OnLineSelected;
 
-        // Build list from all emote prototypes tagged for WorkingJoe
         var lines = new List<WorkingJoeVoiceLine>();
         foreach (var emote in _proto.EnumeratePrototypes<EmotePrototype>())
         {

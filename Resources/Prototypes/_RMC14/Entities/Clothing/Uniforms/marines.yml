@@ -1,8 +1,0 @@
-- type: entity
-  parent: ClothingUniformBase
-  id: CMJumpsuitAverageJoe
-  name: working joe uniform
-  description: A cheap, utilitarian uniform made for Novaris Industries' Working Joe line of synthetics.
-  components:
-  - type: Sprite
-    sprite: _RMC14\Objects\Clothing\Uniforms\Synthetic\joe.rsi

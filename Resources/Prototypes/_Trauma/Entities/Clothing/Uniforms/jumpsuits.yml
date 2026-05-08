@@ -124,3 +124,14 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpskirt/sergeantskirt.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpskirt/sergeantskirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: CMJumpsuitAverageJoe
+  name: working joe uniform
+  description: A cheap, utilitarian uniform made for Novaris Industries' Working Joe line of synthetics.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/joe.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/joe.rsi

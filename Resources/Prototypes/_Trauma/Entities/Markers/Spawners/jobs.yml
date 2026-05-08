@@ -25,3 +25,14 @@
     layers:
     - state: green
     - state: geneticist
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: SpawnPointWorkingJoe
+  name: working joe spawn point
+  components:
+  - type: SpawnPoint
+    job_id: JobWorkingJoe
+  - type: Sprite
+    layers:
+    - state: green

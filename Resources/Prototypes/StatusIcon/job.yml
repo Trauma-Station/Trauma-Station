@@ -323,6 +323,14 @@
     state: Zookeeper
   jobName: job-name-zookeeper
 
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWorkingJoe
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: WorkingJoe
+  jobName: job-name-workingjoe
+
 # Entertainer (like service, but not actually service)
 
 - type: jobIcon

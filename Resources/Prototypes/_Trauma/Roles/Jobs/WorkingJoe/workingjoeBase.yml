@@ -1,0 +1,27 @@
+- type: job
+  id: JobWorkingJoe
+  name: job-name-workingjoe
+  description: job-description-workingjoe
+  playTimeTracker: JobWorkingJoe
+  requirements:
+   - !type:OverallPlaytimeRequirement
+     time: 10800
+  jobEntity: AU14MobWorkingJoe
+  startingGear: AU14GearWorkingJoeBase
+  icon: "JobIconWorkingJoe"
+  supervisors: job-supervisors-service
+  guides: [ Service ]
+  access:
+  - Service
+  - Maintenance
+  - Bar
+  - Kitchen
+  extendedAccess:
+  - Hydroponics
+
+- type: startingGear
+  id: AU14GearWorkingJoeBase
+  equipment:
+    shoes: ClothingShoesBootsWork
+    jumpsuit: CMJumpsuitAverageJoe
+    id: ServiceWorkerPDA

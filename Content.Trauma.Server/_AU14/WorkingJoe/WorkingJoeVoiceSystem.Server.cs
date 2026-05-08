@@ -185,7 +185,6 @@ public sealed class WorkingJoeVoiceSystem : EntitySystem
         if (!_proto.TryIndex<EmotePrototype>(args.EmoteId, out var emote))
             return;
 
-        // Say the line as actual speech
         if (emote.ChatMessages.Count > 0)
         {
             var msg = Loc.GetString(_random.Pick(emote.ChatMessages));
@@ -198,7 +197,6 @@ public sealed class WorkingJoeVoiceSystem : EntitySystem
             );
         }
 
-        // Play soundCollection
         if (EmoteToSound.TryGetValue(args.EmoteId, out var soundId))
         {
             var sound = new SoundCollectionSpecifier(soundId);

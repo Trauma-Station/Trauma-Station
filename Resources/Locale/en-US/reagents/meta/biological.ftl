@@ -52,3 +52,6 @@ reagent-desc-vomit = You can see a few chunks of someone's last meal in it.
 
 reagent-name-grey-matter = grey matter
 reagent-desc-grey-matter = Thought juice, the stuff that leaks out of your ears.
+
+reagent-name-synthetic-blood = Synthetic Blood
+reagent-desc-synthetic-blood = This stuff keeps the Joes Working.

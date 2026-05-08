@@ -276,3 +276,14 @@
         damage:
           types:
             Cellular: 2
+
+- type: reagent
+  parent: Blood
+  id: SyntheticBlood
+  name: reagent-name-synthetic-blood
+  group: Biological
+  desc: reagent-desc-synthetic-blood
+  flavor: horrible
+  color: "#ffffff"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-slimy

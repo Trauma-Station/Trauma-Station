@@ -3,3 +3,6 @@
 
 - type: playTimeTracker
   id: JobPhoneMerchant
+
+- type: playTimeTracker
+  id: JobWorkingJoe
