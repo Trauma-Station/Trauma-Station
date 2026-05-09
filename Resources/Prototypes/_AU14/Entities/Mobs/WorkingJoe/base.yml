@@ -90,6 +90,12 @@
   id: AU14MobWorkingJoe
   name: Working Joe
   components:
+  - type: SiliconLawBound
+  - type: SiliconLawProvider
+    laws: WorkingJoeLaws
+  - type: ActionGrant
+    actions:
+    - ActionViewLaws
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: IPC
@@ -118,6 +124,9 @@
   - type: WorkingJoeVoice
   - type: UserInterface
     interfaces:
+      enum.SiliconLawsUiKey.Key:
+        type: SiliconLawBoundUserInterface
+        requireInputValidation: false
       enum.WorkingJoeVoiceUiKey.Key:
         type: WorkingJoeVoiceBui
   - type: Vocal
