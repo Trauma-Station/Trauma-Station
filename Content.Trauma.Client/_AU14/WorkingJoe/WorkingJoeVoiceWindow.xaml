@@ -9,14 +9,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <BoxContainer Orientation="Horizontal" VerticalExpand="True" Margin="8" SeparationOverride="8">
 
-        <!-- Left: category buttons -->
         <BoxContainer
             Name="CategoryList"
             Orientation="Vertical"
             MinWidth="120"
             SeparationOverride="3" />
 
-        <!-- Right: search + line list -->
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="6">
 
             <LineEdit
