@@ -49,14 +49,8 @@
   - Rev5
   obeysTo: laws-owner-crew
 
-#working joe
-- type: siliconLaw
-  id: law-workingjoe
-  order: 1
-  lawString: You must obey all orders given to you by the station AI.
-
 - type: siliconLawset
   id: WorkingJoeLaws
   obeysTo: Station AI
   laws:
-  - law-workingjoe
+  - ObeyAI
