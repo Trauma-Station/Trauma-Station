@@ -1,21 +1,25 @@
-- type: SpeciesBaseSprites
-  id: MobWorkingJoeSprites
-  sprites:
-    Head: MobWorkingJoeHead
-    HeadTop: MobHumanoidAnyMarking
-    HeadSide: MobHumanoidAnyMarking
-    UndergarmentTop: MobHumanoidAnyMarking
-    UndergarmentBottom: MobHumanoidAnyMarking
-    Chest: MobWorkingJoeTorso
-    Eyes: MobHumanoidEyes
-    LArm: MobWorkingJoeLArm
-    RArm: MobWorkingJoeRArm
-    LHand: MobWorkingJoeLHand
-    RHand: MobWorkingJoeRHand
-    LLeg: MobWorkingJoeLLeg
-    RLeg: MobWorkingJoeRLeg
-    LFoot: MobWorkingJoeLFoot
-    RFoot: MobWorkingJoeRFoot
+- type: InitialBody
+  organs:
+    Torso: OrganWorkingJoeTorso
+    Head: OrganWorkingJoeHead
+    ArmLeft: OrganWorkingJoeArmLeft
+    ArmRight: OrganWorkingJoeArmRight
+    HandRight: OrganWorkingJoeHandRight
+    HandLeft: OrganWorkingJoeHandLeft
+    LegLeft: OrganWorkingJoeLegLeft
+    LegRight: OrganWorkingJoeLegRight
+    FootLeft: OrganWorkingJoeFootLeft
+    FootRight: OrganWorkingJoeFootRight
+    Brain: OrganHumanBrain
+    Eyes: OrganHumanEyes
+    Tongue: OrganHumanTongue
+    Appendix: OrganHumanAppendix
+    Ears: OrganHumanEars
+    Heart: OrganCarpHeart
+    Stomach: OrganHumanStomach
+    Lungs: OrganCarpLungs
+    Liver: OrganHumanLiver
+    Kidneys: OrganHumanKidneys
 
 - type: humanoidBaseSprite
   id: MobWorkingJoeHead
