@@ -1,25 +1,32 @@
-- type: InitialBody
-  organs:
-    Torso: OrganWorkingJoeTorso
-    Head: OrganWorkingJoeHead
-    ArmLeft: OrganWorkingJoeArmLeft
-    ArmRight: OrganWorkingJoeArmRight
-    HandRight: OrganWorkingJoeHandRight
-    HandLeft: OrganWorkingJoeHandLeft
-    LegLeft: OrganWorkingJoeLegLeft
-    LegRight: OrganWorkingJoeLegRight
-    FootLeft: OrganWorkingJoeFootLeft
-    FootRight: OrganWorkingJoeFootRight
-    Brain: OrganHumanBrain
-    Eyes: OrganHumanEyes
-    Tongue: OrganHumanTongue
-    Appendix: OrganHumanAppendix
-    Ears: OrganHumanEars
-    Heart: OrganCarpHeart
-    Stomach: OrganHumanStomach
-    Lungs: OrganCarpLungs
-    Liver: OrganHumanLiver
-    Kidneys: OrganHumanKidneys
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceWorkingJoe
+  name: Working Joe Appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganWorkingJoeTorso
+      Head: OrganWorkingJoeHead
+      ArmLeft: OrganWorkingJoeArmLeft
+      ArmRight: OrganWorkingJoeArmRight
+      HandRight: OrganWorkingJoeHandRight
+      HandLeft: OrganWorkingJoeHandLeft
+      LegLeft: OrganWorkingJoeLegLeft
+      LegRight: OrganWorkingJoeLegRight
+      FootLeft: OrganWorkingJoeFootLeft
+      FootRight: OrganWorkingJoeFootRight
+      Brain: OrganHumanBrain
+      Eyes: OrganHumanEyes
+      Tongue: OrganHumanTongue
+      Appendix: OrganHumanAppendix
+      Ears: OrganHumanEars
+      Heart: OrganCarpHeart
+      Stomach: OrganHumanStomach
+      Lungs: OrganCarpLungs
+      Liver: OrganHumanLiver
+      Kidneys: OrganHumanKidneys
+  - type: HumanoidProfile
+    species: WorkingJoe
 
 - type: humanoidBaseSprite
   id: MobWorkingJoeHead
