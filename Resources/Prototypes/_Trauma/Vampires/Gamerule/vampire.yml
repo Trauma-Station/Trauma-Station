@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseGameRule
+  id: ClockworkCult
+  components:
+  - type: VampireRule
+  - type: GameRule # todo: placeholder
+    chaosScore: 350
+    minPlayers: 15
+  - type: AntagPlayerEffects
+    effects:
+    - !type:ChangeFaction
+      newFaction: VampireFaction
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    agentName: vampire # todo loc
+    definitions:
+    - prefRoles: [ Vampire ]
+      max: 6
+      playerRatio: 20
+      mindRoles:
+      - MindRoleVampire
+      components:
+      - type: Vampire               # Holds total and usable blood.
+      - type: VampireBloodsucking   # Allows the vampire to drain blood from others.
+    # - type: VampireAbilities      # Grants abilities to the vampire.
+      - type: MobClass              # Allows vampire to specialize in a different class.
+        belongsTo: Vampire

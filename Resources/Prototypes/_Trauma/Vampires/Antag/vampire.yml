@@ -1,0 +1,15 @@
+- type: antag
+  id: Vampire
+  name: Vampire # todo: change to loc
+  antagonist: true
+  setPreference: false
+  objective: test  # todo: change to loc
+
+- type: antagSmite
+  id: Vampire
+  antag: Vampire
+  rule: Vampire
+  ruleComp: VampireRule
+  icon:
+    sprite: Structures/Walls/clock.rsi # TODO: Change
+    state: wall_gear
