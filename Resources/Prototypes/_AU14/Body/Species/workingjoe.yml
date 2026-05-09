@@ -1,7 +1,69 @@
 - type: entity
+  abstract: true
+  parent: OrganBaseFleshy
+  id: OrganWorkingJoe
+  suffix: WorkingJoe
+  components:
+  - type: Inorganic
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: IPC
+
+- type: entity
+  abstract: true
+  parent: OrganWorkingJoe
+  id: OrganWorkingJoeExternal
+  components:
+  - type: Sprite
+    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: _AU14/Mobs/WorkingJoe/parts.rsi
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeTorso
+
+- type: entity
+  parent: [ OrganBaseHeadBald, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeHead
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganWorkingJoeExternal ]
+  id: OrganWorkingJoeFootRight
+
+- type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceWorkingJoe
-  name: Working Joe Appearance
+  name: Working Joe appearance
   components:
   - type: InitialBody
     organs:
@@ -27,101 +89,3 @@
       Kidneys: OrganHumanKidneys
   - type: HumanoidProfile
     species: WorkingJoe
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeHead
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeHeadMale
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeHeadFemale
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: head_f
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeTorso
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeTorsoMale
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeTorsoFemale
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: torso_f
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeLLeg
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: l_leg
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeLHand
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: l_hand
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeLArm
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: l_arm
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeLFoot
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: l_foot
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeRLeg
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: r_leg
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeRHand
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: r_hand
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeRArm
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: r_arm
-
-- type: humanoidBaseSprite
-  id: MobWorkingJoeRFoot
-  matchSkin: false
-  baseSprite:
-    sprite: _AU14/Mobs/WorkingJoe/parts.rsi
-    state: r_foot
