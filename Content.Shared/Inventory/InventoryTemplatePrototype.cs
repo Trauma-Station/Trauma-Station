@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+// </Trauma>
 using System.Numerics;
 using Content.Shared.Strip;
 using Content.Shared.Whitelist;
@@ -16,7 +19,7 @@ public sealed partial class InventoryTemplatePrototype : IPrototype
 [DataDefinition]
 public sealed partial class SlotDefinition
 {
-    [DataField("name", required: true)] public string Name { get; private set; } = string.Empty;
+    [DataField(required: true)] public ProtoId<InventorySlotPrototype> Name { get; private set; } // Trauma - string -> ProtoId
     [DataField("slotTexture")] public string TextureName { get; private set; } = "pocket";
     /// <summary>
     /// The texture displayed in a slot when it has an item inside of it.

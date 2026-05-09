@@ -4,7 +4,6 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Roles;
 using Robust.Shared.Map;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;
 

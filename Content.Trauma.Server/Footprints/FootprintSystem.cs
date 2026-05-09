@@ -15,7 +15,6 @@ using Content.Trauma.Shared.Footprints;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Configuration;
-using System.Numerics;
 
 namespace Content.Trauma.Server.Footprints;
 

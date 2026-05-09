@@ -6,7 +6,6 @@ using Robust.Shared.Map.Events;
 using Robust.Shared.Profiling;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;
 

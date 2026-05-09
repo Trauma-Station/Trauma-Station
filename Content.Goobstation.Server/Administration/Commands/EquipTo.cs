@@ -7,6 +7,7 @@ using Content.Shared.Administration;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
+using Content.Trauma.Common.Inventory;
 using Robust.Shared.Console;
 
 namespace Content.Goobstation.Server.Administration.Commands;
@@ -19,8 +20,6 @@ public sealed class EquipTo : LocalizedCommands
 
     public const string CommandName = "equipto";
     public override string Command => CommandName;
-
-    public static readonly ProtoId<InventoryTemplatePrototype> HumanTemplate = "human";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -131,11 +130,10 @@ public sealed class EquipTo : LocalizedCommands
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
-        if (args.Length != 4
-            || !_proto.Resolve(HumanTemplate, out var inventoryTemplate))
+        if (args.Length != 4)
             return CompletionResult.Empty;
 
-        var options = inventoryTemplate.Slots.Select(c => c.Name).OrderBy(c => c).ToArray();
+        var options = _proto.EnumeratePrototypes<InventorySlotPrototype>().Select(p => p.ID).OrderBy(i => i).ToArray();
         return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-equipto-hint"));
     }
 }

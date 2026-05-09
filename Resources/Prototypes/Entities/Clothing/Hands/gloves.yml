@@ -520,6 +520,10 @@
   name: rubber gloves
   description: High-quality rubber gloves, squeaky to do some cleaning!
   components:
+  # <Trauma> - todo above done...
+  - type: LubeImmune
+  - type: GlueImmune
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/janitor.rsi
   - type: Clothing

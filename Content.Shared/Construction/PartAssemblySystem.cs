@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Content.Shared.Construction.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
@@ -94,7 +97,7 @@ public sealed class PartAssemblySystem : EntitySystem
         if (!component.Parts.TryGetValue(assemblyId, out var tags))
             return false;
 
-        var openTags = new List<string>(tags);
+        var openTags = new List<ProtoId<TagPrototype>>(tags); // Trauma - string -> ProtoId
         var contained = new List<EntityUid>(component.PartsContainer.ContainedEntities);
         foreach (var tag in tags)
         {
