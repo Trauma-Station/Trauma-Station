@@ -1,2 +1,2 @@
-action-name-workingjoe-voice = Voice Synthesizer
-action-desc-workingjoe-voice = Opens a Working Joe Voice Synthesizer.
+ent-ActionWorkingJoeVoice = Voice Synthesizer
+    .desc = Opens a Working Joe Voice Synthesizer.

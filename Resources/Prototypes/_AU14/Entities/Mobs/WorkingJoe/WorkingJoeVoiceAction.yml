@@ -1,6 +1,7 @@
 - type: entity
   id: ActionWorkingJoeVoice
-  name: action-name-workingjoe-voice
+  name: Voice Synthesizer
+  description: Opens a Working Joe Voice Synthesizer.
   components:
   - type: Action
     icon:
