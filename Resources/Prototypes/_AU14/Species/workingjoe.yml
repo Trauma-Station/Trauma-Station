@@ -3,7 +3,5 @@
   name: species-name-workingjoe
   roundStart: false
   prototype: AU14MobWorkingJoe
-  sprites: MobWorkingJoeSprites
-  markingLimits: MobHumanMarkingLimits
   dollPrototype: AppearanceHuman
   skinColoration: Hues
