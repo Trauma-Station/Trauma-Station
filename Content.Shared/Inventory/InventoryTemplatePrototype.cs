@@ -36,7 +36,7 @@ public sealed partial class SlotDefinition
     [DataField("strippingWindowPos", required: true)]
     public Vector2i StrippingWindowPos { get; private set; }
 
-    [DataField("dependsOn")] public string? DependsOn { get; private set; }
+    [DataField("dependsOn")] public ProtoId<InventorySlotPrototype>? DependsOn { get; private set; } // Trauma - string -> ProtoId
 
     [DataField("dependsOnComponents")] public ComponentRegistry? DependsOnComponents { get; private set; }
 
