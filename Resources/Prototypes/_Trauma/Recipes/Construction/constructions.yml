@@ -1,6 +1,6 @@
 - type: construction
-  id: Insulation
-  graph: Insulation
+  id: WallInsulation
+  graph: WallInsulation
   targetNode: finish
   placementMode: SnapgridCenter
   category: construction-category-structures

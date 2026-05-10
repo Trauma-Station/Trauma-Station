@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseStructure
-  id: Insulation
+  id: WallInsulation
   name: insulation
   description: Noise blocking insulation.
   components:

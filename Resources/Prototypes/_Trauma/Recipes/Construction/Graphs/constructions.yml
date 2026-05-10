@@ -1,5 +1,5 @@
 - type: constructionGraph
-  id: Insulation
+  id: WallInsulation
   graph:
   - node: start
     actions:
@@ -14,5 +14,5 @@
         doAfter: 1
 
   - node: insulation
-    entity: Insulation
+    entity: WallInsulation
 
