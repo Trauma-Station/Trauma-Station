@@ -1,0 +1,18 @@
+- type: constructionGraph
+  id: Insulation
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity
+    edges:
+    - to: finish
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: Cloth
+        amount: 1
+        doAfter: 1
+
+  - node: finish
+    entity: Insulation
+

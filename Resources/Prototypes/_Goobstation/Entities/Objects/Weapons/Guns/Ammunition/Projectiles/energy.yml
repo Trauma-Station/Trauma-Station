@@ -36,9 +36,9 @@
         Ion: 20
         Heat: 5
   - type: EmpOnTrigger
-    range: 0.5
-    energyConsumption: 200
-    disableDuration: 0
+    range: 1
+    energyConsumption: 400
+    disableDuration: 0.5
   - type: DeleteOnTrigger
 
 - type: entity
