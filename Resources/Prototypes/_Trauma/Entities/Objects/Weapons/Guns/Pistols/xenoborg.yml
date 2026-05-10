@@ -14,7 +14,7 @@
   - type: DisarmMalus
     malus: 0
   - type: Gun
-    fireRate: 1
+    fireRate: 1.5
     clumsyProof: true
     resetOnHandSelected: false
     soundEmpty: null
@@ -28,8 +28,8 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 0.5
   - type: Battery
-    maxCharge: 10
-    startingCharge: 10
+    maxCharge: 15
+    startingCharge: 15
 
 - type: entity
   id: XenoborgDart
@@ -61,10 +61,10 @@
   - type: SolutionContainerManager
     solutions:
       ammo:
-        maxVol: 12
+        maxVol: 6
         reagents:
         - ReagentId: Nocturine
-          Quantity: 12
+          Quantity: 6
   - type: RefillableSolution
     solution: ammo
   - type: DrainableSolution
