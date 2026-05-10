@@ -436,7 +436,7 @@
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
   - type: Damageable
-    damageContainer: Biologicalthats
+    damageContainer: Biological
     damageModifierSet: CoconutCrabUnshelled
   - type: WeakToHoly
   - type: Butcherable
