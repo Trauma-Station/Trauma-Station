@@ -110,7 +110,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
 
     private void SetDischarged(Entity<RechargeableBlockingComponent> ent, EntityUid? user = null, bool discharged = true)
     {
-        if (ent.Comp.Discharged != discharged)
+        if (ent.Comp.Discharged == discharged)
             return;
 
         ent.Comp.Discharged = discharged;

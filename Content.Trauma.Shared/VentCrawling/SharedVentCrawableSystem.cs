@@ -5,7 +5,6 @@ using Content.Shared.Body;
 using Content.Shared.Tools.Components;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
-using Content.Shared.VentCrawler.Tube.Components;
 using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;

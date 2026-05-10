@@ -1,5 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Common.Effects;
+using Content.Shared.Contraband;
+using Content.Trauma.Common.Polymorph;
 // </Trauma>
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -274,6 +276,11 @@ public abstract class SharedChameleonProjectorSystem : EntitySystem
 
         // item disguises can be picked up to be revealed, also makes sure their examine size is correct
         CopyComp<ItemComponent>((disguise, comp));
+        // <Trauma>
+        CopyComp<ContrabandComponent>((disguise, comp));
+        var ev = new ChameleonDisguisedEvent(disguise);
+        RaiseLocalEvent(entity, ref ev);
+        // </Trauma>
 
         _appearance.CopyData(entity, disguise);
         _sparks.DoSparks(Transform(user).Coordinates); // Goob

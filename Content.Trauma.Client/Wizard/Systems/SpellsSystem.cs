@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Animations;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.SupermatterHalberd;

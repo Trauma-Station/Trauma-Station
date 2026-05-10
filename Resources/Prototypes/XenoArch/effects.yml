@@ -485,6 +485,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         rolls: !type:RangeNumberSelector
@@ -514,6 +515,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -541,6 +543,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -640,6 +643,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -660,6 +664,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -750,6 +755,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -785,6 +791,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -808,6 +815,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -831,6 +839,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -854,6 +863,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -877,6 +887,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -900,6 +911,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -947,6 +959,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -974,6 +987,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         rolls: !type:RangeNumberSelector
@@ -1090,6 +1104,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -1171,6 +1186,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -1186,6 +1202,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -1201,6 +1218,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
@@ -1228,6 +1246,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -1274,6 +1293,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:
@@ -1289,6 +1309,7 @@
     refreshOnReactivate: true
     components:
     - type: EntityTableSpawner
+      absolute: true # Trauma
       deleteSpawnerAfterSpawn: false
       table: !type:AllSelector
         children:

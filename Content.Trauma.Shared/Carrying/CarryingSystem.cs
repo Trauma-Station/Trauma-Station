@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Events;
@@ -36,7 +35,6 @@ public sealed class CarryingSystem : CommonCarryingSystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly CarryingSlowdownSystem _slowdown = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -274,9 +272,6 @@ public sealed class CarryingSystem : CommonCarryingSystem
         ApplyCarrySlowdown(carrier, carried);
 
         _actionBlocker.UpdateCanMove(carried);
-
-        if (_net.IsClient) // no spawning prediction
-            return;
 
         _virtualItem.TrySpawnVirtualItemInHand(carried, carrier);
         _virtualItem.TrySpawnVirtualItemInHand(carried, carrier);

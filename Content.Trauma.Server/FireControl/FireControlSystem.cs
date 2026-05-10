@@ -9,7 +9,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
 using Content.Shared.Physics;
-using System.Numerics;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
@@ -428,7 +427,7 @@ public sealed partial class FireControlSystem : EntitySystem
                 continue;
 
             // If we can fire, fire the weapon
-            _gun.AttemptShoot(localWeapon, localWeapon, gun, targetCoords);
+            _gun.AttemptShoot(localWeapon, (localWeapon, gun), targetCoords);
         }
     }
 
@@ -517,7 +516,7 @@ public sealed partial class FireControlSystem : EntitySystem
         // Try to get a gun component and fire the weapon
         if (TryComp<GunComponent>(weapon, out var gun))
         {
-            _gun.AttemptShoot(weapon, user, gun, coords);
+            _gun.AttemptShoot(user, (weapon, gun), coords);
             return true;
         }
 

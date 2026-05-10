@@ -920,6 +920,13 @@
   id: WallShuttleDiagonal
   name: shuttle wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  - type: Penetratable
+    penetrateDamage: 90
+    damagePenalty: 0.3
+  # </Trauma>
   - type: Sprite
     drawdepth: Walls
     sprite: Structures/Walls/shuttle_diagonal.rsi
@@ -927,8 +934,8 @@
   - type: Icon
     sprite: Structures/Walls/shuttle_diagonal.rsi
     state: state0
-  - type: Reflect
-    reflectProb: 1
+  #- type: Reflect # Trauma - annoying, serves no purpose
+  #  reflectProb: 1
   - type: Pullable
   - type: Airtight
     noAirWhenFullyAirBlocked: false
@@ -979,11 +986,6 @@
   - type: Construction
     graph: Girder
     node: diagonalshuttleWall
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 7 # Toxic blade
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 90
-    damagePenalty: 0.3
   - type: RadiationBlocker
     resistance: 5
   - type: StaticPrice
@@ -994,6 +996,15 @@
   id: WallShuttle
   name: shuttle wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  - type: Penetratable
+    penetrateDamage: 90
+    damagePenalty: 0.3
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
@@ -1046,8 +1057,8 @@
           3: { state: shuttle_construct-3, visible: true}
           4: { state: shuttle_construct-4, visible: true}
           5: { state: shuttle_construct-5, visible: true}
-  - type: Reflect
-    reflectProb: 1
+  #- type: Reflect # Trauma - annoying, serves no purpose
+  #  reflectProb: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -1059,13 +1070,6 @@
         layer:
         - WallLayer
         density: 2000
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 7 # Toxic blade
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 90
-    damagePenalty: 0.3
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall

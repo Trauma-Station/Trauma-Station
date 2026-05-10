@@ -101,6 +101,9 @@
       - Belt
     - type: Tag
       tags:
+      # <Trauma>
+      - Lantern
+      # </Trauma>
       - Flashlight
 
 - type: entity

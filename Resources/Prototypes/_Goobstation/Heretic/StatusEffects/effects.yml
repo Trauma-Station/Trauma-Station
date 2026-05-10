@@ -1,4 +1,14 @@
 - type: entity
+  abstract: true
+  parent: StatusEffectBase
+  id: StatusEffectWormBlacklist
+  components:
+  - type: StatusEffect
+    blacklist:
+      components:
+      - LordOfTheNight
+
+- type: entity
   parent: MobStatusEffectBase
   id: StatusEffectCursed
   name: cursed
@@ -102,7 +112,7 @@
         renderOrder: 1
 
 - type: entity
-  parent: MobStatusEffectBase
+  parent: [MobStatusEffectDebuff, MobStatusEffectBase]
   id: StatusEffectCrucibleSoulCooldown
   name: crucible soul cooldown
   components:
@@ -137,7 +147,7 @@
       StatusEffectWoundedSoldierCooldown: 90
 
 - type: entity
-  parent: MobStatusEffectBase
+  parent: [MobStatusEffectDebuff, MobStatusEffectBase]
   id: StatusEffectWoundedSoldierCooldown
   name: wounded soldier cooldown
   components:
@@ -150,7 +160,7 @@
   name: examined mirror maid
 
 - type: entity
-  parent: MobStatusEffectBase
+  parent: [StatusEffectWormBlacklist, MobStatusEffectBase]
   id: StatusEffectNewbornEther
   name: eldritch sleep
   components:
@@ -202,12 +212,12 @@
   name: examined pierced reality
 
 - type: entity
-  parent: MobStatusEffectBase
+  parent: [MobStatusEffectDebuff, MobStatusEffectBase]
   id: MansusGraspAffectedStatusEffect
   name: affected by mansus grasp
 
 - type: entity
-  parent: StatusEffectSpeed
+  parent: [StatusEffectWormBlacklist, StatusEffectSpeed]
   id: ShadowCloakStatusEffect
   name: shadow cloak
   components:
@@ -223,7 +233,7 @@
     - type: ShadowCloaked
 
 - type: entity
-  parent: StatusEffectSpeed
+  parent: [StatusEffectWormBlacklist, StatusEffectSpeed]
   id: ShadowCloakPaleStatusEffect
   name: forest admonitions
   components:
@@ -268,13 +278,23 @@
 
 - type: entity
   parent: MobStatusEffectBase
+  id: VoidCamouflageStatusEffect
+  name: void camouflage
+  components:
+  - type: ForcedStealthStatusEffect
+    visibility: 0.1
+  - type: BlockHereticActionsStatusEffect
+  - type: RemoveOnAttackStatusEffect
+
+- type: entity
+  parent: MobStatusEffectBase
   id: LockMarkedStatusEffect
   name: lock marked
   components:
   - type: AccessDeniedStatusEffect
 
 - type: entity
-  parent: MobStatusEffectBase
+  parent: [StatusEffectWormBlacklist, MobStatusEffectBase]
   id: LastRefugeStatusEffect
   name: caretaker's last refuge
   components:

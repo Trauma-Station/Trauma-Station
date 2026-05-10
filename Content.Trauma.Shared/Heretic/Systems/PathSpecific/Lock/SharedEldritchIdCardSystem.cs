@@ -67,7 +67,8 @@ public abstract class SharedEldritchIdCardSystem : EntitySystem
             return;
         }
 
-        if (!HasComp<DoorComponent>(target) || !TryComp(target, out PhysicsComponent? body) ||
+        if (!TryComp(target, out DoorComponent? door) || !door.BumpOpen && !door.ClickOpen ||
+            !TryComp(target, out PhysicsComponent? body) ||
             (body.CollisionLayer & LockPortalSystem.LockPortalMask) == 0)
             return;
 

@@ -22,7 +22,7 @@
         weight: 0.5 # even more antags!
       - id: LoneOpsSpawn
         weight: 0.2
-      - id: BlobSpawn
+      - id: BlobMidround
         weight: 0.2
       - !type:AllSelector
         weight: 0.3

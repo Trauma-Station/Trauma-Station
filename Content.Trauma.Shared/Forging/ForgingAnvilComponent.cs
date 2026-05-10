@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Forging;
@@ -11,10 +12,22 @@ namespace Content.Trauma.Shared.Forging;
 public sealed partial class ForgingAnvilComponent : Component
 {
     /// <summary>
-    // Range ingots have to be in to be found.
+    /// Range ingots have to be in to be found.
     /// </summary>
     [DataField]
     public float IngotRange = 0.7f;
+
+    /// <summary>
+    /// Multiplier on how many ingots you need to forge something.
+    /// </summary>
+    [DataField]
+    public int CostScale = 1;
+
+    /// <summary>
+    /// Multiplier on how much work you need to forge unfinished items.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 WorkScale = 1;
 
     [DataField]
     public SoundSpecifier? StartSound = new SoundPathSpecifier("/Audio/_Trauma/Weapons/Melee/forging/tink.ogg");

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Common.Wizard.Projectile;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -23,7 +22,7 @@ public sealed class TrailOverlay : Overlay
 
     public TrailOverlay(IEntityManager entManager, IPrototypeManager protoMan, IGameTiming timing)
     {
-        ZIndex = (int) DrawDepth.Effects;
+        ZIndex = (int) DrawDepth.Overdoors;
 
         _entManager = entManager;
         _protoMan = protoMan;

@@ -1957,6 +1957,8 @@
   packetPrototype: CherrySeeds
   productPrototypes:
     - FoodCherry
+  mutationPrototypes: # Trauma
+  - CherryBomb
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6

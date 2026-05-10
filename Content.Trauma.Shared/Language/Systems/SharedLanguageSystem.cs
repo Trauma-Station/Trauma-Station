@@ -2,12 +2,14 @@
 
 using System.Linq;
 using System.Text;
+using Content.Shared.GameTicking;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
-using Content.Shared.GameTicking;
 
 namespace Content.Trauma.Shared.Language.Systems;
 
@@ -15,6 +17,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
 
     private StringBuilder _builder = new();
 
@@ -35,10 +38,18 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         return proto;
     }
 
-    public override string ObfuscateSpeech(string message, LanguagePrototype language)
+    public override string ObfuscateSpeech(string message, LanguagePrototype language, EntityUid messageSource)
     {
         _builder.Clear();
-        language.Obfuscation.Obfuscate(_builder, message, this);
+        var ratio = 1.0f;
+        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+        {
+            if (_knowledge.GetMastery(skill.Comp) > 1)
+                ratio = 0.0f;
+            else
+                ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+        }
+        language.Obfuscation.Obfuscate(_builder, message, this, ratio);
 
         return _builder.ToString();
     }

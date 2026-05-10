@@ -10,7 +10,7 @@ using Content.Shared.Mind;
 using Content.Shared.Verbs;
 using Robust.Server.Player;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class ScryingOrbSystem : SharedScryingOrbSystem
 {
@@ -37,7 +37,7 @@ public sealed class ScryingOrbSystem : SharedScryingOrbSystem
 
     private void OnUnequip(Entity<ScryingOrbComponent> ent, ref GotUnequippedEvent args)
     {
-        AttemptDisableXRay(args.Equipee);
+        AttemptDisableXRay(args.EquipTarget);
     }
 
     private void OnUnequipHand(Entity<ScryingOrbComponent> ent, ref GotUnequippedHandEvent args)
@@ -47,10 +47,11 @@ public sealed class ScryingOrbSystem : SharedScryingOrbSystem
 
     private void OnEquip(Entity<ScryingOrbComponent> ent, ref GotEquippedEvent args)
     {
-        if (!TryComp(args.Equipee, out EyeComponent? eye))
+        var target = args.EquipTarget;
+        if (!TryComp(target, out EyeComponent? eye))
             return;
 
-        _eye.SetVisibilityMask(args.Equipee, eye.VisibilityMask | (int) VisibilityFlags.Ghost, eye);
+        _eye.SetVisibilityMask(target, eye.VisibilityMask | (int) VisibilityFlags.Ghost, eye);
     }
 
     private void OnEquipHand(Entity<ScryingOrbComponent> ent, ref GotEquippedHandEvent args)

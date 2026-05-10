@@ -8,7 +8,7 @@
       steps:
       - material: Steel
         amount: 5
-        doAfter: 5
+        doAfter: 1
   - node: unfinished
     entity: RevUnfinishedMachine
     edges:
@@ -30,7 +30,7 @@
       - material: RevBolt
       - material: RevNut
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: microelectronics assembler # Techfab sabotage required
       steps:
       - tag: TechfabMachineBoard
@@ -51,7 +51,7 @@
       - material: RevNut
         amount: 7
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: 3D printer # Engi required
       steps:
       - tag: RCD
@@ -60,28 +60,28 @@
           sprite: Objects/Tools/rcd.rsi
           state: icon
       - tool: Welding
-        doAfter: 3
+        doAfter: 1
       - material: Cable
         amount: 5
         doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 5
       - material: RevNut
         amount: 5
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: Plastic
         amount: 1
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: RevBolt
         amount: 3
       - material: RevNut
         amount: 2
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: telesphere # RD exclusive
       steps:
       - tag: EncryptionRevolutionary
@@ -95,18 +95,18 @@
           sprite: Objects/Devices/hand_teleporter.rsi
           state: icon
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: Cable
         amount: 8
-        doAfter: 2
+        doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
@@ -126,18 +126,18 @@
           sprite: Objects/Misc/qm_clipboard.rsi
           state: qm_clipboard
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: Cable
         amount: 8
-        doAfter: 2
+        doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
@@ -155,18 +155,18 @@
           sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
           state: icon
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: Cable
         amount: 8
-        doAfter: 2
+        doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
@@ -180,7 +180,7 @@
       - material: RevGear
       - material: RevGear
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: printing press
       steps:
       - tool: Anchoring
@@ -190,7 +190,7 @@
       - material: RevNut
         amount: 2
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: bullet press
       steps:
       - material: RevGunParts
@@ -201,7 +201,7 @@
       - material: RevNut
         amount: 5
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: uniform printer
       steps:
       - tool: Screwing
@@ -211,7 +211,7 @@
       - material: RevNut
         amount: 5
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
   - node: industrial forge
     entity: RevForge
   - node: printing press

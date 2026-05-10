@@ -57,7 +57,14 @@ public sealed class TouchSpellSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
+        if (args.HitEntities.Count == 1)
+        {
+            args.Handled = TryUseTouchSpell(ent, args.User, args.HitEntities[0]);
+            return;
+        }
+
         UseTouchSpellMultiTarget(ent, args.User, args.HitEntities);
+        args.Handled = true;
     }
 
     private void OnAfterInteract(Entity<TouchSpellComponent> ent, ref AfterInteractEvent args)
@@ -65,8 +72,7 @@ public sealed class TouchSpellSystem : EntitySystem
         if (args is not { Handled: false, CanReach: true, Target: { } target })
             return;
 
-        TryUseTouchSpell(ent, args.User, target);
-        args.Handled = true;
+        args.Handled = TryUseTouchSpell(ent, args.User, target);
     }
 
     public bool TryUseTouchSpell(Entity<TouchSpellComponent> ent, EntityUid user, EntityUid target)
@@ -140,12 +146,19 @@ public sealed class TouchSpellSystem : EntitySystem
 
     public void InvokeTouchSpell(Entity<TouchSpellComponent?> ent,
         EntityUid user,
-        TimeSpan? cooldownOverride = null)
+        TimeSpan? cooldownOverride = null,
+        bool predicted = true)
     {
         if (!Resolve(ent, ref ent.Comp))
             return;
 
-        InvokeTouchSpell(user, ent.Comp.Action, ent.Comp.Sound, ent.Comp.Speech, cooldownOverride ?? ent.Comp.Cooldown);
+        InvokeTouchSpell(user,
+            ent.Comp.Action,
+            ent.Comp.Sound,
+            ent.Comp.Speech,
+            cooldownOverride ?? ent.Comp.Cooldown,
+            predicted);
+
         if (cooldownOverride != TimeSpan.Zero)
             PredictedQueueDel(ent);
     }
@@ -154,9 +167,10 @@ public sealed class TouchSpellSystem : EntitySystem
         EntityUid? action,
         SoundSpecifier? sound,
         LocId? speech,
-        TimeSpan cooldown)
+        TimeSpan cooldown,
+        bool predicted = true)
     {
-        _audio.PlayPredicted(sound, user, user);
+        _audio.PlayPredicted(sound, user, predicted ? user : null);
 
         if (speech != null)
             _chat.TrySendInGameICMessage(user, Loc.GetString(speech), InGameICChatType.Speak, false);

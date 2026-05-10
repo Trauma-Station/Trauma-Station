@@ -125,6 +125,9 @@ SpawnPointBrigmedic: null
 
 # 2026-04-13 kill chud signaller
 PanicButton: null
+
+# 2026-04-29 Riot Launcher to trauma version
+GunSafeLauncherNonLethal: GunSafeRiotLauncher
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

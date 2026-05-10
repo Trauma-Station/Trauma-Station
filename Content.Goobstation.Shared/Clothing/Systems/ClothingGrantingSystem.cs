@@ -4,12 +4,14 @@ using Content.Goobstation.Shared.Clothing.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Tag;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
 public sealed class ClothingGrantingSystem : EntitySystem
 {
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -24,28 +26,34 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
     private void OnCompEquip(EntityUid uid, ClothingGrantComponentComponent component, GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!TryComp<ClothingComponent>(uid, out var clothing)) return;
 
         if (!clothing.Slots.HasFlag(args.SlotFlags)) return;
 
-        var user = args.Equipee;
+        var target = args.EquipTarget;
         component.Active.Clear();
         foreach (var name in component.Components.Keys)
         {
             var type = Factory.GetRegistration(name).Type;
-            if (!HasComp(user, type))
+            if (!HasComp(target, type))
                 component.Active.Add(name);
         }
-        EntityManager.AddComponents(user, component.Components);
+        EntityManager.AddComponents(target, component.Components);
     }
 
     private void OnCompUnequip(EntityUid uid, ClothingGrantComponentComponent component, GotUnequippedEvent args)
     {
-        var user = args.Equipee;
+        if (_timing.ApplyingState)
+            return;
+
+        var target = args.EquipTarget;
         foreach (var name in component.Active)
         {
             var type = Factory.GetRegistration(name).Type;
-            RemComp(user, type);
+            RemComp(target, type);
         }
         component.Active.Clear();
     }
@@ -53,26 +61,32 @@ public sealed class ClothingGrantingSystem : EntitySystem
 
     private void OnTagEquip(EntityUid uid, ClothingGrantTagComponent component, GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!TryComp<ClothingComponent>(uid, out var clothing))
             return;
 
         if (!clothing.Slots.HasFlag(args.SlotFlags))
             return;
 
-        var user = args.Equipee;
-        var tags = EnsureComp<TagComponent>(user);
+        var target = args.EquipTarget;
+        var tags = EnsureComp<TagComponent>(target);
         var tag = component.Tag;
         component.IsActive = !_tag.HasTag(tags, tag);
         if (component.IsActive)
-            _tag.AddTag((user, tags), tag);
+            _tag.AddTag((target, tags), tag);
     }
 
     private void OnTagUnequip(EntityUid uid, ClothingGrantTagComponent component, GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!component.IsActive)
             return;
 
-        _tag.RemoveTag(args.Equipee, component.Tag);
+        _tag.RemoveTag(args.EquipTarget, component.Tag);
         component.IsActive = false;
     }
 }

@@ -18,6 +18,29 @@
     - blue
     - yellow
 
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: GunSafeEmptyBlue
+  name: gun safe
+  suffix: Blue
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: GunSafeEmptyRed
+  name: gun safe
+  suffix: Red
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - blue
+    - yellow
+
 - type: entityTable
   id: FillLockerWardenTrauma
   table: !type:AllSelector
@@ -59,7 +82,7 @@
 - type: entity
   parent: BaseTraumaGunSafe
   id: GunSafeShotguns
-  name: shotgun safe
+  name: ballistics safe
   components:
   - type: EntityTableContainerFill
     containers:
@@ -162,6 +185,12 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: WeaponGaussgun
+      amount: 2
+    - id: BaseMagazineGaussgun
+      amount: 2
+    - id: MagazineBoxGaussgunBullet
+      amount: 2
 
 - type: entityTable
   id: FillGunSafeLaserT2

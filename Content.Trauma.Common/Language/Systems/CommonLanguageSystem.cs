@@ -67,7 +67,7 @@ public abstract class CommonLanguageSystem : EntitySystem
     /// <summary>
     ///     Obfuscate a message using the given language.
     /// </summary>
-    public abstract string ObfuscateSpeech(string message, LanguagePrototype language);
+    public abstract string ObfuscateSpeech(string message, LanguagePrototype language, EntityUid messageSource);
 
     public abstract bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language);
 

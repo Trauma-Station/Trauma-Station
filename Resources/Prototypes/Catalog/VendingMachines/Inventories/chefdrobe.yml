@@ -27,3 +27,7 @@
     ClothingBeltChef: 2
   contrabandInventory:
     ToyFigurineChef: 1
+  # <Trauma>
+  emaggedInventory:
+    SyndicateSponge: 1
+  # </Trauma>

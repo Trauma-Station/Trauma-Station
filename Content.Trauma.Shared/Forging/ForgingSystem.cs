@@ -156,7 +156,10 @@ public sealed class ForgingSystem : EntitySystem
         }
     }
 
-    public EntityUid SpawnUnfinished(EntityCoordinates coords, [ForbidLiteral] ProtoId<MetalPrototype> metal, [ForbidLiteral] ProtoId<ForgedItemPrototype> item)
+    public EntityUid SpawnUnfinished(EntityCoordinates coords,
+        [ForbidLiteral] ProtoId<MetalPrototype> metal,
+        [ForbidLiteral] ProtoId<ForgedItemPrototype> item,
+        FixedPoint2 workScale)
     {
         var uid = PredictedSpawnAtPosition(UnfinishedItem, coords);
         _transform.SetLocalRotation(uid, 0); // dogshit engine decision award
@@ -172,7 +175,8 @@ public sealed class ForgingSystem : EntitySystem
 
         // actually let the result be made by working it
         var workable = Comp<WorkableComponent>(uid);
-        _workable.SetRemaining((uid, workable), itemProto.Work * metalProto.WorkScale);
+        var work = itemProto.Work * metalProto.WorkScale * workScale;
+        _workable.SetRemaining((uid, workable), work);
         _workable.SetResult((uid, workable), itemProto.Result ?? DefaultResult);
         _workable.SetAmount((uid, workable), itemProto.Amount);
         // TODO: other shit?
@@ -257,4 +261,11 @@ public sealed class ForgingSystem : EntitySystem
         var ev = new ConstructionChangedEvent(uid);
         RaiseLocalEvent(part, ref ev);
     }
+
+    /// <summary>
+    /// Returns true if a forged item prototype can be made from a given metal.
+    /// </summary>
+    public bool CanMakeFrom(ForgedItemPrototype item, [ForbidLiteral] ProtoId<MetalPrototype> metal)
+        => item.Whitelist?.Contains(metal) != false &&
+            item.Blacklist?.Contains(metal) != true;
 }

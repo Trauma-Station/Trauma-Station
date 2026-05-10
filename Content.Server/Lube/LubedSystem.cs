@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Lube;
+// </Trauma>
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -47,6 +50,12 @@ public sealed class LubedSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        // <Trauma>
+        var ev = new LubedPickUpAttemptEvent();
+        RaiseLocalEvent(args.User, ref ev);
+        if (ev.Cancelled)
+            return;
+        // </Trauma>
         if (ent.Comp.SlipsLeft <= 0)
         {
             RemComp<LubedComponent>(ent);

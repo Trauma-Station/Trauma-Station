@@ -185,7 +185,7 @@
   id: FactoryBlobTile
   name: Factory Blob
   description: The so-called BlobPods come out of the factory and attack passers-by and zombify the corpses of these same passers-by. One factory produces 3 of these BlobPods; they cannot be placed next to each other at a distance of 7 tiles; one factory can produce only one Blobbernaut.
-  categories: [ HideSpawnMenu ]
+  # categories: [ HideSpawnMenu ]
   components:
     - type: TemperatureDamage
       heatDamage:
@@ -209,6 +209,7 @@
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
     - type: BlobFactory
+      accumulateToSpawn: 10
     - type: Sprite
       sprite: _Goobstation/Blob/Mobs/blob.rsi
       drawdepth: BlobTiles

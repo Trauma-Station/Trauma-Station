@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Text;
 using Content.Goobstation.Common.Weapons.MeleeDash;
 using Content.Trauma.Common.Weapons;

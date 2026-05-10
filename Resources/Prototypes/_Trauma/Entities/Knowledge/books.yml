@@ -59,6 +59,7 @@
     price: 20
   - type: KnowledgeGrantOnUse
     singleUse: false # crew books are for sharing
+    instant: false
   - type: Tag
     tags:
     - Book
@@ -79,6 +80,7 @@
     - state: melee
   - type: KnowledgeGrantOnUse
     grantEverything: true
+    instant: true
 
 # TODO: These should just give you an xp gain buff rather than make you stronger bruh
 - type: entity
@@ -194,7 +196,7 @@
 - type: entity
   parent: [BookSkillbook, BaseMinorContraband]
   id: BookShootingPrinted
-  name: Ancienct Chinese Shooting Techniques and you
+  name: Ancient Chinese Shooting Techniques and you
   suffix: melee
   description: You need to become ancient and Chinese.
   components:

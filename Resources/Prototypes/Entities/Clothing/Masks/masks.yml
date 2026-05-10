@@ -178,6 +178,8 @@
     - WhitelistChameleon
     - GasMask
     - Mask
+  - type: IngestionBlocker # Trauma
+    blockSmokeIngestion: true
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -561,6 +563,7 @@
         Heat: 0.9
   - type: IngestionBlocker # Goobstation
     blockSmokeIngestion: true
+  - type: Hailer # Trauma
 
 - type: entity
   parent: [ ClothingMaskGas, BaseSecurityCargoContraband ]

@@ -7,7 +7,6 @@ using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.Map;
-using System.Numerics;
 
 namespace Content.Goobstation.Server.Antag.MaintsSpawn;
 
@@ -46,7 +45,7 @@ public sealed class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponen
                 continue;
 
             var coords = xform.Coordinates; // areas should always be parented to a grid, just round the coords
-            var tile = new Vector2i((int) coords.X, (int) coords.Y);
+            var tile = new Vector2i((int) MathF.Floor(coords.X), (int) MathF.Floor(coords.Y));
             if (_atmos.IsTileAirBlockedCached(grid, tile))
                 continue;
 

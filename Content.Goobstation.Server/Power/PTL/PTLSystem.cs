@@ -25,7 +25,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
-using System.Numerics;
 using System.Text;
 
 namespace Content.Goobstation.Server.Power.PTL;
@@ -136,7 +135,7 @@ public sealed partial class PTLSystem : EntitySystem
         // shoot the laser
         var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
         var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
-        _gun.AttemptShoot(ent, ent, gun, targetCoords);
+        _gun.AttemptShoot(ent, (ent.Owner, gun), targetCoords);
 
         // Determine actual energy used.
         var chargeAfter = _battery.GetCharge((ent, ent.Comp2));

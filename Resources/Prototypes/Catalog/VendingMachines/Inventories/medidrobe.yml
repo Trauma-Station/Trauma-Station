@@ -38,3 +38,8 @@
     ToyFigurineMedicalDoctor: 1
     ToyFigurineParamedic: 1
     ToyFigurineChiefMedicalOfficer: 1
+  # <Trauma>
+  emaggedInventory:
+    ClothingUniformJumpsuitParamedicSyndie: 1
+    SyringeGun: 1
+  # </Trauma>

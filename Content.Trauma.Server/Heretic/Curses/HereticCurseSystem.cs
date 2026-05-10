@@ -21,10 +21,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Verbs;
 using Content.Trauma.Server.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
+using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Wizard;
 using Robust.Shared.Audio.Systems;
@@ -58,8 +58,6 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<Shared.Heretic.Rituals.HereticRitualRuneComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<HereticCurseProviderComponent, CurseSelectedMessage>(OnCurseSelected);
         SubscribeLocalEvent<HereticCurseProviderComponent, HandDeselectedEvent>(OnHandDeselected);
@@ -114,7 +112,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
             return;
         }
 
-        var look = _lookup.GetEntitiesInRange<Shared.Heretic.Rituals.HereticRitualRuneComponent>(args.Actor.ToCoordinates(),
+        var look = _lookup.GetEntitiesInRange<HereticRitualRuneComponent>(args.Actor.ToCoordinates(),
             3f,
             LookupFlags.StaticSundries);
 
@@ -202,35 +200,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
         CurseCrewmember(ent, rune, args.Actor, false, dnaDict);
     }
 
-    private void OnGetVerbs(Entity<Shared.Heretic.Rituals.HereticRitualRuneComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess)
-            return;
-
-        if (!_heretic.IsHereticOrGhoul(args.User))
-            return;
-
-        if (!TryComp(args.Using, out HereticCurseProviderComponent? provider))
-            return;
-
-        var item = args.Using.Value;
-
-        if (!_toggle.IsActivated(item))
-            return;
-
-        var user = args.User;
-
-        AlternativeVerb verb = new()
-        {
-            Text = Loc.GetString("heretic-curse-provider-curse"),
-            Icon = new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/book_morbus.rsi"), "icon-on"),
-            Act = () => CurseCrewmember((item, provider), ent, user, true),
-        };
-
-        args.Verbs.Add(verb);
-    }
-
-    private void CurseCrewmember(Entity<HereticCurseProviderComponent> provider,
+    public override void CurseCrewmember(Entity<HereticCurseProviderComponent> provider,
         EntityUid rune,
         EntityUid user,
         bool popup,

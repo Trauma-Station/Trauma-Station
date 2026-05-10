@@ -23,5 +23,6 @@
     KitchenKnife: 2
   emaggedInventory:
     ClothingMaskBreath: 3
-    EmergencyOxygenTankFilled: 3
+    DoubleEmergencyOxygenTankFilled: 2 # Trauma - was 3 of EmergencyOxygenTankFilled
+    Machete: 1 # Trauma
     DrinkNukieCan: 2

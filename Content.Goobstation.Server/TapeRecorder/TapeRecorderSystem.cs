@@ -28,7 +28,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     }
 
     /// <summary>
-    /// Given a time range, play all messages on a tape within said range, [start, end).
+    /// Given a time range, play all messages on a tape within said range, [start, end)].
     /// Split into this system as shared does not have ChatSystem access
     /// </summary>
     protected override void ReplayMessagesInSegment(Entity<TapeRecorderComponent> ent, TapeCassetteComponent tape, float segmentStart, float segmentEnd)
@@ -47,7 +47,8 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             var verb = message.Verb ?? SharedChatSystem.DefaultSpeechVerb;
             speech.SpeechVerb = _proto.Index<SpeechVerbPrototype>(verb);
             //Play the message
-            _chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false);
+            _chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false,
+                languageOverride: _proto.Index(message.Language ?? tape.DefaultLanguage));
         }
     }
 
@@ -76,7 +77,9 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
         //Add a new entry to the tape
         var verb = _chat.GetSpeechVerb(args.Source, args.Message);
         var name = nameEv.VoiceName;
-        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message));
+        var pos = cassette.Comp.CurrentPosition;
+        var language = args.Language;
+        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(pos, name, verb, args.Message, language));
     }
 
     private void OnPrintMessage(Entity<TapeRecorderComponent> ent, ref PrintTapeRecorderMessage args)
