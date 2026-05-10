@@ -329,8 +329,10 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
             return;
 
         AddInventoryFromPrototype(uid, packPrototype.StartingInventory, InventoryType.Regular, component, restockQuality);
+        /* Trauma - only restock the halal inventory
         AddInventoryFromPrototype(uid, packPrototype.EmaggedInventory, InventoryType.Emagged, component, restockQuality);
         AddInventoryFromPrototype(uid, packPrototype.ContrabandInventory, InventoryType.Contraband, component, restockQuality);
+        */
         Dirty(uid, component);
     }
 

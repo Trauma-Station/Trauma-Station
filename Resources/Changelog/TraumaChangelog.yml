@@ -8090,3 +8090,142 @@ Entries:
   id: 928
   time: '2026-05-07T12:26:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2467
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed traitor undetermined crate slop, be creative and actually make a
+      build..?
+  id: 929
+  time: '2026-05-08T07:21:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2475
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Automatable machines no longer need an automation upgrade kit to be
+      linked.
+  id: 930
+  time: '2026-05-08T11:15:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2487
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed modsuit eating your original clothes if you get gibbed.
+  id: 931
+  time: '2026-05-08T16:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2491
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dragons can now only spawn rifts inside station areas.
+  id: 932
+  time: '2026-05-08T16:35:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2494
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Enemy of the revolution now has its own red skull icon instead of
+      literally reusing rev icon.
+  id: 933
+  time: '2026-05-08T17:25:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2497
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed midround shadowling not working.
+  id: 934
+  time: '2026-05-08T19:02:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2498
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio volatile organ making you stop metabolizing chemicals.
+  id: 935
+  time: '2026-05-08T19:29:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2499
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed random empty category on cargo request console
+  id: 936
+  time: '2026-05-08T21:33:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2482
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added hailer to swat mask
+  - type: Add
+    message: Added smoke blocker to explorer mask
+  - type: Add
+    message: Added missing category to surgery tools
+  - type: Add
+    message: Added more chems to the reagent anomaly
+  - type: Add
+    message: Added straitjacket to security fab
+  - type: Fix
+    message: IPCs can now be thralled
+  - type: Fix
+    message: Laser weapon surgery now actually works
+  - type: Fix
+    message: Added correct timer to reverse bear trap
+  - type: Tweak
+    message: Uniform Printer can now be linked to Material Silo
+  - type: Tweak
+    message: Biodegrade breaks you out of welded containers
+  - type: Tweak
+    message: 8-gauge carpshot now deals structural damage ( 12 gauge already did)
+  - type: Tweak
+    message: Straitjacket breakout time changed from 100 to 120 seconds
+  id: 937
+  time: '2026-05-09T07:14:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2457
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      You can now craft plastic tiles, which now have their own items when pried
+      up.
+  id: 938
+  time: '2026-05-09T08:46:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2506
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Janitors' rubber gloves now let you safely hold glued and lubed items.
+  - type: Fix
+    message: Fixed lube tube not updating the liquid for you when used.
+  id: 939
+  time: '2026-05-09T11:54:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2507
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Undid nerf to ion rifle, it's not a nerf gun anymore.
+  id: 940
+  time: '2026-05-09T13:56:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2512
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Restocking vending machines no longer restocks contraband and emag-only
+      items.
+  id: 941
+  time: '2026-05-09T18:07:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2511
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Midround Antags not getting skills.
+  id: 942
+  time: '2026-05-09T21:24:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2517
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Gold xenobio extract can no longer summon xenos or heretic mobs.
+  id: 943
+  time: '2026-05-10T16:40:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2523

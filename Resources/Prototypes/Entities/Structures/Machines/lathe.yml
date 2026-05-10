@@ -617,7 +617,7 @@
     stealGroup: MedicalTechFabCircuitboard
 
 - type: entity
-  parent: BaseLathe
+  parent: [BaseLathe, BaseSiloUtilizer] # Trauma - was BaseLathe
   id: UniformPrinter
   name: uniform printer
   description: Prints new or replacement uniforms.

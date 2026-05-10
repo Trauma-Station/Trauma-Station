@@ -7,7 +7,6 @@ using Content.Shared.Sprite;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Systems;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.EatToGrow;
 

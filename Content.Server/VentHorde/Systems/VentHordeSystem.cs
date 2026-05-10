@@ -97,7 +97,8 @@ public sealed class VentHordeSystem : EntitySystem
             var spawned = Spawn(spawn, Transform(entity).Coordinates);
             var direction = _random.NextVector2() * _random.NextFloat(entity.Comp.MinThrowDistance, entity.Comp.MaxThrowDistance);
             var throwSpeed = _random.NextFloat(entity.Comp.MinThrowSpeed, entity.Comp.MaxThrowSpeed);
-            _throwing.TryThrow(spawned, direction, throwSpeed);
+            _throwing.TryThrow(spawned, direction, throwSpeed,
+                predicted: false); // Trauma
         }
 
         RemCompDeferred<VentHordeSpawnerComponent>(entity);

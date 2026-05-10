@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Content.Trauma.Common.Heretic;
 using Robust.Client.UserInterface;

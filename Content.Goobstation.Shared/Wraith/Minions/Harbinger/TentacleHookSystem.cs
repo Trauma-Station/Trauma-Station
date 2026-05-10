@@ -10,7 +10,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using System.Numerics;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Shared.Wraith.Minions.Harbinger;

@@ -2,7 +2,9 @@
 
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Inventory;
+using Content.Trauma.Common.Glue;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Lube;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Tackle;
@@ -23,5 +25,7 @@ public sealed class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, TransformSpeakerJobIconEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeHarmfulActionEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, CanSeeOnCameraEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, GluedPickUpAttemptEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, LubedPickUpAttemptEvent>(_inventory.RelayEvent);
     }
 }

@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Robust.Shared.Audio;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.OfficeChair;
 
