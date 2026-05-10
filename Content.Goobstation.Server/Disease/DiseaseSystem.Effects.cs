@@ -8,7 +8,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Numerics;
 
 namespace Content.Goobstation.Server.Disease;
 

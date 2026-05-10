@@ -5,7 +5,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 

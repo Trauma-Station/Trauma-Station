@@ -4,7 +4,6 @@ using Content.Shared.Salvage.Fulton;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.Salvage;
 

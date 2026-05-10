@@ -7,7 +7,6 @@ using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.Map;
-using System.Numerics;
 
 namespace Content.Goobstation.Server.Antag.MaintsSpawn;
 

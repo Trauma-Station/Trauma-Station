@@ -13,7 +13,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Timing;
-using System.Numerics;
 using System.Linq;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
