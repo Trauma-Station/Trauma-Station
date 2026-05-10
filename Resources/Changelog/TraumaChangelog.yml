@@ -8229,3 +8229,18 @@ Entries:
   id: 943
   time: '2026-05-10T16:40:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2523
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: >-
+      Xenoborgs can no longer use positronic brains. Go gib people and put them
+      into an MMI, like the fabricators intended.
+  - type: Tweak
+    message: Nerfed stealth xenoborg syringe gun.
+  - type: Tweak
+    message: Buffed scout xenoborg melee weapon options.
+  - type: Tweak
+    message: Non-engi xenoborgs no longer get a tool module.
+  id: 944
+  time: '2026-05-10T21:53:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2525
