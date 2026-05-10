@@ -5,7 +5,7 @@
     actions:
     - !type:DestroyEntity
     edges:
-    - to: finish
+    - to: insulation
       completed:
       - !type:SnapToGrid
       steps:
@@ -13,6 +13,6 @@
         amount: 1
         doAfter: 1
 
-  - node: finish
+  - node: insulation
     entity: Insulation
 
