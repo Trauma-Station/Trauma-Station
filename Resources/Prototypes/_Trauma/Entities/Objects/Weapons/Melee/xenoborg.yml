@@ -1,0 +1,18 @@
+- type: entity
+  id: EnergySwordXenoborg
+  name: energy sword
+  parent: [BaseMeleeWeaponEnergy, BaseXenoborgContraband]
+  description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
+  suffix: Xenoborg
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/e_sword.rsi
+    layers:
+    - state: e_sword
+    - state: e_sword_blade
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: EnergySword
+    colorOptions:
+    - "#2288ff" # can only be blue
