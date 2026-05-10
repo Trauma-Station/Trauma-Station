@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.UserInterface.Controls;
+using Content.Trauma.Shared.MobClass;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -15,6 +16,29 @@ public sealed class MobClassSelectorBui : BoundUserInterface
     {
         base.Open();
 
+        IoCManager.InjectDependencies(this);
+
         _window = this.CreateWindow<MobClassSelectorWindow>();
+        _window.OpenCentered();
+
+        _window.Specialize += Specialize;
+    }
+
+    private void Specialize(ProtoId<MobClassPrototype>? obj)
+    {
+        if (obj is not { } mobClass)
+            return;
+
+        SendPredictedMessage(new MobClassSelectedMessage(mobClass));
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+
+        if (state is not MobClassState selectorState)
+            return;
+
+        _window?.PopulateWindow(selectorState.Group);
     }
 }

@@ -21,17 +21,17 @@ public sealed class MobClassSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ActionMobClassComponent, OpenClassSelectorUi>(OnOpenSelector);
+        SubscribeLocalEvent<ActionMobClassComponent, OpenClassSelectorUiEvent>(OnOpenSelector);
 
         SubscribeLocalEvent<ActionMobClassComponent, MobClassSelectedMessage>(OnClassSelected);
     }
 
-    private void OnOpenSelector(Entity<ActionMobClassComponent> ent, ref OpenClassSelectorUi args)
+    private void OnOpenSelector(Entity<ActionMobClassComponent> ent, ref OpenClassSelectorUiEvent args)
     {
         var action = ent.Owner;
         var user = args.Performer;
 
-        if (!_mobClassQuery.TryGetComponent(user, out var mobClass))
+        if (!_mobClassQuery.TryGetComponent(user, out var mobClass) || !_proto.Resolve(mobClass.BelongsTo, out _))
             return;
 
         _ui.SetUiState(action, MobClassUiKey.Key, new MobClassState(mobClass.BelongsTo));
@@ -43,6 +43,8 @@ public sealed class MobClassSystem : EntitySystem
         if (_actions.GetAction(ent.Owner) is not { } action
             || action.Comp.AttachedEntity is not { } attachedEnt)
             return;
+
+        _ui.CloseUi(action.Owner, MobClassUiKey.Key);
 
         SelectClass(attachedEnt, args.ClassProto);
 

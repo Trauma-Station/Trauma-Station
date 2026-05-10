@@ -36,6 +36,6 @@ public sealed partial class MobClassPrototype : IPrototype
     /// <summary>
     /// The icon that will appear in the UI.
     /// </summary>
-    [DataField]
-    public SpriteSpecifier? Icon;
+    [DataField(required: true)]
+    public SpriteSpecifier Icon = default!;
 }

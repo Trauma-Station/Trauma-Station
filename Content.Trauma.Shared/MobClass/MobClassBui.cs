@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.MobClass;
 /// <summary>
 /// For use with actions, opens the class selector ui.
 /// </summary>
-public sealed partial class OpenClassSelectorUi : InstantActionEvent;
+public sealed partial class OpenClassSelectorUiEvent : InstantActionEvent;
 
 [Serializable, NetSerializable]
 public sealed class MobClassSelectedMessage(ProtoId<MobClassPrototype> classProto) : BoundUserInterfaceMessage

@@ -36,3 +36,6 @@
         effectsOnExit:
         - !type:SpawnEntity
           entity: FoodMeat
+      - type: ActionGrant
+        actions:
+        - ActionChooseSpecialization

@@ -1,0 +1,55 @@
+- type: mobClassGroup
+  id: Vampire
+  backgroundImagePath: "/Textures/_Trauma/Interface/brown_ice_by_darkwood67.jpg"
+  specializeButtonImagePath: "/Textures/_Trauma/Interface/Vampires/specialize.png"
+  backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+  fontPath: "/Fonts/_Trauma/CinzelDecorative.ttf"
+  fontColorOverride: "#8B0000"
+  fontSize: 15
+  classes:
+  - Gargantua
+  - Haemomancer
+  - Umbrae
+  - Dantalion
+
+- type: mobClass
+  id: Gargantua
+  name: Gargantua
+  icon:
+    sprite: Interface/Actions/actions_mecha.rsi
+    state: mech_eject
+  description: This is a basic description of Gargantua class.
+  effects:
+  - !type:SpawnEntity
+    entity: FoodMeat
+
+- type: mobClass
+  id: Haemomancer
+  name: Haemomancer
+  description: This is a basic description of Haemomancer class.
+  icon:
+    sprite: _Goobstation/Wraith/actions.rsi
+    state: crush
+  effects:
+  - !type:SpawnEntity
+    entity: FoodMeat
+
+- type: mobClass
+  id: Umbrae
+  name: Umbrae
+  description: This is a basic description of Umbrae class.
+  icon: Interface/Actions/zombie-turn.png
+  effects:
+  - !type:SpawnEntity
+    entity: FoodMeat
+
+- type: mobClass
+  id: Dantalion
+  name: Dantalion
+  description: This is a basic description of Dantalion class.
+  icon:
+    sprite: _Goobstation/Actions/chronoblink.rsi
+    state: effect
+  effects:
+  - !type:SpawnEntity
+    entity: FoodMeat

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
+using System.Numerics;
 
 namespace Content.Trauma.Shared.MobClass;
 
@@ -18,6 +18,49 @@ public sealed partial class MobClassGroupPrototype : IPrototype
     /// <summary>
     /// The list of classes belonging to this group.
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public List<ProtoId<MobClassPrototype>> Classes = new();
+
+    /// <summary>
+    ///  The path to the image which will be used as a background for the UI
+    /// </summary>
+    [DataField]
+    public string? BackgroundImagePath;
+
+    /// <summary>
+    ///  The scale of the background image.
+    /// </summary>
+    [DataField]
+    public Vector2 BackgroundScale = new(2f, 2f);
+
+    /// <summary>
+    ///  The path to the image which will be used as texture for the specialize button for the UI
+    /// </summary>
+    [DataField]
+    public string? SpecializeButtonImagePath;
+
+    /// <summary>
+    ///  An optional patch to configure tiling stretching of the background. Used to set
+    ///  the PatchMargin in a <code>StyleBoxTexture</code>
+    /// </summary>
+    [DataField]
+    public Box2 BackgroundPatchMargin;
+
+    /// <summary>
+    /// Optional font override for descriptions of the classes.
+    /// </summary>
+    [DataField]
+    public string? FontPath;
+
+    /// <summary>
+    /// Optional font size override for <see cref="FontPath"/> font.
+    /// </summary>
+    [DataField]
+    public int FontSize = 32;
+
+    /// <summary>
+    /// Overrides the color of the font.
+    /// </summary>
+    [DataField]
+    public Color FontColorOverride  = Color.White;
 }

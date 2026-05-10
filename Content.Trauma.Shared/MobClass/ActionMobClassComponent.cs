@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.MobClass;
 
 /// <summary>
-/// Componenet for use in actions, to open the mob class selector ui for the user.
+/// Component for use in actions, to open the mob class selector ui for the user.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ActionMobClassComponent : Component

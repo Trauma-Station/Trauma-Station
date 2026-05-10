@@ -93,3 +93,17 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectScrambled
         time: 8
+
+- type: entity
+  parent: BaseVampireAction
+  id: ActionChooseSpecialization
+  name: Choose Specialization
+  description: Choose Specialization
+  components:
+  - type: InstantAction
+    event: !type:OpenClassSelectorUiEvent
+  - type: UserInterface
+    interfaces:
+      enum.MobClassUiKey.Key:
+        type: MobClassSelectorBui
+  - type: ActionMobClass
