@@ -41,6 +41,9 @@ public sealed class VampireSystem : EntitySystem
         ent.Comp.UsableBlood += amount;
         ent.Comp.TotalBlood += amount;
         Dirty(ent);
+
+        var ev = new  VampireTotalBloodChangedEvent(ent.Comp.TotalBlood);
+        RaiseLocalEvent(ent.Owner, ref ev);
     }
 
     /// <summary>
@@ -69,5 +72,22 @@ public sealed class VampireSystem : EntitySystem
 
         return false;
     }
+
+    /// <summary>
+    /// Returns the total blood of the vampire.
+    /// </summary>
+    public int GetTotalBlood(Entity<VampireComponent?> ent)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return 0;
+
+        return ent.Comp.TotalBlood;
+    }
     #endregion
 }
+
+/// <summary>
+/// Raised on the vampire when the total blood increases.
+/// </summary>
+[ByRefEvent]
+public record struct VampireTotalBloodChangedEvent(int Blood);

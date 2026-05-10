@@ -71,5 +71,25 @@ public sealed class MobClassSystem : EntitySystem
         Dirty(ent);
 
         _effects.ApplyEffects(ent.Owner, mobClass.Effects);
+
+        var ev = new MobClassSelectedEvent();
+        RaiseLocalEvent(ent.Owner, ref ev);
+    }
+
+    /// <summary>
+    /// Gets the current selected class. Returns null if we don't have any.
+    /// </summary>
+    public ProtoId<MobClassPrototype>? GetClass(Entity<MobClassComponent?> ent)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return null;
+
+        return ent.Comp.CurrentClass;
     }
 }
+
+/// <summary>
+/// Raised on the entity when a mob class has been selected.
+/// </summary>
+[ByRefEvent]
+public record struct MobClassSelectedEvent;

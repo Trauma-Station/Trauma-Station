@@ -22,7 +22,7 @@
       components:
       - type: Vampire               # Holds total and usable blood.
       - type: VampireBloodsucking   # Allows the vampire to drain blood from others.
-    # - type: VampireAbilities      # Grants abilities to the vampire.
+      - type: VampireAbilities      # Grants abilities to the vampire.
       - type: MobClass              # Allows vampire to specialize in a different class.
         belongsTo: Vampire
       - type: AreaDetector          # Detects when you enter/exit areas
@@ -36,6 +36,3 @@
         effectsOnExit:
         - !type:SpawnEntity
           entity: FoodMeat
-      - type: ActionGrant
-        actions:
-        - ActionChooseSpecialization

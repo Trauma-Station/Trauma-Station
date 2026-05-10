@@ -1,0 +1,65 @@
+- type: vampireAbility
+  id: BaseDantalionAbility
+  class: Dantalion
+  abstract: true
+
+- type: vampireAbility  # TODO: Add collective mind here too
+  parents: BaseDantalionAbility
+  id: StartingDantalionAbilities
+  cost: 150
+  onUnlock:
+  - !type:AddComponents
+    components:
+    - type: VampireThralls
+  - !type:AddActions
+    actions:
+    - ActionDanEnthrall
+
+- type: vampireAbility
+  parents: BaseDantalionAbility
+  id: Pacify
+  cost: 250
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionPacify
+    - ActionSubspaceSwap
+
+- type: vampireAbility
+  parents: BaseDantalionAbility
+  id: DeployDecoy
+  cost: 400
+  onUnlock:
+  - !type:AdjustVampireThralls # By default, adds 1 extra
+  - !type:AddActions
+    actions:
+    - ActionDeployDecoy
+
+- type: vampireAbility
+  parents: BaseDantalionAbility
+  id: RallyThralls
+  cost: 600
+  onUnlock:
+  - !type:AdjustVampireThralls
+  - !type:AddActions
+    actions:
+    - ActionRallyThralls
+
+- type: vampireAbility
+  parents: BaseDantalionAbility
+  id: BloodBond
+  cost: 800
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodBond
+
+- type: vampireAbility
+  parents: BaseDantalionAbility
+  id: DantalionFullPower
+  cost: 1000
+  onUnlock:
+  - !type:AdjustVampireThralls
+  - !type:AddActions
+    actions:
+    - ActionMassHysteria

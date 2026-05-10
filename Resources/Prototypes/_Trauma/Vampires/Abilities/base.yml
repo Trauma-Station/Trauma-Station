@@ -1,0 +1,57 @@
+- type: vampireAbility
+  id: RejuvenateI
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionVampRejuvenateI
+
+- type: vampireAbility
+  id: Glare
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionVampireGlare
+
+- type: vampireAbility
+  id: RejuvenateII
+  cost: 200
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionVampRejuvenateII
+  - !type:RemoveActions
+    actions:
+    - ActionVampRejuvenateI
+  - !type:PopupMessage
+    messages:
+    - You feel like your rejuvenate got upgraded!
+    type: Local
+    visualType: Large
+
+- type: vampireAbility
+  id: ChooseSpecialization
+  cost: 150
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionChooseSpecialization
+
+- type: vampireAbility
+  id: NightVision
+  cost: 500
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ToggleNightVision
+
+- type: vampireAbility
+  id: BaseFullPower
+  cost: 1000
+  # TODO: this requires 8 different people
+  onUnlock:
+  - !type:RemoveComponents
+    components:
+    - type: AreaDetector
+    - type: EffectsOnAreaDetect
+    - type: WeakToHoly
+  # nullification removal

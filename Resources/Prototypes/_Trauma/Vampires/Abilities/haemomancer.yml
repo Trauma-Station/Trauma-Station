@@ -1,0 +1,59 @@
+- type: vampireAbility
+  id: BaseHaemomancerAbility
+  class: Haemomancer
+  abstract: true
+
+- type: vampireAbility
+  parents: BaseHaemomancerAbility
+  id: VampiricClaws
+  cost: 150
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodSwell
+
+- type: vampireAbility
+  parents: BaseHaemomancerAbility
+  id: BloodTendrilsBarrier
+  cost: 250
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodTendrils
+    - ActionBloodBarrier
+
+- type: vampireAbility
+  parents: BaseHaemomancerAbility
+  id: BloodPool
+  cost: 400
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodPool
+
+- type: vampireAbility
+  parents: BaseHaemomancerAbility
+  id: PredatorSenses
+  cost: 600
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionPredatorSenses
+
+- type: vampireAbility
+  parents: BaseHaemomancerAbility
+  id: BloodEruption
+  cost: 800
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodEruption
+
+- type: vampireAbility
+  parents: BaseHaemomancerAbility
+  id: HaemomancerFullPower
+  cost: 1000 # TODO: 8 different bodies
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodBringersRite
