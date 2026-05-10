@@ -41,6 +41,6 @@
     soundBlockPercent: .95
   - type: InteractionOutline
   - type: Construction
-    graph: Insulation
+    graph: WallInsulation
     node: insulation
 
