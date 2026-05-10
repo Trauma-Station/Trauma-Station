@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseGameRule
-  id: ClockworkCult
+  id: Vampire
   components:
   - type: VampireRule
   - type: GameRule # todo: placeholder
@@ -25,3 +25,14 @@
     # - type: VampireAbilities      # Grants abilities to the vampire.
       - type: MobClass              # Allows vampire to specialize in a different class.
         belongsTo: Vampire
+      - type: AreaDetector          # Detects when you enter/exit areas
+      - type: EffectsOnAreaDetect   # Runs effects when you enter/exit a specific area
+        areas:
+        - AreaChapel
+        effectsOnEnter:
+        - !type:Ignite
+        - !type:Flammable
+          multiplier: 2
+        effectsOnExit:
+        - !type:SpawnEntity
+          entity: FoodMeat
