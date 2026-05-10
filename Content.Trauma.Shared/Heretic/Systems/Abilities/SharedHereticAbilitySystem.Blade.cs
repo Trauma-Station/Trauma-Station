@@ -22,6 +22,34 @@ public abstract partial class SharedHereticAbilitySystem
         SubscribeLocalEvent<SilverMaelstromComponent, ComponentShutdown>(OnMaelstromShutdown);
 
         SubscribeLocalEvent<EventHereticSacraments>(OnSacraments);
+        SubscribeLocalEvent<HereticBladePassiveRiposteEvent>(OnRiposte);
+    }
+
+    private void OnRiposte(HereticBladePassiveRiposteEvent args)
+    {
+        TryComp(args.Heretic, out RiposteeComponent? riposte);
+        if (args.Negative)
+        {
+            if (riposte == null)
+                return;
+
+            riposte.Data.Remove(args.RiposteDataId);
+            if (riposte.Data.Count == 0)
+                RemCompDeferred(args.Heretic, riposte);
+
+            return;
+        }
+
+        if (riposte?.Data.GetValueOrDefault(args.RiposteDataId) is { } data)
+        {
+            data.Cooldown = MathF.Min(data.Cooldown, args.Cooldown);
+            return;
+        }
+
+        EnsureComp<RiposteeComponent>(args.Heretic).Data = new()
+        {
+            { args.RiposteDataId, new(args.Cooldown) }
+        };
     }
 
     private void OnMaelstromShutdown(Entity<SilverMaelstromComponent> ent, ref ComponentShutdown args)

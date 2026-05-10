@@ -29,7 +29,7 @@ quick_lottery = true
 generator_enabled = false
 
 [movement]
-mob_pushing = true
+mob_pushing = false # Trauma - true -> false
 
 [physics]
 # Makes mapping annoying

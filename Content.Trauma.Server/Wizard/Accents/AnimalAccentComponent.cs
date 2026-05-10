@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Goobstation.Server.Wizard.Accents;
+namespace Content.Trauma.Server.Wizard.Accents;
 
 public abstract partial class AnimalAccentComponent : Component
 {

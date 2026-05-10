@@ -2,7 +2,7 @@
 
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class FadingTimedDespawnSystem : SharedFadingTimedDespawnSystem
 {

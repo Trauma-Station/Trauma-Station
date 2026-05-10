@@ -7,7 +7,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 
-namespace Content.Goobstation.Server.Wizard.NPC;
+namespace Content.Trauma.Server.Wizard.NPC;
 
 /// <summary>
 /// Whether gun either has no ammo (other precondition handles that case) and it's not bolted/has no spent cartridges
@@ -24,14 +24,15 @@ public sealed partial class GunCanFirePrecondition : HTNPrecondition
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
         var gunSystem = _entManager.System<GunSystem>();
 
-        if (!gunSystem.TryGetGun(owner, out var gunUid, out _))
+        if (!gunSystem.TryGetGun(owner, out var gun))
             return false;
 
-        return CanFire(gunSystem, gunUid) ^ Invert;
+        return CanFire(gunSystem, gun) ^ Invert;
     }
 
     private bool CanFire(GunSystem gunSystem, EntityUid gunUid)
     {
+        // TODO: kys
         if (_entManager.TryGetComponent(gunUid, out RevolverAmmoProviderComponent? revolver))
         {
             // No ammo, let other precondition handle that OR there is at least 1 unspent casing

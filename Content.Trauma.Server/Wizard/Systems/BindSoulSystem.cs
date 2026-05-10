@@ -15,7 +15,7 @@ using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Robust.Shared.GameObjects.Components.Localization;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class BindSoulSystem : SharedBindSoulSystem
 {

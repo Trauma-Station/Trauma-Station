@@ -44,8 +44,8 @@
   priority: 6
 
 - type: storeCategory
-  id: HereticPathSideSpecial
-  name: store-heretic-path-side-special
+  id: HereticPathSpecial
+  name: store-heretic-path-special
   priority: 20
 
 - type: storeCategory

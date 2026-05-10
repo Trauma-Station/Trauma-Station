@@ -30,7 +30,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -67,7 +67,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -119,7 +119,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -137,7 +137,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -154,7 +154,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -171,7 +171,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -189,7 +189,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -206,7 +206,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -223,7 +223,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>

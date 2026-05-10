@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.VentCrawler.Tube.Components;
+using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 

@@ -39,8 +39,6 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/turbo.rsi
-    slots:
-    - NECK
 
 - type: entity
   parent: [BasePlushie,BaseMajorContraband]
@@ -108,8 +106,6 @@
   - type: Clothing
     quickEquip: true
     sprite: _Trauma/Objects/Patreon/owenCarpenter.rsi
-    slots:
-    - NECK
 
 - type: entity
   parent: ClothingHeadBase
@@ -132,15 +128,6 @@
     sprite: _Trauma/Objects/Patreon/gribley.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/gribley.rsi
-  - type: GhostRole
-    prob: 1
-    makeSentient: true
-    name: ghost-role-information-disgustingbackpack-name
-    description: ghost-role-information-disgustingbackpack-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleAnimal
-  - type: GhostTakeoverAvailable
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
@@ -148,10 +135,10 @@
     - TauCetiBasic
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase, AllowSuitStorageClothingGasTanks]
   id: PatreonGungeonologist
-  name: bomber jacket
-  description: A green bomber jacket, dont ask what it's made out of.
+  name: bloodied bomber jacket
+  description: A worn bomber jacket with a number of aged blood stains. The inside of the collar has the word "Gunderaan" printed on it.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Patreon/TheGungeonologist/bomberjacket.rsi
@@ -161,7 +148,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: PatreonGungeonologist2
-  name: cup goggles
+  name: surgical goggles
   description: Good for keeping sand out of your eyes.
   components:
   - type: Sprite
@@ -323,15 +310,6 @@
     attackMemoryLength: 5
   - type: GroupRetaliation
     range: 5
-  - type: GhostRole
-    prob: 1
-    makeSentient: true
-    name: ghost-role-information-dwingle-name
-    description: ghost-role-information-dwingle-description
-    rules: ghost-role-information-animal-rules
-    mindRoles:
-    - MindRoleGhostRoleAnimal
-  - type: GhostTakeoverAvailable
 
 - type: entity
   parent: RehydratableAnimalCube
@@ -359,3 +337,90 @@
   - type: Sprite
     sprite: Objects/Misc/monkeycube.rsi
     state: box
+
+- type: entity
+  parent: ClothingUniformBase
+  id: PatreonltKRYSuit
+  name: track suit
+  description: Vaguely Russian.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/ltKRY/clothing.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/ltKRY/clothing.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: PatreonltKRYHat
+  name: track helmet
+  description: Vaguely Russian.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/ltKRY/helmet.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/ltKRY/helmet.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: PatreonDrOktober
+  name: futuristic jacket
+  description: Looks like it came from a scifi novel!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/droktober.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/droktober.rsi
+
+- type: entity
+  parent: [ClothingNeckBase, BaseToggleClothing]
+  id: PatreonDaniels
+  name: time cloak
+  description: The clock on the back is broken...
+  components:
+  - type: ToggleClothing
+    action: ActionBecomeValid
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: KillSign
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/daniels.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/daniels.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: PatreonCatdere
+  name: janitorial cloak
+  description: I killed three men in 1997.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/catdere.rsi
+  - type: Clothing
+    quickEquip: true
+    sprite: _Trauma/Objects/Patreon/catdere.rsi
+
+- type: entity
+  parent: BaseFigurine
+  id: PatreonSuperMage
+  name: tweaking mouse
+  description: Tweaks!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/supermage.rsi
+    state: icon
+  - type: SpeakOnTrigger
+    pack: FigurinesTweaking
+
+- type: entity
+  parent: ClothingHeadBase
+  id: PatreonDino
+  name: glassed flower
+  description: It radiates strangely.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/dino.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Patreon/dino.rsi

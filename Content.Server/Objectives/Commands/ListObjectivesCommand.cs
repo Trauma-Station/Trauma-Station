@@ -57,7 +57,7 @@ namespace Content.Server.Objectives.Commands
                 {
 
                     var progress = (int) (info.Value.Progress * 100f);
-                    shell.WriteLine($"- [{i}] {objectives[i]} ({info.Value.Title}) ({progress}%)");
+                    shell.WriteLine($"- [{i}] {objectives[i]} ({info.Value.Title}) ({progress}%): {info.Value.Description}"); // Trauma - add description
                 }
             }
         }

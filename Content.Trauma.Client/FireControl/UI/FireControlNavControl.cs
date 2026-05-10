@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Client.Shuttles.UI;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.BUIStates;

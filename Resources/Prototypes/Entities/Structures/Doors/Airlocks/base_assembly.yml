@@ -21,6 +21,7 @@
         - FullTileMask
         layer:
         - HumanoidBlockLayer
+        - BulletImpassable # Trauma
   - type: Anchorable
     delay: 2
   - type: Pullable

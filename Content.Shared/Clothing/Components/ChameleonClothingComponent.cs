@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Tag;
+// </Trauma>
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
@@ -29,14 +32,14 @@ public sealed partial class ChameleonClothingComponent : Component
     /// <summary>
     ///     Current user that wears chameleon clothing.
     /// </summary>
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? User;
 
     /// <summary>
     ///     Filter possible chameleon options by a tag in addition to WhitelistChameleon.
     /// </summary>
     [DataField]
-    public string? RequireTag;
+    public ProtoId<TagPrototype>? RequireTag; // Trauma - string -> ProtoId
 
     /// <summary>
     ///     Will component owner be affected by EMP pulses?

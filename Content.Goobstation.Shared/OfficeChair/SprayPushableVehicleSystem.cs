@@ -2,7 +2,6 @@
 
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using System.Numerics;
 using Content.Shared.Buckle.Components;
 
 namespace Content.Goobstation.Shared.OfficeChair;

@@ -55,14 +55,6 @@
         icon:
           sprite: _Trauma/Objects/Tools/overridecomponents.rsi
           state: icon
-      - tag: OverrideKeyComponents
-        doAfter: 5
-        name: construction-graph-tag-overridekeycomponents
-        icon:
-          sprite: _Trauma/Objects/Tools/overridecomponents.rsi
-          state: icon
-      - tool: Screwing
-        doAfter: 3
 
   - node: finished
     entity: ArmoryOverrideKey

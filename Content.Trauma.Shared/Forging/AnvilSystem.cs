@@ -35,14 +35,17 @@ public sealed class AnvilSystem : EntitySystem
 
     private void OnStartItem(Entity<ForgingAnvilComponent> ent, ref AnvilStartItemMessage args)
     {
-        if (!_proto.TryIndex(args.Metal, out var metal) || !_proto.TryIndex(args.Item, out var item))
+        if (!_proto.TryIndex(args.Metal, out var metal) ||
+            !_proto.TryIndex(args.Item, out var item) ||
+            !_forging.CanMakeFrom(item, args.Metal))
             return;
 
         var user = args.Actor;
         var coords = FindIngots(ent, args.Metal);
-        if (_ingots.Count < item.Cost)
+        var cost = item.Cost * ent.Comp.CostScale;
+        if (_ingots.Count < cost)
         {
-            var missing = item.Cost - _ingots.Count;
+            var missing = cost - _ingots.Count;
             _popup.PopupClient($"You are missing {missing} more hot {metal.Name} ingots!",
                 ent, user, PopupType.MediumCaution);
             return;
@@ -53,12 +56,12 @@ public sealed class AnvilSystem : EntitySystem
         foreach (var ingot in _ingots)
         {
             PredictedDel(ingot.Owner);
-            if (++deleted == item.Cost)
+            if (++deleted == cost)
                 break;
         }
 
         // then create the unfinished item
-        var uid = _forging.SpawnUnfinished(coords, args.Metal, args.Item);
+        var uid = _forging.SpawnUnfinished(coords, args.Metal, args.Item, ent.Comp.WorkScale);
         _popup.PopupClient($"You get ready to work on your {Name(uid)}",
             ent, user, PopupType.Medium);
         _audio.PlayPredicted(ent.Comp.StartSound, ent, user);

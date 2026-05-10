@@ -1,0 +1,15 @@
+- type: construction
+  parent: TileSteel
+  id: TilePlastic
+  graph: TilePlastic
+  targetNode: plastic tile
+
+- type: construction
+  parent: TilePlastic
+  id: TilePlasticDark
+  targetNode: dark plastic tile
+
+- type: construction
+  parent: TilePlastic
+  id: TilePlasticWhite
+  targetNode: white plastic tile

@@ -6,7 +6,6 @@ using Robust.Shared.Map.Events;
 using Robust.Shared.Profiling;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;
 
@@ -123,7 +122,7 @@ public sealed class MapAreaSystem : EntitySystem
         _stopwatch.Restart();
         using (_prof.Group("Areas"))
         {
-            foreach (var (indices, chunk) in ent.Comp.Chunks) // copy since it may modify chunks by spawning areas...
+            foreach (var (indices, chunk) in ent.Comp.Chunks)
             {
                 // centered so floating point errors can only occur at absurdly large map sizes
                 var offset = new Vector2(indices.X * size + 0.5f, indices.Y * size + 0.5f);

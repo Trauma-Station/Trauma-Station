@@ -32,6 +32,9 @@
       - PowerCell
       - DroneUsable # Goobstation
   # <Goob>
+  - type: BatteryAmmoProvider
+    proto: LaserSidearmBullet
+    fireCost: 70
   - type: StealTarget
     stealGroup: Battery
   - type: BatteryDrinkerSource
@@ -86,9 +89,6 @@
     sprite: Structures/Power/power.rsi
     state: generator
   - type: Anchorable
-  - type: BatteryAmmoProvider
-    proto: MediumOverchargedLaser # hot potato
-    fireCost: 70 # 1 shot 1 kill, no luck pure skill
   # </Goob>
 
 - type: entity
@@ -117,9 +117,6 @@
       Steel: 12
     chemicalComposition:
       Zinc: 5
-  - type: BatteryAmmoProvider # Goob
-    proto: RedLightLaser
-    fireCost: 45 # 8 shots
 
 - type: entity
   id: PowerCellSmallPrinted
@@ -166,9 +163,6 @@
     maxCharge: 720
     startingCharge: 720
   # <Goob>
-  - type: BatteryAmmoProvider
-    proto: MediumRedLaser
-    fireCost: 90 # 8 shots
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
@@ -214,9 +208,6 @@
     maxCharge: 1080
     startingCharge: 1080
   # <Goob>
-  - type: BatteryAmmoProvider
-    proto: RedLaser
-    fireCost: 135 # 8 shots
   - type: PhysicalComposition
     materialComposition:
       Plastic: 37
@@ -261,9 +252,6 @@
   - type: Battery
     maxCharge: 1800
     startingCharge: 1800
-  - type: BatteryAmmoProvider # Goob
-    proto: RedHeavyLaserShock
-    fireCost: 225 # 8 shots
 
 - type: entity
   id: PowerCellHyperPrinted
@@ -303,9 +291,6 @@
     autoRechargeRate: 12 # takes 1 minute to charge itself back to full
     #canEmp: true # Goob # TODO: reimplement this for predicted battery in a smart way
   # <Goob>
-  - type: BatteryAmmoProvider
-    proto: MediumRedLaser
-    fireCost: 90 # 8 shots
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -350,9 +335,6 @@
       startingCharge: 1200
     - type: BatterySelfRecharger
       autoRechargeRate: 40
-    - type: BatteryAmmoProvider # Goob
-      proto: RedLaser
-      fireCost: 75 # 16 shots
 
 # Power cage (big heavy power cell for big devices)
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.Effects;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;

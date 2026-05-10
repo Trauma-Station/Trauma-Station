@@ -13,7 +13,7 @@
 - type: entity
   parent: ToolboxSyndicate
   id: ToolboxSyndicateFilledWar
-  suffix: Filled
+  suffix: Filled, WAR
   components:
   - type: EntityTableContainerFill
     containers:

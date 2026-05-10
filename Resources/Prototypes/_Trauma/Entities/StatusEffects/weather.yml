@@ -25,6 +25,7 @@
     - AreaAiUpload
     # TODO: make AI access area and replace the not really AI sat places with that, then add AreaAi here
     - AreaMaints
+    - AreaSubstation
     - AreaRadstorm
     - AreaPrisonShower # not quite toilet
 

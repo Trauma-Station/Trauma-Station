@@ -34,32 +34,6 @@
 
   Each influence can only be harvested once, so try to get them before other heretics, even if that means killing other heretics.
 
-  ## Sacrifices
-  The primary method for getting knowledge is by sacrificing crewmates.
-  The Mansus desires only a select few Heathens (non-heretics) at any moment.
-
-  At the start of the round you will be assigned four-five sacrifice targets.
-
-  - One target will be a Head of Staff.
-  - One target will be a member of security.
-  - Other targets will be completely random crewmembers.
-
-  Sacrificing a Head of Staff or member of security will reward you 3 knowledge points, sacrificing any other crewmember will reward 2. You cannot sacrifice regular non-target crewmembers.
-
-  Other heretics are an exception. You can always sacrifice another heretic and get 3 knowledge points for doing so.
-
-  Follow your [color=red]Living Heart[/color] to your target of choice and incapacitate them through any means necessary. If your target is incapacitated, they're ready to sacrifice.
-  Drag them over a transmutation rune and invoke the [color=yellow]Heartbeat of the Mansus[/color] to sacrifice them.
-
-  First, drag a body on the rune, then select the ritual by clicking the rune with an empty hand. Then click on the rune with your Mansus Grasp to invoke the ritual and sacrifice the body.
-
-  You can reroll your targets by invoking [color=yellow]Relentless Heartbeat[/color] ritual.
-
-  ## Heretical Research
-  Once you have some power points, it's time to research! Open up your knowledge store using the action button.
-  The research menu forms a branching tree, and your first selection will be to commit to a path that defines your abilities and Final Ascension.
-  You can learn side knowledge available to all paths, but overall your chosen path will heavily influence your play-style.
-
   ## Transmutation is Key
   Eventually, you'll need to start using proper magics. To draw a transmutation rune, you'll need a writing tool, such as a pen or crayon.
   Activate [color=green]Mansus Grasp[/color] in your offhand and click on the floor to start drawing a rune.
@@ -71,14 +45,70 @@
 
   Transmutation Rituals allow you to create powerful artifacts, demonic monsters, and many useful tools that will help you progress towards ultimate power.
 
+  ## Sacrifices
+  The primary method for getting knowledge is by sacrificing crewmates.
+  The Mansus desires only a select few Heathens (non-heretics) at any moment.
+
+  At the start of the round you will be assigned four-five sacrifice targets.
+
+  - One target will be a Head of Staff.
+  - One target will be a member of Security.
+  - Other targets will be completely random crewmembers.
+
+  Sacrificing a Head of Staff or member of security will reward you 3 knowledge points, sacrificing any other crewmember will reward 2. You cannot sacrifice regular non-target crewmembers.
+
+  Other heretics are an exception. You can always sacrifice another heretic and get 3 knowledge points for doing so.
+
+  Follow your [color=red]Living Heart[/color] to your target of choice and incapacitate them through any means necessary. If your target is incapacitated, they're ready to sacrifice.
+  Drag them over a transmutation rune and invoke the [color=yellow]Sacrifice[/color] to sacrifice them.
+
+  First, drag a body on the rune, then select the ritual by clicking the rune with an empty hand. Then click on the rune with your Mansus Grasp to invoke the ritual and sacrifice the body.
+
+  You can reroll your targets by invoking [color=yellow]Relentless Heartbeat[/color] ritual.
+
+  ## Mansus Grasp
+
+  A powerful spell that garbles target speech, knocks them down and deals 80 stamina damage. It has additional effects based on your chosen path.
+
+  [color=red]Important:[/color] Mansus Grasp cannot be used by clicking a mob using context menu. But it works in [color=red]Combat Mode[/color], Left click in combat mode only affects mobs, and right click acts like left click, but affects everything. Note that Mansus Grasp cannot miss.
+
+  ## The Heretic Blade
+
+  The Sickly Blade will be your first unlocked research. It can be created by transmuting a common knife (this includes even Shivs, which are made by wrapping Glass Shards with Cloth) with a secondary ingredient based on your path, and serves as a powerful melee weapon as well as a one time use escape tool.
+
+  All paths have their own kind of blade, which only differ in appearance and name without any additional research. As with the Mansus Grasp, your blade will be upgraded by your research over time. Said upgrades will differ depending on the path you choose.
+
+  You are limited in the amounts of blades you can create at a time - most paths limit you to two blades, and Blade limits you to four.
+
+  Additionally, you can break your blade by activating it in-hand to teleport to a random, (mostly) safe location in a pinch. Better to lose your weapon and live another day than die fighting. The ability to blade break is lost once your Path Robes are crafted or you accrue 10 knowledge points or research Blade upgrade.
+
+  ## Passive Abilities
+
+  Upon selecting a path, the Heretic will receive a passive ability that can be upgraded a couple of times.
+
+  Crafting your robes upgrades your passive to Tier 2, which unlocks the Ritual of Knowledge. This ritual requires a set of random items; completing it grants 4 Knowledge Points and the final passive upgrade.
+
+  ## Heretical Research
+  Once you have some power points, it's time to research! Open up your knowledge store using the action button.
+  The research menu forms a branching tree, and your first selection will be to commit to a path that defines your abilities and Final Ascension.
+  You can learn side knowledge available to all paths, but overall your chosen path will heavily influence your play-style.
+
   ## Focus is Necessary
   To cast more advanced spells, you must focus by wearing an [color=orange]Amber Focus[/color].
   You can acquire Amber Focus using the eponymous ritual.
   Some more powerful heretical equipment also functions as a focus - namely, the Ominous Armor from the Armorer's Ritual (when the hood is flipped up).
   [color=yellow]Ascension[/color] disables the need for a focus.
 
-  ## Point of no Return
-  After gaining 8 points of knowledge, you lose the ability to break blades to teleport and get visible aura that outs you as heretic after 1 minute. Aura can be hidden by performing [color=yellow]Feast of Owls[/color] ritual or by selection [color=purple]Path of Lock[/color] as your path.
+  ## Point of No Return: The Heretic Aura
+
+  This is the most important turning point for any Heretic. When you either craft your [bold]Path-Specific Robes[/bold] or accrue [bold]10 knowledge points[/bold] or researching [bold]Path-Specific Blade Upgrade[/bold] (whichever comes first), the following permanent changes occur:
+
+  - You lose the ability to Blade Break (emergency teleport by activating blade in-hand).
+  - You gain a permanent visible aura that identifies you as a Heretic to everyone. This makes you valid to kill.
+
+  If you choose [color=yellow]Feast of Owls[/color] (reject ascension for points) or pick the [color=purple]Lock Path[/color], you will not receive the aura.
+
+Once the aura appears, there is no hiding what you are. Plan accordingly.
 
   ## The Chaplain
   A powerful foe indeed, try to steer clear of the Chaplain! Their Null Rod and it's variants will block magic and deal holy damage to you while you're wielding heretical equipment!

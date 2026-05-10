@@ -22,5 +22,7 @@
   contrabandInventory:
     DrinkDrGibbCan: 3
     DrinkChangelingStingCan: 2
+    ClothingBeltUtility: 1 # Trauma
   emaggedInventory:
     DrinkNukieCan: 2
+    DoubleEmergencyOxygenTankFilled: 1 # Trauma

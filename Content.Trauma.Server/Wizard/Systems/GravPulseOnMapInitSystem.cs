@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Singularity.EntitySystems;
+using Content.Trauma.Server.Wizard.Components;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed class GravPulseOnMapInitSystem : EntitySystem
 {

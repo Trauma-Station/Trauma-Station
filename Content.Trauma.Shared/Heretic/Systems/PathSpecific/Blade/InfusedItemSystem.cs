@@ -38,7 +38,7 @@ public sealed class InfusedItemSystem : EntitySystem
         SubscribeLocalEvent<MansusInfusedComponent, ExaminedEvent>(OnInfusedExamine);
         SubscribeLocalEvent<MansusInfusedComponent, InteractHandEvent>(OnInfusedInteract);
         SubscribeLocalEvent<MansusInfusedComponent, MeleeHitEvent>(OnInfusedMeleeHit,
-            after: new[] { typeof(SharedHereticBladeSystem) });
+            after: new[] { typeof(HereticBladeSystem) });
         SubscribeLocalEvent<MansusInfusedComponent, ComponentStartup>(OnInfusedStartup);
         SubscribeLocalEvent<MansusInfusedComponent, ComponentShutdown>(OnInfusedShutdown);
     }
@@ -90,7 +90,7 @@ public sealed class InfusedItemSystem : EntitySystem
         raiser.Blackboard[SharedHereticRitualSystem.Mind] = mind;
 
         _effects.TryApplyEffect(target, ent.Comp.InfusedHitEffect, (ent, raiser), args.User);
-        _grasp.ApplyMark(target, path, heretic.PathStage);
+        _grasp.ApplyMark(target, path, heretic.PassiveLevel);
 
         raiser.Blackboard.Clear();
         SpendInfusionCharges(ent);

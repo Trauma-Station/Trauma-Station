@@ -1,34 +1,31 @@
 - type: entity
+  parent: MarkerBase
   id: RandomVendingSnacks
   name: random vending machine spawner
   suffix: Snacks
-  parent: MarkerBase
   components:
   - type: Sprite
     layers:
-      - state: red
-      - sprite: Structures/Machines/VendingMachines/random.rsi
-        state: snack
-  - type: RandomSpawner
-    prototypes:
+    - state: red
+    - sprite: Structures/Machines/VendingMachines/random.rsi
+      state: snack
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
       # <Trauma>
-      - VendingMachineSweetToof
-      - VendingMachineSustenance
-      - VendingMachineHotfood
-      - VendingMachineFitness
-      - VendingMachineWeeb
+      - id: RandomVendingSnacksMimic
+        weight: 0.01
+      - id: VendingMachineSweetToof
+      - id: VendingMachineSustenance
+      - id: VendingMachineHotfood
+      - id: VendingMachineFitness
+      - id: VendingMachineWeeb
       # </Trauma>
-      - VendingMachineDiscount
-      - VendingMachineSnack
-      - VendingMachineSnackBlue
-      - VendingMachineSnackGreen
-      - VendingMachineSnackOrange
-      - VendingMachineSnackTeal
-      - VendingMachineChang
-      - VendingMachineDonut
-    chance: 0.99 # Trauma, was 1
-    # <Trauma>
-    rarePrototypes:
-    - RandomVendingSnacksMimic
-    rareChance: 0.01
-    # </Trauma>
+      - id: VendingMachineDiscount
+      - id: VendingMachineSnack
+      - id: VendingMachineSnackBlue
+      - id: VendingMachineSnackGreen
+      - id: VendingMachineSnackOrange
+      - id: VendingMachineSnackTeal
+      - id: VendingMachineChang
+      - id: VendingMachineDonut

@@ -1,0 +1,207 @@
+- type: entity
+  parent: [ OrganBaseStomach, OrganHumanInternal ]
+  id: OrganHereticFleshAscendStomach
+  components:
+  - type: Metabolizer
+    solutionOnBody: false
+    metabolizerTypes: [ Vox ]
+    maxReagents: 6
+    stages: [ Digestion, Bloodstream, Metabolites ]
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 1984
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 12
+        - ReagentId: Fat
+          Quantity: 3
+
+- type: entity
+  abstract: true
+  id: MobHereticFleshAscendSegmentBase
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 1984
+        mask:
+        - MobMask
+        layer:
+        - Opaque
+        - BulletImpassable
+        - LowImpassable
+        - MidImpassable
+  - type: DamageOnCollide
+    inverted: true
+    damage:
+      types:
+        Structural: 50
+        Blunt: 5
+    ignoreWhitelist:
+      components:
+      - ContainmentField
+      - FleshPassive
+      - Ghoul
+      - LordOfTheNight
+      tags:
+      - FleshWormSegment
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Goobstation/Heretic/eldritch_mobs.rsi
+    noRot: true
+    layers:
+    - map: ["enum.TailedEntitySegmentLayer.Base"]
+      state: armsy_mid
+  - type: ContainerContainer
+    containers:
+      body_organs: !type:Container
+  - type: BodyCache
+  - type: Body
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
+  - type: AlwaysTakeHoly
+  - type: Damageable
+    damageContainer: Biological
+  - type: Clickable
+  - type: InteractionOutline
+  - type: NpcFactionMember
+    factions:
+    - Heretic
+  - type: Physics
+    bodyType: Dynamic
+  - type: Appearance
+
+- type: entity
+  parent: [MobHereticFleshAscendSegmentBase, BaseMob, MobCombat]
+  id: MobHereticFleshAscend
+  name: Lord of the Night
+  description: An abomination made from dozens and dozens of severed and malformed limbs grasping onto each other.
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganTorsoGhoul
+      Stomach: OrganHereticFleshAscendStomach
+  - type: MovementAlwaysTouching
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 4.5
+  - type: Sprite
+    layers:
+    - state: armsy_start
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      4000: Dead
+  - type: StatusEffects
+    allowed:
+    - RadiationProtection
+  - type: MeleeWeapon
+    canWideSwing: false
+    altDisarm: false
+    damage:
+      types:
+       Blunt: 15
+       Slash: 15
+       Piercing: 15
+       Structural: 200
+      woundSeverityMultipliers:
+        Blunt: 1.5
+        Slash: 1.5
+        Piercing: 1.5
+    soundHit: /Audio/Weapons/smash.ogg
+    animation: WeaponArcSmash
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - StunImmune
+  - type: CollectiveMind
+    defaultChannel: MansusLink
+    channels:
+    - MansusLink
+  - type: Examiner
+  - type: NightVision
+    color: "#82120a"
+    activateSound: null
+    deactivateSound: null
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: ContentEye
+    maxZoom: 1.5,1.5
+    targetZoom: 1.5,1.5
+  - type: TailedEntity
+    shouldCollideWithSegments: true
+    preventFirstSegmentsCollideAmount: 1
+    amount: 0
+    spacing: 1
+    prototype: MobHereticFleshAscendSegment
+  - type: WarpPoint
+    follow: true
+    location: lord of the night
+  - type: Speech
+    speechVerb: LargeMob
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
+  - type: Targeting
+  - type: ActionGrant
+    actions:
+    - ActionHereticFleshContract
+  - type: LordOfTheNight
+    madnessEffects:
+    - !type:GenericStatusEffect
+      key: TemporaryBlindness
+      component: TemporaryBlindness
+      type: Update
+      time: 4
+    - !type:ModifyParalysis
+      time: 4
+    - !type:Emote
+      emote: Scream
+      showInChat: true
+  - type: NoRotateOnMove
+  - type: GhostOnMove
+    mustBeDead: true
+  - type: HideHereticAura
+  - type: Perishable
+    molsPerSecondPerUnitMass: 0
+    rotAfter: 99999
+  - type: MeleeDash
+    emoteOnDash: null
+    length: 8
+    dashSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+  - type: UseDelay
+    delay: 5
+  - type: Puller
+    needsHands: false
+  - type: Pullable
+    canBeGrabbed: false
+
+- type: entity
+  parent: MobHereticFleshAscendSegmentBase
+  id: MobHereticFleshAscendSegment
+  name: worm tail
+  description: Tail of something greater.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tag
+    tags:
+    - FleshWormSegment
+  - type: PreventCollide
+    whitelist:
+      tags:
+      - FleshWormSegment
+  - type: TailedEntitySegment
+    segmentSpriteState: armsy_mid
+    tailSpriteState: armsy_end
