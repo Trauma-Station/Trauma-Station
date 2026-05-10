@@ -250,6 +250,10 @@
   - type: AntagObjectives
     objectives:
     - TunnelClownProtectMaintenanceObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills
 
 - type: entity
   parent: BaseGameRule
@@ -281,6 +285,10 @@
     - SingulothKnightPreachObjective
     - SingulothKnightSingularityObjective
     - SingulothKnightTeslaObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -312,6 +320,10 @@
     - HijackShuttleObjective
     - KillRandomHeadObjective
     - DarkLordDuelObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity # Only has a chance to spawn whenever dark lord spawns
   parent: BaseGameRule
@@ -336,6 +348,10 @@
   - type: AntagObjectives
     objectives:
     - ChosenOneKillDarkLordObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -368,6 +384,10 @@
     - KillRandomHeadObjective
     - KillRandomHeadObjective
     - EscapeShuttleObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
 
 - type: entity
   parent: BaseGameRule
@@ -400,6 +420,10 @@
     - DarkPriestHireApprentice
     - KillRandomPersonObjective
     - EscapeShuttleObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -440,6 +464,10 @@
     - groups: ThiefObjectiveGroups
       maxPicks: 15
     maxDifficulty: 4
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
 
 - type: entity
   id: ClownGoblinMigration

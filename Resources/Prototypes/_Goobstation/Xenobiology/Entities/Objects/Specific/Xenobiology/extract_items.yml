@@ -1,14 +1,14 @@
 - type: entity
+  parent: [ OrganBaseHeart, BasePowerCell ]
   id: XenobioVolatileOrgan
-  parent: [ OrganBaseInternal, BasePowerCell ]
   name: volatile organ
-  description: A pulsating mass of slime, it seems to react to nearby devices.
   suffix: Full
+  description: A pulsating mass of slime, it seems to react to nearby devices.
   components:
   - type: Sprite
     layers:
-      - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/volatile_organ.rsi
-        state: icon
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/volatile_organ.rsi
+      state: icon
   - type: GenericVisualizer
     visuals: {} # disable battery visuals
   - type: Item
@@ -34,11 +34,6 @@
       reagents:
       - ReagentId: Slime
         Quantity: 15
-  - type: Heart
-  - type: Organ
-    category: Heart
-  - type: ChildOrgan
-    parents: [ Torso ]
   - type: OrganComponents
     onAdd:
     - type: LightningArcShooter
@@ -56,7 +51,6 @@
       Damaged: 9
       Destroyed: 0
   - type: Metabolizer
-    maxReagents: 2
     metabolizerTypes: [ Cybernetic ]
   - type: Tag
     tags:

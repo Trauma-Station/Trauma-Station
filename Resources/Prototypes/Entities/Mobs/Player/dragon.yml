@@ -6,6 +6,35 @@
   description: A flying leviathan, loosely related to space carps.
   abstract: true
   components:
+  # <Trauma>
+  - type: CollectiveMind
+    defaultChannel: Dragonmind
+    channels:
+    - Dragonmind
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Dragon
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  - type: Fauna
+  - type: LanguageSpeaker # carp language (keeping basic as an option because the space monster gloating is funny)
+    speaks:
+    - TauCetiBasic
+    - Carptongue
+    understands:
+    - TauCetiBasic
+    - Carptongue
+  - type: InnateWaypointer
+    waypointerProtoIds:
+    - NTStationWaypointer
+    - DragonRiftWaypointer
+  - type: DragonAreaRifts
+    areaWhitelist:
+      components:
+      - StationArea # no being a chud
+  # </Trauma>
   - type: Bloodstream
     bleedReductionAmount: 5 #goob
     bloodReferenceSolution:
@@ -145,14 +174,14 @@
     stomachStorageWhitelist:
       components:
       - MobState
-      - Item
+      - Item # Trauma
     chemical: Ichor
     healRate: 7.5
     whitelist:
       components:
       - MobState
       - Door
-      - Item
+      - Item # Trauma
       tags:
       - Wall
   - type: Tag
@@ -160,14 +189,6 @@
     - CannotSuicide
     - DoorBumpOpener
     - StunImmune
-  # Goobstation - Collective mind
-  - type: CollectiveMind
-    defaultChannel: Dragonmind
-    channels:
-    - Dragonmind
-  - type: Damageable # Goobstation
-    damageContainer: Biological
-    damageModifierSet: Dragon
   - type: Puller
     needsHands: false
   - type: RandomMetadata
@@ -175,36 +196,20 @@
     - NamesDragon
     - NamesDragonTitle
     nameFormat: name-format-dragon
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
-  - type: Fauna # Lavaland Change
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: InnateWaypointer
-    waypointerProtoIds:
-    - NTStationWaypointer
-    - DragonRiftWaypointer
-  - type: LanguageSpeaker # Trauma - carp language (keeping basic as an option because the space monster gloating is funny)
-    speaks:
-    - TauCetiBasic
-    - Carptongue
-    understands:
-    - TauCetiBasic
-    - Carptongue
 
 - type: entity
   parent: BaseMobDragon
   id: MobDragon
   components:
   - type: Dragon
-    # <Trauma>
     spawnRiftAction: ActionSpawnRift
+    # <Trauma>
     carpRiftHealing:
       types:
         Blunt: -1.33

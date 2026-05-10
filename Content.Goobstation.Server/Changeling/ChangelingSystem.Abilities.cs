@@ -43,6 +43,8 @@ using Content.Shared.Actions.Components;
 using Content.Goobstation.Shared.Devour.Events;
 using Content.Server.Actions;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
 using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Changeling;
@@ -50,6 +52,7 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem
 {
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly WeldableSystem _weldable = default!; // for biodegrade unweld
     [Dependency] private readonly GibbingSystem _gibbing = default!;
 
     public static readonly EntProtoId ActionLayEgg = "ActionLayEgg";
@@ -666,6 +669,16 @@ public sealed partial class ChangelingSystem
             QueueDel(bola);
         }
 
+        // Unwelds containers containing changeling
+        var parent = Transform(uid).ParentUid;
+
+        if (parent.IsValid() && TryComp<WeldableComponent>(parent, out var weldable))
+        {
+            if (weldable.IsWelded)
+            {
+                _weldable.SetWeldedState(parent, false);
+            }
+        }
         var soln = new Solution();
         soln.AddReagent(PolytrinicAcid, 10f);
 
@@ -722,7 +735,7 @@ public sealed partial class ChangelingSystem
             EnsureComp<SpecialBreathingImmunityComponent>(uid);
             EnsureComp<SpecialPressureImmunityComponent>(uid);
             EnsureComp<SpecialLowTempImmunityComponent>(uid);
-            Popup.PopupEntity(Loc.GetString("changeling-voidadapt-start"), uid, uid);
+            Popup.PopupEntity("Our exterior adapts to the vacuum of space", uid, uid);
             comp.VoidAdaptActive = true;
             comp.ChemicalRegenMultiplier -= 0.25f; // chem regen slowed by a flat 25%
         }
@@ -731,7 +744,7 @@ public sealed partial class ChangelingSystem
             RemComp<SpecialBreathingImmunityComponent>(uid);
             RemComp<SpecialPressureImmunityComponent>(uid);
             RemComp<SpecialLowTempImmunityComponent>(uid);
-            Popup.PopupEntity(Loc.GetString("changeling-voidadapt-end"), uid, uid);
+            Popup.PopupEntity("Our exterior returns to normal", uid, uid);
             comp.VoidAdaptActive = false;
             comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed
         }

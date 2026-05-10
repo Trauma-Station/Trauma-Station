@@ -1,29 +1,14 @@
 # This one is the standard coefficients for quality.
 - type: quality
   id: BaseQuality
-  gun: 0.9
-  armor: 0.95
-  clothingDelay: 0.87
-  explosionResist: 0.87
-  staminaResist: 0.87
-  health: 0.8
-  selfDamage: 0.87
-  damage: 1.125
-  projectile: 1.125
-  durability: 1.12
-  shield: 1.12
-  shieldFlat: 1.12
-  meleeDamage: 1.05
-  price: 1.5
 
 - type: quality
   id: ShitCraft
   gun: 0.95
-  armor: 0.95
   clothingDelay: 0.95
   explosionResist: 0.95
   staminaResist: 0.95
-  health: 0.95
+  health: 1.05
   selfDamage: 0.95
   damage: 1.05 # This is throwing damage for some reason
   projectile: 1.05
@@ -40,7 +25,7 @@
   clothingDelay: 0.99
   explosionResist: 0.99
   staminaResist: 0.99
-  health: 0.99
+  health: 1.01
   selfDamage: 0.99
   damage: 1.01
   projectile: 1.01

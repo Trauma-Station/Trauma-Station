@@ -131,3 +131,26 @@ Entries:
   id: 17
   time: '2026-04-13T16:36:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2005
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: lsobjectives command now shows the description too
+  id: 18
+  time: '2026-05-08T15:32:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2493
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the effect toolshed command, it can apply entity effect prototypes
+      to input entities.
+  id: 19
+  time: '2026-05-08T16:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2491
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added debug anvil which uses no materials and gets wrought in 1 hit.
+  id: 20
+  time: '2026-05-08T17:25:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2497

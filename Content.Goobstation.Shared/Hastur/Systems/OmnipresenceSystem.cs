@@ -5,7 +5,6 @@ using Content.Goobstation.Shared.Hastur.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.Hastur.Systems;
 

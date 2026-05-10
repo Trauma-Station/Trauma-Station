@@ -6,6 +6,7 @@ using Content.Shared.Devour.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.Sprite;
 using Content.Shared.Stunnable;
+using Content.Trauma.Common.Dragon;
 using Content.Trauma.Common.Sprite;
 using Robust.Shared.Serialization.Manager;
 // </Trauma>
@@ -200,6 +201,17 @@ public sealed partial class DragonSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("carp-rift-space-proximity", ("proximity", RiftTileRadius)), uid, uid);
             return;
         }
+
+        // <Trauma> - allow for area checks
+        var ev = new DragonSpawnRiftAttemptEvent();
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Cancelled)
+        {
+            if (ev.Popup is { } popup)
+                _popup.PopupEntity(popup, uid, uid);
+            return;
+        }
+        // </Trauma>
 
         var carpUid = Spawn(component.RiftPrototype, _transform.GetMapCoordinates(uid, xform: xform));
         Transform(carpUid).LocalRotation = Angle.Zero;
