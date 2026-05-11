@@ -19,7 +19,6 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.PreAscension;
 public sealed class ShadowlingVeilSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly SharedHandheldLightSystem _handheld = default!;
     [Dependency] private readonly UnpoweredFlashlightSystem _unpowered = default!;
