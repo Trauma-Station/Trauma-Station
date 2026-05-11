@@ -4,7 +4,7 @@
   abstract: true
 
 - type: vampireAbility  # TODO: Add collective mind here too
-  parents: BaseDantalionAbility
+  parent: BaseDantalionAbility
   id: StartingDantalionAbilities
   cost: 150
   onUnlock:
@@ -16,7 +16,7 @@
     - ActionDanEnthrall
 
 - type: vampireAbility
-  parents: BaseDantalionAbility
+  parent: BaseDantalionAbility
   id: Pacify
   cost: 250
   onUnlock:
@@ -26,7 +26,7 @@
     - ActionSubspaceSwap
 
 - type: vampireAbility
-  parents: BaseDantalionAbility
+  parent: BaseDantalionAbility
   id: DeployDecoy
   cost: 400
   onUnlock:
@@ -36,7 +36,7 @@
     - ActionDeployDecoy
 
 - type: vampireAbility
-  parents: BaseDantalionAbility
+  parent: BaseDantalionAbility
   id: RallyThralls
   cost: 600
   onUnlock:
@@ -46,7 +46,7 @@
     - ActionRallyThralls
 
 - type: vampireAbility
-  parents: BaseDantalionAbility
+  parent: BaseDantalionAbility
   id: BloodBond
   cost: 800
   onUnlock:
@@ -55,9 +55,12 @@
     - ActionBloodBond
 
 - type: vampireAbility
-  parents: BaseDantalionAbility
+  parent: BaseDantalionAbility
   id: DantalionFullPower
   cost: 1000
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 8
   onUnlock:
   - !type:AdjustVampireThralls
   - !type:AddActions

@@ -4,18 +4,18 @@
   abstract: true
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: GargantuaRejuvenate
   onUnlock:
   - !type:RemoveActions
     actions:
-    - ActionVampRejuvenateII
+    - ActionVampRejuvenateI
   - !type:AddActions
     actions:
     - ActionVampGargRejuv
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: BloodSwell
   cost: 150
   onUnlock:
@@ -24,7 +24,7 @@
     - ActionBloodSwell
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: StompBloodRush
   cost: 250
   onUnlock:
@@ -34,7 +34,7 @@
     - ActionBloodRush
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: BloodSwellII
   cost: 400
   onUnlock:
@@ -46,7 +46,7 @@
     - ActionBloodSwellII
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: OverwhelmingForce
   cost: 600
   onUnlock:
@@ -55,7 +55,7 @@
     - ActionOverwhelmingForce
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: DemonicGraspCharge
   cost: 800
   onUnlock:
@@ -65,9 +65,12 @@
     - ActionGargCharge
 
 - type: vampireAbility
-  parents: BaseGargantuaAbility
+  parent: BaseGargantuaAbility
   id: GargantuaFullPower
   cost: 1000 # TODO: Requires 8 bodies condition
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 8
   onUnlock:
   - !type:AddActions
     actions:

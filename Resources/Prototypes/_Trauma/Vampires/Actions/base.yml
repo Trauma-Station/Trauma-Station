@@ -12,6 +12,16 @@
   - type: Action
     raiseOnAction: true
     itemIconStyle: BigAction
+  - type: ActionConditions
+    conditions:
+    - !type:HasNullificationCondition # cannot use abilities if we are too nullified
+      inverted: true
+      amount: 100
+    - !type:InsideAreaCondition # cannot use abilities if we are in chapel
+      inverted: true
+      whitelist:
+        components:
+        - HolyArea
 
 - type: entity
   parent: BaseVampireAction

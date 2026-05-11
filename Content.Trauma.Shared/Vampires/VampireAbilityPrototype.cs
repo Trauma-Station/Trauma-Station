@@ -40,6 +40,14 @@ public sealed partial class VampireAbilityPrototype : IPrototype, IInheritingPro
     public ProtoId<MobClassPrototype>? Class;
 
     /// <summary>
+    /// We must not be this class to unlock this ability.
+    /// </summary>
+    [DataField]
+    [AlwaysPushInheritance]
+    public ProtoId<MobClassPrototype>? BlacklistClass;
+
+
+    /// <summary>
     /// How much <see cref="VampireComponent.TotalBlood"/> this ability requires.
     /// </summary>
     [DataField]

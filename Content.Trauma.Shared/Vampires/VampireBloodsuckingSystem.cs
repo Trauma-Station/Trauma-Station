@@ -8,6 +8,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
@@ -26,6 +27,7 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    //[Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly EntityQuery<TargetingComponent> _targetingQuery = default!;
@@ -83,13 +85,11 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
         var user = ent.Owner;
         _hunger.ModifyHunger(user, ent.Comp.HungerRestoration);
 
-        // If we have already reached our limit on this target,
-        // then just satiate our hunger and stop
-        if (drainable.BloodGathered >= drainable.MaxBlood)
+        /*if (!_mind.TryGetMind(target, out _, out _)) TODO: Uncomment when done playtesting
         {
-            _popup.PopupClient("You have drained most of their life force, you will get no more usable blood from them", user, user, PopupType.MediumCaution);
+            _popup.PopupClient("Their blood is pale...", user, user, PopupType.MediumCaution);
             return;
-        }
+        }*/
 
         if (!_bloodstreamQuery.TryComp(target, out var bloodstream))
             return;
@@ -102,7 +102,15 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
         var bloodInt = (int) bloodToRemove;
 
         _bloodstream.TryModifyBloodLevel(bloodEnt, bloodToRemove);
-        _bloodstream.TryModifyBleedAmount(bloodEnt, bloodEnt.bloodstream.MaxBleedAmount * 0.6f); // TODO: Adjust this somewhere where it feels good
+        _bloodstream.TryModifyBleedAmount(bloodEnt, bloodEnt.bloodstream.MaxBleedAmount * 0.6f);
+
+        // If we have already reached our limit on this target,
+        // then don't go further.
+        if (drainable.BloodGathered >= drainable.MaxBlood)
+        {
+            _popup.PopupClient("You have drained most of their life force, you will get no more usable blood from them", user, user, PopupType.MediumCaution);
+            return;
+        }
 
         drainable.BloodGathered += bloodInt;
         Dirty(target, drainable);
@@ -113,6 +121,9 @@ public sealed class VampireBloodsuckingSystem : EntitySystem
 
         _popup.PopupClient("You drain the life force out of them...", user, user, PopupType.MediumCaution);
         _popup.PopupEntity("You feel like your life force has been drained...", target, target, PopupType.MediumCaution);
+
+        ent.Comp.ConsumedVictims.Add(target);
+        Dirty(ent);
     }
 
     #region  Helper

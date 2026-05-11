@@ -24,25 +24,33 @@ public sealed class EffectsOnMeleeHitSystem : EntitySystem
             return;
 
         var user = args.User;
+        var targetEffects = ent.Comp.TargetEffects;
+        var userEffects = ent.Comp.UserEffects;
+
         if (!ent.Comp.EffectForEveryHit)
         {
             var target = args.HitEntities[0];
             if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds))
                 return;
 
-            _effects.ApplyEffects(target, ent.Comp.TargetEffects!);
-            _effects.ApplyEffects(user, ent.Comp.UserEffects!);
+            if (targetEffects != null)
+                _effects.ApplyEffects(target, targetEffects);
 
+            if (userEffects != null)
+                _effects.ApplyEffects(user, userEffects);
             return;
         }
 
         foreach (var target in args.HitEntities)
         {
             if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds))
-                return;
+                continue;
 
-            _effects.ApplyEffects(target, ent.Comp.TargetEffects!);
-            _effects.ApplyEffects(user, ent.Comp.UserEffects!);
+            if (targetEffects != null)
+                _effects.ApplyEffects(target, targetEffects);
+
+            if (userEffects != null)
+                _effects.ApplyEffects(user, userEffects);
         }
     }
 }

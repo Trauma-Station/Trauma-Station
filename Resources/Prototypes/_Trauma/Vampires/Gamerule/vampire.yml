@@ -25,6 +25,8 @@
       - type: VampireAbilities      # Grants abilities to the vampire.
       - type: MobClass              # Allows vampire to specialize in a different class.
         belongsTo: Vampire
+      - type: Nullification         # Restricts use of abilities when it reaches 120
+      - type: ZombieImmune          # So there's no first day chud making issue about it
       - type: AreaDetector          # Detects when you enter/exit areas
       - type: EffectsOnAreaDetect   # Runs effects when you enter/exit a specific area
         areas:

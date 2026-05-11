@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.DoAfter;
+using Content.Shared.EntityConditions;
 
 namespace Content.Trauma.Shared.Vampires;
 
@@ -9,6 +10,7 @@ namespace Content.Trauma.Shared.Vampires;
 /// whilst the head of the target is targeted.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class VampireBloodsuckingComponent : Component
 {
     /// <summary>
@@ -22,6 +24,12 @@ public sealed partial class VampireBloodsuckingComponent : Component
     /// </summary>
     [DataField]
     public int BloodToRemove = 25;
+
+    /// <summary>
+    /// A hashset of consumed victims.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> ConsumedVictims = new();
 }
 
 /// <summary>

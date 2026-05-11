@@ -1,0 +1,43 @@
+- type: particleEffect
+  id: VampireCoffinExit
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot_big
+  startColor: "#FFFFFFFF"
+  endColor: "#FFFFFF00"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.2
+  - time: 0.1
+    value: 0.4 # Peaks lower and very quickly
+  - time: 0.4
+    value: 0.15 # Drops almost immediately so it becomes a thin veil
+  - time: 1.0
+    value: 0.0
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 1.0
+    value: 1.5 # Drastically reduced max size so they don't overlap as much
+  lifetime: 3.0 # Shortened so the screen clears faster
+  lifetimeVariance: 1.0
+  speed: 1.0
+  speedVariance: 0.5
+  particleSize: 1.0
+  sizeVariance: 0.2
+  emissionRate: 0
+  maxCount: 20 # Cut down from 75. This is the biggest factor in fixing the visibility!
+  burst: true
+  gravity: -0.05
+  drag: 0.9
+  noiseStrength: 0.5
+  noiseFrequency: 0.5
+  spreadAngle: 360
+  emitAngle: 90
+  startRotation: 0
+  startRotationVariance: 360
+  rotationSpeed: 0.2
+  rotationSpeedVariance: 10
+  shape:
+    type: CircleFill
+    radius: 0.5 # Slightly wider spawn so they aren't all clumped on the center

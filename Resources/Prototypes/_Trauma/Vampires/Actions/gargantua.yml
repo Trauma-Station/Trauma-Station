@@ -10,6 +10,17 @@
     - !type:NestedEffect
       proto: VampireRejuvGarg
 
+- type: entity
+  parent: BaseRejuvAction
+  id: ActionVampGargRejuvII
+  name: Rejuvenate
+  description: Heals you
+  components:
+  - type: EffectAction
+    effects:
+    - !type:NestedEffect
+      proto: VampireRejuvGarg
+
 # Blood Swell I and II
 - type: entity
   parent: BaseVampireAction

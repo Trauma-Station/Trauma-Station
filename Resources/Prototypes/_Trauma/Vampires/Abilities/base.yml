@@ -14,6 +14,7 @@
 
 - type: vampireAbility
   id: RejuvenateII
+  blacklistClass: Gargantua # they get their own rej where it heals based on damage as "passive" once they spec
   cost: 200
   onUnlock:
   - !type:AddActions
@@ -47,11 +48,13 @@
 - type: vampireAbility
   id: BaseFullPower
   cost: 1000
-  # TODO: this requires 8 different people
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 8
   onUnlock:
   - !type:RemoveComponents
     components:
     - type: AreaDetector
-    - type: EffectsOnAreaDetect
     - type: WeakToHoly
+    - type: Nullification
   # nullification removal

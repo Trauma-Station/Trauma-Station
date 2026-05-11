@@ -1,0 +1,14 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireCoffinStatusEffect # restores some nullification every few seconds while in a coffin
+  name: vampire coffin
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Vampire
+  - type: StatusEffectEffects
+    updateDelay: 1
+    effects:
+    - !type:ApplyNullification
+      amount: -1

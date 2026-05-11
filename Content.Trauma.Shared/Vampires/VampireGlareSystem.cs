@@ -41,8 +41,6 @@ public sealed class VampireGlareSystem : EntitySystem
     {
         var performer = args.Performer;
 
-        // TODO: Ignore thralls
-
         // Check if we are blindfolded
         var ev = new CanSeeAttemptEvent();
         RaiseLocalEvent(performer, ev);

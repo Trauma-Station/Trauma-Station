@@ -70,11 +70,11 @@ public sealed class VampireAbilitiesSystem : EntitySystem
             if (ent.Comp.UnlockedAbilities.Contains(ability))
                 continue;
 
-            // We tried to unlock an ability that doesn't belong to us.
-            if (abilityProto.Class is { } vampireClass && mobClass != vampireClass)
+            // We tried to unlock an ability that doesn't belong to us, or we're blacklisted from it.
+            if (( abilityProto.Class is { } requiredClass && mobClass != requiredClass )
+                || abilityProto.BlacklistClass is { } blacklistClass && mobClass == blacklistClass)
                 continue;
 
-            // TODO: LOG WHY TS BROKEN
 
             // We tried to unlock an ability, but we didn't pass the extra conditions
             if (abilityProto.Conditions is { } conditions && !_conditions.TryConditions(user, conditions))

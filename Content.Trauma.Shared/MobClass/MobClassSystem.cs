@@ -81,7 +81,7 @@ public sealed class MobClassSystem : EntitySystem
     /// </summary>
     public ProtoId<MobClassPrototype>? GetClass(Entity<MobClassComponent?> ent)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
             return null;
 
         return ent.Comp.CurrentClass;

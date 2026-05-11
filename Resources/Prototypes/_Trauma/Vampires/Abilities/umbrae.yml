@@ -4,7 +4,7 @@
   abstract: true
 
 - type: vampireAbility
-  parents: BaseUmbraeAbility
+  parent: BaseUmbraeAbility
   id: CloakDarkness
   cost: 150
   onUnlock:
@@ -13,7 +13,7 @@
     - ActionCloakDarkness
 
 - type: vampireAbility
-  parents: BaseUmbraeAbility
+  parent: BaseUmbraeAbility
   id: ShadowSnareSoulAnchor
   cost: 250
   onUnlock:
@@ -23,7 +23,7 @@
     - ActionShadowAnchor
 
 - type: vampireAbility
-  parents: BaseUmbraeAbility
+  parent: BaseUmbraeAbility
   id: DarkPassage
   cost: 400
   onUnlock:
@@ -32,7 +32,7 @@
     - ActionDarkPassage
 
 - type: vampireAbility
-  parents: BaseUmbraeAbility
+  parent: BaseUmbraeAbility
   id: Extinguish
   cost: 600
   onUnlock:
@@ -41,7 +41,7 @@
     - ActionExtinguish
 
 - type: vampireAbility
-  parents: BaseUmbraeAbility
+  parent: BaseUmbraeAbility
   id: ShadowBoxing
   cost: 800
   onUnlock:
@@ -50,9 +50,12 @@
     - ActionShadowBoxing
 
 - type: vampireAbility
-  parents: BaseUmbraeAbility
+  parent: BaseUmbraeAbility
   id: UmbraeFullPower
-  cost: 1000 # TODO: 8 different bodies
+  cost: 1000
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 8
   onUnlock:
   - !type:AddActions
     actions:
