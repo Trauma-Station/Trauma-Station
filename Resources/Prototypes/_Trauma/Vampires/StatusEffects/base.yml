@@ -12,3 +12,27 @@
     effects:
     - !type:ApplyNullification
       amount: -1
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireSpaceStatusEffect # you always burn in space
+  name: vampire space
+  components:
+  - type: StatusEffectEffects # todo: play burn sound
+    updateDelay: 5
+    effects:
+    - !type:HealthChange
+      conditions:
+      - !type:OnGridCondition
+        inverted: true
+      damage:
+        types:
+          Heat: 20
+    - !type:PopupMessage
+      conditions:
+      - !type:OnGridCondition
+        inverted: true
+      messages:
+      - The sunlight burns you!
+      - You should go away from space...
+      - You look pale!

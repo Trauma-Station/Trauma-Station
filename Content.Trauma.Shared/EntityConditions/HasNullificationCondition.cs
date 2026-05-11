@@ -18,7 +18,7 @@ public sealed partial class HasNullificationCondition : EntityConditionBase<HasN
     public int Amount;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
-        => string.Empty; // idc
+        => string.Empty; // TODO: add
 }
 
 public sealed class HasNullificationConditionSystem : EntityConditionSystem<NullificationComponent, HasNullificationCondition>

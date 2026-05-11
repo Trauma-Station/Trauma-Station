@@ -10,6 +10,9 @@
     effects:
     - !type:ChangeFaction
       newFaction: VampireFaction
+    - !type:ModifyStatusEffect
+      effectProto: VampireSpaceStatusEffect
+      time: null
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     agentName: vampire # todo loc
@@ -34,7 +37,4 @@
         effectsOnEnter:
         - !type:Ignite
         - !type:Flammable
-          multiplier: 2
-        effectsOnExit:
-        - !type:SpawnEntity
-          entity: FoodMeat
+          multiplier: 3
