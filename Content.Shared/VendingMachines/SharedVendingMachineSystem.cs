@@ -148,7 +148,8 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
 
     protected virtual void OnMapInit(EntityUid uid, VendingMachineComponent component, MapInitEvent args)
     {
-        RestockInventoryFromPrototype(uid, component, component.InitialStockQuality);
+        RestockInventoryFromPrototype(uid, component, component.InitialStockQuality,
+            contra: true); // Trauma - need to add contra/emag when it spawns
     }
 
     private void OnEmpPulse(Entity<VendingMachineComponent> ent, ref EmpPulseEvent args)
@@ -318,7 +319,8 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
     }
 
     public void RestockInventoryFromPrototype(EntityUid uid,
-        VendingMachineComponent? component = null, float restockQuality = 1f)
+        VendingMachineComponent? component = null, float restockQuality = 1f,
+        bool contra = false) // Trauma - false for actual restocking, true for initial stock
     {
         if (!Resolve(uid, ref component))
         {
@@ -329,10 +331,13 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
             return;
 
         AddInventoryFromPrototype(uid, packPrototype.StartingInventory, InventoryType.Regular, component, restockQuality);
-        /* Trauma - only restock the halal inventory
-        AddInventoryFromPrototype(uid, packPrototype.EmaggedInventory, InventoryType.Emagged, component, restockQuality);
-        AddInventoryFromPrototype(uid, packPrototype.ContrabandInventory, InventoryType.Contraband, component, restockQuality);
-        */
+        // <Trauma> - dont give free contra/emag items when usings restocks
+        if (contra)
+        {
+            AddInventoryFromPrototype(uid, packPrototype.EmaggedInventory, InventoryType.Emagged, component, restockQuality);
+            AddInventoryFromPrototype(uid, packPrototype.ContrabandInventory, InventoryType.Contraband, component, restockQuality);
+        }
+        // </Trauma>
         Dirty(uid, component);
     }
 
