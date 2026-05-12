@@ -33,3 +33,14 @@
       storagebase:
         id: ThrowingKnife
         amount: 8
+
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltRancher
+  name: ranchers belt
+  description: Ideal for storing everything chicken related, and then some.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/ranchers_belt.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/ranchers_belt.rsi

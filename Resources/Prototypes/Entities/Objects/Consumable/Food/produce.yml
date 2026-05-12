@@ -344,7 +344,7 @@
       components:
       - type: EggFertilizer
         specialReplacement: MobChickClown
-    whiteList:
+    entityWhiteList:
     - MobWhiteRooster
   - type: Healing # Bananas heal clown car
     damageContainers:

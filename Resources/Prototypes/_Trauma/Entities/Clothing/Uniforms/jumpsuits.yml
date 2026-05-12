@@ -124,3 +124,15 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpskirt/sergeantskirt.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpskirt/sergeantskirt.rsi
+
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitRancher
+  name: ranchers overalls
+  description: The standard uniform that any rancher worth their chickens wears.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
