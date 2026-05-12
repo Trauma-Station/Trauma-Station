@@ -47,3 +47,16 @@
     - Recyclable
   - type: StaticPrice # MassProduced NT Slop
     price: 0
+
+- type: entity
+  parent: IDCardStandard
+  id: RancherIDCard
+  name: rancher ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idrancher
+      sprite: _Trauma/Objects/Misc/id_cards.rsi
+  - type: PresetIdCard
+    job: Rancher
