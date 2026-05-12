@@ -8,31 +8,31 @@
   id: Tintin
   name: Jeroen Tel - Tintin on the Moon
   path:
-    path: /Audio/Lobby/title3.ogg # Goobstation
+    path: /Audio/Jukebox/title3.ogg
 
 - type: jukebox
   id: Thunderdome
-  name: MashedByMachines - Sector 11 / Thunderdome # Goobstation
+  name: MashedByMachines - Sector 11
   path:
-    path: /Audio/Lobby/thunderdome.ogg # Goobstation
+    path: /Audio/Jukebox/sector11.ogg
 
 - type: jukebox
   id: Constellations
   name: Qwertyquerty - Constellations
   path:
-    path: /Audio/Ambience/constellations.ogg # Goobstation
+    path: /Audio/Jukebox/constellations.ogg
 
 - type: jukebox
   id: Drifting
   name: Qwertyquerty - Drifting
   path:
-    path: /Audio/Ambience/drifting.ogg # Goobstation
+    path: /Audio/Jukebox/drifting.ogg
 
 - type: jukebox
   id: starlight
   name: Qwertyquerty - Starlight
   path:
-    path: /Audio/Ambience/starlight.ogg # Goobstation
+    path: /Audio/Jukebox/starlight.ogg
 
 - type: jukebox
   id: sunset
