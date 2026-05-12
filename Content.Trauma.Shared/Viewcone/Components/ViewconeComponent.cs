@@ -53,6 +53,18 @@ public sealed partial class ViewconeComponent : Component
     [DataField]
     public float ConeIgnoreFeather = 0.03f;
 
+    /// <summary>
+    /// How long it takes for something out of your vision cone to completely fade out, after <see cref="FadeStart"/>.
+    /// </summary>
+    [DataField]
+    public TimeSpan FadeTime = TimeSpan.FromSeconds(8);
+
+    /// <summary>
+    /// Don't start fading until this time has passed.
+    /// </summary>
+    [DataField]
+    public TimeSpan FadeStart = TimeSpan.FromSeconds(0.3);
+
     // Clientside, used for lerping view angle
     // and keeping it consistent across all overlays
     public Angle ViewAngle;

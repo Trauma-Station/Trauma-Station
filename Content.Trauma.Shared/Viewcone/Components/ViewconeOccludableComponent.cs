@@ -35,6 +35,12 @@ public sealed partial class ViewconeOccludableComponent : Component, IComponentT
     [DataField, AutoNetworkedField]
     public EntityUid? Source = null;
 
+    /// <summary>
+    /// When this entity was last in the client's vision cone, used for fading away.
+    /// </summary>
+    [ViewVariables]
+    public TimeSpan LastSeen;
+
     // Clientside comptree stuff
     public EntityUid? TreeUid { get; set; }
     public DynamicTree<ComponentTreeEntry<ViewconeOccludableComponent>>? Tree { get; set; }

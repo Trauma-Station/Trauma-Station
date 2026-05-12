@@ -9,6 +9,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Viewcone.Overlays;
 
@@ -21,6 +22,7 @@ namespace Content.Trauma.Client.Viewcone.Overlays;
 public sealed class ViewconeSetAlphaOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _ent = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     private readonly ViewconeOverlaySystem _cone;
     private readonly ViewconeAngleSystem _angle;
     private readonly ViewconeOcclusionSystem _tree;
@@ -87,10 +89,13 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
         // !! Thank You Bhijn God (TYBG) for 95% of the rest of this methods code !!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         var radConeAngle = MathHelper.DegreesToRadians(_angle.GetAngle((ent, cone)));
+        var halfAngle = radConeAngle * 0.5f;
         var radConeFeather = MathHelper.DegreesToRadians(cone.ConeFeather);
 
         _cone.CachedBaseAlphas.Clear();
         var occludables = _tree.QueryAabb(args.MapId, args.WorldBounds);
+        var fadeTime = cone.FadeTime.TotalSeconds;
+        var now = _timing.CurTime;
         foreach (var entry in occludables)
         {
             var (comp, xform) = entry;
@@ -113,12 +118,17 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
 
             var dist = entPos - eyePos;
             var distLength = dist.Length();
-            var angleDist = Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot);
+            var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
+
+            // handle fading logic, things fade out over time when you dont look at them
+            if (angleDist < halfAngle)
+                comp.LastSeen = now;
+            var diff = now - comp.LastSeen;
+            var targetAlpha = diff < cone.FadeStart
+                ? 1f
+                : 1f - (float) Math.Min(1.0, (diff - cone.FadeStart).TotalSeconds / fadeTime);
 
             var baseAlpha = sprite.Color.A;
-            var angleAlpha = (float) Math.Clamp((Math.Abs(angleDist.Theta) - (radConeAngle * 0.5f)) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
-            var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
-            var targetAlpha = Math.Max(1f - angleAlpha, 1f - distAlpha);
 
             // save the results so we can use it in resetalpha overlay
             _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
