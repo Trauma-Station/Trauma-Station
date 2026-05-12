@@ -54,3 +54,6 @@ reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water
 
 reagent-name-hephaestium = hephaestium
 reagent-desc-hephaestium = hephaestium, named after the greek god of stone Hephaestus, known to turn anything injected with it into stone.
+
+reagent-name-ageium = ageium
+reagent-desc-ageium = ageium, causes subjects injected with it to not age!
