@@ -10062,11 +10062,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -2.5,-17.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 73
 - proto: AltarSpawner
   entities:
   - uid: 456
@@ -45607,22 +45602,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-15.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 73
   - uid: 7045
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,-15.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 73
 - proto: FirelockEdge
   entities:
   - uid: 7046
@@ -62254,11 +62239,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -3.5,-17.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 73
     - type: AtmosPipeColor
       color: '#0055CCFF'
 - proto: GasVentScrubber
@@ -63220,11 +63200,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.5,-17.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 73
     - type: AtmosPipeColor
       color: '#990000FF'
 - proto: GasVolumePump
