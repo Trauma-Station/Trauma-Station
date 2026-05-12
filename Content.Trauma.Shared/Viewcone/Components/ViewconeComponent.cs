@@ -45,7 +45,7 @@ public sealed partial class ViewconeComponent : Component
     public float BaseConeAngle = 225f;
 
     [DataField]
-    public float ConeFeather = 3f;
+    public float ConeFeather = 24f;
 
     [DataField]
     public float ConeIgnoreRadius = 0.65f;
