@@ -31,6 +31,7 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
 
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
     private readonly EntityQuery<ViewconeClientOverrideComponent> _overrideQuery;
+    private readonly EntityQuery<ViewconeOccludedComponent> _occludedQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
 
@@ -49,6 +50,7 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
 
         _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
         _overrideQuery = _ent.GetEntityQuery<ViewconeClientOverrideComponent>();
+        _occludedQuery = _ent.GetEntityQuery<ViewconeOccludedComponent>();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -108,25 +110,52 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
             if (!_spriteQuery.TryComp(uid, out var sprite))
                 continue;
 
-            if (comp.Source == ent)
+            if (comp.Source == ent || uid == ent)
                 continue; // sentient walls should be allowed to see things
 
             if (!comp.OccludeIfAnchored && xform.Anchored)
                 continue;
 
-            var entPos = _xform.GetWorldPosition(xform);
+            var (entPos, entRot) = _xform.GetWorldPositionRotation(xform);
 
             var dist = entPos - eyePos;
             var distLength = dist.Length();
             var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
 
             // handle fading logic, things fade out over time when you dont look at them
-            if (angleDist < halfAngle)
-                comp.LastSeen = now;
-            var diff = now - comp.LastSeen;
-            var targetAlpha = diff < cone.FadeStart
-                ? 1f
-                : 1f - (float) Math.Min(1.0, (diff - cone.FadeStart).TotalSeconds / fadeTime);
+            // when they are out of view you can't see where they are right now
+            ViewconeOccludedComponent? occluded;
+            var targetAlpha = 1f;
+            if (angleDist > halfAngle)
+            {
+                // outside vision, lock old position from the "memory"
+                // won't work with animations and stuff, tough
+                if (!_ent.EnsureComponent(uid, out occluded))
+                {
+                    // occluded for the first frame, copy original sprite data
+                    occluded.LastSeen = now;
+                    occluded.LastPosition = entPos + sprite.Offset;
+                    occluded.OriginalOffset = sprite.Offset;
+                    occluded.LastRotation = entRot + sprite.Rotation;
+                    occluded.OriginalRotation = sprite.Rotation;
+                }
+
+                // offset it so moving mobs etc stay where they were last seen
+                _sprite.SetOffset((uid, sprite), occluded.LastPosition - entPos);
+                _sprite.SetRotation((uid, sprite), occluded.LastRotation - entRot);
+
+                // the actual fading
+                var diff = now - occluded.LastSeen;
+                if (diff >= cone.FadeStart)
+                    targetAlpha -= (float) Math.Min(1.0, (diff - cone.FadeStart).TotalSeconds / fadeTime);
+            }
+            else if (_occludedQuery.TryComp(uid, out occluded))
+            {
+                // in vision now, revert to old values
+                _sprite.SetOffset((uid, sprite), occluded.OriginalOffset);
+                _sprite.SetRotation((uid, sprite), occluded.OriginalRotation);
+                _ent.RemoveComponent(uid, occluded);
+            }
 
             var baseAlpha = sprite.Color.A;
 

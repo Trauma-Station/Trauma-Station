@@ -11,15 +11,19 @@ namespace Content.Trauma.Shared.Viewcone.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ViewconeOccludableComponent : Component, IComponentTreeEntry<ViewconeOccludableComponent>
 {
+    /// <summary>
+    /// If true, prevents being hidden if this is anchored.
+    /// Useful for unanchorable structures so they can hide if being moved.
+    /// </summary>
     [DataField]
-    public bool OccludeIfAnchored = false;
+    public bool OccludeIfAnchored;
 
     /// <summary>
     /// Whether the occluding should be inverted,
     /// i.e. the sprite will be invisible while within view, and visible outside of view
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Inverted = false;
+    public bool Inverted;
 
     /// <summary>
     /// If true, viewcone alpha handling will always override the base alpha of this entity when setting transparency.
@@ -33,13 +37,7 @@ public sealed partial class ViewconeOccludableComponent : Component, IComponentT
     /// of this occludable.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? Source = null;
-
-    /// <summary>
-    /// When this entity was last in the client's vision cone, used for fading away.
-    /// </summary>
-    [ViewVariables]
-    public TimeSpan LastSeen;
+    public EntityUid? Source;
 
     // Clientside comptree stuff
     public EntityUid? TreeUid { get; set; }
