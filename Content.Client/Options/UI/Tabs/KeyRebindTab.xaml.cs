@@ -262,17 +262,17 @@ namespace Content.Client.Options.UI.Tabs
             // <Trauma>
             // TODO: change to scrolling x/y
             AddHeader("ui-options-header-targeting");
-            AddButton(ContentKeyFunctions.TargetHead);
-            AddButton(ContentKeyFunctions.TargetChest);
-            AddButton(ContentKeyFunctions.TargetGroin);
-            AddButton(ContentKeyFunctions.TargetLeftArm);
-            AddButton(ContentKeyFunctions.TargetLeftHand);
-            AddButton(ContentKeyFunctions.TargetRightArm);
-            AddButton(ContentKeyFunctions.TargetRightHand);
-            AddButton(ContentKeyFunctions.TargetLeftLeg);
-            AddButton(ContentKeyFunctions.TargetLeftFoot);
-            AddButton(ContentKeyFunctions.TargetRightLeg);
-            AddButton(ContentKeyFunctions.TargetRightFoot);
+            AddButton(TraumaKeyFunctions.TargetHead);
+            AddButton(TraumaKeyFunctions.TargetChest);
+            AddButton(TraumaKeyFunctions.TargetGroin);
+            AddButton(TraumaKeyFunctions.TargetLeftArm);
+            AddButton(TraumaKeyFunctions.TargetLeftHand);
+            AddButton(TraumaKeyFunctions.TargetRightArm);
+            AddButton(TraumaKeyFunctions.TargetRightHand);
+            AddButton(TraumaKeyFunctions.TargetLeftLeg);
+            AddButton(TraumaKeyFunctions.TargetLeftFoot);
+            AddButton(TraumaKeyFunctions.TargetRightLeg);
+            AddButton(TraumaKeyFunctions.TargetRightFoot);
             // </Trauma>
 
             AddHeader("ui-options-header-misc");
