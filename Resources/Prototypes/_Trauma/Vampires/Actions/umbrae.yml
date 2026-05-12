@@ -8,8 +8,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_cloak
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
@@ -45,8 +45,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: shadow_snare
   - type: TargetAction
     range: 10
   - type: WorldTargetAction
@@ -64,8 +64,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: shadow_anchor
   - type: InstantAction
     event: !type:ShadowAnchorActionEvent
   - type: ActionShadowAnchor
@@ -87,8 +87,8 @@
     useDelay: 1
     raiseOnAction: false
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: dark_passage
 
 # Extinguish
 - type: entity
@@ -100,8 +100,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_extinguish
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -123,8 +123,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: shadow_boxing
   - type: TargetAction
     range: 2
   - type: EntityTargetAction
@@ -155,8 +155,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: eternal_darkness
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction

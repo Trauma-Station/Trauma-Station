@@ -1,6 +1,4 @@
-# All actions in here are the base actions of the vampire, when they start.
-#
-# TODO: Implement ConsumeCharges
+# All actions in here are the base actions of the vampire that hasn't specialized yet.
 #
 # Therefore, this file does not include class-specific actions.
 #
@@ -13,6 +11,7 @@
     raiseOnAction: true
     itemIconStyle: BigAction
   - type: ActionConditions
+    failPopup: The holiness has consumed your powers!
     conditions:
     - !type:HasNullificationCondition # cannot use abilities if we are too nullified
       inverted: true
@@ -29,9 +28,11 @@
   components:
   - type: Action
     useDelay: 20
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_rejuv.ogg
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_rejuvinate
     checkCanInteract: false
   - type: InstantAction
     event: !type:EffectInstantActionEvent
@@ -66,43 +67,51 @@
   components:
   - type: Action
     useDelay: 2
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_glare.ogg
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_glare
   - type: LimitedCharges
     maxCharges: 2
   - type: AutoRecharge
     rechargeDuration: 30
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:SpawnParticles
+      particleProto: VampireGlare
   - type: InstantAction
     event: !type:VampireGlareEvent
-      frontEffects:
-      - !type:TakeStaminaDamage
-        amount: 70
-      - !type:ModifyKnockdown
-        time: 12
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        time: 8
-        type: Add
-      - !type:Flash
-        slowTo: 1
-        maxRange: 0.5
-        duration: 1
-      sideEffects:
-      - !type:TakeStaminaDamage
-        amount: 40
-      - !type:ModifyKnockdown
-        time: 5
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectScrambled
-        time: 8
-      behindEffects:
-      - !type:TakeStaminaDamage
-        amount: 40
-      - !type:ModifyStatusEffect
-        effectProto: StatusEffectScrambled
-        time: 8
+  - type: ActionVampireGlare
+    frontEffects:
+    - !type:TakeStaminaDamage
+      amount: 70
+    - !type:ModifyKnockdown
+      time: 12
+    - !type:GenericStatusEffect
+      key: Muted
+      component: Muted
+      time: 8
+      type: Add
+    - !type:Flash
+      slowTo: 1
+      maxRange: 0.5
+      duration: 1
+    sideEffects:
+    - !type:TakeStaminaDamage
+      amount: 40
+    - !type:ModifyKnockdown
+      time: 5
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectScrambled
+      time: 8
+    behindEffects:
+    - !type:TakeStaminaDamage
+      amount: 40
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectScrambled
+      time: 8
 
 - type: entity
   parent: BaseVampireAction
@@ -110,6 +119,10 @@
   name: Choose Specialization
   description: Choose Specialization
   components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: select_class
   - type: InstantAction
     event: !type:OpenClassSelectorUiEvent
   - type: UserInterface

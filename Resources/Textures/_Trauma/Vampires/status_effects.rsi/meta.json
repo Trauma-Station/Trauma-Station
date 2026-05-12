@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/blob/72610bb4a19340785956715b3549856944c5bfe9/icons/mob/actions/actions.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "blood_rush"
+        },
+        {
+            "name": "blood_swell"
+        },
+        {
+            "name": "mech_damtype_brute"
+        },
+        {
+            "name": "vampire_cloak"
+        }
+    ]
+}

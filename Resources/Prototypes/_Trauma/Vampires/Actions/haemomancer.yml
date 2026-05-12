@@ -8,8 +8,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_claws
   - type: InstantAction
     event: !type:OnRetractableItemActionEvent
   - type: RetractableItemAction
@@ -25,8 +25,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_tendrils
   - type: TargetAction
     range: 10
   - type: WorldTargetAction
@@ -48,8 +48,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_barrier
   - type: TargetAction
     range: 5
   - type: EntityTargetAction
@@ -72,8 +72,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_pool
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -91,8 +91,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: predator_sense
   - type: InstantAction
     event: !type:PredatorSensesActionEvent
   - type: UserInterface
@@ -111,8 +111,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_spikes
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -133,8 +133,8 @@
   - type: Action
     # useDelay: 20
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_bringers_rite
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction

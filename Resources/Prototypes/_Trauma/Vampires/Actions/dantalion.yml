@@ -8,8 +8,8 @@
     raiseOnAction: false
     raiseOnUser: true # this action requires VampireThrallsComponent which is stored in the body
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_enthrall
   - type: TargetAction
     range: 2
   - type: EntityTargetAction
@@ -39,8 +39,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: pacify
   - type: TargetAction
     range: 7
     checkCanAccess: false
@@ -68,8 +68,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: subspace_swap
   - type: TargetAction
     range: 7
   - type: EntityTargetAction
@@ -88,8 +88,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: decoy
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -109,8 +109,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: thralls_up
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -132,8 +132,8 @@
     raiseOnUser: true
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_bond
   - type: InstantAction
     event: !type:BloodBondActionEvent
 
@@ -147,8 +147,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: hysteria
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction

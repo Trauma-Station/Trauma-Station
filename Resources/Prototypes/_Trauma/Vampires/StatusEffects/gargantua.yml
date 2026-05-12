@@ -4,6 +4,8 @@
   id: BloodSwellStatusEffect
   name: blood swell
   components:
+  - type: StatusEffectAlert
+    alert: BloodSwell
   - type: StaminaModifierStatusEffect
     modifier: 1.5
   - type: DamageModifierStatusEffect
@@ -44,6 +46,8 @@
   id: StatusEffectBloodRush
   name: blood rush
   components:
+  - type: StatusEffectAlert
+    alert: BloodRush
   - type: MovementModStatusEffect
     sprintSpeedModifier: 2.0
     walkSpeedModifier: 2.0
@@ -63,6 +67,8 @@
   id: StatusEffectVampireGladiator
   name: vampire gladiator
   components: # TODO: Add bleed and wound immune?
+  - type: StatusEffectAlert
+    alert: Gladiator
   - type: StatusEffectEffects
     effects:
     - !type:EvenHealthChange

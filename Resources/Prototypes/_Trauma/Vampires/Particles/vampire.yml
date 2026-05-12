@@ -1,3 +1,4 @@
+# Looks like smoke, slowly expands outwards.
 - type: particleEffect
   id: VampireCoffinExit
   sprite:
@@ -9,24 +10,24 @@
   - time: 0.0
     value: 0.2
   - time: 0.1
-    value: 0.4 # Peaks lower and very quickly
+    value: 0.4
   - time: 0.4
-    value: 0.15 # Drops almost immediately so it becomes a thin veil
+    value: 0.15
   - time: 1.0
     value: 0.0
   sizeOverLifetime:
   - time: 0.0
     value: 0.5
   - time: 1.0
-    value: 1.5 # Drastically reduced max size so they don't overlap as much
-  lifetime: 3.0 # Shortened so the screen clears faster
+    value: 1.5
+  lifetime: 3.0
   lifetimeVariance: 1.0
   speed: 1.0
   speedVariance: 0.5
   particleSize: 1.0
   sizeVariance: 0.2
   emissionRate: 0
-  maxCount: 20 # Cut down from 75. This is the biggest factor in fixing the visibility!
+  maxCount: 20
   burst: true
   gravity: -0.05
   drag: 0.9
@@ -40,4 +41,53 @@
   rotationSpeedVariance: 10
   shape:
     type: CircleFill
-    radius: 0.5 # Slightly wider spawn so they aren't all clumped on the center
+    radius: 0.5
+
+# Glare
+- type: particleEffect
+  id: VampireGlare
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: cross
+  startColor: "#D3D3D3FF" # Piercing crimson red #71706E
+  endColor: "#FF0000FF"   # Fades out to a dark, transparent blood red
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.8
+  - time: 0.2
+    value: 1.0
+  - time: 0.8
+    value: 0.6
+  - time: 1.0
+    value: 0.0
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.2
+  - time: 0.2
+    value: 2.0
+  - time: 0.6
+    value: 0.5
+  - time: 0.9
+    value: 2.5
+  lifetime: 1.0
+  lifetimeVariance: 0.1
+  speed: 0.1
+  speedVariance: 1.5
+  particleSize: 1.0
+  sizeVariance: 0.2
+  emissionRate: 0
+  maxCount: 25
+  burst: true
+  gravity: -5.0
+  drag: 7.0
+  noiseStrength: 1.0
+  noiseFrequency: 9.5
+  spreadAngle: 360
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 360
+  rotationSpeed: 0.5
+  rotationSpeedVariance: 20
+  shape:
+    type: CircleEdge
+    radius: 0.9

@@ -10,17 +10,6 @@
     - !type:NestedEffect
       proto: VampireRejuvGarg
 
-- type: entity
-  parent: BaseRejuvAction
-  id: ActionVampGargRejuvII
-  name: Rejuvenate
-  description: Heals you
-  components:
-  - type: EffectAction
-    effects:
-    - !type:NestedEffect
-      proto: VampireRejuvGarg
-
 # Blood Swell I and II
 - type: entity
   parent: BaseVampireAction
@@ -30,8 +19,8 @@
   components:
   - type: Action
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_swell
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -62,8 +51,8 @@
   - type: Action
     checkCanInteract: false
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_rush
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -89,8 +78,8 @@
   - type: Action
     checkCanInteract: false
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: seismic_stomp
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -111,8 +100,8 @@
   - type: Action
     useDelay: 2
     icon:
-      sprite: _EinsteinEngines/Shadowling/shadowling_abilities.rsi
-      state: enthrall
+      sprite: _Trauma/Vampires/actions.rsi
+      state: OH_YEAAAAH
   - type: InstantAction
     event: !type:EffectToggleActionEvent
   - type: ToggleEffectAction
@@ -142,7 +131,7 @@
 - type: entity
   parent: BaseVampireAction
   id: ActionDemonicHand
-  name: Demonic Hand
+  name: Demonic Grasp
   description: Send out a Demonic Hand that grabs and pulls/pushes a target depending on your intent. Harm mode pulls, otherwise it pushes.
   components:
   - type: Action
@@ -150,8 +139,8 @@
     raiseOnAction: false
     raiseOnUser: true
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: demonic_grasp
   - type: TargetAction
     range: 65
     checkCanAccess: false
@@ -169,8 +158,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_charge
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -220,8 +209,8 @@
   - type: Action
     # useDelay: 2
     icon:
-      sprite: _Goobstation/Objects/Specific/Fishing/fishing_lure.rsi
-      state: icon
+      sprite: _Trauma/Vampires/actions.rsi
+      state: duel
   - type: TargetAction
     range: 10
   - type: EntityTargetAction

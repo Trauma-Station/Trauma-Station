@@ -6,9 +6,10 @@ using Content.Shared.EntityEffects;
 namespace Content.Trauma.Shared.Vampires;
 
 /// <summary>
-/// <inheritdoc cref="VampireGlareSystem"/> TODO: make this a component
+/// <inheritdoc cref="VampireGlareSystem"/>
 /// </summary>
-public sealed partial class VampireGlareEvent : InstantActionEvent
+[RegisterComponent]
+public sealed partial class ActionVampireGlareComponent : Component
 {
     /// <summary>
     /// The range of the AoE.
@@ -33,4 +34,6 @@ public sealed partial class VampireGlareEvent : InstantActionEvent
     /// </summary>
     [DataField]
     public EntityEffect[] SideEffects;
-};
+}
+
+public sealed partial class VampireGlareEvent : InstantActionEvent;

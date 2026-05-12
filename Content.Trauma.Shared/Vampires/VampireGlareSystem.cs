@@ -34,10 +34,10 @@ public sealed class VampireGlareSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<VampireGlareEvent>(OnGlare);
+        SubscribeLocalEvent<ActionVampireGlareComponent, VampireGlareEvent>(OnGlare);
     }
 
-    private void OnGlare(VampireGlareEvent args)
+    private void OnGlare(Entity<ActionVampireGlareComponent> ent, ref VampireGlareEvent args)
     {
         var performer = args.Performer;
 
@@ -59,8 +59,13 @@ public sealed class VampireGlareSystem : EntitySystem
         var mapCoords = _transform.GetMapCoordinates(performer);
         var isStunned = _stunnedQuery.HasComponent(performer);
 
+        var range = ent.Comp.Range;
+        var sideEffects = ent.Comp.SideEffects;
+        var frontEffects = ent.Comp.FrontEffects;
+        var behindEffects = ent.Comp.BehindEffects;
+
         _statusEffects.Clear();
-        _lookup.GetEntitiesInRange(mapCoords, args.Range, _statusEffects);
+        _lookup.GetEntitiesInRange(mapCoords, range, _statusEffects);
         foreach (var target in _statusEffects)
         {
             if (target.Owner == performer)
@@ -73,7 +78,7 @@ public sealed class VampireGlareSystem : EntitySystem
 
             if (isStunned)
             {
-                _entityEffects.ApplyEffects(target, args.SideEffects, scale);
+                _entityEffects.ApplyEffects(target, sideEffects, scale);
                 continue;
             }
 
@@ -82,17 +87,17 @@ public sealed class VampireGlareSystem : EntitySystem
             {
                 case Deviation.Full:
                 {
-                    _entityEffects.ApplyEffects(target, args.BehindEffects, scale);
+                    _entityEffects.ApplyEffects(target, behindEffects, scale);
                     break;
                 }
                 case Deviation.Partial:
                 {
-                    _entityEffects.ApplyEffects(target, args.SideEffects, scale);
+                    _entityEffects.ApplyEffects(target, sideEffects, scale);
                     break;
                 }
                 case Deviation.None:
                 {
-                    _entityEffects.ApplyEffects(target, args.FrontEffects, scale);
+                    _entityEffects.ApplyEffects(target, frontEffects, scale);
                     break;
                 }
             }

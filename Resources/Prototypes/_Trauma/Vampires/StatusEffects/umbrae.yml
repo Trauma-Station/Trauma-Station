@@ -3,6 +3,8 @@
   id: CloakOfDarknessStatsuEffect # Could run this with entity effects, but since it's a toggle, this is more optimized
   name: cloak of darkness
   components:
+  - type: StatusEffectAlert
+    alert: CloakOfDarkness
   - type: MovementModStatusEffect
     sprintSpeedModifier: 1.5
     walkSpeedModifier: 1.5
