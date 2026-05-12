@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Contraband;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.Storage;
 using Content.Trauma.Common.Grudge;
 using Content.Trauma.Server.Grudges.Components;
@@ -16,6 +16,7 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
 
     public override void Initialize()
     {
@@ -24,9 +25,9 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
         SubscribeLocalEvent<GrudgeItemConditionComponent, ObjectiveGetProgressEvent>(OnGetItemProgress);
 
         SubscribeLocalEvent<GrudgeConditionComponent, GrudgeAddedEvent>(OnStartupGrudge);
+        SubscribeLocalEvent<GrudgeConditionComponent, GrudgeSetupEvent>(OnSetupGrudge);
         SubscribeLocalEvent<GrudgeItemConditionComponent, GrudgeAddedEvent>(OnStartupItemGrudge);
-
-        SubscribeLocalEvent<GrudgeItemComponent, ExaminedEvent>(OnExaminedItemGrudge);
+        SubscribeLocalEvent<GrudgeItemConditionComponent, GrudgeSetupEvent>(OnSetupItemGrudge);
     }
 
     private void OnGetItemProgress(Entity<GrudgeItemConditionComponent> ent, ref ObjectiveGetProgressEvent args)
@@ -44,9 +45,26 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
     {
         // if accuser, target is accused, and vice versa.
         if (ent.Owner == args.AccuserObjective)
-            ent.Comp.Grudge = args.Accused;
+        {
+            ent.Comp.Guy = args.Accused;
+            ent.Comp.Grudge = args.AccusedObjective;
+            ent.Comp.IsAccuser = true;
+        }
         else if (ent.Owner == args.AccusedObjective)
-            ent.Comp.Grudge = args.Accuser;
+        {
+            ent.Comp.Guy = args.Accuser;
+            ent.Comp.Grudge = args.AccuserObjective;
+            ent.Comp.IsAccuser = false;
+        }
+    }
+
+    private void OnSetupGrudge(Entity<GrudgeConditionComponent> ent, ref GrudgeSetupEvent args)
+    {
+        if (ent.Comp.Guy is not { } guy)
+            return;
+
+        var description = $"The guy is {Name(guy)}";
+        _meta.SetEntityDescription(ent.Owner, $"{Description(ent.Owner)}\n{description}", MetaData(ent.Owner));
     }
 
     private void OnStartupItemGrudge(Entity<GrudgeItemConditionComponent> ent, ref GrudgeAddedEvent args)
@@ -54,28 +72,38 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
         // Make sure accuser logic runs first
         if (ent.Owner == args.AccusedObjective)
         {
-            if (TryComp<GrudgeItemConditionComponent>(args.AccuserObjective, out var comp))
-            {
-                ent.Comp.Item = comp.Item;
-                ent.Comp.ItemId = comp.ItemId;
-            }
+            if (!TryComp<GrudgeItemConditionComponent>(args.AccuserObjective, out var comp))
+                return;
+
+            ent.Comp.Item = comp.Item;
+            ent.Comp.ItemId = comp.ItemId;
             return;
         }
 
         // Item spawning.
-        var item = Spawn(ent.Comp.ItemId, args.Accused.ToCoordinates());
-        ent.Comp.Item = item;
-        var grudge = EnsureComp<GrudgeItemComponent>(item);
+        var newItem = Spawn(ent.Comp.ItemId, args.Accused.ToCoordinates());
+        ent.Comp.Item = newItem;
+        var grudge = EnsureComp<GrudgeItemComponent>(newItem);
         grudge.Grudgee = args.Accuser;
-        _hands.PickupOrDrop(args.Accused, item);
+        _hands.PickupOrDrop(args.Accused, newItem);
     }
 
-    private void OnExaminedItemGrudge(Entity<GrudgeItemComponent> ent, ref ExaminedEvent args)
+    private void OnSetupItemGrudge(Entity<GrudgeItemConditionComponent> ent, ref GrudgeSetupEvent args)
     {
-        if (ent.Comp.Grudgee != args.Examiner)
+        if (!TryComp<GrudgeConditionComponent>(ent.Owner, out var comp))
             return;
 
-        args.PushMarkup("This is your item!");
+        if (ent.Comp.Item is not { } item)
+            return;
+
+        string description = "";
+
+        if (comp.IsAccuser)
+            description = $"He has your {Name(item)}!";
+        else
+            description = $"You have his {Name(item)}!";
+
+        _meta.SetEntityDescription(ent.Owner, $"{Description(ent.Owner)}\n{description}", MetaData(ent.Owner));
     }
 
     private float GetItemProgress(EntityUid? targetItem, EntityUid? fakeSelf, EntityUid? otherGuy)

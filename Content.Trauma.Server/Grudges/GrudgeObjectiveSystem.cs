@@ -81,9 +81,13 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
         if (!_mind.TryFindObjective(mindA, proto1, out var grudge1) || !_mind.TryFindObjective(mindB, proto2, out var grudge2))
             return false;
 
-        var ev = new GrudgeAddedEvent(playerA, playerB, grudge1.Value, grudge2.Value);
-        RaiseLocalEvent(grudge1.Value, ref ev);
-        RaiseLocalEvent(grudge2.Value, ref ev);
+        var addedEv = new GrudgeAddedEvent(playerA, playerB, grudge1.Value, grudge2.Value);
+        RaiseLocalEvent(grudge1.Value, ref addedEv);
+        RaiseLocalEvent(grudge2.Value, ref addedEv);
+
+        var raisedEv = new GrudgeSetupEvent();
+        RaiseLocalEvent(grudge1.Value, ref raisedEv);
+        RaiseLocalEvent(grudge2.Value, ref raisedEv);
 
         return true;
     }

@@ -1,4 +1,4 @@
 - type: grudge
   id: GrudgeBeatdown
-  accuserObjective: GrudgeBeatObjectiveAccuser
-  accusedObjective: GrudgeBeatObjectiveAccused
+  accuserObjective: GrudgeHoldObjectiveAccuser
+  accusedObjective: GrudgeHoldObjectiveAccused

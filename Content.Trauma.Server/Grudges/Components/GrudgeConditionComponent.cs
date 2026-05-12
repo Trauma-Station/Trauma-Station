@@ -9,5 +9,17 @@ public sealed partial class GrudgeConditionComponent : Component
     /// Who is the grudgee?
     /// </summary>
     [DataField]
+    public EntityUid? Guy;
+
+    /// <summary>
+    /// The other grudge
+    /// </summary>
+    [DataField]
     public EntityUid? Grudge;
+
+    /// <summary>
+    /// Is accusing grudge
+    /// </summary>
+    [DataField]
+    public bool IsAccuser;
 }

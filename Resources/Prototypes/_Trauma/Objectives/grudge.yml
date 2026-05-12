@@ -9,8 +9,9 @@
 
 - type: entity
   parent: BaseGrudgeObjective
-  id: GrudgeBeatObjectiveAccuser
-  name: Make the company rich
+  id: GrudgeHoldObjectiveAccuser
+  name: Recover Your Property!
+  description: Someone took your property and you want it back!
   components:
   - type: Objective
     difficulty: 1
@@ -21,8 +22,9 @@
 
 - type: entity
   parent: BaseGrudgeObjective
-  id: GrudgeBeatObjectiveAccused
-  name: Make the company rich
+  id: GrudgeHoldObjectiveAccused
+  name: Hold Property!
+  description: You took someone's property and he wants it back!
   components:
   - type: Objective
     difficulty: 1

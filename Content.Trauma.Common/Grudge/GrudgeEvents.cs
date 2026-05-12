@@ -8,3 +8,9 @@ namespace Content.Trauma.Common.Grudge;
 /// </summary>
 [ByRefEvent]
 public record struct GrudgeAddedEvent(EntityUid Accuser, EntityUid Accused, EntityUid AccuserObjective, EntityUid AccusedObjective);
+
+/// <summary>
+/// Raised on a grudge. Setups data.
+/// </summary>
+[ByRefEvent]
+public record struct GrudgeSetupEvent();
