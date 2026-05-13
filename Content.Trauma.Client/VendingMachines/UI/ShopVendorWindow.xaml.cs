@@ -8,7 +8,6 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Timing;
-using System.Numerics;
 using Robust.Shared.Input;
 
 namespace Content.Trauma.Client.VendingMachines.UI;

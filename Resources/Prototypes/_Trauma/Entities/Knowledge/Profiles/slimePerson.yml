@@ -1,6 +1,6 @@
 - type: knowledgeProfile
   id: Slimeperson
-  pointsLimit: 10
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0

@@ -1,27 +1,30 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Administration;
+using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
-using Content.Shared.Administration.Events;
 using Content.Shared.Database;
 
-namespace Content.Server.Administration.Systems;
+namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed class AdminInfoSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IPlayerLocator _locator = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<AdminInfoEvent>(OnAdminInfoEvent);
+        SubscribeNetworkEvent<AdminInfoEvent>(OnAdminInfo);
     }
 
-    private async void OnAdminInfoEvent(AdminInfoEvent ev, EntitySessionEventArgs eventArgs)
+    private async void OnAdminInfo(AdminInfoEvent ev, EntitySessionEventArgs args)
     {
-        var name = eventArgs.SenderSession.Name;
-        if (ev.user == eventArgs.SenderSession.UserId)
+        var name = args.SenderSession.Name;
+        if (ev.user == args.SenderSession.UserId)
             return;
 
         // Try to get original account for this session
@@ -32,7 +35,6 @@ public sealed class AdminInfoSystem : EntitySystem
             return;
 
         _adminLog.Add(LogType.AdminMessage, LogImpact.High, $"{name} is attempting to connect with a userid from {main.Username}");
-        _chatManager.SendAdminAlert($"{name} is attempting to connect with a userid from {main.Username}");
-
+        _chat.SendAdminAlert($"{name} is attempting to connect with a userid from {main.Username}");
     }
 }

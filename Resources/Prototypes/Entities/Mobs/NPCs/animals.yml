@@ -1431,6 +1431,7 @@
   # stupid monkey needs clever mutation to be literate
   - type: BlockReading
   - type: BlockWriting
+  - type: XenoVacTarget # dead monkey cleaner 9000
   # </Trauma>
   - type: CombatMode
     canDisarm: true

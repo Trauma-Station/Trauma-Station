@@ -249,6 +249,17 @@ public abstract partial class SharedMoverController : VirtualController
         float accel;
         Vector2 wishDir;
         var velocity = physicsComponent.LinearVelocity;
+        // <Trauma> - logic to prevent sprint backpedalling unless its 0G in which case who cares
+        var allowSprint = true;
+        if (!weightless)
+        {
+            var limit = moveSpeedComponent?.BackwardsAngle
+                ?? MovementSpeedModifierComponent.DefaultBackwardsAngle;
+            var worldRot = _transform.GetWorldRotation(xform);
+            var velAngle = velocity.ToWorldAngle();
+            allowSprint = Math.Abs(Angle.ShortestDistance(velAngle, worldRot).Theta) < limit.Theta;
+        }
+        // </Trauma>
 
         // Get current tile def for things like speed/friction mods
         ContentTileDefinition? tileDef = null;
@@ -329,7 +340,8 @@ public abstract partial class SharedMoverController : VirtualController
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
 
-            wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed);
+            wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed,
+                allowSprint); // Trauma
 
             if (wishDir != Vector2.Zero)
             {
@@ -411,7 +423,7 @@ public abstract partial class SharedMoverController : VirtualController
                 }
 
                 // <Trauma>
-                var stepEv = new FootStepEvent(uid);
+                var stepEv = new FootStepEvent(uid, wishDir.ToWorldAngle());
                 RaiseLocalEvent(uid, ref stepEv);
                 // </Trauma>
             }
@@ -680,9 +692,11 @@ public abstract partial class SharedMoverController : VirtualController
         return sound != null;
     }
 
-    private Vector2 AssertValidWish(InputMoverComponent mover, float walkSpeed, float sprintSpeed)
+    private Vector2 AssertValidWish(InputMoverComponent mover, float walkSpeed, float sprintSpeed,
+        bool allowSprint = true) // Trauma
     {
-        var (walkDir, sprintDir) = GetVelocityInput(mover);
+        var (walkDir, sprintDir) = GetVelocityInput(mover,
+            allowSprint); // Trauma
 
         var total = walkDir * walkSpeed + sprintDir * sprintSpeed;
 
@@ -812,7 +826,8 @@ public abstract partial class SharedMoverController : VirtualController
                     movementSpeed))
                 {
                     // <Trauma>
-                    var stepEv = new FootStepEvent(uid);
+                    var dir = targetTransform.LocalPosition - tileMovement.Destination;
+                    var stepEv = new FootStepEvent(uid, dir.ToWorldAngle());
                     RaiseLocalEvent(uid, ref stepEv);
                     // </Trauma>
                     EndSlide(uid, tileMovement);

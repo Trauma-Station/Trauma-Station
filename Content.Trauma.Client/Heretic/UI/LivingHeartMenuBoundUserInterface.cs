@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Lobby.UI.ProfileEditorControls;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Client.Heretic.Systems;

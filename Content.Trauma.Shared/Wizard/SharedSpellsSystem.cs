@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Targeting;

@@ -9,3 +9,12 @@
     lawUploadSound: /Audio/Ambience/Antag/silicon_lawboard_antimov.ogg
   - type: StaticPrice
     price: 10000
+
+- type: entity
+  id: VampireCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Vampire)
+  description: An electronics board containing the Vampire lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: VampireLawset

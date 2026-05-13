@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;

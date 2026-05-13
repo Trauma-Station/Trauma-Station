@@ -942,6 +942,14 @@
     - Triclor
     - Cyanide
     - Genecide
+    - NitricAcid
+    - Heroin
+    - Microplastics
+    - Bungotoxin
+    - WeldingFuel
+    - ChloralHydrate
+    - Allicin
+    - Phenol
     usefulChemicals:
     - Cryptobiolin
     - Dylovene
@@ -961,6 +969,14 @@
     - Probital
     - Tirimol
     - Multiver
+    - Immurin
+    - Devirate
+    - Probital
+    - Mitotrophin
+    - Monover
+    - Ibuprofen
+    - Formaldehyde
+    - Morphine
     funChemicals:
     - Desoxyephedrine
     - Ephedrine
@@ -981,6 +997,11 @@
     - JuiceThatMakesYouWeh
     # Goobstation - Start
     - CatDrugs
+    - MouseBites
+    - Copium
+    - Nostalgia
+    - CrapoToxin
+    - Profanol
   - type: Edible
     edible: Drink
     solution: anomaly

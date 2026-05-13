@@ -4,7 +4,6 @@ using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Hands;

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Glue;
+// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;
@@ -125,6 +128,10 @@ public sealed class GlueSystem : EntitySystem
         // So dropping the item would add UnRemoveableComponent on the client without this guard statement.
         if (_timing.ApplyingState)
             return;
+        // <Trauma>
+        var ev = new GluedPickUpAttemptEvent();
+        RaiseLocalEvent(args.User, ref ev);
+        // </Trauma>
 
         var comp = EnsureComp<UnremoveableComponent>(entity);
         comp.DeleteOnDrop = false;

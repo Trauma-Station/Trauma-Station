@@ -25,7 +25,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
-using System.Numerics;
 using System.Text;
 
 namespace Content.Goobstation.Server.Power.PTL;

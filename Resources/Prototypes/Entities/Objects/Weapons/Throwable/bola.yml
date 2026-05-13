@@ -31,6 +31,9 @@
   components:
   - type: Item
     size: Normal
+    shape: # Trauma
+    - 1,0,1,0
+    - 0,1,2,1
   - type: Sprite
     sprite: Objects/Weapons/Throwable/bola.rsi
     state: icon
@@ -107,6 +110,9 @@
   components:
   - type: Item
     size: Small
+    shape:
+    - 1,0,1,0
+    - 2,1,2,1
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Throwable/energy_bola.rsi
   - type: Ensnaring

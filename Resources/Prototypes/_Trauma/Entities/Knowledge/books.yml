@@ -168,8 +168,8 @@
       MeleeKnowledge: 35
       WeaponsKnowledge: 35
     experience:
-      MeleeKnowledge: 5
-      WeaponsKnowledge: 4
+      MeleeKnowledge: 15
+      WeaponsKnowledge: 15
     doAfter: 2
 
 # Shooting
@@ -189,8 +189,8 @@
       ShootingKnowledge: 12
       GunsmithingKnowledge: 12
     experience:
-      ShootingKnowledge: 3
-      GunsmithingKnowledge: 2
+      ShootingKnowledge: 15
+      GunsmithingKnowledge: 15
     doAfter: 2
 
 - type: entity

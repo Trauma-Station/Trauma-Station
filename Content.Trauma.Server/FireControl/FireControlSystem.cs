@@ -9,7 +9,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
 using Content.Shared.Physics;
-using System.Numerics;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;

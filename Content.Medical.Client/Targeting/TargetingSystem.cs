@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Input;
+using Content.Trauma.Common.Input;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Targeting;
@@ -39,27 +39,27 @@ public sealed class TargetingSystem : SharedTargetingSystem
 
         // TODO SHITMED: change this to scrolling "height" and symmetry
         CommandBinds.Builder
-        .Bind(ContentKeyFunctions.TargetHead,
+        .Bind(TraumaKeyFunctions.TargetHead,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.Head)))
-        .Bind(ContentKeyFunctions.TargetChest,
+        .Bind(TraumaKeyFunctions.TargetChest,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.Chest)))
-        .Bind(ContentKeyFunctions.TargetGroin,
+        .Bind(TraumaKeyFunctions.TargetGroin,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.Groin)))
-        .Bind(ContentKeyFunctions.TargetLeftArm,
+        .Bind(TraumaKeyFunctions.TargetLeftArm,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.LeftArm)))
-        .Bind(ContentKeyFunctions.TargetLeftHand,
+        .Bind(TraumaKeyFunctions.TargetLeftHand,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.LeftHand)))
-        .Bind(ContentKeyFunctions.TargetRightArm,
+        .Bind(TraumaKeyFunctions.TargetRightArm,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.RightArm)))
-        .Bind(ContentKeyFunctions.TargetRightHand,
+        .Bind(TraumaKeyFunctions.TargetRightHand,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.RightHand)))
-        .Bind(ContentKeyFunctions.TargetLeftLeg,
+        .Bind(TraumaKeyFunctions.TargetLeftLeg,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.LeftLeg)))
-        .Bind(ContentKeyFunctions.TargetLeftFoot,
+        .Bind(TraumaKeyFunctions.TargetLeftFoot,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.LeftFoot)))
-        .Bind(ContentKeyFunctions.TargetRightLeg,
+        .Bind(TraumaKeyFunctions.TargetRightLeg,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.RightLeg)))
-        .Bind(ContentKeyFunctions.TargetRightFoot,
+        .Bind(TraumaKeyFunctions.TargetRightFoot,
             InputCmdHandler.FromDelegate((session) => HandleTargetChange(session, TargetBodyPart.RightFoot)))
         .Register<SharedTargetingSystem>();
     }
