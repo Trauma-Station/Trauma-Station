@@ -17,6 +17,108 @@
   invertAccusedSpecies: true
 
 - type: grudge
+  id: GrudgeSecurity
+  accuserObjective: GrudgeAccuserSecurity
+  accusedObjective: GrudgeAccusedSecurity
+  allowedAccuserJob:
+  - SecurityOfficer
+  allowedAccusedJob:
+  - SecurityOfficer
+  invertAccuserJob: true # make sure not security officer
+
+- type: grudge
+  id: GrudgeChef
+  accuserObjective: GrudgeAccuserChef
+  accusedObjective: GrudgeAccusedChef
+  allowedAccuserJob:
+  - Chef
+
+- type: grudge
+  id: GrudgeJanitor
+  accuserObjective: GrudgeAccuserJanitor
+  accusedObjective: GrudgeAccusedJanitor
+  allowedAccuserJob:
+  - Janitor
+
+- type: grudge
+  id: GrudgeDoctor
+  accuserObjective: GrudgeAccuserDoctor
+  accusedObjective: GrudgeAccusedDoctor
+  allowedAccuserJob:
+  - MedicalDoctor
+
+- type: grudge
+  id: GrudgeBotanist
+  accuserObjective: GrudgeAccuserBotanist
+  accusedObjective: GrudgeAccusedBotanist
+  allowedAccuserJob:
+  - Botanist
+
+- type: grudge
+  id: GrudgeMiner
+  accuserObjective: GrudgeAccuserMiner
+  accusedObjective: GrudgeAccusedMiner
+  allowedAccuserJob:
+  - SalvageSpecialist
+  allowedAccusedJob:
+  - SalvageSpecialist
+
+- type: grudge
+  id: GrudgeClown
+  accuserObjective: GrudgeAccuserClown
+  accusedObjective: GrudgeAccusedClown
+  allowedAccuserJob:
+  - Clown
+
+- type: grudge
+  id: GrudgeBartender
+  accuserObjective: GrudgeAccuserBartender
+  accusedObjective: GrudgeAccusedBartender
+  allowedAccuserJob:
+  - Bartender
+
+- type: grudge
+  id: GrudgeDwarfHonor
+  accuserObjective: GrudgeAccuserDwarfHonor
+  accusedObjective: GrudgeAccusedDwarfHonor
+  allowedAccuserSpecies:
+  - Dwarf
+  allowedAccusedSpecies:
+  - Dwarf
+
+- type: grudge
+  id: GrudgeSecRivalry
+  accuserObjective: GrudgeAccuserSecRivalry
+  accusedObjective: GrudgeAccusedSecRivalry
+  allowedAccuserJob:
+  - SecurityOfficer
+  allowedAccusedJob:
+  - SecurityOfficer
+
+# Favours
+
+- type: grudge
+  id: FavorDoctor
+  accuserObjective: FavorAccuserDoctor
+  accusedObjective: FavorAccusedDoctor
+  allowedAccuserJob:
+  - MedicalDoctor
+
+- type: grudge
+  id: FavorChef
+  accuserObjective: FavorAccuserChef
+  accusedObjective: FavorAccusedChef
+  allowedAccuserJob:
+  - Chef
+
+- type: grudge
+  id: FavorJanitor
+  accuserObjective: FavorAccuserJanitor
+  accusedObjective: FavorAccusedJanitor
+  allowedAccuserJob:
+  - Janitor
+
+- type: grudge
   id: FavorEngineer
   accuserObjective: FavorAccuserEngineer
   accusedObjective: FavorAccusedEngineer
@@ -32,13 +134,3 @@
   allowedAccusedJob:
   - SecurityOfficer
   invertAccusedJob: true # make sure not security officer
-
-- type: grudge
-  id: GrudgeSecurity
-  accuserObjective: GrudgeAccuserSecurity
-  accusedObjective: GrudgeAccusedSecurity
-  allowedAccuserJob:
-  - SecurityOfficer
-  allowedAccusedJob:
-  - SecurityOfficer
-  invertAccuserJob: true # make sure not security officer

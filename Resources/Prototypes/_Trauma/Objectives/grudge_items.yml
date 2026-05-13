@@ -65,3 +65,275 @@
         tableId: RandomGrudgeItemDwarf
   - type: GrudgeCondition
     description: grudge-hold-accused-dwarf
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserChef
+  name: Recover Your Dish!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Consumable/Food/burger.rsi
+      state: plain
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemChef
+  - type: GrudgeCondition
+    description: grudge-accuser-chef
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedChef
+  name: Hold Onto That Food!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Consumable/Food/burger.rsi
+      state: plain
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemChef
+  - type: GrudgeCondition
+    description: grudge-accused-chef
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserJanitor
+  name: Recover Your Mop!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Janitorial/mop.rsi
+      state: mop
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemJanitor
+  - type: GrudgeCondition
+    description: grudge-accuser-janitor
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedJanitor
+  name: Hang Onto That Mop!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Janitorial/mop.rsi
+      state: mop
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemJanitor
+  - type: GrudgeCondition
+    description: grudge-accused-janitor
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserDoctor
+  name: Recover Your Medkit!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Medical/firstaidkit.rsi
+      state: firstaidkit
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemMedical
+  - type: GrudgeCondition
+    description: grudge-accuser-doctor
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedDoctor
+  name: Keep That Medkit!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Medical/firstaidkit.rsi
+      state: firstaidkit
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemMedical
+  - type: GrudgeCondition
+    description: grudge-accused-doctor
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserBotanist
+  name: Recover Your Produce!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Hydroponics/tray.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemBotanist
+  - type: GrudgeCondition
+    description: grudge-accuser-botanist
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedBotanist
+  name: Hold Onto That Produce!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Hydroponics/tray.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemBotanist
+  - type: GrudgeCondition
+    description: grudge-accused-botanist
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserMiner
+  name: Recover Your Ore Bag!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Mining/ore_bag.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemMiner
+  - type: GrudgeCondition
+    description: grudge-accuser-miner
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedMiner
+  name: Keep That Ore Bag!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Mining/ore_bag.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemMiner
+  - type: GrudgeCondition
+    description: grudge-accused-miner
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserClown
+  name: Recover Your HONK!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Fun/bikehorn.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemClown
+  - type: GrudgeCondition
+    description: grudge-accuser-clown
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedClown
+  name: Keep That HONK!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Fun/bikehorn.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemClown
+  - type: GrudgeCondition
+    description: grudge-accused-clown
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserBartender
+  name: Recover Your Flask!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Consumable/Drinks/flask.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemBartender
+  - type: GrudgeCondition
+    description: grudge-accuser-bartender
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedBartender
+  name: Keep That Flask!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Consumable/Drinks/flask.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemBartender
+  - type: GrudgeCondition
+    description: grudge-accused-bartender
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserDwarfHonor
+  name: Collect Your Duel-Forfeit!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/claymore.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemDwarfHonor
+  - type: GrudgeCondition
+    description: grudge-accuser-dwarf-honor
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedDwarfHonor
+  name: A Debt of Honor!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/claymore.rsi
+      state: icon
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemDwarfHonor
+  - type: GrudgeCondition
+    description: grudge-accused-dwarf-honor

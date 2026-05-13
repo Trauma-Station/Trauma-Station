@@ -14,3 +14,67 @@
     - id: OreBag
     - id: Throngler
     - id: Claymore
+
+- type: entityTable
+  id: RandomGrudgeItemChef
+  table: !type:GroupSelector
+    children:
+    - id: FoodBurgerPlain
+    - id: FoodPizzaMargherita
+    - id: FoodSoupMushroom
+
+- type: entityTable
+  id: RandomGrudgeItemJanitor
+  table: !type:GroupSelector
+    children:
+    - id: MopItem
+    - id: SprayBottle
+    - id: TrashBag
+
+- type: entityTable
+  id: RandomGrudgeItemMedical
+  table: !type:GroupSelector
+    children:
+    - id: MedkitFilled
+    - id: Brutepack
+    - id: Ointment
+
+- type: entityTable
+  id: RandomGrudgeItemBotanist
+  table: !type:GroupSelector
+    children:
+    - id: FoodApple
+    - id: FoodTomato
+    - id: FoodBanana
+
+- type: entityTable
+  id: RandomGrudgeItemMiner
+  table: !type:GroupSelector
+    children:
+    - id: OreBag
+    - id: Pickaxe
+    - id: MiningDrill
+
+- type: entityTable
+  id: RandomGrudgeItemClown
+  table: !type:GroupSelector
+    children:
+    - id: BikeHorn
+    - id: ClownRecorder
+    - id: Balloon
+
+- type: entityTable
+  id: RandomGrudgeItemBartender
+  table: !type:GroupSelector
+    children:
+    - id: DrinkFlask
+    - id: DrinkWhiskeyCola
+    - id: DrinkWater
+
+- type: entityTable
+  id: RandomGrudgeItemDwarfHonor
+  table: !type:GroupSelector
+    children:
+    - id: Pickaxe
+    - id: Throngler
+    - id: Claymore

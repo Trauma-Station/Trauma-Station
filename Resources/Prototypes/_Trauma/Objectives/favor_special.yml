@@ -49,3 +49,81 @@
       state: pickaxe
   - type: GrudgeCondition
     description: favor-accused-engineer
+
+- type: entity
+  parent: BaseFavorObjective
+  id: FavorAccuserDoctor
+  name: You're Owed a Life-Debt!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Medical/firstaidkit.rsi
+      state: firstaidkit
+  - type: GrudgeCondition
+    description: favor-accuser-doctor
+
+- type: entity
+  parent: BaseFavorObjective
+  id: FavorAccusedDoctor
+  name: You Owe the Doctor!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Medical/firstaidkit.rsi
+      state: firstaidkit
+  - type: GrudgeCondition
+    description: favor-accused-doctor
+
+- type: entity
+  parent: BaseFavorObjective
+  id: FavorAccuserChef
+  name: You Fed Them for Free!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Consumable/Food/burger.rsi
+      state: plain
+  - type: GrudgeCondition
+    description: favor-accuser-chef
+
+- type: entity
+  parent: BaseFavorObjective
+  id: FavorAccusedChef
+  name: You Owe the Chef!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Consumable/Food/burger.rsi
+      state: plain
+  - type: GrudgeCondition
+    description: favor-accused-chef
+
+- type: entity
+  parent: BaseFavorObjective
+  id: FavorAccuserJanitor
+  name: You Cleaned Up Their Mess!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Janitorial/mop.rsi
+      state: mop
+  - type: GrudgeCondition
+    description: favor-accuser-janitor
+
+- type: entity
+  parent: BaseFavorObjective
+  id: FavorAccusedJanitor
+  name: You Owe the Janitor!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Specific/Janitorial/mop.rsi
+      state: mop
+  - type: GrudgeCondition
+    description: favor-accused-janitor

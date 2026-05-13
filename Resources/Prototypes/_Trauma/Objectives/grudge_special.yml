@@ -23,3 +23,29 @@
       state: pickaxe
   - type: GrudgeCondition
     description: grudge-accused-security
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserSecRivalry
+  name: Set the Record Straight!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Guns/Battery/taser.rsi
+      state: icon
+  - type: GrudgeCondition
+    description: grudge-accuser-sec-rivalry
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedSecRivalry
+  name: Watch Your Back!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Guns/Battery/taser.rsi
+      state: icon
+  - type: GrudgeCondition
+    description: grudge-accused-sec-rivalry
