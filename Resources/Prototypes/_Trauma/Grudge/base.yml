@@ -1,4 +1,44 @@
+# Grudges - Accuser is the guy who was wronged.
+# Favours - Accuser is the guy who helped the other.
+
 - type: grudge
-  id: GrudgeBeatdown
-  accuserObjective: GrudgeHoldObjectiveAccuser
-  accusedObjective: GrudgeHoldObjectiveAccused
+  id: GrudgeHoldItem
+  accuserObjective: GrudgeHoldAccuser
+  accusedObjective: GrudgeHoldAccused
+
+- type: grudge
+  id: GrudgeHoldItemDwarf
+  accuserObjective: GrudgeHoldAccuserDwarf
+  accusedObjective: GrudgeHoldAccusedDwarf
+  allowedAccuserSpecies:
+  - Dwarf
+  allowedAccusedSpecies:
+  - Dwarf
+  invertAccusedSpecies: true
+
+- type: grudge
+  id: FavorEngineer
+  accuserObjective: FavorAccuserEngineer
+  accusedObjective: FavorAccusedEngineer
+  allowedAccuserJob:
+  - Engineer
+
+- type: grudge
+  id: FavorSecurity
+  accuserObjective: FavorAccuserSecurity
+  accusedObjective: FavorAccusedSecurity
+  allowedAccuserJob:
+  - SecurityOfficer
+  allowedAccusedJob:
+  - SecurityOfficer
+  invertAccusedJob: true # make sure not security officer
+
+- type: grudge
+  id: GrudgeSecurity
+  accuserObjective: GrudgeAccuserSecurity
+  accusedObjective: GrudgeAccusedSecurity
+  allowedAccuserJob:
+  - SecurityOfficer
+  allowedAccusedJob:
+  - SecurityOfficer
+  invertAccuserJob: true # make sure not security officer

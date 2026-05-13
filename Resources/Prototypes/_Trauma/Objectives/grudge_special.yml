@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccuserSecurity
+  name: Get back at this guy!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeCondition
+    description: grudge-accuser-security
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeAccusedSecurity
+  name: Watch your back!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeCondition
+    description: grudge-accused-security

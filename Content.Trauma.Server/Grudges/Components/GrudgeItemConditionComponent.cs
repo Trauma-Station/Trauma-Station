@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Utility;
+using Content.Shared.EntityTable.EntitySelectors;
 
 namespace Content.Trauma.Server.Grudges.Components;
 
@@ -16,6 +16,6 @@ public sealed partial class GrudgeItemConditionComponent : Component
     /// <summary>
     /// Item prototype for the item you're getting.
     /// </summary>
-    [DataField]
-    public EntProtoId? ItemId = "Skub";
+    [DataField(required: true)]
+    public Dictionary<string, EntityTableSelector> ItemId;
 }

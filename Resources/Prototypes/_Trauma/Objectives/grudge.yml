@@ -8,27 +8,10 @@
   - type: GrudgeCondition
 
 - type: entity
-  parent: BaseGrudgeObjective
-  id: GrudgeHoldObjectiveAccuser
-  name: Recover Your Property!
-  description: Someone took your property and you want it back!
+  abstract: true
+  parent: BaseObjective
+  id: BaseFavorObjective
   components:
   - type: Objective
-    difficulty: 1
-    icon:
-      sprite: Objects/Weapons/Melee/pickaxe.rsi
-      state: pickaxe
-  - type: GrudgeItemCondition
-
-- type: entity
-  parent: BaseGrudgeObjective
-  id: GrudgeHoldObjectiveAccused
-  name: Hold Property!
-  description: You took someone's property and he wants it back!
-  components:
-  - type: Objective
-    difficulty: 1
-    icon:
-      sprite: Objects/Weapons/Melee/pickaxe.rsi
-      state: pickaxe
-  - type: GrudgeItemCondition
+    issuer: objective-issuer-nanotrasen
+  - type: GrudgeCondition

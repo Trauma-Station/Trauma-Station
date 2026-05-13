@@ -2,9 +2,11 @@
 
 using System.Linq;
 using Content.Server.Mind;
+using Content.Server.Roles.Jobs;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Roles;
 using Content.Trauma.Common.Grudge;
 using Robust.Shared.Timing;
 
@@ -15,6 +17,7 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly JobSystem _job = default!;
 
     private List<EntityUid> _players = new();
     private TimeSpan _lastTime = TimeSpan.Zero;
@@ -33,8 +36,16 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
 
     public void AddPlayer(EntityUid player)
     {
-        if (HasComp<HumanoidProfileComponent>(player))
-            _players.Add(player);
+        if (!HasComp<HumanoidProfileComponent>(player))
+            return;
+
+        if (!_mind.TryGetMind(player, out var mind, out var mindComp))
+            return;
+
+        if (!_job.MindTryGetJobId(mind, out var job) || job is not { })
+            return;
+
+        _players.Add(player);
     }
 
     public override void Update(float frameTime)
@@ -85,7 +96,7 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
         RaiseLocalEvent(grudge1.Value, ref addedEv);
         RaiseLocalEvent(grudge2.Value, ref addedEv);
 
-        var raisedEv = new GrudgeSetupEvent();
+        var raisedEv = new GrudgeUpdateEvent();
         RaiseLocalEvent(grudge1.Value, ref raisedEv);
         RaiseLocalEvent(grudge2.Value, ref raisedEv);
 
@@ -103,15 +114,24 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
         if (!_mind.TryGetMind(playerA, out var mindA, out var mindCompA) || !_mind.TryGetMind(playerB, out var mindB, out var mindCompB))
             return null;
 
+        if (!_job.MindTryGetJobId(mindA, out var jobAA) || jobAA is not { } jobA || !_job.MindTryGetJobId(mindB, out var jobBB) || jobBB is not { } jobB)
+            return null;
+
         var speciesA = humanoidA.Species;
         var speciesB = humanoidB.Species;
 
         foreach (var grudge in randomGrudges)
         {
-            if (!IsSpeciesValid(speciesA, grudge.AllowedAccuserSpecies, grudge.InvertAccuser))
+            if (!IsSpeciesValid(speciesA, grudge.AllowedAccuserSpecies, grudge.InvertAccuserSpecies))
                 continue;
 
-            if (!IsSpeciesValid(speciesB, grudge.AllowedAccusedSpecies, grudge.InvertAccused))
+            if (!IsSpeciesValid(speciesB, grudge.AllowedAccusedSpecies, grudge.InvertAccusedSpecies))
+                continue;
+
+            if (!IsJobValid(jobA, grudge.AllowedAccuserJob, grudge.InvertAccuserJob))
+                continue;
+
+            if (!IsJobValid(jobB, grudge.AllowedAccusedJob, grudge.InvertAccusedJob))
                 continue;
 
             if (_mind.TryFindObjective(mindA, grudge.AccuserObjective, out _) || _mind.TryFindObjective(mindB, grudge.AccusedObjective, out _))
@@ -124,6 +144,16 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
     }
 
     private bool IsSpeciesValid(string species, List<ProtoId<SpeciesPrototype>>? allowed, bool inverted)
+    {
+        if (allowed == null || allowed.Count == 0)
+            return !inverted;
+
+        var contains = allowed.Contains(species);
+
+        return inverted ? !contains : contains;
+    }
+
+    private bool IsJobValid(string species, List<ProtoId<JobPrototype>>? allowed, bool inverted)
     {
         if (allowed == null || allowed.Count == 0)
             return !inverted;

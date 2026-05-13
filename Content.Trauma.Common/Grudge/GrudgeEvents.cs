@@ -13,4 +13,4 @@ public record struct GrudgeAddedEvent(EntityUid Accuser, EntityUid Accused, Enti
 /// Raised on a grudge. Setups data.
 /// </summary>
 [ByRefEvent]
-public record struct GrudgeSetupEvent();
+public record struct GrudgeUpdateEvent();

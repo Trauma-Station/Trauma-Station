@@ -1,0 +1,67 @@
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeHoldAccuser
+  name: Recover Your Property!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItem
+  - type: GrudgeCondition
+    description: grudge-hold-accuser
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeHoldAccused
+  name: Hold Property!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItem
+  - type: GrudgeCondition
+    description: grudge-hold-accused
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeHoldAccuserDwarf
+  name: Recover Your Property!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemDwarf
+  - type: GrudgeCondition
+    description: grudge-hold-accuser-dwarf
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: GrudgeHoldAccusedDwarf
+  name: Hold Property!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeItemCondition
+    itemId:
+      table: !type:NestedSelector
+        tableId: RandomGrudgeItemDwarf
+  - type: GrudgeCondition
+    description: grudge-hold-accused-dwarf

@@ -1,0 +1,51 @@
+- type: entity
+  parent: BaseGrudgeObjective
+  id: FavorAccuserSecurity
+  name: Looked the other way.
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeCondition
+    description: favor-accuser-security
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: FavorAccusedSecurity
+  name: You owe someone big time!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeCondition
+    description: favor-accused-security
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: FavorAccuserEngineer
+  name: You've gotten a life-debt!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeCondition
+    description: favor-accuser-engineer
+
+- type: entity
+  parent: BaseGrudgeObjective
+  id: FavorAccusedEngineer
+  name: You owe your life!
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Melee/pickaxe.rsi
+      state: pickaxe
+  - type: GrudgeCondition
+    description: favor-accused-engineer

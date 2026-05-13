@@ -22,4 +22,10 @@ public sealed partial class GrudgeConditionComponent : Component
     /// </summary>
     [DataField]
     public bool IsAccuser;
+
+    /// <summary>
+    /// Stores a description of whatever grudge with more details
+    /// </summary>
+    [DataField]
+    public string? Description;
 }

@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Shared.Coordinates;
-using Content.Shared.Examine;
+using Content.Shared.EntityTable;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Objectives.Components;
-using Content.Shared.Objectives.Systems;
 using Content.Shared.Storage;
 using Content.Trauma.Common.Grudge;
 using Content.Trauma.Server.Grudges.Components;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Grudges;
 
@@ -17,6 +18,7 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly EntityTableSystem _table = default!;
 
     public override void Initialize()
     {
@@ -25,9 +27,9 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
         SubscribeLocalEvent<GrudgeItemConditionComponent, ObjectiveGetProgressEvent>(OnGetItemProgress);
 
         SubscribeLocalEvent<GrudgeConditionComponent, GrudgeAddedEvent>(OnStartupGrudge);
-        SubscribeLocalEvent<GrudgeConditionComponent, GrudgeSetupEvent>(OnSetupGrudge);
+        SubscribeLocalEvent<GrudgeConditionComponent, GrudgeUpdateEvent>(OnSetupGrudge);
         SubscribeLocalEvent<GrudgeItemConditionComponent, GrudgeAddedEvent>(OnStartupItemGrudge);
-        SubscribeLocalEvent<GrudgeItemConditionComponent, GrudgeSetupEvent>(OnSetupItemGrudge);
+        SubscribeLocalEvent<GrudgeItemConditionComponent, GrudgeUpdateEvent>(OnSetupItemGrudge);
     }
 
     private void OnGetItemProgress(Entity<GrudgeItemConditionComponent> ent, ref ObjectiveGetProgressEvent args)
@@ -58,13 +60,12 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
         }
     }
 
-    private void OnSetupGrudge(Entity<GrudgeConditionComponent> ent, ref GrudgeSetupEvent args)
+    private void OnSetupGrudge(Entity<GrudgeConditionComponent> ent, ref GrudgeUpdateEvent args)
     {
         if (ent.Comp.Guy is not { } guy)
             return;
-
-        var description = $"The guy is {Name(guy)}";
-        _meta.SetEntityDescription(ent.Owner, $"{Description(ent.Owner)}\n{description}", MetaData(ent.Owner));
+        if (ent.Comp.Description is { } description)
+            _meta.SetEntityDescription(ent.Owner, $"{Description(ent.Owner)}\n{Loc.GetString(description, ("guy", Name(guy)))}", MetaData(ent.Owner));
     }
 
     private void OnStartupItemGrudge(Entity<GrudgeItemConditionComponent> ent, ref GrudgeAddedEvent args)
@@ -76,40 +77,37 @@ public sealed partial class GrudgeConditionSystem : EntitySystem
                 return;
 
             ent.Comp.Item = comp.Item;
-            ent.Comp.ItemId = comp.ItemId;
             return;
         }
 
         // Item spawning.
-        var newItem = Spawn(ent.Comp.ItemId, args.Accused.ToCoordinates());
+        if (!ent.Comp.ItemId.TryFirstOrNull(out var table))
+            return;
+
+        var item = _table.GetSpawns(table.Value.Value).FirstOrDefault();
+        var newItem = Spawn(item, args.Accused.ToCoordinates());
         ent.Comp.Item = newItem;
         var grudge = EnsureComp<GrudgeItemComponent>(newItem);
         grudge.Grudgee = args.Accuser;
         _hands.PickupOrDrop(args.Accused, newItem);
     }
 
-    private void OnSetupItemGrudge(Entity<GrudgeItemConditionComponent> ent, ref GrudgeSetupEvent args)
+    private void OnSetupItemGrudge(Entity<GrudgeItemConditionComponent> ent, ref GrudgeUpdateEvent args)
     {
-        if (!TryComp<GrudgeConditionComponent>(ent.Owner, out var comp))
+        if (!TryComp<GrudgeConditionComponent>(ent.Owner, out var comp) || comp.Guy is not { } guy)
             return;
 
         if (ent.Comp.Item is not { } item)
             return;
 
-        string description = "";
-
-        if (comp.IsAccuser)
-            description = $"He has your {Name(item)}!";
-        else
-            description = $"You have his {Name(item)}!";
-
+        string description = $"It's a {Name(item)}.";
         _meta.SetEntityDescription(ent.Owner, $"{Description(ent.Owner)}\n{description}", MetaData(ent.Owner));
     }
 
     private float GetItemProgress(EntityUid? targetItem, EntityUid? fakeSelf, EntityUid? otherGuy)
     {
         if (targetItem is not { } item)
-            return 0.0f; // Item's gone, you failed yourself
+            return 0.0f; // Item's gone, you failed yourself, your family, your ancestors.
 
         if (fakeSelf is not { } self)
             return 0.0f; // Not real?

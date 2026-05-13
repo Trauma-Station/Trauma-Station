@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Roles;
 
 namespace Content.Trauma.Server.Grudges;
 
@@ -24,11 +25,23 @@ public sealed partial class GrudgePrototype : IPrototype
     public List<ProtoId<SpeciesPrototype>>? AllowedAccuserSpecies;
 
     [DataField]
-    public bool InvertAccuser;
+    public bool InvertAccuserSpecies;
 
     [DataField]
     public List<ProtoId<SpeciesPrototype>>? AllowedAccusedSpecies;
 
     [DataField]
-    public bool InvertAccused;
+    public bool InvertAccusedSpecies;
+
+    [DataField]
+    public List<ProtoId<JobPrototype>>? AllowedAccuserJob;
+
+    [DataField]
+    public bool InvertAccuserJob;
+
+    [DataField]
+    public List<ProtoId<JobPrototype>>? AllowedAccusedJob;
+
+    [DataField]
+    public bool InvertAccusedJob;
 }

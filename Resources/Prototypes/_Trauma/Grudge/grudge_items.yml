@@ -1,0 +1,11 @@
+- type: entityTable
+  id: RandomGrudgeItem
+  table: !type:GroupSelector
+    children:
+    - id: Skub
+
+- type: entityTable
+  id: RandomGrudgeItemDwarf
+  table: !type:GroupSelector
+    children:
+    - id: Skub

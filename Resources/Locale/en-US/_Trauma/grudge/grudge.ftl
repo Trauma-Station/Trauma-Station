@@ -1,0 +1,10 @@
+grudge-hold-accuser = Some time ago, you found your dorm broken into and your family heirloom missing. You think {$guy} has it.
+grudge-hold-accused = Some time ago, you found an item on the floor and picked it up. Finders keepers, as they say.
+grudge-hold-accuser-dwarf = This one's in the book! {$guy} stole your clan's heirloom and is playing keeps-away. Show him what it means to be a dwarf!
+grudge-hold-accused-dwarf = You found an item in the bar and swiped it clean. No one's given you any lip about it.
+grudge-accuser-security = {$guy} creased your nice shoes. Ruin his day.
+grudge-accused-security = You've damaged someone's shoes on patrol, but you're not sure exactly who it is.
+favor-accuser-security = You looked another way when {$guy} had some contraband.
+favor-accused-security = {$guy} looked the other way when you had some contraband.
+favor-accuser-engineer = You saved {$guy}'s life when you stopped a routine atmosphere-siphon. {$guy} remembers this.
+favor-accused-engineer = {$guy} saved your life when the atmosphere
