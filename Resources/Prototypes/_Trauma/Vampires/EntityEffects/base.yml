@@ -49,6 +49,9 @@
       Toxin: -10
       Burn: -10
       Airloss: -50
+  - !type:AdjustReagentGroup
+    amount: -10
+    group: Toxins
   - !type:PopupMessage
     messages:
     - You healed.

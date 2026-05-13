@@ -4,7 +4,7 @@
   effects:
   - !type:ModifyKnockdown
     time: 6
-  - !type:ThrowRandomly # TODO: Make throw opposite
+  - !type:ThrowRandomly
 
 # Charge
 - type: entityEffect
@@ -50,6 +50,9 @@
         Shock: -10
         Cold: -10
         Caustic: -10
+  - !type:AdjustReagentGroup
+    amount: -10
+    group: Toxins
   - !type:PopupMessage
     messages:
     - You healed.

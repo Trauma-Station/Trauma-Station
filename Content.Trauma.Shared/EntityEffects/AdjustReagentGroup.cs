@@ -1,0 +1,49 @@
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.EntityEffects;
+using Content.Shared.FixedPoint;
+
+namespace Content.Trauma.Shared.EntityEffects;
+
+/// <summary>
+/// Effect that adjusts any reagent in the target's specified solution that belongs to a specified reagent group.
+/// The reagent must exist in the target's solution.
+/// TODO: Loc guidebook
+/// </summary>
+public sealed partial class AdjustReagentGroup : EntityEffectBase<AdjustReagentGroup>
+{
+    /// <summary>
+    /// How much to adjust the reagent
+    /// </summary>
+    [DataField(required: true)]
+    public FixedPoint2 Amount;
+
+    /// <summary>
+    /// Which reagent group to adjust.
+    /// </summary>
+    [DataField(required: true)]
+    public string Group;
+}
+
+public sealed class AdjustReagentGroupEffectSystem : EntityEffectSystem<SolutionComponent, AdjustReagentGroup>
+{
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+
+    protected override void Effect(Entity<SolutionComponent> ent, ref EntityEffectEvent<AdjustReagentGroup> args)
+    {
+        var quantity = args.Effect.Amount * args.Scale;
+        var reagentGroup = args.Effect.Group;
+
+        foreach (var (reagent, _) in ent.Comp.Solution.GetReagentPrototypes(_proto))
+        {
+            if (reagent.Group != reagentGroup)
+                continue;
+
+            if (quantity > 0)
+                _solution.TryAddReagent(ent, reagent.ID, quantity);
+            else
+                _solution.RemoveReagent(ent, reagent.ID, quantity);
+        }
+    }
+}
