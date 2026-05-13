@@ -89,11 +89,11 @@
         icon:
           sprite: _Trauma/Objects/Devices/encryption_keys.rsi
           state: rev_label
-      - tag: HandTeleporter
-        name: construction-graph-tag-hand-teleporter
-        icon:
-          sprite: Objects/Devices/hand_teleporter.rsi
-          state: icon
+      # - tag: HandTeleporter - temp remove for econ purposes
+      #   name: construction-graph-tag-hand-teleporter
+      #   icon:
+      #     sprite: Objects/Devices/hand_teleporter.rsi
+      #     state: icon
       - tool: Welding
         doAfter: 1
       - material: Cable

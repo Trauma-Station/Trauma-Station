@@ -19,30 +19,22 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.PreAscension;
 public sealed class ShadowlingVeilSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly SharedHandheldLightSystem _handheld = default!;
     [Dependency] private readonly UnpoweredFlashlightSystem _unpowered = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly EntityQuery<PoweredLightComponent> _poweredLightQuery = default!;
+    [Dependency] private readonly EntityQuery<HandheldLightComponent> _handheldLightQuery = default!;
+    [Dependency] private readonly EntityQuery<UnpoweredFlashlightComponent> _unpoweredFlashlightQuery = default!;
+    [Dependency] private readonly EntityQuery<ExpendableLightComponent> _expendableLightQuery = default!;
+    [Dependency] private readonly EntityQuery<TimedDespawnComponent> _timedDespawnQuery = default!;
 
-    private EntityQuery<PointLightComponent> _pointLightQuery;
-    private EntityQuery<PoweredLightComponent> _poweredLightQuery;
-    private EntityQuery<HandheldLightComponent> _handheldLightQuery;
-    private EntityQuery<UnpoweredFlashlightComponent> _unpoweredFlashlightQuery;
-    private EntityQuery<ExpendableLightComponent> _expendableLightQuery;
-    private EntityQuery<TimedDespawnComponent> _timedDespawnQuery;
+    private HashSet<Entity<PointLightComponent>> _lights = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _pointLightQuery = GetEntityQuery<PointLightComponent>();
-        _poweredLightQuery = GetEntityQuery<PoweredLightComponent>();
-        _handheldLightQuery = GetEntityQuery<HandheldLightComponent>();
-        _unpoweredFlashlightQuery = GetEntityQuery<UnpoweredFlashlightComponent>();
-        _expendableLightQuery = GetEntityQuery<ExpendableLightComponent>();
-        _timedDespawnQuery = GetEntityQuery<TimedDespawnComponent>();
 
         SubscribeLocalEvent<ShadowlingVeilComponent, VeilEvent>(OnVeilActivate);
         SubscribeLocalEvent<ShadowlingVeilComponent, MapInitEvent>(OnStartup);
@@ -61,7 +53,10 @@ public sealed class ShadowlingVeilSystem : EntitySystem
             return;
 
         // its just emp but better
-        foreach (var light in _lookup.GetEntitiesInRange(_transform.GetMapCoordinates(args.Performer), component.Range))
+        _lights.Clear();
+        var coords = Transform(args.Performer).Coordinates;
+        _lookup.GetEntitiesInRange(coords, component.Range, _lights);
+        foreach (var light in _lights)
         {
             TryDisableLights(light, component);
         }
@@ -71,9 +66,6 @@ public sealed class ShadowlingVeilSystem : EntitySystem
 
     private void TryDisableLights(EntityUid uid, ShadowlingVeilComponent component)
     {
-        if (!_pointLightQuery.HasComp(uid))
-            return;
-
         if (_poweredLightQuery.TryComp(uid, out var light))
             _light.TryDestroyBulb(uid, light); // listen, this will make janitor a good role during slings
 

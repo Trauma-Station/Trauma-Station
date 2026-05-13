@@ -674,9 +674,9 @@ public sealed class ToggleableClothingSystem : EntitySystem
             return;
 
         // Add prototype from ClothingPrototype and Slot field to ClothingPrototypes dictionary
-        if (comp.ClothingPrototype != null && !string.IsNullOrEmpty(comp.Slot) && !comp.ClothingPrototypes.ContainsKey(comp.Slot))
+        if (comp.ClothingPrototype is { } proto && comp.Slot is { } slot && !comp.ClothingPrototypes.ContainsKey(slot)) // Trauma - use nullables properly for everything
         {
-            comp.ClothingPrototypes.Add(comp.Slot, comp.ClothingPrototype.Value);
+            comp.ClothingPrototypes.Add(slot, proto); // Trauma - use nullables for everything
         }
 
         var xform = Transform(toggleable.Owner);

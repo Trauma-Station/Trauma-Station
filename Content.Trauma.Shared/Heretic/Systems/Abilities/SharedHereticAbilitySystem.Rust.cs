@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;

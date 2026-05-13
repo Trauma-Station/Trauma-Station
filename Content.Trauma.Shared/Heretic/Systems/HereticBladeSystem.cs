@@ -2,7 +2,6 @@
 
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Weapons;
 using Content.Shared.CombatMode;

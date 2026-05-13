@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Vehicles;
 using Content.Shared.Actions;

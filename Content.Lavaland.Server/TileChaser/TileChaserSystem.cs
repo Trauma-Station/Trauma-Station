@@ -2,7 +2,6 @@
 
 using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
-using System.Numerics;
 using Content.Lavaland.Shared.Anger.Systems;
 using Content.Lavaland.Shared.Megafauna.Events;
 using Content.Lavaland.Shared.TileChaser;

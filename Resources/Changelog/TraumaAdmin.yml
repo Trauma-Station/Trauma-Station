@@ -154,3 +154,19 @@ Entries:
   id: 20
   time: '2026-05-08T17:25:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2497
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Admin commands are now logged with the previously almost unused
+      AdminCommands category.
+  id: 21
+  time: '2026-05-13T18:27:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2591
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed freeform lawboard log being useless.
+  id: 22
+  time: '2026-05-13T19:10:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2592

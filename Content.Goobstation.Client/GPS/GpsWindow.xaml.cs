@@ -8,7 +8,6 @@ using Robust.Client.UserInterface.XAML;
 using System.Linq;
 using Robust.Client.ResourceManagement;
 using Content.Client.Resources;
-using System.Numerics;
 using Content.Goobstation.Shared.GPS.Components;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Lavaland.Server.Biome;
 using Content.Lavaland.Server.Procedural.Components;
 using Content.Lavaland.Shared.Procedural.Components;

@@ -4,9 +4,12 @@ using System.Linq;
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.Ascension;
 using Content.Shared.Actions;
+using Content.Shared.Construction.EntitySystems;
 using Content.Shared.DoAfter;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Ascension;
 
@@ -17,12 +20,12 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Ascension;
 /// </summary>
 public sealed class ShadowlingAscendanceSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly AnchorableSystem _anchorable = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
 
     public override void Initialize()
     {
@@ -64,7 +67,7 @@ public sealed class ShadowlingAscendanceSystem : EntitySystem
             BreakOnMove = true,
         };
 
-        _doAfterSystem.TryStartDoAfter(doAfter);
+        _doAfter.TryStartDoAfter(doAfter);
         args.Handled = true;
     }
 
@@ -87,14 +90,15 @@ public sealed class ShadowlingAscendanceSystem : EntitySystem
 
     private bool TileFree(EntityUid uid)
     {
-        // Check if tile is occupied
-        var mapCoords = _transformSystem.GetMapCoordinates(uid);
-        if (!_mapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid))
+        var xform = Transform(uid);
+        if (xform.GridUid is not { } gridUid || !_gridQuery.TryComp(gridUid, out var grid))
             return false;
 
-        if (_mapSystem.GetAnchoredEntities(gridUid, grid, mapCoords).Any())
-            return false;
+        var indices = _map.TileIndicesFor(gridUid, grid, xform.Coordinates);
 
-        return true;
+        // too lazy to look up values from prototype fixtures :)
+        var layer = (int) CollisionGroup.MachineLayer;
+        var mask = (int) CollisionGroup.MachineMask;
+        return _anchorable.TileFree((gridUid, grid), indices, layer, mask);
     }
 }

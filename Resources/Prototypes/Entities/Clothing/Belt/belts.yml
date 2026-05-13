@@ -149,7 +149,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,3,3
+    - 0,0,5,3 # Trauma, was 0,0,3,3
     whitelist:
       components:
       - Gun

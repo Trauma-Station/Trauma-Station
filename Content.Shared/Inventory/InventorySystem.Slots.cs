@@ -75,9 +75,11 @@ public partial class InventorySystem : EntitySystem
 
         var targetComp = EnsureComp<InventoryComponent>(target);
         targetComp.SpeciesId = source.Comp.SpeciesId;
-        targetComp.Displacements = new Dictionary<string, DisplacementData>(source.Comp.Displacements);
-        targetComp.FemaleDisplacements = new Dictionary<string, DisplacementData>(source.Comp.FemaleDisplacements);
-        targetComp.MaleDisplacements = new Dictionary<string, DisplacementData>(source.Comp.MaleDisplacements);
+        // <Trauma> - removed type parameters so it uses protoid automatically
+        targetComp.Displacements = new(source.Comp.Displacements);
+        targetComp.FemaleDisplacements = new(source.Comp.FemaleDisplacements);
+        targetComp.MaleDisplacements = new(source.Comp.MaleDisplacements);
+        // </Trauma>
         SetTemplateId((target, targetComp), source.Comp.TemplateId);
         Dirty(target, targetComp);
     }

@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Inventory;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Hands.Components;
@@ -188,7 +189,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     ///     If there is a value for the given slot, it will return the proto id for that slot.
     ///     If nothing was found, will return null
     /// </returns>
-    public string? GetGearForSlot(RoleLoadout? loadout, string slot)
+    public string? GetGearForSlot(RoleLoadout? loadout, [ForbidLiteral] ProtoId<InventorySlotPrototype> slot) // Trauma - use ProtoId, add ForbidLiteral
     {
         if (loadout == null)
             return null;

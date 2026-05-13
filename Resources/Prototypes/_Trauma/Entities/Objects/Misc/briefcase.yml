@@ -1,0 +1,21 @@
+- type: entity
+  parent: [BriefcaseBase, BaseStash]
+  id: BriefcaseBrownFake
+  name: brown briefcase
+  suffix: False Bottom
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+    state: icon
+  - type: SecretStash
+    maxItemSize: Normal
+  - type: ToolOpenable
+    showExamine: false
+    openToolQualityNeeded: Screwing
+    closeToolQualityNeeded: Screwing
+    name: secret-stash-briefcase
+  - type: HideContrabandContent
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      stash: !type:ContainerSlot
