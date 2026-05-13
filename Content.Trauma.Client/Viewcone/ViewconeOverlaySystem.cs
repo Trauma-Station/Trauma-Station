@@ -4,6 +4,8 @@ using Content.Client.Eye;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Trauma.Client.Viewcone.Overlays;
+using Content.Trauma.Common.Popups;
+using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -27,6 +29,7 @@ public sealed class ViewconeOverlaySystem : EntitySystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly ViewconeAngleSystem _angle = default!;
     [Dependency] private readonly EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
 
     private ViewconeConeOverlay _coneOverlay = default!;
@@ -47,8 +50,9 @@ public sealed class ViewconeOverlaySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ViewconeComponent, ComponentInit>(OnConeManInit);
-        SubscribeLocalEvent<ViewconeComponent, ComponentShutdown>(OnConeManShutdown);
+        SubscribeLocalEvent<ViewconeComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ViewconeComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ViewconeComponent, ShowPopupAttemptEvent>(OnShowPopupAttempt);
 
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
@@ -72,6 +76,9 @@ public sealed class ViewconeOverlaySystem : EntitySystem
         var enumerator = AllEntityQuery<LerpingEyeComponent, EyeComponent, ViewconeComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out _, out var eye, out var viewcone, out var xform))
         {
+            // cached for overlays and popups to use
+            viewcone.CurrentConeAngle = _angle.GetAngle((uid, viewcone));
+
             var eyeAngle = eye.Rotation;
             var (position, rotation) = _xform.GetWorldPositionRotation(xform);
             var playerAngle = rotation;
@@ -122,6 +129,22 @@ public sealed class ViewconeOverlaySystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Returns true if a point is inside the vision cone, using world positions.
+    /// </summary>
+    public bool IsVisible(Entity<ViewconeComponent> ent, Vector2 eyePos, Vector2 pos)
+    {
+        var dist = pos - eyePos;
+        var r = ent.Comp.ConeIgnoreRadius;
+        var r2 = r * r;
+        if (dist.LengthSquared() < r2)
+            return true; // within cone ignore radius so always visible regardless of angle
+
+        var eyeRot = ent.Comp.ViewAngle;
+        var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
+        return angleDist < MathHelper.DegreesToRadians(ent.Comp.CurrentConeAngle) * 0.5f;
+    }
+
     private void OnPlayerAttached(Entity<ViewconeComponent> ent, ref LocalPlayerAttachedEvent args)
     {
         AddOverlays();
@@ -132,13 +155,18 @@ public sealed class ViewconeOverlaySystem : EntitySystem
         RemoveOverlays();
     }
 
-    private void OnConeManInit(Entity<ViewconeComponent> ent, ref ComponentInit args)
+    private void OnInit(Entity<ViewconeComponent> ent, ref ComponentInit args)
     {
         if (ent.Owner == _player.LocalEntity)
             AddOverlays();
     }
 
-    private void OnConeManShutdown(Entity<ViewconeComponent> ent, ref ComponentShutdown args)
+    private void OnShowPopupAttempt(Entity<ViewconeComponent> ent, ref ShowPopupAttemptEvent args)
+    {
+        args.Cancelled |= !IsVisible(ent, args.ViewerPos, args.WorldPos);
+    }
+
+    private void OnShutdown(Entity<ViewconeComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Owner == _player.LocalEntity)
             RemoveOverlays();

@@ -2,7 +2,6 @@
 
 using Content.Shared.Clothing.Components;
 using Content.Shared.Item;
-using Content.Trauma.Shared.Viewcone;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;

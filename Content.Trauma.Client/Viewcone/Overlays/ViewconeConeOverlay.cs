@@ -2,7 +2,6 @@
 
 using Content.Client.Eye;
 using Content.Shared.MouseRotator;
-using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -21,7 +20,6 @@ public sealed class ViewconeConeOverlay : Overlay
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     private readonly SharedTransformSystem _xform;
-    private readonly ViewconeAngleSystem _angle;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
@@ -40,7 +38,6 @@ public sealed class ViewconeConeOverlay : Overlay
         IoCManager.InjectDependencies(this);
 
         _xform = _ent.System<SharedTransformSystem>();
-        _angle = _ent.System<ViewconeAngleSystem>();
 
         _viewconeShader = _proto.Index(ShaderPrototype).InstanceUnique();
         ZIndex = -6;
@@ -62,10 +59,7 @@ public sealed class ViewconeConeOverlay : Overlay
             if (args.Viewport.Eye != eye.Eye)
                 continue;
 
-            // TODO dont really like that this has to get the angle twice (once here and once in the alpha overlay)
-            // but its not really like its a huge inefficiency (this only has to happen twice per frame and its like a trivial event relay with no logic)
-            // and i really dont want to make it stateful
-            _coneAngle = _angle.GetAngle((uid, viewcone));
+            _coneAngle = viewcone.CurrentConeAngle;
             _coneFeather = viewcone.ConeFeather;
             _coneIgnoreRadius = (viewcone.ConeIgnoreRadius - viewcone.ConeIgnoreFeather) * 50f;
             _coneIgnoreFeather = Math.Max(viewcone.ConeIgnoreFeather * 200f, 8f);

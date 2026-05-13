@@ -16,7 +16,6 @@
   - type: Viewcone
   - type: ViewconeOccludable # if it can move, you probably can't remember it forever?
   - type: ViewconeFootstepsEffect # if you can hear it move you will see steps effects on screen
-    effect: ViewconeEffectFootstep
   # </Trauma>
   - type: Sprite
     noRot: true
@@ -155,6 +154,9 @@
   id: MobCombat
   abstract: true
   components:
+  # <Trauma>
+  - type: ViewconeMeleeEffect
+  # </Trauma>
   - type: CombatMode
   - type: MeleeWeapon
     hidden: true

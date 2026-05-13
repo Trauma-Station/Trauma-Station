@@ -51,7 +51,7 @@ public sealed partial class ViewconeComponent : Component
     public float ConeIgnoreRadius = 0.65f;
 
     [DataField]
-    public float ConeIgnoreFeather = 0.03f;
+    public float ConeIgnoreFeather = 0.1f;
 
     /// <summary>
     /// How long it takes for something out of your vision cone to completely fade out, after <see cref="FadeStart"/>.
@@ -72,4 +72,9 @@ public sealed partial class ViewconeComponent : Component
     public Angle LastMouseRotationAngle;
     public Vector2 LastWorldPos;
     public Angle LastWorldRotationAngle;
+
+    /// <summary>
+    /// Current cone angle in degrees used by the client when drawing this frame.
+    /// </summary>
+    public float CurrentConeAngle;
 }

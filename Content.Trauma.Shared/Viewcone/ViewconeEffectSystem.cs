@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Chat;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Movement;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Shared.Spawners;
@@ -17,17 +19,33 @@ public sealed class ViewconeEffectSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
+    public static readonly EntProtoId TalkEffect = "ViewconeEffectTalk";
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ViewconeFootstepsEffectComponent, FootStepEvent>(OnFootStep);
-        // TODO: give more sound sources viewcone effects, theres already sprites for gunfire, attacks and speech
+        SubscribeLocalEvent<ViewconeMeleeEffectComponent, MeleeAttackEvent>(OnMeleeAttack);
+        SubscribeLocalEvent<EntitySpokeEvent>(OnSpoke);
+        // TODO: CFG boing
     }
 
     private void OnFootStep(Entity<ViewconeFootstepsEffectComponent> ent, ref FootStepEvent args)
     {
         SpawnEffect(ent, ent.Comp.Effect, args.WorldAngle);
+    }
+
+    private void OnMeleeAttack(Entity<ViewconeMeleeEffectComponent> ent, ref MeleeAttackEvent args)
+    {
+        SpawnEffect(ent, ent.Comp.Effect);
+    }
+
+    private void OnSpoke(EntitySpokeEvent args)
+    {
+        // whispering is too quiet to get a fix on
+        if (!args.IsWhisper)
+            SpawnEffect(args.Source, TalkEffect);
     }
 
     /// <summary>

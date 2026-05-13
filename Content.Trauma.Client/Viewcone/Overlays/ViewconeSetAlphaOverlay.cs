@@ -4,7 +4,6 @@ using Content.Client.Eye;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Trauma.Client.Viewcone.ComponentTree;
-using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -30,7 +29,6 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _xform;
     private readonly ViewconeOverlaySystem _cone;
-    private readonly ViewconeAngleSystem _angle;
     private readonly ViewconeOcclusionSystem _tree;
 
     private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery;
@@ -54,7 +52,6 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
         _sprite = _ent.System<SpriteSystem>();
         _xform  = _ent.System<TransformSystem>();
         _cone = _ent.System<ViewconeOverlaySystem>();
-        _angle = _ent.System<ViewconeAngleSystem>();
         _tree = _ent.System<ViewconeOcclusionSystem>();
 
         _humanoidQuery = _ent.GetEntityQuery<HumanoidProfileComponent>();
@@ -92,11 +89,6 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
             return;
 
         var (ent, eye, cone) = _nextEye.Value;
-        var radConeAngle = _angle.GetAngle((ent, cone));
-        if (radConeAngle >= 360f)
-            return; // full vision dont care
-
-        radConeAngle = MathHelper.DegreesToRadians(radConeAngle);
 
         var eyeTransform = _ent.GetComponent<TransformComponent>(ent);
         var eyePos = _xform.GetWorldPosition(eyeTransform);
@@ -105,6 +97,7 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // !! Thank You Bhijn God (TYBG) for 95% of the rest of this methods code !!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        var radConeAngle = MathHelper.DegreesToRadians(cone.CurrentConeAngle);
         var halfAngle = radConeAngle * 0.5f;
         var radConeFeather = MathHelper.DegreesToRadians(cone.ConeFeather);
 
@@ -200,11 +193,13 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
                 continue;
             }
 
+            var memoryVisible = _cone.IsVisible((ent, cone), eyePos, _xform.GetWorldPosition(memory));
+
             var diff = now - comp.LastSeen;
             // FIXME: this looks awful for people because the sprite opacity is applied to each layer instead of being deferred somehow
             if (_humanoidQuery.HasComp(uid))
             {
-                _sprite.SetVisible((memory, memorySprite), diff < fadeTime);
+                _sprite.SetVisible((memory, memorySprite), (diff.TotalSeconds < fadeTime) && !memoryVisible);
                 continue;
             }
 
@@ -212,6 +207,8 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
             var memoryAlpha = diff < cone.FadeStart
                 ? 1f
                 : 1f - (float) Math.Min(1.0, (diff - cone.FadeStart).TotalSeconds / fadeTime);
+            if (memoryVisible)
+                memoryAlpha = 0f; // if you can see where a memory was and it's not there, the memory must be wrong
             // now actually fade the memory out
             SetAlpha((memory, memorySprite), memoryAlpha);
         }

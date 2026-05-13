@@ -8,6 +8,6 @@ namespace Content.Trauma.Shared.Viewcone;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ViewconeFootstepsEffectComponent : Component
 {
-    [DataField(required: true)]
-    public EntProtoId Effect;
+    [DataField]
+    public EntProtoId Effect = "ViewconeEffectFootstep";
 }
