@@ -30,7 +30,7 @@ public abstract class SharedDecalSystem : EntitySystem
     // Note that this constant is effectively baked into all map files, because of how they save the grid decal component.
     // So if this ever needs changing, the maps need converting.
     public const int ChunkSize = 32;
-    public static Vector2i GetChunkIndices(Vector2 coordinates) => new ((int) Math.Floor(coordinates.X / ChunkSize), (int) Math.Floor(coordinates.Y / ChunkSize));
+    public static Vector2i GetChunkIndices(Vector2 coordinates) => (coordinates / ChunkSize).Floored();
 
     public override void Initialize()
     {
@@ -40,7 +40,7 @@ public abstract class SharedDecalSystem : EntitySystem
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
         SubscribeLocalEvent<DecalGridComponent, ComponentStartup>(OnGridStartup);
         SubscribeLocalEvent<DecalComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<DecalComponent, EntityTerminatingEvent>(OnTerminating);
+        SubscribeLocalEvent<DecalComponent, MoveEvent>(OnMove);
     }
 
     private void OnGridInitialize(GridInitializeEvent msg)
@@ -58,18 +58,13 @@ public abstract class SharedDecalSystem : EntitySystem
             if (!_turf.IsSpace(change.NewTile))
                 continue;
 
-            var indices = GetChunkIndices(change.GridIndices);
-
-            if (!grid.ChunkCollection.ChunkCollection.TryGetValue(indices, out var chunk))
+            if (!grid.ChunkCollection.ChunkCollection.TryGetValue(change.ChunkIndex, out var chunk))
                 continue;
 
             foreach (var decal in chunk.Decals)
             {
-                if (new Vector2((int)Math.Floor(decal.Coordinates.X), (int)Math.Floor(decal.Coordinates.Y)) ==
-                    change.GridIndices)
-                {
+                if (GetChunkIndices(decal.Coordinates) == change.GridIndices)
                     PredictedQueueDel(decal.Ent.Owner);
-                }
             }
         }
     }
@@ -94,31 +89,35 @@ public abstract class SharedDecalSystem : EntitySystem
         // dont want clients to detach them for performance
         _meta.AddFlag(ent.Owner, MetaDataFlags.Undetachable);
 
-        var data = ent.Comp.Data;
-        data.Ent = ent;
-
-        var chunk = GetChunk(ent, create: true);
-        chunk?.Decals.Add(data);
+        ent.Comp.Data.Ent = ent;
     }
 
-    private void OnTerminating(Entity<DecalComponent> ent, ref EntityTerminatingEvent args)
+    private void OnMove(Entity<DecalComponent> ent, ref MoveEvent args)
     {
         if (ent.Comp.Data == default)
             return;
 
-        var chunk = GetChunk(ent);
-        chunk?.Decals.Remove(ent.Comp.Data);
+        var oldGrid = args.OldPosition.EntityId;
+        var indices = ent.Comp.Chunk;
+        if (oldGrid.IsValid())
+            GetGridChunk(oldGrid, indices)?.Decals.Remove(ent.Comp.Data);
+        if (args.Component.GridUid is { } newGrid)
+            GetGridChunk(newGrid, indices, true)?.Decals.Add(ent.Comp.Data);
+        else
+            PredictedQueueDel(ent); // can't have decals in space
     }
 
     protected DecalChunk? GetChunk(Entity<DecalComponent> decal, bool create = false)
+        => Transform(decal).GridUid is { } grid
+            ? GetGridChunk(grid, decal.Comp.Chunk, create)
+            : null;
+
+    protected DecalChunk? GetGridChunk(EntityUid gridUid, Vector2i indices, bool create = false)
     {
-        var xform = Transform(decal);
-        if (xform.GridUid is not { } gridUid ||
-            !GridQuery.TryComp(gridUid, out var grid))
+        if (!GridQuery.TryComp(gridUid, out var grid))
             return null;
 
         var chunks = grid.ChunkCollection.ChunkCollection;
-        var indices = decal.Comp.Chunk;
         if (chunks.TryGetValue(indices, out var chunk))
             return chunk;
 
