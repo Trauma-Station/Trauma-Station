@@ -2,7 +2,8 @@
   id: RandomGrudgeItem
   table: !type:GroupSelector
     children:
-    - id: Skub
+    - id: ClothingMaskGas
+    - id: Toolboxrobust
 
 - type: entityTable
   id: RandomGrudgeItemDwarf
@@ -10,6 +11,6 @@
     children:
     - id: Pickaxe
     - id: Flare
-    - id: ClothingMaskGas
     - id: OreBag
     - id: Throngler
+    - id: Claymore
