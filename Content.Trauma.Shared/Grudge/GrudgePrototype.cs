@@ -3,7 +3,7 @@
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 
-namespace Content.Trauma.Server.Grudges;
+namespace Content.Trauma.Shared.Grudges;
 
 /// <summary>
 /// Prototypes for choosing grudges

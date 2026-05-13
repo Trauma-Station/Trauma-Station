@@ -3,11 +3,14 @@
 using System.Linq;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 using Content.Trauma.Common.Grudge;
+using Content.Trauma.Shared.Grudges;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Grudges;
@@ -18,6 +21,7 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly JobSystem _job = default!;
+    [Dependency] private readonly ISharedAdminLogManager _log = default!;
 
     private List<EntityUid> _players = new();
     private TimeSpan _lastTime = TimeSpan.Zero;
@@ -69,28 +73,28 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
 
             var next = participants[(i + 1) % participants.Count];
 
-            if (AssignGrudge(current, next))
-                Log.Info($"Paired {Name(current)} and {Name(next)} for mutual grudges.");
+            if (AssignGrudge(current, next) is { } grudge)
+                _log.Add(LogType.AntagObjective, LogImpact.Medium, $"Paired {current} and {next} for mutual grudge {grudge.Id}.");
         }
 
         _players.Clear();
     }
 
-    public bool AssignGrudge(EntityUid playerA, EntityUid playerB)
+    public ProtoId<GrudgePrototype>? AssignGrudge(EntityUid playerA, EntityUid playerB)
     {
         if (!_mind.TryGetMind(playerA, out var mindA, out var mindCompA) || !_mind.TryGetMind(playerB, out var mindB, out var mindCompB))
-            return false;
+            return null;
 
         if (SelectGrudges(playerA, playerB) is not { } proto)
-            return false;
+            return null;
 
-        var (proto1, proto2) = proto;
+        var (proto1, proto2, grudge) = proto;
 
         _mind.TryAddObjective(mindA, mindCompA, proto1);
         _mind.TryAddObjective(mindB, mindCompB, proto2);
 
         if (!_mind.TryFindObjective(mindA, proto1, out var grudge1) || !_mind.TryFindObjective(mindB, proto2, out var grudge2))
-            return false;
+            return null;
 
         var addedEv = new GrudgeAddedEvent(playerA, playerB, grudge1.Value, grudge2.Value);
         RaiseLocalEvent(grudge1.Value, ref addedEv);
@@ -100,10 +104,10 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
         RaiseLocalEvent(grudge1.Value, ref raisedEv);
         RaiseLocalEvent(grudge2.Value, ref raisedEv);
 
-        return true;
+        return grudge;
     }
 
-    public (EntProtoId, EntProtoId)? SelectGrudges(EntityUid playerA, EntityUid playerB)
+    public (EntProtoId, EntProtoId, ProtoId<GrudgePrototype>)? SelectGrudges(EntityUid playerA, EntityUid playerB)
     {
         var allGrudges = _proto.EnumeratePrototypes<GrudgePrototype>().ToList();
         var randomGrudges = allGrudges.Shuffle();
@@ -137,7 +141,7 @@ public sealed partial class GrudgeObjectiveSystem : EntitySystem
             if (_mind.TryFindObjective(mindA, grudge.AccuserObjective, out _) || _mind.TryFindObjective(mindB, grudge.AccusedObjective, out _))
                 continue;
 
-            return (grudge.AccuserObjective, grudge.AccusedObjective);
+            return (grudge.AccuserObjective, grudge.AccusedObjective, grudge);
         }
 
         return null;

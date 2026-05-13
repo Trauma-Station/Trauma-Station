@@ -8,4 +8,8 @@
   id: RandomGrudgeItemDwarf
   table: !type:GroupSelector
     children:
-    - id: Skub
+    - id: Pickaxe
+    - id: Flare
+    - id: ClothingMaskGas
+    - id: OreBag
+    - id: Throngler

@@ -21,7 +21,7 @@
   accuserObjective: FavorAccuserEngineer
   accusedObjective: FavorAccusedEngineer
   allowedAccuserJob:
-  - Engineer
+  - StationEngineer
 
 - type: grudge
   id: FavorSecurity
