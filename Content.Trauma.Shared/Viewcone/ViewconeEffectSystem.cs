@@ -2,8 +2,10 @@
 
 using Content.Shared.Chat;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Movement;
 using Content.Trauma.Shared.Viewcone.Components;
+using Robust.Shared.Configuration;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
@@ -16,10 +18,13 @@ namespace Content.Trauma.Shared.Viewcone;
 /// </summary>
 public sealed class ViewconeEffectSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     public static readonly EntProtoId TalkEffect = "ViewconeEffectTalk";
+
+    private bool _disabled;
 
     public override void Initialize()
     {
@@ -29,6 +34,8 @@ public sealed class ViewconeEffectSystem : EntitySystem
         SubscribeLocalEvent<ViewconeMeleeEffectComponent, MeleeAttackEvent>(OnMeleeAttack);
         SubscribeLocalEvent<EntitySpokeEvent>(OnSpoke);
         // TODO: CFG boing
+
+        Subs.CVar(_cfg, TraumaCVars.DisableVisionEffects, x => _disabled = x, true);
     }
 
     private void OnFootStep(Entity<ViewconeFootstepsEffectComponent> ent, ref FootStepEvent args)
@@ -56,7 +63,7 @@ public sealed class ViewconeEffectSystem : EntitySystem
     /// <param name="angleOverride">The local rotation to set the effect to, instead of the parent rotation.</param>
     public void SpawnEffect(EntityUid source, [ForbidLiteral] EntProtoId effect, Angle? angleOverride = null)
     {
-        if (!_timing.IsFirstTimePredicted)
+        if (_disabled || !_timing.IsFirstTimePredicted)
             return;
 
         var ent = PredictedSpawnNextToOrDrop(effect, source);
