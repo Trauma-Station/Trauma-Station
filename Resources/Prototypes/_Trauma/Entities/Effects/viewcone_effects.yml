@@ -13,6 +13,7 @@
   - type: ViewconeOccludable
     inverted: true
     overrideBaseAlpha: true
+    useMemory: false # this is the memory
   - type: Sprite
     sprite: _Trauma/Effects/viewcone_effects.rsi
     drawdepth: Effects
@@ -23,6 +24,17 @@
     anchored: true
   - type: TimedDespawn
     lifetime: 3.0
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ViewconeMemory
+  name: memory
+  description: You remember this being here very recently.
+  components:
+  - type: Sprite
+    # copied when it's spawned
+    sprite: error.rsi
+    state: error
 
 - type: entity
   id: ViewconeEffectFootstep

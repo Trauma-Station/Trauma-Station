@@ -55,6 +55,7 @@ public sealed class ViewconeOverlaySystem : EntitySystem
 
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStoppedMessage>(OnPullStopped);
+        SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
 
         _coneOverlay = new();
         _setAlphaOverlay = new();
@@ -179,5 +180,11 @@ public sealed class ViewconeOverlaySystem : EntitySystem
             return;
 
         RemComp<ViewconeClientOverrideComponent>(ent);
+    }
+
+    private void OnOccludableShutdown(Entity<ViewconeOccludableComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.Memory is { } memory && !TerminatingOrDeleted(memory))
+            Del(memory);
     }
 }

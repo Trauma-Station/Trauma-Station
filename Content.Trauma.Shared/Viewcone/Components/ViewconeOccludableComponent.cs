@@ -39,6 +39,19 @@ public sealed partial class ViewconeOccludableComponent : Component, IComponentT
     [DataField, AutoNetworkedField]
     public EntityUid? Source;
 
+    /// <summary>
+    /// Clientside memory entity that gets spawned when this thing exits your vision cone, if <see cref="UseMemory"/> is true.
+    /// </summary>
+    [ViewVariables]
+    public EntityUid? Memory;
+
+    /// <summary>
+    /// Whether to spawn a memory entity or fade this entity out as it exits your vision cone.
+    /// Useful to disable for sound effect indicators.
+    /// </summary>
+    [DataField]
+    public bool UseMemory = true;
+
     // Clientside comptree stuff
     public EntityUid? TreeUid { get; set; }
     public DynamicTree<ComponentTreeEntry<ViewconeOccludableComponent>>? Tree { get; set; }

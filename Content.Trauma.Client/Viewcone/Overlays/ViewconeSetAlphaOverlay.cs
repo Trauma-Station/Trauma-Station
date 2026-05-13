@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Eye;
-using Content.Shared.MouseRotator;
+using Content.Shared.IdentityManagement;
 using Content.Trauma.Client.Viewcone.ComponentTree;
 using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
@@ -23,17 +24,21 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _ent = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    private readonly MetaDataSystem _meta;
+    private readonly SharedContainerSystem _container;
+    private readonly SpriteSystem _sprite;
+    private readonly TransformSystem _xform;
     private readonly ViewconeOverlaySystem _cone;
     private readonly ViewconeAngleSystem _angle;
     private readonly ViewconeOcclusionSystem _tree;
-    private readonly TransformSystem _xform;
-    private readonly SpriteSystem _sprite;
 
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
     private readonly EntityQuery<ViewconeClientOverrideComponent> _overrideQuery;
     private readonly EntityQuery<ViewconeOccludedComponent> _occludedQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
+
+    public static readonly EntProtoId MemoryEntity = "ViewconeMemory";
 
     // slightly sus but cached from beforedraw to use in draw.
     private Entity<EyeComponent, ViewconeComponent>? _nextEye;
@@ -42,11 +47,13 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _meta = _ent.System<MetaDataSystem>();
+        _container = _ent.System<SharedContainerSystem>();
+        _sprite = _ent.System<SpriteSystem>();
+        _xform  = _ent.System<TransformSystem>();
         _cone = _ent.System<ViewconeOverlaySystem>();
         _angle = _ent.System<ViewconeAngleSystem>();
         _tree = _ent.System<ViewconeOcclusionSystem>();
-        _xform  = _ent.System<TransformSystem>();
-        _sprite = _ent.System<SpriteSystem>();
 
         _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
         _overrideQuery = _ent.GetEntityQuery<ViewconeClientOverrideComponent>();
@@ -116,56 +123,86 @@ public sealed class ViewconeSetAlphaOverlay : Overlay
             if (!comp.OccludeIfAnchored && xform.Anchored)
                 continue;
 
+            if (_container.IsEntityInContainer(uid))
+                continue; // completely ignore anything in a container since it won't be visible anyway
+
             var (entPos, entRot) = _xform.GetWorldPositionRotation(xform);
 
             var dist = entPos - eyePos;
             var distLength = dist.Length();
             var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
 
-            // handle fading logic, things fade out over time when you dont look at them
-            // when they are out of view you can't see where they are right now
-            ViewconeOccludedComponent? occluded;
-            var targetAlpha = 1f;
-            if (angleDist > halfAngle)
+            // calculate opacity for the actual entity first
+            var baseAlpha = sprite.Color.A;
+            var angleAlpha = (float) Math.Clamp((angleDist - halfAngle) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
+            var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
+            var targetAlpha = 1f - Math.Min(angleAlpha, distAlpha);
+
+            // simplified logic for effects that dont spawn memories
+            if (!comp.UseMemory)
             {
-                // outside vision, lock old position from the "memory"
-                // won't work with animations and stuff, tough
-                if (!_ent.EnsureComponent(uid, out occluded))
+                // save the results so we can use it in resetalpha overlay
+                _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
+
+                // multiply by the base alpha of the sprite (sprites which were already invisible for other reasons should stay invisible)
+                var alpha = (comp.Inverted ? 1f - targetAlpha : targetAlpha) * (comp.OverrideBaseAlpha ? 1f : baseAlpha);
+                SetAlpha((uid, sprite), alpha);
+                continue;
+            }
+
+            if (!sprite.Visible && !_occludedQuery.HasComp(uid))
+                continue; // dont mess with invisible entities that we haven't occluded
+
+            // when things go out of view, they get a memory in their place
+            if (targetAlpha < 0.001f)
+            {
+                comp.Memory ??= _ent.SpawnEntity(MemoryEntity, xform.Coordinates);
+                var memory = comp.Memory.Value;
+                if (!_ent.EnsureComponent<ViewconeOccludedComponent>(uid, out var occluded))
                 {
-                    // occluded for the first frame, copy original sprite data
+                    // occluded for the first frame, copy original sprite data to memory entity
+                    _xform.SetCoordinates(memory, xform.Coordinates);
+                    _xform.SetLocalRotation(memory, xform.LocalRotation);
+                    _meta.SetEntityName(memory, Identity.Name(uid, _ent));
+                    _sprite.CopySprite((uid, sprite), memory);
+                    // and the time for fading
                     occluded.LastSeen = now;
-                    occluded.LastPosition = entPos + sprite.Offset;
-                    occluded.OriginalOffset = sprite.Offset;
-                    occluded.LastRotation = entRot + sprite.Rotation;
-                    occluded.OriginalRotation = sprite.Rotation;
+                    // don't show the real entity
+                    _sprite.SetVisible((uid, sprite), false);
                 }
 
-                // offset it so moving mobs etc stay where they were last seen
-                _sprite.SetOffset((uid, sprite), occluded.LastPosition - entPos);
-                _sprite.SetRotation((uid, sprite), occluded.LastRotation - entRot);
+                if (!_spriteQuery.TryComp(memory, out var memorySprite))
+                {
+                    // try again next frame? should never happen
+                    _ent.DeleteEntity(memory);
+                    comp.Memory = null;
+                    continue;
+                }
 
-                // the actual fading
                 var diff = now - occluded.LastSeen;
-                if (diff >= cone.FadeStart)
-                    targetAlpha -= (float) Math.Min(1.0, (diff - cone.FadeStart).TotalSeconds / fadeTime);
+                // TOS reference..?
+                var memoryAlpha = diff < cone.FadeStart
+                    ? 1f
+                    : 1f - (float) Math.Min(1.0, (diff - cone.FadeStart).TotalSeconds / fadeTime);
+                // now actually fade the memory out
+                SetAlpha((memory, memorySprite), memoryAlpha);
             }
-            else if (_occludedQuery.TryComp(uid, out occluded))
+            else if (_occludedQuery.TryComp(uid, out var occluded))
             {
-                // in vision now, revert to old values
-                _sprite.SetOffset((uid, sprite), occluded.OriginalOffset);
-                _sprite.SetRotation((uid, sprite), occluded.OriginalRotation);
+                // hide the memory if it goes back in view
+                if (comp.Memory is { } memory)
+                    _sprite.SetVisible(memory, false);
+                // and show the real entity again
+                _sprite.SetVisible((uid, sprite), true);
                 _ent.RemoveComponent(uid, occluded);
             }
-
-            var baseAlpha = sprite.Color.A;
-
-            // save the results so we can use it in resetalpha overlay
-            _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
-
-            // multiply by the base alpha of the sprite (sprites which were already invisible for other reasons should stay invisible)
-            var alpha = (comp.Inverted ? 1f - targetAlpha : targetAlpha) * (comp.OverrideBaseAlpha ? 1f : baseAlpha);
-            _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(alpha));
-            _sprite.SetVisible((uid, sprite), alpha > 0f);
         }
+    }
+
+    private void SetAlpha(Entity<SpriteComponent> ent, float alpha)
+    {
+        var e = ent.AsNullable();
+        _sprite.SetColor(e, ent.Comp.Color.WithAlpha(alpha));
+        _sprite.SetVisible(e, alpha > 0f);
     }
 }
