@@ -43,7 +43,9 @@ public sealed class ViewconeAngleSystem : EntitySystem
 
     private void OnEffectModifyAngle(Entity<ViewconeModifierComponent> ent, ref StatusEffectRelayedEvent<ModifyViewconeAngleEvent> args)
     {
-        args.Args.ModifyAngle(ent.Comp.AngleModifier);
+        var ev = args.Args;
+        ev.ModifyAngle(ent.Comp.AngleModifier);
+        args.Args = ev; // holy dogshit please never ever do this
     }
 
     private void OnOrganModifyAngle(Entity<ViewconeModifierComponent> ent, ref BodyRelayedEvent<ModifyViewconeAngleEvent> args)
