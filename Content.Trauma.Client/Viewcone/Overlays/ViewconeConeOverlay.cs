@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.Eye;
 using Content.Shared.MouseRotator;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.Graphics;
-using Robust.Client.Input;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 
@@ -16,8 +14,6 @@ namespace Content.Trauma.Client.Viewcone.Overlays;
 public sealed class ViewconeConeOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     private readonly SharedTransformSystem _xform;
 
