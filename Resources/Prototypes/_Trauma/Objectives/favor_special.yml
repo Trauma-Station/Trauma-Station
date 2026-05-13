@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseGrudgeObjective
+  parent: BaseFavorObjective
   id: FavorAccuserSecurity
   name: Looked the other way.
   components:
@@ -12,7 +12,7 @@
     description: favor-accuser-security
 
 - type: entity
-  parent: BaseGrudgeObjective
+  parent: BaseFavorObjective
   id: FavorAccusedSecurity
   name: You owe someone big time!
   components:
@@ -25,7 +25,7 @@
     description: favor-accused-security
 
 - type: entity
-  parent: BaseGrudgeObjective
+  parent: BaseFavorObjective
   id: FavorAccuserEngineer
   name: You've gotten a life-debt!
   components:
@@ -38,7 +38,7 @@
     description: favor-accuser-engineer
 
 - type: entity
-  parent: BaseGrudgeObjective
+  parent: BaseFavorObjective
   id: FavorAccusedEngineer
   name: You owe your life!
   components:

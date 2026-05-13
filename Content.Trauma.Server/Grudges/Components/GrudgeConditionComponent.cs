@@ -28,4 +28,10 @@ public sealed partial class GrudgeConditionComponent : Component
     /// </summary>
     [DataField]
     public string? Description;
+
+    /// <summary>
+    /// Is a favor instead of a grudge?
+    /// </summary>
+    [DataField]
+    public bool IsFavor;
 }
