@@ -78,7 +78,8 @@ public sealed class ViewconeConeOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (ScreenTexture == null || _eyeEntity == null)
+        // don't need to do anything if you have full vision
+        if (ScreenTexture == null || _eyeEntity == null || _coneAngle >= 360f)
             return;
 
         var worldHandle = args.WorldHandle;

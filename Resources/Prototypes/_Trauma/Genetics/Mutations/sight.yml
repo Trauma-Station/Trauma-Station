@@ -115,4 +115,4 @@
     - MutationBlindness
     - MutationEnhancedPerception
   - type: ViewconeModifier
-    angleModifier: 0.3 # gotta thug it out
+    angleModifier: 0.5 # gotta thug it out

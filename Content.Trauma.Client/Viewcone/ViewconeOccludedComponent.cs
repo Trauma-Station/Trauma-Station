@@ -3,14 +3,7 @@
 namespace Content.Trauma.Client.Viewcone;
 
 /// <summary>
-/// Component added to entities that are currently out of your vision cone.
-/// Used to fade out the memory entity.
+/// Marker component added to entities that are currently out of your vision cone.
 /// </summary>
 [RegisterComponent]
-public sealed partial class ViewconeOccludedComponent : Component
-{
-    /// <summary>
-    /// When this entity was last in the client's vision cone, used for fading away.
-    /// </summary>
-    public TimeSpan LastSeen;
-}
+public sealed partial class ViewconeOccludedComponent : Component;

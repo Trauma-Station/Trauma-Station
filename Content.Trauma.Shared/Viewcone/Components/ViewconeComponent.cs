@@ -42,7 +42,7 @@ public sealed partial class ViewconeComponent : Component
     /// Instead, use <see cref="ViewconeAngleSystem.GetAngle"/>
     /// </remarks>
     [DataField]
-    public float BaseConeAngle = 225f;
+    public float BaseConeAngle = 190f; // typical human peripheral vision
 
     [DataField]
     public float ConeFeather = 24f;
@@ -57,7 +57,7 @@ public sealed partial class ViewconeComponent : Component
     /// How long it takes for something out of your vision cone to completely fade out, after <see cref="FadeStart"/>.
     /// </summary>
     [DataField]
-    public TimeSpan FadeTime = TimeSpan.FromSeconds(8);
+    public TimeSpan FadeTime = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Don't start fading until this time has passed.
