@@ -4,21 +4,21 @@
   id: BaseClothingViewconeSmall
   components:
   - type: ViewconeModifier
-    angleModifier: 0.85
+    angleModifier: 0.75
 
 - type: entity
   abstract: true
   id: BaseClothingViewconeMedium
   components:
   - type: ViewconeModifier
-    angleModifier: 0.75
+    angleModifier: 0.6
 
 - type: entity
   abstract: true
   id: BaseClothingViewconeLarge
   components:
   - type: ViewconeModifier
-    angleModifier: 0.6
+    angleModifier: 0.25
 
 - type: entity
   abstract: true
