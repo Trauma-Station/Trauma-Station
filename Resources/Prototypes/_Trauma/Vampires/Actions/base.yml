@@ -42,7 +42,7 @@
   parent: BaseRejuvAction
   id: ActionVampRejuvenateI
   name: Rejuvenate I
-  description: Heals you
+  description: Removes any and all stuns. Removes 100 stamina damage.
   components:
   - type: EffectAction
     effects:
@@ -53,6 +53,7 @@
   parent: BaseRejuvAction
   id: ActionVampRejuvenateII
   name: Rejuvenate II
+  description: Removes any and all stuns. Purges 10u of any harmful reagent. Heals 10 points each of brute, burn, toxin, and heals 50 points of oxyloss.
   components:
   - type: EffectAction
     effects:

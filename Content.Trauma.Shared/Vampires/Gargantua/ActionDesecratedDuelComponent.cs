@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.EntityEffects;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Vampires.Gargantua;
@@ -25,10 +26,16 @@ public sealed partial class ActionDesecratedDuelComponent : Component
     public TimeSpan FighterCheck = TimeSpan.FromSeconds(5f);
 
     /// <summary>
-    /// The entity iniating the duel.
+    /// The entity initiating the duel.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid Duelist;
+
+    /// <summary>
+    /// Effects that will run once the duel ends.
+    /// </summary>
+    [DataField]
+    public EntityEffect[] EndEffects = default!;
 }
 
 /// <summary>

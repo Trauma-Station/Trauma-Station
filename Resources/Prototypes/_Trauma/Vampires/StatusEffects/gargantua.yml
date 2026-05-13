@@ -1,7 +1,7 @@
 # Blood Swell
 - type: entity
   parent: StaminaModifierStatusEffect
-  id: BloodSwellStatusEffect
+  id: BloodSwellStatusEffect # TODO: Implement halving all stun times...?
   name: blood swell
   components:
   - type: StatusEffectAlert

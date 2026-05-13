@@ -43,14 +43,14 @@
     type: CircleFill
     radius: 0.5
 
-# Glare
+# Creates a circle of gray -> red color around the user, and then it floats upwards.
 - type: particleEffect
   id: VampireGlare
   sprite:
     sprite: _Starfall/Particles/generic.rsi
     state: cross
-  startColor: "#D3D3D3FF" # Piercing crimson red #71706E
-  endColor: "#FF0000FF"   # Fades out to a dark, transparent blood red
+  startColor: "#D3D3D3FF"
+  endColor: "#FF0000FF"
   alphaOverLifetime:
   - time: 0.0
     value: 0.8

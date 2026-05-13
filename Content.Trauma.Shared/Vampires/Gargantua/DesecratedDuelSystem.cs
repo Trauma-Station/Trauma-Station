@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.StatusEffectNew;
-using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.Arena;
 using Robust.Shared.Timing;
@@ -15,9 +14,7 @@ public sealed class DesecratedDuelSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ArenaCreationSystem _arena = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-
-    private static readonly EntProtoId<StatusEffectComponent> StatusEffectGladiator = "StatusEffectGladiator";
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -38,16 +35,18 @@ public sealed class DesecratedDuelSystem : EntitySystem
             // This time check ensures the arena gets deleted after a certain amount of time.
             if (active.DuelCheck < now)
             {
-               ExitArena(uid, duel.Duelist);
-               RemCompDeferred(uid, active);
-               continue;
+                ExitArena((uid, duel));
+                RemCompDeferred(uid, active);
+                continue;
             }
 
             // This time check ensures the arena gets deleted if either of the fighters has died.
             if (active.NextFighterCheck < now)
             {
-                CheckDuelist(uid, duel.Duelist);
-                RemCompDeferred(uid, active);
+                CheckDuelist((uid, duel), duel.Duelist);
+
+                active.NextFighterCheck += duel.DuelDuration;
+                Dirty(uid, active);
             }
         }
     }
@@ -71,6 +70,8 @@ public sealed class DesecratedDuelSystem : EntitySystem
         comp.DuelCheck = now + ent.Comp.DuelDuration;
         comp.NextFighterCheck = now + ent.Comp.FighterCheck;
         AddComp(ent.Owner, comp, true);
+
+        args.Handled = true;
     }
 
     #region Helpers
@@ -78,24 +79,25 @@ public sealed class DesecratedDuelSystem : EntitySystem
     /// <summary>
     /// Clears the arena and anything related to it.
     /// </summary>
-    private void ExitArena(EntityUid uid, EntityUid duelist)
+    private void ExitArena(Entity<ActionDesecratedDuelComponent> action)
     {
-        _arena.DestroyArena(uid);
+        // Remove status effects, play sound etc
+        _effects.ApplyEffects(action.Comp.Duelist, action.Comp.EndEffects);
 
-        // Clear the status effect
-        _status.TryRemoveStatusEffect(duelist, StatusEffectGladiator);
+        _arena.DestroyArena(action.Owner);
     }
 
     /// <summary>
     /// Check on the duelist to see if they are alive or deleted.
     /// Exits the arena if duelist is dead or deleted.
     /// </summary>
-    private void CheckDuelist(EntityUid action, EntityUid target)
+    private void CheckDuelist(Entity<ActionDesecratedDuelComponent> action, EntityUid target)
     {
-        if (!TerminatingOrDeleted(target) || !_mob.IsDead(target))
+        if (!TerminatingOrDeleted(target) && !_mob.IsDead(target))
             return;
 
-        ExitArena(action, target);
+        ExitArena(action);
+        RemCompDeferred(action.Owner, action.Comp);
     }
     #endregion
 }

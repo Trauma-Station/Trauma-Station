@@ -3,7 +3,7 @@
   parent: BaseRejuvAction
   id: ActionVampGargRejuv
   name: Rejuvenate
-  description: Heals you
+  description: Removes any and all stuns. Purges 10u of any harmful reagent. Rejuvenates more health the more damage you've taken, to a maximum of 50 health at 100 damage.
   components:
   - type: EffectAction
     effects:
@@ -15,9 +15,14 @@
   parent: BaseVampireAction
   id: ActionBloodSwell
   name: Blood Swell
-  description: For 30 seconds, reduces incoming brute by 60%, stamina and burn damage by 50%, and halves all stun times. Guns are unusable for the duration.
+  description: For 30 seconds, reduces incoming brute by 60%, stamina and burn damage by 50%. Guns are unusable for the duration.
   components:
   - type: Action
+    useDelay: 40
+    sound:
+      path: /Audio/Voice/Slime/slime_squish.ogg
+      params:
+        volume: 2
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: blood_swell
@@ -28,6 +33,8 @@
     - !type:ModifyStatusEffect
       effectProto: BloodSwellStatusEffect
       time: 30
+  - type: VampireCostAction
+    bloodCost: 30
 
 - type: entity
   parent: ActionBloodSwell
@@ -46,10 +53,15 @@
   parent: BaseVampireAction
   id: ActionBloodRush
   name: Blood Rush
-  description: For 10 seconds, doubles movement speed. Instantly stands you up, removes any legcuffs and clears knockdowns.
+  description: For 10 seconds, doubles movement speed. Instantly stands you up, removes any cuffs and clears knockdowns.
   components:
   - type: Action
+    useDelay: 30
     checkCanInteract: false
+    sound:
+      path: /Audio/_Lavaland/heartbeat.ogg
+      params:
+        pitch: 2
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: blood_rush
@@ -67,6 +79,8 @@
       components:
       - type: KnockedDown # ModifyKnockdown bugs out
     - !type:Uncuff
+  - type: VampireCostAction
+    bloodCost: 30
 
 # Gargantuan Stomp
 - type: entity
@@ -76,7 +90,11 @@
   description: You stomp the ground, sending out a shockwave that knocks people back.
   components:
   - type: Action
-    checkCanInteract: false
+    useDelay: 60
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_stomp.ogg
+      params:
+        volume: 5
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: seismic_stomp
@@ -89,15 +107,26 @@
       range: 5
       effect: !type:NestedEffect
         proto: GargantuaStomp
+    - !type:SpawnParticles
+      particleProto: VampireStompShockwave
+    - !type:SpawnParticles
+      particleProto: VampireStomp
+  - type: VampireCostAction
+    bloodCost: 30
 
 # Overwhelming Force
 - type: entity
   parent: BaseVampireAction
   id: ActionOverwhelmingForce
   name: Overwhelming Force
-  description: When activated, automatically and instantly pry open doors you don't have access to. This will not work on bolted or welded doors. Also prevents you from being pushed or pulled.
+  description: When activated, automatically and instantly pry open doors you don't have access to. Also prevents you from being pushed or pulled.
   components:
   - type: Action
+    sound:
+      path: /Audio/Items/jaws_pry.ogg
+      params:
+        volume: 2
+        pitch: 2
     useDelay: 2
     icon:
       sprite: _Trauma/Vampires/actions.rsi
@@ -112,7 +141,6 @@
         pryPowered: true
         speedModifier: 100
       - type: VampirePrying
-      # bloodToRemove: 5
     - !type:ModifyStatusEffect
       effectProto: StatusEffectOverwhelmingForce
       time: null
@@ -124,7 +152,7 @@
       - type: VampirePrying
     - !type:ModifyStatusEffect
       effectProto: StatusEffectOverwhelmingForce
-      time: null # TODO: I forgor to test this. Next time
+      time: null
       type: Remove
 
 # Demonic Hand
@@ -135,7 +163,11 @@
   description: Send out a Demonic Hand that grabs and pulls/pushes a target depending on your intent. Harm mode pulls, otherwise it pushes.
   components:
   - type: Action
-    # useDelay: 2
+    useDelay: 30
+    sound:
+      path: /Audio/_Goobstation/Wizard/ghost2.ogg
+      params:
+        pitch: 0.05
     raiseOnAction: false
     raiseOnUser: true
     icon:
@@ -147,6 +179,9 @@
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: ProjectileDemonicHand
+      speed: 9
+  - type: VampireCostAction
+    bloodCost: 20
 
 # Charge
 - type: entity
@@ -156,7 +191,9 @@
   description: Click to charge. Stuns, damages, and knocks back mobs on impact. Completely destroys walls. Also deals 200 damage to mechs and knocks them back.
   components:
   - type: Action
-    # useDelay: 2
+    useDelay: 30
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_charge.ogg
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: vampire_charge
@@ -199,6 +236,10 @@
         # Generic Logic
         - !type:ThrowRandomly
     - !type:ThrowAtFacingDirection
+    - !type:SpawnParticles
+      particleProto: VampireCharge
+  - type: VampireCostAction
+    bloodCost: 30
 
 - type: entity
   parent: BaseVampireAction
@@ -207,7 +248,8 @@
   description: Duel.
   components:
   - type: Action
-    # useDelay: 2
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_duel.ogg
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: duel
@@ -216,13 +258,22 @@
   - type: EntityTargetAction
     event: !type:ArenaTargetActionEvent
   - type: ActionDesecratedDuel # Throws us at the target and clears the arena based on conditions.
+    duelDuration: 30
+    endEffects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectVampireGladiator
+      time: null
+      type: Remove
+    - !type:PlaySoundEffect
+      sound: /Audio/_Trauma/Vampires/Actions/vampire_duel_end.ogg
   - type: ActionArena # Makes the arena. Can be re-used for other actions
     delay: 0.5 # So we have time to get thrown there
-    wallProto: WallHierophantArena # TODO: Change it to the vamp walls from paradise
+    wallProto: WallGargantuanTemporary
   - type: EffectAction
     onPerformed: true
     effects:
     - !type:ModifyStatusEffect
       effectProto: StatusEffectVampireGladiator
       time: null # Will be removed manually by code when the arena stops existing
-      type: Add
+  - type: VampireCostAction
+    bloodCost: 150
