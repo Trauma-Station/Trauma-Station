@@ -123,7 +123,7 @@
     node: printing press
 
 - type: entity
-  parent: [BaseMachine, BaseLatheLube]
+  parent: BaseLatheLube
   id: CrewPrintingPress
   suffix: crew
   name: printing press
