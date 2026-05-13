@@ -365,7 +365,7 @@
   id: OrganVoxEyes
   # <Trauma>
   components:
-  - type: VisionModifier
+  - type: ViewconeModifier
     angleModifier: 1.1 # prey vision for tasty chicken...
   # </Trauma>
 
