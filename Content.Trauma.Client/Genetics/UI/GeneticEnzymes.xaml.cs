@@ -13,7 +13,7 @@ namespace Content.Trauma.Client.Genetics.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GeneticEnzymes : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public event Action? OnSave;
     public event Action? OnApply;

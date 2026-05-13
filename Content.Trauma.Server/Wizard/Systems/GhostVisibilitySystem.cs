@@ -17,14 +17,14 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class GhostVisibilitySystem : SharedGhostVisibilitySystem
+public sealed partial class GhostVisibilitySystem : SharedGhostVisibilitySystem
 {
-    [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private readonly IAdminLogManager _log = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private VisibilitySystem _visibilitySystem = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private IAdminLogManager _log = default!;
+    [Dependency] private IChatManager _chatManager = default!;
 
     public override void Initialize()
     {

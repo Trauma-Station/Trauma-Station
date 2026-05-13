@@ -32,26 +32,26 @@ using Robust.Shared.Utility;
 namespace Content.Trauma.Server.Heretic.Systems;
 
 // TODO: most of this shit can be moved to shared
-public sealed class CarvingKnifeSystem : EntitySystem
+public sealed partial class CarvingKnifeSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private GravitySystem _gravity = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private HereticSystem _heretic = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private IChatManager _chatManager = default!;
 
     private static readonly EntProtoId AlertEffect = "CarvingAlertedStatusEffect";
     private HashSet<Entity<HereticCarvingComponent>> _carvings = new();

@@ -14,20 +14,20 @@ using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Flesh;
 
-public sealed class FleshGraspSystem : EntitySystem
+public sealed partial class FleshGraspSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedHereticRitualSystem _ritual = default!;
-    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedHereticRitualSystem _ritual = default!;
+    [Dependency] private TouchSpellSystem _touchSpell = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
-    [Dependency] private readonly EntityQuery<DamageOverTimeComponent> _mimicQuery = default!;
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<DamageOverTimeComponent> _mimicQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     private static readonly EntProtoId MansusGraspAction = "ActionHereticMansusGrasp";
 

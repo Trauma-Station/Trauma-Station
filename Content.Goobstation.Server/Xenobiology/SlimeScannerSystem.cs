@@ -13,8 +13,8 @@ using System.Text;
 namespace Content.Goobstation.Server.Xenobiology;
 public sealed partial class SlimeScannerSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prot = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
+    [Dependency] private IPrototypeManager _prot = default!;
 
     public override void Initialize()
     {

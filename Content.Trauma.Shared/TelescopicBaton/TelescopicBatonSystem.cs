@@ -9,11 +9,11 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Shared.TelescopicBaton;
 
 // This is so heavily edited by Goobstation that I won't even bother commenting. It's not like we upstream from EE anyway.
-public sealed class TelescopicBatonSystem : EntitySystem
+public sealed partial class TelescopicBatonSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public override void Initialize()
     {

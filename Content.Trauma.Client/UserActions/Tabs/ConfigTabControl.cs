@@ -21,7 +21,7 @@ namespace Content.Trauma.Client.UserActions.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class ConfigTabControl : BaseTabControl
 {
-    [Dependency] private readonly IClientConsoleHost _console = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
 
     public ConfigTabControl()
     {

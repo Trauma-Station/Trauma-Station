@@ -24,15 +24,15 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
-public sealed class LastRefugeSystem : EntitySystem
+public sealed partial class LastRefugeSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _lookupHumanoid = new();
 

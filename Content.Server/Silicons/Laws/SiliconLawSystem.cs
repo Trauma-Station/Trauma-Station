@@ -37,21 +37,21 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server.Silicons.Laws;
 
-public sealed class SiliconLawSystem : SharedSiliconLawSystem
+public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IonLawSystem _ionLaw = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IonLawSystem _ionLaw = default!;
+    [Dependency] private ResearchSystem _research = default!;
+    [Dependency] private RadioSystem _radio = default!;
     // </Trauma>
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
 

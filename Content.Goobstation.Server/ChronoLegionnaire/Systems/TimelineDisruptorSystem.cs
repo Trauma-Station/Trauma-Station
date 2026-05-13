@@ -13,13 +13,13 @@ using Robust.Shared.Timing;
 namespace Content.Goobstation.Server.ChronoLegionnaire.Systems;
 
 // TODO move to shared all of this can be predicted?
-public sealed class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
+public sealed partial class TimelineDisruptorSystem : SharedTimelineDisruptorSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

@@ -13,17 +13,17 @@ using ChunkIndicesEnumerator = Robust.Shared.Map.Enumerators.ChunkIndicesEnumera
 namespace Content.Shared.Decals;
 
 // Trauma - completely rewrote decals to be entity based
-public abstract class SharedDecalSystem : EntitySystem
+public abstract partial class SharedDecalSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly IMapManager MapManager = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] protected readonly SharedMapSystem Map = default!;
-    [Dependency] protected readonly SharedTransformSystem Xform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly EntityQuery<DecalComponent> _query = default!;
-    [Dependency] protected readonly EntityQuery<DecalGridComponent> GridQuery = default!;
-    [Dependency] protected readonly EntityQuery<MapGridComponent> MapGridQuery = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IMapManager MapManager = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] protected SharedMapSystem Map = default!;
+    [Dependency] protected SharedTransformSystem Xform = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityQuery<DecalComponent> _query = default!;
+    [Dependency] protected EntityQuery<DecalGridComponent> GridQuery = default!;
+    [Dependency] protected EntityQuery<MapGridComponent> MapGridQuery = default!;
 
     public static readonly EntProtoId DecalEntity = "Decal";
 

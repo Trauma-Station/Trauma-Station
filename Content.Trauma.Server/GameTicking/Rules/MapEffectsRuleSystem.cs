@@ -9,10 +9,10 @@ using Content.Trauma.Server.GameTicking.Rules.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class MapEffectsRuleSystem : GameRuleSystem<MapEffectsRuleComponent>
+public sealed partial class MapEffectsRuleSystem : GameRuleSystem<MapEffectsRuleComponent>
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     protected override void Started(EntityUid uid, MapEffectsRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

@@ -11,7 +11,7 @@ namespace Content.Client.VoiceMask;
 
 public sealed partial class VoiceMaskNameChangeWindow
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     public Action<ProtoId<JobIconPrototype>>? OnJobIconChanged;
 

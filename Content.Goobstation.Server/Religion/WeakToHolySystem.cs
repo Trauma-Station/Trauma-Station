@@ -13,10 +13,10 @@ using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Shared.Religion;
 
-public sealed class WeakToHolySystem : SharedWeakToHolySystem
+public sealed partial class WeakToHolySystem : SharedWeakToHolySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<ShouldTakeHolyComponent>> _toUpdate = new();
 

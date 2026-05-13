@@ -16,11 +16,11 @@ namespace Content.Trauma.Shared.Viewcone;
 /// Provides API for spawning viewcone effects and making sure source
 /// gets set correctly + it spawns in the correct pos and shit
 /// </summary>
-public sealed class ViewconeEffectSystem : EntitySystem
+public sealed partial class ViewconeEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     public static readonly EntProtoId TalkEffect = "ViewconeEffectTalk";
 

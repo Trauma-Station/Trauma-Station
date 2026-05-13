@@ -15,9 +15,9 @@ using Content.Shared.Wieldable;
 
 namespace Content.Lavaland.Server.Pressure;
 
-public sealed class PressureEfficiencyChangeSystem : SharedPressureEfficiencyChangeSystem
+public sealed partial class PressureEfficiencyChangeSystem : SharedPressureEfficiencyChangeSystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
 
     private EntityQuery<PressureDamageChangeComponent> _query;
     private EntityQuery<ProjectileComponent> _projectileQuery;

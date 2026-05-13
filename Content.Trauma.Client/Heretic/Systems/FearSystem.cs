@@ -14,12 +14,12 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class FearSystem : SharedFearSystem
+public sealed partial class FearSystem : SharedFearSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     private FearOverlay _overlay = default!;
 

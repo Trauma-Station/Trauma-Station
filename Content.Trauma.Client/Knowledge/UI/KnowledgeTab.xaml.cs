@@ -12,7 +12,7 @@ namespace Content.Trauma.Client.Knowledge.UI;
 [GenerateTypedNameReferences]
 public sealed partial class KnowledgeTab : Control
 {
-    [Dependency] private readonly IEntitySystemManager _system = default!;
+    [Dependency] private IEntitySystemManager _system = default!;
     private readonly KnowledgeSystem _knowledge;
     private readonly SpriteSystem _sprite;
 

@@ -13,8 +13,8 @@ namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 [GenerateTypedNameReferences]
 public sealed partial class InfluenceButtonContainer : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private readonly SpriteSystem _sprite;
 

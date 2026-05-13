@@ -14,10 +14,10 @@ using Content.Shared.Weapons.Melee;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobFactorySystem : EntitySystem
+public sealed partial class BlobFactorySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

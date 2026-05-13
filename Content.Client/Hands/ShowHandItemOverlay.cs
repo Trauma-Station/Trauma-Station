@@ -21,15 +21,15 @@ using Direction = Robust.Shared.Maths.Direction;
 
 namespace Content.Client.Hands
 {
-    public sealed class ShowHandItemOverlay : Overlay
+    public sealed partial class ShowHandItemOverlay : Overlay
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IInputManager _inputManager = default!;
-        [Dependency] private readonly IClyde _clyde = default!;
-        [Dependency] private readonly IEntityManager _entMan = default!;
-        [Dependency] private readonly IPlayerManager _player = default!; // Goobstation
-        [Dependency] private readonly IPrototypeManager _protoMan = default!; // Goobstation
-        [Dependency] private readonly IResourceCache _resourceCache = default!; // Goobstation
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IInputManager _inputManager = default!;
+        [Dependency] private IClyde _clyde = default!;
+        [Dependency] private IEntityManager _entMan = default!;
+        [Dependency] private IPlayerManager _player = default!; // Goobstation
+        [Dependency] private IPrototypeManager _protoMan = default!; // Goobstation
+        [Dependency] private IResourceCache _resourceCache = default!; // Goobstation
 
         private readonly SpriteSystem _sprite; // Goobstation
 

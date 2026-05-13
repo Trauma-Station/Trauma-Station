@@ -8,10 +8,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Administration;
 
-public sealed class AdminInfoSystem : EntitySystem
+public sealed partial class AdminInfoSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _u = default!;
-    [Dependency] private readonly IResourceManager _k = default!;
+    [Dependency] private IPlayerManager _u = default!;
+    [Dependency] private IResourceManager _k = default!;
 
     public override void Initialize()
     {

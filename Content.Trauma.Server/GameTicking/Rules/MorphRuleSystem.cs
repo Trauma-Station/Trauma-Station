@@ -13,9 +13,9 @@ namespace Content.Trauma.Server.GameTicking.Rules;
 /// <summary>
 /// Adds morph to the round end summary.
 /// </summary>
-public sealed class MorphRuleSystem : GameRuleSystem<MorphRuleComponent>
+public sealed partial class MorphRuleSystem : GameRuleSystem<MorphRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     public override void Initialize()
     {

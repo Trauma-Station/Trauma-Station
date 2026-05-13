@@ -8,7 +8,7 @@ using Robust.Shared.GameObjects;
 namespace Content.Goobstation.Server.StationReport;
 
 // TODO: make this a component on the station entity bruh
-public sealed class NtrStationReportSystem : EntitySystem
+public sealed partial class NtrStationReportSystem : EntitySystem
 {
 
     //this is shitcode? yes it is

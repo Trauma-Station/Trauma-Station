@@ -11,10 +11,10 @@ using Content.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod.Systems;
 
-public abstract class SharedWeakToHolySystem : EntitySystem
+public abstract partial class SharedWeakToHolySystem : EntitySystem
 {
-    [Dependency] private readonly GoobBibleSystem _goobBible = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private GoobBibleSystem _goobBible = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {

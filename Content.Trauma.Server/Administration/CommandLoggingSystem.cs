@@ -10,11 +10,11 @@ namespace Content.Trauma.Server.Administration;
 /// <summary>
 /// Logs admin commands used to the AdminCommands admin log category.
 /// </summary>
-public sealed class CommandLoggingSystem : EntitySystem
+public sealed partial class CommandLoggingSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IConsoleHost _console = default!;
 
     public static readonly Dictionary<string, LogImpact> CommandImpacts = new()
     {
@@ -27,6 +27,7 @@ public sealed class CommandLoggingSystem : EntitySystem
         // High
         {"ban", LogImpact.High},
         {"pardon", LogImpact.High},
+        {"playglobalsound", LogImpact.High}, // chudmin
         {"readmin", LogImpact.High}, // heres to you yonsim
         // Medium
         {"aghost", LogImpact.Medium},

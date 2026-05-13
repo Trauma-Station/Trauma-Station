@@ -17,18 +17,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Teleportation;
 
-public sealed class ExperimentalTeleporterSystem : EntitySystem
+public sealed partial class ExperimentalTeleporterSystem : EntitySystem
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly TelefragSystem _telefrag = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private TelefragSystem _telefrag = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     public static readonly ProtoId<TagPrototype> WallTag = "Wall";
 

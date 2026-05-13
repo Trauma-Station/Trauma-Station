@@ -6,9 +6,9 @@ using Content.Shared.Wieldable.Components;
 
 namespace Content.Trauma.Shared.Weapons.Wielding;
 
-public sealed class UnwieldOnShootSystem : EntitySystem
+public sealed partial class UnwieldOnShootSystem : EntitySystem
 {
-    [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
+    [Dependency] private SharedWieldableSystem _wieldable = default!;
 
     public override void Initialize()
     {

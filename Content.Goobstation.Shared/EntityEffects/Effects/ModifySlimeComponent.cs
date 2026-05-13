@@ -42,7 +42,7 @@ public sealed partial class ModifySlimeComponent : EntityEffectBase<ModifySlimeC
         => null; // TODO: add something here
 }
 
-public sealed class ModifySlimeComponentEffectSystem : EntityEffectSystem<SlimeComponent, ModifySlimeComponent>
+public sealed partial class ModifySlimeComponentEffectSystem : EntityEffectSystem<SlimeComponent, ModifySlimeComponent>
 {
     protected override void Effect(Entity<SlimeComponent> ent, ref EntityEffectEvent<ModifySlimeComponent> args)
     {

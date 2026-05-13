@@ -9,9 +9,9 @@ namespace Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 
 public sealed class StasisOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override bool RequestScreenTexture => true;
 

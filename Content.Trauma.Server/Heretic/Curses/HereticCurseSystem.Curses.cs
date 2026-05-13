@@ -10,7 +10,7 @@ namespace Content.Trauma.Server.Heretic.Curses;
 
 public sealed partial class HereticCurseSystem
 {
-    [Dependency] private readonly EntityQuery<FlammableComponent> _flammableQuery = default!;
+    [Dependency] private EntityQuery<FlammableComponent> _flammableQuery = default!;
 
     public override void Update(float frameTime)
     {

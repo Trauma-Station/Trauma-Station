@@ -9,7 +9,7 @@ namespace Content.Trauma.Server.Radar;
 
 public sealed partial class RadarBlipSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
     public override void Initialize()
     {
         base.Initialize();

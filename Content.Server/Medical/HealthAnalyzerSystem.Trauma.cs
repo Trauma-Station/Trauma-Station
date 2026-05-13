@@ -22,10 +22,10 @@ namespace Content.Server.Medical;
 /// </summary>
 public sealed partial class HealthAnalyzerSystem
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private EntityQuery<BodyComponent> _bodyQuery;
     private EntityQuery<DamageableComponent> _damageQuery;

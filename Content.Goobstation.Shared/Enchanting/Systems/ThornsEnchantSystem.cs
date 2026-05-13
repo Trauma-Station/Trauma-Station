@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Controls <see cref="DamageOnAttackedComponent"/> damage for <see cref="ThornsEnchantComponent"/>.
 /// </summary>
-public sealed class ThornsEnchantSystem : EntitySystem
+public sealed partial class ThornsEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {
