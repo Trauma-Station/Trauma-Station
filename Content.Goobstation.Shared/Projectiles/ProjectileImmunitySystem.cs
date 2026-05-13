@@ -8,9 +8,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Projectiles;
 
-public sealed class ProjectileImmunitySystem : EntitySystem
+public sealed partial class ProjectileImmunitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

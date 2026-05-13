@@ -10,13 +10,13 @@ using Content.Shared.Revenant.Components;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
-public sealed class MakeRevenentSystem : EntitySystem
+public sealed partial class MakeRevenentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly WraithPossessedSystem _wraithPossessed = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private WraithPossessedSystem _wraithPossessed = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         base.Initialize();

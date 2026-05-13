@@ -21,15 +21,15 @@ using Content.Goobstation.Shared.Chemistry;
 namespace Content.Server.Chemistry.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class VaporSystem : EntitySystem // Goobstation: Made this public instead of internal. Cry about it.
+    public sealed partial class VaporSystem : EntitySystem // Goobstation: Made this public instead of internal. Cry about it.
     {
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
-        [Dependency] private readonly SharedMapSystem _map = default!;
-        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private readonly ThrowingSystem _throwing = default!;
-        [Dependency] private readonly ReactiveSystem _reactive = default!;
-        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
+        [Dependency] private SharedMapSystem _map = default!;
+        [Dependency] private SharedPhysicsSystem _physics = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private ThrowingSystem _throwing = default!;
+        [Dependency] private ReactiveSystem _reactive = default!;
+        [Dependency] private SharedTransformSystem _transformSystem = default!;
 
         public override void Initialize()
         {

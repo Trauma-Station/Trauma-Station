@@ -3,9 +3,9 @@
 
 namespace Content.Trauma.Common.CollectiveMind;
 
-public sealed class CollectiveMindUpdateSystem : EntitySystem
+public sealed partial class CollectiveMindUpdateSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static Dictionary<string, int> _currentId = new();
 

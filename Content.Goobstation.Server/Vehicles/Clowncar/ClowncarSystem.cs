@@ -17,14 +17,14 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Server.Vehicles.Clowncar;
 
-public sealed class ClowncarSystem : SharedClowncarSystem
+public sealed partial class ClowncarSystem : SharedClowncarSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     /// <inheritdoc/>
 

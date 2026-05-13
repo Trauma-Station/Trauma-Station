@@ -9,14 +9,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Multhit;
 
-public sealed class ActiveMultihitSystem : SharedActiveMultihitSystem
+public sealed partial class ActiveMultihitSystem : SharedActiveMultihitSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void FrameUpdate(float frameTime)
     {

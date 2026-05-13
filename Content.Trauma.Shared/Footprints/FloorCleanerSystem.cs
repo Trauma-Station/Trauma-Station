@@ -9,12 +9,12 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Footprints;
 
-public sealed class FloorCleanerSystem : EntitySystem
+public sealed partial class FloorCleanerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDecalSystem _decal = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDecalSystem _decal = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public override void Initialize()
     {

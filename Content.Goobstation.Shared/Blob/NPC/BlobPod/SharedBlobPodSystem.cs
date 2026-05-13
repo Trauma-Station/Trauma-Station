@@ -12,9 +12,9 @@ using Content.Shared.Verbs;
 
 namespace Content.Goobstation.Shared.Blob.NPC.BlobPod;
 
-public abstract class SharedBlobPodSystem : EntitySystem
+public abstract partial class SharedBlobPodSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobs = default!;
+    [Dependency] private MobStateSystem _mobs = default!;
 
 
     private EntityQuery<HumanoidProfileComponent> _query;

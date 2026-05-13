@@ -22,10 +22,10 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly EntityQuery<MartialArtsKnowledgeComponent> _artQuery = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private EntityQuery<MartialArtsKnowledgeComponent> _artQuery = default!;
 
     private void InitializeMartialArts()
     {

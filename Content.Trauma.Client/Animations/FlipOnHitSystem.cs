@@ -7,10 +7,10 @@ using Robust.Shared.Animations;
 
 namespace Content.Trauma.Client.Animations;
 
-public sealed class FlipOnHitSystem : SharedFlipOnHitSystem
+public sealed partial class FlipOnHitSystem : SharedFlipOnHitSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

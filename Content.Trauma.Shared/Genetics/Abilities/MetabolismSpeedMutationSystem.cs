@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class MetabolismSpeedMutationSystem : EntitySystem
+public sealed partial class MetabolismSpeedMutationSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
     [Dependency] private EntityQuery<MetabolizerComponent> _query = default!;
 
     public override void Initialize()

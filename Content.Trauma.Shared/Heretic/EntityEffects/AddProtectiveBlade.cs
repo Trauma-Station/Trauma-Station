@@ -7,9 +7,9 @@ namespace Content.Trauma.Shared.Heretic.EntityEffects;
 
 public sealed partial class AddUserProtectiveBlade : EntityEffectBase<AddUserProtectiveBlade>;
 
-public sealed class AddProtectiveBladeEffectSystem : EntityEffectSystem<TransformComponent, AddUserProtectiveBlade>
+public sealed partial class AddProtectiveBladeEffectSystem : EntityEffectSystem<TransformComponent, AddUserProtectiveBlade>
 {
-    [Dependency] private readonly ProtectiveBladeSystem _pblade = default!;
+    [Dependency] private ProtectiveBladeSystem _pblade = default!;
 
     protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<AddUserProtectiveBlade> args)
     {

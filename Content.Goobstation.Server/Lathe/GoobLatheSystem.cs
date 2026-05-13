@@ -6,12 +6,12 @@ using Content.Shared.Lathe;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
 
-public sealed class GoobLatheSystem : EntitySystem
+public sealed partial class GoobLatheSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly LatheSystem _lathe = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private LatheSystem _lathe = default!;
+    [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private Dictionary<string, int> _totalMaterials = new();
 

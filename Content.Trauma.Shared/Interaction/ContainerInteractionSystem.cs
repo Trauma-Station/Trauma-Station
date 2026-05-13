@@ -9,10 +9,10 @@ namespace Content.Trauma.Shared.Interaction;
 /// Prevents interaction with 2 entities that are inside of different containers.
 /// This also includes drag-drop stuff.
 /// </summary>
-public sealed class ContainerInteractionSystem : EntitySystem
+public sealed partial class ContainerInteractionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

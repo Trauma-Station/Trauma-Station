@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Wizard.Mutate;
 
 public abstract partial class BasicHitscanSharedGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
     public override void Initialize()
     {
         base.Initialize();

@@ -14,12 +14,12 @@ namespace Content.Trauma.Server.Logging;
 /// Sends errors to a discord webhook from the server config.
 /// Internally uses a <see cref="TimedRingBuffer"/> to queue messages and avoid hitting ratelimits as <see cref="DiscordWebhook"/> has no such mechanisms.
 /// </summary>
-public sealed class ErrorWebhookSystem : EntitySystem
+public sealed partial class ErrorWebhookSystem : EntitySystem
 {
-    [Dependency] private readonly DiscordWebhook _discord = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private DiscordWebhook _discord = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ILogManager _log = default!;
 
     private ErrorWebhookLogHandler _handler = new();
     private bool _enabled;

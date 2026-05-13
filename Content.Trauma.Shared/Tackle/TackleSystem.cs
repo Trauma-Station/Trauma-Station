@@ -28,20 +28,20 @@ namespace Content.Trauma.Shared.Tackle;
 
 public sealed partial class TackleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly ThrownItemSystem _thrown = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly PullingSystem _pull = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private ThrownItemSystem _thrown = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private PullingSystem _pull = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
 
     public override void Initialize()
     {

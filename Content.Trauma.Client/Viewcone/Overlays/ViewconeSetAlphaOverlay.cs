@@ -20,10 +20,10 @@ namespace Content.Trauma.Client.Viewcone.Overlays;
 ///
 /// This alpha pass only works because of <see cref="ViewconeResetAlphaOverlay"/>, which resets in a later stage of rendering.
 /// </summary>
-public sealed class ViewconeSetAlphaOverlay : Overlay
+public sealed partial class ViewconeSetAlphaOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private readonly MetaDataSystem _meta;
     private readonly SharedContainerSystem _container;
     private readonly SpriteSystem _sprite;

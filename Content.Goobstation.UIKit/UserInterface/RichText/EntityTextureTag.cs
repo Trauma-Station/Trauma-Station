@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public sealed class EntityTextureTag : BaseTextureTag, IMarkupTagHandler
+public sealed partial class EntityTextureTag : BaseTextureTag, IMarkupTagHandler
 {
     public string Name => "enttex";
 

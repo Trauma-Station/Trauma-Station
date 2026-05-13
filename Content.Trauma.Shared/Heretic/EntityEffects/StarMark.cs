@@ -8,9 +8,9 @@ namespace Content.Trauma.Shared.Heretic.EntityEffects;
 
 public sealed partial class StarMark : EntityEffectBase<StarMark>;
 
-public sealed class StarMarkEffectSystem : EntityEffectSystem<MobStateComponent, StarMark>
+public sealed partial class StarMarkEffectSystem : EntityEffectSystem<MobStateComponent, StarMark>
 {
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
 
     protected override void Effect(Entity<MobStateComponent> ent, ref EntityEffectEvent<StarMark> args)
     {

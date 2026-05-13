@@ -23,11 +23,11 @@ public sealed partial class ScrambleAccessReader : EntityEffectBase<ScrambleAcce
         => null;
 }
 
-public sealed class ScrambleAccessReaderEffectSystem : EntityEffectSystem<AccessReaderComponent, ScrambleAccessReader>
+public sealed partial class ScrambleAccessReaderEffectSystem : EntityEffectSystem<AccessReaderComponent, ScrambleAccessReader>
 {
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private List<ProtoId<AccessLevelPrototype>> _allLevels = new();
 

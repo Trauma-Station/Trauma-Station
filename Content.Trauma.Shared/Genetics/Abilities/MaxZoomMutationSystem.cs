@@ -6,10 +6,10 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Abilties;
 
-public sealed class MaxZoomMutationSystem : EntitySystem
+public sealed partial class MaxZoomMutationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContentEyeSystem _eye = default!;
-    [Dependency] private readonly EntityQuery<ContentEyeComponent> _query = default!;
+    [Dependency] private SharedContentEyeSystem _eye = default!;
+    [Dependency] private EntityQuery<ContentEyeComponent> _query = default!;
 
     public override void Initialize()
     {

@@ -6,9 +6,9 @@ using Content.Trauma.Shared.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
-public sealed class DamageModifyKnowledgeSystem : EntitySystem
+public sealed partial class DamageModifyKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public override void Initialize()
     {

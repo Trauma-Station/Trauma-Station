@@ -8,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Chemistry.InjectOnMobState;
 
-public sealed class InjectOnMobStateSystem : EntitySystem
+public sealed partial class InjectOnMobStateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

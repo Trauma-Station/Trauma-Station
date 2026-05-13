@@ -10,10 +10,10 @@ namespace Content.Trauma.Shared.Movement;
 /// <summary>
 /// Handles adding MouseRotator while you hold the strafe key (shift)
 /// </summary>
-public sealed class StrafingSystem : EntitySystem
+public sealed partial class StrafingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly EntityQuery<CombatModeComponent> _combatQuery = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private EntityQuery<CombatModeComponent> _combatQuery = default!;
 
     public override void Initialize()
     {

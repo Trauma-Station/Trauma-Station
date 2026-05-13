@@ -36,22 +36,22 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobCoreSystem : EntitySystem
+public sealed partial class BlobCoreSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly BlobTileSystem _blobTile = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private BlobTileSystem _blobTile = default!;
 
     private EntityQuery<BlobTileComponent> _tile;
     private EntityQuery<BlobFactoryComponent> _factory;

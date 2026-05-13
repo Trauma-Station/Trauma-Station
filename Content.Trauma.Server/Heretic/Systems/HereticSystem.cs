@@ -46,28 +46,28 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class HereticSystem : SharedHereticSystem
+public sealed partial class HereticSystem : SharedHereticSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly HereticRuleSystem _rule = default!;
-    [Dependency] private readonly HumanoidProfileSystem _profile = default!;
-    [Dependency] private readonly AbductorVestDisguiseSystem _disguise = default!;
-    [Dependency] private readonly SharedHereticRitualSystem _ritual = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IChatManager _chatMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private HereticRuleSystem _rule = default!;
+    [Dependency] private HumanoidProfileSystem _profile = default!;
+    [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
+    [Dependency] private SharedHereticRitualSystem _ritual = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private IChatManager _chatMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
-    [Dependency] private readonly EntityQuery<HereticMinionComponent> _minionQuery = default!;
+    [Dependency] private EntityQuery<HereticMinionComponent> _minionQuery = default!;
 
     private float _timer;
     private const float PassivePointCooldown = 20f * 60f;

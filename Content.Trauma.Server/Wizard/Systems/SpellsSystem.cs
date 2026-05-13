@@ -62,27 +62,27 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class SpellsSystem : SharedSpellsSystem
+public sealed partial class SpellsSystem : SharedSpellsSystem
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedEmpSystem _emp = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly SpreaderSystem _spreader = default!;
-    [Dependency] private readonly GravityWellSystem _gravityWell = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly ServerInventorySystem _inventory = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly KnowledgeSystem _knowledge = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedEmpSystem _emp = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
+    [Dependency] private SpreaderSystem _spreader = default!;
+    [Dependency] private GravityWellSystem _gravityWell = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private ServerInventorySystem _inventory = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private KnowledgeSystem _knowledge = default!;
 
     public override event Action? StopTargeting;
 

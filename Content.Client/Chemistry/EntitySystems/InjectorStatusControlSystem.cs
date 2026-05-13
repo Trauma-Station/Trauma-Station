@@ -6,10 +6,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Chemistry.EntitySystems;
 
-public sealed class InjectorStatusControlSystem : EntitySystem
+public sealed partial class InjectorStatusControlSystem : EntitySystem
 {
-    [Dependency] private readonly InjectorSystem _injector = default!; // Trauma - replaced _solutionContainers with _injector
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private InjectorSystem _injector = default!; // Trauma - replaced _solutionContainers with _injector
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
 
     public override void Initialize()

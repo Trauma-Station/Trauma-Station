@@ -16,11 +16,11 @@ namespace Content.Trauma.Shared.Areas;
 /// Only real difference is areamap is stored on the grid instead of root save yml, it's not really doable with current RT.
 /// Only 256 area prototypes are supported.
 /// </summary>
-public sealed class MapAreaSystem : EntitySystem
+public sealed partial class MapAreaSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<AreaGridComponent> _query = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ProfManager _prof = default!;
+    [Dependency] private EntityQuery<AreaGridComponent> _query = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ProfManager _prof = default!;
 
     private List<Vector2i> _empty = new();
     private List<byte> _badIds = new();
