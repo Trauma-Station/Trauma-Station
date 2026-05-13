@@ -1,7 +1,6 @@
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared.Administration.Events;
+namespace Content.Goobstation.Shared.Administration;
 
 [Serializable, NetSerializable]
 public sealed class AdminInfoEvent(NetUserId userid) : EntityEventArgs

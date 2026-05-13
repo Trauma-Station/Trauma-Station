@@ -90,7 +90,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         SetMouseRotatorComponents(entity, value);
     }
 
-    private void SetMouseRotatorComponents(EntityUid uid, bool value)
+    public void SetMouseRotatorComponents(EntityUid uid, bool value) // Trauma - made public
     {
         if (value)
         {

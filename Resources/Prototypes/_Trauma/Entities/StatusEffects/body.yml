@@ -1,7 +1,9 @@
 - type: entity
   parent: StaminaModifierStatusEffect
   id: StatusEffectCocaineStamina
-  name: 1.15x max stamina
+  name: cocaine rush
   components:
   - type: StaminaModifierStatusEffect
     modifier: 1.15
+  - type: ViewconeModifier
+    angleModifier: 1.2
