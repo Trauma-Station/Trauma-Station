@@ -10,13 +10,14 @@ public static class TraumaInputContexts
     public static void SetupContexts(IInputContextContainer contexts)
     {
         var common = contexts.GetContext("common");
-        common.AddFunction(TraumaKeyFunctions.ResistGrab);
         common.AddFunction(TraumaKeyFunctions.NetBandwidth);
 
         var human = contexts.GetContext("human");
+        human.AddFunction(TraumaKeyFunctions.ResistGrab);
         human.AddFunction(TraumaKeyFunctions.OpenLanguageMenu);
         human.AddFunction(TraumaKeyFunctions.OpenMartialArtsMenu);
         human.AddFunction(TraumaKeyFunctions.Tackle);
+        human.AddFunction(TraumaKeyFunctions.Strafe);
         // TODO: change to cycling x/y
         human.AddFunction(TraumaKeyFunctions.TargetHead);
         human.AddFunction(TraumaKeyFunctions.TargetChest);

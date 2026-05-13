@@ -4,6 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Trauma.Shared.Viewcone.Components;
 
 namespace Content.Trauma.Shared.Viewcone;
@@ -14,6 +15,7 @@ namespace Content.Trauma.Shared.Viewcone;
 public sealed class ViewconeAngleSystem : EntitySystem
 {
     [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly EntityQuery<ViewconeComponent> _query = default!;
 
     public override void Initialize()
@@ -21,6 +23,8 @@ public sealed class ViewconeAngleSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BodyComponent, ModifyViewconeAngleEvent>(_body.RelayEvent);
+        SubscribeLocalEvent<StatusEffectContainerComponent, ModifyViewconeAngleEvent>(_status.RelayEvent);
+
         SubscribeLocalEvent<ViewconeModifierComponent, ExaminedEvent>(OnExamined);
         Subs.SubscribeWithRelay<ViewconeModifierComponent, ModifyViewconeAngleEvent>(OnModifyAngle, held: false);
         SubscribeLocalEvent<ViewconeModifierComponent, StatusEffectRelayedEvent<ModifyViewconeAngleEvent>>(OnEffectModifyAngle);
@@ -50,9 +54,7 @@ public sealed class ViewconeAngleSystem : EntitySystem
 
     private void OnOrganModifyAngle(Entity<ViewconeModifierComponent> ent, ref BodyRelayedEvent<ModifyViewconeAngleEvent> args)
     {
-        var ev = args.Args;
-        ev.ModifyAngle(ent.Comp.AngleModifier);
-        args.Args = ev; // holy dogshit please never ever do this
+        args.Args.ModifyAngle(ent.Comp.AngleModifier);
     }
 
     /// <summary>

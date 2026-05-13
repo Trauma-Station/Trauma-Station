@@ -13,6 +13,7 @@ public static class TraumaKeyFunctions
     public static readonly BoundKeyFunction OpenLanguageMenu = "OpenLanguageMenu";
     public static readonly BoundKeyFunction ResistGrab = "ResistGrab";
     public static readonly BoundKeyFunction NetBandwidth = "NetBandwidth";
+    public static readonly BoundKeyFunction Strafe = "Strafe";
 
     // Targeting
     public static readonly BoundKeyFunction TargetHead = "TargetHead";

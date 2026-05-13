@@ -174,6 +174,7 @@ namespace Content.Client.Options.UI.Tabs
             AddToggleCvarCheckBox("ui-options-hold-to-attack-ranged", CCVars.ControlHoldToAttackRanged);
 
             AddHeader("ui-options-header-movement");
+            AddButton(TraumaKeyFunctions.Strafe); // Trauma
             AddButton(EngineKeyFunctions.MoveUp);
             AddButton(EngineKeyFunctions.MoveLeft);
             AddButton(EngineKeyFunctions.MoveDown);
@@ -202,7 +203,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.Drop);
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
-            AddButton(TraumaKeyFunctions.ResistGrab); // Goob
+            AddButton(TraumaKeyFunctions.ResistGrab); // Trauma
             AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);
@@ -243,7 +244,10 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenCraftingMenu);
             AddButton(ContentKeyFunctions.OpenGuidebook);
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
-            AddButton(TraumaKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
+            // <Trauma>
+            AddButton(TraumaKeyFunctions.OpenLanguageMenu);
+            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu);
+            // </Trauma>
             AddButton(ContentKeyFunctions.OpenAHelp);
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);
@@ -257,7 +261,6 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.WindowCloseRecent);
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
-            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu); // Trauma
 
             // <Trauma>
             // TODO: change to scrolling x/y
