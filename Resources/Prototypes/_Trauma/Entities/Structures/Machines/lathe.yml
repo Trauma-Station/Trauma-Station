@@ -123,7 +123,7 @@
     node: printing press
 
 - type: entity
-  parent: BaseMachine
+  parent: [BaseMachine, BaseLatheLube]
   id: CrewPrintingPress
   suffix: crew
   name: printing press
@@ -191,22 +191,6 @@
   - type: Animateable
   - type: LightningTarget
     priority: 1
-  - type: ReagentSpeed
-    solution: lube
-    modifiers:
-      SpaceLube: 0.25
-      SpaceGlue: 5
-  - type: SolutionContainerManager
-    solutions:
-      lube:
-        maxVol: 250
-  - type: Spillable
-    solution: lube
-  - type: RefillableSolution
-    solution: lube
-  - type: ExaminableSolution
-    solution: lube
-
 
 - type: entity
   parent: BaseRevIndustry
