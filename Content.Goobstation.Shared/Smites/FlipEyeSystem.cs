@@ -5,9 +5,9 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Goobstation.Shared.Smites;
 
-public sealed class FlipEyeSystem : ToggleableSmiteSystem<FlipEyeComponent>
+public sealed partial class FlipEyeSystem : ToggleableSmiteSystem<FlipEyeComponent>
 {
-    [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
+    [Dependency] private SharedContentEyeSystem _eyeSystem = default!;
 
     public override void Set(EntityUid owner)
     {

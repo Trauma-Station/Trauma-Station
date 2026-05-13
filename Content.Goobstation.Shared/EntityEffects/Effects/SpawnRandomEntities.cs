@@ -14,9 +14,9 @@ namespace Content.Goobstation.Shared.EntityEffects.Effects;
 /// </summary>
 public sealed partial class SpawnRandomEntities : BaseSpawnEntityEntityEffect<SpawnRandomEntities>;
 
-public sealed class SpawnRandomEntitiesEffectSystem : EntityEffectSystem<TransformComponent, SpawnRandomEntities>
+public sealed partial class SpawnRandomEntitiesEffectSystem : EntityEffectSystem<TransformComponent, SpawnRandomEntities>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnRandomEntities> args)
     {

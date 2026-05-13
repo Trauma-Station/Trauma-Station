@@ -10,8 +10,8 @@ namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingBiomassSystem : SharedChangelingBiomassSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
 
     public override void Initialize()
     {

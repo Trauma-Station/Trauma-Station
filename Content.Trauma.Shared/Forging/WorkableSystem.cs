@@ -10,13 +10,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Forging;
 
-public sealed class WorkableSystem : EntitySystem
+public sealed partial class WorkableSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMetalSystem _metal = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityQuery<WorkableComponent> _query = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMetalSystem _metal = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<WorkableComponent> _query = default!;
 
     public override void Initialize()
     {

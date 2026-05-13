@@ -16,11 +16,11 @@ namespace Content.Shared.Inventory;
 public partial class InventorySystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RandomHelperSystem _randomHelper = default!;
     // </Trauma>
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IViewVariablesManager _vvm = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IViewVariablesManager _vvm = default!;
 
     private void InitializeSlots()
     {

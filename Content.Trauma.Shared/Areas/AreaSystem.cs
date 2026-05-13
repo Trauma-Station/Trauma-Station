@@ -10,13 +10,13 @@ namespace Content.Trauma.Shared.Areas;
 /// <summary>
 /// Tracks area prototypes and provides API for using them.
 /// </summary>
-public sealed class AreaSystem : EntitySystem
+public sealed partial class AreaSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MapAreaSystem _mapArea = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MapAreaSystem _mapArea = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
 
     /// <summary>
     /// List of every area prototype in the game.

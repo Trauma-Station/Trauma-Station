@@ -4,10 +4,10 @@ using Content.Shared.Verbs;
 
 namespace Content.Server.Instruments;
 
-public sealed class SwappableInstrumentSystem : EntitySystem
+public sealed partial class SwappableInstrumentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInstrumentSystem _sharedInstrument = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedInstrumentSystem _sharedInstrument = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

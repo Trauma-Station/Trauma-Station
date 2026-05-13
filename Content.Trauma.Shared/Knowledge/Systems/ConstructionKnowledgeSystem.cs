@@ -14,12 +14,12 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// <summary>
 /// Controls construction knowledge requirements.
 /// </summary>
-public sealed class ConstructionKnowledgeSystem : EntitySystem
+public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly QualitySystem _quality = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private QualitySystem _quality = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<QualityPrototype> BaseQuality = "BaseQuality";
 

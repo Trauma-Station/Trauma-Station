@@ -20,10 +20,10 @@ namespace Content.Goobstation.Client.JumpScare;
 
 public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private INetManager _netManager = default!;
 
     public void PostInject()
     {

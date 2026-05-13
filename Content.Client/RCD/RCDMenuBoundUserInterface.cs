@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.RCD;
 
 [UsedImplicitly]
-public sealed class RCDMenuBoundUserInterface : BoundUserInterface
+public sealed partial class RCDMenuBoundUserInterface : BoundUserInterface
 {
     private const string TopLevelActionCategory = "Main";
 
@@ -31,8 +31,8 @@ public sealed class RCDMenuBoundUserInterface : BoundUserInterface
             ["Vents"] = ("rcd-component-vents", new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Radial/RPD/vent_passive.png"))),
         };
 
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     private SimpleRadialMenu? _menu;
 

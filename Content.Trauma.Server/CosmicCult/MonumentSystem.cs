@@ -28,27 +28,27 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.CosmicCult;
 
-public sealed class MonumentSystem : SharedMonumentSystem
+public sealed partial class MonumentSystem : SharedMonumentSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly AlertLevelSystem _alert = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RoundEndSystem _evac = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private AlertLevelSystem _alert = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RoundEndSystem _evac = default!;
     private HashSet<Entity<HumanoidProfileComponent>> _targets = [];
 
     public override void Initialize()

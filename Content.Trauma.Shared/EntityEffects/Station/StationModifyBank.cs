@@ -29,10 +29,10 @@ public sealed partial class StationModifyBank : EntityEffectBase<StationModifyBa
         => null;
 }
 
-public sealed class StationModifyBankSystem : EntityEffectSystem<StationBankAccountComponent, StationModifyBank>
+public sealed partial class StationModifyBankSystem : EntityEffectSystem<StationBankAccountComponent, StationModifyBank>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedCargoSystem _cargo = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedCargoSystem _cargo = default!;
 
     protected override void Effect(Entity<StationBankAccountComponent> ent, ref EntityEffectEvent<StationModifyBank> args)
     {

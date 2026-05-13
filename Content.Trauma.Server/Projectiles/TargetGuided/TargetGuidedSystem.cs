@@ -11,11 +11,11 @@ namespace Content.Trauma.Server.Projectiles.TargetGuided;
 /// <summary>
 /// Handles the logic for cursor-guided projectiles.
 /// </summary>
-public sealed class TargetGuidedSystem : EntitySystem
+public sealed partial class TargetGuidedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = null!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = null!;
-    [Dependency] private readonly PhysicsSystem _physics = null!;
+    [Dependency] private SharedTransformSystem _transform = null!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = null!;
+    [Dependency] private PhysicsSystem _physics = null!;
 
     public override void Initialize()
     {

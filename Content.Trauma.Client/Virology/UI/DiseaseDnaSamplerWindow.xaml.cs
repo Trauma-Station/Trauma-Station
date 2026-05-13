@@ -12,8 +12,8 @@ namespace Content.Trauma.Client.Virology.UI;
 [GenerateTypedNameReferences]
 public sealed partial class DiseaseDnaSamplerWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private EntityUid _uid;
     private EntProtoId? _disease;

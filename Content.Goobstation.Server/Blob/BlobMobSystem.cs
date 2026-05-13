@@ -11,9 +11,9 @@ using Content.Trauma.Common.Language.Systems;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobMobSystem : SharedBlobMobSystem
+public sealed partial class BlobMobSystem : SharedBlobMobSystem
 {
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
     public override void Initialize()
     {

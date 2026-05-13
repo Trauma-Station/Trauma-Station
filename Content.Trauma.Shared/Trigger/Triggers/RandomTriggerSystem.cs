@@ -8,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Trigger.Triggers;
 
-public sealed class RandomTriggerSystem : EntitySystem
+public sealed partial class RandomTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     private List<Entity<RandomTriggerComponent>> _triggering = new();
 

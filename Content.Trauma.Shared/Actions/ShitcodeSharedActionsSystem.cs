@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Actions;
 
 public sealed partial class ShitcodeSharedActionsSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {

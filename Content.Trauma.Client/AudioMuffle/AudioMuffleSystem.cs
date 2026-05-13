@@ -23,21 +23,21 @@ namespace Content.Trauma.Client.AudioMuffle;
 
 public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
-    [Dependency] private readonly EntityQuery<GhostComponent> _ghostQuery = default!;
-    [Dependency] private readonly EntityQuery<SpectralComponent> _spectralQuery = default!;
-    [Dependency] private readonly EntityQuery<RelayInputMoverComponent> _relayedQuery = default!;
-    [Dependency] private readonly EntityQuery<AiEyeComponent> _aiEyeQuery = default!;
-    [Dependency] private readonly EntityQuery<SoundBlockerComponent> _blockerQuery = default!;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private EntityQuery<SpectralComponent> _spectralQuery = default!;
+    [Dependency] private EntityQuery<RelayInputMoverComponent> _relayedQuery = default!;
+    [Dependency] private EntityQuery<AiEyeComponent> _aiEyeQuery = default!;
+    [Dependency] private EntityQuery<SoundBlockerComponent> _blockerQuery = default!;
 
     // Tile indices -> blocker entities
     [ViewVariables]

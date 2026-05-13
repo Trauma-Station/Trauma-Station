@@ -11,13 +11,13 @@ namespace Content.Trauma.Client.Forging;
 /// <summary>
 /// Sets procgen forged item sprites.
 /// </summary>
-public sealed class ForgingVisualsSystem : EntitySystem
+public sealed partial class ForgingVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
-    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public override void Initialize()
     {

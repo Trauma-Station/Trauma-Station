@@ -24,15 +24,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
-public sealed class ChampionHookSystem : EntitySystem
+public sealed partial class ChampionHookSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

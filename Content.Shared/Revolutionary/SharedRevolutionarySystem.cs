@@ -12,10 +12,10 @@ using Content.Shared.Antag;
 
 namespace Content.Shared.Revolutionary;
 
-public abstract partial class SharedRevolutionarySystem : EntitySystem // Trauma - made partial
+public abstract partial class SharedRevolutionarySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedStunSystem _sharedStun = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedStunSystem _sharedStun = default!;
 
     public override void Initialize()
     {

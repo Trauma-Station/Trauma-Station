@@ -11,13 +11,13 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Weapons.Ranged.Systems;
 
-public abstract class SharedMultiMagazineGunSystem : EntitySystem
+public abstract partial class SharedMultiMagazineGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
-    [Dependency] private readonly EntityQuery<AppearanceComponent> _appearanceQuery = default!;
+    [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
 
 
     public override void Initialize()

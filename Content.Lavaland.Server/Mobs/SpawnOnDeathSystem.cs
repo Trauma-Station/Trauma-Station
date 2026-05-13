@@ -10,11 +10,11 @@ using Content.Shared.Whitelist;
 // ReSharper disable EnforceIfStatementBraces
 namespace Content.Lavaland.Server.Mobs;
 
-public sealed class SpawnOnDeathSystem : EntitySystem
+public sealed partial class SpawnOnDeathSystem : EntitySystem
 {
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

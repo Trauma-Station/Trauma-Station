@@ -11,10 +11,10 @@ namespace Content.Trauma.Client.Viewcone.Overlays;
 /// <summary>
 /// Renders the actual "cone" part of the viewcone, no alpha modulation
 /// </summary>
-public sealed class ViewconeConeOverlay : Overlay
+public sealed partial class ViewconeConeOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly SharedTransformSystem _xform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

@@ -15,8 +15,8 @@ namespace Content.Goobstation.Server.Administration.Commands;
 [AdminCommand(AdminFlags.Spawn)]
 public sealed class EquipTo : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public const string CommandName = "equipto";
     public override string Command => CommandName;

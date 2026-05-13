@@ -10,7 +10,7 @@ namespace Content.Medical.Shared.Surgery;
 
 public abstract partial class SharedSurgerySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private EntityQuery<SurgeryTargetComponent> _targetQuery;
 

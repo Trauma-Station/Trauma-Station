@@ -18,14 +18,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Xenomorphs.Xenomorph;
 
-public sealed class XenomorphSystem : SharedXenomorphSystem
+public sealed partial class XenomorphSystem : SharedXenomorphSystem
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private LanguageSystem _language = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
     {

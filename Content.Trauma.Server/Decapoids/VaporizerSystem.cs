@@ -11,8 +11,8 @@ namespace Content.Trauma.Server.Decapoids;
 
 public sealed partial class VaporizerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private void ProcessVaporizerTank(EntityUid uid, VaporizerComponent vaporizer, GasTankComponent gasTank, SolutionContainerManagerComponent solutionManager)
     {

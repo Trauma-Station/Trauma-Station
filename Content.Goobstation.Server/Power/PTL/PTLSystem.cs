@@ -31,16 +31,16 @@ namespace Content.Goobstation.Server.Power.PTL;
 
 public sealed partial class PTLSystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly AudioSystem _aud = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedRadiationSystem _radiation = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private FlashSystem _flash = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private AudioSystem _aud = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedRadiationSystem _radiation = default!;
 
     private static readonly EntProtoId _credits = "SpaceCash";
     private static readonly ProtoId<TagPrototype> _tagScrewdriver = "Screwdriver";

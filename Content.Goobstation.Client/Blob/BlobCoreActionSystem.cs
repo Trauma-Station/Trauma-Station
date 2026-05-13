@@ -6,9 +6,9 @@ using Content.Goobstation.Shared.Blob.Events;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
+public sealed partial class BlobCoreActionSystem : SharedBlobCoreActionSystem
 {
-    [Dependency] private readonly MeleeWeaponSystem _meleeWeaponSystem = default!;
+    [Dependency] private MeleeWeaponSystem _meleeWeaponSystem = default!;
 
     public override void Initialize()
     {

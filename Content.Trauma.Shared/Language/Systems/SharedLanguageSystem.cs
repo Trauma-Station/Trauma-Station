@@ -13,11 +13,11 @@ using Content.Trauma.Shared.Language.Events;
 
 namespace Content.Trauma.Shared.Language.Systems;
 
-public abstract class SharedLanguageSystem : CommonLanguageSystem
+public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     private StringBuilder _builder = new();
 

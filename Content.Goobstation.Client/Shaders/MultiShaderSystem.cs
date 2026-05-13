@@ -6,9 +6,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Shaders;
 
-public sealed class MultiShaderSystem : EntitySystem
+public sealed partial class MultiShaderSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

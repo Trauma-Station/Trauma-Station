@@ -20,19 +20,19 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
-public abstract class SharedEldritchIdCardSystem : EntitySystem
+public abstract partial class SharedEldritchIdCardSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IComponentFactory _compFact = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IComponentFactory _compFact = default!;
 
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly SharedAccessSystem _access = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedAccessSystem _access = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {

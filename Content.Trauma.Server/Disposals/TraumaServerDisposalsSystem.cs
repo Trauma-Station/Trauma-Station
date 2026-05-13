@@ -8,10 +8,10 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Server.Disposals;
 
-public sealed class TraumaServerDisposalsSystem : EntitySystem
+public sealed partial class TraumaServerDisposalsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {

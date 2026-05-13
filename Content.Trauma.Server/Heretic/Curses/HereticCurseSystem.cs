@@ -37,23 +37,23 @@ using DnaDict = Dictionary<string, (float, HashSet<EntityUid>)>;
 
 public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IAdminLogManager _log = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _soln = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly VomitSystem _vomit = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly HereticRitualSystem _ritual = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly EntityQuery<ForensicsComponent> _forensicsQuery = default!;
-    [Dependency] private readonly EntityQuery<PuddleComponent> _puddleQuery = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IAdminLogManager _log = default!;
+    [Dependency] private SharedSolutionContainerSystem _soln = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private VomitSystem _vomit = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private HereticRitualSystem _ritual = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private EntityQuery<ForensicsComponent> _forensicsQuery = default!;
+    [Dependency] private EntityQuery<PuddleComponent> _puddleQuery = default!;
 
     public override void Initialize()
     {

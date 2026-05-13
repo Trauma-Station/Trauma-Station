@@ -12,8 +12,8 @@ namespace Content.Trauma.Client.Genetics.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GeneticStorage : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public event Action<uint>? OnPrint;
 

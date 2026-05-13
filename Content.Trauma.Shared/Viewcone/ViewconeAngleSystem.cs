@@ -12,11 +12,11 @@ namespace Content.Trauma.Shared.Viewcone;
 /// <summary>
 /// Provides public API for getting the actual modified viewcone angle (including equipment etc) rather than just the base angle
 /// </summary>
-public sealed class ViewconeAngleSystem : EntitySystem
+public sealed partial class ViewconeAngleSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly EntityQuery<ViewconeComponent> _query = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private EntityQuery<ViewconeComponent> _query = default!;
 
     public override void Initialize()
     {
