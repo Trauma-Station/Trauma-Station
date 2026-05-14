@@ -4,9 +4,9 @@ using Content.Trauma.Common.Language.Components;
 
 namespace Content.Trauma.Common.Language.Systems;
 
-public abstract class CommonLanguageSystem : EntitySystem
+public abstract partial class CommonLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     /// <summary>
     /// A cached instance of <see cref="PsychomanticPrototype"/>.

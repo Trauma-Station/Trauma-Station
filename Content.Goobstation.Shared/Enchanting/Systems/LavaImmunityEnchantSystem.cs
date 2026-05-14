@@ -9,7 +9,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Cancels step triggering for <see cref="LavaImmunityEnchantComponent"/>.
 /// </summary>
-public sealed class LavaImmunityEnchantSystem : EntitySystem
+public sealed partial class LavaImmunityEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

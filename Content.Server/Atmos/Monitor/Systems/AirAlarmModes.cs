@@ -25,6 +25,7 @@ public interface IAirAlarmMode
 }
 
 // IAirAlarmModeUpdate
+//
 // This is an interface that AirAlarmSystem uses
 // in order to 'update' air alarm modes so that
 // modes like Replace can be implemented.
@@ -76,9 +77,9 @@ public sealed class AirAlarmModeFactory
 }
 
 // like a tiny little EntitySystem
-public abstract class AirAlarmModeExecutor : IAirAlarmMode
+public abstract partial class AirAlarmModeExecutor : IAirAlarmMode
 {
-    [Dependency] public readonly IEntityManager EntityManager = default!;
+    [Dependency] public IEntityManager EntityManager = default!;
     public readonly DeviceNetworkSystem DeviceNetworkSystem;
     public readonly AirAlarmSystem AirAlarmSystem;
 

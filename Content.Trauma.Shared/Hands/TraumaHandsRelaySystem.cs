@@ -9,9 +9,9 @@ using Content.Trauma.Shared.Heretic.Events;
 
 namespace Content.Trauma.Shared.Hands;
 
-public sealed class TraumaHandsRelaySystem : EntitySystem
+public sealed partial class TraumaHandsRelaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

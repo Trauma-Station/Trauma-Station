@@ -5,9 +5,9 @@ using Robust.Shared.Console;
 
 namespace Content.Trauma.Client.AudioMuffle;
 
-public sealed class ShowAudioMuffleCommand : LocalizedCommands
+public sealed partial class ShowAudioMuffleCommand : LocalizedCommands
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
     public override string Command => "showaudiomuffle";
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {

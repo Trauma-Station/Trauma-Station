@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Language.Events;
 
 namespace Content.Trauma.Server.Zombies;
 
-public sealed class TraumaZombieSystem : EntitySystem
+public sealed partial class TraumaZombieSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!; // Goob
+    [Dependency] private LanguageSystem _language = default!; // Goob
     public override void Initialize()
     {
         base.Initialize();

@@ -7,9 +7,9 @@ using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Wizard.Simians;
 
-public sealed class DropItemsOnTimedDespawnSystem : EntitySystem
+public sealed partial class DropItemsOnTimedDespawnSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

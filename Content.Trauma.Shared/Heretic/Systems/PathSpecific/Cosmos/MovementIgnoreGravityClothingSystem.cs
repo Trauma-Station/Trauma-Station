@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
-public sealed class MovementIgnoreGravityClothingSystem : EntitySystem
+public sealed partial class MovementIgnoreGravityClothingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
 
     public override void Initialize()
     {

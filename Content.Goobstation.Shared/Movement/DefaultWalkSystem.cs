@@ -12,10 +12,10 @@ namespace Content.Goobstation.Shared.Movement;
 /// <summary>
 /// Applies the default walk cvar to <see cref="InputMoverComponent"/>.
 /// </summary>
-public sealed class DefaultWalkSystem : EntitySystem
+public sealed partial class DefaultWalkSystem : EntitySystem
 {
-    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {

@@ -5,10 +5,10 @@ using Robust.Client.State;
 
 namespace Content.Goobstation.Client.JoinQueue;
 
-public sealed class JoinQueueManager
+public sealed partial class JoinQueueManager
 {
-    [Dependency] private readonly IClientNetManager _net = default!;
-    [Dependency] private readonly IStateManager _state = default!;
+    [Dependency] private IClientNetManager _net = default!;
+    [Dependency] private IStateManager _state = default!;
 
 
     public void Initialize()

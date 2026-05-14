@@ -9,10 +9,10 @@ using Content.Trauma.Shared.Heretic.Components;
 
 namespace Content.Trauma.Shared.TelescopicBaton;
 
-public sealed class KnockdownOnHitSystem : EntitySystem
+public sealed partial class KnockdownOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!; // Goobstation
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private MobStateSystem _mobState = default!; // Goobstation
 
     public override void Initialize()
     {

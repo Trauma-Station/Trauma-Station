@@ -17,16 +17,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Xenomorphs.Egg;
 
-public sealed class XenomorphEggSystem : EntitySystem
+public sealed partial class XenomorphEggSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly FaceHuggerSystem _faceHugger = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private FaceHuggerSystem _faceHugger = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

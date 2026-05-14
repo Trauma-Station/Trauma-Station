@@ -13,14 +13,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Medical.Client.Surgery;
 
-public sealed class SurgeryBui : BoundUserInterface
+public sealed partial class SurgeryBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private readonly SurgerySystem _system;
-    [ViewVariables]
-    private SurgeryWindow? _window;
+    [ViewVariables] private SurgeryWindow? _window;
     private EntityUid? _part;
     private bool _isBody;
     private (EntityUid Ent, EntProtoId Proto)? _surgery;

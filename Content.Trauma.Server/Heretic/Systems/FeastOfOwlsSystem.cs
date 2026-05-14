@@ -20,20 +20,20 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class FeastOfOwlsSystem : EntitySystem
+public sealed partial class FeastOfOwlsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly JitteringSystem _jitter = default!;
-    [Dependency] private readonly StutteringSystem _stutter = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly HereticRitualSystem _ritual = default!;
-    [Dependency] private readonly EntityQuery<VocalComponent> _vocalQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private JitteringSystem _jitter = default!;
+    [Dependency] private StutteringSystem _stutter = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private HereticSystem _heretic = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private HereticRitualSystem _ritual = default!;
+    [Dependency] private EntityQuery<VocalComponent> _vocalQuery = default!;
 
     private readonly ProtoId<TagPrototype> _feastOfOwlsTag = "RitualFeastOfOwls";
     private readonly ProtoId<TagPrototype> _ascensionTag = "RitualAscension";

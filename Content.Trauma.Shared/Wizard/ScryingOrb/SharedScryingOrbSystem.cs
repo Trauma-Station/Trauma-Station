@@ -7,10 +7,10 @@ using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Shared.Wizard.ScryingOrb;
 
-public abstract class SharedScryingOrbSystem : CommonScryingOrbSystem
+public abstract partial class SharedScryingOrbSystem : CommonScryingOrbSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override bool IsScryingOrbEquipped(EntityUid uid)
     {

@@ -13,10 +13,10 @@ public sealed partial class StealItem : EntityEffectBase<StealItem>
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null;
 }
 
-public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealItem>
+public sealed partial class StealItemSystem : EntityEffectSystem<HandsComponent, StealItem>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedWieldableSystem _wield = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedWieldableSystem _wield = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<StealItem> args)
     {

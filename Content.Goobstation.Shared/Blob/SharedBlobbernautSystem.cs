@@ -2,7 +2,7 @@
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract class SharedBlobbernautSystem : EntitySystem
+public abstract partial class SharedBlobbernautSystem : EntitySystem
 {
 
 }

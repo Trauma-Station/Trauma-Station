@@ -6,9 +6,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.JumpScare;
 
-public sealed class ServerFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
+public sealed partial class ServerFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
 {
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private INetManager _netManager = default!;
 
     public void Jumpscare(SpriteSpecifier.Texture image, ICommonSession? session)
     {

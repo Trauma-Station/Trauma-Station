@@ -11,7 +11,7 @@ namespace Content.Shared.Power.EntitySystems;
 /// </summary>
 public abstract partial class SharedBatterySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!; // _Trauma
+    [Dependency] private ItemSlotsSystem _slots = default!; // _Trauma
 
     /// <summary>
     /// Gets the battery for an entity either if it is a battery, or from its power cell if it has a slot.

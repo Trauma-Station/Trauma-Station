@@ -21,16 +21,17 @@ namespace Content.Trauma.Client.Viewcone;
 /// Handles adding and removing the viewcone overlays, as well as ferrying data between them
 /// Also handles calculating desired view angle for active viewcones so overlays can use it
 /// </summary>
-public sealed class ViewconeOverlaySystem : EntitySystem
+public sealed partial class ViewconeOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly ViewconeAngleSystem _angle = default!;
-    [Dependency] private readonly EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private ViewconeAngleSystem _angle = default!;
+    [Dependency] private EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
 
     private ViewconeConeOverlay _coneOverlay = default!;
     private ViewconeSetAlphaOverlay _setAlphaOverlay = default!;
@@ -60,6 +61,7 @@ public sealed class ViewconeOverlaySystem : EntitySystem
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStoppedMessage>(OnPullStopped);
         SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
+        SubscribeLocalEvent<ViewconeOccludableComponent, EntParentChangedMessage>(OnOccludableParentChanged);
 
         _coneOverlay = new();
         _setAlphaOverlay = new();
@@ -214,5 +216,16 @@ public sealed class ViewconeOverlaySystem : EntitySystem
     {
         if (ent.Comp.Memory is { } memory && !TerminatingOrDeleted(memory))
             Del(memory);
+    }
+
+    private void OnOccludableParentChanged(Entity<ViewconeOccludableComponent> ent, ref EntParentChangedMessage args)
+    {
+        if (ent.Comp.Memory is not { } memory ||
+            args.OldMapId == args.Transform.MapUid)
+            return;
+
+        // if the map changes for any reason, hide the memory
+        // this may happen from leaving PVS or FTLing, etc
+        _sprite.SetVisible(memory, false);
     }
 }

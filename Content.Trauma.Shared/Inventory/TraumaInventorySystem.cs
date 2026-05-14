@@ -12,9 +12,9 @@ using Content.Trauma.Shared.Viewcone;
 
 namespace Content.Trauma.Shared.Inventory;
 
-public sealed class TraumaInventorySystem : EntitySystem
+public sealed partial class TraumaInventorySystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

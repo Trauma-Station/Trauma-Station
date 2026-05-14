@@ -14,7 +14,7 @@ namespace Content.Goobstation.Client.Polls.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PollVotingWindow : FancyWindow
 {
-    [Dependency] private readonly PollManager _pollManager = default!;
+    [Dependency] private PollManager _pollManager = default!;
 
     public PollVotingWindow()
     {

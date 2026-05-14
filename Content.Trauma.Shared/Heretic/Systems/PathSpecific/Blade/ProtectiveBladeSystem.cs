@@ -27,19 +27,19 @@ namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 [ByRefEvent]
 public record struct ProtectiveBladeUsedEvent(Entity<ProtectiveBladeComponent> Used);
 
-public sealed class ProtectiveBladeSystem : EntitySystem
+public sealed partial class ProtectiveBladeSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly FollowerSystem _follow = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ReflectSystem _reflect = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private FollowerSystem _follow = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ReflectSystem _reflect = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public static readonly EntProtoId<ProtectiveBladeComponent> BladePrototype = "HereticProtectiveBlade";
     public static readonly EntProtoId BladeProjecilePrototype = "HereticProtectiveBladeProjectile";

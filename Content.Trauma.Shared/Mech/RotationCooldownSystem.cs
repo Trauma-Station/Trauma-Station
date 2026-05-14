@@ -7,10 +7,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Mech;
 
-public sealed class RotationCooldownSystem : EntitySystem
+public sealed partial class RotationCooldownSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

@@ -5,11 +5,11 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EmptyScroll;
 
-public sealed class RandomScrollSystem : EntitySystem
+public sealed partial class RandomScrollSystem : EntitySystem
 {
-    [Dependency] private readonly EmptyScrollSystem _scroll = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private EmptyScrollSystem _scroll = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PaperSystem _paper = default!;
 
     public override void Initialize()
     {

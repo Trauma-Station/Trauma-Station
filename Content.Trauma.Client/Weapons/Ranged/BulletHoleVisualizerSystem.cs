@@ -4,9 +4,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Weapons.Ranged;
 
-public sealed class BulletHoleVisualizerSystem : EntitySystem
+public sealed partial class BulletHoleVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     public override void Initialize()
     {

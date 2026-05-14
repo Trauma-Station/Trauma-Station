@@ -20,10 +20,10 @@ public sealed partial class RelayPuller : EntityEffectBase<RelayPuller>
         => Loc.GetString("entity-effect-guidebook-relay-puller", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys) ?? string.Empty));
 }
 
-public sealed class RelayPullerEffectSystem : EntityEffectSystem<PullableComponent, RelayPuller>
+public sealed partial class RelayPullerEffectSystem : EntityEffectSystem<PullableComponent, RelayPuller>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<PullableComponent> ent, ref EntityEffectEvent<RelayPuller> args)
     {

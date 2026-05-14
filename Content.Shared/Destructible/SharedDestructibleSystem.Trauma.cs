@@ -25,21 +25,21 @@ namespace Content.Shared.Destructible;
 /// </summary>
 public abstract partial class SharedDestructibleSystem
 {
-    [Dependency] public readonly IRobustRandom Random = default!;
+    [Dependency] public IRobustRandom Random = default!;
     public new IEntityManager EntityManager => base.EntityManager;
 
-    [Dependency] public readonly SharedAtmosphereSystem AtmosphereSystem = default!;
-    [Dependency] public readonly SharedAudioSystem AudioSystem = default!;
-    [Dependency] public readonly GibbingSystem Gibbing = default!;
-    [Dependency] public readonly SharedConstructionSystem ConstructionSystem = default!;
-    [Dependency] public readonly SharedExplosionSystem ExplosionSystem = default!;
-    [Dependency] public readonly SharedStackSystem StackSystem = default!;
-    [Dependency] public readonly TriggerSystem TriggerSystem = default!;
-    [Dependency] public readonly SharedSolutionContainerSystem SolutionContainerSystem = default!;
-    [Dependency] public readonly SharedPuddleSystem PuddleSystem = default!;
-    [Dependency] public readonly SharedContainerSystem ContainerSystem = default!;
-    [Dependency] public readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] public readonly ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] public SharedAtmosphereSystem AtmosphereSystem = default!;
+    [Dependency] public SharedAudioSystem AudioSystem = default!;
+    [Dependency] public GibbingSystem Gibbing = default!;
+    [Dependency] public SharedConstructionSystem ConstructionSystem = default!;
+    [Dependency] public SharedExplosionSystem ExplosionSystem = default!;
+    [Dependency] public SharedStackSystem StackSystem = default!;
+    [Dependency] public TriggerSystem TriggerSystem = default!;
+    [Dependency] public SharedSolutionContainerSystem SolutionContainerSystem = default!;
+    [Dependency] public SharedPuddleSystem PuddleSystem = default!;
+    [Dependency] public SharedContainerSystem ContainerSystem = default!;
+    [Dependency] public IPrototypeManager PrototypeManager = default!;
+    [Dependency] public ISharedAdminLogManager AdminLogger = default!;
 
     public bool TryGetDestroyedAt(Entity<DestructibleComponent?> ent, [NotNullWhen(true)] out FixedPoint2? destroyedAt)
     {

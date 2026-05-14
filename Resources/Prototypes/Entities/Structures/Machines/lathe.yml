@@ -16,6 +16,11 @@
       sinks:
       - LathePrint
   - type: LatheAutomation
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 30
   - type: SpamEmitSound # random lathe sounds
     minInterval: 300
     maxInterval: 900

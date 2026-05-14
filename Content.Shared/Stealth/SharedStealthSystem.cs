@@ -1,14 +1,16 @@
+// <Trauma>
+using Robust.Shared.Physics.Components;
+// </Trauma>
 using Content.Shared.Examine;
 using Content.Shared.Mobs;
 using Content.Shared.Stealth.Components;
-using Robust.Shared.Physics.Components; // Goobstation
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Stealth;
 
-public abstract partial class SharedStealthSystem : EntitySystem // Trauma - made partial
+public abstract partial class SharedStealthSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

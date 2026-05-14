@@ -25,18 +25,18 @@ namespace Content.Goobstation.Shared.Xenobiology;
 // This handles any actions that slime mobs may have.
 public sealed partial class SlimeLatchSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly EntityQuery<HungerComponent> _hungerQuery = default!;
-    [Dependency] private readonly EntityQuery<SlimeComponent> _slimeQuery = default!;
-    [Dependency] private readonly EntityQuery<XenoVacuumTankComponent> _tankQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private EntityQuery<HungerComponent> _hungerQuery = default!;
+    [Dependency] private EntityQuery<SlimeComponent> _slimeQuery = default!;
+    [Dependency] private EntityQuery<XenoVacuumTankComponent> _tankQuery = default!;
 
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate;

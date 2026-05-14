@@ -20,9 +20,9 @@ public sealed partial class StartUseDelay : EntityEffectBase<StartUseDelay>
         => Loc.GetString("entity-effect-guidebook-start-use-delay", ("chance", Probability), ("id", DelayId));
 }
 
-public sealed class StartUseDelayEffectSystem : EntityEffectSystem<UseDelayComponent, StartUseDelay>
+public sealed partial class StartUseDelayEffectSystem : EntityEffectSystem<UseDelayComponent, StartUseDelay>
 {
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     protected override void Effect(Entity<UseDelayComponent> ent, ref EntityEffectEvent<StartUseDelay> args)
     {

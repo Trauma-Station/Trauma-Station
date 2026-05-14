@@ -14,10 +14,10 @@ namespace Content.Shared.Mech.EntitySystems;
 
 public abstract partial class SharedMechSystem
 {
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly EntityQuery<TileMovementComponent> _tileQuery = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private EntityQuery<TileMovementComponent> _tileQuery = default!;
 
     private void InitializeTrauma()
     {

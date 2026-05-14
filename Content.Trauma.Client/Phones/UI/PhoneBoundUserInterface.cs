@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Phones.UI;
 
-public sealed class PhoneBoundUserInterface : BoundUserInterface
+public sealed partial class PhoneBoundUserInterface : BoundUserInterface
 {
     private PhoneMenu? _menu;
 

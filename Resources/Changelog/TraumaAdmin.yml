@@ -170,3 +170,12 @@ Entries:
   id: 22
   time: '2026-05-13T19:10:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2592
+- author: pyrocynicals biggest hater
+  changes:
+  - type: Add
+    message: >-
+      Added the wipecurrency command. Password phrase: Who are the patriots?
+      Password response: La-li-lu-le-lo
+  id: 23
+  time: '2026-05-14T13:36:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2609
