@@ -8412,3 +8412,31 @@ Entries:
   id: 964
   time: '2026-05-14T16:55:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to see memories of invisible mobs/things.
+  id: 965
+  time: '2026-05-14T18:54:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2617
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: IPC have inate knowledge of bot construction.
+  - type: Add
+    message: Arachnids have inate Athletics.
+  - type: Tweak
+    message: >-
+      Decapoid given more Strength and Toughness, losing their throwing and
+      athletics.
+  - type: Add
+    message: >-
+      Diona given Throwing, Magical Literacy, and Carving Knowledge. Magical
+      knowledge is preemptive change.
+  - type: Add
+    message: >-
+      SlimePeople given Athletics and Chemistry knowledge. Chemistry knowledge
+      is preemptive change.
+  id: 966
+  time: '2026-05-14T19:05:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2618
