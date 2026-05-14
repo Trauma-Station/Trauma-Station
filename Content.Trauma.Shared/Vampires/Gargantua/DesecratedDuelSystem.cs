@@ -12,6 +12,7 @@ public sealed class DesecratedDuelSystem : EntitySystem
 {
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ArenaCreationSystem _arena = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
@@ -43,9 +44,9 @@ public sealed class DesecratedDuelSystem : EntitySystem
             // This time check ensures the arena gets deleted if either of the fighters has died.
             if (active.NextFighterCheck < now)
             {
-                CheckDuelist((uid, duel), duel.Duelist);
+                CheckDuelist((uid, duel), duel.Target);
 
-                active.NextFighterCheck += duel.DuelDuration;
+                active.NextFighterCheck += duel.FighterCheck;
                 Dirty(uid, active);
             }
         }
@@ -60,8 +61,8 @@ public sealed class DesecratedDuelSystem : EntitySystem
         // First, we leap towards our target
         _throw.TryThrow(performer, Transform(target).Coordinates, 30f, performer);
 
-        // Set the duelist
         ent.Comp.Duelist = performer;
+        ent.Comp.Target = target;
         Dirty(ent);
 
         // Set the active timers
@@ -81,7 +82,11 @@ public sealed class DesecratedDuelSystem : EntitySystem
     /// </summary>
     private void ExitArena(Entity<ActionDesecratedDuelComponent> action)
     {
-        // Remove status effects, play sound etc
+        // mispredicts happening here sadly
+        if (_net.IsClient)
+            return;
+
+        // Remove status effects
         _effects.ApplyEffects(action.Comp.Duelist, action.Comp.EndEffects);
 
         _arena.DestroyArena(action.Owner);
@@ -93,7 +98,7 @@ public sealed class DesecratedDuelSystem : EntitySystem
     /// </summary>
     private void CheckDuelist(Entity<ActionDesecratedDuelComponent> action, EntityUid target)
     {
-        if (!TerminatingOrDeleted(target) && !_mob.IsDead(target))
+        if (_mob.IsAlive(target) && !TerminatingOrDeleted(target))
             return;
 
         ExitArena(action);

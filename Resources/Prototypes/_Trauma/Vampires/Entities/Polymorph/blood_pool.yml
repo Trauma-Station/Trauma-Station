@@ -9,7 +9,7 @@
     - sprite: Fluids/puddle.rsi
       state: splat0
     drawdepth: Puddles
-    color: "#C60C0C"
+    color: "#800000FF"
   - type: Physics
     bodyType: KinematicController
   - type: Slippery
@@ -55,6 +55,16 @@
   - type: Input
     context: "ghost"
   - type: MindContainer
+  - type: StatusEffects
+    allowed:
+    - BloodPuddleStatusEffect
+  - type: TriggerOnSpawn
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodPuddleStatusEffect
+      time: null # gets deleted anyways
+      type: Add
 
 - type: polymorph
   id: BloodPuddlePolymorph

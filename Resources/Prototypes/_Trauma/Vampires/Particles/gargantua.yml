@@ -50,6 +50,7 @@
     type: CircleEdge
     radius: 5.0
 
+# This is just a smoke effect on the target
 - type: particleEffect
   id: VampireStomp
   sprite:
@@ -94,6 +95,7 @@
     type: CircleEdge
     radius: 1.2
 
+# Small particles that look like dust getting off the ground
 - type: particleEffect
   id: VampireCharge
   sprite:

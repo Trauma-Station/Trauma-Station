@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
+using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
@@ -50,6 +51,18 @@ public sealed partial class ActiveBloodLeecherComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan UpdateRate = TimeSpan.FromSeconds(2f);
+
+    /// <summary>
+    /// The music to play during the action
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? Music;
+
+    /// <summary>
+    /// The music entity, used to kill it when the component shutdowns.
+    /// </summary>
+    [DataField]
+    public EntityUid? MusicEntity;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     [AutoPausedField]

@@ -1,0 +1,76 @@
+- type: entity
+  id: BloodBarrierPoint
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot_big
+    color: "#DC143C"
+  - type: TriggerOnSpawn
+  - type: EmitSoundOnTrigger
+    predicted: true
+    sound:
+      path: /Audio/Effects/demon_attack1.ogg
+      params:
+        pitch: 2.0
+        volume: -10
+  - type: Clickable
+
+- type: entity
+  parent: BaseStructure
+  id: BloodBarrier
+  name: Blood Barrier
+  description: A barrier made out of pure blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/vampire_effects.rsi
+    state: blood_barrier
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - SpecialWallLayer
+        layer:
+        - SpecialWallLayer
+  - type: Tag
+    tags:
+      - Wall
+  - type: PreventCollide
+    whitelist:
+      components:
+      - Vampire
+      - BibleUser
+  - type: TriggerOnSpawn
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:RelayNearby
+      compName: Destructible
+      whitelist:
+        tags:
+        - Wall
+      blacklist:
+        components:
+        - PreventCollide
+      range: 1
+      effect: !type:NestedEffect
+        proto: BloodBarrier
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: GlassBreak
+  - type: Airtight
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

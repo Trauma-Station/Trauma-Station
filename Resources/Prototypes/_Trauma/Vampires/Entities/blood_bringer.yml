@@ -1,0 +1,28 @@
+- type: entity
+  id: BloodBeam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/drain_beam.rsi
+    state: drainbeam
+    drawdepth: Effects
+  - type: Physics
+    canCollide: false
+  - type: PointLight
+    enabled: true
+    color: "#780606"
+    radius: 3.5
+    softness: 1
+    autoRot: true
+    castShadows: false
+  - type: Beam
+    sound:
+      path: /Audio/_Trauma/Vampires/vampire_tentacle_hit.ogg
+      params:
+        pitch: 0.7
+  - type: FadingTimedDespawn
+    lifetime: 0.4
+    fadeOutTime: 0.2
+  - type: Tag
+    tags:
+      - HideContextMenu

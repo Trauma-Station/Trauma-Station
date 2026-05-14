@@ -32,6 +32,12 @@ public sealed partial class ActionDesecratedDuelComponent : Component
     public EntityUid Duelist;
 
     /// <summary>
+    /// The entity targeted by the duel.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid Target;
+
+    /// <summary>
     /// Effects that will run once the duel ends.
     /// </summary>
     [DataField]

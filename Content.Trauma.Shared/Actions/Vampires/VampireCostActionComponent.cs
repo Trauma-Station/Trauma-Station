@@ -16,4 +16,7 @@ public sealed partial class VampireCostActionComponent : Component
     /// </summary>
     [DataField(required: true)]
     public int BloodCost;
+
+    [DataField]
+    public string Popup = "You do not have enough usable blood to run this action";
 }

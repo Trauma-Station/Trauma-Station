@@ -2,8 +2,28 @@
 - type: entityEffect
   id: BloodEruption
   effects:
-  - !type:SpawnEntity
+  - !type:NestedEffect
     conditions:
     - !type:ReagentsCondition
       min: 10
-    entity: BloodTendrilPre   # TODO: Spawn spike instead
+    proto: BloodEruptionEffects
+
+- type: entityEffect
+  id: BloodEruptionEffects
+  effects:
+  - !type:SpawnAttached
+    entity: BloodSpike
+  - !type:SpawnParticles
+    particleProto: BloodEruption
+  - !type:PlaySoundEffect
+    sound:
+      collection: gib
+
+# Blood Barrier Destruction
+- type: entityEffect
+  id: BloodBarrier
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Structural: 500

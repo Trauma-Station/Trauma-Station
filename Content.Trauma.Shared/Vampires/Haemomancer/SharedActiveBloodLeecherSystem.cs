@@ -1,27 +1,32 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Body.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Popups;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 public abstract class SharedActiveBloodLeecherSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
-    private readonly HashSet<Entity<VampireDrainableComponent>> _drainable = new();
+    private readonly HashSet<Entity<BloodstreamComponent>> _drainable = new();
 
-    private static readonly EntProtoId BeamProto = "SuperchargedLightning"; // TODO: Change to actual
+    private static readonly EntProtoId BeamProto = "BloodBeam";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ActiveBloodLeecherComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ActiveBloodLeecherComponent, ComponentStartup>(OnMapInit);
+        SubscribeLocalEvent<ActiveBloodLeecherComponent, ComponentShutdown>(OnShutdown);
     }
 
     public override void Update(float frameTime)
@@ -36,11 +41,11 @@ public abstract class SharedActiveBloodLeecherSystem : EntitySystem
             if (now < comp.NextUpdate)
                 continue;
 
-            var ev = new BloodLeecherAttemptEvent(comp.BloodRequired);
-            RaiseLocalEvent(uid, ref ev);
-            if (ev.Cancelled)
+            var attemptEv = new BloodLeecherAttemptEvent(comp.BloodRequired);
+            RaiseLocalEvent(uid, ref attemptEv);
+            if (attemptEv.Cancelled)
             {
-                _popup.PopupClient("You don't have enough power to leech!", uid, PopupType.MediumCaution);
+                _popup.PopupClient("You don't have enough power to leech! You must stop leeching.", uid, PopupType.MediumCaution);
 
                 comp.NextUpdate = _timing.CurTime + comp.UpdateRate;
                 Dirty(uid, comp);
@@ -52,6 +57,11 @@ public abstract class SharedActiveBloodLeecherSystem : EntitySystem
             _lookup.GetEntitiesInRange(Transform(uid).Coordinates, comp.Range, _drainable);
             foreach (var drain in _drainable)
             {
+                // Skip self, duh
+                if (drain.Owner == uid)
+                    continue;
+
+                // Ensures we only have a limited amount of targets
                 if (counter >= comp.MaxEntities)
                     break;
 
@@ -79,10 +89,21 @@ public abstract class SharedActiveBloodLeecherSystem : EntitySystem
         }
     }
 
-    private void OnMapInit(Entity<ActiveBloodLeecherComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<ActiveBloodLeecherComponent> ent, ref ComponentStartup args)
     {
+        // phantom audio if predicted
+        if (_net.IsServer && _audio.PlayPvs(ent.Comp.Music, ent)?.Entity is { } audio)
+        {
+            ent.Comp.MusicEntity = audio;
+        }
+
         ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateRate;
         Dirty(ent);
+    }
+
+    private void OnShutdown(Entity<ActiveBloodLeecherComponent> ent, ref ComponentShutdown args)
+    {
+        _audio.Stop(ent.Comp.MusicEntity);
     }
 
     /// <summary>
