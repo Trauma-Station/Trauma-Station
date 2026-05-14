@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Shared.FireControl;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -10,9 +9,9 @@ namespace Content.Trauma.Client.FireControl;
 /// <summary>
 /// Client-side system that visualizes firing directions for debug purposes
 /// </summary>
-public sealed class FireControlVisualizerSystem : EntitySystem
+public sealed partial class FireControlVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     private readonly Dictionary<EntityUid, VisualizationData> _activeVisualizations = new();
 

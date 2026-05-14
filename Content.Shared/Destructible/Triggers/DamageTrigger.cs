@@ -18,8 +18,9 @@ public sealed partial class DamageTrigger : IThresholdTrigger
     [DataField(required: true)]
     public FixedPoint2 Damage = default!;
 
-    public bool Reached(Entity<DamageableComponent> damageable, SharedDestructibleSystem system)
+    public bool Reached(Entity<DamageableComponent> damageable, SharedDestructibleSystem system,
+        FixedPoint2 scale) // Trauma
     {
-        return system.Damageable.GetTotalDamage(damageable.AsNullable()) >= Damage;
+        return system.Damageable.GetTotalDamage(damageable.AsNullable()) >= Damage * scale; // Trauma - multiply by scale
     }
 }

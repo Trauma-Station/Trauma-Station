@@ -26,9 +26,9 @@ public sealed partial class AddTag : EntityEffectBase<AddTag>
         => GuidebookText is {} loc ? Loc.GetString(loc, ("chance", Probability)) : null;
 }
 
-public sealed class AddTagEffectSystem : EntityEffectSystem<TagComponent, AddTag>
+public sealed partial class AddTagEffectSystem : EntityEffectSystem<TagComponent, AddTag>
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     protected override void Effect(Entity<TagComponent> ent, ref EntityEffectEvent<AddTag> args)
     {

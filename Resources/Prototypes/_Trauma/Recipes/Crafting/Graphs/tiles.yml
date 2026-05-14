@@ -1,0 +1,35 @@
+- type: constructionGraph
+  id: TilePlastic
+  graph:
+  - node: start
+    edges:
+    - to: plastic tile
+      completed:
+      - !type:SetStackCount
+        amount: 4
+      steps:
+      - material: Plastic
+        amount: 1
+    - to: dark plastic tile
+      completed:
+      - !type:SetStackCount
+        amount: 4
+      steps:
+      - material: Plastic
+        amount: 1
+    - to: white plastic tile
+      completed:
+      - !type:SetStackCount
+        amount: 4
+      steps:
+      - material: Plastic
+        amount: 1
+
+  - node: plastic tile
+    entity: FloorTileItemPlastic
+
+  - node: dark plastic tile
+    entity: FloorTileItemPlasticDark
+
+  - node: white plastic tile
+    entity: FloorTileItemPlasticWhite

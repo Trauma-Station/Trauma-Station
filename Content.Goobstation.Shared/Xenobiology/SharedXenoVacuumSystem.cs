@@ -28,18 +28,18 @@ namespace Content.Goobstation.Shared.Xenobiology;
 /// This handles all interactions with xenovac.
 /// AI toggling is done in server.
 /// </summary>
-public abstract class SharedXenoVacuumSystem : EntitySystem
+public abstract partial class SharedXenoVacuumSystem : EntitySystem
 {
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     private const string ReleaseDelayId = "release";
     private const string SuctionDelayId = "suction";

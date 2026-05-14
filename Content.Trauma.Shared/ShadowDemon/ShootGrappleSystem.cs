@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Physics;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -8,10 +7,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.ShadowDemon;
 
-public sealed class ShootGrappleSystem : EntitySystem
+public sealed partial class ShootGrappleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

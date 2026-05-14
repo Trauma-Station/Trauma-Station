@@ -22,7 +22,7 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     private EntityQuery<ArmorComponent> _armorQuery;
 
@@ -650,6 +650,10 @@ public partial class TraumaSystem
 
             switch (trauma)
             {
+                case TraumaType.BoneDamage:
+                    ApplyBoneTrauma(targetChosen.Value, target, inflicter, severity);
+                    break;
+
                 case TraumaType.OrganDamage:
                     var traumaEnt = AddTrauma(targetChosen.Value, target, inflicter, TraumaType.OrganDamage, severity);
 

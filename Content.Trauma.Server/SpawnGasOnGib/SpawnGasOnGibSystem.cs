@@ -7,7 +7,7 @@ namespace Content.Trauma.Server.SpawnGasOnGib;
 
 public sealed partial class SpawnGasOnGibSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
 
     public override void Initialize()
     {

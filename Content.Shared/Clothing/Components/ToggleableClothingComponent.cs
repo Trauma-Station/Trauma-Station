@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+// </Trauma>
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.Containers;
@@ -39,25 +42,25 @@ public sealed partial class ToggleableClothingComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
-    public string Slot = string.Empty;
+    public ProtoId<InventorySlotPrototype>? Slot; // Trauma - nullable, string -> ProtoId
 
     /// <summary>
     ///     Dictionary of inventory slots and entity prototypes to spawn into the clothing container.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<string, EntProtoId> ClothingPrototypes = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, EntProtoId> ClothingPrototypes = new(); // Trauma - string -> ProtoId
 
     /// <summary>
     /// slot -> prefix
     /// </summary>
     [DataField]
-    public Dictionary<string, string?> EquippedPrefixes = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, string?> EquippedPrefixes = new(); // Trauma - string -> ProtoId
 
     /// <summary>
     ///     Dictionary of clothing uids and slots
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<EntityUid, string> ClothingUids = new();
+    public Dictionary<EntityUid, ProtoId<InventorySlotPrototype>> ClothingUids = new(); // Trauma - string -> ProtoId
 
     /// <summary>
     ///     The inventory slot flags required for this component to function.

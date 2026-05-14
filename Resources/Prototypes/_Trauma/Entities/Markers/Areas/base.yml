@@ -11,6 +11,7 @@
   - type: Transform
     anchored: true
     noRot: true
+    gridTraversal: false # waste of processing
   - type: Sprite
     noRot: true
     drawdepth: Overdoors
@@ -27,4 +28,4 @@
   components:
   - type: Sprite
     state: station
-  # maybe do something with this in the future
+  - type: StationArea

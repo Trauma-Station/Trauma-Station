@@ -8,9 +8,9 @@ namespace Content.Trauma.Shared.Revolutionary;
 /// <summary>
 /// Ensures revs start with revolutionary knowledge, and lose it if deconverted.
 /// </summary>
-public sealed class RevolutionaryKnowledgeSystem : EntitySystem
+public sealed partial class RevolutionaryKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public static readonly EntProtoId RevolutionaryKnowledge = "RevolutionaryKnowledge";
 

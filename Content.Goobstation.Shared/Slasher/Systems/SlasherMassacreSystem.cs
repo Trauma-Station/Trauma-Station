@@ -19,15 +19,15 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 /// <summary>
 /// System for the massacre action. Can be re-used for other similar weapons(Like the gang weapon if that ever gets made).
 /// </summary>
-public sealed class SlasherMassacreSystem : EntitySystem
+public sealed partial class SlasherMassacreSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     public override void Initialize()
     {

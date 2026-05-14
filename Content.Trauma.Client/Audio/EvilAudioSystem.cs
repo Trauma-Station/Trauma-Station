@@ -9,9 +9,9 @@ namespace Content.Trauma.Client.Audio;
 /// Some engine shitcode rarely sets your map to an invalid entity which causes error spam for ambienve.
 /// This prevents that happening i hope.
 /// </summary>
-public sealed class EvilAudioSystem : EntitySystem
+public sealed partial class EvilAudioSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {

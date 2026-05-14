@@ -19,9 +19,9 @@ namespace Content.Medical.Server.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly BuckleSystem _buckle = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private BuckleSystem _buckle = default!;
 
     private static readonly EntProtoId<ActionComponent> SendYourself = "ActionSendYourself";
     private static readonly EntProtoId<ActionComponent> ExitAction = "ActionExitConsole";

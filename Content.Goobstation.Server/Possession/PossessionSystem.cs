@@ -21,12 +21,12 @@ namespace Content.Goobstation.Server.Possession;
 
 public sealed partial class PossessionSystem : SharedPossessionSystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly FollowerSystem _follower = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private FollowerSystem _follower = default!;
 
     public override void Initialize()
     {

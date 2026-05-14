@@ -12,7 +12,7 @@ namespace Content.Trauma.Client.Ghost.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GhostCharacterWindow : FancyWindow
 {
-    [Dependency] private readonly IClientPreferencesManager _prefs = default!;
+    [Dependency] private IClientPreferencesManager _prefs = default!;
 
     public event Action<int?>? OnSlotSet;
     public RadioOptions<int?> Buttons = new(RadioOptionsLayout.Vertical);

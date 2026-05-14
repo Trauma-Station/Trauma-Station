@@ -9,10 +9,10 @@ namespace Content.Trauma.Shared.Heretic.EntityEffects;
 
 public sealed partial class TriggerCosmicMark : EntityEffectBase<TriggerCosmicMark>;
 
-public sealed class TriggerCosmicMarkEffectSystem : EntityEffectSystem<HereticCosmicMarkComponent, TriggerCosmicMark>
+public sealed partial class TriggerCosmicMarkEffectSystem : EntityEffectSystem<HereticCosmicMarkComponent, TriggerCosmicMark>
 {
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     protected override void Effect(Entity<HereticCosmicMarkComponent> ent,
         ref EntityEffectEvent<TriggerCosmicMark> args)

@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 namespace Content.Trauma.Client.Wizard.Teleport;
 
 [UsedImplicitly]
-public sealed class WizardTeleportBoundUserInterface : BoundUserInterface
+public sealed partial class WizardTeleportBoundUserInterface : BoundUserInterface
 {
     private WizardTeleportTargetWindow? _menu;
     private NetEntity? _action;

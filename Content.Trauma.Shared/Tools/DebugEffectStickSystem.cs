@@ -12,14 +12,14 @@ using Content.Trauma.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Tools;
 
-public sealed class DebugEffectStickSystem : EntitySystem
+public sealed partial class DebugEffectStickSystem : EntitySystem
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ISharedAdminManager _admin = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedAdminManager _admin = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

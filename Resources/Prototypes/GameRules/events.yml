@@ -51,7 +51,7 @@
       tableId: DerelictBorgEventTable
 
 - type: entityTable
-  id: ModerateAntagEventsTable
+  id: ModerateAntagEventsTable # Stop letting this shit spawn before 50 minutes or ill repo ban everyone
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     - !type:NestedSelector # Trauma
@@ -209,7 +209,7 @@
   - type: GhostroleAlert # Trauma
   - type: StationEvent
     weight: 1 # Trauma - Was 3
-    earliestStart: 30
+    earliestStart: 50 # Trauma, was 30
     #recorruenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
@@ -606,7 +606,7 @@
   components:
   - type: GhostroleAlert # Trauma
   - type: StationEvent
-    earliestStart: 35
+    earliestStart: 50 # trauma, was 35
     weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.

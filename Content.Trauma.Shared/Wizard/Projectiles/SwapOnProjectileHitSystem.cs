@@ -6,10 +6,10 @@ using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 
 namespace Content.Trauma.Shared.Wizard.Projectiles;
 
-public sealed class SwapOnProjectileHitSystem : EntitySystem
+public sealed partial class SwapOnProjectileHitSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedSpellsSystem _spells = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedSpellsSystem _spells = default!;
 
     public override void Initialize()
     {

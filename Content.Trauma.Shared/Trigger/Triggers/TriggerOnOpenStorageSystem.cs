@@ -5,9 +5,9 @@ using Content.Trauma.Common.Storage;
 
 namespace Content.Trauma.Shared.Trigger.Triggers;
 
-public sealed class TriggerOnOpenStorageSystem : EntitySystem
+public sealed partial class TriggerOnOpenStorageSystem : EntitySystem
 {
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

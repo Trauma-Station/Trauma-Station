@@ -8,7 +8,7 @@ namespace Content.Goobstation.Server.Objectives;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class DestroyTheTeslaObjectiveSystem : EntitySystem
+public sealed partial class DestroyTheTeslaObjectiveSystem : EntitySystem
 {
     /// <inheritdoc/>
     public override void Initialize()

@@ -9,10 +9,10 @@ using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.DeepFryer;
 
-public sealed class DeepFriedSystem : EntitySystem
+public sealed partial class DeepFriedSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private static readonly ProtoId<ShaderPrototype> ShaderName = "Fried";
     private ShaderInstance _shader = default!;

@@ -16,7 +16,7 @@ public sealed partial class CavityHasItem : EntityConditionBase<CavityHasItem>
 
 public sealed partial class CavityHasItemConditionSystem : EntityConditionSystem<BodyPartCavityComponent, CavityHasItem>
 {
-    [Dependency] private readonly BodyPartCavitySystem _cavity = default!;
+    [Dependency] private BodyPartCavitySystem _cavity = default!;
 
     protected override void Condition(Entity<BodyPartCavityComponent> ent, ref EntityConditionEvent<CavityHasItem> args)
     {

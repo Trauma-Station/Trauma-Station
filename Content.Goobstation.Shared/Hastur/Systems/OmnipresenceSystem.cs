@@ -5,16 +5,15 @@ using Content.Goobstation.Shared.Hastur.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.Hastur.Systems;
 
-public sealed class OmnipresenceSystem : EntitySystem
+public sealed partial class OmnipresenceSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobCache = new();
     public override void Initialize()

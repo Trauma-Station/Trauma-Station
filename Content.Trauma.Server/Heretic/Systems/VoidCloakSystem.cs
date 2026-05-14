@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Heretic.Systems.Side;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class VoidCloakSystem : SharedVoidCloakSystem
+public sealed partial class VoidCloakSystem : SharedVoidCloakSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

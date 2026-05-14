@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Projectiles;
 
-public sealed class DodgeEffectVisualsSystem : EntitySystem
+public sealed partial class DodgeEffectVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

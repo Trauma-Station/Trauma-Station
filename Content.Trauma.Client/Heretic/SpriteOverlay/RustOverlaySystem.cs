@@ -7,9 +7,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 
-public sealed class RustOverlaySystem : SpriteOverlaySystem<RustOverlayComponent>
+public sealed partial class RustOverlaySystem : SpriteOverlaySystem<RustOverlayComponent>
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {

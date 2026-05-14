@@ -5,9 +5,9 @@ using Content.Shared.Trigger;
 
 namespace Content.Trauma.Shared.Trigger.Conditions;
 
-public sealed class HoldingTriggerConditionSystem : EntitySystem
+public sealed partial class HoldingTriggerConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

@@ -97,6 +97,8 @@
   - type: GhostroleAlert
   - type: StationEvent
     minimumPlayers: 20
+    earliestStart: 45
+    weight: 3
   - type: AntagSelection
     definitions:
     - spawnerPrototype: AbductorScientistSpawner

@@ -1,7 +1,13 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
+- type: entity
+  abstract: true
+  parent: [ OrganHumanHeart, BaseSyndicateContraband ]
+  id: OrganSyndicateHeart
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    scale: 0.5, 0.5
+  - type: UnremoveableOrgan # fuck sec chuds
 
 - type: entity
   parent: [ OrganHumanHeart, BaseSyndicateContraband ]
@@ -12,9 +18,6 @@
   - type: Cybernetics
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/sandevistan.rsi
-    layers:
-    - state: icon
-    scale: 0.5, 0.5
   - type: OrganActions
     actions:
     - ActionToggleSandevistan
@@ -23,31 +26,25 @@
     - type: SandevistanUser
 
 - type: entity
-  parent: [OrganHumanHeart, BaseSyndicateContraband]
+  parent: OrganSyndicateHeart
   id: SyndicateBerserkerHeart
   name: berserker heart
   description: A next-gen combat circulatory core that allows the user to enter a berserk state, greatly increasing their speed and reflexes for a short time at the cost of endurance and some pain resistance. Highly illegal.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/berserker_heart.rsi
-    layers:
-    - state: icon
-    scale: 0.5, 0.5
   - type: OrganActions
     actions:
     - ActionActivateBerserkerImplant
 
 - type: entity
-  parent: [OrganHumanHeart, BaseSyndicateContraband]
+  parent: OrganSyndicateHeart
   id: SyndicateJumpstarterHeart
   name: jumpstarter heart
   description: A next-gen combat circulatory core that injects a large amount of omnizine into the user's bloodstream when they are critically injured, saving them from death. Highly illegal.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/jumpstarter_heart.rsi
-    layers:
-    - state: icon
-    scale: 0.5, 0.5
   - type: OrganComponents
     onAdd:
     - type: InjectOnMobState

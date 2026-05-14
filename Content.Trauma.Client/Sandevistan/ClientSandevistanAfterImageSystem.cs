@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Shared.Sandevistan;
 using Content.Shared.Tag;
 using Robust.Client.GameObjects;
@@ -8,10 +7,10 @@ using DrawDepthEnum = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Trauma.Client.Sandevistan;
 
-public sealed class ClientSandevistanAfterimageSystem : EntitySystem
+public sealed partial class ClientSandevistanAfterimageSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     private static readonly ProtoId<TagPrototype> HideContextMenuTag = "HideContextMenu";
 

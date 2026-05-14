@@ -20,10 +20,10 @@ public sealed partial class RelayStrapped : EntityEffectBase<RelayStrapped>
         => null; // cbf
 }
 
-public sealed class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponent, RelayStrapped>
+public sealed partial class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponent, RelayStrapped>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<StrapComponent> ent, ref EntityEffectEvent<RelayStrapped> args)
     {

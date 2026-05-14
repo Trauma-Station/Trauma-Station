@@ -14,8 +14,8 @@ namespace Content.Trauma.Client.Guidebook.Controls;
 /// </summary>
 public sealed partial class GuideMutationsEmbed : BoxContainer, IDocumentTag
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public GuideMutationsEmbed()
     {

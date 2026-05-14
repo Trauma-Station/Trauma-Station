@@ -13,14 +13,14 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Lube;
 
-public sealed class LubeSystem : EntitySystem
+public sealed partial class LubeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private OpenableSystem _openable = default!;
 
     public override void Initialize()
     {
@@ -69,9 +69,9 @@ public sealed class LubeSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<ItemComponent>(target) && _solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out _, out var solution))
+        if (HasComp<ItemComponent>(target) && _solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out var sol, out var solution)) // Trauma - get sol too
         {
-            var quantity = solution.RemoveReagent(entity.Comp.Reagent, entity.Comp.Consumption);
+            var quantity = _solutionContainer.RemoveReagent(sol.Value, entity.Comp.Reagent, entity.Comp.Consumption); // Trauma - use solution system so it dirties it
             if (quantity > 0)
             {
                 var lubed = EnsureComp<LubedComponent>(target);

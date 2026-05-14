@@ -26,25 +26,25 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Medical;
 
-public abstract class SharedCPRSystem : EntitySystem
+public abstract partial class SharedCPRSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IngestionSystem _ingestion = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<ActiveCPRComponent> _activeQuery = default!;
-    [Dependency] private readonly EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
-    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
-    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
-    [Dependency] private readonly EntityQuery<InternalOrganComponent> _organQuery = default!;
-    [Dependency] private readonly EntityQuery<RottingComponent> _rottingQuery = default!;
-    [Dependency] private readonly EntityQuery<UnrevivableComponent> _unrevivableQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ActiveCPRComponent> _activeQuery = default!;
+    [Dependency] private EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<InternalOrganComponent> _organQuery = default!;
+    [Dependency] private EntityQuery<RottingComponent> _rottingQuery = default!;
+    [Dependency] private EntityQuery<UnrevivableComponent> _unrevivableQuery = default!;
 
     /// <summary>
     /// Modifier for inhale volume on mobs that have CPR being done on them.

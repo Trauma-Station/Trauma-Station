@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
@@ -9,9 +8,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Projectiles;
 
-public sealed class ProjectileImmunitySystem : EntitySystem
+public sealed partial class ProjectileImmunitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
