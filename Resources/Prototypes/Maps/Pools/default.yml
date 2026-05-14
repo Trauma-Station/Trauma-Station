@@ -6,6 +6,9 @@
   - AreaMaints # for ambience and maints spawn rules
   - AreaHallway # for carp migration
   maps:
+  # <Trauma>
+  - Accelerator
+  # </Trauma>
   - Atlas
   - Amber
   - Bagel
