@@ -13,13 +13,13 @@ using Content.Shared.Pointing;
 
 namespace Content.Shared.Body.Systems;
 
-public sealed class BrainSystem : EntitySystem
+public sealed partial class BrainSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IGameTiming _timing = default!;
     // </Trauma>
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
 
     public override void Initialize()
     {

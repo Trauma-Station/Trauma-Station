@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Antag.UI;
 
-public sealed class AntagSummonerBUI : BoundUserInterface
+public sealed partial class AntagSummonerBUI : BoundUserInterface
 {
     private AntagSummonerWindow _window;
 

@@ -8,11 +8,11 @@ using Content.Shared.Popups;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class EatingNeedsOrganSystem : EntitySystem
+public sealed partial class EatingNeedsOrganSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<EnabledOrganComponent> _enabledQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<EnabledOrganComponent> _enabledQuery = default!;
 
     public override void Initialize()
     {

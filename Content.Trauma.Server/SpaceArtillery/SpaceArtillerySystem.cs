@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Server.FireControl;
 using Content.Trauma.Server.SpaceArtillery.Components;
 using Content.Server.Power.Components;
@@ -23,11 +22,11 @@ namespace Content.Trauma.Server.SpaceArtillery;
 
 public sealed partial class SpaceArtillerySystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoilSystem = default!;
-    [Dependency] private readonly FireControlSystem _fireControl = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoilSystem = default!;
+    [Dependency] private FireControlSystem _fireControl = default!;
 
     private const float DISTANCE = 100;
     private const float BIG_DAMAGE = 1000;

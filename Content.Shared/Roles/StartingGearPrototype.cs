@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+// </Trauma>
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -22,7 +25,7 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
     /// <inheritdoc />
     [DataField]
     [AlwaysPushInheritance]
-    public Dictionary<string, EntProtoId> Equipment { get; set; } = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, EntProtoId> Equipment { get; set; } = new(); // Trauma - string -> ProtoId
 
     /// <inheritdoc />
     [DataField]
@@ -32,7 +35,7 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
     /// <inheritdoc />
     [DataField]
     [AlwaysPushInheritance]
-    public Dictionary<string, List<EntProtoId>> Storage { get; set; } = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, List<EntProtoId>> Storage { get; set; } = new(); // Trauma - string -> ProtoId
 }
 
 /// <summary>
@@ -43,7 +46,7 @@ public interface IEquipmentLoadout
     /// <summary>
     /// The slot and entity prototype ID of the equipment that is to be spawned and equipped onto the entity.
     /// </summary>
-    public Dictionary<string, EntProtoId> Equipment { get; set; }
+    public Dictionary<ProtoId<InventorySlotPrototype>, EntProtoId> Equipment { get; set; } // Trauma - string -> ProtoId
 
     /// <summary>
     /// The inhand items that are equipped when this starting gear is equipped onto an entity.
@@ -53,12 +56,12 @@ public interface IEquipmentLoadout
     /// <summary>
     /// Inserts entities into the specified slot's storage (if it does have storage).
     /// </summary>
-    public Dictionary<string, List<EntProtoId>> Storage { get; set; }
+    public Dictionary<ProtoId<InventorySlotPrototype>, List<EntProtoId>> Storage { get; set; } // Trauma - string -> ProtoId
 
     /// <summary>
     /// Gets the entity prototype ID of a slot in this starting gear.
     /// </summary>
-    public string GetGear(string slot)
+    public string GetGear([ForbidLiteral] ProtoId<InventorySlotPrototype> slot) // Trauma - use ProtoId, add ForbidLiteral
     {
         return Equipment.TryGetValue(slot, out var equipment) ? equipment : string.Empty;
     }

@@ -103,7 +103,7 @@ public sealed class RingBuffer<T>
 
 
     /// <summary>
-    /// Call a delegate for every item
+    /// Call a delegate for every item by-ref
     /// </summary>
     public void VisitItems(Visitor visitor)
     {
@@ -113,7 +113,20 @@ public sealed class RingBuffer<T>
         }
     }
 
+    /// <summary>
+    /// Call a delegate for every item by value and clear the buffer.
+    /// </summary>
+    public void Drain(DrainVisitor visitor)
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            visitor(_items[Index(i)]);
+        }
+        Reset();
+    }
+
     public delegate void Visitor(ref T item);
+    public delegate void DrainVisitor(T item);
 
     // index of the oldest item
     private int OldIndex => Index(0);

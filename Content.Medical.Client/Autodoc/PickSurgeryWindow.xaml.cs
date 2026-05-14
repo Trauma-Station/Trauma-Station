@@ -14,8 +14,8 @@ namespace Content.Medical.Client.Autodoc;
 [GenerateTypedNameReferences]
 public sealed partial class PickSurgeryWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly SharedSurgerySystem _surgery;
 
     public event Action<IAutodocStep>? OnAddStep;

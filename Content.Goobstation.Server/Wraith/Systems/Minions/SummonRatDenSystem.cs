@@ -8,7 +8,7 @@ namespace Content.Goobstation.Server.Wraith.Systems.Minions;
 /// <summary>
 /// Spawns a rat den, deletes previous one if it already exists.
 /// </summary>
-public sealed class SummonRatDenSystem : EntitySystem
+public sealed partial class SummonRatDenSystem : EntitySystem
 {
     /// <inheritdoc/>
     public override void Initialize()

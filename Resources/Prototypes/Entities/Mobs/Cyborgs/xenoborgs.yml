@@ -53,6 +53,19 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: KnowledgeGrantOnWear
+    skills: # Basically just engi skillchip because I have no idea what half of those even do, if anything at all
+      FabricationKnowledge: 26
+      MaterialsKnowledge: 26
+      DoorsKnowledge: 26
+      AirlocksKnowledge: 16
+      FurnitureKnowledge: 26
+      InfrastructureKnowledge: 26
+      ElectronicsKnowledge: 26
+      WallsKnowledge: 26
+      WindowsKnowledge: 26
+  # </Trauma>
 
 - type: entity
   parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
@@ -137,7 +150,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleLaser
       - XenoborgModuleJammer
   - type: ItemSlots
@@ -145,6 +158,13 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToughnessKnowledge: 26 # He protecc
+      ShootingKnowledge: 26 # He atacc
+      StrengthKnowledge: 26 # But most importantly, he dragg you to the mothership
+  # </Trauma>
 
 - type: entity
   parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
@@ -191,7 +211,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
@@ -199,6 +219,11 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 30 # High enough for parrying so it's actually kind of a threat in melee. No reflects though.
+  # </Trauma>
 
 - type: entity
   parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
@@ -244,7 +269,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
@@ -253,6 +278,11 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: KnowledgeGrantOnWear
+    skills:
+      ShootingKnowledge: 40 # It's basically a sniper atp it needs semi-high shooting
+  # </Trauma>
 
 
 # xenoborgs empty
@@ -290,7 +320,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleLaser
       - XenoborgModuleJammer
   - type: ItemSlots
@@ -310,7 +340,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
@@ -330,7 +360,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice

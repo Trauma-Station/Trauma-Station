@@ -23,9 +23,9 @@ public sealed partial class BloodstreamCountCondition : EntityConditionBase<Bloo
             ("min", Min));
 }
 
-public sealed class BloodstreamCountConditionSystem : EntityConditionSystem<BloodstreamComponent, BloodstreamCountCondition>
+public sealed partial class BloodstreamCountConditionSystem : EntityConditionSystem<BloodstreamComponent, BloodstreamCountCondition>
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     protected override void Condition(Entity<BloodstreamComponent> ent, ref EntityConditionEvent<BloodstreamCountCondition> args)
     {

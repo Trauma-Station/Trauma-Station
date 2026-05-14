@@ -91,6 +91,15 @@ public sealed class RevsTest : InteractionTest
 
         var converted = IsTargetRev();
         Assert.That(converted, Is.EqualTo(works), reason);
+        if (works)
+        {
+            // conversion count must've gone up too
+            var roles = SEntMan.System<SharedRoleSystem>();
+            var mind = SEntMan.GetComponent<MindContainerComponent>(SPlayer).Mind;
+            Assert.That(mind != null, "Head rev must have a mind");
+            Assert.That(roles.MindHasRole<RevolutionaryRoleComponent>(mind!.Value, out var role), "Head rev must have the role");
+            Assert.That(role.Value.Comp2.ConvertedCount > 0, "ConvertedCount must go up after a conversion");
+        }
     }
 
     private bool IsTargetRev()

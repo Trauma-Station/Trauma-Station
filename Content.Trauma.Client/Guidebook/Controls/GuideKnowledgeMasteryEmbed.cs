@@ -16,7 +16,7 @@ namespace Content.Trauma.Client.Guidebook.Controls;
 /// </summary>
 public sealed partial class GuideKnowledgeMasteryEmbed : BoxContainer, IDocumentTag
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public GuideKnowledgeMasteryEmbed()
     {

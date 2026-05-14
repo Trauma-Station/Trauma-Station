@@ -11,15 +11,15 @@ namespace Content.Trauma.Shared.Forging;
 /// <summary>
 /// Lets players start new forged items from ingots using a radial menu BUI.
 /// </summary>
-public sealed class AnvilSystem : EntitySystem
+public sealed partial class AnvilSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly ForgingSystem _forging = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMetalSystem _metal = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private ForgingSystem _forging = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMetalSystem _metal = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private HashSet<Entity<MetalIngotComponent>> _ingots = new();
 
@@ -42,9 +42,10 @@ public sealed class AnvilSystem : EntitySystem
 
         var user = args.Actor;
         var coords = FindIngots(ent, args.Metal);
-        if (_ingots.Count < item.Cost)
+        var cost = item.Cost * ent.Comp.CostScale;
+        if (_ingots.Count < cost)
         {
-            var missing = item.Cost - _ingots.Count;
+            var missing = cost - _ingots.Count;
             _popup.PopupClient($"You are missing {missing} more hot {metal.Name} ingots!",
                 ent, user, PopupType.MediumCaution);
             return;
@@ -55,12 +56,12 @@ public sealed class AnvilSystem : EntitySystem
         foreach (var ingot in _ingots)
         {
             PredictedDel(ingot.Owner);
-            if (++deleted == item.Cost)
+            if (++deleted == cost)
                 break;
         }
 
         // then create the unfinished item
-        var uid = _forging.SpawnUnfinished(coords, args.Metal, args.Item);
+        var uid = _forging.SpawnUnfinished(coords, args.Metal, args.Item, ent.Comp.WorkScale);
         _popup.PopupClient($"You get ready to work on your {Name(uid)}",
             ent, user, PopupType.Medium);
         _audio.PlayPredicted(ent.Comp.StartSound, ent, user);

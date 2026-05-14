@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -9,13 +8,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic;
 
-public sealed class VoidConduitOverlay : Overlay
+public sealed partial class VoidConduitOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly TransformSystem _xform;
     private readonly SpriteSystem _sprite;

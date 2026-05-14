@@ -18,7 +18,7 @@ namespace Content.Medical.Client.UserInterface.Systems.PartStatus.Widgets;
 [GenerateTypedNameReferences]
 public sealed partial class PartStatusControl : UIWidget
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<ProtoId<OrganCategoryPrototype>, TextureRect> _partStatusControls;
     private readonly PartStatusUIController _controller = default!;

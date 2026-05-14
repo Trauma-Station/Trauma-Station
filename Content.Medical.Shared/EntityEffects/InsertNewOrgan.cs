@@ -22,9 +22,9 @@ public sealed partial class InsertNewOrgan : EntityEffectBase<InsertNewOrgan>
         => Loc.GetString("entity-effect-guidebook-insert-new-organ", ("chance", Probability), ("organ", prototype.Index(Organ).Name));
 }
 
-public sealed class InsertNewOrganEffectSystem : EntityEffectSystem<BodyPartComponent, InsertNewOrgan>
+public sealed partial class InsertNewOrganEffectSystem : EntityEffectSystem<BodyPartComponent, InsertNewOrgan>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyPartComponent> ent, ref EntityEffectEvent<InsertNewOrgan> args)
     {

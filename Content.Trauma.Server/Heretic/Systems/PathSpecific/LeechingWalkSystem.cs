@@ -24,28 +24,28 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class LeechingWalkSystem : EntitySystem
+public sealed partial class LeechingWalkSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly HereticAbilitySystem _ability = default!;
-    [Dependency] private readonly RespiratorSystem _respirator = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly BodyRestoreSystem _bodyRestore = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly EntityQuery<DamageableComponent> _damageableQuery = default!;
-    [Dependency] private readonly EntityQuery<TemperatureComponent> _temperatureQuery = default!;
-    [Dependency] private readonly EntityQuery<StaminaComponent> _staminaQuery = default!;
-    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusQuery = default!;
-    [Dependency] private readonly EntityQuery<RespiratorComponent> _respiratorQuery = default!;
-    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
-    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
-    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private HereticAbilitySystem _ability = default!;
+    [Dependency] private RespiratorSystem _respirator = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private BodyRestoreSystem _bodyRestore = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageableQuery = default!;
+    [Dependency] private EntityQuery<TemperatureComponent> _temperatureQuery = default!;
+    [Dependency] private EntityQuery<StaminaComponent> _staminaQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectsComponent> _statusQuery = default!;
+    [Dependency] private EntityQuery<RespiratorComponent> _respiratorQuery = default!;
+    [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;

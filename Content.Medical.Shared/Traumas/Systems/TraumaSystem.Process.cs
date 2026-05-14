@@ -22,7 +22,7 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     private EntityQuery<ArmorComponent> _armorQuery;
 

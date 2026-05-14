@@ -6,7 +6,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Goobstation.Shared.Supermatter.Systems;
 
-public abstract class SharedSupermatterSystem : EntitySystem
+public abstract partial class SharedSupermatterSystem : EntitySystem
 {
     public override void Initialize()
     {

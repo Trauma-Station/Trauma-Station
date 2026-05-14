@@ -10,7 +10,7 @@ namespace Content.Server.Shuttles.Systems;
 /// </summary>
 public sealed partial class EmergencyShuttleSystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
 
     private EntityUid? _lastRepealUser;
     private double _repealTimestamp = 0;

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Content.Trauma.Common.Heretic;
 using Robust.Client.UserInterface;
@@ -11,9 +10,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public sealed class ButtonTag : IMarkupTagHandler
+public sealed partial class ButtonTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public string Name => "button";
 

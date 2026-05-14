@@ -10,9 +10,9 @@ namespace Content.Goobstation.Client.FloorGoblin;
 
 public sealed partial class HideUnderFloorAbilitySystem : SharedCrawlUnderFloorSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private readonly Dictionary<EntityUid, (EntityUid Grid, Vector2i Tile)> _lastCell = new();
 

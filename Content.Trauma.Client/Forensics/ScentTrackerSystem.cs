@@ -9,12 +9,12 @@ using Robust.Client.Player;
 
 namespace Content.Trauma.Client.Forensics;
 
-public sealed class ScentTrackerSystem : SharedScentTrackerSystem
+public sealed partial class ScentTrackerSystem : SharedScentTrackerSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public override void Update(float frameTime)
     {

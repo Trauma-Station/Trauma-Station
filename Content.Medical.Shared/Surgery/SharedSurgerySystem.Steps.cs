@@ -34,8 +34,8 @@ namespace Content.Medical.Shared.Surgery;
 
 public abstract partial class SharedSurgerySystem
 {
-    [Dependency] protected readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] protected BodyPartSystem _part = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
     public static readonly ProtoId<DamageTypePrototype> Poison = "Poison";

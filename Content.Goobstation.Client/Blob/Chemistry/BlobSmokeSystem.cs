@@ -5,7 +5,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Blob.Chemistry;
 
-public sealed class BlobSmokeSystem : EntitySystem
+public sealed partial class BlobSmokeSystem : EntitySystem
 {
     public override void Initialize()
     {

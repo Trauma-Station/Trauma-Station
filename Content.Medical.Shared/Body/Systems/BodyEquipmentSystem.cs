@@ -10,11 +10,11 @@ using Content.Shared.Popups;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class BodyEquipmentSystem : EntitySystem
+public sealed partial class BodyEquipmentSystem : EntitySystem
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<InventoryComponent> _inventoryQuery;
 

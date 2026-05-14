@@ -7,11 +7,11 @@ using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Forging;
 
-public sealed class MetalSystem : SharedMetalSystem
+public sealed partial class MetalSystem : SharedMetalSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
-    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> EmissiveShader = "Emissive";
 

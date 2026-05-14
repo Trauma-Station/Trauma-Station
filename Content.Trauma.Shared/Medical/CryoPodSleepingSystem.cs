@@ -10,10 +10,10 @@ namespace Content.Trauma.Shared.Medical;
 /// Lets you sleep inside cryo pods.
 /// Being ejected from a cryo pod automatically tries to wake you up.
 /// </summary>
-public sealed class CryoPodSleepingSystem : EntitySystem
+public sealed partial class CryoPodSleepingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SleepingSystem _sleeping = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SleepingSystem _sleeping = default!;
 
     public override void Initialize()
     {

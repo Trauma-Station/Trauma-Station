@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.LinkAccount;
 using Content.Shared.GameTicking;
 using Content.Shared.Random.Helpers;
@@ -15,15 +14,15 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.RoundEndCredits;
 
-public sealed class RoundEndCreditsSystem : EntitySystem
+public sealed partial class RoundEndCreditsSystem : EntitySystem
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private float _timer;
     private EndRoundCreditsControl? _creditsContainer;

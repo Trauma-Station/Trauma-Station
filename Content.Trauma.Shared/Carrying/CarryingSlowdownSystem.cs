@@ -4,9 +4,9 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Trauma.Shared.Carrying;
 
-public sealed class CarryingSlowdownSystem : EntitySystem
+public sealed partial class CarryingSlowdownSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()
     {

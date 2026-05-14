@@ -6,7 +6,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.UI;
 
-public sealed class GeneticsConsoleBUI : BoundUserInterface
+public sealed partial class GeneticsConsoleBUI : BoundUserInterface
 {
     private GeneticsConsoleWindow? _window;
 
