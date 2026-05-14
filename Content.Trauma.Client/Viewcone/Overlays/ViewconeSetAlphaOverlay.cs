@@ -145,6 +145,10 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             // simplified logic for effects that dont spawn memories or anything likely stealthed
             if (!comp.UseMemory || ((!sprite.Visible || sprite.Color.A < 0.4) && !_occludedQuery.HasComp(uid)))
             {
+                // don't want to show memory for invisible things
+                if (comp.Memory is { } oldMemory)
+                    _sprite.SetVisible(oldMemory, false);
+
                 // save the results so we can use it in resetalpha overlay
                 _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
 
