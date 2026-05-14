@@ -325,4 +325,3 @@
     damage:
       types:
         Piercing: 10
-  - type: DeleteOnTrigger
