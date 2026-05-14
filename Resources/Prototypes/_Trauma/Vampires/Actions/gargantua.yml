@@ -245,7 +245,7 @@
   parent: BaseVampireAction
   id: ActionDesecratedDuel
   name: Desecrated Duel
-  description: Duel.
+  description: Click to leap towards a target, and once landing, conjure an arena!
   components:
   - type: Action
     sound:
