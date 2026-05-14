@@ -150,7 +150,6 @@
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
-  - type: Appearance
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -166,7 +165,6 @@
     - !type:AutomatedMaterialStorage
       input: AutomationSlotMaterials
       output: null
-  - type: Animateable
 
 - type: entity
   parent: BaseRevIndustry
