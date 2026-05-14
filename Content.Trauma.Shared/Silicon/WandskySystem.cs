@@ -8,7 +8,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Silicon;
-public sealed class WandskySystem : EntitySystem
+public sealed partial class WandskySystem : EntitySystem
 {
 
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
