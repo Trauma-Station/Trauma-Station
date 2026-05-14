@@ -43,8 +43,24 @@ public sealed partial class ErrorWebhookSystem : EntitySystem
     {
         base.Shutdown();
 
-        if (_enabled)
-            _log.RootSawmill.RemoveHandler(_handler);
+        if (!_enabled)
+            return;
+
+        _log.RootSawmill.RemoveHandler(_handler);
+
+        if (_identifier is not {} identifier)
+            return;
+
+        // if server shuts down try send any buffered errors
+        _handler.Buffer.Drain(async (content) =>
+        {
+            var payload = new WebhookPayload()
+            {
+                Content = content
+            };
+            // do have to wait for this or they may be dropped
+            await _discord.CreateMessage(identifier, payload);
+        });
     }
 
     public override void Update(float frameTime)

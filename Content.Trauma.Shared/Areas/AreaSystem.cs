@@ -48,9 +48,8 @@ public sealed partial class AreaSystem : EntitySystem
 
     private void OnAnchorStateChanged(Entity<AreaComponent> ent, ref AnchorStateChangedEvent args)
     {
-        // delete areas that get unanchored by explosions, someone removing the floor etc
-        // don't do it if client is detaching or it will break PVS
-        if (!args.Anchored && !args.Detaching)
+        // delete areas that get unanchored by explosions or other more cursed things
+        if (!args.Anchored)
             PredictedQueueDel(ent);
     }
 
