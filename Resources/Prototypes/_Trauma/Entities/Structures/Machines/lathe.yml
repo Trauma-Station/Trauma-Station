@@ -160,11 +160,6 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: AutomationSlots
-    slots:
-    - !type:AutomatedMaterialStorage
-      input: AutomationSlotMaterials
-      output: null
 
 - type: entity
   parent: BaseRevIndustry
