@@ -89,7 +89,7 @@ namespace Content.Server.Tabletop
             if (component.Session is not { } session)
                 return;
 
-            if (!_hands.TryGetActiveItem(uid, out var handEnt))
+            if (!_hands.TryGetActiveItem((args.User, hands), out var handEnt)) // Trauma - chess board has no hands, use the user instead
                 return;
 
             if (!TryComp<ItemComponent>(handEnt, out var item))
