@@ -9,6 +9,7 @@ uniform highp float ConeAngle;
 uniform highp float ConeFeather;
 uniform highp float ConeIgnoreRadius;
 uniform highp float ConeIgnoreFeather;
+uniform highp float GrainScale;
 
 uniform highp float ViewAngle;
 
@@ -44,7 +45,7 @@ void fragment(){
     mask = 1.0 - clamp(mask, 0.0, 1.0);
 
     // So grim.. so dark
-    highp float grain = zRandom(FRAGCOORD.xy * sin(TIME * 0.01)).x;
+    highp float grain = GrainScale * zRandom(FRAGCOORD.xy * sin(TIME * 0.01)).x;
 
     // Lil bit of grayscale for good measure, too
     highp float grayscale = zGrayscale(color.rgb) * (grain * grainMult + grainBase);
