@@ -7,7 +7,7 @@ using Robust.Shared.Enums;
 
 namespace Content.Goobstation.Client.Shaders;
 
-public sealed class MultiShaderSpriteOverlay : Overlay
+public sealed partial class MultiShaderSpriteOverlay : Overlay
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPrototypeManager _proto = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Chat;
 
-public sealed class TextShaderTag : IMarkupTagHandler
+public sealed partial class TextShaderTag : IMarkupTagHandler
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IResourceCache _cache = default!;
