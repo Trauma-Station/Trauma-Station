@@ -81,15 +81,11 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
         var ownerCoords = owner.ToCoordinates();
 
         var range = 12f;
-        List<EntityUid> entityList = new();
 
         _entities.Clear();
         _lookup.GetEntitiesInRange(ownerCoords, range, _entities);
 
-        int baseThreat = 0;
         bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
-        if (isEmagged)
-            baseThreat += 10;
 
         foreach (var entity in _entities)
         {
@@ -97,29 +93,44 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
             if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
                 continue;
 
-            int threatLevel = 0;
-            if (entity.Comp.StatusIcon == CriminalStatus)
-                threatLevel += 2;
-
-            threatLevel += _contra.FindContraband(entity.Owner).Count;
-
-            // Is target a threat?
-            if (threatLevel <= 0)
-                continue;
+            if (!isEmagged)
+            {
+                if (entity.Comp.StatusIcon != CriminalStatus && _contra.FindContraband(entity.Owner).Count <= 0 && _card.TryGetIdCard(entity, out var idCard) && !_cardQuery.HasComp(idCard))
+                    continue;
+            }
+            else
+            {
+                if (entity.Comp.StatusIcon == CriminalStatus || _contra.FindContraband(entity.Owner).Count > 0 || !_card.TryGetIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard))
+                    continue;
+            }
 
             // Is threat brought to order
             if (_cuffableQuery.TryComp(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
                 continue;
 
-            entityList.Add(entity.Owner);
+            //Needed to make sure it doesn't sometimes stop right outside it's interaction range
+            var pathRange = SharedInteractionSystem.InteractionRange - 1f;
+            var path = await _pathfinding.GetPath(owner, entity, pathRange, cancelToken);
+
+            if (path.Result != PathResult.Path)
+                continue;
+
+            if (TargetFoundSound != null &&
+                (!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entMan) ||
+                 oldTarget != entity.Owner))
+            {
+                var targetFoundSound = _audio.ResolveSound(TargetFoundSound);
+                _audio.PlayPvs(targetFoundSound, owner);
+            }
+
+            return (true, new Dictionary<string, object>()
+            {
+                {TargetKey, entity.Owner},
+                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(entity).Coordinates},
+                {NPCBlackboard.PathfindKey, path},
+            });
         }
 
-        if (entityList.Count <= 0)
-            return (false, null);
-
-        return (true, new Dictionary<string, object>()
-        {
-            {NPCBlackboard.TargetList, entityList},
-        });
+        return (false, null);
     }
 }

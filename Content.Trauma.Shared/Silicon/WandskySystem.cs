@@ -14,6 +14,7 @@ public sealed class WandskySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -94,8 +95,11 @@ public sealed class WandskySystem : EntitySystem
         }
         else
         {
-            var waypointEntity = Spawn(ent.Comp.WaypointEntityUid, args.Target);
-            ent.Comp.Waypoints.Add(waypointEntity);
+            if (_net.IsServer)
+            {
+                var waypointEntity = Spawn(ent.Comp.WaypointEntityUid, args.Target);
+                ent.Comp.Waypoints.Add(waypointEntity);
+            }
             _popupSystem.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
         }
 

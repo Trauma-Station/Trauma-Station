@@ -3,86 +3,16 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: SecbotFindTargetCompound
-        - !type:HTNCompoundTask
-          task: SecbotCombatCompound
+          task: ArrestWantedNearbyCompound
     - tasks:
-        - !type:HTNCompoundTask
-          task: SecbotPatrolCompound
+      - !type:HTNCompoundTask
+        task: IdleCompound
+    # - tasks:
+    #     - !type:HTNCompoundTask
+    #       task: SecbotPatrolCompound
     # - tasks:
     #     - !type:HTNCompoundTask
     #       task: RandomWalkCompound
-
-- type: htnCompound
-  id: SecbotFindTargetCompound
-  branches:
-    - tasks:
-        - !type:HTNPrimitiveTask
-          operator: !type:PickNearbyTargetOperator
-            targetKey: Target
-            targetMoveKey: TargetCoordinates
-            criminalStatus: SecurityIconHostile
-            targetFoundSound: !type:SoundCollectionSpecifier
-            collection: Ed209TargetFound
-
-        - !type:HTNPrimitiveTask
-          operator: !type:MoveToOperator
-            pathfindInPlanning: false
-            stopOnLineOfSight: true
-            targetKey: TargetCoordinates
-            rangeKey: VisionRange
-
-- type: htnCompound
-  id: SecbotCombatCompound
-  branches:
-    # TACTICAL RETREAT / COVER
-    # - preconditions:
-    #     - !type:EnemyHasLoadedWeaponPrecondition
-    #       targetKey: Target
-    #   tasks:
-    #     - !type:HTNPrimitiveTask
-    #       operator: !type:FindCoverOperator
-    #         targetKey: CoverCoord
-    #     - !type:HTNPrimitiveTask
-    #       operator: !type:MoveToOperator
-    #         targetKey: CoverCoord
-    # ARREST
-    # - preconditions:
-    #     - !type:TargetStunnedPrecondition
-    #       targetKey: Target
-    #     - !type:AreaClearPrecondition
-    #   tasks:
-    #     - !type:HTNPrimitiveTask
-    #       operator: !type:ForceHandcuffOperator
-    #         targetKey: Target
-    # COMBAT
-    - tasks:
-        - !type:HTNPrimitiveTask
-          operator: !type:MoveToOperator
-            targetKey: Target
-        - !type:HTNPrimitiveTask
-          operator: !type:MeleeOperator
-            targetKey: Target
-
-- type: htnCompound
-  id: SecbotPatrolCompound
-  branches:
-    - tasks:
-        - !type:HTNPrimitiveTask
-          operator: !type:EntityWhitelistOperator
-            whitelist:
-              components:
-              - NavMapBeacon
-            targetKey: PatrolTarget
-            targetMoveKey: PatrolCoordinates
-            listKey: PatrolTargets
-
-        - !type:HTNPrimitiveTask
-          operator: !type:MoveToOperator
-            pathfindInPlanning: false
-            stopOnLineOfSight: true
-            targetKey: PatrolCoordinates
-            rangeKey: VisionRange
 
 # - type: htnCompound
 #   id: RandomWalkCompound
@@ -123,24 +53,36 @@
     - preconditions:
         - !type:TargetStunnedPrecondition
           stunned: true
-          targetKey: StunTarget
+          targetKey: Target
+        - !type:KeyExistsPrecondition
+          key: HandcuffItem
       tasks:
         - !type:HTNPrimitiveTask
           operator: !type:ForceHandcuffOperator
-            targetKey: StunTarget
+            targetKey: Target
             handcuffKey: HandcuffItem
             targetArrestedSoundKey: TargetArrestedSound
         - !type:HTNPrimitiveTask
           operator: !type:SendRadioOperator
             message: securitron-target-arrested
             radioChannel: Security
-            key: StunTarget
+            key: Target
+
+    - preconditions:
+        - !type:TargetStunnedPrecondition
+          stunned: true
+          targetKey: Target
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:SpawnHandcuffOperator
+            handcuffKey: HandcuffItem
+            handcuffPrototype: Handcuffs
 
     - preconditions:
         - !type:TargetStunnedPrecondition
           stunned: false
-          targetKey: StunTarget
+          targetKey: Target
       tasks:
         - !type:HTNPrimitiveTask
           operator: !type:MeleeOperator
-            targetKey: StunTarget
+            targetKey: Target

@@ -47,6 +47,8 @@ public sealed partial class ForceHandcuffOperator : HTNOperator
         if (TargetArrestedSoundKey != null && blackboard.TryGetValue<SoundSpecifier>(TargetArrestedSoundKey, out var targetArrestedSound, _entMan))
             _audio.PlayPvs(targetArrestedSound, owner);
 
+        // Clear the key so we don't try to use the same cuffs again
+        blackboard.SetValue(HandcuffKey, EntityUid.Invalid);
         return HTNOperatorStatus.Finished;
     }
 }
