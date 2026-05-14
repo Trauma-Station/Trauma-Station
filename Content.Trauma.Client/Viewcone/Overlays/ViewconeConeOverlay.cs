@@ -87,7 +87,7 @@ public sealed partial class ViewconeConeOverlay : Overlay
         _viewconeShader.SetParameter("ConeFeather", _coneFeather);
         _viewconeShader.SetParameter("ConeIgnoreRadius", _coneIgnoreRadius);
         _viewconeShader.SetParameter("ConeIgnoreFeather", _coneIgnoreFeather);
-        _viewconeShader.SetParameter("GrainScale", _grainScale);
+        _viewconeShader.SetParameter("GrainScale", GrainScale);
 
         worldHandle.UseShader(_viewconeShader);
         worldHandle.DrawRect(viewport, Color.White);
