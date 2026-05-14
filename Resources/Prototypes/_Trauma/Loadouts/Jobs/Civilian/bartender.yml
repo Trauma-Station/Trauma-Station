@@ -1,0 +1,23 @@
+- type: loadoutEffectGroup
+  id: SeniorBarTrauma
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBartender
+      time: 5h # 1 hour per week for 5 weeks because a year is way too long
+
+- type: loadout
+  id: BartenderShotgunDoubleBarrelled
+  storage:
+    back: # i know it doesnt go on the back i dont care
+    - WeaponShotgunDoubleBarreledRubber
+
+- type: loadout
+  id: BartenderShotgunDoubleBarrelledEngraved
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BartenderEngravedShotty
+  storage:
+    back:
+    - WeaponShotgunDoubleBarreledEngravedRubber
