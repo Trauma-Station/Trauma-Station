@@ -7,7 +7,7 @@ using Robust.Shared.Enums;
 
 namespace Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 
-public sealed class StasisOverlay : Overlay
+public sealed partial class StasisOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IEntityManager _entMan = default!;

@@ -18,7 +18,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Goobstation.Client.JumpScare;
 
-public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
+public sealed partial class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IResourceCache _cache = default!;

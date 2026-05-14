@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Shadowling;
 
-public sealed class EnthrallOverlay : Overlay
+public sealed partial class EnthrallOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;

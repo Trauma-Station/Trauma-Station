@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Overlays;
 
-public sealed class SpecialAnimationOverlay : Overlay
+public sealed partial class SpecialAnimationOverlay : Overlay
 {
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager _player = default!;
