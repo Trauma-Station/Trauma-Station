@@ -7,35 +7,33 @@ using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Clothing;
 
-public sealed class ToggleableClothingBoundUserInterface : BoundUserInterface
+public sealed partial class ToggleableClothingBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private IClyde _displayManager = default!;
-    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IClyde _display = default!;
+    [Dependency] private IInputManager _input = default!;
 
-    private IEntityManager _entityManager;
     private ToggleableClothingRadialMenu? _menu;
 
     public ToggleableClothingBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        IoCManager.InjectDependencies(this);
-        _entityManager = IoCManager.Resolve<IEntityManager>();
     }
 
     protected override void Open()
     {
         base.Open();
 
+        // TODO: use SimpleRadialMenu for this shit
         _menu = this.CreateWindow<ToggleableClothingRadialMenu>();
         _menu.SetEntity(Owner);
         _menu.SendToggleClothingMessageAction += SendToggleableClothingMessage;
 
-        var vpSize = _displayManager.ScreenSize;
-        _menu.OpenCenteredAt(_inputManager.MouseScreenPosition.Position / vpSize);
+        var vpSize = _display.ScreenSize;
+        _menu.OpenCenteredAt(_input.MouseScreenPosition.Position / vpSize);
     }
 
     private void SendToggleableClothingMessage(EntityUid uid)
     {
-        var message = new ToggleableClothingUiMessage(_entityManager.GetNetEntity(uid));
+        var message = new ToggleableClothingUiMessage(EntMan.GetNetEntity(uid));
         SendPredictedMessage(message);
     }
 }

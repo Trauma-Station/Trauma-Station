@@ -11,7 +11,7 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Goobstation.Client.ListViewSelector;
 
 [UsedImplicitly]
-public sealed class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
 
