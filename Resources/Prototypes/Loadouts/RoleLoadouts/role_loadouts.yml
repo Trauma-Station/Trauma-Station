@@ -510,7 +510,7 @@
   - HeadofSecurityEnvirohelm
   - HeadofSecurityEnvirosuit
   - HeadofSecurityEnvirogloves
-  - HeadofSecurityGloves
+  # - HeadofSecurityGloves # Trauma
   - ExclusiveItems # Trauma
 
 - type: roleLoadout
