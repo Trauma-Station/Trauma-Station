@@ -4,6 +4,7 @@ using Content.Goobstation.Common.ServerCurrency;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using System.Threading.Tasks;
 
 namespace Content.Goobstation.Client.ServerCurrency;
 
@@ -96,4 +97,8 @@ public sealed partial class ClientCurrencyManager : ICommonCurrencyManager, IEnt
         return _cachedBalance;
     }
 
+    public Task Wipe()
+    {
+        throw new NotImplementedException();
+    }
 }

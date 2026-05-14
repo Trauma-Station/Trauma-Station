@@ -24,6 +24,7 @@ public sealed partial class CommandLoggingSystem : EntitySystem
         {"golobby", LogImpact.Extreme},
         {"restartround", LogImpact.Extreme},
         {"restartroundnow", LogImpact.Extreme},
+        {"wipecurrency", LogImpact.Extreme},
         // High
         {"ban", LogImpact.High},
         {"pardon", LogImpact.High},
