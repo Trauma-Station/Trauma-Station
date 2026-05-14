@@ -1,0 +1,11 @@
+- type: loadout
+  id: BartenderShotgunDoubleBarrelled
+  storage:
+    back:
+    - WeaponShotgunDoubleBarreledRubber
+
+- type: loadout
+  id: BartenderShotgunDoubleBarrelledEngraved
+  storage:
+    back:
+    - WeaponShotgunDoubleBarreledEngravedRubber
