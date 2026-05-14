@@ -12,7 +12,7 @@ namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class EntityWhitelistOperator : HTNOperator, IHtnConditionalShutdown
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private EntityLookupSystem _entityLookup = default!;
     private SharedTransformSystem _transform = default!;

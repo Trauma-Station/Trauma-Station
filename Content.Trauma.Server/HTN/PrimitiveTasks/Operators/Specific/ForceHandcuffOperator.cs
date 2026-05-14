@@ -11,7 +11,7 @@ namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class ForceHandcuffOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private SharedCuffableSystem _cuffable = default!;
     private SharedAudioSystem _audio = default!;
 
@@ -47,7 +47,6 @@ public sealed partial class ForceHandcuffOperator : HTNOperator
         if (TargetArrestedSoundKey != null && blackboard.TryGetValue<SoundSpecifier>(TargetArrestedSoundKey, out var targetArrestedSound, _entMan))
             _audio.PlayPvs(targetArrestedSound, owner);
 
-        // Clear the key so we don't try to use the same cuffs again
         blackboard.SetValue(HandcuffKey, EntityUid.Invalid);
         return HTNOperatorStatus.Finished;
     }

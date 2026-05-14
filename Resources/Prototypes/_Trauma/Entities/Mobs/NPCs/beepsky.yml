@@ -31,7 +31,7 @@
     animation: WeaponArcThrust
     damage:
       types:
-        Blunt: 0
+        Blunt: 10
   - type: Stunbaton
     energyPerUse: 50
   - type: StaminaDamageOnHit
@@ -68,6 +68,19 @@
     channels:
     - Common
     - Security
+  - type: Access
+    tags:
+    - HeadOfSecurity
+    - Command
+    - Brig
+    - Security
+    - Armory
+    - Maintenance
+    - External
+    - Detective
+    - Cryogenics
+    - GenpopEnter
+    - GenpopLeave
   - type: Tag
     tags:
     - DoorBumpOpener

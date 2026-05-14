@@ -9,7 +9,7 @@ using Content.Server.NPC.HTN.PrimitiveTasks;
 [DataDefinition]
 public sealed partial class SpawnHandcuffOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     [DataField(required: true)]
     public EntProtoId HandcuffPrototype = "Handcuffs";
@@ -30,10 +30,7 @@ public sealed partial class SpawnHandcuffOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        // Spawn the cuffs at the bot's position
         var cuffs = _entMan.SpawnEntity(HandcuffPrototype, _entMan.GetComponent<TransformComponent>(owner).Coordinates);
-
-        // Update the blackboard with the real UID
         blackboard.SetValue(HandcuffKey, cuffs);
 
         return HTNOperatorStatus.Finished;

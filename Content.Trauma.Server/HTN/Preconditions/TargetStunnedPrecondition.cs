@@ -8,7 +8,7 @@ namespace Content.Trauma.Server.HTN.Preconditions;
 
 public sealed partial class TargetStunnedPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     [DataField]
     public bool Stunned = true;

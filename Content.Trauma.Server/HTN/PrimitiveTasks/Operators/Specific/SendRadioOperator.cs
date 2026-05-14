@@ -7,17 +7,19 @@ using Content.Server.Pinpointer;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Radio;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class SendRadioOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private RadioSystem _radio = default!;
     private NavMapSystem _navMap = default!;
+    private SharedAudioSystem _audio = default!;
 
     [DataField(required: true)]
     public LocId Message;
@@ -31,10 +33,17 @@ public sealed partial class SendRadioOperator : HTNOperator
     [DataField]
     public bool KeyIsEntity = true;
 
+    /// <summary>
+    /// The sound to play when target arrested
+    /// </summary>
+    [DataField(required: true)]
+    public SoundCollectionSpecifier TargetArrestedSound;
+
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
 
+        _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
         _radio = sysManager.GetEntitySystem<RadioSystem>();
         _navMap = sysManager.GetEntitySystem<NavMapSystem>();
     }
@@ -64,6 +73,10 @@ public sealed partial class SendRadioOperator : HTNOperator
         var speaker = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
         _radio.SendRadioMessage(speaker, message, RadioChannel, speaker, escapeMarkup: false);
+
+        var targetFoundSound = _audio.ResolveSound(TargetArrestedSound);
+        _audio.PlayPvs(targetFoundSound, speaker);
+
         return HTNOperatorStatus.Finished;
     }
 }
