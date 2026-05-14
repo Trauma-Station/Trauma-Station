@@ -11,7 +11,7 @@ using Content.Shared.Eui;
 
 namespace Content.Goobstation.Server.Actions;
 
-public sealed class TimeTransferPanelEui : BaseEui
+public sealed partial class TimeTransferPanelEui : BaseEui
 {
     [Dependency] private IAdminManager _adminMan = default!;
     [Dependency] private ILogManager _log = default!;
