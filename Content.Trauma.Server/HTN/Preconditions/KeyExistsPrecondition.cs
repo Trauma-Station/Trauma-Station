@@ -7,7 +7,7 @@ namespace Content.Trauma.Server.HTN.Preconditions;
 
 public sealed partial class KeyExistsPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     /// <summary>
     /// The blackboard key we are checking for.

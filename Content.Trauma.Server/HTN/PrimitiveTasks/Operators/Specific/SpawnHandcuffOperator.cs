@@ -9,7 +9,7 @@ using Content.Server.NPC.HTN.PrimitiveTasks;
 [DataDefinition]
 public sealed partial class SpawnHandcuffOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     [DataField(required: true)]
     public EntProtoId HandcuffPrototype = "Handcuffs";

@@ -7,14 +7,13 @@ using Content.Server.Pinpointer;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Radio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class SendRadioOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private RadioSystem _radio = default!;
     private NavMapSystem _navMap = default!;

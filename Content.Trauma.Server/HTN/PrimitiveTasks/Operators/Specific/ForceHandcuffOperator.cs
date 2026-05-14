@@ -11,7 +11,7 @@ namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class ForceHandcuffOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private SharedCuffableSystem _cuffable = default!;
     private SharedAudioSystem _audio = default!;
 
