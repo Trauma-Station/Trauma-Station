@@ -77,7 +77,7 @@
   - type: TackleModifier
     grabOnSuccess: true
     staminaCostMultiplier: 0.4
-    skillMod: 7
+    skillMod: 5
 
 - type: entity
   parent: [BaseGlovesTackle, BaseSecurityContraband]
