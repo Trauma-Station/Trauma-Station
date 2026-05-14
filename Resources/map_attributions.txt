@@ -74,3 +74,6 @@
 
 - file: ["amber.yml"]
   authors: Southbridge, Flipsie27
+
+- file: ["accelerator.yml"]
+  authors: GeneRickUsername

@@ -1,0 +1,35 @@
+- type: gameMap
+  id: Accelerator
+  mapName: 'Accelerator'
+  mapPath: /Maps/_Trauma/accelerator.yml
+  minPlayers: 1
+  maxPlayers: 20
+  stations:
+    Accelerator:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: '{0} Accelerator {1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: 'SPD'
+      - type: StationEmergencyShuttle
+        emergencyShuttlePath: /Maps/Shuttles/emergency_crimson.yml
+      - type: StationJobs
+        availableJobs:
+          # Command
+          Captain: [ 3, 3 ]
+          # Engineering
+          ChiefEngineer: [ 1, 1 ]
+          # Medical
+          ChiefMedicalOfficer: [ 1, 1 ]
+          # Science
+          ResearchDirector: [ 1, 1 ]
+          # Security
+          SalvageSpecialist: [ -1, -1 ]
+          # Civilian
+          Clown: [ 1, 1 ]
+          Janitor: [ 2, 2 ]
+      - type: StationBlobConfig
+        stageBegin: 25
+        stageCritical: 350
+        stageTheEnd: 700
