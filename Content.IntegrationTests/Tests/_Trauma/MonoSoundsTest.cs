@@ -25,7 +25,7 @@ public sealed class MonoSoundsTests : GameTest
     public async Task AllPositionalSoundsMono()
     {
         // NFI why i have to do this but sure, loading resources completely fails without it
-        IoCManager.InitThread(Client.InstanceDependencyCollection);
+        IoCManager.InitThread(Client.InstanceDependencyCollection, true);
         var proto = Client.ProtoMan;
         var cache = Client.ResolveDependency<IResourceCache>();
         var failed = new List<string>();
