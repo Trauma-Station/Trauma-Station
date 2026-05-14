@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Cuff;
 
 public sealed partial class CuffSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
 
     private static readonly EntProtoId Cuff = "Handcuffs";
 
