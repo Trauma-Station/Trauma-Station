@@ -4,6 +4,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Emag.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 
@@ -24,6 +25,7 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
 
         SubscribeLocalEvent<CuffSpawnerComponent, UserActivateInWorldEvent>(OnInteract);
         SubscribeLocalEvent<CuffSpawnerComponent, CuffSpawnerDoAfterEvent>(OnCuff);
+        SubscribeLocalEvent<CuffSpawnerComponent, GotEmaggedEvent>(OnEmag);
         SubscribeLocalEvent<CuffSpawnerComponent, DoAfterAttemptEvent<CuffSpawnerDoAfterEvent>>(OnWait);
     }
 
@@ -48,6 +50,11 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
 
         if (args.Target is { } target)
             TryCuff(ent.Owner, target);
+    }
+
+    private void OnEmag(Entity<CuffSpawnerComponent> ent, ref GotEmaggedEvent args)
+    {
+        args.Handled = true;
     }
 
     private void OnWait(Entity<CuffSpawnerComponent> ent, ref DoAfterAttemptEvent<CuffSpawnerDoAfterEvent> args)
