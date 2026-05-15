@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Contraband;
@@ -135,6 +136,9 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
             });
         }
 
-        return (false, null);
+        return (false, new Dictionary<string, object>()
+        {
+            {TargetKey, EntityUid.Invalid},
+        });
     }
 }

@@ -13,10 +13,4 @@ public sealed partial class SlaveComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? MasterEntity { get; set; }
-
-    /// <summary>
-    /// Should the slave be patrolling?
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool IsPatrolling;
 }

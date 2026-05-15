@@ -35,45 +35,27 @@ public sealed partial class WandskySystem : EntitySystem
         if (!TryComp<CommanderComponent>(args.Used, out var commander))
             return;
 
-        if (ent.Comp.MasterEntity is { } && commander.SlaveEntity == ent.Owner)
+        if (ent.Comp.MasterEntity == ent.Owner)
         {
-            _popupSystem.PopupClient("A bond has already been formed with this one.", ent.Owner, args.User, PopupType.Medium);
+            _popupSystem.PopupClient("Bond deleted.", ent.Owner, args.User, PopupType.Medium);
+            ent.Comp.MasterEntity = null;
+            Dirty(ent);
             return;
         }
 
         _popupSystem.PopupClient("Bond formed.", ent.Owner, args.User, PopupType.Medium);
 
-        var slaveEntity = ent.Owner;
-
-        // Clear old one
-        if (TryComp<SlaveComponent>(commander.SlaveEntity, out var slave))
-        {
-            if (TryComp<CommanderComponent>(slave.MasterEntity, out var master))
-                master.SlaveEntity = null;
-            slave.MasterEntity = null;
-        }
-
-        // Set new one
-        commander.SlaveEntity = slaveEntity;
-        ent.Comp.MasterEntity = ent.Owner;
+        ent.Comp.MasterEntity = args.Used;
 
         Dirty(ent);
-        Dirty(args.Used, commander);
-
         _audio.PlayPvs(commander.EnslaveSound, ent);
     }
 
     public void OnTogglePatrol(Entity<CommanderComponent> ent, ref TogglePatrolActionEvent args)
     {
-        if (ent.Comp.SlaveEntity is not { } || !TryComp<SlaveComponent>(ent.Comp.SlaveEntity, out var slave))
-        {
-            _popupSystem.PopupClient("You have not synced to a Securitron", ent.Owner, args.Performer, PopupType.Medium);
-            return;
-        }
+        ent.Comp.IsPatrolling = !ent.Comp.IsPatrolling;
 
-        slave.IsPatrolling = !slave.IsPatrolling;
-
-        var message = slave.IsPatrolling ? "PATROL ENABLED!" : "PATROL DISABLED!";
+        var message = ent.Comp.IsPatrolling ? "PATROL ENABLED!" : "PATROL DISABLED!";
 
         Dirty(ent);
         _popupSystem.PopupClient(message, ent.Owner, args.Performer, PopupType.Medium);

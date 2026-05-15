@@ -11,6 +11,15 @@
     damage: 25
     overtime: 40
     sound: /Audio/Weapons/egloves.ogg
+  - type: MeleeWeapon
+    hidden: true
+    animation: WeaponArcThrust
+    damage:
+      types:
+        Blunt: 10
+  - type: Stunbaton
+    energyPerUse: 50
+  - type: StaminaDamageOnHit
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Item
     size: Normal

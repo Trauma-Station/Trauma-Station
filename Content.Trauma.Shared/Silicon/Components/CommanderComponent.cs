@@ -21,10 +21,10 @@ public sealed partial class CommanderComponent : Component
     public HashSet<EntityUid> Waypoints { get; set; } = new();
 
     /// <summary>
-    /// The enslaved robot.
+    /// Should slaves be patrolling?
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? SlaveEntity { get; set; }
+    public bool IsPatrolling;
 
     /// <summary>
     /// Which sound to play on enslavement.
