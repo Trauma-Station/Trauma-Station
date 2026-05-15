@@ -78,6 +78,9 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
         if (!Resolve(beepsky, ref beepsky.Comp, false))
             return false;
 
+        if (!CheckCuffs(beepsky, target))
+            return false;
+
         if (!_interaction.InRangeUnobstructed(beepsky.Owner, target))
             return false;
 

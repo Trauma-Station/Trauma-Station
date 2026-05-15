@@ -16,11 +16,11 @@
     animation: WeaponArcThrust
     damage:
       types:
-        Blunt: 10
+        Blunt: 1
   - type: Stunbaton
     energyPerUse: 50
   - type: StaminaDamageOnHit
-  - type: LandAtCursor # it deals stamina damage when thrown
+  - type: LandAtCursor
   - type: Item
     size: Normal
   - type: Clothing
@@ -36,8 +36,8 @@
   - type: ActionsContainer
   - type: ActionGrant
     actions:
-    - ActionTogglePatrol # Make an action which creates an entity at the mouse location after a short do-after, add that entity to a list, using this action on an entity that is already in the list should remove it.
-    - ActionCRWaypoint # Make an action which clears that list.
+    - ActionTogglePatrol
+    - ActionCRWaypoint
     - ActionClearWaypoints
   - type: ItemActionGrant
     actions:
