@@ -13,7 +13,7 @@
   icon:
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     state: coconutcrab
-  product: CrateFunDartsSet
+  product: CrateServiceCoconutCrab
   cost: 7500
   category: cargoproduct-category-name-service
   group: market
