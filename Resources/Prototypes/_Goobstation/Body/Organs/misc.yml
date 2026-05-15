@@ -10,7 +10,7 @@
   - type: UnremoveableOrgan # fuck sec chuds
 
 - type: entity
-  parent: [ OrganHumanHeart, BaseSyndicateContraband ]
+  parent: OrganSyndicateHeart
   id: OrganHeartSandevistan
   name: Sandevistan
   description: Illegal cyberware that replaces the user's heart and allows them to greatly increase their speed for the cost of the endurance.
