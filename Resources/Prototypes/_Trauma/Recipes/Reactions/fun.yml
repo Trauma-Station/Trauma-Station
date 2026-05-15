@@ -17,8 +17,6 @@
 - type: reaction
   id: Crabon
   reactants:
-    GroundCrab: # you need crab for the crabs
-      amount: 1
     BahamaMama: # tropical power
       amount: 1
     CogChamp: # THROUGH THE POWER OF RATVAR
@@ -36,4 +34,4 @@
     TheSunAlsoRises: # annoying
       amount: 1
   products:
-    Crabon: 9
+    Crabon: 8
