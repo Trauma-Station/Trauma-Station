@@ -60,7 +60,8 @@ public sealed partial class PigLatinAccentSystem : EntitySystem
         }
 
         // append all the punctuation in the message to the final result
-        _builder[0] = char.ToUpper(_builder[0]);
+        if (_builder.Length > 0)
+            _builder[0] = char.ToUpper(_builder[0]);
         _builder.Append(_punctuation);
         return _builder.ToString();
     }

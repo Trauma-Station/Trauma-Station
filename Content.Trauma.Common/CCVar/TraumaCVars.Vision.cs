@@ -11,4 +11,10 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<bool> DisableVisionEffects =
         CVarDef.Create("trauma.disable_vision_effects", false, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Scale for how strong out-of-vision graininess is, 0 is just pure greyscale.
+    /// </summary>
+    public static readonly CVarDef<float> VisionGrainScale =
+        CVarDef.Create("trauma.vision_grain_scale", 0.75f, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

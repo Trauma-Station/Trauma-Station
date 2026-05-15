@@ -90,6 +90,7 @@ public abstract partial class SharedDecalSystem : EntitySystem
         _meta.AddFlag(ent.Owner, MetaDataFlags.Undetachable);
 
         ent.Comp.Data.Ent = ent;
+        TryAddToChunk(ent, Transform(ent));
     }
 
     private void OnMove(Entity<DecalComponent> ent, ref MoveEvent args)
@@ -101,8 +102,13 @@ public abstract partial class SharedDecalSystem : EntitySystem
         var indices = ent.Comp.Chunk;
         if (oldGrid.IsValid())
             GetGridChunk(oldGrid, indices)?.Decals.Remove(ent.Comp.Data);
-        if (args.Component.GridUid is { } newGrid)
-            GetGridChunk(newGrid, indices, true)?.Decals.Add(ent.Comp.Data);
+        TryAddToChunk(ent, args.Component);
+    }
+
+    private void TryAddToChunk(Entity<DecalComponent> ent, TransformComponent xform)
+    {
+        if (xform.GridUid is { } newGrid)
+            GetGridChunk(newGrid, ent.Comp.Chunk, true)?.Decals.Add(ent.Comp.Data);
         else
             PredictedQueueDel(ent); // can't have decals in space
     }

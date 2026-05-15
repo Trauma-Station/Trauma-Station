@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Eye;
+using Content.Shared.CCVar;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Trauma.Client.Viewcone.Overlays;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Popups;
 using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
@@ -11,6 +13,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -23,12 +26,14 @@ namespace Content.Trauma.Client.Viewcone;
 /// </summary>
 public sealed partial class ViewconeOverlaySystem : EntitySystem
 {
+    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IInputManager _input = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private ViewconeAngleSystem _angle = default!;
     [Dependency] private EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
 
@@ -46,6 +51,11 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     // one wont start rendering in the middle of rendering another
     internal List<(Entity<SpriteComponent> ent, float baseAlpha)> CachedBaseAlphas = new(128);
 
+    // raw grain scale ignoring reduced motion setting
+    // reduced motion locks it to 0
+    private float _grainScale;
+    private bool _reducedMotion;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -60,10 +70,14 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStoppedMessage>(OnPullStopped);
         SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
+        SubscribeLocalEvent<ViewconeOccludableComponent, EntParentChangedMessage>(OnOccludableParentChanged);
 
         _coneOverlay = new();
         _setAlphaOverlay = new();
         _resetAlphaOverlay = new();
+
+        Subs.CVar(_cfg, TraumaCVars.VisionGrainScale, SetGrainScale, true);
+        Subs.CVar(_cfg, CCVars.ReducedMotion, SetReducedMotion, true);
     }
 
     public override void FrameUpdate(float frameTime)
@@ -127,6 +141,21 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
             // convert to angle first so we lerp thru shortestdistance
             viewcone.ViewAngle = Angle.Lerp(viewcone.ViewAngle, viewcone.DesiredViewAngle.Value, 1f - MathF.Pow(2f, -(frameTime / LerpHalfLife)));
         }
+    }
+
+    private void SetGrainScale(float scale)
+    {
+        _grainScale = scale;
+        if (!_reducedMotion)
+            _coneOverlay.GrainScale = scale;
+    }
+
+    private void SetReducedMotion(bool on)
+    {
+        _reducedMotion = on;
+        _coneOverlay.GrainScale = on
+            ? 0f
+            : _grainScale;
     }
 
     /// <summary>
@@ -214,5 +243,16 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     {
         if (ent.Comp.Memory is { } memory && !TerminatingOrDeleted(memory))
             Del(memory);
+    }
+
+    private void OnOccludableParentChanged(Entity<ViewconeOccludableComponent> ent, ref EntParentChangedMessage args)
+    {
+        if (ent.Comp.Memory is not { } memory ||
+            args.OldMapId == args.Transform.MapUid)
+            return;
+
+        // if the map changes for any reason, hide the memory
+        // this may happen from leaving PVS or FTLing, etc
+        _sprite.SetVisible(memory, false);
     }
 }
