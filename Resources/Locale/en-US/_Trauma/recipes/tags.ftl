@@ -22,7 +22,6 @@ construction-graph-tag-overridekeycomponents = override key components
 construction-graph-tag-nail = a nail
 
 # robots
-
 construction-graph-tag-butt = a butt
 construction-graph-tag-cyber-butt = an ipc groin
 construction-graph-tag-egg = any egg
@@ -54,3 +53,6 @@ construction-graph-tag-arrow-shaft = an arrow shaft
 construction-graph-tag-recharging-board = any recharger circuit board
 construction-graph-tag-part-capacitor = a capacitor
 construction-graph-tag-part-metal-container = any metal container
+
+# Security
+construction-graph-tag-stun-baton = stun baton

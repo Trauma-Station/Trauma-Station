@@ -118,19 +118,19 @@
         icon:
           sprite: Objects/Weapons/Melee/stunbaton.rsi
           state: stunbaton_off
-        name: stun baton
+        name: construction-graph-tag-stun-baton
         doAfter: 2
       - tag: ProximitySensor
         icon:
           sprite: Objects/Misc/proximity_sensor.rsi
           state: icon
-        name: proximity sensor
+        name: construction-graph-tag-proximity-sensor
         doAfter: 2
       - tag: BorgArm
         icon:
           sprite: Mobs/Silicon/drone.rsi
           state: l_hand
-        name: borg arm
+        name: construction-graph-tag-borg-arm
         doAfter: 2
   - node: bot
     entity: MobSecuritron
