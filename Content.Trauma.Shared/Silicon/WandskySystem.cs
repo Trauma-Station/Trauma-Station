@@ -35,7 +35,7 @@ public sealed partial class WandskySystem : EntitySystem
         if (!TryComp<CommanderComponent>(args.Used, out var commander))
             return;
 
-        if (ent.Comp.MasterEntity == ent.Owner)
+        if (ent.Comp.MasterEntity == args.Used)
         {
             _popupSystem.PopupClient("Bond deleted.", ent.Owner, args.User, PopupType.Medium);
             ent.Comp.MasterEntity = null;
