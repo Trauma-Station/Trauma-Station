@@ -63,7 +63,7 @@
 
 - type: entity
   parent: WeaponShotgunDoubleBarreledEngraved
-  id: WeaponShotgunDoubleBarreledEngravedRubber
+  id: WeaponShotgunDoubleBarreledEngravedBeanbag
   suffix: Engraved, Non-Lethal
   components:
   - type: BallisticAmmoProvider
