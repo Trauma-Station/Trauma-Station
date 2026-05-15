@@ -24,19 +24,19 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 
 public sealed partial class MutationSystem : CommonMutationSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly EntityQuery<ActionComponent> _actionQuery = default!;
-    [Dependency] private readonly EntityQuery<DnaComponent> _dnaQuery = default!;
-    [Dependency] private readonly EntityQuery<MutatableComponent> _mutatableQuery = default!;
-    [Dependency] private readonly EntityQuery<MutationComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<UnremoveableComponent> _unremoveableQuery = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private EntityQuery<ActionComponent> _actionQuery = default!;
+    [Dependency] private EntityQuery<DnaComponent> _dnaQuery = default!;
+    [Dependency] private EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private EntityQuery<MutationComponent> _query = default!;
+    [Dependency] private EntityQuery<UnremoveableComponent> _unremoveableQuery = default!;
 
     /// <summary>
     /// All mutation prototypes and their respective <see cref="MutationComponent"/>.

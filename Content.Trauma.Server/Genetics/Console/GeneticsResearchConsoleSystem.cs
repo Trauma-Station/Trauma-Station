@@ -9,13 +9,13 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Server.Genetics.Console;
 
-public sealed class GeneticsResearchConsoleSystem : EntitySystem
+public sealed partial class GeneticsResearchConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
-    [Dependency] private readonly EntityQuery<ResearchClientComponent> _clientQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private ResearchSystem _research = default!;
+    [Dependency] private EntityQuery<ResearchClientComponent> _clientQuery = default!;
 
     public override void Initialize()
     {

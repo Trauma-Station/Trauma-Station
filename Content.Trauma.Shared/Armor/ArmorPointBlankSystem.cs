@@ -5,9 +5,9 @@ using Content.Trauma.Common.Armor;
 
 namespace Content.Trauma.Shared.Armor;
 
-public sealed class ArmorPointBlankSystem : EntitySystem
+public sealed partial class ArmorPointBlankSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

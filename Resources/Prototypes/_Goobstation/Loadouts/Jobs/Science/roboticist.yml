@@ -3,7 +3,7 @@
   equipment:
     jumpsuit: ClothingUniformEnvirosuitRoboticist
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -12,7 +12,7 @@
   equipment:
     head: ClothingHeadEnvirohelmRoboticist
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -21,7 +21,7 @@
   equipment:
     gloves: ClothingHandsGlovesEnviroglovesRoboticist
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 

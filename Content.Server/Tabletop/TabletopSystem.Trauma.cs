@@ -6,5 +6,5 @@ namespace Content.Server.Tabletop;
 
 public sealed partial class TabletopSystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private IChatManager _chat = default!;
 }

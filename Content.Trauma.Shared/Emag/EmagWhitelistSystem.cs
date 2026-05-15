@@ -6,10 +6,10 @@ using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Emag;
 
-public sealed class EmagWhitelistSystem : EntitySystem
+public sealed partial class EmagWhitelistSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

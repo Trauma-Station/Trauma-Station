@@ -7,9 +7,9 @@ using Content.Shared.Throwing;
 
 namespace Content.Trauma.Shared.Collision.Blur;
 
-public sealed class BlurOnCollideSystem : EntitySystem
+public sealed partial class BlurOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     public override void Initialize()
     {

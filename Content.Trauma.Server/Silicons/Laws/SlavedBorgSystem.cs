@@ -12,9 +12,9 @@ namespace Content.Trauma.Server.Silicons.Laws;
 /// Handles adding the slave law for the first time.
 /// Borg chassis switches preserve this on its own.
 /// </summary>
-public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
+public sealed partial class SlavedBorgSystem : SharedSlavedBorgSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

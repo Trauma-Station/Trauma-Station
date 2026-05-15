@@ -4,9 +4,9 @@ using Robust.Shared.Console;
 
 namespace Content.Trauma.Client.Areas;
 
-public sealed class ShowAreasCommand : LocalizedEntityCommands
+public sealed partial class ShowAreasCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly AreaVisibilitySystem _areaVisibility = default!;
+    [Dependency] private AreaVisibilitySystem _areaVisibility = default!;
 
     public override string Command => "showareas";
 

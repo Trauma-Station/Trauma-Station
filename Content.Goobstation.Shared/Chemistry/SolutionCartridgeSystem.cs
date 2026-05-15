@@ -6,10 +6,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Chemistry;
 
-public sealed class SolutionCartridgeSystem : EntitySystem
+public sealed partial class SolutionCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     public override void Initialize()
     {

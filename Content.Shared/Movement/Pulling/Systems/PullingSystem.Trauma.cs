@@ -39,14 +39,14 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// </summary>
 public sealed partial class PullingSystem
 {
-    [Dependency] private readonly CommonContestsSystem _contests = default!;
-    [Dependency] private readonly CommonGrabThrownSystem _grabThrown = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private CommonGrabThrownSystem _grabThrown = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     public const float NudgeImpulse = 2f;
 

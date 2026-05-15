@@ -20,8 +20,8 @@ namespace Content.Client.Store.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class StoreMenu : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private StoreWithdrawWindow? _withdrawWindow;
 
@@ -299,7 +299,7 @@ public sealed partial class StoreMenu : DefaultWindow
         RefundButton.Visible = allowRefund;
     }
 
-    private sealed class StoreCategoryButton : Button
+    private sealed partial class StoreCategoryButton : Button
     {
         public string? Id;
     }

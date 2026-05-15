@@ -18,10 +18,10 @@ namespace Content.Trauma.Client.UserActions.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class EmotesTabControl : BaseTabControl
 {
-    [Dependency] private readonly EntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private EntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     private TimeSpan _lastEmoteTime;
     private static readonly TimeSpan EmoteCooldown = TimeSpan.FromSeconds(0);

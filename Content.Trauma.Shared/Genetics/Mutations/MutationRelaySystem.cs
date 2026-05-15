@@ -8,6 +8,7 @@ using Content.Shared.Speech;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Movement;
 using Content.Trauma.Common.Speech;
+using Content.Trauma.Shared.Viewcone;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
@@ -28,6 +29,7 @@ public sealed class MutationRelaySystem : EntitySystem
         SubscribeLocalEvent<MutatableComponent, GetUserMeleeDamageEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, AccentGetEvent>(RelayEvent);
         SubscribeLocalEvent<MutatableComponent, SpeechFontOverrideEvent>(RelayEvent);
+        SubscribeLocalEvent<MutatableComponent, ModifyViewconeAngleEvent>(RelayEvent);
     }
 
     public void RelayEvent<T>(Entity<MutatableComponent> ent, ref T args) where T: notnull

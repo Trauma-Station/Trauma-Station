@@ -23,17 +23,17 @@ namespace Content.Goobstation.Shared.Factory;
 
 internal delegate bool Toggle();
 
-public abstract class SharedInteractorSystem : EntitySystem
+public abstract partial class SharedInteractorSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationFilterSystem _filter = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] protected readonly StartableMachineSystem Machine = default!;
+    [Dependency] private AutomationFilterSystem _filter = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] protected StartableMachineSystem Machine = default!;
 
     private EntityQuery<ActiveDoAfterComponent> _doAfterQuery;
     private EntityQuery<HandsComponent> _handsQuery;

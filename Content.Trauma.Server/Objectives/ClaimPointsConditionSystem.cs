@@ -5,10 +5,10 @@ using Content.Trauma.Server.Salvage;
 
 namespace Content.Trauma.Server.Objectives;
 
-public sealed class ClaimPointsConditionSystem : EntitySystem
+public sealed partial class ClaimPointsConditionSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly MiningRewardsSystem _rewards = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MiningRewardsSystem _rewards = default!;
 
     public override void Initialize()
     {

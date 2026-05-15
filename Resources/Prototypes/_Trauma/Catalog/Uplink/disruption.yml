@@ -19,6 +19,16 @@
       components:
       - SurplusBundle
 
+- type: listing
+  id: AccessConfiguratorSyndicate
+  name: uplink-syndicate-access-config-name
+  description: uplink-syndicate-access-config-desc
+  productEntity: AccessConfiguratorSyndicate
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkDisruption
+
 # - type: listing
 #   id: UplinkXenomorphBundle
 #   name: uplink-xenomorph-compatibility-bundle-name

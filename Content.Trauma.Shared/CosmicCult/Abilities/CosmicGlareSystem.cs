@@ -9,14 +9,14 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public sealed class CosmicGlareSystem : EntitySystem
+public sealed partial class CosmicGlareSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedFlashSystem _flash = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedFlashSystem _flash = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
 

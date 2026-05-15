@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Tools.UI;
 
-public sealed class DebugEffectStickBUI : BoundUserInterface
+public sealed partial class DebugEffectStickBUI : BoundUserInterface
 {
     private DebugEffectStickWindow? _window;
 

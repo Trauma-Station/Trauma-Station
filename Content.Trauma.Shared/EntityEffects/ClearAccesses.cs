@@ -8,9 +8,9 @@ namespace Content.Trauma.Shared.EntityEffects;
 
 public sealed partial class ClearAccesses : EntityEffectBase<ClearAccesses>;
 
-public sealed class ClearAccessesEffectSystem : EntityEffectSystem<AccessReaderComponent, ClearAccesses>
+public sealed partial class ClearAccessesEffectSystem : EntityEffectSystem<AccessReaderComponent, ClearAccesses>
 {
-    [Dependency] private readonly AccessReaderSystem _reader = default!;
+    [Dependency] private AccessReaderSystem _reader = default!;
 
     protected override void Effect(Entity<AccessReaderComponent> entity, ref EntityEffectEvent<ClearAccesses> args)
     {

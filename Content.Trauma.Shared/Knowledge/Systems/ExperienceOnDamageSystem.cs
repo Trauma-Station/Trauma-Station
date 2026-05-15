@@ -5,10 +5,10 @@ using Content.Trauma.Shared.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
-public sealed class ExperienceOnDamageSystem : EntitySystem
+public sealed partial class ExperienceOnDamageSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public override void Initialize()
     {

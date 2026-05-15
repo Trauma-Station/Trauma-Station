@@ -8,9 +8,9 @@ using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public abstract class BaseTextureTag
+public abstract partial class BaseTextureTag
 {
-    [Dependency] protected readonly IEntitySystemManager EntitySystemManager = default!;
+    [Dependency] protected IEntitySystemManager EntitySystemManager = default!;
 
     protected static Control DrawIcon(Texture tex,
         long scaleValue,

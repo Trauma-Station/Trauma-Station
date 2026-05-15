@@ -11,14 +11,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedHereticCombatMarkSystem : EntitySystem
+public abstract partial class SharedHereticCombatMarkSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _lookupHumanoid = new();
 

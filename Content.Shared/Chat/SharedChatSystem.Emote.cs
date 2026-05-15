@@ -12,7 +12,7 @@ namespace Content.Shared.Chat;
 
 public abstract partial class SharedChatSystem
 {
-    [Dependency] private readonly CommonLanguageSystem _language = default!; // Trauma
+    [Dependency] private CommonLanguageSystem _language = default!; // Trauma
 
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
 

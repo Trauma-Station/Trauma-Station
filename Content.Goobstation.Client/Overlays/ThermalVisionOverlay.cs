@@ -13,12 +13,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Overlays;
 
-public sealed class ThermalVisionOverlay : Overlay
+public sealed partial class ThermalVisionOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly TransformSystem _transform;
     private readonly SpriteSystem _sprite;
@@ -154,7 +154,7 @@ public sealed class ThermalVisionOverlay : Overlay
             }
 
             _sprite.SetColor((uid, sprite), Color.White.WithAlpha(alpha));
-            handle.UseShader(_protoMan.Index<ShaderPrototype>(shader).Instance());
+            handle.UseShader(_proto.Index<ShaderPrototype>(shader).Instance());
         }
         else
             _sprite.SetColor((uid, sprite), color.WithAlpha(alpha));

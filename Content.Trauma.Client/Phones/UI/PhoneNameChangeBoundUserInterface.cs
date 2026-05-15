@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Phones.UI;
 
-public sealed class PhoneNameChangeUI : BoundUserInterface
+public sealed partial class PhoneNameChangeUI : BoundUserInterface
 {
     private ChangePhoneName? _menu;
 

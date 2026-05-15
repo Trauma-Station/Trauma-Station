@@ -9,11 +9,11 @@ using Robust.Server.Audio;
 
 namespace Content.Goobstation.Server.SlaughterDemon;
 
-public sealed class BloodCrawlSystem : SharedBloodCrawlSystem
+public sealed partial class BloodCrawlSystem : SharedBloodCrawlSystem
 {
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly EntityQuery<PolymorphedEntityComponent> _polymorphedQuery = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private EntityQuery<PolymorphedEntityComponent> _polymorphedQuery = default!;
 
     protected override bool CheckAlreadyCrawling(Entity<BloodCrawlComponent> ent)
     {

@@ -5,9 +5,9 @@ using Content.Shared.Mind.Components;
 
 namespace Content.Trauma.Shared.Mind;
 
-public sealed class MindMessagesSystem : EntitySystem
+public sealed partial class MindMessagesSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<MindMessagesComponent> _query = default!;
+    [Dependency] private EntityQuery<MindMessagesComponent> _query = default!;
 
     public override void Initialize()
     {

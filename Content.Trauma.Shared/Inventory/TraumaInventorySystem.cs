@@ -8,12 +8,13 @@ using Content.Trauma.Common.Lube;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Tackle;
+using Content.Trauma.Shared.Viewcone;
 
 namespace Content.Trauma.Shared.Inventory;
 
-public sealed class TraumaInventorySystem : EntitySystem
+public sealed partial class TraumaInventorySystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -27,5 +28,6 @@ public sealed class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, CanSeeOnCameraEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, GluedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, LubedPickUpAttemptEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, ModifyViewconeAngleEvent>(_inventory.RelayEvent);
     }
 }

@@ -15,14 +15,14 @@ using Content.Shared.Preferences;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
+public sealed partial class WizardMirrorSystem : SharedWizardMirrorSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public override void Initialize()
     {

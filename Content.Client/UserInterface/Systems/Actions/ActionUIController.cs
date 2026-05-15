@@ -45,10 +45,10 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client.UserInterface.Systems.Actions;
 
-public sealed class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
+public sealed partial class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
 {
     // <Trauma>
-    [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private IEyeManager _eye = default!;
 
     [UISystemDependency] private readonly TransformSystem _transform = default!;
     [UISystemDependency] private readonly CommonSpellsSystem? _spells = default!;
@@ -59,10 +59,10 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     private readonly Dictionary<EntityUid, List<EntityUid?>> _savedActions = new();
     private ISawmill _sawmill = default!;
     // </Trauma>
-    [Dependency] private readonly IOverlayManager _overlays = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private IOverlayManager _overlays = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IInputManager _input = default!;
 
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;

@@ -4,7 +4,7 @@ using Content.Shared.Hands;
 
 namespace Content.Goobstation.Shared.Held;
 
-public sealed class HeldGrantComponentSystem : EntitySystem
+public sealed partial class HeldGrantComponentSystem : EntitySystem
 {
     public override void Initialize()
     {

@@ -19,12 +19,12 @@ namespace Content.Shared.Body;
 /// </summary>
 public sealed partial class BodySystem
 {
-    [Dependency] private readonly CommonBodyCacheSystem _cache = default!;
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private CommonBodyCacheSystem _cache = default!;
+    [Dependency] private CommonBodyPartSystem _part = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     /// <summary>
     /// Body parts' organ categories.

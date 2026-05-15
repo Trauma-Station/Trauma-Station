@@ -14,15 +14,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed class HereticClothingSystem : EntitySystem
+public sealed partial class HereticClothingSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
 
     public override void Initialize()
     {

@@ -16,13 +16,13 @@ using Robust.Shared.Player;
 namespace Content.Trauma.Server.CosmicCult;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class CultifyBorgCommand : LocalizedEntityCommands
+public sealed partial class CultifyBorgCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly ISharedPlayerManager _players = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private ISharedPlayerManager _players = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
     public override string Command => "cultifyborg";
     public override string Description => "Imprisons a given borg in a chantry.";
     public override string Help => "Usage: cultifyborg <entity uid>";

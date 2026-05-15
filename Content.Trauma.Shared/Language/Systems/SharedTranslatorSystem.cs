@@ -8,9 +8,9 @@ using Content.Shared.Toggleable; // Ignore, touching for REUSE Headers.
 
 namespace Content.Trauma.Shared.Language.Systems;
 
-public abstract class SharedTranslatorSystem : CommonTranslatorSystem
+public abstract partial class SharedTranslatorSystem : CommonTranslatorSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

@@ -11,6 +11,9 @@ binds:
   type: State
   key: Q
   mod1: Alt
+- function: Strafe
+  type: State
+  key: Shift
 # </Trauma>
 - function: UIClick
   type: State

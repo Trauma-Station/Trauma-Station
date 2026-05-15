@@ -39,9 +39,9 @@ public sealed partial class ImmunityModifier : EntityEffectBase<ImmunityModifier
             ("time", StatusLifetime.TotalSeconds));
 }
 
-public sealed class ImmunityModifierEffectSystem : EntityEffectSystem<DiseaseCarrierComponent, ImmunityModifier>
+public sealed partial class ImmunityModifierEffectSystem : EntityEffectSystem<DiseaseCarrierComponent, ImmunityModifier>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <summary>
     /// Remove reagent at set rate, changes the immunity modifiers and adds a ImmunityModifierMetabolismComponent if not already there.

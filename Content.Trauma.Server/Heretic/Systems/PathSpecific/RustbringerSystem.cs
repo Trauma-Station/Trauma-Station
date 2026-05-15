@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class RustbringerSystem : EntitySystem
+public sealed partial class RustbringerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Update(float frameTime)
     {

@@ -10,13 +10,13 @@ namespace Content.Trauma.Shared.Areas;
 /// <summary>
 /// Tracks area prototypes and provides API for using them.
 /// </summary>
-public sealed class AreaSystem : EntitySystem
+public sealed partial class AreaSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MapAreaSystem _mapArea = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MapAreaSystem _mapArea = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityQuery<DepartmentAreaComponent> _deptQuery = default!;
 
     /// <summary>
     /// List of every area prototype in the game.
@@ -48,9 +48,8 @@ public sealed class AreaSystem : EntitySystem
 
     private void OnAnchorStateChanged(Entity<AreaComponent> ent, ref AnchorStateChangedEvent args)
     {
-        // delete areas that get unanchored by explosions, someone removing the floor etc
-        // don't do it if client is detaching or it will break PVS
-        if (!args.Anchored && !args.Detaching)
+        // delete areas that get unanchored by explosions or other more cursed things
+        if (!args.Anchored)
             PredictedQueueDel(ent);
     }
 

@@ -7,7 +7,7 @@ namespace Content.Shared.Containers.ItemSlots;
 // Goobstation & Lavaland partial for the main ItemSlots system
 public sealed partial class ItemSlotsSystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     private void InitializeGoob()
     {

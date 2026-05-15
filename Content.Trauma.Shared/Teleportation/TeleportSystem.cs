@@ -17,12 +17,12 @@ namespace Content.Trauma.Shared.Teleportation;
 /// Also provides nice helper for sounds.
 /// Please use this instead of copypasting puller shitcode into everything else.
 /// </summary>
-public sealed class TeleportSystem : EntitySystem
+public sealed partial class TeleportSystem : EntitySystem
 {
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedJointSystem _joint = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedJointSystem _joint = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

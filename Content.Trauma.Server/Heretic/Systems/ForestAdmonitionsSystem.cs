@@ -11,11 +11,11 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
+public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private readonly HashSet<Entity<PhysicsComponent>> _lookupPhysics = new();
 

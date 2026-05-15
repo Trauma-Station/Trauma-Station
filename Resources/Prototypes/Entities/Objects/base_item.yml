@@ -3,7 +3,7 @@
   id: BaseItem
   abstract: true
   components:
-  # Goobstation edit start
+  # <Trauma>
   - type: EmitSoundOnPickup
     sound:
       collection: GenericPickup
@@ -14,10 +14,8 @@
       collection: GenericDrop
       params:
         volume: -7
-  # - type: EmitSoundOnLand
-    # sound:
-      # collection: GenericDrop
-  # Goobstation edit end
+  - type: ViewconeOccludable # can't remember items that are out of view. ideally they would linger for like 5 seconds?
+  # </Trauma>
   - type: Item
     size: Small
   - type: Animateable

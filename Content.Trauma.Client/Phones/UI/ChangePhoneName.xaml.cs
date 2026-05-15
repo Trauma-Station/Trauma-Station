@@ -11,7 +11,7 @@ namespace Content.Trauma.Client.Phones.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ChangePhoneName : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     public event Action<string>? OnTextChanged;
     public event Action<string>? OnCategoryChanged;
     public ChangePhoneName()

@@ -12,11 +12,11 @@ using Content.Trauma.Server.Heretic.Components.PathSpecific;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class ChampionStanceSystem : EntitySystem
+public sealed partial class ChampionStanceSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private BodySystem _body = default!;
 
     public override void Initialize()
     {

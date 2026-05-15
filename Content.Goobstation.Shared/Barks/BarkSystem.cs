@@ -9,9 +9,9 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.Barks;
 
-public sealed class BarkSystem : EntitySystem
+public sealed partial class BarkSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private bool _enabled;
 

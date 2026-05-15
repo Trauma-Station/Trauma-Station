@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Controls <see cref="MeleeThrowOnHitComponent"/> values with the enchant level.
 /// </summary>
-public sealed class KnockbackEnchantSystem : EntitySystem
+public sealed partial class KnockbackEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

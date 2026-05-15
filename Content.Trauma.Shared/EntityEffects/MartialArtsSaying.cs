@@ -25,11 +25,11 @@ public sealed partial class MartialArtsSaying : EntityEffectBase<MartialArtsSayi
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null; // idc
 }
 
-public sealed class MartialArtsSayingEffectSystem : EntityEffectSystem<TransformComponent, MartialArtsSaying>
+public sealed partial class MartialArtsSayingEffectSystem : EntityEffectSystem<TransformComponent, MartialArtsSaying>
 {
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<MartialArtsSaying> args)

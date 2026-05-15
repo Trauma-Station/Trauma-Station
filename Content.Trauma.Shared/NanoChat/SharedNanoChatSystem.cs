@@ -10,9 +10,9 @@ namespace Content.Trauma.Shared.NanoChat;
 /// <summary>
 ///     Base system for NanoChat functionality shared between client and server.
 /// </summary>
-public abstract class SharedNanoChatSystem : CommonNanoChatSystem
+public abstract partial class SharedNanoChatSystem : CommonNanoChatSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

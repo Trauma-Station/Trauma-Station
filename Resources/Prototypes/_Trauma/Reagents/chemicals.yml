@@ -100,6 +100,13 @@
         - !type:ReagentCondition
           reagent: NanoMachines
           min: 40
+      - !type:AdjustReagent
+        reagent: NanoMachines
+        amount: -40
+        conditions:
+        - !type:ReagentCondition
+          reagent: NanoMachines
+          min: 40
       - !type:PopupMessage
         type: Local
         visualType: MediumCaution
