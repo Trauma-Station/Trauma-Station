@@ -3,12 +3,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Contraband;
-using Content.Server.Chat.Systems;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Access.Systems;
-using Content.Shared.Chat;
 using Content.Shared.Coordinates;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Emag.Components;
