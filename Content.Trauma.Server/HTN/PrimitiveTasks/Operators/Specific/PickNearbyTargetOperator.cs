@@ -86,7 +86,10 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
         var ownerCoords = owner.ToCoordinates();
-        blackboard.TryGetValue<EntityUid>(TargetKey, out var targetEnt, _entMan);
+
+        if (!blackboard.TryGetValue<EntityUid>(TargetKey, out var targetEnt, _entMan))
+            targetEnt = EntityUid.Invalid;
+
         var oldEntity = targetEnt;
 
         var range = 12f;
