@@ -8477,3 +8477,85 @@ Entries:
   id: 971
   time: '2026-05-15T06:52:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2642
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix tackle modifiers calculation based on damage, now damage doesn't
+      matter as much as it used to.
+  - type: Tweak
+    message: Guerrilla gloves buffed.
+  - type: Tweak
+    message: Hos has gorilla gloves in their locker instead of starting with them.
+  id: 972
+  time: '2026-05-15T13:32:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2605
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Backpedaling is a bit faster now.
+  id: 973
+  time: '2026-05-15T13:34:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2643
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added new chemicals to botany's random mutation pool
+  id: 974
+  time: '2026-05-15T13:38:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed floor goblins getting doxxed by vision cones.
+  id: 975
+  time: '2026-05-15T14:15:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2644
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed surveillance cameras not working.
+  id: 976
+  time: '2026-05-15T14:46:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2645
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed scope interactions with vision.
+  id: 977
+  time: '2026-05-15T15:39:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2646
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed seismic charges from salv vendor and made them much more expensive
+      to buy.
+  id: 978
+  time: '2026-05-15T15:43:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2647
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Made moths more geared towards engineering.
+  id: 979
+  time: '2026-05-15T17:24:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2631
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Helmets are no longer ignored at point blank.
+  id: 980
+  time: '2026-05-15T20:19:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2650
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Bartender now gets their shotgun in the loadout and gets a new fancy one!
+  - type: Remove
+    message: >-
+      Because of that, the closet no longer has the shotgun. Rob the bartender
+      for it.
+  id: 981
+  time: '2026-05-15T20:44:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2635
