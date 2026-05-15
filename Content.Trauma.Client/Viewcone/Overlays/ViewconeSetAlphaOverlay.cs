@@ -123,7 +123,8 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             if (!comp.OccludeIfAnchored && xform.Anchored)
                 continue;
 
-            if (_container.IsEntityInContainer(uid))
+            // floor goblin and maybe other things set ContainerOccluded without being inside a container
+            if (sprite.ContainerOccluded || _container.IsEntityInContainer(uid))
             {
                 if (comp.Memory is { } containedMemory)
                     _sprite.SetVisible(containedMemory, false);
