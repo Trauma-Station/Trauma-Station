@@ -31,7 +31,7 @@
     animation: WeaponArcThrust
     damage:
       types:
-        Blunt: 10
+        Blunt: 1
   - type: Stunbaton
     energyPerUse: 50
   - type: StaminaDamageOnHit
