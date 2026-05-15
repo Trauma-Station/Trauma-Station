@@ -72,7 +72,6 @@
         components:
         - CommandStaff
         - AntagImmune
-        - BibleUser
       lateJoinAdditional: true
       mindRoles:
       - MindRoleChangelingmidround
@@ -108,7 +107,7 @@
         - BibleUser
       startingGear: Heretictmidround
       lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
+      jobBlacklist: [ Chaplain ]
       mindRoles:
       - MindRoleHeretic
 
@@ -163,6 +162,7 @@
   parent: BaseGameRule
   id: BlobMidround
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 1
     earliestStart: 45
@@ -250,6 +250,10 @@
   - type: AntagObjectives
     objectives:
     - TunnelClownProtectMaintenanceObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills
 
 - type: entity
   parent: BaseGameRule
@@ -281,6 +285,10 @@
     - SingulothKnightPreachObjective
     - SingulothKnightSingularityObjective
     - SingulothKnightTeslaObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -312,6 +320,10 @@
     - HijackShuttleObjective
     - KillRandomHeadObjective
     - DarkLordDuelObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity # Only has a chance to spawn whenever dark lord spawns
   parent: BaseGameRule
@@ -336,6 +348,10 @@
   - type: AntagObjectives
     objectives:
     - ChosenOneKillDarkLordObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -368,6 +384,10 @@
     - KillRandomHeadObjective
     - KillRandomHeadObjective
     - EscapeShuttleObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
 
 - type: entity
   parent: BaseGameRule
@@ -400,6 +420,10 @@
     - DarkPriestHireApprentice
     - KillRandomPersonObjective
     - EscapeShuttleObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
 
 - type: entity
   parent: BaseGameRule
@@ -414,7 +438,7 @@
     prototype: MobVoxRaider
   - type: RuleGrids
   - type: LoadMapRule
-    gridPath: /Maps/_Goobstation/Shuttles/VoxRaiderShuttle.yml
+    gridPath: /Maps/_Trauma/Shuttles/VoxRaidersShuttleNew.yml
   - type: AntagSelection
     agentName: ghost-role-information-vox-raider-name
     definitions:
@@ -440,6 +464,10 @@
     - groups: ThiefObjectiveGroups
       maxPicks: 15
     maxDifficulty: 4
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
 
 - type: entity
   id: ClownGoblinMigration
@@ -460,6 +488,7 @@
   parent: BaseGameRule
   id: SlasherSpawn
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     weight: 3
     duration: null

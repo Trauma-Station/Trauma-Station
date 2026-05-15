@@ -6,6 +6,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
+using Robust.Shared.Random;
 
 namespace Content.Server.Procedural;
 
@@ -18,7 +19,7 @@ public sealed partial class DungeonSystem
     /// <summary>
     /// Gets a random dungeon room matching the specified area, whitelist and size.
     /// </summary>
-    public DungeonRoomPrototype? GetRoomPrototype(Vector2i size, Random random, EntityWhitelist? whitelist = null)
+    public DungeonRoomPrototype? GetRoomPrototype(Vector2i size, IRobustRandom random, EntityWhitelist? whitelist = null)
     {
         return GetRoomPrototype(random, whitelist, minSize: size, maxSize: size);
     }
@@ -26,7 +27,7 @@ public sealed partial class DungeonSystem
     /// <summary>
     /// Gets a random dungeon room matching the specified area and whitelist and size range
     /// </summary>
-    public DungeonRoomPrototype? GetRoomPrototype(Random random,
+    public DungeonRoomPrototype? GetRoomPrototype(IRobustRandom random,
         EntityWhitelist? whitelist = null,
         Vector2i? minSize = null,
         Vector2i? maxSize = null)
@@ -76,7 +77,7 @@ public sealed partial class DungeonSystem
         MapGridComponent grid,
         Vector2i origin,
         DungeonRoomPrototype room,
-        Random random,
+        IRobustRandom random,
         HashSet<Vector2i>? reservedTiles,
         bool clearExisting = false,
         bool rotation = false)
@@ -95,7 +96,7 @@ public sealed partial class DungeonSystem
         SpawnRoom(gridUid, grid, finalTransform, room, reservedTiles, clearExisting);
     }
 
-    public Angle GetRoomRotation(DungeonRoomPrototype room, Random random)
+    public Angle GetRoomRotation(DungeonRoomPrototype room, IRobustRandom random)
     {
         var roomRotation = Angle.Zero;
 
@@ -202,20 +203,22 @@ public sealed partial class DungeonSystem
         {
             EnsureComp<DecalGridComponent>(gridUid);
 
-            foreach (var (_, decal) in _decals.GetDecalsIntersecting(templateMapUid, bounds, loadedDecals))
+            foreach (var decal in _decals.GetDecalsIntersecting(templateMapUid, bounds, loadedDecals)) // Trauma - decal entities
             {
-                // Offset by 0.5 because decals are offset from bot-left corner
-                // So we convert it to center of tile then convert it back again after transform.
-                // Do these shenanigans because 32x32 decals assume as they are centered on bottom-left of tiles.
-                var position = Vector2.Transform(decal.Coordinates + grid.TileSizeHalfVector - roomCenter, roomTransform);
-                position -= grid.TileSizeHalfVector;
+                // <Trauma> - replaces offset slop
+                var position = Transform(decal).Coordinates.Position;
+                position = Vector2.Transform(position + grid.TileSizeHalfVector - roomCenter, roomTransform);
+                // </Trauma>
 
                 if (!clearExisting && reservedTiles?.Contains(position.Floored()) == true)
                     continue;
 
-                // Umm uhh I love decals so uhhhh idk what to do about this
-                var angle = (decal.Angle + finalRoomRotation).Reduced();
+                // <Trauma> - use decal data stored on the component
+                var data = decal.Comp.Data;
+                var angle = (data.Angle + finalRoomRotation).Reduced();
+                // </Trauma>
 
+                /* Trauma - dont need this shit
                 // Adjust because 32x32 so we can't rotate cleanly
                 // Yeah idk about the uhh vectors here but it looked visually okay but they may still be off by 1.
                 // Also EyeManager.PixelsPerMeter should really be in shared.
@@ -242,6 +245,7 @@ public sealed partial class DungeonSystem
                         position += new Vector2(-1f / 32f, 0f);
                     }
                 }
+                */
 
                 var tilePos = position.Floored();
 
@@ -252,14 +256,16 @@ public sealed partial class DungeonSystem
                     _maps.SetTile(gridUid, grid, tilePos, _tile.GetVariantTile((ContentTileDefinition)_tileDefManager[FallbackTileId], _random.GetRandom()));
                 }
 
+                // <Trauma> - use decal data stored on the component
                 var result = _decals.TryAddDecal(
-                    decal.Id,
+                    data.Id,
                     new EntityCoordinates(gridUid, position),
                     out _,
-                    decal.Color,
+                    data.Color,
                     angle,
-                    decal.ZIndex,
-                    decal.Cleanable);
+                    data.ZIndex,
+                    data.Cleanable);
+                // </Trauma>
 
                 DebugTools.Assert(result);
             }

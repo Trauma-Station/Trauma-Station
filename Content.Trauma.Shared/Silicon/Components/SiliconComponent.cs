@@ -2,8 +2,6 @@
 
 using Content.Trauma.Shared.Silicon.Systems;
 using Content.Shared.Alert;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Trauma.Shared.Silicon.Components;

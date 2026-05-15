@@ -5,14 +5,13 @@ using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Heretic.UI;
 
 [UsedImplicitly]
-public sealed class CarvingKnifeBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class CarvingKnifeBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private SimpleRadialMenu? _menu;
 

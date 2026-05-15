@@ -161,6 +161,9 @@
     factions:
     - Heretic
   - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_human
   - type: UserInterface
     interfaces:
       enum.HumanoidMarkingModifierKey.Key:

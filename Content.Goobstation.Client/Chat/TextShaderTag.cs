@@ -6,15 +6,14 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Chat;
 
-public sealed class TextShaderTag : IMarkupTagHandler
+public sealed partial class TextShaderTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IResourceCache _cache = default!;
 
     public string Name => "textshader";
 

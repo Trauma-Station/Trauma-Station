@@ -6,13 +6,12 @@ using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.RadialSelector;
 
-public sealed class RadialSelectorMenuBUI : BoundUserInterface
+public sealed partial class RadialSelectorMenuBUI : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private ConstructionSystem _construction;
 
     public SimpleRadialMenu Menu;

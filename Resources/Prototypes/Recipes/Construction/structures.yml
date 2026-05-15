@@ -16,6 +16,7 @@
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -36,6 +37,7 @@
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -52,10 +54,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
     # TODO: clockwork knowledge if anyone makes that
   # </Trauma>
 
@@ -77,6 +80,7 @@
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -93,10 +97,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -113,10 +118,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -133,10 +139,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 1
   practical:
     WallsKnowledge: 1 # it's just hammering wood together
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -153,10 +160,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -173,10 +181,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -193,7 +202,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -210,10 +220,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -234,6 +245,7 @@
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -248,10 +260,11 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+  useQuality: false
   # <Trauma>
   theory:
-    WallsKnowledge: 2
-    FabricationKnowledge: 2
+    WallsKnowledge: 0
+    FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -271,10 +284,11 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 2
-    FabricationKnowledge: 2
+    WallsKnowledge: 0
+    FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -291,8 +305,9 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
-    BananiumKnowledge: 2
+    WallsKnowledge: 0
+    BananiumKnowledge: 0
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -309,7 +324,8 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -326,7 +342,8 @@
   canRotate: false
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -346,6 +363,7 @@
     WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -365,6 +383,7 @@
     WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -380,9 +399,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WallsKnowledge: 1 # diagonal is harder to make
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -398,9 +418,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WallsKnowledge: 1 # diagonal is harder to make
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -418,9 +439,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -441,6 +463,7 @@
     WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -458,9 +481,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -478,9 +502,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -498,9 +523,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -518,9 +544,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -538,9 +565,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -558,9 +586,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -578,9 +607,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -598,9 +628,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 2
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -618,9 +649,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -638,9 +670,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -660,6 +693,7 @@
     WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -679,6 +713,7 @@
     WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -698,6 +733,7 @@
     WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -717,6 +753,7 @@
     WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -736,6 +773,7 @@
     WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -753,9 +791,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -773,9 +812,10 @@
   canRotate: false
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -793,9 +833,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 1
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -813,9 +854,10 @@
   placementMode: SnapgridCenter
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
+    WindowsKnowledge: 0
   practical:
     FabricationKnowledge: 2
+  useQuality: false
   # </Trauma>
 
 - type: construction
@@ -832,7 +874,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -851,7 +893,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -870,7 +912,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -888,7 +930,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 3
   # </Trauma>
@@ -904,7 +946,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -920,7 +962,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -936,7 +978,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -952,7 +994,7 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    AirlocksKnowledge: 2
+    AirlocksKnowledge: 0
   practical:
     MetalworkingKnowledge: 3
   # </Trauma>
@@ -975,7 +1017,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -996,7 +1038,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1032,7 +1074,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     CarvingKnowledge: 2
   # </Trauma>
@@ -1126,7 +1168,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -1145,7 +1187,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -1164,7 +1206,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -1182,7 +1224,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   # </Trauma>
@@ -1201,7 +1243,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1220,7 +1262,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1239,7 +1281,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1258,7 +1300,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1276,7 +1318,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1295,7 +1337,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1314,7 +1356,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1333,7 +1375,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1352,7 +1394,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1371,7 +1413,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     CarvingKnowledge: 1
   # </Trauma>
@@ -1390,7 +1432,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1408,7 +1450,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1427,7 +1469,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1446,7 +1488,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1465,7 +1507,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1485,7 +1527,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    AirlocksKnowledge: 1
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1503,8 +1545,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
-    AirlocksKnowledge: 1
+    WindowsKnowledge: 0
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1522,8 +1564,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
-    AirlocksKnowledge: 1
+    WindowsKnowledge: 0
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1541,8 +1583,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WindowsKnowledge: 1
-    AirlocksKnowledge: 1
+    WindowsKnowledge: 0
+    AirlocksKnowledge: 0
   practical:
     MechanicsKnowledge: 2
   # </Trauma>
@@ -1564,7 +1606,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1583,7 +1625,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1601,7 +1643,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1619,7 +1661,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1637,7 +1679,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1655,7 +1697,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 0 # This lets it train elcetronics
+    ElectronicsKnowledge: 0 # This lets it train electronics
   useQuality: false
   # </Trauma>
 
@@ -1672,7 +1714,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    DoorsKnowledge: 1
+    DoorsKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -1708,7 +1750,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    DoorsKnowledge: 1
+    DoorsKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -1726,7 +1768,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    DoorsKnowledge: 1
+    DoorsKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -1744,7 +1786,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    DoorsKnowledge: 1
+    DoorsKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
   # </Trauma>
@@ -1760,7 +1802,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    DoorsKnowledge: 1
+    DoorsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -1774,7 +1816,7 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    DoorsKnowledge: 1
+    DoorsKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -1791,7 +1833,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -1808,7 +1850,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -1824,7 +1866,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 0
   practical:
     CarvingKnowledge: 4
   # </Trauma>
@@ -1842,7 +1884,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   practical:
     CarvingKnowledge: 4
   # </Trauma>
@@ -1860,8 +1902,8 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    BananiumKnowledge: 2
-    DoorsKnowledge: 1
+    BananiumKnowledge: 0
+    DoorsKnowledge: 0
   # </Trauma>
 
 ##- type: construction
@@ -1896,9 +1938,9 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
-    DoorsKnowledge: 1
-    ElectronicsKnowledge: 1
+    WallsKnowledge: 0
+    DoorsKnowledge: 0
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1916,9 +1958,9 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    WallsKnowledge: 1
-    DoorsKnowledge: 1
-    ElectronicsKnowledge: 1
+    WallsKnowledge: 0
+    DoorsKnowledge: 0
+    ElectronicsKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1935,7 +1977,7 @@
     - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -1972,7 +2014,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -1989,7 +2031,7 @@
   - !type:TileNotBlocked
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     CarvingKnowledge: 2
   # </Trauma>

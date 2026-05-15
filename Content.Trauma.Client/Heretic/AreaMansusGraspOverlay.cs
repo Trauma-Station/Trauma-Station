@@ -4,16 +4,15 @@ using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic;
 
-public sealed class AreaMansusGraspOverlay : Overlay
+public sealed partial class AreaMansusGraspOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly SharedMansusGraspSystem _mansus;
     private readonly SharedTransformSystem _transform;

@@ -7,7 +7,6 @@ using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -23,9 +22,9 @@ namespace Content.Goobstation.Server.PlayerListener;
 /// </summary>
 public sealed partial class RageQuitNotifySystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IServerNetManager _network = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IServerNetManager _network = default!;
+    [Dependency] private IChatManager _chat = default!;
 
     private EntityUid _ent;
     private bool _notify = true;

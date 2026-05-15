@@ -16,9 +16,9 @@ using Content.Trauma.Shared.VentCrawling.Components;
 
 namespace Content.Trauma.Server.VentCrawling;
 
-public sealed class BeingVentCrawSystem : EntitySystem
+public sealed partial class BeingVentCrawSystem : EntitySystem
 {
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private NodeContainerSystem _nodeContainer = default!;
 
     public override void Initialize()
     {

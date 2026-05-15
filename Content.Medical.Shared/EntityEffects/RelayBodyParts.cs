@@ -4,7 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 
@@ -41,10 +40,10 @@ public sealed partial class RelayBodyParts : EntityEffectBase<RelayBodyParts>
         => GuidebookText is {} key ? Loc.GetString(key, ("chance", Probability)) : null;
 }
 
-public sealed class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponent, RelayBodyParts>
+public sealed partial class RelayBodyPartsEffectSystem : EntityEffectSystem<BodyComponent, RelayBodyParts>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<RelayBodyParts> args)
     {

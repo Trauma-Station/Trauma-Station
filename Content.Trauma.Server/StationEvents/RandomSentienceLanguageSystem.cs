@@ -5,17 +5,16 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.StationEvents;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.StationEvents;
 
 /// <summary>
 /// Makes sure random sentience targets can speak/understand Tau Ceti Basic.
 /// </summary>
-public sealed class RandomSentienceLanguageSystem : EntitySystem
+public sealed partial class RandomSentienceLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
 
     public static readonly ProtoId<LanguagePrototype> TauCetiBasic = "TauCetiBasic";
 

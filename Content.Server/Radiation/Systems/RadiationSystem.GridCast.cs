@@ -1,12 +1,15 @@
+// <Trauma>
+using Content.Shared.Singularity.Components;
+// </Trauma>
 using System.Numerics;
 using Content.Server.Radiation.Components;
 using Content.Server.Radiation.Events;
 using Content.Shared.Radiation.Components;
 using Content.Shared.Radiation.Systems;
-using Content.Shared.Singularity.Components; // Goobstation - Radiation Overhaul
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Radiation.Systems;
 
@@ -74,7 +77,7 @@ public partial class RadiationSystem
             foreach (var source in _sources)
             {
                 // send ray towards destination entity
-                if (Irradiate(source, destUid, destTrs, destWorld, debug) is not {} ray)
+                if (Irradiate(source, destUid, destTrs, destWorld, debug) is not { } ray)
                     continue;
 
                 // add rads to total rad exposure
@@ -135,14 +138,14 @@ public partial class RadiationSystem
 
         var mapId = destTrs.MapID;
 
-        // Goobstation Start - Radiation Overhaul
         // get direction from rad source to destination and its distance
         var dir = destWorld - source.WorldPosition;
-        var dist = Math.Max(dir.Length(),0.5f);
+        // Goobstation Start - Radiation Overhaul
+        var dist = Math.Max(dir.Length(), 0.5f);
         if (TryComp(source.Entity.Owner, out EventHorizonComponent? horizon)) // if we have a horizon emit radiation from the horizon,
             dist = Math.Max(dist - horizon.Radius, 0.5f);
-        var rads = source.Intensity / (dist );
-        if (rads < 0.01)
+        var rads = source.Intensity / dist;
+        if (rads < MinIntensity)
             return null;
         // Goobstation End - Radiation Overhaul
 
@@ -154,7 +157,7 @@ public partial class RadiationSystem
         // if source and destination on the same grid it's possible that
         // between them can be another grid (ie. shuttle in center of donut station)
         // however we can do simplification and ignore that case
-        if (GridcastSimplifiedSameGrid && destTrs.GridUid is {} gridUid && source.GridUid == gridUid)
+        if (GridcastSimplifiedSameGrid && destTrs.GridUid is { } gridUid && source.GridUid == gridUid)
         {
             if (!_gridQuery.TryGetComponent(gridUid, out var gridComponent))
                 return ray;
@@ -282,19 +285,19 @@ public partial class RadiationSystem
 
         // get coordinate of source and destination in grid coordinates
 
-        // Goobstation Start - Radiation Overhaul
-
         // TODO Grid overlap. This currently assumes the grid is always parented directly to the map (local matrix == world matrix).
         // If ever grids are allowed to overlap, this might no longer be true. In that case, this should precompute and cache
         // inverse world matrices.
-        var srcLocal = sourceTrs.ParentUid == grid.Owner
+
+        Vector2 srcLocal = sourceTrs.ParentUid == grid.Owner
             ? sourceTrs.LocalPosition
             : Vector2.Transform(ray.Source, grid.Comp2.InvLocalMatrix);
 
-        var dstLocal = destTrs.ParentUid == grid.Owner
+        Vector2 dstLocal = destTrs.ParentUid == grid.Owner
             ? destTrs.LocalPosition
             : Vector2.Transform(ray.Destination, grid.Comp2.InvLocalMatrix);
 
+        // Goobstation Start - Radiation Overhaul
         Vector2 sourceGrid = new(
             srcLocal.X / grid.Comp1.TileSize,
             srcLocal.Y / grid.Comp1.TileSize);
@@ -303,30 +306,29 @@ public partial class RadiationSystem
             dstLocal.X / grid.Comp1.TileSize,
             dstLocal.Y / grid.Comp1.TileSize);
 
-        foreach (var (point,dist) in AdvancedGridRaycast(sourceGrid,destGrid))
+        // iterate tiles in grid line from source to destination
+        foreach (var (point, dist) in AdvancedGridRaycast(sourceGrid, destGrid))
         {
-            if (resistanceMap.TryGetValue(point, out var resData))
+            if (!resistanceMap.TryGetValue(point, out var resData))
+                continue;
+
+            var passRatioFromRadResistance = (1 / (resData > 2 ? (resData / 2) : 1));
+
+            var passthroughRatio = MathF.Pow(passRatioFromRadResistance, dist);
+            ray.Rads *= passthroughRatio;
+
+            // save data for debug
+            if (saveVisitedTiles && blockers is not null)
+                blockers.Add((point, ray.Rads));
+
+            // no intensity left after blocker
+            if (ray.Rads <= MinIntensity)
             {
-                var passRatioFromRadResistance = (1 / (resData > 2 ? (resData / 2) : 1));
-
-                var passthroughRatio = MathF.Pow(passRatioFromRadResistance, dist);
-                ray.Rads *= passthroughRatio;
-
-                // save data for debug
-                if (saveVisitedTiles)
-                    blockers!.Add((point, ray.Rads));
-
-                // no intensity left after blocker
-                if (ray.Rads <= MinIntensity)
-                {
-                    ray.Rads = 0;
-                    break;
-                }
+                ray.Rads = 0;
+                break;
             }
         }
-
         // Goobstation End - Radiation Overhaul
-
 
         if (!saveVisitedTiles || blockers!.Count <= 0)
             return ray;

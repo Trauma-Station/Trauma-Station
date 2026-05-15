@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
@@ -21,7 +20,7 @@ public sealed partial class HereticCosmicRuneComponent : Component
     [DataField]
     public EntProtoId Effect = "HereticRuneCosmosLight";
 
-    [DataField, AutoPausedField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
     public TimeSpan NextUse = TimeSpan.Zero;
 
     [DataField]

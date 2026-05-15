@@ -2,37 +2,41 @@
 
 - type: gas
   id: BZ
-  name: gases-bz
-  specificHeat: 20
+  name: gas-bz
+  abbreviation: gas-bz-abbreviation
+  molarHeatCapacity: 20
   heatCapacityRatio: 1.6
   molarMass: 12
-  # <Trauma>
-  gasOverlaySprite: /Textures/Effects/atmospherics.rsi
-  gasOverlayState: water_vapor # Is it THE FOG or is it INSTANT DEATH?
-  # </Trauma>
+  gasOverlaySprite:
+    sprite: /Textures/Effects/atmospherics.rsi
+    state: water_vapor # Is it THE FOG or is it INSTANT DEATH?
   color: '#9370db'
   reagent: BZ
   pricePerMole: 2
 
 - type: gas
   id: Healium
-  name: gases-healium
-  specificHeat: 10
+  name: gas-healium
+  abbreviation: gas-healium-abbreviation
+  molarHeatCapacity: 10
   heatCapacityRatio: 1.4
   molarMass: 15
-  gasOverlaySprite: /Textures/Effects/atmospherics.rsi
-  gasOverlayState: healium
+  gasOverlaySprite:
+    sprite: /Textures/_Trauma/Effects/atmospherics.rsi
+    state: healium
   color: '#fa8072'
   reagent: Healium
   pricePerMole: 3
 
 - type: gas
   id: Nitrium
-  name: gases-nitrium
-  specificHeat: 10
+  name: gas-nitrium
+  abbreviation: gas-nitrium-abbreviation
+  molarHeatCapacity: 10
   heatCapacityRatio: 1.4
-  gasOverlaySprite: /Textures/Effects/atmospherics.rsi
-  gasOverlayState: nitrium
+  gasOverlaySprite:
+    sprite: /Textures/_Trauma/Effects/atmospherics.rsi
+    state: nitrium
   molarMass: 8
   color: '#a52a2a'
   reagent: Nitrium
@@ -40,8 +44,9 @@
 
 - type: gas
   id: Pluoxium
-  name: gases-pluoxium
-  specificHeat: 80
+  name: gas-pluoxium
+  abbreviation: gas-pluoxium-abbreviation
+  molarHeatCapacity: 80
   heatCapacityRatio: 1.33
   molarMass: 32
   color: '#7b68ee'

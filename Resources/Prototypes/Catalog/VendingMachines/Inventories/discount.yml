@@ -31,3 +31,9 @@
   contrabandInventory:
     FoodSnackDanDanNoodles: 3
     FoodBakedBunHoney: 3
+  # <Trauma>
+  emaggedInventory:
+    CigCartonMixed: 2
+    CdDiskDanitosBurritos: 1
+    CdDiskDansTickets: 1
+  # </Trauma>

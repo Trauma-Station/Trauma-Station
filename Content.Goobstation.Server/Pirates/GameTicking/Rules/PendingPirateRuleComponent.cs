@@ -2,7 +2,6 @@
 
 using Content.Shared.Cargo;
 using Content.Shared.Dataset;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Pirates.GameTicking.Rules;
 

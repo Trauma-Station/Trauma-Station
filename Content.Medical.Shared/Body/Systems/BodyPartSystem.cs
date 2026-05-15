@@ -14,13 +14,13 @@ namespace Content.Medical.Shared.Body;
 /// </summary>
 public sealed partial class BodyPartSystem : CommonBodyPartSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyCacheSystem _cache = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly EntityQuery<BodyPartComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<ChildOrganComponent> _childQuery = default!;
-    [Dependency] private readonly EntityQuery<OrganComponent> _organQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyCacheSystem _cache = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityQuery<BodyPartComponent> _query = default!;
+    [Dependency] private EntityQuery<ChildOrganComponent> _childQuery = default!;
+    [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
 
     public override void Initialize()
     {

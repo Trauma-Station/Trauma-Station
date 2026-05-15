@@ -1,10 +1,9 @@
 # Security
 
-# TODO: fucking loc strings bruh
 - type: listing
   id: SecoffReinforcement
-  name: Reinforcement Officer
-  description: A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of three minutes.
+  name: reinforcement-sec-name
+  description: reinforcement-sec-desc
   productEntity: ReinforcementBeaconSecurityOfficer
   icon:
     sprite: Markers/jobs.rsi
@@ -19,8 +18,8 @@
 
 - type: listing
   id: SecoffReinforcementExpress
-  name: Express Reinforcement Officer
-  description: A reinforcement officer, does not come with equipment and will have to be armed. Minimum arrival time of ten seconds.
+  name: reinforcement-sec-express-name
+  description: reinforcement-sec-express-desc
   productEntity: ReinforcementBeaconSecurityOfficerFast
   icon:
     sprite: Markers/jobs.rsi
@@ -35,8 +34,8 @@
 
 - type: listing
   id: SecoffReinforcementSpecialist
-  name: Specialist Reinforcement Officer
-  description: A reinforcement officer, this one is armored and armed. Minimum arrival time of three minutes.
+  name: reinforcement-sec-specialist-name
+  description: reinforcement-sec-specialist-desc
   productEntity: ReinforcementBeaconSpecialistOfficerLaser
   icon:
     sprite: Markers/jobs.rsi
@@ -53,8 +52,8 @@
 
 - type: listing
   id: ReinforcementAssistant
-  name: Hire Assistant
-  description: Hire an assistant, fent not included. Minimum arrival time of three minutes.
+  name: reinforcement-assistant-name
+  description: reinforcement-assistant-desc
   productEntity: ReinforcementBeaconAssistant
   icon:
     sprite: Markers/jobs.rsi
@@ -69,8 +68,8 @@
 
 - type: listing
   id: ReinforcementBartender
-  name: Hire Bartender
-  description: Hire a bartender. Minimum arrival time of three minutes.
+  name: reinforcement-bartender-name
+  description: reinforcement-bartender-desc
   productEntity: ReinforcementBeaconBartender
   icon:
     sprite: Markers/jobs.rsi
@@ -85,8 +84,8 @@
 
 - type: listing
   id: ReinforcementChef
-  name: Hire Chef
-  description: Hire a chef. Minimum arrival time of three minutes.
+  name: reinforcement-chef-name
+  description: reinforcement-chef-desc
   productEntity: ReinforcementBeaconChef
   icon:
     sprite: Markers/jobs.rsi
@@ -101,8 +100,8 @@
 
 - type: listing
   id: ReinforcementBeaconBotanist
-  name: Hire Botanist
-  description: Hire a botanist. Minimum arrival time of three minutes.
+  name: reinforcement-botanist-name
+  description: reinforcement-botanist-desc
   productEntity: ReinforcementBeaconBotanist
   icon:
     sprite: Markers/jobs.rsi
@@ -117,8 +116,8 @@
 
 - type: listing
   id: ReinforcementBeaconEngineer
-  name: Hire Engineer
-  description: Hire an engineer, tools included. Minimum arrival time of three minutes.
+  name: reinforcement-engineer-name
+  description: reinforcement-engineer-desc
   productEntity: ReinforcementBeaconEngi
   icon:
     sprite: Markers/jobs.rsi
@@ -133,8 +132,8 @@
 
 - type: listing
   id: ReinforcementBeaconAtmos
-  name: Hire Atmos Tech
-  description: Hire an atmos tech, tools included. Minimum arrival time of three minutes.
+  name: reinforcement-atmos-name
+  description: reinforcement-atmos-desc
   productEntity: ReinforcementBeaconAtmos
   icon:
     sprite: Markers/jobs.rsi
@@ -149,8 +148,8 @@
 
 - type: listing
   id: ReinforcementBeaconScientist
-  name: Hire Scientist
-  description: Hire a scientist. Minimum arrival time of three minutes.
+  name: reinforcement-scientist-name
+  description: reinforcement-scientist-desc
   productEntity: ReinforcementBeaconSci
   icon:
     sprite: Markers/jobs.rsi
@@ -165,8 +164,8 @@
 
 - type: listing
   id: ReinforcementBeaconDClass
-  name: Purchase D-Class
-  description: Hire a disposable, taken from some backwater planet. Minimum arrival time of three minutes.
+  name: reinforcement-dclass-name
+  description: reinforcement-dclass-desc
   productEntity: ReinforcementBeaconDClass
   icon:
     sprite: Markers/jobs.rsi
@@ -181,8 +180,8 @@
 
 - type: listing
   id: ReinforcementBeaconDoctor
-  name: Hire Doctor
-  description: Hire a doctor. Minimum arrival time of three minutes.
+  name: reinforcement-doctor-name
+  description: reinforcement-doctor-desc
   productEntity: ReinforcementBeaconDoctor
   icon:
     sprite: Markers/jobs.rsi
@@ -197,8 +196,8 @@
 
 - type: listing
   id: ReinforcementBeaconChemist
-  name: Hire Chemist
-  description: Hire a chemist. Minimum arrival time of three minutes.
+  name: reinforcement-chemist-name
+  description: reinforcement-chemist-desc
   productEntity: ReinforcementBeaconChemist
   icon:
     sprite: Markers/jobs.rsi
@@ -213,8 +212,8 @@
 
 - type: listing
   id: ReinforcementBeaconCargo
-  name: Hire Cargo Tech
-  description: Hire a cargo tech. Minimum arrival time of three minutes.
+  name: reinforcement-cargo-name
+  description: reinforcement-cargo-desc
   productEntity: ReinforcementBeaconCargo
   icon:
     sprite: Markers/jobs.rsi
@@ -229,8 +228,8 @@
 
 - type: listing
   id: ReinforcementBeaconSalv
-  name: Hire Salvage Specialist
-  description: Hire a salvager. Minimum arrival time of three minutes.
+  name: reinforcement-salvage-name
+  description: reinforcement-salvage-desc
   productEntity: ReinforcementBeaconSalv
   icon:
     sprite: Markers/jobs.rsi

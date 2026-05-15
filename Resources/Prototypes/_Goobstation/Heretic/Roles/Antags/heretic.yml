@@ -9,6 +9,10 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 54000 # 15h
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Decapoid # You need 2 hands to draw the rune...
   guides: [ Heretics ]
   creditImage: /Textures/_Trauma/EndCredits/Antags/heretic.png # Trauma
 
@@ -18,6 +22,15 @@
   antagonist: true
   setPreference: false
   objective: roles-antag-ghoul-description
+  guides: [ Heretics ]
+  dontShowInCredits: True # Trauma
+
+- type: antag
+  id: ArenaParticipant
+  name: roles-antag-arena-participant-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-arena-participant-description
   guides: [ Heretics ]
   dontShowInCredits: True # Trauma
 

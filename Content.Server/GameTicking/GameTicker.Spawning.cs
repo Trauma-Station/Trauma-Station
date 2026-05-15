@@ -32,9 +32,9 @@ namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
-        [Dependency] private readonly IAdminManager _adminManager = default!;
-        [Dependency] private readonly SharedJobSystem _jobs = default!;
-        [Dependency] private readonly AdminSystem _admin = default!;
+        [Dependency] private IAdminManager _adminManager = default!;
+        [Dependency] private SharedJobSystem _jobs = default!;
+        [Dependency] private AdminSystem _admin = default!;
 
         public static readonly EntProtoId ObserverPrototypeName = "MobObserver";
         public static readonly EntProtoId AdminObserverPrototypeName = "AdminObserver";
@@ -347,16 +347,16 @@ namespace Content.Server.GameTicking
 
             DebugTools.AssertNotNull(data);
 
-            var newMind = _mind.CreateMind(data!.UserId, character.Name);
-            _mind.SetUserId(newMind, data.UserId);
-
             jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
-
-            _playTimeTrackings.PlayerRolesChanged(player);
 
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, jobId, character);
             DebugTools.AssertNotNull(mobMaybe);
             mob = mobMaybe!.Value;
+
+            var newMind = _mind.CreateMind(data.UserId, Name(mob));
+            _mind.SetUserId(newMind, data.UserId);
+
+            _playTimeTrackings.PlayerRolesChanged(player);
 
             _mind.TransferTo(newMind, mob);
 

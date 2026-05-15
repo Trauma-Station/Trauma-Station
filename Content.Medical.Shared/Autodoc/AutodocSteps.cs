@@ -5,8 +5,6 @@ using Content.Medical.Shared.Surgery;
 using Content.Shared.Body;
 using Content.Shared.Hands.Components;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Autodoc;
 

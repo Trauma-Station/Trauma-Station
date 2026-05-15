@@ -8,7 +8,6 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Administration.TimeTransferPanel;
@@ -16,9 +15,9 @@ namespace Content.Goobstation.Client.Administration.TimeTransferPanel;
 [GenerateTypedNameReferences]
 public sealed partial class TimeTransferPanel : DefaultWindow
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
 

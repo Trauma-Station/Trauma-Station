@@ -15,6 +15,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> DisablePathfinding =
         CVarDef.Create("trauma.disable_pathfinding", false, CVar.SERVER);
 
+    /// <summary>
+    /// Disables DogVision which sandevistan uses.
+    /// </summary>
+    public static readonly CVarDef<bool> NoVisionFilters =
+        CVarDef.Create("accessibility.no_vision_filters", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #endregion
 
     #region AudioMuffle
@@ -95,6 +101,13 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<float> ChatHighlightVolume =
         CVarDef.Create("chat.highlight_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    /// <summary>
+    /// You get instantly banned if you say something matching this regex in any chat channel.
+    /// The regex is case insensitive.
+    /// </summary>
+    public static readonly CVarDef<string> GamerWordsRegex =
+        CVarDef.Create("chat.gamer_words_regex", string.Empty, CVar.SERVER);
+
     #endregion
 
     #region Webhooks
@@ -112,6 +125,14 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<float> ErrorWebhookDelay =
         CVarDef.Create("trauma.error_webhook_delay", 0.3f, CVar.SERVER);
+
+    /// <summary>
+    /// How many messages can be queued at once.
+    /// If this limit is exceeded the oldest messages get dropped.
+    /// Changing this ingame drops all currently queued messages.
+    /// </summary>
+    public static readonly CVarDef<int> ErrorWebhookLimit =
+        CVarDef.Create("trauma.error_webhook_limit", 64, CVar.SERVER);
 
     #endregion
 
@@ -131,7 +152,7 @@ public sealed partial class TraumaCVars
     /// How long despawning decals like footprints and blood splatters last before despawning.
     /// </summary>
     public static readonly CVarDef<float> DecalDespawnTime =
-        CVarDef.Create("trauma.decal_despawn_time", 300f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_time", 900f, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// How many decals are allowed to be despawning at the same time.
@@ -139,7 +160,69 @@ public sealed partial class TraumaCVars
     /// If this value is changed ingame it will only take affected after restarting the round.
     /// </summary>
     public static readonly CVarDef<int> DecalDespawnLimit =
-        CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_limit", 1024, CVar.SERVER | CVar.REPLICATED);
+
+    #endregion
+
+    #region Station Traits
+
+    /// <summary>
+    /// Whether to enable station traits.
+    /// Used to prevent tests failing for spawned gamerules.
+    /// </summary>
+    public static readonly CVarDef<bool> StationTraitsEnabled =
+        CVarDef.Create("trauma.station_traits_enabled", true, CVar.SERVER);
+
+    /// <summary>
+    /// The offset for in-game date (the date will be server date + this amount of years).
+    /// Displayed in the station report and PDAs.
+    /// </summary>
+    public static readonly CVarDef<int> YearOffset =
+        CVarDef.Create("game.current_year_offset", 739, CVar.SERVERONLY);
+
+    #endregion
+
+    #region Antag Summoner
+
+    /// <summary>
+    /// Minimum number of players for antag summoner to work, to prevent farming money when nobody is even going to take the ghost roles.
+    /// </summary>
+    public static readonly CVarDef<int> AntagSummonerMinPlayers =
+        CVarDef.Create("trauma.antag_summoner_min_players", 30, CVar.SERVER);
+
+    #endregion
+
+    #region Particles
+
+    /// <summary>
+    /// Controls particle effect quality.
+    /// 0 = Off, 1 = Low, 2 = Medium, 3 = High
+    /// Low:    25% of maxCount per emitter
+    /// Medium: 50% of maxCount per emitter
+    /// High:   100% of maxCount per emitter
+    ///
+    /// Note: Particles with IgnoreQualitySettings = true always render at full quality.
+    /// </summary>
+    public static readonly CVarDef<int> ParticleQuality =
+        CVarDef.Create("particles.quality", 3, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Maximum total number of live particles allowed on screen at once across all emitters.
+    /// Emitters will reduce their emission rate once the budget is exhausted.
+    /// Overridden by ParticleQuality presets but can be set manually when quality is High.
+    /// </summary>
+    public static readonly CVarDef<int> ParticleGlobalBudget =
+        CVarDef.Create("particles.global_budget", 8000, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    #endregion
+
+    #region Audio
+
+    /// <summary>
+    /// Special audio volume like fear sounds.
+    /// </summary>
+    public static readonly CVarDef<float> SpecialAudioVolume =
+        CVarDef.Create("trauma.special_audio_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
 }

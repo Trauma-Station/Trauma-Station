@@ -7,16 +7,15 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
-public sealed class CosmosComboSystem : EntitySystem
+public sealed partial class CosmosComboSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

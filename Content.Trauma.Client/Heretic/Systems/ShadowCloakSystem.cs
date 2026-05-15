@@ -11,14 +11,15 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
+using Content.Trauma.Shared.Wizard.Traps;
 using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class ShadowCloakSystem : SharedShadowCloakSystem
+public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -28,10 +29,11 @@ public sealed class ShadowCloakSystem : SharedShadowCloakSystem
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<FireBlastedComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticCombatMarkComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticEyeOverlayComponent>>(UpdateOverlay);
-        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<Shared.Wizard.Traps.IceCubeComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<IceCubeComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<SacramentsOfPowerComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<StarMarkComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<VoidCurseComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticArenaParticipantComponent>>(UpdateOverlay);
 
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShaderEvent>(OnShader);
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShadersEvent>(OnShaders);

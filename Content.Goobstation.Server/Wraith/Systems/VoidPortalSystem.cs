@@ -6,7 +6,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -14,13 +13,13 @@ using Robust.Server.GameObjects;
 
 namespace Content.Goobstation.Server.Wraith.Systems;
 
-public sealed class VoidPortalSystem : EntitySystem
+public sealed partial class VoidPortalSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     private readonly HashSet<Entity<VoidSummonedComponent>> _summoned = new();
 

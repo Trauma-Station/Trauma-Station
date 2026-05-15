@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Shared.Heretic.Components;
 using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 
-public abstract class SpriteOverlaySystem<T> : EntitySystem where T : BaseSpriteOverlayComponent
+public abstract partial class SpriteOverlaySystem<T> : EntitySystem where T : BaseSpriteOverlayComponent
 {
-    [Dependency] protected readonly SpriteSystem Sprite = default!;
+    [Dependency] protected SpriteSystem Sprite = default!;
 
     public override void Initialize()
     {

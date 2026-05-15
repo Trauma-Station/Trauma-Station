@@ -2,7 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Content.Trauma.Shared.Xenomorphs.Caste;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Xenomorphs.Queen;
 

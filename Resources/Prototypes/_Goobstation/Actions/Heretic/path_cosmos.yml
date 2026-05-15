@@ -50,6 +50,7 @@
   components:
   - type: Action
     checkCanInteract: false
+    raiseOnAction: true
     useDelay: 1
     itemIconStyle: NoItem
     sound:

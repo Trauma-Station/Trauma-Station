@@ -6,9 +6,9 @@ using Content.Shared.Alert;
 
 namespace Content.Trauma.Shared.Xenomorphs.Plasma;
 
-public abstract class SharedPlasmaSystem : EntitySystem
+public abstract partial class SharedPlasmaSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
@@ -39,7 +39,8 @@ public abstract class SharedPlasmaSystem : EntitySystem
         component.Plasma = FixedPoint2.Min(component.Plasma + amount, component.MaxPlasma);
         Dirty(uid, component);
 
-        RaiseLocalEvent(uid, new PlasmaAmountChangeEvent(component.Plasma));
+        var ev = new PlasmaAmountChangeEvent(component.Plasma);
+        RaiseLocalEvent(uid, ref ev);
 
         _alerts.ShowAlert(uid, component.PlasmaAlert);
 

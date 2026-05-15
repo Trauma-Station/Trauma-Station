@@ -5,7 +5,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Quality;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Trauma.Shared.Forging;
@@ -110,4 +109,16 @@ public sealed partial class ForgedItemPrototype : IPrototype, IInheritingPrototy
     {
         { "MetalworkingKnowledge", 1 }
     };
+
+    /// <summary>
+    /// If non-null, only these metals can be used to forge this item.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MetalPrototype>>? Whitelist;
+
+    /// <summary>
+    /// If non-null, these metals cannot be used to forge this item.
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<MetalPrototype>>? Blacklist;
 }

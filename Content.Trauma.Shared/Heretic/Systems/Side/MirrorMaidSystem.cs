@@ -16,15 +16,15 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
-public sealed class MirrorMaidSystem : EntitySystem
+public sealed partial class MirrorMaidSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedVoidCurseSystem _curse = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedVoidCurseSystem _curse = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {

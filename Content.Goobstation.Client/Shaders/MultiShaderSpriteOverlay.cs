@@ -1,19 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Shaders;
 
-public sealed class MultiShaderSpriteOverlay : Overlay
+public sealed partial class MultiShaderSpriteOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IClyde _clyde = default!;
 
     private readonly TransformSystem _transform;
     private readonly SpriteSystem _sprite;
@@ -92,16 +90,16 @@ public sealed class MultiShaderSpriteOverlay : Overlay
                 () =>
                 {
                     var position = target.LocalToWorld(eye, (Vector2) screenSpriteSize * 0.5f, viewport.RenderScale);
-
-                    var angle = rot + eye.Rotation;
+                    var rotation = sprite.NoRotation ? rot : -eye.Rotation;
+                    var angle = rotation + eye.Rotation;
                     angle = angle.Reduced().FlipPositive();
 
                     var cardinal = Angle.Zero;
 
-                    if (sprite is {NoRotation: false, SnapCardinals: true})
+                    if (sprite is { NoRotation: false, SnapCardinals: true })
                         cardinal = angle.RoundToCardinalAngle();
 
-                    var entityMatrix = Matrix3Helpers.CreateTransform(position, sprite.NoRotation ? -eye.Rotation : rot - cardinal);
+                    var entityMatrix = Matrix3Helpers.CreateTransform(position, sprite.NoRotation ? -eye.Rotation : rotation - cardinal);
                     Matrix3x2.Invert(entityMatrix, out var invEntityMatrix);
 
                     var invMatrix = target.GetWorldToLocalMatrix(eye, viewport.RenderScale);
@@ -118,7 +116,7 @@ public sealed class MultiShaderSpriteOverlay : Overlay
 
                     postHandle.InvMatrix = invEntityMatrix * invSpriteMatrix * scaleMatrix * entityMatrix * invMatrix;
 
-                    _sprite.RenderSprite((uid, sprite), postHandle, eye.Rotation, rot, position);
+                    _sprite.RenderSprite((uid, sprite), postHandle, eye.Rotation, rotation, position);
                     postHandle.InvMatrix = Matrix3x2.Identity;
 
                     postHandle.SetTransform(Matrix3x2.Identity);
@@ -148,8 +146,11 @@ public sealed class MultiShaderSpriteOverlay : Overlay
                 Color.Transparent);
 
             handle.UseShader(null);
-            handle.SetTransform(Matrix3x2.Identity);
+            var angle = sprite.NoRotation ? -eye.Rotation : rot;
+            var mat = Matrix3x2.CreateTranslation(pos + angle.RotateVec(sprite.Offset) - spriteBB.Center);
+            handle.SetTransform(mat);
             handle.DrawTextureRectRegion(target.Texture, spriteBB);
+            handle.SetTransform(Matrix3x2.Identity);
         }
 
         handle.SetTransform(Matrix3x2.Identity);

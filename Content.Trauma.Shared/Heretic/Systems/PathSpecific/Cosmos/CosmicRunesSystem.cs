@@ -12,26 +12,27 @@ using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
-public sealed class CosmicRunesSystem : EntitySystem
+public sealed partial class CosmicRunesSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private TouchSpellSystem _touchSpell = default!;
 
     private HashSet<Entity<StarMarkComponent>> _teleporting = new();
 
@@ -154,12 +155,11 @@ public sealed class CosmicRunesSystem : EntitySystem
         foreach (var entity in _teleporting)
         {
             var uid = entity.Owner;
-            _pulling.StopAllPulls(uid);
-            // TODO: replace with teleport system
-            _transform.SetCoordinates(uid, xform.Coordinates);
+            _teleport.Teleport(uid, xform.Coordinates, user);
             _starMark.TryApplyStarMark(uid);
         }
 
+        // re-pull if user is cosmos path, teleport breaks pulls
         if (pulling != null)
             _pulling.TryStartPull(user, pulling.Value, puller, null, grabStage, force: true);
 

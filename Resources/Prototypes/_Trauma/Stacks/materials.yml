@@ -25,3 +25,10 @@
   name: stack-whetstone
   icon: { sprite: /Textures/_Trauma/Objects/Tools/weaponreinforcement.rsi, state: icon }
   spawn: Whetstone1
+
+- type: stack
+  parent: BaseTinyStack
+  id: DrillHead
+  name: stack-drillhead
+  icon: { sprite: /Textures/_Trauma/Objects/Tools/drillhead.rsi, state: icon }
+  spawn: DrillHead

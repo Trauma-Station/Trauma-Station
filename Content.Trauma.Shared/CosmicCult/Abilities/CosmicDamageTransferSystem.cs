@@ -5,17 +5,16 @@ using Content.Shared.Administration.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public sealed class CosmicDamageTransferSystem : EntitySystem
+public sealed partial class CosmicDamageTransferSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
 
     public override void Initialize()
     {

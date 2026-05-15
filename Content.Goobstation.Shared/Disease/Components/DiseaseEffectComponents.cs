@@ -3,8 +3,6 @@
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Disease.Components;
 
@@ -144,32 +142,6 @@ public sealed partial class DiseaseVomitEffectComponent : ScalingDiseaseEffect
 
     [DataField]
     public float FoodChange = -40f;
-}
-
-/// <summary>
-/// Causes the host to get flashed
-/// For use with conditions
-/// </summary>
-[RegisterComponent]
-public sealed partial class DiseaseFlashEffectComponent : ScalingDiseaseEffect
-{
-    /// <summary>
-    /// The duration to flash for
-    /// </summary>
-    [DataField]
-    public TimeSpan Duration = TimeSpan.FromSeconds(2f);
-
-    /// <summary>
-    /// How much to slow the host down during the flash
-    /// </summary>
-    [DataField]
-    public float SlowTo = 0.8f;
-
-    /// <summary>
-    /// For how much to stun the host, if not null
-    /// </summary>
-    [DataField]
-    public TimeSpan? StunDuration;
 }
 
 /// <summary>

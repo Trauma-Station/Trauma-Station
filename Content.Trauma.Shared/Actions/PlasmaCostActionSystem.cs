@@ -9,14 +9,14 @@ using Content.Shared.Actions.Events;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class PlasmaCostActionSystem : EntitySystem
+public sealed partial class PlasmaCostActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPlasmaSystem _plasma = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPlasmaSystem _plasma = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<PlasmaCostActionComponent, ActionRelayedEvent<PlasmaAmountChangeEvent>>(OnPlasmaAmountChange);
+        SubscribeLocalEvent<PlasmaCostActionComponent, PlasmaAmountChangeEvent>(OnPlasmaAmountChange);
         SubscribeLocalEvent<PlasmaCostActionComponent, ActionAttemptEvent>(OnActionAttempt);
         SubscribeLocalEvent<PlasmaCostActionComponent, ActionPerformedEvent>(OnActionPerformed);
     }
@@ -43,9 +43,9 @@ public sealed class PlasmaCostActionSystem : EntitySystem
             _plasma.ChangePlasmaAmount(performer, -cost);
     }
 
-    private void OnPlasmaAmountChange(EntityUid uid, PlasmaCostActionComponent component, ActionRelayedEvent<PlasmaAmountChangeEvent> args)
+    private void OnPlasmaAmountChange(EntityUid uid, PlasmaCostActionComponent component, ref PlasmaAmountChangeEvent args)
     {
-        _actions.SetEnabled(uid, component.PlasmaCost <= args.Args.Amount);
+        _actions.SetEnabled(uid, component.PlasmaCost <= args.Amount);
     }
 
     private void OnActionAttempt(Entity<PlasmaCostActionComponent> ent, ref ActionAttemptEvent args)

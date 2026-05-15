@@ -10,14 +10,13 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;
 
-public sealed class ConstructorBUI : BoundUserInterface
+public sealed partial class ConstructorBUI : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly CommonKnowledgeSystem _knowledge = default!;
     private readonly ConstructionSystem _construction;
     private readonly EntityWhitelistSystem _whitelist;

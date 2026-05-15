@@ -3,16 +3,15 @@
 using System.Linq;
 using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class HereticFlamesSystem : EntitySystem
+public sealed partial class HereticFlamesSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {

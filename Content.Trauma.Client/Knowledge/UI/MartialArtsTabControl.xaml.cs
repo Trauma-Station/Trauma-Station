@@ -8,15 +8,14 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Knowledge.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class MartialArtsTabControl : BaseTabControl
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
     private readonly KnowledgeSystem _knowledge;
     private readonly SpriteSystem _sprite;
 

@@ -13,26 +13,26 @@ using Content.Shared.Database;
 using Content.Shared.PDA;
 using Content.Shared.Radio.Components;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
-using Content.Trauma.Common.NanoChat; // Goob
+using Content.Trauma.Common.Chat;
+using Content.Trauma.Common.NanoChat;
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.CartridgeLoader.Cartridges;
 
-public sealed class NanoChatCartridgeSystem : EntitySystem
+public sealed partial class NanoChatCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridge = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedNanoChatSystem _nanoChat = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridge = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedNanoChatSystem _nanoChat = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IConfigurationManager _cfgManager = default!;
 
     // Messages in notifications get cut off after this point
     // no point in storing it on the comp
@@ -277,10 +277,15 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         var content = msg.Content;
         if (!string.IsNullOrWhiteSpace(content))
         {
-            content = FormattedMessage.EscapeText(content.Trim()); // Goob Sanitize Text
+            content = FormattedMessage.EscapeText(content.Trim());
             if (content.Length > NanoChatMessage.MaxContentLength)
                 content = content[..NanoChatMessage.MaxContentLength];
         }
+
+        var attemptEv = new UserMessageAttemptEvent(msg.Actor, content);
+        RaiseLocalEvent(ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
 
         // Create and store message for sender
         var message = new NanoChatMessage(

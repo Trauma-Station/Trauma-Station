@@ -10,19 +10,17 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Weapons.AmmoSelector;
 using Content.Trauma.Shared.Wizard.UserInterface;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Weapons.AmmoSelector;
 
-public sealed class SelectableAmmoSystem : CommonSelectableAmmoSystem
+public sealed partial class SelectableAmmoSystem : CommonSelectableAmmoSystem
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly ActivatableUiUserWhitelistSystem _activatableUiWhitelist = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private ActivatableUiUserWhitelistSystem _activatableUiWhitelist = default!;
 
     public override void Initialize()
     {
@@ -131,6 +129,8 @@ public sealed class SelectableAmmoSystem : CommonSelectableAmmoSystem
             // this will never have a rounding error TRUST
             battery.Shots = (int) Math.Round(battery.Shots * fireCostRatio);
             battery.Capacity = (int) Math.Round(battery.Capacity * fireCostRatio);
+            battery.ShotsFloat *= fireCostRatio;
+            battery.CapacityFloat *= fireCostRatio;
             Dirty(uid, battery);
             return true;
         }

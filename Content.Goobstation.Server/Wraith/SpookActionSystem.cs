@@ -29,25 +29,25 @@ using Content.Shared.Humanoid;
 namespace Content.Goobstation.Server.Wraith;
 
 // TODO: most of this shit just looks up X component in a range then does a thing to N of them, this should use entity effects instead of reinventing the wheel 50 times
-public sealed class SpookActionSystem : EntitySystem
+public sealed partial class SpookActionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly DoorSystem _door = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPoweredLightSystem _poweredLight = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private DoorSystem _door = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    [Dependency] private readonly EntityQuery<DoorComponent> _doorQuery = default!;
-    [Dependency] private readonly EntityQuery<EntityStorageComponent> _entityStorageQuery = default!;
-    [Dependency] private readonly EntityQuery<ActionComponent> _actionQuery = default!;
-    [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private EntityQuery<DoorComponent> _doorQuery = default!;
+    [Dependency] private EntityQuery<EntityStorageComponent> _entityStorageQuery = default!;
+    [Dependency] private EntityQuery<ActionComponent> _actionQuery = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
 
     private HashSet<Entity<ApcComponent>> _apcs = new();
     private HashSet<Entity<FlammableComponent>> _fireTargets = new();

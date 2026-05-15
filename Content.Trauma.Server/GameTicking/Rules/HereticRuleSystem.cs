@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.Goobstation.Server.Objectives.Components;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
@@ -15,20 +14,20 @@ using Content.Shared.Store.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
+public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly ObjectivesSystem _objective = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private ObjectivesSystem _objective = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");

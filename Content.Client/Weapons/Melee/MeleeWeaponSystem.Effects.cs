@@ -18,10 +18,18 @@ public sealed partial class MeleeWeaponSystem
     /// <summary>
     /// Does all of the melee effects for a player that are predicted, i.e. character lunge and weapon animation.
     /// </summary>
-    public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flippedAnimation, bool predicted = true)
+    public override void DoLunge(EntityUid user, EntityUid weapon, Angle angle, Vector2 localPos, string? animation, Angle spriteRotation, bool flippedAnimation, bool predicted = true, EntityUid? source = null) // Trauma - source
     {
         if (!Timing.IsFirstTimePredicted)
             return;
+
+        // <Trauma>
+        if (source != null && source != user)
+        {
+            user = source.Value;
+            weapon = user;
+        }
+        // </Trauma>
 
         var lunge = GetLungeAnimation(localPos);
 
@@ -32,7 +40,7 @@ public sealed partial class MeleeWeaponSystem
         if (localPos == Vector2.Zero || animation == null)
             return;
 
-        if (!_xformQuery.TryGetComponent(user, out var userXform) || userXform.MapID == MapId.Nullspace)
+        if (!TryComp(user, out TransformComponent? userXform) || userXform.MapID == MapId.Nullspace)
             return;
 
         var animationUid = Spawn(animation, userXform.Coordinates);
@@ -56,7 +64,7 @@ public sealed partial class MeleeWeaponSystem
         _sprite.SetRotation((animationUid, sprite), localPos.ToWorldAngle());
         var distance = Math.Clamp(localPos.Length() / 2f, 0.2f, 1f);
 
-        var xform = _xformQuery.GetComponent(animationUid);
+        var xform = Transform(animationUid);
         TrackUserComponent track;
 
         switch (arcComponent.Animation)

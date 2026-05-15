@@ -8,20 +8,19 @@ using Content.Trauma.Server.Heretic.Components.PathSpecific;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class LabyrinthPortalSystem : EntitySystem
+public sealed partial class LabyrinthPortalSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly EntityQuery<MindComponent> _mindQuery = default!;
-    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private EntityQuery<MindComponent> _mindQuery = default!;
+    [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
 
     private TimeSpan _nextSpawn;
     private readonly TimeSpan _spawnDelay = TimeSpan.FromSeconds(1);

@@ -17,7 +17,7 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 /// </summary>
 public abstract partial class SharedGunSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private HashSet<Entity<BodyComponent>> _bodies = new();
 
@@ -42,7 +42,7 @@ public abstract partial class SharedGunSystem
     }
 
     public TargetBodyPart? GetTargetPart(EntityUid? shooter, EntityUid target)
-        => shooter is {} targeting
+        => shooter is {} targeting && Exists(targeting)
             ? GetTargetPart(targeting, TransformSystem.GetMapCoordinates(targeting), TransformSystem.GetMapCoordinates(target))
             : null;
 

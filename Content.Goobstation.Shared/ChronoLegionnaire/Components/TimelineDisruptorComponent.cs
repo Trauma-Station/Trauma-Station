@@ -2,8 +2,6 @@
 
 using Content.Goobstation.Shared.ChronoLegionnaire.EntitySystems;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Shared.ChronoLegionnaire.Components;

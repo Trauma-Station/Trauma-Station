@@ -3,14 +3,13 @@
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Language;
 
-public sealed class TowerOfBabelSystem : EntitySystem
+public sealed partial class TowerOfBabelSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
 
     public override void Initialize()
     {

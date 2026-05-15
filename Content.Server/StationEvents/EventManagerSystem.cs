@@ -15,15 +15,15 @@ using Content.Shared.EntityTable;
 
 namespace Content.Server.StationEvents;
 
-public sealed class EventManagerSystem : EntitySystem
+public sealed partial class EventManagerSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
-    [Dependency] public readonly GameTicker GameTicker = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] public GameTicker GameTicker = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
 
     public bool EventsEnabled { get; private set; }
     private void SetEnabled(bool value) => EventsEnabled = value;
@@ -198,7 +198,12 @@ public sealed class EventManagerSystem : EntitySystem
                 continue;
 
             if (!eventproto.TryGetComponent<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
+            // <Trauma> - this is a programmer error, log it
+            {
+                Log.Error($"Event prototype {eventid} was missing StationEventComponent!");
                 continue;
+            }
+            // </Trauma>
 
             if (!CanRun(eventproto, stationEvent, playerCount.Value, currentTime.Value))
                 continue;

@@ -484,8 +484,6 @@
     layers:
     - state: default
     - state: idbrigmedic
-  - type: PresetIdCard # goob
-    job: Brigmedic
 
 - type: entity
   parent: IDCardStandard
@@ -956,6 +954,7 @@
     # <Trauma>
     - NanotrasenRepresentative
     - Revolutionary
+    - Xenomorph
     # </Trauma>
     - CentralCommand
     - NuclearOperative

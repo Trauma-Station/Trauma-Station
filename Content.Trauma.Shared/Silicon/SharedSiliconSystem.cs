@@ -8,14 +8,12 @@ using Content.Shared.Movement.Systems;
 using Content.Trauma.Common.Body;
 using Content.Trauma.Common.Silicon;
 using Content.Trauma.Shared.Silicon.Components;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
 
-public sealed class SharedSiliconChargeSystem : CommonSiliconSystem
+public sealed partial class SharedSiliconChargeSystem : CommonSiliconSystem
 {
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion";
 

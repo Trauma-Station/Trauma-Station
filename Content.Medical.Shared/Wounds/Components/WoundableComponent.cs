@@ -7,9 +7,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Wounds;
 
@@ -50,7 +47,7 @@ public sealed partial class WoundableComponent : Component
     public ProtoId<DamageContainerPrototype>? DamageContainerID;
 
     [DataField]
-    public EntProtoId BoneEntity = "Bone";
+    public EntProtoId? BoneEntity = "Bone";
 
     /// <summary>
     /// Integrity points of this woundable.

@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -14,6 +13,9 @@ public sealed partial class HereticRitualComponent : Component
     /// </summary>
     [DataField]
     public int Limit;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? RitualOwner;
 
     /// <summary>
     /// All entities created by this ritual.
@@ -49,8 +51,8 @@ public sealed partial class HereticRitualComponent : Component
     public LocId? CancelLoc;
 }
 
-[DataDefinition]
-public sealed partial class RitualIngredient
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class RitualIngredient : IEquatable<RitualIngredient>
 {
     [DataField]
     public int Amount = 1;
@@ -62,5 +64,24 @@ public sealed partial class RitualIngredient
     public EntityWhitelist? Blacklist;
 
     [DataField(required: true)]
-    public LocId Name;
+    public LocId Name { get; private set; }
+
+    public bool Equals(RitualIngredient? other)
+    {
+        if (other is null)
+            return false;
+
+        return ReferenceEquals(this, other) || Name.Equals(other.Name);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj) || obj is RitualIngredient other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        // ReSharper disable once NonReadonlyMemberInGetHashCode
+        return Name.GetHashCode();
+    }
 }

@@ -14,23 +14,22 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
-public sealed class InfusedItemSystem : EntitySystem
+public sealed partial class InfusedItemSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedRatvarianLanguageSystem _language = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedRatvarianLanguageSystem _language = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedMansusGraspSystem _grasp = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private HereticRitualEffectSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -39,7 +38,7 @@ public sealed class InfusedItemSystem : EntitySystem
         SubscribeLocalEvent<MansusInfusedComponent, ExaminedEvent>(OnInfusedExamine);
         SubscribeLocalEvent<MansusInfusedComponent, InteractHandEvent>(OnInfusedInteract);
         SubscribeLocalEvent<MansusInfusedComponent, MeleeHitEvent>(OnInfusedMeleeHit,
-            after: new[] { typeof(SharedHereticBladeSystem) });
+            after: new[] { typeof(HereticBladeSystem) });
         SubscribeLocalEvent<MansusInfusedComponent, ComponentStartup>(OnInfusedStartup);
         SubscribeLocalEvent<MansusInfusedComponent, ComponentShutdown>(OnInfusedShutdown);
     }
@@ -91,7 +90,7 @@ public sealed class InfusedItemSystem : EntitySystem
         raiser.Blackboard[SharedHereticRitualSystem.Mind] = mind;
 
         _effects.TryApplyEffect(target, ent.Comp.InfusedHitEffect, (ent, raiser), args.User);
-        _grasp.ApplyMark(target, path, heretic.PathStage);
+        _grasp.ApplyMark(target, path, heretic.PassiveLevel);
 
         raiser.Blackboard.Clear();
         SpendInfusionCharges(ent);

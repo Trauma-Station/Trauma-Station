@@ -20,25 +20,23 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Shared.Durability.Components;
 using Content.Trauma.Shared.Durability.Events;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Durability;
 
-public sealed class DurabilitySystem : EntitySystem
+public sealed partial class DurabilitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly Dictionary<DurabilityState, Color> AssociatedColors = new()
     {
@@ -338,11 +336,15 @@ public sealed class DurabilitySystem : EntitySystem
         if (args.Target != ent.Owner || args.Handled)
             return;
 
+        // don't care if it's not damaged and can't be over-repaired any further
+        if (ent.Comp.Damage <= -ent.Comp.MaxRepairBonus)
+            return;
+
         if (TryComp<ToolComponent>(args.Used, out var tool) && ent.Comp.RepairTool is not null)
         {
             if (_tool.HasQuality(args.Used, ent.Comp.RepairTool, tool))
             {
-                _tool.UseTool(ent.Owner,
+                _tool.UseTool(args.Used,
                     args.User,
                     args.Target,
                     ent.Comp.RepairDoAfter,

@@ -2,8 +2,6 @@
 
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.CosmicCult.Components;
 

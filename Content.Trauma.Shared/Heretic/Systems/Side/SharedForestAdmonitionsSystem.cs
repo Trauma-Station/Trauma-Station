@@ -7,18 +7,17 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
-public abstract class SharedForestAdmonitionsSystem : EntitySystem
+public abstract partial class SharedForestAdmonitionsSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedTransformSystem XForm = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedTransformSystem XForm = default!;
 
-    [Dependency] private readonly SharedShadowCloakSystem _cloak = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedShadowCloakSystem _cloak = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoreTag = "SpellIgnoreForestAdmonitions";
 

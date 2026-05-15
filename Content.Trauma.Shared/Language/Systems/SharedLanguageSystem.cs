@@ -2,20 +2,22 @@
 
 using System.Linq;
 using System.Text;
+using Content.Shared.GameTicking;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
-using Content.Shared.GameTicking;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Language.Systems;
 
-public abstract class SharedLanguageSystem : CommonLanguageSystem
+public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     private StringBuilder _builder = new();
 
@@ -36,10 +38,18 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         return proto;
     }
 
-    public override string ObfuscateSpeech(string message, LanguagePrototype language)
+    public override string ObfuscateSpeech(string message, LanguagePrototype language, EntityUid messageSource)
     {
         _builder.Clear();
-        language.Obfuscation.Obfuscate(_builder, message, this);
+        var ratio = 1.0f;
+        if (_knowledge.GetContainer(messageSource) is { } brain && _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+        {
+            if (_knowledge.GetMastery(skill.Comp) > 1)
+                ratio = 0.0f;
+            else
+                ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+        }
+        language.Obfuscation.Obfuscate(_builder, message, this, ratio);
 
         return _builder.ToString();
     }
@@ -138,11 +148,22 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         Dirty(ent);
     }
 
-    public override void AddLanguage(EntityUid uid, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
+    public override void AddLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool addSpoken = true, bool addUnderstood = true)
     {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
         var ev = new AddLanguageEvent(language, addSpoken, addUnderstood);
-        RaiseLocalEvent(uid, ref ev);
-        return;
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Handled)
+            return;
+
+        // normal logic for case of no knowledge
+        if (addSpoken)
+            ent.Comp.Speaks.Add(language);
+        if (addUnderstood)
+            ent.Comp.Understands.Add(language);
+        Dirty(ent);
     }
 
     public override void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true)
@@ -152,7 +173,15 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 
         var ev = new RemoveLanguageEvent(language, removeSpoken, removeUnderstood);
         RaiseLocalEvent(ent, ref ev);
-        return;
+        if (ev.Handled)
+            return;
+
+        // normal logic for case of no knowledge
+        if (removeSpoken)
+            ent.Comp.Speaks.Remove(language);
+        if (removeUnderstood)
+            ent.Comp.Understands.Remove(language);
+        Dirty(ent);
     }
 
     /// <summary>
@@ -186,8 +215,8 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
 }
 
 [ByRefEvent]
-public record struct AddLanguageEvent(ProtoId<LanguagePrototype> Language, bool AddSpoken, bool AddUnderstood);
+public record struct AddLanguageEvent(ProtoId<LanguagePrototype> Language, bool AddSpoken, bool AddUnderstood, bool Handled = false);
 [ByRefEvent]
-public record struct RemoveLanguageEvent(ProtoId<LanguagePrototype> Language, bool RemoveSpoken, bool RemoveUnderstood);
+public record struct RemoveLanguageEvent(ProtoId<LanguagePrototype> Language, bool RemoveSpoken, bool RemoveUnderstood, bool Handled = false);
 [ByRefEvent]
 public record struct UpdateLanguageEvent();

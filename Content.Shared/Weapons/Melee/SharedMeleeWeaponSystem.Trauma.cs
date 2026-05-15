@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Weapons;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Whitelist;
 using Content.Trauma.Common.Contests;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Configuration;
@@ -20,11 +22,12 @@ namespace Content.Shared.Weapons.Melee;
 /// </summary>
 public abstract partial class SharedMeleeWeaponSystem
 {
-    [Dependency] private readonly CommonContestsSystem _contests = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 
@@ -82,5 +85,20 @@ public abstract partial class SharedMeleeWeaponSystem
         {
             staminaDamage *= 1 - _knowledge.SharpCurve(melee);
         }
+    }
+
+    protected bool RaiseInRangeEvent(EntityUid ent,
+        EntityUid target,
+        float range,
+        EntityCoordinates? targetCoordinates,
+        Angle? targetAngle,
+        out bool inRange,
+        out EntityUid source)
+    {
+        var ev = new MeleeInRangeEvent(ent, target, range, targetCoordinates, targetAngle);
+        RaiseLocalEvent(ent, ref ev);
+        inRange = ev.InRange;
+        source = ev.User;
+        return ev.Handled;
     }
 }

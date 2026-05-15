@@ -4,15 +4,14 @@ using Content.Goobstation.Shared.ChronoLegionnaire.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 
-public sealed class StasisOverlay : Overlay
+public sealed partial class StasisOverlay : Overlay
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override bool RequestScreenTexture => true;
 

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
+
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Curses.Components;
 
@@ -13,7 +14,7 @@ public sealed partial class CurseOfFlamesStatusEffectComponent : Component
     [DataField]
     public float Penetration = 0.5f;
 
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextIgnition = TimeSpan.Zero;
 
     [DataField]

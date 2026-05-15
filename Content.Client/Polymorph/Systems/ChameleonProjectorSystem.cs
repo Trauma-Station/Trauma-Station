@@ -1,3 +1,8 @@
+// <Trauma>
+using Content.Client.Light.Visualizers;
+using Content.Client.PowerCell;
+using Content.Client.Weapons.Ranged.Components;
+// </Trauma>
 using Content.Client.Effects;
 using Content.Client.Smoking;
 using Content.Shared.Chemistry.Components;
@@ -7,20 +12,17 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Polymorph.Systems;
 
-public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
+public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
-    private EntityQuery<AppearanceComponent> _appearanceQuery;
-    private EntityQuery<SpriteComponent> _spriteQuery;
+    [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _appearanceQuery = GetEntityQuery<AppearanceComponent>();
-        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<ChameleonDisguiseComponent, AfterAutoHandleStateEvent>(OnHandleState);
 
@@ -35,6 +37,11 @@ public sealed class ChameleonProjectorSystem : SharedChameleonProjectorSystem
         CopyComp<GenericVisualizerComponent>(ent);
         CopyComp<SolutionContainerVisualsComponent>(ent);
         CopyComp<BurnStateVisualsComponent>(ent);
+        // <Trauma>
+        CopyComp<PowerChargerVisualsComponent>(ent);
+        CopyComp<MagazineVisualsComponent>(ent);
+        CopyComp<PoweredLightVisualsComponent>(ent);
+        // </Trauma>
 
         // reload appearance to hopefully prevent any invisible layers
         if (_appearanceQuery.TryComp(ent, out var appearance))

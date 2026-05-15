@@ -13,13 +13,13 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.Damage.Systems;
 
-public sealed class RequireProjectileTargetSystem : EntitySystem
+public sealed partial class RequireProjectileTargetSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     // </Trauma>
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     private float _crawlHitzoneSquared; // Goob
 

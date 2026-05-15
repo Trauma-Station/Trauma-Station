@@ -14,14 +14,13 @@ using Content.Shared.Coordinates;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 [DataDefinition]
 public sealed partial class PickNearbyWantedOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
     private SharedAudioSystem _audio = default!;

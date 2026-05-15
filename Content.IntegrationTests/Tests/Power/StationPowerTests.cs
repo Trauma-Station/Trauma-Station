@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -13,8 +14,8 @@ using Robust.Shared.EntitySerialization;
 
 namespace Content.IntegrationTests.Tests.Power;
 
-[TestFixture, Category("MapTests")] // Trauma - only run these in map tests job
-public sealed class StationPowerTests
+[Category("MapTests")] // Trauma - only run these in map tests job
+public sealed class StationPowerTests : GameTest
 {
     /// <summary>
     /// How long the station should be able to survive on stored power if nothing is changed from round start.
@@ -47,14 +48,16 @@ public sealed class StationPowerTests
         "Cog"
     ];
 
+    public override PoolSettings PoolSettings => new ()
+    {
+        Dirty = true,
+    };
+
     [Explicit]
     [Test, TestCaseSource(nameof(GameMaps))]
     public async Task TestStationStartingPowerWindow(string mapProtoId)
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Dirty = true,
-        });
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -107,17 +110,12 @@ public sealed class StationPowerTests
             Assert.That(totalStartingCharge, Is.GreaterThanOrEqualTo(requiredStoredPower),
                 $"Needs at least {requiredStoredPower - totalStartingCharge} more stored power!");
         });
-
-        await pair.CleanReturnAsync();
     }
 
     [Test, TestCaseSource(nameof(GameMaps))]
     public async Task TestApcLoad(string mapProtoId)
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Dirty = true,
-        });
+        var pair = Pair;
         var server = pair.Server;
 
         var entMan = server.EntMan;
@@ -156,7 +154,5 @@ public sealed class StationPowerTests
                 }
             }
         });
-
-        await pair.CleanReturnAsync();
     }
 }

@@ -2,14 +2,13 @@
 
 using Content.Shared.Alert;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Prototypes;
 using Content.Trauma.Common.TileMovement;
 
 namespace Content.Lavaland.Shared.Movement;
 
-public sealed class HierophantBeatSystem : EntitySystem
+public sealed partial class HierophantBeatSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
 
     public override void Initialize()
     {

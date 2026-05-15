@@ -8,16 +8,15 @@ using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.VoiceMask;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.VoiceMask;
 
 public sealed partial class VoiceMaskSystemGoob : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly VoiceMaskSystem _voiceMask = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private VoiceMaskSystem _voiceMask = default!;
 
     public override void Initialize()
     {

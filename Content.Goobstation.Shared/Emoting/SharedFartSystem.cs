@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Emoting;
-public abstract class SharedFartSystem : EntitySystem
+public abstract partial class SharedFartSystem : EntitySystem
 {
     public override void Initialize()
     {

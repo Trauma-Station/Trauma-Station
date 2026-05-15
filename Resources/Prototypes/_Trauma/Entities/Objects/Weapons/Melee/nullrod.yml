@@ -69,24 +69,38 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Nullrod/faith.rsi
     state: icon
+  - type: Item
+    size: Tiny
+    heldPrefix: silver
   - type: Gun
     minAngle: 0
     maxAngle: 5
     angleIncrease: 1
     angleDecay: 3
-    fireRate: 1
+    fireRate: 1.1
     availableModes:
     - SemiAuto
-  - type: Item
-    size: Tiny
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+      params:
+        volume: 0.5
   - type: BasicEntityAmmoProvider
     proto: BulletPistolSilverBig
-    capacity: 5
-    count: 5
+    capacity: 3
+    count: 3
   - type: AmmoCounter
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
+  - type: UseDelayOnShoot
+  - type: UseDelay
+    delay: 2.2
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 2.1
+    rechargeSound:
+      path: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+      params:
+        volume: 0.1
   - type: Tag
     tags:
     - Nullrod
@@ -98,6 +112,46 @@
     - Magic
     slotFlags:
     - NONE
-  - type: ReloadOnPray
-  - type: AlternatePrayable
-    prayDoAfterDuration: 2.5
+  - type: ItemSwitch
+    defaultState: silver
+    state: "silver"
+    showLabel: true
+    states:
+      silver: !type:ItemSwitchState
+        verb: silver
+        components:
+        - type: BasicEntityAmmoProvider
+          proto: BulletPistolSilverBig
+          capacity: 3
+          count: 3
+        - type: Gun
+          minAngle: 0
+          maxAngle: 5
+          angleIncrease: 1
+          angleDecay: 3
+          fireRate: 1.1
+          availableModes:
+          - SemiAuto
+          soundGunshot:
+            path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+            params:
+              volume: 0.5
+      blessed: !type:ItemSwitchState
+        verb: blessed
+        components:
+        - type: BasicEntityAmmoProvider
+          proto: BulletFaithHeal
+          capacity: 2
+          count: 2
+        - type: Gun
+          minAngle: 0
+          maxAngle: 5
+          angleIncrease: 1
+          angleDecay: 3
+          fireRate: 1.1
+          availableModes:
+          - SemiAuto
+          soundGunshot:
+            path: /Audio/Effects/holy.ogg
+            params:
+              volume: 0.5

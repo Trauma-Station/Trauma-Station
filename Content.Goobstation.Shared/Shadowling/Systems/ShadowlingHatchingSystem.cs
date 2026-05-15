@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Shadowling.Systems;
 /// <summary>
 /// This handles egg interactions.
 /// </summary>
-public sealed class ShadowlingHatchingSystem : EntitySystem
+public sealed partial class ShadowlingHatchingSystem : EntitySystem
 {
     public override void Initialize()
     {

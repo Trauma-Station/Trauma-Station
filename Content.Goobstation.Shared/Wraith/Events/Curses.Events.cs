@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Wraith.Curses;
 using Content.Shared.Actions;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Events;
 

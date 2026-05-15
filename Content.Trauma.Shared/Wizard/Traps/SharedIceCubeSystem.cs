@@ -13,23 +13,21 @@ using Content.Shared.Popups;
 using Content.Shared.Speech;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Traps;
 
-public abstract class SharedIceCubeSystem : EntitySystem
+public abstract partial class SharedIceCubeSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPhysicsSystem Physics = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

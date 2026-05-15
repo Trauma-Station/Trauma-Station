@@ -11,8 +11,8 @@ namespace Content.Trauma.Client.UserActions.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<ClientGameTicker>
 {
-    [Dependency] private readonly IEntitySystemManager _entMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntitySystemManager _entMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private ClientGameTicker? _gameTicker;
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.Physics;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
@@ -17,7 +16,6 @@ using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.Heretic.Components;
@@ -25,6 +23,7 @@ using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.Audio;
 using Robust.Server.GameStates;
@@ -34,22 +33,22 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class StarGazerSystem : SharedStarGazerSystem
+public sealed partial class StarGazerSystem : SharedStarGazerSystem
 {
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedStarMarkSystem _mark = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedStarMarkSystem _mark = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     private HashSet<Entity<MobStateComponent>> _targets = default!;
 
@@ -90,14 +89,13 @@ public sealed class StarGazerSystem : SharedStarGazerSystem
         if (IsPaused(target))
             return false;
 
-        var xform = Transform(ent);
+        var oldCoords = Transform(ent).Coordinates;
+        var newCoords = Transform(target).Coordinates;
+        if (!_teleport.Teleport(ent.Owner, newCoords, ent.Comp.TeleportSound, user: ent, predicted: false))
+            return false;
 
-        _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
-        Spawn(ent.Comp.TeleportEffect, xform.Coordinates);
-        _pulling.StopAllPulls(ent);
-        Xform.SetMapCoordinates((ent.Owner, xform), Xform.GetMapCoordinates(target));
-        Spawn(ent.Comp.TeleportEffect, xform.Coordinates);
-        _audio.PlayPvs(ent.Comp.TeleportSound, xform.Coordinates);
+        Spawn(ent.Comp.TeleportEffect, oldCoords);
+        Spawn(ent.Comp.TeleportEffect, newCoords);
         return true;
     }
 

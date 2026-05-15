@@ -20,7 +20,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Station.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -29,23 +28,23 @@ using Content.Server.Ghost.Roles.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponent>
+public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponent>
 {
     private static readonly EntProtoId XenomorphSpawnerProto = "SpawnPointGhostXenomorph";
 
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NukeCodePaperSystem _nukeCodePaper = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!; // Goobstation - Play music on announcement
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NukeCodePaperSystem _nukeCodePaper = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private AudioSystem _audioSystem = default!; // Goobstation - Play music on announcement
 
     public override void Initialize()
     {
@@ -85,23 +84,23 @@ public sealed class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponen
     private void BeforeXenomorphEvolution(
         EntityUid uid,
         XenomorphComponent component,
-        BeforeXenomorphEvolutionEvent args
+        ref BeforeXenomorphEvolutionEvent args
     )
     {
         if (!_protoManager.TryIndex(args.Caste, out var cast) || cast.MaxCount == 0)
             return;
 
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out _, out var xenomorphsRule, out _))
+        while (query.MoveNext(out _, out _, out var rule, out _))
         {
-            if (!xenomorphsRule.Xenomorphs.Contains(uid))
+            if (!rule.Xenomorphs.Contains(uid))
                 continue;
 
-            if (GetXenomorphs(xenomorphsRule, args.Caste).Count >= cast.MaxCount
-                || cast.NeedCasteDeath != null && GetXenomorphs(xenomorphsRule, cast.NeedCasteDeath).Count > 0)
+            if (rule.TotalCastes.GetValueOrDefault(args.Caste) >= cast.MaxCount
+                || cast.NeedCasteDeath != null && GetXenomorphs(rule, cast.NeedCasteDeath).Count > 0)
             {
                 _popup.PopupEntity(Loc.GetString("xenomorphs-evolution-no-cast-slot", ("caste", Loc.GetString(cast.Name))), uid, uid);
-                args.Cancel();
+                args.Cancelled = true;
                 return;
             }
         }
@@ -110,14 +109,16 @@ public sealed class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponen
     private void AfterXenomorphEvolution(
         EntityUid uid,
         XenomorphComponent component,
-        AfterXenomorphEvolutionEvent args
+        ref AfterXenomorphEvolutionEvent args
     )
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out _, out var xenomorphsRule, out _))
+        while (query.MoveNext(out _, out _, out var rule, out _))
         {
-            if (xenomorphsRule.Xenomorphs.Remove(uid))
-                xenomorphsRule.Xenomorphs.Add(args.EvolvedInto);
+            if (!rule.Xenomorphs.Remove(uid))
+                continue;
+            rule.Xenomorphs.Add(args.EvolvedInto);
+            rule.TotalCastes[args.Caste] = rule.TotalCastes.GetValueOrDefault(args.Caste) + 1;
         }
     }
 

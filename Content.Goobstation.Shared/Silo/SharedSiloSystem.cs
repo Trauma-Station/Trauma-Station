@@ -7,15 +7,16 @@ using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Materials;
 using Robust.Shared.Configuration;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Silo;
 
-public abstract class SharedSiloSystem : CommonSiloSystem
+public abstract partial class SharedSiloSystem : CommonSiloSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly SharedDeviceLinkSystem DeviceLink = default!;
-    [Dependency] protected readonly SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] protected SharedDeviceLinkSystem DeviceLink = default!;
+    [Dependency] protected SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private EntityQuery<MaterialStorageComponent> _matsQuery = default!;
+    [Dependency] private EntityQuery<SiloUtilizerComponent> _utilizerQuery = default!;
 
     private bool _siloEnabled;
 
@@ -46,7 +47,7 @@ public abstract class SharedSiloSystem : CommonSiloSystem
         if (args.SinkPort != SinkPort || args.SourcePort != SourcePort)
             return;
 
-        if (!TryComp(args.Sink, out SiloUtilizerComponent? utilizer))
+        if (!_utilizerQuery.TryComp(args.Sink, out var utilizer))
             return;
 
         if (utilizer.Silo != null)
@@ -54,9 +55,9 @@ public abstract class SharedSiloSystem : CommonSiloSystem
 
         utilizer.Silo = null;
 
-        if (TryComp(args.Sink, out MaterialStorageComponent? utilizerStorage) &&
+        if (_matsQuery.TryComp(args.Sink, out var utilizerStorage) &&
             utilizerStorage.Storage.Count != 0 &&
-            TryComp(ent, out MaterialStorageComponent? siloStorage))
+            _matsQuery.TryComp(ent, out var siloStorage))
         {
             foreach (var material in utilizerStorage.Storage.Keys.ToArray())
             {
@@ -73,8 +74,7 @@ public abstract class SharedSiloSystem : CommonSiloSystem
     public override bool TryGetMaterialAmount(EntityUid machine, string material, out int amount)
     {
         amount = 0;
-        var silo = GetSilo(machine);
-        if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))
+        if (GetSilo(machine) is not { } silo || !_matsQuery.TryComp(silo, out var siloComp))
             return false;
 
         amount = siloComp.Storage.GetValueOrDefault(material, 0);
@@ -84,8 +84,7 @@ public abstract class SharedSiloSystem : CommonSiloSystem
     public override bool TryGetTotalMaterialAmount(EntityUid machine, out int amount)
     {
         amount = 0;
-        var silo = GetSilo(machine);
-        if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))
+        if (GetSilo(machine) is not { } silo || !_matsQuery.TryComp(silo, out var siloComp))
             return false;
 
         amount = siloComp.Storage.Values.Sum();
@@ -94,23 +93,19 @@ public abstract class SharedSiloSystem : CommonSiloSystem
 
     public override void DirtySilo(EntityUid machine)
     {
-        var silo = GetSilo(machine);
-        if (silo is not { } || !TryComp<MaterialStorageComponent>(silo, out var siloComp))
+        if (GetSilo(machine) is not { } silo || !_matsQuery.TryComp(silo, out var siloComp))
             return;
-        Dirty(silo.Value, siloComp);
+        Dirty(silo, siloComp);
     }
 
     public override EntityUid? GetSilo(EntityUid machine)
     {
-        if (!_siloEnabled)
-            return null;
+        if (_siloEnabled &&
+            _utilizerQuery.TryComp(machine, out var utilizer) &&
+            utilizer.Silo is { } silo &&
+            _matsQuery.HasComp(silo))
+            return silo;
 
-        if (!TryComp(machine, out SiloUtilizerComponent? utilizer))
-            return null;
-
-        if (!TryComp(utilizer.Silo, out MaterialStorageComponent? storage))
-            return null;
-
-        return utilizer.Silo.Value;
+        return null;
     }
 }

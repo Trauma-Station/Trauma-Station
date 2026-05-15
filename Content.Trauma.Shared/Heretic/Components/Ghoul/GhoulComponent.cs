@@ -3,8 +3,6 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.Ghoul;
 
@@ -16,12 +14,6 @@ public sealed partial class GhoulComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 TotalHealth = 50;
-
-    /// <summary>
-    /// Whether this ghoul can be unghoulified
-    /// </summary>
-    [DataField]
-    public bool CanDeconvert;
 
     [DataField]
     public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.GibOrgans;
@@ -74,4 +66,5 @@ public enum GhoulDeathBehavior : byte
     GibOrgans, // Gibs into organs
     Gib, // Gibs without organs
     NoGib, // Doesn't gib
+    Deconvert, // Doesn't gib, deconverts automatically
 }

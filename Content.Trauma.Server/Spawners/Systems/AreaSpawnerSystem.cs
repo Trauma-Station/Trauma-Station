@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Server.Spawners.Components;
 using Content.Server.Atmos.Components;
 using Content.Shared.Maps;
@@ -12,13 +11,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Spawners.Systems;
 
-public sealed class AreaSpawnerSystem : EntitySystem
+public sealed partial class AreaSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private readonly List<Vector2> _offsets = new List<Vector2>
     {

@@ -38,6 +38,7 @@
   parent: BaseGameRule
   id: MorphRule
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 20
     weight: 3
@@ -50,7 +51,6 @@
     prototype: MobMorph
   - type: AntagSelection
     selectionTime: PostPlayerSpawn
-    agentName: morph-name-user
     definitions:
     - spawnerPrototype: GhostRoleSpawnerMorph
       min: 1
@@ -77,6 +77,7 @@
   parent: BaseShadowDemonRule
   id: ShadowDemonSummon
   components:
+  - type: GhostroleAlert
   - type: AntagSelection
     agentName: shadow-demon-round-end-agent-name
     definitions:
@@ -105,47 +106,46 @@
   parent: BaseShadowlingRule
   id: ShadowlingMidround
   components:
+  - type: GhostroleAlert
   - type: AntagSpawner
     prototype: MobShadowling
   - type: MaintsSpawnRule
   - type: AntagSelection
     definitions:
-    - min: 1
+    - spawnerPrototype: GhostRoleSpawnerShadowling
+      min: 1
       max: 1
       playerRatio: 1
-      blacklist:
-        components:
-        - CommandStaff
       mindRoles:
       - MindRoleShadowling
       pickPlayer: false
 
-## Minor antags ninja threat
-
-- type: entity
-  parent: BaseGameRule
-  id: MidroundMinorAntagsRule
-  components:
-  - type: NestedRule
-    rules: !type:GroupSelector
-      rolls: 2, 3 # mild spam of chuds
-      children:
-      - id: TunnelClownMidround
-      - id: SingulothKnightsMidround
-      - id: DarkLordMidround # spawns chosen one after it's picked by a player
-      - id: MimeAssassinMidround
-      - id: DarkPriestMidround
-      - id: VoxRaidersMidround
-
 ## Sleeper agents ninja threat, the ninja does the announcement
 
 - type: entity
-  parent: SleeperAgents
+  parent: BaseTraitorRule
   id: SleeperAgentsQuiet # cipher's assassin...
   components:
   - type: StationEvent
-    startAnnouncement: null
-    startAudio: null
+    earliestStart: 30
+    weight: 8
+    minimumPlayers: 15
+    maxOccurrences: 1 # can only happen once per round
+    duration: null # the rule has to last the whole round not 1 second
+    occursDuringRoundEnd: false
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ TraitorSleeper ]
+      fallbackRoles: [ Traitor ]
+      min: 1
+      max: 2
+      playerRatio: 10
+      blacklist:
+        components:
+        - AntagImmune
+        - CommandStaff
+      mindRoles:
+      - MindRoleTraitorSleeper
 
 ## Quiet version of wailing horse
 

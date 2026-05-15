@@ -3,14 +3,13 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Factory.Plumbing;
 
-public sealed class PlumbingFilterSystem : EntitySystem
+public sealed partial class PlumbingFilterSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<PlumbingFilterComponent> _query;
 

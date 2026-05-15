@@ -5,7 +5,6 @@ using Content.Client.Guidebook.Richtext;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Trauma.Client.Guidebook.Controls;
@@ -15,8 +14,8 @@ namespace Content.Trauma.Client.Guidebook.Controls;
 /// </summary>
 public sealed partial class GuideMutationsEmbed : BoxContainer, IDocumentTag
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public GuideMutationsEmbed()
     {

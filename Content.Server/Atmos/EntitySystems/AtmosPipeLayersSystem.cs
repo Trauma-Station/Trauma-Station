@@ -19,12 +19,12 @@ namespace Content.Server.Atmos.EntitySystems;
 public sealed partial class AtmosPipeLayersSystem : SharedAtmosPipeLayersSystem
 {
     // <Trauma>
-    [Dependency] private readonly CommonPlumbingSystem _plumbing = default!;
+    [Dependency] readonly CommonPlumbingSystem _plumbing = default!;
     // </Trauma>
-    [Dependency] private readonly NodeGroupSystem _nodeGroup = default!;
-    [Dependency] private readonly PipeRestrictOverlapSystem _pipeRestrictOverlap = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private NodeGroupSystem _nodeGroup = default!;
+    [Dependency] private PipeRestrictOverlapSystem _pipeRestrictOverlap = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {

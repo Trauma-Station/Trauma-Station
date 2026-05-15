@@ -16,14 +16,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Power;
 
-public sealed class BatteryDrinkerSystem : EntitySystem
+public sealed partial class BatteryDrinkerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation - Energycrit
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!; // Goobstation - Energycrit
 
     public override void Initialize()
     {

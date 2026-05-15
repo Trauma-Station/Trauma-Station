@@ -168,6 +168,9 @@
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Steel: 25
+  - type: Tag # Trauma
+    tags:
+    - MetalContainer
 
 - type: entity
   parent: DrinkBaseMug

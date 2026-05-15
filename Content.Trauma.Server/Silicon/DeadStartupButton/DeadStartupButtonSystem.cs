@@ -5,7 +5,6 @@ using Content.Server.Lightning;
 using Content.Server.Lightning.Components;
 using Content.Server.Popups;
 using Content.Shared.Audio;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -17,29 +16,28 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Silicon.DeadStartupButton;
 
-public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
+public sealed partial class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private LightningSystem _lightning = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeadStartupButtonComponent, OnDoAfterButtonPressedEvent>(OnDoAfter);
+        SubscribeLocalEvent<DeadStartupButtonComponent, DeadStartupDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DeadStartupButtonComponent, ElectrocutedEvent>(OnElectrocuted);
         SubscribeLocalEvent<DeadStartupButtonComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
-    private void OnDoAfter(EntityUid uid, DeadStartupButtonComponent comp, OnDoAfterButtonPressedEvent args)
+    private void OnDoAfter(EntityUid uid, DeadStartupButtonComponent comp, DeadStartupDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled
             || !TryComp<MobStateComponent>(uid, out var mobStateComponent)
@@ -47,8 +45,8 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
             || !TryComp<MobThresholdsComponent>(uid, out var mobThresholdsComponent))
             return;
 
-        var damage = _damageable.GetTotalDamage(uid);
-        // Check if entity have critical state
+        var damage = _mobThreshold.CheckVitalDamage(uid);
+        // Check if entity has a critical state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var criticalThreshold, mobThresholdsComponent)
             && damage < criticalThreshold)
         {
@@ -56,7 +54,7 @@ public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
             return;
         }
 
-        // Check if entity have dead state
+        // Check if entity has a dead state
         if (_mobThreshold.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, mobThresholdsComponent)
             && damage < deadThreshold)
         {

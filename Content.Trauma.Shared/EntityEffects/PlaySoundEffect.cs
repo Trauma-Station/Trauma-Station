@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -26,9 +25,9 @@ public sealed partial class PlaySoundEffect : EntityEffectBase<PlaySoundEffect>
         => null; // idc
 }
 
-public sealed class PlaySoundEffectSystem : EntityEffectSystem<TransformComponent, PlaySoundEffect>
+public sealed partial class PlaySoundEffectSystem : EntityEffectSystem<TransformComponent, PlaySoundEffect>
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PlaySoundEffect> args)
     {

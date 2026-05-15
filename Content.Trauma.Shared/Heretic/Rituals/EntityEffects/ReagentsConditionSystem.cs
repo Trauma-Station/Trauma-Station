@@ -5,13 +5,12 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals.EntityEffects;
 
-public sealed class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
+public sealed partial class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _sol = default!;
+    [Dependency] private SharedSolutionContainerSystem _sol = default!;
 
 
     protected override void Condition(Entity<PuddleComponent> entity,

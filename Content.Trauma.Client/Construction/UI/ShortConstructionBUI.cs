@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Construction.Prototypes;
@@ -12,16 +11,15 @@ using Robust.Client.Placement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Construction.UI;
 
-public sealed class ShortConstructionBUI : BoundUserInterface
+public sealed partial class ShortConstructionBUI : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IPlacementManager _placement = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IPlacementManager _placement = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly ConstructionSystem _construction;
     private readonly SpriteSystem _sprite;
 

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
@@ -12,7 +10,7 @@ public sealed partial class HereticCosmicMarkComponent : Component
     public EntityUid? CosmicDiamondUid;
 
     [DataField, AutoNetworkedField]
-    public int PathStage;
+    public int PassiveLevel;
 
     [DataField]
     public EntProtoId CosmicDiamond = "EffectCosmicDiamond";

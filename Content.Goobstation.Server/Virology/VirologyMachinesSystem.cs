@@ -6,7 +6,6 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Paper;
 using Robust.Server.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Text;
 using Content.Goobstation.Shared.Disease.Components;
@@ -19,14 +18,14 @@ namespace Content.Goobstation.Server.Virology;
 
 public sealed partial class VirologyMachinesSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

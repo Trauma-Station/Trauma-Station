@@ -42,6 +42,7 @@
 - type: entity
   parent: BaseSpeciesAppearanceOrganless # Trauma - skeletons have no internal organs
   id: AppearanceSkeletonPerson
+  categories: [ HideSpawnMenu ]
   name: skeletonperson appearance
   components:
   - type: Inventory

@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 /// <summary>
 /// Handles running effects for <see cref="EffectsMutationComponent"/>.
 /// </summary>
-public sealed class EffectsMutationSystem : EntitySystem
+public sealed partial class EffectsMutationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

@@ -7,26 +7,27 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
-public sealed class EldritchSleepStatusEffectSystem : EntitySystem
+public sealed partial class EldritchSleepStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EldritchSleepStatusEffectComponent, StatusEffectAppliedEvent>(OnApply, before: new[] {typeof(SleepingSystem)});
+        SubscribeLocalEvent<EldritchSleepStatusEffectComponent, StatusEffectAppliedEvent>(OnApply,
+            before: new[] { typeof(SleepingSystem) });
         SubscribeLocalEvent<EldritchSleepStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
 
         SubscribeLocalEvent<Components.MetabolismModifierComponent, GetMetabolicMultiplierEvent>(OnGetMultiplier);
     }
 
-    private void OnGetMultiplier(Entity<Components.MetabolismModifierComponent> ent, ref GetMetabolicMultiplierEvent args)
+    private void OnGetMultiplier(Entity<Components.MetabolismModifierComponent> ent,
+        ref GetMetabolicMultiplierEvent args)
     {
         args.Multiplier *= ent.Comp.Modifier;
     }
@@ -50,7 +51,8 @@ public sealed class EldritchSleepStatusEffectSystem : EntitySystem
         RaiseLocalEvent(args.Target, ev);
 
         var difference =
-            ent.Comp.ComponentsToAdd.ExceptBy(AllComps(args.Target), x => x.Value.Component)
+            ent.Comp.ComponentsToAdd.ExceptBy(AllComps(args.Target).Select(c => Factory.GetRegistration(c).Name),
+                    x => x.Key)
                 .ToDictionary();
 
         ent.Comp.ComponentDifference = new(difference);

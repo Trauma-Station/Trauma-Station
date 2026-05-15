@@ -9,20 +9,17 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.BackStab;
 
-public sealed class BackStabSystem : EntitySystem
+public sealed partial class BackStabSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     public static readonly SoundSpecifier BackstabSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Weapons/Effects/guillotine.ogg");
@@ -71,7 +68,7 @@ public sealed class BackStabSystem : EntitySystem
 
         var xform = Transform(target);
         var userXform = Transform(user);
-        var a1 = -_transform.GetWorldRotation(xform) + MathHelper.PiOver2;
+        var a1 = (_transform.GetWorldRotation(xform) + MathHelper.PiOver2).Reduced();
         var a2 = new Angle(_transform.GetWorldPosition(userXform) - _transform.GetWorldPosition(xform));
         // when you are facing the same direction as the target (their back is turned)
         // angle is close to 0, when you are facing eachother the angle is close to 180

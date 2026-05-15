@@ -9,3 +9,8 @@
     exclusiveAntag: true # too op for insurgents to also roll syndie or something
     antagPrototype: Insurgent
   - type: InsurgentRole
+  - type: RoleEffects
+    singleUse: true
+    added:
+    - !type:NestedEffect
+      proto: InsurgentSkills

@@ -14,10 +14,10 @@ namespace Content.Server.Atmos.Piping.EntitySystems;
 public sealed partial class AtmosPipeAppearanceSystem : SharedAtmosPipeAppearanceSystem
 {
     // <Trauma>
-    [Dependency] private readonly CommonPlumbingSystem _plumbing = default!;
+    [Dependency] private CommonPlumbingSystem _plumbing = default!;
     // <Trauma>
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     public override void Initialize()
     {

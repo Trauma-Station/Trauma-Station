@@ -7,9 +7,9 @@ using Robust.Shared.Console;
 namespace Content.Trauma.Server.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class EntityReportCommand : IConsoleCommand
+public sealed partial class EntityReportCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public string Command => "entityreport";
     public string Description => "Get stats for the most common entity prototypes";

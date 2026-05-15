@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Lavaland.Server.Procedural.Components;
 using Content.Server.Procedural;
 using Content.Lavaland.Shared.Procedural.Components;
@@ -10,7 +9,6 @@ using Content.Shared.Decals;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Lavaland.Server.Procedural.Systems;
@@ -330,49 +328,18 @@ public sealed partial class LavalandSystem
         // Spawn decals
         if (TryComp<DecalGridComponent>(grid.Owner, out var loadedDecals))
         {
+            // TODO: why is this completely copypasted from dungeon
             EnsureComp<DecalGridComponent>(lavaland);
-            foreach (var (_, decal) in _decals.GetDecalsIntersecting(grid.Owner, box, loadedDecals))
+            foreach (var decal in _decals.GetDecalsIntersecting(grid.Owner, box, loadedDecals))
             {
-                // Offset by 0.5 because decals are offset from bot-left corner
-                // So we convert it to center of tile then convert it back again after transform.
-                // Do these shenanigans because 32x32 decals assume as they are centered on bottom-left of tiles.
-                var position = Vector2.Transform(decal.Coordinates + grid.Comp.TileSizeHalfVector - center,
-                    roomTransform);
-                position -= grid.Comp.TileSizeHalfVector;
+                var position = Transform(decal).Coordinates.Position;
+                position = Vector2.Transform(position - center, roomTransform);
 
                 if (reservedTiles?.Contains(position.Floored()) == true)
                     continue;
 
-                // Umm uhh I love decals so uhhhh idk what to do about this
-                var angle = decal.Angle.Reduced();
-
-                // Adjust because 32x32 so we can't rotate cleanly
-                // Yeah idk about the uhh vectors here but it looked visually okay but they may still be off by 1.
-                // Also EyeManager.PixelsPerMeter should really be in shared.
-                if (angle.Equals(Math.PI))
-                {
-                    position += new Vector2(-1f / 32f, 1f / 32f);
-                }
-                else if (angle.Equals(-Math.PI / 2f))
-                {
-                    position += new Vector2(-1f / 32f, 0f);
-                }
-                else if (angle.Equals(Math.PI / 2f))
-                {
-                    position += new Vector2(0f, 1f / 32f);
-                }
-                else if (angle.Equals(Math.PI * 1.5f))
-                {
-                    // I hate this but decals are bottom-left rather than center position and doing the
-                    // matrix ops is a PITA hence this workaround for now; I also don't want to add a stupid
-                    // field for 1 specific op on decals
-                    if (decal.Id != "DiagonalCheckerAOverlay" &&
-                        decal.Id != "DiagonalCheckerBOverlay")
-                    {
-                        position += new Vector2(-1f / 32f, 0f);
-                    }
-                }
-
+                var data = decal.Comp.Data;
+                var angle = data.Angle.Reduced();
                 var tilePos = position.Floored();
 
                 // Fallback because uhhhhhhhh yeah, a corner tile might look valid on the original
@@ -386,13 +353,13 @@ public sealed partial class LavalandSystem
                 }
 
                 _decals.TryAddDecal(
-                    decal.Id,
+                    data.Id,
                     new EntityCoordinates(grid, position),
                     out _,
-                    decal.Color,
+                    data.Color,
                     angle,
-                    decal.ZIndex,
-                    decal.Cleanable);
+                    data.ZIndex,
+                    data.Cleanable);
             }
         }
 

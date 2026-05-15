@@ -7,16 +7,15 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Antag;
 using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Trauma.Server.Antag;
 
-public sealed class AntagVerbSystem : EntitySystem
+public sealed partial class AntagVerbSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

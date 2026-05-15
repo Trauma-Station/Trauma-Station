@@ -8,17 +8,16 @@ using Content.Server.Mind;
 using Content.Shared.Prototypes;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Wraith.Systems;
 
-public sealed class SummonVoidCreatureSystem : EntitySystem
+public sealed partial class SummonVoidCreatureSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     public override void Initialize()
     {

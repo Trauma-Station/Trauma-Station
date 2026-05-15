@@ -12,12 +12,12 @@ namespace Content.Trauma.Server.Light;
 /// <summary>
 /// Handles area pickup of bulbs/tubes for light replacers.
 /// </summary>
-public sealed class LightReplacerAreaPickupSystem : EntitySystem
+public sealed partial class LightReplacerAreaPickupSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly LightReplacerSystem _replacer = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private LightReplacerSystem _replacer = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private HashSet<Entity<LightBulbComponent>> _bulbs = new();
 

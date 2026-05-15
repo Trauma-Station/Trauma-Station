@@ -10,18 +10,17 @@ using Content.Shared.Gibbing;
 using Content.Shared.Spawners.Components;
 using Content.Shared.Throwing;
 using Content.Trauma.Shared.Medical.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.BloodSplatter;
 
-public sealed class BloodSplatterSystem : EntitySystem
+public sealed partial class BloodSplatterSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlashProto = "Slash";
     private static readonly ProtoId<DamageTypePrototype> PierceProto = "Piercing";

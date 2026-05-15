@@ -2,14 +2,13 @@
 
 using Content.Shared.GameTicking;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class ActionTargetMarkSystem : CommonActionTargetMarkSystem
+public sealed partial class ActionTargetMarkSystem : CommonActionTargetMarkSystem
 {
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private static readonly EntProtoId MarkProto = "ActionTargetMark";
 

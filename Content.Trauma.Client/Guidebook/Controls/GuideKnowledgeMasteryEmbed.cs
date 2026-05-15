@@ -8,7 +8,6 @@ using Content.Client.Guidebook.Richtext;
 using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Guidebook.Controls;
 
@@ -17,7 +16,7 @@ namespace Content.Trauma.Client.Guidebook.Controls;
 /// </summary>
 public sealed partial class GuideKnowledgeMasteryEmbed : BoxContainer, IDocumentTag
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public GuideKnowledgeMasteryEmbed()
     {

@@ -3,10 +3,13 @@
 - type: entity
   abstract: true
   # Used to put pressureProtection, layers blocker and etc components into ComponentToggler
+  parent: BaseItem
   id: BaseClothingModsuitHelmet
   name: base modsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  - type: Item
+    heldPrefix: off
   - type: Appearance
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Modsuits/standard.rsi
@@ -54,7 +57,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
   - type: HideLayerClothing
     slots:
     - Hair
@@ -176,7 +178,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.65
@@ -251,7 +252,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.55
@@ -599,7 +599,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.75

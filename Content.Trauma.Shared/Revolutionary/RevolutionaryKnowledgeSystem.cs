@@ -2,16 +2,15 @@
 
 using Content.Shared.Revolutionary.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Revolutionary;
 
 /// <summary>
 /// Ensures revs start with revolutionary knowledge, and lose it if deconverted.
 /// </summary>
-public sealed class RevolutionaryKnowledgeSystem : EntitySystem
+public sealed partial class RevolutionaryKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public static readonly EntProtoId RevolutionaryKnowledge = "RevolutionaryKnowledge";
 

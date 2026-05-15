@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Tag;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Forging;
 
 public abstract partial class SharedMetalSystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private void OnTagsChanged(Entity<MetallicTagsComponent> ent, ref MetalWorkableChangedEvent args)
     {

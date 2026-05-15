@@ -5,8 +5,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Silicon.DeadStartupButton;
@@ -17,10 +15,10 @@ namespace Content.Trauma.Shared.Silicon.DeadStartupButton;
 /// </summary>
 public abstract partial class SharedDeadStartupButtonSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private INetManager _net = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -51,7 +49,7 @@ public abstract partial class SharedDeadStartupButtonSystem : EntitySystem
         if (!_net.IsServer)
             return;
         _audio.PlayPvs(comp.ButtonSound, target);
-        var args = new DoAfterArgs(EntityManager, user, comp.DoAfterInterval, new OnDoAfterButtonPressedEvent(), target, target:target)
+        var args = new DoAfterArgs(EntityManager, user, comp.DoAfterInterval, new DeadStartupDoAfterEvent(), target, target:target)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -61,7 +59,7 @@ public abstract partial class SharedDeadStartupButtonSystem : EntitySystem
     }
 
     [Serializable, NetSerializable]
-    public sealed partial class OnDoAfterButtonPressedEvent : SimpleDoAfterEvent
+    public sealed partial class DeadStartupDoAfterEvent : SimpleDoAfterEvent
     {
     }
 

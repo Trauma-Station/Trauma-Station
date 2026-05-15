@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Follower;
 using Content.Shared.Hands.EntitySystems;
@@ -9,10 +8,10 @@ using Content.Shared.Input;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Reflect;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
@@ -20,9 +19,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
@@ -30,19 +27,19 @@ namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 [ByRefEvent]
 public record struct ProtectiveBladeUsedEvent(Entity<ProtectiveBladeComponent> Used);
 
-public sealed class ProtectiveBladeSystem : EntitySystem
+public sealed partial class ProtectiveBladeSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly FollowerSystem _follow = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ReflectSystem _reflect = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private FollowerSystem _follow = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ReflectSystem _reflect = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public static readonly EntProtoId<ProtectiveBladeComponent> BladePrototype = "HereticProtectiveBlade";
     public static readonly EntProtoId BladeProjecilePrototype = "HereticProtectiveBladeProjectile";
@@ -224,7 +221,7 @@ public sealed class ProtectiveBladeSystem : EntitySystem
 
         _audio.PlayPvs(BladeBlockSound, ent);
 
-        args.Cancel();
+        args.Cancelled = true;
     }
 
     private void OnTakeDamage(Entity<ProtectiveBladesComponent> ent, ref BeforeDamageChangedEvent args)

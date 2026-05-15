@@ -6,9 +6,9 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Goobstation.Server.EntityEffects.Effects;
 
-public sealed class DoSmokeEffectSystem : EntityEffectSystem<TransformComponent, DoSmokeEffect>
+public sealed partial class DoSmokeEffectSystem : EntityEffectSystem<TransformComponent, DoSmokeEffect>
 {
-    [Dependency] private readonly SmokeOnTriggerSystem _smoke = default!;
+    [Dependency] private SmokeOnTriggerSystem _smoke = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<DoSmokeEffect> args)
     {

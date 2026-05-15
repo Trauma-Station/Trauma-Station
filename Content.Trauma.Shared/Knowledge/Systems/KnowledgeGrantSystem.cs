@@ -7,8 +7,6 @@ using Content.Shared.Popups;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
@@ -16,13 +14,13 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// <summary>
 /// Handles granting knowledge through different components and ways.
 /// </summary>
-public sealed class KnowledgeGrantSystem : EntitySystem
+public sealed partial class KnowledgeGrantSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -90,7 +88,7 @@ public sealed class KnowledgeGrantSystem : EntitySystem
 
         args.Handled = true;
 
-        if (ent.Comp.SingleUse)
+        if (ent.Comp.Instant)
         {
             // no checking if you already had it, don't waste a cqc book if you already know it chud
             foreach (var (id, level) in ent.Comp.Skills)
@@ -104,8 +102,11 @@ public sealed class KnowledgeGrantSystem : EntitySystem
                     _knowledge.EnsureKnowledge(brain, id, 100);
                 }
             }
-            PredictedQueueDel(ent);
-            PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
+            if (ent.Comp.SingleUse)
+            {
+                PredictedQueueDel(ent);
+                PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
+            }
             return;
         }
 

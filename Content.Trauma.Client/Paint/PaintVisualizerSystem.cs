@@ -5,7 +5,6 @@ using Content.Shared.Hands;
 using Content.Trauma.Shared.Paint;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.Paint;
 
@@ -13,11 +12,11 @@ namespace Content.Trauma.Client.Paint;
 /// Colours layers of painted entities that don't have a shader set.
 /// Also colours the spray can colour layers.
 /// </summary>
-public sealed class PaintVisualizerSystem : EntitySystem
+public sealed partial class PaintVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> ShaderId = "Greyscale";
     public ShaderInstance Shader = default!;

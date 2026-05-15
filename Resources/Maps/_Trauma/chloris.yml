@@ -115631,7 +115631,6 @@ entities:
   - uid: 18590
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 122.5,65.5
       parent: 2
 - proto: CyberPen

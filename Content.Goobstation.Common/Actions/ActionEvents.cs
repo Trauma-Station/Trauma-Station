@@ -2,7 +2,6 @@
 
 using System;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Common.Actions;
 

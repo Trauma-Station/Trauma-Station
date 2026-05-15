@@ -11,12 +11,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.DelayedDeath;
 
-public sealed class DelayedDeathSystem : EntitySystem
+public sealed partial class DelayedDeathSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<MobStateComponent> _mobQuery;
 

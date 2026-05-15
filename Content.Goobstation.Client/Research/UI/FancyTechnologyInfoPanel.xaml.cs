@@ -11,15 +11,14 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Research.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class FancyTechnologyInfoPanel : Control
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public TechnologyPrototype Prototype;
     public Action<TechnologyPrototype>? BuyAction;

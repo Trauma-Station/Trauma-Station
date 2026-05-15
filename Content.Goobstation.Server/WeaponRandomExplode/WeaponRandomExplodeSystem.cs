@@ -7,11 +7,11 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.WeaponRandomExplode;
 
-public sealed class WeaponRandomExplodeSystem : EntitySystem
+public sealed partial class WeaponRandomExplodeSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedExplosionSystem _explosion = default!;
 
     public override void Initialize()
     {

@@ -14,16 +14,15 @@ using Content.Shared.Weapons.Melee;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.Blink;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Wizard.Spellblade;
 
-public abstract class SharedSpellbladeSystem : CommonSpellbladeSystem
+public abstract partial class SharedSpellbladeSystem : CommonSpellbladeSystem
 {
-    [Dependency] protected readonly UseDelaySystem UseDelay = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] protected UseDelaySystem UseDelay = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 

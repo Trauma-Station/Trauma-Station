@@ -27,7 +27,6 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Body.Part;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 
@@ -35,8 +34,8 @@ namespace Content.Medical.Shared.Surgery;
 
 public abstract partial class SharedSurgerySystem
 {
-    [Dependency] protected readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] protected BodyPartSystem _part = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
     public static readonly ProtoId<DamageTypePrototype> Poison = "Poison";
@@ -77,7 +76,6 @@ public abstract partial class SharedSurgerySystem
         SubSurgery<SurgeryAddOrganSlotStepComponent>(OnAddOrganSlotStep, OnAddOrganSlotCheck);
         SubSurgery<SurgeryTraumaTreatmentStepComponent>(OnTraumaTreatmentStep, OnTraumaTreatmentCheck);
         SubSurgery<SurgeryBleedsTreatmentStepComponent>(OnBleedsTreatmentStep, OnBleedsTreatmentCheck);
-        SubSurgery<SurgeryStepPainInflicterComponent>(OnPainInflicterStep, OnPainInflicterCheck);
         Subs.BuiEvents<SurgeryTargetComponent>(SurgeryUIKey.Key, subs =>
         {
             subs.Event<SurgeryStepChosenBuiMsg>(OnSurgeryTargetStepChosen);
@@ -493,49 +491,6 @@ public abstract partial class SharedSurgerySystem
             break;
         }
     }
-
-    private void OnPainInflicterStep(Entity<SurgeryStepPainInflicterComponent> ent, ref SurgeryStepEvent args)
-    {
-        var ev = new SurgeryPainEvent();
-        RaiseLocalEvent(args.Body, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        if (!_consciousness.TryGetNerveSystem(args.Body, out var nerveSys))
-            return;
-
-        var painToInflict = ent.Comp.Amount;
-        if (Status.HasEffectComp<ForcedSleepingStatusEffectComponent>(args.Body))
-            painToInflict *= ent.Comp.SleepModifier;
-
-        if (!_pain.TryChangePainModifier(
-                nerveSys.Value.Owner,
-                args.Part,
-                "SurgeryPain",
-                painToInflict,
-                nerveSys,
-                ent.Comp.PainDuration,
-                ent.Comp.PainType))
-        {
-           _pain.TryAddPainModifier(nerveSys.Value.Owner,
-               args.Part,
-               "SurgeryPain",
-               painToInflict,
-               ent.Comp.PainType,
-               nerveSys,
-               ent.Comp.PainDuration);
-        }
-    }
-
-    private void OnPainInflicterCheck(Entity<SurgeryStepPainInflicterComponent> ent, ref SurgeryStepCompleteCheckEvent args)
-    {
-        if (!_consciousness.TryGetNerveSystem(args.Part, out var nerveSys))
-            return;
-
-        if (!_pain.TryGetPainModifier(nerveSys.Value.Owner, args.Part, "SurgeryPain", out _, nerveSys))
-            args.Cancelled = true;
-    }
-
 
     private void OnSurgeryTargetStepChosen(Entity<SurgeryTargetComponent> ent, ref SurgeryStepChosenBuiMsg args)
     {

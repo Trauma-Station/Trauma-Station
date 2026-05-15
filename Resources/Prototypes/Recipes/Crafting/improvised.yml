@@ -23,7 +23,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false
@@ -67,7 +67,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false
@@ -129,8 +129,7 @@
   category: construction-category-clothing
   objectType: Item
   # <Trauma>
-  theory:
-    FabricationKnowledge: 1
+  theory: {}
   useQuality: false
   # </Trauma>
 
@@ -156,10 +155,11 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 3
+    GunsmithingKnowledge: 2
   practical:
     GunsmithingKnowledge: 4
     WeaponsKnowledge: 3
-  qualityPrototype: ShitCraft
+  qualityPrototype: BaseQuality
   # </Trauma>
 
 - type: construction
@@ -173,6 +173,7 @@
   qualityPrototype: ShitBullets
   theory:
     FabricationKnowledge: 3
+    GunsmithingKnowledge: 1
   practical:
     GunsmithingKnowledge: 2
     WeaponsKnowledge: 2
@@ -216,7 +217,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false
@@ -231,7 +232,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>
@@ -274,7 +275,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -287,7 +288,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -300,10 +301,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
-  practical:
-    ArmorKnowledge: 3
-    MetalworkingKnowledge: 3
+    FabricationKnowledge: 0
+    ArmorKnowledge: 1
+  useQuality: false # just taping goliath hide to a hardsuit, and it doesnt work for the helmet lol
   # </Trauma>
 
 - type: construction
@@ -315,7 +315,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 1
+    ArmorKnowledge: 1
   practical:
     ArmorKnowledge: 4
     MetalworkingKnowledge: 4
@@ -330,7 +331,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 1
+    ArmorKnowledge: 1
   practical:
     ArmorKnowledge: 4
     MetalworkingKnowledge: 4
@@ -345,7 +347,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 3
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false

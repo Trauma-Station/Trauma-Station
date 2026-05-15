@@ -3,7 +3,6 @@
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 
@@ -19,9 +18,9 @@ public sealed partial class RemoveOrganSlot : EntityEffectBase<RemoveOrganSlot>
         => Loc.GetString("entity-effect-guidebook-part-remove-slot", ("chance", Probability), ("slot", Slot));
 }
 
-public sealed class RemoveOrganSlotEffectSystem : EntityEffectSystem<BodyPartComponent, RemoveOrganSlot>
+public sealed partial class RemoveOrganSlotEffectSystem : EntityEffectSystem<BodyPartComponent, RemoveOrganSlot>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyPartComponent> ent, ref EntityEffectEvent<RemoveOrganSlot> args)
     {

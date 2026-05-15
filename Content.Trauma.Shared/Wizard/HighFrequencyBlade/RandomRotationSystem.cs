@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Wizard.HighFrequencyBlade;
 
-public sealed class RandomRotationSystem : EntitySystem
+public sealed partial class RandomRotationSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

@@ -9,19 +9,18 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Misc;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Interaction;
 
-public sealed class TelekinesisSystem : EntitySystem
+public sealed partial class TelekinesisSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTetherGunSystem _tether = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityQuery<AdminFrozenComponent> _frozenQuery = default!;
-    [Dependency] private readonly EntityQuery<TelekineticInteractableComponent> _targetQuery = default!;
-    [Dependency] private readonly EntityQuery<TetherGunComponent> _tetherGunQuery = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTetherGunSystem _tether = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<AdminFrozenComponent> _frozenQuery = default!;
+    [Dependency] private EntityQuery<TelekineticInteractableComponent> _targetQuery = default!;
+    [Dependency] private EntityQuery<TetherGunComponent> _tetherGunQuery = default!;
 
     public override void Initialize()
     {

@@ -2,7 +2,6 @@
 
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 

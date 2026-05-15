@@ -26,7 +26,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.01
@@ -84,7 +83,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -143,7 +141,6 @@
       OrganDamage: 0.9
       BoneDamage: 0.9
       VeinsDamage: 0.9
-      NerveDamage: 0.9
     modifiers:
       coefficients:
         Blunt: 0.1
@@ -198,7 +195,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -264,7 +260,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -295,6 +290,8 @@
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/singuloth_knight_armor.rsi
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/singuloth_knight_armor.rsi
+  - type: AddAccentClothing
+    accent: MedievalAccent
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadSinguloth

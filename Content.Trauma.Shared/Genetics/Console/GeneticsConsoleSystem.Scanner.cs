@@ -5,7 +5,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.Medical;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
@@ -13,7 +12,7 @@ public sealed partial class GeneticsConsoleSystem
 {
     private List<SequenceState> _sequences = new();
 
-    [Dependency] private readonly EntityQuery<GeneticsScannerComponent> _scannerQuery = default!;
+    [Dependency] private EntityQuery<GeneticsScannerComponent> _scannerQuery = default!;
 
     private void InitializeScanner()
     {

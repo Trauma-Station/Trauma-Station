@@ -6,14 +6,13 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
-public abstract class SharedSacramentsSystem : EntitySystem
+public abstract partial class SharedSacramentsSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
 
     public override void Initialize()
     {

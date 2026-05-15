@@ -5,10 +5,10 @@ using Robust.Client.Graphics;
 
 namespace Content.Client.Pinpointer;
 
-public sealed class PinpointerSystem : SharedPinpointerSystem
+public sealed partial class PinpointerSystem : SharedPinpointerSystem
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     // WD EDIT START
     public override void Initialize()

@@ -12,10 +12,7 @@ using Content.Shared.Power.EntitySystems;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.Genetics.Tools;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Text;
 
@@ -23,22 +20,22 @@ namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly GeneticsDiskSystem _disk = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly MutatorSystem _mutator = default!;
-    [Dependency] private readonly ScannedGenomeSystem _genome = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityQuery<MaterialStorageComponent> _materialQuery = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private GeneticsDiskSystem _disk = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private MutatorSystem _mutator = default!;
+    [Dependency] private ScannedGenomeSystem _genome = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMaterialStorageSystem _material = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityQuery<MaterialStorageComponent> _materialQuery = default!;
 
     private StringBuilder _builder = new();
 
@@ -115,7 +112,9 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextScramble = now + ent.Comp.ScrambleCooldown;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextScramble));
 
-        _mutation.Scramble(mutatable, user: args.Actor, predicted: true);
+        // reset dormant but unactivated mutations and reroll them
+        _mutation.ClearUnusedDormant(mutatable);
+        _mutation.Scramble(mutatable);
         UpdateUI(ent.Owner);
     }
 

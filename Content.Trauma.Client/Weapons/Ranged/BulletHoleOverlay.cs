@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Shared.Weapons.Ranged;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -14,10 +13,10 @@ namespace Content.Trauma.Client.Weapons.Ranged;
 /// <summary>
 /// Draws bullet holes on objects
 /// </summary>
-public sealed class BulletHoleOverlay : Overlay
+public sealed partial class BulletHoleOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entMan    = default!;
-    [Dependency] private readonly IResourceCache _resources = default!;
+    [Dependency] private IEntityManager _entMan    = default!;
+    [Dependency] private IResourceCache _resources = default!;
 
     private readonly TransformSystem _xform;
 

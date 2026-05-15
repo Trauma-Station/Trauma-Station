@@ -66,9 +66,10 @@ public abstract partial class SharedHereticAbilitySystem
 
         var ent = args.Performer;
 
-        StatusNew.TryRemoveStatusEffect(ent, args.StunStatus);
-        StatusNew.TryRemoveStatusEffect(ent, args.DrowsinessStatus);
-        StatusNew.TryRemoveStatusEffect(ent, args.SleepStatus);
+        foreach (var effect in args.RemovedEffects)
+        {
+            StatusNew.TryRemoveStatusEffect(ent, effect);
+        }
 
         if (TryComp<StaminaComponent>(ent, out var stam))
         {

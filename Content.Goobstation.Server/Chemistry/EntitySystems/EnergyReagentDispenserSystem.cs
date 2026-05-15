@@ -15,7 +15,6 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Content.Shared.Labels.Components;
 using Content.Server.Power.Components;
 using Robust.Shared.Player;
@@ -30,14 +29,14 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
     /// <seealso cref="EnergyReagentDispenserComponent"/>
     /// </summary>
     [UsedImplicitly]
-    public sealed class EnergyReagentDispenserSystem : EntitySystem
+    public sealed partial class EnergyReagentDispenserSystem : EntitySystem
     {
-        [Dependency] private readonly AudioSystem _audioSystem = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly BatterySystem _battery = default!;
+        [Dependency] private AudioSystem _audioSystem = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+        [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private BatterySystem _battery = default!;
 
         public override void Initialize()
         {
@@ -200,11 +199,10 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             _audioSystem.PlayPvs(reagentDispenser.Comp.ClickSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
 
         private static float GetPowerCostForReagent(string reagentId, int amount, EnergyReagentDispenserComponent comp)
-        {
-            return comp.Reagents.TryGetValue(reagentId, out var cost)
+            => comp.Reagents.TryGetValue(reagentId, out var cost)
                 ? cost * amount
-                : float.MaxValue;
-        }
+                : 0f;
+
         private void OnMapInit(Entity<EnergyReagentDispenserComponent> entity, ref MapInitEvent args) =>
             _itemSlotsSystem.AddItemSlot(entity.Owner, SharedEnergyReagentDispenser.OutputSlotName, entity.Comp.EnergyBeakerSlot);
     }

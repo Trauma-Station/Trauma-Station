@@ -2,13 +2,12 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
-public sealed class HereticRitualEffectSystem : EntitySystem
+public sealed partial class HereticRitualEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

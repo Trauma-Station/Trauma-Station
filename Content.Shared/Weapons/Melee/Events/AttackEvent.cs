@@ -56,21 +56,4 @@ namespace Content.Shared.Weapons.Melee.Events
             ClickLocation = clickLocation;
         }
     }
-
-    // Goobstation start
-    public sealed class BeforeHarmfulActionEvent(EntityUid user, HarmfulActionType type) : CancellableEntityEventArgs
-    {
-        public EntityUid User { get; } = user;
-
-        public HarmfulActionType Type { get; } = type;
-    }
-
-    public enum HarmfulActionType : byte
-    {
-        Harm,
-        Disarm,
-        Grab,
-        MansusGrasp,
-    }
-    // Goobstation end
 }

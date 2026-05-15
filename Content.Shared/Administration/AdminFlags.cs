@@ -125,10 +125,14 @@ namespace Content.Shared.Administration
         NameColor = 1 << 21,
 
         /// <summary>
-        ///     Goobstation Full Admin extra perms.
-        ///     Specifically used for Full Admin only.
+        /// Trauma - some command permissions given to full admins.
         /// </summary>
         FullAdmin = 1 << 22,
+
+        /// <summary>
+        /// Trauma - flag for adding watchlist to a player's notes.
+        /// </summary>
+        Watchlist = 1 << 30,
 
         /// <summary>
         ///     Dangerous host permissions like scsi.

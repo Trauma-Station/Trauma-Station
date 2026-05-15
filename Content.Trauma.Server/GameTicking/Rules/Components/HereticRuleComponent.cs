@@ -2,7 +2,6 @@
 
 using Content.Shared.Store;
 using Content.Trauma.Server.Heretic.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Components;
 
@@ -26,7 +25,7 @@ public sealed partial class HereticRuleComponent : Component
         "HereticPathVoid",
         "HereticPathRust",
         "HereticPathCosmos",
-        "HereticPathSideSpecial",
+        "HereticPathSpecial",
         "HereticPathSideT1",
         "HereticPathSideT2",
         "HereticPathSideT3",

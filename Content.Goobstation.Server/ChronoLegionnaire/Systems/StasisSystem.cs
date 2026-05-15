@@ -4,6 +4,6 @@ using Content.Goobstation.Shared.ChronoLegionnaire.EntitySystems;
 
 namespace Content.Goobstation.Server.ChronoLegionnaire.Systems;
 
-public sealed class StasisSystem : SharedStasisSystem
+public sealed partial class StasisSystem : SharedStasisSystem
 {
 }

@@ -22,7 +22,9 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Contests;
 using Content.Trauma.Common.Grab;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Common.Weapons;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
@@ -37,14 +39,14 @@ namespace Content.Shared.Movement.Pulling.Systems;
 /// </summary>
 public sealed partial class PullingSystem
 {
-    [Dependency] private readonly CommonContestsSystem _contests = default!;
-    [Dependency] private readonly CommonGrabThrownSystem _grabThrown = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private CommonGrabThrownSystem _grabThrown = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     public const float NudgeImpulse = 2f;
 
@@ -180,6 +182,7 @@ public sealed partial class PullingSystem
     {
         if (!Resolve(pullable.Owner, ref pullable.Comp)
             || !Resolve(puller.Owner, ref puller.Comp)
+            || !pullable.Comp.CanBeGrabbed
             || HasComp<PacifiedComponent>(puller)
             || !HasComp<MobStateComponent>(pullable)
             || pullable.Comp.Puller != puller
@@ -204,8 +207,8 @@ public sealed partial class PullingSystem
         meleeWeapon.NextAttack = now + puller.Comp.StageChangeCooldown / attackRateEv.Multipliers;
         DirtyField(puller, meleeWeapon, nameof(MeleeWeaponComponent.NextAttack));
 
-        var beforeEvent = new BeforeHarmfulActionEvent(puller, HarmfulActionType.Grab);
-        RaiseLocalEvent(pullable, beforeEvent);
+        var beforeEvent = new BeforeHarmfulActionEvent(puller, pullable, HarmfulActionType.Grab);
+        RaiseLocalEvent(pullable, ref beforeEvent);
         if (beforeEvent.Cancelled)
             return false;
 
@@ -336,6 +339,9 @@ public sealed partial class PullingSystem
 
     private bool TryUpdateGrabVirtualItems(Entity<PullerComponent> puller, Entity<PullableComponent> pullable)
     {
+        if (!ShouldSpawnVirtualItems(puller, pullable))
+            return true;
+
         // Updating virtual items
         var virtualItemsCount = puller.Comp.GrabVirtualItems.Count;
 
@@ -466,5 +472,12 @@ public sealed partial class PullingSystem
         var newStage = puller.Comp.GrabStage - 1;
         TrySetGrabStages((puller.Owner, puller.Comp), (pullable.Owner, pullable.Comp), newStage);
         return true;
+    }
+
+    private bool ShouldSpawnVirtualItems(EntityUid uid, EntityUid pulled)
+    {
+        var ev = new BeforeSpawnPullingVirtualItemsEvent(uid, pulled);
+        RaiseLocalEvent(uid, ref ev);
+        return !ev.Cancelled;
     }
 }

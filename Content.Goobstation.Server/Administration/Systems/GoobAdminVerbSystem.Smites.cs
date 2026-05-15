@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Threading;
-using Content.Goobstation.Shared.MisandryBox.Smites;
+using Content.Goobstation.Shared.Smites;
 using Content.Server.Administration.Managers;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Administration;
@@ -15,8 +15,8 @@ namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed partial class GoobAdminVerbSystem
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly ThunderstrikeSystem _thunder = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private ThunderstrikeSystem _thunder = default!;
 
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
     {

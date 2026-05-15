@@ -1,3 +1,8 @@
+// <Trauma>
+using Content.Trauma.Common.CCVar;
+using Robust.Shared.Configuration;
+// </Trauma>
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Access.Systems;
 using Content.Server.AlertLevel;
 using Content.Server.CartridgeLoader;
@@ -17,6 +22,7 @@ using Content.Shared.Light;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.PDA;
 using Content.Shared.PDA.Ringer;
+using Content.Shared.Store.Components;
 using Content.Shared.VoiceMask;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -26,18 +32,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.PDA
 {
-    public sealed class PdaSystem : SharedPdaSystem
+    public sealed partial class PdaSystem : SharedPdaSystem
     {
-        [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
-        [Dependency] private readonly InstrumentSystem _instrument = default!;
-        [Dependency] private readonly RingerSystem _ringer = default!;
-        [Dependency] private readonly StationSystem _station = default!;
-        [Dependency] private readonly StoreSystem _store = default!;
-        [Dependency] private readonly IChatManager _chatManager = default!;
-        [Dependency] private readonly UserInterfaceSystem _ui = default!;
-        [Dependency] private readonly UnpoweredFlashlightSystem _unpoweredFlashlight = default!;
-        [Dependency] private readonly ContainerSystem _containerSystem = default!;
-        [Dependency] private readonly IdCardSystem _idCard = default!;
+        [Dependency] private IConfigurationManager _config = default!; // DeltaV
+        [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
+        [Dependency] private InstrumentSystem _instrument = default!;
+        [Dependency] private RingerSystem _ringer = default!;
+        [Dependency] private StationSystem _station = default!;
+        [Dependency] private StoreSystem _store = default!;
+        [Dependency] private IChatManager _chatManager = default!;
+        [Dependency] private UserInterfaceSystem _ui = default!;
+        [Dependency] private UnpoweredFlashlightSystem _unpoweredFlashlight = default!;
+        [Dependency] private ContainerSystem _containerSystem = default!;
+        [Dependency] private IdCardSystem _idCard = default!;
+
+        private DateTime ServerDate; // DeltaV - PDA
 
         public override void Initialize()
         {
@@ -61,6 +70,13 @@ namespace Content.Server.PDA
             SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
             SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent>>(OnRelayedEventToIdCard);
             SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<VoiceMaskNameUpdatedEvent>>(OnRelayedEventToIdCard);
+
+            // <Trauma>
+            Subs.CVar(_config,
+                TraumaCVars.YearOffset,
+                value => ServerDate = DateTime.Today.AddYears(value),
+                true);
+            // </Trauma>
         }
 
         private void OnRelayedEventToIdCard<T>(Entity<PdaComponent> ent, ref InventoryRelayedEvent<T> args)
@@ -189,8 +205,9 @@ namespace Content.Server.PDA
 
             var address = GetDeviceNetAddress(uid);
             var hasInstrument = HasComp<InstrumentComponent>(uid);
-            var showUplink = HasComp<UplinkComponent>(uid) && IsUnlocked(uid);
+            var showUplink = TryGetUnlockedStore(uid, out _);
 
+            pda.CurrentDate = ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
             UpdateAlertLevel(uid, pda);
             // TODO: Update the level and name of the station with each call to UpdatePdaUi is only needed for latejoin players.
@@ -213,6 +230,7 @@ namespace Content.Server.PDA
                     ActualOwnerName = pda.OwnerName,
                     IdOwner = id?.FullName,
                     JobTitle = id?.LocalizedJobTitle,
+                    CurrentDate = pda.CurrentDate, // DeltaV - PDA date
                     StationAlertLevel = pda.StationAlertLevel,
                     StationAlertColor = pda.StationAlertColor
                 },
@@ -274,8 +292,19 @@ namespace Content.Server.PDA
                 return;
 
             // check if its locked again to prevent malicious clients opening locked uplinks
-            if (HasComp<UplinkComponent>(uid) && IsUnlocked(uid))
-                _store.ToggleUi(msg.Actor, uid);
+            if (TryGetUnlockedStore(uid, out var store))
+            {
+                if (store != uid)
+                {
+                    if (TryComp<RemoteStoreComponent>(uid, out var remoteStore))
+                        remoteStore.Store = store;
+                    _store.ToggleUi(msg.Actor, store.Value, remoteAccess: uid);
+                }
+                else
+                {
+                    _store.ToggleUi(msg.Actor, store.Value);
+                }
+            }
         }
 
         private void OnUiMessage(EntityUid uid, PdaComponent pda, PdaLockUplinkMessage msg)
@@ -285,14 +314,24 @@ namespace Content.Server.PDA
 
             if (TryComp<RingerUplinkComponent>(uid, out var uplink))
             {
+                if (TryComp<RemoteStoreComponent>(uid, out var remoteStore))
+                    remoteStore.Store = null;
                 _ringer.LockUplink((uid, uplink));
                 UpdatePdaUi(uid, pda);
             }
         }
 
-        private bool IsUnlocked(EntityUid uid)
+        /// <summary>
+        /// Returns the currently unlocked store, if there is one.
+        /// </summary>
+        private bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
         {
-            return !TryComp<RingerUplinkComponent>(uid, out var uplink) || uplink.Unlocked;
+            store = null;
+            if (!TryComp<RingerUplinkComponent>(uid, out var uplink) || !uplink.Unlocked)
+                return false;
+
+            store = _store.GetStore(uid);
+            return store != null;
         }
 
         private void UpdateStationName(EntityUid uid, PdaComponent pda)

@@ -13,15 +13,14 @@ using Content.Trauma.Common.Kitchen;
 using Content.Trauma.Shared.DeepFryer;
 using Content.Trauma.Shared.DeepFryer.Components;
 using Content.Trauma.Shared.DeepFryer.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.DeepFryer;
 
-public sealed class DeepFryerSystem : SharedDeepFryerSystem
+public sealed partial class DeepFryerSystem : SharedDeepFryerSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
     private static readonly ProtoId<DamageTypePrototype> damageType = "Heat";
 

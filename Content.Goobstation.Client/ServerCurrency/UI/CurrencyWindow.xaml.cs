@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Goobstation.Common.ServerCurrency;
 using Content.Goobstation.Shared.ServerCurrency;
@@ -11,7 +10,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Prototypes;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Goobstation.Client.ServerCurrency.UI
@@ -19,10 +17,10 @@ namespace Content.Goobstation.Client.ServerCurrency.UI
     [GenerateTypedNameReferences]
     public sealed partial class CurrencyWindow : DefaultWindow
     {
-        [Dependency] private readonly ICommonCurrencyManager _serverCur = default!;
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
-        [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
+        [Dependency] private ICommonCurrencyManager _serverCur = default!;
+        [Dependency] private IClientAdminManager _adminManager = default!;
+        [Dependency] private IClientConsoleHost _consoleHost = default!;
+        [Dependency] private IPrototypeManager _protoManager = default!;
         public event Action<ProtoId<TokenListingPrototype>>? OnBuy;
         private bool isAdmin = false;
         private Dictionary<Button, (DateTime LastClick, TokenListingPrototype Listing)> _buttonClickTimes = new();

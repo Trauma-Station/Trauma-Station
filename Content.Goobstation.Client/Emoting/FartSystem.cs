@@ -2,14 +2,12 @@
 
 using Content.Goobstation.Shared.Emoting;
 using Content.Shared.Chat.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Emoting;
 
 public sealed partial class FartSystem : SharedFartSystem
 {
-    [Dependency] private readonly IPrototypeManager _prot = default!;
+    [Dependency] private IPrototypeManager _prot = default!;
 
     public override void Initialize()
     {

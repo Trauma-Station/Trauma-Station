@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Events;
@@ -11,24 +10,24 @@ using Content.Shared.Projectiles;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Whitelist;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Wizard.Traps;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard;
 
-public sealed class IceCubeSystem : SharedIceCubeSystem
+public sealed partial class IceCubeSystem : SharedIceCubeSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     /// <summary>
     /// Damage types that can break ice cubes.

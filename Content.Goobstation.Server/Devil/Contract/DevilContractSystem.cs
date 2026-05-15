@@ -21,15 +21,15 @@ namespace Content.Goobstation.Server.Devil.Contract;
 
 public sealed partial class DevilContractSystem : SharedDevilContractSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SubdermalImplantSystem _implant = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SubdermalImplantSystem _implant = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     public override void Initialize()
     {
@@ -67,9 +67,9 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
             var locId = _targetResolvers.Keys.FirstOrDefault(id => Loc.GetString(id).Equals(targetKey, StringComparison.OrdinalIgnoreCase));
             var resolver = _targetResolvers[locId];
 
-            if (resolver(contract.Comp) == null)
+            if (resolver(contract.Comp) is not { } target || TerminatingOrDeleted(target))
             {
-                Log.Warning($"Unknown resolver: {resolver(contract.Comp)}");
+                Log.Warning($"Bad target entity for {locId}!");
                 continue;
             }
 
@@ -86,10 +86,7 @@ public sealed partial class DevilContractSystem : SharedDevilContractSystem
                 continue;
             }
 
-            if (resolver(contract.Comp) is {} target)
-                ApplyEffectToTarget(target, clause, contract);
-            else
-                Log.Warning($"Invalid target entity from resolver for clause {clauseKey} in contract {ToPrettyString(contract)}");
+            ApplyEffectToTarget(target, clause, contract);
         }
     }
 

@@ -10,21 +10,20 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Trauma.Shared.Holosign;
 
-public sealed class ChargeHolosignSystem : EntitySystem
+public sealed partial class ChargeHolosignSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private HashSet<Entity<IComponent>> _signs = new();
 

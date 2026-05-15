@@ -11,18 +11,17 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Language;
 
 // TODO: move this to shared and predict
-public sealed class TranslatorSystem : SharedTranslatorSystem
+public sealed partial class TranslatorSystem : SharedTranslatorSystem
 {
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private LanguageSystem _language = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {

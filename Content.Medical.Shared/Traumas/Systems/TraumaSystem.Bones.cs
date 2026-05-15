@@ -10,7 +10,6 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -19,7 +18,7 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private void InitBones()
     {

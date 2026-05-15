@@ -41,30 +41,51 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the blade mark, creating flying blades that protect you from attacks when active, throw with an empty hand to use then as a ranged attack.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Dance of the Brand</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Being attacked while holding a heretic blade triggers a riposte, knocking down your attacker. Triggers once per 20 seconds.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Champion Hook</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Makes your next blade light attack deal extra damage, knockdown and hook victim.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Sacraments of Power</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Grants a spell that gives you total damage immunity and some damage reflect for 5 seconds, takes 1 second to start up. Cannot attack while active.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Stance of the Torn Champion</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You are now immune to delimbing, as well as resistant to bloodloss and slowdown. Grows stronger when under 50% health.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Furious Steel</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons three flying blades to protect you.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Empowered Blades</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You can attack with two blades at once, you can also use your grasp to empower blades.</Box></ColorBox>
 
-    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Furious Steel</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Wolves Among Sheep</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Active Ability</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons three flying blades to protect you.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons giant arena, forcing everyone trapped inside to fight each other in order to escape.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Maelstrom of Silver</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Three headless corpses</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You gain a regenerating ring of blades. Your Furious Steel ability cooldown is halved. You deal more damage with your blades and have lifesteal on attacks. Knockdown and stun time is halved, you also become immune to disarms.</Box></ColorBox>
   </Table>
+
+
+  ## Armor and Passive Ability
+
+  <Table Columns="2">
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="5">Name</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Effect</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">You can perform a riposte every 20 seconds while wielding your blade.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Shattered Panoply</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to electrical shocks and stun baton knockdown.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to having your limbs dismembered, as well as wound resistance below 50% hp.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Passive</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Riposte cooldown lowered to 10 seconds.</Box></ColorBox>
+  </Table>
+
 
   ## Tips
 
@@ -73,5 +94,6 @@
   - Sacraments of Power makes you immune to damage, harming people trying to attack you but you cannot use melee or ranged weapons while it's active. Use it as an escape or rush tool.
   - With Empowered Blades, your offensive power grows considerably. You are able to fight with dual-wielded blades, and can empower them by activating your Mansus Grasp while wielding your blades. Left click attack with empowered blade on living target triggers grasp effect and applies blade mark. Your blades also deal additional damage to structures.
   - Maintaining a good offense also creates a good defense. With orbiting blades, you are able to block additional incoming attacks. Remember that you can use throw key with empty hand to throw the orbiting blades, dealing heavy damage and destroying structures.
+  - Use Wolves Among Sheep with caution. Not only does it have a significant cooldown, but it also arms anyone trapped in the effect with you with blades of their own. Use it either as a last ditch defense, or when you know you have the upper hand and need an extra edge. Just don't try to flee the area before taking someone out first.
 
 </Document>

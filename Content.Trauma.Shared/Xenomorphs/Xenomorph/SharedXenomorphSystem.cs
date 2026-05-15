@@ -6,14 +6,13 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Infection;
 using Content.Trauma.Shared.Xenomorphs.Larva;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Xenomorphs.Xenomorph;
 
-public abstract class SharedXenomorphSystem : CommonXenomorphSystem
+public abstract partial class SharedXenomorphSystem : CommonXenomorphSystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<TagPrototype> XenomorphItemTag = "XenomorphItem";
 

@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Markings;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -25,9 +24,9 @@ public sealed partial class AddMarking : EntityEffectBase<AddMarking>
         => Loc.GetString("entity-effect-guidebook-add-marking", ("chance", Probability), ("marking", prototype.Index(Marking).Name));
 }
 
-public sealed class AddMarkingEffectSystem : EntityEffectSystem<BodyComponent, AddMarking>
+public sealed partial class AddMarkingEffectSystem : EntityEffectSystem<BodyComponent, AddMarking>
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<AddMarking> args)
     {

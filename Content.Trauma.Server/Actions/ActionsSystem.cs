@@ -13,21 +13,20 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Actions;
 
-public sealed class ActionsSystem : EntitySystem
+public sealed partial class ActionsSystem : EntitySystem
 {
-    [Dependency] private readonly ITileDefinitionManager _tileDef = default!;
+    [Dependency] private ITileDefinitionManager _tileDef = default!;
 
-    [Dependency] private readonly AnchorableSystem _anchorable = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly PlasmaCostActionSystem _plasmaCost = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnchorableSystem _anchorable = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private PlasmaCostActionSystem _plasmaCost = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {

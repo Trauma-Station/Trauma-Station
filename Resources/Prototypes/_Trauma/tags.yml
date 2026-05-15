@@ -2,6 +2,9 @@
   id: AdvancedMagboots
 
 - type: Tag
+  id: AmmoGaussgun
+
+- type: Tag
   id: AnvilBottom
 
 - type: Tag
@@ -20,6 +23,12 @@
   id: Butt
 
 - type: Tag
+  id: PartCapacitor
+
+- type: Tag
+  id: CartridgeGaussgun
+
+- type: Tag
   id: CartridgeRPG2
 
 - type: Tag
@@ -29,6 +38,9 @@
   id: Cement
 
 - type: Tag
+  id: CircularSaw
+
+- type: Tag
   id: CookedEgg
 
 - type: Tag
@@ -36,6 +48,12 @@
 
 - type: Tag
   id: DataChip
+
+- type: Tag
+  id: DrillHead
+
+- type: Tag
+  id: Directional
 
 - type: Tag
   id: Ed209Shell
@@ -74,6 +92,9 @@
   id: FlamethrowerTank
 
 - type: Tag
+  id: FleshWormSegment
+
+- type: Tag
   id: ForceHereticMinion
 
 - type: Tag
@@ -98,7 +119,16 @@
   id: IngotWorkableSteel
 
 - type: Tag
+  id: Lantern
+
+- type: Tag
+  id: MagazineGaussgun
+
+- type: Tag
   id: MagazineTurret
+
+- type: Tag
+  id: MetalContainer
 
 - type: Tag
   id: OverrideKeyComponents
@@ -117,6 +147,9 @@
 
 - type: Tag
   id: RCD
+
+- type: Tag
+  id: RechargingBoard
 
 - type: Tag
   id: RevArmorPlate
@@ -146,7 +179,13 @@
   id: RitualFeastOfOwls
 
 - type: Tag
+  id: RitualImperfect
+
+- type: Tag
   id: RitualKnowledge
+
+- type: Tag
+  id: SpaceWhaleSegment
 
 - type: Tag
   id: SpellIgnoreForestAdmonitions

@@ -9,9 +9,9 @@ using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Trauma.Client.UserInterface;
 
-public sealed class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>
+public sealed partial class UserActionsPanelUIController : UIController, IOnStateEntered<GameplayState>
 {
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
 
     public override void Initialize()
     {

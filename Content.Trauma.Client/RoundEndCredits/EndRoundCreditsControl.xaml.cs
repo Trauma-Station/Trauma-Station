@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Client.GameTicking.Managers;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
@@ -10,7 +9,6 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.RoundEndCredits;
@@ -18,7 +16,7 @@ namespace Content.Trauma.Client.RoundEndCredits;
 [GenerateTypedNameReferences]
 public sealed partial class EndRoundCreditsControl : ScrollContainer
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
     private readonly ClientGameTicker _gameTicker;
 
     private static readonly ResPath Logo = new("/Textures/Logo/logo.png");

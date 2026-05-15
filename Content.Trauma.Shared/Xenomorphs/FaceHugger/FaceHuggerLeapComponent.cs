@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
-namespace Content.Shared._White.Xenomorphs.FaceHugger;
+namespace Content.Trauma.Shared.Xenomorphs.FaceHugger;
 
 /// <summary>
 /// Handles the leap action for sentient facehuggers

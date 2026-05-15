@@ -16,6 +16,11 @@
       sinks:
       - LathePrint
   - type: LatheAutomation
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 30
   - type: SpamEmitSound # random lathe sounds
     minInterval: 300
     maxInterval: 900
@@ -617,7 +622,7 @@
     stealGroup: MedicalTechFabCircuitboard
 
 - type: entity
-  parent: BaseLathe
+  parent: [BaseLathe, BaseSiloUtilizer] # Trauma - was BaseLathe
   id: UniformPrinter
   name: uniform printer
   description: Prints new or replacement uniforms.
@@ -810,8 +815,6 @@
   name: cutter machine
   description: This is a cutter. It cuts. Add variety to your station floor with eye-pleasing patterns! Don't stick your fingers in.
   components:
-  - type: Transform
-    noRot: false
   - type: Sprite
     sprite: Structures/Machines/cuttermachine.rsi
     snapCardinals: true
@@ -834,10 +837,15 @@
     - FloorSteelTilesStatic
     - FloorWhiteTilesStatic
     - FloorMaintsTilesStatic
+    - FloorIndustrialTilesStatic
     - FloorWoodTilesStatic
     - FloorConcreteTilesStatic
     - CircuitFloorsStatic
     - FloorMarbleTilesStatic
+    - FloorShuttleTilesStatic
+    - PlasticTilesStatic
+    - CarpetTilesStatic
+    - PreciousTilesStatic
     dynamicPacks:
     - FauxTiles
   - type: MaterialStorage

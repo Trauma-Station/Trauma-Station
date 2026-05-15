@@ -1,0 +1,17 @@
+- type: stack
+  parent: BaseTileStack
+  id: FloorTilePlastic
+  name: tiles-plastic-floor
+  spawn: FloorTileItemPlastic
+
+- type: stack
+  parent: BaseTileStack
+  id: FloorTilePlasticDark
+  name: tiles-plastic-dark-floor
+  spawn: FloorTileItemPlasticDark
+
+- type: stack
+  parent: BaseTileStack
+  id: FloorTilePlasticWhite
+  name: tiles-plastic-white-floor
+  spawn: FloorTileItemPlasticWhite

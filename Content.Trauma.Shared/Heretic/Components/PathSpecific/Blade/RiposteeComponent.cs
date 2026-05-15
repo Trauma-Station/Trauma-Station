@@ -3,8 +3,6 @@
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.MartialArts;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 
@@ -33,7 +31,9 @@ public sealed partial class RiposteData(
     BaseRiposteCheckEvent? canRiposteEvent)
 {
     // Default values for blade heretic
-    public RiposteData() : this(20f,
+    public RiposteData() : this(20f) { }
+
+    public RiposteData(float cooldown) : this(cooldown,
         true,
         new() { Tags = new() { "HereticBlade", }, },
         true,

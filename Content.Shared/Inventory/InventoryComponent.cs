@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+// </Trauma>
 using Content.Shared.DisplacementMap;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -38,19 +41,19 @@ public sealed partial class InventoryComponent : Component
     public ContainerSlot[] Containers = Array.Empty<ContainerSlot>();
 
     [DataField, AutoNetworkedField]
-    public Dictionary<string, DisplacementData> Displacements = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, DisplacementData> Displacements = new(); // Trauma - string -> InventorySlotPrototype
 
     /// <summary>
     /// Alternate displacement maps, which if available, will be selected for the player of the appropriate gender.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<string, DisplacementData> FemaleDisplacements = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, DisplacementData> FemaleDisplacements = new(); // Trauma - string -> InventorySlotPrototype
 
     /// <summary>
     /// Alternate displacement maps, which if available, will be selected for the player of the appropriate gender.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<string, DisplacementData> MaleDisplacements = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, DisplacementData> MaleDisplacements = new(); // Trauma - string -> InventorySlotPrototype
 }
 
 /// <summary>

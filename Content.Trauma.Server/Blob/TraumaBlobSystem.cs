@@ -6,13 +6,12 @@ using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Server.Language;
 using Content.Trauma.Shared.Language.Events;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Blob;
 
-public sealed class TraumaBlobSystem : EntitySystem
+public sealed partial class TraumaBlobSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private LanguageSystem _language = default!;
     private static readonly ProtoId<LanguagePrototype> BlobLang = "Blob";
 
     public override void Initialize()

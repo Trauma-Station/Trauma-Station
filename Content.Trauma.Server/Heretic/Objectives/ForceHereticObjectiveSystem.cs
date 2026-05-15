@@ -6,14 +6,13 @@ using Content.Shared.Database;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Heretic.Objectives;
 
-public sealed class ForceHereticObjectiveSystem : EntitySystem
+public sealed partial class ForceHereticObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
 
     public static readonly EntProtoId HereticRule = "Heretic";
 

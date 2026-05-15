@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Curses.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class CurseOfCorrosionStatusEffectComponent : Component
 {
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextVomit = TimeSpan.Zero;
 
     [DataField]

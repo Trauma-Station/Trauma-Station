@@ -1,16 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client.Mind;
 using Content.Client.Overlays;
 using Content.Goobstation.Shared.Overlays;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Whitelist;
 using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Overlays;
 
-public sealed class ThermalVisionSystem : EquipmentHudSystem<ThermalVisionComponent>
+public sealed partial class ThermalVisionSystem : EquipmentHudSystem<ThermalVisionComponent>
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     private ThermalVisionOverlay _thermalOverlay = default!;
     private BaseSwitchableOverlay<ThermalVisionComponent> _overlay = default!;
@@ -35,8 +39,22 @@ public sealed class ThermalVisionSystem : EquipmentHudSystem<ThermalVisionCompon
     protected override void OnRefreshEquipmentHud(Entity<ThermalVisionComponent> ent,
         ref InventoryRelayedEvent<RefreshEquipmentHudEvent<ThermalVisionComponent>> args)
     {
-        if (ent.Comp.IsEquipment)
+        if (ent.Comp.IsEquipment && CheckWhitelist(ent.Comp, args.Args.Uid))
             base.OnRefreshEquipmentHud(ent, ref args);
+    }
+
+    private bool CheckWhitelist(ThermalVisionComponent comp, EntityUid user)
+    {
+        if (comp.UserWhitelist is not { } whitelist)
+            return true;
+
+        if (_whitelist.IsValid(whitelist, user))
+            return true;
+
+        if (!comp.WhitelistCheckMind || !_mind.TryGetMind(user, out var mind, out _))
+            return false;
+
+        return _whitelist.IsValid(whitelist, mind);
     }
 
     private void OnToggle(Entity<ThermalVisionComponent> ent, ref SwitchableOverlayToggledEvent args)

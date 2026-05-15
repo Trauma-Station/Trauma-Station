@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.Effects;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
@@ -24,7 +23,6 @@ using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -33,28 +31,28 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Wizard.Traps;
 
-public abstract class SharedWizardTrapsSystem : EntitySystem
+public abstract partial class SharedWizardTrapsSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SparksSystem _spark = default!;
-    [Dependency] private readonly SharedElectrocutionSystem _electrocution = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMagicSystem _magic = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly EntityQuery<WizardTrapComponent> _trapQuery = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SparksSystem _spark = default!;
+    [Dependency] private SharedElectrocutionSystem _electrocution = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMagicSystem _magic = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private EntityQuery<WizardTrapComponent> _trapQuery = default!;
 
     public override void Initialize()
     {
@@ -140,7 +138,11 @@ public abstract class SharedWizardTrapsSystem : EntitySystem
 
     private void OnDamageTriggered(Entity<DamageTrapComponent> ent, ref TrapTriggeredEvent args)
     {
-        _damageable.TryChangeDamage(args.Victim, ent.Comp.Damage, true, targetPart: TargetBodyPart.Feet);
+        _damageable.TryChangeDamage(args.Victim,
+            ent.Comp.Damage,
+            true,
+            targetPart: ent.Comp.TargetPart,
+            splitDamage: ent.Comp.SplitDamageBehavior);
         if (_net.IsServer && ent.Comp.SpawnedEntity is { } toSpawn)
             Spawn(toSpawn, _transform.GetMapCoordinates(ent));
     }

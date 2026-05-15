@@ -53,6 +53,7 @@ jobs:
           bin/Content.IntegrationTests/*.pdb
           bin/Content.IntegrationTests/runtimes/linux-x64/**
           bin/Content.MapRenderer/*.dll
+          bin/Content.MapRenderer/*.pdb
           bin/Content.Tests/*.dll
         retention-days: 1
 

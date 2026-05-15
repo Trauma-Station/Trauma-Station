@@ -5,7 +5,6 @@ using Content.Server.Station.Systems;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Station;
 
@@ -13,11 +12,11 @@ namespace Content.Trauma.Server.Station;
 /// Changes the limit for jobs regardless of the map chosen if pop is within a range.
 /// Uses <see cref="JobSlotsOverridePrototype"/> prototypes defined in yml.
 /// </summary>
-public sealed class JobSlotsOverrideSystem : EntitySystem
+public sealed partial class JobSlotsOverrideSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private StationJobsSystem _stationJobs = default!;
 
     public override void Initialize()
     {

@@ -16,15 +16,14 @@ using Content.Trauma.Shared.Wizard.Chuuni;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Content.Trauma.Shared.Wizard.Projectiles;
 using Content.Trauma.Shared.Wizard.TimeStop;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Wizard;
 
 public sealed partial class SharedWizardSystem : CommonWizardSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     public override void Initialize()
     {
