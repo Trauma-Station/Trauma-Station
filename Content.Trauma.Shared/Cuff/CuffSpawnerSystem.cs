@@ -34,11 +34,10 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
 
         var target = args.Target;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, 2f, new CuffSpawnerDoAfterEvent(), args.User, args.Target)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(2), new CuffSpawnerDoAfterEvent(), args.User, args.Target)
         {
             BlockDuplicate = true,
             BreakOnMove = true,
-            ExtraCheck = () => CheckCuffs(beepsky.Owner, target)
         });
     }
 

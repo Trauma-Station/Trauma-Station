@@ -99,10 +99,9 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
 
         bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
-        if (targetEnt.Valid)
+        if (targetEnt.Valid && _entMan.TryGetComponent<TransformComponent>(targetEnt, out var transformComp))
         {
-            var targetCoords = _entMan.GetComponent<TransformComponent>(targetEnt).Coordinates;
-            if (!BeatUp(targetEnt, owner, isEmagged) || !ownerCoords.InRange(_entMan, targetCoords, range))
+            if (!BeatUp(targetEnt, owner, isEmagged) || !ownerCoords.InRange(_entMan, transformComp.Coordinates, range))
                 targetEnt = EntityUid.Invalid;
         }
 
