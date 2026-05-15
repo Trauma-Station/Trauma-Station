@@ -54,17 +54,21 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
   # <Trauma>
-  - type: KnowledgeGrantOnWear
-    skills: # Basically just engi skillchip because I have no idea what half of those even do, if anything at all
-      FabricationKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
-      AirlocksKnowledge: 16
-      FurnitureKnowledge: 26
-      InfrastructureKnowledge: 26
-      ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 60
+      MaterialsKnowledge: 60
+      DoorsKnowledge: 60
+      AirlocksKnowledge: 60
+      FurnitureKnowledge: 60
+      InfrastructureKnowledge: 60
+      ElectronicsKnowledge: 60
+      WallsKnowledge: 60
+      WindowsKnowledge: 60
+      MetalworkingKnowledge: 60
+      GunsmithingKnowledge: 60
+      MechanicsKnowledge: 60
+      BotsKnowledge: 60
   # </Trauma>
 
 - type: entity
@@ -159,11 +163,21 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
   # <Trauma>
-  - type: KnowledgeGrantOnWear
+  - type: ModifyKnowledgeGrant
     skills:
-      ToughnessKnowledge: 26 # He protecc
-      ShootingKnowledge: 26 # He atacc
-      StrengthKnowledge: 26 # But most importantly, he dragg you to the mothership
+      FabricationKnowledge: 20
+      MaterialsKnowledge: 20
+      DoorsKnowledge: 20
+      AirlocksKnowledge: 20
+      FurnitureKnowledge: 20
+      InfrastructureKnowledge: 20
+      ElectronicsKnowledge: 20
+      WallsKnowledge: 20
+      WindowsKnowledge: 20
+      ShootingKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
   # </Trauma>
 
 - type: entity
@@ -220,9 +234,22 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
   # <Trauma>
-  - type: KnowledgeGrantOnWear
+  - type: ModifyKnowledgeGrant
     skills:
-      MeleeKnowledge: 30 # High enough for parrying so it's actually kind of a threat in melee. No reflects though.
+      FabricationKnowledge: 20
+      MaterialsKnowledge: 20
+      DoorsKnowledge: 20
+      AirlocksKnowledge: 20
+      FurnitureKnowledge: 20
+      InfrastructureKnowledge: 20
+      ElectronicsKnowledge: 20
+      WallsKnowledge: 20
+      WindowsKnowledge: 20
+      MeleeKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
   # </Trauma>
 
 - type: entity
@@ -279,11 +306,22 @@
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
   # <Trauma>
-  - type: KnowledgeGrantOnWear
+  - type: ModifyKnowledgeGrant
     skills:
-      ShootingKnowledge: 40 # It's basically a sniper atp it needs semi-high shooting
+      FabricationKnowledge: 20
+      MaterialsKnowledge: 20
+      DoorsKnowledge: 20
+      AirlocksKnowledge: 20
+      FurnitureKnowledge: 20
+      InfrastructureKnowledge: 20
+      ElectronicsKnowledge: 20
+      WallsKnowledge: 20
+      WindowsKnowledge: 20
+      ShootingKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
   # </Trauma>
-
 
 # xenoborgs empty
 - type: entity

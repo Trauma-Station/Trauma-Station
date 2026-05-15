@@ -1,16 +1,17 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
-using Content.Shared.Administration.Events;
+using Content.Goobstation.Shared.Administration;
 using Robust.Client.Player;
 using Robust.Shared.ContentPack;
-using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
-namespace Content.Client.Administration.Systems;
+namespace Content.Goobstation.Client.Administration;
 
-public sealed class AdminInfoSystem : EntitySystem
+public sealed partial class AdminInfoSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _u = default!;
-    [Dependency] private readonly IResourceManager _k = default!;
+    [Dependency] private IPlayerManager _u = default!;
+    [Dependency] private IResourceManager _k = default!;
 
     public override void Initialize()
     {

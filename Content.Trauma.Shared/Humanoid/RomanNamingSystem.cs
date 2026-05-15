@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Humanoid;
 
 public sealed partial class RomanNamingSystem : CommonRomanNamingSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly Dictionary<string, int> RomanMap = new()
     {

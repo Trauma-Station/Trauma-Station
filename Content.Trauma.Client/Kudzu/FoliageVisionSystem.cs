@@ -7,12 +7,12 @@ using Content.Trauma.Shared.Kudzu;
 
 namespace Content.Trauma.Client.Kudzu;
 
-public sealed class FoliageVisionSystem : EntitySystem
+public sealed partial class FoliageVisionSystem : EntitySystem
 {
     private const int HighDrawDepth = 10;
     private const int LowDrawDepth = -5;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
     private bool _enabled;
 
     public override void Initialize()

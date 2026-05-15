@@ -17,11 +17,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Server.Shuttles.Systems;
 
-public sealed class DockingShuttleSystem : SharedDockingShuttleSystem
+public sealed partial class DockingShuttleSystem : SharedDockingShuttleSystem
 {
-    [Dependency] private readonly DockingConsoleSystem _console = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private DockingConsoleSystem _console = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     public override void Initialize()
     {

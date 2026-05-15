@@ -16,9 +16,9 @@ public sealed partial class HasStatusEffectCondition : EntityConditionBase<HasSt
             ("invert", Inverted));
 }
 
-public sealed class HasStatusEffectConditionSystem : EntityConditionSystem<MetaDataComponent, HasStatusEffectCondition>
+public sealed partial class HasStatusEffectConditionSystem : EntityConditionSystem<MetaDataComponent, HasStatusEffectCondition>
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     protected override void Condition(Entity<MetaDataComponent> entity,
         ref EntityConditionEvent<HasStatusEffectCondition> args)

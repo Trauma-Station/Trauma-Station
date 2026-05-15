@@ -16,14 +16,14 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 
-public sealed class SlasherRegenerateSystem : EntitySystem
+public sealed partial class SlasherRegenerateSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

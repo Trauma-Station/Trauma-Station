@@ -12,15 +12,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class RustSpreaderSystem : EntitySystem
+public sealed partial class RustSpreaderSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly HereticAbilitySystem _ability = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private HereticAbilitySystem _ability = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private static readonly TimeSpan RustSpreadInterval = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;

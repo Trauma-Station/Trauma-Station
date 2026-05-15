@@ -2,7 +2,7 @@
 
 
 namespace Content.Goobstation.Shared.Emoting;
-public abstract class SharedFartSystem : EntitySystem
+public abstract partial class SharedFartSystem : EntitySystem
 {
     public override void Initialize()
     {

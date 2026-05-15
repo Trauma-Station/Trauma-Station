@@ -25,16 +25,16 @@ namespace Content.Trauma.Client.Wizard.MagicMirror;
 [GenerateTypedNameReferences]
 public sealed partial class WizardMirrorWindow : FancyWindow
 {
-    [Dependency] private readonly IClientPreferencesManager _prefs = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IFileDialogManager _dialog = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IResourceManager _res = default!;
-    [Dependency] private readonly JobRequirementsManager _jobReq = default!;
-    [Dependency] private readonly MarkingManager _marking = default!;
+    [Dependency] private IClientPreferencesManager _prefs = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IFileDialogManager _dialog = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IResourceManager _res = default!;
+    [Dependency] private JobRequirementsManager _jobReq = default!;
+    [Dependency] private MarkingManager _marking = default!;
 
     public readonly HumanoidProfileEditor Editor;
 

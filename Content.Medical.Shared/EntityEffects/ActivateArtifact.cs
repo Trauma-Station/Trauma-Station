@@ -16,9 +16,9 @@ public sealed partial class ActivateArtifact : EntityEffectBase<ActivateArtifact
         => null;
 }
 
-public sealed class ActivateArtifactEffectSystem : EntityEffectSystem<XenoArtifactComponent, ActivateArtifact>
+public sealed partial class ActivateArtifactEffectSystem : EntityEffectSystem<XenoArtifactComponent, ActivateArtifact>
 {
-    [Dependency] private readonly SharedXenoArtifactSystem _artifact = default!;
+    [Dependency] private SharedXenoArtifactSystem _artifact = default!;
 
     protected override void Effect(Entity<XenoArtifactComponent> ent, ref EntityEffectEvent<ActivateArtifact> args)
     {

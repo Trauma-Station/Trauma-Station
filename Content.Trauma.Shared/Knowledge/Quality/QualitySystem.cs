@@ -32,14 +32,14 @@ namespace Content.Trauma.Shared.Knowledge.Quality;
 /// <summary>
 /// Handles quality interactions for construction, projectiles, etc.
 /// </summary>
-public sealed class QualitySystem : EntitySystem
+public sealed partial class QualitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly EntityQuery<QualityComponent> _query = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityQuery<QualityComponent> _query = default!;
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
     private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";

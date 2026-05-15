@@ -19,10 +19,10 @@ namespace Content.Client.Options.UI.Tabs;
 public sealed partial class MiscTab : Control
 {
     // <Trauma>
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    //[Dependency] private readonly IPlayerManager _playerManager = default!; // no longer used
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    //[Dependency] private IPlayerManager _playerManager = default!; // no longer used
     // </Trauma>
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public MiscTab()
     {

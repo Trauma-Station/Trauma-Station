@@ -5,9 +5,9 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Trauma.Shared.Wizard.SlipOnCollide;
 
-public sealed class SlipOnCollideSystem : EntitySystem
+public sealed partial class SlipOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SlipperySystem _slippery = default!;
+    [Dependency] private SlipperySystem _slippery = default!;
 
     public override void Initialize()
     {

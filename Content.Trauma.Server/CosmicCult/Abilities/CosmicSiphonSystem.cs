@@ -11,9 +11,9 @@ namespace Content.Trauma.Server.CosmicCult.Abilities;
 
 public sealed partial class CosmicSiphonSystem : SharedCosmicSiphonSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private IRobustRandom _random = default!;
     private readonly HashSet<Entity<PoweredLightComponent>> _lights = [];
 
     protected override void OnCosmicSiphonDoAfter(Entity<CosmicCultComponent> ent, ref EventCosmicSiphonDoAfter args)

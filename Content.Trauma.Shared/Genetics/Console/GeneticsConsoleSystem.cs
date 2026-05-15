@@ -20,22 +20,22 @@ namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly GeneticsDiskSystem _disk = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly MutatorSystem _mutator = default!;
-    [Dependency] private readonly ScannedGenomeSystem _genome = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityQuery<MaterialStorageComponent> _materialQuery = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private GeneticsDiskSystem _disk = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private MutatorSystem _mutator = default!;
+    [Dependency] private ScannedGenomeSystem _genome = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMaterialStorageSystem _material = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityQuery<MaterialStorageComponent> _materialQuery = default!;
 
     private StringBuilder _builder = new();
 

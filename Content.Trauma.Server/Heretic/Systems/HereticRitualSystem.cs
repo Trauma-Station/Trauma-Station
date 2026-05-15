@@ -14,16 +14,16 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class HereticRitualSystem : SharedHereticRitualSystem
+public sealed partial class HereticRitualSystem : SharedHereticRitualSystem
 {
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IChatManager _chat = default!;
 
-    [Dependency] private readonly EntityQuery<CommandStaffComponent> _commandQuery = default!;
-    [Dependency] private readonly EntityQuery<SecurityStaffComponent> _secQuery = default!;
+    [Dependency] private EntityQuery<CommandStaffComponent> _commandQuery = default!;
+    [Dependency] private EntityQuery<SecurityStaffComponent> _secQuery = default!;
 
     public override void Initialize()
     {

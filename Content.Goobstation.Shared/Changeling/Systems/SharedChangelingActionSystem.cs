@@ -8,9 +8,9 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
-public sealed class SharedChanglingActionSystem : EntitySystem
+public sealed partial class SharedChanglingActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<ChangelingIdentityComponent> _lingQuery;
 

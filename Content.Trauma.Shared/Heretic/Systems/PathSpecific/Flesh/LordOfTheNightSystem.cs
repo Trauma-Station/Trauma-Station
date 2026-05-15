@@ -25,25 +25,25 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Flesh;
 
-public sealed class LordOfTheNightSystem : EntitySystem
+public sealed partial class LordOfTheNightSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedSanguineStrikeSystem _lifesteal = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedTransformSystem _transfrm = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effect = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private WoundSystem _wound = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedSanguineStrikeSystem _lifesteal = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedTransformSystem _transfrm = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private SharedEntityEffectsSystem _effect = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
-    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
+    [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _lookMobs = new();
 

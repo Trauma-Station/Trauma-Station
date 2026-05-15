@@ -8,4 +8,4 @@ namespace Content.Trauma.Common.Movement;
 /// For tile movement mobs, it will happen regardless because it has an actual definitive method of knowing when a tile has been moved to.
 /// </summary>
 [ByRefEvent]
-public readonly record struct FootStepEvent(EntityUid Mob);
+public readonly record struct FootStepEvent(EntityUid Mob, Angle WorldAngle);

@@ -10,8 +10,8 @@ namespace Content.Trauma.Server.FireControl;
 
 public sealed partial class FireControlSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsoleSystem = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ShuttleConsoleSystem _shuttleConsoleSystem = default!;
     private void InitializeConsole()
     {
         SubscribeLocalEvent<FireControlConsoleComponent, PowerChangedEvent>(OnPowerChanged);

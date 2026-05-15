@@ -10,7 +10,7 @@ using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Ghost;
 
-public sealed class GhostCharacterUIController : UIController
+public sealed partial class GhostCharacterUIController : UIController
 {
     [UISystemDependency] private readonly GhostCharacterSystem _character = default!;
 

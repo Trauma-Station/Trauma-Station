@@ -15,18 +15,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.HolographicProjector;
 
-public sealed class GenericFieldGeneratorSystem : EntitySystem
+public sealed partial class GenericFieldGeneratorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPointLightSystem _light = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _signal = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityQuery<GenericFieldGeneratorComponent> _genQuery = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedDeviceLinkSystem _signal = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<GenericFieldGeneratorComponent> _genQuery = default!;
 
     public override void Initialize()
     {

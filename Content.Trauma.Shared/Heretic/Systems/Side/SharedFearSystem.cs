@@ -14,14 +14,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
-public abstract class SharedFearSystem : EntitySystem
+public abstract partial class SharedFearSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
 
-    [Dependency] private readonly EntityQuery<VocalComponent> _vocalQuery = default!;
+    [Dependency] private EntityQuery<VocalComponent> _vocalQuery = default!;
 
     private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private readonly Regex _pattern = new("[a-zA-Z0-9]");

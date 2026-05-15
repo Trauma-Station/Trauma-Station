@@ -11,12 +11,12 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.EntityEffects;
 
-public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformComponent, TeleportRandomArea>
+public sealed partial class TeleportRandomAreaSystem : EntityEffectSystem<TransformComponent, TeleportRandomArea>
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     public const int Oxygen = (int) Gas.Oxygen;
 

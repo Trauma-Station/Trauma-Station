@@ -8,11 +8,11 @@ using Robust.Client.Player;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 
-public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables] private CosmicShopMenu? _menu;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     protected override void Open()
     {

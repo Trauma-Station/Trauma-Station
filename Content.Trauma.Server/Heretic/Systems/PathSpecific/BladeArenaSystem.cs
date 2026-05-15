@@ -39,35 +39,35 @@ namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 [ByRefEvent]
 public readonly record struct ArenaParticipantStatusChangedEvent(EntityUid Arena, bool Entered);
 
-public sealed class BladeArenaSystem : SharedBladeArenaSystem
+public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IChatManager _chatMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SanguineStrikeSystem _lifesteal = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IChatManager _chatMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private SanguineStrikeSystem _lifesteal = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private HereticSystem _heretic = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private readonly List<TileRef> _tilesToConvert = new();
     private readonly HashSet<Entity<AirtightComponent>> _intersecting = new();
 
-    [Dependency] private readonly EntityQuery<AirlockComponent> _airlockQuery = default!;
-    [Dependency] private readonly EntityQuery<BladeArenaDetachedComponent> _detachedQuery = default!;
+    [Dependency] private EntityQuery<AirlockComponent> _airlockQuery = default!;
+    [Dependency] private EntityQuery<BladeArenaDetachedComponent> _detachedQuery = default!;
 
     public override void Initialize()
     {

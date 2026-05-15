@@ -18,18 +18,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
-public sealed class SharedStarTouchSystem : EntitySystem
+public sealed partial class SharedStarTouchSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedStarGazerSystem _starGazer = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
-    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
-    [Dependency] private readonly BlindableSystem _blind = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedStarGazerSystem _starGazer = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private TouchSpellSystem _touchSpell = default!;
+    [Dependency] private BlindableSystem _blind = default!;
 
     public static readonly EntProtoId StarTouchStatusEffect = "StatusEffectStarTouched";
     public static readonly EntProtoId DrowsinessStatusEffect = "StatusEffectDrowsiness";

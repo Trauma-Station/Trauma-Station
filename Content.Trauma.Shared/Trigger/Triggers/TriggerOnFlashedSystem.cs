@@ -9,10 +9,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Trigger.Triggers;
 
-public sealed class TriggerOnFlashedSystem : EntitySystem
+public sealed partial class TriggerOnFlashedSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

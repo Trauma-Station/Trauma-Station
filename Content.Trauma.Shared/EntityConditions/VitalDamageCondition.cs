@@ -26,7 +26,7 @@ public sealed partial class VitalDamageCondition : EntityConditionBase<VitalDama
 
 public sealed partial class VitalDamageConditionSystem : EntityConditionSystem<DamageableComponent, VitalDamageCondition>
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
 
     protected override void Condition(Entity<DamageableComponent> ent, ref EntityConditionEvent<VitalDamageCondition> args)
     {

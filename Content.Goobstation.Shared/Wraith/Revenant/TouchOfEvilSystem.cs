@@ -12,13 +12,13 @@ using Content.Trauma.Common.Grab;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;
 
-public sealed class TouchOfEvilSystem : EntitySystem
+public sealed partial class TouchOfEvilSystem : EntitySystem
 {
-    [Dependency] private readonly CommonGrabThrownSystem _throw = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private CommonGrabThrownSystem _throw = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -18,8 +18,8 @@ public sealed partial class SpawnFriendly : BaseSpawnEntityEntityEffect<SpawnFri
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class SpawnFriendlyEffectSystem : EntityEffectSystem<TransformComponent, SpawnFriendly>
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<SpawnFriendly> args)
     {

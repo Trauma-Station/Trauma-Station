@@ -8,12 +8,12 @@ using Content.Shared.Throwing;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class ShootOrganActionSystem : EntitySystem
+public sealed partial class ShootOrganActionSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedPolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedPolymorphSystem _polymorph = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     public override void Initialize()
     {

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Replay;
 using Content.Replay.Menu;
 using JetBrains.Annotations;
@@ -14,12 +9,12 @@ using Robust.Shared.ContentPack;
 namespace Content.Replay;
 
 [UsedImplicitly]
-public sealed class EntryPoint : GameClient
+public sealed partial class EntryPoint : GameClient
 {
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly IStateManager _stateMan = default!;
-    [Dependency] private readonly ContentReplayPlaybackManager _contentReplayPlaybackMan = default!;
-    [Dependency] private readonly IClientConGroupController _conGrp = default!;
+    [Dependency] private IBaseClient _client = default!;
+    [Dependency] private IStateManager _stateMan = default!;
+    [Dependency] private ContentReplayPlaybackManager _contentReplayPlaybackMan = default!;
+    [Dependency] private IClientConGroupController _conGrp = default!;
 
     public override void Init()
     {

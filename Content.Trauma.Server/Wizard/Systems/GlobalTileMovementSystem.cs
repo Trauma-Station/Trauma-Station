@@ -18,14 +18,14 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class GlobalTileMovementSystem : EntitySystem
+public sealed partial class GlobalTileMovementSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IAdminLogManager _log = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly WizardRuleSystem _wizardRuleSystem = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IAdminLogManager _log = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private WizardRuleSystem _wizardRuleSystem = default!;
     private static readonly EntProtoId GameRule = "GlobalTileMovement";
 
     public override void Initialize()

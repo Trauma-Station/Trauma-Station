@@ -11,7 +11,7 @@ namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 [GenerateTypedNameReferences]
 public sealed partial class InfluenceUIBox : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly SpriteSystem _sprite;
 

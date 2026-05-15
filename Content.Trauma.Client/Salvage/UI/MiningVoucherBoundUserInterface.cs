@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Salvage.UI;
 
-public sealed class MiningVoucherBoundUserInterface : BoundUserInterface
+public sealed partial class MiningVoucherBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private MiningVoucherMenu? _menu;

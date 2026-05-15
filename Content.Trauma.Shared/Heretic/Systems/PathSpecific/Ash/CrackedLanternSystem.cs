@@ -23,25 +23,25 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
-public sealed class CrackedLanternSystem : EntitySystem
+public sealed partial class CrackedLanternSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly NpcFactionSystem _npc = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private NpcFactionSystem _npc = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
-    [Dependency] private readonly EntityQuery<CrackedLanternComponent> _lanterQuery = default!;
+    [Dependency] private EntityQuery<CrackedLanternComponent> _lanterQuery = default!;
 
     private readonly HashSet<Entity<NpcFactionMemberComponent>> _targets = new();
 

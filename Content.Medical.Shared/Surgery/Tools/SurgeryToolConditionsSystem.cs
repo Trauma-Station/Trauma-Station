@@ -14,9 +14,9 @@ namespace Content.Medical.Shared.Surgery.Tools;
 /// <summary>
 ///  Prevents using esword or welder when off, laser when no charges.
 /// </summary>
-public sealed class SurgeryToolConditionsSystem : EntitySystem
+public sealed partial class SurgeryToolConditionsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
