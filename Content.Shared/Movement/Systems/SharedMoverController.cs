@@ -249,15 +249,18 @@ public abstract partial class SharedMoverController : VirtualController
         float accel;
         Vector2 wishDir;
         var velocity = physicsComponent.LinearVelocity;
-        // <Trauma> - logic to prevent sprint backpedalling unless its 0G in which case who cares
-        var allowSprint = true;
+        // <Trauma> - logic to slow down backpedalling unless its 0G in which case who cares
+        var speedScale = 1f;
         if (!weightless)
         {
             var limit = moveSpeedComponent?.BackwardsAngle
                 ?? MovementSpeedModifierComponent.DefaultBackwardsAngle;
+            var backwardsScale = moveSpeedComponent?.BackwardsSpeed
+                ?? MovementSpeedModifierComponent.DefaultBackwardsSpeed;
             var worldRot = _transform.GetWorldRotation(xform);
             var velAngle = velocity.ToWorldAngle();
-            allowSprint = Math.Abs(Angle.ShortestDistance(velAngle, worldRot).Theta) < limit.Theta;
+            if (Math.Abs(Angle.ShortestDistance(velAngle, worldRot).Theta) > limit.Theta)
+                speedScale = backwardsScale;
         }
         // </Trauma>
 
@@ -340,8 +343,7 @@ public abstract partial class SharedMoverController : VirtualController
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
 
-            wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed,
-                allowSprint); // Trauma
+            wishDir = AssertValidWish(mover, walkSpeed * speedScale, sprintSpeed * speedScale); // Trauma - scale them by speedScale
 
             if (wishDir != Vector2.Zero)
             {
@@ -692,11 +694,9 @@ public abstract partial class SharedMoverController : VirtualController
         return sound != null;
     }
 
-    private Vector2 AssertValidWish(InputMoverComponent mover, float walkSpeed, float sprintSpeed,
-        bool allowSprint = true) // Trauma
+    private Vector2 AssertValidWish(InputMoverComponent mover, float walkSpeed, float sprintSpeed)
     {
-        var (walkDir, sprintDir) = GetVelocityInput(mover,
-            allowSprint); // Trauma
+        var (walkDir, sprintDir) = GetVelocityInput(mover);
 
         var total = walkDir * walkSpeed + sprintDir * sprintSpeed;
 
