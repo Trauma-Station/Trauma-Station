@@ -1228,14 +1228,6 @@
   maxLimit: 1
   loadouts:
   - CombatEnvirogloves
-
-- type: loadoutGroup
-  id: HeadofSecurityGloves
-  name: loadout-group-head-of-security-gloves
-  minLimit: 1
-  maxLimit: 1
-  loadouts:
-  - GorillaGloves
 # Brigmedic
 
 - type: loadoutGroup
