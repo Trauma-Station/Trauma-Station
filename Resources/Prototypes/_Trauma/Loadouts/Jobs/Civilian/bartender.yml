@@ -11,7 +11,7 @@
   id: BartenderShotgunDoubleBarrelled
   storage:
     back: # i know it doesnt go on the back i dont care
-    - WeaponShotgunDoubleBarreledRubber
+    - WeaponShotgunDoubleBarreledRubber # ITS BEANBAG I SWEAR ITS JUST SHITCODE OF THE FATHER
 
 - type: loadout
   id: BartenderShotgunDoubleBarrelledEngraved
@@ -20,4 +20,4 @@
     proto: SeniorBarTrauma
   storage:
     back:
-    - WeaponShotgunDoubleBarreledEngravedRubber
+    - WeaponShotgunDoubleBarreledEngravedBeanbag
