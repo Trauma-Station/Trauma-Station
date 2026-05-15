@@ -12,17 +12,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
-public sealed class MadnessMaskSystem : EntitySystem
+public sealed partial class MadnessMaskSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedFearSystem _fear = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedFearSystem _fear = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _targets = new();
 

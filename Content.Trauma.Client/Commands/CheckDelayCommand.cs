@@ -6,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Trauma.Client.Commands;
 
 [AnyCommand]
-public sealed class CheckDelayCommand : IConsoleCommand
+public sealed partial class CheckDelayCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public string Command => "checkdelay";
     public string Description => "Measures bidirectional delay to/from the server";

@@ -4,6 +4,17 @@
   name: camera
   description: A surveillance camera. It's watching you. Kinda.
   components:
+  # <Trauma>
+  - type: ContainerFill
+    containers:
+      board: [ CameraElectronics ]
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: RequireProjectileTarget
+  - type: Viewcone
+    baseConeAngle: 360 # prevent camera vision being messed up
+  # </Trauma>
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -97,15 +108,6 @@
               collection: MetalBreak
               params:
                 volume: -8
-  # <Goob>
-  - type: ContainerFill
-    containers:
-      board: [ CameraElectronics ]
-  - type: ContainerContainer
-    containers:
-      board: !type:Container
-  - type: RequireProjectileTarget
-  # </Goob>
   placement:
     mode: SnapgridCenter
     snap:

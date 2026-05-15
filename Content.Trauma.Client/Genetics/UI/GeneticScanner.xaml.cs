@@ -14,7 +14,7 @@ namespace Content.Trauma.Client.Genetics.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GeneticScanner : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private readonly ScannedGenomeSystem _genome;
 
     public event Action? OnScan;

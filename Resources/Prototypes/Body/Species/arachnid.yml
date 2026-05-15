@@ -238,6 +238,11 @@
 - type: entity
   parent: [ OrganArachnidVisual, OrganBaseEyes, OrganArachnidInternal ]
   id: OrganArachnidEyes
+  # <Trauma>
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.25 # 8 eyes are better than 2
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseTongue, OrganArachnidInternal ]

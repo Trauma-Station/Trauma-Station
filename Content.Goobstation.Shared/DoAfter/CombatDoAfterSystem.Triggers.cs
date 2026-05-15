@@ -14,7 +14,7 @@ namespace Content.Goobstation.Shared.DoAfter;
 
 public sealed partial class CombatDoAfterSystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     private void InitializeTriggers()
     {

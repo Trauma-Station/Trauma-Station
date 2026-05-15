@@ -6,7 +6,7 @@ using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Implants.Systems;
 
-public sealed class ImplantGrantCollectiveMindSystem : EntitySystem
+public sealed partial class ImplantGrantCollectiveMindSystem : EntitySystem
 {
     public override void Initialize()
     {

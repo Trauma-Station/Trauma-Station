@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Content.Trauma.Shared.Speech;
 
-public sealed class CharactersAccentSystem : EntitySystem
+public sealed partial class CharactersAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private StringBuilder _builder = new();
 

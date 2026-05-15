@@ -5,9 +5,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 50
-      MartialArtCorporateJudo: 50
+      MeleeKnowledge: 60
+      ShootingKnowledge: 60
 
 - type: entity
   parent: BaseSkillChip
@@ -50,7 +49,6 @@
     skills:
       MeleeKnowledge: 26
       ShootingKnowledge: 26
-      MartialArtKravMaga: 50 # strongest IDF soldier
       WeaponsKnowledge: 50
       FirstAidKnowledge: 26 # Brigmedic isn't real
       SurgeryKnowledge: 20

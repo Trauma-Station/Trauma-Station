@@ -8,10 +8,10 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.EntityEffects.Station;
 
-public sealed class StationRandomOverflowJobSystem : EntityEffectSystem<StationJobsComponent, StationRandomOverflowJob>
+public sealed partial class StationRandomOverflowJobSystem : EntityEffectSystem<StationJobsComponent, StationRandomOverflowJob>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationJobsSystem _stationJobs = default!;
 
     protected override void Effect(Entity<StationJobsComponent> ent, ref EntityEffectEvent<StationRandomOverflowJob> args)
     {

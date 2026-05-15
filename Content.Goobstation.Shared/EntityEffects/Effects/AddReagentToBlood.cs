@@ -31,9 +31,9 @@ public sealed partial class AddReagentToBlood : EntityEffectBase<AddReagentToBlo
     }
 }
 
-public sealed class AddReagentToBloodEffectSystem : EntityEffectSystem<BloodstreamComponent, AddReagentToBlood>
+public sealed partial class AddReagentToBloodEffectSystem : EntityEffectSystem<BloodstreamComponent, AddReagentToBlood>
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     protected override void Effect(Entity<BloodstreamComponent> ent, ref EntityEffectEvent<AddReagentToBlood> args)
     {

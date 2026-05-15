@@ -31,30 +31,30 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
-    [Dependency] private readonly BackStabSystem _backStab = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedHereticCurseSystem _curse = default!;
-    [Dependency] private readonly FleshGraspSystem _fleshGrasp = default!;
-    [Dependency] private readonly SharedStoreSystem _store = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private HereticRitualEffectSystem _effects = default!;
+    [Dependency] private BackStabSystem _backStab = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private SharedMansusGraspSystem _grasp = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedHereticCurseSystem _curse = default!;
+    [Dependency] private FleshGraspSystem _fleshGrasp = default!;
+    [Dependency] private SharedStoreSystem _store = default!;
 
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
-    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
 
     public static SoundSpecifier RitualSuccessSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");

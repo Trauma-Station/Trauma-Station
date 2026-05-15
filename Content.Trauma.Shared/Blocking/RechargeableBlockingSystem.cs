@@ -14,10 +14,10 @@ using Content.Trauma.Common.Blocking;
 namespace Content.Trauma.Shared.Blocking;
 
 // TODO: move this to shared goobmod and predict
-public sealed class RechargeableBlockingSystem : EntitySystem
+public sealed partial class RechargeableBlockingSystem : EntitySystem
 {
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
 
     public override void Initialize()
     {

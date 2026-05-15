@@ -16,7 +16,7 @@ namespace Content.Lavaland.Server.Procedural.Systems;
 
 public sealed partial class LavalandSystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public bool SetupLavalandPlanet(
         ProtoId<LavalandMapPrototype> mapProto,

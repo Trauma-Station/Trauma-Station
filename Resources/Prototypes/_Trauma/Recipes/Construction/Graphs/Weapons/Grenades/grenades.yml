@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2022 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: constructionGraph
   id: SyndicateMinibombGraph
   graph:
@@ -19,10 +11,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: MinibombTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: MiniBombPayload
-          amount: 1
 
   - node: emptyCase
     entity: SyndieMiniBombModular
@@ -105,10 +95,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: MinibombTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: FakeMiniBombPayload
-          amount: 1
 
   - node: emptyCase
     entity: SyndieTrickyBombModular
@@ -191,10 +179,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: WhiteHoleTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: WhiteHolePayload
-          amount: 1
 
   - node: emptyCase
     entity: WhiteholeGrenadeModular
@@ -277,10 +263,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: NuclearOptionPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: NuclearGrenadeModular
@@ -363,10 +347,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: SupermatterGrenadePayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: SupermatterTimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: SupermatterGrenadeModular
@@ -449,10 +431,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: StingerPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: StingerGrenadeModular
@@ -535,10 +515,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: TearGasPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: TearGasGrenadeModular
@@ -621,10 +599,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: SarinGasPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: SarinGasGrenadeModular
@@ -707,10 +683,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: IncendiaryPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: IncendiaryGrenadeModular
@@ -793,10 +767,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: HolyPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: HolyTimer
-          amount: 1
 
   - node: emptyCase
     entity: HolyHandGrenadeModular
@@ -879,10 +851,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: ClusterBombPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: ClusterGrenadeModular
@@ -965,10 +935,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: ClusterBangPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: ClusterBangModular
@@ -1051,10 +1019,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: AirPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: AirGrenadeModular
@@ -1137,10 +1103,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: FoamPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: GrenadeFoamDartModular
@@ -1223,10 +1187,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: EMPPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: EmpGrenadeModular
@@ -1309,10 +1271,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: BeePayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: BeeGrenadeModular
@@ -1395,10 +1355,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: StrongShrapnelPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: ShrapnelGrenadeModular
@@ -1481,10 +1439,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: FlashPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: FlashbangModular
@@ -1567,10 +1523,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: FakeMiniBombPayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: TrickGrenadeModular
@@ -1653,16 +1607,12 @@
         completed:
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: LubePayload2
-          amount: 1
         - !type:SpawnPrototype
           prototype: LubePayload1
-          amount: 1
         - !type:SpawnPrototype
           prototype: ChemicalPayload
-          amount: 1
 
   - node: emptyCase
     entity: LubeGrenadeModular
@@ -1745,16 +1695,12 @@
         completed:
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: GluePayload2
-          amount: 1
         - !type:SpawnPrototype
           prototype: GluePayload1
-          amount: 1
         - !type:SpawnPrototype
           prototype: ChemicalPayload
-          amount: 1
 
   - node: emptyCase
     entity: GlueGrenadeModular
@@ -1837,16 +1783,12 @@
         completed:
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: CleanPayload1
-          amount: 1
         - !type:SpawnPrototype
           prototype: CleanPayload2
-          amount: 1
         - !type:SpawnPrototype
           prototype: ChemicalPayload
-          amount: 1
 
   - node: emptyCase
     entity: CleanerGrenadeModular
@@ -1929,10 +1871,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: SmokePayload
-          amount: 1
 
   - node: emptyCase
     entity: SmokeGrenadeModular
@@ -2015,16 +1955,12 @@
         completed:
         - !type:SpawnPrototype
           prototype: SilentTimerTrigger
-          amount: 1
         - !type:SpawnPrototype
           prototype: FoamPayload1
-          amount: 1
         - !type:SpawnPrototype
           prototype: FoamPayload2
-          amount: 1
         - !type:SpawnPrototype
           prototype: ChemicalPayload
-          amount: 1
 
   - node: emptyCase
     entity: MetalFoamGrenadeModular
@@ -2107,10 +2043,8 @@
         completed:
         - !type:SpawnPrototype
           prototype: ExplosivePayload
-          amount: 1
         - !type:SpawnPrototype
           prototype: TimerTrigger
-          amount: 1
 
   - node: emptyCase
     entity: ExplosiveGrenadeModular

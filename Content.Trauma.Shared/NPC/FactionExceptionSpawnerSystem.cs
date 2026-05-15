@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.NPC;
 /// <summary>
 /// Makes timed spawners with <see cref="FactionExceptionComponent"/> copy ignored mobs to its spawned entities.
 /// </summary>
-public sealed class FactionExceptionSpawnerSystem : EntitySystem
+public sealed partial class FactionExceptionSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     public override void Initialize()
     {

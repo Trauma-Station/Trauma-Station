@@ -16,13 +16,13 @@ namespace Content.Goobstation.Shared.Clothing.Systems;
 /// <summary>
 /// Used for sealable clothing that requires power to work, aka modsuits.
 /// </summary>
-public sealed class PoweredSealableClothingSystem : EntitySystem
+public sealed partial class PoweredSealableClothingSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

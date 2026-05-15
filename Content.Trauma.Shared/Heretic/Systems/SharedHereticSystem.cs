@@ -24,25 +24,25 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedHereticSystem : EntitySystem
+public abstract partial class SharedHereticSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] protected readonly ISharedPlayerManager PlayerMan = default!;
-    [Dependency] protected readonly StatusEffectsSystem Status = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] protected ISharedPlayerManager PlayerMan = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
 
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
 
-    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     private bool _ascensionRequiresObjectives;
 

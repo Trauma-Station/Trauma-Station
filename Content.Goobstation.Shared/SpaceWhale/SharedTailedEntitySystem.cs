@@ -12,15 +12,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.SpaceWhale;
 
-public abstract class SharedTailedEntitySystem : EntitySystem
+public abstract partial class SharedTailedEntitySystem : EntitySystem
 {
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
 
-    [Dependency] protected readonly EntityQuery<TailedEntitySegmentComponent> SegmentQuery = default!;
+    [Dependency] protected EntityQuery<TailedEntitySegmentComponent> SegmentQuery = default!;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
 
     private readonly HashSet<Entity<TailedEntitySegmentComponent>> _lookSegments = new();
 

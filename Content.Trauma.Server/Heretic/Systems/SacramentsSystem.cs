@@ -8,11 +8,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class SacramentsSystem : SharedSacramentsSystem
+public sealed partial class SacramentsSystem : SharedSacramentsSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

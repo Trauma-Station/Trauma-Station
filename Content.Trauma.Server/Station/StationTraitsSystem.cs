@@ -12,13 +12,13 @@ using System.Text;
 
 namespace Content.Trauma.Server.Station;
 
-public sealed class StationTraitsSystem : EntitySystem
+public sealed partial class StationTraitsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     /// <summary>
     /// All trait prototypes organized per group.

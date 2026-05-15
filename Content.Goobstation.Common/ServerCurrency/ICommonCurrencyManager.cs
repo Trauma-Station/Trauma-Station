@@ -76,4 +76,9 @@ public interface ICommonCurrencyManager
     /// <remarks>Null implies the client is calling this</remarks>
     /// <returns>The players balance.</returns>
     public int GetBalance(NetUserId? userId = null);
+
+    /// <summary>
+    /// Wipe the entire server's currency balances...
+    /// </summary>
+    public Task Wipe();
 }

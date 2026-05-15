@@ -14,8 +14,8 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed partial class DamageableSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <summary>
     /// TargetBodyPart values that aren't a combination of others.

@@ -8,9 +8,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.LightDetection;
 
-public sealed class LightDetectionDamageSystem : SharedLightDetectionDamageSystem
+public sealed partial class LightDetectionDamageSystem : SharedLightDetectionDamageSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

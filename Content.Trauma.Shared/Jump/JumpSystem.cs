@@ -10,15 +10,15 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Trauma.Shared.Jump;
 
-public sealed class JumpSystem : EntitySystem
+public sealed partial class JumpSystem : EntitySystem
 {
-    [Dependency] private readonly ThrownItemSystem _throwingItem = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private ThrownItemSystem _throwingItem = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

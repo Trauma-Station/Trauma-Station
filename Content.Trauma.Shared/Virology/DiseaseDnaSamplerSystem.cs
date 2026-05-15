@@ -17,14 +17,14 @@ namespace Content.Trauma.Shared.Virology;
 /// <summary>
 /// Handles everything related to the syndicate DNA sampler.
 /// </summary>
-public sealed class DiseaseDnaSamplerSystem : EntitySystem
+public sealed partial class DiseaseDnaSamplerSystem : EntitySystem
 {
-    [Dependency] private readonly DnaTargetDiseaseSystem _target = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private DnaTargetDiseaseSystem _target = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

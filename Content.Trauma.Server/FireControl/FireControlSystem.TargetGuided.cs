@@ -13,7 +13,7 @@ namespace Content.Trauma.Server.FireControl;
 
 public sealed partial class FireControlSystem
 {
-    [Dependency] private readonly TargetGuidedSystem _targetGuided = null!;
+    [Dependency] private TargetGuidedSystem _targetGuided = null!;
 
     /// <summary>
     /// List of active guided missiles that need cursor position updates

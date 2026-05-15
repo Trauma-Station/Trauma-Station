@@ -21,9 +21,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.FireControl.UI;
 
-public sealed class FireControlNavControl : BaseShuttleControl
+public sealed partial class FireControlNavControl : BaseShuttleControl
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private IMapManager _mapManager = default!;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;

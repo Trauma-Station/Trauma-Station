@@ -10,10 +10,10 @@ namespace Content.Trauma.Shared.Salvage;
 /// <summary>
 /// Predicts fulton effect spawn/despawn and adding a status effect while fultoned.
 /// </summary>
-public sealed class FultonEffectSystem : EntitySystem
+public sealed partial class FultonEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     public static readonly EntProtoId StatusEffect = "BeingFultonedStatusEffect";
 

@@ -7,11 +7,11 @@ using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Shared.Factory;
 
-public sealed class AutomationSystem : EntitySystem
+public sealed partial class AutomationSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
 
     private List<EntProtoId> _automatable = new();
     /// <summary>

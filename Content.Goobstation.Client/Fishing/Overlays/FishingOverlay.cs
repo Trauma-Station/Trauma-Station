@@ -10,9 +10,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Fishing.Overlays;
 
-public sealed class FishingOverlay : Overlay
+public sealed partial class FishingOverlay : Overlay
 {
-    private readonly IEntityManager _entManager;
+    private readonly IEntityManager _ent;
     private readonly IPlayerManager _player;
     private readonly SharedTransformSystem _transform;
     private readonly ProgressColorSystem _progressColor;
@@ -32,21 +32,21 @@ public sealed class FishingOverlay : Overlay
 
     public FishingOverlay(IEntityManager entManager, IPlayerManager player)
     {
-        _entManager = entManager;
+        _ent = entManager;
         _player = player;
-        _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _progressColor = _entManager.System<ProgressColorSystem>();
+        _transform = _ent.System<SharedTransformSystem>();
+        _progressColor = _ent.System<ProgressColorSystem>();
 
         // Load the progress bar texture
         var sprite = new SpriteSpecifier.Rsi(new("/Textures/_Goobstation/Interface/Misc/fish_bar.rsi"), "icon");
-        _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
+        _barTexture = _ent.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
         var handle = args.WorldHandle;
         var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
-        var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
+        var xformQuery = _ent.GetEntityQuery<TransformComponent>();
 
         const float scale = 1f;
         var scaleMatrix = Matrix3Helpers.CreateScale(new Vector2(scale, scale));
@@ -65,7 +65,7 @@ public sealed class FishingOverlay : Overlay
         var barWidth = scaledTextureSize.X * BarWidthFraction;
 
         // Iterate through all entities with ActiveFisherComponent
-        var enumerator = _entManager.AllEntityQueryEnumerator<ActiveFisherComponent, SpriteComponent, TransformComponent>();
+        var enumerator = _ent.AllEntityQueryEnumerator<ActiveFisherComponent, SpriteComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
             // Skip if the entity is not on the current map, has invalid progress, or is not the local player

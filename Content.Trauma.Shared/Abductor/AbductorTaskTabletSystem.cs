@@ -12,14 +12,14 @@ namespace Content.Trauma.Shared.Abductor;
 /// <summary>
 /// Handles all interactions with the task tablet.
 /// </summary>
-public sealed class AbductorTaskTabletSystem : EntitySystem
+public sealed partial class AbductorTaskTabletSystem : EntitySystem
 {
-    [Dependency] private readonly AbductorTaskSystem _task = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private AbductorTaskSystem _task = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

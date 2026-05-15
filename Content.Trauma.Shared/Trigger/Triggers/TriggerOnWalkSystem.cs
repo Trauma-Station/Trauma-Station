@@ -5,9 +5,9 @@ using Content.Shared.Trigger.Systems;
 
 namespace Content.Trauma.Shared.Trigger.Triggers;
 
-public sealed class TriggerOnWalkSystem : EntitySystem
+public sealed partial class TriggerOnWalkSystem : EntitySystem
 {
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

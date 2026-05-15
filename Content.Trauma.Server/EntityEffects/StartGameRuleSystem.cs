@@ -8,10 +8,10 @@ using Content.Trauma.Shared.EntityEffects;
 
 namespace Content.Trauma.Server.EntityEffects;
 
-public sealed class StartGameRuleSystem : EntityEffectSystem<MetaDataComponent, StartGameRule>
+public sealed partial class StartGameRuleSystem : EntityEffectSystem<MetaDataComponent, StartGameRule>
 {
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<StartGameRule> args)
     {

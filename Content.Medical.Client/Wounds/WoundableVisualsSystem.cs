@@ -20,12 +20,12 @@ namespace Content.Medical.Client.Wounds;
 /// <summary>
 /// Handles visual representation of wounds and damage on body parts
 /// </summary>
-public sealed class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsComponent>
+public sealed partial class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsComponent>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private EntityQuery<VisualOrganComponent> _visualQuery;
 

@@ -11,12 +11,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Cybernetics;
 
-public sealed class CyberneticsSystem : EntitySystem
+public sealed partial class CyberneticsSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

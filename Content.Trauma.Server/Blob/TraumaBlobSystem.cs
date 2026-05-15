@@ -9,9 +9,9 @@ using Content.Trauma.Shared.Language.Events;
 
 namespace Content.Trauma.Server.Blob;
 
-public sealed class TraumaBlobSystem : EntitySystem
+public sealed partial class TraumaBlobSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private LanguageSystem _language = default!;
     private static readonly ProtoId<LanguagePrototype> BlobLang = "Blob";
 
     public override void Initialize()

@@ -2,7 +2,7 @@
 
 namespace Content.Goobstation.Shared.Bloodtrak;
 
-public abstract class SharedBloodtrakSystem : EntitySystem
+public abstract partial class SharedBloodtrakSystem : EntitySystem
 {
 
     /// <summary>

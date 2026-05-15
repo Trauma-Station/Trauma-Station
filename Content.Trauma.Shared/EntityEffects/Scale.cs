@@ -21,9 +21,9 @@ public sealed partial class Scale : EntityEffectBase<Scale>
         => Loc.GetString("entity-effect-guidebook-scale-entity", ("chance", Probability), ("x", Multiplier.X), ("y", Multiplier.Y));
 }
 
-public sealed class ScaleEffectSystem : EntityEffectSystem<TransformComponent, Scale>
+public sealed partial class ScaleEffectSystem : EntityEffectSystem<TransformComponent, Scale>
 {
-    [Dependency] private readonly SharedScaleVisualsSystem _scale = default!;
+    [Dependency] private SharedScaleVisualsSystem _scale = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<Scale> args)
     {

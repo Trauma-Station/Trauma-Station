@@ -26,13 +26,13 @@ namespace Content.Trauma.Server.CosmicCult;
 
 public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     private readonly SoundSpecifier _levelupReadySound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ascendant_noise.ogg");
     private readonly SoundSpecifier _levelupSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/tier_up.ogg");

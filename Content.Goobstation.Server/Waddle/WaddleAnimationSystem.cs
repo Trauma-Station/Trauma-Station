@@ -4,4 +4,4 @@ using Content.Goobstation.Shared.Waddle;
 
 namespace Content.Goobstation.Server.Waddle;
 
-public sealed class WaddleAnimationSystem : SharedWaddleAnimationSystem;
+public sealed partial class WaddleAnimationSystem : SharedWaddleAnimationSystem;
