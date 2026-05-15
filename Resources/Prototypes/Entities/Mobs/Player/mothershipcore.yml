@@ -254,7 +254,6 @@
     - RobotTalk
   - type: Viewcone
     baseConeAngle: 360
-
   # </Trauma>
 
 - type: entity
