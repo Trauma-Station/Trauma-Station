@@ -3,6 +3,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Contraband;
+using Content.Server.Chat.Systems;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
@@ -33,6 +34,7 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     private EntityQuery<MobStateComponent> _mobQuery = default!;
     private EntityQuery<AntagCardComponent> _cardQuery = default!;
+    private EntityQuery<CriminalRecordComponent> _criminalQuery = default!;
 
 
     /// <summary>
@@ -56,10 +58,10 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     /// <summary>
     /// The sound to play when it finds a target
     /// </summary>
-    [DataField]
-    public SoundCollectionSpecifier? TargetFoundSound;
+    [DataField(required: true)]
+    public SoundCollectionSpecifier TargetFoundSound;
 
-    private HashSet<Entity<CriminalRecordComponent>> _entities = new();
+    private HashSet<EntityUid> _entities = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -73,6 +75,7 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
         _cuffableQuery = _entMan.GetEntityQuery<CuffableComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
         _cardQuery = _entMan.GetEntityQuery<AntagCardComponent>();
+        _criminalQuery = _entMan.GetEntityQuery<CriminalRecordComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard, CancellationToken cancelToken)
@@ -83,7 +86,7 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
         var range = 12f;
 
         _entities.Clear();
-        _lookup.GetEntitiesInRange(ownerCoords, range, _entities);
+        _entities = _lookup.GetEntitiesInRange(ownerCoords, range);
 
         bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
@@ -93,20 +96,17 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
             if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
                 continue;
 
-            if (!isEmagged)
-            {
-                if (entity.Comp.StatusIcon != CriminalStatus && _contra.FindContraband(entity.Owner).Count <= 0 && _card.TryGetIdCard(entity, out var idCard) && !_cardQuery.HasComp(idCard))
-                    continue;
-            }
-            else
-            {
-                if (entity.Comp.StatusIcon == CriminalStatus || _contra.FindContraband(entity.Owner).Count > 0 || !_card.TryGetIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard))
-                    continue;
-            }
+            bool isCriminal = (_criminalQuery.TryComp(entity, out var comp) || comp?.StatusIcon == CriminalStatus);
+            bool hasContra = _contra.FindContraband(entity).Count > 0;
+            bool isBadId = !_card.TryGetIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard);
+
+            if (!isEmagged ^ (isCriminal || hasContra || isBadId))
+                continue;
 
             // Is threat brought to order
             if (_cuffableQuery.TryComp(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
                 continue;
+
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range
             var pathRange = SharedInteractionSystem.InteractionRange - 1f;
@@ -115,9 +115,7 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
             if (path.Result != PathResult.Path)
                 continue;
 
-            if (TargetFoundSound != null &&
-                (!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entMan) ||
-                 oldTarget != entity.Owner))
+            if ((!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entMan) || oldTarget != entity))
             {
                 var targetFoundSound = _audio.ResolveSound(TargetFoundSound);
                 _audio.PlayPvs(targetFoundSound, owner);
@@ -125,7 +123,7 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
 
             return (true, new Dictionary<string, object>()
             {
-                {TargetKey, entity.Owner},
+                {TargetKey, entity},
                 {TargetMoveKey, _entMan.GetComponent<TransformComponent>(entity).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });

@@ -13,6 +13,7 @@ public sealed partial class WandskySystem : EntitySystem
 
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
 
@@ -83,26 +84,36 @@ public sealed partial class WandskySystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (args.Entity is { } targetEntity && HasComp<WaypointComponent>(targetEntity))
-        {
-            _popupSystem.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
+        var items = _lookup.GetEntitiesInRange(args.Target, 0.5f, LookupFlags.All);
 
-            if (!ent.Comp.Waypoints.Contains(targetEntity))
-                return;
-
-            ent.Comp.Waypoints.Remove(targetEntity);
-            QueueDel(targetEntity);
-        }
-        else
+        if (items is { } targetEntities)
         {
-            if (_net.IsServer)
+            foreach (var targetEntity in targetEntities)
             {
-                var waypointEntity = Spawn(ent.Comp.WaypointEntityUid, args.Target);
-                ent.Comp.Waypoints.Add(waypointEntity);
+                if (!HasComp<WaypointComponent>(targetEntity))
+                    continue;
+
+                if (!ent.Comp.Waypoints.Contains(targetEntity))
+                    return;
+
+                _popupSystem.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
+
+                if (_net.IsServer)
+                {
+                    ent.Comp.Waypoints.Remove(targetEntity);
+                    QueueDel(targetEntity);
+                }
+                Dirty(ent);
+                return;
             }
-            _popupSystem.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
         }
 
+        if (_net.IsServer)
+        {
+            var waypointEntity = Spawn(ent.Comp.WaypointEntityUid, args.Target);
+            ent.Comp.Waypoints.Add(waypointEntity);
+        }
+        _popupSystem.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
         Dirty(ent);
     }
 
@@ -116,15 +127,16 @@ public sealed partial class WandskySystem : EntitySystem
             _popupSystem.PopupClient("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
             return;
         }
-
-        waypoints.RemoveWhere(waypoint =>
+        if (_net.IsServer)
         {
-            if (!Exists(waypoint))
-                return false;
-            QueueDel(waypoint);
-            return true;
-        });
-
+            waypoints.RemoveWhere(waypoint =>
+            {
+                if (!Exists(waypoint))
+                    return false;
+                QueueDel(waypoint);
+                return true;
+            });
+        }
         Dirty(ent);
         _popupSystem.PopupClient($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
     }

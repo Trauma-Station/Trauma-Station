@@ -4,39 +4,38 @@
     - tasks:
         - !type:HTNCompoundTask
           task: ArrestWantedNearbyCompound
-    - tasks:
-      - !type:HTNCompoundTask
-        task: IdleCompound
     # - tasks:
     #     - !type:HTNCompoundTask
     #       task: SecbotPatrolCompound
     # - tasks:
     #     - !type:HTNCompoundTask
     #       task: RandomWalkCompound
+    - tasks:
+      - !type:HTNCompoundTask
+        task: IdleCompound
 
 # - type: htnCompound
-#   id: RandomWalkCompound
+#   id: SecbotPatrolCompound
 #   branches:
 #     - tasks:
 #         - !type:HTNPrimitiveTask
-#           operator: !type:PickRandomCoordinateOperator
-#             radius: 10
-#             targetKey: RandomTarget
+#           operator: !type:PickPatrolCoordinateOperator
+#             targetMoveKey: TargetCoordinates
 #         - !type:HTNPrimitiveTask
 #           operator: !type:MoveToOperator
-#             targetKey: RandomTarget
+#             targetKey: TargetCoordinates
 
 - type: htnCompound
   id: ArrestWantedNearbyCompound
   branches:
     - tasks:
         - !type:HTNPrimitiveTask
-          operator: !type:PickNearbyWantedOperator
+          operator: !type:PickNearbyTargetOperator
             targetKey: Target
             targetMoveKey: TargetCoordinates
             criminalStatus: SecurityIconHostile
             targetFoundSound: !type:SoundCollectionSpecifier
-            collection: Ed209TargetFound
+              collection: Ed209TargetFound
 
         - !type:HTNPrimitiveTask
           operator: !type:MoveToOperator
@@ -54,7 +53,7 @@
         - !type:TargetStunnedPrecondition
           stunned: true
           targetKey: Target
-        - !type:KeyExistsPrecondition
+        - !type:TargetKeyExistsPrecondition
           key: HandcuffItem
       tasks:
         - !type:HTNPrimitiveTask
@@ -72,6 +71,9 @@
         - !type:TargetStunnedPrecondition
           stunned: true
           targetKey: Target
+        - !type:TargetKeyExistsPrecondition
+          key: HandcuffItem
+          invert: true
       tasks:
         - !type:HTNPrimitiveTask
           operator: !type:SpawnHandcuffOperator
