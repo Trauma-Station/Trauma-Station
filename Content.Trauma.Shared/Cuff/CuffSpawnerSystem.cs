@@ -24,6 +24,7 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
 
         SubscribeLocalEvent<CuffSpawnerComponent, UserActivateInWorldEvent>(OnInteract);
         SubscribeLocalEvent<CuffSpawnerComponent, CuffSpawnerDoAfterEvent>(OnCuff);
+        SubscribeLocalEvent<CuffSpawnerComponent, DoAfterAttemptEvent<CuffSpawnerDoAfterEvent>>(OnWait);
     }
 
     private void OnInteract(Entity<CuffSpawnerComponent> beepsky, ref UserActivateInWorldEvent args)
@@ -31,20 +32,29 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
         if (!CheckCuffs(beepsky!, args.Target, true))
             return;
 
+        var target = args.Target;
+
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, 2f, new CuffSpawnerDoAfterEvent(), args.User, args.Target)
         {
             BlockDuplicate = true,
             BreakOnMove = true,
+            ExtraCheck = () => CheckCuffs(beepsky.Owner, target)
         });
     }
 
-    private void OnCuff(EntityUid uid, CuffSpawnerComponent comp, ref CuffSpawnerDoAfterEvent args)
+    private void OnCuff(Entity<CuffSpawnerComponent> ent, ref CuffSpawnerDoAfterEvent args)
     {
         if (args.Cancelled)
             return;
 
         if (args.Target is { } target)
-            TryCuff(uid, target);
+            TryCuff(ent.Owner, target);
+    }
+
+    private void OnWait(Entity<CuffSpawnerComponent> ent, ref DoAfterAttemptEvent<CuffSpawnerDoAfterEvent> args)
+    {
+        if (args.Event.Target is not { } target || !CheckCuffs(args.Event.User, target))
+            args.Cancel();
     }
 
     /// <summary>

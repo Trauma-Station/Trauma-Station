@@ -86,6 +86,8 @@
     - Bot
     - Unimplantable
   - type: CuffSpawner
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3
 
 - type: entity
   parent: MobSecuritron

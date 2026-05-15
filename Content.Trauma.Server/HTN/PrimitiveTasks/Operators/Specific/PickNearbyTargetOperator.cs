@@ -86,6 +86,8 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
         var ownerCoords = owner.ToCoordinates();
+        blackboard.TryGetValue<EntityUid>(TargetKey, out var targetEnt, _entMan);
+        var oldEntity = targetEnt;
 
         var range = 12f;
 
@@ -94,51 +96,66 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
 
         bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
-        foreach (var entity in _entities)
+        if (targetEnt.Valid)
         {
-            if (entity == owner)
-                continue;
-
-            // Is target a living target?
-            if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
-                continue;
-
-            bool isCriminal = (_criminalQuery.TryComp(entity, out var comp) || comp?.StatusIcon == CriminalStatus);
-            bool hasContra = _contra.FindContraband(entity).Count > 0;
-            bool isBadId = (!_card.TryFindIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard)) && !_tag.HasTag(entity, BotTag);
-
-            if (!isEmagged ^ (isCriminal || hasContra || isBadId))
-                continue;
-
-            // Is threat brought to order
-            if (_cuffableQuery.TryComp(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
-                continue;
-
-
-            //Needed to make sure it doesn't sometimes stop right outside it's interaction range
-            var pathRange = SharedInteractionSystem.InteractionRange - 1f;
-            var path = await _pathfinding.GetPath(owner, entity, pathRange, cancelToken);
-
-            if (path.Result != PathResult.Path)
-                continue;
-
-            if ((!blackboard.TryGetValue<EntityUid>(TargetKey, out var oldTarget, _entMan) || oldTarget != entity))
-            {
-                var targetFoundSound = _audio.ResolveSound(TargetFoundSound);
-                _audio.PlayPvs(targetFoundSound, owner);
-            }
-
-            return (true, new Dictionary<string, object>()
-            {
-                {TargetKey, entity},
-                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(entity).Coordinates},
-                {NPCBlackboard.PathfindKey, path},
-            });
+            var targetCoords = _entMan.GetComponent<TransformComponent>(targetEnt).Coordinates;
+            if (!BeatUp(targetEnt, owner, isEmagged) || !ownerCoords.InRange(_entMan, targetCoords, range))
+                targetEnt = EntityUid.Invalid;
         }
 
-        return (false, new Dictionary<string, object>()
+        if (!targetEnt.Valid)
         {
-            {TargetKey, EntityUid.Invalid},
+            var entities = _lookup.GetEntitiesInRange(ownerCoords, range);
+            foreach (var entity in entities)
+            {
+                if (!BeatUp(entity, owner, isEmagged))
+                    continue;
+
+                targetEnt = entity;
+                break;
+            }
+        }
+
+        if (!targetEnt.Valid)
+            return (false, null);
+
+        var pathRange = SharedInteractionSystem.InteractionRange - 1f;
+        var path = await _pathfinding.GetPath(owner, targetEnt, pathRange, cancelToken);
+
+        if (path.Result != PathResult.Path)
+            return (false, null);
+
+        if (oldEntity != targetEnt)
+            _audio.PlayPvs(TargetFoundSound, owner);
+
+        return (true, new Dictionary<string, object>()
+        {
+            {TargetKey, targetEnt},
+            {TargetMoveKey, _entMan.GetComponent<TransformComponent>(targetEnt).Coordinates},
+            {NPCBlackboard.PathfindKey, path},
         });
+    }
+
+    private bool BeatUp(EntityUid entity, EntityUid beepsky, bool isEmagged)
+    {
+        if (entity == beepsky)
+            return false;
+
+        // Is target a living target?
+        if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
+            return false;
+
+        bool isCriminal = (_criminalQuery.TryComp(entity, out var comp) || comp?.StatusIcon == CriminalStatus);
+        bool hasContra = _contra.FindContraband(entity).Count > 0;
+        bool isBadId = (!_card.TryFindIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard)) && !_tag.HasTag(entity, BotTag);
+
+        if (!isEmagged ^ (isCriminal || hasContra || isBadId))
+            return false;
+
+        // Is threat brought to order
+        if (_cuffableQuery.TryComp(entity, out var cuffable) && cuffable.CuffedHandCount > 0)
+            return false;
+
+        return true;
     }
 }

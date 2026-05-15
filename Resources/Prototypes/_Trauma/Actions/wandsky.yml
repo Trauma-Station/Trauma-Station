@@ -4,8 +4,9 @@
   parent: BaseAction
   description: Toggle patrol on and off.
   components:
-  - type: InstantAction
+  - type: Action
     icon: Interface/AdminNotes/message.png
+  - type: InstantAction
     event: !type:TogglePatrolActionEvent
 
 - type: entity
@@ -31,6 +32,7 @@
   parent: BaseAction
   description: Disables patrol and clears all existing waypoints.
   components:
-  - type: InstantAction
+  - type: Action
     icon: Interface/AdminNotes/high_button.png
+  - type: InstantAction
     event: !type:ClearWaypointsActionEvent
