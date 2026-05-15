@@ -17,7 +17,7 @@
   id: BartenderShotgunDoubleBarrelledEngraved
   effects:
   - !type:GroupLoadoutEffect
-    proto: BartenderEngravedShotty
+    proto: SeniorBarTrauma
   storage:
     back:
     - WeaponShotgunDoubleBarreledEngravedRubber
