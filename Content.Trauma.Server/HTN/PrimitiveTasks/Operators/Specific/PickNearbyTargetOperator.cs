@@ -8,6 +8,7 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Access.Systems;
+using Content.Shared.Chat;
 using Content.Shared.Coordinates;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Emag.Components;
@@ -16,6 +17,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Security.Components;
 using Content.Shared.StatusIcon;
+using Content.Shared.Tag;
 using Content.Trauma.Shared.Card;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -26,6 +28,7 @@ namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 public sealed partial class PickNearbyTargetOperator : HTNOperator
 {
     [Dependency] private IEntityManager _entMan = default!;
+    private TagSystem _tag = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
     private SharedContrabandDetectorSystem _contra = default!;
@@ -62,10 +65,12 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     public SoundCollectionSpecifier TargetFoundSound;
 
     private HashSet<EntityUid> _entities = new();
+    private readonly static ProtoId<TagPrototype> BotTag = "Bot";
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
+        _tag = sysManager.GetEntitySystem<TagSystem>();
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
         _contra = sysManager.GetEntitySystem<SharedContrabandDetectorSystem>();
@@ -92,13 +97,16 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
 
         foreach (var entity in _entities)
         {
+            if (entity == owner)
+                continue;
+
             // Is target a living target?
             if (!_mobQuery.TryComp(entity, out var state) || state.CurrentState != MobState.Alive)
                 continue;
 
             bool isCriminal = (_criminalQuery.TryComp(entity, out var comp) || comp?.StatusIcon == CriminalStatus);
             bool hasContra = _contra.FindContraband(entity).Count > 0;
-            bool isBadId = !_card.TryGetIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard);
+            bool isBadId = (!_card.TryFindIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard)) && !_tag.HasTag(entity, BotTag);
 
             if (!isEmagged ^ (isCriminal || hasContra || isBadId))
                 continue;

@@ -53,32 +53,16 @@
         - !type:TargetStunnedPrecondition
           stunned: true
           targetKey: Target
-        - !type:TargetKeyExistsPrecondition
-          key: HandcuffItem
       tasks:
         - !type:HTNPrimitiveTask
-          operator: !type:ForceHandcuffOperator
+          operator: !type:InteractWithOperator
+            expectDoAfter: true
             targetKey: Target
-            handcuffKey: HandcuffItem
-            targetArrestedSoundKey: TargetArrestedSound
         - !type:HTNPrimitiveTask
           operator: !type:SendRadioOperator
             message: securitron-target-arrested
             radioChannel: Security
             key: Target
-
-    - preconditions:
-        - !type:TargetStunnedPrecondition
-          stunned: true
-          targetKey: Target
-        - !type:TargetKeyExistsPrecondition
-          key: HandcuffItem
-          invert: true
-      tasks:
-        - !type:HTNPrimitiveTask
-          operator: !type:SpawnHandcuffOperator
-            handcuffKey: HandcuffItem
-            handcuffPrototype: Handcuffs
 
     - preconditions:
         - !type:TargetStunnedPrecondition
