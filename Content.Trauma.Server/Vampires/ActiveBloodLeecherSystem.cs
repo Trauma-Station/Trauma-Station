@@ -7,7 +7,7 @@ namespace Content.Trauma.Server.Vampires;
 
 public sealed class ActiveBloodLeecherSystem : SharedActiveBloodLeecherSystem
 {
-    [Dependency] private readonly BeamSystem _beam = default!;
+    [Dependency] private BeamSystem _beam = default!;
 
     protected override void CreateBeam(EntityUid user, EntityUid target, EntProtoId beamProto)
     {

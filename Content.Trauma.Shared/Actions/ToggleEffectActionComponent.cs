@@ -10,7 +10,6 @@ namespace Content.Trauma.Shared.Actions;
 /// Component that runs effects on toggle and off toggle for actions.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class ToggleEffectActionComponent : Component
 {
     /// <summary>
@@ -20,7 +19,7 @@ public sealed partial class ToggleEffectActionComponent : Component
     public EntityEffect[]? OnToggle;
 
     /// <summary>
-    /// Conditions to run before toggling.
+    /// Conditions to run before toggling the <see cref="OnToggle"/> effects.
     /// </summary>
     [DataField]
     public EntityCondition[]? OnToggleConditions;
@@ -30,12 +29,6 @@ public sealed partial class ToggleEffectActionComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntityEffect[] OffToggle = default!;
-
-    /// <summary>
-    /// Defines whether we are in off/on state.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool Toggled;
 }
 
 public sealed partial class EffectToggleActionEvent : InstantActionEvent;

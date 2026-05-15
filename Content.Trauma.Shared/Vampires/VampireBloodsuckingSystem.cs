@@ -20,19 +20,19 @@ namespace Content.Trauma.Shared.Vampires;
 
 public sealed class VampireBloodsuckingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly IngestionSystem _ingestion = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    //[Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly EntityQuery<TargetingComponent> _targetingQuery = default!;
-    [Dependency] private readonly EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
-    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    //[Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private EntityQuery<TargetingComponent> _targetingQuery = default!;
+    [Dependency] private EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
 
     private static readonly EntProtoId BiteEffect = "WeaponArcBite";                                   // TODO: This sprite is ass, change it to custom one
     private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg"); // TODO: This sound is ass, change it to custom one

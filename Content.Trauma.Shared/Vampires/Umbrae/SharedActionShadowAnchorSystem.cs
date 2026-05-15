@@ -10,11 +10,11 @@ namespace Content.Trauma.Shared.Vampires.Umbrae;
 
 public abstract class SharedActionShadowAnchorSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     private static readonly EntProtoId ShadowAnchor = "ShadowAnchor";
 

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
@@ -43,17 +42,15 @@ public sealed partial class EffectActionSystem : EntitySystem
 
     private void OnToggle(Entity<ToggleEffectActionComponent> ent, ref EffectToggleActionEvent args)
     {
-        ent.Comp.Toggled = !ent.Comp.Toggled;
-        args.Toggle = ent.Comp.Toggled;
+        args.Toggle = !args.Toggle;
         Dirty(ent);
 
-        if (ent.Comp.Toggled && ent.Comp.OnToggle is { } onToggleEffects)
+        if (args.Toggle && ent.Comp.OnToggle is { } onToggleEffects)
         {
             if (!_conditions.TryConditions(args.Performer, ent.Comp.OnToggleConditions))
             {
                 // Reset here sicne we didn't pass the on toggle conditions
-                ent.Comp.Toggled = !ent.Comp.Toggled;
-                args.Toggle = ent.Comp.Toggled;
+                args.Toggle = !args.Toggle;
                 Dirty(ent);
                 return;
             }

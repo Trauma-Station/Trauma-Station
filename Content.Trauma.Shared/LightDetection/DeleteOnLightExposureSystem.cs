@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.LightDetection;
 
 public sealed class DeleteOnLightExposureSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

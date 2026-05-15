@@ -45,7 +45,7 @@ public sealed partial class HealthChangeBasedOnDamage : EntityEffectBase<HealthC
 
 public sealed class HealthChangeDamageScaleEffectSystem : EntityEffectSystem<DamageableComponent, HealthChangeBasedOnDamage>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     protected override void Effect(Entity<DamageableComponent> ent, ref EntityEffectEvent<HealthChangeBasedOnDamage> args)
     {

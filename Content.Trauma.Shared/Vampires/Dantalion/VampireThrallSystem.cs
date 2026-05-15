@@ -11,11 +11,11 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 /// </summary>
 public sealed class VampireThrallSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
-    // [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly EntityQuery<VampireThrallsComponent> _thrallsQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    // [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EntityQuery<VampireThrallsComponent> _thrallsQuery = default!;
 
     public override void Initialize()
     {

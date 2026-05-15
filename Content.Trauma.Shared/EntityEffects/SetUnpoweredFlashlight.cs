@@ -26,7 +26,7 @@ public sealed partial class SetUnpoweredFlashlight : EntityEffectBase<SetUnpower
 
 public sealed class SetUnpoweredFlashlightEffectSystem : EntityEffectSystem<UnpoweredFlashlightComponent, SetUnpoweredFlashlight>
 {
-    [Dependency] private readonly UnpoweredFlashlightSystem _unpowered = default!;
+    [Dependency] private UnpoweredFlashlightSystem _unpowered = default!;
 
     protected override void Effect(Entity<UnpoweredFlashlightComponent> entity, ref EntityEffectEvent<SetUnpoweredFlashlight> args)
     {

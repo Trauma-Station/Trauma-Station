@@ -10,9 +10,9 @@ namespace Content.Trauma.Client.StatusEffects;
 
 public sealed class HysteriaStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private HysteriaOverlay _overlay = default!;
 

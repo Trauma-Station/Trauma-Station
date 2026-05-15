@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.StatusEffects;
 
 public sealed class PreventPushStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     public override void Initialize()
     {

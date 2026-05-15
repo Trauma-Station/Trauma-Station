@@ -11,7 +11,7 @@ namespace Content.Trauma.Client.ListEntitySelector;
 [GenerateTypedNameReferences]
 public sealed partial class ListEntitySelectorWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public Action<EntityUid>? OnPressEntity;
 

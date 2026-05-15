@@ -13,7 +13,7 @@ public sealed partial class Uncuff : EntityEffectBase<Uncuff>;
 
 public sealed class UncuffEffectSystem : EntityEffectSystem<CuffableComponent, Uncuff>
 {
-    [Dependency] private readonly SharedCuffableSystem _cuff = default!;
+    [Dependency] private SharedCuffableSystem _cuff = default!;
 
     protected override void Effect(Entity<CuffableComponent> ent, ref EntityEffectEvent<Uncuff> args)
     {

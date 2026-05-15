@@ -1,16 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Stealth;
+using Content.Shared.Stealth.Components;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
 public sealed class DarknessStealthStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     public override void Initialize()
     {
@@ -43,13 +45,19 @@ public sealed class DarknessStealthStatusEffectSystem : EntitySystem
 
     private void OnApplied(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
     {
-        ent.Comp.StatusOwner = args.Target;
+        var target = args.Target;
+        EnsureComp<LightDetectionComponent>(target);
+        EnsureComp<StealthComponent>(target);
+
+        ent.Comp.StatusOwner = target;
         Dirty(ent);
     }
 
     private void OnRemove(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        _stealth.SetVisibility(args.Target, 1f);
+        var target = args.Target;
+        RemCompDeferred<LightDetectionComponent>(target);
+        RemCompDeferred<StealthComponent>(target);
 
         ent.Comp.StatusOwner = null;
         Dirty(ent);

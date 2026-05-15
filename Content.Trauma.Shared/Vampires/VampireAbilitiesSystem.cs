@@ -8,11 +8,11 @@ namespace Content.Trauma.Shared.Vampires;
 
 public sealed class VampireAbilitiesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private readonly VampireSystem _vampire = default!;
-    [Dependency] private readonly MobClassSystem _mobClass = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private VampireSystem _vampire = default!;
+    [Dependency] private MobClassSystem _mobClass = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     /// <summary>
     /// List of every vampire ability prototype.

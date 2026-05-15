@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Chaplain;
 
 public sealed class NullificationSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<NullificationComponent> _nullificationQuery = default!;
+    [Dependency] private EntityQuery<NullificationComponent> _nullificationQuery = default!;
 
     /// <summary>
     /// Adjusts nullification on the target.

@@ -20,7 +20,7 @@ public sealed partial class RemoveStatusEffects : EntityEffectBase<RemoveStatusE
 
 public sealed class RemoveStatusEffectsEffectSystem : EntityEffectSystem<StatusEffectContainerComponent, RemoveStatusEffects>
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     protected override void Effect(Entity<StatusEffectContainerComponent> ent, ref EntityEffectEvent<RemoveStatusEffects> args)
     {

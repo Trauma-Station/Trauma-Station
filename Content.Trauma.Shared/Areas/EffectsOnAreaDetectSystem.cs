@@ -6,8 +6,8 @@ namespace Content.Trauma.Shared.Areas;
 
 public sealed class EffectsOnAreaDetectSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

@@ -10,8 +10,8 @@ namespace Content.Trauma.Shared.StatusEffects;
 
 public sealed class ProjectileModifyStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<ProjectileComponent> _projQuery = default!;
-    [Dependency] private readonly EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
+    [Dependency] private EntityQuery<ProjectileComponent> _projQuery = default!;
+    [Dependency] private EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
 
     public override void Initialize()
     {

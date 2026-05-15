@@ -19,7 +19,7 @@
     range: 8
     effect: !type:NestedEffect
       proto: EternalDarknessTemp
-  - !type:RelayNearby # TODO: make status effect instead
+  - !type:RelayNearby
     compName: Hands
     range: 8
     effect: !type:NestedEffect

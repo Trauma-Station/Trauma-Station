@@ -16,9 +16,9 @@ namespace Content.Trauma.Client.MobClass;
 [GenerateTypedNameReferences]
 public sealed partial class MobClassSelectorWindow : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IResourceCache _resCache = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IResourceCache _resCache = default!;
 
     private SpriteSystem _sprite;
 

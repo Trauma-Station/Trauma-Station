@@ -21,10 +21,10 @@ namespace Content.Trauma.Shared.Vampires;
 /// </summary>
 public sealed class VampireGlareSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<StunnedComponent> _stunnedQuery = default!;
     [Dependency] private EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
 

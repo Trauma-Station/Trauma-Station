@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 public sealed class ActionBloodBarrierSystem : EntitySystem
 {
-    // [Dependency] private readonly SharedTransformSystem _transform = default!;
+    // [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

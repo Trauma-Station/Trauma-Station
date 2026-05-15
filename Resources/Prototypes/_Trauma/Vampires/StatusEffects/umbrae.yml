@@ -1,6 +1,6 @@
 - type: entity
   parent: MobStatusEffectBase
-  id: CloakOfDarknessStatsuEffect # Could run this with entity effects, but since it's a toggle, this is more optimized
+  id: CloakOfDarknessStatusEffect
   name: cloak of darkness
   components:
   - type: StatusEffectAlert
@@ -17,20 +17,14 @@
         Heat: 1.1
         Shock: 1.1
   - type: RemoveOnIgniteStatusEffect
-    effectProto: CloakOfDarknessStatsuEffect
+    effectProto: CloakOfDarknessStatusEffect
   - type: StatusEffectEffectsApply
-    effectsOnApply:
-    - !type:AddComponents
-      components:
-      - type: LightDetection
-      - type: Stealth
     effectsOnRemoval:
-    - !type:RemoveComponents
-      components:
-      - type: LightDetection
-      - type: Stealth
-    - !type:ChangeEffectToggleAction # ensures we don't start in offToggle state
-      action: ActionCloakDarkness
+    - !type:RelayActions # sets the toggle to false so when it gets removed it doesn't start in "On" state
+      whitelist:
+        tags:
+        - CloakOfDarkness
+      effect: !type:SetToggleAction
 
 - type: entity
   parent: MobStatusEffectBase

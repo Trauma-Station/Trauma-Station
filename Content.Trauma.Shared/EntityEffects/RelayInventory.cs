@@ -25,9 +25,9 @@ public sealed partial class RelayInventory : EntityEffectBase<RelayInventory>
 
 public sealed class RelayInventoryEffectSystem : EntityEffectSystem<InventoryComponent, RelayInventory>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     protected override void Effect(Entity<InventoryComponent> ent, ref EntityEffectEvent<RelayInventory> args)
     {

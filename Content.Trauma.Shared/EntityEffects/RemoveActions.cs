@@ -20,7 +20,7 @@ public sealed partial class RemoveActions : EntityEffectBase<RemoveActions>
 
 public sealed class ReplaceActionEffectSystem : EntityEffectSystem<ActionsComponent, RemoveActions>
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     protected override void Effect(Entity<ActionsComponent> ent, ref EntityEffectEvent<RemoveActions> args)
     {

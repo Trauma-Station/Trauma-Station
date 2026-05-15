@@ -7,8 +7,8 @@ namespace Content.Trauma.Server.EntityEffects;
 
 public sealed class SpawnShadowCloneEffectSystem : SharedSpawnShadowCloneEffectSystem
 {
-    [Dependency] private readonly VampireUmbraeSystem _umbrae = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private VampireUmbraeSystem _umbrae = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected override void SpawnShadowClones(EntityUid original, int amount)
     {

@@ -12,13 +12,13 @@ namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 public sealed class PredatorSensesSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedChatManager _chat = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
+    [Dependency] private ISharedChatManager _chat = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
 
     private HashSet<NetEntity> _drainable = new();
 

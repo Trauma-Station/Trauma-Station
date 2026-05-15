@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.StatusEffects;
 /// </summary>
 public sealed class RemoveOnIgniteStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     public override void Initialize()
     {

@@ -20,7 +20,7 @@ public sealed partial class ApplyNullification : EntityEffectBase<ApplyNullifica
 
 public sealed class ApplyNullificationEffectSystem : EntityEffectSystem<NullificationComponent, ApplyNullification>
 {
-    [Dependency] private readonly NullificationSystem _nullification = default!;
+    [Dependency] private NullificationSystem _nullification = default!;
 
     protected override void Effect(Entity<NullificationComponent> ent, ref EntityEffectEvent<ApplyNullification> args)
     {

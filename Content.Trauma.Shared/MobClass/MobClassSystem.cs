@@ -11,11 +11,11 @@ namespace Content.Trauma.Shared.MobClass;
 /// </summary>
 public sealed class MobClassSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly EntityQuery<MobClassComponent> _mobClassQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private EntityQuery<MobClassComponent> _mobClassQuery = default!;
 
     public override void Initialize()
     {

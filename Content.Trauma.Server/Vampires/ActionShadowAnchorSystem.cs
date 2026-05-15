@@ -7,7 +7,7 @@ namespace Content.Trauma.Server.Vampires;
 
 public sealed class ActionShadowAnchorSystem : SharedActionShadowAnchorSystem
 {
-    [Dependency] private readonly VampireUmbraeSystem _umbrae = default!;
+    [Dependency] private VampireUmbraeSystem _umbrae = default!;
 
     protected override void SpawnShadowClone(EntityUid uid, MapCoordinates coordinates)
     {

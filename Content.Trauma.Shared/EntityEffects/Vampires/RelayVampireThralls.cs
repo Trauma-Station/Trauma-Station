@@ -22,9 +22,9 @@ public sealed partial class RelayVampireThralls : EntityEffectBase<RelayVampireT
 
 public sealed class RelayVampireThrallsEffectSystem : EntityEffectSystem<VampireThrallsComponent, RelayVampireThralls>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     private HashSet<Entity<VampireThrallComponent>> _thralls = new();
 

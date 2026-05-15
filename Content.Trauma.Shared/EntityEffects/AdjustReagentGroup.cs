@@ -29,8 +29,8 @@ public sealed partial class AdjustReagentGroup : EntityEffectBase<AdjustReagentG
 
 public sealed class AdjustReagentGroupEffectSystem : EntityEffectSystem<SolutionComponent, AdjustReagentGroup>
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     protected override void Effect(Entity<SolutionComponent> ent, ref EntityEffectEvent<AdjustReagentGroup> args)
     {

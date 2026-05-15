@@ -9,7 +9,7 @@ namespace Content.Trauma.Client.ListEntitySelector;
 [UsedImplicitly]
 public sealed class ListEntitySelectorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private ListEntitySelectorWindow? _window;
 

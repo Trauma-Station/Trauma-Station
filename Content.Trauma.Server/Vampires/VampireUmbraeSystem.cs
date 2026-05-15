@@ -16,8 +16,8 @@ namespace Content.Trauma.Server.Vampires;
 /// </summary>
 public sealed class VampireUmbraeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly CloningSystem _cloning = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private CloningSystem _cloning = default!;
 
     /// <summary>
     /// Holds components required for the shadow clone (e.g. HTN, damage values).

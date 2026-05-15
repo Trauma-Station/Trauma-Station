@@ -10,12 +10,12 @@ namespace Content.Trauma.Shared.Vampires.Gargantua;
 
 public sealed class DesecratedDuelSystem : EntitySystem
 {
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ArenaCreationSystem _arena = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ArenaCreationSystem _arena = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

@@ -12,13 +12,13 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 public sealed class BloodBondSystem : EntitySystem
 {
     // Note: This system is too hardcoded design-wise but i cbf to think of how to make it more generic like the others
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly VampireSystem _vampire = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private VampireSystem _vampire = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private HashSet<Entity<VampireThrallComponent>> _thralls = new();
     private HashSet<Entity<BloodBondLinkedComponent>> _bloodLinked = new();

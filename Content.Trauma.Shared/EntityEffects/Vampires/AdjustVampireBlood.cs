@@ -16,7 +16,7 @@ public sealed partial class AdjustVampireBlood : EntityEffectBase<AdjustVampireB
 
 public sealed class AdjustVampireBloodEffectSystem : EntityEffectSystem<VampireComponent, AdjustVampireBlood>
 {
-    [Dependency] private readonly VampireSystem _vampire = default!;
+    [Dependency] private VampireSystem _vampire = default!;
 
     protected override void Effect(Entity<VampireComponent> entity, ref EntityEffectEvent<AdjustVampireBlood> args)
     {

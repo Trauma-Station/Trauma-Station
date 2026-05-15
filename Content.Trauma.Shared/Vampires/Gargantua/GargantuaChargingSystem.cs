@@ -8,8 +8,8 @@ namespace Content.Trauma.Shared.Vampires.Gargantua;
 
 public sealed class GargantuaChargingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

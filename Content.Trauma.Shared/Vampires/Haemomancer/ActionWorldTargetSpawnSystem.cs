@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 public sealed class ActionWorldTargetSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

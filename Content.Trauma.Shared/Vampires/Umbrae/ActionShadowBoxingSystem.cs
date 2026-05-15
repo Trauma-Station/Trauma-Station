@@ -9,10 +9,10 @@ namespace Content.Trauma.Shared.Vampires.Umbrae;
 
 public sealed class ActionShadowBoxingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private MobStateSystem _mob = default!;
 
     public override void Initialize()
     {

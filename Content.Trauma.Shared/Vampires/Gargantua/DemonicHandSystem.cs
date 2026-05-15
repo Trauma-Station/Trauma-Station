@@ -8,9 +8,9 @@ namespace Content.Trauma.Shared.Vampires.Gargantua;
 
 public sealed class DemonicHandSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
 
     public override void Initialize()
     {

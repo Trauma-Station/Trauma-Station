@@ -10,11 +10,11 @@ namespace Content.Trauma.Shared.Vampires.Gargantua;
 
 public sealed class VampirePryingSystem : EntitySystem
 {
-    [Dependency] private readonly VampireSystem _vampire = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly EntityQuery<PryingComponent> _pryingQuery = default!;
-    [Dependency] private readonly EntityQuery<AirlockComponent> _airlockQuery = default!;
+    [Dependency] private VampireSystem _vampire = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<PryingComponent> _pryingQuery = default!;
+    [Dependency] private EntityQuery<AirlockComponent> _airlockQuery = default!;
 
     public override void Initialize()
     {

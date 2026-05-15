@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 /// </summary>
 public sealed class SubspaceSwapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

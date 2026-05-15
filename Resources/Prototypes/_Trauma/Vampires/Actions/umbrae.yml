@@ -6,7 +6,7 @@
   description: Cloak of Darkness
   components:
   - type: Action
-    # useDelay: 20
+    useDelay: 1
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: vampire_cloak
@@ -22,7 +22,7 @@
       messages:
       - You start getting consumed!
     - !type:ModifyStatusEffect
-      effectProto: CloakOfDarknessStatsuEffect
+      effectProto: CloakOfDarknessStatusEffect
       time: null
       type: Add
     offToggle:
@@ -31,9 +31,12 @@
       messages:
       - You stop getting consumed!
     - !type:ModifyStatusEffect
-      effectProto: CloakOfDarknessStatsuEffect
+      effectProto: CloakOfDarknessStatusEffect
       time: null
       type: Remove
+  - type: Tag
+    tags:
+    - CloakOfDarkness
 
 # Shadow Snare
 - type: entity
