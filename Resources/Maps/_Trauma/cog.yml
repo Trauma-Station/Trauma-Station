@@ -148184,8 +148184,6 @@ entities:
       linkedPorts:
         25689:
         - - MaterialSilo
-          - FillbotAnyItem
-        - - MaterialSilo
           - MaterialSiloUtilizer
 - proto: Mattress
   entities:
