@@ -1,4 +1,6 @@
-﻿using Content.Shared.StatusEffectNew;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.StatusEffects;
