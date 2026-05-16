@@ -6,7 +6,7 @@ using Content.Trauma.Shared.MobClass;
 
 namespace Content.Trauma.Shared.Vampires;
 
-public sealed class VampireAbilitiesSystem : EntitySystem
+public sealed partial class VampireAbilitiesSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;

@@ -7,7 +7,7 @@ using Content.Trauma.Common.Throwing;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-public sealed class PreventPushStatusEffectSystem : EntitySystem
+public sealed partial class PreventPushStatusEffectSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 

@@ -8,7 +8,7 @@ using Content.Trauma.Common.Prying;
 
 namespace Content.Trauma.Shared.Vampires.Gargantua;
 
-public sealed class VampirePryingSystem : EntitySystem
+public sealed partial class VampirePryingSystem : EntitySystem
 {
     [Dependency] private VampireSystem _vampire = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

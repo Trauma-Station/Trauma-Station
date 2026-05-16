@@ -4,7 +4,7 @@ using Content.Trauma.Shared.Chaplain.Components;
 
 namespace Content.Trauma.Shared.Chaplain;
 
-public sealed class NullificationSystem : EntitySystem
+public sealed partial class NullificationSystem : EntitySystem
 {
     [Dependency] private EntityQuery<NullificationComponent> _nullificationQuery = default!;
 

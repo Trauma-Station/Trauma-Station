@@ -6,7 +6,7 @@ using Content.Shared.StatusEffectNew.Components;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-public sealed class PreventPullingStatusEffectSystem : EntitySystem
+public sealed partial class PreventPullingStatusEffectSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 

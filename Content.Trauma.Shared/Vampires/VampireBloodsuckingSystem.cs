@@ -18,7 +18,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Vampires;
 
-public sealed class VampireBloodsuckingSystem : EntitySystem
+public sealed partial class VampireBloodsuckingSystem : EntitySystem
 {
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private IngestionSystem _ingestion = default!;

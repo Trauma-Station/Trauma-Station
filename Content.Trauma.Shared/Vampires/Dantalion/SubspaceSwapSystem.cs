@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 /// <summary>
 /// Action that swaps your entity's positions with another one's.
 /// </summary>
-public sealed class SubspaceSwapSystem : EntitySystem
+public sealed partial class SubspaceSwapSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 

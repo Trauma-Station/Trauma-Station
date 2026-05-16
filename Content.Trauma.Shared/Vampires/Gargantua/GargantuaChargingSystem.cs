@@ -6,7 +6,7 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Trauma.Shared.Vampires.Gargantua;
 
-public sealed class GargantuaChargingSystem : EntitySystem
+public sealed partial class GargantuaChargingSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private INetManager _net = default!;

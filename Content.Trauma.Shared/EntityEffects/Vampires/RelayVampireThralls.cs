@@ -20,7 +20,7 @@ public sealed partial class RelayVampireThralls : EntityEffectBase<RelayVampireT
     public int? Range;
 }
 
-public sealed class RelayVampireThrallsEffectSystem : EntityEffectSystem<VampireThrallsComponent, RelayVampireThralls>
+public sealed partial class RelayVampireThrallsEffectSystem : EntityEffectSystem<VampireThrallsComponent, RelayVampireThralls>
 {
     [Dependency] private EffectDataSystem _data = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

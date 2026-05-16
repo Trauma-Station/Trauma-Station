@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 /// <summary>
 /// This handles anything related to Dantalion's thralling.
 /// </summary>
-public sealed class VampireThrallSystem : EntitySystem
+public sealed partial class VampireThrallSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 

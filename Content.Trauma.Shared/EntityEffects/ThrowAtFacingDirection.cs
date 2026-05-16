@@ -18,7 +18,7 @@ public sealed partial class ThrowAtFacingDirection : BaseThrowEntityEffect<Throw
     public float Distance = 5f;
 }
 
-public sealed class ThrowAtFacingDirectionEffectSystem : EntityEffectSystem<TransformComponent, ThrowAtFacingDirection>
+public sealed partial class ThrowAtFacingDirectionEffectSystem : EntityEffectSystem<TransformComponent, ThrowAtFacingDirection>
 {
     [Dependency] private ThrowingSystem _throwing = default!;
 

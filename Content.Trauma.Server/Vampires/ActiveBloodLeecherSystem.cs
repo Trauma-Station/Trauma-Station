@@ -5,7 +5,7 @@ using Content.Trauma.Shared.Vampires.Haemomancer;
 
 namespace Content.Trauma.Server.Vampires;
 
-public sealed class ActiveBloodLeecherSystem : SharedActiveBloodLeecherSystem
+public sealed partial class ActiveBloodLeecherSystem : SharedActiveBloodLeecherSystem
 {
     [Dependency] private BeamSystem _beam = default!;
 

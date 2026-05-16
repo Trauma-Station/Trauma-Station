@@ -6,7 +6,7 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class ActionConditionsSystem : EntitySystem
+public sealed partial class ActionConditionsSystem : EntitySystem
 {
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

@@ -58,7 +58,7 @@ public sealed partial class AnyNearbyCondition : EntityConditionBase<AnyNearbyCo
         => string.Empty;
 }
 
-public sealed class AnyNearbyConditionSystem : EntityConditionSystem<TransformComponent, AnyNearbyCondition>
+public sealed partial class AnyNearbyConditionSystem : EntityConditionSystem<TransformComponent, AnyNearbyCondition>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

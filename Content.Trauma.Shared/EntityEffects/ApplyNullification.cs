@@ -18,7 +18,7 @@ public sealed partial class ApplyNullification : EntityEffectBase<ApplyNullifica
     public int Amount;
 }
 
-public sealed class ApplyNullificationEffectSystem : EntityEffectSystem<NullificationComponent, ApplyNullification>
+public sealed partial class ApplyNullificationEffectSystem : EntityEffectSystem<NullificationComponent, ApplyNullification>
 {
     [Dependency] private NullificationSystem _nullification = default!;
 

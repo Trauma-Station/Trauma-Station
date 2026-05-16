@@ -27,7 +27,7 @@ public sealed partial class AdjustReagentGroup : EntityEffectBase<AdjustReagentG
     public string Group;
 }
 
-public sealed class AdjustReagentGroupEffectSystem : EntityEffectSystem<SolutionComponent, AdjustReagentGroup>
+public sealed partial class AdjustReagentGroupEffectSystem : EntityEffectSystem<SolutionComponent, AdjustReagentGroup>
 {
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private IPrototypeManager _proto = default!;

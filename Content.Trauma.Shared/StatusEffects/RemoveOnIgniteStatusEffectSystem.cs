@@ -6,10 +6,7 @@ using Content.Shared.StatusEffectNew.Components;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-/// <summary>
-/// This handles...
-/// </summary>
-public sealed class RemoveOnIgniteStatusEffectSystem : EntitySystem
+public sealed partial class RemoveOnIgniteStatusEffectSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _status = default!;
 

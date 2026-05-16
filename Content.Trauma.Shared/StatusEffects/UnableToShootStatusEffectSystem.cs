@@ -7,7 +7,7 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-public sealed class UnableToShootStatusEffectSystem : EntitySystem
+public sealed partial class UnableToShootStatusEffectSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

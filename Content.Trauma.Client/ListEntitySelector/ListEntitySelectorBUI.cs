@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 namespace Content.Trauma.Client.ListEntitySelector;
 
 [UsedImplicitly]
-public sealed class ListEntitySelectorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class ListEntitySelectorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private IEntityManager _entMan = default!;
 

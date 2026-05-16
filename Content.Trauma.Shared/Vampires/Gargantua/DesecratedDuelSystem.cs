@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Gargantua;
 
-public sealed class DesecratedDuelSystem : EntitySystem
+public sealed partial class DesecratedDuelSystem : EntitySystem
 {
     [Dependency] private ThrowingSystem _throw = default!;
     [Dependency] private IGameTiming _timing = default!;

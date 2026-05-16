@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Dantalion;
 
-public sealed class BloodBondSystem : EntitySystem
+public sealed partial class BloodBondSystem : EntitySystem
 {
     // Note: This system is too hardcoded design-wise but i cbf to think of how to make it more generic like the others
     [Dependency] private IGameTiming _timing = default!;

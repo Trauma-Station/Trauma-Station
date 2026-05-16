@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Umbrae;
 
-public sealed class ActionShadowBoxingSystem : EntitySystem
+public sealed partial class ActionShadowBoxingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ExamineSystemShared _examine = default!;

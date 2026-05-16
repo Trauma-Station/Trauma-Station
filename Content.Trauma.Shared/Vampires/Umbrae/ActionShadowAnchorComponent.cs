@@ -27,7 +27,7 @@ public sealed partial class ActionShadowAnchorComponent : Component
     /// When to start the fake recall.
     /// </summary>
     [DataField]
-    public TimeSpan FakeRecallDuration = TimeSpan.FromSeconds(5f); // TODO: 2 minutes
+    public TimeSpan FakeRecallDuration = TimeSpan.FromSeconds(5f);
 
     /// <summary>
     /// Effects that get applied to the user on fake recall.

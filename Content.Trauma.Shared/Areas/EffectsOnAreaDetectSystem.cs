@@ -4,7 +4,7 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Areas;
 
-public sealed class EffectsOnAreaDetectSystem : EntitySystem
+public sealed partial class EffectsOnAreaDetectSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;

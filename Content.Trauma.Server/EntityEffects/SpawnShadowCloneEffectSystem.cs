@@ -5,7 +5,7 @@ using Content.Trauma.Shared.EntityEffects.Vampires;
 
 namespace Content.Trauma.Server.EntityEffects;
 
-public sealed class SpawnShadowCloneEffectSystem : SharedSpawnShadowCloneEffectSystem
+public sealed partial class SpawnShadowCloneEffectSystem : SharedSpawnShadowCloneEffectSystem
 {
     [Dependency] private VampireUmbraeSystem _umbrae = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

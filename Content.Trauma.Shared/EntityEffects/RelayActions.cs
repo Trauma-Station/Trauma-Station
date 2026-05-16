@@ -29,7 +29,7 @@ public sealed partial class RelayActions : EntityEffectBase<RelayActions>
     public EntityWhitelist? Blacklist;
 }
 
-public sealed class RelayActionsEffectSystem : EntityEffectSystem<ActionsComponent, RelayActions>
+public sealed partial class RelayActionsEffectSystem : EntityEffectSystem<ActionsComponent, RelayActions>
 {
     [Dependency] private EffectDataSystem _data = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;

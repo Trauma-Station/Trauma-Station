@@ -8,7 +8,7 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Client.StatusEffects;
 
-public sealed class HysteriaStatusEffectSystem : EntitySystem
+public sealed partial class HysteriaStatusEffectSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IOverlayManager _overlayMan = default!;

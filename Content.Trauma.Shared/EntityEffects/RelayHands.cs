@@ -18,7 +18,7 @@ public sealed partial class RelayHands : EntityEffectBase<RelayHands>
     public EntityEffect Effect = default!;
 }
 
-public sealed class RelayHandsEffectSystem : EntityEffectSystem<HandsComponent, RelayHands>
+public sealed partial class RelayHandsEffectSystem : EntityEffectSystem<HandsComponent, RelayHands>
 {
     [Dependency] private EffectDataSystem _data = default!;
     [Dependency] private SharedHandsSystem _hands = default!;

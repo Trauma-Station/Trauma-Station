@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// </summary>
 public sealed partial class Uncuff : EntityEffectBase<Uncuff>;
 
-public sealed class UncuffEffectSystem : EntityEffectSystem<CuffableComponent, Uncuff>
+public sealed partial class UncuffEffectSystem : EntityEffectSystem<CuffableComponent, Uncuff>
 {
     [Dependency] private SharedCuffableSystem _cuff = default!;
 

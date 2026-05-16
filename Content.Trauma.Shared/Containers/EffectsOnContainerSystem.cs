@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Containers;
 
-public sealed class EffectsOnContainerSystem : EntitySystem
+public sealed partial class EffectsOnContainerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;

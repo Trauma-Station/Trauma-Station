@@ -24,7 +24,7 @@ public sealed partial class SetUnpoweredFlashlight : EntityEffectBase<SetUnpower
     public bool Quiet;
 }
 
-public sealed class SetUnpoweredFlashlightEffectSystem : EntityEffectSystem<UnpoweredFlashlightComponent, SetUnpoweredFlashlight>
+public sealed partial class SetUnpoweredFlashlightEffectSystem : EntityEffectSystem<UnpoweredFlashlightComponent, SetUnpoweredFlashlight>
 {
     [Dependency] private UnpoweredFlashlightSystem _unpowered = default!;
 

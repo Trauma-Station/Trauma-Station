@@ -43,7 +43,7 @@ public sealed partial class HealthChangeBasedOnDamage : EntityEffectBase<HealthC
     public SplitDamageBehavior SplitDamage = SplitDamageBehavior.SplitEnsureAllOrganic;
 }
 
-public sealed class HealthChangeDamageScaleEffectSystem : EntityEffectSystem<DamageableComponent, HealthChangeBasedOnDamage>
+public sealed partial class HealthChangeDamageScaleEffectSystem : EntityEffectSystem<DamageableComponent, HealthChangeBasedOnDamage>
 {
     [Dependency] private DamageableSystem _damageable = default!;
 

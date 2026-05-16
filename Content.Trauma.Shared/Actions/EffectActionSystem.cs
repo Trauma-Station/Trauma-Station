@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Actions;
 
@@ -42,21 +44,35 @@ public sealed partial class EffectActionSystem : EntitySystem
 
     private void OnToggle(Entity<ToggleEffectActionComponent> ent, ref EffectToggleActionEvent args)
     {
-        args.Toggle = !args.Toggle;
-        Dirty(ent);
-
-        if (args.Toggle && ent.Comp.OnToggle is { } onToggleEffects)
+        bool targetState = !ent.Comp.Toggled;
+        // Checking args.Toggle here for one reason. If we modify the toggle of the action via
+        // the method (SetToggled), it will use the Action's toggle variable,
+        // and this is the only way to access that.
+        if (targetState && ent.Comp.OnToggleConditions is { } conditions)
         {
-            if (!_conditions.TryConditions(args.Performer, ent.Comp.OnToggleConditions))
+            if (!_conditions.TryConditions(args.Performer, conditions))
             {
-                // Reset here sicne we didn't pass the on toggle conditions
-                args.Toggle = !args.Toggle;
-                Dirty(ent);
                 return;
             }
+        }
 
-            _effects.ApplyEffects(args.Performer, onToggleEffects);
-            args.Handled = true;
+        args.Handled = true;
+
+        // If you modify args.Toggle directly and use it to check the conditions,
+        // it will eventually lead to mispredicts (offEffects and onEffects getting applied constantly)
+        // Conditions, on the other hand, don't need this.
+        // So, storing a boolean on the component itself fixes those mispredicts.
+        ent.Comp.Toggled = targetState;
+        Dirty(ent);
+
+        args.Toggle = targetState;
+
+        if (ent.Comp.Toggled)
+        {
+            if (ent.Comp.OnToggle is not { } onEffects)
+                return;
+
+            _effects.ApplyEffects(args.Performer, onEffects);
             return;
         }
 
@@ -64,6 +80,5 @@ public sealed partial class EffectActionSystem : EntitySystem
             return;
 
         _effects.ApplyEffects(args.Performer, offToggleEffects);
-        args.Handled = true;
     }
 }

@@ -18,7 +18,7 @@ public sealed partial class RemoveStatusEffects : EntityEffectBase<RemoveStatusE
     public List<EntProtoId<StatusEffectComponent>> StatusEffects;
 }
 
-public sealed class RemoveStatusEffectsEffectSystem : EntityEffectSystem<StatusEffectContainerComponent, RemoveStatusEffects>
+public sealed partial class RemoveStatusEffectsEffectSystem : EntityEffectSystem<StatusEffectContainerComponent, RemoveStatusEffects>
 {
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 

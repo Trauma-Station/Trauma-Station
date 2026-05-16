@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
-public abstract class SharedActiveBloodLeecherSystem : EntitySystem
+public abstract partial class SharedActiveBloodLeecherSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

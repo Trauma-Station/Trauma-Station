@@ -2,7 +2,7 @@
 
 namespace Content.Trauma.Shared.Areas;
 
-public sealed class AreaDetectorSystem : EntitySystem
+public sealed partial class AreaDetectorSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
 

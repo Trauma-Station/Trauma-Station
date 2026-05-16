@@ -19,7 +19,7 @@ namespace Content.Trauma.Shared.Vampires;
 ///
 /// If the performer uses this ability while they are stunned, only the <see cref="Deviation.Partial"/> Entity Effects apply to the targets.
 /// </summary>
-public sealed class VampireGlareSystem : EntitySystem
+public sealed partial class VampireGlareSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;

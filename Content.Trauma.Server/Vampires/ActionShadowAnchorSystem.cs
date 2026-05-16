@@ -5,7 +5,7 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.Vampires;
 
-public sealed class ActionShadowAnchorSystem : SharedActionShadowAnchorSystem
+public sealed partial class ActionShadowAnchorSystem : SharedActionShadowAnchorSystem
 {
     [Dependency] private VampireUmbraeSystem _umbrae = default!;
 

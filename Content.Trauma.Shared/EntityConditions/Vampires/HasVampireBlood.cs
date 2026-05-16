@@ -20,7 +20,7 @@ public sealed partial class HasVampireBlood : EntityConditionBase<HasVampireBloo
         => string.Empty; // idc
 }
 
-public sealed class HasVampireBloodConditionSystem : EntityConditionSystem<VampireComponent, HasVampireBlood>
+public sealed partial class HasVampireBloodConditionSystem : EntityConditionSystem<VampireComponent, HasVampireBlood>
 {
     [Dependency] private VampireSystem _vampire = default!;
 

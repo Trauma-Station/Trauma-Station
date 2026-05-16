@@ -14,7 +14,7 @@ namespace Content.Trauma.Server.Vampires;
 /// <summary>
 /// Public API for spawning shadow clones for the Umbrae Vampire.
 /// </summary>
-public sealed class VampireUmbraeSystem : EntitySystem
+public sealed partial class VampireUmbraeSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private CloningSystem _cloning = default!;

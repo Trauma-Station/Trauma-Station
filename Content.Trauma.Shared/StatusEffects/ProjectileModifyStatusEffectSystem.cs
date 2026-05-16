@@ -8,7 +8,7 @@ using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-public sealed class ProjectileModifyStatusEffectSystem : EntitySystem
+public sealed partial class ProjectileModifyStatusEffectSystem : EntitySystem
 {
     [Dependency] private EntityQuery<ProjectileComponent> _projQuery = default!;
     [Dependency] private EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;

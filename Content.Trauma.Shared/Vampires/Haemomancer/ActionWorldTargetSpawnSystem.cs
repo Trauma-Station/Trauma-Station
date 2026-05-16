@@ -4,7 +4,7 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
-public sealed class ActionWorldTargetSpawnSystem : EntitySystem
+public sealed partial class ActionWorldTargetSpawnSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
 

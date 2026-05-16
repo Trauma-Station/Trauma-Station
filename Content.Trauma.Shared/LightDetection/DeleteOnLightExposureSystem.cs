@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.LightDetection;
 
-public sealed class DeleteOnLightExposureSystem : EntitySystem
+public sealed partial class DeleteOnLightExposureSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
 

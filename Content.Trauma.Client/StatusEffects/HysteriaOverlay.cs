@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.StatusEffects;
 
-public sealed class HysteriaOverlay : Overlay
+public sealed partial class HysteriaOverlay : Overlay
 {
     // Note: a lot of the calculations were done with AI as I have 0 knowledge about coding custom complex overlays like this
     [Dependency] private IEntityManager _entMan = default!;

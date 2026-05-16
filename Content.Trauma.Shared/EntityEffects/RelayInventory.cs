@@ -23,7 +23,7 @@ public sealed partial class RelayInventory : EntityEffectBase<RelayInventory>
     public SlotFlags SlotFlags = SlotFlags.NONE;
 }
 
-public sealed class RelayInventoryEffectSystem : EntityEffectSystem<InventoryComponent, RelayInventory>
+public sealed partial class RelayInventoryEffectSystem : EntityEffectSystem<InventoryComponent, RelayInventory>
 {
     [Dependency] private EffectDataSystem _data = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;

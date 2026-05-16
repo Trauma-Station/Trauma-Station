@@ -25,6 +25,12 @@
         tags:
         - CloakOfDarkness
       effect: !type:SetToggleAction
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Trauma/Vampires/Actions/vampire_cloak.ogg
+        params:
+          volume: -5
+          pitch: 0.85
 
 - type: entity
   parent: MobStatusEffectBase
@@ -40,10 +46,19 @@
         energy: 10
         color: "#A020F0"
     effectsOnRemoval:
-    - !type:ChangeEffectToggleAction # change it to false by default when its removed due to no blood
+    - !type:RelayActions # sets the toggle to false so when it gets removed it doesn't start in "On" state
+      whitelist:
+        tags:
+        - EternalDarkness
+      effect: !type:SetToggleAction
     - !type:RemoveComponents
       components:
       - type: PointLight
+  - type: MusicStatusEffect
+    sound:
+      path: /Audio/_Trauma/Vampires/eternal_darkness.ogg
+      params:
+        volume: -5
   - type: StatusEffectEffects
     updateDelay: 1
     effects:
@@ -57,22 +72,20 @@
       type: Remove
 
     # Notification on no blood
-    - !type:PopupMessage
+    - !type:ModifyStatusEffect
       conditions:
       - !type:HasVampireBlood
         amount: 1
         inverted: true
-      type: Local
-      visualType: Large
-      messages:
-      - Your darkness is weak!
+      effectProto: EternalDarknessStatusEffect
+      time: null
+      type: Remove
 
     # Effect itself
     - !type:NestedEffect
       conditions:
       - !type:HasVampireBlood
         amount: 1
-        inverted: true
       proto: EternalDarkness
 
 - type: entity

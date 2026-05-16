@@ -18,7 +18,7 @@ public sealed partial class RemoveActions : EntityEffectBase<RemoveActions>
     public List<EntProtoId<ActionComponent>> Actions = new();
 }
 
-public sealed class ReplaceActionEffectSystem : EntityEffectSystem<ActionsComponent, RemoveActions>
+public sealed partial class ReplaceActionEffectSystem : EntityEffectSystem<ActionsComponent, RemoveActions>
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 

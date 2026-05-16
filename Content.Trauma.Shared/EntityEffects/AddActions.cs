@@ -21,7 +21,7 @@ public sealed partial class AddActions : EntityEffectBase<AddActions>
         => null;
 }
 
-public sealed class AddActionsEffectSystem : EntityEffectSystem<ActionsComponent, AddActions>
+public sealed partial class AddActionsEffectSystem : EntityEffectSystem<ActionsComponent, AddActions>
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 

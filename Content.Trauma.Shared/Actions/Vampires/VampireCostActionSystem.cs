@@ -8,7 +8,7 @@ using Content.Trauma.Shared.Vampires;
 
 namespace Content.Trauma.Shared.Actions.Vampires;
 
-public sealed class VampireCostActionSystem : EntitySystem
+public sealed partial class VampireCostActionSystem : EntitySystem
 {
     [Dependency] private VampireSystem _vampire = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

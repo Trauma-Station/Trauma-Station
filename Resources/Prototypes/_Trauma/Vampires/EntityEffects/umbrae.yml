@@ -24,6 +24,8 @@
     range: 8
     effect: !type:NestedEffect
       proto: EternalDarknessProj
+  - !type:SpawnParticles
+    particleProto: EternalDarkness
   - !type:ConsumeVampireBlood
     amount: 2 # 6 every 2 seconds
 
@@ -31,7 +33,7 @@
   id: EternalDarknessTemp
   effects:
   - !type:AdjustTemperature
-    amount: -5000
+    amount: -30000
 
 - type: entityEffect
   id: EternalDarknessProj

@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Arena;
 
-public sealed class ArenaCreationSystem : EntitySystem
+public sealed partial class ArenaCreationSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;

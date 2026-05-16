@@ -60,4 +60,4 @@
   - !type:AddActions
     actions:
     - ActionEternalDarkness
-    - ActionToggleFov # TODO: rename to xray and make it custom
+    - ActionUmbralSight

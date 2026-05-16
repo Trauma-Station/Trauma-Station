@@ -17,7 +17,7 @@ public sealed partial class ConsumeVampireBlood : EntityEffectBase<ConsumeVampir
     public int Amount;
 }
 
-public sealed class ConsumeVampireBloodEffectSystem : EntityEffectSystem<VampireComponent, ConsumeVampireBlood>
+public sealed partial class ConsumeVampireBloodEffectSystem : EntityEffectSystem<VampireComponent, ConsumeVampireBlood>
 {
     [Dependency] private VampireSystem _vampire = default!;
 

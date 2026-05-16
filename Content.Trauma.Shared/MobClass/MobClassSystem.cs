@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.MobClass;
 /// Public Api for mob classes. Also, handles BUI events.
 /// TODO: if this gets more complex than a simple specialization, support changing classes
 /// </summary>
-public sealed class MobClassSystem : EntitySystem
+public sealed partial class MobClassSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;

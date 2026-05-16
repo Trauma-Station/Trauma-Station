@@ -24,7 +24,7 @@ public sealed partial class SetHandheldLight : EntityEffectBase<SetHandheldLight
     public bool Quiet;
 }
 
-public sealed class DisableFlashlightEffectSystem : EntityEffectSystem<HandheldLightComponent, SetHandheldLight>
+public sealed partial class DisableFlashlightEffectSystem : EntityEffectSystem<HandheldLightComponent, SetHandheldLight>
 {
     [Dependency] private SharedHandheldLightSystem _handheld = default!;
 

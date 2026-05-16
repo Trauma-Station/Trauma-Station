@@ -6,7 +6,7 @@ using Content.Shared.Throwing;
 
 namespace Content.Trauma.Shared.Vampires.Gargantua;
 
-public sealed class DemonicHandSystem : EntitySystem
+public sealed partial class DemonicHandSystem : EntitySystem
 {
     [Dependency] private SharedCombatModeSystem _combat = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

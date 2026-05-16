@@ -6,7 +6,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Trauma.Shared.Weapons.Melee;
 
-public sealed class EffectsOnMeleeHitSystem : EntitySystem
+public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;

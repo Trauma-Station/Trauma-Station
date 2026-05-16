@@ -10,7 +10,7 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
-public sealed class PredatorSensesSystem : EntitySystem
+public sealed partial class PredatorSensesSystem : EntitySystem
 {
     [Dependency] private ISharedChatManager _chat = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;

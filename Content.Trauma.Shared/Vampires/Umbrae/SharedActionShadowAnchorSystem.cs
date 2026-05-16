@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Umbrae;
 
-public abstract class SharedActionShadowAnchorSystem : EntitySystem
+public abstract partial class SharedActionShadowAnchorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;

@@ -9,7 +9,7 @@ using Content.Shared.Stealth.Components;
 
 namespace Content.Trauma.Shared.StatusEffects;
 
-public sealed class DarknessStealthStatusEffectSystem : EntitySystem
+public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedStealthSystem _stealth = default!;

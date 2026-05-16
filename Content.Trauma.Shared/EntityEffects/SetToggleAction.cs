@@ -18,7 +18,7 @@ public sealed partial class SetToggleAction : EntityEffectBase<SetToggleAction>
     public bool Toggle;
 }
 
-public sealed class SetToggleActionEffectSystem : EntityEffectSystem<ActionComponent, SetToggleAction>
+public sealed partial class SetToggleActionEffectSystem : EntityEffectSystem<ActionComponent, SetToggleAction>
 {
     [Dependency] private SharedActionsSystem _actions = default!;
 
