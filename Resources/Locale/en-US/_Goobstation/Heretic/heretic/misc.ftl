@@ -58,7 +58,7 @@ ui-options-special-volume = Special volume:
 block-context-menu-message = You cannot interact with {$entity} via context menu using {$item}!
 
 coin-flip-examine-message = Current side: [bold]{$side}[/bold]
-coin-flip-popup-message = {CAPITALIZE(THE($coin))} lands on [bold]{$side}[/bold]
+coin-flip-popup-message = {CAPITALIZE(THE($coin))} lands on {$side}
 
 eldritch-coin-side-heretic = heretic
 eldritch-coin-side-blade = blade

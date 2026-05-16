@@ -19,6 +19,9 @@ public sealed partial class CoinFlipComponent : Component
     [DataField(required: true)]
     public TimeSpan FlipTime;
 
+    [DataField]
+    public TimeSpan FlipDelay = TimeSpan.FromMilliseconds(250);
+
     [DataField, AutoNetworkedField]
     public bool IsFlipping;
 

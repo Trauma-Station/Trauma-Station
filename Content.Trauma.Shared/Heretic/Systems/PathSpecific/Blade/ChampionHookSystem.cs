@@ -87,6 +87,9 @@ public sealed partial class ChampionHookSystem : EntitySystem
 
         args.Cancelled = true;
 
+        args.WeaponComponent.NextAttack = TimeSpan.Zero;
+        Dirty(args.Weapon, args.WeaponComponent);
+
         // Attempt attacking with offhand weapon
         foreach (var held in _hands.EnumerateHeld(args.User))
         {
@@ -106,12 +109,8 @@ public sealed partial class ChampionHookSystem : EntitySystem
                     return;
             }
 
-            if (!_melee.AttemptAttack(args.User, held, melee, ev, CompOrNull<ActorComponent>(args.User)?.PlayerSession))
-                continue;
-
-            args.WeaponComponent.NextAttack = TimeSpan.Zero;
-            Dirty(args.Weapon, args.WeaponComponent);
-            return;
+            if (_melee.AttemptAttack(args.User, held, melee, ev, CompOrNull<ActorComponent>(args.User)?.PlayerSession))
+                return;
         }
     }
 

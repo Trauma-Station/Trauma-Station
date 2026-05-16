@@ -45,7 +45,7 @@ public abstract partial class SharedCoinFlipSystem : EntitySystem
     private bool TryFlip(Entity<CoinFlipComponent> ent, EntityUid? user)
     {
         var now = Timing.CurTime;
-        if (now < ent.Comp.FlipEndTime || ent.Comp.IsFlipping)
+        if (now < ent.Comp.FlipEndTime + ent.Comp.FlipDelay || ent.Comp.IsFlipping)
             return false;
 
         ent.Comp.FlipEndTime = now + ent.Comp.FlipTime;
@@ -54,7 +54,7 @@ public abstract partial class SharedCoinFlipSystem : EntitySystem
         Dirty(ent);
 
         Appearance.SetData(ent, CoinFlipVisuals.SpriteState, ent.Comp.FlippingSpriteState);
-        _audio.PlayPredicted(ent.Comp.FlipSound, ent, args.User);
+        _audio.PlayPredicted(ent.Comp.FlipSound, ent, user);
 
         return true;
     }
