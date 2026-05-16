@@ -5,7 +5,9 @@ using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
+using Content.Shared.Interaction.Events;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.Side;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
@@ -21,7 +23,20 @@ public abstract partial class SharedGhoulSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<GhoulComponent, BeforeMindSwappedEvent>(OnBeforeMindSwap);
+
+        SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
     }
+
+    private void OnTryAttack(Entity<HereticMinionComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (args.Target == null)
+            return;
+
+        if (args.Target == ent.Comp.BoundHeretic || HasComp<ShadowCloakEntityComponent>(args.Target.Value) &&
+            Transform(args.Target.Value).ParentUid == ent.Comp.BoundHeretic)
+            args.Cancel();
+    }
+
 
     private void OnBeforeMindSwap(Entity<GhoulComponent> ent, ref BeforeMindSwappedEvent args)
     {

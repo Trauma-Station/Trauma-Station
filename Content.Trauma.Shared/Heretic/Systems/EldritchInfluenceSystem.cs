@@ -1,40 +1,43 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server.Chat.Managers;
-using Content.Server.Mind;
-using Content.Server.Popups;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
+using Content.Shared.Mind;
+using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
-using Content.Trauma.Server.Heretic.Components;
+using Content.Shared.Store.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Wizard;
-using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 
-namespace Content.Trauma.Server.Heretic.Systems;
+namespace Content.Trauma.Shared.Heretic.Systems;
 
 public sealed partial class EldritchInfluenceSystem : EntitySystem
 {
+    [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedDoAfterSystem _doafter = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private HereticSystem _heretic = default!;
-    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
-    [Dependency] private IChatManager _chatMan = default!;
-    [Dependency] private IPlayerManager _playerMan = default!;
+    [Dependency] private ISharedChatManager _chatMan = default!;
+    [Dependency] private ISharedPlayerManager _playerMan = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private INetManager _net = default!;
+
+    public static EntProtoId RealityShiftIntermediate = "EldritchInfluenceIntermediate";
 
     public override void Initialize()
     {
@@ -47,12 +50,8 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
 
     private void OnExamine(Entity<EldritchInfluenceComponent> ent, ref ExaminedEvent args)
     {
-        if (!ent.Comp.Spent && _heretic.TryGetHereticComponent(args.Examiner, out _, out _))
-        {
-            var msg = Loc.GetString(ent.Comp.HereticExamineMessage, ("tier", ent.Comp.Tier));
-            args.PushMarkup(msg);
+        if (_net.IsClient)
             return;
-        }
 
         if (HasComp<SpectralComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner) ||
             HasComp<WizardComponent>(args.Examiner) || HasComp<ApprenticeComponent>(args.Examiner) ||
@@ -94,6 +93,10 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
         if (influence.Comp.Spent)
             return false;
 
+        // Check in range otherwise you can collect influences from far away due to them having x-ray fixture
+        if (!_interaction.InRangeUnobstructed(user, Transform(influence).Coordinates, SharedInteractionSystem.InteractionRange + 0.5f))
+            return false;
+
         var (time, hidden) = TryComp<EldritchInfluenceDrainerComponent>(used, out var drainer)
             ? (drainer.Time, drainer.Hidden)
             : (10f, true);
@@ -110,7 +113,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             Hidden = true,
         };
 
-        _popup.PopupEntity(Loc.GetString("heretic-influence-start"), influence, user);
+        _popup.PopupPredicted(Loc.GetString("heretic-influence-start"), influence, user);
 
         if (!_doafter.TryStartDoAfter(dargs))
             return false;
@@ -154,21 +157,17 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             RemCompDeferred<HereticEyeOverlayComponent>(args.User);
 
         if (args.Cancelled || args.Target == null ||
-            !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
+            !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind) ||
+            !TryComp(mind, out StoreComponent? store) || !TryComp(mind, out MindComponent? mindComp))
             return;
 
-        _heretic.UpdateKnowledge(args.User, 1f);
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp),
+            args.User,
+            HasComp<EldritchInfluenceDrainerComponent>(args.Used)
+                ? SharedHereticSystem.OneKnowledgeOneSidePoint
+                : SharedHereticSystem.OneKnowledgePoint);
 
-        if (TryComp(args.Used, out EldritchInfluenceDrainerComponent? drainer) &&
-            drainer.TierToCategory.TryGetValue(ent.Comp.Tier, out var cat))
-        {
-            var current = heretic.SideKnowledgeDrafts[cat];
-            heretic.SideKnowledgeDrafts[cat] = current + 1;
-            if (current == 0)
-                _heretic.UpdateHereticCostModifiers((mind, heretic), cat);
-        }
-
-        Spawn("EldritchInfluenceIntermediate", Transform(args.Target.Value).Coordinates);
-        QueueDel(args.Target);
+        PredictedSpawnAtPosition(RealityShiftIntermediate, Transform(args.Target.Value).Coordinates);
+        PredictedQueueDel(args.Target);
     }
 }

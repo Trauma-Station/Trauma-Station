@@ -85,7 +85,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -139,7 +140,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -181,7 +183,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -231,7 +234,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -281,7 +285,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul

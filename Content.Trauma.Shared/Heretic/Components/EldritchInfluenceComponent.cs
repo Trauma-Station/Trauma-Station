@@ -2,31 +2,21 @@
 
 using Content.Shared.Dataset;
 using Content.Shared.EntityEffects;
-using Content.Trauma.Server.Heretic.Systems;
 using Robust.Shared.Audio;
 
-namespace Content.Trauma.Server.Heretic.Components;
+namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent, Access(typeof(EldritchInfluenceSystem))]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class EldritchInfluenceComponent : Component
 {
     [DataField]
     public bool Spent;
 
     [DataField]
-    public int Tier = 1;
-
-    [DataField]
-    public float KnowledgeGain = 1f;
-
-    [DataField]
     public SoundSpecifier? ExamineSound = new SoundCollectionSpecifier("bloodCrawl");
 
     [DataField]
     public LocId ExamineBaseMessage = "influence-base-message";
-
-    [DataField]
-    public LocId HereticExamineMessage = "influence-heretic-examine-message";
 
     [DataField]
     public int FontSize = 22;

@@ -32,7 +32,7 @@ public sealed partial class HereticPathCondition : ListingCondition
             !ent.TryGetComponent(args.Buyer, out hereticComp))
             return false;
 
-        if (hereticComp.AvailablePassiveLevel < MinPassiveLevel)
+        if (hereticComp.PassiveLevel < MinPassiveLevel)
             return false;
 
         if (RequiresCanAscend && !hereticComp.CanAscend)
