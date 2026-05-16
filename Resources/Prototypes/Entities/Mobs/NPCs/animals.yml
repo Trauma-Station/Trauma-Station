@@ -3950,7 +3950,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Critical #trauma 30 > 50 
+      50: Critical #trauma 30 > 50
       100: Dead # trauma 60 > 100
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.5
