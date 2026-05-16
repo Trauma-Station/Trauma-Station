@@ -3902,6 +3902,7 @@
   id: MobDionaNymph
   description: It's like a cat, only.... branch-ier.
   components:
+  - type: VentCrawler # trauma
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -3949,11 +3950,11 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      30: Critical
-      60: Dead
+      50: Critical #trauma 30 > 50 
+      100: Dead # trauma 60 > 100
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.5
-    baseSprintSpeed : 4.5
+    baseSprintSpeed : 5 # trauma 4.5 > 5
   - type: Grammar
     attributes:
       gender: epicene
