@@ -8,7 +8,7 @@ namespace Content.Trauma.Client.Heretic.Systems;
 
 public sealed partial class CoinFlipSystem : SharedCoinFlipSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -10,9 +10,9 @@ namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed partial class CoinFlipSystem : SharedCoinFlipSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {
