@@ -29,11 +29,11 @@ public abstract partial class SharedGhoulSystem : EntitySystem
 
     private void OnTryAttack(Entity<HereticMinionComponent> ent, ref AttackAttemptEvent args)
     {
-        if (args.Target == null)
+        if (args.Target is not { } target)
             return;
 
-        if (args.Target == ent.Comp.BoundHeretic || HasComp<ShadowCloakEntityComponent>(args.Target.Value) &&
-            Transform(args.Target.Value).ParentUid == ent.Comp.BoundHeretic)
+        if (target == ent.Comp.BoundHeretic || HasComp<ShadowCloakEntityComponent>(target) &&
+            Transform(target).ParentUid == ent.Comp.BoundHeretic)
             args.Cancel();
     }
 

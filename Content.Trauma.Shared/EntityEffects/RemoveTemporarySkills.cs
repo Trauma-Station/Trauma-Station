@@ -13,9 +13,6 @@ public sealed partial class RemoveTemporarySkills : EntityEffectBase<RemoveTempo
 {
     [DataField(required: true)]
     public Dictionary<EntProtoId, int> Skills = new();
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null;
 }
 
 public sealed partial class

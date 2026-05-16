@@ -15,10 +15,10 @@ using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Server.Objectives.Components;
+using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
