@@ -11,10 +11,10 @@ namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
 public abstract partial class SharedCoinFlipSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
 
     public override void Initialize()
     {
