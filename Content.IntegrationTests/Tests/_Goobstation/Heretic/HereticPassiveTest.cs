@@ -29,7 +29,7 @@ public sealed class HereticPassiveTest : GameTest
         {
             Assert.Multiple(() =>
             {
-                var paths = Enum.GetValuesAsUnderlyingType<HereticPath>().Cast<string>();
+                var paths = Enum.GetValuesAsUnderlyingType<HereticPath>().Cast<HereticPath>();
                 foreach (var path in paths)
                 {
                     for (var i = 1; i <= 3; i++)
