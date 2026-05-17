@@ -102826,8 +102826,6 @@ entities:
       linkedPorts:
         17957:
         - - MaterialSilo
-          - FillbotAnyItem
-        - - MaterialSilo
           - MaterialSiloUtilizer
 - proto: MaterialWoodPlank
   entities:

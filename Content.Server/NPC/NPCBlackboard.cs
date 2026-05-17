@@ -331,7 +331,7 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
     /// </summary>
     public const string NavClimb = "NavClimb";
 
-     public const string NavBlob = "NavBlob"; // Goobstation - Blob
+    public const string NavBlob = "NavBlob"; // Goobstation - Blob
 
     /// <summary>
     /// Default key storage for a movement pathfind.

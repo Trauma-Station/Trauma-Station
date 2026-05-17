@@ -8559,3 +8559,24 @@ Entries:
   id: 981
   time: '2026-05-15T20:44:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2635
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed fillbot for being useless.
+  id: 982
+  time: '2026-05-16T18:57:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2658
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Stunlock trait no longer gets applied to borgs
+  id: 983
+  time: '2026-05-16T19:50:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2660
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: Chef now has a playtime requirement.
+  id: 984
+  time: '2026-05-17T03:43:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2664
