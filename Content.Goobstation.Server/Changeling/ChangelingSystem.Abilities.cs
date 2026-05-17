@@ -51,9 +51,9 @@ namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingSystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly WeldableSystem _weldable = default!; // for biodegrade unweld
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private WeldableSystem _weldable = default!; // for biodegrade unweld
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     public static readonly EntProtoId ActionLayEgg = "ActionLayEgg";
     public static readonly ProtoId<ReagentPrototype> PolytrinicAcid = "PolytrinicAcid";

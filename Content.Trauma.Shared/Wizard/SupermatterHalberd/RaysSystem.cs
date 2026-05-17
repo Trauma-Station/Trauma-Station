@@ -6,12 +6,12 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Wizard.SupermatterHalberd;
 
-public sealed class RaysSystem : CommonRaysSystem
+public sealed partial class RaysSystem : CommonRaysSystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPointLightSystem _pointLight = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override EntityUid? DoRays(MapCoordinates coords,
         Color colorA,

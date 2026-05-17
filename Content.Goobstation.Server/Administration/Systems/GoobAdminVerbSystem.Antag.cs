@@ -12,7 +12,7 @@ namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed partial class GoobAdminVerbSystem
 {
-    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
 
     private void OnGetAntagVerbs(ref GetAntagVerbsEvent args)
     {

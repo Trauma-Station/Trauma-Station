@@ -11,8 +11,8 @@ using Content.Trauma.Server.Forensics.Components;
 namespace Content.Trauma.Server.Forensics.Systems;
 public sealed partial class TraumaForensicsSystem : EntitySystem
 {
-    [Dependency] private readonly ForensicsSystem _forensics = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private ForensicsSystem _forensics = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

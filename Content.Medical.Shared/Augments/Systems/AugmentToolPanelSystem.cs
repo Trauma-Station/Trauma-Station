@@ -12,19 +12,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Augments;
 
-public sealed class AugmentToolPanelSystem : EntitySystem
+public sealed partial class AugmentToolPanelSystem : EntitySystem
 {
-    [Dependency] private readonly AugmentPowerCellSystem _augmentPowerCell = default!;
-    [Dependency] private readonly AugmentSystem _augment = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly EntityQuery<BodyPartComponent> _partQuery = default!;
-    [Dependency] private readonly EntityQuery<ChildOrganComponent> _childQuery = default!;
-    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private AugmentPowerCellSystem _augmentPowerCell = default!;
+    [Dependency] private AugmentSystem _augment = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private EntityQuery<BodyPartComponent> _partQuery = default!;
+    [Dependency] private EntityQuery<ChildOrganComponent> _childQuery = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
 
     public override void Initialize()
     {

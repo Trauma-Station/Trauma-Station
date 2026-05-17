@@ -11,9 +11,9 @@ namespace Content.Trauma.Shared.Heretic.Curses;
 
 using DnaDict = Dictionary<string, (float, HashSet<EntityUid>)>;
 
-public abstract class SharedHereticCurseSystem : EntitySystem
+public abstract partial class SharedHereticCurseSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {

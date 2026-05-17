@@ -9,12 +9,12 @@ using Content.Trauma.Shared.Heretic.Components.Ghoul;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedGhoulSystem : EntitySystem
+public abstract partial class SharedGhoulSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
-    [Dependency] private readonly EntityQuery<BrainComponent> _brainQuery = default!;
-    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
+    [Dependency] private EntityQuery<BrainComponent> _brainQuery = default!;
+    [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     public override void Initialize()
     {

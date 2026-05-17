@@ -143229,8 +143229,6 @@ entities:
         24735:
         - - MaterialSilo
           - MaterialSiloUtilizer
-        - - MaterialSilo
-          - FillbotAnyItem
 - proto: MaterialWoodPlank
   entities:
   - uid: 22126

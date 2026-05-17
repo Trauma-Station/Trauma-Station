@@ -9,12 +9,12 @@ namespace Content.Trauma.Shared.Abductor;
 /// Gives abductor tasks to mobs when <see cref="AbductorSubjectComponent"/> is added.
 /// Provides API for working with it.
 /// </summary>
-public sealed class AbductorTaskSystem : EntitySystem
+public sealed partial class AbductorTaskSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityQuery<AbductorSubjectComponent> _query = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityQuery<AbductorSubjectComponent> _query = default!;
 
     // min-max random tasks to add
     // gland task is always added after this

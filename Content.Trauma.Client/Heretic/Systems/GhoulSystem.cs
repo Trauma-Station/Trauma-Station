@@ -6,10 +6,10 @@ using Robust.Client.Player;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class GhoulSystem : SharedGhoulSystem
+public sealed partial class GhoulSystem : SharedGhoulSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {

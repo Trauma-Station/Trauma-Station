@@ -6,10 +6,10 @@ using Content.Shared.Projectiles;
 using Content.Trauma.Common.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
-public sealed class ShootingKnowledgeSystem : EntitySystem
+public sealed partial class ShootingKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
     private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";

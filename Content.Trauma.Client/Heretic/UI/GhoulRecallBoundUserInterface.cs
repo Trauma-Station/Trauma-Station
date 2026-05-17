@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 namespace Content.Trauma.Client.Heretic.UI;
 
 [UsedImplicitly]
-public sealed class GhoulRecallBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class GhoulRecallBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private GhoulRecallWindow _window = new();
 

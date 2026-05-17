@@ -34,10 +34,10 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
         => null;
 }
 
-public sealed class StationQueryEffectsSystem : EntityEffectSystem<StationDataComponent, StationQueryEffects>
+public sealed partial class StationQueryEffectsSystem : EntityEffectSystem<StationDataComponent, StationQueryEffects>
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationQueryEffects> args)
     {

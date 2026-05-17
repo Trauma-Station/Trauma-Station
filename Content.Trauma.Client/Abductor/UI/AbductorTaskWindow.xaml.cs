@@ -14,9 +14,9 @@ namespace Content.Trauma.Client.Abductor.UI;
 [GenerateTypedNameReferences]
 public sealed partial class AbductorTaskWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public event Action? OnScan;
     public event Action? OnComplete;

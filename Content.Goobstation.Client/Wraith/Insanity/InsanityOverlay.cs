@@ -6,13 +6,13 @@ using Robust.Shared.Enums;
 
 namespace Content.Goobstation.Client.Wraith.Insanity;
 
-public sealed class InsanityOverlay : Overlay
+public sealed partial class InsanityOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Insanity";
 
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _ent = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
@@ -25,12 +25,12 @@ public sealed class InsanityOverlay : Overlay
     public InsanityOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _insanityShader = _prototypeManager.Index(Shader).InstanceUnique();
+        _insanityShader = _proto.Index(Shader).InstanceUnique();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        if (!_entityManager.TryGetComponent(_playerManager.LocalEntity, out EyeComponent? eyeComp))
+        if (!_ent.TryGetComponent(_player.LocalEntity, out EyeComponent? eyeComp))
             return false;
 
         if (args.Viewport.Eye != eyeComp.Eye)

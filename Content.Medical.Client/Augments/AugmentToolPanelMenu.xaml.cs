@@ -12,7 +12,7 @@ namespace Content.Medical.Client.Augments;
 [GenerateTypedNameReferences]
 public sealed partial class AugmentToolPanelMenu : RadialMenu
 {
-    [Dependency] private readonly EntityManager _ent = default!;
+    [Dependency] private EntityManager _ent = default!;
 
     public event Action<EntityUid?>? SendSwitchMessage;
 
@@ -35,6 +35,7 @@ public sealed partial class AugmentToolPanelMenu : RadialMenu
         if (!_ent.TryGetComponent<StorageComponent>(_owner, out var storage))
             return;
 
+        // TODO: make this use simple radial menu bruh
         foreach (var (entity, _) in storage.StoredItems)
         {
             var button = new RadialMenuButtonWithSector()

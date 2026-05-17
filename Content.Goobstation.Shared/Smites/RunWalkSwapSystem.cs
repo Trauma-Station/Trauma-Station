@@ -4,7 +4,7 @@ using Content.Shared.Movement.Components;
 
 namespace Content.Goobstation.Shared.Smites;
 
-public sealed class RunWalkSwapSystem : ToggleableSmiteSystem<RunWalkSwapComponent>
+public sealed partial class RunWalkSwapSystem : ToggleableSmiteSystem<RunWalkSwapComponent>
 {
     public override void Set(EntityUid owner)
     {

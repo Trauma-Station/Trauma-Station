@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Genetics.Abilities;
 namespace Content.Trauma.Server.Genetics.Abilities;
 
 // fucking chud shit is in server for no reason
-public sealed class RadiationMutationSystem : EntitySystem
+public sealed partial class RadiationMutationSystem : EntitySystem
 {
-    [Dependency] private readonly RadiationSystem _radiation = default!;
+    [Dependency] private RadiationSystem _radiation = default!;
 
     public override void Initialize()
     {

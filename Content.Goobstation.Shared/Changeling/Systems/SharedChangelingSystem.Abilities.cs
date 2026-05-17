@@ -12,10 +12,10 @@ namespace Content.Goobstation.Shared.Changeling.Systems;
 
 public abstract partial class SharedChangelingSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly CommonSelectableAmmoSystem _selectableAmmo = default!;
-    [Dependency] protected readonly SharedMindSystem Mind = default!;
-    [Dependency] protected readonly SharedHandsSystem Hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private CommonSelectableAmmoSystem _selectableAmmo = default!;
+    [Dependency] protected SharedMindSystem Mind = default!;
+    [Dependency] protected SharedHandsSystem Hands = default!;
 
     protected virtual void InitAbilities()
     {

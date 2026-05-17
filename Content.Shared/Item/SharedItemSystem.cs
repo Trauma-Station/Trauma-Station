@@ -14,14 +14,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Item;
 
-public abstract class SharedItemSystem : EntitySystem
+public abstract partial class SharedItemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!; // Goobstation
-    [Dependency] private readonly SharedStorageSystem _storage = default!; // Goobstation
-    [Dependency] private readonly InventorySystem _inventory = default!; // Goobstation
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] private SharedTransformSystem _transform = default!; // Goobstation
+    [Dependency] private SharedStorageSystem _storage = default!; // Goobstation
+    [Dependency] private InventorySystem _inventory = default!; // Goobstation
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
 
     public override void Initialize()
     {

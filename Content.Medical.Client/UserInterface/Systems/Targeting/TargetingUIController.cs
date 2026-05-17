@@ -13,11 +13,11 @@ using Robust.Client.Player;
 
 namespace Content.Medical.Client.UserInterface.Systems.Targeting;
 
-public sealed class TargetingUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemChanged<TargetingSystem>
+public sealed partial class TargetingUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemChanged<TargetingSystem>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IEntityNetworkManager _entNet = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IEntityNetworkManager _entNet = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private TargetingComponent? _targetingComponent;
     private TargetingControl? TargetingControl;

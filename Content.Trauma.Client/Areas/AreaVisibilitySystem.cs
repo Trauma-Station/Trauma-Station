@@ -12,9 +12,9 @@ namespace Content.Trauma.Client.Areas;
 /// <summary>
 /// Controls visibility of areas via the <c>showareas</c> and mapping commands.
 /// </summary>
-public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
+public sealed partial class AreaVisibilitySystem : CommonAreaVisibilitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private bool _visible;
 

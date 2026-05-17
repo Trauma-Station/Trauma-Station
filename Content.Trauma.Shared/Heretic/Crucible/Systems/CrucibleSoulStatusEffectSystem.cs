@@ -7,10 +7,10 @@ using Content.Trauma.Shared.Teleportation;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;
 
-public sealed class CrucibleSoulStatusEffectSystem : EntitySystem
+public sealed partial class CrucibleSoulStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     public override void Initialize()
     {

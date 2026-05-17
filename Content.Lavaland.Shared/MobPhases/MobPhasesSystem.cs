@@ -8,9 +8,9 @@ using JetBrains.Annotations;
 
 namespace Content.Lavaland.Shared.MobPhases;
 
-public sealed class MobPhasesSystem : EntitySystem
+public sealed partial class MobPhasesSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

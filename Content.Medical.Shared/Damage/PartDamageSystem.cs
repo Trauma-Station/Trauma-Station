@@ -6,9 +6,9 @@ using Content.Shared.Damage.Systems;
 
 namespace Content.Medical.Shared.Damage;
 
-public sealed class PartDamageSystem : EntitySystem
+public sealed partial class PartDamageSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     public override void Initialize()
     {

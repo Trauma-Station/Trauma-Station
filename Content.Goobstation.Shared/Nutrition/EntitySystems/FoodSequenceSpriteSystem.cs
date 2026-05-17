@@ -6,7 +6,7 @@ using Content.Shared.Nutrition.EntitySystems;
 
 namespace Content.Goobstation.Shared.Nutrition.EntitySystems;
 
-public sealed class FoodSequenceSpriteSystem : SharedFoodSequenceSystem
+public sealed partial class FoodSequenceSpriteSystem : SharedFoodSequenceSystem
 {
     /* Trauma
     Can't work anymore because Sprite is clientside...

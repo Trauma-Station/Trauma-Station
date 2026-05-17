@@ -14,15 +14,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
-public abstract class SharedFireBlastSystem : EntitySystem
+public abstract partial class SharedFireBlastSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedTransformSystem Xform = default!;
-    [Dependency] protected readonly StatusEffectsSystem Status = default!;
-    [Dependency] protected readonly DamageableSystem Dmg = default!;
-    [Dependency] protected readonly BodySystem Body = default!;
+    [Dependency] protected SharedTransformSystem Xform = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected DamageableSystem Dmg = default!;
+    [Dependency] protected BodySystem Body = default!;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
 
     public static readonly EntProtoId FireBlastStatusEffect = "StatusEffectFireBlasted";
 

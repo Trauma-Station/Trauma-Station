@@ -17,7 +17,7 @@ namespace Content.Server.Antag;
 /// </summary>
 public sealed partial class AntagSelectionSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public void UnequipOldGear(EntityUid player)
     {

@@ -5,9 +5,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class OwoifyCommand : IConsoleCommand
+public sealed partial class OwoifyCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public string Command => "owoify";
 
@@ -40,7 +40,6 @@ public sealed class OwoifyCommand : IConsoleCommand
 
         var owoSys = _entManager.System<OwOAccentSystem>();
         var metaDataSys = _entManager.System<MetaDataSystem>();
-
         metaDataSys.SetEntityName(eUid.Value, owoSys.Accentuate(meta.EntityName), meta);
         metaDataSys.SetEntityDescription(eUid.Value, owoSys.Accentuate(meta.EntityDescription), meta);
     }

@@ -8,9 +8,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Waddle;
 
-public sealed class WaddleClothingSystem : EntitySystem
+public sealed partial class WaddleClothingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
