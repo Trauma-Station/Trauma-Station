@@ -298,6 +298,7 @@
       - Steel
       - Ore
       - Telecrystal
+      - RodMetal
     stomachStorageWhitelist:
       components:
       - Item
@@ -310,6 +311,7 @@
       - Steel
       - Ore
       - Telecrystal
+      - RodMetal
   - type: MobPrice
     price: 500
 
