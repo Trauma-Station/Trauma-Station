@@ -36,7 +36,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
 
     public override void Initialize()
     {
