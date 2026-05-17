@@ -1,6 +1,6 @@
 - type: entity
   parent: MarkerBase
-  id : SpawnMobSecuritron
+  id: SpawnMobSecuritron
   name: securitron spawner
   components:
   - type: Sprite
@@ -14,7 +14,7 @@
 
 - type: entity
   parent: MarkerBase
-  id : SpawnMobBeepsky
+  id: SpawnMobBeepsky
   name: beepsky spawner
   components:
   - type: Sprite
