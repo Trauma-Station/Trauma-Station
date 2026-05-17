@@ -2,48 +2,51 @@
 
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Trauma.Common.Silicon;
 using Content.Trauma.Shared.Silicon.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Silicon;
+
+/// <summary>
+/// Used by wandsky to assign secbots waypoints for patrol paths.
+/// </summary>
 public sealed partial class WandskySystem : EntitySystem
 {
 
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
 
+    private HashSet<Entity<WaypointComponent>> _waypoints = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SlaveComponent, InteractUsingEvent>(OnGetSlave);
+        SubscribeLocalEvent<PatrolSlaveComponent, InteractUsingEvent>(OnInteractUsing);
 
-        SubscribeLocalEvent<CommanderComponent, TogglePatrolActionEvent>(OnTogglePatrol);
-        SubscribeLocalEvent<CommanderComponent, WaypointActionEvent>(OnWaypointAction);
-        SubscribeLocalEvent<CommanderComponent, ClearWaypointsActionEvent>(OnClearWaypoints);
+        SubscribeLocalEvent<PatrolCommanderComponent, TogglePatrolActionEvent>(OnTogglePatrol);
+        SubscribeLocalEvent<PatrolCommanderComponent, WaypointActionEvent>(OnWaypointAction);
+        SubscribeLocalEvent<PatrolCommanderComponent, ClearWaypointsActionEvent>(OnClearWaypoints);
     }
 
-    #region CommanderEvents
-
-    public void OnGetSlave(Entity<SlaveComponent> ent, ref InteractUsingEvent args)
+    public void OnInteractUsing(Entity<PatrolSlaveComponent> ent, ref InteractUsingEvent args)
     {
-        if (!TryComp<CommanderComponent>(args.Used, out var commander))
+        if (!TryComp<PatrolCommanderComponent>(args.Used, out var commander))
             return;
 
         if (ent.Comp.MasterEntity == args.Used)
         {
-            _popupSystem.PopupClient("Bond deleted.", ent.Owner, args.User, PopupType.Medium);
+            _popup.PopupClient("Bond deleted.", ent.Owner, args.User, PopupType.Medium);
             ent.Comp.MasterEntity = null;
             Dirty(ent);
             return;
         }
 
-        _popupSystem.PopupClient("Bond formed.", ent.Owner, args.User, PopupType.Medium);
+        _popup.PopupClient("Bond formed.", ent.Owner, args.User, PopupType.Medium);
 
         ent.Comp.MasterEntity = args.Used;
 
@@ -51,76 +54,69 @@ public sealed partial class WandskySystem : EntitySystem
         _audio.PlayPvs(commander.EnslaveSound, ent);
     }
 
-    public void OnTogglePatrol(Entity<CommanderComponent> ent, ref TogglePatrolActionEvent args)
+    public void OnTogglePatrol(Entity<PatrolCommanderComponent> ent, ref TogglePatrolActionEvent args)
     {
         ent.Comp.IsPatrolling = !ent.Comp.IsPatrolling;
 
         var message = ent.Comp.IsPatrolling ? "PATROL ENABLED!" : "PATROL DISABLED!";
 
         Dirty(ent);
-        _popupSystem.PopupClient(message, ent.Owner, args.Performer, PopupType.Medium);
+        _popup.PopupClient(message, ent.Owner, args.Performer, PopupType.Medium);
     }
 
-    public void OnWaypointAction(Entity<CommanderComponent> ent, ref WaypointActionEvent args)
+    public void OnWaypointAction(Entity<PatrolCommanderComponent> ent, ref WaypointActionEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var items = _lookup.GetEntitiesInRange(args.Target, 0.5f, LookupFlags.All);
+        _waypoints.Clear();
+        _lookup.GetEntitiesInRange(args.Target, 0.5f, _waypoints);
 
-        if (items is { } targetEntities)
+        foreach (var waypoint in _waypoints)
         {
-            foreach (var targetEntity in targetEntities)
-            {
-                if (!HasComp<WaypointComponent>(targetEntity))
-                    continue;
-
-                if (!ent.Comp.Waypoints.Contains(targetEntity))
-                    return;
-
-                _popupSystem.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
-
-                if (_net.IsServer)
-                {
-                    ent.Comp.Waypoints.Remove(targetEntity);
-                    QueueDel(targetEntity);
-                }
-                Dirty(ent);
+            if (!ent.Comp.Waypoints.Contains(waypoint))
                 return;
-            }
+
+            _popup.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
+
+            if (!_net.IsServer)
+                return;
+
+            ent.Comp.Waypoints.Remove(waypoint);
+            QueueDel(waypoint);
+            Dirty(ent);
+            return;
         }
 
-        if (_net.IsServer)
-        {
-            var waypointEntity = Spawn(ent.Comp.WaypointEntityUid, args.Target);
-            ent.Comp.Waypoints.Add(waypointEntity);
-        }
-        _popupSystem.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
+        _popup.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
+        if (!_net.IsServer)
+            return;
+
+        var waypointEntity = Spawn(ent.Comp.WaypointId, args.Target);
+        ent.Comp.Waypoints.Add(waypointEntity);
         Dirty(ent);
     }
 
-    public void OnClearWaypoints(Entity<CommanderComponent> ent, ref ClearWaypointsActionEvent args)
+    public void OnClearWaypoints(Entity<PatrolCommanderComponent> ent, ref ClearWaypointsActionEvent args)
     {
         var waypoints = ent.Comp.Waypoints;
         var count = waypoints.Count;
 
         if (count == 0)
         {
-            _popupSystem.PopupClient("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
+            _popup.PopupClient("No waypoints to clear!", ent.Owner, args.Performer, PopupType.Medium);
             return;
         }
-        if (_net.IsServer)
+
+        _popup.PopupClient($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
+        if (!_net.IsServer)
+            return;
+
+        foreach (var waypoint in waypoints)
         {
-            waypoints.RemoveWhere(waypoint =>
-            {
-                if (!Exists(waypoint))
-                    return false;
-                QueueDel(waypoint);
-                return true;
-            });
+            QueueDel(waypoint);
         }
+        ent.Comp.Waypoints.Clear();
         Dirty(ent);
-        _popupSystem.PopupClient($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
     }
-    #endregion
 }

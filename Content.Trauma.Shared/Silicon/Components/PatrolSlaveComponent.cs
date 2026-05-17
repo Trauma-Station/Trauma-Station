@@ -3,14 +3,14 @@
 namespace Content.Trauma.Shared.Silicon.Components;
 
 /// <summary>
-/// Designate's a robot's master.
+/// Designate's a securitron robot's master for patrolling.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class SlaveComponent : Component
+public sealed partial class PatrolSlaveComponent : Component
 {
     /// <summary>
-    /// The master.
+    /// The master that bot points to for patrol instructions.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? MasterEntity { get; set; }
+    public EntityUid? MasterEntity;
 }

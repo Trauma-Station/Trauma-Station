@@ -1,7 +1,7 @@
 - type: entity
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: StunBaton
   id: Wandsky
-  name: commander beepsky
+  name: commander wandsky
   description: A technological marvel used for directing securitrons.
   components:
   - type: Sprite
@@ -11,27 +11,13 @@
     damage: 25
     overtime: 40
     sound: /Audio/Weapons/egloves.ogg
-  - type: MeleeWeapon
-    hidden: true
-    animation: WeaponArcThrust
-    damage:
-      types:
-        Blunt: 1
-  - type: Stunbaton
-    energyPerUse: 50
-  - type: StaminaDamageOnHit
   - type: LandAtCursor
-  - type: Item
-    size: Normal
   - type: Clothing
     sprite: _Trauma/Objects/Tools/commanderwandsky.rsi
     quickEquip: false
     slots:
     - Belt
-  - type: DisarmMalus
-    malus: 0.225
-  - type: Appearance
-  - type: Commander
+  - type: PatrolCommander
     waypointEntityUid: SecuritronWaypoint
   - type: ActionsContainer
   - type: ActionGrant
@@ -46,16 +32,15 @@
     - ActionClearWaypoints
   - type: Construction
     graph: Wandsky
-    node: stick
+    node: bot
 
 - type: entity
   id: SecuritronWaypoint
   name: securitron waypoint
-  categories: [ DoNotMap ]
   components:
   - type: Transform
     anchored: true
-  - type: Sprite # Sprite data is dynamically set in Client.HolopadSystem
+  - type: Sprite
   - type: Appearance
   - type: HolopadHologram
     rsiPath: _Trauma/Mobs/Silicon/Bots/beepsky.rsi

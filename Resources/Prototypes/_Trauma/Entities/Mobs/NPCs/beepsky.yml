@@ -25,6 +25,11 @@
   - type: HTN
     rootTask:
       task: SecbotCompound
+    blackboard:
+      TargetFoundSound: !type:SoundCollectionSpecifier
+        collection: BeepskyTargetFound
+      TargetArrestedSound: !type:SoundCollectionSpecifier
+        collection: BeepskyTargetArrested
   - type: CombatMode
   - type: MeleeWeapon
     hidden: true
@@ -62,7 +67,7 @@
   - type: IntrinsicRadioTransmitter
     channels:
     - Security
-  - type: Slave
+  - type: PatrolSlave
   - type: ActiveRadio
     channels:
     - Common
@@ -94,12 +99,3 @@
   id: MobBeepsky
   name: Officer Beepsky
   description: It's Commander Beep O'sky! Officially the superior officer of all bots on station, Beepsky remains as humble and dedicated to the law as the day he was first fabricated.
-  components:
-  - type: HTN
-    rootTask:
-      task: SecbotCompound
-    blackboard:
-      TargetFoundSound: !type:SoundCollectionSpecifier
-        collection: BeepskyTargetFound
-      TargetArrestedSound: !type:SoundCollectionSpecifier
-        collection: BeepskyTargetArrested

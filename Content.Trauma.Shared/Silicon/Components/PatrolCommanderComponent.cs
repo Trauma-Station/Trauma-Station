@@ -5,23 +5,26 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Silicon.Components;
 
+/// <summary>
+/// Used by wandsky system to assign sec bots to patrols.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class CommanderComponent : Component
+public sealed partial class PatrolCommanderComponent : Component
 {
     /// <summary>
-    /// What are we using as our waypoint?
+    /// Waypoint ProtoId?
     /// </summary>
     [DataField]
-    public EntProtoId WaypointEntityUid = "SecuritronWaypoint";
+    public EntProtoId WaypointId = "SecuritronWaypoint";
 
     /// <summary>
-    /// A list of waypoints placed.
+    /// List of waypoints placed.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> Waypoints { get; set; } = new();
+    public HashSet<EntityUid> Waypoints = new();
 
     /// <summary>
-    /// Should slaves be patrolling?
+    /// Should slaved robots be patrolling?
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsPatrolling;
@@ -34,10 +37,8 @@ public sealed partial class CommanderComponent : Component
 
 }
 
-[ByRefEvent]
 public sealed partial class TogglePatrolActionEvent : InstantActionEvent;
 
 public sealed partial class WaypointActionEvent : WorldTargetActionEvent;
 
-[ByRefEvent]
 public sealed partial class ClearWaypointsActionEvent : InstantActionEvent;

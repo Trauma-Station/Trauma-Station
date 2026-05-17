@@ -1,7 +1,7 @@
 - type: entity
+  parent: BaseAction
   id: ActionTogglePatrol
   name: Toggle Patrol
-  parent: BaseAction
   description: Toggle patrol on and off.
   components:
   - type: Action
@@ -10,9 +10,9 @@
     event: !type:TogglePatrolActionEvent
 
 - type: entity
+  parent: BaseAction
   id: ActionCRWaypoint
   name: Create/Remove Waypoint
-  parent: BaseAction
   description: Creates a waypoint at the target location, clicking an existing waypoint will remove it instead.
   components:
   - type: Action
@@ -27,9 +27,9 @@
     event: !type:WaypointActionEvent
 
 - type: entity
+  parent: BaseAction
   id: ActionClearWaypoints
   name: Clear Waypoints
-  parent: BaseAction
   description: Disables patrol and clears all existing waypoints.
   components:
   - type: Action

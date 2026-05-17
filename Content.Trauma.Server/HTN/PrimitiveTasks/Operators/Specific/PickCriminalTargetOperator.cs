@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Contraband;
@@ -24,7 +23,7 @@ using Robust.Shared.Audio.Systems;
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
 [DataDefinition]
-public sealed partial class PickNearbyTargetOperator : HTNOperator
+public sealed partial class PickCriminalTargetOperator : HTNOperator
 {
     [Dependency] private IEntityManager _entMan = default!;
     private TagSystem _tag = default!;
@@ -63,7 +62,7 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
     [DataField(required: true)]
     public SoundCollectionSpecifier TargetFoundSound;
 
-    private HashSet<EntityUid> _entities = new();
+    private HashSet<Entity<MobStateComponent>> _entities = new();
     private readonly static ProtoId<TagPrototype> BotTag = "Bot";
 
     public override void Initialize(IEntitySystemManager sysManager)
@@ -95,20 +94,20 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
         var range = 12f;
 
         _entities.Clear();
-        _entities = _lookup.GetEntitiesInRange(ownerCoords, range);
 
         bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
+        MobStateComponent? mobState = null;
 
-        if (targetEnt.Valid && _entMan.TryGetComponent<TransformComponent>(targetEnt, out var transformComp))
+        if (targetEnt.Valid && _entMan.TryGetComponent<TransformComponent>(targetEnt, out var transformComp) && _mobQuery.Resolve(targetEnt, ref mobState))
         {
-            if (!BeatUp(targetEnt, owner, isEmagged) || !ownerCoords.InRange(_entMan, transformComp.Coordinates, range))
+            if (!BeatUp((targetEnt, mobState), owner, isEmagged) || !ownerCoords.InRange(_entMan, transformComp.Coordinates, range))
                 targetEnt = EntityUid.Invalid;
         }
 
         if (!targetEnt.Valid)
         {
-            var entities = _lookup.GetEntitiesInRange(ownerCoords, range);
-            foreach (var entity in entities)
+            _lookup.GetEntitiesInRange(ownerCoords, range, _entities);
+            foreach (var entity in _entities)
             {
                 if (!BeatUp(entity, owner, isEmagged))
                     continue;
@@ -138,9 +137,9 @@ public sealed partial class PickNearbyTargetOperator : HTNOperator
         });
     }
 
-    private bool BeatUp(EntityUid entity, EntityUid beepsky, bool isEmagged)
+    private bool BeatUp(Entity<MobStateComponent> entity, EntityUid beepsky, bool isEmagged)
     {
-        if (entity == beepsky)
+        if (entity.Owner == beepsky)
             return false;
 
         // Is target a living target?

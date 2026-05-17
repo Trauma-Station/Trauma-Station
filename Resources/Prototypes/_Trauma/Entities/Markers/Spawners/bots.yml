@@ -1,7 +1,7 @@
 - type: entity
-  name: securitron spawner
-  id : SpawnMobSecuritron
   parent: MarkerBase
+  id : SpawnMobSecuritron
+  name: securitron spawner
   components:
   - type: Sprite
     layers:
@@ -13,9 +13,9 @@
     - MobSecuritron
 
 - type: entity
-  name: beepsky spawner
-  id : SpawnMobBeepsky
   parent: MarkerBase
+  id : SpawnMobBeepsky
+  name: beepsky spawner
   components:
   - type: Sprite
     layers:

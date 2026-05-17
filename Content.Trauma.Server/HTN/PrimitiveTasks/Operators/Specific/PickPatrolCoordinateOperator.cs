@@ -23,16 +23,16 @@ public sealed partial class PickPatrolCoordinateOperator : HTNOperator
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
 
-    private EntityQuery<SlaveComponent> _slaveQuery = default!;
-    private EntityQuery<CommanderComponent> _commanderQuery = default!;
+    private EntityQuery<PatrolSlaveComponent> _slaveQuery = default!;
+    private EntityQuery<PatrolCommanderComponent> _commanderQuery = default!;
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
 
-        _slaveQuery = _entMan.GetEntityQuery<SlaveComponent>();
-        _commanderQuery = _entMan.GetEntityQuery<CommanderComponent>();
+        _slaveQuery = _entMan.GetEntityQuery<PatrolSlaveComponent>();
+        _commanderQuery = _entMan.GetEntityQuery<PatrolCommanderComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard, CancellationToken cancelToken)

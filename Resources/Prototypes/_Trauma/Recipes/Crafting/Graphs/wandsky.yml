@@ -1,10 +1,9 @@
 - type: constructionGraph
   id: Wandsky
-  start: start
   graph:
   - node: start
     edges:
-    - to: stick
+    - to: bot
       steps:
       - tag: StunBaton
         icon:
@@ -18,5 +17,5 @@
           state: icon
         name: construction-graph-tag-proximity-sensor
         doAfter: 2
-  - node: stick
+  - node: bot
     entity: Wandsky

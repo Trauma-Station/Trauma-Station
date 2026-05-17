@@ -108,7 +108,6 @@
 
 - type: constructionGraph
   id: SecBot
-  start: start
   graph:
   - node: start
     edges:
@@ -131,6 +130,12 @@
           sprite: Mobs/Silicon/drone.rsi
           state: l_hand
         name: construction-graph-tag-borg-arm
-        doAfter: 2
+        doAfter: 1
+      - tag: SecurityHelmet
+        name: construction-graph-tag-security-helmet
+        icon:
+          sprite: Clothing/Head/Helmets/security.rsi
+          state: icon
+          doAfter: 1
   - node: bot
     entity: MobSecuritron

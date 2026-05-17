@@ -23,9 +23,6 @@ public sealed partial class TargetStunnedPrecondition : HTNPrecondition
 
         var hasComp = _entManager.HasComponent<StunnedComponent>(target);
 
-        if (Stunned)
-            return hasComp;
-        else
-            return !hasComp;
+        return Stunned == hasComp;
     }
 }

@@ -6,6 +6,7 @@ using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 
 namespace Content.Trauma.Shared.Cuff;
@@ -18,10 +19,15 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedCuffableSystem _cuff = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+
+    private EntityQuery<CuffableComponent> _cuffQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _cuffQuery = GetEntityQuery<CuffableComponent>();
 
         SubscribeLocalEvent<CuffSpawnerComponent, UserActivateInWorldEvent>(OnInteract);
         SubscribeLocalEvent<CuffSpawnerComponent, CuffSpawnerDoAfterEvent>(OnCuff);
@@ -71,16 +77,13 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
         if (!Resolve(beepsky, ref beepsky.Comp, false))
             return false;
 
-        if (!TryComp<CuffableComponent>(target, out var cuffed))
+        if (!_cuffQuery.TryComp(target, out var cuffed))
             return false;
 
         if (_cuff.IsCuffed((target, cuffed)))
             return false;
 
-        if (!TryComp<HandsComponent>(target, out var hands))
-            return false;
-
-        if (hands.Count <= 0)
+        if (_hands.CountFreeHands(target) <= 0)
             return false;
 
         return true;

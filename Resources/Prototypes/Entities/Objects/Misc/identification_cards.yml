@@ -860,6 +860,10 @@
   name: prisoner ID card
   description: A generically printed ID card for scummy prisoners.
   components:
+  # <Trauma>
+  - type: AntagCard
+    threat: 2 # Shouldn't be outside of jail.
+  # </Trauma>
   - type: Sprite
     layers:
     - state: orange
@@ -887,10 +891,6 @@
     - Recyclable
   - type: StaticPrice # these are infinitely producible.
     price: 0
-  # <Trauma>
-  - type: AntagCard
-    threat: 2 # Shouldn't be outside of jail.
-  # </Trauma>
 
 #ERT/Centcomm
 
