@@ -1,4 +1,6 @@
-﻿using Content.Server.Mind;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Mind;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Shared.Vampires;

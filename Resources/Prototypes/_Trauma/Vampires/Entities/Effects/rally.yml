@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RallyOverlay
   categories: [ HideSpawnMenu ]
   components:

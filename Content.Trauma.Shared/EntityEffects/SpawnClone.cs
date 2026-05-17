@@ -1,4 +1,6 @@
-﻿using Content.Shared.Cloning;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Cloning;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.EntityEffects;

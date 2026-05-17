@@ -1,4 +1,6 @@
-﻿using Content.Server.Cloning;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Cloning;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.EntityEffects;

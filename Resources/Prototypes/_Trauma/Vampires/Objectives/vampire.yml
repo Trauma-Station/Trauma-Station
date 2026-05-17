@@ -1,4 +1,4 @@
-﻿# TODO: Add more objectives in the future (maybe after objective shit gets predicted or reworked)
+# TODO: Add more objectives in the future (maybe after objective shit gets predicted or reworked)
 - type: entity
   parent: BaseObjective
   id: BaseVampireObjective
