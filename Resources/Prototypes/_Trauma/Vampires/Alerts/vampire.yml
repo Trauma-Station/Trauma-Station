@@ -29,3 +29,11 @@
     state: vampire_cloak
   name: cloak of darkness # todo: loc
   description: makes you strong and shit # todo: loc
+
+- type: alert
+  id: BloodBond
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/actions.rsi
+    state: blood_bond
+  name: blood bond # todo: loc
+  description: makes you strong and shit # todo: loc

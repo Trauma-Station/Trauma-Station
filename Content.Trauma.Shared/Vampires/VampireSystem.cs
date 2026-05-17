@@ -4,7 +4,7 @@ using Content.Trauma.Shared.Vampires.Haemomancer;
 
 namespace Content.Trauma.Shared.Vampires;
 
-public sealed class VampireSystem : EntitySystem
+public sealed partial class VampireSystem : EntitySystem
 {
     public override void Initialize()
     {

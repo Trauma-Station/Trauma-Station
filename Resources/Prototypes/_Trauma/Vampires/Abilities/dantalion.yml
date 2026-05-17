@@ -11,6 +11,10 @@
   - !type:AddComponents
     components:
     - type: VampireThralls
+    - type: CollectiveMind
+      defaultChannel: Dantalion
+      channels:
+      - Dantalion
   - !type:AddActions
     actions:
     - ActionDanEnthrall
@@ -24,6 +28,9 @@
     actions:
     - ActionPacify
     - ActionSubspaceSwap
+  - !type:PopupPredicted
+    message: You can now pacify people, and swap places with them.
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseDantalionAbility
@@ -34,6 +41,9 @@
   - !type:AddActions
     actions:
     - ActionDeployDecoy
+  - !type:PopupPredicted
+    message: You gain one extra thrall slot, and the ability to deploy a decoy!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseDantalionAbility
@@ -44,6 +54,9 @@
   - !type:AddActions
     actions:
     - ActionRallyThralls
+  - !type:PopupPredicted
+    message: You gain one extra thrall slot, and the ability to rally thralls!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseDantalionAbility
@@ -53,6 +66,9 @@
   - !type:AddActions
     actions:
     - ActionBloodBond
+  - !type:PopupPredicted
+    message: You gain the ability to initiate a blood bond between thralls!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseDantalionAbility
@@ -60,7 +76,7 @@
   cost: 1000
   conditions:
   - !type:HasSuckedVictimsCondition
-    amount: 8
+    amount: 7
   onUnlock:
   - !type:AdjustVampireThralls
   - !type:AddActions

@@ -25,6 +25,8 @@ public sealed partial class SubspaceSwapSystem : EntitySystem
         var target = args.Target;
 
         _transform.SwapPositions(performer, target);
+
+        args.Handled = true;
     }
 }
 

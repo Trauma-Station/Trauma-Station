@@ -2,6 +2,7 @@
 
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Content.Trauma.Common.CollectiveMind;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Dantalion;
@@ -12,10 +13,12 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 public sealed partial class VampireThrallSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
-
     [Dependency] private IGameTiming _timing = default!;
     // [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityQuery<VampireThrallsComponent> _thrallsQuery = default!;
+    [Dependency] private EntityQuery<CollectiveMindComponent> _collectiveMindQuery = default!;
+
+    private static readonly ProtoId<CollectiveMindPrototype> DantalionMind = "Dantalion";
 
     public override void Initialize()
     {
@@ -30,8 +33,8 @@ public sealed partial class VampireThrallSystem : EntitySystem
 
     private void OnEnthrall(Entity<VampireThrallsComponent> ent, ref DanEnthrallActionEvent args)
     {
-        var target = args.Target;
         var user = ent.Owner;
+        var target = args.Target;
         var cap = ent.Comp.ThrallCap;
 
         /*if (!_mind.TryGetMind(target, out _, out _))
@@ -54,6 +57,11 @@ public sealed partial class VampireThrallSystem : EntitySystem
         var comp = EnsureComp<VampireThrallComponent>(target);
         comp.Vampire = user;
         Dirty(target, comp);
+
+        // Holy shit, make an api for it bruh
+        EnsureComp<CollectiveMindComponent>(target).Channels.Add(DantalionMind);
+
+        args.Handled = true;
     }
 
 
@@ -85,6 +93,11 @@ public sealed partial class VampireThrallSystem : EntitySystem
 
         // Notify the vampire that they lost a thrall
         _popup.PopupEntity("You feel like you lost a follower!", vampire, PopupType.LargeCaution);
+
+        if (!_collectiveMindQuery.TryComp(ent.Owner, out var collectiveMind))
+            return;
+
+        collectiveMind.Channels.Remove(DantalionMind);
     }
     #endregion
 

@@ -10,6 +10,7 @@
   - !type:RemoveActions
     actions:
     - ActionVampRejuvenateI
+    - ActionVampRejuvenateII
   - !type:AddActions
     actions:
     - ActionVampGargRejuv
@@ -32,6 +33,9 @@
     actions:
     - ActionGargStomp
     - ActionBloodRush
+  - !type:PopupPredicted
+    message: You gain the ability to stomp, and use blood rush!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseGargantuaAbility
@@ -44,6 +48,9 @@
   - !type:AddActions
     actions:
     - ActionBloodSwellII
+  - !type:PopupPredicted
+    message: Your blood swell becomes upgraded!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseGargantuaAbility
@@ -53,6 +60,9 @@
   - !type:AddActions
     actions:
     - ActionOverwhelmingForce
+  - !type:PopupPredicted
+    message: You can now pry open doors by using your blood!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseGargantuaAbility
@@ -61,8 +71,11 @@
   onUnlock:
   - !type:AddActions
     actions:
-    - ActionDemonicGrasp
+    - ActionDemonicHand
     - ActionGargCharge
+  - !type:PopupPredicted
+    message: You can charge and send demonic hands to your targets!
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseGargantuaAbility

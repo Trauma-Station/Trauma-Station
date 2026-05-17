@@ -19,8 +19,10 @@
   onUnlock:
   - !type:AddActions
     actions:
-    - ActionCloakDarkness
     - ActionShadowAnchor
+  - !type:PopupPredicted
+    message: You may now create pylons to fool anyone.
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseUmbraeAbility
@@ -30,6 +32,9 @@
   - !type:AddActions
     actions:
     - ActionDarkPassage
+  - !type:PopupPredicted
+    message: The passage opens, you may now teleport to any turf.
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseUmbraeAbility
@@ -39,6 +44,9 @@
   - !type:AddActions
     actions:
     - ActionExtinguish
+  - !type:PopupPredicted
+    message: Your mind gets consumed, you can now extinguish any light nearby.
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseUmbraeAbility
@@ -48,6 +56,9 @@
   - !type:AddActions
     actions:
     - ActionShadowBoxing
+  - !type:PopupPredicted
+    message: The shadows have come to help you.
+    visualType: Large
 
 - type: vampireAbility
   parent: BaseUmbraeAbility
@@ -55,7 +66,7 @@
   cost: 1000
   conditions:
   - !type:HasSuckedVictimsCondition
-    amount: 8
+    amount: 7
   onUnlock:
   - !type:AddActions
     actions:

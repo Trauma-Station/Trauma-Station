@@ -18,10 +18,9 @@
   - !type:MovementSpeedModifier
     time: 0
     type: Set
-  - !type:PopupMessage
-    messages:
-    - You healed.
-    visualType: Medium
+  - !type:PopupPredicted
+    message: You healed...
+    visualType: MediumCaution
 
 # Same, but instead purges 10u of any harmful reagent. Heals 10 points each of brute, burn, toxic, and heals 50 of oxyloss
 - type: entityEffect
@@ -52,31 +51,6 @@
   - !type:AdjustReagentGroup
     amount: -10
     group: Toxins
-  - !type:PopupMessage
-    messages:
-    - You healed.
-    visualType: Medium
-
-# Testing
-- type: entity
-  name: paralyse stick
-  parent: BaseItem
-  id: MeleeDebugParalyse
-  description: hit hard ye
-  suffix: DEBUG
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Melee/debug.rsi
-    state: icon
-  - type: EffectsTool
-    verbText: paint-remover-verb
-    userPopup: paint-remover-popup-user
-    othersPopup: paint-remover-popup-others
-    effects:
-    - !type:ModifyParalysis
-      time: 10
-    - !type:TakeStaminaDamage
-      amount: 100
-  - type: Item
-    size: Tiny
-    sprite: Objects/Weapons/Melee/debug.rsi
+  - !type:PopupPredicted
+    message: You healed...
+    visualType: MediumCaution

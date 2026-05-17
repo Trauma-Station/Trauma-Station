@@ -13,6 +13,10 @@
     - !type:ModifyStatusEffect
       effectProto: VampireSpaceStatusEffect
       time: null
+  - type: AntagObjectives
+    objectives:
+    - VampireBloodObjective
+    - VampireSurviveObjective
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     agentName: vampire # todo loc

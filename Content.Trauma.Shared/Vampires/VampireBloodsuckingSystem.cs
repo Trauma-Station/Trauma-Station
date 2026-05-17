@@ -34,10 +34,10 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
     [Dependency] private EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
 
-    private static readonly EntProtoId BiteEffect = "WeaponArcBite";                                   // TODO: This sprite is ass, change it to custom one
-    private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg"); // TODO: This sound is ass, change it to custom one
+    private static readonly EntProtoId BiteEffect = "WeaponArcBite";
+    private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
 
-    private static TimeSpan _bloodsuckingDelay = TimeSpan.FromSeconds(5); // TODO: Should be a cvar
+    private static TimeSpan _bloodsuckingDelay = TimeSpan.FromSeconds(5);
 
     public override void Initialize()
     {
@@ -120,7 +120,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         RaiseLocalEvent(user, ref ev);
 
         _popup.PopupClient("You drain the life force out of them...", user, user, PopupType.MediumCaution);
-        _popup.PopupEntity("You feel like your life force has been drained...", target, target, PopupType.MediumCaution);
+        _popup.PopupEntity("You feel like your life force has been drained...", user, target, PopupType.MediumCaution);
 
         ent.Comp.ConsumedVictims.Add(target);
         Dirty(ent);

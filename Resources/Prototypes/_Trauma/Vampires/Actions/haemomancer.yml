@@ -157,10 +157,9 @@
     - !type:HasVampireBlood
       amount: 10
     onToggle:
-    - !type:PopupMessage
-      type: Local
-      messages:
-      - The rite begins!
+    - !type:PopupPredicted
+      message: The rite begins!
+      visualType: MediumCaution
     - !type:ModifyStatusEffect
       effectProto: BloodBringerRiteStatusEffect
       time: null
@@ -191,7 +190,6 @@
       effectProto: BloodBringerRiteStatusEffect
       time: null
       type: Remove
-    - !type:PopupMessage
-      type: Local
-      messages:
-      - The rite stops...
+    - !type:PopupPredicted
+      message: The rite stops!
+      visualType: MediumCaution

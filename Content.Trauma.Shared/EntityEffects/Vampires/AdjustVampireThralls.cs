@@ -17,13 +17,14 @@ public sealed partial class AdjustVampireThralls : EntityEffectBase<AdjustVampir
     public int Amount = 1;
 }
 
-public sealed class AdjustVampireThrallsEffectSystem : EntityEffectSystem<VampireThrallsComponent, AdjustVampireThralls>
+public sealed partial class AdjustVampireThrallsEffectSystem : EntityEffectSystem<VampireThrallsComponent, AdjustVampireThralls>
 {
+    [Dependency] private VampireThrallSystem _thrall = default!;
+
     protected override void Effect(Entity<VampireThrallsComponent> ent, ref EntityEffectEvent<AdjustVampireThralls> args)
     {
         var effect = args.Effect;
 
-        ent.Comp.ThrallCap += effect.Amount;
-        Dirty(ent);
+        _thrall.AdjustThrallCap(ent.AsNullable(), effect.Amount);
     }
 }

@@ -23,10 +23,8 @@
   - !type:RemoveActions
     actions:
     - ActionVampRejuvenateI
-  - !type:PopupMessage
-    messages:
-    - You feel like your rejuvenate got upgraded!
-    type: Local
+  - !type:PopupPredicted
+    message: You feel like your rejuvenate got upgraded!
     visualType: Large
 
 - type: vampireAbility
@@ -36,25 +34,33 @@
   - !type:AddActions
     actions:
     - ActionChooseSpecialization
+  - !type:PopupPredicted
+    message: You unlock the ability to specialize.
+    visualType: Large
 
 - type: vampireAbility
   id: NightVision
   cost: 500
   onUnlock:
-  - !type:AddActions
-    actions:
-    - ToggleNightVision
+  - !type:AddComponents
+    components:
+    - type: NightVision
+  - !type:PopupPredicted
+    message: You gain night vision.
+    visualType: Large
 
 - type: vampireAbility
   id: BaseFullPower
   cost: 1000
   conditions:
   - !type:HasSuckedVictimsCondition
-    amount: 8
+    amount: 7
   onUnlock:
   - !type:RemoveComponents
     components:
     - type: AreaDetector
     - type: WeakToHoly
     - type: Nullification
-  # nullification removal
+  - !type:PopupPredicted
+    message: You have reached full power!
+    visualType: Large

@@ -1,0 +1,38 @@
+﻿# TODO: Add more objectives in the future (maybe after objective shit gets predicted or reworked)
+- type: entity
+  parent: BaseObjective
+  id: BaseVampireObjective
+  components:
+  - type: Objective
+    issuer: vampire
+    unique: true
+    difficulty: 1
+  - type: RoleRequirement
+    roles:
+    - VampireRole
+
+- type: entity
+  parent: BaseVampireObjective
+  id: VampireBloodObjective
+  description: Deliver the payload and get out before the payload detonates.
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Devices/nuke.rsi
+      state: nuclearbomb_base
+  - type: NumberObjective
+    min: 1000
+    max: 1000
+    title: objective-condition-doorjack-title
+    description: objective-condition-doorjack-description
+  - type: VampireBloodCondition
+
+- type: entity
+  parent: [BaseVampireObjective, BaseSurviveObjective]
+  id: VampireSurviveObjective
+  description: You must survive no matter what.
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Devices/nuke.rsi
+      state: nuclearbomb_base

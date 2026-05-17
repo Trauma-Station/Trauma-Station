@@ -1,6 +1,6 @@
 # Stomp
 - type: entityEffect
-  id: GargantuaStomp # TODO: Look at times in paradise + make shader for stomp + play cool ass sound + do camera kick
+  id: GargantuaStomp
   effects:
   - !type:ModifyKnockdown
     time: 6
@@ -53,7 +53,6 @@
   - !type:AdjustReagentGroup
     amount: -10
     group: Toxins
-  - !type:PopupMessage
-    messages:
-    - You healed.
-    visualType: Medium
+  - !type:PopupPredicted
+    message: You healed...
+    visualType: MediumCaution

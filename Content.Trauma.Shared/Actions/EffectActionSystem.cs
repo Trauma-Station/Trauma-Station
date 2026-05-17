@@ -45,9 +45,6 @@ public sealed partial class EffectActionSystem : EntitySystem
     private void OnToggle(Entity<ToggleEffectActionComponent> ent, ref EffectToggleActionEvent args)
     {
         bool targetState = !ent.Comp.Toggled;
-        // Checking args.Toggle here for one reason. If we modify the toggle of the action via
-        // the method (SetToggled), it will use the Action's toggle variable,
-        // and this is the only way to access that.
         if (targetState && ent.Comp.OnToggleConditions is { } conditions)
         {
             if (!_conditions.TryConditions(args.Performer, conditions))

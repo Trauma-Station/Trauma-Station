@@ -3,6 +3,7 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Actions;
+using Content.Shared.Alert;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
@@ -13,6 +14,7 @@ public sealed partial class BloodBondSystem : EntitySystem
 {
     // Note: This system is too hardcoded design-wise but i cbf to think of how to make it more generic like the others
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AlertsSystem _alert = default!;
     [Dependency] private VampireSystem _vampire = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private DamageableSystem _damage = default!;
@@ -23,6 +25,8 @@ public sealed partial class BloodBondSystem : EntitySystem
     private HashSet<Entity<VampireThrallComponent>> _thralls = new();
     private HashSet<Entity<BloodBondLinkedComponent>> _bloodLinked = new();
 
+    private static readonly ProtoId<AlertPrototype> BloodBondAlert = "BloodBond";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -31,6 +35,9 @@ public sealed partial class BloodBondSystem : EntitySystem
 
         SubscribeLocalEvent<BloodBondLinkedComponent, MoveEvent>(OnMove);
         SubscribeLocalEvent<BloodBondLinkedComponent, DamageModifyEvent>(OnDamageModify);
+
+        SubscribeLocalEvent<BloodBondLinkedComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<BloodBondLinkedComponent, ComponentShutdown>(OnShutdown);
     }
 
     public override void Update(float frameTime)
@@ -104,6 +111,8 @@ public sealed partial class BloodBondSystem : EntitySystem
             vampLinked.Range = args.Range;
             Dirty(user, vampLinked);
 
+            args.Handled = true;
+
             return;
         }
 
@@ -127,10 +136,7 @@ public sealed partial class BloodBondSystem : EntitySystem
 
         // Remove the component itself when getting out of range.
         if ((userPos.Position - vampirePos.Position).Length() <= ent.Comp.Range)
-        {
-            _popup.PopupClient("You stop being part of the blood bond!", ent.Owner, PopupType.MediumCaution);
             RemCompDeferred(ent.Owner, ent.Comp);
-        }
     }
 
     private void OnDamageModify(Entity<BloodBondLinkedComponent> ent, ref DamageModifyEvent args)
@@ -165,6 +171,16 @@ public sealed partial class BloodBondSystem : EntitySystem
                 splitDamage: SplitDamageBehavior.SplitEnsureAll,
                 canMiss: false);
         }
+    }
+
+    private void OnStartup(Entity<BloodBondLinkedComponent> ent, ref ComponentStartup args)
+    {
+        _alert.ShowAlert(ent.Owner, BloodBondAlert);
+    }
+
+    private void OnShutdown(Entity<BloodBondLinkedComponent> ent, ref ComponentShutdown args)
+    {
+        _alert.ClearAlert(ent.Owner, BloodBondAlert);
     }
 
     #region Helper
