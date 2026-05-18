@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.MobClass;
@@ -12,6 +14,7 @@ namespace Content.Trauma.Shared.MobClass;
 public sealed partial class MobClassSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -74,6 +77,8 @@ public sealed partial class MobClassSystem : EntitySystem
 
         var ev = new MobClassSelectedEvent();
         RaiseLocalEvent(ent.Owner, ref ev);
+
+        _admin.Add(LogType.MobClass, LogImpact.High, $"User {ent.Owner} has gained the class {classProto} which belongs to {mobGroup}");
     }
 
     /// <summary>
@@ -85,6 +90,18 @@ public sealed partial class MobClassSystem : EntitySystem
             return null;
 
         return ent.Comp.CurrentClass;
+    }
+
+    /// <summary>
+    /// Gets the name of the class the entity currently belongs to.
+    /// Returns "None" if no class has been selected.
+    /// </summary>
+    public string GetClassName(Entity<MobClassComponent?> ent)
+    {
+        if (!_mobClassQuery.Resolve(ent.Owner, ref ent.Comp) || !_proto.Resolve(ent.Comp.CurrentClass, out var proto))
+            return "None";
+
+        return proto.Name;
     }
 }
 

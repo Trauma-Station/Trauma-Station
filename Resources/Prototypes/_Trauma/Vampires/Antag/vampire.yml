@@ -1,9 +1,25 @@
 - type: antag
   id: Vampire
-  name: Vampire # todo: change to loc
+  name: roles-antag-vampire-name
   antagonist: true
-  setPreference: false
-  objective: test  # todo: change to loc
+  setPreference: true
+  objective: roles-antag-vampire-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 5h
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC       # no blood
+    - Plasmaman # no blood
+  # guides: [ Vampires ]
+
+- type: antag
+  id: VampireThrall
+  name: roles-antag-vampire-thrall-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-vampire-thrall-objective
 
 - type: antagSmite
   id: Vampire
@@ -11,5 +27,5 @@
   rule: Vampire
   ruleComp: VampireRule
   icon:
-    sprite: Structures/Walls/clock.rsi # TODO: Change
-    state: wall_gear
+    sprite: Fluids/tomato_splat.rsi
+    state: puddle-1

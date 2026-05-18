@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
@@ -10,6 +12,7 @@ public sealed partial class ArenaCreationSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     public override void Initialize()
     {
@@ -78,6 +81,8 @@ public sealed partial class ArenaCreationSystem : EntitySystem
     /// </summary>
     public List<EntityUid>? CreateArena(EntityCoordinates coords, int arenaSize, EntProtoId wallProto, bool predicted)
     {
+        _admin.Add(LogType.EntitySpawn, LogImpact.Medium, $"An arena of size {arenaSize} has been created at {coords}");
+
         // We only spawn the walls in the edges of the area.
         var walls = new List<EntityUid>();
 

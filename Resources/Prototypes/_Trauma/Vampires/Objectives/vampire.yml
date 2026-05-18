@@ -4,7 +4,7 @@
   id: BaseVampireObjective
   components:
   - type: Objective
-    issuer: vampire
+    issuer: objective-issuer-vampire
     unique: true
     difficulty: 1
   - type: RoleRequirement
@@ -14,17 +14,15 @@
 - type: entity
   parent: BaseVampireObjective
   id: VampireBloodObjective
-  description: Deliver the payload and get out before the payload detonates.
+  description: Drink blood.
   components:
   - type: Objective
-    icon:
-      sprite: Objects/Devices/nuke.rsi
-      state: nuclearbomb_base
+    icon: _Trauma/Interface/Vampires/specialize.png
   - type: NumberObjective
     min: 1000
     max: 1000
-    title: objective-condition-doorjack-title
-    description: objective-condition-doorjack-description
+    title: objective-condition-blood-title
+    description: objective-condition-blood-description
   - type: VampireBloodCondition
 
 - type: entity
@@ -34,5 +32,6 @@
   components:
   - type: Objective
     icon:
-      sprite: Objects/Devices/nuke.rsi
-      state: nuclearbomb_base
+      sprite: Fluids/splatter.rsi
+      state: splatter-5
+      color: Red

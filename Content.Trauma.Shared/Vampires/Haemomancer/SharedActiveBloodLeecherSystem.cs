@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
+using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -12,6 +14,7 @@ public abstract partial class SharedActiveBloodLeecherSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -97,12 +100,16 @@ public abstract partial class SharedActiveBloodLeecherSystem : EntitySystem
             ent.Comp.MusicEntity = audio;
         }
 
+        _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ToPrettyString(ent.Owner)} has initiated the Blood Bringer's Rite action");
+
         ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateRate;
         Dirty(ent);
     }
 
     private void OnShutdown(Entity<ActiveBloodLeecherComponent> ent, ref ComponentShutdown args)
     {
+        _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ToPrettyString(ent.Owner)} has stopped the Blood Bringer's Rite action");
+
         _audio.Stop(ent.Comp.MusicEntity);
     }
 

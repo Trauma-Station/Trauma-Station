@@ -13,7 +13,7 @@ public sealed partial class NullificationSystem : EntitySystem
     /// </summary>
     public void AdjustNullification(Entity<NullificationComponent?> ent, int amount)
     {
-        if (!_nullificationQuery.Resolve(ent.Owner, ref ent.Comp))
+        if (!_nullificationQuery.Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
         var newAmount = Math.Clamp(ent.Comp.CurrentNullification + amount, 0, ent.Comp.MaxNullification);

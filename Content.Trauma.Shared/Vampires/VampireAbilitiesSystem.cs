@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.MobClass;
@@ -8,6 +10,7 @@ namespace Content.Trauma.Shared.Vampires;
 
 public sealed partial class VampireAbilitiesSystem : EntitySystem
 {
+    [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
     [Dependency] private VampireSystem _vampire = default!;
@@ -84,6 +87,8 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
 
             ent.Comp.UnlockedAbilities.Add(ability);
             Dirty(ent);
+
+            _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ToPrettyString(ent.Owner)} has gained the ability {ability.Id}");
         }
     }
 

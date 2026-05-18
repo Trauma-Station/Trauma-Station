@@ -7,5 +7,17 @@
     antagPrototype: Vampire
     exclusiveAntag: true
     roleType: SoloAntagonist
-    subtype: vampire # todo loc
+    subtype: roles-antag-vampire-name
   - type: VampireRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleVampireThrall
+  name: Vampire Thrall Role
+  components:
+  - type: MindRole
+    antagPrototype: VampireThrall
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+    subtype: roles-antag-vampire-thrall-name
+  - type: VampireThrallRole

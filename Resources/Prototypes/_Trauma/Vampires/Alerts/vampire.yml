@@ -3,37 +3,37 @@
   icons:
   - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
     state: blood_swell
-  name: blood swell # todo: loc
-  description: makes you strong and shit # todo: loc
+  name: blood-swell-effect-name
+  description: blood-swell-effect-description
 
 - type: alert
   id: BloodRush
   icons:
   - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
     state: blood_rush
-  name: blood rush # todo: loc
-  description: makes you strong and shit # todo: loc
+  name: blood-rush-effect-name
+  description: blood-rush-effect-description
 
 - type: alert
   id: Gladiator
   icons:
   - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
     state: mech_damtype_brute
-  name: gladiator # todo: loc
-  description: makes you strong and shit # todo: loc
+  name: gladiator-effect-name
+  description: gladiator-effect-description
 
 - type: alert
   id: CloakOfDarkness
   icons:
   - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
     state: vampire_cloak
-  name: cloak of darkness # todo: loc
-  description: makes you strong and shit # todo: loc
+  name: cloak-darkness-effect-name
+  description: cloak-darkness-effect-description
 
 - type: alert
   id: BloodBond
   icons:
   - sprite: /Textures/_Trauma/Vampires/actions.rsi
     state: blood_bond
-  name: blood bond # todo: loc
-  description: makes you strong and shit # todo: loc
+  name: blood-bond-effect-name
+  description: blood-bond-effect-description

@@ -1220,12 +1220,16 @@
           min: 40
         components:
         - type: VampireThrall
-      - !type:ApplyNullification
+      - !type:NestedEffect
         conditions:
         - !type:ReagentCondition
           reagent: Holywater
           min: 20
-        amount: 5
+        - !type:WhitelistCondition
+          whitelist:
+            components:
+            - Vampire
+        proto: VampireHolyWater
       # </Trauma>
       - !type:SatiateThirst
         factor: 3

@@ -54,3 +54,20 @@
   - !type:PopupPredicted
     message: You healed...
     visualType: MediumCaution
+
+- type: entityEffect
+  id: VampireFlameBurst
+  effects:
+  - !type:Flammable
+    multiplier: 5
+  - !type:Ignite
+
+- type: entityEffect
+  id: VampireHolyWater
+  effects:
+  - !type:Vomit
+    probability: 0.2
+  - !type:TakeStaminaDamage
+    amount: 10
+  - !type:ApplyNullification
+    amount: 5

@@ -53,7 +53,7 @@ public sealed partial class VampireBloodConditionSystem : EntitySystem
     }
 
     /// <summary>
-    /// Increments the blood of the objective, called after a bloodsucking sequence
+    /// Sets the blood of the objective, called after a bloodsucking sequence
     /// </summary>
     public void AddBlood(Entity<VampireBloodConditionComponent?> ent, int blood)
     {

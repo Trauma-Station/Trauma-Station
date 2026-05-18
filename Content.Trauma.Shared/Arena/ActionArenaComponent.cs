@@ -16,8 +16,8 @@ public sealed partial class ActionArenaComponent : Component
     /// <summary>
     /// The wall prototype to use.
     /// </summary>
-    [DataField] // TODO: Required
-    public EntProtoId WallProto = "WallHierophantArena";
+    [DataField(required: true)]
+    public EntProtoId WallProto;
 
     /// <summary>
     /// How big the arena will be.

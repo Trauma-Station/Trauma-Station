@@ -3,9 +3,8 @@
   id: Vampire
   components:
   - type: VampireRule
-  - type: GameRule # todo: placeholder
-    chaosScore: 350
-    minPlayers: 15
+  - type: GameRule
+    minPlayers: 20
   - type: AntagPlayerEffects
     effects:
     - !type:ChangeFaction
@@ -19,7 +18,7 @@
     - VampireSurviveObjective
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
-    agentName: vampire # todo loc
+    agentName: roles-antag-vampire-name
     definitions:
     - prefRoles: [ Vampire ]
       max: 4
@@ -27,7 +26,7 @@
       mindRoles:
       - MindRoleVampire
       briefing:
-        # text: TODO
+        text: vampire-role-briefing
         color: "#650000"
         sound: /Audio/_Trauma/Vampires/vampalert.ogg
       components:
@@ -43,6 +42,12 @@
         areas:
         - AreaChapel
         effectsOnEnter:
-        - !type:Ignite
-        - !type:Flammable
-          multiplier: 3
+        - !type:ModifyStatusEffect
+          effectProto: VampireChapelStatusEffect
+          time: null
+          type: Add
+        effectsOnExit:
+        - !type:ModifyStatusEffect
+          effectProto: VampireChapelStatusEffect
+          time: null
+          type: Remove

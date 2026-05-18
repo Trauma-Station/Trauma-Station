@@ -508,4 +508,14 @@ public enum LogType
     /// Trauma - Genetics related logs.
     /// </summary>
     Genetics = 20001,
+
+    /// <summary>
+    /// Trauma - Mob class related logs.
+    /// </summary>
+    MobClass = 20002,
+
+    /// <summary>
+    /// Trauma - Vampire related logs.
+    /// </summary>
+    Vampire = 20003,
 }
