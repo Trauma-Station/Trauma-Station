@@ -1,4 +1,4 @@
-﻿blood-swell-effect-name = Blood Swell
+blood-swell-effect-name = Blood Swell
 blood-swell-effect-description = You take reduced brute, burn and stamina damage, but you're unable to use guns.
 
 blood-rush-effect-name = Blood Rush

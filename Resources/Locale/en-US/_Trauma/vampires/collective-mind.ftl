@@ -1,1 +1,1 @@
-﻿collective-mind-dantalion = Dantalion
+collective-mind-dantalion = Dantalion

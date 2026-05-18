@@ -1,4 +1,4 @@
-﻿roles-antag-vampire-name = Vampire
+roles-antag-vampire-name = Vampire
 roles-antag-vampire-objective = Suck the blood of the crew, and reach full power.
 
 vampire-role-briefing = You are a Vampire! To bite someone, target the head and use harm intent with an empty hand. Drink blood to gain new powers.

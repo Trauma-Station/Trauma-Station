@@ -1,4 +1,4 @@
-﻿vampire-gargantua-briefing =
+vampire-gargantua-briefing =
         You are the Gargantua! Your Rejuvenate has been upgraded to heal you based on how much damage you've taken.
         Use force and violence to reach full power!
 
@@ -13,4 +13,3 @@ vampire-umbrae-briefing =
 vampire-dantalion-briefing =
         You are the Dantalion! You are able to harvest the minds of the crew, in order to make them your thralls.
         You can have up to 4 thralls during full power, so choose wisely!
-
