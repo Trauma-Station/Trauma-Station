@@ -230,7 +230,6 @@
   - type: Emag
     emagType: Access
   - type: AntagCard
-    threat: 5
 
 # event-resctricted jobs
 

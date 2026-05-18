@@ -47,5 +47,4 @@
     - Recyclable
   - type: StaticPrice # MassProduced NT Slop
     price: 0
-  - type: AntagCard
-    threat: 1 # D-class? Outside? Can't be.
+  - type: AntagCard # D-class? Outside? Can't be.

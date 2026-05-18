@@ -79,11 +79,8 @@ public sealed partial class WandskySystem : EntitySystem
 
             _popup.PopupClient("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
 
-            if (!_net.IsServer)
-                return;
-
             ent.Comp.Waypoints.Remove(waypoint);
-            QueueDel(waypoint);
+            PredictedQueueDel(waypoint);
             Dirty(ent);
             return;
         }
@@ -92,7 +89,7 @@ public sealed partial class WandskySystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        var waypointEntity = Spawn(ent.Comp.WaypointId, args.Target);
+        var waypointEntity = PredictedSpawnAtPosition(ent.Comp.WaypointId, args.Target);
         ent.Comp.Waypoints.Add(waypointEntity);
         Dirty(ent);
     }
@@ -109,12 +106,10 @@ public sealed partial class WandskySystem : EntitySystem
         }
 
         _popup.PopupClient($"Cleared {count} waypoints!", ent.Owner, args.Performer, PopupType.Medium);
-        if (!_net.IsServer)
-            return;
 
         foreach (var waypoint in waypoints)
         {
-            QueueDel(waypoint);
+            PredictedQueueDel(waypoint);
         }
         ent.Comp.Waypoints.Clear();
         Dirty(ent);

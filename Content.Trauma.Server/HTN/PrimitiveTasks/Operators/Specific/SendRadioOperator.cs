@@ -57,10 +57,9 @@ public sealed partial class SendRadioOperator : HTNOperator
             if (!blackboard.TryGetValue<EntityUid>(Key, out var value, _entManager) || _entManager.Deleted(value))
                 return HTNOperatorStatus.Failed;
 
-            var xform = _entManager.GetComponent<TransformComponent>(value);
-            var location = FormattedMessage.RemoveMarkupPermissive(_navMap.GetNearestBeaconString((value, xform)));
+            var location = FormattedMessage.RemoveMarkupPermissive(_navMap.GetNearestBeaconString((value, _entManager.GetComponent<TransformComponent>(value))));
 
-            message = Loc.GetString(Message, ("entity", Identity.Entity(value, _entManager)), ("coords", $"X: {MathF.Round(xform.Coordinates.X)}, Y: {MathF.Round(xform.Coordinates.Y)}"), ("location", location));
+            message = Loc.GetString(Message, ("entity", Identity.Entity(value, _entManager)), ("location", location));
         }
         else
         {

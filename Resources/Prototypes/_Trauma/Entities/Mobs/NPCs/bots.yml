@@ -246,6 +246,7 @@
   - type: ChangeHtnOnEmag
     task: !type:HTNCompoundTask
       task: ED209EmagedCompound
+  - type: PatrolSlave
 
 - type: entity
   id: ED209Endoskeleton

@@ -16,7 +16,6 @@
     graph: MakeshiftIDCard
     node: final
   - type: AntagCard
-    threat: 2
 
 - type: entity
   parent: BaseItem

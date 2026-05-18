@@ -2,6 +2,9 @@
 
 namespace Content.Trauma.Shared.Cuff;
 
+/// <summary>
+/// Arrests somebody and spawns cuffs when doing so.
+/// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CuffSpawnerComponent : Component
 {

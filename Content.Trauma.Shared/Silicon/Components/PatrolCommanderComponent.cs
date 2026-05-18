@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.Silicon.Components;
 public sealed partial class PatrolCommanderComponent : Component
 {
     /// <summary>
-    /// Waypoint ProtoId?
+    /// Waypoint ProtoId.
     /// </summary>
     [DataField]
     public EntProtoId WaypointId = "SecuritronWaypoint";
@@ -34,7 +34,6 @@ public sealed partial class PatrolCommanderComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier EnslaveSound = new SoundPathSpecifier("/Audio/Machines/chime.ogg");
-
 }
 
 public sealed partial class TogglePatrolActionEvent : InstantActionEvent;

@@ -607,8 +607,7 @@
   name: death squad ID card
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 3 # Weapons? On my station?
+  - type: AntagCard # Weapons? On my station?
   # </Trauma>
   - type: Sprite
     layers:
@@ -663,8 +662,7 @@
   suffix: Nukie
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 7 # Holy nukie
+  - type: AntagCard # Holy nukie
   # </Trauma>
   - type: Access
     tags:
@@ -691,7 +689,6 @@
   components:
   # <Trauma>
   - type: AntagCard
-    threat: 4
   # </Trauma>
   - type: Sprite
     layers:
@@ -712,7 +709,6 @@
   components:
   # <Trauma>
   - type: AntagCard
-    threat: 6
   # </Trauma>
   - type: Sprite
     layers:
@@ -727,8 +723,7 @@
   name: syndicate corpsman ID card
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 10 # Priority
+  - type: AntagCard # Holy shit
   # </Trauma>
   - type: Sprite
     layers:
@@ -742,8 +737,7 @@
   name: syndicate commander ID card
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 9 # Second Priority
+  - type: AntagCard # Holy Shit 2
   # </Trauma>
   - type: Sprite
     layers:
@@ -757,10 +751,6 @@
   name: ninja ID card
   suffix: Ninja
   components:
-  # <Trauma>
-  - type: AntagCard
-    threat: 4
-  # </Trauma>
   - type: Sprite # Trauma - not using wizden id card sprites system yet
     layers:
     - state: default
@@ -787,8 +777,7 @@
   name: pirate ID card
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 3
+  - type: AntagCard # YARGH
   # </Trauma>
   - type: Sprite
     layers:
@@ -861,8 +850,7 @@
   description: A generically printed ID card for scummy prisoners.
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 2 # Shouldn't be outside of jail.
+  - type: AntagCard # Shouldn't be outside of jail.
   # </Trauma>
   - type: Sprite
     layers:
