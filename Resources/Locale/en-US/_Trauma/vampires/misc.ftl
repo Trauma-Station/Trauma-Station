@@ -1,1 +1,1 @@
-﻿metabolizer-type-vampire = Vampire
+metabolizer-type-vampire = Vampire
