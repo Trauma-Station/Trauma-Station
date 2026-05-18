@@ -21,8 +21,8 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/ratma.rsi
     layers:
-      - map: [ "enum.DamageStateVisualLayers.Base" ]
-        state: alive
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
   - type: DamageStateVisuals
     states:
       Alive:
@@ -261,8 +261,8 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/wailinghorse.rsi
     layers:
-      - map: [ "enum.DamageStateVisualLayers.Base" ]
-        state: alive
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
   - type: DamageStateVisuals
     states:
       Alive:
@@ -361,7 +361,7 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: coconutcrabnoshell
+    - state: coconutcrabnoshell
   - type: NoSlip
   - type: Puller # Ditto
     needsHands: false
@@ -452,7 +452,7 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: coconutcrab
+    - state: coconutcrab
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -468,8 +468,8 @@
         deleteGibs: true
         recursive: false
       - !type:PlaySoundBehavior
-            sound:
-              collection: WoodDestroy
+        sound:
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodCoconutHalf:
@@ -502,7 +502,7 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: floofycrab
+    - state: floofycrab
   - type: SlowOnDamage
     speedModifierThresholds:
       999: 1
@@ -538,7 +538,7 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: tinycrab
+    - state: tinycrab
   - type: Fixtures
     fixtures:
       fix1:
