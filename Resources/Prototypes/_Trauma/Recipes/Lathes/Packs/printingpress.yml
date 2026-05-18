@@ -1,6 +1,12 @@
 - type: latheRecipePack
   id: PrintingPressSimple
   recipes:
+  - BookMelee
+  - BookStrength
+  - BookShooting
+  - BookSurgery
+  - BookMagicalLiteracy
+  - BookLiteracy
   - BookJanitor
   - BookFabrication
   - BookSurvival
@@ -8,6 +14,11 @@
 - type: latheRecipePack
   id: PrintingPressAdvanced
   recipes:
+  - BookMeleePrinted
+  - BookShootingPrinted
+  - BookSurgeryPrinted
+  - BookMagicalLiteracyPrinted
+  - BookLanguageTauCeti
   - BookFabricationPrinted
   - BookSurvivalPrinted
 
