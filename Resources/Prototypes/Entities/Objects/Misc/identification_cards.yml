@@ -797,8 +797,7 @@
   name: psychologist ID card
   components:
   # <Trauma>
-  - type: AntagCard
-    threat: 3 # Very much deserved
+  - type: AntagCard # Very much deserved
   # </Trauma>
   - type: Sprite
     layers:

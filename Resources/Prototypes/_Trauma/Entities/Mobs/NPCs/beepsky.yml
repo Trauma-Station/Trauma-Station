@@ -85,11 +85,6 @@
     - Cryogenics
     - GenpopEnter
     - GenpopLeave
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - Bot
-    - Unimplantable
   - type: CuffSpawner
   - type: MovementSpeedModifier
     baseSprintSpeed: 3

@@ -231,10 +231,6 @@
   - type: HTN
     rootTask:
       task: ED209Compound
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - FootstepSound
   - type: NpcFactionMember
     factions:
     - NanoTrasen
