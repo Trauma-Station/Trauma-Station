@@ -12,6 +12,18 @@
     - !type:ModifyStatusEffect
       effectProto: VampireSpaceStatusEffect
       time: null
+    - !type:RelayOrgan
+      category: Stomach
+      effects:
+      - !type:SetMetabolizerType
+        metabolizerTypes:
+        - Vampire
+      - !type:SetStomachDigestable
+        specialDigestible:
+          tags:
+          - Pill
+          - Crayon
+          - Paper
   - type: AntagObjectives
     objectives:
     - VampireBloodObjective
