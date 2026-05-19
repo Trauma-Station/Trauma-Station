@@ -204,7 +204,7 @@ public abstract partial class SharedItemSwitchSystem : EntitySystem
 
         if (TryComp<ItemComponent>(uid, out var item) && _container.TryGetContainingContainer((uid, null, null), out var container))
         {
-            if (TryComp(container.Owner, out StorageComponent? storage))
+            if (container.ID == StorageComponent.ContainerId && TryComp(container.Owner, out StorageComponent? storage))
             {
                 _transform.AttachToGridOrMap(uid);
                 if (!_storage.Insert(container.Owner, uid, out _, null, storage, false))
