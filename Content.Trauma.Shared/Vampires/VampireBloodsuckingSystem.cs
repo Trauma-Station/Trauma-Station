@@ -27,7 +27,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    //[Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private EntityQuery<TargetingComponent> _targetingQuery = default!;
@@ -83,11 +83,11 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         var user = ent.Owner;
         _hunger.ModifyHunger(user, ent.Comp.HungerRestoration);
 
-        /*if (!_mind.TryGetMind(target, out _, out _)) TODO: Uncomment when done playtesting
+        if (!_mind.TryGetMind(target, out _, out _))
         {
             _popup.PopupClient("Their blood is pale...", user, user, PopupType.MediumCaution);
             return;
-        }*/
+        }
 
         if (!_bloodstreamQuery.TryComp(target, out var bloodstream))
             return;
