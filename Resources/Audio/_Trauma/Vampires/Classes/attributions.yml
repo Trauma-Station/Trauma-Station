@@ -1,0 +1,19 @@
+- files: ["class_dantalion.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from opengameart, converted to ogg, mono and cut by @Lumminal (Github)"
+  source: "https://opengameart.org/content/cute-bass"
+
+- files: ["class_umbrae.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from freesound, converted to ogg, mono and cut by @Lumminal (Github)"
+  source: "https://freesound.org/people/ChristmasKrumble666/sounds/753583/"
+
+- files: ["class_haemomancer.ogg"]
+  license: "CC-BY-NC-4.0"
+  copyright: "Taken from www.classicals.de, converted to mono by @Lumminal (Github)"
+  source: "https://www.classicals.de/chopin-collection"
+
+- files: ["class_gargantua.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Taken from opengameart, converted to ogg, mono and cut by @Lumminal (Github)"
+  source: "https://opengameart.org/content/act-of-war"

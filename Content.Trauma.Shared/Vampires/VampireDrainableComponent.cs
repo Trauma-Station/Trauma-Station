@@ -11,13 +11,13 @@ namespace Content.Trauma.Shared.Vampires;
 public sealed partial class VampireDrainableComponent : Component
 {
     /// <summary>
-    ///     How much blood we have gathered from this entity.
+    /// How much blood we have gathered from this entity.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int BloodGathered;
 
     /// <summary>
-    ///     The maximum amount of blood we are allowed to gather from this entity.
+    /// The maximum amount of blood we are allowed to gather from this entity.
     /// </summary>
     [DataField]
     public int MaxBlood = 200;

@@ -8,7 +8,6 @@ using Content.Shared.Alert;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
-using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
@@ -149,7 +148,6 @@ public sealed partial class PryingSystem : EntitySystem
             return false;
         }
         // </Trauma>
-
         BeforePryEvent canev;
 
         if (comp != null || Resolve(user, ref comp, false))
@@ -224,7 +222,6 @@ public sealed partial class PryingSystem : EntitySystem
         var userEv = new PriedSuccessEvent();
         RaiseLocalEvent(args.User, ref userEv);
         // </Trauma>
-
         var ev = new PriedEvent(args.User);
         RaiseLocalEvent(uid, ref ev);
 

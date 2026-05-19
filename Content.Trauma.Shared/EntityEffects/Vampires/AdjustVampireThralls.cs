@@ -6,7 +6,7 @@ using Content.Trauma.Shared.Vampires.Dantalion;
 namespace Content.Trauma.Shared.EntityEffects.Vampires;
 
 /// <summary>
-/// Effect that adjustes the cap on an entity with <see cref="VampireThrallsComponent"/>.
+/// Effect that adjusts the cap on an entity with <see cref="VampireThrallsComponent"/>.
 /// </summary>
 public sealed partial class AdjustVampireThralls : EntityEffectBase<AdjustVampireThralls>
 {

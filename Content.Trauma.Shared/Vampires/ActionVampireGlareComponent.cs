@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Vampires;
 /// <summary>
 /// <inheritdoc cref="VampireGlareSystem"/>
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class ActionVampireGlareComponent : Component
 {
     /// <summary>

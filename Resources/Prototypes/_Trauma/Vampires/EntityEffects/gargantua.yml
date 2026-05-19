@@ -23,20 +23,22 @@
   effects:
   - !type:TakeStaminaDamage
     amount: -100
-  - !type:RemoveStatusEffects
-    statusEffects:
-    - StatusEffectForcedSleeping
-    - StatusEffectStunned
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: null
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: null
+    type: Remove
   - !type:SetStanding
     force: true
   - !type:ModifyKnockdown
-    time: 0
-    type: Set
+    time: null
+    type: Remove
   - !type:ModifyParalysis
-    time: 0
-    type: Set
-  - !type:MovementSpeedModifier
-    type: Set
+    time: null
+    type: Remove
   - !type:HealthChangeBasedOnDamage
     maximumDamage: -50
     damage:

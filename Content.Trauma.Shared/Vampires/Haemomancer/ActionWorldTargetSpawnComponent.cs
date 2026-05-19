@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Actions;
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 /// <summary>
 /// Action component that spawns an entity prototype around a 3x3 area of a tile.
-/// TODO: Move this outta here
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ActionWorldTargetSpawnComponent : Component

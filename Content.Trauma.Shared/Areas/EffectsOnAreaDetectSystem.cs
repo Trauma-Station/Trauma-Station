@@ -24,7 +24,6 @@ public sealed partial class EffectsOnAreaDetectSystem : EntitySystem
             ent.Comp.EffectsOnExit is { } exitEffects)
         {
             _effects.ApplyEffects(ent.Owner, exitEffects);
-            Log.Debug("Running exit effects");
         }
 
         if (args.NewArea is { } newArea &&
@@ -33,7 +32,6 @@ public sealed partial class EffectsOnAreaDetectSystem : EntitySystem
             ent.Comp.EffectsOnEnter is { } enterEffects)
         {
             _effects.ApplyEffects(ent.Owner, enterEffects);
-            Log.Debug("Running enter effects");
         }
     }
 }

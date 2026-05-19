@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Charges.Components;
-using Content.Shared.Charges.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Popups;

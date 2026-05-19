@@ -2,6 +2,7 @@
 
 using System.Text;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Trauma.Shared.MobClass;
 using Content.Trauma.Shared.Vampires;
@@ -11,6 +12,8 @@ namespace Content.Trauma.Server.Vampires.GameTicking;
 public sealed partial class VampireRuleSystem : GameRuleSystem<VampireRuleComponent>
 {
     [Dependency] private MobClassSystem _mobClass = default!;
+    [Dependency] private ObjectivesSystem _objective = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -21,21 +24,20 @@ public sealed partial class VampireRuleSystem : GameRuleSystem<VampireRuleCompon
 
     private void OnTextPrepend(Entity<VampireRuleComponent> ent, ref ObjectivesTextPrependEvent args)
     {
-        var bloodConsumed = 0;
-        var targetsConsumed = 0;
-        var classSelected = "None";
+        var sb = new StringBuilder();
 
         var query = EntityQueryEnumerator<VampireComponent, VampireBloodsuckingComponent, MobClassComponent>();
         while (query.MoveNext(out var uid, out var comp, out var bloodsucking, out var mobClass))
         {
-            bloodConsumed = comp.TotalBlood;
-            targetsConsumed = bloodsucking.ConsumedVictims.Count;
-            classSelected = _mobClass.GetClassName((uid,  mobClass));
-        }
+            if (!_mind.TryGetMind(uid, out var mindId, out var mind))
+                continue;
 
-        var sb = new StringBuilder();
-        sb.AppendLine($"They consumed a total of {bloodConsumed} units of blood from {targetsConsumed} victims.");
-        sb.AppendLine($"They specialized as: {classSelected}.");
+            var classSelected = _mobClass.GetClassName((uid,  mobClass));
+            var name = _objective.GetTitle((mindId, mind), Name(mind.OwnedEntity ?? mindId));
+
+            sb.AppendLine($"{name} consumed a total of [color=red]{comp.TotalBlood}[/color] units of blood from {bloodsucking.ConsumedVictims.Count} victims.");
+            sb.AppendLine($"{name} specialized as: {classSelected}.");
+        }
 
         args.Text = sb.ToString();
     }

@@ -1,0 +1,19 @@
+- files: ["blood_bringer.ogg"]
+  license: "CC-BY-NC-4.0"
+  copyright: "Taken from www.classicals.de, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://www.classicals.de/bach-bwv-1068"
+
+- files: ["eternal_darkness.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/death-is-looming"
+
+- files: ["vampalert.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from paradisestation, converted to mono by @Lumminal (Github)"
+  source: "https://github.com/ParadiseSS13/Paradise/blob/57ae8c6fed2748eabb54d0962018691e9e963960/sound/ambience/antag/vampalert.ogg"
+
+- files: ["vampire_tentacle_hit.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/impact"

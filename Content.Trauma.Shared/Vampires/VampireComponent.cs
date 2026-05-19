@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Alert;
+
 namespace Content.Trauma.Shared.Vampires;
 
 /// <summary>
@@ -10,9 +12,9 @@ namespace Content.Trauma.Shared.Vampires;
 public sealed partial class VampireComponent : Component
 {
     /// <summary>
-    ///   The blood we can use right now.
+    ///  The blood we can use right now.
     ///
-    ///   This is the blood that counts towards abilities that require it.
+    ///  This is the blood that counts towards abilities that require it.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int UsableBlood;
@@ -27,3 +29,8 @@ public sealed partial class VampireComponent : Component
     [DataField, AutoNetworkedField]
     public int TotalBlood;
 }
+
+/// <summary>
+/// An alert event used to display your total and usable blood via a popup.
+/// </summary>
+public sealed partial class VampireBloodAlertEvent : BaseAlertEvent;

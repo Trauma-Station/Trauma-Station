@@ -10,6 +10,9 @@ namespace Content.Trauma.Shared.EntityEffects.Vampires;
 /// </summary>
 public sealed partial class AdjustVampireBlood : EntityEffectBase<AdjustVampireBlood>
 {
+    /// <summary>
+    /// By how much to adjust the vampire's total and usable blood.
+    /// </summary>
     [DataField(required: true)]
     public int Amount;
 }

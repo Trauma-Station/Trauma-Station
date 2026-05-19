@@ -10,7 +10,6 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// <summary>
 /// Effect that adjusts any reagent in the target's specified solution that belongs to a specified reagent group.
 /// The reagent must exist in the target's solution.
-/// TODO: Loc guidebook
 /// </summary>
 public sealed partial class AdjustReagentGroup : EntityEffectBase<AdjustReagentGroup>
 {

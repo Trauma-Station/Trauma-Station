@@ -17,10 +17,12 @@
   description: Drink blood.
   components:
   - type: Objective
-    icon: _Trauma/Interface/Vampires/specialize.png
+    icon:
+      sprite: Fluids/tomato_splat.rsi
+      state: puddle-1
   - type: NumberObjective
-    min: 1000
-    max: 1000
+    min: 400
+    max: 800
     title: objective-condition-blood-title
     description: objective-condition-blood-description
   - type: VampireBloodCondition
@@ -28,6 +30,7 @@
 - type: entity
   parent: [BaseVampireObjective, BaseSurviveObjective]
   id: VampireSurviveObjective
+  name: Survive
   description: You must survive no matter what.
   components:
   - type: Objective

@@ -3,21 +3,25 @@
   effects:
   - !type:TakeStaminaDamage
     amount: -100
-  - !type:RemoveStatusEffects
-    statusEffects:
-    - StatusEffectForcedSleeping
-    - StatusEffectStunned
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: null
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: null
+    type: Remove
   - !type:RemoveComponents
     components:
     - type: KnockedDown # ModifyKnockdown bugs out
   - !type:SetStanding
     force: true
+  - !type:ModifyKnockdown
+    time: null
+    type: Remove
   - !type:ModifyParalysis
-    time: 0
-    type: Set
-  - !type:MovementSpeedModifier
-    time: 0
-    type: Set
+    time: null
+    type: Remove
   - !type:PopupPredicted
     message: You healed...
     visualType: MediumCaution
@@ -28,18 +32,22 @@
   effects:
   - !type:TakeStaminaDamage
     amount: -100
-  - !type:RemoveStatusEffects
-    statusEffects:
-    - StatusEffectForcedSleeping
-    - StatusEffectStunned
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: null
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: null
+    type: Remove
   - !type:SetStanding
     force: true
   - !type:ModifyKnockdown
-    time: 0
-    type: Set
+    time: null
+    type: Remove
   - !type:ModifyParalysis
-    time: 0
-    type: Set
+    time: null
+    type: Remove
   - !type:MovementSpeedModifier
     type: Set
   - !type:EvenHealthChange

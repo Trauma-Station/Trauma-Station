@@ -37,8 +37,6 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
     private static readonly EntProtoId BiteEffect = "WeaponArcBite";
     private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
 
-    private static TimeSpan _bloodsuckingDelay = TimeSpan.FromSeconds(5);
-
     public override void Initialize()
     {
         base.Initialize();
@@ -140,7 +138,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
             user: ent.Owner,
-            delay: _bloodsuckingDelay,
+            delay: ent.Comp.BloodsuckingDelay,
             @event: new BloodSuckDoAfterEvent(),
             eventTarget: ent.Owner,
             target: target

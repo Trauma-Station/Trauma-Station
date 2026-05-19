@@ -35,6 +35,10 @@ public sealed partial class MobClassSelectorWindow : FancyWindow
         _sprite = _entMan.System<SpriteSystem>();
     }
 
+    /// <summary>
+    /// Handles populating the window with the parameters of <see cref="MobClassGroupPrototype"/>.
+    /// If no UI parameters were set, it will use the default UI controls.
+    /// </summary>
     public void PopulateWindow(ProtoId<MobClassGroupPrototype> group)
     {
         // Clear existing buttons

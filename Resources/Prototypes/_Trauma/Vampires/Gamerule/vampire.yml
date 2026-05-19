@@ -9,10 +9,12 @@
     effects:
     - !type:ChangeFaction
       newFaction: VampireFaction
-    - !type:ModifyStatusEffect
+    - !type:AdjustAlert            # Shows usable and total blood to the vampire via a popup
+      alertType: BloodLevel
+    - !type:ModifyStatusEffect     # This handles starlight interactions
       effectProto: VampireSpaceStatusEffect
       time: null
-    - !type:RelayOrgan
+    - !type:RelayOrgan             # Vampires can only drink blood, can't eat foods
       category: Stomach
       effects:
       - !type:SetMetabolizerType
@@ -63,3 +65,22 @@
           effectProto: VampireChapelStatusEffect
           time: null
           type: Remove
+
+- type: gamePreset
+  id: Vampires
+  alias:
+  - vampz
+  - bloodsuckers
+  name: vampire-preset-title
+  description: vampire-preset-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - Vampire
+  - CalmTraitor

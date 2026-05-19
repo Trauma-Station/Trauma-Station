@@ -8,3 +8,6 @@ objective-issuer-vampire = [color=Red]Vampire[/color]
 
 roles-antag-vampire-thrall-name = Vampire Thrall
 roles-antag-vampire-thrall-objective = Follow the directions of your master.
+
+vampire-preset-title = Vampires
+vampire-preset-description = Hungry bloodsuckers hide among the crew.

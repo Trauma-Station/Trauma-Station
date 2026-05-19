@@ -1,4 +1,13 @@
 - type: alert
+  id: BloodLevel
+  clickEvent: !type:VampireBloodAlertEvent
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/blood_alert.rsi
+    state: blood_display
+  name: blood-display-name
+  description: blood-display-description
+
+- type: alert
   id: BloodSwell
   icons:
   - sprite: /Textures/_Trauma/Vampires/status_effects.rsi

@@ -1,17 +1,23 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Popups;
 using Content.Trauma.Shared.Vampires.Haemomancer;
 
 namespace Content.Trauma.Shared.Vampires;
 
 public sealed partial class VampireSystem : EntitySystem
 {
+    [Dependency] private SharedPopupSystem _popup = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<VampireComponent, BloodsuckingSuccessEvent>(OnBloodsucking);
         SubscribeLocalEvent<VampireComponent, BloodLeecherAttemptEvent>(OnBloodLeechingAttempt);
+
+        SubscribeLocalEvent<VampireComponent, VampireBloodAlertEvent>(OnAlertClick);
+        SubscribeLocalEvent<VampireComponent, GlareAttemptEvent>(OnGlare);
     }
 
     private void OnBloodsucking(Entity<VampireComponent> ent, ref BloodsuckingSuccessEvent args)
@@ -25,6 +31,19 @@ public sealed partial class VampireSystem : EntitySystem
         if (HasUsableBlood(ent.AsNullable(), args.BloodRequired))
             return;
 
+        args.Cancelled = true;
+    }
+
+    private void OnAlertClick(Entity<VampireComponent> ent, ref VampireBloodAlertEvent args)
+    {
+        var total = ent.Comp.TotalBlood;
+        var usable = ent.Comp.UsableBlood;
+
+        _popup.PopupClient($"You have {total} total, and {usable} usable blood", ent.Owner, ent.Owner, PopupType.Large);
+    }
+
+    private void OnGlare(Entity<VampireComponent> ent, ref GlareAttemptEvent args)
+    {
         args.Cancelled = true;
     }
 

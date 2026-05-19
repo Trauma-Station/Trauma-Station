@@ -5,8 +5,7 @@ using Content.Shared.Actions;
 namespace Content.Trauma.Shared.Vampires.Dantalion;
 
 /// <summary>
-/// Links an entity with
-/// TODO: make this generic linker...?
+/// Used to link an entity with a vampire, in order to share damage with each other.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
