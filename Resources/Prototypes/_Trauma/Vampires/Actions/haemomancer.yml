@@ -44,8 +44,8 @@
   - type: ActionWorldTargetSpawn
     spawnPrototype: BloodTendrilPre
     size: 2,2
-  #- type: VampireCostAction
-  #  bloodCost: 10
+  - type: VampireCostAction
+    bloodCost: 10
 
 # Blood Barrier
 - type: entity
@@ -55,7 +55,7 @@
   description: Manifest a barrier of crystalline blood. select two tiles and a wall with a maximum length of 3 will be produced.
   components:
   - type: Action
-    # useDelay: 60
+    useDelay: 60
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: blood_barrier
@@ -70,8 +70,8 @@
     distance: 3 # How much distance we can have between the points
     barrierProto: BloodBarrier
     pointProto: BloodBarrierPoint
-  #- type: VampireCostAction
-  #  bloodCost: 10
+  - type: VampireCostAction
+    bloodCost: 40
 
 # Blood Pool
 - type: entity
@@ -81,7 +81,7 @@
   description: Briefly transform into a sentient blood puddle, increasing movement speed and allowing you to move through anything except walls.
   components:
   - type: Action
-    # useDelay: 30
+    useDelay: 30
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: blood_pool
@@ -91,8 +91,8 @@
     effects:
     - !type:Polymorph # Sins of the father
       prototype: BloodPuddlePolymorph
-  #- type: VampireCostAction
-  #  bloodCost: 50
+  - type: VampireCostAction
+    bloodCost: 50
 
 # Predator Senses
 - type: entity
@@ -121,8 +121,8 @@
   name: Blood Eruption
   description: Cause any blood within 8 tiles of you to erupt, dealing 50 brute damage to anyone standing on it.
   components:
-  - type: Action # todo: find sound
-    # useDelay: 200
+  - type: Action
+    useDelay: 200
     icon:
       sprite: _Trauma/Vampires/actions.rsi
       state: blood_spikes
@@ -135,8 +135,8 @@
       range: 8
       effect: !type:NestedEffect
         proto: BloodEruption
-  #- type: VampireCostAction
-  #  bloodCost: 100
+  - type: VampireCostAction
+    bloodCost: 100
 
 # Blood Bringer Rite
 - type: entity
@@ -182,6 +182,8 @@
         - !type:EvenHealthChange
           damage:
             Brute: 5
+        - !type:SpawnParticles
+          particleProto: BloodParticles
     offToggle:
     - !type:RemoveComponents
       components:
