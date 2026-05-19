@@ -1,12 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Cloning;
-using Content.Server.NPC;
-using Content.Server.NPC.HTN;
-using Content.Server.NPC.Systems;
 using Content.Shared.Cloning;
 using Content.Shared.Inventory;
-using Content.Shared.NPC.Systems;
+using Content.Trauma.Shared.Heretic.Prototypes;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.Vampires;
@@ -22,12 +19,12 @@ public sealed partial class VampireUmbraeSystem : EntitySystem
     /// <summary>
     /// Holds components required for the shadow clone (e.g. HTN, damage values).
     /// </summary>
-    private static readonly EntProtoId ShadowCloneAddComponents = "ShadowCloneAdd";
+    private static readonly ProtoId<ComponentRegistryPrototype> ShadowCloneAddComponents = "ShadowCloneAdd";
 
     /// <summary>
     /// Holds components to remove (e.g. mind for ssd)
     /// </summary>
-    private static readonly EntProtoId ShadowCloneRemoveComponents = "ShadowCloneRemove";
+    private static readonly ProtoId<ComponentRegistryPrototype> ShadowCloneRemoveComponents = "ShadowCloneRemove";
 
     /// <summary>
     /// Holds the cloning settings of the shadow clones.
@@ -54,8 +51,8 @@ public sealed partial class VampireUmbraeSystem : EntitySystem
 
             _cloning.CopyEquipment(original, cloneEnt, SlotFlags.All);
 
-            EntityManager.RemoveComponents(cloneEnt, _proto.Index(ShadowCloneRemoveComponents));
-            EntityManager.AddComponents(cloneEnt, _proto.Index(ShadowCloneAddComponents));
+            EntityManager.RemoveComponents(cloneEnt, _proto.Index(ShadowCloneRemoveComponents).Components);
+            EntityManager.AddComponents(cloneEnt, _proto.Index(ShadowCloneAddComponents).Components);
         }
     }
 }

@@ -6,7 +6,7 @@
   - AlwaysTakeHoly
   - HumanoidProfile
 
-- type: entity
+- type: componentRegistry
   id: ShadowCloneAdd
   components:
   - type: TimedDespawn
@@ -23,7 +23,7 @@
       NavSmash: !type:Bool
         true
 
-- type: entity
+- type: componentRegistry
   id: ShadowCloneRemove
   components:
   - type: MindContainer
