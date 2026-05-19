@@ -33,6 +33,8 @@
     - ActionCRWaypoint
     - ActionClearWaypoints
   - type: ContainerContainer
+    containers:
+      actions: !type:Container
   - type: Construction
     graph: Wandsky
     node: bot
