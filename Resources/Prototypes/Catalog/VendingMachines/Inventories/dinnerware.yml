@@ -1,7 +1,7 @@
 - type: vendingMachineInventory
   id: DinnerwareInventory
   startingInventory:
-    Whetstone: 1
+    Whetstone: 1 # Trauma
     ButchCleaver: 1
     KitchenKnife: 5
     RollingPin: 4
