@@ -91,7 +91,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             case { X: > 0f, Y: > 1f }:
                 newDamage = MathF.Min(damage + vec.X, damage * vec.Y);
                 break;
-            case {X: < 0f, Y: < 1f}:
+            case { X: < 0f, Y: < 1f }:
                 newDamage = MathF.Max(damage + vec.X, damage * vec.Y);
                 break;
             default:
@@ -99,6 +99,7 @@ public sealed partial class DurabilitySystem : EntitySystem
         }
 
         comp.CustomDurabilityModifiers[args.NewState] = newDamage / damage;
+        DirtyField(args.Weapon, comp, nameof(DurabilityComponent.CustomDurabilityModifiers));
     }
 
     public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null, EntityUid? attacker = null, HashSet<EntityUid>? targets = null, EntityUid? used = null)
@@ -127,13 +128,13 @@ public sealed partial class DurabilitySystem : EntitySystem
         {
             var stateEv = new DurabilityStateChangedEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
             RaiseLocalEvent(uid, ref stateEv);
+        }
 
-            if (used is { } item)
-            {
-                var stateUsedEv =
-                    new DurabilityStateChangedByEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
-                RaiseLocalEvent(item, ref stateUsedEv);
-            }
+        if (used is { } item)
+        {
+            var stateUsedEv =
+                new DurabilityStateChangedByEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
+            RaiseLocalEvent(item, ref stateUsedEv);
         }
 
         var afterEv = new DurabilityDamageChangedEvent(uid, comp.Damage, oldDamage);
@@ -166,7 +167,7 @@ public sealed partial class DurabilitySystem : EntitySystem
         return DurabilityState.Pristine;
     }
 
-    private FixedPoint2 GetDurabilityModifier(DurabilityComponent comp)
+    private float GetDurabilityModifier(DurabilityComponent comp)
     {
         if (!comp.CustomDurabilityModifiers.TryGetValue(comp.DurabilityState, out var mod) &&
             !comp.DurabilityModifiers.TryGetValue(comp.DurabilityState, out mod))
@@ -231,7 +232,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             {
                 args.PushMarkup(Loc.GetString("durability-examine-weapon",
                     ("color", AssociatedColors[ent.Comp.DurabilityState].ToHex()),
-                    ("mod", GetDurabilityModifier(ent.Comp))));
+                    ("mod", $"{GetDurabilityModifier(ent.Comp):0.00}")));
             }
 
             // only show if it even has gun values like this
@@ -239,7 +240,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             {
                 args.PushMarkup(Loc.GetString("durability-examine-gun",
                     ("color", AssociatedColors[ent.Comp.DurabilityState].ToHex()),
-                    ("mod", GetDurabilityModifier(ent.Comp))));
+                    ("mod", $"{GetDurabilityModifier(ent.Comp):0.00}")));
             }
 
             var entries = GetRepairMaterialString(ent.Comp);
@@ -297,7 +298,7 @@ public sealed partial class DurabilitySystem : EntitySystem
 
     private void OnGunRefreshModifiers(Entity<DurabilityComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        var mod = GetDurabilityModifier(ent.Comp).Float();
+        var mod = GetDurabilityModifier(ent.Comp);
         args.FireRate *= mod;
         args.BurstFireRate *= mod;
         args.MaxAngle /= mod;
@@ -474,7 +475,8 @@ public sealed partial class DurabilitySystem : EntitySystem
 
         DamageEntity(ent.Owner,
             -SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent.Owner)).NextFloat(min, max),
-            ent.Comp);
+            ent.Comp,
+            used: args.Used);
 
         _tool.PlayToolSound(args.Used.Value, Comp<ToolComponent>(args.Used.Value), args.User);
 
