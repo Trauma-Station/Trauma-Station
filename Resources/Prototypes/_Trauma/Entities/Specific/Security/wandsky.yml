@@ -32,6 +32,7 @@
     - ActionTogglePatrol
     - ActionCRWaypoint
     - ActionClearWaypoints
+  - type: ContainerContainer
   - type: Construction
     graph: Wandsky
     node: bot
