@@ -15,6 +15,7 @@ using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Server.Objectives.Components;
+using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
@@ -35,9 +36,9 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     public static readonly SoundSpecifier BriefingSoundIntense =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain_intense.ogg");
 
-    public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
+    public static EntProtoId MindRole = "MindRoleHeretic";
 
-    private static EntProtoId MindRole = "MindRoleHeretic";
+    public static EntProtoId RealityShift = "EldritchInfluence";
 
     public override void Initialize()
     {
@@ -64,17 +65,17 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
 
     private void OnSpawn(ref SpawnHereticInfluenceEvent ev)
     {
-        SpawnInfluence(ev.Proto, ev.Amount);
+        SpawnInfluence(ev.Amount);
     }
 
     private void OnAntagSelect(Entity<HereticRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         TryMakeHeretic(args.EntityUid, ent.Comp);
 
-        SpawnInfluence(ent.Comp.RealityShift, ent.Comp.RealityShiftPerHeretic);
+        SpawnInfluence(ent.Comp.RealityShiftPerHeretic);
     }
 
-    public void SpawnInfluence(EntProtoId proto, int amount)
+    public void SpawnInfluence(int amount)
     {
         if (amount <= 0)
             return;
@@ -88,7 +89,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
         for (var i = 0; i < amount; i++)
         {
             if (TryFindTileOnGrid(grid, out _, out var coords))
-                Spawn(proto, coords);
+                Spawn(RealityShift, coords);
         }
     }
 
@@ -128,7 +129,9 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
             store.Categories.Add(category);
         }
 
-        store.CurrencyWhitelist.Add(Currency);
+        store.CurrencyWhitelist.Add(SharedHereticSystem.Currency);
+        store.CurrencyWhitelist.Add(SharedHereticSystem.SideCurrency);
+        store.Balance[SharedHereticSystem.SideCurrency] = 1; // 1 free side point
         return store;
     }
 

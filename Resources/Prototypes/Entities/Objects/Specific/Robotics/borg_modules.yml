@@ -1707,7 +1707,7 @@
     - state: icon-xenoborg-sword
   - type: ItemBorgModule
     hands:
-    - item: EnergyDaggerLoudBlue # Trauma - was KukriKnife (I think)
+    - item: KukriKnife
     - item: BorgJetpackXenoborg # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
@@ -1724,7 +1724,7 @@
     - state: icon-xenoborg-sword2
   - type: ItemBorgModule
     hands:
-    - item: EnergySwordXenoborg # Trauma - was EnergyDaggerLoudBlue
+    - item: EnergyDaggerLoudBlue
     - item: BorgJetpackXenoborg # Trauma - Durability
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword2-module }

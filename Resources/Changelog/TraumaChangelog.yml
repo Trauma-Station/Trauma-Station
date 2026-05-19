@@ -8580,3 +8580,84 @@ Entries:
   id: 984
   time: '2026-05-17T03:43:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2664
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nukie and abductor shuttles are now immune to radiation storms.
+  id: 985
+  time: '2026-05-17T20:21:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2670
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Reverted Scout Xenoborg modules to kukri and energy dagger respectively.
+  id: 986
+  time: '2026-05-17T21:59:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2672
+- author: Aviu
+  changes:
+  - type: Add
+    message: Added 2 new heretic side knowledge.
+  - type: Add
+    message: All ghouls get skills now.
+  - type: Remove
+    message: Removed tiers from heretic influences.
+  - type: Add
+    message: >-
+      Harvesting rifts with codex now gives 1 main point and 1 point for side
+      knowledge shop.
+  - type: Tweak
+    message: Ritual of knowledge gives 2 main and 2 side points.
+  - type: Tweak
+    message: >-
+      Reverted blade path dual wield follow up attack damage multiplier nerf
+      0.65 -> 0.75.
+  - type: Tweak
+    message: Increased the amount of roundstart rifts per heretic 1 -> 2.
+  - type: Tweak
+    message: Changed ashen path t2 passive ability.
+  id: 987
+  time: '2026-05-17T22:38:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2654
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed being able to learn nonsense skills like strength by reading
+      books.
+  id: 988
+  time: '2026-05-18T01:24:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2677
+- author: Its Crab Time
+  changes:
+  - type: Tweak
+    message: >-
+      We sent some exterminators to curb the Coconut Crab population! This also
+      weakened them, too!
+  - type: Tweak
+    message: >-
+      Unfortunately this has agitated them, they will now attack faster without
+      their shell.
+  - type: Tweak
+    message: Also, coconuts are more interesting. Give them to your botanists PLEASE!
+  - type: Add
+    message: >-
+      Also there's tiny ones now, apparently bartenders can synthesize crab
+      eggs?
+  id: 989
+  time: '2026-05-18T02:02:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2348
+- author: griibble
+  changes:
+  - type: Add
+    message: 'Added a new "brutalize" status to the criminal records computer. '
+  id: 990
+  time: '2026-05-18T12:05:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2675
+- author: Goober
+  changes:
+  - type: Tweak
+    message: Lootbugs can now eat metal rods.
+  id: 991
+  time: '2026-05-19T00:28:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2683

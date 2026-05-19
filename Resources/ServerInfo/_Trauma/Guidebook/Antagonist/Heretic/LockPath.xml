@@ -10,8 +10,8 @@
   ## Pros
 
   - Your mansus grasp can open any lock, unlock every terminal and bypass any access restriction.
-  - Lock heretics get more side knowledge for free or at a discount, making it the perfect path if you want to experiment with the various trinkets the shop has to offer.
-  - Lock heretics don't gain visible aura after 8 knowledge points, making it perfect for being stealthy at latter stages.
+  - Lock heretics get some side knowledge for free, making it the perfect path if you want to experiment with the various trinkets the shop has to offer.
+  - Lock heretics don't gain visible aura after losing the ability to break blades, making it perfect for being stealthy at latter stages.
 
   ## Cons
 
@@ -69,10 +69,10 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Effect</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Passive</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"></Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"></Box>Grants you one free side knowledge for every tier.</ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Shifting Guise</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to electrical shocks and stun baton knockdown.</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Hides you from camera vision and conceals your voice.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Passive</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp no longer goes on cooldown from opening locks.</Box></ColorBox>
