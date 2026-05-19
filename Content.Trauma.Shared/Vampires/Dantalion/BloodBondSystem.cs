@@ -125,7 +125,7 @@ public sealed partial class BloodBondSystem : EntitySystem
     private void OnMove(Entity<BloodBondLinkedComponent> ent, ref MoveEvent args)
     {
         // Vampires are the ones linking so we don't have to check about them.
-        if (ent.Owner == ent.Comp.Vampire)
+        if (TerminatingOrDeleted(ent.Comp.Vampire) || ent.Owner == ent.Comp.Vampire)
             return;
 
         var vampireXform = Transform(ent.Comp.Vampire);
