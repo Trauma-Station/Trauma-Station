@@ -10,11 +10,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class ClothingToggleAnimationVisualsSystem : EntitySystem
+public sealed partial class ClothingToggleAnimationVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly ItemSystem _item = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private ItemSystem _item = default!;
 
     public override void Initialize()
     {

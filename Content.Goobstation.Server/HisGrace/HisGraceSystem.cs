@@ -34,23 +34,23 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.HisGrace;
 
-public sealed class HisGraceSystem : SharedHisGraceSystem
+public sealed partial class HisGraceSystem : SharedHisGraceSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _state = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _state = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     private HashSet<Entity<MobStateComponent>> _targets = new();
 

@@ -8,9 +8,9 @@ namespace Content.Trauma.Client.EmptyScroll;
 /// <summary>
 /// Opens funger wiki when you fail to write an empty scroll.
 /// </summary>
-public sealed class FungerWikiSystem : EntitySystem
+public sealed partial class FungerWikiSystem : EntitySystem
 {
-    [Dependency] private readonly IUriOpener _uri = default!;
+    [Dependency] private IUriOpener _uri = default!;
 
     public const string Wiki = "https://fearandhunger.wiki.gg/wiki/Empty_Scroll";
 

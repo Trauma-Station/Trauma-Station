@@ -23,9 +23,9 @@ public sealed partial class SpawnInsideSlot : BaseSpawnEntityEntityEffect<SpawnI
 
 public sealed partial class SpawnInsideSlotEntityEffectSystem : EntityEffectSystem<InventoryComponent, SpawnInsideSlot>
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
 
     protected override void Effect(Entity<InventoryComponent> ent, ref EntityEffectEvent<SpawnInsideSlot> args)
     {

@@ -11,16 +11,16 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public sealed class CosmicTransmuteSystem : EntitySystem
+public sealed partial class CosmicTransmuteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedHandsSystem _hand = default!;
-    [Dependency] private readonly PullingSystem _pull = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedHandsSystem _hand = default!;
+    [Dependency] private PullingSystem _pull = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     private string? _message;
 

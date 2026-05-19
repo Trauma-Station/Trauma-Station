@@ -16,9 +16,9 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
-    [Dependency] private readonly EntityQuery<FlammableComponent> _flamQuery = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private EntityQuery<FlammableComponent> _flamQuery = default!;
 
     protected override void SubscribeAsh()
     {

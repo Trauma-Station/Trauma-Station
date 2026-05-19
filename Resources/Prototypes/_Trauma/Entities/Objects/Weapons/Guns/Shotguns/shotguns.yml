@@ -48,3 +48,23 @@
     deconstructionTarget: null
     graph: RevGuns
     node: Devastator
+
+- type: entity
+  parent: WeaponShotgunDoubleBarreled
+  id: WeaponShotgunDoubleBarreledEngraved
+  name: double-barreled shotgun
+  description: A well kept over/under shotgun, its engravings provide no tactical advantage whatsoever.
+  suffix: Engraved
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/ou_shotgun.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/ou_shotgun_inhands_64x.rsi
+
+- type: entity
+  parent: WeaponShotgunDoubleBarreledEngraved
+  id: WeaponShotgunDoubleBarreledEngravedBeanbag
+  suffix: Engraved, Non-Lethal
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunBeanbag

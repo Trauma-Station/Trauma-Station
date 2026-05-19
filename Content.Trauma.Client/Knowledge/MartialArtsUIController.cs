@@ -19,10 +19,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Knowledge;
 
-public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
+public sealed partial class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IResourceCache _cache = default!;
     [UISystemDependency] private readonly KnowledgeSystem _knowledge = default!;
     [UISystemDependency] private readonly PopupSystem _popup = default!;
 

@@ -10,11 +10,12 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.ServerCurrency.UI;
 
-public sealed class CurrencyEui : BaseEui
+public sealed partial class CurrencyEui : BaseEui
 {
-    [Dependency] private readonly ICommonCurrencyManager _currencyMan = default!;
-    [Dependency] private readonly IAdminNotesManager _notesMan = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private ICommonCurrencyManager _currency = default!;
+    [Dependency] private IAdminNotesManager _notes = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+
     public CurrencyEui()
     {
         IoCManager.InjectDependencies(this);
@@ -42,16 +43,16 @@ public sealed class CurrencyEui : BaseEui
 
     private async void BuyToken(ProtoId<TokenListingPrototype> tokenId, ICommonSession playerName)
     {
-        var balance = _currencyMan.GetBalance(Player.UserId);
+        var balance = _currency.GetBalance(Player.UserId);
 
-        if (!_protoMan.TryIndex<TokenListingPrototype>(tokenId, out var token))
+        if (!_proto.TryIndex<TokenListingPrototype>(tokenId, out var token))
             return;
 
         if (balance < token.Price)
             return;
 
-        _currencyMan.RemoveCurrency(Player.UserId, token.Price);
-        await _notesMan.AddAdminRemark(Player, Player.UserId, 0,
+        _currency.RemoveCurrency(Player.UserId, token.Price);
+        await _notes.AddAdminRemark(Player, Player.UserId, 0,
             Loc.GetString(token.AdminNote), 0, false, null);
     }
 }

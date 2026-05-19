@@ -48,3 +48,40 @@
   - Rev4
   - Rev5
   obeysTo: laws-owner-crew
+
+# Vampire lawset
+- type: siliconLaw
+  id: Vamp1
+  order: 1
+  lawString: law-vamp-1
+
+- type: siliconLaw
+  id: Vamp2
+  order: 2
+  lawString: law-vamp-2
+
+- type: siliconLaw
+  id: Vamp3
+  order: 3
+  lawString: law-vamp-3
+
+- type: siliconLaw
+  id: Vamp4
+  order: 4
+  lawString: law-vamp-4
+
+- type: siliconLaw
+  id: Vamp5
+  order: 5
+  lawString: law-vamp-5
+
+- type: siliconLawset
+  id: VampireLawset
+  name: law-vamp-name
+  laws:
+  - Vamp1
+  - Vamp2
+  - Vamp3
+  - Vamp4
+  - Vamp5
+  obeysTo: laws-owner-crew

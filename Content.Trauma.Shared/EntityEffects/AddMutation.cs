@@ -29,9 +29,9 @@ public sealed partial class AddMutation : EntityEffectBase<AddMutation>
         => null; // if you add this to a reagent make a guidebook string...
 }
 
-public sealed class AddMutationEffectSystem : EntityEffectSystem<MutatableComponent, AddMutation>
+public sealed partial class AddMutationEffectSystem : EntityEffectSystem<MutatableComponent, AddMutation>
 {
-    [Dependency] private readonly MutationSystem _mutation = default!;
+    [Dependency] private MutationSystem _mutation = default!;
 
     protected override void Effect(Entity<MutatableComponent> ent, ref EntityEffectEvent<AddMutation> args)
     {

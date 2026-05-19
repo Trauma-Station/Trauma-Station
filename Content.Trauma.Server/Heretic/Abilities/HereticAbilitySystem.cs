@@ -42,34 +42,34 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 {
     #region Dependencies
 
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly PolymorphSystem _poly = default!;
-    [Dependency] private readonly MobStateSystem _mobstate = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
-    [Dependency] private readonly SharedAudioSystem _aud = default!;
-    [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
-    [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly SharedWeatherSystem _weather = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedSanguineStrikeSystem _lifesteal = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly BladeArenaSystem _arena = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private PolymorphSystem _poly = default!;
+    [Dependency] private MobStateSystem _mobstate = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
+    [Dependency] private SharedAudioSystem _aud = default!;
+    [Dependency] private FlashSystem _flash = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private SharedWeatherSystem _weather = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedSanguineStrikeSystem _lifesteal = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private BladeArenaSystem _arena = default!;
 
     #endregion
 

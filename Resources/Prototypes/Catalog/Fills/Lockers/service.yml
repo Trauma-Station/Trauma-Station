@@ -13,7 +13,9 @@
   table: !type:AllSelector
     children:
     - id: ClothingOuterArmorBasicSlim
-    - id: WeaponShotgunDoubleBarreledRubber
+    # <Trauma> Commented out for bartender loadout shotty for drip
+    # - id: WeaponShotgunDoubleBarreledRubber
+    # </Trauma>
     - id: DrinkShaker
     - id: ClothingEyesHudBeer
     - id: HandLabeler

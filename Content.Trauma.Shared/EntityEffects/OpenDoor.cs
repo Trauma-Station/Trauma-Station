@@ -12,9 +12,9 @@ public sealed partial class OpenDoor : EntityEffectBase<OpenDoor>
     public bool Value;
 }
 
-public sealed class OpenDoorEffectSystem : EntityEffectSystem<DoorComponent, OpenDoor>
+public sealed partial class OpenDoorEffectSystem : EntityEffectSystem<DoorComponent, OpenDoor>
 {
-    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
 
     protected override void Effect(Entity<DoorComponent> ent, ref EntityEffectEvent<OpenDoor> args)
     {

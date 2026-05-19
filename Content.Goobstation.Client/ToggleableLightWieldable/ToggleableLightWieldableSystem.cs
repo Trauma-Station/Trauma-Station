@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.ToggleableLightWieldable;
 
-public sealed class ToggleableLightWieldableSystem : EntitySystem
+public sealed partial class ToggleableLightWieldableSystem : EntitySystem
 {
     public override void Initialize()
     {

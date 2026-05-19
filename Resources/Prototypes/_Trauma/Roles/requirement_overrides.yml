@@ -79,6 +79,11 @@
       department: Service
       time: 3h
       inverted: true
+    #Civilian
+    Chef: # Anti-raider ops
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 1h
     #Cargo - No intern role, so no limits lmao.
     #Engineering
     StationEngineer:

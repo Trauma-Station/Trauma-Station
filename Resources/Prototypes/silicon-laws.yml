@@ -592,6 +592,7 @@
     # <Trauma>
     RevLawset: 0.35
     CosmicCultLaws: 0.35
+    VampireLawset: 0.35
     # </Trauma>
     # its crewsimov by default dont be lame
     Crewsimov: 0.20 # Trauma - was 0.25

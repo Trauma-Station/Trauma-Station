@@ -23,16 +23,16 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Server.Drone;
 
 // TODO: move 90% of this bullshit to shared
-public sealed class DroneSystem : SharedDroneSystem
+public sealed partial class DroneSystem : SharedDroneSystem
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly InnateToolSystem _innateTool = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InnateToolSystem _innateTool = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private HashSet<Entity<MindContainerComponent>> _mobs = new();
 

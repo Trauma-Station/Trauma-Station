@@ -12,12 +12,12 @@ namespace Content.Lavaland.Server.TileChaser;
 ///     Chaser works as a self replicator.
 ///     It searches for the player, picks a neat position and spawns itself with something else
 /// </summary>
-public sealed class TileChaserSystem : EntitySystem
+public sealed partial class TileChaserSystem : EntitySystem
 {
-    [Dependency] private readonly AngerSystem _anger = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private AngerSystem _anger = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private static readonly Vector2i[] Directions =
     {

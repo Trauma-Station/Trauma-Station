@@ -7,10 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Client.Light.EntitySystems;
 
-public sealed class RotatingLightSystem : SharedRotatingLightSystem
+public sealed partial class RotatingLightSystem : SharedRotatingLightSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animations = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AnimationPlayerSystem _animations = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private Animation GetAnimation(float speed, int dir) // Goob edit
     {

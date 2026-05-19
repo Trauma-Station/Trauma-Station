@@ -34,25 +34,25 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed class HereticBladeSystem : EntitySystem
+public sealed partial class HereticBladeSystem : EntitySystem
 {
-    [Dependency] private readonly CosmosComboSystem _combo = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RandomTeleportSystem _teleport = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedHereticCombatMarkSystem _combatMark = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSanguineStrikeSystem _sanguine = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private CosmosComboSystem _combo = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RandomTeleportSystem _teleport = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedHereticCombatMarkSystem _combatMark = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSanguineStrikeSystem _sanguine = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

@@ -5,9 +5,9 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Trauma.Shared.Weapons.UseDelay;
 
-public sealed class UseDelayBlockShootSystem : EntitySystem
+public sealed partial class UseDelayBlockShootSystem : EntitySystem
 {
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {

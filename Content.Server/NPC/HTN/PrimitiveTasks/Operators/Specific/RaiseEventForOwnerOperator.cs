@@ -6,7 +6,7 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 /// </summary>
 public sealed partial class RaiseEventForOwnerOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     /// <summary>
     /// The conceptual "target" of this event. Note that this is NOT the entity for which the event is raised. If null,

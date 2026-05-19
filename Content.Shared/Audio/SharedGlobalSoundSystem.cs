@@ -44,9 +44,13 @@ public sealed class GameGlobalSoundEvent : GlobalSoundEvent
 public enum StationEventMusicType : byte
 {
     Nuke,
-    CosmicCult, // DeltaV - Cosmic Cult
-    VoidAscended, // GoobStation - Heretics
-    ShadowLing, // goob - shadowlings
+    // <Trauma>
+    CosmicCult,
+    VoidAscended,
+    ShadowLing,
+    Xenomorph,
+    Blob,
+    // </Trauma>
 }
 
 /// <summary>

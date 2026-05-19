@@ -5,7 +5,7 @@ using Content.Shared.Implants;
 
 namespace Content.Goobstation.Server.Implants.Systems;
 
-public sealed class ComponentsImplantSystem : EntitySystem
+public sealed partial class ComponentsImplantSystem : EntitySystem
 {
     public override void Initialize()
     {

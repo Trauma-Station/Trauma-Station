@@ -21,8 +21,8 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/ratma.rsi
     layers:
-      - map: [ "enum.DamageStateVisualLayers.Base" ]
-        state: alive
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
   - type: DamageStateVisuals
     states:
       Alive:
@@ -261,8 +261,8 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/wailinghorse.rsi
     layers:
-      - map: [ "enum.DamageStateVisualLayers.Base" ]
-        state: alive
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
   - type: DamageStateVisuals
     states:
       Alive:
@@ -361,7 +361,25 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: coconutcrabnoshell
+    - state: coconutcrabnoshell
+  - type: NoSlip
+  - type: Puller # Ditto
+    needsHands: false
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - Crab
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      50: 0.9
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
   - type: HTN
     rootTask:
       task: XenomorphCompound # i could replace with a custom htn but it'll be fiiiiiiiine
@@ -375,11 +393,12 @@
       NavPry: !type:Bool
         true
   - type: Prying
+    speedModifier: 2
     pryPowered: true
   - type: ComplexInteraction
   - type: NpcFactionMember
     factions:
-    - SimpleHostile
+    - CrabFaction
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -394,23 +413,18 @@
         Bloodloss:
           -0.25
   - type: MovementSpeedModifier
-    baseWalkSpeed: 3
-    baseSprintSpeed: 3
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 3.5
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
-    range: 0.9 # Make kitable but barely
-    attackRate: 0.6
     damage:
       types:
-        Blunt: 15
-        Structural: 5
+        Blunt: 12
+        Structural: 15
   - type: MeleeThrowOnHit
     distance: 5
     speed: 10
-  - type: StaminaDamageOnHit
-    damage: 10
-    overtime: 10
   - type: LanguageSpeaker
     speaks:
     - Crab
@@ -421,6 +435,10 @@
     speechVerb: Arachnid
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: CoconutCrabUnshelled
+  - type: WeakToHoly
   - type: Butcherable
     spawned:
     - id: FoodMeatCrab
@@ -434,7 +452,7 @@
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
     layers:
-      - state: coconutcrab
+    - state: coconutcrab
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -444,11 +462,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 75
       behaviors:
       - !type:GibBehavior
         deleteGibs: true
         recursive: false
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodCoconutHalf:
@@ -458,10 +479,146 @@
             min: 1
             max: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 1
+    baseWalkSpeed: 1.5
+    baseSprintSpeed: 1.5
+  - type: MeleeWeapon
+    attackRate: 0.6
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      999: 1
+      0: 1
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: CoconutCrab
   - type: MobPrice
-    price: 200 # The fact that a test requires me to add this is fucking stupid
+    price: 500 # The fact that a test requires me to add this is fucking stupid
+
+- type: entity
+  parent: MobCoconutCrabShellless
+  id: MobCoconutCrabFloofy
+  suffix: Silly, AI
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    layers:
+    - state: floofycrab
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      999: 1
+      0: 1
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: CoconutCrab
+  - type: VentCrawler
+  - type: GhostRole
+    name: ghost-role-coconutcrab-name
+    description: ghost-role-ratma-desc
+    rules: ghost-role-information-antagonist-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    damage:
+      types:
+        Blunt: 15
+        Structural: 15
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat]
+  id: MobCrabTinyBase # base incase something else wants to be a tiny crab, was gonna be used for the botany ones but not anymore
+  abstract: true
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1.5
+    baseSprintSpeed : 2.5
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    layers:
+    - state: tinycrab
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+          - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: Tag
+    tags:
+    - Crab
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 10
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - CrabFaction # This is crabtually insane
+  - type: ZombieImmune
+  - type: MobPrice
+    price: 10
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    damage:
+      types:
+        Blunt: 1
+  - type: Edible
+  - type: FlavorProfile
+    flavors:
+    - crabby
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+
+- type: entity
+  parent: MobCrabTinyBase
+  id: MobCrabTiny
+  name: red crab
+  components:
+  - type: Temperature
+  - type: TemperatureDamage
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+  - type: MovementAlwaysTouching
+  - type: PressureImmunity
+  - type: ProtectedFromStepTriggers
+  - type: Respirator
+    minSaturation: 5.0
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    damage:
+      types:
+        Blunt: 2.5
+        Piercing: 2.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatCrab:
+            min: 0
+            max: 1

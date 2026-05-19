@@ -13,7 +13,7 @@ namespace Content.Trauma.Client.Phones.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PhoneMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     public event Action<int>? OnKeypadButtonPressed;
     public event Action<int>? OnPhoneBookButtonPressed;
     public event Action? OnClearButtonPressed;

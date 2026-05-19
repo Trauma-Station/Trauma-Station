@@ -305,6 +305,7 @@
     - type: InputMover
     - type: Appearance
     - type: Eye
+      drawFov: false
     - type: Input
       context: "ghost"
     - type: Examiner

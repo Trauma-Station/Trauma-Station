@@ -17,8 +17,8 @@ namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 [GenerateTypedNameReferences]
 public sealed partial class CosmicShopMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     // All influence prototypes
     private readonly IEnumerable<InfluencePrototype> _influencePrototypes;

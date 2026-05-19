@@ -14,11 +14,11 @@ namespace Content.Goobstation.Client.Emoting;
 
 public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _anim = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly CommonRaysSystem _rays = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _anim = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private CommonRaysSystem _rays = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private const int TweakAnimationDurationMs = 1100; // 11 frames * 100ms per frame
     private const int FlexAnimationDurationMs = 200 * 7; // 7 frames * 200ms per frame

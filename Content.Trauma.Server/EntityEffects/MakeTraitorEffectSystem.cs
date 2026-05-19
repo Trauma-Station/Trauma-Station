@@ -8,9 +8,9 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.EntityEffects;
 
-public sealed class MakeTraitorEffectSystem : EntityEffectSystem<ActorComponent, MakeTraitor>
+public sealed partial class MakeTraitorEffectSystem : EntityEffectSystem<ActorComponent, MakeTraitor>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     protected override void Effect(Entity<ActorComponent> ent, ref EntityEffectEvent<MakeTraitor> args)
     {

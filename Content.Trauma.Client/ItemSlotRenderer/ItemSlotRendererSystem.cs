@@ -23,12 +23,12 @@ namespace Content.Trauma.Client.ItemSlotRenderer;
 /// <summary>
 /// I can feel my grip on reality slowly slipping.
 /// </summary>
-public sealed class ItemSlotRendererSystem : EntitySystem
+public sealed partial class ItemSlotRendererSystem : EntitySystem
 {
-    [Dependency] private readonly IReflectionManager _reflection = default!;
-    [Dependency] private readonly ItemSlotsSystem _slot = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IReflectionManager _reflection = default!;
+    [Dependency] private ItemSlotsSystem _slot = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -99,9 +99,9 @@ public sealed class ItemSlotRendererSystem : EntitySystem
 /// Doesn't actually render anything by itself. I'd place this code in a system's FrameUpdate,
 /// but I need to somehow acquire a draw handle to draw an entity to a texture.
 /// </summary>
-public sealed class SpriteToLayerBullshitOverlay : Overlay
+public sealed partial class SpriteToLayerBullshitOverlay : Overlay
 {
-    [Dependency] private readonly EntityManager _entMan = default!;
+    [Dependency] private EntityManager _entMan = default!;
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpaceBelowWorld;
 

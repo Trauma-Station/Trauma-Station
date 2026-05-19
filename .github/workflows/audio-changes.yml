@@ -34,7 +34,7 @@ jobs:
         # no trolling
         infos=`file -- $files | sed s/EOF/E0F/g`
         echo "Infos = $infos"
-        printf 'info<<EOF\n**Sound Bot**\n\nThis PR changed %d sounds:\n<details>\n%s\n</details>\nEOF' "$count" "$infos" >> $GITHUB_OUTPUT
+        printf 'info<<EOF\n**Sound Bot**\n\nThis PR changed %d sounds:\n<details>\n```\n%s\n```\n</details>\nEOF' "$count" "$infos" >> $GITHUB_OUTPUT
 
     - name: Potentially find comment
       uses: peter-evans/find-comment@v1

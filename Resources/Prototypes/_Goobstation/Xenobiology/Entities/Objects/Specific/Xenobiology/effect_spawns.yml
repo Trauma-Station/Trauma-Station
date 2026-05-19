@@ -103,10 +103,6 @@
     - MobCarpMagic
     - MobCarpHolo
     - MobCarpRainbow
-    - MobGhoulStalker
-    - MobGhoulProphet
-    - MobGhoulFireShark
-    - MobGhoulRustWalker
     - ReagentSlimeSpawner
     - MobAbomination
     - MobHivebot
@@ -122,8 +118,6 @@
     - MobTomatoKiller
     - MobRatKing
     - MobTick
-    - MobXenomorphHunter
-    - MobXenomorphFaceHugger # trollage
     - MobPurpleSnake
     - MobSmallPurpleSnake
     - MobBingle

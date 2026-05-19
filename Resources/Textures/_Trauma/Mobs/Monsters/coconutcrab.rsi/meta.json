@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "created by asardonicsailor, shelled variant by taro_varne (Discord)",
+  "copyright": "created by asardonicsailor, shelled variant and tinycrab by taro_varne (Discord), floofycrab by FloofyShork (sharkkett on Discord)",
   "size": {
     "x": 32,
     "y": 32
@@ -13,6 +13,18 @@
     },
     {
       "name": "coconutcrabnoshell",
+      "directions": 4
+    },
+    {
+      "name": "coconutcrabdead",
+      "directions": 4
+    },
+    {
+      "name": "tinycrab",
+      "directions": 4
+    },
+    {
+      "name": "floofycrab",
       "directions": 4
     }
   ]

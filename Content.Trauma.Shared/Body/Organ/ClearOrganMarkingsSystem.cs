@@ -4,10 +4,10 @@ using Content.Shared.Body;
 
 namespace Content.Trauma.Shared.Body.Organ;
 
-public sealed class ClearOrganMarkingsSystem : EntitySystem
+public sealed partial class ClearOrganMarkingsSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public override void Initialize()
     {

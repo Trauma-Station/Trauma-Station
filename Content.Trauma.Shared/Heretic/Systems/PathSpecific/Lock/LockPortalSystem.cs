@@ -20,16 +20,16 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
-public sealed class LockPortalSystem : EntitySystem
+public sealed partial class LockPortalSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
 
     private readonly List<Entity<DoorComponent, TransformComponent>> _possibleDestinations = new();
     private readonly HashSet<Entity<PhysicsComponent>> _intersecting = new();

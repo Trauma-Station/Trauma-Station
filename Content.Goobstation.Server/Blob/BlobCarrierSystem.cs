@@ -18,14 +18,14 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobCarrierSystem : SharedBlobCarrierSystem
+public sealed partial class BlobCarrierSystem : SharedBlobCarrierSystem
 {
-    [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly GhostRoleSystem _ghost = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly CommonLanguageSystem _language = default!;
+    [Dependency] private BlobCoreSystem _blobCoreSystem = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private GhostRoleSystem _ghost = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private CommonLanguageSystem _language = default!;
 
     public override void Initialize()
     {

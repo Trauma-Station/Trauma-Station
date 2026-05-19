@@ -541,6 +541,11 @@
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
+    # <Trauma>
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+    # </Trauma>
   - type: TypingIndicator
     proto: xenoborg
   - type: Speech
@@ -625,11 +630,3 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
-  # <Trauma>
-  - type: KnowledgeGrantOnWear # gets added to the brain
-    skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-  # </Trauma>

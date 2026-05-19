@@ -5,10 +5,10 @@ using Content.Shared.Temperature.Components;
 
 namespace Content.Trauma.Shared.Temperature;
 
-public sealed class BlackBodySystem : EntitySystem
+public sealed partial class BlackBodySystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly EntityQuery<TemperatureComponent> _tempQuery = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private EntityQuery<TemperatureComponent> _tempQuery = default!;
 
     public override void Initialize()
     {

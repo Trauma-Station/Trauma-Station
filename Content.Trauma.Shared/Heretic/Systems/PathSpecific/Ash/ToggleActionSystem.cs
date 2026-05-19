@@ -6,9 +6,9 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
-public sealed class ToggleActionSystem : EntitySystem
+public sealed partial class ToggleActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

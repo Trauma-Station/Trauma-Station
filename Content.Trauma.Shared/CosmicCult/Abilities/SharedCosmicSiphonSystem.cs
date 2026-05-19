@@ -15,17 +15,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public abstract class SharedCosmicSiphonSystem : EntitySystem
+public abstract partial class SharedCosmicSiphonSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedCosmicCultSystem _cosmicCult = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedCosmicCultSystem _cosmicCult = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly ProtoId<DamageTypePrototype> DamageType = "Cold";
 
