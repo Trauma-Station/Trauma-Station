@@ -503,8 +503,8 @@
         whitelist:
           tags:
           - CableCoil
-    - item: BorgWirecutter # Trauma - Durability
-    - item: BorgCrowbar # Trauma - Durability
+    - item: Wirecutter
+    - item: Crowbar
     - item: trayScanner
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: wire-module }
@@ -556,13 +556,13 @@
     - state: icon-tools
   - type: ItemBorgModule
     hands:
-    - item: BorgCrowbar # Trauma - Durability
-    - item: BorgWrench # Trauma - Durability
-    - item: BorgScrewdriver # Trauma - Durability
-    - item: BorgWirecutter # Trauma - Durability
-    - item: BorgWelderIndustrial # Trauma - Durability
+    - item: Crowbar
+    - item: Wrench
+    - item: Screwdriver
+    - item: Wirecutter
+    - item: WelderIndustrial
     - item: Multitool
-    - item: BorgMeleeHammer # Trauma - Durability
+    - item: MeleeHammer
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: tool-module }
 
@@ -609,7 +609,7 @@
   - type: ItemBorgModule
     hands:
     - item: AppraisalTool
-    - item: BorgPen # Trauma - Durability
+    - item: Pen
     - item: HandLabeler
     - item: RubberStampApproved
     - item: RubberStampDenied
@@ -628,7 +628,7 @@
     - state: icon-mining
   - type: ItemBorgModule
     hands:
-    - item: BorgMiningDrill # Trauma - Durability
+    - item: MiningDrill
     #- item: Shovel # Goob
     - item: MineralScannerUnpowered
     - item: BorgOreBag
@@ -647,8 +647,8 @@
     - state: icon-mining-adv
   - type: ItemBorgModule
     hands:
-    - item: BorgMiningDrillDiamond # Trauma - Durability
-    - item: BorgShovel # Trauma - Durability
+    - item: MiningDrillDiamond
+    - item: Shovel
     - item: AdvancedMineralScannerUnpowered
     - item: OreBagOfHolding
     - item: WeaponProtoKineticAccelerator # Goob
@@ -693,9 +693,9 @@
     - state: icon-tools-adv
   - type: ItemBorgModule
     hands:
-    - item: BorgJawsOfLife # Trauma - Durability
-    - item: BorgPowerDrill # Trauma - Durability
-    - item: BorgWelderExperimental # Trauma - Durability
+    - item: JawsOfLife
+    - item: PowerDrill
+    - item: WelderExperimental
     - item: Multitool
     - item: RemoteSignallerAdvanced
     - item: GeigerCounter # Goob
@@ -842,7 +842,7 @@
     - state: icon-mop
   - type: ItemBorgModule
     hands:
-    - item: BorgMopItem # Trauma - Durability
+    - item: MopItem
     - item: WireBrush
     - item: BorgBucket
     - item: BorgSprayBottle
@@ -862,7 +862,7 @@
     - state: icon-mop-adv
   - type: ItemBorgModule
     hands:
-    - item: BorgAdvMopItem # Trauma - Durability
+    - item: AdvMopItem
     - item: WireBrushElectrical
     - item: BorgMegaSprayBottle
     - item: HoloprojectorBorg
@@ -961,7 +961,7 @@
     hands:
     - item: HandheldHealthAnalyzer
     - item: DefibrillatorOneHandedUnpowered
-    - item: BorgCrowbar # Trauma - Durability
+    - item: Crowbar
     - item: BorgFireExtinguisher
     - item: BorgHandheldGPSBasic
   - type: BorgModuleIcon
@@ -1217,9 +1217,9 @@
     - state: icon-gardening
   - type: ItemBorgModule
     hands:
-    - item: BorgHydroponicsToolMiniHoe # Trauma - Durability
-    - item: BorgHydroponicsToolSpade # Trauma - Durability
-    - item: BorgHydroponicsToolClippers # Trauma - Durability
+    - item: HydroponicsToolMiniHoe
+    - item: HydroponicsToolSpade
+    - item: HydroponicsToolClippers
     - item: Syringe # Trauma
     - item: Bucket
     - hand: # Trauma - make service borgs 1% useful
@@ -1242,8 +1242,8 @@
     - state: icon-harvesting
   - type: ItemBorgModule
     hands:
-    - item: BorgHydroponicsToolScythe # Trauma - Durability
-    - item: BorgHydroponicsToolHatchet # Trauma - Durability
+    - item: HydroponicsToolScythe
+    - item: HydroponicsToolHatchet
     - item: PlantBag
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: harvesting-module }
@@ -1341,7 +1341,7 @@
       - state: icon-syndicate
     - type: ItemBorgModule
       hands:
-      - item: BorgSyndicateJawsOfLife # Trauma - Durability, was crowbar
+      - item: SyndicateJawsOfLife # Trauma - was crowbar
       - item: Emag
       - item: AccessBreaker
       - item: PinpointerSyndicateNuclear
@@ -1534,12 +1534,12 @@
     - state: icon-xenoborg-tools
   - type: ItemBorgModule
     hands:
-    - item: BorgCrowbar # Trauma - Durability
-    - item: BorgWrench # Trauma - Durability
-    - item: BorgScrewdriver # Trauma - Durability
-    - item: BorgWirecutter # Trauma - Durability
+    - item: Crowbar
+    - item: Wrench
+    - item: Screwdriver
+    - item: Wirecutter
     - item: Multitool
-    - item: BorgRefuelingWelder # Trauma - Durability
+    - item: RefuelingWelder
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-tool-module }
 
@@ -1674,7 +1674,7 @@
     - item: PinpointerMothership
     - item: HandheldStationMapUnpowered
     - item: WeaponGrapplingGun
-    - item: BorgJetpackXenoborg # Trauma - Durability
+    - item: JetpackXenoborg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-space-movement-module }
 
@@ -1708,7 +1708,7 @@
   - type: ItemBorgModule
     hands:
     - item: KukriKnife
-    - item: BorgJetpackXenoborg # Trauma - Durability
+    - item: JetpackXenoborg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
 
@@ -1725,7 +1725,7 @@
   - type: ItemBorgModule
     hands:
     - item: EnergyDaggerLoudBlue
-    - item: BorgJetpackXenoborg # Trauma - Durability
+    - item: JetpackXenoborg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword2-module }
 
