@@ -18,6 +18,6 @@
   - type: MindRole
     antagPrototype: VampireThrall
     exclusiveAntag: true
-    roleType: SoloAntagonist
+    roleType: TeamAntagonist
     subtype: roles-antag-vampire-thrall-name
   - type: VampireThrallRole

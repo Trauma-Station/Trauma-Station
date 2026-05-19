@@ -1206,13 +1206,6 @@
     Digestion:
       effects:
       # <Trauma>
-      - !type:HolyIgnite
-        stacks: 3
-        conditions:
-        - !type:WhitelistCondition
-          blacklist:
-            components:
-            - GhoulDeconvert
       - !type:RemoveComponents
         conditions:
         - !type:ReagentCondition

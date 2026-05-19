@@ -24,11 +24,8 @@
         - Impassable
   # These triggers handle entity effects on collision
   - type: TriggerOnCollide
-    keysIn:
-    - effects
     fixtureID: shadowsnare
   - type: EntityEffectOnTrigger
-    keyOut: effects
     targetUser: true
     effects:
     - !type:GenericStatusEffect # TODO: replace with new status effects when it gets merged
