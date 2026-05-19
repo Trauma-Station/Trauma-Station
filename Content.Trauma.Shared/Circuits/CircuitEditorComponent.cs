@@ -35,12 +35,12 @@ public sealed class CircuitEditorState(CircuitData? data) : BoundUserInterfaceSt
 public sealed class CircuitEditorClearMessage : BoundUserInterfaceMessage;
 
 /// <summary>
-/// Imports a circuit from its YML form, clearing whatever was there before.
+/// Imports a complete circuit, clearing whatever was there before.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class CircuitEditorImportMessage(string source) : BoundUserInterfaceMessage
+public sealed class CircuitEditorImportMessage(CircuitData data) : BoundUserInterfaceMessage
 {
-    public readonly string Source = source;
+    public readonly CircuitData Data = data;
 }
 
 /// <summary>

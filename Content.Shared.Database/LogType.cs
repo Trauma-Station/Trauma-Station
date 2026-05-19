@@ -512,5 +512,5 @@ public enum LogType
     /// <summary>
     /// Trauma - Circuits related logs.
     /// </summary>
-    Circuits = 20001,
+    Circuits = 20004,
 }

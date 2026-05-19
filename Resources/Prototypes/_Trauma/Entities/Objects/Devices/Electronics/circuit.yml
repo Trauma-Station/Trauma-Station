@@ -134,4 +134,3 @@
       - !type:CircuitLogicGate
         gate: Nor
         inputs: [-2, 1]
-        output: true

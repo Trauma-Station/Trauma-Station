@@ -1,0 +1,11 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<BoxContainer xmlns="https://spacestation14.io"
+		MinSize="80 60">
+	<PanelContainer>
+		<Label Name="NameLabel"/>
+	</PanelContainer>
+	<!-- TODO: actually do it properly -->
+</BoxContainer>

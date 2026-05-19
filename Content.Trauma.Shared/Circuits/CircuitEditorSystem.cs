@@ -5,6 +5,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Robust.Shared.Containers;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Circuits;
@@ -22,6 +23,8 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<CircuitEditorComponent, BeforeActivatableUIOpenEvent>(OnUIOpen);
+        SubscribeLocalEvent<CircuitEditorComponent, EntInsertedIntoContainerMessage>(OnCircuitChanged);
+        SubscribeLocalEvent<CircuitEditorComponent, EntRemovedFromContainerMessage>(OnCircuitChanged);
         Subs.BuiEvents<CircuitEditorComponent>(CircuitEditorUiKey.Key, subs =>
         {
             subs.Event<CircuitEditorClearMessage>(OnClear);
@@ -37,6 +40,12 @@ public sealed partial class CircuitEditorSystem : EntitySystem
     private void OnUIOpen(Entity<CircuitEditorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateUI(ent);
+    }
+
+    private void OnCircuitChanged(EntityUid uid, CircuitEditorComponent comp, ContainerModifiedMessage args)
+    {
+        if (args.Container.ID == comp.SlotId)
+            UpdateUI((uid, comp));
     }
 
     private void OnClear(Entity<CircuitEditorComponent> ent, ref CircuitEditorClearMessage args)
@@ -56,31 +65,19 @@ public sealed partial class CircuitEditorSystem : EntitySystem
 
     private void OnImport(Entity<CircuitEditorComponent> ent, ref CircuitEditorImportMessage args)
     {
-        if (GetCircuit(ent) is not { } circuit ||
-            string.IsNullOrEmpty(args.Source))
+        if (GetCircuit(ent) is not { } circuit)
             return;
 
-        if (args.Source.Length > CircuitComponent.MaxImportSize)
+        var data = args.Data;
+        if (data.Gates.Count > CircuitComponent.MaxGates)
         {
-            _popup.PopupPredictedCursor("Circuit data too large to import!", args.Actor, PopupType.LargeCaution);
-            return;
-        }
-
-        try
-        {
-            // TODO
-            throw new Exception("NYI");
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Failed to import circuit yml: {e}");
-            _popup.PopupPredictedCursor("Importing circuit failed, check your console!", args.Actor, PopupType.LargeCaution);
+            _popup.PopupPredictedCursor("Circuit has too many gates to import!", args.Actor, PopupType.MediumCaution);
             return;
         }
 
-        var data = circuit.Comp.Data;
         foreach (var gate in data.Gates)
         {
+            gate.Initialize();
             gate.Validate();
         }
 

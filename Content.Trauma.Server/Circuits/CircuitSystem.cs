@@ -25,6 +25,10 @@ public sealed partial class CircuitSystem : EntitySystem
         SubscribeLocalEvent<CircuitHousingComponent, SignalReceivedEvent>(OnSignalReceived);
 
         SubscribeLocalEvent<CircuitComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<CircuitComponent, MapInitEvent>(OnMapInit);
+
+        SubscribeLocalEvent<ActiveCircuitComponent, ComponentInit>(OnActiveInit);
+        SubscribeLocalEvent<ActiveCircuitComponent, ComponentShutdown>(OnActiveShutdown);
     }
 
     public override void Update(float frameTime)
@@ -102,6 +106,8 @@ public sealed partial class CircuitSystem : EntitySystem
             ent.Comp.Inputs.Add(false);
         while (ent.Comp.LinkedInputs.Count < CircuitComponent.PortsCount)
             ent.Comp.LinkedInputs.Add(new());
+        while (ent.Comp.LastOutputs.Count < CircuitComponent.PortsCount)
+            ent.Comp.LastOutputs.Add(false);
 
         var data = ent.Comp.Data;
         var gates = data.Gates;
@@ -124,6 +130,48 @@ public sealed partial class CircuitSystem : EntitySystem
                 gates[input - 1].LinkOutput(-i - 1);
             else if (input < 0 && -input <= ent.Comp.LinkedInputs.Count)
                 ent.Comp.LinkInput(-input - 1, -i - 1);
+        }
+    }
+
+    private void OnMapInit(Entity<CircuitComponent> ent, ref MapInitEvent args)
+    {
+        // want to automatically update gates for premade circuits so you dont have to toggle inputs or whatever
+        for (var i = 0; i < ent.Comp.LinkedInputs.Count; i++)
+        {
+            var list = ent.Comp.LinkedInputs[i];
+            var value = ent.Comp.Inputs[i];
+            foreach (var linked in list)
+            {
+                if (linked > 0) // ignore directly wired output ports since theres probably no housing
+                    ent.Comp.Changed.Add(linked - 1);
+                else if (linked < 0 && -linked <= ent.Comp.LastOutputs.Count)
+                    ent.Comp.LastOutputs[-linked - 1] = value;
+            }
+        }
+    }
+
+    private void OnActiveInit(Entity<ActiveCircuitComponent> ent, ref ComponentInit args)
+    {
+        if (!_query.TryComp(ent, out var comp))
+            return;
+
+        // send expected values when a circuit is repowered installed etc
+        for (var i = 0; i < comp.LastOutputs.Count; i++)
+        {
+            SendOutput(comp.Housing, i + 1, comp.LastOutputs[i]);
+        }
+    }
+
+    private void OnActiveShutdown(Entity<ActiveCircuitComponent> ent, ref ComponentShutdown args)
+    {
+        if (!_query.TryComp(ent, out var comp))
+            return;
+
+        // stop sending values when a circuit is depowered removed etc
+        for (var i = 0; i < CircuitComponent.PortsCount; i++)
+        {
+            if (!comp.LastOutputs[i].Equals(false))
+                SendOutput(comp.Housing, i + 1, false);
         }
     }
 
@@ -154,7 +202,7 @@ public sealed partial class CircuitSystem : EntitySystem
         if (i > 0)
             comp.Changed.Add(i - 1); // update it next tick
         else if (i < 0 && -i <= CircuitComponent.PortsCount)
-            SendOutput(comp.Housing, -i, value); // send signal now
+            SendOutput(comp.Housing, -i, comp.LastOutputs[-i - 1] = value); // send signal now
     }
 
     private void SendOutput(EntityUid housing, int i, object value)

@@ -25,15 +25,16 @@ public sealed partial class CircuitComponent : Component
     public const int MaxGates = 256;
 
     /// <summary>
-    /// Limit on the circuit yml size for importing circuits from files.
-    /// </summary>
-    public const int MaxImportSize = 16000;
-
-    /// <summary>
     /// The current inputs to the circuit.
     /// </summary>
     [DataField(serverOnly: true)]
     public List<object> Inputs = new();
+
+    /// <summary>
+    /// The last outputs of the circuit.
+    /// </summary>
+    [DataField(serverOnly: true)]
+    public List<object> LastOutputs = new();
 
     /// <summary>
     /// List of circuit output index for each input.
