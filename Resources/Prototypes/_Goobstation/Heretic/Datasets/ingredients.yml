@@ -174,11 +174,6 @@
       - CircularSaw
     name: heretic-ritual-ingredient-circular-saw
   - whitelist:
-      tags:
-      - MimeMask
-      - ClownMask
-    name: heretic-ritual-ingredient-mime-clown-mask
-  - whitelist:
       requireAll: true
       components:
       - FlashImmunity

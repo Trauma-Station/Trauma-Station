@@ -28,6 +28,8 @@
     - AreaSubstation
     - AreaRadstorm
     - AreaPrisonShower # not quite toilet
+    - AreaShuttleAbductor
+    - AreaShuttleNukie
 
 # Schedulers
 

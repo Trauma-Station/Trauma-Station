@@ -320,21 +320,35 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         public void AdjustFireStacks(EntityUid uid, float relativeFireStacks, FlammableComponent? flammable = null, bool ignite = false,
-            float penetration = 0f) // Goob
+            float penetration = 0f) // Trauma - penetration
         {
             if (!Resolve(uid, ref flammable))
                 return;
 
-            SetFireStacks(uid, flammable.FireStacks + relativeFireStacks, flammable, ignite);
+            SetFireStacks(uid, flammable.FireStacks + relativeFireStacks, flammable, ignite, penetration); // Trauma - penetration
         }
 
         public void SetFireStacks(EntityUid uid, float stacks, FlammableComponent? flammable = null, bool ignite = false,
-            float penetration = 0f) // Goob
+            float penetration = 0f) // Trauma - penetration
         {
             if (!Resolve(uid, ref flammable))
                 return;
 
             flammable.FireStacks = MathF.Min(MathF.Max(flammable.MinimumFireStacks, stacks), flammable.MaximumFireStacks);
+
+            // <Trauma>
+            if (stacks <= flammable.FireStacks)
+                penetration = MathF.Max(flammable.FireProtectionPenetration, penetration);
+
+            if (stacks > 0)
+                penetration = MathHelper.Lerp(flammable.FireProtectionPenetration, penetration, 1f - flammable.FireStacks / stacks);
+
+            penetration = Math.Clamp(penetration, 0f, 1f);
+            flammable.FireProtectionPenetration = penetration;
+
+            var ev = new FireStacksChangedEvent(uid, flammable.FireStacks);
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
 
             // Goobstation modified - fix
             if (flammable.FireStacks <= 0)
