@@ -54,7 +54,7 @@ public sealed partial class VampireSystem : EntitySystem
     /// </summary>
     public void AdjustBlood(Entity<VampireComponent?> ent, int amount)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
         ent.Comp.UsableBlood += amount;
@@ -70,7 +70,7 @@ public sealed partial class VampireSystem : EntitySystem
     /// </summary>
     public void SubtractUsableBlood(Entity<VampireComponent?> ent, int amount)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
         ent.Comp.UsableBlood = Math.Clamp(ent.Comp.UsableBlood - amount, 0, ent.Comp.TotalBlood);
@@ -83,7 +83,7 @@ public sealed partial class VampireSystem : EntitySystem
     /// <returns>True if we have enough <see cref="VampireComponent.UsableBlood"/>, false otherwise</returns>
     public bool HasUsableBlood(Entity<VampireComponent?> ent, int amount)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
             return false;
 
         if (ent.Comp.UsableBlood >= amount)
@@ -97,7 +97,7 @@ public sealed partial class VampireSystem : EntitySystem
     /// </summary>
     public int GetTotalBlood(Entity<VampireComponent?> ent)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
             return 0;
 
         return ent.Comp.TotalBlood;
