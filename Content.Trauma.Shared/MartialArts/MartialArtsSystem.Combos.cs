@@ -17,9 +17,9 @@ namespace Content.Trauma.Shared.MartialArts;
 /// </summary>
 public partial class MartialArtsSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private readonly EntityQuery<CanPerformComboComponent> _comboQuery = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private EntityQuery<CanPerformComboComponent> _comboQuery = default!;
 
     private void InitializeCanPerformCombo()
     {
@@ -123,12 +123,12 @@ public partial class MartialArtsSystem
 
     public void PerformCombo(EntityUid performer, EntityUid target, ComboPrototype proto, Entity<CanPerformComboComponent> ent, int level)
     {
+        // TODO: dont hardcode this here...
         ent.Comp.Momentum += 1;
 
-        float scale = Math.Clamp(((float) (level - proto.LevelRequired)) / 10.0f, 0.1f, 2.0f) + Math.Min(((float) ent.Comp.Momentum) / 20f, 2.0f);
-        var evDamage = new MartialArtDamageModifierEvent(performer, 1);
-        RaiseLocalEvent(ent, ref evDamage);
-        scale *= evDamage.Coefficient;
+        var scaleEv = new MartialArtModifyScaleEvent(performer);
+        RaiseLocalEvent(ent, ref scaleEv);
+        var scale = scaleEv.Scale;
 
         if (proto.UserEffects != null)
             _effects.ApplyEffects(performer, proto.UserEffects, scale, user: performer);

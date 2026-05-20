@@ -13,18 +13,18 @@ using Robust.Server.GameObjects;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
-public sealed class CosmicSpireSystem : EntitySystem
+public sealed partial class CosmicSpireSystem : EntitySystem
 {
-    [Dependency] private readonly AmbientSoundSystem _ambient = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cosmicRule = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly GasVentScrubberSystem _scrub = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private AmbientSoundSystem _ambient = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private CosmicCultRuleSystem _cosmicRule = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private GasVentScrubberSystem _scrub = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     private readonly HashSet<Entity<CosmicEntropyMoteComponent>> _motes = [];
 

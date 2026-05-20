@@ -44,7 +44,7 @@
   components:
   - type: Mutation
     instability: 35
-    difficulty: 32 # powergamers delight
+    difficulty: 20 # powergamers delight
     rarity: Mythical
     conflicts:
     - MutationPressureAdaptation

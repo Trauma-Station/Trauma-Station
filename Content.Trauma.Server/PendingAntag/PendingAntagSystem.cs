@@ -5,12 +5,12 @@ using Content.Server.Antag.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 
-namespace Content.Goobstation.Server.PendingAntag;
+namespace Content.Trauma.Server.PendingAntag;
 
-public sealed class PendingAntagSystem : EntitySystem
+public sealed partial class PendingAntagSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly AntagSelectionSystem _selection = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private AntagSelectionSystem _selection = default!;
 
     public Dictionary<NetUserId, (AntagSelectionDefinition, Entity<AntagSelectionComponent>)> PendingAntags = new();
 

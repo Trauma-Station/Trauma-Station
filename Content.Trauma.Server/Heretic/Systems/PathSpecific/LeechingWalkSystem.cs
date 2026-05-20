@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
+using Content.Goobstation.Shared.Disease.Components;
 using Content.Medical.Shared.Body;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -23,31 +24,43 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class LeechingWalkSystem : EntitySystem
+public sealed partial class LeechingWalkSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly HereticAbilitySystem _ability = default!;
-    [Dependency] private readonly RespiratorSystem _respirator = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly BodyRestoreSystem _bodyRestore = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly EntityQuery<DamageableComponent> _damageableQuery = default!;
-    [Dependency] private readonly EntityQuery<TemperatureComponent> _temperatureQuery = default!;
-    [Dependency] private readonly EntityQuery<StaminaComponent> _staminaQuery = default!;
-    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusQuery = default!;
-    [Dependency] private readonly EntityQuery<RespiratorComponent> _respiratorQuery = default!;
-    [Dependency] private readonly EntityQuery<HereticComponent> _hereticQuery = default!;
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
-    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
-    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private HereticAbilitySystem _ability = default!;
+    [Dependency] private RespiratorSystem _respirator = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private BodyRestoreSystem _bodyRestore = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageableQuery = default!;
+    [Dependency] private EntityQuery<TemperatureComponent> _temperatureQuery = default!;
+    [Dependency] private EntityQuery<StaminaComponent> _staminaQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectsComponent> _statusQuery = default!;
+    [Dependency] private EntityQuery<RespiratorComponent> _respiratorQuery = default!;
+    [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<LeechingWalkComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(Entity<LeechingWalkComponent> ent, ref MapInitEvent args)
+    {
+        RemCompDeferred<DiseaseCarrierComponent>(ent);
+    }
 
     public override void Update(float frameTime)
     {
@@ -68,31 +81,35 @@ public sealed class LeechingWalkSystem : EntitySystem
 
             _damageableQuery.TryComp(uid, out var damageable);
 
-            var multiplier = 1.5f;
+            var multiplier = 1f;
             var shouldHeal = true;
+            var boneHeal = FixedPoint2.Zero;
             if (_hereticQuery.TryComp(mindContainer.Mind, out var heretic))
             {
-                if (heretic.PathStage >= 7)
+                multiplier += heretic.PassiveLevel * 0.5f;
+                if (heretic is { Ascended: true, CurrentPath: HereticPath.Rust })
                 {
-                    if (heretic is {Ascended: true, CurrentPath: HereticPath.Rust})
+                    if (_respiratorQuery.TryComp(uid, out var respirator))
                     {
-                        multiplier = 3.5f;
-                        if (_respiratorQuery.TryComp(uid, out var respirator))
-                        {
-                            _respirator.UpdateSaturation(uid,
-                                respirator.MaxSaturation - respirator.MinSaturation,
-                                respirator);
-                        }
-
-                        if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
-                        {
-                            if (_bodyQuery.TryComp(uid, out var body))
-                                _bodyRestore.RestoreBody((uid, body));
-                            shouldHeal = false;
-                        }
+                        _respirator.UpdateSaturation(uid,
+                            respirator.MaxSaturation - respirator.MinSaturation,
+                            respirator);
                     }
-                    else
-                        multiplier = 2f;
+
+                    multiplier += 1.5f;
+                }
+
+                if (heretic.PassiveLevel >= 2)
+                    boneHeal = leech.BoneHeal * heretic.PassiveLevel;
+
+                if (heretic.PassiveLevel >= 3)
+                {
+                    if (damageable != null && _dmg.GetTotalDamage((uid, damageable)) < FixedPoint2.Epsilon)
+                    {
+                        if (_bodyQuery.TryComp(uid, out var body))
+                            _bodyRestore.RestoreBody((uid, body));
+                        shouldHeal = false;
+                    }
                 }
             }
             else if (_ghoulQuery.HasComp(uid))
@@ -107,7 +124,8 @@ public sealed class LeechingWalkSystem : EntitySystem
                 _ability.IHateWoundMed((uid, damageable, null),
                     toHeal,
                     leech.BloodHeal * multiplier,
-                    null);
+                    null,
+                    boneHeal);
             }
 
             if (_bloodQuery.TryComp(uid, out var blood))

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
@@ -14,12 +15,6 @@ public sealed partial class GhoulComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 TotalHealth = 50;
-
-    /// <summary>
-    /// Whether this ghoul can be unghoulified
-    /// </summary>
-    [DataField]
-    public bool CanDeconvert;
 
     [DataField]
     public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.GibOrgans;
@@ -65,6 +60,12 @@ public sealed partial class GhoulComponent : Component
 
     [DataField]
     public HashSet<ProtoId<NpcFactionPrototype>> OldFactions = new();
+
+    [DataField]
+    public ProtoId<EntityEffectPrototype> SkillEffect = "GhoulSkills";
+
+    [DataField]
+    public ProtoId<EntityEffectPrototype> SkillEffectRemove = "GhoulSkillsRemove";
 }
 
 public enum GhoulDeathBehavior : byte
@@ -72,4 +73,5 @@ public enum GhoulDeathBehavior : byte
     GibOrgans, // Gibs into organs
     Gib, // Gibs without organs
     NoGib, // Doesn't gib
+    Deconvert, // Doesn't gib, deconverts automatically
 }

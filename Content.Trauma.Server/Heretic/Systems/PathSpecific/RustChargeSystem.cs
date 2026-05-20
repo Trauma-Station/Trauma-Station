@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Rust;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class RustChargeSystem : SharedRustChargeSystem
+public sealed partial class RustChargeSystem : SharedRustChargeSystem
 {
-    [Dependency] private readonly DestructibleSystem _destructible = default!;
+    [Dependency] private DestructibleSystem _destructible = default!;
 
     protected override void DestroyStructure(EntityUid uid, EntityUid user)
     {

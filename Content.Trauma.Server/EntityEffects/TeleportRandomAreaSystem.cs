@@ -6,17 +6,16 @@ using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.EntityEffects;
 using Content.Trauma.Shared.Teleportation;
-using Robust.Shared.Map;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.EntityEffects;
 
-public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformComponent, TeleportRandomArea>
+public sealed partial class TeleportRandomAreaSystem : EntityEffectSystem<TransformComponent, TeleportRandomArea>
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     public const int Oxygen = (int) Gas.Oxygen;
 
@@ -40,7 +39,7 @@ public sealed class TeleportRandomAreaSystem : EntityEffectSystem<TransformCompo
     }
 
     private bool IsTileUnsafe(Entity<TransformComponent> area)
-        => _atmos.GetTileMixture(area.AsNullable()) is not {} mixture || // space
+        => _atmos.GetTileMixture(area.AsNullable()) is not { } mixture || // space
             mixture.Temperature <= 270 || mixture.Temperature >= 360 || // bad temp
             mixture.Pressure <= 20 || mixture.Pressure >= 300 || // bad pressure
             mixture[Oxygen] < 16; // not enough oxygen

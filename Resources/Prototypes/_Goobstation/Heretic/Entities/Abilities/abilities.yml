@@ -149,7 +149,7 @@
   components:
   - type: Sprite
     noRot: true
-    drawdepth: Mobs
+    drawdepth: Effects # Draw above trail
   - type: Clickable
   - type: InteractionOutline
   - type: Damageable

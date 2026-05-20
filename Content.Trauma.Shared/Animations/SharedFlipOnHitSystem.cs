@@ -10,12 +10,12 @@ using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Animations;
 
-public abstract class SharedFlipOnHitSystem : EntitySystem
+public abstract partial class SharedFlipOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    [Dependency] protected readonly StandingStateSystem Standing = default!;
-    [Dependency] protected readonly StatusEffectsSystem Status = default!;
+    [Dependency] protected StandingStateSystem Standing = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
 
     protected static readonly TimeSpan Duration = TimeSpan.FromMilliseconds(1600);
     protected const string AnimationKey = "fliponhit";

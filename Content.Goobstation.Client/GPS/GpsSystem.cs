@@ -5,7 +5,7 @@ using Content.Goobstation.Shared.GPS.Components;
 
 namespace Content.Goobstation.Client.GPS;
 
-public sealed class GpsSystem : SharedGpsSystem
+public sealed partial class GpsSystem : SharedGpsSystem
 {
     protected override void UpdateUi(Entity<GPSComponent> ent)
     {

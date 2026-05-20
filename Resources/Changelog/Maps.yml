@@ -278,3 +278,36 @@ Entries:
   id: 30
   time: '2026-04-09T10:01:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1884
+- author: Vanadiom
+  changes:
+  - type: Fix
+    message: >-
+      Removed an errant sensor on Amber Station, the Cargo PTL air alarm no
+      longer thinks it's spaced all the time!
+  id: 31
+  time: '2026-04-22T19:15:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2173
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Cog: All areas are mapped, maints now actually protects you from radstorms
+      here.
+  id: 32
+  time: '2026-05-02T03:03:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2365
+- author: Aineias1
+  changes:
+  - type: Tweak
+    message: Leonid medical main room split in 2
+  - type: Add
+    message: Added Genetics to Cog.
+  - type: Add
+    message: Added Radio Host to Atlas and Packed.
+  - type: Add
+    message: Added Phones to Packed, Cog, Atlas
+  - type: Fix
+    message: Fixed Oasis genetics being spaced.
+  id: 33
+  time: '2026-05-12T20:31:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2551

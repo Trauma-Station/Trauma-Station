@@ -8,7 +8,6 @@ using Robust.Client.UserInterface.XAML;
 using System.Linq;
 using Robust.Client.ResourceManagement;
 using Content.Client.Resources;
-using System.Numerics;
 using Content.Goobstation.Shared.GPS.Components;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
@@ -19,10 +18,10 @@ namespace Content.Goobstation.Client.GPS;
 [GenerateTypedNameReferences]
 public sealed partial class GpsWindow : BaseWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly SharedTransformSystem _transform;
     private readonly SpriteSystem _sprite;

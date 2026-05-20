@@ -2,21 +2,20 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Throwing;
-using Content.Trauma.Shared.Xenomorphs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
-namespace Content.Shared._White.Xenomorphs.FaceHugger;
+namespace Content.Trauma.Shared.Xenomorphs.FaceHugger;
 
 /// <summary>
 /// Handles the leap action for sentient facehuggers
 /// </summary>
-public sealed class SharedFaceHuggerLeapSystem : EntitySystem
+public sealed partial class SharedFaceHuggerLeapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     public override void Initialize()
     {

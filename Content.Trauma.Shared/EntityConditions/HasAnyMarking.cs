@@ -28,9 +28,9 @@ public sealed partial class HasAnyMarking : EntityConditionBase<HasAnyMarking>
         => string.Empty; // idc
 }
 
-public sealed class HasAnyMarkingConditionSystem : EntityConditionSystem<BodyComponent, HasAnyMarking>
+public sealed partial class HasAnyMarkingConditionSystem : EntityConditionSystem<BodyComponent, HasAnyMarking>
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     protected override void Condition(Entity<BodyComponent> ent, ref EntityConditionEvent<HasAnyMarking> args)
     {

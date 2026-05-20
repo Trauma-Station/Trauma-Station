@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Dataset;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -78,26 +79,7 @@ public sealed partial class HereticComponent : Component
     public int InfluenceGainTextFontSize = 22;
 
     [DataField]
-    public List<LocId> InfluenceGainMessages = new()
-    {
-        "influence-gain-message-1",
-        "influence-gain-message-2",
-        "influence-gain-message-3",
-        "influence-gain-message-4",
-        "influence-gain-message-5",
-        "influence-gain-message-6",
-        "influence-gain-message-7",
-        "influence-gain-message-7",
-        "influence-gain-message-8",
-        "influence-gain-message-9",
-        "influence-gain-message-10",
-        "influence-gain-message-11",
-        "influence-gain-message-12",
-        "influence-gain-message-13",
-        "influence-gain-message-14",
-        "influence-gain-message-15",
-        "influence-gain-message-16",
-    };
+    public ProtoId<LocalizedDatasetPrototype> InfluenceGainMessages = "InfluenceGainMessages";
 
     [DataField]
     public List<EntProtoId<ObjectiveComponent>> AllObjectives = new()
@@ -127,12 +109,7 @@ public sealed partial class HereticComponent : Component
     /// Side category -> draft amount
     /// </summary>
     [DataField]
-    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts = new()
-    {
-        { "HereticPathSideT1", 1 }, // 1 free draft of t1 side roundstart
-        { "HereticPathSideT2", 0 },
-        { "HereticPathSideT3", 0 },
-    };
+    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts = new();
 
     [DataField]
     public int SideDraftChoiceAmount = 3;
@@ -141,14 +118,22 @@ public sealed partial class HereticComponent : Component
     /// After this amount of knowledge heretic loses their blade break ability
     /// </summary>
     [DataField]
-    public float LockBladeBreakKnowledgeAmount = 8f;
+    public float LockBladeBreakKnowledgeAmount = 10f;
 
     [DataField, AutoNetworkedField]
     public float KnowledgeTracker;
 
+    /// <summary>
+    /// Can't break blade after purchasing blade upgrade or reaching t2 passive or ascending
+    /// or reaching <see cref="LockBladeBreakKnowledgeAmount"/> knowledge points
+    /// </summary>
     [ViewVariables]
-    public bool CanBreakBlade => !Ascended && KnowledgeTracker < LockBladeBreakKnowledgeAmount;
+    public bool CanBreakBlade => PathStage < 7 && PassiveLevel < 2 && !Ascended &&
+                                 KnowledgeTracker < LockBladeBreakKnowledgeAmount;
 
+    /// <summary>
+    /// Show aura if path is not lock and either ascended or did not do feast of owls and cannot break blade
+    /// </summary>
     [ViewVariables]
     public bool ShouldShowAura => CurrentPath != HereticPath.Lock && (Ascended || CanAscend && !CanBreakBlade);
 
@@ -157,6 +142,9 @@ public sealed partial class HereticComponent : Component
 
     [DataField]
     public LocId AuraVisibleMessage = "heretic-aura-message";
+
+    [DataField]
+    public LocId AuraVisibleMessageImmediate = "heretic-aura-message-immediate";
 
     [DataField]
     public TimeSpan AuraDelayTime = TimeSpan.FromMinutes(1);
@@ -168,21 +156,23 @@ public sealed partial class HereticComponent : Component
     public int SacrificeTracker;
 
     /// <summary>
-    /// Influences gradually spawn with increasing tier after sacrifices
+    /// Influences gradually spawn after sacrifices
     /// <see cref="SacrificeTracker"/> tracks the amount
     /// </summary>
     [DataField]
-    public Dictionary<int, EntProtoId> InfluenceSpawnPerSacrificeAmount = new()
-    {
-        {1, "EldritchInfluenceT2"},
-        {2, "EldritchInfluenceT3"},
-    };
+    public int MaxSacrificeInfluenceSpawn = 2;
 
     /// <summary>
     /// Inactive means either dead or in jaunt
     /// </summary>
     [DataField]
     public bool IsActive = true;
+
+    /// <summary>
+    /// Current heretic passive ability level
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int PassiveLevel;
 }
 
 [DataDefinition, Serializable, NetSerializable]

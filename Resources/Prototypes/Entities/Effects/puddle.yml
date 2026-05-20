@@ -133,6 +133,8 @@
   components:
   # <Trauma>
   - type: BadFood # stop mice treating to drink slime off the floor its too op
+  - type: ViewconeOccludable # seeing some guy bleeding behind you... not very good
+    occludeIfAnchored: true # they're always anchored
   # </Trauma>
   - type: Clickable
   - type: Slippery

@@ -5,11 +5,6 @@
   components:
   - type: Loadout
     prototypes: [ GreyTideAntagGear ]
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: TraitorSkills
 
 - type: entity
   parent: MobHuman
@@ -21,11 +16,6 @@
   - type: Loadout
     prototypes: [ TunnelClownAntagGear ]
   - type: Clumsy
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: ChangelingSkills
 
 - type: entity
   parent: MobHuman
@@ -36,11 +26,6 @@
     randomizeName: true
   - type: Loadout
     prototypes: [ SingulothKnightsAntagGear ]
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: HereticSkills
 
 - type: entity
   parent: MobHuman
@@ -50,16 +35,12 @@
   - type: ActionGrant
     actions:
     - ActionLightningBolt
+    - ActionInstantSummons
   - type: RandomHumanoidAppearance
     randomizeName: true
   - type: Loadout
     prototypes: [ DarkLordAntagGear ]
   - type: DarkLordMarker
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: HereticSkills
 
 - type: entity
   parent: MobHuman
@@ -74,11 +55,6 @@
     randomizeName: true
   - type: Loadout
     prototypes: [ ChosenOneProtagGear ]
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: HereticSkills
 
 - type: entity
   parent: MobHuman
@@ -90,11 +66,6 @@
     randomizeName: true
   - type: Loadout
     prototypes: [ MimeAssassinGear ]
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: TraitorSkills
 
 - type: entity
   parent: MobHuman
@@ -105,11 +76,6 @@
     randomizeName: true
   - type: Loadout
     prototypes: [ DarkPriestAntagGear ]
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: HereticSkills
 
 - type: entity
   parent: MobVox
@@ -120,8 +86,3 @@
     randomizeName: true
   - type: Loadout
     prototypes: [ VoxRaiderAntagGear ]
-  - type: TriggerOnSpawn
-  - type: EntityEffectOnTrigger
-    effects:
-    - !type:NestedEffect
-      proto: TraitorSkills

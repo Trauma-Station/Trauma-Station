@@ -10,14 +10,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.CardboardBox;
 
-public sealed class JustABoxSystem : EntitySystem
+public sealed partial class JustABoxSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     /// <summary>
     /// Flags to look for witnesses.

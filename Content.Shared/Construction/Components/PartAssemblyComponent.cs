@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Shared.Tag;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Construction.Components;
@@ -14,7 +18,7 @@ public sealed partial class PartAssemblyComponent : Component
     /// A dictionary of a set of parts to a list of tags for each assembly.
     /// </summary>
     [DataField("parts", required: true)]
-    public Dictionary<string, List<string>> Parts = new();
+    public Dictionary<string, List<ProtoId<TagPrototype>>> Parts = new(); // Trauma - ProtoId for the tags
 
     /// <summary>
     /// The entry in <see cref="Parts"/> that is currently being worked on.

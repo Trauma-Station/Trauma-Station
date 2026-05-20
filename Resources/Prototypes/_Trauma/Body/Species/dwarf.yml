@@ -1,0 +1,26 @@
+- type: markingsGroup
+  parent: Human
+  id: Dwarf
+  limits:
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: true # all dwarves need beards
+      default: [ HumanFacialHairDwarf ]
+
+- type: entity
+  abstract: true
+  parent: OrganDwarf
+  id: OrganDwarfExternal
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Species/Human/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Dwarf
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganDwarfExternal ]
+  id: OrganDwarfHead

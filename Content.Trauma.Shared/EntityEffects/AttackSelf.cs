@@ -22,12 +22,12 @@ public sealed partial class AttackSelf : EntityEffectBase<AttackSelf>
         => Loc.GetString("entity-effect-guidebook-attack-self", ("chance", Probability), ("useHeld", UseHeld));
 }
 
-public sealed class AttackSelfEntityEvent : EntityEffectSystem<CombatModeComponent, AttackSelf>
+public sealed partial class AttackSelfEntityEvent : EntityEffectSystem<CombatModeComponent, AttackSelf>
 {
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly EntityQuery<MeleeWeaponComponent> _query = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private EntityQuery<MeleeWeaponComponent> _query = default!;
 
     protected override void Effect(Entity<CombatModeComponent> ent, ref EntityEffectEvent<AttackSelf> args)
     {

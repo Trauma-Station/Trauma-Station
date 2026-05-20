@@ -679,6 +679,7 @@
       tags:
       - DroneUsable
       - AugmentRechargerBoard
+      - RechargingBoard # Trauma
 
 - type: entity
   id: PowerCageRechargerCircuitboard
@@ -701,6 +702,9 @@
         Glass: 125
     - type: StaticPrice
       price: 30
+    - type: Tag # Trauma
+      tags:
+      - RechargingBoard
 
 - type: entity
   id: BorgChargerCircuitboard
@@ -726,6 +730,7 @@
       tags:
       - DroneUsable
       - AugmentStationBoard
+      - RechargingBoard # Trauma
 
 - type: entity
   id: WeaponCapacitorRechargerCircuitboard
@@ -747,6 +752,11 @@
         Plastic: 25
     - type: StaticPrice
       price: 15
+    - type: Tag # Trauma
+      tags:
+      - DroneUsable
+      - AugmentStationBoard
+      - RechargingBoard
 
 - type: entity
   id: TurboItemRechargerCircuitboard
@@ -767,6 +777,11 @@
       Steel: 25
       Glass: 125
       Gold: 25
+  - type: Tag # Trauma
+    tags:
+    - DroneUsable
+    - AugmentStationBoard
+    - RechargingBoard
 
 - type: entity
   id: SubstationMachineCircuitboard

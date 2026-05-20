@@ -7,6 +7,6 @@
   objectType: Item
   # <Trauma>
   theory:
-    ScienceKnowledge: 1
+    ScienceKnowledge: 0
   useQuality: false
   # </Trauma>

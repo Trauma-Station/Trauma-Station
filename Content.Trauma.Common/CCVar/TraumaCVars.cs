@@ -152,7 +152,7 @@ public sealed partial class TraumaCVars
     /// How long despawning decals like footprints and blood splatters last before despawning.
     /// </summary>
     public static readonly CVarDef<float> DecalDespawnTime =
-        CVarDef.Create("trauma.decal_despawn_time", 300f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_time", 900f, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// How many decals are allowed to be despawning at the same time.
@@ -160,7 +160,7 @@ public sealed partial class TraumaCVars
     /// If this value is changed ingame it will only take affected after restarting the round.
     /// </summary>
     public static readonly CVarDef<int> DecalDespawnLimit =
-        CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_limit", 1024, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 
@@ -189,6 +189,40 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<int> AntagSummonerMinPlayers =
         CVarDef.Create("trauma.antag_summoner_min_players", 30, CVar.SERVER);
+
+    #endregion
+
+    #region Particles
+
+    /// <summary>
+    /// Controls particle effect quality.
+    /// 0 = Off, 1 = Low, 2 = Medium, 3 = High
+    /// Low:    25% of maxCount per emitter
+    /// Medium: 50% of maxCount per emitter
+    /// High:   100% of maxCount per emitter
+    ///
+    /// Note: Particles with IgnoreQualitySettings = true always render at full quality.
+    /// </summary>
+    public static readonly CVarDef<int> ParticleQuality =
+        CVarDef.Create("particles.quality", 3, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Maximum total number of live particles allowed on screen at once across all emitters.
+    /// Emitters will reduce their emission rate once the budget is exhausted.
+    /// Overridden by ParticleQuality presets but can be set manually when quality is High.
+    /// </summary>
+    public static readonly CVarDef<int> ParticleGlobalBudget =
+        CVarDef.Create("particles.global_budget", 8000, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    #endregion
+
+    #region Audio
+
+    /// <summary>
+    /// Special audio volume like fear sounds.
+    /// </summary>
+    public static readonly CVarDef<float> SpecialAudioVolume =
+        CVarDef.Create("trauma.special_audio_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
 }

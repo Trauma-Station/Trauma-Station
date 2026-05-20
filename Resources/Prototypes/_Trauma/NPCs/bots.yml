@@ -6,6 +6,9 @@
       task: WantedInnateRangedCombatCompound
   - tasks:
     - !type:HTNCompoundTask
+      task: SecbotPatrolCompound
+  - tasks:
+    - !type:HTNCompoundTask
       task: IdleCompound
 
 - type: htnCompound

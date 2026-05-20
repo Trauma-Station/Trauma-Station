@@ -9,9 +9,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Curses;
 
-public abstract class SharedHereticCurseSystem : EntitySystem
+using DnaDict = Dictionary<string, (float, HashSet<EntityUid>)>;
+
+public abstract partial class SharedHereticCurseSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {
@@ -55,5 +57,13 @@ public abstract class SharedHereticCurseSystem : EntitySystem
             return;
 
         RemCompDeferred<LegsParalyzedComponent>(args.Target);
+    }
+
+    public virtual void CurseCrewmember(Entity<HereticCurseProviderComponent> provider,
+        EntityUid rune,
+        EntityUid user,
+        bool popup,
+        DnaDict? dnaDict = null)
+    {
     }
 }

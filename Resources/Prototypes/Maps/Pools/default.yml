@@ -24,9 +24,10 @@
   - Kettle
   #- Submarine
   - Leonid
-  - Delta
+  #- Delta # decals are overlapping everywhere and have Z fighting
   #- Chloris
   - Cog
   - Reach
   #- Serpentcrest
   - Nume
+  - Freighter

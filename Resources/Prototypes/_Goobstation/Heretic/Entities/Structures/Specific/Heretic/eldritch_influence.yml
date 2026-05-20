@@ -86,7 +86,6 @@
         layer:
           - WallLayer
         mask:
-          - Impassable
           - HighImpassable
           - MidImpassable
           - LowImpassable
@@ -111,42 +110,6 @@
     lifetime: 600
   - type: SpawnOnDespawn
     prototype: EldritchInfluenceSpent
-
-- type: entity
-  parent: EldritchInfluence
-  id: EldritchInfluenceT1
-  suffix: T1
-  components:
-  - type: Aura
-    auraFarm: 1
-    distortion: 0.01
-    auraColor: "#a6a600"
-  - type: EldritchInfluence
-    tier: 1
-
-- type: entity
-  parent: EldritchInfluence
-  id: EldritchInfluenceT2
-  suffix: T2
-  components:
-  - type: Aura
-    auraFarm: 1
-    distortion: 0.02
-    auraColor: "#00a6a6"
-  - type: EldritchInfluence
-    tier: 2
-
-- type: entity
-  parent: EldritchInfluence
-  id: EldritchInfluenceT3
-  suffix: T3
-  components:
-  - type: Aura
-    auraFarm: 1
-    distortion: 0.03
-    auraColor: "#a60000"
-  - type: EldritchInfluence
-    tier: 3
 
 - type: entity
   parent: EldritchInfluence

@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Wraith.Aura;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using System.Numerics;
 using Content.Goobstation.Client.Shaders;
 using Content.Goobstation.Common.Shaders;
 
@@ -12,11 +11,11 @@ namespace Content.Goobstation.Client.Wraith.Aura;
 /// <summary>
 /// This be handling your aura 🥀
 /// </summary>
-public sealed class AuraSystem : EntitySystem
+public sealed partial class AuraSystem : EntitySystem
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Aura";
 
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private ShaderInstance _shader = default!;
     /// <inheritdoc/>

@@ -2,10 +2,13 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Polymorph;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -154,8 +157,8 @@ public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<Fin
 
 public sealed partial class UpdateKnowledgeEffect : BaseRitualEffect<UpdateKnowledgeEffect>
 {
-    [DataField(required: true)]
-    public float Amount;
+    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, CurrencyPrototype>))]
+    public Dictionary<string, FixedPoint2> Knowledge;
 }
 
 public sealed partial class RemoveRitualsEffect : BaseRitualEffect<RemoveRitualsEffect>
@@ -184,10 +187,7 @@ public sealed partial class GhoulifyEffect : EntityEffectBase<GhoulifyEffect>, I
     public bool ChangeAppearance = true;
 
     [DataField]
-    public bool CanDeconvert = true;
-
-    [DataField]
-    public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.NoGib;
+    public GhoulDeathBehavior DeathBehavior = GhoulDeathBehavior.Deconvert;
 }
 
 public sealed partial class SplitIngredientsRitualEffect : BaseRitualEffect<SplitIngredientsRitualEffect>
@@ -245,3 +245,5 @@ public sealed partial class SetBlackboardValuesRitualEffect : EntityEffectBase<S
     [DataField(required: true)]
     public Dictionary<string, bool> Values;
 }
+
+public sealed partial class AddToFleshGhoulLimit : EntityEffectBase<AddToFleshGhoulLimit>, IHereticRitualEntry;

@@ -53,6 +53,23 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 60
+      MaterialsKnowledge: 60
+      DoorsKnowledge: 60
+      AirlocksKnowledge: 60
+      FurnitureKnowledge: 60
+      InfrastructureKnowledge: 60
+      ElectronicsKnowledge: 60
+      WallsKnowledge: 60
+      WindowsKnowledge: 60
+      MetalworkingKnowledge: 60
+      GunsmithingKnowledge: 60
+      MechanicsKnowledge: 60
+      BotsKnowledge: 60
+  # </Trauma>
 
 - type: entity
   parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
@@ -137,7 +154,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleLaser
       - XenoborgModuleJammer
   - type: ItemSlots
@@ -145,6 +162,23 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 20
+      MaterialsKnowledge: 20
+      DoorsKnowledge: 20
+      AirlocksKnowledge: 20
+      FurnitureKnowledge: 20
+      InfrastructureKnowledge: 20
+      ElectronicsKnowledge: 20
+      WallsKnowledge: 20
+      WindowsKnowledge: 20
+      ShootingKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
+  # </Trauma>
 
 - type: entity
   parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
@@ -191,7 +225,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
@@ -199,6 +233,24 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
+  # <Trauma>
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 20
+      MaterialsKnowledge: 20
+      DoorsKnowledge: 20
+      AirlocksKnowledge: 20
+      FurnitureKnowledge: 20
+      InfrastructureKnowledge: 20
+      ElectronicsKnowledge: 20
+      WallsKnowledge: 20
+      WindowsKnowledge: 20
+      MeleeKnowledge: 51
+      StrengthKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
+  # </Trauma>
 
 - type: entity
   parent: [ BaseXenoborgChassis, BaseXenoborgTransponder ]
@@ -244,7 +296,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
@@ -253,7 +305,23 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHigh
-
+  # <Trauma>
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 20
+      MaterialsKnowledge: 20
+      DoorsKnowledge: 20
+      AirlocksKnowledge: 20
+      FurnitureKnowledge: 20
+      InfrastructureKnowledge: 20
+      ElectronicsKnowledge: 20
+      WallsKnowledge: 20
+      WindowsKnowledge: 20
+      ShootingKnowledge: 51
+      ToughnessKnowledge: 51
+      AthleticsKnowledge: 51
+      WeaponsKnowledge: 51
+  # </Trauma>
 
 # xenoborgs empty
 - type: entity
@@ -290,7 +358,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleLaser
       - XenoborgModuleJammer
   - type: ItemSlots
@@ -310,7 +378,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
@@ -330,7 +398,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      - XenoborgModuleTool
+      #- XenoborgModuleTool # Trauma - engi xorg exists
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice

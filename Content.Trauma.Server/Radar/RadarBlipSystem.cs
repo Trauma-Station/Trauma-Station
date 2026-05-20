@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Trauma.Common.Radar;
@@ -10,7 +9,7 @@ namespace Content.Trauma.Server.Radar;
 
 public sealed partial class RadarBlipSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
     public override void Initialize()
     {
         base.Initialize();

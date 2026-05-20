@@ -36,3 +36,22 @@
   coefficients:
     Radiation: 0
     Heat: 2
+
+- type: damageModifierSet
+  id: CoconutCrab
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.75
+    Piercing: 0.75
+    Heat: 0.5
+    Caustic: 2
+    Holy: 2
+  flatReductions:
+    Slash: 5
+
+- type: damageModifierSet
+  id: CoconutCrabUnshelled
+  coefficients:
+    Slash: 0.9
+    Caustic: 2
+    Holy: 2

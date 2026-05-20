@@ -203,7 +203,7 @@
     - Wizard
 
 - type: entity
-  parent: [UnbreakableDurability, BaseCrowbar, BaseMagicalContraband]
+  parent: [BaseCrowbar, BaseMagicalContraband]
   id: CrowbarWizard
   description: A compact multipurpose tool to pry open doors and destroy stations.
   suffix: Wizard # Trauma

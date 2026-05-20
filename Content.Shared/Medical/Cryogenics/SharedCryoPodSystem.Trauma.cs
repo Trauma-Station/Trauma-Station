@@ -6,5 +6,5 @@ namespace Content.Shared.Medical.Cryogenics;
 
 public abstract partial class SharedCryoPodSystem
 {
-    [Dependency] private readonly SleepingSystem _sleeping = default!;
+    [Dependency] private SleepingSystem _sleeping = default!;
 }

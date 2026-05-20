@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Lathe.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Guidebook;
@@ -16,8 +15,8 @@ namespace Content.Trauma.Client.Heretic.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CurseWindow : FancyWindow
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private Dictionary<EntProtoId, CurseProviderData> _providerData = new();
     private HashSet<CurseData> _data = new();

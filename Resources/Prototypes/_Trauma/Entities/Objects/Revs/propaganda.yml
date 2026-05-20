@@ -66,10 +66,23 @@
       path: /Audio/_Goobstation/Items/handling/paper_throw.ogg
       params:
         volume: -6
-  - type: RevolutionaryConverter
-    conversionDuration: 5
+  - type: RevPropaganda
+    conversionDuration: 2
     consumesCharges: 1
-    applyFlashEffect: false
+    userBlacklist:
+      components:
+      - MumbleAccent # cant use it while muzzled...
+    whitelist:
+      components:
+      - HumanoidProfile
+      - AlwaysRevolutionaryConvertible
+    blacklist:
+      components:
+      - MindShield
+      - Revolutionary # no wasting propaganda on someone already converted
+      - Deaf # have to hear the headrevs words
+      - Zombie
+      - AntagImmune
   - type: UseDelay
     delay: 5
   - type: LimitedCharges
@@ -84,7 +97,6 @@
   name: advanced propaganda pamphlet
   description: This propaganda pamphlet is full of the most potent class consciousness you can come up with. It will convert instantly.
   components:
-  - type: RevolutionaryConverter
+  - type: RevPropaganda
     conversionDuration: 0.1
     consumesCharges: 1
-    applyFlashEffect: false

@@ -21,10 +21,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
-using Content.Shared.Verbs;
 using Content.Trauma.Server.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
+using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Wizard;
 using Robust.Shared.Audio.Systems;
@@ -37,29 +37,27 @@ using DnaDict = Dictionary<string, (float, HashSet<EntityUid>)>;
 
 public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IAdminLogManager _log = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _soln = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly VomitSystem _vomit = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly HereticRitualSystem _ritual = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly EntityQuery<ForensicsComponent> _forensicsQuery = default!;
-    [Dependency] private readonly EntityQuery<PuddleComponent> _puddleQuery = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IAdminLogManager _log = default!;
+    [Dependency] private SharedSolutionContainerSystem _soln = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private VomitSystem _vomit = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private HereticRitualSystem _ritual = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private EntityQuery<ForensicsComponent> _forensicsQuery = default!;
+    [Dependency] private EntityQuery<PuddleComponent> _puddleQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<Shared.Heretic.Rituals.HereticRitualRuneComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<HereticCurseProviderComponent, CurseSelectedMessage>(OnCurseSelected);
         SubscribeLocalEvent<HereticCurseProviderComponent, HandDeselectedEvent>(OnHandDeselected);
@@ -114,7 +112,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
             return;
         }
 
-        var look = _lookup.GetEntitiesInRange<Shared.Heretic.Rituals.HereticRitualRuneComponent>(args.Actor.ToCoordinates(),
+        var look = _lookup.GetEntitiesInRange<HereticRitualRuneComponent>(args.Actor.ToCoordinates(),
             3f,
             LookupFlags.StaticSundries);
 
@@ -202,35 +200,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
         CurseCrewmember(ent, rune, args.Actor, false, dnaDict);
     }
 
-    private void OnGetVerbs(Entity<Shared.Heretic.Rituals.HereticRitualRuneComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess)
-            return;
-
-        if (!_heretic.IsHereticOrGhoul(args.User))
-            return;
-
-        if (!TryComp(args.Using, out HereticCurseProviderComponent? provider))
-            return;
-
-        var item = args.Using.Value;
-
-        if (!_toggle.IsActivated(item))
-            return;
-
-        var user = args.User;
-
-        AlternativeVerb verb = new()
-        {
-            Text = Loc.GetString("heretic-curse-provider-curse"),
-            Icon = new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/book_morbus.rsi"), "icon-on"),
-            Act = () => CurseCrewmember((item, provider), ent, user, true),
-        };
-
-        args.Verbs.Add(verb);
-    }
-
-    private void CurseCrewmember(Entity<HereticCurseProviderComponent> provider,
+    public override void CurseCrewmember(Entity<HereticCurseProviderComponent> provider,
         EntityUid rune,
         EntityUid user,
         bool popup,

@@ -1,3 +1,6 @@
+// <Trauma>
+using System.Linq;
+// </Trauma>
 using System.Numerics;
 using Content.Client.IoC;
 using Content.Client.Items;
@@ -14,12 +17,12 @@ namespace Content.Client.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
-    private void OnAmmoCounterCollect(EntityUid uid, AmmoCounterComponent component, ItemStatusCollectMessage args)
+    private void OnAmmoCounterCollect(Entity<AmmoCounterComponent> ent, ref ItemStatusCollectMessage args)
     {
-        RefreshControl(uid, component);
+        RefreshControl(ent);
 
-        if (component.Control != null)
-            args.Controls.Add(component.Control);
+        if (ent.Comp.Control != null)
+            args.Controls.Add(ent.Comp.Control);
     }
 
     /// <summary>
@@ -27,38 +30,70 @@ public sealed partial class GunSystem
     /// </summary>
     /// <param name="uid"></param>
     /// <param name="component"></param>
-    private void RefreshControl(EntityUid uid, AmmoCounterComponent? component = null)
+    private void RefreshControl(Entity<AmmoCounterComponent> ent)
     {
-        if (!Resolve(uid, ref component, false))
-            return;
-
-        component.Control?.Dispose();
-        component.Control = null;
+        ent.Comp.Control?.Dispose();
+        ent.Comp.Control = null;
 
         var ev = new AmmoCounterControlEvent();
-        RaiseLocalEvent(uid, ev, false);
+        RaiseLocalEvent(ent, ev, false);
 
         // Fallback to default if none specified
         ev.Control ??= new DefaultStatusControl();
 
-        component.Control = ev.Control;
-        UpdateAmmoCount(uid, component);
+        // <Trauma>
+        if (ev.Controls.Count > 1)
+        {
+            var container = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalExpand = true,
+                VerticalExpand = true,
+            };
+            foreach (var control in ev.Controls)
+            {
+                container.AddChild(control);
+            }
+
+            ent.Comp.Control = container;
+            UpdateAmmoCount(ent);
+            return;
+        }
+        // </Trauma>
+
+        ent.Comp.Control = ev.Control;
+        UpdateAmmoCount(ent);
     }
 
-    private void UpdateAmmoCount(EntityUid uid, AmmoCounterComponent component)
+    private void UpdateAmmoCount(Entity<AmmoCounterComponent> ent)
     {
-        if (component.Control == null)
+        if (ent.Comp.Control == null)
             return;
+
+        // <Trauma>
+        if (ent.Comp.Control is BoxContainer container)
+        {
+            foreach (var child in container.Children)
+            {
+                var childEv = new UpdateAmmoCounterEvent()
+                {
+                    Control = child
+                };
+
+                RaiseLocalEvent(ent, childEv);
+            }
+        }
+        // </Trauma>
 
         var ev = new UpdateAmmoCounterEvent()
         {
-            Control = component.Control
+            Control = ent.Comp.Control
         };
 
-        RaiseLocalEvent(uid, ev, false);
+        RaiseLocalEvent(ent, ev, false);
     }
 
-    protected override void UpdateAmmoCount(EntityUid uid, bool prediction = true)
+    public override void UpdateAmmoCount(EntityUid uid, bool prediction = true) // Trauma - made public
     {
         // Don't use resolves because the method is shared and there's no compref and I'm trying to
         // share as much code as possible
@@ -68,7 +103,7 @@ public sealed partial class GunSystem
             return;
         }
 
-        UpdateAmmoCount(uid, clientComp);
+        UpdateAmmoCount((uid, clientComp));
     }
 
     /// <summary>
@@ -76,7 +111,28 @@ public sealed partial class GunSystem
     /// </summary>
     public sealed class AmmoCounterControlEvent : EntityEventArgs
     {
-        public Control? Control;
+        public Control? Control
+        // <Trauma>
+        {
+            get => Controls.FirstOrDefault();
+            set
+            {
+                if (value is not { } control)
+                    return;
+
+                var type = control.GetType();
+
+                var index = Controls.FindIndex(x => x.GetType() == type);
+
+                if (index < 0)
+                    Controls.Add(control);
+                else
+                    Controls[index] = control;
+            }
+        }
+
+        public List<Control> Controls = new();
+        // </Trauma>
     }
 
     /// <summary>
@@ -84,13 +140,18 @@ public sealed partial class GunSystem
     /// </summary>
     public sealed class UpdateAmmoCounterEvent : HandledEntityEventArgs
     {
+        // <Trauma>
+        // Only used for BatteryAmmoProvider currently
+        public float FireCostMultiplier = 1f;
+        // </Trauma>
         public Control Control = default!;
     }
 
     #region Controls
 
-    private sealed class DefaultStatusControl : Control
+    public sealed class DefaultStatusControl : Control // Trauma - made public
     {
+        private readonly Label _ammoCount; // Trauma
         private readonly BulletRender _bulletRender;
 
         public DefaultStatusControl()
@@ -98,15 +159,36 @@ public sealed partial class GunSystem
             MinHeight = 15;
             HorizontalExpand = true;
             VerticalAlignment = VAlignment.Center;
-            AddChild(_bulletRender = new BulletRender
+            // <Trauma> - wrap BulletRender in BoxContainer, add _ammoCount
+            AddChild(new BoxContainer
             {
-                HorizontalAlignment = HAlignment.Right,
-                VerticalAlignment = VAlignment.Bottom
+                HorizontalExpand = true,
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                Children =
+                {
+                    (_bulletRender = new BulletRender
+                    {
+                        Margin = new Thickness(0, 0, 5, 0),
+                        HorizontalExpand = true
+                    }),
+                    (_ammoCount = new Label
+                    {
+                        StyleClasses = { StyleClass.ItemStatus },
+                        HorizontalAlignment = HAlignment.Right,
+                        VerticalAlignment = VAlignment.Bottom
+                    }),
+                }
             });
+            // <Trauma>
         }
 
         public void Update(int count, int capacity)
         {
+            // <Trauma>
+            _ammoCount.Visible = true;
+            _ammoCount.Text = $"x{count:00}";
+            // </Trauma>
+
             _bulletRender.Count = count;
             _bulletRender.Capacity = capacity;
 
@@ -132,6 +214,7 @@ public sealed partial class GunSystem
 
             AddChild(new BoxContainer
             {
+                HorizontalExpand = true, // Trauma
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
                 Children =
                 {
@@ -188,7 +271,11 @@ public sealed partial class GunSystem
                         {
                             (_bulletRender = new BulletRender
                             {
+                                // <Trauma>
+                                HorizontalExpand = true,
+                                /*
                                 HorizontalAlignment = HAlignment.Right,
+                                </Trauma> */
                                 VerticalAlignment = VAlignment.Bottom
                             }),
                             (_noMagazineLabel = new Label

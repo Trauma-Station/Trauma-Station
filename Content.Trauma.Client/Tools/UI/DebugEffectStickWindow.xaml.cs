@@ -12,8 +12,8 @@ namespace Content.Trauma.Client.Tools.UI;
 [GenerateTypedNameReferences]
 public sealed partial class DebugEffectStickWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public event Action<string?>? OnSetEffect;
 

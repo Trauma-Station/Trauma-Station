@@ -1059,6 +1059,7 @@
   - type: Tag
     tags:
     - VimPilot
+    - Crab # Trauma
   - type: HTN
     rootTask:
       task: RuminantCompound
@@ -1431,6 +1432,7 @@
   # stupid monkey needs clever mutation to be literate
   - type: BlockReading
   - type: BlockWriting
+  - type: XenoVacTarget # dead monkey cleaner 9000
   # </Trauma>
   - type: CombatMode
     canDisarm: true
@@ -1505,7 +1507,10 @@
       - Monkey  # Goob Balloons Edit
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: MonkeyCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true
   - type: IdExaminable
   - type: Tag
     tags:
@@ -2043,7 +2048,7 @@
   name: mouse
   description: Squeak!
   components:
-  - type: Damageable
+  - type: DefaultBodyDamage # Trauma - damage the parts on mapinit
     damage:
       types:
         Bloodloss: 6

@@ -70,7 +70,7 @@
 - type: entity
   name: cautery
   id: Cautery
-  parent: [BaseToolSurgery, MetalToolDurabilityWeak] # Trauma
+  parent: BaseToolSurgery
   description: A surgical tool used to cauterize open wounds.
   components:
   - type: Sprite
@@ -98,7 +98,7 @@
 - type: entity
   name: drill
   id: Drill
-  parent: [ BaseToolSurgery, MetalToolDurabilityWeak, BaseMedicalScienceContraband ] # Trauma - Made it contraband, durability
+  parent: [ BaseToolSurgery, BaseMedicalScienceContraband ] # Trauma - Made it contraband
   description: A surgical drill for making holes into hard material.
   components:
   - type: Sprite
@@ -128,7 +128,7 @@
 - type: entity
   name: scalpel
   id: Scalpel
-  parent: [ BaseToolSurgery, KnifeDurabilityWeak, BaseMedicalScienceContraband ] # Trauma - Made it contraband, durability
+  parent: [ BaseToolSurgery, BaseMedicalScienceContraband ] # Trauma - Made it contraband
   description: A surgical tool used to make incisions into flesh.
   components:
   - type: Sharp
@@ -170,7 +170,7 @@
 - type: entity
   name: shiv
   id: ScalpelShiv
-  parent: [NonweaponDurability, Scalpel, BaseMinorContraband] # Trauma - Contraband the prison shiv.
+  parent: [ Scalpel, BaseMinorContraband] # Trauma - Contraband the prison shiv.
   description: A pointy piece of glass, abraded to an edge and wrapped in tape for a handle. # Could become a decent tool or weapon with right tool mods.
   components:
   - type: Sprite
@@ -287,6 +287,8 @@
   - type: Tool
     qualities:
       - Sawing
+    useSound: # Trauma
+      path: /Audio/_Shitmed/Medical/Surgery/bone_saw.ogg
   # Shitmed Change
   - type: BoneSaw
   - type: SurgeryTool
@@ -297,7 +299,7 @@
 - type: entity
   name: choppa
   id: SawImprov
-  parent: [Saw, BaseMinorContraband, KnifeDurabilityWeak] # Trauma - add contraband mark
+  parent: [Saw, BaseMinorContraband] # Trauma - add contraband mark
   description: A wicked serrated blade made of whatever nasty sharp things you could find. # It would make a pretty decent weapon, given there are more space for some tool mods too.
   components:
   - type: Sprite
@@ -319,9 +321,15 @@
 - type: entity
   name: circular saw
   id: SawElectric
-  parent: [Saw, MetalToolDurabilityStrong]
+  parent: Saw
   description: For heavy duty cutting.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - SurgeryTool
+    - CircularSaw
+  # </Trauma>
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/circular-saw.rsi
     state: circular-saw
@@ -336,6 +344,8 @@
       path: /Audio/Items/drill_hit.ogg
   - type: Tool
     speedModifier: 1.5
+    useSound: # Trauma
+      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: BoneSaw # Shitmed
     speed: 1.5
   - type: SurgeryTool

@@ -488,6 +488,19 @@
         damage:
           types:
             Heat: 3
+      # <Imp>
+      - !type:Oxygenate
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Decapoid ]
+      - !type:ModifyLungGas
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Decapoid ]
+        ratios:
+          Ammonia: 1.0
+          WaterVapor: -1.0
+      # </Imp>
 
 - type: reagent
   id: Ice

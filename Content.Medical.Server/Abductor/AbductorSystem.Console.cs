@@ -16,7 +16,7 @@ namespace Content.Medical.Server.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly SharedItemSwitchSystem _itemSwitch = default!;
+    [Dependency] private SharedItemSwitchSystem _itemSwitch = default!;
 
     public static readonly SoundSpecifier ExperimentSound = new SoundPathSpecifier(new ResPath("/Audio/Voice/Human/wilhelm_scream.ogg"));
 

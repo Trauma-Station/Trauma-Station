@@ -111,6 +111,27 @@
     - Lock
 
 - type: listing
+  id: HereticLockArmor
+  name: knowledge-path-lock-armor-name
+  description: knowledge-path-lock-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/lock_armor.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ArmorLock
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Lock
+
+- type: listing
   id: HereticLockPath6
   name: knowledge-path-lock-s6-name
   description: knowledge-path-lock-s6-desc

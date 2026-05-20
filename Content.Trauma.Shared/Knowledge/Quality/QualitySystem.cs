@@ -5,7 +5,6 @@ using Content.Shared.Blocking;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
-using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.Explosion.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
@@ -33,14 +32,14 @@ namespace Content.Trauma.Shared.Knowledge.Quality;
 /// <summary>
 /// Handles quality interactions for construction, projectiles, etc.
 /// </summary>
-public sealed class QualitySystem : EntitySystem
+public sealed partial class QualitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly EntityQuery<QualityComponent> _query = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityQuery<QualityComponent> _query = default!;
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
     private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
@@ -125,14 +124,9 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnDestructibleApplyQuality(Entity<DestructibleComponent> ent, ref ApplyQualityEvent args)
     {
-        // 250% health at +5 quality
         var modifier = args.Modifier(args.Proto.Health);
-        foreach (var threshold in ent.Comp.Thresholds)
-        {
-            if (threshold.Trigger is DamageTrigger trigger)
-                trigger.Damage *= modifier;
-        }
-        // TODO: this cant be networked which isn't good, make a scale field?
+        ent.Comp.Scale = modifier;
+        Dirty(ent);
     }
 
     private void OnSelfDamageApplyQuality(Entity<DamageOnHitComponent> ent, ref ApplyQualityEvent args)

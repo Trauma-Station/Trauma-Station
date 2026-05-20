@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Objectives.Components;
 using Content.Server.Mind;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Server.Heretic.Systems;
+using Content.Trauma.Server.Objectives.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 
 namespace Content.Trauma.Server.Heretic.Objectives;
 
-public sealed class HereticObjectiveSystem : EntitySystem
+public sealed partial class HereticObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private HereticSystem _heretic = default!;
 
     public override void Initialize()
     {

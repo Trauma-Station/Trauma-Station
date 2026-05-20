@@ -28,7 +28,7 @@
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: BlobSpawn
+    - id: BlobMidround
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
@@ -96,3 +96,25 @@
     table:
       id: MobWailingHorse
       amount: 1, 1
+
+- type: entity
+  id: CoconutCrabSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 15
+    weight: 5
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 6, 8
+      children:
+      - id: MobCoconutCrab
+      - id: MobCrabTiny
+        weight: 0.625 # Not as scary so make rarer in the event, shrimple as.
+      - id: MobCoconutCrabFloofy # because it looks funny
+        weight: 0.05 # NEVER BASICALLY

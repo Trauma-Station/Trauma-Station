@@ -111,6 +111,27 @@
     whitelist:
     - Blade
 
+- type: listing
+  id: HereticBladeArmor
+  name: knowledge-path-blade-armor-name
+  description: knowledge-path-blade-armor-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - ArmorBlade
+  cost:
+    KnowledgePoint: 1
+  categories:
+  - HereticPathSpecial
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 5
+    whitelist:
+    - Blade
+
 # side
 - type: listing
   id: HereticBladePath6

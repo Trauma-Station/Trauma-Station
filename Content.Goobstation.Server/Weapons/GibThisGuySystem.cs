@@ -9,9 +9,9 @@ namespace Content.Goobstation.Server.Weapons;
 /// <summary>
 /// Gib this Person
 /// </summary>
-public sealed class GibThisGuySystem : EntitySystem
+public sealed partial class GibThisGuySystem : EntitySystem
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     public override void Initialize()
     {

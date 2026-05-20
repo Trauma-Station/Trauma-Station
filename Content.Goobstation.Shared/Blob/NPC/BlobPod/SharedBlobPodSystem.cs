@@ -12,9 +12,9 @@ using Content.Shared.Verbs;
 
 namespace Content.Goobstation.Shared.Blob.NPC.BlobPod;
 
-public abstract class SharedBlobPodSystem : EntitySystem
+public abstract partial class SharedBlobPodSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobs = default!;
+    [Dependency] private MobStateSystem _mobs = default!;
 
 
     private EntityQuery<HumanoidProfileComponent> _query;
@@ -62,14 +62,15 @@ public abstract class SharedBlobPodSystem : EntitySystem
 
     private void OnUnequipAttempt(Entity<BlobPodComponent> ent, ref BeingUnequippedAttemptEvent args)
     {
-        if (args.Unequipee == args.UnEquipTarget)
+        if (args.User == args.UnEquipTarget)
         {
             args.Cancel();
             return;
         }
+
         if (!TryComp<MobStateComponent>(args.UnEquipTarget, out var mobStateComponent))
             return;
-        if (_mobs.IsDead(args.UnEquipTarget,mobStateComponent) || _mobs.IsCritical(args.UnEquipTarget,mobStateComponent))
+        if (_mobs.IsDead(args.UnEquipTarget,mobStateComponent) || _mobs.IsCritical(args.UnEquipTarget, mobStateComponent))
             return;
         if (!HasComp<ZombieBlobComponent>(args.UnEquipTarget))
             return;

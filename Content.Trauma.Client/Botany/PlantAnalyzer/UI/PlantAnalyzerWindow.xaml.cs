@@ -15,7 +15,7 @@ namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PlantAnalyzerWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
     private readonly ButtonGroup _buttonGroupTop = new();
 
     private const string IndentedNewline = "\n   ";

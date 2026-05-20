@@ -27,22 +27,22 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
-public abstract class SharedStarMarkSystem : EntitySystem
+public abstract partial class SharedStarMarkSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedStaminaSystem _stam = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly EntityQuery<CosmicFieldComponent> _fieldQuery = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedStaminaSystem _stam = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedBroadphaseSystem _broadphase = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private EntityQuery<CosmicFieldComponent> _fieldQuery = default!;
 
     public static readonly EntProtoId StarMarkStatusEffect = "StatusEffectStarMark";
     public static readonly EntProtoId CosmicField = "WallFieldCosmic";
@@ -99,7 +99,9 @@ public abstract class SharedStarMarkSystem : EntitySystem
 
         var curTime = _timing.CurTime;
 
-        var query2 = EntityQueryEnumerator<CosmosPassiveComponent, SpeedModifiedByContactComponent, StaminaComponent, PhysicsComponent>();
+        var query2 =
+            EntityQueryEnumerator<CosmosPassiveComponent, SpeedModifiedByContactComponent, StaminaComponent,
+                PhysicsComponent>();
         while (query2.MoveNext(out var uid, out var passive, out _, out var stam, out var phys))
         {
             if (curTime < passive.NextUpdate)
@@ -136,7 +138,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
 
     private void OnStartCollide(Entity<CosmicFieldComponent> ent, ref StartCollideEvent args)
     {
-        if (args.OurFixture.Hard || ent.Comp.Strength < 7)
+        if (args.OurFixture.Hard || ent.Comp.Strength < 2)
             return;
 
         var other = args.OtherEntity;
@@ -195,6 +197,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
     public void SpawnCosmicFields(EntityCoordinates coords,
         int range,
         int strength,
+        bool hollow = false,
         float lifetime = 30f,
         bool predicted = true)
     {
@@ -208,6 +211,9 @@ public abstract class SharedStarMarkSystem : EntitySystem
         {
             for (var x = -range; x <= range; x++)
             {
+                if (hollow && Math.Abs(x) != range && Math.Abs(y) != range)
+                    continue;
+
                 SpawnCosmicField(coords.Offset(new Vector2i(x, y)), strength, lifetime, predicted);
             }
         }
@@ -255,7 +261,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
         }
     }
 
-    public bool TryApplyStarMark(Entity<MobStateComponent?> entity)
+    public bool TryApplyStarMark(Entity<MobStateComponent?> entity, TimeSpan? delay = null)
     {
         if (!Resolve(entity, ref entity.Comp, false) ||
             _heretic.TryGetHereticComponent(entity.Owner, out var heretic, out _) &&
@@ -267,7 +273,10 @@ public abstract class SharedStarMarkSystem : EntitySystem
         RaiseLocalEvent(entity, ev, true);
 
         var result = !ev.Cancelled &&
-                     _status.TryUpdateStatusEffectDuration(entity, StarMarkStatusEffect, TimeSpan.FromSeconds(30));
+                     _status.TryUpdateStatusEffectDuration(entity,
+                         StarMarkStatusEffect,
+                         TimeSpan.FromSeconds(30),
+                         delay);
 
         if (!result)
             return false;
@@ -281,7 +290,7 @@ public abstract class SharedStarMarkSystem : EntitySystem
         field.Comp.Strength = strength;
         Dirty(field);
 
-        if (strength < 10 || !TryComp(field, out VelocityModifierContactsComponent? modifier))
+        if (strength < 3 || !TryComp(field, out VelocityModifierContactsComponent? modifier))
             return;
 
         modifier.IsActive = true;

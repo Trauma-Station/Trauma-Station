@@ -3,7 +3,6 @@
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Goobstation.Client.Research.UI;
 

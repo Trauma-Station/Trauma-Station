@@ -8,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class ShadowCloakSystem : SharedShadowCloakSystem
+public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IdentitySystem _identity = default!;
 
     private static readonly TimeSpan SustainedDamageReductionInterval = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using System.Threading.Tasks;
 using Content.Client.Resources;
 using Content.Goobstation.Shared.JumpScare;
@@ -19,12 +18,12 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Goobstation.Client.JumpScare;
 
-public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
+public sealed partial class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private INetManager _netManager = default!;
 
     public void PostInject()
     {
