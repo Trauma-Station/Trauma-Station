@@ -1,0 +1,16 @@
+- type: construction
+  name: knitted balaclava
+  id: makeshiftBalaclava
+  graph: KnitBalaclava
+  startNode: start
+  targetNode: balaclava
+  category: construction-category-clothing
+  description: Like a ski mask but evil.
+  icon:
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
+    state: icon
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    TailoringKnowledge: 3

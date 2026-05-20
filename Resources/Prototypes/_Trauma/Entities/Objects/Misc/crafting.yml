@@ -1,0 +1,10 @@
+- type: entity
+  parent: [ ClothingMaskBaseButcherable, BaseMinorContraband ]
+  id: IncompleteKnittedBalaclava
+  name: incomplete balaclava
+  description: Just a few cuts and you can do whatever crime you want.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/unfinished_knit_balaclava.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Misc/unfinished_knit_balaclava.rsi
