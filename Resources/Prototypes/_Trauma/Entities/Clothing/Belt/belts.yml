@@ -33,3 +33,165 @@
       storagebase:
         id: ThrowingKnife
         amount: 8
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseSecurityContraband]
+  id: ClothingBeltSheathKatana
+  name: katana sheath
+  description: A sheath designed to hold an officer's blade.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/sec_katana_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/sec_katana_sheath.rsi
+  - type: Item
+    size: Ginormous
+  - type: ItemSlots
+    smartEquip: true
+    slots:
+      item:
+        name: Katana
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - SecurityKatana
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          tags:
+          - SecurityKatana
+  - type: Appearance
+  - type: SheathCounterattack
+    extraCounterAttackDamage:
+      types:
+        Slash: 25
+      woundSeverityMultipliers:
+        Slash: 2
+      armorPenetration: 0.5
+  - type: GuideHelp
+    guides:
+    - CounterAttack
+
+- type: entity
+  id: ClothingBeltSheathKatanaFilled
+  parent: ClothingBeltSheathKatana
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - SecurityKatana
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseMajorContraband]
+  id: ClothingBeltSheathKatanaNinja
+  name: energy katana sheath
+  description: A high tech katana sheath that allows for quick blade movements.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/ninja_katana_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/ninja_katana_sheath.rsi
+  - type: Item
+    size: Ginormous
+  - type: ItemSlots
+    smartEquip: true
+    slots:
+      item:
+        name: Katana
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          components:
+          - EnergyKatana
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          components:
+          - EnergyKatana
+  - type: Appearance
+  - type: SheathCounterattack
+    blockEffectTime: 5
+    extraCounterAttackDamage:
+      types:
+        Slash: 35
+      woundSeverityMultipliers:
+        Slash: 3
+      armorPenetration: 0.5
+  - type: GuideHelp
+    guides:
+    - CounterAttack
+  - type: EnergyKatanaSheath
+
+- type: entity
+  id: ClothingBeltSheathKatanaNinjaFilled
+  parent: ClothingBeltSheathKatanaNinja
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - EnergyKatana
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseSyndicateContraband]
+  id: ClothingBeltSheathSnakesfang
+  name: snakesfang scabbard
+  description: Can hold scimitars.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/snakesfang_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/snakesfang_sheath.rsi
+  - type: Item
+    size: Ginormous
+  - type: ItemSlots
+    smartEquip: true
+    slots:
+      item:
+        name: Snakesfang
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Snakesfang
+  - type: ItemMapper
+    mapLayers:
+      sheath-blade:
+        whitelist:
+          tags:
+          - Snakesfang
+  - type: Appearance
+  - type: SheathCounterattack
+    blockEffectTime: 5
+    extraCounterAttackDamage:
+      types:
+        Slash: 35
+      woundSeverityMultipliers:
+        Slash: 3
+      armorPenetration: 0.5
+  - type: GuideHelp
+    guides:
+    - CounterAttack
+
+- type: entity
+  id: ClothingBeltSheathSnakesfangFilled
+  parent: ClothingBeltSheathSnakesfang
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - Snakesfang

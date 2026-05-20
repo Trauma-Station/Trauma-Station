@@ -6,6 +6,19 @@
   name: sabre sheath
   description: An ornate sheath designed to hold an officer's blade.
   components:
+  # <Trauma>
+  - type: SheathCounterattack
+    blockEffectTime: 10
+    extraCounterAttackDamage:
+      types:
+        Slash: 25
+      woundSeverityMultipliers:
+        Slash: 2
+      armorPenetration: 0.5
+  - type: GuideHelp
+    guides:
+    - CounterAttack
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Belt/sheath.rsi
     state: sheath

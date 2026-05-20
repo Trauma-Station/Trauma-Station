@@ -204,7 +204,9 @@
   table: !type:AllSelector
     children:
     - id: Truncheon
-      amount: 6
+      amount: 5
+    - id: ClothingBeltSheathKatanaFilled
+      amount: 3
 
 - type: entityTable
   id: FillGunSafeJudoT1

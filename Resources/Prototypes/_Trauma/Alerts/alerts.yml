@@ -4,3 +4,19 @@
   clickEvent: !type:ResistHolyFireAlertEvent
   name: alerts-on-holy-fire-name
   description: alerts-on-holy-fire-desc
+
+- type: alert
+  id: CounterAttacking
+  icons:
+  - sprite: /Textures/_Trauma/Interface/Alerts/counterattack.rsi
+    state: counterattack
+  name: alerts-counter-attacking-name
+  description: alerts-counter-attacking-desc
+
+- type: alert
+  id: CounterAttackingBlocked
+  icons:
+  - sprite: /Textures/_Trauma/Interface/Alerts/counterattack.rsi
+    state: counterattack_blocked
+  name: alerts-counter-attacking-blocked-name
+  description: alerts-counter-attacking-blocked-desc

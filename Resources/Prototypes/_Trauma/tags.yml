@@ -185,6 +185,9 @@
   id: RitualKnowledge
 
 - type: Tag
+  id: SecurityKatana
+
+- type: Tag
   id: SpaceWhaleSegment
 
 - type: Tag
@@ -192,6 +195,9 @@
 
 - type: Tag
   id: SteelScraps
+
+- type: Tag
+  id: Snakesfang
 
 - type: Tag
   id: TechfabMachineBoard

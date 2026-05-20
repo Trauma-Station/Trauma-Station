@@ -9,6 +9,8 @@ public record struct BeforeHarmfulActionEvent(
     EntityUid User,
     EntityUid Target,
     HarmfulActionType Type,
+    EntityUid? Used = null,
+    bool CanRiposte = true,
     bool Cancelled = false)
     : IInventoryRelayEvent
 {

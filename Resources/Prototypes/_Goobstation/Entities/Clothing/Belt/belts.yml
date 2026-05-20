@@ -183,6 +183,17 @@
           tags:
           - Justice
   - type: Appearance
+  - type: SheathCounterattack
+    blockEffectTime: 10
+    extraCounterAttackDamage:
+      types:
+        Slash: 25
+      woundSeverityMultipliers:
+        Slash: 2
+      armorPenetration: 0.5
+  - type: GuideHelp
+    guides:
+    - CounterAttack
 
 - type: entity
   parent: [ ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSyndicateContraband ]

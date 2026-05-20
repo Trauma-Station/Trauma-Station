@@ -396,7 +396,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(null, GetNetEntity(weaponUid), GetNetCoordinates(coordinates)), null);
     }
 
-    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target)
+    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool canParry = true) // Trauma - added CanParry
     {
         if (!TryComp(target, out TransformComponent? targetXform))
             return false;
@@ -632,12 +632,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             return;
         }
 
-        // Goobstation start
-        var beforeEvent = new BeforeHarmfulActionEvent(user, target.Value, HarmfulActionType.Harm);
+        // <Trauma>
+        var beforeEvent = new BeforeHarmfulActionEvent(user, target.Value, HarmfulActionType.Harm, meleeUid, ev.CanParry);
         RaiseLocalEvent(target.Value, ref beforeEvent);
         if (beforeEvent.Cancelled)
+        {
+            DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(target.Value.ToCoordinates()), rangeEv.Range, component.Animation, component.AnimationRotation, component.FlipAnimation, source);
             return;
-        // Goobstation end
+        }
+        // </Trauma>
 
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
@@ -662,7 +665,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         Interaction.DoContactInteraction(user, target);
 
         // <Trauma>
-        if (component.CanParryLight)
+        if (component.CanParryLight && ev.CanParry)
         {
             var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, target.Value);
             RaiseLocalEvent(target.Value, ref parryAttemptEv);
@@ -795,12 +798,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
                 !_damageQuery.HasComponent(entity))
                 continue;
 
-            // Goobstation start
-            var beforeEvent = new BeforeHarmfulActionEvent(user, entity, HarmfulActionType.Harm);
+            // <Trauma>
+            var beforeEvent = new BeforeHarmfulActionEvent(user, entity, HarmfulActionType.Harm, meleeUid);
             RaiseLocalEvent(entity, ref beforeEvent);
             if (beforeEvent.Cancelled)
                 continue;
-            // Goobstation end
+            // </Trauma>
 
             targets.Add(entity);
         }
@@ -1054,15 +1057,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (!InRange(user, target, component.Range, session, out _)) // Trauma - out _
             return false;
 
-        // Goobstation start
+        // <Trauma>
         var beforeEvent = new BeforeHarmfulActionEvent(user, target, HarmfulActionType.Disarm);
         RaiseLocalEvent(target, ref beforeEvent);
         if (beforeEvent.Cancelled)
-            return false;
+            return true; // play animation anyway
 
         var comboEv = new ComboAttackPerformedEvent(user, target, meleeUid, ComboAttackType.Disarm);
         RaiseLocalEvent(user, ref comboEv);
-        // Goobstation end
+        // </Trauma>
 
         PhysicalShove(user, target);
         Interaction.DoContactInteraction(user, target);
