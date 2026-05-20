@@ -12,6 +12,14 @@ namespace Content.Trauma.Client.Knowledge.UI;
 [GenerateTypedNameReferences]
 public sealed partial class AttributeModifierBox : BoxContainer
 {
+    public AttributeModifierBox(string modifier, string number)
+    {
+        RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
+
+        SetText(modifier, number);
+    }
+
     public void SetText(string modifier, string number)
     {
         TextOne.Text = modifier;

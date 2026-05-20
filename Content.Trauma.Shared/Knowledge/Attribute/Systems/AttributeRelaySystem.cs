@@ -24,7 +24,9 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         SubscribeLocalEvent<DodgeAttributeComponent, GetDodgeSavingThrowEvent>(OnCalculateDodge);
         SubscribeLocalEvent<PhysicalAttributeComponent, GetPhysicalSavingThrowEvent>(OnCalculatePhysical);
         SubscribeLocalEvent<MentalAttributeComponent, GetMentalSavingThrowEvent>(OnCalculateMental);
-        SubscribeLocalEvent<StrengthFeatComponent, GetCarryLimitsEvent>(OnCarry);
+        SubscribeLocalEvent<LiftAttributeComponent, GetCarryLimitsEvent>(OnLift);
+        SubscribeLocalEvent<CarryAttributeComponent, GetCarryLimitsEvent>(OnCarry);
+        SubscribeLocalEvent<DragAttributeComponent, GetCarryLimitsEvent>(OnDrag);
         SubscribeLocalEvent<MoraleAttributeComponent, GetMoraleModifierEvent>(OnCalculateMorale);
     }
 
@@ -49,7 +51,7 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, -14, 14);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
     private void OnStrengthFeat(Entity<StrengthFeatComponent> ent, ref GetStrengthFeatEvent args)
@@ -57,7 +59,7 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, -14, 18);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
 
@@ -66,7 +68,7 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 3.01, 20.51, -10, 18);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
     private void OnCalculateDodge(Entity<DodgeAttributeComponent> ent, ref GetDodgeSavingThrowEvent args)
@@ -74,7 +76,7 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 3.01, 20.51, -3, 3);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
     private void OnCalculatePhysical(Entity<PhysicalAttributeComponent> ent, ref GetPhysicalSavingThrowEvent args)
@@ -82,7 +84,7 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 22.01, -5, 6);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
     private void OnCalculateMental(Entity<MentalAttributeComponent> ent, ref GetMentalSavingThrowEvent args)
@@ -90,17 +92,31 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.01, -5, 4);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
-    private void OnCarry(Entity<StrengthFeatComponent> ent, ref GetCarryLimitsEvent args)
+    private void OnLift(Entity<LiftAttributeComponent> ent, ref GetCarryLimitsEvent args)
     {
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Lift += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, 32, 675);
-        args.Carry += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, 15, 384);
-        args.Drag += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 20.51, 80, 1688);
+        args.Lift += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
+    }
+
+    private void OnCarry(Entity<CarryAttributeComponent> ent, ref GetCarryLimitsEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Carry += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
+    }
+
+    private void OnDrag(Entity<DragAttributeComponent> ent, ref GetCarryLimitsEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Drag += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
     private void OnCalculateMorale(Entity<MoraleAttributeComponent> ent, ref GetMoraleModifierEvent args)
@@ -108,6 +124,6 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, 1.01, 22.01, -5, 6);
+        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 }

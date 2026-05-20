@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.FixedPoint;
-using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Common.Knowledge;
@@ -10,4 +8,4 @@ namespace Content.Trauma.Common.Knowledge;
 public record struct SkillInfo(string Name, string Description, Color Color, SpriteSpecifier? Sprite, int LearnedLevel, int NetLevel, int CurrentExp, int ExpCost);
 
 [Serializable, NetSerializable]
-public record struct AttributeInfo(string Name, string Description, FixedPoint2 Inherent);
+public record struct AttributeInfo(string Name, string Description, NetEntity Entity);

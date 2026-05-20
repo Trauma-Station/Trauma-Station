@@ -28,7 +28,7 @@ public sealed partial class AttributeTab : Control
     /// <summary>
     /// Updates the specificied knowledge tab with the player's current martial arts knowledge.
     /// </summary>
-    public void UpdateAttributeTab(EntityUid player)
+    public void UpdateAttributeTab(EntityUid player, EntityManager entMan)
     {
         TabContainer.SetTabTitle(this, Loc.GetString("trauma-attribute-title"));
 
@@ -43,7 +43,7 @@ public sealed partial class AttributeTab : Control
         AttributeBox.SeparationOverride = 10;
         foreach (var (groupId, conditions) in doohickeys)
         {
-            var attributeBox = new AttributeTabControl(conditions);
+            var attributeBox = new AttributeTabControl(conditions, entMan);
             AttributeBox.AddChild(attributeBox);
         }
     }

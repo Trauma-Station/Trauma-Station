@@ -11,7 +11,30 @@
   parent: BaseAttribute
   components:
   - type: DamageAttribute
+    minX: 1.01
+    maxX: 20.51
+    minY: -14
+    maxY: 14
+  - type: LiftAttribute
+    minX: 1.01
+    maxX: 20.51
+    minY: 32
+    maxY: 675
+  - type: CarryAttribute
+    minX: 1.01
+    maxX: 20.51
+    minY: 15
+    maxY: 384
+  - type: DragAttribute
+    minX: 1.01
+    maxX: 20.51
+    minY: 80
+    maxY: 1688
   - type: StrengthFeat
+    minX: 1.01
+    maxX: 20.51
+    minY: -14
+    maxY: 18
   - type: Attribute
     order: 0
 
@@ -25,7 +48,6 @@
     maxX: 20.01
     minY: -5
     maxY: 3
-  - type: StrengthFeat
   - type: Attribute
     order: 1
 
@@ -40,6 +62,10 @@
     minY: -4
     maxY: 3
   - type: MentalAttribute
+    minX: 1.01
+    maxX: 20.01
+    minY: -5
+    maxY: 4
   - type: Attribute
     order: 2
 
@@ -59,7 +85,15 @@
     minY: -5
     maxY: 7
   - type: AgilityFeat
+    minX: 3.01
+    maxX: 20.51
+    minY: -10
+    maxY: 18
   - type: DodgeAttribute
+    minX: 3.01
+    maxX: 20.51
+    minY: -3
+    maxY: 3
   - type: Attribute
     order: 3
 
@@ -69,6 +103,10 @@
   parent: BaseAttribute
   components:
   - type: PhysicalAttribute
+    minX: 1.01
+    maxX: 22.01
+    minY: -5
+    maxY: 6
   - type: Attribute
     order: 4
 
@@ -86,5 +124,9 @@
   parent: BaseAttribute
   components:
   - type: MoraleAttribute
+    minX: 1.01
+    maxX: 22.01
+    minY: -5
+    maxY: 6
   - type: Attribute
     order: 6

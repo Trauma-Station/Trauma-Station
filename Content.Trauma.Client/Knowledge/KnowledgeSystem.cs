@@ -11,6 +11,8 @@ using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Knowledge.Attribute.Attribute;
+using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
@@ -29,6 +31,19 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
     {
         base.Initialize();
 
+
+        SubscribeLocalEvent<DefenseAttributeComponent, GetAttributeModifierEvent>(OnCalculateDefense);
+        SubscribeLocalEvent<DamageAttributeComponent, GetAttributeModifierEvent>(OnCalculateDamage);
+        SubscribeLocalEvent<StrengthFeatComponent, GetAttributeModifierEvent>(OnStrengthFeat);
+        SubscribeLocalEvent<AgilityFeatComponent, GetAttributeModifierEvent>(OnCalculateAgility);
+        SubscribeLocalEvent<DodgeAttributeComponent, GetAttributeModifierEvent>(OnCalculateDodge);
+        SubscribeLocalEvent<PhysicalAttributeComponent, GetAttributeModifierEvent>(OnCalculatePhysical);
+        SubscribeLocalEvent<MentalAttributeComponent, GetAttributeModifierEvent>(OnCalculateMental);
+        SubscribeLocalEvent<LiftAttributeComponent, GetAttributeModifierEvent>(OnLift);
+        SubscribeLocalEvent<CarryAttributeComponent, GetAttributeModifierEvent>(OnCarry);
+        SubscribeLocalEvent<DragAttributeComponent, GetAttributeModifierEvent>(OnDrag);
+        SubscribeLocalEvent<MoraleAttributeComponent, GetAttributeModifierEvent>(OnCalculateMorale);
+
         SubscribeLocalEvent<KnowledgeHolderComponent, GetPerformedAttackTypesEvent>(OnGetAttackTypes);
         SubscribeLocalEvent<KnowledgeHolderComponent, UpdateExperienceEvent>(OnUpdateExperienceEvent);
         Subs.CVar(_cfg, TraumaCVars.SkillPopups, x => _showPopups = x, true);
@@ -43,6 +58,103 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         base.Shutdown();
         CharacterWindow.OnOpened -= EnsureKnowledgeTab;
         LobbyUIController.OnProfileEditorCreated -= AddProfileEditorTab;
+    }
+
+    private void OnCalculateAttack(Entity<AttackAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Attack: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCalculateDefense(Entity<DefenseAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Defense: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCalculateDamage(Entity<DamageAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Damage: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnStrengthFeat(Entity<StrengthFeatComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Strength Feat: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+
+    private void OnCalculateAgility(Entity<AgilityFeatComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Agility Feat: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCalculateDodge(Entity<DodgeAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Dodge: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCalculatePhysical(Entity<PhysicalAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Physical: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCalculateMental(Entity<MentalAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Mental: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnLift(Entity<LiftAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Lift: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCarry(Entity<CarryAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Carry: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnDrag(Entity<DragAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Drag: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+    }
+
+    private void OnCalculateMorale(Entity<MoraleAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    {
+        if (!TryComp<AttributeComponent>(ent, out var comp))
+            return;
+
+        args.Modifiers.Add(("Morale: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
     }
 
     private void OnGetAttackTypes(Entity<KnowledgeHolderComponent> ent, ref GetPerformedAttackTypesEvent args)
@@ -95,7 +207,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         if (_player.LocalEntity is { } player)
         {
             skillTab.UpdateSkillTab(player);
-            attributeTab.UpdateAttributeTab(player);
+            attributeTab.UpdateAttributeTab(player, EntityManager);
         }
     }
 

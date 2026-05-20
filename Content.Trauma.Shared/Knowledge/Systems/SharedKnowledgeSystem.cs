@@ -401,7 +401,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         info.Name = Name(ent);
         info.Description = Description(ent);
-        info.Inherent = ent.Comp.Inherent;
+        info.Entity = GetNetEntity(ent);
         return (ent.Comp.Order, info);
     }
 

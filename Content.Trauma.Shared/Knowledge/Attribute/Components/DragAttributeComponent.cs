@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 
 /// <summary>
-/// Attribute component to modify dodge.
+/// Attribute component to modify lift capacity.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class DodgeAttributeComponent : BaseAttributeComponent;
+public sealed partial class DragAttributeComponent : BaseAttributeComponent;
