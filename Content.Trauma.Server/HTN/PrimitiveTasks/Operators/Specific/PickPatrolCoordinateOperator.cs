@@ -64,7 +64,7 @@ public sealed partial class PickPatrolCoordinateOperator : HTNOperator
         }
 
         var pathRange = SharedInteractionSystem.InteractionRange - 1f;
-        var path = await _pathfinding.GetPath(owner, targetEntity.Value, pathRange, cancelToken);
+        var path = await _pathfinding.GetPath(owner, targetEntity.Value, pathRange, cancelToken, PathFlags.Access);
 
         if (path.Result != PathResult.Path)
             return (false, null);
