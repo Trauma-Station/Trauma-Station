@@ -18,6 +18,7 @@ using Content.Shared.StatusIcon;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Card;
+using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -33,6 +34,7 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     private SharedContrabandDetectorSystem _contra = default!;
     private SharedIdCardSystem _card = default!;
     private SharedAudioSystem _audio = default!;
+    private ContainerSystem _container = default!;
     private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     private EntityQuery<MobStateComponent> _mobQuery = default!;
     private EntityQuery<AntagCardComponent> _cardQuery = default!;
@@ -77,6 +79,7 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
         _contra = sysManager.GetEntitySystem<SharedContrabandDetectorSystem>();
         _card = sysManager.GetEntitySystem<SharedIdCardSystem>();
         _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
+        _container = sysManager.GetEntitySystem<ContainerSystem>();
 
         _cuffableQuery = _entMan.GetEntityQuery<CuffableComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
@@ -145,6 +148,9 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     private bool BeatUp(Entity<MobStateComponent> entity, EntityUid beepsky, bool isEmagged)
     {
         if (entity.Owner == beepsky)
+            return false;
+
+        if (_container.IsEntityInContainer(entity))
             return false;
 
         // Is target a living target?
