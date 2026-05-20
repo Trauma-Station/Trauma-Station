@@ -94,6 +94,7 @@
   id: MobBeepsky
   name: Officer Beepsky
   description: It's Commander Beep O'sky! Officially the superior officer of all bots on station, Beepsky remains as humble and dedicated to the law as the day he was first fabricated.
+  components:
   - type: StaminaDamageOnHit
     lightAttackDamageMultiplier: 3
   - type: MovementSpeedModifier
