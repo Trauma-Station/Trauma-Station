@@ -50,6 +50,9 @@ public sealed partial class PlaySoundEffectSystem : EntityEffectSystem<Transform
             return;
         }
 
-        _audio.PlayPvs(sound, user);
+        if (args.Effect.Positional)
+            _audio.PlayPvs(sound, ent.Comp.Coordinates);
+        else
+            _audio.PlayPvs(sound, ent);
     }
 }

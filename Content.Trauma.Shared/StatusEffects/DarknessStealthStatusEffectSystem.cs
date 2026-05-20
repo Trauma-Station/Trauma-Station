@@ -29,18 +29,16 @@ public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
     private void OnLightUpdated(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectRelayedEvent<LightLevelUpdated> args)
     {
         var newLevel = args.Args.NewLightLevel;
-        var target = ent.Comp.StatusOwner;
-        if (target is not { } statusOwner)
-            return;
+        var target = args.Container.Owner;
 
         // We are in darkness here
         if (newLevel < ent.Comp.TriggerAt)
         {
-            _stealth.SetVisibility(statusOwner, ent.Comp.Visibility);
+            _stealth.SetVisibility(target, ent.Comp.Visibility);
             return;
         }
 
-        _stealth.SetVisibility(statusOwner, 1f);
+        _stealth.SetVisibility(target, 1f);
     }
 
     private void OnApplied(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
@@ -48,9 +46,6 @@ public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
         var target = args.Target;
         EnsureComp<LightDetectionComponent>(target);
         EnsureComp<StealthComponent>(target);
-
-        ent.Comp.StatusOwner = target;
-        Dirty(ent);
     }
 
     private void OnRemove(Entity<DarknessStealthStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
@@ -58,8 +53,5 @@ public sealed partial class DarknessStealthStatusEffectSystem : EntitySystem
         var target = args.Target;
         RemCompDeferred<LightDetectionComponent>(target);
         RemCompDeferred<StealthComponent>(target);
-
-        ent.Comp.StatusOwner = null;
-        Dirty(ent);
     }
 }

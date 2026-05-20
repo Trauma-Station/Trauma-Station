@@ -8,7 +8,7 @@ using Content.Shared.Whitelist;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// For actions, applies an effect to the entities that the user has.
+/// For actions, applies an effect to the action entities that the user has.
 /// </summary>
 public sealed partial class RelayActions : EntityEffectBase<RelayActions>
 {

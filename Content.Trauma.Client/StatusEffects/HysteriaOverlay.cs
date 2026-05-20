@@ -14,7 +14,6 @@ namespace Content.Trauma.Client.StatusEffects;
 
 public sealed partial class HysteriaOverlay : Overlay
 {
-    // Note: a lot of the calculations were done with AI as I have 0 knowledge about coding custom complex overlays like this
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;

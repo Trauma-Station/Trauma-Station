@@ -8,7 +8,6 @@ namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Effect that shows a single predicted popup.
-/// TODO: Remove once upstream predicts PopupMessage
 /// </summary>
 public sealed partial class PopupPredicted : EntityEffectBase<PopupPredicted>
 {

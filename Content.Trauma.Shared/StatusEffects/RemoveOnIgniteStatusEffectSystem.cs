@@ -17,28 +17,10 @@ public sealed partial class RemoveOnIgniteStatusEffectSystem : EntitySystem
         SubscribeLocalEvent<StatusEffectContainerComponent, IgnitedEvent>(_status.RelayEvent);
 
         SubscribeLocalEvent<RemoveOnIgniteStatusEffectComponent, StatusEffectRelayedEvent<IgnitedEvent>>(OnIgnite);
-
-        SubscribeLocalEvent<RemoveOnIgniteStatusEffectComponent, StatusEffectAppliedEvent>(OnApplied);
-        SubscribeLocalEvent<RemoveOnIgniteStatusEffectComponent, StatusEffectRemovedEvent>(OnRemove);
     }
 
     private void OnIgnite(Entity<RemoveOnIgniteStatusEffectComponent> ent, ref StatusEffectRelayedEvent<IgnitedEvent> args)
     {
-        if (ent.Comp.StatusOwner is not { } target)
-            return;
-
-        _status.TryRemoveStatusEffect(target, ent.Comp.EffectProto);
-    }
-
-    private void OnApplied(Entity<RemoveOnIgniteStatusEffectComponent> ent, ref StatusEffectAppliedEvent args)
-    {
-        ent.Comp.StatusOwner = args.Target;
-        Dirty(ent);
-    }
-
-    private void OnRemove(Entity<RemoveOnIgniteStatusEffectComponent> ent, ref StatusEffectRemovedEvent args)
-    {
-        ent.Comp.StatusOwner = null;
-        Dirty(ent);
+        _status.TryRemoveStatusEffect(args.Container.Owner, ent.Comp.EffectProto);
     }
 }

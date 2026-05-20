@@ -1,10 +1,13 @@
+// <Trauma>
+using Content.Shared.EntityConditions;
+using Content.Trauma.Common.Reagents;
+// </Trauma>
 using System.Collections.Frozen;
 using System.Linq;
 using Content.Shared.FixedPoint;
 using System.Text.Json.Serialization;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Contraband;
-using Content.Shared.EntityConditions; // Trauma
 using Content.Shared.EntityEffects;
 using Content.Shared.Localizations;
 using Content.Shared.Metabolism;
@@ -36,7 +39,7 @@ namespace Content.Shared.Chemistry.Reagent
         public string LocalizedName => Loc.GetString(Name);
 
         [DataField]
-        public string Group { get; private set; } = "Unknown";
+        public ProtoId<ReagentGroupPrototype> Group { get; private set; } = "Unknown"; // Trauma - Added protoid
 
         [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ReagentPrototype>))]
         public string[]? Parents { get; private set; }

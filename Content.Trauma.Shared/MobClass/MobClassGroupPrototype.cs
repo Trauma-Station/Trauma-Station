@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.MobClass;
 
@@ -25,7 +26,7 @@ public sealed partial class MobClassGroupPrototype : IPrototype
     ///  The path to the image which will be used as a background for the UI
     /// </summary>
     [DataField]
-    public string? BackgroundImagePath;
+    public ResPath? BackgroundImagePath;
 
     /// <summary>
     ///  The scale of the background image.
@@ -37,7 +38,7 @@ public sealed partial class MobClassGroupPrototype : IPrototype
     ///  The path to the image which will be used as texture for the specialize button for the UI
     /// </summary>
     [DataField]
-    public string? SpecializeButtonImagePath;
+    public ResPath? SpecializeButtonImagePath;
 
     /// <summary>
     ///  An optional patch to configure tiling stretching of the background. Used to set
@@ -50,7 +51,7 @@ public sealed partial class MobClassGroupPrototype : IPrototype
     /// Optional font override for descriptions of the classes.
     /// </summary>
     [DataField]
-    public string? FontPath;
+    public ResPath? FontPath;
 
     /// <summary>
     /// Optional font size override for <see cref="FontPath"/> font.

@@ -36,11 +36,10 @@ public sealed partial class DemonicHandSystem : EntitySystem
             return;
         }
 
-        //TODO: Test this fr
         var mapCoordsShooter = _transform.GetMapCoordinates(xform);
         var mapCoordsTarget = _transform.GetMapCoordinates(targetXform);
         var dir = (mapCoordsTarget.Position - mapCoordsShooter.Position).Normalized();
 
-        _throw.TryThrow(args.Target, dir, 30f, shooter); // TODO: Increase distance
+        _throw.TryThrow(args.Target, dir, 30f, shooter);
     }
 }

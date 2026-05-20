@@ -12,10 +12,10 @@ namespace Content.Trauma.Shared.EntityEffects;
 public sealed partial class SetToggleAction : EntityEffectBase<SetToggleAction>
 {
     /// <summary>
-    /// Toggles or un-toggles an action
+    /// Whether the action is toggled or not
     /// </summary>
     [DataField]
-    public bool Toggle;
+    public bool Toggled;
 }
 
 public sealed partial class SetToggleActionEffectSystem : EntityEffectSystem<ActionComponent, SetToggleAction>
@@ -24,6 +24,6 @@ public sealed partial class SetToggleActionEffectSystem : EntityEffectSystem<Act
 
     protected override void Effect(Entity<ActionComponent> ent, ref EntityEffectEvent<SetToggleAction> args)
     {
-        _actions.SetToggled(ent.AsNullable(), args.Effect.Toggle);
+        _actions.SetToggled(ent.AsNullable(), args.Effect.Toggled);
     }
 }

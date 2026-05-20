@@ -16,9 +16,6 @@ public sealed partial class AddActions : EntityEffectBase<AddActions>
     /// </summary>
     [DataField(required: true)]
     public List<EntProtoId<ActionComponent>> Actions = new();
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null;
 }
 
 public sealed partial class AddActionsEffectSystem : EntityEffectSystem<ActionsComponent, AddActions>

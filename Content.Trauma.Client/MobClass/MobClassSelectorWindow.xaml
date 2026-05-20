@@ -2,20 +2,15 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<controls1:FancyWindow
+<controls:FancyWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
-    MinWidth="800"
-    MinHeight="300"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    MinSize="800 300"
     Title="Classes">
-    <Control>
-
-        <PanelContainer Name="Background">
+    <PanelContainer Name="Background">
         </PanelContainer>
-
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-            <GridContainer Name="ClassPanel" VerticalExpand="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-            </GridContainer>
+            <GridContainer Name="ClassPanel" VerticalExpand="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <Control MinHeight="100" VerticalAlignment="Bottom">
                 <BoxContainer Name="DescriptionPanel" Orientation="Vertical" Visible="False" Margin="10">
@@ -24,6 +19,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 </BoxContainer>
             </Control>
         </BoxContainer>
-
-    </Control>
-</controls1:FancyWindow>
+</controls:FancyWindow>

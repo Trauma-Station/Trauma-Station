@@ -16,17 +16,12 @@ public sealed class MobClassSelectorBui : BoundUserInterface
     {
         base.Open();
 
-        IoCManager.InjectDependencies(this);
-
         _window = this.CreateWindow<MobClassSelectorWindow>();
         _window.OpenCentered();
 
         _window.Specialize += Specialize;
     }
 
-    /// <summary>
-    /// Sends a predicted message in order for the entity to change their current class, to the selected one.
-    /// </summary>
     private void Specialize(ProtoId<MobClassPrototype>? obj)
     {
         if (obj is not { } mobClass)

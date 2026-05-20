@@ -40,13 +40,13 @@ public sealed partial class ActionArenaComponent : Component
     /// <summary>
     /// The target entity that will be used for creating the arena around it.
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Target;
 
     /// <summary>
     /// Wall entities used to destroy the arena when needed.
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Walls = new();
 }
 

@@ -20,7 +20,4 @@ public abstract partial class BaseThrowEntityEffect<T> : EntityEffectBase<T> whe
     /// </summary>
     [DataField]
     public bool Predicted = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
 }

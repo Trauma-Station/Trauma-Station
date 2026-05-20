@@ -3,7 +3,6 @@
 namespace Content.Trauma.Shared.StatusEffects;
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class DarknessStealthStatusEffectComponent : Component
 {
     /// <summary>
@@ -17,10 +16,4 @@ public sealed partial class DarknessStealthStatusEffectComponent : Component
     /// </summary>
     [DataField]
     public float Visibility = 0.15f;
-
-    /// <summary>
-    /// The owner of the status effect
-    /// </summary>
-    [AutoNetworkedField]
-    public EntityUid? StatusOwner;
 }

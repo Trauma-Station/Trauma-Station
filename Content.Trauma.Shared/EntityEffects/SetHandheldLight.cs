@@ -15,7 +15,7 @@ public sealed partial class SetHandheldLight : EntityEffectBase<SetHandheldLight
     /// Either disables or enables the flashlight.
     /// </summary>
     [DataField]
-    public bool Toggle;
+    public bool Activated;
 
     /// <summary>
     /// Will it make a sound, or not?
@@ -31,6 +31,6 @@ public sealed partial class DisableFlashlightEffectSystem : EntityEffectSystem<H
     protected override void Effect(Entity<HandheldLightComponent> entity, ref EntityEffectEvent<SetHandheldLight> args)
     {
         var effect = args.Effect;
-        _handheld.SetActivated(entity.Owner, effect.Toggle, entity.Comp, effect.Quiet);
+        _handheld.SetActivated(entity.Owner, effect.Activated, entity.Comp, effect.Quiet);
     }
 }

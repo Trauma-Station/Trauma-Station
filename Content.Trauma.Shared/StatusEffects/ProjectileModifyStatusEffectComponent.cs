@@ -11,11 +11,11 @@ public sealed partial class ProjectileModifyStatusEffectComponent : Component
     /// <summary>
     /// The modifier to apply to the projectile's damage.
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public float Modifier;
 
     /// <summary>
-    /// If true, it will only apply to lasers
+    /// If true, it will only apply to reflective projectiles (like lasers).
     /// </summary>
     [DataField]
     public bool Laser;

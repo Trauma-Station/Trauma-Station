@@ -4,6 +4,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Trauma.Common.Reagents;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -23,7 +24,7 @@ public sealed partial class AdjustReagentGroup : EntityEffectBase<AdjustReagentG
     /// Which reagent group to adjust.
     /// </summary>
     [DataField(required: true)]
-    public string Group;
+    public ProtoId<ReagentGroupPrototype> Group;
 }
 
 public sealed partial class AdjustReagentGroupEffectSystem : EntityEffectSystem<SolutionComponent, AdjustReagentGroup>
@@ -44,7 +45,7 @@ public sealed partial class AdjustReagentGroupEffectSystem : EntityEffectSystem<
             if (quantity > 0)
                 _solution.TryAddReagent(ent, reagent.ID, quantity);
             else
-                _solution.RemoveReagent(ent, reagent.ID, quantity);
+                _solution.RemoveReagent(ent, reagent.ID, -quantity);
         }
     }
 }

@@ -15,7 +15,7 @@ public sealed partial class SetUnpoweredFlashlight : EntityEffectBase<SetUnpower
     /// Either disables or enables the flashlight.
     /// </summary>
     [DataField]
-    public bool Toggle;
+    public bool Activated;
 
     /// <summary>
     /// Will it make a sound, or not?
@@ -31,6 +31,6 @@ public sealed partial class SetUnpoweredFlashlightEffectSystem : EntityEffectSys
     protected override void Effect(Entity<UnpoweredFlashlightComponent> entity, ref EntityEffectEvent<SetUnpoweredFlashlight> args)
     {
         var effect = args.Effect;
-        _unpowered.SetLight(entity.Owner, effect.Toggle, entity.Owner, effect.Quiet);
+        _unpowered.SetLight(entity.Owner, effect.Activated, entity.Owner, effect.Quiet);
     }
 }

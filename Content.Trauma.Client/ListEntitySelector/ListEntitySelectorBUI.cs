@@ -9,8 +9,6 @@ namespace Content.Trauma.Client.ListEntitySelector;
 [UsedImplicitly]
 public sealed partial class ListEntitySelectorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private IEntityManager _entMan = default!;
-
     private ListEntitySelectorWindow? _window;
 
     protected override void Open()
@@ -25,7 +23,7 @@ public sealed partial class ListEntitySelectorBui(EntityUid owner, Enum uiKey) :
 
     private void OnPressEntity(EntityUid entity)
     {
-        SendPredictedMessage(new ListEntitySelectorMessage(_entMan.GetNetEntity(entity)));
+        SendPredictedMessage(new ListEntitySelectorMessage(EntMan.GetNetEntity(entity)));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
