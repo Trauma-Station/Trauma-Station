@@ -39,7 +39,11 @@ public sealed partial class PickPatrolCoordinateOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!_slaveQuery.TryComp(owner, out var slave) || !_commanderQuery.TryComp(slave.MasterEntity, out var master) || !master.IsPatrolling || master.Waypoints.ToList() is not { } waypoints || waypoints.Count <= 0)
+        if (!_slaveQuery.TryComp(owner, out var slave) ||
+            !_commanderQuery.TryComp(slave.MasterEntity, out var master) ||
+            !master.IsPatrolling ||
+            master.Waypoints.ToList() is not { } waypoints ||
+            waypoints.Count <= 0)
             return (false, null);
 
         var nextTargetIndex = 0;

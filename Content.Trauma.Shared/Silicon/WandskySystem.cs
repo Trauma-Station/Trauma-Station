@@ -18,7 +18,6 @@ public sealed partial class WandskySystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private INetManager _net = default!;
 
     private HashSet<Entity<WaypointComponent>> _waypoints = new();
 
@@ -86,9 +85,6 @@ public sealed partial class WandskySystem : EntitySystem
         }
 
         _popup.PopupClient("Waypoint added!", args.Performer, args.Performer, PopupType.Medium);
-        if (!_net.IsServer)
-            return;
-
         var waypointEntity = PredictedSpawnAtPosition(ent.Comp.WaypointId, args.Target);
         ent.Comp.Waypoints.Add(waypointEntity);
         Dirty(ent);
