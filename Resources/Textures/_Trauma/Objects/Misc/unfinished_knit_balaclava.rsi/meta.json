@@ -1,22 +1,22 @@
 {
-  "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Icon & inhands taken from http://github.com/tgstation/tgstation/commit/cb2ba1a0e3c4171640cfa77bd7b00031ea197d61. Edited by GoidaYAMLWarrior (github)",
-  "size": {
-    "x": 32,
-    "y": 32
-  },
-  "states": [
-    {
-      "name": "icon"
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Icon & inhands taken from http://github.com/tgstation/tgstation/commit/cb2ba1a0e3c4171640cfa77bd7b00031ea197d61. Edited by GoidaYAMLWarrior (github)",
+    "size": {
+        "x": 32,
+        "y": 32
     },
-    {
-      "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
-      "directions": 4
-    }
-  ]
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+    ]
 }
