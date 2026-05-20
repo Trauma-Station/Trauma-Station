@@ -85,74 +85,9 @@
   - type: Sprite
     sprite: _Trauma/Objects/Misc/schematics.rsi
 
-<<<<<<< HEAD
-- type: entity
-  parent: BookSkillbook
-  id: BookStrength
-  name: HOW TO GET JACKED MONTHY OH HELL YEAH
-  suffix: strength
-  description: You feel yourself throwing your back out just looking at this.
-  components:
-  - type: Sprite
-    layers:
-    - state: strength
-  - type: KnowledgeGrantOnUse
-    skills:
-      # StrengthKnowledge 10
-      AthleticsKnowledge: 10
-      # ToughnessKnowledge 10
-    experience:
-      # StrengthKnowledge 3
-      AthleticsKnowledge: 3
-      # ToughnessKnowledge 3
-    doAfter: 2
-
 # Melee
 
 - type: entity
-  parent: [BookSkillbook, BaseMinorContraband]
-  id: BookMelee
-  name: George Gimmes Guide to Killing
-  suffix: melee
-  description: It contains crude drawings of an elderly man hurting people with his bare fists and carving various shitty weapons.
-  components:
-  - type: Sprite
-    layers:
-    - state: melee
-  - type: KnowledgeGrantOnUse
-    skills:
-      # MeleeKnowledge 12
-      WeaponsKnowledge: 12
-    experience:
-      # MeleeKnowledge 3
-      WeaponsKnowledge: 2
-    doAfter: 2
-
-- type: entity
-  parent: [BookSkillbook, BaseMinorContraband]
-  id: BookMeleePrinted
-  name: Close Combat in the Modern Age
-  suffix: melee
-  description: A detailed book about how to properly throw punches, kicks, and make some proper improvised weaponry.
-  components:
-  - type: Sprite
-    layers:
-    - state: melee
-  - type: KnowledgeGrantOnUse
-    skills:
-      # MeleeKnowledge 26
-      WeaponsKnowledge: 26
-    experience:
-      # MeleeKnowledge 4
-      WeaponsKnowledge: 3
-    doAfter: 2
-
-- type: entity
-=======
-# Melee
-
-- type: entity
->>>>>>> upstream/master
   parent: [BookSkillbook, BaseRevMinorContraband]
   id: BookMeleePrintedRev
   name: ГОЙДА! Д
@@ -167,59 +102,13 @@
       # MeleeKnowledge 35
       WeaponsKnowledge: 35
     experience:
-<<<<<<< HEAD
-      # MeleeKnowledge 5
-      WeaponsKnowledge: 4
-=======
       MeleeKnowledge: 15
       WeaponsKnowledge: 15
->>>>>>> upstream/master
     doAfter: 2
 
 # Shooting
 
 - type: entity
-<<<<<<< HEAD
-  parent: [BookSkillbook, BaseMinorContraband]
-  id: BookShooting
-  name: Cadet Training Guide
-  suffix: shooting
-  description: Its useless.
-  components:
-  - type: Sprite
-    layers:
-    - state: shooting
-  - type: KnowledgeGrantOnUse
-    skills:
-      # ShootingKnowledge: 12
-      GunsmithingKnowledge: 12
-    experience:
-      # ShootingKnowledge: 3
-      GunsmithingKnowledge: 2
-    doAfter: 2
-
-- type: entity
-  parent: [BookSkillbook, BaseMinorContraband]
-  id: BookShootingPrinted
-  name: Ancient Chinese Shooting Techniques and you
-  suffix: melee
-  description: You need to become ancient and Chinese.
-  components:
-  - type: Sprite
-    layers:
-    - state: shooting
-  - type: KnowledgeGrantOnUse
-    skills:
-      # MeleeKnowledge 26
-      WeaponsKnowledge: 26
-    experience:
-      # MeleeKnowledge 4
-      WeaponsKnowledge: 3
-    doAfter: 2
-
-- type: entity
-=======
->>>>>>> upstream/master
   parent: [BookSkillbook, BaseRevMinorContraband]
   id: BookShootingPrintedRev
   name: ГОЙДА! Б

@@ -9,14 +9,11 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knockdown;
-using Robust.Shared.Prototypes;
-using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
 
 public abstract partial class SharedHulkSystem : EntitySystem
 {
-    [Dependency] private SharedCuffableSystem _cuffs = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";

@@ -11,9 +11,9 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// <summary>
 /// Handles all dexterity related bullshit.
 /// </summary>
-public sealed class DexteritySystem : EntitySystem
+public sealed partial class DexteritySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private readonly int _slipThreshold = 15;
     public override void Initialize()

@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.Knowledge;
 /// </summary>
 public sealed partial class RollSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

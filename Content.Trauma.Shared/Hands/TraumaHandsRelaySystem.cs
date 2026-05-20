@@ -4,7 +4,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Overlays;
-using Content.Trauma.Common.Parry;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Viewcone;
 

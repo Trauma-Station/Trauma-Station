@@ -13,9 +13,9 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// <summary>
 /// Handles all strength related bullshit.
 /// </summary>
-public sealed class StrengthSystem : EntitySystem
+public sealed partial class StrengthSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

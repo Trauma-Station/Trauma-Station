@@ -18,9 +18,9 @@ public sealed partial class TargetedDamage : EntityEffectBase<TargetedDamage>
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null; // idc
 }
 
-public sealed class TargetedDamageEffectSystem : EntityEffectSystem<TransformComponent, TargetedDamage>
+public sealed partial class TargetedDamageEffectSystem : EntityEffectSystem<TransformComponent, TargetedDamage>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<TargetedDamage> args)
     {

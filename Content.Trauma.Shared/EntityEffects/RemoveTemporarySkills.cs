@@ -27,7 +27,7 @@ public sealed partial class
 
         foreach (var (id, level) in args.Effect.Skills)
         {
-            if (_knowledge.GetKnowledge(brain, id) is not { } unit)
+            if (_knowledge.GetSkill(brain, id) is not { } unit)
                 continue;
 
             unit.Comp.TemporaryLevel = Math.Max(0, unit.Comp.TemporaryLevel - level);

@@ -12,9 +12,9 @@ namespace Content.Trauma.Shared.Knowledge.Miscellanious.Systems;
 
 public sealed partial class CriticalStrikeSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effect = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedEntityEffectsSystem _effect = default!;
 
     private static readonly ProtoId<CriticalStrikePrototype> StandardMelee = "StandardMelee";
     private static readonly ProtoId<FumblePrototype> StandardFumble = "StandardFumble";

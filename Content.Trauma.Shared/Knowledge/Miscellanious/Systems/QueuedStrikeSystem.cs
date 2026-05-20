@@ -10,10 +10,10 @@ namespace Content.Trauma.Shared.Knowledge.Miscellanious.Systems;
 
 public sealed partial class QueuedStrikeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
 
     public override void Update(float frameTime)
     {

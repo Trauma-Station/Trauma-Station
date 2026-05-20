@@ -14,9 +14,9 @@ using Content.Trauma.Shared.Knowledge.Systems;
 namespace Content.Trauma.Shared.Knowledge.Miscellanious.Systems;
 public sealed partial class FightingStanceSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public override void Initialize()
     {

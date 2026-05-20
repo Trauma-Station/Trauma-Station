@@ -35,7 +35,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedLanguageSystem _language = default!;
     [Dependency] private EntityQuery<AwakeMobComponent> _awakeQuery = default!;
-    [Dependency] private EntityQuery<KnowledgeComponent> _query = default!;
+    [Dependency] private EntityQuery<SkillComponent> _skillQuery = default!;
+    [Dependency] private EntityQuery<AttributeComponent> _attributeQuery = default!;
+    [Dependency] private EntityQuery<ProficiencyComponent> _proficiencyQuery = default!;
+    [Dependency] private EntityQuery<TalentComponent> _talentQuery = default!;
     [Dependency] private EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
     [Dependency] private EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
 

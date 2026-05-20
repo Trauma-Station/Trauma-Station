@@ -19,7 +19,6 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 

@@ -11,7 +11,7 @@ namespace Content.Trauma.Client.Knowledge.UI;
 [GenerateTypedNameReferences]
 public sealed partial class SkillTabControl : BoxContainer
 {
-    [Dependency] private readonly IEntitySystemManager _system = default!;
+    [Dependency] private IEntitySystemManager _system = default!;
     private readonly SpriteSystem _sprite;
 
     public SkillTabControl(SkillInfo conditions)

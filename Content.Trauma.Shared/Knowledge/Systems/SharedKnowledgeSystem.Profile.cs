@@ -13,7 +13,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly AttributeSystem _attribute = default!;
+    [Dependency] private AttributeSystem _attribute = default!;
 
     private List<EntProtoId> _invalid = new();
 

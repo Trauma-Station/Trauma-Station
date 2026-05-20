@@ -27,7 +27,7 @@ public sealed partial class
 
         foreach (var (id, level) in args.Effect.Skills)
         {
-            if (_knowledge.EnsureKnowledge(brain, id) is { } unit)
+            if (_knowledge.EnsureKnowledge<SkillComponent>(brain, id) is { } unit)
             {
                 unit.Comp.TemporaryLevel += level;
                 Dirty(unit);

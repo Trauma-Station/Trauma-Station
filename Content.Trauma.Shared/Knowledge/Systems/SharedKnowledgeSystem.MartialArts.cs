@@ -27,7 +27,7 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] protected SharedPopupSystem _popup = default!;
     [Dependency] private MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private EntityQuery<MartialArtsKnowledgeComponent> _artQuery = default!;
+    [Dependency] private EntityQuery<MartialArtsSkillComponent> _artQuery = default!;
 
     private void InitializeMartialArts()
     {

@@ -21,10 +21,6 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -41,9 +37,9 @@ public abstract partial class SharedCPRSystem : EntitySystem
     [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<ActiveCPRComponent> _activeQuery = default!;
-    [Dependency] private EntityQuery<CPRTrainingComponent> _trainingQuery = default!;
     [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
     [Dependency] private EntityQuery<InternalOrganComponent> _organQuery = default!;
@@ -145,28 +141,28 @@ public abstract partial class SharedCPRSystem : EntitySystem
         return CanPerformCPR(ent, target, identity);
     }
 
-    private bool CanPerformCPR(Entity<KnowledgeHolderComponent> ent, EntityUid target, EntityUid identity)
+    private bool CanPerformCPR(EntityUid uid, EntityUid target, EntityUid identity)
     {
         if (_rottingQuery.HasComp(target))
         {
-            _popup.PopupClient(Loc.GetString("cpr-target-rotting", ("entity", identity)), ent, ent, PopupType.LargeCaution);
+            _popup.PopupClient(Loc.GetString("cpr-target-rotting", ("entity", identity)), uid, uid, PopupType.LargeCaution);
             return false;
         }
 
-        if (GetLungs(target) == null || GetLungs(ent) == null)
+        if (GetLungs(target) == null || GetLungs(uid) == null)
         {
-            _popup.PopupClient(Loc.GetString("cpr-target-cantbreathe", ("entity", identity)), ent, ent, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("cpr-target-cantbreathe", ("entity", identity)), uid, uid, PopupType.MediumCaution);
             return false;
         }
 
         if (_inventory.TryGetSlotEntity(target, "outerClothing", out var outer))
         {
-            _popup.PopupClient(Loc.GetString("cpr-must-remove", ("clothing", outer)), ent, ent, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("cpr-must-remove", ("clothing", outer)), uid, uid, PopupType.Medium);
             return false;
         }
 
         // popups done in ingestion system
-        return _ingestion.HasMouthAvailable(ent, ent) || !_ingestion.HasMouthAvailable(ent, target);
+        return _ingestion.HasMouthAvailable(uid, uid) || !_ingestion.HasMouthAvailable(uid, target);
     }
 
     private void OnShutdown(Entity<ActiveCPRComponent> ent, ref ComponentShutdown args)
@@ -186,9 +182,7 @@ public abstract partial class SharedCPRSystem : EntitySystem
         args.Handled = true;
 
         var identity = Identity.Entity(ent, EntityManager);
-        if (!_trainingQuery.TryComp(user, out var training) ||
-            !_mobQuery.TryComp(ent, out var mob) ||
-            !CanPerformCPR((user, training), ent, identity))
+        if (!_mobQuery.TryComp(ent, out var mob) || !CanPerformCPR(user, ent, identity))
         {
             RemCompDeferred(ent, ent.Comp);
             return;
