@@ -1,0 +1,22 @@
+- type: constructionGraph
+  id: KnitBalaclavaGraph
+  start: unfinished
+  graph:
+  - node: unfinished
+    edges:
+    - to: halfway
+      steps:
+      - material: Cloth
+        amount: 1
+        doAfter: 6
+
+    - node: halfway
+      entity: IncompleteKnittedBalaclava
+      edges:
+      - to: finished
+        steps:
+        - tool: Slicing
+          doAfter: 2
+
+    - node: finished
+      entity: KnittedBalaclava

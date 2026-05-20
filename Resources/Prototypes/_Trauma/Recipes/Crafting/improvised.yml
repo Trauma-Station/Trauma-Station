@@ -1,11 +1,11 @@
 - type: construction
-  id: makeshiftBalaclava
-  graph: KnitBalaclava
-  startNode: start
-  targetNode: balaclava
+  id: KnitBalaclava
+  graph: KnitBalaclavaGraph
+  startNode: unfinished
+  targetNode: finished
   category: construction-category-clothing
   objectType: Item
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     TailoringKnowledge: 3
