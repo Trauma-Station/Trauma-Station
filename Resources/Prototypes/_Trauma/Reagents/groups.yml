@@ -30,3 +30,9 @@
 
 - type: reagentGroup
   id: Drinks
+
+- type: reagentGroup
+  id: NonAlcoholicDrinks
+
+- type: reagentGroup
+  id: AlcoholicDrinks
