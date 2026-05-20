@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components;
@@ -14,4 +13,8 @@ public abstract partial class BaseSpriteOverlayComponent : Component
     public virtual bool Unshaded { get; set; } = true;
 
     public virtual Vector2 Offset { get; set; } = Vector2.Zero;
+
+    public virtual Color Color { get; set; } = Color.White;
+
+    public virtual bool Active { get; set; } = true;
 }

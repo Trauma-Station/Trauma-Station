@@ -9,10 +9,10 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
-public sealed class BloodCrayonSystem : EntitySystem
+public sealed partial class BloodCrayonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly WraithPointsSystem _wpSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private WraithPointsSystem _wpSystem = default!;
 
     public override void Initialize()
     {

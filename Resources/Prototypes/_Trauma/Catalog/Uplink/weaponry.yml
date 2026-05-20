@@ -23,3 +23,13 @@
     Telecrystal: 20
   categories:
   - UplinkWeaponry
+
+- type: listing
+  id: UplinkRifleFAL
+  name: uplink-rifle-FAL-name
+  description: uplink-rifle-FAL-description
+  productEntity: WeaponRifleFAL
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkWeaponry

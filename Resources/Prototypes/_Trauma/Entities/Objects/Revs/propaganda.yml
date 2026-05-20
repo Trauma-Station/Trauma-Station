@@ -67,7 +67,7 @@
       params:
         volume: -6
   - type: RevPropaganda
-    conversionDuration: 5
+    conversionDuration: 2
     consumesCharges: 1
     userBlacklist:
       components:

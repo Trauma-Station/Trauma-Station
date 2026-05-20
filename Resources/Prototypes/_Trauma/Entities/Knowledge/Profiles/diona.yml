@@ -27,7 +27,7 @@
     SmokeablesKnowledge: 12
     # Intelectual Skills
     LiteracyKnowledge: 12
-    MagicalLiteracyKnowledge: 0
+    MagicalLiteracyKnowledge: 3 # Preemptive magical knowledge for when it matters. Magic tree ent lore larp or smth.
     # Language Skills
     LanguageRootSpeak: 9
     # Medical Skill
@@ -35,14 +35,14 @@
     FirstAidKnowledge: 3
     ChemistryKnowledge: 3
     # Physical Skill
-    ThrowingKnowledge: 0
+    ThrowingKnowledge: 1 # Mass matters for throwing but lean into it a bit.
     AthleticsKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
     MetalworkingKnowledge: 0
-    CarvingKnowledge: 0
+    CarvingKnowledge: 2 # Made of wood, so uh. yeah.
     GunsmithingKnowledge: 0
     MechanicsKnowledge: 0
     TailoringKnowledge: 0

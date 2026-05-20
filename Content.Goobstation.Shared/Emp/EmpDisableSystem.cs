@@ -9,7 +9,7 @@ using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Goobstation.Shared.Emp;
 
-public sealed class EmpDisableSystem : EntitySystem
+public sealed partial class EmpDisableSystem : EntitySystem
 {
     public override void Initialize()
     {

@@ -5,7 +5,8 @@ knowledge-path-side-knowledge-name = Ritual of Knowledge
 knowledge-path-side-knowledge-desc =
     Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise.
 
-    You learn a special, one-time-only ritual that requires 3 different items. Performing this ritual instantly grants you 4 knowledge points.
+    You learn a special, one-time-only ritual that requires 3 different items.
+    Performing this ritual instantly grants you 2 knowledge points and 2 side points.
     Unlocks tier 3 passive ability upgrade when performed.
 
 ## T1
@@ -76,6 +77,21 @@ knowledge-path-side-t1-mask-desc =
     Allows you to transmute any mask, a stun baton, and a liver to create a Mask of Madness.
     The mask protects you from bright flashes and instills extreme fear into heathens who witness it.
     It can also be forced onto a heathen, to make them unable to take it off...
+
+knowledge-path-side-t1-curio-name = Unfatomable Curio
+knowledge-path-side-t1-curio-desc =
+    The Mansus holds many curiosities, some are not meant for the mortal eye.
+
+    Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
+    a belt that has a lot of storage space. Whilst worn it will veil you,
+    blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
+
+knowledge-path-side-t1-coin-name = Eldritch Coin
+knowledge-path-side-t1-coin-desc =
+    The Mansus is a place of all sorts of sins. But greed held a special role.
+
+    Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
+    The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
 ## T2
 knowledge-path-side-t2-ice-spear-name = Mysteries of Creation

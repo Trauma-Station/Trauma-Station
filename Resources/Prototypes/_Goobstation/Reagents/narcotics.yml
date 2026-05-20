@@ -7,6 +7,7 @@
   desc: reagent-desc-fentanyl
   flavor: fentanyl
   physicalDesc: reagent-physical-desc-murky
+  contrabandSeverity: Major
   color: "#6e697d"
   metabolisms:
     Bloodstream:
@@ -344,6 +345,7 @@
   group: Medicine
   desc: reagent-desc-heroin
   physicalDesc: reagent-physical-desc-thick
+  contrabandSeverity: Major # Does nothing, may as well make it fun (illegal) to have
   flavor: medicine
   color: "#a8a8af"
   metabolisms:

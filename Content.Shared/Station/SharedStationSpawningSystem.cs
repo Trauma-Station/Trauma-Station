@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Inventory;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Hands.Components;
@@ -14,23 +15,23 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Station;
 
-public abstract class SharedStationSpawningSystem : EntitySystem
+public abstract partial class SharedStationSpawningSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     // </Trauma>
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] protected readonly InventorySystem InventorySystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] protected InventorySystem InventorySystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedTransformSystem _xformSystem = default!;
 
-    [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
-    [Dependency] private readonly EntityQuery<InventoryComponent> _inventoryQuery = default!;
-    [Dependency] private readonly EntityQuery<StorageComponent> _storageQuery = default!;
-    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private EntityQuery<InventoryComponent> _inventoryQuery = default!;
+    [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     /// <summary>
     ///     Equips the data from a `RoleLoadout` onto an entity.
@@ -188,7 +189,7 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     ///     If there is a value for the given slot, it will return the proto id for that slot.
     ///     If nothing was found, will return null
     /// </returns>
-    public string? GetGearForSlot(RoleLoadout? loadout, string slot)
+    public string? GetGearForSlot(RoleLoadout? loadout, [ForbidLiteral] ProtoId<InventorySlotPrototype> slot) // Trauma - use ProtoId, add ForbidLiteral
     {
         if (loadout == null)
             return null;

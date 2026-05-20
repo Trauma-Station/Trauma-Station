@@ -11,8 +11,8 @@ namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
 
     private float PartVariation;
     private float WoundMultiplier;

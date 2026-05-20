@@ -14,13 +14,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
 
-public sealed class HollowWeaveSystem : EntitySystem
+public sealed partial class HollowWeaveSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly EntityQuery<RemoveOnAttackStatusEffectComponent> _removeQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private EntityQuery<RemoveOnAttackStatusEffectComponent> _removeQuery = default!;
 
 
     public override void Initialize()

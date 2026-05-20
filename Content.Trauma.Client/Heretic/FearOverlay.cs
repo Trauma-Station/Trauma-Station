@@ -11,14 +11,14 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.Heretic;
 
-public sealed class FearOverlay : Overlay
+public sealed partial class FearOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Horror";
 
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;

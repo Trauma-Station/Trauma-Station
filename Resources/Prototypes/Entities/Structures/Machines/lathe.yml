@@ -16,6 +16,11 @@
       sinks:
       - LathePrint
   - type: LatheAutomation
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 30
   - type: SpamEmitSound # random lathe sounds
     minInterval: 300
     maxInterval: 900
@@ -617,7 +622,7 @@
     stealGroup: MedicalTechFabCircuitboard
 
 - type: entity
-  parent: BaseLathe
+  parent: [BaseLathe, BaseSiloUtilizer] # Trauma - was BaseLathe
   id: UniformPrinter
   name: uniform printer
   description: Prints new or replacement uniforms.

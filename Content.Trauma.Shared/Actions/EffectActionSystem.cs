@@ -5,9 +5,9 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class EffectActionSystem : EntitySystem
+public sealed partial class EffectActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

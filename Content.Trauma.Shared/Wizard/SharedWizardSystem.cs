@@ -22,8 +22,8 @@ namespace Content.Trauma.Shared.Wizard;
 
 public sealed partial class SharedWizardSystem : CommonWizardSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     public override void Initialize()
     {

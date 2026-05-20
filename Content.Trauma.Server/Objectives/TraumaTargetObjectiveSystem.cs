@@ -9,11 +9,11 @@ using Content.Trauma.Server.Wizard.Components;
 
 namespace Content.Trauma.Server.Objectives;
 
-public sealed class TraumaTargetObjectiveSystem : EntitySystem
+public sealed partial class TraumaTargetObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
 
     public override void Initialize()
     {

@@ -11,12 +11,12 @@ using Content.Trauma.Shared.Heretic.Components;
 
 namespace Content.Trauma.Shared.Wizard.Projectiles;
 
-public sealed class RejuvenateOnProjectileHitSystem : EntitySystem
+public sealed partial class RejuvenateOnProjectileHitSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {

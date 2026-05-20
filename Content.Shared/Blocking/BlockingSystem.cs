@@ -25,22 +25,22 @@ namespace Content.Shared.Blocking;
 
 public sealed partial class BlockingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!; // Goobstation
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private FixtureSystem _fixtureSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!; // Goobstation
+    [Dependency] private TurfSystem _turf = default!;
 
-    [Dependency] private readonly EntityQuery<BlockingComponent> _blockQuery = default!;
-    [Dependency] private readonly EntityQuery<HandsComponent> _handQuery = default!;
-    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
-    [Dependency] private readonly EntityQuery<BlockingUserComponent> _userQuery = default!;
+    [Dependency] private EntityQuery<BlockingComponent> _blockQuery = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<BlockingUserComponent> _userQuery = default!;
 
     public override void Initialize()
     {
@@ -305,7 +305,7 @@ public sealed partial class BlockingSystem : EntitySystem
         var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
 
         var msg = new FormattedMessage();
-        msg.AddMarkupOrThrow(Loc.GetString("blocking-fraction", ("value", MathF.Round(fraction * 100, 1))));
+        msg.AddMarkupOrThrow(Loc.GetString("blocking-fraction-trauma", ("value", MathF.Round(fraction * 100, 1)))); // Trauma - use custom examine
 
         AppendCoefficients(modifier, msg);
 
@@ -321,7 +321,7 @@ public sealed partial class BlockingSystem : EntitySystem
         foreach (var coefficient in modifiers.Coefficients)
         {
             msg.PushNewline();
-            msg.AddMarkupOrThrow(Robust.Shared.Localization.Loc.GetString("blocking-coefficient-value",
+            msg.AddMarkupOrThrow(Robust.Shared.Localization.Loc.GetString("blocking-coefficient-trauma", // Trauma - use custom examine
                 ("type", coefficient.Key),
                 ("value", MathF.Round(coefficient.Value * 100, 1))
             ));
@@ -330,7 +330,7 @@ public sealed partial class BlockingSystem : EntitySystem
         foreach (var flat in modifiers.FlatReduction)
         {
             msg.PushNewline();
-            msg.AddMarkupOrThrow(Robust.Shared.Localization.Loc.GetString("blocking-reduction-value",
+            msg.AddMarkupOrThrow(Robust.Shared.Localization.Loc.GetString("blocking-reduction-trauma", // Trauma - use custom examine
                 ("type", flat.Key),
                 ("value", flat.Value)
             ));

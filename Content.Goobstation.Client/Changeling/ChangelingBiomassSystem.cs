@@ -10,7 +10,7 @@ namespace Content.Goobstation.Client.Changeling;
 
 public sealed partial class ChangelingBiomassSystem : SharedChangelingBiomassSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

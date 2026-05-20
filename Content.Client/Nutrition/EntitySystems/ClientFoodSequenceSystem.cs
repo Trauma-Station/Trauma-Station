@@ -8,10 +8,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Nutrition.EntitySystems;
 
-public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
+public sealed partial class ClientFoodSequenceSystem : SharedFoodSequenceSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!; // Goob
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _proto = default!; // Goob
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

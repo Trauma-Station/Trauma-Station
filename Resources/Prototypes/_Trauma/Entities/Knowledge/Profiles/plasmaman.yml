@@ -9,6 +9,7 @@
     ConstitutionAttribute: 0
     LooksAttribute: 0
     CharismaAttribute: 0
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0

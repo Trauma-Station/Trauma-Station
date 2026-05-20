@@ -36,7 +36,7 @@
     ChemistryKnowledge: 0
     # Physical Skill
     ThrowingKnowledge: 0
-    AthleticsKnowledge: 0
+    AthleticsKnowledge: 3 # Jumping spider larp.
     # Crafting Quality
     FabricationKnowledge: 0
     WeaponsKnowledge: 0

@@ -1,3 +1,4 @@
+knowledge-path-lock-passive-desc-1 = You get one free side knowlede for every tier.
 knowledge-path-lock-passive-desc-2 = Your grasp no longer goes on cooldown when used to open a door or locker.
 knowledge-path-lock-passive-desc-3 = Grants you x-ray vision.
 
@@ -9,8 +10,6 @@ knowledge-path-lock-s1-desc =
     Allows you to transmute a knife and a crowbar into a Key Blade.
     You can only create two at a time and they function as fast crowbars.
     In addition, they can fit into utility belts.
-
-    Path of Lock has more side knowledge unlocked for free or at a discount.
 
 knowledge-path-lock-s2-name = Grasp of Lock
 knowledge-path-lock-s2-desc =

@@ -15,12 +15,12 @@ using Content.Trauma.Common.Heretic;
 
 namespace Content.Trauma.Server.Examine;
 
-public sealed class ExaminableCharacterSystem : EntitySystem
+public sealed partial class ExaminableCharacterSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly IdentitySystem _identitySystem = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private IdentitySystem _identitySystem = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private INetConfigurationManager _netConfigManager = default!;
 
     private List<string> _logLines = new();
 

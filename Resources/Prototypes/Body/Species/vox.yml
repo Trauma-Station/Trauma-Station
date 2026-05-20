@@ -363,6 +363,11 @@
 - type: entity
   parent: [ OrganVoxVisual, OrganBaseEyes, OrganVoxInternal ]
   id: OrganVoxEyes
+  # <Trauma>
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.1 # prey vision for tasty chicken...
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseTongue, OrganVoxInternal ]

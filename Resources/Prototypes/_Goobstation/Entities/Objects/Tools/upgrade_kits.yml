@@ -1,10 +1,8 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: BaseItem
-  id: UpgradeKitAutomation
-  name: automation upgrade kit
-  description: An upgrade kit with all the parts needed to upgrade a machine. This one allows extra automation options by linking robotic arms.
+  id: AutodocUpgradeKitBluespace
+  name: autodoc bluespace upgrade kit
+  description: An upgrade kit with all the parts needed to upgrade an Autodoc. This one allows it to operate through clothing.
   components:
   - type: Sprite
     sprite: _DV/Objects/Tools/lathe_upgrade_kit.rsi
@@ -12,28 +10,21 @@
   - type: UpgradeKit
     whitelist:
       components:
-      - AutomationSlots # automation needs code to support it, can't work on literally any machine
+      - Autodoc
     blacklist:
       components:
-      - Automated
       - UpgradedMachine
     components:
     - type: UpgradedMachine
-      upgrade: upgrade-kit-automation
-    - type: Automated
-    - type: DeviceNetwork
-      deviceNetId: Wireless
-      receiveFrequencyId: BasicDevice
+      upgrade: upgrade-kit-autodoc-bluespace
+    - type: SurgeryIgnoreClothing
 
-# for entities that come pre-automated
+# for entities that are heavily involved with automation
 - type: entity
   abstract: true
   id: BaseAutomatedMachine
   components:
   - type: AutomationSlots
-  - type: Automated
-  - type: UpgradedMachine
-    upgrade: upgrade-kit-automation
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice

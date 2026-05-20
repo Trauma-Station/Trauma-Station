@@ -18,13 +18,8 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
-    // [Dependency] private readonly DamageableSystem _damageable = default!;
-
-    // public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
-    // private readonly DamageSpecifier _curseDamage = new();
-    // private static readonly HashSet<string> CursedWords = new() { "shit", "fuck", "curse", "die", "220" };
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     private void InitializeLanguage()
     {
@@ -265,6 +260,6 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
-        AddExperience(brain, args.Language.Id, Math.Min(args.Message.Length / 10, 8));
+        AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
     }
 }

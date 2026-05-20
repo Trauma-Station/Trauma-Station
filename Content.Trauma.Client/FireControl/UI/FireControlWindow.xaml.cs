@@ -12,7 +12,7 @@ namespace Content.Trauma.Client.FireControl.UI;
 [GenerateTypedNameReferences]
 public sealed partial class FireControlWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public FireControlNavControl Radar => NavRadar;
     public Action? OnServerRefresh;

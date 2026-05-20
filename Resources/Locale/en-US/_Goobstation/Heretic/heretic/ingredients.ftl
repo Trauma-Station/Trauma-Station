@@ -53,3 +53,4 @@ heretic-ritual-ingredient-insuls = insulated gloves
 heretic-ritual-ingredient-circular-saw = circular saw
 heretic-ritual-ingredient-sunglasses = sun glasses
 heretic-ritual-ingredient-lantern-flashlight = lantern or flashlight
+heretic-ritual-ingredient-utility-belt = utility belt

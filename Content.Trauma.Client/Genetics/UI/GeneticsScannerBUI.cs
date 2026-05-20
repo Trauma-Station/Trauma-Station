@@ -6,7 +6,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.UI;
 
-public sealed class GeneticsScannerBUI(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
+public sealed partial class GeneticsScannerBUI(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
 {
     private GeneticsScannerWindow? _window;
 

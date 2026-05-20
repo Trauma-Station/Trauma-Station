@@ -15,10 +15,10 @@ namespace Content.Trauma.Shared.Knowledge.Skills.Systems;
 
 public sealed partial class MeleeSkillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
 
     //private readonly float _missChance = 0.1f
 

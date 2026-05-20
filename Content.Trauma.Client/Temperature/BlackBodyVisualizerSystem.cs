@@ -10,12 +10,12 @@ using Robust.Shared.Maths;
 
 namespace Content.Trauma.Client.Temperature;
 
-public sealed class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyComponent>
+public sealed partial class BlackBodyVisualizerSystem : VisualizerSystem<BlackBodyComponent>
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly SharedPointLightSystem _light = default!;
-    [Dependency] private readonly EntityQuery<PointLightComponent> _lightQuery = default!;
-    [Dependency] private readonly EntityQuery<SpriteComponent> _spriteQuery = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
+    [Dependency] private EntityQuery<PointLightComponent> _lightQuery = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public static readonly ProtoId<ShaderPrototype> EmissiveShader = "Emissive";
     public const float MinGlowTemp = 600f;

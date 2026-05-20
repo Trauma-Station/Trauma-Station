@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Vehicles;
 using Content.Shared.Actions;
@@ -18,13 +17,13 @@ namespace Content.Goobstation.Shared.OfficeChair;
 
 public sealed partial class VehicleWallPushSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly CommonContestsSystem _contests = default!;
-    [Dependency] private readonly INetConfigurationManager _config = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private INetConfigurationManager _config = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

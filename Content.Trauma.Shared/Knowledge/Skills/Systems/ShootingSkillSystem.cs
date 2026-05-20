@@ -9,10 +9,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Skills.Systems;
 
-public sealed class ShootingSkillSystem : EntitySystem
+public sealed partial class ShootingSkillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 

@@ -7,9 +7,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Silicon.IPC;
 
-public sealed class InternalEncryptionKeySpawner : EntitySystem
+public sealed partial class InternalEncryptionKeySpawner : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {

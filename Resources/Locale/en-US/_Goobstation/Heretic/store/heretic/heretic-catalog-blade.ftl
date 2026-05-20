@@ -1,3 +1,7 @@
+knowledge-path-blade-passive-desc-1 =
+    Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down.
+    This effect can only trigger once every 20 seconds.
+
 knowledge-path-blade-passive-desc-2 =
     Grants you immunity to having limbs dismembered.
     Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds.
@@ -17,8 +21,6 @@ knowledge-path-blade-s2-desc =
     The story of the footsoldier has been told since antiquity. It is one of blood and valor, and is championed by sword, steel and silver.
 
     Your Mansus Grasp will cause a short stun when used on someone lying down or facing away from you.
-
-    Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down. This effect can only trigger once every 20 seconds.
 
 knowledge-path-blade-s3-name = Mark of the Blade
 knowledge-path-blade-s3-desc =

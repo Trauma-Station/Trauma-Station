@@ -58,10 +58,15 @@
   id: GraspOfAsh
   path: Ash
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: AshPassive1
+  stage: 2
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialHighTempImmunity
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfAsh
@@ -89,21 +94,19 @@
   - RitualArmorAsh
 
 - type: hereticKnowledge
-  id: AshPassiveT2
+  id: AshPassive2
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
-    - type: WeatherImmune
-  passiveLevel: 2
+    - type: FireStackSpeed
 
 - type: hereticKnowledge
-  id: AshPassiveT3
+  id: AshPassive3
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: TemporaryBlindnessImmunity
     - type: BlurryVisionImmunity
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: CrackedLantern
@@ -156,9 +159,14 @@
   id: GraspOfBlade
   path: Blade
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: BladePassive1
+  stage: 2
   event: !type:HereticBladePassiveRiposteEvent
     cooldown: 20
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfBlade
@@ -189,19 +197,17 @@
   - RitualArmorBlade
 
 - type: hereticKnowledge
-  id: BladePassiveT2
+  id: BladePassive2
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ChampionStance
-  passiveLevel: 2
 
 - type: hereticKnowledge
-  id: BladePassiveT3
+  id: BladePassive3
   stage: 6
   event: !type:HereticBladePassiveRiposteEvent
     cooldown: 10
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: FuriousSteel
@@ -249,13 +255,18 @@
   id: GraspOfFlesh
   path: Flesh
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: FleshPassive1
+  stage: 2
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: FleshPassive
   mindEvent: !type:HereticAddMindComponentsEvent
     addedComponents:
     - type: FleshHereticMind
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfFlesh
@@ -283,15 +294,14 @@
   - RitualArmorFlesh
 
 - type: hereticKnowledge
-  id: FleshPassiveT2
+  id: FleshPassive2
   stage: 6
   mindEvent: !type:IncreaseFleshGhoulLimitEvent
     ghoulLimitIncrease: 2
     voicelessDeadLimitIncrease: 1
-  passiveLevel: 2
 
 - type: hereticKnowledge
-  id: FleshPassiveT3
+  id: FleshPassive3
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
@@ -305,7 +315,6 @@
       damageContainers:
       - Biological
     - type: ShowDiseaseIcons
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: RawRitual
@@ -355,10 +364,15 @@
   id: GraspOfVoid
   path: Void
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: VoidPassive1
+  stage: 2
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialLowTempImmunity
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfVoid
@@ -386,20 +400,18 @@
   - RitualArmorVoid
 
 - type: hereticKnowledge
-  id: VoidPassiveT2
+  id: VoidPassive2
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SpecialBreathingImmunity
-  passiveLevel: 2
 
 - type: hereticKnowledge
-  id: VoidPassiveT3
+  id: VoidPassive3
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: SlowdownResistance
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: VoidPull
@@ -460,10 +472,15 @@
   id: GraspOfRust
   path: Rust
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: RustPassive1
+  stage: 2
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: LeechingWalk
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfRust
@@ -491,14 +508,12 @@
   - RitualArmorRust
 
 - type: hereticKnowledge
-  id: RustPassiveT2
+  id: RustPassive2
   stage: 6
-  passiveLevel: 2
 
 - type: hereticKnowledge
-  id: RustPassiveT3
+  id: RustPassive3
   stage: 6
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: EntropicPlume
@@ -547,10 +562,15 @@
   id: GraspOfCosmos
   path: Cosmos
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: CosmosPassive1
+  stage: 2
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: CosmosPassive
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfCosmos
@@ -578,14 +598,12 @@
   - RitualArmorCosmos
 
 - type: hereticKnowledge
-  id: CosmosPassiveT2
+  id: CosmosPassive2
   stage: 6
-  passiveLevel: 2
 
 - type: hereticKnowledge
-  id: CosmosPassiveT3
+  id: CosmosPassive3
   stage: 6
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: StarTouch
@@ -641,12 +659,17 @@
   id: GraspOfLock
   path: Lock
   stage: 2
+  mindEvent: !type:HereticSetPassiveLevelEvent
+    level: 1
+
+- type: hereticKnowledge
+  id: LockPassive1
+  stage: 2
   mindEvent: !type:HereticModifySideKnowledgeDraftsEvent
     sideKnowledgeDrafts:
       HereticPathSideT1: 1
       HereticPathSideT2: 1
       HereticPathSideT3: 1
-  passiveLevel: 1
 
 - type: hereticKnowledge
   id: MarkOfLock
@@ -674,12 +697,11 @@
   - RitualArmorLock
 
 - type: hereticKnowledge
-  id: LockPassiveT2
+  id: LockPassive2
   stage: 6
-  passiveLevel: 2
 
 - type: hereticKnowledge
-  id: LockPassiveT3
+  id: LockPassive3
   stage: 6
   event: !type:HereticXRayVisionEvent
     addedComponents:
@@ -688,7 +710,6 @@
       activateSound: null
       deactivateSound: null
       drawOverlay: false
-  passiveLevel: 3
 
 - type: hereticKnowledge
   id: BurglarsFinesse
@@ -782,6 +803,18 @@
   stage: 4
   ritualPrototypes:
   - RitualMaskOfMadness
+
+- type: hereticKnowledge
+  id: UnfathomableCurio
+  stage: 4
+  ritualPrototypes:
+  - RitualUnfathomableCurio
+
+- type: hereticKnowledge
+  id: EldritchCoin
+  stage: 4
+  ritualPrototypes:
+  - RitualEldritchCoin
 
 ## T2
 - type: hereticKnowledge

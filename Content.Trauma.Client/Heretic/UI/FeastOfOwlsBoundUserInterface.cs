@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 namespace Content.Trauma.Client.Heretic.UI;
 
 [UsedImplicitly]
-public sealed class FeastOfOwlsBoundUserInterface(EntityUid owner, Enum uiKey)
+public sealed partial class FeastOfOwlsBoundUserInterface(EntityUid owner, Enum uiKey)
     : BoundUserInterface(owner, uiKey)
 {
     private FeastOfOwlsMenu? _menu;

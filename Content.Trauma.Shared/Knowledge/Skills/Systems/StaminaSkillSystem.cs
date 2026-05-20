@@ -8,9 +8,9 @@ using Content.Trauma.Shared.Knowledge.Systems;
 
 namespace Content.Trauma.Shared.Knowledge.Skills.Systems;
 
-public sealed class StaminaSkillSystem : EntitySystem
+public sealed partial class StaminaSkillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public override void Initialize()
     {

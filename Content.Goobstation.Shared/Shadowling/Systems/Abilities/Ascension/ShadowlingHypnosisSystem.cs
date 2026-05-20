@@ -11,10 +11,10 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.Ascension;
 /// This handles Hypnosis.
 /// Instant Thrall from afar!
 /// </summary>
-public sealed class ShadowlingHypnosisSystem : EntitySystem
+public sealed partial class ShadowlingHypnosisSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

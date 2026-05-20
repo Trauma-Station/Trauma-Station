@@ -28,10 +28,10 @@
     FirstAidKnowledge: 0
     ChemistryKnowledge: 0
     # Physical Skill
-    ThrowingKnowledge: 2
-    AthleticsKnowledge: 2
-    StrengthKnowledge: 2
-    ToughnessKnowledge: 2
+    ThrowingKnowledge: 0
+    AthleticsKnowledge: 1
+    StrengthKnowledge: 3
+    ToughnessKnowledge: 3
     # Combat Skill
     MeleeKnowledge: 0
     ShootingKnowledge: 0

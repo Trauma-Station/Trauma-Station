@@ -19,14 +19,14 @@ namespace Content.Trauma.Server.SelfExtinguisher;
 
 public sealed partial class SelfExtinguisherSystem : SharedSelfExtinguisherSystem
 {
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
 
     // Same color as the water reagent
     private readonly Color _extinguishColor = Color.FromHex("#75b1f0");

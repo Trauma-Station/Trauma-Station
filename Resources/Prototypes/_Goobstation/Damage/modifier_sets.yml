@@ -151,9 +151,9 @@
 - type: damageModifierSet
   id: ExplosiveLatticeBlob # Explosive Lattice
   coefficients:
-    Blunt: 0.25
-    Slash: 0.25
-    Piercing: 0.25
+    Blunt: 0.75
+    Slash: 0.75
+    Piercing: 0.75
     Heat: 3.00
     Shock: 1.50
   ignoreArmorPierceFlags: All
@@ -179,10 +179,10 @@
 - type: damageModifierSet
   id: BlobReflective # If it reflects lasers, then it must be fragile?
   coefficients:
-    Blunt: 5
-    Slash: 5
-    Piercing: 5
-    Heat: 5
+    Blunt: 7
+    Slash: 7
+    Piercing: 7
+    Heat: 7
   ignoreArmorPierceFlags: All
 
 - type: damageModifierSet

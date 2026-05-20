@@ -10,9 +10,9 @@ namespace Content.Trauma.Shared.Knowledge.Skills.Systems;
 /// <summary>
 /// Handles first aid knowledge interactions.
 /// </summary>
-public sealed class FirstAidSkillSystem : EntitySystem
+public sealed partial class FirstAidSkillSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public override void Initialize()
     {

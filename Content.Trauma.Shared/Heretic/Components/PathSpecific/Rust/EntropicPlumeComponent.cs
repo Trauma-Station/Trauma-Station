@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
@@ -11,7 +12,7 @@ public sealed partial class EntropicPlumeComponent : Component
     public float Duration = 10f;
 
     [DataField]
-    public Dictionary<string, FixedPoint2> Reagents = new()
+    public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> Reagents = new()
     {
         { "Mold", 5f },
     };

@@ -4,9 +4,9 @@ using Content.Medical.Shared.Surgery.Tools;
 
 namespace Content.Trauma.Shared.Surgery.Tools;
 
-public sealed class TraumaSurgeryToolSystem : EntitySystem
+public sealed partial class TraumaSurgeryToolSystem : EntitySystem
 {
-    [Dependency] private readonly SurgeryToolExamineSystem _tool = default!;
+    [Dependency] private SurgeryToolExamineSystem _tool = default!;
 
     public override void Initialize()
     {

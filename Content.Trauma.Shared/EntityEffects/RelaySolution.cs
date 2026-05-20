@@ -28,11 +28,11 @@ public sealed partial class RelaySolution : EntityEffectBase<RelaySolution>
         => null; // cbf
 }
 
-public sealed class RelaySolutionEffectSystem : EntityEffectSystem<SolutionContainerManagerComponent, RelaySolution>
+public sealed partial class RelaySolutionEffectSystem : EntityEffectSystem<SolutionContainerManagerComponent, RelaySolution>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     protected override void Effect(Entity<SolutionContainerManagerComponent> ent, ref EntityEffectEvent<RelaySolution> args)
     {

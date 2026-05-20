@@ -14,9 +14,10 @@ using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
 
-public abstract class SharedHulkSystem : EntitySystem
+public abstract partial class SharedHulkSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
     public static readonly ProtoId<DamageTypePrototype> Structural = "Structural";

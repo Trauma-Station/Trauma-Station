@@ -14,11 +14,11 @@ namespace Content.Trauma.Server.Forging;
 /// All the serverside metal, working and forging logic.
 /// Only exists because temperature and construction shitcode is serverside.
 /// </summary>
-public sealed class MetalSystem : SharedMetalSystem
+public sealed partial class MetalSystem : SharedMetalSystem
 {
-    [Dependency] private readonly DamageOnHoldingSystem _damageOnHolding = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
+    [Dependency] private DamageOnHoldingSystem _damageOnHolding = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
 
     public override void Initialize()
     {

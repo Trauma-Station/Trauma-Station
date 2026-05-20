@@ -41,30 +41,30 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Atmos.EntitySystems
 {
-    public sealed class FlammableSystem : EntitySystem
+    public sealed partial class FlammableSystem : EntitySystem
     {
         // <Trauma>
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly CommonSpellbladeSystem _spellblade = default!;
-        [Dependency] private readonly BodySystem _body = default!;
-        [Dependency] private readonly EntityQuery<FireImmunityComponent> _fireImmuneQuery = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private CommonSpellbladeSystem _spellblade = default!;
+        [Dependency] private BodySystem _body = default!;
+        [Dependency] private EntityQuery<FireImmunityComponent> _fireImmuneQuery = default!;
         // </Trauma>
-        [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-        [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
-        [Dependency] private readonly StunSystem _stunSystem = default!;
-        [Dependency] private readonly TemperatureSystem _temperatureSystem = default!;
-        [Dependency] private readonly SharedIgnitionSourceSystem _ignitionSourceSystem = default!;
-        [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-        [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-        [Dependency] private readonly FixtureSystem _fixture = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly InventorySystem _inventory = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly UseDelaySystem _useDelay = default!;
-        [Dependency] private readonly AudioSystem _audio = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+        [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
+        [Dependency] private StunSystem _stunSystem = default!;
+        [Dependency] private TemperatureSystem _temperatureSystem = default!;
+        [Dependency] private SharedIgnitionSourceSystem _ignitionSourceSystem = default!;
+        [Dependency] private DamageableSystem _damageableSystem = default!;
+        [Dependency] private AlertsSystem _alertsSystem = default!;
+        [Dependency] private FixtureSystem _fixture = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private InventorySystem _inventory = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private UseDelaySystem _useDelay = default!;
+        [Dependency] private AudioSystem _audio = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private IGameTiming _timing = default!;
 
         private EntityQuery<InventoryComponent> _inventoryQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -320,21 +320,35 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         public void AdjustFireStacks(EntityUid uid, float relativeFireStacks, FlammableComponent? flammable = null, bool ignite = false,
-            float penetration = 0f) // Goob
+            float penetration = 0f) // Trauma - penetration
         {
             if (!Resolve(uid, ref flammable))
                 return;
 
-            SetFireStacks(uid, flammable.FireStacks + relativeFireStacks, flammable, ignite);
+            SetFireStacks(uid, flammable.FireStacks + relativeFireStacks, flammable, ignite, penetration); // Trauma - penetration
         }
 
         public void SetFireStacks(EntityUid uid, float stacks, FlammableComponent? flammable = null, bool ignite = false,
-            float penetration = 0f) // Goob
+            float penetration = 0f) // Trauma - penetration
         {
             if (!Resolve(uid, ref flammable))
                 return;
 
             flammable.FireStacks = MathF.Min(MathF.Max(flammable.MinimumFireStacks, stacks), flammable.MaximumFireStacks);
+
+            // <Trauma>
+            if (stacks <= flammable.FireStacks)
+                penetration = MathF.Max(flammable.FireProtectionPenetration, penetration);
+
+            if (stacks > 0)
+                penetration = MathHelper.Lerp(flammable.FireProtectionPenetration, penetration, 1f - flammable.FireStacks / stacks);
+
+            penetration = Math.Clamp(penetration, 0f, 1f);
+            flammable.FireProtectionPenetration = penetration;
+
+            var ev = new FireStacksChangedEvent(uid, flammable.FireStacks);
+            RaiseLocalEvent(uid, ref ev);
+            // </Trauma>
 
             // Goobstation modified - fix
             if (flammable.FireStacks <= 0)

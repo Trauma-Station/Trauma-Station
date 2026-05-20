@@ -11,7 +11,7 @@
         icon:
           sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Rockets/unfinished.rsi
           state: icon
-        doAfter: 5
+        doAfter: 1
   - node: unfinished
     entity: RevUnfinishedRocket
     edges:
@@ -23,42 +23,14 @@
         doAfter: 0.5
       - tool: Hammering
         doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
       - material: RevBallBearings
       - material: RevBolt
       - material: RevNut
       - tool: Screwing
-        doAfter: 5
+        doAfter: 1
       - material: Steel
         amount: 2
-        doAfter: 3
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
+        doAfter: 1
       - tool: Hammering
         doAfter: 0.5
       - tool: Hammering
@@ -66,27 +38,13 @@
       - tool: Hammering
         doAfter: 0.5
       - material: Gunpowder
-        amount: 5
+        amount: 1
       - tool: Screwing
-        doAfter: 5
+        doAfter: 1
     - to: AP
       steps:
       - tool: Screwing
-        doAfter: 5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
+        doAfter: 1
       - tool: Hammering
         doAfter: 0.5
       - tool: Hammering
@@ -95,28 +53,14 @@
         doAfter: 0.5
       - material: Uranium
         amount: 2
-        doAfter: 3
+        doAfter: 1
       - material: RevBolt
       - material: RevNut
       - tool: Screwing
-        doAfter: 5
+        doAfter: 1
       - material: Steel
         amount: 2
-        doAfter: 3
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
+        doAfter: 1
       - tool: Hammering
         doAfter: 0.5
       - tool: Hammering
@@ -124,9 +68,9 @@
       - tool: Hammering
         doAfter: 0.5
       - material: Gunpowder
-        amount: 5
+        amount: 1
       - tool: Screwing
-        doAfter: 5
+        doAfter: 1
   - node: HE
     entity: CartridgeRocketRPG2HE
   - node: AP
@@ -158,8 +102,8 @@
         quantity: 100
       steps:
       - tool: Screwing
-        doAfter: 3
+        doAfter: 1
       - tool: Painting
-        doAfter: 3
+        doAfter: 1
   - node: FlamethrowerAmmo
     entity: FuelTankFlamethrower

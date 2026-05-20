@@ -17,14 +17,14 @@ namespace Content.Goobstation.Shared.HoloCigar;
 /// <summary>
 /// This is the system for the Holo-Cigar. - pure unadulterated shitcode below beware
 /// </summary>
-public sealed class HoloCigarSystem : EntitySystem
+public sealed partial class HoloCigarSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     private const string LitPrefix = "lit";
     private const string UnlitPrefix = "unlit";

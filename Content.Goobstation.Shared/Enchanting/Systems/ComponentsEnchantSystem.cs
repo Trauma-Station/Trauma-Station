@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// Adds or removes components from an item enchanted with <see cref="ComponentsEnchantComponent"/>
 /// Multiple levels do nothing.
 /// </summary>
-public sealed class ComponentsEnchantSystem : EntitySystem
+public sealed partial class ComponentsEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

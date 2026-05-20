@@ -4,13 +4,14 @@ using Content.Goobstation.Common.ServerCurrency;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using System.Threading.Tasks;
 
 namespace Content.Goobstation.Client.ServerCurrency;
 
-public sealed class ClientCurrencyManager : ICommonCurrencyManager, IEntityEventSubscriber, IPostInjectInit
+public sealed partial class ClientCurrencyManager : ICommonCurrencyManager, IEntityEventSubscriber, IPostInjectInit
 {
-    [Dependency] private readonly IEntityManager _ent = default!;
-    [Dependency] private readonly IPlayerManager _playMan = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPlayerManager _playMan = default!;
 
     private static int _cachedBalance = -1;
     public event Action? ClientBalanceChange;
@@ -96,4 +97,8 @@ public sealed class ClientCurrencyManager : ICommonCurrencyManager, IEntityEvent
         return _cachedBalance;
     }
 
+    public Task Wipe()
+    {
+        throw new NotImplementedException();
+    }
 }

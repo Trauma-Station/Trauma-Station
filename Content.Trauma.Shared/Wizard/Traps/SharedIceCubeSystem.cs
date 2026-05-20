@@ -20,14 +20,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Traps;
 
-public abstract class SharedIceCubeSystem : EntitySystem
+public abstract partial class SharedIceCubeSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedPhysicsSystem Physics = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected SharedPhysicsSystem Physics = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
