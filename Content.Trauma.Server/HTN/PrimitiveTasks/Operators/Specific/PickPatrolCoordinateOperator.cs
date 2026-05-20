@@ -45,34 +45,50 @@ public sealed partial class PickPatrolCoordinateOperator : HTNOperator
             return (false, null);
 
         EntityUid? targetEntity = null;
+        var waypoints = master.Waypoints;
 
-        if (master.Waypoints.ToList() is not { } waypoints || waypoints.Count <= 0)
-        {
+        if (waypoints.Count <= 0)
             targetEntity = slave.MasterEntity;
-        }
         else
         {
             var nextTargetIndex = 0;
 
             if (blackboard.TryGetValue<EntityUid>("LastPatrolWaypoint", out var lastWaypoint, _entMan))
             {
-                var currentIndex = waypoints.IndexOf(lastWaypoint);
+                var currentIndex = 0;
+                foreach (var waypoint in waypoints)
+                {
+                    if (waypoint == lastWaypoint)
+                        break;
+                    currentIndex++;
+                }
                 nextTargetIndex = (currentIndex + 1) % waypoints.Count;
             }
 
-            targetEntity = waypoints[nextTargetIndex];
+            var i = 0;
+            foreach (var waypoint in waypoints)
+            {
+                if (i == nextTargetIndex)
+                {
+                    targetEntity = waypoint;
+                    break;
+                }
+                i++;
+            }
         }
 
-        var pathRange = SharedInteractionSystem.InteractionRange - 1f;
-        var path = await _pathfinding.GetPath(owner, targetEntity.Value, pathRange, cancelToken, PathFlags.Access);
+        if (targetEntity is not { } target)
+            return (false, null);
 
+        var pathRange = SharedInteractionSystem.InteractionRange - 1f;
+        var path = await _pathfinding.GetPath(owner, target, pathRange, cancelToken, PathFlags.Access);
         if (path.Result != PathResult.Path)
             return (false, null);
 
         return (true, new Dictionary<string, object>()
         {
-            { "LastPatrolWaypoint", targetEntity },
-            { TargetMoveKey, _entMan.GetComponent<TransformComponent>(targetEntity.Value).Coordinates },
+            { "LastPatrolWaypoint", target },
+            { TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates },
             { NPCBlackboard.PathfindKey, path },
         });
     }
