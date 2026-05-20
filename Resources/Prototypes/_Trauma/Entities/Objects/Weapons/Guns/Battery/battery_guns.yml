@@ -34,7 +34,7 @@
     zeroVisible: true
   - type: BatteryAmmoProvider
     proto: BulletDisabler
-    fireCost: 31.25
+    fireCost: 30
   - type: Tag
     tags:
     - Taser
