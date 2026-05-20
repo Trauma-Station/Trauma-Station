@@ -12,5 +12,5 @@ public sealed partial class CounterAttackerComponent : Component
 {
     [DataField]
     public SpriteSpecifier Icon =
-        new SpriteSpecifier.Rsi(new ResPath("_Trauma/Interface/Alerts/counterattack.rsi"), "icon");
+        new SpriteSpecifier.Rsi(new ResPath("_Trauma/Interface/Alerts/counterattack.rsi"), "counterattack");
 }
