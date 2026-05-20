@@ -3,7 +3,7 @@ namespace Content.Trauma.Common.Reagents;
 /// <summary>
 /// Prototype for <see cref="ReagentPrototype"/>, in order to classify the reagent into a specific group.
 /// </summary>
-[Prototype()]
+[Prototype]
 public sealed partial class ReagentGroupPrototype : IPrototype
 {
     /// <inheritdoc/>
