@@ -9,8 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <TextureRect Name="TextRect" Margin="0, 8, 0, 0" />
 
     <BoxContainer Name="HorizontalContainer" Orientation="Horizontal">
-        <RichTextLabel Name="SkillBox" SetWidth="75" HorizontalAlignment="Left" />
-
+        <RichTextLabel Name="SkillBox" SetWidth="325" HorizontalAlignment="Left" />
         <RichTextLabel Name="ModifierBox" MinSize="50 20"/>
     </BoxContainer>
 </BoxContainer>
