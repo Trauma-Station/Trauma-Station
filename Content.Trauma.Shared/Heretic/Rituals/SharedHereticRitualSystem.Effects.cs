@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
@@ -8,6 +9,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -26,8 +28,6 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<EffectsRitualEffect>>(OnEffects);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<UpdateKnowledgeEffect>>(OnUpdateKnowledge);
         SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<RemoveRitualsEffect>>(OnRemoveRituals);
-        SubscribeLocalEvent<HereticComponent, HereticRitualEffectEvent<SetHereticAvailablePassiveLevelEffect>>(
-            OnSetPassiveLevel);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<SplitIngredientsRitualEffect>>(OnSplit);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualEffectEvent<IfElseRitualEffect>>(OnIfElse);
 
@@ -37,31 +37,6 @@ public abstract partial class SharedHereticRitualSystem
             OnBlackboard);
         SubscribeLocalEvent<RustGraspComponent, HereticRitualEffectEvent<ResetRustGraspDelayEffect>>(OnRustDelay);
         SubscribeLocalEvent<GhoulComponent, HereticRitualEffectEvent<AddToFleshGhoulLimit>>(OnAddToFleshLimit);
-    }
-
-    private void OnSetPassiveLevel(Entity<HereticComponent> ent,
-        ref HereticRitualEffectEvent<SetHereticAvailablePassiveLevelEffect> args)
-    {
-        var couldBreak = ent.Comp.CanBreakBlade;
-        var hadAura = ent.Comp.ShouldShowAura;
-        ent.Comp.AvailablePassiveLevel = Math.Max(ent.Comp.AvailablePassiveLevel, args.Effect.Level);
-        Dirty(ent);
-        var canBreak = ent.Comp.CanBreakBlade;
-        var showAura = ent.Comp.ShouldShowAura;
-
-        if (!TryGetValue(args.Ritual, Performer, out EntityUid uid))
-            return;
-
-        _store.UpdateUserInterface(uid, ent.Owner);
-
-        if (!_player.TryGetSessionById(CompOrNull<MindComponent>(ent)?.UserId, out var session))
-            return;
-
-        if (!canBreak && couldBreak)
-            _heretic.SendNoBreakBladeMessage(ent.Comp, session);
-
-        if (!hadAura && showAura)
-            _heretic.ShowAura(ent.Comp, uid, session, true);
     }
 
     private void OnAddToFleshLimit(Entity<GhoulComponent> ent, ref HereticRitualEffectEvent<AddToFleshGhoulLimit> args)
@@ -173,7 +148,7 @@ public abstract partial class SharedHereticRitualSystem
             !TryComp(ent, out StoreComponent? store))
             return;
 
-        _heretic.UpdateMindKnowledge((ent, ent, store, mind), null, args.Effect.Amount);
+        _heretic.UpdateMindKnowledge((ent, ent, store, mind), null, args.Effect.Knowledge);
     }
 
     private void OnGhoulify(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<GhoulifyEffect> args)
@@ -313,13 +288,18 @@ public abstract partial class SharedHereticRitualSystem
         if (knowledgeGain == 0)
             return;
 
-        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, knowledgeGain);
+        var dict = new Dictionary<string, FixedPoint2>()
+        {
+            {SharedHereticSystem.Currency, knowledgeGain}
+        };
+
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, dict);
 
         heretic.SacrificeTracker++;
-        if (!heretic.InfluenceSpawnPerSacrificeAmount.TryGetValue(heretic.SacrificeTracker, out var influence))
+        if (heretic.MaxSacrificeInfluenceSpawn < heretic.SacrificeTracker)
             return;
 
-        var influenceEv = new SpawnHereticInfluenceEvent(influence);
+        var influenceEv = new SpawnHereticInfluenceEvent();
         RaiseLocalEvent(ref influenceEv);
     }
 

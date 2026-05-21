@@ -2,85 +2,186 @@
 
   # Crimes
 
-  # I. Criminal Violations (Law Code CX)
+  # I. Criminal Violations Title (Law Section, Code CXX-YY)
 
-  ### Criminal violations are those that involve the employee themselves becoming classified as a criminal of some kind through their actions. Along with taboo violations, these are the only actual laws that security cadets are expected to learn and remember, and should be prioritized.
+  ### Criminal violations are those that involve the employee themselves becoming classified as a criminal of some kind through their actions. Criminal violations encompass misdemeanours, felonies and taboo violations, these are the only actual laws that security cadets are expected to learn and remember, and should be prioritized.
 
-  ## No Penalty Criminal Violations:
+  ## C§ 01 - No Penalty Misdemeanours:
 
-  - C0: Contraband Possession: Having any item classified as contraband. This usually doesn't have a sentence other than taking away the contraband, but employees may be subject to monitoring and being suspected of being a member of the organization they possessed the contraband from.
+  C§ 01 encompasses minor violations that are not considered indictable offences, punishment includes, but is not limited to; verbal warnings, citations, fines, as well as the offending party resolving the issue.
 
-  ## Max 3 Minute Timer Criminal Violations:
+  - C01-01: Minor Contraband Possession; Having any item classified as contraband, that does not fall under any other codes. This includes, but is not limited to: departmentally-restricted contraband, rival corporate paraphernalia, and any item that does not fall under any other sections or codes.
+  - C01-02: Littering; The improper disposal of waste via public dumping. This usually doesn't involve any sentence other than cleaning up the litter.
+  - C01-03: Public Nuisance; The disorderly conduct of an employee in a public area that is disruptive to the work of other employees, or otherwise damages the Nanotrasen™ brand.
+  - C01-04: Unsanctioned Assembly; Rallying a group of employees for unlawful reasons, including but not limited to: protests, riots, disruption of departments, organised criminal activity.
+  - C01-05: Harassment; The act of intentionally offending, verbally intimidating or humiliating another employee.
+  - C01-06: Dereliction of duty; The willful neglect of one's job duties.
+  - C01-07: Trespass; The act of entering an area one does not have access to through non-forceful means and without explicit approval from a member of that department. Heads of staff reserve the right to waive any approvals given by members of their department.
+  - C01-08: Unauthorized Use of Company Property; Using company property without explicit approval from a member of the department that the property belongs to. Heads of staff reserve the right to waive any approvals given by members of their department.
+  - C01-09: Public Smoking and Vaping; The act of smoking or vaping outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or offices.
+  - C01-10: Departmental Impersonation; The act of wearing a departmental uniform whilst not being a part of that department.
+  - C01-11: Vandalism; The act of intentionally defacing company property.
+  - C01-12: Concealment of Identity; The act of intentionally hiding one's identity through the use of masks, disguises, failing to show company-mandated ID/PDA.
+  - C01-13: Personal Possession of Schedule A Narcotics; The act of possessing prohibited Schedule A narcotics that does not exceed 50 units.
 
-  - C1: Mail Tampering: Opening mail that is addressed to another employee, or tampering with the mail incurring a loss of funds. Anyone who does this will be considered a thief and be subject to monitoring by security at their discretion.
-  - C2: Theft: Taking personal or departmental items without permission. Anyone who does this will be considered a thief and be subject to monitoring by security at their discretion.
-  - C3: Recreational Drug Possession, Usage or Sale: Possession, usage, or sale of any recreational drug besides nicotine or alcohol.
-  - C4: Vandalism: Purposefully defacing Nanotrasen property in order to lower its aesthetic value.
+  ## C§ 02 - Indictable Misdemeanours:
 
-  ## Max 5 Minute Timer Criminal Violations:
+  C§ 02 encompasses minor violations that are indictable offences, punishment includes: incarceration, fines, corporal punishment or community service. The maximum sentence for C§ 02 incarceration is 3 minutes.
 
-  - C5: Secure Trespass: Trespass into a security or command area.
-  - C6: Kidnapping: Using non-lethal means to capture a member of the crew and hold them hostage.
-  - C7: Assault Any assault on a member of the crew.
-  - C8: Grand Theft: Stealing any high value or importance item.
-  - C9: Destruction of Property. This includes killing any of the station-wide "pets" without a good reason.
-  - C10: Grand Assault: Any assault on a member of Command, the Captain, or the Nanotrasen Representative, whether the intent is to murder or not.
+  - C02-01: Noncompliance; The act of refusing to comply with a lawful order from a security officer, or any order that resolves a C§ 01 offence.
+  - C02-02: Battery; The act of intentionally causing physical harm to another employee.
+  - C02-03: Assault; The act of threatening an employee with immediate physical harm.
+  - C02-04: Petty Larceny; The act of stealing any item that does not belong to the offender. That does not fall under any other sections or codes.
+  - C02-05: Burglary; The act of unlawfully entering an area one does not have access to through forceful means and with the intent to steal.
+  - C02-06: Receiving and Handling Stolen Goods; The act of receiving or handling items that have been stolen knowingly.
+  - C02-07: Breaking and Entering; The act of unlawfully entering an area one does not have access to through forceful means.
+  - C02-08: Tampering; The act of intentionally sabotaging or interfering with company property or electronic systems.
+  - C02-09: Bribery; The act of offering or accepting a bribe, which is any item, favor, or service offered in exchange for an illicit advantage.
+  - C02-10: Possession of Prohibited Weaponry; The act of possessing prohibited weaponry that does not fall under any other sections or codes.
+  - C02-11: Incitement of Violence; The act of encouraging or threatening violence against another employee, group of employees or department.
+  - C02-12: Inciting a Riot; The act of organizing or causing a riot or unlawful assembly.
+  - C02-13: Reckless Endangerment; The act of endangering the safety of other employees through reckless actions or inaction.
+  - C02-14: Personal Possession of Schedule B Narcotics; The act of possessing prohibited Schedule B narcotics that does not exceed 50 units.
+  - C02-15: Conspiracy; The act of forming an agreement with other employees to commit a crime.
+  - C02-16: Aiding and Abetting; The act of assisting in the commission of a crime, or providing support to those committing a crime.
+  - C02-17: Evasion; The act of fleeing or failing to stop when being pursued or hailed by security, without using force.
+  - C02-18: Obstruction of Work; The act of interfering with other employee's ability to work through forceful means, or otherwise impeding the work of other employees.
+  - C02-19: Destruction of Property; The act of intentionally destroying company or personal property.
+  - C02-20: Failure to Report; The act of failing to report a crime or violation that one has knowledge of to security or management.
+  - C02-21: Looting; The act of stealing items from a crime scene, or otherwise taking items that do not belong to the offender from an area that has recently been the site of a crime or catastrophe.
 
-  ## D-Class Criminal Violations:
+  ## C§ 03 - Indictable Felonies:
 
-  ### These are violations that specifically warrant reducing an employee's job position to Disposable Class, eliminating all their privileges as a normal crew member.
+  C§ 03 encompasses serious violations that are indictable offences, punishment includes: incarceration, corporal punishment, community service and demotions. The maximum sentence for C§ 03 incarceration is 5 minutes.
 
-  - C11 Murder: Purposefully killing someone with no intent to revive.
-  - C12 Treason: Knowingly allying with or being a member of any organization or cult opposed to Nanotrasen.
-  - C13 Prevention of Revival: Hiding bodies or using deception to prevent the revival of someone on the station who has not been given a do not revive order.
-  - C14 Breach of Custody: Removal of anyone who has been arrested from a secure area with the intent to free them, or preventing a security officer from making an arrest.
-  - C15 Embezzlement: Stealing funding from Nanotrasen for the purpose of self-enrichment.
+  - C03-01: Secure Trespass; The act of entering a command or security area one does not have access to without explicit approval from a member of that department.
+  - C03-02: Aggravated Battery; The act of intentionally causing physical harm to another employee by using a weapon or with the intent to cause serious bodily harm or death.
+  - C03-03: Aggravated Assault; The act of threatening an employee with immediate physical harm by using a weapon or with the intent to cause serious bodily harm or death.
+  - C03-04: Grand Larceny; The act of stealing any unique or valuable item that does not belong to the offender, that does not fall under any other sections or codes.
+  - C03-05: Grand Theft; Stealing any high value or importance item.
+  - C03-06: Destruction of Property; This includes killing any of the station-wide "pets" without a good reason.
+  - C03-07: Grand Assault; Any assault on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
+  - C03-08: Grand Battery; Any battery on a member of security, the captain, or the corporate liaison, whether the intent is to murder or not.
+  - C03-09: Unlawful Imprisonment; The act of holding an individual against their will without a justifiable basis. This includes but is not limited to: kidnapping, false arrest, and misconduct regarding incarceration.
+  - C03-10: Possession of Firearms; The act of possessing firearms without proper authorization.
+  - C03-11: Manufacture of Prohibited Weaponry; The act of manufacturing firearms or other prohibited weapons without proper authorization, this includes growing illegal fauna such as gatfruits or capfruits.
+  - C03-12: Manufacture of Narcotics; The act of producing Schedule A/B substances, this includes growing fauna with intent to create narcotics.
+  - C03-13: Obstruction of Justice; The act of interfering with security's ability to work through forceful means, or otherwise impeding the work of officers.
+  - C03-14: Resisting Arrest; The act of using force to resist arrest by security personnel.
+  - C03-15: Vigilantism; The act of taking the law into one's own hand and neglecting their own duties to do such.
+  - C03-16: Involuntary Manslaughter; The act of unintentionally causing the death of another employee through reckless actions or inaction.
+  - C03-17: Grave Robbery; The act of stealing from a corpse.
 
-  # II. Taboo Violations (Law Code TX)
+  ## C§ 04 - Criminal Terminations:
 
-  ### Those who engage in taboo violations open themself up to immidiate execution by security team members.
+  ### C§ 04 encompasses serious violations that specifically void the rights and contract of an employee and result in the disposable classification.
 
+  - C04-01: Homicide; The act of killing another employee, whether intentionally or unintentionally.
+  - C04-02: Attempted Homicide; The act of attempting to kill another employee.
+  - C04-03: Prevention of Revival; The act of intentionally stopping, preventing or hindering the revival process of a deceased employee that does not have a do not resuscitate order through any means. This includes, but is not limited to: removing a corpse from medbay, hiding corpses, removing the corpse's brain or core, turning suit sensors off or otherwise disabling them.
+  - C04-04: Breach of Custody; The act of removing someone or onesself who has been arrested from a secure area with the intent to free them.
+  - C04-05: Embezzlement; The act of stealing money that was entrusted to one's care by the corporation, such as taking money from a request computer for personal use. Heads reserve the right to offer bonuses that do not exceed 300 spesos.
+  - C04-06: Fraud; The act of intentionally deceiving others or the corporation for personal gain.
+  - C04-07: Forgery; The act of creating a false document, signature, stamp or other imitation of an item of value used with the intent to deceive another employee or the corporation.
+  - C04-08: Terrorism; The act of mass violence or destruction against the corporation for ideological or political purposes.
+  - C04-09: Attempted Malicious Engine Sabotage; The act of attempting to sabotage the station's singularity or tesla engine to cause a station-wide catastrophe.
+  - C04-10: Unionization; The act of conspiring with other employees to unionize, striking or asking for "workers rights", which are a violation of corporate rights.
+  - C04-11: Production of Explosives and Incendiary Devices/Reagents; The act of creating explosive or inciendary devices/reagents.
+
+  # II. Taboo Violations Code (Law Code T-XX)
+
+  ### Those who engage in taboo violations open themself up to immediate execution by security.
   ### Security team members should strive to capture alive those who violate taboo for study.
 
-  - T1: Usage of Magic: Demonstrating usage of magic or usage of a magical item.
-  - T2: Conspiracy to Unionize: Conspiring with employees to unionize or asking for "workers rights", which are a violation of corporate rights.
-  - T3: Possession of Psionic Capabilities: Being capable of powers that mimic magic through the mind itself.
-  - T4: Possession of Illegal and dangerous DNA Modification: Commonly known mutations include: changelings, shadowlings, magic organs, or hulk mutations.
+  ### §T encompasses violations that are considered extremely dangerous, unnatural or otherwise forbidden. In the case of T-01, the chaplain is permitted to enforce this law and is advised to cooperate with security regarding such matters.
 
-  # III. Protocol Violations (Law Code PX)
+  - T-01: Magic; The act of practicing magic or usage of a magical item.
+  - T-02: Possession of Psionic Capabilities; The act of possessing powers that mimic magic through the mind itself.
+  - T-03: Possession of Illegal DNA Modification; The act of possessing genetic mutations that are considered dangerous or otherwise taboo, mutations include: magic organs, hulk mutations, ork mutations and other dangerous modifications.
+  - T-04: Malicious Engine Sabotage; The act of sabotaging the station's singularity or tesla engine to cause a station-wide catastrophe.
+  - T-05: Unsanctioned Alien Species; The act of being or bringing unsanctioned alien species onto the station, such as xenomorphs, space carp, changelings, shadowlings and other dangerous fauna.
 
-  ### Protocol violations are generally the least serious and least likely to be punished violations of corporate law.
+  # III. Protocol Violations Code (Law Code P-XX)
 
-  ### When and if they are punished is usually at the discretion of the Nanotrasen Representative, who may request an officer from the HoS to help enforce the punishment.
+  ### §P encompasses protocol violations, which are generally very minor. Punishment is typically decided by managerial staff like command, central command or the corporate liaison rather than security.
 
-  - P1: Time Theft: Any extended use of company time for purposes other than productive work. This generally means spending 15 minutes or more doing things other than one's job-related duties. The typical punishment is having to repay this time through salvage work, or being placed on a work plan that involves direct supervision.
-  - P2: Unsanctioned Social Gatherings:  Attending and organizing parties, weddings, funerals, ect, that have not been written off by management staff.
+  ### When and if they are punished is usually at the discretion of the Corporate Liaison or their superior, who may request an officer to help enforce the punishment.
+  ### Punishment includes, and may not exceed: Demotion, citations, pay docking and increased supervision. In the case of P-01 violations the offending party may be sent to lavaland to make up for lost productivity.
 
-  # IV. Disciplinary Violations (Law Code DX)
+  - P-01: Time Theft; Any extended use of company time for purposes other than productive work. This generally means spending 15 minutes or more doing things other than one's job-related duties.
+  - P-02: Unsanctioned Social Gatherings;  Attending and organizing parties, weddings, funerals, ect, that have not been written off by management staff.
+  - P-03: Inappropriate Use of Departmental Communication Systems; The act of using company communication systems for non-work related purposes.
 
-  ### Disciplinary violations are those that may be enforced at the discretion of security personnel or management staff. The typical punishment for them is corporal punishment.
+  # IV. Disciplinary Violations Code (Law Code D-XX)
 
-  - D1: Excessive Public Drunkenness: Those who show excessive public drunkenness through vomiting and slurring of words are assumed to be impeding their ability to work.
-  - D2: Insubordination: Failure to follow instructions from one's superior is considered insubordination. Their head is allowed to institute corporal punishment through use of a batong to re-instill a sense of discipline within them. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion.
-  - D3: Disrespecting Corporate Authority: Disrespecting either the company, or a security officer acting on behalf of the company, shall result in swift corporal punishment, as well as a public apology being made. If the employee refuses to apologize for their transgression, more serious punishments such as brig time may be enacted.
-  - D4: Departmental Trespassing: Entering a department one does not have access to without explicit approval of a member of that department. Heads of staff can overrule any approvals given by members of their department.
+  ### §D encompasses disciplinary violations that may be enforced at the discretion of security personnel or management staff. The typical punishment for them is corporal punishment.
 
-  # V. Special Disciplinary Violations (Law Code SDX)
+  - D-01: Public Intoxication; The act of being intoxicated, whether by alcohol or illicit substances, outside of designated hospitality areas such as bars, breakrooms, theaters, cafeterias or medbay if undergoing sobering treatment
+  - D-02: Insubordination; The act of willfully disobeying or refusing to follow instructions from one's superior. In the case of security officers being insubordinate to the Head of Security, insubordination is considered much more severe and additional actions may be taken at the Head of Security's discretion.
+  - D-03: Insolence; The act of disrespecting or insulting security or one's superiors. Officers are expected to deliver swift corporal punishment and move on.
 
-  ### These are violations specifically by management staff.
+  # V. Managerial Violations Code (Law Code M-XX)
 
-  - SD1: Managerial Incompetence: When a command member is deemed incompetent at their job by either a member of CentComm, or by a vote among the heads, they shall be immediately stripped of their head of staff equipment, banished to salvage-work, and considered a D-Class employee from then on.
-  - SD2: Insanity: When a command member is deemed as acting "insane" rather than incompetent, such as engaging in excessively silly behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. They may then either prescribe a treatment plan, have the head of staff committed to the brig, or perform a lobotomy and have them work in salvage.
-  - SD3: Conspiracy: Conspiring against the captain to unlawfully seize power without a proper justification shall result in all command members involved being stripped of their head of staff equipment, banished to salvage-work, and considered D-Class employees.
+  ### §M encompasses violations specifically by management staff.
+  ### These violations are decided by the corporate liaison, central command, the captain or a lesser triumvirate of command, and may involve security for enforcement.
 
-  # VI. Work Agreement Violations (Law Code WX)
+  - M-01: Managerial Incompetence; The act of lacking the necessary skill, knowledge, quality or decorum to perform a job or duty. They shall be immediately stripped of their head of staff equipment, banished to salvage-work, and considered a D-Class employee from then on.
+  - M-02: Insanity; The act of being irrational, mentally ill, extremely unreasonable or otherwise not of sound mind, such as engaging in excessively manic or bizarre behavior, they shall be required to submit to either the psychologist or the Chief Medical Officer for a psychological evaluation. They may then either prescribe a treatment plan, have the head of staff committed to the brig, or perform a lobotomy and have them work in salvage.
+  - M-03: Coup de'tat; The act of suddenly and illegaly seizing power against the captain without a proper justification shall result in all command members involved being stripped of their head of staff equipment, banished to salvage-work, and considered D-Class employees.
 
-  ### These are violations specific to workers who are not employees of Nanotrasen.
+  # VI. Foreign Violations Act (Law Code F-XX)
+
+  ### §F encompasses violations specific to workers who are not employees of Nanotrasen.
   ### This includes visitors, salvagers, and other foreign agents.
   ### Punishment is at the discretion of the officer who finds individuals in violation of the code.
 
-  - W1: Fraternization: Socializing with actual Nanotrasen Employees.
-  - W2: Corporate Espionage: Taking proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
-  - W3. Solicitation: Offering services to an employee for spesos or favors outside the scope of their contract, such as a mercenary contractor offering to act as a bodyguard for a Nanotrasen employee.
-  - W4. Poaching: Trying to get a Nanotrasen employee to join their company.
+  - F-01: Fraternization; Socializing with, or attempting to befriend Nanotrasen Employees.
+  - F-02: Corporate Espionage; Taking proprietary Nanotrasen technology. Contractors should be searched before they get on the shuttle.
+  - F-03: Solicitation; The act of offering services to an employee for spesos or favors outside the scope of their contract.
+  - F-04: Poaching; The act of attempting to get a Nanotrasen employee to join their company.
+
+  # VII. Racketeering and Organized Crime Title (Law Section, Code RXX-YY)
+
+  ## R§ 01 - Racketeering Misdemeanours
+
+  R§ 01 encompasses minor violations related to organized crime, corrupt organizations and other forms of racketeering, these are incarceratable offenses with a maximum sentece of 3 minutes.
+  - R01-01: Illegal Gambling; The act of participating in gambling activities that are not sanctioned by the corporation.
+  - R01:02: Money Laundering; The act of concealing the origins of illegaly obtained money through the use of legitimate businesses or financial transactions.
+  - R01-03: Counterfeiting; The act of producing or using imitation currency.
+  - R01-04: Smuggling; The act of illegally importing or exporting contraband into the station.
+  - R01-05: Sale of Contraband; The act of selling items classified as contraband, that does not fall under any other sections or codes.
+  - R01-06: Drug Trafficking; The act of selling Schedule A or B narcotics.
+  - R01-07: Blackmail; The act of threatening to reveal damaging information about another employee unless certain demands are met.
+
+  ## R§ 02 - Racketeering Felonies
+
+  R§ 02 encompasses serious violations related to organized crime and other forms of racketeering, these are incarceratable offenses with a maximum sentece of 5 minutes.
+
+  - R02-01: Extortion; The act of using coercion, threats and/or intimidation to obtain money, property, services or other goods from another employee.
+  - R02-02: Loan Sharking; The act of offering loans or goods at extremely high interest rates, and using threats or violence to collect debts.
+  - R02-03: Weapon Trafficking; The act of selling firearms or other prohibited weapons.
+  - R02-04: Production of Prohibited Weaponry with intent to supply/sell; The act of manufacturing firearms or other prohibited weapons for commercial gain.
+  - R02-05: Production of Narcotics with intent to supply/sell; The act of producing Schedule A or B substances for commercial gain.
+  - R02-06: Possession of a Traffickable Quantity of Narcotics; The act of possessing Schedule A or B substances in a quantity that exceeds 50 units.
+  - R02-07: Operation of an Illegal Business; The act of operating an illegal business, this includes but is not limited to: illegal gambling rings, fight clubs, drug dens, black market shops and other illicit commercial enterprises.
+  - R02-08: Corruption of an Employee; The act of bribing, blackmailing or otherwise corrupting a non-managerial employee to gain illicit advantages.
+
+  ## R§ 03 - Racketeering Terminations
+
+  R§ 03 encompasses serious violations related to organized crime and other forms of racketeering, that specifically void the rights and contract of the employee and result in the dispoable classification.
+
+  - R03-01: Sapient Trafficking; The act of trading or otherwise exploiting other sapient employees for illegal purposes. This includes hypnosis implants or other forms of hypnotic control.
+  - R03-02: Contract Killing; The act of killing someone for monetary gain.
+  - R03-03: Possession of a Commercial Quantity of Narcotics; The act of possessing Schedule A or B substances in a quantity that exceeds 200 units.
+  - R03-04: Operation of a Criminal Enterprise; The act of operating a criminal enterprise such as a gang, mafia, triad, yakuza or other criminal organization.
+  - R03-05: Corruption of a Managerial Official; The act of bribing, blackmailing or otherwise corrupting a member of command to gain illicit advantages.
+
+  # VIII. Parole Violations (Law Code PA-XX)
+
+  ### §PA encompasses violations of parole, which are any violations committed by an employee who has been previously incarcerated, and only applicable to those who have been incarcerated. Parole offenders run the risk of being indicted for a longer sentence for any crime they commit.
+
+  - PA-01: Evasion of Surveillance; The act of intentionally avoiding security surveillance via turning coordinates off.
+  - PA-02: Criminal Association; The act of meeting or talking to known criminals, or otherwise associating with them.
+  - PA-03: Reoffending; The act of commiting any crime after being incarcerated for a previous crime.
+  - PA-04: Intoxication; The act of being under any mind-altering substance, prohibited or legal, while on parole.
 </Document>

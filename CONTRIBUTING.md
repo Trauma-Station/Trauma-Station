@@ -72,6 +72,12 @@ All interactions must be predicted unless you have a very good reason not to do 
 
 All code should be in shared unless they have a hard dependency in server/client or are only used clientside, with no need to have the server control its existence.
 
+### Tags
+
+Tags you add to `Resources/Prototypes/_Trauma/tags.yml` must be added in alphabetical order, with documentation of how they are used.
+For example, if you add a `Katana` tag for a katana sheath' storage whitelist, add `# Used in ClothingBeltKatanaSheath slot whitelist`
+Try to update this documentation if you add a substatial use of a tag.
+
 ## Commenting changes
 
 Changes to upstream files must be commented properly.

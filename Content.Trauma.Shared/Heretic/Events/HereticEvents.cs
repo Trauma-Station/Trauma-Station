@@ -18,7 +18,7 @@ public readonly record struct SetGhoulBoundHereticEvent(EntityUid Heretic, Entit
 public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId Proto, int Amount = 1);
 
 [ByRefEvent]
-public readonly record struct SpawnHereticInfluenceEvent(EntProtoId Proto, int Amount = 1);
+public readonly record struct SpawnHereticInfluenceEvent(int Amount = 1);
 
 [ByRefEvent]
 public readonly record struct UserInvokeTouchSpellEvent;
@@ -40,6 +40,13 @@ public sealed partial class EventHereticAddKnowledge : EntityEventArgs
 {
     [DataField(required: true)]
     public List<ProtoId<HereticKnowledgePrototype>> Knowledge;
+}
+
+[DataDefinition]
+public sealed partial class HereticSetPassiveLevelEvent : EntityEventArgs
+{
+    [DataField(required: true)]
+    public int Level;
 }
 
 [DataDefinition]

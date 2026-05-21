@@ -102,7 +102,8 @@
     toolRepairAmount: 10, 3
     fuelCost: 5
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -145,7 +146,8 @@
     toolRepairAmount: 10, 15
     fuelCost: 5
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -187,7 +189,8 @@
     toolRepairAmount: 10, 15
     fuelCost: 5
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -225,7 +228,8 @@
     maxDamageRoll: 5
     maxRepairBonus: 0
     repairable: false
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -274,7 +278,8 @@
     repairMaterials:
       Whetstone: 15, 25
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -315,7 +320,8 @@
     repairMaterials:
       Whetstone: 15, 25
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -356,7 +362,8 @@
     repairMaterials:
       Whetstone: 15, 25
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -416,11 +423,10 @@
       - durability-metal-9
       - durability-metal-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPlastic1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPlastic1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -462,11 +468,10 @@
       - durability-metal-9
       - durability-metal-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPlastic1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPlastic1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -508,11 +513,10 @@
       - durability-metal-9
       - durability-metal-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetSteel1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetSteel1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -554,11 +558,11 @@
       - durability-wood-9
       - durability-wood-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        MaterialWoodPlank1:
-          min: 2
-          max: 3
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: MaterialWoodPlank1
+      min: 2
+      number: 3
     minDamageRoll: 5
     maxDamageRoll: 10
     repairDoAfter: 3
@@ -600,11 +604,11 @@
       - durability-wood-9
       - durability-wood-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        MaterialWoodPlank1:
-          min: 2
-          max: 3
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: MaterialWoodPlank1
+      min: 2
+      number: 3
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -639,11 +643,9 @@
       Destroyed:
       - durability-shaft-7
       - durability-shaft-8
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        WoodenHandleLong:
-          min: 1
-          max: 1
+    onBreakEffects:
+    - !type:SpawnEntity
+      entity: WoodenHandleLong
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -679,11 +681,9 @@
       Destroyed:
       - durability-shaft-7
       - durability-shaft-8
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        WoodenHandleLong:
-          min: 1
-          max: 1
+    onBreakEffects:
+    - !type:SpawnEntity
+      entity: WoodenHandleLong
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -719,11 +719,10 @@
       Destroyed:
       - durability-shaft-7
       - durability-shaft-8
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPlastic1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPlastic1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -748,11 +747,9 @@
       - durability-plush-9
       - durability-plush-10
       - durability-plush-11
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        PlushieGore:
-          min: 1
-          max: 1
+    onBreakEffects:
+    - !type:SpawnEntity
+      entity: PlushieGore
     minDamageRoll: 999
     maxDamageRoll: 999
     maxRepairBonus: 0
@@ -772,11 +769,11 @@
       - durability-book-9
       - durability-book-10
       - durability-book-11
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPaper1:
-          min: 3
-          max: 5
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPaper1
+      min: 3
+      number: 5
     minDamageRoll: 999
     maxDamageRoll: 999
     maxRepairBonus: 0

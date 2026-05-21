@@ -38,7 +38,7 @@ public sealed partial class MeleeWeaponComponent
     public EntityWhitelist? AltClickAttackWhitelist;
 
     /// <summary>
-    /// If true, melee weapon won't miss on click attacks
+    /// If false, melee weapon won't miss on click attacks
     /// </summary>
     [DataField]
     public bool CanMiss = true;

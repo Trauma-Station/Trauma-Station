@@ -80,7 +80,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             }))
             return;
 
-        _popup.PopupClient("You start up the {name}...", ent, user, PopupType.Medium);
+        _popup.PopupClient($"You start up the {name}...", ent, user, PopupType.Medium);
 
         var ev = new TransferDnaEvent { Donor = user, Recipient = ent };
         RaiseLocalEvent(user, ref ev);

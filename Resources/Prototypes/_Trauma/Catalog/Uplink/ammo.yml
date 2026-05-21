@@ -20,3 +20,14 @@
     Telecrystal: 10
   categories:
   - UplinkAmmo
+
+- type: listing
+  id: Uplink20rdLightRifleMagazine
+  name: uplink-ammo-20rdmagazine-name
+  description: uplink-ammo-20rdmagazine-desc
+  icon: { sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/straight_light_rifle_mag.rsi, state: base }
+  productEntity: MagazineLightRifle20rd
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkAmmo

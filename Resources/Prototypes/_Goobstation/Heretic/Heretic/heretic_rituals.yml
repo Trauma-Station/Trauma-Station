@@ -301,8 +301,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticAsh: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualCrackedLantern
@@ -508,8 +513,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticBlade: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionBlade
@@ -698,8 +708,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticFlesh: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualImperfect
@@ -1044,8 +1059,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticVoid: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionVoid
@@ -1208,8 +1228,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticRust: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionRust
@@ -1376,8 +1401,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticCosmos: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionCosmos
@@ -1538,8 +1568,13 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticLock: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualEldritchId
@@ -1735,10 +1770,16 @@
       - RitualKnowledge
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
-      amount: 4
-    - !type:SetHereticAvailablePassiveLevelEffect
+      knowledge:
+        KnowledgePoint: 2
+        SideKnowledgePoint: 2
+    - !type:EffectsRitualEffect
       applyOn: Mind
-      level: 3
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 3
   - type: HereticKnowledgeRitual
     datasets:
       KnowledgeRitualOrgans: 1
@@ -2112,6 +2153,87 @@
       applyOn: Platform
       output:
         ClothingMaskMadHeretic: 1
+
+- type: entity
+  id: RitualUnfathomableCurio
+  name: Unfathomable Curio
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Lung
+          name: heretic-ritual-ingredient-lung
+        - whitelist:
+            tags:
+            - RodMetal
+          name: heretic-ritual-ingredient-metal-rod
+          amount: 3
+        - whitelist:
+            tags:
+            - UtilityBelt
+          name: heretic-ritual-ingredient-utility-belt
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        UnfathomableCurio: 1
+
+- type: entity
+  id: RitualEldritchCoin
+  name: Eldritch Coin
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    state: heretic
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GoldBar
+          name: heretic-ritual-ingredient-gold
+        - whitelist:
+            tags:
+            - SilverBar
+          name: heretic-ritual-ingredient-silver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        EldritchCoin: 1
 
 ## T2
 - type: entity

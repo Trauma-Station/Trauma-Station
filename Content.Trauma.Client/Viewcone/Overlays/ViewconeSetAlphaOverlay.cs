@@ -123,7 +123,8 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             if (!comp.OccludeIfAnchored && xform.Anchored)
                 continue;
 
-            if (_container.IsEntityInContainer(uid))
+            // floor goblin and maybe other things set ContainerOccluded without being inside a container
+            if (sprite.ContainerOccluded || _container.IsEntityInContainer(uid))
             {
                 if (comp.Memory is { } containedMemory)
                     _sprite.SetVisible(containedMemory, false);
@@ -145,6 +146,10 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             // simplified logic for effects that dont spawn memories or anything likely stealthed
             if (!comp.UseMemory || ((!sprite.Visible || sprite.Color.A < 0.4) && !_occludedQuery.HasComp(uid)))
             {
+                // don't want to show memory for invisible things
+                if (comp.Memory is { } oldMemory)
+                    _sprite.SetVisible(oldMemory, false);
+
                 // save the results so we can use it in resetalpha overlay
                 _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
 
@@ -178,6 +183,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             {
                 // occluded for the first frame, copy original sprite data to memory entity
                 _xform.SetCoordinates(memory, xform.Coordinates);
+                _xform.AttachToGridOrMap(memory); // don't move along with the parent, e.g. for a tile embedded in someone
                 _xform.SetLocalRotation(memory, xform.LocalRotation);
                 _meta.SetEntityName(memory, Identity.Name(uid, _ent));
                 _sprite.CopySprite((uid, sprite), memory);

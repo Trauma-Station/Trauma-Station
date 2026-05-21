@@ -67,7 +67,7 @@ namespace Content.IntegrationTests.Tests
             // <Trauma>
             {"/Maps/_Trauma/gate.yml", ["ShuttleGunPerforator"]},
             {"/Maps/_Goobstation/Nonstations/wizden.yml", ["RubberStampWizard"]},
-            {"/Maps/_Goobstation/Shuttles/ShuttleEvent/instigator.yml", ["ShuttleGunFriendship"]},
+            {"/Maps/_Trauma/Shuttles/ShuttleEvent/instigator.yml", ["ShuttleGunFriendship"]},
             {"/Maps/_Lavaland/Lavaland/ruin_toyshop.yml", ["GoldenBikeHorn", "ClothingHeadHatCatEars"]},
             {"/Maps/_Trauma/bagel.yml", ["RubberStampMime"]},
             {"/Maps/_Trauma/kettle.yml", ["RubberStampSyndicate"]}, // exterior rocks loot

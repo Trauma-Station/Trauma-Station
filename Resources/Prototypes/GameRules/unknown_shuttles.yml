@@ -72,7 +72,7 @@
   - type: StationEvent
     weight: 0.1 #  approximately 1/1000 on the random hostile shuttle table. Golden Legendary!
   - type: LoadMapRule
-    gridPath: /Maps/_Goobstation/Shuttles/ShuttleEvent/instigator.yml # Goob
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/instigator.yml # Trauma
 
 - type: entity
   abstract: true # Goob - nuke the man-o-war

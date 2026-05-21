@@ -1,3 +1,7 @@
+knowledge-path-rust-passive-desc-1 =
+    You heal damage and stamina passively and purge most chemicals when standing on rust.
+    You also become immune to diseases.
+
 knowledge-path-rust-passive-desc-2 = Rust now heals your bones. Healing rate increased.
 knowledge-path-rust-passive-desc-3 = Rust now regenerates lost body parts. Healing rate increased.
 
@@ -15,9 +19,7 @@ knowledge-path-rust-s2-desc =
 
     Your Mansus Grasp will deal massive damage to non-living matter and rust any surface it touches.
     Already rusted surfaces are destroyed.
-    Standing on Rusted tiles heals, purges chems off your body and grants you resistance to batons.
     Allows you to rust basic iron walls and floors.
-    You also become immune to diseases.
 
 knowledge-path-rust-s3-name = Mark of Rust
 knowledge-path-rust-s3-desc =

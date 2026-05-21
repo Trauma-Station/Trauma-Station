@@ -6,7 +6,7 @@
   components:
   # <Trauma>
   - type: Viewcone
-    baseConeAngle: 360 # observers wraiths etc can see everything
+    baseConeAngle: 36000 # observers wraiths etc can see everything basically no matter what
   # </Trauma>
   - type: Sprite
     noRot: true
@@ -15,6 +15,7 @@
   - type: FTLSmashImmune
   - type: CargoSellBlacklist
   - type: MovementSpeedModifier
+    backwardsAngle: 360 # Trauma - ghosts can moonwalk
     baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: MovementIgnoreGravity

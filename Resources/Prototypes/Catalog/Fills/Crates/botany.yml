@@ -86,15 +86,13 @@
           amount: 2
         - id: TobaccoSeeds
           amount: 2
-        - id: CannabisSeeds
-          amount: 2
+        # - id: CannabisSeeds # Trauma - made minor contraband
+        #   amount: 2
         - id: NettleSeeds
           amount: 2
         - id: FlyAmanitaSeeds
           amount: 2
         - id: BungoSeeds
-          amount: 2
-        - id: CocaSeeds # Trauma
           amount: 2
 
 - type: entity

@@ -363,6 +363,11 @@
   components:
   - type: Medibot
     treatments:
+      # <Trauma>
+      SoftCrit:
+        reagent: Inaprovaline
+        quantity: 15
+      # </Trauma>
       Alive:
         reagent: Tricordrazine
         quantity: 30
@@ -371,6 +376,11 @@
         quantity: 15
   - type: EmaggableMedibot
     replacements:
+      # <Trauma>
+      SoftCrit:
+        reagent: SpaceDrugs
+        quantity: 25
+      # </Trauma>
       # when you are fine, medibot will help you go sleep
       Alive:
         reagent: ChloralHydrate
