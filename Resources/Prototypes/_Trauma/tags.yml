@@ -119,6 +119,9 @@
   id: IngotWorkableSteel
 
 - type: Tag
+  id: Katana # Used for sheath whitelist
+
+- type: Tag
   id: Lantern
 
 - type: Tag
@@ -185,7 +188,7 @@
   id: RitualKnowledge
 
 - type: Tag
-  id: SecurityKatana
+  id: Scimitar # Used for scabbard whitelist
 
 - type: Tag
   id: SpaceWhaleSegment
@@ -195,9 +198,6 @@
 
 - type: Tag
   id: SteelScraps
-
-- type: Tag
-  id: Snakesfang
 
 - type: Tag
   id: TechfabMachineBoard

@@ -1,24 +1,11 @@
 ## Belts that need/have visualizers
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband]
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband, BaseSheathCounterAttackMeduim] # Trauma - BaseSheathCounterAttackMeduim
   id: ClothingBeltSheath
   name: sabre sheath
   description: An ornate sheath designed to hold an officer's blade.
   components:
-  # <Trauma>
-  - type: SheathCounterattack
-    blockEffectTime: 10
-    extraCounterAttackDamage:
-      types:
-        Slash: 25
-      woundSeverityMultipliers:
-        Slash: 2
-      armorPenetration: 0.5
-  - type: GuideHelp
-    guides:
-    - CounterAttack
-  # </Trauma>
   - type: Sprite
     sprite: Clothing/Belt/sheath.rsi
     state: sheath

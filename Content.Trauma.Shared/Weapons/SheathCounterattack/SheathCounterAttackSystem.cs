@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -75,8 +76,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
     {
         var user = args.User;
 
-        if (user == ent.Owner || !_counterAttackerQuery.TryComp(user, out var comp) || !_combat.IsInCombatMode(user) ||
-            _hands.GetActiveItem(user) != null)
+        if (user == ent.Owner || !_counterAttackerQuery.TryComp(user, out var comp) || !CanCounterAttack(user))
             return;
 
         if (_status.HasEffectComp<CounterAttackingStatusEffectComponent>(user) ||
@@ -90,7 +90,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
             Priority = 10,
             Act = () =>
             {
-                if (!_combat.IsInCombatMode(user) || _hands.GetActiveItem(user) != null) // check again
+                if (!CanCounterAttack(user)) // check again
                     return;
 
                 if (GetSheathAndWeapon(user) is not { } tuple)
@@ -133,6 +133,11 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
         });
     }
 
+    private bool CanCounterAttack(EntityUid user)
+    {
+        return _combat.IsInCombatMode(user) && _hands.GetHandCount(user) > 0 && _hands.GetActiveItem(user) == null;
+    }
+
     private (Entity<SheathCounterattackComponent>, Entity<MeleeWeaponComponent>)? GetSheathAndWeapon(EntityUid user)
     {
         var ev = new GetCounterAttackSheathEvent();
@@ -146,8 +151,12 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
     private void OnBeforeHarmfulAction(Entity<CounterAttackerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (_net.IsClient || args.Cancelled || !args.CanRiposte || !_combat.IsInCombatMode(ent) ||
-            _hands.GetActiveItem(ent.Owner) != null || !_blocker.CanInteract(ent.Owner, args.Target) ||
+        // This isn't predicted because it calls _riposte.CounterAttack which calls
+        // SharedMeleeWeaponSystem.AttemptLightAttack that does melee lunge animation for all clients except for ent.Owner
+        // (this inclures client session that has attacked this entity).
+        // Predicting would result in lunge animation playing twice for args.User
+        if (_net.IsClient || args.Cancelled || !args.CanRiposte || !CanCounterAttack(ent.Owner) ||
+            !_blocker.CanInteract(ent.Owner, args.Target) ||
             TryComp(args.Used, out MeleeWeaponComponent? melee) && !melee.CanParryLight)
             return;
 
@@ -174,12 +183,18 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
 
         if (_riposte.CounterAttack(weapon, ent, args.User, sheath.Comp.CounterAttackSuccessSound, null))
         {
-            _dmg.ChangeDamage(args.User,
-                sheath.Comp.ExtraCounterAttackDamage,
-                origin: ent,
-                canBeCancelled: false,
-                canMiss: false);
+            var dmg = new DamageSpecifier()
+            {
+                DamageDict = weapon.Comp.Damage.DamageDict.ToDictionary(x => x.Key, x => x.Value * sheath.Comp.ExtraDamageMultiplier),
+                ArmorPenetration = sheath.Comp.ExtraArmorPenetration,
+                WoundSeverityMultipliers = sheath.Comp.ExtraWoundSeverityMultipliers,
+            };
+
+            _dmg.ChangeDamage(args.User, dmg, origin: ent, canBeCancelled: false, canMiss: false);
         }
+
+        QueueDel(uid);
+        args.Cancelled = true;
 
         RaiseNetworkEvent(new RiposteUsedEvent(GetNetEntity(ent.Owner),
                 GetNetEntity(args.User),
@@ -187,8 +202,5 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
                 sheath.Comp.CounterAttackSuccessSound,
                 null),
             ent.Owner);
-
-        PredictedQueueDel(uid);
-        args.Cancelled = true;
     }
 }

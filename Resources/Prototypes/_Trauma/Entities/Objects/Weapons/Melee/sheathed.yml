@@ -13,14 +13,14 @@
       types:
         Slash: 17
     soundHit:
-        path: /Audio/Weapons/bladeslice.ogg
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     storedRotation: -45
     shape:
     - 0,0,0,3
   - type: Tag
     tags:
-    - SecurityKatana
+    - Katana
 
 - type: entity
   parent: [BaseSword, BaseSyndicateContraband]
@@ -46,4 +46,4 @@
     - 0,0,1,2
   - type: Tag
     tags:
-    - Snakesfang
+    - Scimitar

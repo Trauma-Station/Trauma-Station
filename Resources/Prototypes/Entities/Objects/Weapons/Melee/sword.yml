@@ -123,6 +123,11 @@
   id: Katana
   description: Ancient craftwork made with not so ancient plasteel.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Katana
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/katana.rsi
   - type: MeleeWeapon
