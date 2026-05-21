@@ -8,8 +8,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
-using Content.Shared.Teleportation;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -76,13 +74,15 @@ public sealed partial class RandomTeleportSystem : EntitySystem
 
         // play sound before and after teleport if sound is true
         var oldCoords = Transform(target).Coordinates;
-        if (sound) _audio.PlayPvs(rtp.DepartureSound, oldCoords, AudioParams.Default);
+        if (sound)
+            _audio.PlayPredicted(rtp.DepartureSound, oldCoords, predicted ? user : null);
         _sparks.DoSparks(oldCoords); // also sparks!!
 
-        finalWorldPos = RandomTeleport(target, rtp.Radius, rtp.TeleportAttempts, rtp.ForceSafeTeleport);
+        finalWorldPos = RandomTeleport(target, rtp.Radius, rtp.TeleportAttempts, rtp.ForceSafeTeleport, rtp.TeleportPulled);
 
         var newCoords = Transform(target).Coordinates;
-        if (sound) _audio.PlayPvs(rtp.ArrivalSound, newCoords, AudioParams.Default);
+        if (sound)
+            _audio.PlayPredicted(rtp.ArrivalSound, oldCoords, predicted ? user : null);
         _sparks.DoSparks(newCoords);
 
         return true;
@@ -97,7 +97,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         return rand.NextAngle().ToVec() * distance;
     }
 
-    public Vector2 RandomTeleport(EntityUid uid, MinMax radius, int triesBase = 10, bool forceSafe = true, EntityUid? user = null, bool predicted = true)
+    public Vector2 RandomTeleport(EntityUid uid, MinMax radius, int triesBase = 10, bool forceSafe = true, bool pulled = true, EntityUid? user = null, bool predicted = true)
     {
         var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
         IRobustRandom rand = new RobustRandom();
@@ -157,9 +157,8 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         // We haven't found a valid teleport, so just teleport to any spot in range
         if (!foundValid) targetCoords = entityCoords.Offset(GetTeleportVector(rand, radius.Min, extraRadiusBase));
 
-        var map = xform.MapID;
         var newPos = _xform.ToCoordinates(targetCoords);
-        _teleport.Teleport(uid, newPos, user, predicted, pulled: true);
+        _teleport.Teleport(uid, newPos, user, predicted, pulled);
         return newPos.Position;
     }
 }
