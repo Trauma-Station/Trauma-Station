@@ -11,10 +11,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Xenomorphs.Acid;
 
-public abstract class SharedXenomorphAcidSystem : EntitySystem
+public abstract partial class SharedXenomorphAcidSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

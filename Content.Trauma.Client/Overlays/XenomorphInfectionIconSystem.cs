@@ -6,9 +6,9 @@ using Content.Shared.StatusIcon.Components;
 
 namespace Content.Trauma.Client.Overlays;
 
-public sealed class XenomorphInfectionIconSystem : EntitySystem
+public sealed partial class XenomorphInfectionIconSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

@@ -361,7 +361,7 @@
     sprite: _Trauma/Objects/Patreon/ltKRY/helmet.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: ClothingNeckBase
   id: PatreonDrOktober
   name: futuristic jacket
   description: Looks like it came from a scifi novel!

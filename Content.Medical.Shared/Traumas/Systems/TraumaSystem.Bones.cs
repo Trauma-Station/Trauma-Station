@@ -18,7 +18,7 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private void InitBones()
     {

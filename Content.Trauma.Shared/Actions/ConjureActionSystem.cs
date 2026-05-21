@@ -4,9 +4,9 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class ConjureActionSystem : EntitySystem
+public sealed partial class ConjureActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

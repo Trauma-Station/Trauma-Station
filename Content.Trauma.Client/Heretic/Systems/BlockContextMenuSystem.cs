@@ -6,9 +6,9 @@ using Content.Trauma.Shared.Heretic.Components;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class BlockContextMenuSystem : EntitySystem
+public sealed partial class BlockContextMenuSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

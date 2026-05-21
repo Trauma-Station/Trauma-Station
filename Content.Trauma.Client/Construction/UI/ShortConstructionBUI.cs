@@ -14,12 +14,12 @@ using Robust.Shared.Enums;
 
 namespace Content.Trauma.Client.Construction.UI;
 
-public sealed class ShortConstructionBUI : BoundUserInterface
+public sealed partial class ShortConstructionBUI : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IPlacementManager _placement = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IPlacementManager _placement = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly ConstructionSystem _construction;
     private readonly SpriteSystem _sprite;
 

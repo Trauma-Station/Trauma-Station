@@ -8,6 +8,9 @@ fallbackpreset = "Traitor"
 [chat]
 max_announcement_length = 512
 
+[voice]
+barks_enabled = true
+
 [shuttle]
 cooldown = 5
 

@@ -9,9 +9,9 @@ using Content.Trauma.Shared.Heretic.Events;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed class HereticMagicItemSystem : EntitySystem
+public sealed partial class HereticMagicItemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {

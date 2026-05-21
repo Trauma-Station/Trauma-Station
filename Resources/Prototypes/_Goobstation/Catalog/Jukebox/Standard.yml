@@ -1,178 +1,176 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: jukebox
   id: skubstep
   name: Finket - Skubstep
   path:
-    path: /Audio/Lobby/skubstep.ogg
+    path: /Audio/_Goobstation/Lobby/skubstep.ogg
 
 - type: jukebox
   id: sneeds
   name: Burgerchild - Sneeds Feed and Seed
   path:
-    path: /Audio/Lobby/sneedsfeedandseed.ogg
+    path: /Audio/_Goobstation/Lobby/sneedsfeedandseed.ogg
 
 - type: jukebox
   id: clownwmv
   name: Admiral Hippie - Clown.wmv
   path:
-    path: /Audio/Lobby/clownwmv.ogg
+    path: /Audio/_Goobstation/Lobby/clownwmv.ogg
 
 - type: jukebox
   id: clownalwayswins
   name: NИTRODE - Clown Always Wins
   path:
-    path: /Audio/Lobby/clownalwayswins.ogg
+    path: /Audio/_Goobstation/Lobby/clownalwayswins.ogg
 
 - type: jukebox
   id: horn
   name: Scruq - Horn!
   path:
-    path: /Audio/Lobby/horn.ogg
+    path: /Audio/_Trauma/Jukebox/horn.ogg
 
 - type: jukebox
   id: thewizard
   name: Chris Remo - The Wizard
   path:
-    path: /Audio/Lobby/thewizard.ogg
+    path: /Audio/_Trauma/Jukebox/the_wizard.ogg
 
 - type: jukebox
   id: dawsonschristian
   name: Vic Tyler - Dawson's Christian
   path:
-    path: /Audio/Lobby/dawsonschristian.ogg
+    path: /Audio/_Goobstation/Lobby/dawsonschristian.ogg
 
 - type: jukebox
   id: skubstub
   name: DJ B1G YAPPA - SKUBSTUB
   path:
-    path: /Audio/Lobby/skubstub.ogg
+    path: /Audio/_Trauma/Jukebox/skubstub.ogg
 
 - type: jukebox
   id: violet
   name: Mrjajkes - Violet
   path:
-    path: /Audio/_Goobstation/Announcements/violet.ogg
+    path: /Audio/_Goobstation/RadioStation/music/violet.ogg
 
 - type: jukebox
   id: redsun
   name: Red Sun in the Sky
   path:
-    path: /Audio/Lobby/redsun.ogg
+    path: /Audio/_Trauma/Jukebox/redsun.ogg
 
 - type: jukebox
   id: chollima
   name: Pochonbo Electronic Ensemble - Chollima on the Wing
   path:
-    path: /Audio/Lobby/chollima.ogg
+    path: /Audio/_Trauma/Jukebox/chollima.ogg
 
 - type: jukebox
   id: blatantly_nuclear
   name: mrjajkes - Blatantly Nuclear
   path:
-    path: /Audio/StationEvents/blatantly_nuclear.ogg
+    path: /Audio/_Trauma/Jukebox/blatantly_nuclear.ogg
 
 - type: jukebox
   id: countdown
   name: Qwertyqwerty - Countdown
   path:
-    path: /Audio/StationEvents/countdown.ogg
+    path: /Audio/_Trauma/Jukebox/countdown.ogg
 
 - type: jukebox
   id: last_call
   name: Mrjajkes - Last Call
   path:
-    path: /Audio/_Goobstation/StationEvents/last_call.ogg
+    path: /Audio/_Trauma/Jukebox/last_call.ogg
 
 - type: jukebox
   id: running_out
   name: Bolgarich - Running Out
   path:
-    path: /Audio/StationEvents/running_out.ogg
+    path: /Audio/_Trauma/Jukebox/running_out.ogg
 
 - type: jukebox
   id: sound_station_14
   name: Donchan - Sound Station 14
   path:
-    path: /Audio/StationEvents/sound_station_14.ogg
+    path: /Audio/_Trauma/Jukebox/sound_station_14.ogg
 
 - type: jukebox
   id: tansume
   name: Moranbong Band - Tansume
   path:
-    path: /Audio/_Goobstation/StationEvents/tansume.ogg
+    path: /Audio/_Trauma/Jukebox/tansume.ogg
 
 - type: jukebox
   id: absconditus
   name: ZhayTee - Absconditus
   path:
-    path: /Audio/Lobby/absconditus.ogg
+    path: /Audio/_Trauma/Jukebox/absconditus.ogg
 
 - type: jukebox
   id: spaceasshole
   name: Chris Remo - Space Asshole
   path:
-    path: /Audio/Lobby/space_asshole.ogg
+    path: /Audio/_Trauma/Jukebox/space_asshole.ogg
 
 - type: jukebox
   id: endless_space
   name: SolusLunes - Endless Space
   path:
-    path: /Audio/Lobby/endless_space.ogg
+    path: /Audio/_Trauma/Jukebox/endless_space.ogg
 
 - type: jukebox
   id: singuloose
-  name: Janis Schiedková - Singuloose
+  name: Janis Schiedkov - Singuloose
   path:
-    path: /Audio/Lobby/singuloose.ogg
+    path: /Audio/_Trauma/Jukebox/singuloose.ogg
 
 - type: jukebox
   id: comet_haley
   name: Stellardrone - Comet Haley
   path:
-    path: /Audio/Lobby/comet_haley.ogg
+    path: /Audio/_Trauma/Jukebox/comet_haley.ogg
 
 - type: jukebox
   id: title2
   name: Eric Shumaker & Jonathan Dunn - Robocop / Title 2
   path:
-    path: /Audio/Lobby/title2.ogg
+    path: /Audio/_Trauma/Jukebox/title2.ogg
 
 - type: jukebox
   id: spac_stac
   name: Hayabusa - Spac Stac
   path:
-    path: /Audio/Lobby/Spac_Stac.ogg
+    path: /Audio/_Trauma/Jukebox/Spac_Stac.ogg
 
 - type: jukebox
   id: pwmur
   name: Sunbeamstress - Phoron Will Make Us Rich
   path:
-    path: /Audio/Lobby/pwmur.ogg
+    path: /Audio/_Trauma/Jukebox/pwmur.ogg
 
 - type: jukebox
   id: lasers_rip_apart_the_bulkhead
   name: Sunbeamstress - Lasers Rip Apart the Bulkhead
   path:
-    path: /Audio/Lobby/lasers_rip_apart_the_bulkhead.ogg
+    path: /Audio/_Trauma/Jukebox/lasers_rip_apart_the_bulkhead.ogg
 
 - type: jukebox
   id: every_light_is_blinking_at_once
   name: Sunbeamstress - Every Light is Blinking at Once
   path:
-    path: /Audio/Lobby/every_light_is_blinking_at_once.ogg
+    path: /Audio/_Trauma/Jukebox/every_light_is_blinking_at_once.ogg
 
 - type: jukebox
   id: atomicamnesiammx
   name: Philip Dyer - Atomic Amnesia MMX
   path:
-    path: /Audio/Lobby/atomicamnesiammx.ogg
+    path: /Audio/_Trauma/Jukebox/atomicamnesiammx.ogg
 
 - type: jukebox
   id: the_future_soon
   name: Jonathan Coulton - The Future Soon
   path:
-    path: /Audio/Lobby/the_future_soon.ogg
+    path: /Audio/_Goobstation/Lobby/the_future_soon.ogg
 
 - type: jukebox
   id: running_in
@@ -202,7 +200,7 @@
   id: the_final_battle
   name: Bobik-music - The Final Battle
   path:
-    path: /Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg
+    path: /Audio/_Trauma/Jukebox/Colonial_Marines_The_Final_Battle.ogg
 
 - type: jukebox
   id: graytide

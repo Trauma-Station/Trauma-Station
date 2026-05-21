@@ -33,22 +33,22 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class StarGazerSystem : SharedStarGazerSystem
+public sealed partial class StarGazerSystem : SharedStarGazerSystem
 {
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedStarMarkSystem _mark = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedStarMarkSystem _mark = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     private HashSet<Entity<MobStateComponent>> _targets = default!;
 

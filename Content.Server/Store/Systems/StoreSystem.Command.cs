@@ -9,7 +9,7 @@ namespace Content.Server.Store.Systems;
 
 public sealed partial class StoreSystem
 {
-    [Dependency] private readonly IConsoleHost _consoleHost = default!;
+    [Dependency] private IConsoleHost _consoleHost = default!;
 
     public void InitializeCommand()
     {

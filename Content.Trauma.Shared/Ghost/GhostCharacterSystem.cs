@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Ghost;
 /// <summary>
 /// Stores characters you have played in this round, and which character you want to use for reinforcement ghost roles.
 /// </summary>
-public sealed class GhostCharacterSystem : EntitySystem
+public sealed partial class GhostCharacterSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     [ViewVariables(VVAccess.ReadWrite)] // use vvwrite probably
     private Dictionary<NetUserId, CharacterData> _data = new();

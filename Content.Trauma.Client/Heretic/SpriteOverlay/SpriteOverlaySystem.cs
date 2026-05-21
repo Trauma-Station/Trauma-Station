@@ -5,9 +5,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 
-public abstract class SpriteOverlaySystem<T> : EntitySystem where T : BaseSpriteOverlayComponent
+public abstract partial class SpriteOverlaySystem<T> : EntitySystem where T : BaseSpriteOverlayComponent
 {
-    [Dependency] protected readonly SpriteSystem Sprite = default!;
+    [Dependency] protected SpriteSystem Sprite = default!;
 
     public override void Initialize()
     {
@@ -36,7 +36,7 @@ public abstract class SpriteOverlaySystem<T> : EntitySystem where T : BaseSprite
     // source is owner of comp (if null it just assumes ent is owner)
     public virtual void AddOverlay(Entity<SpriteComponent?> ent, T comp, EntityUid? source = null)
     {
-        if (comp.Sprite == null)
+        if (comp.Sprite == null || !comp.Active)
         {
             RemoveOverlay(ent, comp);
             return;
@@ -64,6 +64,8 @@ public abstract class SpriteOverlaySystem<T> : EntitySystem where T : BaseSprite
 
         if (comp.Offset != Vector2.Zero)
             Sprite.LayerSetOffset(ent, layer, comp.Offset);
+
+        Sprite.LayerSetColor(ent, layer, comp.Color);
 
         UpdateOverlayLayer((ent.Owner, ent.Comp), comp, layer, source);
 

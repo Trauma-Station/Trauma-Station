@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Virology.UI;
 
-public sealed class DiseaseDnaSamplerBUI : BoundUserInterface
+public sealed partial class DiseaseDnaSamplerBUI : BoundUserInterface
 {
     private DiseaseDnaSamplerWindow? _window;
 

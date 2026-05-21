@@ -5,7 +5,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Wizard.MagicMirror;
 
-public sealed class WizardMirrorBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class WizardMirrorBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
     private WizardMirrorWindow? _window;

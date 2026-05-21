@@ -10,6 +10,7 @@ namespace Content.Trauma.Common.TileMovement;
 /// be tile-based. Contains info used to facilitate that movement.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+// TODO: make this shit use delta states and properly network stuff
 public sealed partial class TileMovementComponent : Component
 {
     /// <summary>
@@ -60,7 +61,7 @@ public sealed partial class TileMovementComponent : Component
     /// Coordinates of the moving entity on the last physics tick. Null if the entity was not
     /// parented to the same entity last tick.
     /// </summary>
-    [AutoNetworkedField]
+    [AutoNetworkedField] // TODO: DOES NOT NEED TO BE NETWORKED EVERY TICK!?
     public Vector2? LastTickLocalCoordinates;
 
     /// <summary>

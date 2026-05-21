@@ -15,8 +15,8 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     private void InitializeLanguage()
     {

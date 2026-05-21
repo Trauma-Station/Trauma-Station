@@ -14,10 +14,10 @@ using static Content.Shared.Decals.DecalGridComponent;
 namespace Content.Server.Decals;
 
 // Trauma - completely rewrote decals to be entity based
-public sealed class DecalSystem : SharedDecalSystem
+public sealed partial class DecalSystem : SharedDecalSystem
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
     private static readonly Vector2 _boundsMinExpansion = new(0.01f, 0.01f);
     private static readonly Vector2 _boundsMaxExpansion = new(1.01f, 1.01f);

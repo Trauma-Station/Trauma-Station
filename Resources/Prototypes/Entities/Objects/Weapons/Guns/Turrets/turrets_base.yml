@@ -4,6 +4,10 @@
   name: turret
   abstract: true
   components:
+  # <Trauma>
+  - type: ViewconeOccludable
+    occludeIfAnchored: true
+  # </Trauma>
   - type: Clickable
   - type: InteractionOutline
   - type: Actions

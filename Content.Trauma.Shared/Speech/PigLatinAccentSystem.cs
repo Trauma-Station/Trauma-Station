@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Content.Trauma.Shared.Speech;
 
-public sealed class PigLatinAccentSystem : EntitySystem
+public sealed partial class PigLatinAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly char[] Punctuation = { '!', '?', '.', '-' };
     private static readonly char[] Vowels = { 'a', 'e', 'i', 'o', 'u' };
@@ -60,7 +60,8 @@ public sealed class PigLatinAccentSystem : EntitySystem
         }
 
         // append all the punctuation in the message to the final result
-        _builder[0] = char.ToUpper(_builder[0]);
+        if (_builder.Length > 0)
+            _builder[0] = char.ToUpper(_builder[0]);
         _builder.Append(_punctuation);
         return _builder.ToString();
     }

@@ -4,9 +4,9 @@ using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class VoidConduitOverlaySystem : EntitySystem
+public sealed partial class VoidConduitOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void Initialize()
     {

@@ -29,21 +29,21 @@ namespace Content.Trauma.Shared.Projectiles;
 /// Handles predicting projectile hits.
 /// This was previously only done serverside.
 /// </summary>
-public sealed class PredictedProjectileSystem : EntitySystem
+public sealed partial class PredictedProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
 
-    [Dependency] private readonly EntityQuery<ProjectileComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-    [Dependency] private readonly EntityQuery<FixturesComponent> _fixturesQuery = default!;
+    [Dependency] private EntityQuery<ProjectileComponent> _query = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public override void Initialize()
     {

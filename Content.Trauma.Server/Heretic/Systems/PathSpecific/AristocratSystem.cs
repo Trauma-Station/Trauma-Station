@@ -32,33 +32,33 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 // void path heretic exclusive
-public sealed class AristocratSystem : EntitySystem
+public sealed partial class AristocratSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPrototypeManager _prot = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly VoidCurseSystem _voidcurse = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly SharedWeatherSystem _weather = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly EntityQuery<AirlockComponent> _airlockQuery = default!;
-    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private IPrototypeManager _prot = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private VoidCurseSystem _voidcurse = default!;
+    [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedPoweredLightSystem _light = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private SharedWeatherSystem _weather = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private HereticSystem _heretic = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private EntityQuery<AirlockComponent> _airlockQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectsComponent> _statusQuery = default!;
 
     private static readonly EntProtoId IceTilePrototype = "IceCrust";
     private static readonly EntProtoId IceWallPrototype = "WallIce";

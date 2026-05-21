@@ -5,9 +5,9 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class TemperatureDamageMutationSystem : EntitySystem
+public sealed partial class TemperatureDamageMutationSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<TemperatureDamageComponent> _query = default!;
+    [Dependency] private EntityQuery<TemperatureDamageComponent> _query = default!;
 
     public override void Initialize()
     {

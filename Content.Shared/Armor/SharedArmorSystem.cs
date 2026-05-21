@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Body;
 using Content.Shared.Localizations;
-using Content.Trauma.Common.Armor;
 using System.Linq;
 // </Trauma>
 using Content.Shared.Clothing.Components;
@@ -18,9 +17,9 @@ namespace Content.Shared.Armor;
 /// <summary>
 ///     This handles logic relating to <see cref="ArmorComponent" />
 /// </summary>
-public abstract class SharedArmorSystem : EntitySystem
+public abstract partial class SharedArmorSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -56,11 +55,6 @@ public abstract class SharedArmorSystem : EntitySystem
 
         // <Trauma>
         if (args.Args.TargetPart is not {} partType || !component.ArmorCoverage.Contains(partType))
-            return;
-
-        var ev = new ArmorProtectAttemptEvent(args.Args.Origin);
-        RaiseLocalEvent(uid, ref ev);
-        if (ev.Cancelled)
             return;
 
         args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,

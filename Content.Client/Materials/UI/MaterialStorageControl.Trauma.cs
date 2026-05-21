@@ -13,8 +13,8 @@ namespace Content.Client.Materials.UI;
 /// </summary>
 public sealed partial class MaterialStorageControl
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private CommonSiloSystem _silo = default!;
     private TagSystem _tag = default!;
 

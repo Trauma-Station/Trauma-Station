@@ -9,12 +9,12 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed class HereticCloakSystem : EntitySystem
+public sealed partial class HereticCloakSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

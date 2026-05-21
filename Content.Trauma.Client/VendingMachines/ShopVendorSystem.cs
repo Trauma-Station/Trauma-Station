@@ -7,10 +7,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.VendingMachines;
 
-public sealed class ShopVendorSystem : SharedShopVendorSystem
+public sealed partial class ShopVendorSystem : SharedShopVendorSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

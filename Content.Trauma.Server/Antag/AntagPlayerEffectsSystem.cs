@@ -5,9 +5,9 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Server.Antag;
 
-public sealed class AntagPlayerEffectsSystem : EntitySystem
+public sealed partial class AntagPlayerEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

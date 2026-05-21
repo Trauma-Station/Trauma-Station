@@ -106,10 +106,15 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     minimumPlayers: 15
-    weight: 10
+    weight: 5
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
-    table:
-      id: MobCoconutCrab
-      amount: 1, 4
+    table: !type:GroupSelector
+      rolls: 6, 8
+      children:
+      - id: MobCoconutCrab
+      - id: MobCrabTiny
+        weight: 0.625 # Not as scary so make rarer in the event, shrimple as.
+      - id: MobCoconutCrabFloofy # because it looks funny
+        weight: 0.05 # NEVER BASICALLY

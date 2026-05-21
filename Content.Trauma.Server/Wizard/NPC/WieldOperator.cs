@@ -12,7 +12,7 @@ namespace Content.Trauma.Server.Wizard.NPC;
 
 public sealed partial class WieldOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
     {

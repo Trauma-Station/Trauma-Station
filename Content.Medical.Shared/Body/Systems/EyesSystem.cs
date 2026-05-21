@@ -10,11 +10,11 @@ using Robust.Shared.Containers;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class EyesSystem : EntitySystem
+public sealed partial class EyesSystem : EntitySystem
 {
-    [Dependency] private readonly BlindableSystem _blindable = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
+    [Dependency] private BlindableSystem _blindable = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> EyesCategory = "Eyes";
 

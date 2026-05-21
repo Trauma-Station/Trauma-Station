@@ -14,9 +14,9 @@ public sealed partial class DetachOrgan : EntityEffectBase<DetachOrgan>
         => Loc.GetString("entity-effect-guidebook-detach-part", ("chance", Probability));
 }
 
-public sealed class DetachOrganEffectSystem : EntityEffectSystem<ChildOrganComponent, DetachOrgan>
+public sealed partial class DetachOrganEffectSystem : EntityEffectSystem<ChildOrganComponent, DetachOrgan>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<ChildOrganComponent> ent, ref EntityEffectEvent<DetachOrgan> args)
     {

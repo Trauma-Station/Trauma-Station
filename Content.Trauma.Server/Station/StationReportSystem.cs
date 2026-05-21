@@ -1,25 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Text;
 using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using System.Text;
 
 namespace Content.Trauma.Server.Station;
 
 /// <summary>
 /// Creates the station report and sends it to all comms consoles on the station.
 /// </summary>
-public sealed class StationReportSystem : EntitySystem
+public sealed partial class StationReportSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly StationTraitsSystem _traits = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private StationTraitsSystem _traits = default!;
 
     private StringBuilder _sb = new();
     private int _years;

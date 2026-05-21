@@ -11,10 +11,10 @@ namespace Content.Trauma.Server.Lathe;
 /// Makes unpowered lathes stop and start producing depending on being anchored.
 /// Similar to powered lathes when they lose or gain power.
 /// </summary>
-public sealed class LatheAnchorSystem : EntitySystem
+public sealed partial class LatheAnchorSystem : EntitySystem
 {
-    [Dependency] private readonly LatheSystem _lathe = default!;
-    [Dependency] private readonly EntityQuery<ApcPowerReceiverComponent> _powerQuery = default!;
+    [Dependency] private LatheSystem _lathe = default!;
+    [Dependency] private EntityQuery<ApcPowerReceiverComponent> _powerQuery = default!;
 
     public override void Initialize()
     {

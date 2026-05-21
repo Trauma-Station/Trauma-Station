@@ -8,7 +8,7 @@ namespace Content.Goobstation.Server.Enchanting.Systems;
 /// <summary>
 /// Controls <see cref="IgniteOnMeleeHitComponent"/> fire stacks with enchant level.
 /// </summary>
-public sealed class FireAspectEnchantSystem : EntitySystem
+public sealed partial class FireAspectEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

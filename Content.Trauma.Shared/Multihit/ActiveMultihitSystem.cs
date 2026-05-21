@@ -6,9 +6,9 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Trauma.Shared.Multihit;
 
-public abstract class SharedActiveMultihitSystem : EntitySystem
+public abstract partial class SharedActiveMultihitSystem : EntitySystem
 {
-    [Dependency] protected readonly EntityQuery<ActiveMultihitComponent> ActiveQuery = default!;
+    [Dependency] protected EntityQuery<ActiveMultihitComponent> ActiveQuery = default!;
 
     public override void Initialize()
     {
@@ -36,7 +36,7 @@ public abstract class SharedActiveMultihitSystem : EntitySystem
         }
 
         Dirty(ent.Value, active);
-}
+    }
 
     private void OnHit(Entity<ActiveMultihitComponent> ent, ref MeleeHitEvent args)
     {

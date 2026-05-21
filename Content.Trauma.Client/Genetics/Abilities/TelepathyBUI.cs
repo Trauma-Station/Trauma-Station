@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.Abilities;
 
-public sealed class TelepathyBUI : BoundUserInterface
+public sealed partial class TelepathyBUI : BoundUserInterface
 {
     private DialogWindow? _window;
 

@@ -11,9 +11,9 @@ using Content.Trauma.Shared.Silicon.Components;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
 
-public sealed class SharedSiliconChargeSystem : CommonSiliconSystem
+public sealed partial class SharedSiliconChargeSystem : CommonSiliconSystem
 {
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion";
 

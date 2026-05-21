@@ -8,7 +8,7 @@ using Robust.Shared.Map;
 namespace Content.Trauma.Client.FireControl.UI;
 
 [UsedImplicitly]
-public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
+public sealed partial class FireControlConsoleBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private FireControlWindow? _window;

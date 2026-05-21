@@ -1,6 +1,6 @@
 - type: entity
   name: basic lighter
-  parent: [BaseItem, NonweaponDurability] # Trauma
+  parent: BaseItem
   id: Lighter
   description: "A simple plastic cigarette lighter."
   components:

@@ -28,20 +28,20 @@ namespace Content.Trauma.Shared.Parry;
 /// <summary>
 /// This handles logic for <see cref="ParryComponent" />.
 /// </summary>
-public sealed class ParrySystem : EntitySystem
+public sealed partial class ParrySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-    [Dependency] private readonly EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
 
     public override void Initialize()
     {

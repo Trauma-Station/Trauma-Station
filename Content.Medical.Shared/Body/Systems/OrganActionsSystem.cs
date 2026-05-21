@@ -7,10 +7,10 @@ using Content.Shared.Body;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class OrganActionsSystem : EntitySystem
+public sealed partial class OrganActionsSystem : EntitySystem
 {
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     private EntityQuery<OrganComponent> _organQuery;
 

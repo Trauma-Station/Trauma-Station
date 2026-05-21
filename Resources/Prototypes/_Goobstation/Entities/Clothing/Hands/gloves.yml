@@ -338,7 +338,7 @@
 # Knuckle Dusters
 
 - type: entity
-  parent: [BaseItem, KnuckleWeaponsDurability]
+  parent: BaseItem
   id: ClothingHandsKnuckleDustersBase
   abstract: true
   components:
@@ -385,7 +385,7 @@
   #   node: icon
 
 - type: entity
-  parent: [UnbreakableDurability, ClothingHandsKnuckleDustersBase, BaseSyndicateContraband]
+  parent: [ClothingHandsKnuckleDustersBase, BaseSyndicateContraband]
   id: ClothingHandsKnuckleDustersSyndicate
   name: syndicate knuckle dusters
   description: Plastitanium knuckle dusters branded with the syndicate logo. A real man beats someone to death with these.

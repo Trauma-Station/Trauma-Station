@@ -8,10 +8,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
-public sealed class ClothingGrantingSystem : EntitySystem
+public sealed partial class ClothingGrantingSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

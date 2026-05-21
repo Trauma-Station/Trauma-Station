@@ -8,9 +8,9 @@ namespace Content.Trauma.Shared.AlertLevel;
 /// <summary>
 /// Prevents a station going to certain alert levels without being on a required alert level for some time beforehand.
 /// </summary>
-public abstract class SharedAlertLevelLockingSystem : EntitySystem
+public abstract partial class SharedAlertLevelLockingSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {

@@ -7,11 +7,11 @@ using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 
-public sealed class SacramentsOverlaySystem : SpriteOverlaySystem<SacramentsOfPowerComponent>
+public sealed partial class SacramentsOverlaySystem : SpriteOverlaySystem<SacramentsOfPowerComponent>
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly Systems.ShadowCloakSystem _shadow = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private Systems.ShadowCloakSystem _shadow = default!;
 
     private const string AnimationKey = "eye_flash";
 

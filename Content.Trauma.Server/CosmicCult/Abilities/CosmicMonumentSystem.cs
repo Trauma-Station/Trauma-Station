@@ -18,17 +18,17 @@ using System.Linq;
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
 // TODO: why the fuck is this not in MonumentSystem
-public sealed class CosmicMonumentSystem : EntitySystem
+public sealed partial class CosmicMonumentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private HashSet<Entity<MonumentSpawnMarkComponent>> _nearbyMarks = [];
     private HashSet<Entity<FixturesComponent>> _blocking = [];
