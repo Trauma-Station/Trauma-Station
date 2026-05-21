@@ -8,7 +8,7 @@
   work: 200 # its a fucking halberd
   cost: 2
   skills:
-    MetalworkingKnowledge: 2
+    ManufacturingKnowledge: 2
     WeaponsKnowledge: 3
 
 - type: forgedItem
@@ -20,5 +20,5 @@
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
   work: 150
   skills:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     WeaponsKnowledge: 2

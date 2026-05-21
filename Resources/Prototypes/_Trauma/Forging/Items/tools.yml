@@ -24,7 +24,7 @@
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/pickaxe_head.rsi
   work: 170 # need to stretch an ingot out a lot
   skills:
-    MetalworkingKnowledge: 2
+    ManufacturingKnowledge: 2
 
 - type: forgedItem
   id: Crowbar

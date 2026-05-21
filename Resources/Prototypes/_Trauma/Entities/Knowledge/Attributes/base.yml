@@ -6,9 +6,10 @@
     inherent: 1.01
 
 - type: entity
+  parent: BaseAttribute
   id: StrengthAttribute
   name: Strength
-  parent: BaseAttribute
+  description: Hit harder. Lift more.
   components:
   - type: DamageAttribute
     minX: 1.01
@@ -39,9 +40,10 @@
     order: 0
 
 - type: entity
+  parent: BaseAttribute
   id: IntelligenceAttribute
   name: Intelligence
-  parent: BaseAttribute
+  description: One smart cookie! It's been said that David beat Goliath, and he didn't do it with raw strength.
   components:
   - type: AttackAttribute
     minX: 1.01
@@ -52,9 +54,10 @@
     order: 1
 
 - type: entity
+  parent: BaseAttribute
   id: WisdomAttribute
   name: Wisdom
-  parent: BaseAttribute
+  description: A wise old man... A wise old man once said...
   components:
   - type: DefenseAttribute
     minX: 1.01
@@ -70,9 +73,10 @@
     order: 2
 
 - type: entity
+  parent: BaseAttribute
   id: DexterityAttribute
   name: Dexterity
-  parent: BaseAttribute
+  description: Can't go wrong with a little bit of dexterity.
   components:
   - type: AttackAttribute
     minX: 3.01
@@ -98,9 +102,10 @@
     order: 3
 
 - type: entity
+  parent: BaseAttribute
   id: ConstitutionAttribute
   name: Constitution
-  parent: BaseAttribute
+  description: Do you like not dying from chemicals? Like shaking off pain? Maybe a hardier body? Look no further.
   components:
   - type: PhysicalAttribute
     minX: 1.01
@@ -111,17 +116,19 @@
     order: 4
 
 - type: entity
+  parent: BaseAttribute
   id: LooksAttribute
   name: Looks
-  parent: BaseAttribute
+  description: Mog 'em all.
   components:
   - type: Attribute
     order: 5
 
 - type: entity
+  parent: BaseAttribute
   id: CharismaAttribute
   name: Charisma
-  parent: BaseAttribute
+  description: I'm not too sure what this could do. Talk fast?
   components:
   - type: MoraleAttribute
     minX: 1.01

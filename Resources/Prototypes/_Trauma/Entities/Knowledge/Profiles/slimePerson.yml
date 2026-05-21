@@ -10,21 +10,6 @@
     LooksAttribute: -60 # A face only a mother could love.
     CharismaAttribute: 0
   mastery:
-    # Crafting Recipe Skills
-    CookingKnowledge: 0
-    MaterialsKnowledge: 3
-    DoorsKnowledge: 3
-    AirlocksKnowledge: 3
-    ToysKnowledge: 3
-    BananiumKnowledge: 0
-    BotsKnowledge: 0
-    FurnitureKnowledge: 3
-    InfrastructureKnowledge: 3
-    ElectronicsKnowledge: 3
-    WallsKnowledge: 3
-    ScienceKnowledge: 0
-    WindowsKnowledge: 3
-    SmokeablesKnowledge: 0
     # Intelectual Skills
     LiteracyKnowledge: 12
     MagicalLiteracyKnowledge: 0
@@ -38,13 +23,15 @@
     ThrowingKnowledge: 0
     AthleticsKnowledge: 3
     # Crafting Quality
-    FabricationKnowledge: 0
+    CookingKnowledge: 0
+    ManufacturingKnowledge: 3
+    ConstructionKnowledge: 3
+    MechanicsKnowledge: 3
+    ScienceKnowledge: 0
+    ElectronicsKnowledge: 3
+    SurvivalKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 0
-    CarvingKnowledge: 0
-    GunsmithingKnowledge: 0
-    MechanicsKnowledge: 0
-    TailoringKnowledge: 0
+    GunsmithKnowledge: 0
     # Misc Skill
     JanitorKnowledge: 0

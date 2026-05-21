@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.Knowledge.Components;
-using Robust.Shared.Prototypes;
-using Content.Trauma.Common.Knowledge.Prototypes;
-using Content.Trauma.Common.MartialArts;
 
 namespace Content.Trauma.Common.Knowledge.Systems;
 

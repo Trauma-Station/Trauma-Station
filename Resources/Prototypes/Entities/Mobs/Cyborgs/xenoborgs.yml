@@ -56,19 +56,11 @@
   # <Trauma>
   - type: ModifyKnowledgeGrant
     skills:
-      FabricationKnowledge: 60
-      MaterialsKnowledge: 60
-      DoorsKnowledge: 60
-      AirlocksKnowledge: 60
-      FurnitureKnowledge: 60
-      InfrastructureKnowledge: 60
+      ManufacturingKnowledge: 60
+      ConstructionKnowledge: 60
       ElectronicsKnowledge: 60
-      WallsKnowledge: 60
-      WindowsKnowledge: 60
-      MetalworkingKnowledge: 60
-      GunsmithingKnowledge: 60
+      GunsmithKnowledge: 60
       MechanicsKnowledge: 60
-      BotsKnowledge: 60
   # </Trauma>
 
 - type: entity
@@ -165,15 +157,9 @@
   # <Trauma>
   - type: ModifyKnowledgeGrant
     skills:
-      FabricationKnowledge: 20
-      MaterialsKnowledge: 20
-      DoorsKnowledge: 20
-      AirlocksKnowledge: 20
-      FurnitureKnowledge: 20
-      InfrastructureKnowledge: 20
+      ManufacturingKnowledge: 20
+      ConstructionKnowledge: 20
       ElectronicsKnowledge: 20
-      WallsKnowledge: 20
-      WindowsKnowledge: 20
       ShootingKnowledge: 51
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51
@@ -236,15 +222,8 @@
   # <Trauma>
   - type: ModifyKnowledgeGrant
     skills:
-      FabricationKnowledge: 20
-      MaterialsKnowledge: 20
-      DoorsKnowledge: 20
-      AirlocksKnowledge: 20
-      FurnitureKnowledge: 20
-      InfrastructureKnowledge: 20
+      ConstructionKnowledge: 20
       ElectronicsKnowledge: 20
-      WallsKnowledge: 20
-      WindowsKnowledge: 20
       MeleeKnowledge: 51
       StrengthKnowledge: 51
       ToughnessKnowledge: 51
@@ -308,15 +287,9 @@
   # <Trauma>
   - type: ModifyKnowledgeGrant
     skills:
-      FabricationKnowledge: 20
-      MaterialsKnowledge: 20
-      DoorsKnowledge: 20
-      AirlocksKnowledge: 20
-      FurnitureKnowledge: 20
-      InfrastructureKnowledge: 20
+      ManufacturingKnowledge: 20
+      ConstructionKnowledge: 20
       ElectronicsKnowledge: 20
-      WallsKnowledge: 20
-      WindowsKnowledge: 20
       ShootingKnowledge: 51
       ToughnessKnowledge: 51
       AthleticsKnowledge: 51

@@ -14,7 +14,7 @@
     price: 3000
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       MartialArtCQC: 70
     doAfter: 2
   - type: GuideHelp
@@ -38,7 +38,7 @@
     price: 3000
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       MartialArtSleepingCarp: 70
     doAfter: 2
   - type: GuideHelp
@@ -61,7 +61,7 @@
     price: 3000
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       MartialArtCapoeira: 26 # Starts you with all moves, +12.5% movespeed, +50% attack speed, +50% damage
     doAfter: 2
   - type: GuideHelp

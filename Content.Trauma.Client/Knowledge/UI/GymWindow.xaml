@@ -1,0 +1,21 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    Title="Systemic Gym Matrix" MinSize="350 150">
+
+    <BoxContainer Orientation="Vertical" Margin="10">
+
+        <LayoutContainer Name="TrackWrapper" HorizontalExpand="True" MinHeight="40">
+
+            <ProgressBar Name="RhythmProgressBar" 
+                             HorizontalExpand="True" 
+                             MinSize="200 20"
+                             />
+
+            <TextureRect Name="RhythmTrackerImage"
+                         Modulate="#FF0000"
+                         MinSize="24 24" />
+
+        </LayoutContainer>
+
+    </BoxContainer>
+</controls:FancyWindow>

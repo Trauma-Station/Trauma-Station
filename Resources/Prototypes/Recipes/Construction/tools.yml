@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -70,9 +70,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0 # banging 2 rocks together
+    ManufacturingKnowledge: 0 # banging 2 rocks together
   practical:
-    CarvingKnowledge: 2
+    SurvivalKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -84,9 +84,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
   practical:
-    CarvingKnowledge: 2
+    SurvivalKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -98,7 +98,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
     ElectronicsKnowledge: 0
     # TODO: some kind of knowledge that you know about separating liquids by centrifugal forces
   # </Trauma>

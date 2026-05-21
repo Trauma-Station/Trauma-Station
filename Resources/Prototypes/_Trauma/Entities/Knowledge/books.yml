@@ -53,6 +53,13 @@
   - type: KnowledgeGrantOnUse
     singleUse: false # crew books are for sharing
     instant: false
+  - type: ActivatableUI
+    key: enum.GymUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.GymUiKey.Key:
+        type: GymBoundUserInterface
   - type: Tag
     tags:
     - Book
@@ -98,7 +105,7 @@
     layers:
     - state: melee
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       # MeleeKnowledge 35
       WeaponsKnowledge: 35
     experience:
@@ -119,7 +126,7 @@
     layers:
     - state: shooting
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       # MeleeKnowledge 35
       WeaponsKnowledge: 35
     experience:
@@ -140,7 +147,7 @@
     layers:
     - state: janitor
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       ThrowingKnowledge: 26
       JanitorKnowledge: 26
     experience:
@@ -161,10 +168,10 @@
     layers:
     - state: fabrication
   - type: KnowledgeGrantOnUse
-    skills:
-      FabricationKnowledge: 10
+    knowledge:
+      ManufacturingKnowledge: 10
     experience:
-      FabricationKnowledge: 3
+      ManufacturingKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -178,10 +185,10 @@
     layers:
     - state: fabrication
   - type: KnowledgeGrantOnUse
-    skills:
-      FabricationKnowledge: 26
+    knowledge:
+      ManufacturingKnowledge: 26
     experience:
-      FabricationKnowledge: 4
+      ManufacturingKnowledge: 4
     doAfter: 2
 
 # Carving
@@ -197,10 +204,10 @@
     layers:
     - state: fabrication
   - type: KnowledgeGrantOnUse
-    skills:
-      CarvingKnowledge: 10
+    knowledge:
+      SurvivalKnowledge: 10
     experience:
-      CarvingKnowledge: 3
+      SurvivalKnowledge: 3
     doAfter: 2
 
 - type: entity
@@ -214,10 +221,10 @@
     layers:
     - state: fabrication
   - type: KnowledgeGrantOnUse
-    skills:
-      CarvingKnowledge: 26
+    knowledge:
+      SurvivalKnowledge: 26
     experience:
-      CarvingKnowledge: 4
+      SurvivalKnowledge: 4
     doAfter: 2
 
 # Blueprints
@@ -229,10 +236,10 @@
   description: A blueprint with designs for materials.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      MaterialsKnowledge: 26
+    knowledge:
+      ManufacturingKnowledge: 26
     experience:
-      MaterialsKnowledge: 5
+      ManufacturingKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -245,10 +252,10 @@
   description: A blueprint with designs for doors.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      DoorsKnowledge: 26
+    knowledge:
+      ConstructionKnowledge: 26
     experience:
-      DoorsKnowledge: 5
+      ConstructionKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -261,10 +268,10 @@
   description: A blueprint with designs for airlocks.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      AirlocksKnowledge: 26
+    knowledge:
+      ConstructionKnowledge: 26
     experience:
-      AirlocksKnowledge: 5
+      ConstructionKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -277,10 +284,10 @@
   description: A blueprint with designs for toys.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      ToysKnowledge: 26
+    knowledge:
+      MechanicsKnowledge: 26
     experience:
-      ToysKnowledge: 5
+      MechanicsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -293,10 +300,10 @@
   description: A blueprint with designs for bananium structures.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      BananiumKnowledge: 26
+    knowledge:
+      ScienceKnowledge: 26
     experience:
-      BananiumKnowledge: 5
+      ScienceKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -309,10 +316,10 @@
   description: A blueprint with designs for robots.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      BotsKnowledge: 26
+    knowledge:
+      MechanicsKnowledge: 26
     experience:
-      BotsKnowledge: 5
+      MechanicsKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -325,10 +332,10 @@
   description: A blueprint with designs for furniture.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      FurnitureKnowledge: 26
+    knowledge:
+      ConstructionKnowledge: 26
     experience:
-      FurnitureKnowledge: 5
+      ConstructionKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -341,10 +348,10 @@
   description: A blueprint with designs for various pieces of infrastructure.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      InfrastructureKnowledge: 26
+    knowledge:
+      ConstructionKnowledge: 26
     experience:
-      InfrastructureKnowledge: 5
+      ConstructionKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -357,7 +364,7 @@
   description: A blueprint with designs for various electronics.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       ElectronicsKnowledge: 26
     experience:
       ElectronicsKnowledge: 5
@@ -373,10 +380,10 @@
   description: A blueprint with designs for walls.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      WallsKnowledge: 26
+    knowledge:
+      ConstructionKnowledge: 26
     experience:
-      WallsKnowledge: 5
+      ConstructionKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -389,10 +396,10 @@
   description: A blueprint with designs for windows.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      WindowsKnowledge: 26
+    knowledge:
+      ConstructionKnowledge: 26
     experience:
-      WindowsKnowledge: 5
+      ConstructionKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:
@@ -405,10 +412,10 @@
   description: A blueprint with designs for blunts.
   components:
   - type: KnowledgeGrantOnUse
-    skills:
-      SmokeablesKnowledge: 26
+    knowledge:
+      SurvivalKnowledge: 26
     experience:
-      SmokeablesKnowledge: 5
+      SurvivalKnowledge: 5
     doAfter: 2
   - type: Sprite
     layers:

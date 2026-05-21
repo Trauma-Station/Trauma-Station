@@ -32,7 +32,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
     {
         _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
-        return entities.SelectMany(e => _knowledge.TryGetAllKnowledgeUnits(e)?.Select(u => u.Owner) ?? Enumerable.Empty<EntityUid>());
+        return entities.SelectMany(e => _knowledge.TryGetAllKnowledgeUnits(e)?.Select(u => u) ?? Enumerable.Empty<EntityUid>());
     }
 
     [CommandImplementation("clear")]

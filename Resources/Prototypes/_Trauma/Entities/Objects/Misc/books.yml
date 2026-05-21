@@ -32,7 +32,7 @@
       color: "#b8280d"
   - type: UseRequiresSight
   - type: KnowledgeGrantOnUse
-    skills:
+    knowledge:
       LanguageCodespeak: 100
   - type: Tag
     tags:

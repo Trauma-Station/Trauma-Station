@@ -9,7 +9,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false # annoying for construction, masterwork tiles as weapons is sad but not worth the hassle
   # </Trauma>
 

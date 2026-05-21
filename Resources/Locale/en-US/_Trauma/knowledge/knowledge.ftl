@@ -1,7 +1,7 @@
 knowledge-level-up-popup = You gained {$mastery} mastery in {$knowledge}!
 knowledge-unit-learned-popup = You have learned {$knowledge}!
 knowledge-unit-forgotten-popup = You have forgotten the secrets of {$knowledge}!
-knowledge-could-not-learn = This has no more secrets for you to find.
+knowledge-could-not-learn = You've reached a plateau, this can help you no longer. Find something else.
 knowledge-level-more = You learn more about {$knowledge}.
 knowledge-level-epiphany = You have reached a sudden epiphany regarding {$knowledge}!
 

@@ -134,7 +134,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -150,7 +150,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -165,9 +165,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0 # it's a fucking pipe
+    ConstructionKnowledge: 0 # it's a fucking pipe
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -181,9 +181,9 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -197,10 +197,10 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -213,9 +213,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0 # it's a hole in a pipe
+    ConstructionKnowledge: 0 # it's a hole in a pipe
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -229,9 +229,9 @@
   mirror: DisposalRouterFlipped
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -246,9 +246,9 @@
   mirror: DisposalRouter
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -263,10 +263,10 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -282,10 +282,10 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -299,9 +299,9 @@
   mirror: DisposalJunctionFlipped
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 0
+    ManufacturingKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -326,9 +326,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -341,9 +341,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -356,9 +356,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0 # bendy pipe
+    ConstructionKnowledge: 0 # bendy pipe
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 # ATMOS
@@ -377,7 +377,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -395,7 +395,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0 # fire alarms are pretty obvious
+    ConstructionKnowledge: 0 # fire alarms are pretty obvious
   # </Trauma>
 
 - type: construction
@@ -410,7 +410,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -429,7 +429,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   # </Trauma>
 
 - type: construction
@@ -480,9 +480,9 @@
   - GasPipeHalfAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -529,9 +529,9 @@
   - GasPipeStraightAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0 # it's a pipe
+    ConstructionKnowledge: 0 # it's a pipe
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -579,9 +579,9 @@
   - GasPipeBendAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0 # it's a bent pipe
+    ConstructionKnowledge: 0 # it's a bent pipe
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -629,9 +629,9 @@
   - GasPipeTJunctionAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -679,9 +679,9 @@
   - GasPipeFourwayAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -724,9 +724,9 @@
   canBuildInImpassable: true
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 2
+    ManufacturingKnowledge: 2
   # </Trauma>
 
 # ATMOS UNARY
@@ -742,9 +742,9 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -759,9 +759,9 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -776,10 +776,10 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -795,10 +795,10 @@
   - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -819,10 +819,10 @@
   - GasPressurePumpAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -843,10 +843,10 @@
   - GasPressurePumpAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -867,10 +867,10 @@
   - GasPressurePumpAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -890,10 +890,10 @@
   - GasVolumePumpAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -947,9 +947,9 @@
   - GasPassiveGateAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1002,10 +1002,10 @@
   - GasPressureRegulatorAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -1059,9 +1059,9 @@
   - GasValveAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1114,10 +1114,10 @@
   - SignalControlledValveAlt2
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -1165,9 +1165,9 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1180,9 +1180,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1195,9 +1195,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -1211,9 +1211,9 @@
   canBuildInImpassable: false
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   # </Trauma>
 
 # ATMOS TRINARY
@@ -1230,10 +1230,10 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -1264,10 +1264,10 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -1297,10 +1297,10 @@
     - !type:NoUnstackableInTile
   # <Trauma>
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
 
@@ -1354,7 +1354,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -1374,7 +1374,7 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -1395,5 +1395,5 @@
   # <Trauma>
   theory:
     ElectronicsKnowledge: 3
-    InfrastructureKnowledge: 1
+    ConstructionKnowledge: 1
   # </Trauma>

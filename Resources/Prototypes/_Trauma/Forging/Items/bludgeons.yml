@@ -8,7 +8,7 @@
   work: 300 # its a fucking morningstar
   cost: 3
   skills:
-    MetalworkingKnowledge: 2
+    ManufacturingKnowledge: 2
     WeaponsKnowledge: 2
 
 - type: forgedItem
@@ -21,5 +21,5 @@
   work: 200 # its a fucking warhammer
   cost: 2
   skills:
-    MetalworkingKnowledge: 2
+    ManufacturingKnowledge: 2
     WeaponsKnowledge: 2

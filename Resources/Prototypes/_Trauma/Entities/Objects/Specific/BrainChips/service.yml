@@ -24,8 +24,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
-      SmokeablesKnowledge: 50
+      ManufacturingKnowledge: 26
+      SurvivalKnowledge: 50
 
 - type: entity
   parent: BaseSkillChip
@@ -47,5 +47,5 @@
   - type: KnowledgeGrantOnWear
     skills:
       CookingKnowledge: 10
-      FabricationKnowledge: 10 # idk
+      ManufacturingKnowledge: 10 # idk
       LanguageSpaceItalian: 10 # so you can understand chefs

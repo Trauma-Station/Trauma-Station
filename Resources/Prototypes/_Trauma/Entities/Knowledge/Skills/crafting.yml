@@ -7,8 +7,9 @@
 
 - type: entity
   parent: BaseCraftingKnowledge
-  id: FabricationKnowledge
-  name: Fabrication
+  id: ConstructionKnowledge
+  name: Construction
+  description: Infrastructure? Doors? Airlocks? If it's a brick you know how to work it.
   components:
   - type: Skill
     experienceCost: 15
@@ -18,49 +19,77 @@
   parent: BaseCraftingKnowledge
   id: WeaponsKnowledge
   name: Weaponsmith
+  description: Blades? Weaponry is a bit more complicated than just bare manufacturing.
+
+- type: entity
+  parent: BaseCraftingKnowledge
+  id: GunsmithKnowledge
+  name: Gunsmith
+  description: Guns? Weaponry is a bit more complicated than just bare manufacturing.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: ArmorKnowledge
   name: Armorsmith
+  description: Armor's a bit more complicated. All the layers and the curves are complicated enough to warrant it's own skill.
 
 - type: entity
   parent: BaseCraftingKnowledge
-  id: MetalworkingKnowledge
-  name: Metalworking
+  id: ManufacturingKnowledge
+  name: Manufacturing
+  description: Metallurgy? Know what material does what? When it comes to factories and fabrication, you know what to do.
 
 - type: entity
   parent: BaseCraftingKnowledge
-  id: CarvingKnowledge
-  name: Carving
+  id: ElectronicsKnowledge
+  name: Electronics
+  description: If it runs electricity, you've heard of it.
 
 - type: entity
   parent: BaseCraftingKnowledge
-  id: GunsmithingKnowledge
-  name: Gunsmithing
+  id: SurvivalKnowledge
+  name: Survival
+  description: Carving? Tailoring? Detail work? Look no further.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: MechanicsKnowledge
   name: Mechanics
+  description: If it's got gears and whistles, you'll need this.
 
 - type: entity
   parent: BaseCraftingKnowledge
-  id: TailoringKnowledge
-  name: Tailoring
-
-# - type: entity - Also effects quality, but has a few recipes.
-#   parent: BaseCraftingKnowledge
-#   id: ElectronicsKnowledge
-#   name: Electronics
+  id: ScienceKnowledge
+  name: Science
+  description: What the fuck is that?
 
 # TODO: bunch of different types of cooking
 - type: entity
   parent: BaseCraftingKnowledge
   id: CookingKnowledge
   name: Cooking
+  description: Want to cook something that isn't dogshit?
   components:
   - type: Skill
     experienceCost: 15
   - type: ExperienceOnCooking # it just makes sense
     scale: 100 # cook 100 meals to master it from unskilled
+
+- type: entity
+  parent: BaseCraftingKnowledge
+  id: SpiderCraftKnowledge
+  name: Spider Webs
+  description: It's spider time.
+  components:
+  - type: Skill
+    cost: null # Spider only
+
+- type: entity
+  parent: BaseCraftingKnowledge
+  id: RevolutionaryKnowledge
+  name: Revolutionary
+  description: The revolution chose me!
+  components:
+  - type: Skill
+    cost: null # lol
+

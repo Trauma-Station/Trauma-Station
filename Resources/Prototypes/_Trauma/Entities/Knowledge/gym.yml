@@ -1,0 +1,52 @@
+- type: entity
+  parent: BaseItem
+  id: GymItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Gym/dumbbells.rsi
+    layers:
+    - state: base
+  - type: StaticPrice
+    price: 20
+  - type: KnowledgeGrantOnUse
+    singleUse: false
+    instant: false
+  - type: ActivatableUI
+    key: enum.GymUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.GymUiKey.Key:
+        type: GymBoundUserInterface
+  - type: Tag
+    tags:
+    - Book
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: GymItem
+  id: GymItemDumbbell
+  name: Dumbbell
+  suffix: strength
+  description: It's a dumbbell.
+  components:
+  - type: KnowledgeGrantOnUse
+    knowledge:
+      StrengthAttribute: 11
+    experience:
+      StrengthAttribute: 3
+
+- type: entity
+  parent: GymItem
+  id: GymItemDumbbellHeavy
+  name: Heavy Dumbbell
+  suffix: strength
+  description: It's a heavy dumbbell.
+  components:
+  - type: KnowledgeGrantOnUse
+    knowledge:
+      StrengthAttribute: 15
+    experience:
+      StrengthAttribute: 1

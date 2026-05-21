@@ -6,7 +6,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   theory:
-    InfrastructureKnowledge: 0
+    ConstructionKnowledge: 0
     ElectronicsKnowledge: 0
 
 - type: construction

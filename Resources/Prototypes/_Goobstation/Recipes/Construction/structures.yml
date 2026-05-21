@@ -8,9 +8,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
 
 - type: construction
   id: SolarPanel
@@ -34,9 +34,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 1 # good cading is hard
+    ConstructionKnowledge: 1 # good cading is hard
   practical:
-    MetalworkingKnowledge: 4
+    ManufacturingKnowledge: 4
 
 - type: construction
   id: BarricadeSteelFolding
@@ -48,9 +48,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 2
+    ConstructionKnowledge: 2
   practical:
-    MetalworkingKnowledge: 4
+    ManufacturingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteel
@@ -62,9 +62,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 2
+    ConstructionKnowledge: 2
   practical:
-    MetalworkingKnowledge: 4
+    ManufacturingKnowledge: 4
 
 - type: construction
   id: BarricadePlasteelFolding
@@ -76,9 +76,9 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 2
+    ConstructionKnowledge: 2
   practical:
-    MetalworkingKnowledge: 4
+    ManufacturingKnowledge: 4
 
 # Airlocks
 
@@ -93,7 +93,7 @@
   conditions:
     - !type:TileNotBlocked
   theory:
-    AirlocksKnowledge: 1
+    ConstructionKnowledge: 1
   practical:
     MechanicsKnowledge: 2
 
@@ -108,6 +108,6 @@
   conditions:
     - !type:TileNotBlocked
   theory:
-    AirlocksKnowledge: 1
+    ConstructionKnowledge: 1
   practical:
     MechanicsKnowledge: 2

@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -20,7 +20,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -33,7 +33,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -46,7 +46,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -59,7 +59,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -72,7 +72,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -85,7 +85,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -108,7 +108,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -121,7 +121,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -134,7 +134,7 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -147,6 +147,6 @@
   objectType: Item
   # <Trauma>
   theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
+    ManufacturingKnowledge: 0
   useQuality: false
   # </Trauma>

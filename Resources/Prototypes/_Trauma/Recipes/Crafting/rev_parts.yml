@@ -9,8 +9,7 @@
   theory:
     RevolutionaryKnowledge: 0
   practical:
-    FabricationKnowledge: 1
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   useQuality: false
 
 - type: construction

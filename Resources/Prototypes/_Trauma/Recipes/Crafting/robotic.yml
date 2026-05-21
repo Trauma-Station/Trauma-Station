@@ -5,8 +5,7 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    ToysKnowledge: 0
-    BotsKnowledge: 0
+    MechanicsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
 
@@ -17,7 +16,7 @@
 #  category: construction-category-utilities
 #  objectType: Item
 #  theory:
-#    BotsKnowledge: 0
+#    MechanicsKnowledge: 0
 
 - type: construction
   id: DuckBot
@@ -27,7 +26,7 @@
   objectType: Item
   theory:
     CookingKnowledge: 0
-    BotsKnowledge: 0
+    MechanicsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
 
@@ -39,6 +38,6 @@
   objectType: Item
   theory:
     ElectronicsKnowledge: 0
-    BotsKnowledge: 0
+    MechanicsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1

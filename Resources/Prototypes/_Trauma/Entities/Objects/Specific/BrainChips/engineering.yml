@@ -6,16 +6,10 @@
   - type: KnowledgeGrantOnWear
     skills:
       # TODO: O LORD KILL THIS SLOP
-      FabricationKnowledge: 50
-      MaterialsKnowledge: 50
-      DoorsKnowledge: 50
-      AirlocksKnowledge: 50
-      FurnitureKnowledge: 50
-      InfrastructureKnowledge: 50
+      ManufacturingKnowledge: 50
+      ConstructionKnowledge: 50
       ElectronicsKnowledge: 50
-      WallsKnowledge: 50
-      WindowsKnowledge: 50
-      SmokeablesKnowledge: 100 # lol
+      SurvivalKnowledge: 100
 
 - type: entity
   parent: BaseSkillChip
@@ -24,16 +18,10 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
-      AirlocksKnowledge: 16
-      FurnitureKnowledge: 26
-      InfrastructureKnowledge: 50
+      ManufacturingKnowledge: 26
+      ConstructionKnowledge: 50
       ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
-      SmokeablesKnowledge: 50
+      SurvivalKnowledge: 50
 
 - type: entity
   parent: BaseSkillChip
@@ -42,16 +30,10 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
-      AirlocksKnowledge: 16
-      FurnitureKnowledge: 26
-      InfrastructureKnowledge: 26
+      ManufacturingKnowledge: 26
+      ConstructionKnowledge: 26
       ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
-      SmokeablesKnowledge: 50
+      SurvivalKnowledge: 50
 
 - type: entity
   parent: BaseSkillChip
@@ -61,13 +43,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       # TODO: make this just 1 or 2 types
-      FabricationKnowledge: 10
-      MaterialsKnowledge: 10
-      DoorsKnowledge: 10
-      AirlocksKnowledge: 10
-      FurnitureKnowledge: 10
-      InfrastructureKnowledge: 10
+      ManufacturingKnowledge: 10
+      ConstructionKnowledge: 10
       ElectronicsKnowledge: 10
-      WallsKnowledge: 10
-      WindowsKnowledge: 10
-      SmokeablesKnowledge: 50
+      SurvivalKnowledge: 50

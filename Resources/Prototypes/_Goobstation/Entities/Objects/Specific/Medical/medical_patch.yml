@@ -226,9 +226,9 @@
   objectType: Item
   theory:
     FirstAidKnowledge: 0
-    FabricationKnowledge: 1
+    ManufacturingKnowledge: 1
   practical:
-    TailoringKnowledge: 1
+    SurvivalKnowledge: 1
 
 - type: constructionGraph
   id: SilkPatchMakeshift
@@ -254,6 +254,6 @@
   theory:
     SpiderCraftKnowledge: 0
   practical:
-    TailoringKnowledge: 1
+    SurvivalKnowledge: 1
   useQuality: false
   # </Trauma>

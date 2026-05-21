@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "Custom",
+  "copyright": "Created by MayasMischief, licensed AGPL-3.0-or-later.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    }
+  ]
+}

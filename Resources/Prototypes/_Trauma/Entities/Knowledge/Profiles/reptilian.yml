@@ -10,21 +10,6 @@
     LooksAttribute: 0
     CharismaAttribute: 0
   mastery:
-    # Crafting Recipe Skills
-    CookingKnowledge: 0
-    MaterialsKnowledge: 0
-    DoorsKnowledge: 0
-    AirlocksKnowledge: 0
-    ToysKnowledge: 0
-    BananiumKnowledge: 0
-    BotsKnowledge: 0
-    FurnitureKnowledge: 0
-    InfrastructureKnowledge: 0
-    ElectronicsKnowledge: 0
-    WallsKnowledge: 0
-    ScienceKnowledge: 0
-    WindowsKnowledge: 0
-    SmokeablesKnowledge: 0
     # Intelectual Skills
     LiteracyKnowledge: 6
     MagicalLiteracyKnowledge: 0
@@ -38,13 +23,15 @@
     ThrowingKnowledge: 3
     AthleticsKnowledge: 6
     # Crafting Quality
-    FabricationKnowledge: 0
+    CookingKnowledge: 0
+    ManufacturingKnowledge: 0
+    ConstructionKnowledge: 0
+    MechanicsKnowledge: 0
+    ScienceKnowledge: 0
+    ElectronicsKnowledge: 0
+    SurvivalKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 0
-    CarvingKnowledge: 0
-    GunsmithingKnowledge: 0
-    MechanicsKnowledge: 0
-    TailoringKnowledge: 0
+    GunsmithKnowledge: 0
     # Misc Skill
     JanitorKnowledge: 0

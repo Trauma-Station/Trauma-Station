@@ -5,7 +5,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
+      ManufacturingKnowledge: 26
       # evil NT mind control dulling the tiders
       MeleeKnowledge: -5
       ShootingKnowledge: -10
@@ -20,8 +20,8 @@
     #fabrication and furniture for alter building
       LiteracyKnowledge: 26
       MagicalLiteracyKnowledge: 50
-      FurnitureKnowledge: 10
-      FabricationKnowledge: 10
+      ConstructionKnowledge: 10
+      ManufacturingKnowledge: 10
 
 - type: entity
   parent: BaseSkillChip
@@ -30,9 +30,9 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      BananiumKnowledge: 50
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      ScienceKnowledge: 50
+      MechanicsKnowledge: 26
+      ManufacturingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -115,8 +115,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      MechanicsKnowledge: 26
+      ManufacturingKnowledge: 26
   - type: OrganComponents
     onAdd:
     - type: MimePowers # merci
@@ -130,8 +130,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      MechanicsKnowledge: 26
+      ManufacturingKnowledge: 26
       # TODO: music knowledge if anyone makes that...
 
 - type: entity
@@ -142,7 +142,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       LiteracyKnowledge: 26
-      FabricationKnowledge: 26
+      ManufacturingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -151,5 +151,5 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      MechanicsKnowledge: 26
+      ManufacturingKnowledge: 26

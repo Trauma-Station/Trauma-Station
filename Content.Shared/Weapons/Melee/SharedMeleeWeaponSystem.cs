@@ -664,6 +664,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         // <Trauma>
         var attackAttemptEv = new ActiveMeleeResolveEvent(target.Value, meleeUid, damage);
         RaiseLocalEvent(user, ref attackAttemptEv);
+        target = attackAttemptEv.Defender;
         if (attackAttemptEv.Cancelled)
             return;
         damage = attackAttemptEv.Damage;
@@ -844,6 +845,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             // <Trauma>
             var attackAttemptEv = new ActiveMeleeResolveEvent(entity, meleeUid, damage);
             RaiseLocalEvent(user, ref attackAttemptEv);
+            targets[i] = attackAttemptEv.Defender;
+            entity = attackAttemptEv.Defender;
             if (attackAttemptEv.Cancelled)
                 continue;
             var adjustedDamage = attackAttemptEv.Damage;

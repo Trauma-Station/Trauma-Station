@@ -10,22 +10,7 @@
     ConstitutionAttribute: -50 # Do not let them near a flyswatter
     LooksAttribute: -35 # Creepiest thing I've had the displeasure of seeing
     CharismaAttribute: 0
-  mastery:
-    # Crafting Recipe Skills
-    CookingKnowledge: 0
-    MaterialsKnowledge: 1
-    DoorsKnowledge: 2
-    AirlocksKnowledge: 1
-    ToysKnowledge: 0
-    BananiumKnowledge: 0
-    BotsKnowledge: 0
-    FurnitureKnowledge: 2
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-    WallsKnowledge: 2
-    ScienceKnowledge: 0
-    WindowsKnowledge: 2
-    SmokeablesKnowledge: 0
+  skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 4
     MagicalLiteracyKnowledge: 0
@@ -39,13 +24,15 @@
     ThrowingKnowledge: 0
     AthleticsKnowledge: 3
     # Crafting Quality
-    FabricationKnowledge: 1
+    CookingKnowledge: 0
+    ManufacturingKnowledge: 1
+    ConstructionKnowledge: 2
+    MechanicsKnowledge: 1
+    ScienceKnowledge: 0
+    ElectronicsKnowledge: 1
+    SurvivalKnowledge: 1 # gotta make some clothes to eat
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 0
-    CarvingKnowledge: 0
-    GunsmithingKnowledge: 0
-    MechanicsKnowledge: 1
-    TailoringKnowledge: 1 # gotta make some clothes to eat
+    GunsmithKnowledge: 0
     # Misc Skill
     JanitorKnowledge: 0

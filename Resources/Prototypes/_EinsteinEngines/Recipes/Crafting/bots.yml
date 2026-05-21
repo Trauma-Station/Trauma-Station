@@ -6,7 +6,7 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    BotsKnowledge: 1
+    MechanicsKnowledge: 1
   practical:
     ElectronicsKnowledge: 1
 
@@ -18,7 +18,7 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    BotsKnowledge: 1
+    MechanicsKnowledge: 1
   practical:
     ElectronicsKnowledge: 1
 
@@ -31,7 +31,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    MechanicsKnowledge: 1
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>

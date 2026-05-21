@@ -12,7 +12,7 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     /// Knowledge cap that can be used.
     /// </summary>
     [DataField, AlwaysPushInheritance]
-    public Dictionary<EntProtoId, int> Skills = new();
+    public Dictionary<EntProtoId, int> Knowledge = new();
 
     /// <summary>
     /// Experience that will be added per use.
@@ -53,4 +53,7 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     /// </summary>
     [DataField]
     public EntProtoId Ash = "Ash";
+
+    [DataField]
+    public float IdealRhythmInterval = 1.0f;
 }

@@ -6,7 +6,7 @@
   objectType: Item
   theory: {} # it's folding paper bro
   practical:
-    MaterialsKnowledge: 0 # its folding paper bro
+    ManufacturingKnowledge: 0 # its folding paper bro
   useQuality: false
 
 - type: construction
@@ -25,8 +25,7 @@
   category: construction-category-tools
   objectType: Item
   theory:
-    MaterialsKnowledge: 1
-    FabricationKnowledge: 1
+    ManufacturingKnowledge: 1
   useQuality: false
 
 - type: construction

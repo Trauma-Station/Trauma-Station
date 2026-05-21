@@ -4,7 +4,7 @@
   category: Blades
   construction: ForgedShortHandle
   skills:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     WeaponsKnowledge: 1
 
 - type: forgedItem
@@ -12,7 +12,7 @@
   parent: BaseKnife
   id: BaseSword
   skills:
-    MetalworkingKnowledge: 2
+    ManufacturingKnowledge: 2
     WeaponsKnowledge: 2
 
 # Knives

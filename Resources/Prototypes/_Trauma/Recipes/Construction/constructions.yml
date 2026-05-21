@@ -9,7 +9,7 @@
   conditions:
   - !type:TileNotBlocked
   theory:
-    FabricationKnowledge: 0
-    FurnitureKnowledge: 0
+    ManufacturingKnowledge: 0
+    ConstructionKnowledge: 0
   practical:
-    TailoringKnowledge: 1
+    SurvivalKnowledge: 1

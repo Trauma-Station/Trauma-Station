@@ -50,14 +50,12 @@
       MeleeKnowledge: 51
       ShootingKnowledge: 51
       FirstAidKnowledge: 51
-      FabricationKnowledge: 88
+      ManufacturingKnowledge: 88
       WeaponsKnowledge: 88
       ArmorKnowledge: 88
-      MetalworkingKnowledge: 88
-      CarvingKnowledge: 88
-      GunsmithingKnowledge: 88
+      SurvivalKnowledge: 88
+      GunsmithKnowledge: 88
       MechanicsKnowledge: 88
-      TailoringKnowledge: 88
   # </Trauma>
   - type: GhostRole
     name: ghost-role-information-closet-skeleton-name

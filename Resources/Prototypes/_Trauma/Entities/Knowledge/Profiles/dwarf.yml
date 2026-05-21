@@ -10,21 +10,6 @@
     LooksAttribute: -20 # Seen the beard on this guy?
     CharismaAttribute: -20
   skillRolls:
-    # Crafting Recipe Skills - Dwarves dont care for much but making stuff with their hands
-    CookingKnowledge: 0
-    MaterialsKnowledge: 3
-    DoorsKnowledge: 3
-    AirlocksKnowledge: 3
-    ToysKnowledge: 3
-    BananiumKnowledge: 3
-    BotsKnowledge: 3
-    FurnitureKnowledge: 3
-    InfrastructureKnowledge: 3
-    ElectronicsKnowledge: 3
-    WallsKnowledge: 3
-    ScienceKnowledge: 3
-    WindowsKnowledge: 3
-    SmokeablesKnowledge: 3
     # Intelectual Skills
     LiteracyKnowledge: 6
     MagicalLiteracyKnowledge: 0
@@ -38,13 +23,15 @@
     ThrowingKnowledge: 0
     AthleticsKnowledge: 0
     # Crafting Quality - Skilled Craftsmen of the underground
-    FabricationKnowledge: 10
+    CookingKnowledge: 0
+    ManufacturingKnowledge: 10
+    ConstructionKnowledge: 3
+    MechanicsKnowledge: 10
+    ScienceKnowledge: 3
+    ElectronicsKnowledge: 3
+    SurvivalKnowledge: 10
     WeaponsKnowledge: 10
     ArmorKnowledge: 10
-    MetalworkingKnowledge: 10
-    CarvingKnowledge: 10
-    GunsmithingKnowledge: 10
-    MechanicsKnowledge: 10
-    TailoringKnowledge: 10
+    GunsmithKnowledge: 10
     # Misc Skill
     JanitorKnowledge: 0

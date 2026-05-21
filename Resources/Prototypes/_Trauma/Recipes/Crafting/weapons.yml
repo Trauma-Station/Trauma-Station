@@ -6,7 +6,7 @@
 #   category: construction-category-weapons
 #   objectType: Item
 #   theory:
-#     FabricationKnowledge: 3
+#     ManufacturingKnowledge: 3
 #     ElectronicsKnowledge: 1
 #   qualityPrototype: BaseQuality
 #   useQuality: false
@@ -19,10 +19,10 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 3
+    ManufacturingKnowledge: 3
     ElectronicsKnowledge: 2
   practical:
-    GunsmithingKnowledge: 3
+    GunsmithKnowledge: 3
     WeaponsKnowledge: 2
     MechanicsKnowledge: 2
   qualityPrototype: BaseQuality
@@ -35,10 +35,10 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 2
+    ManufacturingKnowledge: 2
     ElectronicsKnowledge: 2
   practical:
-    GunsmithingKnowledge: 3
+    GunsmithKnowledge: 3
     WeaponsKnowledge: 2
     MechanicsKnowledge: 2
   qualityPrototype: BaseQuality
@@ -51,9 +51,9 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 1
+    ManufacturingKnowledge: 1
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   useQuality: false
 
 - type: construction
@@ -64,7 +64,7 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
   practical:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
   useQuality: false

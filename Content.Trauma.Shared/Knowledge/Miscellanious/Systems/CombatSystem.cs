@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -23,6 +24,7 @@ public sealed partial class CombatSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -79,9 +81,11 @@ public sealed partial class CombatSystem : EntitySystem
             if (evOpposedContest.CriticallySucceededUser)
                 return; // If you crit but can't strike the opponent, then what are you fighting?
 
+            var difference = evOpposedContest.DiceOpposed + evOpposedContest.ModOpposed - evOpposedContest.DiceUser - evOpposedContest.ModUser;
+
             if (evOpposedContest.CriticallyFailedUser)
             {
-                var fumbleEv = new OnFumbleEvent(evOpposedContest.DiceOpposed + evOpposedContest.ModOpposed - evOpposedContest.DiceUser - evOpposedContest.ModUser);
+                var fumbleEv = new OnFumbleEvent(difference);
                 RaiseLocalEvent(attacker, ref fumbleEv);
             }
 
@@ -105,7 +109,28 @@ public sealed partial class CombatSystem : EntitySystem
                 _popup.PopupClient("You've been parried.", ent, ent, PopupType.Small);
                 _popup.PopupEntity("You've successfully defended against an opponent.", defender, defender, PopupType.Small);
             }
-            args.Cancelled = true;
+
+            if (difference < 10)
+            {
+                var hands = _hands.EnumerateHands(defender);
+                var handCount = 0;
+                foreach (var hand in hands)
+                {
+                    if (difference > 5 && handCount == 0)
+                    {
+                        handCount++;
+                        continue;
+                    }
+
+                    if (_hands.TryGetHeldItem(defender, hand, out var item))
+                        args.Defender = item.Value;
+                    else
+                        return; // TODO: Replace with hand targeting.
+                    return;
+                }
+            }
+            else
+                args.Cancelled = true;
             return;
         }
 

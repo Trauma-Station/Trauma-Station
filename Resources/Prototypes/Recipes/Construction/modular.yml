@@ -7,10 +7,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 3
+    ManufacturingKnowledge: 3
     MechanicsKnowledge: 3
   # </Trauma>
 
@@ -23,9 +23,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 0
+    ManufacturingKnowledge: 0
     ElectronicsKnowledge: 0
   practical:
-    MetalworkingKnowledge: 3
+    ManufacturingKnowledge: 3
     MechanicsKnowledge: 3
   # </Trauma>

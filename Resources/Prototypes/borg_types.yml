@@ -25,12 +25,10 @@
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
-      ScienceKnowledge: 50 # not good at much else
-      MaterialsKnowledge: 10
-      BotsKnowledge: 50
-      InfrastructureKnowledge: 20
-      WallsKnowledge: 20 # containing anoms or whatever
-      WindowsKnowledge: 20
+      ScienceKnowledge: 50 # containing anoms or whatever
+      ManufacturingKnowledge: 10
+      MechanicsKnowledge: 50
+      ConstructionKnowledge: 20 # not good at much else
   # </Trauma>
 
   # Visual
@@ -77,21 +75,12 @@
   - type: ModifyKnowledgeGrant
     skills:
       # crafting
-      FabricationKnowledge: 60
-      MetalworkingKnowledge: 40
-      CarvingKnowledge: 40
+      ManufacturingKnowledge: 60
+      SurvivalKnowledge: 40
       MechanicsKnowledge: 40
-      # recipes
-      MaterialsKnowledge: 50
-      DoorsKnowledge: 50
-      AirlocksKnowledge: 50
-      BotsKnowledge: 30
-      InfrastructureKnowledge: 50
-      FurnitureKnowledge: 50
+      ConstructionKnowledge: 50
       ElectronicsKnowledge: 50
-      WallsKnowledge: 50
       ScienceKnowledge: 10 # sciborg is better
-      WindowsKnowledge: 50
   # </Trauma>
 
   # Visual
@@ -187,9 +176,8 @@
   - type: ModifyKnowledgeGrant
     skills:
       JanitorKnowledge: 100 # mankind is dead. trash is fuel. disposals is full.
-      MaterialsKnowledge: 10
-      InfrastructureKnowledge: 10
-      WallsKnowledge: 10
+      ManufacturingKnowledge: 10
+      ConstructionKnowledge: 10
   # </Trauma>
 
   lawset: Janitor # DeltaV: Custom lawset
@@ -306,8 +294,7 @@
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
-      ToysKnowledge: 80 # the clown's bitch
-      BotsKnowledge: 50 # honk
+      MechanicsKnowledge: 80 # the clown's bitch
   # </Trauma>
 
   # Visual

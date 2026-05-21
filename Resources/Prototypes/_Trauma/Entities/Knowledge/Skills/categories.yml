@@ -57,17 +57,6 @@
 
 - type: entity
   parent: BaseKnowledge
-  id: BaseRecipesKnowledge
-  abstract: true
-  components:
-  - type: Skill
-    category: Recipes
-    color: "#f39b29"
-    experienceCost: 20
-    timeBetweenExperience: 1
-
-- type: entity
-  parent: BaseKnowledge
   id: BaseLanguageKnowledge
   abstract: true
   components:

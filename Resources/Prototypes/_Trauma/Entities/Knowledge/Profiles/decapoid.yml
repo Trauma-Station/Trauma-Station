@@ -1,23 +1,16 @@
 - type: knowledgeProfile
   id: Decapoid
   # Human but better physical stats
-  pointsLimit: 5
-  mastery:
-    # Crafting Recipe Skills
-    CookingKnowledge: 0
-    MaterialsKnowledge: 1
-    DoorsKnowledge: 1
-    AirlocksKnowledge: 1
-    ToysKnowledge: 1
-    BananiumKnowledge: 0
-    BotsKnowledge: 0
-    FurnitureKnowledge: 1
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
-    WallsKnowledge: 1
-    ScienceKnowledge: 0
-    WindowsKnowledge: 1
-    SmokeablesKnowledge: 0
+  pointsLimit: 50
+  attributes:
+    StrengthAttribute: 0
+    IntelligenceAttribute: 0
+    WisdomAttribute: 15
+    DexterityAttribute: -30
+    ConstitutionAttribute: 20
+    LooksAttribute: -30
+    CharismaAttribute: 0
+  skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 4
     MagicalLiteracyKnowledge: 0
@@ -36,13 +29,15 @@
     MeleeKnowledge: 0
     ShootingKnowledge: 0
     # Crafting Quality
-    FabricationKnowledge: 0
+    CookingKnowledge: 0
+    ManufacturingKnowledge: 1
+    ConstructionKnowledge: 1
+    MechanicsKnowledge: 1
+    ScienceKnowledge: 0
+    ElectronicsKnowledge: 1
+    SurvivalKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 0
-    CarvingKnowledge: 0
-    GunsmithingKnowledge: 0
-    MechanicsKnowledge: 0
-    TailoringKnowledge: 0
+    GunsmithKnowledge: 0
     # Misc Skill
     JanitorKnowledge: 0

@@ -8,7 +8,7 @@
   work: 150 # theres so many of them and they're very intricate
   amount: 6
   skills:
-    MetalworkingKnowledge: 1
+    ManufacturingKnowledge: 1
     WeaponsKnowledge: 1
 
 - type: forgedItem
@@ -19,8 +19,8 @@
   work: 50
   amount: 30
   skills:
-    MetalworkingKnowledge: 1
-    GunsmithingKnowledge: 1
+    ManufacturingKnowledge: 1
+    GunsmithKnowledge: 1
   whitelist:
   - Steel
 
@@ -32,8 +32,8 @@
   work: 50
   amount: 30
   skills:
-    MetalworkingKnowledge: 1
-    GunsmithingKnowledge: 1
+    ManufacturingKnowledge: 1
+    GunsmithKnowledge: 1
   whitelist:
   - Steel
 
@@ -45,7 +45,7 @@
   work: 100
   amount: 30
   skills:
-    MetalworkingKnowledge: 1
-    GunsmithingKnowledge: 1
+    ManufacturingKnowledge: 1
+    GunsmithKnowledge: 1
   whitelist:
   - Steel

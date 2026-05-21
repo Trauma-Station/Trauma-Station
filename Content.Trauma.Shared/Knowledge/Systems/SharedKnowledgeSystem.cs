@@ -11,6 +11,7 @@ using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Knowledge.Systems;
 using Content.Trauma.Common.Silicons.Borgs;
+using Content.Trauma.Shared.Knowledge.Attribute.Attribute;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Language.Systems;
 using Content.Trauma.Shared.Mobs;
@@ -293,6 +294,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             RaiseLocalEvent(ev);
     }
 
+    /// <summary>
+    /// Run on a knowledge brain and id to add exp.
+    /// </summary>
     public void AddExperience(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id, int xp, int levelCap = 100, bool popup = true)
     {
         if (!_skillGain)
@@ -319,20 +323,35 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
-    public void AddExperience(Entity<SkillComponent?> ent, EntityUid target, int added, int limit = 100)
+    /// <summary>
+    /// Run on a knowledge unit and target to add exp.
+    /// </summary>
+    public void AddExperience(EntityUid ent, EntityUid target, int added, int limit = 100)
     {
-        if (!_skillGain || !_skillQuery.Resolve(ent, ref ent.Comp))
+        if (!_skillGain)
             return;
 
-        var now = _timing.CurTime;
-        if (now < ent.Comp.TimeToNextExperience || ent.Comp.LearnedLevel >= Math.Min(limit, 100))
-            return;
+        if (_skillQuery.TryComp(ent, out var skillComp))
+        {
+            var now = _timing.CurTime;
+            if (now < skillComp.TimeToNextExperience || skillComp.LearnedLevel >= Math.Min(limit, 100))
+                return;
 
-        ent.Comp.TimeToNextExperience = now + ent.Comp.TimeBetweenExperience;
-        ent.Comp.Experience += added + ent.Comp.BonusExperience;
-        Dirty(ent);
+            skillComp.TimeToNextExperience = now + skillComp.TimeBetweenExperience;
+            skillComp.Experience += added + skillComp.BonusExperience;
+            Dirty(ent, skillComp);
 
-        RollForLevelUp((ent, ent.Comp), target);
+            RollForLevelUp((ent, skillComp), target);
+        }
+
+        if (_attributeQuery.TryComp(ent, out var attributeComp))
+        {
+            attributeComp.Inherent = AttributeSystem.AdjustAttribute(attributeComp.Attribute, added);
+            Dirty(ent, attributeComp);
+        }
+
+        var updateEv = new UpdateExperienceEvent();
+        RaiseLocalEvent(target, ref updateEv);
     }
 
     /// <summary>
@@ -448,9 +467,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         else if (GetTalent(ent, id) is { } talent)
         {
-            if (talent.Comp.Level < level)
+            if (talent.Comp.Strength < level)
             {
-                talent.Comp.Level = level;
+                talent.Comp.Strength = level;
                 Dirty(talent, talent.Comp);
             }
             return talent.Owner;
@@ -481,7 +500,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
         else if (_talentQuery.TryComp(unit, out var talent))
         {
-            talent.Level = level;
+            talent.Strength = level;
             Dirty(unit, talent);
         }
 
@@ -891,9 +910,18 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// Applies temporary levels from e.g. equipment.
     /// </summary>
     public int GetLevel(EntityUid uid)
-        => _skillQuery.TryComp(uid, out var comp)
-            ? Math.Clamp(comp.NetLevel, 0, 100)
-            : 0;
+    {
+        if (_skillQuery.TryComp(uid, out var skill))
+            return skill.NetLevel;
+
+        if (_attributeQuery.TryComp(uid, out var attribute))
+            return attribute.Attribute.Int();
+
+        if (_talentQuery.TryComp(uid, out var talent))
+            return talent.Level;
+
+        return 0;
+    }
 
     public override int GetInverseMastery(int mastery)
         => mastery switch

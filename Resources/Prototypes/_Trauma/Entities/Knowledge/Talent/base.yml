@@ -8,6 +8,7 @@
   parent: BaseTalent
   id: AttackBonusTalent
   name: Attack Talent
+  description: Hit easier. 
   components:
   - type: AttackTalent
 
@@ -15,6 +16,7 @@
   parent: BaseTalent
   id: DefenseBonusTalent
   name: Defense Talent
+  description: Turtle Style, Go!
   components:
   - type: DefenseTalent
 
@@ -22,20 +24,23 @@
   parent: BaseTalent
   id: DamageBonusTalent
   name: Damage Talent
+  description: Hit harder.
   components:
   - type: DamageTalent
 
 - type: entity
   parent: BaseTalent
-  id: DodgeTalent # Dodge things
+  id: DodgeTalent
   name: Dodge Talent
+  description: You want to dodge bullets? Look no further! Taking this talent will give you the chance to dodge a bullet, but it'll get harder the more you dodge! It'll also help your defense.
   components:
   - type: Dodge
 
 - type: entity
   parent: BaseTalent
-  id: FastHealerTalent # Heal faster
+  id: FastHealerTalent
   name: Fast Healer
+  description: Heal faster. Twice as fast. 
   components:
   - type: FastHealer
 
@@ -43,21 +48,26 @@
   parent: BaseTalent
   id: PoisonResistantTalent
   name: Poison Resistance
-  repeat: true
+  description: Resist all chems! 
   components:
+  - type: Talent
+    repeat: true
   - type: PoisonResistant
 
 - type: entity
   parent: BaseTalent
-  id: StoutTalent # Get knocked down less
+  id: StoutTalent
   name: Stout
+  description: Get knocked down less 
   components:
   - type: Stout
 
 - type: entity
   parent: BaseTalent
-  id: ToughHideTalent # Take one less point of damage
+  id: ToughHideTalent
   name: Tough Hide
-  repeat: true
+  description: You want to not die? Look no further. The tougher your hide, the less damage you'll take. 
   components:
+  - type: Talent
+    repeat: true
   - type: ToughHide

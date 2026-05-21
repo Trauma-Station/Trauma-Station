@@ -6,10 +6,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
+    ManufacturingKnowledge: 2
   practical:
     ArmorKnowledge: 1
-    TailoringKnowledge: 2
+    SurvivalKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -20,11 +20,11 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    ManufacturingKnowledge: 1
     ElectronicsKnowledge: 2
   practical:
     ElectronicsKnowledge: 3
-    TailoringKnowledge: 1
+    SurvivalKnowledge: 1
   # </Trauma>
 
 - type: construction

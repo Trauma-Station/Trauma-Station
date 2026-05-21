@@ -5,10 +5,10 @@
   targetNode: axe
   objectType: Item
   theory:
-    FabricationKnowledge: 1
+    ManufacturingKnowledge: 1
   practical:
     WeaponsKnowledge: 4
-    CarvingKnowledge: 4
+    SurvivalKnowledge: 4
   qualityPrototype: ShitCraft
 
 - type: construction
@@ -18,8 +18,8 @@
   targetNode: dagger
   objectType: Item
   theory:
-    FabricationKnowledge: 1
+    ManufacturingKnowledge: 1
   practical:
     WeaponsKnowledge: 4
-    CarvingKnowledge: 4
+    SurvivalKnowledge: 4
   qualityPrototype: ShitCraft

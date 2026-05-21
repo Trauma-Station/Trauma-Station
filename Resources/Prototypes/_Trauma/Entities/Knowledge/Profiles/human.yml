@@ -11,21 +11,6 @@
     LooksAttribute: 0
     CharismaAttribute: 0
   skillRolls:
-    # Crafting Recipe Skills - 1 is standard unless stated otherwise. A human's dabbled in just about everything.
-    CookingKnowledge: 0
-    MaterialsKnowledge: 3
-    DoorsKnowledge: 3
-    AirlocksKnowledge: 3
-    ToysKnowledge: 3
-    BananiumKnowledge: 0 # Not roundstart, blueprint required.
-    BotsKnowledge: 0 # Not roundstart, blueprint required.
-    FurnitureKnowledge: 3
-    InfrastructureKnowledge: 3
-    ElectronicsKnowledge: 3
-    WallsKnowledge: 3
-    ScienceKnowledge: 0 # Not roundstart, blueprint required.
-    WindowsKnowledge: 3
-    SmokeablesKnowledge: 0 # Not roundstart, blueprint required.
     # Intelectual Skills
     LiteracyKnowledge: 12
     MagicalLiteracyKnowledge: 0
@@ -39,13 +24,14 @@
     ThrowingKnowledge: 0
     AthleticsKnowledge: 0
     # Crafting Quality
-    FabricationKnowledge: 0
+    CookingKnowledge: 0
+    ManufacturingKnowledge: 3
+    ConstructionKnowledge: 3
+    MechanicsKnowledge: 3
+    ScienceKnowledge: 0 # Not roundstart, blueprint required.
+    ElectronicsKnowledge: 3
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 0
-    CarvingKnowledge: 0
-    GunsmithingKnowledge: 0
-    MechanicsKnowledge: 0
-    TailoringKnowledge: 0
+    GunsmithKnowledge: 0
     # Misc Skill
     JanitorKnowledge: 0

@@ -8,7 +8,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    TailoringKnowledge: 3
+    SurvivalKnowledge: 3
 
 - type: construction
   id: ClothingNeckClassicPonchoWeb
@@ -20,7 +20,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    TailoringKnowledge: 4
+    SurvivalKnowledge: 4
 
 - type: construction
   id: ClothingNeckPonchoWeb
@@ -32,7 +32,7 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    TailoringKnowledge: 4
+    SurvivalKnowledge: 4
 
 - type: construction
   id: ClothingNeckCloakWeb
@@ -44,4 +44,4 @@
   theory:
     SpiderCraftKnowledge: 2
   practical:
-    TailoringKnowledge: 4
+    SurvivalKnowledge: 4
