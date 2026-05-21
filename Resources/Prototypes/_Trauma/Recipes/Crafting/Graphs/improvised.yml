@@ -1,5 +1,5 @@
 - type: construction
-  id: KnitBalaclava
+  id: KnitBalaclavaGraph
   start: unfinished
   graph:
   - node: unfinished
