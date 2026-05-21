@@ -9,9 +9,9 @@ using Content.Trauma.Common.Knowledge.Components;
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 
 /// <summary>
-/// Handles all dexterity related bullshit.
+/// Handles all agility feat related things.
 /// </summary>
-public sealed partial class DexteritySystem : EntitySystem
+public sealed partial class AttributeAgilityFeatSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 

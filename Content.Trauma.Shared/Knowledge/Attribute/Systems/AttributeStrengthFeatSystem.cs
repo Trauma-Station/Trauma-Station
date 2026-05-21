@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage;
 using Content.Shared.Popups;
-using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -11,9 +9,9 @@ using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 
 /// <summary>
-/// Handles all strength related bullshit.
+/// Handles all strength feat related things.
 /// </summary>
-public sealed partial class StrengthSystem : EntitySystem
+public sealed partial class AttributeStrengthFeatSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
@@ -22,7 +20,6 @@ public sealed partial class StrengthSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, InstantUncuffEvent>(OnUncuff);
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetUserMeleeDamageEvent>(OnDamageGet);
     }
 
     private void OnUncuff(Entity<KnowledgeHolderComponent> ent, ref InstantUncuffEvent args)
@@ -48,20 +45,5 @@ public sealed partial class StrengthSystem : EntitySystem
         _popup.PopupClient("Holy shit, you broke free!", ent, ent, PopupType.Medium);
 
         args.CuffsBroken = true;
-    }
-
-    private void OnDamageGet(Entity<KnowledgeHolderComponent> ent, ref GetUserMeleeDamageEvent args)
-    {
-        var selfEv = new GetDamageModifierEvent();
-
-        RaiseLocalEvent(ent.Owner, ref selfEv);
-
-        var damage = new DamageModifierSet();
-
-        foreach (var (key, _) in args.Damage.DamageDict)
-        {
-            damage.FlatReduction.Add(key, -selfEv.Mod); // Negative for more damage.
-        }
-        args.Modifiers.Add(damage);
     }
 }
