@@ -1,7 +1,6 @@
 - type: constructionGraph
   id: KnitBalaclavaGraph
   start: unfinished
-  graph:
   - node: unfinished
     edges:
     - to: halfway
