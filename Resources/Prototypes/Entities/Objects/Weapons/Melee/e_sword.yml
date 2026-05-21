@@ -94,7 +94,7 @@
   - type: Parry # Trauma
     reflects:
       - Energy
-    maxParries: 2
+    maxParries: 0
     maxReflects: 10
     reflectSpread: 60
   - type: IgnitionSource
@@ -415,7 +415,7 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
   - type: Parry # Trauma
     maxReflects: 15
-    maxParries: 3
+    maxParries: 0
     reflectSpread: 30
   - type: FlipOnHit # WD EDIT
     lightAttackOnly: true

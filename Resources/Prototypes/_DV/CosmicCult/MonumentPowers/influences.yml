@@ -61,14 +61,14 @@
 - type: influence
   id: InfluenceConversion
   name: influence-name-conversion
-  cost: 15
+  cost: 10
   description: influence-description-conversion
   icon:
     sprite: _DV/CosmicCult/Icons/cosmiccult_abilities.rsi
     state: shatter
   add:
   action: ActionCosmicConversion
-  tier: 2
+  tier: 1
 
 - type: influence
   id: InfluenceAstralStride

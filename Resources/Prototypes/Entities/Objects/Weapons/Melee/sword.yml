@@ -118,7 +118,7 @@
     stealGroup: CaptainSword
   # <Trauma>
   - type: Parry
-    maxParries: 3
+    maxParries: 2
     maxReflects: 0
     parryMinSkill: 40
     soundOnParry:

@@ -606,6 +606,9 @@
   id: CentcomIDCardDeathsquad
   name: death squad ID card
   components:
+  # <Trauma>
+  - type: AntagCard # Weapons? On my station?
+  # </Trauma>
   - type: Sprite
     layers:
     - state: centcom
@@ -658,6 +661,9 @@
   id: NukieAgentIDCard
   suffix: Nukie
   components:
+  # <Trauma>
+  - type: AntagCard # Holy nukie
+  # </Trauma>
   - type: Access
     tags:
     - Maintenance
@@ -681,6 +687,9 @@
   id: SyndicateIDCard
   name: syndicate ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -698,6 +707,9 @@
   id: SyndiOperativeIDCard
   name: syndicate operative ID card
   components:
+  # <Trauma>
+  - type: AntagCard
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -710,6 +722,9 @@
   id: SyndiCorpsmanIDCard
   name: syndicate corpsman ID card
   components:
+  # <Trauma>
+  - type: AntagCard # Holy shit
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -721,6 +736,9 @@
   id: SyndiCommanderIDCard
   name: syndicate commander ID card
   components:
+  # <Trauma>
+  - type: AntagCard # Holy Shit 2
+  # </Trauma>
   - type: Sprite
     layers:
     - state: syndie # Trauma
@@ -758,6 +776,9 @@
   id: PirateIDCard
   name: pirate ID card
   components:
+  # <Trauma>
+  - type: AntagCard # YARGH
+  # </Trauma>
   - type: Sprite
     layers:
     - state: pirate
@@ -775,6 +796,9 @@
   id: PsychologistIDCard
   name: psychologist ID card
   components:
+  # <Trauma>
+  - type: AntagCard # Very much deserved
+  # </Trauma>
   - type: Sprite
     layers:
     - state: default
@@ -824,6 +848,9 @@
   name: prisoner ID card
   description: A generically printed ID card for scummy prisoners.
   components:
+  # <Trauma>
+  - type: AntagCard # Shouldn't be outside of jail.
+  # </Trauma>
   - type: Sprite
     layers:
     - state: orange

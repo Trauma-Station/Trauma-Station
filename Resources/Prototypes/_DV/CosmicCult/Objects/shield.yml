@@ -48,9 +48,9 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
-    maxParries: 0
-    maxReflects: 5
-    reflectMinSkill: 30
+    maxParries: 2 # doesnt work yet, but will in the future
+    maxReflects: 11
+    reflectMinSkill: 25
     soundOnReflect:
       path: /Audio/Weapons/Guns/Hits/ric4.ogg
       params:

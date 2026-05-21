@@ -55,6 +55,8 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     // reduced motion locks it to 0
     private float _grainScale;
     private bool _reducedMotion;
+    private bool _active;
+    private bool _disabled;
 
     public override void Initialize()
     {
@@ -77,6 +79,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         _resetAlphaOverlay = new();
 
         Subs.CVar(_cfg, TraumaCVars.VisionGrainScale, SetGrainScale, true);
+        Subs.CVar(_cfg, TraumaCVars.DisableVisionCones, SetConesDisabled, true);
         Subs.CVar(_cfg, CCVars.ReducedMotion, SetReducedMotion, true);
     }
 
@@ -150,6 +153,18 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
             _coneOverlay.GrainScale = scale;
     }
 
+    private void SetConesDisabled(bool disabled)
+    {
+        _disabled = disabled;
+        if (!_active)
+            return;
+
+        if (_disabled)
+            RemoveOverlays(setActive: false); // remove unless and until cvar is reenabled
+        else
+            AddOverlays(); // add them back
+    }
+
     private void SetReducedMotion(bool on)
     {
         _reducedMotion = on;
@@ -203,16 +218,40 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
 
     private void AddOverlays()
     {
+        if (_disabled)
+            return;
+
+        _active = true;
+
         _overlay.AddOverlay(_coneOverlay);
         _overlay.AddOverlay(_setAlphaOverlay);
         _overlay.AddOverlay(_resetAlphaOverlay);
     }
 
-    private void RemoveOverlays()
+    private void RemoveOverlays(bool setActive = true)
     {
+        if (setActive) // keep its value if cvar is changed live
+            _active = false;
+
         _overlay.RemoveOverlay(_coneOverlay);
         _overlay.RemoveOverlay(_setAlphaOverlay);
         _overlay.RemoveOverlay(_resetAlphaOverlay);
+
+        // hide memories
+        var query = EntityQueryEnumerator<ViewconeOccludableComponent>();
+        while (query.MoveNext(out var comp))
+        {
+            if (comp.Memory is { } memory)
+                _sprite.SetVisible(memory, false);
+        }
+
+        // reset everythings opacity
+        var query2 = EntityQueryEnumerator<ViewconeOccludedComponent>();
+        while (query2.MoveNext(out var uid, out var comp))
+        {
+            _sprite.SetVisible(uid, true);
+            RemCompDeferred(uid, comp);
+        }
     }
 
     // Logic for disabling occluding of entities that you're currently pulling.

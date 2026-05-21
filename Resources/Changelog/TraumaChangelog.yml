@@ -8744,3 +8744,120 @@ Entries:
   id: 998
   time: '2026-05-19T20:19:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2697
+- author: MayasMischief
+  changes:
+  - type: Fix
+    message: Red Onions now mutate into Bloonions
+  id: 999
+  time: '2026-05-20T03:13:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2698
+- author: GeneRickUsername
+  changes:
+  - type: Add
+    message: Officer Beepsky
+  id: 1000
+  time: '2026-05-20T03:57:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/261
+- author: Aineias1
+  changes:
+  - type: Remove
+    message: Derotated saltern(A new map is in works to replace saltern)
+  - type: Tweak
+    message: Omega station can now roll on 0 pop, replacing saltern.
+  id: 1001
+  time: '2026-05-20T06:51:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2693
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Warden skillchip has higher melee and shooting skill now
+  id: 1002
+  time: '2026-05-20T15:50:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2704
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the "demote" status to criminal records
+  id: 1003
+  time: '2026-05-20T15:51:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2696
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added 18 new classes to the Reinforcement Callers
+  - type: Add
+    message: Added an instrument beacon for musicians
+  - type: Add
+    message: Added space mirage pills to psychologist gear
+  id: 1004
+  time: '2026-05-20T16:52:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2657
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Beepsky follows wandsky if patrol is enabled with no waypoints
+  - type: Tweak
+    message: Beepsky can move through areas he has access too.
+  - type: Fix
+    message: Beepsky no longer targets entities inside of inventory.
+  - type: Fix
+    message: Beepsky excess stamina damage.
+  id: 1005
+  time: '2026-05-20T23:09:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2710
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Teleporting with heretic blade no longer takes pulled entity with you.
+  id: 1006
+  time: '2026-05-21T01:53:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2713
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Nerfed parries for coscult sword, captain sabre, esword and desword
+  - type: Tweak
+    message: Removed reflects from coscult sword and moved it to the coscult shield
+  - type: Tweak
+    message: Nerfed Omnizine healing
+  - type: Tweak
+    message: Buffed Heavy xenoborgs
+  - type: Tweak
+    message: >-
+      Made coscult "Shatter Cognition" a tier 1 ability and reduced it's cost to
+      10
+  - type: Tweak
+    message: Made Wraith a subgamemode
+  - type: Tweak
+    message: Syndicate Access Config now costs 10 tc and comes with a syndicate ID
+  - type: Fix
+    message: Fixed pirate ghostroles not having description/name
+  - type: Fix
+    message: Fixed Slaughter Demon not having knowledge and Hell Ripte
+  - type: Fix
+    message: Fixed Ratma being crew aligned
+  - type: Fix
+    message: >-
+      Fixed Wailing Horse being crew aligned and having Ratma's name and
+      description
+  - type: Fix
+    message: Fixed Dragons crippling themselves by blowing their tails off
+  id: 1007
+  time: '2026-05-21T07:25:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2653
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Things out of vision can now be seen after /ghosting etc. that would
+      remove your vision cone.
+  id: 1008
+  time: '2026-05-21T08:07:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2714
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed medibots not treating softcrit people.
+  id: 1009
+  time: '2026-05-21T08:10:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2715

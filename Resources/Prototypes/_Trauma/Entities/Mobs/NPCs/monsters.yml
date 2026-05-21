@@ -97,9 +97,11 @@
   - type: Puller
     needsHands: false
   - type: GhostRole
-    name: ghost-role-ratma-name
-    description: ghost-role-ratma-desc
+    name: ghost-role-information-ratma-name
+    description: ghost-role-information-ratma-desc
     rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: JumpAbility
@@ -308,9 +310,11 @@
   - type: Puller
     needsHands: false
   - type: GhostRole
-    name: ghost-role-ratma-name
-    description: ghost-role-ratma-desc
+    name: ghost-role-information-wailing-horse-name
+    description: ghost-role-information-wailing-horse-desc
     rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: PointLight
