@@ -4,8 +4,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Xenomorphs.Tail;
 
-public sealed class TailVentCrawlSystem : EntitySystem
+public sealed partial class TailVentCrawlSystem : EntitySystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -20,11 +22,7 @@ public sealed class TailVentCrawlSystem : EntitySystem
             return;
 
         foreach (var segment in tailed.TailSegments)
-        {
-            var segmentUid = GetEntity(segment.Segment);
-            if (TryComp<SpriteComponent>(segmentUid, out var sprite))
-                sprite.Visible = false;
-        }
+            _sprite.SetVisible(GetEntity(segment.Segment), false);
     }
 
     private void OnStopVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentRemove args)
@@ -33,10 +31,6 @@ public sealed class TailVentCrawlSystem : EntitySystem
             return;
 
         foreach (var segment in tailed.TailSegments)
-        {
-            var segmentUid = GetEntity(segment.Segment);
-            if (TryComp<SpriteComponent>(segmentUid, out var sprite))
-                sprite.Visible = true;
-        }
+            _sprite.SetVisible(GetEntity(segment.Segment), true);
     }
 }
