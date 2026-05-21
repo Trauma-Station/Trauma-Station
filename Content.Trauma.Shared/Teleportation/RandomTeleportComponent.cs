@@ -37,7 +37,7 @@ public partial class RandomTeleportComponent : Component
 
     [DataField]
     public SoundSpecifier ArrivalSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
-    [DataField]
 
+    [DataField]
     public SoundSpecifier DepartureSound = new SoundPathSpecifier("/Audio/Effects/teleport_departure.ogg");
 }
