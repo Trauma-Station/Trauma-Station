@@ -21,19 +21,19 @@ public sealed partial class ActionVampireGlareComponent : Component
     /// Effects applied to those from behind.
     /// </summary>
     [DataField]
-    public EntityEffect[] BehindEffects;
+    public EntityEffect[] BehindEffects = default!;
 
     /// <summary>
     /// Effects applied to those in front.
     /// </summary>
     [DataField]
-    public EntityEffect[] FrontEffects;
+    public EntityEffect[] FrontEffects = default!;
 
     /// <summary>
     /// Effects applied to those on the sides.
     /// </summary>
     [DataField]
-    public EntityEffect[] SideEffects;
+    public EntityEffect[] SideEffects = default!;
 }
 
 public sealed partial class VampireGlareEvent : InstantActionEvent;
