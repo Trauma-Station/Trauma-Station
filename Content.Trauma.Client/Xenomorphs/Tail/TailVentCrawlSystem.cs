@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.SpaceWhale;
 using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Client.GameObjects;
