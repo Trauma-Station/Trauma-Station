@@ -49,3 +49,14 @@
       CookingKnowledge: 10
       FabricationKnowledge: 10 # idk
       LanguageSpaceItalian: 10 # so you can understand chefs
+
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipRancher # Idk chicken skill when
+  name: skill chip (rancher)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FabricationKnowledge: 26
+      SmokeablesKnowledge: 50
