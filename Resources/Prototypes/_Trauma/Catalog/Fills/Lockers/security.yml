@@ -55,6 +55,7 @@
     - id: WeaponEnergyShotgun
     - id: GunpowderBottlePartFull
     - id: ReinforcementCallerHos
+    - id: SecTrackTablet
 
 - type: entityTable
   id: FillLockerSecurityTrauma

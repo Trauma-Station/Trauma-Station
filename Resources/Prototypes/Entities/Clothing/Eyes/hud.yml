@@ -12,6 +12,7 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: ShowSquadIcons # Trauma - SecTrack
   - type: ShowJobIcons
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons

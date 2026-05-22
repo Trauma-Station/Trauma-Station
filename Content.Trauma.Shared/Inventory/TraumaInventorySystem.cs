@@ -2,11 +2,13 @@
 
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Trauma.Common.Glue;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Lube;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.SecTrack;
 using Content.Trauma.Shared.Tackle;
 using Content.Trauma.Shared.Viewcone;
 
@@ -29,5 +31,6 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GluedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, LubedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, ModifyViewconeAngleEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, RefreshEquipmentHudEvent<ShowSquadIconsComponent>>(_inventory.RelayEvent);
     }
 }

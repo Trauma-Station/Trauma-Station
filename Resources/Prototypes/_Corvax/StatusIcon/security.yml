@@ -1,0 +1,174 @@
+- type: securityIcon
+  id: SecuritySquadIcon
+  abstract: true
+  priority: 4
+  locationPreference: Left
+  isShaded: true
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon0
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: alpha
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon1
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: beta
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon2
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: gamma
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon3
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: delta
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon4
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: epsilon
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon5
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: zeta
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon6
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: heta
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon7
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: theta
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon8
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: iota
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon9
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: kappa
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon10
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: lambda
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon11
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: mu
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon12
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: nu
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon13
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: xi
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon14
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: omicron
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon15
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: pi
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon16
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: ro
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon17
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: sigma
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon18
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: tau
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon19
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: upsilon
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon20
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: fi
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon21
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: hi
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon22
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: psi
+
+- type: securityIcon
+  parent: SecuritySquadIcon
+  id: SecuritySquadIcon23
+  icon:
+    sprite: /Textures/_Corvax/Interface/Misc/security_icons.rsi
+    state: omega

@@ -1,0 +1,29 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<PanelContainer xmlns="https://spacestation14.io"
+                HorizontalExpand="True">
+
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  VerticalAlignment="Center"
+                  SeparationOverride="10">
+
+        <BoxContainer Name="CrewContainer" Orientation="Vertical" HorizontalExpand="True">
+            <Label Name="MemberNameLabel" HorizontalExpand="True" />
+            <BoxContainer Name="JobContainer" Orientation="Horizontal" HorizontalExpand="True">
+                <Label Name="JobTitleLabel" Margin="0 0 5 0" />
+            </BoxContainer>
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal"
+                      VerticalAlignment="Center">
+            <OptionButton Name="SquadDropdown" StyleClasses="SecTrackOptionButton"
+                          MinWidth="50"
+                          Margin="0 0 8 0" />
+        </BoxContainer>
+
+    </BoxContainer>
+
+</PanelContainer>
