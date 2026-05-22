@@ -101,10 +101,11 @@ public sealed partial class CircuitEditorBUI : BoundUserInterface
             return;
 
         _data = cast.Data;
-        if (EntMan.GetEntity(cast.Circuit) is { } circuit &&
+        if (_data is { } data &&
+            EntMan.GetEntity(cast.Circuit) is { } circuit &&
             EntMan.TryGetComponent<CircuitComponent>(circuit, out var comp))
         {
-            comp.Data = cast.Data; // update it so messages can be predicted, basically per-client networked field
+            comp.Data = data; // update it so messages can be predicted, basically per-client networked field
         }
 
         _window?.UpdateState(cast);

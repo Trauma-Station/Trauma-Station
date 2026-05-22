@@ -253,11 +253,14 @@ public sealed partial class CircuitEditorWindow : FancyWindow
 
     private bool IsLinked(CircuitIndex output, CircuitPinControl input)
     {
+        if (_data is not { } data)
+            return false;
+
         if (input.Index.GateIndex is { } g)
-            return _data.Gates.TryGetValue(g, out var gate) && gate.Inputs[input.N] == output;
+            return data.Gates.TryGetValue(g, out var gate) && gate.Inputs[input.N] == output;
 
         return input.Index.PortIndex is { } p &&
-            _data.OutputIndices.TryGetValue(p, out var linked) &&
+            data.OutputIndices.TryGetValue(p, out var linked) &&
             linked == output;
     }
 
