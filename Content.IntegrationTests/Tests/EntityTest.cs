@@ -389,6 +389,7 @@ namespace Content.IntegrationTests.Tests
                 "StatusEffect", // doesnt make sense to spawn unattached, fails test with weather schedulers
                 "GasTank", // maxcaps blow up duh
                 "AshJaunt", // spawns jaunt end animation
+                "SpawnEntityTableOnTrigger", // Spawn thing SPAWNS THING????
                 // </Trauma>
             };
 
