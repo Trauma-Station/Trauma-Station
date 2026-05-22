@@ -132,7 +132,7 @@ public sealed partial class SquadEntry : PanelContainer
     private void SetupIconDropdown()
     {
         IconDropdown.Clear();
-        for (int icon = 0; icon < 23; icon++)
+        for (int icon = 0; icon < 24; icon++)
         {
             IconDropdown.AddItem(GetIconText(icon), icon);
         }
