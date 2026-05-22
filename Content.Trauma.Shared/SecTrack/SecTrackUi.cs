@@ -82,21 +82,21 @@ public sealed class ChangeSquadIconMessage(string squadId, int iconId) : BoundUs
 }
 
 [Serializable, NetSerializable]
-public sealed class ChangeSquadStatusMessage(string squadId, string status) : BoundUserInterfaceMessage
+public sealed class ChangeSquadStatusMessage(string squadId, SquadStatus status) : BoundUserInterfaceMessage
 {
     public string SquadId = squadId;
-    public string Status = status;
+    public SquadStatus Status = status;
 }
 
 [Serializable, NetSerializable]
-public sealed class TimerUpdateState(string timers) : BoundUserInterfaceMessage
+public sealed class TimerUpdateState(List<TimerEntry> timers) : BoundUserInterfaceState
 {
-    public string Timers = timers;
+    public List<TimerEntry> Timers = timers;
 
 }
 
 [Serializable, NetSerializable]
-public sealed class RemoveTimerMessage(string timerUid) : BoundUserInterfaceMessage
+public sealed class RemoveTimerMessage(NetEntity timerUid) : BoundUserInterfaceMessage
 {
-    public string TimerUid = timerUid;
+    public NetEntity TimerUid = timerUid;
 }

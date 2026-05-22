@@ -524,36 +524,9 @@ public sealed partial class SecTrackSystem : EntitySystem
         }
     }
 
-    private string GetIconPrototypeId(SquadIconNum icon)
+    private string GetIconPrototypeId(int icon)
     {
-        return icon switch
-        {
-            SquadIconNum.Alpha => "SecuritySquadIconAlpha",
-            SquadIconNum.Beta => "SecuritySquadIconBeta",
-            SquadIconNum.Gamma => "SecuritySquadIconGamma",
-            SquadIconNum.Delta => "SecuritySquadIconDelta",
-            SquadIconNum.Epsilon => "SecuritySquadIconEpsilon",
-            SquadIconNum.Zeta => "SecuritySquadIconZeta",
-            SquadIconNum.Heta => "SecuritySquadIconHeta",
-            SquadIconNum.Theta => "SecuritySquadIconTheta",
-            SquadIconNum.Iota => "SecuritySquadIconIota",
-            SquadIconNum.Kappa => "SecuritySquadIconKappa",
-            SquadIconNum.Lambda => "SecuritySquadIconLambda",
-            SquadIconNum.Mu => "SecuritySquadIconMu",
-            SquadIconNum.Nu => "SecuritySquadIconNu",
-            SquadIconNum.Xi => "SecuritySquadIconXi",
-            SquadIconNum.Omicron => "SecuritySquadIconOmicron",
-            SquadIconNum.Pi => "SecuritySquadIconPi",
-            SquadIconNum.Ro => "SecuritySquadIconRo",
-            SquadIconNum.Sigma => "SecuritySquadIconSigma",
-            SquadIconNum.Tau => "SecuritySquadIconTau",
-            SquadIconNum.Upsilon => "SecuritySquadIconUpsilon",
-            SquadIconNum.Fi => "SecuritySquadIconFi",
-            SquadIconNum.Hi => "SecuritySquadIconHi",
-            SquadIconNum.Psi => "SecuritySquadIconPsi",
-            SquadIconNum.Omega => "SecuritySquadIconOmega",
-            _ => "SecuritySquadIconAlpha"
-        };
+        return $"SecuritySquadIcon{icon}";
     }
 
     private static string SanitizeString(string input, int maxLength)

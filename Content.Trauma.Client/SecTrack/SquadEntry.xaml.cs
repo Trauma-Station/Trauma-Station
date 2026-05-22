@@ -29,7 +29,7 @@ public sealed partial class SquadEntry : PanelContainer
     public Action<string>? OnUpdateDescriptionPressed;
     public Action<SquadStatus>? OnStatusChanged;
     public Action<string>? OnRemoveMemberPressed;
-    public Action<SquadIconNum>? OnIconChanged;
+    public Action<int>? OnIconChanged;
 
     private readonly SecTrackStyles _styles;
 
@@ -132,15 +132,15 @@ public sealed partial class SquadEntry : PanelContainer
     private void SetupIconDropdown()
     {
         IconDropdown.Clear();
-        foreach (SquadIconNum icon in Enum.GetValues(typeof(SquadIconNum)))
+        for (int icon = 0; icon < 23; icon++)
         {
-            IconDropdown.AddItem(GetIconText(icon), (int) icon);
+            IconDropdown.AddItem(GetIconText(icon), icon);
         }
 
         IconDropdown.OnItemSelected += args =>
         {
             IconDropdown.SelectId(args.Id);
-            var icon = (SquadIconNum) args.Id;
+            var icon = args.Id;
             OnIconChanged?.Invoke(icon);
         };
     }
@@ -506,35 +506,8 @@ public sealed partial class SquadEntry : PanelContainer
         };
     }
 
-    private string GetIconText(SquadIconNum icon)
+    private string GetIconText(int icon)
     {
-        return icon switch
-        {
-            SquadIconNum.Alpha => Loc.GetString("sec-track-icon-alpha"),
-            SquadIconNum.Beta => Loc.GetString("sec-track-icon-beta"),
-            SquadIconNum.Gamma => Loc.GetString("sec-track-icon-gamma"),
-            SquadIconNum.Delta => Loc.GetString("sec-track-icon-delta"),
-            SquadIconNum.Epsilon => Loc.GetString("sec-track-icon-epsilon"),
-            SquadIconNum.Zeta => Loc.GetString("sec-track-icon-zeta"),
-            SquadIconNum.Heta => Loc.GetString("sec-track-icon-heta"),
-            SquadIconNum.Theta => Loc.GetString("sec-track-icon-theta"),
-            SquadIconNum.Iota => Loc.GetString("sec-track-icon-iota"),
-            SquadIconNum.Kappa => Loc.GetString("sec-track-icon-kappa"),
-            SquadIconNum.Lambda => Loc.GetString("sec-track-icon-lambda"),
-            SquadIconNum.Mu => Loc.GetString("sec-track-icon-mu"),
-            SquadIconNum.Nu => Loc.GetString("sec-track-icon-nu"),
-            SquadIconNum.Xi => Loc.GetString("sec-track-icon-xi"),
-            SquadIconNum.Omicron => Loc.GetString("sec-track-icon-omicron"),
-            SquadIconNum.Pi => Loc.GetString("sec-track-icon-pi"),
-            SquadIconNum.Ro => Loc.GetString("sec-track-icon-ro"),
-            SquadIconNum.Sigma => Loc.GetString("sec-track-icon-sigma"),
-            SquadIconNum.Tau => Loc.GetString("sec-track-icon-tau"),
-            SquadIconNum.Upsilon => Loc.GetString("sec-track-icon-upsilon"),
-            SquadIconNum.Fi => Loc.GetString("sec-track-icon-fi"),
-            SquadIconNum.Hi => Loc.GetString("sec-track-icon-hi"),
-            SquadIconNum.Psi => Loc.GetString("sec-track-icon-psi"),
-            SquadIconNum.Omega => Loc.GetString("sec-track-icon-omega"),
-            _ => Loc.GetString("sec-track-unknown")
-        };
+        return Loc.GetString($"sec-track-icon-{icon}");
     }
 }

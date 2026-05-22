@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Client.GameTicking.Managers;
 using Content.Trauma.Shared.SecTrack;
 using Content.Shared.StatusIcon;
@@ -13,13 +12,11 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.SecTrack;
 
-[Virtual]
 [GenerateTypedNameReferences]
 public sealed partial class SecTrackWindow : BaseWindow
 {
@@ -44,7 +41,7 @@ public sealed partial class SecTrackWindow : BaseWindow
     public Action<string, SquadStatus>? OnChangeSquadStatus;
     public Action<string, string>? OnAddMemberToSquad;
     public Action<string, string>? OnRemoveMemberFromSquad;
-    public Action<string, SquadIconNum>? OnChangeSquadIcon;
+    public Action<string, int>? OnChangeSquadIcon;
     public Action<NetEntity>? OnRemoveTimer;
 
     private Stylesheet? _previousGlobalStylesheet;
