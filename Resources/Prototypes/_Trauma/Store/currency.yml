@@ -9,5 +9,5 @@
   id: SpesosFake
   displayName: store-currency-display-fake-spesos
   cash:
-    1: SpaceCashFake
+    1: SpaceCashCounterfeit
   canWithdraw: true
