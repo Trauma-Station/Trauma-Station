@@ -518,7 +518,7 @@ public enum LogType
     /// Trauma - Vampire related logs.
     /// </summary>
     Vampire = 20003,
-    
+
     /// <summary>
     /// Trauma - Circuits related logs.
     /// </summary>
