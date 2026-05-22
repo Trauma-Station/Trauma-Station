@@ -169,6 +169,11 @@ public sealed partial class StoreMenu : DefaultWindow
     {
         var text = string.Empty;
 
+        // <Trauma>
+        if (GetListingAltPriceString(listing) is { } altText)
+            return altText;
+        // </Trauma>
+
         if (listing.Cost.Count < 1)
             text = Loc.GetString("store-currency-free");
         else
@@ -205,7 +210,7 @@ public sealed partial class StoreMenu : DefaultWindow
             foreach (var (currency, amount) in relativeModifiersSummary)
             {
                 var currencyPrototype = _prototypeManager.Index(currency);
-                if (sb.Length != 0)
+                if (sb.Length > 1) // Trauma: "!= 0" -> "> 1"
                 {
                     sb.Append(", ");
                 }

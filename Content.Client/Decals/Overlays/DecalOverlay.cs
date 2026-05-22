@@ -51,12 +51,19 @@ public sealed class DecalOverlay : GridOverlay
         var eyeAngle = args.Viewport.Eye?.Rotation ?? Angle.Zero;
 
         var bounds = args.WorldBounds.Enlarged(1f);
+        var gridAABB = xformSystem.GetInvWorldMatrix(xform).TransformBox(args.WorldBounds.Enlarged(1f));
+        var chunkEnumerator = new ChunkIndicesEnumerator(gridAABB, SharedDecalSystem.ChunkSize);
         _decals.Clear();
-        var query = _entMan.AllEntityQueryEnumerator<DecalComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var decalXform))
+        while (chunkEnumerator.MoveNext(out var index))
         {
-            if (comp.Data != default && decalXform.MapID == args.MapId && bounds.Contains(xformSystem.GetWorldPosition(decalXform)))
-                _decals.Add(comp.Data);
+            if (!decalGrid.ChunkCollection.ChunkCollection.TryGetValue(index.Value, out var chunk))
+                continue;
+
+            foreach (var decal in chunk.Decals)
+            {
+                if (gridAABB.Contains(decal.Coordinates))
+                    _decals.Add(decal);
+            }
         }
 
         if (_decals.Count == 0)

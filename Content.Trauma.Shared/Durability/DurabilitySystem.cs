@@ -2,8 +2,8 @@
 
 using System.Linq;
 using Content.Shared.Damage.Components;
-using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
@@ -28,7 +28,7 @@ namespace Content.Trauma.Shared.Durability;
 
 public sealed partial class DurabilitySystem : EntitySystem
 {
-    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedStackSystem _stack = default!;
@@ -70,9 +70,39 @@ public sealed partial class DurabilitySystem : EntitySystem
         SubscribeLocalEvent<DurabilityComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<DurabilityComponent, RepairItemDoAfterEvent>(OnRepairItemDoAfter);
         SubscribeLocalEvent<DurabilityComponent, RepairToolDoAfterEvent>(OnRepairToolDoAfter);
+        SubscribeLocalEvent<CustomDurabilityModifierComponent, DurabilityStateChangedByEvent>(OnStateChangedBy);
     }
 
-    public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null, EntityUid? attacker = null, HashSet<EntityUid>? targets = null)
+    private void OnStateChangedBy(Entity<CustomDurabilityModifierComponent> ent, ref DurabilityStateChangedByEvent args)
+    {
+        if (!TryComp(args.Weapon, out DurabilityComponent? comp) ||
+            !TryComp(args.Weapon, out MeleeWeaponComponent? melee) ||
+            !ent.Comp.MaxDurabilityStateModifiers.TryGetValue(args.NewState, out var vec))
+            return;
+
+        var damage = melee.Damage.GetTotal().Float();
+
+        if (damage == 0f)
+            return;
+
+        float newDamage;
+        switch (vec)
+        {
+            case { X: > 0f, Y: > 1f }:
+                newDamage = MathF.Min(damage + vec.X, damage * vec.Y);
+                break;
+            case { X: < 0f, Y: < 1f }:
+                newDamage = MathF.Max(damage + vec.X, damage * vec.Y);
+                break;
+            default:
+                return;
+        }
+
+        comp.CustomDurabilityModifiers[args.NewState] = newDamage / damage;
+        DirtyField(args.Weapon, comp, nameof(DurabilityComponent.CustomDurabilityModifiers));
+    }
+
+    public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null, EntityUid? attacker = null, HashSet<EntityUid>? targets = null, EntityUid? used = null)
     {
         if (!Resolve(uid, ref comp))
             return false;
@@ -96,8 +126,15 @@ public sealed partial class DurabilitySystem : EntitySystem
         // Don't raise the event if it didn't actually change.
         if (comp.DurabilityState != oldState)
         {
-            var stateEv = new DurabilityStateChangedEvent(oldState, comp.DurabilityState, uid, attacker, targets);
+            var stateEv = new DurabilityStateChangedEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
             RaiseLocalEvent(uid, ref stateEv);
+        }
+
+        if (used is { } item)
+        {
+            var stateUsedEv =
+                new DurabilityStateChangedByEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
+            RaiseLocalEvent(item, ref stateUsedEv);
         }
 
         var afterEv = new DurabilityDamageChangedEvent(uid, comp.Damage, oldDamage);
@@ -130,9 +167,10 @@ public sealed partial class DurabilitySystem : EntitySystem
         return DurabilityState.Pristine;
     }
 
-    private FixedPoint2 GetDurabilityModifier(DurabilityComponent comp)
+    private float GetDurabilityModifier(DurabilityComponent comp)
     {
-        if (!comp.DurabilityModifiers.TryGetValue(comp.DurabilityState, out var mod))
+        if (!comp.CustomDurabilityModifiers.TryGetValue(comp.DurabilityState, out var mod) &&
+            !comp.DurabilityModifiers.TryGetValue(comp.DurabilityState, out mod))
             return comp.DurabilityState is DurabilityState.Destroyed ? 0 : 1;
         return mod;
     }
@@ -194,7 +232,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             {
                 args.PushMarkup(Loc.GetString("durability-examine-weapon",
                     ("color", AssociatedColors[ent.Comp.DurabilityState].ToHex()),
-                    ("mod", GetDurabilityModifier(ent.Comp))));
+                    ("mod", $"{GetDurabilityModifier(ent.Comp):0.00}")));
             }
 
             // only show if it even has gun values like this
@@ -202,7 +240,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             {
                 args.PushMarkup(Loc.GetString("durability-examine-gun",
                     ("color", AssociatedColors[ent.Comp.DurabilityState].ToHex()),
-                    ("mod", GetDurabilityModifier(ent.Comp))));
+                    ("mod", $"{GetDurabilityModifier(ent.Comp):0.00}")));
             }
 
             var entries = GetRepairMaterialString(ent.Comp);
@@ -260,7 +298,7 @@ public sealed partial class DurabilitySystem : EntitySystem
 
     private void OnGunRefreshModifiers(Entity<DurabilityComponent> ent, ref GunRefreshModifiersEvent args)
     {
-        var mod = GetDurabilityModifier(ent.Comp).Float();
+        var mod = GetDurabilityModifier(ent.Comp);
         args.FireRate *= mod;
         args.BurstFireRate *= mod;
         args.MaxAngle /= mod;
@@ -310,14 +348,35 @@ public sealed partial class DurabilitySystem : EntitySystem
 
     private void OnDurabilityStateChanged(Entity<DurabilityComponent> ent, ref DurabilityStateChangedEvent args)
     {
+        if (ent.Comp.CustomDurabilityModifiers.Count > 0 && args.NewState != args.OldState)
+        {
+            foreach (var state in ent.Comp.CustomDurabilityModifiers.Keys.ToList())
+            {
+                if (args.NewState < args.OldState)
+                {
+                    if (state > args.NewState)
+                        ent.Comp.CustomDurabilityModifiers.Remove(state);
+                }
+                else
+                {
+                    if (state < args.NewState)
+                        ent.Comp.CustomDurabilityModifiers.Remove(state);
+                }
+            }
+
+            DirtyField(ent, ent.Comp, nameof(DurabilityComponent.CustomDurabilityModifiers));
+        }
+
         if (args.NewState is not DurabilityState.Destroyed)
             return;
 
-        ent.Comp.OnBreakBehavior?.Execute(ent.Owner, _destructible);
+        if (ent.Comp.OnBreakEffects is { } effects)
+            _effects.ApplyEffects(ent, effects, 1f, args.Attacker);
         if (!ent.Comp.DeleteOnDestroyed)
             return;
         PredictedQueueDel(ent.Owner);
 
+        // TODO: remove this and make any weapon hit reset user's innate melee NextAttack
         if (TryComp<MeleeWeaponComponent>(args.Attacker, out var userMelee))
         {
             userMelee.NextAttack = _timing.CurTime + TimeSpan.FromSeconds(1 / userMelee.AttackRate);
@@ -392,7 +451,8 @@ public sealed partial class DurabilitySystem : EntitySystem
         // deal negative damage to heal
         if (!DamageEntity(ent.Owner,
                 -SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent.Owner)).NextFloat(min, max),
-                ent.Comp))
+                ent.Comp,
+                used: args.Used))
             return;
 
         if (TryComp<StackComponent>(args.Used, out var stack))
@@ -415,7 +475,8 @@ public sealed partial class DurabilitySystem : EntitySystem
 
         DamageEntity(ent.Owner,
             -SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent.Owner)).NextFloat(min, max),
-            ent.Comp);
+            ent.Comp,
+            used: args.Used);
 
         _tool.PlayToolSound(args.Used.Value, Comp<ToolComponent>(args.Used.Value), args.User);
 

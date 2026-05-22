@@ -7,6 +7,7 @@ using Content.Goobstation.Server.Blob.Components;
 using Content.Goobstation.Shared.Blob.Components;
 using Content.Server.AlertLevel;
 using Content.Server.Antag;
+using Content.Server.Audio;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
@@ -16,6 +17,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Audio;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Components;
 using Robust.Server.Player;
@@ -34,6 +36,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
 
     public override void Initialize()
     {
@@ -47,7 +50,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
         var activeRules = QueryActiveRules();
         while (activeRules.MoveNext(out var entityUid, out _, out _, out _))
         {
-            if(uid == entityUid)
+            if (uid == entityUid)
                 continue;
 
             GameTicker.EndGameRule(uid, gameRule);
@@ -60,7 +63,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     {
         component.Accumulator += frameTime;
 
-        if(component.Accumulator < 10)
+        if (component.Accumulator < 10)
             return;
 
         component.Accumulator = 0;
@@ -145,28 +148,37 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     Loc.GetString("blob-alert-detect"),
                     stationName,
                     true,
-                    blobRuleComp.DetectedAudio,
+                    null,
                     Color.Red);
+
+                if (blobRuleComp.DetectedAudio is { } detectedAudio)
+                    // Station is the source here because that's the only UID we have in this method. Гойда.
+                    _sound.DispatchStationEventMusic(stationUid, detectedAudio, StationEventMusicType.Blob, detectedAudio.Params);
 
                 _alertLevelSystem.SetLevel(stationUid, StationAlertDetected, true, true, true, true);
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
-                {
-                    Station = stationUid,
-                    Level = blobRuleComp.Stage
-                },
+                    {
+                        Station = stationUid,
+                        Level = blobRuleComp.Stage
+                    },
                     broadcast: true);
                 return;
             case BlobStage.Begin when blobTilesCount >= (stationUid.Comp?.StageCritical ?? StationBlobConfigComponent.DefaultStageCritical):
-            {
                 blobRuleComp.Stage = BlobStage.Critical;
-                    _chatSystem.DispatchGlobalAnnouncement(
+                _chatSystem.DispatchGlobalAnnouncement(
                     Loc.GetString("blob-alert-critical-cburn"),
                     stationName,
                     true,
                     blobRuleComp.CriticalAudio,
                     Color.Red);
+
+                if (blobRuleComp.CriticalAudio is { } criticalAudio)
+                {
+                    _sound.StopStationEventMusic(stationUid, StationEventMusicType.Blob);
+                    _sound.DispatchStationEventMusic(stationUid, criticalAudio, StationEventMusicType.Blob, criticalAudio.Params);
+                }
 
                 if (!blobRuleComp.BlobCBurnCalled)
                     _ticker.StartGameRule(blobRuleComp.BlobCBurnEvent);
@@ -176,27 +188,26 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
-                {
-                    Station = stationUid,
-                    Level = blobRuleComp.Stage
-                },
+                    {
+                        Station = stationUid,
+                        Level = blobRuleComp.Stage
+                    },
                     broadcast: true);
                 return;
-            }
+
             case BlobStage.Critical when blobTilesCount >= (stationUid.Comp?.StageTheEnd ?? StationBlobConfigComponent.DefaultStageEnd):
-            {
                 blobRuleComp.Stage = BlobStage.TheEnd;
                 _roundEndSystem.EndRound();
+                _sound.StopStationEventMusic(stationUid, StationEventMusicType.Blob);
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
-                {
-                    Station = stationUid,
-                    Level = blobRuleComp.Stage
-                },
+                    {
+                        Station = stationUid,
+                        Level = blobRuleComp.Stage
+                    },
                     broadcast: true);
                 return;
-            }
         }
     }
 

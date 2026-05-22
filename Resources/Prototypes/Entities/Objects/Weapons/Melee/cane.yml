@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, WoodDurabilityWeak] # Trauma
+  parent: BaseItem
   id: Cane
   name: cane
   description: A standard wooden cane. Can help disabled people move easier. # Goobstation

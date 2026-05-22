@@ -47,8 +47,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
       WeaponsKnowledge: 50
       FirstAidKnowledge: 26 # Brigmedic isn't real
       SurgeryKnowledge: 20

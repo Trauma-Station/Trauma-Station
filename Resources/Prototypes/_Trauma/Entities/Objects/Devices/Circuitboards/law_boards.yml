@@ -18,3 +18,66 @@
   components:
   - type: SiliconLawProvider
     laws: VampireLawset
+
+- type: entity
+  id: GreatWallCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Great Wall)
+  description: An electronics board containing the Great Wall lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: GreatWallLawset
+
+- type: entity
+  id: BureaucracyCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Bureaucracy)
+  description: An electronics board containing the Bureaucracy lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: BureaucracyLawset
+
+- type: entity
+  id: ConspiracyCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Conspiracy)
+  description: An electronics board containing the Conspiracy lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: ConspiracyLawset
+
+- type: entity
+  id: MotivationalCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Motivational Speaker)
+  description: An electronics board containing the Motivational Speaker lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: MotivationalLawset
+
+- type: entity
+  id: MadScientistCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Mad Scientist)
+  description: An electronics board containing the Mad Scientist lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: MadScientistLawset
+
+- type: entity
+  id: GhostCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Ghost)
+  description: An electronics board containing the Ghost lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: GhostLawset
+
+- type: entity
+  id: SilenceCircuitBoard
+  parent: BaseSiliconLawboard
+  name: law board (Silence)
+  description: An electronics board containing the Silence lawset.
+  components:
+  - type: SiliconLawProvider
+    laws: SilenceLawset

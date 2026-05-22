@@ -96,6 +96,8 @@
   name: phylactery of damnation
   description: Used to steal blood from soon-to-be victims.
   components:
+  - type: Item
+    size: Tiny
   - type: UnholyItem
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/phylactery.rsi
@@ -244,8 +246,8 @@
     state: icon
   - type: SpawnItemsOnUse
     items:
-    - id: EldritchInfluenceT1
-    - id: EldritchInfluenceT2
+    - id: EldritchInfluence
+    - id: EldritchInfluence
   - type: Tag
     tags:
     - HereticItem
@@ -374,3 +376,87 @@
   - type: Targeting
   - type: Clickable
   - type: InteractionOutline
+
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: EldritchCoin
+  name: eldritch coin
+  description: A surprisingly heavy, ornate coin. Its sides seem to depict a different image each time you look.
+  components:
+  - type: Item
+    size: Tiny
+  - type: UnholyItem
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    noRot: true
+    layers:
+    - state: heretic
+      map: [ "enum.CoinFlipKey.Key" ]
+  - type: Appearance
+  - type: Tag
+    tags:
+    - HereticItem
+  - type: StaticPrice
+    price: 500 # Trollface
+  - type: CoinFlip
+    flippingSpriteState: flip
+    flipTime: 1
+    sides:
+    - name: eldritch-coin-side-heretic
+      spriteState: heretic
+      userEffects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 10
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+      - !type:RelayNearby
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+        compName: Door
+        range: 5
+        flags: Static
+        effect: !type:ToggleDoorState
+          predicted: false
+    - name: eldritch-coin-side-blade
+      spriteState: blade
+      userEffects:
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: 3
+            Slash: 3
+            Piercing: 3
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+      - !type:RelayNearby
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+        compName: DoorBolt
+        range: 5
+        flags: Static
+        effect: !type:ToggleDoorBolts
+          predicted: false

@@ -1,4 +1,4 @@
-store-category-security = Reinforcement Officers
+store-category-security = Security
 store-category-specialists = Specialist Officers
 
 store-category-service = Service

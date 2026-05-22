@@ -25,7 +25,7 @@
   description: uplink-syndicate-access-config-desc
   productEntity: AccessConfiguratorSyndicate
   cost:
-    Telecrystal: 8
+    Telecrystal: 10
   categories:
   - UplinkDisruption
 

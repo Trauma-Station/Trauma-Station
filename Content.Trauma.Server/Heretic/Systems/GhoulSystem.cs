@@ -17,6 +17,7 @@ using Content.Shared.Administration.Systems;
 using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
+using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Gibbing;
@@ -24,7 +25,6 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -84,6 +84,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     [Dependency] private HereticSystem _heretic = default!;
     [Dependency] private HolyFlammableSystem _holyFlam = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private SharedEntityEffectsSystem _effect = default!;
 
     public override void Initialize()
     {
@@ -101,7 +102,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
 
         SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
 
-        SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
         SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
 
         SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
@@ -233,6 +233,8 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
 
     public void UnGhoulifyEntity(Entity<GhoulComponent> ent)
     {
+        _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove);
+
         if (!TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
             if (Prototype(ent) is not { } proto)
@@ -321,6 +323,8 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
         EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnGhoulify).Components);
+
+        _effect.TryApplyEffect(ent, ent.Comp.SkillEffect);
 
         EnsureComp<WeakToHolyComponent>(ent);
         var ev = new UnholyStatusChangedEvent(ent, ent, true);
@@ -446,16 +450,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         SendBriefing(ent.AsNullable());
     }
 
-    private void OnTryAttack(Entity<HereticMinionComponent> ent, ref AttackAttemptEvent args)
-    {
-        if (args.Target == null)
-            return;
-
-        if (args.Target == ent.Comp.BoundHeretic || HasComp<ShadowCloakEntityComponent>(args.Target.Value) &&
-            Transform(args.Target.Value).ParentUid == ent.Comp.BoundHeretic)
-            args.Cancel();
-    }
-
     private void OnExamine(Entity<GhoulComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.ExamineMessage == null)
@@ -513,6 +507,8 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
 
         if (!HasComp<BodyComponent>(ent))
             return;
+
+        _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove);
 
         foreach (var giblet in _gibbing.Gib(ent, ent.Comp.DeathBehavior == GhoulDeathBehavior.GibOrgans))
         {

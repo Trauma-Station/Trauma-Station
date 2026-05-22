@@ -1,4 +1,8 @@
-knowledge-path-ash-passive-desc-2 = Grants you immunity to ash storms.
+knowledge-path-ash-passive-desc-1 =
+    Grants you immunity high temperatures.
+    Upon reaching 3 fire stacks on your body, your spells will become empowered.
+
+knowledge-path-ash-passive-desc-2 = Being on fire speeds you up based on the amount of fire stacks.
 knowledge-path-ash-passive-desc-3 = Grants you immunity temporary blindness and vision blur.
 
 knowledge-path-ash-s1-name = Nightwatcher's Secret
@@ -14,8 +18,6 @@ knowledge-path-ash-s2-desc =
     The Nightwatcher was the first of them, his treason started it all. Their lantern, expired to ash - their watch, absent.
 
     Your Mansus Grasp will burn the eyes of the victim, damaging them and blurring their vision.
-    You become immune to high temperatures.
-    Upon reaching 4 fire stacks on your body, your spells will become empowered.
 
 knowledge-path-ash-s3-name = Mark of Ash
 knowledge-path-ash-s3-desc =

@@ -5,6 +5,10 @@
   description: A specialized individual, an excellent predator, created to track down and destroy targets. Extremely dangerous in close combat.
   abstract: true
   components:
+  - type: TailedEntity
+    amount: 17
+    spacing: 0.170
+    prototype: MobXenomorphTailSegmentBase
   - type: Sprite
     sprite: _White/Mobs/Aliens/Xenomorphs/hunter.rsi
     layers:

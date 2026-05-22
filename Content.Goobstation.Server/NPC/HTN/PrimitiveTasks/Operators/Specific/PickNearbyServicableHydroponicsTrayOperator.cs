@@ -22,8 +22,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     /// <summary>
     /// Determines how close the bot needs to be to service a tray
     /// </summary>
-    [DataField]
-    public string RangeKey = NPCBlackboard.PlantbotServiceRange;
+    public const float Range = 4f;
 
     /// <summary>
     /// Target entity to service
@@ -52,14 +51,14 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entMan) || !_entMan.TryGetComponent<PlantbotComponent>(owner, out _))
+        if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out _))
             return (false, null);
 
         var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
 
         var coords = _entMan.GetComponent<TransformComponent>(owner).Coordinates;
         _targets.Clear();
-        _lookup.GetEntitiesInRange(coords, range, _targets);
+        _lookup.GetEntitiesInRange(coords, Range, _targets);
         foreach (var target in _targets)
         {
             if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || target.Comp.Dead || target.Comp.WaterLevel <= 0f))

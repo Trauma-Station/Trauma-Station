@@ -1,3 +1,7 @@
+knowledge-path-flesh-passive-desc-1 =
+    You are now able to consume raw flesh. Eating meat, organs and body parts will heal you.
+    You also become immune to damage from poisons as well as diseases.
+
 knowledge-path-flesh-passive-desc-2 = You can create two more ghouls and one more Voiceless Dead.
 knowledge-path-flesh-passive-desc-3 = Grants you medical hud.
 
@@ -19,9 +23,6 @@ knowledge-path-flesh-s2-desc =
     All ghouls get their own Bloody Blade that cannot be shattered and disappears on ghoul death.
     Risen ghouls become normal on death but can be risen again using your grasp.
     You can recall any creature summoned by you by alt-clicking ritual rune using your mansus grasp.
-
-    You are now able to consume raw flesh. Eating meat, organs and body parts will heal you.
-    You also become immune to damage from poisons as well as diseases.
 
 knowledge-path-flesh-s3-name = Mark of Flesh
 knowledge-path-flesh-s3-desc =

@@ -11,6 +11,8 @@
       prob: 0.02
     - id: Shadowling
       prob: 0.02
+    - id: SubWraith
+      prob: 0.02
 
 - type: entity
   parent: BaseGameRule

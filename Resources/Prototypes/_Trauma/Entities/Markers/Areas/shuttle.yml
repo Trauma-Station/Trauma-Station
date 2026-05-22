@@ -1,0 +1,25 @@
+# For areas to be mapped on shuttles
+- type: entity
+  abstract: true
+  parent: BaseArea
+  id: BaseAreaShuttle
+  components:
+  - type: Sprite
+    sprite: _Trauma/Markers/Areas/shuttle.rsi
+    state: shuttle
+
+- type: entity
+  parent: BaseAreaShuttle
+  id: AreaShuttleAbductor
+  name: abductor shuttle
+  components:
+  - type: Sprite
+    state: abductor
+
+- type: entity
+  parent: BaseAreaShuttle
+  id: AreaShuttleNukie
+  name: nukie shuttle
+  components:
+  - type: Sprite
+    state: nukie
