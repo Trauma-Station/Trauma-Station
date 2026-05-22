@@ -16,7 +16,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Horizontal">
                 <Label Name="NameLabel" Margin="2"/>
-                <controls:ConfirmButton Name="RemoveButton" Text="X" Margin="4" MaxHeight="32"/>
+                <controls:ConfirmButton Name="RemoveButton" Text="X" ConfirmationText="X" Margin="4" MaxHeight="32"/>
             </BoxContainer>
         </PanelContainer>
         <BoxContainer Name="OutputsContainer" Orientation="Vertical" Margin="4"/>
