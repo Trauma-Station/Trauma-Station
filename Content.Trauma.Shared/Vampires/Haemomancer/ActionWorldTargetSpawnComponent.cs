@@ -5,7 +5,7 @@ using Content.Shared.Actions;
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 /// <summary>
-/// Action component that spawns an entity prototype around a 3x3 area of a tile.
+/// Action component that spawns an entity prototype around an area of a tile.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ActionWorldTargetSpawnComponent : Component

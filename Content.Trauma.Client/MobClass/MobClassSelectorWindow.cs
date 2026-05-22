@@ -21,9 +21,19 @@ public sealed partial class MobClassSelectorWindow : FancyWindow
 
     private SpriteSystem _sprite;
 
+    /// <summary>
+    /// Invoked when clicking <see cref="SpecializeTextureButton"/>.
+    /// </summary>
     public Action<ProtoId<MobClassPrototype>?>? Specialize;
 
+    /// <summary>
+    /// The classes populated by the window.
+    /// </summary>
     public List<EntProtoId>? Classes;
+
+    /// <summary>
+    /// The class we have selected, as a result of clicking one of the <see cref="Classes"/>.
+    /// </summary>
     private ProtoId<MobClassPrototype>? _currentSelectedClass;
 
     public MobClassSelectorWindow()

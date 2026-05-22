@@ -21,11 +21,6 @@ public sealed partial class ListEntitySelectorWindow : FancyWindow
         IoCManager.InjectDependencies(this);
     }
 
-    /// <summary>
-    /// Populates the window with a hashset of entities.
-    /// Each entity represents a button, which when clicked raises a <see cref="OnPressEntity"/>,
-    /// and informs the BUI owner via a message.
-    /// </summary>
     public void PopulateWindow(HashSet<NetEntity> entities, string windowTitle)
     {
         Title = windowTitle;

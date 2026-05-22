@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 /// <summary>
-/// Components that does blood bringer's rite behaviour.
+/// Components that does blood bringer's rite behavior.
 ///
 /// When active: constantly leech blood from up to 10 people in view,
 /// healing you massively and removing incapacitating effects. The healing is per person in range, and is greatly reduced for burn damage.

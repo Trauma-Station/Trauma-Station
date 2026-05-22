@@ -34,7 +34,7 @@ public sealed partial class ToggleEffectActionComponent : Component
     /// <summary>
     /// Whether the action is toggled, or not.
     ///
-    /// Exists to fix mispredicts caused by modifying args.Toggle directly.
+    /// Exists to fix mispredicts caused by modifying <see cref="ActionComponent.Toggled"/> directly via the action event.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Toggled;

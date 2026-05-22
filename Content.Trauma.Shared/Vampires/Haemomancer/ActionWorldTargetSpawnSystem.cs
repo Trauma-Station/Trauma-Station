@@ -20,7 +20,7 @@ public sealed partial class ActionWorldTargetSpawnSystem : EntitySystem
         if (_net.IsClient && !ent.Comp.Predicted)
             return;
 
-        // Only taget tiles
+        // Only target tiles
         if (args.Entity is not null)
             return;
 

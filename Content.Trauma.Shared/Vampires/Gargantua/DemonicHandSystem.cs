@@ -28,7 +28,7 @@ public sealed partial class DemonicHandSystem : EntitySystem
         var targetXform = Transform(args.Target);
 
         // Technically, if you switch fast enough to combat mode during the shooting,
-        // you will be able to change behaviour. It is not really a bug, therefore
+        // you will be able to change behavior. It is not really a bug, therefore
         // it will be kept because it reduces the amount of coding I do (I cbf) and it's a nice mechanic.
         if (_combat.IsInCombatMode(shooter))
         {

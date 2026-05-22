@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Vampires.Umbrae;
 /// Recasting will teleport the target to the anchor.
 ///
 /// After a certain amount of time, a shadow clone will be spawned at the anchor,
-/// and the user becomes invisibile for some seconds.
+/// and the user becomes invisible for some seconds.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
@@ -36,7 +36,7 @@ public sealed partial class ActionShadowAnchorComponent : Component
     public EntityEffect[] EffectsOnFakeRecall = default!;
 
     /// <summary>
-    /// Has this action been casted?
+    /// Has this action been cast?
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Casted;
