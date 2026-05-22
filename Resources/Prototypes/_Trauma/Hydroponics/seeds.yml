@@ -114,7 +114,7 @@
       PotencyDivisor: 40
 
 - type: seed
-  id: deliciousApple
+  id: DeliciousApple
   name: seeds-appledelicious-name
   noun: seeds-noun-seeds
   displayName: seeds-appledelicious-display-name
