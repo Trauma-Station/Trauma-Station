@@ -222,7 +222,7 @@ public sealed partial class CircuitStrLenGate : CircuitGate
 
     public override void Update(CircuitComponent comp)
     {
-        var s = comp.GetValue(Inputs[0]).ToString();
+        var s = comp.GetString(Inputs[0]);
         Output = s.Length;
     }
 }
@@ -243,8 +243,8 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
 
     public override void Update(CircuitComponent comp)
     {
-        var s = comp.GetValue(Inputs[0]).ToString();
-        var check = comp.GetValue(Inputs[1]).ToString();
+        var s = comp.GetString(Inputs[0]);
+        var check = comp.GetString(Inputs[1]);
         Output = Mode switch
         {
             NameFilterMode.Contain => s.Contains(check),
@@ -348,7 +348,8 @@ public sealed partial class CircuitCompareGate : CircuitGate
         CompareOp.Greater => ">",
         CompareOp.GreaterEqual => ">=",
         CompareOp.Less => "<",
-        CompareOp.LessEqual => "<="
+        CompareOp.LessEqual => "<=",
+        _ => "?"
     };
     public override string Category => "Integers";
     public override GateValue OutputType => GateValue.Bool;

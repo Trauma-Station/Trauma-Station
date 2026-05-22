@@ -110,6 +110,12 @@ public sealed partial class CircuitComponent : Component
     }
 
     /// <summary>
+    /// Get the string representation of any value from <see cref="GetValue"/>.
+    /// </summary>
+    public string GetString(CircuitIndex i)
+        => GetValue(i).ToString()!
+
+    /// <summary>
     /// Ensures that all port-related fields have at least <see cref="PortsCount"/> items.
     /// </summary>
     public void ValidatePortsCount()
