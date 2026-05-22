@@ -4,7 +4,6 @@ using Content.Client.Lathe.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.ListViewSelector;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface.Controls;
 
 // ReSharper disable InconsistentNaming
 

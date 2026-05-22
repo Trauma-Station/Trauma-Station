@@ -5,7 +5,6 @@ using Content.Server.Medical.CrewMonitoring;
 using Content.Server.Pinpointer;
 using Content.Shared.Chat;
 using Content.Shared.Mobs;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.RelayedDeathrattle;
 

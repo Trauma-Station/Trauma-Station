@@ -4,12 +4,8 @@ using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Shared.Construction;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Placement;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Enums;
 
 namespace Content.Trauma.Client.Construction.UI;

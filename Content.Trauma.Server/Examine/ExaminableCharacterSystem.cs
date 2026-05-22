@@ -9,7 +9,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 using System.Globalization;
 using Content.Trauma.Common.Heretic;
 

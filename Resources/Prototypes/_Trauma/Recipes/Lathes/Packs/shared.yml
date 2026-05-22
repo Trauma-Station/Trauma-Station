@@ -4,3 +4,5 @@
   id: TraumaPartsStatic
   recipes:
   - PartCapacitor
+  - CircuitHousing
+  - CircuitHousingPortable

@@ -3,8 +3,6 @@
 using Content.Shared.Movement.Components;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.AudioMuffle;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 

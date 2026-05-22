@@ -2,8 +2,6 @@
 
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Forging;
-using Robust.Client.UserInterface;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Forging;
 

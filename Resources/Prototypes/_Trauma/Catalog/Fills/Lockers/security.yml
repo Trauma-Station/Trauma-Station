@@ -205,6 +205,8 @@
     children:
     - id: Truncheon
       amount: 6
+    - id: SecBreachingHammer
+      amount: 2
 
 - type: entityTable
   id: FillGunSafeJudoT1

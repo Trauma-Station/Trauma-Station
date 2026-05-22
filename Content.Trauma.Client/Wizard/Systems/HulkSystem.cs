@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Humanoid;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 

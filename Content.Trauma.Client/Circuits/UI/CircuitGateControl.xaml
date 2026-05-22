@@ -1,0 +1,24 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<PanelContainer xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        xmlns:gfx="using:Robust.Client.Graphics">
+    <PanelContainer.PanelOverride>
+        <gfx:StyleBoxFlat BackgroundColor="#333333"/>
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Horizontal">
+        <BoxContainer Name="InputsContainer" Orientation="Vertical" Margin="4"/>
+        <PanelContainer Name="NameContainer" MinSize="80 60" MouseFilter="Pass">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#252525"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal">
+                <Label Name="NameLabel" Margin="2"/>
+                <controls:ConfirmButton Name="RemoveButton" Text="X" ConfirmationText="X" Margin="4" MaxHeight="32"/>
+            </BoxContainer>
+        </PanelContainer>
+        <BoxContainer Name="OutputsContainer" Orientation="Vertical" Margin="4"/>
+    </BoxContainer>
+</PanelContainer>

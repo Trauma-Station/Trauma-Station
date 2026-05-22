@@ -5,6 +5,10 @@
   description: A specialized individual designed to build and maintain a hive. Less aggressive than other xenomorph forms, but still deadly when approached.
   abstract: true
   components:
+  - type: TailedEntity
+    amount: 17
+    spacing: 0.170
+    prototype: MobXenomorphTailSegmentBase
   - type: Sprite
     sprite: _White/Mobs/Aliens/Xenomorphs/drone.rsi
     layers:

@@ -4,7 +4,6 @@ using Content.Client.Items.UI;
 using Content.Client.Message;
 using Content.Client.Stylesheets;
 using Content.Trauma.Shared.Blink;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Blink;
 

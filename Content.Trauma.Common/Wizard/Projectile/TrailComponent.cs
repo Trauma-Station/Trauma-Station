@@ -2,7 +2,6 @@
 
 using Robust.Shared.Animations;
 using Robust.Shared.Map;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Common.Wizard.Projectile;
 
