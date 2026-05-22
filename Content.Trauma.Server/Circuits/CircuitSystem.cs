@@ -94,7 +94,6 @@ public sealed partial class CircuitSystem : EntitySystem
             return; // no change
 
         // process dependent gates next tick
-        Log.Debug($"Sending value {value} for {i}");
         comp.Inputs[i] = value;
         foreach (var input in comp.LinkedInputs[i])
         {

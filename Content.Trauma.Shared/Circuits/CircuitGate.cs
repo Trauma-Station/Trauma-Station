@@ -47,11 +47,14 @@ public abstract partial class CircuitGate
     [DataField]
     public List<CircuitIndex> Inputs = new();
 
+    // have to make this nullable because serialization generator is dogshit and doesnt support just plain object
+    [DataField("output")]
+    protected object? _output = false;
+
     /// <summary>
     /// The last output of this gate.
     /// </summary>
-    [DataField]
-    public object Output = false;
+    public object Output => _output ?? false;
 
     /// <summary>
     /// Where it is in the editor UI.
@@ -70,7 +73,7 @@ public abstract partial class CircuitGate
     /// </summary>
     public void Initialize()
     {
-        Output = OutputType switch
+        _output = OutputType switch
         {
             GateValue.Bool => false,
             GateValue.Int => 0,
@@ -159,7 +162,7 @@ public sealed partial class CircuitMemoryCell : CircuitGate
     public override void Update(CircuitComponent comp)
     {
         if (comp.GetBool(Inputs[1]))
-            Output = comp.GetValue(Inputs[0]);
+            _output = comp.GetValue(Inputs[0]);
     }
 }
 
@@ -184,7 +187,7 @@ public sealed partial class CircuitLogicGate : CircuitGate
     {
         var a = comp.GetBool(Inputs[0]);
         var b = comp.GetBool(Inputs[1]);
-        Output = Gate switch
+        _output = Gate switch
         {
             LogicGate.Or => a || b,
             LogicGate.And => a && b,
@@ -223,7 +226,7 @@ public sealed partial class CircuitStrLenGate : CircuitGate
     public override void Update(CircuitComponent comp)
     {
         var s = comp.GetString(Inputs[0]);
-        Output = s.Length;
+        _output = s.Length;
     }
 }
 
@@ -245,7 +248,7 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
     {
         var s = comp.GetString(Inputs[0]);
         var check = comp.GetString(Inputs[1]);
-        Output = Mode switch
+        _output = Mode switch
         {
             NameFilterMode.Contain => s.Contains(check),
             NameFilterMode.Start => s.StartsWith(check),
@@ -286,7 +289,7 @@ public sealed partial class CircuitMathGate : CircuitGate
     {
         var a = comp.GetInt(Inputs[0]);
         var b = comp.GetInt(Inputs[1]);
-        Output = Op switch
+        _output = Op switch
         {
             // arithmetic
             MathOp.Add => a + b,
@@ -359,7 +362,7 @@ public sealed partial class CircuitCompareGate : CircuitGate
     {
         var a = comp.GetInt(Inputs[0]);
         var b = comp.GetInt(Inputs[1]);
-        Output = Op switch
+        _output = Op switch
         {
             CompareOp.Equal => a == b,
             CompareOp.NotEqual => a != b,
