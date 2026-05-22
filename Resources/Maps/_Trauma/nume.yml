@@ -104926,14 +104926,6 @@ entities:
     - type: Transform
       pos: -6.5,-34.5
       parent: 2
-- proto: MobSlimeXenobioBabyRed
-  entities:
-  - uid: 15403
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -11.5,16.5
-      parent: 2
 - proto: MonkeyCubeBox
   entities:
   - uid: 15404
