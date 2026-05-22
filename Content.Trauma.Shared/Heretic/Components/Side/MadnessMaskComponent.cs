@@ -17,10 +17,10 @@ public sealed partial class MadnessMaskComponent : Component
     public float MaxRange = 8f;
 
     [DataField]
-    public float DistFearModifier = 2f;
+    public float DistFearModifier = 1.5f;
 
     [DataField]
-    public float ViewFearModifier = 3f;
+    public float ViewFearModifier = 2f;
 
     [DataField]
     public float MaxFear = 5f;

@@ -2600,6 +2600,88 @@
       output:
         RaggedSword: 1
 
+- type: entity
+  id: RitualLionhunterRifle
+  name: Lionhunter's Rifle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/lionhunter-icon.rsi
+    state: base
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - WoodPlank
+          name: heretic-ritual-ingredient-wood-plank
+        - whitelist:
+            components:
+            - Pda
+          name: heretic-ritual-ingredient-pda
+        - whitelist:
+            requireAll: true
+            components:
+            - Organ
+            - Edible
+          name: heretic-ritual-ingredient-organ
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        WeaponBoltActionLionhunter: 1
+
+- type: entity
+  id: RitualLionhunterRifleAmmunition
+  name: Lionhunter's Rifle Ammunition
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    state: base
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - CartridgeAmmo
+          blacklist:
+            tags:
+            - CartridgeLionhunter
+          name: heretic-ritual-ingredient-cartridge-ammo
+          amount: 3
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        CartridgeLionhunter: 3
+
 # T3
 - type: entity
   id: RitualMaidInTheMirror

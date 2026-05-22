@@ -1,14 +1,16 @@
 - type: entity
   parent: [BaseMagicalContraband, BaseWeaponSniper, BaseGunWieldable]
   id: WeaponBoltActionLionhunter
-  name: Lionhunter's Rifle
+  name: lionhunter's rifle
   description: An antique looking rifle that looks immaculate despite being clearly very old.
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/lionhunter-icon.rsi
   - type: Item
     sprite: _Goobstation/Heretic/Entities/lionhunter.rsi
-    size: Huge
+    size: Large
+    shape:
+    - 0,0,5,1
   - type: Clothing
     sprite: _Goobstation/Heretic/Entities/lionhunter.rsi
     quickEquip: false
@@ -17,6 +19,7 @@
     - suitStorage
   - type: GunRequiresWield
   - type: BallisticAmmoProvider
+    autoCycle: true
     capacity: 3
     whitelist:
       tags:
@@ -31,4 +34,14 @@
     maxOffset: 8
     pvsIncrease: 0.8
   - type: StaticPrice
-    price: 2000
+    price: 1000
+  - type: Gun
+    projectileSpeed: 25
+    unaffectedBySkill: true
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.35
+    sprintModifier: 0.35
+  - type: LionhunterRifle
+    aimWhitelist:
+      components:
+      - MobState

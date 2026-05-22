@@ -90,3 +90,9 @@
       armorPenetration: 0.5
   - type: StaminaDamageOnCollide
     damage: 30
+  - type: LionhunterRifleProjectile
+    componentsOnEmpower:
+    - type: StaminaDamageOnCollide
+      damage: 60
+    - type: HomingProjectile
+      homingSpeed: 2160

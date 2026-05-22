@@ -5,3 +5,7 @@
   components:
   - type: CartridgeAmmo
     proto: BulletLionhunter
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+    - CartridgeLionhunter

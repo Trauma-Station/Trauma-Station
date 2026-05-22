@@ -35,6 +35,9 @@
   id: CartridgeTurret
 
 - type: Tag
+  id: CartridgeLionhunter # Used for lionhunter rifle ammo creation ritual blacklist
+
+- type: Tag
   id: Cement
 
 - type: Tag
