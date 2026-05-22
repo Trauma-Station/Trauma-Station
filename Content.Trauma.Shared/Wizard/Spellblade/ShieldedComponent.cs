@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Spellblade;
 

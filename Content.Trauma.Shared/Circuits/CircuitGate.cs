@@ -45,7 +45,7 @@ public abstract partial class CircuitGate
     /// The circuit input indices of this gate.
     /// </summary>
     [DataField]
-    public List<int> Inputs = new();
+    public List<CircuitIndex> Inputs = new();
 
     /// <summary>
     /// The last output of this gate.
@@ -60,18 +60,17 @@ public abstract partial class CircuitGate
     public Vector2 Pos = Vector2.Zero;
 
     /// <summary>
-    /// Dynamically built circuit output indices that depend on this gate's output.
+    /// Dynamically built circuit output indices which depend on this gate's output.
     /// </summary>
-    [ViewVariables, NonSerialized]
-    public List<int> LinkedOutputs = new();
+    [ViewVariables]
+    public List<CircuitIndex> LinkedOutputs = new();
 
     /// <summary>
     /// Called after creating a new gate.
     /// </summary>
     public void Initialize()
     {
-        Inputs = new(InputCount());
-        Output = OutputType() switch
+        Output = OutputType switch
         {
             GateValue.Bool => false,
             GateValue.Int => 0,
@@ -84,17 +83,22 @@ public abstract partial class CircuitGate
     /// <summary>
     /// User-facing name of this gate
     /// </summary>
-    public abstract string Name();
+    public abstract string Name { get; }
+
+    /// <summary>
+    /// Category used in the UI to sort gates.
+    /// </summary>
+    public abstract string Category { get; }
 
     /// <summary>
     /// Type of value this gate can output.
     /// </summary>
-    public abstract GateValue OutputType();
+    public abstract GateValue OutputType { get; }
 
     /// <summary>
     /// How many inputs this gate has.
     /// </summary>
-    public abstract int InputCount();
+    public abstract int InputCount { get; }
 
     /// <summary>
     /// Update output based on inputs and other gates of a circuit.
@@ -102,29 +106,42 @@ public abstract partial class CircuitGate
     public abstract void Update(CircuitComponent comp);
 
     /// <summary>
+    /// Add all variants of this gate to a list of gates.
+    /// If there are no variants it just adds itself.
+    /// </summary>
+    public virtual void AddVariants(List<CircuitGate> gates)
+    {
+        gates.Add(this);
+    }
+
+    /// <summary>
     /// Called for a user's serialized gates.
     /// </summary>
     public void Validate()
     {
-        Pos = Vector2.Clamp(Pos, -MaxOffset, MaxOffset);
-        var count = InputCount();
+        Pos = ClampPosition(Pos);
+        var count = InputCount;
         if (Inputs.Count > count)
             Inputs.RemoveRange(count, Inputs.Count - count);
-        else if (Inputs.Count == count)
-            return;
 
         while (Inputs.Count < count)
-            Inputs.Add(0);
+            Inputs.Add(CircuitIndex.Invalid);
     }
 
     /// <summary>
     /// Add a linked circuit input index this gate is outputting to.
     /// </summary>
-    public void LinkOutput(int linked)
+    public void LinkOutput(CircuitIndex linked)
     {
         if (!LinkedOutputs.Contains(linked))
             LinkedOutputs.Add(linked);
     }
+
+    /// <summary>
+    /// Clamp a gate position to the allowed range.
+    /// </summary>
+    public static Vector2 ClampPosition(Vector2 pos)
+        => Vector2.Clamp(pos, -MaxOffset, MaxOffset);
 }
 
 /// <summary>
@@ -134,11 +151,10 @@ public abstract partial class CircuitGate
 [Serializable, NetSerializable]
 public sealed partial class CircuitMemoryCell : CircuitGate
 {
-    public override string Name() => "MEM";
-
-    public override GateValue OutputType() => GateValue.Any;
-
-    public override int InputCount() => 2;
+    public override string Name => "MEM";
+    public override string Category => "Misc";
+    public override GateValue OutputType => GateValue.Any;
+    public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
@@ -159,11 +175,10 @@ public sealed partial class CircuitLogicGate : CircuitGate
     [DataField]
     public LogicGate Gate = LogicGate.Or;
 
-    public override string Name() => Gate.ToString().ToUpper();
-
-    public override GateValue OutputType() => GateValue.Bool;
-
-    public override int InputCount() => 2;
+    public override string Name => Gate.ToString().ToUpper();
+    public override string Category => "Boolean Logic";
+    public override GateValue OutputType => GateValue.Bool;
+    public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
@@ -180,6 +195,18 @@ public sealed partial class CircuitLogicGate : CircuitGate
             _ => false
         };
     }
+
+    public override void AddVariants(List<CircuitGate> gates)
+    {
+        var values = (LogicGate[]) Enum.GetValues(typeof(LogicGate));
+        foreach (var gate in values)
+        {
+            gates.Add(new CircuitLogicGate()
+            {
+                Gate = gate
+            });
+        }
+    }
 }
 
 /// <summary>
@@ -188,11 +215,10 @@ public sealed partial class CircuitLogicGate : CircuitGate
 [Serializable, NetSerializable]
 public sealed partial class CircuitStrLenGate : CircuitGate
 {
-    public override string Name() => "LEN";
-
-    public override GateValue OutputType() => GateValue.Int;
-
-    public override int InputCount() => 1;
+    public override string Name => "LEN";
+    public override string Category => "Strings";
+    public override GateValue OutputType => GateValue.Int;
+    public override int InputCount => 1;
 
     public override void Update(CircuitComponent comp)
     {
@@ -210,11 +236,10 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
     [DataField]
     public NameFilterMode Mode = NameFilterMode.Contain;
 
-    public override string Name() => Mode.ToString().ToUpper();
-
-    public override GateValue OutputType() => GateValue.Bool;
-
-    public override int InputCount() => 1;
+    public override string Name => Mode.ToString().ToUpper();
+    public override string Category => "Strings";
+    public override GateValue OutputType => GateValue.Bool;
+    public override int InputCount => 1;
 
     public override void Update(CircuitComponent comp)
     {
@@ -229,6 +254,18 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
             _ => false
         };
     }
+
+    public override void AddVariants(List<CircuitGate> gates)
+    {
+        var modes = (NameFilterMode[]) Enum.GetValues(typeof(NameFilterMode));
+        foreach (var mode in modes)
+        {
+            gates.Add(new CircuitStrCompareGate()
+            {
+                Mode = mode
+            });
+        }
+    }
 }
 
 /// <summary>
@@ -240,11 +277,10 @@ public sealed partial class CircuitMathGate : CircuitGate
     [DataField]
     public MathOp Op = MathOp.Add;
 
-    public override string Name() => Op.ToString().ToUpper();
-
-    public override GateValue OutputType() => GateValue.Int;
-
-    public override int InputCount() => 2;
+    public override string Name => Op.ToString().ToUpper();
+    public override string Category => "Maths";
+    public override GateValue OutputType => GateValue.Int;
+    public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
@@ -266,6 +302,18 @@ public sealed partial class CircuitMathGate : CircuitGate
             MathOp.Brs => a >> b,
             _ => 0
         };
+    }
+
+    public override void AddVariants(List<CircuitGate> gates)
+    {
+        var ops = (MathOp[]) Enum.GetValues(typeof(MathOp));
+        foreach (var op in ops)
+        {
+            gates.Add(new CircuitMathGate()
+            {
+                Op = op
+            });
+        }
     }
 }
 
@@ -293,7 +341,7 @@ public sealed partial class CircuitCompareGate : CircuitGate
     [DataField]
     public CompareOp Op = CompareOp.Equal;
 
-    public override string Name() => Op switch
+    public override string Name => Op switch
     {
         CompareOp.Equal => "==",
         CompareOp.NotEqual => "!=",
@@ -302,10 +350,9 @@ public sealed partial class CircuitCompareGate : CircuitGate
         CompareOp.Less => "<",
         CompareOp.LessEqual => "<="
     };
-
-    public override GateValue OutputType() => GateValue.Bool;
-
-    public override int InputCount() => 2;
+    public override string Category => "Integers";
+    public override GateValue OutputType => GateValue.Bool;
+    public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
@@ -321,6 +368,18 @@ public sealed partial class CircuitCompareGate : CircuitGate
             CompareOp.LessEqual => a <= b,
             _ => false
         };
+    }
+
+    public override void AddVariants(List<CircuitGate> gates)
+    {
+        var ops = (CompareOp[]) Enum.GetValues(typeof(CompareOp));
+        foreach (var op in ops)
+        {
+            gates.Add(new CircuitCompareGate()
+            {
+                Op = op
+            });
+        }
     }
 }
 

@@ -117,20 +117,3 @@
       cell_slot: !type:ContainerSlot
   - type: GuideHelp
     guides: [ Circuits ]
-
-- type: entity
-  parent: Circuit
-  id: CircuitTest
-  suffix: Test
-  components:
-  - type: Circuit
-    changed: [ 1 ]
-    data:
-      outputIndices: [1, 2, -3, 0, 0, 0, 0, 0]
-      gates:
-      - !type:CircuitLogicGate
-        gate: Xor
-        inputs: [-1, 2]
-      - !type:CircuitLogicGate
-        gate: Nor
-        inputs: [-2, 1]

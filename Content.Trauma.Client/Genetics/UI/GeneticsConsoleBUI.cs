@@ -2,7 +2,6 @@
 
 using Content.Shared.Research.Components;
 using Content.Trauma.Shared.Genetics.Console;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.UI;
 

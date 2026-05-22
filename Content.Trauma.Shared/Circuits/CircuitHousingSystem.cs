@@ -48,7 +48,7 @@ public sealed partial class CircuitHousingSystem : EntitySystem
             return;
 
         UpdateActive(ent, false); // stop updating it now that its removed
-        circuit.Housing = EntityUid.Invalid;
+        circuit.Housing = null;
         Dirty(args.Entity, circuit);
         ent.Comp.Circuit = null;
         Dirty(ent);

@@ -8,9 +8,7 @@ using Content.Trauma.Client.Language;
 using Content.Trauma.Common.Input;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.UserInterface.Systems.Language;
 

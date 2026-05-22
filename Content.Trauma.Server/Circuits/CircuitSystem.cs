@@ -24,7 +24,6 @@ public sealed partial class CircuitSystem : EntitySystem
 
         SubscribeLocalEvent<CircuitHousingComponent, SignalReceivedEvent>(OnSignalReceived);
 
-        SubscribeLocalEvent<CircuitComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<CircuitComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<ActiveCircuitComponent, ComponentInit>(OnActiveInit);
@@ -46,10 +45,9 @@ public sealed partial class CircuitSystem : EntitySystem
             var gates = comp.Data.Gates;
             foreach (var i in changed)
             {
-                if (i < 0 || i >= gates.Count)
-                    continue; // invalid
+                if (!gates.TryGetValue(i, out var gate))
+                    continue; // invalid...
 
-                var gate = gates[i];
                 var old = gate.Output;
                 gate.Update(comp);
                 if (gate.Output.Equals(old))
@@ -62,7 +60,7 @@ public sealed partial class CircuitSystem : EntitySystem
             }
 
             // change any momentary pulses back to low since theyve been processed
-            for (int i = 0; i < comp.Inputs.Count; i++)
+            for (var i = 0; i < comp.Inputs.Count; i++)
             {
                 if (comp.Inputs[i] is not Pulse p)
                     continue;
@@ -89,9 +87,14 @@ public sealed partial class CircuitSystem : EntitySystem
         if (!int.TryParse(c, out var i))
             return; // ignore non circuit ports, they end with a number
 
-        i -= 1; // the ids start with 1
+        i--; // the ids start with 1, convert to 0-based index
         // legacy signals with no data are assumed to be a pulse
         var value = args.Data is { } data ? ParseValue(data) : Pulse.Instance;
+        if (comp.Inputs[i].Equals(value))
+            return; // no change
+
+        // process dependent gates next tick
+        Log.Debug($"Sending value {value} for {i}");
         comp.Inputs[i] = value;
         foreach (var input in comp.LinkedInputs[i])
         {
@@ -99,42 +102,28 @@ public sealed partial class CircuitSystem : EntitySystem
         }
     }
 
-    private void OnInit(Entity<CircuitComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<CircuitComponent> ent, ref MapInitEvent args)
     {
-        // ensure required input port data exists
-        while (ent.Comp.Inputs.Count < CircuitComponent.PortsCount)
-            ent.Comp.Inputs.Add(false);
-        while (ent.Comp.LinkedInputs.Count < CircuitComponent.PortsCount)
-            ent.Comp.LinkedInputs.Add(new());
-        while (ent.Comp.LastOutputs.Count < CircuitComponent.PortsCount)
-            ent.Comp.LastOutputs.Add(false);
-
         var data = ent.Comp.Data;
+        ent.Comp.ValidatePortsCount();
+
         var gates = data.Gates;
         for (var i = 0; i < gates.Count; i++)
         {
             var gate = gates[i];
+            var output = CircuitIndex.Gate(i);
             foreach (var input in gate.Inputs)
             {
-                if (input > 0 && input <= gates.Count)
-                    gates[input - 1].LinkOutput(i + 1);
-                else if (input < 0 && -input <= ent.Comp.LinkedInputs.Count)
-                    ent.Comp.LinkInput(-input - 1, i + 1);
+                ent.Comp.LinkOutput(input, output);
             }
         }
 
         for (var i = 0; i < data.OutputIndices.Count; i++)
         {
             var input = data.OutputIndices[i];
-            if (input > 0 && input <= gates.Count)
-                gates[input - 1].LinkOutput(-i - 1);
-            else if (input < 0 && -input <= ent.Comp.LinkedInputs.Count)
-                ent.Comp.LinkInput(-input - 1, -i - 1);
+            ent.Comp.LinkOutput(input, CircuitIndex.Port(i));
         }
-    }
 
-    private void OnMapInit(Entity<CircuitComponent> ent, ref MapInitEvent args)
-    {
         // want to automatically update gates for premade circuits so you dont have to toggle inputs or whatever
         for (var i = 0; i < ent.Comp.LinkedInputs.Count; i++)
         {
@@ -142,10 +131,10 @@ public sealed partial class CircuitSystem : EntitySystem
             var value = ent.Comp.Inputs[i];
             foreach (var linked in list)
             {
-                if (linked > 0) // ignore directly wired output ports since theres probably no housing
-                    ent.Comp.Changed.Add(linked - 1);
-                else if (linked < 0 && -linked <= ent.Comp.LastOutputs.Count)
-                    ent.Comp.LastOutputs[-linked - 1] = value;
+                if (linked.GateIndex is { } g)
+                    ent.Comp.Changed.Add(g);
+                else if (linked.PortIndex is { } p)
+                    ent.Comp.LastOutputs[p] = value;
             }
         }
     }
@@ -194,20 +183,26 @@ public sealed partial class CircuitSystem : EntitySystem
         if (data.TryGetValue<string>("logic_string", out var s))
             return s;
 
-        return false; // its a mystery
+        return Pulse.Instance; // non-logic signals are assumed to be a pulse
     }
 
-    private void ValueChanged(CircuitComponent comp, int i, object value)
+    private void ValueChanged(CircuitComponent comp, CircuitIndex idx, object value)
     {
-        if (i > 0)
-            comp.Changed.Add(i - 1); // update it next tick
-        else if (i < 0 && -i <= CircuitComponent.PortsCount)
-            SendOutput(comp.Housing, -i, comp.LastOutputs[-i - 1] = value); // send signal now
+        if (!comp.Data.ValidIndex(idx))
+            return;
+
+        if (idx.GateIndex is { } g)
+            comp.Changed.Add(g); // update it next tick
+        else if (idx.PortIndex is { } p)
+            SendOutput(comp.Housing, p, comp.LastOutputs[p] = value); // send signal now
     }
 
-    private void SendOutput(EntityUid housing, int i, object value)
+    private void SendOutput(EntityUid? housing, int i, object value)
     {
-        var port = $"Circuit{i}";
+        if (housing == null)
+            return;
+
+        var port = $"Circuit{i + 1}";
 
         // send new output signal to linked machines
         _payload.Clear();
@@ -229,6 +224,6 @@ public sealed partial class CircuitSystem : EntitySystem
                 Log.Error($"Tried to send unknown output {value} to port {port} of {ToPrettyString(housing)}!");
                 return;
         }
-        _device.InvokePort(housing, port, _payload);
+        _device.InvokePort(housing.Value, port, _payload);
     }
 }

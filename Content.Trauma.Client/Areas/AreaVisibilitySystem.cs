@@ -3,8 +3,6 @@
 using Content.Client.UserInterface.Systems.Sandbox.Windows;
 using Content.Trauma.Common.Areas;
 using Content.Trauma.Shared.Areas;
-using Robust.Client.GameObjects;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Client.Areas;

@@ -23,9 +23,10 @@ public enum CircuitEditorUiKey : byte
 /// Networking circuits to everyone would be way too expensive, no prediction :(
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class CircuitEditorState(CircuitData? data) : BoundUserInterfaceState
+public sealed class CircuitEditorState(CircuitData? data, NetEntity? circuit) : BoundUserInterfaceState
 {
     public readonly CircuitData? Data = data;
+    public readonly NetEntity? Circuit = circuit;
 }
 
 /// <summary>
@@ -76,10 +77,10 @@ public sealed class CircuitEditorRemoveGateMessage(int index) : BoundUserInterfa
 /// For a circuit output port (negative value for input) n will be 0.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class CircuitEditorLinkMessage(int input, int index, int n) : BoundUserInterfaceMessage
+public sealed class CircuitEditorLinkMessage(CircuitIndex input, CircuitIndex index, int n) : BoundUserInterfaceMessage
 {
-    public readonly int Input = input;
-    public readonly int Index = index;
+    public readonly CircuitIndex Input = input;
+    public readonly CircuitIndex Index = index;
     public readonly int N = n;
 }
 
@@ -88,8 +89,8 @@ public sealed class CircuitEditorLinkMessage(int input, int index, int n) : Boun
 /// For a circuit output port (negative value for index) n will be 0.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class CircuitEditorUnlinkMessage(int index, int n) : BoundUserInterfaceMessage
+public sealed class CircuitEditorUnlinkMessage(CircuitIndex index, int n) : BoundUserInterfaceMessage
 {
-    public readonly int Index = index;
+    public readonly CircuitIndex Index = index;
     public readonly int N = n;
 }

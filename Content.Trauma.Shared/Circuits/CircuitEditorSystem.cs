@@ -6,7 +6,6 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Circuits;
 
@@ -45,7 +44,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
     private void OnCircuitChanged(EntityUid uid, CircuitEditorComponent comp, ContainerModifiedMessage args)
     {
         if (args.Container.ID == comp.SlotId)
-            UpdateUI((uid, comp));
+            UpdateUI(uid, args.Entity);
     }
 
     private void OnClear(Entity<CircuitEditorComponent> ent, ref CircuitEditorClearMessage args)
@@ -75,11 +74,15 @@ public sealed partial class CircuitEditorSystem : EntitySystem
             return;
         }
 
-        foreach (var gate in data.Gates)
+        for (var i = 0; i < data.Gates.Count; i++)
         {
+            var gate = data.Gates[i];
             gate.Initialize();
             gate.Validate();
+            circuit.Comp.Changed.Add(i); // fully recompute it when powered to account for clocks etc
         }
+
+        circuit.Comp.Data = data;
 
         var size = data.Gates.Count;
         _adminLog.Add(LogType.Circuits, LogImpact.Medium, $"Circuit {circuit.Owner} imported {size} gates by {args.Actor} using {ent.Owner}");
@@ -92,7 +95,8 @@ public sealed partial class CircuitEditorSystem : EntitySystem
             return;
 
         var data = circuit.Comp.Data;
-        if (data.Gates.Count >= CircuitComponent.MaxGates)
+        var i = data.Gates.Count;
+        if (i >= CircuitComponent.MaxGates)
         {
             _popup.PopupPredictedCursor("Circuit is full!", args.Actor, PopupType.MediumCaution);
             return;
@@ -102,6 +106,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         gate.Validate();
         gate.Initialize();
         data.Gates.Add(gate);
+        circuit.Comp.Changed.Add(i); // update the gate when its next powered
         UpdateUI(ent);
     }
 
@@ -114,7 +119,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         if (args.Index >= gates.Count)
             return;
 
-        var gate = gates[args.Index - 1];
+        var gate = gates[args.Index];
         gate.Pos = args.Pos;
         gate.Validate();
         UpdateUI(ent);
@@ -130,48 +135,55 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         if (args.Index >= gates.Count)
             return;
 
+        var output = CircuitIndex.Gate(args.Index);
         var gate = gates.RemoveSwap(args.Index);
-        if (gates.Count == 0)
-        {
-            ClearCircuit(circuit); // reset it when empty to make logic easier
-            UpdateUI(ent);
-            return;
-        }
 
         // have to remove all references to the removed gate
         foreach (var index in gate.Inputs)
         {
-            if (index > 0 && index <= gates.Count)
-                gates[index - 1].LinkedOutputs.RemoveSwap(args.Index);
-            else if (index < 0 && -index <= circuit.Comp.LinkedInputs.Count)
-                circuit.Comp.LinkedInputs[-index - 1].RemoveSwap(index);
+            circuit.Comp.UnlinkOutput(index, output);
         }
         foreach (var index in gate.LinkedOutputs)
         {
-            if (index > 0 && index <= gates.Count)
-                SwapValue(gates[index - 1].Inputs, index, 0); // unlink from a gate
-            else if (index < 0 && -index <= data.OutputIndices.Count)
-                data.OutputIndices[-index - 1] = 0; // unlink from a output port of the circuit
+            if (!data.ValidIndex(index))
+                continue;
+
+            if (index.GateIndex is { } g)
+                SwapValue(gates[g].Inputs, output, CircuitIndex.Invalid); // unlink from a gate
+            else if (index.PortIndex is { } p && p < data.OutputIndices.Count)
+                data.OutputIndices[p] = CircuitIndex.Invalid; // unlink from a output port of the circuit
+        }
+
+        if (!gates.TryGetValue(args.Index, out gate))
+        {
+            // no gate left to replace it, done now
+            UpdateUI(ent);
+            return;
         }
 
         // and the gate that replaced it
-        var oldIndex = gates.Count;
-        gate = gates[args.Index];
+        var oldIndex = CircuitIndex.Gate(gates.Count);
         foreach (var index in gate.Inputs)
         {
-            if (index > 0 && index <= gates.Count)
-                SwapValue(gates[index - 1].LinkedOutputs, oldIndex, args.Index);
-            else if (index < 0 && -index <= circuit.Comp.LinkedInputs.Count)
-                SwapValue(circuit.Comp.LinkedInputs[-index - 1], oldIndex, args.Index);
-        }
+            if (!data.ValidIndex(index))
+                continue;
 
+            if (index.GateIndex is { } g)
+                SwapValue(gates[g].LinkedOutputs, oldIndex, output);
+            else if (index.PortIndex is { } p && circuit.Comp.LinkedInputs.TryGetValue(p, out var inputs))
+                SwapValue(inputs, oldIndex, output);
+        }
         foreach (var index in gate.LinkedOutputs)
         {
-            if (index > 0 && index <= gates.Count)
-                SwapValue(gates[index - 1].Inputs, oldIndex, args.Index);
-            else if (index < 0 && -index <= data.OutputIndices.Count)
-                data.OutputIndices[-index - 1] = args.Index;
+            if (!data.ValidIndex(index))
+                continue;
+
+            if (index.GateIndex is { } g)
+                SwapValue(gates[g].Inputs, oldIndex, output);
+            else if (index.PortIndex is { } p && p < data.OutputIndices.Count)
+                data.OutputIndices[p] = output;
         }
+
         UpdateUI(ent);
     }
 
@@ -182,35 +194,29 @@ public sealed partial class CircuitEditorSystem : EntitySystem
 
         var data = circuit.Comp.Data;
         var gates = data.Gates;
-        var i = args.Index;
-        if (i == 0 || args.Input == 0 || (args.Input > 0 && args.Input > gates.Count) || (args.Input < 0 && -args.Input > data.OutputIndices.Count))
-            return;
+        var output = args.Index;
+        var input = args.Input;
+        if (!data.ValidIndex(input))
+            return; // bounds check this upfront so it doesnt get half set
 
-        if (i > 0)
+        if (output.GateIndex is { } g)
         {
-            if (i > gates.Count)
-                return;
-
-            var gate = gates[i - 1];
+            var gate = gates[g];
             if (args.N >= gate.Inputs.Count)
                 return;
 
-            gate.Inputs[args.N] = args.Input;
+            gate.Inputs[args.N] = input;
+        }
+        else if (output.PortIndex is { } p && p < data.OutputIndices.Count)
+        {
+            data.OutputIndices[p] = input;
         }
         else
         {
-            i = -i;
-            if (i > data.OutputIndices.Count)
-                return;
-
-            data.OutputIndices[i - 1] = args.Input;
+            return; // no linking something to invalid
         }
 
-        // already bounds checked at the top
-        if (args.Input > 0)
-            gates[args.Input - 1].LinkOutput(i);
-        else
-            circuit.Comp.LinkInput(-args.Input - 1, i);
+        circuit.Comp.LinkOutput(input, output);
 
         UpdateUI(ent);
     }
@@ -222,38 +228,34 @@ public sealed partial class CircuitEditorSystem : EntitySystem
 
         var data = circuit.Comp.Data;
         var gates = data.Gates;
-        var i = args.Index;
-        if (i == 0)
+        var output = args.Index;
+        if (!data.ValidIndex(output))
             return;
 
-        var old = 0;
-        if (i > 0)
+        var old = CircuitIndex.Invalid;
+        if (output.GateIndex is { } g)
         {
-            if (i > gates.Count)
-                return;
-
-            var gate = gates[i - 1];
+            var gate = gates[g];
             if (args.N >= gate.Inputs.Count)
                 return;
 
             old = gate.Inputs[args.N];
-            gate.Inputs[args.N] = 0;
+            gate.Inputs[args.N] = CircuitIndex.Invalid;
         }
-        else
+        else if (output.PortIndex is { } p)
         {
-            i = -i - 1;
-            if (i >= data.OutputIndices.Count)
-                return;
-
-            old = data.OutputIndices[i];
-            data.OutputIndices[i] = 0;
+            old = data.OutputIndices[p];
+            data.OutputIndices[p] = CircuitIndex.Invalid;
         }
 
         // clean up backreferences
-        if (old > 0 && old <= gates.Count)
-            gates[old - 1].LinkedOutputs.Remove(args.Index);
-        else if (old < 0 && -old <= circuit.Comp.LinkedInputs.Count)
-            circuit.Comp.LinkedInputs[-old - 1].Remove(args.Index);
+        if (data.ValidIndex(old))
+        {
+            if (old.GateIndex is { } og)
+                gates[og].LinkedOutputs.Remove(output);
+            else if (old.PortIndex is { } op)
+                circuit.Comp.LinkedInputs[op].Remove(output);
+        }
 
         UpdateUI(ent);
     }
@@ -270,16 +272,25 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         ent.Comp.LinkedInputs.Clear();
         ent.Comp.Changed.Clear(); // just incase...
         ent.Comp.Data = new();
+        ent.Comp.ValidatePortsCount();
     }
 
     public void UpdateUI(Entity<CircuitEditorComponent> ent)
     {
-        var data = GetCircuit(ent)?.Comp.Data;
-        var state = new CircuitEditorState(data);
+        var circuit =  GetCircuit(ent);
+        var data = circuit?.Comp.Data;
+        var state = new CircuitEditorState(data, GetNetEntity(circuit?.Owner));
         _ui.SetUiState(ent.Owner, CircuitEditorUiKey.Key, state);
     }
 
-    private static void SwapValue(List<int> list, int from, int to)
+    public void UpdateUI(EntityUid uid, EntityUid circuit)
+    {
+        var data = _query.CompOrNull(circuit)?.Data;
+        var state = new CircuitEditorState(data, GetNetEntity(circuit));
+        _ui.SetUiState(uid, CircuitEditorUiKey.Key, state);
+    }
+
+    private static void SwapValue(List<CircuitIndex> list, CircuitIndex from, CircuitIndex to)
     {
         for (int i = 0; i < list.Count; i++)
         {

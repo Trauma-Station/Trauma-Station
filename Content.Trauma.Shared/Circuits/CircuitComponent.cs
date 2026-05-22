@@ -4,10 +4,7 @@ namespace Content.Trauma.Shared.Circuits;
 
 /// <summary>
 /// Component for an integrated circuit, which can be linked to other machines with a <see cref="CircuitHousingComponent"/>.
-/// Gates reference eachother, inputs and outputs with a circuit value index.
-/// If the index is 0, the reference is invalid.
-/// If the index is positive, it's a 1-based index for a gate.
-/// If the index is negative, it's a 1-based index for a sink/source port of the housing, depending on context.
+/// Gates reference eachother, inputs and outputs with a <see cref="CircuitIndex"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
@@ -41,13 +38,13 @@ public sealed partial class CircuitComponent : Component
     /// Built dynamically from gates.
     /// </summary>
     [DataField(serverOnly: true)]
-    public List<List<int>> LinkedInputs = new();
+    public List<List<CircuitIndex>> LinkedInputs = new();
 
     /// <summary>
-    /// The housing this circuit is inside, or invalid if it's not in one.
+    /// The housing this circuit is inside, if any.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid Housing;
+    public EntityUid? Housing;
 
     /// <summary>
     /// Gates which have changed their output this tick.
@@ -62,18 +59,23 @@ public sealed partial class CircuitComponent : Component
     public CircuitData Data = new();
 
     /// <summary>
-    /// Get the value of a <see cref="CircuitGate"/> if positive, or circuit input if negative, falling back to false if 0 (unlinked) or out of bounds.
+    /// Get the value of a <see cref="CircuitGate"/> depending on a circuit index, falling back to false if invalid.
     /// </summary>
-    public object GetValue(int i)
-        => i >= 0
-            ? i > 0 && i <= Data.Gates.Count ? Data.Gates[i - 1].Output : false
-            : -i <= Inputs.Count ? Inputs[-i - 1] : false;
+    public object GetValue(CircuitIndex idx)
+    {
+        if (idx.GateIndex is { } g)
+            return Data.Gates.TryGetValue(g, out var gate) ? gate.Output : false;
+        if (idx.PortIndex is { } p)
+            return Inputs.TryGetValue(p, out var input) ? input : false;
+
+        return false;
+    }
 
     /// <summary>
     /// <see cref="GetValue"/> then get a boolean value for it.
     /// Strings are not supported, nonzero ints map to 1.
     /// </summary>
-    public bool GetBool(int i)
+    public bool GetBool(CircuitIndex i)
     {
         switch (GetValue(i))
         {
@@ -92,7 +94,7 @@ public sealed partial class CircuitComponent : Component
     /// <see cref="GetValue"/> then get an int for it.
     /// Strings are not supported, bools map to 0/1.
     /// </summary>
-    public int GetInt(int i)
+    public int GetInt(CircuitIndex i)
     {
         switch (GetValue(i))
         {
@@ -108,16 +110,60 @@ public sealed partial class CircuitComponent : Component
     }
 
     /// <summary>
-    /// Link a circuit output index as using a certain input.
+    /// Ensures that all port-related fields have at least <see cref="PortsCount"/> items.
     /// </summary>
-    public void LinkInput(int i, int linked)
+    public void ValidatePortsCount()
     {
-        if (i < 0 || i >= LinkedInputs.Count)
+        // ensure required input port data exists
+        var count = CircuitComponent.PortsCount;
+        while (Inputs.Count < count)
+            Inputs.Add(false);
+        while (LinkedInputs.Count < count)
+            LinkedInputs.Add(new());
+        while (LastOutputs.Count < count)
+            LastOutputs.Add(false);
+        while (Data.OutputIndices.Count < count)
+            Data.OutputIndices.Add(CircuitIndex.Invalid);
+    }
+
+    /// <summary>
+    /// Backreference a link between an input and an output index.
+    /// </summary>
+    public void LinkOutput(CircuitIndex input, CircuitIndex output)
+    {
+        if (!Data.ValidIndex(input))
             return;
 
-        var list = LinkedInputs[i];
-        if (!list.Contains(linked))
-            list.Add(linked);
+        if (input.GateIndex is { } g)
+            Data.Gates[g].LinkOutput(output);
+        else if (input.PortIndex is { } p)
+            LinkInputPort(p, output);
+    }
+
+    /// <summary>
+    /// Remove a link backreference between an input and an output index.
+    /// </summary>
+    public void UnlinkOutput(CircuitIndex input, CircuitIndex output)
+    {
+        if (!Data.ValidIndex(input))
+            return;
+
+        if (input.GateIndex is { } g)
+            Data.Gates[g].LinkedOutputs.Remove(output);
+        else if (input.PortIndex is { } p)
+            UnlinkInputPort(p, output);
+    }
+
+    private void LinkInputPort(int i, CircuitIndex output)
+    {
+        if (LinkedInputs.TryGetValue(i, out var list) && !list.Contains(output))
+            list.Add(output);
+    }
+
+    private void UnlinkInputPort(int i, CircuitIndex output)
+    {
+        if (LinkedInputs.TryGetValue(i, out var list))
+            list.Remove(output);
     }
 }
 
@@ -129,11 +175,18 @@ public sealed partial class CircuitData
     /// 0 if it's not linked to anything.
     /// </summary>
     [ViewVariables]
-    public List<int> OutputIndices = new();
+    public List<CircuitIndex> OutputIndices = new();
 
     /// <summary>
     /// Each gate in the circuit.
     /// </summary>
     [ViewVariables]
     public List<CircuitGate> Gates = new();
+
+    /// <summary>
+    /// Returns true if an index is currently valid for this circuit data.
+    /// </summary>
+    public bool ValidIndex(CircuitIndex idx)
+        => idx.GateIndex is {} g && g < Gates.Count
+            || idx.PortIndex is {} p && p < CircuitComponent.PortsCount;
 }

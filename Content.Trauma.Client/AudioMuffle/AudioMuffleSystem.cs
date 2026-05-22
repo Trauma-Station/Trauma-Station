@@ -7,7 +7,6 @@ using Content.Shared.StationAi;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.AudioMuffle;
 using Robust.Client.Audio;
-using Robust.Client.GameObjects;
 using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Shared;

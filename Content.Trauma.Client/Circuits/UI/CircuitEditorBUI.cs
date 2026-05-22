@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Circuits;
-using Robust.Client.UserInterface;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
-using Robust.Shared.Utility;
 using System.IO;
 using YamlDotNet.RepresentationModel;
 
@@ -61,6 +59,7 @@ public sealed partial class CircuitEditorBUI : BoundUserInterface
             yamlStream.Load(reader);
             var root = yamlStream.Documents[0].RootNode;
             var data = _serMan.Read<CircuitData>(root.ToDataNode(), notNullableOverride: true);
+            _sawmill.Info($"Sending import message for {data.Gates.Count} gates");
             SendPredictedMessage(new CircuitEditorImportMessage(data));
         }
         catch (Exception e)
@@ -102,10 +101,10 @@ public sealed partial class CircuitEditorBUI : BoundUserInterface
             return;
 
         _data = cast.Data;
-        if (EntMan.TryGetComponent<CircuitEditorComponent>(Owner, out var editor) &&
-            _editor.GetCircuit((Owner, editor)) is { } circuit)
+        if (EntMan.GetEntity(cast.Circuit) is { } circuit &&
+            EntMan.TryGetComponent<CircuitComponent>(circuit, out var comp))
         {
-            circuit.Comp.Data = cast.Data; // update it so messages can be predicted, basically per-client networked field
+            comp.Data = cast.Data; // update it so messages can be predicted, basically per-client networked field
         }
 
         _window?.UpdateState(cast);

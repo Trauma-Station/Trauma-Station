@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 

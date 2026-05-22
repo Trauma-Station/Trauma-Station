@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Changeling.Components;
-using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Changeling;
 
