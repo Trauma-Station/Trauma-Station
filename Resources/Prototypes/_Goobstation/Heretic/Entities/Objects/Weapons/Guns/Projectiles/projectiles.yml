@@ -76,3 +76,17 @@
   - type: CosmicTrail
   - type: TileFrictionModifier
     modifier: 0
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletLionhunter
+  name: bullet (.60 hunter's)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+      armorPenetration: 0.5
+  - type: StaminaDamageOnCollide
+    damage: 30
