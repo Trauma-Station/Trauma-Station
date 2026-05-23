@@ -151,6 +151,28 @@ public sealed partial class CircuitComponent : Component
     }
 
     /// <summary>
+    /// Link all gate outputs together.
+    /// </summary>
+    public void LinkGateOutputs()
+    {
+        for (var i = 0; i < Data.Gates.Count; i++)
+        {
+            var gate = Data.Gates[i];
+            var output = CircuitIndex.Gate(i);
+            foreach (var input in gate.Inputs)
+            {
+                LinkOutput(input, output);
+            }
+        }
+
+        for (var i = 0; i < Data.OutputIndices.Count; i++)
+        {
+            var input = Data.OutputIndices[i];
+            LinkOutput(input, CircuitIndex.Port(i));
+        }
+    }
+
+    /// <summary>
     /// Remove a link backreference between an input and an output index.
     /// </summary>
     public void UnlinkOutput(CircuitIndex input, CircuitIndex output)

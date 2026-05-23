@@ -106,34 +106,18 @@ public sealed partial class CircuitSystem : EntitySystem
         var data = ent.Comp.Data;
         ent.Comp.ValidatePortsCount();
 
-        var gates = data.Gates;
-        for (var i = 0; i < gates.Count; i++)
-        {
-            var gate = gates[i];
-            var output = CircuitIndex.Gate(i);
-            foreach (var input in gate.Inputs)
-            {
-                ent.Comp.LinkOutput(input, output);
-            }
-        }
-
-        for (var i = 0; i < data.OutputIndices.Count; i++)
-        {
-            var input = data.OutputIndices[i];
-            ent.Comp.LinkOutput(input, CircuitIndex.Port(i));
-        }
+        ent.Comp.LinkGateOutputs();
 
         // want to automatically update gates for premade circuits so you dont have to toggle inputs or whatever
         for (var i = 0; i < ent.Comp.LinkedInputs.Count; i++)
         {
             var list = ent.Comp.LinkedInputs[i];
-            var value = ent.Comp.Inputs[i];
             foreach (var linked in list)
             {
                 if (linked.GateIndex is { } g)
                     ent.Comp.Changed.Add(g);
                 else if (linked.PortIndex is { } p)
-                    ent.Comp.LastOutputs[p] = value;
+                    ent.Comp.LastOutputs[p] = ent.Comp.Inputs[i];
             }
         }
     }
