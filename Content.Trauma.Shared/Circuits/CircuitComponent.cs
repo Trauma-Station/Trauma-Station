@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.DeviceLinking;
+
 namespace Content.Trauma.Shared.Circuits;
 
 /// <summary>
@@ -79,12 +81,10 @@ public sealed partial class CircuitComponent : Component
     {
         switch (GetValue(i))
         {
-            case bool b:
-                return b;
-            case Pulse:
-                return true;
-            case int n:
-                return n != 0;
+            case SignalState s:
+                return s != SignalState.Low;
+            case Integer n:
+                return n.Value != 0;
             default:
                 return false;
         }
@@ -98,12 +98,10 @@ public sealed partial class CircuitComponent : Component
     {
         switch (GetValue(i))
         {
-            case bool b:
-                return b ? 1 : 0;
-            case Pulse:
-                return 1;
-            case int n:
-                return n;
+            case SignalState s:
+                return s != SignalState.Low ? 1 : 0;
+            case Integer n:
+                return n.Value;
             default:
                 return 0;
         }

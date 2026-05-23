@@ -6,11 +6,13 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Circuits;
 
 public sealed partial class CircuitEditorSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -127,7 +129,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
 
     private void OnRemoveGate(Entity<CircuitEditorComponent> ent, ref CircuitEditorRemoveGateMessage args)
     {
-        if (args.Index < 0 || GetCircuit(ent) is not { } circuit)
+        if (!_timing.IsFirstTimePredicted || args.Index < 0 || GetCircuit(ent) is not { } circuit)
             return;
 
         var data = circuit.Comp.Data;

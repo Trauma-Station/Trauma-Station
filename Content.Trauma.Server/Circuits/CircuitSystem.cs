@@ -62,13 +62,13 @@ public sealed partial class CircuitSystem : EntitySystem
             // change any momentary pulses back to low since theyve been processed
             for (var i = 0; i < comp.Inputs.Count; i++)
             {
-                if (comp.Inputs[i] is not Pulse p)
+                if (comp.Inputs[i] is not SignalState s || s != SignalState.Momentary)
                     continue;
 
-                comp.Inputs[i] = false;
+                comp.Inputs[i] = SignalState.Low;
                 foreach (var input in comp.LinkedInputs[i])
                 {
-                    ValueChanged(comp, input, false);
+                    ValueChanged(comp, input, SignalState.Low);
                 }
             }
         }
@@ -89,7 +89,7 @@ public sealed partial class CircuitSystem : EntitySystem
 
         i--; // the ids start with 1, convert to 0-based index
         // legacy signals with no data are assumed to be a pulse
-        var value = args.Data is { } data ? ParseValue(data) : Pulse.Instance;
+        var value = args.Data is { } data ? ParseValue(data) : SignalState.Momentary;
         if (comp.Inputs[i].Equals(value))
             return; // no change
 
@@ -158,31 +158,23 @@ public sealed partial class CircuitSystem : EntitySystem
         // stop sending values when a circuit is depowered removed etc
         for (var i = 0; i < CircuitComponent.PortsCount; i++)
         {
-            if (!comp.LastOutputs[i].Equals(false))
-                SendOutput(comp.Housing, i + 1, false);
+            if (!comp.LastOutputs[i].Equals(SignalState.Low))
+                SendOutput(comp.Housing, i + 1, SignalState.Low);
         }
     }
 
     private object ParseValue(NetworkPayload data)
     {
         if (data.TryGetValue<SignalState>(DeviceNetworkConstants.LogicState, out var state))
-        {
-            return state switch
-            {
-                SignalState.Momentary => Pulse.Instance,
-                SignalState.Low => false,
-                SignalState.High => true,
-                _ => false
-            };
-        }
+            return state;
 
         if (data.TryGetValue<int>("logic_int", out var n))
-            return n;
+            return new Integer(n);
 
         if (data.TryGetValue<string>("logic_string", out var s))
             return s;
 
-        return Pulse.Instance; // non-logic signals are assumed to be a pulse
+        return SignalState.Momentary; // non-logic signals are assumed to be a pulse
     }
 
     private void ValueChanged(CircuitComponent comp, CircuitIndex idx, object value)
@@ -207,14 +199,11 @@ public sealed partial class CircuitSystem : EntitySystem
         _payload.Clear();
         switch (value)
         {
-            case bool b:
-                _payload[DeviceNetworkConstants.LogicState] = b ? SignalState.High : SignalState.Low;
+            case SignalState s:
+                _payload[DeviceNetworkConstants.LogicState] = s;
                 break;
-            case Pulse p: // should probably never happen but just incase
-                _payload[DeviceNetworkConstants.LogicState] = SignalState.Momentary;
-                break;
-            case int n:
-                _payload["logic_int"] = n;
+            case Integer n:
+                _payload["logic_int"] = n.Value;
                 break;
             case string s:
                 _payload["logic_string"] = s;
