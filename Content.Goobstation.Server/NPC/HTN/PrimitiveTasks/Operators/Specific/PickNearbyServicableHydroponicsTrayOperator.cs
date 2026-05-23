@@ -14,10 +14,10 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOperator
 {
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _ent = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
-    [Dependency] private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
 
     /// <summary>
     /// Determines how close the bot needs to be to service a tray
@@ -44,6 +44,8 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
 
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+
+        _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -53,7 +55,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
 
         var emagged = _emaggedQuery.HasComp(owner);
 
-        var coords = _entMan.GetComponent<TransformComponent>(owner).Coordinates;
+        var coords = _ent.GetComponent<TransformComponent>(owner).Coordinates;
         _targets.Clear();
         _lookup.GetEntitiesInRange(coords, Range, _targets);
         foreach (var target in _targets)
@@ -71,7 +73,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
             return (true, new Dictionary<string, object>()
             {
                 {TargetKey, target.Owner},
-                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
+                {TargetMoveKey, _ent.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });
         }

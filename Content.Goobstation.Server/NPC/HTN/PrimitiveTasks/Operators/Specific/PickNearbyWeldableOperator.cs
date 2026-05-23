@@ -20,8 +20,8 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     private DamageableSystem _damageable = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
-    [Dependency] private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
-    [Dependency] private EntityQuery<WeldbotComponent> _query = default!;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<WeldbotComponent> _query = default!;
 
     /// <summary>
     /// Target entity to weld
@@ -46,6 +46,9 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
         _damageable = sysManager.GetEntitySystem<DamageableSystem>();
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+
+        _emaggedQuery = _ent.GetEntityQuery<EntityQuery<EmaggedComponent>();
+        _query = _ent.GetEntityQuery<WeldbotComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
