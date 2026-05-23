@@ -51,7 +51,7 @@ public sealed partial class ViewconeComponent : Component
     public float ConeIgnoreRadius = 1.35f;
 
     [DataField]
-    public float ConeIgnoreFeather = 1.0f;
+    public float ConeIgnoreFeather = 0.2f;
 
     /// <summary>
     /// How long it takes for something out of your vision cone to completely fade out, after <see cref="FadeStart"/>.
