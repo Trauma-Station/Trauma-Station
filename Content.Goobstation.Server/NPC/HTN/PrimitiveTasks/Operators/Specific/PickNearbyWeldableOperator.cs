@@ -47,7 +47,7 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
 
-        _emaggedQuery = _ent.GetEntityQuery<EntityQuery<EmaggedComponent>();
+        _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
         _query = _ent.GetEntityQuery<WeldbotComponent>();
     }
 
