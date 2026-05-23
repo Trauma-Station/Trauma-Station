@@ -11,6 +11,6 @@ public sealed partial class RemoveOnIgniteStatusEffectComponent : Component
     /// <summary>
     /// The effect prototype
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public EntProtoId EffectProto;
 }

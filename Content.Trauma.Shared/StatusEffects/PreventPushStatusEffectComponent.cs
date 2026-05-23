@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.StatusEffects;
 
 /// <summary>
-/// Prevent you from being pushed/thrown.
+/// Status effect that prevents you from being pushed/thrown.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class PreventPushStatusEffectComponent : Component;

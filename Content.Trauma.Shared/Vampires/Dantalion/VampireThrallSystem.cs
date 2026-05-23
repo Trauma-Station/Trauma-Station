@@ -71,7 +71,7 @@ public sealed partial class VampireThrallSystem : EntitySystem
         _role.MindAddRole(mindId, ThrallMindRole);
         args.Handled = true;
 
-        _admin.Add(LogType.Vampire, LogImpact.High, $"Vampire {ToPrettyString(user)} made {ToPrettyString(target)} a thrall via Enthrall action");
+        _admin.Add(LogType.Vampire, LogImpact.High, $"Vampire {user} made {target} a thrall via Enthrall action");
     }
 
 

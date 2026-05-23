@@ -3,8 +3,9 @@
 namespace Content.Trauma.Shared.Vampires;
 
 /// <summary>
-/// Marks an entity that can be drained by a vampire.
-/// This means the entity with <see cref="VampireBloodsuckingComponent"/> can not drain more usable blood from them.
+/// Marks an entity that can be drained by an entity with <see cref="VampireBloodsuckingComponent"/>.
+///
+/// If the bloodsucker sucks more than <see cref="MaxBlood"/> from this entity, then they cannot be drained anymore.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]

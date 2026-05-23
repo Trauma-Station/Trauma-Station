@@ -9,11 +9,12 @@ namespace Content.Trauma.Shared.Vampires.Gargantua;
 /// Applies entity effects on collision with other entities, and gets removed during a landing event.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class GargantuaChargingComponent : Component
 {
     /// <summary>
-    /// Effects that run when the entity collides with other entities.
+    /// The effect to run on targets we collided with
     /// </summary>
-    [DataField]
-    public EntityEffect[] ImpactEffects = default!;
+    [DataField(required: true), AutoNetworkedField]
+    public ProtoId<EntityEffectPrototype> Effect = default!;
 }

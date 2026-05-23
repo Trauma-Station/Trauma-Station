@@ -100,7 +100,7 @@ public abstract partial class SharedActiveBloodLeecherSystem : EntitySystem
             ent.Comp.MusicEntity = audio;
         }
 
-        _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ToPrettyString(ent.Owner)} has initiated the Blood Bringer's Rite action");
+        _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ent.Owner} has initiated the Blood Bringer's Rite action");
 
         ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.UpdateRate;
         Dirty(ent);
@@ -108,7 +108,7 @@ public abstract partial class SharedActiveBloodLeecherSystem : EntitySystem
 
     private void OnShutdown(Entity<ActiveBloodLeecherComponent> ent, ref ComponentShutdown args)
     {
-        _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ToPrettyString(ent.Owner)} has stopped the Blood Bringer's Rite action");
+        _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ent.Owner} has stopped the Blood Bringer's Rite action");
 
         _audio.Stop(ent.Comp.MusicEntity);
     }

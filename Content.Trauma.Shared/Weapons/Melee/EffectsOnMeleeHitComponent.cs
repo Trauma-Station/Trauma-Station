@@ -31,7 +31,7 @@ public sealed partial class EffectsOnMeleeHitComponent : Component
     public bool EffectForEveryHit;
 
     /// <summary>
-    /// Conditions that run on the target, before the entity effects.
+    /// Conditions that are checked on the target, before the entity effects.
     /// Useful if you want to run <see cref="UserEffects"/> based on target conditions.
     /// </summary>
     [DataField]

@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.MobClass;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.MobClass;
 

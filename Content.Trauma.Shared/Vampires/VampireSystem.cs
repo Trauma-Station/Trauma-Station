@@ -61,7 +61,7 @@ public sealed partial class VampireSystem : EntitySystem
         ent.Comp.TotalBlood += amount;
         Dirty(ent);
 
-        var ev = new  VampireTotalBloodChangedEvent(ent.Comp.TotalBlood);
+        var ev = new VampireTotalBloodChangedEvent(ent.Comp.TotalBlood);
         RaiseLocalEvent(ent.Owner, ref ev);
     }
 
@@ -86,10 +86,7 @@ public sealed partial class VampireSystem : EntitySystem
         if (!Resolve(ent.Owner, ref ent.Comp, false))
             return false;
 
-        if (ent.Comp.UsableBlood >= amount)
-            return true;
-
-        return false;
+        return ent.Comp.UsableBlood >= amount;
     }
 
     /// <summary>

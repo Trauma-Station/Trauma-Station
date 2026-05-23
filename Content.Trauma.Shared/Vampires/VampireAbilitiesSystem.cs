@@ -88,7 +88,7 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
             ent.Comp.UnlockedAbilities.Add(ability);
             Dirty(ent);
 
-            _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ToPrettyString(ent.Owner)} has gained the ability {ability.Id}");
+            _admin.Add(LogType.Vampire, LogImpact.Medium, $"User {ent.Owner} has gained the ability {ability.Id}");
         }
     }
 
@@ -104,7 +104,7 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (!args.WasModified<EntityPrototype>())
+        if (!args.WasModified<VampireAbilityPrototype>())
             return;
 
         LoadPrototypes();

@@ -204,37 +204,7 @@
     - !type:AddComponents
       components:
       - type: GargantuaCharging
-        impactEffects:
-        # Wall Logic
-        - !type:HealthChange
-          conditions:
-          - !type:WhitelistCondition
-            whitelist:
-              tags:
-              - Wall
-          damage:
-            types:
-              Structural: 500
-        # Body Logic
-        - !type:NestedEffect
-          conditions:
-          - !type:WhitelistCondition
-            whitelist:
-              components:
-              - Body
-          proto: ChargeMob
-        # Mech Logic
-        - !type:HealthChange
-          conditions:
-          - !type:WhitelistCondition
-            whitelist:
-              components:
-              - Mech
-          damage:
-            types:
-              Blunt: 200
-        # Generic Logic
-        - !type:ThrowRandomly
+        effect: VampireGargCharge
     - !type:ThrowAtFacingDirection
     - !type:SpawnParticles
       particleProto: VampireCharge

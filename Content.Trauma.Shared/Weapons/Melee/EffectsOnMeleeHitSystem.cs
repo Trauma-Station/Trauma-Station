@@ -33,11 +33,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
             if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds))
                 return;
 
-            if (targetEffects != null)
-                _effects.ApplyEffects(target, targetEffects);
-
-            if (userEffects != null)
-                _effects.ApplyEffects(user, userEffects);
+            DoEffects(targetEffects, userEffects, user, target);
             return;
         }
 
@@ -46,11 +42,26 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
             if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds))
                 continue;
 
-            if (targetEffects != null)
-                _effects.ApplyEffects(target, targetEffects);
-
-            if (userEffects != null)
-                _effects.ApplyEffects(user, userEffects);
+            DoEffects(targetEffects, userEffects, user, target);
         }
     }
+
+    #region Helepr
+
+    /// <summary>
+    /// Runs effects on the target and user.
+    /// </summary>
+    public void DoEffects(
+        EntityEffect[]? targetEffects,
+        EntityEffect[]? userEffects,
+        EntityUid user,
+        EntityUid target)
+    {
+        if (targetEffects is { } targetEffect)
+            _effects.ApplyEffects(target, targetEffect);
+
+        if (userEffects is { } userEffect)
+            _effects.ApplyEffects(user, userEffect);
+    }
+    #endregion
 }

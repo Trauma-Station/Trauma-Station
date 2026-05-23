@@ -23,11 +23,7 @@ public sealed partial class GargantuaChargingSystem : EntitySystem
 
     private void OnCollide(Entity<GargantuaChargingComponent> ent, ref StartCollideEvent args)
     {
-        // So we don't get null reference errors
-        if (_net.IsClient)
-            return;
-
-        _effects.ApplyEffects(args.OtherEntity, ent.Comp.ImpactEffects);
+        _effects.TryApplyEffect(args.OtherEntity, ent.Comp.Effect, user: ent.Owner);
     }
 
     private void OnLand(Entity<GargantuaChargingComponent> ent, ref LandEvent args)

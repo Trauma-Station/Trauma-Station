@@ -20,7 +20,7 @@ namespace Content.Trauma.Shared.Vampires;
 public sealed partial class VampireGlareSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<StunnedComponent> _stunnedQuery = default!;
@@ -76,7 +76,7 @@ public sealed partial class VampireGlareSystem : EntitySystem
 
             if (isStunned)
             {
-                _entityEffects.ApplyEffects(target, sideEffects, scale);
+                _effects.ApplyEffects(target, sideEffects, scale);
                 continue;
             }
 
@@ -85,17 +85,17 @@ public sealed partial class VampireGlareSystem : EntitySystem
             {
                 case Deviation.Full:
                 {
-                    _entityEffects.ApplyEffects(target, behindEffects, scale);
+                    _effects.ApplyEffects(target, behindEffects, scale);
                     break;
                 }
                 case Deviation.Partial:
                 {
-                    _entityEffects.ApplyEffects(target, sideEffects, scale);
+                    _effects.ApplyEffects(target, sideEffects, scale);
                     break;
                 }
                 case Deviation.None:
                 {
-                    _entityEffects.ApplyEffects(target, frontEffects, scale);
+                    _effects.ApplyEffects(target, frontEffects, scale);
                     break;
                 }
             }

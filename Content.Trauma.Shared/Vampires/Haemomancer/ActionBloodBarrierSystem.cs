@@ -2,8 +2,10 @@
 
 namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
-public sealed class ActionBloodBarrierSystem : EntitySystem
+public sealed partial class ActionBloodBarrierSystem : EntitySystem
 {
+    [Dependency] private SharedTransformSystem _transform = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -64,8 +66,10 @@ public sealed class ActionBloodBarrierSystem : EntitySystem
     /// </summary>
     private void SpawnBarrier(TransformComponent pointA, TransformComponent pointB, EntProtoId barrierProto)
     {
-        var a = pointA.Coordinates;
-        var b = pointB.Coordinates;
+        var a = _transform.GetMapCoordinates(pointA);
+        var b = _transform.GetMapCoordinates(pointB);
+        if (a == b)
+            return;
 
         var delta = b.Position - a.Position;
         var dirVec = delta.Normalized();
@@ -74,7 +78,7 @@ public sealed class ActionBloodBarrierSystem : EntitySystem
 
         while (currentOffset.Length() < stopDist)
         {
-            var currentCoords = a.Offset(currentOffset);
+            var currentCoords = pointA.Coordinates.Offset(currentOffset);
             PredictedSpawnAtPosition(barrierProto, currentCoords);
 
             currentOffset += dirVec;
