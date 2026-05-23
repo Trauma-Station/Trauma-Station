@@ -98,9 +98,6 @@
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Bullets/gaussgun.rsi
   - type: Ammo
     muzzleFlash: null
-  - type: Tag
-    tags:
-    - AmmoGaussgun
   - type: Reflective
   - type: FlyBySound
   - type: Clickable
