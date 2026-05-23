@@ -233,6 +233,7 @@
         false
 
 - type: entity
+  abstract: true
   id: BaseXenoTailed
   components:
   - type: TailedEntity
