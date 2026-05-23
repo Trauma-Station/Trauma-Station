@@ -26,8 +26,10 @@ public sealed class NotesControlTest : InteractionTest
         // Click the ahelp button in the menu bar
         await ClickWidgetControl<GameTopMenuBar, MenuButton>(nameof(GameTopMenuBar.AHelpButton));
         // <Trauma> - Mentor Help
+        await RunTicks(5);
         var staffHelp = GetWindow<StaffHelpWindow>();
         await ClickControl(staffHelp.AdminHelpButton);
+        await RunTicks(5);
         // </Trauma>
         var bwoink = GetWindow<BwoinkWindow>();
 
