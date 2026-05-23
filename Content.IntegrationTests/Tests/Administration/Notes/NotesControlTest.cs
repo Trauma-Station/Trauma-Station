@@ -42,11 +42,13 @@ public sealed class NotesControlTest : InteractionTest
 
         // Open their notes
         await ClickControl(bwoink.Bwoink.Notes);
+        await RunTicks(5); // Trauma
         var noteCtrl = GetWindow<AdminNotesWindow>().Notes;
         Assert.That(noteCtrl.Notes.ChildCount, Is.EqualTo(0));
 
         // Add a new note
         await ClickControl(noteCtrl.NewNoteButton);
+        await RunTicks(5); // Trauma
         var addNoteWindow = GetWindow<NoteEdit>();
         var msg = $"note: {Guid.NewGuid()}";
         await Client.WaitPost(() => addNoteWindow.NoteTextEdit.TextRope = new Rope.Leaf(msg));
