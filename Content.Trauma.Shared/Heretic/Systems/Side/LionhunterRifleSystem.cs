@@ -2,15 +2,15 @@
 
 using System.Linq;
 using Content.Lavaland.Common.Weapons.Ranged;
-using Content.Shared.Coordinates;
+using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
+using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
@@ -19,7 +19,11 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.Projectiles;
+using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
@@ -35,6 +39,8 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     [Dependency] private EntityQuery<WieldableComponent> _wieldableQuery = default!;
     [Dependency] private EntityQuery<LionhunterRifleProjectileComponent> _lionhunterProjectileQuery = default!;
@@ -46,7 +52,6 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<LionhunterRifleComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<LionhunterRifleComponent, DoAfterAttemptEvent<HereticAimGunDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<LionhunterRifleComponent, HereticAimGunDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<LionhunterRifleComponent, ProjectileShotEvent>(OnShoot);
@@ -54,6 +59,19 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         SubscribeLocalEvent<LionhunterRifleProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<LionhunterRifleProjectileComponent, ProjectileHitEvent>(OnHit);
+
+        CommandBinds.Builder
+            .Bind(EngineKeyFunctions.UseSecondary, new PointerInputCmdHandler(Aim))
+            .Register<LionhunterRifleSystem>();
+    }
+
+    private bool Aim(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
+    {
+        if (session?.AttachedEntity is not { Valid: true } player || !Exists(player) || !Exists(uid))
+            return false;
+
+        AimRifle(player, uid);
+        return false;
     }
 
     private void OnHit(Entity<LionhunterRifleProjectileComponent> ent, ref ProjectileHitEvent args)
@@ -88,7 +106,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
     private void OnShoot(Entity<LionhunterRifleComponent> ent, ref ProjectileShotEvent args)
     {
-        if (ent.Comp.AimMarker == null || args.User is not { } user)
+        if (ent.Comp.AimingAt == null || args.User is not { } user)
             return;
 
         HereticPath? path = null;
@@ -136,25 +154,30 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
     private void OnDoAfter(Entity<LionhunterRifleComponent> ent, ref HereticAimGunDoAfterEvent args)
     {
-        if (args is { Cancelled: false, Handled: false } && Exists(args.Target))
+        if (ent.Comp.AimingAt is not { } target)
+            return;
+
+        if (args is { Cancelled: false, Handled: false } && Exists(args.Target) && args.Target.Value == target)
         {
             args.Handled = true;
 
             if (!TryComp(ent, out GunComponent? gun))
                 return;
 
-            _gun.AttemptShoot(args.User, (ent, gun), Transform(args.Target.Value).Coordinates, args.Target.Value);
+            _gun.AttemptShoot(args.User, (ent, gun), Transform(target).Coordinates, target);
+            _delay.TryResetDelay(ent.Owner, id: ent.Comp.AimUseDelayId);
         }
 
-        PredictedQueueDel(ent.Comp.AimMarker);
-        ent.Comp.AimMarker = null;
+        RemCompDeferred<LionhunterRifleAimMarkerComponent>(target);
+        ent.Comp.AimingAt = null;
         Dirty(ent);
     }
 
     private void OnDoAfterAttempt(Entity<LionhunterRifleComponent> ent,
         ref DoAfterAttemptEvent<HereticAimGunDoAfterEvent> args)
     {
-        if (_wieldableQuery.TryComp(ent, out var wieldable) && !wieldable.Wielded ||
+        if (ent.Comp.AimingAt != args.Event.Target ||
+            _wieldableQuery.TryComp(ent, out var wieldable) && !wieldable.Wielded ||
             args.Event.Target is not { } target || !Transform(target)
                 .Coordinates
                 .TryDistance(EntityManager, _transform, Transform(args.Event.User).Coordinates, out var dist) ||
@@ -162,66 +185,96 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnAfterInteract(Entity<LionhunterRifleComponent> ent, ref AfterInteractEvent args)
+    private void AimRifle(EntityUid user, EntityUid target)
     {
-        if (!_heretic.IsHereticOrGhoul(args.User))
+        if (target == user || !_heretic.IsHereticOrGhoul(user) || !_combat.IsInCombatMode(user) ||
+            !TryComp(user, out DoAfterComponent? doAfter))
             return;
 
-        if (!_hands.IsHolding(args.User, ent))
+        if (!_hands.TryGetActiveItem(user, out var ent) || !TryComp(ent.Value, out LionhunterRifleComponent? comp) ||
+            _delay.IsDelayed(ent.Value, comp.AimUseDelayId))
             return;
 
-        if (_wieldableQuery.TryComp(ent, out var wieldable) && !wieldable.Wielded)
+        if (_whitelist.IsWhitelistFail(comp.AimWhitelist, target))
+            return;
+
+        if (_wieldableQuery.TryComp(ent.Value, out var wieldable) && !wieldable.Wielded)
         {
-            _popup.PopupClient(Loc.GetString("heretic-ability-fail-not-wielded", ("ent", ent.Owner)),
-                args.User,
-                args.User);
+            _popup.PopupClient(Loc.GetString("heretic-ability-fail-not-wielded", ("ent", ent.Value)), user, user);
             return;
         }
 
-        if (args.Target is not { } target || target == args.User || _whitelist.IsWhitelistFail(ent.Comp.AimWhitelist, target))
-            return;
-
-        var coords = Transform(args.User).Coordinates;
+        var coords = Transform(user).Coordinates;
         var otherCoords = Transform(target).Coordinates;
         if (!coords.TryDistance(EntityManager, _transform, otherCoords, out var distance) ||
-            distance > ent.Comp.MaxDistance)
+            distance > comp.MaxDistance)
             return;
 
-        if (distance < ent.Comp.MinDistance)
+        if (distance < comp.MinDistance)
         {
-            _popup.PopupClient(Loc.GetString("heretic-ability-fail-too-close"), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("heretic-ability-fail-too-close"), user, user);
             return;
         }
 
-        var time = ent.Comp.AimTimePerDistance * distance;
-        if (time > ent.Comp.MaxAimTime)
-            time = ent.Comp.MaxAimTime;
+        var time = comp.AimTimePerDistance * distance;
+        if (time > comp.MaxAimTime)
+            time = comp.MaxAimTime;
 
         var doArgs = new DoAfterArgs(EntityManager,
-            args.User,
+            user,
             time,
             new HereticAimGunDoAfterEvent(),
-            ent,
+            ent.Value,
             target,
-            ent)
+            ent.Value)
         {
             MultiplyDelay = false,
             AttemptFrequency = AttemptFrequency.EveryTick,
             BreakOnDropItem = true,
             BreakOnHandChange = true,
+            NeedHand = true,
             RequireCanInteract = false,
             DistanceThreshold = null,
+            DuplicateCondition = DuplicateConditions.SameTarget,
         };
 
-        if (!_doAfter.TryStartDoAfter(doArgs))
+        var dirtied = false;
+
+        // If we are already aiming at target, do-after will be cancelled because of DuplicateConditions
+        if (comp.AimingAt != target)
+        {
+            if (Exists(comp.AimingAt))
+                RemCompDeferred<LionhunterRifleAimMarkerComponent>(comp.AimingAt.Value);
+
+            // Cancel all other aiming do-afters, we can't aim at multiple targets at once
+            // Not relying on DuplicateConditions because we need new do-after to be prioritized over old ones
+            foreach (var (id, da) in doAfter.DoAfters)
+            {
+                if (da.Cancelled || da.Completed)
+                    continue;
+
+                if (_doAfter.GetArgs(da).Event.GetType() != typeof(HereticAimGunDoAfterEvent))
+                    continue;
+
+                _doAfter.Cancel(user, id, doAfter, true);
+            }
+
+            comp.AimingAt = target;
+            Dirty(ent.Value, comp);
+            dirtied = true;
+
+        }
+
+        if (_doAfter.TryStartDoAfter(doArgs))
+        {
+            _popup.PopupClient(Loc.GetString("lionhunter-rifle-aim-message"), user, user);
+            EnsureComp<LionhunterRifleAimMarkerComponent>(target);
             return;
+        }
 
-        _popup.PopupClient(Loc.GetString("lionhunter-rifle-aim-message"), args.User, args.User);
-
-        ent.Comp.AimMarker = PredictedSpawnAttachedTo(ent.Comp.AimMarkerProto, target.ToCoordinates());
-        Dirty(ent);
-
-        args.Handled = true;
+        comp.AimingAt = null;
+        if (!dirtied)
+            Dirty(ent.Value, comp);
     }
 
     [Serializable, NetSerializable]

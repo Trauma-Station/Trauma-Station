@@ -17,14 +17,17 @@ public sealed partial class LionhunterRifleComponent : Component
     public float MinDistance = 4f;
 
     [DataField]
-    public float MaxDistance = 60f;
+    public float MaxDistance = 30f;
 
     [DataField]
     public EntProtoId AimMarkerProto = "LionhunterReticle";
 
     [DataField, AutoNetworkedField]
-    public EntityUid? AimMarker;
+    public EntityUid? AimingAt;
 
     [DataField]
     public EntityWhitelist? AimWhitelist;
+
+    [DataField]
+    public string AimUseDelayId = "aim";
 }

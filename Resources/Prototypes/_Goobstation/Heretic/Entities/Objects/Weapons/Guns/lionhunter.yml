@@ -41,6 +41,10 @@
   - type: SpeedModifiedOnWield
     walkModifier: 0.35
     sprintModifier: 0.35
+  - type: UseDelay
+    delays:
+      aim:
+        length: 3
   - type: LionhunterRifle
     aimWhitelist:
       components:

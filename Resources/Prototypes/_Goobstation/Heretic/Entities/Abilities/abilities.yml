@@ -353,23 +353,6 @@
     - HideContextMenu
 
 - type: entity
-  id: LionhunterReticle
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: TimedDespawn
-    lifetime: 15
-  - type: Sprite
-    noRot: true
-    drawdepth: Effects
-    layers:
-    - shader: unshaded
-      sprite: _Goobstation/Heretic/Effects/effects.rsi
-      state: sniper_zoom
-  - type: Tag
-    tags:
-    - HideContextMenu
-
-- type: entity
   id: VoidConduit
   name: Void Conduit
   description: An open gate which leads to nothingness. Releases pulses which you do not want to get hit by.
