@@ -9,6 +9,8 @@
     amount: 17
     spacing: 0.170
     prototype: MobXenomorphTailSegmentBase
+    tailOffset: 0, -0.13
+    headFollowSegmentRotation: false
   - type: Sprite
     sprite: _White/Mobs/Aliens/Xenomorphs/sentinel.rsi
     layers:
