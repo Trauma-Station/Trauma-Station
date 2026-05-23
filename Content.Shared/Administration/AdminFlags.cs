@@ -133,7 +133,7 @@ namespace Content.Shared.Administration
         ///    RMC - Lets you use the mentor help system.
         /// </summary>
         MentorHelp = 1 << 29,
-        
+
         /// Trauma - flag for adding watchlist to a player's notes.
         /// </summary>
         Watchlist = 1 << 30,
