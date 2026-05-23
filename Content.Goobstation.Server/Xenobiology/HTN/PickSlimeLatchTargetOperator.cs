@@ -24,8 +24,8 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
     private GoobHungerSystem _hunger = default!;
     private PathfindingSystem _pathfinding = default!;
     private SlimeLatchSystem _latch = default!;
-    [Dependency] private EntityQuery<BeingLatchedComponent> _latchedQuery = default!;
-    [Dependency] private EntityQuery<SlimeDamageOvertimeComponent> _dotQuery = default!;
+    private EntityQuery<BeingLatchedComponent> _latchedQuery = default!;
+    private EntityQuery<SlimeDamageOvertimeComponent> _dotQuery = default!;
 
     [DataField(required: true)]
     public string RangeKey = string.Empty;
@@ -50,6 +50,9 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
         _factions = sysManager.GetEntitySystem<NpcFactionSystem>();
         _hunger = sysManager.GetEntitySystem<GoobHungerSystem>();
         _latch = sysManager.GetEntitySystem<SlimeLatchSystem>();
+
+        _latchedQuery = _ent.GetEntityQuery<BeingLatchedComponent>();
+        _dotQuery = _ent.GetEntityQuery<SlimeDamageOvertimeComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard, CancellationToken cancelToken)
