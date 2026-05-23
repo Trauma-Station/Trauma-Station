@@ -1,3 +1,5 @@
+# Circuits
+
 - type: sinkPort
   id: Circuit1
   name: signal-port-name-circuit-1
