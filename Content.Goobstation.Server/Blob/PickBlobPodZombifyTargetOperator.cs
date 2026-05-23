@@ -46,8 +46,8 @@ public sealed partial class PickBlobPodZombifyTargetOperator : HTNOperator
         _mob = sysManager.GetEntitySystem<MobStateSystem>();
         _factions = sysManager.GetEntitySystem<NpcFactionSystem>();
 
-        _humanoidQuery = GetEntityQuery<HumanoidProfileComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
+        _humanoidQuery = _ent.GetEntityQuery<HumanoidProfileComponent>();
+        _xformQuery = _ent.TransformQuery;
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
