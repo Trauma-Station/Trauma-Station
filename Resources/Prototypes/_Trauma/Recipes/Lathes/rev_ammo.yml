@@ -59,5 +59,13 @@
 
 - type: latheRecipe
   parent: BaseRevMagazine
+  id: RevTurretMagazineHeavy
+  completetime: 15
+  materials:
+    Steel: 500
+  result: BaseMagazineTurretHeavyEmpty
+
+- type: latheRecipe
+  parent: BaseRevMagazine
   id: RevSMGMagazine
   result: MagazinePistolSubMachineGunEmpty

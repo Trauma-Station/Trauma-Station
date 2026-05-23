@@ -42,3 +42,21 @@
   completetime: 2
   materials:
     Steel: 500
+
+- type: latheRecipe
+  id: RegenerativeMesh
+  result: RegenerativeMesh
+  categories:
+  - Medical
+  materials:
+    Cloth: 100
+    Plasma: 100
+
+- type: latheRecipe
+  id: MedicatedSuture
+  result: MedicatedSuture
+  categories:
+  - Medical
+  materials:
+    Cloth: 100
+    Plasma: 100

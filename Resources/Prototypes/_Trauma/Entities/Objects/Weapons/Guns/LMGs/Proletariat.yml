@@ -5,7 +5,7 @@
   description: An ancient LMG named for the classes it was used to oppress, until that class got ahold of it. Takes .22 short turret mags.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/SMGs/resistance.rsi
+    sprite: _Trauma/Objects/Weapons/Guns/LightMachineGuns/proletariat.rsi/
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -95,3 +95,15 @@
     walkModifier: 1
     sprintModifier: 0.9
   - type: HeldSpeedModifier
+
+- type: entity
+  parent: WeaponLightMachineGunProletariat
+  id: WeaponLightMachineGunProletariatEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevGuns
+    node: resistance
+  - type: ContainerFill
+    containers: {}

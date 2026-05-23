@@ -396,3 +396,50 @@
     whitelist:
       tags:
       - T45Frame
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevMedFab
+  name: hidden medical fabricator
+  description: A hidden subfloor fabricator that can make medical equipment.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/revforge.rsi
+  - type: SubFloorHide
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - SubfloorMask
+  - type: Lathe
+    producingSound:
+      path: /Audio/_Trauma/Revs/strike.ogg
+    runningState: revforge
+    staticPacks:
+    - TopicalsStatic
+    - RevMedicalStatic
+    - ChemistryStatic
+    - SurgeryStatic
+    - MedicalStatic
+    - MedicalClothingStatic
+    - MedicalBoardsStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
+  - type: Construction
+    node: hidden medical fabricator
