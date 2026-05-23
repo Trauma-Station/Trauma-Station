@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.DeviceLinking;
 using Content.Goobstation.Shared.Factory.Filters;
 
 namespace Content.Trauma.Shared.Circuits;
@@ -15,7 +16,6 @@ public enum GateValue : byte
     String,
     Any
 }
-
 
 // need these wrapper classes because reflection manager yml tag lookup is broken and refuses to use structs like Int32 or Boolean...
 [DataDefinition, Serializable, NetSerializable]
