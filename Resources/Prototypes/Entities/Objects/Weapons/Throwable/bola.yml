@@ -1,5 +1,3 @@
-# Goob edit - energy bola
-
 - type: entity
   name: bola
   parent: [BaseItem, BaseSecurityContraband]
