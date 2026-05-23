@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 <mentor:MentorHelpWindow
     xmlns="https://spacestation14.io"
     xmlns:mentor="clr-namespace:Content.Trauma.Client.Mentor"
