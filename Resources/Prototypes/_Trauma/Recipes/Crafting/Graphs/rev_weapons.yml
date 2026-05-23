@@ -70,6 +70,34 @@
     entity: RevTorch
 
 - type: constructionGraph
+  id: RevMaul
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 2
+  - node: finished
+    entity: RevMaul
+
+- type: constructionGraph
+  id: RevKunai
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 2
+  - node: finished
+    entity: RevKunai
+
+- type: constructionGraph
   id: RevGuns
   start: start
   graph:

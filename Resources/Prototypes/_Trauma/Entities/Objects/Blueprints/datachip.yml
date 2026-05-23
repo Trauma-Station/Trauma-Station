@@ -47,3 +47,27 @@
   - type: Blueprint
     providedRecipes:
     - RevShieldRipper
+
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseRevMinorContraband ]
+  id: BaseBlueprintDatachipForge
+  name: data chip
+  description: A datachip, can be inserted into an industrial forge to make new useful tech.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/datachip.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - ForgeMold # lol
+
+- type: entity
+  parent: BaseBlueprintDatachipForge
+  id: DataChipMeleeUpgrades
+  name: data chip [Melee Upgrades]
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - RevMaul
+    - RevKunai

@@ -40,3 +40,28 @@
   components:
   - type: BallisticAmmoProvider
     proto: null
+
+- type: entity
+  parent: BaseMagazineTurret
+  id: BaseMagazineTurretHeavy
+  name: "circular magazine (.22 short)"
+  suffix: Full
+  description: 275 round low-caliber magazine, often used in less-lethal LMGs... whatever the fuck that means.
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeTurret
+    proto: CartridgeTurret
+    capacity: 275
+  - type: Item
+    size: Normal
+
+- type: entity
+  parent: BaseMagazineTurret
+  id: BaseMagazineTurretHeavyEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
