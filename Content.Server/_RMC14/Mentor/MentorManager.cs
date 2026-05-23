@@ -14,16 +14,16 @@ using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Mentor;
 
-public sealed class MentorManager : IPostInjectInit
+public sealed partial class MentorManager : IPostInjectInit
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
-    [Dependency] private readonly UserDbDataManager _userDb = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private ILogManager _log = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private PlayerRateLimitManager _rate = default!;
+    [Dependency] private UserDbDataManager _db = default!;
 
     private const string RateLimitKey = "MentorHelp";
 
@@ -147,13 +147,13 @@ public sealed class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorHelpMsg>(OnMentorHelpMessage);
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>();
 
-        _userDb.AddOnFinishLoad(FinishLoad);
-        _userDb.AddOnPlayerDisconnect(ClientDisconnected);
+        _db.AddOnFinishLoad(FinishLoad);
+        _db.AddOnPlayerDisconnect(ClientDisconnected);
 
         if (_config.IsCVarRegistered(TraumaCVars.RMCMentorHelpRateLimitPeriod.Name) &&
             _config.IsCVarRegistered(TraumaCVars.RMCMentorHelpRateLimitCount.Name))
         {
-            _rateLimit.Register(
+            _rate.Register(
                 RateLimitKey,
                 new RateLimitRegistration(
                     TraumaCVars.RMCMentorHelpRateLimitPeriod,
