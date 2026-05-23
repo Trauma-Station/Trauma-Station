@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory.Filters;
-using Content.Shared.DeviceLinking;
 
 namespace Content.Trauma.Shared.Circuits;
 
@@ -17,9 +16,32 @@ public enum GateValue : byte
     Any
 }
 
-/// <summary>
-/// Class version of System.Int32 because reflection manager yml tag lookup is broken and refuses to use structs...
-/// </summary>
+
+// need these wrapper classes because reflection manager yml tag lookup is broken and refuses to use structs like Int32 or Boolean...
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class True
+{
+    public override string ToString() => "true";
+
+    public static readonly True Instance = new();
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class False
+{
+    public override string ToString() => "false";
+
+    public static readonly False Instance = new();
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class Pulse
+{
+    public override string ToString() => "pulse";
+
+    public static readonly Pulse Instance = new();
+}
+
 [DataRecord, Serializable, NetSerializable]
 public sealed partial class Integer
 {
@@ -58,7 +80,9 @@ public abstract partial class CircuitGate
     /// </summary>
     private static Type[] AllowedTypes =
     [
-        typeof(SignalState),
+        typeof(True),
+        typeof(False),
+        typeof(Pulse),
         typeof(Integer),
         typeof(String)
     ];
@@ -76,7 +100,7 @@ public abstract partial class CircuitGate
     /// <summary>
     /// The last output of this gate.
     /// </summary>
-    public object Output => _output ?? SignalState.Low;
+    public object Output => _output ?? False.Instance;
 
     /// <summary>
     /// Where it is in the editor UI.
@@ -101,7 +125,7 @@ public abstract partial class CircuitGate
         {
             GateValue.Int => Integer.Zero,
             GateValue.String => string.Empty,
-            _ => SignalState.Low
+            _ => False.Instance
         };
     }
 
@@ -147,7 +171,7 @@ public abstract partial class CircuitGate
 
     protected void SetOutput(bool value)
     {
-        _output = value ? SignalState.High : SignalState.Low;
+        _output = value ? True.Instance : False.Instance;
     }
 
     protected void SetOutput(int value)

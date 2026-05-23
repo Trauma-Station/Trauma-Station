@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.DeviceLinking;
 using Content.Trauma.Shared.Circuits;
 
 namespace Content.Trauma.Client.Circuits.UI;
@@ -8,7 +7,7 @@ namespace Content.Trauma.Client.Circuits.UI;
 [GenerateTypedNameReferences]
 public sealed partial class BoolPickerWindow : ConstPickerWindow
 {
-    public override object Value => ToggleButton.Pressed ? SignalState.High : SignalState.Low;
+    public override object Value => ToggleButton.Pressed ? True.Instance : False.Instance;
 
     public BoolPickerWindow()
     {

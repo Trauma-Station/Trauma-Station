@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.DeviceLinking;
-
 namespace Content.Trauma.Shared.Circuits;
 
 /// <summary>
@@ -66,11 +64,11 @@ public sealed partial class CircuitComponent : Component
     public object GetValue(CircuitIndex idx)
     {
         if (idx.GateIndex is { } g)
-            return Data.Gates.TryGetValue(g, out var gate) ? gate.Output : false;
+            return Data.Gates.TryGetValue(g, out var gate) ? gate.Output : False.Instance;
         if (idx.PortIndex is { } p)
-            return Inputs.TryGetValue(p, out var input) ? input : false;
+            return Inputs.TryGetValue(p, out var input) ? input : False.Instance;
 
-        return false;
+        return False.Instance;
     }
 
     /// <summary>
@@ -81,8 +79,12 @@ public sealed partial class CircuitComponent : Component
     {
         switch (GetValue(i))
         {
-            case SignalState s:
-                return s != SignalState.Low;
+            case True t:
+                return true;
+            case False f:
+                return false;
+            case Pulse p:
+                return true;
             case Integer n:
                 return n.Value != 0;
             default:
@@ -98,8 +100,12 @@ public sealed partial class CircuitComponent : Component
     {
         switch (GetValue(i))
         {
-            case SignalState s:
-                return s != SignalState.Low ? 1 : 0;
+            case True t:
+                return 1;
+            case False f:
+                return 0;
+            case Pulse p:
+                return 1;
             case Integer n:
                 return n.Value;
             default:
@@ -121,11 +127,11 @@ public sealed partial class CircuitComponent : Component
         // ensure required input port data exists
         var count = CircuitComponent.PortsCount;
         while (Inputs.Count < count)
-            Inputs.Add(false);
+            Inputs.Add(False.Instance);
         while (LinkedInputs.Count < count)
             LinkedInputs.Add(new());
         while (LastOutputs.Count < count)
-            LastOutputs.Add(false);
+            LastOutputs.Add(False.Instance);
         while (Data.OutputIndices.Count < count)
             Data.OutputIndices.Add(CircuitIndex.Invalid);
     }

@@ -24,7 +24,7 @@ public abstract class GatePickerWindow : FancyWindow
 /// </summary>
 public abstract class ConstPickerWindow : GatePickerWindow
 {
-    public virtual object Value { get; }
+    public abstract object Value { get; }
 
     public void Create()
     {
