@@ -235,6 +235,7 @@
 - type: entity
   abstract: true
   id: BaseXenoTailed
+  abstract: true
   components:
   - type: TailedEntity
     amount: 17
