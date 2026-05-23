@@ -6,3 +6,5 @@ ui-options-function-tackle = Tackle
 ui-options-function-strafe = Strafe (Face cursor)
 
 ui-options-show-skill-popups = Show Skill Popups
+
+ui-options-function-open-mentor = Open admin and mentor help

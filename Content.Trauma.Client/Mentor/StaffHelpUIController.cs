@@ -2,32 +2,27 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Bwoink;
-using Content.Shared._RMC14.Mentor;
 using Content.Shared.Input;
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.Mentor;
 using Robust.Client.Audio;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
-namespace Content.Client._RMC14.Mentor;
+namespace Content.Trauma.Client.Mentor;
 
-public sealed class StaffHelpUIController : UIController, IOnSystemChanged<BwoinkSystem>
+public sealed partial class StaffHelpUIController : UIController, IOnSystemChanged<BwoinkSystem>
 {
-    [Dependency] private readonly AHelpUIController _aHelp = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private AHelpUIController _aHelp = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPlayerManager _player = default!;
     [UISystemDependency] private readonly AudioSystem? _audio = default!;
 
     private readonly Dictionary<NetUserId, List<MentorMessage>> _messages = new();
@@ -47,7 +42,14 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _net.RegisterNetMessage<MentorSendMessageMsg>();
         _net.RegisterNetMessage<MentorHelpMsg>();
 
+        AHelpUIController.OnLoad += OnLoad;
+
         _config.OnValueChanged(TraumaCVars.RMCMentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
+    }
+
+    private void OnLoad(AHelpUIController obj)
+    {
+        ToggleWindow();
     }
 
     private void OnMentorStatus(MentorStatusMsg msg)

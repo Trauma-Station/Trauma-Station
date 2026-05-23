@@ -1,8 +1,6 @@
 using Lidgren.Network;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Mentor;
+namespace Content.Trauma.Common.Mentor;
 
 public sealed class MentorMessagesReceivedMsg : NetMessage
 {

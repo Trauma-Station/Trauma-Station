@@ -1,6 +1,6 @@
-<controls:MentorHelpWindow
+<mentor:MentorHelpWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.Mentor"
+    xmlns:mentor="clr-namespace:Content.Trauma.Client.Mentor"
     SetSize="500 300"
     Title="Mentor Help">
     <BoxContainer Orientation="Vertical">
@@ -10,4 +10,4 @@
             <LineEdit Name="Chat" Access="Public" HorizontalExpand="True" />
         </BoxContainer>
     </BoxContainer>
-</controls:MentorHelpWindow>
+</mentor:MentorHelpWindow>

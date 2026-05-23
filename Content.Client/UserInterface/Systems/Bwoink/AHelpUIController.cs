@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Client._RMC14.Mentor;
-// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
@@ -36,13 +33,6 @@ namespace Content.Client.UserInterface.Systems.Bwoink;
 [UsedImplicitly]
 public sealed partial class AHelpUIController: UIController, IOnSystemChanged<BwoinkSystem>, IOnStateChanged<GameplayState>, IOnStateChanged<LobbyState>
 {
-    [Dependency] private readonly IClientAdminManager _adminManager = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly StaffHelpUIController _staffHelp = default!; // Trauma
     [Dependency] private IClientAdminManager _adminManager = default!;
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
@@ -59,6 +49,10 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
     private bool _hasUnreadAHelp;
     private bool _bwoinkSoundEnabled;
     private string? _aHelpSound;
+
+    // <Trauma>
+    public static Action<AHelpUIController>? OnLoad;
+    // </Trauma>
 
     protected override string SawmillName => "c.s.go.es.bwoink";
 
@@ -101,9 +95,11 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
 
     private void AHelpButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        // EnsureUIHelper(); - Trauma commented out
+        // <Trauma>
+        // EnsureUIHelper();
         // UIHelper!.ToggleWindow();
-        _staffHelp.ToggleWindow();
+        OnLoad?.Invoke(this);
+        // </Trauma>
     }
 
     public void OnSystemLoaded(BwoinkSystem system)

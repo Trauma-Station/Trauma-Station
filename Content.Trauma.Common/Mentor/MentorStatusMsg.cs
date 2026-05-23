@@ -1,22 +1,23 @@
 using Lidgren.Network;
-using Robust.Shared.Network;
-using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Mentor;
+namespace Content.Trauma.Common.Mentor;
 
-public sealed class MentorHelpMsg : NetMessage
+public sealed class MentorStatusMsg : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Core;
 
-    public string Message = string.Empty;
+    public bool IsMentor;
+    public bool CanReMentor;
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
-        Message = buffer.ReadString();
+        IsMentor = buffer.ReadBoolean();
+        CanReMentor = buffer.ReadBoolean();
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
-        buffer.Write(Message);
+        buffer.Write(IsMentor);
+        buffer.Write(CanReMentor);
     }
 }

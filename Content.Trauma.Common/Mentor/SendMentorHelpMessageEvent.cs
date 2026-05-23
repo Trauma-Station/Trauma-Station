@@ -1,6 +1,4 @@
-using Robust.Shared.Serialization;
-
-namespace Content.Shared._RMC14.Mentor;
+namespace Content.Trauma.Common.Mentor;
 
 [Serializable, NetSerializable]
 public sealed class SendMentorHelpMessageEvent(string message) : EntityEventArgs
