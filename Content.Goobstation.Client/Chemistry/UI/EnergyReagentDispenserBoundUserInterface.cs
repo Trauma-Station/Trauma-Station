@@ -5,7 +5,6 @@ using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.Chemistry;
 using Content.Shared.Containers.ItemSlots;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Chemistry.UI
 {

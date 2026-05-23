@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 - type: entity
-  parent: [ BaseSiliconLawboard, BaseMagicalContraband ]
+  parent: [ BaseSiliconLawboard, BaseCosmicContraband ]
   id: CosmicCultLawBoard
   name: malign law board
   description: An eerie circuit board, suited for slotting into an AI law upload console. Its circuitry is interwoven with dendritic strands that twitch of their own accord.

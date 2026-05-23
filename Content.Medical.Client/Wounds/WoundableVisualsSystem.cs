@@ -11,9 +11,7 @@ using Content.Shared.Body;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
-using Robust.Client.GameObjects;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Client.Wounds;
 

@@ -4,7 +4,6 @@ using Content.Client.Items.UI;
 using Content.Client.Message;
 using Content.Client.Stylesheets;
 using Content.Medical.Shared.ItemSwitch;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Medical.Client.ItemSwitch;
 

@@ -4,7 +4,6 @@ using Content.Client.Alerts;
 using Content.Client.UserInterface.Systems.Alerts.Controls;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.LightDetection;
 

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Shaders;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Shaders;
 

@@ -6,7 +6,6 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Antag;
-using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Trauma.Server.Antag;

@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.FloorGoblin;
 using Content.Trauma.Common.VentCrawling;
-using Robust.Client.GameObjects;
 using Robust.Shared.Map.Components;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 

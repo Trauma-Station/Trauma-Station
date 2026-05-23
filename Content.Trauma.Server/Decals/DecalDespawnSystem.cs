@@ -6,7 +6,6 @@ using Content.Trauma.Common.Decals;
 using Content.Trauma.Shared.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Decals;

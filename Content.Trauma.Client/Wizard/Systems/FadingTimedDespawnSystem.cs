@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 

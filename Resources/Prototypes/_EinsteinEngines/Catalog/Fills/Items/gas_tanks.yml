@@ -8,6 +8,11 @@
     sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
   - type: Item
     sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
+    storedRotation: -45
+    storedOffset: 10,0
+    storedSprite:
+      state: icon
+      sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Objects/Tanks/emergency.rsi
   - type: Tag
@@ -38,6 +43,11 @@
     sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
   - type: Item
     sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
+    storedRotation: -45
+    storedOffset: 10,0
+    storedSprite:
+      state: icon
+      sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Objects/Tanks/regular.rsi
   - type: Tag
@@ -68,6 +78,11 @@
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
   - type: Item
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
+    storedRotation: -45
+    storedOffset: 10,0
+    storedSprite:
+      state: icon
+      sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
   - type: Clothing
     sprite: _EinsteinEngines/Objects/Tanks/double-emergency.rsi
   - type: Tag

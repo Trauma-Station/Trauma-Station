@@ -48,3 +48,20 @@
   - type: StaticPrice # MassProduced NT Slop
     price: 0
   - type: AntagCard # D-class? Outside? Can't be.
+
+- type: entity
+  parent: IDCardStandard
+  id: SpacePolIDCard
+  name: SpacePol ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idsecurityofficer
+  - type: IdCard
+    jobTitle: job-name-spacepol
+    jobIcon: JobIconSecurityOfficer
+  - type: Access
+    tags:
+    - Maintenance
+    - SyndicateAgent

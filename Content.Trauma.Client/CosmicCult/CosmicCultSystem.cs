@@ -10,9 +10,7 @@ using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Audio;
-using Robust.Client.GameObjects;
 using Robust.Shared.Audio;
-using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Trauma.Client.CosmicCult;

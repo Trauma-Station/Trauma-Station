@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.Wizard.Projectile;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;

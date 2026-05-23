@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.VendingMachines;
 using Content.Shared.VendingMachines;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.VendingMachines;
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Power.PTL;
-using Robust.Client.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Power.PTL;
