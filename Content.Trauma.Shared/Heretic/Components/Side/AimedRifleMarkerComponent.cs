@@ -4,8 +4,12 @@ using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 
+/// <summary>
+/// Adds visual mark for target if we are aiming at them using <see cref="AimedRifleComponent"/>\
+/// This is visible to everyone
+/// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class LionhunterRifleAimMarkerComponent : BaseSpriteOverlayComponent
+public sealed partial class AimedRifleMarkerComponent : BaseSpriteOverlayComponent
 {
     public override Enum Key { get; set; } = LionhunterAimMarkerKey.Key;
 

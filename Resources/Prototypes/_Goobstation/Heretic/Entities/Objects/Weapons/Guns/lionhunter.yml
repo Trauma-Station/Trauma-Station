@@ -25,10 +25,6 @@
       tags:
       - CartridgeAntiMateriel
     proto: CartridgeLionhunter
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 20
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 8
@@ -45,7 +41,8 @@
     delays:
       aim:
         length: 3
-  - type: LionhunterRifle
+  - type: AimedRifle
     aimWhitelist:
       components:
       - MobState
+  - type: LionhunterRifle
