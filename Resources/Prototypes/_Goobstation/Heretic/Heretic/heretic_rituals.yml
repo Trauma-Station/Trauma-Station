@@ -332,7 +332,6 @@
         ingredients:
         - whitelist:
             tags:
-            - Lantern
             - Flashlight
           name: heretic-ritual-ingredient-lantern-flashlight
         - whitelist:

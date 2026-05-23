@@ -377,7 +377,7 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
         _ => string.Empty
     };
     public override GateValue OutputType => GateValue.Bool;
-    public override int InputCount => 1;
+    public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {

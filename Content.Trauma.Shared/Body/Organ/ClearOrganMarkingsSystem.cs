@@ -13,7 +13,7 @@ public sealed partial class ClearOrganMarkingsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BodyComponent, ClearOrganMarkingsEvent>(_body.RefRelayBodyEvent);
+        SubscribeLocalEvent<BodyComponent, ClearOrganMarkingsEvent>(_body.RelayEvent);
         SubscribeLocalEvent<VisualOrganMarkingsComponent, BodyRelayedEvent<ClearOrganMarkingsEvent>>(OnClear);
     }
 
