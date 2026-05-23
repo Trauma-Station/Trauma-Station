@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Client.Mentor;
+// </Trauma>
 using System.Linq;
 using Content.Client.Administration.UI.Bwoink;
 using Content.Client.Administration.UI.CustomControls;
@@ -22,6 +25,10 @@ public sealed class NotesControlTest : InteractionTest
     {
         // Click the ahelp button in the menu bar
         await ClickWidgetControl<GameTopMenuBar, MenuButton>(nameof(GameTopMenuBar.AHelpButton));
+        // <Trauma> - Mentor Help
+        var staffHelp = GetWindow<StaffHelpWindow>();
+        await ClickControl(staffHelp.AdminHelpButton);
+        // </Trauma>
         var bwoink = GetWindow<BwoinkWindow>();
 
         // Damn, if only I had an excuse to use bwoink.Bwoink.BwoinkArea
