@@ -46,7 +46,7 @@
   id: BaseMagazineTurretHeavy
   name: "circular magazine (.22 short)"
   suffix: Full
-  description: 275 round low-caliber magazine, often used in less-lethal LMGs... whatever the fuck that means.
+  description: 275 round low-caliber magazine, often used by communists and other assholes.
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true

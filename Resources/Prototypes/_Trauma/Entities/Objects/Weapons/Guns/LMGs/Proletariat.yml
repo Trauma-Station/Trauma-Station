@@ -2,7 +2,7 @@
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponLightMachineGunProletariat
   name: Proletariat
-  description: An ancient LMG named for the classes it was used to oppress... however, its means of production were seized and given to revolutionaries. Takes .22 short turret mags.
+  description: An ancient LMG named for the classes it was used to oppress, until that class got ahold of it. Takes .22 short turret mags.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/SMGs/resistance.rsi
