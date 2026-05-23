@@ -106,12 +106,15 @@
   minLimit: 3
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencyPlasma
+  - EmergencyVapor
+  - EmergencySilicon
+  # </Trauma>
   - EmergencyNitrogen
   - EmergencyOxygen
-  - EmergencyPlasma
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -583,6 +586,7 @@
   loadouts:
   - JesterHat
   - JesterAltHat
+  - ClownMitre
 
 - type: loadoutGroup
   id: ClownJumpsuit
@@ -623,12 +627,15 @@
   minLimit: 2
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencySilicon
+  - EmergencyPlasmaClown
+  - EmergencyVapor
+  # </Trauma>
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
-  - EmergencyPlasmaClown
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -690,13 +697,16 @@
   minLimit: 2
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencySilicon
+  - EmergencyPlasmaMime
+  - EmergencyVapor
+  # </Trauma>
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
-  - EmergencyPlasmaMime
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -1059,12 +1069,15 @@
   minLimit: 2
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencySilicon
+  - EmergencyPlasmaExtended
+  - EmergencyVapor # No extended for you
+  # </Trauma>
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
-  - EmergencyPlasmaExtended
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 # Science
 - type: loadoutGroup
@@ -1293,6 +1306,7 @@
   - SecurityBeret
   - SecurityHat
   - TrooperHat
+  - SergeantBeret # Trauma
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1305,6 +1319,8 @@
   - SeniorOfficerJumpsuit
   - SeniorOfficerJumpskirt
   - TrooperUniform
+  - SergeantUniform # Trauma
+  - SergeantSkirt # Trauma
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1493,6 +1509,7 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathTool
+  - LoadoutDecapoidBreathTool # Trauma
 
 - type: loadoutGroup
   id: GroupSpeciesBreathToolMedical
@@ -1502,6 +1519,7 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathToolMedical
+  - LoadoutDecapoidBreathTool # Trauma
 
 - type: loadoutGroup
   id: GroupSpeciesBreathToolSecurity
@@ -1511,3 +1529,4 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathToolSecurity
+  - LoadoutDecapoidBreathTool # Trauma

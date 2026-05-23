@@ -3,7 +3,7 @@
   configuration:
     entity: PolymorphAshJaunt
     forced: true
-    duration: 3
+    duration: 4 # 3 seconds + 1 for out animation
     attachToGridOrMap: true
     showPopup: false
     allowRepeatedMorphs: true
@@ -60,12 +60,15 @@
   id: EldritchHorror
   configuration:
     entity: MobHereticFleshAscend
-    forced: true
-    transferName: true
     transferDamage: false
     revertOnCrit: false
     revertOnDeath: false
-    allowRepeatedMorphs: true
+    allowRepeatedMorphs: false
+    skipRevertConfirmation: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
 
 - type: polymorph
   id: VoidPrison
@@ -337,3 +340,93 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+
+- type: polymorph
+  id: ShapeshiftStalkerLock
+  configuration:
+    entity: MobGhoulStalkerLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftProphetLock
+  configuration:
+    entity: MobGhoulProphetLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftMaidLock
+  configuration:
+    entity: MobGhoulMirrorMaidLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftFireSharkLock
+  configuration:
+    entity: MobGhoulFireSharkLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftRustWalkerLock
+  configuration:
+    entity: MobGhoulRustWalkerLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+
+- type: polymorph
+  id: ShapeshiftShatteredLock
+  configuration:
+    entity: MobShatteredLock
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    skipRevertConfirmation: true
+    allowRepeatedMorphs: true
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar

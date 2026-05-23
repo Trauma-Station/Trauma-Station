@@ -6,18 +6,13 @@ using Content.Goobstation.Shared.Factory;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;
 
-public sealed class ConstructorBUI : BoundUserInterface
+public sealed partial class ConstructorBUI : BoundUserInterface
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     private readonly CommonKnowledgeSystem _knowledge = default!;
     private readonly ConstructionSystem _construction;
     private readonly EntityWhitelistSystem _whitelist;
@@ -56,6 +51,7 @@ public sealed class ConstructorBUI : BoundUserInterface
                 _id = item.Prototype.ID;
                 _menu.SetRecipeInfo(item.Prototype.Name ?? "", item.Prototype.Description ?? "", item?.TargetPrototype,
                     item!.Prototype.Type != ConstructionType.Item, true, // TODO: favourites
+                    true,
                     item.Prototype);
 
                 GenerateStepList(item.Prototype);

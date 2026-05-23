@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -23,17 +16,17 @@ using Content.Shared.Players.PlayTimeTracking;
 
 namespace Content.Server.Voting;
 
-public sealed class VotingSystem : EntitySystem
+public sealed partial class VotingSystem : EntitySystem
 {
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly JobSystem _jobs = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtimeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private JobSystem _jobs = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ISharedPlaytimeManager _playtimeManager = default!;
 
     public override void Initialize()
     {

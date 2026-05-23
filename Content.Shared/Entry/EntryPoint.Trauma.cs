@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Module;
 using Robust.Shared.Network;
 using Robust.Shared.Reflection;
@@ -10,9 +12,9 @@ namespace Content.Shared.Entry;
 /// </summary>
 public sealed partial class EntryPoint
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IReflectionManager _refMan = default!;
-    [Dependency] private readonly ISandboxHelper _sandbox = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IReflectionManager _refMan = default!;
+    [Dependency] private ISandboxHelper _sandbox = default!;
 
     private void VerifyModules()
     {

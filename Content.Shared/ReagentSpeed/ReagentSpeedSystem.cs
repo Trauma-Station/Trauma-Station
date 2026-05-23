@@ -1,16 +1,10 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Chemistry.EntitySystems;
 
 namespace Content.Shared.ReagentSpeed;
 
-public sealed class ReagentSpeedSystem : EntitySystem
+public sealed partial class ReagentSpeedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     /// <summary>
     /// Consumes reagents and modifies the duration.

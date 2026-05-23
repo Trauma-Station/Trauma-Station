@@ -1,11 +1,13 @@
-using System.Collections.Generic;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Preferences.Loadouts;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-[TestFixture]
-public sealed class LoadoutOrphanTest
+public sealed class LoadoutOrphanTest : GameTest
 {
     /// <summary>
     /// Ensures that every <see cref="LoadoutPrototype"/> is present in at least 1 <see cref="LoadoutGroupPrototype"/>.
@@ -14,8 +16,7 @@ public sealed class LoadoutOrphanTest
     [Test]
     public async Task NoOrphanedLoadoutsTest()
     {
-        var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
+        var server = Pair.Server;
         var proto = server.ProtoMan;
 
         // go through each group
@@ -31,17 +32,17 @@ public sealed class LoadoutOrphanTest
 
         await server.WaitAssertion(() =>
         {
-            Assert.Multiple(() =>
+            var orphans = new List<string>();
+            // then go through each loadout
+            foreach (var loadout in proto.EnumeratePrototypes<LoadoutPrototype>())
             {
-                // then go through each loadout
-                foreach (var loadout in proto.EnumeratePrototypes<LoadoutPrototype>())
-                {
-                    // and make sure it has a group
-                    Assert.That(grouped.Contains(loadout.ID), $"Loadout {loadout.ID} was not found in any LoadoutGroupPrototype, it cannot be used");
-                }
-            });
-        });
+                // and make sure it has a group
+                var id = loadout.ID;
+                if (!grouped.Contains(id))
+                    orphans.Add(id);
+            }
 
-        await pair.CleanReturnAsync();
+            Assert.That(orphans, Is.Empty, $"Orphaned loadouts {string.Join(' ', orphans)} were not found in any LoadoutGroupPrototype, they cannot be used");
+        });
     }
 }

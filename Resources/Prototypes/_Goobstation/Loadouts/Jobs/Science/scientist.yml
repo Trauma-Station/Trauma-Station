@@ -3,7 +3,7 @@
   equipment:
     jumpsuit: ClothingUniformEnvirosuitScientist
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -12,6 +12,11 @@
   equipment:
     head: ClothingHeadEnvirohelmScientist
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
+
+- type: loadout
+  id: ResearchMJ
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryScientist

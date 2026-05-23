@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 Tornado Tech <54727692+Tornado-Technology@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -26,17 +14,15 @@ namespace Content.Shared.Tag;
 /// if you need to use them often, it's better to make a proper implementation,
 /// you can read more <a href="https://github.com/space-wizards/space-station-14/pull/28272">HERE</a>.
 /// </summary>
-public sealed class TagSystem : EntitySystem
+public sealed partial class TagSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
-    private EntityQuery<TagComponent> _tagQuery;
+    [Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _tagQuery = GetEntityQuery<TagComponent>();
 
 #if DEBUG
         SubscribeLocalEvent<TagComponent, ComponentInit>(OnTagInit);

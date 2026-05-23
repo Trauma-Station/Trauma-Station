@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kot <1192090+koteq@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Bed.Sleep;
 using Content.Shared.CCVar;
 using Content.Shared.StatusEffectNew;
@@ -17,13 +11,13 @@ namespace Content.Shared.SSDIndicator;
 /// <summary>
 ///     Handle changing player SSD indicator status
 /// </summary>
-public sealed class SSDIndicatorSystem : EntitySystem
+public sealed partial class SSDIndicatorSystem : EntitySystem
 {
     public static readonly EntProtoId StatusEffectSSDSleeping = "StatusEffectSSDSleeping";
 
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private bool _icSsdSleep;
     private float _icSsdSleepTime;

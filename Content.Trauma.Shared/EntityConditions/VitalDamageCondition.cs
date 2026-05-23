@@ -4,7 +4,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.EntityConditions;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -27,7 +26,7 @@ public sealed partial class VitalDamageCondition : EntityConditionBase<VitalDama
 
 public sealed partial class VitalDamageConditionSystem : EntityConditionSystem<DamageableComponent, VitalDamageCondition>
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
 
     protected override void Condition(Entity<DamageableComponent> ent, ref EntityConditionEvent<VitalDamageCondition> args)
     {

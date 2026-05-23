@@ -9,10 +9,10 @@ using Robust.Shared.Threading;
 // ReSharper disable EnforceForeachStatementBraces
 namespace Content.Lavaland.Shared.Megafauna.Systems;
 
-public sealed class MegafaunaFieldSystem : EntitySystem
+public sealed partial class MegafaunaFieldSystem : EntitySystem
 {
-    [Dependency] private readonly EntityShapeSystem _entityShape = default!;
-    [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private EntityShapeSystem _entityShape = default!;
+    [Dependency] private IParallelManager _parallel = default!;
 
     private MegafaunaSpawnFieldJob _job;
 

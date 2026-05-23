@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -37,9 +36,9 @@ public sealed partial class NitriumMovespeedModifier : EntityEffectBase<NitriumM
 /// <summary>
 /// Remove reagent at set rate, changes the movespeed modifiers and adds a MovespeedModifierMetabolismComponent if not already there.
 /// </summary>
-public sealed class NitriumMovespeedModifierEffectSystem : EntityEffectSystem<InputMoverComponent, NitriumMovespeedModifier>
+public sealed partial class NitriumMovespeedModifierEffectSystem : EntityEffectSystem<InputMoverComponent, NitriumMovespeedModifier>
 {
-    [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
+    [Dependency] private MovementModStatusSystem _movementMod = default!;
 
     public static readonly EntProtoId StatusEffect = "NitriumStatusEffect";
 

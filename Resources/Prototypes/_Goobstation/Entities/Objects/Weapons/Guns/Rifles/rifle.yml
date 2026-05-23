@@ -27,8 +27,10 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Goobstation/Objects/Weapons/Guns/Rifles/burner.rsi
   - type: Gun
-    fireRate: 3
+    fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: ChamberMagazineAmmoProvider

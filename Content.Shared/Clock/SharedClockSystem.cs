@@ -1,17 +1,12 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 
 namespace Content.Shared.Clock;
 
-public abstract class SharedClockSystem : EntitySystem
+public abstract partial class SharedClockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

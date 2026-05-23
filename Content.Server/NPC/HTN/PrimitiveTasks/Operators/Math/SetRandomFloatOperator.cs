@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Tornado Tech <54727692+Tornado-Technology@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Threading;
 using System.Threading.Tasks;
 using Robust.Shared.Random;
@@ -16,7 +11,7 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Math;
 /// </summary>
 public sealed partial class SetRandomFloatOperator : HTNOperator
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     [DataField(required: true), ViewVariables]
     public string TargetKey = string.Empty;

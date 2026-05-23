@@ -130,9 +130,6 @@
         components:
         - type: DelayedKnockdown
         guidebookText: entity-effect-guidebook-remove-delayed-knockdown
-      - !type:SuppressPain
-        amount: 1.2
-        time: 10 # it accumulated 1.2*quantity and then exists for 30 seconds.
       # </Trauma>
 
       # Side effects
@@ -225,9 +222,6 @@
       - !type:TakeStaminaDamage
         amount: -10
         immediate: true
-      - !type:SuppressPain
-          amount: 1.2
-          time: 30 # it accumulated 1.2*quantity and then exists for 30 seconds.
       # </Goob>
 
       # Main effects
@@ -263,6 +257,7 @@
   flavorMinimum: 0.05
   color: "#808080"
   physicalDesc: reagent-physical-desc-crystalline
+  contrabandSeverity: Minor # Trauma
   plantMetabolism:
   - !type:PlantAdjustNutrition
     amount: -5
@@ -323,6 +318,7 @@
   group: Narcotics
   desc: reagent-desc-space-drugs
   physicalDesc: reagent-physical-desc-syrupy
+  contrabandSeverity: Minor # Trauma
   flavor: bitter
   color: "#63806e"
   metabolisms:
@@ -339,6 +335,7 @@
   group: Narcotics
   desc: reagent-desc-bananadine
   physicalDesc: reagent-physical-desc-powdery
+  contrabandSeverity: Minor # Trauma
   flavor: bitter
   color: "#ffff00"
   metabolisms:

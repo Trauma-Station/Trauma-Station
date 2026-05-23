@@ -1,10 +1,9 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard;
+using Content.Trauma.Common.Actions;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Popups;
+using Content.Trauma.Common.Heretic;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -31,32 +30,28 @@ namespace Content.Shared.Actions;
 public abstract partial class SharedActionsSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     // </Trauma>
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-    [Dependency] private   readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private   readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private   readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private   readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private   readonly RotateToFaceSystem _rotateToFace = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] private   readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private   readonly SharedTransformSystem _transform = default!;
-    [Dependency] private   readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
-    private EntityQuery<ActionComponent> _actionQuery;
-    private EntityQuery<ActionsComponent> _actionsQuery;
-    private EntityQuery<MindComponent> _mindQuery;
+    [Dependency] private EntityQuery<ActionComponent> _actionQuery = default!;
+    [Dependency] private EntityQuery<ActionsComponent> _actionsQuery = default!;
+    [Dependency] private EntityQuery<MindComponent> _mindQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         InitializeActionDoAfter();
-
-        _actionQuery = GetEntityQuery<ActionComponent>();
-        _actionsQuery = GetEntityQuery<ActionsComponent>();
-        _mindQuery = GetEntityQuery<MindComponent>();
 
         SubscribeLocalEvent<ActionComponent, MapInitEvent>(OnActionMapInit);
 
@@ -402,7 +397,11 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         if (args.Input.EntityCoordinatesTarget is not { } netTarget)
         {
-            args.Invalid |= !Fallback(); // Goob - check fallback instead of setting it to false immediately
+            // <Trauma> - check fallback instead of setting it to false immediately
+            var evCheck = new CheckWorldInstantActionEvent(user, provider);
+            RaiseLocalEvent(ent, ref evCheck);
+            args.Invalid |= !evCheck.Fallback;
+            // </Trauma>
             return;
         }
 
@@ -413,7 +412,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         if (!ValidateWorldTarget(user, target, ent))
         {
-            Fallback(); // Goobstation
+            // <Trauma>
+            var evCheck = new CheckWorldInstantActionEvent(user, provider);
+            RaiseLocalEvent(ent, ref evCheck);
+            // </Trauma>
             return;
         }
 
@@ -423,7 +425,9 @@ public abstract partial class SharedActionsSystem : EntitySystem
             !TryComp<EntityTargetActionComponent>(ent, out var entTarget) ||
             !ValidateEntityTarget(user, targetEntity.Value, (ent, entTarget))))
         {
-            args.Invalid |= !Fallback(); // Goob edit
+            var evCheck = new CheckWorldInstantActionEvent(user, provider);
+            RaiseLocalEvent(ent, ref evCheck);
+            args.Invalid |= !evCheck.Fallback; // Goob edit
             return;
         }
 
@@ -436,23 +440,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
             ev.Entity = targetEntity;
         }
 
-        // Goobtation start
         return;
-
-        bool Fallback()
-        {
-            if (ent.Comp.Event is not InstantWorldTargetActionEvent instantWorldEv)
-                return false;
-
-            instantWorldEv.Target = EntityCoordinates.Invalid;
-            instantWorldEv.Entity = null;
-
-            _adminLogger.Add(LogType.Action,
-                $"{ToPrettyString(user):user} is performing the {Name(ent):action} action provided by {ToPrettyString(provider):provider}.");
-
-            return true;
-        }
-        // Goobstation end
     }
 
     public bool ValidateEntityTarget(EntityUid user, EntityUid target, Entity<EntityTargetActionComponent> ent)
@@ -975,7 +963,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         ActionRemoved((performer, performer.Comp), ent);
 
         if (ent.Comp.Temporary)
-            QueueDel(ent);
+            PredictedQueueDel(ent); // Trauma - predicted del
     }
 
     /// <summary>
@@ -1059,7 +1047,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
             return;
 
-        var ev = new GetItemActionsEvent(_actionContainer, args.Equipee, args.Equipment, args.SlotFlags);
+        var ev = new GetItemActionsEvent(_actionContainer, args.EquipTarget, args.Equipment, args.SlotFlags);
         RaiseLocalEvent(args.Equipment, ev);
 
         if (ev.Actions.Count == 0)
@@ -1067,7 +1055,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         GrantActions((ent, ent), ev.Actions, args.Equipment);
 
-        LoadActions(args.Equipee); // Goobstation
+        LoadActions(args.EquipTarget); // Goobstation
     }
 
     private void OnHandEquipped(Entity<ActionsComponent> ent, ref DidEquipHandEvent args)
@@ -1091,16 +1079,16 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (GameTiming.ApplyingState || !GameTiming.IsFirstTimePredicted) // Goob edit
             return;
 
-        // Goobstation start
+        // <Trauma>
         if (!TerminatingOrDeleted(args.Equipment))
         {
-            var ev = new GetItemActionsEvent(_actionContainer, args.Equipee, args.Equipment, isEquipping: false); // Lavaland Change - added false for isEquipping
+            var ev = new GetItemActionsEvent(_actionContainer, args.EquipTarget, args.Equipment, isEquipping: false);
             RaiseLocalEvent(args.Equipment, ev);
 
             if (ev.Actions.Count > 0)
                 SaveActions(uid);
         }
-        // Goobstation end
+        // </Trauma>
 
         RemoveProvidedActions(uid, args.Equipment, component);
     }
@@ -1213,56 +1201,4 @@ public abstract partial class SharedActionsSystem : EntitySystem
         ent.Comp.Temporary = temporary;
         Dirty(ent);
     }
-
-    // Shitmed Change Start - Starlight Abductors
-    public EntityUid[] HideActions(EntityUid performer, ActionsComponent? comp = null)
-    {
-        if (!Resolve(performer, ref comp, false))
-            return [];
-
-        var actions = comp.Actions.ToArray();
-        comp.Actions.Clear();
-        Dirty(performer, comp);
-        return actions;
-    }
-
-    public void UnHideActions(EntityUid performer, EntityUid[] actions, ActionsComponent? comp = null)
-    {
-        if (!Resolve(performer, ref comp, false))
-            return;
-
-        foreach (var action in actions)
-            comp.Actions.Add(action);
-        Dirty(performer, comp);
-    }
-    // Shitmed Change End
-
-    // Goobstation edit start
-    public bool TryGetActionById(
-        EntityUid ent,
-        EntProtoId actionId,
-        [NotNullWhen(true)] out Entity<ActionComponent>? action,
-        ActionsContainerComponent? container = null)
-    {
-        action = null;
-        var actions = Resolve(ent, ref container, false)
-            ? container.Container.ContainedEntities
-            : GetActions(ent).Select(x => x.Owner);
-        foreach (var uid in actions)
-        {
-            if (TerminatingOrDeleted(uid))
-                continue;
-
-            var entityPrototypeId = MetaData(uid).EntityPrototype?.ID;
-            if (entityPrototypeId == null
-                || entityPrototypeId != actionId)
-                continue;
-
-            action = (uid, Comp<ActionComponent>(uid));
-            return true;
-        }
-
-        return false;
-    }
-    // Goobstation edit end
 }

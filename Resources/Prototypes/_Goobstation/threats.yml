@@ -28,7 +28,7 @@
 - type: ninjaHackingThreat
   id: Blob
   announcement: terror-blob
-  rule: BlobSpawn
+  rule: BlobMidround
 
 - type: ninjaHackingThreat
   id: VoxRaiders
@@ -44,11 +44,6 @@
   id: ShuttleInstigator
   announcement: terror-lone-operative
   rule: UnknownShuttleInstigator
-
-- type: ninjaHackingThreat
-  id: GreyTide
-  announcement: terror-grey-tide
-  rule: GreyTideAntagMidround
 
 - type: ninjaHackingThreat
   id: Revolutionary

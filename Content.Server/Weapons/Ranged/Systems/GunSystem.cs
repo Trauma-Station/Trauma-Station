@@ -17,13 +17,14 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Random;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem : SharedGunSystem
 {
-    [Dependency] private readonly PricingSystem _pricing = default!;
-    //[Dependency] private readonly SharedMapSystem _map = default!; // Trauma - no longer used
+    [Dependency] private PricingSystem _pricing = default!;
+    //[Dependency] private SharedMapSystem _map = default!; // Trauma - no longer used
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -33,20 +34,20 @@ public sealed partial class GunSystem : SharedGunSystem
         SubscribeLocalEvent<BallisticAmmoProviderComponent, PriceCalculationEvent>(OnBallisticPrice);
     }
 
-    private void OnBallisticPrice(EntityUid uid, BallisticAmmoProviderComponent component, ref PriceCalculationEvent args)
+    private void OnBallisticPrice(Entity<BallisticAmmoProviderComponent> ent, ref PriceCalculationEvent args)
     {
-        if (string.IsNullOrEmpty(component.Proto) || component.UnspawnedCount == 0)
+        if (string.IsNullOrEmpty(ent.Comp.Proto) || ent.Comp.UnspawnedCount == 0)
             return;
 
-        if (!ProtoManager.TryIndex<EntityPrototype>(component.Proto, out var proto))
+        if (!ProtoManager.TryIndex<EntityPrototype>(ent.Comp.Proto, out var proto))
         {
-            Log.Error($"Unable to find fill prototype for price on {component.Proto} on {ToPrettyString(uid)}");
+            Log.Error($"Unable to find fill prototype for price on {ent.Comp.Proto} on {ToPrettyString(ent)}");
             return;
         }
 
         // Probably good enough for most.
         var price = _pricing.GetEstimatedPrice(proto);
-        args.Price += price * component.UnspawnedCount;
+        args.Price += price * ent.Comp.UnspawnedCount;
     }
 
     // Trauma - moved almost everything to shared

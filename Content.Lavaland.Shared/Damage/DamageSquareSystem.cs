@@ -7,7 +7,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.Damage;
@@ -15,15 +14,15 @@ namespace Content.Lavaland.Shared.Damage;
 /// <summary>
 ///     We have to use our own system even for the damage field because WIZDEN SYSTEMS FUCKING SUUUUUUUUUUUCKKKKKKKKKKKKKKK
 /// </summary>
-public sealed class DamageSquareSystem : EntitySystem
+public sealed partial class DamageSquareSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     private EntityQuery<DamageableComponent> _damageQuery;
     private EntityQuery<DamageSquareImmunityComponent> _immuneQuery;

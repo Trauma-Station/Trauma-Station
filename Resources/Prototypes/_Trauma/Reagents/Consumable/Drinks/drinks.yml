@@ -27,3 +27,102 @@
         intensityPerUnit: 0.1
         intensitySlope: 1
         maxTotalIntensity: 0.1
+
+- type: reagent
+  id: T
+  name: reagent-name-t
+  parent: BaseAlcohol
+  desc: reagent-desc-t
+  physicalDesc: reagent-physical-desc-literal
+  flavor: tea
+  color: "#b08d71"
+  metamorphicSprite:
+    sprite: _Trauma/Objects/Consumable/Drinks/t_drink.rsi
+    state: icon
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      metabolites:
+        Ethanol: 0.1
+
+
+- type: reagent
+  id: RumAndCoke
+  name: reagent-name-rum-and-coke
+  parent: BaseAlcohol
+  desc: reagent-desc-rum-and-coke
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: cola
+  color: "#301503"
+  metamorphicSprite:
+    sprite: _Trauma/Objects/Consumable/Drinks/rum_coke.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      metabolites:
+        Ethanol: 0.3
+
+
+- type: reagent
+  id: TrappistBeer
+  name: reagent-name-trappist-beer
+  parent: BaseAlcohol
+  desc: reagent-desc-trappist-beer
+  physicalDesc: reagent-physical-desc-foamy
+  flavor: bitter
+  color: "#5c3e12"
+  metamorphicSprite:
+    sprite: _Trauma/Objects/Consumable/Drinks/trappist.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      metabolites:
+        Ethanol: 0.5
+
+
+- type: reagent
+  id: AloeCocktail
+  name: reagent-name-aloe-cocktail
+  parent: BaseAlcohol
+  desc: reagent-desc-aloe-cocktail
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: sweet
+  color: "#e2e26a"
+  metamorphicSprite:
+    sprite: _Trauma/Objects/Consumable/Drinks/aloe_cocktail.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      metabolites:
+        Ethanol: 0.2
+
+
+- type: reagent
+  id: BananaMilkshake
+  name: reagent-name-banana-milkshake
+  parent: BaseDrink
+  desc: reagent-desc-banana-milkshake
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: sweet
+  color: "#ffe135"
+  metamorphicSprite:
+    sprite:  _Trauma/Objects/Consumable/Drinks/banana_milkshake.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Digestion:
+      metabolites:
+        Nutriment: 0.8

@@ -1,16 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Shared.Overlays;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Overlays;
 
-public sealed class BaseSwitchableOverlay<TComp> : Overlay where TComp : SwitchableVisionOverlayComponent
+public sealed partial class BaseSwitchableOverlay<TComp> : Overlay where TComp : SwitchableVisionOverlayComponent
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -26,7 +23,7 @@ public sealed class BaseSwitchableOverlay<TComp> : Overlay where TComp : Switcha
     public BaseSwitchableOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototype.Index(NightVision).InstanceUnique();
+        _shader = _proto.Index(NightVision).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

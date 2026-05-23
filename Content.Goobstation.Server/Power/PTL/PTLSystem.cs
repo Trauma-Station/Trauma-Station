@@ -13,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Radiation.Components;
+using Content.Shared.Radiation.Systems;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Hitscan.Components;
@@ -23,24 +24,23 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Numerics;
 using System.Text;
 
 namespace Content.Goobstation.Server.Power.PTL;
 
 public sealed partial class PTLSystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly AudioSystem _aud = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private IGameTiming _time = default!;
+    [Dependency] private FlashSystem _flash = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private AudioSystem _aud = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedRadiationSystem _radiation = default!;
 
     private static readonly EntProtoId _credits = "SpaceCash";
     private static readonly ProtoId<TagPrototype> _tagScrewdriver = "Screwdriver";
@@ -91,7 +91,7 @@ public sealed partial class PTLSystem : EntitySystem
     {
         if (TryComp<RadiationSourceComponent>(ent, out var rad)
             && rad.Intensity > 0)
-            rad.Intensity = MathF.Max(0, rad.Intensity - (rad.Intensity * 0.2f + 0.1f)); // Making sure the radition value doesn't go below
+            _radiation.SetIntensity((ent, rad), MathF.Max(0, rad.Intensity - (rad.Intensity * 0.2f + 0.1f))); // Making sure the radition value doesn't go below
     }
 
     private void Tick(Entity<PTLComponent> ent)
@@ -135,7 +135,7 @@ public sealed partial class PTLSystem : EntitySystem
         // shoot the laser
         var directionInParentSpace = xform.LocalRotation.RotateVec(localDirectionVector);
         var targetCoords = xform.Coordinates.Offset(directionInParentSpace);
-        _gun.AttemptShoot(ent, ent, gun, targetCoords);
+        _gun.AttemptShoot(ent, (ent.Owner, gun), targetCoords);
 
         // Determine actual energy used.
         var chargeAfter = _battery.GetCharge((ent, ent.Comp2));
@@ -145,15 +145,13 @@ public sealed partial class PTLSystem : EntitySystem
 
         var usedMJ = energyUsed / megajoule;
         // some random formula i found in bounty thread i popped it into desmos i think it looks good
-        var spesos = (int) (usedMJ * 650 / (Math.Log(usedMJ * 2) + 1));
+        var spesos = (int) (usedMJ * 325 / (Math.Log(usedMJ * 2) + 1));
         if (!double.IsFinite(spesos) || spesos < 0)
             return;
 
         // EVIL behavior based on energy actually used.
         var evil = (float) (usedMJ * ent.Comp1.EvilMultiplier);
-
-        if (TryComp<RadiationSourceComponent>(ent, out var rad))
-            rad.Intensity = evil;
+        _radiation.SetIntensity(ent.Owner, evil);
 
         _flash.FlashArea(ent.Owner, ent, evil/2, TimeSpan.FromSeconds(evil / 2));
 

@@ -1,10 +1,11 @@
 - type: entity
   parent: BaseAntagSpawner
-  id: SpawnPointInsurgent
-  name: insurgent spawn point
-  categories: [ Spawner ]
+  id: GhostRoleSpawnerInsurgent
+  name: insurgent ghost role spawner
   components:
   - type: GhostRole
+    name: roles-antag-insurgent-name
+    description: roles-antag-insurgent-objective
     rules: ghost-role-information-rules-team-antagonist
     mindRoles:
     - MindRoleInsurgent
@@ -13,3 +14,90 @@
     layers:
     - state: green
     - state: passenger
+    - sprite: Clothing/Mask/gas.rsi
+      state: icon
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: GhostRoleSpawnerMorph
+  name: morph ghost role spawner
+  components:
+  - type: GhostRole
+    name: ghost-role-information-morph-name
+    description: ghost-role-information-morph-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleMorph
+    raffle:
+      settings: default
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _Trauma/Mobs/morph.rsi
+      state: morph
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: GhostRoleSpawnerShadowling
+  name: shadowling ghost role spawner
+  components:
+  - type: GhostRole
+    name: roles-antag-shadowling-name
+    description: roles-antag-shadowling-description
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleShadowling
+    raffle:
+      settings: default
+  - type: Sprite
+    sprite: _EinsteinEngines/Shadowling/egg.rsi
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: base
+    - state: closed
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostRoleFugitive
+  name: fugitive spawn
+  components:
+  - type: GhostRole
+    name: ghost-role-information-fugitive-name
+    description: ghost-role-information-fugitive-description
+    rules: ghost-role-information-fugitive-rules
+    mindRoles:
+    - MindRoleGhostRoleFugitive
+    raffle:
+      settings: default
+  - type: Sprite
+    layers:
+    - sprite: Markers/cross.rsi
+      state: green
+    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      state: icon
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostRoleHunter
+  name: fugitive hunter spawn
+  components:
+  - type: GhostRole
+    name: ghost-role-information-hunter-name
+    description: ghost-role-information-hunter-description
+    rules: ghost-role-information-hunter-rules
+    mindRoles:
+    - MindRoleGhostRoleHunter
+    raffle:
+      settings: default
+  - type: Sprite
+    layers:
+    - sprite: Markers/cross.rsi
+      state: green
+    - sprite: Clothing/Head/Helmets/justice.rsi
+      state: icon

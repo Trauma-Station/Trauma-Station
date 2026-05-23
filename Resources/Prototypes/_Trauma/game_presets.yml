@@ -18,24 +18,6 @@
   - Insurgency
 
 - type: gamePreset
-  id: Abductors
-  alias:
-  - ayylmao
-  name: abductors-title
-  description: abductors-description
-  showInVote: false
-  minPlayers: 20
-  rules:
-  - BasicRoundstartVariation
-  - BasicStationEventScheduler
-  - BasicAntagEventScheduler
-  - ModerateAntagEventScheduler
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlEventScheduler
-  - SubGamemodesRule
-  - DuoAbductorRoundstart
-
-- type: gamePreset
   id: Heretics
   alias:
   - heretic
@@ -52,6 +34,7 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRuleNoHeretic
   - HereticGamemode
+  - CalmTraitor
 
 - type: gamePreset
   id: Shadowlings
@@ -70,22 +53,4 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - ShadowlingGamemode
-
-- type: gamePreset
-  id: Wraith
-  alias:
-  - wraith
-  - ayyghost
-  - ghostie
-  name: wraith-title
-  description: wraith-description
-  showInVote: false
-  rules:
-  - BasicRoundstartVariation
-  - BasicStationEventScheduler
-  - BasicAntagEventScheduler
-  - ModerateAntagEventScheduler
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlEventScheduler
-  - SubGamemodesRule
-  - WraithRoundstart
+  - CalmTraitor

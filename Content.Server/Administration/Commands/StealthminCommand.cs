@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
@@ -12,9 +6,9 @@ using Robust.Shared.Utility;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Stealth)]
-public sealed class StealthminCommand : LocalizedCommands
+public sealed partial class StealthminCommand : LocalizedCommands
 {
-    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
 
     public override string Command => "stealthmin";
 

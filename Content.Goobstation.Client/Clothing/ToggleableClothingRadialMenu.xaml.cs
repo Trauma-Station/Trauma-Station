@@ -1,17 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Clothing.Components;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.XAML;
 
 namespace Content.Goobstation.Client.Clothing;
 
 public sealed partial class ToggleableClothingRadialMenu : RadialMenu
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     public event Action<EntityUid>? SendToggleClothingMessageAction;
 

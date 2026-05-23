@@ -80,3 +80,109 @@ Entries:
   id: 11
   time: '2026-03-25T21:49:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/1582
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: SM ashing players log is now extreme instead of medium.
+  id: 12
+  time: '2026-04-04T14:47:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1862
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the cleardecals command, use it if the server lags like crazy from
+      decals.
+  id: 13
+  time: '2026-04-07T07:00:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1895
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Implants no longer allow being implanted into anything via admeme
+      implanter, you have to VV the implant and remove its whitelist/blacklist
+      now.
+  id: 14
+  time: '2026-04-07T07:25:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1896
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Trialmins can no longer make watchlists, hitler dead.
+  id: 15
+  time: '2026-04-09T18:42:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1948
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed godmode not protecting from explosions or other things that directly
+      damage limbs.
+  id: 16
+  time: '2026-04-11T18:54:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1980
+- author: Ministry of Truth
+  changes:
+  - type: Add
+    message: >-
+      Saying slurs configured in the server cvar now automatically admin alerts,
+      smites and permabans you.
+  id: 17
+  time: '2026-04-13T16:36:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2005
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: lsobjectives command now shows the description too
+  id: 18
+  time: '2026-05-08T15:32:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2493
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the effect toolshed command, it can apply entity effect prototypes
+      to input entities.
+  id: 19
+  time: '2026-05-08T16:06:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2491
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added debug anvil which uses no materials and gets wrought in 1 hit.
+  id: 20
+  time: '2026-05-08T17:25:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2497
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Admin commands are now logged with the previously almost unused
+      AdminCommands category.
+  id: 21
+  time: '2026-05-13T18:27:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2591
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed freeform lawboard log being useless.
+  id: 22
+  time: '2026-05-13T19:10:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2592
+- author: pyrocynicals biggest hater
+  changes:
+  - type: Add
+    message: >-
+      Added the wipecurrency command. Password phrase: Who are the patriots?
+      Password response: La-li-lu-le-lo
+  id: 23
+  time: '2026-05-14T13:36:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2609
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added trauma.disable_vision_cones cvar
+  id: 24
+  time: '2026-05-21T08:07:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2714

@@ -138,11 +138,7 @@
       - DemonicWhisperAction
   - type: ReplacementAccent
     accent: slaughterDemon
-  - type: KnowledgeGrant
-    skills:
-      MartialArtHellRip: 88 # almost maxed out, demon cant read books
-      StrengthKnowledge: 70
-      AthleticsKnowledge: 40
+  - type: KnowledgeHolder
   - type: AlwaysTakeHoly
   - type: Hands
   - type: PressureImmunity
@@ -166,7 +162,7 @@
       reagents:
       - ReagentId: Sulfur
         Quantity: 300
-    bleedReductionAmount: 5
+    bleedReductionAmount: 30
   - type: TemperatureDamage
     coldDamage:
       types:

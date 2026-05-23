@@ -3,7 +3,6 @@
 using Content.Shared.Humanoid;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.Prototypes;
 using Content.Shared.Polymorph;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
@@ -17,7 +16,7 @@ public sealed partial class SpeciesChange : EntityEffectBase<SpeciesChange>
         => Loc.GetString("reagent-effect-guidebook-change-species", ("species", prototype.Index(NewSpecies).Name));
 }
 
-public abstract class SharedSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, SpeciesChange>
+public abstract partial class SharedSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, SpeciesChange>
 {
     protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<SpeciesChange> args)
     {

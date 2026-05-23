@@ -9,9 +9,9 @@ using Robust.Shared.Console;
 namespace Content.Goobstation.Server.Polls;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class CreatePollCommand : LocalizedEntityCommands
+public sealed partial class CreatePollCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly PollManager _pollManager = default!;
+    [Dependency] private PollManager _pollManager = default!;
 
     public override string Command => "createpoll";
     public override string Description => "Creates a new poll that players can vote on.";
@@ -79,9 +79,9 @@ public sealed class CreatePollCommand : LocalizedEntityCommands
 }
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class ClosePollCommand : LocalizedEntityCommands
+public sealed partial class ClosePollCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly PollManager _pollManager = default!;
+    [Dependency] private PollManager _pollManager = default!;
 
     public override string Command => "closepoll";
     public override string Description => "Closes an active poll.";
@@ -121,9 +121,9 @@ public sealed class ClosePollCommand : LocalizedEntityCommands
 }
 
 [AnyCommand]
-public sealed class ListPollsCommand : LocalizedEntityCommands
+public sealed partial class ListPollsCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly PollManager _pollManager = default!;
+    [Dependency] private PollManager _pollManager = default!;
 
     public override string Command => "listpolls";
     public override string Description => "Lists all active polls.";
@@ -153,9 +153,9 @@ public sealed class ListPollsCommand : LocalizedEntityCommands
 }
 
 [AnyCommand]
-public sealed class PollInfoCommand : LocalizedEntityCommands
+public sealed partial class PollInfoCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly PollManager _pollManager = default!;
+    [Dependency] private PollManager _pollManager = default!;
 
     public override string Command => "pollinfo";
     public override string Description => "Shows detailed information about a specific poll.";

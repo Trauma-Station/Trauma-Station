@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Radiation.Components;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
@@ -114,7 +108,7 @@ public partial class RadiationSystem
 
         // save resistance into rad protection grid
         var gridId = trs.GridUid.Value;
-        var tilePos = grid.TileIndicesFor(trs.Coordinates);
+        var tilePos = _maps.TileIndicesFor((trs.GridUid.Value, grid), trs.Coordinates);
         AddToTile(gridId, tilePos, component.RadResistance);
 
         // and remember it as last valid position

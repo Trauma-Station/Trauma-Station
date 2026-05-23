@@ -2,13 +2,12 @@
 
 using Content.Goobstation.Shared.Vehicles.Clowncar;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Vehicles.Clowncar;
 
-public sealed class ClowncarSystem : SharedClowncarSystem
+public sealed partial class ClowncarSystem : SharedClowncarSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
+    [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
 
     public override void Initialize()
     {

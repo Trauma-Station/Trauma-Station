@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Eye.Blinding.Components;
@@ -9,7 +11,7 @@ namespace Content.Shared.Eye.Blinding.Systems;
 /// </summary>
 public sealed partial class BlindableSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     private void UpdateEyeOrganDamage(EntityUid uid, int amount)
     {

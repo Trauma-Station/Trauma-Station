@@ -2,7 +2,6 @@
 
 using Content.Medical.Common.Traumas;
 using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Shared.Traumas;
 

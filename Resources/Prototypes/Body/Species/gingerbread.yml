@@ -1,6 +1,7 @@
 - type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceGingerbread
+  categories: [ HideSpawnMenu ]
   name: gingerbread appearance
   components:
   - type: Inventory
@@ -82,11 +83,6 @@
   id: OrganGingerbread
   abstract: true
   suffix: gingerbread
-  # <Shitmed>
-  components:
-  - type: Damageable
-    damageModifierSet: Gingerbread
-  # </Shitmed>
 
 - type: entity
   parent: OrganGingerbread

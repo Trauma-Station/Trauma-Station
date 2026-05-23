@@ -4,7 +4,6 @@ using Content.Shared.EntityConditions;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Areas;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -35,10 +34,10 @@ public sealed partial class InsideAreaCondition : EntityConditionBase<InsideArea
         => Loc.GetString(GuidebookText);
 }
 
-public sealed class InsideAreaConditionSystem : EntityConditionSystem<TransformComponent, InsideAreaCondition>
+public sealed partial class InsideAreaConditionSystem : EntityConditionSystem<TransformComponent, InsideAreaCondition>
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     protected override void Condition(Entity<TransformComponent> ent, ref EntityConditionEvent<InsideAreaCondition> args)
     {

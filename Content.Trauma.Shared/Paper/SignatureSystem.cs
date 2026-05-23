@@ -9,17 +9,16 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.Paper;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Paper;
 
-public sealed class SignatureSystem : EntitySystem
+public sealed partial class SignatureSystem : EntitySystem
 {
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     // The sprite used to visualize "signatures" on paper entities.
     private const string SignatureStampState = "paper_stamp-signature";

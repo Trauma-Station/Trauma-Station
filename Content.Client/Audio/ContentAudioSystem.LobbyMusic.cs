@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Fildrance <fildrance@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 pa.pecherskij <pa.pecherskij@interfax.ru>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 pathetic meowmeow <uhhadd@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby;
@@ -28,9 +18,9 @@ namespace Content.Client.Audio;
 // Part of ContentAudioSystem that is responsible for lobby music playing/stopping and round-end sound-effect.
 public sealed partial class ContentAudioSystem
 {
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly ClientGameTicker _gameTicker = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private IBaseClient _client = default!;
+    [Dependency] private ClientGameTicker _gameTicker = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     private readonly AudioParams _lobbySoundtrackParams = new(-5f, 1, 0, 0, 0, false, 0f);
     private readonly AudioParams _roundEndSoundEffectParams = new(-5f, 1, 0, 0, 0, false, 0f);

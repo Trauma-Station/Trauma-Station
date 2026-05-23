@@ -3,16 +3,15 @@
 using Content.Client.DamageState;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed class BlobTileSystem : SharedBlobTileSystem
+public sealed partial class BlobTileSystem : SharedBlobTileSystem
 {
     protected override void TryUpgrade(Entity<BlobTileComponent> target, Entity<BlobCoreComponent> core, EntityUid observer) { }
 }
 
-public sealed class BlobTileVisualizerSystem : VisualizerSystem<BlobTileComponent>
+public sealed partial class BlobTileVisualizerSystem : VisualizerSystem<BlobTileComponent>
 {
     public override void Initialize()
     {

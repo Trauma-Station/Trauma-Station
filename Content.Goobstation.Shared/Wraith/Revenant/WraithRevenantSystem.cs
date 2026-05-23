@@ -5,7 +5,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;
 
@@ -13,9 +12,9 @@ namespace Content.Goobstation.Shared.Wraith.Revenant;
 /// This handles the revenant system for wraith.
 /// Just adds the abilities and passive damage shittery
 /// </summary>
-public sealed class WraithRevenantSystem : EntitySystem
+public sealed partial class WraithRevenantSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Net;
 using Content.Server.Administration.Logs;
 using Content.Server.Database;
@@ -21,13 +10,13 @@ using Robust.Shared.Network;
 
 namespace Content.Server.Info;
 
-public sealed class RulesManager
+public sealed partial class RulesManager
 {
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private static DateTime LastValidReadTime => DateTime.UtcNow - TimeSpan.FromDays(60);
 

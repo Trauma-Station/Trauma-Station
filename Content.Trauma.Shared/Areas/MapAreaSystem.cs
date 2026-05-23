@@ -3,10 +3,8 @@
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Events;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
-using System.Linq;
-using System.Numerics;
+using Robust.Shared.Profiling;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Areas;
 
@@ -17,21 +15,24 @@ namespace Content.Trauma.Shared.Areas;
 /// Only real difference is areamap is stored on the grid instead of root save yml, it's not really doable with current RT.
 /// Only 256 area prototypes are supported.
 /// </summary>
-public sealed class MapAreaSystem : EntitySystem
+public sealed partial class MapAreaSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<AreaGridComponent> _query = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private ProfManager _prof = default!;
+    [Dependency] private EntityQuery<AreaGridComponent> _query = default!;
 
     private List<Vector2i> _empty = new();
     private List<byte> _badIds = new();
     private Dictionary<EntProtoId, byte> _mapping = new();
+    private Stopwatch _stopwatch = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<AreaComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<AreaComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<AreaComponent, MoveEvent>(OnMove);
 
         SubscribeLocalEvent<GridAddEvent>(OnGridAdd);
 
@@ -42,14 +43,19 @@ public sealed class MapAreaSystem : EntitySystem
 
     private void OnStartup(Entity<AreaComponent> ent, ref ComponentStartup args)
     {
-        if (GetChunk(ent, create: true) is {} chunk)
-            chunk.Areas.Add(ent);
+        // areas virtually never change and have ~no cost so its good for clients to keep them around
+        _meta.AddFlag(ent.Owner, MetaDataFlags.Undetachable);
+
+        TryAddToChunk((ent, Transform(ent)));
     }
 
-    private void OnShutdown(Entity<AreaComponent> ent, ref ComponentShutdown args)
+    private void OnMove(Entity<AreaComponent> ent, ref MoveEvent args)
     {
-        if (GetChunk(ent) is {} chunk)
-            chunk.Areas.Remove(ent);
+        var oldGrid = args.OldPosition.EntityId;
+        if (oldGrid.IsValid())
+            RemoveFromChunk(oldGrid, args.OldPosition.Position, ent);
+
+        TryAddToChunk((ent, args.Component));
     }
 
     private void OnGridAdd(GridAddEvent args)
@@ -80,6 +86,10 @@ public sealed class MapAreaSystem : EntitySystem
 
     private void OnGridStartup(Entity<AreaGridComponent> ent, ref ComponentStartup args)
     {
+        var chunks = ent.Comp.Chunks.Count;
+        if (chunks == 0)
+            return; // empty...
+
         var size = ent.Comp.ChunkSize;
         // verify that none of the areas used got removed, skip any that were
         foreach (var (mapped, id) in ent.Comp.AreaMap)
@@ -98,18 +108,26 @@ public sealed class MapAreaSystem : EntitySystem
 
         // now spawn all the areas it used
         Log.Debug($"Loading {ent.Comp.AreaMap.Count} unique areas for {ToPrettyString(ent)}");
-        foreach (var (indices, chunk) in ent.Comp.Chunks.ToList()) // copy since it may modify chunks by spawning areas...
+        _stopwatch.Restart();
+        using (_prof.Group("Areas"))
         {
-            var offset = new Vector2(indices.X * size, indices.Y * size);
-            try
+            foreach (var (indices, chunk) in ent.Comp.Chunks)
             {
-                LoadChunk(ent, size, offset, chunk);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Caught exception while loading areas for grid {ToPrettyString(ent)} @ {indices}: {e}");
+                // centered so floating point errors can only occur at absurdly large map sizes
+                var offset = new Vector2(indices.X * size + 0.5f, indices.Y * size + 0.5f);
+                try
+                {
+                    LoadChunk(ent, size, offset, chunk);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"Caught exception while loading areas for grid {ToPrettyString(ent)} @ {indices}: {e}");
+                }
             }
         }
+
+        var time = _stopwatch.Elapsed;
+        Log.Debug($"Loaded areas for {ToPrettyString(ent)} in {time} ({chunks} x {time / chunks})");
     }
 
     private void LoadChunk(Entity<AreaGridComponent> ent, int size, Vector2 offset, AreaChunk chunk)
@@ -118,10 +136,15 @@ public sealed class MapAreaSystem : EntitySystem
         if (string.IsNullOrEmpty(chunk.Data))
             return;
 
+        var area = size * size;
+        chunk.Areas = new EntityUid[area]; // it's null when loading from yml
         var map = ent.Comp.AreaMap;
         byte[] bytes = Convert.FromBase64String(chunk.Data);
-        var area = size * size;
-        DebugTools.Assert(bytes.Length == area, $"Bytes had bad length {bytes.Length}, expected {area}");
+        if (bytes.Length != area)
+        {
+            Log.Error($"Bytes of grid {ToPrettyString(ent)} chunk at {offset} had bad length {bytes.Length}, expected {area}!");
+            return;
+        }
 
         for (int i = 0; i < area; i++)
         {
@@ -136,7 +159,12 @@ public sealed class MapAreaSystem : EntitySystem
             var y = i / size;
             var local = new Vector2(offset.X + x, offset.Y + y);
             var coords = new EntityCoordinates(ent, local);
-            PredictedSpawnAtPosition(id, coords); // predicted map loading..?
+            var spawned = PredictedSpawnAtPosition(id, coords); // predicted map loading..?
+            if (chunk.Areas[i] != spawned)
+            {
+                Log.Error($"Area {ToPrettyString(spawned)} at {local} of grid {ToPrettyString(ent)} did not have working setup logic!");
+            }
+            chunk.Areas[i] = spawned;
         }
     }
 
@@ -146,7 +174,8 @@ public sealed class MapAreaSystem : EntitySystem
         _empty.Clear();
         foreach (var (indices, chunk) in areas.Chunks)
         {
-            if (chunk.Areas.Count == 0)
+            PruneDeletedAreas(chunk);
+            if (chunk.AreaCount == 0)
                 _empty.Add(indices);
         }
 
@@ -163,11 +192,10 @@ public sealed class MapAreaSystem : EntitySystem
         }
         foreach (var chunk in areas.Chunks.Values)
         {
-            chunk.Areas.RemoveWhere(uid => Deleted(uid));
             foreach (var uid in chunk.Areas)
             {
                 // TODO: might want to cache the id somewhere..?
-                if (Prototype(uid)?.ID is not {} id)
+                if (!uid.IsValid() || Prototype(uid)?.ID is not {} id)
                     continue;
 
                 if (_mapping.ContainsKey(id))
@@ -190,39 +218,80 @@ public sealed class MapAreaSystem : EntitySystem
         }
     }
 
-    private Entity<AreaGridComponent>? GetGrid(Entity<TransformComponent> area)
+    private void RemoveFromChunk(EntityUid grid, Vector2 pos, EntityUid area)
     {
-        if (area.Comp.GridUid is not {} grid)
-            return null;
+        if (GetChunk(grid, pos, out var index) is not { } chunk || chunk.Areas[index] != area)
+            return;
 
-        if (_query.TryComp(grid, out var comp))
-            return (grid, comp);
-
-        Log.Error($"Grid {ToPrettyString(grid)} for area {ToPrettyString(area)} was missing AreaGridComponent!");
-        return null;
+        chunk.Areas[index] = EntityUid.Invalid;
+        chunk.AreaCount--;
     }
 
     /// <summary>
-    /// Gets an area chunk from an area's grid.
-    /// If <c>create</c> is true, it will creating a chunk if it doesn't exist.
+    /// Add an area to the chunk it's in, or delete if it's in space
     /// </summary>
-    public AreaChunk? GetChunk(EntityUid area, bool create = false)
+    private void TryAddToChunk(Entity<TransformComponent> area)
     {
-        var xform = Transform(area);
-        if (GetGrid((area, xform)) is not {} grid)
+        if (area.Comp.GridUid is { } grid)
+            AddToChunk(grid, area.Comp.LocalPosition, area);
+        else if (area.Comp.MapID != MapId.Nullspace) // ignore entity spawn menu's nullspace entities
+            PredictedDel(area.Owner); // no areas in space
+    }
+
+    private void AddToChunk(EntityUid grid, Vector2 pos, EntityUid area)
+    {
+        if (GetChunk(grid, pos, out var index, create: true) is not { } chunk)
+            return;
+
+        var added = Deleted(chunk.Areas[index]);
+        chunk.Areas[index] = area;
+        if (added)
+            chunk.AreaCount++;
+    }
+
+    /// <summary>
+    /// Gets an area chunk from a grid and local position.
+    /// If <c>create</c> is true, it will create a chunk if it doesn't exist.
+    /// </summary>
+    private AreaChunk? GetChunk(Entity<AreaGridComponent?> grid, Vector2 pos, out int index, bool create = false)
+    {
+        index = 0;
+        if (!_query.Resolve(grid, ref grid.Comp, false))
             return null;
 
+        // calculate index for the chunk inside the grid
         var size = grid.Comp.ChunkSize;
         var chunks = grid.Comp.Chunks;
-        var pos = xform.Coordinates.Position;
         var indices = new Vector2i((int) MathF.Floor(pos.X / size), (int) MathF.Floor(pos.Y / size));
+        // calculate index inside the chunk
+        var x = (int) MathF.Floor(pos.X - indices.X * size);
+        var y = (int) MathF.Floor(pos.Y - indices.Y * size);
+        DebugTools.Assert(x >= 0 && x < size);
+        DebugTools.Assert(x >= 0 && y < size);
+        index = x + y * size;
         if (chunks.TryGetValue(indices, out var chunk))
             return chunk;
 
         if (!create)
             return null;
 
-        return chunks[indices] = new();
+        return chunks[indices] = new()
+        {
+            Areas = new EntityUid[size * size]
+        };
+    }
+
+    /// <summary>
+    /// Try to get an area at a given grid-local position on a grid.
+    /// </summary>
+    public EntityUid? GetArea(Entity<AreaGridComponent?> grid, Vector2 pos)
+    {
+        if (!_query.Resolve(grid, ref grid.Comp, false) ||
+            GetChunk(grid, pos, out var index) is not {} chunk)
+            return null;
+
+        var area = chunk.Areas[index];
+        return area.IsValid() ? area : null;
     }
 
     private void BuildChunk(int size, Vector2 offset, AreaChunk chunk)
@@ -230,8 +299,7 @@ public sealed class MapAreaSystem : EntitySystem
         var bytes = new byte[size * size];
         foreach (var uid in chunk.Areas)
         {
-            // these should always exist from ComponentShutdown removing it from the chunk.
-            if (Prototype(uid)?.ID is not {} id)
+            if (!uid.IsValid() || Prototype(uid)?.ID is not {} id)
                 continue;
 
             var xform = Transform(uid);
@@ -248,5 +316,19 @@ public sealed class MapAreaSystem : EntitySystem
         }
 
         chunk.Data = Convert.ToBase64String(bytes);
+    }
+
+    private void PruneDeletedAreas(AreaChunk chunk)
+    {
+        for (int i = 0; i < chunk.Areas.Length; i++)
+        {
+            var area = chunk.Areas[i];
+            if (area.IsValid() && Deleted(area))
+            {
+                Log.Warning($"Found deleted area {area} inside a chunk at index {i}! It should have been cleaned up in ComponentShutdown");
+                chunk.Areas[i] = EntityUid.Invalid;
+                chunk.AreaCount--;
+            }
+        }
     }
 }

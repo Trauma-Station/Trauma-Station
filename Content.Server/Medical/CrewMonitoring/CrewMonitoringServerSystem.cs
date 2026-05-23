@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Medical.SuitSensors;
 using Content.Shared.DeviceNetwork;
@@ -15,12 +8,12 @@ using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
-public sealed class CrewMonitoringServerSystem : EntitySystem
+public sealed partial class CrewMonitoringServerSystem : EntitySystem
 {
-    [Dependency] private readonly SuitSensorSystem _sensors = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly SingletonDeviceNetServerSystem _singletonServerSystem = default!;
+    [Dependency] private SuitSensorSystem _sensors = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private SingletonDeviceNetServerSystem _singletonServerSystem = default!;
 
     private const float UpdateRate = 3f;
     private float _updateDiff;

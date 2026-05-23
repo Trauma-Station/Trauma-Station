@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Mindshield;
+// </Trauma>
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
@@ -9,10 +12,10 @@ using Content.Shared.Antag;
 
 namespace Content.Shared.Revolutionary;
 
-public abstract partial class SharedRevolutionarySystem : EntitySystem // Trauma - made partial
+public abstract partial class SharedRevolutionarySystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedStunSystem _sharedStun = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedStunSystem _sharedStun = default!;
 
     public override void Initialize()
     {
@@ -25,6 +28,9 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem // Trauma
         SubscribeLocalEvent<RevolutionaryComponent, ComponentStartup>(DirtyRevComps);
         SubscribeLocalEvent<HeadRevolutionaryComponent, ComponentStartup>(DirtyRevComps);
         SubscribeLocalEvent<ShowAntagIconsComponent, ComponentStartup>(DirtyRevComps);
+        // <Trauma>
+        SubscribeLocalEvent<HeadRevolutionaryComponent, RemoveMindShieldEvent>(OnMindshieldRemoval);
+        // </Trauma>
     }
 
     /// <summary>

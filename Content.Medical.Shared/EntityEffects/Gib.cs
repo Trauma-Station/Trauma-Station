@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Gibbing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 
@@ -19,9 +18,9 @@ public sealed partial class Gib : EntityEffectBase<Gib>
         => Loc.GetString("entity-effect-guidebook-gib", ("chance", Probability));
 }
 
-public sealed class GibEffectSystem : EntityEffectSystem<TransformComponent, Gib>
+public sealed partial class GibEffectSystem : EntityEffectSystem<TransformComponent, Gib>
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<Gib> args)
     {

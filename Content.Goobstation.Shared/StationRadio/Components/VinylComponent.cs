@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.StationRadio.Components;
 
@@ -11,5 +10,6 @@ public sealed partial class VinylComponent : Component
     /// <summary>
     /// What song should be played when the vinyl is played
     /// </summary>
-    [DataField] public SoundPathSpecifier? Song;
+    [DataField(required: true)]
+    public SoundPathSpecifier? Song;
 }

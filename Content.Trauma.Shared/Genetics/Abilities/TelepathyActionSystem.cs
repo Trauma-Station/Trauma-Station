@@ -6,28 +6,23 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class TelepathyActionSystem : EntitySystem
+public sealed partial class TelepathyActionSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ISharedChatManager _chatMan = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-
-    private EntityQuery<ActorComponent> _actorQuery;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedChatManager _chatMan = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<TelepathyActionComponent, TelepathyActionEvent>(OnTelepathyPrompt);
 

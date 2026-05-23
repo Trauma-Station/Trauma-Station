@@ -4,15 +4,14 @@ using Content.Goobstation.Shared.InternalResources.Components;
 using Content.Goobstation.Shared.InternalResources.Events;
 using Content.Shared.Actions.Events;
 using Content.Shared.Popups;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.InternalResources.EntitySystems;
 
 public sealed partial class SharedInternalResourcesActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInternalResourcesSystem _internalResources = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedInternalResourcesSystem _internalResources = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {

@@ -17,9 +17,9 @@ public sealed partial class SimpleRadialMenu : RadialMenu
 {
     private EntityUid? _attachMenuToEntity;
 
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IInputManager _inputManager = default!;
 
     public SimpleRadialMenu()
     {
@@ -135,7 +135,12 @@ public sealed partial class SimpleRadialMenu : RadialMenu
         };
 
         if(imageControl != null)
+        // <Trauma> - set the color too
+        {
+            imageControl.Modulate = model.Color;
             button.AddChild(imageControl);
+        }
+        // </Trauma>
 
         if (model is RadialMenuActionOptionBase actionOption)
         {
@@ -334,6 +339,12 @@ public abstract class RadialMenuOptionBase
     /// Specifier that describes icon to be used for radial menu button.
     /// </summary>
     public RadialMenuIconSpecifier? IconSpecifier { get; set; }
+
+    /// <summary>
+    /// Trauma - Color modulation for the icon.
+    /// Does nothing if <see cref="IconSpecifier"/> is null.
+    /// </summary>
+    public Color Color = Color.White;
 }
 
 /// <summary> Base type for model of radial menu button with some action on button pressed. </summary>

@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -106,6 +96,8 @@
   name: phylactery of damnation
   description: Used to steal blood from soon-to-be victims.
   components:
+  - type: Item
+    size: Tiny
   - type: UnholyItem
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/phylactery.rsi
@@ -254,8 +246,217 @@
     state: icon
   - type: SpawnItemsOnUse
     items:
-    - id: EldritchInfluenceT1
-    - id: EldritchInfluenceT2
+    - id: EldritchInfluence
+    - id: EldritchInfluence
   - type: Tag
     tags:
     - HereticItem
+
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: LabyrinthHandbook
+  name: labyrinth handbook
+  description: A book containing the laws and regulations of the Locked Labyrinth, penned on an unknown substance. Its pages squirm and strain, looking to lash out and escape.
+  components:
+  - type: UnholyItem
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/heretichandbook.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Small
+    sprite: _Goobstation/Heretic/book.rsi
+  - type: UseDelay
+  - type: HolosignProjector
+    signProto: WallLabyrinth
+  - type: LimitedCharges
+    maxCharges: 5
+  - type: AutoRecharge
+    rechargeDuration: 15
+  - type: LabyrinthHandbook
+  - type: Tag
+    tags:
+    - HereticItem
+
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: LanternHeretic
+  name: cracked lantern
+  description: It is said that the noon stones are not the same as before. That is not true. I will collect my tears in a bowl. I will use them to ignite an ancient flame. Light, wait for me.
+  components:
+  - type: UnholyItem
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/lantern.rsi
+    layers:
+    - state: icon
+  - type: Item
+    sprite: _Goobstation/Heretic/Entities/lantern.rsi
+  - type: Flash
+    flashOnMelee: false
+    aoeFlashDuration: 4.0
+  - type: UseDelay
+    delay: 5
+  - type: PointLight
+    radius: 8
+    energy: 6
+    color: "#13800E"
+  - type: StealTarget
+    stealGroup: LAMP
+  - type: Clothing
+    sprite: Objects/Tools/lantern.rsi
+    equippedPrefix: off
+    quickEquip: false
+    slots:
+    - Belt
+  - type: MeleeWeapon
+    angle: 0
+    damage:
+      types:
+        Blunt: 0
+  - type: IgniteOnFlash
+    fireStacks: 2
+    fireProtectionPenetration: 0.35
+  - type: AlwaysHot
+  - type: CrackedLantern
+  - type: Tag
+    tags:
+    - HereticItem
+
+- type: entity
+  id: LanternHereticSummon
+  name: hint
+  description: Strange creature that seems to feel more comfortable behind you.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CombatMode
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      collection: ShadowDemonPunch
+    animation: WeaponArcShadowClaw
+    damage:
+      types:
+        Blunt: 4
+        Slash: 4
+        Piercing: 4
+        Heat: 4
+  - type: BackStab
+    damageMultiplier: 1.5
+  - type: CrackedLanternSummon
+  - type: Damageable
+    damageContainer: Biological
+  - type: AlwaysTakeHoly
+  - type: Sprite
+    noRot: true
+    sprite: _Goobstation/Heretic/Mobs/hint.rsi
+    layers:
+    - state: smol_progenitor
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+    linearDamping: 0.5
+    ignoreGravity: true
+    canCollide: false
+  - type: TileFrictionModifier
+    modifier: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 25
+  - type: Tag
+    tags:
+    - WideSwingIgnore
+  - type: FactionException
+  - type: NpcFactionMember
+    factions:
+    - Heretic
+  - type: Targeting
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: EldritchCoin
+  name: eldritch coin
+  description: A surprisingly heavy, ornate coin. Its sides seem to depict a different image each time you look.
+  components:
+  - type: Item
+    size: Tiny
+  - type: UnholyItem
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    noRot: true
+    layers:
+    - state: heretic
+      map: [ "enum.CoinFlipKey.Key" ]
+  - type: Appearance
+  - type: Tag
+    tags:
+    - HereticItem
+  - type: StaticPrice
+    price: 500 # Trollface
+  - type: CoinFlip
+    flippingSpriteState: flip
+    flipTime: 1
+    sides:
+    - name: eldritch-coin-side-heretic
+      spriteState: heretic
+      userEffects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 10
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+      - !type:RelayNearby
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+        compName: Door
+        range: 5
+        flags: Static
+        effect: !type:ToggleDoorState
+          predicted: false
+    - name: eldritch-coin-side-blade
+      spriteState: blade
+      userEffects:
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: 3
+            Slash: 3
+            Piercing: 3
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+      - !type:RelayNearby
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+        compName: DoorBolt
+        range: 5
+        flags: Static
+        effect: !type:ToggleDoorBolts
+          predicted: false

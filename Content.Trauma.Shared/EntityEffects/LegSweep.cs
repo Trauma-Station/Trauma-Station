@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -21,11 +20,11 @@ public sealed partial class LegSweep : EntityEffectBase<LegSweep>
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null; // idc
 }
 
-public sealed class LegSweepEffectSystem : EntityEffectSystem<TransformComponent, LegSweep>
+public sealed partial class LegSweepEffectSystem : EntityEffectSystem<TransformComponent, LegSweep>
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<LegSweep> args)

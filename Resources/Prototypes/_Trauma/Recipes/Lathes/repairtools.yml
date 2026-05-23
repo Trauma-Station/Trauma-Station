@@ -1,0 +1,6 @@
+- type: latheRecipe
+  id: DrillHead
+  result: DrillHead
+  completetime: 5
+  materials:
+    Steel: 100

@@ -1,21 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Lavaland.Shared.Megafauna.Events;
 using Content.Lavaland.Shared.Movement;
 using Content.Shared.Actions.Components;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 
 namespace Content.Lavaland.Shared.Megafauna.Systems;
 
 /// <summary>
 /// Handles general actions that are useful for all megafauna bosses.
 /// </summary>
-public sealed class MegafaunaActionsSystem : EntitySystem
+public sealed partial class MegafaunaActionsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

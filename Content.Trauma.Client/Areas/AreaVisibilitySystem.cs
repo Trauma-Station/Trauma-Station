@@ -3,8 +3,6 @@
 using Content.Client.UserInterface.Systems.Sandbox.Windows;
 using Content.Trauma.Common.Areas;
 using Content.Trauma.Shared.Areas;
-using Robust.Client.GameObjects;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Client.Areas;
@@ -12,9 +10,9 @@ namespace Content.Trauma.Client.Areas;
 /// <summary>
 /// Controls visibility of areas via the <c>showareas</c> and mapping commands.
 /// </summary>
-public sealed class AreaVisibilitySystem : CommonAreaVisibilitySystem
+public sealed partial class AreaVisibilitySystem : CommonAreaVisibilitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private bool _visible;
 

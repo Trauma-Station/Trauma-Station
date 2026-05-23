@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Shared._DV.StepTrigger.Components;
+using Content.Trauma.Common.StepTrigger;
+using Content.Trauma.Common.TileMovement;
 using Content.Shared.Physics;
-using Content.Shared._vg.TileMovement;
 using Content.Shared.Standing;
 using Content.Trauma.Common.Movement;
 // </Trauma>
@@ -42,44 +42,43 @@ namespace Content.Shared.Movement.Systems;
 public abstract partial class SharedMoverController : VirtualController
 {
     // <Trauma>
-    [Dependency] private   readonly StandingStateSystem _standing = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] protected EntityQuery<NoShoesSilentFootstepsComponent> NoShoesSilentQuery = default!;
+    [Dependency] protected EntityQuery<FixturesComponent> FixturesQuery = default!;
+    [Dependency] protected EntityQuery<TileMovementComponent> TileMovementQuery = default!;
     // </Trauma>
-    [Dependency] private   readonly IConfigurationManager _configManager = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private   readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private   readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private   readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private   readonly InventorySystem _inventory = default!;
-    [Dependency] private   readonly MobStateSystem _mobState = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] private   readonly SharedContainerSystem _container = default!;
-    [Dependency] private   readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private   readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private   readonly SharedTransformSystem _transform = default!;
-    [Dependency] private   readonly TagSystem _tags = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tags = default!;
 
-    protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
-    protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery;
-    protected EntityQuery<FTLComponent> FTLQuery;
-    protected EntityQuery<InputMoverComponent> MoverQuery;
-    protected EntityQuery<MapComponent> MapQuery;
-    protected EntityQuery<MapGridComponent> MapGridQuery;
-    protected EntityQuery<MobMoverComponent> MobMoverQuery;
-    protected EntityQuery<MovementRelayTargetComponent> RelayTargetQuery;
-    protected EntityQuery<MovementSpeedModifierComponent> ModifierQuery;
-    protected EntityQuery<NoRotateOnMoveComponent> NoRotateQuery;
-    protected EntityQuery<PhysicsComponent> PhysicsQuery;
-    protected EntityQuery<PilotComponent> PilotQuery;
-    protected EntityQuery<PreventPilotComponent> PreventPilotQuery;
-    protected EntityQuery<RelayInputMoverComponent> RelayQuery;
-    protected EntityQuery<PullableComponent> PullableQuery;
-    protected EntityQuery<TransformComponent> XformQuery;
-    protected EntityQuery<NoShoesSilentFootstepsComponent> NoShoesSilentQuery; // DeltaV - NoShoesSilentFootstepsComponent
+    [Dependency] protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery = default!;
+    [Dependency] protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery = default!;
+    [Dependency] protected EntityQuery<FTLComponent> FTLQuery = default!;
+    [Dependency] protected EntityQuery<InputMoverComponent> MoverQuery = default!;
+    [Dependency] protected EntityQuery<MapComponent> MapQuery = default!;
+    [Dependency] protected EntityQuery<MapGridComponent> MapGridQuery = default!;
+    [Dependency] protected EntityQuery<MobMoverComponent> MobMoverQuery = default!;
+    [Dependency] protected EntityQuery<MovementRelayTargetComponent> RelayTargetQuery = default!;
+    [Dependency] protected EntityQuery<MovementSpeedModifierComponent> ModifierQuery = default!;
+    [Dependency] protected EntityQuery<NoRotateOnMoveComponent> NoRotateQuery = default!;
+    [Dependency] protected EntityQuery<PhysicsComponent> PhysicsQuery = default!;
+    [Dependency] protected EntityQuery<PilotComponent> PilotQuery = default!;
+    [Dependency] protected EntityQuery<PreventPilotComponent> PreventPilotQuery = default!;
+    [Dependency] protected EntityQuery<RelayInputMoverComponent> RelayQuery = default!;
+    [Dependency] protected EntityQuery<PullableComponent> PullableQuery = default!;
+    [Dependency] protected EntityQuery<TransformComponent> XformQuery = default!;
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
-
-    protected EntityQuery<FixturesComponent> FixturesQuery; // Tile Movement Change
-    protected EntityQuery<TileMovementComponent> TileMovementQuery; // Tile Movement Change
 
     private bool _relativeMovement;
     private float _minDamping;
@@ -98,26 +97,6 @@ public abstract partial class SharedMoverController : VirtualController
     {
         UpdatesBefore.Add(typeof(TileFrictionController));
         base.Initialize();
-
-        MoverQuery = GetEntityQuery<InputMoverComponent>();
-        MobMoverQuery = GetEntityQuery<MobMoverComponent>();
-        ModifierQuery = GetEntityQuery<MovementSpeedModifierComponent>();
-        RelayTargetQuery = GetEntityQuery<MovementRelayTargetComponent>();
-        PhysicsQuery = GetEntityQuery<PhysicsComponent>();
-        RelayQuery = GetEntityQuery<RelayInputMoverComponent>();
-        PullableQuery = GetEntityQuery<PullableComponent>();
-        XformQuery = GetEntityQuery<TransformComponent>();
-        NoRotateQuery = GetEntityQuery<NoRotateOnMoveComponent>();
-        CanMoveInAirQuery = GetEntityQuery<CanMoveInAirComponent>();
-        FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
-        MapGridQuery = GetEntityQuery<MapGridComponent>();
-        FixturesQuery = GetEntityQuery<FixturesComponent>(); // Tile Movement Change
-        TileMovementQuery = GetEntityQuery<TileMovementComponent>(); // Tile Movement Change
-        NoShoesSilentQuery = GetEntityQuery<NoShoesSilentFootstepsComponent>(); // DeltaV - NoShoesSilentFootstepsComponent
-        MapQuery = GetEntityQuery<MapComponent>();
-        FTLQuery = GetEntityQuery<FTLComponent>();
-        PilotQuery = GetEntityQuery<PilotComponent>();
-        PreventPilotQuery = GetEntityQuery<PreventPilotComponent>();
 
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
         SubscribeLocalEvent<InputMoverComponent, ComponentStartup>(OnMoverStartup);
@@ -270,6 +249,20 @@ public abstract partial class SharedMoverController : VirtualController
         float accel;
         Vector2 wishDir;
         var velocity = physicsComponent.LinearVelocity;
+        // <Trauma> - logic to slow down backpedalling unless its 0G in which case who cares
+        var speedScale = 1f;
+        if (!weightless)
+        {
+            var limit = moveSpeedComponent?.BackwardsAngle
+                ?? MovementSpeedModifierComponent.DefaultBackwardsAngle;
+            var backwardsScale = moveSpeedComponent?.BackwardsSpeed
+                ?? MovementSpeedModifierComponent.DefaultBackwardsSpeed;
+            var worldRot = _transform.GetWorldRotation(xform);
+            var velAngle = velocity.ToWorldAngle();
+            if (Math.Abs(Angle.ShortestDistance(velAngle, worldRot).Theta) > limit.Theta)
+                speedScale = backwardsScale;
+        }
+        // </Trauma>
 
         // Get current tile def for things like speed/friction mods
         ContentTileDefinition? tileDef = null;
@@ -350,7 +343,7 @@ public abstract partial class SharedMoverController : VirtualController
             var walkSpeed = moveSpeedComponent?.CurrentWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
 
-            wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed);
+            wishDir = AssertValidWish(mover, walkSpeed * speedScale, sprintSpeed * speedScale); // Trauma - scale them by speedScale
 
             if (wishDir != Vector2.Zero)
             {
@@ -432,7 +425,7 @@ public abstract partial class SharedMoverController : VirtualController
                 }
 
                 // <Trauma>
-                var stepEv = new FootStepEvent(uid);
+                var stepEv = new FootStepEvent(uid, wishDir.ToWorldAngle());
                 RaiseLocalEvent(uid, ref stepEv);
                 // </Trauma>
             }
@@ -667,7 +660,7 @@ public abstract partial class SharedMoverController : VirtualController
 
         // If the coordinates have a FootstepModifier component
         // i.e. component that emit sound on footsteps emit that sound
-        var anchored = grid.GetAnchoredEntitiesEnumerator(position);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, position);
 
         while (anchored.MoveNext(out var maybeFootstep))
         {
@@ -833,7 +826,8 @@ public abstract partial class SharedMoverController : VirtualController
                     movementSpeed))
                 {
                     // <Trauma>
-                    var stepEv = new FootStepEvent(uid);
+                    var dir = targetTransform.LocalPosition - tileMovement.Destination;
+                    var stepEv = new FootStepEvent(uid, dir.ToWorldAngle());
                     RaiseLocalEvent(uid, ref stepEv);
                     // </Trauma>
                     EndSlide(uid, tileMovement);

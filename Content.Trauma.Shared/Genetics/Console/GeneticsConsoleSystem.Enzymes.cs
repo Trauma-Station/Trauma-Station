@@ -2,13 +2,12 @@
 
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem
 {
-    [Dependency] private readonly UniqueEnzymesSystem _enzymes = default!;
+    [Dependency] private UniqueEnzymesSystem _enzymes = default!;
 
     private void InitializeEnzymes()
     {

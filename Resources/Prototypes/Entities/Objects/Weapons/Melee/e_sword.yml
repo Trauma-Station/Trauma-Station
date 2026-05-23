@@ -57,7 +57,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
+        Slash: 10 # Trauma, was 15
         Heat: 15
         Structural: 20
       woundSeverityMultipliers: # Goobstation
@@ -94,7 +94,7 @@
   - type: Parry # Trauma
     reflects:
       - Energy
-    maxParries: 3
+    maxParries: 0
     maxReflects: 10
     reflectSpread: 60
   - type: IgnitionSource
@@ -377,8 +377,8 @@
           Heat: 15    #Goob Station rebalance, was originally 12
           Structural: 40 # Goob edit
         woundSeverityMultipliers: #Goob, Should be at least some reason to use this over eshield/base esword
-          Slash: 7
-          Heat: 7
+          Slash: 4
+          Heat: 4
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -415,9 +415,14 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
   - type: Parry # Trauma
     maxReflects: 15
-    maxParries: 3
+    maxParries: 0
     reflectSpread: 30
   - type: FlipOnHit # WD EDIT
+    lightAttackOnly: true
+    statusEffect: StatusEffectFlipDesword
+    hitWhitelist:
+      components:
+      - MobState
   - type: ThrowableBlocker # Goobstation
     blockSound:
       path: /Audio/Weapons/eblade1.ogg

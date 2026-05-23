@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.CharacterInfo;
 using Content.Client.Message;
 using Content.Shared.Points;
@@ -14,9 +7,9 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client.Points;
 
 /// <inheritdoc/>
-public sealed class PointSystem : SharedPointSystem
+public sealed partial class PointSystem : SharedPointSystem
 {
-    [Dependency] private readonly CharacterInfoSystem _characterInfo = default!;
+    [Dependency] private CharacterInfoSystem _characterInfo = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

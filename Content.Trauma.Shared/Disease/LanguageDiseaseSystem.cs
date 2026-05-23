@@ -3,18 +3,17 @@
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
-using Content.Shared._EinsteinEngines.Language;
 using Content.Shared.Chat;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Common.Language;
 
 namespace Content.Trauma.Shared.Disease;
 
 /// <summary>
 /// Relays <see cref="EntitySpokeEvent"/> to diseases and handles vocal parasite activation.
 /// </summary>
-public sealed class LanguageDiseaseSystem : EntitySystem
+public sealed partial class LanguageDiseaseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
+    [Dependency] private SharedDiseaseSystem _disease = default!;
 
     public override void Initialize()
     {

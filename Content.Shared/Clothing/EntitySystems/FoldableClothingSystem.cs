@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Luiz Costa <33888056+luizwritescode@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marty <martynashagriefer@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 paige404 <59348003+paige404@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Clothing.Components;
 using Content.Shared.Foldable;
 using Content.Shared.Inventory;
@@ -16,11 +5,11 @@ using Content.Shared.Item;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class FoldableClothingSystem : EntitySystem
+public sealed partial class FoldableClothingSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothingSystem = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
+    [Dependency] private ClothingSystem _clothingSystem = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedItemSystem _itemSystem = default!;
 
     public override void Initialize()
     {

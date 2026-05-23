@@ -7,11 +7,11 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Body.Part;
 
-public sealed class BodyPartCavitySystem : EntitySystem
+public sealed partial class BodyPartCavitySystem : EntitySystem
 {
-    [Dependency] private readonly CommonInsideBodyPartSystem _insideBodyPart = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private CommonInsideBodyPartSystem _insideBodyPart = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {

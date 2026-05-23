@@ -1,20 +1,15 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Movement.Components;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Server.Movement.Systems;
 
-public sealed class BoundarySystem : EntitySystem
+public sealed partial class BoundarySystem : EntitySystem
 {
     /*
      * The real reason this even exists is because with out mover controller it's really easy to clip out of bounds on chain shapes.
      */
 
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {

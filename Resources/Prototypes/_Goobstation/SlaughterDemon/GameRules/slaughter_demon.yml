@@ -34,6 +34,10 @@
     objectives:
       - SlaughterKillTheWizardObjective
       - SlaughterKillEveryoneObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: SlaughterDemonSkills
 
 # laughter
 - type: entity

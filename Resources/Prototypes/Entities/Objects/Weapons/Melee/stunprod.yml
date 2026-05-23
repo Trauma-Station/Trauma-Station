@@ -1,6 +1,6 @@
 - type: entity
   name: stun prod
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [BaseItem, BaseMinorContraband, BracingDurabilityWeak] # Trauma - durability
   id: Stunprod
   description: A stun prod for illegal incapacitation.
   components:
@@ -58,7 +58,11 @@
         length: 2.5
   - type: Item
     heldPrefix: off
-    size: Normal
+    # <Trauma>
+    shape:
+    - 0,0,2,0
+    storedRotation: 45
+    # </Trauma>
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunprod.rsi
     quickEquip: false
@@ -78,3 +82,11 @@
   - type: Construction
     graph: makeshiftstunprod
     node: msstunprod
+# <Trauma>
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+# </Trauma>

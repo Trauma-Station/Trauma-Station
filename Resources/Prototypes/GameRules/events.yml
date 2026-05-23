@@ -40,6 +40,7 @@
     - id: SnakeSpawnHorde
     - id: SpiderClownSpawnHorde
     - id: SpiderSpawnHorde
+    - id: CoconutCrabSpawn
     - !type:NestedSelector
       tableId: BasicAntagEventsTrauma
     # </Trauma>
@@ -50,21 +51,21 @@
       tableId: DerelictBorgEventTable
 
 - type: entityTable
-  id: ModerateAntagEventsTable
+  id: ModerateAntagEventsTable # Stop letting this shit spawn before 50 minutes or ill repo ban everyone
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     - !type:NestedSelector # Trauma
       tableId: ModerateAntagEventsTrauma
     - id: DragonSpawn
     - id: NinjaSpawn
-    #- id: ParadoxCloneSpawn # Trauma - moved to minor events
+    #- id: ParadoxCloneSpawn # Trauma, moved to minor
     #- id: RevenantSpawn  # GoobStation - removed till rework
-    - id: SleeperAgents
+    #- id: SleeperAgents # Trauma, moved to minor
     #- id: ZombieOutbreak Trauma - we dont want this as a midround
     - id: LoneOpsSpawn
     #- id: WizardSpawn # Trauma - chud wizard removed pending rework
-    #- !type:NestedSelector # Trauma
-    #  tableId: DerelictBorgEventTable
+    # - !type:NestedSelector # Trauma, moved to minor
+    #   tableId: DerelictBorgEventTable
 
 - type: entityTable
   id: DerelictBorgEventTable #For Derelict Borg spawns
@@ -205,9 +206,10 @@
   parent: BaseGameRule
   id: DragonSpawn
   components:
+  - type: GhostroleAlert # Trauma
   - type: StationEvent
     weight: 1 # Trauma - Was 3
-    earliestStart: 60 # Trauma - Was 30
+    earliestStart: 50 # Trauma, was 30
     #recorruenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 50
@@ -237,10 +239,17 @@
   parent: BaseGameRule
   id: NinjaSpawn
   components:
+  # <Trauma>
+  - type: GhostroleAlert
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills
+  # </Trauma>
   - type: StationEvent
     weight: 1 # Trauma - was 6
     duration: null
-    earliestStart: 45
+    earliestStart: 40 # Trauma - Was 45. Lowered so it works better with our schedulers
     #reoccurrenceDelay: 20 # Goobstation - no longer needed
     maxOccurrences: 1 # Goobstation
     minimumPlayers: 30
@@ -349,7 +358,7 @@
   components:
   - type: StationEvent
     weight: 1 # rare
-    duration: 1
+    duration: null
     earliestStart: 30
     reoccurrenceDelay: 60
     minimumPlayers: 30
@@ -573,7 +582,6 @@
       playerRatio: 10
       blacklist:
         components:
-        - BibleUser
         - ZombieImmune
         - AntagImmune
       briefing:
@@ -596,8 +604,9 @@
   parent: BaseNukeopsRule
   id: LoneOpsSpawn
   components:
+  - type: GhostroleAlert # Trauma
   - type: StationEvent
-    earliestStart: 60 # Trauma - Was 35
+    earliestStart: 50 # trauma, was 35
     weight: 1 # Trauma - was 5.5
     minimumPlayers: 50 # Goobstation - was 20
     duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
@@ -640,7 +649,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 50 # Trauma, was 8
+    weight: 8
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception

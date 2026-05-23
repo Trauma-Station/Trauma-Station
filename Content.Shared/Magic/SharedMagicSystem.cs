@@ -3,16 +3,8 @@
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Magic;
 using Content.Goobstation.Common.Religion;
-using Content.Shared._Goobstation.Wizard;
-using Content.Shared._Goobstation.Wizard.BindSoul;
-using Content.Shared._Goobstation.Wizard.Chuuni;
-using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
-using Content.Shared.Actions;
-using Content.Shared.FixedPoint;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Ghost;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
@@ -39,6 +31,7 @@ using Content.Shared.Magic.Components;
 using Content.Shared.Magic.Events;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Muting;
@@ -62,36 +55,37 @@ namespace Content.Shared.Magic;
 /// <summary>
 /// Handles learning and using spells (actions)
 /// </summary>
-public abstract class SharedMagicSystem : EntitySystem
+public abstract partial class SharedMagicSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private CommonWizardSystem _wizard = default!;
     // </Trauma>
-    [Dependency] private readonly ISerializationManager _seriMan = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedGunSystem _gunSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly LockSystem _lock = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    //[Dependency] private readonly ExamineSystemShared _examine= default!; // Trauma - unused now
+    [Dependency] private ISerializationManager _seriMan = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedGunSystem _gunSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private LockSystem _lock = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private TagSystem _tag = default!;
+    //[Dependency] private MobStateSystem _mobState = default!; // Trauma - unused now
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    //[Dependency] private ExamineSystemShared _examine= default!; // Trauma - unused now
+    [Dependency] private TargetSystem _target = default!;
 
     private static readonly ProtoId<TagPrototype> InvalidForGlobalSpawnSpellTag = "InvalidForGlobalSpawnSpell";
 
@@ -196,7 +190,7 @@ public abstract class SharedMagicSystem : EntitySystem
         var flags = SlotFlags.OUTERCLOTHING | SlotFlags.HEAD;
         var requiredSlots = 2;
         if (_inventory.TryGetSlotEntity(args.Performer, "eyes", out var eyepatch) &&
-            HasComp<ChuuniEyepatchComponent>(eyepatch.Value))
+            _wizard.IsChunni(eyepatch))
         {
             requiresSpeech = true;
             flags = SlotFlags.OUTERCLOTHING;
@@ -406,10 +400,13 @@ public abstract class SharedMagicSystem : EntitySystem
     #region Projectile Spells
     public void OnProjectileSpell(ProjectileSpellEvent ev) // Goob edit - made public
     {
-        if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer)) // Goob edit
+        if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
         ev.Handled = true;
+
+        if (!_net.IsServer)
+            return; // client returns handled for predicted audio
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
@@ -587,7 +584,7 @@ public abstract class SharedMagicSystem : EntitySystem
             if (TryComp<DoorComponent>(target, out var doorComp) && doorComp.State is not DoorState.Open)
                 _door.StartOpening(target);
 
-            if (TryComp<LockComponent>(target, out var lockComp) && lockComp.Locked)
+            if (TryComp<LockComponent>(target, out var lockComp) && lockComp.Locked && lockComp.BreakOnAccessBreaker)
                 _lock.Unlock(target, performer, lockComp);
         }
     }
@@ -615,7 +612,7 @@ public abstract class SharedMagicSystem : EntitySystem
             return;
 
         if (TryComp<BasicEntityAmmoProviderComponent>(wand, out var basicAmmoComp) && basicAmmoComp.Count != null)
-            _gunSystem.UpdateBasicEntityAmmoCount(wand.Value, basicAmmoComp.Count.Value + ev.Charge, basicAmmoComp);
+            _gunSystem.UpdateBasicEntityAmmoCount((wand.Value, basicAmmoComp), basicAmmoComp.Count.Value + ev.Charge);
         else if (TryComp<LimitedChargesComponent>(wand, out var charges))
             _charges.AddCharges((wand.Value, charges), ev.Charge);
     }
@@ -630,7 +627,7 @@ public abstract class SharedMagicSystem : EntitySystem
 
         ev.Handled = true;
 
-        var allHumans = _mind.GetAliveHumans();
+        var allHumans = _target.GetAliveHumans();
 
         foreach (var human in allHumans)
         {
@@ -661,42 +658,23 @@ public abstract class SharedMagicSystem : EntitySystem
         if (ev.Handled || !PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        if (IsTouchSpellDenied(ev.Target)) // Goobstation
+        // Goobstation start
+        if (IsTouchSpellDenied(ev.Target))
         {
             ev.Handled = true;
             return;
         }
 
-        // Goobstation start
-        if (_mobState.IsIncapacitated(ev.Target) || HasComp<ZombieComponent>(ev.Target))
-        {
-            _popup.PopupClient(Loc.GetString("spell-fail-mindswap-dead"), ev.Performer, ev.Performer);
-            return;
-        }
 
-        // raise blocker event (why the fuck was this done as a list lol)
         var blockEv = new BeforeMindSwappedEvent();
         RaiseLocalEvent(ev.Target, ref blockEv);
 
-        List<(Type, string)> blockers = new()
-        {
-            (typeof(GhoulComponent), "ghoul"),
-            // Mindswapping with aghost real.
-            (typeof(GhostComponent), "ghost"),
-            (typeof(SpectralComponent), "ghost"),
-            (typeof(TimedDespawnComponent), "temporary"),
-            (typeof(FadingTimedDespawnComponent), "temporary"),
-        };
-
-        // someone should nuke the list and make all of the components use the event. that someone is not me.
         if (blockEv.Cancelled)
         {
             _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{blockEv.Message}"), ev.Performer, ev.Performer);
             return;
         }
 
-        if (blockers.Any(x => CheckMindswapBlocker(x.Item1, x.Item2)))
-            return;
         // Goobstation end
 
         ev.Handled = true;
@@ -710,8 +688,10 @@ public abstract class SharedMagicSystem : EntitySystem
 
         var tarHasMind = _mind.TryGetMind(ev.Target, out var tarMind, out var tarMindComp);
 
-        _tag.AddTag(ev.Performer, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
-        _tag.AddTag(ev.Target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        EnsureComp<MindSwappingComponent>(ev.Performer);
+        EnsureComp<MindSwappingComponent>(ev.Target);
+        // </Trauma>
 
         _mind.TransferTo(perMind, ev.Target);
 
@@ -720,143 +700,22 @@ public abstract class SharedMagicSystem : EntitySystem
             _mind.TransferTo(tarMind, ev.Performer);
         }
 
-        // Goobstation start
-        List<Type> components = new()
-        {
-            typeof(RevolutionaryComponent),
-            typeof(HeadRevolutionaryComponent),
-            typeof(WizardComponent),
-            typeof(ApprenticeComponent),
-        };
-
-        foreach (var component in components)
-        {
-            TransferComponent(component, ev.Performer, ev.Target);
-        }
-
-        TransferFactions();
+        // <Trauma>
+        var afterEv = new AfterMindSwappedEvent(ev.Performer, ev.Target);
+        RaiseLocalEvent(ref afterEv);
 
         if (_net.IsServer)
         {
             _audio.PlayEntity(ev.Sound, ev.Target, ev.Target);
             _audio.PlayEntity(ev.Sound, ev.Performer, ev.Performer);
         }
-        // Goobstation end
 
-        _tag.RemoveTag(ev.Performer, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
-        _tag.RemoveTag(ev.Target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        RemComp<MindSwappingComponent>(ev.Performer);
+        RemComp<MindSwappingComponent>(ev.Target);
+        // </Trauma>
 
         _stun.TryUpdateParalyzeDuration(ev.Target, ev.TargetStunDuration);
         _stun.TryUpdateParalyzeDuration(ev.Performer, ev.PerformerStunDuration);
-
-        // Goobstation start
-        return;
-
-        void TransferFactions()
-        {
-            TryComp(ev.Performer, out NpcFactionMemberComponent? performerFaction);
-            TryComp(ev.Target, out NpcFactionMemberComponent? targetFaction);
-
-            if (performerFaction == null && targetFaction == null)
-                return;
-
-            var performerHadFaction = true;
-            var targetHadFaction = true;
-
-            if (performerFaction == null)
-            {
-                performerFaction = AddComp<NpcFactionMemberComponent>(ev.Performer);
-                performerHadFaction = false;
-            }
-
-            if (targetFaction == null)
-            {
-                targetFaction = AddComp<NpcFactionMemberComponent>(ev.Target);
-                targetHadFaction = false;
-            }
-
-            List<ProtoId<NpcFactionPrototype>> factionsToTransfer = new()
-            {
-                "Wizard",
-                "Assistant",
-            };
-
-            ProtoId<NpcFactionPrototype> fallbackFaction = "NanoTrasen";
-
-            var performerFactions = new HashSet<ProtoId<NpcFactionPrototype>>();
-            var targetFactions = new HashSet<ProtoId<NpcFactionPrototype>>();
-
-            foreach (var faction in FilterFactions(performerFaction.Factions))
-            {
-                performerFactions.Add(faction);
-            }
-
-            foreach (var faction in FilterFactions(targetFaction.Factions))
-            {
-                targetFactions.Add(faction);
-            }
-
-            Entity<NpcFactionMemberComponent?> targetFactionEnt = (ev.Target, targetFaction);
-            foreach (var faction in targetFactions)
-            {
-                _faction.RemoveFaction(targetFactionEnt, faction, false);
-            }
-
-            Entity<NpcFactionMemberComponent?> performerFactionEnt = (ev.Performer, performerFaction);
-            foreach (var faction in performerFactions)
-            {
-                _faction.RemoveFaction(performerFactionEnt, faction, false);
-            }
-
-            if (performerHadFaction)
-                _faction.AddFactions(targetFactionEnt, performerFactions);
-
-            if (targetHadFaction)
-                _faction.AddFactions(performerFactionEnt, targetFactions);
-
-            if (targetFaction.Factions.Count == 0)
-                _faction.AddFaction(targetFactionEnt, fallbackFaction);
-
-            if (performerFaction.Factions.Count == 0)
-                _faction.AddFaction(performerFactionEnt, fallbackFaction);
-            return;
-
-            IEnumerable<ProtoId<NpcFactionPrototype>> FilterFactions(HashSet<ProtoId<NpcFactionPrototype>> factions)
-            {
-                return factions.Where(x => factionsToTransfer.Contains(x));
-            }
-        }
-
-        bool CheckMindswapBlocker(Type type, string message)
-        {
-            if (!HasComp(ev.Target, type))
-                return false;
-
-            _popup.PopupClient(Loc.GetString($"spell-fail-mindswap-{message}"), ev.Performer, ev.Performer);
-            return true;
-        }
-        // Goobstation end
-    }
-
-    private void TransferComponent(Type type, EntityUid a, EntityUid b)
-    {
-        var aHasComp = HasComp(a, type);
-        var bHasComp = HasComp(b, type);
-
-        if (aHasComp && bHasComp)
-            return;
-
-        var comp = Factory.GetComponent(type);
-        if (aHasComp)
-        {
-            AddComp(b, comp);
-            RemCompDeferred(a, type);
-        }
-        else if (bHasComp)
-        {
-            AddComp(a, comp);
-            RemCompDeferred(b, type);
-        }
     }
 
     #endregion

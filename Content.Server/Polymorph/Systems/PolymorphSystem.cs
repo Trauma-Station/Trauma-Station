@@ -1,15 +1,11 @@
 // <Trauma>
-using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared.Actions.Components;
-using Content.Shared.Buckle.Components;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Tag;
-using Robust.Shared.Map;
-using Robust.Shared.Physics;
+using Content.Trauma.Common.Polymorph;
+using Content.Trauma.Common.Wizard;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using System.Linq;
@@ -44,28 +40,27 @@ namespace Content.Server.Polymorph.Systems;
 public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - extend shared system
 {
     // <Trauma>
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private BodySystem _body = default!;
     // </Trauma>
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly ServerInventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
-    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private ServerInventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private SharedMindSystem _mindSystem = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     private const string RevertPolymorphId = "ActionRevertPolymorph";
 
@@ -394,12 +389,16 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             }
         }
 
-        _tag.AddTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        EnsureComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, child, mind: mind);
 
-        _tag.RemoveTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        RemComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         //Ensures a map to banish the entity to
         EnsurePausedMap();
@@ -507,12 +506,16 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             }
         }
 
-        _tag.AddTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        EnsureComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, parent, mind: mind);
 
-        _tag.RemoveTag(uid, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+        // <Trauma>
+        RemComp<MindSwappingComponent>(uid);
+        // </Trauma>
 
         if (TryComp<PolymorphableComponent>(parent, out var polymorphableComponent))
             polymorphableComponent.LastPolymorphEnd = _gameTiming.CurTime;

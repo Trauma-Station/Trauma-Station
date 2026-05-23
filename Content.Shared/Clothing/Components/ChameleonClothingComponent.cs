@@ -1,13 +1,6 @@
-// SPDX-FileCopyrightText: 2022 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 HerCoyote23 <131214189+HerCoyote23@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Shared.Tag;
+// </Trauma>
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
@@ -39,14 +32,14 @@ public sealed partial class ChameleonClothingComponent : Component
     /// <summary>
     ///     Current user that wears chameleon clothing.
     /// </summary>
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? User;
 
     /// <summary>
     ///     Filter possible chameleon options by a tag in addition to WhitelistChameleon.
     /// </summary>
     [DataField]
-    public string? RequireTag;
+    public ProtoId<TagPrototype>? RequireTag; // Trauma - string -> ProtoId
 
     /// <summary>
     ///     Will component owner be affected by EMP pulses?

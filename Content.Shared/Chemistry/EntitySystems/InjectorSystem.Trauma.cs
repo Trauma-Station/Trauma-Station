@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
@@ -12,8 +14,8 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// </summary>
 public sealed partial class InjectorSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
 
     /// <summary>
     /// Raises an event to allow other systems to modify where the injector's solution comes from.

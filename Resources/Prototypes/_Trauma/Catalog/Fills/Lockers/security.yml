@@ -18,6 +18,29 @@
     - blue
     - yellow
 
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: GunSafeEmptyBlue
+  name: gun safe
+  suffix: Blue
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
+
+- type: entity
+  parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
+  id: GunSafeEmptyRed
+  name: gun safe
+  suffix: Red
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - blue
+    - yellow
+
 - type: entityTable
   id: FillLockerWardenTrauma
   table: !type:AllSelector
@@ -30,13 +53,14 @@
     - id: ContrabandDetectorFlatpack
     - id: SecurityMegaphone
     - id: WeaponEnergyShotgun
+    - id: GunpowderBottlePartFull
+    - id: ReinforcementCallerHos
 
 - type: entityTable
   id: FillLockerSecurityTrauma
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltSecurityRegular
-    - id: PanicButton
     - id: PepperSpray
     - id: WeaponLaserSidearm
     - id: ClothingHandsGlovesSecurity
@@ -50,11 +74,15 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeLaserT1
+  - type: StationAlertLevelLock
+    lockedAlertLevels:
+    - green
+    - yellow
 
 - type: entity
   parent: BaseTraumaGunSafe
   id: GunSafeShotguns
-  name: shotgun safe
+  name: ballistics safe
   components:
   - type: EntityTableContainerFill
     containers:
@@ -143,7 +171,11 @@
   table: !type:AllSelector
     children:
     - id: WeaponLaserCarbine
-      amount: 6
+      amount: 3
+    - id: WeaponLaserGunCarbine
+      amount: 2
+    - id: WeaponLaserGunAssault
+      amount: 1
 
 - type: entityTable
   id: FillGunSafeShotgunsT1
@@ -153,6 +185,12 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: WeaponGaussgun
+      amount: 2
+    - id: BaseMagazineGaussgun
+      amount: 2
+    - id: MagazineBoxGaussgunBullet
+      amount: 2
 
 - type: entityTable
   id: FillGunSafeLaserT2
@@ -167,6 +205,8 @@
     children:
     - id: Truncheon
       amount: 6
+    - id: SecBreachingHammer
+      amount: 2
 
 - type: entityTable
   id: FillGunSafeJudoT1

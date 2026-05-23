@@ -15,12 +15,12 @@ namespace Content.Shared.UserInterface;
 
 public sealed partial class ActivatableUISystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
-    [Dependency] private readonly ActionBlockerSystem _blockerSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private ISharedAdminManager _adminManager = default!;
+    [Dependency] private ActionBlockerSystem _blockerSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -45,11 +45,12 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
     private void OnStartup(Entity<ActivatableUIComponent> ent, ref ComponentStartup args)
     {
-        if (ent.Comp.Key == null)
-        {
-            Log.Error($"Missing UI Key for entity: {ToPrettyString(ent)}");
-            return;
-        }
+        // Goob edit
+        // if (ent.Comp.Key == null)
+        // {
+        //     Log.Error($"Missing UI Key for entity: {ToPrettyString(ent)}");
+        //     return;
+        // }
 
         // TODO BUI
         // set interaction range to zero to avoid constant range checks.

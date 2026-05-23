@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 J <billsmith116@gmail.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Trigger;
 using Content.Shared.Trigger.Components.Triggers;
 using Robust.Client.Animations;
@@ -17,11 +6,11 @@ using Robust.Shared.Animations;
 
 namespace Content.Client.Trigger.Systems;
 
-public sealed class ProximityTriggerAnimationSystem : EntitySystem
+public sealed partial class ProximityTriggerAnimationSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _player = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _player = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /*
      * Currently all of the appearance stuff is hardcoded for portable flashers

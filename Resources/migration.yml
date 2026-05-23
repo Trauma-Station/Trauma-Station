@@ -101,6 +101,9 @@ CardBoxBlack: null
 CardBoxSyndicate: null
 CardBoxNanotrasen: null
 
+# 2026-03-04
+RotaryPhoneStand: RotaryPhoneStandNoRot
+
 # 2026-03-10 this gives martial arts, no longer harmless maint loot
 MaterialHideBear: MaterialHideCorgi
 
@@ -110,6 +113,21 @@ MedicalBiofabMachineBoard: null
 
 # 2026-03-13 necrosol was removed
 NecrosolChemistryBottle: ArcryoxChemistryBottle
+
+# 2026-03-28 blockers being mapped is anti fun
+DisposalBlocker: DisposalPipe
+
+# 2026-03-29 no chud boris
+AiRemoteBrain: null
+
+# 2026-04-12 kill brigmedic
+SpawnPointBrigmedic: null
+
+# 2026-04-13 kill chud signaller
+PanicButton: null
+
+# 2026-04-29 Riot Launcher to trauma version
+GunSafeLauncherNonLethal: GunSafeRiotLauncher
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -138,24 +156,6 @@ AirlockZookeeperGlassLocked: AirlockServiceGlassLocked
 AirlockZookeeperLocked: AirlockServiceLocked
 AlwaysPoweredLightPostSmallRed: null
 AsteroidAltRock: AsteroidRock
-BenchParkBambooMiddle: null
-BenchParkLeft: null
-BenchParkMiddle: null
-BenchParkRight: null
-BenchPewLeft: null
-BenchPewMiddle: null
-BenchPewRight: null
-BenchSofaCorpLeft: null
-BenchSofaCorpMiddle: null
-BenchSofaCorpRight: null
-BenchSofaLeft: null
-BenchSofaRight: null
-BenchSteelLeft: null
-BenchSteelMiddle: null
-BenchSteelRight: null
-BenchSteelWhiteLeft: null
-BenchSteelWhiteMiddle: null
-BenchSteelWhiteRight: null
 BoardGameSpawner: null
 BoxColoredLighttube: BoxLighttube
 BoxEncryptionKeyPrisoner: BoxEncryptionKeyPassenger
@@ -1147,5 +1147,25 @@ RightArmSkeleton: OrganSkeletonPersonArmRight
 #TowelColorSilver: null
 #TowelColorMime: null
 
-# 2026-04-03
-RotaryPhoneStand: RotaryPhoneStandNoRot
+# 2026-02-18
+# Replace cargo order crates which contain exactly one item with the item, parcel wrapped.
+CrateVendingMachineRestockBoozeFilled: VendingMachineRestockBooze
+CrateVendingMachineRestockChefvendFilled: VendingMachineRestockChefvend
+CrateVendingMachineRestockClothesFilled: VendingMachineRestockClothes
+CrateVendingMachineRestockAutoDrobeFilled: VendingMachineRestockCostumes
+CrateVendingMachineRestockCondimentStationFilled: VendingMachineRestockCondimentStation
+CrateVendingMachineRestockDinnerwareFilled: VendingMachineRestockDinnerware
+CrateVendingMachineRestockGamesFilled: VendingMachineRestockGames
+CrateVendingMachineRestockPTechFilled: VendingMachineRestockPTech
+#CrateVendingMachineRestockSalvageEquipmentFilled: VendingMachineRestockSalvageEquipment # Trauma - doesnt exist anymore
+CrateVendingMachineRestockVendomatFilled: VendingMachineRestockVendomat
+CrateVendingMachineRestockTankDispenserFilled: VendingMachineRestockTankDispenser
+# The crates below contained _two_ of the restock items, so these are technically not direct migrations. But eh.
+CrateVendingMachineRestockHotDrinksFilled: VendingMachineRestockHotDrinks
+CrateVendingMachineRestockRobustSoftdrinksFilled: VendingMachineRestockRobustSoftdrinks
+CrateVendingMachineRestockSmokesFilled: VendingMachineRestockSmokes
+CrateVendingMachineRestockHappyHonkFilled: VendingMachineRestockHappyHonk
+CrateVendingMachineRestockGetmoreChocolateCorpFilled: VendingMachineRestockGetmoreChocolateCorp
+CrateVendingMachineRestockChangFilled: VendingMachineRestockChang
+CrateVendingMachineRestockDiscountDansFilled: VendingMachineRestockDiscountDans
+CrateVendingMachineRestockDonutFilled: VendingMachineRestockDonut

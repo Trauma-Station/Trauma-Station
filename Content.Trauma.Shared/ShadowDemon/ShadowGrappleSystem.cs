@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
@@ -10,31 +9,31 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ShadowDemon;
 
-public sealed class ShadowGrappleSystem : EntitySystem
+public sealed partial class ShadowGrappleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedPoweredLightSystem _poweredLight = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityQuery<HandheldLightComponent> _handheldQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     private const string GrappleJoint = "grappling";
 
     private static readonly EntProtoId Ash = "Ash";
-
-    private EntityQuery<MobStateComponent> _mobStateQuery;
-    private EntityQuery<HandheldLightComponent> _handheldQuery;
 
     private readonly HashSet<Entity<PoweredLightComponent>> _lights = new();
 
@@ -48,9 +47,6 @@ public sealed class ShadowGrappleSystem : EntitySystem
 
         SubscribeLocalEvent<ShadowGrappleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ShadowGrappleComponent, ComponentShutdown>(OnShutdown);
-
-        _mobStateQuery = GetEntityQuery<MobStateComponent>();
-        _handheldQuery = GetEntityQuery<HandheldLightComponent>();
     }
 
     private void OnEmbed(Entity<ShadowGrappleProjectileComponent> ent, ref ProjectileEmbedEvent args)
@@ -80,7 +76,7 @@ public sealed class ShadowGrappleSystem : EntitySystem
         var target = args.Target;
 
         // Body, apply damage and throw them to us
-        if (_mobStateQuery.HasComp(target))
+        if (_mobQuery.HasComp(target))
         {
             _damage.TryChangeDamage(target, ent.Comp.DamageOnHit);
             BreakLightsOnTarget(target);
@@ -118,6 +114,9 @@ public sealed class ShadowGrappleSystem : EntitySystem
         _lookup.GetEntitiesInRange(Transform(target).Coordinates, range, _lights);
         foreach (var light in _lights)
         {
+            if (!CanRemove(light))
+                continue;
+
             _poweredLight.TryDestroyBulb(light.Owner, light.Comp, user);
         }
     }
@@ -129,12 +128,16 @@ public sealed class ShadowGrappleSystem : EntitySystem
     {
         foreach (var slotEnt in _inventory.GetHandOrInventoryEntities(target))
         {
-            if (!_handheldQuery.HasComp(slotEnt))
+            if (!_handheldQuery.HasComp(slotEnt) || !CanRemove(slotEnt))
                 continue;
 
             PredictedSpawnAtPosition(Ash, Transform(target).Coordinates);
             PredictedQueueDel(slotEnt);
         }
     }
+
+    // always allow breaking if it's not in a container, if it is then check events for unremoveable etc
+    private bool CanRemove(EntityUid uid)
+        => !_container.TryGetContainingContainer(uid, out var container) || _container.CanRemove(uid, container);
     #endregion
 }

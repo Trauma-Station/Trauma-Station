@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SlamBamActionman <slambamactionman@gmail.com>
-// SPDX-FileCopyrightText: 2025 qwerltaz <msmarcinpl@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.SubFloor;
@@ -21,18 +8,20 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SubFloor;
 
-public sealed class TrayScannerSystem : SharedTrayScannerSystem
+public sealed partial class TrayScannerSystem : SharedTrayScannerSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TrayScanRevealSystem _trayScanReveal = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TrayScanRevealSystem _trayScanReveal = default!;
+    [Dependency] private EntityQuery<TrayScannerComponent> _trayScannerQuery = default!;
+    [Dependency] private EntityQuery<SubFloorHideComponent> _subFloorHideQuery = default!;
 
     private const string TRayAnimationKey = "trays";
     private const double AnimationLength = 0.3;
@@ -48,16 +37,14 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
 
         // TODO: Multiple viewports or w/e
         var player = _player.LocalEntity;
-        var xformQuery = GetEntityQuery<TransformComponent>();
 
-        if (!xformQuery.TryGetComponent(player, out var playerXform))
+        if (!TryComp(player, out TransformComponent? playerXform))
             return;
 
-        var playerPos = _transform.GetWorldPosition(playerXform, xformQuery);
+        var playerPos = _transform.GetWorldPosition(playerXform);
         var playerMap = playerXform.MapID;
         var range = 0f;
         HashSet<Entity<SubFloorHideComponent>> inRange;
-        var scannerQuery = GetEntityQuery<TrayScannerComponent>();
 
         // TODO: Should probably sub to player attached changes / inventory changes but inventory's
         // API is extremely skrungly. If this ever shows up on dottrace ping me and laugh.
@@ -70,7 +57,7 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
             {
                 foreach (var ent in slot.ContainedEntities)
                 {
-                    if (!scannerQuery.TryGetComponent(ent, out var sneakScanner) || !sneakScanner.Enabled)
+                    if (!_trayScannerQuery.TryGetComponent(ent, out var sneakScanner) || !sneakScanner.Enabled)
                         continue;
 
                     canSee = true;
@@ -84,7 +71,7 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
             if (!_hands.TryGetHeldItem(player.Value, hand, out var heldEntity))
                 continue;
 
-            if (!scannerQuery.TryGetComponent(heldEntity, out var heldScanner) || !heldScanner.Enabled)
+            if (!_trayScannerQuery.TryGetComponent(heldEntity, out var heldScanner) || !heldScanner.Enabled)
                 continue;
 
             range = MathF.Max(heldScanner.Range, range);
@@ -106,13 +93,12 @@ public sealed class TrayScannerSystem : SharedTrayScannerSystem
         }
 
         var revealedQuery = AllEntityQuery<TrayRevealedComponent, SpriteComponent>();
-        var subfloorQuery = GetEntityQuery<SubFloorHideComponent>();
 
         while (revealedQuery.MoveNext(out var uid, out _, out var sprite))
         {
             // Revealing
             // Add buffer range to avoid flickers.
-            if (subfloorQuery.TryGetComponent(uid, out var subfloor) &&
+            if (_subFloorHideQuery.TryGetComponent(uid, out var subfloor) &&
                 inRange.Contains((uid, subfloor)))
             {
                 // Due to the fact client is predicting this server states will reset it constantly

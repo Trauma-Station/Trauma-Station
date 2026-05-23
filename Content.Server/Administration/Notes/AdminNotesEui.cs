@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Shared.Administration.Notes;
@@ -21,11 +10,11 @@ using static Content.Shared.Administration.Notes.AdminNoteEuiMsg;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class AdminNotesEui : BaseEui
+public sealed partial class AdminNotesEui : BaseEui
 {
-    [Dependency] private readonly IAdminManager _admins = default!;
-    [Dependency] private readonly IAdminNotesManager _notesMan = default!;
-    [Dependency] private readonly IPlayerLocator _locator = default!;
+    [Dependency] private IAdminManager _admins = default!;
+    [Dependency] private IAdminNotesManager _notesMan = default!;
+    [Dependency] private IPlayerLocator _locator = default!;
 
     public AdminNotesEui()
     {
@@ -64,7 +53,8 @@ public sealed class AdminNotesEui : BaseEui
             Notes,
             _notesMan.CanCreate(Player), // Trauma - removed HasConnectedBefore check it doesn't work in debug?
             _notesMan.CanDelete(Player),
-            _notesMan.CanEdit(Player)
+            _notesMan.CanEdit(Player),
+            _notesMan.CanWatchlist(Player) // Trauma
         );
     }
 

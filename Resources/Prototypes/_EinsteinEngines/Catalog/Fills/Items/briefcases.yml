@@ -25,6 +25,7 @@
       storagebase: !type:AllSelector
         children:
         - id: SyndieHandyFlag
+        - id: VialCocaine # Trauma
 
 - type: entity
   id: BriefcaseThiefBribingBundlePlasmamanFilled

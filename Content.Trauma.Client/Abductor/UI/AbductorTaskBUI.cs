@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Abductor;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Abductor.UI;
 
-public sealed class AbductorTaskBUI : BoundUserInterface
+public sealed partial class AbductorTaskBUI : BoundUserInterface
 {
     private AbductorTaskWindow _window;
 

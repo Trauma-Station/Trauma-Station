@@ -1,6 +1,6 @@
 # Note: ShadowGrapple exists on the heart of the shadow demon
 - type: entity
-  parent: [AppearanceShadowDemon, SimpleSpaceMobBase]
+  parent: [AppearanceShadowDemon, SimpleSpaceMobBase, FlyingMobBase]
   id: BaseMobShadowDemon
   name: shadow demon
   suffix: ""
@@ -121,7 +121,7 @@
       reagents:
       - ReagentId: Sulfur
         Quantity: 300
-    bleedReductionAmount: 5
+    bleedReductionAmount: 30
   - type: TemperatureDamage
     coldDamage:
       types:

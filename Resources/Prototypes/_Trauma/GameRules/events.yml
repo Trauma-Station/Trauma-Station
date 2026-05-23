@@ -8,12 +8,13 @@
     - id: MalignRiftSpawn
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
-    - id: PlagueMiceSpawn
+    - id: RadiationStormRule
 
 - type: entityTable
   id: BasicAntagEventsTrauma
   table: !type:AllSelector
     children:
+    - id: CarpMigrationRule
     # TOOD: remove these if they fucking suck lmao
     - id: SingulothKnightsMidround
     - id: MimeAssassinMidround
@@ -21,12 +22,14 @@
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
+    - id: MorphRule
+    - id: FugitiveSpawn
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: BlobSpawn
+    - id: BlobMidround
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
@@ -34,20 +37,32 @@
     - id: ColossusSpawn
 
 - type: entity
-  parent: BaseStationEventShortDelay
-  id: PlagueMiceSpawn
+  parent: BaseGameRule
+  id: CarpMigrationRule
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 4 # annoying
-    reoccurrenceDelay: 60 # no spamming them
-    duration: 5
-  - type: VentHordeRule
-    table:
-      id: MobMousePlague
-      amount: 1, 3
+    duration: 1
+    weight: 1
+  - type: CarpMigrationRule
+  - type: SpaceSpawnRule
+
+- type: entity
+  parent: BaseGameRule
+  id: RadiationStormRule
+  components:
+  - type: StationEvent
+    weight: 0.5
+    startAnnouncement: station-event-radiation-storm-announcement
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+    maxOccurrences: 3
+    duration: 1
+  - type: RadiationStormRule
+  - type: MapEffectsRule
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: WeatherSchedulerRadiationStorm
+      time: null # it removes itself when done
 
 - type: entity
   id: RatmaSpawn
@@ -63,4 +78,123 @@
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table:
-      id: MobMousePlague
+      id: MobRatma
+      amount: 1, 1
+
+- type: entity
+  id: WailingHorseSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 30
+    weight: 3
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table:
+      id: MobWailingHorse
+      amount: 1, 1
+
+- type: entity
+  id: CoconutCrabSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    minimumPlayers: 15
+    weight: 5
+    duration: 5
+    reoccurrenceDelay: 30
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 6, 8
+      children:
+      - id: MobCoconutCrab
+      - id: MobCrabTiny
+        weight: 0.625 # Not as scary so make rarer in the event, shrimple as.
+      - id: MobCoconutCrabFloofy # because it looks funny
+        weight: 0.05 # NEVER BASICALLY
+
+- type: entity
+  id: FugitiveSpawn
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 10
+    duration: null
+    earliestStart: 10
+    minimumPlayers: 30
+    reoccurrenceDelay: 30
+    maxOccurrences: 2
+  - type: FugitiveRule
+  - type: MaintsSpawnRule
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - FugitiveEscapeObjective
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostRoleFugitive
+      min: 2
+      max: 2
+      pickPlayer: false
+      startingGear: FugitiveAntagGear
+      briefing:
+        text: fugitive-role-greeting
+        color: Orange
+        sound: /Audio/Misc/thief_greeting.ogg
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Syndicate
+      - type: RandomMetadata
+      - type: EmitSoundOnSpawn # fell out of the ceiling
+        sound: /Audio/Effects/clang.ogg
+      mindRoles:
+      - MindRoleGhostRoleFugitive
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+
+- type: entity
+  id: FugitiveHunterRule
+  parent: BaseGameRule
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterArrestFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostRoleHunter
+      min: 2
+      max: 2
+      pickPlayer: false
+      startingGear: HunterAntagGear
+      briefing:
+        text: hunter-role-greeting
+        color: Blue
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Syndicate
+      - type: RandomMetadata
+      mindRoles:
+      - MindRoleGhostRoleHunter
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills

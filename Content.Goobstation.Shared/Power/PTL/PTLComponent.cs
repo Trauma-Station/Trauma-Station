@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.Destructible.Thresholds;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Power.PTL;
 

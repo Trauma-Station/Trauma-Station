@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._EinsteinEngines.Language;
+using Content.Trauma.Common.Language.Systems;
 using Content.Shared.EntityEffects;
 // </Trauma>
 using Content.Shared.GameTicking;
@@ -12,12 +12,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Traits;
 
-public sealed class TraitSystem : EntitySystem
+public sealed partial class TraitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!; // Trauma
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!; // Trauma
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedHandsSystem _sharedHandsSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -69,7 +69,7 @@ public sealed class TraitSystem : EntitySystem
 
             // Einstein Engines - Language begin (remove this if trait system refactor)
             // Remove/Add Languages required by the prototype
-            var language = EntityManager.System<LanguageSystem>();
+            var language = EntityManager.System<CommonLanguageSystem>();
 
             if (traitPrototype.RemoveLanguagesSpoken is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesSpoken)

@@ -1,15 +1,6 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Popups;
+// </Trauma>
 using System.Numerics;
 using Content.Shared.Examine;
 using Robust.Client.Graphics;
@@ -104,6 +95,15 @@ public sealed class PopupOverlay : Overlay
             if (mapPos.MapId != args.MapId)
                 continue;
 
+            // <Trauma>
+            if (ourEntity != null)
+            {
+                var ev = new ShowPopupAttemptEvent(mapPos.Position, ourPos);
+                _entManager.EventBus.RaiseLocalEvent(ourEntity.Value, ref ev);
+                if (ev.Cancelled)
+                    continue;
+            }
+            // </Trauma>
             var distance = (mapPos.Position - ourPos).Length();
 
             // Should handle fade here too wyci.

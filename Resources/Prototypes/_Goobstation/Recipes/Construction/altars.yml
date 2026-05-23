@@ -8,6 +8,6 @@
   canRotate: false
   canBuildInImpassable: false
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   conditions:
   - !type:TileNotBlocked

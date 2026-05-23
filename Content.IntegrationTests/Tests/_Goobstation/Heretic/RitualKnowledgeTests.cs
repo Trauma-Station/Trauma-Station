@@ -1,89 +1,77 @@
-// SPDX-FileCopyrightText: 2024 TGRCDev <tgrc@tgrc.dev>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Collections.Generic;
-using System.Linq;
-using Content.Shared._Shitcode.Heretic.Components;
-using Content.Shared.Dataset;
+using Content.IntegrationTests.Fixtures;
 using Content.Shared.Tag;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using System.Linq;
+using Content.Shared.Prototypes;
+using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Heretic.Prototypes;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Heretic;
 
-[TestFixture, TestOf(typeof(HereticKnowledgeRitualComponent))]
-public sealed class RitualKnowledgeTests
+[TestFixture, TestOf(typeof(Trauma.Shared.Heretic.Components.Side.HereticKnowledgeRitualComponent))]
+public sealed class RitualKnowledgeTests : GameTest
 {
-    private static readonly ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";
-
-    [Test]
-    public async Task ValidateEligibleTags()
-    {
-        // As far as I can tell, there's no annotation to validate
-        // a dataset of tag prototype IDs, so we'll have to do it
-        // in a test fixture. Sad.
-
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-
-        var entMan = server.ResolveDependency<IEntityManager>();
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
-
-        await server.WaitAssertion(() =>
-        {
-            // Get the eligible tags prototype
-            var dataset = protoMan.Index(KnowledgeDataset);
-
-            // Validate that every value is a valid tag
-            Assert.Multiple(() =>
-            {
-                foreach (var tagId in dataset.Values)
-                {
-                    Assert.That(protoMan.TryIndex<TagPrototype>(tagId, out var tagProto), Is.True, $"\"{tagId}\" is not a valid tag prototype ID");
-                }
-            });
-        });
-
-        await pair.CleanReturnAsync();
-    }
-
     [Test]
     public async Task ValidateTagsHaveItems()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
-        var entMan = server.ResolveDependency<IEntityManager>();
+        var tagSys = server.System<TagSystem>();
         var protoMan = server.ResolveDependency<IPrototypeManager>();
-        var compFactory = server.ResolveDependency<IComponentFactory>();
+        var compFactory = server.EntMan.ComponentFactory;
 
         await server.WaitAssertion(() =>
         {
-            // Get the eligible tags prototype
-            var dataset = protoMan.Index(KnowledgeDataset).Values.ToHashSet();
+            var ingredients = protoMan.EnumeratePrototypes<RitualIngredientDatasetPrototype>()
+                .SelectMany(x => x.Ingredients)
+                .ToHashSet();
 
-            // Loop through every entity prototype and assemble a used tags set
-            var usedTags = new HashSet<string>();
-
-            // Ensure that every tag is used by a non-abstract entity
             foreach (var entProto in protoMan.EnumeratePrototypes<EntityPrototype>())
             {
-                if (entProto.Abstract)
-                    continue;
+                ingredients.RemoveWhere(x => CheckBoth(entProto, x.Blacklist, x.Whitelist));
+            }
 
-                if (entProto.TryGetComponent<TagComponent>(out var tags, compFactory))
+            Assert.That(ingredients,
+                Is.Empty,
+                $"The following ritual ingredients (names) are not used by any available entities {string.Join(", ", ingredients.Select(x => x.Name))}");
+        });
+
+        return;
+
+        bool CheckBoth(EntityPrototype proto, EntityWhitelist blacklist = null, EntityWhitelist whitelist = null)
+        {
+            return (blacklist == null || !IsValid(blacklist, proto)) && (whitelist == null || IsValid(whitelist, proto));
+        }
+
+        bool IsValid(EntityWhitelist list, EntityPrototype prototype)
+        {
+            if (list.Components is { } comps)
+            {
+                foreach (var name in comps)
                 {
-                    usedTags.UnionWith(tags.Tags.Select(t => t.Id));
+                    var comp = compFactory.GetRegistration(name).Type;
+                    if (prototype.HasComponent(comp, compFactory))
+                    {
+                        if (!list.RequireAll)
+                            return true;
+                    }
+                    else if (list.RequireAll)
+                        return false;
                 }
             }
 
-            var unusedTags = dataset.Except(usedTags).ToHashSet();
-            Assert.That(unusedTags, Is.Empty, $"The following ritual item tags are not used by any obtainable entity prototypes: {string.Join(", ", unusedTags)}");
-        });
+            if (list.Tags is { } tags)
+            {
+                if (!prototype.TryGetComponent(out TagComponent tagComp, compFactory))
+                    return false;
 
-        await pair.CleanReturnAsync();
+                return list.RequireAll ? tagSys.HasAllTags(tagComp, tags) : tagSys.HasAnyTag(tagComp, tags);
+            }
+
+            return list.RequireAll;
+        }
     }
 }

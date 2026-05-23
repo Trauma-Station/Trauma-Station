@@ -1,0 +1,73 @@
+- type: htnCompound
+  id: SecbotCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: ArrestWantedNearbyCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: SecbotPatrolCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+- type: htnCompound
+  id: SecbotPatrolCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:PickPatrolCoordinateOperator
+        targetMoveKey: TargetCoordinates
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: TargetCoordinates
+
+- type: htnCompound
+  id: ArrestWantedNearbyCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:PickCriminalTargetOperator
+        targetKey: Target
+        targetMoveKey: TargetCoordinates
+        criminalStatus: SecurityIconHostile
+        targetFoundSound: !type:SoundCollectionSpecifier
+          collection: BeepskyTargetFound
+
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: TargetCoordinates
+        pathfindInPlanning: false
+        removeKeyOnFinish: false
+
+    - !type:HTNCompoundTask
+      task: ArrestTargetCompound
+
+- type: htnCompound
+  id: ArrestTargetCompound
+  branches:
+  - preconditions:
+    - !type:TargetStunnedPrecondition
+      stunned: true
+      targetKey: Target
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:InteractWithOperator
+        expectDoAfter: true
+        targetKey: Target
+    - !type:HTNPrimitiveTask
+      operator: !type:SendRadioOperator
+        message: securitron-target-arrested
+        radioChannel: Security
+        key: Target
+        targetArrestedSound: !type:SoundCollectionSpecifier
+          collection: BeepskyTargetArrested
+
+  - preconditions:
+    - !type:TargetStunnedPrecondition
+      stunned: false
+      targetKey: Target
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:MeleeOperator
+        targetKey: Target

@@ -33,7 +33,7 @@ uplink-gloves-knuckleduster-name = Syndicate Knuckle Dusters
 uplink-gloves-knuckleduster-desc = A pair of plastitanium knuckle dusters that let you punch hard enough to break the captains jaw into pieces.
 
 uplink-hushpup-name = Hushpup
-uplink-hushpup-desc = A powerful silenced shotgun with a low magazine capacity. Uses .50 shotgun ammo.
+uplink-hushpup-desc = A powerful silenced shotgun with a low magazine capacity. Uses 12 gauge shells.
 
 uplink-c20r-name = C-20r
 uplink-c20r-desc = Old faithful: The classic C-20r Submachine Gun.
@@ -99,15 +99,15 @@ uplink-shrapnel-grenade-desc = Launches a spray of sharp fragments dealing great
 
 # Ammo
 uplink-pistol-magazine-name = Pistol Magazine (.35 auto)
-uplink-pistol-magazine-desc = Pistol magazine with 15 cartridges. Compatible with the Viper.
+uplink-pistol-magazine-desc = Pistol magazine with 12 cartridges. Compatible with the Viper.
 
 uplink-pistol-magazine-c20r-name = SMG magazine (.35 auto)
 uplink-pistol-magazine-c20r-desc = SMG magazine with 30 cartridges. Compatible with C-20r.
 
-uplink-magazine-bulldog-pellet-name = Drum magazine (.50 pellet)
+uplink-magazine-bulldog-pellet-name = Drum magazine (12 gauge)
 uplink-magazine-bulldog-pellet-desc = Shotgun magazine with 8 shells filled with buckshot. Compatible with the Bulldog.
 
-uplink-magazine-bulldog-slug-name = Drum magazine (.50 slug)
+uplink-magazine-bulldog-slug-name = Drum magazine (12 gauge)
 uplink-magazine-bulldog-slug-desc = Shotgun magazine with 8 shells filled with slugs. Compatible with the Bulldog.
 
 uplink-estoc-ammo-name = Rifle magazine (.20 rifle)
@@ -376,7 +376,7 @@ uplink-syndie-raid-name = Syndicate Raid Suit
 uplink-syndie-raid-desc = A very durable and reasonably flexible suit of blood-red armor, reinforced against all common forms of damage but not capable of space walks. Comes with a sick helmet.
 
 uplink-hardsuit-syndieelite-name = Syndicate Elite Hardsuit
-uplink-hardsuit-syndieelite-desc = An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
+uplink-hardsuit-syndieelite-desc = An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor. Property of Gorlex Marauders.
 
 uplink-clothing-outer-hardsuit-juggernaut-name = Cybersun Juggernaut Suit
 uplink-clothing-outer-hardsuit-juggernaut-desc = Hyper resilient armor made of materials tested in the Tau chromosphere facility. The only thing that's going to be slowing you down is this suit... and tasers.
@@ -405,6 +405,9 @@ uplink-soap-desc = An untrustworthy bar of soap. Smells of fear.
 
 uplink-ultrabright-lantern-name = Extra-Bright Lantern
 uplink-ultrabright-lantern-desc = This ultra-bright lantern can be used to blind people, similar to a flash.
+
+uplink-travel-camera-name = Travel Camera
+uplink-travel-camera-desc = Stun people with your photography skills and the conveniently legal camera flash. Makes you look like a tourist.
 
 uplink-combat-medkit-name = Combat Medical Kit
 uplink-combat-medkit-desc = A medkit made for fixing combat injuries.
@@ -517,3 +520,7 @@ uplink-briefcase-gun-desc = An indistinct briefcase with a highly compact C-20K 
 
 uplink-energycrossbow-name = Mini Energy Crossbow
 uplink-energycrossbow-desc = The go-to sidearm of any operative who prefers their victims not to be moving. Fires regenerating toxic arrows that floors victims in an instant.
+
+#Objective items
+uplink-hijack-beacon-name = Hijack Beacon
+uplink-hijack-beacon-desc = A syndicate-brand hijack beacon designed to get around the firewalls of Nanotrasen-brand Automated Trade Stations. They take 200 seconds to work and Trade Stations will announce they are being hacked, so prepare accordingly.

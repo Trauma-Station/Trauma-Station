@@ -11,6 +11,7 @@
   - Ninjutsu
   - DragonKungFu
   - HellRip
+  - ArmstrongKarate
 
 - type: guideEntry
   id: CQC
@@ -51,3 +52,8 @@
   id: DragonKungFu
   name: guide-entry-dragon-kung-fu
   text: "/ServerInfo/_Goobstation/Guidebook/MartialArts/DragonKungFu.xml"
+
+- type: guideEntry
+  id: ArmstrongKarate
+  name: guide-entry-armstrong-karate
+  text: "/ServerInfo/_Trauma/Guidebook/MartialArts/ArmstrongKarate.xml"

@@ -4,6 +4,8 @@
   parent: BaseGameRule
   id: BasicAntagEventScheduler
   components:
+  - type: RuleSchedulerLimit
+    limit: 10
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicAntagEventsTable
@@ -30,12 +32,42 @@
       min: 1800
       max: 3000
 
-## Shadow demon
+## Morph
 
 - type: entity
   parent: BaseGameRule
-  id: BaseShadowDemonRule
+  id: MorphRule
+  components:
+  - type: GhostroleAlert
+  - type: StationEvent
+    earliestStart: 20
+    weight: 3
+    minimumPlayers: 30
+    duration: null
+    occursDuringRoundEnd: false
+  - type: MorphRule
+  - type: MaintsSpawnRule
+  - type: AntagSpawner
+    prototype: MobMorph
+  - type: AntagSelection
+    selectionTime: PostPlayerSpawn
+    definitions:
+    - spawnerPrototype: GhostRoleSpawnerMorph
+      min: 1
+      max: 1
+      briefing:
+        text: morph-role-greeting
+        color: lime
+        sound: /Audio/_Trauma/Morph/mutate.ogg
+      mindRoles:
+      - MindRoleMorph
+
+## Shadow demon
+
+- type: entity
   abstract: true
+  parent: BaseGameRule
+  id: BaseShadowDemonRule
   components:
   - type: AntagSpawner
     prototype: BaseMobShadowDemon
@@ -45,6 +77,7 @@
   parent: BaseShadowDemonRule
   id: ShadowDemonSummon
   components:
+  - type: GhostroleAlert
   - type: AntagSelection
     agentName: shadow-demon-round-end-agent-name
     definitions:
@@ -66,3 +99,60 @@
         nameFormat: name-format-slaughter
       - type: LightImmunity # Grants temporary light immunity so it survives AntagRandomSpawn | Remove once we get better spawns
         duration: 20
+
+## Shadowling
+
+- type: entity
+  parent: BaseShadowlingRule
+  id: ShadowlingMidround
+  components:
+  - type: GhostroleAlert
+  - type: AntagSpawner
+    prototype: MobShadowling
+  - type: MaintsSpawnRule
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: GhostRoleSpawnerShadowling
+      min: 1
+      max: 1
+      playerRatio: 1
+      mindRoles:
+      - MindRoleShadowling
+      pickPlayer: false
+
+## Sleeper agents ninja threat, the ninja does the announcement
+
+- type: entity
+  parent: BaseTraitorRule
+  id: SleeperAgentsQuiet # cipher's assassin...
+  components:
+  - type: StationEvent
+    earliestStart: 30
+    weight: 8
+    minimumPlayers: 15
+    maxOccurrences: 1 # can only happen once per round
+    duration: null # the rule has to last the whole round not 1 second
+    occursDuringRoundEnd: false
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ TraitorSleeper ]
+      fallbackRoles: [ Traitor ]
+      min: 1
+      max: 2
+      playerRatio: 10
+      blacklist:
+        components:
+        - AntagImmune
+        - CommandStaff
+      mindRoles:
+      - MindRoleTraitorSleeper
+
+## Quiet version of wailing horse
+
+- type: entity
+  parent: WailingHorseSpawn
+  id: WailingHorseQuiet
+  components:
+  - type: StationEvent
+    startAnnouncement: null
+    startAudio: null

@@ -73,8 +73,5 @@
   id: Flashed
 
 - type: statusEffect
-  id: RadiationProtection
-
-- type: statusEffect
   id: Adrenaline
   alert: Adrenaline

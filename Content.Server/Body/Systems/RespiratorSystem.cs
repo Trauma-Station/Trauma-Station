@@ -1,12 +1,11 @@
 // <Trauma>
 using Content.Medical.Common.Body;
+using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Goobstation.Common.Body.Components;
 using Content.Trauma.Common.MartialArts;
-using Content.Goobstation.Shared.Body;
-using Content.Shared._DV.CosmicCult.Components;
-using Content.Shared.Movement.Pulling.Components;
 using Content.Trauma.Common.Body;
+using Content.Shared.Movement.Pulling.Components;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
@@ -38,20 +37,20 @@ using Robust.Shared.Timing;
 namespace Content.Server.Body.Systems;
 
 [UsedImplicitly]
-public sealed class RespiratorSystem : EntitySystem
+public sealed partial class RespiratorSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosSys = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DamageableSystem _damageableSys = default!;
-    [Dependency] private readonly LungSystem _lungSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _entityConditions = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
+    [Dependency] private AtmosphereSystem _atmosSys = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DamageableSystem _damageableSys = default!;
+    [Dependency] private LungSystem _lungSystem = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedEntityConditionsSystem _entityConditions = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
     private static readonly ProtoId<MetabolismStagePrototype> RespirationStage = new("Respiration");
 
@@ -130,13 +129,10 @@ public sealed class RespiratorSystem : EntitySystem
 
             if (!CanBreathe(uid, respirator)) // Goobstation edit
             {
-                // DeltaV: Cosmic Cult - One line change but a refactor would be better. this is kinda cringe.
-                // Makes cultists gasp and respirate but not asphyxiate in space.
-                if (TryComp<CosmicNonRespiratingComponent>(uid, out var cultComponent)
-                    && cultComponent.Enabled
-                    && (cultComponent.EnableWhenCritical && _mobState.IsIncapacitated(uid)
-                    || cultComponent.EnableWhenAlive && _mobState.IsAlive(uid)))
-                    return;
+                var ev = new SuffocationBeforeEvent();
+                RaiseLocalEvent(uid, ref ev);
+                if (ev.Cancelled)
+                    continue;
 
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {
@@ -360,7 +356,7 @@ public sealed class RespiratorSystem : EntitySystem
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} started suffocating");
 
         _damageableSys.ChangeDamage(ent.Owner, HasComp<DebrainedComponent>(ent) ? ent.Comp.Damage * 4.5f : ent.Comp.Damage,
-            targetPart: TargetBodyPart.All, interruptsDoAfters: false, ignoreResistances: true); // Shitmed
+            targetPart: TargetBodyPart.Vital, interruptsDoAfters: false, ignoreResistances: true); // Trauma
 
         if (ent.Comp.SuffocationCycles < ent.Comp.SuffocationCycleThreshold)
             return;
@@ -375,7 +371,7 @@ public sealed class RespiratorSystem : EntitySystem
             _adminLogger.Add(LogType.Asphyxiation, $"{ToPrettyString(ent):entity} stopped suffocating");
 
         _damageableSys.ChangeDamage(ent.Owner, ent.Comp.DamageRecovery,
-            targetPart: TargetBodyPart.All, ignoreBlockers: true); // Shitmed
+            splitDamage: SplitDamageBehavior.SplitEnsureAllDamagedAndOrganic, targetPart: TargetBodyPart.All, ignoreBlockers: true); // Trauma
 
         var ev = new StopSuffocatingEvent();
         RaiseLocalEvent(ent, ref ev);

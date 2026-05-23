@@ -3,13 +3,12 @@
 using Content.Client.Weapons.Melee;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Events;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed class BlobCoreActionSystem : SharedBlobCoreActionSystem
+public sealed partial class BlobCoreActionSystem : SharedBlobCoreActionSystem
 {
-    [Dependency] private readonly MeleeWeaponSystem _meleeWeaponSystem = default!;
+    [Dependency] private MeleeWeaponSystem _meleeWeaponSystem = default!;
 
     public override void Initialize()
     {

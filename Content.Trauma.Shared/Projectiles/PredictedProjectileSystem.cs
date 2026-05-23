@@ -16,7 +16,6 @@ using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Executions;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
@@ -30,29 +29,25 @@ namespace Content.Trauma.Shared.Projectiles;
 /// Handles predicting projectile hits.
 /// This was previously only done serverside.
 /// </summary>
-public sealed class PredictedProjectileSystem : EntitySystem
+public sealed partial class PredictedProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
 
-    private EntityQuery<ProjectileComponent> _query;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private EntityQuery<ProjectileComponent> _query = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ProjectileComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
     }

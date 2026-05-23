@@ -4,19 +4,17 @@ using Content.Lavaland.Shared.Aggression;
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Selectors;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.Megafauna.Systems;
 
 public sealed partial class MegafaunaSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private EntityQuery<AggressiveComponent> _aggressiveQuery;
 

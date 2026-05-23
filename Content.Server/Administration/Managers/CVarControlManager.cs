@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Simon <63975668+Simyon264@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Reflection;
 using Content.Shared.CCVar.CVarAccess;
@@ -16,12 +11,12 @@ namespace Content.Server.Administration.Managers;
 /// <summary>
 /// Manages the control of CVars via the <see cref="Content.Shared.CCVar.CVarAccess.CVarControl"/> attribute.
 /// </summary>
-public sealed class CVarControlManager : IPostInjectInit
+public sealed partial class CVarControlManager : IPostInjectInit
 {
-    [Dependency] private readonly IReflectionManager _reflectionManager = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly ILocalizationManager _localizationManager = default!;
-    [Dependency] private readonly ILogManager _logger = default!;
+    [Dependency] private IReflectionManager _reflectionManager = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private ILocalizationManager _localizationManager = default!;
+    [Dependency] private ILogManager _logger = default!;
 
     private readonly List<ChangableCVar> _changableCvars = new();
     private ISawmill _sawmill = default!;

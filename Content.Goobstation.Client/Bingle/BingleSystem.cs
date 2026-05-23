@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Bingle;
 using Content.Shared.CombatMode;
-using Robust.Client.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 
@@ -11,9 +10,9 @@ namespace Content.Goobstation.Client.Bingle;
 /// <summary>
 ///   Handles the appearance of bingles.
 /// </summary>
-public sealed class BingleSystem : EntitySystem
+public sealed partial class BingleSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

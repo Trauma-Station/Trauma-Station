@@ -1,10 +1,8 @@
 // <Trauma>
-using Content.Client._Shitcode.Wizard.Systems;
-using Content.Shared._Goobstation.Wizard.Components;
-using Content.Shared._Goobstation.Wizard.SpellCards;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Damage.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Mobs.Components;
+using Content.Trauma.Common.Heretic;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
@@ -47,31 +45,34 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 
 namespace Content.Client.UserInterface.Systems.Actions;
 
-public sealed class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
+public sealed partial class ActionUIController : UIController, IOnStateChanged<GameplayState>, IOnSystemChanged<ActionsSystem>
 {
-    [Dependency] private readonly IOverlayManager _overlays = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IEyeManager _eye = default!; // Goobstation
+    // <Trauma>
+    [Dependency] private IEyeManager _eye = default!;
+
+    [UISystemDependency] private readonly TransformSystem _transform = default!;
+    [UISystemDependency] private readonly CommonSpellsSystem? _spells = default!;
+    [UISystemDependency] private readonly CommonActionTargetMarkSystem? _mark = default!;
+    [UISystemDependency] private readonly EntityLookupSystem _lookup = default!;
+
+    private List<EntityUid?> _actions = new();
+    private readonly Dictionary<EntityUid, List<EntityUid?>> _savedActions = new();
+    private ISawmill _sawmill = default!;
+    // </Trauma>
+    [Dependency] private IOverlayManager _overlays = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IInputManager _input = default!;
 
     [UISystemDependency] private readonly ActionsSystem? _actionsSystem = default;
     [UISystemDependency] private readonly InteractionOutlineSystem? _interactionOutline = default;
     [UISystemDependency] private readonly TargetOutlineSystem? _targetOutline = default;
     [UISystemDependency] private readonly SpriteSystem _spriteSystem = default!;
-    [UISystemDependency] private readonly TransformSystem _transform = default!; // Goobstation
-    [UISystemDependency] private readonly SpellsSystem? _spells = default!; // Goobstation
-    [UISystemDependency] private readonly ActionTargetMarkSystem? _mark = default!; // Goobstation
-    [UISystemDependency] private readonly EntityLookupSystem _lookup = default!; // Goobstation
 
     private ActionButtonContainer? _container;
-    private List<EntityUid?> _actions = new(); // Goob edit
     private readonly DragDropHelper<ActionButton> _menuDragHelper;
     private readonly TextureRect _dragShadow;
     private ActionsWindow? _window;
-
-    private readonly Dictionary<EntityUid, List<EntityUid?>> _savedActions = new(); // Goobstation
-    private ISawmill _sawmill = default!; // Goobstation
 
     private ActionsBar? ActionsBar => UIManager.GetActiveUIWidgetOrNull<ActionsBar>();
     private MenuButton? ActionButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.ActionButton;
@@ -130,7 +131,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             // Goobstation end
         }
 
-        if (_spells != null) // Goobstation
+        if (_spells is { }) // Goobstation
             _spells.StopTargeting += StopTargeting;
 
         UpdateFilterLabel();
@@ -258,7 +259,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             // Goobstation end
         }
 
-        if (_spells != null) // Goobstation
+        if (_spells is { }) // Goobstation
             _spells.StopTargeting -= StopTargeting;
 
         CommandBinds.Unregister<ActionUIController>();
@@ -311,7 +312,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (!swap.AllowSecondaryTarget)
             return false;
 
-        if (_actionsSystem == null || _spells == null)
+        if (_actionsSystem == null || _spells is not { })
             return false;
 
         var entity = args.EntityUid;
@@ -909,7 +910,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         if (_window is {UpdateNeeded: true})
             SearchAndDisplay();
 
-        // Goobstation start
+        // <Goob>
         if (_mark == null)
             return;
 
@@ -917,15 +918,11 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             return;
 
         if (!EntityManager.TryGetComponent(SelectingTargetFor, out LockOnMarkActionComponent? lockOnMark))
-        {
-            _mark.SetMark(null);
             return;
-        }
 
         var coords = _eye.PixelToMap(_input.MouseScreenPosition);
 
-        var targets =
-            _lookup.GetEntitiesInRange<MobStateComponent>(coords, lockOnMark.LockOnRadius, LookupFlags.Dynamic);
+        var targets = _lookup.GetEntitiesInRange<MobStateComponent>(coords, lockOnMark.LockOnRadius, LookupFlags.Dynamic);
         var xformQuery = EntityManager.GetEntityQuery<TransformComponent>();
         var damageableQuery = EntityManager.GetEntityQuery<DamageableComponent>();
         List<(float range, EntityUid target)> selectedTargets = new();
@@ -944,14 +941,18 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             selectedTargets.Add((range, target));
         }
 
+        var targeting = (SelectingTargetFor.Value, lockOnMark);
+
+        // STINKS
         if (selectedTargets.Count == 0)
         {
-            _mark.SetMark(null);
+            _mark.SetMark(targeting, null);
             return;
         }
 
-        _mark.SetMark(selectedTargets.MinBy(x => x.range).target);
-        // Goobstation end
+        var bestTarget = selectedTargets.MinBy(x => x.range).target;
+        _mark.SetMark(targeting, bestTarget);
+        // </Goob>
     }
 
     private void OnComponentLinked(ActionsComponent component)
@@ -1014,9 +1015,8 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         StopTargeting();
 
         // Goobstation
-        if (EntityManager.TryGetComponent(ent, out WorldTargetActionComponent? worldTarget) &&
-            worldTarget.Event is InstantWorldTargetActionEvent)
-            _actionsSystem?.TriggerAction(ent, true); // We just perform it and hope for the best :godo:
+        var ev = new TryPerformInstantWorldTargetActionEvent();
+        EntityManager.EventBus.RaiseLocalEvent(ent, ref ev);
 
         SelectingTargetFor = uid;
         // TODO inform the server
@@ -1074,7 +1074,10 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
     /// </summary>
     private void StopTargeting()
     {
-        _mark?.SetMark(null); // Goobstation
+        // <Goob>
+        if (SelectingTargetFor is { } target && EntityManager.TryGetComponent<LockOnMarkActionComponent>(SelectingTargetFor, out var lockOnMark))
+            _mark?.SetMark((target, lockOnMark), null);
+        // </Goob>
 
         if (SelectingTargetFor == null)
             return;

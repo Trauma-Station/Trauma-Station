@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Drowsiness;
 using Content.Shared.StatusEffectNew;
 using Robust.Client.Graphics;
@@ -11,11 +6,11 @@ using Robust.Shared.Player;
 
 namespace Content.Client.Drowsiness;
 
-public sealed class DrowsinessSystem : SharedDrowsinessSystem
+public sealed partial class DrowsinessSystem : SharedDrowsinessSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
     private DrowsinessOverlay _overlay = default!;
 

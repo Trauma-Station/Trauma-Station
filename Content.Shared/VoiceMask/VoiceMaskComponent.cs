@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Shared.StatusIcon;
-// </Trauma>
 using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 
@@ -48,12 +45,6 @@ public sealed partial class VoiceMaskComponent : Component
     public EntityUid? ActionEntity;
 
     /// <summary>
-    /// Goob - Whether the action should be granted when equipped.
-    /// </summary>
-    [DataField]
-    public bool EnableAction = true;
-
-    /// <summary>
     ///     If user's voice is getting changed when they speak.
     /// </summary>
     [DataField]
@@ -70,18 +61,4 @@ public sealed partial class VoiceMaskComponent : Component
     /// </summary>
     [DataField]
     public bool ChangeIDName = false;
-
-    #region GabyStation
-    /// <summary>
-    ///     The job icon to be displayed next to their name when speaking on radio
-    /// </summary>
-    [DataField]
-    public ProtoId<JobIconPrototype>? JobIconProtoId; // GabyStation -> Radio icons
-
-    /// <summary>
-    ///     The name of the job that should show up when a mouse overs over the job icon on the radio
-    /// </summary>
-    [DataField]
-    public string? JobName; // GabyStation -> Radio icons
-    #endregion
 }

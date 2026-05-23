@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.IconSmoothing;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Fluids;
@@ -13,10 +7,10 @@ using Robust.Shared.Map;
 
 namespace Content.Client.Fluids;
 
-public sealed class PuddleSystem : SharedPuddleSystem
+public sealed partial class PuddleSystem : SharedPuddleSystem
 {
-    [Dependency] private readonly IconSmoothSystem _smooth = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IconSmoothSystem _smooth = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

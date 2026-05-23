@@ -1,25 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JustCone <141039037+JustCone14@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 coolboy911 <85909253+coolboy911@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 lunarcomets <140772713+lunarcomets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 saintmuntzer <47153094+saintmuntzer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.StationAi;
 using Robust.Shared.Map.Components;
@@ -28,7 +6,7 @@ using Robust.Shared.Threading;
 
 namespace Content.Shared.Silicons.StationAi;
 
-public sealed class StationAiVisionSystem : EntitySystem
+public sealed partial class StationAiVisionSystem : EntitySystem
 {
     /*
      * This class handles 2 things:
@@ -36,11 +14,13 @@ public sealed class StationAiVisionSystem : EntitySystem
      * 2. It does single-tile lookups to tell if they're visible or not with support for a faster range-only path.
      */
 
-    [Dependency] private readonly IParallelManager _parallel = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedMapSystem _maps = default!;
-    [Dependency] private readonly SharedTransformSystem _xforms = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private IParallelManager _parallel = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
+    [Dependency] private SharedTransformSystem _xforms = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+
+    [Dependency] private EntityQuery<OccluderComponent> _occluderQuery = default!;
 
     private SeedJob _seedJob;
     private ViewJob _job;
@@ -48,8 +28,6 @@ public sealed class StationAiVisionSystem : EntitySystem
     private readonly HashSet<Entity<OccluderComponent>> _occluders = new();
     private readonly HashSet<Entity<StationAiVisionComponent>> _seeds = new();
     private readonly HashSet<Vector2i> _viewportTiles = new();
-
-    private EntityQuery<OccluderComponent> _occluderQuery;
 
     // Dummy set
     private readonly HashSet<Vector2i> _singleTiles = new();
@@ -66,8 +44,6 @@ public sealed class StationAiVisionSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _occluderQuery = GetEntityQuery<OccluderComponent>();
 
         _seedJob = new()
         {
@@ -106,7 +82,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (!seed.Comp.Enabled)
                 continue;
 
-            if (seed.Comp.NeedsPower && !_power.IsPowered(seed.Owner))
+            if (seed.Comp.NeedsPower && !Paused(seed.Owner) && !_power.IsPowered(seed.Owner)) // Trauma - ignore power check if paused
                 continue;
 
             if (seed.Comp.NeedsAnchoring && !Transform(seed.Owner).Anchored)
@@ -193,7 +169,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (!seed.Comp.Enabled)
                 continue;
 
-            if (seed.Comp.NeedsPower && !_power.IsPowered(seed.Owner))
+            if (seed.Comp.NeedsPower && !Paused(seed.Owner) && !_power.IsPowered(seed.Owner)) // Trauma - ignore power check if paused
                 continue;
 
             if (seed.Comp.NeedsAnchoring && !Transform(seed.Owner).Anchored)

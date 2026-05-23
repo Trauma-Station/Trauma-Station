@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: UnknownShuttleAlienTourist
   parent: BaseUnknownShuttleRule
@@ -8,4 +6,4 @@
     startAnnouncement: station-event-unknown-shuttle-incoming #!!
     weight: 4
   - type: LoadMapRule
-    gridPath: /Maps/_Goobstation/Shuttles/ShuttleEvent/alien_tourist.yml
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/alien_tourist.yml

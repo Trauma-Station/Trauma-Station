@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -26,11 +25,11 @@ public sealed partial class DropRandomItem : EntityEffectBase<DropRandomItem>
         => null; // not used by reagents idc
 }
 
-public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
+public sealed partial class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private List<EntityUid> _items = new();
 

@@ -9,10 +9,10 @@ using Content.Shared.Toggleable;
 
 namespace Content.Medical.Shared.Augments;
 
-public sealed class AugmentActionSystem : EntitySystem
+public sealed partial class AugmentActionSystem : EntitySystem
 {
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

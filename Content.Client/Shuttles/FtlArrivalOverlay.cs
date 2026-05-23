@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Shared.Shuttles.Components;
 using Robust.Client.GameObjects;
@@ -18,7 +12,7 @@ namespace Content.Client.Shuttles;
 /// <summary>
 /// Plays a visualization whenever a shuttle is arriving from FTL.
 /// </summary>
-public sealed class FtlArrivalOverlay : Overlay
+public sealed partial class FtlArrivalOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 
@@ -28,9 +22,9 @@ public sealed class FtlArrivalOverlay : Overlay
     private SharedMapSystem _maps;
     private SharedTransformSystem _transforms;
     private SpriteSystem _sprites;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _protos = default!;
 
     private readonly HashSet<Entity<FtlVisualizerComponent>> _visualizers = new();
 

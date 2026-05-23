@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Hastur.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Hastur;
 
-public sealed class HasturDevouringSystem : EntitySystem
+public sealed partial class HasturDevouringSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _spriteSystem = default!;
 
     public override void Initialize()
     {

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Xenobiology.Components;
 
@@ -12,14 +10,8 @@ namespace Content.Goobstation.Shared.Xenobiology.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SlimeDamageOvertimeComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid? SourceEntityUid;
-
     [DataField]
-    public TimeSpan Interval = TimeSpan.FromSeconds(1);
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public TimeSpan NextTickTime = TimeSpan.Zero;
+    public EntityUid? SourceEntityUid;
 
     [DataField]
     public DamageSpecifier Damage = new()

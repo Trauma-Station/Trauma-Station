@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2020 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PrPleGoo <PrPleGoo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using JetBrains.Annotations;
@@ -14,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Client.Commands;
 
 [UsedImplicitly]
-internal sealed class AtvRangeCommand : LocalizedCommands
+internal sealed partial class AtvRangeCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     public override string Command => "atvrange";
 
@@ -51,9 +43,9 @@ internal sealed class AtvRangeCommand : LocalizedCommands
 }
 
 [UsedImplicitly]
-internal sealed class AtvModeCommand : LocalizedCommands
+internal sealed partial class AtvModeCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     public override string Command => "atvmode";
 
@@ -110,9 +102,9 @@ internal sealed class AtvModeCommand : LocalizedCommands
 }
 
 [UsedImplicitly]
-internal sealed class AtvCBMCommand : LocalizedCommands
+internal sealed partial class AtvCBMCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
 
     public override string Command => "atvcbm";
 

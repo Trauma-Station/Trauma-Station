@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.Lathe.Components;
@@ -15,8 +17,8 @@ namespace Content.Server.Lathe;
 /// </summary>
 public sealed partial class LatheSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private StationSystem _station = default!;
 
     private void InitializeTrauma()
     {

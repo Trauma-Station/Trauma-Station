@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Shared.Movement.Systems;
@@ -16,10 +8,10 @@ namespace Content.Shared.Item;
 /// <summary>
 /// This handles <see cref="HeldSpeedModifierComponent"/>
 /// </summary>
-public sealed class HeldSpeedModifierSystem : EntitySystem
+public sealed partial class HeldSpeedModifierSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!; // Goobstation
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // Goobstation
 
     /// <inheritdoc/>
     public override void Initialize()

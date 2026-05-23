@@ -110,6 +110,7 @@
 
 - type: material
   id: Bones
+  stackEntity: MaterialBones1 # Trauma
   name: materials-bones
   unit: materials-unit-piece
   icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: bones } # Trauma

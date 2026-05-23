@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Goobstation.Silo;
+using Content.Goobstation.Common.Silo;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Interaction;
@@ -18,13 +18,13 @@ namespace Content.Shared.Materials;
 /// This handles storing materials and modifying their amounts
 /// <see cref="MaterialStorageComponent"/>
 /// </summary>
-public abstract class SharedMaterialStorageSystem : EntitySystem
+public abstract partial class SharedMaterialStorageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedSiloSystem _silo = default!; // Goobstation
+    [Dependency] private CommonSiloSystem _silo = default!; // Goobstation
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
     /// <summary>
     /// Default volume for a sheet if the material's entity prototype has no material composition.
@@ -84,7 +84,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return 0; //you have nothing
-        if (component.ConnectToSilo && _silo.TryGetMaterialAmount(uid, material, out var amount)) // Goobstation
+        if (_silo.TryGetMaterialAmount(uid, material, out var amount)) // Goobstation
             return amount;
         return component.Storage.GetValueOrDefault(material, 0);
     }
@@ -99,7 +99,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return 0;
-        if (component.ConnectToSilo && _silo.TryGetTotalMaterialAmount(uid, out var amount)) // Goobstation
+        if (_silo.TryGetTotalMaterialAmount(uid, out var amount)) // Goobstation
             return amount;
         return component.Storage.Values.Sum();
     }
@@ -138,7 +138,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
             if (component.MaterialWhiteList == null ? false : !component.MaterialWhiteList.Contains(materialId))
                 return false;
 
-        if (component.ConnectToSilo && _silo.TryGetMaterialAmount(uid, materialId, out var siloAmount)) // Goobstation
+        if (_silo.TryGetMaterialAmount(uid, materialId, out var siloAmount)) // Goobstation
             return siloAmount + volume >= 0;
 
         var amount = component.Storage.GetValueOrDefault(materialId);
@@ -182,35 +182,26 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         if (!CanChangeMaterialAmount(uid, materialId, volume, component))
             return false;
 
-        // Goob start
-        EntityUid storageUid;
-        Dictionary<ProtoId<MaterialPrototype>, int> storage;
-        if (component.ConnectToSilo)
+        // <Trauma> - change the silo's materials instead, if it's linked to one
+        if (_silo.GetSilo(uid) is {} silo)
         {
-            var silo = _silo.GetSilo(uid);
-            if (dirty && silo != null)
-                Dirty(silo.Value);
-            storage = silo != null ? silo.Value.Comp.Storage : component.Storage;
-            storageUid = silo != null ? silo.Value : uid;
+            uid = silo;
+            if (!TryComp<MaterialStorageComponent>(uid, out component))
+                return false;
         }
-        else
-        {
-            storage = component.Storage;
-            storageUid = uid;
-        }
+        // </Trauma>
 
-        var existing = storage.GetOrNew(materialId);
-        // Goob end
+        var existing = component.Storage.GetOrNew(materialId);
 
         existing += volume;
 
         if (existing == 0)
-            storage.Remove(materialId); // Goob edit
+            component.Storage.Remove(materialId);
         else
-            storage[materialId] = existing; // Goob edit
+            component.Storage[materialId] = existing;
 
         var ev = new MaterialAmountChangedEvent();
-        RaiseLocalEvent(storageUid, ref ev); // Goob edit
+        RaiseLocalEvent(uid, ref ev);
 
         if (dirty)
             Dirty(uid, component);

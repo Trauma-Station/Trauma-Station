@@ -6,40 +6,20 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
+    InfrastructureKnowledge: 0
+    ElectronicsKnowledge: 0
 
 - type: construction
+  parent: GasFilter
   id: GasFilterInline
-  graph: GasTrinary
   targetNode: inline_filter
-  category: construction-category-utilities
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-  - !type:NoUnstackableInTile
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: HeatExchanger
   id: HeatExchangerInline
-  graph: GasBinary
   targetNode: inlineradiator
-  category: construction-category-utilities
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1
 
 - type: construction
+  parent: HeatExchangerBend
   id: HeatExchangerInlineBend
-  graph: GasBinary
   targetNode: bendinlineradiator
-  category: construction-category-utilities
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  theory:
-    InfrastructureKnowledge: 1
-    ElectronicsKnowledge: 1

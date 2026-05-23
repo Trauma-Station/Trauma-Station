@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Silicons.Borgs; // Cortex-Next
+// </Trauma>
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -33,40 +36,37 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared._CorvaxNext.Silicons.Borgs; // Cortex-Next
 
 namespace Content.Shared.Silicons.StationAi;
 
 public abstract partial class SharedStationAiSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminManager _admin = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly ItemToggleSystem _toggles = default!;
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly SharedAirlockSystem _airlocks = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedDoorSystem _doors = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedElectrocutionSystem _electrify = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] protected readonly SharedMapSystem Maps = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem PowerReceiver = default!;
-    [Dependency] private readonly SharedTransformSystem _xforms = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly StationAiVisionSystem _vision = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-
-    [Dependency] private readonly SharedAiRemoteControlSystem _remoteSystem = default!; // Corvax-Next-AiRemoteControl
+    [Dependency] private ISharedAdminManager _admin = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private ItemToggleSystem _toggles = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
+    [Dependency] private SharedAirlockSystem _airlocks = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedDoorSystem _doors = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedElectrocutionSystem _electrify = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] protected SharedMapSystem Maps = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem PowerReceiver = default!;
+    [Dependency] private SharedTransformSystem _xforms = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private StationAiVisionSystem _vision = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     // StationAiHeld is added to anything inside of an AI core.
     // StationAiHolder indicates it can hold an AI positronic brain (e.g. holocard / core).
@@ -75,8 +75,8 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     // StationAiOverlay handles the static overlay. It also handles interaction blocking on client and server
     // for anything under it.
 
-    private EntityQuery<BroadphaseComponent> _broadphaseQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
+    [Dependency] private EntityQuery<BroadphaseComponent> _broadphaseQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly EntProtoId DefaultAi = "StationAiBrain";
     private readonly ProtoId<ChatNotificationPrototype> _downloadChatNotificationPrototype = "IntellicardDownload";
@@ -84,9 +84,6 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _broadphaseQuery = GetEntityQuery<BroadphaseComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
 
         InitializeAirlock();
         InitializeHeld();
@@ -210,16 +207,15 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     {
         args.Handled = true;
 
-        // Shitmed - Starlight Abductors Change Start
+        // <Trauma> - allow changing the target for abductor eye
         var target = args.Target;
         if (ent.Comp.AllowCrossGrid && TryComp(ent, out RelayInputMoverComponent? relay))
             target = relay.RelayEntity;
-        // Shitmed Change End
-
         var targetXform = Transform(target);
+        // </Trauma>
 
         // No cross-grid
-        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Shitmed Change
+        if (targetXform.GridUid != Transform(args.User).GridUid && !ent.Comp.AllowCrossGrid) // Trauma - check AllowCrossGrid
         {
             return;
         }
@@ -251,12 +247,13 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         // Try to insert our thing into them
         if (_slots.CanEject(ent.Owner, args.User, ent.Comp.Slot))
         {
-            // Corvax-Next-AiRemoteControl-Start
-            if (ent.Comp.Slot.Item != null
-                && TryComp<StationAiHeldComponent>(ent.Comp.Slot.Item, out var stationAiHeldComp))
-                if (stationAiHeldComp.CurrentConnectedEntity != null)
-                    _remoteSystem.ReturnMindIntoAi(stationAiHeldComp.CurrentConnectedEntity.Value);
-            // Corvax-Next-AiRemoteControl-End
+            // <Trauma> - Corvax-Next-AiRemoteControl-Start
+            if (ent.Comp.Slot.Item is { } item)
+            {
+                var ev = new OnIntellicardInsertEvent();
+                RaiseLocalEvent(item, ref ev);
+            }
+            // </Trauma>
 
             if (!_slots.TryInsert(args.Args.Target.Value, targetHolder.Slot, ent.Comp.Slot.Item!.Value, args.User, excludeUserAudio: true))
             {
@@ -640,6 +637,29 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         }
 
         return _blocker.CanComplexInteract(entity.Owner);
+    }
+
+    /// <summary>
+    /// Gets all alive AI minds and adds them to the inputted hashset, excluding one optional mind
+    /// </summary>
+    /// <param name="aliveAis">Hashset of alive AI minds</param>
+    /// <param name="exclude">Optional mind to exclude</param>
+    public void AddAliveAis(HashSet<Entity<MindComponent>> aliveAis, EntityUid? exclude = null)
+    {
+        var query = EntityQueryEnumerator<StationAiCoreComponent, StationAiHolderComponent>();
+
+        while (query.MoveNext(out var uid, out _, out var aiHolder))
+        {
+            // the player needs to have a mind and not be the excluded one +
+            // the player has to be alive
+            if (!TryGetHeld((uid, aiHolder), out var held) || _mobState.IsDead(held.Value))
+                continue;
+
+            if (!_mind.TryGetMind(held.Value, out var mind, out var mindComp) || mind == exclude)
+                continue;
+
+            aliveAis.Add((mind, mindComp));
+        }
     }
 }
 

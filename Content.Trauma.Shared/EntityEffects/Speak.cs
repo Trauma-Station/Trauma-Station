@@ -5,7 +5,6 @@ using Content.Shared.Dataset;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityEffects;
@@ -32,11 +31,11 @@ public sealed partial class Speak : EntityEffectBase<Speak>
         => Loc.GetString(GuidebookText, ("chance", Probability));
 }
 
-public sealed class SpeakEffectSystem : EntityEffectSystem<SpeechComponent, Speak>
+public sealed partial class SpeakEffectSystem : EntityEffectSystem<SpeechComponent, Speak>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
 
     protected override void Effect(Entity<SpeechComponent> ent, ref EntityEffectEvent<Speak> args)
     {

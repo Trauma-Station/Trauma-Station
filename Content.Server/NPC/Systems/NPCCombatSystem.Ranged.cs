@@ -1,16 +1,4 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.NPC.Components;
-using Content.Shared._Goobstation.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
@@ -19,14 +7,15 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Content.Goobstation.Shared.Weapons.SmartGun;
 
 namespace Content.Server.NPC.Systems;
 
 public sealed partial class NPCCombatSystem
 {
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotate = default!;
-    [Dependency] private readonly SharedLaserPointerSystem _pointer = default!; // Goobstation
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private RotateToFaceSystem _rotate = default!;
+    [Dependency] private SharedLaserPointerSystem _pointer = default!; // Goobstation
 
     private EntityQuery<CombatModeComponent> _combatQuery;
     private EntityQuery<NPCSteeringComponent> _steeringQuery;
@@ -74,9 +63,9 @@ public sealed partial class NPCCombatSystem
         }
 
         // Goobstation
-        if (_gun.TryGetGun(uid, out var gunUid, out _) && TryComp(gunUid, out LaserPointerComponent? laser) &&
-            TryComp(gunUid, out WieldableComponent? wieldable) && TryComp(gunUid, out TransformComponent? xform))
-            _pointer.AddOrRemoveLine(GetNetEntity(gunUid), laser, wieldable, xform, null, null);
+        if (_gun.TryGetGun(uid, out var gun) && TryComp(gun, out LaserPointerComponent? laser) &&
+            TryComp(gun, out WieldableComponent? wieldable) && TryComp(gun, out TransformComponent? xform))
+            _pointer.AddOrRemoveLine(GetNetEntity(gun), laser, wieldable, xform, null, null);
     }
 
     private void UpdateRanged(float frameTime)
@@ -85,12 +74,14 @@ public sealed partial class NPCCombatSystem
 
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (!_gun.TryGetGun(uid, out var gunUid, out var gun))
+            // <Trauma> - moved from way below so it doesnt do wrong logic
+            if (!_gun.TryGetGun(uid, out var gun))
             {
                 comp.Status = CombatStatus.NoWeapon;
                 comp.ShootAccumulator = 0f;
                 continue;
             }
+            // </Trauma>
 
             if (comp.Status == CombatStatus.Unspecified)
             {
@@ -129,7 +120,7 @@ public sealed partial class NPCCombatSystem
             }
 
             var ammoEv = new GetAmmoCountEvent();
-            RaiseLocalEvent(gunUid, ref ammoEv);
+            RaiseLocalEvent(gun, ref ammoEv);
 
             var worldPos = _transform.GetWorldPosition(xform);
             var targetPos = _transform.GetWorldPosition(targetXform);
@@ -137,7 +128,7 @@ public sealed partial class NPCCombatSystem
             if (ammoEv.Count == 0)
             {
                 // Recharging then?
-                if (_rechargeQuery.HasComponent(gunUid))
+                if (_rechargeQuery.HasComponent(gun))
                 {
                     UpdatePointerLine(); // Goobstation
                     continue;
@@ -225,7 +216,7 @@ public sealed partial class NPCCombatSystem
 
             if (_mapManager.TryFindGridAt(xform.MapID, targetPos, out var gridUid, out var mapGrid))
             {
-                targetCordinates = new EntityCoordinates(gridUid, mapGrid.WorldToLocal(targetSpot));
+                targetCordinates = new EntityCoordinates(gridUid, _map.WorldToLocal(gridUid, mapGrid, targetSpot));
             }
             else
             {
@@ -236,22 +227,22 @@ public sealed partial class NPCCombatSystem
 
             UpdatePointerLine(); // Goobstation
 
-            if (gun.NextFire > _timing.CurTime)
+            if (gun.Comp.NextFire > _timing.CurTime)
             {
                 return;
             }
 
-            _gun.AttemptShoot(uid, gunUid, gun, targetCordinates, comp.Target);
+            _gun.AttemptShoot(uid, gun, targetCordinates, comp.Target);
 
             // <Goob>
             void UpdatePointerLineNoTarget()
             {
-                if (TryComp(gunUid, out LaserPointerComponent? pointer) && TryComp(gunUid, out WieldableComponent? wieldable))
+                if (TryComp(gun, out LaserPointerComponent? pointer) && TryComp(gun, out WieldableComponent? wieldable))
                 {
-                    _pointer.AddOrRemoveLine(GetNetEntity(gunUid),
+                    _pointer.AddOrRemoveLine(GetNetEntity(gun),
                         pointer,
                         wieldable,
-                        _xformQuery.Comp(gunUid),
+                        Transform(gun),
                         null,
                         null);
                 }
@@ -259,12 +250,12 @@ public sealed partial class NPCCombatSystem
 
             void UpdatePointerLine()
             {
-                if (TryComp(gunUid, out LaserPointerComponent? pointer) && TryComp(gunUid, out WieldableComponent? wieldable))
+                if (TryComp(gun, out LaserPointerComponent? pointer) && TryComp(gun, out WieldableComponent? wieldable))
                 {
-                    _pointer.AddOrRemoveLine(GetNetEntity(gunUid),
+                    _pointer.AddOrRemoveLine(GetNetEntity(gun),
                         pointer,
                         wieldable,
-                        _xformQuery.Comp(gunUid),
+                        Transform(gun),
                         targetPos - worldPos,
                         comp.Target);
                 }

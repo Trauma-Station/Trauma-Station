@@ -20,8 +20,6 @@
   - type: VisualOrgan
     data:
       sprite: _EinsteinEngines/Mobs/Species/Cybernetics/bishop/bishop_main.rsi
-  - type: Nerve
-    painMultiplier: 1.5
   - type: Woundable
     canBleed: false
   - type: WoundableVisuals
@@ -128,7 +126,7 @@
   id: OrganCyberneticSpeed
   description: A cybernetic leg that allows its wearer to run faster.
   components:
-  - type: MovementBodyPart
+  - type: Leg
     walkSpeed: 3.125
     sprintSpeed: 5.175
 

@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ImHoks <imhokzzzz@gmail.com>
-// SPDX-FileCopyrightText: 2025 KillanGenifer <killangenifer@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Logs;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Radio.EntitySystems;
@@ -29,14 +17,14 @@ namespace Content.Server.Research.Systems;
 /// Handles UI and state receiving for the robotics control console.
 /// <c>BorgTransponderComponent<c/> broadcasts state from the station's borgs to consoles.
 /// </summary>
-public sealed class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
+public sealed partial class RoboticsConsoleSystem : SharedRoboticsConsoleSystem
 {
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly LockSystem _lock = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private LockSystem _lock = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     // almost never timing out more than 1 per tick so initialize with that capacity
     private List<string> _removing = new(1);

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Nutrition.Components;
@@ -11,16 +5,15 @@ using Content.Shared.Nutrition.Components;
 namespace Content.Shared.Nutrition.EntitySystems;
 
 /// <inheritdoc cref="ExaminableHungerComponent"/>
-public sealed class ExaminableHungerSystem : EntitySystem
+public sealed partial class ExaminableHungerSystem : EntitySystem
 {
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    private EntityQuery<HungerComponent> _hungerQuery;
+    [Dependency] private HungerSystem _hunger = default!;
+
+    [Dependency] private EntityQuery<HungerComponent> _hungerQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _hungerQuery = GetEntityQuery<HungerComponent>();
 
         SubscribeLocalEvent<ExaminableHungerComponent, ExaminedEvent>(OnExamine);
     }

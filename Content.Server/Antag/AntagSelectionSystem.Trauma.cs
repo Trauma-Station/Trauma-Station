@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
@@ -16,7 +17,7 @@ namespace Content.Server.Antag;
 /// </summary>
 public sealed partial class AntagSelectionSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public void UnequipOldGear(EntityUid player)
     {

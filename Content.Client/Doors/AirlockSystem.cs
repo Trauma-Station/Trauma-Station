@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Tom Leys <tom@crump-leys.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2023 nikthechampiongr <32041239+nikthechampiongr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 778b <33431126+778b@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Wires.Visualizers;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -20,10 +7,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Doors;
 
-public sealed class AirlockSystem : SharedAirlockSystem
+public sealed partial class AirlockSystem : SharedAirlockSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -73,6 +60,11 @@ public sealed class AirlockSystem : SharedAirlockSystem
 
         if (!comp.AnimatePanel)
             return;
+
+        // For some reason the open panel sprite is used for both open and
+        // closed sprites. I really don't get it.
+        door.OpenSpriteStates.Add((WiresVisualLayers.MaintenancePanel, comp.OpenPanelSpriteState));
+        door.ClosedSpriteStates.Add((WiresVisualLayers.MaintenancePanel, comp.OpenPanelSpriteState));
 
         ((Animation)door.OpeningAnimation).AnimationTracks.Add(new AnimationTrackSpriteFlick()
         {

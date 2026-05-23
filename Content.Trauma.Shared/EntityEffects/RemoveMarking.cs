@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid.Markings;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -25,10 +24,10 @@ public sealed partial class RemoveMarking : EntityEffectBase<RemoveMarking>
         => Loc.GetString("entity-effect-guidebook-remove-marking", ("chance", Probability), ("marking", prototype.Index(Marking).Name));
 }
 
-public sealed class RemoveMarkingEffectSystem : EntityEffectSystem<BodyComponent, RemoveMarking>
+public sealed partial class RemoveMarkingEffectSystem : EntityEffectSystem<BodyComponent, RemoveMarking>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<RemoveMarking> args)
     {

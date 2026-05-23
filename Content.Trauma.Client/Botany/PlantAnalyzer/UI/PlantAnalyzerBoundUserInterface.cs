@@ -5,8 +5,7 @@ using Content.Trauma.Shared.Botany.Components;
 
 namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 
-
-public sealed class PlantAnalyzerBoundUserInterface : BoundUserInterface
+public sealed partial class PlantAnalyzerBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private PlantAnalyzerWindow? _window;

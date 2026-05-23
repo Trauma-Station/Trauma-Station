@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Velcroboy <107660393+iamvelcroboy@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -13,10 +8,10 @@ namespace Content.Shared.Storage.EntitySystems;
 /// Ejects items that do not match a <see cref="EntityWhitelist"/> from a storage when it is anchored.
 /// <seealso cref="AnchoredStorageFilterComponent"/>
 /// </summary>
-public sealed class AnchoredStorageFilterSystem : EntitySystem
+public sealed partial class AnchoredStorageFilterSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

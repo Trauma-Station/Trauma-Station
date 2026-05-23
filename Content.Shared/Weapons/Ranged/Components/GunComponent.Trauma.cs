@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 namespace Content.Shared.Weapons.Ranged.Components;
 
 public sealed partial class GunComponent : Component

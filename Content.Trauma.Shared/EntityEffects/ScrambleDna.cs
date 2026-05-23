@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
 using Content.Shared.Trigger.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -18,9 +17,9 @@ public sealed partial class ScrambleDna : EntityEffectBase<ScrambleDna>
 }
 
 // fuck you mocho
-public sealed class ScrambleDnaEntityEffectSystem : EntityEffectSystem<HumanoidProfileComponent, ScrambleDna>
+public sealed partial class ScrambleDnaEntityEffectSystem : EntityEffectSystem<HumanoidProfileComponent, ScrambleDna>
 {
-    [Dependency] private readonly DnaScrambleOnTriggerSystem _scramble = default!;
+    [Dependency] private DnaScrambleOnTriggerSystem _scramble = default!;
 
     protected override void Effect(Entity<HumanoidProfileComponent> ent, ref EntityEffectEvent<ScrambleDna> args)
     {

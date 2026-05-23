@@ -114,7 +114,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        50: Dead
+        20: Dead
     - type: MovementSpeedModifier
       baseWalkSpeed: 3
       baseSprintSpeed: 4
@@ -126,6 +126,13 @@
       guides:
       - Blob
     - type: MovementIgnoreGravity # Trauma
+    - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
+      bloodReferenceSolution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
+      bleedReductionAmount: 30
 
 # Blobbernaut
 - type: entity
@@ -238,11 +245,12 @@
       guides:
       - Blob
     - type: Bloodstream
+      maxBleedAmount: 0 # no bleeding
       bloodReferenceSolution:
         reagents:
         - ReagentId: Blood
           Quantity: 300
-      bleedReductionAmount: 5
+      bleedReductionAmount: 30
     - type: MovementIgnoreGravity # Trauma
 
 # Observer
@@ -297,6 +305,7 @@
     - type: InputMover
     - type: Appearance
     - type: Eye
+      drawFov: false
     - type: Input
       context: "ghost"
     - type: Examiner

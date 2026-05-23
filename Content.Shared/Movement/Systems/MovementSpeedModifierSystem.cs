@@ -1,18 +1,21 @@
+// <Trauma>
+using Content.Goobstation.Common.Movement;
+using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.Heretic;
+// </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Standing;
 using Robust.Shared.Configuration;
-using Content.Goobstation.Common.Movement; // Goobstation
-using Content.Goobstation.Common.CCVar; // Goobstation
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Movement.Systems
 {
-    public sealed class MovementSpeedModifierSystem : EntitySystem
+    public sealed partial class MovementSpeedModifierSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IConfigurationManager _configManager = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private IConfigurationManager _configManager = default!;
 
         private float _frictionModifier;
         private float _airDamping;
@@ -114,9 +117,14 @@ namespace Content.Shared.Movement.Systems
                 MathHelper.CloseTo(ev.SprintSpeedModifier, move.SprintSpeedModifier))
                 return;
 
+            // <Trauma>
+            var ev2 = new BeforeMovespeedModifierAppliedEvent(ev.WalkSpeedModifier, ev.SprintSpeedModifier);
 
-            move.WalkSpeedModifier = Math.Min(ev.WalkSpeedModifier, _maxSpeed); // Goobstation Change
-            move.SprintSpeedModifier = Math.Min(ev.SprintSpeedModifier, _maxSpeed); // Goobstation Change
+            RaiseLocalEvent(uid, ref ev2);
+
+            move.WalkSpeedModifier = Math.Min(ev2.WalkModifier, _maxSpeed);
+            move.SprintSpeedModifier = Math.Min(ev2.SprintModifier, _maxSpeed);
+            // </Trauma>
             Dirty(uid, move);
         }
 

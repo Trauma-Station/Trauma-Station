@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Phill101 <28949487+Phill101@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Phill101 <holypics4@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.CrewManifest;
 using Content.Shared.Roles;
 using Robust.Client.GameObjects;
@@ -14,10 +7,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.CrewManifest.UI;
 
-public sealed class CrewManifestListing : BoxContainer
+public sealed partial class CrewManifestListing : BoxContainer
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     private readonly SpriteSystem _spriteSystem;
 
     public CrewManifestListing()

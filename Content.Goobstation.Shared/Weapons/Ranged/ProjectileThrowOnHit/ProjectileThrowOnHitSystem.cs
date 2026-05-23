@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -11,10 +10,10 @@ namespace Content.Goobstation.Shared.Weapons.Ranged.ProjectileThrowOnHit;
 /// <summary>
 /// This handles <see cref="ProjectileThrowOnHitComponent"/>
 /// </summary>
-public sealed class ProjectileThrowOnHitSystem : EntitySystem
+public sealed partial class ProjectileThrowOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<ProjectileThrowOnHitComponent, ProjectileHitEvent>(OnProjectileHit);

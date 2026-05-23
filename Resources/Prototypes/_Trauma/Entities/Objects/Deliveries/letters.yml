@@ -99,8 +99,6 @@
       - id: MobMouse
       - id: MobMouse1
       - id: MobMouse2
-      - id: MobMousePlague
-        weight: 0.05
       - id: MobMouseCancer
         weight: 0.01
 

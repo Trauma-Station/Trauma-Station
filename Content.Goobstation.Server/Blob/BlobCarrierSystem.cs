@@ -11,23 +11,21 @@ using Content.Server.Mind;
 using Content.Shared.Gibbing;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Content.Server._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Events;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobCarrierSystem : SharedBlobCarrierSystem
+public sealed partial class BlobCarrierSystem : SharedBlobCarrierSystem
 {
-    [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly GhostRoleSystem _ghost = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private BlobCoreSystem _blobCoreSystem = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private GhostRoleSystem _ghost = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private CommonLanguageSystem _language = default!;
 
     public override void Initialize()
     {
@@ -37,7 +35,6 @@ public sealed class BlobCarrierSystem : SharedBlobCarrierSystem
         SubscribeLocalEvent<BlobCarrierComponent, TransformToBlobActionEvent>(OnTransformToBlobChanged);
 
         SubscribeLocalEvent<BlobCarrierComponent, MapInitEvent>(OnStartup);
-        SubscribeLocalEvent<BlobCarrierComponent, DetermineEntityLanguagesEvent>(OnApplyLang);
         SubscribeLocalEvent<BlobCarrierComponent, ComponentShutdown>(OnRemove);
 
         SubscribeLocalEvent<BlobCarrierComponent, MindAddedMessage>(OnMindAdded);
@@ -45,20 +42,6 @@ public sealed class BlobCarrierSystem : SharedBlobCarrierSystem
     }
 
     private static readonly EntProtoId ActionTransformToBlob = "ActionTransformToBlob";
-
-    private static readonly ProtoId<LanguagePrototype> BlobLang = "Blob";
-
-    private void OnApplyLang(Entity<BlobCarrierComponent> ent, ref DetermineEntityLanguagesEvent args)
-    {
-        if(ent.Comp.LifeStage is
-           ComponentLifeStage.Removing
-           or ComponentLifeStage.Stopping
-           or ComponentLifeStage.Stopped)
-            return;
-
-        args.SpokenLanguages.Add(BlobLang);
-        args.UnderstoodLanguages.Add(BlobLang);
-    }
 
     private void OnRemove(Entity<BlobCarrierComponent> ent, ref ComponentShutdown args) => _language.UpdateEntityLanguages(ent.Owner);
 

@@ -15,7 +15,7 @@ public sealed partial class DestructibleSystem
             foreach (var threshold in destructible.Thresholds)
             {
                 // Chances are, none of these triggers will pass!
-                Triggered(threshold, (uid, damageable));
+                Triggered(threshold, (uid, damageable), destructible.Scale); // Trauma - add scale
             }
         }
     }

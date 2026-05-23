@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Server._RMC14.LinkAccount;
+using Content.Server.LinkAccount;
 using Content.Server.MoMMI;
 using Content.Server._RMC14.Mentor;
 // </Trauma>
@@ -28,7 +28,6 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
-using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -71,7 +70,6 @@ internal static class ServerContentIoC
         deps.Register<PlayTimeTrackingManager>();
         deps.Register<UserDbDataManager>();
         deps.Register<ServerInfoManager>();
-        deps.Register<PoissonDiskSampler>();
         deps.Register<DiscordWebhook>();
         deps.Register<VoteWebhooks>();
         deps.Register<ServerDbEntryManager>();
@@ -88,6 +86,7 @@ internal static class ServerContentIoC
         //deps.Register<DiscordLink>(); // Trauma - wasn't cherry picked
         //deps.Register<DiscordChatLink>(); // Trauma
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
+        deps.Register<IPostInjectInit, LinkAccountManager>(); // RMC - Patreon
         deps.Register<LinkAccountManager>(); // RMC - Patreon
         deps.Register<MentorManager>(); // RMC - Mentor
         deps.Register<ServerFeedbackManager>();

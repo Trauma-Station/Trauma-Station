@@ -1,20 +1,19 @@
-using Content.Server.Medical.Components;
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Shared.Wounds;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
+using Content.Server.Medical.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Damage.Components;
-using Content.Shared.MedicalScanner;
 using Content.Shared.FixedPoint;
+using Content.Shared.MedicalScanner;
 using Content.Shared.Mobs.Systems;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Server.Medical;
 
@@ -23,10 +22,10 @@ namespace Content.Server.Medical;
 /// </summary>
 public sealed partial class HealthAnalyzerSystem
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private EntityQuery<BodyComponent> _bodyQuery;
     private EntityQuery<DamageableComponent> _damageQuery;
@@ -48,14 +47,14 @@ public sealed partial class HealthAnalyzerSystem
     /// <param name="args">The message containing the selected part</param>
     private void OnHealthAnalyzerPartSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerPartMessage args)
     {
-        if (!TryGetEntity(args.Owner, out var owner))
+        if (healthAnalyzer.Comp.ScannedEntity is not { } target || !Exists(target))
             return;
 
         healthAnalyzer.Comp.CurrentMode = HealthAnalyzerMode.Body; // If you press a part ye get redirected bozo.
-        if (args.Category is not {} category)
-            BeginAnalyzingEntity(healthAnalyzer, owner.Value, null);
-        else if (_body.GetOrgan(owner.Value, category) is {} organ)
-            BeginAnalyzingEntity(healthAnalyzer, owner.Value, organ);
+        if (args.Category is not { } category)
+            BeginAnalyzingEntity(healthAnalyzer, target, null);
+        else if (_body.GetOrgan(target, category) is { } organ)
+            BeginAnalyzingEntity(healthAnalyzer, target, organ);
     }
 
     /// <summary>
@@ -65,11 +64,11 @@ public sealed partial class HealthAnalyzerSystem
     /// <param name="args">The message containing the selected mode</param>
     private void OnHealthAnalyzerModeSelected(Entity<HealthAnalyzerComponent> healthAnalyzer, ref HealthAnalyzerModeSelectedMessage args)
     {
-        if (!TryGetEntity(args.Owner, out var owner))
+        if (healthAnalyzer.Comp.ScannedEntity is not { } target || !Exists(target))
             return;
 
         healthAnalyzer.Comp.CurrentMode = args.Mode; // If you press a part ye get redirected bozo.
-        BeginAnalyzingEntity(healthAnalyzer, owner.Value);
+        BeginAnalyzingEntity(healthAnalyzer, target);
     }
 
     // can't keep scanning a deleted or detached part
@@ -86,11 +85,9 @@ public sealed partial class HealthAnalyzerSystem
 
     private void FetchBodyData(EntityUid target,
         out Dictionary<NetEntity, List<WoundableTraumaData>> traumas,
-        out Dictionary<NetEntity, FixedPoint2> pain,
         out HashSet<ProtoId<OrganCategoryPrototype>> bleeding)
     {
         traumas = new();
-        pain = new();
         bleeding = new();
 
         // TODO SHITMED: all of this shit should just be networked
@@ -98,7 +95,6 @@ public sealed partial class HealthAnalyzerSystem
         {
             var ent = GetNetEntity(part);
             traumas.Add(ent, FetchTraumaData(part, part.Comp));
-            pain.Add(ent, FetchPainData(part));
             if (part.Comp.Bleeds > 0 && _body.GetCategory(part.Owner) is {} category)
                 bleeding.Add(category);
         }
@@ -141,9 +137,6 @@ public sealed partial class HealthAnalyzerSystem
         return traumasList;
     }
 
-    private FixedPoint2 FetchPainData(EntityUid target)
-        => CompOrNull<NerveComponent>(target)?.PainFeels ?? FixedPoint2.Zero;
-
     private Dictionary<NetEntity, OrganTraumaData> FetchOrganData(EntityUid target)
     {
         var organs = new Dictionary<NetEntity, OrganTraumaData>();
@@ -163,23 +156,23 @@ public sealed partial class HealthAnalyzerSystem
         return organs;
     }
 
-    private Dictionary<NetEntity, Solution> FetchChemicalData(EntityUid target)
+    private List<NetEntity> FetchChemicalData(EntityUid target)
     {
-        var solutionsList = new Dictionary<NetEntity, Solution>();
+        var solutionsList = new List<NetEntity>();
 
         if (TryComp<BloodstreamComponent>(target, out var blood) &&
             _solutionContainerSystem.ResolveSolution(target, blood.BloodSolutionName, ref blood.BloodSolution, out var bloodSol))
         {
-            solutionsList.Add(GetNetEntity(blood.BloodSolution.Value), bloodSol);
+            solutionsList.Add(GetNetEntity(blood.BloodSolution.Value));
         }
 
         // TODO SHITMED: this is already networked????
         foreach (var stomach in _body.GetOrgans<StomachComponent>(target))
         {
-            if (stomach.Comp.Solution is not {} solution)
+            if (stomach.Comp.Solution is not { } solution)
                 continue;
 
-            solutionsList.Add(GetNetEntity(solution), solution.Comp.Solution);
+            solutionsList.Add(GetNetEntity(solution));
         }
 
         return solutionsList;
