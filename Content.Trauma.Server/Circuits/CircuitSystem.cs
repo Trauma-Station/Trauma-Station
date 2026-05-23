@@ -159,7 +159,7 @@ public sealed partial class CircuitSystem : EntitySystem
         for (var i = 0; i < CircuitComponent.PortsCount; i++)
         {
             if (!comp.LastOutputs[i].Equals(False.Instance))
-                SendOutput(comp.Housing, i + 1, False.Instance))
+                SendOutput(comp.Housing, i + 1, False.Instance);
         }
     }
 
