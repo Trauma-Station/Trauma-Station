@@ -4,7 +4,6 @@ using Content.Client.Overlays;
 using Content.Goobstation.Shared.Overlays;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Overlays;
 

@@ -3,8 +3,6 @@
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.Heretic.Components.Side;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Random;

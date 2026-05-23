@@ -9,8 +9,6 @@ using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Popups;
 using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;

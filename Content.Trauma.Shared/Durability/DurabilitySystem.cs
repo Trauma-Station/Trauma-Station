@@ -22,7 +22,6 @@ using Content.Trauma.Shared.Durability.Components;
 using Content.Trauma.Shared.Durability.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Durability;
 

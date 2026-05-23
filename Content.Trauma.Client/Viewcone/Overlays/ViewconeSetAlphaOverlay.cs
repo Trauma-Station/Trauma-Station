@@ -5,8 +5,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Trauma.Client.Viewcone.ComponentTree;
 using Content.Trauma.Shared.Viewcone.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Map.Components;

@@ -2,7 +2,6 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 

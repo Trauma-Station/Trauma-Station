@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Trauma.Shared.AudioMuffle;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.AudioMuffle;
 

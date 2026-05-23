@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceNetwork;
+// </Trauma>
 using Content.Shared.Trigger.Components.Triggers;
 using Content.Shared.Trigger.Components.Effects;
 using Content.Shared.DeviceLinking.Events;
@@ -39,6 +43,12 @@ public sealed partial class TriggerSystem
         if (args.Port != ent.Comp.Port)
             return;
 
+        // <Trauma> - prevent low signals from triggering stuff
+        var state = SignalState.Momentary;
+        args.Data?.TryGetValue(DeviceNetworkConstants.LogicState, out state);
+        if (state == SignalState.Low)
+            return;
+        // </Trauma>
         Trigger(ent.Owner, args.Trigger, ent.Comp.KeyOut);
     }
 }

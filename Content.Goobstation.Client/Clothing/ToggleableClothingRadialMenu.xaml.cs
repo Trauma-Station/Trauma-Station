@@ -2,9 +2,6 @@
 
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Clothing.Components;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.XAML;
 
 namespace Content.Goobstation.Client.Clothing;
 

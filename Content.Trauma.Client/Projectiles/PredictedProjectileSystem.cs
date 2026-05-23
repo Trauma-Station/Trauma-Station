@@ -2,7 +2,6 @@
 
 using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Projectiles;
-using Robust.Client.GameObjects;
 using Robust.Client.Physics;
 
 namespace Content.Trauma.Client.Projectiles;

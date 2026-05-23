@@ -508,4 +508,9 @@ public enum LogType
     /// Trauma - Genetics related logs.
     /// </summary>
     Genetics = 20001,
+
+    /// <summary>
+    /// Trauma - Circuits related logs.
+    /// </summary>
+    Circuits = 20004,
 }

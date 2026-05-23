@@ -2,15 +2,12 @@
 
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Particles;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Configuration;
 using Robust.Shared.Graphics.RSI;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Particles;
 

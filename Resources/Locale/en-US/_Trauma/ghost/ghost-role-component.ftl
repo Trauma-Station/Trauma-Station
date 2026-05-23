@@ -85,3 +85,11 @@ ghost-role-information-pirate-description = Follow your captain's orders. Loot, 
 
 ghost-role-information-pirate-captain-name = Pirate Scooner Captain
 ghost-role-information-pirate-captain-description = Order your crewmen around. Get rich.
+
+ghost-role-information-hunter-name = Fugitive Hunter
+ghost-role-information-hunter-description = You're a Fugitive Hunter. Catch the fugitives.
+ghost-role-information-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Try not to kill them or security in the process.
+
+ghost-role-information-fugitive-name = Fugitive
+ghost-role-information-fugitive-description = You're an escaped prisoner. Make it out alive.
+ghost-role-information-fugitive-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Focus on laying low rather than engaging the hunters or security directly.

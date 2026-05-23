@@ -3,9 +3,7 @@
 using System;
 using System.Diagnostics.Contracts;
 using System.Text;
-using Robust.Client.Graphics;
 using Robust.Shared.Log;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 

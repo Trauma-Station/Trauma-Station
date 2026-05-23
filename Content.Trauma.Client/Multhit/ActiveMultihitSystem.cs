@@ -2,7 +2,6 @@
 
 using Content.Client.Hands.Systems;
 using Content.Trauma.Shared.Multihit;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Timing;

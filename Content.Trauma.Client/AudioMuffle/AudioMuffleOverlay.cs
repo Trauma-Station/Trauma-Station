@@ -2,10 +2,8 @@
 
 using Content.Client.Resources;
 using Content.Trauma.Shared.AudioMuffle;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Enums;

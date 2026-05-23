@@ -4,7 +4,6 @@ using Content.Shared.Preferences.Loadouts.Effects;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Preferences;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Trauma.Shared.Loadouts;
