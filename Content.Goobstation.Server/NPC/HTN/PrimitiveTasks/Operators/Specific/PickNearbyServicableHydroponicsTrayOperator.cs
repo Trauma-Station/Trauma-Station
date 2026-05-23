@@ -15,9 +15,9 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOperator
 {
     [Dependency] private IEntityManager _entMan = default!;
-
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
+    [Dependency] private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
 
     /// <summary>
     /// Determines how close the bot needs to be to service a tray
@@ -51,10 +51,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!_entMan.TryGetComponent<PlantbotComponent>(owner, out _))
-            return (false, null);
-
-        var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
+        var emagged = _emaggedQuery.HasComp(owner);
 
         var coords = _entMan.GetComponent<TransformComponent>(owner).Coordinates;
         _targets.Clear();

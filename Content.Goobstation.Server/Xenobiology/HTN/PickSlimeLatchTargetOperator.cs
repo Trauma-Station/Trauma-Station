@@ -24,6 +24,8 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
     private GoobHungerSystem _hunger = default!;
     private PathfindingSystem _pathfinding = default!;
     private SlimeLatchSystem _latch = default!;
+    [Dependency] private EntityQuery<BeingLatchedComponent> _latchedQuery = default!;
+    [Dependency] private EntityQuery<SlimeDamageOvertimeComponent> _dotQuery = default!;
 
     [DataField(required: true)]
     public string RangeKey = string.Empty;
@@ -64,8 +66,8 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
 
         foreach (var entity in _factions.GetNearbyHostiles(owner, range))
         {
-            if (_ent.HasComponent<BeingLatchedComponent>(entity)
-            || _ent.HasComponent<SlimeDamageOvertimeComponent>(entity) // it's taken
+            if (_latchedQuery.HasComp(entity)
+            || _dotQuery.HasComp(entity) // it's taken
             || _mobSystem.IsDead(entity)
             || (growthComp.IsFirstStage && entity == slimeComp.Tamer) // no killing tamer
             || (entity == slimeComp.Tamer && _hunger.IsHungerAboveState(owner, HungerThreshold.Peckish))) // no killing tamer unless very hungry

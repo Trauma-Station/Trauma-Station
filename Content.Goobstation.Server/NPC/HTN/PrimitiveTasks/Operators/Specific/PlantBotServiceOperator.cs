@@ -85,7 +85,7 @@ public sealed partial class PlantbotServiceOperator : HTNOperator
                 _audio.PlayPvs(botComp.WeedSound, target);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-remove-weeds"), InGameICChatType.Speak, hideChat: true, hideLog: true);
             }
-            else if (plantHolderComponent.Harvest) // Trauma
+            else if (plantHolderComponent.Harvest)
             {
                 _plantHolderSystem.DoHarvest(target, owner, plantHolderComponent);
                 _chat.TrySendInGameICMessage(owner, Loc.GetString("plantbot-harvest"), InGameICChatType.Speak, hideChat: true, hideLog: true);

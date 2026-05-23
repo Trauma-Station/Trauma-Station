@@ -16,24 +16,27 @@ public sealed partial class PickBlobPodZombifyTargetOperator : HTNOperator
     [Dependency] private IEntityManager _entManager = default!;
     private NpcFactionSystem _factions = default!;
     private MobStateSystem _mobSystem = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
 
-    [DataField("rangeKey", required: true)]
-    public string RangeKey = string.Empty;
+    public const float Range = 7f;
 
-    [DataField("targetKey", required: true)]
+    [DataField(required: true)]
     public string TargetKey = string.Empty;
 
-    [DataField("zombifyKey")]
+    [DataField(required: true)]
     public string ZombifyKey = string.Empty;
 
     /// <summary>
     /// Where the pathfinding result will be stored (if applicable). This gets removed after execution.
     /// </summary>
-    [DataField("pathfindKey")]
+    [DataField]
     public string PathfindKey = NPCBlackboard.PathfindKey;
+
+    private List<EntityUid> _targets = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -49,42 +52,33 @@ public sealed partial class PickBlobPodZombifyTargetOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entManager))
-            return (false, null);
-
-        var huAppQuery = _entManager.GetEntityQuery<HumanoidProfileComponent>();
-        var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
-
-        var targets = new List<EntityUid>();
-
-        foreach (var entity in _factions.GetNearbyHostiles(owner, range))
+        _targets.Clear();
+        foreach (var entity in _factions.GetNearbyHostiles(owner, Range))
         {
-            if (!huAppQuery.TryGetComponent(entity, out var humanoidAppearance))
+            if (!_humanoidQuery.HasComp(entity))
                 continue;
 
             if (_mobSystem.IsAlive(entity))
                 continue;
 
-            targets.Add(entity);
+            _targets.Add(entity);
         }
 
-        foreach (var target in targets)
+        foreach (var target in _targets)
         {
-            if (!xformQuery.TryGetComponent(target, out var xform))
+            if (!_xformQuery.TryGetComponent(target, out var xform))
                 continue;
 
             var targetCoords = xform.Coordinates;
-            var path = await _pathfinding.GetPath(owner, target, range, cancelToken);
+            var path = await _pathfinding.GetPath(owner, target, Range, cancelToken);
             if (path.Result != PathResult.Path)
-            {
                 continue;
-            }
 
             return (true, new Dictionary<string, object>()
             {
                 { TargetKey, targetCoords },
                 { ZombifyKey, target },
-                { PathfindKey, path}
+                { PathfindKey, path }
             });
         }
 
