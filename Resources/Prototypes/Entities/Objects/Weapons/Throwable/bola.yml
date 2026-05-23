@@ -88,9 +88,9 @@
   components:
   - type: Item
     size: Small
-    shape:
-    - 1,0,1,0
-    - 2,1,2,1
+    shape: # Trauma, is this goob in upstream files or is this straight up present in upstream? I don't know so I comment anyway!
+    - 0,0,1,0
+    - 0,0,1,1
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Throwable/energy_bola.rsi
   - type: Ensnaring
