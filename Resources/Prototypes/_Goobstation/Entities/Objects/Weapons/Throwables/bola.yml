@@ -1,8 +1,8 @@
 - type: entity
+  id: BolaEnergy
+  parent: BaseBola
   name: energy bola
   description: A specialized hardlight bola designed to ensnare fleeing criminals and aid in arrests.
-  parent: BaseBola
-  id: BolaEnergy
   components:
   - type: Item
     size: Small
