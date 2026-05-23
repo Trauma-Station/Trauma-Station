@@ -81,7 +81,7 @@ public sealed partial class TailedEntityComponent : Component
     /// allows the user to offset the tails position on the head entity
     /// </summary>
     [DataField]
-    public Vector2 TailOffset = Vector2.Zero;
+    public Vector2 TailOffset;
 }
 
 [Serializable, NetSerializable, DataRecord]
