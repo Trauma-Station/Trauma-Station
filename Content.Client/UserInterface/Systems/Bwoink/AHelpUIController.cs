@@ -50,10 +50,6 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
     private bool _bwoinkSoundEnabled;
     private string? _aHelpSound;
 
-    // <Trauma>
-    public static Action<AHelpUIController>? OnLoad;
-    // </Trauma>
-
     protected override string SawmillName => "c.s.go.es.bwoink";
 
     public override void Initialize()

@@ -46,7 +46,7 @@ public sealed partial class StaffHelpUIController : UIController, IOnSystemChang
 
         AHelpUIController.OnLoad += OnLoad;
 
-        _config.OnValueChanged(TraumaCVars.RMCMentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
+        _config.OnValueChanged(TraumaCVars.MentorHelpSound, v => _mHelpSound = new SoundPathSpecifier(v), true);
     }
 
     private void OnLoad(AHelpUIController obj)

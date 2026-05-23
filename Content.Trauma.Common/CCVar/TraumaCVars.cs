@@ -225,15 +225,4 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.special_audio_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
-
-    #region Mentor
-    public static readonly CVarDef<float> RMCMentorHelpRateLimitPeriod =
-        CVarDef.Create("trauma.mentor_help_rate_limit_period", 2f, CVar.SERVERONLY);
-
-    public static readonly CVarDef<int> RMCMentorHelpRateLimitCount =
-        CVarDef.Create("trauma.mentor_help_rate_limit_count", 10, CVar.SERVERONLY);
-
-    public static readonly CVarDef<string> RMCMentorHelpSound =
-        CVarDef.Create("trauma.mentor_help_sound", "/Audio/_RMC14/Effects/Admin/mhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
-    #endregion
 }

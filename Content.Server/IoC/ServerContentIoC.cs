@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Server._RMC14.Mentor;
 using Content.Server.LinkAccount;
 using Content.Server.MoMMI;
 // </Trauma>
@@ -88,7 +87,6 @@ internal static class ServerContentIoC
         deps.Register<IMoMMILink, MoMMILink>(); // Trauma
         deps.Register<IPostInjectInit, LinkAccountManager>(); // RMC - Patreon
         deps.Register<LinkAccountManager>(); // RMC - Patreon
-        deps.Register<MentorManager>(); // RMC - Mentor
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
     }

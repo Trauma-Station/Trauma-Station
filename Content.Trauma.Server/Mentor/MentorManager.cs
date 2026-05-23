@@ -9,10 +9,9 @@ using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Mentor;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
-namespace Content.Server._RMC14.Mentor;
+namespace Content.Trauma.Server.Mentor;
 
 public sealed partial class MentorManager : IPostInjectInit
 {
@@ -150,14 +149,14 @@ public sealed partial class MentorManager : IPostInjectInit
         _db.AddOnFinishLoad(FinishLoad);
         _db.AddOnPlayerDisconnect(ClientDisconnected);
 
-        if (_config.IsCVarRegistered(TraumaCVars.RMCMentorHelpRateLimitPeriod.Name) &&
-            _config.IsCVarRegistered(TraumaCVars.RMCMentorHelpRateLimitCount.Name))
+        if (_config.IsCVarRegistered(TraumaCVars.MentorHelpRateLimitPeriod.Name) &&
+            _config.IsCVarRegistered(TraumaCVars.MentorHelpRateLimitCount.Name))
         {
             _rate.Register(
                 RateLimitKey,
                 new RateLimitRegistration(
-                    TraumaCVars.RMCMentorHelpRateLimitPeriod,
-                    TraumaCVars.RMCMentorHelpRateLimitCount,
+                    TraumaCVars.MentorHelpRateLimitPeriod,
+                    TraumaCVars.MentorHelpRateLimitCount,
                     _ => { }
                 )
             );
