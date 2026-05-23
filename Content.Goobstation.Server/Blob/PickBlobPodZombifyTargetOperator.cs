@@ -13,11 +13,11 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed partial class PickBlobPodZombifyTargetOperator : HTNOperator
 {
-    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _ent = default!;
     private NpcFactionSystem _factions = default!;
-    private MobStateSystem _mobSystem = default!;
-    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
-    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
+    private MobStateSystem _mob = default!;
+    private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
@@ -43,8 +43,11 @@ public sealed partial class PickBlobPodZombifyTargetOperator : HTNOperator
         base.Initialize(sysManager);
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
-        _mobSystem = sysManager.GetEntitySystem<MobStateSystem>();
+        _mob = sysManager.GetEntitySystem<MobStateSystem>();
         _factions = sysManager.GetEntitySystem<NpcFactionSystem>();
+
+        _humanoidQuery = GetEntityQuery<HumanoidProfileComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -58,7 +61,7 @@ public sealed partial class PickBlobPodZombifyTargetOperator : HTNOperator
             if (!_humanoidQuery.HasComp(entity))
                 continue;
 
-            if (_mobSystem.IsAlive(entity))
+            if (_mob.IsAlive(entity))
                 continue;
 
             _targets.Add(entity);
