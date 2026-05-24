@@ -52,7 +52,7 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
         if (args.Cancelled || !_roles.MindHasRole<NinjaRoleComponent>(args.MindId))
             return;
         // <Trauma> - get map to check for warp points in below
-        if (args.Mind.OwnedEntity is not { } map)
+        if (args.Mind.OwnedEntity is not { } mob)
             return;
 
         var map = Transform(mob).MapID;
