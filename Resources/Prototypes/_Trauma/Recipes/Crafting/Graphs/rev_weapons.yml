@@ -71,7 +71,6 @@
 
 - type: constructionGraph
   id: RevMaul
-  start: start
   graph:
   - node: start
     edges:
@@ -85,7 +84,6 @@
 
 - type: constructionGraph
   id: RevKunai
-  start: start
   graph:
   - node: start
     edges:
