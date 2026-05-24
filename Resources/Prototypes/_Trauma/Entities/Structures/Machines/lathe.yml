@@ -406,15 +406,6 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/hiddenmedifab.rsi
   - type: SubFloorHide
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.4"
-        density: 190
-        mask:
-        - SubfloorMask
   - type: Lathe
     producingSound:
       path: /Audio/Machines/uniformprinter.ogg
