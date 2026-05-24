@@ -11,10 +11,4 @@ public sealed class EntryPoint : GameServer
     {
         ServerTraumaContentIoC.Register(Dependencies);
     }
-
-    public override void Init()
-    {
-        Dependencies.BuildGraph();
-        Dependencies.InjectDependencies(this);
-    }
 }

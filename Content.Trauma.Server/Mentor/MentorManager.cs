@@ -26,6 +26,8 @@ public sealed partial class MentorManager : IPostInjectInit
 
     private const string RateLimitKey = "MentorHelp";
 
+    private ISawmill _sawmill = default!;
+
     private readonly List<ICommonSession> _activeMentors = new();
     private readonly Dictionary<NetUserId, bool> _mentors = new();
 
@@ -134,7 +136,7 @@ public sealed partial class MentorManager : IPostInjectInit
             }
             catch (Exception e)
             {
-                _log.RootSawmill.Error($"Error sending mentor help message:\n{e}");
+                _sawmill.Error($"Error sending mentor help message:\n{e}");
             }
         }
     }
@@ -145,6 +147,8 @@ public sealed partial class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorSendMessageMsg>(OnMentorSendMessage);
         _net.RegisterNetMessage<MentorHelpMsg>(OnMentorHelpMessage);
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>();
+
+        _sawmill = _log.GetSawmill("mhelp");
 
         _db.AddOnFinishLoad(FinishLoad);
         _db.AddOnPlayerDisconnect(ClientDisconnected);
