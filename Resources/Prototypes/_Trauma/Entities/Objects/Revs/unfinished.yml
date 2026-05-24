@@ -251,26 +251,13 @@
     node: empty
 
 - type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
-  id: RevFuelFrame
-  name: empty fuel tank
-  description: A frame for a flamethrower fuel tank
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/unfinished.rsi
-    state: icon
-  - type: Tag
-    tags:
-    - RevFuelTank
-
-- type: entity
   parent: BaseUnfinishedRevWeapon
   id: RevMaulHead
   name: unfinished maul parts
   description: An unfinished maul, use some wood to complete it.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/upgradecomponents.rsi/
+    sprite: _Trauma/Objects/Revs/upgradecomponents.rsi
     state: maul
   - type: Construction
     graph: RevMaul
@@ -282,7 +269,7 @@
   description: An unfinished kunai, use some wood to complete it.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/upgradecomponents.rsi/
+    sprite: _Trauma/Objects/Revs/upgradecomponents.rsi
     state: kunai
   - type: Construction
     graph: RevKunai
