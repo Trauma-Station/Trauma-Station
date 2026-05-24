@@ -1,4 +1,4 @@
-﻿namespace Content.Client.UserInterface.Systems.Bwoink;
+namespace Content.Client.UserInterface.Systems.Bwoink;
 
 public sealed partial class AHelpUIController
 {
