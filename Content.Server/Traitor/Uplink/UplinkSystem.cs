@@ -39,8 +39,10 @@ public sealed partial class UplinkSystem : EntitySystem
 
     private void OnRemoteStoreImplanted(Entity<RemoteStoreComponent> entity, ref ImplantImplantedEvent args)
     {
-        if (_mind.GetMind(args.Implanted) is not { } mind )
-            return;
+        // <Trauma> - dont return if mind is null
+        // need to create an uplink even if it has no mind, so spawning mobs with uplink implant works
+        var mind = _mind.GetMind(args.Implanted);
+        // </Trauma>
 
         var storeEnumerator = EntityQueryEnumerator<RingerAccessUplinkComponent, StoreComponent>();
         while (storeEnumerator.MoveNext(out var uid, out _, out var store))
