@@ -48,6 +48,8 @@
   suffix: Full
   description: 240 round low-caliber pan magazine, often used by communists and other assholes.
   components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/maxim.rsi
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:

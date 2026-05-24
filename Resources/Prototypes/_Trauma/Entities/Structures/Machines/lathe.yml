@@ -424,8 +424,6 @@
     - ChemistryStatic
     - SurgeryStatic
     - MedicalStatic
-    - MedicalClothingStatic
-    - MedicalBoardsStatic
   - type: MaterialStorage
     whitelist:
       tags:
