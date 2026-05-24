@@ -72,7 +72,7 @@
 
 - type: latheRecipe
   parent: BaseRevMedical
-  id: Brutepack
+  id: RevBrutepack
   result: Brutepack
 
 - type: latheRecipe
