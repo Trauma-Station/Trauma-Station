@@ -105,6 +105,6 @@
   - type: Construction
     deconstructionTarget: null
     graph: RevGuns
-    node: proletariat
+    node: Proletariat
   - type: ContainerFill
     containers: {}
