@@ -112,6 +112,9 @@
   recipes:
   - MedicatedSuture
   - RegenerativeMesh
+  - RevGauze
+  - RevBrutepack
+  - RevOintment
 
 - type: latheRecipePack
   id: RevFoundryStatic
