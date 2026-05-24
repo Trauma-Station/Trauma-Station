@@ -60,7 +60,7 @@
         priority: 1
         whitelist:
           tags:
-            - CartridgeTurret
+          - CartridgeTurret
   - type: ContainerFill
     containers:
       gun_magazine: [ BaseMagazineTurretHeavy ]
