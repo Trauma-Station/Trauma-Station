@@ -67,7 +67,7 @@
 - type: construction
   parent: BaseRevMachine
   id: RevMedFab
-  targetNode: hidden medical fabricator
+  targetNode: hidden medifab
 
 # Turrets
 

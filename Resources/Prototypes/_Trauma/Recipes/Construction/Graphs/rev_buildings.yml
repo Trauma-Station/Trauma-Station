@@ -173,7 +173,7 @@
         amount: 10
       - tool: Anchoring
         doAfter: 1
-    - to: hidden medical fabricator
+    - to: hidden medifab
       steps:
       - tag: HudMedical # Bully medical for it
       - tool: Screwing
@@ -248,5 +248,5 @@
     entity: RevTechAnalyzer
   - node: plasma foundry
     entity: RevPlasmaFoundry
-  - node: hidden medical fabricator
+  - node: hidden medifab
     entity: RevMedFab

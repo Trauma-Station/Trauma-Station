@@ -12,9 +12,10 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/LightMachineGuns/proletariat_inhands_x64.rsi/
     size: Huge
     shape:
-    - 0,0,4,3
+    - 0,0,5,3
   - type: Clothing
     sprite: Objects/Weapons/Guns/LMGs/l6.rsi
     quickEquip: false
@@ -23,10 +24,10 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
-    minAngle: 22.5
-    maxAngle: 45
+    minAngle: 10
+    maxAngle: 30
     fireRate: 4
-    angleIncrease: 3
+    angleIncrease: 1 # its a 22
     angleDecay: 16
     selectedMode: FullAuto
     availableModes:
@@ -37,8 +38,8 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -12.5
-    maxAngle: -30
+    minAngle: -10
+    maxAngle: -25
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/smg_cock.ogg

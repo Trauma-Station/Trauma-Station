@@ -44,19 +44,43 @@
     Steel: 500
 
 - type: latheRecipe
-  id: RegenerativeMesh
-  result: RegenerativeMesh
+  abstract: true
+  id: BaseRevMedical
   categories:
   - Medical
+  materials:
+    Cloth: 50
+    Plasma: 50
+
+- type: latheRecipe
+  abstract: true
+  parent: BaseRevMedical
+  id: BaseRevMedicalAdvanced
   materials:
     Cloth: 100
     Plasma: 100
 
 - type: latheRecipe
+  parent: BaseRevMedicalAdvanced
+  id: RegenerativeMesh
+  result: RegenerativeMesh
+
+- type: latheRecipe
+  parent: BaseRevMedicalAdvanced
   id: MedicatedSuture
   result: MedicatedSuture
-  categories:
-  - Medical
-  materials:
-    Cloth: 100
-    Plasma: 100
+
+- type: latheRecipe
+  parent: BaseRevMedical
+  id: Brutepack
+  result: Brutepack
+
+- type: latheRecipe
+  parent: BaseRevMedical
+  id: RevOintment
+  result: Ointment
+
+- type: latheRecipe
+  parent: BaseRevMedical
+  id: RevGauze
+  result: Gauze

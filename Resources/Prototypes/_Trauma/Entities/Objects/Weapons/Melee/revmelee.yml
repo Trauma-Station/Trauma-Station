@@ -79,7 +79,10 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Ginormous
+    size: Huge
+    shape:
+    - 0,0,7,0
+    storedRotation: 45
   - type: IncreaseDamageOnWield
     damage:
       types:
@@ -142,7 +145,10 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Ginormous
+    size: Huge
+    shape:
+    - 0,0,8,0
+    storedRotation: 45
   - type: EmbeddableProjectile
   - type: ThrowingAngle
     angle: 225
@@ -340,9 +346,10 @@
     range: 1.70
     damage:
       types:
-        Blunt: 10
-        Structural: 15
+        Blunt: 20
+        Structural: 20
       armorPenetration: 0.75
+      bluntStaminaDamageFactor: 1.5
     soundHit:
       path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
   - type: Item
@@ -356,8 +363,8 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 15
-        Structural: 25
+        Blunt: 5
+        Structural: 20
   - type: Wieldable
 
 - type: entity

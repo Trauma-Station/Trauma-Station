@@ -400,11 +400,11 @@
 - type: entity
   parent: BaseRevIndustry
   id: RevMedFab
-  name: hidden medical fabricator
+  name: hidden medifab
   description: A hidden subfloor fabricator that can make medical equipment.
   components:
   - type: Sprite
-    sprite: _Trauma/Structures/Machines/revforge.rsi
+    sprite: _Trauma/Structures/Machines/hiddenmedifab.rsi
   - type: SubFloorHide
   - type: Fixtures
     fixtures:
@@ -417,10 +417,9 @@
         - SubfloorMask
   - type: Lathe
     producingSound:
-      path: /Audio/_Trauma/Revs/strike.ogg
-    runningState: revforge
+      path: /Audio/Machines/uniformprinter.ogg
+    runningState: icon
     staticPacks:
-    - TopicalsStatic
     - RevMedicalStatic
     - ChemistryStatic
     - SurgeryStatic
@@ -442,4 +441,4 @@
     containers:
     - blueprint
   - type: Construction
-    node: hidden medical fabricator
+    node: hidden medifab

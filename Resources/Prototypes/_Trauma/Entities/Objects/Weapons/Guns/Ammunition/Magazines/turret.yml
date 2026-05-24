@@ -44,9 +44,9 @@
 - type: entity
   parent: BaseMagazineTurret
   id: BaseMagazineTurretHeavy
-  name: "circular magazine (.22 short)"
+  name: "pan magazine (.22 short)"
   suffix: Full
-  description: 275 round low-caliber magazine, often used by communists and other assholes.
+  description: 240 round low-caliber pan magazine, often used by communists and other assholes.
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
@@ -54,12 +54,12 @@
       tags:
         - CartridgeTurret
     proto: CartridgeTurret
-    capacity: 275
+    capacity: 240
   - type: Item
     size: Normal
 
 - type: entity
-  parent: BaseMagazineTurret
+  parent: BaseMagazineTurretHeavy
   id: BaseMagazineTurretHeavyEmpty
   suffix: Empty
   components:
