@@ -178,8 +178,6 @@
       - tag: HudMedical # Bully medical for it
         name: construction-graph-tag-medical-hud
         icon:
-        sprite: Clothing/Eyes/Hud/med.rsi
-        state: icon
       - tool: Screwing
         doAfter: 1
       - material: Glass
