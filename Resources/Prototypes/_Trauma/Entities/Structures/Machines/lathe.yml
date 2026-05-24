@@ -406,6 +406,11 @@
   - type: Sprite
     sprite: _Trauma/Structures/Machines/hiddenmedifab.rsi
   - type: SubFloorHide
+  - type: Visibility # This kills the test fail.
+  - type: CollideOnAnchor # This kills the test fail.
+  - type: Physics # This kills the test fail.
+    bodyType: Static
+    canCollide: false
   - type: Lathe
     producingSound:
       path: /Audio/Machines/uniformprinter.ogg
