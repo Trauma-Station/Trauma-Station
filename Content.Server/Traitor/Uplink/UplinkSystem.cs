@@ -57,7 +57,7 @@ public sealed partial class UplinkSystem : EntitySystem
         // If we didn't have an uplink, make an empty one.
         entity.Comp.Store = Spawn(TraitorUplinkStore, MapCoordinates.Nullspace);
         SetUplink(args.Implanted, entity.Comp.Store.Value, 0, false);
-        Log.Error($"{ToPrettyString(args.Implanted)} did not have an uplink when they were implanted.");
+        //Log.Error($"{ToPrettyString(args.Implanted)} did not have an uplink when they were implanted."); // Trauma - implanting a non-traitor isnt an error
     }
 
     /// <summary>
