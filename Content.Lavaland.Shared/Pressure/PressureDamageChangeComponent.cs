@@ -1,25 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Atmos;
-
 namespace Content.Lavaland.Shared.Pressure;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class PressureDamageChangeComponent : Component
 {
-    [DataField]
-    public bool Enabled = true;
-
-    [DataField]
-    public float LowerBound = Atmospherics.OneAtmosphere * 0.2f;
-
-    [DataField]
-    public float UpperBound = Atmospherics.OneAtmosphere * 0.5f;
-
-    [DataField]
-    public bool ApplyWhenInRange = true;
-
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float AppliedModifier = 2f; // Becomes 2 times better when in lavaland pressure environment
 
     [DataField]

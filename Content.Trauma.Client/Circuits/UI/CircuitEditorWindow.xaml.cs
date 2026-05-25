@@ -174,7 +174,7 @@ public sealed partial class CircuitEditorWindow : FancyWindow
             var center = pin.GlobalPosition + pin.Size * 0.5f;
             var mousePos = MousePos;
             if (ClipEnd(center, ref mousePos, bounds))
-                handle.DrawLine(center, mousePos, LinkingColor);
+                handle.DrawLine(center * UIScale, mousePos * UIScale, LinkingColor);
         }
     }
 
@@ -183,7 +183,7 @@ public sealed partial class CircuitEditorWindow : FancyWindow
         var start = output.GlobalPosition + output.Size * 0.5f;
         var end = input.GlobalPosition + input.Size * 0.5f;
         if (ClipBoth(ref start, ref end, bounds))
-            handle.DrawLine(start, end, LinkedColor);
+            handle.DrawLine(start * UIScale, end * UIScale, LinkedColor);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

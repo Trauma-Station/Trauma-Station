@@ -64,11 +64,11 @@ public sealed partial class CircuitComponent : Component
     public object GetValue(CircuitIndex idx)
     {
         if (idx.GateIndex is { } g)
-            return Data.Gates.TryGetValue(g, out var gate) ? gate.Output : false;
+            return Data.Gates.TryGetValue(g, out var gate) ? gate.Output : False.Instance;
         if (idx.PortIndex is { } p)
-            return Inputs.TryGetValue(p, out var input) ? input : false;
+            return Inputs.TryGetValue(p, out var input) ? input : False.Instance;
 
-        return false;
+        return False.Instance;
     }
 
     /// <summary>
@@ -79,12 +79,14 @@ public sealed partial class CircuitComponent : Component
     {
         switch (GetValue(i))
         {
-            case bool b:
-                return b;
-            case Pulse:
+            case True t:
                 return true;
-            case int n:
-                return n != 0;
+            case False f:
+                return false;
+            case Pulse p:
+                return true;
+            case Integer n:
+                return n.Value != 0;
             default:
                 return false;
         }
@@ -98,12 +100,14 @@ public sealed partial class CircuitComponent : Component
     {
         switch (GetValue(i))
         {
-            case bool b:
-                return b ? 1 : 0;
-            case Pulse:
+            case True t:
                 return 1;
-            case int n:
-                return n;
+            case False f:
+                return 0;
+            case Pulse p:
+                return 1;
+            case Integer n:
+                return n.Value;
             default:
                 return 0;
         }
@@ -123,11 +127,11 @@ public sealed partial class CircuitComponent : Component
         // ensure required input port data exists
         var count = CircuitComponent.PortsCount;
         while (Inputs.Count < count)
-            Inputs.Add(false);
+            Inputs.Add(False.Instance);
         while (LinkedInputs.Count < count)
             LinkedInputs.Add(new());
         while (LastOutputs.Count < count)
-            LastOutputs.Add(false);
+            LastOutputs.Add(False.Instance);
         while (Data.OutputIndices.Count < count)
             Data.OutputIndices.Add(CircuitIndex.Invalid);
     }
@@ -144,6 +148,28 @@ public sealed partial class CircuitComponent : Component
             Data.Gates[g].LinkOutput(output);
         else if (input.PortIndex is { } p)
             LinkInputPort(p, output);
+    }
+
+    /// <summary>
+    /// Link all gate outputs together.
+    /// </summary>
+    public void LinkGateOutputs()
+    {
+        for (var i = 0; i < Data.Gates.Count; i++)
+        {
+            var gate = Data.Gates[i];
+            var output = CircuitIndex.Gate(i);
+            foreach (var input in gate.Inputs)
+            {
+                LinkOutput(input, output);
+            }
+        }
+
+        for (var i = 0; i < Data.OutputIndices.Count; i++)
+        {
+            var input = Data.OutputIndices[i];
+            LinkOutput(input, CircuitIndex.Port(i));
+        }
     }
 
     /// <summary>

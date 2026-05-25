@@ -33,7 +33,7 @@ public sealed class CircuitPinControl : PanelContainer
         PanelOverride = new StyleBoxTexture()
         {
             Texture = cache.GetResource<TextureResource>(path).Texture,
-            Mode = StyleBoxTexture.StretchMode.Tile
+            Mode = StyleBoxTexture.StretchMode.Stretch
         };
         MinSize = new Vector2(32f, 32f);
     }
