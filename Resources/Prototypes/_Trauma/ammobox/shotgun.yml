@@ -7,9 +7,5 @@
   - type: Construction
 
   - type: Sprite
-    layers:
-    - state: pellets
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-
+    layers: Objects\Weapons\Guns\Ammunition\Boxes\shotgun.rsi
+    state: "lethal"
