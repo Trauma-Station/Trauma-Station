@@ -76,17 +76,6 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#ba7710"
-- type: entity
-  parent: AmmoProviderShotgunShell
-  id: BoxShotgunShellsEmpty
-  name: ammunition box (12 Gauge)
-
-  components:
-  - type: Construction
-
-  - type: Sprite
-    sprite: Objects/Storage/boxes.rsi
-    state: box
 
 - type: entity
   parent: BaseMagazineShotgun

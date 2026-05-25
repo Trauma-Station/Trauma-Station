@@ -1,7 +1,6 @@
 - type: construction
   id: BoxShotgunShellsEmpty
   graph: BoxShotgunShellsEmptyGraph
-  startNode: start
   targetNode: finished
   category: construction-category-storage
   objectType: Item
