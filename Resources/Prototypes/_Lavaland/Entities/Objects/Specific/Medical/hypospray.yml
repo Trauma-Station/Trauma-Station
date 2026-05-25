@@ -50,7 +50,7 @@
 
 # doesn't get any better than this
 - type: entity
-  name: luxury medipen
+  name: luxurium medipen
   parent: ChemicalMedipen
   id: LuxuryMedipen
   description: A medipen containing medicines both ordinary and exotic to keep Nanotrasen's finest miners going. Harmful to use outside of low-pressure environments.
@@ -68,7 +68,6 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        # <Trauma>
         maxVol: 40
         reagents:
           - ReagentId: Luxurium
@@ -77,4 +76,3 @@
             Quantity: 10
           - ReagentId: Saline
             Quantity: 10
-          # </Trauma>

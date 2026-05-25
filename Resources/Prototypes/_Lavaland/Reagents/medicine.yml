@@ -94,7 +94,6 @@
   metabolisms:
     Bloodstream:
       effects:
-      # <Trauma>
       # Healing done only between 0-50kpa, poisoning has different damage
       - !type:EvenHealthChange
         conditions:
@@ -131,7 +130,6 @@
           inverted: true
           min: 0
           max: 50
-      # </Trauma>
 
 - type: reagent
   id: VitriumFroth
