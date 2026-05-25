@@ -6,6 +6,40 @@
   name: personal ai device
   description: Your electronic pal who's fun to be with!
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic # Add individual languages so they can speak in said language for privacy.
+    - Bubblish
+    - Draconic
+    - SolCommon
+    - RootSpeak
+    - Moffic
+    - RobotTalk
+    - DroneTalk
+    - Elyran
+    - Freespeak
+    - Tradeband
+    - NewKinPidgin
+    understands:
+    - TauCetiBasic # Add individual languages so they can understand without understanding animals.
+    - Bubblish
+    - Draconic
+    - SolCommon
+    - RootSpeak
+    - Moffic
+    - RobotTalk
+    - DroneTalk
+    - Elyran
+    - Freespeak
+    - Tradeband
+    - NewKinPidgin
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: IntellicardableMind
+  # </Trauma>
   - type: Instrument
     allowPercussion: false
     handheld: false
@@ -60,11 +94,6 @@
     channels:
     # - Binary # Goobstation - replaced with collective mind
     - Common
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: DoAfter
   - type: Actions
   - type: ActionGrant
@@ -105,35 +134,6 @@
       components:
         - SecretStash
         - WrappedParcel
-  # Einstein Engines - Language begin
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic # Add individual languages so they can speak in said language for privacy.
-    - Bubblish
-    - Draconic
-    - SolCommon
-    - RootSpeak
-    - Moffic
-    - RobotTalk
-    - DroneTalk
-    - Elyran
-    - Freespeak
-    - Tradeband
-    - NewKinPidgin
-    understands:
-    - TauCetiBasic # Add individual languages so they can understand without understanding animals.
-    - Bubblish
-    - Draconic
-    - SolCommon
-    - RootSpeak
-    - Moffic
-    - RobotTalk
-    - DroneTalk
-    - Elyran
-    - Freespeak
-    - Tradeband
-    - NewKinPidgin
-  # Einstein Engines - Language end
   - type: Vocal
     sounds:
       Unsexed: UnisexSilicon

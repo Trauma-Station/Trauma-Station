@@ -16,8 +16,9 @@
       types:
         Slash: 12
   - type: PressureDamageChange
-    lowerBound: 0
     appliedModifier: 1.25
+  - type: PressureEfficiency
+    lowerBound: 0
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
     offset: -0.15,0.0
@@ -78,8 +79,9 @@
     mustBeEquippedToUse: true
     heavyStaminaCost: 4 # No skill?
   - type: PressureDamageChange
-    lowerBound: 0
     appliedModifier: 1.25
+  - type: PressureEfficiency
+    lowerBound: 0
   - type: Sharp
   - type: Prying
   - type: UseDelay
@@ -126,8 +128,9 @@
     range: 2 # Like a crusher, makes it possible to hit enemies without them hitting you
   # TODO make it wearable on a belt/back slot
   - type: PressureDamageChange
-    lowerBound: 0
     appliedModifier: 1.25
+  - type: PressureEfficiency
+    lowerBound: 0
   - type: Item
     size: Normal
     sprite: _Lavaland/Objects/Weapons/Secondary/kinetic_machete-inhands.rsi

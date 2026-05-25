@@ -6,11 +6,13 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Circuits;
 
 public sealed partial class CircuitEditorSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -44,7 +46,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
     private void OnCircuitChanged(EntityUid uid, CircuitEditorComponent comp, ContainerModifiedMessage args)
     {
         if (args.Container.ID == comp.SlotId)
-            UpdateUI(uid, args.Entity);
+            UpdateUI((uid, comp));
     }
 
     private void OnClear(Entity<CircuitEditorComponent> ent, ref CircuitEditorClearMessage args)
@@ -83,6 +85,8 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         }
 
         circuit.Comp.Data = data;
+        circuit.Comp.ValidatePortsCount();
+        circuit.Comp.LinkGateOutputs();
 
         var size = data.Gates.Count;
         _adminLog.Add(LogType.Circuits, LogImpact.Medium, $"Circuit {circuit.Owner} imported {size} gates by {args.Actor} using {ent.Owner}");
@@ -127,7 +131,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
 
     private void OnRemoveGate(Entity<CircuitEditorComponent> ent, ref CircuitEditorRemoveGateMessage args)
     {
-        if (args.Index < 0 || GetCircuit(ent) is not { } circuit)
+        if (!_timing.IsFirstTimePredicted || args.Index < 0 || GetCircuit(ent) is not { } circuit)
             return;
 
         var data = circuit.Comp.Data;
@@ -277,17 +281,10 @@ public sealed partial class CircuitEditorSystem : EntitySystem
 
     public void UpdateUI(Entity<CircuitEditorComponent> ent)
     {
-        var circuit =  GetCircuit(ent);
+        var circuit = GetCircuit(ent);
         var data = circuit?.Comp.Data;
         var state = new CircuitEditorState(data, GetNetEntity(circuit?.Owner));
         _ui.SetUiState(ent.Owner, CircuitEditorUiKey.Key, state);
-    }
-
-    public void UpdateUI(EntityUid uid, EntityUid circuit)
-    {
-        var data = _query.CompOrNull(circuit)?.Data;
-        var state = new CircuitEditorState(data, GetNetEntity(circuit));
-        _ui.SetUiState(uid, CircuitEditorUiKey.Key, state);
     }
 
     private static void SwapValue(List<CircuitIndex> list, CircuitIndex from, CircuitIndex to)

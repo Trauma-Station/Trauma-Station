@@ -120,10 +120,10 @@
     - state: shooting
   - type: KnowledgeGrantOnUse
     skills:
-      MeleeKnowledge: 35
+      ShootingKnowledge: 35
       WeaponsKnowledge: 35
     experience:
-      MeleeKnowledge: 5
+      ShootingKnowledge: 5
       WeaponsKnowledge: 4
     doAfter: 2
 

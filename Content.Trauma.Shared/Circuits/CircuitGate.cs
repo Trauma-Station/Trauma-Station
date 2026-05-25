@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Factory.Filters;
 using Content.Shared.DeviceLinking;
+using Content.Goobstation.Shared.Factory.Filters;
 
 namespace Content.Trauma.Shared.Circuits;
 
@@ -17,16 +17,49 @@ public enum GateValue : byte
     Any
 }
 
-/// <summary>
-/// A momentary signal pulse which gets changed to false on the next tick.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class Pulse
+// need these wrapper classes because reflection manager yml tag lookup is broken and refuses to use structs like Int32 or Boolean...
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class True
 {
-    /// <summary>
-    /// Instance used when handling signal state.
-    /// </summary>
+    public override string ToString() => "true";
+
+    public static readonly True Instance = new();
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class False
+{
+    public override string ToString() => "false";
+
+    public static readonly False Instance = new();
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class Pulse
+{
+    public override string ToString() => "pulse";
+
     public static readonly Pulse Instance = new();
+}
+
+[DataRecord, Serializable, NetSerializable]
+public sealed partial class Integer
+{
+    public Integer()
+    {
+    }
+
+    public Integer(int value)
+    {
+        Value = value;
+    }
+
+    public int Value;
+
+    public override string ToString()
+        => Value.ToString();
+
+    public static readonly Integer Zero = new();
 }
 
 /// <summary>
@@ -41,6 +74,19 @@ public abstract partial class CircuitGate
     /// </summary>
     public static readonly Vector2 MaxOffset = new Vector2(500f, 500f);
 
+    // TODO: make custom serializer for it
+    /// <summary>
+    /// Only these C# types are allowed for output values.
+    /// </summary>
+    private static Type[] AllowedTypes =
+    [
+        typeof(True),
+        typeof(False),
+        typeof(Pulse),
+        typeof(Integer),
+        typeof(String)
+    ];
+
     /// <summary>
     /// The circuit input indices of this gate.
     /// </summary>
@@ -49,12 +95,12 @@ public abstract partial class CircuitGate
 
     // have to make this nullable because serialization generator is dogshit and doesnt support just plain object
     [DataField("output")]
-    protected object? _output = false;
+    private object? _output;
 
     /// <summary>
     /// The last output of this gate.
     /// </summary>
-    public object Output => _output ?? false;
+    public object Output => _output ?? False.Instance;
 
     /// <summary>
     /// Where it is in the editor UI.
@@ -73,13 +119,13 @@ public abstract partial class CircuitGate
     /// </summary>
     public void Initialize()
     {
-        _output = OutputType switch
+        if (_output?.GetType() is { } type && !AllowedTypes.Contains(type))
+            _output = null;
+        _output ??= OutputType switch
         {
-            GateValue.Bool => false,
-            GateValue.Int => 0,
+            GateValue.Int => Integer.Zero,
             GateValue.String => string.Empty,
-            GateValue.Any => false,
-            _ => false
+            _ => False.Instance
         };
     }
 
@@ -90,8 +136,14 @@ public abstract partial class CircuitGate
 
     /// <summary>
     /// Category used in the UI to sort gates.
+    /// If this is empty, it will not be listed in the picker.
     /// </summary>
     public abstract string Category { get; }
+
+    /// <summary>
+    /// User-facing tooltop if this gate, shown on hover.
+    /// </summary>
+    public abstract string Desc { get; }
 
     /// <summary>
     /// Type of value this gate can output.
@@ -115,6 +167,37 @@ public abstract partial class CircuitGate
     public virtual void AddVariants(List<CircuitGate> gates)
     {
         gates.Add(this);
+    }
+
+    protected void SetOutput(bool value)
+    {
+        _output = value ? True.Instance : False.Instance;
+    }
+
+    protected void SetOutput(int value)
+    {
+        if (_output is Integer existing)
+            existing.Value = value;
+        else
+            _output = new Integer(value);
+    }
+
+    protected void SetOutput(string value)
+    {
+        _output = value;
+    }
+
+    protected void SetOutputToObject(object value)
+    {
+        _output = value;
+    }
+
+    protected void CopyOutputFromObject(object value)
+    {
+        if (value is Integer integer)
+            _output = new Integer(integer.Value); // only datatype that needs to be deep copied is the int wrapper
+        else
+            _output = value; // everything else has no data or can be passed as-is (string)
     }
 
     /// <summary>
@@ -148,6 +231,26 @@ public abstract partial class CircuitGate
 }
 
 /// <summary>
+/// A constant value source.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class CircuitConstantGate : CircuitGate
+{
+    public CircuitConstantGate(object value)
+    {
+        SetOutputToObject(value);
+    }
+
+    public override string Name => "CONST";
+    public override string Category => string.Empty; // UI has a dedicated thing to add constants, hide it
+    public override string Desc => $"Always has a constant output value: {Output}";
+    public override GateValue OutputType => GateValue.Any;
+    public override int InputCount => 0;
+
+    public override void Update(CircuitComponent comp) {}
+}
+
+/// <summary>
 /// Stores any value when second input is true.
 /// Output is always the stored value.
 /// </summary>
@@ -157,12 +260,13 @@ public sealed partial class CircuitMemoryCell : CircuitGate
     public override string Name => "MEM";
     public override string Category => "Misc";
     public override GateValue OutputType => GateValue.Any;
+    public override string Desc => "Always outputs the value stored in memory.\nIf the second output is set to true, stores the first input to memory.";
     public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
         if (comp.GetBool(Inputs[1]))
-            _output = comp.GetValue(Inputs[0]);
+            CopyOutputFromObject(comp.GetValue(Inputs[0]));
     }
 }
 
@@ -180,6 +284,16 @@ public sealed partial class CircuitLogicGate : CircuitGate
 
     public override string Name => Gate.ToString().ToUpper();
     public override string Category => "Boolean Logic";
+    public override string Desc => Gate switch
+    {
+        LogicGate.Or => "True if at least 1 input is true",
+        LogicGate.And => "True if both inputs are true",
+        LogicGate.Xor => "True if the inputs are different",
+        LogicGate.Nor => "True if both inputs are false",
+        LogicGate.Nand => "True if at most 1 input is true",
+        LogicGate.Xnor => "True if the inputs are the same",
+        _ => string.Empty
+    };
     public override GateValue OutputType => GateValue.Bool;
     public override int InputCount => 2;
 
@@ -187,7 +301,7 @@ public sealed partial class CircuitLogicGate : CircuitGate
     {
         var a = comp.GetBool(Inputs[0]);
         var b = comp.GetBool(Inputs[1]);
-        _output = Gate switch
+        SetOutput(Gate switch
         {
             LogicGate.Or => a || b,
             LogicGate.And => a && b,
@@ -196,7 +310,7 @@ public sealed partial class CircuitLogicGate : CircuitGate
             LogicGate.Nand => !(a && b),
             LogicGate.Xnor => a == b,
             _ => false
-        };
+        });
     }
 
     public override void AddVariants(List<CircuitGate> gates)
@@ -220,13 +334,34 @@ public sealed partial class CircuitStrLenGate : CircuitGate
 {
     public override string Name => "LEN";
     public override string Category => "Strings";
+    public override string Desc => "Outputs the input string's length as an integer";
     public override GateValue OutputType => GateValue.Int;
     public override int InputCount => 1;
 
     public override void Update(CircuitComponent comp)
     {
         var s = comp.GetString(Inputs[0]);
-        _output = s.Length;
+        SetOutput(s.Length);
+    }
+}
+
+/// <summary>
+/// Binary gate that gets the integer value of the nth char of a string.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class CircuitStrCharGate : CircuitGate
+{
+    public override string Name => "CHAR";
+    public override string Category => "Strings";
+    public override string Desc => "First input: string, second input: int, output: int value of the string at that position";
+    public override GateValue OutputType => GateValue.Int;
+    public override int InputCount => 2;
+
+    public override void Update(CircuitComponent comp)
+    {
+        var s = comp.GetString(Inputs[0]);
+        var i = comp.GetInt(Inputs[1]);
+        SetOutput(i < s.Length ? (int) s[i] : 0);
     }
 }
 
@@ -241,21 +376,29 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
 
     public override string Name => Mode.ToString().ToUpper();
     public override string Category => "Strings";
+    public override string Desc => Mode switch
+    {
+        NameFilterMode.Contain => "True if the first input string contains the second input string",
+        NameFilterMode.Start => "True if the first input string starts with the second input string",
+        NameFilterMode.End => "True if the first input string ends with the second input string",
+        NameFilterMode.Match => "True if the first input string is the same as the second input string",
+        _ => string.Empty
+    };
     public override GateValue OutputType => GateValue.Bool;
-    public override int InputCount => 1;
+    public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
         var s = comp.GetString(Inputs[0]);
         var check = comp.GetString(Inputs[1]);
-        _output = Mode switch
+        SetOutput(Mode switch
         {
             NameFilterMode.Contain => s.Contains(check),
             NameFilterMode.Start => s.StartsWith(check),
             NameFilterMode.End => s.EndsWith(check),
             NameFilterMode.Match => s == check,
             _ => false
-        };
+        });
     }
 
     public override void AddVariants(List<CircuitGate> gates)
@@ -282,6 +425,21 @@ public sealed partial class CircuitMathGate : CircuitGate
 
     public override string Name => Op.ToString().ToUpper();
     public override string Category => "Maths";
+    public override string Desc => Op switch
+    {
+        // if you need this you need to go to school...
+        MathOp.Add => "Sum of the inputs",
+        MathOp.Sub => "First input minus the second input",
+        MathOp.Mul => "Prodcut of the inputs",
+        MathOp.Div => "First input divided by the second input",
+        MathOp.Rem => "Remainder of dividing the first input by the second input",
+        MathOp.Bor => "Bitwise OR of the inputs",
+        MathOp.Band => "Bitwise AND of the inputs",
+        MathOp.Bxor => "Bitwise XOR of the inputs",
+        MathOp.Bls => "Shift the first input left by the second input bits",
+        MathOp.Brs => "Shift the first input right by the second input bits",
+        _ => string.Empty
+    };
     public override GateValue OutputType => GateValue.Int;
     public override int InputCount => 2;
 
@@ -289,7 +447,7 @@ public sealed partial class CircuitMathGate : CircuitGate
     {
         var a = comp.GetInt(Inputs[0]);
         var b = comp.GetInt(Inputs[1]);
-        _output = Op switch
+        SetOutput(Op switch
         {
             // arithmetic
             MathOp.Add => a + b,
@@ -304,7 +462,7 @@ public sealed partial class CircuitMathGate : CircuitGate
             MathOp.Bls => a << b,
             MathOp.Brs => a >> b,
             _ => 0
-        };
+        });
     }
 
     public override void AddVariants(List<CircuitGate> gates)
@@ -355,6 +513,16 @@ public sealed partial class CircuitCompareGate : CircuitGate
         _ => "?"
     };
     public override string Category => "Integers";
+    public override string Desc => Op switch
+    {
+        CompareOp.Equal => "True if the input integers are equal",
+        CompareOp.NotEqual => "True if the input integers are not equal",
+        CompareOp.Greater => "True if the first input is greater than the second input",
+        CompareOp.GreaterEqual => "True if the first input is greather than or equal to the second input",
+        CompareOp.Less => "True if the first input is less than the second input",
+        CompareOp.LessEqual => "Ttrue if the first input is less than or equal to the second input",
+        _ => string.Empty
+    };
     public override GateValue OutputType => GateValue.Bool;
     public override int InputCount => 2;
 
@@ -362,7 +530,7 @@ public sealed partial class CircuitCompareGate : CircuitGate
     {
         var a = comp.GetInt(Inputs[0]);
         var b = comp.GetInt(Inputs[1]);
-        _output = Op switch
+        SetOutput(Op switch
         {
             CompareOp.Equal => a == b,
             CompareOp.NotEqual => a != b,
@@ -371,7 +539,7 @@ public sealed partial class CircuitCompareGate : CircuitGate
             CompareOp.Less => a < b,
             CompareOp.LessEqual => a <= b,
             _ => false
-        };
+        });
     }
 
     public override void AddVariants(List<CircuitGate> gates)

@@ -15,7 +15,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <gfx:StyleBoxFlat BackgroundColor="#252525"/>
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Horizontal">
-                <Label Name="NameLabel" Margin="2"/>
+                <Label Name="NameLabel" Margin="4" MinWidth="30" Align="Center"/>
                 <controls:ConfirmButton Name="RemoveButton" Text="X" ConfirmationText="X" Margin="4" MaxHeight="32"/>
             </BoxContainer>
         </PanelContainer>

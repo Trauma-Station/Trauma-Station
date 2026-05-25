@@ -65,10 +65,10 @@ public sealed partial class CircuitSystem : EntitySystem
                 if (comp.Inputs[i] is not Pulse p)
                     continue;
 
-                comp.Inputs[i] = false;
+                comp.Inputs[i] = False.Instance;
                 foreach (var input in comp.LinkedInputs[i])
                 {
-                    ValueChanged(comp, input, false);
+                    ValueChanged(comp, input, False.Instance);
                 }
             }
         }
@@ -106,34 +106,18 @@ public sealed partial class CircuitSystem : EntitySystem
         var data = ent.Comp.Data;
         ent.Comp.ValidatePortsCount();
 
-        var gates = data.Gates;
-        for (var i = 0; i < gates.Count; i++)
-        {
-            var gate = gates[i];
-            var output = CircuitIndex.Gate(i);
-            foreach (var input in gate.Inputs)
-            {
-                ent.Comp.LinkOutput(input, output);
-            }
-        }
-
-        for (var i = 0; i < data.OutputIndices.Count; i++)
-        {
-            var input = data.OutputIndices[i];
-            ent.Comp.LinkOutput(input, CircuitIndex.Port(i));
-        }
+        ent.Comp.LinkGateOutputs();
 
         // want to automatically update gates for premade circuits so you dont have to toggle inputs or whatever
         for (var i = 0; i < ent.Comp.LinkedInputs.Count; i++)
         {
             var list = ent.Comp.LinkedInputs[i];
-            var value = ent.Comp.Inputs[i];
             foreach (var linked in list)
             {
                 if (linked.GateIndex is { } g)
                     ent.Comp.Changed.Add(g);
                 else if (linked.PortIndex is { } p)
-                    ent.Comp.LastOutputs[p] = value;
+                    ent.Comp.LastOutputs[p] = ent.Comp.Inputs[i];
             }
         }
     }
@@ -158,26 +142,23 @@ public sealed partial class CircuitSystem : EntitySystem
         // stop sending values when a circuit is depowered removed etc
         for (var i = 0; i < CircuitComponent.PortsCount; i++)
         {
-            if (!comp.LastOutputs[i].Equals(false))
-                SendOutput(comp.Housing, i + 1, false);
+            if (!comp.LastOutputs[i].Equals(False.Instance))
+                SendOutput(comp.Housing, i + 1, False.Instance);
         }
     }
 
     private object ParseValue(NetworkPayload data)
     {
         if (data.TryGetValue<SignalState>(DeviceNetworkConstants.LogicState, out var state))
-        {
             return state switch
             {
                 SignalState.Momentary => Pulse.Instance,
-                SignalState.Low => false,
-                SignalState.High => true,
-                _ => false
+                SignalState.High => True.Instance,
+                _ => False.Instance
             };
-        }
 
         if (data.TryGetValue<int>("logic_int", out var n))
-            return n;
+            return new Integer(n);
 
         if (data.TryGetValue<string>("logic_string", out var s))
             return s;
@@ -207,14 +188,17 @@ public sealed partial class CircuitSystem : EntitySystem
         _payload.Clear();
         switch (value)
         {
-            case bool b:
-                _payload[DeviceNetworkConstants.LogicState] = b ? SignalState.High : SignalState.Low;
+            case True t:
+                _payload[DeviceNetworkConstants.LogicState] = SignalState.High;
                 break;
-            case Pulse p: // should probably never happen but just incase
+            case False f:
+                _payload[DeviceNetworkConstants.LogicState] = SignalState.Low;
+                break;
+            case Pulse p:
                 _payload[DeviceNetworkConstants.LogicState] = SignalState.Momentary;
                 break;
-            case int n:
-                _payload["logic_int"] = n;
+            case Integer n:
+                _payload["logic_int"] = n.Value;
                 break;
             case string s:
                 _payload["logic_string"] = s;

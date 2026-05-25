@@ -1,3 +1,5 @@
+# Circuits
+
 - type: sourcePort
   id: Circuit1
   name: signal-port-name-circuit-1
@@ -37,3 +39,10 @@
   id: Circuit8
   name: signal-port-name-circuit-8
   description: signal-port-description-circuit-output
+
+# Intercom
+
+- type: sourcePort
+  id: RadioMessage
+  name: signal-port-name-radio-message
+  description: signal-port-description-radio-message

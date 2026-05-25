@@ -12,7 +12,7 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeGaussgun
+      - CartridgeGaussgun
     proto: CartridgeBallBearing
     capacity: 15
   - type: Item
