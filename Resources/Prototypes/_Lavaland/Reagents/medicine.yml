@@ -115,7 +115,7 @@
           max: 50
         damage:
           Toxin: 1
-          Blunt: 1
+          Brute: 1
           Airloss: 1
       - !type:Emote
         conditions:
