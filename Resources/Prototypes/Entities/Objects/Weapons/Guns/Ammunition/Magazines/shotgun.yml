@@ -76,6 +76,19 @@
       - state: inhand-right-mag
       - state: inhand-right-stripe
         color: "#ba7710"
+- type: entity
+  parent: AmmoProviderShotgunShell
+  id: BoxLethalshot
+  name: ammunition box (12 Gauge pellet)
+
+  components:
+  - type: Construction
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun
+
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    state: box
 
 - type: entity
   parent: BaseMagazineShotgun

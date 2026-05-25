@@ -1,0 +1,14 @@
+- type: constructionGraph
+  id: BoxLethalshotGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      steps:
+      - material: Cardboard
+        amount: 5
+        doAfter: 1
+
+  - node: finished
+    entity: BoxLethalshot

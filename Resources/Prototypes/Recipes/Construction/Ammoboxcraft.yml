@@ -1,0 +1,10 @@
+- type: construction
+  id: BoxLethalshot
+  graph: BoxLethalshotGraph
+  startNode: start
+  targetNode: finished
+  category: construction-category-storage
+  objectType: Item
+
+  theory:
+    FabricationKnowledge: 0
