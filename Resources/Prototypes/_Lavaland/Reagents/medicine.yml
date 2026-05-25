@@ -102,10 +102,10 @@
             min: 0
             max: 50
         damage:
-          Toxin: -1.5
-          Brute: -10
-          Burn: -8
-          Airloss: -3
+          Toxin: -2
+          Brute: -6
+          Burn: -6
+          Airloss: -6
       # Improper pressure effects below
       - !type:EvenHealthChange
         conditions:
