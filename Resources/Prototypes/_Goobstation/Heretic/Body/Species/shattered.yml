@@ -36,6 +36,7 @@
   - MobFlammable
   id: MobShattered
   components:
+  - type: Cuffable # please stop copypasting common shit to 5 different prototypes
   - type: FootprintOwner
   - type: StunVisuals
   - type: FireVisuals
