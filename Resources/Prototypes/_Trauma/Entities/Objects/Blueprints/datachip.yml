@@ -49,24 +49,17 @@
     - RevShieldRipper
 
 - type: entity
-  abstract: true
   parent: [ BaseItem, BaseRevMinorContraband ]
-  id: BaseBlueprintDatachipForge
-  name: data chip
-  description: A datachip, can be inserted into an industrial forge to make new stuff.
+  id: MoldMeleeUpgrades
+  name: melee upgrades mold
+  description: A mold for some new melee weapons. It can be inserted into an industrial forge.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/datachip.rsi
+    sprite: _Trauma/Objects/Revs/mold.rsi
     state: icon
   - type: Tag
     tags:
-    - ForgeMold # lol
-
-- type: entity
-  parent: BaseBlueprintDatachipForge
-  id: DataChipMeleeUpgrades
-  name: data chip [Melee Upgrades]
-  components:
+    - ForgeMold
   - type: Blueprint
     providedRecipes:
     - RevMaul

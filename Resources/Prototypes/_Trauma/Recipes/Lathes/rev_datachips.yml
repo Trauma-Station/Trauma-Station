@@ -28,6 +28,6 @@
   result: DataChipShieldRipper
 
 - type: latheRecipe
-  id: DataChipMeleeUpgrades
+  id: MoldMeleeUpgrades
   parent: BaseRevDatachip
-  result: DataChipMeleeUpgrades
+  result: MoldMeleeUpgrades
