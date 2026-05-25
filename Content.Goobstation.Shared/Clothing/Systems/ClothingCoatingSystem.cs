@@ -8,7 +8,7 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
-public sealed class ClothingCoatingSystem : EntitySystem
+public sealed partial class ClothingCoatingSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
