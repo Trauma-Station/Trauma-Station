@@ -175,7 +175,7 @@ public sealed partial class PTLSystem : EntitySystem
 
     private void OnAfterInteractUsing(Entity<PTLComponent> ent, ref AfterInteractUsingEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !args.CanReach)
             return;
 
         var held = args.Used;
