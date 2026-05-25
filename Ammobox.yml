@@ -1,0 +1,23 @@
+- type: construction
+  id: BoxLethalshot
+  graph: BoxLethalshot
+  startNode: start
+  targetNode: boxlethalshot
+  category: construction-category-storage
+  description: A box of lethal shotgun shells.
+  theory: {}
+
+- type: constructionGraph
+  id: BoxLethalshot
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: boxlethalshot
+      steps:
+      - material: Cardboard
+        amount: 5
+        doAfter: 4
+
+  - node: boxlethalshot
+    entity: BoxLethalshot
