@@ -9056,3 +9056,17 @@ Entries:
   id: 1032
   time: '2026-05-24T21:43:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2777
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed circuits memory gate not updating properly.
+  id: 1033
+  time: '2026-05-25T06:47:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2786
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to remove money from a PTL through walls.
+  id: 1034
+  time: '2026-05-25T07:18:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2787
