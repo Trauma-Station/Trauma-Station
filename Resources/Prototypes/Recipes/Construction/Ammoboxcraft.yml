@@ -8,3 +8,6 @@
 
   theory:
     FabricationKnowledge: 0
+
+  practical:
+    FabricationKnowledge: 1
