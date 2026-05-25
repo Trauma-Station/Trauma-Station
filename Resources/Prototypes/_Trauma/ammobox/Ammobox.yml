@@ -1,6 +1,5 @@
 - type: constructionGraph
-  id: BoxLethalshotGraph
-  start: start
+  id: BoxShotgunShellsEmptyGraph
   graph:
   - node: start
     edges:
@@ -8,7 +7,9 @@
       steps:
       - material: Cardboard
         amount: 5
-        doAfter: 1
+        doAfter: 2
 
   - node: finished
-    entity: BoxLethalshot
+    actions:
+    - !type:SpawnPrototype
+      prototype: BoxLethalshot

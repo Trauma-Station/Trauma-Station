@@ -1,10 +1,11 @@
 - type: construction
-  id: BoxLethalshot
-  graph: BoxLethalshotGraph
+  id: BoxShotgunShellsEmpty
+  graph: BoxShotgunShellsEmptyGraph
   startNode: start
   targetNode: finished
   category: construction-category-storage
   objectType: Item
-
+  # </Trauma>
   theory:
     FabricationKnowledge: 0
+  useQuality: false
