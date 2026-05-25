@@ -22,6 +22,7 @@
     soundHit:
       collection: MetalThud
   - type: PressureDamageChange
+  - type: PressureEfficiency
   - type: Wieldable
   - type: GunRequiresWield
   - type: UseDelayBlockMelee
