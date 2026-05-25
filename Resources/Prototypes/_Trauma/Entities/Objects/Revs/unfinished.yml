@@ -257,7 +257,6 @@
   description: An unfinished maul, use some wood to complete it.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/upgradecomponents.rsi
     state: maul
   - type: Construction
     graph: RevMaul
@@ -269,7 +268,6 @@
   description: An unfinished kunai, use some wood to complete it.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/upgradecomponents.rsi
     state: kunai
   - type: Construction
     graph: RevKunai
