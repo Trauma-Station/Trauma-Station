@@ -7,6 +7,8 @@
     minPlayers: 20
   - type: AntagPlayerEffects
     effects:
+    - !type:NestedEffect
+      proto: HereticSkills
     - !type:ChangeFaction
       newFaction: VampireFaction
     - !type:AdjustAlert            # Shows usable and total blood to the vampire via a popup
