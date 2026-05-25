@@ -6,4 +6,4 @@ namespace Content.Lavaland.Common.Weapons.Ranged;
 /// Raised on a gun when a projectile has been fired by it.
 /// </summary>
 [ByRefEvent]
-public record struct ProjectileShotEvent(EntityUid FiredProjectile);
+public record struct ProjectileShotEvent(EntityUid FiredProjectile, EntityUid? User);

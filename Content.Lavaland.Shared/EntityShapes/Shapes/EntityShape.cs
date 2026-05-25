@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using JetBrains.Annotations;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;

@@ -3,18 +3,17 @@
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Trauma.Shared.Particles;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Particles.Visuals;
 
 /// <summary>
 /// Particles when entities are on fire.
 /// </summary>
-public sealed class FlammableParticleSystem : EntitySystem
+public sealed partial class FlammableParticleSystem : EntitySystem
 {
-    [Dependency] private readonly ParticleSystem _particles = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private ParticleSystem _particles = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<ParticleEffectPrototype> FireEffect  = "SfFireContinuous";
     private static readonly ProtoId<ParticleEffectPrototype> SmokeEffect = "SfFireSmoke";

@@ -13,7 +13,6 @@ using Content.Shared.Body;
 using Content.Shared.Paper;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -21,15 +20,15 @@ namespace Content.Goobstation.Server.Devil.Contract;
 
 public sealed partial class DevilContractSystem : SharedDevilContractSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SubdermalImplantSystem _implant = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SubdermalImplantSystem _implant = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     public override void Initialize()
     {

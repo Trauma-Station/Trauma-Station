@@ -24,35 +24,35 @@ using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Flesh;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
-    [Dependency] private readonly BackStabSystem _backStab = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedHereticCurseSystem _curse = default!;
-    [Dependency] private readonly FleshGraspSystem _fleshGrasp = default!;
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
-    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
-    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private HereticRitualEffectSystem _effects = default!;
+    [Dependency] private BackStabSystem _backStab = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private SharedMansusGraspSystem _grasp = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedHereticCurseSystem _curse = default!;
+    [Dependency] private FleshGraspSystem _fleshGrasp = default!;
 
-    public static SoundSpecifier RitualSuccessSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
+
+    public static SoundSpecifier RitualSuccessSound =
+        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/castsummon.ogg");
 
     public const string Performer = "Performer";
     public const string Mind = "Mind";
@@ -75,6 +75,18 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     }
 
     #region Helpers
+
+    public void SetOwner(Entity<HereticRitualComponent?> ent, EntityUid owner)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.RitualOwner = owner;
+        Dirty(ent);
+
+        var ev = new HereticRitualOwnerSetEvent(owner);
+        RaiseLocalEvent(ent, ref ev);
+    }
 
     protected virtual (bool isCommand, bool isSec) IsCommandOrSec(EntityUid uid)
     {
@@ -174,7 +186,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
             !HasComp<FleshHereticMindComponent>(mind))
             return null;
 
-        if (!TryComp(item, out FleshGraspComponent? fleshGrasp))
+        if (!HasComp<FleshGraspComponent>(item))
             return null;
 
         AlternativeVerb verb = new()
@@ -246,7 +258,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
-        if (!HasComp<Components.MansusGraspComponent>(args.Used))
+        if (!HasComp<MansusGraspComponent>(args.Used))
             return;
 
         if (!TryComp(heretic.ChosenRitual, out HereticRitualComponent? ritual))
@@ -285,7 +297,7 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
 
     public void RitualSuccess(EntityUid ent, EntityUid user, bool predicted)
     {
-        _audio.PlayPredicted(RitualSuccessSound, ent, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
+        _audio.PlayPredicted(RitualSuccessSound, Transform(ent).Coordinates, predicted ? user : null, AudioParams.Default.WithVolume(-3f));
         var popup = Loc.GetString("heretic-ritual-success");
         _popup.PopupPredicted(popup, ent, predicted ? user : null, Filter.Entities(user), false);
         PredictedSpawnAttachedTo("HereticRuneRitualAnimation", ent.ToCoordinates());

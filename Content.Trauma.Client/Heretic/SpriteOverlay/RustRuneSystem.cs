@@ -4,15 +4,14 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
-using Robust.Client.GameObjects;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 
-public sealed class RustRuneSystem : SpriteOverlaySystem<RustRuneComponent>
+public sealed partial class RustRuneSystem : SpriteOverlaySystem<RustRuneComponent>
 {
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

@@ -9,10 +9,7 @@ namespace Content.Trauma.Server.Heretic.Components;
 public sealed partial class HereticRuleComponent : Component
 {
     [DataField]
-    public int RealityShiftPerHeretic = 1;
-
-    [DataField]
-    public EntProtoId RealityShift = "EldritchInfluenceT1";
+    public int RealityShiftPerHeretic = 2;
 
     public readonly List<EntityUid> Minds = new();
 
@@ -25,7 +22,7 @@ public sealed partial class HereticRuleComponent : Component
         "HereticPathVoid",
         "HereticPathRust",
         "HereticPathCosmos",
-        "HereticPathSideSpecial",
+        "HereticPathSpecial",
         "HereticPathSideT1",
         "HereticPathSideT2",
         "HereticPathSideT3",

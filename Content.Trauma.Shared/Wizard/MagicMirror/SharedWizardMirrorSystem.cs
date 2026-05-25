@@ -5,15 +5,14 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Preferences;
 using Content.Shared.UserInterface;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.MagicMirror;
 
-public abstract class SharedWizardMirrorSystem : EntitySystem
+public abstract partial class SharedWizardMirrorSystem : EntitySystem
 {
-    [Dependency] protected readonly HumanoidProfileSystem Humanoid = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem UISystem = default!;
+    [Dependency] protected HumanoidProfileSystem Humanoid = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] protected SharedUserInterfaceSystem UISystem = default!;
 
     public override void Initialize()
     {

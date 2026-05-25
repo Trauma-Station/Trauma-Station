@@ -9,10 +9,10 @@ namespace Content.Trauma.Shared.Decapoids;
 /// <summary>
 /// Prevents the entity from being injected with syringes altogether.
 /// </summary>
-public sealed class ExoskeletonSystem : EntitySystem
+public sealed partial class ExoskeletonSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly EntityQuery<InjectorComponent> _injectorQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityQuery<InjectorComponent> _injectorQuery = default!;
 
     public override void Initialize()
     {

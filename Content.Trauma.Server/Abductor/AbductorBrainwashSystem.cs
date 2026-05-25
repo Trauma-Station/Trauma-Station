@@ -11,8 +11,8 @@ namespace Content.Trauma.Server.Abductor;
 
 public sealed partial class AbductorBrainwashSystem : EntitySystem
 {
-    [Dependency] private readonly MindcontrolSystem _mindcontrol = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private MindcontrolSystem _mindcontrol = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

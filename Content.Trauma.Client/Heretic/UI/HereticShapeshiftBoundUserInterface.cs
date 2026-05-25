@@ -6,15 +6,14 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Rituals;
 using JetBrains.Annotations;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Heretic.UI;
 
 [UsedImplicitly]
-public sealed class HereticShapeshiftBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class HereticShapeshiftBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private SimpleRadialMenu? _menu;
 

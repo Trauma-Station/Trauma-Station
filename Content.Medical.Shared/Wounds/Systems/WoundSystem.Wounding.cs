@@ -30,14 +30,13 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Wounds;
 
 public sealed partial class WoundSystem
 {
-    [Dependency] private readonly BodyStatusSystem _bodyStatus = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private BodyStatusSystem _bodyStatus = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     private const string WoundContainerId = "Wounds";
     private const string BoneContainerId = "Bone";

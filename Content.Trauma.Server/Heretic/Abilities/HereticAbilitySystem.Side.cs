@@ -16,7 +16,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private readonly List<EntityUid> _bloodStealTargets = new();
     private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
@@ -102,10 +102,9 @@ public sealed partial class HereticAbilitySystem
     {
         if (TryComp(uid, out PolymorphedEntityComponent? morphed) && HasComp<SpectralComponent>(uid))
             _poly.Revert((uid, morphed));
-        else if (TryUseAbility(args))
-            _poly.PolymorphEntity(uid, polymorph);
-        else
+        else if (!TryUseAbility(args) || _poly.PolymorphEntity(uid, polymorph) == null)
             return false;
+
         return true;
     }
 

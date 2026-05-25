@@ -18,7 +18,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -27,17 +26,17 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
-    [Dependency] protected readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager _proto = default!;
-    [Dependency] protected readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
-    [Dependency] private readonly EntityQuery<KnowledgeComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
-    [Dependency] private readonly EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
+    [Dependency] protected IConfigurationManager _cfg = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected IPrototypeManager _proto = default!;
+    [Dependency] protected ISharedPlayerManager _player = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
+    [Dependency] private EntityQuery<AwakeMobComponent> _awakeQuery = default!;
+    [Dependency] private EntityQuery<KnowledgeComponent> _query = default!;
+    [Dependency] private EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
 
     /// <summary>
     /// Every knowledge prototype and its data.
@@ -270,6 +269,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         if (GetKnowledge(ent, id) is not { } unit)
         {
+            // Can't add it with experience if you can't comprehend complexity.
+            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+                return;
+
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
                 EnsureKnowledge(ent, id, 0, popup);

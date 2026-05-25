@@ -13,3 +13,14 @@
     Steel: 1000
     Glass: 800
     Plastic: 500
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingOuterStraightjacket
+  result: ClothingOuterStraightjacket
+  completetime: 10
+  categories:
+  - Clothing
+  materials:
+    Cloth: 3000
+    Steel: 500

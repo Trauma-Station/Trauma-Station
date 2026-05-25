@@ -268,7 +268,7 @@
     size: Normal
   - type: Handcuff
     cuffedRSI: Clothing/OuterClothing/Misc/straight_jacket.rsi
-    breakoutTime: 100
+    breakoutTime: 120 # Trauma - was 100
     cuffTime: 10
     uncuffTime: 10
     stunBonus: 4

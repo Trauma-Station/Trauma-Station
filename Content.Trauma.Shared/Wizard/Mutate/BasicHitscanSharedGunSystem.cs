@@ -2,12 +2,13 @@
 
 using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 
-namespace Content.Shared.Weapons.Ranged.Systems;
+namespace Content.Trauma.Shared.Wizard.Mutate;
 
 public abstract partial class BasicHitscanSharedGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
     public override void Initialize()
     {
         base.Initialize();

@@ -4,6 +4,10 @@
   abstract: true
   description: Mobs without physical bodies
   components:
+  # <Trauma>
+  - type: Viewcone
+    baseConeAngle: 36000 # observers wraiths etc can see everything basically no matter what
+  # </Trauma>
   - type: Sprite
     noRot: true
     overrideContainerOcclusion: true # Always show up regardless of where they're contained.
@@ -11,6 +15,7 @@
   - type: FTLSmashImmune
   - type: CargoSellBlacklist
   - type: MovementSpeedModifier
+    backwardsAngle: 360 # Trauma - ghosts can moonwalk
     baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: MovementIgnoreGravity
@@ -157,7 +162,7 @@
     icon: Interface/Actions/scream.png
     checkCanInteract: false
     startDelay: true
-    useDelay: 120
+    useDelay: 30 # Trauma, was 120
   - type: InstantAction
     event: !type:BooActionEvent
 

@@ -11,13 +11,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
-public sealed class CosmicColossusSystem : SharedCosmicColossusSystem
+public sealed partial class CosmicColossusSystem : SharedCosmicColossusSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly CodeConditionSystem _codeCondition = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private CodeConditionSystem _codeCondition = default!;
 
     public override void Initialize()
     {

@@ -3,11 +3,10 @@
 using Content.Shared.Administration;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Genetics.Abilities;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.Abilities;
 
-public sealed class TelepathyBUI : BoundUserInterface
+public sealed partial class TelepathyBUI : BoundUserInterface
 {
     private DialogWindow? _window;
 

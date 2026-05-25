@@ -35,7 +35,10 @@
     soundGunshot:
       path: /Audio/_Trauma/Weapons/Guns/railgun/railgunshot.ogg
     defaultDirection: 1, 0
-  - type: MagazineAmmoProvider
+  - type: MultiMagazineAmmoProvider
+    slots:
+      gun_magazine: null # Use ammo provied by gun magazine
+      gun_magazine_cell: 0.34 # Don't use battery projectiles, multiply fire cost by 0.34 (45 shots for high-cap cell)
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -49,9 +52,9 @@
         priority: 2
         whitelist:
           tags:
-            - MagazineGaussgun
+          - MagazineGaussgun
         whitelistFailPopup: gun-magazine-whitelist-fail
-      power_cell:
+      gun_magazine_cell:
         ejectOnInteract: false
         name: power-cell-slot-component-slot-name-default
         whitelist:
@@ -61,14 +64,14 @@
         blacklist:
           tags:
           - PotatoBattery
+          - PowerCage
         whitelistFailPopup: gun-magazine-whitelist-fail
   - type: PowerCellSlot
-    cellSlotId: power_cell
+    cellSlotId: gun_magazine_cell
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-      power_cell: !type:ContainerSlot
+      gun_magazine_cell: !type:ContainerSlot
   - type: Appearance
 
 - type: entity
@@ -104,7 +107,6 @@
 - type: entity
   parent: [ WeaponGaussgun, BaseMajorContraband ]
   id: WeaponGaussgunImprov
-  name: gauss rifle
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun.rsi
@@ -115,12 +117,6 @@
   - type: Gun
     minAngle: 40
     maxAngle: 50
-    fireRate: 1
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -30
   - type: Construction
     graph: GaussRifleGraph
     node: finish
@@ -144,7 +140,6 @@
   - type: Gun
     minAngle: 10
     maxAngle: 20
-    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -155,7 +150,7 @@
 # crafting
 
 - type: entity
-  parent: [BaseItem, BaseMajorContraband]
+  parent: [ BaseItem, BaseMajorContraband ]
   id: CraftingGaussRifle
   name: incomplete gauss rifle
   description: An unfinished gauss rifle.

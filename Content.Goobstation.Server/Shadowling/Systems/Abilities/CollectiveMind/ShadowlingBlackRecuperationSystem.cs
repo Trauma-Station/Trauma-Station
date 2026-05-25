@@ -10,8 +10,8 @@ using Content.Server.Ghost;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
+using Content.Shared.Body;
 using Content.Shared.DoAfter;
-using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -26,20 +26,21 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.CollectiveMind
 /// Black Rec. either turns back a dead Thrall to life, OR turns a living Thrall into a Lesser Shadowling by empowering them
 /// Reduces your light resistance forever. Less for thralls, more for lesser shadowlings.
 /// </summary>
-public sealed class ShadowlingBlackRecuperationSystem : EntitySystem
+public sealed partial class ShadowlingBlackRecuperationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly LightDetectionDamageSystem _light = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerMan = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly EuiManager _euiManager = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private LightDetectionDamageSystem _light = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private ISharedPlayerManager _playerMan = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private EuiManager _euiManager = default!;
 
     public override void Initialize()
     {
@@ -133,10 +134,7 @@ public sealed class ShadowlingBlackRecuperationSystem : EntitySystem
             var comps = _protoMan.Index(component.LesserSlingComponents);
             EntityManager.AddComponents(newUid.Value, comps);
 
-            /* TODO NUBODY: wait for an actual api :)
-            if (TryComp<HumanoidProfileComponent>(newUid.Value, out var human))
-                _humanoidAppearance.AddMarking(newUid.Value, component.MarkingId, Color.Red, true, true, human);
-            */
+            _body.AddOrganMarking(newUid.Value, component.MarkingOrgan, component.MarkingId, Color.Red, true);
 
             Spawn(component.BlackRecuperationEffect, Transform(newUid.Value).Coordinates);
 

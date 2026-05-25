@@ -8,10 +8,10 @@ using Content.Shared.Stacks;
 
 namespace Content.Goobstation.Shared.MaterialEnergy;
 
-public sealed class MaterialEnergySystem : EntitySystem
+public sealed partial class MaterialEnergySystem : EntitySystem
 {
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
 
     public override void Initialize()
     {

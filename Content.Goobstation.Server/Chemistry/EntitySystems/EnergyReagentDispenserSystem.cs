@@ -18,7 +18,6 @@ using Robust.Shared.Containers;
 using Content.Shared.Labels.Components;
 using Content.Server.Power.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Power.Components;
 
@@ -29,14 +28,14 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
     /// <seealso cref="EnergyReagentDispenserComponent"/>
     /// </summary>
     [UsedImplicitly]
-    public sealed class EnergyReagentDispenserSystem : EntitySystem
+    public sealed partial class EnergyReagentDispenserSystem : EntitySystem
     {
-        [Dependency] private readonly AudioSystem _audioSystem = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly BatterySystem _battery = default!;
+        [Dependency] private AudioSystem _audioSystem = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+        [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private BatterySystem _battery = default!;
 
         public override void Initialize()
         {

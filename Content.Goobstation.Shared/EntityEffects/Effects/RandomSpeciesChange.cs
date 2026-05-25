@@ -15,11 +15,11 @@ public sealed partial class RandomSpeciesChange : EntityEffectBase<RandomSpecies
         => Loc.GetString("reagent-effect-guidebook-change-species-random");
 }
 
-public sealed class RandomSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, RandomSpeciesChange>
+public sealed partial class RandomSpeciesChangeEffectSystem : EntityEffectSystem<HumanoidProfileComponent, RandomSpeciesChange>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedSpeciesChangeEffectSystem _speciesChange = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedSpeciesChangeEffectSystem _speciesChange = default!;
 
     public static readonly HashSet<ProtoId<SpeciesPrototype>> SpeciesBlacklist = new()
     {

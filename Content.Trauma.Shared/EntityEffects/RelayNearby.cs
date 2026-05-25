@@ -59,13 +59,13 @@ public sealed partial class RelayNearby : EntityEffectBase<RelayNearby>
         => Effect.EntityEffectGuidebookText(prototype, entSys); // lazy
 }
 
-public sealed class RelayNearbyEffectSystem : EntityEffectSystem<TransformComponent, RelayNearby>
+public sealed partial class RelayNearbyEffectSystem : EntityEffectSystem<TransformComponent, RelayNearby>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private HashSet<Entity<IComponent>> _found = new();
 

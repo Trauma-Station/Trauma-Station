@@ -6,9 +6,9 @@ using Content.Trauma.Shared.Wizard.Traps;
 
 namespace Content.Trauma.Server.Wizard;
 
-public sealed class WizardTrapsSystem : SharedWizardTrapsSystem
+public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
 {
-    [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
 
     public override void Initialize()
     {

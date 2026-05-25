@@ -4,16 +4,15 @@ using Content.Shared.Body;
 using Content.Shared.Humanoid;
 using Content.Shared.Sprite;
 using Content.Trauma.Common.Sprite;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Sprite;
 
 /// <summary>
 /// Applies random sprite colour to a mob's limbs.
 /// </summary>
-public sealed class RandomSpriteBodySystem : EntitySystem
+public sealed partial class RandomSpriteBodySystem : EntitySystem
 {
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public override void Initialize()
     {

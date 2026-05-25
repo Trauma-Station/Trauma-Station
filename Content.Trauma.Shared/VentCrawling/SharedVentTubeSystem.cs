@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.VentCrawler.Tube.Components;
+using Content.Trauma.Shared.VentCrawling.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
 namespace Content.Trauma.Shared.VentCrawling;
 
-public sealed class SharedVentTubeSystem : EntitySystem
+public sealed partial class SharedVentTubeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
 
     public EntityUid? NextTubeFor(EntityUid target, Direction nextDirection, VentCrawlerTubeComponent? targetTube = null)
     {

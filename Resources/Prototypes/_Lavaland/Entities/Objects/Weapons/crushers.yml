@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [BaseItem, BracingDurability]
+  parent: BaseItem
   id: BaseWeaponCrusher
   name: crusher
   description: An early design of the proto-kinetic accelerator.
@@ -22,6 +22,7 @@
     soundHit:
       collection: MetalThud
   - type: PressureDamageChange
+  - type: PressureEfficiency
   - type: Wieldable
   - type: GunRequiresWield
   - type: UseDelayBlockMelee

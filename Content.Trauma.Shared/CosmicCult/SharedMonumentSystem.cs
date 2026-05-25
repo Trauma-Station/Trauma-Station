@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.CosmicCult;
 
-public abstract class SharedMonumentSystem : EntitySystem
+public abstract partial class SharedMonumentSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

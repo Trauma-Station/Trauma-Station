@@ -11,12 +11,12 @@ using Robust.Server.Player;
 
 namespace Content.Goobstation.Server.StationEvents;
 
-public sealed class JobAddTagsRule : StationEventSystem<JobAddTagsRuleComponent>
+public sealed partial class JobAddTagsRule : StationEventSystem<JobAddTagsRuleComponent>
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     // TODO: just run entity effects so its not tag specific
     protected override void Started(EntityUid uid, JobAddTagsRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)

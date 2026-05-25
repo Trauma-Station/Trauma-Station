@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.Goobstation.Server.Objectives.Components;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
@@ -15,19 +14,21 @@ using Content.Shared.Store.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Server.Objectives.Components;
+using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
+public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly ObjectivesSystem _objective = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private ObjectivesSystem _objective = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
@@ -35,9 +36,9 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
     public static readonly SoundSpecifier BriefingSoundIntense =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain_intense.ogg");
 
-    public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
+    public static EntProtoId MindRole = "MindRoleHeretic";
 
-    private static EntProtoId MindRole = "MindRoleHeretic";
+    public static EntProtoId RealityShift = "EldritchInfluence";
 
     public override void Initialize()
     {
@@ -64,17 +65,17 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 
     private void OnSpawn(ref SpawnHereticInfluenceEvent ev)
     {
-        SpawnInfluence(ev.Proto, ev.Amount);
+        SpawnInfluence(ev.Amount);
     }
 
     private void OnAntagSelect(Entity<HereticRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         TryMakeHeretic(args.EntityUid, ent.Comp);
 
-        SpawnInfluence(ent.Comp.RealityShift, ent.Comp.RealityShiftPerHeretic);
+        SpawnInfluence(ent.Comp.RealityShiftPerHeretic);
     }
 
-    public void SpawnInfluence(EntProtoId proto, int amount)
+    public void SpawnInfluence(int amount)
     {
         if (amount <= 0)
             return;
@@ -88,7 +89,7 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
         for (var i = 0; i < amount; i++)
         {
             if (TryFindTileOnGrid(grid, out _, out var coords))
-                Spawn(proto, coords);
+                Spawn(RealityShift, coords);
         }
     }
 
@@ -128,7 +129,9 @@ public sealed class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
             store.Categories.Add(category);
         }
 
-        store.CurrencyWhitelist.Add(Currency);
+        store.CurrencyWhitelist.Add(SharedHereticSystem.Currency);
+        store.CurrencyWhitelist.Add(SharedHereticSystem.SideCurrency);
+        store.Balance[SharedHereticSystem.SideCurrency] = 1; // 1 free side point
         return store;
     }
 

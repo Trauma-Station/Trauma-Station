@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
@@ -8,6 +9,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -31,7 +33,8 @@ public abstract partial class SharedHereticRitualSystem
 
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<NestedRitualEffect>>(OnNested);
         SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SpawnCosmicField>>(OnCosmicField);
-        SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SetBlackboardValuesRitualEffect>>(OnBlackboard);
+        SubscribeLocalEvent<TransformComponent, HereticRitualEffectEvent<SetBlackboardValuesRitualEffect>>(
+            OnBlackboard);
         SubscribeLocalEvent<RustGraspComponent, HereticRitualEffectEvent<ResetRustGraspDelayEffect>>(OnRustDelay);
         SubscribeLocalEvent<GhoulComponent, HereticRitualEffectEvent<AddToFleshGhoulLimit>>(OnAddToFleshLimit);
     }
@@ -46,7 +49,8 @@ public abstract partial class SharedHereticRitualSystem
         Dirty(mind, fleshMind);
     }
 
-    private void OnBlackboard(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<SetBlackboardValuesRitualEffect> args)
+    private void OnBlackboard(Entity<TransformComponent> ent,
+        ref HereticRitualEffectEvent<SetBlackboardValuesRitualEffect> args)
     {
         foreach (var (key, value) in args.Effect.Values)
         {
@@ -54,7 +58,8 @@ public abstract partial class SharedHereticRitualSystem
         }
     }
 
-    private void OnRustDelay(Entity<RustGraspComponent> ent, ref HereticRitualEffectEvent<ResetRustGraspDelayEffect> args)
+    private void OnRustDelay(Entity<RustGraspComponent> ent,
+        ref HereticRitualEffectEvent<ResetRustGraspDelayEffect> args)
     {
         if (!TryComp(ent, out UseDelayComponent? delay))
             return;
@@ -143,7 +148,7 @@ public abstract partial class SharedHereticRitualSystem
             !TryComp(ent, out StoreComponent? store))
             return;
 
-        _heretic.UpdateMindKnowledge((ent, ent, store, mind), null, args.Effect.Amount);
+        _heretic.UpdateMindKnowledge((ent, ent, store, mind), null, args.Effect.Knowledge);
     }
 
     private void OnGhoulify(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<GhoulifyEffect> args)
@@ -261,7 +266,7 @@ public abstract partial class SharedHereticRitualSystem
 
         var knowledgeGain = 0f;
         var (isCommand, isSec) = IsCommandOrSec(ent);
-        var isHeretic = _heretic.TryGetHereticComponent(ent.Owner, out _, out _);
+        var isHeretic = _heretic.TryGetHereticComponent(ent.Owner, out var otherHeretic, out var otherMind);
         knowledgeGain += isHeretic || IsSacrificeTarget((mind, heretic), ent)
             ? isCommand || isSec || isHeretic ? 3f : 2f
             : 0f;
@@ -277,16 +282,24 @@ public abstract partial class SharedHereticRitualSystem
             RaiseLocalEvent(mind, ref ev2);
         }
 
+        if (otherHeretic != null)
+            RemCompDeferred(otherMind, otherHeretic);
+
         if (knowledgeGain == 0)
             return;
 
-        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, knowledgeGain);
+        var dict = new Dictionary<string, FixedPoint2>()
+        {
+            {SharedHereticSystem.Currency, knowledgeGain}
+        };
+
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, dict);
 
         heretic.SacrificeTracker++;
-        if (!heretic.InfluenceSpawnPerSacrificeAmount.TryGetValue(heretic.SacrificeTracker, out var influence))
+        if (heretic.MaxSacrificeInfluenceSpawn < heretic.SacrificeTracker)
             return;
 
-        var influenceEv = new SpawnHereticInfluenceEvent(influence);
+        var influenceEv = new SpawnHereticInfluenceEvent();
         RaiseLocalEvent(ref influenceEv);
     }
 

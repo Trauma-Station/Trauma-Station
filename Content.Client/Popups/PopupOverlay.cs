@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Popups;
+// </Trauma>
 using System.Numerics;
 using Content.Shared.Examine;
 using Robust.Client.Graphics;
@@ -92,6 +95,15 @@ public sealed class PopupOverlay : Overlay
             if (mapPos.MapId != args.MapId)
                 continue;
 
+            // <Trauma>
+            if (ourEntity != null)
+            {
+                var ev = new ShowPopupAttemptEvent(mapPos.Position, ourPos);
+                _entManager.EventBus.RaiseLocalEvent(ourEntity.Value, ref ev);
+                if (ev.Cancelled)
+                    continue;
+            }
+            // </Trauma>
             var distance = (mapPos.Position - ourPos).Length();
 
             // Should handle fade here too wyci.

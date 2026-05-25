@@ -21,6 +21,7 @@
   - Revolutionary
   - Wizard
   - Xenoborg
+  - CrabFaction
 
 - type: npcFaction
   id: InsurgentDestroyer9000
@@ -31,3 +32,29 @@
   id: InitialInfected
   friendly:
   - Zombie
+
+- type: npcFaction
+  id: CrabFaction
+  friendly:
+  - Dragon
+  - Xeno
+  - Passive
+  - SimpleHostile
+  - SimpleNeutral
+  - Wraith
+  - Lavafauna
+  - Wizard
+  - Xenoborg
+  hostile:
+  - Insurgent
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - NanoTrasen
+  - PetsNT
+  - Syndicate
+  - Zombie
+  - Revolutionary
+  - AllHostile

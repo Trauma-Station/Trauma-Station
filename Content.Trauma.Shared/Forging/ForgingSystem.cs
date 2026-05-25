@@ -18,16 +18,16 @@ namespace Content.Trauma.Shared.Forging;
 /// <summary>
 /// Handles forged item procedural generation.
 /// </summary>
-public sealed class ForgingSystem : EntitySystem
+public sealed partial class ForgingSystem : EntitySystem
 {
-    [Dependency] private readonly DurabilitySystem _durability = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMetalSystem _metal = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly WorkableSystem _workable = default!;
-    [Dependency] private readonly EntityQuery<ForgedItemComponent> _query = default!;
+    [Dependency] private DurabilitySystem _durability = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMetalSystem _metal = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private WorkableSystem _workable = default!;
+    [Dependency] private EntityQuery<ForgedItemComponent> _query = default!;
 
     public static readonly EntProtoId UnfinishedItem = "UnfinishedForgedItem";
     public static readonly EntProtoId DefaultResult = "ForgedPart";
@@ -156,7 +156,10 @@ public sealed class ForgingSystem : EntitySystem
         }
     }
 
-    public EntityUid SpawnUnfinished(EntityCoordinates coords, [ForbidLiteral] ProtoId<MetalPrototype> metal, [ForbidLiteral] ProtoId<ForgedItemPrototype> item)
+    public EntityUid SpawnUnfinished(EntityCoordinates coords,
+        [ForbidLiteral] ProtoId<MetalPrototype> metal,
+        [ForbidLiteral] ProtoId<ForgedItemPrototype> item,
+        FixedPoint2 workScale)
     {
         var uid = PredictedSpawnAtPosition(UnfinishedItem, coords);
         _transform.SetLocalRotation(uid, 0); // dogshit engine decision award
@@ -172,7 +175,8 @@ public sealed class ForgingSystem : EntitySystem
 
         // actually let the result be made by working it
         var workable = Comp<WorkableComponent>(uid);
-        _workable.SetRemaining((uid, workable), itemProto.Work * metalProto.WorkScale);
+        var work = itemProto.Work * metalProto.WorkScale * workScale;
+        _workable.SetRemaining((uid, workable), work);
         _workable.SetResult((uid, workable), itemProto.Result ?? DefaultResult);
         _workable.SetAmount((uid, workable), itemProto.Amount);
         // TODO: other shit?

@@ -2,14 +2,13 @@
 
 using System.Linq;
 using Content.Trauma.Shared.Wizard.BindSoul;
-using Robust.Client.GameObjects;
 using Content.Shared.DrawDepth;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class BindSoulSystem : SharedBindSoulSystem
+public sealed partial class BindSoulSystem : SharedBindSoulSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

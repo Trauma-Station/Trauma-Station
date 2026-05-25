@@ -5,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Nyanotrasen.Holograms;
 
-public sealed class HologramVisualizerSystem : EntitySystem
+public sealed partial class HologramVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private readonly ProtoId<ShaderPrototype> _shaderId = "Holographic"; // Goobstation - Start
     private ShaderPrototype? _shaderProto;

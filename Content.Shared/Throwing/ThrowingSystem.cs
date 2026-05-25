@@ -38,23 +38,23 @@ public sealed partial class ThrowingSystem : EntitySystem
     private float _airDamping;
 
     // <Trauma>
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
     // </Trauma>
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownSystem = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrownItemSystem _thrownSystem = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
 
-    private EntityQuery<AnchorableComponent> _anchorableQuery;
+    [Dependency] private EntityQuery<AnchorableComponent> _anchorableQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _anchorableQuery = GetEntityQuery<AnchorableComponent>();
 
         Subs.CVar(_configManager, CCVars.TileFrictionModifier, value => _frictionModifier = value, true);
         Subs.CVar(_configManager, CCVars.AirFriction, value => _airDamping = value, true);
@@ -117,18 +117,14 @@ public sealed partial class ThrowingSystem : EntitySystem
         bool predicted = true)
         // </Trauma>
     {
-        var physicsQuery = GetEntityQuery<PhysicsComponent>();
-        if (!physicsQuery.TryGetComponent(uid, out var physics))
+        if (!_physicsQuery.TryComp(uid, out var physics))
             return;
-
-        var projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         TryThrow(
             uid,
             direction,
             physics,
             Transform(uid),
-            projectileQuery,
             baseThrowSpeed,
             user,
             pushbackRatio,
@@ -151,7 +147,6 @@ public sealed partial class ThrowingSystem : EntitySystem
         Vector2 direction,
         PhysicsComponent physics,
         TransformComponent transform,
-        EntityQuery<ProjectileComponent> projectileQuery,
         float baseThrowSpeed = 10.0f,
         EntityUid? user = null,
         float pushbackRatio = PushbackDefault,
@@ -181,7 +176,7 @@ public sealed partial class ThrowingSystem : EntitySystem
             return;
 
         // Allow throwing if this projectile only acts as a projectile when shot, otherwise disallow
-        if (projectileQuery.TryGetComponent(uid, out var proj) && !proj.OnlyCollideWhenShot)
+        if (_projectileQuery.TryComp(uid, out var proj) && !proj.OnlyCollideWhenShot)
             return;
 
         // <Trauma>

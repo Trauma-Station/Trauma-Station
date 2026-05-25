@@ -106,12 +106,15 @@
   minLimit: 3
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencyPlasma
+  - EmergencyVapor
+  - EmergencySilicon
+  # </Trauma>
   - EmergencyNitrogen
   - EmergencyOxygen
-  - EmergencyPlasma
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -624,12 +627,15 @@
   minLimit: 2
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencySilicon
+  - EmergencyPlasmaClown
+  - EmergencyVapor
+  # </Trauma>
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
-  - EmergencyPlasmaClown
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -691,13 +697,16 @@
   minLimit: 2
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencySilicon
+  - EmergencyPlasmaMime
+  - EmergencyVapor
+  # </Trauma>
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
-  - EmergencyPlasmaMime
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -1060,12 +1069,15 @@
   minLimit: 2
   hidden: true
   loadouts:
+  # <Trauma>
+  - LoadoutSpeciesPlasma
+  - EmergencySilicon
+  - EmergencyPlasmaExtended
+  - EmergencyVapor # No extended for you
+  # </Trauma>
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
-  - EmergencyPlasmaExtended
   - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesPlasma # Goobstation
-  - EmergencySilicon
 
 # Science
 - type: loadoutGroup

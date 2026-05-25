@@ -862,7 +862,7 @@ entities:
     - type: GridFill
       addComponents:
       - type: NukeOpsShuttle
-      path: /Maps/_Goobstation/Shuttles/infiltrator.yml
+      path: /Maps/_Trauma/Shuttles/infiltrator.yml
 - proto: AirlockHatchSyndicate
   entities:
   - uid: 5

@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Abilities.Mime;
 /// <summary>
 /// Runs a YML-defined entity effect on mimes when they break vows.
 /// </summary>
-public sealed class MimePunishmentSystem : EntitySystem
+public sealed partial class MimePunishmentSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public static readonly ProtoId<EntityEffectPrototype> Punishments = "MimePunishments";
 

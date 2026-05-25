@@ -129,37 +129,45 @@ public sealed partial class GunUpgradeSystem
     {
         var weapon = args.Container.Owner;
         var comp = ent.Comp;
-        if (!TryComp<PressureDamageChangeComponent>(weapon, out var pdc))
+        if (!TryComp<PressureEfficiencyComponent>(weapon, out var pec) ||
+            !TryComp<PressureDamageChangeComponent>(weapon, out var pdc))
             return;
 
         comp.SavedAppliedModifier = pdc.AppliedModifier;
-        comp.SavedApplyWhenInRange = pdc.ApplyWhenInRange;
-        comp.SavedLowerBound = pdc.LowerBound;
-        comp.SavedUpperBound = pdc.UpperBound;
+        comp.SavedApplyWhenInRange = pec.ApplyWhenInRange;
+        comp.SavedLowerBound = pec.LowerBound;
+        comp.SavedUpperBound = pec.UpperBound;
 
         if (comp.NewAppliedModifier is { } newModifier)
+        {
             pdc.AppliedModifier = newModifier;
+            Dirty(weapon, pdc);
+        }
         if (comp.NewApplyWhenInRange is { } newApplyInRange)
-            pdc.ApplyWhenInRange = newApplyInRange;
+            pec.ApplyWhenInRange = newApplyInRange;
         if (comp.NewLowerBound is { } newLower)
-            pdc.LowerBound = newLower;
+            pec.LowerBound = newLower;
         if (comp.NewUpperBound is { } newUpper)
-            pdc.UpperBound = newUpper;
-        Dirty(weapon, pdc);
+            pec.UpperBound = newUpper;
+        Dirty(weapon, pec);
     }
 
     private void OnPressureEject(Entity<GunUpgradePressureComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         var weapon = args.Container.Owner;
         var comp = ent.Comp;
-        if (!TryComp<PressureDamageChangeComponent>(weapon, out var pdc))
+        if (!TryComp<PressureEfficiencyComponent>(weapon, out var pec))
             return;
 
-        pdc.AppliedModifier = comp.SavedAppliedModifier;
-        pdc.ApplyWhenInRange = comp.SavedApplyWhenInRange;
-        pdc.LowerBound = comp.SavedLowerBound;
-        pdc.UpperBound = comp.SavedUpperBound;
-        Dirty(weapon, pdc);
+        if (TryComp<PressureDamageChangeComponent>(weapon, out var pdc))
+        {
+            pdc.AppliedModifier = comp.SavedAppliedModifier;
+            Dirty(weapon, pdc);
+        }
+        pec.ApplyWhenInRange = comp.SavedApplyWhenInRange;
+        pec.LowerBound = comp.SavedLowerBound;
+        pec.UpperBound = comp.SavedUpperBound;
+        Dirty(weapon, pec);
     }
 
     private void OnEffectsUpgradeHit(Entity<WeaponUpgradeEffectsComponent> ent, ref MeleeHitEvent args)

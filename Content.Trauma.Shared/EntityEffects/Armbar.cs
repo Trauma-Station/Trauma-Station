@@ -14,9 +14,9 @@ public sealed partial class Armbar : EntityEffectBase<Armbar>
         => null;
 }
 
-public sealed class ArmbarEffectSystem : EntityEffectSystem<TransformComponent, Armbar>
+public sealed partial class ArmbarEffectSystem : EntityEffectSystem<TransformComponent, Armbar>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<Armbar> args)
     {

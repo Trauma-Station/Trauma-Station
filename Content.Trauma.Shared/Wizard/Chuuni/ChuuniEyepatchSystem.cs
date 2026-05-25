@@ -11,17 +11,16 @@ using Content.Shared.Magic.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Wizard;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Chuuni;
 
-public sealed class ChuuniEyepatchSystem : EntitySystem
+public sealed partial class ChuuniEyepatchSystem : EntitySystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

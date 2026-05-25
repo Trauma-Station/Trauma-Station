@@ -5,9 +5,9 @@ using Content.Shared.Gibbing;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class FragileOrganSystem : EntitySystem
+public sealed partial class FragileOrganSystem : EntitySystem
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     public override void Initialize()
     {

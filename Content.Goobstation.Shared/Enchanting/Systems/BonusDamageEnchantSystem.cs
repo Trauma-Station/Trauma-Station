@@ -9,7 +9,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Handles fire + temperature events for <see cref="BonusDamageEnchantComponent"/>.
 /// </summary>
-public sealed class BonusDamageEnchantSystem : EntitySystem
+public sealed partial class BonusDamageEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

@@ -43,12 +43,12 @@ public sealed partial class StationAreaEffects : EntityEffectBase<StationAreaEff
         => null;
 }
 
-public sealed class StationAreaEffectsSystem : EntityEffectSystem<StationDataComponent, StationAreaEffects>
+public sealed partial class StationAreaEffectsSystem : EntityEffectSystem<StationDataComponent, StationAreaEffects>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private List<EntityUid> _areas = new();
 

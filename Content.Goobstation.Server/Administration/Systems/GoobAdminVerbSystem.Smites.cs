@@ -9,14 +9,13 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.Administration.Systems;
 
 public sealed partial class GoobAdminVerbSystem
 {
-    [Dependency] private readonly IAdminManager _admin = default!;
-    [Dependency] private readonly ThunderstrikeSystem _thunder = default!;
+    [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private ThunderstrikeSystem _thunder = default!;
 
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
     {

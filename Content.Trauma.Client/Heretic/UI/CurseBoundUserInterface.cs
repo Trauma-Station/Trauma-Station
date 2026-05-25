@@ -3,14 +3,13 @@
 using Content.Trauma.Shared.Heretic.Curses;
 using Content.Trauma.Shared.Heretic.Curses.Components;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Heretic.UI;
 
 [UsedImplicitly]
-public sealed class CurseBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class CurseBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private CurseWindow _window = new();
 

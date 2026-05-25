@@ -1,3 +1,9 @@
+// <Trauma>
+using Content.Goobstation.Common.Pirates;
+using Content.Goobstation.Common.Research;
+using Robust.Shared.Prototypes;
+using System.Linq;
+// </Trauma>
 using Content.Server.Power.EntitySystems;
 using Content.Server.Research.Components;
 using Content.Shared.UserInterface;
@@ -7,16 +13,12 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
-using Content.Goobstation.Common.Pirates;
-using Content.Goobstation.Common.Research; // R&D Console Rework
-using System.Linq;
-using Robust.Shared.Prototypes; // R&D Console Rework
 
 namespace Content.Server.Research.Systems;
 
 public sealed partial class ResearchSystem
 {
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     private void InitializeConsole()
     {
@@ -160,5 +162,3 @@ public sealed partial class ResearchSystem
         args.Handled = true;
     }
 }
-
-public sealed partial class ResearchConsoleUnlockEvent : CancellableEntityEventArgs { }

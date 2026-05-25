@@ -18,7 +18,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
     {
         _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
-        if (_knowledge.GetContainer(input) is {} brain)
+        if (_knowledge.GetContainer(input) is { } brain)
             _knowledge.EnsureKnowledge(brain, proto, level);
         return input;
     }
@@ -32,15 +32,7 @@ public sealed class KnowledgeCommand : ToolshedCommand
     {
         _knowledge ??= GetSys<SharedKnowledgeSystem>();
 
-        return entities.SelectMany(e =>
-        {
-            var units = _knowledge.TryGetAllKnowledgeUnits(e);
-
-            if (units == null)
-                return Array.Empty<EntityUid>();
-
-            return units.Select(u => u.Owner);
-        });
+        return entities.SelectMany(e => _knowledge.TryGetAllKnowledgeUnits(e)?.Select(u => u.Owner) ?? Enumerable.Empty<EntityUid>());
     }
 
     [CommandImplementation("clear")]

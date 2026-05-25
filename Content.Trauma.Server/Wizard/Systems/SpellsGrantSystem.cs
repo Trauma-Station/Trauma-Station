@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Antag;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
@@ -15,24 +14,25 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Random;
 using Content.Trauma.Common.Wizard;
-using Content.Trauma.Shared.Objectives;
+using Content.Trauma.Server.Wizard.Components;
+using Content.Trauma.Server.Objectives;
 using Content.Trauma.Shared.Wizard;
 using Robust.Server.Player;
 using Robust.Shared.Random;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class SpellsGrantSystem : EntitySystem
+public sealed partial class SpellsGrantSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
-    [Dependency] private readonly TraumaTargetObjectiveSystem _traumaTarget = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
+    [Dependency] private TraumaTargetObjectiveSystem _traumaTarget = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {

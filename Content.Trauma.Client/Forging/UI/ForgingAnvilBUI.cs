@@ -2,12 +2,10 @@
 
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Forging;
-using Robust.Client.UserInterface;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Forging;
 
-public sealed class ForgingAnvilBUI : BoundUserInterface
+public sealed partial class ForgingAnvilBUI : BoundUserInterface
 {
     private readonly ForgingSystem _forging;
     private readonly SharedMetalSystem _metal;

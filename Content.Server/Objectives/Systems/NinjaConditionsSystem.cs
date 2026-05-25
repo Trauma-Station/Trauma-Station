@@ -12,13 +12,13 @@ namespace Content.Server.Objectives.Systems;
 /// Handles the objective conditions that hard depend on ninja.
 /// Survive is handled by <see cref="SurviveConditionSystem"/> since it works without being a ninja.
 /// </summary>
-public sealed class NinjaConditionsSystem : EntitySystem
+public sealed partial class NinjaConditionsSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
 
     public override void Initialize()
     {
@@ -51,6 +51,12 @@ public sealed class NinjaConditionsSystem : EntitySystem
     {
         if (args.Cancelled || !_roles.MindHasRole<NinjaRoleComponent>(args.MindId))
             return;
+        // <Trauma> - get map to check for warp points in below
+        if (args.Mind.OwnedEntity is not { } mob)
+            return;
+
+        var map = Transform(mob).MapID;
+        // </Trauma>
 
         // choose spider charge detonation point
         var warps = new List<EntityUid>();
@@ -59,6 +65,10 @@ public sealed class NinjaConditionsSystem : EntitySystem
 
         while (allEnts.MoveNext(out var warpUid, out var warp))
         {
+            // <Trauma> - check map and ignore singularity etc
+            if (warp.Follow || Transform(warpUid).MapID != map)
+                continue;
+            // </Trauma>
             if (_whitelist.IsWhitelistFail(bombingBlacklist, warpUid)
                 && !string.IsNullOrWhiteSpace(warp.Location))
             {

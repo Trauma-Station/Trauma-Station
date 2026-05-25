@@ -24,18 +24,18 @@ namespace Content.Goobstation.Shared.TableSlam;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class TableSlamSystem : EntitySystem
+public sealed partial class TableSlamSystem : EntitySystem
 {
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly CommonContestsSystem _contests = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private IRobustRandom _random = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {

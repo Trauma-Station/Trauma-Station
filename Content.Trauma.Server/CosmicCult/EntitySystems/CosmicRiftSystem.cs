@@ -23,18 +23,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
-public sealed class CosmicRiftSystem : EntitySystem
+public sealed partial class CosmicRiftSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CosmicBlankSystem _blank = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private CosmicBlankSystem _blank = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _targets = [];
 

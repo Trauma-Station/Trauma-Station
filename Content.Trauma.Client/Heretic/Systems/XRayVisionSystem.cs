@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Heretic.Crucible.Systems;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class XRayVisionSystem : SharedXRayVisionSystem
+public sealed partial class XRayVisionSystem : SharedXRayVisionSystem
 {
-    [Dependency] private readonly ILightManager _light = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private ILightManager _light = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     protected override void DrawLight(EntityUid uid, bool value)
     {

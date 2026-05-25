@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.GameObjects;
 using Content.Trauma.Shared.CosmicCult.Components;
 
 namespace Content.Trauma.Client.CosmicCult;
@@ -8,9 +7,9 @@ namespace Content.Trauma.Client.CosmicCult;
 /// <summary>
 /// Visualizer for The Monument of the Cosmic Cult.
 /// </summary>
-public sealed class MonumentVisualizerSystem : EntitySystem
+public sealed partial class MonumentVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {

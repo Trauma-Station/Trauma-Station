@@ -1,0 +1,27 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSecuritron
+  name: securitron spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
+      state: secbot
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSecuritron
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBeepsky
+  name: beepsky spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
+      state: secbot
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBeepsky

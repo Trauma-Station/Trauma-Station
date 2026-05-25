@@ -4,9 +4,9 @@ using Content.Trauma.Shared.CosmicCult.Components;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public sealed class CosmicShopSystem : EntitySystem
+public sealed partial class CosmicShopSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
     public override void Initialize()
     {
         base.Initialize();

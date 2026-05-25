@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Changeling.Components;
-using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Changeling;
 
-public sealed class FleshmendEffectSystem : EntitySystem
+public sealed partial class FleshmendEffectSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

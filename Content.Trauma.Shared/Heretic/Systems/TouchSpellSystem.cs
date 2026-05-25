@@ -15,13 +15,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed class TouchSpellSystem : EntitySystem
+public sealed partial class TouchSpellSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -57,7 +57,14 @@ public sealed class TouchSpellSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
+        if (args.HitEntities.Count == 1)
+        {
+            args.Handled = TryUseTouchSpell(ent, args.User, args.HitEntities[0]);
+            return;
+        }
+
         UseTouchSpellMultiTarget(ent, args.User, args.HitEntities);
+        args.Handled = true;
     }
 
     private void OnAfterInteract(Entity<TouchSpellComponent> ent, ref AfterInteractEvent args)
@@ -65,8 +72,7 @@ public sealed class TouchSpellSystem : EntitySystem
         if (args is not { Handled: false, CanReach: true, Target: { } target })
             return;
 
-        TryUseTouchSpell(ent, args.User, target);
-        args.Handled = true;
+        args.Handled = TryUseTouchSpell(ent, args.User, target);
     }
 
     public bool TryUseTouchSpell(Entity<TouchSpellComponent> ent, EntityUid user, EntityUid target)

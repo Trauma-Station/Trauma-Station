@@ -43,7 +43,6 @@
   - type: Tag
     tags:
     - Nullrod
-    - Iradomini
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1
@@ -104,7 +103,6 @@
   - type: Tag
     tags:
     - Nullrod
-    - FaithGun
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1

@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.VendingMachines;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.VendingMachines.UI;
 
-public sealed class ShopVendorBoundUserInterface : BoundUserInterface
+public sealed partial class ShopVendorBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private ShopVendorWindow? _window;

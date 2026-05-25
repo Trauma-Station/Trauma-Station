@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Utility;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 
@@ -14,7 +14,7 @@ public sealed partial class EntropicPlumeAffectedComponent : BaseSpriteOverlayCo
     [DataField]
     public float? Duration = 10f;
 
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextAttack = TimeSpan.Zero;
 
     public override Enum Key { get; set; } = EntropicPlumeKey.Key;

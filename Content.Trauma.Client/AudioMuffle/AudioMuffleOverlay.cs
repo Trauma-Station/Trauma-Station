@@ -1,12 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Resources;
 using Content.Trauma.Shared.AudioMuffle;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Enums;
@@ -14,12 +11,12 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Client.AudioMuffle;
 
-public sealed class AudioMuffleOverlay : Overlay
+public sealed partial class AudioMuffleOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IResourceCache _cache = default!;
 
     private readonly AudioMuffleSystem _system;
     private readonly SharedTransformSystem _transform;
@@ -32,9 +29,9 @@ public sealed class AudioMuffleOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
-        _system = _entManager.System<AudioMuffleSystem>();
-        _transform = _entManager.System<SharedTransformSystem>();
-        _map = _entManager.System<SharedMapSystem>();
+        _system = _ent.System<AudioMuffleSystem>();
+        _transform = _ent.System<SharedTransformSystem>();
+        _map = _ent.System<SharedMapSystem>();
         _font = _cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 12);
     }
 

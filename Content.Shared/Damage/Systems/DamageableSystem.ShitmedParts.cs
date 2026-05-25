@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Medical.Common.Damage;
+using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
@@ -13,8 +14,8 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed partial class DamageableSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <summary>
     /// TargetBodyPart values that aren't a combination of others.
@@ -282,6 +283,21 @@ public sealed partial class DamageableSystem
 
                 goto case SplitDamageBehavior.SplitEnsureAll;
             case SplitDamageBehavior.SplitEnsureAll:
+
+                var healDamageTypes = newDamage.DamageDict.Where(x => x.Value < 0).Select(x => x.Key.Id).ToList();
+                var woundedParts = new List<EntityUid>();
+                if (healDamageTypes.Count > 0)
+                {
+                    var ev = new CheckPartWoundedEvent(healDamageTypes);
+                    foreach (var part in parts)
+                    {
+                        ev.Wounded = false;
+                        RaiseLocalEvent(part, ref ev);
+                        if (ev.Wounded)
+                            woundedParts.Add(part);
+                    }
+                }
+
                 foreach (var (type, val) in newDamage.DamageDict)
                 {
                     // project 0 comments :face_holding_back_tears:
@@ -298,8 +314,9 @@ public sealed partial class DamageableSystem
 
                         foreach (var part in parts)
                         {
-                            if (part.Comp.Damage.DamageDict.TryGetValue(type, out var currentDamage)
-                                && currentDamage > 0)
+                            if (woundedParts.Contains(part.Owner) ||
+                                part.Comp.Damage.DamageDict.TryGetValue(type, out var currentDamage) &&
+                                currentDamage > 0)
                                 count++;
                         }
 

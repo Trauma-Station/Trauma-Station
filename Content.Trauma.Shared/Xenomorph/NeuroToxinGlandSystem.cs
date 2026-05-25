@@ -7,10 +7,10 @@ using Content.Trauma.Shared.Xenomorphs;
 
 namespace Content.Trauma.Shared.Xenomorph;
 
-public sealed class NeurotoxinGlandSystem : EntitySystem
+public sealed partial class NeurotoxinGlandSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -3,6 +3,8 @@
 using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
+using Content.Medical.Shared.Traumas;
+using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Body;
@@ -52,50 +54,51 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private INetManager _net = default!;
 
-    [Dependency] protected readonly IPrototypeManager Proto = default!;
-    [Dependency] protected readonly ITileDefinitionManager Tile = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
-    [Dependency] protected readonly EntityLookupSystem Lookup = default!;
-    [Dependency] protected readonly StatusEffectsSystem Status = default!;
-    [Dependency] protected readonly SharedVoidCurseSystem Voidcurse = default!;
-    [Dependency] protected readonly SharedHereticSystem Heretic = default!;
-    [Dependency] protected readonly Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
-    [Dependency] protected readonly ExamineSystemShared Examine = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected IPrototypeManager Proto = default!;
+    [Dependency] protected ITileDefinitionManager Tile = default!;
+    [Dependency] protected IRobustRandom Random = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedDoAfterSystem DoAfter = default!;
+    [Dependency] protected EntityLookupSystem Lookup = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected SharedVoidCurseSystem Voidcurse = default!;
+    [Dependency] protected SharedHereticSystem Heretic = default!;
+    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem StatusNew = default!;
+    [Dependency] protected ExamineSystemShared Examine = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _blood = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedEmpSystem _emp = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
-    [Dependency] private readonly SharedEnsnareableSystem _snare = default!;
-    [Dependency] private readonly SharedMansusGraspSystem _grasp = default!;
-    [Dependency] private readonly TouchSpellSystem _touchSpell = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedEmpSystem _emp = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedEnsnareableSystem _snare = default!;
+    [Dependency] private SharedMansusGraspSystem _grasp = default!;
+    [Dependency] private TouchSpellSystem _touchSpell = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
+    [Dependency] private SharedGhoulSystem _ghoul = default!;
 
-    [Dependency] private readonly EntityQuery<GhoulComponent> _ghoulQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
     public static readonly DamageSpecifier AllDamage = new()
     {
@@ -289,17 +292,19 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     /// <param name="toHeal">how much to heal, null = full heal</param>
     /// <param name="bloodHeal">how much to restore blood, null = fully restore</param>
     /// <param name="bleedHeal">how much to heal bleeding, null = full heal</param>
+    /// <param name="boneHeal">how much to heal bone damage, null = full heal</param>
     public void IHateWoundMed(Entity<DamageableComponent?, BodyComponent?> uid,
         DamageSpecifier? toHeal,
         FixedPoint2? bloodHeal,
-        FixedPoint2? bleedHeal)
+        FixedPoint2? bleedHeal,
+        FixedPoint2? boneHeal)
     {
         if (!Resolve(uid, ref uid.Comp1, false))
             return;
 
         if (toHeal != null)
         {
-            _dmg.TryChangeDamage((uid, uid.Comp1),
+            _dmg.ChangeDamage((uid, uid.Comp1),
                 toHeal,
                 true,
                 false,
@@ -313,6 +318,22 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             _mobThreshold.SetAllowRevives(uid, true, thresholds);
             _dmg.SetAllDamage((uid, uid.Comp1), 0);
             _mobThreshold.SetAllowRevives(uid, false, thresholds);
+        }
+
+        if (boneHeal == null || boneHeal != FixedPoint2.Zero && Resolve(uid, ref uid.Comp2, false))
+        {
+            var parts = _body.GetOrgans<WoundableComponent>((uid, uid.Comp2));
+
+            foreach (var part in parts)
+            {
+                if (_trauma.GetBone(part.AsNullable()) is not {} bone)
+                    continue;
+
+                if (boneHeal is { } heal)
+                    _trauma.ApplyDamageToBone(bone, heal, bone.Comp);
+                else
+                    _trauma.SetBoneIntegrity(bone, bone.Comp.BoneIntegrity, bone.Comp);
+            }
         }
 
         // im too lazy to update some unused shit to reduce pain by an arbitrary number (makes no fucking sense)

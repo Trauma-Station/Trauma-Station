@@ -5,7 +5,6 @@ using Content.Medical.Common.Body;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
-using Content.Shared._White.Xenomorphs.FaceHugger;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
@@ -37,29 +36,28 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Xenomorphs.FaceHugger;
 
-public sealed class FaceHuggerSystem : EntitySystem
+public sealed partial class FaceHuggerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!; // Goobstation
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!; // Goobstation
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutions = default!; // Goobstation
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedTransformSystem _transform = default!; // Goobstation
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private CommonBodyPartSystem _part = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     private HashSet<Entity<InventoryComponent>> _targets = new();
     private TimeSpan _nextUpdate;
@@ -130,27 +128,27 @@ public sealed class FaceHuggerSystem : EntitySystem
 
     private void OnGotEquipped(EntityUid uid, FaceHuggerComponent component, GotEquippedEvent args)
     {
+        var target = args.EquipTarget;
         if (args.Slot != component.Slot
             || _mobState.IsDead(uid)
-            || _entityWhitelist.IsWhitelistPass(component.Blacklist, args.Equipee))
+            || _entityWhitelist.IsWhitelistPass(component.Blacklist, target))
             return;
-        _popup.PopupEntity(Loc.GetString("xenomorphs-face-hugger-equip", ("equipment", uid)), uid, args.Equipee);
+
+        _popup.PopupEntity(Loc.GetString("xenomorphs-face-hugger-equip", ("equipment", uid)), uid, target);
         _popup.PopupEntity(
             Loc.GetString("xenomorphs-face-hugger-equip-other",
                 ("equipment", uid),
-                ("target", Identity.Entity(args.Equipee, EntityManager))),
+                ("target", Identity.Entity(target, EntityManager))),
             uid,
-            Filter.PvsExcept(args.Equipee),
+            Filter.PvsExcept(target),
             true);
 
-        _stun.TryKnockdown(args.Equipee, component.KnockdownTime, true);
+        _stun.TryKnockdown(target, component.KnockdownTime, true);
 
-        if (component.InfectionPrototype.HasValue)
-            EnsureComp<XenomorphPreventSuicideComponent>(args.Equipee); //Prevent suicide for infected
-
-        if (!component.InfectionPrototype.HasValue)
+        if (component.InfectionPrototype == null)
             return;
 
+        EnsureComp<XenomorphPreventSuicideComponent>(target); //Prevent suicide for infected
         component.InfectIn = _timing.CurTime + _random.Next(component.MinInfectTime, component.MaxInfectTime);
     }
 
@@ -158,14 +156,17 @@ public sealed class FaceHuggerSystem : EntitySystem
         FaceHuggerComponent component,
         BeingUnequippedAttemptEvent args)
     {
-        if (component.Slot != args.Slot || args.Unequipee != args.UnEquipTarget ||
+        // TODO: move this shit to shared bruh
+        var target = args.UnEquipTarget;
+        var user = args.User;
+        if (component.Slot != args.Slot || user != target ||
             component.InfectionPrototype == null || _mobState.IsDead(uid))
             return;
 
         _popup.PopupEntity(
             Loc.GetString("xenomorphs-face-hugger-unequip", ("equipment", Identity.Entity(uid, EntityManager))),
             uid,
-            args.Unequipee);
+            user);
         args.Cancel();
     }
 

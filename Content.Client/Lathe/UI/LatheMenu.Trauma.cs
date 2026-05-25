@@ -8,7 +8,7 @@ namespace Content.Client.Lathe.UI;
 
 public sealed partial class LatheMenu
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private CommonMiningPointsSystem _miningPoints = default!;
     private CommonSiloSystem _silo = default!;
 

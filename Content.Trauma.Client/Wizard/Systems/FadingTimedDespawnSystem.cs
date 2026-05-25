@@ -2,14 +2,13 @@
 
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class FadingTimedDespawnSystem : SharedFadingTimedDespawnSystem
+public sealed partial class FadingTimedDespawnSystem : SharedFadingTimedDespawnSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animationSystem = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _animationSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

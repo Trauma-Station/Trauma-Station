@@ -7,15 +7,15 @@ using Content.Trauma.Shared.Mobs;
 using Content.Trauma.Shared.Utility;
 using Robust.Shared.Timing;
 
-namespace Content.Trauma.Shared.Mobs;
+namespace Content.Trauma.Server.Mobs;
 
 /// <summary>
 /// Makes entities with <see cref="MobSpamSystem"/> despawn 5 minutes after dying.
 /// </summary>
-public sealed class MobSpamSystem : EntitySystem
+public sealed partial class MobSpamSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mob = default!;
 
     public static readonly TimeSpan DespawnTime = TimeSpan.FromMinutes(5);
 

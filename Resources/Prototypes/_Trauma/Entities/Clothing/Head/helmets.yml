@@ -74,3 +74,16 @@
     - WhitelistChameleon
   - type: HideLayerClothing
     layers: {}
+
+- type: entity
+  parent: ClothingHeadHatHelmetTemplar
+  id: ClothingHeadHatHelmetMamluk
+  name: mamluk helmet
+  description: The coif that blocked thousands of arrows.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Misc/mamluk.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Misc/mamluk.rsi
+  - type: FaceHuggerBlocker

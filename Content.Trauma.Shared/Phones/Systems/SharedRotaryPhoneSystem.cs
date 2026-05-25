@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Content.Shared.Tools;
-using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Trauma.Shared.Phones.Components;
@@ -26,7 +25,7 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Phones.Systems;
 
-public abstract class SharedRotaryPhoneSystem : EntitySystem
+public abstract partial class SharedRotaryPhoneSystem : EntitySystem
 {
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
     private readonly HashSet<int> _phoneNumbers = new();
@@ -35,14 +34,15 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
     private const int PhoneNumberPoolSize = PhoneNumberMax - PhoneNumberMin; // 88,888 possible numbers
     public const string PhoneJoint = "jointphone";
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly SharedJointSystem _joint = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private SharedJointSystem _joint = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -56,10 +56,23 @@ public abstract class SharedRotaryPhoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RotaryPhoneComponent, InteractUsingEvent>(OnInteract);
         SubscribeLocalEvent<RotaryPhoneComponent, DestructionEventArgs>(OnPhoneDestroy);
+        SubscribeLocalEvent<RotaryPhoneComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttemptContainer);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, ExaminedEvent>(OnExamineHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, EntRemovedFromContainerMessage>(OnPhoneRemoveHolder);
         SubscribeLocalEvent<RotaryPhoneHolderComponent, DestructionEventArgs>(OnDestruction);
+    }
+
+    private void OnInsertAttemptContainer(Entity<RotaryPhoneComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    {
+        if (HasComp<RotaryPhoneHolderComponent>(args.Container.Owner))
+            return;
+
+        if (!HasComp<HandsComponent>(args.Container.Owner))
+            args.Cancel();
+
+        if (!_hands.TryGetHand(args.Container.Owner, args.Container.ID, out _))
+            args.Cancel();
     }
 
     private void OnPhoneRemoveHolder(Entity<RotaryPhoneHolderComponent> ent, ref EntRemovedFromContainerMessage args)

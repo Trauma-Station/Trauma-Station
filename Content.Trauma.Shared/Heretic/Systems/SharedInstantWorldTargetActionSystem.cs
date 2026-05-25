@@ -10,9 +10,9 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedInstantWorldTargetActionSystem : EntitySystem
+public abstract partial class SharedInstantWorldTargetActionSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {
