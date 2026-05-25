@@ -9070,3 +9070,12 @@ Entries:
   id: 1034
   time: '2026-05-25T07:18:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2787
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed salv explorer suit fully protecting you on station.
+  - type: Tweak
+    message: PKA/explorer suit/etc pressure efficiency changes are now predicted.
+  id: 1035
+  time: '2026-05-25T08:53:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2789

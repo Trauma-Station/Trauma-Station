@@ -12,6 +12,7 @@
     - 0,0,1,1
   - type: PressureDamageChange
     applyToMelee: false
+  - type: PressureEfficiency
   - type: UpgradeableWeapon
   - type: ContainerContainer
     containers:
