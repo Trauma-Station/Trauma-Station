@@ -125,7 +125,7 @@
   - type: Tag
     tags:
     - Pickaxe
-  - type: CosmicTransmutable # Trauma
+  - type: CosmicTransmutable
     transmuteTo: ScytheCosmicCult # Similar-ish in function
 
 - type: entity
