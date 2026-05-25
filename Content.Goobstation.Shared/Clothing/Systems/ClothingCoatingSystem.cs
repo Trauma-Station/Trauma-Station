@@ -5,12 +5,10 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using System.Text;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
-[Virtual]
-public partial class SharedClothingCoatingSystem : EntitySystem
+public sealed class ClothingCoatingSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
@@ -24,12 +22,19 @@ public partial class SharedClothingCoatingSystem : EntitySystem
 
     private void OnAfterInteract(Entity<ClothingCoatingComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.Target.HasValue
-        || !TryComp<ClothingComponent>(args.Target, out var clothing))
+        if (args.Target is not { } target ||
+            !TryComp<ClothingComponent>(target, out var clothing))
             return;
 
-        var target = args.Target.Value;
         EntityManager.AddComponents(target, ent.Comp.Components, false);
+        if (TryComp<ToggleableClothingComponent>(target, out var toggleable))
+        {
+            // apply it to modsuit parts etc as well
+            foreach (var part in toggleable.ClothingUids.Keys)
+            {
+                EntityManager.AddComponents(part, ent.Comp.Components, false);
+            }
+        }
 
         var coated = EnsureComp<CoatedClothingComponent>(target);
         coated.CoatingNames.Add(ent.Comp.CoatingName);
@@ -42,12 +47,7 @@ public partial class SharedClothingCoatingSystem : EntitySystem
 
     private void OnExamined(Entity<CoatedClothingComponent> ent, ref ExaminedEvent args)
     {
-        var sb = new StringBuilder();
-        for (int i = 0; i < ent.Comp.CoatingNames.Count; i++)
-        {
-            sb.Append(Loc.GetString(ent.Comp.CoatingNames[i]));
-            if (i >= ent.Comp.CoatingNames.Count - 1) sb.Append(", ");
-        }
-        args.PushMarkup(Loc.GetString("clothing-coating-inspect", ("coatings", sb.ToString())));
+        var names = string.Join(", ", ent.Comp.CoatingNames);
+        args.PushMarkup(Loc.GetString("clothing-coating-inspect", ("coatings", names)));
     }
 }
