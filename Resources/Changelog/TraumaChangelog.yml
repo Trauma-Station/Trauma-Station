@@ -9092,3 +9092,10 @@ Entries:
   id: 1036
   time: '2026-05-26T00:53:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2808
+- author: Hoodsie
+  changes:
+  - type: Add
+    message: Gave Advanced Cleaning module to engi xenoborg.
+  id: 1037
+  time: '2026-05-26T04:10:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2817
