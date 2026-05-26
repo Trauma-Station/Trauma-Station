@@ -129080,11 +129080,6 @@ entities:
       parent: 2
 - proto: SignDirectionalCryo
   entities:
-  - uid: 19951
-    components:
-    - type: Transform
-      pos: -17.49506,22.291811
-      parent: 2
   - uid: 19952
     components:
     - type: Transform
@@ -129116,6 +129111,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -35.497772,6.299343
       parent: 2
+  - uid: 25772
+    components:
+    - type: Transform
+      pos: -17.5,22.5
+      parent: 2
+      rot: 4.71238898038469 rad
 - proto: SignDirectionalEng
   entities:
   - uid: 19963
