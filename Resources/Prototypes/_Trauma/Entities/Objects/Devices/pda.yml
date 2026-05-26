@@ -52,6 +52,7 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-rancher
   - type: Icon
     sprite: _Trauma/Objects/Devices/pda.rsi
     state: pda-rancher
