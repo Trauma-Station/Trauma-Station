@@ -184,6 +184,12 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h
+    Ninja:
+    - !type:OverallPlaytimeRequirement
+      time: 3h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
     NukeopsMedic:
     - !type:OverallPlaytimeRequirement
       time: 5h
