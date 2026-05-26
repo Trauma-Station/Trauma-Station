@@ -343,7 +343,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning # Trauma
+      - BorgModuleAdvancedCleaning # trauma
   - type: ItemSlots
     slots:
       cell_slot:
