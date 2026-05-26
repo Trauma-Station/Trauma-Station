@@ -9,7 +9,6 @@ namespace Content.Goobstation.Shared.EntityEffects.Effects;
 /// <summary>
 /// Default metabolism for stimulants and tranqs. Attempts to find a MovementSpeedModifier on the target,
 /// adding one if not there and to change the movespeed
-/// Trauma - moved it here out of core files and refactored
 /// </summary>
 public sealed partial class NitriumMovespeedModifier : EntityEffectBase<NitriumMovespeedModifier>
 {

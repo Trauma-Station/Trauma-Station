@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Events;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Abilities;
 

@@ -3,7 +3,6 @@
 using Content.Client.DamageState;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Blob;
 

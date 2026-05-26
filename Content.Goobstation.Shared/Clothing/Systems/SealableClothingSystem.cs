@@ -18,7 +18,6 @@ using Content.Shared.Silicons.StationAi;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Clothing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 using Vector2 = System.Numerics.Vector2;
 

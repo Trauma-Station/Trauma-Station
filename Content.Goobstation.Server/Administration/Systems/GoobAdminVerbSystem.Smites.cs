@@ -9,7 +9,6 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.Administration.Systems;
 

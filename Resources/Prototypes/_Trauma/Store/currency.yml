@@ -4,3 +4,10 @@
   cash:
     1: SpaceCash
   canWithdraw: true
+
+- type: currency
+  id: SpesosFake
+  displayName: store-currency-display-fake-spesos
+  cash:
+    1: SpaceCashCounterfeit
+  canWithdraw: true

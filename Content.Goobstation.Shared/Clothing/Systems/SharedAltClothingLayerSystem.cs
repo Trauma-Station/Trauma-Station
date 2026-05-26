@@ -7,7 +7,6 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Verbs;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 

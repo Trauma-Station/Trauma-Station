@@ -142,7 +142,7 @@
     - Sidearm
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 2 # Trauma, was 1.5
+    fireRate: 2
     availableModes:
     - SemiAuto
     soundGunshot:

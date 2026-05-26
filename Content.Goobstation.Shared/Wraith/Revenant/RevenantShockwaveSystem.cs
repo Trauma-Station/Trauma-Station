@@ -10,7 +10,6 @@ using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Goobstation.Shared.Wraith.Revenant;

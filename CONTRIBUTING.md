@@ -1,5 +1,7 @@
 # Trauma Station contribution guidelines and standards
 
+For the basics and anything not listed here, read [SS14's upstream documentation](https://docs.ss14.io)
+
 ## Core guidelines
 
 1. Do not rely on language models to do everything for you. You will be ridiculed for this.

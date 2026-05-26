@@ -23,7 +23,6 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using Content.Server.Ghost.Roles.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;

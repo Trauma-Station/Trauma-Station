@@ -2,8 +2,6 @@
 
 using Content.Client.Hands;
 using Content.Shared.Containers.ItemSlots;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;

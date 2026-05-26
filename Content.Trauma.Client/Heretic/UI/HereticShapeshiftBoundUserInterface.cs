@@ -6,7 +6,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Rituals;
 using JetBrains.Annotations;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Heretic.UI;
 
