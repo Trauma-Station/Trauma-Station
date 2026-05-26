@@ -27,17 +27,6 @@
   - type: Clickable
   - type: Damageable
     damageContainer: Inorganic
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Oil
-        Quantity: 300
-    bloodlossDamage:
-      types:
-        Bloodloss: 1
-    bloodlossHealDamage:
-      types:
-        Bloodloss: -1
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
@@ -106,6 +95,7 @@
     defaultChannel: Binary
     channels:
     - Binary
+  - type: ZombieImmune
   - type: DoAfter
   - type: Pullable
   - type: Examiner
