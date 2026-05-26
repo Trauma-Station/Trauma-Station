@@ -178,15 +178,15 @@
     Heretic:
     - !type:OverallPlaytimeRequirement
       time: 5h
-    Nukeops:
-    - !type:OverallPlaytimeRequirement
-      time: 5h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 1h
     Ninja:
     - !type:OverallPlaytimeRequirement
       time: 3h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    Nukeops:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h
