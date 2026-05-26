@@ -4,8 +4,6 @@ using System.Diagnostics;
 using Content.Client.DamageState;
 using Content.Goobstation.Shared.Xenobiology;
 using Content.Goobstation.Shared.Xenobiology.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Xenobiology;
 

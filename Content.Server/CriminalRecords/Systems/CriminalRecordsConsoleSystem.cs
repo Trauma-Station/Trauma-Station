@@ -92,8 +92,9 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
         // prevent malf client violating wanted/reason nullability
         if (msg.Status == SecurityStatus.Wanted != (msg.Reason != null) &&
             msg.Status == SecurityStatus.Suspected != (msg.Reason != null) &&
-            msg.Status == SecurityStatus.Search != (msg.Reason != null) && // Goob
+            msg.Status == SecurityStatus.Demote != (msg.Reason != null) && // Trauma
             msg.Status == SecurityStatus.Brutalize != (msg.Reason != null) && // Trauma
+            msg.Status == SecurityStatus.Search != (msg.Reason != null) && // Goob
             msg.Status == SecurityStatus.Hostile != (msg.Reason != null))
             return;
 
@@ -164,12 +165,14 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
             // going from any other state to wanted, AOS or prisonbreak / lazy secoff never set them to released and they reoffended
             (_, SecurityStatus.Wanted) => "wanted",
             // <Trauma>
+            // Person should be demoted
+            (_, SecurityStatus.Demote) => "demote",
+            // Person should be beaten non-lethally
+            (_, SecurityStatus.Brutalize) => "brutalize",
             // person has been sentenced to perma
             (_, SecurityStatus.Perma) => "perma",
             // person needs to be searched
             (_, SecurityStatus.Search) => "search",
-            // Person should be beaten non-lethally
-            (_, SecurityStatus.Brutalize) => "brutalize",
             // </Trauma>
             (SecurityStatus.Hostile, SecurityStatus.None) => "not-hostile",
             (SecurityStatus.Eliminated, SecurityStatus.None) => "not-eliminated",
@@ -182,6 +185,8 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
             // criminal is no longer on parole
             (SecurityStatus.Paroled, SecurityStatus.None) => "not-parole",
             // <Trauma>
+            //Person has been demoted
+            (oldStatus:SecurityStatus.Demote, SecurityStatus.None) => "not-demote",
             // ass sufficiently kicked
             (SecurityStatus.Brutalize, SecurityStatus.None) => "not-brutalize",
             // criminal is no longer in perma

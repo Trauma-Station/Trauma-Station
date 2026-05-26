@@ -3,7 +3,6 @@
 using Content.Shared.Administration;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Genetics.Abilities;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Genetics.Abilities;
 

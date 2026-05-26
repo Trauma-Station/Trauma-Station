@@ -41,9 +41,10 @@ public abstract class SharedCriminalRecordsSystem : EntitySystem
         record.StatusIcon = status switch
         {
             // <Trauma>
+            SecurityStatus.Demote => "SecurityIconDemote",
+            SecurityStatus.Brutalize => "SecurityIconBrutalize",
             SecurityStatus.Perma => "SecurityIconPerma",
             SecurityStatus.Search => "SecurityIconSearch",
-            SecurityStatus.Brutalize => "SecurityIconBrutalize",
             // </Trauma>
             SecurityStatus.Paroled => "SecurityIconParoled",
             SecurityStatus.Wanted => "SecurityIconWanted",

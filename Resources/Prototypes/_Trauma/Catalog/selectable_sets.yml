@@ -1,0 +1,77 @@
+# Fugitives
+
+- type: selectableSet
+  id: FugitiveHitmanSet
+  name: fugitive-set-hitman-name
+  description: fugitive-set-hitman-description
+  sprite:
+    sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+    state: icon
+  content:
+  - WeaponPistolViper
+  - MagazinePistolHighCapacity
+
+- type: selectableSet
+  id: FugitiveGhostSet
+  name: fugitive-set-ghost-name
+  description: fugitive-set-ghost-description
+  sprite:
+    sprite: Objects/Weapons/Grenades/smoke.rsi
+    state: icon
+  content:
+  - ScramImplanter
+  - SmokeImplanter
+
+- type: selectableSet
+  id: FugitiveSaboteurSet
+  name: fugitive-set-saboteur-name
+  description: fugitive-set-saboteur-description
+  sprite:
+    sprite: Objects/Weapons/Bombs/c4.rsi
+    state: icon
+  content:
+  - C4 # 1
+  - C4 # 2
+  - ExGrenade
+
+- type: selectableSet
+  id: FugitiveInfiltratorSet
+  name: fugitive-set-infiltrator-name
+  description: fugitive-set-infiltrator-description
+  sprite:
+    entity: AgentIDCard
+  content:
+  - AgentIDCard
+  - FakeMindShieldImplanter
+
+- type: selectableSet
+  id: FugitiveEngineerSet
+  name: fugitive-set-engineer-name
+  description: fugitive-set-engineer-description
+  sprite:
+    sprite: Clothing/Hands/Gloves/Color/yellow.rsi
+    state: icon
+  content:
+  - ClothingHandsGlovesConducting
+  - ClothingEyesGlassesMeson
+  - ClothingBeltUtilityEngineering
+
+- type: selectableSet
+  id: FugitiveContractorSet
+  name: fugitive-set-contractor-name
+  description: fugitive-set-contractor-description
+  sprite:
+    sprite: _Goobstation/Objects/Weapons/Melee/contractor_baton.rsi
+    state: icon
+  content:
+  - ContractorBaton
+
+- type: selectableSet
+  id: FugitiveCommunicatorSet
+  name: fugitive-set-communicator-name
+  description: fugitive-set-communicator-description
+  sprite:
+    entity: EncryptionKeyStationMaster
+  content:
+  - EncryptionKeyStationMaster
+  - EncryptionKeyFreelance

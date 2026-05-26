@@ -32,7 +32,7 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private ObjectivesSystem _objectivesSystem = default!;
     [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
-    [Dependency] private GameTicker _ticker = default!; // Trauma
+    [Dependency] private GameTicker _ticker = default!;
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private EmergencyShuttleSystem _emergency = default!;

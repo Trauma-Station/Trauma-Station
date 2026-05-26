@@ -3,7 +3,6 @@
 using Content.Goobstation.Common.StationReport;
 using Content.Server.GameTicking;
 using Content.Shared.Paper;
-using Robust.Shared.GameObjects;
 
 namespace Content.Goobstation.Server.StationReport;
 

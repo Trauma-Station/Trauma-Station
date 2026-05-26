@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Client.Overlays;
 using Content.Goobstation.Shared.SpecialAnimation;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 

@@ -365,9 +365,9 @@
     count: 5
   - type: Machine
     board: ShuttleGunKineticCircuitboard
-  # <Trauma>
   - type: PressureDamageChange
-    lowerBound: 0
+  - type: PressureEfficiency
+    lowerBound: 0 # work in space
   - type: UpgradeableWeapon
   - type: ItemSlots # for upgrades
     slots:
@@ -380,4 +380,3 @@
         whitelist:
           tags:
           - PKAUpgrade
-  # </Trauma>

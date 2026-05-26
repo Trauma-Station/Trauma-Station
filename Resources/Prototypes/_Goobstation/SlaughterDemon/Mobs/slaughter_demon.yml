@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -73,7 +70,7 @@
       types:
         Slash: 25
         Structural: 50
-  - type: Evil # Trauma - duh
+  - type: Evil
   - type: SlaughterDemon # main component
     speedModWalk: 2.5
     speedModRun: 2.5
@@ -138,11 +135,7 @@
       - DemonicWhisperAction
   - type: ReplacementAccent
     accent: slaughterDemon
-  - type: KnowledgeGrant
-    skills:
-      MartialArtHellRip: 88 # almost maxed out, demon cant read books
-      StrengthKnowledge: 70
-      AthleticsKnowledge: 40
+  - type: KnowledgeHolder
   - type: AlwaysTakeHoly
   - type: Hands
   - type: PressureImmunity

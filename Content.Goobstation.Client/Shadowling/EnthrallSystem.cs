@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Goobstation.Shared.Shadowling.Systems;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 

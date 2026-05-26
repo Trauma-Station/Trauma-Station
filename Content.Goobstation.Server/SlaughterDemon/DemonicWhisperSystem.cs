@@ -6,7 +6,6 @@ using Content.Server.Popups;
 using Content.Server.Prayer;
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.SlaughterDemon;
 

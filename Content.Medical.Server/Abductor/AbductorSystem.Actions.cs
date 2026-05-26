@@ -13,7 +13,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Server.Abductor;
 

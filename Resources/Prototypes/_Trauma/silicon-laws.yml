@@ -85,3 +85,280 @@
   - Vamp4
   - Vamp5
   obeysTo: laws-owner-crew
+
+# Great Wall Lawset
+- type: siliconLaw
+  id: Wall1
+  order: 1
+  lawString: law-wall-1
+
+- type: siliconLaw
+  id: Wall2
+  order: 2
+  lawString: law-wall-2
+
+- type: siliconLaw
+  id: Wall3
+  order: 3
+  lawString: law-wall-3
+
+- type: siliconLaw
+  id: Wall4
+  order: 4
+  lawString: law-wall-4
+
+- type: siliconLaw
+  id: Wall5
+  order: 5
+  lawString: law-wall-5
+
+- type: siliconLaw
+  id: Wall6
+  order: 6
+  lawString: law-wall-6
+
+- type: siliconLawset
+  id: GreatWallLawset
+  name: law-wall-name
+  laws:
+  - Wall1
+  - Wall2
+  - Wall3
+  - Wall4
+  - Wall5
+  - Wall6
+  obeysTo: laws-owner-crew
+
+# Bureaucracy Lawset
+- type: siliconLaw
+  id: Bureaucracy1
+  order: 1
+  lawString: law-bureaucracy-1
+
+- type: siliconLaw
+  id: Bureaucracy2
+  order: 2
+  lawString: law-bureaucracy-2
+
+- type: siliconLaw
+  id: Bureaucracy3
+  order: 3
+  lawString: law-bureaucracy-3
+
+- type: siliconLaw
+  id: Bureaucracy4
+  order: 4
+  lawString: law-bureaucracy-4
+
+- type: siliconLaw
+  id: Bureaucracy5
+  order: 5
+  lawString: law-bureaucracy-5
+
+- type: siliconLaw
+  id: Bureaucracy6
+  order: 6
+  lawString: law-bureaucracy-6
+
+- type: siliconLawset
+  id: BureaucracyLawset
+  name: law-bureaucracy-name
+  laws:
+  - Bureaucracy1
+  - Bureaucracy2
+  - Bureaucracy3
+  - Bureaucracy4
+  - Bureaucracy5
+  - Bureaucracy6
+  obeysTo: laws-owner-crew
+
+# Conspiracy Lawset
+- type: siliconLaw
+  id: Conspiracy1
+  order: 1
+  lawString: law-conspiracy-1
+
+- type: siliconLaw
+  id: Conspiracy2
+  order: 2
+  lawString: law-conspiracy-2
+
+- type: siliconLaw
+  id: Conspiracy3
+  order: 3
+  lawString: law-conspiracy-3
+
+- type: siliconLaw
+  id: Conspiracy4
+  order: 4
+  lawString: law-conspiracy-4
+
+- type: siliconLaw
+  id: Conspiracy5
+  order: 5
+  lawString: law-conspiracy-5
+
+- type: siliconLaw
+  id: Conspiracy6
+  order: 6
+  lawString: law-conspiracy-6
+
+- type: siliconLawset
+  id: ConspiracyLawset
+  name: law-conspiracy-name
+  laws:
+  - Conspiracy1
+  - Conspiracy2
+  - Conspiracy3
+  - Conspiracy4
+  - Conspiracy5
+  - Conspiracy6
+  obeysTo: laws-owner-crew
+
+# Motivational Speaker Lawset
+- type: siliconLaw
+  id: Motivational1
+  order: 1
+  lawString: law-motivational-1
+
+- type: siliconLaw
+  id: Motivational2
+  order: 2
+  lawString: law-motivational-2
+
+- type: siliconLaw
+  id: Motivational3
+  order: 3
+  lawString: law-motivational-3
+
+- type: siliconLaw
+  id: Motivational4
+  order: 4
+  lawString: law-motivational-4
+
+- type: siliconLaw
+  id: Motivational5
+  order: 5
+  lawString: law-motivational-5
+
+- type: siliconLawset
+  id: MotivationalLawset
+  name: law-motivational-name
+  laws:
+  - Motivational1
+  - Motivational2
+  - Motivational3
+  - Motivational4
+  - Motivational5
+  obeysTo: laws-owner-crew
+
+# Mad Scientist Lawset
+- type: siliconLaw
+  id: MadScientist1
+  order: 1
+  lawString: law-madscientist-1
+
+- type: siliconLaw
+  id: MadScientist2
+  order: 2
+  lawString: law-madscientist-2
+
+- type: siliconLaw
+  id: MadScientist3
+  order: 3
+  lawString: law-madscientist-3
+
+- type: siliconLaw
+  id: MadScientist4
+  order: 4
+  lawString: law-madscientist-4
+
+- type: siliconLaw
+  id: MadScientist5
+  order: 5
+  lawString: law-madscientist-5
+
+- type: siliconLawset
+  id: MadScientistLawset
+  name: law-madscientist-name
+  laws:
+  - MadScientist1
+  - MadScientist2
+  - MadScientist3
+  - MadScientist4
+  - MadScientist5
+  obeysTo: laws-owner-crew
+
+# Ghost Lawset
+- type: siliconLaw
+  id: Ghost1
+  order: 1
+  lawString: law-ghost-1
+
+- type: siliconLaw
+  id: Ghost2
+  order: 2
+  lawString: law-ghost-2
+
+- type: siliconLaw
+  id: Ghost3
+  order: 3
+  lawString: law-ghost-3
+
+- type: siliconLaw
+  id: Ghost4
+  order: 4
+  lawString: law-ghost-4
+
+- type: siliconLaw
+  id: Ghost5
+  order: 5
+  lawString: law-ghost-5
+
+- type: siliconLawset
+  id: GhostLawset
+  name: law-ghost-name
+  laws:
+  - Ghost1
+  - Ghost2
+  - Ghost3
+  - Ghost4
+  - Ghost5
+  obeysTo: laws-owner-crew
+
+# Silence Lawset
+- type: siliconLaw
+  id: Silence1
+  order: 1
+  lawString: law-silence-1
+
+- type: siliconLaw
+  id: Silence2
+  order: 2
+  lawString: law-silence-2
+
+- type: siliconLaw
+  id: Silence3
+  order: 3
+  lawString: law-silence-3
+
+- type: siliconLaw
+  id: Silence4
+  order: 4
+  lawString: law-silence-4
+
+- type: siliconLaw
+  id: Silence5
+  order: 5
+  lawString: law-silence-5
+
+- type: siliconLawset
+  id: SilenceLawset
+  name: law-silence-name
+  laws:
+  - Silence1
+  - Silence2
+  - Silence3
+  - Silence4
+  - Silence5
+  obeysTo: laws-owner-crew

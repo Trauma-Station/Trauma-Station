@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Waddle;
 using Content.Shared.Movement.Components;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 
 namespace Content.Goobstation.Client.Waddle;

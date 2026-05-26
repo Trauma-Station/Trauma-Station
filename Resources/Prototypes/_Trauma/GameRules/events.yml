@@ -23,6 +23,7 @@
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
     - id: MorphRule
+    - id: FugitiveSpawn
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -118,3 +119,82 @@
         weight: 0.625 # Not as scary so make rarer in the event, shrimple as.
       - id: MobCoconutCrabFloofy # because it looks funny
         weight: 0.05 # NEVER BASICALLY
+
+- type: entity
+  id: FugitiveSpawn
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 10
+    duration: null
+    earliestStart: 10
+    minimumPlayers: 30
+    reoccurrenceDelay: 30
+    maxOccurrences: 2
+  - type: FugitiveRule
+  - type: MaintsSpawnRule
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - FugitiveEscapeObjective
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostRoleFugitive
+      min: 2
+      max: 2
+      pickPlayer: false
+      startingGear: FugitiveAntagGear
+      briefing:
+        text: fugitive-role-greeting
+        color: Orange
+        sound: /Audio/Misc/thief_greeting.ogg
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Syndicate
+      - type: RandomMetadata
+      - type: EmitSoundOnSpawn # fell out of the ceiling
+        sound: /Audio/Effects/clang.ogg
+      mindRoles:
+      - MindRoleGhostRoleFugitive
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+
+- type: entity
+  id: FugitiveHunterRule
+  parent: BaseGameRule
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterArrestFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostRoleHunter
+      min: 2
+      max: 2
+      pickPlayer: false
+      startingGear: HunterAntagGear
+      briefing:
+        text: hunter-role-greeting
+        color: Blue
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Syndicate
+      - type: RandomMetadata
+      mindRoles:
+      - MindRoleGhostRoleHunter
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills

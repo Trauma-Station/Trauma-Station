@@ -146,3 +146,293 @@
       children:
       - id: ClothingOuterArmorMamluk
       - id: ClothingHeadHatHelmetMamluk
+
+- type: entity
+  id: SpawnInstrumentGlockenspiel
+  categories: [ HideSpawnMenu ]
+  name: glockenspiel
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: GlockenspielInstrument
+
+- type: entity
+  id: SpawnInstrumentMusicBox
+  categories: [ HideSpawnMenu ]
+  name: music box
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: MusicBoxInstrument
+
+- type: entity
+  id: SpawnInstrumentXylophone
+  categories: [ HideSpawnMenu ]
+  name: xylophone
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: XylophoneInstrument
+
+- type: entity
+  id: SpawnInstrumentMicrophone
+  categories: [ HideSpawnMenu ]
+  name: microphone
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: MicrophoneInstrument
+
+- type: entity
+  id: SpawnInstrumentWoodblock
+  categories: [ HideSpawnMenu ]
+  name: woodblock
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: WoodblockInstrument
+
+- type: entity
+  id: SpawnInstrumentReverseCymbals
+  categories: [ HideSpawnMenu ]
+  name: reverse cymbals
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: ReverseCymbalsInstrument
+
+- type: entity
+  id: SpawnInstrumentElectricGuitar
+  categories: [ HideSpawnMenu ]
+  name: electric guitar
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: ElectricGuitarInstrument
+
+- type: entity
+  id: SpawnInstrumentBassGuitar
+  categories: [ HideSpawnMenu ]
+  name: bass guitar
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: BassGuitarInstrument
+
+- type: entity
+  id: SpawnInstrumentAcousticGuitar
+  categories: [ HideSpawnMenu ]
+  name: acoustic guitar
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: AcousticGuitarInstrument
+
+- type: entity
+  id: SpawnInstrumentBanjo
+  categories: [ HideSpawnMenu ]
+  name: banjo
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: BanjoInstrument
+
+- type: entity
+  id: SpawnInstrumentViolin
+  categories: [ HideSpawnMenu ]
+  name: violin
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: ViolinInstrument
+
+- type: entity
+  id: SpawnInstrumentViola
+  categories: [ HideSpawnMenu ]
+  name: viola
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: ViolaInstrument
+
+- type: entity
+  id: SpawnInstrumentCello
+  categories: [ HideSpawnMenu ]
+  name: cello
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: CelloInstrument
+
+- type: entity
+  id: SpawnInstrumentSaxophone
+  categories: [ HideSpawnMenu ]
+  name: saxophone
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: SaxophoneInstrument
+
+- type: entity
+  id: SpawnInstrumentHarmonica
+  categories: [ HideSpawnMenu ]
+  name: harmonica
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: HarmonicaInstrument
+
+- type: entity
+  id: SpawnInstrumentClarinet
+  categories: [ HideSpawnMenu ]
+  name: clarinet
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: ClarinetInstrument
+
+- type: entity
+  id: SpawnInstrumentFlute
+  categories: [ HideSpawnMenu ]
+  name: flute
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: FluteInstrument
+
+- type: entity
+  id: SpawnInstrumentRecorder
+  categories: [ HideSpawnMenu ]
+  name: recorder
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: RecorderInstrument
+
+- type: entity
+  id: SpawnInstrumentPanFlute
+  categories: [ HideSpawnMenu ]
+  name: pan flute
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: PanFluteInstrument
+
+- type: entity
+  id: SpawnInstrumentOcarina
+  categories: [ HideSpawnMenu ]
+  name: ocarina
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: OcarinaInstrument
+
+- type: entity
+  id: SpawnInstrumentBagpipe
+  categories: [ HideSpawnMenu ]
+  name: bagpipe
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: BagpipeInstrument
+
+- type: entity
+  id: SpawnInstrumentSynthesizer
+  categories: [ HideSpawnMenu ]
+  name: synthesizer
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: SynthesizerInstrument
+
+- type: entity
+  id: SpawnInstrumentAccordion
+  categories: [ HideSpawnMenu ]
+  name: accordion
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: AccordionInstrument
+
+- type: entity
+  id: SpawnInstrumentKalimba
+  categories: [ HideSpawnMenu ]
+  name: kalimba
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: KalimbaInstrument
+
+- type: entity
+  id: SpawnInstrumentTrumpet
+  categories: [ HideSpawnMenu ]
+  name: trumpet
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: TrumpetInstrument
+
+- type: entity
+  id: SpawnInstrumentTrombone
+  categories: [ HideSpawnMenu ]
+  name: trombone
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: TromboneInstrument
+
+- type: entity
+  id: SpawnInstrumentFrenchHorn
+  categories: [ HideSpawnMenu ]
+  name: french horn
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: FrenchHornInstrument
+
+- type: entity
+  id: SpawnInstrumentEuphonium
+  categories: [ HideSpawnMenu ]
+  name: euphonium
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: EuphoniumInstrument
+
+- type: entity
+  id: SpawnInstrumentGunpet
+  categories: [ HideSpawnMenu ]
+  name: gunpet
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnTableOnDespawn
+    table:
+      id: GunpetInstrument

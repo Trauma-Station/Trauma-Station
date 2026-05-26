@@ -97,7 +97,6 @@ public sealed partial class BrainSystem : EntitySystem
         if (HasComp<BrainComponent>(entity)) // sentient brain...
             return true;
 
-        // TODO NUBODY: make this an event
         foreach (var brain in _body.GetOrgans<BrainComponent>((entity, body)))
         {
             if (brain.Comp.Active)

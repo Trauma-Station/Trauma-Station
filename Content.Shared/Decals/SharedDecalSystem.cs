@@ -209,10 +209,7 @@ public abstract partial class SharedDecalSystem : EntitySystem
         {
             var ent = decal.Ent;
             if (!TryComp(ent, out TransformComponent? xform))
-            {
-                Log.Error($"Deleted decal {ent} found in chunk {chunkIndices} of {ToPrettyString(gridId)}!");
                 continue;
-            }
 
             var decalPos = xform.Coordinates.Position;
             if ((position - decalPos).LengthSquared() > dist2)

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Text;
 using Content.Shared.Chat;
 using Content.Shared.Paper;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using System.Text;
 
 namespace Content.Trauma.Server.Station;
 

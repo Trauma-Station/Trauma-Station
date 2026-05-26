@@ -1539,7 +1539,7 @@
     - item: Screwdriver
     - item: Wirecutter
     - item: Multitool
-    - item: RefuelingWelder
+    #- item: RefuelingWelder # Trauma - only engiborg gets welder
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-tool-module }
 

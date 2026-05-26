@@ -14,18 +14,30 @@ public partial class RandomTeleportComponent : Component
     /// <summary>
     ///     Up to how far to teleport the user in tiles.
     /// </summary>
-    [DataField] public MinMax Radius = new MinMax(10, 20);
+    [DataField]
+    public MinMax Radius = new MinMax(10, 20);
 
     /// <summary>
     ///     How many times to try to pick the destination. Larger number means the teleport is more likely to be safe.
     /// </summary>
-    [DataField] public int TeleportAttempts = 10;
+    [DataField]
+    public int TeleportAttempts = 10;
 
     /// <summary>
     ///     Will try harder to find a safe teleport.
     /// </summary>
-    [DataField] public bool ForceSafeTeleport = true;
+    [DataField]
+    public bool ForceSafeTeleport = true;
 
-    [DataField] public SoundSpecifier ArrivalSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
-    [DataField] public SoundSpecifier DepartureSound = new SoundPathSpecifier("/Audio/Effects/teleport_departure.ogg");
+    /// <summary>
+    ///     Whether teleporting should teleport pulled entity as well
+    /// </summary>
+    [DataField]
+    public bool TeleportPulled;
+
+    [DataField]
+    public SoundSpecifier ArrivalSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
+
+    [DataField]
+    public SoundSpecifier DepartureSound = new SoundPathSpecifier("/Audio/Effects/teleport_departure.ogg");
 }

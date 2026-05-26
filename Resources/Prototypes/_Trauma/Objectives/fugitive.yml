@@ -1,0 +1,70 @@
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseFugitiveObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-unknown
+  - type: RoleRequirement
+    roles:
+    - FugitiveRole
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseHunterObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-spacepol
+  - type: RoleRequirement
+    roles:
+    - HunterRole
+
+- type: entity
+  parent: [BaseFugitiveObjective, BaseLivingObjective]
+  id: FugitiveEscapeObjective
+  name: Evade law enforcement
+  description: You will never atone for your crimes, make sure of it by blending into the crowd.
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Markers/jobs.rsi
+      state: prisoner
+  - type: EscapeShuttleCondition
+
+- type: entity
+  parent: [BaseHunterObjective, BaseKillObjective]
+  id: HunterKillFugitiveObjective
+  name: Eliminate the fugitive
+  description: The fugitive is considered too dangerous to be taken alive. Use the report to identify them and make sure they don't make it off the station.
+  components:
+  - type: Objective
+    difficulty: 2
+    unique: false
+    icon:
+      sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+      state: base
+  - type: TargetObjective
+  - type: FugitiveTarget
+  - type: KillPersonCondition
+    requireDead: true
+    requireMaroon: true
+
+- type: entity
+  parent: [BaseHunterObjective, BaseKillObjective]
+  id: HunterArrestFugitiveObjective
+  name: Apprehend the fugitive
+  description: Locate the fugitive using the report and ensure they do not escape on the evacuation shuttle. Bring them to justice, dead or alive.
+  components:
+  - type: Objective
+    difficulty: 1.5
+    unique: false
+    icon:
+      sprite: Objects/Weapons/Melee/stunbaton.rsi
+      state: stunbaton_on
+  - type: TargetObjective
+  - type: FugitiveTarget
+  - type: KillPersonCondition
+    requireDead: false
+    requireMaroon: true

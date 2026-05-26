@@ -15,7 +15,6 @@ using Content.Trauma.Shared.BloodSplatter;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.EntityEffects;
 

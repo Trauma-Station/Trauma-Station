@@ -35,7 +35,7 @@
   id: Morph
   coefficients:
     Radiation: 0
-    Heat: 2
+    Heat: 1.5
 
 - type: damageModifierSet
   id: CoconutCrab

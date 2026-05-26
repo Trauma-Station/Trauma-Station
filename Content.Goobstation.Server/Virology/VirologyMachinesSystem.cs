@@ -12,7 +12,6 @@ using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.Virology;
 

@@ -8,3 +8,14 @@
     state: cpu_medical
   - type: ComputerBoard
     prototype: ComputerGeneticsConsoleEmpty # no farming biomass chud
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: CircuitEditorConsoleCircuitboard
+  name: circuit editor console board
+  description: A computer printed circuit board for a circuit editor console.
+  components:
+  - type: Sprite
+    state: cpu_science
+  - type: ComputerBoard
+    prototype: ComputerCircuitEditor

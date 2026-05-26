@@ -3,8 +3,6 @@
 using Content.Client.Guidebook.Controls;
 using Content.Client.Guidebook.Richtext;
 using Content.Goobstation.Shared.Factory;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Goobstation.Client.Guidebook.Controls;

@@ -3,8 +3,6 @@
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.Paint;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Paint;
 

@@ -7,7 +7,6 @@ using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 

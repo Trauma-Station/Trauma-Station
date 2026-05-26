@@ -34,15 +34,18 @@ public sealed partial class CosmicCultObjectiveSystem : EntitySystem
 
     private void OnEffigyRequirementCheck(EntityUid uid, CosmicEffigyConditionComponent comp, ref RequirementCheckEvent args)
     {
-        if (args.Cancelled || !_roles.MindHasRole<CosmicColossusRoleComponent>(args.MindId))
+        if (args.Cancelled || !_roles.MindHasRole<CosmicColossusRoleComponent>(args.MindId) || args.Mind.OwnedEntity is not { } mob)
             return;
 
+        var map = Transform(mob).MapID;
         var warps = new List<EntityUid>();
         var query = EntityQueryEnumerator<WarpPointComponent>();
         while (query.MoveNext(out var warpUid, out var warp))
         {
-            if (_whitelist.IsWhitelistFail(comp.Blacklist, warpUid)
-                && !string.IsNullOrWhiteSpace(warp.Location))
+            if (_whitelist.IsWhitelistFail(comp.Blacklist, warpUid) &&
+                !string.IsNullOrWhiteSpace(warp.Location) &&
+                !warp.Follow && // no effigy in the singularity
+                Transform(warpUid).MapID == map) // no lavaland beacons etc
             {
                 warps.Add(warpUid);
             }

@@ -17,7 +17,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 

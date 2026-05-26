@@ -19,7 +19,6 @@ using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.NanoChat;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.CartridgeLoader.Cartridges;
 

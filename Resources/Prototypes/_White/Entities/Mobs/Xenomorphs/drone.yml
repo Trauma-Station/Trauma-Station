@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone ]
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone, BaseXenoTailed ]
   id: BaseMobXenomorphDrone
   name: xenomorph drone
   description: A specialized individual designed to build and maintain a hive. Less aggressive than other xenomorph forms, but still deadly when approached.

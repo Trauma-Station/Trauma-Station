@@ -2,7 +2,6 @@
 
 using System.Linq;
 using Content.Trauma.Shared.Wizard.BindSoul;
-using Robust.Client.GameObjects;
 using Content.Shared.DrawDepth;
 
 namespace Content.Trauma.Client.Wizard.Systems;
