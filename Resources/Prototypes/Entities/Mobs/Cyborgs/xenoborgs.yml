@@ -22,7 +22,7 @@
       map: ["light"]
       visible: false
   - type: BorgChassis
-    maxModules: 8
+    maxModules: 8 #trauma - was 7
     hasMindState: xenoborg_engi_e
     noMindState: xenoborg_engi_e_r
     moduleWhitelist:
@@ -31,7 +31,7 @@
       - XenoborgModuleEngi
       - BorgModuleEngineering
       - BorgModuleGeneric
-      - BorgModuleJanitor
+      - BorgModuleJanitor #trauma - to make it able to remove and add
   - type: ContainerFill
     containers:
       borg_brain:
@@ -44,7 +44,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning
+      - BorgModuleAdvancedCleaning #trauma - Clean the ship
   - type: ShowElectrocutionHUD
   - type: ShowHealthBars
     damageContainers:
@@ -343,7 +343,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
-      - BorgModuleAdvancedCleaning
+      - BorgModuleAdvancedCleaning #Trauma - Clean the ship
   - type: ItemSlots
     slots:
       cell_slot:
