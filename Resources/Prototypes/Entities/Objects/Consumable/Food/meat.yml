@@ -310,7 +310,7 @@
   - type: EntityEffectOnEaten
     effects:
     - !type:Vomit
-    whiteList:
+    whitelist:
       tags:
       - Chicken
   # </Trauma>
