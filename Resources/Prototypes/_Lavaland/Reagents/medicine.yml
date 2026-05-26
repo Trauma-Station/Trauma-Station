@@ -34,7 +34,6 @@
       effects:
       - !type:ModifyBloodLevel
         amount: 1.5
-      # <Trauma>
       - !type:EvenHealthChange
         damage:
           Burn: -1
@@ -52,7 +51,6 @@
           Burn: -4
           Brute: -4
           Airloss: -1
-      # </Trauma>
         conditions:
         - !type:PressureCondition
           min: 1
