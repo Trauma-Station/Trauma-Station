@@ -9079,3 +9079,16 @@ Entries:
   id: 1035
   time: '2026-05-25T08:53:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2789
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: DClass are no longer considered crew by silicons.
+  - type: Tweak
+    message: SpacePol Hunters are no longer considered crew by silicons.
+  - type: Add
+    message: >-
+      SpacePol Hunters get a new ID icon to distinguish them from security
+      officers.
+  id: 1036
+  time: '2026-05-26T00:53:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2808
