@@ -29,18 +29,14 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AutoSurgeonComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<AutoSurgeonComponent, StrappedEvent>(OnStrapped);
+        SubscribeLocalEvent<AutoSurgeonComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<AutoSurgeonComponent, AutoSurgeonDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<AutoSurgeonComponent, ExaminedEvent>(OnExamined);
     }
 
-    private void OnActivate(Entity<AutoSurgeonComponent> ent, ref ActivateInWorldEvent args)
+    private void OnStrapped(Entity<AutoSurgeonComponent> ent, ref StrappedEvent args)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
         ent.Comp.ActiveSound = _audio.Stop(ent.Comp.ActiveSound);
 
         var user = args.User;
@@ -51,14 +47,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
             return;
         }
 
-        var buckled = Comp<StrapComponent>(ent).BuckledEntities;
-        if (buckled.Count == 0)
-        {
-            _popup.PopupClient($"Nothing is strapped to the {name}!", ent, user, PopupType.SmallCaution);
-            return;
-        }
-
-        var target = buckled.First();
+        var target = args.Buckle.Owner;
         if (!HasComp<BodyComponent>(target))
         {
             _popup.PopupClient($"{Name(target)} can't be operated on!", ent, user, PopupType.SmallCaution);
@@ -90,6 +79,13 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
 
         if (_audio.PlayPvs(ent.Comp.Sound, ent) is {} sound)
             ent.Comp.ActiveSound = sound.Entity;
+    }
+
+    private void OnUnstrapped(Entity<AutoSurgeonComponent> ent, ref UnstrappedEvent args)
+    {
+        // no sound spamming idc about the doafter, just run away
+        _audio.Stop(ent.Comp.ActiveSound);
+        ent.Comp.ActiveSound = null;
     }
 
     private void OnDoAfter(Entity<AutoSurgeonComponent> ent, ref AutoSurgeonDoAfterEvent args)
