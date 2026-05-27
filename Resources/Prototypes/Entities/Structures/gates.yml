@@ -20,6 +20,9 @@
   parent: LogicEmptyCircuit
   id: BaseLogicItem
   components:
+  # <Trauma>
+  - type: SubFloorHide # sneaky
+  # </Trauma>
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
