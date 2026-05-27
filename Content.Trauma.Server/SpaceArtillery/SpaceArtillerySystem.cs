@@ -167,7 +167,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
             return;
         args.PushMarkup(
             Loc.GetString(
-                "ship-gun-class-component-examine-detail",
+                "",
                 ("processingPower", _fireControl.GetProcessingPowerCost(uid, controllable))
             )
         );
