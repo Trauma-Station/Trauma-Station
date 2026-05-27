@@ -19,7 +19,7 @@ public sealed partial class EmotesTabControl : BaseTabControl
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ISharedPlayerManager _playerManager = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
-    private SpriteSystem _sprite;
+    private SpriteSystem? _sprite;
 
     private TimeSpan _lastEmoteTime;
     private static readonly TimeSpan EmoteCooldown = TimeSpan.FromSeconds(0);
@@ -28,8 +28,6 @@ public sealed partial class EmotesTabControl : BaseTabControl
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-
-        _sprite = _ent.System<SpriteSystem>();
     }
 
     public override bool UpdateState()
@@ -70,6 +68,7 @@ public sealed partial class EmotesTabControl : BaseTabControl
     private IconButton CreateEmoteButton(EmotePrototype emote)
     {
         var button = new IconButton(Loc.GetString(emote.Name));
+        _sprite ??= _ent.System<SpriteSystem>();
         button.Icon.Texture = _sprite.Frame0(emote.Icon);
         button.OnPressed += _ => OnPlayEmote(new ProtoId<EmotePrototype>(emote.ID));
 
