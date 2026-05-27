@@ -2,12 +2,14 @@
 
 using System.Linq;
 using Content.Trauma.Shared.Wizard.Mutate;
-using Content.Shared.Humanoid;
+using Content.Shared.Body;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class HulkSystem : SharedHulkSystem
+public sealed partial class HulkSystem : SharedHulkSystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -22,7 +24,7 @@ public sealed class HulkSystem : SharedHulkSystem
         if (TerminatingOrDeleted(uid))
             return;
 
-        if (HasComp<HumanoidProfileComponent>(uid))
+        if (HasComp<VisualBodyComponent>(uid))
             return;
 
         if (!TryComp<SpriteComponent>(uid, out var sprite))
@@ -33,9 +35,10 @@ public sealed class HulkSystem : SharedHulkSystem
         if (comp.NonHumanoidOldLayerData.Count != layerCount)
             return;
 
+        var spriteEnt = (uid, sprite);
         for (var i = 0; i < layerCount; i++)
         {
-            sprite.LayerSetColor(i, comp.NonHumanoidOldLayerData[i]);
+            _sprite.LayerSetColor(spriteEnt, i, comp.NonHumanoidOldLayerData[i]);
         }
     }
 
@@ -45,18 +48,20 @@ public sealed class HulkSystem : SharedHulkSystem
 
         var (uid, comp) = hulk;
 
-        if (HasComp<HumanoidProfileComponent>(uid))
+        if (HasComp<VisualBodyComponent>(uid))
             return;
 
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
+        var ent = (uid, sprite);
         for (var i = 0; i < sprite.AllLayers.Count(); i++)
         {
-            if (!sprite.TryGetLayer(i, out var layer))
-                return;
+            if (!_sprite.TryGetLayer(ent, i, out var layer, false))
+                continue;
+
             comp.NonHumanoidOldLayerData.Add(layer.Color);
-            sprite.LayerSetColor(i, comp.SkinColor);
+            _sprite.LayerSetColor(ent, i, comp.SkinColor);
         }
     }
 }
