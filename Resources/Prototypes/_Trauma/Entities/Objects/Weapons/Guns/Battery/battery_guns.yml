@@ -107,7 +107,7 @@
     burstCooldown: 0.5
   - type: BatteryAmmoProvider
     proto: LaserGunBullet
-    fireCost: 65 # Trauma, was 25 # 40 shots
+    fireCost: 65 # 40 shots
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser_wide.rsi
   - type: Clothing

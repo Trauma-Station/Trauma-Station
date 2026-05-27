@@ -9079,3 +9079,32 @@ Entries:
   id: 1035
   time: '2026-05-25T08:53:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2789
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: DClass are no longer considered crew by silicons.
+  - type: Tweak
+    message: SpacePol Hunters are no longer considered crew by silicons.
+  - type: Add
+    message: >-
+      SpacePol Hunters get a new ID icon to distinguish them from security
+      officers.
+  id: 1036
+  time: '2026-05-26T00:53:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2808
+- author: Hoodsie
+  changes:
+  - type: Add
+    message: Gave Advanced Cleaning module to engi xenoborg.
+  id: 1037
+  time: '2026-05-26T04:10:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2817
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked sub gamemode heretic to spawn more heretics instead of just a max
+      of 1
+  id: 1038
+  time: '2026-05-26T06:33:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2818

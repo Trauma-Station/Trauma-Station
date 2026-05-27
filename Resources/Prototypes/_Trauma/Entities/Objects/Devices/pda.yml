@@ -29,10 +29,17 @@
     accentVColor: "#C0C0C0"
 
 - type: entity
-  parent: ClearPDA
-  id: ClearPDAHunter
+  parent: ChameleonPDA
+  id: HunterPDA
   name: SpacePol PDA
   description: Surprisingly low quality, for a spacepol officer's pda.
   components:
+  - type: Sprite
+    layers:
+      - state: pda-security
   - type: Pda
-    id: SpacePolIDCard
+    id: SpacePolIDCardChameleon
+  - type: ChameleonClothing
+    slot: [idcard]
+    default: SecurityPDA
+    requireTag: WhitelistChameleonPDA
