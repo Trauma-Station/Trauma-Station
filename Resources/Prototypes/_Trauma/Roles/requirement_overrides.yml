@@ -178,12 +178,6 @@
     Heretic:
     - !type:OverallPlaytimeRequirement
       time: 5h
-    Ninja:
-    - !type:OverallPlaytimeRequirement
-      time: 3h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 1h
     Nukeops:
     - !type:OverallPlaytimeRequirement
       time: 5h
@@ -211,6 +205,12 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 1h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    SpaceNinja:
+    - !type:OverallPlaytimeRequirement
+      time: 3h
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h
