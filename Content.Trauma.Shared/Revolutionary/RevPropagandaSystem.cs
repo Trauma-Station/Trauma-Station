@@ -73,7 +73,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
             return false;
 
         var message = _random.Pick(_speechLocalization);
-        _chat.TrySendInGameICMessage(user, Loc.GetString(message), InGameICChatType.Speak, hideChat: false, hideLog: false);
+        _chat.TrySendInGameICMessage(user, message, InGameICChatType.Speak, hideChat: false, hideLog: false);
         return true;
     }
 

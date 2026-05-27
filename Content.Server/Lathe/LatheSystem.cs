@@ -393,7 +393,7 @@ namespace Content.Server.Lathe
         {
             UpdateUserInterfaceState(uid, component);
 
-            AnnounceAddedRecipes((uid, component), args.UnlockedRecipes); // Trauma
+            AnnounceAddedRecipes((uid, component), args.NewlyUnlockedRecipes); // Trauma
         }
 
         private void OnResearchRegistrationChanged(EntityUid uid, LatheComponent component, ref ResearchRegistrationChangedEvent args)

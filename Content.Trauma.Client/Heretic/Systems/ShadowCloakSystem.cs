@@ -34,6 +34,7 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<VoidCurseComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticArenaParticipantComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<UnfathomableCurioShieldComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<AimedRifleMarkerComponent>>(UpdateOverlay);
 
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShaderEvent>(OnShader);
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShadersEvent>(OnShaders);

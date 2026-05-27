@@ -113,78 +113,82 @@ entity-effect-guidebook-even-health-change =
         }
     } { $changes }
 
+# Trauma - removed LOC() from all of these, its already localized
 entity-effect-guidebook-status-effect-old =
     { $type ->
         [update]{ $chance ->
                     [1] Causes
                      *[other] cause
-                 } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
+                 } {$key} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
         [add]   { $chance ->
                     [1] Causes
                     *[other] cause
-                } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} with accumulation
+                } {$key} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} with accumulation
         [set]  { $chance ->
                     [1] Causes
                     *[other] cause
-                } {LOC($key)} for {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
+                } {$key} for {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
         *[remove]{ $chance ->
                     [1] Removes
                     *[other] remove
-                } {NATURALFIXED($time, 3)} {MANY("second", $time)} of {LOC($key)}
+                } {NATURALFIXED($time, 3)} {MANY("second", $time)} of {$key}
     }
 
+# Trauma - removed LOC() from all of these, its already localized
 entity-effect-guidebook-status-effect =
     { $type ->
         [update]{ $chance ->
                     [1] Causes
                     *[other] cause
-                 } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
+                 } {$key} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
         [add]   { $chance ->
                     [1] Causes
                     *[other] cause
-                } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} with accumulation
+                } {$key} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} with accumulation
         [set]  { $chance ->
                     [1] Causes
                     *[other] cause
-                } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
+                } {$key} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
         *[remove]{ $chance ->
                     [1] Removes
                     *[other] remove
-                } {NATURALFIXED($time, 3)} {MANY("second", $time)} of {LOC($key)}
+                } {NATURALFIXED($time, 3)} {MANY("second", $time)} of {$key}
     } { $delay ->
         [0] immediately
         *[other] after a {NATURALFIXED($delay, 3)} second delay
     }
 
+# Trauma - removed LOC() from all of these, its already localized
 entity-effect-guidebook-status-effect-indef =
     { $type ->
         [update]{ $chance ->
                     [1] Causes
                     *[other] cause
-                 } permanent {LOC($key)}
+                 } permanent {$key}
         [add]   { $chance ->
                     [1] Causes
                     *[other] cause
-                } permanent {LOC($key)}
+                } permanent {$key}
         [set]  { $chance ->
                     [1] Causes
                     *[other] cause
-                } permanent {LOC($key)}
+                } permanent {$key}
         *[remove]{ $chance ->
                     [1] Removes
                     *[other] remove
-                } {LOC($key)}
+                } {$key}
     } { $delay ->
         [0] immediately
         *[other] after a {NATURALFIXED($delay, 3)} second delay
     }
 
+# Trauma - LOC($key) -> knockdown, copy paste major
 entity-effect-guidebook-knockdown =
     { $type ->
         [update]{ $chance ->
                     [1] Causes
                     *[other] cause
-                    } {LOC($key)} for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
+                    } knockdown for at least {NATURALFIXED($time, 3)} {MANY("second", $time)} without accumulation
         [add]   { $chance ->
                     [1] Causes
                     *[other] cause

@@ -186,3 +186,10 @@ Entries:
   id: 24
   time: '2026-05-21T08:07:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2714
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: Fax logs work again
+  id: 25
+  time: '2026-05-23T18:43:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2766

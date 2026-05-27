@@ -32,6 +32,9 @@
   id: CartridgeTurret # Ammo whitelist: BaseMagazineTurret, WeaponTurretRevolutionaryPistol
 
 - type: Tag
+  id: CartridgeLionhunter # Used for lionhunter rifle ammo creation ritual blacklist
+
+- type: Tag
   id: Cement # Construction: WetBrick
 
 - type: Tag

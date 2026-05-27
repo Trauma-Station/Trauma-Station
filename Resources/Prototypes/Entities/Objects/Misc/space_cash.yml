@@ -1,6 +1,7 @@
 - type: entity
+  abstract: true # Trauma
   parent: BaseItem
-  id: SpaceCash
+  id: BaseSpaceCash # Trauma - SpaceCash has CashComponent separately. i love not being able to remove components in child prototypes...
   name: spesos
   description: You gotta have money.
   components:
@@ -47,8 +48,8 @@
   - type: Tag
     tags:
     - Paper # Moth food
+  #- type: Cash # dont want this to be inherited, moved to separate SpaceCash prototype
   # </Trauma>
-  - type: Cash
   - type: Item
     shape:
     - 0,0,1,0

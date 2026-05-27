@@ -11,22 +11,23 @@ public sealed class TrailOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
-    private readonly IEntityManager _entManager;
-    private readonly IPrototypeManager _protoMan;
-    private readonly IGameTiming _timing;
-
-    private readonly SpriteSystem _sprite;
-    private readonly TransformSystem _transform;
+    private IEntityManager _ent;
+    private IPrototypeManager _proto;
+    private IGameTiming _timing;
+    private SpriteSystem _sprite;
+    private TransformSystem _transform;
+    private EntityQuery<SpriteComponent> _spriteQuery;
 
     public TrailOverlay(IEntityManager entManager, IPrototypeManager protoMan, IGameTiming timing)
     {
         ZIndex = (int) DrawDepth.Overdoors;
 
-        _entManager = entManager;
-        _protoMan = protoMan;
+        _ent = entManager;
+        _proto = protoMan;
         _timing = timing;
-        _sprite = _entManager.System<SpriteSystem>();
-        _transform = _entManager.System<TransformSystem>();
+        _sprite = _ent.System<SpriteSystem>();
+        _transform = _ent.System<TransformSystem>();
+        _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -40,18 +41,15 @@ public sealed class TrailOverlay : Overlay
         var handle = args.WorldHandle;
         var bounds = args.WorldAABB;
 
-        var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
-        var spriteQuery = _entManager.GetEntityQuery<SpriteComponent>();
-
-        var query = _entManager.EntityQueryEnumerator<TrailComponent, TransformComponent>();
+        var query = _ent.EntityQueryEnumerator<TrailComponent, TransformComponent>();
         while (query.MoveNext(out _, out var trail, out var xform))
         {
             if (trail.TrailData.Count == 0)
                 continue;
 
-            var (position, rotation) = _transform.GetWorldPositionRotation(xform, xformQuery);
+            var (position, rotation) = _transform.GetWorldPositionRotation(xform);
 
-            if (trail.Shader != null && _protoMan.TryIndex<ShaderPrototype>(trail.Shader, out var shaderProto))
+            if (trail.Shader != null && _proto.TryIndex<ShaderPrototype>(trail.Shader, out var shaderProto))
             {
                 var shader = shaderProto.InstanceUnique();
                 foreach (var (key, data) in trail.ShaderData)
@@ -72,7 +70,7 @@ public sealed class TrailOverlay : Overlay
             else
                 handle.UseShader(null);
 
-            if (trail.RenderedEntity != null)
+            if (trail.RenderedEntity is { } uid)
             {
                 Direction? direction = null;
                 var rot = rotation;
@@ -82,9 +80,9 @@ public sealed class TrailOverlay : Overlay
                     direction = dirRot.GetCardinalDir();
                 }
                 else if (trail.RenderedEntityRotationStrategy == RenderedEntityRotationStrategy.RenderedEntity)
-                    rot = _transform.GetWorldRotation(trail.RenderedEntity.Value);
+                    rot = _transform.GetWorldRotation(uid);
 
-                if (spriteQuery.TryComp(trail.RenderedEntity.Value, out var sprite))
+                if (_spriteQuery.TryComp(uid, out var sprite))
                 {
                     handle.SetTransform(Matrix3x2.Identity);
                     foreach (var data in trail.TrailData)
@@ -104,11 +102,12 @@ public sealed class TrailOverlay : Overlay
 
                         var originalColor = sprite.Color;
                         var originalScale = sprite.Scale;
-                        sprite.Color = data.Color;
-                        sprite.Scale *= data.Scale;
-                        sprite.Render(handle, eyeRot, rot, direction, worldPosition);
-                        sprite.Color = originalColor;
-                        sprite.Scale = originalScale;
+                        var ent = (uid, sprite);
+                        _sprite.SetColor(ent, data.Color);
+                        _sprite.SetScale(ent, sprite.Scale * data.Scale);
+                        _sprite.RenderSprite(ent, handle, eyeRot, rot, worldPosition, direction);
+                        _sprite.SetColor(ent, originalColor);
+                        _sprite.SetScale(ent, originalScale);
                     }
                 }
                 continue;

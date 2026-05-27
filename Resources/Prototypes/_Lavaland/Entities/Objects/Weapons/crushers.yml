@@ -22,6 +22,8 @@
     soundHit:
       collection: MetalThud
   - type: PressureDamageChange
+    appliedModifier: 4
+  - type: PressureEfficiency
   - type: Wieldable
   - type: GunRequiresWield
   - type: UseDelayBlockMelee
@@ -124,7 +126,7 @@
   - type: Tag
     tags:
     - Pickaxe
-  - type: CosmicTransmutable # Trauma
+  - type: CosmicTransmutable
     transmuteTo: ScytheCosmicCult # Similar-ish in function
 
 - type: entity
@@ -144,13 +146,13 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 6
-        Blunt: 5
+        Slash: 3
+        Blunt: 3
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 4
-        Structural: 8
+        Slash: 2
+        Structural: 4
 
 - type: entity
   parent: [ BaseWeaponCrusher, BaseSalvageContraband ]
@@ -180,13 +182,13 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 5
-        Slash: 4
+        Piercing: 2
+        Slash: 2
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 3
-        Structural: 8
+        Piercing: 2
+        Structural: 4
 
 - type: entity
   parent: [ BaseWeaponCrusher, BaseSalvageContraband ]
@@ -201,12 +203,12 @@
     attackRate: 0.6
     damage:
       types:
-        Blunt: 12
+        Blunt: 6
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 13
-        Structural: 15 # Breaks weak rocks effectively
+        Blunt: 6
+        Structural: 8
   - type: Item
     size: Ginormous
     sprite: _Lavaland/Objects/Weapons/Crushers/crusher_hammer-inhands.rsi
@@ -237,14 +239,14 @@
     range: 2.2
     damage:
       types:
-        Slash: 6
-        Blunt: 5
+        Slash: 3
+        Blunt: 3
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 3
-        Slash: 3
-        Structural: 15 # Breaks weak rocks effectively
+        Piercing: 2
+        Slash: 1
+        Structural: 7
 
 # Random upgrades
 - type: entity

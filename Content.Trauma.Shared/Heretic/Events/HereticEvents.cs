@@ -172,3 +172,6 @@ public record struct ShouldHideHereticAuraEvent(bool Hide) : IInventoryRelayEven
 {
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
+
+[ByRefEvent]
+public record struct AimedRifleAimAttemptEvent(EntityUid Ent, EntityUid User, EntityUid Target, bool Cancelled = false);

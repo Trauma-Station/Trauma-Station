@@ -18,24 +18,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Master
+    - &checkout
+      name: Checkout Master
       uses: actions/checkout@v4.2.2
 
-    - name: Setup Submodule
+    - &submodule
+      name: Setup Submodule
       run: git submodule update --init --recursive
 
-    - name: Pull engine updates
-      uses: space-wizards/submodule-dependency@v0.1.5
+    - &submodule_pull
+      name: Pull engine updates
+      uses: Trauma-Station/submodule-dependency@v0.2.1
+      with:
+        map: |
+          {
+            "QuietToolbox": "RobustToolbox"
+          }
 
-    - name: Update Engine Submodules
+    - &submodule_update
+      name: Update Engine Submodules
       run: |
         cd RobustToolbox/
         git submodule update --init --recursive
-
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.1.0
-      with:
-        dotnet-version: 10.0.x
 
     - name: Install dependencies
       run: dotnet restore
@@ -63,26 +67,12 @@ jobs:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.2
-
-    - name: Setup Submodule
-      run: git submodule update --init --recursive
-
-    - name: Pull engine updates
-      uses: space-wizards/submodule-dependency@v0.1.5
-
-    - name: Update Engine Submodules
-      run: |
-        cd RobustToolbox/
-        git submodule update --init --recursive
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4.1.0
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Download build artifacts
+    - *checkout
+    - *submodule
+    - *submodule_pull
+    - *submodule_update
+    - &download_build
+      name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
         name: build-output
@@ -103,30 +93,11 @@ jobs:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.2
-
-    - name: Setup Submodule
-      run: git submodule update --init --recursive
-
-    - name: Pull engine updates
-      uses: space-wizards/submodule-dependency@v0.1.5
-
-    - name: Update Engine Submodules
-      run: |
-        cd RobustToolbox/
-        git submodule update --init --recursive
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4.1.0
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Download build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: build-output
-        path: bin/
+    - *checkout
+    - *submodule
+    - *submodule_pull
+    - *submodule_update
+    - *download_build
 
     - name: Run main Content.IntegrationTests
       run: |
@@ -151,30 +122,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.2
-
-    - name: Setup Submodule
-      run: git submodule update --init --recursive
-
-    - name: Pull engine updates
-      uses: space-wizards/submodule-dependency@v0.1.5
-
-    - name: Update Engine Submodules
-      run: |
-        cd RobustToolbox/
-        git submodule update --init --recursive
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4.1.0
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Download build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: build-output
-        path: bin/
+    - *checkout
+    - *submodule
+    - *submodule_pull
+    - *submodule_update
+    - *download_build
 
     - name: Run MapTests
       run: |
@@ -197,30 +149,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.2
-
-    - name: Setup Submodule
-      run: git submodule update --init --recursive
-
-    - name: Pull engine updates
-      uses: space-wizards/submodule-dependency@v0.1.5
-
-    - name: Update Engine Submodules
-      run: |
-        cd RobustToolbox/
-        git submodule update --init --recursive
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4.1.0
-      with:
-        dotnet-version: 10.0.x
-
-    - name: Download build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: build-output
-        path: bin/
+    - *checkout
+    - *submodule
+    - *submodule_pull
+    - *submodule_update
+    - *download_build
 
     - name: Link runtimes
       run: ln -s $(pwd)/bin/Content.IntegrationTests/runtimes bin/Content.MapRenderer/

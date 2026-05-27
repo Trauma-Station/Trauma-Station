@@ -72,7 +72,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseSyndicateContraband ] # Trauma - Syndicate contraband mark
+  parent: [ ClothingHeadBase, BaseSyndicateContraband ]
   id: ReverseBearTrap
   name: reverse bear trap
   description: A horrifying set of shut metal jaws, rigged to a kitchen timer and secured by padlock to a head-mounted clamp. To apply, hit someone with it

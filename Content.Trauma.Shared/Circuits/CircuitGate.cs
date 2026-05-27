@@ -192,6 +192,14 @@ public abstract partial class CircuitGate
         _output = value;
     }
 
+    protected void CopyOutputFromObject(object value)
+    {
+        if (value is Integer integer)
+            _output = new Integer(integer.Value); // only datatype that needs to be deep copied is the int wrapper
+        else
+            _output = value; // everything else has no data or can be passed as-is (string)
+    }
+
     /// <summary>
     /// Called for a user's serialized gates.
     /// </summary>
@@ -258,7 +266,7 @@ public sealed partial class CircuitMemoryCell : CircuitGate
     public override void Update(CircuitComponent comp)
     {
         if (comp.GetBool(Inputs[1]))
-            SetOutputToObject(comp.GetValue(Inputs[0]));
+            CopyOutputFromObject(comp.GetValue(Inputs[0]));
     }
 }
 

@@ -250,10 +250,8 @@
   targetNode: silkPatchMakeshift
   category: construction-category-tools
   objectType: Item
-  # <Trauma>
   theory:
     SpiderCraftKnowledge: 0
   practical:
     TailoringKnowledge: 1
   useQuality: false
-  # </Trauma>

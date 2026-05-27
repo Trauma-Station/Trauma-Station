@@ -16,11 +16,11 @@ namespace Content.Server.GameTicking.Presets
         [DataField("alias")]
         public string[] Alias = Array.Empty<string>();
 
-        [DataField("name")]
-        public string ModeTitle = "????";
+        [DataField("name", required: true)] // Trauma - required
+        public LocId ModeTitle; // Trauma - change to LocId
 
-        [DataField("description")]
-        public string Description = string.Empty;
+        [DataField(required: true)] // Trauma - required
+        public LocId Description;
 
         [DataField("showInVote")]
         public bool ShowInVote;
