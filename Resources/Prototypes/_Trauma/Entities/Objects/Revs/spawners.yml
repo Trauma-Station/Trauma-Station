@@ -45,7 +45,7 @@
       ignoreResistances: true
 
 - type: entity
-  parent: [ BaseItem, BaseRevMinorContraband ]
+  parent: RevDropPodTraps
   id: RevDropPodMelees
   name: drop pod beacon (melee upgrades mold)
   components:
