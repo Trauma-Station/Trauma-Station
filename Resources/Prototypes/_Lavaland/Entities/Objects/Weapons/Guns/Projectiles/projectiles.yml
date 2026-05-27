@@ -20,8 +20,8 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 15
-        Structural: 20
+        Blunt: 8
+        Structural: 11
   # Short lifespan
   - type: TimedDespawn
     lifetime: 0.18 # roughly 4 tiles
@@ -63,7 +63,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 6
+        Blunt: 4
   - type: TimedDespawn
     lifetime: 0.22 # roughly 5.5 tiles
 
@@ -75,7 +75,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 5
+        Blunt: 4
 
 - type: entity
   id: PelletKinetic

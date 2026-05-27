@@ -10,6 +10,7 @@ namespace Content.Trauma.Client.CosmicCult;
 public sealed partial class MonumentVisualizerSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -20,26 +21,22 @@ public sealed partial class MonumentVisualizerSystem : EntitySystem
 
     private void OnAppearanceChanged(Entity<MonumentComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (args.Sprite == null)
+        if (args.Sprite is not { } spriteComp)
             return;
 
-        args.Sprite.LayerMapTryGet(MonumentVisualLayers.TransformLayer, out var transformLayer);
-        args.Sprite.LayerMapTryGet(MonumentVisualLayers.FinaleLayer, out var finaleLayer);
-        args.Sprite.LayerMapTryGet(MonumentVisualLayers.MonumentLayer, out var baseLayer);
+        var sprite = new Entity<SpriteComponent?>(ent.Owner, spriteComp);
+        var transformLayer = _sprite.LayerMapGet(sprite, MonumentVisualLayers.TransformLayer);
+        var finaleLayer = _sprite.LayerMapGet(sprite, MonumentVisualLayers.FinaleLayer);
+        var baseLayer = _sprite.LayerMapGet(sprite, MonumentVisualLayers.MonumentLayer);
         _appearance.TryGetData<bool>(ent, MonumentVisuals.Transforming, out var transforming, args.Component);
 
-        if (transforming && HasComp<MonumentTransformingComponent>(ent))
-        {
-            args.Sprite.LayerSetAnimationTime(transformLayer, 0f);
-            args.Sprite.LayerSetVisible(transformLayer, true);
-            args.Sprite.LayerSetVisible(finaleLayer, false);
-            args.Sprite.LayerSetVisible(baseLayer, false);
-        }
-        else
-        {
-            args.Sprite.LayerSetVisible(transformLayer, false);
-            args.Sprite.LayerSetVisible(finaleLayer, true);
-            args.Sprite.LayerSetVisible(baseLayer, true);
-        }
+        transforming &= HasComp<MonumentTransformingComponent>(ent);
+
+        if (transforming)
+            _sprite.LayerSetAnimationTime(sprite, transformLayer, 0f);
+
+        _sprite.LayerSetVisible(sprite, transformLayer, transforming);
+        _sprite.LayerSetVisible(sprite, finaleLayer, !transforming);
+        _sprite.LayerSetVisible(sprite, baseLayer, !transforming);
     }
 }
