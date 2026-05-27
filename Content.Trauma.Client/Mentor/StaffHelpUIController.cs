@@ -148,7 +148,7 @@ public sealed partial class StaffHelpUIController : UIController, IOnSystemChang
         UIManager.ClickSound();
 
         if (_unread)
-            _staffHelpWindow.MentorHelpButton.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
+            _staffHelpWindow.MentorHelpButton.StyleClasses.Add("ButtonColorRed");
 
         _staffHelpWindow.AdminHelpButton.OnPressed += _ =>
         {
