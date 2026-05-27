@@ -9092,3 +9092,42 @@ Entries:
   id: 1036
   time: '2026-05-26T00:53:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2808
+- author: Hoodsie
+  changes:
+  - type: Add
+    message: Gave Advanced Cleaning module to engi xenoborg.
+  id: 1037
+  time: '2026-05-26T04:10:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2817
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked sub gamemode heretic to spawn more heretics instead of just a max
+      of 1
+  id: 1038
+  time: '2026-05-26T06:33:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2818
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to put counterfeit spesos into cargo consoles.
+  id: 1039
+  time: '2026-05-27T05:08:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2829
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: Ninja now has a ghostrole timer requirement.
+  id: 1040
+  time: '2026-05-27T06:22:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2826
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changelings absorbing bodies now does 200 cellular to each part instead of
+      splitting it up.
+  id: 1041
+  time: '2026-05-27T09:14:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2833

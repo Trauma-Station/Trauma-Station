@@ -100,7 +100,7 @@ public sealed partial class GpsWindow : BaseWindow
                 TrackedPositionLabel.Text = $"{coords.X:F0}, {coords.Y:F0}";
             }
             else
-                TrackedPositionLabel.Text = Loc.GetString("gps-window-position-unknown");
+                TrackedPositionLabel.Text = "?, ?";
         }
         else
             TrackedPositionLabel.Text = Loc.GetString("gps-window-position-none");

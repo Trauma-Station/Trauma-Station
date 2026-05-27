@@ -180,7 +180,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         RaiseLocalEvent(mindRoleId.Value, ref ev);
         // </Trauma>
 
-        var name = Loc.GetString(protoEnt.Name);
+        var name = protoEnt.Name; // Trauma - don't double-localize it, entity loc already does that
         if (mind.OwnedEntity is not null)
         {
             _adminLogger.Add(LogType.Mind,

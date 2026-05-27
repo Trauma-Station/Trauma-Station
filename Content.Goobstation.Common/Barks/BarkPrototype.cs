@@ -10,7 +10,7 @@ public sealed partial class BarkPrototype : IPrototype
     [IdDataField] public string ID { get; private set; } = default!;
 
     /// <summary>
-    /// A list of sound files that are used for barks.
+    /// The name of the bark shown in the character editor.
     /// </summary>
     [DataField(required: true)]
     public string Name = string.Empty;

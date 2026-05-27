@@ -3,24 +3,26 @@
 - type: startingGear
   id: HunterAntagGear
   equipment:
-    head: ClothingHeadHelmetJustice
+    head: ClothingHeadHelmetSwat # maybe keep justice for shits and giggles?
     eyes: ClothingEyesGlassesSecurity
     neck: Dinkystar
-    mask: ClothingMaskGasSwat
+    mask: ClothingHunterMaskGasSwat
     jumpsuit: ClothingUniformJumpsuitNanotrasen
     outerClothing: ClothingOuterArmourDurathread
     back: ClothingBackpackSatchelLeather
     shoes: ClothingShoesBootsJackFilled
     belt: ClothingBeltSecurityFilled
-    id: ClearPDAHunter
+    id: HunterPDA
     pocket1: WeaponPistolMk58
     pocket2: WeaponLaserSidearm
-    ears: ClothingHeadsetAltFreelancer
+    ears: ClothingHeadsetAltHunter
     gloves: ClothingHandsGlovesCombat
   storage:
     back:
     - BoxSurvivalSlotsSecurity
     - MagazinePistol
+    - ForensicScanner
+    - MedkitCombat
 
 # Fugitives
   # Convict
@@ -29,8 +31,13 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitPrisoner
     shoes: ClothingShoesColorBlack
+    belt: ClothingBeltStorageWaistbag
     id: IDCardTide
     pocket1: CombatKnife
     pocket2: SoapSyndie
   inhand:
   - SatchelFugitive
+  storage:
+    belt:
+    - BarberScissors
+    - Telecrystal25

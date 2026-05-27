@@ -10,3 +10,8 @@ insurgency-description = Insurgents are among us...
 
 roles-antag-shadow-demon-name = Shadow Demon
 roles-antag-shadow-demon-objective = The darkness needs a King, and you got summoned to wear that crown.
+
+roles-antag-mind-controlled-name = Mind Controlled
+roles-antag-mind-controlled-objective = Help your Master
+
+never-shown = !

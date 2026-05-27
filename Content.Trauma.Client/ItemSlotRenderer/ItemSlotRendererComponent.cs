@@ -11,13 +11,13 @@ namespace Content.Trauma.Client.ItemSlotRenderer;
 [RegisterComponent]
 public sealed partial class ItemSlotRendererComponent : Component
 {
-    // [slotId] = layer mapping (in string form)
+    // [slotId] = layer mapping (in string/enum form)
     [DataField("mapping")]
     public Dictionary<string, string> PrototypeLayerMappings = new();
 
-    // [mapkey] = slotId
+    // [layer index] = slotId
     [ViewVariables(VVAccess.ReadWrite)]
-    public List<(object, string)> LayerMappings = new();
+    public List<(int, string)> LayerMappings = new();
 
     // [slotId] = entity uid
     [ViewVariables(VVAccess.ReadOnly)]

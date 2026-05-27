@@ -137,6 +137,7 @@
   - type: AntagObjectives
     objectives:
     - FugitiveEscapeObjective
+    - FugitiveKillObjective
   - type: AntagSelection
     agentName: ghost-role-information-fugitive-name
     definitions:
@@ -147,12 +148,14 @@
       startingGear: FugitiveAntagGear
       briefing:
         text: fugitive-role-greeting
-        color: Orange
-        sound: /Audio/Misc/thief_greeting.ogg
+        color: red
       components:
       - type: NpcFactionMember
         factions:
         - Syndicate
+      - type: AutoImplant
+        implants:
+        - UplinkImplant
       - type: RandomMetadata
       - type: EmitSoundOnSpawn # fell out of the ceiling
         sound: /Audio/Effects/clang.ogg
@@ -173,11 +176,17 @@
     objectives:
     - HunterKillFugitiveObjective
     - HunterArrestFugitiveObjective
+    - HunterKillRandomPersonObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: HunterObjectiveGroups
+      maxPicks: 3
+    maxDifficulty: 5
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-fugitive-name
+    agentName: ghost-role-information-hunter-name
     definitions:
     - spawnerPrototype: SpawnPointGhostRoleHunter
       min: 2
@@ -186,11 +195,15 @@
       startingGear: HunterAntagGear
       briefing:
         text: hunter-role-greeting
-        color: Blue
+        color: red
       components:
       - type: NpcFactionMember
         factions:
         - Syndicate
+      - type: AutoImplant
+        implants:
+        - FakeMindShieldImplant
+        - DeathAcidifierImplant
       - type: RandomMetadata
       mindRoles:
       - MindRoleGhostRoleHunter
