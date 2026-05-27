@@ -83,7 +83,7 @@ public sealed partial class HysteriaOverlay : Overlay
             if (!_nearbyEntities.Contains(uid))
             {
                 if (_spriteQuery.TryComp(uid, out var sprite))
-                    sprite.Visible = true;
+                    _sprite.SetVisible((uid, sprite), true);
             }
         }
 
@@ -95,7 +95,7 @@ public sealed partial class HysteriaOverlay : Overlay
 
             if (_spriteQuery.TryComp(uid, out var sprite) && sprite.Visible)
             {
-                sprite.Visible = false;
+                _sprite.SetVisible((uid, sprite), false);
                 _hiddenEntities.Add(uid);
             }
         }
@@ -164,7 +164,7 @@ public sealed partial class HysteriaOverlay : Overlay
         foreach (var uid in _hiddenEntities)
         {
             if (_spriteQuery.TryComp(uid, out var sprite))
-                sprite.Visible = true;
+                _sprite.SetVisible((uid, sprite), true);
         }
 
         _hiddenEntities.Clear();
