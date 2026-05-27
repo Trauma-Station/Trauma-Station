@@ -1,18 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Client.ClockworkCult;
 
-public sealed class ClockworkTransferOverlay : Overlay
+public sealed partial class ClockworkTransferOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private readonly SharedTransformSystem _transformSystem;
 
@@ -54,7 +51,6 @@ public sealed class ClockworkTransferOverlay : Overlay
                 if (linkTransform.MapID == MapId.Nullspace)
                     continue;
 
-                // Note: GPT math
                 var targetPos = _transformSystem.GetWorldPosition(linkTransform);
                 var length = (targetPos - sourcePos).Length();
                 var angle = (targetPos - sourcePos).ToAngle();

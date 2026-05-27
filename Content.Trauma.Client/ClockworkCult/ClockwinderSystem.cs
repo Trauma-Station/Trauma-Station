@@ -9,10 +9,10 @@ namespace Content.Trauma.Client.ClockworkCult;
 /// <summary>
 /// This handles turning the <see cref="ClockworkTransferOverlay"/> on/off.
 /// </summary>
-public sealed class ClockwinderSystem : SharedClockwinderSystem
+public sealed partial class ClockwinderSystem : SharedClockwinderSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public override void ToggleOverlay()
     {

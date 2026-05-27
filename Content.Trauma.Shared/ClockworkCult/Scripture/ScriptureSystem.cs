@@ -6,7 +6,6 @@ using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Trauma.Shared.ClockworkCult.Slab;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ClockworkCult.Scripture;
@@ -19,14 +18,14 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// </summary>
 public sealed partial class ScriptureSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<ScriptureComponent> _scriptureQuery = default!;
-    [Dependency] private readonly EntityQuery<ScriptureTierComponent> _scriptureTierQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ScriptureComponent> _scriptureQuery = default!;
+    [Dependency] private EntityQuery<ScriptureTierComponent> _scriptureTierQuery = default!;
 
     /// <summary>
     /// All entity prototypes with <see cref="ScriptureComponent"/>.
@@ -188,8 +187,6 @@ public sealed partial class ScriptureSystem : EntitySystem
     {
         if (args.Cancelled)
             return;
-
-        Log.Debug("Is this even getting run? 2");
 
         if (args.TierId is not { } tierId)
             return;

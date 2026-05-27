@@ -13,12 +13,12 @@ namespace Content.Trauma.Shared.ClockworkCult.Slab;
 ///
 /// Holding the Clockwork Slab grants passive power generation to the Clockwork Cultist.
 /// </summary>
-public sealed class ClockworkSlabSystem : EntitySystem
+public sealed partial class ClockworkSlabSystem : EntitySystem
 {
-    [Dependency] private readonly ScriptureSystem _scripture = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityQuery<ClockworkCultistComponent> _clockworkCultistQuery = default!;
+    [Dependency] private ScriptureSystem _scripture = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<ClockworkCultistComponent> _clockworkCultistQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -79,7 +79,7 @@ public sealed class ClockworkSlabSystem : EntitySystem
     /// </summary>
     private void OnEquipped(Entity<ClockworkSlabComponent> ent, ref GotEquippedEvent args)
     {
-        var holder = args.Equipee;
+        var holder = args.EquipTarget;
         if (!_clockworkCultistQuery.HasComp(holder))
             return;
 

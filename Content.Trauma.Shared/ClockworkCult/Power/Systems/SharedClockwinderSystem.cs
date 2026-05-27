@@ -13,10 +13,10 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 /// The clockwinder system handles connecting clockwork structures with each other,
 /// in order to power them up via updating their <see cref="LimitedChargesComponent"/>.
 /// </summary>
-public abstract class SharedClockwinderSystem : EntitySystem
+public abstract partial class SharedClockwinderSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -30,14 +30,14 @@ public abstract class SharedClockwinderSystem : EntitySystem
 
     private void OnInteract(Entity<ClockwinderComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target is not {} target)
+        if (!args.CanReach || args.Target is not { } target)
             return;
 
-        var ev = new ClockwinderInteractEvent( ent.Comp.Transferrer, ent.Owner);
+        var ev = new ClockwinderInteractEvent(ent.Comp.Transferrer, ent.Owner);
         RaiseLocalEvent(target, ref ev);
     }
 
-    private void OnUsed(Entity<ClockwinderComponent> ent, ref  UseInHandEvent args)
+    private void OnUsed(Entity<ClockwinderComponent> ent, ref UseInHandEvent args)
     {
         // Just clear the transferrer
         SetTransferrer(ent.AsNullable(), null);

@@ -14,14 +14,14 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 /// </summary>
 public sealed partial class ClockworkPowerTransferSystem : EntitySystem
 {
-    [Dependency] private readonly SharedClockwinderSystem _clockwinder = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityQuery<ClockworkStructureComponent> _structureQuery = default!;
-    [Dependency] private readonly EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
-    [Dependency] private readonly EntityQuery<ClockworkTransferrerComponent> _transferrerQuery = default!;
+    [Dependency] private SharedClockwinderSystem _clockwinder = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<ClockworkStructureComponent> _structureQuery = default!;
+    [Dependency] private EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
+    [Dependency] private EntityQuery<ClockworkTransferrerComponent> _transferrerQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

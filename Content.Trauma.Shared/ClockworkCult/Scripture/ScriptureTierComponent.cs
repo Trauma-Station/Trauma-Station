@@ -7,8 +7,6 @@ using Robust.Shared.Serialization;
 namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 
 /// <summary>
-/// TODO: Implement it in ui and playtest it
-///
 /// Enables the use of tiers on a scripture.
 ///
 /// A tier is just an upgraded version of a scripture,
@@ -32,7 +30,7 @@ public sealed partial class ScriptureTierComponent : Component
 }
 
 /// <summary>
-/// A basic data structure holding scripture tiers.
+/// A basic data structure holding scripture tiers. TODO: MAKE PROTOTYPE INSTEAD BRUH
 /// </summary>
 [DataRecord, NetSerializable, Serializable]
 public partial record struct ScriptureTierData

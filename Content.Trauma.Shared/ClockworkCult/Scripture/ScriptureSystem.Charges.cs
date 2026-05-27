@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Scripture;
 /// </summary>
 public sealed partial class ScriptureSystem
 {
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
 
     private void InitializeCharges()
     {

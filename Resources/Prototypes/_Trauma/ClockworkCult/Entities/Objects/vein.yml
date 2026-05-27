@@ -22,4 +22,4 @@
   parent: BaseArea
   components:
   - type: PowerVein
-    reducedRechargeTime: -5 # Makes it run 5 seconds faster
+    reducedRechargeTime: -0.2 # Makes it run faster

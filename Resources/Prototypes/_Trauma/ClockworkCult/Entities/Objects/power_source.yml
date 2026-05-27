@@ -17,6 +17,8 @@
     state: office-dark
 
   # Clockwork Components
+  - type: ClockworkConnectionHolder
+    transferConnection: Ratvarian
   - type: ClockworkPowerSource
     rechargeTime: 0.5 # 1 charge every half-second
   - type: ClockworkTransferrer # Can be connected to ClockworkStructure

@@ -16,7 +16,9 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabRecitePageContents : BoxContainer
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+
     /// <summary>
     /// Notifies BUI that we want to recite.
     /// Passes the event through this order, upwards:
@@ -46,7 +48,7 @@ public sealed partial class CogSlabRecitePageContents : BoxContainer
 
         // If we support tiers, then store them as buttons
         if (_proto.Resolve(scriptureProto, out var scriptureResolved)
-            && scriptureResolved.TryGetComponent<ScriptureTierComponent>(out var scriptureTier))
+            && scriptureResolved.TryGetComponent<ScriptureTierComponent>(out var scriptureTier, _factory))
         {
             for (int i = 0; i < scriptureTier.Tiers.Count; i++)
             {

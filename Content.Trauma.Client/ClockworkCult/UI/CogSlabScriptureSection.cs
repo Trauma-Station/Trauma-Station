@@ -10,7 +10,7 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabScriptureSection : CogSlabSection
 {
-    [Dependency] private readonly IEntitySystemManager _system = default!;
+    [Dependency] private IEntitySystemManager _system = default!;
 
     public event Action<EntProtoId?, string?>? OnRecite;
 

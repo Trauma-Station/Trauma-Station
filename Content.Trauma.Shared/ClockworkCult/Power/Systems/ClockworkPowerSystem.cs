@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Charges.Components;
+using Content.Shared.EntityEffects;
 using Content.Shared.Verbs;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.ClockworkCult.Power.Components;
@@ -19,17 +20,18 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 /// The <see cref="ClockwinderComponent"/> is responsible for connecting a structure with a transferrer.
 ///
 /// TODO for finishing prototype:
-/// 1. Add support for checking for distance and possibly check if obstructed (e.g. can't connect a power source to a structure if its too far away)
 /// Test stuff i added
 ///
 /// </summary>
-public sealed class ClockworkPowerSystem : EntitySystem
+public sealed partial class ClockworkPowerSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ClockworkPowerTransferSystem _powerTransfer = default!;
-    [Dependency] private readonly EntityQuery<PowerVeinComponent> _powerVeinQuery = default!;
-    [Dependency] private readonly EntityQuery<ClockwinderComponent> _clockwinderQuery = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ClockworkPowerTransferSystem _powerTransfer = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<PowerVeinComponent> _powerVeinQuery = default!;
+    [Dependency] private EntityQuery<ClockwinderComponent> _clockwinderQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -42,6 +44,8 @@ public sealed class ClockworkPowerSystem : EntitySystem
 
         SubscribeLocalEvent<ClockworkStructureComponent, ClockwinderInteractEvent>(OnClockwinder);
         SubscribeLocalEvent<ClockworkStructureComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
+
+        SubscribeLocalEvent<ClockworkStructureComponent, MoveEvent>(OnMove);
     }
 
     private void OnAnchored(Entity<ClockworkActivatableComponent> ent, ref AnchorStateChangedEvent args)
@@ -49,21 +53,17 @@ public sealed class ClockworkPowerSystem : EntitySystem
         if (!args.Anchored && ent.Comp.Active)
         {
             ent.Comp.Active = false;
-            Dirty(ent);
         }
         else if (args.Anchored && !ent.Comp.Active)
         {
             ent.Comp.Active = true;
-            Dirty(ent);
         }
+        Dirty(ent);
 
         var ev = new ClockworkStructureStateChangedEvent(ent.Comp.Active);
         RaiseLocalEvent(ent.Comp.Owner, ref ev);
 
         Log.Debug($"Structure has been activated: {ent.Comp.Active}");
-
-        if (ent.Comp.ComponentsOnActivation is not { } components)
-            return;
 
         if (_timing.ApplyingState)
             return;
@@ -71,12 +71,13 @@ public sealed class ClockworkPowerSystem : EntitySystem
         // Add components once we get activated
         if (ent.Comp.Active)
         {
-            EntityManager.AddComponents(ent.Owner, components);
+            if (ent.Comp.ActivationEffects is { } activationEffects)
+                _effects.ApplyEffects(ent.Owner, activationEffects);
             return;
         }
 
-        // Remove them once we get de-activated
-        EntityManager.RemoveComponents(ent.Owner, components);
+        if (ent.Comp.DeactivationEffects is { } deactivationEffects)
+            _effects.ApplyEffects(ent.Owner, deactivationEffects);
     }
 
     /// <summary>
@@ -85,15 +86,12 @@ public sealed class ClockworkPowerSystem : EntitySystem
     private void OnActiveChanged(Entity<ClockworkPowerSourceComponent> ent,
         ref ClockworkStructureStateChangedEvent args)
     {
-        if (args.Active)
-        {
-            if (_timing.ApplyingState)
-                return;
+        if (_timing.ApplyingState)
+            return;
 
-            // TODO:
-            // Make it so you can lock anchor them in place,
-            // since removing this comp will result in losing all charges
-            // (not intended, but this can't act as storage so its good lol)
+        if (!args.Active)
+        {
+            // TODO: Make it so you can lock anchor them in place,
             RemCompDeferred<AutoRechargeComponent>(ent.Owner);
             return;
         }
@@ -101,9 +99,6 @@ public sealed class ClockworkPowerSystem : EntitySystem
         // In order to activate the power source, we must be standing on a power vein
         var xform = Transform(ent.Owner);
         if (_area.GetArea(xform.Coordinates) is not { } area || !_powerVeinQuery.TryComp(area, out var vein))
-            return;
-
-        if (_timing.ApplyingState)
             return;
 
         var comp = EnsureComp<AutoRechargeComponent>(ent.Owner);
@@ -114,7 +109,7 @@ public sealed class ClockworkPowerSystem : EntitySystem
 
     private void OnClockwinder(Entity<ClockworkStructureComponent> ent, ref ClockwinderInteractEvent args)
     {
-        if (args.Transferrer is not {} transferrer)
+        if (args.Transferrer is not { } transferrer)
             return;
 
         // Add the connection to the transferrer
@@ -141,6 +136,24 @@ public sealed class ClockworkPowerSystem : EntitySystem
                 _powerTransfer.RemoveConnection(ent.AsNullable());
             }
         });
+    }
+
+    private void OnMove(Entity<ClockworkStructureComponent> ent, ref MoveEvent args)
+    {
+        if (ent.Comp.Transferrers.Count == 0)
+            return;
+
+        // Moving away should disconnect clockwork structures from their transferrers that aren't in 10 tile range
+        foreach (var transferrer in ent.Comp.Transferrers)
+        {
+            if (TerminatingOrDeleted(transferrer) || transferrer is not { } transfer)
+                continue;
+
+            if (_transform.InRange(ent.Owner, transfer, 10f))
+                continue;
+
+            _powerTransfer.RemoveConnection(transfer, ent.Owner);
+        }
     }
 }
 

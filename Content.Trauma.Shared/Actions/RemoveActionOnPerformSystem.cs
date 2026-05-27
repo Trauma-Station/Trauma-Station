@@ -5,9 +5,9 @@ using Content.Shared.Actions.Events;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class RemoveActionOnPerformSystem : EntitySystem
+public sealed partial class RemoveActionOnPerformSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

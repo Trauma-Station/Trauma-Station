@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.ClockworkCult.Power.Systems;
 /// </summary>
 public partial class ClockworkPowerTransferSystem
 {
-    [Dependency] private readonly EntityQuery<ClockworkConnectionHolderComponent> _connectionHolderQuery = default!;
+    [Dependency] private EntityQuery<ClockworkConnectionHolderComponent> _connectionHolderQuery = default!;
 
     public void InitializeConnection()
     {
@@ -22,7 +22,7 @@ public partial class ClockworkPowerTransferSystem
     private void OnMapInit(Entity<ClockworkConnectionHolderComponent> ent, ref MapInitEvent args)
     {
         // Set the original connection in case we need it later.
-        if (ent.Comp.OriginalConnection is {} connection)
+        if (ent.Comp.OriginalConnection is { } connection)
             ent.Comp.OriginalConnection = connection;
         if (ent.Comp.TransferConnection is { } transferrer)
             ent.Comp.OriginalTransferConnection = transferrer;

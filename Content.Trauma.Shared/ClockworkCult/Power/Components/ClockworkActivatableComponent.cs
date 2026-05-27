@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.ClockworkCult.Power.Components;
 
@@ -25,8 +24,14 @@ public sealed partial class ClockworkActivatableComponent : Component
     public bool Active;
 
     /// <summary>
-    /// The components to add/remove on activation
+    /// The effects to add on activation.
     /// </summary>
     [DataField]
-    public ComponentRegistry? ComponentsOnActivation;
+    public EntityEffect[]? ActivationEffects;
+
+    /// <summary>
+    /// The effects to add on de-activation.
+    /// </summary>
+    [DataField]
+    public EntityEffect[]? DeactivationEffects;
 }

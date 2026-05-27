@@ -14,7 +14,7 @@ namespace Content.Trauma.Client.ClockworkCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CogSlabScriptureRecitePage : CogSlabPage
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public event Action<EntProtoId?, string?>? OnRecite;
 
