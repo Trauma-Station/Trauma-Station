@@ -155,7 +155,7 @@
   name: xenomorph-title
   description: xenomorph-description
   showInVote: false
-  minPlayers: 1
+  minPlayers: 30
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
