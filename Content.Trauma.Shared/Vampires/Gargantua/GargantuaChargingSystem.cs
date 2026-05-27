@@ -23,6 +23,9 @@ public sealed partial class GargantuaChargingSystem : EntitySystem
 
     private void OnCollide(Entity<GargantuaChargingComponent> ent, ref StartCollideEvent args)
     {
+        if (args.OurEntity != ent.Owner || !args.OtherFixture.Hard)
+            return;
+
         _effects.TryApplyEffect(args.OtherEntity, ent.Comp.Effect, user: ent.Owner);
     }
 

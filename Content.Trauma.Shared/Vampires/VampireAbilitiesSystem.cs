@@ -78,7 +78,6 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
                 || abilityProto.BlacklistClass is { } blacklistClass && mobClass == blacklistClass)
                 continue;
 
-
             // We tried to unlock an ability, but we didn't pass the extra conditions
             if (abilityProto.Conditions is { } conditions && !_conditions.TryConditions(user, conditions))
                 continue;

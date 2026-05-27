@@ -17,6 +17,7 @@ namespace Content.Trauma.Shared.Vampires.Dantalion;
 public sealed partial class VampireThrallSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedMindSystem _mind = default!;
@@ -46,20 +47,20 @@ public sealed partial class VampireThrallSystem : EntitySystem
 
         if (!_mind.TryGetMind(target, out var mindId, out _))
         {
-            _popup.PopupClient("The target has no mind!", user, PopupType.MediumCaution);
+            _popup.PopupClient("The target has no mind!", user, user, PopupType.MediumCaution);
             return;
         }
 
         if (ent.Comp.Thralls.Count == cap)
         {
-            _popup.PopupClient($"You can't have more than {cap} thralls!", user, PopupType.MediumCaution);
+            _popup.PopupClient($"You can't have more than {cap} thralls!", user, user, PopupType.MediumCaution);
             return;
         }
 
         ent.Comp.Thralls.Add(target);
         Dirty(ent);
 
-        _popup.PopupClient("You gain a new thrall!", user, PopupType.Medium);
+        _popup.PopupClient("You gain a new thrall!", user, user, PopupType.Medium);
 
         var comp = EnsureComp<VampireThrallComponent>(target);
         comp.Vampire = user;
@@ -106,10 +107,11 @@ public sealed partial class VampireThrallSystem : EntitySystem
         thralls.Thralls.Remove(user);
         Dirty(vampire, thralls);
 
-        _popup.PopupClient("You are fred from enthrallment!", user, PopupType.Large);
+        _popup.PopupClient("You are freed from enthrallment!", user, user, PopupType.Large);
 
         // Notify the vampire that they lost a thrall
-        _popup.PopupEntity("You feel like you lost a follower!", vampire, PopupType.LargeCaution);
+        if (_net.IsServer)
+            _popup.PopupEntity("You feel like you lost a follower!", vampire, vampire, PopupType.LargeCaution);
 
         // Remove collective mind channel since they don't need it anymore
         if (!_collectiveMindQuery.TryComp(user, out var collectiveMind))

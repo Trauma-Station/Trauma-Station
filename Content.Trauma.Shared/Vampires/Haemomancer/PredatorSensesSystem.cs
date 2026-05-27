@@ -12,6 +12,7 @@ namespace Content.Trauma.Shared.Vampires.Haemomancer;
 
 public sealed partial class PredatorSensesSystem : EntitySystem
 {
+    [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedChatManager _chat = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedActionsSystem _action = default!;
@@ -56,6 +57,10 @@ public sealed partial class PredatorSensesSystem : EntitySystem
 
     private void OnMessage(Entity<ActionPredatorSensesComponent> ent, ref ListEntitySelectorMessage args)
     {
+        // Can't predict for targets outside pvs range
+        if (_net.IsClient)
+            return;
+
         var target = GetEntity(args.SelectedEntity);
         if (!_drainableQuery.HasComp(target))
             return;
@@ -65,19 +70,19 @@ public sealed partial class PredatorSensesSystem : EntitySystem
 
         if (_area.GetArea(target) is not { } area)
         {
-            _popup.PopupClient("They are somewhere away...", attachedEnt, attachedEnt, PopupType.MediumCaution);
+            _popup.PopupEntity("They are somewhere away...", attachedEnt, attachedEnt, PopupType.MediumCaution);
             _action.StartUseDelay(action.AsNullable());
             _ui.CloseUi(ent.Owner, ListEntitySelectorUiKey.Key);
             return;
         }
 
-        var msg = $"They are at {MetaData(area).EntityName}.";
+        var msg = $"They are at {Name(area)}.";
         if (_damageable.GetTotalDamage(target) >= ent.Comp.TotalDamage)
         {
             msg += " They are wounded";
         }
 
-        _popup.PopupClient(msg, attachedEnt, attachedEnt, PopupType.LargeCaution);
+        _popup.PopupEntity(msg, attachedEnt, attachedEnt, PopupType.LargeCaution);
         if (TryComp<ActorComponent>(attachedEnt, out var actor))
         {
             var wrappedMsg = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
