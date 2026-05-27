@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2021 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Shared.CCVar;
@@ -29,10 +13,10 @@ namespace Content.Client.Changelog
 {
     public sealed partial class ChangelogManager : IPostInjectInit
     {
-        [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly IResourceManager _resource = default!;
-        [Dependency] private readonly ISerializationManager _serialization = default!;
-        [Dependency] private readonly IConfigurationManager _configManager = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private IResourceManager _resource = default!;
+        [Dependency] private ISerializationManager _serialization = default!;
+        [Dependency] private IConfigurationManager _configManager = default!;
 
         private const string SawmillName = "changelog";
         public const string MainChangelogName = "Traumalog";

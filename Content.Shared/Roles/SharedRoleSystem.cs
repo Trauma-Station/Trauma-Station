@@ -20,15 +20,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Roles;
 
-public abstract class SharedRoleSystem : EntitySystem
+public abstract partial class SharedRoleSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly ISharedPlayerManager Player = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMindSystem _minds = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] protected ISharedPlayerManager Player = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMindSystem _minds = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private JobRequirementOverridePrototype? _requirementOverride;
 
@@ -180,7 +180,7 @@ public abstract class SharedRoleSystem : EntitySystem
         RaiseLocalEvent(mindRoleId.Value, ref ev);
         // </Trauma>
 
-        var name = Loc.GetString(protoEnt.Name);
+        var name = protoEnt.Name; // Trauma - don't double-localize it, entity loc already does that
         if (mind.OwnedEntity is not null)
         {
             _adminLogger.Add(LogType.Mind,

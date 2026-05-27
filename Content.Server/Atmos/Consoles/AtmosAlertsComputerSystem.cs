@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Atmos.Monitor.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Pinpointer;
@@ -23,16 +16,16 @@ using System.Linq;
 
 namespace Content.Server.Atmos.Monitor.Systems;
 
-public sealed class AtmosAlertsComputerSystem : SharedAtmosAlertsComputerSystem
+public sealed partial class AtmosAlertsComputerSystem : SharedAtmosAlertsComputerSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly AirAlarmSystem _airAlarmSystem = default!;
-    [Dependency] private readonly AtmosDeviceNetworkSystem _atmosDevNet = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly NavMapSystem _navMapSystem = default!;
-    [Dependency] private readonly DeviceListSystem _deviceListSystem = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private AirAlarmSystem _airAlarmSystem = default!;
+    [Dependency] private AtmosDeviceNetworkSystem _atmosDevNet = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MapSystem _mapSystem = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
+    [Dependency] private NavMapSystem _navMapSystem = default!;
+    [Dependency] private DeviceListSystem _deviceListSystem = default!;
 
     private const float UpdateTime = 1.0f;
 

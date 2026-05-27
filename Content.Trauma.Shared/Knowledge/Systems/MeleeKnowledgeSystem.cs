@@ -10,17 +10,16 @@ using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Shared.Knowledge.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public sealed partial class MeleeKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
 
     private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";

@@ -1,0 +1,94 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Objectives.Systems;
+using Content.Shared.Objectives.Components;
+using Content.Shared.Roles;
+using Content.Shared.Warps;
+using Content.Shared.Whitelist;
+using Content.Trauma.Server.Objectives.Components;
+using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Trauma.Shared.Roles;
+using Robust.Shared.Random;
+
+namespace Content.Trauma.Server.Objectives.Systems;
+
+public sealed partial class CosmicCultObjectiveSystem : EntitySystem
+{
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<CosmicEffigyConditionComponent, RequirementCheckEvent>(OnEffigyRequirementCheck);
+        SubscribeLocalEvent<CosmicEffigyConditionComponent, ObjectiveAfterAssignEvent>(OnEffigyAfterAssign);
+
+        SubscribeLocalEvent<CosmicEntropyConditionComponent, ObjectiveGetProgressEvent>(OnGetEntropyProgress);
+        SubscribeLocalEvent<CosmicTierConditionComponent, ObjectiveGetProgressEvent>(OnGetTierProgress);
+        SubscribeLocalEvent<CosmicVictoryConditionComponent, ObjectiveGetProgressEvent>(OnGetVictoryProgress);
+    }
+
+    private void OnEffigyRequirementCheck(EntityUid uid, CosmicEffigyConditionComponent comp, ref RequirementCheckEvent args)
+    {
+        if (args.Cancelled || !_roles.MindHasRole<CosmicColossusRoleComponent>(args.MindId) || args.Mind.OwnedEntity is not { } mob)
+            return;
+
+        var map = Transform(mob).MapID;
+        var warps = new List<EntityUid>();
+        var query = EntityQueryEnumerator<WarpPointComponent>();
+        while (query.MoveNext(out var warpUid, out var warp))
+        {
+            if (_whitelist.IsWhitelistFail(comp.Blacklist, warpUid) &&
+                !string.IsNullOrWhiteSpace(warp.Location) &&
+                !warp.Follow && // no effigy in the singularity
+                Transform(warpUid).MapID == map) // no lavaland beacons etc
+            {
+                warps.Add(warpUid);
+            }
+        }
+
+        if (warps.Count <= 0)
+        {
+            args.Cancelled = true;
+            return;
+        }
+        comp.EffigyTarget = _random.Pick(warps);
+    }
+
+    private void OnEffigyAfterAssign(EntityUid uid, CosmicEffigyConditionComponent comp, ref ObjectiveAfterAssignEvent args)
+    {
+        string description;
+        if (comp.EffigyTarget == null || !TryComp<WarpPointComponent>(comp.EffigyTarget, out var warp) || warp.Location == null)
+        {
+            // this should never really happen but eh
+            description = Loc.GetString("objective-condition-effigy-no-target");
+        }
+        else
+        {
+            description = Loc.GetString("objective-condition-effigy", ("location", warp.Location));
+        }
+        _metaData.SetEntityDescription(uid, description, args.Meta);
+    }
+
+    private void OnGetEntropyProgress(Entity<CosmicEntropyConditionComponent> ent, ref ObjectiveGetProgressEvent args) =>
+        args.Progress = Progress(ent.Comp.Siphoned, _number.GetTarget(ent.Owner));
+
+    private void OnGetTierProgress(Entity<CosmicTierConditionComponent> ent, ref ObjectiveGetProgressEvent args) =>
+        args.Progress = Progress(ent.Comp.Tier, _number.GetTarget(ent.Owner));
+
+    private void OnGetVictoryProgress(Entity<CosmicVictoryConditionComponent> ent, ref ObjectiveGetProgressEvent args) =>
+        args.Progress = ent.Comp.Victory ? 1f : 0f;
+
+    private static float Progress(int recruited, int target)
+    {
+        // prevent divide-by-zero
+        if (target == 0)
+            return 1f;
+
+        return MathF.Min(recruited / (float) target, 1f);
+    }
+}

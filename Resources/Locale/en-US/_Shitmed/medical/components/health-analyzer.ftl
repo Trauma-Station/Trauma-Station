@@ -4,10 +4,7 @@ condition-body-trauma-BoneDamage-Cracked = • The {$woundable}'s bone looks alm
 condition-body-trauma-BoneDamage-Broken = • The {$woundable}'s bone is broken!
 condition-body-trauma-OrganDamage = • The {$woundable} has some damage on its organs.
 condition-body-trauma-VeinsDamage = • The {$woundable} has some damage on its veins.
-condition-body-trauma-NerveDamage = • The {$woundable} has some damage on its nerves.
 condition-body-trauma-Dismemberment = • The {$targetSymmetry}{$targetType} has been removed...
-condition-body-pain-decreased = • The {$woundable}'s nerves are numbed.
-condition-body-pain-increased = • The {$woundable}'s nerves are abnormally sensitive.
 condition-body-unrevivable = • {$entity} has a particularly weak constitution. They cannot withstand the shock of a defibrillator.
 condition-body-bleeding = • {$entity} is bleeding.
 

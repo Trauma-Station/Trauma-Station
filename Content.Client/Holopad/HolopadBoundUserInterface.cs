@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Holopad;
 using Content.Shared.Silicons.StationAi;
 using Robust.Client.UserInterface;
@@ -11,9 +6,9 @@ using System.Numerics;
 
 namespace Content.Client.Holopad;
 
-public sealed class HolopadBoundUserInterface : BoundUserInterface
+public sealed partial class HolopadBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     [ViewVariables]
     private HolopadWindow? _window;

@@ -7,25 +7,34 @@ using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Skinnable;
 
-public sealed class SkinnableSystem : EntitySystem
+public sealed partial class SkinnableSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<KitchenSpikeComponent, GetVerbsEvent<InteractionVerb>>(OnSpikeGetVerbs);
         SubscribeLocalEvent<SkinnableComponent, GetVerbsEvent<InteractionVerb>>(OnGetVerbs);
         SubscribeLocalEvent<SkinnableComponent, SkinningDoAfterEvent>(OnSkinningDoAfter);
+    }
+
+    private void OnSpikeGetVerbs(Entity<KitchenSpikeComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        // relay event to the victim for skinning
+        if (ent.Comp.BodyContainer.ContainedEntity is {} victim)
+            RaiseLocalEvent(victim, args);
     }
 
     private void OnGetVerbs(Entity<SkinnableComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
@@ -35,6 +44,7 @@ public sealed class SkinnableSystem : EntitySystem
             !args.CanComplexInteract ||
             ent.Comp.Skinned ||
             args.Using is not {} used ||
+            _whitelist.IsWhitelistFail(ent.Comp.Whitelist, ent) ||
             !HasComp<SharpComponent>(used))
             return;
 
@@ -75,20 +85,21 @@ public sealed class SkinnableSystem : EntitySystem
 
     private void OnSkinningDoAfter(Entity<SkinnableComponent> target, ref SkinningDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target != target.Owner)
+        if (args.Cancelled || args.Handled || args.Target != target.Owner ||
+            _whitelist.IsWhitelistFail(target.Comp.Whitelist, target))
             return;
 
-        Skin(target);
+        Skin(target, args.User);
     }
 
-    private void Skin(Entity<SkinnableComponent> ent)
+    private void Skin(Entity<SkinnableComponent> ent, EntityUid? user)
     {
         if (ent.Comp.Skinned)
             return;
 
         ent.Comp.Skinned = true;
         Dirty(ent, ent.Comp);
-        _damageable.TryChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned);
+        _damageable.ChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned, origin: user);
         // mfw no api :face_holding_back_tears:
         foreach (var organ in _body.GetOrgans<VisualOrganComponent>(ent.Owner))
         {

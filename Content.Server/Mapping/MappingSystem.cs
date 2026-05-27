@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.IO;
 using Content.Server.Administration;
 using Content.Shared.Administration;
@@ -28,14 +16,14 @@ namespace Content.Server.Mapping;
 /// <summary>
 ///     Handles autosaving maps.
 /// </summary>
-public sealed class MappingSystem : EntitySystem
+public sealed partial class MappingSystem : EntitySystem
 {
-    [Dependency] private readonly IConsoleHost _conHost = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IResourceManager _resMan = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
+    [Dependency] private IConsoleHost _conHost = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IResourceManager _resMan = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
 
     // Not a comp because I don't want to deal with this getting saved onto maps ever
     /// <summary>

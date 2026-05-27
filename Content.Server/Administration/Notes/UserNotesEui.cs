@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.EUI;
@@ -15,10 +9,10 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class UserNotesEui : BaseEui
+public sealed partial class UserNotesEui : BaseEui
 {
-    [Dependency] private readonly IAdminNotesManager _notesMan = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IAdminNotesManager _notesMan = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     private readonly bool _seeOwnNotes;
 
     public UserNotesEui()

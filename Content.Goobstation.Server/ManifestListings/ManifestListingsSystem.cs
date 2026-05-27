@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text;
 using Content.Shared.FixedPoint;
 using Content.Goobstation.Shared.ManifestListings;
-using Content.Server.Heretic.EntitySystems;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Store;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.ManifestListings;
 
-public sealed class ManifestListingsSystem : EntitySystem
+public sealed partial class ManifestListingsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -23,8 +20,7 @@ public sealed class ManifestListingsSystem : EntitySystem
 
         SubscribeLocalEvent<MindComponent, ListingPurchasedEvent>(OnPurchase);
 
-        SubscribeLocalEvent<MindListingsComponent, PrependObjectivesSummaryTextEvent>(OnPrepend,
-            before: [typeof(HereticSystem)]);
+        SubscribeLocalEvent<MindListingsComponent, PrependObjectivesSummaryTextEvent>(OnPrepend);
     }
 
     private void OnPurchase(Entity<MindComponent> ent, ref ListingPurchasedEvent args)

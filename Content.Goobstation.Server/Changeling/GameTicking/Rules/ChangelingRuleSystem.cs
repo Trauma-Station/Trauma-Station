@@ -1,33 +1,31 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Goobstation.Shared.Roles;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Objectives;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Changeling.GameTicking.Rules;
 
-public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponent>
+public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponent>
 {
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly ObjectivesSystem _objective = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private ObjectivesSystem _objective = default!;
 
     public readonly SoundSpecifier BriefingSound = new SoundPathSpecifier("/Audio/_Goobstation/Ambience/Antag/changeling_start.ogg");
 
@@ -39,7 +37,7 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
 
     public readonly ProtoId<CurrencyPrototype> Currency = "EvolutionPoint";
 
-    public readonly int StartingCurrency = 16;
+    public readonly int StartingCurrency = 6;
 
     public static readonly EntProtoId<ChangelingRoleComponent> MindRole = "MindRoleChangeling";
 
@@ -57,7 +55,7 @@ public sealed class ChangelingRuleSystem : GameRuleSystem<ChangelingRuleComponen
     }
     public bool MakeChangeling(EntityUid target, ChangelingRuleComponent rule)
     {
-        if (HasComp<SiliconComponent>(target))
+        if (_silicon.IsSilicon(target))
             return false;
 
         if (!_mind.TryGetMind(target, out var mindId, out var mind))

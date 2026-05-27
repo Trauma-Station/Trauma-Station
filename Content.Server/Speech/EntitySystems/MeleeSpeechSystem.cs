@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 HerCoyote23 <131214189+HerCoyote23@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration.Logs;
 using Content.Shared.Actions;
 using Content.Shared.Database;
@@ -15,11 +8,11 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Speech.EntitySystems;
 
-public sealed class MeleeSpeechSystem : SharedMeleeSpeechSystem
+public sealed partial class MeleeSpeechSystem : SharedMeleeSpeechSystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedActionsSystem _actionSystem = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedActionsSystem _actionSystem = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
     public override void Initialize()
     {
         base.Initialize();

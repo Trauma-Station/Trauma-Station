@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Common.Barks;
 
@@ -11,7 +10,7 @@ public sealed partial class BarkPrototype : IPrototype
     [IdDataField] public string ID { get; private set; } = default!;
 
     /// <summary>
-    /// A list of sound files that are used for barks.
+    /// The name of the bark shown in the character editor.
     /// </summary>
     [DataField(required: true)]
     public string Name = string.Empty;

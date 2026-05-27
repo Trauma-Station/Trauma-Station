@@ -20,28 +20,26 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
-public sealed class HitscanBasicRaycastSystem : EntitySystem
+public sealed partial class HitscanBasicRaycastSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
     // </Trauma>
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ISharedAdminLogManager _log = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ISharedAdminLogManager _log = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private float _crawlHitzoneSquared; // Trauma
-    private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery;
+    [Dependency] private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _cfg.OnValueChanged(GoobCVars.CrawlHitzoneSize, x => _crawlHitzoneSquared = x * x, true); // Trauma - cvar is squared as micro-optimisation for later checking
-        _visualsQuery = GetEntityQuery<HitscanBasicVisualsComponent>();
-
         SubscribeLocalEvent<HitscanBasicRaycastComponent, HitscanTraceEvent>(OnHitscanFired);
     }
 

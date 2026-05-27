@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Station.Systems;
 using Robust.Shared.Random;
 
@@ -12,11 +7,11 @@ namespace Content.Server.GameTicking.Rules.VariationPass;
 ///     Base class for procedural variation rule passes, which apply some kind of variation to a station,
 ///     so we simply reduce the boilerplate for the event handling a bit with this.
 /// </summary>
-public abstract class VariationPassSystem<T> : GameRuleSystem<T>
+public abstract partial class VariationPassSystem<T> : GameRuleSystem<T>
     where T: IComponent
 {
-    [Dependency] protected readonly StationSystem Stations = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
+    [Dependency] protected StationSystem Stations = default!;
+    [Dependency] protected IRobustRandom Random = default!;
 
     public override void Initialize()
     {

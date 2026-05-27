@@ -2,9 +2,9 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared.Body;
 
-public sealed class HandOrganSystem : EntitySystem
+public sealed partial class HandOrganSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -16,7 +16,13 @@ public sealed class HandOrganSystem : EntitySystem
 
     private void OnGotInserted(Entity<HandOrganComponent> ent, ref OrganGotInsertedEvent args)
     {
-        _hands.AddHand(args.Target.Owner, ent.Comp.HandID, ent.Comp.Data); // Trauma - use .Owner
+        // <Trauma>
+        _hands.AddHand(args.Target.Owner, ent.Comp.HandID, ent.Comp.Data);
+
+        if (ent.Comp.StartingItem is not { } proto) return;
+        var item = PredictedSpawnNextToOrDrop(proto, args.Target);
+        _hands.TryPickup(args.Target.Owner, item, ent.Comp.HandID, animate: false);
+        // </Trauma>
     }
 
     private void OnGotRemoved(Entity<HandOrganComponent> ent, ref OrganGotRemovedEvent args)

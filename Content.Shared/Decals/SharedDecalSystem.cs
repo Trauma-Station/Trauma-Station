@@ -1,170 +1,280 @@
-// SPDX-FileCopyrightText: 2022 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2022 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared.Maps;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 using static Content.Shared.Decals.DecalGridComponent;
+using ChunkIndicesEnumerator = Robust.Shared.Map.Enumerators.ChunkIndicesEnumerator;
 
-namespace Content.Shared.Decals
+namespace Content.Shared.Decals;
+
+// Trauma - completely rewrote decals to be entity based
+public abstract partial class SharedDecalSystem : EntitySystem
 {
-    public abstract class SharedDecalSystem : EntitySystem
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected IMapManager MapManager = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] protected SharedMapSystem Map = default!;
+    [Dependency] protected SharedTransformSystem Xform = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityQuery<DecalComponent> _query = default!;
+    [Dependency] protected EntityQuery<DecalGridComponent> GridQuery = default!;
+    [Dependency] protected EntityQuery<MapGridComponent> MapGridQuery = default!;
+
+    public static readonly EntProtoId DecalEntity = "Decal";
+
+    // Note that this constant is effectively baked into all map files, because of how they save the grid decal component.
+    // So if this ever needs changing, the maps need converting.
+    public const int ChunkSize = 32;
+    public static Vector2i GetChunkIndices(Vector2 coordinates) => (coordinates / ChunkSize).Floored();
+
+    public override void Initialize()
     {
-        [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-        [Dependency] protected readonly IMapManager MapManager = default!;
+        base.Initialize();
 
-        protected bool PvsEnabled;
+        SubscribeLocalEvent<GridInitializeEvent>(OnGridInitialize);
+        SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
+        SubscribeLocalEvent<DecalGridComponent, ComponentStartup>(OnGridStartup);
+        SubscribeLocalEvent<DecalComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<DecalComponent, MoveEvent>(OnMove);
+    }
 
-        // Note that this constant is effectively baked into all map files, because of how they save the grid decal component.
-        // So if this ever needs changing, the maps need converting.
-        public const int ChunkSize = 32;
-        public static Vector2i GetChunkIndices(Vector2 coordinates) => new ((int) Math.Floor(coordinates.X / ChunkSize), (int) Math.Floor(coordinates.Y / ChunkSize));
+    private void OnGridInitialize(GridInitializeEvent msg)
+    {
+        EnsureComp<DecalGridComponent>(msg.EntityUid);
+    }
 
-        public override void Initialize()
+    private void OnTileChanged(ref TileChangedEvent args)
+    {
+        if (!GridQuery.TryComp(args.Entity, out var grid))
+            return;
+
+        foreach (var change in args.Changes)
         {
-            base.Initialize();
+            if (!_turf.IsSpace(change.NewTile))
+                continue;
 
-            SubscribeLocalEvent<GridInitializeEvent>(OnGridInitialize);
-            SubscribeLocalEvent<DecalGridComponent, ComponentStartup>(OnCompStartup);
-            SubscribeLocalEvent<DecalGridComponent, ComponentGetState>(OnGetState);
-        }
+            if (!grid.ChunkCollection.ChunkCollection.TryGetValue(change.ChunkIndex, out var chunk))
+                continue;
 
-        private void OnGetState(EntityUid uid, DecalGridComponent component, ref ComponentGetState args)
-        {
-            if (PvsEnabled && !args.ReplayState)
-                return;
-
-            // Should this be a full component state or a delta-state?
-            if (args.FromTick <= component.CreationTick || args.FromTick <= component.ForceTick)
+            foreach (var decal in chunk.Decals)
             {
-                args.State = new DecalGridState(component.ChunkCollection.ChunkCollection);
-                return;
+                if (GetChunkIndices(decal.Coordinates) == change.GridIndices)
+                    PredictedQueueDel(decal.Ent.Owner);
             }
+        }
+    }
 
-            var data = new Dictionary<Vector2i, DecalChunk>();
-            foreach (var (index, chunk) in component.ChunkCollection.ChunkCollection)
+    private void OnGridStartup(EntityUid uid, DecalGridComponent component, ComponentStartup args)
+    {
+        foreach (var (indices, chunk) in component.ChunkCollection.ChunkCollection)
+        {
+            // spawn decal entities from the map's data
+            foreach (var data in chunk.Decals)
             {
-                if (chunk.LastModified >= args.FromTick)
-                    data[index] = chunk;
+                AddDecal(uid, data, chunk, indices);
             }
-
-            args.State = new DecalGridDeltaState(data, new(component.ChunkCollection.ChunkCollection.Keys));
         }
+    }
 
-        private void OnGridInitialize(GridInitializeEvent msg)
+    private void OnStartup(Entity<DecalComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.Data == default)
+            return; // not initialized yet
+
+        // dont want clients to detach them for performance
+        _meta.AddFlag(ent.Owner, MetaDataFlags.Undetachable);
+
+        ent.Comp.Data.Ent = ent;
+        TryAddToChunk(ent, Transform(ent));
+    }
+
+    private void OnMove(Entity<DecalComponent> ent, ref MoveEvent args)
+    {
+        if (ent.Comp.Data == default)
+            return;
+
+        var oldGrid = args.OldPosition.EntityId;
+        var indices = ent.Comp.Chunk;
+        if (oldGrid.IsValid())
+            GetGridChunk(oldGrid, indices)?.Decals.Remove(ent.Comp.Data);
+        TryAddToChunk(ent, args.Component);
+    }
+
+    private void TryAddToChunk(Entity<DecalComponent> ent, TransformComponent xform)
+    {
+        if (xform.GridUid is { } newGrid)
+            GetGridChunk(newGrid, ent.Comp.Chunk, true)?.Decals.Add(ent.Comp.Data);
+        else
+            PredictedQueueDel(ent); // can't have decals in space
+    }
+
+    protected DecalChunk? GetChunk(Entity<DecalComponent> decal, bool create = false)
+        => Transform(decal).GridUid is { } grid
+            ? GetGridChunk(grid, decal.Comp.Chunk, create)
+            : null;
+
+    protected DecalChunk? GetGridChunk(EntityUid gridUid, Vector2i indices, bool create = false)
+    {
+        if (!GridQuery.TryComp(gridUid, out var grid))
+            return null;
+
+        var chunks = grid.ChunkCollection.ChunkCollection;
+        if (chunks.TryGetValue(indices, out var chunk))
+            return chunk;
+
+        if (!create)
+            return null;
+
+        return chunks[indices] = new();
+    }
+
+    protected Dictionary<Vector2i, DecalChunk>? ChunkCollection(EntityUid gridEuid, DecalGridComponent? comp = null)
+    {
+        if (!GridQuery.Resolve(gridEuid, ref comp, false))
+            return null;
+
+        return comp.ChunkCollection.ChunkCollection;
+    }
+
+    public bool TryAddDecal(string id, EntityCoordinates coordinates, out EntityUid decalId, Color? color = null, Angle? rotation = null, int zIndex = 0, bool cleanable = false)
+    {
+        rotation ??= Angle.Zero;
+        var decal = new Decal(coordinates.Position, id, color, rotation.Value, zIndex, cleanable);
+
+        return TryAddDecal(decal, coordinates, out decalId);
+    }
+
+    public bool TryAddDecal(Decal decal, EntityCoordinates coordinates, out EntityUid decalId)
+    {
+        decalId = EntityUid.Invalid;
+
+        if (!PrototypeManager.HasIndex<DecalPrototype>(decal.Id))
         {
-            EnsureComp<DecalGridComponent>(msg.EntityUid);
+            Log.Error($"Tried to spawn decal with invalid prototype {decal.Id} at {coordinates}!");
+            return false;
         }
 
-        private void OnCompStartup(EntityUid uid, DecalGridComponent component, ComponentStartup args)
-        {
-            foreach (var (indices, decals) in component.ChunkCollection.ChunkCollection)
-            {
-                foreach (var decalUid in decals.Decals.Keys)
-                {
-                    component.DecalIndex[decalUid] = indices;
-                }
-            }
+        var gridId = Xform.GetGrid(coordinates);
+        if (!MapGridQuery.TryComp(gridId, out var grid))
+            return false;
 
-            // This **shouldn't** be required, but just in case we ever get entity prototypes that have decal grids, we
-            // need to ensure that we send an initial full state to players.
-            Dirty(uid, component);
-        }
+        if (_turf.IsSpace(Map.GetTileRef(gridId.Value, grid, coordinates)))
+            return false;
 
-        protected Dictionary<Vector2i, DecalChunk>? ChunkCollection(EntityUid gridEuid, DecalGridComponent? comp = null)
-        {
-            if (!Resolve(gridEuid, ref comp))
-                return null;
+        if (!GridQuery.TryComp(gridId, out var comp))
+            return false;
 
-            return comp.ChunkCollection.ChunkCollection;
-        }
+        var chunkIndices = GetChunkIndices(decal.Coordinates);
+        var chunk = comp.ChunkCollection.ChunkCollection.GetOrNew(chunkIndices);
+        decalId = AddDecal(gridId.Value, decal, chunk, chunkIndices);
+        return true;
+    }
 
-        protected virtual void DirtyChunk(EntityUid id, Vector2i chunkIndices, DecalChunk chunk) {}
+    private EntityUid AddDecal(EntityUid grid, Decal decal, DecalChunk chunk, Vector2i chunkIndices)
+    {
+        // maps and all code that adds decals have coords as the bottom left of the tile, move it to the center
+        var coords = new EntityCoordinates(grid, decal.Coordinates + new Vector2(0.5f, 0.5f));
+        var decalId = PredictedSpawnAtPosition(DecalEntity, coords);
+        Xform.SetLocalRotation(decalId, decal.Angle);
+        chunk.Decals.Add(decal);
 
-        // internal, so that client/predicted code doesn't accidentally remove decals. There is a public server-side function.
-        protected bool RemoveDecalInternal(EntityUid gridId, uint decalId, [NotNullWhen(true)] out Decal? removed, DecalGridComponent? component = null)
-        {
-            removed = null;
-            if (!Resolve(gridId, ref component))
-                return false;
+        var decalComp = _query.Comp(decalId);
+        decal.Ent = (decalId, decalComp);
+        decalComp.Data = decal;
+        decalComp.Chunk = chunkIndices;
+        Dirty(decalId, decalComp);
 
-            if (!component.DecalIndex.Remove(decalId, out var indices)
-                || !component.ChunkCollection.ChunkCollection.TryGetValue(indices, out var chunk)
-                || !chunk.Decals.Remove(decalId, out removed))
-            {
-                return false;
-            }
-
-            if (chunk.Decals.Count == 0)
-                component.ChunkCollection.ChunkCollection.Remove(indices);
-
-            DirtyChunk(gridId, indices, chunk);
-            OnDecalRemoved(gridId, decalId, component, indices, chunk);
-            return true;
-        }
-
-        protected virtual void OnDecalRemoved(EntityUid gridId, uint decalId, DecalGridComponent component, Vector2i indices, DecalChunk chunk)
-        {
-            // used by client-side overlay code
-        }
-
-        public virtual HashSet<(uint Index, Decal Decal)> GetDecalsInRange(EntityUid gridId, Vector2 position, float distance = 0.75f, Func<Decal, bool>? validDelegate = null)
-        {
-            // NOOP on client atm.
-            return new HashSet<(uint Index, Decal Decal)>();
-        }
-
-        public virtual bool RemoveDecal(EntityUid gridId, uint decalId, DecalGridComponent? component = null)
-        {
-            // NOOP on client atm.
-            return true;
-        }
+        return decalId;
     }
 
     /// <summary>
-    ///     Sent by clients to request that a decal is placed on the server.
+    /// Get all decals on a given grid in range of some position on it, that optionally match a delegate.
+    /// This will not work across chunk boundaries, so keep distances small to make this less noticable.
     /// </summary>
-    [Serializable, NetSerializable]
-    public sealed class RequestDecalPlacementEvent : EntityEventArgs
+    public HashSet<Entity<DecalComponent>> GetDecalsInRange(EntityUid gridId, Vector2 position, float distance = 0.75f, Func<Decal, bool>? validDelegate = null)
     {
-        public Decal Decal;
-        public NetCoordinates Coordinates;
+        var decalIds = new HashSet<Entity<DecalComponent>>();
+        var chunkCollection = ChunkCollection(gridId);
+        var chunkIndices = GetChunkIndices(position);
+        if (chunkCollection == null || !chunkCollection.TryGetValue(chunkIndices, out var chunk))
+            return decalIds;
 
-        public RequestDecalPlacementEvent(Decal decal, NetCoordinates coordinates)
+        var dist2 = distance * distance;
+        foreach (var decal in chunk.Decals)
         {
-            Decal = decal;
-            Coordinates = coordinates;
+            var ent = decal.Ent;
+            if (!TryComp(ent, out TransformComponent? xform))
+                continue;
+
+            var decalPos = xform.Coordinates.Position;
+            if ((position - decalPos).LengthSquared() > dist2)
+                continue;
+
+            if (validDelegate == null || validDelegate(decal))
+            {
+                decalIds.Add(ent);
+            }
         }
+
+        return decalIds;
     }
 
-    [Serializable, NetSerializable]
-    public sealed class RequestDecalRemovalEvent : EntityEventArgs
+    public HashSet<Entity<DecalComponent>> GetDecalsIntersecting(EntityUid gridUid, Box2 bounds, DecalGridComponent? component = null)
     {
-        public NetCoordinates Coordinates;
+        var decalIds = new HashSet<Entity<DecalComponent>>();
+        var chunkCollection = ChunkCollection(gridUid, component);
 
-        public RequestDecalRemovalEvent(NetCoordinates coordinates)
+        if (chunkCollection == null)
+            return decalIds;
+
+        var chunks = new ChunkIndicesEnumerator(bounds, ChunkSize);
+
+        while (chunks.MoveNext(out var chunkOrigin))
         {
-            Coordinates = coordinates;
+            if (!chunkCollection.TryGetValue(chunkOrigin.Value, out var chunk))
+                continue;
+
+            foreach (var decal in chunk.Decals)
+            {
+                if (!bounds.Contains(decal.Coordinates))
+                    continue;
+
+                decalIds.Add(decal.Ent);
+            }
         }
+
+        return decalIds;
+    }
+}
+
+/// <summary>
+///     Sent by clients to request that a decal is placed on the server.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class RequestDecalPlacementEvent : EntityEventArgs
+{
+    public Decal Decal;
+    public NetCoordinates Coordinates;
+
+    public RequestDecalPlacementEvent(Decal decal, NetCoordinates coordinates)
+    {
+        Decal = decal;
+        Coordinates = coordinates;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RequestDecalRemovalEvent : EntityEventArgs
+{
+    public NetCoordinates Coordinates;
+
+    public RequestDecalRemovalEvent(NetCoordinates coordinates)
+    {
+        Coordinates = coordinates;
     }
 }

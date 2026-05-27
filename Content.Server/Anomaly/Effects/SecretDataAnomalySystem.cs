@@ -1,17 +1,11 @@
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Anomaly.Components;
 using Robust.Shared.Random;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class SecretDataAnomalySystem : EntitySystem
+public sealed partial class SecretDataAnomalySystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly List<AnomalySecretData> _deita = new();
 

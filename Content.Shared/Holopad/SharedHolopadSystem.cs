@@ -1,15 +1,10 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Holopad;
 
-public abstract class SharedHolopadSystem : EntitySystem
+public abstract partial class SharedHolopadSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public bool IsHolopadControlLocked(Entity<HolopadComponent> entity, EntityUid? user = null)
     {

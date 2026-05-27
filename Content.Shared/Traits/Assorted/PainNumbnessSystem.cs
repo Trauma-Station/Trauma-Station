@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Coolsurf6 <coolsurf24@yahoo.com.au>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Damage.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Events;
@@ -11,9 +6,9 @@ using Content.Shared.StatusEffectNew;
 
 namespace Content.Shared.Traits.Assorted;
 
-public sealed class PainNumbnessSystem : EntitySystem
+public sealed partial class PainNumbnessSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+    [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
 
     public override void Initialize()
     {

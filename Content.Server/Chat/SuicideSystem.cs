@@ -1,8 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Shared.Possession;
-using Content.Shared._White.Xenomorphs.Infection;
-using Content.Shared._EinsteinEngines.Silicon.Components;
-using Content.Medical.Shared.Consciousness;
+using Content.Trauma.Common.Silicon;
+using Content.Trauma.Common.Xenomorphs;
 // </Trauma>
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
@@ -24,16 +23,20 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Chat;
 
-public sealed class SuicideSystem : EntitySystem
+public sealed partial class SuicideSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly SharedSuicideSystem _suicide = default!;
+    // <Trauma>
+    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private CommonXenomorphSystem _xeno = default!;
+    // </Trauma>
+    [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private GhostSystem _ghostSystem = default!;
+    [Dependency] private SharedSuicideSystem _suicide = default!;
 
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
 
@@ -111,7 +114,7 @@ public sealed class SuicideSystem : EntitySystem
         // CannotSuicide tag will allow the user to ghost, but also return to their mind
         // This is kind of weird, not sure what it applies to?
         if (_tagSystem.HasTag(victim, CannotSuicideTag)
-            || HasComp<XenomorphPreventSuicideComponent>(victim)) // Goob station - Xenomorphs
+            || _xeno.IsSlimed(victim)) // Goob station - Xenomorphs
             args.CanReturnToBody = true;
 
         if (_ghostSystem.OnGhostAttempt(victim.Comp.Mind.Value, args.CanReturnToBody, mind: mindComponent))
@@ -163,7 +166,7 @@ public sealed class SuicideSystem : EntitySystem
     private void OnDamageableSuicide(Entity<DamageableComponent> victim, ref SuicideEvent args)
     {
         if (args.Handled
-            || HasComp<XenomorphPreventSuicideComponent>(victim)) // Goob station - Xenomorphs
+            || _xeno.IsSlimed(victim)) // Goob station - Xenomorphs
             return;
 
         var othersMessage = Loc.GetString("suicide-command-default-text-others", ("name", Identity.Entity(victim, EntityManager)));
@@ -179,7 +182,7 @@ public sealed class SuicideSystem : EntitySystem
             return;
         }
 
-        if (HasComp<SiliconComponent>(victim)) // Goobstation
+        if (_silicon.IsSilicon(victim)) // Goobstation
             args.DamageType ??= "Shock";
         else
             args.DamageType ??= "Slash";

@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jake Huxell <JakeHuxell@pm.me>
-// SPDX-FileCopyrightText: 2024 Vyacheslav Kovalevsky <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Objectives.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
@@ -26,13 +12,13 @@ namespace Content.Server.Objectives.Systems;
 /// Handles the objective conditions that hard depend on ninja.
 /// Survive is handled by <see cref="SurviveConditionSystem"/> since it works without being a ninja.
 /// </summary>
-public sealed class NinjaConditionsSystem : EntitySystem
+public sealed partial class NinjaConditionsSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
 
     public override void Initialize()
     {
@@ -65,6 +51,12 @@ public sealed class NinjaConditionsSystem : EntitySystem
     {
         if (args.Cancelled || !_roles.MindHasRole<NinjaRoleComponent>(args.MindId))
             return;
+        // <Trauma> - get map to check for warp points in below
+        if (args.Mind.OwnedEntity is not { } mob)
+            return;
+
+        var map = Transform(mob).MapID;
+        // </Trauma>
 
         // choose spider charge detonation point
         var warps = new List<EntityUid>();
@@ -73,6 +65,10 @@ public sealed class NinjaConditionsSystem : EntitySystem
 
         while (allEnts.MoveNext(out var warpUid, out var warp))
         {
+            // <Trauma> - check map and ignore singularity etc
+            if (warp.Follow || Transform(warpUid).MapID != map)
+                continue;
+            // </Trauma>
             if (_whitelist.IsWhitelistFail(bombingBlacklist, warpUid)
                 && !string.IsNullOrWhiteSpace(warp.Location))
             {

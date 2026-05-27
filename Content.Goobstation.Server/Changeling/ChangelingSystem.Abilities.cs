@@ -5,13 +5,13 @@ using Content.Goobstation.Common.Atmos;
 using Content.Goobstation.Common.Body.Components;
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Shared.FixedPoint;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
+using Content.Goobstation.Shared.Devour.Events;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Light.Components;
-using Content.Shared._Starlight.CollectiveMind;
-using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -24,6 +24,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Hands.Components;
@@ -34,31 +35,41 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Store.Components;
-using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
-using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Content.Shared.Actions.Components;
-using Content.Goobstation.Shared.Devour.Events;
-using Content.Server.Actions;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
+using Content.Trauma.Common.CollectiveMind;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingSystem
 {
-    #region Dependencies
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    #endregion
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private WeldableSystem _weldable = default!; // for biodegrade unweld
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     public static readonly EntProtoId ActionLayEgg = "ActionLayEgg";
     public static readonly ProtoId<ReagentPrototype> PolytrinicAcid = "PolytrinicAcid";
     public static readonly ProtoId<CollectiveMindPrototype> HivemindProto = "Lingmind";
-    public static readonly ProtoId<DamageGroupPrototype> AbsorbedDamageGroup = "Genetic";
-    public List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new() { "Nutriment", "Protein", "UncookedAnimalProteins", "Fat" }; // fat so absorbing raw meat good
+    public static readonly ProtoId<DamageTypePrototype> AbsorbedDamageType = "Cellular";
+    public static readonly ProtoId<ReagentPrototype> FerrochromicAcid = "FerrochromicAcid";
+    public static readonly List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new()
+    {
+        "Nutriment",
+        "Protein",
+        "UncookedAnimalProteins",
+        "Fat" // fat so absorbing raw meat good
+    };
+
+    private HashSet<Entity<CrawlerComponent>> _crawlers = new();
+    private HashSet<Entity<PoweredLightComponent>> _lights = new();
 
     protected override void InitAbilities()
     {
@@ -160,14 +171,7 @@ public sealed partial class ChangelingSystem
 
         PlayMeatySound(args.User, comp);
 
-        var dmg = new DamageSpecifier(_proto.Index(AbsorbedDamageGroup), 200);
-        _damage.TryChangeDamage(target, dmg, true, false, targetPart: TargetBodyPart.All); // Shitmed Change
-        if (TryComp<BloodstreamComponent>(target, out var blood))
-        {
-            var volume = blood.BloodReferenceSolution.Volume;
-            _blood.ChangeBloodReagents((target, blood), new([new("FerrochromicAcid", volume)]));
-        }
-        _blood.SpillAllSolutions(target);
+        AbsorbDamage(target, uid);
 
         EnsureComp<AbsorbedComponent>(target);
         EnsureComp<UnrevivableComponent>(target);
@@ -490,13 +494,14 @@ public sealed partial class ChangelingSystem
         DoScreech(uid, comp); // screenshake
         TryScreechStun(uid, comp); // the actual thing
 
-        var power = comp.ShriekPower;
-        var lights = GetEntityQuery<PoweredLightComponent>();
-        var lookup = _lookup.GetEntitiesInRange(uid, power);
+        var coords = Transform(uid).Coordinates;
+        _lights.Clear();
+        _lookup.GetEntitiesInRange(coords, comp.ShriekPower, _lights);
 
-        foreach (var ent in lookup)
-            if (lights.HasComponent(ent))
-                _light.TryDestroyBulb(ent);
+        foreach (var light in _lights)
+        {
+            _light.TryDestroyBulb(light);
+        }
 
         args.Handled = true;
     }
@@ -606,15 +611,7 @@ public sealed partial class ChangelingSystem
         eggComp.lingMind = mind;
         eggComp.AugmentedEyesightPurchased = HasComp<Shared.Overlays.ThermalVisionComponent>(uid);
 
-        EnsureComp<AbsorbedComponent>(target);
-        var dmg = new DamageSpecifier(_proto.Index(AbsorbedDamageGroup), 200);
-        _damage.TryChangeDamage(target, dmg, false, false, targetPart: TargetBodyPart.All); // Shitmed Change
-        if (TryComp<BloodstreamComponent>(target, out var blood))
-        {
-            var volume = blood.BloodReferenceSolution.Volume;
-            _blood.ChangeBloodReagents((target, blood), new([new("FerrochromicAcid", volume)]));
-        }
-        _blood.SpillAllSolutions(target);
+        AbsorbDamage(target, uid);
 
         PlayMeatySound(uid, comp);
 
@@ -624,6 +621,23 @@ public sealed partial class ChangelingSystem
     #endregion
 
     #region Utilities
+
+    private void AbsorbDamage(EntityUid target, EntityUid user)
+    {
+        EnsureComp<AbsorbedComponent>(target);
+        var dmg = new DamageSpecifier();
+        dmg.DamageDict[AbsorbedDamageType] = 200;
+        _damage.TryChangeDamage(target, dmg, false, false,
+            origin: user,
+            targetPart: TargetBodyPart.All,
+            splitDamage: SplitDamageBehavior.None); // kill em dead
+        if (TryComp<BloodstreamComponent>(target, out var blood))
+        {
+            var volume = blood.BloodReferenceSolution.Volume;
+            _blood.ChangeBloodReagents((target, blood), new([new(FerrochromicAcid, volume)]));
+        }
+        _blood.SpillAllSolutions(target);
+    }
 
     public void OnAnatomicPanacea(EntityUid uid, ChangelingIdentityComponent comp, ref ActionAnatomicPanaceaEvent args)
     {
@@ -658,6 +672,16 @@ public sealed partial class ChangelingSystem
             QueueDel(bola);
         }
 
+        // Unwelds containers containing changeling
+        var parent = Transform(uid).ParentUid;
+
+        if (parent.IsValid() && TryComp<WeldableComponent>(parent, out var weldable))
+        {
+            if (weldable.IsWelded)
+            {
+                _weldable.SetWeldedState(parent, false);
+            }
+        }
         var soln = new Solution();
         soln.AddReagent(PolytrinicAcid, 10f);
 
@@ -714,7 +738,7 @@ public sealed partial class ChangelingSystem
             EnsureComp<SpecialBreathingImmunityComponent>(uid);
             EnsureComp<SpecialPressureImmunityComponent>(uid);
             EnsureComp<SpecialLowTempImmunityComponent>(uid);
-            Popup.PopupEntity(Loc.GetString("changeling-voidadapt-start"), uid, uid);
+            Popup.PopupEntity("Our exterior adapts to the vacuum of space", uid, uid);
             comp.VoidAdaptActive = true;
             comp.ChemicalRegenMultiplier -= 0.25f; // chem regen slowed by a flat 25%
         }
@@ -723,7 +747,7 @@ public sealed partial class ChangelingSystem
             RemComp<SpecialBreathingImmunityComponent>(uid);
             RemComp<SpecialPressureImmunityComponent>(uid);
             RemComp<SpecialLowTempImmunityComponent>(uid);
-            Popup.PopupEntity(Loc.GetString("changeling-voidadapt-end"), uid, uid);
+            Popup.PopupEntity("Our exterior returns to normal", uid, uid);
             comp.VoidAdaptActive = false;
             comp.ChemicalRegenMultiplier += 0.25f; // chem regen debuff removed
         }

@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 E F R <602406+Efruit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.NodeContainer;
 using JetBrains.Annotations;
@@ -19,13 +9,13 @@ using Robust.Shared.Map;
 namespace Content.Client.NodeContainer
 {
     [UsedImplicitly]
-    public sealed class NodeGroupSystem : EntitySystem
+    public sealed partial class NodeGroupSystem : EntitySystem
     {
-        [Dependency] private readonly IOverlayManager _overlayManager = default!;
-        [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
-        [Dependency] private readonly IInputManager _inputManager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
+        [Dependency] private IOverlayManager _overlayManager = default!;
+        [Dependency] private EntityLookupSystem _entityLookup = default!;
+        [Dependency] private IMapManager _mapManager = default!;
+        [Dependency] private IInputManager _inputManager = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
 
         public bool VisEnabled { get; private set; }
 

@@ -2,7 +2,7 @@
 
 #BaseSword
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, KnifeDurabilitySharpenOnly] # Trauma - Durability
   id: BaseSword
   abstract: true
   components:
@@ -97,8 +97,6 @@
     damage:
       types:
         Slash: 19 #cmon, it has to be at least BETTER than the rest. # Goob edit
-      woundSeverityMultipliers:
-        Slash: 3
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -120,7 +118,7 @@
     stealGroup: CaptainSword
   # <Trauma>
   - type: Parry
-    maxParries: 3
+    maxParries: 2
     maxReflects: 0
     parryMinSkill: 40
     soundOnParry:
@@ -240,7 +238,7 @@
 #Other/Weird
 - type: entity
   name: throngler
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ UnbreakableDurability, BaseSword, BaseMajorContraband ] # Trauma - durability
   id: Throngler
   description: If Security dares take it from you, just remind them that they are indeed mortal.
   components:

@@ -5,15 +5,13 @@ using Content.Shared.UserInterface;
 
 namespace Content.Trauma.Shared.Paper;
 
-public sealed class BlockReadingSystem : EntitySystem
+public sealed partial class BlockReadingSystem : EntitySystem
 {
-    private EntityQuery<BlockReadingComponent> _query;
+    [Dependency] private EntityQuery<BlockReadingComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<BlockReadingComponent>();
 
         SubscribeLocalEvent<PaperComponent, ActivatableUIOpenAttemptEvent>(OnOpenAttempt);
     }

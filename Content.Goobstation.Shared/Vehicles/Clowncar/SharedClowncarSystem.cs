@@ -6,7 +6,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 
@@ -39,8 +38,8 @@ namespace Content.Goobstation.Shared.Vehicles.Clowncar;
  */
 public abstract partial class SharedClowncarSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAppearanceSystem AppearanceSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] protected SharedAppearanceSystem AppearanceSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

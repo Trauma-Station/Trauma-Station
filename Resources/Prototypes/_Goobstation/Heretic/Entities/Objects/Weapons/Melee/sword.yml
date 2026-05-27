@@ -1,7 +1,7 @@
 - type: entity
   name: ragged sword
   description: This blade feels cold and faintly resonant to the touch. Its surface swims with impossible, fleeting geometries that strain the eye, and it will cut bits off mortals and immortals just fine.
-  parent: [ BaseSword, BaseMagicalContraband ]
+  parent: [ KnifeDurabilitySharpenOnly, BaseSword, BaseMagicalContraband ]
   id: RaggedSword
   components:
   - type: UnholyItem
@@ -10,8 +10,10 @@
     state: icon
   - type: Item
     sprite: _Goobstation/Heretic/Entities/sword-inhands.rsi
-    size: Huge
-    storedRotation: -45
+    size: Large
+    shape:
+    - 0,0,5,1
+    storedRotation: 45
   - type: MeleeWeapon # Same dps, more wounding and range compared to blade, but no AP
     damage:
       types:

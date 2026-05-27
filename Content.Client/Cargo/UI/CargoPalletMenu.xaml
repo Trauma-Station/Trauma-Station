@@ -1,11 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2023 Checkraze <71046427+Cheackraze@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: MIT
--->
-
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
             SetSize="300 150"
@@ -15,14 +7,12 @@ SPDX-License-Identifier: MIT
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc 'cargo-pallet-menu-appraisal-label'}"
                    StyleClasses="LabelKeyText" />
-            <Label Name="AppraisalLabel"
-                   Text="{Loc 'cargo-pallet-menu-no-goods-text'}" />
+            <Label Name="AppraisalLabel" /> <!-- Trauma - removed invalid Text -->
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc 'cargo-pallet-menu-count-label'}"
                    StyleClasses="LabelKeyText" />
-            <Label Name="CountLabel"
-                   Text="{Loc 'cargo-pallet-menu-no-goods-text'}" />
+            <Label Name="CountLabel" /> <!-- Trauma - removed invalid Text -->
         </BoxContainer>
         <Button Name="AppraiseButton"
                 Text="{Loc 'cargo-pallet-appraise-button'}"/>

@@ -28,9 +28,9 @@
     speed: 5
   - type: Item
     size: Normal
-    storedRotation: -75
+    storedRotation: 45
     shape:
-    - 0,0,1,2
+    - 0,0,2,0
   - type: Tag
     tags:
     - SecBeltEquip

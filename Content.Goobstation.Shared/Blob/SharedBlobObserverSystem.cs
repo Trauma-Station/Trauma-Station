@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.Interaction;
 using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract class SharedBlobObserverSystem : EntitySystem
+public abstract partial class SharedBlobObserverSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Morb <14136326+Morb0@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Hannah Giovanna Dawson <karakkaraz@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -14,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerCommand : LocalizedCommands
+public sealed partial class PanicBunkerCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker";
 
@@ -56,9 +48,9 @@ public sealed class PanicBunkerCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerDisableWithAdminsCommand : LocalizedCommands
+public sealed partial class PanicBunkerDisableWithAdminsCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker_disable_with_admins";
 
@@ -76,9 +68,9 @@ public sealed class PanicBunkerDisableWithAdminsCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerEnableWithoutAdminsCommand : LocalizedCommands
+public sealed partial class PanicBunkerEnableWithoutAdminsCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker_enable_without_admins";
 
@@ -96,9 +88,9 @@ public sealed class PanicBunkerEnableWithoutAdminsCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerCountDeadminnedCommand : LocalizedCommands
+public sealed partial class PanicBunkerCountDeadminnedCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker_count_deadminned_admins";
 
@@ -116,9 +108,9 @@ public sealed class PanicBunkerCountDeadminnedCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerShowReasonCommand : LocalizedCommands
+public sealed partial class PanicBunkerShowReasonCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker_show_reason";
 
@@ -136,9 +128,9 @@ public sealed class PanicBunkerShowReasonCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerMinAccountAgeCommand : LocalizedCommands
+public sealed partial class PanicBunkerMinAccountAgeCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker_min_account_age";
 
@@ -168,9 +160,9 @@ public sealed class PanicBunkerMinAccountAgeCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PanicBunkerMinOverallMinutesCommand : LocalizedCommands
+public sealed partial class PanicBunkerMinOverallMinutesCommand : LocalizedCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public override string Command => "panicbunker_min_overall_minutes";
 

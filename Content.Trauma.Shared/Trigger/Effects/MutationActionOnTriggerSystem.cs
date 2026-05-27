@@ -7,11 +7,11 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Trigger.Effects;
 
-public sealed class MutationActionOnTriggerSystem : XOnTriggerSystem<MutationActionOnTriggerComponent>
+public sealed partial class MutationActionOnTriggerSystem : XOnTriggerSystem<MutationActionOnTriggerComponent>
 {
-    [Dependency] private readonly ActionMutationSystem _actionMutation = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private ActionMutationSystem _actionMutation = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     protected override void OnTrigger(Entity<MutationActionOnTriggerComponent> ent, EntityUid target, ref TriggerEvent args)
     {

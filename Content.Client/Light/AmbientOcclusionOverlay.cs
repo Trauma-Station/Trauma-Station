@@ -14,17 +14,17 @@ namespace Content.Client.Light;
 /// <summary>
 /// Applies ambient-occlusion to the viewport.
 /// </summary>
-public sealed class AmbientOcclusionOverlay : Overlay
+public sealed partial class AmbientOcclusionOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
     private static readonly ProtoId<ShaderPrototype> StencilMaskShader = "StencilMask";
     private static readonly ProtoId<ShaderPrototype> StencilEqualDrawShader = "StencilEqualDraw";
 
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IConfigurationManager _cfgManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
 
@@ -101,7 +101,10 @@ public sealed class AmbientOcclusionOverlay : Overlay
 
                     worldHandle.SetTransform(localMatrix);
                     // 4 pixels
-                    worldHandle.DrawRect(Box2.UnitCentered.Enlarged(distance / EyeManager.PixelsPerMeter), Color.White);
+                    // <Trauma> - use the occluder's BoundingBox instead of hardcoded 1x1 box
+                    var box = entry.Component.BoundingBox; // separate line because access is stupid
+                    worldHandle.DrawRect(box.Enlarged(distance / EyeManager.PixelsPerMeter), Color.White);
+                    // </Trauma>
                 }
             }, Color.Transparent);
 

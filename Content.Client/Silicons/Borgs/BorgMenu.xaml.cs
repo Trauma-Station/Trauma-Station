@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <shadowjjt@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.CCVar;
@@ -25,8 +17,8 @@ namespace Content.Client.Silicons.Borgs;
 [GenerateTypedNameReferences]
 public sealed partial class BorgMenu : FancyWindow
 {
-    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private IConfigurationManager _cfgManager = default!;
+    [Dependency] private IEntityManager _entity = default!;
     private readonly NameModifierSystem _nameModifier;
     private readonly PowerCellSystem _powerCell;
     private readonly SharedBatterySystem _battery;

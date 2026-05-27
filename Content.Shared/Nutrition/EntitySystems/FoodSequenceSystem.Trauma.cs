@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Item;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.Prototypes;
@@ -10,7 +12,7 @@ namespace Content.Shared.Nutrition.EntitySystems;
 /// </summary>
 public sealed partial class FoodSequenceSystem
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     public static readonly ProtoId<FoodSequenceElementPrototype> FallbackElement = "ItemFallback";
 

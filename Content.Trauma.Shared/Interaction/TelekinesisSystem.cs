@@ -9,28 +9,22 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Misc;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Interaction;
 
-public sealed class TelekinesisSystem : EntitySystem
+public sealed partial class TelekinesisSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedTetherGunSystem _tether = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private EntityQuery<AdminFrozenComponent> _frozenQuery;
-    private EntityQuery<TelekineticInteractableComponent> _targetQuery;
-    private EntityQuery<TetherGunComponent> _tetherGunQuery;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedTetherGunSystem _tether = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<AdminFrozenComponent> _frozenQuery = default!;
+    [Dependency] private EntityQuery<TelekineticInteractableComponent> _targetQuery = default!;
+    [Dependency] private EntityQuery<TetherGunComponent> _tetherGunQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _frozenQuery = GetEntityQuery<AdminFrozenComponent>();
-        _targetQuery = GetEntityQuery<TelekineticInteractableComponent>();
-        _tetherGunQuery = GetEntityQuery<TetherGunComponent>();
 
         // this is evil but preferable to making a new event to uncancel interaction attempts.
         // anything important that might accidentally get overriden (admin freeze) is already checked in CanUseTelekinesis

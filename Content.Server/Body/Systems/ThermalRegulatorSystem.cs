@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Body.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
@@ -17,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Body.Systems;
 
-public sealed class ThermalRegulatorSystem : EntitySystem
+public sealed partial class ThermalRegulatorSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly TemperatureSystem _tempSys = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSys = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private TemperatureSystem _tempSys = default!;
+    [Dependency] private ActionBlockerSystem _actionBlockerSys = default!;
 
     public override void Initialize()
     {

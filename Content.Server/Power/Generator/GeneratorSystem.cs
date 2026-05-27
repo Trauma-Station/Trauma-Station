@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Audio;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Materials;
@@ -28,14 +16,14 @@ namespace Content.Server.Power.Generator;
 /// <seealso cref="FuelGeneratorComponent"/>
 /// <seealso cref="ChemicalFuelGeneratorAdapterComponent"/>
 /// <seealso cref="SolidFuelGeneratorAdapterComponent"/>
-public sealed class GeneratorSystem : SharedGeneratorSystem
+public sealed partial class GeneratorSystem : SharedGeneratorSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private AmbientSoundSystem _ambientSound = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
 
     public override void Initialize()
     {

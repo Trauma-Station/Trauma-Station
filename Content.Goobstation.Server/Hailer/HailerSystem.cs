@@ -13,13 +13,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Hailer;
 
-public sealed class HailerSystem : EntitySystem
+public sealed partial class HailerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _random = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -32,14 +32,14 @@ public sealed class HailerSystem : EntitySystem
     {
         if (args.SlotFlags == SlotFlags.MASK)
         {
-            _actionsSystem.AddAction(args.Equipee, ref component.HailActionEntity, component.HailerAction, args.Equipee);
+            _actionsSystem.AddAction(args.EquipTarget, ref component.HailActionEntity, component.HailerAction, args.EquipTarget);
         }
     }
     private void OnGotUnequipped(EntityUid uid, HailerComponent component, GotUnequippedEvent args)
     {
         if (args.SlotFlags == SlotFlags.MASK)
         {
-            _actionsSystem.RemoveAction(args.Equipee, component.HailActionEntity);
+            _actionsSystem.RemoveAction(args.EquipTarget, component.HailActionEntity);
         }
     }
     string[] _sounds = [

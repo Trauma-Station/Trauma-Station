@@ -2,7 +2,6 @@
 
 using System.Collections;
 using System.Runtime.CompilerServices;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 

@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jake Huxell <JakeHuxell@pm.me>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
@@ -21,14 +12,15 @@ namespace Content.Shared.Maps;
 /// <summary>
 ///     This system provides various useful helper methods for turfs & tiles. Replacement for <see cref="TurfHelpers"/>
 /// </summary>
-public sealed class TurfSystem : EntitySystem
+public sealed partial class TurfSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitions = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitions = default!;
 
+    [Dependency] private EntityQuery<FixturesComponent> _fixtureQuery = default!;
 
     /// <summary>
     /// Attempts to get the turf at or under some given coordinates or null if no such turf exists.
@@ -86,8 +78,7 @@ public sealed class TurfSystem : EntitySystem
         if (!Resolve(gridUid, ref grid, ref gridXform))
             return false;
 
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var (gridPos, gridRot, matrix) = _transform.GetWorldPositionRotationMatrix(gridXform, xformQuery);
+        var (gridPos, gridRot, matrix) = _transform.GetWorldPositionRotationMatrix(gridXform);
 
         var size = grid.TileSize;
         var localPos = new Vector2(indices.X * size + (size / 2f), indices.Y * size + (size / 2f));
@@ -99,14 +90,13 @@ public sealed class TurfSystem : EntitySystem
         tileAabb = tileAabb.Translated(localPos);
 
         var intersectionArea = 0f;
-        var fixtureQuery = GetEntityQuery<FixturesComponent>();
         foreach (var ent in _entityLookup.GetEntitiesIntersecting(gridUid, worldBox, LookupFlags.Dynamic | LookupFlags.Static))
         {
-            if (!fixtureQuery.TryGetComponent(ent, out var fixtures))
+            if (!_fixtureQuery.TryGetComponent(ent, out var fixtures))
                 continue;
 
             // get grid local coordinates
-            var (pos, rot) = _transform.GetWorldPositionRotation(xformQuery.GetComponent(ent), xformQuery);
+            var (pos, rot) = _transform.GetWorldPositionRotation(ent);
             rot -= gridRot;
             pos = (-gridRot).RotateVec(pos - gridPos);
 

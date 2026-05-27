@@ -8,15 +8,20 @@
   - Heretic
   - Wizard
   - Blob
+  - Insurgent
+  - CrabFaction
 
 - type: npcFaction
   id: Balloon
   # Balloons can't attack
+  hostile:
+  - Insurgent
 
 - type: npcFaction
   id: Monkey
   hostile:
   - Balloon # Custom faction specifically for attacking bloons
+  - Insurgent
 
 - type: npcFaction
   id: Wraith
@@ -34,8 +39,10 @@
   - Heretic
   - Blob
   - PirateFaction
+  - Insurgent
   friendly:
   - Lavafauna
+  - CrabFaction
 
 # Lavaland mob faction to stop gang wars
 - type: npcFaction
@@ -57,8 +64,10 @@
   - Shadowling
   - Wizard
   - PirateFaction
+  - Insurgent
   friendly:
   - Dragon
+  - CrabFaction
 
 - type: npcFaction
   id: Assistant
@@ -80,3 +89,5 @@
   - Lavafauna
   - AllHostile
   - Xenoborg
+  - Insurgent
+  - CrabFaction

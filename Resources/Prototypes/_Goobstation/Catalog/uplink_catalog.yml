@@ -1,64 +1,3 @@
-# SPDX-FileCopyrightText: 2024 CMDR-Piboy314 <92357316+CMDR-Piboy314@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 Piras314 <92357316+Piras314@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Preston Smith <92108534+thetolbean@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Remuchi <72476615+Remuchi@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ScyronX <166930367+ScyronX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Spatison <137375981+Spatison@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tristan <traynor123123@gmail.com>
-# SPDX-FileCopyrightText: 2024 Tryded <139474617+Tryded@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Bandit <queenjess521@gmail.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot02@gmail.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot20@gmail.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-# SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
-# SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
-# SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Scruq445 <storchdamien@gmail.com>
-# SPDX-FileCopyrightText: 2025 Shy Bandit <92641277+rotundfan@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-# SPDX-FileCopyrightText: 2025 TurboTracker <130304754+TurboTrackerss14@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Weide <64257676+Lyacs@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 absurd-shaman <165011607+absurd-shaman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 crasg <109207982+Scruq445@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 loltart <lo1tartyt@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-# SPDX-FileCopyrightText: 2025 terminatorbo <kovalevb059@gmail.com>
-# SPDX-FileCopyrightText: 2025 jvne <juneialduncan21@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Disruption
 
 - type: listing
@@ -83,21 +22,11 @@
 
 - type: listing
   id: UplinkBoxReagentGrenades
-  name: Box of Reagent Grenades
-  description: Contains 2 Glue grenades and 2 Lube Grenades
+  name: uplink-reagent-grenades-name
+  description: uplink-reagent-grenades-desc
   productEntity: BoxReagentGrenades
   cost:
     Telecrystal: 30
-  categories:
-    -  UplinkDisruption
-
-- type: listing
-  id: UplinkRemoteSignallerAdvanced
-  name: uplink-signaller-name
-  description: uplink-signaller-desc
-  productEntity: RemoteSignallerAdvanced
-  cost:
-    Telecrystal: 8
   categories:
     -  UplinkDisruption
 
@@ -349,6 +278,11 @@
     Telecrystal: 100 # don't kill me piras
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkBowHardlight
@@ -366,16 +300,16 @@
       tags:
       - NukeOpsUplink
 
-- type: listing
-  id: UplinkDualettaBundle
-  name: uplink-dualetta-bundle-name
-  description: uplink-dualetta-bundle-desc
-  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/Dualetta.rsi, state: icon }
-  productEntity: BriefcaseSyndieDualettaBundleFilled
-  cost:
-    Telecrystal: 50
-  categories:
-  - UplinkWeaponry
+# - type: listing - Miserable to fight against
+#   id: UplinkDualettaBundle
+#   name: uplink-dualetta-bundle-name
+#   description: uplink-dualetta-bundle-desc
+#   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/Dualetta.rsi, state: icon }
+#   productEntity: BriefcaseSyndieDualettaBundleFilled
+#   cost:
+#     Telecrystal: 50
+#   categories:
+#   - UplinkWeaponry
 
 - type: listing
   id: UplinkPistolAnaconda
@@ -403,17 +337,6 @@
     - UplinkWeaponry
 
 # Wearables
-
-- type: listing
-  id: UplinkClothingDreadnought
-  name: uplink-hardsuit-cybersun-dreadnought-name
-  description: uplink-hardsuit-cybersun-dreadnought-desc
-  icon: { sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/dreadnought.rsi, state: icon }
-  productEntity: CrateSyndicateDreadnought
-  cost:
-    Telecrystal: 150
-  categories:
-  - UplinkWearables
 
 - type: listing
   id: UplinkClothingBeltMilitaryRigGrenadier
@@ -538,7 +461,7 @@
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Melee/hisgrace.rsi, state: icon }
   productEntity: HisGrace
   cost:
-    Telecrystal: 100
+    Telecrystal: 125
   categories:
   - UplinkJob
   conditions:
@@ -1016,6 +939,11 @@
     Telecrystal: 12 # Buying granades this way is ~14% cheaper than getting them from china-lake bundles
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkGrenadeFrag
@@ -1027,6 +955,11 @@
     Telecrystal: 12 # Buying granades this way is ~14% cheaper than getting them from china-lake bundles
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkGrenadeMPAPERS
@@ -1038,6 +971,11 @@
     Telecrystal: 3
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineLightRifleBox
@@ -1049,6 +987,11 @@
     Telecrystal: 20
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineHighCaliber
@@ -1060,6 +1003,11 @@
     Telecrystal: 8
   categories:
   - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkMagazineHighCaliberExplosive
@@ -1071,48 +1019,20 @@
     Telecrystal: 12
   categories:
   - UplinkAmmo
-
-#- type: listing # A box, really? Why not like... mags?
-#  id: UplinkHighCaliberBox
-#  name: uplink-high-caliber-box-name
-#  description: uplink-high-caliber-box-desc
-#  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi, state: base-b }
-#  productEntity: MagazineBoxHighCaliber
-#  cost:
-#    Telecrystal: 40 # ammo should be a big cost for this
-#  categories:
-#  - UplinkAmmo
-
-#- type: listing Trauma, removed with the shotgun
-#  id: UplinkMagazineShotgunHeavy
-#  name: uplink-heavy-shotgun-magazine-name
-#  description: uplink-heavy-shotgun-magazine-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon }
-#  productEntity: MagazineShotgunHeavy
-#  cost:
-#    Telecrystal: 30
-#  categories:
-#  - UplinkAmmo
-
-#- type: listing Trauma, removed with the shotgun
-#  id: UplinkMagazineShotgunHeavySlug
-#  name: uplink-heavy-shotgun-magazine-slug-name
-#  description: uplink-heavy-shotgun-magazine-slug-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon2 }
-#  productEntity: MagazineShotgunHeavySlug
-#  cost:
-#    Telecrystal: 40
-#  categories:
-#  - UplinkAmmo
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkHighCapacityMagazinePistol
   name: uplink-highcap-pistol-mag-name
   description: uplink-highcap-pistol-mag-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
   productEntity: MagazinePistolHighCapacity
   cost:
-    Telecrystal: 3
+    Telecrystal: 7
   categories:
   - UplinkAmmo
 
@@ -1126,11 +1046,6 @@
     Telecrystal: 25 # Same as what it was before being removed
   categories:
   - UplinkDisruption
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
 
 - type: listing
   id: UplinkSyndicateWeaponModuleAdvanced
@@ -1141,17 +1056,6 @@
     Telecrystal: 40 # goob
   categories:
   - UplinkDisruption
-
-- type: listing
-  id: UplinkMagazinePistolCaselessRifleSAPHE
-  name: uplink-pistol-magazine-caseless-saphe-name
-  description: uplink-pistol-magazine-caseless-saphe-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: base }
-  productEntity: MagazinePistolCaselessRifleSAPHE
-  cost:
-    Telecrystal: 5 # 23 damage but ~1/3 of a rifle magazine and semi armor piercing, remember the damage is 13 pierce 10.5 explosive
-  categories:
-  - UplinkAmmo
 
 # Mechs
 
@@ -1216,15 +1120,15 @@
     whitelist:
     - Chef
 
-- type: listing
-  id: UplinkCapoeiraManual
-  name: uplink-capoeira-name
-  description: uplink-capoeira-desc
-  productEntity: CapoeiraManual
-  cost:
-    Telecrystal: 35
-  categories:
-  - UplinkWeaponry
+# - type: listing
+#   id: UplinkCapoeiraManual
+#   name: uplink-capoeira-name
+#   description: uplink-capoeira-desc
+#   productEntity: CapoeiraManual
+#   cost:
+#     Telecrystal: 35
+#   categories:
+#   - UplinkWeaponry
 
 - type: listing
   id: UplinkMysteriousScroll
@@ -1268,7 +1172,7 @@
   name: uplink-M172LAW-name
   description: uplink-M172LAW-desc
   productEntity: WeaponLauncherRocketDisposable
-  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Launchers/m172.rsi, state: icon }
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Launchers/m172_icon_48x.rsi, state: icon }
   cost:
     Telecrystal: 6 # Basically a worse C4 but ranged
   categories:
@@ -1295,7 +1199,7 @@
   name: uplink-RPOA-name
   description: uplink-RPOA-desc
   productEntity: WeaponLauncherRocketDisposableThermobaric
-  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Launchers/shmel.rsi, state: icon }
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Launchers/shmel_icon_48x.rsi, state: icon }
   cost:
     Telecrystal: 6 # one and a half incendiary grenades, takes up the same space as three
   categories:
@@ -1313,7 +1217,7 @@
   description: uplink-dimension-pot-desc
   productEntity: DimensionPot
   cost:
-    Telecrystal: 40
+    Telecrystal: 15
   categories:
   - UplinkDeception
 
@@ -1330,25 +1234,6 @@
   - !type:BuyerSpeciesCondition
     whitelist:
     - Human
-
-- type: listing
-  id: UplinkUndeterminedBundle
-  name: uplink-undetermined-bundle-name
-  description: uplink-undetermined-bundle-desc
-  productEntity: CrateSyndicateUndetermined
-  cost:
-    Telecrystal: 99 # :trollface:
-  categories:
-  - UplinkDisruption
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
 
 - type: listing
   id: UplinkEnergyPickaxe

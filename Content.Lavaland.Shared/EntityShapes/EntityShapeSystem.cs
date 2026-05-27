@@ -5,19 +5,17 @@ using Content.Lavaland.Shared.EntityShapes.Components;
 using Content.Lavaland.Shared.EntityShapes.Shapes;
 using Content.Lavaland.Shared.Megafauna.Events;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.EntityShapes;
 
-public sealed class EntityShapeSystem : EntitySystem
+public sealed partial class EntityShapeSystem : EntitySystem
 {
-    [Dependency] private readonly AngerSystem _anger = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
+    [Dependency] private AngerSystem _anger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IMapManager _mapMan = default!;
 
     private EntityQuery<ShapeSpawnerComponent> _spawnerQuery;
     private EntityQuery<ShapeSpawnerCounterComponent> _counterQuery;

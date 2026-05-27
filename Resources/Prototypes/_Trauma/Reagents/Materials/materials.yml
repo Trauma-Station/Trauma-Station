@@ -1,0 +1,44 @@
+- type: material
+  id: Charcoal
+  stackEntity: Charcoal1
+  name: materials-charcoal
+  unit: materials-unit-piece
+  icon: { sprite: Objects/Materials/ore.rsi, state: coal }
+  color: "#404040"
+  price: 0.1 # $10 for 1 unit
+
+- type: material
+  id: Brick
+  stackEntity: Brick1
+  name: materials-brick
+  unit: materials-unit-piece
+  icon: { sprite: _Trauma/Objects/Materials/materials.rsi, state: brick }
+  color: "#b6946d"
+  price: 0.1 # $10 for 1 unit
+
+- type: material
+  id: Whetstone
+  stackEntity: Whetstone1
+  name: materials-whetstone
+  unit: materials-unit-use
+  icon: { sprite: _Trauma/Objects/Tools/whetstone.rsi, state: icon }
+  color: "#000000"
+  price: 0
+
+- type: material
+  id: Bracing
+  stackEntity: WeaponBracing1
+  name: materials-bracing
+  unit: materials-unit-use
+  icon: { sprite: _Trauma/Objects/Tools/weaponreinforcement.rsi, state: icon }
+  color: "#000000"
+  price: 0
+
+- type: material
+  id: DrillHead
+  stackEntity: DrillHead
+  name: materials-drillhead
+  unit: materials-unit-use
+  icon: { sprite: _Trauma/Objects/Tools/drillhead.rsi, state: icon }
+  color: "#000000"
+  price: 0

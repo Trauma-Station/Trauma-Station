@@ -1,22 +1,12 @@
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Content.Trauma.Common.Wizard;
+// </Trauma>
 using Content.Client.Administration.Managers;
 using Content.Client.Launcher;
 using Content.Client.MainMenu;
 using Content.Client.Replay.Spectator;
 using Content.Client.Replay.UI.Loading;
 using Content.Client.UserInterface.Systems.Chat;
-using Content.Shared._Goobstation.Wizard;
 using Content.Shared.Chat;
 using Content.Shared.Effects;
 using Content.Shared.GameTicking;
@@ -45,21 +35,21 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Replay;
 
-public sealed class ContentReplayPlaybackManager
+public sealed partial class ContentReplayPlaybackManager
 {
-    [Dependency] private readonly IStateManager _stateMan = default!;
-    [Dependency] private readonly IClientGameTiming _timing = default!;
-    [Dependency] private readonly IReplayLoadManager _loadMan = default!;
-    [Dependency] private readonly IGameController _controller = default!;
-    [Dependency] private readonly IClientEntityManager _entMan = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiMan = default!;
-    [Dependency] private readonly IReplayPlaybackManager _playback = default!;
-    [Dependency] private readonly IClientConGroupController _conGrp = default!;
-    [Dependency] private readonly IClientAdminManager _adminMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IResourceManager _resMan = default!;
+    [Dependency] private IStateManager _stateMan = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
+    [Dependency] private IReplayLoadManager _loadMan = default!;
+    [Dependency] private IGameController _controller = default!;
+    [Dependency] private IClientEntityManager _entMan = default!;
+    [Dependency] private IUserInterfaceManager _uiMan = default!;
+    [Dependency] private IReplayPlaybackManager _playback = default!;
+    [Dependency] private IClientConGroupController _conGrp = default!;
+    [Dependency] private IClientAdminManager _adminMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IBaseClient _client = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IResourceManager _resMan = default!;
 
     /// <summary>
     /// UI state to return to when stopping a replay or loading fails.

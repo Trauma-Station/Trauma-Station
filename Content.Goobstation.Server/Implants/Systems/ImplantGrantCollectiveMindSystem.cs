@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Implants.Components;
-using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Implants;
+using Content.Trauma.Common.CollectiveMind;
 
 namespace Content.Goobstation.Server.Implants.Systems;
 
-public sealed class ImplantGrantCollectiveMindSystem : EntitySystem
+public sealed partial class ImplantGrantCollectiveMindSystem : EntitySystem
 {
     public override void Initialize()
     {

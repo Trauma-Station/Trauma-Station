@@ -1,21 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
-using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Body;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.SmartLinkImplant;
 
-public sealed class SmartLinkSystem : EntitySystem
+public sealed partial class SmartLinkSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

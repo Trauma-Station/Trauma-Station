@@ -10,16 +10,9 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// The only reason this exists is because "ECS" entity effects are half baked and provide no way to extend the arguments like the original did.
 /// TheShuEd my goat.
 /// </remarks>
-public sealed class EffectDataSystem : EntitySystem
+public sealed partial class EffectDataSystem : EntitySystem
 {
-    private EntityQuery<EntityEffectToolComponent> _toolQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _toolQuery = GetEntityQuery<EntityEffectToolComponent>();
-    }
+    [Dependency] private EntityQuery<EntityEffectToolComponent> _toolQuery = default!;
 
     public EntityUid? GetTool(EntityUid target)
         => _toolQuery.CompOrNull(target)?.Tool;

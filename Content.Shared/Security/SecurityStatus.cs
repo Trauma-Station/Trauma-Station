@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Arendian <137322659+Arendian@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Soup-Byte07 <135303377+Soup-Byte07@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 namespace Content.Shared.Security;
 
 /// <summary>
@@ -20,6 +13,8 @@ namespace Content.Shared.Security;
 /// Eliminated - the person has been eliminated and should not be healed
 /// Search - the person needs to be searched
 /// Perma - the person has been sentenced to permanent imprisonment
+/// Brutalize - the person should be non-lethally beaten
+/// Demote - the person should be demoted
 /// </summary>
 public enum SecurityStatus : byte
 {
@@ -30,9 +25,11 @@ public enum SecurityStatus : byte
     Detained,
     Paroled,
     Discharged,
-    // <Goob>
+    // <Trauma>
+    Demote,
+    Brutalize,
     Search,
     Perma,
-    // </Goob>
+    // </Trauma>
     Eliminated
 }

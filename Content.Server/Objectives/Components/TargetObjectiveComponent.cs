@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Objectives.Systems;
 
 namespace Content.Server.Objectives.Components;
@@ -15,9 +8,10 @@ public sealed partial class TargetObjectiveComponent : Component
     /// <summary>
     /// Locale id for the objective title.
     /// It is passed "targetName" and "job" arguments.
+    /// If null, the objective title will not be set.
     /// </summary>
-    [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
-    public string Title = string.Empty;
+    [DataField, ViewVariables(VVAccess.ReadWrite)] // Trauma - was required: true
+    public string? Title;
 
     /// <summary>
     /// Mind entity id of the target.

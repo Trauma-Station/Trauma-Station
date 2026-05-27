@@ -1,15 +1,10 @@
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Robust.Shared.Random;
 
 namespace Content.Shared.Lightning;
 
-public abstract class SharedLightningSystem : EntitySystem
+public abstract partial class SharedLightningSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     /// Picks a random sprite state for the lightning. It's just data that gets passed to the <see cref="BeamComponent"/>

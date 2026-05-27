@@ -1,0 +1,44 @@
+- type: guideEntry
+  id: HereticRituals
+  name: guide-entry-heretic-rituals
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/HereticKnowledge.xml"
+
+- type: guideEntry
+  id: HereticPotions
+  name: guide-entry-heretic-potions
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/HereticPotions.xml"
+
+- type: guideEntry
+  id: AshPath
+  name: guide-entry-heretic-ash
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/AshPath.xml"
+
+- type: guideEntry
+  id: VoidPath
+  name: guide-entry-heretic-void
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/VoidPath.xml"
+
+- type: guideEntry
+  id: FleshPath
+  name: guide-entry-heretic-flesh
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/FleshPath.xml"
+
+- type: guideEntry
+  id: LockPath
+  name: guide-entry-heretic-lock
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/LockPath.xml"
+
+- type: guideEntry
+  id: RustPath
+  name: guide-entry-heretic-rust
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/RustPath.xml"
+
+- type: guideEntry
+  id: BladePath
+  name: guide-entry-heretic-blade
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/BladePath.xml"
+
+- type: guideEntry
+  id: CosmosPath
+  name: guide-entry-heretic-cosmos
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Heretic/CosmosPath.xml"

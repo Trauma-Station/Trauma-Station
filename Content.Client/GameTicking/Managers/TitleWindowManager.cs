@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.CCVar;
 using Robust.Client;
 using Robust.Client.Graphics;
@@ -12,12 +6,12 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.GameTicking.Managers;
 
-public sealed class TitleWindowManager
+public sealed partial class TitleWindowManager
 {
-    [Dependency] private readonly IBaseClient _client = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameController _gameController = default!;
+    [Dependency] private IBaseClient _client = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameController _gameController = default!;
 
     public void Initialize()
     {

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Maps;
@@ -14,9 +9,9 @@ namespace Content.Server.Maps;
 /// Toggles GridDragging on the system.
 /// </summary>
 [AdminCommand(AdminFlags.Fun)]
-public sealed class GridDraggingCommand : LocalizedEntityCommands
+public sealed partial class GridDraggingCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly GridDraggingSystem _grid = default!;
+    [Dependency] private GridDraggingSystem _grid = default!;
 
     public override string Command => SharedGridDraggingSystem.CommandName;
 

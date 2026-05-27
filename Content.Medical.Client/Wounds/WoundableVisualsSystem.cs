@@ -11,22 +11,19 @@ using Content.Shared.Body;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
-using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Client.Wounds;
 
 /// <summary>
 /// Handles visual representation of wounds and damage on body parts
 /// </summary>
-public sealed class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsComponent>
+public sealed partial class WoundableVisualsSystem : VisualizerSystem<WoundableVisualsComponent>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private EntityQuery<VisualOrganComponent> _visualQuery;
 

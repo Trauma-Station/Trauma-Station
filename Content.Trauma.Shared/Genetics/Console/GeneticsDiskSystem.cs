@@ -3,23 +3,19 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Kitchen;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
-public sealed class GeneticsDiskSystem : EntitySystem
+public sealed partial class GeneticsDiskSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
 
-    private EntityQuery<GeneticsDiskComponent> _query;
-    private EntityQuery<GeneticsDiskSlotComponent> _slotQuery;
+    [Dependency] private EntityQuery<GeneticsDiskComponent> _query = default!;
+    [Dependency] private EntityQuery<GeneticsDiskSlotComponent> _slotQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<GeneticsDiskComponent>();
-        _slotQuery = GetEntityQuery<GeneticsDiskSlotComponent>();
 
         SubscribeLocalEvent<GeneticsDiskComponent, BeingMicrowavedEvent>(OnMicrowaved);
     }

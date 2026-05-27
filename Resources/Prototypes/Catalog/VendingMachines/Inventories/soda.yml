@@ -21,5 +21,10 @@
   contrabandInventory:
     DrinkColaBottleFull: 2
     DrinkChangelingStingCan: 3
+    DrinkCanPack: 1 # Trauma
   emaggedInventory:
     DrinkNukieCan: 3
+    # <Trauma>
+    FoodMealCubancarp: 1
+    ClothingOuterSuitCarp: 1
+    # </Trauma>

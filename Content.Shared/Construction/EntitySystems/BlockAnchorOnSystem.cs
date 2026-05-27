@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Velcroboy <107660393+iamvelcroboy@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Construction.Components;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
@@ -14,12 +9,12 @@ namespace Content.Shared.Construction.EntitySystems;
 /// Prevents anchoring an item in the same tile as an item matching the <see cref="EntityWhitelist"/>.
 /// <seealso cref="BlockAnchorOnComponent"/>
 /// </summary>
-public sealed class BlockAnchorOnSystem : EntitySystem
+public sealed partial class BlockAnchorOnSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

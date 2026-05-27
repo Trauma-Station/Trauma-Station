@@ -2,14 +2,13 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
-public sealed class ActionMutationSystem : EntitySystem
+public sealed partial class ActionMutationSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

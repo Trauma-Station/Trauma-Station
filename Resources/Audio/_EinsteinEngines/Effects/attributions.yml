@@ -1,14 +1,9 @@
-- files: ["bamf.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "From paradise station"
-  source: "https://github.com/ParadiseSS13/Paradise"
-
-- files: ["ghost.ogg"]
+- files: ["bamf.ogg", "ghost.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "From paradise station"
   source: "https://github.com/ParadiseSS13/Paradise"
 
 - files: ["ghost2.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "From paradise station"
+  copyright: "Taken from paradise station, converted to mono by @deltanedas (github)"
   source: "https://github.com/ParadiseSS13/Paradise"

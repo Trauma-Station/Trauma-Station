@@ -1,26 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 PAFFhassoocks <asukalangleydanielle@gmail.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -309,19 +286,16 @@
     damage:
       types:
         Cold: 3
-  - type: Reflective # Trauma
+    impactEffect: BulletImpactEffectBlueDisabler
+  - type: Reflective
     reflective:
     - None
-  - type: PointLight
-    radius: 2
-    color: blue
-    energy: 1
   - type: ChangeTemperatureOnCollide
-    heat: -50000 # -35000 > -50000 Trauma
+    heat: -50000
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
-    - state: omnilaser
+    - state: ice
       shader: unshaded
 
 - type: entity
@@ -335,15 +309,17 @@
     damage:
       types:
         Heat: 3
-  - type: Reflective # Trauma
+    impactEffect: BulletImpactEffectRedDisabler
+  - type: Reflective
     reflective:
     - None
-  - type: PointLight
-    radius: 2
-    color: red
-    energy: 1
   - type: ChangeTemperatureOnCollide # This will probably be tweaked.
-    heat: 50000 # 35000 > 50000 Trauma
+    heat: 50000
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    layers:
+    - state: hellfire
+      shader: unshaded
 
 - type: entity
   name: disabler bolt
@@ -486,7 +462,7 @@
     damage:
       types:
         Piercing: 3
-        Holy: 6
+        Holy: 4
 
 - type: entity
   name : stun bolt

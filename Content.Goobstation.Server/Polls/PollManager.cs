@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 using Content.Goobstation.Shared.Polls;
 using Content.Server.Database;
 using Robust.Server.Player;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.Polls;
 
-public sealed class PollManager : IPostInjectInit
+public sealed partial class PollManager : IPostInjectInit
 {
-    [Dependency] private readonly IServerDbManager _db = null!;
-    [Dependency] private readonly IPlayerManager _playerManager = null!;
-    [Dependency] private readonly INetManager _net = null!;
+    [Dependency] private IServerDbManager _db = null!;
+    [Dependency] private IPlayerManager _playerManager = null!;
+    [Dependency] private INetManager _net = null!;
 
     private readonly Dictionary<int, Poll> _cachedPolls = [];
     private readonly object _cacheLock = new();

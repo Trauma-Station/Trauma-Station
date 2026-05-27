@@ -30,8 +30,8 @@ namespace Content.Client.Options.UI.Tabs
             EngineKeyFunctions.HideUI,
         };
 
-        [Dependency] private readonly IInputManager _inputManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IInputManager _inputManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         private BindButton? _currentlyRebinding;
 
@@ -174,6 +174,7 @@ namespace Content.Client.Options.UI.Tabs
             AddToggleCvarCheckBox("ui-options-hold-to-attack-ranged", CCVars.ControlHoldToAttackRanged);
 
             AddHeader("ui-options-header-movement");
+            AddButton(TraumaKeyFunctions.Strafe); // Trauma
             AddButton(EngineKeyFunctions.MoveUp);
             AddButton(EngineKeyFunctions.MoveLeft);
             AddButton(EngineKeyFunctions.MoveDown);
@@ -181,7 +182,6 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.Walk);
             AddCheckBox("ui-options-hotkey-toggle-walk", _cfg.GetCVar(CCVars.ToggleWalk), HandleToggleWalk);
             AddCheckBox("ui-options-hotkey-default-walk", _cfg.GetCVar(GoobCVars.DefaultWalk), HandleDefaultWalk); // Goob
-            AddButton(ContentKeyFunctions.Sprint); // Goob
             InitToggleWalk();
             AddButton(ContentKeyFunctions.ToggleKnockdown);
 
@@ -203,7 +203,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.Drop);
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
-            AddButton(ContentKeyFunctions.ResistGrab); // Goob
+            AddButton(TraumaKeyFunctions.ResistGrab); // Trauma
             AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);
@@ -244,7 +244,10 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenCraftingMenu);
             AddButton(ContentKeyFunctions.OpenGuidebook);
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
-            AddButton(ContentKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
+            // <Trauma>
+            AddButton(TraumaKeyFunctions.OpenLanguageMenu);
+            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu);
+            // </Trauma>
             AddButton(ContentKeyFunctions.OpenAHelp);
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);
@@ -258,22 +261,21 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.WindowCloseRecent);
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
-            AddButton(TraumaKeyFunctions.OpenMartialArtsMenu); // Trauma
 
             // <Trauma>
             // TODO: change to scrolling x/y
             AddHeader("ui-options-header-targeting");
-            AddButton(ContentKeyFunctions.TargetHead);
-            AddButton(ContentKeyFunctions.TargetChest);
-            AddButton(ContentKeyFunctions.TargetGroin);
-            AddButton(ContentKeyFunctions.TargetLeftArm);
-            AddButton(ContentKeyFunctions.TargetLeftHand);
-            AddButton(ContentKeyFunctions.TargetRightArm);
-            AddButton(ContentKeyFunctions.TargetRightHand);
-            AddButton(ContentKeyFunctions.TargetLeftLeg);
-            AddButton(ContentKeyFunctions.TargetLeftFoot);
-            AddButton(ContentKeyFunctions.TargetRightLeg);
-            AddButton(ContentKeyFunctions.TargetRightFoot);
+            AddButton(TraumaKeyFunctions.TargetHead);
+            AddButton(TraumaKeyFunctions.TargetChest);
+            AddButton(TraumaKeyFunctions.TargetGroin);
+            AddButton(TraumaKeyFunctions.TargetLeftArm);
+            AddButton(TraumaKeyFunctions.TargetLeftHand);
+            AddButton(TraumaKeyFunctions.TargetRightArm);
+            AddButton(TraumaKeyFunctions.TargetRightHand);
+            AddButton(TraumaKeyFunctions.TargetLeftLeg);
+            AddButton(TraumaKeyFunctions.TargetLeftFoot);
+            AddButton(TraumaKeyFunctions.TargetRightLeg);
+            AddButton(TraumaKeyFunctions.TargetRightFoot);
             // </Trauma>
 
             AddHeader("ui-options-header-misc");
@@ -557,7 +559,7 @@ namespace Content.Client.Options.UI.Tabs
             }
         }
 
-        private sealed class BindButton : Control
+        private sealed partial class BindButton : Control
         {
             private readonly KeyRebindTab _tab;
             public readonly KeyControl KeyControl;

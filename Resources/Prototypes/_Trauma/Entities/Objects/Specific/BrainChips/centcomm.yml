@@ -1,0 +1,61 @@
+- type: entity
+  parent: [ BaseSkillChip, BaseCentcommContraband ]
+  id: SkillChipDeathSquad
+  name: skill chip (deathsquad)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      CookingKnowledge: 100
+      MaterialsKnowledge: 100
+      DoorsKnowledge: 100
+      AirlocksKnowledge: 100
+      ToysKnowledge: 100
+      BananiumKnowledge: 100
+      BotsKnowledge: 100
+      FurnitureKnowledge: 100
+      InfrastructureKnowledge: 100
+      ElectronicsKnowledge: 100
+      WallsKnowledge: 100
+      ScienceKnowledge: 100
+      WindowsKnowledge: 100
+      SmokeablesKnowledge: 100
+      LiteracyKnowledge: 100
+      MagicalLiteracyKnowledge: 100
+      LanguageSolCommon: 100
+      SurgeryKnowledge: 100
+      FirstAidKnowledge: 100
+      ChemistryKnowledge: 100
+      ThrowingKnowledge: 100
+      AthleticsKnowledge: 100
+      StrengthKnowledge: 100
+      ToughnessKnowledge: 100
+      MeleeKnowledge: 100
+      ShootingKnowledge: 100
+      FabricationKnowledge: 100
+      WeaponsKnowledge: 100
+      ArmorKnowledge: 100
+      MetalworkingKnowledge: 100
+      CarvingKnowledge: 100
+      GunsmithingKnowledge: 100
+      MechanicsKnowledge: 100
+      TailoringKnowledge: 100
+      JanitorKnowledge: 100
+
+- type: entity
+  parent: [ BaseSkillChip, BaseCentcommContraband ]
+  id: SkillChipCBURN
+  name: skill chip (CBURN)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      SurgeryKnowledge: 60
+      FirstAidKnowledge: 60
+      ThrowingKnowledge: 40
+      AthleticsKnowledge: 60
+      StrengthKnowledge: 60
+      ToughnessKnowledge: 60
+      MeleeKnowledge: 60
+      ShootingKnowledge: 60
+      # for cading..?
+      FabricationKnowledge: 100
+      MetalworkingKnowledge: 100

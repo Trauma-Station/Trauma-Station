@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Chat;
 
@@ -8,7 +10,7 @@ namespace Content.Server.Shuttles.Systems;
 /// </summary>
 public sealed partial class EmergencyShuttleSystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
 
     private EntityUid? _lastRepealUser;
     private double _repealTimestamp = 0;

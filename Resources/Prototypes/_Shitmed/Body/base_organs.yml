@@ -10,6 +10,7 @@
   - type: ThrowingAngle # We add this so that throwing things doesn't make them freak the fuck out by automatically deciding directions.
     angle: 90
   - type: BodyPart
+  - type: CoveredPart # for explosion damage and per-limb coverage
   - type: Woundable
     # numbers for an arm/leg since they're the most common and a reasonable default for strange parts
     integrity: 80
@@ -26,7 +27,6 @@
       Brute: _Shitmed/Mobs/Effects/brute_damage.rsi
       Burn: _Shitmed/Mobs/Effects/burn_damage.rsi
   - type: Appearance
-  - type: Nerve
   - type: ContainerContainer
     containers:
       Wounds: !type:Container
@@ -121,7 +121,7 @@
   components:
   - type: BodyPart
     partType: Leg
-  - type: MovementBodyPart
+  - type: Leg
   - type: Woundable
     integrity: 80
     integrityCap: 80
@@ -177,7 +177,7 @@
     markingData:
       layers:
       - Head
-      - Face # Trauma - where the fuck else would it go
+      - Face
       - Snout
       - SnoutCover
       - HeadSide

@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
@@ -25,14 +15,14 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Administration.Notes;
 
-public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
+public sealed partial class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 {
-    [Dependency] private readonly IAdminManager _admins = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly EuiManager _euis = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private IAdminManager _admins = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private EuiManager _euis = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IConfigurationManager _config = default!;
 
     public const string SawmillId = "admin.notes";
 
@@ -87,6 +77,11 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
         // You can still ban them just fine, which is why we should allow admins to view their bans with the notes panel
         if (await _db.GetPlayerRecordByUserId((NetUserId) player) is null)
             return;
+
+        // <Trauma> - no watchlist for trialmins
+        if (type == NoteType.Watchlist && !CanWatchlist(createdBy))
+            return;
+        // </Trauma>
 
         var sb = new StringBuilder($"{createdBy.Name} added a");
 
@@ -189,6 +184,10 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 
     public async Task DeleteAdminRemark(int noteId, NoteType type, ICommonSession deletedBy)
     {
+        // <Trauma> - trialmins dont get to change watchlists
+        if (type == NoteType.Watchlist && !CanWatchlist(deletedBy))
+            return;
+        // </Traum>
         var note = await GetAdminRemark(noteId, type);
         if (note == null)
         {
@@ -222,6 +221,10 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
 
     public async Task ModifyAdminRemark(int noteId, NoteType type, ICommonSession editedBy, string message, NoteSeverity? severity, bool secret, DateTime? expiryTime)
     {
+        // <Trauma> - trialmins dont get to change watchlists
+        if (type == NoteType.Watchlist && !CanWatchlist(editedBy))
+            return;
+        // </Traum>
         message = message.Trim();
 
         var note = await GetAdminRemark(noteId, type);

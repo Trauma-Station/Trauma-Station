@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Objectives.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Mind;
@@ -14,9 +8,9 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Handles <see cref="CodeConditionComponent"/> progress and provides API for systems to use.
 /// </summary>
-public sealed class CodeConditionSystem : EntitySystem
+public sealed partial class CodeConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

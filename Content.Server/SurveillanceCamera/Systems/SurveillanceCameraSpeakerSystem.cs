@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Jake Huxell <JakeHuxell@pm.me>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Chat.Systems;
 using Content.Server.Speech;
 using Content.Shared.Speech;
@@ -22,12 +10,12 @@ namespace Content.Server.SurveillanceCamera;
 /// <summary>
 ///     This handles speech for surveillance camera monitors.
 /// </summary>
-public sealed class SurveillanceCameraSpeakerSystem : EntitySystem
+public sealed partial class SurveillanceCameraSpeakerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SpeechSoundSystem _speechSound = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SpeechSoundSystem _speechSound = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

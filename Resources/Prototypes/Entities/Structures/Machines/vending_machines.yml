@@ -7,6 +7,21 @@
   description: Just add capitalism!
   abstract: true
   components:
+  # <Trauma>
+  - type: Rotatable
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: IntellicardableMind
+  # </Trauma>
   - type: ActionGrant
     actions:
     - ActionVendingThrow
@@ -71,7 +86,6 @@
     boardName: wires-board-name-vendingmachine
     layoutId: Vending
   - type: Anchorable
-  - type: Rotatable # Trauma - why not
   - type: TypingIndicator
     proto: robot
   - type: Speech
@@ -93,11 +107,6 @@
     channels:
     # - Binary # Goobstation - replaced with collective mind
     - Common
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: DoAfter
   - type: Electrified
     enabled: false
@@ -122,13 +131,6 @@
     price: 100
   - type: Appearance
   - type: WiresVisuals
-  - type: LanguageSpeaker # Einstein Engines - Languages
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
 
 - type: entity
   id: VendingMachineWallmount

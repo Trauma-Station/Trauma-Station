@@ -6,13 +6,9 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
-/// <summary>
-/// Trauma - Rewrote this shitcode and put it here instead of core files
-/// </summary>
 public sealed partial class AddReagentToBlood : EntityEffectBase<AddReagentToBlood>
 {
     [DataField(required: true)]
@@ -32,9 +28,9 @@ public sealed partial class AddReagentToBlood : EntityEffectBase<AddReagentToBlo
     }
 }
 
-public sealed class AddReagentToBloodEffectSystem : EntityEffectSystem<BloodstreamComponent, AddReagentToBlood>
+public sealed partial class AddReagentToBloodEffectSystem : EntityEffectSystem<BloodstreamComponent, AddReagentToBlood>
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     protected override void Effect(Entity<BloodstreamComponent> ent, ref EntityEffectEvent<AddReagentToBlood> args)
     {

@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Server.OnPray.HealNearOnPray;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Medical.Common.Damage;
-using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Medical.Common.Targeting;
+using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Revenant.Components;
+using Content.Trauma.Common.Silicon;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -19,23 +18,20 @@ namespace Content.Goobstation.Server.Religion.OnPray.HealNearOnPray;
 
 public sealed partial class HealNearOnPraySystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private EntityQuery<CorporealComponent> _corporealQuery = default!;
+    [Dependency] private EntityQuery<SpectralComponent> _spectralQuery = default!;
 
-    private EntityQuery<SpectralComponent> _spectralQuery;
-    private EntityQuery<CorporealComponent> _corporealQuery;
-
-    private HashSet<Entity<MobStateComponent>> _targets = new();
+    private HashSet<Entity<BodyComponent>> _targets = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _spectralQuery = GetEntityQuery<SpectralComponent>();
-        _corporealQuery = GetEntityQuery<CorporealComponent>();
 
         SubscribeLocalEvent<HealNearOnPrayComponent, AlternatePrayEvent>(OnPray);
     }
@@ -44,12 +40,12 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
     {
         _targets.Clear();
         _lookup.GetEntitiesInRange(Transform(args.User).Coordinates, comp.Range, _targets);
-        _targets.RemoveWhere(entity => !_examine.InRangeUnOccluded(uid, entity, comp.Range));
 
         foreach (var entity in _targets)
         {
-            if (_mobState.IsDead(entity.AsNullable())
-                || HasComp<SiliconComponent>(entity))
+            if (_mobState.IsDead(entity.Owner) ||
+                !_examine.InRangeUnOccluded(uid, entity, comp.Range) ||
+                _silicon.IsSilicon(entity))
                 continue;
 
             // if its a ghost and its not in corporeal form then skip

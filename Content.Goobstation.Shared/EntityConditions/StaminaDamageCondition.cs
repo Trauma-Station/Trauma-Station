@@ -3,7 +3,6 @@
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityConditions;
 
@@ -21,7 +20,7 @@ public sealed partial class StaminaDamageCondition : EntityConditionBase<Stamina
             ("min", Min));
 }
 
-public sealed class StaminaDamageConditionSystem : EntityConditionSystem<StaminaComponent, StaminaDamageCondition>
+public sealed partial class StaminaDamageConditionSystem : EntityConditionSystem<StaminaComponent, StaminaDamageCondition>
 {
     protected override void Condition(Entity<StaminaComponent> ent, ref EntityConditionEvent<StaminaDamageCondition> args)
     {

@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._DV.Salvage.Components;
 using Content.Shared.DragDrop;
-using Content.Shared.Storage;
 using Content.Shared.Interaction;
 using Content.Shared.Materials;
+using Content.Shared.Storage;
+using Content.Trauma.Common.Salvage;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Shared.OreBag;
 
-public sealed class OreBagSystem : EntitySystem
+public sealed partial class OreBagSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<OreBagComponent, AfterInteractEvent>(OnAfterInteract);

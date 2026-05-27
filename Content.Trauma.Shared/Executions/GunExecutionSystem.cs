@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Systems;
@@ -22,7 +21,6 @@ using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Executions;
@@ -33,30 +31,27 @@ namespace Content.Trauma.Shared.Executions;
 /// This is basically copy of gun code except using <c>AmmoImpactEvent</c> instead of <c>CreateAndFireProjectiles</c>.
 /// <see cref="BeingExecutedComponent"/> allows damage to the target to get multiplied while the execution is being processed.
 /// </summary>
-public sealed class GunExecutionSystem : EntitySystem
+public sealed partial class GunExecutionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly PredictedProjectileSystem _projectile = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedExecutionSystem _execution = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
-
-    private EntityQuery<ProjectileComponent> _projectileQuery;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private PredictedProjectileSystem _projectile = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedExecutionSystem _execution = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrownItemSystem _thrownItem = default!;
+    [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         /* Interaction */
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);

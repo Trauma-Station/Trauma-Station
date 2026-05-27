@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Moony <moony@hellomouse.net>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 MilenVolf <63782763+MilenVolf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration.Logs; // Goobstation
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Managers; // Goobstation
@@ -26,12 +10,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.StationEvents.Events
 {
-    internal sealed class GasLeakRule : StationEventSystem<GasLeakRuleComponent>
+    internal sealed partial class GasLeakRule : StationEventSystem<GasLeakRuleComponent>
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly IChatManager _chat = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private AtmosphereSystem _atmosphere = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private IChatManager _chat = default!;
 
         protected override void Started(EntityUid uid, GasLeakRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
         {

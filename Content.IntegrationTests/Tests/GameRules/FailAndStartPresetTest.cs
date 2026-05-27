@@ -1,15 +1,5 @@
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 #nullable enable
+using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
 using Content.Shared.CCVar;
@@ -20,7 +10,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
-public sealed class FailAndStartPresetTest
+public sealed class FailAndStartPresetTest : GameTest
 {
     [TestPrototypes]
     private const string Prototypes = @"
@@ -28,8 +18,8 @@ public sealed class FailAndStartPresetTest
   id: TestPreset
   alias:
     - nukeops
-  name: Test Preset
-  description: """"
+  name: test-preset-title # Trauma - use loc
+  description: test-preset-desc # Trauma - use non-empty loc
   showInVote: false
   rules:
   - TestRule
@@ -38,8 +28,8 @@ public sealed class FailAndStartPresetTest
   id: TestPresetTenPlayers
   alias:
     - nukeops
-  name: Test Preset 10 players
-  description: """"
+  name: test-preset-10-title # Trauma - use loc
+  description: test-preset-desc # Trauma - use non-empty loc
   showInVote: false
   rules:
   - TestRuleTenPlayers
@@ -63,19 +53,21 @@ public sealed class FailAndStartPresetTest
   - type: TestRule
 ";
 
+    public override PoolSettings PoolSettings => new()
+    {
+        Dirty = true,
+        DummyTicker = false,
+        Connected = true,
+        InLobby = true
+    };
+
     /// <summary>
     ///     Test that a nuke ops gamemode can start after failing to start once.
     /// </summary>
     [Test]
     public async Task FailAndStartTest()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Dirty = true,
-            DummyTicker = false,
-            Connected = true,
-            InLobby = true
-        });
+        var pair = Pair;
 
         var server = pair.Server;
         var client = pair.Client;
@@ -126,7 +118,6 @@ public sealed class FailAndStartPresetTest
         server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, true);
         server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "secret");
         server.System<TestRuleSystem>().Run = false;
-        await pair.CleanReturnAsync();
     }
 }
 

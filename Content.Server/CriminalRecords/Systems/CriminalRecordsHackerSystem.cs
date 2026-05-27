@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Chat.Systems;
 using Content.Server.Power.EntitySystems; // Goobstation - Check power
 using Content.Server.Station.Systems;
@@ -19,15 +13,15 @@ using Robust.Shared.Random;
 
 namespace Content.Server.CriminalRecords.Systems;
 
-public sealed class CriminalRecordsHackerSystem : SharedCriminalRecordsHackerSystem
+public sealed partial class CriminalRecordsHackerSystem : SharedCriminalRecordsHackerSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly CriminalRecordsSystem _criminalRecords = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationRecordsSystem _records = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!; // Goobstation - check power
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!; // Goobstation - check power
     public override void Initialize()
     {
         base.Initialize();

@@ -70,10 +70,6 @@
   - type: EmitSoundOnLand
     sound:
       collection: SMGDrop
-  - type: Multishot
-    missChance: 0.4
-    spreadMultiplier: 3
-    spreadAddition: 50
   - type: AltFireMelee
     attackType: Heavy
   - type: MeleeWeapon

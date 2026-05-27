@@ -1,13 +1,6 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+// <Trauma>
+using Robust.Shared.Timing;
+// </Trauma>
 using Content.Shared.Item.ItemToggle.Components;
 
 namespace Content.Shared.Item.ItemToggle;
@@ -15,8 +8,11 @@ namespace Content.Shared.Item.ItemToggle;
 /// <summary>
 /// Handles <see cref="ComponentTogglerComponent"/> component manipulation.
 /// </summary>
-public sealed class ComponentTogglerSystem : EntitySystem
+public sealed partial class ComponentTogglerSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private IGameTiming _timing = default!;
+    // </Trauma>
     public override void Initialize()
     {
         base.Initialize();
@@ -32,6 +28,11 @@ public sealed class ComponentTogglerSystem : EntitySystem
     // Goobstation - Make this system more flexible
     public void ToggleComponent(EntityUid uid, bool activate)
     {
+        // <Trauma>
+        if (_timing.ApplyingState)
+            return;
+        // </Trauma>
+
         if (!TryComp<ComponentTogglerComponent>(uid, out var component))
             return;
 
@@ -45,6 +46,7 @@ public sealed class ComponentTogglerSystem : EntitySystem
 
             component.Target = target;
 
+            EntityManager.RemoveComponents(target, component.DeactivateComponents); // Trauma
             EntityManager.AddComponents(target, component.Components);
         }
         else
@@ -56,6 +58,7 @@ public sealed class ComponentTogglerSystem : EntitySystem
                 return;
 
             EntityManager.RemoveComponents(component.Target.Value, component.RemoveComponents ?? component.Components);
+            EntityManager.AddComponents(component.Target.Value, component.DeactivateComponents); // Trauma
         }
     }
 }

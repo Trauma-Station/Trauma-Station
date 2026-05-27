@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Goobstation: https://github.com/Goob-Station/Goob-Station/tree/e1506007baf86fcb6317fa16b752007861568127/Resources/Textures/_Goobstation/Clothing/Mask/bsoswat.rsi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-vox",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

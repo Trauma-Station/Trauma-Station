@@ -1,5 +1,6 @@
 // <Trauma>
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Shared.Whitelist;
+using Content.Trauma.Common.Language.Systems;
 // </Trauma>
 using Content.Shared.Chat;
 using Content.Shared.Inventory.Events;
@@ -8,18 +9,17 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Content.Shared.Whitelist;
 
 namespace Content.Server.Radio.EntitySystems;
 
-public sealed class HeadsetSystem : SharedHeadsetSystem
+public sealed partial class HeadsetSystem : SharedHeadsetSystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private CommonLanguageSystem _language = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     // </Trauma>
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private RadioSystem _radio = default!;
 
     public override void Initialize()
     {
@@ -68,7 +68,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         base.OnGotEquipped(uid, component, args);
         if (component.IsEquipped && component.Enabled)
         {
-            EnsureComp<WearingHeadsetComponent>(args.Equipee).Headset = uid;
+            EnsureComp<WearingHeadsetComponent>(args.EquipTarget).Headset = uid;
             UpdateRadioChannels(uid, component);
         }
     }
@@ -77,7 +77,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     {
         base.OnGotUnequipped(uid, component, args);
         RemComp<ActiveRadioComponent>(uid);
-        RemComp<WearingHeadsetComponent>(args.Equipee);
+        RemComp<WearingHeadsetComponent>(args.EquipTarget);
     }
 
     public void SetEnabled(EntityUid uid, bool value, HeadsetComponent? component = null)

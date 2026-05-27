@@ -2,7 +2,6 @@
 
 using Content.Trauma.Common.Salvage;
 using Content.Shared.GameTicking;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Salvage;
@@ -11,9 +10,9 @@ namespace Content.Trauma.Server.Salvage;
 /// Stores total claimed mining points in a round for salv objectives.
 /// The count is tied to the user id and persists across ghost roles etc.
 /// </summary>
-public sealed class MiningRewardsSystem : EntitySystem
+public sealed partial class MiningRewardsSystem : EntitySystem
 {
-    private EntityQuery<ActorComponent> _actorQuery;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     // TODO: put the dict on a round entity wsci
     private Dictionary<NetUserId, int> PointsPerPlayer = new();
@@ -21,8 +20,6 @@ public sealed class MiningRewardsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _actorQuery = GetEntityQuery<ActorComponent>();
 
         SubscribeLocalEvent<MiningPointsClaimedEvent>(OnPointsClaimed);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);

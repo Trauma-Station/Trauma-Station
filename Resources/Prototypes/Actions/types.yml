@@ -164,9 +164,11 @@
   name: Activate EMP
   description: Triggers a small EMP pulse around you
   components:
+  - type: LimitedCharges
+    maxCharges: 3
   - type: Action
     checkCanInteract: false
-    useDelay: 30
+    useDelay: 5  # Trauma, was 30
     itemIconStyle: BigAction
     priority: -20
     icon:
@@ -436,6 +438,17 @@
       state: icon
   - type: InstantAction
     event: !type:GravityJumpEvent {}
+
+- type: entity
+  parent: ActionGravityJump
+  id: ActionJumpBoost
+  name: Jump boost
+  components:
+  - type: Action
+    useDelay: 16
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: xenoborg-jump-module
 
 - type: entity
   parent: BaseAction

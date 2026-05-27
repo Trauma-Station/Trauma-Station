@@ -2,24 +2,19 @@
 
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
 using Content.Goobstation.Shared.Clothing;
-using Content.Server.Heretic.Components.PathSpecific;
-using Content.Server.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Stunnable;
-using Content.Shared._Goobstation.Heretic.Components;
-using Content.Shared._Shitcode.Weapons.Misc;
 using Content.Shared.Armor;
-using Content.Shared.Damage.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
+using Content.Trauma.Common.Damage;
 
 namespace Content.Goobstation.Server.Weapons.DelayedKnockdown;
 
-public sealed class DelayedKnockdownOnHitSystem : EntitySystem
+public sealed partial class DelayedKnockdownOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private readonly ChampionStanceSystem _champion = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public override void Initialize()
     {
@@ -31,24 +26,6 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
         SubscribeLocalEvent<ModifyDelayedKnockdownComponent, InventoryRelayedEvent<DelayedKnockdownAttemptEvent>>(
             OnInventoryAttempt);
         SubscribeLocalEvent<ModifyDelayedKnockdownComponent, ArmorExamineEvent>(OnExamine);
-
-        SubscribeLocalEvent<ChampionStanceComponent, DelayedKnockdownAttemptEvent>(OnChampionDelayedKnockdownAttempt);
-        SubscribeLocalEvent<SilverMaelstromComponent, DelayedKnockdownAttemptEvent>(OnMaelstromDelayedKnockdownAttempt);
-    }
-
-    private void OnMaelstromDelayedKnockdownAttempt(Entity<SilverMaelstromComponent> ent,
-        ref DelayedKnockdownAttemptEvent args)
-    {
-        args.Cancel();
-    }
-
-    private void OnChampionDelayedKnockdownAttempt(Entity<ChampionStanceComponent> ent,
-        ref DelayedKnockdownAttemptEvent args)
-    {
-        if (!_champion.Condition(ent))
-            return;
-
-        args.Cancel();
     }
 
     private void OnExamine(Entity<ModifyDelayedKnockdownComponent> ent, ref ArmorExamineEvent args)
@@ -131,7 +108,7 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
         if (TryComp(uid, out UseDelayComponent? delay))
             _delay.TryResetDelay((uid, delay), id: comp.UseDelay);
 
-        foreach (var (hit, _) in args.HitEntities)
+        foreach (var hit in args.HitEntities)
         {
             if (!HasComp<StandingStateComponent>(hit))
                 continue;

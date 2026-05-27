@@ -13,6 +13,7 @@
   id: SyndieDrobeInventory
   startingInventory:
     ClothingBackpackMessengerSyndicate: 2 # Frontier
+    ClothingBackpackSyndicate: 2 # Trauma
     ClothingHeadHatOutlawHat: 3
     ClothingHeadHatSyndie: 5
     ClothingMaskNeckGaiter: 5
@@ -39,3 +40,4 @@
   emaggedInventory:
     ClothingOuterCoatSyndieCapArmored: 1
     ClothingOuterWinterSyndieCapArmored: 1
+    SyndicatePersonalAI: 1 # Trauma

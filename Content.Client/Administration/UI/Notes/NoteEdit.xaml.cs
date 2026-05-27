@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Repo <47093363+Titian3@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.co>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 beck-thompson <107373427+beck-thompson@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration.Notes;
 using Content.Shared.Database;
@@ -28,12 +14,13 @@ namespace Content.Client.Administration.UI.Notes;
 [GenerateTypedNameReferences]
 public sealed partial class NoteEdit : FancyWindow
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IClientConsoleHost _console = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
 
     public event Action<int, NoteType, string, NoteSeverity?, bool, DateTime?>? SubmitPressed;
 
-    public NoteEdit(SharedAdminNote? note, string playerName, bool canCreate, bool canEdit)
+    public NoteEdit(SharedAdminNote? note, string playerName, bool canCreate, bool canEdit,
+        bool canWatchlist) // Trauma
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -42,6 +29,7 @@ public sealed partial class NoteEdit : FancyWindow
         IsCreating = note is null;
         CanCreate = canCreate;
         CanEdit = canEdit;
+        CanWatchlist = canWatchlist; // Trauma
 
         ResetSubmitButton();
 
@@ -162,6 +150,7 @@ public sealed partial class NoteEdit : FancyWindow
                 UpdatePermanentCheckboxFields();
                 break;
             case (int) NoteType.Watchlist: // Watchlist: these are always secret and only shown to admins when the player logs on
+                if (!CanWatchlist) return; // Trauma
                 NoteType = NoteType.Watchlist;
                 SecretCheckBox.Disabled = true;
                 SecretCheckBox.Pressed = true;

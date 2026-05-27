@@ -3,4 +3,4 @@
   name: roles-antag-contractor-name
   antagonist: true
   setPreference: false
-  objective: roles-antag-contractor-objectives
+  objective: roles-antag-contractor-description

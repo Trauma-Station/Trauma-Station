@@ -20,18 +20,14 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.3
         Slash: 0.3
         Piercing: 0.3
         Heat: 0.3
-        Radiation: 0.75
-        Caustic: 0.75
   - type: ExplosionResistance
     damageCoefficient: 0.75
-  - type: FaceHuggerBlocker #trauma
 
 - type: entity
   parent: [ ClothingHeadHelmetArmoredBase, BaseRevMajorContraband ]
@@ -45,14 +41,11 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Head/Helmets/revflamearmor.rsi
   - type: Armor
-    coverage:
-    - Head
     traumaDeductions:
       Dismemberment: 0.2
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -60,10 +53,10 @@
         Piercing: 0.7
         Heat: 0.5
   - type: ExplosionResistance
-    damageCoefficient: 0.90
+    damageCoefficient: 0.4
   - type: FireProtection
     reduction: 0.2
-  - type: FaceHuggerBlocker #trauma
+  - type: FaceHuggerBlocker
 
 - type: entity
   parent: ClothingHeadHatHelmetTemplar
@@ -81,3 +74,16 @@
     - WhitelistChameleon
   - type: HideLayerClothing
     layers: {}
+
+- type: entity
+  parent: ClothingHeadHatHelmetTemplar
+  id: ClothingHeadHatHelmetMamluk
+  name: mamluk helmet
+  description: The coif that blocked thousands of arrows.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Misc/mamluk.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Misc/mamluk.rsi
+  - type: FaceHuggerBlocker

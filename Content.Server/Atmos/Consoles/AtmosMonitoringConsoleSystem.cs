@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.DeviceNetwork.Components;
@@ -28,11 +23,11 @@ using Content.Shared.NodeContainer;
 
 namespace Content.Server.Atmos.Consoles;
 
-public sealed class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
+public sealed partial class AtmosMonitoringConsoleSystem : SharedAtmosMonitoringConsoleSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly SharedMapSystem _sharedMapSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private SharedMapSystem _sharedMapSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     // Private variables
     // Note: this data does not need to be saved

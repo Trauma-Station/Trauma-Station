@@ -2,7 +2,7 @@
   parent: BaseStationTile
   id: FloorSteelBurnt
   name: tiles-steel-floor
-  sprite: /Textures/_Trauma/Tiles/steel_burnt.png # Trauma
+  sprite: /Textures/_Trauma/Tiles/steel_burnt.png
   variants: 2
   placementVariants:
   - 1.0

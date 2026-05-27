@@ -3,16 +3,15 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Shared.DelayedDeath;
 using Content.Shared.Body;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;
 
 // TODO SHITMED: make this generic vital organs system instead of copy pasting with brain system bruh
-public sealed class HeartSystem : EntitySystem
+public sealed partial class HeartSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> Brain = "Brain";
 

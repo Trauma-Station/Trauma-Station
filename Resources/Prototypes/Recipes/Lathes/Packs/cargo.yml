@@ -25,6 +25,7 @@
   - MineralScannerEmpty
   - AdvancedMineralScannerEmpty
   - OreBagOfHolding
+  - DrillHead # Trauma
 
 - type: latheRecipePack
   id: CargoBoards

@@ -1,7 +1,7 @@
 - type: entity
-  name: minibomb payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: MiniBombPayload
+  name: minibomb payload
   description: Causes a small, deadly explosion.
   components:
   - type: Sprite
@@ -9,8 +9,7 @@
     state: payload-minibomb
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 25
       behaviors:
       - !type:TriggerBehavior
@@ -23,10 +22,10 @@
   - type: ExplodeOnTrigger
 
 - type: entity
-  name: small speaker
   parent: BasePayload
-  description: Its preprogrammed with a fart noise...
   id: FakeMiniBombPayload
+  name: small speaker
+  description: Its preprogrammed with a fart noise...
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
@@ -36,9 +35,9 @@
       path: /Audio/Effects/Emotes/parp1.ogg
 
 - type: entity
-  name: whitehole payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: WhiteHolePayload
+  name: whitehole payload
   description: Pushes everything away very quickly.
   components:
   - type: Sprite
@@ -81,9 +80,9 @@
     - type: DeleteOnTrigger
 
 - type: entity
-  name: nuclear option payload
   parent: [ BasePayload, BaseMajorContraband ]
   id: NuclearOptionPayload
+  name: nuclear option payload
   description: Oh no.
   components:
   - type: Sprite
@@ -91,8 +90,7 @@
     state: payload-nuclearoption
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 1
       behaviors:
       - !type:TriggerBehavior
@@ -105,9 +103,9 @@
   - type: ExplodeOnTrigger
 
 - type: entity
-  name: supermatter payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: SupermatterGrenadePayload
+  name: supermatter payload
   description: Pulls nearby objects close, then explodes.
   components:
   - type: Sprite
@@ -115,8 +113,7 @@
     state: payload-supermatter
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 25
       behaviors:
       - !type:TriggerBehavior
@@ -157,10 +154,10 @@
     - type: ExplodeOnTrigger
 
 - type: entity
-  name: stinger payload
   parent: [ BasePayload, BaseSecurityContraband ]
   id: StingerPayload
-  description: Launches many of less-lethal stunning rubber pellets.
+  name: stinger payload
+  description: Launches many less-lethal stunning rubber pellets.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
@@ -179,9 +176,9 @@
     proto: GrenadeFlashEffect
 
 - type: entity
-  name: tear gas payload
   parent: [ BasePayload, BaseSecurityContraband ]
   id: TearGasPayload
+  name: tear gas payload
   description: Releases a large amount of blinding gas.
   components:
   - type: Sprite
@@ -200,9 +197,9 @@
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
-  name: smoke payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: SmokePayload
+  name: smoke payload
   description: Releases a large, long-lasting cloud of smoke when used.
   components:
   - type: Sprite
@@ -216,9 +213,9 @@
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
-  name: sarin gas payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: SarinGasPayload
+  name: sarin gas payload
   description: Releases a large amount of deadly gas.
   components:
   - type: Sprite
@@ -236,10 +233,10 @@
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
-  name: incendiary payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: IncendiaryPayload
-  description: Launches many firey fragments.
+  name: incendiary payload
+  description: Launches many fiery fragments.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
@@ -263,9 +260,9 @@
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
 
 - type: entity
-  name: holy payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: HolyPayload
+  name: holy payload
   description: Causes a HUGE, deadly explosion.
   components:
   - type: Sprite
@@ -291,9 +288,9 @@
     netsync: false
 
 - type: entity
-  name: cluster payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: ClusterBombPayload
+  name: cluster payload
   description: Causes three large, deadly explosions.
   components:
   - type: Sprite
@@ -318,9 +315,9 @@
       cluster-payload: !type:Container
 
 - type: entity
-  name: explosive payload
   parent: [ BasePayload, BaseSyndicateContraband ]
   id: ExplosivePayload
+  name: explosive payload
   description: Explodes when triggered, moderately strong.
   components:
   - type: Sprite
@@ -342,9 +339,9 @@
       - !type:TriggerBehavior
 
 - type: entity
-  name: clusterbang payload
   parent: [ BasePayload, BaseSecurityContraband ]
   id: ClusterBangPayload
+  name: clusterbang payload
   description: Releashes three flashbangs.
   components:
   - type: Sprite
@@ -363,9 +360,9 @@
       cluster-payload: !type:Container
 
 - type: entity
-  name: air payload
   parent: [ BasePayload, BaseEngineeringContraband ]
   id: AirPayload
+  name: air payload
   description: Releases air I guess.
   components:
   - type: Sprite
@@ -382,9 +379,9 @@
       temperature: 293.15
 
 - type: entity
-  name: foam payload
   parent: BasePayload
   id: FoamPayload
+  name: foam payload
   description: Makes a giant fucking mess. Shame on you.
   components:
   - type: ContainerContainer
@@ -399,9 +396,9 @@
     velocity: 30
 
 - type: entity
-  name: EMP payload
   parent: BasePayload
   id: EMPPayload
+  name: EMP payload
   description: Releases an electro magnetic pulse, disrupts electronics.
   components:
   - type: Sprite
@@ -413,9 +410,9 @@
   - type: DeleteOnTrigger
 
 - type: entity
-  name: bee payload
   parent: BasePayload
   id: BeePayload
+  name: bee payload
   description: Releases bees. (they are mean)
   components:
   - type: Sprite
@@ -456,9 +453,9 @@
     capacity: 30
 
 - type: entity
-  id: LubePayload1
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: LubePayload1
+  suffix: Lube foam 1
   components:
   - type: SolutionContainerManager
     solutions:
@@ -471,9 +468,9 @@
           Quantity: 20
 
 - type: entity
-  id: LubePayload2
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: LubePayload2
+  suffix: Lube foam 2
   components:
   - type: SolutionContainerManager
     solutions:
@@ -484,9 +481,9 @@
           Quantity: 25
 
 - type: entity
-  id: GluePayload1
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: GluePayload1
+  suffix: Glue smoke 1
   components:
   - type: SolutionContainerManager
     solutions:
@@ -499,9 +496,9 @@
           Quantity: 20
 
 - type: entity
-  id: GluePayload2
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: GluePayload2
+  suffix: Glue smoke 2
   components:
   - type: SolutionContainerManager
     solutions:
@@ -514,9 +511,9 @@
           Quantity: 25
 
 - type: entity
-  id: CleanPayload1
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: CleanPayload1
+  suffix: Cleaner foam 1
   components:
   - type: SolutionContainerManager
     solutions:
@@ -529,9 +526,9 @@
           Quantity: 30
 
 - type: entity
-  id: CleanPayload2
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: CleanPayload2
+  suffix: Cleaner foam 2
   components:
   - type: SolutionContainerManager
     solutions:
@@ -542,9 +539,9 @@
           Quantity: 70
 
 - type: entity
-  id: FoamPayload1
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: FoamPayload1
+  suffix: Metal foam 1
   components:
   - type: SolutionContainerManager
     solutions:
@@ -555,9 +552,9 @@
           Quantity: 90
 
 - type: entity
-  id: FoamPayload2
   parent: LargeBeaker
-  categories: [ HideSpawnMenu ]
+  id: FoamPayload2
+  suffix: Metal foam 2
   components:
   - type: SolutionContainerManager
     solutions:
@@ -589,8 +586,7 @@
     proto: MolotovFire
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
+    - trigger: !type:DamageTrigger
         damage: 25
       behaviors:
       - !type:TriggerBehavior

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Movement.Systems;
@@ -11,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Movement;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class LockEyesCommand : LocalizedEntityCommands
+public sealed partial class LockEyesCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly SharedMoverController _controller = default!;
+    [Dependency] private SharedMoverController _controller = default!;
 
     public override string Command => $"lockeyes";
 

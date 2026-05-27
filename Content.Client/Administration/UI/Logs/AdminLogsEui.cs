@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.IO;
 using System.Linq;
 using Content.Client.Administration.UI.CustomControls;
@@ -23,12 +13,12 @@ using static Content.Shared.Administration.Logs.AdminLogsEuiMsg;
 namespace Content.Client.Administration.UI.Logs;
 
 [UsedImplicitly]
-public sealed class AdminLogsEui : BaseEui
+public sealed partial class AdminLogsEui : BaseEui
 {
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IFileDialogManager _dialogManager = default!;
-    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IFileDialogManager _dialogManager = default!;
+    [Dependency] private ILogManager _log = default!;
 
     private const char CsvSeparator = ',';
     private const string CsvQuote = "\"";

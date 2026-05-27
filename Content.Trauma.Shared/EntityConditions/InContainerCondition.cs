@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityConditions;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -17,7 +16,7 @@ public sealed partial class InContainerCondition : EntityConditionBase<InContain
 
 public sealed partial class InContainerConditionSystem : EntityConditionSystem<MetaDataComponent, InContainerCondition>
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     protected override void Condition(Entity<MetaDataComponent> ent, ref EntityConditionEvent<InContainerCondition> args)
     {

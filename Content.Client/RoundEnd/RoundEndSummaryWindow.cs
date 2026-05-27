@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Goobstation.Common.StationReport;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Content.Client.Stylesheets;
 using Content.Shared.Mobs;
@@ -313,11 +314,12 @@ namespace Content.Client.RoundEnd
 
             return playerManifestTab;
         }
+        // TODO: make this shitcode injected instead of shitting this up
         private BoxContainer MakeStationReportTab()
         {
             string stationReportText = Loc.GetString("no-station-report-summited");
             //gets the stationreport varibible and sets the station report tab text to it if the map doesn't have a tablet will say No station report submitted
-            var stationReportSystem = _entityManager.System<Goobstation.Common.StationReport.StationReportSystem>();
+            var stationReportSystem = _entityManager.System<CommonNtrStationReportSystem>();
             if (!string.IsNullOrWhiteSpace(stationReportSystem.StationReportText) && stationReportSystem.StationReportText != Loc.GetString("station-report-text"))
             {
                 stationReportText = Loc.GetString(

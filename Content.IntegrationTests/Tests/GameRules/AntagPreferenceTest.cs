@@ -1,16 +1,7 @@
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
@@ -24,17 +15,19 @@ namespace Content.IntegrationTests.Tests.GameRules;
 // Once upon a time, players in the lobby weren't ever considered eligible for antag roles.
 // Lets not let that happen again.
 [TestFixture]
-public sealed class AntagPreferenceTest
+public sealed class AntagPreferenceTest : GameTest
 {
+    public override PoolSettings PoolSettings => new PoolSettings
+    {
+        DummyTicker = false,
+        Connected = true,
+        InLobby = true
+    };
+
     [Test]
     public async Task TestLobbyPlayersValid()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            DummyTicker = false,
-            Connected = true,
-            InLobby = true
-        });
+        var pair = Pair;
 
         var server = pair.Server;
         var client = pair.Client;
@@ -81,6 +74,5 @@ public sealed class AntagPreferenceTest
         Assert.That(pool.Count, Is.EqualTo(0));
 
         await server.WaitPost(() => server.EntMan.DeleteEntity(uid));
-        await pair.CleanReturnAsync();
     }
 }

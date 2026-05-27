@@ -1,0 +1,28 @@
+# Generic bases for clothing (head, eyes, mask) that should modify viewcone angle.
+- type: entity
+  abstract: true
+  id: BaseClothingViewconeSmall
+  components:
+  - type: ViewconeModifier
+    angleModifier: 0.75
+
+- type: entity
+  abstract: true
+  id: BaseClothingViewconeMedium
+  components:
+  - type: ViewconeModifier
+    angleModifier: 0.6
+
+- type: entity
+  abstract: true
+  id: BaseClothingViewconeLarge
+  components:
+  - type: ViewconeModifier
+    angleModifier: 0.25
+
+- type: entity
+  abstract: true
+  id: BaseClothingViewconeBlinding
+  components:
+  - type: ViewconeModifier
+    angleModifier: 0

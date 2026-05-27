@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 TGRCDev <tgrc@tgrc.dev>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Trigger;
@@ -15,12 +8,12 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed class ProjectileGrenadeSystem : EntitySystem
+public sealed partial class ProjectileGrenadeSystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TransformSystem _transformSystem = default!;
 
 
     public override void Initialize()

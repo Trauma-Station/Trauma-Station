@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Tornado Tech <54727692+Tornado-Technology@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Chat.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.Chat;
@@ -24,11 +12,11 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators;
 
 public sealed partial class SpeakOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
     private ChatSystem _chat = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     [DataField(required: true)]
     public SpeakOperatorSpeech Speech;
@@ -100,7 +88,7 @@ public sealed partial class SpeakOperator : HTNOperator
         public sealed partial class SingleSpeakOperatorSpeech : SpeakOperatorSpeech
         {
             [DataField(required: true)]
-            public string Line;
+            public LocId Line; // Trauma - use LocId
         }
 
         public sealed partial class LocalizedSetSpeakOperatorSpeech : SpeakOperatorSpeech

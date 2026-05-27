@@ -6,17 +6,16 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
 public sealed partial class SummonPlagueRatSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
 
     public override void Initialize()
     {

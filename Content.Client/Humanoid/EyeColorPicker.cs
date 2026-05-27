@@ -6,10 +6,10 @@ using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.Humanoid;
 
-public sealed class EyeColorPicker : Control
+public sealed partial class EyeColorPicker : Control
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private uint _lastColorUpdate;
     // </Trauma>
 

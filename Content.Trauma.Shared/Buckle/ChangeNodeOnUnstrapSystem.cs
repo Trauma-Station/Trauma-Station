@@ -5,9 +5,9 @@ using Content.Shared.Construction;
 
 namespace Content.Trauma.Shared.Buckle;
 
-public sealed class ChangeNodeOnUnstrapSystem : EntitySystem
+public sealed partial class ChangeNodeOnUnstrapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedConstructionSystem _construction = default!;
+    [Dependency] private SharedConstructionSystem _construction = default!;
 
     public override void Initialize()
     {

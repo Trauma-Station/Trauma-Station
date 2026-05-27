@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.Piping;
@@ -16,12 +10,12 @@ using Content.Shared.Power.EntitySystems;
 
 namespace Content.Shared.Atmos.EntitySystems;
 
-public abstract class SharedGasPressurePumpSystem : EntitySystem
+public abstract partial class SharedGasPressurePumpSystem : EntitySystem
 {
-    [Dependency] private   readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private   readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private   readonly SharedPowerReceiverSystem _receiver = default!;
-    [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPowerReceiverSystem _receiver = default!;
+    [Dependency] protected SharedUserInterfaceSystem UserInterfaceSystem = default!;
 
     // TODO: Check enabled for activatableUI
     // TODO: Add activatableUI to it.

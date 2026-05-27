@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.StationEvents.Components;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
@@ -25,13 +17,13 @@ namespace Content.Server.StationEvents.Events;
 ///     Greytide Virus event
 ///     This will open and bolt airlocks and unlock lockers from randomly selected access groups.
 /// </summary>
-public sealed class GreytideVirusRule : StationEventSystem<GreytideVirusRuleComponent>
+public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirusRuleComponent>
 {
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly SharedAirlockSystem _airlock = default!; // Goobstation - Greytide Virus EA instead of open-bolt
-    [Dependency] private readonly LockSystem _lock = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private SharedAirlockSystem _airlock = default!; // Goobstation - Greytide Virus EA instead of open-bolt
+    [Dependency] private LockSystem _lock = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void Added(EntityUid uid, GreytideVirusRuleComponent virusComp, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {

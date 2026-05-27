@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 DoutorWhite <thedoctorwhite@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.GameTicking.Managers;
 using Content.Shared;
 using Content.Shared.Light.Components;
@@ -16,11 +8,11 @@ using Robust.Shared.Timing;
 namespace Content.Client.Light;
 
 /// <inheritdoc/>
-public sealed class LightCycleSystem : SharedLightCycleSystem
+public sealed partial class LightCycleSystem : SharedLightCycleSystem
 {
-    [Dependency] private readonly ClientGameTicker _ticker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
+    [Dependency] private ClientGameTicker _ticker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
 
     public override void Update(float frameTime)
     {

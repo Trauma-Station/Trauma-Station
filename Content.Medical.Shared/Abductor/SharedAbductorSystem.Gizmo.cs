@@ -9,20 +9,18 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Abductor;
 
 public abstract partial class SharedAbductorSystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly TagSystem _tag = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected SharedColorFlashEffectSystem _color = default!;
+    [Dependency] protected SharedDoAfterSystem _doAfter = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] protected TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> Abductor = "Abductor";
 

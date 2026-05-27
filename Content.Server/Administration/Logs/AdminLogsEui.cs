@@ -1,16 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Javier Guardia Fernández <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,13 +17,13 @@ using static Content.Shared.Administration.Logs.AdminLogsEuiMsg;
 
 namespace Content.Server.Administration.Logs;
 
-public sealed class AdminLogsEui : BaseEui
+public sealed partial class AdminLogsEui : BaseEui
 {
-    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IEntityManager _e = default!;
+    [Dependency] private IAdminLogManager _adminLogs = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IEntityManager _e = default!;
 
     private readonly ISawmill _sawmill;
 

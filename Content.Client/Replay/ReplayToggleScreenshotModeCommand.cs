@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Shared.Chat;
 using Robust.Client.Replays.Commands;
@@ -12,10 +7,10 @@ using Robust.Shared.Console;
 
 namespace Content.Client.Replay;
 
-public sealed class ReplayToggleScreenshotModeCommand : BaseReplayCommand
+public sealed partial class ReplayToggleScreenshotModeCommand : BaseReplayCommand
 {
-    [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-    [Dependency] private readonly ContentReplayPlaybackManager _replayManager = default!;
+    [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+    [Dependency] private ContentReplayPlaybackManager _replayManager = default!;
 
     public override string Command => "replay_toggle_screenshot_mode";
 

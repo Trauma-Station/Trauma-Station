@@ -32,20 +32,20 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Body.Systems;
 
-public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma - made partial
+public abstract partial class SharedBloodstreamSystem : EntitySystem
 {
     public static readonly EntProtoId Bloodloss = "StatusEffectBloodloss";
 
-    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    //[Dependency] private readonly SharedPopupSystem _popup = default!; // Trauma - not used anymore
-    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!;
+    [Dependency] protected SharedSolutionContainerSystem SolutionContainer = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    //[Dependency] private SharedPopupSystem _popup = default!; // Trauma - not used anymore
+    [Dependency] private SharedPuddleSystem _puddle = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
     public override void Initialize()
     {
@@ -102,7 +102,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
                     // </Goob>
 
                     _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Goob
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.Vital); // Trauma
 
                     // Apply dizziness as a symptom of bloodloss.
                     // The effect is applied in a way that it will never be cleared without being healthy.
@@ -117,7 +117,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
                         bloodstream.BloodlossHealDamage * bloodPercentage * _bloodlossMultiplier,
                         ignoreResistances: true,
                         interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll); // Goob
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.Vital); // Trauma
 
                     _status.TryRemoveStatusEffect(uid, Bloodloss);
                 }
@@ -314,7 +314,8 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
         if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution))
         {
             SolutionContainer.RemoveAllSolution(ent.Comp.BloodSolution.Value);
-            TryModifyBloodLevel(ent.AsNullable(), ent.Comp.BloodReferenceSolution.Volume);
+            // TODO: Use Solutions API for this when it exists
+            TryRegulateBloodLevel(ent.AsNullable(), ent.Comp.BloodReferenceSolution.Volume);
         }
     }
 
@@ -440,11 +441,12 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem // Trauma -
             return false;
 
         referenceFactor = Math.Clamp(referenceFactor, 0f, ent.Comp.MaxVolumeModifier);
+        var ratio = amount / ent.Comp.BloodReferenceSolution.Volume;
 
         foreach (var (referenceReagent, referenceQuantity) in ent.Comp.BloodReferenceSolution)
         {
             var error = referenceQuantity * referenceFactor - bloodSolution.GetTotalPrototypeQuantity(referenceReagent.Prototype);
-            var adjustedAmount = amount * referenceQuantity / ent.Comp.BloodReferenceSolution.Volume;
+            var adjustedAmount = referenceQuantity * amount / ent.Comp.BloodReferenceSolution.Volume; // Trauma - unroll ratio since fp2 cant represent 1/300
 
             if (error > 0)
             {

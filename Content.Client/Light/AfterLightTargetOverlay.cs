@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 DoutorWhite <thedoctorwhite@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -15,11 +7,11 @@ namespace Content.Client.Light;
 /// <summary>
 /// This exists just to copy <see cref="BeforeLightTargetOverlay"/> to the light render target
 /// </summary>
-public sealed class AfterLightTargetOverlay : Overlay
+public sealed partial class AfterLightTargetOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 
-    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
 
     public const int ContentZIndex = LightBlurOverlay.ContentZIndex + 1;
 

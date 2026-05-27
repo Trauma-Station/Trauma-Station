@@ -1,13 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Conversion;
-using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Shadowling.Components;
-using Content.Shared._Shitcode.Heretic.Systems;
-using Content.Shared._Starlight.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.Body;
 using Content.Shared.Damage.Systems;
@@ -22,24 +19,23 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffectNew;
+using Content.Trauma.Common.CollectiveMind;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 
-public abstract class SharedShadowlingSystem : EntitySystem
+public abstract partial class SharedShadowlingSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedLightDetectionDamageSystem _lightDamage = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private SharedLightDetectionDamageSystem _lightDamage = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     public static readonly ProtoId<OrganCategoryPrototype> TorsoCategory = "Torso";
@@ -230,8 +226,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
 
         return HasComp<MobStateComponent>(target)
                && !HasComp<ShadowlingComponent>(target)
-               && !HasComp<ThrallComponent>(target)
-               && !_heretic.TryGetHereticComponent(target, out _, out _);
+               && !HasComp<ThrallComponent>(target);
     }
 
     public void DoEnthrall(EntityUid uid, EntProtoId components, SimpleDoAfterEvent args)

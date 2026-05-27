@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Popups;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Access.Systems;
@@ -22,9 +17,9 @@ namespace Content.Client.Holopad;
 [GenerateTypedNameReferences]
 public sealed partial class HolopadWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly SharedHolopadSystem _holopadSystem = default!;
     private readonly SharedTelephoneSystem _telephoneSystem = default!;
@@ -178,9 +173,9 @@ public sealed partial class HolopadWindow : FancyWindow
         var callerId = _telephoneSystem.GetFormattedCallerIdForEntity(telephone.LastCallerId.Item1, telephone.LastCallerId.Item2, Color.LightGray, "Default", 11);
         var holoapdId = _telephoneSystem.GetFormattedDeviceIdForEntity(telephone.LastCallerId.Item3, Color.LightGray, "Default", 11);
 
-        CallerIdText.SetMessage(FormattedMessage.FromMarkupOrThrow(callerId));
-        HolopadIdText.SetMessage(FormattedMessage.FromMarkupOrThrow(holoapdId));
-        LockOutIdText.SetMessage(FormattedMessage.FromMarkupOrThrow(callerId));
+        CallerIdText.SetMessage(FormattedMessage.FromMarkupPermissive(callerId));
+        HolopadIdText.SetMessage(FormattedMessage.FromMarkupPermissive(holoapdId));
+        LockOutIdText.SetMessage(FormattedMessage.FromMarkupPermissive(callerId));
 
         // Sort holopads alphabetically
         var holopadArray = holopads.ToArray();
@@ -317,7 +312,7 @@ public sealed partial class HolopadWindow : FancyWindow
         }
     }
 
-    private sealed class HolopadContactButton : Button
+    private sealed partial class HolopadContactButton : Button
     {
         public NetEntity NetEntity;
 

@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Goobstation.Common.Cloning;
+using Content.Trauma.Shared.Language.Systems;
 using Content.Shared.Body;
 using Content.Shared.Mind.Components;
+using Content.Shared.Polymorph;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Knowledge;
@@ -14,12 +16,8 @@ using Content.Trauma.Shared.MartialArts.Components;
 using Content.Trauma.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -28,13 +26,17 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
-    [Dependency] protected readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager _proto = default!;
-    [Dependency] protected readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] protected IConfigurationManager _cfg = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected IPrototypeManager _proto = default!;
+    [Dependency] protected ISharedPlayerManager _player = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
+    [Dependency] private EntityQuery<AwakeMobComponent> _awakeQuery = default!;
+    [Dependency] private EntityQuery<KnowledgeComponent> _query = default!;
+    [Dependency] private EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
 
     /// <summary>
     /// Every knowledge prototype and its data.
@@ -48,11 +50,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         "expert",
         "master"
     ];
-
-    private EntityQuery<AwakeMobComponent> _awakeQuery;
-    private EntityQuery<KnowledgeComponent> _query;
-    private EntityQuery<KnowledgeContainerComponent> _containerQuery;
-    private EntityQuery<KnowledgeHolderComponent> _holderQuery;
 
     private bool _skillGain;
     private TimeSpan _nextUpdate;
@@ -74,16 +71,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
         SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
+        SubscribeLocalEvent<KnowledgeContainerComponent, TransferredToCloneEvent>(OnCloneTransfer);
 
+        SubscribeLocalEvent<KnowledgeHolderComponent, PolymorphedEvent>(OnPolymorphed);
         SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
-
-        _awakeQuery = GetEntityQuery<AwakeMobComponent>();
-        _query = GetEntityQuery<KnowledgeComponent>();
-        _containerQuery = GetEntityQuery<KnowledgeContainerComponent>();
-        _holderQuery = GetEntityQuery<KnowledgeHolderComponent>();
 
         LoadSkillPrototypes();
     }
@@ -194,6 +188,17 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         UnlinkContainer(args.Chassis, ent);
     }
 
+    private void OnCloneTransfer(Entity<KnowledgeContainerComponent> ent, ref TransferredToCloneEvent args)
+    {
+        TransferKnowledge(ent, args.Cloned);
+    }
+
+    private void OnPolymorphed(Entity<KnowledgeHolderComponent> ent, ref PolymorphedEvent args)
+    {
+        if (ent.Owner == args.OldEntity)
+            TransferKnowledge(ent, args.NewEntity);
+    }
+
     private void OnMindAdded(Entity<KnowledgeHolderComponent> ent, ref MindAddedMessage args)
     {
         // all player-controlled mobs can use knowledge
@@ -222,6 +227,28 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     }
 
     /// <summary>
+    /// Attempts to transfer all knowledge from one entity (container or holder) to another (holder).
+    /// </summary>
+    public void TransferKnowledge(EntityUid ent, EntityUid otherHolder)
+    {
+        if (TryGetAllKnowledgeUnits(ent) is not { } found)
+            return;
+
+        var mobContainer = EnsureKnowledgeContainer(otherHolder);
+        if (mobContainer.Comp.Container is not { } container)
+            return;
+
+        foreach (var knowledgeEnt in found)
+        {
+            _container.Insert(knowledgeEnt.Owner, container);
+            var protoId = Prototype(knowledgeEnt)?.ID;
+            if (protoId is { } id)
+                mobContainer.Comp.KnowledgeDict[id] = knowledgeEnt.Owner;
+        }
+        ClearKnowledge(ent, false);
+    }
+
+    /// <summary>
     /// Shows a skill popup to a user, respecting the popup cooldown.
     /// Can be called from server, client or both.
     /// Can be hidden by client skill popups setting.
@@ -242,6 +269,10 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
         if (GetKnowledge(ent, id) is not { } unit)
         {
+            // Can't add it with experience if you can't comprehend complexity.
+            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+                return;
+
             // if you don't have it, you have a small change to learn it when gaining some xp
             if (SharedRandomExtensions.PredictedProb(_timing, _learnChance, GetNetEntity(ent)))
                 EnsureKnowledge(ent, id, 0, popup);
@@ -278,12 +309,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public bool RollForLevelUp(Entity<KnowledgeComponent> ent, EntityUid target)
     {
-        var getMastery = GetMastery(ent.Comp.NetLevel);
-        (int, bool) rollResult = (0, false);
-
         // If we don't have enough experience or level is max, return.
         if (ent.Comp.Experience < ent.Comp.ExperienceCost || ent.Comp.LearnedLevel >= 100)
             return false;
+
+        var oldMastery = GetMastery(ent.Comp.NetLevel);
+        (int, bool) rollResult = (0, false);
 
         // This should roll as many times as experience cached experience.
         int timesToRoll = ent.Comp.Experience / ent.Comp.ExperienceCost;
@@ -299,14 +330,8 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (ent.Comp.LearnedLevel > 100) // Ensures Level doesn't go above 100.
             ent.Comp.LearnedLevel = 100;
 
-        // Controls client popup whatnot when you level up.
-        if (rollResult.Item2)
-            SkillPopup(Loc.GetString("knowledge-level-epiphany", ("knowledge", Name(ent))), target);
-
-        if (getMastery != GetMastery(ent.Comp.NetLevel) && !rollResult.Item2)
+        if (oldMastery != GetMastery(ent.Comp.NetLevel))
             SkillPopup(Loc.GetString("knowledge-level-up-popup", ("knowledge", Name(ent)), ("mastery", GetMasteryString(ent).ToLower())), target);
-        else if (!rollResult.Item2)
-            SkillPopup(Loc.GetString("knowledge-level-more", ("knowledge", Name(ent))), target);
 
         return true;
     }
@@ -624,6 +649,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetMastery(int level)
         => level switch
         {
+            >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
             >= 76 => 4,
             >= 51 => 3,
@@ -647,6 +673,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     public override int GetInverseMastery(int mastery)
         => mastery switch
         {
+            >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
             >= 4 => 76,
             >= 3 => 51,

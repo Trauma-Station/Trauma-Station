@@ -152,6 +152,8 @@
     icon:
       sprite: _Goobstation/Blob/Actions/blob.rsi
       state: blobToCore
+  - type: ConfirmableAction
+    popup: transform-blob-confirm-popup
   - type: InstantAction
     event: !type:TransformToBlobActionEvent
 

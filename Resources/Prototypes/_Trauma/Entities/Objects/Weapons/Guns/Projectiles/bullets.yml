@@ -15,3 +15,37 @@
   abstract: true
   components:
   - type: BulletHoleGenerator
+
+- type: entity
+  id: BulletPistolSilverBig
+  name: bullet (.50 silver)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 5
+        Holy: 5
+  - type: HolyIgniteOnCollide
+    fireStacks: 3.5
+
+- type: entity
+  id: BulletFaithHeal
+  name: blessed shot
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: magicm_yellow
+  - type: Projectile
+    damage:
+      types:
+        Piercing: -5.0
+        Slash: -5.0
+        Blunt: -5.0
+        Heat: -5.0
+        Cold: -5.0
+        Shock: -5.0

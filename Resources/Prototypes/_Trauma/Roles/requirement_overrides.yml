@@ -56,6 +56,8 @@
       department: Security
       time: 3h
       inverted: true
+    - !type:OverallPlaytimeRequirement
+      time: 2h
     TechnicalAssistant:
     - !type:DepartmentTimeRequirement
       department: Engineering
@@ -77,6 +79,11 @@
       department: Service
       time: 3h
       inverted: true
+    #Civilian
+    Chef: # Anti-raider ops
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 1h
     #Cargo - No intern role, so no limits lmao.
     #Engineering
     StationEngineer:
@@ -126,13 +133,6 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h
-    Brigmedic:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 1h
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 1h
     Warden:
     - !type:DepartmentTimeRequirement
       department: Security
@@ -143,5 +143,88 @@
       role: JobBorg
       time: 3h
     Borg:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+  antags:
+    AbductorAgentAntag:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    AbductorScientistAntag:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 1h
+    Blob:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+    Changeling:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+    CosmicAntagCultist:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+    Devil:
+    - !type:RoleTimeRequirement
+      role: JobLawyer
+      time: 1h
+    HeadRev:
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 2h
+    Heretic:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
+    Nukeops:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    NukeopsMedic:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    - !type:RoleTimeRequirement
+      role: JobChemist
+      time: 1h
+    NukeopsCommander:
+    - !type:OverallPlaytimeRequirement
+      time: 3h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    Shadowling:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 1h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    SpaceNinja:
+    - !type:OverallPlaytimeRequirement
+      time: 3h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    Wizard:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
+    MothershipCore:
+    - !type:RoleTimeRequirement
+      role: JobStationAi
+      time: 3h
+    Xenoborg:
+    - !type:RoleTimeRequirement
+      role: JobBorg
+      time: 3h
+    XenomorphsInfestationRoundstart:
     - !type:OverallPlaytimeRequirement
       time: 2h

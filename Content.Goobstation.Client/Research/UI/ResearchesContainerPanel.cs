@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface.Controls;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Goobstation.Client.Research.UI;
 

@@ -6,17 +6,16 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Server.Wraith.Systems;
 
 public sealed partial class SummonPortalSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {

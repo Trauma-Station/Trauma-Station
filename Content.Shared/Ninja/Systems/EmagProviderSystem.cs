@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Goobstation.Common.Effects;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -21,14 +13,14 @@ namespace Content.Shared.Ninja.Systems;
 /// <summary>
 /// Handles emagging whitelisted objects when clicked.
 /// </summary>
-public sealed class EmagProviderSystem : EntitySystem
+public sealed partial class EmagProviderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedNinjaGlovesSystem _gloves = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!; // goob edit - sparks everywhere
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedNinjaGlovesSystem _gloves = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SparksSystem _sparks = default!; // goob edit - sparks everywhere
 
     public override void Initialize()
     {

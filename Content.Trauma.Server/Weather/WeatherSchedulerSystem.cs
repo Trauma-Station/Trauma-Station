@@ -10,12 +10,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Weather;
 
-public sealed class WeatherSchedulerSystem : EntitySystem
+public sealed partial class WeatherSchedulerSystem : EntitySystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedWeatherSystem _weather = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedWeatherSystem _weather = default!;
 
     public override void Update(float frameTime)
     {
@@ -23,30 +23,38 @@ public sealed class WeatherSchedulerSystem : EntitySystem
 
         var now = _timing.CurTime;
         var query = EntityQueryEnumerator<WeatherSchedulerComponent>();
-        while (query.MoveNext(out var map, out var comp))
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (now < comp.NextUpdate)
                 continue;
 
             if (comp.Stage >= comp.Stages.Count)
+            {
+                if (comp.Temporary)
+                {
+                    // remove the status effect instead of wrapping
+                    QueueDel(uid);
+                    continue;
+                }
                 comp.Stage = 0;
+            }
 
             var stage = comp.Stages[comp.Stage++];
             var duration = TimeSpan.FromSeconds(stage.Duration.Next(_random));
             comp.NextUpdate = now + duration;
 
-            var mapId = Comp<MapComponent>(map).MapId;
-            if (stage.Weather is {} weather)
+            var mapId = Transform(uid).MapID;
+            if (stage.Weather is { } weather)
             {
                 // crossfade weather smoothly so as one ends the next starts
                 if (HasWeather(comp, comp.Stage - 1))
                     duration += SharedWeatherSystem.StartupTime;
                 if (HasWeather(comp, comp.Stage + 1))
                     duration += SharedWeatherSystem.ShutdownTime;
-                _weather.TryAddWeather(map, weather, out _, duration);
+                _weather.TryAddWeather(mapId, weather, out _, duration);
             }
 
-            if (stage.Message is {} message)
+            if (stage.Message is { } message)
             {
                 var msg = Loc.GetString(message);
                 _chat.ChatMessageToManyFiltered(
@@ -54,7 +62,7 @@ public sealed class WeatherSchedulerSystem : EntitySystem
                     ChatChannel.Radio,
                     msg,
                     msg,
-                    map,
+                    uid,
                     false,
                     true,
                     null);

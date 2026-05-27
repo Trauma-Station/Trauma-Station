@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.DeviceLinking.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
@@ -14,9 +8,9 @@ namespace Content.Server.DeviceLinking.Systems;
 /// <summary>
 /// Handles the control of output based on the input and enable ports.
 /// </summary>
-public sealed class MemoryCellSystem : EntitySystem
+public sealed partial class MemoryCellSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
 
     public override void Initialize()
     {

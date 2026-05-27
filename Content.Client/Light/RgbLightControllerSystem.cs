@@ -1,17 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using System.Numerics;
 using Content.Client.Items.Systems;
@@ -28,12 +14,12 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client.Light
 {
-    public sealed class RgbLightControllerSystem : SharedRgbLightControllerSystem
+    public sealed partial class RgbLightControllerSystem : SharedRgbLightControllerSystem
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly ItemSystem _itemSystem = default!;
-        [Dependency] private readonly SharedPointLightSystem _lights = default!;
-        [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private ItemSystem _itemSystem = default!;
+        [Dependency] private SharedPointLightSystem _lights = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
 
         public override void Initialize()
         {

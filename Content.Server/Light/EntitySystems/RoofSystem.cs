@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 DoutorWhite <thedoctorwhite@gmail.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Map.Components;
@@ -11,9 +5,9 @@ using Robust.Shared.Map.Components;
 namespace Content.Server.Light.EntitySystems;
 
 /// <inheritdoc/>
-public sealed class RoofSystem : SharedRoofSystem
+public sealed partial class RoofSystem : SharedRoofSystem
 {
-    [Dependency] private readonly SharedMapSystem _maps = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
 
     private EntityQuery<MapGridComponent> _gridQuery;
 

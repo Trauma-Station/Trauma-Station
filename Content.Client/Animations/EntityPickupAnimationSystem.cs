@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Numerics;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -18,12 +11,12 @@ namespace Content.Client.Animations;
 /// <summary>
 ///     System that handles animating an entity that a player has picked up.
 /// </summary>
-public sealed class EntityPickupAnimationSystem : EntitySystem
+public sealed partial class EntityPickupAnimationSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animations = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _animations = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     public override void Initialize()
     {

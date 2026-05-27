@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Numerics;
 using Content.Client.Actions;
 using Content.Client.Decals.Overlays;
@@ -27,16 +15,16 @@ namespace Content.Client.Decals;
 
 // This is shit and basically a half-rewrite of PlacementManager
 // TODO refactor placementmanager so this isnt shit anymore
-public sealed class DecalPlacementSystem : EntitySystem
+public sealed partial class DecalPlacementSystem : EntitySystem
 {
-    [Dependency] private readonly IInputManager _inputManager = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly InputSystem _inputSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IInputManager _inputManager = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private InputSystem _inputSystem = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public static readonly EntProtoId DecalAction = "BaseMappingDecalAction";
 

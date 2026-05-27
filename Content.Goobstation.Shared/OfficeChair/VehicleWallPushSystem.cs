@@ -2,30 +2,27 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.Vehicles;
-using Content.Shared._EinsteinEngines.Contests;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Item;
 using Content.Shared.Throwing;
+using Content.Trauma.Common.Contests;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.OfficeChair;
 
 public sealed partial class VehicleWallPushSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly ContestsSystem _contests = default!;
-    [Dependency] private readonly INetConfigurationManager _config = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private INetConfigurationManager _config = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

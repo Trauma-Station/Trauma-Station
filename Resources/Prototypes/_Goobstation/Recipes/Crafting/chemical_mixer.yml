@@ -1,9 +1,8 @@
 - type: construction
   id: portableChemicalMixerConstruction
   graph: portableChemicalMixerGraph
-  startNode: start
   targetNode: end
   category: construction-category-misc
   objectType: Item
   theory:
-    ElectronicsKnowledge: 2
+    ElectronicsKnowledge: 1

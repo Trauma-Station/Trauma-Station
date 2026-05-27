@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.GhostKick;
@@ -21,9 +12,9 @@ namespace Content.Server.GhostKick;
 // Basically we boot the client off the server without telling them, so the game shits itself.
 // Hilarious, isn't it?
 
-public sealed class GhostKickManager
+public sealed partial class GhostKickManager
 {
-    [Dependency] private readonly IServerNetManager _netManager = default!;
+    [Dependency] private IServerNetManager _netManager = default!;
 
     public void Initialize()
     {
@@ -54,10 +45,10 @@ public sealed class GhostKickManager
 }
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class GhostKickCommand : LocalizedEntityCommands
+public sealed partial class GhostKickCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly GhostKickManager _ghostKick = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private GhostKickManager _ghostKick = default!;
 
     public override string Command => "ghostkick";
 

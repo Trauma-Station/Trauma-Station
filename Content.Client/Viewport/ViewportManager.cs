@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Client.UserInterface.Controls;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -15,9 +8,9 @@ namespace Content.Client.Viewport
     ///     Event proxy for <see cref="MainViewport"/> to listen to config events.
     /// </summary>
     // ReSharper disable once ClassNeverInstantiated.Global
-    public sealed class ViewportManager
+    public sealed partial class ViewportManager
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         private readonly List<MainViewport> _viewports = new();
 

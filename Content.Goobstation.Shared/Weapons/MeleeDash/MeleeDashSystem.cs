@@ -21,17 +21,17 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Shared.Weapons.MeleeDash;
 
-public sealed class MeleeDashSystem : EntitySystem
+public sealed partial class MeleeDashSystem : EntitySystem
 {
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedAnimatedEmotesSystem _animatedEmotes = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedAnimatedEmotesSystem _animatedEmotes = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private const int DashCollisionLayer = (int) CollisionGroup.MidImpassable;
 
@@ -40,6 +40,7 @@ public sealed class MeleeDashSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<DashingComponent, LandEvent>(OnLand);
+        SubscribeLocalEvent<DashingComponent, StopThrowEvent>(OnStopThrow);
         SubscribeLocalEvent<DashingComponent, StartCollideEvent>(OnCollide);
         SubscribeAllEvent<MeleeDashEvent>(OnDash);
     }
@@ -60,7 +61,7 @@ public sealed class MeleeDashSystem : EntitySystem
         if (!HasComp<MobStateComponent>(args.OtherEntity))
             return;
 
-        if (!_hands.IsHolding(ent.Owner, ent.Comp.Weapon))
+        if (!_hands.IsHolding(ent.Owner, ent.Comp.Weapon) && ent.Owner != ent.Comp.Weapon)
             return;
 
         comp.HitEntities.Add(args.OtherEntity);
@@ -72,7 +73,17 @@ public sealed class MeleeDashSystem : EntitySystem
         _melee.DoLightAttack(uid, ev, comp.Weapon.Value, melee, actor.PlayerSession);
     }
 
+    private void OnStopThrow(Entity<DashingComponent> ent, ref StopThrowEvent args)
+    {
+        StopDash(ent);
+    }
+
     private void OnLand(Entity<DashingComponent> ent, ref LandEvent args)
+    {
+        StopDash(ent);
+    }
+
+    private void StopDash(Entity<DashingComponent> ent)
     {
         var (uid, comp) = ent;
 
@@ -104,7 +115,7 @@ public sealed class MeleeDashSystem : EntitySystem
         var weapon = GetEntity(msg.Weapon);
 
         if (TerminatingOrDeleted(weapon) ||
-            !_hands.IsHolding(user, weapon) ||
+            !_hands.IsHolding(user, weapon) && user != weapon ||
             !TryComp(weapon, out MeleeDashComponent? dash) ||
             !TryComp(weapon, out UseDelayComponent? delay) || _useDelay.IsDelayed((weapon, delay)))
             return;

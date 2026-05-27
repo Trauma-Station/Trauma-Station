@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory.Slots;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Factory;
 
 /// <summary>
-/// Adds slots to an entity that can be controlled by automation machines if it also has <see cref="AutomationComponent"/>.
+/// Adds slots to an entity that can be controlled by automation machines.
 /// Slots using <see cref="AutomationSlot"/> can provide or accept items.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(AutomationSystem))]

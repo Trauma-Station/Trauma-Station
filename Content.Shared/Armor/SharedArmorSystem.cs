@@ -17,9 +17,9 @@ namespace Content.Shared.Armor;
 /// <summary>
 ///     This handles logic relating to <see cref="ArmorComponent" />
 /// </summary>
-public abstract class SharedArmorSystem : EntitySystem
+public abstract partial class SharedArmorSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -53,14 +53,13 @@ public abstract class SharedArmorSystem : EntitySystem
         if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)
             return;
 
-        // <Goob>
-        if (args.Args.TargetPart is not {} partType)
+        // <Trauma>
+        if (args.Args.TargetPart is not {} partType || !component.ArmorCoverage.Contains(partType))
             return;
 
-        if (component.ArmorCoverage.Contains(partType))
-            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration));
-        // </Goob>
+        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
+            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration)); // apply penetration to base modifiers
+        // </Trauma>
     }
 
     private void OnBorgDamageModify(EntityUid uid, ArmorComponent component,
@@ -123,9 +122,9 @@ public abstract class SharedArmorSystem : EntitySystem
             {
                 msg.PushNewline();
                 var armorType = Loc.GetString("armor-damage-type-" + coefficientArmor.Key.ToLower());
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value",
+                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value-trauma", // Trauma - better locale string
                     ("type", armorType),
-                    ("value", MathF.Round((1f - coefficientArmor.Value) * 100, 1))
+                    ("value", MathF.Abs(1f - coefficientArmor.Value) * 100), ("protect", coefficientArmor.Value < 1f) // Trauma - better values
                 ));
             }
 

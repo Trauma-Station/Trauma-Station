@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Trauma.Common.MartialArts;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.EntityEffects;
@@ -18,9 +17,9 @@ public sealed partial class BlockedBreathing : EntityEffectBase<BlockedBreathing
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null; // idc
 }
 
-public sealed class BlockedBreathingEffectSystem : EntityEffectSystem<TransformComponent, BlockedBreathing>
+public sealed partial class BlockedBreathingEffectSystem : EntityEffectSystem<TransformComponent, BlockedBreathing>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<BlockedBreathing> args)

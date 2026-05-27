@@ -1,0 +1,19 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    Title="{Loc 'heretic-flesh-grasp-recall-ghoul'}"
+    SizeFlagsStretchRatio="0.4"
+    MinHeight="210">
+    <BoxContainer Name="MainContainer" Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="5">
+            <LineEdit Name="SearchBar" PlaceHolder="{Loc 'heretic-flesh-grasp-recall-search-filter'}"
+                      HorizontalExpand="True" Margin="0 4" />
+        </BoxContainer>
+        <Label Name="NoGhoulsLabel" HorizontalAlignment="Center" Text="{Loc 'heretic-flesh-grasp-recall-no-ghouls'}" />
+        <controls:SearchListContainer Name="Ghouls" VerticalExpand="True" Visible="False" />
+    </BoxContainer>
+</controls:FancyWindow>

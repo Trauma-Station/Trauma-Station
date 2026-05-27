@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Flesh <62557990+PolterTzi@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.CCVar;
 using Content.Shared.Drugs;
 using Content.Shared.StatusEffectNew;
@@ -20,16 +10,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Drugs;
 
-public sealed class RainbowOverlay : Overlay
+public sealed partial class RainbowOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Rainbow";
 
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private readonly StatusEffectsSystem _statusEffects = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

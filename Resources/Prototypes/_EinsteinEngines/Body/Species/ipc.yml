@@ -210,6 +210,7 @@
   - type: DamagedSiliconAccent
     enableChargeCorruption: false
   - type: Uncloneable # it a fucking robot
+  - type: MindControllable
   - type: ZombieImmune
   - type: Fixtures
     fixtures:
@@ -240,6 +241,8 @@
   - type: Deathgasp
     prototype: SiliconDeathgasp
     needsCritical: false
+  - type: SurgeryTarget
+    sepsisImmune: true
   - type: Tag
     tags:
     - SiliconMob
@@ -295,8 +298,8 @@
   - type: WoundableVisuals
     damageGroupColors:
       Brute: "#DD8822"
-  - type: Boneless
-    bonePenalty: 1
+  - type: Woundable
+    boneEntity: null
 
 ## Parts
 

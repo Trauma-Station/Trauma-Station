@@ -1,60 +1,3 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Paul <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <gradientvera@outlook.com>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Paul Ritter <ritter.paul1@googlemail.com>
-// SPDX-FileCopyrightText: 2022 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2022 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Andrew Montagne <andrew@montagne.uk>
-// SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <65184747+Dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Dimastra <dimastra@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Eoin Mcloughlin <helloworld@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 JIPDawg <JIPDawg93@gmail.com>
-// SPDX-FileCopyrightText: 2024 Mervill <mervills.email@gmail.com>
-// SPDX-FileCopyrightText: 2024 Moomoobeef <62638182+Moomoobeef@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 PJBot <pieterjan.briers+bot@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 PopGamer46 <yt1popgamer@gmail.com>
-// SPDX-FileCopyrightText: 2024 PursuitInAshes <pursuitinashes@gmail.com>
-// SPDX-FileCopyrightText: 2024 QueerNB <176353696+QueerNB@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Saphire Lattice <lattice@saphi.re>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Simon <63975668+Simyon264@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Spessmann <156740760+Spessmann@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 eoineoineoin <github@eoinrul.es>
-// SPDX-FileCopyrightText: 2024 github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 stellar-novas <stellar_novas@riseup.net>
-// SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using System.Threading;
 using Content.Server.Administration.Logs;
@@ -87,16 +30,16 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.Singularity.EntitySystems
 {
-    public sealed class EmitterSystem : SharedEmitterSystem
+    public sealed partial class EmitterSystem : SharedEmitterSystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly ProjectileSystem _projectile = default!;
-        [Dependency] private readonly GunSystem _gun = default!;
-        [Dependency] private readonly RadioSystem _radio = default!;
-        [Dependency] private readonly NavMapSystem _navMap = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private IAdminLogManager _adminLogger = default!;
+        [Dependency] private SharedAppearanceSystem _appearance = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private ProjectileSystem _projectile = default!;
+        [Dependency] private GunSystem _gun = default!;
+        [Dependency] private RadioSystem _radio = default!;
+        [Dependency] private NavMapSystem _navMap = default!;
 
         public override void Initialize()
         {
@@ -107,7 +50,7 @@ namespace Content.Server.Singularity.EntitySystems
             SubscribeLocalEvent<EmitterComponent, ActivateInWorldEvent>(OnActivate);
             SubscribeLocalEvent<EmitterComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
             SubscribeLocalEvent<EmitterComponent, SignalReceivedEvent>(OnSignalReceived);
-            SubscribeLocalEvent<EmitterComponent, DestructionAttemptEvent>(OnDestructionAttempted);
+            SubscribeLocalEvent<EmitterComponent, DestructionEventArgs>(OnDestruction);
             SubscribeLocalEvent<EmitterComponent, MachineDeconstructedEvent>(OnDeconstructed); // you shouldn't be able to deconstruct locked emitters but out of scope to fix
             SubscribeLocalEvent<EmitterComponent, LockToggledEvent>(OnLockToggled);
         }
@@ -231,7 +174,7 @@ namespace Content.Server.Singularity.EntitySystems
                 return;
             }
 
-            AlertRadio((uid, component), "unpowered");
+            AlertRadio((uid, component), component.LocUnpowered);
 
             component.IsPowered = false;
 
@@ -302,7 +245,7 @@ namespace Content.Server.Singularity.EntitySystems
 
             var targetPos = new EntityCoordinates(uid, new Vector2(0, -1));
 
-            _gun.Shoot(uid, gunComponent, ent, xform.Coordinates, targetPos, out _);
+            _gun.Shoot((uid, gunComponent), ent, xform.Coordinates, targetPos, out _);
         }
 
         private void UpdateAppearance(EntityUid uid, EmitterComponent component)
@@ -354,27 +297,26 @@ namespace Content.Server.Singularity.EntitySystems
             }
         }
 
-        private void OnDestructionAttempted(Entity<EmitterComponent> ent, ref DestructionAttemptEvent args)
+        private void OnDestruction(Entity<EmitterComponent> ent, ref DestructionEventArgs args)
         {
-            // warn engineering their containment engine needs IMMEDIATE repairs
-            // this doesn't change much for natural loosing through emitter destruction given any meteor warning serves the same purpose
-            // can also be used to scare engineering though given it broadcasts its location you need a renamed station beacon to really scare them
-            AlertRadio(ent, "destroyed");
+            // Engineering needs to know if an emitter is destroyed so they can replace it before the engine looses.
+            AlertRadio(ent, ent.Comp.LocDestroyed);
         }
 
         private void OnDeconstructed(Entity<EmitterComponent> ent, ref MachineDeconstructedEvent args)
         {
             // right now you don't even need to unlock the emitter to deconstruct it. that's almost certainly a bug but even without it it probably still needs an alert
-            AlertRadio(ent, "deconstructed");
+            AlertRadio(ent, ent.Comp.LocDeconstructed);
         }
 
-        private void AlertRadio(Entity<EmitterComponent> ent, string type)
+        private void AlertRadio(Entity<EmitterComponent> ent, string locString)
         {
             if (!ent.Comp.AlertRadio || !ent.Comp.IsOn || !ent.Comp.IsPowered)
                 return; // APEs do not need to scream over engineering radio, and an emitter that is off is probably not going to be alerting radios
 
-            var message = Loc.GetString("emitter-" + type + "-broadcast",
-            ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(ent.Owner)))
+            var message = Loc.GetString(
+                locString,
+                ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(ent.Owner)))
             );
             _radio.SendRadioMessage(ent.Owner, message, ent.Comp.RadioChannel, ent.Owner);
         }
@@ -384,7 +326,7 @@ namespace Content.Server.Singularity.EntitySystems
             if (args.Locked)
                 return;
 
-            AlertRadio(ent, "unlocked");
+            AlertRadio(ent, ent.Comp.LocUnlocked);
         }
     }
 }

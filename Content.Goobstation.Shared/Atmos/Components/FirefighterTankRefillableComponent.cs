@@ -2,8 +2,6 @@
 
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Whitelist;
 

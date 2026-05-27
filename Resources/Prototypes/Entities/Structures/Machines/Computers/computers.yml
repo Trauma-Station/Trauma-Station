@@ -141,8 +141,6 @@
         enum.WiresUiKey.Key:
           type: WiresBoundUserInterface
   - type: RadarConsole
-  - type: WorldLoader
-    radius: 256
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -220,8 +218,6 @@
       - Syndicate
   - type: RadarConsole
     maxRange: 384
-  - type: WorldLoader
-    radius: 1536
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -670,6 +666,9 @@
   name: communications computer
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
+  # <Trauma>
+  - type: StationReportTarget # not given to aghost
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]

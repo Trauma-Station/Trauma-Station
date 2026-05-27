@@ -4,7 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Medical.Common.Surgery.Tools;
 using Content.Medical.Common.Traumas;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Common.Body;
 

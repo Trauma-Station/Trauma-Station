@@ -5,15 +5,14 @@ using Content.Shared.Body;
 using Content.Shared.Gibbing;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class UnremoveableOrganSystem : EntitySystem
+public sealed partial class UnremoveableOrganSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

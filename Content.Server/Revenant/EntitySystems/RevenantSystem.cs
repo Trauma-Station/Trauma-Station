@@ -1,24 +1,6 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <drsmugleaf@gmail.com>
-// SPDX-FileCopyrightText: 2023 Jezithyr <jezithyr@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 keronshb <keronshb@live.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-// SPDX-FileCopyrightText: 2024 DisposableCrewmember42 <disposablecrewmember42@proton.me>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Numerics;
 using Content.Server.Actions;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.GameTicking;
 using Content.Server.Store.Systems;
 using Content.Shared.Alert;
@@ -45,23 +27,24 @@ namespace Content.Server.Revenant.EntitySystems;
 
 public sealed partial class RevenantSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly VisibilitySystem _visibility = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedInteractionSystem _interact = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private VisibilitySystem _visibility = default!;
+    [Dependency] private TurfSystem _turf = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -207,6 +190,23 @@ public sealed partial class RevenantSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Cools the area around the revenant.
+    /// The more essence they have, the colder it gets, up to a certain point.
+    /// </summary>
+    /// <param name="ent">The revenant entity.</param>
+    private void ChillArea(Entity<RevenantComponent> ent)
+    {
+        var effectiveEssence = Math.Clamp(ent.Comp.Essence.Int(), 0, ent.Comp.ChillUpperBound.Float());
+        // Parabolic curve based on essence, more essence = more delta q, flattening as upper bound is reached
+        var dQ =
+            200 / ent.Comp.ChillScaling.Float() * MathF.Pow(effectiveEssence - ent.Comp.ChillUpperBound.Float(), 2) -
+            ent.Comp.ChillScaling.Float();
+
+        if (_atmosphere.GetContainingMixture(ent.Owner, true, true) is { } air)
+            _atmosphere.AddHeat(air, dQ);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -224,6 +224,8 @@ public sealed partial class RevenantSystem : EntitySystem
             {
                 ChangeEssenceAmount(uid, rev.EssencePerSecond, rev, regenCap: true);
             }
+
+            ChillArea((uid, rev));
         }
     }
 }

@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2022 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Rotation;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -14,11 +5,11 @@ using Robust.Shared.Animations;
 
 namespace Content.Client.Rotation;
 
-public sealed class RotationVisualizerSystem : SharedRotationVisualsSystem
+public sealed partial class RotationVisualizerSystem : SharedRotationVisualsSystem
 {
 
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
 
     public override void Initialize()
     {

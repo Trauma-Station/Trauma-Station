@@ -1,33 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 Piras314 <92357316+Piras314@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 ScyronX <166930367+ScyronX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tristan <traynor123123@gmail.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <142914808+Aineias1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Weide <64257676+Lyacs@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 absurd-shaman <165011607+absurd-shaman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 jvne <juneialduncan21@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Surplus Voidsuits
 
 uplink-hardsuit-syndiemedic-name = Gorlex Agent Hardsuit
@@ -141,9 +111,6 @@ uplink-frag-grenade-desc = Lower damage, bigger radius. Compatible with the Chin
 
 uplink-mpapers-grenade-name = MP-APERS shell (40mm)
 uplink-mpapers-grenade-desc = Fires out 20 small pellets to turn your grenade launcher into a shotgun. Compatible with the China-Lake.
-
-uplink-pistol-magazine-caseless-saphe-name = Pistol Magazine (9.5mm SAP-HE)
-uplink-pistol-magazine-caseless-saphe-desc = 10 rounds of 9.5mm caseless magnum semi-armor-piercing high-explosive ammunition. It is exactly what you have read. Compatible with the Cobra.
 
 uplink-l6-box-name = Magazine Box (.30 rifle)
 uplink-l6-box-desc = Magazine box with 100 catridges. Compatible with the L6 SAW.
@@ -298,6 +265,9 @@ uplink-syndicate-weapon-module-advanced-desc = Upgrades a cyborg with an energy 
 uplink-carpcaller-name = Space Carp Caller
 uplink-carpcaller-desc = A device exploiting carp psychology that, when anchored, powered, and exposed to open space, will attract wild space carp. Keep in mind you're not their friend.
 
+uplink-reagent-grenades-name = Box of Reagent Grenades
+uplink-reagent-grenades-desc = Contains 2 Glue grenades and 2 Lube Grenades
+
 # Martial Arts
 
 uplink-cqc-name = CQC Manual
@@ -322,7 +292,7 @@ uplink-pizza-party-crate-name = Pizza Party Crate
 uplink-pizza-party-crate-desc = A crate coming in the form of disaster pizza delivery. Filled with pizzas and pizza bombs to throw the most explosive pizza party ever. Unfortunately you can't seem to remember which one is which.
 
 uplink-undetermined-bundle-name = Undetermined Bundle Crate
-uplink-undetermined-bundle-desc = This crate comes with three random bundles and allows to choose one of them. Guaranteed to include Syndicate encryption key.
+uplink-undetermined-bundle-desc = This crate comes with four random bundles and allows to choose one of them. Guaranteed to include Syndicate encryption key.
 
 uplink-energy-pickaxe-name = Energy Pickaxe
 uplink-energy-pickaxe-desc = A holographic mining tool with blades comprised of hard light that also serves a deadly melee weapon. Rock and stone!
