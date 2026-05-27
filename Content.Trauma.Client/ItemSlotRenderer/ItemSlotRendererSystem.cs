@@ -105,19 +105,19 @@ public sealed partial class ItemSlotRendererSystem : EntitySystem
 public sealed partial class SpriteToLayerBullshitOverlay : Overlay
 {
     [Dependency] private EntityManager _ent = default!;
-    private SpriteSystem _sprite;
+    private SpriteSystem? _sprite;
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpaceBelowWorld;
 
     public SpriteToLayerBullshitOverlay()
     {
         IoCManager.InjectDependencies(this);
-
-        _sprite = _ent.System<SpriteSystem>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        _sprite ??= _ent.System<SpriteSystem>();
+
         var handle = args.ScreenHandle;
         var query = _ent.EntityQueryEnumerator<ItemSlotRendererComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var comp, out var sprite))
