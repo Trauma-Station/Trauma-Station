@@ -24,7 +24,7 @@ public sealed partial class RCDPrototype : IPrototype
     /// The name associated with the prototype
     /// </summary>
     [DataField("name"), ViewVariables(VVAccess.ReadOnly)]
-    public string SetName { get; private set; } = "Unknown";
+    public LocId SetName { get; private set; } = "generic-unknown-title"; // Trauma - changed to LocId
 
     /// <summary>
     /// The name of the radial container that this prototype will be listed under on the RCD menu

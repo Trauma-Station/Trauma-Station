@@ -5,7 +5,6 @@ using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Heretic.Rituals;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Heretic.UI;
 

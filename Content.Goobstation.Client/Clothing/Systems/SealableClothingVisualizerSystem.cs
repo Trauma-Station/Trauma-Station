@@ -7,7 +7,6 @@ using Content.Goobstation.Shared.Clothing;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Clothing.Systems;
 

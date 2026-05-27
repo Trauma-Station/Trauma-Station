@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Content.Server.Antag;
+using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -14,16 +15,14 @@ using Content.Server.Station.Systems;
 using Content.Trauma.Shared.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Caste;
 using Content.Trauma.Shared.Xenomorphs.Xenomorph;
+using Content.Shared.Audio;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Station.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using Robust.Server.Audio; // Goobstation - Play music on announcement
 using Content.Server.Ghost.Roles.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
@@ -36,7 +35,6 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IRobustRandom _random = default!;
-
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -44,7 +42,7 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private StationSystem _station = default!;
-    [Dependency] private AudioSystem _audioSystem = default!; // Goobstation - Play music on announcement
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
 
     public override void Initialize()
     {
@@ -251,7 +249,8 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             if (!string.IsNullOrEmpty(component.Announcement))
                 _chat.DispatchGlobalAnnouncement(Loc.GetString(component.Announcement), component.Sender != null ? Loc.GetString(component.Sender) : null, colorOverride: component.AnnouncementColor);
 
-            _audioSystem.PlayGlobal(component.XenomorphInfestationSound, Filter.Broadcast(), true); // Goobstation - Play music on announcement
+            _sound.StopStationEventMusic(uid, StationEventMusicType.Xenomorph);
+            _sound.DispatchStationEventMusic(uid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
         }
 
         CheckRoundEnd(uid, component, gameRule);
@@ -267,7 +266,7 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
         // Check if there are any xenomorph larva ghost role present
         var hasXenomorphSpawners = false;
         var spawnerQuery = AllEntityQuery<GhostRoleComponent, MetaDataComponent>();
-        while (spawnerQuery.MoveNext(out var spawnerUid, out _, out var metaData))
+        while (spawnerQuery.MoveNext(out _, out _, out var metaData))
         {
             if (metaData.EntityPrototype != null && metaData.EntityPrototype.ID == XenomorphSpawnerProto)
             {
@@ -306,7 +305,8 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             component.RoundEndTextShuttleCall,
             component.RoundEndTextAnnouncement
         );
-        _audioSystem.PlayGlobal(component.XenomorphTakeoverSound, Filter.Broadcast(), true); // Goobstation - Play music on announcement
+        _sound.StopStationEventMusic(uid, StationEventMusicType.Xenomorph);
+        _sound.DispatchStationEventMusic(uid, component.XenomorphTakeoverSound, StationEventMusicType.Xenomorph, component.XenomorphTakeoverSound.Params);
 
         component.WinType = WinType.XenoMinor;
         component.WinConditions.Add(WinCondition.XenoTakeoverStation);

@@ -2,9 +2,7 @@
 
 using Content.Trauma.Common.Weapons.AmmoSelector;
 using JetBrains.Annotations;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.AmmoSelector;
 

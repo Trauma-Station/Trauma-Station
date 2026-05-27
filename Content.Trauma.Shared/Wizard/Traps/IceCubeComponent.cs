@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Traps;
 

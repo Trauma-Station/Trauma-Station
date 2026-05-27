@@ -4,7 +4,6 @@ using Content.Client.UserInterface.Fragments;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.CartridgeLoader;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.CartridgeLoader.Cartridges;
 

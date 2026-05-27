@@ -57,7 +57,7 @@ public sealed partial class PaperSystem : EntitySystem
     {
         if (!string.IsNullOrEmpty(entity.Comp.Content))
         {
-            SetContent(entity, Loc.GetString(entity.Comp.Content));
+            SetContent(entity, Loc.TryGetString(entity.Comp.Content, out var content) ? content : entity.Comp.Content); // Trauma - use TryGetString and fallback to the string itself
         }
     }
 

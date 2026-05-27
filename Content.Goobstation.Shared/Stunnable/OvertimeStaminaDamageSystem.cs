@@ -2,12 +2,14 @@
 
 using Content.Goobstation.Common.Stunnable;
 using Content.Shared.Damage.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Stunnable;
 
 public sealed partial class OvertimeStaminaDamageSystem : EntitySystem
 {
     [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
@@ -19,6 +21,7 @@ public sealed partial class OvertimeStaminaDamageSystem : EntitySystem
 
     private void OnInit(Entity<OvertimeStaminaDamageComponent> ent, ref ComponentInit args)
     {
+        // TODO: an iq too high?
         // UNDER NO CIRCUMSTANCES ALLOW THIS SHIT TO RUN ON CLIENT
         if (_net.IsClient)
         {
@@ -26,7 +29,7 @@ public sealed partial class OvertimeStaminaDamageSystem : EntitySystem
             return;
         }
 
-        ent.Comp.Timer = ent.Comp.Delay;
+        ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.Delay;
         ent.Comp.Damage = ent.Comp.Amount;
     }
 
@@ -34,15 +37,15 @@ public sealed partial class OvertimeStaminaDamageSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        foreach (var overtime in EntityQuery<OvertimeStaminaDamageComponent>())
+        var query = EntityQueryEnumerator<OvertimeStaminaDamageComponent>();
+        var now = _timing.CurTime;
+        while (query.MoveNext(out var uid, out var comp))
         {
-            overtime.Timer -= frameTime;
+            if (now < comp.NextUpdate)
+                continue;
 
-            if (overtime.Timer <= 0)
-            {
-                Update((overtime.Owner, overtime));
-                overtime.Timer = overtime.Delay;
-            }
+            Update((uid, comp));
+            comp.NextUpdate = _timing.CurTime + comp.Delay;
         }
     }
 
@@ -55,6 +58,6 @@ public sealed partial class OvertimeStaminaDamageSystem : EntitySystem
         ent.Comp.Damage -= damage;
 
         if (ent.Comp.Damage <= 0)
-            RemComp<OvertimeStaminaDamageComponent>(ent);
+            RemComp(ent, ent.Comp);
     }
 }

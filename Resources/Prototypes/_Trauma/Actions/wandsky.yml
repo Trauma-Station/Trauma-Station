@@ -1,0 +1,38 @@
+- type: entity
+  parent: BaseAction
+  id: ActionTogglePatrol
+  name: Toggle Patrol
+  description: Toggle patrol on and off.
+  components:
+  - type: Action
+    icon: Interface/AdminNotes/message.png
+  - type: InstantAction
+    event: !type:TogglePatrolActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionCRWaypoint
+  name: Create/Remove Waypoint
+  description: Creates a waypoint at the target location, clicking an existing waypoint will remove it instead.
+  components:
+  - type: Action
+    useDelay: 3
+    icon: Interface/AdminNotes/none_button.png
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Machines/chime.ogg
+  - type: TargetAction
+    range: 200
+    repeat: false
+  - type: WorldTargetAction
+    event: !type:WaypointActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionClearWaypoints
+  name: Clear Waypoints
+  description: Disables patrol and clears all existing waypoints.
+  components:
+  - type: Action
+    icon: Interface/AdminNotes/high_button.png
+  - type: InstantAction
+    event: !type:ClearWaypointsActionEvent

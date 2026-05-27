@@ -397,7 +397,7 @@
     tags:
     - HereticItem
   - type: StaticPrice
-    price: 500 # Trollface
+    price: 250
   - type: CoinFlip
     flippingSpriteState: flip
     flipTime: 1

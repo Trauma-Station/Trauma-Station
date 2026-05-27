@@ -868,6 +868,9 @@
   packetPrototype: OnionRedSeeds
   productPrototypes:
     - FoodOnionRed
+  mutationPrototypes: # Trauma, make red onions not suck
+    - onion
+    - bloonion
   lifespan: 25
   maturation: 8
   production: 6

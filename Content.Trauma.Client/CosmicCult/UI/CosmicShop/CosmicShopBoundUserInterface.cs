@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
-using Robust.Client.UserInterface;
 using Robust.Client.Player;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;

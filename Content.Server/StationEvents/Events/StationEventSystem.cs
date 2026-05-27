@@ -47,7 +47,7 @@ public abstract partial class StationEventSystem<T> : GameRuleSystem<T> where T 
         Filter allPlayersInGame = Filter.Empty().AddWhere(GameTicker.UserHasJoinedGame);
 
         if (stationEvent.StartAnnouncement != null)
-            ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(stationEvent.StartAnnouncement), playSound: false, colorOverride: stationEvent.StartAnnouncementColor);
+            ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame, Loc.TryGetString(stationEvent.StartAnnouncement, out var announcement) ? announcement : stationEvent.StartAnnouncement, playSound: false, colorOverride: stationEvent.StartAnnouncementColor); // Trauma - use Loc.TryGetString
 
         Audio.PlayGlobal(stationEvent.StartAudio, allPlayersInGame, true);
     }

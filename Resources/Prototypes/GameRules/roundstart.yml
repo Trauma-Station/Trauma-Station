@@ -35,6 +35,8 @@
       prob: 0.05
     - id: SubDuoAbductor
       prob: 0.05
+    - id: SubWraith
+      prob: 0.02
     # </Trauma>
 
 - type: entity
@@ -56,6 +58,8 @@
       prob: 0.02
     - id: SubDuoAbductor
       prob: 0.05
+    - id: SubWraith
+      prob: 0.02
     # </Trauma>
 
 - type: entity
@@ -77,6 +81,8 @@
       prob: 0.02
     - id: SubDuoAbductor
       prob: 0.05
+    - id: SubWraith
+      prob: 0.02
     # </Trauma>
 
 - type: entity

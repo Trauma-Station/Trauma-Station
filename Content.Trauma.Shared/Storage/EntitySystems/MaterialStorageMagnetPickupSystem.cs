@@ -7,7 +7,6 @@ using Robust.Shared.Timing;
 using Content.Shared.Examine;   // Frontier
 using Content.Shared.Hands.Components;  // Frontier
 using Content.Shared.Verbs;     // Frontier
-using Robust.Shared.Utility;    // Frontier
 
 namespace Content.Trauma.Shared.Storage.EntitySystems;
 

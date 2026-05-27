@@ -23,7 +23,7 @@
     doAfterDuration: 1.0
 
 - type: entity
-  parent: [BaseRevForgedWeapon, BracingDurability]
+  parent: BaseRevForgedWeapon
   id: RevMace
   name: forged mace
   description: A robust mace, stuns enemies. Knocks the air out of targets and makes them struggle to speak.
@@ -63,7 +63,7 @@
     solution: melee
 
 - type: entity
-  parent: [BaseRevForgedWeapon, KnifeDurability]
+  parent: [BaseRevForgedWeapon, KnifeDurabilitySharpenOnly]
   id: RevSword
   name: forged sword
   description: A two handed sword, deals heavy damage.
@@ -112,7 +112,6 @@
         volume: -8
   - type: Construction
     graph: RevSword
-  # <Trauma>
   - type: Parry
     maxParries: 3
     maxReflects: 0
@@ -122,10 +121,9 @@
       params:
         variation: 0.2
         volume: -11
-  # </Trauma>
 
 - type: entity
-  parent: [BaseRevForgedWeapon, SpearDurability]
+  parent: BaseRevForgedWeapon
   id: RevPitchfork
   name: forged pitchfork
   description: A large pitchfork, can be thrown and has extended melee range.
@@ -161,7 +159,7 @@
     graph: RevPitchfork
 
 - type: entity
-  parent: [BaseRevForgedWeapon, KnifeDurability]
+  parent: [BaseRevForgedWeapon, KnifeDurabilitySharpenOnly]
   id: RevKnife
   name: forged knife
   description: A small forged knife. It is concealable, can be tipped with poison and is usable with a shield.
@@ -243,7 +241,7 @@
     graph: RevKnife
 
 - type: entity
-  parent: [BaseRevMeleeWeapon, MetalToolDurability]
+  parent: BaseRevMeleeWeapon
   id: RevTorch
   name: combat torch
   description: A refined torch mounted with a steel head. Lights enemies on fire when hit.

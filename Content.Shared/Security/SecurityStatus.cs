@@ -14,6 +14,7 @@ namespace Content.Shared.Security;
 /// Search - the person needs to be searched
 /// Perma - the person has been sentenced to permanent imprisonment
 /// Brutalize - the person should be non-lethally beaten
+/// Demote - the person should be demoted
 /// </summary>
 public enum SecurityStatus : byte
 {
@@ -25,6 +26,7 @@ public enum SecurityStatus : byte
     Paroled,
     Discharged,
     // <Trauma>
+    Demote,
     Brutalize,
     Search,
     Perma,

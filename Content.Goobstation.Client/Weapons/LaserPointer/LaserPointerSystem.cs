@@ -6,8 +6,6 @@ using Content.Goobstation.Shared.Weapons.SmartGun;
 using Content.Shared.CombatMode;
 using Content.Shared.Hands.Components;
 using Content.Shared.Wieldable.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;

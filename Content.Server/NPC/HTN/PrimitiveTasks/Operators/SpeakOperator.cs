@@ -88,7 +88,7 @@ public sealed partial class SpeakOperator : HTNOperator
         public sealed partial class SingleSpeakOperatorSpeech : SpeakOperatorSpeech
         {
             [DataField(required: true)]
-            public string Line;
+            public LocId Line; // Trauma - use LocId
         }
 
         public sealed partial class LocalizedSetSpeakOperatorSpeech : SpeakOperatorSpeech

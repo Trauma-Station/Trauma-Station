@@ -1,0 +1,48 @@
+# Circuits
+
+- type: sourcePort
+  id: Circuit1
+  name: signal-port-name-circuit-1
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit2
+  name: signal-port-name-circuit-2
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit3
+  name: signal-port-name-circuit-3
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit4
+  name: signal-port-name-circuit-4
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit5
+  name: signal-port-name-circuit-5
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit6
+  name: signal-port-name-circuit-6
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit7
+  name: signal-port-name-circuit-7
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit8
+  name: signal-port-name-circuit-8
+  description: signal-port-description-circuit-output
+
+# Intercom
+
+- type: sourcePort
+  id: RadioMessage
+  name: signal-port-name-radio-message
+  description: signal-port-description-radio-message

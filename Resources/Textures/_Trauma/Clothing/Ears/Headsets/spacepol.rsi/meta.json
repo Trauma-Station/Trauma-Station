@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Goobstation: https://github.com/Goob-Station/Goob-Station/tree/e1506007baf86fcb6317fa16b752007861568127/Resources/Textures/_Goobstation/Clothing/Ears/Headsets/blueshield.rsi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon_alt"
+    },
+    {
+      "name": "alt-equipped-EARS",
+      "directions": 4
+    }
+  ]
+}
