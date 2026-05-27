@@ -30,4 +30,4 @@
 - type: latheRecipe
   id: MoldMeleeUpgrades
   parent: BaseRevDatachip
-  result: MoldMeleeUpgrades
+  result: RevDropPodMelees

@@ -393,11 +393,6 @@
       path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
       params:
         volume: -8
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
-      params:
-        volume: -8
   - type: Tag
     tags:
     - CombatKnife
@@ -408,10 +403,10 @@
   - type: Sharp
   - type: Utensil
     types:
-      - Knife
+    - Knife
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
   - type: Prying
   - type: UseDelay
     delay: 1
