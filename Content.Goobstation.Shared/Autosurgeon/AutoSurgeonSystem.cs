@@ -71,8 +71,8 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
 
         _popup.PopupClient($"You start up the {name}...", ent, user, PopupType.Medium);
 
-        var ev = new TransferDnaEvent { Donor = user, Recipient = ent };
-        RaiseLocalEvent(user, ref ev);
+        var ev = new TransferDnaEvent { Donor = target, Recipient = ent };
+        RaiseLocalEvent(target, ref ev);
 
         if (_net.IsClient) // Fuck sound networking
             return;
