@@ -16,7 +16,7 @@ public sealed partial class SetWiresPanelSecurity : IGraphAction
     ///     Sets the Examine field on the entity's <see cref="WiresPanelSecurityComponent"/>
     /// </summary>
     [DataField("examine")]
-    public string Examine = string.Empty;
+    public LocId? Examine; // Trauma - LocId, nullable and null by default
 
     /// <summary>
     ///     Sets the WiresAccessible field on the entity's <see cref="WiresPanelSecurityComponent"/>

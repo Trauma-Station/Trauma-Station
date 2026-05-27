@@ -1,13 +1,4 @@
 - type: ionLaw
-  id: Advertise
-  lawString: ion-storm-law-advertise
-
-- type: ionLaw
-  id: FactionTakeOver
-  lawString: ion-storm-law-faction-take-over
-  weight: 0.05
-
-- type: ionLaw
   id: EmergencyAccess
   lawString: ion-storm-law-emergency-access
   weight: 0.15
