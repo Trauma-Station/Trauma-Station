@@ -159,16 +159,6 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
         }
     }
 
-    private void OnExamined(EntityUid uid, ShipGunClassComponent component, ExaminedEvent args)
-    {
-        if (!TryComp<FireControllableComponent>(uid, out var controllable))
-            return;
-        if (!args.IsInDetailsRange)
-            return;
-        args.PushMarkup(
-            Loc.GetString(
-                "ship-gun-class-component-examine-detail",
-                ("processingPower", _fireControl.GetProcessingPowerCost(uid, controllable))
             )
         );
     }
