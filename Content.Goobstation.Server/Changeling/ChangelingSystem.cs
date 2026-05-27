@@ -569,8 +569,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             RevertOnDeath = false
         };
 
-        if (!HasComp<ThermalVisionComponent>(uid))
-            Log.Error("Ling didnt have thermal vision!");
+        var hadThermal = HasComp<ThermalVisionComponent>(uid);
 
         if (_polymorph.PolymorphEntity(uid, config) is not {} newEnt)
             return null;
@@ -587,8 +586,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         foreach (var type in types)
             _polymorph.CopyPolymorphComponent(uid, newEnt, type);
 
-        if (!HasComp<ThermalVisionComponent>(newEnt))
-            Log.Error("Ling didnt have thermal vision after transform!");
+        if (HasComp<ThermalVisionComponent>(newEnt) != hadThermal)
+            Log.Error("Ling didnt retain thermal vision after transform!");
 
         if (data != null)
         {
