@@ -4,8 +4,10 @@ using Content.Trauma.Shared.Wizard.SanguineStrike;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
+public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -14,27 +16,23 @@ public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
         SubscribeLocalEvent<SanguineStrikeComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnShutdown(Entity<SanguineStrikeComponent> ent, ref ComponentShutdown args)
-    {
-        var (uid, comp) = ent;
-
-        if (TerminatingOrDeleted(uid))
-            return;
-
-        if (!TryComp(uid, out SpriteComponent? sprite))
-            return;
-
-        sprite.Color = comp.OldColor;
-    }
-
     private void OnStartup(Entity<SanguineStrikeComponent> ent, ref ComponentStartup args)
     {
         var (uid, comp) = ent;
 
-        if (!TryComp(uid, out SpriteComponent? sprite))
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
         comp.OldColor = sprite.Color;
-        sprite.Color = comp.Color;
+        _sprite.SetColor((uid, sprite), comp.Color);
     }
+
+    private void OnShutdown(Entity<SanguineStrikeComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        _sprite.SetColor(ent.Owner, ent.Comp.OldColor);
+    }
+
 }

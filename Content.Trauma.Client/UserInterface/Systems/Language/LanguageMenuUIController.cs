@@ -83,7 +83,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
     {
         if (_menu is { })
         {
-            _menu.Dispose();
+            _menu.Orphan();
             _menu = null;
         }
 
