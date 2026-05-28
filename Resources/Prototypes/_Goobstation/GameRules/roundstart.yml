@@ -1,52 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# SubGamemodes
-
-- type: entity
-  parent: BaseGameRule
-  id: TraitorSubGamemodesRule
-  components:
-  - type: SubGamemodes
-    rules:
-    - id: SubgamemodeTraitor
-      prob: 0.5
-
 # GameModes
-
-- type: entity
-  parent: BaseGameRule
-  id: Changeling
-  components:
-  - type: ChangelingRule
-  - type: GameRule
-    minPlayers: 15
-  - type: AntagRandomObjectives
-    sets:
-    - groups: ChangelingObjectiveGroups
-    maxDifficulty: 5
-  - type: AntagObjectives
-    objectives:
-    - ChangelingSurviveObjective
-    - ChangelingStealDNAObjective
-    - ChangelingAbsorbObjective
-    - EscapeIdentityObjective
-  - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    agentName: changeling-roundend-name
-    definitions:
-    - prefRoles: [ Changeling ]
-      max: 4
-      playerRatio: 12
-      blacklist:
-        components:
-        - CommandStaff
-      lateJoinAdditional: true
-      mindRoles:
-      - MindRoleChangeling
-  - type: AntagPlayerEffects
-    effects:
-    - !type:NestedEffect
-      proto: ChangelingSkills
 
 - type: entity
   parent: BaseTraitorRule
@@ -64,20 +18,13 @@
       min: 465
       max: 665 # Delay is so the heads help their department get set up.
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ Traitor ]
-      max: 2
+    antags:
+    - !type:LinearAntagCount
+      proto: CorporateAgent
+      range:
+        min: 1
+        max: 2
       playerRatio: 25
-      jobBlacklist: [ NanotrasenRepresentative ]
-      whitelist:
-        components:
-        - CommandStaff
-      blacklist:
-        components:
-        - Condemned # Stops the NTR from rolling it
-      lateJoinAdditional: true
-      mindRoles:
-      - MindRoleTraitor
 
 - type: entity
   parent: BaseTraitorRule
@@ -86,19 +33,14 @@
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    definitions:
-    - prefRoles: [ Traitor ]
-      max: 3
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      proto: Traitor
+      range:
+        min: 1
+        max: 3
       playerRatio: 15
-      blacklist:
-        components:
-        - CommandStaff
-        - AntagImmune
-        - Changeling
-      lateJoinAdditional: true
-      mindRoles:
-      - MindRoleTraitor
 
 - type: entity
   parent: Changeling
@@ -107,18 +49,13 @@
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    agentName: changeling-roundend-name
-    definitions:
-    - prefRoles: [ Changeling ]
-      max: 2
+    antags:
+    - !type:LinearAntagCount
+      proto: Changeling
+      range:
+        min: 1
+        max: 2
       playerRatio: 15
-      blacklist:
-        components:
-        - CommandStaff
-      lateJoinAdditional: true
-      mindRoles:
-      - MindRoleTraitor
 
 - type: entity
   parent: BaseNukeopsRule
@@ -130,88 +67,28 @@
     mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
-    definitions:
-    - prefRoles: [ NukeopsCommander ]
-      fallbackRoles: [ Nukeops, NukeopsMedic ]
-      spawnerPrototype: SpawnPointNukeopsCommander
-      playerRatio: 15
-      startingGear: SyndicateCommanderGearFull
-      unequipOldGear: true
-      components:
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - NamesSyndicateElite
-        nameFormat: name-format-nukie-commander
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      mindRoles:
-      - MindRoleNukeopsCommander
-    - prefRoles: [ NukeopsMedic ]
-      fallbackRoles: [ Nukeops, NukeopsCommander ]
-      spawnerPrototype: SpawnPointNukeopsMedic
-      playerRatio: 15
-      startingGear: SyndicateOperativeMedicFull
-      unequipOldGear: true
-      components:
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - NamesSyndicateElite
-        nameFormat: name-format-nukie-agent
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: SurgerySpeedModifier # shitmed
-        speedModifier: 2
-      mindRoles:
-      - MindRoleNukeopsMedic
-    - prefRoles: [ Nukeops ]
-      fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
-      spawnerPrototype: SpawnPointNukeopsOperative
-      max: 10
+    antags:
+    - !type:FixedAntagCount
+      proto: NukeopsCommander
+    - !type:FixedAntagCount
+      proto: NukeopsMedic
+    - !type:LinearAntagCount
+      proto: NukeopsOperative
+      range:
+        min: 1
+        max: 8
       playerRatio: 20
-      startingGear: SyndicateOperativeGearFull
-      unequipOldGear: true
-      components:
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - NamesSyndicateElite
-        nameFormat: name-format-nukie-operator
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      mindRoles:
-      - MindRoleNukeops
 
 - type: entity
+  parent: Revolutionary
   id: CalmRevs # For Dual Antag Gamemodes
-  parent: BaseGameRule
   components:
   - type: GameRule
     minPlayers: 30
-  - type: RevolutionaryRule
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    definitions:
-    - prefRoles: [ HeadRev ]
-      max: 1
-      playerRatio: 20
-      blacklist:
-        components:
-        - CommandStaff
-      briefing:
-        text: head-rev-role-greeting
-        color: CornflowerBlue
-        sound: "/Audio/Ambience/Antag/headrev_start.ogg"
-      startingGear: HeadRevGear
-      components:
-      - type: Revolutionary
-      - type: HeadRevolutionary
-      mindRoles:
-      - MindRoleHeadRevolutionary
+    antags:
+    - !type:FixedAntagCount
+      proto: HeadRev
 
 # Blob
 - type: entity
@@ -221,29 +98,18 @@
   - type: BlobRule
 
 - type: entity
+  parent: [ BlobRule, BaseRoundstartAntagRule ]
   id: BlobGameMode
-  parent: BlobRule
   components:
   - type: GameRule
     minPlayers: 40
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    definitions:
-    - prefRoles: [ Blob ]
-      allowNonHumans: true
-      blacklist:
-        components:
-        - CommandStaff
-        - AntagImmune
-      briefing:
-        text: blob-carrier-role-greeting
-        color: Plum
-        sound: /Audio/Announcements/bloblarm.ogg
-      mindRoles:
-      - MindRoleBlob
+    antags:
+    - !type:FixedAntagCount
+      proto: Blob
 
 - type: entity
-  parent: BaseNukeopsRule
+  parent: [ BaseNukeopsRule, BaseRoundstartAntagRule ]
   id: Honkops
   components:
   - type: GameRule
@@ -258,76 +124,20 @@
   - type: LoadMapRule
     mapPath: /Maps/_Trauma/Nonstations/nukieplanet-honkops.yml
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn
-    definitions:
-    - prefRoles: [ NukeopsCommander ]
-      fallbackRoles: [ Nukeops, NukeopsMedic ]
-      spawnerPrototype: SpawnPointNukeopsCommander
-      startingGear: SyndicateCommanderGearFullHonkops
-      roleLoadout:
-      - RoleSurvivalNukieHonkops
-      components:
-      # clown
-      - type: Clumsy
-      - type: SleepEmitSound
-        snore: /Audio/Voice/Misc/silly_snore.ogg
-        interval: 10
-      - type: SpeechFontOverride
-        font: LDFComicSans
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - NamesHonkopsPrefix
-        - NamesHonkopsElite
-        nameFormat: name-format-standard
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      mindRoles:
-      - MindRoleNukeopsCommander
-    - prefRoles: [ NukeopsMedic ]
-      fallbackRoles: [ Nukeops, NukeopsCommander ]
-      spawnerPrototype: SpawnPointNukeopsMedic
-      startingGear: SyndicateOperativeMedicFullHonkops
-      roleLoadout:
-      - RoleSurvivalNukieHonkops
-      components:
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - NamesHonkopsPrefix
-        - NamesHonkopsElite
-        nameFormat: name-format-standard
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: SurgerySpeedModifier # shitmed
-        speedModifier: 2
-      mindRoles:
-      - MindRoleNukeopsMedic
-    - prefRoles: [ Nukeops ]
-      fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
-      spawnerPrototype: SpawnPointNukeopsOperative
-      max: 5
-      playerRatio: 16 # Goobstation
-      startingGear: SyndicateOperativeGearFullHonkops
-      roleLoadout:
-      - RoleSurvivalNukieHonkops
-      components:
-      - type: NukeOperative
-      - type: RandomMetadata
-        nameSegments:
-        - NamesHonkopsPrefix
-        - NamesHonkopsElite
-        nameFormat: name-format-standard
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      mindRoles:
-      - MindRoleNukeops
+    antags:
+    - !type:FixedAntagCount
+      proto: HonkopsCommander
+    - !type:FixedAntagCount
+      proto: HonkopsMedic
+    - !type:LinearAntagCount
+      proto: HonkopsOperative
+      range:
+        min: 1
+        max: 5
+      playerRatio: 16
 
 - type: entity
-  parent: BaseGameRule
+  parent: [ BaseGameRule, BaseRoundstartAntagRule ]
   id: Devil
   components:
   - type: DevilRule
@@ -338,15 +148,7 @@
     - DevilContractObjective
     - DevilWeightObjective
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
     agentName: devil-roundend-name
-    definitions:
-    - prefRoles: [ Devil ]
-      max: 1
-      playerRatio: 40 # from 20 --> 40 , makes it less likely to spawn (Fuck devils)
-      jobBlacklist: [ Chaplain, Mime, ChiefEngineer, ResearchDirector, Quartermaster ] #chaplain is obvious, mime can't write.
-      mindRoles:
-      - DevilMindRole
-      mindComponents:
-      - type: Evil
-      startingGear: DevilStartingGear
+    antags:
+    - !type:FixedAntagCount
+      proto: Devil

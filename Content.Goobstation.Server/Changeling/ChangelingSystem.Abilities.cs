@@ -23,7 +23,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
-using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
@@ -35,7 +35,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
@@ -51,7 +51,7 @@ namespace Content.Goobstation.Server.Changeling;
 
 public sealed partial class ChangelingSystem
 {
-    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private WeldableSystem _weldable = default!; // for biodegrade unweld
     [Dependency] private GibbingSystem _gibbing = default!;
 
@@ -97,7 +97,6 @@ public sealed partial class ChangelingSystem
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionBiodegradeEvent>(OnBiodegrade);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionChameleonSkinEvent>(OnChameleonSkin);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionAdrenalineReservesEvent>(OnAdrenalineReserves);
-        SubscribeLocalEvent<ChangelingIdentityComponent, ActionFleshmendEvent>(OnHealUltraSwag);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionLastResortEvent>(OnLastResort);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionLesserFormEvent>(OnLesserForm);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionVoidAdaptEvent>(OnVoidAdapt);
@@ -292,7 +291,7 @@ public sealed partial class ChangelingSystem
         if (!TryComp<EdibleComponent>(target, out var edible))
             return;
 
-        if (!TryComp<SolutionContainerManagerComponent>(target, out var solMan))
+        if (!TryComp<SolutionManagerComponent>(target, out var solMan))
             return;
 
         var totalFood = FixedPoint2.New(0);
@@ -335,7 +334,7 @@ public sealed partial class ChangelingSystem
     {
         if (args.Cancelled ||
             args.Target is not {} target ||
-            !TryComp<SolutionContainerManagerComponent>(target, out var solMan))
+            !TryComp<SolutionManagerComponent>(target, out var solMan))
             return;
 
         var totalFood = FixedPoint2.New(0);
@@ -664,9 +663,9 @@ public sealed partial class ChangelingSystem
             }
         }
 
-        if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.Container.ContainedEntities.Count > 0)
+        if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.Container is { } container && container.ContainedEntities.Count > 0)
         {
-            var bola = ensnareable.Container.ContainedEntities[0];
+            var bola = container.ContainedEntities[0];
             // Yes this is dumb, but trust me this is the best way to do this. Bola code is fucking awful.
             _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, 0, new EnsnareableDoAfterEvent(), uid, uid, bola));
             QueueDel(bola);
@@ -693,15 +692,9 @@ public sealed partial class ChangelingSystem
                 _puddle.TrySplashSpillAt(puller.Value, Transform((EntityUid) puller).Coordinates, soln, out _);
                 _stun.KnockdownOrStun(puller.Value, TimeSpan.FromSeconds(1.5));
 
-                if (!TryComp(puller.Value, out StatusEffectsComponent? status))
+                var duration = TimeSpan.FromSeconds(2f);
+                if (_status.TryUpdateStatusEffectDuration(puller.Value, BlindnessSystem.BlindingStatusEffect, duration))
                     return;
-
-                _statusEffects.TryAddStatusEffect<TemporaryBlindnessComponent>(puller.Value,
-                    "TemporaryBlindness",
-                    TimeSpan.FromSeconds(2f),
-                    true,
-                    status);
-                return;
             }
         }
         _puddle.TrySplashSpillAt(uid, Transform(uid).Coordinates, soln, out _);
@@ -771,17 +764,6 @@ public sealed partial class ChangelingSystem
             Popup.PopupEntity(Loc.GetString("changeling-inject-fail"), uid, uid);
         }
 
-        args.Handled = true;
-    }
-
-    // john space made me do this
-    public void OnHealUltraSwag(EntityUid uid, ChangelingIdentityComponent comp, ref ActionFleshmendEvent args)
-    {
-        _statusEffects.TryAddStatusEffect<FleshmendComponent>(uid,
-                    args.StatusID,
-                    args.Duration,
-                    true);
-        Popup.PopupEntity(Loc.GetString("changeling-fleshmend"), uid, uid);
         args.Handled = true;
     }
 

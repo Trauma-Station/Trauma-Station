@@ -24,8 +24,9 @@
     mode: SnapgridCenter
   components:
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: Biological
   - type: Appearance
   - type: PlacementReplacement
     key: walls

@@ -5,16 +5,15 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 5h # Trauma, was 10
-    # - !type:DepartmentTimeRequirement # Trauma
-    #   department: Security
-    #   time: 5h
-    #   inverted: true # stop playing intern if you're good at security!
+      time: 10h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 5h
+      inverted: true # stop playing intern if you're good at security!
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Security
   access:
   - Security
@@ -25,9 +24,9 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # goobstation
+  - !type:AddComponentSpecial # Trauma
     components:
-      - type: SecurityStaff
+    - type: SecurityStaff
 
 - type: startingGear
   id: SecurityCadetGear

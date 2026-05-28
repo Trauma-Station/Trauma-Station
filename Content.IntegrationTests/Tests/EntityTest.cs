@@ -20,7 +20,7 @@ namespace Content.IntegrationTests.Tests
     [TestOf(typeof(EntityUid))]
     public sealed class EntityTest : GameTest
     {
-        private static readonly ProtoId<EntityCategoryPrototype> SpawnerCategory = "Spawner";
+        private static readonly HashSet<ProtoId<EntityCategoryPrototype>> IgnoredCategories = ["Spawner", "Debug"];
 
         public override PoolSettings PoolSettings => new()
         {
@@ -61,7 +61,6 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // randomly spawns things...
                 .Where(p => !p.Components.ContainsKey("Area"))
                 .Where(p => !p.Components.ContainsKey("StatusEffect")) // nonsense to just spawn it 4 no raisin, use an actual test
-                .Where(p => !p.Components.ContainsKey("GasTank")) // maxcaps blow up duh
                 // </Trauma>
                 .Select(p => p.ID)
                 .ToList();
@@ -186,7 +185,6 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("LabyrinthPortal")) // spawns things
                     .Where(p => !p.Components.ContainsKey("Area")) // deletes itself if spawned in space
                     .Where(p => !p.Components.ContainsKey("StatusEffect")) // doesn't make sense to spawn not attached to anything
-                    .Where(p => !p.Components.ContainsKey("GasTank")) // maxcaps blow up duh
                     // </Trauma>
                     .Select(p => p.ID)
                     .ToList();
@@ -387,19 +385,17 @@ namespace Content.IntegrationTests.Tests
                 "LabyrinthPortal", // it randomly spawns things
                 "Area", // map tests spawn ~every area anyway, this fails from trying to spawn an area in space
                 "StatusEffect", // doesnt make sense to spawn unattached, fails test with weather schedulers
-                "GasTank", // maxcaps blow up duh
                 "AshJaunt", // spawns jaunt end animation
                 // </Trauma>
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
 
-            // <Trauma> - unroll linq slop, don't need to check abstract, check spawner category pointer instead of strings
+            // <Trauma> - unroll linq slop, don't need to check abstract
             var protoIds = new List<EntProtoId>();
-            var spawnerCategory = server.ProtoMan.Index(SpawnerCategory);
             foreach (var p in server.ProtoMan.EnumeratePrototypes<EntityPrototype>())
             {
-                if (pair.IsTestPrototype(p) || excluded.Any(p.Components.ContainsKey) || p.Categories.Contains(spawnerCategory))
+                if (pair.IsTestPrototype(p) || excluded.Any(p.Components.ContainsKey) || p.Categories.Any(id => IgnoredCategories.Contains(id)))
                     continue;
 
                 protoIds.Add(p.ID);

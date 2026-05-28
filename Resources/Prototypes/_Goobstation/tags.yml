@@ -574,9 +574,6 @@
   id: MakeshiftShield
 
 - type: Tag
-  id: MolotovConstruction
-
-- type: Tag
   id: IgnitionSource
 
 - type: Tag

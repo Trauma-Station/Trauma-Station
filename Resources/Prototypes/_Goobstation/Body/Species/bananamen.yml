@@ -163,17 +163,13 @@
   suffix: lungs
   description: "A very odd-looking banana, it looks flabby enough to store air or something."
   components:
-  - type: SolutionContainerManager
-    solutions:
-      Lung:
-        maxVol: 100
-        canReact: false
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 4
-        - ReagentId: Vitamin
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: Vitamin
+        Quantity: 2
 
 - type: entity
   parent: [ OrganBananaMenInternal, OrganHumanHeart ]

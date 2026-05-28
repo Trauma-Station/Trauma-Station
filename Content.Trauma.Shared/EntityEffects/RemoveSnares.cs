@@ -23,10 +23,13 @@ public sealed partial class RemoveSnaresEffectSystem : EntityEffectSystem<Ensnar
 
     protected override void Effect(Entity<EnsnareableComponent> ent, ref EntityEffectEvent<RemoveSnares> args)
     {
+        if (ent.Comp.Container is not { } container)
+            return;
+
         var user = args.User ?? ent.Owner;
 
         // snare api is dogshit and i cbf to improve it
-        foreach (var bola in ent.Comp.Container.ContainedEntities)
+        foreach (var bola in container.ContainedEntities)
         {
             _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, 0, new EnsnareableDoAfterEvent(), user, user, bola));
             _transform.DropNextTo(bola, user);

@@ -6,18 +6,16 @@
   setPreference: false
   startingGear: CentcommGear
   icon: "JobIconNanotrasen"
-  supervisors: job-supervisors-centcom # Goobstation
-  canBeAntag: false
-  requirements:
+  supervisors: job-supervisors-centcom # Trauma - hos is below central command, not above them
+  requirements: # Trauma
   - !type:AgeRequirement
     requiredAge: 21
   accessGroups:
   - AllAccess
   access:
+  - NanotrasenRepresentative # Trauma
   - CentralCommand
-  # Goobstation
-  - NanotrasenRepresentative
-  special: # Goobstation
+  special: # Trauma - all the implants
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
 

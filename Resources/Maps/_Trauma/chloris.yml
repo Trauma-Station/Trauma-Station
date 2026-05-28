@@ -17825,188 +17825,6 @@ entities:
     - type: TileHistory
       chunkHistory: {}
     - type: ExplosionAirtightGrid
-  - uid: 4
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 3
-    - type: Solution
-      solution:
-        maxVol: 20
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Lexorin
-          Quantity: 20
-    - type: ContainedSolution
-      containerName: food
-      container: 3
-  - uid: 10
-    components:
-    - type: MetaData
-      name: solution - pen
-    - type: Transform
-      parent: 9
-    - type: Solution
-      solution:
-        maxVol: 15
-        name: pen
-        reagents:
-        - data: []
-          ReagentId: Pax
-          Quantity: 15
-    - type: ContainedSolution
-      containerName: pen
-      container: 9
-  - uid: 12
-    components:
-    - type: MetaData
-      name: solution - injector
-    - type: Transform
-      parent: 11
-    - type: Solution
-      solution:
-        maxVol: 15
-        name: injector
-        reagents:
-        - data: []
-          ReagentId: Haloperidol
-          Quantity: 15
-    - type: ContainedSolution
-      containerName: injector
-      container: 11
-  - uid: 22
-    components:
-    - type: MetaData
-      name: solution - beaker
-    - type: Transform
-      parent: 21
-    - type: Solution
-      solution:
-        maxVol: 30
-        name: beaker
-        reagents:
-        - data: []
-          ReagentId: Sedin
-          Quantity: 20
-    - type: ContainedSolution
-      containerName: beaker
-      container: 21
-  - uid: 24
-    components:
-    - type: MetaData
-      name: solution - beaker
-    - type: Transform
-      parent: 23
-    - type: Solution
-      solution:
-        maxVol: 30
-        name: beaker
-        reagents:
-        - data: []
-          ReagentId: GreyMatter
-          Quantity: 30
-    - type: ContainedSolution
-      containerName: beaker
-      container: 23
-  - uid: 26
-    components:
-    - type: MetaData
-      name: solution - drink
-    - type: Transform
-      parent: 25
-    - type: Solution
-      solution:
-        maxVol: 30
-        name: drink
-        reagents:
-        - data: []
-          ReagentId: GreyMatter
-          Quantity: 30
-    - type: ContainedSolution
-      containerName: drink
-      container: 25
-  - uid: 76
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 75
-    - type: Solution
-      solution:
-        maxVol: 50
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Vitamin
-          Quantity: 13
-        - data: []
-          ReagentId: Nutriment
-          Quantity: 37
-    - type: ContainedSolution
-      containerName: food
-      container: 75
-  - uid: 78
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 77
-    - type: Solution
-      solution:
-        maxVol: 20
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Nutriment
-          Quantity: 10
-        - data: []
-          ReagentId: Vitamin
-          Quantity: 10
-    - type: ContainedSolution
-      containerName: food
-      container: 77
-  - uid: 80
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 79
-    - type: Solution
-      solution:
-        maxVol: 50
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Fat
-          Quantity: 25
-        - data: []
-          ReagentId: UncookedAnimalProteins
-          Quantity: 25
-    - type: ContainedSolution
-      containerName: food
-      container: 79
-  - uid: 82
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 81
-    - type: Solution
-      solution:
-        maxVol: 20
-        name: food
-        reagents:
-        - data: []
-          ReagentId: UncookedAnimalProteins
-          Quantity: 10
-        - data: []
-          ReagentId: Fat
-          Quantity: 10
-    - type: ContainedSolution
-      containerName: food
-      container: 81
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 160
@@ -106665,18 +106483,15 @@ entities:
     components:
     - type: Transform
       parent: 8
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - pen
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Pax
+          Quantity: 15
     - type: Tag
       tags: []
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@pen: !type:ContainerSlot
-          ent: 10
 - proto: ChemicalPayload
   entities:
   - uid: 17178
@@ -106798,14 +106613,11 @@ entities:
     - type: Tag
       tags:
       - CentrifugeCompatible
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 22
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Sedin
+          Quantity: 20
   - uid: 23
     components:
     - type: Transform
@@ -106814,16 +106626,13 @@ entities:
     - type: Tag
       tags:
       - CentrifugeCompatible
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: GreyMatter
+          Quantity: 30
     - type: SolutionTransfer
       transferAmount: 25
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 24
   - uid: 1929
     components:
     - type: Transform
@@ -131020,14 +130829,11 @@ entities:
     - type: Transform
       pos: 119.575,90.61887
       parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - drink
-    - type: ContainerContainer
-      containers:
-        solution@drink: !type:ContainerSlot
-          ent: 26
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: GreyMatter
+          Quantity: 30
   - uid: 21224
     components:
     - type: Transform
@@ -238744,20 +238550,11 @@ entities:
       parent: 2
     - type: Pill
       pillType: 11
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          temperature: 293.15
-          canReact: True
-          maxVol: 0
-          name: food
-          reagents: []
-      containers:
-      - food
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 4
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Lexorin
+          Quantity: 20
 - proto: PillCanister
   entities:
   - uid: 14
@@ -252777,14 +252574,6 @@ entities:
     - type: Transform
       pos: 94.32815,147.7232
       parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - food
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 76
 - proto: ReagentContainerCornmealSmall
   entities:
   - uid: 81
@@ -252792,14 +252581,6 @@ entities:
     - type: Transform
       pos: 94.39065,147.44196
       parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - food
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 82
   - uid: 38958
     components:
     - type: Transform
@@ -252812,14 +252593,6 @@ entities:
     - type: Transform
       pos: 94.6719,147.77008
       parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - food
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 80
   - uid: 38959
     components:
     - type: Transform
@@ -252832,14 +252605,6 @@ entities:
     - type: Transform
       pos: 94.71877,147.52008
       parent: 2
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - food
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 78
   - uid: 38960
     components:
     - type: Transform
@@ -271958,16 +271723,13 @@ entities:
       tags:
       - Syringe
       - SyringeGunAmmo
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - injector
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Haloperidol
+          Quantity: 15
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@injector: !type:ContainerSlot
-          ent: 12
   - uid: 2690
     components:
     - type: Transform

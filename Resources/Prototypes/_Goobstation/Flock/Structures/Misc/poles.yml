@@ -12,6 +12,7 @@
   - type: InteractionOutline
   - type: Damageable
     damageModifierSet: RGlass
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:

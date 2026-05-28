@@ -10,7 +10,6 @@
   setPreference: false
   startingGear: ConquestGear
   supervisors: job-supervisors-null
-  canBeAntag: false
   requirements:
   - !type:AgeRequirement
     requiredAge: 21
@@ -44,7 +43,6 @@
   startingGear: GovernmentManGear
   icon: "JobIconLambda"
   supervisors: job-supervisors-null
-  canBeAntag: false
   requirements:
   - !type:AgeRequirement
     requiredAge: 21
@@ -88,7 +86,6 @@
   startingGear: SyndicateHighCommanderGearFull
   icon: "JobIconSyndicate"
   supervisors: job-supervisor-syndicate
-  canBeAntag: true
   requirements:
   - !type:AgeRequirement
     requiredAge: 21
@@ -140,7 +137,6 @@
   startingGear: MercenaryCaptainGear
   icon: "JobIconSyndicate"
   supervisors: job-supervisors-credits
-  canBeAntag: true
   requirements:
   - !type:AgeRequirement
     requiredAge: 21

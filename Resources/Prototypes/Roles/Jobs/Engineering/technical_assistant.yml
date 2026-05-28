@@ -6,14 +6,14 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 1h
-    # - !type:DepartmentTimeRequirement # Trauma
-    #   department: Engineering
-    #   time: 5h
-    #   inverted: true # stop playing intern if you're good at engineering!
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 5h
+      inverted: true # stop playing intern if you're good at engineering!
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
-  guides: # goobstation
+  guides: # Trauma
   - Construction
   - Power
   - Networking

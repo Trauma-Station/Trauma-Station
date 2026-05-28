@@ -12,8 +12,9 @@
     channels:
     - Dragonmind
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Dragon
+  - type: Injurable
+    damageContainer: Biological
   - type: NightVision
     color: "#808080"
     activateSound: null
@@ -137,7 +138,6 @@
   - type: StatusEffects # Overwriting basesimplemob to remove flash, getting flashed as dragon just feelsbad
     allowed:
     - Electrocution
-    - TemporaryBlindness
     - Pacified
     - Adrenaline
   - type: Temperature

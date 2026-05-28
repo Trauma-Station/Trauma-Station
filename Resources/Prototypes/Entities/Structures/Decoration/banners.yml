@@ -43,6 +43,7 @@
         - BulletImpassable
   - type: InteractionOutline
   - type: Damageable
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:

@@ -118,8 +118,9 @@
     proto: PuddleSpaceLube
     predicted: true
   - type: Damageable
-    damageContainer: ClowncarDamageContainer
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: ClowncarDamageContainer
   - type: Jukebox
   - type: ActivatableUI
     key: enum.JukeboxUiKey.Key

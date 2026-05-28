@@ -1,0 +1,17 @@
+- type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentGrenadier
+  name: syndicate grenadier
+  components:
+  - type: Loadout
+    prototypes: [ SyndicateReinforcementGrenadier ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+
+- type: entity
+  parent: MobHumanSyndicateAgent
+  id: MobHumanSyndicateAgentHitman
+  name: syndicate hitman
+  components:
+  - type: Loadout
+    prototypes: [ SyndicateReinforcementHitman ]
+    roleLoadout: [ RoleSurvivalSyndicate ]

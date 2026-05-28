@@ -34,7 +34,7 @@ public sealed partial class GhostRoleComponent : Component
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
     public string RoleName
     {
-        get => Loc.GetString(_roleName);
+        get => Loc.TryGetString(_roleName, out var name) ? name : _roleName; // Trauma - TryGetString, systems may set it to non-loc strings
         set
         {
             _roleName = value;
@@ -46,7 +46,7 @@ public sealed partial class GhostRoleComponent : Component
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
     public string RoleDescription
     {
-        get => Loc.GetString(_roleDescription);
+        get => Loc.TryGetString(_roleDescription, out var desc) ? desc : _roleDescription; // Trauma - TryGetString, systems may set it to non-loc strings
         set
         {
             _roleDescription = value;
@@ -58,7 +58,7 @@ public sealed partial class GhostRoleComponent : Component
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // FIXME Friends
     public string RoleRules
     {
-        get => Loc.GetString(_roleRules);
+        get => Loc.TryGetString(_roleRules, out var rules) ? rules : _roleRules; // Trauma - TryGetString, systems may set it to non-loc strings
         set
         {
             _roleRules = value;

@@ -7,13 +7,13 @@
   - type: Sprite
     sprite: _Goobstation/Wizard/Objects/vials.rsi
     state: vialtickles
-  - type: SolutionContainerManager
-    solutions:
-      liquid:
-        maxVol: 15
-        reagents:
-        - ReagentId: Laughter
-          Quantity: 15
+  - type: Solution
+    id: liquid
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Laughter
+        Quantity: 15
   - type: ExaminableSolution
     solution: liquid
   - type: Item
@@ -23,6 +23,7 @@
       types:
         Blunt: 5
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -55,13 +56,12 @@
   components:
   - type: Sprite
     state: vial
-  - type: SolutionContainerManager
-    solutions:
-      liquid:
-        maxVol: 15
-        reagents:
-        - ReagentId: Blood
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Blood
+        Quantity: 15
   - type: Destructible
     thresholds:
     - trigger:

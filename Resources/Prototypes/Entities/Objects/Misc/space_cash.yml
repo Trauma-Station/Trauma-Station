@@ -21,6 +21,7 @@
     normalState: fire
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
   - type: Destructible
     thresholds:
     - trigger:
@@ -38,13 +39,13 @@
     flavors:
     - paper
   - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 1
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 1
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 1
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 1
   - type: Tag
     tags:
     - Paper # Moth food

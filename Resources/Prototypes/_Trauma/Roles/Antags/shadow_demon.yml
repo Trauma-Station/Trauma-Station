@@ -3,3 +3,20 @@
   name: roles-antag-shadow-demon-name
   antagonist: true
   objective: roles-antag-shadow-demon-objective
+
+- type: antagSpecifier
+  id: ShadowDemon
+  spawnerPrototype: SpawnPointGhostShadowDemon
+  mindRoles: [ MindRoleShadowDemon ]
+  briefing:
+    text: shadow-demon-role-greeting
+    color: Red
+    sound: /Audio/_Trauma/Mobs/ShadowDemon/briefing/shadowdemonbriefing.ogg
+  components:
+  - type: RandomMetadata  # Left as is since they are demonic names
+    nameSegments:
+    - NamesSlaughterTitle
+    - NamesSlaughter
+    nameFormat: name-format-slaughter
+  - type: LightImmunity # Grants temporary light immunity so it survives AntagRandomSpawn | Remove once we get better spawns
+    duration: 20

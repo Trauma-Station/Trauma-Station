@@ -12,7 +12,6 @@
   startingGear: SecurityClownGear
   icon: "JobIconSecurityClown"
   supervisors: job-supervisors-security
-  canBeAntag: false
   setPreference: false
   access:
   - Security

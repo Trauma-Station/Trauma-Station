@@ -23,7 +23,7 @@
     doAfterDuration: 1.0
 
 - type: entity
-  parent: BaseRevForgedWeapon
+  parent: [ BaseRevForgedWeapon, SolutionDart ]
   id: RevMace
   name: forged mace
   description: A robust mace, stuns enemies. Knocks the air out of targets and makes them struggle to speak.
@@ -48,12 +48,7 @@
   - type: MeleeThrowOnHit
     distance: 0.3
     speed: 1
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 1
   - type: SolutionRegeneration
-    solution: melee
     generated:
       reagents:
       - ReagentId: MuteToxin
@@ -215,10 +210,10 @@
         Slash: 5
   - type: ThrowingAngle
     angle: 225
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 3
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 3
   - type: MeleeChemicalInjector
     transferAmount: 3
     solution: melee

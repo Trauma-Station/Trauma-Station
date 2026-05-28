@@ -10,6 +10,26 @@
     time: 1h
   creditImage: /Textures/_Trauma/EndCredits/Antags/traitor.png # Trauma
 
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseTraitor
+  # <Trauma>
+  blacklist:
+    components:
+    - AntagImmune
+    - Changeling
+  # </Trauma>
+
+- type: antagSpecifier
+  parent: BaseTraitor
+  id: Traitor
+  prefRoles:
+  - Traitor
+  # Trauma - removed blacklist copy, its inherited
+  mindRoles:
+  - MindRoleTraitor
+
 - type: antag
   id: TraitorSleeper
   name: roles-antag-syndicate-agent-sleeper-name
@@ -20,6 +40,23 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 1h
+
+- type: antagSpecifier
+  parent: BaseTraitor
+  id: TraitorSleeper
+  prefRoles:
+  - TraitorSleeper
+  mindRoles:
+  - MindRoleTraitorSleeper
+
+- type: antagSpecifier
+  parent: BaseTraitor
+  id: TraitorReinforcement
+  prefRoles:
+  - Traitor
+  - GenericTeamAntagonist # Matters for Antag bans.
+  mindRoles:
+  - MindRoleTraitorReinforcement
 
 # Syndicate Operative Outfit - Monkey
 - type: startingGear
@@ -49,57 +86,67 @@
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackSyndicate
     shoes: ClothingShoesBootsSyndieFilled
+    # <Trauma>
+    id: SyndiPDA
+    ears: ClothingHeadsetAltSyndicate
+    # </Trauma>
     gloves: ClothingHandsGlovesColorBlack
 
 - type: startingGear
+  parent: SyndicateOperativeClothing # Trauma
   id: SyndicateReinforcementMedic
   equipment:
-    jumpsuit: ClothingUniformJumpsuitOperative
-    shoes: ClothingShoesColorRed
-    gloves: ClothingHandsGlovesLatex
-    head: ClothingHeadHatSurgcapPurple
-    id: VisitorPDA
-    belt: ClothingBeltMedicalFilled
-    back: ClothingBackpackDuffelMedical
-    ears: ClothingHeadsetMedical
-    eyes: ClothingEyesHudMedical
-    pocket1: HandheldHealthAnalyzer
-    pocket2: PillCanisterBicaridine
+    # <Trauma>
+    eyes: ClothingEyesHudSyndicateAgent
+    id: SyndiMedicPDA
+    gloves: ClothingHandsGlovesNitrile
+    pocket1: WeaponPistolViper
   inhand:
-    - MedkitCombatFilled
+    - ClothingBackpackDuffelSyndicateFilledMedical
   storage:
     back:
-    - Defibrillator
-    - CigPackSyndicate
-    - UniformScrubsColorPurple
-    - ChemistryBottleToxin
-    - WeaponPistolViper
-    - Syringe
-    - Syringe
+    - MedkitCombatFilled
+    - CigPackSyndicate # 1
+    - CigPackSyndicate # 2
+    - InterdyneFlippo
+    - CombatMedipen # 1
+    # </Trauma>
 
 - type: startingGear
+  parent: SyndicateOperativeClothing # Trauma
   id: SyndicateReinforcementSpy
   equipment:
-    jumpsuit: ClothingUniformJumpsuitOperative
-    back: ClothingBackpack
-    shoes: ClothingShoesColorBlack
+    # <Trauma>
     gloves: ClothingHandsGlovesColorBlack
-    pocket1: WeaponPistolViper
-    pocket2: VoiceMaskImplanter
+    pocket1: WeaponPistolCobra
   inhand:
     - ClothingBackpackChameleonFillAgent
-- type: startingGear
-  id: SyndicateReinforcementThief
-  parent: SyndicateOperativeClothing
-  equipment:
-    pocket1: WeaponPistolViper
-    pocket2: MagazinePistolHighCapacity
-  inhand:
-    - ToolboxSyndicateFilled
   storage:
     back:
+    - VoiceMaskImplanter
+    - MagazinePistolCaselessRifle # 1
+    - MagazinePistolCaselessRifle # 2
+    - RadioJammer
+    - ChameleonProjector
+    # </Trauma>
+
+- type: startingGear
+  id: SyndicateReinforcementThief
+  # <Trauma>
+  parent: SyndicateOperativeClothing
+  equipment:
+    shoes: ClothingShoesBootsCombatFilled
+    gloves: ClothingHandsChameleonThief
+    pocket1: WeaponPistolViper
+  storage:
+    back:
+    - MagazinePistolHighCapacity # 1
+    - MagazinePistolHighCapacity # 2
     - SyndicateJawsOfLife
     - CameraBug
+    - Fulton
+    - FultonBeacon
+  # </Trauma>
 
 #Syndicate Operative Outfit - Basic
 - type: startingGear

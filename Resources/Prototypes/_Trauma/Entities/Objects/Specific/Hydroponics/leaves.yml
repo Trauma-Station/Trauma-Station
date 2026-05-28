@@ -8,9 +8,8 @@
     sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
   - type: Produce
     seedId: CocaPlant
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: CocaSlurry
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: CocaSlurry
+        Quantity: 10

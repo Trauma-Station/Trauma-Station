@@ -14,15 +14,13 @@
     layers:
     - state: bowl
     - state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Protein
-          Quantity: 10
-        - ReagentId: BingleJuice
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Protein
+        Quantity: 20
+      - ReagentId: BingleJuice
+        Quantity: 10
   - type: Tag
     tags:
     - Meat
@@ -42,15 +40,13 @@
     layers:
     - state: bowl
     - state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Protein
-          Quantity: 10
-        - ReagentId: Nutriment
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Protein
+        Quantity: 20
+      - ReagentId: Nutriment
+        Quantity: 10
   - type: Tag
     tags:
     - Meat
@@ -68,13 +64,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/breadsandwich.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 25
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 15
 
 - type: entity
   parent: FoodInjectableBase
@@ -85,13 +80,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/chickenparm.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 20
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 20
 
 - type: entity
   parent: FoodInjectableBase
@@ -102,15 +96,14 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/corndog.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Protein
+        Quantity: 10
   - type: FlavorProfile
     flavors:
       - offensive
@@ -129,15 +122,14 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/hotdog.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Protein
+        Quantity: 10
   - type: FlavorProfile
     flavors:
       - offensive
@@ -153,15 +145,14 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/eggontoast.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Protein
+        Quantity: 10
   - type: FlavorProfile
     flavors:
       - offensive
@@ -180,13 +171,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/egg.rsi
     state: raw
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 16
-        reagents:
-        - ReagentId: Egg
-          Quantity: 6
+  - type: Solution
+    solution:
+      maxVol: 16
+      reagents:
+      - ReagentId: Egg
+        Quantity: 6
   - type: FlavorProfile
     flavors:
       - egg
@@ -203,13 +193,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/egg.rsi
     state: cooked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 16
-        reagents:
-        - ReagentId: EggCooked
-          Quantity: 6
+  - type: Solution
+    solution:
+      maxVol: 16
+      reagents:
+      - ReagentId: EggCooked
+        Quantity: 6
   - type: FlavorProfile
     flavors:
     - egg
@@ -229,15 +218,14 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/fairybread.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Sugar
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 25
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Sugar
+        Quantity: 5
   - type: FlavorProfile
     flavors:
       - sweet
@@ -254,15 +242,14 @@
     layers:
     - state: bowl
     - state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 15
-        - ReagentId: Protein
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 15
+      - ReagentId: Protein
+        Quantity: 5
   - type: FlavorProfile
     flavors:
       - meat
@@ -280,13 +267,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Protein
-          Quantity: 20
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Protein
+        Quantity: 20
   - type: FlavorProfile
     flavors:
       - meat
@@ -303,15 +289,14 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/roastedmonkey.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 200
-        reagents:
-        - ReagentId: Protein
-          Quantity: 125
-        - ReagentId: Nutriment
-          Quantity: 65
+  - type: Solution
+    solution:
+      maxVol: 200
+      reagents:
+      - ReagentId: Protein
+        Quantity: 125
+      - ReagentId: Nutriment
+        Quantity: 65
   - type: FlavorProfile
     flavors:
       - meat
@@ -341,13 +326,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/sausage.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Protein
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Protein
+        Quantity: 10
   - type: FlavorProfile
     flavors:
       - meat
@@ -364,13 +348,12 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/spire.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 99999
-        reagents:
-        - ReagentId: Protein
-          Quantity: 99999
+  - type: Solution
+    solution:
+      maxVol: 99999
+      reagents:
+      - ReagentId: Protein
+        Quantity: 99999
   - type: FlavorProfile
     flavors:
       - meat

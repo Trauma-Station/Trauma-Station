@@ -50,6 +50,7 @@
       90: Critical
       100: Dead
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: MeleeWeapon
     altDisarm: false
@@ -78,7 +79,6 @@
     - SlowedDown
     - Stutter
     - Electrocution
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
     - Flashed
@@ -341,8 +341,9 @@
         Holy: -1
   - type: Insulated
   - type: Damageable
-    damageContainer: InorganicMetaphysical
     damageModifierSet: MirrorMaid
+  - type: Injurable
+    damageContainer: InorganicMetaphysical
   - type: MovementIgnoreGravity
 
 - type: entity
@@ -548,6 +549,7 @@
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
   - type: Damageable
+  - type: Injurable
     damageContainer: SiliconMetaphysical
   - type: HealthExaminable
     examinableTypes:

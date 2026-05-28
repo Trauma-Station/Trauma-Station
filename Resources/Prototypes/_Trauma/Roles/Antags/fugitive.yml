@@ -24,6 +24,25 @@
     - ForensicScanner
     - MedkitCombat
 
+- type: antagSpecifier
+  id: FugitiveHunter
+  spawnerPrototype: SpawnPointGhostRoleHunter
+  startingGear: HunterAntagGear
+  briefing:
+    text: hunter-role-greeting
+    color: red
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: AutoImplant
+    implants:
+    - FakeMindShieldImplant
+    - DeathAcidifierImplant
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
+
 # Fugitives
   # Convict
 - type: startingGear
@@ -41,3 +60,23 @@
     belt:
     - BarberScissors
     - Telecrystal25
+
+- type: antagSpecifier
+  id: Fugitive
+  spawnerPrototype: SpawnPointGhostRoleFugitive
+  startingGear: FugitiveAntagGear
+  briefing:
+    text: fugitive-role-greeting
+    color: red
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: AutoImplant
+    implants:
+    - UplinkImplant
+  - type: RandomMetadata
+  - type: EmitSoundOnSpawn # fell out of the ceiling
+    sound: /Audio/Effects/clang.ogg
+  mindRoles:
+  - MindRoleGhostRoleFugitive
