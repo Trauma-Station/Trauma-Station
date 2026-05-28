@@ -1,4 +1,4 @@
-﻿using Content.Server.GameTicking.Rules.Components;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Metric.Components;
 using Content.Shared.Damage;
