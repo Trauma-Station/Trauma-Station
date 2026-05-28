@@ -722,15 +722,6 @@
   id: ReverseBearTrapKey
 
 - type: Tag
-  id: Rifle
-
-- type: Tag
-  id: Hacking
-
-- type: Tag
-  id: Jetpack
-
-- type: Tag
   id: DisposableBattery
 
 - type: Tag

@@ -1,6 +1,6 @@
-﻿using Content.Server.Chemistry.EntitySystems;
-using Content.Server.StationEvents.Metric.Components;
+﻿using Content.Server.StationEvents.Metric.Components;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
 
@@ -13,7 +13,7 @@ namespace Content.Server.StationEvents.Metric;
 /// </summary>
 public sealed partial class PuddleMetricSystem : ChaosMetricSystem<PuddleMetricComponent>
 {
-    [Dependency] private SolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
     public override ChaosMetrics CalculateChaos(EntityUid metric_uid, PuddleMetricComponent component,
         CalculateChaosEvent args)

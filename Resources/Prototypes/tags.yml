@@ -1308,9 +1308,6 @@
   id: SecurityHelmet # ConstructionGraph: HelmetJustice
 
 - type: Tag
-  id: Sheep # Reproductive partner key
-
-- type: Tag
   id: Sheet # MaterialStorage whitelist for many machines and lathes. Storage whitelist: MaterialBag
 
 - type: Tag
@@ -1459,9 +1456,6 @@
 
 - type: Tag
   id: Taser # Storage whitelist: ClothingBeltSecurity
-
-- type: Tag
-  id: TheaterBagel # used for Bagel Station's randomized theater
 
 - type: Tag
   id: TimerBrigElectronics # ConstructionGraph: Timer

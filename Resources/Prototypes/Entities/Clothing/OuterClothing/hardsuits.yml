@@ -238,7 +238,6 @@
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
-    - CombatHardsuit
 
 #Security Hardsuit (goob - not used)
 - type: entity
@@ -805,7 +804,6 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
-    - HeavyCombatHardsuit
     - CombatHardsuit
 
 #Cybersun Juggernaut Hardsuit

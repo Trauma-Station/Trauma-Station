@@ -23,15 +23,15 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-  - type: Tag
-    tags:
-    - Armor
     modifiers:
       coefficients:
         Blunt: 0.65 # Trauma, was 0.7
         Slash: 0.65 # Trauma, was 0.7
         Piercing: 0.65 # Trauma, was 0.7
         Heat: 0.80
+  - type: Tag
+    tags:
+    - Armor
   - type: ExplosionResistance
     damageCoefficient: 0.75 # Trauma, was 0.9
   - type: ModifyDelayedKnockdown # Goobstation
@@ -561,6 +561,7 @@
     tags:
     - WhitelistChameleon
     - SyringeArmor
+    - HeavyArmor
   - type: ModifyDelayedKnockdown # Goobstation
     cancel: true
   - type: StaminaResistance # Goobstation

@@ -13,9 +13,6 @@
   - type: KnowledgeGrantOnWear
     blocked:
       MartialArtCorporateJudo: true
-  - type: Tag
-    tags:
-    - StunBaton
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunbaton.rsi
@@ -120,6 +117,7 @@
   - type: Tag
     tags:
     - Stunbaton
+    - StunBaton
   - type: GuideHelp
     guides:
     - Security
