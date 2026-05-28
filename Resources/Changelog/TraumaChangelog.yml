@@ -9131,3 +9131,84 @@ Entries:
   id: 1041
   time: '2026-05-27T09:14:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2833
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mobs immediately disappear when you lose sight of them.
+  id: 1042
+  time: '2026-05-27T19:28:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2840
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Buffed the Phaser (10>12 damage)
+  - type: Tweak
+    message: Buffed the Laser Gun (10>14 damage)
+  - type: Tweak
+    message: Buffed the Laser Carbine's accuracy (its damage is fine)
+  id: 1043
+  time: '2026-05-27T19:54:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2706
+- author: Speebro
+  changes:
+  - type: Tweak
+    message: >-
+      Survival medipen now heals a bit less, you're trading effectiveness for
+      convenience vs. the brute and burn pens.
+  - type: Tweak
+    message: >-
+      Luxury medipen now only contains Luxurium, Tranexamic Acid, and Saline, in
+      exchange Luxurium actually heals now at comparable rates to what the pen
+      gave before, but only within 0-50kPa. Also it's called the Luxurium
+      Medipen now.
+  - type: Tweak
+    message: >-
+      Luxurium damage outside of low pressure works on station, but is less
+      deadly than before.
+  id: 1044
+  time: '2026-05-27T19:57:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2797
+- author: Crab Exterminators
+  changes:
+  - type: Tweak
+    message: >-
+      Less Coconut Crabs spawn from vent hordes now, but more of the small crabs
+      spawn.
+  - type: Tweak
+    message: Minimum crabs from vent hordes reduced.
+  - type: Tweak
+    message: Crab vent hordes rarer now.
+  - type: Tweak
+    message: You only get one Coconut Crab from the Coconut Crab Crate now.
+  id: 1045
+  time: '2026-05-27T20:04:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2841
+- author: Armok
+  changes:
+  - type: Tweak
+    message: made more antags roll more
+  - type: Tweak
+    message: make vision cones loved by everyone
+  id: 1046
+  time: '2026-05-27T20:30:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2842
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Autosurgeon automatically starts when you are buckled to it, no need to
+      press E anymore.
+  id: 1047
+  time: '2026-05-27T21:06:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2844
+- author: TechnicFighter
+  changes:
+    - type: Tweak
+      message: >-
+        Tweaked Fugitives. Shuttle changed, loadouts changed, objectives changed, etc.
+    - type: Fix
+      message: >-
+        Fixed bugs and oversights, regarding Fugitives and their Hunters.
+  id: 1048
+  time: '2026-05-27T22:41:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2769

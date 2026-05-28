@@ -151,7 +151,7 @@
                                                      TextAlign="Center"
                                                      Margin="0 2 0 2"/>
                                     <controls:Button Name="DeviceButton4"
-                                                     Text="{controls:Loc 'shuttle-console-device-button-8'}"
+                                                     Text="{controls:Loc 'shuttle-console-device-button-4'}"
                                                      TextAlign="Center"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
                                                      Margin="0 2 0 2"/>
