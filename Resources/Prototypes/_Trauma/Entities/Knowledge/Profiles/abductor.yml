@@ -7,8 +7,6 @@
     WisdomAttribute: 15
     DexterityAttribute: -30
     ConstitutionAttribute: 20
-    LooksAttribute: -30
-    CharismaAttribute: 0
   mastery:
     # Intelectual Skills
     LiteracyKnowledge: 2

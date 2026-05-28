@@ -17,6 +17,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Construction;
+using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Quality;
@@ -41,7 +42,7 @@ public sealed partial class QualitySystem : EntitySystem
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private EntityQuery<QualityComponent> _query = default!;
 
-    private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
+    private static readonly EntProtoId ManufacturingKnowledge = "ManufacturingKnowledge";
     private static readonly ProtoId<SkillCategoryPrototype> CraftingCategory = "Crafting";
 
     public override void Initialize()
@@ -285,7 +286,6 @@ public sealed partial class QualitySystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
-    // technically its not actually rolling but whatever
     public void RollQuality(Entity<QualityComponent> ent, EntityUid user)
     {
         if (_knowledge.GetContainer(user) is not { } brain)
@@ -296,24 +296,22 @@ public sealed partial class QualitySystem : EntitySystem
 
         var (knowledgeToUse, lowestId, lowestDelta, skillDelta) = FindLowestDelta(brain, ent.Comp.LevelDeltas);
 
-        var added = _knowledge.GetSkill(brain, knowledgeToUse)?.Comp.NetLevel ?? -1;
+        var skill = _knowledge.GetSkill(brain, knowledgeToUse)?.Comp.NetLevel ?? -1;
+        var mastery = _knowledge.GetMastery(skill) + lowestDelta;
 
-        var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
+        var ev = new SingleContestEvent(100, skillDelta * 5, skill, true);
+        RaiseLocalEvent(user, ref ev);
+        if (ev.CriticallyFailed)
+            ent.Comp.Quality = 2 * mastery - 5 - 2;
+        if (ev.Failed)
+            ent.Comp.Quality = 2 * mastery - 5 - 1;
+        else if (ev.CriticallySucceeded)
+            ent.Comp.Quality = 2 * mastery - 5 + 1;
+        else
+            ent.Comp.Quality = 2 * mastery - 5;
 
-        ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
-        {
-            >= 88 => 5,
-            >= 44 => 4,
-            >= 20 => 3,
-            >= 10 => 2,
-            >= 5 => 1,
-            >= 0 => 0,
-            >= -5 => -1,
-            >= -10 => -2,
-            >= -20 => -3,
-            >= -44 => -4,
-            _ => -5,
-        };
+        ent.Comp.Quality = Math.Clamp(ent.Comp.Quality, -5, 5);
+
         Dirty(ent);
         ApplyQuality(ent);
 
@@ -332,7 +330,7 @@ public sealed partial class QualitySystem : EntitySystem
         int lowestDelta = 0;
         int skillDelta = 0;
         EntProtoId? lowestId = null;
-        EntProtoId knowledgeToUse = FabricationKnowledge;
+        EntProtoId knowledgeToUse = ManufacturingKnowledge;
         bool setKnowledge = false;
         foreach (var (id, delta) in levelDeltas)
         {

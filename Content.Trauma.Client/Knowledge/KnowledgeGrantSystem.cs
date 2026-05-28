@@ -19,6 +19,9 @@ public sealed partial class KnowledgeGrantSystem : SharedKnowledgeGrantSystem
             return;
 
         gymWindow.UpdateTime(ent.Comp.IdealRhythmInterval);
-        HandleRep(ent, user, gymWindow.HandleRepInput());
+        var (staminaDamage, accuracy) = gymWindow.StaminaDamageInput();
+        StaminaDamage(user, staminaDamage, accuracy);
+        if (gymWindow.ShouldSendMessage())
+            HandleRep(ent, user, gymWindow.HandleRepInput());
     }
 }

@@ -7,8 +7,6 @@
     WisdomAttribute: -100
     DexterityAttribute: -100
     ConstitutionAttribute: -100
-    LooksAttribute: -100
-    CharismaAttribute: -100
   mastery:
     # Intelectual Skills
     LiteracyKnowledge: 0

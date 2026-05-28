@@ -7,7 +7,17 @@ public enum GymUiKey : byte
 }
 
 /// <summary>
-/// Fired from client to server when client does a rep.
+/// Fired from client to server when client takes stamina damage.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class GymRepTryMessage(int staminaMultiplier, float timingAccuracy) : BoundUserInterfaceMessage
+{
+    public int StaminaMultiplier = staminaMultiplier;
+    public float TimingAccuracy = timingAccuracy;
+}
+
+/// <summary>
+/// Fired from client to server when client has done enough for experience.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class GymRepPerformedMessage(float timingAccuracy) : BoundUserInterfaceMessage

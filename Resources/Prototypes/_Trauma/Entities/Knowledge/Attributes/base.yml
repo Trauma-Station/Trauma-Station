@@ -45,7 +45,7 @@
   name: Intelligence
   description: One smart cookie! It's been said that David beat Goliath, and he didn't do it with raw strength.
   components:
-  - type: AttackAttribute
+  - type: SpeedAttribute
     minX: 1.01
     maxX: 20.01
     minY: -5
@@ -59,7 +59,7 @@
   name: Wisdom
   description: A wise old man... A wise old man once said...
   components:
-  - type: DefenseAttribute
+  - type: SpeedAttribute
     minX: 1.01
     maxX: 20.51
     minY: -4
@@ -78,16 +78,11 @@
   name: Dexterity
   description: Can't go wrong with a little bit of dexterity.
   components:
-  - type: AttackAttribute
+  - type: SpeedAttribute
     minX: 3.01
     maxX: 20.51
-    minY: -4
-    maxY: 5
-  - type: DefenseAttribute
-    minX: 3.01
-    maxX: 20.51
-    minY: -5
-    maxY: 7
+    minY: -9
+    maxY: 12
   - type: AgilityFeat
     minX: 3.01
     maxX: 20.51
@@ -114,26 +109,3 @@
     maxY: 6
   - type: Attribute
     order: 4
-
-- type: entity
-  parent: BaseAttribute
-  id: LooksAttribute
-  name: Looks
-  description: Mog 'em all.
-  components:
-  - type: Attribute
-    order: 5
-
-- type: entity
-  parent: BaseAttribute
-  id: CharismaAttribute
-  name: Charisma
-  description: I'm not too sure what this could do. Talk fast?
-  components:
-  - type: MoraleAttribute
-    minX: 1.01
-    maxX: 22.01
-    minY: -5
-    maxY: 6
-  - type: Attribute
-    order: 6

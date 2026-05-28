@@ -7,8 +7,6 @@
     WisdomAttribute: 0
     DexterityAttribute: 0
     ConstitutionAttribute: 80 # Tough MFs
-    LooksAttribute: -20 # Seen the beard on this guy?
-    CharismaAttribute: -20
   skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 6

@@ -3,4 +3,4 @@
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class DefenseTierdownComponent : BaseTierdownComponent;
+public sealed partial class AgilityFeatTierdownComponent : BaseTierdownComponent;

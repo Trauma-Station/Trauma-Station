@@ -13,18 +13,6 @@ namespace Content.Trauma.Common.Knowledge;
 public record struct GetDamageModifierEvent(int Mod = 0);
 
 /// <summary>
-/// Raised on an attribute holder to calculate the defense modifier.
-/// </summary>
-[ByRefEvent]
-public record struct GetDefenseModifierEvent(int Mod = 0);
-
-/// <summary>
-/// Raised on an attribute holder to calculate the attack modifier.
-/// </summary>
-[ByRefEvent]
-public record struct GetAttackModifierEvent(int Mod = 0);
-
-/// <summary>
 /// Raised on an attribute holder to calculate carry limits.
 /// </summary>
 [ByRefEvent]

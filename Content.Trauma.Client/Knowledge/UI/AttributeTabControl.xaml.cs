@@ -39,7 +39,7 @@ public sealed partial class AttributeTabControl : BoxContainer
         foreach (var (id, number) in ev.Modifiers)
         {
             var box = new AttributeModifierBox(id, number);
-            HorizontalContainer.AddChild(box);
+            ModifiersContainer.AddChild(box);
         }
     }
 }

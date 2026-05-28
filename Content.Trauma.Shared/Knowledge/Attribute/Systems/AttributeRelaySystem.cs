@@ -15,8 +15,6 @@ public sealed partial class AttributeRelaySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AttackAttributeComponent, GetAttackModifierEvent>(OnCalculateAttack);
-        SubscribeLocalEvent<DefenseAttributeComponent, GetDefenseModifierEvent>(OnCalculateDefense);
         SubscribeLocalEvent<DamageAttributeComponent, GetDamageModifierEvent>(OnCalculateDamage);
         SubscribeLocalEvent<StrengthFeatComponent, GetStrengthFeatEvent>(OnStrengthFeat);
         SubscribeLocalEvent<AgilityFeatComponent, GetAgilityFeatEvent>(OnCalculateAgility);
@@ -27,22 +25,6 @@ public sealed partial class AttributeRelaySystem : EntitySystem
         SubscribeLocalEvent<CarryAttributeComponent, GetCarryLimitsEvent>(OnCarry);
         SubscribeLocalEvent<DragAttributeComponent, GetCarryLimitsEvent>(OnDrag);
         SubscribeLocalEvent<MoraleAttributeComponent, GetMoraleModifierEvent>(OnCalculateMorale);
-    }
-
-    private void OnCalculateAttack(Entity<AttackAttributeComponent> ent, ref GetAttackModifierEvent args)
-    {
-        if (!TryComp<AttributeComponent>(ent, out var comp))
-            return;
-
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
-    }
-
-    private void OnCalculateDefense(Entity<DefenseAttributeComponent> ent, ref GetDefenseModifierEvent args)
-    {
-        if (!TryComp<AttributeComponent>(ent, out var comp))
-            return;
-
-        args.Mod += AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY);
     }
 
     private void OnCalculateDamage(Entity<DamageAttributeComponent> ent, ref GetDamageModifierEvent args)

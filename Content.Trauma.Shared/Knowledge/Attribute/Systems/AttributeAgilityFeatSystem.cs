@@ -5,6 +5,7 @@ using Content.Shared.Slippery;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 
@@ -37,7 +38,10 @@ public sealed partial class AttributeAgilityFeatSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
         var threshold = _slipThreshold - (ev.DiceUser + selfEv.Mod);
         if (threshold > 0)
-            return;
+        {
+            var malus = EnsureComp<AgilityFeatTierdownComponent>(ent);
+            malus.Mod += 2;
+        }
 
         _popup.PopupPredicted("You begin to slip, but some deft footwork manages to keep you upright.", ent, ent, PopupType.Medium);
         args.NoSlip = true;

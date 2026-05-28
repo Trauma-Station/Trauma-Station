@@ -7,8 +7,6 @@
     WisdomAttribute: 0
     DexterityAttribute: 40 # Creepy Crawlers
     ConstitutionAttribute: -40 # Insects
-    LooksAttribute: -40 # Creepy MFs
-    CharismaAttribute: 0
   skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 12

@@ -29,6 +29,7 @@ public abstract partial class SharedKnowledgeGrantSystem : EntitySystem
         SubscribeLocalEvent<KnowledgeGrantComponent, MapInitEvent>(OnKnowledgeGrantInit, after: [typeof(SharedKnowledgeSystem), typeof(InitialBodySystem)]);
 
         SubscribeLocalEvent<KnowledgeGrantOnUseComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<KnowledgeGrantOnUseComponent, GymRepTryMessage>(OnUiRepMessage);
         SubscribeLocalEvent<KnowledgeGrantOnUseComponent, GymRepPerformedMessage>(OnUiMessage);
     }
 
@@ -79,20 +80,31 @@ public abstract partial class SharedKnowledgeGrantSystem : EntitySystem
 
     protected abstract void OnActivate(Entity<KnowledgeGrantOnUseComponent> ent, EntityUid user, BoundUserInterface window);
 
+    private void OnUiRepMessage(Entity<KnowledgeGrantOnUseComponent> ent, ref GymRepTryMessage args)
+    {
+        StaminaDamage(args.Actor, args.StaminaMultiplier, args.TimingAccuracy);
+    }
+
     private void OnUiMessage(Entity<KnowledgeGrantOnUseComponent> ent, ref GymRepPerformedMessage args)
     {
         HandleRep(ent, args.Actor, args.TimingAccuracy);
     }
 
-    protected void HandleRep(Entity<KnowledgeGrantOnUseComponent> ent, EntityUid actor, float timingAccuracy)
+    protected void StaminaDamage(EntityUid actor, int amount, float accuracy)
     {
-        _stamina.TakeStaminaDamage(actor, Math.Max(1 - timingAccuracy, 0.0f) * 15);
-        if (timingAccuracy < 0.4f)
+        _stamina.TakeStaminaDamage(actor, amount * 20);
+        if (accuracy < 0.4f)
         {
             _popup.PopupClient("Poor form!", actor, actor, PopupType.SmallCaution);
             return;
         }
 
+        var qualityString = accuracy > 0.85f ? "Perfect!" : "Good!";
+        _popup.PopupClient($"{qualityString}", actor, actor, PopupType.Medium);
+    }
+
+    protected void HandleRep(Entity<KnowledgeGrantOnUseComponent> ent, EntityUid actor, float timingAccuracy)
+    {
         if (_knowledge.GetContainer(actor) is not { } brain)
             return;
 
@@ -111,10 +123,5 @@ public abstract partial class SharedKnowledgeGrantSystem : EntitySystem
 
         if (!hasLearned)
             _popup.PopupClient(Loc.GetString("knowledge-could-not-learn"), actor, actor, PopupType.SmallCaution);
-        else
-        {
-            var qualityString = timingAccuracy > 0.85f ? "Perfect!" : "Good!";
-            _popup.PopupClient($"{qualityString}", actor, actor, PopupType.Medium);
-        }
     }
 }

@@ -8,8 +8,6 @@
     WisdomAttribute: 0
     DexterityAttribute: 0
     ConstitutionAttribute: 0
-    LooksAttribute: 0
-    CharismaAttribute: 0
   skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 12

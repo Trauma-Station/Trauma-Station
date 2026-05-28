@@ -7,8 +7,6 @@
     WisdomAttribute: 15 # The trees are wise
     DexterityAttribute: -30 # Slow as the trees themselves
     ConstitutionAttribute: 20 # That's bark, man
-    LooksAttribute: -30 # They're literal plants
-    CharismaAttribute: 0
   skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 12

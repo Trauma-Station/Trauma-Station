@@ -7,8 +7,6 @@
     WisdomAttribute: 0
     DexterityAttribute: 30 # Slippery guys, huh
     ConstitutionAttribute: 0
-    LooksAttribute: -60 # A face only a mother could love.
-    CharismaAttribute: 0
   mastery:
     # Intelectual Skills
     LiteracyKnowledge: 12

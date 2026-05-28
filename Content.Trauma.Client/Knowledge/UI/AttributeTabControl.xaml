@@ -8,8 +8,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     Orientation="Horizontal">
     <TextureRect Name="TextRect" Margin="0, 8, 0, 0" />
 
-    <BoxContainer Name="HorizontalContainer" Orientation="Horizontal">
-        <RichTextLabel Name="SkillBox" SetWidth="325" HorizontalAlignment="Left" />
-        <RichTextLabel Name="ModifierBox" MinSize="50 20"/>
+    <BoxContainer Name="CoreInfoGroup" Orientation="Horizontal" SeparationOverride="4">
+        <RichTextLabel Name="SkillBox" />
+        <RichTextLabel Name="ModifierBox" MinSize="30 20"/>
+    </BoxContainer>
+
+    <BoxContainer Name="ModifiersContainer" Orientation="Horizontal" SeparationOverride="8">
     </BoxContainer>
 </BoxContainer>

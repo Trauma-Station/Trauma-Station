@@ -8,8 +8,6 @@
     WisdomAttribute: 20
     DexterityAttribute: -20 # Clumsy to a fault
     ConstitutionAttribute: -50 # Do not let them near a flyswatter
-    LooksAttribute: -35 # Creepiest thing I've had the displeasure of seeing
-    CharismaAttribute: 0
   skillRolls:
     # Intelectual Skills
     LiteracyKnowledge: 4

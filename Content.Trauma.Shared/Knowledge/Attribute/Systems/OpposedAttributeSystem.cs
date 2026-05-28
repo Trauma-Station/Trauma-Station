@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 

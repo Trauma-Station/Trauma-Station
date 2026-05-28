@@ -19,7 +19,12 @@ public sealed class GymBoundUserInterface : BoundUserInterface
         _window = new GymWindow();
         _window.OnClose += Close;
 
-        _window.OnRepPressed += accuracy =>
+        _window.OnRepPressed += (staminaDamage, timingAccuracy) =>
+        {
+            SendMessage(new GymRepTryMessage(staminaDamage, timingAccuracy));
+        };
+
+        _window.OnRepSend += accuracy =>
         {
             SendMessage(new GymRepPerformedMessage(accuracy));
         };
@@ -30,6 +35,16 @@ public sealed class GymBoundUserInterface : BoundUserInterface
         }
 
         _window.OpenCentered();
+    }
+
+    public (int, float) StaminaDamageInput()
+    {
+        return _window?.StaminaDamageInput() ?? (1, 0f);
+    }
+
+    public bool ShouldSendMessage()
+    {
+        return _window?.GetCurrentAccuracy() > 1f;
     }
 
     public float HandleRepInput()

@@ -10,11 +10,13 @@ namespace Content.Trauma.Client.Knowledge.UI;
 public sealed partial class GymWindow : FancyWindow
 {
     // Event passed upward to the BoundUserInterface parent wrapper
-    public event Action<float>? OnRepPressed;
+    public event Action<int, float>? OnRepPressed;
+    public event Action<float>? OnRepSend;
 
     private float _rhythmTimer = 0f;
     private float _targetInterval = 1.0f;
     private bool _pingPongDirection = true;
+    private float? _accuracy = 1.0f;
 
     public GymWindow()
     {
@@ -62,16 +64,35 @@ public sealed partial class GymWindow : FancyWindow
     }
 
     /// <summary>
-    /// Handles the input for a single repetition and calculates the accuracy based on the rhythmic pacing.
+    /// Handles the stamina damage calculation.
     /// </summary>
-    public float HandleRepInput()
+    public (int, float) StaminaDamageInput()
     {
         float maxAllowedError = 0.3f;
         float distanceFromTarget = Math.Abs(_targetInterval - _rhythmTimer);
 
         float accuracy = Math.Clamp(1.0f - (distanceFromTarget / maxAllowedError), 0.0f, 1.0f);
+        if (_accuracy is not { })
+            _accuracy = accuracy / 5;
+        else
+            _accuracy += accuracy / 5;
+        OnRepPressed?.Invoke((int)(accuracy * 2), accuracy);
+        return ((int) (accuracy * 2), accuracy);
+    }
 
-        OnRepPressed?.Invoke(accuracy);
+    /// <summary>
+    /// Handles the input for a single repetition and calculates the accuracy based on the rhythmic pacing.
+    /// </summary>
+    public float HandleRepInput()
+    {
+        float accuracy = _accuracy ?? 0f;
+        _accuracy = null;
+        OnRepSend?.Invoke(accuracy);
         return accuracy;
+    }
+
+    public float GetCurrentAccuracy()
+    {
+        return _accuracy ?? 0f;
     }
 }
