@@ -1,4 +1,4 @@
-﻿using Content.Shared.Whitelist;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared.Trigger.Components.Effects;
 
