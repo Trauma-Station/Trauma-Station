@@ -163,7 +163,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
     private bool CanBloodSuck(EntityUid user)
     {
         // Our current selected hand must be empty for this to work.
-        if (!_hands.ActiveHandIsEmpty(user))
+        if (!_hands.ActiveHandIsEmpty(user) || _mobState.IsCritical(user))
             return false;
 
         // We must be targeting our target's head first.
