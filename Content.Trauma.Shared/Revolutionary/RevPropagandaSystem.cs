@@ -18,6 +18,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Revolutionary;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -96,8 +97,13 @@ public sealed partial class RevPropagandaSystem : EntitySystem
 
         var comp = ent.Comp;
 
+        var attemptEv = new AttemptConvertRevolutionaryEvent(false);
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return false;
+
         var ev = new BeforeConversionEvent();
-        RaiseLocalEvent(target);
+        RaiseLocalEvent(target, ref ev);
         return !ev.Blocked &&
             TryComp<MindContainerComponent>(target, out var mind) &&
             mind.HasMind &&

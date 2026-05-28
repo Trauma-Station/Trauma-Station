@@ -33,6 +33,8 @@ public sealed partial class SpikerShuffleSystem : EntitySystem
         // first remove all status effects
         foreach (var statusEffect in ent.Comp.StatusEffectsToRemove)
             _statusOld.TryRemoveStatusEffect(ent.Owner, statusEffect);
+        foreach (var effect in ent.Comp.NewEffectsToRemove)
+            _statusNew.TryRemoveStatusEffect(ent.Owner, effect);
 
         _statusNew.TryAddStatusEffect(ent.Owner, ent.Comp.StatusEffect, out _, ent.Comp.Duration);
         _statusNew.TryAddStatusEffect(ent.Owner, ent.Comp.StatusAbilityDisable, out _, ent.Comp.Duration); // disable using actions

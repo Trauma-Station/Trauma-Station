@@ -1,10 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 FoxxoTrystan <45297731+FoxxoTrystan@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 Pspritechologist <naaronn@gmail.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -12,10 +5,9 @@
   id: DrinkCartonBaseSmallFull
   abstract: true
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 25
+  - type: Solution
+    solution:
+      maxVol: 25
 
 - type: entity
   parent: [DrinkBaseMaterialPlastic, DrinkCartonBaseFull]
@@ -23,13 +15,11 @@
   name: mini milk
   description: An opaque white liquid produced by the mammary glands of mammals.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 25
-        reagents:
-        - ReagentId: Milk
-          Quantity: 25
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Milk
+        Quantity: 25
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Drinks/milkmini.rsi
     state: icon
@@ -40,13 +30,11 @@
   name: mini choco milk
   description: A milk drink flavored with chocolate.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 25
-        reagents:
-        - ReagentId: MilkChoco
-          Quantity: 25
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: MilkChoco
+        Quantity: 25
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Drinks/milkminichoco.rsi
     state: icon

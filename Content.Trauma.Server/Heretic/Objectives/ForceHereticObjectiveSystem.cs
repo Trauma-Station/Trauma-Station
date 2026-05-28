@@ -14,7 +14,7 @@ public sealed partial class ForceHereticObjectiveSystem : EntitySystem
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;
 
-    public static readonly EntProtoId HereticRule = "Heretic";
+    public static readonly EntProtoId HereticRule = "HereticRoundstart";
 
     public override void Initialize()
     {

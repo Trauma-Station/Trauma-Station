@@ -143,13 +143,11 @@
   id: DrinkMugwortTeaGlass
   suffix: mugwort tea
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Mugwort
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mugwort
+        Quantity: 30
   - type: Icon
     sprite: Objects/Consumable/Drinks/greenteaglass.rsi
     state: icon
@@ -167,15 +165,12 @@
   - type: Sprite
     sprite: _Goobstation/Wizard/Objects/evermug.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Omnizine
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Omnizine
+        Quantity: 30
   - type: SolutionRegeneration
-    solution: drink
     duration: 10
     generated:
       reagents:

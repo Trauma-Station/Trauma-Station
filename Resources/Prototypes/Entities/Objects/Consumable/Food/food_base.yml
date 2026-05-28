@@ -1,9 +1,10 @@
-# Base component for edible food-like items
+#
+# Base component for edible food-like items, different from BaseDrink
 #
 - type: entity
   abstract: true
-  parent: BaseItem
-  id: EdibleBase
+  parent: [BaseItem, SolutionFood, SolutionSmall]
+  id: FoodBase
   components:
   - type: FlavorProfile
     flavors:
@@ -19,8 +20,8 @@
 #
 - type: entity
   abstract: true
-  parent: [ EdibleBase, BasePerishableFood ] # Trauma - most food is perishable
-  id: FoodBase
+  parent: BasePerishableFood # Trauma - most food is perishable
+  id: FoodBaseTrash
   components:
   - type: SpaceGarbage
 
@@ -30,7 +31,7 @@
 
 - type: entity
   abstract: true
-  parent: FoodBase
+  parent: FoodBaseTrash
   id: FoodInjectableBase
   components:
   - type: InjectableSolution

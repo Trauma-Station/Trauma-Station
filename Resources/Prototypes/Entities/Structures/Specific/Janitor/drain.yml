@@ -1,10 +1,5 @@
-# SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
+  parent: [SolutionDrain, SolutionGinormous]
   id: FloorDrain
   name: drain
   description: Drains puddles around it. Useful for dumping mop buckets or keeping certain rooms clean.
@@ -41,13 +36,10 @@
       maxFillLevels: 1
       fillBaseName: fill-
       solutionName: drainBuffer
-    - type: SolutionContainerManager
-      solutions:
-        drainBuffer:
-          maxVol: 1000
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallic
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Destructible
       thresholds:
         - trigger:
@@ -65,3 +57,8 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalBreak
+
+- type: entity
+  parent: [SolutionDrain, SolutionNormal]
+  id: SolutionDrainNormal
+  categories: [ HideSpawnMenu ]

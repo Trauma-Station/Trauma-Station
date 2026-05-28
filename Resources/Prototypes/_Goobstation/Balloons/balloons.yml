@@ -17,7 +17,8 @@
   - type: Item
     size: Huge
   - type: Damageable
-    damageContainer: RubberBalloon # default damage container
+  - type: Injurable
+    damageContainer: RubberBalloon
   - type: Physics # has dynamic physics
     bodyType: Dynamic
   - type: Penetratable # projectile Able to pierce balloons
@@ -206,6 +207,7 @@
   - type: Sprite
     state: black
   - type: Damageable
+  - type: Injurable
     damageContainer: BlackBalloon
   - type: Destructible
     thresholds:
@@ -239,6 +241,7 @@
   - type: Sprite
     state: white
   - type: Damageable
+  - type: Injurable
     damageContainer: WhiteBalloon
   - type: Destructible
     thresholds:
@@ -273,6 +276,7 @@
   - type: Sprite
     state: zebra
   - type: Damageable
+  - type: Injurable
     damageContainer: ZebraBalloon
   - type: Destructible
     thresholds:
@@ -309,8 +313,9 @@
   components:
   - type: Sprite
     state: steel
-  - type: Damageable        # only damagable via heat
-    damageContainer: SteelBalloon
+  - type: Damageable
+  - type: Injurable
+    damageContainer: SteelBalloon # only damagable via heat
   - type: Penetratable # projectile Able to pierce balloons
     penetrateDamage: 1000
     damagePenalty: 1000

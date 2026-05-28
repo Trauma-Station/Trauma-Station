@@ -282,16 +282,17 @@
     baseDecayRate: 0.25
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 50
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 50
   - type: Butcherable
     spawned:
     - id: FoodMeatSlime
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:

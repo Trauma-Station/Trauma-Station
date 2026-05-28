@@ -1,7 +1,5 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <142914808+Aineias1@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Base benches
 - type: entity
   name: bench
@@ -18,8 +16,8 @@
   - type: Rotatable
   - type: Sprite
     state: middle
-  - type: StaticPrice # Frontier
-    price: 50 # Frontier: 20
+  - type: StaticPrice
+    price: 50
 
 # Park benches
 - type: entity
@@ -29,11 +27,11 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/parkbench_wooden.rsi
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchParkMiddleNode # Frontier
-  - type: StaticPrice # Frontier
-    price: 50 # Frontier: 30
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchParkMiddleNode
+  - type: StaticPrice
+    price: 50
 
 - type: entity
   id: BenchParkLeft
@@ -42,9 +40,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchParkLeftNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchParkLeftNode
 
 - type: entity
   id: BenchParkRight
@@ -53,9 +51,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchParkRightNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchParkRightNode
 
 # Bamboo benches
 - type: entity
@@ -65,11 +63,11 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/parkbench_bamboo.rsi
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchParkBambooMiddleNode # Frontier
-  - type: StaticPrice # Frontier
-    price: 50 # Frontier: 30
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchParkBambooMiddleNode
+  - type: StaticPrice
+    price: 50
 
 - type: entity
   id: BenchParkBambooLeft
@@ -78,9 +76,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchParkBambooLeftNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchParkBambooLeftNode
 
 - type: entity
   id: BenchParkBambooRight
@@ -89,9 +87,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchParkBambooRightNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchParkBambooRightNode
 
 # Pews
 - type: entity
@@ -101,11 +99,11 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/pews.rsi
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchPewMiddleNode # Frontier
-  - type: StaticPrice # Frontier
-    price: 50 # Frontier: 30
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchPewMiddleNode
+  - type: StaticPrice
+    price: 50
 
 - type: entity
   id: BenchPewLeft
@@ -114,9 +112,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchPewLeftNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchPewLeftNode
 
 - type: entity
   id: BenchPewRight
@@ -125,9 +123,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchPewRightNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchPewRightNode
 
 # Steel benches
 - type: entity
@@ -137,9 +135,9 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/steel_bench.rsi
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchSteelMiddleNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchSteelMiddleNode
 
 - type: entity
   id: BenchSteelLeft
@@ -148,9 +146,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchSteelLeftNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchSteelLeftNode
 
 - type: entity
   id: BenchSteelRight
@@ -159,9 +157,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchSteelRightNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchSteelRightNode
 
 # White steel benches
 - type: entity
@@ -171,9 +169,9 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/steel_bench_white.rsi
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchSteelWhiteMiddleNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchSteelWhiteMiddleNode
 
 - type: entity
   id: BenchSteelWhiteLeft
@@ -182,9 +180,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchSteelWhiteLeftNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchSteelWhiteLeftNode
 
 - type: entity
   id: BenchSteelWhiteRight
@@ -193,9 +191,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: BenchesGraph # Frontier
-    node: BenchSteelWhiteRightNode # Frontier
+  - type: Construction
+    graph: BenchesGraph
+    node: BenchSteelWhiteRightNode
 
 # Standard sofa
 - type: entity
@@ -205,11 +203,11 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/sofa.rsi
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaMiddleNode # Frontier
-  - type: StaticPrice # Frontier
-    price: 50 # Frontier: 25
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaMiddleNode
+  - type: StaticPrice
+    price: 50
 
 - type: entity
   id: BenchSofaLeft
@@ -218,9 +216,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaLeftNode # Frontier
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaLeftNode
 
 - type: entity
   id: BenchSofaRight
@@ -229,9 +227,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaRightNode # Frontier
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaRightNode
 
 - type: entity
   name: sofa
@@ -251,8 +249,9 @@
   - type: InteractionOutline
   - type: Pullable
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -264,9 +263,9 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaCornerNode # Frontier
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaCornerNode
 
 # Corp sofa
 - type: entity
@@ -276,11 +275,11 @@
   components:
   - type: Sprite
     sprite: _SimpleStation/Structures/Furniture/Benches/sofa_corp.rsi
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaCorpMiddleNode # Frontier
-  - type: StaticPrice # Frontier
-    price: 50 # Frontier: 25
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaCorpMiddleNode
+  - type: StaticPrice
+    price: 50
 
 - type: entity
   id: BenchSofaCorpLeft
@@ -289,9 +288,9 @@
   components:
   - type: Sprite
     state: left
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaCorpLeftNode # Frontier
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaCorpLeftNode
 
 - type: entity
   id: BenchSofaCorpRight
@@ -300,9 +299,9 @@
   components:
   - type: Sprite
     state: right
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaCorpRightNode # Frontier
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaCorpRightNode
 
 - type: entity
   name: grey sofa
@@ -322,8 +321,9 @@
   - type: InteractionOutline
   - type: Pullable
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -335,6 +335,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: Construction # Frontier
-    graph: SofasGraph # Frontier
-    node: BenchSofaCorpCornerNode # Frontier
+  - type: Construction
+    graph: SofasGraph
+    node: BenchSofaCorpCornerNode

@@ -10,13 +10,13 @@
     delay: 15
     forceFeedDelay: 15
   - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 10
   - type: FlavorProfile
     flavors:
     - paper
@@ -79,13 +79,13 @@
     delay: 15
     forceFeedDelay: 15
   - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 10
   - type: FlavorProfile
     flavors:
     - paper

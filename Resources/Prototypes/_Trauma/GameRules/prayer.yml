@@ -7,14 +7,8 @@
     giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
     giveBriefing: false # slop?
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ Traitor ]
-      pickPlayer: false
-      max: 1
-      playerRatio: 1
-      blacklist:
-        components:
-        - CommandStaff
-        # lings and other shit can use it, but not command. fuck you chud
-      mindRoles:
-      - MindRoleTraitor
+    selectionTime: Never # directly assigned by code
+    assignmentHandled: true
+    antags:
+    - !type:FixedAntagCount
+      proto: Traitor

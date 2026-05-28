@@ -581,8 +581,11 @@ namespace Content.Shared.Cuffs
         /// /// <param name="target">The entity to be checked</param>
         /// <param name="requireFullyCuffed">when true, return false if the target is only partially cuffed (for things with more than 2 hands)</param>
         /// <returns></returns>
-        public bool IsCuffed(Entity<CuffableComponent> target, bool requireFullyCuffed = true)
+        public bool IsCuffed(Entity<CuffableComponent?> target, bool requireFullyCuffed = true)
         {
+            if (!Resolve(target, ref target.Comp, false))
+                return false;
+
             if (!TryComp<HandsComponent>(target, out var hands))
                 return false;
 
@@ -613,7 +616,7 @@ namespace Content.Shared.Cuffs
         /// <param name="cuff">The handcuff entity we're attempting to remove.</param>
         public void TryUncuff(Entity<CuffableComponent?> target, EntityUid user, Entity<HandcuffComponent?> cuff)
         {
-            if (!Resolve(target, ref target.Comp) || !Resolve(cuff, ref cuff.Comp))
+            if (!Resolve(target, ref target.Comp, false) || !Resolve(cuff, ref cuff.Comp)) // Trauma - logMissing false for target
                 return;
 
             var isOwner = user == target.Owner;
@@ -870,7 +873,7 @@ namespace Content.Shared.Cuffs
         /// <returns>The most recently added cuff or null if none exists.</returns>
         public EntityUid? GetLastCuffOrNull(Entity<CuffableComponent?> entity)
         {
-            if (!Resolve(entity, ref entity.Comp))
+            if (!Resolve(entity, ref entity.Comp, false)) // Trauma - false
                 return null;
 
             return entity.Comp.Container.ContainedEntities.Count == 0 ? null : entity.Comp.Container.ContainedEntities.Last();

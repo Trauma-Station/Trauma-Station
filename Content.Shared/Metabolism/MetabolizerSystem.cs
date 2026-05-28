@@ -32,7 +32,7 @@ public sealed partial class MetabolizerSystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
     [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
-    [Dependency] private EntityQuery<SolutionContainerManagerComponent> _solutionQuery = default!;
+    [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
 
     public override void Initialize()
     {
@@ -96,7 +96,7 @@ public sealed partial class MetabolizerSystem : EntitySystem
     }
 
     private bool LookupSolution(
-        Entity<MetabolizerComponent, OrganComponent?, SolutionContainerManagerComponent?> ent,
+        Entity<MetabolizerComponent, OrganComponent?, SolutionManagerComponent?> ent,
         MetabolismSolutionEntry solutionData,
         bool lookupTransfer,
         [NotNullWhen(true)] out Solution? solution,
@@ -115,28 +115,24 @@ public sealed partial class MetabolizerSystem : EntitySystem
 
         if (lookupTransfer ? solutionData.TransferSolutionOnBody : solutionData.SolutionOnBody)
         {
-            if (ent.Comp2?.Body is { } body)
-            {
-                if (!_solutionQuery.TryComp(body, out var bodySolution))
-                    return false;
-
-                solutionOwner = body;
-                return _solutionContainerSystem.TryGetSolution((body, bodySolution), solutionName, out solutionEntity, out solution);
-            }
-        }
-        else
-        {
-            if (!_solutionQuery.Resolve(ent, ref ent.Comp3, logMissing: false))
+            if (ent.Comp2?.Body is not { } body)
                 return false;
 
-            solutionOwner = ent;
-            return _solutionContainerSystem.TryGetSolution((ent, ent), solutionName, out solutionEntity, out solution);
+            if (!_solutionContainerSystem.TryGetSolution(body, solutionName, out solutionEntity, out solution))
+                return false;
+
+            solutionOwner = body;
+            return true;
         }
 
-        return false;
+        if (!_solutionContainerSystem.TryGetSolution((ent, ent.Comp3), solutionName, out solutionEntity, out solution))
+            return false;
+
+        solutionOwner = ent;
+        return true;
     }
 
-    private void TryMetabolizeStage(Entity<MetabolizerComponent, OrganComponent?, SolutionContainerManagerComponent?> ent, ProtoId<MetabolismStagePrototype> stage)
+    private void TryMetabolizeStage(Entity<MetabolizerComponent, OrganComponent?, SolutionManagerComponent?> ent, ProtoId<MetabolismStagePrototype> stage)
     {
         if (!ent.Comp1.Solutions.TryGetValue(stage, out var solutionData))
             return;
@@ -274,9 +270,10 @@ public sealed partial class MetabolizerSystem : EntitySystem
         }
     }
 
-    private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionContainerManagerComponent?> ent)
+    private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionManagerComponent?> ent)
     {
         _organQuery.Resolve(ent, ref ent.Comp2, logMissing: false);
+        _solutionQuery.Resolve(ent, ref ent.Comp3, logMissing: false);
 
         foreach (var stage in ent.Comp1.Stages)
         {

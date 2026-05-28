@@ -27,6 +27,7 @@
         hard: false
   - type: Clickable
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Destructible
     thresholds:

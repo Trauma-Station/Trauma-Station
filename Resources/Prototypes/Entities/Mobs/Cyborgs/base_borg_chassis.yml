@@ -209,8 +209,9 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
+    damageModifierSet: Silicon # Trauma - ion damage
+  - type: Injurable
     damageContainer: Silicon
-    damageModifierSet: Silicon #Goobstation - Iondamage
   - type: Destructible
     thresholds:
     - trigger:
@@ -392,6 +393,17 @@
   parent: BaseBorgChassis
   abstract: true
   components:
+  # <Trauma>
+  - type: Damageable
+    damageModifierSet: SiliconProtected
+  - type: Injurable
+    damageContainer: Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: FlashImmunity
+  - type: SpeechSynthesis
+    voice: BorgSyndie
+  # </Trauma>
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -430,16 +442,6 @@
     color: "#dd200b"
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove syndieborg brains.
-  # <Goob>
-  - type: Damageable
-    damageContainer: Silicon
-    damageModifierSet: SiliconProtected
-  - type: ExplosionResistance
-    damageCoefficient: 0.5
-  - type: FlashImmunity
-  - type: SpeechSynthesis
-    voice: BorgSyndie
-  # </Goob>
 
 - type: entity
   id: BaseBorgChassisDerelict

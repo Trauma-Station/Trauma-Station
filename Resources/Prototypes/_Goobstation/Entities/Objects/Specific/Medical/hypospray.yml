@@ -16,10 +16,9 @@
     fillBaseName: cartridge
     solutionName: cartridge
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 0
+  - type: Solution
+    solution:
+      maxVol: 0
   - type: Injector
     currentTransferAmount: null
   - type: CartridgeInjector
@@ -84,10 +83,9 @@
   - type: UseDelay
     delay: 3
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 0
+  - type: Solution
+    solution:
+      maxVol: 0
   - type: ExaminableSolution
     solution: hypospray
   - type: Injector
@@ -123,10 +121,10 @@
     - state: filling
       color: "#ffffff"
   - type: SolutionCartridge
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
+  - type: Solution
+    id: cartridge
+    solution:
+      maxVol: 10
   - type: Tag
     tags:
     - SecBeltEquip
@@ -142,15 +140,13 @@
     - state: base
     - state: filling
       color: "#cad8d4"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Epinephrine
-          Quantity: 7
-        - ReagentId: TranexamicAcid
-          Quantity: 3 # Fully stops bleeding
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Epinephrine
+        Quantity: 7
+      - ReagentId: TranexamicAcid
+        Quantity: 3 # Fully stops bleeding
 
 - type: entity
   name: airloss autoinjector cartridge
@@ -163,15 +159,13 @@
     - state: base
     - state: filling
       color: "#1776c4"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Saline
-          Quantity: 7
-        - ReagentId: DexalinPlus
-          Quantity: 3
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Saline
+        Quantity: 7
+      - ReagentId: DexalinPlus
+        Quantity: 3
 
 - type: entity
   name: brute autoinjector cartridge
@@ -184,19 +178,17 @@
     - state: base
     - state: filling
       color: "#c5932d"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Bicaridine
-          Quantity: 4
-        - ReagentId: Ibuprofen
-          Quantity: 4
-        - ReagentId: SalicylicAcid
-          Quantity: 1
-        - ReagentId: TranexamicAcid
-          Quantity: 1 # Stops 30% of maximum bleeding
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Bicaridine
+        Quantity: 4
+      - ReagentId: Ibuprofen
+        Quantity: 4
+      - ReagentId: SalicylicAcid
+        Quantity: 1
+      - ReagentId: TranexamicAcid
+        Quantity: 1 # Stops 30% of maximum bleeding
   #If you have a full dmg spread, it'll heal ~60 dmg , down from previous 96
   #It will heal 20 dmg if you only have one dmg type and you have more than 25 dmg (see salicylic acid)
 
@@ -211,17 +203,15 @@
     - state: base
     - state: filling
       color: "#956960"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Kelotane
-          Quantity: 5
-        - ReagentId: Dermaline
-          Quantity: 4
-        - ReagentId: Leporazine #will minorly help with temperature regulation
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Kelotane
+        Quantity: 5
+      - ReagentId: Dermaline
+        Quantity: 4
+      - ReagentId: Leporazine #will minorly help with temperature regulation
+        Quantity: 1
 
 #what were they cooking here before, 114 total possible dmg heal was crazyyy
 #~21 dmg healed/dmg type (unless its cold, then its a lil more), doesnt heal caustic all that well
@@ -236,13 +226,11 @@
     - state: base
     - state: filling
       color: "#572757"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Atropine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Atropine
+        Quantity: 10
 
 - type: entity
   name: piercing autoinjector cartridge
@@ -255,13 +243,11 @@
     - state: base
     - state: filling
       color: "#b9bf93"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Puncturase
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Puncturase
+        Quantity: 10
 
 - type: entity
   name: stimulant autoinjector cartridge
@@ -274,13 +260,11 @@
     - state: base
     - state: filling
       color: "#d2fffa"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Ephedrine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ephedrine
+        Quantity: 10
 
 - type: entity
   name: sedative autoinjector cartridge
@@ -293,23 +277,21 @@
     - state: base
     - state: filling
       color: "#415130"
-  - type: SolutionContainerManager
-    solutions:
-      cartridge:
-        maxVol: 10
-        reagents:
-        - ReagentId: Tirizene
-          Quantity: 4
-        - ReagentId: Impedrezene
-          Quantity: 3
-        - ReagentId: Haloperidol
-          Quantity: 3
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Tirizene
+        Quantity: 4
+      - ReagentId: Impedrezene
+        Quantity: 3
+      - ReagentId: Haloperidol
+        Quantity: 3
 
 # Q - Why is this edible?
 # A - Because the dispenser reminded me of a pez dispenser, and it'd be funny if you could eat them.
 - type: entity
   name: amnestic autoinjector cartridge
-  parent: [ BaseCentcommContraband , BaseAutoinjectorCartridge, EdibleBase ]
+  parent: [ BaseCentcommContraband , BaseAutoinjectorCartridge, FoodBase ]
   description: Contains 10u of dimtremethic-neuramincyl acid, used in a cartridge autoinjector.
   id: CartridgeAmnestic
   components:
@@ -320,13 +302,11 @@
       color: "#FAF9F6"
   - type: SolutionCartridge
     solutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Amnestizine
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Amnestizine
+        Quantity: 10
   - type: Edible
     delay: 0.2
     forceFeedDelay: 1.5
@@ -354,13 +334,12 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stasipen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 10
-        reagents:
-        - ReagentId: Stasizium
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Stasizium
+        Quantity: 10
 
 - type: entity
   name: centcomm advanced stimulant
@@ -374,17 +353,16 @@
     layers:
     - state: ntstimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 50
-        reagents:
-        - ReagentId: Stimulants
-          Quantity: 25
-        - ReagentId: Ichor
-          Quantity: 10
-        - ReagentId: Dylovene
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Stimulants
+        Quantity: 25
+      - ReagentId: Ichor
+        Quantity: 10
+      - ReagentId: Dylovene
+        Quantity: 15
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -408,15 +386,14 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: ambuzolpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Ambuzol
-          Quantity: 10
-        - ReagentId: Ultravasculine
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Ambuzol
+        Quantity: 10
+      - ReagentId: Ultravasculine
+        Quantity: 5
   - type: Tag
     tags:
     - Medipen
@@ -438,15 +415,14 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: ambuzolpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: AmbuzolPlus
-          Quantity: 5
-        - ReagentId: Diphenhydramine
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: AmbuzolPlus
+        Quantity: 5
+      - ReagentId: Diphenhydramine
+        Quantity: 15
   - type: Tag
     tags:
     - Medipen
@@ -455,20 +431,19 @@
 # Actual hyposprays
 
 - type: entity
-  name: centcomm hypospray
   parent: [BaseHypospray, BaseCentcommContraband]
-  description: Reserved for Nanotrasen's top doctors. It utilizes experimental bluespace technology.
   id: CentCommHypo
+  name: centcomm hypospray
+  description: Reserved for Nanotrasen's top doctors. It utilizes experimental bluespace technology.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Medical/centcomm_hypo.rsi
     state: hypo
   - type: Item
     sprite: _Goobstation/Objects/Specific/Medical/centcomm_hypo.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 50
+  - type: Solution
+    solution:
+      maxVol: 100
   - type: IgnoreHypoport
   - type: UseDelay
     delay: 0.2

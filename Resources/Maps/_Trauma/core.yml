@@ -11650,40 +11650,6 @@ entities:
       chunkHistory: {}
     - type: ImplicitRoof
     - type: ExplosionAirtightGrid
-  - uid: 1962
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 1961
-    - type: Solution
-      solution:
-        maxVol: 1
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Fiber
-          Quantity: 1
-    - type: ContainedSolution
-      containerName: food
-      container: 1961
-  - uid: 1964
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 1963
-    - type: Solution
-      solution:
-        maxVol: 1
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Fiber
-          Quantity: 1
-    - type: ContainedSolution
-      containerName: food
-      container: 1963
   - uid: 17546
     components:
     - type: MetaData
@@ -69487,17 +69453,11 @@ entities:
     - type: Transform
       pos: -31.668869,-37.148655
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        drink:
-          temperature: 293.15
-          canReact: True
-          maxVol: 50
-          name: null
-          reagents:
-          - data: null
-            ReagentId: PoisonWine
-            Quantity: 50
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: PoisonWine
+          Quantity: 50
 - proto: DrinkChangelingStingCan
   entities:
   - uid: 976
@@ -105388,54 +105348,6 @@ entities:
 
         [italic]We are leaving this in your qualified hands and to your discretion. [bold]Best of wishes, NanoTrasen technical build team.[/bold][/italic]
       editingDisabled: True
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          temperature: 293.15
-          canReact: True
-          maxVol: 0
-          name: food
-          reagents: []
-      containers:
-      - food
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        flammable:
-          shape: !type:PhysShapeCircle
-            radius: 0.35
-            position: 0,0
-          mask:
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 1962
   - uid: 1963
     components:
     - type: MetaData
@@ -105465,54 +105377,6 @@ entities:
 
         [italic]Best wishes, [bold]NanoTrasen Technical Build Team.[/bold][/italic]
       editingDisabled: True
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          temperature: 293.15
-          canReact: True
-          maxVol: 0
-          name: food
-          reagents: []
-      containers:
-      - food
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        flammable:
-          shape: !type:PhysShapeCircle
-            radius: 0.35
-            position: 0,0
-          mask:
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 1964
   - uid: 5260
     components:
     - type: Transform

@@ -26,6 +26,9 @@
                        StyleClasses="LabelKeyText"/>
                 <ui:OptionSlider Name="NotificationsVolumeSlider" Title="{Loc 'ui-options-admin-notifications-volume'}"/>
                 <!-- Goobstation End - Admin Notifications -->
+                <Label Text="{Loc 'ui-options-admin-strip-overlay-title'}"
+                       StyleClasses="LabelKeyText"/>
+                <CheckBox Name="EnableAdminStripOverlayDefault" Text="{Loc 'ui-options-admin-strip-overlay-setting'}" />
             </BoxContainer>
         </ScrollContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />

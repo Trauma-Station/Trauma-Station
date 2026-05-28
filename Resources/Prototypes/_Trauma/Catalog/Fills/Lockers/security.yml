@@ -10,8 +10,9 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeLaserCarbine
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Gunsafes
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: StationAlertLevelLock
     lockedAlertLevels:
     - green

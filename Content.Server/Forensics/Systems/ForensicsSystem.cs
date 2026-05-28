@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Forensics;
-using Robust.Shared.Timing; // Goobstation
+using Robust.Shared.Timing;
 // </Trauma>
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -54,11 +54,11 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<CleansForensicsComponent, AfterInteractEvent>(OnAfterInteract, after: new[] { typeof(AbsorbentSystem) });
             SubscribeLocalEvent<ForensicsComponent, CleanForensicsDoAfterEvent>(OnCleanForensicsDoAfter);
             SubscribeLocalEvent<DnaComponent, TransferDnaEvent>(OnTransferDnaEvent);
-            SubscribeLocalEvent<DnaSubstanceTraceComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+            SubscribeLocalEvent<DnaSubstanceTraceComponent, SolutionChangedEvent>(OnSolutionChanged);
             SubscribeLocalEvent<CleansForensicsComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);
         }
 
-        private void OnSolutionChanged(Entity<DnaSubstanceTraceComponent> ent, ref SolutionContainerChangedEvent ev)
+        private void OnSolutionChanged(Entity<DnaSubstanceTraceComponent> ent, ref SolutionChangedEvent ev)
         {
             var soln = GetSolutionsDNA(ev.Solution);
             if (soln.Count > 0)
@@ -167,29 +167,26 @@ namespace Content.Server.Forensics
             }
         }
 
-        public List<(string, TimeSpan)> GetSolutionsDNA(EntityUid uid) // Goobstation
+        public List<(string, TimeSpan)> GetSolutionsDNA(EntityUid uid) // Trauma - add TimeSpan
         {
-            List<(string, TimeSpan)> list = new(); // Goobstation
-            if (TryComp<SolutionContainerManagerComponent>(uid, out var comp))
+            List<(string, TimeSpan)> list = new(); // Goobstation - add TimeSpan
+            foreach (var (_, soln) in _solutionContainerSystem.EnumerateSolutions(uid))
             {
-                foreach (var (_, soln) in _solutionContainerSystem.EnumerateSolutions((uid, comp)))
-                {
-                    list.AddRange(GetSolutionsDNA(soln.Comp.Solution));
-                }
+                list.AddRange(GetSolutionsDNA(soln.Comp.Solution));
             }
             return list;
         }
 
-        public List<(string, TimeSpan)> GetSolutionsDNA(Solution soln) // Goobstation
+        public List<(string, TimeSpan)> GetSolutionsDNA(Solution soln) // Trauma - add TimeSpan
         {
-            List<(string, TimeSpan)> list = new(); // Goobstation
+            List<(string, TimeSpan)> list = new(); // Trauma - add TimeSpan
             foreach (var reagent in soln.Contents)
             {
                 foreach (var data in reagent.Reagent.EnsureReagentData())
                 {
                     if (data is DnaData)
                     {
-                        list.Add((((DnaData) data).DNA, ((DnaData) data).Freshness)); // Goobstation
+                        list.Add((((DnaData) data).DNA, ((DnaData) data).Freshness)); // Trauma - add Freshness data
                     }
                 }
             }

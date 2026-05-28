@@ -1,11 +1,18 @@
 # Base
 
 - type: entity
-  parent: [FoodInjectableBase, ItemHeftyBase]
+  parent: [SolutionVeryTiny, FoodInjectableBase, ItemHeftyBase]
   id: FoodEggBase
   description: An egg!
   abstract: true
   components:
+  # <Trauma>
+  - type: Rehydratable
+    catalyst: UnstableMutagen
+    catalystMinimum: 5
+    possibleSpawns:
+    - MobHomunculus
+  # </Trauma>
   - type: Tag
     tags:
       - Egg
@@ -18,18 +25,12 @@
   - type: Item
     sprite: Objects/Consumable/Food/egg.rsi
     size: Tiny
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 11 #Goob edit - homunculus
-        reagents:
-        - ReagentId: Egg
-          Quantity: 6
-  - type: Rehydratable #Goob start
-    catalyst: UnstableMutagen
-    catalystMinimum: 5
-    possibleSpawns:
-    - MobHomunculus #Goob end
+  - type: Solution
+    solution:
+      maxVol: 11 # Trauma - allow injecting 5u for homonculus
+      reagents:
+      - ReagentId: Egg
+        Quantity: 6 # About 50ml which is the expected size of an egg
   - type: DrawableSolution
     solution: food
   - type: SolutionSpiker
@@ -43,6 +44,7 @@
       types:
         Blunt: 1
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Destructible
     thresholds:
@@ -92,13 +94,6 @@
     state: eggshells
   - type: Item
     size: Tiny
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 2
-        reagents:
-        - ReagentId: Egg
-          Quantity: 1
   - type: Tag
     tags:
     - Egg
@@ -135,13 +130,11 @@
     layers:
     - state: icon
       map: [ "enum.DamageStateVisualLayers.Base" ]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 6
-        reagents:
-        - ReagentId: EggCooked
-          Quantity: 6
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: EggCooked
+        Quantity: 6
   - type: Temperature
     # preserve temperature from the boiling step
     currentTemperature: 344

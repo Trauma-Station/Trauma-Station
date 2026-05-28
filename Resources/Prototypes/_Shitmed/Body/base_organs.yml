@@ -60,14 +60,14 @@
         Quantity: 3
       - ReagentId: Blood
         Quantity: 10
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 12
-        - ReagentId: Fat
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 12
+      - ReagentId: Fat
+        Quantity: 3
 
 - type: entity
   abstract: true
@@ -83,14 +83,14 @@
       reagents:
       - ReagentId: Sugar
         Quantity: 15
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 12
-        - ReagentId: Nutriment
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 12
+      - ReagentId: Nutriment
+        Quantity: 3
 
 ## Parts
 
