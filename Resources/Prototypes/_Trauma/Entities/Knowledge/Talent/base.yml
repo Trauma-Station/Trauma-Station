@@ -24,7 +24,7 @@
   parent: BaseTalent
   id: FastHealerTalent
   name: Fast Healer
-  description: Heal faster. Twice as fast. 
+  description: Heal faster. Twice as fast.
   components:
   - type: FastHealer
 
@@ -32,7 +32,7 @@
   parent: BaseTalent
   id: PoisonResistantTalent
   name: Poison Resistance
-  description: Resist all chems! 
+  description: Resist all chems!
   components:
   - type: Talent
     repeat: true
@@ -50,7 +50,7 @@
   parent: BaseTalent
   id: ToughHideTalent
   name: Tough Hide
-  description: You want to not die? Look no further. The tougher your hide, the less damage you'll take. 
+  description: You want to not die? Look no further. The tougher your hide, the less damage you'll take.
   components:
   - type: Talent
     repeat: true
