@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
@@ -12,6 +13,14 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// </summary>
 public sealed partial class AttributeDamageSystem : EntitySystem
 {
+    private static readonly HashSet<ProtoId<DamageTypePrototype>> DamageTypes = new()
+    {
+        "Blunt",
+        "Slash",
+        "Piercing",
+        "Structural"
+    };
+
     public override void Initialize()
     {
         base.Initialize();
@@ -29,6 +38,9 @@ public sealed partial class AttributeDamageSystem : EntitySystem
 
         foreach (var (key, _) in args.Damage.DamageDict)
         {
+            if (!DamageTypes.Contains(key))
+                continue;
+
             damage.FlatReduction.Add(key, -selfEv.Mod); // Negative for more damage.
         }
         args.Modifiers.Add(damage);

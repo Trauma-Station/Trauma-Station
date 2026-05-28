@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Trauma.Common.Knowledge;
@@ -14,6 +15,13 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// </summary>
 public sealed partial class TalentRelaySystem : EntitySystem
 {
+    private static readonly HashSet<ProtoId<DamageTypePrototype>> DamageTypes = new()
+    {
+        "Blunt",
+        "Slash",
+        "Piercing",
+    };
+
     public override void Initialize()
     {
         base.Initialize();
@@ -66,6 +74,9 @@ public sealed partial class TalentRelaySystem : EntitySystem
         var damageReduction = DamageSpecifier.GetPositive(args.Damage);
         foreach (var (key, amount) in damageReduction.DamageDict)
         {
+            if (!DamageTypes.Contains(key))
+                continue;
+
             damageReduction.DamageDict[key] = -FixedPoint2.Min(amount, FixedPoint2.New(talent.Level));
         }
         args.Damage.ExclusiveAdd(damageReduction);
