@@ -24,10 +24,6 @@
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="_Mono\Audio\" />
-    <Folder Include="_VDS\Audio\" />
-  </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
 </Project>
