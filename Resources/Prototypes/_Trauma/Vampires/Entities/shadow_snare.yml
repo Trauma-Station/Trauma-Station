@@ -28,15 +28,14 @@
   - type: EntityEffectOnTrigger
     targetUser: true
     effects:
-    - !type:GenericStatusEffect # TODO: replace with new status effects when it gets merged
+    - !type:ModifyStatusEffect
       conditions:
       - !type:WhitelistCondition
         blacklist:
           components:
           - VampireThrall
           - Vampire
-      key: TemporaryBlindness
-      component: TemporaryBlindness
+      effectProto: StatusEffectBlindness
       time: 15
     - !type:RelayInventory # Note: modsuit lights are borked, im not bothering fixing them. Works for helmets
       effect: !type:NestedEffect
@@ -60,6 +59,7 @@
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
   - type: Damageable
+  - type: Injurable
     damageContainer: ShadowHaze # Same because they literally both get destroyed by flash
 
   # Shadow Snares get deleted when exposed to light for more than 5 seconds
