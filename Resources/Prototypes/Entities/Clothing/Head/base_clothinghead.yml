@@ -112,7 +112,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseClothingViewconeSmall] # Trauma
   id: ClothingHeadEVAHelmetBase
   name: base space helmet
   components:
@@ -154,6 +154,7 @@
 
 - type: entity
   abstract: true
+  parent: BaseClothingViewconeSmall # Trauma
   # No parent since we aren't actually an item.
   id: ClothingHeadHardsuitBase
   name: base hardsuit helmet

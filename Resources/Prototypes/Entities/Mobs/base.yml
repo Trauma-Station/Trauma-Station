@@ -15,6 +15,7 @@
   - type: AnimatedEmotes
   - type: Viewcone
   - type: ViewconeOccludable # if it can move, you probably can't remember it forever?
+    useMemory: false # forgor
   - type: ViewconeFootstepsEffect # if you can hear it move you will see steps effects on screen
   # </Trauma>
   - type: Sprite

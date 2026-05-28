@@ -184,6 +184,8 @@
     allowedStates:
     - Dead
   - type: Rootable
+  - type: Viewcone
+    baseConeAngle: 360
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy

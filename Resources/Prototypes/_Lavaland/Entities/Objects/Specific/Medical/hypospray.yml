@@ -50,10 +50,10 @@
 
 # doesn't get any better than this
 - type: entity
-  name: luxury medipen
+  name: luxurium medipen
   parent: ChemicalMedipen
   id: LuxuryMedipen
-  description: Cutting edge bluespace technology allowed Nanotrasen to compact 180u of volume into a single medipen. Contains rare and powerful chemicals used to aid in exploration of harsh environments. Chemicals relatively harmful and not as effective when used outside of low pressure.
+  description: A medipen containing medicines both ordinary and exotic to keep Nanotrasen's finest miners going. Harmful to use outside of low-pressure environments.
   components:
   - type: Sprite
     sprite: /Textures/_Lavaland/Objects/Specific/Medical/luxmedipen.rsi
@@ -68,23 +68,11 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 180
+        maxVol: 40
         reagents:
-          - ReagentId: DexalinPlus
-            Quantity: 20
-          - ReagentId: Epinephrine # until Penthrite gets shitcoded in someday
-            Quantity: 20
-          - ReagentId: Oxandrolone
-            Quantity: 20
-          - ReagentId: SalicylicAcid
-            Quantity: 20
-          - ReagentId: Omnizine
-            Quantity: 20
-          - ReagentId: Leporazine
-            Quantity: 20
-          - ReagentId: TranexamicAcid
-            Quantity: 20
-          - ReagentId: Saline
-            Quantity: 20
           - ReagentId: Luxurium
             Quantity: 20
+          - ReagentId: TranexamicAcid
+            Quantity: 10
+          - ReagentId: Saline
+            Quantity: 10
