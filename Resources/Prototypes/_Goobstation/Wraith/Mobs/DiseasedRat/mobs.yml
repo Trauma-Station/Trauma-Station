@@ -81,12 +81,11 @@
       types:
         Slash: 3
         Blunt: 2
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
-          Quantity: 100
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
+        Quantity: 100
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 0.10
@@ -99,8 +98,9 @@
     baseWalkSpeed: 3
     baseSprintSpeed: 6
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona # Weak to heat
+  - type: Injurable
+    damageContainer: Biological
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -243,12 +243,12 @@
       types:
         Slash: 3
         Blunt: 2
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
-          Quantity: 100
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: Toxin # Change this to rat spit once that disease effect gets coded.
+        Quantity: 100
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 0.1
@@ -261,8 +261,9 @@
     baseWalkSpeed: 3
     baseSprintSpeed: 6
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona # Weak to heat
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
       - trigger:

@@ -1,5 +1,6 @@
 - type: entity
   abstract: true
+  parent: FoodBase
   id: BasePerishableFood
   components:
   - type: Perishable
@@ -19,3 +20,30 @@
     conductivity: 15
   - type: BurnableFood
     burnTemp: 550
+
+# FoodInjectableBase without perishable stuff
+- type: entity
+  abstract: true
+  parent: FoodBase
+  id: FoodUnperishableInjectableBase
+  components:
+  - type: SpaceGarbage
+  - type: InjectableSolution
+    solution: food
+  - type: RefillableSolution
+    solution: food
+
+# FoodProduceBase without perishable stuff
+- type: entity
+  abstract: true
+  parent: FoodBase
+  id: FoodProduceUnperishableBase
+  components:
+  - type: Solution
+  - type: Sprite
+    state: produce
+  - type: Produce
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: food

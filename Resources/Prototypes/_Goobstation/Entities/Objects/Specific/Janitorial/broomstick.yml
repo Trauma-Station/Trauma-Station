@@ -27,10 +27,10 @@
     size: Large
     #sprite: _Goobstation/Objects/Specific/Janitorial/broomstick.rsi
   - type: Absorbent
-  - type: SolutionContainerManager
-    solutions:
-      absorbed:
-        maxVol: 60
+  - type: Solution
+    id: absorbed
+    solution:
+      maxVol: 60
   - type: UseDelay
     delay: 0.5
   - type: PhysicalComposition #Goobstation - Recycle update

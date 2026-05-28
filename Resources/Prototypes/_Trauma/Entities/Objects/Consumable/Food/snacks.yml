@@ -6,15 +6,14 @@
   id: FoodSnackBase
   components:
   # TODO: could have negative food effects if thats ever added
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 9
-        - ReagentId: LabGrownNutriment
-          Quantity: 1
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 9
+      - ReagentId: LabGrownNutriment
+        Quantity: 1
 
 # Organic snacks, made by the chef so no slop
 # Can't use them in cooking though because microwave is utter shitcode :)
@@ -49,17 +48,16 @@
     tags:
     - FoodSnack
     - ReptilianFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 15 # bonus 5 for making snack
-        - ReagentId: Theobromine
-          Quantity: 3
-        - ReagentId: CocoaPowder
-          Quantity: 1
+  - type: Solution
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 15 # bonus 5 for making snack
+      - ReagentId: Theobromine
+        Quantity: 3
+      - ReagentId: CocoaPowder
+        Quantity: 1
 
 - type: entity
   parent: FoodSnackHealthyBase

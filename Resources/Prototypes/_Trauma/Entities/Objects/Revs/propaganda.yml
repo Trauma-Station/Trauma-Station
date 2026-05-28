@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
+  parent: [ BasePaper, BaseRevMajorContraband ]
   id: RevPropaganda
   name: propaganda pamphlet
   description: It is a revolutionary propaganda pamphlet. It loses its charm after reading it once, so you will need plenty.
@@ -10,13 +10,6 @@
     - state: icon
       visible: true
       map: ["enum.ChargesVisualLayers.ChargesLeft"]
-  - type: Flammable
-    fireSpread: true
-    alwaysCombustible: true
-    damage:
-      types:
-        Heat: 1
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.ChargesVisuals.Charges:
@@ -26,46 +19,6 @@
   - type: FireVisuals
     sprite: _Trauma/Effects/fire.rsi
     normalState: revfire
-  - type: Damageable
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          Ash:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_Goobstation/Items/handling/paper_pickup.ogg
-      params:
-        volume: -6
-  - type: EmitSoundOnDrop
-    sound:
-      path: /Audio/_Goobstation/Items/handling/paper_drop.ogg
-      params:
-        volume: -6
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/_Goobstation/Items/handling/paper_use.ogg
-      params:
-        volume: -6
-  - type: EmitSoundOnCollide
-    sound:
-      path: /Audio/_Goobstation/Items/handling/paper_drop.ogg
-      params:
-        volume: -6
-  - type: EmitSoundOnThrow
-    sound:
-      path: /Audio/_Goobstation/Items/handling/paper_throw.ogg
-      params:
-        volume: -6
   - type: RevPropaganda
     conversionDuration: 2
     consumesCharges: 1
@@ -89,7 +42,7 @@
     maxCharges: 1
   - type: Tag
     tags:
-    - Document
+    - Document # no Paper, cant fax it...
 
 - type: entity
   parent: RevPropaganda

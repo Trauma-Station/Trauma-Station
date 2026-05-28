@@ -33,7 +33,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRuleNoHeretic
-  - HereticGamemode
+  - HereticRoundstart
   - CalmTraitor
 
 - type: gamePreset

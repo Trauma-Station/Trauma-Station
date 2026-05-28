@@ -152,7 +152,7 @@
     bloodReferenceSolution: # TODO Color slime blood based on their slime color or smth
       reagents:
       - ReagentId: Slime
-        Quantity: 300
+        Quantity: 600
   - type: Barotrauma
     damage:
       types:
@@ -200,12 +200,11 @@
   suffix: slime person
   # <Shitmed>
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
   # </Shitmed>
 
 - type: entity
@@ -292,16 +291,9 @@
   - type: ChildOrgan
     parents: [ Torso ] # allow it to be in torsos instead of head
   # </Shitmed>
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50.0
-      # <Shitmed>
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
-      # </Shitmed>
+    - SolutionStomach
   - type: Stomach
   - type: Metabolizer
     maxReagents: 6
@@ -314,15 +306,11 @@
   name: gas sacs
   components:
   # <Shitmed>
-  - type: SolutionContainerManager
-    solutions:
-      Lung:
-        maxVol: 100.0
-        canReact: false
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
   # </Shitmed>
   - type: Lung
     alert: LowNitrogen

@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Tonk-GCR <190437025+Tonk-GCR@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Alcohol drinks
 - type: entity
@@ -8,13 +5,11 @@
   id: DrinkGinAndSonic
   suffix: gin and sonic
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: GinAndSonic
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: GinAndSonic
+        Quantity: 30
   - type: Icon
     sprite: _NF/Objects/Consumable/Drinks/ginandsonic.rsi
     state: icon
@@ -24,13 +19,11 @@
   id: DrinkGoldenCat
   suffix: golden cat
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: GoldenCat
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: GoldenCat
+        Quantity: 30
   - type: Icon
     sprite: _NF/Objects/Consumable/Drinks/goldencat.rsi
     state: icon
@@ -40,13 +33,11 @@
   id: DrinkPineappleBlast
   suffix: pineapple blast
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: PineappleBlast
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: PineappleBlast
+        Quantity: 30
   - type: Icon
     sprite: _NF/Objects/Consumable/Drinks/pineappleblast.rsi
     state: icon
@@ -56,13 +47,11 @@
   id: DrinkTorpedoJuice
   suffix: torpedo juice
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: TorpedoJuice
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: TorpedoJuice
+        Quantity: 30
   - type: Icon
     sprite: _NF/Objects/Consumable/Drinks/torpedojuice.rsi
     state: icon
@@ -72,13 +61,11 @@
   id: DrinkBeesKnees
   suffix: bee's knees
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: BeesKnees
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BeesKnees
+        Quantity: 30
   - type: Icon
     sprite: _NF/Objects/Consumable/Drinks/beesknees.rsi
     state: icon

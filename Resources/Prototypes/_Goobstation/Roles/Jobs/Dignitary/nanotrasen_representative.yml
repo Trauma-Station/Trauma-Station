@@ -16,7 +16,6 @@
   icon: "JobIconNanotrasenRepresentative"
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   guides:
   - SpaceLaw
   - Writing

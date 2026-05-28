@@ -123,6 +123,7 @@
   - type: StaticPrice
     price: 750
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -208,6 +209,7 @@
   - type: StaticPrice
     price: 8000
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

@@ -20,6 +20,6 @@ public sealed partial class UnwieldOnShootSystem : EntitySystem
     private void OnShoot(EntityUid uid, UnwieldOnShootComponent component, ref GunShotEvent args)
     {
         if (TryComp(uid, out WieldableComponent? wieldable))
-            _wieldable.TryUnwield(uid, wieldable, args.User);
+            _wieldable.TryUnwield((uid, wieldable), args.User);
     }
 }

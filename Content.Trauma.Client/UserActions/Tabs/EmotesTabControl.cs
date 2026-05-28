@@ -15,10 +15,11 @@ namespace Content.Trauma.Client.UserActions.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class EmotesTabControl : BaseTabControl
 {
-    [Dependency] private EntityManager _entManager = default!;
+    [Dependency] private EntityManager _ent = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ISharedPlayerManager _playerManager = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
+    private SpriteSystem? _sprite;
 
     private TimeSpan _lastEmoteTime;
     private static readonly TimeSpan EmoteCooldown = TimeSpan.FromSeconds(0);
@@ -67,7 +68,8 @@ public sealed partial class EmotesTabControl : BaseTabControl
     private IconButton CreateEmoteButton(EmotePrototype emote)
     {
         var button = new IconButton(Loc.GetString(emote.Name));
-        button.Icon.Texture = emote.Icon.Frame0();
+        _sprite ??= _ent.System<SpriteSystem>();
+        button.Icon.Texture = _sprite.Frame0(emote.Icon);
         button.OnPressed += _ => OnPlayEmote(new ProtoId<EmotePrototype>(emote.ID));
 
         return button;
@@ -75,7 +77,7 @@ public sealed partial class EmotesTabControl : BaseTabControl
 
     private bool IsEmoteAvailable(EmotePrototype emote, EntityUid player)
     {
-        var whitelistSystem = _entManager.System<EntityWhitelistSystem>();
+        var whitelistSystem = _ent.System<EntityWhitelistSystem>();
 
         if (emote.Category == EmoteCategory.Invalid || emote.ChatTriggers.Count == 0)
             return false;
@@ -85,7 +87,7 @@ public sealed partial class EmotesTabControl : BaseTabControl
             return false;
 
         if (!emote.Available &&
-            _entManager.TryGetComponent<SpeechComponent>(player, out var speech) &&
+            _ent.TryGetComponent<SpeechComponent>(player, out var speech) &&
             !speech.AllowedEmotes.Contains(emote.ID))
             return false;
 
@@ -99,7 +101,7 @@ public sealed partial class EmotesTabControl : BaseTabControl
             return;
 
         _lastEmoteTime = currentTime;
-        _entManager.RaisePredictiveEvent(new PlayEmoteMessage(protoId));
+        _ent.RaisePredictiveEvent(new PlayEmoteMessage(protoId));
     }
 
     protected override void Resized()

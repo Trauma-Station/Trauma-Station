@@ -66,8 +66,9 @@
     alwaysRandomize: true
     layoutId: SurveillanceCamera
   - type: Damageable
+    #damageModifierSet: Metallic # Trauma
+  - type: Injurable
     damageContainer: StructuralInorganic
-    # damageModifierSet: Metallic # Goob
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/camera.rsi
@@ -251,8 +252,9 @@
     - type: Transform
       anchored: true
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: Metallic
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Sprite
       drawdepth: WallMountedItems
       sprite: Structures/Wallmounts/camera.rsi

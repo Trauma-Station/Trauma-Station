@@ -80,7 +80,7 @@
         time: 90
       StatusEffectCurseOfAmok:
         time: 90
-      StatusEffectCurseOfBlindness:
+      StatusEffectBlindness:
         time: 150
       StatusEffectCurseOfFragility:
         time: 300
@@ -125,10 +125,10 @@
     maxFillLevels: 2
     fillBaseName: phylactery
     metamorphic: false
-  - type: SolutionContainerManager
-    solutions:
-      injector:
-        maxVol: 10
+  - type: Solution
+    id: injector
+    solution:
+      maxVol: 10
   - type: MixableSolution
     solution: injector
   - type: ExaminableSolution
@@ -160,9 +160,8 @@
   - type: Icon
     sprite: _Goobstation/Heretic/items.rsi
     state: eldritch_flask
-  - type: SolutionContainerManager
-    solutions:
-      drink:
+  - type: Solution
+    solution:
         # it's a cryostasis flash filled with healing goodies what could possibly go wrong?
         # i will certainly not abuse it as a heretic chemist
         maxVol: 100
@@ -232,7 +231,7 @@
     reflective: Magic
 
 - type: entity
-  id: Inkofimaginination
+  id: InkOfImaginination
   name: Ink of imaginination
   description: Call to the great minimal to bring forth true existence... A closing truth
   parent: BaseItem
@@ -344,6 +343,7 @@
     damageMultiplier: 1.5
   - type: CrackedLanternSummon
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: AlwaysTakeHoly
   - type: Sprite

@@ -60,5 +60,5 @@ public sealed partial class GenericStatusEffect : EntityEffectBase<GenericStatus
         ("chance", Probability),
         ("type", Type),
         ("time", Time.TotalSeconds),
-        ("key", $"entity-effect-status-effect-{Key}"));
+        ("key", Loc.GetString($"entity-effect-status-effect-{Key}"))); // Trauma - localize it here not in loc bruh
 }

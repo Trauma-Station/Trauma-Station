@@ -89122,17 +89122,11 @@ entities:
       parent: 2
     - type: Tag
       tags: []
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Hyronalin
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Hyronalin
+          Quantity: 15
 - proto: SyringePoisonFent
   entities:
   - uid: 8985

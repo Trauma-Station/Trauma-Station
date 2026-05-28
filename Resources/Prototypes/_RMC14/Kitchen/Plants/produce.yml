@@ -8,15 +8,14 @@
     flavors:
       - sweet
       - fruity
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 9
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 4
-        - ReagentId: Vitamin
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 9
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: Vitamin
+        Quantity: 5
   - type: Sprite
     sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
   - type: Item

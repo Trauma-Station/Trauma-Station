@@ -3,7 +3,7 @@
 - type: entity
   abstract: true
   # Used to put pressureProtection, layers blocker and etc components into ComponentToggler
-  parent: BaseItem
+  parent: [BaseItem, BaseClothingViewconeSmall] # Trauma
   id: BaseClothingModsuitHelmet
   name: base modsuit helmet
   categories: [ HideSpawnMenu ]

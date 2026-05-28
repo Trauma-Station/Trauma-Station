@@ -10,6 +10,7 @@
   content:
   - WeaponPistolViper
   - MagazinePistolHighCapacity
+  - EnergyDagger
 
 - type: selectableSet
   id: FugitiveGhostSet
@@ -33,6 +34,9 @@
   - C4 # 1
   - C4 # 2
   - ExGrenade
+  - GrenadeIncendiary
+  - GrenadeShrapnel
+  - EmpGrenade
 
 - type: selectableSet
   id: FugitiveInfiltratorSet
@@ -41,20 +45,22 @@
   sprite:
     entity: AgentIDCard
   content:
-  - AgentIDCard
+  - ChameleonAgentPDA
   - FakeMindShieldImplanter
+  - VoiceMaskImplanter
 
 - type: selectableSet
   id: FugitiveEngineerSet
   name: fugitive-set-engineer-name
   description: fugitive-set-engineer-description
   sprite:
-    sprite: Clothing/Hands/Gloves/Color/yellow.rsi
+    sprite: Clothing/Hands/Gloves/combat.rsi
     state: icon
   content:
-  - ClothingHandsGlovesConducting
-  - ClothingEyesGlassesMeson
-  - ClothingBeltUtilityEngineering
+  - ClothingHandsGlovesCombat
+  - ClothingMaskGasSyndicate
+  - SyndicateJawsOfLife
+  - EmpImplanter
 
 - type: selectableSet
   id: FugitiveContractorSet
@@ -65,6 +71,7 @@
     state: icon
   content:
   - ContractorBaton
+  - FreedomImplanter
 
 - type: selectableSet
   id: FugitiveCommunicatorSet
@@ -75,3 +82,6 @@
   content:
   - EncryptionKeyStationMaster
   - EncryptionKeyFreelance
+  - EncryptionKeySyndie
+  - ClothingMaskGasVoiceChameleon
+  - ClothingHeadsetChameleon

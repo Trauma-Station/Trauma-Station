@@ -149,8 +149,9 @@
     speechVerb: Slime
     speechSounds: Morph
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Morph
+  - type: Injurable
+    damageContainer: Biological
   - type: NpcFactionMember
     factions:
     - SimpleHostile

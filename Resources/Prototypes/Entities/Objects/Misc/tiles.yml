@@ -21,6 +21,7 @@
     tags:
       - DroneUsable # Goobstation
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
