@@ -33,6 +33,7 @@
   - type: SaltLineVisualizer
     state: salt_
   - type: Damageable
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -45,12 +46,11 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/Effects/cig_snuff.ogg
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: TableSalt
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: TableSalt
+        Quantity: 1
   #- type: DamageOnCollide # takes damage when entities collide with it
   #  whitelist:
   #    tags:

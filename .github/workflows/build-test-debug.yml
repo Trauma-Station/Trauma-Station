@@ -86,8 +86,7 @@ jobs:
 
     # never seen it fail once IDC about archiving it
 
-  # Run every test except map loading tests, they take a little while
-  # Any test with Category("MapTests") is excluded
+  # Run every test that doesnt have a [Category] set
   test-main:
     needs: build
     if: github.event.pull_request.draft == false
@@ -102,7 +101,7 @@ jobs:
     - name: Run main Content.IntegrationTests
       run: |
         DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
-          NUnit.Where="cat != MapTests" \
+          NUnit.Where="cat !~ '.+'" \
           NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results
@@ -143,6 +142,35 @@ jobs:
         retention-days: 7
         compression-level: 9
 
+  # Test all the gamerule tests seperately
+  # Any test with Category("GameRuleTests") is used
+  test-gamerules:
+    needs: build
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+
+    steps:
+    - *checkout
+    - *submodule
+    - *submodule_pull
+    - *submodule_update
+    - *download_build
+
+    - name: Run GameRuleTests
+      run: |
+        DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
+          NUnit.Where="cat == GameRuleTests" \
+          NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+
+    - name: Archive NUnit3 test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: nunit3-results-gamerules-${{ github.run_attempt }}
+        path: test_results/*
+        retention-days: 7
+        compression-level: 9
+
   test-map-render:
     needs: build
     if: github.event.pull_request.draft == false
@@ -163,7 +191,7 @@ jobs:
 
   ci-success:
     name: Build & Test Debug
-    needs: [build, test-unit, test-main, test-maps, test-map-render]
+    needs: [build, test-unit, test-main, test-maps, test-gamerules, test-map-render]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -173,6 +201,7 @@ jobs:
                 "${{ needs.test-unit.result }}" != "success" ||
                 "${{ needs.test-main.result }}" != "success" ||
                 "${{ needs.test-maps.result }}" != "success" ||
+                "${{ needs.test-gamerules.result }}" != "success" ||
                 "${{ needs.test-map-render.result }}" != "success" ]]; then
             echo "Not all tests succeeded!"
             exit 1

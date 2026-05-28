@@ -6,21 +6,21 @@
   name: protein powder packet
   description: Contains 10u of powdered protein. Mix with 20u of water
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Protein
-          Quantity: 9
-        - ReagentId: Fentanyl
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Protein
+        Quantity: 9
+      - ReagentId: Fentanyl
+        Quantity: 1
   - type: Icon
     state: packet-greygoo
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: packet-solid-
+  - type: StaticPrice
+    price: 15
 
 - type: entity
   name: block of freedom cheese
@@ -38,15 +38,14 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Food/freedom_cheese.rsi
     state: cheese_block
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 28
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 16
-        - ReagentId: GastroToxin
-          Quantity: 4
+  - type: Solution
+    solution:
+      maxVol: 28
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 16
+      - ReagentId: GastroToxin
+        Quantity: 4
   - type: SliceableFood
     count: 4
     slice: FoodFreedomCheeseSlice
@@ -68,15 +67,14 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Food/freedom_cheese.rsi
     state: cheese_slice
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 7
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 4
-        - ReagentId: GastroToxin
-          Quantity: 1
+  - type: Solution
+    solution:
+      maxVol: 7
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: GastroToxin
+        Quantity: 1
   - type: Tag
     tags:
     - Slice

@@ -19,17 +19,13 @@ public sealed partial class NPCJukeSystem : EntitySystem
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    private EntityQuery<NPCMeleeCombatComponent> _npcMeleeQuery;
-    private EntityQuery<NPCRangedCombatComponent> _npcRangedQuery;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private EntityQuery<NPCMeleeCombatComponent> _npcMeleeQuery = default!;
+    [Dependency] private EntityQuery<NPCRangedCombatComponent> _npcRangedQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _npcMeleeQuery = GetEntityQuery<NPCMeleeCombatComponent>();
-        _npcRangedQuery = GetEntityQuery<NPCRangedCombatComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-
         SubscribeLocalEvent<NPCJukeComponent, NPCSteeringEvent>(OnJukeSteering);
     }
 

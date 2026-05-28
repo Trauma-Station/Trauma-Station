@@ -6,13 +6,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-formaldehyde
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Formaldehyde
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Formaldehyde
+        Quantity: 30
 
 - type: entity
   id: CrateMorgue

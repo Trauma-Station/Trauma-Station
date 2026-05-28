@@ -1,14 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <142914808+Aineias1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ghost-role-information-nukie-reinforcement-name = Nuclear Operative
@@ -114,24 +103,6 @@ ghost-role-information-ancient-rogue-king-rules = You bow to no one. Kill anythi
 ghost-role-information-rules-default-xeno = You are a [color={role-type-team-antagonist-color}][bold]Xenomorph[/bold][/color].
                                             Your objective is to protect your Queen and expand your Hive.
                                             Achieve this by bringing your Queen crewmembers to infest.
-
-# Token Roles
-
-ghost-role-information-description-token-generic = Don't take this role unless you redeemed the token!
-
-ghost-role-information-space-ninja-name-token = Space Ninja (Token)
-ghost-role-information-space-dragon-name-token = Space Dragon (Token)
-ghost-role-information-revenant-name-token = Revenant (Token)
-ghost-role-information-loneop-name-token = Lone Operative (Token)
-ghost-role-information-derelict-cyborg-syndicate-name-token = Derelict Assault Cyborg (Token)
-ghost-role-information-bingle-name-token = Bingle (Token)
-blob-carrier-role-name-token = Blob Carrier (Token)
-abductor-lone-ghost-role-name-token = Lone Abductor (Token)
-roles-wizard-name-token = Wizard (Token)
-roles-slaughter-demon-name-token = Slaughter Demon (Token)
-roles-laughter-demon-name-token = Laughter Demon (Token)
-ghost-role-information-ancient-rogue-king-name-token = Ancient Rogue King (Token)
-ghost-role-information-wraith-name-token = Wraith (Token)
 
 # Misc-Midround Antags
 

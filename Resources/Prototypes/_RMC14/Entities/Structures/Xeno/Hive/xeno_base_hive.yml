@@ -17,5 +17,6 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: Biological

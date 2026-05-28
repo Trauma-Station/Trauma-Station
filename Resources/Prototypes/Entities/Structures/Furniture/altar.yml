@@ -8,6 +8,10 @@
   - type: Anchorable
   - type: Transform
   - type: Prayable
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PlaceableSurface
   - type: Fixtures
     fixtures:

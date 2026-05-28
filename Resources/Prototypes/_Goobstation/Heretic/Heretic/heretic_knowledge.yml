@@ -105,7 +105,7 @@
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
-    - type: TemporaryBlindnessImmunity
+    - type: BlindnessImmunity
     - type: BlurryVisionImmunity
 
 - type: hereticKnowledge

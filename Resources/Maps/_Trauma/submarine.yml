@@ -214135,37 +214135,23 @@ entities:
     - type: Transform
       pos: 87.5,38.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 50
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
     - type: StepTrigger
       active: False
-- proto: PuddleFlour
-  entities:
   - uid: 30095
     components:
     - type: Transform
       pos: 87.5,43.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 30
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 30
     - type: StepTrigger
       active: False
   - uid: 30096
@@ -214173,17 +214159,11 @@ entities:
     - type: Transform
       pos: 85.5,40.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 50
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
     - type: StepTrigger
       active: False
   - uid: 30097
@@ -214191,17 +214171,11 @@ entities:
     - type: Transform
       pos: 90.5,40.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 35
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 35
     - type: StepTrigger
       active: False
 - proto: PuddleSparkle

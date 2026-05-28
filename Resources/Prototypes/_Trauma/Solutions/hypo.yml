@@ -1,0 +1,8 @@
+- type: entity
+  parent: Solution
+  id: SolutionTool50
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 50 # for CMO hypospray to not be strictly worse than crew hypos

@@ -216,7 +216,7 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
         foreach (var crime in crimes)
         {
             var count = RobustRandom.Next(rule.MinCounts, rule.MaxCounts + 1);
-            report.AddMarkupOrThrow(Loc.GetString("fugitive-report-crime", ("crime", Loc.GetString(crime)), ("count", count)));
+            report.AddMarkupOrThrow(Loc.GetString("fugitive-report-crime", ("crime", crime), ("count", count)));
             report.PushNewline();
         }
     }

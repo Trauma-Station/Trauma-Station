@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ DisposalUnitBase, SeatBase ]
+  parent: [ SolutionTank, SolutionHuge, DisposalUnitBase, SeatBase]
   id: BaseToilet
   name: toilet
   description: The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean.
@@ -8,6 +8,11 @@
   # <Trauma>
   - type: AcousticData
     absorption: 5
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: ToiletFishingLootTable
+    fishDefaultTimer: 45.0
+    fishTimerVariety: 15.0
   # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/toilet.rsi
@@ -52,6 +57,7 @@
     containers:
       stash: !type:ContainerSlot {}
       disposals: !type:Container
+      solutions: !type:Container
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -99,25 +105,14 @@
   - type: Rummageable
     table: !type:NestedSelector
       tableId: RatKingLoot
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      drainBuffer:
-        maxVol: 100
-      tank:
-        maxVol: 500
-  #- type: SolutionRegeneration - Goobstation - laggy, also who uses toilets?
-  #  solution: tank
-  #  generated:
-  #    reagents:
-  #    - ReagentId: Water
-  #      Quantity: 1
-  # Goobstation - fishing in toilet is fun
-  - type: FishingSpot
-    fishList: !type:NestedSelector
-      tableId: ToiletFishingLootTable
-    fishDefaultTimer: 45.0
-    fishTimerVariety: 15.0
-  # Goobstation - fishing
+    - SolutionDrainNormal
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Water
+        Quantity: 1
   - type: DrainableSolution
     solution: tank
   - type: ReagentTank
@@ -157,17 +152,13 @@
   id: ToiletDirtyWater
   suffix: Dirty Water
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drainBuffer:
-        maxVol: 100
-      tank:
-        maxVol: 500
-        reagents:
-        - ReagentId: Water
-          Quantity: 180
-        - ReagentId: GastroToxin
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 180
+      - ReagentId: GastroToxin
+        Quantity: 20
 
 - type: entity
   parent: ToiletEmpty
@@ -236,16 +227,12 @@
   components:
   - type: StealTarget
     stealGroup: ToiletGoldenDirtyWater
-  - type: SolutionContainerManager
-    solutions:
-      drainBuffer:
-        maxVol: 100
-      tank:
-        maxVol: 500
-        reagents:
-        - ReagentId: Water
-          Quantity: 160
-        - ReagentId: Gold
-          Quantity: 20
-        - ReagentId: GastroToxin
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 160
+      - ReagentId: Gold
+        Quantity: 20
+      - ReagentId: GastroToxin
+        Quantity: 20

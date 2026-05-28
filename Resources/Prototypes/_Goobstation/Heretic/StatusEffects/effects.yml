@@ -47,15 +47,6 @@
 
 - type: entity
   parent: MobStatusEffectBase
-  id: StatusEffectCurseOfBlindness
-  name: curse of blindness
-  components:
-  - type: GrantComponentsStatusEffect
-    components:
-    - type: TemporaryBlindness
-
-- type: entity
-  parent: MobStatusEffectBase
   id: StatusEffectCurseOfFragility
   name: curse of fragility
   components:

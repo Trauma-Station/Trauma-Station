@@ -29,6 +29,7 @@
 # SPDX-License-Identifier: MIT
 
 - type: entity
+  parent: SolutionLarge
   id: hydroponicsSoil
   name: soil
   description: A mix of organic matter and minerals creating a soil to grow your plant in space. Seems to be dry.
@@ -52,8 +53,9 @@
         layer:
         - FullTileMask
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -68,10 +70,8 @@
     noRot: true
   - type: PlantHolder
     drawWarnings: false
-  - type: SolutionContainerManager
-    solutions:
-      soil:
-        maxVol: 200
+  - type: Solution
+    id: soil
   - type: RefillableSolution
     solution: soil
     maxRefill: 50

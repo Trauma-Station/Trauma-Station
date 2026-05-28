@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
@@ -11,7 +12,7 @@ public sealed class BlindnessImmunitySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<TemporaryBlindnessImmunityComponent, BeforeOldStatusEffectAddedEvent>(OnBeforeBlindness);
+        SubscribeLocalEvent<BlindnessImmunityComponent, BeforeStatusEffectAddedEvent>(OnBeforeBlindness);
         SubscribeLocalEvent<BlurryVisionImmunityComponent, BeforeOldStatusEffectAddedEvent>(OnBeforeBlur);
     }
 
@@ -21,10 +22,9 @@ public sealed class BlindnessImmunitySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnBeforeBlindness(Entity<TemporaryBlindnessImmunityComponent> ent,
-        ref BeforeOldStatusEffectAddedEvent args)
+    private void OnBeforeBlindness(Entity<BlindnessImmunityComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
-        if (args.EffectKey == ent.Comp.Key)
+        if (args.Effect == ent.Comp.Key)
             args.Cancelled = true;
     }
 }

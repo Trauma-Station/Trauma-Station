@@ -19,8 +19,9 @@
     mode: CardinalFlags
 #  - type: SmoothEdge # goobstation new sprites
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resin
+  - type: Injurable
+    damageContainer: Biological
   - type: Fixtures
     fixtures:
       fix1:

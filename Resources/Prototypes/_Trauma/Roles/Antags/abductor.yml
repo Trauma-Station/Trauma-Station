@@ -1,0 +1,88 @@
+- type: antagSpecifier
+  abstract: true
+  id: BaseAbductor
+  unequipOldGear: true
+  briefing:
+    text: abductor-role-greeting
+    color: Green
+    sound: /Audio/_Shitmed/Misc/abductor.ogg
+  components:
+  - type: Abductor
+  - type: ActionGrant
+    actions:
+    - ActionReturnToShip
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Tag
+    tags:
+    - Abductor
+    - AbductorScientist
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+  - type: RandomMetadata
+    nameSegments:
+    - AbductorScientistPrefix
+    - AbductorNames
+    nameFormat: name-format-standard
+
+- type: antagSpecifier
+  parent: BaseAbductor
+  id: LoneAbductor
+  spawnerPrototype: LoneAbductorSpawner
+  startingGear: LoneAbductorGear
+  prefRoles: [ LoneAbductorAntag, AbductorScientistAntag, AbductorAgentAntag ]
+  mindRoles: [ MindRoleLoneAbductor ]
+  components:
+  - type: AbductorScientist
+  - type: SurgeryIgnoreClothing
+  - type: Sanitized
+  - type: SurgerySpeedModifier
+    speedModifier: 1.5
+  # TODO: does this really need to be here...
+  - type: GhostRole
+    name: abductor-lone-ghost-role-name
+    description: abductor-lone-ghost-role-desc
+    rules: abductors-ghost-role-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+
+- type: antagSpecifier
+  parent: BaseAbductor
+  id: AbductorScientist
+  spawnerPrototype: AbductorScientistSpawner
+  startingGear: AbductorScientistGear
+  prefRoles: [ AbductorScientistAntag, AbductorAgentAntag ]
+  mindRoles: [ MindRoleAbductorScientist ]
+  components:
+  - type: AbductorScientist
+  - type: SurgeryIgnoreClothing
+  - type: Sanitized
+  - type: SurgerySpeedModifier
+    speedModifier: 1.5
+
+- type: antagSpecifier
+  parent: BaseAbductor
+  id: AbductorAgent
+  startingGear: AbductorAgentGear
+  prefRoles: [ AbductorAgentAntag, AbductorScientistAntag ]
+  mindRoles: [ MindRoleAbductorAgent ]
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - AbductorAgentPrefix
+    - AbductorNames
+  - type: AbductorScientist # Remove if you want agents to not be able to use teleporter etc solo
+
+- type: antagSpecifier
+  id: AbductorVictim
+  mindRoles: [ MindRoleAbductorVictim ]
+  briefing:
+    text: abductor-victim-role-greeting
+    color: Red
+    sound: /Audio/_Shitmed/Misc/abducted.ogg
+  pickPlayer: false # manually assigned

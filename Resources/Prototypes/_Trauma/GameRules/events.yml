@@ -121,8 +121,8 @@
         weight: 0.05 # NEVER BASICALLY
 
 - type: entity
+  parent: BaseAntagGhostRoleRule
   id: FugitiveSpawn
-  parent: BaseGameRule
   components:
   - type: StationEvent
     weight: 10
@@ -140,36 +140,18 @@
     - FugitiveKillObjective
   - type: AntagSelection
     agentName: ghost-role-information-fugitive-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostRoleFugitive
-      min: 2
-      max: 2
-      pickPlayer: false
-      startingGear: FugitiveAntagGear
-      briefing:
-        text: fugitive-role-greeting
-        color: red
-      components:
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: AutoImplant
-        implants:
-        - UplinkImplant
-      - type: RandomMetadata
-      - type: EmitSoundOnSpawn # fell out of the ceiling
-        sound: /Audio/Effects/clang.ogg
-      mindRoles:
-      - MindRoleGhostRoleFugitive
+    antags:
+    - !type:FixedAntagCount
+      proto: Fugitive
+      count: 2
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
       proto: TraitorSkills
 
-
 - type: entity
+  parent: BaseAntagGhostRoleRule
   id: FugitiveHunterRule
-  parent: BaseGameRule
   components:
   - type: AntagGhostCharacterRule
   - type: AntagObjectives
@@ -187,26 +169,10 @@
     gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
   - type: AntagSelection
     agentName: ghost-role-information-hunter-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostRoleHunter
-      min: 2
-      max: 2
-      pickPlayer: false
-      startingGear: HunterAntagGear
-      briefing:
-        text: hunter-role-greeting
-        color: red
-      components:
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: AutoImplant
-        implants:
-        - FakeMindShieldImplant
-        - DeathAcidifierImplant
-      - type: RandomMetadata
-      mindRoles:
-      - MindRoleGhostRoleHunter
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunter
+      count: 2
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect

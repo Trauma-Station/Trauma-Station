@@ -19,7 +19,7 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _tx = default!;
-    [Dependency] private SharedSolutionContainerSystem _solutions = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private VaporSystem _vapor = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -40,7 +40,7 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
             if (_timing.CurTime >= comp.BoostEnd)
                 continue;
 
-            if (!_solutions.TryGetSolution(uid, comp.FuelSolution, out var solnEnt, out var solution))
+            if (!_solution.TryGetSolution(uid, comp.FuelSolution, out var solnEnt, out var solution))
             {
                 comp.BoostEnd = _timing.CurTime;
                 continue;
@@ -56,7 +56,7 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
             var need = FixedPoint2.New(comp.FuelPerSecond * MathF.Max(frameTime, 0f));
             var take = FixedPoint2.Min(have, need);
             if (take > FixedPoint2.Zero)
-                _solutions.RemoveReagent(solnEnt!.Value, comp.FuelReagent, take);
+                _solution.RemoveReagent(solnEnt!.Value, comp.FuelReagent, take);
 
             if (have < need)
                 comp.BoostEnd = _timing.CurTime;
@@ -77,16 +77,18 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
     {
         var (uid, comp) = ent;
 
-        _solutions.EnsureSolutionEntity((uid, (SolutionContainerManagerComponent?) null),
-            comp.FuelSolution, out _, out var solEnt, FixedPoint2.New(comp.FuelCapacity));
+        if (!_solution.EnsureSolution(uid, comp.FuelSolution, out var sol))
+            return;
 
-        if (solEnt != null && solEnt.Value.Comp.Solution.Volume == 0 && comp.StartFuel > 0)
-            _solutions.TryAddReagent(solEnt.Value, comp.FuelReagent, FixedPoint2.New(comp.StartFuel));
+        _solution.SetCapacity(sol, comp.FuelCapacity);
+
+        if (sol.Comp.Solution.Volume == 0 && comp.StartFuel > 0)
+            _solution.TryAddReagent(sol, comp.FuelReagent, comp.StartFuel);
     }
 
     private void SpawnVaporBurst(EntityUid uid, RocketChairComponent comp)
     {
-        if (!_solutions.TryGetSolution(uid, comp.FuelSolution, out Entity<SolutionComponent>? solnEnt, out var fuelSol))
+        if (!_solution.TryGetSolution(uid, comp.FuelSolution, out var solnEnt))
             return;
 
         var color = _proto.Index<ReagentPrototype>(comp.FuelReagent).SubstanceColor.WithAlpha(1f);
@@ -103,7 +105,7 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
 
         for (var i = 0; i < count; i++)
         {
-            var extracted = _solutions.SplitSolution(solnEnt!.Value, perPuff);
+            var extracted = _solution.SplitSolution(solnEnt.Value, perPuff);
             if (extracted.Volume <= FixedPoint2.Zero)
                 break;
 
@@ -124,7 +126,7 @@ public sealed partial class RocketChairSystem : SharedRocketChairSystem
 
             var vap = Comp<VaporComponent>(vapor);
             var vapEnt = (vapor, vap);
-            _vapor.TryAddSolution(vapEnt, extracted);
+            _solution.TryAddSolution((vapor, Comp<SolutionComponent>(vapor)), extracted);
 
             var speed = comp.VaporVelocity;
             var life = comp.VaporLifetime;

@@ -13,21 +13,13 @@
     - CosmicMonumentObjective
     - CosmicEntropyObjective
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ CosmicAntagCultist ]
-      min: 3
-      max: 8
+    antags:
+    - !type:LinearAntagCount
+      proto: CosmicCultist
+      range:
+        min: 3
+        max: 8
       playerRatio: 7
-      jobBlacklist: [ Chaplain ] # GOOBSTATION
-      blacklist:
-        components:
-        - CommandStaff # GOOBSTATION
-        - AntagImmune
-        - BibleUser
-      components:
-      - type: CosmicCult
-      mindRoles:
-      - MindRoleCosmicCult
   - type: AntagPlayerEffects
     effects:
     - !type:GrantSkills

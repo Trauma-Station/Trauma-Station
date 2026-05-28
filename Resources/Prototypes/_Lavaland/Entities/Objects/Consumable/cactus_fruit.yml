@@ -1,7 +1,7 @@
 - type: entity
-  name: fruiting cacti
   parent: FoodProduceBase
   id: FoodMealCactusFruit
+  name: fruiting cacti
   description: A cactus fruit covered in a thick, reddish skin. And some ash.
   components:
   - type: Edible
@@ -11,14 +11,13 @@
   - type: Sprite
     sprite: _Lavaland/Objects/Consomable/flora.rsi
     state: fruiting_cactus
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 18
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Water # Uhh, cacti are juicy, right?
-          Quantity: 5
-        - ReagentId: VitriumFroth
-          Quantity: 8
+  - type: Solution
+    solution:
+      maxVol: 18
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Water # Uhh, cacti are juicy, right?
+        Quantity: 5
+      - ReagentId: VitriumFroth
+        Quantity: 8
