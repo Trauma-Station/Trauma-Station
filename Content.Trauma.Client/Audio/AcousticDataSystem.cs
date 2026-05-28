@@ -7,8 +7,6 @@
 // this has been heavily refactored by Jellvisk to the point
 // where this is like a ship of theseus situation.
 
-using Content.Client._Mono.Audio;
-using Content.Client._VDS.Audio.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
@@ -24,30 +22,29 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Numerics;
+using Content.Trauma.Client.Audio.Components;
 
-namespace Content.Client._VDS.Audio;
+namespace Content.Trauma.Client.Audio;
 
 /// <summary>
 /// Gathers environmental acoustic data around the player, later to be processed by <see cref="AudioEffectSystem"/>.
 /// </summary>
-public sealed class AcousticDataSystem : EntitySystem
+public sealed partial class AcousticDataSystem : EntitySystem
 {
-    [Dependency] private readonly AudioEffectSystem _audioEffectSystem = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly ILogManager _logMan = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ReflectiveRaycastSystem _reflectiveRaycast = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedRoofSystem _roofSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly TurfSystem _turfSystem = default!;
+    [Dependency] private AudioEffectSystem _audioEffectSystem = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private ILogManager _logMan = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ReflectiveRaycastSystem _reflectiveRaycast = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedRoofSystem _roofSystem = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private TurfSystem _turfSystem = default!;
 
     /// <summary>
     /// Quick reference to our <see cref="AcousticSettingsComponent"/>
@@ -87,7 +84,6 @@ public sealed class AcousticDataSystem : EntitySystem
     /// Our previously recorded magnitude, for lerp purposes.
     /// </summary>
     private float _prevAvgMagnitude;
-
 
     private EntityQuery<AcousticDataComponent> _acousticQuery;
     private EntityQuery<MapGridComponent> _gridQuery;

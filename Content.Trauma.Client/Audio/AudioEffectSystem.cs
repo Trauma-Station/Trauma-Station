@@ -12,19 +12,17 @@ using Content.Shared.GameTicking;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 using DependencyAttribute = Robust.Shared.IoC.DependencyAttribute;
 
-namespace Content.Client._Mono.Audio;
+namespace Content.Trauma.Client.Audio;
 
 /// <summary>
 ///     Handler for client-side audio effects.
 /// </summary>
-public sealed class AudioEffectSystem : EntitySystem
+public sealed partial class AudioEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
 
     /// <summary>
     ///     Whether creating new auxiliaries is safe.

@@ -93,6 +93,10 @@
   description: Heavy as a really heavy thing.
   abstract: true
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+  # </Trauma>
   - type: Clickable
   - type: Sprite
     noRot: true
@@ -121,14 +125,17 @@
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
-  - type: AcousticData # VDS
-    absorption: 20
 
 - type: entity
   id: BaseTree
   description: Yep, it's a tree.
   abstract: true
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 30
+    reflectRay: true
+  # </Trauma>
   - type: SpriteFade
   - type: Clickable
   - type: Sprite
@@ -183,9 +190,6 @@
             max: 8
   - type: TypingIndicator # Add diona typing indicator here so that diona players keep the same typing bubble when polymorphed into a tree.
     proto: diona
-  - type: AcousticData # VDS
-    absorption: 30
-    reflectRay: true
 
 - type: entity
   parent: BaseTree

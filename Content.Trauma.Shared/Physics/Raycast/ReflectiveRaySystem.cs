@@ -1,10 +1,8 @@
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
-using System.Numerics;
 
-namespace Content.Shared._VDS.Physics;
+namespace Content.Trauma.Shared.Physics.Raycast;
 
 /// <summary>
 /// Cast rays with better collision detection and the ability to bounce.
@@ -12,8 +10,8 @@ namespace Content.Shared._VDS.Physics;
 /// </summary>
 public sealed partial class ReflectiveRaycastSystem : EntitySystem
 {
-    [Dependency] private readonly RayCastSystem _rayCast = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private RayCastSystem _rayCast = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
 
     /// <summary>
     /// Automatically cast and iterate through a bouncing ray.

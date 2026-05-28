@@ -5,6 +5,10 @@
   description: A square piece of metal standing on four metal legs.
   abstract: true
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+  # </Trauma>
   - type: Animateable
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -43,8 +47,6 @@
     - ForceFixRotations
   - type: RequireProjectileTarget # Goobstation - Crawling
     ignoreThrow: true
-  - type: AcousticData # VDS
-    absorption: 20
 
 - type: entity
   id: CounterBase
@@ -52,6 +54,10 @@
   name: counter
   abstract: true
   components:
+  # <Trauma>
+  - type: AcousticData # VDS
+    absorption: 35
+  # </Trauma>
   - type: Fixtures
     fixtures:
       fix1:
@@ -64,5 +70,3 @@
         layer:
         - TableLayer
         - BulletImpassable # Goobstation - Crawling
-  - type: AcousticData # VDS
-    absorption: 35

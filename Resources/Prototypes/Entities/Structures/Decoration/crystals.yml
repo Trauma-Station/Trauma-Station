@@ -5,6 +5,11 @@
   name: crystal
   description: A crystaline solid.
   components:
+    # <Trauma>
+    - type: AcousticData
+      absorption: -10 # makes sense right
+      reflectRay: true
+    # </Trauma>
     - type: Sprite
       sprite: Structures/Decoration/crystal.rsi
       state: crystal_grey
@@ -56,9 +61,6 @@
                   max: 1
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
-    - type: AcousticData # VDS
-      absorption: -10 # makes sense right
-      reflectRay: true
 
 - type: entity
   id: CrystalPink

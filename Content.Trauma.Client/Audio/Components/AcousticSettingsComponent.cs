@@ -1,7 +1,6 @@
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
-namespace Content.Client._VDS.Audio.Components;
+namespace Content.Trauma.Client.Audio.Components;
 
 /// <summary>
 /// Holds client-side settings for <see cref="AcousticDataSystem"/> that the player

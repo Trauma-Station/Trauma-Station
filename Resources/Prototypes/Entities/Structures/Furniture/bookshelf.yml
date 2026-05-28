@@ -4,6 +4,11 @@
   name: "bookshelf"
   description: Mostly filled with books.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 30
+    reflectRay: true
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/bookshelf.rsi
     snapCardinals: true
@@ -78,6 +83,3 @@
     graph: Bookshelf
     node: bookshelf
   - type: BlockWeather
-  - type: AcousticData # VDS
-    absorption: 30
-    reflectRay: true

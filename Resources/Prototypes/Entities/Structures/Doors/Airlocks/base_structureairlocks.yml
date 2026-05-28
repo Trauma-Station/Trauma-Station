@@ -4,6 +4,12 @@
   name: airlock
   description: It opens, it closes, and maybe crushes you.
   components:
+  # <Trauma>
+  - type: SoundBlocker
+  - type: AcousticData
+    absorption: 10
+    reflectRay: true
+  # </Trauma>
   - type: Anchorable
     flags:
     - Anchorable
@@ -205,10 +211,6 @@
   - type: Penetratable # Goobstation - Better snipers
     penetrateDamage: 75
     damagePenalty: 0.2
-  - type: SoundBlocker # Trauma
-  - type: AcousticData # VDS
-    absorption: 10
-    reflectRay: true
   placement:
     mode: SnapgridCenter
 

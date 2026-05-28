@@ -5,6 +5,10 @@
   name: table frame
   description: Pieces of metal that make the frame of a table.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 3
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Tables/frame.rsi
   - type: Icon
@@ -54,8 +58,6 @@
   - type: Construction
     graph: Table
     node: TableFrame
-  - type: AcousticData # VDS
-    absorption: 3
 
 - type: entity
   id: CounterWoodFrame
@@ -63,6 +65,10 @@
   name: wooden counter frame
   description: Pieces of wood that make the frame of a table.
   components:
+  # <Trauma>
+  - type: AcousticData # VDS
+    absorption: 5
+  # </Trauma>
   - type: SpriteFade
   - type: Sprite
     sprite: Structures/Furniture/Tables/frame.rsi
@@ -114,8 +120,6 @@
     node: CounterWoodFrame
   - type: RequireProjectileTarget # Goobstation - Crawling
     ignoreThrow: true
-  - type: AcousticData # VDS
-    absorption: 5
 
 - type: entity
   id: CounterMetalFrame
@@ -538,6 +542,10 @@
   name: wood table
   description: Do not apply fire to this. Rumour says it burns easily.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 25
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Tables/wood.rsi
   - type: Icon
@@ -583,8 +591,6 @@
       collection: FootstepWood
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
-  - type: AcousticData # VDS
-    absorption: 25
 
 - type: entity
   id: TableCarpet
@@ -592,6 +598,10 @@
   name: gambling table
   description: Play em' cowboy.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 35
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Tables/carpet.rsi
   - type: Icon
@@ -640,8 +650,6 @@
       collection: FootstepCarpet
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
-  - type: AcousticData # VDS
-    absorption: 35
 
 - type: entity
   id: TableStone
@@ -678,6 +686,10 @@
   name: web table
   description: Really smooth and surprisingly durable.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 30
+  # </Trauma>
   - type: Damageable
     damageModifierSet: Web
   - type: Sprite
@@ -707,8 +719,6 @@
       collection: FootstepCarpet
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
-  - type: AcousticData # VDS
-    absorption: 30
 
 - type: entity
   abstract: true # Trauma - xeno station content wasn't cherry picked
@@ -748,6 +758,10 @@
   name: fancy table
   description: Expensive and rich.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 25
+  # </Trauma>
   - type: Damageable
     damageModifierSet: Wood
   - type: Destructible
@@ -786,8 +800,6 @@
       collection: FootstepCarpet
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
-  - type: AcousticData # VDS
-    absorption: 25
 
 - type: entity
   id: TableFancyBlue
@@ -969,6 +981,10 @@
   name: wood counter
   description: Do not apply fire to this. Rumour says it burns easily.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 25
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Tables/counterwood.rsi
   - type: Icon
@@ -1008,8 +1024,6 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepWood
-  - type: AcousticData # VDS
-    absorption: 25
 
 - type: entity
   id: TableCounterMetal

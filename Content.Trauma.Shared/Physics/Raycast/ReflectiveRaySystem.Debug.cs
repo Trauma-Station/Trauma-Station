@@ -2,11 +2,11 @@ using JetBrains.Annotations;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 
-namespace Content.Shared._VDS.Physics;
+namespace Content.Trauma.Shared.Physics.Raycast;
 
 public sealed partial class ReflectiveRaycastSystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physicsSystem = default!;
 
     /// <summary>
     /// Returns our current state as a string dictionary. Useful for debugging without a debugger, or logging.

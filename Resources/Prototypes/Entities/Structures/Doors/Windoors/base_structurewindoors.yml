@@ -11,6 +11,9 @@
     penetrateDamage: 25
     damagePenalty: 0.1
   - type: ReflectiveSurface
+  - type: AcousticData
+    absorption: 5
+    reflectRay: true
   # </Trauma>
   - type: Anchorable
     flags:
@@ -185,9 +188,6 @@
     tags:
       - DoorRemoteWhitelist
       # This tag is used by door remotes to allow or not a door remote to normally be able to interact with a door
-  - type: AcousticData # VDS
-    absorption: 5
-    reflectRay: true
 
 - type: entity
   id: BaseSecureWindoor
