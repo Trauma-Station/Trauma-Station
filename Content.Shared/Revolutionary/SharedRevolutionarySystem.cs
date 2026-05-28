@@ -31,6 +31,7 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem
         // <Trauma>
         SubscribeLocalEvent<HeadRevolutionaryComponent, RemoveMindShieldEvent>(OnMindshieldRemoval);
         // </Trauma>
+        SubscribeLocalEvent<RevolutionaryComponent, AttemptConvertRevolutionaryEvent>(OnAttemptConvert);
     }
 
     /// <summary>
@@ -107,5 +108,10 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem
         {
             Dirty(uid, comp);
         }
+    }
+
+    private void OnAttemptConvert(Entity<RevolutionaryComponent> ent, ref AttemptConvertRevolutionaryEvent args)
+    {
+        args.Cancelled = true;
     }
 }

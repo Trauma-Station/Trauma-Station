@@ -4,8 +4,10 @@ using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -204,6 +206,7 @@ public sealed partial class DamageableSystem
         return list;
     }
 
+    // TODO: kill this shit
     /// <summary>
     /// Updates the parent entity's damage values by summing damage from all body parts.
     /// Should be called after damage is applied to any body part.
@@ -214,7 +217,7 @@ public sealed partial class DamageableSystem
     /// <param name="origin">The entity that caused the damage</param>
     /// <param name="ignoreBlockers">Whether to ignore damage blockers</param>
     /// <returns>True if parent damage was updated, false otherwise</returns>
-    private bool UpdateParentDamageFromBodyParts(
+    public bool UpdateParentDamageFromBodyParts(
         EntityUid body,
         DamageSpecifier? appliedDamage,
         bool interruptsDoAfters,
@@ -252,8 +255,7 @@ public sealed partial class DamageableSystem
         OnEntityDamageChanged((body, bodyDamage),
             appliedDamage,
             interruptsDoAfters,
-            origin,
-            ignoreBlockers: ignoreBlockers);
+            origin);
 
         return true;
     }
@@ -334,12 +336,12 @@ public sealed partial class DamageableSystem
         }
     }
 
-    public void SetDamageContainerID(Entity<DamageableComponent?> ent, string damageContainerId)
+    public void SetDamageContainerID(Entity<InjurableComponent?> ent, [ForbidLiteral] ProtoId<DamageContainerPrototype> id)
     {
-        if (!_damageableQuery.Resolve(ent, ref ent.Comp) || ent.Comp.DamageContainerID == damageContainerId)
+        if (!_injurableQuery.Resolve(ent, ref ent.Comp) || ent.Comp.DamageContainer == id)
             return;
 
-        ent.Comp.DamageContainerID = damageContainerId;
+        ent.Comp.DamageContainer = id;
         Dirty(ent);
     }
 }

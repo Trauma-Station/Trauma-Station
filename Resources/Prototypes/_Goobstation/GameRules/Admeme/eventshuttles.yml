@@ -99,7 +99,7 @@
 
 #Contractor
 - type: entity
-  parent: BaseUnknownShuttleRule
+  parent: [ BaseAntagGhostRoleRule, BaseUnknownShuttleRule ]
   id: ContractorSpawn
   components:
   - type: StationEvent
@@ -120,28 +120,7 @@
     objectives:
     - ContractorRansomObjective
   - type: AntagSelection
-    selectionTime: PostPlayerSpawn
     agentName: ghost-role-information-contractor-name
-    definitions:
-    - spawnerPrototype: ContractorSpawner
-      min: 1
-      max: 1
-      pickPlayer: false
-      startingGear: ContractorGear
-      roleLoadout:
-      - RoleSurvivalNukie
-      mindRoles:
-      - MindRoleContractor
-      briefing:
-        text: contractor-role-greeting
-        color: Red
-        sound: /Audio/Ambience/Antag/traitor_wawa.ogg
-      components:
-      - type: RandomMetadata
-        nameSegments:
-        - NamesContractorPrefix
-        - NamesSyndicateElite
-        nameFormat: name-format-standard
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
+    antags:
+    - !type:FixedAntagCount
+      proto: Contractor

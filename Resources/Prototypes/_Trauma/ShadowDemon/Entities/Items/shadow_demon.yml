@@ -7,13 +7,12 @@
   - type: Sprite
     sprite: _Goobstation/Wizard/Objects/vials.rsi
     state: vialshadows
-  - type: SolutionContainerManager
-    solutions:
-      liquid:
-        maxVol: 15
-        reagents:
-        - ReagentId: Blood
-          Quantity: 15
+  - type: Solution
+    id: liquid
+    solution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 15
   - type: ExaminableSolution
     solution: liquid
   - type: Item
@@ -22,7 +21,7 @@
     damage:
       types:
         Blunt: 5
-  - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

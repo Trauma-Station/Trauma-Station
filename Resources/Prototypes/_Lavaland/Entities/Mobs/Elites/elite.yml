@@ -55,8 +55,9 @@
       0: Alive
       1000: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
   - type: TileMovement
   - type: BossMusic
     soundId: Miniboss
@@ -111,8 +112,9 @@
       0: Alive
       1000: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
 
 - type: entity
   id: LavalandElitePandora #Just a hierophant resprite, all of these are templates anyway.
@@ -155,8 +157,9 @@
   - type: MobState
   # Actual boss from here
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -250,8 +253,9 @@
   - type: Aggressive # also required component for aggro checking
     forgiveRange: 20.0
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
 
 - type: entity
   name: Broodmother
@@ -301,5 +305,6 @@
       0: Alive
       1000: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic

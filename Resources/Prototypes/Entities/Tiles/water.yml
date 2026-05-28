@@ -1,20 +1,5 @@
-# SPDX-FileCopyrightText: 2023 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Froffy025 <78222136+Froffy025@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 justdie12 <125140938+justdie12@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
+  parent: SolutionTile
   id: FloorWaterEntity
   name: water
   description: A real thirst quencher.
@@ -33,15 +18,13 @@
     drawdepth: BelowFloor
     layers:
       - state: shoreline_water
-  - type: SolutionContainerManager
-    solutions:
-      pool:
-        maxVol: 9999999 #.inf seems to break the whole yaml file, but would definitely be preferable.
-        reagents:
-        - ReagentId: Water
-          Quantity: 9999999
-  #- type: SolutionRegeneration Goobstation - laggy as shit
-  #  solution: tank
+  - type: Solution
+    id: pool
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 99999999 # Trauma - remove need for regen
+  #- type: SolutionRegeneration # Trauma - no lag
   #  generated:
   #    reagents:
   #    - ReagentId: Water

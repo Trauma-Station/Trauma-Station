@@ -39,7 +39,7 @@ public sealed partial class CarvingKnifeBoundUserInterface(EntityUid owner, Enum
 
             models[i] = new RadialMenuActionOption<EntProtoId>(HandleRadialMenuClick, protoId)
             {
-                IconSpecifier = proto.TryGetComponent(out IconComponent? icon)
+                IconSpecifier = proto.TryGetComponent(out IconComponent? icon, EntMan.ComponentFactory)
                     ? new RadialMenuTextureIconSpecifier(icon.Icon)
                     : new RadialMenuEntityPrototypeIconSpecifier(proto),
                 ToolTip = Loc.GetString("carving-knife-ui-tooltip", ("name", proto.Name), ("desc", proto.Description)),

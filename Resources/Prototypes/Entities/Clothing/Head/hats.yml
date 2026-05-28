@@ -53,7 +53,7 @@
 
 # TODO: Make a single ClothingHeadHatArmoreredBeret in goob namespace so all these items dont need to have armor values listed seperately, since they wont have seperate armor values ANYWAY!
 - type: entity
-  parent: [ClothingHeadHatBeret, BaseSecurityContraband] #goobstation - contraband marking
+  parent: [ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] #goobstation - contraband marking
   id: ClothingHeadHatBeretSecurity
   name: security beret
   description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
@@ -191,7 +191,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatBeretRND, BaseSecurityCommandContraband] # Goob edit
+  parent: [ClothingHeadHatBeretRND, BaseSecurityCommandContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
   id: ClothingHeadHatBeretHoS
   name: head of security's beret
   description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
@@ -297,7 +297,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ ClothingHeadBase ]
+  parent: [ ClothingHeadBase, BaseClothingViewconeSmallIncrease ] # Trauma
   id: ClothingHeadHatBeretMerc
   name: mercenary beret
   description: An olive beret with a badge depicting a jackal on a rock.
@@ -874,7 +874,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseSecurityContraband] # Goob edit
+  parent: [ClothingHeadBase, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
   id: ClothingHeadHatWarden
   name: warden's cap
   description: This hat emphasizes that you are THE LAW.
@@ -1636,6 +1636,7 @@
         Heat: 1
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
   - type: Appearance
   - type: FireVisuals
     sprite: Effects/fire.rsi

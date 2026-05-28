@@ -1,24 +1,23 @@
 - type: entity
-  name: burned food
-  parent: EdibleBase
+  parent: FoodBase
   id: FoodBurned
+  name: burned food
   description: An all too common mistake.
   components:
   - type: FlavorProfile
     flavors:
-      - terrible
+    - terrible
   - type: Sprite
     sprite: Objects/Consumable/Food/ingredients.rsi
     state: badrecipe
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 8
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: GastroToxin
-          Quantity: 3
+  - type: Solution
+    solution:
+      maxVol: 8
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: GastroToxin
+        Quantity: 3
   - type: Tag
     tags:
     - Trash

@@ -17,12 +17,9 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
-    private EntityQuery<TransformComponent> _xformQuery;
-
     public override void Initialize()
     {
         base.Initialize();
-        _xformQuery = GetEntityQuery<TransformComponent>();
 
         // WD EDIT START
         SubscribeLocalEvent<PinpointerComponent, MapInitEvent>(OnMapInit); // TODO: move to a different system bruh
@@ -167,7 +164,7 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
 
             foreach (var (otherUid, _) in EntityManager.GetAllComponents(reg.Type))
             {
-                if (!_xformQuery.TryGetComponent(otherUid, out var compXform) || compXform.MapID != mapId)
+                if (!TryComp(otherUid, out TransformComponent? compXform) || compXform.MapID != mapId)
                     continue;
 
                 if (Whitelist.IsWhitelistPass(blacklist, otherUid))
@@ -191,10 +188,8 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
         EntityWhitelist whitelist,
         EntityWhitelist? blacklist)
     {
-        _xformQuery.Resolve(ent, ref ent.Comp, false);
         var list = new List<EntityUid>();
-
-        if (ent.Comp == null)
+        if (!EntityManager.TransformQuery.Resolve(ent, ref ent.Comp, false))
             return list;
 
         var transform = ent.Comp;
@@ -214,7 +209,7 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
 
             foreach (var (otherUid, _) in EntityManager.GetAllComponents(reg.Type))
             {
-                if (!_xformQuery.TryGetComponent(otherUid, out var compXform) || compXform.MapID != mapId)
+                if (!TryComp(otherUid, out TransformComponent? compXform) || compXform.MapID != mapId)
                     continue;
 
                 if (Whitelist.IsWhitelistPass(blacklist, otherUid))
@@ -271,12 +266,10 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
     /// <returns>Null if failed to calculate distance between two entities</returns>
     private Vector2? CalculateDirection(EntityUid pinUid, EntityUid trgUid)
     {
-        var xformQuery = GetEntityQuery<TransformComponent>();
-
         // check if entities have transform component
-        if (!xformQuery.TryGetComponent(pinUid, out var pin))
+        if (!TryComp(pinUid, out TransformComponent? pin))
             return null;
-        if (!xformQuery.TryGetComponent(trgUid, out var trg))
+        if (!TryComp(trgUid, out TransformComponent? trg))
             return null;
 
         // check if they are on same map
@@ -284,7 +277,7 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
             return null;
 
         // get world direction vector
-        var dir = _transform.GetWorldPosition(trg, xformQuery) - _transform.GetWorldPosition(pin, xformQuery);
+        var dir = _transform.GetWorldPosition(trg) - _transform.GetWorldPosition(pin);
         return dir;
     }
 

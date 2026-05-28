@@ -1,9 +1,9 @@
 - type: entity
-  id: BaseSlimeExtract
+  abstract: true
   parent: BaseItem
+  id: BaseSlimeExtract
   name: slime extract
   description: Goo extracted from a slime. Legends claim these to have "magical powers".
-  abstract: true
   components:
   - type: Item
     size: Small
@@ -13,10 +13,10 @@
       state: core
       color: "#828282"
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      extract:
-        maxVol: 100
+  - type: Solution
+    id: extract
+    solution:
+      maxVol: 100
   - type: InjectableSolution
     solution: extract
   - type: DrawableSolution

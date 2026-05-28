@@ -75,7 +75,7 @@ public sealed partial class GamerWordsSystem : EntitySystem
             return false;
 
         // 1. tell admins
-        _chat.SendAdminAlert("Player {player.Name} has been smitten for trying to say gamer words");
+        _chat.SendAdminAlert($"Player {player.Name} has been smitten for trying to say gamer words");
         // 2. smite by god so the people know
         if (player.AttachedEntity is {} mob)
             _thunderstrike.Smite(mob);

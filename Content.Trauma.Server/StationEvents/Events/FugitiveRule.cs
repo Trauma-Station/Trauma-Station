@@ -16,7 +16,6 @@ using Content.Trauma.Common.Roles;
 using Content.Trauma.Server.StationEvents.Components;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Containers;
-using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Trauma.Server.StationEvents.Events;
@@ -40,35 +39,6 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
     }
 
     /// <summary>
-    /// Checks if hunters should be spawned before the announcement and spawns them outside the active tick loop
-    /// </summary>
-    public override void Update(float frameTime)
-    {
-        var spawnHunters = false;
-
-        var query = EntityQueryEnumerator<FugitiveRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var gameRule))
-        {
-            if (!GameTicker.IsGameRuleActive(uid, gameRule))
-                continue;
-
-            if (!comp.HuntersSpawned
-                && comp.NextAnnounce is { } spawnCheck
-                && Timing.CurTime >= spawnCheck - comp.HunterSpawnDelay)
-            {
-                comp.HuntersSpawned = true;
-                spawnHunters = true;
-            }
-        }
-
-        // Spawn hunters after the loop to avoid modifying the collection mid-iteration
-        if (spawnHunters)
-            _ticker.StartGameRule(HunterSpawnProto);
-
-        base.Update(frameTime);
-    }
-
-    /// <summary>
     /// Sends the report to every comms console on the station, and prevents any possible funnies
     /// </summary>
     protected override void ActiveTick(EntityUid uid, FugitiveRuleComponent component, GameRuleComponent gameRule, float frameTime)
@@ -79,6 +49,8 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
         var announcement = Loc.GetString(component.Announcement);
         var sender = Loc.GetString(component.Sender);
         ChatSystem.DispatchGlobalAnnouncement(announcement, sender: sender, colorOverride: component.Color);
+
+        _ticker.StartGameRule(HunterSpawnProto);
 
         var query = EntityQueryEnumerator<CommunicationsConsoleComponent, TransformComponent>();
         while (query.MoveNext(out var console, out _, out var xform))
@@ -93,8 +65,6 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
         }
 
         component.NextAnnounce = null;
-
-        RemCompDeferred(uid, component);
     }
 
      /// <summary>
@@ -246,7 +216,7 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
         foreach (var crime in crimes)
         {
             var count = RobustRandom.Next(rule.MinCounts, rule.MaxCounts + 1);
-            report.AddMarkupOrThrow(Loc.GetString("fugitive-report-crime", ("crime", Loc.GetString(crime)), ("count", count)));
+            report.AddMarkupOrThrow(Loc.GetString("fugitive-report-crime", ("crime", crime), ("count", count)));
             report.PushNewline();
         }
     }

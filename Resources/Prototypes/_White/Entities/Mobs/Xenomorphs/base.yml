@@ -74,8 +74,9 @@
       125: 0.9
       150: 0.8
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: Stamina
     baseCritThreshold: 500
   - type: Fixtures

@@ -82,11 +82,10 @@ public abstract partial class SharedHereticAbilitySystem
         if (TryComp(ent, out CuffableComponent? cuffable) && _cuffs.TryGetLastCuff((ent, cuffable), out var cuffs))
             _cuffs.Uncuff(ent, null, cuffs.Value, cuffable);
 
-        if (TryComp(ent, out EnsnareableComponent? ensnareable) && ensnareable.IsEnsnared &&
-            ensnareable.Container.ContainedEntities.Count > 0)
+        if (TryComp(ent, out EnsnareableComponent? ensnareable) && _snare.IsEnsnared((ent, ensnareable)))
         {
-            var bola = ensnareable.Container.ContainedEntities[0];
-            _snare.ForceFree(bola, Comp<EnsnaringComponent>(bola));
+            var bola = ensnareable.Container!.ContainedEntities[0];
+            _snare.ForceFree(bola);
         }
 
         _pulling.StopAllPulls(ent, stopPuller: false);
