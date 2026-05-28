@@ -21,6 +21,9 @@
     channels:
     - Binary
   - type: IntellicardableMind
+  - type: AcousticData
+    absorption: 20
+    reflectRay: true
   # </Trauma>
   - type: ActionGrant
     actions:
@@ -131,9 +134,6 @@
     price: 100
   - type: Appearance
   - type: WiresVisuals
-  - type: AcousticData # VDS
-    absorption: 20
-    reflectRay: true
 
 - type: entity
   id: VendingMachineWallmount

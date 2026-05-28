@@ -5,6 +5,10 @@
   name: crate
   description: A large container for items.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 10
+  # </Trauma>
   - type: Animateable
   - type: Transform
     noRot: true
@@ -73,8 +77,6 @@
   - type: Tag
     tags:
       - Crate
-  - type: AcousticData # VDS
-    absorption: 10
 
 - type: entity
   parent: CrateGeneric

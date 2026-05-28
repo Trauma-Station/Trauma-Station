@@ -14,6 +14,9 @@
   - type: ReflectiveSurface
   - type: PlacementReplacement
     key: windows
+  - type: AcousticData
+    absorption: 10
+    reflectRay: true
   # </Trauma>
   - type: Anchorable
     flags:
@@ -103,9 +106,6 @@
   - type: StaticPrice
     price: 100
   - type: BlockWeather
-  - type: AcousticData # VDS
-    absorption: 10
-    reflectRay: true
 
 - type: entity
   parent: Window
@@ -161,6 +161,11 @@
     snap:
     - Window
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 6
+    reflectRay: true
+  # </Trauma>
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -246,9 +251,6 @@
   - type: StaticPrice
     price: 15
   - type: ReflectiveSurface # Goob
-  - type: AcousticData # VDS
-    absorption: 6
-    reflectRay: true
 
 - type: entity
   id: WindowDirectionalRCDResistant

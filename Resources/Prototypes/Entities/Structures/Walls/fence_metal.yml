@@ -5,6 +5,10 @@
   description: A metal piece of fencing cordoning off something likely very important.
   abstract: true
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 2
+  # </Trauma>
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -79,8 +83,6 @@
     cost: 2
     delay: 2
     fx: EffectRCDDeconstruct2
-  - type: AcousticData # VDS
-    absorption: 2
 
 - type: entity
   parent: BaseFenceMetal

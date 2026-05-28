@@ -5,6 +5,11 @@
   description: A liquids storage tank.
   abstract: true
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 15
+    reflectRay: true
+  # </Trauma>
   - type: Animateable
   - type: Sprite
     noRot: true
@@ -67,9 +72,6 @@
   - type: ReagentTank
   - type: Transform
     noRot: true
-  - type: AcousticData # VDS
-    absorption: 15
-    reflectRay: true
 
 # For highcap tanks
 - type: entity

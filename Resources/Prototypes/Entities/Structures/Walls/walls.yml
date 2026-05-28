@@ -9,6 +9,17 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 50
+    damagePenalty: 0.1
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: SoundBlocker
+  - type: AcousticData
+    absorption: 5
+    reflectRay: true
+  # </Trauma>
   - type: Anchorable
     flags:
     - Anchorable
@@ -53,17 +64,6 @@
     price: 75
   - type: BlockWeather
   - type: SunShadowCast
-  - type: AcousticData # VDS
-    absorption: 5
-    reflectRay: true
-  # <Trauma>
-  - type: Penetratable
-    penetrateDamage: 50
-    damagePenalty: 0.1
-  - type: ExaminableDamage
-    messages: WindowMessages
-  - type: SoundBlocker
-  # </Trauma>
 
 - type: entity
   abstract: true
@@ -1291,6 +1291,11 @@
   name: wood wall
   description: The traditional greytide defense.
   components:
+  # <Trauma>
+  - type: AcousticData # wood absorb more
+    absorption: 12
+    reflectRay: true
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/wood.rsi
   - type: Icon
@@ -1325,9 +1330,6 @@
     base: wood
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WallCosmicCult
-  - type: AcousticData # VDS. wood absorb more!
-    absorption: 12
-    reflectRay: true
 
 - type: entity
   parent: BaseWall
@@ -1335,6 +1337,11 @@
   name: web wall
   description: Keeps the spiders in and the greytide out.
   components:
+  # <Trauma>
+  - type: AcousticData # web sticky
+    absorption: 22
+    reflectRay: true
+  # </Trauma>
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -1377,9 +1384,6 @@
   - type: Construction
     graph: WebStructures
     node: wall
-  - type: AcousticData # VDS. web sticky
-    absorption: 22
-    reflectRay: true
 
 
 # Lavalend Walls

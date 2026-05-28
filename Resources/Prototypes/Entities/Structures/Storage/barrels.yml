@@ -5,6 +5,11 @@
   name: chemical barrel
   description: A small metal drum. How tropical.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+    reflectRay: true
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/barrels.rsi
     state: metalbarrel
@@ -50,9 +55,6 @@
     solution: tank
   - type: StaticPrice
     price: 500
-  - type: AcousticData # VDS
-    absorption: 20
-    reflectRay: true
 
 - type: entity
   parent: BaseBarrelChem

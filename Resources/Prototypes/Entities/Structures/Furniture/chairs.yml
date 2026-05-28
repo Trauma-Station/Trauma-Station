@@ -6,6 +6,10 @@
   placement:
     mode: PlaceFree
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 12
+  # </Trauma>
   - type: Animateable
   - type: Clickable
   - type: InteractionOutline
@@ -52,8 +56,6 @@
   - type: Tag # goob edit
     tags:
     - Chair
-  - type: AcousticData # VDS
-    absorption: 12
 
 #Starts unanchored, cannot be rotated while anchored
 - type: entity
@@ -98,12 +100,14 @@
   placement:
     mode: SnapgridCenter
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 10
+  # </Trauma>
   - type: Physics
     bodyType: Static
   - type: Transform
     anchored: true
-  - type: AcousticData # VDS. smaller :-|
-    absorption: 10
 
 - type: entity
   name: chair
@@ -218,6 +222,10 @@
   id: ChairWood
   parent: UnanchoredChairBase
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 18
+  # </Trauma>
   - type: Sprite
     state: wooden
   - type: Construction
@@ -256,8 +264,6 @@
     - Chair # Goob
   - type: StaticPrice
     price: 75
-  - type: AcousticData # VDS. wood :-)
-    absorption: 18
 
 - type: entity
   name: ritual chair
@@ -329,6 +335,10 @@
   description: For true web developers.
   parent: UnanchoredChairBase
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Web/chair.rsi
     state: icon
@@ -367,8 +377,6 @@
   - type: Construction
     graph: WebStructures
     node: chair
-  - type: AcousticData # VDS. web :-)
-    absorption: 20
 
 - type: entity
   parent: [SeatBase, BaseDeployFoldable]
@@ -376,6 +384,10 @@
   name: folding chair
   description: If you carry six of these you become the coolest kid at church.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 6
+  # </Trauma>
   - type: Rotatable
   - type: Sprite
     sprite: Structures/Furniture/folding_chair.rsi
@@ -398,8 +410,6 @@
     graph: Seat
     node: chairFolding
   - type: DamageExaminable
-  - type: AcousticData # VDS. cheap :-(
-    absorption: 6
 
 - type: entity
   parent: ChairFolding
@@ -463,6 +473,10 @@
   parent: ChairBase
   description: Did you get a splinter? Well, at least it’s eco friendly.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+  # </Trauma>
   - type: Sprite
     state: wooden-bench
   - type: Construction
@@ -495,5 +509,3 @@
             max: 4
   - type: StaticPrice
     price: 50
-  - type: AcousticData # VDS. wood (big) :-)
-    absorption: 20

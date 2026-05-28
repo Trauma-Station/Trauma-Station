@@ -13,8 +13,6 @@ using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared._VDS.Audio.Components;
-using Content.Shared._VDS.CCVars;
-using Content.Shared._VDS.Physics;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Audio;
@@ -27,6 +25,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using Content.Trauma.Client.Audio.Components;
+using Content.Trauma.Common.CCVar;
+using Content.Trauma.Shared.Physics.Raycast;
 
 namespace Content.Trauma.Client.Audio;
 
@@ -98,9 +98,9 @@ public sealed partial class AcousticDataSystem : EntitySystem
 
         _sawmill = _logMan.GetSawmill("acoustics");
 
-        _configurationManager.OnValueChanged(VCCVars.AcousticEnable, x => _acousticEnabled = x, invokeImmediately: true);
-        _configurationManager.OnValueChanged(VCCVars.AcousticHighResolution, x => _calculatedDirections = GetEffectiveDirections(x), invokeImmediately: true);
-        _configurationManager.OnValueChanged(VCCVars.AcousticReflectionCount, x => _acousticMaxReflections = x, invokeImmediately: true);
+        _configurationManager.OnValueChanged(TraumaCVars.AcousticEnable, x => _acousticEnabled = x, invokeImmediately: true);
+        _configurationManager.OnValueChanged(TraumaCVars.AcousticHighResolution, x => _calculatedDirections = GetEffectiveDirections(x), invokeImmediately: true);
+        _configurationManager.OnValueChanged(TraumaCVars.AcousticReflectionCount, x => _acousticMaxReflections = x, invokeImmediately: true);
 
         _acousticQuery = GetEntityQuery<AcousticDataComponent>();
         _gridQuery = GetEntityQuery<MapGridComponent>();

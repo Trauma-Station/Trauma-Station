@@ -9,6 +9,9 @@
   - type: Penetratable
     penetrateDamage: 5
     damagePenalty: .5
+  - type: AcousticData
+    absorption: 15
+    reflectRay: true
   # </Trauma>
   - type: Animateable
   - type: ResistLocker
@@ -108,9 +111,6 @@
     stateDoorClosed: generic_door
   - type: StaticPrice
     price: 75
-  - type: AcousticData # VDS
-    absorption: 15
-    reflectRay: true
 
 # steel closet base (that can be constructed/deconstructed)
 - type: entity
@@ -236,6 +236,11 @@
   name: suit storage unit
   description: A fancy hi-tech storage unit made for storing space suits.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+    reflectRay: true
+  # </Trauma>
   - type: AccessReader
   - type: Lock
   - type: Anchorable
@@ -319,6 +324,3 @@
     stateDoorOpen: base
     stateDoorClosed: door
   - type: LockVisuals
-  - type: AcousticData # VDS
-    absorption: 20
-    reflectRay: true

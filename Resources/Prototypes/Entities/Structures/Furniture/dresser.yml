@@ -4,6 +4,10 @@
   name: dresser
   description: Wooden dresser, can store things inside itself, ideal for underwear, and someone's kidneys?...
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/furniture.rsi
     state: dresser
@@ -50,8 +54,6 @@
   - type: Construction
     graph: Dresser
     node: dresser
-  - type: AcousticData # VDS
-    absorption: 20
 
 - type: entity
   id: DresserFilled

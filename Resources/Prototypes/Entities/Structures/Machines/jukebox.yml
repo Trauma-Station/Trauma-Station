@@ -1,18 +1,13 @@
-# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 iNVERTED <alextjorgensen@gmail.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: Jukebox
   name: jukebox
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   description: A machine capable of playing a wide variety of tunes. Enjoyment not guaranteed.
   components:
+  # <Trauma>
+  - type: AcousticData # jukeboxes are also anti-reverb machine did you know that
+    absorption: 60
+  # </Trauma>
   - type: StationAiWhitelist
   - type: Sprite
     sprite: Structures/Machines/jukebox.rsi
@@ -73,5 +68,3 @@
         layer:
         - MachineLayer
         density: 200
-  - type: AcousticData # VDS. jukeboxes are also anti-reverb machine did you know that
-    absorption: 60

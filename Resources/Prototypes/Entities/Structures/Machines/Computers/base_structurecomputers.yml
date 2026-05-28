@@ -5,7 +5,11 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: TelekineticInteractable # Trauma
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+  - type: TelekineticInteractable
+  # </Trauma>
   - type: Animateable
   - type: MeleeSound
     soundGroups:
@@ -71,8 +75,6 @@
     blacklist:
       tags:
       - NoConsoleSound
-  - type: AcousticData # VDS
-    absorption: 20
   - type: ContainerContainer
     containers:
       board: !type:Container

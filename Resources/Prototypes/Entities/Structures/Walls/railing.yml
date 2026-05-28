@@ -5,6 +5,10 @@
   name: railing
   description: Basic railing meant to protect idiots like you from falling.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 3
+  # </Trauma>
   - type: Sprite
     drawdepth: 5 # Trauma - changed for platforms, was SmallObjects (2)
     sprite: Structures/Walls/railing.rsi
@@ -24,8 +28,6 @@
     cost: 2
     delay: 2
     fx: EffectRCDDeconstruct2
-  - type: AcousticData # VDS
-    absorption: 3
 
 - type: entity
   parent: BaseRailing

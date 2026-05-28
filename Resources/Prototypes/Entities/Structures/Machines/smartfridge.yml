@@ -4,6 +4,11 @@
   name: SmartFridge
   description: A refrigerated storage unit for keeping items cold and fresh.
   components:
+  # <Trauma>
+  - type: AcousticData
+    absorption: 20
+    reflectRay: true
+  # </Trauma>
   - type: StationAiWhitelist
   - type: Vocalizer
     hideChat: true
@@ -118,9 +123,6 @@
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Airtight
-  - type: AcousticData # VDS
-    absorption: 20
-    reflectRay: true
 
 - type: entity
   parent: SmartFridge

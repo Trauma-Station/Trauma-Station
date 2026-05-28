@@ -3,6 +3,13 @@
   parent: BaseStructure
   id: BaseMachine
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 5
+    damagePenalty: .5
+  - type: AcousticData
+    absorption: 15
+  # </Trauma>
   - type: Animateable
   - type: InteractionOutline
   - type: Anchorable
@@ -47,13 +54,6 @@
     - TauCetiBasic
     understands:
     - TauCetiBasic
-  # <Trauma>
-  - type: Penetratable
-    penetrateDamage: 5
-    damagePenalty: .5
-  # </Trauma>
-  - type: AcousticData # VDS
-    absorption: 15
 
 - type: entity
   abstract: true
