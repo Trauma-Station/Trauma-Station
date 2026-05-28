@@ -30,7 +30,7 @@ public sealed partial class AudioEffectSystem : EntitySystem
     ///         will be made afterwards.
     /// </summary>
     // actually this problem applies for effects too
-    private bool? _auxiliariesSafe = null;
+    private bool? _auxiliariesSafe;
 
     private static readonly Dictionary<ProtoId<AudioPresetPrototype>, (EntityUid AuxiliaryUid, EntityUid EffectUid)> CachedEffects = new();
 
@@ -213,7 +213,6 @@ public sealed partial class AudioEffectSystem : EntitySystem
     /// <returns>Whether the entity was successfully initialised, and it did not previously exist in the cache.</returns>
     public bool TryCacheEffect(in ProtoId<AudioPresetPrototype> preset, [NotNullWhen(true)] out EntityUid? auxiliaryUid, [NotNullWhen(true)] out EntityUid? effectUid)
     {
-
         effectUid = null;
         auxiliaryUid = null;
 

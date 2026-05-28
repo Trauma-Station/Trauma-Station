@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared._VDS.Audio.Components;
+namespace Content.Trauma.Shared.Audio.Components;
 
 /// <summary>
 /// Data that alters audio if the client has acoustics enabled.
@@ -14,11 +14,11 @@ public sealed partial class AcousticDataComponent : Component
     /// Farther away things suffer falloff.
     /// </summary>
     [DataField]
-    public float Absorption = 0f;
+    public float Absorption;
 
     /// <summary>
     /// If the acoustic ray will pass through this entity, or bounce off of it (like a wall) instead.
     /// </summary>
     [DataField]
-    public bool ReflectRay = false;
+    public bool ReflectRay;
 }

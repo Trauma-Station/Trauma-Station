@@ -6,8 +6,6 @@ namespace Content.Trauma.Common.CCVar;
 
 public sealed partial class TraumaCVars
 {
-    #region Audio
-
     /// <summary>
     ///     Whether to render sounds with echo when they are in 'large' open, rooved areas.
     /// </summary>
@@ -80,6 +78,4 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<int> AcousticReflectionCountMaximum =
         CVarDef.Create("trauma.acoustics.reflection_count_maximum", 16, CVar.REPLICATED | CVar.SERVER | CVar.CHEAT);
-
-    #endregion
 }

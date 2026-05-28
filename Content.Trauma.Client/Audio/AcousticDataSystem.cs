@@ -5,7 +5,6 @@ using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
-using Content.Shared._VDS.Audio.Components;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Audio;
@@ -19,6 +18,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using Content.Trauma.Client.Audio.Components;
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Shared.Audio.Components;
 using Content.Trauma.Shared.Physics.Raycast;
 
 namespace Content.Trauma.Client.Audio;
@@ -30,7 +30,6 @@ public sealed partial class AcousticDataSystem : EntitySystem
 {
     [Dependency] private AudioEffectSystem _audioEffectSystem = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;
-    [Dependency] private ILogManager _logMan = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ReflectiveRaycastSystem _reflectiveRaycast = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;
@@ -38,6 +37,10 @@ public sealed partial class AcousticDataSystem : EntitySystem
     [Dependency] private SharedRoofSystem _roofSystem = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private TurfSystem _turfSystem = default!;
+    [Dependency] private EntityQuery<AcousticDataComponent> _acousticQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<RoofComponent> _roofQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _transformQuery = default!;
 
     /// <summary>
     /// Quick reference to our <see cref="AcousticSettingsComponent"/>
@@ -78,27 +81,13 @@ public sealed partial class AcousticDataSystem : EntitySystem
     /// </summary>
     private float _prevAvgMagnitude;
 
-    private EntityQuery<AcousticDataComponent> _acousticQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
-    private EntityQuery<RoofComponent> _roofQuery;
-    private EntityQuery<TransformComponent> _transformQuery;
-
-    private ISawmill _sawmill = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        _sawmill = _logMan.GetSawmill("acoustics");
-
         _configurationManager.OnValueChanged(TraumaCVars.AcousticEnable, x => _acousticEnabled = x, invokeImmediately: true);
         _configurationManager.OnValueChanged(TraumaCVars.AcousticHighResolution, x => _calculatedDirections = GetEffectiveDirections(x), invokeImmediately: true);
         _configurationManager.OnValueChanged(TraumaCVars.AcousticReflectionCount, x => _acousticMaxReflections = x, invokeImmediately: true);
-
-        _acousticQuery = GetEntityQuery<AcousticDataComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _roofQuery = GetEntityQuery<RoofComponent>();
-        _transformQuery = GetEntityQuery<TransformComponent>();
 
         /*
            this is kinda janky as fuck. it also wasn't me who originally did it i swear
@@ -232,7 +221,7 @@ public sealed partial class AcousticDataSystem : EntitySystem
         // edge cases
         if (upperIndex == 0) // magnitude is smaller than the first element of our list
             return presetList.GetValueAtIndex(upperIndex);
-        else if (lowerIndex == presetList.Count - 1) // magnitude is bigger than the last element of our list
+        if (lowerIndex == presetList.Count - 1) // magnitude is bigger than the last element of our list
             return presetList.GetValueAtIndex(lowerIndex);
 
         // return the value of whatever is closest to our magnitude
@@ -444,7 +433,7 @@ public sealed partial class AcousticDataSystem : EntitySystem
     private float GetAcousticAbsorption(
         RayHit result,
         in EntityUid originEnt,
-        in AcousticDataComponent comp)
+        in Shared.Audio.Components.AcousticDataComponent comp)
     {
         result.Entity.ToCoordinates().TryDistance(
             EntityManager,
@@ -498,14 +487,6 @@ public sealed partial class AcousticDataSystem : EntitySystem
         {
             amplitude *= _acousticSettings.NoRoofPenalty;
         }
-
-        // _sawmill.Debug($"""
-        //         Results:
-        //         Absorbtion Multiplier: {absorbMultiplier:F3}
-        //         Escape Multiplier: {escapeMultiplier:F3}
-        //         Final Amplitude: {amplitude:F3}
-        //         Acoustic Preset: {GetBestReverbPreset(amplitude, _acousticPresets!)}
-        //         """);
 
         return amplitude;
     }

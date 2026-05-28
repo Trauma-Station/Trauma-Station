@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.Audio.Components;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Client.Audio.Components;
@@ -15,7 +16,7 @@ public sealed partial class AcousticSettingsComponent : Component
     /// <summary>
     /// A list of distances and what <see cref="AudioPresetPrototype"/> to use alongside it.
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public SortedList<float, ProtoId<AudioPresetPrototype>> ReverbPresets = new()
     {
         { 10f, "SpaceStationCupboard" },
@@ -34,40 +35,40 @@ public sealed partial class AcousticSettingsComponent : Component
     /// Based on the maximum posssible distance an acoustic raycast can travel,
     /// what percentage a single segment of it can it travel before it is considered 'escaped' and terminated early?
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public float EscapeDistancePercentage = 0.3f;
 
     /// <summary>
     /// We will never penalize our acoustic data less than this percentage.
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public float MaxmimumEscapePenalty = 0.10f;
 
     /// <summary>
     /// Penalize the all of the acoustic data by this percentage if the client is standing in
     /// an unrooved area.
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public float NoRoofPenalty = 0.10f;
 
     /// <summary>
     /// Maximum random degree offset an acoustic ray may take each bounce.
     /// Note that this is applied both clock-wise and counter-clockwise.
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public float DirectionRandomOffset = 0.3f;
 
     /// <summary>
     /// How large our absorption modifier is allowed to get.
-    /// Values above 1.0f allow negative <see cref="Content.Shared._VDS.Audio.Components.AcousticDataComponent.Absorption"/> values
+    /// Values above 1.0f allow negative <see cref="AcousticDataComponent.Absorption"/> values
     /// to amplify the acoustic magnitude.
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public float MaxAbsorptionClamp = 1.3f;
 
     /// <summary>
     /// How much blending we do via lerp for our previous and current average magnitude values.
     /// </summary>
-    [DataField, ViewVariables]
+    [DataField]
     public float AvgMagnitudeBlend = 0.25f;
 }
