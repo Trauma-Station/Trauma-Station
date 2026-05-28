@@ -67,6 +67,8 @@
       types:
         Blunt: 35
         Slash: 15
+  - type: CombatPower
+    factor: 2.0
   - type: NpcFactionMember
     factions:
     - Lavafauna
@@ -236,6 +238,8 @@
     proto: MobHivelordBrood
     capacity: 1
     count: 1
+  - type: CombatPower
+    factor: 2.0
   - type: NpcFactionMember
     factions:
     - Lavafauna # Goobedit - Lavaland
@@ -260,6 +264,8 @@
   name: hivelord brood
   description: A fragment of the original hivelord, rallying behind its original. One isn't much of a threat, but...
   components:
+  - type: CombatPower
+    factor: 0.3
   - type: Sprite
     sprite: Mobs/Aliens/Asteroid/hivelord.rsi
     layers:
@@ -411,6 +417,8 @@
       reagents:
       - ReagentId: Blood
         Quantity: 200
+  - type: CombatPower
+    factor: 1.5
   - type: NpcFactionMember
     factions:
     - SimpleHostile

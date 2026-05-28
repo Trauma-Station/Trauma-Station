@@ -4,6 +4,9 @@
   abstract: true
   components:
   - type: EnergySword
+  - type: Tag
+    tags:
+    - HighRiskItem
   - type: ItemToggle
     # Goobstation start
     soundFailToActivate:

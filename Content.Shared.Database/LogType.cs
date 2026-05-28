@@ -513,4 +513,6 @@ public enum LogType
     /// Trauma - Circuits related logs.
     /// </summary>
     Circuits = 20004,
+
+    GameDirector = 105,
 }

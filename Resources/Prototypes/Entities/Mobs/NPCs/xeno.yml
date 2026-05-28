@@ -38,6 +38,8 @@
     factions:
     - Xeno
     - SimpleHostile
+  - type: CombatPower
+    factor: 1.5
   - type: MeleeWeapon
     angle: 0
     animation: WeaponArcBite

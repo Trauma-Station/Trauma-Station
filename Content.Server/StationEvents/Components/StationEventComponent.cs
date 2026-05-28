@@ -1,3 +1,4 @@
+using Content.Server.StationEvents.Metric;
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -87,4 +88,12 @@ public sealed partial class StationEventComponent : Component
     /// </summary>
     [DataField]
     public bool OccursDuringRoundEnd = true;
+
+    /// <summary>
+    ///   Expected Chaos changes when this event occurs.
+    ///   Used by the GameDirector, which picks an event expected to make the desired chaos changes.
+    /// </summary>
+    [DataField]
+    public ChaosMetrics Chaos = new ChaosMetrics();
+
 }

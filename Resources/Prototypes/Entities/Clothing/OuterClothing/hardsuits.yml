@@ -193,6 +193,7 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
+    - CombatHardsuit
 
 #Maxim Hardsuit
 - type: entity
@@ -237,6 +238,7 @@
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
+    - CombatHardsuit
 
 #Security Hardsuit (goob - not used)
 - type: entity
@@ -283,6 +285,7 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
+    - CombatHardsuit
 
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
@@ -320,6 +323,9 @@
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
+  - type: Tag
+    tags:
+    - CombatHardsuit
 
 #Warden's Hardsuit
 - type: entity
@@ -361,6 +367,9 @@
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
+  - type: Tag
+    tags:
+    - CombatHardsuit
 
 #Captain's Hardsuit
 - type: entity
@@ -408,6 +417,7 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
+    - CombatHardsuit
 
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
@@ -577,6 +587,9 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
     damageCoefficient: 0.5
+  - type: Tag
+    tags:
+    - CombatHardsuit
 
 #Luxury Mining Hardsuit
 - type: entity
@@ -664,6 +677,7 @@
     - WhitelistChameleon
     - CorgiWearable
     - ScurretWearable
+    - CombatHardsuit
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -741,6 +755,7 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
+    - CombatHardsuit
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitSyndieElite
@@ -790,6 +805,8 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
+    - HeavyCombatHardsuit
+    - CombatHardsuit
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -838,6 +855,7 @@
     - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
+    - HeavyCombatHardsuit
 
 #Wizard Hardsuit
 - type: entity
@@ -886,6 +904,7 @@
     - WhitelistChameleon
     - SyringeArmor
     - CorgiWearable
+    - CombatHardsuit
 
 #Ling Space Suit (goob - not used)
 - type: entity
@@ -1001,6 +1020,9 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
     damageCoefficient: 0.5
+  - type: Tag
+    tags:
+    - CombatHardsuit
 
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
@@ -1083,6 +1105,7 @@
     tags:
     - Hardsuit
     - WhitelistChameleon
+    - CombatHardsuit
 
 #ERT Janitor Hardsuit
 - type: entity
@@ -1154,7 +1177,8 @@
   - type: ModifyDelayedKnockdown # Goobstation - End
     cancel: true
   - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
+    tags:
+    - HeavyCombatHardsuit
 
 #CBURN Hardsuit
 - type: entity
@@ -1202,6 +1226,9 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
     damageCoefficient: 0.5
+  - type: Tag
+    tags:
+    - CombatHardsuit
 
 #MISC. HARDSUITS
 #Clown Hardsuit

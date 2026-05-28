@@ -134,6 +134,9 @@
       openOnActivation: true
       guides:
       - Defusal
+    - type: Tag
+      tags:
+        - Bomb
 
 - type: entity
   parent: BaseHardBomb

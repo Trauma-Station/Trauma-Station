@@ -18,6 +18,8 @@
   parent: MobHuman
   id: MobSalvager
   components:
+    - type: CombatPower
+      factor: 1.0
     - type: NpcFactionMember
       factions:
         - Syndicate
@@ -37,6 +39,8 @@
   id: MobSpirate
   description: Yarr!
   components:
+  - type: CombatPower
+    factor: 1.0
   - type: NpcFactionMember
     factions:
       - Syndicate
@@ -55,6 +59,8 @@
   parent: MobHuman
   id: MobSyndicateFootsoldier
   components:
+    - type: CombatPower
+      factor: 1.5
     - type: NpcFactionMember
       factions:
         - Syndicate

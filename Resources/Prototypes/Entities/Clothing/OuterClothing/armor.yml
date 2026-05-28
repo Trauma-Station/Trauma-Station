@@ -23,6 +23,9 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
+  - type: Tag
+    tags:
+    - Armor
     modifiers:
       coefficients:
         Blunt: 0.65 # Trauma, was 0.7
@@ -167,6 +170,7 @@
   - type: Tag
     tags:
     - CorgiWearable
+    - Armor
     - WhitelistChameleon
 
 - type: entity
@@ -384,6 +388,9 @@
     knockdownTimeDelta: -3
   - type: Item
     size: Normal
+  - type: Tag
+    tags:
+    - HeavyArmor
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSecurityContraband]
@@ -420,6 +427,9 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance # Goobstation
     damageCoefficient: 0.5
+  - type: Tag
+    tags:
+    - HeavyArmor
 
 - type: entity
   parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
@@ -456,6 +466,9 @@
     damageCoefficient: 0.5
   - type: ExplosionResistance
     damageCoefficient: 0.75 # Trauma - was 0.9, doesn't cover head/hands/feet
+  - type: Tag
+    tags:
+    - HeavyArmor
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
@@ -496,6 +509,9 @@
     damageCoefficient: 0.5
   - type: ExplosionResistance
     damageCoefficient: 0.4 # Trauma - was 0.5, doesn't cover head
+  - type: Tag
+    tags:
+    - HeavyArmor
 
 - type: entity
   parent: ClothingOuterArmorHeavy
@@ -657,6 +673,9 @@
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit
+  - type: Tag
+    tags:
+    - HeavyArmor
 
 - type: entity
   parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
@@ -696,6 +715,9 @@
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit
+  - type: Tag
+    tags:
+    - HeavyArmor
 
 - type: entity
   parent: ClothingOuterArmorBase

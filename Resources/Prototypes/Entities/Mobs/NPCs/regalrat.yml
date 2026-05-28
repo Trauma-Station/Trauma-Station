@@ -154,6 +154,8 @@
     attributes:
       gender: male
   - type: Sharp
+  - type: CombatPower
+    factor: 2 # times more dangerous than a crew-member
 
 - type: entity
   id: MobRatKingBuff

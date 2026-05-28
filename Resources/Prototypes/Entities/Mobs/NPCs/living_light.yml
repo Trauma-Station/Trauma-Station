@@ -22,6 +22,8 @@
         true
       NavSmash: !type:Bool
         true
+  - type: CombatPower
+    factor: 1.5
   - type: NpcFactionMember
     factions:
     - SimpleHostile

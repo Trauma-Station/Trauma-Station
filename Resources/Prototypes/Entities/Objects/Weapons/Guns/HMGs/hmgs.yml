@@ -96,6 +96,9 @@
   abstract: true
   components:
   - type: Sprite
+  - type: Tag
+    tags:
+    - HeavyMachineGun
   - type: Item
     size: Ginormous
   - type: MultiHandedItem

@@ -113,6 +113,8 @@
     weight: 44
     earliestStart: 2
     minimumPlayers: 0
+    chaos:
+      Atmos: 10
   - type: MeteorSwarm
     announcement: null
     announcementSound: null
@@ -133,6 +135,8 @@
   - type: StationEvent
     weight: 22
     minimumPlayers: 0
+    chaos:
+      Atmos: 30
   - type: MeteorSwarm
     announcement: station-event-space-dust-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
@@ -153,6 +157,8 @@
   - type: StationEvent
     weight: 18
     minimumPlayers: 15
+    chaos:
+      Atmos: 40
   - type: MeteorSwarm
     meteors:
       MeteorSmall: 7
@@ -164,6 +170,8 @@
   components:
   - type: StationEvent
     weight: 10
+    chaos:
+      Atmos: 50
   - type: MeteorSwarm
     meteors:
       MeteorSmall: 3
@@ -176,6 +184,8 @@
   components:
   - type: StationEvent
     weight: 5
+    chaos:
+      Atmos: 70
   - type: MeteorSwarm
     meteors:
       MeteorSmall: 2
@@ -188,6 +198,9 @@
   components:
   - type: StationEvent
     weight: 0.05
+    chaos:
+      Atmos: 50
+      Mess: 500
   - type: MeteorSwarm
     announcement: station-event-meteor-urist-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
@@ -213,6 +226,8 @@
     duration: 1
     earliestStart: 30
     minimumPlayers: 25
+    chaos:
+      Atmos: 100
   - type: ImmovableRodRule
     rodPrototypes:
     - id: ImmovableRodKeepTiles
@@ -249,6 +264,9 @@
   components:
   - type: StationEvent
     weight: 0.05
+    chaos:
+      Atmos: 50
+      Mess: 500
   - type: MeteorSwarm
     announcement: station-event-meteor-cow-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
@@ -267,6 +285,9 @@
   components:
   - type: StationEvent
     weight: 0.05
+    chaos:
+      Atmos: 50
+      Mess: 500
   - type: MeteorSwarm
     announcement: station-event-meteor-clown-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
@@ -285,6 +306,8 @@
   components:
   - type: StationEvent
     weight: 0.05
+    chaos:
+      Atmos: 50
   - type: MeteorSwarm
     announcement: station-event-meteor-potato-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
@@ -303,6 +326,9 @@
   components:
   - type: StationEvent
     weight: 0.03
+    chaos:
+      Atmos: 70
+      Mess: 500
   - type: MeteorSwarm
     announcement: station-event-fun-swarm-start-announcement
     announcementSound: /Audio/Announcements/attention.ogg
