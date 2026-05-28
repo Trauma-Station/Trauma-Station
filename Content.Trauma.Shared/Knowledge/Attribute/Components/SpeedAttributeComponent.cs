@@ -6,4 +6,4 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 /// Attribute component to modify damage.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class DamageAttributeComponent : BaseAttributeComponent;
+public sealed partial class SpeedAttributeComponent : BaseAttributeComponent;

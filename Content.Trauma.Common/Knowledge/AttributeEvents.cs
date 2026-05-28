@@ -13,6 +13,12 @@ namespace Content.Trauma.Common.Knowledge;
 public record struct GetDamageModifierEvent(int Mod = 0);
 
 /// <summary>
+/// Raised on an attribute holder to calculate the speed modifier.
+/// </summary>
+[ByRefEvent]
+public record struct GetSpeedModifierEvent(int Mod = 0);
+
+/// <summary>
 /// Raised on an attribute holder to calculate carry limits.
 /// </summary>
 [ByRefEvent]
