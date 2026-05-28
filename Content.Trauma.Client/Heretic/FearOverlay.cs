@@ -78,7 +78,8 @@ public sealed partial class FearOverlay : Overlay
     {
         foreach (var (uid, sprite, xform) in _hiddenEntities)
         {
-            var random = new Random(_entMan.GetNetEntity(uid).Id);
+            IRobustRandom random = new RobustRandom();
+            random.SetSeed(_entMan.GetNetEntity(uid).Id);
             var toRender = random.Pick(_visibleFearTargets);
             var (pos, rot) = _transform.GetWorldPositionRotation(xform);
             _sprite.RenderSprite(toRender,

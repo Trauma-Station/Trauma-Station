@@ -12,10 +12,13 @@ namespace Content.Goobstation.Shared.Changeling.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FleshmendComponent : Component
 {
+    [DataField]
+    public TimeSpan UpdateTimer;
+
     /// <summary>
     ///     Delay between healing ticks.
     /// </summary>
-    public TimeSpan UpdateTimer = default!;
+    [DataField]
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
     public EntityUid? SoundSource; // used to stop the passive sound (if it exists)
@@ -27,9 +30,9 @@ public sealed partial class FleshmendComponent : Component
     ///     Used in the case that someone wants to change the default effect (e.g if they are adding a fleshmend-esque passive to some random mob or ability)
     /// </summary>
     [DataField]
-    public string EffectState;
+    public string? EffectState;
     [DataField]
-    public ResPath ResPath;
+    public ResPath? ResPath;
 
     [DataField]
     public bool DoVisualEffect = true;

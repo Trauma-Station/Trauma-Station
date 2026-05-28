@@ -6,12 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h # Trauma, was 2.5
+      time: 2.5h
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Security
   - CorporateJudo
   access:
@@ -23,7 +22,7 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # goobstation
+  - !type:AddComponentSpecial # Trauma
     components:
       - type: SecurityStaff
 

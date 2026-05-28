@@ -25,15 +25,13 @@
         Quantity: 3
       - ReagentId: FluorosulfuricAcid
         Quantity: 10
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 3
-        - ReagentId: FluorosulfuricAcid
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 3
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 2
 
 - type: entity
   abstract: true
@@ -171,14 +169,13 @@
   id: OrganXenomorphBrain
   description: We barely understand the brains of terrestial animals. Who knows what we may find in the brain of such an advanced species?
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: GreyMatter
-          Quantity: 5
-        - ReagentId: FluorosulfuricAcid
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: GreyMatter
+        Quantity: 5
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 5
 
 - type: entity
   parent: [ OrganBaseEyes, OrganXenomorphInternal ]

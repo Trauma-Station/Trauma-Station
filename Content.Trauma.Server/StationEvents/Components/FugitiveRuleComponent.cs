@@ -35,18 +35,6 @@ public sealed partial class FugitiveRuleComponent : Component
     public TimeSpan AnnounceDelay = TimeSpan.FromMinutes(10);
 
     /// <summary>
-    /// How long before the announcement hunters should spawn.
-    /// </summary>
-    [DataField]
-    public TimeSpan HunterSpawnDelay = TimeSpan.FromSeconds(30);
-
-    /// <summary>
-    /// Whether hunters have already been spawned.
-    /// </summary>
-    [DataField]
-    public bool HuntersSpawned = false;
-
-    /// <summary>
     /// Station to give the report to.
     /// </summary>
     [DataField]

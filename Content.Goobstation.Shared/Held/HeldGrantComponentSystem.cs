@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Hands;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Held;
 
 public sealed partial class HeldGrantComponentSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -16,6 +19,9 @@ public sealed partial class HeldGrantComponentSystem : EntitySystem
 
     private void OnCompEquip(Entity<HeldGrantComponentComponent> ent, ref GotEquippedHandEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         ent.Comp.Active.Clear();
         var user = args.User;
         foreach (var name in ent.Comp.Components.Keys)
@@ -29,6 +35,9 @@ public sealed partial class HeldGrantComponentSystem : EntitySystem
 
     private void OnCompUnequip(Entity<HeldGrantComponentComponent> ent, ref GotUnequippedHandEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var user = args.User;
         foreach (var name in ent.Comp.Active)
         {

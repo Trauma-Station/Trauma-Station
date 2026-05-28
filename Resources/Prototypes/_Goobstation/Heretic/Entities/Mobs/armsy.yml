@@ -7,16 +7,18 @@
     metabolizerTypes: [ Vox ]
     maxReagents: 6
     stages: [ Digestion, Bloodstream, Metabolites ]
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 1984
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 12
-        - ReagentId: Fat
-          Quantity: 3
+    - SolutionStomachHeretic
+
+- type: entity
+  parent: SolutionStomach
+  id: SolutionStomachHeretic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 1984
 
 - type: entity
   abstract: true
@@ -67,6 +69,7 @@
       Torso: OrganTorsoGhoul
   - type: AlwaysTakeHoly
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Clickable
   - type: InteractionOutline
@@ -159,10 +162,8 @@
     - ActionHereticFleshContract
   - type: LordOfTheNight
     madnessEffects:
-    - !type:GenericStatusEffect
-      key: TemporaryBlindness
-      component: TemporaryBlindness
-      type: Update
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectBlindness
       time: 4
     - !type:ModifyParalysis
       time: 4

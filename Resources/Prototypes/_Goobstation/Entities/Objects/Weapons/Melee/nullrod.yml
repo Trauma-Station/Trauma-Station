@@ -236,7 +236,7 @@
     sprite: _ShitChap/Objects/Weapons/Nullrod/arrythmic.rsi
     state: icon
   - type: MeleeWeapon
-    animationRotation: -45 # WWDP
+    animationRotation: -45
     wideAnimationRotation: -135
     attackRate: 1.5
     damage:
@@ -367,6 +367,7 @@
     sprintModifier: 0.75
   - type: HeldSpeedModifier
   - type: Damageable
+  - type: Injurable
     damageContainer: Shield
   - type: MultiHandedItem
   - type: DivineIntervention # Bulwark blocks magic from bagslot
@@ -522,7 +523,7 @@
   components:
   - type: Wieldable
     wieldSound: !type:SoundPathSpecifier
-      path: /Audio/Weapons/chainsawwield.ogg
+      path: /Audio/Weapons/chainsaw_pull.ogg
       params:
         volume: 1
   - type: MeleeRequiresWield
@@ -550,7 +551,7 @@
         Structural: 20
         Holy: 3
     soundHit:
-      path: /Audio/Weapons/chainsaw.ogg
+      path: /Audio/Weapons/chainsaw_rev.ogg
       params:
         volume: -3
   - type: Item
@@ -560,9 +561,9 @@
     speed: 0.65
   - type: SurgeryTool # Shitmed
     startSound:
-      path: /Audio/Weapons/chainsawwield.ogg
+      path: /Audio/Weapons/chainsaw_pull.ogg
     endSound:
-      path: /Audio/Weapons/chainsaw.ogg
+      path: /Audio/Weapons/chainsaw_rev.ogg
   - type: Tag
     tags:
       - HolyChainsaw
@@ -669,7 +670,7 @@
         Slash: 1
 
 - type: entity
-  parent: BaseNullrod
+  parent: [ BaseNullrod, SolutionSpear ]
   id: RatvarianSpear
   name: ancient spear
   description: An ancient spear made of brass, I mean gold, I mean bronze. It looks highly mechanical.
@@ -680,10 +681,10 @@
         Piercing: 20
     UntrainedUseString: nullrod-spear-untrained-usage-popup
   - type: Item
-    size: Large # Goob edit
-    shape: # Goob
+    size: Large
+    shape:
     - 0,0,8,0
-    storedRotation: 45 # Goob
+    storedRotation: 45
     sprite: _ShitChap/Objects/Weapons/Nullrod/ratvarian_spear.rsi
   - type: Sprite
     sprite: _ShitChap/Objects/Weapons/Nullrod/ratvarian_spear.rsi
@@ -695,9 +696,9 @@
     - suitStorage
     - back
   - type: MeleeWeapon
-    range: 2.2 # Goob
-    attackRate: 0.8 # Goob
-    animationRotation: -135 # WWDP
+    range: 2.2
+    attackRate: 0.8
+    animationRotation: -135
     wideAnimationRotation: -135
     damage:
       types:
@@ -725,8 +726,8 @@
       fix1:
         shape: !type:PolygonShape
           vertices:
-            - -0.08,-0.06 # Goob edit
-            - -0.06,-0.08 # Goob edit
+            - -0.08,-0.06
+            - -0.06,-0.08
             - 0.40,0.30
             - 0.30,0.40
         density: 20
@@ -735,12 +736,8 @@
         restitution: 0.3
         friction: 0.2
   - type: Sharp
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 5 # Goobstation
   - type: MeleeChemicalInjector
-    transferAmount: 1 # Goobstation
+    transferAmount: 1
     solution: melee
   - type: RefillableSolution
     solution: melee
@@ -751,4 +748,4 @@
     solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 2
-  - type: ThrowableBlocked # Goobstation
+  - type: ThrowableBlocked

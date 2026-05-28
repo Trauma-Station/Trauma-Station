@@ -67,7 +67,7 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     [DataField]
     public bool IgnoreResistances = true;
 
-    // <Shitmed>
+    // <Trauma>
     /// <summary>
     /// How to scale the effect based on the temperature of the target entity.
     /// </summary>
@@ -75,7 +75,7 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     public TemperatureScaling? ScaleByTemperature;
 
     [DataField]
-    public SplitDamageBehavior SplitDamage = SplitDamageBehavior.SplitEnsureAllOrganic;
+    public SplitDamageBehavior SplitDamage = SplitDamageBehavior.None;
 
     [DataField]
     public bool UseTargeting = true;

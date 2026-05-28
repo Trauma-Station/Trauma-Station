@@ -4,8 +4,10 @@ using Content.Trauma.Shared.Wizard.Traps;
 
 namespace Content.Trauma.Client.Wizard;
 
-public sealed class WizardTrapsSystem : SharedWizardTrapsSystem
+public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -21,6 +23,6 @@ public sealed class WizardTrapsSystem : SharedWizardTrapsSystem
         if (args.Sprite is not { } sprite)
             return;
 
-        sprite.Color = sprite.Color.WithAlpha((float) alpha);
+        _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha((float) alpha));
     }
 }

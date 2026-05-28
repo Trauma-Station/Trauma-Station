@@ -92,6 +92,7 @@
           Piercing: 3
     - type: Appearance
     - type: Damageable
+    - type: Injurable
       damageContainer: Shield
     - type: StaticPrice
       price: 350

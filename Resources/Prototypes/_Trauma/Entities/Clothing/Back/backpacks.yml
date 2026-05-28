@@ -78,10 +78,8 @@
   - type: Sprite
     sprite: _Trauma/Clothing/Back/Backpacks/holybackpacktank.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 1200
-        reagents:
-        - ReagentId: Holywater
-          Quantity: 1200
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 1200

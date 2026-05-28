@@ -20,14 +20,11 @@ public sealed partial class ChunkingSystem : EntitySystem
     [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    private EntityQuery<TransformComponent> _xformQuery;
-
     private Box2 _baseViewBounds;
 
     public override void Initialize()
     {
         base.Initialize();
-        _xformQuery = GetEntityQuery<TransformComponent>();
         Subs.CVar(_configurationManager, CVars.NetMaxUpdateRange, OnPvsRangeChanged, true);
     }
 
@@ -65,7 +62,7 @@ public sealed partial class ChunkingSystem : EntitySystem
         int chunkSize,
         float viewEnlargement)
     {
-        if (!_xformQuery.TryGetComponent(viewer, out var xform))
+        if (!TryComp(viewer, out TransformComponent? xform))
             return;
 
         var pos = _transform.GetWorldPosition(xform);

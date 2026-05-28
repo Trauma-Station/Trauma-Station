@@ -41,8 +41,9 @@
         layer:
         - FlyingMobLayer
   - type: Damageable
-    damageContainer: InorganicMetaphysical
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: InorganicMetaphysical
   - type: Destructible
     thresholds:
       - trigger:

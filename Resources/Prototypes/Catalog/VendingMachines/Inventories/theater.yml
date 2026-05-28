@@ -57,14 +57,14 @@
     ClothingShoesBootsCowboyBrown: 1
     ClothingShoesBootsCowboyBlack: 1
     ClothingShoesBootsCowboyWhite: 1
-    # <DeltaV>
+    ClothingHeadHatWizardFake: 1
+    ClothingOuterWizardFake: 1
+    # <Trauma>
     ClothingHeadHelmetRoman: 2
     ClothingHeadHelmetRomanCenturion: 2
     ClothingUniformJumpsuitRoman: 3
     ClothingShoesBootsRoman: 3
     ClothingHeadHatLaurelWreath: 2
-    # </DeltaV>
-    # <Goob>
     ClothingCostumeAbductorHead: 1
     ClothingCostumeAbductor: 1
     ClothingHeadSanabi: 1
@@ -73,7 +73,7 @@
     ClothingOuterSuitHotDog: 1
     ClothingOuterSuitPickle: 1
     ClothingHeadHatTinfoilHat: 2
-    # </Goob>
+    # </Trauma>
   contrabandInventory:
     ClothingHeadHatRichard: 1
     ClothingShoesBling: 1

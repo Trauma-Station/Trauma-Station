@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -60,12 +57,11 @@
   - type: SurgeryTool
     startSound:
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 30
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 30
   - type: SolutionRegeneration
-    solution: melee
     generated:
       reagents:
       - ReagentId: Amatoxin

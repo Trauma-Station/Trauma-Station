@@ -9,13 +9,13 @@
       prob: 0.5
     - id: Devil
       prob: 0.02
-    - id: Shadowling
+    - id: ShadowlingRoundstart
       prob: 0.02
-    - id: SubWraith
+    - id: WraithRoundstart
       prob: 0.02
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseRoundstartAntagRule
   id: Insurgency
   components:
   - type: GameRule
@@ -33,22 +33,14 @@
     - Plasmaman # instantly dies
   - type: InsurgencyRule
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn # need to move them to their shittle
     agentName: insurgent-round-end-agent-name
-    definitions:
-    - prefRoles: [ Insurgent ]
-      spawnerPrototype: GhostRoleSpawnerInsurgent
-      startingGear: Insurgent
-      unequipOldGear: true
-      max: 4
+    antags:
+    - !type:LinearAntagCount
+      proto: Insurgent
+      range:
+        min: 1
+        max: 4
       playerRatio: 10
-      roleLoadout:
-      - RoleSurvivalStandard
-      components:
-      - type: RandomHumanoidAppearance
-        randomizeName: true
-      mindRoles:
-      - MindRoleInsurgent
 
 - type: entity
   parent: BaseGameRule
@@ -60,51 +52,23 @@
       prob: 0.5
 
 - type: entity
-  parent: BaseGameRule
-  id: HereticGamemode
-  components:
-  - type: HereticRule
-  - type: GameRule
-    minPlayers: 15
-  - type: AntagObjectives
-    objectives:
-    - HereticKnowledgeObjective
-    - HereticSacrificeObjective
-    - HereticSacrificeHeadObjective
-  - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    agentName: heretic-roundend-name
-    definitions:
-    - prefRoles: [ Heretic ]
-      max: 6
-      playerRatio: 10
-      lateJoinAdditional: true
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleHeretic
-
-- type: entity
-  parent: BaseShadowlingRule
+  parent: [ BaseShadowlingRule, BaseRoundstartAntagRule ]
   id: ShadowlingGamemode
   components:
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ Shadowling ]
-      max: 3
+    antags:
+    - !type:LinearAntagCount
+      proto: Shadowling
+      range:
+        min: 1
+        max: 3
       playerRatio: 25
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleShadowling
 
 - type: entity
-  id: TraitorReinforcementNukeOps
   parent: TraitorReinforcement
+  id: TraitorReinforcementNukeOps
   components:
   - type: AntagPlayerEffects
     effects:
