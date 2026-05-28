@@ -29,3 +29,38 @@
   icon:
     sprite: Fluids/tomato_splat.rsi
     state: puddle-1
+
+- type: antagSpecifier
+  id: Vampire
+  blacklist:
+    components:
+    - AntagImmune
+    - BibleUser
+  prefRoles: [ Vampire ]
+  mindRoles: [ MindRoleVampire ]
+  briefing:
+    text: vampire-role-briefing
+    color: "#650000"
+    sound: /Audio/_Trauma/Vampires/vampalert.ogg
+  components:
+  - type: Vampire               # Holds total and usable blood.
+  - type: VampireBloodsucking   # Allows the vampire to drain blood from others.
+  - type: VampireAbilities      # Grants abilities to the vampire.
+  - type: MobClass              # Allows vampire to specialize in a different class.
+    belongsTo: Vampire
+  - type: Nullification         # Restricts use of abilities when it reaches 120
+  - type: ZombieImmune          # So there's no first day chud making issue about it
+  - type: AreaDetector          # Detects when you enter/exit areas
+  - type: EffectsOnAreaDetect   # Runs effects when you enter/exit a specific area
+    areas:
+    - AreaChapel
+    effectsOnEnter:
+    - !type:ModifyStatusEffect
+      effectProto: VampireChapelStatusEffect
+      time: null
+      type: Add
+    effectsOnExit:
+    - !type:ModifyStatusEffect
+      effectProto: VampireChapelStatusEffect
+      time: null
+      type: Remove
