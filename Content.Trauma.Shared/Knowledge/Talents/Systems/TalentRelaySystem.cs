@@ -15,11 +15,17 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// </summary>
 public sealed partial class TalentRelaySystem : EntitySystem
 {
-    private static readonly HashSet<ProtoId<DamageTypePrototype>> DamageTypes = new()
+    private static readonly HashSet<ProtoId<DamageTypePrototype>> DamageTypesToughHide = new()
     {
         "Blunt",
         "Slash",
         "Piercing",
+    };
+
+    private static readonly HashSet<ProtoId<DamageTypePrototype>> DamageTypesPoison = new()
+    {
+        "Poison",
+        "Caustic",
     };
 
     public override void Initialize()
@@ -30,7 +36,8 @@ public sealed partial class TalentRelaySystem : EntitySystem
         SubscribeLocalEvent<DamageTalentComponent, GetDamageModifierEvent>(OnCalculateDamage);
         SubscribeLocalEvent<DamageTalentComponent, GetSpeedModifierEvent>(OnCalculateSpeed);
         SubscribeLocalEvent<DamageTalentComponent, BeforeDamageChangedEvent>(OnCalculateHeal);
-        SubscribeLocalEvent<ToughHideComponent, BeforeDamageChangedEvent>(OnCalculateResist);
+        SubscribeLocalEvent<ToughHideComponent, BeforeDamageChangedEvent>(OnCalculateResistToughHide);
+        SubscribeLocalEvent<PoisonResistantComponent, BeforeDamageChangedEvent>(OnCalculateResistPoison);
     }
 
     private void OnCalculateDodge(Entity<DodgeComponent> ent, ref GetDodgeSavingThrowEvent args)
@@ -66,7 +73,7 @@ public sealed partial class TalentRelaySystem : EntitySystem
         args.Damage.ExclusiveAdd(heal);
     }
 
-    private void OnCalculateResist(Entity<ToughHideComponent> ent, ref BeforeDamageChangedEvent args)
+    private void OnCalculateResistToughHide(Entity<ToughHideComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (!TryComp<TalentComponent>(ent, out var talent))
             return;
@@ -74,7 +81,23 @@ public sealed partial class TalentRelaySystem : EntitySystem
         var damageReduction = DamageSpecifier.GetPositive(args.Damage);
         foreach (var (key, amount) in damageReduction.DamageDict)
         {
-            if (!DamageTypes.Contains(key))
+            if (!DamageTypesToughHide.Contains(key))
+                continue;
+
+            damageReduction.DamageDict[key] = -FixedPoint2.Min(amount, FixedPoint2.New(talent.Level));
+        }
+        args.Damage.ExclusiveAdd(damageReduction);
+    }
+
+    private void OnCalculateResistPoison(Entity<PoisonResistantComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (!TryComp<TalentComponent>(ent, out var talent))
+            return;
+
+        var damageReduction = DamageSpecifier.GetPositive(args.Damage);
+        foreach (var (key, amount) in damageReduction.DamageDict)
+        {
+            if (!DamageTypesPoison.Contains(key))
                 continue;
 
             damageReduction.DamageDict[key] = -FixedPoint2.Min(amount, FixedPoint2.New(talent.Level));
