@@ -17,3 +17,8 @@
   id: Attribute
   name: entity-category-name-attribute
   hideSpawnMenu: true
+
+- type: entityCategory
+  id: HereticRituals
+  name: entity-category-name-heretic-rituals
+  hideSpawnMenu: true

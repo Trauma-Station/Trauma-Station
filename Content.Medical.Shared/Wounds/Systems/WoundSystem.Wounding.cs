@@ -30,7 +30,6 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Wounds;
 

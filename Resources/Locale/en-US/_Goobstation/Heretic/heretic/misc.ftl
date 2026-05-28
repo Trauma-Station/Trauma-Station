@@ -62,3 +62,10 @@ coin-flip-popup-message = {CAPITALIZE(THE($coin))} lands on {$side}
 
 eldritch-coin-side-heretic = heretic
 eldritch-coin-side-blade = blade
+
+lionhunter-rifle-examine-message =
+    Right click on a distant target in [color=red]Combat Mode[/color] to aim at them.
+    This fires an empowered homing projectile that can go through walls.
+    Only special hunter's ammunition has this effect.
+
+lionhunter-rifle-aim-message = taking aim...

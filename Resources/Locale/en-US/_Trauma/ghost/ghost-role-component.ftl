@@ -61,7 +61,7 @@ ghost-role-information-ratma-desc = Hunt and kill.
 ghost-role-information-breadling-namee = Breadling
 ghost-role-information-BreadLing-desc = Brought to life by a loving baker, enjoy the fickle time you have remaining. You have no knowledge of your coming death unless told.
 
-ghost-role-coconutcrab-name = Coconut Crab
+ghost-role-information-coconutcrab-name = Coconut Crab
 
 ghost-role-information-goidabot-name = goida bot
 ghost-role-information-goidabot-desc = ГОЙДА
@@ -85,3 +85,11 @@ ghost-role-information-pirate-description = Follow your captain's orders. Loot, 
 
 ghost-role-information-pirate-captain-name = Pirate Scooner Captain
 ghost-role-information-pirate-captain-description = Order your crewmen around. Get rich.
+
+ghost-role-information-hunter-name = Fugitive Hunter
+ghost-role-information-hunter-description = You are a Syndicate Recovery Agent disguised as a Space Police Officer. You have been tasked with catching the fugitives hiding out in this station. Do not get caught. Do not fail.
+ghost-role-information-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Try not to kill them or security in the process.
+
+ghost-role-information-fugitive-name = Fugitive
+ghost-role-information-fugitive-description = You are a Syndicate Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
+ghost-role-information-fugitive-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Focus on laying low rather than engaging the hunters or security directly.

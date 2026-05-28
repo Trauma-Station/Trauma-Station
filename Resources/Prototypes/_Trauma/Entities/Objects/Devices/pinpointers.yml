@@ -19,3 +19,6 @@
     whitelist:
       components:
       - CommandStaff
+    blacklist:
+      components:
+      - DeadMob

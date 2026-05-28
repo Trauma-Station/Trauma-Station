@@ -1,9 +1,19 @@
+# Used for generic robotic entities (like Hivelords)
 - type: entity
   save: false
   abstract: true
   parent: BaseMob
   id: MobRobotic
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  # </Trauma>
   - type: LagCompensation
   - type: Reactive
     groups:
@@ -64,13 +74,6 @@
   - type: ProtectedFromStepTriggers
   - type: NoSlip
   - type: Insulated
-  - type: LanguageSpeaker # Einstein Engines - Languages # Goob moved to MobRobotic since it is parent for MobSiliconBase
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
 
 # Used for bots
 - type: entity
@@ -79,6 +82,13 @@
   parent: MobRobotic
   id: MobSiliconBase
   components:
+  # <Trauma>
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: IntellicardableMind
+  # </Trauma>
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
@@ -93,11 +103,6 @@
     channels:
     - Common
     # - Binary # Goobstation - replaced with collective mind
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: HealthExaminable
     examinableTypes:
     - Blunt

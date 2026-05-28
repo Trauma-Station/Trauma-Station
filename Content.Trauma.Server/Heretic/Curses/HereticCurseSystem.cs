@@ -29,7 +29,6 @@ using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Wizard;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Curses;
 

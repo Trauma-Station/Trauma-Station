@@ -865,6 +865,18 @@
   ritualPrototypes:
   - RitualThroughTheBoundary
 
+- type: hereticKnowledge
+  id: LionhunterRifle
+  stage: 5
+  ritualPrototypes:
+  - RitualLionhunterRifle
+
+- type: hereticKnowledge
+  id: LionhunterRifleAmmunition
+  stage: 5
+  ritualPrototypes:
+  - RitualLionhunterRifleAmmunition
+
 ## T3
 - type: hereticKnowledge
   id: MindGrasp

@@ -22,8 +22,8 @@
 
 - type: listing
   id: UplinkBoxReagentGrenades
-  name: Box of Reagent Grenades
-  description: Contains 2 Glue grenades and 2 Lube Grenades
+  name: uplink-reagent-grenades-name
+  description: uplink-reagent-grenades-desc
   productEntity: BoxReagentGrenades
   cost:
     Telecrystal: 30
@@ -1024,39 +1024,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-
-#- type: listing # A box, really? Why not like... mags?
-#  id: UplinkHighCaliberBox
-#  name: uplink-high-caliber-box-name
-#  description: uplink-high-caliber-box-desc
-#  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi, state: base-b }
-#  productEntity: MagazineBoxHighCaliber
-#  cost:
-#    Telecrystal: 40 # ammo should be a big cost for this
-#  categories:
-#  - UplinkAmmo
-
-#- type: listing Trauma, removed with the shotgun
-#  id: UplinkMagazineShotgunHeavy
-#  name: uplink-heavy-shotgun-magazine-name
-#  description: uplink-heavy-shotgun-magazine-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon }
-#  productEntity: MagazineShotgunHeavy
-#  cost:
-#    Telecrystal: 30
-#  categories:
-#  - UplinkAmmo
-
-#- type: listing Trauma, removed with the shotgun
-#  id: UplinkMagazineShotgunHeavySlug
-#  name: uplink-heavy-shotgun-magazine-slug-name
-#  description: uplink-heavy-shotgun-magazine-slug-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon2 }
-#  productEntity: MagazineShotgunHeavySlug
-#  cost:
-#    Telecrystal: 40
-#  categories:
-#  - UplinkAmmo
 
 - type: listing
   id: UplinkHighCapacityMagazinePistol

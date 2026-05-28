@@ -6,6 +6,7 @@ guide-entry-xenobiology = Xenobiology
 
 guide-entry-tackle = Tackle
 guide-entry-forging = Forging
+guide-entry-circuits = Circuits
 
 guide-entry-civilian = Civilian Jobs
 

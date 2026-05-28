@@ -717,7 +717,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         if (gunUid is {} gun)
         {
-            var shotEv = new ProjectileShotEvent(uid);
+            var shotEv = new ProjectileShotEvent(uid, user);
             RaiseLocalEvent(gun, ref shotEv);
         }
         // </Trauma>

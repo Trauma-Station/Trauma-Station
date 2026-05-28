@@ -12,7 +12,6 @@ using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

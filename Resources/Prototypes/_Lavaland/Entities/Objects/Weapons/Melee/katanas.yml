@@ -38,10 +38,10 @@
     price: 10000
 
 - type: entity
+  parent: [ LavalandBaseKatana, BaseMajorContraband ]
+  id: CryoKatana
   name: cryo katana
   description: Okay maybe things took a weird route when a snow golem was making this engraved sword.
-  parent: [ LavalandBaseKatana, BaseMajorContraband ] # Trauma - preemptive change for when this is Lavaland attainable (dont bring contra back to station)
-  id: CryoKatana
   categories: [ DoNotMap ]
   components:
   - type: Sprite
@@ -76,10 +76,10 @@
     heat: -100000 # Low temperature also slows you down, so the change is lower than on lava katana
 
 - type: entity
+  parent: [ LavalandBaseKatana, BaseMajorContraband ]
+  id: LavaKatana
   name: lava katana
   description: One thousand degree knife, that somehow always keeps intact.
-  parent: [ LavalandBaseKatana, BaseMajorContraband ] # Trauma - preemptive change for when this is Lavaland attainable (dont bring contra back to station)
-  id: LavaKatana
   categories: [ DoNotMap ]
   components:
   - type: Sprite

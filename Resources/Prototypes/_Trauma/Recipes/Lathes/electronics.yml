@@ -5,3 +5,34 @@
   icon:
     sprite: Structures/Machines/scanner.rsi
     state: open
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: CircuitEditorConsoleCircuitboard
+  result: CircuitEditorConsoleCircuitboard
+  # it only has a generic computer sprite :(
+
+- type: latheRecipe
+  id: Circuit
+  result: Circuit
+  materials:
+    Glass: 500
+    Steel: 200
+    Gold: 50
+
+- type: latheRecipe
+  id: CircuitHousing
+  result: CircuitHousing
+  materials:
+    Steel: 800
+    Plastic: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: CircuitHousingPortable
+  result: CircuitHousingPortable
+  materials:
+    Steel: 600
+    Plastic: 500
+    Glass: 300
+    Gold: 150

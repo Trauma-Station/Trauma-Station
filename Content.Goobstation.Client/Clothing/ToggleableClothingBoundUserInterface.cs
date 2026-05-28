@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Clothing.Components;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Clothing;
 

@@ -6,7 +6,6 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Silicon;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.Administration.Systems;
 

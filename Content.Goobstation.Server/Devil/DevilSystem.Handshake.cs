@@ -8,7 +8,6 @@ using Content.Shared.Body;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.Devil;
 

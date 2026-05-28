@@ -4,7 +4,6 @@ using Content.Lavaland.Shared.Aggression;
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Conditions.Targeting;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Utility;
 
 // ReSharper disable once CheckNamespace
 namespace Content.Lavaland.Shared.Megafauna.Selectors;

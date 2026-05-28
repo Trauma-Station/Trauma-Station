@@ -5,12 +5,13 @@ using Content.Goobstation.Common.Atmos;
 using Content.Goobstation.Common.Body.Components;
 using Content.Goobstation.Common.Changeling;
 using Content.Goobstation.Common.Temperature.Components;
-using Content.Shared.FixedPoint;
 using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
+using Content.Goobstation.Shared.Devour.Events;
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Light.Components;
-using Content.Medical.Common.Targeting; // Shitmed Change
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -23,6 +24,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Hands.Components;
@@ -38,14 +40,12 @@ using Content.Shared.Stealth.Components;
 using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
-using Robust.Shared.Player;
 using Content.Shared.Actions.Components;
-using Content.Goobstation.Shared.Devour.Events;
-using Content.Server.Actions;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Trauma.Common.CollectiveMind;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Changeling;
 
@@ -58,7 +58,8 @@ public sealed partial class ChangelingSystem
     public static readonly EntProtoId ActionLayEgg = "ActionLayEgg";
     public static readonly ProtoId<ReagentPrototype> PolytrinicAcid = "PolytrinicAcid";
     public static readonly ProtoId<CollectiveMindPrototype> HivemindProto = "Lingmind";
-    public static readonly ProtoId<DamageGroupPrototype> AbsorbedDamageGroup = "Genetic";
+    public static readonly ProtoId<DamageTypePrototype> AbsorbedDamageType = "Cellular";
+    public static readonly ProtoId<ReagentPrototype> FerrochromicAcid = "FerrochromicAcid";
     public static readonly List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new()
     {
         "Nutriment",
@@ -170,14 +171,7 @@ public sealed partial class ChangelingSystem
 
         PlayMeatySound(args.User, comp);
 
-        var dmg = new DamageSpecifier(_proto.Index(AbsorbedDamageGroup), 200);
-        _damage.TryChangeDamage(target, dmg, true, false, targetPart: TargetBodyPart.All); // Shitmed Change
-        if (TryComp<BloodstreamComponent>(target, out var blood))
-        {
-            var volume = blood.BloodReferenceSolution.Volume;
-            _blood.ChangeBloodReagents((target, blood), new([new("FerrochromicAcid", volume)]));
-        }
-        _blood.SpillAllSolutions(target);
+        AbsorbDamage(target, uid);
 
         EnsureComp<AbsorbedComponent>(target);
         EnsureComp<UnrevivableComponent>(target);
@@ -617,15 +611,7 @@ public sealed partial class ChangelingSystem
         eggComp.lingMind = mind;
         eggComp.AugmentedEyesightPurchased = HasComp<Shared.Overlays.ThermalVisionComponent>(uid);
 
-        EnsureComp<AbsorbedComponent>(target);
-        var dmg = new DamageSpecifier(_proto.Index(AbsorbedDamageGroup), 200);
-        _damage.TryChangeDamage(target, dmg, false, false, targetPart: TargetBodyPart.All); // Shitmed Change
-        if (TryComp<BloodstreamComponent>(target, out var blood))
-        {
-            var volume = blood.BloodReferenceSolution.Volume;
-            _blood.ChangeBloodReagents((target, blood), new([new("FerrochromicAcid", volume)]));
-        }
-        _blood.SpillAllSolutions(target);
+        AbsorbDamage(target, uid);
 
         PlayMeatySound(uid, comp);
 
@@ -635,6 +621,23 @@ public sealed partial class ChangelingSystem
     #endregion
 
     #region Utilities
+
+    private void AbsorbDamage(EntityUid target, EntityUid user)
+    {
+        EnsureComp<AbsorbedComponent>(target);
+        var dmg = new DamageSpecifier();
+        dmg.DamageDict[AbsorbedDamageType] = 200;
+        _damage.TryChangeDamage(target, dmg, false, false,
+            origin: user,
+            targetPart: TargetBodyPart.All,
+            splitDamage: SplitDamageBehavior.None); // kill em dead
+        if (TryComp<BloodstreamComponent>(target, out var blood))
+        {
+            var volume = blood.BloodReferenceSolution.Volume;
+            _blood.ChangeBloodReagents((target, blood), new([new(FerrochromicAcid, volume)]));
+        }
+        _blood.SpillAllSolutions(target);
+    }
 
     public void OnAnatomicPanacea(EntityUid uid, ChangelingIdentityComponent comp, ref ActionAnatomicPanaceaEvent args)
     {

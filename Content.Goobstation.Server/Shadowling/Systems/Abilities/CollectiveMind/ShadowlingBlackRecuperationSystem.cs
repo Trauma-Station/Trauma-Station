@@ -10,8 +10,8 @@ using Content.Server.Ghost;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
+using Content.Shared.Body;
 using Content.Shared.DoAfter;
-using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -28,6 +28,7 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.CollectiveMind
 /// </summary>
 public sealed partial class ShadowlingBlackRecuperationSystem : EntitySystem
 {
+    [Dependency] private BodySystem _body = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -133,10 +134,7 @@ public sealed partial class ShadowlingBlackRecuperationSystem : EntitySystem
             var comps = _protoMan.Index(component.LesserSlingComponents);
             EntityManager.AddComponents(newUid.Value, comps);
 
-            /* TODO NUBODY: wait for an actual api :)
-            if (TryComp<HumanoidProfileComponent>(newUid.Value, out var human))
-                _humanoidAppearance.AddMarking(newUid.Value, component.MarkingId, Color.Red, true, true, human);
-            */
+            _body.AddOrganMarking(newUid.Value, component.MarkingOrgan, component.MarkingId, Color.Red, true);
 
             Spawn(component.BlackRecuperationEffect, Transform(newUid.Value).Coordinates);
 

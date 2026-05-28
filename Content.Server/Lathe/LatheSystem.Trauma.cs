@@ -32,9 +32,9 @@ public sealed partial class LatheSystem
         ent.Comp.SoundEntity = null;
     }
 
-    private void AnnounceAddedRecipes(Entity<LatheComponent> ent, List<ProtoId<LatheRecipePrototype>> recipes)
+    private void AnnounceAddedRecipes(Entity<LatheComponent> ent, List<string>? recipes)
     {
-        if (recipes.Count == 0)
+        if (recipes is not { } list || list.Count == 0)
             return;
 
         var recipesCount = 0;
@@ -42,7 +42,12 @@ public sealed partial class LatheSystem
         {
             if (!_proto.Resolve(pack, out var proto))
                 continue;
-            recipesCount += proto.Recipes.Intersect(recipes).Count(); // which recipes we can use are the ones just unlocked?
+            foreach (var recipe in proto.Recipes)
+            {
+                // which recipes we can use are the ones just unlocked?
+                if (list.Contains(recipe))
+                    recipesCount++;
+            }
         }
 
         if (recipesCount == 0)

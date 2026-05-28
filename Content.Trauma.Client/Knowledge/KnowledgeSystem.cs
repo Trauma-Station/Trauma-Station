@@ -16,7 +16,6 @@ using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Knowledge;
 

@@ -4,6 +4,19 @@
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
+  # <Trauma>
+  - type: DelayedKnockdownOnHit
+    useDelay: stunbaton
+  - type: UseDelayBlockMelee
+    delays:
+    - stunbaton
+  - type: KnowledgeGrantOnWear
+    blocked:
+      MartialArtCorporateJudo: true
+  - type: Tag
+    tags:
+    - StunBaton
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunbaton.rsi
     layers:
@@ -38,21 +51,17 @@
       types:
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
-    angle: 0
+    angle: 0 # Trauma - was 60, no more wideswing
     animation: WeaponArcThrust
-  # it was ~35 now it's 55 so it's a buff ig
-  - type: StaminaDamageOnHit # Trauma - edited values
-    damage: 15
+  - type: StaminaDamageOnHit
+    # <Trauma>
+    damage: 15 # was 35, now 55 total over time
     overtime: 5
     lightAttackOvertimeDamageMultiplier: 4
     lightAttackDamageMultiplier: 4
+    # </Trauma>
     sound: /Audio/Weapons/egloves.ogg
   # <Goob>
-  - type: DelayedKnockdownOnHit
-    useDelay: stunbaton
-  - type: UseDelayBlockMelee
-    delays:
-    - stunbaton
   # lol no
   #- type: StaminaDamageOnCollide
   #  damage: 35
@@ -67,12 +76,12 @@
       stunbaton:
         length: 2.5
   - type: Item
-    heldPrefix: off
-  # <Trauma>
+    # <Trauma>
     shape:
     - 0,0,2,0
-  # <Trauma>
-    storedRotation: 45 # Goob
+    storedRotation: 45
+    # <Trauma>
+    heldPrefix: off
 
     size: Normal
   - type: Clothing
@@ -104,19 +113,13 @@
     explosionType: Default
     intensitySlope: 1.5
     maxIntensity: 200
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
-      Steel: 75
-      Plastic: 75
+      Steel: 100
+      Plastic: 100
   - type: GuideHelp
     guides:
     - Security
-  - type: KnowledgeGrantOnWear # Trauma - Knowledge
-    blocked:
-      MartialArtCorporateJudo: true
-  - type: Tag # Goob
-    tags:
-    - StunBaton
 
 - type: entity
   name: truncheon
@@ -124,6 +127,11 @@
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
+  # </Trauma>
+  - type: KnowledgeGrantOnWear
+    blocked:
+      MartialArtCorporateJudo: true
+  # <Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/truncheon.rsi
     state: icon
@@ -156,9 +164,6 @@
   - type: Appearance
   - type: StaticPrice
     price: 80
-  - type: KnowledgeGrantOnWear # Trauma - Knowledge
-    blocked:
-      MartialArtCorporateJudo: true
   - type: GuideHelp
     guides:
     - Security
@@ -168,10 +173,9 @@
   name: flash
   parent: [BaseItem, BaseSecurityScienceCommandContraband]
   id: Flash
-  suffix: DO NOT MAP
   description: An ultrabright flashbulb with a trigger, which causes the victim to be dazed and lose their eyesight for a moment. Useless when burnt out.
   components:
-    # Goobstation edit start
+    # <Trauma>
     - type: EmitSoundOnPickup
       sound:
         path: /Audio/_Goobstation/Items/handling/component_pickup.ogg
@@ -181,7 +185,7 @@
     - type: EmitSoundOnLand
       sound:
         path: /Audio/_Goobstation/Items/handling/component_drop.ogg
-    # Goobstation edit end
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/flash.rsi
       layers:
@@ -192,10 +196,11 @@
         visible: false
         shader: unshaded
     - type: Flash
-      meleeDuration: 7.0 # Goobstation Start - Total Flash Death
+      # <Trauma>
+      meleeDuration: 7.0
       aoeFlashDuration: 6.0
       meleeStunDuration: 2.5
-      slowTo: 1.5 # Goobstation End - Total Flash Death
+      # </Trauma>
     - type: RevolutionaryConverter
     - type: LimitedCharges
       maxCharges: 5

@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Systems;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 

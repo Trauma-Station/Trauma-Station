@@ -89,7 +89,7 @@
         icon:
           sprite: _Trauma/Objects/Devices/encryption_keys.rsi
           state: rev_label
-      # - tag: HandTeleporter - temp remove for econ purposes
+      # - component: HandTeleporter - temp remove for econ purposes
       #   name: construction-graph-tag-hand-teleporter
       #   icon:
       #     sprite: Objects/Devices/hand_teleporter.rsi

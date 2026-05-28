@@ -340,27 +340,27 @@ public sealed partial class BodySystem
 
     /// <summary>
     /// Adds a marking to an organ with a given category, not allowing duplicates on the same organ.
-    /// It will have default colours.
     /// </summary>
     public bool AddOrganMarking(
         Entity<BodyComponent?> body,
         [ForbidLiteral] ProtoId<OrganCategoryPrototype> category,
         [ForbidLiteral] ProtoId<MarkingPrototype> marking,
+        Color? color = null,
         bool force = false)
     {
         if (GetOrgan(body, category) is not {} organ)
             return false; // no organ found
 
-        return AddOrganMarking(organ, marking);
+        return AddOrganMarking(organ, marking, color, force);
     }
 
     /// <summary>
     /// Adds a marking to a given organ, not allowing duplicates on the same organ.
-    /// It will have default colours.
     /// </summary>
     public bool AddOrganMarking(
         Entity<VisualOrganMarkingsComponent?> organ,
         [ForbidLiteral] ProtoId<MarkingPrototype> marking,
+        Color? color = null,
         bool force = false)
     {
         if (!Resolve(organ, ref organ.Comp))
@@ -394,7 +394,9 @@ public sealed partial class BodySystem
         }
 
         // good to go
-        list.Add(new Marking(marking, []));
+        list.Add(new Marking(marking, color != null
+            ? Enumerable.Repeat(color.Value, proto.Sprites.Count)
+            : []));
         Dirty(organ, organ.Comp);
         return true;
     }

@@ -2,7 +2,6 @@
 
 using Content.Shared.Weapons.Melee.EnergySword;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Weapons.Melee.EnergySword;
 

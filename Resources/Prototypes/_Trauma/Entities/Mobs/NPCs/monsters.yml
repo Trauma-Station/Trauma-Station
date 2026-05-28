@@ -516,8 +516,8 @@
     damageModifierSet: CoconutCrab
   - type: VentCrawler
   - type: GhostRole
-    name: ghost-role-coconutcrab-name
-    description: ghost-role-ratma-desc
+    name: ghost-role-information-coconutcrab-name
+    description: ghost-role-information-ratma-desc
     rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default

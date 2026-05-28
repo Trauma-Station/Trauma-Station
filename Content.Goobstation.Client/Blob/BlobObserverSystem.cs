@@ -6,7 +6,6 @@ using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
-using Robust.Client.Graphics;
 using Robust.Shared.Player;
 //using Content.Shared.Flesh;
 

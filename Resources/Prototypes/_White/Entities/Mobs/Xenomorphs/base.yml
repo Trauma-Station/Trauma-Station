@@ -231,3 +231,14 @@
         false
       Inventory: !type:Bool
         false
+
+- type: entity
+  abstract: true
+  id: BaseXenoTailed
+  components:
+  - type: TailedEntity
+    amount: 17
+    spacing: 0.170
+    prototype: MobXenomorphTailSegmentBase
+    tailOffset: 0, -0.13
+    headFollowSegmentRotation: false

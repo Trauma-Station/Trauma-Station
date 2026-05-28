@@ -4,9 +4,7 @@ using Content.Client.UserInterface.Systems.Ghost;
 using Content.Client.UserInterface.Systems.Ghost.Widgets;
 using Content.Trauma.Client.Ghost.UI;
 using Content.Trauma.Shared.Ghost;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Ghost;
 

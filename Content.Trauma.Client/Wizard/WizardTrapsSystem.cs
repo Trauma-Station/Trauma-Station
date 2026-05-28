@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Wizard.Traps;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Wizard;
 
-public sealed class WizardTrapsSystem : SharedWizardTrapsSystem
+public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -22,6 +23,6 @@ public sealed class WizardTrapsSystem : SharedWizardTrapsSystem
         if (args.Sprite is not { } sprite)
             return;
 
-        sprite.Color = sprite.Color.WithAlpha((float) alpha);
+        _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha((float) alpha));
     }
 }

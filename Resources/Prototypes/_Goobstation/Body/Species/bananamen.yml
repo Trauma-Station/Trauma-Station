@@ -47,7 +47,7 @@
     spawned:
     - id: FoodBanana
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+    - id: MaterialBones1
       amount: 3
 
 ## Base

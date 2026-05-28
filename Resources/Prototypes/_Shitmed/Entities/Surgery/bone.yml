@@ -1,16 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: Bone
   parent: BaseItem
   name: bone
   description: A real bone. Contains calcium, a lot of calcium.
   components:
-  - type: Bone # backmen: wounding
+  - type: Bone
   - type: Sprite
-    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
+    sprite: _Trauma/Objects/Materials/materials.rsi
     state: bones
   - type: Appearance
   - type: Item
-    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
+    sprite: _Trauma/Objects/Materials/materials.rsi
     size: Normal
   - type: Tag
     tags:
@@ -25,8 +27,8 @@
   description: A bone from the neck. Contains a lot of calcium.
   components:
   - type: Bone
-    integrityCap: 100 # Goob edit
-    boneIntegrity: 100 # Goob edit
+    integrityCap: 100
+    boneIntegrity: 100
 
 - type: entity
   id: BoneWeak

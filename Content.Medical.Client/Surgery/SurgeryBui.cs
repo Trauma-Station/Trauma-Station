@@ -6,10 +6,7 @@ using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Surgery;
 using Content.Shared.Body;
-using Robust.Client.GameObjects;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Client.Surgery;
 

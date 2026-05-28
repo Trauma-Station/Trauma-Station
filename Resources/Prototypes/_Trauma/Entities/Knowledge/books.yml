@@ -106,7 +106,7 @@
     - state: melee
   - type: KnowledgeGrantOnUse
     knowledge:
-      # MeleeKnowledge 35
+      MeleeKnowledge: 35
       WeaponsKnowledge: 35
     experience:
       MeleeKnowledge: 15
@@ -127,10 +127,10 @@
     - state: shooting
   - type: KnowledgeGrantOnUse
     knowledge:
-      # MeleeKnowledge 35
+      ShootingKnowledge: 35
       WeaponsKnowledge: 35
     experience:
-      # MeleeKnowledge 5
+      ShootingKnowledge: 5
       WeaponsKnowledge: 4
     doAfter: 2
 

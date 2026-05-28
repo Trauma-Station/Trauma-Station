@@ -249,16 +249,3 @@
     graph: RevFlamethrowerAmmo
     deconstructionTarget: null
     node: empty
-
-- type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
-  id: RevFuelFrame
-  name: empty fuel tank
-  description: A frame for a flamethrower fuel tank
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Flamethrower/unfinished.rsi
-    state: icon
-  - type: Tag
-    tags:
-    - RevFuelTank

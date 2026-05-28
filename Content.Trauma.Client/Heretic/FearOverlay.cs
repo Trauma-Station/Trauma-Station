@@ -3,8 +3,6 @@
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.Heretic.Components.Side;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Random;
@@ -80,7 +78,8 @@ public sealed partial class FearOverlay : Overlay
     {
         foreach (var (uid, sprite, xform) in _hiddenEntities)
         {
-            var random = new Random(_entMan.GetNetEntity(uid).Id);
+            IRobustRandom random = new RobustRandom();
+            random.SetSeed(_entMan.GetNetEntity(uid).Id);
             var toRender = random.Pick(_visibleFearTargets);
             var (pos, rot) = _transform.GetWorldPositionRotation(xform);
             _sprite.RenderSprite(toRender,

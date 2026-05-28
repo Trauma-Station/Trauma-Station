@@ -177,7 +177,7 @@
     markingData:
       layers:
       - Head
-      - Face # Trauma - where the fuck else would it go
+      - Face
       - Snout
       - SnoutCover
       - HeadSide

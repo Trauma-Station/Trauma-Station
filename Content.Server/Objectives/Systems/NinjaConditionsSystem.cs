@@ -51,6 +51,12 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
     {
         if (args.Cancelled || !_roles.MindHasRole<NinjaRoleComponent>(args.MindId))
             return;
+        // <Trauma> - get map to check for warp points in below
+        if (args.Mind.OwnedEntity is not { } mob)
+            return;
+
+        var map = Transform(mob).MapID;
+        // </Trauma>
 
         // choose spider charge detonation point
         var warps = new List<EntityUid>();
@@ -59,6 +65,10 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
 
         while (allEnts.MoveNext(out var warpUid, out var warp))
         {
+            // <Trauma> - check map and ignore singularity etc
+            if (warp.Follow || Transform(warpUid).MapID != map)
+                continue;
+            // </Trauma>
             if (_whitelist.IsWhitelistFail(bombingBlacklist, warpUid)
                 && !string.IsNullOrWhiteSpace(warp.Location))
             {

@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Physics;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Physics;
 

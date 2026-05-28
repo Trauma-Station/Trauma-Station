@@ -9,9 +9,6 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
-/// <summary>
-/// Trauma - Rewrote this shitcode and put it here instead of core files
-/// </summary>
 public sealed partial class AddReagentToBlood : EntityEffectBase<AddReagentToBlood>
 {
     [DataField(required: true)]

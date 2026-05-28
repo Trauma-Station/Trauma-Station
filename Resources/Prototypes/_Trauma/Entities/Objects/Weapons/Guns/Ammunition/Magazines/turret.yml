@@ -12,7 +12,7 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeTurret
+      - CartridgeTurret
     proto: CartridgeTurret
     capacity: 60
   - type: Item

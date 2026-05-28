@@ -43,7 +43,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Dead
+      300: Dead
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.5
     baseSprintSpeed: 4
@@ -71,13 +71,13 @@
     wideAnimation: WeaponArcPunch
     damage:
       types:
-        Blunt: 20
-        Structural: 30
+        Blunt: 25
+        Structural: 40
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
       - ReagentId: Blood
-        Quantity: 50
+        Quantity: 75
   - type: Devourer
     devourAction: ActionMorphDevour
     soundStructureDevour: /Audio/Effects/sizzle.ogg

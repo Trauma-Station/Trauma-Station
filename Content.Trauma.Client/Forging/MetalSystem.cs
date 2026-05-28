@@ -2,8 +2,6 @@
 
 using Content.Shared.Item;
 using Content.Trauma.Shared.Forging;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.Forging;
 

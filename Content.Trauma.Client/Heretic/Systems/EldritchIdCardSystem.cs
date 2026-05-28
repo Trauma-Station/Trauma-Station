@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 

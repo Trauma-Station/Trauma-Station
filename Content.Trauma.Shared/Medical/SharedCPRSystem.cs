@@ -22,7 +22,6 @@ using Content.Trauma.Shared.Knowledge.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Medical;
 

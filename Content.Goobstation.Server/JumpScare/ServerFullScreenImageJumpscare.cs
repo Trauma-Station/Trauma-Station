@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.JumpScare;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.JumpScare;
 

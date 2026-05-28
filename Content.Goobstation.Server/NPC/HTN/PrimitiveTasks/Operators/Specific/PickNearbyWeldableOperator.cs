@@ -20,6 +20,8 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     private DamageableSystem _damageable = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<WeldbotComponent> _query = default!;
 
     /// <summary>
     /// Target entity to weld
@@ -44,6 +46,9 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
         _damageable = sysManager.GetEntitySystem<DamageableSystem>();
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+
+        _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
+        _query = _ent.GetEntityQuery<WeldbotComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -51,10 +56,10 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!_ent.TryGetComponent<WeldbotComponent>(owner, out var weldbot))
+        if (!_query.TryComp(owner, out var weldbot))
             return (false, null);
 
-        var emagged = _ent.HasComponent<EmaggedComponent>(owner);
+        var emagged = _emaggedQuery.HasComp(owner);
 
         var coords = _ent.GetComponent<TransformComponent>(owner).Coordinates;
         _targets.Clear();

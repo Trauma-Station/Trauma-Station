@@ -18,7 +18,6 @@ using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Skills.Components;
 using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
