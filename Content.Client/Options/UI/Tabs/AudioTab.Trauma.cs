@@ -1,4 +1,4 @@
-﻿namespace Content.Client.Options.UI.Tabs;
+namespace Content.Client.Options.UI.Tabs;
 
 public sealed partial class AudioTab
 {

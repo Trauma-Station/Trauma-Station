@@ -1,11 +1,4 @@
-// SPDX-FileCopyrightText: 2025 LaCumbiaDelCoronavirus
-// SPDX-FileCopyrightText: 2025 ark1368
-// SPDX-FileCopyrightText: 2025 Jellvisk
-//
-// SPDX-License-Identifier: MPL-2.0
-
-// this has been heavily refactored by Jellvisk to the point
-// where this is like a ship of theseus situation.
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Coordinates;
 using Content.Shared.Light.Components;
