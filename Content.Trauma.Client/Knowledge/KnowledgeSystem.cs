@@ -31,7 +31,6 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         base.Initialize();
 
 
-        SubscribeLocalEvent<DefenseAttributeComponent, GetAttributeModifierEvent>(OnCalculateDefense);
         SubscribeLocalEvent<DamageAttributeComponent, GetAttributeModifierEvent>(OnCalculateDamage);
         SubscribeLocalEvent<StrengthFeatComponent, GetAttributeModifierEvent>(OnStrengthFeat);
         SubscribeLocalEvent<AgilityFeatComponent, GetAttributeModifierEvent>(OnCalculateAgility);
@@ -59,20 +58,12 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         LobbyUIController.OnProfileEditorCreated -= AddProfileEditorTab;
     }
 
-    private void OnCalculateAttack(Entity<AttackAttributeComponent> ent, ref GetAttributeModifierEvent args)
+    private void OnCalculateAttack(Entity<SpeedAttributeComponent> ent, ref GetAttributeModifierEvent args)
     {
         if (!TryComp<AttributeComponent>(ent, out var comp))
             return;
 
-        args.Modifiers.Add(("Attack: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
-    }
-
-    private void OnCalculateDefense(Entity<DefenseAttributeComponent> ent, ref GetAttributeModifierEvent args)
-    {
-        if (!TryComp<AttributeComponent>(ent, out var comp))
-            return;
-
-        args.Modifiers.Add(("Defense: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
+        args.Modifiers.Add(("Speed: ", AttributeSystem.LerpCurve(comp.Attribute, ent.Comp.MinX, ent.Comp.MaxX, ent.Comp.MinY, ent.Comp.MaxY).ToString()));
     }
 
     private void OnCalculateDamage(Entity<DamageAttributeComponent> ent, ref GetAttributeModifierEvent args)
