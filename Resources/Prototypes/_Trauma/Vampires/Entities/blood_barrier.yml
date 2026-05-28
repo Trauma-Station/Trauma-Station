@@ -16,6 +16,8 @@
         pitch: 2.0
         volume: -10
   - type: Clickable
+  - type: TimedDespawn
+    lifetime: 25.0
 
 - type: entity
   parent: BaseStructure
