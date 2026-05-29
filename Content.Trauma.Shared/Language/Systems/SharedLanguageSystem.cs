@@ -51,6 +51,10 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
                 else
                     ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
             }
+            else
+            {
+                ratio = 1.0f;
+            }
         }
         else
         {
@@ -109,7 +113,11 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
             return true;
 
         // Kind of important that knowledge holders don't understand everything so they use the obfuscation logic.
-        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && !HasComp<KnowledgeHolderComponent>(ent);
+        var canUnderstand = true;
+        if (_knowledge.GetContainer(ent.Owner) is { } brain)
+            canUnderstand = _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } unit && _knowledge.GetMastery(unit.Comp) >= 2;
+
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && canUnderstand;
     }
 
     public bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)

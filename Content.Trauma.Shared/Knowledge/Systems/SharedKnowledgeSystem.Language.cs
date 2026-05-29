@@ -259,7 +259,7 @@ public abstract partial class SharedKnowledgeSystem
 
         var languageId = LanguageUnit(args.Language);
 
-        // Try obfuscate speech if can't speak good.
+        // Try obfuscate speech if can't listen well.
         if (GetKnowledge(brain, LanguageUnit(args.Language)) is { } unit && GetMastery(unit.Owner) >= 2)
             return;
 
