@@ -14,10 +14,8 @@
   weight: 20
   startingGear: NanotrasenRepresentativeGear
   icon: "JobIconNanotrasenRepresentative"
-  requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   guides:
   - SpaceLaw
   - Writing

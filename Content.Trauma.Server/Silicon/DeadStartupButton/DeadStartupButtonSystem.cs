@@ -16,16 +16,16 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Silicon.DeadStartupButton;
 
-public sealed class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
+public sealed partial class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private LightningSystem _lightning = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

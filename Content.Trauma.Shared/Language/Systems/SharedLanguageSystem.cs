@@ -13,11 +13,11 @@ using Content.Trauma.Shared.Language.Events;
 
 namespace Content.Trauma.Shared.Language.Systems;
 
-public abstract class SharedLanguageSystem : CommonLanguageSystem
+public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     private StringBuilder _builder = new();
 
@@ -108,7 +108,7 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
-        // Kind of important that knowledge holders don't understand everything so they use the obfuscation logic override.
+        // Kind of important that knowledge holders don't understand everything so they use the obfuscation logic.
         return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && !HasComp<KnowledgeHolderComponent>(ent);
     }
 

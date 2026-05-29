@@ -13,7 +13,7 @@ public sealed partial class SpawnAttached : BaseSpawnEntityEntityEffect<SpawnAtt
 
 public sealed partial class SpawnAttachedEntityEffectSystem : EntityEffectSystem<TransformComponent, SpawnAttached>
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<SpawnAttached> args)
     {

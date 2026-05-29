@@ -12,6 +12,16 @@
   inhand:
   - Toolboxrobust
 
+- type: antagSpecifier
+  id: TunnelClown
+  spawnerPrototype: SpawnPointGhostTunnelClown
+  mindRoles:
+  - MindRoleGhostRoleSoloAntagonist
+  briefing:
+    text: tunnel-clown-role-greeting
+    color: Pink
+    sound: /Audio/_Goobstation/Misc/clownalwayswinsshort.ogg
+
 - type: startingGear
   id: TunnelClownAntagGear
   equipment:
@@ -44,6 +54,15 @@
     - TrashBananaPeelExplosive
     - TrashBananaPeelExplosive
 
+- type: antagSpecifier
+  id: SingulothKnight
+  spawnerPrototype: SpawnPointGhostSingulothKnight
+  mindRoles: [ MindRoleGhostRoleFreeAgent ]
+  briefing:
+    text: Singuloth-Knight-role-greeting
+    color: Red
+    sound: /Audio/_Goobstation/Misc/singulothknight_greeting.ogg
+
 - type: startingGear
   id: SingulothKnightsAntagGear
   equipment:
@@ -62,6 +81,15 @@
     - OxygenTankFilled
     - Bible
 
+- type: antagSpecifier
+  id: DarkLord
+  spawnerPrototype: SpawnPointGhostDarkLord
+  mindRoles: [ MindRoleGhostRoleSoloAntagonist ]
+  briefing:
+    text: dark-lord-role-greeting
+    color: Red
+    sound: /Audio/_Goobstation/Misc/darklord_greeting.ogg
+
 - type: startingGear
   id: DarkLordAntagGear
   equipment:
@@ -79,6 +107,15 @@
     - BoxSurvivalSlotsSyndicate
     - MedkitCombatFilled
 
+- type: antagSpecifier
+  id: ChosenOne
+  spawnerPrototype: SpawnPointGhostChosenOne
+  mindRoles: [ MindRoleGhostRoleNeutral ]
+  briefing:
+    text: chosen-one-role-greeting
+    color: Green
+    sound: /Audio/_Goobstation/Misc/darklord_greeting.ogg
+
 - type: startingGear
   id: ChosenOneProtagGear
   equipment:
@@ -90,6 +127,16 @@
     id: CentcomPDA
   inhand:
   - EnergySwordBlue
+
+- type: antagSpecifier
+  id: MimeAssassin
+  spawnerPrototype: SpawnPointGhostMimeAssassin
+  mindRoles:
+  - MindRoleGhostRoleSoloAntagonist
+  briefing:
+    text: mime-Assassin-role-greeting
+    color: Red
+    sound: /Audio/Misc/thief_greeting.ogg
 
 - type: startingGear
   id: MimeAssassinGear
@@ -123,6 +170,15 @@
     - SmokeImplanter
     - BodyBagFolded
 
+- type: antagSpecifier
+  id: DarkPriest
+  spawnerPrototype: SpawnPointGhostDarkPriest
+  mindRoles: [ MindRoleGhostRoleFreeAgent ]
+  briefing:
+    text: dark-priest-role-greeting
+    color: Purple
+    sound: /Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg
+
 - type: startingGear
   id: DarkPriestAntagGear
   equipment:
@@ -145,6 +201,17 @@
     - ClothingHeadHatHoodVoidCloak
     - ClothingOuterHoodieChaplain
     - BoxSurvivalSlots
+
+- type: antagSpecifier
+  id: VoxRaider
+  spawnerPrototype: SpawnPointGhostVoxRaider
+  mindRoles:
+  - MindRoleGhostRoleTeamAntagonist
+  - MindRoleThief
+  briefing:
+    text: vox-raider-role-greeting
+    color: Purple
+    sound: /Audio/Misc/thief_greeting.ogg
 
 - type: startingGear
   id: VoxRaiderAntagGear

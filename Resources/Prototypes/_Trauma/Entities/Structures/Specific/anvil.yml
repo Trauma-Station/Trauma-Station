@@ -30,8 +30,19 @@
     interfaces:
       enum.AnvilUiKey.Key:
         type: ForgingAnvilBUI
-  # TODO: automation upgrade signal port to create the last item
+  # TODO: automation signal port to create the last item
   - type: Construction
     graph: Anvil
     node: anvil
   - type: PlaceableSurface
+
+- type: entity
+  categories: [ Debug, DoNotMap ]
+  parent: AnvilComplete
+  id: AnvilDebug
+  name: debug anvil
+  description: Forge anything you want from thin air using a single punch.
+  components:
+  - type: ForgingAnvil
+    costScale: 0
+    workScale: 0

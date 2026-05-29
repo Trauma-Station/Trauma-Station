@@ -15,3 +15,16 @@
     - id: SyringeTramadol
     - id: SyringeOxycodone
     - id: SyringeIbuprofen
+
+- type: entity
+  parent: PillCanister
+  id: PillCanisterSpaceDrugs
+  suffix: Space Mirage 15u, 15
+  components:
+  - type: Label
+    currentLabel: space mirage 15u
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: PillSpaceDrugs
+        amount: 15

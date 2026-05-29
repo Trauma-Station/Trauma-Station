@@ -1,6 +1,6 @@
 - type: knowledgeProfile
   id: Plasmaman
-  pointsLimit: 10 # Already a challenge, leave them as is
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0

@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;
 
-public sealed class TimerButton : Button
+public sealed partial class TimerButton : Button
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly string _label;
     private readonly TimeSpan _timeSpan;

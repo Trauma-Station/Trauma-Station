@@ -4,9 +4,9 @@ using Content.Shared.Actions;
 
 namespace Content.Medical.Shared.Abilities.Goliath;
 
-public sealed class GoliathTentacleSystem : EntitySystem
+public sealed partial class GoliathTentacleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

@@ -21,14 +21,14 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.CosmicCult;
 
-public sealed class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRuleComponent>
+public sealed partial class MalignRiftSpawnRule : StationEventSystem<MalignRiftSpawnRuleComponent>
 {
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPlayerManager _playerMan = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private IPlayerManager _playerMan = default!;
 
     protected override void Added(EntityUid uid, MalignRiftSpawnRuleComponent comp, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {

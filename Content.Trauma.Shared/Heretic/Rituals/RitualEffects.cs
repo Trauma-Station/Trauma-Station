@@ -2,10 +2,13 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Polymorph;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -154,15 +157,8 @@ public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<Fin
 
 public sealed partial class UpdateKnowledgeEffect : BaseRitualEffect<UpdateKnowledgeEffect>
 {
-    [DataField(required: true)]
-    public float Amount;
-}
-
-public sealed partial class
-    SetHereticAvailablePassiveLevelEffect : BaseRitualEffect<SetHereticAvailablePassiveLevelEffect>
-{
-    [DataField]
-    public int Level = 2;
+    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, CurrencyPrototype>))]
+    public Dictionary<string, FixedPoint2> Knowledge;
 }
 
 public sealed partial class RemoveRitualsEffect : BaseRitualEffect<RemoveRitualsEffect>

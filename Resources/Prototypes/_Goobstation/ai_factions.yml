@@ -9,6 +9,7 @@
   - Wizard
   - Blob
   - Insurgent
+  - CrabFaction
 
 - type: npcFaction
   id: Balloon
@@ -41,6 +42,7 @@
   - Insurgent
   friendly:
   - Lavafauna
+  - CrabFaction
 
 # Lavaland mob faction to stop gang wars
 - type: npcFaction
@@ -65,6 +67,7 @@
   - Insurgent
   friendly:
   - Dragon
+  - CrabFaction
 
 - type: npcFaction
   id: Assistant
@@ -87,3 +90,4 @@
   - AllHostile
   - Xenoborg
   - Insurgent
+  - CrabFaction

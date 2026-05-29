@@ -23,7 +23,7 @@
           Toxin: -12
           Airloss: -12
 
-      - !type:GenericStatusEffect
+      - !type:ModifyStatusEffect
         conditions:
         - !type:WhitelistCondition
           blacklist:
@@ -34,6 +34,5 @@
         - !type:ReagentCondition
           reagent: ShadowlingToxin
           min: 5
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+        effectProto: StatusEffectBlindness
         time: 3

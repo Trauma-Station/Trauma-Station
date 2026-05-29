@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.IoC;
-
 namespace Content.Goobstation.Shared.Redial;
 
-public abstract class SharedRedialManager : IPostInjectInit
+public abstract partial class SharedRedialManager : IPostInjectInit
 {
-    [Dependency] protected readonly INetManager _netManager = default!;
+    [Dependency] protected INetManager _netManager = default!;
 
     public void PostInject()
     {
@@ -15,6 +13,5 @@ public abstract class SharedRedialManager : IPostInjectInit
 
     public virtual void Initialize()
     {
-
     }
 }

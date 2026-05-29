@@ -7,10 +7,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class TemperatureTrackerSystem : EntitySystem
+public sealed partial class TemperatureTrackerSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

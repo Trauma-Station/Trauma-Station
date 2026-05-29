@@ -10,13 +10,13 @@ using Robust.Shared.Configuration;
 
 namespace Content.Goobstation.Shared.Silo;
 
-public abstract class SharedSiloSystem : CommonSiloSystem
+public abstract partial class SharedSiloSystem : CommonSiloSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly SharedDeviceLinkSystem DeviceLink = default!;
-    [Dependency] protected readonly SharedMaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly EntityQuery<MaterialStorageComponent> _matsQuery = default!;
-    [Dependency] private readonly EntityQuery<SiloUtilizerComponent> _utilizerQuery = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] protected SharedDeviceLinkSystem DeviceLink = default!;
+    [Dependency] protected SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private EntityQuery<MaterialStorageComponent> _matsQuery = default!;
+    [Dependency] private EntityQuery<SiloUtilizerComponent> _utilizerQuery = default!;
 
     private bool _siloEnabled;
 

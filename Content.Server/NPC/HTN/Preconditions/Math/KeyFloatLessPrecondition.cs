@@ -6,7 +6,7 @@ namespace Content.Server.NPC.HTN.Preconditions.Math;
 /// </summary>
 public sealed partial class KeyFloatLessPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     [DataField(required: true), ViewVariables]
     public string Key = string.Empty;

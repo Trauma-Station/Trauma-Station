@@ -5,10 +5,10 @@ using Content.Shared.Emag.Systems;
 
 namespace Content.Trauma.Server.ChangeHTNOnEmag;
 
-public sealed class ChangeHtnOnEmagSystem : EntitySystem
+public sealed partial class ChangeHtnOnEmagSystem : EntitySystem
 {
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private EmagSystem _emag = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<ChangeHtnOnEmagComponent, GotEmaggedEvent>(OnEmag);

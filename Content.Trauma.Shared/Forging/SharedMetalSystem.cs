@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Forging;
 /// </summary>
 public abstract partial class SharedMetalSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager Proto = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<MetallicComponent> _query = default!;
+    [Dependency] protected IPrototypeManager Proto = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<MetallicComponent> _query = default!;
 
     /// <summary>
     /// Cache of each metal prototype.

@@ -24,9 +24,9 @@ public sealed partial class ReduceActionsCooldown : EntityEffectBase<ReduceActio
 
 public sealed partial class ReduceActionsCooldownSystem : EntityEffectSystem<TransformComponent, ReduceActionsCooldown>
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<ReduceActionsCooldown> args)
     {

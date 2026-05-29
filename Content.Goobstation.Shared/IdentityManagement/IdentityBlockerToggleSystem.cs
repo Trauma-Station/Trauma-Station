@@ -9,10 +9,10 @@ namespace Content.Goobstation.Shared.IdentityManagement;
 /// <summary>
 /// Updates your identity when you toggle a mask up or down.
 /// </summary>
-public sealed class IdentityBlockerToggleSystem : EntitySystem
+public sealed partial class IdentityBlockerToggleSystem : EntitySystem
 {
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

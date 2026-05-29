@@ -9,14 +9,13 @@ using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
 using Content.Trauma.Shared.Language.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     private void InitializeLanguage()
     {
@@ -256,11 +255,11 @@ public abstract partial class SharedKnowledgeSystem
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
-        AddExperience(brain, args.Language.Id, Math.Min(args.Message.Length / 10, 8));
+        AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
 
         var languageId = LanguageUnit(args.Language);
 
-        // Exit obfuscation if they can understand, just in case.
+        // Try obfuscate speech if can't speak good.
         if (GetKnowledge(brain, LanguageUnit(args.Language)) is { } unit && GetMastery(unit.Owner) >= 2)
             return;
 

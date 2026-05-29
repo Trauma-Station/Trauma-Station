@@ -5,9 +5,9 @@ using Content.Shared.Body;
 
 namespace Content.Medical.Shared.DoAfter;
 
-public sealed class DoAfterDelayMultiplierSystem : EntitySystem
+public sealed partial class DoAfterDelayMultiplierSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     public override void Initialize()
     {

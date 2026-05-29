@@ -9,12 +9,12 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class IgniteOnFlashSystem : EntitySystem
+public sealed partial class IgniteOnFlashSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly ExamineSystem _examine = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private ExamineSystem _examine = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
 
     private readonly HashSet<Entity<FlammableComponent>> _targetEntities = new();
 

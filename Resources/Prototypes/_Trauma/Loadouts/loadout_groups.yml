@@ -53,3 +53,20 @@
   - PatreoniDoppel
   - PatreonWraith_man
   - PatreonToasterStrudels
+  - PatreonLtKRY
+  - PatreonDrOktober
+  - PatreonDaniels
+  - PatreonCatdere
+  - PatreonSuperMage
+  - PatreonDino
+
+# Bartender
+
+- type: loadoutGroup
+  id: BartenderWeapon
+  name: loadout-group-bartenderweapon
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - BartenderShotgunDoubleBarrelled
+  - BartenderShotgunDoubleBarrelledEngraved

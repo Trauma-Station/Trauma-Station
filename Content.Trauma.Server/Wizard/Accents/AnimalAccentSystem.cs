@@ -5,9 +5,9 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard.Accents;
 
-public sealed class AnimalAccentSystem : EntitySystem
+public sealed partial class AnimalAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

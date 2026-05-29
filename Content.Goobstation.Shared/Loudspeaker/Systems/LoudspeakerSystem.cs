@@ -9,15 +9,14 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Loudspeaker.Systems;
 
-public sealed class LoudSpeakerSystem : EntitySystem
+public sealed partial class LoudSpeakerSystem : EntitySystem
 {
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

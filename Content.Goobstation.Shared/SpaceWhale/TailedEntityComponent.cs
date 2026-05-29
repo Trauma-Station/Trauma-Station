@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 
 namespace Content.Goobstation.Shared.SpaceWhale;
 
@@ -77,6 +76,12 @@ public sealed partial class TailedEntityComponent : Component
 
     [DataField]
     public Vector2 LastPos;
+
+    /// <summary>
+    /// allows the user to offset the tails position on the head entity
+    /// </summary>
+    [DataField]
+    public Vector2 TailOffset;
 }
 
 [Serializable, NetSerializable, DataRecord]

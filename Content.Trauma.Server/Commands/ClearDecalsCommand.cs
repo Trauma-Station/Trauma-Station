@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration;
-using Content.Server.Decals;
 using Content.Shared.Administration;
 using Content.Shared.Decals;
 using Robust.Shared.Console;
@@ -9,9 +8,9 @@ using Robust.Shared.Console;
 namespace Content.Trauma.Server.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class ClearDecalsCommand : IConsoleCommand
+public sealed partial class ClearDecalsCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public string Command => "cleardecals";
     public string Description => "Clear all decals in the game, including uncleanable ones";

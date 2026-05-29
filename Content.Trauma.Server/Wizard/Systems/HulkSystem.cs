@@ -16,16 +16,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class HulkSystem : SharedHulkSystem
+public sealed partial class HulkSystem : SharedHulkSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedScaleVisualsSystem _scale = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
+    [Dependency] private HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedScaleVisualsSystem _scale = default!;
 
     public override void Initialize()
     {

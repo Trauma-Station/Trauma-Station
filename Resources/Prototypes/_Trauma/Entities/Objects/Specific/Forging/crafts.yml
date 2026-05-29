@@ -314,7 +314,7 @@
 # Arrows
 
 - type: entity
-  parent: [ BaseMetallicProcGen, SpearDurabilityWeak, BaseArrow ] # it's basically a mini spear
+  parent: [ BaseMetallicProcGen, BaseArrow ]
   id: ForgedArrow
   name: arrow
   categories: [ HideSpawnMenu ]
@@ -339,7 +339,7 @@
 # Spear
 
 - type: entity
-  parent: [ BaseForgedProductSeparateHead, SpearDurabilityStrong, Spear ]
+  parent: [ BaseForgedProductSeparateHead, Spear ]
   id: ForgedSpear
   categories: [ HideSpawnMenu ]
   components:

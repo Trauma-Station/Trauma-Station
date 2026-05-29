@@ -12,11 +12,11 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators;
 
 public sealed partial class SpeakOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
     private ChatSystem _chat = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     [DataField(required: true)]
     public SpeakOperatorSpeech Speech;
@@ -88,7 +88,7 @@ public sealed partial class SpeakOperator : HTNOperator
         public sealed partial class SingleSpeakOperatorSpeech : SpeakOperatorSpeech
         {
             [DataField(required: true)]
-            public string Line;
+            public LocId Line; // Trauma - use LocId
         }
 
         public sealed partial class LocalizedSetSpeakOperatorSpeech : SpeakOperatorSpeech

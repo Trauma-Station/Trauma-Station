@@ -17,19 +17,19 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
-public sealed class CosmicConversionSystem : EntitySystem
+public sealed partial class CosmicConversionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly RottingSystem _rotting = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private RottingSystem _rotting = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private readonly SoundSpecifier _conversionSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_start.ogg");
     private readonly SoundSpecifier _conversionEndSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/conversion_end.ogg");

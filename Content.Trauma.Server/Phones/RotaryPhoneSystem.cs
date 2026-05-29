@@ -19,12 +19,12 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Phones;
 
-public sealed class RotaryPhoneSystem : SharedRotaryPhoneSystem
+public sealed partial class RotaryPhoneSystem : SharedRotaryPhoneSystem
 {
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

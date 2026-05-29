@@ -28,16 +28,16 @@ namespace Content.Trauma.Server.Chaplain;
 /// <summary>
 /// This system takes care of entities that can catch holy fire by leveraging if the entity has the weakToHolyComponent.
 /// </summary>
-public sealed class HolyFlammableSystem : EntitySystem
+public sealed partial class HolyFlammableSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private const float InitialGrowthRate = 1f;
     private const float IntermediateGrowthRate = 0.5f;

@@ -31,7 +31,7 @@ public sealed partial class HijackBeaconComponent : Component
     ///     Remaining time until the hijack is completed.
     /// </summary>
     [DataField, Access(typeof(HijackBeaconSystem))]
-    public TimeSpan RemainingTime = TimeSpan.FromSeconds(200);
+    public TimeSpan RemainingTime = TimeSpan.FromSeconds(600); // Trauma, should be difficult to defend, was 200
 
     /// <summary>
     ///     Default amount of time before the beacon can be re-activated, if it is disarmed.
@@ -49,5 +49,5 @@ public sealed partial class HijackBeaconComponent : Component
     ///     How much cash should be withdrawn from each department account?
     /// </summary>
     [DataField]
-    public int Fine = 5000;
+    public int Fine = 15000; // Trauma, was 5000
 }

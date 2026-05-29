@@ -8,11 +8,11 @@ namespace Content.Trauma.Shared.CosmicCult;
 
 public sealed partial class CosmicShopSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public override void Initialize()
     {

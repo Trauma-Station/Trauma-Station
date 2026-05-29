@@ -31,8 +31,8 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly EntityQuery<CartridgeAmmoComponent> _cartridgeQuery = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private EntityQuery<CartridgeAmmoComponent> _cartridgeQuery = default!;
 
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "FleshMimic";
     private static readonly ProtoId<OrganCategoryPrototype> StomachCategory = "Stomach";

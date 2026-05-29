@@ -7,15 +7,16 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Content.Trauma.Shared.Morph;
+using System.Linq;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
 /// <summary>
 /// Adds morph to the round end summary.
 /// </summary>
-public sealed class MorphRuleSystem : GameRuleSystem<MorphRuleComponent>
+public sealed partial class MorphRuleSystem : GameRuleSystem<MorphRuleComponent>
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
 
     public override void Initialize()
     {
@@ -31,7 +32,7 @@ public sealed class MorphRuleSystem : GameRuleSystem<MorphRuleComponent>
     {
         base.AppendRoundEndText(uid, comp, gameRule, ref args);
 
-        var sessionData = _antag.GetAntagIdentifiers(uid);
+        var sessionData = _antag.GetAntagIdentifiers(uid).ToList();
         var lone = sessionData.Count == 1;
         foreach (var (mindId, data, name) in sessionData)
         {

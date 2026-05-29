@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class StarMarkSystem : SharedStarMarkSystem
+public sealed partial class StarMarkSystem : SharedStarMarkSystem
 {
-    [Dependency] private readonly AirtightSystem _airtight = default!;
+    [Dependency] private AirtightSystem _airtight = default!;
 
     protected override void InitializeCosmicField(Entity<CosmicFieldComponent> field, int strength)
     {

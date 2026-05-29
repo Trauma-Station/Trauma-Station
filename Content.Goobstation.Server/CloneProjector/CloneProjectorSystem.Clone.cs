@@ -15,7 +15,7 @@ namespace Content.Goobstation.Server.CloneProjector;
 // TODO: move parts that dont use HostProjector to shared...
 public partial class CloneProjectorSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     public void InitializeClone()
     {

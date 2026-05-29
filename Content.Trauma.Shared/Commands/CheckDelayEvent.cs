@@ -7,8 +7,8 @@ namespace Content.Trauma.Shared.Commands;
 /// Used for measuring connection delay in both directions, accounting for message queues and what not.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class CheckDelayEvent(DateTime sent) : EntityEventArgs
+public sealed class CheckDelayEvent(TimeSpan sent) : EntityEventArgs
 {
-    public readonly DateTime Sent = sent;
-    public DateTime Received;
+    public readonly TimeSpan Sent = sent;
+    public TimeSpan Received;
 }

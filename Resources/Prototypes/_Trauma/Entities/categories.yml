@@ -12,3 +12,8 @@
   id: Areas
   name: entity-category-name-areas
   # could hide spawn menu if someone remakes strongdmm for ss14
+
+- type: entityCategory
+  id: HereticRituals
+  name: entity-category-name-heretic-rituals
+  hideSpawnMenu: true

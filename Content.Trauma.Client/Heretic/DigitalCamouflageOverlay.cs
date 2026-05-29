@@ -3,20 +3,18 @@
 using Content.Shared.Movement.Components;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.AudioMuffle;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 
 namespace Content.Trauma.Client.Heretic;
 
-public sealed class DigitalCamouflageOverlay : Overlay
+public sealed partial class DigitalCamouflageOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.ScreenSpace | OverlaySpace.WorldSpaceBelowEntities;
 
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private readonly SpriteSystem _sprite;
 
     private readonly HashSet<Entity<SpriteComponent>> _hiddenEntities = new();

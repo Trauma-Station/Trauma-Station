@@ -6,23 +6,21 @@ using Content.Server.GameTicking;
 
 namespace Content.Goobstation.Server.DarkLord;
 
-public sealed class DarkLordSystem : EntitySystem
+public sealed partial class DarkLordSystem : EntitySystem
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IRobustRandom _random = default!;
+
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<DarkLordComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnMapInit(EntityUid uid, DarkLordComponent component, MapInitEvent args)
+    private void OnMapInit(Entity<DarkLordComponent> ent, ref MapInitEvent args)
     {
-        if (_random.Prob(component.ChosenOneChance))
-        {
-            var ticker = _entitySystemManager.GetEntitySystem<GameTicker>();
-            ticker.AddGameRule("ChosenOneMidround");
-            ticker.StartGameRule("ChosenOneMidround");
-        }
+        if (_random.Prob(ent.Comp.ChosenOneChance))
+            _ticker.StartGameRule(ent.Comp.Rule);
     }
 }

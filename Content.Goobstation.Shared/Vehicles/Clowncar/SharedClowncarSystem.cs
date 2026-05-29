@@ -38,8 +38,8 @@ namespace Content.Goobstation.Shared.Vehicles.Clowncar;
  */
 public abstract partial class SharedClowncarSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAppearanceSystem AppearanceSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] protected SharedAppearanceSystem AppearanceSystem = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -17,12 +17,12 @@ using Robust.Shared.GameObjects.Components.Localization;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class BindSoulSystem : SharedBindSoulSystem
+public sealed partial class BindSoulSystem : SharedBindSoulSystem
 {
-    [Dependency] private readonly SpecialRespawnSystem _respawn = default!;
-    [Dependency] private readonly WizardRuleSystem _wizard = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly OutfitSystem _outfit = default!;
+    [Dependency] private SpecialRespawnSystem _respawn = default!;
+    [Dependency] private WizardRuleSystem _wizard = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private OutfitSystem _outfit = default!;
 
     public override void Resurrect(EntityUid mind,
         EntityUid phylactery,

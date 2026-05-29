@@ -22,12 +22,12 @@ namespace Content.Lavaland.Shared.Weapons.Upgrades;
 
 public sealed partial class GunUpgradeSystem : EntitySystem
 {
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     private EntityQuery<GunUpgradeComponent> _upgradeQuery;
 

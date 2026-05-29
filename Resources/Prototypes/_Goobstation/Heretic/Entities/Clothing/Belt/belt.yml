@@ -1,0 +1,26 @@
+- type: entity
+  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseMagicalContraband]
+  id: UnfathomableCurio
+  name: unfathomable curio
+  description: It. It looks backs. It looks past. It looks in. It sees. It hides. It opens.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,4
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: UnholyItem
+  - type: HereticClothing
+  - type: Tag
+    tags:
+    - HereticItem
+    - WhitelistChameleon
+  - type: ClothingGrantComponent
+    component:
+    - type: UnfathomableCurioShield

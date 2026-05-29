@@ -1,0 +1,53 @@
+# All valid inventory slot for yml linting
+
+- type: inventorySlot
+  id: jumpsuit
+
+- type: inventorySlot
+  id: back
+
+- type: inventorySlot
+  id: id
+
+- type: inventorySlot
+  id: outerClothing
+
+- type: inventorySlot
+  id: suitstorage
+
+- type: inventorySlot
+  id: shoes
+
+- type: inventorySlot
+  id: gloves
+
+- type: inventorySlot
+  id: head
+
+- type: inventorySlot
+  id: ears
+
+- type: inventorySlot
+  id: mask
+
+- type: inventorySlot
+  id: neck
+
+- type: inventorySlot
+  id: eyes
+
+- type: inventorySlot
+  id: belt
+
+# pockets being considered inventory slots has been a curse on mankind
+- type: inventorySlot
+  id: pocket1
+
+- type: inventorySlot
+  id: pocket2
+
+- type: inventorySlot
+  id: pocket3
+
+- type: inventorySlot
+  id: pocket4

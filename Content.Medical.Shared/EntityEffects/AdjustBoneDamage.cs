@@ -22,10 +22,10 @@ public sealed partial class AdjustBoneDamage : EntityEffectBase<AdjustBoneDamage
         => Loc.GetString("reagent-effect-guidebook-adjust-bone-damage", ("amount", Amount));
 }
 
-public sealed class AdjustBoneDamageEffectSystem : EntityEffectSystem<BodyComponent, AdjustBoneDamage>
+public sealed partial class AdjustBoneDamageEffectSystem : EntityEffectSystem<BodyComponent, AdjustBoneDamage>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<AdjustBoneDamage> args)
     {

@@ -9,13 +9,13 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Spawners;
 
-public sealed class DropPodSpawnPointSystem : EntitySystem
+public sealed partial class DropPodSpawnPointSystem : EntitySystem
 {
-    [Dependency] private readonly DropPodSystem _dropPod = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StationSpawningSystem _spawning = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private DropPodSystem _dropPod = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StationSpawningSystem _spawning = default!;
+    [Dependency] private StationSystem _station = default!;
 
     private List<EntityUid> _points = new();
 

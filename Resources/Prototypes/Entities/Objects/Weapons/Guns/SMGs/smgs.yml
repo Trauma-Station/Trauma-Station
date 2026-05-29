@@ -124,9 +124,10 @@
 #    minAngle: -19
 #    maxAngle: -16
   - type: Gun
-#    minAngle: 21 # Base SMG already has minAngle: 2 maxAngle: 16
-#    maxAngle: 32 # Goob - one-handed C20R - end
+    minAngle: 4 # # Trauma, was 21
+    maxAngle: 36 # Trauma, was 32
     shotsPerBurst: 5
+    fireRate: 8
     availableModes:
     - Burst
     - FullAuto
@@ -221,7 +222,7 @@
       - FullAuto
       - SemiAuto
       shotsPerBurst: 3
-      burstCooldown: 0.375
+      burstCooldown: 0.75 # Trauma, was 0.375
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -272,7 +273,7 @@
   - type: Gun # Goobstation - I am the one who nerfs the WT.
     minAngle: 2
     maxAngle: 16
-    fireRate: 5
+    fireRate: 4 # trauma, was 5
     burstFireRate: 8
     angleIncrease: 3
     angleDecay: 16

@@ -4,4 +4,4 @@ using Content.Goobstation.Shared.Silo;
 
 namespace Content.Goobstation.Client.Silo;
 
-public sealed class SiloSystem : SharedSiloSystem;
+public sealed partial class SiloSystem : SharedSiloSystem;

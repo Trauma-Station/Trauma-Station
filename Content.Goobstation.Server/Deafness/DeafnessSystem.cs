@@ -10,7 +10,7 @@ using Content.Goobstation.Common.Chat;
 
 namespace Content.Goobstation.Server.Deafness;
 
-public sealed class DeafnessSystem : EntitySystem
+public sealed partial class DeafnessSystem : EntitySystem
 {
     private EntityQuery<DeafComponent> _deafQuery;
 

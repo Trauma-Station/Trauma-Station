@@ -20,20 +20,20 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
-public sealed class HitscanBasicRaycastSystem : EntitySystem
+public sealed partial class HitscanBasicRaycastSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
     // </Trauma>
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ISharedAdminLogManager _log = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ISharedAdminLogManager _log = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private float _crawlHitzoneSquared; // Trauma
-    [Dependency] private readonly EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
+    [Dependency] private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
     public override void Initialize()
     {

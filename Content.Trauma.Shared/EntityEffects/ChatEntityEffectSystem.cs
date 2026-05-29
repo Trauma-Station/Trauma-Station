@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// Forces target to say message in IC chat
 /// </summary>
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
-public sealed class ChatEntityEffectSystem : EntityEffectSystem<MetaDataComponent, Chat>
+public sealed partial class ChatEntityEffectSystem : EntityEffectSystem<MetaDataComponent, Chat>
 {
-    [Dependency] private readonly SharedChatSystem _chat = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
 
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<Chat> args)
     {

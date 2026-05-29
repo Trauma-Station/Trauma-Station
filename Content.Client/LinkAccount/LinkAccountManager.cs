@@ -5,9 +5,9 @@ using Robust.Shared.Network;
 
 namespace Content.Client.LinkAccount;
 
-public sealed class LinkAccountManager : IPostInjectInit
+public sealed partial class LinkAccountManager : IPostInjectInit
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     private readonly List<SharedRMCPatron> _allPatrons = [];
 

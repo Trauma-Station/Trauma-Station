@@ -7,11 +7,11 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Standing;
 
-public sealed class TelefragSystem : EntitySystem
+public sealed partial class TelefragSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     private HashSet<Entity<CrawlerComponent>> _targets = new();
 

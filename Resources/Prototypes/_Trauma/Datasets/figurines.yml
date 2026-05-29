@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: FigurinesTweaking
+  values:
+    prefix: figurines-tweaking-
+    count: 3

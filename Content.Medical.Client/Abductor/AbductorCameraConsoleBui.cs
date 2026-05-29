@@ -3,7 +3,6 @@
 using Content.Medical.Shared.Abductor;
 using Content.Medical.Client.Choice.UI;
 using static Content.Shared.Pinpointer.SharedNavMapSystem;
-using Robust.Client.UserInterface;
 
 namespace Content.Medical.Client.Abductor;
 

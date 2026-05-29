@@ -9,12 +9,12 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Footprints;
 
-public sealed class FloorCleanerSystem : EntitySystem
+public sealed partial class FloorCleanerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDecalSystem _decal = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDecalSystem _decal = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public override void Initialize()
     {
@@ -26,11 +26,11 @@ public sealed class FloorCleanerSystem : EntitySystem
 
     private void OnAfterInteract(Entity<FloorCleanerComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.CanReach && !args.Handled && CleanDecals(ent, args.ClickLocation))
+        if (args.CanReach && !args.Handled && CleanDecals(ent, args.ClickLocation, args.User))
             args.Handled = true;
     }
 
-    public bool CleanDecals(Entity<FloorCleanerComponent> ent, EntityCoordinates coords)
+    public bool CleanDecals(Entity<FloorCleanerComponent> ent, EntityCoordinates coords, EntityUid? user)
     {
         if (Transform(ent).GridUid is not {} grid ||
             TryComp<UseDelayComponent>(ent, out var delay) && _delay.IsDelayed((ent, delay)))
@@ -52,8 +52,7 @@ public sealed class FloorCleanerSystem : EntitySystem
         if (!cleaned)
             return false;
 
-        // TODO: change to PlayPredicted if decals ever gets moved to shared (lol never happening)
-        _audio.PlayPvs(ent.Comp.Sound, ent);
+        _audio.PlayPredicted(ent.Comp.Sound, ent, user);
 
         if (delay != null)
             _delay.TryResetDelay((ent, delay));

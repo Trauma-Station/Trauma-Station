@@ -19,9 +19,9 @@ namespace Content.Trauma.Shared.Mobs;
 /// </summary>
 public abstract partial class SharedSoftCritSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly SharedCPRSystem _cpr = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedCPRSystem _cpr = default!;
 
     /// <summary>
     /// Speed modifier for softcrit mobs, on top of being forced to crawl.

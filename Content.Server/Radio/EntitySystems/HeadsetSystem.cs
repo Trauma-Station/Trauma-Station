@@ -12,14 +12,14 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Radio.EntitySystems;
 
-public sealed class HeadsetSystem : SharedHeadsetSystem
+public sealed partial class HeadsetSystem : SharedHeadsetSystem
 {
     // <Trauma>
-    [Dependency] private readonly CommonLanguageSystem _language = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private CommonLanguageSystem _language = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     // </Trauma>
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private RadioSystem _radio = default!;
 
     public override void Initialize()
     {

@@ -46,7 +46,8 @@ public partial class ListingData : IEquatable<ListingData>
         other.ResetRestockOnPurchase,
         other.RestockAfterPurchase,
         other.BlockRefundListings,
-        other.RaiseProductEventOnMind
+        other.RaiseProductEventOnMind,
+        other.AltCostCurrencyPriorities
         // </Trauma>
     )
     {
@@ -78,7 +79,8 @@ public partial class ListingData : IEquatable<ListingData>
         bool resetRestockOnPurchase,
         TimeSpan? restockAfterPurchase,
         HashSet<ProtoId<ListingPrototype>> blockRefundListings,
-        bool raiseProductEventOnMind
+        bool raiseProductEventOnMind,
+        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, int>? altCostCurrencyPriorities
         // </Trauma>
     )
     {
@@ -107,6 +109,7 @@ public partial class ListingData : IEquatable<ListingData>
         RestockAfterPurchase = restockAfterPurchase;
         BlockRefundListings = blockRefundListings;
         RaiseProductEventOnMind = raiseProductEventOnMind;
+        AltCostCurrencyPriorities = altCostCurrencyPriorities is { } altPriorities ? new Dictionary<ProtoId<CurrencyPrototype>, int>(altPriorities) : null;
         // </Trauma>
     }
 
@@ -272,6 +275,12 @@ public partial class ListingData : IEquatable<ListingData>
         // <Trauma>
         if (!BlockRefundListings.OrderBy(x => x).SequenceEqual(listing.BlockRefundListings.OrderBy(x => x)))
             return false;
+
+        if (listing.AltCostCurrencyPriorities is not { } listingAltPriorities)
+            return AltCostCurrencyPriorities == null;
+
+        if (AltCostCurrencyPriorities?.OrderBy(x => x.Value).SequenceEqual(listingAltPriorities.OrderBy(x => x.Value)) is not true)
+            return false;
         // </Trauma>
 
         return true;
@@ -354,7 +363,8 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.ResetRestockOnPurchase,
             listingData.RestockAfterPurchase,
             listingData.BlockRefundListings,
-            listingData.RaiseProductEventOnMind
+            listingData.RaiseProductEventOnMind,
+            listingData.AltCostCurrencyPriorities
             // </Trauma>
         )
     {
@@ -399,6 +409,12 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     /// <summary> Check if listing item can be bought with passed balance. </summary>
     public bool CanBuyWith(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance)
     {
+        // <Trauma>
+        var selected = TryGetSelectedCurrenciesForPurchase(balance, out var skipped);
+        if (!skipped)
+            return selected != null;
+        // </Trauma>
+
         foreach (var (currency, amount) in Cost)
         {
             if (!balance.ContainsKey(currency))

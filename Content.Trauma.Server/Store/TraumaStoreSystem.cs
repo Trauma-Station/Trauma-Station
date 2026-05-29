@@ -10,8 +10,8 @@ namespace Content.Trauma.Server.Store;
 
 public sealed partial class TraumaStoreSystem : EntitySystem
 {
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly IAdminLogManager _admin = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private IAdminLogManager _admin = default!;
 
     public override void Initialize()
     {

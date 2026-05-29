@@ -47,6 +47,11 @@
     proto: CartridgeLightRifle
     capacity: 100
   - type: Item
+    # <Trauma>
+    size: Small
+    shape:
+    - 0,0,1,1
+    # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
   - type: MagazineVisuals

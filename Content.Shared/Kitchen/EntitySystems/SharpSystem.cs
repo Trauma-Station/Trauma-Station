@@ -25,20 +25,20 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Kitchen.EntitySystems; // Trauma - moved to shared and using shared systems now
 
-public sealed class SharpSystem : EntitySystem
+public sealed partial class SharpSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     // </Trauma>
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destructibleSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    //[Dependency] private readonly IRobustRandom _robustRandom = default!; // Trauma - no longer used
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedDestructibleSystem _destructibleSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    //[Dependency] private IRobustRandom _robustRandom = default!; // Trauma - no longer used
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {

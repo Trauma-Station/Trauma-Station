@@ -38,35 +38,35 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedMansusGraspSystem : EntitySystem
+public abstract partial class SharedMansusGraspSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] protected readonly Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
-    [Dependency] protected readonly TouchSpellSystem TouchSpell = default!;
+    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
+    [Dependency] protected TouchSpellSystem TouchSpell = default!;
 
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedRatvarianLanguageSystem _language = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
-    [Dependency] private readonly SharedHereticRitualSystem _ritual = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedRatvarianLanguageSystem _language = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private HereticRitualEffectSystem _effects = default!;
+    [Dependency] private SharedHereticRitualSystem _ritual = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 

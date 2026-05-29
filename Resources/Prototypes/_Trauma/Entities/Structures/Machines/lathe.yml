@@ -123,7 +123,7 @@
     node: printing press
 
 - type: entity
-  parent: BaseMachine
+  parent: BaseLatheLube
   id: CrewPrintingPress
   suffix: crew
   name: printing press
@@ -150,18 +150,6 @@
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
-  - type: Appearance
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.4"
-        density: 190
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -172,26 +160,6 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: ActivatableUI
-    key: enum.LatheUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.LatheUiKey.Key:
-        type: LatheBoundUserInterface
-      enum.ResearchClientUiKey.Key:
-        type: ResearchClientBoundUserInterface
-  - type: StaticPrice
-    price: 800
-  - type: TechnologyDatabase
-  - type: AutomationSlots
-    slots:
-    - !type:AutomatedMaterialStorage
-      input: AutomationSlotMaterials
-      output: null
-  - type: Animateable
-  - type: LightningTarget
-    priority: 1
-
 
 - type: entity
   parent: BaseRevIndustry

@@ -22,3 +22,11 @@
   components:
   - type: Sprite
     state: holodeck
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaLootRoom
+  name: lootroom
+  components:
+  - type: Sprite
+    state: loot_room

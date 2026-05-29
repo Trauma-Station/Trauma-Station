@@ -10,11 +10,11 @@ using Content.Trauma.Shared.Heretic.Events;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed class HereticAuraSystem : EntitySystem
+public sealed partial class HereticAuraSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

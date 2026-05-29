@@ -8,11 +8,11 @@ using Content.Shared.Whitelist;
 /// <summary>
 /// Tries to transfer implants to the new entity when the old implanted one is polymorphed.
 /// </summary>
-public sealed class ImplantPolymorphSystem : EntitySystem
+public sealed partial class ImplantPolymorphSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
-    [Dependency] private readonly EntityQuery<SubdermalImplantComponent> _query = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private EntityQuery<SubdermalImplantComponent> _query = default!;
 
     public override void Initialize()
     {

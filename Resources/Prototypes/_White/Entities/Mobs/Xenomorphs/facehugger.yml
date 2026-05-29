@@ -29,7 +29,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
-      settings: default
+      settings: short
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
@@ -39,8 +39,9 @@
     accent: ReplacementAccent
     replacement: mumble
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: MobThresholds
     thresholds:
       0: Alive

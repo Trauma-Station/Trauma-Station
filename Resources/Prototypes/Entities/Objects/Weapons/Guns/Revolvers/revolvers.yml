@@ -222,7 +222,7 @@
     storedOffset: 0,-2
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 1.5 # Goobstation
+    fireRate: 2 # Trauma, was 3
     availableModes:
     - SemiAuto
     soundGunshot:

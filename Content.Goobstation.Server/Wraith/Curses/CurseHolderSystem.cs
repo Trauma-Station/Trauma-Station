@@ -6,9 +6,9 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Server.Wraith.Curses;
 
-public sealed class CurseHolderSystem : SharedCurseHolderSystem
+public sealed partial class CurseHolderSystem : SharedCurseHolderSystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {

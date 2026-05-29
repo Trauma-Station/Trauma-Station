@@ -18,31 +18,29 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Revolutionary;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Whitelist;
-using Content.Trauma.Common.Language.Components;
-using Content.Trauma.Shared.Language.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Revolutionary;
 
-public sealed class RevPropagandaSystem : EntitySystem
+public sealed partial class RevPropagandaSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     private static readonly ProtoId<LocalizedDatasetPrototype> RevConvertSpeechProto = "RevolutionaryConverterSpeech";
     private static readonly ProtoId<NpcFactionPrototype> Faction = "Revolutionary";
@@ -76,7 +74,7 @@ public sealed class RevPropagandaSystem : EntitySystem
             return false;
 
         var message = _random.Pick(_speechLocalization);
-        _chat.TrySendInGameICMessage(user, Loc.GetString(message), InGameICChatType.Speak, hideChat: false, hideLog: false);
+        _chat.TrySendInGameICMessage(user, message, InGameICChatType.Speak, hideChat: false, hideLog: false);
         return true;
     }
 
@@ -85,17 +83,27 @@ public sealed class RevPropagandaSystem : EntitySystem
         var user = args.User;
         if (args.Cancelled ||
             args.Target is not { } target ||
-            !CanConvert(ent.Comp, user, target) ||
+            !CanConvert(ent.AsNullable(), user, target) ||
             !_charges.TryUseCharges(ent.Owner, ent.Comp.ConsumesCharges))
             return;
 
         ConvertTarget(user, target);
     }
 
-    public bool CanConvert(RevPropagandaComponent comp, EntityUid user, EntityUid target)
+    public bool CanConvert(Entity<RevPropagandaComponent?> ent, EntityUid user, EntityUid target)
     {
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+
+        var comp = ent.Comp;
+
+        var attemptEv = new AttemptConvertRevolutionaryEvent(false);
+        RaiseLocalEvent(target, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return false;
+
         var ev = new BeforeConversionEvent();
-        RaiseLocalEvent(target);
+        RaiseLocalEvent(target, ref ev);
         return !ev.Blocked &&
             TryComp<MindContainerComponent>(target, out var mind) &&
             mind.HasMind &&
@@ -155,20 +163,13 @@ public sealed class RevPropagandaSystem : EntitySystem
         if (user == target)
             return;
 
-        if (!CanConvert(converter.Comp, user, target))
+        if (!CanConvert(converter.AsNullable(), user, target))
         {
             _popup.PopupClient("You can't convert them!", target, user);
             return;
         }
 
-        if (SpeakPropaganda(converter, user)
-            // Note: this check is skipped if the speaker speaks lines and somehow doesn't have a languageSpeaker component.
-            && TryComp<LanguageSpeakerComponent>(user, out var speakerComponent)) // returns true if the chosen conversion method uses a spoken line of text
-        {
-            //check if spoken language can be understood by target
-            if (!_language.CanUnderstand(target, speakerComponent.CurrentLanguage))
-                return; //the target does not understand the speaker's language, so the conversion fails
-        }
+        SpeakPropaganda(converter, user);
 
         if (converter.Comp.ConversionDuration == TimeSpan.Zero)
         {

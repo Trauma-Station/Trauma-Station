@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Body;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
@@ -38,6 +39,12 @@ public sealed partial class ShadowlingBlackRecuperationComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<PolymorphPrototype> LesserShadowlingSpeciesProto = "ShadowPolymorph";
+
+    /// <summary>
+    /// The organ to add <see cref="MarkingId"/> to.
+    /// </summary>
+    [DataField]
+    public ProtoId<OrganCategoryPrototype> MarkingOrgan = "Eyes";
 
     /// <summary>
     /// The marking of the eyes of a Lesser Shadowling.

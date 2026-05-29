@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Events;
@@ -32,20 +31,20 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Trauma.Shared.Carrying;
 
-public sealed class CarryingSystem : CommonCarryingSystem
+public sealed partial class CarryingSystem : CommonCarryingSystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly CarryingSlowdownSystem _slowdown = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPseudoItemSystem _pseudoItem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _standingState = default!;
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ContestsSystem _contests = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private CarryingSlowdownSystem _slowdown = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPseudoItemSystem _pseudoItem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StandingStateSystem _standingState = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private ContestsSystem _contests = default!;
 
     public override void Initialize()
     {

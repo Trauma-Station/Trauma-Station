@@ -6,9 +6,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Surgery;
 
-public sealed class OrganComponentsSystem : EntitySystem
+public sealed partial class OrganComponentsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

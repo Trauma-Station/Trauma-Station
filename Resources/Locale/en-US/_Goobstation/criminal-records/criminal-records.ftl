@@ -1,6 +1,9 @@
 criminal-records-status-search = Search
 criminal-records-status-perma = Perma
 
+criminal-records-console-search-reason = Search Reason
+criminal-records-console-hostile-reason = Hostile Reason
+
 criminal-records-console-search = {$officer} marked {$name} ({$job}) for search because of: {$reason}
 criminal-records-console-not-search = {$officer} cleared the search status of {$name} ({$job}).
 criminal-records-console-perma = {$name} ({$job}) has been sentenced to perma by {$officer}.

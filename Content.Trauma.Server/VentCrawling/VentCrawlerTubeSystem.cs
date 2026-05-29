@@ -19,15 +19,15 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Trauma.Server.VentCrawling;
 
-public sealed class VentCrawlerTubeSystem : EntitySystem
+public sealed partial class VentCrawlerTubeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVentCrawableSystem _ventCrawableSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
-    [Dependency] private readonly ServerInventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedVentCrawableSystem _ventCrawableSystem = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedMoverController _mover = default!;
+    [Dependency] private ServerInventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

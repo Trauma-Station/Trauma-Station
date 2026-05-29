@@ -3,6 +3,6 @@
 using Content.Goobstation.Shared.FloorGoblin;
 namespace Content.Goobstation.Server.FloorGoblin;
 
-public sealed class CrawlUnderFloorSystem : SharedCrawlUnderFloorSystem
+public sealed partial class CrawlUnderFloorSystem : SharedCrawlUnderFloorSystem
 {
 }

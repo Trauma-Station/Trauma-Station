@@ -22,6 +22,16 @@
     - Plasmaman
   creditImage: /Textures/_Trauma/EndCredits/Antags/devil.png
 
+- type: antagSpecifier
+  parent: CommandBlacklistedAntag
+  id: Devil
+  prefRoles: [ Devil ]
+  jobBlacklist: [ Chaplain, Mime ] # chaplain is obvious, mime can't write.
+  mindRoles: [ DevilMindRole ]
+  startingGear: DevilStartingGear
+  mindComponents:
+  - type: Evil
+
 - type: startingGear
   id: DevilStartingGear
   storage:

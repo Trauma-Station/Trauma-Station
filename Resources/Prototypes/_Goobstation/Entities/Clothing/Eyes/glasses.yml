@@ -24,6 +24,7 @@
       sprite: Clothing/Eyes/Glasses/glasses.rsi
     - type: VisionCorrection
     - type: Damageable
+    - type: Injurable
       damageContainer: Inorganic
     - type: Tag
       tags:

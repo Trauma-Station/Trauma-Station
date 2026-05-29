@@ -16,7 +16,7 @@ public sealed partial class InContainerCondition : EntityConditionBase<InContain
 
 public sealed partial class InContainerConditionSystem : EntityConditionSystem<MetaDataComponent, InContainerCondition>
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     protected override void Condition(Entity<MetaDataComponent> ent, ref EntityConditionEvent<InContainerCondition> args)
     {

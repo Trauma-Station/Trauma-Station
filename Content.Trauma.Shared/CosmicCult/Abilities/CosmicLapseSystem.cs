@@ -10,13 +10,13 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public sealed class CosmicLapseSystem : EntitySystem
+public sealed partial class CosmicLapseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedPolymorphSystem _polymorph = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
     public override void Initialize()

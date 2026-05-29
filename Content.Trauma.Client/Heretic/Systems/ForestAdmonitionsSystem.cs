@@ -2,15 +2,14 @@
 
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
-using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
+public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void FrameUpdate(float frameTime)
     {

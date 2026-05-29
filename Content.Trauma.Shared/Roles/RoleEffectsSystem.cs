@@ -5,9 +5,9 @@ using Content.Trauma.Common.Roles;
 
 namespace Content.Trauma.Shared.Roles;
 
-public sealed class RoleEffectsSystem : EntitySystem
+public sealed partial class RoleEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

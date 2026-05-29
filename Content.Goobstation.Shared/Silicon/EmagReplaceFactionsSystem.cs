@@ -13,11 +13,11 @@ namespace Content.Goobstation.Shared.Silicon;
 /// <summary>
 /// Handles emagging entities to change their factions.
 /// </summary>
-public sealed class EmagReplaceFactionsSystem : EntitySystem
+public sealed partial class EmagReplaceFactionsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFactionSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private NpcFactionSystem _npcFactionSystem = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
 
     public override void Initialize()
     {

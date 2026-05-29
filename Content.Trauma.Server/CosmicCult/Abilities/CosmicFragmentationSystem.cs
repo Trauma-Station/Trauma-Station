@@ -18,14 +18,14 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
-public sealed class CosmicFragmentationSystem : EntitySystem
+public sealed partial class CosmicFragmentationSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly CosmicCultSystem _cult = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private CosmicCultSystem _cult = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ActionsSystem _actions = default!;
 
     private ProtoId<RadioChannelPrototype> _cultRadio = "CosmicRadio";
 

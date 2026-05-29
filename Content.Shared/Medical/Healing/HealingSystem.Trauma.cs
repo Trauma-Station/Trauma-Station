@@ -21,7 +21,7 @@ namespace Content.Shared.Medical.Healing;
 
 public sealed partial class HealingSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     private ProtoId<OrganCategoryPrototype>[] _partHealingOrder =
     {

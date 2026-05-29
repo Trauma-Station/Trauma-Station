@@ -34,6 +34,7 @@
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
+    - id: FugitiveSpawn
 
 - type: entity
   parent: BaseGameRule
@@ -105,11 +106,74 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    minimumPlayers: 15
-    weight: 10
+    minimumPlayers: 30
+    weight: 3
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
-    table:
-      id: MobCoconutCrab
-      amount: 1, 4
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobCoconutCrab
+        weight: 0.75
+      - id: MobCrabTiny
+      - id: MobCoconutCrabFloofy # because it looks funny
+        weight: 0.05 # NEVER BASICALLY
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveSpawn
+  components:
+  - type: StationEvent
+    weight: 3
+    duration: null
+    earliestStart: 10
+    minimumPlayers: 30
+    reoccurrenceDelay: 30
+    maxOccurrences: 2
+  - type: FugitiveRule
+  - type: MaintsSpawnRule
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - FugitiveEscapeObjective
+    - FugitiveKillObjective
+  - type: AntagSelection
+    agentName: ghost-role-information-fugitive-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Fugitive
+      count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRule
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterArrestFugitiveObjective
+    - HunterKillRandomPersonObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: HunterObjectiveGroups
+      maxPicks: 3
+    maxDifficulty: 5
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunter
+      count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills

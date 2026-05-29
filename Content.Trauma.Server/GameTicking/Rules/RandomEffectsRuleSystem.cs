@@ -10,11 +10,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class RandomEffectsRuleSystem : GameRuleSystem<RandomEffectsRuleComponent>
+public sealed partial class RandomEffectsRuleSystem : GameRuleSystem<RandomEffectsRuleComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Added(EntityUid uid, RandomEffectsRuleComponent comp, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {

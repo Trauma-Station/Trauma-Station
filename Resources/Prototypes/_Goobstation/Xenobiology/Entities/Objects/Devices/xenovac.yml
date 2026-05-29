@@ -22,8 +22,9 @@
       item: !type:ContainerSlot
       StorageTank: !type:Container
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -76,7 +77,7 @@
     entityWhitelist:
       components:
       - Slime
-      - Skinnable # only monkeys have it as far as im aware, if not, skin john poland
+      - XenoVacTarget
   - type: UseDelay
     delays:
       release:

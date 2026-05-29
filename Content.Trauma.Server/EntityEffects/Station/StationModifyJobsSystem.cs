@@ -7,9 +7,9 @@ using Content.Trauma.Shared.EntityEffects.Station;
 
 namespace Content.Trauma.Server.EntityEffects.Station;
 
-public sealed class StationModifyJobsSystem : EntityEffectSystem<StationJobsComponent, StationModifyJobs>
+public sealed partial class StationModifyJobsSystem : EntityEffectSystem<StationJobsComponent, StationModifyJobs>
 {
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
+    [Dependency] private StationJobsSystem _stationJobs = default!;
 
     protected override void Effect(Entity<StationJobsComponent> ent, ref EntityEffectEvent<StationModifyJobs> args)
     {

@@ -7,10 +7,10 @@ using Content.Shared.Body;
 
 namespace Content.Goobstation.Shared.RecoilAbsorber;
 
-public sealed class RecoilAbsorberSystem : EntitySystem
+public sealed partial class RecoilAbsorberSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     public override void Initialize()
     {

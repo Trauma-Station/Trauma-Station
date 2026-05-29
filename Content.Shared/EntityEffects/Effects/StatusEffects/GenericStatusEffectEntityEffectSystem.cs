@@ -11,7 +11,7 @@ namespace Content.Shared.EntityEffects.Effects.StatusEffects;
 [Obsolete("Use ModifyStatusEffect instead")]
 public sealed partial class GenericStatusEffectEntityEffectSystem : EntityEffectSystem<MetaDataComponent, GenericStatusEffect>
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<GenericStatusEffect> args)
     {
@@ -60,5 +60,5 @@ public sealed partial class GenericStatusEffect : EntityEffectBase<GenericStatus
         ("chance", Probability),
         ("type", Type),
         ("time", Time.TotalSeconds),
-        ("key", $"entity-effect-status-effect-{Key}"));
+        ("key", Loc.GetString($"entity-effect-status-effect-{Key}"))); // Trauma - localize it here not in loc bruh
 }

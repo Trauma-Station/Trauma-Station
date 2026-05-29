@@ -25,6 +25,13 @@
       metabolites:
         UncookedAnimalProteins: 0.2
       effects:
+      # <Trauma>
+      - !type:SatiateHunger
+        factor: 1.0
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Vampire ]
+      # </Trauma>
       - !type:SatiateThirst
         factor: 1.0
         conditions:

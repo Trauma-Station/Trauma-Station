@@ -9,9 +9,9 @@ using Robust.Shared.Physics.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
-public sealed class ThrowingKnowledgeSystem : EntitySystem
+public sealed partial class ThrowingKnowledgeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     private static readonly EntProtoId StrengthKnowledge = "StrengthKnowledge";
     private static readonly EntProtoId ThrowingKnowledge = "ThrowingKnowledge";

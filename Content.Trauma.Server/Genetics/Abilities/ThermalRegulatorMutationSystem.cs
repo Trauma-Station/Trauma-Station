@@ -6,9 +6,9 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Server.Genetics.Abilities;
 
-public sealed class ThermalRegulatorMutationSystem : EntitySystem
+public sealed partial class ThermalRegulatorMutationSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<ThermalRegulatorComponent> _query = default!;
+    [Dependency] private EntityQuery<ThermalRegulatorComponent> _query = default!;
 
     public override void Initialize()
     {

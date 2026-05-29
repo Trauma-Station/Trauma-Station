@@ -12,7 +12,7 @@ namespace Content.Shared.Nutrition.EntitySystems;
 /// </summary>
 public sealed partial class FoodSequenceSystem
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     public static readonly ProtoId<FoodSequenceElementPrototype> FallbackElement = "ItemFallback";
 

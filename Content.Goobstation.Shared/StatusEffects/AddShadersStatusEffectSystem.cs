@@ -5,7 +5,7 @@ using Content.Shared.StatusEffectNew;
 
 namespace Content.Goobstation.Shared.StatusEffects;
 
-public sealed class AddShadersStatusEffectSystem : EntitySystem
+public sealed partial class AddShadersStatusEffectSystem : EntitySystem
 {
     public override void Initialize()
     {

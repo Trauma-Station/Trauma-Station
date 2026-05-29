@@ -2,13 +2,12 @@
 
 using Content.Client.Items;
 using Content.Medical.Shared.ItemSwitch;
-using Robust.Client.GameObjects;
 
 namespace Content.Medical.Client.ItemSwitch;
 
-public sealed class ItemSwitchSystem : SharedItemSwitchSystem
+public sealed partial class ItemSwitchSystem : SharedItemSwitchSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

@@ -135,7 +135,6 @@
     name: heretic-ritual-ingredient-id-card
   - whitelist:
       tags:
-      - Lantern
       - Flashlight
     name: heretic-ritual-ingredient-lantern-flashlight
 
@@ -173,11 +172,6 @@
       tags:
       - CircularSaw
     name: heretic-ritual-ingredient-circular-saw
-  - whitelist:
-      tags:
-      - MimeMask
-      - ClownMask
-    name: heretic-ritual-ingredient-mime-clown-mask
   - whitelist:
       requireAll: true
       components:

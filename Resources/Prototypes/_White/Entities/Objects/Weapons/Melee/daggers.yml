@@ -15,7 +15,7 @@
     attackRate: 3
     damage:
       types:
-        Slash: 8
+        Slash: 4
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Sharp

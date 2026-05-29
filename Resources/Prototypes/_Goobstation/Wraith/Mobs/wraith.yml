@@ -57,8 +57,9 @@
     - Stun
     - Corporeal
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: NoSlip
   - type: PointLight
     enabled: true

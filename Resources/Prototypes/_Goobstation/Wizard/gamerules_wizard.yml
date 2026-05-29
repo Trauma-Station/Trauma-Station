@@ -1,147 +1,16 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
-  parent: BaseGameRule
-  id: BaseWizardRule
-  components:
-  - type: WizardRule
-  - type: GameRule
-    minPlayers: 30
-  - type: AntagObjectives
-    objectives:
-    - WizardSurviveObjective
-  - type: AntagSelection
-    useCharacterNames: true
-    selectionTime: PrePlayerSpawn
-    agentName: wizard-round-end-name
-    definitions:
-    - spawnerPrototype: SpawnPointWizard
-      prefRoles: [ Wizard ]
-      playerRatio: 20
-      min: 1
-      max: 1
-      mindRoles:
-      - MindRoleWizard
-      startingGear: WizardGear
-      unequipOldGear: true
-      roleLoadout:
-      - RoleSurvivalEVA
-      components:
-      - type: Wizard
-      - type: CanEnchant
-      - type: LanguageSpeaker
-        speaks: []
-        understands: []
-      - type: UniversalLanguageSpeaker
-      - type: TowerOfBabel
-      - type: RandomMetadata
-        nameSegments:
-        - WizardFirst
-        - WizardLast
-        nameFormat: name-format-standard
-      - type: NpcFactionMember
-        factions:
-        - Wizard
-  - type: AntagLoadProfileRule
-    speciesOverride: Human
-    speciesOverrideBlacklist:
-    - Plasmaman # EE
-  - type: RuleGrids
-  - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/wizden.yml
-  - type: AntagPlayerEffects
-    effects:
-    - !type:NestedEffect
-      proto: WizardSkills
-
-- type: entity
-  parent: BaseWizardRule
-  id: Wizard
-
-- type: entity
-  parent: BaseWizardRule
-  id: WizardMidround
-  components:
-  - type: StationEvent
-    earliestStart: 35
-    weight: 5.5
-    minimumPlayers: 20
-    duration: 1
-  - type: AntagSelection
-    useCharacterNames: true
-    selectionTime: PostPlayerSpawn
-    definitions:
-    - spawnerPrototype: SpawnPointWizard
-      playerRatio: 20
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleWizard
-      startingGear: WizardGear
-      unequipOldGear: true
-      roleLoadout:
-      - RoleSurvivalEVA
-      components:
-      - type: Wizard
-      - type: CanEnchant
-      - type: LanguageSpeaker
-        speaks: []
-        understands: []
-      - type: UniversalLanguageSpeaker
-      - type: TowerOfBabel
-      - type: RandomMetadata
-        nameSegments:
-        - WizardFirst
-        - WizardLast
-        nameFormat: name-format-standard
-      - type: NpcFactionMember
-        factions:
-        - Wizard
-
-- type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: ApprenticeRule
   components:
   - type: GameRule
   - type: AntagSelection
     useCharacterNames: true
-    selectionTime: PostPlayerSpawn
     agentName: apprentice-roundend-name
-    definitions:
-    - prefRoles: [ Apprentice ]
-      playerRatio: 1
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleApprentice
-      components:
-      - type: Apprentice
-      - type: CanEnchant
-      - type: LanguageSpeaker
-        speaks: []
-        understands: []
-      - type: UniversalLanguageSpeaker
-      - type: TowerOfBabel
-      - type: NpcFactionMember
-        factions:
-        - Wizard
+    antags:
+    - !type:FixedAntagCount
+      proto: WizardApprentice
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
@@ -160,17 +29,13 @@
   components:
   - type: StationEvent
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ TraitorSleeper ]
-      fallbackRoles: [ Traitor ]
-      min: 4
-      max: 6
+    antags:
+    - !type:LinearAntagCount
+      proto: TraitorSleeper
+      range:
+        min: 4
+        max: 6
       playerRatio: 10
-      blacklist:
-        components:
-        - AntagImmune
-      mindRoles:
-      - MindRoleTraitorSleeper
 
 - type: entity
   parent: BaseGameRule

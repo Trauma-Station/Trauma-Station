@@ -9,9 +9,9 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class GhostroleAlertSystem : EntitySystem
+public sealed partial class GhostroleAlertSystem : EntitySystem
 {
-    [Dependency] private readonly EuiManager _euiMan = default!;
+    [Dependency] private EuiManager _euiMan = default!;
 
     public override void Initialize()
     {

@@ -26,12 +26,12 @@ using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map.Components;
-using Content.Trauma.Shared.Silicon.Components; // Goobstation
 using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Category("GameRuleTests")] // Trauma
 public sealed class NukeOpsTest : GameTest
 {
     private static readonly ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";

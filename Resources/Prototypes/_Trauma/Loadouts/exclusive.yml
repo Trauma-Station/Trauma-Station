@@ -115,6 +115,42 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 179d5e03-6b1a-4f92-bb31-2f4fe4fd631d
 
+- type: loadoutEffectGroup
+  id: LtKRY
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 5b4f2f1b-2422-4b59-b8de-d9853d683332
+
+- type: loadoutEffectGroup
+  id: DrOktober
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: ed870ec2-2e3d-4585-8a3e-fe0087eecbd2
+
+- type: loadoutEffectGroup
+  id: Daniels
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: bce4d1a7-7bed-499a-96ce-798902c4aeb0
+
+- type: loadoutEffectGroup
+  id: Catdere
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: a64de73b-9435-467c-b0dc-8e3607e17ea4
+
+- type: loadoutEffectGroup
+  id: SuperMage
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: c425e547-0f6c-470d-b588-e3ebd736ac57
+
+- type: loadoutEffectGroup
+  id: Dino
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: 46ed7573-2b2c-475a-94c3-038ebab10bf1
+
 #Items (ADD TO ExclusiveItems OR IT WONT EXIST)
 - type: loadout
   id: CybersunFlippo
@@ -261,3 +297,58 @@
   storage:
     back:
     - PatreonToasterStrudels
+
+- type: loadout
+  id: PatreonLtKRY
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: LtKRY
+  storage:
+    back:
+    - PatreonltKRYSuit
+    - PatreonltKRYHat
+
+- type: loadout
+  id: PatreonDrOktober
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DrOktober
+  storage:
+    back:
+    - PatreonDrOktober
+
+- type: loadout
+  id: PatreonDaniels
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Daniels
+  storage:
+    back:
+    - PatreonDaniels
+
+- type: loadout
+  id: PatreonCatdere
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Catdere
+  storage:
+    back:
+    - PatreonCatdere
+
+- type: loadout
+  id: PatreonSuperMage
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SuperMage
+  storage:
+    back:
+    - PatreonSuperMage
+
+- type: loadout
+  id: PatreonDino
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Dino
+  storage:
+    back:
+    - PatreonDino

@@ -21,9 +21,9 @@ public sealed partial class GrantSkills : EntityEffectBase<GrantSkills>
         => null;
 }
 
-public sealed class GrantSkillsEffectSystem : EntityEffectSystem<KnowledgeHolderComponent, GrantSkills>
+public sealed partial class GrantSkillsEffectSystem : EntityEffectSystem<KnowledgeHolderComponent, GrantSkills>
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     protected override void Effect(Entity<KnowledgeHolderComponent> ent, ref EntityEffectEvent<GrantSkills> args)
     {

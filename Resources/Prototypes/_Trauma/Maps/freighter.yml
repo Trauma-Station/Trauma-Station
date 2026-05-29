@@ -1,0 +1,75 @@
+- type: gameMap
+  id: Freighter
+  mapName: 'Freighter'
+  mapPath: /Maps/_Trauma/freighter.yml
+  minPlayers: 30
+  maxPlayers: 70
+  stations:
+    Freighter:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Freighter Transport {0}-{1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: 'TR'
+      - type: StationEmergencyShuttle
+        emergencyShuttlePath: /Maps/Shuttles/emergency_accordia.yml
+      - type: StationCargoShuttle
+        path: /Maps/_Trauma/Shuttles/cargo_fland.yml
+      - type: StationJobs
+        availableJobs:
+          # Command
+          Captain: [ 1, 1 ]
+          NanotrasenRepresentative: [ 1, 1 ]
+          # Silicon
+          StationAi: [ 1, 1 ]
+          Borg: [ 3, 3 ]
+          # Service
+          HeadOfPersonnel: [ 1, 1 ]
+          Bartender: [ 2, 2 ]
+          Botanist: [ 3, 3 ]
+          Chef: [ 2, 2 ]
+          ServiceWorker: [ 2, 2 ]
+          # Engineering
+          ChiefEngineer: [ 1, 1 ]
+          AtmosphericTechnician: [ 3, 3 ]
+          StationEngineer: [ 4, 4 ]
+          TechnicalAssistant: [ 4, 4 ]
+          # Medical
+          ChiefMedicalOfficer: [ 1, 1 ]
+          Chemist: [ 2, 2 ]
+          MedicalDoctor: [ 4, 4 ]
+          Paramedic: [ 2, 2 ]
+          MedicalIntern: [ 4, 4 ]
+          Virologist: [ 2, 2 ]
+          # Science
+          ResearchDirector: [ 1, 1 ]
+          Scientist: [ 4, 4 ]
+          ResearchAssistant: [ 4, 4 ]
+          Roboticist: [ 2, 2 ]
+          Geneticist: [ 2, 2 ]
+          # Security
+          HeadOfSecurity: [ 1, 1 ]
+          Warden: [ 1, 1 ]
+          SecurityOfficer: [ 4, 4 ]
+          Detective: [ 1, 1 ]
+          SecurityCadet: [ 4, 4 ]
+          # Cargo
+          Quartermaster: [ 1, 1 ]
+          SalvageSpecialist: [ 3, 3 ]
+          CargoTechnician: [ 4, 4 ]
+          # Civilian
+          Passenger: [ -1, -1 ]
+          Clown: [ 1, 1 ]
+          Mime: [ 1, 1 ]
+          Musician: [ 1, 1 ]
+          Reporter: [ 1, 1 ]
+          RadioHost: [ 1, 1 ]
+          Janitor: [ 2, 2 ]
+          Chaplain: [ 1, 1 ]
+          Librarian: [ 1, 1 ]
+          Lawyer: [ 1, 1 ]
+      - type: StationBlobConfig
+        stageBegin: 40
+        stageCritical: 350
+        stageTheEnd: 700

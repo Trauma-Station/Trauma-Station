@@ -5,9 +5,9 @@ using Content.Shared.Weapons.Hitscan.Events;
 
 namespace Content.Trauma.Shared.Weapons.Hitscan;
 
-public sealed class HitscanEntityEffectsSystem : EntitySystem
+public sealed partial class HitscanEntityEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {

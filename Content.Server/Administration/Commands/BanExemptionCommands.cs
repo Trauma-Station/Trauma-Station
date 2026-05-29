@@ -6,10 +6,10 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class BanExemptionUpdateCommand : LocalizedCommands
+public sealed partial class BanExemptionUpdateCommand : LocalizedCommands
 {
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
 
     public override string Command => "ban_exemption_update";
 
@@ -61,10 +61,10 @@ public sealed class BanExemptionUpdateCommand : LocalizedCommands
 }
 
 [AdminCommand(AdminFlags.Ban)]
-public sealed class BanExemptionGetCommand : LocalizedCommands
+public sealed partial class BanExemptionGetCommand : LocalizedCommands
 {
-    [Dependency] private readonly IServerDbManager _dbManager = default!;
-    [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+    [Dependency] private IServerDbManager _dbManager = default!;
+    [Dependency] private IPlayerLocator _playerLocator = default!;
 
     public override string Command => "ban_exemption_get";
 

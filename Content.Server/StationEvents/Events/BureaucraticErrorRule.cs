@@ -15,11 +15,11 @@ using Robust.Shared.Random;
 namespace Content.Server.StationEvents.Events;
 
 [UsedImplicitly]
-public sealed class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
+public sealed partial class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
 {
-    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!; // Goob
-    [Dependency] private readonly IChatManager _chat = default!; // Goob
+    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!; // Goob
+    [Dependency] private IChatManager _chat = default!; // Goob
 
     protected override void Started(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

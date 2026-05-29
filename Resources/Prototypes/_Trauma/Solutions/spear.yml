@@ -1,0 +1,9 @@
+- type: entity
+  parent: Solution
+  id: SolutionSpear
+  categories: [ HideSpawnMenu ] # Not abstract so weapons with multiple solutions can exist
+  components:
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 5

@@ -7,9 +7,9 @@ using Content.Trauma.Server.GameTicking.Rules.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class NestedRuleSystem : GameRuleSystem<NestedRuleComponent>
+public sealed partial class NestedRuleSystem : GameRuleSystem<NestedRuleComponent>
 {
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
 
     protected override void Started(EntityUid uid, NestedRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

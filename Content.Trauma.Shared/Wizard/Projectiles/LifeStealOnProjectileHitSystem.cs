@@ -7,11 +7,11 @@ using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Wizard.Projectiles;
 
-public sealed class LifeStealOnProjectileHitSystem : EntitySystem
+public sealed partial class LifeStealOnProjectileHitSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedSanguineStrikeSystem _sanguine = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedSanguineStrikeSystem _sanguine = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

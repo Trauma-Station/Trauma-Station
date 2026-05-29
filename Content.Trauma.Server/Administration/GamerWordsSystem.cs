@@ -12,13 +12,13 @@ using System.Text.RegularExpressions;
 
 namespace Content.Trauma.Server.Administration;
 
-public sealed class GamerWordsSystem : EntitySystem
+public sealed partial class GamerWordsSystem : EntitySystem
 {
-    [Dependency] private readonly IBanManager _ban = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ThunderstrikeSystem _thunderstrike = default!;
-    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private IBanManager _ban = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ThunderstrikeSystem _thunderstrike = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     private Regex? _regex;
 
@@ -75,7 +75,7 @@ public sealed class GamerWordsSystem : EntitySystem
             return false;
 
         // 1. tell admins
-        _chat.SendAdminAlert("Player {player.Name} has been smitten for trying to say gamer words");
+        _chat.SendAdminAlert($"Player {player.Name} has been smitten for trying to say gamer words");
         // 2. smite by god so the people know
         if (player.AttachedEntity is {} mob)
             _thunderstrike.Smite(mob);

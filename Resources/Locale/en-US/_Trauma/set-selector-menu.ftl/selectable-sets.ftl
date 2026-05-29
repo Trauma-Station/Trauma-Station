@@ -16,13 +16,6 @@ selectable-set-no-russian-description =
     syndicate encryption key, L6 SAW and
     an L6 SAW magazine box.
 
-selectable-set-syndicate-special-forces-name = Syndicate Special Forces Bundle
-selectable-set-syndicate-special-forces-description =
-    Try to remember the basics of CQC.
-    Contains: olive drabs, solid headband, jackboots, gorilla gloves,
-    redspace assisted armor, syndicate encryption key, old manual,
-    and an invisible cardboard box.
-
 selectable-set-syndicate-pirate-captain-name = Syndicate Pirate Captain Bundle
 selectable-set-syndicate-pirate-captain-description =
     Yo ho, yo ho, A pirate's life for me!

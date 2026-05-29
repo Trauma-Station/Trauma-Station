@@ -18,19 +18,22 @@ public sealed partial class AddMarking : EntityEffectBase<AddMarking>
     public ProtoId<MarkingPrototype> Marking;
 
     [DataField]
+    public Color? Color;
+
+    [DataField]
     public bool Forced;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-add-marking", ("chance", Probability), ("marking", prototype.Index(Marking).Name));
 }
 
-public sealed class AddMarkingEffectSystem : EntityEffectSystem<BodyComponent, AddMarking>
+public sealed partial class AddMarkingEffectSystem : EntityEffectSystem<BodyComponent, AddMarking>
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<AddMarking> args)
     {
         var e = args.Effect;
-        _body.AddOrganMarking(ent.AsNullable(), e.Organ, e.Marking, e.Forced);
+        _body.AddOrganMarking(ent.AsNullable(), e.Organ, e.Marking, e.Color, e.Forced);
     }
 }

@@ -6,7 +6,7 @@ using Content.Shared.DeviceLinking;
 
 namespace Content.Goobstation.Server.Construction;
 
-public sealed class FlatpackSignalSystem : EntitySystem
+public sealed partial class FlatpackSignalSystem : EntitySystem
 {
     public static readonly ProtoId<SinkPortPrototype> OnPort = "On";
 

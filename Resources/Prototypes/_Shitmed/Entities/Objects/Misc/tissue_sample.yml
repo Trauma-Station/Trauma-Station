@@ -11,12 +11,11 @@
   - type: TissueSample
   - type: StaticPrice
     price: 2500 # coroner gameplay
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: SulfuricAcid
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 20
   - type: FlavorProfile
     flavors:
     - meaty

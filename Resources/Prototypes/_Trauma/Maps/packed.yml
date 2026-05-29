@@ -56,6 +56,7 @@
           CargoTechnician: [ 2, 2 ]
           # Civilian
           Passenger: [ -1, -1 ]
+          RadioHost: [ 1, 1 ]
           Clown: [ 1, 1 ]
           Mime: [ 1, 1 ]
           Musician: [ 1, 1 ]

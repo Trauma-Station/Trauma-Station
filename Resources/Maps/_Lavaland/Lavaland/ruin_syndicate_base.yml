@@ -1600,37 +1600,6 @@ entities:
     - type: ImplicitRoof
     - type: IFF
       flags: HideLabel, Hide
-  - uid: 3
-    components:
-    - type: MetaData
-      name: solution - food
-    - type: Transform
-      parent: 2
-    - type: Solution
-      solution:
-        maxVol: 1
-        name: food
-        reagents:
-        - data: []
-          ReagentId: Fiber
-          Quantity: 1
-    - type: ContainedSolution
-      containerName: food
-      container: 2
-  - uid: 6
-    components:
-    - type: MetaData
-      name: solution - injector
-    - type: Transform
-      parent: 5
-    - type: Solution
-      solution:
-        maxVol: 15
-        name: injector
-        reagents: []
-    - type: ContainedSolution
-      containerName: injector
-      container: 5
 - proto: AdvancedRetractor
   entities:
   - uid: 11
@@ -17959,51 +17928,6 @@ entities:
         stampedName: Syndicate Logistics
       content: You broke your last arcade machine, we won't send you more.
       editingDisabled: True
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - food
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        flammable:
-          shape: !type:PhysShapeCircle
-            radius: 0.35
-            position: 0,0
-          mask:
-          - MidImpassable
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: 3
 - proto: PaperBin10
   entities:
   - uid: 2753
@@ -20044,18 +19968,8 @@ entities:
       name: Empty romerol syringe
     - type: Transform
       parent: 4
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - injector
     - type: Physics
-      angularDamping: 0
-      linearDamping: 0
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@injector: !type:ContainerSlot
-          ent: 6
     - type: InsideEntityStorage
 - proto: SyringeAmbuzol
   entities:
@@ -20064,8 +19978,6 @@ entities:
     - type: Transform
       parent: 2725
     - type: Physics
-      angularDamping: 0
-      linearDamping: 0
       canCollide: False
     - type: InsideEntityStorage
 - proto: Table

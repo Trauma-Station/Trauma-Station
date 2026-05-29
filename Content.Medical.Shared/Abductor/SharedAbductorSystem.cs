@@ -11,9 +11,9 @@ namespace Content.Medical.Shared.Abductor;
 
 public abstract partial class SharedAbductorSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] protected IGameTiming Timing = default!;
 
     public override void Initialize()
     {

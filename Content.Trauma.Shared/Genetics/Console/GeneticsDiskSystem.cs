@@ -6,12 +6,12 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
-public sealed class GeneticsDiskSystem : EntitySystem
+public sealed partial class GeneticsDiskSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
 
-    [Dependency] private readonly EntityQuery<GeneticsDiskComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<GeneticsDiskSlotComponent> _slotQuery = default!;
+    [Dependency] private EntityQuery<GeneticsDiskComponent> _query = default!;
+    [Dependency] private EntityQuery<GeneticsDiskSlotComponent> _slotQuery = default!;
 
     public override void Initialize()
     {

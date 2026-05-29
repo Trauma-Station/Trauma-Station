@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
@@ -59,6 +60,12 @@ public sealed partial class GhoulComponent : Component
 
     [DataField]
     public HashSet<ProtoId<NpcFactionPrototype>> OldFactions = new();
+
+    [DataField]
+    public ProtoId<EntityEffectPrototype> SkillEffect = "GhoulSkills";
+
+    [DataField]
+    public ProtoId<EntityEffectPrototype> SkillEffectRemove = "GhoulSkillsRemove";
 }
 
 public enum GhoulDeathBehavior : byte

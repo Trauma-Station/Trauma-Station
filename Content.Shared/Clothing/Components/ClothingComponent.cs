@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+using Robust.Shared.Prototypes;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.Clothing.EntitySystems;
@@ -66,7 +70,7 @@ public sealed partial class ClothingComponent : Component
     /// satisfies the <see cref="Slots"/> flags.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? InSlot;
+    public ProtoId<InventorySlotPrototype>? InSlot; // Trauma - string -> ProtoId
     // TODO CLOTHING
     // Maybe keep this null unless its in a valid slot?
     // To lazy to figure out ATM if that would break anything.

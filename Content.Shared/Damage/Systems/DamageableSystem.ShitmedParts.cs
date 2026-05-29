@@ -1,10 +1,13 @@
 using System.Linq;
 using Content.Medical.Common.Damage;
+using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -13,8 +16,8 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed partial class DamageableSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     /// <summary>
     /// TargetBodyPart values that aren't a combination of others.
@@ -203,6 +206,7 @@ public sealed partial class DamageableSystem
         return list;
     }
 
+    // TODO: kill this shit
     /// <summary>
     /// Updates the parent entity's damage values by summing damage from all body parts.
     /// Should be called after damage is applied to any body part.
@@ -213,7 +217,7 @@ public sealed partial class DamageableSystem
     /// <param name="origin">The entity that caused the damage</param>
     /// <param name="ignoreBlockers">Whether to ignore damage blockers</param>
     /// <returns>True if parent damage was updated, false otherwise</returns>
-    private bool UpdateParentDamageFromBodyParts(
+    public bool UpdateParentDamageFromBodyParts(
         EntityUid body,
         DamageSpecifier? appliedDamage,
         bool interruptsDoAfters,
@@ -251,8 +255,7 @@ public sealed partial class DamageableSystem
         OnEntityDamageChanged((body, bodyDamage),
             appliedDamage,
             interruptsDoAfters,
-            origin,
-            ignoreBlockers: ignoreBlockers);
+            origin);
 
         return true;
     }
@@ -282,6 +285,21 @@ public sealed partial class DamageableSystem
 
                 goto case SplitDamageBehavior.SplitEnsureAll;
             case SplitDamageBehavior.SplitEnsureAll:
+
+                var healDamageTypes = newDamage.DamageDict.Where(x => x.Value < 0).Select(x => x.Key.Id).ToList();
+                var woundedParts = new List<EntityUid>();
+                if (healDamageTypes.Count > 0)
+                {
+                    var ev = new CheckPartWoundedEvent(healDamageTypes);
+                    foreach (var part in parts)
+                    {
+                        ev.Wounded = false;
+                        RaiseLocalEvent(part, ref ev);
+                        if (ev.Wounded)
+                            woundedParts.Add(part);
+                    }
+                }
+
                 foreach (var (type, val) in newDamage.DamageDict)
                 {
                     // project 0 comments :face_holding_back_tears:
@@ -298,8 +316,9 @@ public sealed partial class DamageableSystem
 
                         foreach (var part in parts)
                         {
-                            if (part.Comp.Damage.DamageDict.TryGetValue(type, out var currentDamage)
-                                && currentDamage > 0)
+                            if (woundedParts.Contains(part.Owner) ||
+                                part.Comp.Damage.DamageDict.TryGetValue(type, out var currentDamage) &&
+                                currentDamage > 0)
                                 count++;
                         }
 
@@ -317,12 +336,12 @@ public sealed partial class DamageableSystem
         }
     }
 
-    public void SetDamageContainerID(Entity<DamageableComponent?> ent, string damageContainerId)
+    public void SetDamageContainerID(Entity<InjurableComponent?> ent, [ForbidLiteral] ProtoId<DamageContainerPrototype> id)
     {
-        if (!_damageableQuery.Resolve(ent, ref ent.Comp) || ent.Comp.DamageContainerID == damageContainerId)
+        if (!_injurableQuery.Resolve(ent, ref ent.Comp) || ent.Comp.DamageContainer == id)
             return;
 
-        ent.Comp.DamageContainerID = damageContainerId;
+        ent.Comp.DamageContainer = id;
         Dirty(ent);
     }
 }

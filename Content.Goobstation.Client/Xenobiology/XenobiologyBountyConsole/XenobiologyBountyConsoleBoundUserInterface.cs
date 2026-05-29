@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Xenobiology.XenobiologyBountyConsole;
 using Content.Shared.Cargo.Components;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Xenobiology.XenobiologyBountyConsole;
 

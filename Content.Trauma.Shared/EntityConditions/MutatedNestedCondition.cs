@@ -18,9 +18,9 @@ public sealed partial class MutatedNestedCondition : EntityConditionBase<Mutated
         => Condition.EntityConditionGuidebookText(prototype);
 }
 
-public sealed class MutatedNestedConditionSystem : EntityConditionSystem<MutationComponent, MutatedNestedCondition>
+public sealed partial class MutatedNestedConditionSystem : EntityConditionSystem<MutationComponent, MutatedNestedCondition>
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     protected override void Condition(Entity<MutationComponent> ent, ref EntityConditionEvent<MutatedNestedCondition> args)
     {

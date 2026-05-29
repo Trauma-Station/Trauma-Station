@@ -6,7 +6,6 @@ using Content.Trauma.Common.Decals;
 using Content.Trauma.Shared.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Decals;
@@ -14,10 +13,10 @@ namespace Content.Trauma.Server.Decals;
 /// <summary>
 /// Manages decals that opt in to being removed after a delay, configured by cvars.
 /// </summary>
-public sealed class DecalDespawnSystem : EntitySystem
+public sealed partial class DecalDespawnSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private TimedRingBuffer<EntityUid> _buffer = default!;
 

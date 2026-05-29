@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: [ BaseSimpleMob, BaseMobAnimal, MobCombat ]
+  parent: [ BaseSimpleMob, BaseMobAnimal, MobCombat, MobBloodstream ]
   id: BaseMobArgocyte
   suffix: AI
   description: A dangerous alien found on the wrong side of planets, known for their propensity for munching on ruins.
@@ -14,8 +14,7 @@
       task: SimpleHostileCompound #todo custom argocyte AI
   - type: Sprite
     sprite: Mobs/Aliens/Argocyte/argocyte_common.rsi
-  - type: SolutionContainerManager
-  - type: LanguageSpeaker # Einstein Engines - Language
+  - type: LanguageSpeaker # Trauma - replaces ReplacementAccent
     speaks:
     - Xeno
     understands:

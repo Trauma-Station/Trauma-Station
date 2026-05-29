@@ -8,7 +8,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Goobstation.Shared.Chemistry;
 
-public sealed class HyposprayBlockNonMobInjectionSystem : EntitySystem
+public sealed partial class HyposprayBlockNonMobInjectionSystem : EntitySystem
 {
     public override void Initialize()
     {

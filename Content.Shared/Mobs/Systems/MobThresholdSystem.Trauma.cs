@@ -14,10 +14,10 @@ namespace Content.Shared.Mobs.Systems;
 /// </summary>
 public sealed partial class MobThresholdSystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
-    [Dependency] private readonly EntityQuery<DamageableComponent> _damageQuery = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
 
     /// <summary>
     /// Version of GetScaledDamage that also gets the parts damage, indexed by organ category.

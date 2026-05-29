@@ -10,7 +10,7 @@ namespace Content.Client.Construction.UI;
 
 internal sealed partial class ConstructionMenuPresenter
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     private CommonKnowledgeSystem _knowledge = default!;
 
     private bool _autoFocusSearch;

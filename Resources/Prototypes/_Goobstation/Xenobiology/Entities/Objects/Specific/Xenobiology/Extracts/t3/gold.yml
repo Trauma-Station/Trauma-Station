@@ -21,7 +21,7 @@
         frequency: 20
       - !type:SpawnEntity
         entity: RPassiveMobSpawner
-        number: 5
+        number: 2
     - reagents: [ Plasma ]
       methods: [ Touch, Injection ]
       effects:
@@ -32,7 +32,7 @@
         frequency: 20
       - !type:SpawnEntity
         entity: RHostileMobSpawner
-        number: 5
+        number: 2
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
@@ -43,7 +43,7 @@
         frequency: 20
       - !type:SpawnEntity
         entity: RNeutralMobSpawner
-        number: 5
+        number: 2
   - type: Tag
     tags:
     - XenobiologyGoldExtract

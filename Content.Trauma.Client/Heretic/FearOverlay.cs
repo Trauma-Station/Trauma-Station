@@ -3,22 +3,20 @@
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.Heretic.Components.Side;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.Heretic;
 
-public sealed class FearOverlay : Overlay
+public sealed partial class FearOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Horror";
 
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
@@ -80,7 +78,8 @@ public sealed class FearOverlay : Overlay
     {
         foreach (var (uid, sprite, xform) in _hiddenEntities)
         {
-            var random = new Random(_entMan.GetNetEntity(uid).Id);
+            IRobustRandom random = new RobustRandom();
+            random.SetSeed(_entMan.GetNetEntity(uid).Id);
             var toRender = random.Pick(_visibleFearTargets);
             var (pos, rot) = _transform.GetWorldPositionRotation(xform);
             _sprite.RenderSprite(toRender,

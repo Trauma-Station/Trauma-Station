@@ -18,12 +18,12 @@ namespace Content.Medical.Shared.Body;
 ///     This system handles behavior on entities when they lose their head or their brains are removed.
 ///     MindComponent fuckery should still be mainly handled on BrainSystem as usual.
 /// </summary>
-public sealed class DebrainedSystem : EntitySystem
+public sealed partial class DebrainedSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> Heart = "Heart";
 

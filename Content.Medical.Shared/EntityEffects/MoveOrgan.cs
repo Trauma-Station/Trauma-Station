@@ -31,12 +31,12 @@ public sealed partial class MoveOrgan : EntityEffectBase<MoveOrgan>
         => Loc.GetString("entity-effect-guidebook-move-organ", ("chance", Probability), ("organ", prototype.Index(Organ).Name), ("dest", prototype.Index(Dest).Name));
 }
 
-public sealed class MoveOrganEffectSystem : EntityEffectSystem<BodyComponent, MoveOrgan>
+public sealed partial class MoveOrganEffectSystem : EntityEffectSystem<BodyComponent, MoveOrgan>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyCacheSystem _cache = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyCacheSystem _cache = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<MoveOrgan> args)
     {
