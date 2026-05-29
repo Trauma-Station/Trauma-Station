@@ -83,7 +83,6 @@ public sealed partial class WizardMirrorSystem : SharedWizardMirrorSystem
                     new("Apprentice", mirror: true),
                     new("UniversalLanguageSpeaker", mirror: true),
                     new("TowerOfBabel", mirror: true),
-                    new("CanEnchant", mirror: true),
                     new("CanPerformCombo"),
                     new("MartialArtsKnowledge"),
                     new("NinjutsuSneakAttack"),
