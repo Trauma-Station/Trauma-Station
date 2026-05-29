@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Shared.Communications;
+using Content.Goobstation.Common.Loudspeaker;
 using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Goobstation.Shared.Radio;
 using Content.Trauma.Common.Language;
