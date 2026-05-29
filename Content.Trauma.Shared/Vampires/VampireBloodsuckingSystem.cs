@@ -8,11 +8,10 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -23,20 +22,17 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
 {
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private IngestionSystem _ingestion = default!;
-    [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private EntityQuery<MindContainerComponent> _mindQuery = default!;
     [Dependency] private EntityQuery<TargetingComponent> _targetingQuery = default!;
     [Dependency] private EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
-
-    private static readonly ProtoId<TagPrototype> AnimalTag = "VimPilot";
 
     private static readonly EntProtoId BiteEffect = "WeaponArcBite";
     private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
@@ -101,7 +97,8 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         _hunger.ModifyHunger(user, ent.Comp.HungerRestoration);
 
         // animals and no mind can't give you total/usable blood
-        if (!_mind.TryGetMind(target, out _, out _) || _tag.HasTag(target, AnimalTag))
+        // testing against the mindcontainer component directly fixes mispredicts of _mind.TryGetMind
+        if (!_mindQuery.TryComp(target, out var mindContainer) || !mindContainer.HasMind)
         {
             _popup.PopupClient("Their blood is pale...", user, user, PopupType.MediumCaution);
             return;

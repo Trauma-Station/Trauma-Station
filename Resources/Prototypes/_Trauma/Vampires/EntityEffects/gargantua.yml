@@ -13,6 +13,7 @@
   - !type:ModifyKnockdown
     time: 12
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 60
