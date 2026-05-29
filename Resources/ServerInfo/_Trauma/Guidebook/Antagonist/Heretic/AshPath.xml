@@ -71,16 +71,16 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">Effect</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Passive</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to high temperatures. Having 3 fire stacks or more on yourself will empower your ash spells</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to high temperatures. Having 3 fire stacks or more on yourself will empower your ash spells.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Scorched Mantle</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Immunity to fire. Passive fire stack generation when already on fire.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Passive</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Ash storm immunity</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Fire stacks speed you up when on fire.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Passive</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Temporary blindness and vision blur immunity</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Temporary blindness and vision blur immunity.</Box></ColorBox>
   </Table>
 
 

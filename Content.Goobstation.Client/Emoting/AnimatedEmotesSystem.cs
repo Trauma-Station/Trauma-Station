@@ -5,8 +5,6 @@ using Content.Client.DamageState;
 using Content.Goobstation.Shared.Emoting;
 using Content.Trauma.Common.Wizard;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Animations;
 using Robust.Shared.Timing;
 

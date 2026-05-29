@@ -39,7 +39,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             </PanelContainer.PanelOverride>
                             <BoxContainer Orientation="Vertical" Margin="5 5">
                                 <Label Text="{Loc 'gps-window-gps-position-label'}" HorizontalAlignment="Center" />
-                                <Label Name="GpsPositionLabel" Text="{Loc 'gps-window-position-unknown'}" HorizontalAlignment="Center" />
+                                <Label Name="GpsPositionLabel" Text="?, ?" HorizontalAlignment="Center" />
                             </BoxContainer>
                         </PanelContainer>
 

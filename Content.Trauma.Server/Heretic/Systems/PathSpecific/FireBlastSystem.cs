@@ -19,7 +19,6 @@ using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 

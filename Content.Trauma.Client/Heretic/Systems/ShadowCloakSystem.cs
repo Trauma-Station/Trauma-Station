@@ -12,7 +12,6 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
 using Content.Trauma.Shared.Wizard.Traps;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
@@ -34,6 +33,8 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<StarMarkComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<VoidCurseComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticArenaParticipantComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<UnfathomableCurioShieldComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<AimedRifleMarkerComponent>>(UpdateOverlay);
 
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShaderEvent>(OnShader);
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShadersEvent>(OnShaders);

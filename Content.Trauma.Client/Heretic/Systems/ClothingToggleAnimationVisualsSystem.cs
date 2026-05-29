@@ -5,7 +5,6 @@ using Content.Client.Items.Systems;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Client.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic.Systems;

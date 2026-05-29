@@ -76,7 +76,8 @@
     sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
   - type: TackleModifier
     grabOnSuccess: true
-    staminaCostMultiplier: 1
+    staminaCostMultiplier: 0.4
+    skillMod: 5
 
 - type: entity
   parent: [BaseGlovesTackle, BaseSecurityContraband]
@@ -131,9 +132,9 @@
   - type: TackleModifier
     staminaCostMultiplier: 0.3
     knockdownTimeMultiplier: 0.5
-    rangeMultiplier: 1.5
+    rangeMultiplier: 1.2
     speedMultiplier: 0.65
-    minDistance: 2
+    minDistance: 1
     skillMod: -2
 
 - type: entity

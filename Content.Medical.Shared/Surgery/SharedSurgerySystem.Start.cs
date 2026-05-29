@@ -4,7 +4,6 @@ using Content.Medical.Common.CCVar;
 using Content.Medical.Shared.Surgery.Tools;
 using Content.Shared.Verbs;
 using Robust.Shared.Configuration;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Surgery;
 

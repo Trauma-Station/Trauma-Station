@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Devil.UI;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Devil.UI;
 

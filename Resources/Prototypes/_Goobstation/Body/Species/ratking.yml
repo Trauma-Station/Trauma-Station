@@ -25,12 +25,15 @@
   suffix: "ratking"
   description: "How hungry?"
   components:
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 800
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
+    - SolutionStomachRatKing
+
+- type: entity
+  parent: SolutionStomach
+  id: SolutionStomachRatKing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      maxVol: 800

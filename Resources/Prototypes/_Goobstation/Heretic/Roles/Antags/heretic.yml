@@ -14,7 +14,7 @@
     species:
     - Decapoid # You need 2 hands to draw the rune...
   guides: [ Heretics ]
-  creditImage: /Textures/_Trauma/EndCredits/Antags/heretic.png # Trauma
+  creditImage: /Textures/_Trauma/EndCredits/Antags/heretic.png
 
 - type: antag
   id: Ghoul
@@ -23,7 +23,7 @@
   setPreference: false
   objective: roles-antag-ghoul-description
   guides: [ Heretics ]
-  dontShowInCredits: True # Trauma
+  dontShowInCredits: True
 
 - type: antag
   id: ArenaParticipant
@@ -32,18 +32,29 @@
   setPreference: false
   objective: roles-antag-arena-participant-description
   guides: [ Heretics ]
-  dontShowInCredits: True # Trauma
+  dontShowInCredits: True
 
 - type: startingGear
-  id: Heretictmidround
+  id: HereticMidround
   storage:
     back:
-    - Inkofimaginination
+    - InkOfImaginination # TODO: just give the knowledge directly holy shit
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Heretic
+  prefRoles: [ Heretic ]
+  jobBlacklist: [ Chaplain ]
+
+- type: antagSpecifier
+  parent: Heretic
+  id: HereticMidround
+  startingGear: HereticMidround
 
 - type: antagSmite
   id: Heretic
   antag: Heretic
-  rule: Heretic
+  rule: HereticRoundstart
   ruleComp: HereticRule
   icon:
     sprite: _Goobstation/Heretic/Blades/eldritch_blade.rsi

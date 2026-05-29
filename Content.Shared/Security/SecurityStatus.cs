@@ -13,6 +13,8 @@ namespace Content.Shared.Security;
 /// Eliminated - the person has been eliminated and should not be healed
 /// Search - the person needs to be searched
 /// Perma - the person has been sentenced to permanent imprisonment
+/// Brutalize - the person should be non-lethally beaten
+/// Demote - the person should be demoted
 /// </summary>
 public enum SecurityStatus : byte
 {
@@ -23,9 +25,11 @@ public enum SecurityStatus : byte
     Detained,
     Paroled,
     Discharged,
-    // <Goob>
+    // <Trauma>
+    Demote,
+    Brutalize,
     Search,
     Perma,
-    // </Goob>
+    // </Trauma>
     Eliminated
 }

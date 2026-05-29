@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Vehicles.Clowncar;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Vehicles.Clowncar;
 

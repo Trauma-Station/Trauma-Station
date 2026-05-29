@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Wizard.Teleport;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Wizard.Teleport;
 

@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingMaskPullableBase
+  parent: [ClothingMaskPullableBase, BaseClothingViewconeSmall] # Trauma
   id: ClothingMaskGas
   name: gas mask
   description: A face-covering mask that can be connected to an air supply.
@@ -71,6 +71,8 @@
   - type: Hailer # Goobstation - Hailer
   - type: IngestionBlocker # Goobstation
     blockSmokeIngestion: true
+  - type: ViewconeModifier # Trauma
+    angleModifier: 0.90
 
 - type: entity
   parent: [ClothingMaskGas, BaseSyndicateContraband]
@@ -100,6 +102,8 @@
     - SyndicateBreathMask
   - type: IngestionBlocker # Goobstation
     blockSmokeIngestion: true
+  - type: ViewconeModifier # Trauma
+    angleModifier: 0.90
 
 - type: entity
   parent: ClothingMaskGas
@@ -180,6 +184,8 @@
     - Mask
   - type: IngestionBlocker # Trauma
     blockSmokeIngestion: true
+  - type: ViewconeModifier # Trauma
+    angleModifier: 0.90
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -564,6 +570,8 @@
   - type: IngestionBlocker # Goobstation
     blockSmokeIngestion: true
   - type: Hailer # Trauma
+  - type: ViewconeModifier # Trauma
+    angleModifier: 0.90
 
 - type: entity
   parent: [ ClothingMaskGas, BaseSecurityCargoContraband ]
@@ -592,6 +600,8 @@
     - WhitelistChameleon
     - GasMask
     - Mask
+  - type: ViewconeModifier # Trauma
+    angleModifier: 0.90
 
 - type: entity
   parent: [ ClothingMaskGas, BaseCentcommContraband ]
@@ -624,6 +634,8 @@
         Heat: 0.9
   - type: IngestionBlocker # Goobstation
     blockSmokeIngestion: true
+  - type: ViewconeModifier # Trauma
+    angleModifier: 0.90
 
 - type: entity
   parent: ClothingMaskGasERT
@@ -664,6 +676,8 @@
         Aerial: -1
       chanceMultipliers:
         Aerial: 0
+  - type: ViewconeModifier # Trauma
+    angleModifier: 1.5
 
 - type: entity
   parent: ClothingMaskBase
@@ -953,7 +967,7 @@
     - IPCMaskWearable # EE - IPCs
 
 - type: entity
-  parent: ClothingMaskBase
+  parent: [ClothingMaskBase, BaseClothingViewconeSmall]
   id: ClothingMaskWeldingGas
   name: welding gas mask
   description: A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd.

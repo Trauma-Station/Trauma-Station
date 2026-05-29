@@ -27,7 +27,6 @@
           operator: !type:PickBlobPodZombifyTargetOperator
             targetKey: MovementTarget
             zombifyKey: ZombifyTarget
-            rangeKey: IdleRange
         - !type:HTNPrimitiveTask
           operator: !type:MoveToOperator
             pathfindInPlanning: false

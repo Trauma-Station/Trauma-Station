@@ -3,6 +3,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Pulling.Components;
@@ -20,6 +21,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
@@ -32,7 +34,11 @@ public sealed partial class ChampionHookSystem : EntitySystem
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private PullingSystem _pulling = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private IGameTiming _timing = default!;
+
+    [Dependency] private EntityQuery<MeleeWeaponComponent> _meleeQuery = default!;
 
     public override void Initialize()
     {
@@ -41,13 +47,13 @@ public sealed partial class ChampionHookSystem : EntitySystem
         SubscribeLocalEvent<ChampionHookComponent, EventHereticToggleChampionHook>(OnHookToggle);
         SubscribeLocalEvent<ChampionHookComponent, ComboAttackPerformedEvent>(OnAttack);
         SubscribeLocalEvent<ChampionHookComponent, BeforeSpawnPullingVirtualItemsEvent>(OnVirtualItems);
-        SubscribeLocalEvent<ChampionHookComponent, AttackAttemptEvent>(OnAttackAttempt);
         SubscribeLocalEvent<ChampionHookComponent, MeleeAttackEvent>(OnMelee);
         SubscribeLocalEvent<ChampionHookComponent, GetGrabMovespeedEvent>(OnGetMovespeed);
         SubscribeLocalEvent<ChampionHookComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ChampionHookComponent, PullStoppedMessage>(OnHookStopped);
 
         SubscribeLocalEvent<HereticBladeComponent, GotUnequippedHandEvent>(OnUnequipHand);
+        SubscribeLocalEvent<HereticBladeComponent, AttemptMeleeEvent>(OnMeleeAttempt);
 
         SubscribeLocalEvent<ChampionHookedComponent, CanStandWhileImmobileEvent>(OnImmobileStand);
         SubscribeLocalEvent<ChampionHookedComponent, BeingPulledAttemptEvent>(OnPullAttempt);
@@ -71,6 +77,41 @@ public sealed partial class ChampionHookSystem : EntitySystem
             return;
 
         _pulling.TryStopPull(hooked, pullable, args.User, true);
+    }
+
+    private void OnMeleeAttempt(Entity<HereticBladeComponent> ent, ref AttemptMeleeEvent args)
+    {
+        if (!TryComp(args.User, out ChampionHookComponent? hook) || hook.Weapon != ent.Owner ||
+            hook.HookedMob == null)
+            return;
+
+        args.Cancelled = true;
+
+        args.WeaponComponent.NextAttack = TimeSpan.Zero;
+        Dirty(args.Weapon, args.WeaponComponent);
+
+        // Attempt attacking with offhand weapon
+        foreach (var held in _hands.EnumerateHeld(args.User))
+        {
+            if (held == ent.Owner || !_meleeQuery.TryComp(held, out var melee))
+                continue;
+
+            AttackEvent ev;
+            switch (args.attack)
+            {
+                case LightAttackEvent light:
+                    ev = new LightAttackEvent(light.Target, GetNetEntity(held), light.Coordinates, light.IsLeftClick);
+                    break;
+                case HeavyAttackEvent heavy:
+                    ev = new HeavyAttackEvent(GetNetEntity(held), heavy.Entities, heavy.Coordinates);
+                    break;
+                default:
+                    return;
+            }
+
+            if (_melee.AttemptAttack(args.User, held, melee, ev, CompOrNull<ActorComponent>(args.User)?.PlayerSession))
+                return;
+        }
     }
 
     private void OnImmobileStand(Entity<ChampionHookedComponent> ent, ref CanStandWhileImmobileEvent args)
@@ -101,14 +142,6 @@ public sealed partial class ChampionHookSystem : EntitySystem
         var rate = weapon.NextAttack - _timing.CurTime;
         weapon.NextAttack -= rate * ent.Comp.OffhandAttackSpeedBuff;
         Dirty(args.Weapon, weapon);
-    }
-
-    private void OnAttackAttempt(Entity<ChampionHookComponent> ent, ref AttackAttemptEvent args)
-    {
-        if (ent.Comp.HookedMob is not { } hooked || args.Weapon is not { } weapon || weapon != ent.Comp.Weapon)
-            return;
-
-        args.Cancel();
     }
 
     private void OnHookStopped(Entity<ChampionHookComponent> ent, ref PullStoppedMessage args)

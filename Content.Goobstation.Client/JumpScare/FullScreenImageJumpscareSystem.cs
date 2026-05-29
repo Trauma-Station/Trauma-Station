@@ -4,15 +4,11 @@ using System.Threading.Tasks;
 using Content.Client.Resources;
 using Content.Goobstation.Shared.JumpScare;
 using Robust.Client.Audio;
-using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Audio;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 

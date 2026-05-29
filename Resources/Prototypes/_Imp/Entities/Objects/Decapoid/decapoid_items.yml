@@ -121,10 +121,10 @@
       moles:
         WaterVapor: 2.051379050
       temperature: 293.15
-  - type: SolutionContainerManager
-    solutions:
-      waterTank:
-        maxVol: 30
+  - type: Solution
+    id: waterTank
+    solution:
+      maxVol: 30
   - type: RefillableSolution
     solution: waterTank
   - type: ExaminableSolution

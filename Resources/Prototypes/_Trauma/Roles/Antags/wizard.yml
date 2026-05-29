@@ -1,0 +1,22 @@
+- type: antag
+  id: Apprentice
+  name: roles-antag-apprentice-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-apprentice-description
+
+- type: antagSpecifier
+  id: WizardApprentice
+  prefRoles: [ Apprentice ]
+  mindRoles: [ MindRoleApprentice ]
+  components:
+  - type: Apprentice
+  - type: CanEnchant
+  - type: LanguageSpeaker
+    speaks: []
+    understands: []
+  - type: UniversalLanguageSpeaker
+  - type: TowerOfBabel
+  - type: NpcFactionMember
+    factions:
+    - Wizard

@@ -6679,17 +6679,11 @@ entities:
     - type: Transform
       pos: 7.7243433,-13.122412
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          temperature: 293.15
-          canReact: True
-          maxVol: 50
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Leporazine
-            Quantity: 40
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Leporazine
+          Quantity: 40
   - uid: 415
     components:
     - type: Transform

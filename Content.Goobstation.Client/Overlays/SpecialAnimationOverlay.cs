@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpecialAnimation;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Shared.Graphics;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Overlays;
 

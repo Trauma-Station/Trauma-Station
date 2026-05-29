@@ -52,7 +52,7 @@
         priority: 2
         whitelist:
           tags:
-            - MagazineGaussgun
+          - MagazineGaussgun
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_magazine_cell:
         ejectOnInteract: false
@@ -64,6 +64,7 @@
         blacklist:
           tags:
           - PotatoBattery
+          - PowerCage
         whitelistFailPopup: gun-magazine-whitelist-fail
   - type: PowerCellSlot
     cellSlotId: gun_magazine_cell
@@ -106,7 +107,6 @@
 - type: entity
   parent: [ WeaponGaussgun, BaseMajorContraband ]
   id: WeaponGaussgunImprov
-  name: gauss rifle
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun.rsi
@@ -117,12 +117,6 @@
   - type: Gun
     minAngle: 40
     maxAngle: 50
-    fireRate: 1
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -30
   - type: Construction
     graph: GaussRifleGraph
     node: finish
@@ -146,7 +140,6 @@
   - type: Gun
     minAngle: 10
     maxAngle: 20
-    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -157,7 +150,7 @@
 # crafting
 
 - type: entity
-  parent: [BaseItem, BaseMajorContraband]
+  parent: [ BaseItem, BaseMajorContraband ]
   id: CraftingGaussRifle
   name: incomplete gauss rifle
   description: An unfinished gauss rifle.

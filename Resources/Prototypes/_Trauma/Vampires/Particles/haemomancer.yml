@@ -1,0 +1,89 @@
+# Looks like blood (Note: if we want to expand this to be for everyone, we need to account for their blood color)
+- type: particleEffect
+  id: BloodParticles
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot
+  startColor: "#880808"
+  endColor: "#B22222"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.9
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.15
+    value: 0.4
+  - time: 0.2
+    value: 1.0
+  lifetime: 0.1
+  lifetimeVariance: 0.4
+  speed: 0.0
+  speedVariance: 0.2
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 10
+  burst: true
+  gravity: 0.5
+  drag: 9.0
+  noiseStrength: 8.0
+  noiseFrequency: 2.0
+  spreadAngle: 360
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 6.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleFill
+    radius: 0.4
+
+# Looks like blood coming off the ground
+- type: particleEffect
+  id: BloodEruption
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot
+  startColor: "#880808"
+  endColor: "#B22222"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.9
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.5
+    value: 0.5
+  - time: 0.8
+    value: 1.0
+  lifetime: 0.5
+  lifetimeVariance: 0.4
+  speed: 0.0
+  speedVariance: 0.2
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 15
+  burst: true
+  gravity: -4.0
+  drag: -5.0
+  noiseStrength: 0.0
+  noiseFrequency: 0.0
+  spreadAngle: 90
+  emitAngle: 90
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 6.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleFill
+    radius: 0.5

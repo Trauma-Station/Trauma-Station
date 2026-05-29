@@ -4,7 +4,6 @@ using Content.Shared.Body;
 using Content.Shared.Humanoid;
 using Content.Shared.Sprite;
 using Content.Trauma.Common.Sprite;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Sprite;
 

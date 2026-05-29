@@ -1,0 +1,119 @@
+- type: entity
+  parent: BaseItem
+  id: Circuit
+  name: integrated circuit
+  description: A field programmable gate array, what it can do is virtually limitless.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: cpu
+  - type: Circuit
+  - type: GuideHelp
+    guides: [ Circuits ]
+
+# for entities with a circuit item slot
+# will need manual replacing if you add more slots because they cant push inheritance
+- type: entity
+  abstract: true
+  id: BaseCircuitSlot
+  components:
+  - type: ItemSlots
+    slots:
+      circuit: &circuit_slot
+        name: circuit-item-slot-name
+        whitelist:
+          components:
+          - Circuit
+  - type: ContainerContainer
+    containers:
+      circuit: !type:ContainerSlot
+
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseCircuitSlot ]
+  id: BaseCircuitHousing
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: card_mod # TODO: make actual sprites...
+  - type: CircuitHousing
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    prefix: device-address-prefix-circuit
+    receiveFrequencyId: BasicDevice
+    examinableAddress: true # why not
+    savableAddress: false # it doesnt use device lists
+  - type: WirelessNetworkConnection
+    range: 200
+  # :)
+  - type: DeviceLinkSink
+    ports:
+    - Circuit1
+    - Circuit2
+    - Circuit3
+    - Circuit4
+    - Circuit5
+    - Circuit6
+    - Circuit7
+    - Circuit8
+  - type: DeviceLinkSource
+    ports:
+    - Circuit1
+    - Circuit2
+    - Circuit3
+    - Circuit4
+    - Circuit5
+    - Circuit6
+    - Circuit7
+    - Circuit8
+  - type: GuideHelp
+    guides: [ Circuits ]
+
+- type: entity
+  parent: BaseCircuitHousing
+  id: CircuitHousing
+  name: circuit housing
+  description: A housing for an integrated circuit, providing it with I/O ports using a LV power supply.
+  components:
+  - type: Item
+    size: Normal
+  - type: Anchorable
+  - type: ExtensionCableReceiver
+  - type: ApcPowerReceiver
+    powerLoad: 100
+    powerDisabled: true # its empty
+  - type: PowerSwitch
+
+- type: entity
+  parent: BaseCircuitHousing
+  id: CircuitHousingPortable
+  name: portable circuit housing
+  description: A battery-powered integrated circuit housing, capable of working on the go.
+  components:
+  - type: Item
+    size: Small
+  - type: WirelessNetworkConnection
+    range: 10 # far less range
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+    fitsInCharger: false # bruh no
+  - type: PowerCellDraw
+    drawRate: 1.2 # 10 minutes on a medium cell
+    enabled: false # its empty
+  - type: ItemSlots
+    slots:
+      circuit: *circuit_slot
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        whitelist:
+          components:
+          - PowerCell
+        blacklist:
+          tags:
+          - PowerCage # fuck you
+  - type: ContainerContainer
+    containers:
+      circuit: !type:ContainerSlot
+      cell_slot: !type:ContainerSlot
+  - type: GuideHelp
+    guides: [ Circuits ]

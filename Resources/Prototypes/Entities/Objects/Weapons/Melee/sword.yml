@@ -2,7 +2,7 @@
 
 #BaseSword
 - type: entity
-  parent: [BaseItem, KnifeDurability] # Trauma - Durability
+  parent: [BaseItem, KnifeDurabilitySharpenOnly] # Trauma - Durability
   id: BaseSword
   abstract: true
   components:
@@ -78,7 +78,7 @@
 #Longswords
 - type: entity
   name: captain's sabre
-  parent: [ KnifeDurabilityStrong, BaseSword, BaseCommandContraband ] # Trauma - durability
+  parent: [ BaseSword, BaseCommandContraband ]
   id: CaptainSabre
   description: A ceremonial weapon belonging to the captain of the station.
   components:
@@ -118,7 +118,7 @@
     stealGroup: CaptainSword
   # <Trauma>
   - type: Parry
-    maxParries: 3
+    maxParries: 2
     maxReflects: 0
     parryMinSkill: 40
     soundOnParry:

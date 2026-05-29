@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Inventory;
+// </Trauma>
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
@@ -5,7 +8,6 @@ using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Inventory; // Goob
 using Robust.Shared.Prototypes;
 using BreathToolComponent = Content.Shared.Atmos.Components.BreathToolComponent;
 using InternalsComponent = Content.Shared.Body.Components.InternalsComponent;
@@ -14,7 +16,9 @@ namespace Content.Shared.Body.Systems;
 
 public sealed partial class LungSystem : EntitySystem
 {
-    [Dependency] private InventorySystem _inventory = default!; // Goobstaiton
+    // <Trauma>
+    [Dependency] private InventorySystem _inventory = default!;
+    // </Trauma>
     [Dependency] private SharedAtmosphereSystem _atmos = default!;
     [Dependency] private SharedInternalsSystem _internals = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
@@ -22,7 +26,7 @@ public sealed partial class LungSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<LungComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<LungComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BreathToolComponent, ComponentInit>(OnBreathToolInit); // Goobstation - Modsuits - Update on component toggle
         SubscribeLocalEvent<BreathToolComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<BreathToolComponent, GotUnequippedEvent>(OnGotUnequipped);
@@ -47,16 +51,15 @@ public sealed partial class LungSystem : EntitySystem
         }
     }
 
-    private void OnComponentInit(Entity<LungComponent> entity, ref ComponentInit args)
+    private void OnMapInit(Entity<LungComponent> entity, ref MapInitEvent args)
     {
-        if (_solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out var solution))
-        {
-            solution.MaxVolume = 100.0f;
-            solution.CanReact = false; // No dexalin lungs
-        }
+        _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out var solution);
+
+        solution.Comp.Solution.MaxVolume = 100.0f;
+        solution.Comp.Solution.CanReact = false; // No dexalin lungs
     }
 
-    // Goobstation - Update component state on component toggle
+    // Goobstation - Update component state on component toggle TODO move this shit out
     private void OnBreathToolInit(Entity<BreathToolComponent> ent, ref ComponentInit args)
     {
         var comp = ent.Comp;

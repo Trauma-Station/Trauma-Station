@@ -23,10 +23,10 @@
     - storagebase
     componentsToAdd:
     - type: DeepFried
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          maxVol: 15
+    - type: Solution
+      id: food
+      solution:
+        maxVol: 15
     - type: NameModifier
     componentsToAddObjects:
     - type: Edible
@@ -90,7 +90,6 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
-      solutions: !type:Container
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: Climbable
@@ -103,10 +102,10 @@
       path: /Audio/_Trauma/Machines/DeepFryer/deep_fryer_ambience.ogg
   - type: ApcPowerReceiver
     powerLoad: 700
-  - type: SolutionContainerManager
-    solutions:
-      fryer:
-        maxVol: 300
+  - type: Solution
+    id: fryer
+    solution:
+      maxVol: 300
   - type: MixableSolution
     solution: fryer
   - type: RefillableSolution

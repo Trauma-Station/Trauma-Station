@@ -1,0 +1,63 @@
+- type: entity
+  parent: BaseGameRule
+  id: Vampire
+  components:
+  - type: VampireRule
+  - type: GameRule
+    minPlayers: 20
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: HereticSkills
+    - !type:ChangeFaction
+      newFaction: VampireFaction
+    - !type:AdjustAlert            # Shows usable and total blood to the vampire via a popup
+      alertType: BloodLevel
+    - !type:ModifyStatusEffect     # This handles starlight interactions
+      effectProto: VampireSpaceStatusEffect
+      time: null
+    - !type:RelayOrgan             # Vampires can only drink blood, can't eat foods
+      category: Stomach
+      effects:
+      - !type:SetMetabolizerType
+        metabolizerTypes:
+        - Vampire
+      - !type:SetStomachDigestable
+        specialDigestible:
+          tags:
+          - Pill
+          - Crayon
+          - Paper
+  - type: AntagObjectives
+    objectives:
+    - VampireBloodObjective
+    - VampireSurviveObjective
+  - type: AntagSelection
+    agentName: roles-antag-vampire-name
+    antags:
+    - !type:LinearAntagCount
+      proto: Vampire
+      range:
+        min: 1
+        max: 3
+      playerRatio: 20
+
+
+- type: gamePreset
+  id: Vampires
+  alias:
+  - vampz
+  - bloodsuckers
+  name: vampire-preset-title
+  description: vampire-preset-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - Vampire
+  - CalmTraitor

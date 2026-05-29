@@ -353,7 +353,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
                 _blood.TryModifyBleedAmount((uid, blood), bleedHeal.Value.Float());
         }
 
-        if (bloodHeal == FixedPoint2.Zero || !TryComp(uid, out SolutionContainerManagerComponent? sol) ||
+        if (bloodHeal == FixedPoint2.Zero || !TryComp(uid, out SolutionManagerComponent? sol) ||
             !_solution.ResolveSolution((uid, sol), blood.BloodSolutionName, ref blood.BloodSolution) ||
             blood.BloodSolution.Value.Comp.Solution.Volume >= blood.BloodReferenceSolution.Volume)
             return;

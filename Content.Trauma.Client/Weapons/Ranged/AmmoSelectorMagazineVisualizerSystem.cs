@@ -4,8 +4,6 @@ using Content.Client.Weapons.Ranged.Components;
 using Content.Trauma.Shared.Weapons.AmmoSelector;
 using Content.Shared.Rounding;
 using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Client.GameObjects;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Weapons.Ranged;
 

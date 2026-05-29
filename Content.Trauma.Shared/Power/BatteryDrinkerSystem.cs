@@ -12,7 +12,6 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Power;
 

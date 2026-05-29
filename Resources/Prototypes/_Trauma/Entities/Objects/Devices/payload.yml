@@ -457,114 +457,98 @@
   id: LubePayload1
   suffix: Lube foam 1
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Fluorosurfactant
-          Quantity: 25
-        - ReagentId: SpaceLube
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Fluorosurfactant
+        Quantity: 25
+      - ReagentId: SpaceLube
+        Quantity: 20
 
 - type: entity
   parent: LargeBeaker
   id: LubePayload2
   suffix: Lube foam 2
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Water
-          Quantity: 25
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 25
 
 - type: entity
   parent: LargeBeaker
   id: GluePayload1
   suffix: Glue smoke 1
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 25
-        - ReagentId: SpaceGlue
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 25
+      - ReagentId: SpaceGlue
+        Quantity: 20
 
 - type: entity
   parent: LargeBeaker
   id: GluePayload2
   suffix: Glue smoke 2
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Potassium
-          Quantity: 25
-        - ReagentId: Phosphorus
-          Quantity: 25
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Potassium
+        Quantity: 25
+      - ReagentId: Phosphorus
+        Quantity: 25
 
 - type: entity
   parent: LargeBeaker
   id: CleanPayload1
   suffix: Cleaner foam 1
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Fluorosurfactant
-          Quantity: 70
-        - ReagentId: SpaceCleaner
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Fluorosurfactant
+        Quantity: 70
+      - ReagentId: SpaceCleaner
+        Quantity: 30
 
 - type: entity
   parent: LargeBeaker
   id: CleanPayload2
   suffix: Cleaner foam 2
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Water
-          Quantity: 70
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 70
 
 - type: entity
   parent: LargeBeaker
   id: FoamPayload1
   suffix: Metal foam 1
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: Aluminium
-          Quantity: 90
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Aluminium
+        Quantity: 90
 
 - type: entity
   parent: LargeBeaker
   id: FoamPayload2
   suffix: Metal foam 2
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 100
-        reagents:
-        - ReagentId: FluorosulfuricAcid
-          Quantity: 30
-        - ReagentId: FoamingAgent
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 30
+      - ReagentId: FoamingAgent
+        Quantity: 30
 
 - type: entity
   parent: [ BasePayload, BaseMinorContraband ]

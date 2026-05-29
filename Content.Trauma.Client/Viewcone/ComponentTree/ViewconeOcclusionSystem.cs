@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Viewcone.Components;
-using Robust.Client.GameObjects;
 using Robust.Shared.ComponentTrees;
 using Robust.Shared.Physics;
 

@@ -2445,17 +2445,12 @@ entities:
     - type: Transform
       pos: 0.5,-10.5
       parent: 1
-    - type: SolutionContainerManager
-      solutions:
-        tank:
-          temperature: 293.15
-          canReact: True
-          maxVol: 500
-          name: null
-          reagents:
-          - data: []
-            ReagentId: Blood
-            Quantity: 500
+    - type: Solution
+      solution:
+        maxVol: 500
+        reagents:
+        - ReagentId: Blood
+          Quantity: 500
 - proto: WoodenBench
   entities:
   - uid: 185

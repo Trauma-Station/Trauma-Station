@@ -5,7 +5,8 @@ knowledge-path-side-knowledge-name = Ritual of Knowledge
 knowledge-path-side-knowledge-desc =
     Everything can be a key to unlocking the secrets behind the Gates. I must be wary and wise.
 
-    You learn a special, one-time-only ritual that requires 3 different items. Performing this ritual instantly grants you 4 knowledge points.
+    You learn a special, one-time-only ritual that requires 3 different items.
+    Performing this ritual instantly grants you 2 knowledge points and 2 side points.
     Unlocks tier 3 passive ability upgrade when performed.
 
 ## T1
@@ -76,6 +77,21 @@ knowledge-path-side-t1-mask-desc =
     Allows you to transmute any mask, a stun baton, and a liver to create a Mask of Madness.
     The mask protects you from bright flashes and instills extreme fear into heathens who witness it.
     It can also be forced onto a heathen, to make them unable to take it off...
+
+knowledge-path-side-t1-curio-name = Unfatomable Curio
+knowledge-path-side-t1-curio-desc =
+    The Mansus holds many curiosities, some are not meant for the mortal eye.
+
+    Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
+    a belt that has a lot of storage space. Whilst worn it will veil you,
+    blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
+
+knowledge-path-side-t1-coin-name = Eldritch Coin
+knowledge-path-side-t1-coin-desc =
+    The Mansus is a place of all sorts of sins. But greed held a special role.
+
+    Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
+    The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
 ## T2
 knowledge-path-side-t2-ice-spear-name = Mysteries of Creation
@@ -156,6 +172,19 @@ knowledge-path-side-t2-sword-desc =
     Ragged Sword deals moderate damage with increased melee attack range.
     More importantly, attacking with the sword will mark the target with combat mark of any Path of Decay.
     The sword cannot trigger the mark by itself - best used in combination with heretic blade.
+
+knowledge-path-side-t2-rifle-name = Lionhunter's Rifle
+knowledge-path-side-t2-rifle-desc =
+    I met an old man in an antique shop who wielded a very unusual weapon.
+    I could not purchase it at the time, but they showed me how they made it ages ago.
+
+    Allows you to transmute a piece of wood, with any flesh organ, and a PDA to create the Lionhunter's rifle.
+    The Lionhunter's Rifle is a long ranged ballistic weapon with three shots.
+    These shots function as normal, albeit weak high-caliber munitions when fired.
+    You can aim the rifle at distant foes by right-clicking them in Combat Mode,
+    causing the shot to mark your victim with your grasp, teleport you directly to them and deal double damage.
+
+    You can transmute 3 ballistic ammo casings (used or unused) of any caliber, including shotgun shells to create extra ammunition for the Lionhunter Rifle.
 
 ## T3
 knowledge-path-side-t3-grasp-name = Mind Grasp

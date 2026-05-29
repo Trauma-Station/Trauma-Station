@@ -1,5 +1,6 @@
 # Last match in file takes precedence.
 
-/* @Trauma-Station/Maintainers
-/Resources/Maps/* @Trauma-Station/Maptainers
-/Resources/Prototypes/Maps/* @Trauma-Station/Maptainers
+/** @Trauma-Station/Maintainers
+/Resources/Maps/** @Trauma-Station/Maptainers
+/Resources/Prototypes/Maps/** @Trauma-Station/Maptainers
+/Resources/Prototypes/_Trauma/Maps/** @Trauma-Station/Maptainers

@@ -16,7 +16,6 @@ using Content.Shared.Throwing;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Traps;
 

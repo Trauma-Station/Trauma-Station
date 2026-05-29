@@ -20,13 +20,11 @@
     layers:
     - state: bag_closed
       map: ["enum.OpenableVisuals.Layer"]
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 200
-        reagents:
-        - ReagentId: Cement
-          Quantity: 200
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Cement
+        Quantity: 200
 
 - type: entity
   parent: BaseItem
@@ -56,6 +54,8 @@
   description: A newly made wet brick, leave it out to dry for a while.
   components:
   - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

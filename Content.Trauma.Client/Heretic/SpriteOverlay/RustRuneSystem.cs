@@ -4,7 +4,6 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
-using Robust.Client.GameObjects;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;

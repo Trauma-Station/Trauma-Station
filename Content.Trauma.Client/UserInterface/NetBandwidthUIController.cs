@@ -2,7 +2,6 @@
 
 using Content.Trauma.Common.Input;
 using Robust.Client.Input;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Input.Binding;

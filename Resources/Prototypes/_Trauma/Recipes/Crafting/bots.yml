@@ -1,0 +1,11 @@
+- type: construction
+  id: secbot
+  graph: SecBot
+  startNode: start
+  targetNode: bot
+  category: construction-category-utilities
+  objectType: Item
+  theory:
+    BotsKnowledge: 1
+  practical:
+    ElectronicsKnowledge: 1

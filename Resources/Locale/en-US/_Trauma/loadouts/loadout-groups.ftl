@@ -4,6 +4,9 @@ loadout-group-player-restriction = You do not have access to this item.
 # Misc
 loadout-group-exclusive = Exclusive
 
+# Bartender
+loadout-group-bartenderweapon = Bartender weapon
+
 # Roboticist
 loadout-group-roboticist-envirohelm = Roboticist envirohelm
 loadout-group-roboticist-envirosuit = Roboticist envirosuit

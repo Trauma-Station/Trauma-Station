@@ -8,6 +8,10 @@
   - type: Anchorable
   - type: Transform
   - type: Prayable
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PlaceableSurface
   - type: Fixtures
     fixtures:
@@ -285,14 +289,12 @@
   parent: AltarConvertFestival
   name: orange altar
   components:
-# <Trauma>
   - type: Construction
     graph: AltarsGraph
     node: ConvertOrangeNode
   - type: AltarSource
     rodProto: WeaponPistolIradomini
     effectProto: EffectSpark
-# </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
     layers:

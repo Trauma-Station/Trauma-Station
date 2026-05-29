@@ -5,7 +5,6 @@ using Content.Shared.Body;
 using Content.Shared.Gibbing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Body;
 

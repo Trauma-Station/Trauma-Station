@@ -7,6 +7,7 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Content.Trauma.Shared.Morph;
+using System.Linq;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
@@ -31,7 +32,7 @@ public sealed partial class MorphRuleSystem : GameRuleSystem<MorphRuleComponent>
     {
         base.AppendRoundEndText(uid, comp, gameRule, ref args);
 
-        var sessionData = _antag.GetAntagIdentifiers(uid);
+        var sessionData = _antag.GetAntagIdentifiers(uid).ToList();
         var lone = sessionData.Count == 1;
         foreach (var (mindId, data, name) in sessionData)
         {

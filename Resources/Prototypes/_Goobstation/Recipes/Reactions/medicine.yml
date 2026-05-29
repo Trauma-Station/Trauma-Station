@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 CBozo <165491409+CBozo@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 tiderwithagun <notrightnow@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reaction
@@ -193,52 +184,6 @@
   products:
     Ibuprofen: 3
 
-#- type: reaction
-#  id: SilverSulfadiazine
-#  minTemp: 500
-#  reactants:
-#    Silver: # actually using silver cuz it's just strong
-#      amount: 1
-#    Chlorine:
-#      amount: 1
-#    Ammonia:
-#      amount: 1
-#    Oxygen:
-#      amount: 1
-#    Sulfur:
-#      amount: 1
-#  products:
-#    SilverSulfadiazine: 5 # might need to be lowered
-
-#- type: reaction # Trauma
-#  id: StypticCrystalCatalyst
-#  reactants:
-#    Aluminium:
-#      amount: 1
-#    Hydroxide:
-#      amount: 1
-#    SulfuricAcid:
-#      amount: 1
-#    Silicon:
-#      amount: 1
-#  products:
-#    StypticCrystalCatalyst: 2
-
-#- type: reaction
-#  id: StypticCrystalCreation
-#  quantized: true
-#  conserveEnergy: false
-#  reactants:
-#    StypticCrystalCatalyst:
-#      amount: 5
-#    Blood:
-#      amount: 10
-#    Sodium:
-#      amount: 10
-#  effects:
-#    - !type:SpawnEntity
-#      entity: ShardCrystalStyptic
-
 - type: reaction
   id: MeatSynth
   quantized: true
@@ -394,7 +339,7 @@
 # Wraith
 - type: reaction
   id: Formaldehyde
-  minTemp: 357 # trauma - temp, reactants, and products adjusted with explosives PR
+  minTemp: 357
   reactants:
     Methanol:
       amount: 1

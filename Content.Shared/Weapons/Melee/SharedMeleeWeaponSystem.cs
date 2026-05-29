@@ -416,7 +416,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     /// Called when a windup is finished and an attack is tried.
     /// </summary>
     /// <returns>True if attack successful</returns>
-    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
+    public bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session) // Trauma - made public
     {
         var curTime = Timing.CurTime;
 
@@ -527,7 +527,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
 
         // Do this AFTER attack so it doesn't spam every tick
-        var ev = new AttemptMeleeEvent(user, weaponUid, weapon); // Lavaland Change: WHY ARENT YOU FUCKS PASSING THE USER RAHHHHHHHHHHH
+        var ev = new AttemptMeleeEvent(user, weaponUid, weapon, attack); // Lavaland Change: WHY ARENT YOU FUCKS PASSING THE USER RAHHHHHHHHHHH
         RaiseLocalEvent(weaponUid, ref ev);
         RaiseLocalEvent(user, ref ev); // Shitmed Change
 

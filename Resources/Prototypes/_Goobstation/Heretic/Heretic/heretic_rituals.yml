@@ -3,7 +3,6 @@
 - type: entity
   id: RitualSacrifice
   name: Sacrifice
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
@@ -51,7 +50,6 @@
 - type: entity
   id: RitualAmberFocus
   name: Amber Focus
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/amber_focus.rsi
@@ -89,7 +87,6 @@
 - type: entity
   id: RitualLivingHeart
   name: Relentless Heartbeat
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
@@ -137,7 +134,6 @@
 - type: entity
   id: RitualCodexCicatrix
   name: Codex Cicatrix
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/book.rsi
@@ -181,7 +177,6 @@
 - type: entity
   id: RitualFeastOfOwls
   name: Feast of Owls
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -204,7 +199,6 @@
 - type: entity
   id: RitualBladeAsh
   name: Nightwatcher's Secret
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_ash.rsi
@@ -260,7 +254,6 @@
 - type: entity
   id: RitualArmorAsh
   name: Scorched Mantle
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/ashen_armor.rsi
@@ -301,13 +294,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticAsh: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualCrackedLantern
   name: Cracked Lantern
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/lantern.rsi
@@ -327,7 +324,6 @@
         ingredients:
         - whitelist:
             tags:
-            - Lantern
             - Flashlight
           name: heretic-ritual-ingredient-lantern-flashlight
         - whitelist:
@@ -354,7 +350,6 @@
 - type: entity
   id: RitualAscensionAsh
   name: Ashlord's Rite
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -411,7 +406,6 @@
 - type: entity
   id: RitualBladeBlade
   name: Cutting Edge
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_blade.rsi
@@ -467,7 +461,6 @@
 - type: entity
   id: RitualArmorBlade
   name: Shattered Panoply
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi
@@ -508,13 +501,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticBlade: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionBlade
   name: Maelstrom of Silver
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
@@ -573,7 +570,6 @@
 - type: entity
   id: RitualBladeFlesh
   name: Principle of Hunger
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_flesh.rsi
@@ -643,7 +639,6 @@
 - type: entity
   id: RitualArmorFlesh
   name: Writhing Embrace
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/flesh_armor.rsi
@@ -698,13 +693,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticFlesh: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualImperfect
   name: Imperfect Ritual
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
@@ -768,7 +767,6 @@
 - type: entity
   id: RitualRaw
   name: Raw Ritual
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
@@ -825,7 +823,6 @@
 - type: entity
   id: RitualLonely
   name: Lonely Ritual
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
@@ -889,7 +886,6 @@
 - type: entity
   id: RitualAscensionFlesh
   name: Priest’s Final Hymn
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -945,7 +941,6 @@
 - type: entity
   id: RitualBladeVoid
   name: Glimmer of Winter
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_void.rsi
@@ -1002,7 +997,6 @@
 - type: entity
   id: RitualArmorVoid
   name: Hollow Weave
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_armor.rsi
@@ -1044,13 +1038,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticVoid: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionVoid
   name: Waltz at the End of Time
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Interface/Alerts/temperature.rsi
@@ -1111,7 +1109,6 @@
 - type: entity
   id: RitualBladeRust
   name: Blacksmith's Tale
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_rust.rsi
@@ -1167,7 +1164,6 @@
 - type: entity
   id: RitualArmorRust
   name: Salvaged Remains
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
@@ -1208,13 +1204,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticRust: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionRust
   name: Rustbringer's Oath
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -1279,7 +1279,6 @@
 - type: entity
   id: RitualBladeCosmos
   name: Eternal Gate
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_cosmos.rsi
@@ -1335,7 +1334,6 @@
 - type: entity
   id: RitualArmorCosmos
   name: Starwoven Cloak
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/cosmos_armor.rsi
@@ -1376,13 +1374,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticCosmos: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualAscensionCosmos
   name: Creators's Gift
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -1441,7 +1443,6 @@
 - type: entity
   id: RitualBladeLock
   name: A Steward's Secret
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/blade_lock.rsi
@@ -1497,7 +1498,6 @@
 - type: entity
   id: RitualArmorLock
   name: Shifting Guise
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/lock_armor.rsi
@@ -1538,13 +1538,17 @@
       applyOn: Platform
       output:
         ClothingOuterArmorHereticLock: 1
-    - !type:SetHereticAvailablePassiveLevelEffect
+    - !type:EffectsRitualEffect
       applyOn: Mind
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 2
 
 - type: entity
   id: RitualEldritchId
   name: Key Keeper's Burden
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: Objects/Misc/id_cards.rsi
@@ -1603,7 +1607,6 @@
 - type: entity
   id: RitualConcierge
   name: Concierge's Rite
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/heretichandbook.rsi
@@ -1645,7 +1648,6 @@
 - type: entity
   id: RitualAscensionLock
   name: Unlock the Labyrinth
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -1708,7 +1710,6 @@
 - type: entity
   id: RitualKnowledge
   name: Ritual of Knowledge
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/book.rsi
@@ -1735,10 +1736,16 @@
       - RitualKnowledge
     - !type:UpdateKnowledgeEffect
       applyOn: Mind
-      amount: 4
-    - !type:SetHereticAvailablePassiveLevelEffect
+      knowledge:
+        KnowledgePoint: 2
+        SideKnowledgePoint: 2
+    - !type:EffectsRitualEffect
       applyOn: Mind
-      level: 3
+      effects:
+      - !type:RaiseEvents
+        events:
+        - !type:HereticSetPassiveLevelEvent
+          level: 3
   - type: HereticKnowledgeRitual
     datasets:
       KnowledgeRitualOrgans: 1
@@ -1753,7 +1760,6 @@
 - type: entity
   id: RitualPriest
   name: Priest's Ritual
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
@@ -1795,7 +1801,6 @@
 - type: entity
   id: RitualAshenEyes
   name: Ashen Eyes
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_medalion.rsi
@@ -1837,7 +1842,6 @@
 - type: entity
   id: RitualVoidCloak
   name: Void Cloak
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_cloak.rsi
@@ -1879,7 +1883,6 @@
 - type: entity
   id: RitualScorchingShark
   name: Scorching Shark
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
@@ -1924,7 +1927,6 @@
 - type: entity
   id: RitualPhylacteryOfDamnation
   name: Phylactery of Damnation
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/phylactery.rsi
@@ -1976,7 +1978,6 @@
 - type: entity
   id: RitualEtherOfTheNewborn
   name: Ether of the Newborn
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi
@@ -2030,7 +2031,6 @@
 - type: entity
   id: RitualEnvyKnife
   name: Rite of Stolen Faces
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/envy_knife.rsi
@@ -2073,7 +2073,6 @@
 - type: entity
   id: RitualMaskOfMadness
   name: Mask of Madness
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/mad_mask.rsi
@@ -2113,11 +2112,89 @@
       output:
         ClothingMaskMadHeretic: 1
 
+- type: entity
+  id: RitualUnfathomableCurio
+  name: Unfathomable Curio
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Lung
+          name: heretic-ritual-ingredient-lung
+        - whitelist:
+            tags:
+            - RodMetal
+          name: heretic-ritual-ingredient-metal-rod
+          amount: 3
+        - whitelist:
+            tags:
+            - UtilityBelt
+          name: heretic-ritual-ingredient-utility-belt
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        UnfathomableCurio: 1
+
+- type: entity
+  id: RitualEldritchCoin
+  name: Eldritch Coin
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/eldritch_coin.rsi
+    state: heretic
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - GoldBar
+          name: heretic-ritual-ingredient-gold
+        - whitelist:
+            tags:
+            - SilverBar
+          name: heretic-ritual-ingredient-silver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        EldritchCoin: 1
+
 ## T2
 - type: entity
   id: RitualRusted
   name: Rusted Ritual
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
@@ -2178,7 +2255,6 @@
 - type: entity
   id: RitualCarvingKnife
   name: Carving Knife
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
@@ -2220,7 +2296,6 @@
 - type: entity
   id: RitualCodexMorbus
   name: Codex Morbus
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/book_morbus.rsi
@@ -2274,7 +2349,6 @@
 - type: entity
   id: RitualGreavesOfTheProphet
   name: Greaves of the Prophet
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Clothing/Shoes/greaves.rsi
@@ -2317,7 +2391,6 @@
 - type: entity
   id: RitualShattered
   name: Shattered Ritual
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/abilities_heretic.rsi
@@ -2394,7 +2467,6 @@
 - type: entity
   id: RitualMawedCrucible
   name: Mawed Crucible
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/items.rsi
@@ -2436,7 +2508,6 @@
 - type: entity
   id: RitualThroughTheBoundary
   name: Through the Boundary
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/sword.rsi
@@ -2478,11 +2549,90 @@
       output:
         RaggedSword: 1
 
+- type: entity
+  id: RitualLionhunterRifle
+  name: Lionhunter's Rifle
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/lionhunter-icon.rsi
+    state: base
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - WoodPlank
+          name: heretic-ritual-ingredient-wood-plank
+        - whitelist:
+            components:
+            - Pda
+          name: heretic-ritual-ingredient-pda
+        - whitelist:
+            requireAll: true
+            components:
+            - Organ
+            - Edible
+          name: heretic-ritual-ingredient-organ
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        WeaponBoltActionLionhunter: 1
+
+- type: entity
+  id: RitualLionhunterRifleAmmunition
+  name: Lionhunter's Rifle Ammunition
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    state: base
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - CartridgeAmmo
+          blacklist:
+            tags:
+            - CartridgeLionhunter
+          name: heretic-ritual-ingredient-cartridge-ammo
+          amount: 3
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        CartridgeLionhunter: 3
+
 # T3
 - type: entity
   id: RitualMaidInTheMirror
   name: Maid in the Mirror
-  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi

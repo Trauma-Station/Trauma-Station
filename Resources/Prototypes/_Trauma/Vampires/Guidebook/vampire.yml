@@ -1,0 +1,4 @@
+- type: guideEntry
+  id: Vampires
+  name: roles-antag-vampire-name # idc
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Vampires.xml"

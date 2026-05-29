@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: BaseSheet
   id: SheetMetalBase
   description: A sheet of metal, used often on the station in various applications.
   components:
@@ -8,30 +8,14 @@
     sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
   - type: Item
     sprite: _Trauma/Objects/Materials/Sheets/metal.rsi # Trauma
-    size: Normal
-  - type: StaticPrice
-    price: 0
   - type: Tag
     tags:
+    - DroneUsable # Trauma
     - Sheet
     - Metal
-    - DroneUsable # Goobstation
     - ConstructionMaterial
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: SolutionContainerManager
-    solutions:
-      steel:
-        canReact: false
   - type: GuideHelp
     guides:
     - ExpandingRepairingStation
@@ -47,6 +31,13 @@
     prototypes:
     - MetalRod
     - TileSteel
+  - type: Tag # add Steel
+    tags:
+    - Sheet
+    - Metal
+    - DroneUsable
+    - ConstructionMaterial
+    - Steel
   # </Trauma>
   - type: Material
   - type: PhysicalComposition
@@ -66,26 +57,13 @@
       map: ["base"]
   - type: Item
     heldPrefix: steel
-  - type: Appearance
-  - type: Extractable
-    grindableSolutionName: steel
-  - type: SolutionContainerManager
-    solutions:
-      steel:
-        reagents:
-        - ReagentId: Iron
-          Quantity: 7
-        - ReagentId: Carbon
-          Quantity: 2
-        - ReagentId: Lead
-          Quantity: 1
-  - type: Tag # Goob - add Steel
-    tags:
-    - Sheet
-    - Metal
-    - DroneUsable
-    - ConstructionMaterial
-    - Steel
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Iron
+        Quantity: 9
+      - ReagentId: Carbon
+        Quantity: 1
 
 - type: entity
   parent: SheetSteel
@@ -118,7 +96,6 @@
   description: A sheet of brass, primarily used by clockwork enthusiasts and the remnants of Ratvarian cults.
   suffix: Full
   components:
-  - type: Material
   - type: PhysicalComposition
     materialComposition:
       Brass: 100
@@ -136,20 +113,16 @@
       map: ["base"]
   - type: Item
     heldPrefix: brass
-  - type: Appearance
   - type: FloorTile
     outputs:
     - PlatingBrass
-  - type: Extractable
-    grindableSolutionName: brass
-  - type: SolutionContainerManager
-    solutions:
-      brass:
-        reagents:
-        - ReagentId: Zinc
-          Quantity: 3.3
-        - ReagentId: Copper
-          Quantity: 6.7
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Zinc
+        Quantity: 3.3
+      - ReagentId: Copper
+        Quantity: 6.7
 
 - type: entity
   parent: SheetBrass
@@ -181,7 +154,6 @@
   name: plasteel
   suffix: Full
   components:
-  - type: Material
   - type: PhysicalComposition
     materialComposition:
       Plasteel: 100
@@ -199,20 +171,16 @@
       map: ["base"]
   - type: Item
     heldPrefix: plasteel
-  - type: Appearance
-  - type: Extractable
-    grindableSolutionName: plasteel
-  - type: SolutionContainerManager
-    solutions:
-      plasteel:
-        reagents:
-        - ReagentId: Plasma
-          Quantity: 10
-        - ReagentId: Iron
-          Quantity: 9
-        - ReagentId: Carbon
-          Quantity: 1
-        canReact: false
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 10
+      - ReagentId: Iron
+        Quantity: 9
+      - ReagentId: Carbon
+        Quantity: 1
 
 - type: entity
   parent: SheetPlasteel

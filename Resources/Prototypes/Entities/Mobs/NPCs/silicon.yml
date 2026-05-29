@@ -1,15 +1,26 @@
+# Used for generic robotic entities (like Hivelords)
 - type: entity
   save: false
   abstract: true
   parent: BaseMob
   id: MobRobotic
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+  # </Trauma>
   - type: LagCompensation
   - type: Reactive
     groups:
       Acidic: [Touch]
   - type: Clickable
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: InteractionOutline
   - type: Fixtures
@@ -64,13 +75,6 @@
   - type: ProtectedFromStepTriggers
   - type: NoSlip
   - type: Insulated
-  - type: LanguageSpeaker # Einstein Engines - Languages # Goob moved to MobRobotic since it is parent for MobSiliconBase
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
 
 # Used for bots
 - type: entity
@@ -79,6 +83,13 @@
   parent: MobRobotic
   id: MobSiliconBase
   components:
+  # <Trauma>
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: IntellicardableMind
+  # </Trauma>
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
@@ -93,11 +104,6 @@
     channels:
     - Common
     # - Binary # Goobstation - replaced with collective mind
-  # Goobstation
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -144,7 +150,7 @@
     speechSounds: Pai #couldn't decide if this should be borg or pai sounds so I flipped a coin.
 
 - type: entity
-  parent: MobSiliconBase
+  parent: [MobSiliconBase, SolutionFireExtinguisherMini]
   id: MobFireBot
   name: firebot
   description: A little fire extinguishing bot. He looks rather anxious.
@@ -158,15 +164,7 @@
   - type: HTN
     rootTask:
       task: FirebotCompound
-  - type: SolutionContainerManager
-    solutions:
-      spray:
-        maxVol: 10
-        reagents:
-        - ReagentId: Water
-          Quantity: 10
   - type: SolutionRegeneration
-    solution: spray
     generated:
       reagents:
         - ReagentId: Water
@@ -302,7 +300,7 @@
     canCreateVacuum: false
 
 - type: entity
-  parent: MobSiliconBase
+  parent: [MobSiliconBase, SolutionMopNormal]
   id: MobCleanBot
   name: cleanbot
   description: The creep of automation now threatening space janitors.
@@ -320,28 +318,20 @@
   - type: UseDelay
     delay: 2
   - type: SolutionRegeneration
-    solution: absorbed
     generated:
       reagents:
         - ReagentId: Water
           Quantity: 10
   - type: SolutionPurge
-    solution: absorbed
     preserve:
       - Water
     quantity: 10
-  - type: SolutionContainerManager
-    solutions:
-      absorbed:
-        maxVol: 50
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3
   - type: HTN
     rootTask:
       task: CleanbotCompound
-  - type: DrainableSolution
-    solution: drainBuffer
   - type: InteractionPopup
     interactSuccessString: petting-success-cleanbot
     interactFailureString: petting-failure-cleanbot
@@ -363,6 +353,11 @@
   components:
   - type: Medibot
     treatments:
+      # <Trauma>
+      SoftCrit:
+        reagent: Inaprovaline
+        quantity: 15
+      # </Trauma>
       Alive:
         reagent: Tricordrazine
         quantity: 30
@@ -371,6 +366,11 @@
         quantity: 15
   - type: EmaggableMedibot
     replacements:
+      # <Trauma>
+      SoftCrit:
+        reagent: SpaceDrugs
+        quantity: 25
+      # </Trauma>
       # when you are fine, medibot will help you go sleep
       Alive:
         reagent: ChloralHydrate

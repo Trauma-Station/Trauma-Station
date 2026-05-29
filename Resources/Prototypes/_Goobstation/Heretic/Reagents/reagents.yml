@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: flavor
@@ -85,7 +80,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -139,7 +135,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -181,15 +178,15 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
         type: Add
         time: 3
 
@@ -231,7 +228,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -281,7 +279,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul

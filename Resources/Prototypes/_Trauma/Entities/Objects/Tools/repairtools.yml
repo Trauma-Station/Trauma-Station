@@ -26,6 +26,9 @@
   - type: PhysicalComposition
     materialComposition:
       Whetstone: 100
+  - type: CustomDurabilityModifier
+    maxDurabilityStateModifiers:
+      Reinforced: 2, 1.15 # Either +2 damage or +15% damage, whichever is less
 
 - type: entity
   parent: Whetstone

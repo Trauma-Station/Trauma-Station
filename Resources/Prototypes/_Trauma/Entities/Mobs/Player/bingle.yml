@@ -283,8 +283,9 @@
       state: Upgraded
       visible: true
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: BingleUpgraded
+  - type: Injurable
+    damageContainer: Biological
   - type: DamageStateVisuals
     states:
       Alive:
@@ -356,8 +357,9 @@
       state: Upgraded
       visible: true
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: BingleUpgraded
+  - type: Injurable
+    damageContainer: Biological
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
@@ -407,8 +409,9 @@
       state: Upgraded
       visible: true
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: BingleUpgraded
+  - type: Injurable
+    damageContainer: Biological
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg

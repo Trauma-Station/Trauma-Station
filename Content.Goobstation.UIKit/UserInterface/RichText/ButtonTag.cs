@@ -3,10 +3,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Content.Trauma.Common.Heretic;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Map;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 

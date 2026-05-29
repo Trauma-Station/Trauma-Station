@@ -106,7 +106,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
         }
         else
         {
-            Log.Warning($"Tried to inject implant '{implantId}' without SubdermalImplantComponent into {ToPrettyString(target):implanted}");
+            Log.Error($"Tried to inject implant '{implantId}' without SubdermalImplantComponent into {ToPrettyString(target):implanted}"); // Trauma - Warning -> Error
             Del(implant);
             return null;
         }

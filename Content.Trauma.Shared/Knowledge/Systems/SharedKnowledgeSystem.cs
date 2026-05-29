@@ -18,7 +18,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 

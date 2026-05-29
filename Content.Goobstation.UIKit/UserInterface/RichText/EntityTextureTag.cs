@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 

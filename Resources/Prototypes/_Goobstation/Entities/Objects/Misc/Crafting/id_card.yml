@@ -15,6 +15,7 @@
   - type: Construction
     graph: MakeshiftIDCard
     node: final
+  - type: AntagCard
 
 - type: entity
   parent: BaseItem

@@ -14,6 +14,9 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
+        [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+        [Dependency] private EntityQuery<MovedByPressureComponent> _movedByPressureQuery = default!;
+
         private static readonly ProtoId<SoundCollectionPrototype> DefaultSpaceWindSounds = "SpaceWind";
 
         private const int SpaceWindSoundCooldownCycles = 75;
@@ -99,7 +102,7 @@ namespace Content.Server.Atmos.EntitySystems
             _activePressures.Add((uid, component));
         }
 
-        private void HighPressureMovements(Entity<GridAtmosphereComponent> gridAtmosphere, TileAtmosphere tile, EntityQuery<PhysicsComponent> bodies, EntityQuery<TransformComponent> xforms, EntityQuery<MovedByPressureComponent> pressureQuery, EntityQuery<MetaDataComponent> metas)
+        private void HighPressureMovements(Entity<GridAtmosphereComponent> gridAtmosphere, TileAtmosphere tile)
         {
             if (tile.PressureDifference < SpaceWindMinimumCalculatedMass * SpaceWindMinimumCalculatedMass)
                 return;
@@ -158,12 +161,12 @@ namespace Content.Server.Atmos.EntitySystems
             {
                 // Ideally containers would have their own EntityQuery internally or something given recursively it may need to slam GetComp<T> anyway.
                 // Also, don't care about static bodies (but also due to collisionwakestate can't query dynamic directly atm).
-                if (!bodies.TryGetComponent(entity, out var body) ||
-                    !pressureQuery.TryGetComponent(entity, out var pressure) ||
+                if (!_physicsQuery.TryGetComponent(entity, out var body) ||
+                    !_movedByPressureQuery.TryGetComponent(entity, out var pressure) ||
                     !pressure.Enabled)
                     continue;
 
-                if (_containers.IsEntityInContainer(entity, metas.GetComponent(entity))) continue;
+                if (_containers.IsEntityInContainer(entity)) continue;
 
                 var pressureMovements = EnsureComp<MovedByPressureComponent>(entity);
                 if (pressure.LastHighPressureMovementAirCycle < gridAtmosphere.Comp.UpdateCounter)
@@ -176,7 +179,7 @@ namespace Content.Server.Atmos.EntitySystems
                         tile.PressureDirection,
                         tile.PressureSpecificTarget != null ? _mapSystem.ToCenterCoordinates(tile.GridIndex, tile.PressureSpecificTarget.GridIndices) : EntityCoordinates.Invalid,
                         gridWorldRotation,
-                        xforms.GetComponent(entity),
+                        Transform(entity),
                         body);
                 }
             }

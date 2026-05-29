@@ -4,8 +4,6 @@ using System.Linq;
 using Content.Shared.Coordinates;
 using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Shared.Wizard.TimeStop;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Animations;
 using Robust.Shared.Map;
@@ -13,7 +11,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Wizard.Trail;
 

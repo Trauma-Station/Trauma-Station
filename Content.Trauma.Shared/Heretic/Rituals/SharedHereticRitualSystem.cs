@@ -9,7 +9,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
-using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -25,14 +24,11 @@ using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Flesh;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
-    [Dependency] private ISharedPlayerManager _player = default!;
-
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -51,7 +47,6 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedHereticCurseSystem _curse = default!;
     [Dependency] private FleshGraspSystem _fleshGrasp = default!;
-    [Dependency] private SharedStoreSystem _store = default!;
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
