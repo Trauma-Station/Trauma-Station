@@ -23,7 +23,7 @@ public sealed partial class GargantuaChargingComponent : Component
     /// Delete after few seconds, if component hasn't been deleted.
     /// </summary>
     [DataField]
-    public TimeSpan Delete = TimeSpan.FromSeconds(1f);
+    public TimeSpan Delete = TimeSpan.FromSeconds(0.8f);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     [AutoNetworkedField]

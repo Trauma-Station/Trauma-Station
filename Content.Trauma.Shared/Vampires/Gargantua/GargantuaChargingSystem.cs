@@ -18,7 +18,7 @@ public sealed partial class GargantuaChargingSystem : EntitySystem
 
         SubscribeLocalEvent<GargantuaChargingComponent, StartCollideEvent>(OnCollide);
 
-        SubscribeLocalEvent<GargantuaChargingComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GargantuaChargingComponent, ComponentStartup>(OnStartup);
 
         SubscribeLocalEvent<GargantuaChargingComponent, LandEvent>(OnLand);
         SubscribeLocalEvent<GargantuaChargingComponent, StopThrowEvent>(OnStopThrow);
@@ -33,7 +33,7 @@ public sealed partial class GargantuaChargingSystem : EntitySystem
         var eqe = EntityQueryEnumerator<GargantuaChargingComponent>();
         while (eqe.MoveNext(out var uid, out var comp))
         {
-            if (comp.NextDelete < now)
+            if (now < comp.NextDelete)
                 continue;
 
             if (TerminatingOrDeleted(uid))
@@ -43,9 +43,10 @@ public sealed partial class GargantuaChargingSystem : EntitySystem
         }
     }
 
-    private void OnMapInit(Entity<GargantuaChargingComponent> ent, ref MapInitEvent args)
+    private void OnStartup(Entity<GargantuaChargingComponent> ent, ref ComponentStartup args)
     {
         // exists in case the component doesn't get deleted
+        // high speeds will not let Land/StopThrow events trigger for some reason
         ent.Comp.NextDelete = _timing.CurTime + ent.Comp.Delete;
         Dirty(ent);
     }
