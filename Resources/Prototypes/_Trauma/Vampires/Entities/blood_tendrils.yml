@@ -1,0 +1,73 @@
+- type: entity
+  id: BloodTendrilPre
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: SpawnOnDespawn
+    prototype: BloodTendril
+  - type: TriggerOnSpawn
+  - type: EmitSoundOnTrigger # acts as a notification for other players nearby
+    sound:
+      path: /Audio/Items/Defib/defib_zap.ogg
+      params:
+        pitch: 0.6
+        volume: -10
+    positional: true
+    predicted: true
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: BloodTendril
+  name: Blood Tendril
+  description: A weird tentacle.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/vampire_effects.rsi
+    state: blood_tendril
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      bloodtendril:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - MobMask
+        layer:
+        - Impassable
+  - type: TriggerOnCollide
+    fixtureID: bloodtendril
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodTendrilSlowdown
+      time: 5
+      type: Set
+    - !type:SpawnEntity
+      entity: BloodTendrilImmobilizeEffect
+    - !type:PlaySoundEffect
+      sound: /Audio/_Trauma/Vampires/vampire_tentacle_hit.ogg
+  - type: TimedDespawn
+    lifetime: 1.0
+
+- type: entity
+  id: BloodTendrilImmobilizeEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FadingTimedDespawn
+    lifetime: 4.5
+    fadeOutTime: 0.4
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    sprite: _Trauma/Vampires/vampire_effects.rsi
+    state: immobilized
+  - type: Tag
+    tags:
+      - HideContextMenu
