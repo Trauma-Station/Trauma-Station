@@ -22,3 +22,4 @@
     blacklist:
       components:
       - DeadMob
+      - Revolutionary
