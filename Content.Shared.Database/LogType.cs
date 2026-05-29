@@ -510,6 +510,16 @@ public enum LogType
     Genetics = 20001,
 
     /// <summary>
+    /// Trauma - Mob class related logs.
+    /// </summary>
+    MobClass = 20002,
+
+    /// <summary>
+    /// Trauma - Vampire related logs.
+    /// </summary>
+    Vampire = 20003,
+
+    /// <summary>
     /// Trauma - Circuits related logs.
     /// </summary>
     Circuits = 20004,

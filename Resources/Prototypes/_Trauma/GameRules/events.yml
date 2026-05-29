@@ -23,7 +23,6 @@
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
     - id: MorphRule
-    - id: FugitiveSpawn
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -35,6 +34,7 @@
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
+    - id: FugitiveSpawn
 
 - type: entity
   parent: BaseGameRule
@@ -125,7 +125,7 @@
   id: FugitiveSpawn
   components:
   - type: StationEvent
-    weight: 10
+    weight: 3
     duration: null
     earliestStart: 10
     minimumPlayers: 30

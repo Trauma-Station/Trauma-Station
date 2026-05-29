@@ -1197,6 +1197,25 @@
   metabolisms:
     Digestion:
       effects:
+      # <Trauma>
+      - !type:RemoveComponents
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 40
+        components:
+        - type: VampireThrall
+      - !type:NestedEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 20
+        - !type:WhitelistCondition
+          whitelist:
+            components:
+            - Vampire
+        proto: VampireHolyWater
+      # </Trauma>
       - !type:SatiateThirst
         factor: 3
       - !type:HealthChange

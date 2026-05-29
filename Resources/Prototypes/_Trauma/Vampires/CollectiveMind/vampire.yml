@@ -1,0 +1,5 @@
+- type: collectiveMind
+  id: Dantalion
+  name: collective-mind-dantalion
+  keycode: 'v'
+  color: "#00FF00"
