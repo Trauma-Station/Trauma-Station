@@ -265,6 +265,7 @@
   id: MobBloodstream
   abstract: true
   components:
+  - type: VampireDrainable # Trauma
   - type: SolutionManager
   - type: InjectableSolution
     solution: bloodstream

@@ -12,6 +12,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -22,6 +23,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
 {
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -33,6 +35,8 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
     [Dependency] private EntityQuery<TargetingComponent> _targetingQuery = default!;
     [Dependency] private EntityQuery<VampireDrainableComponent> _drainableQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
+
+    private static readonly ProtoId<TagPrototype> AnimalTag = "VimPilot";
 
     private static readonly EntProtoId BiteEffect = "WeaponArcBite";
     private static readonly SoundSpecifier BiteSound = new SoundPathSpecifier("/Audio/Effects/bite.ogg");
@@ -80,15 +84,6 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         if (args.Cancelled || args.Target is not { } target || !_drainableQuery.TryComp(target, out var drainable))
             return;
 
-        var user = ent.Owner;
-        _hunger.ModifyHunger(user, ent.Comp.HungerRestoration);
-
-        if (!_mind.TryGetMind(target, out _, out _))
-        {
-            _popup.PopupClient("Their blood is pale...", user, user, PopupType.MediumCaution);
-            return;
-        }
-
         if (!_bloodstreamQuery.TryComp(target, out var bloodstream))
             return;
 
@@ -101,6 +96,16 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
 
         _bloodstream.TryModifyBloodLevel(bloodEnt, bloodToRemove);
         _bloodstream.TryModifyBleedAmount(bloodEnt, bloodEnt.bloodstream.MaxBleedAmount * 0.6f);
+
+        var user = ent.Owner;
+        _hunger.ModifyHunger(user, ent.Comp.HungerRestoration);
+
+        // animals and no mind can't give you total/usable blood
+        if (!_mind.TryGetMind(target, out _, out _) || _tag.HasTag(target, AnimalTag))
+        {
+            _popup.PopupClient("Their blood is pale...", user, user, PopupType.MediumCaution);
+            return;
+        }
 
         // If we have already reached our limit on this target,
         // then don't go further.

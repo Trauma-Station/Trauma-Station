@@ -16,7 +16,7 @@
   - type: GenericCounterAlert
     centerGlyph: false
   - type: Sprite
-    sprite: /Textures/Interface/Alerts/essence_counter.rsi # idc its just numbers
+    sprite: Interface/Alerts/essence_counter.rsi # idc its just numbers
     layers:
     - map: [ "enum.AlertVisualLayers.Base" ]
     - map: [ "1" ]
