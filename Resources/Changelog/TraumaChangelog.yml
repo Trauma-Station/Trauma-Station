@@ -9257,3 +9257,28 @@ Entries:
   id: 1053
   time: '2026-05-28T07:35:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2803
+- author: Lumminal
+  changes:
+  - type: Add
+    message: >-
+      Added vampires from Paradise Station 13. Vampires are a new round-start
+      antagonist. Check the guidebook for more information.
+  - type: Add
+    message: The hunt begins.
+  id: 1054
+  time: '2026-05-28T20:48:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2204
+- author: Hoodsie
+  changes:
+  - type: Tweak
+    message: converted command is no longer tracked
+  id: 1055
+  time: '2026-05-29T08:07:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2883
+- author: SpeltIncorrectyl
+  changes:
+  - type: Fix
+    message: dragging yourself onto secway no longer occupies two hands
+  id: 1056
+  time: '2026-05-29T14:38:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2884

@@ -1,0 +1,197 @@
+# Vampiric Claws
+- type: entity
+  parent: BaseVampireAction
+  id: ActionVampiricClaws
+  name: Vampiric Claws
+  description: Create undroppable claws of blood. Claws remove bonus blood from the target on hit, a fraction of this is added to your blood total. Use in hand to dispel.
+  components:
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_claws
+  - type: InstantAction
+    event: !type:OnRetractableItemActionEvent
+  - type: RetractableItemAction
+    spawnedPrototype: VampiricClaws
+    summonSounds:
+      collection: gib
+    retractSounds:
+      collection: gib
+  - type: VampireCostAction
+    bloodCost: 30
+    popup: Not enough blood to summon the claws! Use in hand, if holding them! # lmao im not dealing with this edge case :tf:
+
+# Blood Tendrils
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodTendrils
+  name: Blood Tendrils
+  description: Manifest tentacles of blood in a 3x3 grid around a tile you click. After a short delay, these will latch onto anyone on their tile, slowing them massively for 4-6 seconds.
+  components:
+  - type: Action
+    # useDelay: 30
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_tendrils
+  - type: TargetAction
+    range: 10
+  - type: WorldTargetAction
+    event: !type:WorldTargetSpawnActionEvent
+  # Spawns an entity prototype in a specific pattern.
+  # Size is the pattern (in-game it will be 3x3 for size 2,2).
+  # Can also specify offset. Only works for world target actions.
+  - type: ActionWorldTargetSpawn
+    spawnPrototype: BloodTendrilPre
+    size: 2,2
+  - type: VampireCostAction
+    bloodCost: 10
+
+# Blood Barrier
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodBarrier
+  name: Blood Barrier
+  description: Manifest a barrier of crystalline blood. select two tiles and a wall with a maximum length of 3 will be produced.
+  components:
+  - type: Action
+    useDelay: 60
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_barrier
+  - type: TargetAction
+    range: 5
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:BloodBarrierActionEvent
+    # Makes two points and creates a barrier between them.
+  - type: ActionBloodBarrier
+    distance: 3 # How much distance we can have between the points
+    barrierProto: BloodBarrier
+    pointProto: BloodBarrierPoint
+  - type: VampireCostAction
+    bloodCost: 40
+
+# Blood Pool
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodPool
+  name: Blood Pool
+  description: Briefly transform into a sentient blood puddle, increasing movement speed and allowing you to move through anything except walls.
+  components:
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_pool
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:Polymorph # Sins of the father
+      prototype: BloodPuddlePolymorph
+  - type: VampireCostAction
+    bloodCost: 50
+
+# Predator Senses
+- type: entity
+  parent: BaseVampireAction
+  id: ActionPredatorSenses
+  name: Predator Senses
+  description: Find out the location of someone on the same sector as you.
+  components:
+  - type: Action
+    useDelay: 20
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: predator_sense
+  - type: InstantAction
+    event: !type:PredatorSensesActionEvent
+  - type: UserInterface
+    interfaces:
+      enum.ListEntitySelectorUiKey.Key:
+        type: ListEntitySelectorBui
+  - type: ActionPredatorSenses
+
+# Blood Eruption
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodEruption
+  name: Blood Eruption
+  description: Cause any blood within 8 tiles of you to erupt, dealing 50 brute damage to anyone standing on it.
+  components:
+  - type: Action
+    useDelay: 200
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_spikes
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: Puddle
+      range: 8
+      effect: !type:NestedEffect
+        proto: BloodEruption
+  - type: VampireCostAction
+    bloodCost: 100
+
+# Blood Bringer Rite
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodBringersRite
+  name: The Blood Bringer's Rite
+  description: The Blood Bringer's Rite
+  components:
+  - type: Action
+    useDelay: 10
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_bringers_rite
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggleConditions: # we must have at least 10 usable blood, ensures we don't attach the component 4noraisin
+    - !type:HasVampireBlood
+      amount: 10
+    onToggle:
+    - !type:PopupPredicted
+      message: The rite begins!
+      visualType: MediumCaution
+    - !type:ModifyStatusEffect
+      effectProto: BloodBringerRiteStatusEffect
+      time: null
+      type: Add
+    - !type:AddComponents
+      components:
+      - type: ActiveBloodLeecher
+        music:
+          path: /Audio/_Trauma/Vampires/blood_bringer.ogg
+          params:
+            volume: -2
+        userEffects:
+        - !type:EvenHealthChange
+          damage:
+            Brute: -5
+            Burn: -5
+        targetEffects:
+        - !type:ModifyBloodLevel
+          amount: -10
+        - !type:EvenHealthChange
+          damage:
+            Brute: 5
+        - !type:SpawnParticles
+          particleProto: BloodParticles
+    offToggle:
+    - !type:RemoveComponents
+      components:
+      - type: ActiveBloodLeecher
+    - !type:ModifyStatusEffect
+      effectProto: BloodBringerRiteStatusEffect
+      time: null
+      type: Remove
+    - !type:PopupPredicted
+      message: The rite stops!
+      visualType: MediumCaution

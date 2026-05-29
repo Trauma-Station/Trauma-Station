@@ -6,6 +6,10 @@
   abstract: true
   components:
   - type: DivineIntervention
+  - type: EffectsOnMeleeHit
+    targetEffects:
+    - !type:ApplyNullification
+      amount: 20
   - type: AlternatePrayable
   - type: Sprite
     sprite: _ShitChap/Objects/Weapons/Nullrod/nullrod.rsi
