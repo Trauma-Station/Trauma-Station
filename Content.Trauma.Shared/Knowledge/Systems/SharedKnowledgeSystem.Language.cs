@@ -254,11 +254,20 @@ public abstract partial class SharedKnowledgeSystem
         if (args.Source == ent.Owner)
             return; // Same person, no need.
 
-        // Already Obfuscating.
-
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
+
+        var languageId = LanguageUnit(args.Language);
+
+        // Exit obfuscation if they can understand, just in case.
+        if (GetKnowledge(brain, LanguageUnit(args.Language)) is { } unit && GetMastery(unit.Owner) >= 2)
+            return;
+
+        // Use Obfuscate logic through language system.
+        var languageProto = _proto.Index(args.Language);
+        args.Message = _language.ObfuscateSpeech(args.Message, languageProto, ent.Owner);
     }
+}
 }
