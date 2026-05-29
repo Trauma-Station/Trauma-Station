@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Phones.Components;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Phones.UI;
 
-public sealed class PhoneNameChangeUI : BoundUserInterface
+public sealed partial class PhoneNameChangeUI : BoundUserInterface
 {
     private ChangePhoneName? _menu;
 

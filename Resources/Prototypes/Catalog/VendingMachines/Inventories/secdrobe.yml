@@ -80,6 +80,10 @@
     ToyFigurineBrigmedic: 1 # Goobstation
     ToyFigurineWarden: 1
     ToyFigurineHeadOfSecurity: 1
-  emaggedInventory: # Goobstation
+  # <Trauma>
+  emaggedInventory:
     ClothingOuterCoatSyndieCapArmored: 1
     ClothingOuterWinterSyndieCapArmored: 1
+    ClothingHeadHelmetSwatSyndicate: 1
+    ClothingMaskGasSyndicate: 1
+  # </Trauma>

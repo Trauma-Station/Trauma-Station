@@ -32,7 +32,11 @@
       sprite: _Goobstation/Heretic/abilities_heretic.rsi
       state: star_touch
   - type: InstantAction
-    event: !type:EventHereticStarTouch
+    event: !type:TouchSpellEvent
+      touchSpell: TouchSpellStar
+      touchSpellWhitelist:
+        components:
+        - StarTouch
   - type: HereticAction
     requireMagicItem: true
   - type: Tag
@@ -46,6 +50,7 @@
   components:
   - type: Action
     checkCanInteract: false
+    raiseOnAction: true
     useDelay: 1
     itemIconStyle: NoItem
     sound:
@@ -58,6 +63,12 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:EventHereticStarBlast
+    # Replace with its used in yml chud
+    # anyway
+    # its a shitcode way just murder it all
+    # add a marker component to the star blast action yml and check for it in there
+    # instead of getting the event shitcode
+    # then make the star blast event just inherit WorldTargetActionEvent
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction

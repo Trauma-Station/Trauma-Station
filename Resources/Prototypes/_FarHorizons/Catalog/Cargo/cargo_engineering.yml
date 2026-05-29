@@ -1,0 +1,19 @@
+- type: cargoProduct
+  id: HolographicFieldGeneratorPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_field_generator.rsi
+    state: icon
+  product: CrateEngineeringHolographicFieldGenerator
+  cost: 1000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: HolographicBarrierGeneratorPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_barrier_generator.rsi
+    state: icon
+  product: CrateSecurityHolographicBarrierGenerator
+  cost: 2000
+  category: cargoproduct-category-name-security
+  group: market

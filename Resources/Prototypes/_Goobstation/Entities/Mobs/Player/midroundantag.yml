@@ -35,6 +35,7 @@
   - type: ActionGrant
     actions:
     - ActionLightningBolt
+    - ActionInstantSummons
   - type: RandomHumanoidAppearance
     randomizeName: true
   - type: Loadout

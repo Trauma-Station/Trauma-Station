@@ -5,7 +5,6 @@ using Content.Server.Administration;
 using Content.Server.Implants;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Administration.Commands;
 

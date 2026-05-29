@@ -2,7 +2,6 @@
 
 using Content.Shared.Chat.Prototypes;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Shadowling.Components.Abilities.Ascension;
 

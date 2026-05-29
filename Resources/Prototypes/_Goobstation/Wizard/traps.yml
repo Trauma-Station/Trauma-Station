@@ -87,6 +87,9 @@
     damage:
       types:
         Blunt: 50
+      woundSeverityMultipliers:
+        Blunt: 2
+      partDamageVariation: 2
 
 - type: entity
   parent: BaseTrap

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 keronshb <54602815+keronshb@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Lock;
 using Content.Shared.Projectiles;
 using Content.Shared.Storage.Components;
@@ -16,13 +10,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.Storage.EntitySystems;
 
-internal sealed class StoreOnCollideSystem : EntitySystem
+internal sealed partial class StoreOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityStorageSystem _storage = default!;
-    [Dependency] private readonly LockSystem _lock = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private SharedEntityStorageSystem _storage = default!;
+    [Dependency] private LockSystem _lock = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {

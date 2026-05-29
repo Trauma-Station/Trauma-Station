@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Abilties;
 
-public sealed class MobThresholdMutationSystem : EntitySystem
+public sealed partial class MobThresholdMutationSystem : EntitySystem
 {
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
 
     public override void Initialize()
     {

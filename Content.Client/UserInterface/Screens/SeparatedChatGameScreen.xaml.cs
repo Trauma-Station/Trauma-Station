@@ -13,6 +13,8 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
     public const string StyleClassChatContainer = "ChatContainer";
     public const string StyleClassChatOutput = "ChatOutput";
 
+    public static Action<SeparatedChatGameScreen>? OnCreated;
+
     public SeparatedChatGameScreen()
     {
         RobustXamlLoader.Load(this);
@@ -32,6 +34,9 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
             OnChatResized?.Invoke(new Vector2(ScreenContainer.SplitFraction, 0));
 
         ViewportContainer.OnResized += ResizeActionContainer;
+        // <Trauma>
+        OnCreated?.Invoke(this);
+        // </Trauma>
     }
 
     private void ResizeActionContainer()

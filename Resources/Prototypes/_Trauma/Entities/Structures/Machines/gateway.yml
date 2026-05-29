@@ -1,0 +1,6 @@
+- type: entity
+  parent: BaseGateway
+  id: GatewayLavalandEmpty
+  name: lavaland gateway
+  description: To hell you don't go.
+  suffix: OFF

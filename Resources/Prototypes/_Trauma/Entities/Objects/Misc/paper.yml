@@ -1,0 +1,5 @@
+- type: entity
+  parent: Paper
+  id: PaperStationReport
+  name: Central Command Status Summary
+  description: It looks important, you'd better read it...

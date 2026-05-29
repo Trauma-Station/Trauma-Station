@@ -22,7 +22,6 @@
       OrganDamage: 0.25
       BoneDamage: 0.25
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.3
@@ -41,6 +40,7 @@
     clothingPrototypes:
       head: LavalandEquipmentAncientArmorHood
   - type: PressureArmorChange
+  - type: PressureEfficiency
 
 - type: entity
   parent: ClothingHeadBase
@@ -67,7 +67,6 @@
       OrganDamage: 0.25
       BoneDamage: 0.25
       VeinsDamage: 0
-      NerveDamage: 0
     coverage:
     - Head
     modifiers:
@@ -78,3 +77,4 @@
         Heat: 0.65
         Caustic: 0.65
   - type: PressureArmorChange
+  - type: PressureEfficiency

@@ -41,7 +41,7 @@ genetics-console-scramble-cooldown = Scramble on cooldown ({$cooldown}s)
 genetics-console-inserted-disk = Inserted disk:
 genetics-console-loaded-mutation = Loaded mutation:
 genetics-console-no-disk = No disk inserted
-genetics-console-print-item = Print {$item} {$delay}s
+genetics-console-print-item = Print {$item} ({$cost})
 
 genetics-console-sequencer-no-subject = No subject detected
 genetics-console-sequencer-not-scanned = Scan the subject to begin.
@@ -62,6 +62,9 @@ genetics-console-print-sequence = Print bases
 genetics-console-sequencer-tip = Tip: Ctrl+Click on the base to set it to X. Right Click to cycle in reverse.
 genetics-console-begin-sequencing = Begin Sequencing
 genetics-console-reset-sequence = Reset Sequence
+
+genetics-console-examined = The console has [bold]{$biomass}[/bold] biomass stored.
+genetics-console-missing-biomass = The console doesn't have enough biomass to print that!
 
 genetics-console-combine-button = Combine!
 genetics-console-combine-catalyst = Catalyst Mutation: {$mutation}

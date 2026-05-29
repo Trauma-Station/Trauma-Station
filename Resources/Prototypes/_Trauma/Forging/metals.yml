@@ -1,0 +1,57 @@
+######################################
+#   NOTE TO BURGERS SUCH AS ARMOK    #
+# THIS USES KELVIN NOT FAHRENHEIT!!! #
+######################################
+
+- type: metal
+  id: Brass
+  name: brass
+  color: "#e79962"
+  ingotSprite: ingot_brass
+  density: 8.5
+  workingTemp: 850
+  workingRange: 56
+  meltTemp: 1200
+  durability: 0.75 # brittle...
+  speed: 0.9 # heavy and slow
+  damage:
+    Blunt: 1.25 # hit hard ye
+    Slash: 0.9 # doesn't hold a good edge
+    Piercing: 0.75 # really doesnt handle it well
+  overheated: OverheatedBrass
+
+- type: metal
+  id: Steel
+  name: steel
+  color: "#d7dbe9"
+  ingotSprite: ingot_steel
+  density: 7.9
+  workingTemp: 1260
+  workingRange: 42
+  meltTemp: 1700
+  workScale: 1.5
+  durability: 1 # standard material most things use
+  damage:
+    Blunt: 1.25
+  overheated: OverheatedSteel
+
+# TODO: cast iron and stuff? very nice frying pan, not very nice sword blades
+
+- type: metal
+  id: Plasteel
+  name: plasteel
+  color: "#dac7f5"
+  ingotSprite: ingot_plasteel
+  density: 4 # between steel and aluminium, basically lighter steel
+  workingTemp: 1483
+  workingRange: 27
+  meltTemp: 2500 # idk closer to tungsten its crazy high
+  workScale: 2
+  durability: 3 # extremely durable
+  speed: 1.1 # light and quick
+  damage:
+    Blunt: 0.5 # too light to make a good hammer etc
+    Slash: 1.25 # decent knives
+    Piercing: 1.5 # very pointy spears
+  overheated: OverheatedPlasteel
+  masteryOffset: 1 # hard to make stuff with it

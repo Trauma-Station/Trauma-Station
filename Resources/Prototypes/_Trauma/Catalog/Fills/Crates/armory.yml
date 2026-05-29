@@ -1,0 +1,23 @@
+- type: entity
+  parent: [ CrateWeaponSecure, BaseSecurityContraband ]
+  id: CrateArmoryLaserCarbine
+  name: laser carbines crate
+  description: Contains three laser carbines. Requires Armory access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: WeaponLaserGunCarbine
+        amount: 3
+
+- type: entity
+  parent: [ CrateWeaponSecure, BaseSecurityContraband ]
+  id: CrateArmoryLaserAssault
+  name: assault lasers crate
+  description: Contains two assault laser rifles. Requires Armory access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: WeaponLaserGunAssault
+        amount: 2

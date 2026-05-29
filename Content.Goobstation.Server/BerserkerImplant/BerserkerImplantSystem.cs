@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.BerserkerImplant;
-using Content.Shared._Goobstation.Wizard.Projectiles;
 using Content.Shared.Damage.Systems;
+using Content.Trauma.Common.Wizard.Projectile;
 
 namespace Content.Goobstation.Server.BerserkerImplant;
 
-public sealed class BerserkerImplantSystem : SharedBerserkerImplantSystem
+public sealed partial class BerserkerImplantSystem : SharedBerserkerImplantSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

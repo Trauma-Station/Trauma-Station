@@ -9,7 +9,7 @@ namespace Content.Goobstation.Server.Kitchen;
 /// Prevents automation taking items out of an active microwave.
 /// Only exists because microwave supercode only prevents it in interaction, not attempt events.
 /// </summary>
-public sealed class MicrowaveEventsSystem : EntitySystem
+public sealed partial class MicrowaveEventsSystem : EntitySystem
 {
     public override void Initialize()
     {

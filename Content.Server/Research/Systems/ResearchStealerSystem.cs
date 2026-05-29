@@ -1,20 +1,13 @@
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Server.Research.Systems;
 
-public sealed class ResearchStealerSystem : SharedResearchStealerSystem
+public sealed partial class ResearchStealerSystem : SharedResearchStealerSystem
 {
-    [Dependency] private readonly SharedResearchSystem _research = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedResearchSystem _research = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

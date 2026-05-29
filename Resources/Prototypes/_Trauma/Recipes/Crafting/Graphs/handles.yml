@@ -1,0 +1,56 @@
+- type: constructionGraph
+  id: Handle
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: unfinished handle
+      steps:
+      - material: WoodPlank
+        amount: 3
+        doAfter: 3
+
+  - node: unfinished handle
+    entity: WoodenHandleUnfinished
+    edges:
+    - to: wooden pole
+      steps:
+      - tool: Slicing
+        doAfter: 2
+
+  - node: wooden pole
+    entity: WoodenHandleLong
+    edges:
+    - to: medium handle
+      completed:
+      - !type:SpawnPrototype
+        prototype: WoodenHandleMedium # 2 total
+      steps:
+      - tool: Slicing
+        doAfter: 1
+
+  - node: medium handle
+    entity: WoodenHandleMedium
+    edges:
+    - to: short handle
+      completed:
+      - !type:SpawnPrototype
+        prototype: WoodenHandleShort # 2 total, 4 per pole
+      steps:
+      - tool: Slicing
+        doAfter: 1
+
+  - node: short handle
+    entity: WoodenHandleShort
+    edges:
+    - to: arrow shaft
+      completed:
+      - !type:SpawnPrototype
+        prototype: WoodenArrowShaft
+        amount: 2 # 3 total
+      steps:
+      - tool: Slicing
+        doAfter: 5 # very delicate work
+
+  - node: arrow shaft
+    entity: WoodenArrowShaft

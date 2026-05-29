@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 
@@ -8,7 +10,7 @@ namespace Content.Server.NPC.Pathfinding;
 /// </summary>
 public sealed partial class PathfindingSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private bool _disabled;
 

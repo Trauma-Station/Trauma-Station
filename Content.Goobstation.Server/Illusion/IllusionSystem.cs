@@ -9,7 +9,6 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Popups;
-using Content.Medical.Shared.Consciousness;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Cloning;
@@ -34,25 +33,24 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Server.Illusion;
 
-public sealed class IllusionSystem : EntitySystem
+public sealed partial class IllusionSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly CloningSystem _cloning = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private CloningSystem _cloning = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "Illusion";
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "IllusionCompound";
@@ -66,7 +64,6 @@ public sealed class IllusionSystem : EntitySystem
         typeof(ReproductiveComponent),
         typeof(ReproductivePartnerComponent),
         typeof(TemperatureComponent),
-        typeof(ConsciousnessComponent),
         typeof(PacifiedComponent),
         typeof(BloodstreamComponent),
     ];

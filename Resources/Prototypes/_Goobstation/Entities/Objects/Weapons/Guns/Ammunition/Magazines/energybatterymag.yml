@@ -32,7 +32,7 @@
     - state: erifle_lethal
       map: [ "enum.GunVisualLayers.Base" ]
   - type: BatteryAmmoProvider
-    proto: RifleBulletEnergyGunLethal
+    proto: LaserGunBullet
     fireCost: 50
 
 - type: entity
@@ -46,7 +46,7 @@
     - state: erifle_disabler
       map: [ "enum.GunVisualLayers.Base" ]
   - type: BatteryAmmoProvider
-    proto: RifleBulletEnergyGunDisabler
+    proto: BulletDisabler
     fireCost: 50
 
 - type: entity

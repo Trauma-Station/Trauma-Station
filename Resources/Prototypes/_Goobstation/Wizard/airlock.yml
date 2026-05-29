@@ -86,7 +86,6 @@
 - type: construction
   id: AirlockUranium
   graph: AirlockUranium
-  startNode: start
   targetNode: airlock
   category: construction-category-structures
   objectType: Structure
@@ -94,15 +93,12 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # <Trauma>
   theory:
-    AirlocksKnowledge: 1
-  # </Trauma>
+    AirlocksKnowledge: 0
 
 - type: construction
   id: AirlockUraniumGlass
   graph: AirlockUranium
-  startNode: start
   targetNode: glassAirlock
   category: construction-category-structures
   objectType: Structure
@@ -110,10 +106,8 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  # <Trauma>
   theory:
-    AirlocksKnowledge: 1
-  # </Trauma>
+    AirlocksKnowledge: 0
 
 # Construction
 - type: constructionGraph

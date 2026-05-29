@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Nyanotrasen.Holograms;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -10,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Nyanotrasen.Holograms;
 
-public sealed class HologramVisualizerSystem : EntitySystem
+public sealed partial class HologramVisualizerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private readonly ProtoId<ShaderPrototype> _shaderId = "Holographic"; // Goobstation - Start
     private ShaderPrototype? _shaderProto;

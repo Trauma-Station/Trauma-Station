@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Clothing.Components;
 using Content.Shared.Gravity;
 using Content.Shared.Inventory;
@@ -15,10 +10,10 @@ namespace Content.Shared.Clothing.EntitySystems;
 /// This is for balance reasons as it prevents you from wearing anti-grav clothing to cheese being stun cuffed, as
 /// well as other worse things.
 /// </remarks>
-public sealed class AntiGravityClothingSystem : EntitySystem
+public sealed partial class AntiGravityClothingSystem : EntitySystem
 {
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

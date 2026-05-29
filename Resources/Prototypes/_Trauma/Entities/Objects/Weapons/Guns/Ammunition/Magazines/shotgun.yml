@@ -7,18 +7,19 @@
   - type: BallisticAmmoProvider
     proto: ShellShotgunBreaching
   - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi
     layers:
-    - state: pellets
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+      - state: mag-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: breaching
+        map: ["enum.GunVisualLayers.Base"]
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#ba7710"
+        color: "#f1641f"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#ba7710"
+        color: "#f1641f"

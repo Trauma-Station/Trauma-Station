@@ -1,8 +1,7 @@
 // <Trauma>
 using Content.Goobstation.Shared.Mind.Components;
-using Content.Shared._Goobstation.Wizard.BindSoul;
+using Content.Trauma.Common.Wizard;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Tag;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
@@ -21,17 +20,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.Mind;
 
-public sealed class MindSystem : SharedMindSystem
+public sealed partial class MindSystem : SharedMindSystem
 {
-    // <Trauma>
-    [Dependency] private readonly TagSystem _tag = default!;
-    // </Trauma>
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly GhostSystem _ghosts = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private GhostSystem _ghosts = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
     {
@@ -193,7 +189,7 @@ public sealed class MindSystem : SharedMindSystem
         {
             component = EnsureComp<MindContainerComponent>(entity.Value);
 
-            if (TryGetMind(entity.Value, out var entityMindId, out _))
+            if (TryGetMind(entity.Value, out var entityMindId, out _) && entityMindId != mindId)
                 _ghosts.OnGhostAttempt(entityMindId, false);
 
             if (TryComp<ActorComponent>(entity.Value, out var actor))
@@ -245,7 +241,7 @@ public sealed class MindSystem : SharedMindSystem
 
             oldContainer.Mind = null;
             oldContainer.HasMind = false;
-            mind.OwnedEntity = null;
+            mind.OwnedEntity = entity;
 
             RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt, entity));
             RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt, entity));
@@ -374,14 +370,14 @@ public sealed class MindSystem : SharedMindSystem
         }
 
         if (mind.OwnedEntity != null) // Goobstation
-            _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
-        _tag.AddTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        EnsureComp<MindSwappingComponent>(target);
 
         MakeSentient(target);
         TransferTo(mindId, target, ghostCheckOverride: true, mind: mind);
 
         if (mind.OwnedEntity != null) // Goobstation
-            _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
-        _tag.RemoveTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+            EnsureComp<MindSwappingComponent>(mind.OwnedEntity.Value);
+        EnsureComp<MindSwappingComponent>(target);
     }
 }

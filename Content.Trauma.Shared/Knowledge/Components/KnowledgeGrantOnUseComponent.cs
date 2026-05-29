@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Components;
 
@@ -21,8 +19,17 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     /// <summary>
     /// Experience that will be added per use.
     /// </summary>
+    /// <remarks>
+    /// Does nothing right now
+    /// </remarks>
     [DataField, AlwaysPushInheritance]
     public Dictionary<EntProtoId, int> Experience = new();
+
+    /// <summary>
+    /// Grants literally every single skill at level 100 if true.
+    /// </summary>
+    [DataField]
+    public bool GrantEverything;
 
     /// <summary>
     /// Length of a single doafter to learn this knowledge.
@@ -31,7 +38,13 @@ public sealed partial class KnowledgeGrantOnUseComponent : Component
     public TimeSpan DoAfter = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// If true, you will instantly gain all the skills then the item is ashed.
+    /// If true, you will instantly gain all the skills when used instead of a doafter.
+    /// </summary>
+    [DataField]
+    public bool Instant = true;
+
+    /// <summary>
+    /// If true and <see cref="Instant"/> is true, the item is ashed after using it.
     /// Only <see cref="Skills"/> is used, <see cref="Experience"/> is ignored.
     /// </summary>
     [DataField]

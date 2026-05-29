@@ -9,7 +9,6 @@ using Content.Shared.Actions;
 using Content.Shared.Explosion;
 using Content.Shared.Gibbing;
 using Content.Shared.Mobs.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.Ascension;
 
@@ -17,12 +16,12 @@ namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.Ascension;
 /// This handles the Annihilate abiltiy logic.
 /// Gib from afar!
 /// </summary>
-public sealed class ShadowlingAnnihilateSystem : EntitySystem
+public sealed partial class ShadowlingAnnihilateSystem : EntitySystem
 {
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

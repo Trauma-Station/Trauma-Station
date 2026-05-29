@@ -7,11 +7,11 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Body.Part;
 
-public sealed class BodyPartCavitySystem : EntitySystem
+public sealed partial class BodyPartCavitySystem : EntitySystem
 {
-    [Dependency] private readonly CommonInsideBodyPartSystem _insideBodyPart = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private CommonInsideBodyPartSystem _insideBodyPart = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -75,6 +75,13 @@ public sealed class BodyPartCavitySystem : EntitySystem
         var ev = new RemovedFromCavityEvent(ent);
         RaiseLocalEvent(args.Entity, ref ev);
     }
+
+    /// <summary>
+    /// Returns true if a bodypart has a item in its cavity.
+    /// </summary>
+    public bool HasItem(Entity<BodyPartCavityComponent> ent)
+        => _container.TryGetContainer(ent.Owner, ent.Comp.ContainerId, out var container) &&
+            container.Count > 0;
 }
 
 /// <summary>

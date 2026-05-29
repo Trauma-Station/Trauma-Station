@@ -133,7 +133,7 @@
   id: MorgueArea
   sound:
     params:
-      volume: -15
+      volume: -10
     collection: AmbienceSpooky
   fadeIn: true
   interruptable: true
@@ -144,7 +144,7 @@
   id: HolyArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceHoly
   rules: InChapelArea
   fadeIn: true
@@ -155,7 +155,7 @@
   id: DetectiveArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceDetective
   rules: InDetectiveArea
   fadeIn: true
@@ -166,7 +166,7 @@
   id: PoolArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceBeach
   rules: InBeachArea
   fadeIn: true
@@ -177,7 +177,7 @@
   id: ColdArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceCold
   rules: InColdArea
   fadeIn: true
@@ -188,7 +188,7 @@
   id: DojoArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceDojo
   rules: InDojoArea
   fadeIn: true
@@ -199,7 +199,7 @@
   id: InterrogationArea
   sound:
     params:
-      volume: -15
+      volume: -10
     collection: AmbienceInterrogation
   rules: InInterrogationArea
   fadeIn: true
@@ -211,7 +211,7 @@
   id: MedicalArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceMedical
   rules: InMedicalArea
   fadeIn: true
@@ -222,7 +222,7 @@
   id: EngineeringArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceEngineering
   rules: InEngineeringArea
   fadeIn: true
@@ -233,7 +233,7 @@
   id: SecurityArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceSecurity
   rules: InSecurityArea
   fadeIn: true
@@ -245,7 +245,7 @@
   id: MaintenanceArea
   sound:
     params:
-      volume: -20
+      volume: -10
     collection: AmbienceMaintenance
   rules: InMaintsArea
   fadeIn: true

@@ -1,7 +1,6 @@
 - type: construction
   id: RevRPG2HE
   graph: RevRockets
-  startNode: start
   targetNode: HE
   category: construction-category-antagonist
   objectType: Item
@@ -10,23 +9,12 @@
     WeaponsKnowledge: 2
 
 - type: construction
+  parent: RevRPG2HE
   id: RevRPG2AP
-  graph: RevRockets
-  startNode: start
   targetNode: AP
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 2
 
 - type: construction
+  parent: RevRPG2HE
   id: RevFlamethrowerAmmo
   graph: RevFlamethrowerAmmo
-  startNode: start
   targetNode: FlamethrowerAmmo
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 2
-    WeaponsKnowledge: 2

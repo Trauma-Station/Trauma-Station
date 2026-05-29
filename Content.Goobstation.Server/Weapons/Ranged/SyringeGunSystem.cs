@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chemistry.Components;
-using Content.Shared._Goobstation.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Trauma.Common.Weapons.Ranged;
 
 namespace Content.Goobstation.Server.Weapons.Ranged;
 
 /// <summary>
 ///     System for handling projectiles and altering their properties when fired from a Syringe Gun.
 /// </summary>
-public sealed class SyringeGunSystem : EntitySystem
+public sealed partial class SyringeGunSystem : EntitySystem
 {
 
     public override void Initialize()

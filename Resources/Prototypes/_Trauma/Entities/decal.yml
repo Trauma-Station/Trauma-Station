@@ -1,0 +1,10 @@
+- type: entity
+  save: false # DecalGrid does it
+  id: Decal
+  name: decal
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+    gridTraversal: false # waste of processing
+  - type: Decal

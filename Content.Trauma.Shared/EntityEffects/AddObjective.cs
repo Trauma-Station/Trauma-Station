@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -23,9 +22,9 @@ public sealed partial class AddObjective : EntityEffectBase<AddObjective>
         => null; // make it if you put this on a reagent (and die for doing that)
 }
 
-public sealed class AddObjectiveEffectSystem : EntityEffectSystem<MindContainerComponent, AddObjective>
+public sealed partial class AddObjectiveEffectSystem : EntityEffectSystem<MindContainerComponent, AddObjective>
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     protected override void Effect(Entity<MindContainerComponent> ent, ref EntityEffectEvent<AddObjective> args)
     {

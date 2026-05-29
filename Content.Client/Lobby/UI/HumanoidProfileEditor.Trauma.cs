@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Common.Barks;
 using Content.Trauma.Common.Knowledge;
@@ -11,7 +13,7 @@ namespace Content.Client.Lobby.UI;
 /// </summary>
 public sealed partial class HumanoidProfileEditor
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private uint _lastColorUpdate;
 
     /// <summary>

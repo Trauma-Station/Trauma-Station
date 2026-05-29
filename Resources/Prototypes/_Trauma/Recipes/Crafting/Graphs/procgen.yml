@@ -1,0 +1,90 @@
+# Procedurally generated tools/weapons graphs
+
+- type: constructionGraph
+  id: ForgedShortHandle
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      conditions:
+      - !type:QuenchMetal
+      completed:
+      - !type:FinishForgedItem
+      steps:
+      - tag: WoodenHandleShort
+        doAfter: 4
+        name: construction-graph-tag-smallhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+      - tool: Hammering
+        doAfter: 3
+      - tool: Hammering
+        doAfter: 3
+  - node: finished
+    # entity gets changed manually in FinishForgedItem
+
+- type: constructionGraph
+  id: ForgedMediumHandle
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      conditions:
+      - !type:QuenchMetal
+      completed:
+      - !type:FinishForgedItem
+      steps:
+      - tag: WoodenHandleMedium
+        doAfter: 5
+        name: construction-graph-tag-mediumhandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlemedium
+      - tool: Hammering
+        doAfter: 4
+      - tool: Hammering
+        doAfter: 4
+  - node: finished
+
+- type: constructionGraph
+  id: ForgedLongHandle
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      conditions:
+      - !type:QuenchMetal
+      completed:
+      - !type:FinishForgedItem
+      steps:
+      - tag: WoodenHandleLong
+        doAfter: 6
+        name: construction-graph-tag-largehandle
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlelarge
+      - tool: Hammering
+        doAfter: 5
+      - tool: Hammering
+        doAfter: 5
+  - node: finished
+
+- type: constructionGraph
+  id: ForgedArrow
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      conditions:
+      - !type:QuenchMetal
+      completed:
+      - !type:FinishForgedItem
+      steps:
+      - tag: WoodenArrowShaft
+        doAfter: 2
+        name: construction-graph-tag-arrow-shaft
+        icon:
+          sprite: _Trauma/Objects/Specific/forging.rsi
+          state: handlesmall
+  - node: finished

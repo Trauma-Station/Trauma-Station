@@ -202,7 +202,6 @@
     MobXenomorphSentinel: 0.8
     MobXenomorphHunter: 1
     MobXenomorphPraetorian: 0.5
-    MobXenomorphMaid: 0.01
 
 - type: weightedRandom
   id: WabbajackGroups

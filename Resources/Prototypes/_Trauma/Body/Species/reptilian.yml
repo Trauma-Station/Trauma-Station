@@ -18,3 +18,21 @@
     onAdd:
     - type: Wagging
       organ: Tail
+
+- type: entity
+  parent: OrganReptilianTail
+  id: OrganReptilianTailDefault
+  suffix: Reptilian, Default
+  components:
+  - type: Sprite
+    layers:
+    - state: tail
+      color: "#33A222FF"
+  - type: VisualOrgan
+    profile:
+      skinColor: "#33A222FF"
+  - type: VisualOrganMarkings
+    markings:
+      Tail:
+      - markingId: LizardTailSmooth
+        markingColor: [ "#33A222FF" ]

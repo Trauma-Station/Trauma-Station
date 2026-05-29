@@ -13,3 +13,19 @@
     whitelist:
       tags:
       - NukeOpsUplink
+
+- type: listing
+  id: UplinkAutosurgeonStatvekaSandevistan
+  name: uplink-autosurgeon-statveka-sandevistan-name
+  description: uplink-autosurgeon-statveka-sandevistan-desc
+  icon: { sprite: _Goobstation/Objects/Misc/sandevistan.rsi, state: icon }
+  productEntity: AutosurgeonStatvekaSandevistan
+  cost:
+    Telecrystal: 66
+  categories:
+  - UplinkImplants
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink

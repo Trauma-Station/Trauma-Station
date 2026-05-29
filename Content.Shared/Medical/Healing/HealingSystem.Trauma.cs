@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Healing;
 using Content.Medical.Common.Targeting;
@@ -19,7 +21,7 @@ namespace Content.Shared.Medical.Healing;
 
 public sealed partial class HealingSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     private ProtoId<OrganCategoryPrototype>[] _partHealingOrder =
     {
@@ -90,6 +92,12 @@ public sealed partial class HealingSystem
 
         // see if there is any damage that can be healed
         if (AnyHealable((part, damageable), healing.Damage))
+            return true;
+
+        // see if there are any wounds to heal
+        var ev2 = new CheckPartWoundedEvent(healing.Damage.DamageDict.Keys.Select(x => x.Id).ToList());
+        RaiseLocalEvent(part, ref ev2);
+        if (ev2.Wounded)
             return true;
 
         if (healing.BloodlossModifier == 0)

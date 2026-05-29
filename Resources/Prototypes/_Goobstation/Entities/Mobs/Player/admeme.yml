@@ -1,36 +1,8 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-## Navy Shit
-
 # Central Command!
 
 - type: randomHumanoidSettings
   id: CentcommHumanoid
-  speciesBlacklist:
-  - Monkey
-  - Kobold
-  - Abductor
-  - IPC
-  - Diona
-  - Vox # Pasha
-  - Gingerbread # Soecusn
-  - Plasmaman
-  - Reptilian
-  - Moth
-  - Arachnid
-  - Vulpkanin
-  - SlimePerson
-  - Dwarf
-  - Feroxi
-  - Chitinid
+  speciesWhitelist: Human
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
@@ -40,6 +12,8 @@
   - type: Speech
     speechVerb: HolierThanThou
   - type: GhostRole
+
+## Navy Shit
 
 # Navy Officer
 

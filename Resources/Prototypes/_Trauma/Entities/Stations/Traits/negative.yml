@@ -1,0 +1,187 @@
+- type: stationTrait
+  id: AnomalyStorm
+  group: Negative # you're gonna have a lot more than you can probably make use of
+  chance: 0.4
+  name: "Anomaly Storm"
+  report: "Anomalous readings in your region are off the charts! Keep a few locators handy..."
+  effects:
+  - !type:StartGameRule
+    rule: AnomalyStormRule
+
+- type: stationTrait
+  id: Blackout
+  group: Negative
+  name: "Blackout"
+  report: "Station lights seem to be damaged, be safe when starting your shift today."
+  mapEffects:
+  # TODO: change it to overload lighting channel on APCs if anyone ever implements channels (lol)
+  - !type:StationQueryEffects
+    compName: PoweredLight
+    effects:
+    - !type:DestroyLightBulb
+      probability: 0.6
+
+- type: stationTrait
+  id: BotLanguages
+  group: Negative
+  chance: 0.8
+  name: "Bot Language Matrix Malfunction"
+  report: "Your station's friendly bots have had their language matrix fried due to an ion storm, resulting in some strange and unfamiliar speech patterns."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: LanguageSpeaker
+    effects:
+    - !type:AddRandomLanguage
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          tags:
+          - Bot
+
+- type: stationTrait
+  id: MachineLanguages
+  group: Negative
+  chance: 0.4
+  name: "Machine Language Matrix Malfunction"
+  report: "Your station's machines have had their language matrix fried due to an ion storm, resulting in some strange and unfamiliar speech patterns."
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: LanguageSpeaker
+    effects:
+    - !type:AddRandomLanguage
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Computer
+          - Machine
+          - VendingMachine
+
+- type: stationTrait
+  id: CarpInfestation
+  group: Negative
+  minPlayers: 15
+  name: "Carp infestation"
+  report: "Dangerous fauna is present in the area of this station."
+  effects:
+  - !type:StartGameRule
+    rule: CarpInfestationRule
+
+- type: stationTrait
+  id: EmptyMaint
+  group: Negative
+  name: "Cleared out maintenance"
+  report: "Our workers cleaned out most of the junk in the maintenace areas."
+  conflicts: [ FilledMaint ]
+  startEffects: # has to run before the map inits so it can change the spawners
+  - !type:StationQueryEffects
+    compName: MaintsClosetSpawner
+    includePaused: true
+    effects:
+    - !type:AddComponents
+      components:
+      - type: RandomSpawner
+        offset: 0
+        prototypes:
+        - ClosetMaintenanceFilledLess # just overriding this
+        rarePrototypes:
+        - LockerMimic
+        rareChance: 0.005
+
+- type: stationTrait
+  id: DistantSupplyLines
+  group: Negative
+  chance: 0.6
+  name: "Distant supply lines"
+  report: "Due to the distance to our normal supply lines, cargo orders are more expensive."
+  conflicts: [ StrongSupplyLines ]
+  effects:
+  - !type:AddComponents
+    components:
+    - type: CargoPriceModifier
+      modifier: 1.2
+
+- type: stationTrait
+  id: IonicStormfront
+  group: Negative
+  chance: 0.6
+  name: "Ionic Stormfront"
+  report: "An ionic stormfront is passing over your station's system. Expect an increased likelihood of ion storms afflicting your station's silicon units."
+  effects:
+  - !type:StartGameRule
+    rule: IonStormScheduler
+
+- type: stationTrait
+  id: LateArrivals
+  group: Negative
+  chance: 0.4
+  name: "Late Arrivals"
+  report: "Sorry for that, we didn't expect to fly into that vomiting goose while bringing you to your new station."
+  conflicts: [ RandomSpawns ]
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: SpawnPoint
+    effects:
+    - !type:Delete
+      conditions:
+      # only keep latejoin, observer etc
+      - !type:SpawnPointHasJob
+
+- type: stationTrait
+  id: MeteorSwarm
+  group: Negative
+  chance: 0.4
+  name: "Meteor Swarm"
+  report: "The space around your station has an unusual number of asteroids orbiting your star."
+  effects:
+  - !type:StartGameRule
+    rule: MeteorSwarmScheduler # double the fun
+
+- type: stationTrait
+  id: RandomSpawns
+  group: Negative
+  chance: 0.4
+  minPlayers: 30 # more fun with more people + getting stuck in a room on deadpop is bad
+  name: "Drive-by landing"
+  report: "Sorry for that, we missed your station by a few miles, so we just launched you towards your station in pods. Hope you don't mind!"
+  conflicts: [ LateArrivals ]
+  mapEffects:
+  - !type:StationQueryEffects
+    compName: SpawnPoint
+    effects:
+    - !type:NestedEffect
+      proto: MakeSpawnPointDropPod # any job can spawn at any spawn point, in drop pods.
+
+- type: stationTrait
+  id: OverflowJobMistake
+  group: Negative
+  name: "Overflow bureaucracy mistake"
+  report: "It seems for some reason we put out the wrong job-listing for the overflow role this shift..." # the job is left as a surprise
+  mapEffects: # need this after station jobs are loaded but before job spawn
+  - !type:StationRandomOverflowJob
+    ignoredJobs:
+    - StationAi # broken as fuck and has a dedicated trait
+  - !type:StationModifyJobs
+    set:
+      Passenger: 5 # no unlimited assistants, replace them with the picked job.
+
+- type: stationTrait
+  id: PostRevolutionaryFervor
+  group: Negative
+  chance: 0.4
+  name: "Post-Revolutionary Fervor"
+  report: "Your station was recently reclaimed from a revolutionary commune. We couldn't clean up after them in time."
+  effects:
+  - !type:StartGameRule
+    rule: RevolutionaryFervorVariation
+  # TODO: maybe add a forge or something randomly in maints..?
+
+- type: stationTrait
+  id: RadiationStormfront
+  group: Negative
+  chance: 0.4
+  name: "Radiation Stormfront"
+  report: "A radioactive stormfront is passing through your station's system. Expect an increased likelihood of radiation storms passing over your station."
+  effects:
+  - !type:StartGameRule
+    rule: RadiationStormfrontRule

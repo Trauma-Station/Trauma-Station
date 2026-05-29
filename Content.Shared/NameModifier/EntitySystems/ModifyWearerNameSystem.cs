@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
@@ -11,7 +6,7 @@ namespace Content.Shared.NameModifier.EntitySystems;
 
 public sealed partial class ModifyWearerNameSystem : EntitySystem
 {
-    [Dependency] private readonly NameModifierSystem _nameMod = default!;
+    [Dependency] private NameModifierSystem _nameMod = default!;
 
     public override void Initialize()
     {

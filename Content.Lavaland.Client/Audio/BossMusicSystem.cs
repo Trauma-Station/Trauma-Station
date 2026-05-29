@@ -12,20 +12,19 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Client.Audio;
 
 // TODO: Port this system to Shared and optimize it.
-public sealed class BossMusicSystem : SharedBossMusicSystem
+public sealed partial class BossMusicSystem : SharedBossMusicSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly ContentAudioSystem _audioContent = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] private ContentAudioSystem _audioContent = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static float _volumeSlider;
     private Entity<AudioComponent?>? _bossMusicStream;

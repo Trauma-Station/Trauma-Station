@@ -36,9 +36,9 @@
         amount: 1.5
       - !type:EvenHealthChange
         damage:
-          Burn: -1.75
-          Brute: -1.75
-          Airloss: -1.25
+          Burn: -1
+          Brute: -1
+          Airloss: -1
       - !type:ModifyBloodLevel
         amount: 1.5
         conditions:
@@ -48,9 +48,9 @@
           worksOnLavaland: true
       - !type:EvenHealthChange
         damage:
-          Burn: -4.75
-          Brute: -4.75
-          Airloss: -1.25
+          Burn: -4
+          Brute: -4
+          Airloss: -1
         conditions:
         - !type:PressureCondition
           min: 1
@@ -92,19 +92,42 @@
   metabolisms:
     Bloodstream:
       effects:
+      # Healing done only between 0-50kpa, poisoning has different damage
       - !type:EvenHealthChange
         conditions:
         - !type:PressureCondition
-          inverted: true # only do the damage outside of lavaland
-          min: 1
-          max: 50
-          worksOnLavaland: true
+            min: 0
+            max: 50
         damage:
-          Toxin: 1.5
-          Brute: 7.5
-          Burn: 4.5
-          Airloss: 3.25
-      # Cuts the amount healed roughly by 50% when in normal pressure.
+          Toxin: -2
+          Brute: -6
+          Burn: -6
+          Airloss: -6
+      # Improper pressure effects below
+      - !type:EvenHealthChange
+        conditions:
+        - !type:PressureCondition
+          inverted: true
+          min: 0
+          max: 50
+        damage:
+          Toxin: 1
+          Brute: 1
+          Airloss: 1
+      - !type:Emote
+        conditions:
+        - !type:PressureCondition # five billion pressure conditions :joel:
+          inverted: true
+          min: 0
+          max: 50
+        emote: Scream
+        probability: 0.1
+      - !type:Jitter
+        conditions:
+        - !type:PressureCondition
+          inverted: true
+          min: 0
+          max: 50
 
 - type: reagent
   id: VitriumFroth

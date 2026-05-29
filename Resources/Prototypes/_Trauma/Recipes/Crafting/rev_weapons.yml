@@ -1,7 +1,6 @@
 - type: construction
   id: RevLiberator
   graph: RevGuns
-  startNode: start
   targetNode: liberator
   category: construction-category-antagonist
   objectType: Item
@@ -15,7 +14,6 @@
 - type: construction
   id: RevResistance
   graph: RevGuns
-  startNode: start
   targetNode: resistance
   category: construction-category-antagonist
   objectType: Item
@@ -29,7 +27,6 @@
 - type: construction
   id: RPG2
   graph: RevGuns
-  startNode: start
   targetNode: RPG2
   category: construction-category-antagonist
   objectType: Item
@@ -43,7 +40,6 @@
 - type: construction
   id: Flamethrower
   graph: RevGuns
-  startNode: start
   targetNode: Flamethrower
   category: construction-category-antagonist
   objectType: Item
@@ -57,7 +53,6 @@
 - type: construction
   id: Devastator
   graph: RevGuns
-  startNode: start
   targetNode: Devastator
   category: construction-category-antagonist
   objectType: Item
@@ -71,7 +66,6 @@
 - type: construction
   id: RevIED
   graph: RevIED
-  startNode: start
   targetNode: IED
   category: construction-category-antagonist
   objectType: Item

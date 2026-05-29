@@ -1,17 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Vasilis <vasilis@pikachu.systems>
-# SPDX-FileCopyrightText: 2023 drteaspoon420 <87363733+drteaspoon420@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Boaz1111 <149967078+Boaz1111@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-# SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 superjj18 <gagnonjake@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, SolutionDart]
   id: BaseArrow
   abstract: true
   components:
@@ -53,24 +41,19 @@
     damage:
       types:
         Piercing: 25
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        maxVol: 2
   - type: RefillableSolution # This is sus. You can't really just run an arrowhead under a sink faucet.
-    solution: ammo
+    solution: melee
   - type: InjectableSolution
-    solution: ammo
+    solution: melee
   - type: SolutionInjectOnEmbed
     transferAmount: 2
-    solution: ammo
+    solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 2
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: solution
-
 
 - type: entity
   parent: BaseArrow
@@ -91,14 +74,38 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 35
+        Piercing: 20
 
 - type: entity
-  parent: BaseArrow
+  parent: BaseArrowImprovised # Trauma - Improvised parent
   id: ArrowImprovised
   name: glass shard arrow
   description: The greyshirt's preferred projectile.
   components:
+  # <Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
     layers:
@@ -114,17 +121,42 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 13 # Trauma, was 25
   - type: Construction
     graph: ImprovisedArrow
     node: ImprovisedArrow
 
 - type: entity
-  parent: BaseArrow
+  parent: BaseArrowImprovised # Trauma - Improvised parent
   id: ArrowImprovisedPlasma
   name: plasma glass shard arrow
   description: The greyshirt's preferred projectile. Now with extra lethality!
   components:
+  # <Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+      Plasma: 50
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
     layers:
@@ -140,17 +172,42 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Piercing: 13 # Trauma, was 30
   - type: Construction
     graph: ImprovisedArrowPlasma
     node: ImprovisedArrowPlasma
 
 - type: entity
-  parent: BaseArrow
+  parent: BaseArrowImprovised # Trauma - Improvised parent
   id: ArrowImprovisedUranium
   name: uranium glass shard arrow
   description: The greyshirt's preferred projectile. Now with added radiation!
   components:
+  # <Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 50
+      Uranium: 50
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
     layers:
@@ -166,18 +223,42 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 7 # Trauma, was 25
         Radiation: 5
   - type: Construction
     graph: ImprovisedArrowUranium
     node: ImprovisedArrowUranium
 
 - type: entity
-  parent: BaseArrow
+  parent: BaseArrowImprovised # Trauma - Improvised parent
   id: ArrowImprovisedCarp
   name: carp tooth arrow
   description: The salvager's preferred arrow. Kill your enemies with the teeth of their families.
   components:
+  # <Trauma>
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Bones: 25 # teeth are kinda bones...
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
     layers:
@@ -193,7 +274,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Piercing: 15 # Trauma, was 30
   - type: Construction
     graph: ImprovisedArrowCarp
     node: ImprovisedArrowCarp
@@ -204,6 +285,16 @@
   name: cardboard arrow
   description: Careful, you'll poke an eye out!
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Cardboard: 50
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/arrows.rsi
     layers:
@@ -213,6 +304,9 @@
       color: brown
     - state: tip
       color: brown
+    - state: solution1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Projectile
     damage:
       types:

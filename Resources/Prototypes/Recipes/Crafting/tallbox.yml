@@ -7,7 +7,7 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
@@ -22,8 +22,8 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
-    ElectronicsKnowledge: 1
+    FurnitureKnowledge: 0
+    ElectronicsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
@@ -39,7 +39,7 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
     MechanicsKnowledge: 1
@@ -54,7 +54,7 @@
   objectType: Structure
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 2
     MechanicsKnowledge: 2
@@ -74,7 +74,7 @@
     - !type:WallmountCondition
   # <Trauma>
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
     MechanicsKnowledge: 1

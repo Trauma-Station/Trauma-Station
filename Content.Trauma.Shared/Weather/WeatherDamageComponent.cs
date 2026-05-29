@@ -2,15 +2,15 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameStates;
+using Content.Trauma.Shared.Areas;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Weather;
 
 /// <summary>
-/// Component for weather status effects that damages anything not under a roof which does not match a blacklist.
+/// Component for weather status effects that damages anything not protected from this weather which does not match a blacklist.
 /// </summary>
-// TODO: change this to areas if every lavaland ruin etc gets updated
+// TODO: change this to areas in the ash storm prototype if every lavaland ruin etc gets updated
 [RegisterComponent, NetworkedComponent, Access(typeof(WeatherDamageSystem))]
 [AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class WeatherDamageComponent : Component
@@ -23,6 +23,18 @@ public sealed partial class WeatherDamageComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    /// <summary>
+    /// If true, being under a roof makes you safe from damage.
+    /// </summary>
+    [DataField]
+    public bool SafeIndoors = true;
+
+    /// <summary>
+    /// Areas that are safe to be inside.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId<AreaComponent>> SafeAreas = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoNetworkedField, AutoPausedField]

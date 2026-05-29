@@ -2,16 +2,15 @@
 
 using Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 using Content.Goobstation.Shared.ChronoLegionnaire.Components;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Client.ChronoLegionnaire;
 
-public sealed class StasisOverlaySystem : EntitySystem
+public sealed partial class StasisOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
 
     private StasisOverlay _overlay = default!;
 

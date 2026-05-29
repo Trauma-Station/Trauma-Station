@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.Timing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -21,9 +20,9 @@ public sealed partial class UseDelayCondition : EntityConditionBase<UseDelayCond
         => Loc.GetString("entity-condition-guidebook-use-delay", ("id", DelayId));
 }
 
-public sealed class UseDelayConditionSystem : EntityConditionSystem<UseDelayComponent, UseDelayCondition>
+public sealed partial class UseDelayConditionSystem : EntityConditionSystem<UseDelayComponent, UseDelayCondition>
 {
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     protected override void Condition(Entity<UseDelayComponent> ent, ref EntityConditionEvent<UseDelayCondition> args)
     {

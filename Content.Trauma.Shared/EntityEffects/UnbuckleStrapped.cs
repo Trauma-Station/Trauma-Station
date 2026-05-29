@@ -3,7 +3,6 @@
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 
@@ -16,9 +15,9 @@ public sealed partial class UnbuckleStrapped : EntityEffectBase<UnbuckleStrapped
         => null; // its just used for crucifying idc
 }
 
-public sealed class UnbuckleStrappedEffectSystem : EntityEffectSystem<StrapComponent, UnbuckleStrapped>
+public sealed partial class UnbuckleStrappedEffectSystem : EntityEffectSystem<StrapComponent, UnbuckleStrapped>
 {
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
 
     protected override void Effect(Entity<StrapComponent> ent, ref EntityEffectEvent<UnbuckleStrapped> args)
     {

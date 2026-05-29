@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
+# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
+# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: CigPackMedical
+  parent: CigPackBase
+  name: ChemLab menthols pack
+  description: Nanotrasen decided to let Chemistry make their own soaked cigarettes for export, and this is the result. The menthol is there to hide the noxious chemicals!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/chem.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/chem.rsi
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigaretteMedical
+        amount: 10

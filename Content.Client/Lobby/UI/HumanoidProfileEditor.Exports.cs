@@ -47,7 +47,7 @@ public sealed partial class HumanoidProfileEditor
         }
         catch (Exception exc)
         {
-            _sawmill.Error($"Error when importing profile\n{exc.StackTrace}");
+            _sawmill.Error($"Error when importing profile\n{exc}"); // Trauma - actually print the error properly
         }
         finally
         {

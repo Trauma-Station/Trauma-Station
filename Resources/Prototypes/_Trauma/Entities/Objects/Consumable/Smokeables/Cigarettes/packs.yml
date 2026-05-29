@@ -1,0 +1,36 @@
+- type: entity
+  abstract: true
+  parent: CigPackBase
+  id: CigPackBaseSoft
+  name: cigarette soft pack
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: ["closeLayer"]
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/softpack-visualizer.rsi
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/softpack-visualizer.rsi
+      visible: false
+  - type: ItemCounter
+    layerStates:
+    - cig1
+    - cig2
+
+- type: entity
+  id: CigPackBotany
+  parent: CigPackBase
+  name: Hydroponic Herbals pack
+  description: Nanotrasen decided to let Botany make their own signature blend cigarettes for export, and this is the result.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/botany.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Packs/botany.rsi

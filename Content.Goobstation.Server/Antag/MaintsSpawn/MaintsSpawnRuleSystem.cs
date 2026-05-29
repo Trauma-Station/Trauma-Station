@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Antag;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
@@ -9,9 +10,11 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.Antag.MaintsSpawn;
 
-public sealed class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponent>
+public sealed partial class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<StationMemberComponent> _memberQuery = default!;
 
     public override void Initialize()
     {
@@ -30,14 +33,23 @@ public sealed class MaintsSpawnRule : StationEventSystem<MaintsSpawnRuleComponen
             return;
         }
 
+        // TODO: this is evil, make a random area thing that works something like this
+        // 0. build an AABB of every area we want
+        // 1. pick random position
+        // 2. repeat until position is in wanted area
         var locations = EntityQueryEnumerator<MaintsSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<MapCoordinates>();
-        while (locations.MoveNext(out _, out _, out var transform))
+        while (locations.MoveNext(out _, out _, out var xform))
         {
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station != station)
+            if (xform.GridUid is not {} grid || _memberQuery.CompOrNull(grid)?.Station != station)
                 continue;
 
-            validLocations.Add(_transform.GetMapCoordinates(transform));
+            var coords = xform.Coordinates; // areas should always be parented to a grid, just round the coords
+            var tile = new Vector2i((int) MathF.Floor(coords.X), (int) MathF.Floor(coords.Y));
+            if (_atmos.IsTileAirBlockedCached(grid, tile))
+                continue;
+
+            validLocations.Add(_transform.GetMapCoordinates(xform));
         }
 
         if (validLocations.Count == 0)

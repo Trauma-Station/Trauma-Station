@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Mobs;
-using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Factory.Filters;
 

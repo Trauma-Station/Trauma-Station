@@ -3,17 +3,15 @@
 using Content.Goobstation.Client.Fishing.Overlays;
 using Content.Goobstation.Shared.Fishing.Components;
 using Content.Goobstation.Shared.Fishing.Systems;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Fishing;
 
-public sealed class FishingSystem : SharedFishingSystem
+public sealed partial class FishingSystem : SharedFishingSystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {

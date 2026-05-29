@@ -1,0 +1,5 @@
+- type: stack
+  id: CreditFake
+  name: stack-credit
+  icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
+  spawn: SpaceCashCounterfeit

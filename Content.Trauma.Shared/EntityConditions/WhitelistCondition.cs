@@ -3,7 +3,6 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.Mind;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -42,10 +41,10 @@ public sealed partial class WhitelistCondition : EntityConditionBase<WhitelistCo
     }
 }
 
-public sealed class WhitelistConditionSystem : EntityConditionSystem<MetaDataComponent, WhitelistCondition>
+public sealed partial class WhitelistConditionSystem : EntityConditionSystem<MetaDataComponent, WhitelistCondition>
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
 
     protected override void Condition(Entity<MetaDataComponent> ent, ref EntityConditionEvent<WhitelistCondition> args)

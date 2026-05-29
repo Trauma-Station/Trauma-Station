@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Religion.Nullrod.Components;
 using Content.Shared.DoAfter;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod;
 

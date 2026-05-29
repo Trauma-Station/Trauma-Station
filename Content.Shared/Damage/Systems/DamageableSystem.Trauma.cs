@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Damage.Prototypes;
@@ -10,20 +12,13 @@ namespace Content.Shared.Damage.Systems;
 /// </summary>
 public sealed partial class DamageableSystem
 {
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
-    private EntityQuery<BodyComponent> _bodyQuery = default!;
-    private EntityQuery<InorganicComponent> _inorganicQuery = default!;
-    private EntityQuery<InternalOrganComponent> _internalQuery = default!;
+    [Dependency] private CommonBodyPartSystem _part = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<InorganicComponent> _inorganicQuery = default!;
+    [Dependency] private EntityQuery<InternalOrganComponent> _internalQuery = default!;
 
     private static readonly ProtoId<DamageGroupPrototype>[] _vitalOnlyDamageGroups = { "Airloss", "Toxin", "Genetic", "Metaphysical" };
     private readonly List<ProtoId<DamageTypePrototype>> _vitalOnlyDamageTypes = new();
-
-    private void InitializeTrauma()
-    {
-        _bodyQuery = GetEntityQuery<BodyComponent>();
-        _inorganicQuery = GetEntityQuery<InorganicComponent>();
-        _internalQuery = GetEntityQuery<InternalOrganComponent>();
-    }
 
     private void CacheVitalPrototypes()
     {

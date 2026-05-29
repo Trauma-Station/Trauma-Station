@@ -17,9 +17,9 @@ namespace Content.Client.Options.UI.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class AudioTab : Control
 {
-    [Dependency] private readonly IAudioManager _audio = default!;
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IAudioManager _audio = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public AudioTab()
     {
@@ -32,12 +32,17 @@ public sealed partial class AudioTab : Control
             scale: ContentAudioSystem.MasterVolumeMultiplier);
         masterVolume.ImmediateValueChanged += OnMasterVolumeSliderChanged;
 
-        // Goob Station - Barks-start
+        // <Trauma>
         Control.AddOptionPercentSlider(
             GoobCVars.BarksVolume,
             SliderVolumeBarks,
-            scale: ContentAudioSystem.BarksMultiplier);
-        // Goob Station - Barks-end
+            scale: 3f);
+
+        Control.AddOptionPercentSlider(
+            TraumaCVars.SpecialAudioVolume,
+            SliderVolumeSpecial,
+            scale: 1f);
+        // </Trauma>
 
         Control.AddOptionPercentSlider(
             CVars.MidiVolume,
@@ -64,11 +69,6 @@ public sealed partial class AudioTab : Control
             SliderVolumeInterface,
             scale: ContentAudioSystem.InterfaceMultiplier);
 
-        Control.AddOptionPercentSlider(
-            GoobCVars.VoiceChatVolume,
-            SliderVolumeVoiceChat,
-            -8, 10);
-
         // <Trauma>
         Control.AddOptionPercentSlider(
             TraumaCVars.ChatHighlightVolume,
@@ -82,7 +82,6 @@ public sealed partial class AudioTab : Control
             _cfg.GetCVar(CCVars.MinMaxAmbientSourcesConfigured),
             _cfg.GetCVar(CCVars.MaxMaxAmbientSourcesConfigured));
 
-        Control.AddOptionCheckBox(GoobCVars.VoiceChatHearSelf, HearSelfCheckBox);
         Control.AddOptionCheckBox(CCVars.LobbyMusicEnabled, LobbyMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.RestartSoundsEnabled, RestartSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);

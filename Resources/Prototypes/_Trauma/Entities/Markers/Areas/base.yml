@@ -11,22 +11,15 @@
   - type: Transform
     anchored: true
     noRot: true
+    gridTraversal: false # waste of processing
   - type: Sprite
+    noRot: true
     drawdepth: Overdoors
     sprite: _Trauma/Markers/Areas/station.rsi
     state: error
-  - type: Physics # for lookup to work
-  - type: Fixtures
-    fixtures:
-      area:
-        shape: !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
   - type: PlacementReplacement
     key: areas
   - type: Area
-  - type: Tag
-    tags:
-    - ForceFixRotations
 
 - type: entity
   abstract: true
@@ -35,4 +28,4 @@
   components:
   - type: Sprite
     state: station
-  # maybe do something with this in the future
+  - type: StationArea

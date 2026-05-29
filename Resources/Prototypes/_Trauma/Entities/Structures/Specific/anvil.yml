@@ -1,0 +1,48 @@
+# TODO: dont use a fucking lathe...
+- type: entity
+  parent: [ BaseMetallicSteel, BaseMachine ]
+  id: AnvilComplete
+  name: anvil
+  description: Use this to make ingots into the desired creation.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Forging/anvil.rsi
+    state: icon
+  - type: ForgingAnvil
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 10000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 3
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: ActivatableUI
+    key: enum.AnvilUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.AnvilUiKey.Key:
+        type: ForgingAnvilBUI
+  # TODO: automation signal port to create the last item
+  - type: Construction
+    graph: Anvil
+    node: anvil
+  - type: PlaceableSurface
+
+- type: entity
+  categories: [ Debug, DoNotMap ]
+  parent: AnvilComplete
+  id: AnvilDebug
+  name: debug anvil
+  description: Forge anything you want from thin air using a single punch.
+  components:
+  - type: ForgingAnvil
+    costScale: 0
+    workScale: 0

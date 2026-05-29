@@ -2,7 +2,6 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Lollypop;
 

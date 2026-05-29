@@ -9,6 +9,11 @@
   name: atmospherics hardsuit helmet # Goob edit
   description: A special hardsuit helmet designed for working in low-pressure and high-temperature environments. # Goob edit
   components:
+  # <Trauma>
+  - type: EyeProtection
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/atmospherics.rsi
     layers:
@@ -65,7 +70,6 @@
         Piercing: 0.9
         Heat: 0.8
         Radiation: 0.15
-  - type: EyeProtection # goob - do we even still use this suit
   - type: Tag
     tags:
     - CorgiWearable
@@ -78,6 +82,11 @@
   name: engineering hardsuit helmet # Goob edit
   description: An engineering hardsuit helmet designed for working in low-pressure, highly radioactive environments. # Goob edit
   components:
+  # <Trauma>
+  - type: EyeProtection
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering.rsi
   - type: Clothing
@@ -93,7 +102,6 @@
         Shock: 0.5
         Caustic: 0.7
         Radiation: 0.05
-  - type: EyeProtection # goob
   - type: Tag
     tags:
     - CorgiWearable
@@ -168,6 +176,10 @@
   name: salvage hardsuit helmet # Goob edit
   description: A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating for wildlife encounters and dual floodlights.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/salvage.rsi
   - type: Clothing
@@ -199,6 +211,10 @@
   name: goliath hardsuit helmet # Goob edit
   description: A sturdy hardsuit helmet, infused with a goliath's hide and an eerie, unblinking eye cut from its mass. # Goob edit
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/goliathhelm.rsi
     layers:
@@ -266,6 +282,10 @@
   name: salvager maxim helmet
   description: A predication of decay washes over your mind.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/maxim.rsi
   - type: Clothing
@@ -279,7 +299,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.65
@@ -295,6 +314,12 @@
   name: security hardsuit helmet
   description: Armored hardsuit helmet for security needs.
   components:
+  # <Trauma>
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security.rsi
   - type: Clothing
@@ -310,7 +335,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.65
@@ -318,8 +342,6 @@
         Piercing: 0.65
         Heat: 0.8
         Caustic: 0.7
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
   - type: Tag
     tags:
     - CorgiWearable
@@ -332,6 +354,12 @@
   name: brigmedic hardsuit helmet # Goob edit
   description: The lightweight helmet of the brigmedic hardsuit. Protects against viruses, and clowns.
   components:
+  # <Trauma>
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+    damageCoefficient: 0.7
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/brigmedic.rsi
   - type: Clothing
@@ -350,8 +378,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
 
 #Warden's Hardsuit
 - type: entity
@@ -360,6 +386,10 @@
   name: warden's hardsuit helmet # Goob edit
   description: A modified riot helmet. Oddly comfortable.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security-warden.rsi
   - type: Clothing
@@ -375,7 +405,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.45
@@ -393,6 +422,12 @@
   name: captain's spacesuit helmet # Goob edit
   description: Special spacesuit helmet, made for the captain of the station. # Goob edit
   components:
+  # <Trauma>
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+    damageCoefficient: 0.65
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/capspace.rsi
   - type: Clothing
@@ -400,15 +435,12 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
   - type: Armor
     traumaDeductions:
       Dismemberment: 0.3
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.9 #Goob - Modsuit Rebalance start
@@ -429,6 +461,10 @@
   name: chief engineer's hardsuit helmet # Goob edit
   description: Special hardsuit helmet, made for the chief engineer of the station. # Goob edit
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
@@ -487,6 +523,10 @@
   name: experimental research hardsuit helmet # Goob edit
   description: Lightweight hardsuit helmet that doesn't restrict your head movements. # Goob edit
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.55
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/rd.rsi
   - type: Clothing
@@ -519,6 +559,12 @@
   name: head of security's hardsuit helmet # Goob edit
   description: Security hardsuit helmet with the latest top secret NT-HUD software. Belongs to the HoS. # Goob edit
   components:
+  # <Trauma>
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/security-red.rsi
   - type: Clothing
@@ -534,7 +580,6 @@
       OrganDamage: 0.3
       BoneDamage: 0.3
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.7
@@ -543,8 +588,6 @@
         Heat: 0.8
         Radiation: 0.5
         Caustic: 0.5
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
 
 #Luxury Mining Hardsuit
 - type: entity
@@ -554,6 +597,10 @@
   description: A refurbished mining hardsuit helmet, fitted with satin cushioning and an extra (non-functioning) antenna, because you're that extra. # Goob edit
   categories: [ DoNotMap ]
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/luxury.rsi
   - type: Clothing
@@ -581,6 +628,12 @@
   name: blood-red hardsuit helmet # Goob edit
   description: A heavily armored helmet designed for work in special operations. Property of Gorlex Marauders.
   components:
+  # <Trauma>
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndicate.rsi
   - type: Clothing
@@ -596,17 +649,13 @@
       OrganDamage: 0.5
       BoneDamage: 0.5
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Radiation: 0.5
-        Caustic: 0.5
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
+        Blunt: 0.3 # Trauma, was 0.5
+        Slash: 0.3 # Trauma, was 0.5
+        Piercing: 0.3 # Trauma, was 0.5
+        Heat: 0.3 # Trauma, was 0.5
+        Radiation: 0.3 # Trauma, was 0.5
   - type: Tag
     tags:
     - CorgiWearable
@@ -629,8 +678,12 @@
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitSyndieElite
   name: syndicate elite hardsuit helmet # Goob edit
-  description: An elite version of the blood-red hardsuit's helmet, with improved armor and fireproofing. Property of Gorlex Marauders. # Goob edit
+  description: An elite version of the blood-red hardsuit's helmet, with heat-resistant armor and fireproofing. Property of Gorlex Marauders. # Trauma - align desc with resistances
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndieelite.rsi
   - type: Clothing
@@ -651,15 +704,14 @@
       OrganDamage: 0.5
       BoneDamage: 0.5
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.6
-        Heat: 0.25
+        Blunt: 0.8 # Trauma, was 0.6
+        Slash: 0.8 # Trauma, was 0.6
+        Piercing: 0.8 # Trauma, was 0.6
+        Heat: 0.3 # Trauma, was 0.6
         Radiation: 0.01
-        Caustic: 0.4
+        # Caustic: 0.4 # Trauma
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
   - type: Tag
@@ -674,6 +726,12 @@
   name: syndicate hardsuit helmet # Goob edit
   description: A bulked up version of the blood-red hardsuit's helmet, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights. # Goob edit
   components:
+  # <Trauma>
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
   - type: Clothing
@@ -689,7 +747,6 @@
       OrganDamage: 0.6
       BoneDamage: 0.6
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.4
@@ -698,8 +755,6 @@
         Heat: 0.5
         Radiation: 0.2
         Caustic: 0.4
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
   - type: Tag
     tags:
     - CorgiWearable
@@ -712,6 +767,10 @@
   name: cybersun juggernaut helmet
   description: Made of compressed red matter, this helmet was designed in the Tau chromosphere facility.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/cybersun.rsi
   - type: Clothing
@@ -725,7 +784,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.2
@@ -733,7 +791,7 @@
         Piercing: 0.2
         Heat: 0.2
         Radiation: 0.2
-        Caustic: 0.2
+        # Caustic: 0.2 # Trauma
   - type: FlashImmunity # Goobstation
   - type: FlashSoundSuppression # Goobstation
   - type: Tag
@@ -748,6 +806,10 @@
   name: wizard hardsuit helmet # Goob edit
   description: A bizarre gem-encrusted helmet that radiates magical energies.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/wizard.rsi
   - type: Clothing
@@ -765,7 +827,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.4
@@ -789,6 +850,10 @@
   name: organic space helmet
   description: A spaceworthy biomass of pressure and temperature resistant tissue.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/lingspacehelmet.rsi
   - type: Clothing
@@ -809,6 +874,10 @@
   suffix: Pirate
   description: A deep space EVA helmet, very heavy but provides good protection.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.7
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/pirateeva.rsi
   - type: Clothing
@@ -833,6 +902,10 @@
   suffix: Pirate
   description: A special hardsuit helmet, made for the captain of a pirate ship. # Goob edit
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
   - type: ToggleableVisuals
@@ -966,6 +1039,12 @@
   name: CBURN exosuit helmet
   description: A pressure resistant and fireproof hood worn by special cleanup units.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.7
+  - type: FlashImmunity
+  - type: FlashSoundSuppression
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/cburn.rsi
     layers:
@@ -1007,8 +1086,6 @@
         Caustic: 0.1
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.75
-  - type: FlashImmunity # Goobstation
-  - type: FlashSoundSuppression # Goobstation
 
 #Deathsquad Hardsuit
 - type: entity
@@ -1017,6 +1094,10 @@
   name: deathsquad hardsuit helmet # Goob edit
   description: A robust helmet for special operations.
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  # </Trauma>
   - type: BreathMask
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/deathsquad.rsi
@@ -1033,7 +1114,6 @@
       OrganDamage: 1
       BoneDamage: 1
       VeinsDamage: 1
-      NerveDamage: 1
     modifiers:
       coefficients:
         Blunt: 0.15 # Best armor in the game - Yeah no shit.
@@ -1070,6 +1150,10 @@
   name: clown hardsuit helmet # Goob edit
   description: A clown hardsuit helmet. # Goob edit
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  # </Trauma>
   - type: BreathMask
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/clown.rsi
@@ -1083,7 +1167,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -1109,7 +1192,6 @@
       OrganDamage: 0.2
       BoneDamage: 0.2
       VeinsDamage: 0
-      NerveDamage: 0
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -1124,6 +1206,10 @@
   name: Santa's hardsuit helmet # Goob edit
   description: A festive-looking hardsuit helmet that provides the jolly gift-giver protection from low-pressure environments. # Goob edit
   components:
+  # <Trauma>
+  - type: ExplosionResistance
+    damageCoefficient: 0.85
+  # </Trauma>
   - type: BreathMask
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/santahelm.rsi

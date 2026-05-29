@@ -28,7 +28,10 @@
                     </BoxContainer>
                 </BoxContainer>
             </Control>
-            <ItemList Name="RecipeStepList" Access="Public" VerticalExpand="True" Margin="0 0 0 5"/>
+            <ItemList Name="RecipeStepList" Access="Public" VerticalExpand="True" SizeFlagsStretchRatio="3" Margin="0 0 0 5"/>
+            <!-- Trauma: added construction list requirements -->
+            <BoxContainer Orientation="Vertical" Name="RecipeConstructionList" Access="Public" VerticalExpand="True" SizeFlagsStretchRatio="1" Margin="0 0 0 5"/>
+            <!-- /Trauma -->
             <BoxContainer Orientation="Vertical">
                 <Button Name="BuildButton" Disabled="True" ToggleMode="True"
                         VerticalExpand="True" SizeFlagsStretchRatio="0.5"/>

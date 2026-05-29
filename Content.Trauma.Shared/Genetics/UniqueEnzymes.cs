@@ -2,7 +2,6 @@
 
 using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Genetics;
 

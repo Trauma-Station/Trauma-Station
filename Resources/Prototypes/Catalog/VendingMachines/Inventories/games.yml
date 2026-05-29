@@ -21,3 +21,10 @@
     Basketball: 1
     FoodSnackBoritos: 3
     DrinkSpaceMountainWindCan: 3
+    BaseBallBat: 1 # Trauma
+  # <Trauma>
+  emaggedInventory:
+    WeaponRussianRevolver: 1
+    MagazineBoxMagnum: 1
+    Handcuffs: 1
+  #</Trauma>

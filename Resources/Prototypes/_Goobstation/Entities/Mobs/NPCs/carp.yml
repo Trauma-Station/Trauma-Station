@@ -46,3 +46,6 @@
     - type: HTN
       rootTask:
         task: DragonCarpCompound
+    - type: FadingTimedDespawn # Prevents carps from getting stuck and resupplies them
+      lifetime: 180 # 3 minutes
+      fadeOutTime: 3

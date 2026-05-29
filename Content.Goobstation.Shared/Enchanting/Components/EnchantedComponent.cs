@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Shared.Enchanting.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Enchanting.Components;
 

@@ -1,9 +1,10 @@
-# Base component for edible food-like items
+#
+# Base component for edible food-like items, different from BaseDrink
 #
 - type: entity
   abstract: true
-  parent: BaseItem
-  id: EdibleBase
+  parent: [BaseItem, SolutionFood, SolutionSmall]
+  id: FoodBase
   components:
   - type: FlavorProfile
     flavors:
@@ -19,28 +20,10 @@
 #
 - type: entity
   abstract: true
-  parent: EdibleBase
-  id: FoodBase
+  parent: BasePerishableFood # Trauma - most food is perishable
+  id: FoodBaseTrash
   components:
   - type: SpaceGarbage
-# <Trauma>
-  - type: Perishable
-    rotAfter: 600
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
-  - type: Temperature
-    currentTemperature: 290
-    specificHeat: 25
-  - type: TemperatureDamage
-  - type: InternalTemperature
-    thickness: 0.02
-    area: 0.02
-    conductivity: 15
-  - type: BurnableFood
-    burnTemp: 550
-#</Trauma>
 
 # This base type is used to cover all of the "obvious" things that should be doable to open-package food.
 # Practically this means injection.
@@ -48,7 +31,7 @@
 
 - type: entity
   abstract: true
-  parent: FoodBase
+  parent: FoodBaseTrash
   id: FoodInjectableBase
   components:
   - type: InjectableSolution

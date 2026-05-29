@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Riggle <27156122+RigglePrime@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
 using System.Numerics;
 using Content.Shared.Administration.Notes;
@@ -23,8 +15,8 @@ namespace Content.Client.Administration.UI.Notes;
 [GenerateTypedNameReferences]
 public sealed partial class AdminNotesControl : Control
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IEntitySystemManager _entitySystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public event Action<int, NoteType, string, NoteSeverity?, bool, DateTime?>? NoteChanged;
     public event Action<NoteType, string, NoteSeverity?, bool, DateTime?>? NewNoteEntered;
@@ -63,7 +55,8 @@ public sealed partial class AdminNotesControl : Control
 
     private void OnNewNoteButtonPressed(BaseButton.ButtonEventArgs obj)
     {
-        var noteEdit = new NoteEdit(null, PlayerName, CanCreate, CanEdit);
+        var noteEdit = new NoteEdit(null, PlayerName, CanCreate, CanEdit,
+            CanWatchlist); // Trauma
         noteEdit.SubmitPressed += OnNoteSubmitted;
         noteEdit.OpenCentered();
     }
@@ -89,7 +82,8 @@ public sealed partial class AdminNotesControl : Control
                 return;
             }
 
-            var noteEdit = new NoteEdit(input.Note, PlayerName, CanCreate, CanEdit);
+            var noteEdit = new NoteEdit(input.Note, PlayerName, CanCreate, CanEdit,
+                CanWatchlist); // Trauma
             noteEdit.SubmitPressed += OnNoteSubmitted;
             noteEdit.OpenCentered();
         };
@@ -207,11 +201,13 @@ public sealed partial class AdminNotesControl : Control
         ShowMoreButton.Visible = false;
     }
 
-    public void SetPermissions(bool create, bool delete, bool edit)
+    public void SetPermissions(bool create, bool delete, bool edit,
+        bool watchlist) // Trauma
     {
         CanCreate = create;
         CanDelete = delete;
         CanEdit = edit;
+        CanWatchlist = watchlist; // Trauma
         NewNoteButton.Visible = create;
         NewNoteButton.Disabled = !create;
     }

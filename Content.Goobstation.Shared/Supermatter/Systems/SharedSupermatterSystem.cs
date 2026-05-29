@@ -3,11 +3,10 @@
 using System;
 using Content.Goobstation.Shared.Supermatter.Components;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Supermatter.Systems;
 
-public abstract class SharedSupermatterSystem : EntitySystem
+public abstract partial class SharedSupermatterSystem : EntitySystem
 {
     public override void Initialize()
     {

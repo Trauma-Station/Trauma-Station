@@ -368,6 +368,7 @@
     graph: ModularGrenadeGraph
     node: emptyCase
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -406,7 +407,7 @@
   - type: EmpOnTrigger
     keysIn:
     - trigger
-    range: 5.5
+    range: 2.5 # Trauma, was 5.5
     energyConsumption: 50000
   - type: DeleteOnTrigger
     keysIn:

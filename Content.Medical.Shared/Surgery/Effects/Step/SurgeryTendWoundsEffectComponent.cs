@@ -2,8 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.Surgery.Effects.Step;
 

@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Text.Json.Serialization;
 
 namespace Content.Server.Administration.Managers;
@@ -13,7 +7,6 @@ public sealed partial class BanManager
     // Responsible for ban notification handling.
     // Ban notifications are sent through the database to notify the entire server group that a new ban has been added,
     // so that people will get kicked if they are banned on a different server than the one that placed the ban.
-    //
     // Ban notifications are currently sent by a trigger in the database, automatically.
 
     /// <summary>
@@ -23,7 +16,6 @@ public sealed partial class BanManager
 
     // Rate limit to avoid undue load from mass-ban imports.
     // Only process 10 bans per 30 second interval.
-    //
     // I had the idea of maybe binning this by postgres transaction ID,
     // to avoid any possibility of dropping a normal ban by coincidence.
     // Didn't bother implementing this though.

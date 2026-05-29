@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Knowledge.Components;
 

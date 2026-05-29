@@ -57,9 +57,10 @@
   components:
   - type: Sprite
     state: bar
+  - type: LuckyWinnerTarget
 
 - type: entity
-  parent: AreaBar
+  parent: BaseAreaService
   id: AreaBarBackRoom
   name: bar back room
   components:

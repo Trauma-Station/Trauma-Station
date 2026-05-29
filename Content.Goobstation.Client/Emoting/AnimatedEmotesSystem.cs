@@ -1,29 +1,22 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using System.Numerics;
 using Content.Client.Animations;
 using Content.Client.DamageState;
 using Content.Goobstation.Shared.Emoting;
-using Content.Shared._Goobstation.Wizard.SupermatterHalberd;
-using Content.Shared.Chat.Prototypes;
+using Content.Trauma.Common.Wizard;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Animations;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Emoting;
 
 public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _anim = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly RaysSystem _rays = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private AnimationPlayerSystem _anim = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private CommonRaysSystem _rays = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private const int TweakAnimationDurationMs = 1100; // 11 frames * 100ms per frame
     private const int FlexAnimationDurationMs = 200 * 7; // 7 frames * 200ms per frame
@@ -75,7 +68,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 
     private void OnAutoHandleState(Entity<AnimatedEmotesComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (_proto.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is {} ev)
+        if (_proto.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is { } ev)
             RaiseLocalEvent(ent, ev);
     }
 
@@ -156,7 +149,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     }
     private void OnTweak(Entity<AnimatedEmotesComponent> ent, ref AnimationTweakEmoteEvent args)
     {
-        if (ent.Comp.TweakState is not {} tweak)
+        if (ent.Comp.TweakState is not { } tweak)
             return;
 
         var a = new Animation
@@ -179,10 +172,10 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 
     private void OnFlex(Entity<AnimatedEmotesComponent> ent, ref AnimationFlexEmoteEvent args)
     {
-        if (ent.Comp.FlexState is not {} flex ||
-            ent.Comp.FlexDefaultState is not {} defaultState ||
-            ent.Comp.FlexDamageState is not {} damage ||
-            ent.Comp.FlexDefaultDamageState is not {} defaultDamage)
+        if (ent.Comp.FlexState is not { } flex ||
+            ent.Comp.FlexDefaultState is not { } defaultState ||
+            ent.Comp.FlexDamageState is not { } damage ||
+            ent.Comp.FlexDefaultDamageState is not { } defaultDamage)
         {
             return;
         }

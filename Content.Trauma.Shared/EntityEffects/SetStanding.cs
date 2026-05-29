@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.Standing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -27,9 +26,9 @@ public sealed partial class SetStanding : EntityEffectBase<SetStanding>
         => Loc.GetString("entity-effect-guidebook-set-standing", ("chance", Probability), ("standing", Standing));
 }
 
-public sealed class SetStandingEffectSystem : EntityEffectSystem<StandingStateComponent, SetStanding>
+public sealed partial class SetStandingEffectSystem : EntityEffectSystem<StandingStateComponent, SetStanding>
 {
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     protected override void Effect(Entity<StandingStateComponent> ent, ref EntityEffectEvent<SetStanding> args)
     {

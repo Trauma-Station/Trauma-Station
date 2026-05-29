@@ -13,8 +13,6 @@
     partnerWhitelist: !type:EntityWhitelist
   - type: ReproductivePartner
   - type: Temperature
-  - type: Consciousness
-    threshold: 95
   - type: Pacified
   - type: Xenomorph
     caste: Drone
@@ -23,6 +21,7 @@
     hungerPerArmyUse: 25
   - type: Dragon
     carpRiftHealing: !type:DamageSpecifier
+  - type: DiseaseCarrier
 
 - type: componentRegistry
   id: ComponentsToRemoveOnUnGhoulify
@@ -31,8 +30,6 @@
   - type: HereticMinion
   - type: WeakToHoly
   - type: GhostTakeoverAvailable
-  - type: VoicelessDead
   - type: HereticBladeUserBonusDamage
-  - type: GhoulDeconvert
   - type: HolyIgniteOnCollide
   - type: HolyFlammable

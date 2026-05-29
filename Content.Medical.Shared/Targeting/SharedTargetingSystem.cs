@@ -7,10 +7,10 @@ using Content.Shared.Humanoid;
 
 namespace Content.Medical.Shared.Targeting;
 
-public abstract class SharedTargetingSystem : EntitySystem
+public abstract partial class SharedTargetingSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     private EntityQuery<TargetingComponent> _query;
 

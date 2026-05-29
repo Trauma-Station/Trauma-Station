@@ -3,7 +3,6 @@
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using System.Text;
 

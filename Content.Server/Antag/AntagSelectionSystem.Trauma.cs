@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Antag.Components;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.Antag;
 
@@ -14,7 +17,7 @@ namespace Content.Server.Antag;
 /// </summary>
 public sealed partial class AntagSelectionSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public void UnequipOldGear(EntityUid player)
     {
@@ -40,41 +43,40 @@ public sealed partial class AntagSelectionSystem
     }
 
     /// <summary>
-    /// Get all definition blacklists from sessions that have been preselected for antag. | GOOBSTATION
+    /// Type-erased ForceMakeAntag overload
     /// </summary>
-    public Dictionary<ICommonSession, List<ProtoId<JobPrototype>>> GetPreSelectedAntagSessionsWithBlacklist(AntagSelectionDefinition? except = null)
+    public void ForceMakeAntag(ICommonSession player, [ForbidLiteral] EntProtoId defaultRule, [ForbidLiteral] string comp)
     {
-        var result = new Dictionary<ICommonSession, List<ProtoId<JobPrototype>>>();
-        var query = QueryAllRules();
+        var rule = ForceGetGameRuleEnt(defaultRule, comp);
 
-        while (query.MoveNext(out var uid, out var comp, out _))
+        if (TryAssignNextAvailableAntag(rule, player))
+            return;
+
+        if (rule.Comp.Antags.LastOrDefault() is not { } antag || !Proto.Resolve(antag.Proto, out var proto))
+            return;
+
+        PreSelectSession(rule, proto, player);
+        TryInitializeAntag(rule, proto, player);
+    }
+
+    /// <summary>
+    /// Type-erased ForceGetGameRuleEnt overload
+    /// </summary>
+    public Entity<AntagSelectionComponent> ForceGetGameRuleEnt([ForbidLiteral] EntProtoId id, [ForbidLiteral] string comp)
+    {
+        var type = Factory.GetRegistration(comp).Type;
+        var query = EntityManager.AllEntityQueryEnumerator(type);
+        while (query.MoveNext(out var uid, out _))
         {
-            if (HasComp<EndedGameRuleComponent>(uid))
-                continue;
-
-            foreach (var def in comp.Definitions)
-            {
-                if (def.Equals(except) || !comp.PreSelectedSessions.TryGetValue(def, out var sessions))
-                    continue;
-
-                foreach (var session in sessions)
-                {
-                    // Get the blacklisted jobs for this antag definition
-                    var blacklist = def.JobBlacklist ?? new List<ProtoId<JobPrototype>>();
-
-                    // If session already exists, merge the blacklists
-                    if (result.TryGetValue(session, out var existingBlacklist))
-                    {
-                        existingBlacklist.AddRange(blacklist);
-                    }
-                    else
-                    {
-                        result[session] = new List<ProtoId<JobPrototype>>(blacklist);
-                    }
-                }
-            }
+            if (TryComp<AntagSelectionComponent>(uid, out var ontag))
+                return (uid, ontag);
         }
 
-        return result;
+        var ruleEnt = GameTicker.AddGameRule(id);
+        RemComp<LoadMapRuleComponent>(ruleEnt);
+        var antag = Comp<AntagSelectionComponent>(ruleEnt);
+        antag.AssignmentHandled = true; // don't do normal selection.
+        GameTicker.StartGameRule(ruleEnt);
+        return (ruleEnt, antag);
     }
 }

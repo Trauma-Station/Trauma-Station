@@ -1,32 +1,17 @@
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Abbey Armbruster <abbeyjarmb@gmail.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 GreaseMonk <1354802+GreaseMonk@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Audio;
 
-public abstract class SharedAmbientSoundSystem : EntitySystem
+public abstract partial class SharedAmbientSoundSystem : EntitySystem
 {
-    private EntityQuery<AmbientSoundComponent> _query;
+    [Dependency] private EntityQuery<AmbientSoundComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<AmbientSoundComponent, ComponentGetState>(GetCompState);
         SubscribeLocalEvent<AmbientSoundComponent, ComponentHandleState>(HandleCompState);
-
-        _query = GetEntityQuery<AmbientSoundComponent>();
     }
 
     public virtual void SetAmbience(EntityUid uid, bool value, AmbientSoundComponent? ambience = null)

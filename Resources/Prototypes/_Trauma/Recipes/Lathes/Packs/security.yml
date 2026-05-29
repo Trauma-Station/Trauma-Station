@@ -17,3 +17,8 @@
   - EDAiCoreElectronics
   - EDIFFElectronics
   - EDWeaponControlsElectronics
+
+- type: latheRecipePack
+  id: TraumaSecurityEquipmentStatic
+  recipes:
+  - ClothingOuterStraightjacket

@@ -37,3 +37,7 @@
   contrabandInventory:
     ToyFigurineCaptain: 1
     ToyFigurineHeadOfPersonnel: 1
+  # <Trauma>
+  emaggedInventory:
+    PenCentcom: 1
+  # </Trauma>

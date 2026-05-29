@@ -6,14 +6,13 @@ using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod;
 
-public sealed class NullrodTransformSystem : EntitySystem
+public sealed partial class NullrodTransformSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public static readonly ProtoId<TagPrototype> NullrodTag = "Nullrod";
 

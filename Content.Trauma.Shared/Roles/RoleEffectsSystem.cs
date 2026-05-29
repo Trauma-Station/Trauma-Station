@@ -5,9 +5,9 @@ using Content.Trauma.Common.Roles;
 
 namespace Content.Trauma.Shared.Roles;
 
-public sealed class RoleEffectsSystem : EntitySystem
+public sealed partial class RoleEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -26,6 +26,8 @@ public sealed class RoleEffectsSystem : EntitySystem
             return;
 
         _effects.ApplyEffects(mob, ent.Comp.Added);
+        if (ent.Comp.SingleUse)
+            RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnRemoved(Entity<RoleEffectsComponent> ent, ref RoleGotRemovedEvent args)

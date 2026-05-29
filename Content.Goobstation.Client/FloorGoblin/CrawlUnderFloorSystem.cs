@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.FloorGoblin;
-using Content.Shared._Starlight.VentCrawling;
-using Content.Shared.VentCrawler.Tube.Components;
-using Robust.Client.GameObjects;
+using Content.Trauma.Common.VentCrawling;
 using Robust.Shared.Map.Components;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
@@ -11,9 +9,9 @@ namespace Content.Goobstation.Client.FloorGoblin;
 
 public sealed partial class HideUnderFloorAbilitySystem : SharedCrawlUnderFloorSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private readonly Dictionary<EntityUid, (EntityUid Grid, Vector2i Tile)> _lastCell = new();
 

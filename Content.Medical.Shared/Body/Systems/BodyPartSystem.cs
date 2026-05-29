@@ -5,7 +5,6 @@ using Content.Shared.Body;
 using Content.Shared.Gibbing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Body;
 
@@ -14,21 +13,17 @@ namespace Content.Medical.Shared.Body;
 /// </summary>
 public sealed partial class BodyPartSystem : CommonBodyPartSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyCacheSystem _cache = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    private EntityQuery<BodyPartComponent> _query = default!;
-    private EntityQuery<ChildOrganComponent> _childQuery = default!;
-    private EntityQuery<OrganComponent> _organQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyCacheSystem _cache = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityQuery<BodyPartComponent> _query = default!;
+    [Dependency] private EntityQuery<ChildOrganComponent> _childQuery = default!;
+    [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<BodyPartComponent>();
-        _childQuery = GetEntityQuery<ChildOrganComponent>();
-        _organQuery = GetEntityQuery<OrganComponent>();
 
         SubscribeLocalEvent<BodyPartComponent, OrganGotInsertedEvent>(OnPartInserted);
         SubscribeLocalEvent<BodyPartComponent, OrganGotRemovedEvent>(OnPartRemoved);

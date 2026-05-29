@@ -1,0 +1,47 @@
+- type: gameMap
+  id: Reach
+  mapName: 'Reach'
+  mapPath: /Maps/_Trauma/reach.yml
+  minPlayers: 0
+  maxPlayers: 10
+  stations:
+    Reach:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: '{0} Reach Transport {1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: 'SC'
+      - type: StationEmergencyShuttle
+        emergencyShuttlePath: /Maps/Shuttles/emergency_cluster.yml
+      - type: StationJobs
+        availableJobs:
+          # Command
+          Captain: [ 1, 1 ]
+          NanotrasenRepresentative: [ 1, 1 ]
+          # Cargo
+          CargoTechnician: [ 1, 1 ]
+          SalvageSpecialist: [ 1, 2 ]
+          # Engineering
+          AtmosphericTechnician: [ 1, 1 ]
+          StationEngineer: [ 1, 2 ]
+          # Medical
+          MedicalDoctor: [ 1, 2 ]
+          Chemist: [ 1, 1 ]
+          # Service
+          Bartender: [ 1, 1 ]
+          Botanist: [ 1, 1 ]
+          Chef: [ 1, 1 ]
+          # Science
+          Scientist: [ 1, 1 ]
+          # Security
+          HeadOfSecurity: [ 1, 1 ]
+          SecurityOfficer: [ 1, 2 ]
+          # Civilian
+          Janitor: [ 1, 1 ]
+          Musician: [ 1, 1 ]
+          Passenger: [ -1, -1 ]
+      - type: StationBlobConfig
+        stageBegin: 15
+        stageCritical: 200
+        stageTheEnd: 400

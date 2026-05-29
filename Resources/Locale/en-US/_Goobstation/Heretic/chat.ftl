@@ -1,3 +1,6 @@
+blade-arena-crit-message = The mansus is pleased with your performance, you may leave now.
+blade-arena-crit-message-heretic = You have done well, you may leave now.
+
 # influence gain and fracture examine messages must have newlines because otherwise they wouldn't fit in chat window
 
 influence-base-message = [textshader="{$text}" font="DefaultBold" size={$size} shader="Eldritch"]

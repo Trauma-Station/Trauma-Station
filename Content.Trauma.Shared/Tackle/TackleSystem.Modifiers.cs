@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Wizard.Mutate;
+using Content.Trauma.Shared.Wizard.Mutate;
 using Content.Shared.Clumsy;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs;
@@ -29,12 +29,12 @@ public sealed partial class TackleSystem
         var total = _dmg.GetTotalDamage((ent.Owner, damageable));
         if (_threshold.TryGetThresholdForState(ent, MobState.SoftCrit, out var threshold) ||
             _threshold.TryGetThresholdForState(ent, MobState.Critical, out threshold) && threshold > 0f)
-            args.Modifier -= (total * threshold.Value / 2).Float();
+            args.Modifier -= (total / threshold.Value / 2).Float();
     }
 
     private void OnStamina(Entity<StaminaComponent> ent, ref CalculateTackleModifierEvent args)
     {
-        args.Modifier -= ent.Comp.StaminaDamage / ent.Comp.CritThreshold * 2f;
+        args.Modifier -= ent.Comp.StaminaDamage / ent.Comp.CritThreshold;
     }
 
     private void OnMass(Entity<PhysicsComponent> ent, ref CalculateTackleModifierEvent args)

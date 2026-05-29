@@ -1,3 +1,6 @@
+reagent-name-cement = cement
+reagent-desc-cement = A chemical used for making bricks.
+
 reagent-name-potassium-sulfate = potassium sulfate
 reagent-desc-potassium-sulfate = Potassium in a water-soluble form, providing both potassium and sulfur. Used primarily as a fertilizer for plants.
 

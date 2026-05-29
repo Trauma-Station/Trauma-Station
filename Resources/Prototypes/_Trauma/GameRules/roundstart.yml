@@ -9,15 +9,17 @@
       prob: 0.5
     - id: Devil
       prob: 0.02
-    - id: Shadowling
+    - id: ShadowlingRoundstart
+      prob: 0.02
+    - id: WraithRoundstart
       prob: 0.02
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseRoundstartAntagRule
   id: Insurgency
   components:
   - type: GameRule
-    minPlayers: 10 # no insurgents on deadpop
+    minPlayers: 5 # no insurgents on deadpop
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
@@ -29,107 +31,16 @@
     speciesOverride: Human
     speciesOverrideBlacklist:
     - Plasmaman # instantly dies
+  - type: InsurgencyRule
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn # need to move them to their shittle
     agentName: insurgent-round-end-agent-name
-    definitions:
-    - prefRoles: [ Insurgent ]
-      spawnerPrototype: SpawnPointInsurgent
-      startingGear: Insurgent
-      unequipOldGear: true
-      max: 8
+    antags:
+    - !type:LinearAntagCount
+      proto: Insurgent
+      range:
+        min: 1
+        max: 4
       playerRatio: 10
-      roleLoadout:
-      - RoleSurvivalStandard
-      components:
-      - type: RandomHumanoidAppearance
-        randomizeName: true
-      mindRoles:
-      - MindRoleInsurgent
-
-- type: entity
-  parent: DuoAbductorSpawn
-  id: DuoAbductorRoundstart
-  components:
-  # I LOVE GOIDA COPY PASTING THE ENTIRE THING
-  # this just has ghost roles removed, pref roles added and players are picked roundstart
-  - type: AntagSelection
-    selectionTime: PrePlayerSpawn
-    definitions:
-    - spawnerPrototype: AbductorScientistSpawner
-      prefRoles: [ AbductorScientistAntag ]
-      fallbackRoles: [ AbductorAgentAntag ]
-      min: 1
-      max: 1
-      pickPlayer: true
-      unequipOldGear: true
-      startingGear: AbductorScientistGear
-      briefing:
-        text: abductor-role-greeting
-        color: Green
-        sound: /Audio/_Shitmed/Misc/abductor.ogg
-      components:
-      - type: Abductor
-      - type: ActionGrant
-        actions:
-        - ActionReturnToShip
-      - type: NpcFactionMember
-        factions:
-        - SimpleHostile
-      - type: RandomMetadata
-        nameSegments:
-        - AbductorScientistPrefix
-        - AbductorNames
-        nameFormat: name-format-standard
-      - type: Tag
-        tags:
-        - Abductor
-        - AbductorScientist
-        - CanPilot
-        - FootstepSound
-        - DoorBumpOpener
-      - type: AbductorScientist
-      - type: SurgeryIgnoreClothing
-      - type: Sanitized
-      - type: SurgerySpeedModifier
-        speedModifier: 1.5
-      mindRoles:
-      - MindRoleAbductorScientist
-    - spawnerPrototype: AbductorAgentSpawner
-      prefRoles: [ AbductorAgentAntag ]
-      fallbackRoles: [ AbductorScientistAntag ]
-      min: 1
-      max: 1
-      pickPlayer: true
-      unequipOldGear: true
-      startingGear: AbductorAgentGear
-      briefing:
-        text: abductor-role-greeting
-        color: Green
-        sound: /Audio/_Shitmed/Misc/abductor.ogg
-      components:
-      - type: Abductor
-      - type: ActionGrant
-        actions:
-        - ActionReturnToShip
-      - type: NpcFactionMember
-        factions:
-        - SimpleHostile
-      - type: RandomMetadata
-        nameSegments:
-        - AbductorAgentPrefix
-        - AbductorNames
-        nameFormat: name-format-standard
-      - type: Tag
-        tags:
-          - Abductor
-          - AbductorScientist
-          - CanPilot
-          - FootstepSound
-          - DoorBumpOpener
-      - type: AbductorScientist # Should be removed when we have proper teleportation system
-      mindRoles:
-      - MindRoleAbductorAgent
 
 - type: entity
   parent: BaseGameRule
@@ -141,50 +52,27 @@
       prob: 0.5
 
 - type: entity
-  parent: BaseGameRule
-  id: HereticGamemode
-  components:
-  - type: HereticRule
-  - type: GameRule
-    minPlayers: 15
-  - type: AntagObjectives
-    objectives:
-    - HereticKnowledgeObjective
-    - HereticSacrificeObjective
-    - HereticSacrificeHeadObjective
-  - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    agentName: heretic-roundend-name
-    definitions:
-    - prefRoles: [ Heretic ]
-      max: 6
-      playerRatio: 10
-      lateJoinAdditional: true
-      jobBlacklist: [ Chaplain ]
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleHeretic
-
-- type: entity
-  parent: BaseGameRule
+  parent: [ BaseShadowlingRule, BaseRoundstartAntagRule ]
   id: ShadowlingGamemode
   components:
-  - type: ShadowlingRule
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ Shadowling ]
-      max: 3
+    antags:
+    - !type:LinearAntagCount
+      proto: Shadowling
+      range:
+        min: 1
+        max: 3
       playerRatio: 25
-      jobBlacklist: [ Chaplain ]
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleShadowling
-  - type: AntagObjectives
-    objectives:
-    - ShadowlingAscendObjective
+
+- type: entity
+  parent: TraitorReinforcement
+  id: TraitorReinforcementNukeOps
+  components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:NestedEffect
+      proto: InstallSkillChipNukie

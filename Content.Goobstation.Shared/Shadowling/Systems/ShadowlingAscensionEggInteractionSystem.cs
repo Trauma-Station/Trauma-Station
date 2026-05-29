@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Shadowling.Systems;
 /// <summary>
 /// This handles Ascension Egg interactions
 /// </summary>
-public sealed class ShadowlingAscensionEggInteractionSystem : EntitySystem
+public sealed partial class ShadowlingAscensionEggInteractionSystem : EntitySystem
 {
     public override void Initialize()
     {

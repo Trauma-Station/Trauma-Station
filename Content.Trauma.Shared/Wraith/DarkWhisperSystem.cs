@@ -10,14 +10,13 @@ namespace Content.Trauma.Shared.Wraith;
 /// <summary>
 /// Lets you talk through a selected target when you speak for a certain amount of seconds
 /// </summary>
-public sealed class DarkWhisperSystem : EntitySystem
+public sealed partial class DarkWhisperSystem : EntitySystem
 {
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-
-    private EntityQuery<DarkWhisperComponent> _darkWhisperQuery;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private EntityQuery<DarkWhisperComponent> _darkWhisperQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -28,8 +27,6 @@ public sealed class DarkWhisperSystem : EntitySystem
         SubscribeLocalEvent<DarkWhisperComponent, EntitySpokeEvent>(OnDarkWhisperSpoke);
 
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
-
-        _darkWhisperQuery = GetEntityQuery<DarkWhisperComponent>();
     }
 
     public override void Update(float frameTime)

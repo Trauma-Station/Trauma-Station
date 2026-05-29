@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseItem
+  id: PartCapacitor
+  name: capacitor
+  description: A capacitor for electronic devices.
+  components:
+  - type: Tag
+    tags:
+    - PartCapacitor
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/component_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/component_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/component_drop.ogg
+  - type: Sprite
+    sprite: Objects/Misc/stock_parts.rsi
+    state: adv_capacitor
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 12
+      Plastic: 12

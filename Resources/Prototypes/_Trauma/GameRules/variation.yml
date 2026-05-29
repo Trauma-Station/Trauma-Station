@@ -1,0 +1,6 @@
+- type: entity
+  parent: BasicDecalGraffitiVariationPass
+  id: RevolutionaryDecalGraffitiVariationPass
+  components:
+  - type: EntitySpawnVariationPass
+    tilesPerEntityAverage: 40 # 3x as common

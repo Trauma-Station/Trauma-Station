@@ -1,5 +1,5 @@
 - type: entity
-  parent: EdibleBase
+  parent: FoodBase
   id: FoodRot
   name: rotten slop
   description: Disgusting.
@@ -22,16 +22,15 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/rot.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
-        - ReagentId: Ipecac
-          Quantity: 7
-        - ReagentId: Mold
-          Quantity: 7
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 1
+      - ReagentId: Ipecac
+        Quantity: 7
+      - ReagentId: Mold
+        Quantity: 7
   - type: Item
     size: Tiny
     storedOffset: -2,1
@@ -49,6 +48,8 @@
       - ReagentId: RobustHarvest
         Quantity: 10
   - type: Damageable
+  - type: Injurable
+    damageContainer: Biological
   - type: DamageOverTime
     damage:
       types:

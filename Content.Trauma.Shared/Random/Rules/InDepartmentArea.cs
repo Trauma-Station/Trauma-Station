@@ -3,7 +3,6 @@
 using Content.Shared.Random.Rules;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.Areas;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Random.Rules;
 

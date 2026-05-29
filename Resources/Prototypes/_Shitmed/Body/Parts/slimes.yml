@@ -9,3 +9,5 @@
     slots:
     - Stomach # sentient slime core
     - Lungs # slime lungs
+  - type: Woundable
+    boneEntity: null

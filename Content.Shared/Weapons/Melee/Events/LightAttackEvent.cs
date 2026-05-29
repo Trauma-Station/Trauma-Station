@@ -1,9 +1,3 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
@@ -17,10 +11,12 @@ public sealed class LightAttackEvent : AttackEvent
 {
     public readonly NetEntity? Target;
     public readonly NetEntity Weapon;
+    public readonly bool IsLeftClick; // Trauma
 
-    public LightAttackEvent(NetEntity? target, NetEntity weapon, NetCoordinates coordinates) : base(coordinates)
+    public LightAttackEvent(NetEntity? target, NetEntity weapon, NetCoordinates coordinates, bool isLeftClick = true) : base(coordinates) // Trauma - isLeftClick
     {
         Target = target;
         Weapon = weapon;
+        IsLeftClick = isLeftClick; // Trauma
     }
 }

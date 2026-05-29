@@ -11,10 +11,9 @@
     - state: fill-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 2000
-        reagents:
-        - ReagentId: OleoresinCapsaicin
-          Quantity: 2000
+  - type: Solution
+    solution:
+      maxVol: 2000
+      reagents:
+      - ReagentId: OleoresinCapsaicin
+        Quantity: 2000

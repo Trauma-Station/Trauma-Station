@@ -56,6 +56,7 @@
 - type: entity
   parent: BaseSpeciesAppearance
   id: AppearanceMoth
+  categories: [ HideSpawnMenu ]
   name: moth appearance
   components:
   - type: Inventory
@@ -163,11 +164,15 @@
     allowedEmotes: ['Chitter', 'Squeak', 'Flap']
   - type: TypingIndicator
     proto: moth
+  - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_moth
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
       - ReagentId: InsectBlood
-        Quantity: 300
+        Quantity: 600
   #- type: DamageVisuals # Shitmed
   #  damageOverlayGroups:
   #    Brute:
@@ -214,11 +219,6 @@
   id: OrganMoth
   abstract: true
   suffix: Moth
-  # <Shitmed>
-  components:
-  - type: Damageable
-    damageModifierSet: Moth
-  # </Shitmed>
 
 - type: entity
   id: OrganMothMetabolizer

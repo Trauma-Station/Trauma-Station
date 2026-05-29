@@ -26,3 +26,5 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
   - type: Unremoveable
+  - type: FactionClothing
+    faction: Insurgent

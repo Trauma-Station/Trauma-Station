@@ -3,7 +3,6 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Tag;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.DeepFryer;
 

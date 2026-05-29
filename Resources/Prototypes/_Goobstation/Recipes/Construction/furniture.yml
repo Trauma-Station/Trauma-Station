@@ -24,4 +24,4 @@
   conditions:
     - !type:TileNotBlocked
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0

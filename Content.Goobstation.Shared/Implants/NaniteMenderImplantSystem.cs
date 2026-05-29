@@ -7,11 +7,11 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Implants;
 
-public sealed class NaniteMenderImplantSystem : EntitySystem
+public sealed partial class NaniteMenderImplantSystem : EntitySystem
 {
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly SharedJitteringSystem _jittering = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private SharedJitteringSystem _jittering = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

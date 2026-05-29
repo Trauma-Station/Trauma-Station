@@ -1,0 +1,89 @@
+# Handles
+
+- type: entity
+  abstract: true
+  parent: BaseForgeItemNoTemp
+  id: BaseForgingHandle
+  components:
+  - type: Construction
+    graph: Handle
+
+- type: entity
+  parent: BaseForgingHandle
+  id: WoodenHandleUnfinished
+  name: unfinished handle
+  description: A rough wooden pole, use a knife to cut it into shape.
+  components:
+  - type: Sprite
+    state: unfinishedhandle
+  - type: Construction
+    node: unfinished handle
+
+- type: entity
+  parent: BaseForgingHandle
+  id: WoodenHandleShort
+  name: short handle
+  description: A small handle, suitable for small weapons and tools, like knives or screwdrivers. Can be cut into arrow shafts if you have a steady hand.
+  components:
+  - type: Sprite
+    state: handlesmall
+  - type: Tag
+    tags:
+    - WoodenHandleShort
+  - type: Construction
+    node: short handle
+
+- type: entity
+  parent: BaseForgingHandle
+  id: WoodenHandleMedium
+  name: medium handle
+  description: A medium handle, suitable for medium sized weapons, such as maces and pickaxes. Can be cut down for smaller handles.
+  components:
+  - type: Sprite
+    state: handlemedium
+  - type: Tag
+    tags:
+    - WoodenHandleMedium
+  - type: Construction
+    node: medium handle
+
+- type: entity
+  parent: BaseForgingHandle
+  id: WoodenHandleLong
+  name: wooden pole
+  description: A long wooden pole, suitable for giant weapons such as halberds and spears. Can be cut down for smaller handles.
+  components:
+  - type: Sprite
+    state: handlelarge
+  - type: Tag
+    tags:
+    - WoodenHandleLong
+  - type: Construction
+    graph: Handle
+    node: wooden pole
+
+- type: entity
+  parent: BaseForgingHandle
+  id: WoodenArrowShaft
+  name: arrow shaft
+  description: A thin but strong piece of wood, perfect for handmade arrows. You could attach it to a forged arrow head.
+  components:
+  - type: Sprite
+    state: handlesmall # TODO: sprite??
+  - type: Tag
+    tags:
+    - WoodenArrowShaft
+  - type: Construction
+    node: arrow shaft
+
+- type: Tag
+  id: WoodenArrowShaft
+
+- type: Tag
+  id: WoodenHandleShort
+
+- type: Tag
+  id: WoodenHandleMedium
+
+- type: Tag
+  id: WoodenHandleLong

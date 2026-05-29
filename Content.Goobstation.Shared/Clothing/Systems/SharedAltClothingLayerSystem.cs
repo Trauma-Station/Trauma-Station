@@ -7,13 +7,12 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Verbs;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
-public sealed class SharedAltClothingLayerSystem : EntitySystem
+public sealed partial class SharedAltClothingLayerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     public override void Initialize()
     {

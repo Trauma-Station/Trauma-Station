@@ -83,7 +83,7 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: Damageable
+  - type: DefaultBodyDamage # Trauma - damage the body on mapinit, dont set Damageable.damage directly
     damage:
       types:
         Bloodloss: 49

@@ -2,7 +2,6 @@
 
 using Content.Shared.DeviceLinking;
 using Content.Shared.Research.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Server.Lathe;
 

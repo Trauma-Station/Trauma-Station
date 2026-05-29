@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Damage;
 /// <summary>
 /// Trauma - moved here from Content.Server
 /// </summary>
-public sealed class DamageOnHitSystem : EntitySystem
+public sealed partial class DamageOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     public override void Initialize()
     {

@@ -1,8 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -10,12 +5,12 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Tiles;
 
-public sealed class ReplaceFloorOnSpawnSystem : EntitySystem
+public sealed partial class ReplaceFloorOnSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

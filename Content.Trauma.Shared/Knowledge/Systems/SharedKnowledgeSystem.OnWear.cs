@@ -3,16 +3,16 @@
 using Content.Shared.Body;
 using Content.Shared.Clothing;
 using Content.Shared.EntityConditions;
+using Content.Shared.Implants;
 using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Knowledge.Components;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     private void InitializeOnWear()
     {
@@ -22,6 +22,8 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ClothingGotUnequippedEvent>(OnRemoveKnowledgeWear);
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainInsertedIntoBorgEvent>(OnBrainInsertedIntoBorg);
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainRemovedFromBorgEvent>(OnBrainRemovedFromBorg);
+        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ImplantImplantedEvent>(OnImplantImplanted);
+        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ImplantRemovedEvent>(OnImplantRemoved);
 
         SubscribeLocalEvent<ModifyKnowledgeGrantComponent, MapInitEvent>(OnModifyGrantMapInit,
             after: [ typeof(InitialBodySystem) ]); // TODO: move this to a partial of KnowledgeGrantSystem bruh...
@@ -44,6 +46,12 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnBrainRemovedFromBorg(Entity<KnowledgeGrantOnWearComponent> ent, ref BrainRemovedFromBorgEvent args)
         => RemoveKnowledgeModifiers(args.Brain, ent);
+
+    private void OnImplantImplanted(Entity<KnowledgeGrantOnWearComponent> ent, ref ImplantImplantedEvent args)
+        => ApplyKnowledgeModifiers(args.Implanted, ent);
+
+    private void OnImplantRemoved(Entity<KnowledgeGrantOnWearComponent> ent, ref ImplantRemovedEvent args)
+        => RemoveKnowledgeModifiers(args.Implanted, ent);
 
     private void OnModifyGrantMapInit(Entity<ModifyKnowledgeGrantComponent> ent, ref MapInitEvent args)
     {

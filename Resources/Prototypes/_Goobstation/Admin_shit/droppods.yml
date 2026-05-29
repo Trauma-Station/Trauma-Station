@@ -35,6 +35,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: TriggerOnUse
   - type: TimerTrigger

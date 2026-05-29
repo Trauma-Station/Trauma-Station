@@ -5,17 +5,19 @@ using Content.Shared.Blocking;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
-using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Shared.Explosion.Components;
 using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Trauma.Common.Construction;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Quality;
@@ -23,7 +25,6 @@ using Content.Trauma.Common.Stack;
 using Content.Trauma.Shared.Damage;
 using Content.Trauma.Shared.Durability.Components;
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Knowledge.Quality;
@@ -31,15 +32,14 @@ namespace Content.Trauma.Shared.Knowledge.Quality;
 /// <summary>
 /// Handles quality interactions for construction, projectiles, etc.
 /// </summary>
-public sealed class QualitySystem : EntitySystem
+public sealed partial class QualitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-
-    private EntityQuery<QualityComponent> _query;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityQuery<QualityComponent> _query = default!;
 
     private static readonly EntProtoId FabricationKnowledge = "FabricationKnowledge";
     private static readonly ProtoId<KnowledgeCategoryPrototype> CraftingCategory = "Crafting";
@@ -48,11 +48,8 @@ public sealed class QualitySystem : EntitySystem
     {
         base.Initialize();
 
-        _query = GetEntityQuery<QualityComponent>();
-
         // quality effects
         SubscribeLocalEvent<QualityComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
-        SubscribeLocalEvent<QualityComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<QualityComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
         SubscribeLocalEvent<ArmorComponent, ApplyQualityEvent>(OnArmorApplyQuality);
         SubscribeLocalEvent<ClothingComponent, ApplyQualityEvent>(OnClothingApplyQuality);
@@ -61,6 +58,7 @@ public sealed class QualitySystem : EntitySystem
         SubscribeLocalEvent<DestructibleComponent, ApplyQualityEvent>(OnDestructibleApplyQuality);
         SubscribeLocalEvent<DamageOnHitComponent, ApplyQualityEvent>(OnSelfDamageApplyQuality);
         SubscribeLocalEvent<DamageOtherOnHitComponent, ApplyQualityEvent>(OnDamageApplyQuality);
+        SubscribeLocalEvent<MeleeWeaponComponent, ApplyQualityEvent>(OnMeleeDamageApplyQuality);
         SubscribeLocalEvent<GunComponent, ApplyQualityEvent>(OnGunApplyQuality);
         SubscribeLocalEvent<ProjectileComponent, ApplyQualityEvent>(OnProjectileApplyQuality);
         SubscribeLocalEvent<DurabilityComponent, ApplyQualityEvent>(OnDurabilityApplyQuality);
@@ -83,22 +81,16 @@ public sealed class QualitySystem : EntitySystem
         args.AddModifier($"quality-name-{clamped}");
     }
 
-    private void OnGetMeleeDamage(Entity<QualityComponent> ent, ref GetMeleeDamageEvent args)
-    {
-        args.Damage *= QualityModifier(_proto.Resolve(ent.Comp.QualityFactors, out var proto) ? proto.Durability : 1.1f);
-    }
-
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
     {
         // 60% spread at +5, 170% at -5
-        var modifier = QualityModifier(_proto.Resolve(ent.Comp.QualityFactors, out var proto) ? proto.Gun : 0.9f);
+        var modifier = QualityModifier(_proto.Index(ent.Comp.QualityFactors).Gun);
         args.MinAngle *= modifier;
         args.MaxAngle *= modifier;
     }
 
     private void OnArmorApplyQuality(Entity<ArmorComponent> ent, ref ApplyQualityEvent args)
     {
-        // TODO: make this dogshit an event
         // -5 is half as good, 5 is twice as good
         var modifier = args.Modifier(args.Proto.Armor);
         var coefficients = ent.Comp.Modifiers.Coefficients;
@@ -119,27 +111,22 @@ public sealed class QualitySystem : EntitySystem
     private void OnExplosionResistApplyQuality(Entity<ExplosionResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.ExplosionResist);
-        ent.Comp.DamageCoefficient = modifier;
+        ent.Comp.DamageCoefficient *= modifier;
         Dirty(ent);
     }
 
     private void OnStaminaResistApplyQuality(Entity<StaminaResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.StaminaResist);
-        ent.Comp.DamageCoefficient = modifier;
+        ent.Comp.DamageCoefficient *= modifier;
         Dirty(ent);
     }
 
     private void OnDestructibleApplyQuality(Entity<DestructibleComponent> ent, ref ApplyQualityEvent args)
     {
-        // 250% health at +5 quality
         var modifier = args.Modifier(args.Proto.Health);
-        foreach (var threshold in ent.Comp.Thresholds)
-        {
-            if (threshold.Trigger is DamageTrigger trigger)
-                trigger.Damage *= modifier;
-        }
-        // TODO: this cant be networked which isn't good, make a scale field?
+        ent.Comp.Scale = modifier;
+        Dirty(ent);
     }
 
     private void OnSelfDamageApplyQuality(Entity<DamageOnHitComponent> ent, ref ApplyQualityEvent args)
@@ -154,6 +141,15 @@ public sealed class QualitySystem : EntitySystem
         // 180% damage at +5 quality
         ent.Comp.Damage *= args.Modifier(args.Proto.Damage);
         Dirty(ent);
+    }
+
+    private void OnMeleeDamageApplyQuality(Entity<MeleeWeaponComponent> ent, ref ApplyQualityEvent args)
+    {
+        var modifier = args.Modifier(args.Proto.MeleeDamage);
+        foreach (var (id, value) in ent.Comp.Damage.DamageDict)
+        {
+            ent.Comp.Damage.DamageDict[id] = value * modifier;
+        }
     }
 
     private void OnGunApplyQuality(Entity<GunComponent> ent, ref ApplyQualityEvent args)
@@ -176,8 +172,8 @@ public sealed class QualitySystem : EntitySystem
 
     private void OnShieldApplyQuality(Entity<BlockingComponent> ent, ref ApplyQualityEvent args)
     {
-        var modifierPlus = args.Modifier(args.Proto.Shield);
-        var modifierMinus = args.Modifier(args.Proto.ShieldFlat);
+        var modifierMinus = args.Modifier(args.Proto.Shield);
+        var modifierPlus = args.Modifier(args.Proto.ShieldFlat);
         ent.Comp.PassiveBlockFraction *= modifierPlus;
         ent.Comp.ActiveBlockFraction *= modifierPlus;
 
@@ -298,47 +294,11 @@ public sealed class QualitySystem : EntitySystem
             return;
         }
 
-        int? lowestDelta = null;
-        EntProtoId? lowestId = null;
-        EntProtoId knowledgeToUse = FabricationKnowledge;
-        bool setKnowledge = false;
-        foreach (var (id, delta) in ent.Comp.LevelDeltas)
-        {
-            if (_knowledge.GetKnowledge(brain, id) is not { } skill)
-            {
-                if (lowestDelta is not { })
-                {
-                    lowestDelta = -1 - delta;
-                    lowestId = id;
-                }
-                else if (-1 - delta < delta)
-                {
-                    lowestDelta = -1 - delta;
-                    lowestId = id;
-                }
-                continue;
-            }
-
-            if (_knowledge.GetMastery(skill.Comp) - delta < lowestDelta)
-            {
-                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
-                lowestId = id;
-            }
-
-            if (!setKnowledge)
-                continue;
-
-            if (skill.Comp.Category == CraftingCategory)
-            {
-                knowledgeToUse = id;
-                setKnowledge = true;
-            }
-        }
+        var (knowledgeToUse, lowestId, lowestDelta, skillDelta) = FindLowestDelta(brain, ent.Comp.LevelDeltas);
 
         var added = _knowledge.GetKnowledge(brain, knowledgeToUse)?.Comp.NetLevel ?? -1;
 
         var roll = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent)).Next(1, 100);
-
 
         ent.Comp.Quality = (added + lowestDelta * 15 + ent.Comp.Quality + ent.Comp.QualityModifiers - roll) switch
         {
@@ -358,13 +318,43 @@ public sealed class QualitySystem : EntitySystem
         ApplyQuality(ent);
 
         // TODO: limit skill gain based on the recipe used
-        _knowledge.AddExperience(brain, FabricationKnowledge, Math.Abs(ent.Comp.Quality / 2) + 3);
+        _knowledge.AddExperience(brain, knowledgeToUse, Math.Abs(ent.Comp.Quality / 2) + 3, _knowledge.GetInverseMastery(skillDelta + 2));
 
         if (lowestId is not { } actualId)
             return;
 
         // TODO: above
-        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2) + 3);
+        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2) + 3, _knowledge.GetInverseMastery(skillDelta + 2));
+    }
+
+    public (EntProtoId, EntProtoId?, int, int) FindLowestDelta(Entity<KnowledgeContainerComponent> brain, Dictionary<EntProtoId, int> levelDeltas)
+    {
+        int lowestDelta = 0;
+        int skillDelta = 0;
+        EntProtoId? lowestId = null;
+        EntProtoId knowledgeToUse = FabricationKnowledge;
+        bool setKnowledge = false;
+        foreach (var (id, delta) in levelDeltas)
+        {
+            if (_knowledge.GetKnowledge(brain, id) is not { } skill)
+                continue;
+
+            if (skill.Comp.Category == CraftingCategory && !setKnowledge)
+            {
+                knowledgeToUse = id;
+                setKnowledge = true;
+            }
+
+            int smallestDelta = _knowledge.GetMastery(skill.Comp) - delta;
+            if ((lowestId is not { } || smallestDelta < lowestDelta) && knowledgeToUse != id)
+            {
+                lowestDelta = _knowledge.GetMastery(skill.Comp) - delta;
+                lowestId = id;
+                skillDelta = delta;
+            }
+        }
+
+        return (knowledgeToUse, lowestId, lowestDelta, skillDelta);
     }
 
     private bool LevelDeltasMatch(Dictionary<EntProtoId, int> a, Dictionary<EntProtoId, int> b)

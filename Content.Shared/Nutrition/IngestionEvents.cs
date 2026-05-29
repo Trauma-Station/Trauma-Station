@@ -46,7 +46,7 @@ public record struct AttemptIngestEvent(EntityUid User, EntityUid Ingested, bool
 ///     that is preventing it from doing the consumption.
 /// </summary>
 [ByRefEvent]
-public record struct IngestionAttemptEvent(SlotFlags TargetSlots, bool Cancelled = false) : IInventoryRelayEvent
+public record struct IngestionAttemptEvent(SlotFlags TargetSlots, EntityUid User, bool Cancelled = false) : IInventoryRelayEvent // Trauma - added User
 {
     /// <summary>
     ///     The equipment that is blocking consumption. Should only be non-null if the event was canceled.

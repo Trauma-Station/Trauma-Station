@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.StatusEffects;
 
-public sealed class StatusEffectsOnStatusRemoveSystem : EntitySystem
+public sealed partial class StatusEffectsOnStatusRemoveSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     private readonly Dictionary<EntityUid, Dictionary<EntProtoId, TimeSpan>> _toApply = new();
 

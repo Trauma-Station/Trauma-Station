@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Goobstation.Shared.Disease.Systems;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 
@@ -32,9 +31,9 @@ public sealed partial class DiseaseProgressChange : EntityEffectBase<DiseaseProg
             ("amount", ProgressModifier));
 }
 
-public sealed class DiseaseProgressChangeEffectSystem : EntityEffectSystem<DiseaseCarrierComponent, DiseaseProgressChange>
+public sealed partial class DiseaseProgressChangeEffectSystem : EntityEffectSystem<DiseaseCarrierComponent, DiseaseProgressChange>
 {
-    [Dependency] private readonly SharedDiseaseSystem _disease = default!;
+    [Dependency] private SharedDiseaseSystem _disease = default!;
 
     protected override void Effect(Entity<DiseaseCarrierComponent> ent, ref EntityEffectEvent<DiseaseProgressChange> args)
     {

@@ -1,0 +1,33 @@
+- type: entity
+  parent: ClothingNeckPonchoBlack
+  id: ClothingNeckPonchoArmstrong
+  name: itchy poncho
+  suffix: DO NOT MAP
+  description: Make sure to wear an undershirt with this bad boy.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Neck/itchyponcho.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Neck/itchyponcho.rsi
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtArmstrongKarate: 1
+    experience:
+      MartialArtArmstrongKarate: 1
+
+- type: entity
+  parent: ClothingNeckPonchoBlack
+  id: ClothingNeckPonchoLisa
+  name: silk poncho
+  suffix: DO NOT MAP
+  description: Who did this belong to?
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Neck/silkponcho.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Neck/silkponcho.rsi
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtArmstrongKarate: 100
+    experience:
+      MartialArtArmstrongKarate: 100

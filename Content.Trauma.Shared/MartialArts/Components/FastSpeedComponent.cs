@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Knowledge;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.MartialArts.Components;
 
@@ -23,10 +22,4 @@ public sealed partial class FastSpeedComponent : Component
     /// </summary>
     [DataField(required: true)]
     public SkillCurve DamageScaleCurve = default!;
-
-    /// <summary>
-    /// Makes it so that when you scale when you have less speed, and hit weaker when you have more.
-    /// </summary>
-    [DataField]
-    public bool InvertSpeed;
 }

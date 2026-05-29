@@ -7,9 +7,9 @@ using Content.Shared.Store.Components;
 
 namespace Content.Trauma.Server.Store;
 
-public sealed class AutoDiscountSystem : EntitySystem
+public sealed partial class AutoDiscountSystem : EntitySystem
 {
-    [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private StoreSystem _store = default!;
 
     public override void Initialize()
     {

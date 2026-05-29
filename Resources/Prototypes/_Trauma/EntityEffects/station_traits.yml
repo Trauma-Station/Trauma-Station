@@ -1,0 +1,11 @@
+- type: entityEffect
+  id: MakeSpawnPointDropPod
+  conditions:
+  - !type:SpawnPointHasJob # leave latejoin, observer, etc alone
+  effects:
+  - !type:RemoveComponents
+    components:
+    - type: SpawnPoint
+  - !type:AddComponents
+    components:
+    - type: DropPodSpawnPoint

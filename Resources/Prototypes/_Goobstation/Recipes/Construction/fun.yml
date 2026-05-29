@@ -5,9 +5,10 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   practical:
     WeaponsKnowledge: 2
+    BananiumKnowledge: 2
 
 - type: construction
   id: boomerang

@@ -1,0 +1,22 @@
+- type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
+  id: SecAntagSummoner
+  name: security funding booster
+  description: Receive a large funding grant from our partners in the arms manufacturing sector! No strings attached... right?
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/declaration_of_war.rsi # it basically is
+    layers:
+    - state: declarator
+  - type: ActivatableUI
+    inHandsOnly: true
+    singleUser: true
+    requireActiveHand: false
+    key: enum.AntagSummonerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.AntagSummonerUiKey.Key:
+        type: AntagSummonerBUI
+  - type: AntagSummoner
+  - type: AccessReader
+    access: [["Security"]]

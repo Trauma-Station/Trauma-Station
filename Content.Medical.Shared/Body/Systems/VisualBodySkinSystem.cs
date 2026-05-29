@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Body;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.Body;
 
 /// <summary>
 /// Makes e.g. lizard tails and snouts follow skin color properly.
 /// </summary>
-public sealed class VisualBodySkinSystem : EntitySystem
+public sealed partial class VisualBodySkinSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

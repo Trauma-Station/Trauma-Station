@@ -3,7 +3,6 @@
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Robust.Shared.Audio;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.DoAfter;
 

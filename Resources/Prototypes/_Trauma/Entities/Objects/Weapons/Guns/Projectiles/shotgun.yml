@@ -8,7 +8,7 @@
     damage:
       types:
         Piercing: 5
-        Structural: 35
+        Structural: 15
       armorPenetration: 0.5 # Give it some use in actual combat
 
 - type: entity

@@ -5,19 +5,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 50
-      MartialArtCorporateJudo: 50
-
-- type: entity
-  parent: BaseSkillChip
-  id: SkillChipBrigmedic
-  name: skill chip (brigmedic)
-  components:
-  - type: KnowledgeGrantOnWear
-    skills:
-      FirstAidKnowledge: 50
-      SurgeryKnowledge: 26
+      MeleeKnowledge: 60
+      ShootingKnowledge: 60
 
 - type: entity
   parent: BaseSkillChip
@@ -37,8 +26,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 5
-      ShootingKnowledge: 5
+      MeleeKnowledge: 20
+      ShootingKnowledge: 20
     # TODO: xp gain boost
 
 - type: entity
@@ -49,7 +38,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       MeleeKnowledge: 26
-      ShootingKnowledge: 10
+      ShootingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -58,7 +47,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
-      MartialArtKravMaga: 50 # strongest IDF soldier
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
       WeaponsKnowledge: 50
+      FirstAidKnowledge: 26 # Brigmedic isn't real
+      SurgeryKnowledge: 20

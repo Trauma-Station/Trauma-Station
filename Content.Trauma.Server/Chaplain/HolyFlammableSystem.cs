@@ -28,17 +28,16 @@ namespace Content.Trauma.Server.Chaplain;
 /// <summary>
 /// This system takes care of entities that can catch holy fire by leveraging if the entity has the weakToHolyComponent.
 /// </summary>
-public sealed class HolyFlammableSystem : EntitySystem
+public sealed partial class HolyFlammableSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private const float InitialGrowthRate = 1f;
     private const float IntermediateGrowthRate = 0.5f;
@@ -46,7 +45,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public override void Initialize()
     {
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        base.Initialize();
 
         SubscribeLocalEvent<HolyFlammableComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<HolyFlammableComponent, RejuvenateEvent>(OnRejuvenate);
@@ -211,7 +210,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public void HolyExtinguish(EntityUid uid, HolyFlammableComponent? flammable = null)
     {
-        if (!Resolve(uid, ref flammable) || !flammable.CanExtinguish)
+        if (!Resolve(uid, ref flammable, false) || !flammable.CanExtinguish)
             return;
 
         RemCompDeferred<OnHolyFireComponent>(uid);
@@ -290,6 +289,9 @@ public sealed class HolyFlammableSystem : EntitySystem
 
     public void OnRemove(Entity<ShouldTakeHolyComponent> ent, ref ComponentRemove args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         HolyExtinguish(ent);
         RemComp<HolyFlammableComponent>(ent);
         RemComp<HolyIgniteOnCollideComponent>(ent);

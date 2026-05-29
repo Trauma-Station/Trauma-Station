@@ -4,6 +4,7 @@ using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
 using Content.Server.Disposal.Unit;
+using Content.Shared.Ghost;
 using Content.Shared.Physics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -18,14 +19,15 @@ namespace Content.Goobstation.Server.LightDetection;
 /// This system detects if an entity is standing on light.
 /// It casts rays from the PointLight to the player.
 /// </summary>
-public sealed class LightDetectionSystem : SharedLightDetectionSystem
+public sealed partial class LightDetectionSystem : SharedLightDetectionSystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physicsSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IParallelManager _parallel = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private SharedPhysicsSystem _physicsSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IParallelManager _parallel = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
 
     protected override string SawmillName => "light_damage";
 
@@ -84,8 +86,8 @@ public sealed class LightDetectionSystem : SharedLightDetectionSystem
         {
             var (uid, comp, xform) = UpdateEnts[index];
 
-            //ignore lights while travelling through disposals
-            if (LightSys.HasComp<BeingDisposedComponent>(uid))
+            //ignore lights while travelling through disposals and personal lights from ghosts
+            if (LightSys.HasComp<BeingDisposedComponent>(uid) || LightSys._ghostQuery.HasComp(uid))
             {
                 comp.CurrentLightLevel = 0f;
                 LightSys.Dirty(uid, comp);

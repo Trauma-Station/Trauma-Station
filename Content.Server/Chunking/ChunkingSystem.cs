@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Microsoft.Extensions.ObjectPool;
 using Robust.Shared;
 using Robust.Shared.Configuration;
@@ -24,20 +14,17 @@ namespace Content.Shared.Chunking;
 ///     This system just exists to provide some utility functions for other systems that chunk data that needs to be
 ///     sent to players. In particular, see <see cref="GetChunksForSession"/>.
 /// </summary>
-public sealed class ChunkingSystem : EntitySystem
+public sealed partial class ChunkingSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private EntityQuery<TransformComponent> _xformQuery;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private Box2 _baseViewBounds;
 
     public override void Initialize()
     {
         base.Initialize();
-        _xformQuery = GetEntityQuery<TransformComponent>();
         Subs.CVar(_configurationManager, CVars.NetMaxUpdateRange, OnPvsRangeChanged, true);
     }
 
@@ -75,7 +62,7 @@ public sealed class ChunkingSystem : EntitySystem
         int chunkSize,
         float viewEnlargement)
     {
-        if (!_xformQuery.TryGetComponent(viewer, out var xform))
+        if (!TryComp(viewer, out TransformComponent? xform))
             return;
 
         var pos = _transform.GetWorldPosition(xform);

@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.MartialArts;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Common.Knowledge.Systems;
 
@@ -32,6 +31,12 @@ public abstract partial class CommonKnowledgeSystem : EntitySystem
 
     public int GetMastery(KnowledgeComponent comp)
         => GetMastery(comp.NetLevel);
+
+    /// <summary>
+    /// Get the name for a given mastery number.
+    /// Clamps the number if its out of bounds.
+    /// </summary>
+    public abstract string GetMasteryString(int level);
 
     /// <summary>
     /// Gets the mastery level of a knowledge unit's entity.

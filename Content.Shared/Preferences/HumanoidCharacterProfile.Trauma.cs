@@ -1,5 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Barks;
-using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Knowledge;

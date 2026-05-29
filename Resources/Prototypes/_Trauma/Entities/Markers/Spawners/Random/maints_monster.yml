@@ -1,0 +1,93 @@
+- type: entity
+  parent: MarkerBase
+  id: MaintsMonsterSpawner
+  name: maintenance monster spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: brullbarking
+      sprite: _Goobstation/Mobs/Animals/brullbar.rsi
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:GroupSelector
+        prob: 0.4
+        children:
+        - id: MobBrullbar
+        - id: MobBrullbarKing
+        - id: MobBearGoon
+        - id: MobWhiteWolf
+        - id: MobLivingCurse
+        - id: MobFermidLarge
+        - id: MobFermidSmall
+        - id: MobFermidWarrior
+        - id: MobFermidQueen
+        - id: MobSpookyGhost1
+        - id: BaseMobGlutton
+        - id: MobNanites
+        - id: GunBot
+        - id: NukeBot
+        - id: MobAbyssCrawler
+        - id: MobAncientRobot1Wraith
+        - id: MobAncientRobot2Wraith
+        - id: MobAncientRobot3Wraith
+        - id: MobAncientLegsWraith
+        - id: MobAncientRepairBotWraith
+        - id: MobAncientGuardBotWraith
+        - id: MobCorgiCerberus
+        - id: MobAbomination
+        - id: MobBasilisk
+        - id: MobGorillaAngry
+        - id: MobHivebot
+        - id: MobHivebotRanged
+        - id: MobHivebotStrong
+        - id: MobLionWraith
+        - id: MobShadeWraith
+        - id: MobSkeletonGoonWraith
+        - id: MobPlagueRatLarge
+        - id: MobRotHulk
+        - id: MobCrunchedWraith
+        - id: MobRotHulkBuff
+        - id: MobMonstrosityHeadWraith
+        - id: MobMonstrosityBodyWraith
+        - id: MobVoidHoundWraith
+        - id: MobVoidSpikerWraith
+        - id: MobSkeletonCommanderWraith
+        - id: MobPlagueRatMedium
+        - id: MobPlagueRatSmall
+        - id: MobWailingHorse
+        - id: MobCoconutCrab
+        - id: MobRatma
+        - id: MobRatKing
+      - !type:GroupSelector
+        prob: 0.1
+        children:
+        - id: CMMobXenoDroneSentient
+        - id: CMMobXenoBurrowerSentient
+        - id: CMMobXenoWarriorSentient
+        - id: CMMobXenoCrusherSentient
+        - id: CMMobXenoRavagerSentient
+        - id: CMMobXenoKingSentient
+        - id: CMMobXenoQueenSentient
+        - id: CMMobXenoRogueKingSentient
+      - !type:GroupSelector
+        prob: 0.2
+        children:
+        - id: MobGhoulStalker
+        - id: MobGhoulProphet
+        - id: MobGhoulFireShark
+        - id: MobGhoulMirrorMaid
+        - id: MobGhoulRustWalker
+      - !type:GroupSelector
+        prob: 0.6
+        children:
+        - id: MobClownSpider
+        - id: MobGiantSpiderAngry
+        - id: MobSpiderSpace
+        - id: MobBearSpace
+        - id: MobCobraSpace
+        - id: MobKangarooSpace
+        - id: MobPurpleSnake
+        - id: MobSmallPurpleSnake
+        - id: MobLaserRaptor

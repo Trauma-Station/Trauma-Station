@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 metalgearsloth <metalgearsloth@gmail.com>
-// SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 0x6273 <0x40@keemail.me>
-// SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Administration;
 using Content.Shared.Administration.Managers;
 using Robust.Client.Console;
@@ -26,15 +10,15 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Administration.Managers
 {
-    public sealed class ClientAdminManager : IClientAdminManager, IClientConGroupImplementation, IPostInjectInit, ISharedAdminManager
+    public sealed partial class ClientAdminManager : IClientAdminManager, IClientConGroupImplementation, IPostInjectInit, ISharedAdminManager
     {
-        [Dependency] private readonly IPlayerManager _player = default!;
-        [Dependency] private readonly IClientNetManager _netMgr = default!;
-        [Dependency] private readonly IClientConGroupController _conGroup = default!;
-        [Dependency] private readonly IClientConsoleHost _host = default!;
-        [Dependency] private readonly IResourceManager _res = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
+        [Dependency] private IPlayerManager _player = default!;
+        [Dependency] private IClientNetManager _netMgr = default!;
+        [Dependency] private IClientConGroupController _conGroup = default!;
+        [Dependency] private IClientConsoleHost _host = default!;
+        [Dependency] private IResourceManager _res = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private IUserInterfaceManager _userInterface = default!;
 
         private AdminData? _adminData;
         private readonly HashSet<string> _availableCommands = new();

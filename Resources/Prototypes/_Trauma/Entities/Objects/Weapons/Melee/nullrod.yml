@@ -1,6 +1,6 @@
 - type: entity
   name: iradomini
-  parent: BaseItem
+  parent: [ BaseItem, BaseChaplainContraband ]
   id: WeaponPistolIradomini
   description: A powerful crossbow for the crusader with style.
   components:
@@ -43,7 +43,6 @@
   - type: Tag
     tags:
     - Nullrod
-    - Iradomini
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1
@@ -54,3 +53,103 @@
   - type: ReloadOnPray
   - type: AlternatePrayable
     prayDoAfterDuration: 10
+
+- type: entity
+  parent: [ BaseItem, BaseChaplainContraband ]
+  id: WeaponPistolFaith
+  name: faith
+  description: "`Cause you gotta have Faith."
+  components:
+  - type: Nullrod
+    damageOnUntrainedUse:
+      types:
+        Piercing: 20
+    UntrainedUseString: nullrod-faith-untrained-usage-popup
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Nullrod/faith.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+    heldPrefix: silver
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    angleIncrease: 1
+    angleDecay: 3
+    fireRate: 1.1
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+      params:
+        volume: 0.5
+  - type: BasicEntityAmmoProvider
+    proto: BulletPistolSilverBig
+    capacity: 3
+    count: 3
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: UseDelayOnShoot
+  - type: UseDelay
+    delay: 2.2
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 2.1
+    rechargeSound:
+      path: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+      params:
+        volume: 0.1
+  - type: Tag
+    tags:
+    - Nullrod
+  - type: DivineIntervention
+  - type: Reflect
+    reflectProb: 1
+    reflects:
+    - Magic
+    slotFlags:
+    - NONE
+  - type: ItemSwitch
+    defaultState: silver
+    state: "silver"
+    showLabel: true
+    states:
+      silver: !type:ItemSwitchState
+        verb: silver
+        components:
+        - type: BasicEntityAmmoProvider
+          proto: BulletPistolSilverBig
+          capacity: 3
+          count: 3
+        - type: Gun
+          minAngle: 0
+          maxAngle: 5
+          angleIncrease: 1
+          angleDecay: 3
+          fireRate: 1.1
+          availableModes:
+          - SemiAuto
+          soundGunshot:
+            path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+            params:
+              volume: 0.5
+      blessed: !type:ItemSwitchState
+        verb: blessed
+        components:
+        - type: BasicEntityAmmoProvider
+          proto: BulletFaithHeal
+          capacity: 2
+          count: 2
+        - type: Gun
+          minAngle: 0
+          maxAngle: 5
+          angleIncrease: 1
+          angleDecay: 3
+          fireRate: 1.1
+          availableModes:
+          - SemiAuto
+          soundGunshot:
+            path: /Audio/Effects/holy.ogg
+            params:
+              volume: 0.5

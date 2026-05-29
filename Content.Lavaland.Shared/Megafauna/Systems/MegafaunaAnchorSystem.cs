@@ -5,9 +5,9 @@ using Content.Lavaland.Shared.Megafauna.Events;
 
 namespace Content.Lavaland.Shared.Megafauna.Systems;
 
-public sealed class MegafaunaAnchorSystem : EntitySystem
+public sealed partial class MegafaunaAnchorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {

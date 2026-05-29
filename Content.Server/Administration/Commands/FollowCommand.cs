@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LankLTE <135308300+LankLTE@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 crazybrain23 <44417085+crazybrain23@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Administration;
 using Content.Shared.Follower;
 using Robust.Shared.Console;
@@ -13,9 +6,9 @@ using Robust.Shared.Enums;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class FollowCommand : LocalizedEntityCommands
+public sealed partial class FollowCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly FollowerSystem _followerSystem = default!;
+    [Dependency] private FollowerSystem _followerSystem = default!;
 
     public override string Command => "follow";
 

@@ -7,17 +7,14 @@ using Content.Trauma.Shared.Genetics.Mutations;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class BleedingMutationSystem : EntitySystem
+public sealed partial class BleedingMutationSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-
-    private EntityQuery<BloodstreamComponent> _bloodstreamQuery;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _bloodstreamQuery = GetEntityQuery<BloodstreamComponent>();
 
         SubscribeLocalEvent<BleedingMutationComponent, MutationAddedEvent>(OnAdded);
         SubscribeLocalEvent<BleedingMutationComponent, MutationRemovedEvent>(OnRemoved);

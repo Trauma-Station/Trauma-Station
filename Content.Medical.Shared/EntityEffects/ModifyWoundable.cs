@@ -2,7 +2,6 @@
 
 using Content.Medical.Shared.Wounds;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 

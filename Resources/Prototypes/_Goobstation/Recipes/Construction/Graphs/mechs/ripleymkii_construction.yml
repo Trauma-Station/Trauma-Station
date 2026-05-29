@@ -12,6 +12,9 @@
     edges:
     - to: ripleymkii
       steps:
+      - assemblyId: RipleyMkIIChassis
+        guideString: ripleymkii-construction-guide-string
+
       - tool: Anchoring
         doAfter: 1
         completed:

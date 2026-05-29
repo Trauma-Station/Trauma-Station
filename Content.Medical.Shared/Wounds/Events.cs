@@ -2,7 +2,6 @@
 
 using Content.Medical.Common.Wounds;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Serialization;
 
 namespace Content.Medical.Shared.Wounds;
 

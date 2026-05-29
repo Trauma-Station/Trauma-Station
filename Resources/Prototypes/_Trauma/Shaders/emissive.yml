@@ -1,0 +1,6 @@
+- type: shader
+  id: Emissive
+  kind: source
+  path: "/Textures/_Trauma/Shaders/emissive.swsl"
+  params:
+    emissive: 0,0,0,0 # rgba emissive factor overlay, needs to be set in layer.Shader

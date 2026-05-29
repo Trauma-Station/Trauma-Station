@@ -7,57 +7,52 @@ using Content.Server.Administration.Notes;
 using Content.Server.EUI;
 using Content.Shared.Eui;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Server.ServerCurrency.UI
+namespace Content.Goobstation.Server.ServerCurrency.UI;
+
+public sealed partial class CurrencyEui : BaseEui
 {
-    public sealed class CurrencyEui : BaseEui
+    [Dependency] private ICommonCurrencyManager _currency = default!;
+    [Dependency] private IAdminNotesManager _notes = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+
+    public CurrencyEui()
     {
-        [Dependency] private readonly ICommonCurrencyManager _currencyMan = default!;
-        [Dependency] private readonly IAdminNotesManager _notesMan = default!;
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
-        public CurrencyEui()
-        {
-            IoCManager.InjectDependencies(this);
-        }
+        IoCManager.InjectDependencies(this);
+    }
 
-        public override void Opened()
-        {
-            StateDirty();
-        }
+    public override void Opened()
+    {
+        StateDirty();
+    }
 
-        public override EuiStateBase GetNewState()
-        {
-            return new CurrencyEuiState();
-        }
+    public override EuiStateBase GetNewState()
+    {
+        return new CurrencyEuiState();
+    }
 
+    public override void HandleMessage(EuiMessageBase msg)
+    {
+        base.HandleMessage(msg);
+        if (msg is not CurrencyEuiMsg.Buy buy)
+            return;
 
-        public override void HandleMessage(EuiMessageBase msg)
-        {
-            base.HandleMessage(msg);
-            switch (msg)
-            {
-                case CurrencyEuiMsg.Buy Buy:
+        BuyToken(buy.TokenId, Player);
+        StateDirty();
+    }
 
-                    BuyToken(Buy.TokenId, Player);
-                    StateDirty();
-                    break; //grrr fix formatting
-            }
-        }
+    private async void BuyToken(ProtoId<TokenListingPrototype> tokenId, ICommonSession playerName)
+    {
+        var balance = _currency.GetBalance(Player.UserId);
 
-        private async void BuyToken(ProtoId<TokenListingPrototype> tokenId, ICommonSession playerName)
-        {
-            var balance = _currencyMan.GetBalance(Player.UserId);
+        if (!_proto.TryIndex<TokenListingPrototype>(tokenId, out var token))
+            return;
 
-            if (!_protoMan.TryIndex<TokenListingPrototype>(tokenId, out var token))
-                return;
+        if (balance < token.Price)
+            return;
 
-            if (balance < token.Price)
-                return;
-
-            await _notesMan.AddAdminRemark(Player, Player.UserId, 0,
-                Loc.GetString(token.AdminNote), 0, false, null);
-            _currencyMan.RemoveCurrency(Player.UserId, token.Price);
-        }
+        _currency.RemoveCurrency(Player.UserId, token.Price);
+        await _notes.AddAdminRemark(Player, Player.UserId, 0,
+            Loc.GetString(token.AdminNote), 0, false, null);
     }
 }

@@ -56,3 +56,8 @@
     ToyFigurineCargoTech: 1
     ToyFigurineSalvage: 1
     ToyFigurineQuartermaster: 1
+  # <Trauma>
+    RubberStampTrader: 1
+  emaggedInventory:
+    ClothingOuterCoatJensenFilled: 1
+  # </Trauma>

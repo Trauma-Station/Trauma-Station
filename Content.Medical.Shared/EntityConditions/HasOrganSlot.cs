@@ -4,7 +4,6 @@ using Content.Medical.Common.Body;
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityConditions;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityConditions;
 
@@ -29,9 +28,9 @@ public sealed partial class HasOrganSlot : EntityConditionBase<HasOrganSlot>
         => Loc.GetString("entity-condition-guidebook-organ-slot", ("inverted", Inverted), ("part", PartType), ("slot", Organ));
 }
 
-public sealed class HasOrganSlotConditionSystem : EntityConditionSystem<BodyComponent, HasOrganSlot>
+public sealed partial class HasOrganSlotConditionSystem : EntityConditionSystem<BodyComponent, HasOrganSlot>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Condition(Entity<BodyComponent> ent, ref EntityConditionEvent<HasOrganSlot> args)
     {

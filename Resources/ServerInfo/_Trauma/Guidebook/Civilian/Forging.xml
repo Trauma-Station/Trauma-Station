@@ -1,0 +1,33 @@
+<Document>
+# Forging
+Forging takes a lot of setup but can create strong items that are otherwise difficult or impossible to get.
+
+# Getting Started
+Start by getting some cement, either from maints or chem, and mixing it with water to make wet cement. This can be made into wet bricks, which after drying can be used to make bloomeries.
+
+  <Box>
+    <GuideEntityEmbed Entity="ReagentContainerCement" Caption="Bag of Cement"/>
+    <GuideEntityEmbed Entity="WetCement" Caption="Cement"/>
+    <GuideEntityEmbed Entity="WetBrick" Caption="Wet Brick"/>
+    <GuideEntityEmbed Entity="Brick1" Caption="Brick"/>
+  </Box>
+
+# Bloomery
+Bloomeries can be loaded with charcoal and metal scraps to make blooms, once they are finished firing; break them open to get the bloom.
+
+  <Box>
+    <GuideEntityEmbed Entity="BloomeryCold" Caption="Bloomery"/>
+    <GuideEntityEmbed Entity="BloomeryLitSteel" Caption="Active Bloomery"/>
+    <GuideEntityEmbed Entity="BloomeryCompleteSteel" Caption="Finished Bloomery"/>
+  </Box>
+
+# Forging
+To work the bloom into a usable ingot, deal enough blunt damage to it before it cools down! It can be kept warm with a charcoal forge, but be careful to not overheat it.
+
+You should make an anvil next, it is required to make metal items.
+
+  <Box>
+    <GuideEntityEmbed Entity="SteelBloom" Caption="Bloom"/>
+    <GuideEntityEmbed Entity="SteelIngot" Caption="Ingot"/>
+  </Box>
+</Document>

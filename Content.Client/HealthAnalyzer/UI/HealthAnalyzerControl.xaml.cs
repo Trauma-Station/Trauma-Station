@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Chemistry.EntitySystems;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Shared.Atmos;
@@ -27,6 +30,7 @@ namespace Content.Client.HealthAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class HealthAnalyzerControl : BoxContainer
 {
+    private readonly SharedSolutionContainerSystem _solution;
     private readonly IEntityManager _entityManager;
     private readonly SpriteSystem _spriteSystem;
     private readonly IPrototypeManager _prototypes;
@@ -43,7 +47,10 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         _prototypes = dependencies.Resolve<IPrototypeManager>();
         _cache = dependencies.Resolve<IResourceCache>();
         _damageable = _entityManager.System<DamageableSystem>();
+        // <Trauma>
+        _solution = _entityManager.System<SharedSolutionContainerSystem>();
         InitializeTrauma(); // Trauma
+        // </Trauma>
     }
 
     public void Populate(HealthAnalyzerUiState state)
@@ -152,7 +159,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         return mobState switch
         {
             MobState.Alive => Loc.GetString("health-analyzer-window-entity-alive-text"),
-            MobState.SoftCrit | // Trauma - include softcrit
+            MobState.SoftCrit => Loc.GetString("health-analyzer-window-entity-critical-text"), // Trauma - include softcrit
             MobState.Critical => Loc.GetString("health-analyzer-window-entity-critical-text"),
             MobState.Dead => Loc.GetString("health-analyzer-window-entity-dead-text"),
             _ => Loc.GetString("health-analyzer-window-entity-unknown-text"),

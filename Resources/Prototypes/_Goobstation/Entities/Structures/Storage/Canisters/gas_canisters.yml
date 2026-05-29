@@ -8,8 +8,20 @@
   - type: Sprite
     layers:
     - state: purple
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    - state: integrity-unshaded-0
+      map: [ "enum.MaxPressureVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+      visible: false
+    - state: mask-purple
+      map: [ "enum.MaxPressureVisualLayers.Base" ]
+      visible: false
+  - type: MaxPressureVisuals
+    integrityMask: mask-purple
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         BZ: 2769.36
@@ -48,8 +60,20 @@
   - type: Sprite
     layers:
     - state: healium
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    - state: integrity-unshaded-0
+      map: [ "enum.MaxPressureVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+      visible: false
+    - state: mask-healium
+      map: [ "enum.MaxPressureVisualLayers.Base" ]
+      visible: false
+  - type: MaxPressureVisuals
+    integrityMask: mask-healium
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Healium: 2769.36
@@ -88,8 +112,20 @@
   - type: Sprite
     layers:
     - state: brown
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    - state: integrity-unshaded-0
+      map: [ "enum.MaxPressureVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+      visible: false
+    - state: mask-brown
+      map: [ "enum.MaxPressureVisualLayers.Base" ]
+      visible: false
+  - type: MaxPressureVisuals
+    integrityMask: mask-brown
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Nitrium: 2769.36
@@ -128,8 +164,20 @@
   - type: Sprite
     layers:
     - state: darkblue
+    - state: paper
+      visible: false
+      map: [ "enum.PaperLabelVisuals.Layer" ]
+    - state: integrity-unshaded-0
+      map: [ "enum.MaxPressureVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+      visible: false
+    - state: mask-darkblue
+      map: [ "enum.MaxPressureVisualLayers.Base" ]
+      visible: false
+  - type: MaxPressureVisuals
+    integrityMask: mask-darkblue
   - type: GasCanister
-    gasMixture:
+    air:
       volume: 1500
       moles:
         Pluoxium: 2769.36

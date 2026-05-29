@@ -5,6 +5,7 @@
   components:
   - type: Sprite
     state: maints
+  - type: MaintsSpawnLocation # for slasher and xenos
 
 - type: entity
   parent: BaseAreaStation
@@ -21,3 +22,11 @@
   components:
   - type: Sprite
     state: holodeck
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaLootRoom
+  name: lootroom
+  components:
+  - type: Sprite
+    state: loot_room

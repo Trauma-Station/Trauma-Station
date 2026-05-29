@@ -3,7 +3,6 @@
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Containers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.Body;
@@ -11,20 +10,17 @@ namespace Content.Medical.Shared.Body;
 /// <summary>
 /// Handles events to properly cache organs in a body with <see cref="BodyCacheComponent"/> and <see cref="ChildOrganComponent"/>.
 /// </summary>
-public sealed class BodyCacheSystem : CommonBodyCacheSystem
+public sealed partial class BodyCacheSystem : CommonBodyCacheSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    private EntityQuery<BodyCacheComponent> _query = default!;
-    private EntityQuery<ChildOrganComponent> _childQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<BodyCacheComponent> _query = default!;
+    [Dependency] private EntityQuery<ChildOrganComponent> _childQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<BodyCacheComponent>();
-        _childQuery = GetEntityQuery<ChildOrganComponent>();
 
         // adding BodyCache automatically, carefully using different events than BodySystem does for containers
         SubscribeLocalEvent<BodyComponent, ComponentStartup>(OnBodyStartup);

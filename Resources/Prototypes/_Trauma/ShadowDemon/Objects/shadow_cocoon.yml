@@ -19,7 +19,7 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
-  - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

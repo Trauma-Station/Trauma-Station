@@ -1,12 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
@@ -30,9 +21,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     [IdDataField]
     public required string ID { get; set; }
 
-    //
     // Description info (name/desc) is configured via localization strings directly.
-    //
 
     /// <summary>
     /// The prototype displayed in the selection menu for this type.
@@ -40,9 +29,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public required EntProtoId DummyPrototype;
 
-    //
     // Functional information
-    //
 
     /// <summary>
     /// The amount of free module slots this borg type has.
@@ -98,9 +85,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public ComponentRegistry? AddComponents { get; set; }
 
-    //
     // Visual information
-    //
 
     /// <summary>
     /// The sprite state for the main borg body.
@@ -134,9 +119,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public string SpriteToggleLightState { get; set; } = "robot_l";
 
-    //
     // Minor information
-    //
 
     /// <summary>
     /// String to use on petting success.
@@ -152,9 +135,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public string PetFailureString { get; set; } = "petting-failure-generic-cyborg";
 
-    //
     // Sounds
-    //
 
     /// <summary>
     /// Sound specifier for footstep sounds created by this borg.

@@ -1,0 +1,49 @@
+- type: entity
+  abstract: true
+  parent: FoodBase
+  id: BasePerishableFood
+  components:
+  - type: Perishable
+    rotAfter: 1200
+    molsPerSecondPerUnitMass: 0
+  - type: RotInto
+    entity: FoodRot
+    stage: 1
+  - type: AtmosExposed
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 25
+  - type: TemperatureDamage
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+    conductivity: 15
+  - type: BurnableFood
+    burnTemp: 550
+
+# FoodInjectableBase without perishable stuff
+- type: entity
+  abstract: true
+  parent: FoodBase
+  id: FoodUnperishableInjectableBase
+  components:
+  - type: SpaceGarbage
+  - type: InjectableSolution
+    solution: food
+  - type: RefillableSolution
+    solution: food
+
+# FoodProduceBase without perishable stuff
+- type: entity
+  abstract: true
+  parent: FoodBase
+  id: FoodProduceUnperishableBase
+  components:
+  - type: Solution
+  - type: Sprite
+    state: produce
+  - type: Produce
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: food

@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Shared.EntityEffects;
@@ -30,11 +29,11 @@ public sealed partial class RelayOrgans : EntityEffectBase<RelayOrgans>
         => GuidebookText is {} key ? Loc.GetString(key, ("chance", Probability)) : null;
 }
 
-public sealed class RelayOrgansEffectSystem : EntityEffectSystem<BodyComponent, RelayOrgans>
+public sealed partial class RelayOrgansEffectSystem : EntityEffectSystem<BodyComponent, RelayOrgans>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<RelayOrgans> args)
     {

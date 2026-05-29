@@ -2,19 +2,14 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.StatusIcon;
-using Robust.Client.GameObjects;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
-public sealed class IconTag : IMarkupTagHandler
+public sealed partial class IconTag : IMarkupTagHandler
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private SpriteSystem? _spriteSystem;
 
     public string Name => "icon";

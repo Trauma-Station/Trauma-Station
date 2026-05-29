@@ -153,5 +153,6 @@
     - id: MobTomatoKiller
     - id: MobLuminousEntity
     - id: MobLuminousObject
+    - id: MobCoconutCrab # Trauma, lol
     - id: FoodGatfruit # 0.007% spawn chance. 1 / 141
       weight: 0.10

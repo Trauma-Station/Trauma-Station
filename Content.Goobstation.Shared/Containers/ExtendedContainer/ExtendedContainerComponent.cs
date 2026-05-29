@@ -3,7 +3,6 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Containers.ExtendedContainer;
 

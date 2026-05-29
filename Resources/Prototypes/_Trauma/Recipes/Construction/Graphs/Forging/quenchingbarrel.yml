@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: QuenchingBarrel
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 5
+  - node: finish
+    entity: QuenchingBarrel

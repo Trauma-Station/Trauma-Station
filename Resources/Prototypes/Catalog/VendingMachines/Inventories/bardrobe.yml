@@ -43,3 +43,8 @@
     ClothingEyesGlassesSunglasses: 2
   contrabandInventory:
     ToyFigurineBartender: 1
+  # <Trauma>
+  emaggedInventory:
+    BoxShellTranquilizer: 1
+    BoxBeanbag: 1
+  # </Trauma>

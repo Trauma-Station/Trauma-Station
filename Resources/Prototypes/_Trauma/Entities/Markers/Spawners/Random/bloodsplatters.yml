@@ -3,6 +3,7 @@
   id: DecalSpawnerSplatterCleanableBase
   abstract: true
   components:
+  - type: DespawningDecalSpawner
   - type: RandomDecalSpawner
     zIndex: 5
     color: '#800000'

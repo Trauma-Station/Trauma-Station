@@ -1,0 +1,407 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Diagnostics.CodeAnalysis;
+using Content.Goobstation.Common.CCVar;
+using Content.Goobstation.Common.Conversion;
+using Content.Shared.Actions;
+using Content.Shared.Chat;
+using Content.Shared.FixedPoint;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
+using Content.Shared.Objectives.Systems;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Store;
+using Content.Shared.Store.Components;
+using Content.Shared.Tag;
+using Content.Trauma.Shared.Heretic.Components;
+using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Events;
+using Content.Trauma.Shared.Heretic.Prototypes;
+using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
+using Robust.Shared.Player;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Timing;
+
+namespace Content.Trauma.Shared.Heretic.Systems;
+
+public abstract partial class SharedHereticSystem : EntitySystem
+{
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+
+    [Dependency] protected ISharedChatManager ChatMan = default!;
+    [Dependency] protected ISharedPlayerManager PlayerMan = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
+
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] private SharedStoreSystem _store = default!;
+
+    [Dependency] private EntityQuery<HereticComponent> _hereticQuery = default!;
+    [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
+
+    public static readonly ProtoId<CurrencyPrototype> Currency = "KnowledgePoint";
+    public static readonly ProtoId<CurrencyPrototype> SideCurrency = "SideKnowledgePoint";
+
+    public static readonly Dictionary<string, FixedPoint2> OneKnowledgePoint = new()
+    {
+        {Currency, 1},
+    };
+
+    public static readonly Dictionary<string, FixedPoint2> OneKnowledgeOneSidePoint = new()
+    {
+        {Currency, 1},
+        {SideCurrency, 1},
+    };
+
+    private bool _ascensionRequiresObjectives;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<MindContainerComponent, BeforeConversionEvent>(OnConversionAttempt);
+        SubscribeLocalEvent<HereticComponent, EventHereticAddKnowledge>(OnAddKnowledge);
+        SubscribeLocalEvent<HereticComponent, HereticSetPassiveLevelEvent>(OnSetPassiveLevel);
+        SubscribeLocalEvent<HereticComponent, ComponentInit>(OnInit);
+
+        Subs.CVar(_cfg, GoobCVars.AscensionRequiresObjectives, value => _ascensionRequiresObjectives = value, true);
+    }
+
+    private void OnInit(Entity<HereticComponent> ent, ref ComponentInit args)
+    {
+        ent.Comp.RitualContainer = Container.EnsureContainer<Container>(ent, "rituals");
+    }
+
+    private void OnSetPassiveLevel(Entity<HereticComponent> ent, ref HereticSetPassiveLevelEvent args)
+    {
+        if (ent.Comp.CurrentPath is not { } path || !TryComp(ent, out MindComponent? mind))
+            return;
+
+        if (ent.Comp.PassiveLevel >= args.Level)
+            return;
+
+        PlayerMan.TryGetSessionById(mind.UserId, out var session);
+
+        for (var i = ent.Comp.PassiveLevel + 1; i <= args.Level; i++)
+        {
+            var pathStr = path.ToString();
+            var knowledgeId = $"{pathStr}Passive{i}";
+
+            if (_proto.HasIndex<HereticKnowledgePrototype>(knowledgeId))
+            {
+                TryAddKnowledge((ent, mind, ent.Comp), knowledgeId);
+                var passiveDesc = Loc.GetString($"knowledge-path-{pathStr.ToLower()}-passive-desc-{i}");
+                var msg = Loc.GetString("heretic-passive-unlock", ("tier", i), ("desc", passiveDesc));
+                if (session != null)
+                {
+                    ChatMan.ChatMessageToOne(ChatChannel.Server,
+                        msg,
+                        msg,
+                        default,
+                        false,
+                        session.Channel,
+                        Color.Lime);
+                }
+            }
+            else
+                Log.Error($"Missing heretic passive knowledge prototype: {knowledgeId}");
+        }
+
+        var couldBreak = ent.Comp.CanBreakBlade;
+        var hadAura = ent.Comp.ShouldShowAura;
+        ent.Comp.PassiveLevel = args.Level;
+        Dirty(ent);
+        var canBreak = ent.Comp.CanBreakBlade;
+        var showAura = ent.Comp.ShouldShowAura;
+
+        if (session == null)
+            return;
+
+        if (!canBreak && couldBreak)
+            SendNoBreakBladeMessage(ent.Comp, session);
+
+        if (!hadAura && showAura)
+            ShowAura(ent.Comp, mind.OwnedEntity, session, true);
+    }
+
+    private void OnAddKnowledge(Entity<HereticComponent> ent, ref EventHereticAddKnowledge args)
+    {
+        foreach (var knowledge in args.Knowledge)
+        {
+            TryAddKnowledge((ent, null, ent.Comp), knowledge);
+        }
+    }
+
+    private void OnConversionAttempt(Entity<MindContainerComponent> ent, ref BeforeConversionEvent args)
+    {
+        if (TryGetHereticComponent(ent.AsNullable(), out _, out _))
+            args.Blocked = true;
+    }
+
+    public bool TryGetHereticComponent(
+        Entity<MindContainerComponent?> ent,
+        [NotNullWhen(true)] out HereticComponent? heretic,
+        out EntityUid mind)
+    {
+        heretic = null;
+        return _mind.TryGetMind(ent, out mind, out _, ent.Comp) && _hereticQuery.TryComp(mind, out heretic);
+    }
+
+    public bool IsHereticOrGhoul(EntityUid uid)
+    {
+        return _ghoulQuery.HasComp(uid) || TryGetHereticComponent(uid, out _, out _);
+    }
+
+    public bool TryGetRitual(Entity<HereticComponent?> ent,
+        string tag,
+        [NotNullWhen(true)] out Entity<Rituals.HereticRitualComponent>? ritual)
+    {
+        ritual = null;
+
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
+        foreach (var rit in ent.Comp.RitualContainer.ContainedEntities)
+        {
+            if (!_tag.HasTag(rit, tag) || !TryComp(rit, out Rituals.HereticRitualComponent? comp))
+                continue;
+
+            ritual = (rit, comp);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void RemoveRituals(Entity<HereticComponent?> ent, List<ProtoId<TagPrototype>> tags)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        var toDelete = new List<EntityUid>();
+        foreach (var ritual in ent.Comp.RitualContainer.ContainedEntities)
+        {
+            if (_tag.HasAnyTag(ritual, tags))
+                toDelete.Add(ritual);
+        }
+
+        foreach (var ritual in toDelete)
+        {
+            if (ent.Comp.ChosenRitual == ritual)
+                ent.Comp.ChosenRitual = null;
+
+            Container.Remove(ritual, ent.Comp.RitualContainer);
+            PredictedQueueDel(ritual);
+        }
+
+        Dirty(ent);
+    }
+
+    public void UpdateKnowledge(EntityUid uid,
+        Dictionary<string, FixedPoint2> knowledge,
+        bool showText = true,
+        bool playSound = true,
+        MindContainerComponent? mindContainer = null)
+    {
+        if (!_mind.TryGetMind(uid, out var mindId, out var mind, mindContainer) ||
+            !TryComp(mindId, out StoreComponent? store) || !TryComp(mindId, out HereticComponent? heretic))
+            return;
+
+        UpdateMindKnowledge((mindId, heretic, store, mind), uid, knowledge, showText, playSound);
+    }
+
+    public bool ObjectivesAllowAscension(Entity<HereticComponent> ent)
+    {
+        return !_ascensionRequiresObjectives || ent.Comp.ObjectivesCompleted;
+    }
+
+    public bool TryAddKnowledge(Entity<MindComponent?, HereticComponent?> ent,
+        ProtoId<HereticKnowledgePrototype> id,
+        EntityUid? body = null)
+    {
+        if (!Resolve(ent, ref ent.Comp1, ref ent.Comp2, false) || ent.Comp1.UserId is not { } userId)
+            return false;
+
+        body ??= ent.Comp1.OwnedEntity;
+
+        var data = _proto.Index(id);
+
+        if (data.MindEvent is { } hereticEv)
+        {
+            RaiseLocalEvent(ent.Owner, hereticEv);
+        }
+
+        if (data.Event != null && body != null)
+        {
+            var ev = _serialization.CreateCopy(data.Event, notNullableOverride: true);
+            RaiseKnowledgeEvent(body.Value, ev, false);
+            ent.Comp2.KnowledgeEvents.Add(ev);
+        }
+
+        if (data.ActionPrototypes is { Count: > 0 })
+        {
+            foreach (var act in data.ActionPrototypes)
+            {
+                _actionContainer.AddAction(ent.Owner, act);
+            }
+        }
+
+        if (data.RitualPrototypes is { Count: > 0 })
+            SpawnRituals((ent, ent.Comp2), data.RitualPrototypes, PlayerMan.GetSessionById(userId));
+
+        if (data.Path is { } path)
+        {
+            ent.Comp2.CurrentPath ??= path;
+
+            // make sure we only progress when buying current path knowledge
+            if (data.Stage > ent.Comp2.PathStage && path == ent.Comp2.CurrentPath)
+            {
+                var couldBreak = ent.Comp2.CanBreakBlade;
+                var hadAura = ent.Comp2.ShouldShowAura;
+                ent.Comp2.PathStage = data.Stage;
+                var canBreak = ent.Comp2.CanBreakBlade;
+                var showAura = ent.Comp2.ShouldShowAura;
+
+                if (PlayerMan.TryGetSessionById(ent.Comp1.UserId, out var session))
+                {
+                    if (!canBreak && couldBreak)
+                        SendNoBreakBladeMessage(ent.Comp2, session);
+
+                    if (!hadAura && showAura)
+                        ShowAura(ent.Comp2, body, session, false);
+                }
+
+                UpdateHereticCostModifiers((ent, ent.Comp2));
+            }
+        }
+
+        if (body != null)
+            _store.UpdateUserInterface(body, ent.Owner);
+
+        Dirty(ent, ent.Comp2);
+        return true;
+    }
+
+    public void RemoveAura(EntityUid uid)
+    {
+        RemCompDeferred<HereticAuraComponent>(uid);
+    }
+
+    public void UpdateHereticAura(EntityUid uid)
+    {
+        if (_timing.ApplyingState || TerminatingOrDeleted(uid))
+            return;
+
+        if (!TryGetHereticComponent(uid, out var heretic, out _) || !heretic.ShouldShowAura)
+        {
+            RemoveAura(uid);
+            return;
+        }
+
+        var ev = new ShouldHideHereticAuraEvent();
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Hide)
+        {
+            RemoveAura(uid);
+            return;
+        }
+
+        EnsureComp<HereticAuraComponent>(uid);
+    }
+
+    public virtual void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
+        EntityUid? user,
+        Dictionary<string, FixedPoint2> knowledge,
+        bool showText = true,
+        bool playSound = true)
+    {
+    }
+
+    public virtual void RaiseKnowledgeEvent(EntityUid uid, HereticKnowledgeEvent ev, bool negative) { }
+
+    protected virtual void SpawnRituals(Entity<HereticComponent> heretic,
+        List<EntProtoId<Rituals.HereticRitualComponent>> rituals,
+        ICommonSession session)
+    {
+    }
+
+    public virtual void UpdateHereticCostModifiers(Entity<HereticComponent?> ent,
+        ProtoId<StoreCategoryPrototype>? category = null,
+        ListingDataWithCostModifiers? except = null)
+    {
+    }
+
+    public void UpdateObjectiveProgress(Entity<HereticComponent, MindComponent> ent)
+    {
+        // Client throws exceptions when trying to call objective system public api
+        // That's why this thing exists in the first place
+        if (_net.IsClient)
+            return;
+
+        Entity<MindComponent> mindEntity = (ent, ent.Comp2);
+
+        var result = true;
+
+        foreach (var objId in ent.Comp1.AllObjectives)
+        {
+            if (!_mind.TryFindObjective(mindEntity.AsNullable(), objId, out var objective) ||
+                _objectives.IsCompleted(objective.Value, mindEntity))
+                continue;
+
+            result = false;
+            break;
+        }
+
+        if (ent.Comp1.ObjectivesCompleted == result)
+            return;
+
+        ent.Comp1.ObjectivesCompleted = result;
+        Dirty(ent.Owner, ent.Comp1);
+    }
+
+    public void SendNoBreakBladeMessage(HereticComponent heretic, ICommonSession session)
+    {
+        if (heretic.CanBreakBlade)
+            return;
+
+        var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
+        ChatMan.ChatMessageToOne(ChatChannel.Server,
+            msg,
+            msg,
+            default,
+            false,
+            session.Channel,
+            Color.Red);
+    }
+
+    public void ShowAura(HereticComponent heretic, EntityUid? body, ICommonSession session, bool immediate)
+    {
+        if (!heretic.ShouldShowAura)
+            return;
+
+        if (body is { } uid)
+        {
+            if (immediate)
+                UpdateHereticAura(uid);
+            else
+                Status.TryUpdateStatusEffectDuration(uid, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
+        }
+
+        var msg = Loc.GetString(immediate ? heretic.AuraVisibleMessageImmediate : heretic.AuraVisibleMessage);
+        ChatMan.ChatMessageToOne(ChatChannel.Server,
+            msg,
+            msg,
+            default,
+            false,
+            session.Channel,
+            Color.Red);
+    }
+}

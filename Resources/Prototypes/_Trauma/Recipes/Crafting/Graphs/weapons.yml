@@ -1,0 +1,365 @@
+- type: constructionGraph
+  id: GaussRifleGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - tag: RifleStock
+        icon:
+          sprite: Objects/Misc/rifle_stock.rsi
+          state: icon
+        name: construction-graph-tag-rifle-stock
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussRifle1
+    edges:
+    - to: 2
+      steps:
+      - tag: ModularReceiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+        name: construction-graph-tag-modular-receiver
+        doAfter: 0.5
+
+  - node: 2
+    entity: CraftingGaussRifle2
+    edges:
+    - to: 3
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 3
+    entity: CraftingGaussRifle3
+    edges:
+    - to: 4
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: construction-graph-tag-pipe
+        doAfter: 0.5
+
+  - node: 4
+    entity: CraftingGaussRifle4
+    edges:
+    - to: 5
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 5
+    entity: CraftingGaussRifle5
+    edges:
+    - to: 6
+      steps:
+      - tool: Welding
+        doAfter: 1
+      - material: CableHV
+        amount: 10
+        doAfter: 0.5
+      - tag: RechargingBoard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        name: construction-graph-tag-recharging-board
+        doAfter: 0.5
+
+  - node: 6
+    entity: CraftingGaussRifle6
+    edges:
+    - to: 7
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 7
+    entity: CraftingGaussRifle7
+    edges:
+    - to: 8
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 8
+    entity: CraftingGaussRifle8
+    edges:
+    - to: 9
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 9
+    entity: CraftingGaussRifle9
+    edges:
+    - to: 10
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Cable
+        amount: 1
+        doAfter: 0.5
+
+  - node: 10
+    entity: CraftingGaussRifle10
+    edges:
+    - to: 11
+      steps:
+      - material: CableMV
+        amount: 1
+        doAfter: 0.5
+
+  - node: 11
+    entity: CraftingGaussRifle11
+    edges:
+    - to: finish
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: finish
+    entity: WeaponGaussgunImprov
+
+
+# Pistol
+
+- type: constructionGraph
+  id: GaussPistolGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - tag: RifleStock
+        icon:
+          sprite: Objects/Misc/rifle_stock.rsi
+          state: icon
+        name: construction-graph-tag-rifle-stock
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussPistol1
+    edges:
+    - to: 2
+      steps:
+      - tag: ModularReceiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+        name: construction-graph-tag-modular-receiver
+        doAfter: 0.5
+
+  - node: 2
+    entity: CraftingGaussPistol2
+    edges:
+    - to: 3
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 3
+    entity: CraftingGaussPistol3
+    edges:
+    - to: 4
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: construction-graph-tag-pipe
+        doAfter: 0.5
+
+  - node: 4
+    entity: CraftingGaussPistol4
+    edges:
+    - to: 5
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Steel
+        amount: 1
+        doAfter: 0.5
+
+  - node: 5
+    entity: CraftingGaussPistol5
+    edges:
+    - to: 6
+      steps:
+      - tool: Welding
+        doAfter: 1
+      - material: CableHV
+        amount: 3
+        doAfter: 0.5
+      - tag: RechargingBoard
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: generic
+        name: construction-graph-tag-recharging-board
+        doAfter: 0.5
+
+  - node: 6
+    entity: CraftingGaussPistol6
+    edges:
+    - to: 7
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 7
+    entity: CraftingGaussPistol7
+    edges:
+    - to: 8
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - tag: PartCapacitor
+        icon:
+          sprite: Objects/Misc/stock_parts.rsi
+          state: adv_capacitor
+        name: construction-graph-tag-part-capacitor
+        doAfter: 0.5
+
+  - node: 8
+    entity: CraftingGaussPistol8
+    edges:
+    - to: 9
+      steps:
+      - tool: Screwing
+        doAfter: 1
+      - material: Cable
+        amount: 1
+        doAfter: 0.5
+
+  - node: 9
+    entity: CraftingGaussPistol9
+    edges:
+    - to: 10
+      steps:
+      - material: CableMV
+        amount: 1
+        doAfter: 0.5
+
+  - node: 10
+    entity: CraftingGaussPistol10
+    edges:
+    - to: finish
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: finish
+    entity: WeaponGaussgunPistol
+
+# Magazine
+
+- type: constructionGraph
+  id: GaussImprovMagazineGraph
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - tag: MetalContainer
+        icon:
+          sprite: Objects/Consumable/Drinks/mug_metal.rsi
+          state: icon
+        name: construction-graph-tag-part-metal-container
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussMagazineImprov
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 3
+
+  - node: finish
+    entity: MagazineGaussgunImprov
+
+# Ammo
+
+- type: constructionGraph
+  id: GaussImprovAmmoGraph
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: 1
+      steps:
+      - material: MetalRod
+        amount: 1
+        doAfter: 0.5
+
+  - node: 1
+    entity: CraftingGaussAmmoImprov
+    edges:
+    - to: finish
+      steps:
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      - tool: Sawing
+        doAfter: 1.5
+      completed:
+      - !type:SpawnPrototype
+        prototype: CartridgeBallBearing
+        amount: 7
+
+  - node: finish
+    entity: CartridgeBallBearing

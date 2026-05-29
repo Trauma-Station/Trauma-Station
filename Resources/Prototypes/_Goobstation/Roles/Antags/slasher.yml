@@ -6,6 +6,46 @@
   objective: roles-antag-slasher-objectives
   guides: [ Slasher ]
 
+- type: antagSpecifier
+  id: Slasher
+  spawnerPrototype: SpawnPointGhostSlasher
+  startingGear: SlasherGear
+  briefing:
+    text: slasher-role-greeting
+    color: Red
+    sound: /Audio/_Goobstation/Effects/Slasher/SlasherIntro.ogg
+  mindRoles: [ MindRoleSlasher ]
+  components:
+  - type: Slasher
+  - type: SlasherSummonMachete
+  - type: SlasherStaggerArea
+  - type: SlasherRegenerate
+  - type: SlasherPossession
+  - type: SlasherBloodTrail
+  - type: SlasherIncorporeal
+  - type: SlasherSoulSteal
+  - type: SlasherSummonMeatSpike
+  - type: BreathingImmunity
+  - type: GunBlocked
+    popupText: slasher-cannot-use-guns
+  - type: WeakToHoly
+  - type: NightVision
+    activateSound: null
+    deactivateSound: null
+  - type: Hunger
+    baseDecayRate: 0
+  - type: Thirst
+    baseDecayRate: 0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Dead
+  - type: RandomMetadata
+    nameSegments:
+    - NamesSlasherTitle
+    - NamesSlasher
+    nameFormat: name-format-slasher
+
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
@@ -36,23 +76,3 @@
     outerClothing: ClothingOuterSlasherApron
     shoes: ClothingShoesSlasher
     id: AgentIDCard
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: BaseAntagSpawner
-  id: SpawnPointGhostSlasherToken
-  components:
-  - type: GhostRole
-    name: ghost-role-information-slasher-token
-    description: ghost-role-information-description-token-generic
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: short
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: _Goobstation/Objects/Specific/Slasher/machete.rsi
-      state: icon

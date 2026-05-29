@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Shared.Carrying;
+
+/// <summary>
+/// Stores the carrier of an entity being carried.
+/// </summary>
+[RegisterComponent, NetworkedComponent, Access(typeof(CarryingSystem))]
+[AutoGenerateComponentState]
+public sealed partial class BeingCarriedComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public EntityUid Carrier;
+}

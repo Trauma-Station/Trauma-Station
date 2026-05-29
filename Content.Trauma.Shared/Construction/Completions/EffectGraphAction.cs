@@ -8,7 +8,6 @@ namespace Content.Trauma.Shared.Construction.Completions;
 /// <summary>
 /// Applies entity effects to the construction entity.
 /// </summary>
-[DataDefinition]
 public sealed partial class EffectGraphAction : IGraphAction
 {
     [DataField(required: true)]

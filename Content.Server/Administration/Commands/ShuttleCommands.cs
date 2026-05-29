@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 moonheart08 <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.RoundEnd;
 using Content.Shared.Administration;
 using Content.Shared.Localizations;
@@ -16,9 +6,9 @@ using Robust.Shared.Console;
 namespace Content.Server.Administration.Commands
 {
     [AdminCommand(AdminFlags.Round)]
-    public sealed class CallShuttleCommand : LocalizedEntityCommands
+    public sealed partial class CallShuttleCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
+        [Dependency] private RoundEndSystem _roundEndSystem = default!;
 
         public override string Command => "callshuttle";
 
@@ -37,9 +27,9 @@ namespace Content.Server.Administration.Commands
     }
 
     [AdminCommand(AdminFlags.Round)]
-    public sealed class RecallShuttleCommand : LocalizedEntityCommands
+    public sealed partial class RecallShuttleCommand : LocalizedEntityCommands
     {
-        [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
+        [Dependency] private RoundEndSystem _roundEndSystem = default!;
 
         public override string Command => "recallshuttle";
 

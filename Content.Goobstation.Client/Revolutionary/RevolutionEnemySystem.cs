@@ -2,16 +2,15 @@
 
 using Content.Goobstation.Shared.Revolutionary;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Revolutionary;
 
 /// <summary>
 /// Gives enemies of the revolution a status icon.
 /// </summary>
-public sealed class RevolutionaryEnemySystem : EntitySystem
+public sealed partial class RevolutionaryEnemySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

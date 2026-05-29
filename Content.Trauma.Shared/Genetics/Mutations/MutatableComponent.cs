@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.StatusEffectNew.Components;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
@@ -10,7 +8,7 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 /// Allows an entity to have mutations.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(MutationSystem))]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class MutatableComponent : Component
 {
     /// <summary>

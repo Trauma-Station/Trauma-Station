@@ -23,3 +23,10 @@
     ClothingHeadBandSkull: 2
     ClothingHeadsetRobotics: 2
     ClothingOuterWinterRobo: 2
+  # <Trauma>
+  contrabandInventory:
+    ClothingHeadHatCardborg: 1
+    ClothingOuterCardborg: 1
+  emaggedInventory:
+    BorgModuleAdvancedTool: 1
+  # </Trauma>

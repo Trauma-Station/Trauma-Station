@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseAutosurgeonSyndicate
+  id: AutosurgeonStatvekaSandevistan
+  name: syndicate autosurgeon (statveka sandevistan)
+  components:
+  - type: AutoSurgeon
+    entries:
+    - targetCategory: Torso
+      newOrganProto: OrganHeartStatvekaSandevistan

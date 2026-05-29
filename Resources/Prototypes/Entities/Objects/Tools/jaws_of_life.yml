@@ -49,7 +49,7 @@
     wideAnimationRotation: 90
     damage:
       types:
-        Blunt: 10
+        Blunt: 12 # Trauma, was 10
     soundHit:
       collection: MetalThud
   - type: Tweezers # Shitmed
@@ -109,6 +109,6 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 14
+        Blunt: 12 # Trauma, was 14
   - type: StaticPrice
     price: 1000

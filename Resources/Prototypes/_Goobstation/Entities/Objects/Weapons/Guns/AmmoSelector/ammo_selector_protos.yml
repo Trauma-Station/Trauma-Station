@@ -144,20 +144,20 @@
   id: HeavyPulse
   desc: Decimate
   icon:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    state: omnilaser
+    sprite: _Trauma/Objects/Weapons/Guns/Projectiles/laser.rsi
+    state: u_laser
   color: "#00B2FF"
-  protoId: HeavyPulse
+  protoId: PulseGunBulletHeavy
   fireCost: 250
 
 - type: selectableAmmo
   id: Pulse
   desc: Terminate.
   icon:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    state: omnilaser
+    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
+    state: omnilaser-blue
   color: "#00B2FF"
-  protoId: Pulse
+  protoId: PulseGunBullet
   fireCost: 200
 
 - type: selectableAmmo
@@ -167,15 +167,15 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     state: heavylaser
   color: red
-  protoId: LightPulse
+  protoId: PulseGunBulletLight
   fireCost: 100
 
 - type: selectableAmmo
   id: StunPulse
   desc: Stun.
   icon:
-    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
-    state: omnilaser-blue
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    state: omnilaser
   color: blue
-  protoId: StunPulse
+  protoId: BulletDisabler
   fireCost: 20

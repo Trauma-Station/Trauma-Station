@@ -3,7 +3,6 @@
 using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.EntityEffects;
 
@@ -19,9 +18,9 @@ public sealed partial class AddOrganSlot : EntityEffectBase<AddOrganSlot>
         => Loc.GetString("entity-effect-guidebook-part-add-slot", ("chance", Probability), ("slot", prototype.Index(Category).Name));
 }
 
-public sealed class AddOrganSlotEffectSystem : EntityEffectSystem<BodyPartComponent, AddOrganSlot>
+public sealed partial class AddOrganSlotEffectSystem : EntityEffectSystem<BodyPartComponent, AddOrganSlot>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyPartComponent> ent, ref EntityEffectEvent<AddOrganSlot> args)
     {

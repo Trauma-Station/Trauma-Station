@@ -32,6 +32,8 @@
     ClothingNeckScarfStripedLightBlue: 3
   contrabandInventory:
     ToyFigurineAtmosTech: 1
+    FireExtinguisher: 1 # Trauma
   emaggedInventory: # goob
     ClothingOuterSuitAtmosFire: 1
     ClothingHeadHelmetAtmosFire: 1
+    FireAxe: 1 # Trauma

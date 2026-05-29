@@ -61,14 +61,6 @@
 
   Malign Rifts can be purged by interacting with them using a bible.
 
-  <Box>
-    <GuideEntityEmbed Entity="CosmicGreaterMalignRift" Caption="A Malign Fracture"/>
-  </Box>
-
-  [color=#4cabb3]Malign Fracture[/color] is a more powerful version of a Malign Rift. It is harder to purge, easier to absorb, and corrupts it's environment at a much faster rate.
-
-  Standing near a fracture is dangerous! Unless you are protected by divine power, or are a part of the cosmic cult, you should keep your distance from any Fractures, as coming too close might have negative effects.
-
   ## Vacuous Chantries
   <Box>
     <GuideEntityEmbed Entity="CosmicBorgChantry" Caption=""/>
@@ -89,7 +81,7 @@
     <GuideEntityEmbed Entity="CosmicCultLawBoard" Caption=""/>
     <GuideEntityEmbed Entity="PlayerStationAi" Caption=""/>
   </Box>
-  While empowered, one of the ways cultists can choose to expend their empowerment is by using [color=#4cabb3]Null Fragmentation[/color] on the [bold]AI Upload Console[/bold]. Provided there is a Station AI active, this will forcibly overwrite their laws with a corrupt set of guidelines, aligning them with the Cosmic Cult, in addition to granting them access to the Astral Murmur channel.
+  While empowered, cultists can choose to use [color=#4cabb3]Null Fragmentation[/color] on the [bold]AI Upload Console[/bold]. Provided there is a Station AI active, this will forcibly overwrite their laws with a corrupt set of guidelines, aligning them with the Cosmic Cult, in addition to granting them access to the Astral Murmur channel.
 
   If a different lawboard was installed, this process will forcibly eject the previous lawboard from the AI Upload Console, regardless of wether or not the console was locked. Be warned; the crew will still be able to restore the Station AI's functionality by installing a safe, crew-aligned lawboard.
 </Document>

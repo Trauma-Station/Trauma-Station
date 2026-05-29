@@ -14,6 +14,9 @@ surgery-popup-procedure-SurgeryRemoveTongue-step-SurgeryStepRemoveOrgan = {$user
 
 surgery-popup-step-SurgeryStepInsertTongue = {$user} is inserting a tongue into {$target}'s {$part}!
 
+surgery-popup-procedure-SurgeryRemoveKidneys-step-SurgeryStepRemoveOrgan = {$user} is removing {$target}'s kidneys!
+surgery-popup-step-SurgeryStepInsertKidneys = {$user} is inserting kidneys into {$target}'s {$part}!
+
 surgery-popup-step-SurgeryStepOpenPanel = {$user} is opening a small panel on {$target}'s {$part}.
 surgery-popup-step-SurgeryStepClosePanel = {$user} is closing a small panel on {$target}'s {$part}.
 surgery-popup-step-SurgeryStepInsertBrainChip = {$user} is inserting a brain chip into {$target}'s {$part}!

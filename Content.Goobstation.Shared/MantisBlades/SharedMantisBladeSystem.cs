@@ -5,7 +5,7 @@ using Content.Shared.Examine;
 // This exists purely for examine.
 namespace Content.Goobstation.Shared.MantisBlades;
 
-public sealed class SharedMantisBladeSystem : EntitySystem
+public sealed partial class SharedMantisBladeSystem : EntitySystem
 {
     public override void Initialize()
     {

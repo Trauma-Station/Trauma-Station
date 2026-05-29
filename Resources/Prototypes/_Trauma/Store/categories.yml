@@ -1,0 +1,23 @@
+# Wizard
+
+- type: storeCategory
+  id: SpellbookSummons
+  name: store-caregory-spellbook-summons
+  priority: 5
+
+- type: storeCategory
+  id: SpellbookSpecial
+  name: store-caregory-spellbook-special
+  priority: 6
+
+- type: storeCategory
+  id: SpellbookBundles
+  name: store-caregory-spellbook-bundles
+  priority: 7
+
+# Traitor
+
+- type: storeCategory
+  id: DiscountedItems
+  name: store-discounted-items
+  priority: 200

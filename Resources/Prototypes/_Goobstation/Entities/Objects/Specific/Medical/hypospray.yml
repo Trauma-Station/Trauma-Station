@@ -1,20 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 CometVoid <cometsstrile@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Cartridge Autoinjectors
 
@@ -28,20 +11,19 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Medical/autoinjector.rsi
   - type: SolutionContainerVisuals
+    insertedItemSlotID: item # thank you shitcoder that added this
     maxFillLevels: 1
     fillBaseName: cartridge
+    solutionName: cartridge
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10
-  - type: ExaminableSolution
-    solution: hypospray
+  - type: Solution
+    solution:
+      maxVol: 0
   - type: Injector
     currentTransferAmount: null
   - type: CartridgeInjector
   - type: HyposprayBlockNonMobInjection
-  - type: IgnoreHypoport # Trauma - it's an auto"injector" not a hypospray and these would be strictly inferior to crew hyposprays with 30s delay
+  - type: IgnoreHypoport # it's an auto"injector" not a hypospray and these would be strictly inferior to crew hyposprays with 30s delay
   - type: UseDelay
     delay: 30
   - type: ContainerContainer
@@ -101,16 +83,15 @@
   - type: UseDelay
     delay: 3
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 10
+  - type: Solution
+    solution:
+      maxVol: 0
   - type: ExaminableSolution
     solution: hypospray
   - type: Injector
     currentTransferAmount: null
   - type: HyposprayBlockNonMobInjection
-  - type: IgnoreHypoport # Trauma - admin aboose
+  - type: IgnoreHypoport
   - type: ContainerContainer
     containers:
       item: !type:ContainerSlot
@@ -140,7 +121,8 @@
     - state: filling
       color: "#ffffff"
   - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
+    id: cartridge
     solution:
       maxVol: 10
   - type: Tag
@@ -158,10 +140,8 @@
     - state: base
     - state: filling
       color: "#cad8d4"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Epinephrine
         Quantity: 7
@@ -179,10 +159,8 @@
     - state: base
     - state: filling
       color: "#1776c4"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Saline
         Quantity: 7
@@ -200,10 +178,8 @@
     - state: base
     - state: filling
       color: "#c5932d"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Bicaridine
         Quantity: 4
@@ -215,21 +191,20 @@
         Quantity: 1 # Stops 30% of maximum bleeding
   #If you have a full dmg spread, it'll heal ~60 dmg , down from previous 96
   #It will heal 20 dmg if you only have one dmg type and you have more than 25 dmg (see salicylic acid)
+
 - type: entity
-  name: burn autoinjector cartridge
   parent: [ BaseSecurityMedicalContraband , BaseAutoinjectorCartridge ]
-  description: Contains 5u of kelotane, 4u of dermaline 1u of leporazine, used in a cartridge autoinjector.
   id: CartridgeDermaline
+  name: burn autoinjector cartridge
+  description: Contains 5u of kelotane, 4u of dermaline 1u of leporazine, used in a cartridge autoinjector.
   components:
   - type: Sprite
     layers:
     - state: base
     - state: filling
       color: "#956960"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Kelotane
         Quantity: 5
@@ -237,6 +212,7 @@
         Quantity: 4
       - ReagentId: Leporazine #will minorly help with temperature regulation
         Quantity: 1
+
 #what were they cooking here before, 114 total possible dmg heal was crazyyy
 #~21 dmg healed/dmg type (unless its cold, then its a lil more), doesnt heal caustic all that well
 - type: entity
@@ -250,10 +226,8 @@
     - state: base
     - state: filling
       color: "#572757"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Atropine
         Quantity: 10
@@ -269,10 +243,8 @@
     - state: base
     - state: filling
       color: "#b9bf93"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Puncturase
         Quantity: 10
@@ -288,10 +260,8 @@
     - state: base
     - state: filling
       color: "#d2fffa"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Ephedrine
         Quantity: 10
@@ -307,10 +277,8 @@
     - state: base
     - state: filling
       color: "#415130"
-  - type: SolutionCartridge
-    targetSolution: hypospray
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Tirizene
         Quantity: 4
@@ -323,7 +291,7 @@
 # A - Because the dispenser reminded me of a pez dispenser, and it'd be funny if you could eat them.
 - type: entity
   name: amnestic autoinjector cartridge
-  parent: [ BaseCentcommContraband , BaseAutoinjectorCartridge, EdibleBase ]
+  parent: [ BaseCentcommContraband , BaseAutoinjectorCartridge, FoodBase ]
   description: Contains 10u of dimtremethic-neuramincyl acid, used in a cartridge autoinjector.
   id: CartridgeAmnestic
   components:
@@ -333,19 +301,12 @@
     - state: filling
       color: "#FAF9F6"
   - type: SolutionCartridge
-    targetSolution: hypospray
+    solutionName: food
+  - type: Solution
     solution:
-      maxVol: 10
       reagents:
       - ReagentId: Amnestizine
         Quantity: 10
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Amnestizine
-          Quantity: 10
   - type: Edible
     delay: 0.2
     forceFeedDelay: 1.5
@@ -373,13 +334,12 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stasipen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 10
-        reagents:
-        - ReagentId: Stasizium
-          Quantity: 10
+  - type: Solution
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: Stasizium
+        Quantity: 10
 
 - type: entity
   name: centcomm advanced stimulant
@@ -393,17 +353,16 @@
     layers:
     - state: ntstimpen
       map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 50
-        reagents:
-        - ReagentId: Stimulants
-          Quantity: 25
-        - ReagentId: Ichor
-          Quantity: 10
-        - ReagentId: Dylovene
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: Stimulants
+        Quantity: 25
+      - ReagentId: Ichor
+        Quantity: 10
+      - ReagentId: Dylovene
+        Quantity: 15
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -427,15 +386,14 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: ambuzolpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 15
-        reagents:
-        - ReagentId: Ambuzol
-          Quantity: 10
-        - ReagentId: Ultravasculine
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Ambuzol
+        Quantity: 10
+      - ReagentId: Ultravasculine
+        Quantity: 5
   - type: Tag
     tags:
     - Medipen
@@ -457,15 +415,14 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: ambuzolpen_empty
-  - type: SolutionContainerManager
-    solutions:
-      pen:
-        maxVol: 20
-        reagents:
-        - ReagentId: AmbuzolPlus
-          Quantity: 5
-        - ReagentId: Diphenhydramine
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 20
+      reagents:
+      - ReagentId: AmbuzolPlus
+        Quantity: 5
+      - ReagentId: Diphenhydramine
+        Quantity: 15
   - type: Tag
     tags:
     - Medipen
@@ -474,20 +431,19 @@
 # Actual hyposprays
 
 - type: entity
-  name: centcomm hypospray
   parent: [BaseHypospray, BaseCentcommContraband]
-  description: Reserved for Nanotrasen's top doctors. It utilizes experimental bluespace technology.
   id: CentCommHypo
+  name: centcomm hypospray
+  description: Reserved for Nanotrasen's top doctors. It utilizes experimental bluespace technology.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Medical/centcomm_hypo.rsi
     state: hypo
   - type: Item
     sprite: _Goobstation/Objects/Specific/Medical/centcomm_hypo.rsi
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 50
+  - type: Solution
+    solution:
+      maxVol: 100
   - type: IgnoreHypoport
   - type: UseDelay
     delay: 0.2

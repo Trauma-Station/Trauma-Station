@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.FixedPoint;
+// </Trauma>
 using Content.Shared.Damage.Components;
 
 namespace Content.Shared.Destructible.Thresholds.Triggers;
@@ -23,5 +26,6 @@ public interface IThresholdTrigger
     /// An instance of <see cref="SharedDestructibleSystem"/> to pull dependencies from, if any.
     /// </param>
     /// <returns>true if this trigger has been reached, false otherwise.</returns>
-    bool Reached(Entity<DamageableComponent> damageable, SharedDestructibleSystem system);
+    bool Reached(Entity<DamageableComponent> damageable, SharedDestructibleSystem system,
+        FixedPoint2 scale); // Trauma
 }

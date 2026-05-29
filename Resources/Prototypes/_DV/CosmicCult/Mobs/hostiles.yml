@@ -55,6 +55,7 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - Bot # Rust grasp target (its a robot?)
   - type: MobState
     allowedStates:
     - Alive
@@ -63,9 +64,8 @@
     thresholds:
       0: Alive
       50: Dead
-  - type: Damageable
+  - type: Injurable
     damageContainer: InorganicMetaphysical
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
       - trigger:

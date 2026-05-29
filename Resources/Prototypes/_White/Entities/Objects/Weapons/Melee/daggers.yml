@@ -1,16 +1,7 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   name: betrayal knife
   description: Watch your back!
-  parent: [BaseKnife, BaseSyndicateContraband]
+  parent: [KnifeDurabilitySharpenOnly, BaseKnife, BaseSyndicateContraband]
   id: BetrayalKnife
   components:
   - type: Sprite
@@ -24,7 +15,7 @@
     attackRate: 3
     damage:
       types:
-        Slash: 8
+        Slash: 4
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Sharp
@@ -40,6 +31,7 @@
     malus: 0.225
   - type: BackStab
   - type: Blink
+    knockdownTime: 2
   - type: UseDelay
     delay: 0.8
     delays:

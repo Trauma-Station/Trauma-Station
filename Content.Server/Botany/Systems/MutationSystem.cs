@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Botany;
+using Content.Shared.Chemistry.Reagent;
 // </Trauma>
 using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
@@ -10,13 +11,13 @@ using System.Linq;
 
 namespace Content.Server.Botany;
 
-public sealed class MutationSystem : EntitySystem
+public sealed partial class MutationSystem : EntitySystem
 {
     private static ProtoId<RandomPlantMutationListPrototype> RandomPlantMutations = "RandomPlantMutations";
 
-    [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
+    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
     private RandomPlantMutationListPrototype _randomMutations = default!;
 
     public override void Initialize()
@@ -107,7 +108,7 @@ public sealed class MutationSystem : EntitySystem
         return result;
     }
 
-    private void CrossChemicals(ref Dictionary<string, SeedChemQuantity> val, Dictionary<string, SeedChemQuantity> other)
+    private void CrossChemicals(ref Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity> val, Dictionary<ProtoId<ReagentPrototype>, SeedChemQuantity> other) // Trauma - protoid
     {
         // Go through chemicals from the pollen in swab
         foreach (var otherChem in other)

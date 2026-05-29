@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.IntegrationTests.Fixtures;
 using Content.Trauma.Shared.Genetics.Abilities;
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Server.Polymorph.Systems;
@@ -9,9 +11,8 @@ using System.Collections.Generic;
 
 namespace Content.IntegrationTests.Tests._Trauma;
 
-[TestFixture]
 [TestOf(typeof(MutationSystem))]
-public sealed class MutationTest
+public sealed class MutationTest : GameTest
 {
     private static readonly EntProtoId TestMob = "MobHuman";
     private static readonly EntProtoId TestMobPoly = "MobDwarf";
@@ -25,12 +26,12 @@ public sealed class MutationTest
     [Test]
     public async Task AddRemoveAllMutations()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var map = await pair.CreateTestMap();
 
-        var entMan = server.ResolveDependency<IEntityManager>();
-        var protoMan = server.ResolveDependency<IPrototypeManager>();
+        var entMan = server.EntMan;
+        var protoMan = server.ProtoMan;
         var mutation = entMan.System<MutationSystem>();
         var factory = entMan.ComponentFactory;
         // monkey polymorph mutation messes it up so exclude it
@@ -66,8 +67,6 @@ public sealed class MutationTest
         });
 
         await server.WaitRunTicks(150); // 5 seconds
-
-        await pair.CleanReturnAsync();
     }
 
     /// <summary>
@@ -76,17 +75,22 @@ public sealed class MutationTest
     [Test]
     public async Task MutationsPolymorphTest()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var entMan = server.EntMan;
         var mutation = entMan.System<MutationSystem>();
         var polymorph = entMan.System<PolymorphSystem>();
+        var genome = entMan.System<ScannedGenomeSystem>();
 
         var map = await pair.CreateTestMap();
 
         await server.WaitAssertion(() =>
         {
             var dorf = entMan.SpawnEntity(TestMobPoly, map.GridCoords);
+
+            // scan him and compare sequence count later
+            genome.ScanGenome(dorf);
+            var started = entMan.GetComponent<ScannedGenomeComponent>(dorf).Sequences.Count;
 
             // dwarf must start with dwarfism
             Assert.That(mutation.HasMutation(dorf, TestMutation),
@@ -105,6 +109,11 @@ public sealed class MutationTest
             Assert.That(!mutation.HasMutation(dorf, TestMutation),
                 $"{TestMutation} was not moved from {entMan.ToPrettyString(dorf)}!");
 
+            // and still have everything scanned
+            var ended = entMan.GetComponent<ScannedGenomeComponent>(monkey).Sequences.Count;
+            Assert.That(ended, Is.EqualTo(started),
+                "Lost some scanned genome squences when turning into a monkey!");
+
             // return from monke
             Assert.That(polymorph.Revert(monkey), Is.EqualTo(dorf),
                 $"Failed to revert polymorph from {entMan.ToPrettyString(monkey)} back to {entMan.ToPrettyString(dorf)}!");
@@ -113,9 +122,11 @@ public sealed class MutationTest
             Assert.That(mutation.HasMutation(dorf, TestMutation),
                 $"{TestMutation} was not moved back to {entMan.ToPrettyString(dorf)}!");
 
+            ended = entMan.GetComponent<ScannedGenomeComponent>(dorf).Sequences.Count;
+            Assert.That(ended, Is.EqualTo(started),
+                "Lost some scanned genome squences when turning back from a monkey!");
+
             entMan.DeleteEntity(dorf);
         });
-
-        await pair.CleanReturnAsync();
     }
 }

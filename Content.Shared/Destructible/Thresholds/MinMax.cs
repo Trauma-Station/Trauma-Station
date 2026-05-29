@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Random;
 
 namespace Content.Shared.Destructible.Thresholds;
@@ -32,5 +25,10 @@ public partial struct MinMax
     public readonly int Next(System.Random random)
     {
         return random.Next(Min, Max + 1);
+    }
+
+    public static implicit operator MinMax((int Min, int Max) tuple)
+    {
+        return new MinMax(tuple.Min, tuple.Max);
     }
 }

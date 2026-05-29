@@ -28,28 +28,13 @@
   - OreDiamond
   - OreBSCrystal
   #- OreGibtonite # It's broken right now sadly because of how Gatherable works :(
-  addComponents:
-  - type: FTLDestination
-    whitelist: # TODO fix shuttles FTLing on planets and remove this whitelist
-      components:
-      - MiningShuttle
-  - type: WeatherScheduler # Regular ash storms
-    stages:
-    - duration: # 10-15 minutes of calm
-        min: 600
-        max: 900
-    - weather: WeatherAshfallLight
-      message: ash-storm-telegraph
-      duration:
-        min: 90
-        max: 120
-    - weather: WeatherAshfall
-      message: ash-storm-alert
-      duration:
-        min: 120
-        max: 180
-    - weather: WeatherAshfallLight
-      message: ash-storm-clearing
-      duration:
-        min: 30
-        max: 30
+  mapEffects:
+  - !type:AddComponents
+    components:
+    - type: FTLDestination
+      whitelist: # TODO fix shuttles FTLing on planets and remove this whitelist
+        components:
+        - MiningShuttle
+  - !type:ModifyStatusEffect
+    effectProto: WeatherSchedulerAshStorm # Regular ash storms
+    time: null # permanent

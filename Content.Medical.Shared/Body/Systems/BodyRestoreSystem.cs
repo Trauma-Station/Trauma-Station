@@ -7,10 +7,10 @@ using Content.Shared.Rejuvenate;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class BodyRestoreSystem : EntitySystem
+public sealed partial class BodyRestoreSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     public override void Initialize()
     {

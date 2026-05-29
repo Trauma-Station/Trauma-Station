@@ -18,14 +18,6 @@ public partial class TraumaSystem
         { BoneSeverity.Broken, 0 },
     };
 
-    private readonly Dictionary<BoneSeverity, FixedPoint2> _bonePainModifiers = new()
-    {
-        { BoneSeverity.Normal, 0.4 },
-        { BoneSeverity.Damaged, 0.6 },
-        { BoneSeverity.Cracked, 0.8 },
-        { BoneSeverity.Broken, 1 },
-    };
-
     private readonly Dictionary<WoundableSeverity, FixedPoint2> _boneTraumaChanceMultipliers = new()
     {
         { WoundableSeverity.Healthy, 0 },

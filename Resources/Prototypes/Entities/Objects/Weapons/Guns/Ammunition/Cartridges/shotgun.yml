@@ -115,7 +115,7 @@
     state: "practice"
 
 - type: entity
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  parent: [ SolutionAmmo, SolutionToolVeryTiny, BaseShellShotgun, BaseSecurityContraband ]
   id: ShellTranquilizer
   name: shell (12 Gauge tranquilizer) # Goobstation
   description: The standard cartridge used by most modern shotguns. Tranquilizer ammunition contains a single ballistic syringe loaded with a strong sedative that harmlessly puts targets to sleep.
@@ -131,12 +131,11 @@
   - type: CartridgeAmmo
     proto: PelletShotgunTranquilizer
   - type: ChemicalAmmo
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        reagents:
-        - ReagentId: ChloralHydrate
-          Quantity: 7
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 7.5
   - type: SolutionTransfer
     maxTransferAmount: 7
   - type: SpentAmmoVisuals
@@ -148,10 +147,15 @@
   name: improvised shotgun shell
   description: A homemade shotgun shell loaded with chunks of glass shrapnel. Surprisingly effective, but the spread is so wide that you couldn't hit the broad side of a barn.
   components:
+  # <Trauma>
+  - type: StaticPrice
+    price: 50 # Trauma - fix arbitrage
+  # </Trauma>
   - type: Tag
     tags:
     - ShellShotgun
     - ShellShotgunLight
+    - Trash # Trauma
   - type: Sprite
     layers:
       - state: improvised
@@ -163,6 +167,13 @@
     proto: PelletShotgunImprovisedSpread
   - type: SpentAmmoVisuals
     state: "improvised"
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Plastic: 50
+      Glass: 200
+  #</Trauma>
 
 - type: entity
   parent: [ BaseShellShotgun, BaseSecurityContraband ]

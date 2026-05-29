@@ -7,12 +7,12 @@ using Content.Goobstation.Shared.Overlays;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
-using Content.Server.Atmos.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -34,23 +34,25 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.HisGrace;
 
-public sealed class HisGraceSystem : SharedHisGraceSystem
+public sealed partial class HisGraceSystem : SharedHisGraceSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = null!;
-    [Dependency] private readonly PopupSystem _popup = null!;
-    [Dependency] private readonly IGameTiming _timing = null!;
-    [Dependency] private readonly MobStateSystem _state = null!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = null!;
-    [Dependency] private readonly EntityLookupSystem _lookup = null!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = null!;
-    [Dependency] private readonly TransformSystem _transform = null!;
-    [Dependency] private readonly AudioSystem _audio = null!;
-    [Dependency] private readonly MindSystem _mind = null!;
-    [Dependency] private readonly StunSystem _stun = null!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = null!;
-    [Dependency] private readonly ChatSystem _chat = null!;
-    [Dependency] private readonly MobThresholdSystem _threshold = null!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = null!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _state = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private MovementSpeedModifierSystem _speedModifier = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+
+    private HashSet<Entity<MobStateComponent>> _targets = new();
 
     public override void Initialize()
     {
@@ -172,7 +174,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             return;
 
         // 5 blunt per entity consumed
-        hisGrace.Comp.CurrentDamageIncrease.DamageDict["Blunt"] = hisGrace.Comp.EntitiesAbsorbed * 5;
+        hisGrace.Comp.CurrentDamageIncrease.DamageDict["Blunt"] = hisGrace.Comp.EntitiesAbsorbed * 2;
         melee.Damage = hisGrace.Comp.BaseDamage + hisGrace.Comp.CurrentDamageIncrease;
 
         Dirty(hisGrace, melee);
@@ -345,13 +347,17 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             && hisGrace.Comp.Holder == hisGrace.Comp.User)
             return;
 
-        var nearbyEnts = _lookup.GetEntitiesInRange(hisGrace, 1f);
+        var coords = Transform(hisGrace).Coordinates;
+        var flags = LookupFlags.Uncontained; // skip mobs that are already devoured, aka in a container
+        _targets.Clear();
+        _lookup.GetEntitiesInRange(coords, 1f, _targets, flags);
 
-        // dont attack if the entity is the user, and dont if the entity is in a container (e.g, already devoured)
-        foreach (var entity in nearbyEnts.Where(entity => HasComp<MobStateComponent>(entity)
-            && entity != hisGrace.Comp.User
-            && !_containerSystem.IsEntityOrParentInContainer(entity)))
+        foreach (var entity in _targets)
         {
+            // dont attack if the entity is the user
+            if (entity == hisGrace.Comp.User)
+                continue;
+
             // Log ground attack
             _adminLog.Add(LogType.AdminMessage, LogImpact.Medium,
                 $"HIS GRACE GROUND ATTACK: {ToPrettyString(hisGrace):tool} attacked {ToPrettyString(entity):target} at {Transform(hisGrace).Coordinates}");
@@ -361,7 +367,7 @@ public sealed class HisGraceSystem : SharedHisGraceSystem
             var angle = _transform.GetRelativePosition(xform, entity, GetEntityQuery<TransformComponent>()).ToAngle();
 
             // do damage and animation
-            _damageable.TryChangeDamage(entity, melee.Damage, targetPart: TargetBodyPart.Chest, origin: hisGrace);
+            _damageable.TryChangeDamage(entity.Owner, melee.Damage, targetPart: TargetBodyPart.Chest, origin: hisGrace);
             _melee.DoLunge(hisGrace, hisGrace, angle, coordinates.Position, null, angle, false, false);
 
             _audio.PlayPvs(melee.HitSound, hisGrace);

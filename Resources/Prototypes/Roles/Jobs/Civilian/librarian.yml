@@ -7,14 +7,8 @@
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hop
   access:
-  - Library # Trauma - TODO, remove service after mapping is done
-  - Service
+  - Library # Trauma - replaced Service
   - Maintenance
-  # <Trauma>
-  special: # Librarian should speak most languages.
-  - !type:AddImplantSpecial
-    implants: [ LibrarianTranslatorImplant ]
-  # </Trauma>
 - type: startingGear
   id: LibrarianGear
   equipment:

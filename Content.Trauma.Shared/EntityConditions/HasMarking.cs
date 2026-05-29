@@ -3,7 +3,6 @@
 using Content.Shared.Body;
 using Content.Shared.EntityConditions;
 using Content.Shared.Humanoid.Markings;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -34,10 +33,10 @@ public sealed partial class HasMarking : EntityConditionBase<HasMarking>
         => Loc.GetString(GuidebookText, ("marking", prototype.Index(Marking).Name));
 }
 
-public sealed class HasMarkingConditionSystem : EntityConditionSystem<BodyComponent, HasMarking>
+public sealed partial class HasMarkingConditionSystem : EntityConditionSystem<BodyComponent, HasMarking>
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private BodySystem _body = default!;
 
     protected override void Condition(Entity<BodyComponent> ent, ref EntityConditionEvent<HasMarking> args)
     {

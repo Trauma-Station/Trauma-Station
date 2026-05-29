@@ -33,3 +33,7 @@
     ClothingShoesBootsWinterSci: 2
   contrabandInventory:
     ToyFigurineResearchDirector: 1
+  # <Trauma>
+  emaggedInventory:
+    WeaponPistolCHIMPUpgradeKit: 1
+  # </Trauma>

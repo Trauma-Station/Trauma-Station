@@ -40,5 +40,7 @@
   contrabandInventory:
     DrinkColaBottleFull: 2
     DrinkChangelingStingCan: 2
+    VialCocaine: 2 # Trauma
   emaggedInventory:
     DrinkNukieCan: 2
+    GlueGrenade: 2 # Trauma - Cola in my language is glue lol

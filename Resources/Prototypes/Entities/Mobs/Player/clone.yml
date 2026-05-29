@@ -18,8 +18,8 @@
   - CanEnchant
   - Store # needed for heretic and any other antags with an intrinsic store, IDEALLY this would be on the mind
   - LanguageSpeaker
-  # - LanguageKnowledge # Trauma - knowledge
   - ForeignerTrait
+  - EncryptionKeyHolder
   # </Trauma>
   # general
   - DetailExaminable
@@ -28,7 +28,8 @@
   - Grammar # Pronouns
   - HumanoidProfile # Age, Sex, Gender
   - NpcFactionMember
-  - EncryptionKeyHolder # Goobstation
+  - RandomPrice
+  - CreamPied
   # traits
   - BlackAndWhiteOverlay
   - Clumsy

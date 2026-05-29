@@ -15,17 +15,16 @@ using Content.Shared.Popups;
 using Content.Shared.Trigger.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
 namespace Content.Goobstation.Server.Devil.Condemned;
 
 public sealed partial class CondemnedSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly PolymorphSystem _poly = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly DnaScrambleOnTriggerSystem _scramble = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private PolymorphSystem _poly = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private DnaScrambleOnTriggerSystem _scramble = default!;
 
     public override void Initialize()
     {

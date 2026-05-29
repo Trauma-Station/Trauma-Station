@@ -1,18 +1,27 @@
-# Sidearm Laser
 - type: selectableAmmo
   id: BulletLethalSidearm
   desc: Lethal
   icon:
-    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/energy_bolt.rsi
-    state: bolt_red_heavy
-  protoId: SidearmLethal
-  fireCost: 40
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    state: heavylaser
+  protoId: LaserSidearmBullet
+  fireCost: 30
+  flags:
+  - ChangeWeaponFireSound
+  - ChangeWeaponFireCost
+  soundGunshot:
+    path: /Audio/_Trauma/Weapons/Guns/Gunshots/laser2.ogg
 
 - type: selectableAmmo
   id: BulletDisablerSidearm
   desc: Disable
   icon:
-    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/energy_bolt.rsi
-    state: bolt_blue_heavy
-  protoId: SidearmDisable
-  fireCost: 80
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    state: omnilaser
+  protoId: BulletDisabler
+  fireCost: 30
+  flags:
+  - ChangeWeaponFireSound
+  - ChangeWeaponFireCost
+  soundGunshot:
+    path: /Audio/Weapons/Guns/Gunshots/taser2.ogg

@@ -5,15 +5,20 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
+  conditions:
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Muted # can't spam it on the same person immediately
   opponentEffects:
-  - !type:ModifyParalysis
-    time: 2
-  - !type:HealthChange
-    damage:
-      types:
-        Slash: 5
+  - !type:ModifyStatusEffect
+    effectProto: NinjutsuTakedownStatusEffect
+    time: 5
+  - !type:GenericStatusEffect
+    key: Muted
+    component: Muted
+    time: 10
   levelRequired: 50
-  giveExperience: false
 
 - type: combo
   id: BiteTheDust
@@ -25,11 +30,11 @@
     sound: /Audio/Weapons/genhit3.ogg
   opponentEffects:
   - !type:ModifyParalysis
-    time: 20
+    time: 9
   - !type:HealthChange
     damage:
       types:
-        Slash: 20
+        Slash: 10
   levelRequired: 10
 
 - type: combo

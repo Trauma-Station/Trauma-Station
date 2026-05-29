@@ -1,14 +1,14 @@
 - type: entity
+  parent: [ OrganBaseHeart, BasePowerCell ]
   id: XenobioVolatileOrgan
-  parent: [ OrganBaseInternal, BasePowerCell ]
   name: volatile organ
-  description: A pulsating mass of slime, it seems to react to nearby devices.
   suffix: Full
+  description: A pulsating mass of slime, it seems to react to nearby devices.
   components:
   - type: Sprite
     layers:
-      - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/volatile_organ.rsi
-        state: icon
+    - sprite: _Goobstation/Xenobiology/Specific/Xenobiology/volatile_organ.rsi
+      state: icon
   - type: GenericVisualizer
     visuals: {} # disable battery visuals
   - type: Item
@@ -20,25 +20,15 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 40
   - type: EmpImmune
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      battery:
-        maxVol: 15
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
+    - SolutionRiggable
+    - SolutionFoodSlime
   - type: Extractable
     juiceSolution:
       reagents:
       - ReagentId: Slime
         Quantity: 15
-  - type: Heart
-  - type: Organ
-    category: Heart
-  - type: ChildOrgan
-    parents: [ Torso ]
   - type: OrganComponents
     onAdd:
     - type: LightningArcShooter
@@ -56,7 +46,6 @@
       Damaged: 9
       Destroyed: 0
   - type: Metabolizer
-    maxReagents: 2
     metabolizerTypes: [ Cybernetic ]
   - type: Tag
     tags:
@@ -77,6 +66,7 @@
   - type: Item
     size: Normal
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 0.1
@@ -203,3 +193,16 @@
     price: 10000 # goida
 
 # todo mind transfer potion
+
+- type: entity
+  parent: Solution
+  id: SolutionFoodSlime
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15

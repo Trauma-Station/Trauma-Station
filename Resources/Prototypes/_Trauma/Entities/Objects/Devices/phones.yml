@@ -8,6 +8,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/phone/phone.rsi
     state: icon
+  - type: BlockPull
   - type: RotaryPhone
   - type: ActiveListener
     range: 2
@@ -68,6 +69,8 @@
     - PhonePickupPort
     - PhoneHangupPort
   - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

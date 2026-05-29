@@ -2,8 +2,6 @@
 
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Wraith.Components.Mobs;
 

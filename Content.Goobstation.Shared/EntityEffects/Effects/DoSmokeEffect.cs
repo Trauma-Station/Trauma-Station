@@ -2,7 +2,6 @@
 
 using Content.Shared.Chemistry.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.EntityEffects.Effects;
 

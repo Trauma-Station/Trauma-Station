@@ -92,10 +92,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     FabricationKnowledge: 0 # caveman gaming
   practical:
-    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+    WeaponsKnowledge: 5 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -106,10 +107,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     FabricationKnowledge: 0
   practical:
-    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+    WeaponsKnowledge: 5 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -120,10 +122,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+    WeaponsKnowledge: 5 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -134,10 +137,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     FabricationKnowledge : 1
   practical:
-    WeaponsKnowledge: 4 # Very difficult to make something good out of shit
+    WeaponsKnowledge: 5 # Very difficult to make something good out of shit
   # </Trauma>
 
 - type: construction
@@ -148,8 +152,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
-    WeaponsKnowledge: 2
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -189,6 +197,7 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     FabricationKnowledge: 0 # it's cardboard
   practical:
@@ -218,12 +227,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitBullets
   theory:
-    WeaponsKnowledge: 1
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 1
-    CarvingKnowledge: 2
+    GunsmithingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -234,11 +242,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitBullets
   theory:
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 1
-    CarvingKnowledge: 2
+    GunsmithingKnowledge: 2
+    CarvingKnowledge: 3
   # </Trauma>
 
 - type: construction
@@ -249,12 +258,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitBullets
   theory:
-    WeaponsKnowledge: 1
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 1
-    CarvingKnowledge: 2
+    GunsmithingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -265,12 +273,11 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitBullets
   theory:
-    WeaponsKnowledge: 1
     FabricationKnowledge: 1
   practical:
-    WeaponsKnowledge: 1
-    CarvingKnowledge: 2
+    GunsmithingKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -281,6 +288,7 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: Cardboard
   theory:
     FabricationKnowledge: 0 # it's card board but like origami
   practical:
@@ -311,11 +319,12 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     WeaponsKnowledge: 0
   practical:
-    WeaponsKnowledge: 2
-    CarvingKnowledge: 2
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
   # </Trauma>
 
 # - type: construction # Trauma
@@ -334,6 +343,7 @@
   category: construction-category-weapons
   objectType: Item
   # <Trauma>
+  qualityPrototype: ShitCraft
   theory:
     FabricationKnowledge: 0 # it's cardboard
   practical:

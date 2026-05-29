@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Shared.Chemistry.Components;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -15,9 +8,9 @@ namespace Content.Client.Chemistry.Visualizers;
 /// <summary>
 /// The system responsible for ensuring <see cref="FoamVisualsComponent"/> plays the animation it's meant to when the foam dissolves.
 /// </summary>
-public sealed class FoamVisualizerSystem : VisualizerSystem<FoamVisualsComponent>
+public sealed partial class FoamVisualizerSystem : VisualizerSystem<FoamVisualsComponent>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

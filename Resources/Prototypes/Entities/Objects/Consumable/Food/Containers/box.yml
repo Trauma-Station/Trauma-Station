@@ -506,6 +506,7 @@
   suffix: Toy Safe
   description: The toy is more edible than the food.
   components:
+  - type: AntiRottingContainer # Trauma
   - type: Sprite
     sprite: Objects/Storage/Happyhonk/clown.rsi
     state: box

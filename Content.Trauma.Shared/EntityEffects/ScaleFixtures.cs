@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -23,9 +22,9 @@ public sealed partial class ScaleFixtures : EntityEffectBase<ScaleFixtures>
         => null;
 }
 
-public sealed class ScaleFixturesEffectSystem : EntityEffectSystem<FixturesComponent, ScaleFixtures>
+public sealed partial class ScaleFixturesEffectSystem : EntityEffectSystem<FixturesComponent, ScaleFixtures>
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     protected override void Effect(Entity<FixturesComponent> ent, ref EntityEffectEvent<ScaleFixtures> args)
     {

@@ -3,14 +3,13 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Discord;
 using Content.Server.GameTicking;
-using Robust.Shared.Network;
 
 namespace Content.Goobstation.Server.PlayerListener;
 
 public sealed partial class RageQuitNotifySystem
 {
-    [Dependency] private readonly DiscordWebhook _discord = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
+    [Dependency] private DiscordWebhook _discord = default!;
+    [Dependency] private GameTicker _ticker = default!;
     private WebhookData? _webhook;
 
     private void InitializeDiscord()

@@ -14,7 +14,4 @@ public sealed partial class BiomeOptimizeComponent : Component
 {
     [DataField]
     public Box2 LoadArea;
-
-    [ViewVariables]
-    public HashSet<Vector2i> LoadedChunks = new();
 }

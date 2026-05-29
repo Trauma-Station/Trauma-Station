@@ -3,8 +3,6 @@
 using Content.Shared.Polymorph;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 

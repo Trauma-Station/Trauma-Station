@@ -1,9 +1,8 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
-using Content.Medical.Common.Targeting;
 using Content.Medical.Common.Wounds;
-using Content.Shared.FixedPoint;
 using Content.Shared.Body;
+using Content.Shared.FixedPoint;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Robust.Shared.Prototypes;
 // </Trauma>
 using Robust.Shared.Serialization;

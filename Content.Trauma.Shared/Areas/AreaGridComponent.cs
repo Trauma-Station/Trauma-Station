@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Prototypes;
-using System.Numerics;
 
 namespace Content.Trauma.Shared.Areas;
 
 /// <summary>
-/// Stores areas on a grid efficiently for map saving and loading.
+/// Stores areas on a grid efficiently for quick lookup and map saving/loading.
 /// Basically the area version of <c>MapGridComponent</c>.
 /// </summary>
 [RegisterComponent, Access(typeof(MapAreaSystem))]
@@ -39,7 +37,14 @@ public sealed partial class AreaChunk
     /// <summary>
     /// Live area entities that are on this chunk.
     /// Only exists while the map is loaded, area entities do not get saved directly.
+    /// Must have a length equal to chunk size squared.
     /// </summary>
     [ViewVariables]
-    public HashSet<EntityUid> Areas = new();
+    public EntityUid[] Areas = default!;
+
+    /// <summary>
+    /// How many area entities are currently live in this chunk.
+    /// </summary>
+    [ViewVariables]
+    public int AreaCount;
 }

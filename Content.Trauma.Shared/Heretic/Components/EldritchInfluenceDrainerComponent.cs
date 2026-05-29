@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Shared.Heretic.Components;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class EldritchInfluenceDrainerComponent : Component
+{
+    [DataField]
+    public float Time = 8f;
+
+    [DataField]
+    public bool Hidden;
+}

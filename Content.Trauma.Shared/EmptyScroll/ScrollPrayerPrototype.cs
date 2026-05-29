@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityTable.EntitySelectors;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EmptyScroll;
 

@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
+
+/// <summary>
+/// Added to walls which can be converted to ice walls by aristocrat's way.
+/// Obviously should not be added to ice walls.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class FreezableWallComponent : Component;

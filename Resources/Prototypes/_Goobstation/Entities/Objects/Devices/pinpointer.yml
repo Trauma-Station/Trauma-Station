@@ -127,29 +127,6 @@
       - LavalandStation # Lavaland change
 
 - type: entity
-  name: thieving pinpointer
-  description: A handheld tracking device that can target anything worthwhile, including high risk items and stealable structures while off. Keep upright to retain accuracy.
-  id: PinpointerThief
-  parent: [ PinpointerBase, BaseMinorContraband ]
-  components:
-  - type: Sprite
-    layers:
-    - state: pinpointer_thief
-      map: ["enum.PinpointerLayers.Base"]
-    - state: pinonnull
-      map: ["enum.PinpointerLayers.Screen"]
-      shader: unshaded
-      visible: false
-  - type: Icon
-    state: pinpointer_thief
-  - type: Pinpointer
-    updateTargetName: true
-    canRetarget: true
-    retargetingWhitelist: # Goob edit: pinpointer whitelist
-      components:
-      - StealTarget # You can marker your objective with it!
-
-- type: entity
   name: syndicate nuke pinpointer
   description: Produced specifically for nuclear operative missions, get that nuclear bomb!
   id: PinpointerSyndicateNuclearFission

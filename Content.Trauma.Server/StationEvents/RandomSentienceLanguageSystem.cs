@@ -1,21 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._EinsteinEngines.Language;
-using Content.Shared._EinsteinEngines.Language.Components;
-using Content.Shared._EinsteinEngines.Language.Systems;
+using Content.Trauma.Common.Language;
+using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.StationEvents;
 using Content.Trauma.Shared.Knowledge.Systems;
-using Robust.Shared.Prototypes;
+using Content.Trauma.Shared.Language.Systems;
 
 namespace Content.Trauma.Server.StationEvents;
 
 /// <summary>
 /// Makes sure random sentience targets can speak/understand Tau Ceti Basic.
 /// </summary>
-public sealed class RandomSentienceLanguageSystem : EntitySystem
+public sealed partial class RandomSentienceLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
 
     public static readonly ProtoId<LanguagePrototype> TauCetiBasic = "TauCetiBasic";
 

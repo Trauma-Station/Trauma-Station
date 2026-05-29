@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Weapons.SmartGun;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
+using Content.Goobstation.Shared.Weapons.SmartGun;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Goobstation.Client.Weapons.LaserPointer;

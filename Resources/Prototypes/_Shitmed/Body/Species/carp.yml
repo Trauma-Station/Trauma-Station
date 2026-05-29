@@ -6,8 +6,6 @@
   id: AppearanceCarp
   name: carp appearance
   components:
-  - type: Legs
-    required: 1 # tail
   - type: InitialBody
     organs:
       # Parts
@@ -35,6 +33,8 @@
   components:
   - type: Sprite
     sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
+  - type: Woundable
+    boneEntity: null
   - type: VisualOrgan
     data:
       sprite: _Shitmed/Mobs/Aliens/Carps/carp_parts.rsi
@@ -59,9 +59,6 @@
   name: carp tail
   description: Unique glands in this tail let space carp fly in a vacuum.
   components:
-  - type: MovementBodyPart
-    walkSpeed: 2.5
-    sprintSpeed: 3.5
   - type: Sprite
     layers:
     - state: tail-icon

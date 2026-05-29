@@ -22,7 +22,6 @@
         Radiation: -1.5
         Cellular: -3
     delay: 9
-  - type: Timer
   - type: TimedSpawner
     prototypes:
     - MobMadRat
@@ -59,8 +58,9 @@
         maxDistance: 10
         variation: 0.1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
       - trigger:

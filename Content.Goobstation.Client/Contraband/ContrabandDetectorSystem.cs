@@ -4,6 +4,6 @@ using Content.Goobstation.Shared.Contraband;
 
 namespace Content.Goobstation.Client.Contraband;
 
-public sealed class ContrabandDetectorSystem : SharedContrabandDetectorSystem
+public sealed partial class ContrabandDetectorSystem : SharedContrabandDetectorSystem
 {
 }

@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -27,10 +21,6 @@
       path: /Audio/Weapons/Guns/Empty/empty.ogg
     clumsyProof: true
   - type: PacifismAllowedGun
-  - type: Multishot # Goobstation V
-    missChance: 0.2
-    spreadMultiplier: 1
-    spreadAddition: 15
   - type: AmmoCounter
   - type: RechargeBasicEntityAmmo
     rechargeCooldown: 5
@@ -40,10 +30,9 @@
     proto: BulletDartGun
     capacity: 5
     count: 5
-  - type: SolutionContainerManager
-    solutions:
-      solution:
-        maxVol: 30
+  - type: Solution
+    solution:
+      maxVol: 30
   - type: RefillableSolution
     solution: solution
   - type: ExaminableSolution
@@ -73,10 +62,10 @@
     muzzleFlash: null
   - type: Reflective
     reflective: None
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        maxVol: 5
+  - type: Solution
+    id: ammo
+    solution:
+      maxVol: 5
   - type: SolutionInjectOnProjectileHit
     transferAmount: 5
     solution: ammo

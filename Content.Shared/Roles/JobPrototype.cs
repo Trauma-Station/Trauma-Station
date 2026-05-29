@@ -81,9 +81,6 @@ namespace Content.Shared.Roles
         [DataField]
         public bool? OverrideConsoleVisibility { get; private set; } = null;
 
-        [DataField]
-        public bool CanBeAntag { get; private set; } = true;
-
         /// <summary>
         ///     The "weight" or importance of this job. If this number is large, the job system will assign this job
         ///     before assigning other jobs.
@@ -153,12 +150,6 @@ namespace Content.Shared.Roles
         /// </summary>
         [DataField]
         public List<ProtoId<GuideEntryPrototype>>? Guides;
-
-        /// <summary>
-        ///     Goobstation Change: The amount of Goobcoins a player will receive when they finish a round as this job.
-        /// </summary>
-        [DataField]
-        public int Goobcoins { get; private set; } = 1;
     }
 
     /// <summary>

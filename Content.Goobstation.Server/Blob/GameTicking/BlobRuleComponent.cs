@@ -3,7 +3,6 @@
 using Content.Server.GameTicking.Rules;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes; // Trauma
 
 namespace Content.Goobstation.Server.Blob.GameTicking;
 
@@ -14,7 +13,7 @@ public sealed partial class BlobRuleComponent : Component
     public SoundSpecifier? DetectedAudio = new SoundPathSpecifier("/Audio/_Goobstation/Announcements/blob_detected.ogg");
 
     [DataField]
-    public SoundSpecifier? CriticalAudio = new SoundPathSpecifier("/Audio/StationEvents/blobin_time.ogg");
+    public SoundSpecifier? CriticalAudio = new SoundPathSpecifier("/Audio/_Goobstation/StationEvents/blobin_time.ogg");
 
     [ViewVariables]
     public List<(EntityUid mindId, MindComponent mind)> Blobs = new(); //BlobRoleComponent
@@ -26,18 +25,17 @@ public sealed partial class BlobRuleComponent : Component
     public float Accumulator = 0f;
 
     /// <summary>
-    /// Trauma - The shuttle event used for the blob CBurn autocall.
+    /// The shuttle event used for the blob CBurn autocall.
     /// </summary>
     [DataField]
     public EntProtoId BlobCBurnEvent = "SpawnCBURNNoAnnounce";
 
     /// <summary>
-    /// Trauma - Whether or not a CBurn shuttle for blob has been sent.
+    /// Whether or not a CBurn shuttle for blob has been sent.
     /// </summary>
     [DataField]
     public bool BlobCBurnCalled;
 }
-
 
 public enum BlobStage : byte
 {

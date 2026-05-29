@@ -1,43 +1,29 @@
 # less material and time efficient than a forge, basically
 # only for bootstrapping if you lose your starting parts
 - type: construction
+  abstract: true
+  id: BaseRevParts
+  graph: RevParts
+  category: construction-category-antagonist
+  objectType: Item
+  theory:
+    RevolutionaryKnowledge: 0
+  practical:
+    FabricationKnowledge: 1
+    MetalworkingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: BaseRevParts
   id: RevGear
-  graph: RevParts
-  startNode: start
   targetNode: gear
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 0
-  practical:
-    FabricationKnowledge: 1
-    MetalworkingKnowledge: 1
-  useQuality: false
 
 - type: construction
+  parent: BaseRevParts
   id: RevBolt
-  graph: RevParts
-  startNode: start
   targetNode: bolt
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 0
-  practical:
-    FabricationKnowledge: 1
-    MetalworkingKnowledge: 1
-  useQuality: false
 
 - type: construction
+  parent: BaseRevParts
   id: RevNut
-  graph: RevParts
-  startNode: start
   targetNode: nut
-  category: construction-category-antagonist
-  objectType: Item
-  theory:
-    RevolutionaryKnowledge: 0
-  practical:
-    FabricationKnowledge: 1
-    MetalworkingKnowledge: 1
-  useQuality: false

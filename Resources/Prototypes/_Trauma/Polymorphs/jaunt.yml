@@ -1,0 +1,12 @@
+- type: polymorph
+  id: BloodCrawlJauntPrayer
+  configuration:
+    entity: PolymorphBloodCrawlJauntPrayer
+    forced: true
+    attachToGridOrMap: true
+    showPopup: false
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+    - component: SlaughterDevour

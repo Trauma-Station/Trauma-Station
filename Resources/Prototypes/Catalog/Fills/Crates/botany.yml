@@ -86,8 +86,8 @@
           amount: 2
         - id: TobaccoSeeds
           amount: 2
-        - id: CannabisSeeds
-          amount: 2
+        # - id: CannabisSeeds # Trauma - made minor contraband
+        #   amount: 2
         - id: NettleSeeds
           amount: 2
         - id: FlyAmanitaSeeds

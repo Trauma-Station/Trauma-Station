@@ -2,9 +2,9 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.FixedPoint;
-using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Magic.Components;
+using Content.Trauma.Common.Wizard;
 // </Trauma>
 using Content.Server.Chat.Systems;
 using Content.Shared.Actions.Events;
@@ -20,10 +20,10 @@ namespace Content.Server.Speech.EntitySystems;
 /// As soon as the chat refactor moves to Shared
 /// the logic here can move to the shared <see cref="SharedSpeakOnActionSystem"/>
 /// </summary>
-public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
+public sealed partial class SpeakOnActionSystem : SharedSpeakOnActionSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!; // Goob
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DamageableSystem _damageable = default!; // Goob
 
     public override void Initialize()
     {
@@ -63,6 +63,6 @@ public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
         if (string.IsNullOrWhiteSpace(speech))
             return;
 
-        _chat.TrySendInGameICMessage(user, Loc.GetString(speech), InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(user, Loc.GetString(speech), ent.Comp.ChatType, false); // Trauma - use ent.Comp.ChatType
     }
 }

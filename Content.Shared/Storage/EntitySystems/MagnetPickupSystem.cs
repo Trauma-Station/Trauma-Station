@@ -1,9 +1,10 @@
-// <Goob>
+// <Trauma>
 using Content.Shared.Examine;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
-// </Goob>
+// </Trauma>
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
@@ -15,26 +16,29 @@ namespace Content.Shared.Storage.EntitySystems;
 /// <summary>
 /// <see cref="MagnetPickupComponent"/>
 /// </summary>
-public sealed class MagnetPickupSystem : EntitySystem
+public sealed partial class MagnetPickupSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!; // Goob
-    [Dependency] private readonly SharedItemSystem _item = default!; // White Dream
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    // <Trauma>
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private EntityQuery<ItemToggleComponent> _toggleQuery = default!;
+    // </Trauma>
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
 
-    private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<MagnetPickupComponent, ItemToggledEvent>(OnItemToggled); // White Dream
         SubscribeLocalEvent<MagnetPickupComponent, ExaminedEvent>(OnExamined); // WD EDIT
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
@@ -42,6 +46,7 @@ public sealed class MagnetPickupSystem : EntitySystem
     //WD EDIT start
     private void OnExamined(Entity<MagnetPickupComponent> entity, ref ExaminedEvent args)
     {
+        // TODO: theres already a component for this
         var onMsg = _toggle.IsActivated(entity.Owner)
             ? Loc.GetString("comp-magnet-pickup-examined-on")
             : Loc.GetString("comp-magnet-pickup-examined-off");
@@ -50,6 +55,7 @@ public sealed class MagnetPickupSystem : EntitySystem
 
     private void OnItemToggled(Entity<MagnetPickupComponent> entity, ref ItemToggledEvent args)
     {
+        // TODO: bruh this has no reason to be here
         _item.SetHeldPrefix(entity.Owner, args.Activated ? "on" : "off");
     }
     //WD EDIT end
@@ -57,7 +63,6 @@ public sealed class MagnetPickupSystem : EntitySystem
     {
         component.NextScan = _timing.CurTime;
     }
-
 
     public override void Update(float frameTime)
     {
@@ -67,29 +72,37 @@ public sealed class MagnetPickupSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var comp, out var storage, out var xform, out var meta))
         {
-            // WD EDIT START
-            if (!TryComp<ItemToggleComponent>(uid, out var toggle))
+            // <Trauma>
+            if (_toggleQuery.TryComp(uid, out var toggle) && !toggle.Activated)
                 continue;
+            // </Trauma>
 
-            if (!toggle.Activated)
-                continue;
-            // WD EDIT END
-
-             if (comp.NextScan > currentTime)
+            if (comp.NextScan > currentTime)
                 continue;
 
             comp.NextScan += ScanDelay;
             Dirty(uid, comp);
 
-                        // WD EDIT START. Added ForcePickup.
-            if (!comp.ForcePickup && !_inventory.TryGetContainingSlot((uid, xform, meta), out _))
+            var parentUid = xform.ParentUid;
+
+            /* Trauma - let ore bags work when enabled regardless of being held/equipped
+            if (comp.RequireActiveHand && (!_hands.TryGetActiveItem(parentUid, out var activeItem) || activeItem != uid))
                 continue;
+
+            if (comp.SlotFlags != null)
+            {
+                if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
+                    continue;
+
+                if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
+                    continue;
+            }
+            */
 
             // No space
             if (!_storage.HasSpace((uid, storage)))
                 continue;
-            //WD EDIT END.
-            var parentUid = xform.ParentUid;
+
             var playedSound = false;
             var finalCoords = xform.Coordinates;
             var moverCoords = _transform.GetMoverCoordinates(uid, xform);
@@ -117,7 +130,7 @@ public sealed class MagnetPickupSystem : EntitySystem
                     continue;
 
                 // Play pickup animation for either the stack entity or the original entity.
-                                _storage.PlayPickupAnimation(stacked ?? near, nearCoords, finalCoords, nearXform.LocalRotation);
+                _storage.PlayPickupAnimation(stacked ?? near, nearCoords, finalCoords, nearXform.LocalRotation);
 
                 playedSound = true;
             }

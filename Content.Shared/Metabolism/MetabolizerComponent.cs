@@ -24,6 +24,7 @@ public sealed partial class MetabolizerComponent : Component
     /// </summary>
     /// <returns></returns>
     [DataField]
+    [AutoNetworkedField] // Trauma
     public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 
     /// <summary>

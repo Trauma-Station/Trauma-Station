@@ -1,0 +1,33 @@
+- type: entity
+  name: envy's knife
+  description: Their success will be yours.
+  parent: [KnifeDurabilitySharpenOnly, BaseKnife, BaseMagicalContraband]
+  id: EnvyKnife
+  components:
+  - type: UnholyItem
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/envy_knife.rsi
+    state: icon
+  - type: Item
+    sprite: _Goobstation/Heretic/Entities/envy_knife.rsi
+    size: Small
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    angle: 0
+    damage:
+      types:
+        Slash: 18
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Sharp
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+  - type: ThrowingAngle
+    angle: 180
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 10
+  - type: BackStab
+    damageMultiplier: 1.5
+  - type: EnvyKnife

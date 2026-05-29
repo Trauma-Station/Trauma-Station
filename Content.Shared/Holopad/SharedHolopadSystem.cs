@@ -1,22 +1,14 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Holopad;
 
-public abstract class SharedHolopadSystem : EntitySystem
+public abstract partial class SharedHolopadSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public bool IsHolopadControlLocked(Entity<HolopadComponent> entity, EntityUid? user = null)
     {
-        if (entity.Comp.ControlLockoutStartTime == TimeSpan.Zero)
-            return false;
-
-        if (entity.Comp.ControlLockoutStartTime + TimeSpan.FromSeconds(entity.Comp.ControlLockoutDuration) < _timing.CurTime)
+        if (_timing.CurTime > entity.Comp.ControlLockoutEndTime)
             return false;
 
         if (entity.Comp.ControlLockoutOwner == null || entity.Comp.ControlLockoutOwner == user)
@@ -27,15 +19,12 @@ public abstract class SharedHolopadSystem : EntitySystem
 
     public TimeSpan GetHolopadControlLockedPeriod(Entity<HolopadComponent> entity)
     {
-        return entity.Comp.ControlLockoutStartTime + TimeSpan.FromSeconds(entity.Comp.ControlLockoutDuration) - _timing.CurTime;
+        return entity.Comp.ControlLockoutEndTime - _timing.CurTime;
     }
 
     public bool IsHolopadBroadcastOnCoolDown(Entity<HolopadComponent> entity)
     {
-        if (entity.Comp.ControlLockoutStartTime == TimeSpan.Zero)
-            return false;
-
-        if (entity.Comp.ControlLockoutStartTime + TimeSpan.FromSeconds(entity.Comp.ControlLockoutCoolDown) < _timing.CurTime)
+        if (_timing.CurTime > entity.Comp.ControlLockoutCoolDownEndTime)
             return false;
 
         return true;
@@ -43,6 +32,6 @@ public abstract class SharedHolopadSystem : EntitySystem
 
     public TimeSpan GetHolopadBroadcastCoolDown(Entity<HolopadComponent> entity)
     {
-        return entity.Comp.ControlLockoutStartTime + TimeSpan.FromSeconds(entity.Comp.ControlLockoutCoolDown) - _timing.CurTime;
+        return entity.Comp.ControlLockoutCoolDownEndTime - _timing.CurTime;
     }
 }

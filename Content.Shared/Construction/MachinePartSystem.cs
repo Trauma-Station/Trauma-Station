@@ -1,11 +1,3 @@
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
 using Content.Shared.Construction.Components;
 using Content.Shared.Examine;
@@ -18,11 +10,11 @@ namespace Content.Shared.Construction
     /// <summary>
     /// Deals with machine parts and machine boards.
     /// </summary>
-    public sealed class MachinePartSystem : EntitySystem
+    public sealed partial class MachinePartSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly SharedLatheSystem _lathe = default!;
-        [Dependency] private readonly SharedConstructionSystem _construction = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private SharedLatheSystem _lathe = default!;
+        [Dependency] private SharedConstructionSystem _construction = default!;
 
         public override void Initialize()
         {

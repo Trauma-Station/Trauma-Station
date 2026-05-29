@@ -3,7 +3,6 @@
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Goobstation.Shared.Clothing.Components

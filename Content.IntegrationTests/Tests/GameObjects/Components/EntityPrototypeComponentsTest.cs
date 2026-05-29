@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Content.IntegrationTests.Fixtures;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
@@ -22,12 +23,12 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 {
     [TestFixture]
     [TestOf(typeof(Server.Entry.IgnoredComponents))]
-    public sealed class EntityPrototypeComponentsTest
+    public sealed class EntityPrototypeComponentsTest : GameTest
     {
         [Test]
         public async Task PrototypesHaveKnownComponents()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
 
@@ -111,7 +112,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 
             if (unknownComponentsClient.Count + unknownComponentsServer.Count + doubleIgnoredComponents.Count == 0)
             {
-                await pair.CleanReturnAsync();
                 Assert.Pass($"Validated {entitiesValidated} entities with {componentsValidated} components in {paths.Length} files.");
                 return;
             }
@@ -142,11 +142,11 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
         [Test]
         public async Task IgnoredComponentsExistInTheCorrectPlaces()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
             var client = pair.Client;
             var serverComponents = server.ResolveDependency<IComponentFactory>();
-            var ignoredServerNames = Server.Entry.IgnoredComponents.List;
+            var ignoredServerNames = Content.Server.Entry.IgnoredComponents.List;
             var clientComponents = client.ResolveDependency<IComponentFactory>();
 
             var failureMessages = "";
@@ -162,7 +162,6 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
                 }
             }
             Assert.That(failureMessages, Is.Empty);
-            await pair.CleanReturnAsync();
         }
     }
 }

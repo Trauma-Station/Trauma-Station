@@ -4,15 +4,16 @@ using Content.Goobstation.Common.Flash;
 using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
 using Content.Shared.Stunnable;
 
 namespace Content.Goobstation.Shared.Flashbang;
 
-public sealed class FlashbangSystem : EntitySystem
+public sealed partial class FlashbangSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {
@@ -27,6 +28,9 @@ public sealed class FlashbangSystem : EntitySystem
 
     private void OnExamined(Entity<FlashSoundSuppressionComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<MobStateComponent>(ent))
+            return;
+
         var range = ent.Comp.ProtectionRange;
         var message = range > 0
             ? Loc.GetString("flash-sound-suppression-examine", ("range", range))

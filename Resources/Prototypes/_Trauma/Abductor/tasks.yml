@@ -1,0 +1,184 @@
+# Special
+
+- type: abductorTask
+  id: InstallGland
+  random: false # always given at the end
+  completed:
+  - !type:HasOrgan
+    organCategory: Heart
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - AbductorOrgan
+
+# Organ manipulation
+
+- type: abductorTask
+  id: RemoveWings
+  valid:
+  - !type:SpeciesCondition
+    species: Moth
+  - !type:HasOrgan
+    organCategory: Wings
+  completed: # no moth check here
+  - !type:HasOrgan
+    inverted: true
+    organCategory: Wings
+
+- type: abductorTask
+  id: FixWings
+  valid:
+  - !type:SpeciesCondition
+    species: Moth
+  - !type:HasOrgan
+    inverted: true
+    organCategory: Wings
+  completed:
+  - !type:HasOrgan
+    organCategory: Wings
+
+- type: abductorTask
+  id: RemoveTail
+  valid:
+  - !type:HasOrgan
+    organCategory: Tail
+
+- type: abductorTask
+  id: EndRacism # lizard lives matter
+  valid:
+  - !type:SpeciesCondition
+    species: Human # must be racist
+  - !type:HasOrgan
+    inverted: true # must not already have a tail...
+    organCategory: Tail
+  completed:
+  - !type:HasOrgan
+    organCategory: Tail
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - PullerTail # lizard tail is best
+
+- type: abductorTask
+  id: CyberEyes
+  valid:
+  - !type:HasOrgan
+    inverted: true # no automatic completion
+    organCategory: Eyes
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Cybernetics
+
+- type: abductorTask
+  id: InsertCavity
+  valid:
+  - !type:HasOrgan
+    organCategory: Torso
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - BodyPartCavity # just incase some species has no cavity...
+    - !type:CavityHasItem
+      inverted: true # no automatic completion
+  completed:
+  - !type:HasOrgan
+    organCategory: Torso
+    conditions:
+    - !type:CavityHasItem
+
+# Damage
+
+- type: abductorTask
+  id: FullyHeal # how kind of you
+  valid:
+  - !type:VitalDamageCondition
+    min: 10 # from having a boo boo to being a rotting corpse
+  completed:
+  - !type:VitalDamageCondition
+    max: 5 # in case some annoying shit like genetic damage is left over
+
+- type: abductorTask
+  id: Beating
+  valid:
+  - !type:VitalDamageCondition
+    max: 90 # don't kick a man while hes down
+  completed:
+  - !type:TypedDamageCondition
+    damage:
+      types:
+        Blunt: 30 # fuck him up good
+
+- type: abductorTask
+  id: BurnMoth
+  valid:
+  - !type:SpeciesCondition
+    species: Moth
+  completed:
+  - !type:TypedDamageCondition
+    damage:
+      types:
+        Heat: 30
+
+# Abuse
+
+- type: abductorTask
+  id: RemoveArms
+  chance: 0.05 # rare
+  valid:
+  - !type:HasOrgan
+    organCategory: ArmLeft
+  - !type:HasOrgan
+    organCategory: ArmRight
+
+- type: abductorTask
+  id: RemoveLegs
+  chance: 0.05 # rare
+  valid:
+  - !type:HasOrgan
+    organCategory: LegLeft
+  - !type:HasOrgan
+    organCategory: LegRight
+
+- type: abductorTask
+  id: RemoveTongue
+  chance: 0.5 # kinda rare
+  valid:
+  - !type:HasOrgan
+    organCategory: Tongue
+  completed:
+  - !type:HasOrgan
+    inverted: true
+    organCategory: Tongue
+  - !type:HasOrgan
+    organCategory: Head # don't allow cutting off head to do it...
+
+- type: abductorTask
+  id: RemoveKidneys
+  valid:
+  - !type:HasOrgan
+    organCategory: Kidneys
+
+- type: abductorTask
+  id: RemoveStomach
+  valid:
+  - !type:SpeciesCondition
+    inverted: true
+    species: SlimePerson # thats debraining...
+  - !type:HasOrgan
+    organCategory: Stomach
+  completed:
+  - !type:HasOrgan
+    inverted: true
+    organCategory: Stomach
+
+- type: abductorTask
+  id: RemoveHair # use your high-tech retractor
+  valid:
+  - !type:HasAnyMarking
+    organ: Head
+    layer: Hair

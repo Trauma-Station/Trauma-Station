@@ -1,16 +1,7 @@
-// SPDX-FileCopyrightText: 2024 TGRCDev <tgrc@tgrc.dev>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Marcus F <marcus2008stoke@gmail.com>
-// SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <199992874+thebiggestbruh@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 thebiggestbruh <marcus2008stoke@gmail.com>
-//
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Changeling.Components;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Inventory;
@@ -20,9 +11,8 @@ using Robust.Shared.Timing;
 
 namespace Content.IntegrationTests.Tests._Goobstation.Changeling;
 
-// TODO: optimise this dogshit it takes me 73s to fucking use an action why
 [TestFixture]
-public sealed class ChangelingArmorTest
+public sealed class ChangelingArmorTest : GameTest
 {
     private static readonly EntProtoId mercenaryHelmet = "ClothingHeadHelmetMerc";
 
@@ -31,8 +21,7 @@ public sealed class ChangelingArmorTest
     [Explicit] // Trauma - takes so long for no benefit idc
     public async Task TestChangelingFullArmor(string actionProto, string outerProto, string helmetProto)
     {
-        await using var pair = await PoolManager.GetServerClient();
-
+        var pair = Pair;
         var server = pair.Server;
         var testMap = await pair.CreateTestMap();
         var entMan = server.ResolveDependency<IEntityManager>();
@@ -134,7 +123,5 @@ public sealed class ChangelingArmorTest
             });
             entMan.DeleteEntity(urist);
         });
-
-        await pair.CleanReturnAsync();
     }
 }

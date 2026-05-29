@@ -12,7 +12,7 @@ round-end-credits-trauma-show-credits = Show round end movie style credits
 round-end-credits-trauma-created = Created and Directed by
 round-end-credits-trauma-kojima = Hideo Kojima
 
-round-end-credits-trauma-jargon = Filmed on location at Trauma Station LTD
+round-end-credits-trauma-jargon = Filmed on location at {$station}
 
     Filmed with Robust Technology ©
     Outer space footage provided by NASA

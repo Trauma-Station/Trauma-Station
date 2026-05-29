@@ -1,0 +1,23 @@
+- type: entity
+  parent: [ BaseItem, BaseMajorContraband ]
+  id: AbductorTaskTablet
+  name: experiment tablet
+  description: A futuristic tablet used by abductors to experiment on their victims.
+  components:
+  - type: Item
+    size: Small
+    sprite: _Shitmed/Objects/Misc/gizmo.rsi
+  # TODO: Make good inhands
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/alienpaper.rsi
+    state: icon
+  - type: AbductorTaskTablet
+  - type: ActivatableUI
+    key: enum.AbductorTaskTabletUIKey.Key
+    inHandsOnly: true
+    requireActiveHand: false
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.AbductorTaskTabletUIKey.Key:
+        type: AbductorTaskBUI

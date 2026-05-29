@@ -7,8 +7,8 @@
 - type: entity
   parent: BaseStructure
   id: AbductorExperimentator
-  name: experimentator
-  description: A device that analyzes the result of the experiment and resets the subject to the place from where they were taken.
+  name: return pod
+  description: A device that sends the subject back to where they were taken from.
   components:
   - type: AbductorExperimentator
   - type: Sprite

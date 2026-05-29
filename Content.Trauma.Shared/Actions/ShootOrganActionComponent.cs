@@ -3,8 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Body;
 using Content.Shared.Polymorph;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Actions;
 

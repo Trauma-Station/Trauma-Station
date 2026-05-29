@@ -1,19 +1,13 @@
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using Content.Server.Ame.Components;
 using Content.Shared.Ame.Components;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.Ame.EntitySystems;
 
-public sealed class AmeShieldingSystem : EntitySystem
+public sealed partial class AmeShieldingSystem : EntitySystem
 {
-    [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
+    [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private PointLightSystem _pointLightSystem = default!;
 
     public void SetCore(EntityUid uid, bool value, AmeShieldComponent? shield = null)
     {

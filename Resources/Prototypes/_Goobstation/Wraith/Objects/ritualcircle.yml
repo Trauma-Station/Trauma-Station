@@ -26,8 +26,9 @@
         - WallLayer
         hard: false
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
       - trigger:

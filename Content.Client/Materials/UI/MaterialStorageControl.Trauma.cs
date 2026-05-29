@@ -1,9 +1,10 @@
-using Content.Client._Shitcode.Silo;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using System.Linq;
 using Content.Goobstation.Common.Silo;
 using Content.Shared.Materials;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Client.Materials.UI;
 
@@ -12,16 +13,16 @@ namespace Content.Client.Materials.UI;
 /// </summary>
 public sealed partial class MaterialStorageControl
 {
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    private SiloSystem _silo = default!;
+    [Dependency] private IComponentFactory _factory = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    private CommonSiloSystem _silo = default!;
     private TagSystem _tag = default!;
 
     public static readonly ProtoId<TagPrototype> Ore = "Ore";
 
     private void InitializeTrauma()
     {
-        _silo = _entityManager.System<SiloSystem>();
+        _silo = _entityManager.System<CommonSiloSystem>();
         _tag = _entityManager.System<TagSystem>();
     }
 

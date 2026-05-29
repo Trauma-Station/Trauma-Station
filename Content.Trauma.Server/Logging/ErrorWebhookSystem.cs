@@ -2,6 +2,7 @@
 
 using Content.Server.Discord;
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Shared.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Log;
 using Robust.Shared.Timing;
@@ -11,54 +12,71 @@ namespace Content.Trauma.Server.Logging;
 
 /// <summary>
 /// Sends errors to a discord webhook from the server config.
-/// Internally uses a queue to avoid hitting ratelimits as <see cref="DiscordWebhook"/> has no such mechanism.
+/// Internally uses a <see cref="TimedRingBuffer"/> to queue messages and avoid hitting ratelimits as <see cref="DiscordWebhook"/> has no such mechanisms.
 /// </summary>
-public sealed class ErrorWebhookSystem : EntitySystem
+public sealed partial class ErrorWebhookSystem : EntitySystem
 {
-    [Dependency] private readonly DiscordWebhook _discord = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private DiscordWebhook _discord = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ILogManager _log = default!;
 
-    private ErrorWebhookLogHandler _handler = default!;
+    private ErrorWebhookLogHandler _handler = new();
     private bool _enabled;
     private WebhookIdentifier? _identifier;
     private TimeSpan _nextSend;
     private TimeSpan _sendDelay;
+    private int _limit;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _handler = new ErrorWebhookLogHandler();
-
         Subs.CVar(_cfg, TraumaCVars.ErrorWebhookUrl, UpdateWebhookUrl, true);
         Subs.CVar(_cfg, TraumaCVars.ErrorWebhookDelay, x => _sendDelay = TimeSpan.FromSeconds(x), true);
+        Subs.CVar(_cfg, TraumaCVars.ErrorWebhookLimit, UpdateBufferLimit, true);
+
+        _handler.Buffer = new(_limit);
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
 
-        if (_enabled)
-            _log.RootSawmill.RemoveHandler(_handler);
+        if (!_enabled)
+            return;
+
+        _log.RootSawmill.RemoveHandler(_handler);
+
+        if (_identifier is not {} identifier)
+            return;
+
+        // if server shuts down try send any buffered errors
+        _handler.Buffer.Drain(async (content) =>
+        {
+            var payload = new WebhookPayload()
+            {
+                Content = content
+            };
+            // do have to wait for this or they may be dropped
+            await _discord.CreateMessage(identifier, payload);
+        });
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        if (_identifier is not {} identifier || _handler.Messages.Count == 0)
+        if (_identifier is not {} identifier || _handler.Buffer.IsEmpty)
             return; // not enabled or nothing to send
 
         var now = _timing.CurTime;
         if (now < _nextSend)
             return; // on cooldown
 
-        // wait before sending the next message to not get ratelimited
         _nextSend = now + _sendDelay;
 
-        var content = _handler.Messages.Dequeue();
+        _handler.Buffer.Pop(out var content);
         var payload = new WebhookPayload()
         {
             Content = content
@@ -87,6 +105,14 @@ public sealed class ErrorWebhookSystem : EntitySystem
         else
             root.RemoveHandler(_handler);
     }
+
+    private void UpdateBufferLimit(int limit)
+    {
+        _limit = limit;
+        // any queued messages will get dropped if it's changed midgame
+        if (_handler.Buffer != default)
+            _handler.Buffer.Reset(limit);
+    }
 }
 
 public sealed class ErrorWebhookLogHandler : ILogHandler
@@ -94,24 +120,47 @@ public sealed class ErrorWebhookLogHandler : ILogHandler
     /// <summary>
     /// Prefix to remove from stack trace paths.
     /// </summary>
-    public const string StackTracePrefix = "/home/runner/work/Trauma-Station/";
+    public const string StackTracePrefix = "/home/runner/work/Trauma-Station/Trauma-Station/";
 
-    public Queue<string> Messages = new();
+    /// <summary>
+    /// Ignore errors that contain these strings.
+    /// </summary>
+    public static readonly string[] IgnoredStrings = new[]
+    {
+        // ignore state error spam for deleted entities referenced in a component
+        "Tried to network deleted", // TODO: make separate thing that just tracks every failure and reports it once or on demand
+        // upstream issue nobody cares about with prometheus
+        "Exception in metrics listener"
+    };
+
+    public RingBuffer<string> Buffer = default!; // set in Initialize
 
     void ILogHandler.Log(string sawmillName, LogEvent message)
     {
         if (message.Level < LogEventLevel.Error)
             return; // only care about errors
 
+        var text = message.RenderMessage()
+            .Replace(StackTracePrefix, string.Empty);
+        foreach (var ignored in IgnoredStrings)
+        {
+            if (text.Contains(ignored))
+                return;
+        }
+
         var name = LogMessage.LogLevelToName(message.Level.ToRobust());
-        var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {message.RenderMessage()}";
+        var content = $"{DateTime.Now:o} [{name}] {sawmillName}: {text}";
         if (message.Exception is {} e)
-            content += $"\n```\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n```";
+            content += $"\n{e.ToString().Replace(StackTracePrefix, string.Empty)}\n";
 
         // trim the end of the stack trace if its too long, usually not important
-        if (content.Length > 2000)
-            content = content[0..2000];
+        var limit = 2000 - 8;
+        if (content.Length > limit)
+            content = content[0..limit];
 
-        Messages.Enqueue(content);
+        content = $"```\n{content}\n```";
+
+        // if logs are being spammed too fast, oldest messages just get dropped
+        Buffer.Push(content, out _);
     }
 }

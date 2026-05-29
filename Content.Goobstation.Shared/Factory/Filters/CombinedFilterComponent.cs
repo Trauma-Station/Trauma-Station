@@ -2,7 +2,6 @@
 
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
-using Robust.Shared.GameStates;
 
 namespace Content.Goobstation.Shared.Factory.Filters;
 

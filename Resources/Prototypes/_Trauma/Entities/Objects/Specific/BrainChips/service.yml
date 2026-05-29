@@ -37,6 +37,7 @@
       MartialArtCQCChef: 1 # work your way up chuddy
       MeleeKnowledge: 10
       CookingKnowledge: 26
+      LanguageSpaceItalian: 100 # born and raised
 
 - type: entity
   parent: BaseSkillChip
@@ -47,3 +48,4 @@
     skills:
       CookingKnowledge: 10
       FabricationKnowledge: 10 # idk
+      LanguageSpaceItalian: 10 # so you can understand chefs

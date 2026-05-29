@@ -1,27 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Eui;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
-namespace Content.Goobstation.Shared.ServerCurrency.UI
+namespace Content.Goobstation.Shared.ServerCurrency.UI;
+
+[Serializable, NetSerializable]
+public sealed class CurrencyEuiState : EuiStateBase;
+
+public static class CurrencyEuiMsg
 {
     [Serializable, NetSerializable]
-    public sealed class CurrencyEuiState : EuiStateBase
-    {
+    public sealed class Close : EuiMessageBase;
 
-    }
-    public static class CurrencyEuiMsg
+    [Serializable, NetSerializable]
+    public sealed class Buy : EuiMessageBase
     {
-        [Serializable, NetSerializable]
-        public sealed class Close : EuiMessageBase
-        {
-        }
-
-        [Serializable, NetSerializable]
-        public sealed class Buy : EuiMessageBase
-        {
-            public ProtoId<TokenListingPrototype> TokenId;
-        }
+        public ProtoId<TokenListingPrototype> TokenId;
     }
 }

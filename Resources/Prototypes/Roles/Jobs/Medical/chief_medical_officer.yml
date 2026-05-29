@@ -6,24 +6,26 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 1h # Trauma was 2.5
+      time: 2.5h
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 2h # Trauma was 5
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 5h # Trauma was 10
+      time: 10h
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Medical
   - Command
   - Chemicals
   - Virology
   access:
+  # <Trauma>
+  - External
+  # </Trauma>
   - Medical
   - Command
   - Maintenance
@@ -31,7 +33,6 @@
   - ChiefMedicalOfficer
   - Brig
   - Cryogenics
-  - External # goobstation
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

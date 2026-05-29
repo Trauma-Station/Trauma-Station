@@ -1,16 +1,5 @@
-// SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -19,19 +8,23 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
-public sealed class StartEndGameRulesTest
+[Category("GameRuleTests")] // Trauma
+public sealed class StartEndGameRulesTest : GameTest
 {
+    public override PoolSettings PoolSettings => new PoolSettings
+    {
+        Dirty = true,
+        DummyTicker = false,
+        Map = PoolManager.TestStation
+    };
+
     /// <summary>
     ///     Tests that all game rules can be added/started/ended at the same time without exceptions.
     /// </summary>
     [Test]
     public async Task TestAllConcurrent()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Dirty = true,
-            DummyTicker = false
-        });
+        var pair = Pair;
         var server = pair.Server;
         await server.WaitIdleAsync();
         var gameTicker = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<GameTicker>();
@@ -59,7 +52,5 @@ public sealed class StartEndGameRulesTest
             gameTicker.ClearGameRules();
             Assert.That(!gameTicker.GetAddedGameRules().Any());
         });
-
-        await pair.CleanReturnAsync();
     }
 }

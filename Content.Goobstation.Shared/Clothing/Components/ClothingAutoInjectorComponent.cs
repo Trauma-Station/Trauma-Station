@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Clothing;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Shared.Clothing.Components;
 /// <summary>

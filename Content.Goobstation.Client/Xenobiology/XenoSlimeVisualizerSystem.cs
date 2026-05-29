@@ -4,19 +4,16 @@ using System.Diagnostics;
 using Content.Client.DamageState;
 using Content.Goobstation.Shared.Xenobiology;
 using Content.Goobstation.Shared.Xenobiology.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Goobstation.Client.Xenobiology;
 
 /// <summary>
 /// This handles visual changes in slimes between breeds.
 /// </summary>
-public sealed class XenoSlimeVisualizerSystem : VisualizerSystem<SlimeComponent>
+public sealed partial class XenoSlimeVisualizerSystem : VisualizerSystem<SlimeComponent>
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     protected override void OnAppearanceChange(EntityUid uid, SlimeComponent component, ref AppearanceChangeEvent args)
     {

@@ -3,8 +3,6 @@
 using System.Linq;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Consciousness;
-using Content.Medical.Shared.Pain;
 using Content.Medical.Shared.Traumas;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
@@ -18,25 +16,23 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Tourniquet;
 
 /// <summary>
 /// This handles tourniqueting people
 /// </summary>
-public sealed class TourniquetSystem : EntitySystem
+public sealed partial class TourniquetSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly PainSystem _pain = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private const string TourniquetContainerId = "Tourniquet";
 
@@ -56,8 +52,7 @@ public sealed class TourniquetSystem : EntitySystem
     private bool TryTourniquet(EntityUid target, EntityUid user, EntityUid tourniquetEnt, TourniquetComponent tourniquet)
     {
         if (!TryComp<TargetingComponent>(user, out var targeting)
-            || !HasComp<BodyComponent>(user)
-            || !HasComp<ConsciousnessComponent>(user)) // To prevent people from tourniqueting simple mobs
+            || !HasComp<BodyComponent>(user))
             return false;
 
         var (partType, _) = _body.ConvertTargetBodyPart(targeting.Target);
@@ -156,12 +151,10 @@ public sealed class TourniquetSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("cant-tourniquet"), ent, args.User, PopupType.Medium);
                 return;
             }
-            _pain.TryAddPainFeelsModifier(used, "Tourniquet", targetPart, -10f);
             _bloodstream.TryAddBleedModifier(targetPart, "TourniquetPresent", 100, false, true);
 
             foreach (var woundable in _wound.GetAllWoundableChildren(targetPart))
             {
-                _pain.TryAddPainFeelsModifier(used, "Tourniquet", woundable, -10f);
                 _bloodstream.TryAddBleedModifier(woundable, "TourniquetPresent", 100, false, true, woundable);
             }
 
@@ -254,12 +247,10 @@ public sealed class TourniquetSystem : EntitySystem
         }
         else
         {
-            _pain.TryRemovePainFeelsModifier(used, "Tourniquet", tourniquetedBodyPart.Value);
             _bloodstream.TryRemoveBleedModifier(tourniquetedBodyPart.Value, "TourniquetPresent", true);
 
             foreach (var woundable in _wound.GetAllWoundableChildren(tourniquetedBodyPart.Value))
             {
-                _pain.TryRemovePainFeelsModifier(used, "Tourniquet", woundable);
                 _bloodstream.TryRemoveBleedModifier(woundable, "TourniquetPresent", true, woundable);
             }
         }

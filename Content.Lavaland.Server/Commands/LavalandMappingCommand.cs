@@ -5,15 +5,14 @@ using Content.Server.Administration;
 using Content.Lavaland.Shared.Procedural.Prototypes;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 
 namespace Content.Lavaland.Server.Commands;
 
 [AdminCommand(AdminFlags.Mapping)]
-public sealed class LavalandMappingCommand : IConsoleCommand
+public sealed partial class LavalandMappingCommand : IConsoleCommand
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public string Command => "mappinglavaland";
 

@@ -1,63 +1,70 @@
-# SPDX-FileCopyrightText: 2022 Deahaka <96499407+Deahaka@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 #Add satanic when ready
 - type: entity
   name: random altar spawner
   id: AltarSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Structures/Furniture/Altars/Gods/nanotrasen.rsi
-          state: nanotrasen
-    - type: RandomSpawner
-      prototypes:
-        - AltarNanotrasen
-        - AltarChaos
-        - AltarDruid
-        - AltarToolbox
-        - AltarSpaceChristian
-        - AltarTechnology
-        - AltarConvert
-        - AltarHeaven
-        - AltarFangs
-        - AltarBananium
-        - AltarClock # Goobstation
-        - AltarConvertMaint
-      offset: 0.0
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Furniture/Altars/Gods/nanotrasen.rsi
+      state: nanotrasen
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      # <Trauma>
+      - id: AltarBananium
+      - id: AltarClock
+      # </Trauma>
+      - id: AltarNanotrasen
+      - id: AltarChaos
+      - id: AltarDruid
+      - id: AltarToolbox
+      - id: AltarSpaceChristian
+      - id: AltarSatana
+      - id: AltarTechnology
+    offset: 0.0
 
 - type: entity
   name: random convert-altar spawner
   id: ConvertAltarSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
-          state: convertaltar
-    - type: RandomSpawner
-      prototypes:
-        - AltarConvert
-      offset: 0.0
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
+      state: convertaltar
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      # <Trauma>
+      - id: AltarConvertMaint
+      # </Trauma>
+      - id: AltarConvert
+      - id: AltarConvertFestival
+      - id: AltarConvertMaint
+      - id: AltarConvertBlue
+      - id: AltarConvertBurden
+      - id: AltarConvertOrange
+      - id: AltarConvertRed
+      - id: AltarConvertWhite
+      - id: AltarConvertYellow
+    offset: 0.0
 
 - type: entity
   name: random cult-altar spawner
   id: CultAltarSpawner
   parent: MarkerBase
   components:
-    - type: Sprite
-      layers:
-        - state: red
-        - sprite: Structures/Furniture/Altars/Cults/fangs.rsi
-          state: full
-    - type: RandomSpawner
-      prototypes:
-        - AltarHeaven
-        - AltarFangs
-      offset: 0.0
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Structures/Furniture/Altars/Cults/fangs.rsi
+      state: full
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: AltarHeaven
+      - id: AltarFangs
+    offset: 0.0

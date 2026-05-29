@@ -2,7 +2,6 @@
 
 using Content.Medical.Common.Surgery.Tools;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Medical.Shared.Surgery.Tools;
 

@@ -50,8 +50,9 @@
     sound:
       path: /Audio/_DV/CosmicCult/spire_draining.ogg
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: RCDDeconstructable
     deconstructable: false
   - type: Destructible
@@ -106,8 +107,9 @@
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-forthecult
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger: # overkill threshold

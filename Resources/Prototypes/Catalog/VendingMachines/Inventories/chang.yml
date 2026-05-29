@@ -22,4 +22,12 @@
   contrabandInventory:
     FoodBakedDumplings: 2
     FoodSoupMiso: 2
-# rice?
+  # <Trauma>
+    FoodRiceBoiled: 1
+    FoodRiceEgg: 2
+    RiceSeeds: 2
+    ClothingHeadHatCasa: 1
+  emaggedInventory:
+    BoxMRE: 2
+    ClothingOuterDogi: 1
+  # </Trauma>

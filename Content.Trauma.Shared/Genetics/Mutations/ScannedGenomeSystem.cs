@@ -1,29 +1,23 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Polymorph;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Text;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
-public sealed class ScannedGenomeSystem : EntitySystem
+public sealed partial class ScannedGenomeSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-
-    private EntityQuery<MutatableComponent> _mutatableQuery;
-    private EntityQuery<ScannedGenomeComponent> _query;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private EntityQuery<ScannedGenomeComponent> _query = default!;
 
     private StringBuilder _builder = new();
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _mutatableQuery = GetEntityQuery<MutatableComponent>();
-        _query = GetEntityQuery<ScannedGenomeComponent>();
 
         SubscribeLocalEvent<ScannedGenomeComponent, PolymorphedEvent>(OnPolymorphed);
         SubscribeLocalEvent<ScannedGenomeComponent, MutationRemovedEvent>(OnMutationRemoved);
@@ -47,7 +41,9 @@ public sealed class ScannedGenomeSystem : EntitySystem
         if (ent.Owner != args.Target.Owner || args.Automatic)
             return;
 
-        RemoveSequence(ent, args.Id);
+        // don't remove dormant mutations
+        if (_mutation.IsForeign(args.Target.Comp, args.Id))
+            RemoveSequence(ent, args.Id);
     }
 
     #region Public API

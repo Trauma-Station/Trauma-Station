@@ -11,9 +11,9 @@ using Robust.Shared.Utility;
 namespace Content.Client.Waypointer;
 
 [UsedImplicitly]
-public sealed class WaypointerMenuBoundUserinterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class WaypointerMenuBoundUserinterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private SimpleRadialMenu? _menu;
 

@@ -84,3 +84,35 @@
     difficulty: 16
     rarity: Mythical
   # TODO: move out of goob hulk
+
+- type: entity
+  parent: BaseMutation
+  id: MutationEnhancedPerception
+  name: Enhanced Perception
+  description: Improves the subject's peripheral vision, letting them see things in the corner of their eyes better.
+  components:
+  - type: Mutation
+    instability: 20 # pretty good
+    difficulty: 14
+    rarity: Rare
+    conflicts:
+    - MutationBlindness
+    - MutationWeakPerception
+  - type: ViewconeModifier
+    angleModifier: 1.3
+
+- type: entity
+  parent: BaseMutation
+  id: MutationWeakPerception
+  name: Weak Perception
+  description: The subject has almost no peripheral vision, only able to see almost directly infront of themselves.
+  components:
+  - type: Mutation
+    instability: -20
+    difficulty: 14
+    rarity: Rare
+    conflicts:
+    - MutationBlindness
+    - MutationEnhancedPerception
+  - type: ViewconeModifier
+    angleModifier: 0.5 # gotta thug it out

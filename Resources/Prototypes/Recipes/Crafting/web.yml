@@ -7,10 +7,10 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   useQuality: false
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 2
   # </Trauma>
 
 - type: construction
@@ -22,9 +22,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -36,9 +36,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -50,9 +50,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -65,7 +65,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   useQuality: false
   # </Trauma>
 
@@ -78,9 +78,9 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>
 
 - type: construction
@@ -92,7 +92,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    SpiderCraftKnowledge: 2
+    SpiderCraftKnowledge: 0
   practical:
-    SpiderCraftKnowledge: 3
+    TailoringKnowledge: 4
   # </Trauma>

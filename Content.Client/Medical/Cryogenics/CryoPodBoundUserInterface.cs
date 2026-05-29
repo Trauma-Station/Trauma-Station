@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared._Shitmed.Medical.HealthAnalyzer;
+using Content.Trauma.Common.Medical.HealthAnalyzer;
 using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 // </Trauma>
@@ -27,8 +27,8 @@ public sealed class CryoPodBoundUserInterface : BoundUserInterface
         _window.OnEjectBeakerPressed += EjectBeakerPressed;
         _window.OnInjectPressed += InjectPressed;
         // <Shitmed>
-        _window.OnBodyPartSelected += SendBodyPartMessage;
-        _window.OnModeChanged += SendModeMessage;
+        _window.OnBodyPartSelected += (part, _) => SendBodyPartMessage(part);
+        _window.OnModeChanged += (mode, _) => SendModeMessage(mode);
         // </Shitmed>
     }
 
@@ -62,8 +62,8 @@ public sealed class CryoPodBoundUserInterface : BoundUserInterface
 
     // <Shitmed>
     // TODO SHITMED: just use target stored on the component holy goida
-    private void SendBodyPartMessage(ProtoId<OrganCategoryPrototype>? part, EntityUid target) => SendMessage(new HealthAnalyzerPartMessage(EntMan.GetNetEntity(target), part));
+    private void SendBodyPartMessage(ProtoId<OrganCategoryPrototype>? part) => SendMessage(new HealthAnalyzerPartMessage(part));
 
-    private void SendModeMessage(HealthAnalyzerMode mode, EntityUid target) => SendMessage(new HealthAnalyzerModeSelectedMessage(EntMan.GetNetEntity(target), mode));
+    private void SendModeMessage(HealthAnalyzerMode mode) => SendMessage(new HealthAnalyzerModeSelectedMessage(mode));
     // </Shitmed>
 }

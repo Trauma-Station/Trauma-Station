@@ -1,14 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Entity Prototypes
 
@@ -118,9 +107,12 @@
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackAbductor
     pocket1: AbductorGizmo
-    pocket2: WeaponAlien
+    pocket2: AbductorTaskTablet
     suitstorage: Wonderprod
     id: AgentIDCard
+  storage:
+    back:
+    - WeaponAlien
 
 - type: startingGear
   id: AbductorScientistGear
@@ -132,10 +124,13 @@
     head: ClothingHeadMirror
     outerClothing: ClothingOuterCoatAbductor
     back: ClothingBackpackDuffelAbductor
-    pocket1: Silencer # Trauma - swapped silencer and gizmo
-    pocket2: RadioJammer # Trauma
+    pocket1: Silencer
+    pocket2: AbductorTaskTablet
     suitstorage: WeaponDecloner
     id: AgentIDCard
+  storage:
+    back:
+    - RadioJammer
 
 - type: startingGear
   id: AbductorAgentGear
@@ -147,7 +142,7 @@
     head: ClothingHeadHelmetAbductor
     outerClothing: ClothingOuterArmorAbductor
     back: ClothingBackpackAbductor
-    pocket1: AbductorGizmo # Trauma - swapped silencer and gizmo
+    pocket1: AbductorGizmo
     pocket2: WeaponAlien
     suitstorage: Wonderprod
     id: AgentIDCard
@@ -157,17 +152,17 @@
 # Spawners
 
 - type: entity
-  name: lone abductor spawner
-  id: SpawnPointLoneAbductor
   parent: MarkerBase
+  id: SpawnPointAbductor
+  name: abductor spawn point
   components:
   - type: SpawnPoint
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: radiation
+    - state: green
+    - sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi
+      state: icon
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
@@ -190,19 +185,6 @@
         state: radiation
 
 - type: entity
-  name: abductor agent spawner
-  id: SpawnPointAbductorAgent
-  parent: MarkerBase
-  components:
-  - type: SpawnPoint
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: radiation
-
-- type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
   id: AbductorAgentSpawner
@@ -215,19 +197,6 @@
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: radiation
-
-- type: entity
-  name: abductor scientist spawner
-  id: SpawnPointAbductorScientist
-  parent: MarkerBase
-  components:
-  - type: SpawnPoint
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

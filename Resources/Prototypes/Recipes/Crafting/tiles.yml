@@ -9,97 +9,69 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   useQuality: false # annoying for construction, masterwork tiles as weapons is sad but not worth the hassle
   # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileWood
   graph: TileWood
   startNode: start
   targetNode: woodtile
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileBrassFilled
   graph: TilesBrass
   startNode: start
   targetNode: filledPlate
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileBrassReebe
   graph: TilesBrass
   startNode: start
   targetNode: reebe
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileWhite
   graph: TileWhite
   startNode: start
   targetNode: whitetile
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileDark
   graph: TileDark
   startNode: start
   targetNode: darktile
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileFlesh
   graph: TileFlesh
   startNode: start
   targetNode: fleshTile
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: TileSteel # Trauma
   id: TileWoodLarge
   graph: TileWoodLarge
   startNode: start
   targetNode: woodtilelarge
   category: construction-category-tiles
   objectType: Item
-  # <Trauma>
-  theory:
-    FabricationKnowledge: 1
-  useQuality: false
-  # </Trauma>

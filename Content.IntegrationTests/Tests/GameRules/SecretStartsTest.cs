@@ -1,31 +1,26 @@
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System.Linq;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.GameTicking;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
-public sealed class SecretStartsTest
+[Category("GameRuleTests")] // Trauma
+public sealed class SecretStartsTest : GameTest
 {
+    public override PoolSettings PoolSettings => new PoolSettings { Dirty = true };
+
+    private static readonly EntProtoId SecretGameRule = "Secret";
+
     /// <summary>
     ///     Tests that when secret is started, all of the game rules it successfully adds are also started.
     /// </summary>
     [Test]
     public async Task TestSecretStarts()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Dirty = true });
+        var pair = Pair;
 
         var server = pair.Server;
         await server.WaitIdleAsync();
@@ -36,7 +31,7 @@ public sealed class SecretStartsTest
         {
             // this mimics roundflow:
             // rules added, then round starts
-            gameTicker.AddGameRule("Secret");
+            gameTicker.AddGameRule(SecretGameRule);
             gameTicker.StartGamePresetRules();
         });
 
@@ -50,7 +45,5 @@ public sealed class SecretStartsTest
             // End all rules
             gameTicker.ClearGameRules();
         });
-
-        await pair.CleanReturnAsync();
     }
 }

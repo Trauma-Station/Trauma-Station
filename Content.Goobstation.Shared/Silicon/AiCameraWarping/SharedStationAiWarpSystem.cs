@@ -2,11 +2,10 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Silicons.StationAi;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.Silicon.AiCameraWarping;
 
-public abstract class SharedStationAiWarpSystem : EntitySystem { }
+public abstract partial class SharedStationAiWarpSystem : EntitySystem { }
 
 public sealed partial class ToggleCameraWarpScreenEvent : InstantActionEvent { }
 

@@ -3,7 +3,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Goobstation.Common.Bingle;
@@ -49,7 +48,13 @@ public sealed partial class BinglePitComponent : Component
     /// </summary>
     public Container Pit = default!;
     [DataField]
-    public float MaxSize = 3f;
+    public float MaxSize = 999f;
+
+    /// <summary>
+    /// How much the bingle pits hitbox will expand with each level
+    /// </summary>
+    [DataField]
+    public float HitBoxGrowthSize = 1.3f;
 
     [DataField]
     public SoundSpecifier FallingSound = new SoundPathSpecifier("/Audio/Effects/falling.ogg");

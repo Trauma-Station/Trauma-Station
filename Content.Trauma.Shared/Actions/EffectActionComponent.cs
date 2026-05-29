@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.EntityEffects;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Actions;
 

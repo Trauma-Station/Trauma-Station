@@ -4,4 +4,4 @@
   id: SpawnCBURNNoAnnounce
   components:
   - type: LoadMapRule
-    preloadedGrid: RetortShuttleCBURN
+    gridPath: /Maps/_Goobstation/Shuttles/retort_cburn.yml

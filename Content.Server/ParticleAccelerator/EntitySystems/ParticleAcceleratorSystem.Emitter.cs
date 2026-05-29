@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 crazybrain23 <44417085+crazybrain23@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 liltenhead <liltenhead@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.ParticleAccelerator.Components;
 using Content.Server.Singularity.Components;
 using Content.Shared.ParticleAccelerator.Components;
@@ -26,8 +14,7 @@ public sealed partial class ParticleAcceleratorSystem
         if (!Resolve(uid, ref emitter))
             return;
 
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        if (!xformQuery.TryGetComponent(uid, out var xform))
+        if (!TryComp(uid, out TransformComponent? xform))
         {
             Log.Error("ParticleAccelerator attempted to emit a particle without (having) a transform from which to base its initial position and orientation.");
             return;
@@ -35,12 +22,12 @@ public sealed partial class ParticleAcceleratorSystem
 
         var emitted = Spawn(emitter.EmittedPrototype, xform.Coordinates);
 
-        if (xformQuery.TryGetComponent(emitted, out var particleXform))
+        if (TryComp(emitted, out TransformComponent? particleXform))
             _transformSystem.SetLocalRotation(emitted, xform.LocalRotation, particleXform);
 
         if (TryComp<PhysicsComponent>(emitted, out var particlePhys))
         {
-            var angle = _transformSystem.GetWorldRotation(uid, xformQuery);
+            var angle = _transformSystem.GetWorldRotation(uid);
             _physicsSystem.SetBodyStatus(emitted, particlePhys, BodyStatus.InAir);
 
             var velocity = angle.ToWorldVec() * 20f;

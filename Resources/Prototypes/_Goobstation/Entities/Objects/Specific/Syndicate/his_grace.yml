@@ -12,6 +12,7 @@
   components:
   - type: HisGrace # easily editable for you YAML warriors
     hungerOnDevourMultiplier: 0.2
+    speedAddition: 0.05
     tickDelay: 3
     healing:
       types:
@@ -37,7 +38,7 @@
     heavyStaminaCost: 10
     damage:
       types:
-        Blunt: 15
+        Blunt: 12
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
   - type: Appearance

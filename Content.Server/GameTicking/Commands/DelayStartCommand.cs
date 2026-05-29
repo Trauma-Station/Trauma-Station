@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Moony <moonheart08@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
@@ -16,41 +5,42 @@ using Robust.Shared.Console;
 namespace Content.Server.GameTicking.Commands;
 
 [AdminCommand(AdminFlags.Round)]
-public sealed class DelayStartCommand : LocalizedEntityCommands
+sealed class DelayStartCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-
     public override string Command => "delaystart";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (_gameTicker.RunLevel != GameRunLevel.PreRoundLobby)
+        var ticker = EntityManager.System<GameTicker>();
+        if (ticker.RunLevel != GameRunLevel.PreRoundLobby)
         {
-            shell.WriteLine(Loc.GetString("shell-can-only-run-from-pre-round-lobby"));
+            shell.WriteLine(Loc.GetString("delaystart-preround-only"));
             return;
         }
 
-        switch (args.Length)
+        if (args.Length == 0)
         {
-            case 0:
-                var paused = _gameTicker.TogglePause();
-                shell.WriteLine(Loc.GetString(paused ? "cmd-delaystart-paused" : "cmd-delaystart-unpaused"));
-                return;
-            case 1:
-                break;
-            default:
-                shell.WriteError(Loc.GetString("shell-wrong-arguments-number"));
-                return;
+            var paused = ticker.TogglePause();
+            shell.WriteLine(paused ? Loc.GetString("delaystart-paused") : Loc.GetString("delaystart-resumed"));
+            return;
         }
 
-        if (!uint.TryParse(args[0], out var seconds) || seconds == 0)
+        if (args.Length != 1)
         {
-            shell.WriteLine(Loc.GetString("cmd-delaystart-invalid-seconds", ("value", args[0])));
+            shell.WriteLine(Loc.GetString("shell-need-between-arguments", ("lower", 0), ("upper", 1)));
+            return;
+        }
+
+        if (!int.TryParse(args[0], out var seconds) || seconds == 0)
+        {
+            shell.WriteLine(Loc.GetString("delaystart-invalid-seconds", ("seconds", args[0])));
             return;
         }
 
         var time = TimeSpan.FromSeconds(seconds);
-        if (!_gameTicker.DelayStart(time))
-            shell.WriteLine(Loc.GetString("cmd-delaystart-too-late"));
+        if (!ticker.DelayStart(time))
+        {
+            shell.WriteLine(Loc.GetString("shell-unknown-error"));
+        }
     }
 }

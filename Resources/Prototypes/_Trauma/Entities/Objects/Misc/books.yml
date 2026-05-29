@@ -1,0 +1,47 @@
+- type: entity
+  abstract: true
+  id: BaseBookSounds # BookBase isnt really a base
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/book_pickup.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/book_drop.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/book_drop.ogg
+      params:
+        volume: -4
+
+- type: entity
+  parent: [ BaseItem, BaseBookSounds, BaseSyndicateContraband ]
+  id: CodespeakManual
+  name: codespeak manual
+  description: "The book's cover reads: \"Codespeak(tm) - Secure your communication with metaphors so elaborate, they seem randomly generated!\""
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#b8280d"
+  - type: UseRequiresSight
+  - type: KnowledgeGrantOnUse
+    skills:
+      LanguageCodespeak: 100
+  - type: Tag
+    tags:
+    - Book
+
+- type: entity
+  parent: CodespeakManual
+  id: DeluxeCodespeakManual
+  name: deluxe codespeak manual
+  components:
+  - type: KnowledgeGrantOnUse
+    singleUse: false # still instant but doesn't get ashed

@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseTraitorRuleNoObjectives
+  id: TraitorPrayer
+  components:
+  - type: TraitorRule
+    giveUplink: false
+    giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
+    giveBriefing: false # slop?
+  - type: AntagSelection
+    selectionTime: Never # directly assigned by code
+    assignmentHandled: true
+    antags:
+    - !type:FixedAntagCount
+      proto: Traitor

@@ -1,5 +1,8 @@
-using System.Numerics;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Common.Weapons.Ranged;
+using Content.Shared.Inventory;
+using Content.Shared.Power;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
@@ -10,6 +13,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -18,8 +22,9 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 /// </summary>
 public abstract partial class SharedGunSystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
     private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
@@ -38,9 +43,10 @@ public abstract partial class SharedGunSystem
     {
     }
 
-    private void ShootOrThrow(EntityUid uid, Vector2 mapDirection, Vector2 gunVelocity, GunComponent gun, EntityUid gunUid, EntityUid? user, Vector2? targetCoordinates = null) // Goobstation
+    private void ShootOrThrow(EntityUid uid, Vector2 mapDirection, Vector2 gunVelocity, Entity<GunComponent> gun, EntityUid? user,
+        Vector2? targetCoordinates = null)
     {
-        if (gun.Target is { } target && !TerminatingOrDeleted(target))
+        if (gun.Comp.Target is { } target && !TerminatingOrDeleted(target))
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
             targeted.Target = GetNetEntity(target);
@@ -52,11 +58,12 @@ public abstract partial class SharedGunSystem
         {
             RemoveShootable(uid);
             // TODO: Someone can probably yeet this a billion miles so need to pre-validate input somewhere up the call stack.
-            ThrowingSystem.TryThrow(uid, mapDirection, gun.ProjectileSpeedModified, user);
+            ThrowingSystem.TryThrow(uid, mapDirection, gun.Comp.ProjectileSpeedModified, user);
             return;
         }
 
-        ShootProjectile(uid, mapDirection, gunVelocity, gunUid, user, gun.ProjectileSpeedModified, targetCoordinates); // Goobstation
+        ShootProjectile(uid, mapDirection, gunVelocity, gun, user, gun.Comp.ProjectileSpeedModified,
+            targetCoordinates);
     }
 
     /// <summary>
@@ -124,5 +131,15 @@ public abstract partial class SharedGunSystem
         return level < 26
             ? 3.0f - level / 26.0f - _knowledge.SharpCurve(shooting)
             : (float) Math.Max(1.0f - Math.Pow((level - 50) / 50.0f, 2), 0.2f);
+    }
+
+    public (float, float) GetBatteryShotsFloat(Entity<BatteryAmmoProviderComponent> ent)
+    {
+        var ev = new GetChargeEvent();
+        RaiseLocalEvent(ent, ref ev);
+        var currentShots = ev.CurrentCharge / ent.Comp.FireCost;
+        var maxShots = ev.MaxCharge / ent.Comp.FireCost;
+
+        return (currentShots, maxShots);
     }
 }

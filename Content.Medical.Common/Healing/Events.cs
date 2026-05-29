@@ -11,6 +11,12 @@ namespace Content.Medical.Common.Healing;
 public record struct CheckPartBleedingEvent(bool Bleeding = false);
 
 /// <summary>
+/// Raised on a bodypart to check if it is wounded.
+/// </summary>
+[ByRefEvent]
+public record struct CheckPartWoundedEvent(List<string> DamageKeys, bool Wounded = false);
+
+/// <summary>
 /// Raised on a bodypart to try heal its bleeding wounds.
 /// </summary>
 [ByRefEvent]

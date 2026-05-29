@@ -12,16 +12,16 @@ namespace Content.Medical.Shared.Traumas;
 /// Implements gameplay effects when you have broken bones.
 /// </summary>
 // TODO: make this 1000x better this is such a nothingburger
-public sealed class BoneEffectsSystem : EntitySystem
+public sealed partial class BoneEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private SharedVirtualItemSystem _virtual = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<HandOrganComponent, PartBoneDamageChangedEvent>(OnHandDamageChanged);
-        SubscribeLocalEvent<MovementBodyPartComponent, PartBoneDamageChangedEvent>(OnLegDamageChanged);
+        SubscribeLocalEvent<LegComponent, PartBoneDamageChangedEvent>(OnLegDamageChanged);
     }
 
     private void OnHandDamageChanged(Entity<HandOrganComponent> ent, ref PartBoneDamageChangedEvent args)
@@ -30,7 +30,7 @@ public sealed class BoneEffectsSystem : EntitySystem
             _virtual.DeleteInHandsMatching(args.Body, args.Bone);
     }
 
-    private void OnLegDamageChanged(Entity<MovementBodyPartComponent> ent, ref PartBoneDamageChangedEvent args)
+    private void OnLegDamageChanged(Entity<LegComponent> ent, ref PartBoneDamageChangedEvent args)
     {
         // TODO NUBODY: broken legs give you a STATUS EFFECT that modifies speed, not a fucking 65 line slopfunction
     }
@@ -48,7 +48,7 @@ public sealed class BoneEffectsSystem : EntitySystem
 
         foreach (var legEntity in body.Comp.Legs)
         {
-            if (!TryComp<MovementBodyPartComponent>(legEntity, out var movement))
+            if (!TryComp<LegComponent>(legEntity, out var movement))
                 continue;
 
             var partWalkSpeed = movement.WalkSpeed;

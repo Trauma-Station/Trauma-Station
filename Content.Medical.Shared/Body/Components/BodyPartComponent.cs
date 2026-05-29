@@ -3,8 +3,6 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Surgery.Tools;
 using Content.Shared.Body;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Medical.Shared.Body;
 

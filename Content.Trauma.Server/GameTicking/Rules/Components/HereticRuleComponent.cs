@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Store;
+using Content.Trauma.Server.Heretic.Systems;
+
+namespace Content.Trauma.Server.Heretic.Components;
+
+[RegisterComponent, Access(typeof(HereticRuleSystem))]
+public sealed partial class HereticRuleComponent : Component
+{
+    [DataField]
+    public int RealityShiftPerHeretic = 2;
+
+    public readonly List<EntityUid> Minds = new();
+
+    public static readonly List<ProtoId<StoreCategoryPrototype>> StoreCategories = new()
+    {
+        "HereticPathAsh",
+        "HereticPathLock",
+        "HereticPathFlesh",
+        "HereticPathBlade",
+        "HereticPathVoid",
+        "HereticPathRust",
+        "HereticPathCosmos",
+        "HereticPathSpecial",
+        "HereticPathSideT1",
+        "HereticPathSideT2",
+        "HereticPathSideT3",
+    };
+}

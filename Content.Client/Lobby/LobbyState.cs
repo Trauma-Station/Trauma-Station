@@ -1,4 +1,6 @@
-using Content.Client._RMC14.LinkAccount;
+// <Trauma>
+using Content.Client.LinkAccount;
+// </Trauma>
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
@@ -20,20 +22,27 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Lobby
 {
-    public sealed class LobbyState : Robust.Client.State.State
+    public sealed partial class LobbyState : Robust.Client.State.State
     {
-        [Dependency] private readonly IBaseClient _baseClient = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
-        [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
-        [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
-        [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
-        [Dependency] private readonly IPrototypeManager _protoMan = default!;
+        // <Trauma>
+        [Dependency] private ICommonCurrencyManager _serverCur = default!; // Goobstation - server currency
+        [Dependency] private LinkAccountManager _linkAccount = default!; // RMC - Patreon
+        // </Trauma>
+        [Dependency] private IBaseClient _baseClient = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private IClientConsoleHost _consoleHost = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IResourceCache _resourceCache = default!;
+        [Dependency] private IUserInterfaceManager _userInterfaceManager = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IVoteManager _voteManager = default!;
+        [Dependency] private ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
+        [Dependency] private IPrototypeManager _protoMan = default!;
+
+        // <Trauma>
+        public static Action<LobbyState>? OnCreated;
+        public Action? OnTogglePatronPerksWindow;
+        // </Trauma>
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _contentAudioSystem = default!;
@@ -82,6 +91,9 @@ namespace Content.Client.Lobby
             _gameTicker.LobbyLateJoinStatusUpdated += LobbyLateJoinStatusUpdated;
 
             _serverCur.ClientBalanceChange += UpdatePlayerBalance; // Goobstation - Goob Coin
+            // <Trauma>
+            OnCreated?.Invoke(this);
+            // </Trauma>
         }
 
         protected override void Shutdown()
@@ -118,7 +130,7 @@ namespace Content.Client.Lobby
 
         private void OnPatronPerksPressed(BaseButton.ButtonEventArgs obj)
         {
-            _userInterfaceManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
+            OnTogglePatronPerksWindow?.Invoke();
         }
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)

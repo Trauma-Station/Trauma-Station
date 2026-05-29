@@ -15,3 +15,30 @@
   name: ghost-role-information-colossus-name
   antagonist: true
   objective: ghost-role-colossus-objective
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: CosmicCultist
+  jobBlacklist: [ Chaplain ]
+  components:
+  - type: CosmicCult
+  prefRoles: [ CosmicAntagCultist ]
+  mindRoles: [ MindRoleCosmicCult ]
+
+- type: antagSpecifier
+  id: CosmicColossus
+  spawnerPrototype: SpawnPointCosmicColossus
+  briefing:
+    text: ghost-role-colossus-briefing
+    color: CadetBlue
+    sound: /Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg
+  mindRoles: [ MindRoleCosmicColossus ]
+
+- type: antagSmite
+  id: CosmicCultist
+  antag: CosmicAntagCultist
+  rule: CosmicCult
+  ruleComp: CosmicCultRule
+  icon:
+    sprite: _DV/CosmicCult/Icons/antag_icons.rsi
+    state: CosmicCult

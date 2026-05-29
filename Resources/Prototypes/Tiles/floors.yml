@@ -232,7 +232,7 @@
   - 1.0
   - 1.0
   - 1.0
-  itemDrop: FloorTileItemSteel
+  itemDrop: FloorTileItemPlastic # Trauma - plastic tile items
   tileRipResistance: 80 # Goob
 
 - type: tile
@@ -444,7 +444,7 @@
   - 1.0
   footstepSounds:
     collection: FootstepTile
-  itemDrop: FloorTileItemWhite
+  itemDrop: FloorTileItemPlasticWhite # Trauma - plastic tile items
   tileRipResistance: 80 # Goob
 
 - type: tile
@@ -637,7 +637,7 @@
   - 1.0
   footstepSounds:
     collection: FootstepTile
-  itemDrop: FloorTileItemDark
+  itemDrop: FloorTileItemPlasticDark # Trauma - plastic tile items
   tileRipResistance: 50 # Goob
 
 - type: tile

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
@@ -17,12 +19,12 @@ namespace Content.Shared.Body;
 /// </summary>
 public sealed partial class BodySystem
 {
-    [Dependency] private readonly CommonBodyCacheSystem _cache = default!;
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private CommonBodyCacheSystem _cache = default!;
+    [Dependency] private CommonBodyPartSystem _part = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
 
     /// <summary>
     /// Body parts' organ categories.
@@ -177,6 +179,24 @@ public sealed partial class BodySystem
     }
 
     /// <summary>
+    /// Get the number of vital parts for an entity, falls back to 1 for non-mobs.
+    /// </summary>
+    public int GetVitalParts(Entity<BodyComponent?> body)
+    {
+        if (!_bodyQuery.Resolve(body, ref body.Comp, false) || body.Comp.Organs?.ContainedEntities is not {} organs)
+            return 1;
+
+        int vital = 0;
+        foreach (var organ in organs)
+        {
+            if (GetCategory(organ) is {} category && VitalParts.Contains(category))
+                vital++;
+        }
+
+        return vital;
+    }
+
+    /// <summary>
     /// Converts Enums from BodyPartType to their Targeting system equivalent.
     /// </summary>
     public TargetBodyPart GetTargetBodyPart(BodyPartType type, BodyPartSymmetry symmetry)
@@ -320,27 +340,27 @@ public sealed partial class BodySystem
 
     /// <summary>
     /// Adds a marking to an organ with a given category, not allowing duplicates on the same organ.
-    /// It will have default colours.
     /// </summary>
     public bool AddOrganMarking(
         Entity<BodyComponent?> body,
         [ForbidLiteral] ProtoId<OrganCategoryPrototype> category,
         [ForbidLiteral] ProtoId<MarkingPrototype> marking,
+        Color? color = null,
         bool force = false)
     {
         if (GetOrgan(body, category) is not {} organ)
             return false; // no organ found
 
-        return AddOrganMarking(organ, marking);
+        return AddOrganMarking(organ, marking, color, force);
     }
 
     /// <summary>
     /// Adds a marking to a given organ, not allowing duplicates on the same organ.
-    /// It will have default colours.
     /// </summary>
     public bool AddOrganMarking(
         Entity<VisualOrganMarkingsComponent?> organ,
         [ForbidLiteral] ProtoId<MarkingPrototype> marking,
+        Color? color = null,
         bool force = false)
     {
         if (!Resolve(organ, ref organ.Comp))
@@ -374,7 +394,9 @@ public sealed partial class BodySystem
         }
 
         // good to go
-        list.Add(new Marking(marking, []));
+        list.Add(new Marking(marking, color != null
+            ? Enumerable.Repeat(color.Value, proto.Sprites.Count)
+            : []));
         Dirty(organ, organ.Comp);
         return true;
     }

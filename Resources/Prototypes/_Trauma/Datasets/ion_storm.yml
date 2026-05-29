@@ -1,0 +1,11 @@
+# Well.. it's in the name...
+- type: dataset
+  id: IonStormDepartments
+  values:
+  - COMMAND
+  - CARGO
+  - ENGINEERING
+  - MEDICAL
+  - SCIENCE
+  - SECURITY
+  - SERVICE

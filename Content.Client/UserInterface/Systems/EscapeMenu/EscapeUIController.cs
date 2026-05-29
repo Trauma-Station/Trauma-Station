@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Client._RMC14.LinkAccount;
+using Content.Client.LinkAccount;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Robust.Shared;
 // </Trauma>
@@ -22,21 +22,27 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client.UserInterface.Systems.EscapeMenu;
 
 [UsedImplicitly]
-public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
+public sealed partial class EscapeUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    [Dependency] private readonly IClientConsoleHost _console = default!;
-    [Dependency] private readonly IUriOpener _uri = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ChangelogUIController _changelog = default!;
-    [Dependency] private readonly InfoUIController _info = default!;
-    [Dependency] private readonly OptionsUIController _options = default!;
-    [Dependency] private readonly GuidebookUIController _guidebook = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
-    [Dependency] private readonly FeedbackPopupUIController _feedback = null!;
+    // <Trauma>
+    [Dependency] private LinkAccountManager _linkAccount = default!; // RMC - Patreon
+    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
+    // </Trauma>
+    [Dependency] private IClientConsoleHost _console = default!;
+    [Dependency] private IUriOpener _uri = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ChangelogUIController _changelog = default!;
+    [Dependency] private InfoUIController _info = default!;
+    [Dependency] private OptionsUIController _options = default!;
+    [Dependency] private GuidebookUIController _guidebook = default!;
+    [Dependency] private FeedbackPopupUIController _feedback = null!;
+
+    // <Trauma>
+    public static Action<EscapeUIController>? OnCreated;
+    public Action? OnTogglePatronPerksWindow;
+    // </Trauma>
 
     private Options.UI.EscapeMenu? _escapeWindow;
-
-    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton; // RMC - Patreon
 
     public override void Initialize()  // RMC - Patreon
     {
@@ -45,6 +51,10 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             if (_escapeWindow != null)
                 _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
         };
+
+        // <Trauma>
+        OnCreated?.Invoke(this);
+        // </Trauma>
     }
 
     public void UnloadButton()
@@ -109,7 +119,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow.PatronPerksButton.OnPressed += _ => // RMC - Patreon
         {
             CloseEscapeWindow();
-            UIManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
+            OnTogglePatronPerksWindow?.Invoke();
         };
 
         _escapeWindow.RulesButton.OnPressed += _ =>

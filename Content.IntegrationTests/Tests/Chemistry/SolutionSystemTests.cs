@@ -1,21 +1,9 @@
-// SPDX-FileCopyrightText: 2022 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <wrexbe@protonmail.com>
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.IntegrationTests.Fixtures;
+using Content.IntegrationTests.Fixtures.Attributes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Fluids.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -27,17 +15,18 @@ namespace Content.IntegrationTests.Tests.Chemistry;
 // reactions can change this assumption
 [TestFixture]
 [TestOf(typeof(SharedSolutionContainerSystem))]
-public sealed class SolutionSystemTests
+public sealed class SolutionSystemTests : GameTest
 {
     [TestPrototypes]
     private const string Prototypes = @"
 - type: entity
   id: SolutionTarget
   components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 50
+  - type: Solution
+    id: beaker
+    solution:
+      maxVol: 50
+  - type: Spillable
 
 - type: reagent
   id: TestReagentA
@@ -57,18 +46,35 @@ public sealed class SolutionSystemTests
   name: reagent-name-nothing
   desc: reagent-desc-nothing
   physicalDesc: reagent-physical-desc-nothing
+
+- type: reagent
+  id: TestReagentD
+  name: reagent-name-nothing
+  desc: reagent-desc-nothing
+  physicalDesc: reagent-physical-desc-nothing
+
+- type: reaction
+  id: TestReagentA
+  reactants:
+    TestReagentC:
+      amount: 1
+    TestReagentD:
+      amount: 1
+  products:
+    TestReagentA: 20
 ";
 
     private const string TestReagentA = "TestReagentA";
     private const string TestReagentB = "TestReagentB";
     private const string TestReagentC = "TestReagentC";
+    private const string TestReagentD = "TestReagentD";
     private const string Water = "Water";
     private const string Oil = "Oil";
 
     [Test]
     public async Task TryAddTwoNonReactiveReagent()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entityManager = server.ResolveDependency<IEntityManager>();
@@ -103,8 +109,6 @@ public sealed class SolutionSystemTests
                 Assert.That(oil, Is.EqualTo(oilQuantity));
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 
     // This test mimics current behavior
@@ -112,7 +116,7 @@ public sealed class SolutionSystemTests
     [Test]
     public async Task TryAddTooMuchNonReactiveReagent()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var testMap = await pair.CreateTestMap();
@@ -148,15 +152,38 @@ public sealed class SolutionSystemTests
                 Assert.That(oil, Is.EqualTo(FixedPoint2.Zero));
             });
         });
+    }
 
-        await pair.CleanReturnAsync();
+    [SidedDependency(Side.Server)] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+
+    [Test]
+    public async Task TryOverflowReaction()
+    {
+        var testMap = await Pair.CreateTestMap();
+
+        await Server.WaitAssertion(() =>
+        {
+            var reagentC = new Solution(TestReagentC, 5);
+            var reagentD = new Solution(TestReagentD, 5);
+
+            var beaker = SSpawnAtPosition("SolutionTarget", testMap.GridCoords);
+
+            Assert.That(_solutionContainer.TryGetSolution(beaker, "beaker", out var solutionEnt, out var solution));
+
+            _solutionContainer.AddSolution(solutionEnt.Value, reagentC);
+            _solutionContainer.AddSolution(solutionEnt.Value, reagentD);
+
+            Assert.That(solution.Volume, Is.EqualTo(FixedPoint2.New(50)));
+            var query = SEntMan.EntityQueryEnumerator<PuddleComponent>();
+            Assert.That(query.MoveNext(out _), "A puddle should have been spawned from the solution");
+        });
     }
 
     // Unlike TryAddSolution this adds and two solution without then splits leaving only threshold in original
     [Test]
     public async Task TryMixAndOverflowTooMuchReagent()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
 
@@ -203,15 +230,13 @@ public sealed class SolutionSystemTests
                 Assert.That(oilOverFlow, Is.EqualTo(oilQuantity - oilMix));
             });
         });
-
-        await pair.CleanReturnAsync();
     }
 
     // TryMixAndOverflow will fail if Threshold larger than MaxVolume
     [Test]
     public async Task TryMixAndOverflowTooBigOverflow()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
 
         var entityManager = server.ResolveDependency<IEntityManager>();
@@ -241,14 +266,12 @@ public sealed class SolutionSystemTests
                 .TryMixAndOverflow(solutionEnt.Value, oilAdded, threshold, out _),
                 Is.False);
         });
-
-        await pair.CleanReturnAsync();
     }
 
     [Test]
     public async Task TestTemperatureCalculations()
     {
-        await using var pair = await PoolManager.GetServerClient();
+        var pair = Pair;
         var server = pair.Server;
         var protoMan = server.ResolveDependency<IPrototypeManager>();
         const float temp = 100.0f;
@@ -279,7 +302,5 @@ public sealed class SolutionSystemTests
             solutionOne.AddSolution(solutionTwo, protoMan);
             Assert.That(solutionOne.GetHeatCapacity(protoMan) * solutionOne.Temperature, Is.EqualTo(thermalEnergyOne + thermalEnergyTwo));
         });
-
-        await pair.CleanReturnAsync();
     }
 }

@@ -41,6 +41,7 @@
   - type: FireVisuals
     alternateState: Standing
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:
@@ -84,8 +85,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Critical
-      251: Dead
+      250: Critical
+      260: Dead
   - type: ShatteredRisen
   - type: StatusIcon
     bounds: -0.5,-0.5,0.5,0.5
@@ -136,10 +137,8 @@
     - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
-    - RadiationProtection
     - Adrenaline
   - type: Identity
   - type: IdExaminable
@@ -161,6 +160,9 @@
     factions:
     - Heretic
   - type: CreamPied
+    sprite:
+      sprite: Effects/creampie.rsi
+      state: creampie_human
   - type: UserInterface
     interfaces:
       enum.HumanoidMarkingModifierKey.Key:
@@ -212,6 +214,12 @@
         volume: -8
   - type: Insulated
   - type: FlashImmunity
+  - type: FlashSoundSuppression
+    protectionRange: 0
+  - type: CollectiveMind
+    defaultChannel: MansusLink
+    channels:
+    - MansusLink
 
 ## Base
 

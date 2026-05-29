@@ -10,3 +10,25 @@
   # intentionally no epsilon, NT won't sell you guns to kill their deathsquads
   category: cargoproduct-category-name-armory
   group: market
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryLaserCarbine
+  icon:
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser_carbine.rsi
+    state: icon
+  product: CrateArmoryLaserCarbine
+  cost: 6000
+  category: cargoproduct-category-name-armory
+  group: market
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryLaserAssault
+  icon:
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/assault_laser_wide.rsi
+    state: icon
+  product: CrateArmoryLaserAssault
+  cost: 7200
+  category: cargoproduct-category-name-armory
+  group: market

@@ -76,6 +76,7 @@
   - type: Tag
     tags:
     - BowImprovised
+    - Trash
   # </Trauma>
   - type: Sprite
     layers:
@@ -120,3 +121,9 @@
   - type: Construction
     graph: ImprovisedBow
     node: ImprovisedBow
+  # <Truama>
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 500
+      Cloth: 250
+  #</Trauma>

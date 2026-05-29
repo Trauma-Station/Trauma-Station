@@ -71,12 +71,12 @@
       Dead: XenomorphDead
   - type: SlowOnDamage
     speedModifierThresholds:
-      105: 0.9
-      125: 0.7
-      150: 0.6
+      125: 0.9
+      150: 0.8
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: Stamina
     baseCritThreshold: 500
   - type: Fixtures
@@ -107,7 +107,7 @@
     angle: 0
     soundHit:
       collection: AlienClaw
-    animation: WeaponArcBite
+    animation: WeaponArcClaw
     damage:
       types:
         Blunt: 5
@@ -121,10 +121,10 @@
     specificHeat: 42
   - type: TemperatureDamage
     heatDamageThreshold: 600
-    coldDamageThreshold: -150
+    coldDamageThreshold: 100 # Trauma, was -150
     coldDamage: #per second, scales with temperature & other constants
       types:
-        Cold: 0.1
+        Cold: 0.25 # Trauma, was 0.1
     heatDamage: #per second, scales with temperature & other constants
       types:
         Heat: 1.5
@@ -166,6 +166,10 @@
     groups:
     - XenomorphAccess
   - type: BloodSplatterer # Trauma
+  - type: KnowledgeGrant
+    skills:
+      ThrowingKnowledge: 50
+      StrengthKnowledge: 50
 
 
 - type: entity
@@ -201,7 +205,6 @@
     - DoorBumpOpener
     - FootstepSound
   - type: XenomorphShoveTracker
-  - type: CanMoveInAir
   - type: MovementAlwaysTouching # Trauma
 
 - type: entity
@@ -229,3 +232,14 @@
         false
       Inventory: !type:Bool
         false
+
+- type: entity
+  abstract: true
+  id: BaseXenoTailed
+  components:
+  - type: TailedEntity
+    amount: 17
+    spacing: 0.170
+    prototype: MobXenomorphTailSegmentBase
+    tailOffset: 0, -0.13
+    headFollowSegmentRotation: false

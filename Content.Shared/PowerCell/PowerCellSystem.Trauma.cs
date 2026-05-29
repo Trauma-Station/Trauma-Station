@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Inventory;
 using Content.Shared.Power.Components;
 
@@ -9,7 +10,7 @@ namespace Content.Shared.PowerCell;
 /// </summary>
 public sealed partial class PowerCellSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     private Entity<BatteryComponent>? FindBattery(EntityUid uid)
     {

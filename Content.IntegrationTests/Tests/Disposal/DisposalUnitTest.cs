@@ -32,6 +32,7 @@
 #nullable enable annotations
 using System.Linq;
 using System.Numerics;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Disposal.Unit;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -47,7 +48,7 @@ namespace Content.IntegrationTests.Tests.Disposal
     [TestOf(typeof(DisposalHolderComponent))]
     [TestOf(typeof(DisposalEntryComponent))]
     [TestOf(typeof(DisposalUnitComponent))]
-    public sealed class DisposalUnitTest
+    public sealed class DisposalUnitTest : GameTest
     {
         [Reflect(false)]
         private sealed class DisposalUnitTestSystem : EntitySystem
@@ -115,6 +116,7 @@ namespace Content.IntegrationTests.Tests.Disposal
       0: Alive
       200: Dead
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Physics
     bodyType: KinematicController
@@ -176,7 +178,7 @@ namespace Content.IntegrationTests.Tests.Disposal
         [Test]
         public async Task Test()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var testMap = await pair.CreateTestMap();
@@ -271,8 +273,6 @@ namespace Content.IntegrationTests.Tests.Disposal
                 // Re-pressurizing
                 Flush(disposalUnit, unitComponent, false, disposalSystem);
             });
-
-            await pair.CleanReturnAsync();
         }
     }
 }

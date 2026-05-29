@@ -1,0 +1,33 @@
+# TODO: enable these once its real
+- type: forgedItem
+  abstract: true
+  id: ChainmailSheet
+  category: Armor
+  name: chainmail sheet
+  tag: ForgedChainmailSheet
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/chainmail.rsi
+
+- type: Tag
+  id: ForgedChainmailSheet
+
+- type: forgedItem
+  abstract: true
+  id: ArmorPlate
+  category: Armor
+  name: plate
+  tag: ForgedArmorPlate
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/armor_plate.rsi
+
+- type: Tag
+  id: ForgedArmorPlate
+
+- type: forgedItem
+  abstract: true
+  id: ShieldBoss
+  category: Armor
+  name: shield boss # big boss
+  tag: ForgedShieldBoss
+  sprite: _Trauma/Objects/Specific/Forging/Unfinished/shield_boss.rsi
+
+- type: Tag
+  id: ForgedShieldBoss

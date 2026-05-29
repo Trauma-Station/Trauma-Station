@@ -26,6 +26,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Numerics;
+using Content.IntegrationTests.Fixtures;
 using Content.Server.Doors.Systems;
 using Content.Shared.Doors.Components;
 using Robust.Shared.GameObjects;
@@ -38,7 +39,7 @@ namespace Content.IntegrationTests.Tests.Doors
 {
     [TestFixture]
     [TestOf(typeof(AirlockComponent))]
-    public sealed class AirlockTest
+    public sealed class AirlockTest : GameTest
     {
         [TestPrototypes]
         private const string Prototypes = @"
@@ -81,7 +82,7 @@ namespace Content.IntegrationTests.Tests.Doors
         [Test]
         public async Task OpenCloseDestroyTest()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             var entityManager = server.ResolveDependency<IEntityManager>();
@@ -131,16 +132,12 @@ namespace Content.IntegrationTests.Tests.Doors
                     entityManager.DeleteEntity(airlock);
                 });
             });
-
-            server.RunTicks(5);
-
-            await pair.CleanReturnAsync();
         }
 
         [Test]
         public async Task AirlockBlockTest()
         {
-            await using var pair = await PoolManager.GetServerClient();
+            var pair = Pair;
             var server = pair.Server;
 
             await server.WaitIdleAsync();
@@ -206,7 +203,6 @@ namespace Content.IntegrationTests.Tests.Doors
             {
                 Assert.That(Math.Abs(xformSystem.GetWorldPosition(airlockPhysicsDummy).X - 1), Is.GreaterThan(0.01f));
             });
-            await pair.CleanReturnAsync();
         }
     }
 }

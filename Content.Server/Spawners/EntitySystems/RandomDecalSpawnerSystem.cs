@@ -1,6 +1,9 @@
+// <Trauma>
+using Content.Trauma.Common.Decals;
+// </Trauma>
 using System.Numerics;
 using Content.Server.Decals;
-using Content.Shared.Spawners.Components; // Trauma
+using Content.Shared.Spawners.Components; // Trauma - moved to shared
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -8,13 +11,13 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Spawners.EntitySystems;
 
-public sealed class RandomDecalSpawnerSystem : EntitySystem
+public sealed partial class RandomDecalSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefs = default!;
+    [Dependency] private DecalSystem _decal = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ITileDefinitionManager _tileDefs = default!;
 
     public override void Initialize()
     {
@@ -114,12 +117,16 @@ public sealed class RandomDecalSpawnerSystem : EntitySystem
             _decal.TryAddDecal(
                 decalProtoId,
                 position,
-                out _,
+                out var decal, // Trauma - need the decal for below
                 color,
                 rotation,
                 comp.ZIndex,
                 cleanable
             );
+            // <Trauma>
+            var ev = new DecalSpawnedEvent(decal);
+            RaiseLocalEvent(ent, ref ev);
+            // </Trauma>
 
             if (comp.MaxDecalsPerTile is > 0)
                 addedDecals[tileRefStr]++;

@@ -33,6 +33,12 @@
   name: cleanade
   description: Special grenade for janitors, releasing large cloud of space cleaner foam.
   components:
+  # <Trauma>
+  - type: Construction
+    graph: CleanerGrenadeGraph
+    node: start
+    deconstructionTarget: null
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Grenades/janitor.rsi
   - type: SmokeOnTrigger
@@ -45,10 +51,9 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
-  - type: Construction # Trauma
-    graph: CleanerGrenadeGraph
-    node: start
-    deconstructionTarget: null
+  - type: Tag
+    tags:
+    - CleanerGrenade
 
 - type: entity
   parent: SmokeGrenade

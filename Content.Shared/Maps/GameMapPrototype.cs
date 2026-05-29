@@ -30,7 +30,7 @@ public sealed partial class GameMapPrototype : IPrototype
     [DataField] public bool IsGrid;
 
     [DataField]
-    public bool RandomRotation = true;
+    public bool RandomRotation; // Trauma - make false by default
 
     /// <summary>
     /// Name of the map to use in generic messages, like the map vote.

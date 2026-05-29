@@ -1,0 +1,47 @@
+- type: knowledgeProfile
+  id: Abductor
+  pointsLimit: 5
+  mastery:
+    # Crafting Recipe Skills - 1 is standard unless stated otherwise.
+    CookingKnowledge: 0
+    MaterialsKnowledge: 1
+    DoorsKnowledge: 1
+    AirlocksKnowledge: 1
+    ToysKnowledge: 1
+    BananiumKnowledge: 0 # Not roundstart, blueprint required.
+    BotsKnowledge: 0 # Not roundstart, blueprint required.
+    FurnitureKnowledge: 1
+    InfrastructureKnowledge: 1
+    ElectronicsKnowledge: 1
+    WallsKnowledge: 1
+    ScienceKnowledge: 4 # Not roundstart, blueprint required.
+    WindowsKnowledge: 1
+    SmokeablesKnowledge: 0 # Not roundstart, blueprint required.
+    # Intelectual Skills
+    LiteracyKnowledge: 2
+    MagicalLiteracyKnowledge: 0
+    # Language Skills
+    LanguageSolCommon: 0
+    # Medical Skill
+    SurgeryKnowledge: 4
+    FirstAidKnowledge: 2
+    ChemistryKnowledge: 0
+    # Physical Skill
+    ThrowingKnowledge: 0
+    AthleticsKnowledge: 0
+    StrengthKnowledge: 0
+    ToughnessKnowledge: 0
+    # Combat Skill
+    MeleeKnowledge: 0
+    ShootingKnowledge: 2
+    # Crafting Quality
+    FabricationKnowledge: 0
+    WeaponsKnowledge: 0
+    ArmorKnowledge: 0
+    MetalworkingKnowledge: 0
+    CarvingKnowledge: 0
+    GunsmithingKnowledge: 0
+    MechanicsKnowledge: 0
+    TailoringKnowledge: 0
+    # Misc Skill
+    JanitorKnowledge: 0

@@ -2,7 +2,6 @@
 
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
-using Robust.Shared.Serialization;
 
 namespace Content.Goobstation.Shared.SlaughterDemon;
 

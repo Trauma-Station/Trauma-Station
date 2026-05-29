@@ -4,14 +4,13 @@ using Content.Client.Overlays;
 using Content.Goobstation.Shared.Overlays;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Overlays;
 
-public sealed class NightVisionSystem : EquipmentHudSystem<NightVisionComponent>
+public sealed partial class NightVisionSystem : EquipmentHudSystem<NightVisionComponent>
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
-    [Dependency] private readonly ILightManager _lightManager = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
+    [Dependency] private ILightManager _lightManager = default!;
 
     private BaseSwitchableOverlay<NightVisionComponent> _overlay = default!;
 

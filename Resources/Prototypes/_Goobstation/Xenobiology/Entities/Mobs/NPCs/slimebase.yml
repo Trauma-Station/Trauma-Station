@@ -70,8 +70,9 @@
         Asphyxiation: -1.0
     maxSaturation: 15
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Slime
+  - type: Injurable
+    damageContainer: Biological
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -147,6 +148,7 @@
   - type: GuideHelp
     guides:
     - Xenobiology
+  - type: MobSpam # you can easily make hundreds of them...
 
 # Begin Slimes
 

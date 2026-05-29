@@ -27,12 +27,12 @@
     FirstAidKnowledge: 0
     ChemistryKnowledge: 0
     # Physical Skill
-    ThrowingKnowledge: 0
+    ThrowingKnowledge: 1
     AthleticsKnowledge: 2
     StrengthKnowledge: 3
     ToughnessKnowledge: 2
     # Combat Skill
-    MeleeKnowledge: 0
+    MeleeKnowledge: 2
     ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 0

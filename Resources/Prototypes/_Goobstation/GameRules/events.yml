@@ -24,7 +24,7 @@
     channel: Tidemind
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: DerelictCyborgSyndicateSpawn
   components:
   - type: StationEvent
@@ -38,22 +38,24 @@
   - type: AntagSpawner
     prototype: PlayerBorgDerelictSyndicateAssaultBattery
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictCyborgSyndicate
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictCyborgSyndicate
 
-- type: entity # Goobstation
-  id: JobDistributionError
+- type: antagSpecifier
+  id: DerelictCyborgSyndicate
+  spawnerPrototype: SpawnPointGhostDerelictCyborgSyndicate
+
+- type: entity
   parent: BaseGameRule
+  id: JobDistributionError
   components:
   - type: StationEvent
     startAnnouncement: station-event-job-distribution-error-announcement
     minimumPlayers: 25
     weight: 3
     duration: 1
-  - type: JobDistributionErrorRule # Goobstation
+  - type: JobDistributionErrorRule
     jobs:
     - SecurityClown
     - PartyMaker

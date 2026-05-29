@@ -97,6 +97,7 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseMechRecipeCategory ]
   id: RipleyCentralElectronics
   result: RipleyCentralElectronics
+  categories: [ Mech, Ripley ] # Trauma
 
 - type: latheRecipe
   parent: RipleyCentralElectronics
@@ -107,6 +108,7 @@
   parent: [ BaseBananiumCircuitboardRecipe, BaseMechRecipeCategory ]
   id: HonkerCentralElectronics
   result: HonkerCentralElectronics
+  categories: [ Mech, Honker ] # Trauma
 
 - type: latheRecipe
   parent: HonkerCentralElectronics
@@ -122,6 +124,7 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseMechRecipeCategory]
   id: HamtrCentralElectronics
   result: HamtrCentralElectronics
+  categories: [ Mech, Hamptr ] # Trauma
 
 - type: latheRecipe
   parent: HamtrCentralElectronics

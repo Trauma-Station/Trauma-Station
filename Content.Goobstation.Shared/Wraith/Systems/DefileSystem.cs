@@ -2,17 +2,17 @@
 
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
-using Content.Shared._White.ListViewSelector;
+using Content.Goobstation.Shared.ListViewSelector;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
-public sealed class DefileSystem : EntitySystem
+public sealed partial class DefileSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
     public override void Initialize()
     {
         base.Initialize();

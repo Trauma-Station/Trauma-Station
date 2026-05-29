@@ -45,6 +45,27 @@
   - sprite: _White/Mobs/Customization/snouts.rsi
     state: eastern_dragon_usiki
 
+# TAIL
+- type: marking
+  id: SnakeLargeTail
+  bodyPart: Tail
+  groupWhitelist: [Reptilian]
+  sprites:
+    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
+      state: snake_large
+    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
+      state: snake_large_overlay
+
+- type: marking
+  id: SnakeLargeTailAnimated
+  bodyPart: Tail
+  groupWhitelist: []
+  sprites:
+    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
+      state: snake_large_wagging
+    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
+      state: snake_large_wagging_overlay
+
 # SPINE
 - type: marking
   id: LizardChestSpinesAquatic

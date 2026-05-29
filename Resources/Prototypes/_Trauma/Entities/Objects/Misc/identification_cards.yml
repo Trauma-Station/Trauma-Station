@@ -22,3 +22,44 @@
       sprite: _Trauma/Objects/Misc/id_cards.rsi
   - type: PresetIdCard
     job: PhoneMerchant
+
+- type: entity
+  parent: IDCardStandard
+  id: DClassIDCard
+  name: d-class ID card
+  description: A Cheaply printed ID card for the lowest of low.
+  components:
+  - type: Sprite
+    layers:
+    - state: orange
+  - type: Item
+    heldPrefix: orange
+  - type: Access
+  - type: IdCard
+    jobTitle: job-name-d-class
+    jobIcon: JobIconDClass
+    canMicrowave: false
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+    - Recyclable
+  - type: StaticPrice # MassProduced NT Slop
+    price: 0
+  - type: AntagCard # D-class? Outside? Can't be.
+
+- type: entity
+  parent: [ AgentIDCard ]
+  id: SpacePolIDCardChameleon
+  name: SpacePol ID card
+  suffix: Agent
+  components:
+  - type: IdCard
+    jobTitle: job-name-spacepol
+    jobIcon: JobIconSpacePol
+  - type: Access
+    tags:
+    - Maintenance
+    - SyndicateAgent
+    - External

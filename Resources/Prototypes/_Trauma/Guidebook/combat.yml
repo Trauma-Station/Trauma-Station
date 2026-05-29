@@ -2,3 +2,8 @@
   id: Tackle
   name: guide-entry-tackle
   text: "/ServerInfo/_Trauma/Guidebook/Combat/Tackle.xml"
+
+- type: guideEntry
+  id: Forging
+  name: guide-entry-forging
+  text: "/ServerInfo/_Trauma/Guidebook/Civilian/Forging.xml"

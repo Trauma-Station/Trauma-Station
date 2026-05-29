@@ -1,0 +1,19 @@
+- type: entityTable
+  id: RandomScarf
+  table: !type:GroupSelector
+    children:
+    - id: ClothingNeckScarfStripedRed
+    - id: ClothingNeckScarfStripedBlue
+    - id: ClothingNeckScarfStripedGreen
+    - id: ClothingNeckScarfStripedBlack
+    - id: ClothingNeckScarfStripedBrown
+    - id: ClothingNeckScarfStripedLightBlue
+    - id: ClothingNeckScarfStripedOrange
+    - id: ClothingNeckScarfStripedPurple
+    # rare special scarves
+    - id: ClothingNeckScarfStripedSyndieGreen
+      weight: 0.1
+    - id: ClothingNeckScarfStripedSyndieRed
+      weight: 0.1
+    - id: ClothingNeckScarfStripedCentcom
+      weight: 0.05

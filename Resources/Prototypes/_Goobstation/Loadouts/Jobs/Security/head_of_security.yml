@@ -64,8 +64,3 @@
   - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
-
-- type: loadout
-  id: GorillaGloves
-  equipment:
-    gloves: ClothingHandsGlovesGorilla

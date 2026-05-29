@@ -9,26 +9,22 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Serialization;
 
 namespace Content.Trauma.Shared.Tools;
 
-public sealed class EffectsToolSystem : EntitySystem
+public sealed partial class EffectsToolSystem : EntitySystem
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-
-    private EntityQuery<EffectsToolComponent> _query;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<EffectsToolComponent> _query = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<EffectsToolComponent>();
 
         SubscribeLocalEvent<EffectsToolComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<EffectsToolComponent, GetVerbsEvent<UtilityVerb>>(OnGetVerbs);

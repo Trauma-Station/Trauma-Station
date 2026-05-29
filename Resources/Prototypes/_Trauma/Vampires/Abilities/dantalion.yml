@@ -1,0 +1,84 @@
+- type: vampireAbility
+  id: BaseDantalionAbility
+  class: Dantalion
+  abstract: true
+
+- type: vampireAbility  # TODO: Add collective mind here too
+  parent: BaseDantalionAbility
+  id: StartingDantalionAbilities
+  cost: 150
+  onUnlock:
+  - !type:AddComponents
+    components:
+    - type: VampireThralls
+    - type: CollectiveMind
+      defaultChannel: Dantalion
+      channels:
+      - Dantalion
+  - !type:AddActions
+    actions:
+    - ActionDanEnthrall
+
+- type: vampireAbility
+  parent: BaseDantalionAbility
+  id: Pacify
+  cost: 250
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionPacify
+    - ActionSubspaceSwap
+  - !type:PopupPredicted
+    message: You can now pacify people, and swap places with them.
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseDantalionAbility
+  id: DeployDecoy
+  cost: 400
+  onUnlock:
+  - !type:AdjustVampireThralls # By default, adds 1 extra
+  - !type:AddActions
+    actions:
+    - ActionDeployDecoy
+  - !type:PopupPredicted
+    message: You gain one extra thrall slot, and the ability to deploy a decoy!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseDantalionAbility
+  id: RallyThralls
+  cost: 600
+  onUnlock:
+  - !type:AdjustVampireThralls
+  - !type:AddActions
+    actions:
+    - ActionRallyThralls
+  - !type:PopupPredicted
+    message: You gain one extra thrall slot, and the ability to rally thralls!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseDantalionAbility
+  id: BloodBond
+  cost: 800
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodBond
+  - !type:PopupPredicted
+    message: You gain the ability to initiate a blood bond between thralls!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseDantalionAbility
+  id: DantalionFullPower
+  cost: 1000
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 7
+  onUnlock:
+  - !type:AdjustVampireThralls
+  - !type:AddActions
+    actions:
+    - ActionMassHysteria

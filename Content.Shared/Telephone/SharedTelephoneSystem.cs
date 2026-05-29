@@ -1,8 +1,4 @@
-// SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Shared.Telephone;
@@ -26,15 +22,15 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         if (presumedJob != null)
             callerId = Loc.GetString("chat-telephone-caller-id-with-job",
-                ("callerName", presumedName),
-                ("callerJob", presumedJob),
+                ("callerName", FormattedMessage.RemoveMarkupPermissive(presumedName)),
+                ("callerJob", FormattedMessage.RemoveMarkupPermissive(presumedJob)),
                 ("color", fontColor),
                 ("fontType", fontType),
                 ("fontSize", fontSize));
 
         else
             callerId = Loc.GetString("chat-telephone-caller-id-without-job",
-                ("callerName", presumedName),
+                ("callerName", FormattedMessage.RemoveMarkupPermissive(presumedName)),
                 ("color", fontColor),
                 ("fontType", fontType),
                 ("fontSize", fontSize));
@@ -53,7 +49,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
         }
 
         return Loc.GetString("chat-telephone-device-id",
-            ("deviceName", deviceName),
+            ("deviceName", FormattedMessage.RemoveMarkupPermissive(deviceName)),
             ("color", fontColor),
             ("fontType", fontType),
             ("fontSize", fontSize));

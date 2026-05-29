@@ -2,6 +2,10 @@
   id: StatusEffectBase
   abstract: true
   components:
+  # <Trauma>
+  - type: Transform
+    gridTraversal: false # War has changed. ID-tagged soldiers carry ID-tagged weapons, use ID-tagged gear. Nanomachines inside their bodies enhance and regulate their abilities. Genetic control. Information control. Emotion control. Battlefield control. Everything is monitored and kept under control.
+  # </Trauma>
   - type: StatusEffect
   - type: Sprite
     drawdepth: Effects
@@ -94,3 +98,16 @@
   name: drunk
   components: # Trauma
   - type: DrunknessLimit
+
+# Prevents the target from seeing
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectBlindness
+  name: temporary blindness
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobState
+      - Blindable
+  - type: BlindnessStatusEffect

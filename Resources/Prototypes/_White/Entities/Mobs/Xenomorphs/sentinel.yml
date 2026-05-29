@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel ]
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel, BaseXenoTailed ]
   id: BaseMobXenomorphSentinel
   name: xenomorph sentinel
   description: A specialized specimen designed to hit targets at a distance. Particularly dangerous in narrow corridors and confined spaces.

@@ -1,0 +1,7 @@
+- type: shader
+  id: Horror
+  kind: source
+  path: "/Textures/_Trauma/Shaders/horror.swsl"
+  params:
+    pulseSpeed: 4.0
+    shadowSoftness: 0.3

@@ -8,7 +8,7 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
 
@@ -20,7 +20,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
 
 # Barricades
 
@@ -85,7 +85,6 @@
 - type: construction
   id: AirlockSealed
   graph: Airlock
-  startNode: start
   targetNode: sealedAirlock
   category: construction-category-structures
   objectType: Structure
@@ -101,7 +100,6 @@
 - type: construction
   id: AirlockSealedGlass
   graph: Airlock
-  startNode: start
   targetNode: sealedGlassAirlock
   category: construction-category-structures
   objectType: Structure

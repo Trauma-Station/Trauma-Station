@@ -73,3 +73,7 @@
     ClothingHeadHatHoodCulthood: 3
     ClothingShoesCult: 4
     BedsheetCult: 4
+  # <Trauma>
+    RitualDagger: 1
+    BibleNecronomicon: 1
+  # </Trauma>

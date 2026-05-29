@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   parent: BaseAction
   id: ActionHereticVoidPhase
@@ -97,7 +88,7 @@
   description: Opens a gate to the Void; it releases an intermittent pulse that damages windows and airlocks, while afflicting Heathens with void chill. Affected Heretics instead receive low pressure resistance.
   components:
   - type: Action
-    useDelay: 60
+    useDelay: 90
     itemIconStyle: NoItem
     checkCanInteract: false
     icon:
@@ -110,5 +101,5 @@
   - type: SpeakOnAction
     sentence: heretic-speech-void-conduit
   - type: ChangeUseDelayOnAscension
-    newUseDelay: 30
+    newUseDelay: 45
     requiredPath: Void

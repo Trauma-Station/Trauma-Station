@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.Knowledge.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Common.Knowledge.Components;
 
@@ -88,10 +85,22 @@ public sealed partial class KnowledgeComponent : Component
     public TimeSpan TimeToNextExperience = TimeSpan.Zero;
 
     /// <summary>
+    /// Stores what should be used to calculate the next xp timestamp.
+    /// </summary>
+    [DataField]
+    public TimeSpan TimeBetweenExperience = TimeSpan.FromSeconds(5);
+
+    /// <summary>
     /// Array of point costs for each mastery level, including 0.
     /// There are 6 of them total by default, removing will decrease the max mastery you can buy.
     /// If this is null, you can't opt in to this knowledge.
     /// </summary>
     [DataField(required: true)]
     public int[]? Costs = null;
+
+    /// <summary>
+    /// Determines if the skill can be learned by doing or if it needs formal training.
+    /// </summary>
+    [DataField]
+    public bool Complex = false;
 }

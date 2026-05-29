@@ -1,2 +1,2 @@
-ent-XenoborgModuleHypo = xenoborg dartgun module
-    .desc = Module with a self-refilling nocturine dartgun.
+ent-WeaponLaserCarbine = laser rifle
+    .desc = The Type 5 Heat Delivery System, developed by Nanotrasen. The workhorse of Nanotrasen's security forces.

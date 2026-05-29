@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.Roles;
 
@@ -23,4 +22,11 @@ public sealed partial class RoleEffectsComponent : Component
 
     [DataField, AlwaysPushInheritance]
     public EntityEffect[] MindRemoved = [];
+
+    /// <summary>
+    /// Whether to remove this component after adding components to the mob.
+    /// MindAdded and Removed don't use this.
+    /// </summary>
+    [DataField]
+    public bool SingleUse;
 }

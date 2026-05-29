@@ -6,24 +6,20 @@ using Content.Shared.Radio;
 using Content.Shared.Research.Components;
 using Content.Trauma.Shared.Genetics.Console;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Server.Genetics.Console;
 
-public sealed class GeneticsResearchConsoleSystem : EntitySystem
+public sealed partial class GeneticsResearchConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
-
-    private EntityQuery<ResearchClientComponent> _clientQuery;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private ResearchSystem _research = default!;
+    [Dependency] private EntityQuery<ResearchClientComponent> _clientQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _clientQuery = GetEntityQuery<ResearchClientComponent>();
 
         SubscribeLocalEvent<GeneticsResearchConsoleComponent, MutationSequencedEvent>(OnSequenced);
     }

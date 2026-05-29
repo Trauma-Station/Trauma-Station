@@ -7,33 +7,27 @@ using Content.Shared.Chemistry.Events;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Standing;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Medical.Hypoport;
 
 /// <summary>
 /// Prevents hypospray injections without a hypoport or if you aren't grabbing the patient.
 /// </summary>
-public sealed class HypoportSystem : EntitySystem
+public sealed partial class HypoportSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-
-    private EntityQuery<IgnoreHypoportComponent> _ignoreQuery;
-    private EntityQuery<InjectorComponent> _injectorQuery;
-    private EntityQuery<PullerComponent> _pullerQuery;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private EntityQuery<IgnoreHypoportComponent> _ignoreQuery = default!;
+    [Dependency] private EntityQuery<InjectorComponent> _injectorQuery = default!;
+    [Dependency] private EntityQuery<PullerComponent> _pullerQuery = default!;
 
     public static ProtoId<OrganCategoryPrototype> HypoportCategory = "Hypoport";
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _ignoreQuery = GetEntityQuery<IgnoreHypoportComponent>();
-        _injectorQuery = GetEntityQuery<InjectorComponent>();
-        _pullerQuery = GetEntityQuery<PullerComponent>();
 
         SubscribeLocalEvent<BodyComponent, TargetBeforeInjectEvent>(OnBeforeInject);
 

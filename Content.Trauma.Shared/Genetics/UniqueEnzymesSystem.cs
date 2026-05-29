@@ -13,24 +13,14 @@ namespace Content.Trauma.Shared.Genetics;
 /// <summary>
 /// Simple API for getting and changing <see cref="UniqueEnzymes"/> for mobs.
 /// </summary>
-public sealed class UniqueEnzymesSystem : EntitySystem
+public sealed partial class UniqueEnzymesSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private HumanoidProfileSystem _humanoid = default!;
 
-    private EntityQuery<DetailExaminableComponent> _detailQuery;
-    private EntityQuery<FingerprintComponent> _printsQuery;
-    private EntityQuery<HumanoidProfileComponent> _humanoidQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _detailQuery = GetEntityQuery<DetailExaminableComponent>();
-        _printsQuery = GetEntityQuery<FingerprintComponent>();
-        _humanoidQuery = GetEntityQuery<HumanoidProfileComponent>();
-    }
+    [Dependency] private EntityQuery<FingerprintComponent> _printsQuery = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
 
     /// <summary>
     /// Change a mob's unique enzymes, if it is mutatable (i.e. no renaming mice and shit).

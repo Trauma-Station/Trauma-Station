@@ -1,0 +1,8 @@
+- type: entity
+  parent: MobCarp
+  id: MobCarpMigrating
+  suffix: Migration AI
+  components:
+  - type: HTN
+    rootTask:
+      task: DragonCarpCompound

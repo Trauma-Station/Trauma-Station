@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <controls:BaseTabControl
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Content.Client._Shitcode.UserActions.Tabs"
+    xmlns:controls="using:Content.Trauma.Client.UserActions.Tabs"
     x:Class="Content.Trauma.Client.Knowledge.UI.MartialArtsTabControl">
 
     <PanelContainer StyleClasses="BackgroundDark">
