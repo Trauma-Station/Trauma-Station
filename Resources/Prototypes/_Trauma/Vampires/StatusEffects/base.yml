@@ -38,8 +38,9 @@
       - !type:OnGridCondition
         inverted: true
       damage:
+        splitDamage: SplitEnsureAll
         types:
-          Cellular: 20
+          Cellular: 10
     - !type:PopupMessage
       conditions:
       - !type:OnGridCondition

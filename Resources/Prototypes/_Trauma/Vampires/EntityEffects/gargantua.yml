@@ -13,7 +13,7 @@
   - !type:ModifyKnockdown
     time: 12
   - !type:HealthChange
-    targetPart: Chest
+    splitDamage: SplitEnsureAll
     damage:
       types:
         Blunt: 60
