@@ -1,7 +1,8 @@
 <Document>
   # Vampires
+
   <Box>
-    <GuideEntityEmbed Entity="ActionVampireGlare" Caption=""/>
+    <GuideEntityEmbed Entity="CrateCoffin" Caption=""/>
   </Box>
 
   Vampires are creatures who possess the ability to drain and manipulate life essence from the blood of sapient beings on-station.
@@ -26,15 +27,31 @@
 
   ## Starting Powers
 
+  <Box>
+    <GuideEntityEmbed Entity="VampireGlareGuideBook" Caption=""/>
+    <GuideEntityEmbed Entity="VampireRejuvGuideBook" Caption=""/>
+  </Box>
+
   Vampires will start with two powers: Glare and Rejuvenate. Using Glare can stun and silence, with the effect varying depending on if you are facing the target, and Rejuvenate will clear all stuns.
 
   ## Classes
+
+  <Box>
+    <GuideEntityEmbed Entity="ClassGargantuaGuideBook" Caption=""/>
+    <GuideEntityEmbed Entity="ClassHaemomancerGuideBook" Caption=""/>
+    <GuideEntityEmbed Entity="ClassUmbraeGuideBook" Caption=""/>
+    <GuideEntityEmbed Entity="ClassDantalionGuideBook" Caption=""/>
+  </Box>
 
   Vampires have two different types of powers: base powers and class powers. Base powers are abilities that every Vampire has or will be able to unlock regardless of class.
   After drinking a total of 150 blood, vampires gain access to 4 unique and mutually exclusive skill trees, with increasingly powerful abilities tailored to various play styles.
   Upon gathering 1,000u of blood from at least 8 different people vampires will and rise to their full power, gaining improved night vision, immunity to holy water, the chapel, nullification, and the chaplain's holiness, becoming a blood-fueled emissary of death and destruction!
 
   ## Fighting Vampires
+
+  <Box>
+    <GuideEntityEmbed Entity="Nullrod" Caption=""/>
+  </Box>
 
   - Keeping your distance from a vampire will prevent them from glaring you, which is normally a death sentence. stay back and shoot.
   - Vampiric abilities can be "nullified", which increases the blood cost of powers; Nullification scales all the way to 100, at which point Vampires cannot use any abilities. A Chaplain's Null Rod or holy water applies nullification.
