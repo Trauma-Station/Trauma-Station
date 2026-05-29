@@ -11,7 +11,6 @@
   mindRoles: [ MindRoleApprentice ]
   components:
   - type: Apprentice
-  - type: CanEnchant
   - type: LanguageSpeaker
     speaks: []
     understands: []

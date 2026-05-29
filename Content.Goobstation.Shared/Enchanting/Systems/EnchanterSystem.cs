@@ -6,9 +6,12 @@ using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Stacks;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Enchanting.Systems;
 
@@ -18,21 +21,22 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 public sealed partial class EnchanterSystem : EntitySystem
 {
     [Dependency] private EnchantingSystem _enchanting = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     private List<EntProtoId<EnchantComponent>> _pool = new();
-    private EntityQuery<CanEnchantComponent> _userQuery;
+
+    private static readonly EntProtoId MagicalLiteracy = "MagicalLiteracyKnowledge";
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _userQuery = GetEntityQuery<CanEnchantComponent>();
 
         SubscribeLocalEvent<EnchanterComponent, ExaminedEvent>(OnExamined);
 
@@ -75,12 +79,6 @@ public sealed partial class EnchanterSystem : EntitySystem
             return;
         }
 
-        if (_userQuery.HasComp(user) == false)
-        {
-            _popup.PopupClient(Loc.GetString("enchanter-disallowed-enchant"), user, user);
-            return;
-        }
-
         TryEnchant(enchanter, item, user);
     }
 
@@ -106,17 +104,20 @@ public sealed partial class EnchanterSystem : EntitySystem
             return false;
         }
 
-        // can't predict any further due to rng + spawning
-        if (_net.IsClient)
-            return true;
+        if (_knowledge.GetKnowledge(user, MagicalLiteracy) is not { } skill || _knowledge.GetMastery(skill.Comp) < 1)
+        {
+            _popup.PopupClient(Loc.GetString("enchanter-no-skill"), item, user);
+            return false;
+        }
 
-        // pick a random enchant then do it
-        var picking = _random.NextFloat(ent.Comp.MinCount, ent.Comp.MaxCount);
+        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent), GetNetEntity(user));
+        var picking = random.NextFloat(ent.Comp.MinCount, ent.Comp.MaxCount);
         var total = 0f;
         for (int i = 0; i < 20 && total < picking; i++)
         {
-            var id = _random.Pick(_pool);
-            var level = (int) _random.NextFloat(ent.Comp.MinLevel, ent.Comp.MaxLevel);
+            var id = random.Pick(_pool);
+            // TODO: Integrate with skills 2
+            var level = (int) random.NextFloat(ent.Comp.MinLevel, _knowledge.GetMastery(skill.Comp) + ent.Comp.AdjustLevel);
             if (_enchanting.Enchant(item, id, level))
                 total += 1f;
         }
@@ -124,13 +125,12 @@ public sealed partial class EnchanterSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.Sound, item);
         _popup.PopupEntity(Loc.GetString("enchanter-enchanted", ("item", item)), item, PopupType.Large);
 
-        _adminLogger.Add(LogType.EntityDelete, LogImpact.Low,
-            $"{ToPrettyString(user):player} enchanted {ToPrettyString(item):item} using {ToPrettyString(ent):enchanter}");
+        _adminLogger.Add(LogType.EntityDelete, LogImpact.Low, $"{ToPrettyString(user):player} enchanted {ToPrettyString(item):item} using {ToPrettyString(ent):enchanter}");
 
         if (!TryComp<StackComponent>(ent, out var stack) || !_stack.TryUse((ent, stack), 1))
         {
             ent.Comp.Enchants = new(); // prevent double enchanting by malf client
-            QueueDel(ent);
+            PredictedQueueDel(ent);
         }
         return true;
     }

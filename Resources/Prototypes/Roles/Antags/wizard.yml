@@ -34,7 +34,6 @@
   components:
   # <Trauma>
   - type: Wizard
-  - type: CanEnchant
   - type: LanguageSpeaker
     speaks: []
     understands: []
