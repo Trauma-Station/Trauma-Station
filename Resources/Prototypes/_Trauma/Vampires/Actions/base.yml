@@ -142,7 +142,7 @@
   - type: Action
     icon:
       sprite: _Trauma/Vampires/actions.rsi
-      state: select_class
+      state: lair
   - type: TargetAction
     range: 2
   - type: EntityTargetAction
@@ -161,7 +161,7 @@
     useDelay: 500
     icon:
       sprite: _Trauma/Vampires/actions.rsi
-      state: select_class
+      state: lair_tp
   - type: InstantAction
     event: !type:ActionLairTeleportEvent
   - type: ActionLairTeleport

@@ -6,11 +6,18 @@
     - ActionVampRejuvenateI
 
 - type: vampireAbility
-  id: Glare
+  id: GlareLair
   onUnlock:
   - !type:AddActions
     actions:
     - ActionVampireGlare
+
+- type: vampireAbility
+  id: CreateLair
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionCreateLair
 
 - type: vampireAbility
   id: RejuvenateII

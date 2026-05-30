@@ -102,6 +102,12 @@
         },
         {
             "name": "demonic_grasp"
+        },
+        {
+            "name": "lair"
+        },
+        {
+            "name": "lair_tp"
         }
     ]
 }
