@@ -1,36 +1,36 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Jittering;
 using Content.Server.Popups;
-using Content.Trauma.Shared.Xenomorphs;
-using Content.Trauma.Shared.Xenomorphs.Larva;
+using Content.Shared._White.Xenomorphs;
+using Content.Shared._White.Xenomorphs.Larva;
 using Content.Shared.DoAfter;
-using Content.Shared.Gibbing;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Content.Shared.Damage;
+using Content.Shared._Shitmed.Targeting;
 
-namespace Content.Trauma.Server.Xenomorphs.Larva;
+namespace Content.Server._White.Xenomorphs.Larva;
 
-public sealed partial class XenomorphLarvaSystem : EntitySystem
+public sealed class XenomorphLarvaSystem : EntitySystem
 {
-    [Dependency] private ContainerSystem _container = default!;
-    [Dependency] private DoAfterSystem _doAfter = default!;
-    [Dependency] private GibbingSystem _gibbing = default!;
-    [Dependency] private JitteringSystem _jitter = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly DoAfterSystem _doAfter = default!;
+    [Dependency] private readonly JitteringSystem _jitter = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<XenomorphLarvaComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<XenomorphLarvaComponent, EntGotRemovedFromContainerMessage>(OnGotRemovedFromContainer);
+        SubscribeLocalEvent<XenomorphLarvaComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
         SubscribeLocalEvent<XenomorphLarvaComponent, LarvaBurstDoAfterEvent>(OnLarvaBurstDoAfter);
-        SubscribeLocalEvent<XenomorphLarvaComponent, MindAddedMessage>(OnMindAdded);
     }
 
     private void OnShutdown(EntityUid uid, XenomorphLarvaComponent component, ComponentShutdown args)
@@ -45,16 +45,9 @@ public sealed partial class XenomorphLarvaSystem : EntitySystem
             RemComp<XenomorphLarvaVictimComponent>(component.Victim.Value);
     }
 
-    private void OnMindAdded(EntityUid uid, XenomorphLarvaComponent component, MindAddedMessage args)
+    private void OnTakeGhostRole(EntityUid uid, XenomorphLarvaComponent component, TakeGhostRoleEvent args)
     {
-        if (component.Victim.HasValue
-            && _container.TryGetContainingContainer(uid, out _))
-            StartBurst(uid, component);
-    }
-
-    private void StartBurst(EntityUid uid, XenomorphLarvaComponent component)
-    {
-        if (component.Victim is not { } victim)
+        if (component.Victim is not {} victim)
             return;
 
         var doAfterEventArgs = new DoAfterArgs(EntityManager, uid, component.BurstDelay, new LarvaBurstDoAfterEvent(), uid, target: component.Victim)
@@ -84,6 +77,9 @@ public sealed partial class XenomorphLarvaSystem : EntitySystem
             return;
 
         _container.Remove(uid, container);
-        _gibbing.Gib(victim);
+        var damage = new DamageSpecifier();
+        damage.DamageDict.Add("Blunt", 120);
+        damage.DamageDict.Add("Piercing", 80);
+        _damageableSystem.TryChangeDamage(uid: victim, damage: damage, ignoreResistances: true, interruptsDoAfters: false, targetPart: TargetBodyPart.Chest);
     }
 }
