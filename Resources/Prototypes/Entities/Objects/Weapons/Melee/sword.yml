@@ -166,7 +166,7 @@
     damage:
       types:
         # <Trauma>
-        Slash: 20
+        Slash: 20 # was 30
       woundSeverityMultipliers:
         Slash: 2
         # </Trauma>

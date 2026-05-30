@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/21579ab5e68e7958fbc83a10f99576fb7504845b",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a24aa586b5bed116c600eaf5e540f9097a43b385/icons/obj/clothing/belts.dmi, https://github.com/tgstation/tgstation/blob/a24aa586b5bed116c600eaf5e540f9097a43b385/icons/mob/clothing/belt_mirror.dmi",
   "size": {
     "x": 32,
     "y": 32
