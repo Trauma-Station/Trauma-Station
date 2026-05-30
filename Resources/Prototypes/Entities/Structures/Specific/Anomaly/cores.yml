@@ -1,22 +1,3 @@
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 PursuitInAshes <91865152+PursuitInAshes@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 August Sun <45527070+august-sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ed <96445749+TheShuEd@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Scribbles0 <91828755+Scribbles0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 august-sun <45527070+august.sun@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 yglop <95057024+yglop@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -74,7 +55,6 @@
     temperature: 400
     ignited: true
   - type: Enchanter # Goobstation
-    maxLevel: 2 # Non-inert cores can roll max level
     enchants:
     - EnchantFireAspect
     - EnchantLavaforged
@@ -93,7 +73,6 @@
     color: "#1e070e"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 2 # Non-inert cores can roll max level
     enchants:
     - EnchantKnockback
 
@@ -111,7 +90,6 @@
     color: "#befaff"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 4 # Non-inert cores can roll max level
     enchants:
     - EnchantProtFire
 
@@ -130,7 +108,6 @@
     color: "#cb5b7e"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 5 # Non-inert cores can roll max level
     enchants:
     - EnchantSharpness
 
@@ -148,7 +125,6 @@
     color: "#5ca8cb"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 3 # Non-inert cores can roll max level
     enchants:
     - EnchantProtection
     - EnchantUnbreaking
@@ -167,7 +143,6 @@
     color: "#ffffff"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 4 # Non-inert cores can roll max level
     enchants:
     - EnchantSlippery
     - EnchantUnslippable
@@ -220,7 +195,6 @@
     color: "#6270bb"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 3 # Non-inert cores can roll max level
     enchants:
     - EnchantThorns
 
@@ -266,7 +240,6 @@
     color: "#fc0303"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 3 # Non-inert cores can roll max level
     enchants:
     - EnchantFortune
 
@@ -302,7 +275,6 @@
     color: "#fca3c0"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 1
     enchants:
     - EnchantFireAspect
     - EnchantLavaforged
@@ -321,7 +293,6 @@
     color: "#1e070e"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 1
     enchants:
     - EnchantKnockback
 
@@ -339,7 +310,6 @@
     color: "#befaff"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 2
     enchants:
     - EnchantProtFire
 
@@ -358,7 +328,6 @@
     color: "#cb5b7e"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 3
     enchants:
     - EnchantSharpness
 
@@ -376,7 +345,6 @@
     color: "#5ca8cb"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 1
     enchants:
     - EnchantProtection
     - EnchantUnbreaking
@@ -395,7 +363,6 @@
     color: "#ffffff"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 2 # Non-inert cores can roll max level
     enchants:
     - EnchantSlippery
     - EnchantUnslippable
@@ -428,7 +395,6 @@
     color: "#ffffaa"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 4 # Insuls rolling
     enchants:
     - EnchantBudgetInsulated
 
@@ -448,7 +414,6 @@
     color: "#6270bb"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 2
     enchants:
     - EnchantThorns
 
@@ -494,6 +459,5 @@
     color: "#fc0303"
     castShadows: false
   - type: Enchanter # Goobstation
-    maxLevel: 2
     enchants:
     - EnchantFortune

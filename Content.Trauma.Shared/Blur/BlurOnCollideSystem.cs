@@ -1,15 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Projectiles;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 
 namespace Content.Trauma.Shared.Collision.Blur;
 
 public sealed partial class BlurOnCollideSystem : EntitySystem
 {
-    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
 
     public override void Initialize()
     {
@@ -33,18 +35,13 @@ public sealed partial class BlurOnCollideSystem : EntitySystem
     {
         if (component.BlurTime > TimeSpan.Zero)
         {
-            _statusEffects.TryAddStatusEffect<BlurryVisionComponent>(target,
+            _statusOld.TryAddStatusEffect<BlurryVisionComponent>(target,
                 "BlurryVision",
                 component.BlurTime,
                 true);
         }
 
         if (component.BlindTime > TimeSpan.Zero)
-        {
-            _statusEffects.TryAddStatusEffect<TemporaryBlindnessComponent>(target,
-                "TemporaryBlindness",
-                component.BlindTime,
-                true);
-        }
+            _status.TryUpdateStatusEffectDuration(target, BlindnessSystem.BlindingStatusEffect, component.BlindTime);
     }
 }

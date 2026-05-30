@@ -6,12 +6,8 @@ using Content.Medical.Client.Targeting;
 using Content.Medical.Client.UserInterface.Systems.PartStatus.Widgets;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.PartStatus;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Client.UserInterface.Systems.PartStatus;

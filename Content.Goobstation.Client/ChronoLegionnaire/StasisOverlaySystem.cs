@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 using Content.Goobstation.Shared.ChronoLegionnaire.Components;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 

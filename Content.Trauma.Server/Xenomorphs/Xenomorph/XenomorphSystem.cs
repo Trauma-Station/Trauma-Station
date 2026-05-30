@@ -14,7 +14,6 @@ using Content.Trauma.Server.Language;
 using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Xenomorphs.Xenomorph;
 

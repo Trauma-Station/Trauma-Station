@@ -54,6 +54,7 @@
   components:
   - type: Sprite
     state: chapel
+  - type: HolyArea
 
 - type: entity
   parent: AreaChapel
@@ -62,6 +63,7 @@
   components:
   - type: Sprite
     state: chapel_office
+  - type: HolyArea
 
 - type: entity
   parent: AreaChapel
@@ -70,6 +72,7 @@
   components:
   - type: Sprite
     state: cremate
+  - type: HolyArea
 
 - type: entity
   parent: BaseAreaCivilian

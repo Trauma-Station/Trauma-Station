@@ -4,13 +4,12 @@
   name: full fat carton
   description: A label on the side says "101% fat!".
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 200
-        reagents:
-        - ReagentId: FullFatOils
-          Quantity: 200
+  - type: Solution
+    solution:
+      maxVol: 200
+      reagents:
+      - ReagentId: FullFatOils
+        Quantity: 200
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Drinks/Containers/fullfatContainer.rsi
     state: icon

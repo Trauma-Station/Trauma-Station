@@ -298,9 +298,8 @@
     key: BlurryVision
     component: BlurryVision
     time: 40
-  - !type:GenericStatusEffect
-    key: TemporaryBlindness
-    component: TemporaryBlindness
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlindness
     time: 5 # few seconds of blindness instead of eye damage
   - !type:ModifyKnockdown
     time: 2

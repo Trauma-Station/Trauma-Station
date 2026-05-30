@@ -3,7 +3,6 @@
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Trauma.Shared.Particles;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Particles.Visuals;
 

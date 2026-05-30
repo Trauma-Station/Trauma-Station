@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.JoinQueue;
 using Robust.Client.Audio;
 using Robust.Client.Console;
 using Robust.Client.State;
-using Robust.Client.UserInterface;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Client.JoinQueue;

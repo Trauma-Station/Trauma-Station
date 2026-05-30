@@ -4,11 +4,18 @@
   id: Chainsaw
   description: A very large chainsaw. Usually you use this for cutting down trees... usually.
   components:
+  # Trauma>
+  - type: BoneSaw
+    speed: 0.5 # TODO: arm-mounted version becomes 0.65
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/Weapons/chainsaw_pull.ogg
+    endSound:
+      path: /Audio/Weapons/chainsaw_rev.ogg
+  # <Trauma>
   - type: Wieldable
     wieldSound: !type:SoundPathSpecifier
-      path: /Audio/Weapons/chainsawwield.ogg
-      params:
-        volume: -3
+      path: /Audio/Weapons/chainsaw_pull.ogg
   - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/chainsaw.rsi
@@ -28,17 +35,16 @@
         Slash: 2
         Blunt: 2
     soundHit:
-      path: /Audio/Weapons/chainsaw.ogg
+      path: /Audio/Weapons/chainsaw_rev.ogg
       params:
-        volume: -3
+        volume: -2
   - type: IncreaseDamageOnWield
     damage:
       types:
         Slash: 4
         Structural: 4
   - type: Item
-    size: Normal
-    sprite: Objects/Weapons/Melee/chainsaw.rsi
+    size: Large
   # <Trauma>
     shape:
     - 0,0,1,1
@@ -46,23 +52,7 @@
     storedRotation: 45
     storedOffset: -15,6
   # </Trauma>
-
+    sprite: Objects/Weapons/Melee/chainsaw.rsi
   - type: DisarmMalus
-  - type: RefillableSolution
-    solution: Welder
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 300
-        maxVol: 300
   - type: UseDelay
     delay: 1
-  - type: BoneSaw # Shitmed
-    speed: 0.5 # TODO: arm-mounted version becomes 0.65
-  - type: SurgeryTool # Shitmed
-    startSound:
-      path: /Audio/Weapons/chainsawwield.ogg
-    endSound:
-      path: /Audio/Weapons/chainsaw.ogg

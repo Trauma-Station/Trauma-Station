@@ -4,8 +4,6 @@ using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Common.RadialSelector;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.RadialSelector;
 

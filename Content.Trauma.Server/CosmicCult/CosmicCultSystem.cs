@@ -19,7 +19,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using Content.Trauma.Common.Speech;
 
 namespace Content.Trauma.Server.CosmicCult;

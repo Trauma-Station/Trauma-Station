@@ -40,6 +40,7 @@
     clothingPrototypes:
       head: LavalandEquipmentAncientArmorHood
   - type: PressureArmorChange
+  - type: PressureEfficiency
 
 - type: entity
   parent: ClothingHeadBase
@@ -76,3 +77,4 @@
         Heat: 0.65
         Caustic: 0.65
   - type: PressureArmorChange
+  - type: PressureEfficiency

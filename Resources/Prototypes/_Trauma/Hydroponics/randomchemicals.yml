@@ -1,11 +1,11 @@
 - type: weightedRandomFillSolution
   id: CrabonFillSolution
   fills:
-  - quantity: 0.5
+  - quantity: 1.5
     weight: 20
     reagents:
     - Crabon
-  - quantity: 1
+  - quantity: 3
     weight: 10
     reagents:
     - Crabon

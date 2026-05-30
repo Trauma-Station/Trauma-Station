@@ -59,7 +59,7 @@
       path: /Audio/Effects/double_beep.ogg
   - type: CombatMode
     toggleMouseRotator: false
-  - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

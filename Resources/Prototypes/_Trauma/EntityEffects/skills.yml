@@ -99,3 +99,12 @@
       WeaponsKnowledge: 26
       ThrowingKnowledge: 26
       FirstAidKnowledge: 26
+
+- type: entityEffect
+  id: SlaughterDemonSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MartialArtHellRip: 88
+      StrengthKnowledge: 70
+      AthleticsKnowledge: 40

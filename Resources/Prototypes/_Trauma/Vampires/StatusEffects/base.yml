@@ -1,0 +1,50 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireCoffinStatusEffect # restores some nullification every few seconds while in a coffin
+  name: vampire coffin
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Vampire
+  - type: StatusEffectEffects
+    updateDelay: 1
+    effects:
+    - !type:ApplyNullification
+      amount: -1
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireChapelStatusEffect # random chance to burst into flames
+  name: vampire chaepl
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 2
+    effects:
+    - !type:NestedEffect
+      probability: 0.1
+      proto: VampireFlameBurst
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireSpaceStatusEffect # you always burn in space
+  name: vampire space
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 5
+    effects:
+    - !type:HealthChange
+      conditions:
+      - !type:OnGridCondition
+        inverted: true
+      damage:
+        types:
+          Cellular: 20
+    - !type:PopupMessage
+      conditions:
+      - !type:OnGridCondition
+        inverted: true
+      messages:
+      - The sunlight burns you!
+      - You should go away from space...
+      - You look pale!

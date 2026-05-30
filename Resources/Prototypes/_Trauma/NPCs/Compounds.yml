@@ -14,7 +14,7 @@
   branches:
   - tasks:
     - !type:HTNPrimitiveTask
-      operator: !type:PickNearbyWantedOperator
+      operator: !type:PickCriminalTargetOperator
         targetKey: Target
         targetMoveKey: TargetCoordinates
         criminalStatus: SecurityIconHostile

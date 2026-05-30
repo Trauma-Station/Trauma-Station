@@ -74,8 +74,9 @@
         0: Alive
         650: Dead
     - type: Damageable
-      damageContainer: BiologicalMetaphysical
       damageModifierSet: DevilDealPositive # Lots of damage to Holy.
+    - type: Injurable
+      damageContainer: BiologicalMetaphysical
     - type: StaticPrice
       price: 30000
     - type: MeleeWeapon
@@ -100,7 +101,6 @@
     - type: StatusEffects
       allowed:
         - Electrocution
-        - TemporaryBlindness
         - RadiationProtection
         - Adrenaline
     - type: PassiveDamage # Mild passive regenation, with the exception of poison and genetic, which cannot be used effectively against it.

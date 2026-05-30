@@ -1,0 +1,77 @@
+- type: entity
+  parent: [ BaseMob ]
+  id: PolymorphBloodPool
+  name: Puddle
+  description: A puddle of liquid.
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Fluids/puddle.rsi
+      state: splat0
+    drawdepth: Puddles
+    color: "#800000FF"
+  - type: Physics
+    bodyType: KinematicController
+  - type: Slippery
+    staminaDamage: 0
+    frictionStatusTime: 0
+  - type: StepTrigger
+    triggerGroups:
+      types:
+      - SlipTile
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        hard: true
+        layer:
+        - MobLayer
+        mask:
+        - Impassable
+      slipFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - ItemMask
+        layer:
+        - SlipLayer
+        hard: false
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: Blood
+          Quantity: 300
+  - type: ExaminableSolution
+    solution: puddle
+    locVolume: "examinable-solution-on-examine-volume-puddle"
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 8
+  - type: Input
+    context: "ghost"
+  - type: MindContainer
+  - type: StatusEffects
+    allowed:
+    - BloodPuddleStatusEffect
+  - type: TriggerOnSpawn
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodPuddleStatusEffect
+      time: null # gets deleted anyways
+      type: Add
+
+- type: polymorph
+  id: BloodPuddlePolymorph
+  configuration:
+    entity: PolymorphBloodPool
+    forced: true
+    attachToGridOrMap: true
+    showPopup: false
+    transferName: false
+    duration: 10

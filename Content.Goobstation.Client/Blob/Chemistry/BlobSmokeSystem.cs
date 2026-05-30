@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Blob.Chemistry;
 

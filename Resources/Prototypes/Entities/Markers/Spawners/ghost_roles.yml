@@ -340,7 +340,6 @@
       settings: default
 
 - type: entity
-  abstract: true # Trauma - chudwiz not used
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
   id: SpawnPointGhostWizard
@@ -349,7 +348,7 @@
   components:
   - type: GhostRole
     name: ghost-role-information-wizard-name
-    description: ghost-role-information-wizard-desc
+    description: roles-antag-wizard-objective-goob # Trauma
     rules: ghost-role-information-antagonist-rules
     mindRoles:
     - MindRoleWizard

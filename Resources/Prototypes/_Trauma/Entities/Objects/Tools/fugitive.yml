@@ -1,0 +1,24 @@
+- type: entity
+  parent: [ BaseItem, BaseSetSelector, BaseMinorContraband ]
+  id: SatchelFugitive
+  name: undetermined fugitive satchel
+  description: Most only plan to escape, you planned further.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/smuggler.rsi
+    state: folded
+  - type: Item
+    storedRotation: 90
+  - type: SetSelector
+    possibleSets:
+    - FugitiveHitmanSet
+    - FugitiveGhostSet
+    - FugitiveSaboteurSet
+    - FugitiveInfiltratorSet
+    - FugitiveEngineerSet
+    - FugitiveContractorSet
+    - FugitiveCommunicatorSet
+    spawnedStoragePrototype: ClothingBackpackSatchelSmugglerUnanchored
+    spawnedStorageContainer: storagebase
+    approveSound:
+      collection: storageRustle

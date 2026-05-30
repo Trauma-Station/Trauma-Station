@@ -1,0 +1,31 @@
+- type: cloningSettings
+  id: ShadowCloneSettings
+  copyStatusEffects: false
+  components:
+  - WeakToHoly
+  - AlwaysTakeHoly
+  - HumanoidProfile
+
+- type: componentRegistry
+  id: ShadowCloneAdd
+  components:
+  - type: TimedDespawn
+    lifetime: 30
+  - type: NpcFactionMember
+    factions:
+    - VampireFaction
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+
+- type: componentRegistry
+  id: ShadowCloneRemove
+  components:
+  - type: MindContainer
+  - type: MindExaminable
+  - type: Hands

@@ -9,7 +9,6 @@ using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Skinnable;
 
@@ -90,17 +89,17 @@ public sealed partial class SkinnableSystem : EntitySystem
             _whitelist.IsWhitelistFail(target.Comp.Whitelist, target))
             return;
 
-        Skin(target);
+        Skin(target, args.User);
     }
 
-    private void Skin(Entity<SkinnableComponent> ent)
+    private void Skin(Entity<SkinnableComponent> ent, EntityUid? user)
     {
         if (ent.Comp.Skinned)
             return;
 
         ent.Comp.Skinned = true;
         Dirty(ent, ent.Comp);
-        _damageable.TryChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned);
+        _damageable.ChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned, origin: user);
         // mfw no api :face_holding_back_tears:
         foreach (var organ in _body.GetOrgans<VisualOrganComponent>(ent.Owner))
         {

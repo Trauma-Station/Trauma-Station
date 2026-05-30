@@ -134,11 +134,8 @@ public sealed partial class SpellsGrantSystem : EntitySystem
 
         comp.Granted = true;
 
-        if (comp.AntagProfile != null)
-        {
-            _player.TryGetSessionById(args.Mind.Comp.UserId, out var session);
-            _antag.ForceMakeAntag<SpellsGrantComponent>(session, comp.AntagProfile);
-        }
+        if (comp.AntagProfile is { } rule && _player.TryGetSessionById(args.Mind.Comp.UserId, out var session))
+            _antag.ForceMakeAntag<SpellsGrantComponent>(session, rule);
 
         var container = EnsureComp<ActionsContainerComponent>(args.Mind.Owner);
 

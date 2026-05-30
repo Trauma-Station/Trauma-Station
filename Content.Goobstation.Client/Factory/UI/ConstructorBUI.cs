@@ -6,10 +6,6 @@ using Content.Goobstation.Shared.Factory;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
 using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;

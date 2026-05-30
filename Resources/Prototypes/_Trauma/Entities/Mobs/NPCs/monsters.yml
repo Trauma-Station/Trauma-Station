@@ -97,9 +97,11 @@
   - type: Puller
     needsHands: false
   - type: GhostRole
-    name: ghost-role-ratma-name
-    description: ghost-role-ratma-desc
+    name: ghost-role-information-ratma-name
+    description: ghost-role-information-ratma-desc
     rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: JumpAbility
@@ -118,7 +120,7 @@
 - type: entity
   name: breadling
   id: MobBreadLing
-  parent: [EdibleBase, SimpleMobBase, MobCombat]
+  parent: [FoodBase, SimpleMobBase, MobCombat]
   description: Be kind to him, he is not long for this world.
   components:
   - type: FlavorProfile
@@ -126,13 +128,12 @@
     - bread
   - type: SliceableFood
     slice: FoodBreadPlainSlice
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 25
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 25
+  - type: Solution
+    solution:
+      maxVol: 25
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 25
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -308,9 +309,11 @@
   - type: Puller
     needsHands: false
   - type: GhostRole
-    name: ghost-role-ratma-name
-    description: ghost-role-ratma-desc
+    name: ghost-role-information-wailing-horse-name
+    description: ghost-role-information-wailing-horse-desc
     rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: PointLight
@@ -436,8 +439,9 @@
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: CoconutCrabUnshelled
+  - type: Injurable
+    damageContainer: Biological
   - type: WeakToHoly
   - type: Butcherable
     spawned:
@@ -488,8 +492,9 @@
       999: 1
       0: 1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: CoconutCrab
+  - type: Injurable
+    damageContainer: Biological
   - type: MobPrice
     price: 500 # The fact that a test requires me to add this is fucking stupid
 
@@ -508,12 +513,13 @@
       999: 1
       0: 1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: CoconutCrab
+  - type: Injurable
+    damageContainer: Biological
   - type: VentCrawler
   - type: GhostRole
-    name: ghost-role-coconutcrab-name
-    description: ghost-role-ratma-desc
+    name: ghost-role-information-coconutcrab-name
+    description: ghost-role-information-ratma-desc
     rules: ghost-role-information-antagonist-rules
     raffle:
       settings: default
@@ -566,7 +572,7 @@
     - CrabFaction # This is crabtually insane
   - type: ZombieImmune
   - type: MobPrice
-    price: 10
+    price: 15
   - type: MeleeWeapon
     altDisarm: false
     angle: 0

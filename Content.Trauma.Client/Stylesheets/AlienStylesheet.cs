@@ -4,9 +4,6 @@ using Content.Client.Stylesheets;
 using Content.Client.Stylesheets.Fonts;
 using Content.Trauma.Common.Stylesheets;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Utility;
 using System.Linq;
 using static Robust.Client.UserInterface.StylesheetHelpers;
 

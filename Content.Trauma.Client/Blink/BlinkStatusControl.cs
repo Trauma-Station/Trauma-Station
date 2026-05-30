@@ -4,7 +4,6 @@ using Content.Client.Items.UI;
 using Content.Client.Message;
 using Content.Client.Stylesheets;
 using Content.Trauma.Shared.Blink;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Blink;
 
@@ -16,7 +15,7 @@ public sealed class BlinkStatusControl : PollingItemStatusControl<BlinkStatusCon
     public BlinkStatusControl(Entity<BlinkComponent> parent)
     {
         _parent = parent;
-        _label = new RichTextLabel { StyleClasses = { StyleNano.StyleClassItemStatus } };
+        _label = new RichTextLabel { StyleClasses = { StyleClass.ItemStatus } };
         AddChild(_label);
 
         UpdateDraw();

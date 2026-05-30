@@ -3,7 +3,7 @@
 - type: entity
   name: cane blade
   suffix: Nanotrasen
-  parent: [BaseItem, BaseCentcommContraband, KnifeDurabilitySharpenOnly] # Trauma - Contraband marker
+  parent: [BaseItem, BaseCentcommContraband, KnifeDurabilitySharpenOnly]
   id: CaneBladeNanotrasen
   description: A sharp blade with a cane shaped hilt, a Nanotrasen logo is engraved on the blade.
   components:

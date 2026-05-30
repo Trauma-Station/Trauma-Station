@@ -82,9 +82,7 @@
       IPCPump: OrganIPCPump
   - type: HumanoidProfile
     species: IPC
-    # <Trauma>
   - type: KnowledgeHolder
-    # </Trauma>
 
 - type: entity
   parent:
@@ -135,8 +133,9 @@
     - NanoTrasen
   - type: StandingState
   - type: Damageable
-    damageContainer: SiliconRadiation
     damageModifierSet: IPC
+  - type: Injurable
+    damageContainer: SiliconRadiation
   - type: MobState
     allowedStates:
     - Alive
@@ -263,9 +262,9 @@
   components:
   - type: Inorganic
   - type: Damageable
-    damageContainer: SiliconRadiation
     damageModifierSet: IPC
-    bleedingOverlay: null
+  - type: Injurable
+    damageContainer: SiliconRadiation
 
 - type: entity
   abstract: true
@@ -275,12 +274,12 @@
   - type: Sprite
     sprite: _EinsteinEngines/Mobs/Species/IPC/organs.rsi
   # TODO SHITMED: make it so you can only eat it with rock eater or something
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Oil
-          Quantity: 10
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Oil
+        Quantity: 10
 
 - type: entity
   abstract: true
@@ -296,6 +295,7 @@
     markingData:
       group: IPC
   - type: WoundableVisuals
+    bleedingOverlay: null
     damageGroupColors:
       Brute: "#DD8822"
   - type: Woundable
@@ -304,7 +304,7 @@
 ## Parts
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganIPCExternal ]
+  parent: [ OrganIPCExternal, OrganBaseTorsoSexed, OrganBaseTorso ]
   id: OrganIPCTorso
   components:
   - type: BodyPart
@@ -320,7 +320,7 @@
     - IPCPump
 
 - type: entity
-  parent: [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganIPCExternal ]
+  parent: [ OrganIPCExternal, OrganBaseHeadSexed, OrganBaseHeadBald ]
   id: OrganIPCHead
   components:
   - type: BodyPart
@@ -332,41 +332,41 @@
     - BrainChip # USB 6.0
 
 - type: entity
-  parent: [ OrganBaseArmLeft, OrganIPCExternal ]
+  parent: [ OrganIPCExternal, OrganBaseArmLeft ]
   id: OrganIPCArmLeft
 
 - type: entity
-  parent: [ OrganBaseArmRight, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseArmRight ]
   id: OrganIPCArmRight
 
 - type: entity
-  parent: [ OrganBaseHandLeft, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseHandLeft ]
   id: OrganIPCHandLeft
 
 - type: entity
-  parent: [ OrganBaseHandRight, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseHandRight ]
   id: OrganIPCHandRight
 
 - type: entity
-  parent: [ OrganBaseLegLeft, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseLegLeft ]
   id: OrganIPCLegLeft
 
 - type: entity
-  parent: [ OrganBaseLegRight, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseLegRight ]
   id: OrganIPCLegRight
 
 - type: entity
-  parent: [ OrganBaseFootLeft, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseFootLeft ]
   id: OrganIPCFootLeft
 
 - type: entity
-  parent: [ OrganBaseFootRight, OrganIPCExternal ]
+  parent: [ OrganIPCExternal,  OrganBaseFootRight ]
   id: OrganIPCFootRight
 
 ## Organs
 
 - type: entity
-  parent: [ OrganBaseEyes, OrganIPCInternal ]
+  parent: [ OrganIPCInternal,  OrganBaseEyes ]
   id: OrganIPCEyes
   name: robotic eyes
   description: "01001001 00100000 01110011 01100101 01100101 00100000 01111001 01101111 01110101 00100001"
@@ -376,18 +376,18 @@
       group: IPC
 
 - type: entity
-  parent: [ OrganBaseTongue, OrganIPCInternal ]
+  parent: [ OrganIPCInternal,  OrganBaseTongue ]
   id: OrganIPCTongue
   name: vocal modulator
   description: A vocal modulator, used to produce speech.
 
 - type: entity
-  parent: [ OrganBaseEars, OrganIPCInternal ]
+  parent: [ OrganIPCInternal,  OrganBaseEars ]
   id: OrganIPCEars
   name: sonic receptors
 
 - type: entity
-  parent: [ OrganBaseHeart, OrganIPCInternal ]
+  parent: [ OrganIPCInternal,  OrganBaseHeart ]
   id: OrganIPCPump
   name: micro pump
   description: A micro pump, used to circulate coolant.

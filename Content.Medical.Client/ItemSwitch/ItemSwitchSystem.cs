@@ -2,7 +2,6 @@
 
 using Content.Client.Items;
 using Content.Medical.Shared.ItemSwitch;
-using Robust.Client.GameObjects;
 
 namespace Content.Medical.Client.ItemSwitch;
 

@@ -1,0 +1,16 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<circuits:StringPickerWindow xmlns="https://spacestation14.io"
+        xmlns:circuits="using:Content.Trauma.Client.Circuits.UI"
+        MinSize="300 150"
+        Title="Circuit Constant: String">
+    <BoxContainer Orientation="Vertical" Align="Center">
+        <BoxContainer Orientation="Horizontal" Align="Center" Margin="8">
+            <Label Text="Value" Margin="8"/>
+            <LineEdit Name="ValueEdit" PlaceHolder="Hello, world!" MinWidth="250"/>
+        </BoxContainer>
+        <Button Name="CreateButton" Text="Create" MaxWidth="80"/>
+    </BoxContainer>
+</circuits:StringPickerWindow>

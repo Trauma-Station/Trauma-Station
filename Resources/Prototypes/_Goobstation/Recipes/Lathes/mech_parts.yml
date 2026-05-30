@@ -72,7 +72,7 @@
 
 # Durand
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandHarness
   result: DurandHarness
   categories:
@@ -84,7 +84,7 @@
     Silver: 1500
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandArmor
   result: DurandArmorPlate
   categories:
@@ -95,7 +95,7 @@
     Silver: 900
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandHead
   result: DurandHead
   categories:
@@ -108,7 +108,7 @@
     Diamond: 100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandLArm
   result: DurandLArm
   categories:
@@ -119,7 +119,7 @@
     Silver: 250
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandLLeg
   result: DurandLLeg
   categories:
@@ -130,7 +130,7 @@
     Silver: 250
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandRLeg
   result: DurandRLeg
   categories:
@@ -141,7 +141,7 @@
     Silver: 250
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: DurandRArm
   result: DurandRArm
   categories:
@@ -153,7 +153,7 @@
 
 # Gygax
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxHarness
   result: GygaxHarness
   categories:
@@ -164,7 +164,7 @@
     Glass: 2000
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxArmor
   result: GygaxArmorPlate
   categories:
@@ -174,7 +174,7 @@
     Steel: 3000
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxHead
   result: GygaxHead
   categories:
@@ -186,7 +186,7 @@
     Diamond: 100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxLArm
   result: GygaxLArm
   categories:
@@ -196,7 +196,7 @@
     Steel: 1100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxLLeg
   result: GygaxLLeg
   categories:
@@ -206,7 +206,7 @@
     Steel: 1100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxRLeg
   result: GygaxRLeg
   categories:
@@ -216,7 +216,7 @@
     Steel: 1100
 
 - type: latheRecipe
-  parent: BaseRedAlert # Trauma
+  parent: BaseRedAlert
   id: GygaxRArm
   result: GygaxRArm
   categories:

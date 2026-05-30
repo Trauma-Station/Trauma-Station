@@ -231,10 +231,6 @@
   - type: HTN
     rootTask:
       task: ED209Compound
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - FootstepSound
   - type: NpcFactionMember
     factions:
     - NanoTrasen
@@ -246,6 +242,7 @@
   - type: ChangeHtnOnEmag
     task: !type:HTNCompoundTask
       task: ED209EmagedCompound
+  - type: PatrolSlave
 
 - type: entity
   id: ED209Endoskeleton

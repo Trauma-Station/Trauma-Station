@@ -14,3 +14,13 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: DClass
   jobName: job-name-d-class
+  isCrewJob: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpacePol
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: SpacePol
+  jobName: job-name-spacepol
+  isCrewJob: false

@@ -29,17 +29,13 @@ public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRule
 
     public readonly SoundSpecifier BriefingSound = new SoundPathSpecifier("/Audio/_Goobstation/Ambience/Antag/changeling_start.ogg");
 
-    public readonly ProtoId<AntagPrototype> ChangelingPrototypeId = "Changeling";
-
     public readonly ProtoId<NpcFactionPrototype> ChangelingFactionId = "Changeling";
 
     public readonly ProtoId<NpcFactionPrototype> NanotrasenFactionId = "NanoTrasen";
 
     public readonly ProtoId<CurrencyPrototype> Currency = "EvolutionPoint";
 
-    public readonly int StartingCurrency = 6;
-
-    public static readonly EntProtoId<ChangelingRoleComponent> MindRole = "MindRoleChangeling";
+    public readonly int StartingCurrency = 6; // have to keep this in sync with MindRoleChangeling manually :(
 
     public override void Initialize()
     {
@@ -61,8 +57,6 @@ public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRule
         if (!_mind.TryGetMind(target, out var mindId, out var mind))
             return false;
 
-        _role.MindAddRole(mindId, MindRole, mind, true);
-
         // briefing
         var name = Name(target) ?? Loc.GetString("generic-unknown-title");
         var briefing = Loc.GetString("changeling-role-greeting", ("name", name));
@@ -72,7 +66,7 @@ public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRule
 
         if (!_role.MindHasRole<ChangelingRoleComponent>(mindId, out var mr))
         {
-            Log.Error($"Mind role {MindRole} did not have ChangelingRoleComponent!");
+            Log.Error($"Changeling {ToPrettyString(target)} had no role!");
             return false;
         }
 
@@ -82,22 +76,6 @@ public sealed partial class ChangelingRuleSystem : GameRuleSystem<ChangelingRule
         // hivemind stuff
         _npcFaction.RemoveFaction(target, NanotrasenFactionId, false);
         _npcFaction.AddFaction(target, ChangelingFactionId);
-
-        // make them a changeling
-        EnsureComp<ChangelingComponent>(target);
-
-        // add store
-        var store = EnsureComp<StoreComponent>(role);
-        foreach (var category in rule.StoreCategories)
-            store.Categories.Add(category);
-        store.CurrencyWhitelist.Add(Currency);
-        store.Balance.Add(Currency, StartingCurrency);
-        // TODO: uncomment if store gets predicted
-        //Dirty(role, store)
-
-        // no range or validation because it's on the mind and would immediately get closed
-        var uiData = new InterfaceData("StoreBoundUserInterface", 0f, false);
-        _ui.SetUi(role, StoreUiKey.Key, uiData);
 
         rule.ChangelingMinds.Add(mindId);
 

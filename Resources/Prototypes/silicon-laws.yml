@@ -593,6 +593,13 @@
     RevLawset: 0.35
     CosmicCultLaws: 0.35
     VampireLawset: 0.35
+    GreatWallLawset: 0.35
+    BureaucracyLawset: 0.35
+    ConspiracyLawset: 0.35
+    MotivationalLawset: 0.5
+    MadScientistLawset: 0.35
+    GhostLawset: 0.35
+    SilenceLawset: 0.35
     # </Trauma>
     # its crewsimov by default dont be lame
     Crewsimov: 0.20 # Trauma - was 0.25

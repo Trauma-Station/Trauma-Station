@@ -208,6 +208,12 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h
+    SpaceNinja:
+    - !type:OverallPlaytimeRequirement
+      time: 3h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
     Wizard:
     - !type:OverallPlaytimeRequirement
       time: 5h
