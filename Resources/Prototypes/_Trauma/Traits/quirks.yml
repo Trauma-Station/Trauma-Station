@@ -19,6 +19,9 @@
     components:
     - BorgChassis
     - Silicon
+  whitelist:
+    components:
+    - Bloodstream
   components:
   - type: VampireBloodsucking
     bloodToRemove: 10

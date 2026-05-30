@@ -78,7 +78,8 @@ public sealed partial class CombatModeSystem : SharedCombatModeSystem
                 EntityManager,
                 _eye,
                 this,
-                EntityManager.System<HandsSystem>()));
+                EntityManager.System<HandsSystem>(),
+                _playerManager)); // Trauma - Passed player manager
         }
         else
         {

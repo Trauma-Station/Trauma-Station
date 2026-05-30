@@ -4,6 +4,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Shared.Enums;
 using Robust.Shared.Utility;
@@ -16,7 +17,7 @@ namespace Content.Client.CombatMode;
 ///   while for all other types of weapons and items in hand, as well as for an empty hand,
 ///   a crosshair of a different type is displayed. These crosshairs simply show the state of combat mode (on|off).
 /// </summary>
-public sealed class CombatModeIndicatorsOverlay : Overlay
+public sealed partial class CombatModeIndicatorsOverlay : Overlay // Trauma - added partial
 {
     private readonly IInputManager _inputManager;
     private readonly IEntityManager _entMan;
@@ -35,13 +36,14 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     public float Scale = 0.6f;  // 1 is a little big
 
     public CombatModeIndicatorsOverlay(IInputManager input, IEntityManager entMan,
-            IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands)
+            IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands, IPlayerManager player) // Trauma - Added player manager
     {
         _inputManager = input;
         _entMan = entMan;
         _eye = eye;
         _combat = combatSys;
         _hands = hands;
+        _player = player; // Trauma
 
         var spriteSys = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _gunSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
@@ -50,6 +52,7 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
             "gun_bolt_sight"));
         _meleeSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
              "melee_sight"));
+        _bloodSuck = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_Trauma/Interface/Misc/crosshair_pointers.rsi"), "bloodsuck")); // Trauma
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -78,7 +81,7 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
         var uiScale = (args.ViewportControl as Control)?.UIScale ?? 1f;
         var limitedScale = uiScale > 1.25f ? 1.25f : uiScale;
 
-        var sight = isHandGunItem ? (isGunBolted ? _gunSight : _gunBoltSight) : _meleeSight;
+        var sight = IsBloodsucking() ? _bloodSuck : (isHandGunItem ? (isGunBolted ? _gunSight : _gunBoltSight) : _meleeSight); // Trauma - Added bloodsucking crosshair
         DrawSight(sight, args.ScreenHandle, mousePos, limitedScale * Scale);
     }
 

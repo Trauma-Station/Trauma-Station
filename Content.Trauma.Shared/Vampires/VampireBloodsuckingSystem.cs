@@ -13,6 +13,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Vampires;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -175,3 +176,22 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
     }
     #endregion
 }
+
+/// <summary>
+/// Raised on the <see cref="VampireBloodsuckingComponent"/> entity, after the bloodsucking process starts.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class BloodSuckDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// Raised on the entity that does the bloodsucking sequence, and it passes.
+/// </summary>
+/// <param name="BloodRemoved"></param>The blood that was removed from the target during the bloodsucking sequence.
+[ByRefEvent]
+public record struct BloodsuckingSuccessEvent(int BloodRemoved, EntityUid TargetSucked);
+
+/// <summary>
+/// Raised on the target to validate whether they can be drained of their blood.
+/// </summary>
+[ByRefEvent]
+public record struct BloodsuckingAttemptEvent(bool Cancelled = false);
