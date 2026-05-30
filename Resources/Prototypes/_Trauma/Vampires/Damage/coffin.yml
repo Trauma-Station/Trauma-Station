@@ -1,4 +1,4 @@
-﻿- type: damageModifierSet
+- type: damageModifierSet
   id: VampireCoffin
   coefficients:
     Heat: 0.1

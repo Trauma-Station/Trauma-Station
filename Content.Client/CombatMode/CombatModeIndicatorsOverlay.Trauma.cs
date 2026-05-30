@@ -1,4 +1,4 @@
-﻿using Content.Medical.Common.Targeting;
+using Content.Medical.Common.Targeting;
 using Content.Trauma.Common.Vampires;
 using Robust.Client.Graphics;
 using Robust.Client.Player;

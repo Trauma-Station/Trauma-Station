@@ -1,4 +1,6 @@
-﻿using Content.Shared.Actions;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;

@@ -1,4 +1,6 @@
-﻿namespace Content.Trauma.Shared.Vampires.Lair;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Shared.Vampires.Lair;
 
 /// <summary>
 /// Used for making the vampiric rune get the color of its creator's blood.

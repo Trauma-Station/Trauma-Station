@@ -1,4 +1,4 @@
-﻿- type: componentRegistry
+- type: componentRegistry
   id: VampireCoffin
   components:
   - type: Damageable

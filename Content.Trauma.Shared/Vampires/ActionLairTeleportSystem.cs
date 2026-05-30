@@ -1,4 +1,6 @@
-﻿using Content.Shared.Mobs.Systems;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Content.Trauma.Shared.Teleportation;
