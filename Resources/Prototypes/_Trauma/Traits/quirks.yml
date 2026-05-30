@@ -9,3 +9,30 @@
     - Silicon
   components:
   - type: NoHypoport
+
+- type: trait
+  id: Bloodsucking
+  name: trait-bloodsuck-name
+  description: trait-bloodsuck-desc
+  category: Quirks
+  blacklist:
+    components:
+    - BorgChassis
+    - Silicon
+  components:
+  - type: VampireBloodsucking
+    bloodToRemove: 10
+    hungerRestoration: 20
+  effects:
+  - !type:RelayOrgan
+    category: Stomach
+    effects:
+    - !type:SetMetabolizerType
+      metabolizerTypes:
+      - Vampire
+    - !type:SetStomachDigestable
+      specialDigestible:
+        tags:
+        - Pill
+        - Crayon
+        - Paper
