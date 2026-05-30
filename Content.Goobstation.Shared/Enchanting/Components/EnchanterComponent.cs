@@ -32,12 +32,10 @@ public sealed partial class EnchanterComponent : Component
     public float MinLevel = 1f;
 
     /// <summary>
-    /// Maxmimum enchant level to roll.
-    /// If the enchant already exists it will get added to its level.
-    /// Rolled with <see cref="MinLevel"/> and floored.
+    /// Level adjustment applied to the enchantment based on the used item.
     /// </summary>
     [DataField]
-    public float MaxLevel = 2.5f;
+    public float AdjustLevel = 0;
 
     /// <summary>
     /// The possible enchants that can be rolled.

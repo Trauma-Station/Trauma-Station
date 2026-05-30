@@ -9282,3 +9282,25 @@ Entries:
   id: 1056
   time: '2026-05-29T14:38:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2884
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Magical Literacy affects enchanting
+  id: 1057
+  time: '2026-05-29T21:17:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2885
+- author: Aviu
+  changes:
+  - type: Add
+    message: You can counterattack with sheathed weapons, see guidebook for details.
+  - type: Add
+    message: Security katana.
+  - type: Add
+    message: New syndicate weapon - snakesfang.
+  - type: Tweak
+    message: Removed passive parries for all sheathed weapons.
+  - type: Tweak
+    message: Ninja katana damage 30 -> 20.
+  id: 1058
+  time: '2026-05-30T09:18:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2712
