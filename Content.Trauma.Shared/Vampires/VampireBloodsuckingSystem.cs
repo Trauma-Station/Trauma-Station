@@ -114,7 +114,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         Dirty(target, drainable);
 
         // Notify anyone, for example Vampires to update their blood pools
-        var ev = new BloodsuckingSuccessEvent(bloodInt);
+        var ev = new BloodsuckingSuccessEvent(bloodInt, target);
         RaiseLocalEvent(user, ref ev);
 
         _popup.PopupClient("You drain the life force out of them...", user, user, PopupType.MediumCaution);
