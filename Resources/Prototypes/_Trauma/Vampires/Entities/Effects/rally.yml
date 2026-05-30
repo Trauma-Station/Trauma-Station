@@ -9,6 +9,3 @@
     sprite: _Trauma/Vampires/vampire_effects.rsi
     state: rallyoverlay
     drawdepth: Effects
-  - type: Tag
-    tags:
-      - HideContextMenu

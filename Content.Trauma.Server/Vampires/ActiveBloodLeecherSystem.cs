@@ -9,7 +9,7 @@ public sealed partial class ActiveBloodLeecherSystem : SharedActiveBloodLeecherS
 {
     [Dependency] private BeamSystem _beam = default!;
 
-    protected override void CreateBeam(EntityUid user, EntityUid target, EntProtoId beamProto)
+    public override void CreateBeam(EntityUid user, EntityUid target, EntProtoId beamProto)
     {
         base.CreateBeam(user, target, beamProto);
 
