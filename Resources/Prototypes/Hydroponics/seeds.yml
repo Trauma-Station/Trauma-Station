@@ -2027,12 +2027,12 @@
   growthStages: 4
   waterConsumption: 0.60
   nutrientConsumption: 0.50
-  chemicals: 
+  chemicals:
     Potassium: #Trauma, Changed the max for potassium, phosphorus and sugar to 15 and the potency divisor to 6
       Min: 1
       Max: 15
-      PotencyDivisor: 6 
-    Phosphorus: 
+      PotencyDivisor: 6
+    Phosphorus:
       Min: 1
       Max: 15
       PotencyDivisor: 6
