@@ -10,10 +10,10 @@
   - type: Sprite
     sprite: _Goobstation/Objects/Medical/medical_patch.rsi
     state: GenericPatch
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
+  - type: Solution
+    id: drink # chemmaster is hardcoded to check for this solution
+    solution:
+      maxVol: 30
   - type: ExaminableSolution
     solution: drink
   - type: Sticky
@@ -55,10 +55,9 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 9
     fillBaseName: GenericPatch-
-  - type: SolutionContainerManager
-    solutions:
-      drink:  #drink is the same as Bottle solution, this is to prevent recoding chem master. TODO: recode chem master
-        maxVol: 40
+  - type: Solution
+    solution:
+      maxVol: 40
   - type: Tag
     tags:
     - MedicalPatch
@@ -143,10 +142,9 @@
       - state: GenericPatch-1
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 60 # +50% from basic
+  - type: Solution
+    solution:
+      maxVol: 60 # +50% from basic
   - type: MedicalPatch
     injectPercentageOnAttatch: 15 # 10u when full
 
@@ -162,10 +160,9 @@
     updateTime: 2 # slow
     singleUse: true
     trashObject: UsedMedicalPatchMakeshift
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 20  # lasts for 40 seconds, effectively half as good as a normal patch
+  - type: Solution
+    solution:
+      maxVol: 20  # lasts for 40 seconds, effectively half as good as a normal patch
   - type: RefillableSolution  # So Tiders can fill ther bandages whit hotch and ventcurd
     solution: drink
   - type: Construction

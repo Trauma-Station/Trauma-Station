@@ -20,8 +20,9 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: shadowling_ascend
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: ShadowlingAscendant
+  - type: Injurable
+    damageContainer: Biological
   - type: MobMover
   - type: InputMover
   - type: InteractionOutline

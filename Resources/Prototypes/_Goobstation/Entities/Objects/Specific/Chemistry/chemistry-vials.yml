@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # T3 chems for mapping
 
@@ -14,13 +8,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-gold
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-          - ReagentId: Gold
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Gold
+        Quantity: 30
 
 - type: entity
   id: SilverChemistryVial
@@ -29,13 +21,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-silver
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-          - ReagentId: Silver
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Silver
+        Quantity: 30
 
 - type: entity
   id: UraniumChemistryVial
@@ -44,13 +34,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-uranium
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-          - ReagentId: Uranium
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Uranium
+        Quantity: 30
 
 - type: entity
   id: TirimolChemistryVial
@@ -59,13 +47,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-tirimol
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-          - ReagentId: Tirimol
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Tirimol
+        Quantity: 30
 
 - type: entity
   id: OmnizineChemistryVial
@@ -74,13 +60,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-omnizine
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-          - ReagentId: Omnizine
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Omnizine
+        Quantity: 30
 
 - type: entity
   id: ProcenylLazideChemistryVial
@@ -89,19 +73,17 @@
   components:
   - type: Label
     currentLabel: reagent-name-procenyl-lazide
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-          - ReagentId: ProcenylLazide
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: ProcenylLazide
+        Quantity: 30
 
 - type: entity
-  name: bluespace vial
   parent: BaseBeakerMetallic
-  description: It's longer on the inside!
   id: BluespaceChemistryVial
+  name: bluespace vial
+  description: It's longer on the inside! # thats what she said, doctor
   components:
   - type: Tag
     tags:
@@ -114,10 +96,9 @@
       - state: icon
   - type: SolutionContainerVisuals
     maxFillLevels: 0
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 300
+  - type: Solution
+    solution:
+      maxVol: 300
   - type: PhysicalComposition
     materialComposition:
       Steel: 25

@@ -8,6 +8,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
+using Content.Shared.Players;
 using Content.Shared.Roles.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -180,7 +181,7 @@ public abstract partial class SharedRoleSystem : EntitySystem
         RaiseLocalEvent(mindRoleId.Value, ref ev);
         // </Trauma>
 
-        var name = Loc.GetString(protoEnt.Name);
+        var name = protoEnt.Name; // Trauma - don't double-localize it, entity loc already does that
         if (mind.OwnedEntity is not null)
         {
             _adminLogger.Add(LogType.Mind,
@@ -616,6 +617,16 @@ public abstract partial class SharedRoleSystem : EntitySystem
     }
 
     /// <summary>
+    /// Does this player's mind possess an antagonist role
+    /// </summary>
+    /// <param name="player">The player session we want the mind of</param>
+    /// <returns>True if the mind possesses any antag roles</returns>
+    public bool PlayerIsAntagonist(ICommonSession player)
+    {
+        return MindIsAntagonist(player.GetMind());
+    }
+
+    /// <summary>
     /// Does this mind possess an antagonist role
     /// </summary>
     /// <param name="mindId">The mind entity</param>
@@ -626,6 +637,16 @@ public abstract partial class SharedRoleSystem : EntitySystem
             return false;
 
         return CheckAntagonistStatus(mindId.Value).Antag;
+    }
+
+    /// <summary>
+    /// Does this player's mind possess an exclusive antagonist role
+    /// </summary>
+    /// <param name="player">The player session we want the mind of</param>
+    /// <returns>True if the mind possesses any antag roles</returns>
+    public bool PlayerIsExclusiveAntagonist(ICommonSession player)
+    {
+        return MindIsExclusiveAntagonist(player.GetMind());
     }
 
     /// <summary>

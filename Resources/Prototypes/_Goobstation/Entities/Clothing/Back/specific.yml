@@ -178,13 +178,13 @@
     solutionId: tank
     proto: AtmosResin
     fireCost: 25
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 1200
-        reagents:
-        - ReagentId: Water
-          Quantity: 1200
+  - type: Solution
+    id: tank
+    solution:
+      maxVol: 1200
+      reagents:
+      - ReagentId: Water
+        Quantity: 1200
   - type: DrawableSolution
     solution: tank
   - type: DrainableSolution

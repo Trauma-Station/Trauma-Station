@@ -10,8 +10,9 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeLaserCarbine
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Gunsafes
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: StationAlertLevelLock
     lockedAlertLevels:
     - green
@@ -219,7 +220,9 @@
   table: !type:AllSelector
     children:
     - id: Truncheon
-      amount: 6
+      amount: 5
+    - id: ClothingBeltSheathKatanaFilled
+      amount: 2
     - id: SecBreachingHammer
       amount: 2
 

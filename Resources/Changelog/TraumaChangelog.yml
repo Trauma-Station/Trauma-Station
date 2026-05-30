@@ -9131,3 +9131,176 @@ Entries:
   id: 1041
   time: '2026-05-27T09:14:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2833
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Mobs immediately disappear when you lose sight of them.
+  id: 1042
+  time: '2026-05-27T19:28:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2840
+- author: MayasMischief
+  changes:
+  - type: Tweak
+    message: Buffed the Phaser (10>12 damage)
+  - type: Tweak
+    message: Buffed the Laser Gun (10>14 damage)
+  - type: Tweak
+    message: Buffed the Laser Carbine's accuracy (its damage is fine)
+  id: 1043
+  time: '2026-05-27T19:54:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2706
+- author: Speebro
+  changes:
+  - type: Tweak
+    message: >-
+      Survival medipen now heals a bit less, you're trading effectiveness for
+      convenience vs. the brute and burn pens.
+  - type: Tweak
+    message: >-
+      Luxury medipen now only contains Luxurium, Tranexamic Acid, and Saline, in
+      exchange Luxurium actually heals now at comparable rates to what the pen
+      gave before, but only within 0-50kPa. Also it's called the Luxurium
+      Medipen now.
+  - type: Tweak
+    message: >-
+      Luxurium damage outside of low pressure works on station, but is less
+      deadly than before.
+  id: 1044
+  time: '2026-05-27T19:57:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2797
+- author: Crab Exterminators
+  changes:
+  - type: Tweak
+    message: >-
+      Less Coconut Crabs spawn from vent hordes now, but more of the small crabs
+      spawn.
+  - type: Tweak
+    message: Minimum crabs from vent hordes reduced.
+  - type: Tweak
+    message: Crab vent hordes rarer now.
+  - type: Tweak
+    message: You only get one Coconut Crab from the Coconut Crab Crate now.
+  id: 1045
+  time: '2026-05-27T20:04:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2841
+- author: Armok
+  changes:
+  - type: Tweak
+    message: made more antags roll more
+  - type: Tweak
+    message: make vision cones loved by everyone
+  id: 1046
+  time: '2026-05-27T20:30:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2842
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Autosurgeon automatically starts when you are buckled to it, no need to
+      press E anymore.
+  id: 1047
+  time: '2026-05-27T21:06:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2844
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked Fugitives. Shuttle changed, loadouts changed, objectives changed,
+      etc.
+  - type: Fix
+    message: Fixed bugs and oversights, regarding Fugitives and their Hunters.
+  id: 1048
+  time: '2026-05-27T22:41:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2769
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Grenadier class to the Reinforcement Teleporter.
+  - type: Add
+    message: Added the Hitman class to the Reinforcement Teleporter.
+  - type: Tweak
+    message: >-
+      Tweaked the Reinforcement Teleporter. Medic, Spy and Thief classes have
+      been rebalanced (actually worth the 70 TC now).
+  id: 1049
+  time: '2026-05-28T05:41:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2819
+- author: Hoodsie
+  changes:
+  - type: Fix
+    message: Fixed typos in rules
+  id: 1050
+  time: '2026-05-28T05:45:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2850
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed chemicals to deal equal damage to every bodypart instead of
+      getting split, so poisons and medicines are now 5x effective usually.
+  - type: Tweak
+    message: Reverted upstream making jugs 2x4, they're still 2x2
+  id: 1051
+  time: '2026-05-28T06:20:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2822
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Red jelly extract now applies to modsuit/hardsuit pieces.
+  id: 1052
+  time: '2026-05-28T06:49:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2802
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Losing a hand now removes your cuffs.
+  id: 1053
+  time: '2026-05-28T07:35:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2803
+- author: Lumminal
+  changes:
+  - type: Add
+    message: >-
+      Added vampires from Paradise Station 13. Vampires are a new round-start
+      antagonist. Check the guidebook for more information.
+  - type: Add
+    message: The hunt begins.
+  id: 1054
+  time: '2026-05-28T20:48:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2204
+- author: Hoodsie
+  changes:
+  - type: Tweak
+    message: converted command is no longer tracked
+  id: 1055
+  time: '2026-05-29T08:07:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2883
+- author: SpeltIncorrectyl
+  changes:
+  - type: Fix
+    message: dragging yourself onto secway no longer occupies two hands
+  id: 1056
+  time: '2026-05-29T14:38:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2884
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Magical Literacy affects enchanting
+  id: 1057
+  time: '2026-05-29T21:17:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2885
+- author: Aviu
+  changes:
+  - type: Add
+    message: You can counterattack with sheathed weapons, see guidebook for details.
+  - type: Add
+    message: Security katana.
+  - type: Add
+    message: New syndicate weapon - snakesfang.
+  - type: Tweak
+    message: Removed passive parries for all sheathed weapons.
+  - type: Tweak
+    message: Ninja katana damage 30 -> 20.
+  id: 1058
+  time: '2026-05-30T09:18:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2712

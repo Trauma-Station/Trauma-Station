@@ -225,7 +225,7 @@ public sealed partial class StatusEffectsSystem
     )
     {
         time = default;
-        if (!Resolve(uid, ref container))
+        if (!Resolve(uid, ref container, false)) // Trauma - added false
             return false;
 
         foreach (var effect in container.ActiveStatusEffects?.ContainedEntities ?? [])
@@ -367,12 +367,13 @@ public sealed partial class StatusEffectsSystem
         if (!_containerQuery.TryComp(target, out var container))
             return false;
 
+        var query = GetEntityQuery<T>(); // Trauma
         foreach (var effect in container.ActiveStatusEffects?.ContainedEntities ?? [])
         {
             if (!_effectQuery.TryComp(effect, out var statusComp))
                 continue;
 
-            if (TryComp<T>(effect, out var comp))
+            if (query.TryComp(effect, out var comp)) // Trauma - use query from above
             {
                 effects ??= [];
                 effects.Add((effect, comp, statusComp));
@@ -423,7 +424,7 @@ public sealed partial class StatusEffectsSystem
     public IEnumerable<Entity<StatusEffectComponent>> EnumerateStatusEffects(
         Entity<StatusEffectContainerComponent?> container)
     {
-        if (!_containerQuery.Resolve(container, ref container.Comp) || container.Comp.ActiveStatusEffects == null)
+        if (!_containerQuery.Resolve(container, ref container.Comp, false) || container.Comp.ActiveStatusEffects == null) // Trauma - added false
             yield break;
 
         foreach (var effect in container.Comp.ActiveStatusEffects.ContainedEntities)
@@ -442,7 +443,7 @@ public sealed partial class StatusEffectsSystem
     public IEnumerable<Entity<StatusEffectComponent, T>> EnumerateStatusEffects<T>(
         Entity<StatusEffectContainerComponent?> container) where T : Component
     {
-        if (!_containerQuery.Resolve(container, ref container.Comp) || container.Comp.ActiveStatusEffects == null)
+        if (!_containerQuery.Resolve(container, ref container.Comp, false) || container.Comp.ActiveStatusEffects == null) // Trauma - added false
             yield break;
 
         foreach (var effect in container.Comp.ActiveStatusEffects.ContainedEntities)
@@ -457,7 +458,7 @@ public sealed partial class StatusEffectsSystem
         Entity<StatusEffectContainerComponent?> container,
         EntityQuery<T> query) where T : Component
     {
-        if (!_containerQuery.Resolve(container, ref container.Comp) || container.Comp.ActiveStatusEffects == null)
+        if (!_containerQuery.Resolve(container, ref container.Comp, false) || container.Comp.ActiveStatusEffects == null) // Trauma - added false
             yield break;
 
         foreach (var effect in container.Comp.ActiveStatusEffects.ContainedEntities)

@@ -48,8 +48,9 @@
     noAirWhenFullyAirBlocked: false
   - type: Occluder
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:

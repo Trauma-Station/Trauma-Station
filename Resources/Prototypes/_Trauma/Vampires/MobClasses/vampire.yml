@@ -1,0 +1,69 @@
+- type: mobClassGroup
+  id: Vampire
+  backgroundImagePath: "/Textures/_Trauma/Interface/brown_ice_by_darkwood67.jpg"
+  specializeButtonImagePath: "/Textures/_Trauma/Interface/Vampires/specialize.png"
+  backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+  fontPath: "/Fonts/_Trauma/CinzelDecorative.ttf"
+  fontColorOverride: "#8B0000"
+  fontSize: 15
+  classes:
+  - Gargantua
+  - Haemomancer
+  - Umbrae
+  - Dantalion
+
+- type: mobClass
+  id: Gargantua
+  name: Gargantua
+  icon:
+    sprite: _Trauma/Vampires/actions.rsi
+    state: duel
+  description: A bloodsucker fueled by the thrill of the duel.
+  effects:
+  - !type:SendBriefing
+    text: vampire-gargantua-briefing
+    color: Orange
+    briefingSound:
+      path: /Audio/_Trauma/Vampires/Classes/class_gargantua.ogg
+
+- type: mobClass
+  id: Haemomancer
+  name: Haemomancer
+  description: The station is your canvas, and blood is your brush.
+  icon:
+    sprite: _Trauma/Vampires/actions.rsi
+    state: blood_bringers_rite
+  effects:
+  - !type:SendBriefing
+    text: vampire-haemomancer-briefing
+    color: DarkRed
+    briefingSound:
+      path: /Audio/_Trauma/Vampires/Classes/class_haemomancer.ogg
+
+- type: mobClass
+  id: Umbrae
+  name: Umbrae
+  description: Soon, you will be consumed. By them... by the Dark
+  icon:
+    sprite: _Trauma/Vampires/actions.rsi
+    state: eternal_darkness
+  effects:
+  - !type:SendBriefing
+    text: vampire-umbrae-briefing
+    color: Purple
+    briefingSound:
+      path: /Audio/_Trauma/Vampires/Classes/class_umbrae.ogg
+
+- type: mobClass
+  id: Dantalion
+  name: Dantalion
+  description: You reanimate people into a loyal horde of thralls.
+  icon:
+    sprite: _Trauma/Vampires/actions.rsi
+    state: hysteria
+  effects:
+  - !type:SendBriefing
+    text: vampire-dantalion-briefing
+    color: Green
+    briefingSound:
+      path: /Audio/_Trauma/Vampires/Classes/class_dantalion.ogg

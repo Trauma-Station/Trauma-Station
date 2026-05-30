@@ -346,16 +346,22 @@ public sealed partial class StationJobsSystem
     private Dictionary<NetUserId, List<string>> GetPlayersJobCandidates(int? weight, JobPriority? selectedPriority, Dictionary<NetUserId, HumanoidCharacterProfile> profiles)
     {
         var outputDict = new Dictionary<NetUserId, List<string>>(profiles.Count);
-        var antagBlacklists = _antag.GetPreSelectedAntagSessionsWithBlacklist(); //GOOBSTATION
+
+        var antags = _antag.GetAntagJobs();
 
         foreach (var (player, profile) in profiles)
         {
 
             var roleBans = _banManager.GetJobBans(player);
-            var antagBlocked = _antag.GetPreSelectedAntagSessions();
             var profileJobs = profile.JobPriorities.Keys.Select(k => new ProtoId<JobPrototype>(k)).ToList();
             var ev = new StationJobsGetCandidatesEvent(player, profileJobs);
             RaiseLocalEvent(ref ev);
+
+            // Shouldn't happen but you know :P
+            if (!_player.TryGetSessionById(player, out var session))
+                continue;
+
+            var (whitelist, blacklist) = antags.GetValueOrDefault(session);
 
             List<string>? availableJobs = null;
 
@@ -369,14 +375,10 @@ public sealed partial class StationJobsSystem
                 if (!_prototypeManager.Resolve(jobId, out var job))
                     continue;
 
-                // Check if this job is blacklisted for the player's session || GOOBSTATION
-                if (_player.TryGetSessionById(player, out var session) && antagBlacklists.TryGetValue(session, out var blacklistedJobs))
-                {
-                    if (blacklistedJobs.Contains(jobId))
-                        continue;
-                }
+                if (whitelist != null && !whitelist.Contains(jobId))
+                    continue;
 
-                if (!job.CanBeAntag && (!_player.TryGetSessionById(player, out session) || antagBlocked.Contains(session)))
+                if (blacklist != null && blacklist.Contains(jobId))
                     continue;
 
                 if (weight is not null && job.Weight != weight.Value)

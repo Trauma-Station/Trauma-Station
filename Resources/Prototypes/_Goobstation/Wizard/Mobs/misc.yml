@@ -139,8 +139,9 @@
             Cellular: 1
   - type: Crawler
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: PaperCreature
+  - type: Injurable
+    damageContainer: Biological
   - type: DamageStateVisuals
     states:
       Alive:

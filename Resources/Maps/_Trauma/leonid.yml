@@ -15175,40 +15175,6 @@ entities:
     - type: ExplosionAirtightGrid
     - type: TileHistory
       chunkHistory: {}
-  - uid: 4
-    components:
-    - type: MetaData
-      name: solution - injector
-    - type: Transform
-      parent: 3
-    - type: Solution
-      solution:
-        maxVol: 15
-        name: injector
-        reagents:
-        - data: []
-          ReagentId: Diphenylmethylamine
-          Quantity: 5
-    - type: ContainedSolution
-      containerName: injector
-      container: 3
-  - uid: 7
-    components:
-    - type: MetaData
-      name: solution - beaker
-    - type: Transform
-      parent: 6
-    - type: Solution
-      solution:
-        maxVol: 50
-        name: beaker
-        reagents:
-        - data: []
-          ReagentId: Bleach
-          Quantity: 50
-    - type: ContainedSolution
-      containerName: beaker
-      container: 6
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 8
@@ -41076,16 +41042,13 @@ entities:
     components:
     - type: Transform
       parent: 5
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Bleach
+          Quantity: 50
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 7
   - uid: 4702
     components:
     - type: Transform
@@ -195098,14 +195061,11 @@ entities:
       tags:
       - Syringe
       - SyringeGunAmmo
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - injector
-    - type: ContainerContainer
-      containers:
-        solution@injector: !type:ContainerSlot
-          ent: 4
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Diphenylmethylamine
+          Quantity: 5
   - uid: 30540
     components:
     - type: Transform

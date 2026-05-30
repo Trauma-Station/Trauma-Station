@@ -13,7 +13,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, BaseClothingViewconeBlinding] # Trauma
   id: ClothingEyesBlindfold
   name: blindfold
   description: The bind leading the blind.

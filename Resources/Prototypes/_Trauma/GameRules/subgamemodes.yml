@@ -1,148 +1,38 @@
 - type: entity
-  parent: BaseTraitorRule
+  parent: Traitor
   id: SubTraitor
   components:
   - type: GameRule
     minPlayers: 5
   - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    definitions:
-    - prefRoles: [ Traitor ]
-      max: 2
-      playerRatio: 40
-      blacklist:
-        components:
-        - CommandStaff
-        - AntagImmune
-        - Changeling
-      lateJoinAdditional: false
-      mindRoles:
-      - MindRoleTraitor
+    antags:
+    - !type:LinearAntagCount
+      proto: Traitor
+      range:
+        min: 1
+        max: 3
+      playerRatio: 20
 
 - type: entity
-  parent: Heretic
+  parent: HereticRoundstart
   id: SubHeretic
   components:
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ Heretic ]
-      min: 1
-      max: 3
+    antags:
+    - !type:LinearAntagCount
+      proto: Heretic
+      range:
+        min: 1
+        max: 3
       playerRatio: 20
-      jobBlacklist: [ Chaplain ]
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleHeretic
 
 - type: entity
-  parent: DuoAbductorSpawn
+  parent: [BaseRoundstartAntagRule, DuoAbductorSpawn ]
   id: SubDuoAbductor
   components:
-  # He loves, quote, "GOIDA COPY PASTING THE ENTIRE THING", and I love goida cut-pasting the entire thing
-  # this just has ghost roles removed, pref roles added and players are picked roundstart
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn
-    definitions:
-    - spawnerPrototype: AbductorScientistSpawner
-      prefRoles: [ AbductorScientistAntag ]
-      fallbackRoles: [ AbductorAgentAntag ]
-      min: 1
-      max: 1
-      pickPlayer: true
-      unequipOldGear: true
-      startingGear: AbductorScientistGear
-      briefing:
-        text: abductor-role-greeting
-        color: Green
-        sound: /Audio/_Shitmed/Misc/abductor.ogg
-      components:
-      - type: Abductor
-      - type: ActionGrant
-        actions:
-        - ActionReturnToShip
-      - type: NpcFactionMember
-        factions:
-        - SimpleHostile
-      - type: RandomMetadata
-        nameSegments:
-        - AbductorScientistPrefix
-        - AbductorNames
-        nameFormat: name-format-standard
-      - type: Tag
-        tags:
-        - Abductor
-        - AbductorScientist
-        - CanPilot
-        - FootstepSound
-        - DoorBumpOpener
-      - type: AbductorScientist
-      - type: SurgeryIgnoreClothing
-      - type: Sanitized
-      - type: SurgerySpeedModifier
-        speedModifier: 1.5
-      mindRoles:
-      - MindRoleAbductorScientist
-    - spawnerPrototype: AbductorAgentSpawner
-      prefRoles: [ AbductorAgentAntag ]
-      fallbackRoles: [ AbductorScientistAntag ]
-      min: 1
-      max: 1
-      pickPlayer: true
-      unequipOldGear: true
-      startingGear: AbductorAgentGear
-      briefing:
-        text: abductor-role-greeting
-        color: Green
-        sound: /Audio/_Shitmed/Misc/abductor.ogg
-      components:
-      - type: Abductor
-      - type: ActionGrant
-        actions:
-        - ActionReturnToShip
-      - type: NpcFactionMember
-        factions:
-        - SimpleHostile
-      - type: RandomMetadata
-        nameSegments:
-        - AbductorAgentPrefix
-        - AbductorNames
-        nameFormat: name-format-standard
-      - type: Tag
-        tags:
-          - Abductor
-          - AbductorScientist
-          - CanPilot
-          - FootstepSound
-          - DoorBumpOpener
-      - type: AbductorScientist # Should be removed when we have proper teleportation system
-      mindRoles:
-      - MindRoleAbductorAgent
-
-- type: entity
-  parent: WraithRoundstart
-  id: SubWraith
-  components:
-  - type: AntagSelection
-    selectionTime: PrePlayerSpawn
-    definitions:
-    - prefRoles: [ WraithRoundstart ]
-      spawnerPrototype: SpawnPointGhostWraithRoundstart
-      min: 1
-      max: 1
-      pickPlayer: true
-      mindRoles:
-      - MindRoleGhostRoleSoloAntagonist
-      briefing:
-        text: wraith-role-greeting
-        sound: /Audio/_Goobstation/Wraith/Ambience/Void_Calls.ogg
-      components:
-      - type: RandomMetadata
-        nameSegments:
-        - NamesWraith
-        - NamesWraithTitle
-        nameFormat: name-format-wraith
-      - type: Banishment
-        lives: 0
-        popup: wraith-banishment
+    antags:
+    - !type:FixedAntagCount
+      proto: AbductorScientist
+    - !type:FixedAntagCount
+      proto: AbductorAgent

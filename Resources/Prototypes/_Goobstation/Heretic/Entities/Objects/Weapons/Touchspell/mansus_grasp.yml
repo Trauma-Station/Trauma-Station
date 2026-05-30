@@ -81,10 +81,8 @@
   components:
   - type: MansusGrasp
     effects:
-    - !type:GenericStatusEffect
-      key: TemporaryBlindness
-      component: TemporaryBlindness
-      type: Update
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectBlindness
       time: 5
 
 - type: entity

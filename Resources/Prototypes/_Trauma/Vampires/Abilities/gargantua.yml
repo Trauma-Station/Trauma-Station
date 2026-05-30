@@ -1,0 +1,90 @@
+- type: vampireAbility
+  id: BaseGargantuaAbility
+  class: Gargantua
+  abstract: true
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: GargantuaRejuvenate
+  onUnlock:
+  - !type:RemoveActions
+    actions:
+    - ActionVampRejuvenateI
+    - ActionVampRejuvenateII
+  - !type:AddActions
+    actions:
+    - ActionVampGargRejuv
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: BloodSwell
+  cost: 150
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodSwell
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: StompBloodRush
+  cost: 250
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionGargStomp
+    - ActionBloodRush
+  - !type:PopupPredicted
+    message: You gain the ability to stomp, and use blood rush!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: BloodSwellII
+  cost: 400
+  onUnlock:
+  - !type:RemoveActions
+    actions:
+    - ActionBloodSwell
+  - !type:AddActions
+    actions:
+    - ActionBloodSwellII
+  - !type:PopupPredicted
+    message: Your blood swell becomes upgraded!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: OverwhelmingForce
+  cost: 600
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionOverwhelmingForce
+  - !type:PopupPredicted
+    message: You can now pry open doors by using your blood!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: DemonicGraspCharge
+  cost: 800
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionDemonicHand
+    - ActionGargCharge
+  - !type:PopupPredicted
+    message: You can charge and send demonic hands to your targets!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseGargantuaAbility
+  id: GargantuaFullPower
+  cost: 1000 # TODO: Requires 8 bodies condition
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 8
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionDesecratedDuel

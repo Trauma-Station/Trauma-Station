@@ -10,7 +10,6 @@
   startingGear: ERTLeaderGearEVA
   icon: "JobIconERTLeader"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -109,7 +108,6 @@
   startingGear: ERTChaplainGear
   icon: "JobIconERTChaplain"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -121,7 +119,6 @@
     components:
     - type: BibleUser #Lets them heal with bibles
     - type: CurseImmune # Goobstation - Wraith
-    - type: CanEnchant #GoobStation
     # <Trauma>
     - type: KnowledgeGrant
       skills:
@@ -216,7 +213,6 @@
   startingGear: ERTEngineerGearEVA
   icon: "JobIconERTEngineer"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -353,7 +349,6 @@
   startingGear: ERTSecurityGearEVA
   icon: "JobIconERTSecurity"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -540,7 +535,6 @@
   startingGear: ERTMedicalGearEVA
   icon: "JobIconERTMedic"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -655,7 +649,6 @@
   startingGear: ERTJanitorGearEVA
   icon: "JobIconERTJanitor"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:

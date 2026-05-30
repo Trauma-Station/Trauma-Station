@@ -10,6 +10,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Rotation;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffectNew;
@@ -18,15 +19,14 @@ using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
-using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
 public abstract partial class SharedShadowCloakSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IRobustRandom _random = default!;
-
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private TagSystem _tag = default!;
@@ -47,7 +47,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ShadowCloakedComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ShadowCloakedComponent, ModifyDoAfterDelayEvent>(OnGetDoAfterSpeed);
-        SubscribeLocalEvent<ShadowCloakedComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<ShadowCloakedComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<ShadowCloakedComponent, TransformSpeakerNameEvent>(OnTransformName);
         SubscribeLocalEvent<ShadowCloakedComponent, TryGetIdentityShortInfoEvent>(OnGetIdentity);
         SubscribeLocalEvent<ShadowCloakedComponent, GetIdentityRepresentationEntityEvent>(OnGetIdentityEntity);
@@ -60,7 +60,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
 
         SubscribeLocalEvent<ShadowCloakEntityComponent, EntParentChangedMessage>(OnEntParentChanged);
         SubscribeLocalEvent<ShadowCloakEntityComponent, ComponentShutdown>(OnCloakShutdown);
-        SubscribeLocalEvent<ShadowCloakEntityComponent, DamageChangedEvent>(OnDamage);
+        SubscribeLocalEvent<ShadowCloakEntityComponent, DamageDealtEvent>(OnDamageDealt);
     }
 
     private void OnStand(Entity<ShadowCloakedComponent> ent, ref StoodEvent args)
@@ -126,16 +126,13 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         args.VoiceName = Name(cloak);
     }
 
-    private void OnDamage(Entity<ShadowCloakEntityComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageDealt(Entity<ShadowCloakEntityComponent> ent, ref DamageDealtEvent args)
     {
         if (ent.Comp.User is not {} user)
             return;
 
-        if ((args.UncappedDamage ?? args.DamageDelta) is not { } dmg)
-            return;
-
         _dmg.ChangeDamage(user,
-            dmg,
+            args.Damage,
             origin: args.Origin,
             interruptsDoAfters: args.InterruptsDoAfters,
             ignoreBlockers: args.IgnoreBlockers,
@@ -143,24 +140,22 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
             canMiss: false);
     }
 
-    private void OnDamageChanged(Entity<ShadowCloakedComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageDealt(Entity<ShadowCloakedComponent> ent, ref DamageDealtEvent args)
     {
-        if (_net.IsClient)
-            return;
-
-        if (!args.DamageIncreased || args.DamageDelta == null)
+        if (!args.Damage.AnyPositive())
             return;
 
         if (GetShadowCloakEntity(ent) is not { } cloak)
             return;
 
-        cloak.Comp.SustainedDamage += args.DamageDelta.GetTotal();
+        cloak.Comp.SustainedDamage += args.Damage.GetTotal();
+        Dirty(cloak);
 
         if (cloak.Comp.SustainedDamage < cloak.Comp.DamageBeforeReveal)
             return;
 
         var chance = Math.Clamp(cloak.Comp.SustainedDamage.Float() * cloak.Comp.RevealDamageMultiplier / 100f, 0f, 1f);
-        if (!_random.Prob(chance))
+        if (!SharedRandomExtensions.PredictedProb(_timing, chance, GetNetEntity(ent)))
             return;
 
         if (cloak.Comp.DebuffOnEarlyReveal)

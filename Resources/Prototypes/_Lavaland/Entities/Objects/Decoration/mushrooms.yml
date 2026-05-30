@@ -31,8 +31,9 @@
     delay: 3.5
     loot: FoodSpaceshroom # TODO: make lavashroom food
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

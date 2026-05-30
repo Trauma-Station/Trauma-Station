@@ -34,25 +34,25 @@
   description: all-at-once-description
   showInVote: false
   rules:
+    # <Trauma>
+    - Thief
+    - HereticRoundstart
+    - BlobGameMode
+    - LoneAbductorSpawn
+    - Changeling
+    - Insurgency
+    - CosmicCult
+    # </Trauma>
     - Nukeops
     - Traitor
     - Revolutionary
     - Zombie
     - Wizard
-    - CosmicCult # DeltaV
     - Xenoborgs
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     - SpaceTrafficControlEventScheduler
     - BasicRoundstartVariation
-    # <Trauma>
-    - Thief
-    - Heretic
-    - BlobGameMode
-    - LoneAbductorSpawn
-    - Changeling
-    - Insurgency
-    # </Trauma>
 
 - type: gamePreset
   id: AllerAtOnce
@@ -69,12 +69,13 @@
     - BasicAntagEventScheduler
     - ModerateAntagEventScheduler
     - Thief
-    - Heretic
+    - HereticRoundstart
     - BlobGameMode
     - LoneAbductorSpawn
     - Changeling
-    - Shadowling
+    - ShadowlingRoundstart
     - Insurgency
+    - CosmicCult
     # </Trauma>
     - Nukeops
     - Traitor
@@ -141,8 +142,8 @@
   showInVote: true
   description: secret-description
   rules:
-  - Insurgency # Trauma
-  - Secret
+    - Insurgency # Trauma
+    - Secret
 
 - type: gamePreset
   id: Sandbox
