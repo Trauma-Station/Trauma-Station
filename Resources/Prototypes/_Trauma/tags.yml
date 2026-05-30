@@ -119,6 +119,11 @@
 - type: Tag
   id: IngotWorkableSteel # Construction: AnvilBottom, AnvilTop
 
+## K ##
+
+- type: Tag
+  id: Katana # Used for sheath whitelist
+
 ## M ##
 
 - type: Tag
@@ -198,6 +203,9 @@
   id: RitualKnowledge # Heretic: used to remove knowledge ritual after you use it
 
 ## S ##
+
+- type: Tag
+  id: Scimitar # Used for scabbad whitelist
 
 - type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision

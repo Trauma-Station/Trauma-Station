@@ -260,7 +260,7 @@ public sealed partial class CircuitMemoryCell : CircuitGate
     public override string Name => "MEM";
     public override string Category => "Misc";
     public override GateValue OutputType => GateValue.Any;
-    public override string Desc => "Always outputs the value stored in memory.\nIf the second output is set to true, stores the first input to memory.";
+    public override string Desc => "Always outputs the value stored in memory.\nIf the second input is set to true, stores the first input to memory.";
     public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
