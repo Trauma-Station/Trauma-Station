@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Server.DoAfter;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Jittering;
@@ -14,6 +12,8 @@ using Content.Shared.Popups;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Content.Shared.Damage;
+using Content.Shared._Shitmed.Targeting;
 
 namespace Content.Trauma.Server.Xenomorphs.Larva;
 
@@ -24,6 +24,7 @@ public sealed partial class XenomorphLarvaSystem : EntitySystem
     [Dependency] private GibbingSystem _gibbing = default!;
     [Dependency] private JitteringSystem _jitter = default!;
     [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     public override void Initialize()
     {
@@ -84,6 +85,9 @@ public sealed partial class XenomorphLarvaSystem : EntitySystem
             return;
 
         _container.Remove(uid, container);
-        _gibbing.Gib(victim);
+        var damage = new DamageSpecifier();
+        damage.DamageDict.Add("Blunt", 120);
+        damage.DamageDict.Add("Piercing", 80);
+        _damageableSystem.TryChangeDamage(uid: victim, damage: damage, ignoreResistances: true, interruptsDoAfters: false, targetPart: TargetBodyPart.Chest);
     }
 }
