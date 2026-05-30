@@ -1160,7 +1160,7 @@
       Min: 1
       Max: 4
       PotencyDivisor: 25
-    Fresium: #Trauma
+    Fresium: # Trauma
       Min: 1
       Max: 5
       PotencyDivisor: 20
@@ -2028,7 +2028,7 @@
   waterConsumption: 0.60
   nutrientConsumption: 0.50
   chemicals:
-    Potassium: #Trauma, Changed the max for potassium, phosphorus and sugar to 15 and the potency divisor to 6
+    Potassium: # Trauma, Changed the max for potassium, phosphorus and sugar to 15 and the potency divisor to 6
       Min: 1
       Max: 15
       PotencyDivisor: 6
