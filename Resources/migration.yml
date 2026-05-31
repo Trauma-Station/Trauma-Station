@@ -140,6 +140,9 @@ PanicButton: null
 
 # 2026-04-29 Riot Launcher to trauma version
 GunSafeLauncherNonLethal: GunSafeRiotLauncher
+
+# 2026-05-31
+BSOManual: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
