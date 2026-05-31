@@ -52,7 +52,7 @@
   parent: BaseVampireAction
   id: ActionBloodBarrier
   name: Blood Barrier
-  description: Manifest a barrier of crystalline blood. select two tiles and a wall with a maximum length of 3 will be produced.
+  description: Manifest a barrier of crystalline blood. select two tiles with a maximum length of 3 will be produced.
   components:
   - type: Action
     useDelay: 60

@@ -36,10 +36,9 @@ public sealed partial class VampireSystem : EntitySystem
 
     private void OnAlertClick(Entity<VampireComponent> ent, ref VampireBloodAlertEvent args)
     {
-        var total = ent.Comp.TotalBlood;
         var usable = ent.Comp.UsableBlood;
 
-        _popup.PopupClient($"You have {total} total, and {usable} usable blood", ent.Owner, ent.Owner, PopupType.Large);
+        _popup.PopupClient($"You have {usable} usable blood", ent.Owner, ent.Owner, PopupType.Large);
     }
 
     private void OnGlare(Entity<VampireComponent> ent, ref GlareAttemptEvent args)

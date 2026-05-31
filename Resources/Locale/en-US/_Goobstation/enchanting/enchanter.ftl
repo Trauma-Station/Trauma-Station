@@ -2,6 +2,7 @@ enchanter-examine = [color=lightblue]This item can be used as a source of enchan
 enchanting-tool-examine = [color=lightblue]This can enchant items with a source item on an altar.[/color]
 
 enchanter-disallowed-enchant = You are not worthy!
+enchanter-no-skill = You don't have the skill!
 enchanter-cant-enchant = You can't enchant that using this item!
 enchanter-enchanted = A magical aura shimmers across {THE($item)}!
 enchanting-tool-no-enchanter = You need to put an enchanting source with the target item.

@@ -1,0 +1,110 @@
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: WeaponLightMachineGunProletariat
+  name: Proletariat
+  description: An ancient LMG named for the classes it was used to oppress, until that class got ahold of it. Takes .22 short turret mags.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/LightMachineGuns/proletariat.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/LightMachineGuns/proletariat_inhands_x64.rsi
+    size: Huge
+    shape:
+    - 0,0,5,3
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/LMGs/l6.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: Gun
+    minAngle: 10
+    maxAngle: 30
+    fireRate: 4
+    angleIncrease: 1 # its a 22
+    angleDecay: 16
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/smg.ogg
+    defaultDirection: 1, 0
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -10
+    maxAngle: -25
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/smg_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineTurret
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeTurret
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeTurret
+  - type: ContainerFill
+    containers:
+      gun_magazine: [ BaseMagazineTurretHeavy ]
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SMGPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SMGDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SMGDrop
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 10
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+
+- type: entity
+  parent: WeaponLightMachineGunProletariat
+  id: WeaponLightMachineGunProletariatEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    deconstructionTarget: null
+    graph: RevGuns
+    node: Proletariat
+  - type: ContainerFill
+    containers: {}

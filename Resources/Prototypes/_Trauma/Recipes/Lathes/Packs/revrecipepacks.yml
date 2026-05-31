@@ -61,6 +61,7 @@
   recipes:
   - RevGunParts
   - RevTurretMagazine
+  - RevTurretMagazineHeavy
   - RevSMGMagazine
 
 - type: latheRecipePack
@@ -104,6 +105,16 @@
   - DataChipReflectivePlate
   - DataChipFakeMindshield
   - DataChipShieldRipper
+  - MoldMeleeUpgrades
+
+- type: latheRecipePack
+  id: RevMedicalStatic
+  recipes:
+  - MedicatedSuture
+  - RegenerativeMesh
+  - RevGauze
+  - RevBrutepack
+  - RevOintment
 
 - type: latheRecipePack
   id: RevFoundryStatic
