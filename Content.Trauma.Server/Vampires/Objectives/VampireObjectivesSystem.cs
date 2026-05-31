@@ -47,7 +47,7 @@ public sealed partial class VampireObjectivesSystem : EntitySystem
 
     private void OnGetProgress(Entity<VampireBloodConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
-        args.Progress = GetProgress(ent.Comp, _number.GetTarget(ent));
+        args.Progress = GetProgress(ent.Comp.Blood, _number.GetTarget(ent));
     }
     #endregion
 
@@ -70,33 +70,20 @@ public sealed partial class VampireObjectivesSystem : EntitySystem
 
     private void OnGetProgress(Entity<VampireSuckConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
-        args.Progress = GetSuckProgress(ent.Comp, _number.GetTarget(ent));
+        args.Progress = GetProgress(ent.Comp.SuckedEntities.Count, _number.GetTarget(ent));
     }
     #endregion
 
     #region Helper
-    private float GetProgress(VampireBloodConditionComponent comp, int target)
+    private float GetProgress(int number, int target)
     {
-        var blood = comp.Blood;
         if (target == 0)
             return 1f;
 
-        if (blood >= target)
+        if (number >= target)
             return 1f;
 
-        return (float) blood / target;
-    }
-
-    private float GetSuckProgress(VampireSuckConditionComponent comp, int target)
-    {
-        var count = comp.SuckedEntities.Count;
-        if (target == 0)
-            return 1f;
-
-        if (count >= target)
-            return 1f;
-
-        return (float) count / target;
+        return (float) number / target;
     }
     #endregion
 }

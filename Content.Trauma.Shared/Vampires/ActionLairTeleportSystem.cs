@@ -21,8 +21,6 @@ public sealed partial class ActionLairTeleportSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ActionLairTeleportComponent, ActionLairTeleportEvent>(OnAction);
-
-        SubscribeLocalEvent<ActionLairTeleportComponent, VampireLairCreatedEvent>(OnLair);
     }
 
     private void OnAction(Entity<ActionLairTeleportComponent> ent, ref ActionLairTeleportEvent args)
@@ -56,9 +54,15 @@ public sealed partial class ActionLairTeleportSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnLair(Entity<ActionLairTeleportComponent> ent, ref VampireLairCreatedEvent args)
+    /// <summary>
+    /// Sets the lair that was created by <see cref="ActionLairComponent"/> action, on this action entity.
+    /// </summary>
+    public void SetLair(Entity<ActionLairTeleportComponent?> ent, EntityUid lair)
     {
-        ent.Comp.Lair = args.Lair;
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return;
+
+        ent.Comp.Lair = lair;
         Dirty(ent);
     }
 }

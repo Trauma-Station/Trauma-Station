@@ -738,10 +738,6 @@
   description: A comfy coffin, excellent place for the vampires and corpses.
   components:
   # <Trauma>
-  - type: Damageable
-    damageModifierSet: VampireCoffin
-  - type: Injurable
-    damageContainer: VampireCoffin
   - type: VampireLair
   - type: EffectsOnContainer
     inserted:

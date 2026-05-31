@@ -6,12 +6,9 @@ using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffectNew;
 using Content.Trauma.Shared.Vampires.Haemomancer;
 using Content.Trauma.Shared.Vampires.Lair;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires;
 
@@ -19,7 +16,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ActionLairTeleportSystem _lair = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedActionsSystem _action = default!;
@@ -27,7 +24,6 @@ public abstract partial class SharedActionLairSystem : EntitySystem
     [Dependency] private SharedActiveBloodLeecherSystem _leecher = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private EntityQuery<VampireLairComponent> _lairQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
@@ -43,9 +39,6 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         SubscribeLocalEvent<ActionLairComponent, ActionLairEvent>(OnAction);
         SubscribeLocalEvent<ActionLairComponent, VampireLairDoAfterEvent>(OnDoAfter);
-
-        SubscribeLocalEvent<VampireLairComponent, EntInsertedIntoContainerMessage>(OnInserted);
-        SubscribeLocalEvent<VampireLairComponent, EntRemovedFromContainerMessage>(OnRemoved);
     }
 
     private void OnAction(Entity<ActionLairComponent> ent, ref ActionLairEvent args)
@@ -128,33 +121,9 @@ public abstract partial class SharedActionLairSystem : EntitySystem
             || _action.AddAction(attached, ActionTeleportLair) is not { } tpAction)
             return;
 
+        _lair.SetLair(tpAction, target);
+
         _action.RemoveAction(attached, action.AsNullable());
-
-        // Raised on the new action added, so we can pass the lair to it
-        var ev = new VampireLairCreatedEvent(target);
-        RaiseLocalEvent(tpAction, ref ev);
-    }
-
-    private void OnInserted(Entity<VampireLairComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (ent.Comp.Vampire is not { } vampire || args.Entity != vampire)
-            return;
-
-        _status.TryAddStatusEffect(vampire, ent.Comp.CoffinStatus, out _);
-    }
-
-    private void OnRemoved(Entity<VampireLairComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (ent.Comp.Vampire is not { } vampire || args.Entity != vampire)
-            return;
-
-        _status.TryRemoveStatusEffect(vampire, ent.Comp.CoffinStatus);
     }
 
     /// <summary>
@@ -162,6 +131,3 @@ public abstract partial class SharedActionLairSystem : EntitySystem
     /// </summary>
     protected virtual void GhostBoo(EntityUid uid) { }
 }
-
-[ByRefEvent]
-public record struct VampireLairCreatedEvent(EntityUid Lair);

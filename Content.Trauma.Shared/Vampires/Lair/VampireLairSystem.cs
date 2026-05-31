@@ -4,6 +4,8 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
+using Content.Shared.StatusEffectNew;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Vampires.Lair;
@@ -12,6 +14,7 @@ public sealed partial class VampireLairSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<DamageTypePrototype> Heat = "Heat";
@@ -21,6 +24,9 @@ public sealed partial class VampireLairSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<VampireLairComponent, DamageDealtEvent>(OnDamage);
+
+        SubscribeLocalEvent<VampireLairComponent, EntInsertedIntoContainerMessage>(OnInserted);
+        SubscribeLocalEvent<VampireLairComponent, EntRemovedFromContainerMessage>(OnRemoved);
     }
 
     private void OnDamage(Entity<VampireLairComponent> ent, ref DamageDealtEvent args)
@@ -29,11 +35,33 @@ public sealed partial class VampireLairSystem : EntitySystem
         if (ent.Comp.Vampire is not { } vamp|| !args.Damage.DamageDict.ContainsKey(Heat))
             return;
 
-        // Random chance of getting the popup
+        // Random chance of getting the popup, so again, it doesn't spam the user but still warns them a lot.
         if (!SharedRandomExtensions.PredictedProb(_timing, 0.2f, GetNetEntity(ent)))
             return;
 
         if (_net.IsServer)
             _popup.PopupEntity("Your lair is being attacked!", vamp, vamp, PopupType.LargeCaution);
+    }
+
+    private void OnInserted(Entity<VampireLairComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (ent.Comp.Vampire is not { } vampire || args.Entity != vampire)
+            return;
+
+        _status.TryAddStatusEffect(vampire, ent.Comp.CoffinStatus, out _);
+    }
+
+    private void OnRemoved(Entity<VampireLairComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (ent.Comp.Vampire is not { } vampire || args.Entity != vampire)
+            return;
+
+        _status.TryRemoveStatusEffect(vampire, ent.Comp.CoffinStatus);
     }
 }
