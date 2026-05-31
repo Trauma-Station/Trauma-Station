@@ -35,7 +35,13 @@ public sealed partial class ActionBloodBarrierSystem : EntitySystem
         {
             var pointACoords = Transform(ent.Comp.Points[0]).Coordinates;
             if (Vector2.Distance(pointACoords.Position, coords.Position) > ent.Comp.Distance)
+            {
+                // clear the previous point so user doesn't run away and forgets to clear it
+                PredictedQueueDel(ent.Comp.Points[0]);
+                ent.Comp.Points.Clear();
+                Dirty(ent);
                 return;
+            }
         }
 
         var point = PredictedSpawnAtPosition(ent.Comp.PointProto, coords);
