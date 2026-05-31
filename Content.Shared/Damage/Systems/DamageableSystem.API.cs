@@ -226,8 +226,13 @@ public sealed partial class DamageableSystem
         // <Goob> - For entities with a body, route damage through body parts. no damage is added to the body's DamageableComponent
         if (_bodyQuery.HasComp(ent))
         {
+            var vitalDamage = GetVitalDamage(damage);
+            damage -= vitalDamage;
+
             return ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
-                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
+                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly) +
+                ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
+                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
         }
         // </Goob>
 
