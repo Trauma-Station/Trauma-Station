@@ -4,7 +4,6 @@ namespace Content.Trauma.Shared.Vampires.Lair;
 
 /// <summary>
 /// Used on coffins. Holds data on whether this coffin has a vampire owner.
-/// Used along with <see cref="ActionLairComponent"/> action.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]

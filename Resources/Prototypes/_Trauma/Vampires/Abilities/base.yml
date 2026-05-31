@@ -6,7 +6,7 @@
     - ActionVampRejuvenateI
 
 - type: vampireAbility
-  id: GlareLair
+  id: Glare
   onUnlock:
   - !type:AddActions
     actions:
@@ -68,6 +68,7 @@
     - type: AreaDetector
     - type: WeakToHoly
     - type: Nullification
+    - type: AlwaysTakeHoly
   - !type:PopupPredicted
     message: You have reached full power!
     visualType: Large
