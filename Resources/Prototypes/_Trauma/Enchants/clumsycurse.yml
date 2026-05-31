@@ -12,7 +12,7 @@
   - type: ComponentsEnchant
     added:
     - type: ClothingGrantComponent
-    components:
+      component:
       - type: Clumsy
         gunShootFailDamage:
           types:
