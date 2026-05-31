@@ -89,6 +89,13 @@ public sealed partial class TriggerSystem : EntitySystem
     {
         if (!Resolve(ent, ref ent.Comp))
             return false;
+        // <Trauma> - deadman switch skips disabled timers
+        if (ent.Comp.Disabled)
+        {
+            ent.Comp.Disabled = false;
+            return false;
+        }
+        // </Trauma>
 
         if (Terminating(ent))
             return false; // Stop trying to resurrect a dead horse.

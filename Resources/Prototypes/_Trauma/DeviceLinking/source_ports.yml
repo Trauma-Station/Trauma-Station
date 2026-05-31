@@ -19,3 +19,9 @@
   id: PhoneHangupPort
   name: signal-port-name-phone-hangup
   description: signal-port-description-phone-hangup
+
+- type: sourcePort
+  id: Dropped
+  name: signal-port-name-dropped
+  description: signal-port-description-dropped
+  defaultLinks: [ Toggle, Trigger, Timer ]

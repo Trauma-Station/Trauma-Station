@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Deadman made by tkirkby for Space Station 14. Deadman is modified from https://github.com/space-wizards/space-station-14/tree/47d552f7455f6ca17b377cbc251cf577d7e264d1/Resources/Textures/Objects/Devices/signaller.rsi.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "deadman"
+    },
+    {
+      "name": "deadman-armed",
+      "delays": [
+        [
+          0.4,
+          0.1,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "deadman-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "deadman-inhand-right",
+      "directions": 4
+    }
+  ]
+}
