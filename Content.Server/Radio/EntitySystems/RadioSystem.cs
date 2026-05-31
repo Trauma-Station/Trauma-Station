@@ -260,10 +260,6 @@ public sealed partial class RadioSystem : EntitySystem
         if (language.SpeechOverride.Color is { } colorOverride)
             languageColor = Color.InterpolateBetween(Color.White, colorOverride, colorOverride.A); // Changed first param to Color.White so it shows color correctly.
 
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
-
         // goob start - loudspeakers
 
         int? loudSpeakFont = null;
@@ -303,8 +299,7 @@ public sealed partial class RadioSystem : EntitySystem
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", nameString), // goob
-            ("message", message),
-            ("language", languageDisplay));
+            ("message", message));
     }
     // Einstein Engines - Language end
 
