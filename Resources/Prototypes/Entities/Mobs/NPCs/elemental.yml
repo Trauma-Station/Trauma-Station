@@ -419,8 +419,6 @@
       - id: ReagentSlimeCocaine # Trauma - To Make them spawnable
       - id: ReagentSlimeCrackCocaine # Trauma - To Make them spawnable
 
-
-
 - type: entity
   id: ReagentSlimeBeer
   parent: ReagentSlime
