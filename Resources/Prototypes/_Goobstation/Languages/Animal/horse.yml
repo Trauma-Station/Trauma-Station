@@ -1,6 +1,5 @@
 - type: language
   id: Cheval
-  isVisibleLanguage: true
   speech:
     color: "#964B00"
   obfuscation:
