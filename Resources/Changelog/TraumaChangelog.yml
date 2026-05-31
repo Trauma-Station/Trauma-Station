@@ -9268,3 +9268,52 @@ Entries:
   id: 1054
   time: '2026-05-28T20:48:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2204
+- author: Hoodsie
+  changes:
+  - type: Tweak
+    message: converted command is no longer tracked
+  id: 1055
+  time: '2026-05-29T08:07:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2883
+- author: SpeltIncorrectyl
+  changes:
+  - type: Fix
+    message: dragging yourself onto secway no longer occupies two hands
+  id: 1056
+  time: '2026-05-29T14:38:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2884
+- author: GeneRickUsername
+  changes:
+  - type: Tweak
+    message: Magical Literacy affects enchanting
+  id: 1057
+  time: '2026-05-29T21:17:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2885
+- author: Aviu
+  changes:
+  - type: Add
+    message: You can counterattack with sheathed weapons, see guidebook for details.
+  - type: Add
+    message: Security katana.
+  - type: Add
+    message: New syndicate weapon - snakesfang.
+  - type: Tweak
+    message: Removed passive parries for all sheathed weapons.
+  - type: Tweak
+    message: Ninja katana damage 30 -> 20.
+  id: 1058
+  time: '2026-05-30T09:18:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2712
+- author: Lumminal
+  changes:
+  - type: Fix
+    message: Various bug-fixes related to Vampires.
+  - type: Tweak
+    message: Vampire guidebook has been updated. It now also includes images.
+  - type: Add
+    message: Vampire Blood Alert now has a counter showing your total blood.
+  - type: Add
+    message: Vampire actions now show the blood required to use them.
+  id: 1059
+  time: '2026-05-30T21:03:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2863

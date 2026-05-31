@@ -151,6 +151,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         if (ent.Comp.RequiredHands == 0)
             return false;
 
+        _virtualItem.DeleteInHandsMatching(driver, ent.Owner, queueDel: false);
         for (var hands = 0; hands < ent.Comp.RequiredHands; hands++)
         {
             if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, driver, false))

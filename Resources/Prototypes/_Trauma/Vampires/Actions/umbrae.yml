@@ -161,6 +161,7 @@
     update: 0.5
     targetEffects:
     - !type:HealthChange
+      splitDamage: SplitEnsureAll
       damage:
         types:
           Blunt: 3
