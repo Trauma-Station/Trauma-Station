@@ -1,6 +1,6 @@
 - type: entity
-  id: ReagentSlimeCocaine
   parent: ReagentSlime
+  id: ReagentSlimeCocaine
   suffix: Cocaine
   components:
   - type: Bloodstream
