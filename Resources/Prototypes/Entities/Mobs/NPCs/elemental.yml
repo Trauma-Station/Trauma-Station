@@ -420,8 +420,6 @@
       - id: ReagentSlimeCocaine
       - id: ReagentSlimeCrackCocaine
 
-
-
 - type: entity
   id: ReagentSlimeBeer
   parent: ReagentSlime
