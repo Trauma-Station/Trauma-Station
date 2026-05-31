@@ -9304,3 +9304,53 @@ Entries:
   id: 1058
   time: '2026-05-30T09:18:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2712
+- author: Lumminal
+  changes:
+  - type: Fix
+    message: Various bug-fixes related to Vampires.
+  - type: Tweak
+    message: Vampire guidebook has been updated. It now also includes images.
+  - type: Add
+    message: Vampire Blood Alert now has a counter showing your total blood.
+  - type: Add
+    message: Vampire actions now show the blood required to use them.
+  id: 1059
+  time: '2026-05-30T21:03:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2863
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added an additional chemical to Chilly Peppers
+  - type: Add
+    message: Added 10 more chemicals to botany's random chemical pool
+  - type: Tweak
+    message: Tweaked the amount of potassium, phosphorus, and sugar in Bloonions
+  id: 1060
+  time: '2026-05-31T04:53:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2899
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Clown, Mime and Chaplain reinforcements not being their job.
+  id: 1061
+  time: '2026-05-31T04:54:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2875
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Revs can now create a subfloor medical fabricator!
+  - type: Add
+    message: Added the Proletariat, an LMG for revs in .22 short!
+  - type: Add
+    message: Added the Maul, a powerful anti-armor tool for revs.
+  - type: Add
+    message: Added the Kunai, a shovel for revs. Yes, shovel. Kunai are shovels.
+  - type: Tweak
+    message: Forged Knife holds 5u of chems instead of 3u.
+  - type: Tweak
+    message: Forged Sword fits in duffelbags. (1x8)
+  - type: Tweak
+    message: Forged Pitchfork fits in the revs backpacks. (1x9)
+  id: 1062
+  time: '2026-05-31T04:55:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2746

@@ -10,6 +10,7 @@ namespace Content.Trauma.Shared.Actions.Vampires;
 
 public sealed partial class VampireCostActionSystem : EntitySystem
 {
+    [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private VampireSystem _vampire = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
@@ -18,10 +19,17 @@ public sealed partial class VampireCostActionSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<VampireCostActionComponent, MapInitEvent>(OnMapInit);
+
         SubscribeLocalEvent<VampireCostActionComponent, ActionPerformedEvent>(OnPerform);
         SubscribeLocalEvent<VampireCostActionComponent, ActionAttemptEvent>(OnAttempt);
 
         SubscribeLocalEvent<RetractableItemActionComponent, VampireCostActionAttemptEvent>(OnRetractableAttempt);
+    }
+
+    private void OnMapInit(Entity<VampireCostActionComponent> ent, ref MapInitEvent args)
+    {
+        _meta.SetEntityDescription(ent, $"{Description(ent)} [color=red]{ent.Comp.BloodCost} Blood[/color]");
     }
 
     private void OnPerform(Entity<VampireCostActionComponent> ent, ref ActionPerformedEvent args)
