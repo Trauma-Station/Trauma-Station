@@ -364,7 +364,6 @@
     - RawMaterial
     - Diamond
   - type: Enchanter # Goobstation
-    maxLevel: 3
     enchants:
     - EnchantFortune
 

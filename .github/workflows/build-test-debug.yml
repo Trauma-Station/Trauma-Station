@@ -101,7 +101,7 @@ jobs:
     - name: Run main Content.IntegrationTests
       run: |
         DOTNET_gcServer=1 dotnet test bin/Content.IntegrationTests/Content.IntegrationTests.dll -- \
-          NUnit.Where="cat !~ '.+'" \
+          NUnit.Where="cat != MapTests && cat != GameRuleTests" \
           NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     - name: Archive NUnit3 test results

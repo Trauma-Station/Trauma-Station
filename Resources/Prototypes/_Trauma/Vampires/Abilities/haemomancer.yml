@@ -10,7 +10,7 @@
   onUnlock:
   - !type:AddActions
     actions:
-    - ActionBloodSwell
+    - ActionVampiricClaws
 
 - type: vampireAbility
   parent: BaseHaemomancerAbility

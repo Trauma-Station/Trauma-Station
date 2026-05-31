@@ -310,6 +310,9 @@
         Slash: 5
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  - type: Tag
+    tags:
+    - Katana
 
 # Arrows
 

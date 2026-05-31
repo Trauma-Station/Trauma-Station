@@ -9,7 +9,6 @@
   - CorporateJudo
   - Capoeira
   - Ninjutsu
-  - DragonKungFu
   - HellRip
   - ArmstrongKarate
 
@@ -47,11 +46,6 @@
   id: Ninjutsu
   name: guide-entry-ninjutsu
   text: "/ServerInfo/_Goobstation/Guidebook/MartialArts/Ninjutsu.xml"
-
-- type: guideEntry
-  id: DragonKungFu
-  name: guide-entry-dragon-kung-fu
-  text: "/ServerInfo/_Goobstation/Guidebook/MartialArts/DragonKungFu.xml"
 
 - type: guideEntry
   id: ArmstrongKarate

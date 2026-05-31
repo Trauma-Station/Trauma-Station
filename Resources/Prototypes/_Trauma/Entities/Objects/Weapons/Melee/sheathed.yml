@@ -1,0 +1,49 @@
+- type: entity
+  parent: [BaseSword, BaseSecurityContraband]
+  id: SecurityKatana
+  name: officer's katana
+  description: An elegant weapon, its monomolecular edge is capable of cutting through flesh and bone with ease.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/sec_katana.rsi
+  - type: MeleeWeapon
+    animationRotation: -95
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Slash: 17
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    storedRotation: -45
+    shape:
+    - 0,0,0,3
+  - type: Tag
+    tags:
+    - Katana
+
+- type: entity
+  parent: [BaseSword, BaseSyndicateContraband]
+  id: Snakesfang
+  name: snakesfang
+  description: A uniquely curved, black and red sword. Extra-edgy and cutting-edge.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/snakesfang.rsi
+  - type: MeleeWeapon
+    animationRotation: -95
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Slash: 20
+      woundSeverityMultipliers:
+        Slash: 2
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    storedRotation: -45
+    shape:
+    - 0,0,1,2
+  - type: Tag
+    tags:
+    - Scimitar

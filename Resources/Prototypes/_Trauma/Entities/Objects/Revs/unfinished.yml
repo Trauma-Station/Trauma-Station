@@ -248,3 +248,25 @@
     graph: RevFlamethrowerAmmo
     deconstructionTarget: null
     node: empty
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevMaulHead
+  name: unfinished maul parts
+  description: An unfinished maul, use some wood to complete it.
+  components:
+  - type: Sprite
+    state: maul
+  - type: Construction
+    graph: RevMaul
+
+- type: entity
+  parent: BaseUnfinishedRevWeapon
+  id: RevKunaiHead
+  name: unfinished kunai parts
+  description: An unfinished kunai, use some wood to complete it.
+  components:
+  - type: Sprite
+    state: kunai
+  - type: Construction
+    graph: RevKunai

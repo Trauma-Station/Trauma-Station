@@ -65,6 +65,7 @@
   parent: BaseVampireAction
   id: ActionVampireGlare
   name: Glare
+  description: Works in melee-range, and has different effects on each side of you. Requires 2 charges to fully stun.
   components:
   - type: Action
     useDelay: 2

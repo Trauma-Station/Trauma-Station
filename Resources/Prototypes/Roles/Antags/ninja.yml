@@ -56,7 +56,7 @@
     ears: ClothingHeadsetNinja
     pocket1: SpiderCharge
     pocket2: PinpointerStation
-    belt: EnergyKatana
+    belt: ClothingBeltSheathKatanaNinjaFilled # Trauma - was EnergyKatana
   inhand:
     - JetpackBlackFilled
     - NinjutsuScroll # Goobstation

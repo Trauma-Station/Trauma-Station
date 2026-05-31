@@ -25,7 +25,7 @@
   ### Loss of Surprise
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookLossOfSurprise" Caption=""/>
+    <TextureEmbed Sprite="Structures/Storage/closet.rsi" State="cardboard_special"/>
   </Box>
 
   In the silence of an opening, the ninja moves like a whisper in the wind.
@@ -44,7 +44,7 @@
   ### Assasinate
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
   Deals massive damage to target's chest if Sneak Attack is active. Damage is easily stopped by armor.
@@ -53,7 +53,7 @@
   ### Ninjutsu Takedown
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="help"/>
   </Box>
 
   Only works with active Sneak Attack. Slows the opponent down significantly and mutes them.
@@ -62,7 +62,7 @@
   ### Swift Strike
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
   When the foe is knocked down, melee weapon dealing slash strike comes faster than the eye can follow.
@@ -71,8 +71,8 @@
   ### Bite The Dust
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="grab"/>
   </Box>
 
   Temporarily knocks the opponent down. As well as dealing blunt damage.
@@ -80,8 +80,8 @@
   ### Dirty Kill
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
   </Box>
 
   Temporarily stuns a knocked down opponent. Target cannot be stunned for longer than they are knocked down.

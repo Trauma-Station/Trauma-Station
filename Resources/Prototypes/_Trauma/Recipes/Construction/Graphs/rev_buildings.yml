@@ -173,6 +173,24 @@
         amount: 10
       - tool: Anchoring
         doAfter: 1
+    - to: hidden medifab
+      steps:
+      - tag: HudMedical # Bully medical for it
+        name: construction-graph-tag-medical-hud
+        icon:
+      - tool: Screwing
+        doAfter: 1
+      - material: Glass
+        amount: 5
+      - material: Cable
+        amount: 5
+        doAfter: 1
+      - material: RevBolt
+        amount: 7
+      - material: RevNut
+        amount: 7
+      - tool: Anchoring
+        doAfter: 1
   - node: gear
     edges:
     - to: industrial forge
@@ -232,3 +250,5 @@
     entity: RevTechAnalyzer
   - node: plasma foundry
     entity: RevPlasmaFoundry
+  - node: hidden medifab
+    entity: RevMedFab
