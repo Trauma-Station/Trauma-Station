@@ -9,7 +9,7 @@
   "states": [
     {
       "name": "alive",
-      "directions": 2
+      "directions": 4
     }
   ]
 }
