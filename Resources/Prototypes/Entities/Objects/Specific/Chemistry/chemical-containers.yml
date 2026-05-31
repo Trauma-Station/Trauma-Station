@@ -7,7 +7,7 @@
   - type: Sprite
     sprite: Objects/Specific/Chemistry/jug.rsi
   - type: Item
-    size: Normal # Trauma - was Large
+    size: Large
     sprite: Objects/Specific/Chemistry/jug.rsi
   - type: SolutionContainerVisuals
     maxFillLevels: 6
