@@ -26,6 +26,10 @@
     maxTriggers: 1
   - type: DamageOnTrigger
     targetUser: true
+    blacklist:
+      components:
+      - Vampire
+      - VampireThrall
     damage:
       types:
         Slash: 20

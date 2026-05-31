@@ -15,6 +15,9 @@ public sealed partial class AreaDetectorSystem : EntitySystem
 
     private void OnMove(Entity<AreaDetectorComponent> ent, ref MoveEvent args)
     {
+        if (TerminatingOrDeleted(ent) || args.Entity.Comp1.MapUid == null)
+            return;
+
         if (_area.GetArea(ent.Owner) is not { } area)
         {
             // If we were in an area before, and we enter a place where there's no areas, then raise an early event.

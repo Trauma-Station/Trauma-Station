@@ -1117,9 +1117,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         colorOverride ??= language.SpeechOverride.Color;
         if (colorOverride != null)
             color = Color.InterpolateBetween(color, colorOverride.Value, colorOverride.Value.A);
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
 
         // goob start - loudspeakers
 
@@ -1156,8 +1153,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("fontType", fontEv.Font), // Trauma - use Font from above
             ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
-            ("message", message),
-            ("language", languageDisplay));
+            ("message", message));
     }
     // Einstein Engines - Language end
 

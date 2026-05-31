@@ -29,7 +29,7 @@
   id: CartridgeRPG2 # Ammo whitelist: WeaponLauncherRPG2
 
 - type: Tag
-  id: CartridgeTurret # Ammo whitelist: BaseMagazineTurret, WeaponTurretRevolutionaryPistol
+  id: CartridgeTurret # Ammo whitelist: BaseMagazineTurret, WeaponTurretRevolutionaryPistol, BaseMagazineTurretHeavy, WeaponLightMachineGunProletariat
 
 - type: Tag
   id: CartridgeLionhunter # Used for lionhunter rifle ammo creation ritual blacklist

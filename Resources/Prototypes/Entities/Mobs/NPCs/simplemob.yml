@@ -44,6 +44,10 @@
   id: SimpleSpaceMobBase # Mob without barotrauma, freezing and asphyxiation (for space carps!?)
   suffix: AI
   components:
+  # <Trauma>
+  - type: Destructible
+    thresholds: [] # Remove gibbing since it has bodyparts
+  # </Trauma>
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
