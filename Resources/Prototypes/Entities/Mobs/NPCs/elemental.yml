@@ -416,6 +416,11 @@
       - id: ReagentSlimeNorepinephricAcid
       - id: ReagentSlimeEphedrine
       - id: ReagentSlimeRobustHarvest
+        # Trauma
+      - id: ReagentSlimeCocaine
+      - id: ReagentSlimeCrackCocaine
+
+
 
 - type: entity
   id: ReagentSlimeBeer
