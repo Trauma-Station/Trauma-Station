@@ -26,8 +26,6 @@
   components:
   - type: Sprite
     state: ashartine
-  - type: Item
-    state: ashartine
   - type: Tag
     tags:
     - Ashartine
@@ -38,8 +36,6 @@
   name: asimel
   components:
   - type: Sprite
-    state: asimel
-  - type: Item
     state: asimel
   - type: Tag
     tags:
@@ -52,8 +48,6 @@
   components:
   - type: Sprite
     state: azurapetra
-  - type: Item
-    state: azurapetra
   - type: Tag
     tags:
     - Azurapetra
@@ -64,8 +58,6 @@
   name: catwink
   components:
   - type: Sprite
-    state: catwink
-  - type: Item
     state: catwink
   - type: Tag
     tags:
@@ -78,8 +70,6 @@
   components:
   - type: Sprite
     state: endozult
-  - type: Item
-    state: endozult
   - type: Tag
     tags:
     - Endozult
@@ -90,8 +80,6 @@
   name: hithine
   components:
   - type: Sprite
-    state: hithine
-  - type: Item
     state: hithine
   - type: Tag
     tags:
@@ -104,8 +92,6 @@
   components:
   - type: Sprite
     state: houndsgall
-  - type: Item
-    state: houndsgall
   - type: Tag
     tags:
     - Houndsgall
@@ -116,8 +102,6 @@
   name: indothine
   components:
   - type: Sprite
-    state: indothine
-  - type: Item
     state: indothine
   - type: Tag
     tags:
@@ -130,8 +114,6 @@
   components:
   - type: Sprite
     state: marakat
-  - type: Item
-    state: marakat
   - type: Tag
     tags:
     - Marakat
@@ -142,8 +124,6 @@
   name: nillycant
   components:
   - type: Sprite
-    state: nillycant
-  - type: Item
     state: nillycant
   - type: Tag
     tags:
@@ -156,8 +136,6 @@
   components:
   - type: Sprite
     state: nocimat
-  - type: Item
-    state: nocimat
   - type: Tag
     tags:
     - Nocimat
@@ -168,8 +146,6 @@
   name: orpiment exultant
   components:
   - type: Sprite
-    state: orpimentexultant
-  - type: Item
     state: orpimentexultant
   - type: Tag
     tags:
@@ -182,8 +158,6 @@
   components:
   - type: Sprite
     state: perhibiate
-  - type: Item
-    state: perhibiate
   - type: Tag
     tags:
     - Perhibiate
@@ -194,8 +168,6 @@
   name: perinsabate
   components:
   - type: Sprite
-    state: perinsabate
-  - type: Item
     state: perinsabate
   - type: Tag
     tags:
@@ -208,8 +180,6 @@
   components:
   - type: Sprite
     state: perinculate
-  - type: Item
-    state: perinculate
   - type: Tag
     tags:
     - Perinculate
@@ -220,8 +190,6 @@
   name: porphyrine
   components:
   - type: Sprite
-    state: porphyrine
-  - type: Item
     state: porphyrine
   - type: Tag
     tags:
@@ -234,8 +202,6 @@
   components:
   - type: Sprite
     state: posithane
-  - type: Item
-    state: posithane
   - type: Tag
     tags:
     - Posithane
@@ -246,8 +212,6 @@
   name: purpura tramentum
   components:
   - type: Sprite
-    state: purpuraatramentum
-  - type: Item
     state: purpuraatramentum
   - type: Tag
     tags:
@@ -260,8 +224,6 @@
   components:
   - type: Sprite
     state: pyrathene
-  - type: Item
-    state: pyrathene
   - type: Tag
     tags:
     - Pyrathene
@@ -272,8 +234,6 @@
   id: MagicInkPyroendine
   components:
   - type: Sprite
-    state: pyroendine
-  - type: Item
     state: pyroendine
   - type: Tag
     tags:
@@ -286,8 +246,6 @@
   components:
   - type: Sprite
     state: raggath
-  - type: Item
-    state: raggath
   - type: Tag
     tags:
     - Raggath
@@ -298,8 +256,6 @@
   name: rubiginosus
   components:
   - type: Sprite
-    state: rubiginosus
-  - type: Item
     state: rubiginosus
   - type: Tag
     tags:
@@ -312,8 +268,6 @@
   components:
   - type: Sprite
     state: stargallink
-  - type: Item
-    state: stargallink
   - type: Tag
     tags:
     - Stargallink
@@ -324,8 +278,6 @@
   name: terragall
   components:
   - type: Sprite
-    state: terragall
-  - type: Item
     state: terragall
   - type: Tag
     tags:
@@ -338,8 +290,6 @@
   components:
   - type: Sprite
     state: unden
-  - type: Item
-    state: unden
   - type: Tag
     tags:
     - Unden
@@ -351,8 +301,6 @@
   components:
   - type: Sprite
     state: uzult
-  - type: Item
-    state: uzult
   - type: Tag
     tags:
     - Uzult
@@ -363,8 +311,6 @@
   name: yewgall
   components:
   - type: Sprite
-    state: yewgallink
-  - type: Item
     state: yewgallink
   - type: Tag
     tags:

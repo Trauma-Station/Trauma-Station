@@ -31,4 +31,4 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 3
     fillBaseName: fill-
-    InHandsMaxFillLevels: 3
+    inHandsMaxFillLevels: 3
