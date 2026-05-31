@@ -9354,3 +9354,12 @@ Entries:
   id: 1062
   time: '2026-05-31T04:55:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2746
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed simplemobs gibbing at total parts damage instead of letting
+      individual bodyparts handle it.
+  id: 1063
+  time: '2026-05-31T06:51:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2925
