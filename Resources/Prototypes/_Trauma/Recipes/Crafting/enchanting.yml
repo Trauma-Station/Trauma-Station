@@ -7,3 +7,13 @@
   theory:
     MagicalLiteracyKnowledge: 1
   useQuality: false
+
+- type: construction
+  id: BloodVial
+  graph: BloodVial
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Item
+  theory:
+    MagicalLiteracyKnowledge: 1
+  useQuality: false

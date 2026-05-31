@@ -10,8 +10,8 @@
     price: 100
   - type: PhysicalComposition
     materialComposition:
-      Glass: 250
-      Steel: 250
+      Glass: 100
+      Steel: 50
   - type: Solution
     solution:
       maxVol: 100
@@ -35,6 +35,9 @@
   - type: GuideHelp
     guides:
     - Enchanting
+  - type: Construction
+    graph: BloodVial
+    node: empty
 
 - type: entity
   name: prepared blood vial
@@ -46,8 +49,8 @@
     price: 100
   - type: PhysicalComposition
     materialComposition:
-      Glass: 250
-      Steel: 250
+      Glass: 100
+      Steel: 50
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
     layers:
@@ -61,3 +64,6 @@
   - type: Tag
     tags:
     - BloodVial
+  - type: Construction
+    graph: BloodVial
+    node: finish

@@ -14,6 +14,22 @@
 
 - type: entity
   parent: BaseEnchant
+  id: CurseUnremovableOther
+  name: Binding Curse
+  components:
+  - type: Enchant
+    maxLevel: 1
+    blacklist:
+      components:
+      - MeleeWeapon
+      - Armor
+      - Clothing
+  - type: ComponentsEnchant
+    added:
+    - type: Unremoveable
+
+- type: entity
+  parent: BaseEnchant
   id: CurseUnremovableArmor
   name: Binding Curse
   components:
@@ -22,10 +38,6 @@
     whitelist:
       components:
       - Clothing
-      - Armor
   - type: ComponentsEnchant
     added:
     - type: SelfUnremovableClothing
-    - type: Clothing
-      stripDelay: 60 # Its a curse
-      equipDelay: 0 # Trolled

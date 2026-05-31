@@ -35,7 +35,7 @@
       - Alive
     damage:
       types:
-        Heat: -3
+        Heat: -1
         Blunt: -1
         Slash: -1
         Piercing: -1
@@ -65,7 +65,7 @@
   - type: GhostRole
     name: ghost-role-information-demon-name
     description: ghost-role-information-demon-desc
-    rules: ghost-role-information-familliar-rules
+    rules: ghost-role-information-antagonist-rules
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     raffle:
@@ -80,24 +80,44 @@
     defaultRotation: 90
     horizontalRotation: 90
   - type: Targeting
+  - type: Mutatable
+    defaultMutations:
+      MutationInternalMartyrdom: 0.1
+      MutationSpatialInstability: 0.1
+      MutationAntiGlow: 0.1
+      MutationTelekinesis: 0.1
+      MutationLaserEyes: 0.1
+      MutationOrk: 0.05
+      MutationFierySweat: 0.1
+      MutationSpastic: 0.1
+      MutationTwoLeftFeet: 0.1
+      MutationAntenna: 0.1
+      MutationAdrenalineRush: 0.1
+      Dwarfism: 0.1
+      Acromegaly: 0.1
+      Gigantism: 0.1
+  - type: WarpPoint
+  - type: PointLight
+    radius: 0
+    energy: 0
 
 - type: entity
   id: ControlledDemon
   abstract: true
   components:
   - type: GhostRole
-    name: ghost-role-information-demon-name
-    description: ghost-role-information-demon-desc
-    rules: ghost-role-information-antagonist-rules
+    name: ghost-role-information-demon-tame-name
+    description: ghost-role-information-demon-tame-desc
+    rules: ghost-role-information-familliar-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleGhostRoleFamiliar
     raffle:
       settings: short
 
 # Minor Demons
 
 - type: entity
-  name: demon
+  name: 5'11" male
   parent: BaseDemon
   id: MinorDemonGuy
   description: It came from hell.
@@ -128,12 +148,12 @@
             max: 1
 
 - type: entity
-  parent: [MinorDemonGuy, ControlledDemon]
+  parent: [ControlledDemon, MinorDemonGuy]
   id: MinorDemonGuyControlled
   suffix: Controlled
 
 - type: entity
-  name: demon
+  name: Jack Pierson
   parent: BaseDemon
   id: MinorDemonIncel
   description: It came from hell.
@@ -164,113 +184,12 @@
             max: 1
 
 - type: entity
-  parent: [MinorDemonIncel, ControlledDemon]
+  parent: [ControlledDemon, MinorDemonIncel]
   id: MinorDemonIncelControlled
   suffix: Controlled
 
 - type: entity
-  name: demon
-  parent: BaseDemon
-  id: MinorDemonHamlet
-  description: It came from hell.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/Demons/hamlet.rsi
-    drawdepth: SmallMobs
-  - type: MeleeWeapon
-    range: 1
-    soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
-    damage:
-      types:
-        Slash: 10
-    altDisarm: false
-    canWideSwing: true
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:GibBehavior
-        recursive: false
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          BaseDemonSoulFragment:
-            min: 0
-            max: 1
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3.5
-    baseSprintSpeed: 5.5
-  - type: VentCrawler
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.2
-        density: 12 # Goob edit
-        mask:
-        - SmallMobMask
-        layer:
-        - SmallMobLayer
-  - type: FaxableObject
-    insertingState: inserting_hamster
-  - type: FaxSlip
-    slipChance: 0.3
-
-- type: entity
-  parent: [MinorDemonHamlet, ControlledDemon]
-  id: MinorDemonHamletControlled
-  suffix: Controlled
-
-- type: entity
-  name: demon
-  parent: BaseDemon
-  id: MinorDemonGhost
-  description: It came from hell.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
-  - type: MeleeWeapon
-    range: 1
-    soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
-    damage:
-      types:
-        Cold: 10
-    altDisarm: false
-    canWideSwing: true
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:GibBehavior
-        recursive: false
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          BaseDemonSoulFragment:
-            min: 0
-            max: 1
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.1,-0.2,0.1,0.2"
-        hard: false
-        mask:
-        - Opaque
-
-- type: entity
-  parent: [MinorDemonGhost, ControlledDemon]
-  id: MinorDemonGhostControlled
-  suffix: Controlled
-
-- type: entity
-  name: demon
+  name: Urist McHands
   parent: [BaseDemon, InventoryBase]
   id: MinorDemonUrist
   description: It came from hell.
@@ -310,12 +229,12 @@
   - type: ComplexInteraction
 
 - type: entity
-  parent: [MinorDemonUrist, ControlledDemon]
+  parent: [ControlledDemon, MinorDemonUrist]
   id: MinorDemonUristControlled
   suffix: Controlled
 
 - type: entity
-  name: demon
+  name: Flesh Ian
   parent: BaseDemon
   id: MinorDemonIan
   description: It came from hell.
@@ -354,12 +273,12 @@
     baseSprintSpeed: 1.5
 
 - type: entity
-  parent: [MinorDemonIan, ControlledDemon]
+  parent: [ControlledDemon, MinorDemonIan]
   id: MinorDemonIanControlled
   suffix: Controlled
 
 - type: entity
-  name: demon
+  name: outcast
   parent: [BaseDemon, InventoryBase]
   id: MinorDemonVox
   description: It came from hell.
@@ -399,12 +318,12 @@
   - type: ComplexInteraction
 
 - type: entity
-  parent: [MinorDemonVox, ControlledDemon]
+  parent: [ControlledDemon, MinorDemonVox]
   id: MinorDemonVoxControlled
   suffix: Controlled
 
 - type: entity
-  name: demon
+  name: man's best friend
   parent: [BaseDemon, InventoryBase]
   id: MinorDemonVulp
   description: It came from hell.
@@ -444,7 +363,7 @@
   - type: ComplexInteraction
 
 - type: entity
-  parent: [MinorDemonVulp, ControlledDemon]
+  parent: [ControlledDemon, MinorDemonVulp]
   id: MinorDemonVulpControlled
   suffix: Controlled
 
@@ -482,88 +401,303 @@
             min: 1
             max: 3
 
+- type: entity
+  parent: [ControlledDemon, MediumDemonChad]
+  id: MediumDemonChadControlled
+  suffix: Controlled
+
+- type: entity
+  name: Pun Pun # todo let him talk to deadchat
+  parent: BaseDemon
+  id: MediumDemonGhost
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Cold: 10
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 1
+            max: 2
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
+
+- type: entity
+  parent: [ControlledDemon, MediumDemonGhost]
+  id: MinorDemonGhostControlled
+  suffix: Controlled
+
+- type: entity
+  name: hellmet
+  parent: BaseDemon
+  id: MediumDemonHamlet
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/hamlet.rsi
+    drawdepth: SmallMobs
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 10
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 1
+            max: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 5.5
+  - type: VentCrawler
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12 # Goob edit
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: FaxableObject
+    insertingState: inserting_hamster
+  - type: FaxSlip
+    slipChance: 0.3
+
+- type: entity
+  parent: [ControlledDemon, MediumDemonHamlet]
+  id: MinorDemonHamletControlled
+  suffix: Controlled
+
 # Major demons
 
 - type: entity
-  name: demon
+  name: angel
   parent: BaseDemon
-  id: MajorDemon64Fat
-  description: It came from hell.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
-  - type: MeleeWeapon
-    range: 1
-    soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
-    damage:
-      types:
-        Blunt: 20
-        Structural: 50
-    altDisarm: true
-    canWideSwing: false
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:GibBehavior
-        recursive: false
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          BaseDemonSoulFragment:
-            min: 3
-            max: 5
-
-- type: entity
-  name: demon
-  parent: BaseDemon
-  id: MajorDemon64Buff
-  description: It came from hell.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
-  - type: MeleeWeapon
-    range: 1
-    soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
-    damage:
-      types:
-        Blunt: 20
-        Structural: 50
-    altDisarm: true
-    canWideSwing: false
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:GibBehavior
-        recursive: false
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          BaseDemonSoulFragment:
-            min: 3
-            max: 5
-
-- type: entity
-  name: demon
-  parent: BaseDemon
-  id: MajorDemon64
+  id: MediumDemon64Fat
   description: It came from hell.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
   - type: MeleeWeapon
-    range: 1
+    range: 2
     soundHit:
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 20
-        Structural: 50
+        Blunt: 15
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 1
+            max: 3
+  - type: ActionGrant
+    actions:
+      - ActionDemonRift
+
+- type: entity
+  parent: [ControlledDemon, MediumDemon64Fat]
+  id: MediumDemon64FatControlled
+  suffix: Controlled
+
+- type: entity
+  name: angel
+  parent: BaseDemon
+  id: MediumDemon64Buff
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 15
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 1
+            max: 3
+  - type: ActionGrant
+    actions:
+      - ActionDemonRift
+
+- type: entity
+  parent: [ControlledDemon, MediumDemon64Buff]
+  id: MediumDemon64BuffControlled
+  suffix: Controlled
+
+- type: entity
+  name: angel
+  parent: BaseDemon
+  id: MediumDemon64
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
+  - type: MeleeWeapon
+    range: 2
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 15
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 1
+            max: 3
+  - type: ActionGrant
+    actions:
+      - ActionDemonRift
+
+- type: entity
+  parent: [ControlledDemon, MediumDemon64]
+  id: MediumDemon64Controlled
+  suffix: Controlled
+
+- type: entity
+  name: bosche
+  parent: BaseDemon
+  id: MajorDemonBosche
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/bosche.rsi
+  - type: MeleeWeapon
+    range: 2.5
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 1
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5
+  - type: Devourer
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidProfile
+    stomachStorageWhitelist:
+      components:
+      - MobState
+      - Item
+    chemical: Ichor
+    healRate: 7.5
+    whitelist:
+      components:
+      - MobState
+      - Door
+      - Item
+      tags:
+      - Wall
+
+- type: entity
+  parent: [ControlledDemon, MajorDemonBosche]
+  id: MajorDemonBoscheControlled
+  suffix: Controlled
+
+- type: entity
+  name: feverbird
+  parent: BaseDemon
+  id: MajorDemonFeverbird
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/feverbird.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      shader: unshaded
+  - type: MeleeWeapon
+    range: 2.5
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 5
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -579,3 +713,640 @@
           BaseDemonSoulFragment:
             min: 3
             max: 5
+  - type: MovementIgnoreGravity
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 13
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: MindbreakerToxin
+        Quantity: 1
+      - ReagentId: Tazinide
+        Quantity: 5
+      - ReagentId: Fentanyl
+        Quantity: 1
+      - ReagentId: Happiness
+        Quantity: 10
+  - type: MeleeChemicalInjector
+    transferAmount: 17
+    solution: melee
+
+- type: entity
+  parent: [ControlledDemon, MajorDemonFeverbird]
+  id: MajorDemonFeverbirdControlled
+  suffix: Controlled
+
+- type: entity
+  name: hanged
+  parent: BaseDemon
+  id: MajorDemonHanged
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/hanger.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Airloss: 5
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5
+  - type: Hands
+    hands:
+      hand_right:
+        location: Right
+      hand_left:
+        location: Left
+    sortedHands:
+    - hand_right
+    - hand_left
+  - type: Puller
+    needsHands: false
+    stageChangeCooldown: 0.1
+    softGrabSpeedModifier: 1
+    hardGrabSpeedModifier: 1
+    chokeGrabSpeedModifier: 1
+    suffocateGrabStaminaDamage: 1000
+    grabThrowDamageModifier: 4
+
+- type: entity
+  parent: [ControlledDemon, MajorDemonHanged]
+  id: MajorDemonHangedControlled
+  suffix: Controlled
+
+- type: entity
+  name: hiver
+  parent: BaseDemon
+  id: MajorDemonHiver
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/hiver.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 15
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5
+  - type: TimedSpawner
+    prototypes:
+    - BeeLaughterDemon
+    intervalSeconds: 3
+    minimumEntitiesSpawned: 5
+    maximumEntitiesSpawned: 10
+
+- type: entity
+  parent: [ControlledDemon, MajorDemonHiver]
+  id: MajorDemonHiverControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon bee
+  parent: BeeLaughter
+  id: BeeLaughterDemon
+  description: It came from hell.
+  components:
+  - type: FadingTimedDespawn
+    lifetime: 5
+    fadeOutTime: 5
+
+- type: entity
+  name: steamer
+  parent: BaseDemon
+  id: MajorDemonSteamer
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/steamer.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Burn: 15
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5
+  - type: GunRequiresWield
+  - type: Gun
+    minAngle: 0
+    maxAngle: 0
+    fireRate: 15
+    burstFireRate: 15
+    burstCooldown: 1
+    shotsPerBurst: 5
+    projectileSpeed: 20
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/_Trauma/Revs/flamethrower.ogg
+  - type: BatteryAmmoProvider
+    proto: FlameThrowerBullet
+    fireCost: 1
+    examinable: false
+  - type: BatterySelfRecharger
+    autoRechargeRate: 5
+  - type: Battery
+    maxCharge: 150
+    startingCharge: 150
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+
+- type: entity
+  parent: [ControlledDemon, MajorDemonSteamer]
+  id: MajorDemonSteamerControlled
+  suffix: Controlled
+
+# Demon spawners
+
+- type: entity
+  abstract: true
+  id: BaseDemonSummoningRuneHostile
+  name: summoning circle
+  description: A demon could be here any second...
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Animateable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Transform
+    anchored: true
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: TimedDespawn
+    lifetime: 60
+
+- type: entity
+  abstract: true
+  parent: BaseDemonSummoningRuneHostile
+  id: BaseDemonSummoningRuneFamilliar
+  components:
+  - type: GhostRole
+    name: ghost-role-information-demon-tame-name
+    description: ghost-role-information-demon-tame-desc
+    rules: ghost-role-information-familliar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
+
+- type: entity
+  id: BaseMinorSummoningRune
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/minor.rsi
+    state: icon
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+
+- type: entity
+  id: BaseMediumSummoningRune
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/medium.rsi
+    state: icon
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+
+- type: entity
+  id: BaseMajorSummoningRune
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/major.rsi
+    state: icon
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 90
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+
+# Minor
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMinorSummoningRune]
+  id: SummoningRuneGuy
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonGuy
+  - type: SpawnOnDespawn
+    prototype: MinorDemonGuy
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMinorSummoningRune]
+  id: SummoningRuneGuyTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonGuyControlled
+  - type: SpawnOnDespawn
+    prototype: MinorDemonGuyControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMinorSummoningRune]
+  id: SummoningRuneIncel
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonIncel
+  - type: SpawnOnDespawn
+    prototype: MinorDemonIncel
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMinorSummoningRune]
+  id: SummoningRuneIncelTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonIncelControlled
+  - type: SpawnOnDespawn
+    prototype: MinorDemonIncelControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMinorSummoningRune]
+  id: SummoningRuneUrist
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonUrist
+  - type: SpawnOnDespawn
+    prototype: MinorDemonUrist
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMinorSummoningRune]
+  id: SummoningRuneUristTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonUristControlled
+  - type: SpawnOnDespawn
+    prototype: MinorDemonUristControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMinorSummoningRune]
+  id: SummoningRuneIan
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonIan
+  - type: SpawnOnDespawn
+    prototype: MinorDemonIan
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMinorSummoningRune]
+  id: SummoningRuneIanTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonIanControlled
+  - type: SpawnOnDespawn
+    prototype: MinorDemonIanControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMinorSummoningRune]
+  id: SummoningRuneVox
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonVox
+  - type: SpawnOnDespawn
+    prototype: MinorDemonVox
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMinorSummoningRune]
+  id: SummoningRuneVoxTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonVoxControlled
+  - type: SpawnOnDespawn
+    prototype: MinorDemonVoxControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMinorSummoningRune]
+  id: SummoningRuneVulp
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonVulp
+  - type: SpawnOnDespawn
+    prototype: MinorDemonVulp
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMinorSummoningRune]
+  id: SummoningRuneVulpTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonVulpControlled
+  - type: SpawnOnDespawn
+    prototype: MinorDemonVulpControlled
+
+
+# Medium
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMediumSummoningRune]
+  id: SummoningRuneChad
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemonChad
+  - type: SpawnOnDespawn
+    prototype: MediumDemonChad
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMediumSummoningRune]
+  id: SummoningRuneChadTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemonChadControlled
+  - type: SpawnOnDespawn
+    prototype: MediumDemonChadControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMediumSummoningRune]
+  id: SummoningRuneGhost
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemonGhost
+  - type: SpawnOnDespawn
+    prototype: MediumDemonGhost
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMediumSummoningRune]
+  id: SummoningRuneGhostTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonGhostControlled
+  - type: SpawnOnDespawn
+    prototype: MediumDemonGhostControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMediumSummoningRune]
+  id: SummoningRuneHamlet
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemonHamlet
+  - type: SpawnOnDespawn
+    prototype: MediumDemonHamlet
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMediumSummoningRune]
+  id: SummoningRuneHamletTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MinorDemonHamletControlled
+  - type: SpawnOnDespawn
+    prototype: MediumDemonHamletControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMediumSummoningRune]
+  id: SummoningRuneDemon64Fat
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemon64Fat
+  - type: SpawnOnDespawn
+    prototype: MediumDemon64Fat
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMediumSummoningRune]
+  id: SummoningRuneDemon64FatTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemon64FatControlled
+  - type: SpawnOnDespawn
+    prototype: MediumDemon64FatControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMediumSummoningRune]
+  id: SummoningRuneDemon64Buff
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemon64Buff
+  - type: SpawnOnDespawn
+    prototype: MediumDemon64Buff
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMediumSummoningRune]
+  id: SummoningRuneDemon64BuffTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemon64BuffControlled
+  - type: SpawnOnDespawn
+    prototype: MediumDemon64BuffControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMediumSummoningRune]
+  id: SummoningRuneDemon64
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemon64
+  - type: SpawnOnDespawn
+    prototype: MediumDemon64
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMediumSummoningRune]
+  id: SummoningRuneDemon64Tame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MediumDemon64Controlled
+  - type: SpawnOnDespawn
+    prototype: MediumDemon64Controlled
+
+# Major
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMajorSummoningRune]
+  id: SummoningRuneBosche
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonBosche
+  - type: SpawnOnDespawn
+    prototype: MajorDemonBosche
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMajorSummoningRune]
+  id: SummoningRuneBoscheTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonBoscheControlled
+  - type: SpawnOnDespawn
+    prototype: MajorDemonBoscheControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMajorSummoningRune]
+  id: SummoningRuneFeverbird
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonFeverbird
+  - type: SpawnOnDespawn
+    prototype: MajorDemonFeverbird
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMajorSummoningRune]
+  id: SummoningRuneFeverbirdTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonFeverbirdControlled
+  - type: SpawnOnDespawn
+    prototype: MajorDemonFeverbirdControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMajorSummoningRune]
+  id: SummoningRuneHanged
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonHanged
+  - type: SpawnOnDespawn
+    prototype: MajorDemonHanged
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMajorSummoningRune]
+  id: SummoningRuneHangedTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonHangedControlled
+  - type: SpawnOnDespawn
+    prototype: MajorDemonHangedControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMajorSummoningRune]
+  id: SummoningRuneHiver
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonHiver
+  - type: SpawnOnDespawn
+    prototype: MajorDemonHiver
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMajorSummoningRune]
+  id: SummoningRuneHiverTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonHiverControlled
+  - type: SpawnOnDespawn
+    prototype: MajorDemonHiverControlled
+
+- type: entity
+  parent: [BaseDemonSummoningRuneHostile, BaseMajorSummoningRune]
+  id: SummoningRuneSteamer
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonSteamer
+  - type: SpawnOnDespawn
+    prototype: MajorDemonSteamer
+
+- type: entity
+  parent: [BaseDemonSummoningRuneFamilliar, BaseMajorSummoningRune]
+  id: SummoningRuneSteamerTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonSteamerControlled
+  - type: SpawnOnDespawn
+    prototype: MajorDemonSteamerControlled
+
+
+
+

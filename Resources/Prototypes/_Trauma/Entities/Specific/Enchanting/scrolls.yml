@@ -377,6 +377,7 @@
     enchants:
     - CurseUnremovableWeapon
     - CurseUnremovableArmor
+    - CurseUnremovableOther
   - type: Construction
     graph: EnchantedScroll
     node: EnchantingScrollUnremovable

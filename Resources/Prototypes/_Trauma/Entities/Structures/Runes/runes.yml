@@ -118,6 +118,10 @@
   - type: Construction
     graph: MinorSummoning
     node: finish
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomMinorSummoningRune
 
 - type: entity
   id: MinorRuneCarved
@@ -159,6 +163,10 @@
   - type: Construction
     graph: MediumSummoning
     node: finish
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomMediumSummoningRune
 
 - type: entity
   id: MediumRuneCarved
@@ -200,6 +208,10 @@
   - type: Construction
     graph: MajorSummoning
     node: finish
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomMajorSummoningRune
 
 - type: entity
   id: MajorRuneCarved

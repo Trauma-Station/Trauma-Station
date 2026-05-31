@@ -96,6 +96,11 @@
   id: MobBee
   description: Nice to have, but you can't build a civilization on a foundation of honey alone.
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 1
+    damagePenalty: 0.95
+  # </Trauma>
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 3

@@ -352,3 +352,35 @@
 
   - node: EnchantingScrollVanishing
     entity: EnchantingScrollVanishing
+
+- type: constructionGraph
+  id: BloodVial
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: empty
+      steps:
+      - material: Steel
+        amount: 1
+      - material: Glass
+        amount: 2
+        doAfter: 1
+
+  - node: empty
+    entity: BloodVial
+    edges:
+    - to: finish
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: Blood
+        quantity: 100
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: finish
+    edges: BloodVialFull
