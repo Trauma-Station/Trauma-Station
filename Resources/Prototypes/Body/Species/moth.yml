@@ -172,7 +172,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: InsectBlood
-        Quantity: 600
+        Quantity: 300 # Trauma, was 600
   #- type: DamageVisuals # Shitmed
   #  damageOverlayGroups:
   #    Brute:

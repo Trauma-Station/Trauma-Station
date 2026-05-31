@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantFocus
+  name: Focus
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - Clothing
+      - Armor
+  - type: ComponentsEnchant
+    added:
+    - type: UnholyItem
+    - type: HereticMagicItem

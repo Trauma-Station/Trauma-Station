@@ -1,0 +1,34 @@
+- type: entity
+  name: blood vial
+  parent: [DrinkBaseMaterialGlass, DrinkBaseCup, DrinkVisualsFillOverlay, BaseMagicalContraband]
+  description: A vial embuded with black magic, can convert blood and demonic souls into magic inks.
+  id: BloodVial
+  components:
+  - type: Spillable
+    solution: drink
+  - type: StaticPrice
+    price: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 250
+      Steel: 250
+  - type: Solution
+    solution:
+      maxVol: 100
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+    layers:
+    - state: icon-empty
+      map: [ "enum.SolutionContainerLayers.Base" ]
+    - state: fill-1
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+    - state: icon-front
+      map: [ "enum.SolutionContainerLayers.Overlay" ]
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: fill-
+    InHandsMaxFillLevels: 3

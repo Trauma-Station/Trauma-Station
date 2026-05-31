@@ -250,7 +250,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: AmmoniaBlood
-        Quantity: 600
+        Quantity: 300 # Trauma, was 600
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw
