@@ -123,7 +123,7 @@ public sealed partial class EnchanterSystem : EntitySystem
         }
 
         _audio.PlayPvs(ent.Comp.Sound, item);
-        _popup.PopupEntity(Loc.GetString("enchanter-enchanted", ("item", item)), item, PopupType.Large);
+        _popup.PopupPredicted(Loc.GetString("enchanter-enchanted", ("item", item)), item, user, PopupType.Large);
 
         _adminLogger.Add(LogType.EntityDelete, LogImpact.Low, $"{ToPrettyString(user):player} enchanted {ToPrettyString(item):item} using {ToPrettyString(ent):enchanter}");
 
