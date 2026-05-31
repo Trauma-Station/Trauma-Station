@@ -446,7 +446,7 @@
     emptySpriteName: punctpen_empty
   - type: Solution
     solution:
-      maxVol: 15 # Trauma - you gotta set the maxVol if you change the amount of chemicals
+      maxVol: 17 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Puncturase
         Quantity: 12
