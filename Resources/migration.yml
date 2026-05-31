@@ -9,12 +9,17 @@
 # Table: null
 
 # <Trauma> - too lazy to port debugoks multi migration thing
-# 2026-3-2026
-ClosetMaintenanceFilledRandom: RandomMaintsCloset
-
-# 2026-01-07
-GunSafeDisabler: GunSafePhaser
-WeaponDisabler: WeaponLaserSidearm
+# 2025-10-19
+LockerBlueshieldOfficerFilled: null
+DresserBlueshieldOfficerFilled: null
+HolopadCommandBSO: null
+UniqueLockerBlueshieldOfficerFilled: null
+AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
+AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
+SpawnMobHumanBSOBase: null
+SpawnMobHumanBSOModSuit: null
+SpawnMobHumanBSOSuit: null
+SpawnPointBlueshieldOfficer: null
 
 # 2025-10-30
 DVSmartFridgeMedical: SmartFridgeMedical
@@ -47,6 +52,10 @@ PosterLegitHelio: null
 
 # 2026-01-05 Actually use the ToiletCisternLoot table.
 ToiletEmpty: ToiletFilled
+
+# 2026-01-07
+GunSafeDisabler: GunSafePhaser
+WeaponDisabler: WeaponLaserSidearm
 
 # 2026-01-08 back to wizden mail
 MailTeleporter: CargoMailTeleporter
@@ -114,6 +123,9 @@ MedicalBiofabMachineBoard: null
 # 2026-03-13 necrosol was removed
 NecrosolChemistryBottle: ArcryoxChemistryBottle
 
+# 2026-03-26
+ClosetMaintenanceFilledRandom: RandomMaintsCloset
+
 # 2026-03-28 blockers being mapped is anti fun
 DisposalBlocker: DisposalPipe
 
@@ -128,6 +140,9 @@ PanicButton: null
 
 # 2026-04-29 Riot Launcher to trauma version
 GunSafeLauncherNonLethal: GunSafeRiotLauncher
+
+# 2026-05-31
+BSOManual: null
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -1065,19 +1080,6 @@ WarpPointBombing: null
 ToyGriffin: ToyFigurineGriffin
 ToyOwlman: ToyFigurineOwlman
 ToySkeleton: ToyFigurineSkeleton
-
-# Trauma - 2025-10-19
-LockerBlueshieldOfficerFilled: null
-DresserBlueshieldOfficerFilled: null
-HolopadCommandBSO: null
-UniqueLockerBlueshieldOfficerFilled: null
-AirlockBlueshieldOfficerCommandLocked: AirlockCentralCommandLocked
-AirlockBlueshieldOfficerCommandGlassLocked: AirlockCentralCommandGlassLocked
-SpawnMobHumanBSOBase: null
-SpawnMobHumanBSOModSuit: null
-SpawnMobHumanBSOSuit: null
-SpawnPointBlueshieldOfficer: null
-BSOManual: DragonKungFuManual
 
 # 2025-10-28
 DrinkKiraSpecial: DrinkOrangeLimeSodaGlass

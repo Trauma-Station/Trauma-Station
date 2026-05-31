@@ -20711,22 +20711,6 @@ entities:
       parent: 2
     - type: Physics
       canCollide: False
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]50%[/color].
-          priority: 0
-          component: Armor
-        title: null
 - proto: ClothingBeltUtilityFilled
   entities:
   - uid: 3268

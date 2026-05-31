@@ -1,7 +1,7 @@
 name: "Labels: Approved"
 
 on:
-  pull_request_review:
+  pull_request_target:
     types: [submitted]
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       with:
         username: ${{ github.actor }}
         team: "Maintainers"
-        GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
       uses: actions-ecosystem/action-add-labels@v1
       with:

@@ -20,6 +20,9 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
 
     private void OnHit(Entity<EffectsOnMeleeHitComponent> ent, ref MeleeHitEvent args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         if (args.HitEntities.Count == 0)
             return;
 
