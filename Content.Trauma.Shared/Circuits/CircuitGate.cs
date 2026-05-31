@@ -115,7 +115,8 @@ public abstract partial class CircuitGate
     public List<CircuitIndex> LinkedOutputs = new();
 
     /// <summary>
-    /// Called after creating a new gate.
+    /// Set up a valid output value for this gate.
+    /// Called after creating a new gate or importing a circuit.
     /// </summary>
     public void Initialize()
     {
@@ -411,6 +412,44 @@ public sealed partial class CircuitStrCompareGate : CircuitGate
                 Mode = mode
             });
         }
+    }
+}
+
+/// <summary>
+/// Unary gate that makes a string lowercase.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class CircuitStrLowerGate : CircuitGate
+{
+    public override string Name => "LOWER";
+    public override string Category => "Strings";
+    public override string Desc => "Makes a string lowercase";
+    public override GateValue OutputType => GateValue.String;
+    public override int InputCount => 1;
+
+    public override void Update(CircuitComponent comp)
+    {
+        var s = comp.GetString(Inputs[0]);
+        SetOutput(s.ToLower());
+    }
+}
+
+/// <summary>
+/// Unary gate that makes a string uppercase.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class CircuitStrUpperGate : CircuitGate
+{
+    public override string Name => "UPPER";
+    public override string Category => "Strings";
+    public override string Desc => "Makes a string uppercase";
+    public override GateValue OutputType => GateValue.String;
+    public override int InputCount => 1;
+
+    public override void Update(CircuitComponent comp)
+    {
+        var s = comp.GetString(Inputs[0]);
+        SetOutput(s.ToUpper());
     }
 }
 

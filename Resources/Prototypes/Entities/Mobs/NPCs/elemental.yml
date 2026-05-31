@@ -403,6 +403,10 @@
   - type: EntityTableSpawner
     table: !type:GroupSelector
       children:
+      # <Trauma>
+      - id: ReagentSlimeCocaine
+      - id: ReagentSlimeCrackCocaine
+      # </Trauma>
       - id: ReagentSlime
       - id: ReagentSlimeBeer
       - id: ReagentSlimePax

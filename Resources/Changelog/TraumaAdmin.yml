@@ -200,3 +200,10 @@ Entries:
   id: 26
   time: '2026-05-27T19:40:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2839
+- author: DrSmugLeaf, SolStar2, Luminal
+  changes:
+  - type: Add
+    message: Added mentor help adminflag.
+  id: 27
+  time: '2026-05-31T08:45:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1718

@@ -1,26 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# This is for random skins
-- type: entity
-  id: MobBingleRandom
-  parent: MarkerBase
-  name: bingle
-  suffix: Random
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Mobs/Bingle/bingle.rsi
-    state: alive
-  - type: EntityTableSpawner
-    table: !type:GroupSelector
-      children:
-      - id: MobBingleHunk
-        weight: 1
-      - id: MobBingleSlavering
-        weight: 1
-      - id: MobBingleBoney
-        weight: 1
-
-
 # Base bingle
 - type: entity
   name: bingle
@@ -106,6 +85,7 @@
     speechVerb: Bingle
     speechSounds: Slime
   - type: LanguageSpeaker
+    currentLanguage: Bingle
     speaks:
     - Bingle
     understands:
