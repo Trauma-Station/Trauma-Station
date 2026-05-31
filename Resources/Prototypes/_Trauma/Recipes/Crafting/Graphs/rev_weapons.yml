@@ -70,6 +70,32 @@
     entity: RevTorch
 
 - type: constructionGraph
+  id: RevMaul
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 2
+  - node: finished
+    entity: RevMaul
+
+- type: constructionGraph
+  id: RevKunai
+  graph:
+  - node: start
+    edges:
+    - to: finished
+      steps:
+      - material: WoodPlank
+        amount: 1
+        doAfter: 2
+  - node: finished
+    entity: RevKunai
+
+- type: constructionGraph
   id: RevGuns
   start: start
   graph:
@@ -296,6 +322,48 @@
         doAfter: 0.5
       - tool: Slicing
         doAfter: 1
+    - to: Proletariat
+      steps:
+      - material: Steel
+        amount: 10
+        doAfter: 5
+      - tool: Slicing
+        doAfter: 1
+      - material: RevBolt
+        amount: 2
+        doAfter: 1
+      - material: RevNut
+        amount: 2
+        doAfter: 1
+      - tool: Hammering
+        doAfter: 0.5
+      - material: RevGunParts
+        amount: 5
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tag: Pipe
+        name: construction-graph-tag-pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+      - tag: ModularReceiver
+        name: construction-graph-tag-modular-receiver
+        icon:
+          sprite: Objects/Misc/modular_receiver.rsi
+          state: icon
+      - material: RevBallBearings
+        amount: 3
+        doAfter: 1
+      - tool: Anchoring
+        doAfter: 1
+      - material: WoodPlank
+        amount: 5
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
 
   - node: liberator
     entity: WeaponPistolLiberatorEmpty
@@ -307,6 +375,8 @@
     entity: ClothingBackpackFlamethrower # Temp
   - node: Devastator
     entity: WeaponShotgunDevastatorEmpty
+  - node: Proletariat
+    entity: WeaponLightMachineGunProletariatEmpty
 
 - type: constructionGraph
   id: RevIED
