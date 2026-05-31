@@ -1,0 +1,23 @@
+- type: entity
+  id: EnchantingRune
+  parent: BaseStructure
+  name: enchantment rune
+  description: A rune used for enchanting items.
+  abstract: true
+  components:
+  - type: Anchorable
+  - type: Transform
+  - type: Damageable
+  - type: PlaceableSurface
+  - type: Clickable
+  - type: EnchantingTable
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/enchanting.rsi
+    state: icon
+    snapCardinals: true
+  - type: Icon
+    sprite: _Trauma/Structures/Runes/enchanting.rsi
+    state: icon
+  # - type: Construction
+  #   graph: AltarsGraph
+  #   node: NanotrasenAltarNode
