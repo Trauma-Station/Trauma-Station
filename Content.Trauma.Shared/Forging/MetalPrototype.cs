@@ -82,16 +82,29 @@ public sealed partial class MetalPrototype : IPrototype
     public FixedPoint2 Durability = 1;
 
     /// <summary>
-    /// Modifier for melee weapon speed.
+    /// Modifier for tool and melee weapon speed.
     /// </summary>
     [DataField]
     public float Speed = 1f;
+
+    /// <summary>
+    /// Price of a single product per point of work and ingot used.
+    /// </summary>
+    [DataField]
+    public double Price = 1.0;
 
     /// <summary>
     /// Modifiers for damage done by melee weapons and thrown items.
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> Damage = new();
+
+    /// <summary>
+    /// Bonus damage modifiers added to melee weapons and thrown items.
+    /// The final damage value added is the modifier multiplied by the item's total default damage, before <see cref="Damage"/> is applied.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DamageBonus = new();
 
     /// <summary>
     /// Overheated brittle item to spawn when overheating it too much.
