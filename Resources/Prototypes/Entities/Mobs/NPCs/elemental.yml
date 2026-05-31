@@ -416,8 +416,10 @@
       - id: ReagentSlimeNorepinephricAcid
       - id: ReagentSlimeEphedrine
       - id: ReagentSlimeRobustHarvest
-      - id: ReagentSlimeCocaine # Trauma - To Make them spawnable
-      - id: ReagentSlimeCrackCocaine # Trauma - To Make them spawnable
+    # <Trauma>
+      - id: ReagentSlimeCocaine
+      - id: ReagentSlimeCrackCocaine 
+    # </Trauma>
 
 - type: entity
   id: ReagentSlimeBeer
