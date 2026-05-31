@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseEnchant
+  parent: BaseEnchant # Broken rn
   id: CurseBabel
   name: Curse of Babel
   components:

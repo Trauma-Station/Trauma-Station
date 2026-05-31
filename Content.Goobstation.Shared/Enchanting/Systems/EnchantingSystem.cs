@@ -136,13 +136,13 @@ public sealed partial class EnchantingSystem : EntitySystem
         if (!_enchantedQuery.Resolve(ref item, false))
             return true;
 
-        // can't have incompatible enchants
-        var comp = item.Comp!;
-        foreach (var incompatible in data.Incompatible)
-        {
-            if (FindEnchant(comp, incompatible) != null)
-                return false;
-        }
+        // // can't have incompatible enchants
+        // var comp = item.Comp!;
+        // foreach (var incompatible in data.Incompatible)
+        // {
+        //     if (FindEnchant(comp, incompatible) != null)
+        //         return false;
+        // }
 
         // enchant is at max level
         if (FindEnchant(comp, id) is {} enchant)

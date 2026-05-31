@@ -6,8 +6,18 @@
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/inks.rsi
   - type: Item
-    size: Small
+    size: Tiny
     sprite: _Trauma/Objects/Enchanting/inks.rsi
+
+- type: entity
+  categories: [HideSpawnMenu]
+  parent: MagicInkNocimat
+  id: MagicInkPlaceholder
+  name: any magic ink
+  components:
+  - type: Tag
+    tags:
+    - Placeholder
 
 - type: entity
   parent: BaseInk
@@ -142,7 +152,7 @@
 - type: entity
   parent: BaseInk
   id: MagicInkNocimat
-  name: Nocimat
+  name: nocimat
   components:
   - type: Sprite
     state: nocimat

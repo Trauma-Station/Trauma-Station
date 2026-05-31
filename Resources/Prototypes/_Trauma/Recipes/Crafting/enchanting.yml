@@ -1,0 +1,9 @@
+- type: construction
+  id: EnchantScroll
+  graph: EnchantedScroll
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Item
+  theory:
+    MagicalLiteracyKnowledge: 1
+  useQuality: false

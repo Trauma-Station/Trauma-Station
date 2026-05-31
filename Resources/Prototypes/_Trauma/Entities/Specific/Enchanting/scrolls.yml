@@ -17,6 +17,15 @@
     size: Small
 
 - type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollCraftingPlaceholder
+  categories: [HideSpawnMenu]
+  components:
+  - type: Construction
+    graph: EnchantedScroll
+    node: finish
+
+- type: entity
   parent: BaseItem
   id: EnchantingScrollEmpty
   description: An empty scroll waiting to be filled with an enchantment.
@@ -31,6 +40,9 @@
   - type: Tag
     tags:
     - Scroll
+  - type: Construction
+    graph: EnchantedScroll
+    node: empty
 
 - type: entity
   parent: BaseEnchantingScroll
@@ -41,3 +53,368 @@
     maxLevel: 1
     enchants:
     - EnchantSharpness
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollSharpness
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollFlames
+  name: scroll of flames
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantFireAspect
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollFlames
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollFortune
+  name: scroll of riches
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantFortune
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollFortune
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollInsulated
+  name: scroll of electric resistance
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantInsulated
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollInsulated
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollKnockback
+  name: scroll of force
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantKnockback
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollKnockback
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollLavaforged
+  name: scroll of lava swimming
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantLavaforged
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollLavaforged
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollProtection
+  name: scroll of physical resistance
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantProtection
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollProtection
+
+# - type: entity
+#   parent: BaseEnchantingScroll
+#   id: EnchantingScrollExplosiveProtection
+#   name: scroll of explosive resistance
+#   components:
+#   - type: Enchanter
+#     maxLevel: 1
+#     enchants:
+#     - EnchantProtBlast
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollFireProtection
+  name: scroll of fire resistance
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantProtFire
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollFireProtection
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollSlippery
+  name: scroll of hatred
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantSlippery
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollSlippery
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollThorns
+  name: scroll of the sharpened flesh
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantThorns
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollThorns
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollUnbreaking
+  name: scroll of steel
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantUnbreaking
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollUnbreaking
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollUnslippable
+  name: scroll of the deft runner
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantUnslippable
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollUnslippable
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollFlameCurse
+  name: scroll of seared flesh
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseBurning
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollFlameCurse
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollClumsy
+  name: scroll of the jester
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseClumsy
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollClumsy
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollSlow
+  name: scroll of chains
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseSlowing
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollSlow
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollBabel
+  name: scroll of the tower # broken rn
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseBabel
+  # - type: Construction
+  #   graph: EnchantedScroll
+  #   node: empty
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollThunder
+  name: scroll of thunder
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantElecetrified
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollThunder
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollFocus
+  name: scroll of concentration
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantFocus
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollFocus
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollGravity
+  name: scroll of the singularity
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseGravity
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollGravity
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollinvisibility
+  name: scroll of the blinded eye
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseInvisibility
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollinvisibility
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollLaser
+  name: scroll of light
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantLaser
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollLaser
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollMagicProtection
+  name: scroll of magic resistance
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantMagicProtection
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollMagicProtection
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollMagnetic
+  name: scroll of magnets
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantMagnetized
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollMagnetic
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollPoison
+  name: scroll of snakes
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantPoison
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollPoison
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollRotting
+  name: scroll of maggots
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantRotten
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollRotting
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollSentience
+  name: scroll of mind
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - EnchantMagicSentience
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollSentience
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollUnremovable
+  name: scroll of flesh knitting
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseUnremovableWeapon
+    - CurseUnremovableArmor
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollUnremovable
+
+- type: entity
+  parent: BaseEnchantingScroll
+  id: EnchantingScrollVanishing
+  name: scroll of decay
+  components:
+  - type: Enchanter
+    maxLevel: 1
+    enchants:
+    - CurseVanishing
+  - type: Construction
+    graph: EnchantedScroll
+    node: EnchantingScrollVanishing

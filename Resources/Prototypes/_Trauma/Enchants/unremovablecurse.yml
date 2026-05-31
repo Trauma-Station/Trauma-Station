@@ -8,10 +8,6 @@
     whitelist:
       components:
       - MeleeWeapon
-    blacklist:
-      components:
-      - Clothing
-      - Armor
   - type: ComponentsEnchant
     added:
     - type: Unremoveable
@@ -23,9 +19,6 @@
   components:
   - type: Enchant
     maxLevel: 1
-    blacklist:
-      components:
-      - MeleeWeapon
     whitelist:
       components:
       - Clothing

@@ -56,3 +56,6 @@ construction-graph-tag-part-metal-container = any metal container
 
 # Security
 construction-graph-tag-stun-baton = stun baton
+
+# Demonology
+construction-graph-tag-any-ink = any magic ink
