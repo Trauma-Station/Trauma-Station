@@ -26,7 +26,7 @@
   ### Help intent
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHelp" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="help"/>
   </Box>
 
   To perform help, simply press [bold] Left Mouse Button [/bold] on someone with [color=Red] Harm Mode [/color] turned OFF.
@@ -38,7 +38,7 @@
   ### Harm intent
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
   To perform harm, press [bold] Left Mouse Button [/bold] with [color=Red] Harm Mode [/color] turned ON.
@@ -50,7 +50,7 @@
   ### Disarm intent
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
   </Box>
 
   To perform disarm, press [bold] Right Mouse Button [/bold] with [color=Red] Harm Mode [/color] turned ON.
@@ -63,7 +63,7 @@
   ### Grab intent
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="grab"/>
   </Box>
 
   To perform grab, press [bold] Left Mouse Button [/bold] on someone while holding [bold] CTRL [/bold] with [color=Red] Harm Mode [/color] turned ON.
