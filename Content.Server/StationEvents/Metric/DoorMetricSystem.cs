@@ -1,4 +1,4 @@
-﻿using Content.Server.Power.Components;
+using Content.Server.Power.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Metric.Components;
 using Content.Shared.Doors.Components;

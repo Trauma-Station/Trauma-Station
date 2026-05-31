@@ -1,4 +1,4 @@
-﻿using Content.Server.StationEvents.Metric.Components;
+using Content.Server.StationEvents.Metric.Components;
 using Content.Server.Storage.Components;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.FixedPoint;

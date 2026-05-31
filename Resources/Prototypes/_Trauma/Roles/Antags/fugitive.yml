@@ -22,7 +22,7 @@
     - BoxSurvivalSlotsSecurity
     - MagazinePistol
     - ForensicScanner
-    - MedkitCombat
+    - MedkitCombatFilled
 
 - type: antagSpecifier
   id: FugitiveHunter

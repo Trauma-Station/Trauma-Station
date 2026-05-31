@@ -48,7 +48,7 @@ public sealed partial class StatusEffectsSystem
         RelayEvent((uid, component), ref args);
     }
 
-    private void RelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, T args) where T : class
+    public void RelayStatusEffectEvent<T>(EntityUid uid, StatusEffectContainerComponent component, T args) where T : class // Trauma - made public
     {
         RelayEvent((uid, component), args);
     }

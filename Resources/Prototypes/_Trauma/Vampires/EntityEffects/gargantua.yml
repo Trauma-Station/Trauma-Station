@@ -1,0 +1,95 @@
+# Stomp
+- type: entityEffect
+  id: GargantuaStomp
+  effects:
+  - !type:ModifyKnockdown
+    time: 6
+  - !type:ThrowRandomly
+
+# Charge
+- type: entityEffect
+  id: ChargeMob
+  effects:
+  - !type:ModifyKnockdown
+    time: 12
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 60
+
+# Rejuv Garg
+- type: entityEffect
+  id: VampireRejuvGarg
+  effects:
+  - !type:TakeStaminaDamage
+    amount: -100
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: null
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: null
+    type: Remove
+  - !type:SetStanding
+    force: true
+  - !type:ModifyKnockdown
+    time: null
+    type: Remove
+  - !type:ModifyParalysis
+    time: null
+    type: Remove
+  - !type:HealthChangeBasedOnDamage
+    maximumDamage: -50
+    damage:
+      types:
+        Blunt: -10
+        Piercing: -10
+        Slash: -10
+        Heat: -10
+        Bloodloss: -10
+        Asphyxiation: -10
+        Shock: -10
+        Cold: -10
+        Caustic: -10
+  - !type:AdjustReagentGroup
+    amount: -10
+    group: Toxins
+  - !type:PopupPredicted
+    message: You healed...
+    visualType: MediumCaution
+
+# Gargantua Charge
+- type: entityEffect
+  id: VampireGargCharge
+  effects:
+  # Wall Logic
+  - !type:HealthChange
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        tags:
+        - Wall
+    damage:
+      types:
+        Structural: 500
+  # Body Logic
+  - !type:NestedEffect
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Body
+    proto: ChargeMob
+  # Mech Logic
+  - !type:HealthChange
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Mech
+    damage:
+      types:
+        Blunt: 200
+  # Generic Logic
+  - !type:ThrowRandomly

@@ -1,4 +1,4 @@
-﻿using Content.Server.StationEvents.Metric.Components;
+using Content.Server.StationEvents.Metric.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;

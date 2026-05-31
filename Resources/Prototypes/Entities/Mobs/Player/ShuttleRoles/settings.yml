@@ -432,7 +432,6 @@
   components:
     # <Trauma>
     - type: CurseImmune
-    - type: CanEnchant
     # </Trauma>
     - type: BibleUser
     - type: GhostRole

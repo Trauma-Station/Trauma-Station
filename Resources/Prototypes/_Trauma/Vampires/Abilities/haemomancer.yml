@@ -1,0 +1,74 @@
+- type: vampireAbility
+  id: BaseHaemomancerAbility
+  class: Haemomancer
+  abstract: true
+
+- type: vampireAbility
+  parent: BaseHaemomancerAbility
+  id: VampiricClaws
+  cost: 150
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodSwell
+
+- type: vampireAbility
+  parent: BaseHaemomancerAbility
+  id: BloodTendrilsBarrier
+  cost: 250
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodTendrils
+    - ActionBloodBarrier
+  - !type:PopupPredicted
+    message: You may now paint the floors with tendrils, and use barriers!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseHaemomancerAbility
+  id: BloodPool
+  cost: 400
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodPool
+  - !type:PopupPredicted
+    message: You unlock the ability to turn into a puddle of blood.
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseHaemomancerAbility
+  id: PredatorSenses
+  cost: 600
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionPredatorSenses
+  - !type:PopupPredicted
+    message: Your senses are sharpened...
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseHaemomancerAbility
+  id: BloodEruption
+  cost: 800
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodEruption
+  - !type:PopupPredicted
+    message: You can now cause blood puddles to erupt!
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseHaemomancerAbility
+  id: HaemomancerFullPower
+  cost: 1000
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 7
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionBloodBringersRite

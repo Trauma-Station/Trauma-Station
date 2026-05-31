@@ -1,0 +1,74 @@
+- type: vampireAbility
+  id: BaseUmbraeAbility
+  class: Umbrae
+  abstract: true
+
+- type: vampireAbility
+  parent: BaseUmbraeAbility
+  id: CloakDarkness
+  cost: 150
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionCloakDarkness
+
+- type: vampireAbility
+  parent: BaseUmbraeAbility
+  id: ShadowSnareSoulAnchor
+  cost: 250
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionShadowAnchor
+  - !type:PopupPredicted
+    message: You may now create pylons to fool anyone.
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseUmbraeAbility
+  id: DarkPassage
+  cost: 400
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionDarkPassage
+  - !type:PopupPredicted
+    message: The passage opens, you may now teleport to any turf.
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseUmbraeAbility
+  id: Extinguish
+  cost: 600
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionExtinguish
+  - !type:PopupPredicted
+    message: Your mind gets consumed, you can now extinguish any light nearby.
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseUmbraeAbility
+  id: ShadowBoxing
+  cost: 800
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionShadowBoxing
+  - !type:PopupPredicted
+    message: The shadows have come to help you.
+    visualType: Large
+
+- type: vampireAbility
+  parent: BaseUmbraeAbility
+  id: UmbraeFullPower
+  cost: 1000
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 7
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionEternalDarkness
+    - ActionUmbralSight

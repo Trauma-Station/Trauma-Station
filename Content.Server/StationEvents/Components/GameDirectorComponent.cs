@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 using Content.Server.StationEvents.Metric;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;

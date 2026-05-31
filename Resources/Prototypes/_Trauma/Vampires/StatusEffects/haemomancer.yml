@@ -1,0 +1,41 @@
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: BloodTendrilSlowdown
+  name: blood tendril slowdown
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 0.1
+    walkSpeedModifier: 0.1
+
+- type: entity
+  parent: StatusEffectBase
+  id: BloodPuddleStatusEffect
+  name: blood pool
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 2
+    effects:
+    - !type:SpawnEntity
+      conditions:
+      - !type:AnyNearbyCondition # don't spawn on same tile
+        inverted: true
+        compName: Puddle
+        range: 1
+      predicted: false
+      entity: PuddleBlood
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: BloodBringerRiteStatusEffect
+  name: blood bringer rite
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 2
+    effects:
+    - !type:ConsumeVampireBlood
+      amount: 10
+    - !type:TakeStaminaDamage
+      amount: -15
+    - !type:ModifyKnockdown
+      time: 2
+      type: Remove
