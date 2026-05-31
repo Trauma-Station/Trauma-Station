@@ -1,0 +1,581 @@
+- type: entity
+  name: demon
+  parent: [ MobSpaceBasic, MobCombat ]
+  id: BaseDemon
+  abstract: true
+  description: It came from hell.
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4.5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1000: Dead
+  - type: PassiveDamage
+    allowedStates:
+      - Alive
+    damage:
+      types:
+        Heat: -3
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 100
+    bleedReductionAmount: 1
+  - type: Prying
+    speedModifier: 5
+    pryPowered: true
+    useSound: /Audio/Machines/airlock_creaking.ogg
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+    understands:
+    - TauCetiBasic
+    - Eldritch
+  - type: ThermalVision
+  - type: Stamina
+    baseCritThreshold: 9999
+  - type: FlashImmunity
+  - type: Puller
+    needsHands: false
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-familliar-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: GhostTakeoverAvailable
+  - type: AlwaysTakeHoly
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+
+- type: entity
+  id: ControlledDemon
+  abstract: true
+  components:
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+
+# Minor Demons
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MinorDemonGuy
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/guy.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 10
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+
+- type: entity
+  parent: [MinorDemonGuy, ControlledDemon]
+  id: MinorDemonGuyControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MinorDemonIncel
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/incel.rsi
+  - type: MeleeWeapon
+    range: 3
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 10
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+
+- type: entity
+  parent: [MinorDemonIncel, ControlledDemon]
+  id: MinorDemonIncelControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MinorDemonHamlet
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/hamlet.rsi
+    drawdepth: SmallMobs
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 10
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 5.5
+  - type: VentCrawler
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12 # Goob edit
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: FaxableObject
+    insertingState: inserting_hamster
+  - type: FaxSlip
+    slipChance: 0.3
+
+- type: entity
+  parent: [MinorDemonHamlet, ControlledDemon]
+  id: MinorDemonHamletControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MinorDemonGhost
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Cold: 10
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
+
+- type: entity
+  parent: [MinorDemonGhost, ControlledDemon]
+  id: MinorDemonGhostControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: [BaseDemon, InventoryBase]
+  id: MinorDemonUrist
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/human.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 5
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    activeHandId: Hand
+    hands:
+      Hand:
+        location: Left
+  - type: ComplexInteraction
+
+- type: entity
+  parent: [MinorDemonUrist, ControlledDemon]
+  id: MinorDemonUristControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MinorDemonIan
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/ian.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Slash: 2
+    altDisarm: false
+    canWideSwing: true
+    attackRate: 5
+    autoAttack: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+          MaterialHideCorgi:
+            min: 1
+            max: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 7.5
+    baseSprintSpeed: 1.5
+
+- type: entity
+  parent: [MinorDemonIan, ControlledDemon]
+  id: MinorDemonIanControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: [BaseDemon, InventoryBase]
+  id: MinorDemonVox
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/vox.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 5
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    activeHandId: Hand
+    hands:
+      Hand:
+        location: Left
+  - type: ComplexInteraction
+
+- type: entity
+  parent: [MinorDemonVox, ControlledDemon]
+  id: MinorDemonVoxControlled
+  suffix: Controlled
+
+- type: entity
+  name: demon
+  parent: [BaseDemon, InventoryBase]
+  id: MinorDemonVulp
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/vulp.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 5
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 0
+            max: 1
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    activeHandId: Hand
+    hands:
+      Hand:
+        location: Left
+  - type: ComplexInteraction
+
+- type: entity
+  parent: [MinorDemonVulp, ControlledDemon]
+  id: MinorDemonVulpControlled
+  suffix: Controlled
+
+# medium
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MediumDemonChad
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/chad.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 20
+        Structural: 50
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 1
+            max: 3
+
+# Major demons
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MajorDemon64Fat
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 20
+        Structural: 50
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MajorDemon64Buff
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 20
+        Structural: 50
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5
+
+- type: entity
+  name: demon
+  parent: BaseDemon
+  id: MajorDemon64
+  description: It came from hell.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Blunt: 20
+        Structural: 50
+    altDisarm: true
+    canWideSwing: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 3
+            max: 5

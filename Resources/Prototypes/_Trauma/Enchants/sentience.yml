@@ -13,9 +13,9 @@
       understands:
       - TauCetiBasic
     - type: GhostRole
-      name: justice-role-name # Change this
-      description: justice-role-description # Change this
-      rules: ghost-role-information-familiar-rules
+      name: ghost-role-information-cursed-name
+      description: ghost-role-information-cursed-desc
+      rules: ghost-role-information-antagonist-rules
       mindRoles:
       - MindRoleGhostRoleFamiliar
     - type: GhostTakeoverAvailable

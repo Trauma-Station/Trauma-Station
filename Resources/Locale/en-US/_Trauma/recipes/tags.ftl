@@ -59,3 +59,4 @@ construction-graph-tag-stun-baton = stun baton
 
 # Demonology
 construction-graph-tag-any-ink = any magic ink
+construction-graph-tag-bloodvial = a full blood vial

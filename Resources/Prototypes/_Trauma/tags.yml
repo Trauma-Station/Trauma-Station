@@ -9,6 +9,9 @@
 ## B ##
 
 - type: Tag
+  id: BloodVial
+
+- type: Tag
   id: BowImprovised # Construction: AltarConvertOrange, given to improvised shortbow, used to get Iradomini nullrod's altar
 
 - type: Tag

@@ -25,3 +25,6 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: EnchantingTool
+  - type: GuideHelp
+    guides:
+    - Enchanting

@@ -8,6 +8,9 @@
   - type: Item
     size: Tiny
     sprite: _Trauma/Objects/Enchanting/inks.rsi
+  - type: GuideHelp
+    guides:
+    - Enchanting
 
 - type: entity
   categories: [HideSpawnMenu]

@@ -1,7 +1,7 @@
 - type: entity
-  name: blood vial
+  name: empty blood vial
   parent: [DrinkBaseMaterialGlass, DrinkBaseCup, DrinkVisualsFillOverlay, BaseMagicalContraband]
-  description: A vial embuded with black magic, can convert blood and demonic souls into magic inks.
+  description: An empty vial, needs to be filled with blood.
   id: BloodVial
   components:
   - type: Spillable
@@ -32,3 +32,32 @@
     maxFillLevels: 3
     fillBaseName: fill-
     inHandsMaxFillLevels: 3
+  - type: GuideHelp
+    guides:
+    - Enchanting
+
+- type: entity
+  name: prepared blood vial
+  parent: [BaseItem, BaseMagicalContraband]
+  description: A blood vial embuded with black magic, useful for a variety of things.
+  id: BloodVialFull
+  components:
+  - type: StaticPrice
+    price: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 250
+      Steel: 250
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Tag
+    tags:
+    - BloodVial
