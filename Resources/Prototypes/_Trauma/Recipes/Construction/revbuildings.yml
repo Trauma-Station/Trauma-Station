@@ -64,6 +64,11 @@
   id: RevPlasmaFoundry
   targetNode: plasma foundry
 
+- type: construction
+  parent: BaseRevMachine
+  id: RevMedFab
+  targetNode: hidden medifab
+
 # Turrets
 
 - type: construction

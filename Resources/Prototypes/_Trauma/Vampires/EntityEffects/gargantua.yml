@@ -13,6 +13,7 @@
   - !type:ModifyKnockdown
     time: 12
   - !type:HealthChange
+    splitDamage: SplitEnsureAll
     damage:
       types:
         Blunt: 60
