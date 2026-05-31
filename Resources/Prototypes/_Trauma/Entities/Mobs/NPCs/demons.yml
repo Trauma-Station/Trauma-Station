@@ -1346,7 +1346,3 @@
     prototype: MajorDemonSteamerControlled
   - type: SpawnOnDespawn
     prototype: MajorDemonSteamerControlled
-
-
-
-
