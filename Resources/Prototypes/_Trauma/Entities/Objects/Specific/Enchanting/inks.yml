@@ -168,7 +168,7 @@
   - type: Sprite
     state: nocimat
   - type: EnchantAdder
-    enchant: EnchantingScrollUnbreaking
+    enchant: EnchantUnbreaking
     name: scroll of steel
 
 - type: entity

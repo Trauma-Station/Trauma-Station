@@ -31,12 +31,12 @@
       steps:
       - tool: Screwing
         doAfter: 1
-        conditions:
-        - !type:MinSolution
-          solution: drink
-          reagent:
-            ReagentId: Blood
-          quantity: 100
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: Blood
+        quantity: 100
   - node: finish
     entity: BloodVialFull
 
