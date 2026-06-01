@@ -51,7 +51,7 @@ public abstract partial class SharedChatSystem
         var fonts = GetFont(source, speech, language, message);
         speech ??= GetSpeechVerb(source, message);
 
-        return Loc.GetString(wrapId,
+        return Loc.GetString(wrapId,s
             ("color", color),
             ("entityName", entityName),
             ("verb", Loc.GetString(fonts.VerbId)),
@@ -65,17 +65,17 @@ public abstract partial class SharedChatSystem
     {
         var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(source));
 
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
-        RaiseLocalEvent(source, ref fontEv);
-
-        var fontSizeEv = new SpeechFontSizeOverrideEvent(language.SpeechOverride.FontSize ?? speech.FontSize);
-        RaiseLocalEvent(source, ref fontSizeEv);
-
         var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
             ? random.Pick(verbsOverride).ToString()
             : (speech is null ? "chat-speech-verb-default" : random.Pick(speech.SpeechVerbStrings));
 
         speech ??= GetSpeechVerb(source, message);
+
+        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
+        RaiseLocalEvent(source, ref fontEv);
+
+        var fontSizeEv = new SpeechFontSizeOverrideEvent(language.SpeechOverride.FontSize ?? speech.FontSize);
+        RaiseLocalEvent(source, ref fontSizeEv);
 
         return (Loc.GetString(verbId), fontEv.Font, fontSizeEv.FontSize.ToString());
     }
