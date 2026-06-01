@@ -2,6 +2,7 @@
   parent: [BaseItem, BaseMagicalContraband]
   id: BaseInk
   description: A vial of magical ink, can be used on a scroll to prepare an encantment or curse.
+  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/inks.rsi
