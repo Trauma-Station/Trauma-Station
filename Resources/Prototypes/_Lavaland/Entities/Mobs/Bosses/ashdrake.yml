@@ -76,8 +76,9 @@
     - id: FireballSpellbook
       amount: 1
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
   - type: TileMovement
   - type: BossMusic
     soundId: AshDrake

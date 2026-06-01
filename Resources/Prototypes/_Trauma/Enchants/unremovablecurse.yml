@@ -1,0 +1,44 @@
+- type: entity
+  parent: BaseEnchant
+  id: CurseUnremovableWeapon
+  name: Binding Curse
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - MeleeWeapon
+  - type: ComponentsEnchant
+    added:
+    - type: Unremoveable
+
+- type: entity
+  parent: BaseEnchant
+  id: CurseUnremovableOther
+  name: Binding Curse
+  components:
+  - type: Enchant
+    maxLevel: 1
+    blacklist:
+      components:
+      - MeleeWeapon
+      - Armor
+      - Clothing
+      - StealTarget
+  - type: ComponentsEnchant
+    added:
+    - type: Unremoveable
+
+- type: entity
+  parent: BaseEnchant
+  id: CurseUnremovableArmor
+  name: Binding Curse
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - Clothing
+  - type: ComponentsEnchant
+    added:
+    - type: SelfUnremovableClothing

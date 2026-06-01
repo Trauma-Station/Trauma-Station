@@ -61,8 +61,7 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
 
     private void OnTryClose(Entity<DeepFryerComponent> ent, ref StorageCloseAttemptEvent args)
     {
-        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            || !_solution.TryGetSolution(ent.Owner,
+        if (!_solution.TryGetSolution(ent.Owner,
                 ent.Comp.FryerSolutionContainer,
                 out _,
                 out var deepFryerSolution)
@@ -139,12 +138,12 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
         ent.Comp.StoredObjects.Clear();
         ent.Comp.FryFinishTime = TimeSpan.Zero;
 
-        if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            && _solution.TryGetSolution(ent.Owner,
-                ent.Comp.FryerSolutionContainer,
-                out var solution,
-                out _))
+        if (_solution.TryGetSolution(ent.Owner,
+            ent.Comp.FryerSolutionContainer,
+            out var solution))
+        {
             _solution.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
+        }
     }
 
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)

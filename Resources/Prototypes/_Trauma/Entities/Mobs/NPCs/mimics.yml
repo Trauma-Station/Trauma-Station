@@ -284,15 +284,15 @@
     damage:
       types:
         Piercing: 10
-  - type: SolutionContainerManager
-    solutions:
-      ammo:
-        maxVol: 5
-        reagents:
-        - ReagentId: Impedrezene
-          Quantity: 2.5
-        - ReagentId: MuteToxin
-          Quantity: 2.5
+  - type: Solution
+    id: ammo
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: Impedrezene
+        Quantity: 2.5
+      - ReagentId: MuteToxin
+        Quantity: 2.5
   - type: SolutionInjectOnEmbed
     transferAmount: 5
     solution: ammo
@@ -340,8 +340,9 @@
   - type: Advertise
     pack: MimicMachineAds
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: FlimsyGlass
+  - type: Injurable
+    damageContainer: StructuralInorganic
 
 - type: entity
   parent: [BaseVendorMimic, VendingMachineCoffee]

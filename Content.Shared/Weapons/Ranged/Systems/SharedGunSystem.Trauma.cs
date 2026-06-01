@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Common.Weapons.Ranged;
+using Content.Shared.Inventory;
 using Content.Shared.Power;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
@@ -13,6 +13,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -21,6 +22,7 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 /// </summary>
 public abstract partial class SharedGunSystem
 {
+    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 

@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseItem
+  parent: FoodBase
   id: PlushieGore
   name: plushie gore
   description: Harden your heart...
@@ -12,13 +12,11 @@
   - type: FlavorProfile
     flavors:
     - fiber
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 5
   - type: Tag
     tags:
     - ClothMade

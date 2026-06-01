@@ -66,6 +66,9 @@ ghost-role-information-coconutcrab-name = Coconut Crab
 ghost-role-information-goidabot-name = goida bot
 ghost-role-information-goidabot-desc = ГОЙДА
 
+ghost-role-information-cursed-name = cursed artifact
+ghost-role-information-cursed-desc = You are an artifact cursed with sentience, drive your wielder insane.
+
 ghost-role-information-animal-name = An animal
 ghost-role-information-animal-rules = You are an [color={role-type-animal-color}][bold]{role-type-animal-name}[/bold][/color]. Act like the animal you are does.
                                          This means to not go around killing people / causing problems for no reason.
@@ -93,3 +96,15 @@ ghost-role-information-hunter-rules = You are a [color={role-type-team-antagonis
 ghost-role-information-fugitive-name = Fugitive
 ghost-role-information-fugitive-description = You are a Syndicate Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
 ghost-role-information-fugitive-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Focus on laying low rather than engaging the hunters or security directly.
+
+ghost-role-information-syndicate-reinforcement-grenadier-name = Syndicate Grenadier
+ghost-role-information-syndicate-reinforcement-grenadier-description = Someone needs reinforcements. Your expertise is in explosions, use it well.
+
+ghost-role-information-syndicate-reinforcement-hitman-name = Syndicate Hitman
+ghost-role-information-syndicate-reinforcement-hitman-description = Someone needs reinforcements. Your objective is to dispatch of someone that your agent needs gone.
+
+ghost-role-information-demon-name = Demon
+ghost-role-information-demon-desc = KILL THOSE WHO DARE SUMMON YOU!!!
+
+ghost-role-information-demon-tame-name = Demon
+ghost-role-information-demon-tame-desc = Your will is bound to those who summoned you...

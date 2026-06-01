@@ -1,4 +1,3 @@
-using Content.Shared.EntityList;
 using Content.Shared.EntityTable.EntitySelectors;
 using Content.Shared.Whitelist;
 

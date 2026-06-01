@@ -193,3 +193,17 @@ Entries:
   id: 25
   time: '2026-05-23T18:43:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2766
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Debug uplink can now buy any item regardless of job, species, etc.
+  id: 26
+  time: '2026-05-27T19:40:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2839
+- author: DrSmugLeaf, SolStar2, Luminal
+  changes:
+  - type: Add
+    message: Added mentor help adminflag.
+  id: 27
+  time: '2026-05-31T08:45:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1718

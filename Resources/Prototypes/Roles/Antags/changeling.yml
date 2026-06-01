@@ -1,0 +1,30 @@
+- type: antag
+  id: Changeling
+  name: roles-antag-changeling-name
+  antagonist: true
+  # <Trauma>
+  setPreference: true
+  objective: roles-antag-changeling-description # this string exists, -objective one doesnt
+  guides: [ Changelings ]
+  creditImage: /Textures/_Trauma/EndCredits/Antags/changeling.png
+  # </Trauma>
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Changeling
+  prefRoles: [ Changeling ]
+  briefing:
+    text: changeling-role-greeting
+    color: Red
+    sound: /Audio/_Goobstation/Ambience/Antag/changeling_start.ogg # Trauma
+  # <Trauma>
+  blacklist:
+    components:
+    - Silicon
+    - BorgChassis
+  components:
+  # removed most of upstreams components, ling is mostly implemented in ChangelingRule shitcode
+  - type: Changeling
+  # </Trauma>
+  mindRoles:
+  - MindRoleChangeling

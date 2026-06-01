@@ -29,4 +29,13 @@ Entries:
   id: 3
   time: '2026-02-12T16:50:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/666
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: Core Rule 3 now includes netspeak as not permitted.
+  - type: Add
+    message: Roleplay Rule 5 now includes reference characters as not permitted.
+  id: 4
+  time: '2026-05-31T11:55:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2938
 Order: 1

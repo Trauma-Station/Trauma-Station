@@ -318,7 +318,7 @@ public abstract partial class SharedAutodocSystem : EntitySystem
                 throw new AutodocError($"step-invalid-{error}");
 
             var hands = Comp<HandsComponent>(ent);
-            _hands.SwapHands((ent.Owner, hands));
+            _hands.SwapHands((ent.Owner, hands), false, false);
             if (!_surgery.TryDoSurgeryStep(patient, part, ent, surgeryId, nextStep, out error))
                 throw new AutodocError($"step-invalid-{error}"); // no trying again just fail
         }

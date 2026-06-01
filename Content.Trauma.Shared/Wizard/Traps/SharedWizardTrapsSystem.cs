@@ -8,6 +8,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Magic;
 using Content.Shared.Maps;
@@ -15,7 +16,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Whitelist;
@@ -151,20 +152,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     {
         var (_, comp) = ent;
 
-        if (!TryComp(args.Victim, out StatusEffectsComponent? status))
-            return;
-
-        _status.TryAddStatusEffect<TemporaryBlindnessComponent>(args.Victim,
-            "TemporaryBlindness",
-            comp.BlindDuration,
-            true,
-            status);
-
-        _status.TryAddStatusEffect<BlurryVisionComponent>(args.Victim,
-            "BlurryVision",
-            comp.BlurDuration,
-            true,
-            status);
+        _status.TryUpdateStatusEffectDuration(args.Victim, BlindnessSystem.BlindingStatusEffect, comp.BlindDuration);
     }
 
     private void OnChillTriggered(Entity<ChillTrapComponent> ent, ref TrapTriggeredEvent args)
@@ -298,8 +286,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
             return;
 
         if (!comp.CanReveal ||
-            HasComp<TemporaryBlindnessComponent>(args.Examiner) ||
-            HasComp<PermanentBlindnessComponent>(args.Examiner) ||
+            TryComp<BlindableComponent>(args.Examiner, out var blindable) && blindable.IsBlind ||
             !_transform.InRange(uid, args.Examiner, comp.ExamineRange))
             args.Cancel();
     }

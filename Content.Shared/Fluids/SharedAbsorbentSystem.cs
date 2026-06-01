@@ -1,7 +1,7 @@
 using System.Numerics;
-using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -38,7 +38,7 @@ public abstract partial class SharedAbsorbentSystem : EntitySystem
 
         SubscribeLocalEvent<AbsorbentComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<AbsorbentComponent, UserActivateInWorldEvent>(OnActivateInWorld);
-        SubscribeLocalEvent<AbsorbentComponent, SolutionContainerChangedEvent>(OnAbsorbentSolutionChange);
+        SubscribeLocalEvent<AbsorbentComponent, SolutionChangedEvent>(OnAbsorbentSolutionChange);
     }
 
     private void OnActivateInWorld(Entity<AbsorbentComponent> ent, ref UserActivateInWorldEvent args)
@@ -59,7 +59,7 @@ public abstract partial class SharedAbsorbentSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnAbsorbentSolutionChange(Entity<AbsorbentComponent> ent, ref SolutionChangedEvent args)
     {
         // The changes are already networked as part of the same game state.
         if (_timing.ApplyingState)
@@ -284,7 +284,7 @@ public abstract partial class SharedAbsorbentSystem : EntitySystem
         var (_, absorber, useDelay) = absorbEnt;
 
         Solution puddleSplit;
-        //var isRemoved = false; // Trauma - no longer used
+        var isRemoved = false;
         if (absorber.UseAbsorberSolution)
         {
             // No reason to mop something that 1) can evaporate, 2) is an absorber, and 3) is being mopped with
@@ -339,15 +339,13 @@ public abstract partial class SharedAbsorbentSystem : EntitySystem
                 // Spawn a *sparkle*
                 PredictedSpawnAttachedTo(absorber.MoppedEffect, Transform(target).Coordinates);
                 PredictedQueueDel(target);
-                //isRemoved = true; // Trauma - no longer used
+                isRemoved = true;
             }
         }
 
         SolutionContainer.AddSolution(absorberSoln, puddleSplit);
 
-        // Goobstation fix mopping sounds
-        // Always play the sound at the puddle's coordinates to prevent cutoff when entity is deleted
-        _audio.PlayPredicted(absorber.PickupSound, Transform(target).Coordinates, user);
+        _audio.PlayPredicted(absorber.PickupSound, isRemoved ? absorbEnt : target, user);
 
         if (useDelay != null)
             _useDelay.TryResetDelay((absorbEnt, useDelay));
@@ -357,7 +355,8 @@ public abstract partial class SharedAbsorbentSystem : EntitySystem
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
         localPos = userXform.LocalRotation.RotateVec(localPos);
 
-        _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null, Angle.Zero, false);
+        _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null,
+            Angle.Zero, false); // Trauma
 
         return true;
     }

@@ -1,6 +1,6 @@
 - type: entity
   name: Glacier Spear
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [BaseItem, SolutionSpear, BaseMagicalContraband]
   id: SpearIceHeretic
   description: When the veil between frost and thought thins, the spear shall bite with the might of the Winter Dawn.
   components:
@@ -53,10 +53,6 @@
     slots:
     - back
     - suitStorage
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 5
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee

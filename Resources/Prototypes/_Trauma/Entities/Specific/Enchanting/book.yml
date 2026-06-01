@@ -1,0 +1,33 @@
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: BloodEnchanter
+  name: defaced bible
+  description: A defaced bible, useful for enchanting with blood magic.
+  components:
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+    damage:
+      types:
+        Blunt: 1
+        Heat: 5
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+  - type: Storage
+    grid:
+    - 0,0,0,1
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: EnchantingTool
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Construction
+    graph: DefaceBible
+    node: finish

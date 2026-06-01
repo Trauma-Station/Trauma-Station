@@ -98794,23 +98794,16 @@ entities:
     - type: Transform
       pos: -88.941025,148.14993
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          temperature: 293.15
-          canReact: True
-          maxVol: 45
-          name: null
-          reagents:
-          - data: null
-            ReagentId: MuteToxin
-            Quantity: 15
-          - data: null
-            ReagentId: MindbreakerToxin
-            Quantity: 15
-          - data: null
-            ReagentId: Pax
-            Quantity: 15
+    - type: Solution
+      solution:
+        maxVol: 45
+        reagents:
+        - ReagentId: MuteToxin
+          Quantity: 15
+        - ReagentId: MindbreakerToxin
+          Quantity: 15
+        - ReagentId: Pax
+          Quantity: 15
     - type: SingularityDistortion
       falloffPower: 1.4142137
       intensity: 31.249992
@@ -165761,17 +165754,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 372.10287
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Desoxyephedrine
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Desoxyephedrine
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165782,17 +165769,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 372.10287
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Desoxyephedrine
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Desoxyephedrine
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165803,17 +165784,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: SpaceDrugs
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: SpaceDrugs
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165824,17 +165799,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: SpaceDrugs
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: SpaceDrugs
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165845,17 +165814,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: SpaceDrugs
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: SpaceDrugs
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165866,17 +165829,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: SpaceDrugs
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: SpaceDrugs
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165887,17 +165844,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: SpaceDrugs
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: SpaceDrugs
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -165908,17 +165859,11 @@ entities:
     - type: Tag
       tags:
       - Syringe
-    - type: SolutionContainerManager
-      solutions:
-        injector:
-          temperature: 293.15
-          canReact: True
-          maxVol: 15
-          name: null
-          reagents:
-          - data: null
-            ReagentId: SpaceDrugs
-            Quantity: 15
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: SpaceDrugs
+          Quantity: 15
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage

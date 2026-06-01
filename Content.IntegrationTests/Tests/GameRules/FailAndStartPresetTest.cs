@@ -10,6 +10,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Category("GameRuleTests")] // Trauma
 public sealed class FailAndStartPresetTest : GameTest
 {
     [TestPrototypes]

@@ -9,6 +9,9 @@
 ## B ##
 
 - type: Tag
+  id: BloodVial
+
+- type: Tag
   id: BowImprovised # Construction: AltarConvertOrange, given to improvised shortbow, used to get Iradomini nullrod's altar
 
 - type: Tag
@@ -29,7 +32,7 @@
   id: CartridgeRPG2 # Ammo whitelist: WeaponLauncherRPG2
 
 - type: Tag
-  id: CartridgeTurret # Ammo whitelist: BaseMagazineTurret, WeaponTurretRevolutionaryPistol
+  id: CartridgeTurret # Ammo whitelist: BaseMagazineTurret, WeaponTurretRevolutionaryPistol, BaseMagazineTurretHeavy, WeaponLightMachineGunProletariat
 
 - type: Tag
   id: CartridgeLionhunter # Used for lionhunter rifle ammo creation ritual blacklist
@@ -50,6 +53,9 @@
   id: DataChip # Blueprint whitelist: RevMicroelectronicsAssembler
 
 ## D ##
+
+- type: Tag
+  id: DemonEssense
 
 - type: Tag
   id: DrillHead # for drills durability repair whitelist
@@ -119,6 +125,11 @@
 - type: Tag
   id: IngotWorkableSteel # Construction: AnvilBottom, AnvilTop
 
+## K ##
+
+- type: Tag
+  id: Katana # Used for sheath whitelist
+
 ## M ##
 
 - type: Tag
@@ -150,6 +161,9 @@
 
 - type: Tag
   id: PlasteelScraps # Construction: BloomeryColdPlasteel
+
+- type: Tag
+  id: Placeholder
 
 ## Q ##
 
@@ -200,6 +214,12 @@
 ## S ##
 
 - type: Tag
+  id: Scroll
+
+- type: Tag
+  id: Scimitar # Used for scabbad whitelist
+
+- type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision
 
 - type: Tag
@@ -247,3 +267,86 @@
 
 - type: Tag
   id: Whetstone # Durability repair of spears and knives
+
+## Inks ## This would be hell to alphebetize
+
+- type: Tag
+  id: Ashartine
+
+- type: Tag
+  id: Asimel
+
+- type: Tag
+  id: Azurapetra
+
+- type: Tag
+  id: Catwink
+
+- type: Tag
+  id: Endozult
+
+- type: Tag
+  id: Hithine
+
+- type: Tag
+  id: Houndsgall
+
+- type: Tag
+  id: Indothine
+
+- type: Tag
+  id: Marakat
+
+- type: Tag
+  id: Nillycant
+
+- type: Tag
+  id: Nocimat
+
+- type: Tag
+  id: Orpimentexultant
+
+- type: Tag
+  id: Perhibiate
+
+- type: Tag
+  id: Perinsabate
+
+- type: Tag
+  id: Perinculate
+
+- type: Tag
+  id: Porphyrine
+
+- type: Tag
+  id: Posithane
+
+- type: Tag
+  id: Purpuraatramentum
+
+- type: Tag
+  id: Pyrathene
+
+- type: Tag
+  id: Pyroendine
+
+- type: Tag
+  id: Raggath
+
+- type: Tag
+  id: Rubiginosus
+
+- type: Tag
+  id: Stargallink
+
+- type: Tag
+  id: Terragall
+
+- type: Tag
+  id: Unden
+
+- type: Tag
+  id: Uzult
+
+- type: Tag
+  id: Yewgallink

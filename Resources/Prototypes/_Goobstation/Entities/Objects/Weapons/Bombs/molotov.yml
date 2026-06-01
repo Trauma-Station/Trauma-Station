@@ -17,6 +17,7 @@
     graph: MolotovConstruction
     node: UnlitMolotov
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Explosive
     explosionType: Molotov
@@ -70,6 +71,7 @@
   - type: Appearance
   - type: AnimationPlayer
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Flammable
     fireSpread: true

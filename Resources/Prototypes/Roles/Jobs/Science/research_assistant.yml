@@ -4,16 +4,16 @@
   description: job-description-research-assistant
   playTimeTracker: JobResearchAssistant
   requirements:
-    - !type:OverallPlaytimeRequirement # Trauma
+    - !type:OverallPlaytimeRequirement
       time: 1h
-    # - !type:DepartmentTimeRequirement # Trauma
-    #   department: Science
-    #   time: 5h
-    #   inverted: true # stop playing intern if you're good at science!
+    - !type:DepartmentTimeRequirement
+      department: Science
+      time: 5h
+      inverted: true # stop playing intern if you're good at science!
   startingGear: ResearchAssistantGear
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
-  guides: [ Science ] # goobstation
+  guides: [ Science ] # Trauma
   access:
   - Research
   - Maintenance

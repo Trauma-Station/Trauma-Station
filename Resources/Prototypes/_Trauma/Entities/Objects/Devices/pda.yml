@@ -43,3 +43,12 @@
     slot: [idcard]
     default: SecurityPDA
     requireTag: WhitelistChameleonPDA
+
+- type: entity
+  parent: SyndiCorpsmanPDA
+  id: SyndiMedicPDA
+  name: syndicate medic PDA
+  description: Ok, time to be a productive member of- oh cool I'm a bad guy time to kill people!
+  components:
+  - type: Pda
+    id: SyndicateIDCard

@@ -33,7 +33,6 @@ using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
 using Content.Shared.Station.Components;
-using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -76,6 +75,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private ExamineSystemShared _examineSystem = default!;
+    [Dependency] private EntityQuery<GhostHearingComponent> _ghostHearingQuery = default!;
 
     public readonly Color DefaultSpeakColor = Color.White; // Einstein Engines - Language
 
@@ -1112,14 +1112,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
             ? _random.Pick(verbsOverride).ToString()
-            : (speech is null ? string.Empty : _random.Pick(speech.SpeechVerbStrings));
+            : (speech is null ? "chat-speech-verb-default" : _random.Pick(speech.SpeechVerbStrings));
         var color = DefaultSpeakColor;
         colorOverride ??= language.SpeechOverride.Color;
         if (colorOverride != null)
             color = Color.InterpolateBetween(color, colorOverride.Value, colorOverride.Value.A);
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
 
         // goob start - loudspeakers
 
@@ -1156,8 +1153,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("fontType", fontEv.Font), // Trauma - use Font from above
             ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
-            ("message", message),
-            ("language", languageDisplay));
+            ("message", message));
     }
     // Einstein Engines - Language end
 
@@ -1169,10 +1165,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         // TODO proper speech occlusion
 
         var recipients = new Dictionary<ICommonSession, ICChatRecipientData>();
-        var ghostHearing = GetEntityQuery<GhostHearingComponent>();
-        var xforms = GetEntityQuery<TransformComponent>();
 
-        var transformSource = xforms.GetComponent(source);
+        var transformSource = Transform(source);
         var sourceMapId = transformSource.MapID;
         var sourceCoords = transformSource.Coordinates;
 
@@ -1181,12 +1175,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (player.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
 
-            var transformEntity = xforms.GetComponent(playerEntity);
+            var transformEntity = Transform(playerEntity);
 
             if (transformEntity.MapID != sourceMapId)
                 continue;
 
-            var observer = ghostHearing.HasComponent(playerEntity);
+            var observer = _ghostHearingQuery.HasComponent(playerEntity);
 
             // Floofstation - Check Line-Of-Sight begin
             sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance);

@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseEnchant
+  id: CurseVanishing
+  name: Curse of Vanishing
+  components:
+  - type: Enchant
+    maxLevel: 1
+    blacklist:
+      components:
+      - StealTarget
+  - type: ComponentsEnchant
+    added:
+    - type: FadingTimedDespawn
+      lifetime: 1
+      fadeOutTime: 180

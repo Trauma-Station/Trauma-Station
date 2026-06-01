@@ -60,9 +60,8 @@
     - - !type:SpillBlood
         amount: 100
     # Lock
-    - - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+    - - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
         time: 20
         type: Add
       - !type:RemoveAccess

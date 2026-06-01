@@ -1,39 +1,23 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Lumminal <81829924+Lumminal@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # major
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: SlaughterDemonSummon
   components:
   - type: AntagSpawner
     prototype: BaseMobSlaughterDemon
   - type: AntagSelection
     agentName: slaughter-round-end-agent-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostSlaughterDemon
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleSlaughterDemon
-      briefing:
-        text: slaughter-role-greeting
-        color: Red
-        sound: /Audio/_Goobstation/SlaughterDemon/briefing.ogg
-      components:
-      - type: RandomMetadata
-        nameSegments:
-        - NamesSlaughterTitle
-        - NamesSlaughter
-        nameFormat: name-format-slaughter
+    selectionTime: Never
+    antags:
+    - !type:FixedAntagCount
+      proto: SlaughterDemon
   - type: AntagRandomSpawn
   - type: AntagObjectives
     objectives:
-      - SlaughterKillTheWizardObjective
-      - SlaughterKillEveryoneObjective
+    - SlaughterKillTheWizardObjective
+    - SlaughterKillEveryoneObjective
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
@@ -41,60 +25,30 @@
 
 # laughter
 - type: entity
-  parent: BaseGameRule
+  parent: SlaughterDemonSummon
   id: LaughterDemonSummon
   components:
   - type: AntagSpawner
     prototype: MobLaughterDemon
   - type: AntagSelection
     agentName: laughter-round-end-agent-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostLaughterDemon
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleSlaughterDemon
-      briefing:
-        text: laughter-role-greeting
-        color: Pink
-        sound: /Audio/_Goobstation/Vehicle/Clowncar/clowncar_fart.ogg
-      components:
-      - type: RandomMetadata
-        nameSegments:
-        - NamesLaughterTitle
-        - NamesSlaughter
-        nameFormat: name-format-slaughter
-  - type: AntagRandomSpawn
+    antags:
+    - !type:FixedAntagCount
+      proto: LaughterDemon
   - type: AntagObjectives
     objectives:
     - SlaughterHugAndTickleObjective
 
 # midround
 - type: entity
-  parent: BaseGameRule
+  parent: SlaughterDemonSummon
   id: SlaughterDemonMidround
   components:
   - type: AntagSelection
     agentName: lesser-slaughter-round-end-agent-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostSlaughterDemon
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleSlaughterDemon
-      briefing:
-        text: slaughter-role-greeting
-        color: Red
-        sound: /Audio/Misc/narsie_rises.ogg
-      components:
-      - type: RandomMetadata
-        nameSegments:
-        - NamesSlaughterTitle
-        - NamesSlaughter
-        nameFormat: name-format-slaughter
-  - type: AntagRandomSpawn
+    antags:
+    - !type:FixedAntagCount
+      proto: SlaughterDemonMidround
   - type: AntagSpawner
     prototype: MobLesserSlaughterDemon
   - type: StationEvent

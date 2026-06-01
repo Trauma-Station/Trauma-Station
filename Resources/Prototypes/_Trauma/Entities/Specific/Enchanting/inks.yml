@@ -1,0 +1,335 @@
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: BaseInk
+  description: A vial of magical ink, can be used on a scroll to prepare an encantment or curse.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+  - type: Item
+    size: Tiny
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+  - type: GuideHelp
+    guides:
+    - Enchanting
+
+- type: entity
+  categories: [HideSpawnMenu]
+  parent: MagicInkNocimat
+  id: MagicInkPlaceholder
+  name: any magic ink
+  components:
+  - type: Tag
+    tags:
+    - Placeholder
+
+- type: entity
+  # categories: [HideSpawnMenu]
+  parent: MagicInkNocimat
+  id: MagicInkRandom
+  name: random magic ink
+  components:
+  - type: TimedDespawn
+    lifetime: 0.01
+  - type: SpawnOnDespawn
+    prototype: RandomInkSpawner
+  - type: Construction
+    graph: RandomInk
+    node: finish
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkAshartine
+  name: ashartine
+  components:
+  - type: Sprite
+    state: ashartine
+  - type: Tag
+    tags:
+    - Ashartine
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkAsimel
+  name: asimel
+  components:
+  - type: Sprite
+    state: asimel
+  - type: Tag
+    tags:
+    - Asimel
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkAzurapetra
+  name: azura petra
+  components:
+  - type: Sprite
+    state: azurapetra
+  - type: Tag
+    tags:
+    - Azurapetra
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkCatwink
+  name: catwink
+  components:
+  - type: Sprite
+    state: catwink
+  - type: Tag
+    tags:
+    - Catwink
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkEndozult
+  name: endozult
+  components:
+  - type: Sprite
+    state: endozult
+  - type: Tag
+    tags:
+    - Endozult
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkHithine
+  name: hithine
+  components:
+  - type: Sprite
+    state: hithine
+  - type: Tag
+    tags:
+    - Hithine
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkHoundsgall
+  name: houndsgall
+  components:
+  - type: Sprite
+    state: houndsgall
+  - type: Tag
+    tags:
+    - Houndsgall
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkIndothine
+  name: indothine
+  components:
+  - type: Sprite
+    state: indothine
+  - type: Tag
+    tags:
+    - Indothine
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkMarakat
+  name: marakat
+  components:
+  - type: Sprite
+    state: marakat
+  - type: Tag
+    tags:
+    - Marakat
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkNillycant
+  name: nillycant
+  components:
+  - type: Sprite
+    state: nillycant
+  - type: Tag
+    tags:
+    - Nillycant
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkNocimat
+  name: nocimat
+  components:
+  - type: Sprite
+    state: nocimat
+  - type: Tag
+    tags:
+    - Nocimat
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkOrpimentexultant
+  name: orpiment exultant
+  components:
+  - type: Sprite
+    state: orpimentexultant
+  - type: Tag
+    tags:
+    - Orpimentexultant
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPerhibiate
+  name: perhibiate
+  components:
+  - type: Sprite
+    state: perhibiate
+  - type: Tag
+    tags:
+    - Perhibiate
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPerinsabate
+  name: perinsabate
+  components:
+  - type: Sprite
+    state: perinsabate
+  - type: Tag
+    tags:
+    - Perinsabate
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPerinculate
+  name: perinculate
+  components:
+  - type: Sprite
+    state: perinculate
+  - type: Tag
+    tags:
+    - Perinculate
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPorphyrine
+  name: porphyrine
+  components:
+  - type: Sprite
+    state: porphyrine
+  - type: Tag
+    tags:
+    - Porphyrine
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPosithane
+  name: posithane
+  components:
+  - type: Sprite
+    state: posithane
+  - type: Tag
+    tags:
+    - Posithane
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPurpuraatramentum
+  name: purpura tramentum
+  components:
+  - type: Sprite
+    state: purpuraatramentum
+  - type: Tag
+    tags:
+    - Purpuraatramentum
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPyrathene
+  name: pyrathene
+  components:
+  - type: Sprite
+    state: pyrathene
+  - type: Tag
+    tags:
+    - Pyrathene
+
+- type: entity
+  parent: BaseInk
+  name: pyroendine
+  id: MagicInkPyroendine
+  components:
+  - type: Sprite
+    state: pyroendine
+  - type: Tag
+    tags:
+    - Pyroendine
+
+- type: entity
+  parent: BaseInk
+  name: raggath
+  id: MagicInkRaggath
+  components:
+  - type: Sprite
+    state: raggath
+  - type: Tag
+    tags:
+    - Raggath
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkRubiginosus
+  name: rubiginosus
+  components:
+  - type: Sprite
+    state: rubiginosus
+  - type: Tag
+    tags:
+    - Rubiginosus
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkStargallink
+  name: stargall
+  components:
+  - type: Sprite
+    state: stargallink
+  - type: Tag
+    tags:
+    - Stargallink
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkTerragall
+  name: terragall
+  components:
+  - type: Sprite
+    state: terragall
+  - type: Tag
+    tags:
+    - Terragall
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkUnden
+  name: unden
+  components:
+  - type: Sprite
+    state: unden
+  - type: Tag
+    tags:
+    - Unden
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkUzult
+  name: uzult
+  components:
+  - type: Sprite
+    state: uzult
+  - type: Tag
+    tags:
+    - Uzult
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkYewgallink
+  name: yewgall
+  components:
+  - type: Sprite
+    state: yewgallink
+  - type: Tag
+    tags:
+    - Yewgallink

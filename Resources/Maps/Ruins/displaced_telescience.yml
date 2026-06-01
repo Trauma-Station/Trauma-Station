@@ -1758,28 +1758,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-  - uid: 476
-    mapInit: true
-    paused: true
-    components:
-    - type: MetaData
-      name: solution - beaker
-    - type: Transform
-      parent: 15
-    - type: Solution
-      solution:
-        maxVol: 30
-        name: beaker
-        reagents:
-        - data: []
-          ReagentId: Frezon
-          Quantity: 20
-        - data: []
-          ReagentId: Fresium
-          Quantity: 10
-    - type: ContainedSolution
-      containerName: beaker
-      container: 15
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -1964,20 +1942,16 @@ entities:
     - type: Tag
       tags:
       - CentrifugeCompatible
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - beaker
-    - type: MeleeWeapon
-      nextAttack: -32.1421018
-    - type: EmitSoundOnCollide
-      nextSound: -1171.0409639
+    - type: Solution
+      solution:
+        maxVol: 30
+        reagents:
+        - ReagentId: Frezon
+          Quantity: 20
+        - ReagentId: Fresium
+          Quantity: 10
     - type: Physics
       canCollide: False
-    - type: ContainerContainer
-      containers:
-        solution@beaker: !type:ContainerSlot
-          ent: 476
     - type: Label
       currentLabel: frezon coolant
     - type: NameModifier

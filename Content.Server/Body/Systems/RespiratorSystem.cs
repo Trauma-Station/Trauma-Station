@@ -259,7 +259,7 @@ public sealed partial class RespiratorSystem : EntitySystem
     /// <returns>Returns true only if the gas mixture is not toxic, and it wouldn't suffocate.</returns>
     public bool CanMetabolizeInhaledAir(Entity<RespiratorComponent?> ent, GasMixture gas)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        if (!Resolve(ent, ref ent.Comp, false)) // Trauma - false for clankers to not fail tests
             return false;
 
         var ev = new CanMetabolizeGasEvent(gas);

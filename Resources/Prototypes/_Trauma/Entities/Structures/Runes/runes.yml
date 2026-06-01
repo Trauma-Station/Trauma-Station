@@ -1,0 +1,217 @@
+- type: entity
+  parent: [BaseStructure, BaseMagicalContraband]
+  id: BaseSummoningRune
+  abstract: true
+  components:
+  - type: Clickable
+  - type: IgnoresFingerprints
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Fixtures
+    fixtures:
+      rune:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.5
+        hard: false
+        mask:
+         - ItemMask
+        layer:
+         - SlipLayer
+  - type: Physics
+
+- type: entity
+  parent: [BaseStructure, DrinkBase, BaseMagicalContraband]
+  id: BaseCarvedRune
+  abstract: true
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+  - type: InteractionOutline
+# Enchanting
+
+- type: entity
+  id: EnchantingRuneCarved
+  parent: BaseCarvedRune
+  name: unfinished rune
+  description: An unfinished rune, needs blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/enchanting.rsi
+    state: carved
+    snapCardinals: true
+  - type: Construction
+    graph: EnchantingRune
+    node: carved
+
+- type: entity
+  id: EnchantingRune
+  parent: BaseSummoningRune
+  name: enchantment rune
+  description: A rune used for enchanting items.
+  components:
+  - type: PlaceableSurface
+  - type: EnchantingTable
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/enchanting.rsi
+    state: icon
+    snapCardinals: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+  - type: Construction
+    graph: EnchantingRune
+    node: finish
+
+# Minor
+
+- type: entity
+  id: MinorDemonRune
+  parent: BaseSummoningRune
+  name: minor summoning circle
+  description: A rune used to summon minor demons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/minor.rsi
+    state: icon
+    snapCardinals: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+  - type: Construction
+    graph: MinorSummoning
+    node: finish
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomMinorSummoningRune
+
+- type: entity
+  id: MinorRuneCarved
+  parent: BaseCarvedRune
+  name: unfinished rune
+  description: An unfinished rune, needs blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/minor.rsi
+    state: carved
+    snapCardinals: true
+  - type: Construction
+    graph: MinorSummoning
+    node: carved
+
+# Medium
+
+- type: entity
+  id: MediumDemonRune
+  parent: BaseSummoningRune
+  name: summoning circle
+  description: A rune used to summon demons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/medium.rsi
+    state: icon
+    snapCardinals: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+  - type: Construction
+    graph: MediumSummoning
+    node: finish
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomMediumSummoningRune
+
+- type: entity
+  id: MediumRuneCarved
+  parent: BaseCarvedRune
+  name: unfinished rune
+  description: An unfinished rune, needs blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/medium.rsi
+    state: carved
+    snapCardinals: true
+  - type: Construction
+    graph: MediumSummoning
+    node: carved
+
+# Major
+
+- type: entity
+  id: MajorDemonRune
+  parent: BaseSummoningRune
+  name: major summoning circle
+  description: A rune used to summon major demons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/major.rsi
+    state: icon
+    snapCardinals: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 90
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
+  - type: Construction
+    graph: MajorSummoning
+    node: finish
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomMajorSummoningRune
+
+- type: entity
+  id: MajorRuneCarved
+  parent: BaseCarvedRune
+  name: unfinished rune
+  description: An unfinished rune, needs blood.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Runes/major.rsi
+    state: carved
+    snapCardinals: true
+  - type: Construction
+    graph: MajorSummoning
+    node: carved

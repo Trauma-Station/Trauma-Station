@@ -32,8 +32,8 @@ public sealed partial class FoldingWeaponSystem : EntitySystem
 
     private void OnToggle(Entity<FoldingWeaponComponent> ent, ref ItemToggledEvent args)
     {
-        if (args.User != null && TryComp(ent, out WieldableComponent? wieldable))
-            _wieldable.TryUnwield(ent, wieldable, args.User.Value, true);
+        if (args.User is { } user)
+            _wieldable.TryUnwield(ent.Owner, user, force: true);
 
         if (!ent.Comp.SetPrefix)
             return;

@@ -1160,6 +1160,10 @@
       Min: 1
       Max: 4
       PotencyDivisor: 25
+    Fresium: # Trauma
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20
 
 - type: seed
   id: poppy
@@ -2024,18 +2028,18 @@
   waterConsumption: 0.60
   nutrientConsumption: 0.50
   chemicals:
-    Potassium:
+    Potassium: # Trauma, Changed the max for potassium, phosphorus and sugar to 15 and the potency divisor to 6
       Min: 1
-      Max: 5
-      PotencyDivisor: 20
+      Max: 15
+      PotencyDivisor: 6
     Phosphorus:
       Min: 1
-      Max: 5
-      PotencyDivisor: 20
+      Max: 15
+      PotencyDivisor: 6
     Sugar:
       Min: 1
-      Max: 5
-      PotencyDivisor: 20
+      Max: 15
+      PotencyDivisor: 6
     Allicin:
       Min: 1
       Max: 10

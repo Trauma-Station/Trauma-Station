@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/21579ab5e68e7958fbc83a10f99576fb7504845b, modified by Aviu00 (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "counterattack"
+    },
+    {
+      "name": "counterattack_blocked"
+    }
+  ]
+}

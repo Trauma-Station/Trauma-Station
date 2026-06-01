@@ -12,7 +12,7 @@
   - type: Item
     size: Tiny
   - type: Inorganic
-  - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Organ
     category: BrainChip

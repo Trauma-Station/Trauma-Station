@@ -25,18 +25,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Objectives;
 
-// heavily edited by goobstation contributor gang
-// if you wanna upstream something think twice
-// TODO: kill this faction slop
 public sealed partial class ObjectivesSystem : SharedObjectivesSystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private SharedJobSystem _job = default!;
-    [Dependency] private IConfigurationManager _cfg = default!;
 
     private IEnumerable<string>? _objectives;
 
@@ -66,33 +62,26 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
     private void OnRoundEndText(RoundEndTextAppendEvent ev)
     {
         // go through each gamerule getting data for the roundend summary.
-        var summaries = new Dictionary<string, Dictionary<string, Dictionary<string, List<(EntityUid, string)>>>>();
-        var query = EntityQueryEnumerator<GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var gameRule))
+        var summaries = new Dictionary<string, Dictionary<string, List<(EntityUid, string)>>>();
+        var query = EntityQueryEnumerator<ActiveGameRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var uid, out _, out var comp))
         {
-            if (!_gameTicker.IsGameRuleAdded(uid, gameRule))
-                continue;
-
             var info = new ObjectivesTextGetInfoEvent(new List<(EntityUid, string)>(), string.Empty);
             RaiseLocalEvent(uid, ref info);
             if (info.Minds.Count == 0)
                 continue;
 
             // first group the gamerules by their agents, for example 2 different dragons
-            var agent = info.Faction ?? info.AgentName;
+            var agent = info.AgentName;
             if (!summaries.ContainsKey(agent))
-                summaries[agent] = new Dictionary<string, Dictionary<string, List<(EntityUid, string)>>>();
-
-            // next group them by agent names, for example different traitors, blood brother teams, etc.
-            if (!summaries[agent].ContainsKey(info.AgentName))
-                summaries[agent][info.AgentName] = new Dictionary<string, List<(EntityUid, string)>>();
+                summaries[agent] = new Dictionary<string, List<(EntityUid, string)>>();
 
             var prepend = new ObjectivesTextPrependEvent("");
             RaiseLocalEvent(uid, ref prepend);
 
             // next group them by their prepended texts
             // for example with traitor rule, group them by the codewords they share
-            var summary = summaries[agent][info.AgentName];
+            var summary = summaries[agent];
             if (summary.ContainsKey(prepend.Text))
             {
                 // same prepended text (usually empty) so combine them
@@ -100,44 +89,41 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
             }
             else
             {
-                summary[prepend.Text] = info.Minds;
+                summary[prepend.Text] = info.Minds.ToList();
             }
         }
 
         // convert the data into summary text
-        foreach (var (faction, summariesFaction) in summaries)
+        foreach (var (agent, summary) in summaries)
         {
-            foreach (var (agent, summary) in summariesFaction)
+            // first get the total number of players that were in these game rules combined
+            var total = 0;
+            var totalInCustody = 0;
+            foreach (var (_, minds) in summary)
             {
-                // first get the total number of players that were in these game rules combined
-                var total = 0;
-                var totalInCustody = 0;
-                foreach (var (_, minds) in summary)
-                {
-                    total += minds.Count;
-                    totalInCustody += minds.Where(pair => IsInCustody(pair.Item1)).Count();
-                }
-
-                var result = new StringBuilder();
-                result.AppendLine(Loc.GetString("objectives-round-end-result", ("count", total), ("agent", agent)));
-                if (agent == Loc.GetString("traitor-round-end-agent-name"))
-                {
-                    result.AppendLine(Loc.GetString("objectives-round-end-result-in-custody", ("count", total), ("custody", totalInCustody), ("agent", agent)));
-                }
-                // next add all the players with its own prepended text
-                foreach (var (prepend, minds) in summary)
-                {
-                    if (prepend != string.Empty)
-                        result.Append(prepend);
-
-                    // add space between the start text and player list
-                    result.AppendLine();
-
-                    AddSummary(result, agent, minds);
-                }
-
-                ev.AddLine(result.AppendLine().ToString());
+                total += minds.Count;
+                totalInCustody += minds.Count(pair => IsInCustody(pair.Item1));
             }
+
+            var result = new StringBuilder();
+            result.AppendLine(Loc.GetString("objectives-round-end-result", ("count", total), ("agent", agent)));
+            if (agent == Loc.GetString("traitor-round-end-agent-name"))
+            {
+                result.AppendLine(Loc.GetString("objectives-round-end-result-in-custody", ("count", total), ("custody", totalInCustody), ("agent", agent)));
+            }
+            // next add all the players with its own prepended text
+            foreach (var (prepend, minds) in summary)
+            {
+                if (prepend != string.Empty)
+                    result.Append(prepend);
+
+                // add space between the start text and player list
+                result.AppendLine();
+
+                AddSummary(result, agent, minds);
+            }
+
+            ev.AddLine(result.AppendLine().ToString());
         }
     }
 
@@ -279,7 +265,7 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
     /// <summary>
     /// Returns whether a target is considered 'in custody' (cuffed on the shuttle).
     /// </summary>
-    private bool IsInCustody(EntityUid mindId, MindComponent? mind = null)
+    public bool IsInCustody(EntityUid mindId, MindComponent? mind = null)
     {
         if (!Resolve(mindId, ref mind))
             return false;
@@ -355,7 +341,7 @@ public sealed partial class ObjectivesSystem : SharedObjectivesSystem
 /// The objectives system already checks if the game rule is added so you don't need to check that in this event's handler.
 /// </remarks>
 [ByRefEvent]
-public record struct ObjectivesTextGetInfoEvent(List<(EntityUid, string)> Minds, string AgentName, string? Faction = null);
+public record struct ObjectivesTextGetInfoEvent(List<(EntityUid, string)> Minds, string AgentName);
 
 /// <summary>
 /// Raised on the game rule before text for each agent's objectives is added, letting you prepend something.

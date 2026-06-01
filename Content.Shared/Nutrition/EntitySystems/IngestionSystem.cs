@@ -3,7 +3,7 @@ using Content.Trauma.Common.Nutrition;
 using Content.Trauma.Common.Heretic;
 using Content.Shared.Clothing.EntitySystems;
 // </Trauma>
-﻿using Content.Shared.Administration.Logs;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -28,6 +28,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Nutrition.EntitySystems;
@@ -71,7 +72,7 @@ public sealed partial class IngestionSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EdibleComponent, ComponentInit>(OnEdibleInit);
+        SubscribeLocalEvent<EdibleComponent, MapInitEvent>(OnEdibleInit);
 
         // Interactions
         // Trauma - ClothingSystem handles equipping on use, not InventorySystem
@@ -89,7 +90,7 @@ public sealed partial class IngestionSystem : EntitySystem
 
         // Verbs
         SubscribeLocalEvent<EdibleComponent, GetVerbsEvent<AlternativeVerb>>(AddEdibleVerbs);
-        SubscribeLocalEvent<EdibleComponent, SolutionContainerChangedEvent>(OnSolutionContainerChanged);
+        SubscribeLocalEvent<EdibleComponent, SolutionChangedEvent>(OnSolutionContainerChanged);
 
         // Misc
         SubscribeLocalEvent<EdibleComponent, AttemptShakeEvent>(OnAttemptShake);
@@ -141,19 +142,10 @@ public sealed partial class IngestionSystem : EntitySystem
         return ingestionEv.Handled;
     }
 
-    private void OnEdibleInit(Entity<EdibleComponent> entity, ref ComponentInit args)
+    private void OnEdibleInit(Entity<EdibleComponent> entity, ref MapInitEvent args)
     {
-        // Beakers, Soap and other items have drainable, and we should be able to eat that solution.
-        // This ensures that tests fail when you configured the yaml from and EdibleComponent uses the wrong solution,
-        if (TryComp<DrainableSolutionComponent>(entity, out var existingDrainable))
-            entity.Comp.Solution = existingDrainable.Solution;
-        else
-            _solutionContainer.EnsureSolution(entity.Owner, entity.Comp.Solution, out _);
-
+        _solutionContainer.EnsureSolution(entity.Owner, entity.Comp.Solution, out _);
         UpdateAppearance(entity);
-
-        if (TryComp(entity, out RefillableSolutionComponent? refillComp))
-            refillComp.Solution = entity.Comp.Solution;
     }
 
     #region Appearance System
@@ -167,7 +159,7 @@ public sealed partial class IngestionSystem : EntitySystem
         _appearance.SetData(entity, FoodVisuals.Visual, drainAvailable.Float(), entity.Comp2);
     }
 
-    private void OnSolutionContainerChanged(Entity<EdibleComponent> entity, ref SolutionContainerChangedEvent args)
+    private void OnSolutionContainerChanged(Entity<EdibleComponent> entity, ref SolutionChangedEvent args)
     {
         // The changes are already networked as part of the same game state.
         if (_timing.ApplyingState)
@@ -387,14 +379,14 @@ public sealed partial class IngestionSystem : EntitySystem
         var afterEv = new IngestedEvent(args.User, entity, split, forceFed, beforeEv.Transfer >= beforeEv.Max);
         RaiseLocalEvent(food, ref afterEv);
 
-        // Goobstation start
+        // <Trauma> - raise event on the target entity if the food is consumed
         var volume = split.Volume;
-        if (_stomach.TryTransferSolution(stomachToUse.Value.Owner, split, stomachToUse))
+        if (_stomach.TryTransferSolution(stomachToUse.Value.AsNullable(), split))
         {
             var consumingEv = new ConsumingFoodEvent(food, volume);
             RaiseLocalEvent(entity, ref consumingEv);
         }
-        // Goobstation end
+        // </Trauma>
 
         if (!afterEv.Destroy)
         {
