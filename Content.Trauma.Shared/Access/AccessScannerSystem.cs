@@ -71,8 +71,10 @@ public sealed partial class AccessScannerSystem : EntitySystem
 
                 // ping
                 UpdateActive((uid, comp));
-                SendString(uid, comp.NamePort, id.Comp.FullName);
-                SendString(uid, comp.JobPort, id.Comp.LocalizedJobTitle);
+                if (id.Comp.FullName is { } name)
+                    SendString(uid, comp.NamePort, name);
+                if (id.Comp.LocalizedJobTitle is { } job)
+                    SendString(uid, comp.JobPort, job);
             }
 
             var removed = comp.Scanned.RemoveWhere(id =>
