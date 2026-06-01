@@ -28,8 +28,8 @@
   ## Starting Powers
 
   <Box>
-    <GuideEntityEmbed Entity="VampireGlareGuideBook" Caption=""/>
-    <GuideEntityEmbed Entity="VampireRejuvGuideBook" Caption=""/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="vampire_glare"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="vampire_rejuvinate"/>
   </Box>
 
   Vampires will start with two powers: Glare and Rejuvenate. Using Glare can stun and silence, with the effect varying depending on if you are facing the target, and Rejuvenate will clear all stuns.
@@ -37,10 +37,10 @@
   ## Classes
 
   <Box>
-    <GuideEntityEmbed Entity="ClassGargantuaGuideBook" Caption=""/>
-    <GuideEntityEmbed Entity="ClassHaemomancerGuideBook" Caption=""/>
-    <GuideEntityEmbed Entity="ClassUmbraeGuideBook" Caption=""/>
-    <GuideEntityEmbed Entity="ClassDantalionGuideBook" Caption=""/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="duel"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="blood_bringers_rite"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="eternal_darkness"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="hysteria"/>
   </Box>
 
   Vampires have two different types of powers: base powers and class powers. Base powers are abilities that every Vampire has or will be able to unlock regardless of class.

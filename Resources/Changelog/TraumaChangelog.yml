@@ -9354,3 +9354,69 @@ Entries:
   id: 1062
   time: '2026-05-31T04:55:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2746
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed simplemobs gibbing at total parts damage instead of letting
+      individual bodyparts handle it.
+  id: 1063
+  time: '2026-05-31T06:51:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2925
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Poison/airloss/metaphysical/genetic damage only applies to vital parts.
+  - type: Tweak
+    message: >-
+      Poisons/heals split damage to all parts instead of applying fixed amount
+      of damage to every parts again.
+  id: 1064
+  time: '2026-05-31T07:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2918
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added string UPPER/LOWER circuit gates.
+  id: 1065
+  time: '2026-05-31T07:44:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2923
+- author: DrSmugLeaf, SolStar2, Luminal
+  changes:
+  - type: Add
+    message: >-
+      Added mentor help. You can press F1 to access it. You can use it for
+      requesting assistance regarding a game mechanic, or anything related to
+      the game.
+  - type: Add
+    message: >-
+      Added mentors. They are capable of answering mentor help, and provide
+      assistance to players.
+  id: 1066
+  time: '2026-05-31T08:45:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1718
+- author: Hoodsie
+  changes:
+  - type: Add
+    message: Added Cocaine slime
+  id: 1067
+  time: '2026-05-31T09:49:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2933
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed holoparasite being disconnected from you when you get polymorphed by
+      wizard, genetics, etc.
+  id: 1068
+  time: '2026-05-31T10:19:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2934
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bingles speaking tau-ceti basic and having to take the ghost role
+      twice.
+  id: 1069
+  time: '2026-05-31T11:09:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2937

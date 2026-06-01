@@ -53,6 +53,10 @@ public sealed partial class DamageableSystem
         bool canMiss = true,
         bool increaseOnly = false)
     {
+        damage.TrimZeros();
+        if (damage.Empty)
+            return damage;
+
         // TODO SHITMED: jesus christ refactor this
         var adjustedDamage = damage * partMultiplier;
         // This cursed shitcode lets us know if the target part is a power of 2

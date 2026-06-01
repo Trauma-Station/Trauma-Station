@@ -37,7 +37,7 @@ namespace Content.Shared.Construction
 
                     args.PushMarkup(Loc.GetString("machine-board-component-required-element-entry-text",
                         ("amount", amount),
-                        ("requiredElement", Loc.GetString(name))));
+                        ("requiredElement", name))); // Trauma - remove Loc.GetString it's an entity prototype
                 }
 
                 foreach (var (_, info) in component.ComponentRequirements)
