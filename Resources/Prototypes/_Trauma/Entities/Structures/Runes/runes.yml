@@ -1,7 +1,7 @@
 - type: entity
+  abstract: true
   parent: [BaseStructure, BaseMagicalContraband]
   id: BaseSummoningRune
-  abstract: true
   components:
   - type: Clickable
   - type: IgnoresFingerprints
@@ -9,7 +9,7 @@
   - type: Injurable
     damageContainer: Inorganic
   - type: Fixtures
-    fixtures:
+    fixtures: # TODO: why the fuck is this here?
       rune:
         shape:
           !type:PhysShapeCircle
@@ -20,11 +20,12 @@
         layer:
          - SlipLayer
   - type: Physics
+    canCollide: false
 
 - type: entity
+  abstract: true
   parent: [BaseStructure, DrinkBase, BaseMagicalContraband]
   id: BaseCarvedRune
-  abstract: true
   components:
   - type: Destructible
     thresholds:
@@ -38,11 +39,13 @@
         sound:
           path: /Audio/_Goobstation/Heretic/runebreak.ogg
   - type: InteractionOutline
+  - type: Physics
+    canCollide: false
 # Enchanting
 
 - type: entity
-  id: EnchantingRuneCarved
   parent: BaseCarvedRune
+  id: EnchantingRuneCarved
   name: unfinished rune
   description: An unfinished rune, needs blood.
   components:
@@ -55,8 +58,8 @@
     node: carved
 
 - type: entity
-  id: EnchantingRune
   parent: BaseSummoningRune
+  id: EnchantingRune
   name: enchantment rune
   description: A rune used for enchanting items.
   components:
@@ -84,8 +87,8 @@
 # Minor
 
 - type: entity
-  id: MinorDemonRune
   parent: BaseSummoningRune
+  id: MinorDemonRune
   name: minor summoning circle
   description: A rune used to summon minor demons.
   components:
@@ -113,8 +116,8 @@
     prototype: RandomMinorSummoningRune
 
 - type: entity
-  id: MinorRuneCarved
   parent: BaseCarvedRune
+  id: MinorRuneCarved
   name: unfinished rune
   description: An unfinished rune, needs blood.
   components:
@@ -129,8 +132,8 @@
 # Medium
 
 - type: entity
-  id: MediumDemonRune
   parent: BaseSummoningRune
+  id: MediumDemonRune
   name: summoning circle
   description: A rune used to summon demons.
   components:
@@ -158,8 +161,8 @@
     prototype: RandomMediumSummoningRune
 
 - type: entity
-  id: MediumRuneCarved
   parent: BaseCarvedRune
+  id: MediumRuneCarved
   name: unfinished rune
   description: An unfinished rune, needs blood.
   components:
@@ -174,8 +177,8 @@
 # Major
 
 - type: entity
-  id: MajorDemonRune
   parent: BaseSummoningRune
+  id: MajorDemonRune
   name: major summoning circle
   description: A rune used to summon major demons.
   components:
@@ -203,8 +206,8 @@
     prototype: RandomMajorSummoningRune
 
 - type: entity
-  id: MajorRuneCarved
   parent: BaseCarvedRune
+  id: MajorRuneCarved
   name: unfinished rune
   description: An unfinished rune, needs blood.
   components:

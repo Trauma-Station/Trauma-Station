@@ -675,7 +675,7 @@ namespace Content.Shared.Containers.ItemSlots
                         continue;
 
                     var verbSubject = slot.Name != string.Empty
-                        ? Loc.GetString(slot.Name)
+                        ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString, like 50 things dont use loc strings...
                         : Name(args.Using.Value);
 
                     AlternativeVerb verb = new()
@@ -729,7 +729,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var verbSubject = slot.Name != string.Empty
-                    ? Loc.GetString(slot.Name)
+                    ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString
                     : Comp<MetaDataComponent>(slot.Item.Value).EntityName ?? string.Empty;
 
                 AlternativeVerb verb = new()
@@ -770,7 +770,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var verbSubject = slot.Name != string.Empty
-                    ? Loc.GetString(slot.Name)
+                    ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString
                     : Name(slot.Item!.Value);
 
                 InteractionVerb takeVerb = new()
@@ -798,7 +798,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var verbSubject = slot.Name != string.Empty
-                    ? Loc.GetString(slot.Name)
+                    ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString
                     : Name(args.Using.Value);
 
                 InteractionVerb insertVerb = new()

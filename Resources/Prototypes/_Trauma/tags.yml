@@ -87,6 +87,9 @@
   id: Ed209WeaponsControl
 
 - type: Tag
+  id: EnchantingScroll # Enchanting ink's EnchantAdder whitelist
+
+- type: Tag
   id: EncryptionRevolutionary # Construction: RevTelesphere
 
 ## F ##
@@ -214,9 +217,6 @@
 ## S ##
 
 - type: Tag
-  id: Scroll
-
-- type: Tag
   id: Scimitar # Used for scabbad whitelist
 
 - type: Tag
@@ -267,86 +267,3 @@
 
 - type: Tag
   id: Whetstone # Durability repair of spears and knives
-
-## Inks ## This would be hell to alphebetize
-
-- type: Tag
-  id: Ashartine
-
-- type: Tag
-  id: Asimel
-
-- type: Tag
-  id: Azurapetra
-
-- type: Tag
-  id: Catwink
-
-- type: Tag
-  id: Endozult
-
-- type: Tag
-  id: Hithine
-
-- type: Tag
-  id: Houndsgall
-
-- type: Tag
-  id: Indothine
-
-- type: Tag
-  id: Marakat
-
-- type: Tag
-  id: Nillycant
-
-- type: Tag
-  id: Nocimat
-
-- type: Tag
-  id: Orpimentexultant
-
-- type: Tag
-  id: Perhibiate
-
-- type: Tag
-  id: Perinsabate
-
-- type: Tag
-  id: Perinculate
-
-- type: Tag
-  id: Porphyrine
-
-- type: Tag
-  id: Posithane
-
-- type: Tag
-  id: Purpuraatramentum
-
-- type: Tag
-  id: Pyrathene
-
-- type: Tag
-  id: Pyroendine
-
-- type: Tag
-  id: Raggath
-
-- type: Tag
-  id: Rubiginosus
-
-- type: Tag
-  id: Stargallink
-
-- type: Tag
-  id: Terragall
-
-- type: Tag
-  id: Unden
-
-- type: Tag
-  id: Uzult
-
-- type: Tag
-  id: Yewgallink

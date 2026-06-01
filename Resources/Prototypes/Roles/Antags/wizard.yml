@@ -21,8 +21,9 @@
   parent: RestrictedAntag
   id: Wizard
   spawnerPrototype: SpawnPointGhostWizard
-  startingGear: WizardBlueGear
+  startingGear: WizardGear # Trauma
   unequipOldGear: true # Trauma
+  prefRoles: [ Wizard ] # Trauma
   roleLoadout:
   - RoleSurvivalEVA # Trauma - was RoleSurvivalExtended
   briefing:

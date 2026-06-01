@@ -58,7 +58,6 @@ construction-graph-tag-part-metal-container = any metal container
 construction-graph-tag-stun-baton = stun baton
 
 # Demonology
-construction-graph-tag-any-ink = any magic ink
 construction-graph-tag-bloodvial = a full blood vial
 construction-graph-tag-demonsoul = a demonic soul fragment
 construction-graph-tag-bible = any holy book

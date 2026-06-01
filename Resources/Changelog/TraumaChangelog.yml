@@ -9437,3 +9437,49 @@ Entries:
   id: 1070
   time: '2026-06-01T01:57:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2921
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Surplus bundles can no longer be on sale...
+  id: 1071
+  time: '2026-06-01T07:40:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2944
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood vial crafting not working with blood taken from people.
+  id: 1072
+  time: '2026-06-01T10:11:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2959
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fully predicted clown car interactions.
+  id: 1073
+  time: '2026-06-01T10:33:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2963
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wizard not picking anyone opted into it roundstart.
+  - type: Fix
+    message: Fixed (now rare) wizard ghost role not having a description.
+  id: 1074
+  time: '2026-06-01T11:13:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2964
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Demonology runes now require magical literacy mastery levels 3-5 to make
+      instead of 1.
+  id: 1075
+  time: '2026-06-01T11:17:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2965
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Renamed some minor demon names to be less stupid.
+  id: 1076
+  time: '2026-06-01T11:28:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2966

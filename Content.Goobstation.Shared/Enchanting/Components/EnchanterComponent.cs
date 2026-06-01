@@ -10,6 +10,7 @@ namespace Content.Goobstation.Shared.Enchanting.Components;
 /// Requires an altar with this and the target item placed on it, then click on the target with a bible.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(EnchanterSystem))]
+[AutoGenerateComponentState(true)]
 public sealed partial class EnchanterComponent : Component
 {
     /// <summary>
@@ -40,7 +41,7 @@ public sealed partial class EnchanterComponent : Component
     /// <summary>
     /// The possible enchants that can be rolled.
     /// </summary>
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public List<EntProtoId<EnchantComponent>> Enchants = new();
 
     /// <summary>
@@ -48,4 +49,13 @@ public sealed partial class EnchanterComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_Goobstation/Wizard/repulse.ogg");
+}
+
+/// <summary>
+/// Sprite layer that gets hidden/shown based on <c>Enchants</c> being empty.
+/// </summary>
+[Serializable, NetSerializable]
+public enum EnchanterVisuals : byte
+{
+    Layer
 }
