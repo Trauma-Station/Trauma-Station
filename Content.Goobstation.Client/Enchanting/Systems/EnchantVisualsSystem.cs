@@ -17,7 +17,7 @@ public sealed partial class EnchantVisualsSystem : EntitySystem
     [Dependency] private SpriteSystem _sprite = default!;
 
     public readonly ProtoId<ShaderPrototype> Shader = "Enchant";
-    private ShaderInstance _shader;
+    private ShaderInstance _shader = default!;
 
     public override void Initialize()
     {
