@@ -5,7 +5,7 @@ namespace Content.Trauma.Server.Vampires.Objectives;
 /// <summary>
 /// Objective component that checks how many victims we have sucked.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class VampireSuckConditionComponent : Component
 {
     /// <summary>
