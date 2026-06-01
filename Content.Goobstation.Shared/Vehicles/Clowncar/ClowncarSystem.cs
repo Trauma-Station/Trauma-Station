@@ -3,7 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
-using Content.Shared.Chat.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;

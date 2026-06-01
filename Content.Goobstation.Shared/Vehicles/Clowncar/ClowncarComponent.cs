@@ -2,7 +2,7 @@
 
 namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedClowncarSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(ClowncarSystem))]
 [AutoGenerateComponentState]
 public sealed partial class ClowncarComponent : Component
 {
