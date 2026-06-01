@@ -1,39 +1,29 @@
 - type: construction
+  abstract: true
+  id: BaseDemonology
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Item
+  theory:
+    MagicalLiteracyKnowledge: 1
+  useQuality: false
+
+- type: construction
+  parent: BaseDemonology
   id: EnchantScroll
   graph: EnchantedScroll
-  targetNode: finish
-  category: construction-category-demonology
-  objectType: Item
-  theory:
-    MagicalLiteracyKnowledge: 1
-  useQuality: false
 
 - type: construction
+  parent: BaseDemonology
   id: BloodVial
   graph: DemonBlood
-  targetNode: finish
-  category: construction-category-demonology
-  objectType: Item
-  theory:
-    MagicalLiteracyKnowledge: 1
-  useQuality: false
 
 - type: construction
+  parent: BaseDemonology
   id: CraftInk
   graph: RandomInk
-  targetNode: finish
-  category: construction-category-demonology
-  objectType: Item
-  theory:
-    MagicalLiteracyKnowledge: 1
-  useQuality: false
 
 - type: construction
+  parent: BaseDemonology
   id: DefaceBible
   graph: DefaceBible
-  targetNode: finish
-  category: construction-category-demonology
-  objectType: Item
-  theory:
-    MagicalLiteracyKnowledge: 0
-  useQuality: false

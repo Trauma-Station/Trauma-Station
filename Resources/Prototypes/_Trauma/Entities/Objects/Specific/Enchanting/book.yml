@@ -4,6 +4,9 @@
   name: defaced bible
   description: A defaced bible, useful for enchanting with blood magic.
   components:
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg

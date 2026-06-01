@@ -589,9 +589,9 @@
   suffix: Controlled
 
 - type: entity
-  name: angel
   parent: BaseDemon
   id: MediumDemon64
+  name: angel
   description: It came from hell.
   components:
   - type: Sprite
@@ -620,7 +620,7 @@
             max: 3
   - type: ActionGrant
     actions:
-      - ActionDemonRift
+    - ActionDemonRift
 
 - type: entity
   parent: [ControlledDemon, MediumDemon64]

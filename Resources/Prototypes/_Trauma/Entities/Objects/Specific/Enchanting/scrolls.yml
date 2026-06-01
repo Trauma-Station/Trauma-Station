@@ -1,0 +1,44 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseEnchantingScroll
+  name: enchanted scroll
+  description: A scroll embuded with an enchantment. Could do any number of things.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/empty_scroll.rsi
+    layers:
+    - state: icon
+      shader: shaded
+    - state: writing
+      map: ["enum.EnchanterVisuals.Layer"]
+      shader: Enchant
+  - type: Item
+    size: Small
+  - type: GuideHelp
+    guides:
+    - Enchanting
+
+- type: entity
+  parent: BaseItem
+  id: EnchantingScrollEmpty
+  name: scroll
+  description: An empty scroll waiting to be filled with an enchantment.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/empty_scroll.rsi
+    layers:
+    - state: icon
+      shader: shaded
+    - state: writing
+      map: ["enum.EnchanterVisuals.Layer"]
+      visible: false
+      shader: Enchant
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - EnchantingScroll
+  - type: Construction
+    graph: EnchantedScroll
+    node: finish

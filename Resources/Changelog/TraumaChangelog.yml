@@ -9444,3 +9444,10 @@ Entries:
   id: 1071
   time: '2026-06-01T07:40:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2944
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood vial crafting not working with blood taken from people.
+  id: 1072
+  time: '2026-06-01T10:11:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2959
