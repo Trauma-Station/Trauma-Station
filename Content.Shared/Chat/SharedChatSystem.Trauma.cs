@@ -1,6 +1,3 @@
-using System.Text;
-using Content.Goobstation.Common.Loudspeaker;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
 using Content.Trauma.Common.Language;
@@ -40,10 +37,8 @@ public abstract partial class SharedChatSystem
     {
         language ??= _language.GetLanguage(source);
 
-        // Goobstation - Bolded Language Overrides begin
         if (language.SpeechOverride.BoldFontId != null && speech?.Bold == true)
             wrapId = "chat-manager-entity-say-bolded-language-wrap-message";
-        // Goobstation end
 
         if (language.SpeechOverride.MessageWrapOverrides.TryGetValue(chatType, out var wrapOverride))
             wrapId = wrapOverride;
@@ -61,41 +56,21 @@ public abstract partial class SharedChatSystem
             ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
             : "";
 
-        // goob start - loudspeakers
-
-        int? loudSpeakFont = null;
-
-        var getLoudspeakerEv = new GetLoudspeakerEvent();
-        RaiseLocalEvent(source, ref getLoudspeakerEv);
-
-        if (getLoudspeakerEv.Loudspeakers != null)
-            foreach (var loudspeaker in getLoudspeakerEv.Loudspeakers)
-            {
-                var loudSpeakerEv = new GetLoudspeakerDataEvent();
-                RaiseLocalEvent(loudspeaker, ref loudSpeakerEv);
-
-                if (loudSpeakerEv.IsActive && loudSpeakerEv.AffectChat)
-                {
-                    loudSpeakFont = loudSpeakerEv.FontSize;
-                    break;
-                }
-            }
-
-        // goob end
-
-        // <Trauma> - allow source entity to replace font
         speech ??= GetSpeechVerb(source, message);
         var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
         RaiseLocalEvent(source, ref fontEv);
-        // </Trauma>
+
+        var fontSizeEv = new SpeechFontSizeOverrideEvent(language.SpeechOverride.FontSize ?? speech.FontSize);
+        RaiseLocalEvent(source, ref fontSizeEv);
+
 
         return Loc.GetString(wrapId,
             ("color", color),
             ("entityName", entityName),
             ("verb", Loc.GetString(verbId)),
-            ("fontType", fontEv.Font), // Trauma - use Font from above
-            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
-            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
+            ("fontType", fontEv.Font),
+            ("fontSize", fontSizeEv.FontSize),
+            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId),
             ("message", message),
             ("language", languageDisplay));
     }

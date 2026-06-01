@@ -16,10 +16,10 @@ public sealed partial class DeafnessSystem : EntitySystem
 
         _deafQuery = GetEntityQuery<DeafComponent>();
         SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
-        SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRange>(OnOverrideInVoiceRange);
+        SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRangeEvent>(OnOverrideInVoiceRange);
     }
 
-    private void OnOverrideInVoiceRange(EntityUid uid, DeafComponent comp, ref ChatMessageOverrideInVoiceRange args)  // blocks normal chat
+    private void OnOverrideInVoiceRange(EntityUid uid, DeafComponent comp, ref ChatMessageOverrideInVoiceRangeEvent args)  // blocks normal chat
     {
         args.Cancel();
     }

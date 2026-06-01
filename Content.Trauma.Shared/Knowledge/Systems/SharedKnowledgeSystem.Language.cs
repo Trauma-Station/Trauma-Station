@@ -33,7 +33,7 @@ public abstract partial class SharedKnowledgeSystem
 
         // Experience methods
         SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRange>(OnLanguageHeard);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRangeEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -248,7 +248,7 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(unit, comp);
     }
 
-    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRange args)
+    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
         if (args.Source == ent.Owner)
             return; // Same person, no need.

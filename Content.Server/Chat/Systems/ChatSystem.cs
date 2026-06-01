@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Traits;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Speech;
 using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.Language;
@@ -582,10 +581,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             wrappedObfuscated,
             source,
             range,
-            languageOverride: language, // Einstein Engines - Language
-            checkLOS: typeLOS, // Floofstation - Check Line-Of-Sight
-            speech: speech, // Trauma - Language
-            colorOverride: colorOverride // Trauma - Language
+            // <Trauma>
+            languageOverride: language,
+            checkLOS: typeLOS,
+            speech: speech,
+            colorOverride: colorOverride
+            // </Trauma>
             );
 
         var ev = new EntitySpokeEvent(source, message, null, false, language); // EE - added language
@@ -915,10 +916,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         EntityUid source,
         ChatTransmitRange range,
         NetUserId? author = null,
-        LanguagePrototype? languageOverride = null, // Einstein Engines - Language
-        bool checkLOS = false, // Floofstation - Check Line-Of-Sight
-        SpeechVerbPrototype? speech = null, // Trauma - Language
-        Color? colorOverride = null // Goobstation
+        // <Trauma>
+        LanguagePrototype? languageOverride = null,
+        bool checkLOS = false,
+        SpeechVerbPrototype? speech = null,
+        Color? colorOverride = null
+        // </Trauma>
         )
     {
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
@@ -939,7 +942,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             // <Trauma>
             // Raises a event for the deaf component
-            var ev = new ChatMessageOverrideInVoiceRange(source, name, language.ID, speech, colorOverride, obfuscated, obfuscatedWrappedMessage);
+            var ev = new ChatMessageOverrideInVoiceRangeEvent(source, name, language.ID, speech, colorOverride, obfuscated, obfuscatedWrappedMessage);
             RaiseLocalEvent(listener, ref ev);
             if (channel == ChatChannel.Local
                 && language.SpeechOverride.RequireSpeech // Check for whether speech is required.
