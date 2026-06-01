@@ -43,31 +43,40 @@ public abstract partial class SharedChatSystem
         if (language.SpeechOverride.MessageWrapOverrides.TryGetValue(chatType, out var wrapOverride))
             wrapId = wrapOverride;
 
-        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(source));
-
-        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
-            ? random.Pick(verbsOverride).ToString()
-            : (speech is null ? "chat-speech-verb-default" : random.Pick(speech.SpeechVerbStrings));
         var color = DefaultSpeakColor;
         colorOverride ??= language.SpeechOverride.Color;
         if (colorOverride != null)
             color = Color.InterpolateBetween(color, colorOverride.Value, colorOverride.Value.A);
 
+        var fonts = GetFont(source, speech, language, message);
         speech ??= GetSpeechVerb(source, message);
+
+        return Loc.GetString(wrapId,
+            ("color", color),
+            ("entityName", entityName),
+            ("verb", Loc.GetString(fonts.VerbId)),
+            ("fontType", fonts.FontType),
+            ("fontSize", fonts.FontSize),
+            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId),
+            ("message", message));
+    }
+
+    public (string VerbId, string FontType, string FontSize) GetFont(EntityUid source, SpeechVerbPrototype? speech, LanguagePrototype language, string message)
+    {
+        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(source));
+
         var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
         RaiseLocalEvent(source, ref fontEv);
 
         var fontSizeEv = new SpeechFontSizeOverrideEvent(language.SpeechOverride.FontSize ?? speech.FontSize);
         RaiseLocalEvent(source, ref fontSizeEv);
 
+        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
+            ? random.Pick(verbsOverride).ToString()
+            : (speech is null ? "chat-speech-verb-default" : random.Pick(speech.SpeechVerbStrings));
 
-        return Loc.GetString(wrapId,
-            ("color", color),
-            ("entityName", entityName),
-            ("verb", Loc.GetString(verbId)),
-            ("fontType", fontEv.Font),
-            ("fontSize", fontSizeEv.FontSize),
-            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId),
-            ("message", message));
+        speech ??= GetSpeechVerb(source, message);
+
+        return (Loc.GetString(verbId), fontEv.Font, fontSizeEv.FontSize.ToString());
     }
 }

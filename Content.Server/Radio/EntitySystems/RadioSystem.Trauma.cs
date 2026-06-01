@@ -1,4 +1,6 @@
+using Content.Shared.Chat;
 using Content.Shared.Radio;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Speech;
 using Content.Shared.StatusIcon;
 using Content.Trauma.Common.Language;
@@ -30,12 +32,8 @@ public sealed partial class RadioSystem
         if (language.SpeechOverride.Color is { } colorOverride)
             languageColor = Color.InterpolateBetween(Color.White, colorOverride, colorOverride.A); // Changed first param to Color.White so it shows color correctly.
 
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
-        RaiseLocalEvent(source, ref fontEv);
-
-        var fontSizeEv = new SpeechFontSizeOverrideEvent(language.SpeechOverride.FontSize ?? speech.FontSize);
-        RaiseLocalEvent(source, ref fontSizeEv);
-
+        var font = _chat.GetFont(source, speech, language, message);
+        
         var nameString = jobIcon is null
             ? name
             : Loc.GetString("chat-radio-message-name-with-icon", ("jobIcon", jobIcon), ("jobName", jobName ?? ""), ("name", name));
@@ -43,10 +41,10 @@ public sealed partial class RadioSystem
         return Loc.GetString(wrapId,
             ("color", channel.Color),
             ("languageColor", languageColor),
-            ("fontType", fontEv.Font),
-            ("fontSize", fontSizeEv.FontSize),
+            ("fontType", font.FontType),
+            ("fontSize", font.FontSize),
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId),
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+            ("verb", Loc.GetString(font.VerbId)),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", nameString),
             ("message", message));
