@@ -1,4 +1,6 @@
-﻿namespace Content.Trauma.Common.CombatMode;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Common.CombatMode;
 
 /// <summary>
 /// Raised on the player entity before the <see cref="CombatModeIndicatorsOverlay"/> draws the sight texture,
