@@ -12,7 +12,7 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Speech.Muting;
@@ -27,7 +27,6 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -123,11 +122,7 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
         if (!TryComp(args.Victim, out StatusEffectsComponent? status))
             return;
 
-        _status.TryAddStatusEffect<TemporaryBlindnessComponent>(args.Victim,
-            "TemporaryBlindness",
-            ent.Comp.BlindnessTime,
-            true,
-            status);
+        _statusNew.TryUpdateStatusEffectDuration(args.Victim, BlindnessSystem.BlindingStatusEffect, ent.Comp.BlindnessTime);
 
         _status.TryAddStatusEffect<MutedComponent>(args.Victim,
             "Muted",

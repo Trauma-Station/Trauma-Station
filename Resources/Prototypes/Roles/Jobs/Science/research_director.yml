@@ -6,17 +6,16 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobScientist
-    time: 3h # Trauma was 5
+    time: 5h
   - !type:DepartmentTimeRequirement
     department: Science
-    time: 5h # Trauma was 10
+    time: 10h
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
-  #canBeAntag: false
-  antagAdvantage: 75 # Goobstation
-  guides: # goobstation
+  antagAdvantage: 75 # Trauma
+  guides: # Trauma
   - Science
   - Command
   access:

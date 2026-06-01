@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Destructible.Thresholds.Behaviors;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Materials;
 using Content.Shared.Tools;
@@ -54,11 +54,10 @@ public sealed partial class DurabilityComponent : Component
 
     /// <summary>
     /// What to do when the entity has depleted all of its durability.
-    /// Supports any <see cref="IThresholdBehavior"/> so it can be done like how you would do it on a <see cref="Content.Shared.Destructible.DestructibleComponent"/>.
     /// Can omit destruction act as the entity will be deleted anyway once it breaks.
     /// </summary>
-    [DataField(serverOnly: true)]
-    public IThresholdBehavior? OnBreakBehavior;
+    [DataField]
+    public EntityEffect[]? OnBreakEffects;
 
     /// <summary>
     /// Whether to actually delete the entity when <see cref="DurabilityState"/> is <see cref="DurabilityState.Destroyed"/>.
@@ -97,11 +96,18 @@ public sealed partial class DurabilityComponent : Component
     [DataField]
     public SortedDictionary<DurabilityState, float> DurabilityModifiers = new()
     {
-        { DurabilityState.Reinforced, 1.2f },
         { DurabilityState.Worn, 0.9f },
         { DurabilityState.Damaged, 0.7f },
         { DurabilityState.Broken, 0.45f },
     };
+
+    /// <summary>
+    /// Override of <see cref="DurabilityModifiers"/> that is automatically removed on state reduction (if reinforced)
+    /// or on state increase (if below pristine)
+    /// Required for <see cref="CustomDurabilityModifierComponent"/>
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<DurabilityState, float> CustomDurabilityModifiers = new();
 
     /// <summary>
     /// Set of entity prototypes that can be used to repair this entity, and how much it will repair the entity by.

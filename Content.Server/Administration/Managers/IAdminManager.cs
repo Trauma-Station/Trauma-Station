@@ -11,6 +11,12 @@ namespace Content.Server.Administration.Managers
     public interface IAdminManager : ISharedAdminManager
     {
         /// <summary>
+        /// Trauma - whether anyone is allowed to run a command
+        /// </summary>
+        bool CanAnyoneRunCommand(string name);
+
+        /// </summary>
+        /// <summary>
         ///     Fired when the permissions of an admin on the server changed.
         /// </summary>
         event Action<AdminPermsChangedEventArgs> OnPermsChanged;

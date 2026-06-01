@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared.Timing;
+using Content.Trauma.Common.Prying;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
@@ -138,6 +139,15 @@ public sealed partial class PryingSystem : EntitySystem
 
     private bool CanPry(EntityUid target, EntityUid user, out string? message, PryingComponent? comp = null, PryUnpoweredComponent? unpoweredComp = null)
     {
+        // <Trauma>
+        var attemptEv = new PryAttemptEvent(target);
+        RaiseLocalEvent(user, ref attemptEv);
+        if (attemptEv.Cancelled)
+        {
+            message = null;
+            return false;
+        }
+        // </Trauma>
         BeforePryEvent canev;
 
         if (comp != null || Resolve(user, ref comp, false))
@@ -208,6 +218,10 @@ public sealed partial class PryingSystem : EntitySystem
             _audioSystem.PlayPredicted(comp.UseSound, args.Used.Value, args.User);
         }
 
+        // <Trauma>
+        var userEv = new PriedSuccessEvent();
+        RaiseLocalEvent(args.User, ref userEv);
+        // </Trauma>
         var ev = new PriedEvent(args.User);
         RaiseLocalEvent(uid, ref ev);
 

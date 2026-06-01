@@ -4,8 +4,6 @@ using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.DeepFryer.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.DeepFryer;
 

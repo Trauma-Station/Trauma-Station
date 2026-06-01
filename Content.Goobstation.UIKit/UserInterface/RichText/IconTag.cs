@@ -2,11 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.StatusIcon;
-using Robust.Client.GameObjects;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 

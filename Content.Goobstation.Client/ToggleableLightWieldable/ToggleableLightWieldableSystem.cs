@@ -3,7 +3,6 @@
 using Content.Client.Toggleable;
 using Content.Shared.Hands;
 using Content.Shared.Wieldable.Components;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.ToggleableLightWieldable;
 

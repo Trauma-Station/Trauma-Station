@@ -85,6 +85,9 @@ public sealed partial class ServerCurrencyManager : ICommonCurrencyManager
         return userId == null ? 0 : Task.Run(() => GetBalanceAsync(userId.Value)).GetAwaiter().GetResult();
     }
 
+    public Task Wipe()
+        => _db.WipeServerCurrency();
+
     #region Internal/Async tasks
 
     /// <summary>
@@ -107,9 +110,8 @@ public sealed partial class ServerCurrencyManager : ICommonCurrencyManager
     /// </summary>
     /// <param name="userId">The player's NetUserId</param>
     /// <param name="amount">The amount of currency that will be set.</param>
-    /// <param name="oldAmount">The amount of currency that will be set.</param>
     /// <remarks>This and its calees will block server shutdown until execution finishes.</remarks>
-    private async Task SetBalanceAsyncInternal(NetUserId userId, int amount, int oldAmount)
+    private async Task SetBalanceAsyncInternal(NetUserId userId, int amount)
     {
         var task = Task.Run(() => _db.SetServerCurrency(userId, amount));
         TrackPending(task);
@@ -125,9 +127,8 @@ public sealed partial class ServerCurrencyManager : ICommonCurrencyManager
     /// <remarks>Use the return value instead of calling <see cref="GetBalance(NetUserId)"/> prior to this.</remarks>
     private async Task<int> SetBalanceAsync(NetUserId userId, int amount)
     {
-        // We need to block it first to ensure we don't read our own amount, hence sync function
         var oldAmount = GetBalance(userId);
-        await SetBalanceAsyncInternal(userId, amount, oldAmount);
+        await SetBalanceAsyncInternal(userId, amount);
         return oldAmount;
     }
 

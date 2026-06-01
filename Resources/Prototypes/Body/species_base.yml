@@ -46,7 +46,10 @@
   - type: Destructible
     thresholds: [] # remove gib threshold, you can gib the torso instead
   - type: Tackler
+  - type: CounterAttacker
   - type: KnowledgeHolder
+  - type: VampireDrainable
+  - type: PressureTracker # avoid initial mispredict with PKAs and stuff, might be used by other stuff in the future too
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
@@ -119,7 +122,6 @@
     - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - TemporaryBlindness
     - Pacified
     - Flashed
     - Adrenaline

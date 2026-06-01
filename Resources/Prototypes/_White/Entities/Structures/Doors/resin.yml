@@ -51,8 +51,9 @@
     noAirWhenFullyAirBlocked: false
   - type: Occluder
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resin
+  - type: Injurable
+    damageContainer: Biological
   - type: MeleeSound
     soundGroups:
       Brute:

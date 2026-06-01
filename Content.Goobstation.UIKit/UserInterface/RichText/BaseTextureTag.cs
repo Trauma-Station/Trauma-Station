@@ -2,9 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Goobstation.UIKit.UserInterface.Controls;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 

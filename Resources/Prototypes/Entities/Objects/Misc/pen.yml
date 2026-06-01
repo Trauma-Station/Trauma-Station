@@ -92,7 +92,7 @@
 
 - type: entity
   id: BaseAdvancedPen
-  parent: [PenEmbeddable, UnbreakableDurability] # Trauma - Durability
+  parent: PenEmbeddable
   abstract: true
   components:
   - type: Tag

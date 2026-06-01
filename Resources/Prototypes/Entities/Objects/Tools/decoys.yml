@@ -39,6 +39,7 @@
     - NamesSyndicateNormal
     nameFormat: name-format-nukie-generic
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: ToggleableVisuals
     spriteLayer: light

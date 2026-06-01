@@ -4,7 +4,6 @@ using System.Linq;
 using Content.Goobstation.Shared.Administration;
 using Robust.Client.Player;
 using Robust.Shared.ContentPack;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Client.Administration;
 

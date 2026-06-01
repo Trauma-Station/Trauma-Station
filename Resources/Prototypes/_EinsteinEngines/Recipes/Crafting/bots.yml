@@ -5,12 +5,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # <Trauma>
   theory:
     BotsKnowledge: 1
   practical:
     ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: plantbot
@@ -19,26 +17,10 @@
   targetNode: bot
   category: construction-category-utilities
   objectType: Item
-  # <Trauma>
   theory:
     BotsKnowledge: 1
   practical:
     ElectronicsKnowledge: 1
-  # </Trauma>
-
-- type: construction
-  id: fillbot
-  graph: FillBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-  # <Trauma>
-  theory:
-    BotsKnowledge: 1
-  practical:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: minebot

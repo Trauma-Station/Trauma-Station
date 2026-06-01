@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from RMC https://github.com/RMC-14/RMC-14/blob/ff204839b5ccc64748b4aafaddf940932fae7180/Resources/Textures/_RMC14/Effects/beam.rsi/oppressor_tail.png | Modified by assripper.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "XenoTailSegmentBase"
+
+    }
+  ]
+}

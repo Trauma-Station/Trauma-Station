@@ -2,7 +2,6 @@
 
 using Content.Shared.MouseRotator;
 using Content.Trauma.Shared.Viewcone.Components;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 
@@ -28,6 +27,7 @@ public sealed partial class ViewconeConeOverlay : Overlay
     private float _coneFeather;
     private float _coneIgnoreRadius;
     private float _coneIgnoreFeather;
+    public float GrainScale = 1f;
 
     public ViewconeConeOverlay()
     {
@@ -82,10 +82,12 @@ public sealed partial class ViewconeConeOverlay : Overlay
         _viewconeShader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
         _viewconeShader.SetParameter("Zoom", zoom);
         _viewconeShader.SetParameter("ViewAngle", viewAngle);
-        _viewconeShader.SetParameter("ConeAngle", _coneAngle);
-        _viewconeShader.SetParameter("ConeFeather", _coneFeather);
+        _viewconeShader.SetParameter("ConeAngle", MathHelper.DegreesToRadians(_coneAngle));
+        _viewconeShader.SetParameter("ConeFeather", MathHelper.DegreesToRadians(_coneFeather));
         _viewconeShader.SetParameter("ConeIgnoreRadius", _coneIgnoreRadius);
         _viewconeShader.SetParameter("ConeIgnoreFeather", _coneIgnoreFeather);
+        _viewconeShader.SetParameter("GrainScale", GrainScale);
+        _viewconeShader.SetParameter("Offset", eye.Offset * EyeManager.PixelsPerMeter);
 
         worldHandle.UseShader(_viewconeShader);
         worldHandle.DrawRect(viewport, Color.White);

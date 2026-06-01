@@ -6,8 +6,10 @@ using Content.Trauma.Shared.Xenomorphs.Plasma.Components;
 
 namespace Content.Trauma.Client.Xenomorphs.Plasma;
 
-public sealed class PlasmaSystem : SharedPlasmaSystem
+public sealed partial class PlasmaSystem : SharedPlasmaSystem
 {
+    [Dependency] SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -15,16 +17,17 @@ public sealed class PlasmaSystem : SharedPlasmaSystem
         SubscribeLocalEvent<PlasmaVesselComponent, UpdateAlertSpriteEvent>(OnUpdateAlertSprite);
     }
 
+    // TODO: use GenericAlertCounter
     private void OnUpdateAlertSprite(EntityUid uid, PlasmaVesselComponent component, ref UpdateAlertSpriteEvent args)
     {
         if (args.Alert.ID != component.PlasmaAlert)
             return;
 
-        var sprite = args.SpriteViewEnt.Comp;
         var plasma = Math.Clamp(component.Plasma.Int(), 0, 999);
 
-        sprite.LayerSetState(PlasmaVisualLayers.Digit1, $"{plasma / 100 % 10}");
-        sprite.LayerSetState(PlasmaVisualLayers.Digit2, $"{plasma / 10 % 10}");
-        sprite.LayerSetState(PlasmaVisualLayers.Digit3, $"{plasma % 10}");
+        var sprite = args.SpriteViewEnt.AsNullable();
+        _sprite.LayerSetRsiState(sprite, PlasmaVisualLayers.Digit1, $"{plasma / 100 % 10}");
+        _sprite.LayerSetRsiState(sprite, PlasmaVisualLayers.Digit2, $"{plasma / 10 % 10}");
+        _sprite.LayerSetRsiState(sprite, PlasmaVisualLayers.Digit3, $"{plasma % 10}");
     }
 }

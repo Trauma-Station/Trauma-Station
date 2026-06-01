@@ -1,16 +1,3 @@
-# SPDX-FileCopyrightText: 2023 EmoGarbage404 <retron404@gmail.com>
-# SPDX-FileCopyrightText: 2023 coolmankid12345 <55817627+coolmankid12345@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 coolmankid12345 <coolmankid12345@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Fenn <162015305+TooSillyFennec@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Mr. 27 <45323883+Dutch-VanDerLinde@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: antag
   id: HeadRev
   name: roles-antag-rev-head-name
@@ -24,6 +11,35 @@
   guides: [ Revolutionaries ] # Goob
   creditImage: /Textures/_Trauma/EndCredits/Antags/revolution.png # Trauma
 
+- type: antagSpecifier
+  abstract: true
+  parent: RestrictedAntag
+  id: BaseRev
+  name: revolutionary
+  prefRoles:
+  - GenericTeamAntagonist # For antag ban purposes
+  components:
+  - type: Revolutionary
+
+- type: antagSpecifier
+  parent: BaseRev
+  id: HeadRev
+  prefRoles:
+  - HeadRev
+  briefing:
+    text: head-rev-role-greeting
+    color: CornflowerBlue
+    sound: "/Audio/Ambience/Antag/headrev_start.ogg"
+  startingGear: HeadRevGear
+  components:
+  - type: Revolutionary
+  - type: HeadRevolutionary
+  mindRoles:
+  - MindRoleHeadRevolutionary
+  jobBlacklist: [ Mime ] # Trauma - mimes cant convert people without breaking vow...
+
+# TODO: Make it so creating new revolutionaries uses antag prototypes! This saves a *lot* of boilerplate for conversion antags.
+
 - type: antag
   id: Rev
   name: roles-antag-rev-name
@@ -36,7 +52,7 @@
   id: HeadRevGear
   storage:
     back:
-    # <Trauma> replaced all upstream items
+    # <Trauma> - replaced all upstream items
     - RevGear
     - RevGear
     - RevGear

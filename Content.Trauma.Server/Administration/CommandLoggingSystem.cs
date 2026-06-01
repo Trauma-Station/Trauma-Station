@@ -24,6 +24,7 @@ public sealed partial class CommandLoggingSystem : EntitySystem
         {"golobby", LogImpact.Extreme},
         {"restartround", LogImpact.Extreme},
         {"restartroundnow", LogImpact.Extreme},
+        {"wipecurrency", LogImpact.Extreme},
         // High
         {"ban", LogImpact.High},
         {"pardon", LogImpact.High},
@@ -51,6 +52,7 @@ public sealed partial class CommandLoggingSystem : EntitySystem
     {
         // ignore non-admins to avoid spamming/DOS
         if (shell.Player is { } player && _admin.GetAdminData(player) == null ||
+            _admin.CanAnyoneRunCommand(command) || // ignore commands anyone is allowed to run like chat...
             Ignored.Contains(command))
             return;
 

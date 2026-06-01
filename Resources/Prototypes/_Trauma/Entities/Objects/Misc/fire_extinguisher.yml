@@ -6,10 +6,8 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Misc/holy_fire_extinguisher.rsi
-  - type: SolutionContainerManager
-    solutions:
-      spray:
-        maxVol: 100
-        reagents:
-        - ReagentId: Holywater
-          Quantity: 100
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 100

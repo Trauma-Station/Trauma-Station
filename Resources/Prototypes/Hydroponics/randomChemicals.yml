@@ -26,6 +26,12 @@
     - BingleJuice
     - JuiceThatMakesYouHew
     - Carpolin
+    - Aluite
+    - AmmoniatedMercury
+    - Rororium
+    - NanoMachines
+    - BlackPowder
+    - PolytrinicAcid
     # </Trauma>
     - Omnizine
     - Impedrezene
@@ -39,6 +45,15 @@
     # <Trauma>
     - Genecide
     - Fentanyl
+    - Anacea
+    - Hemorrhinol
+    - Tirizene
+    - Hercuri
+    - GreyMatter
+    - Atropine
+    - Herignis
+    - Lipozine
+    - Fluorosurfactant
     # </Trauma>
     - Cognizine
     - Toxin
@@ -67,6 +82,12 @@
     # <Trauma>
     - Ibuprofen
     - Tilenol
+    - Morphine
+    - Multiver
+    - Bozaide
+    - Musiver
+    - Tramadol
+    - Microplastics
     # </Trauma>
     - Desoxyephedrine
     - ChloralHydrate
@@ -99,6 +120,8 @@
     # <Trauma>
     - Tirimol
     - Probital
+    - Mold
+    - Cement
     # </Trauma>
     - Bicaridine
     - Dermaline
@@ -137,6 +160,9 @@
   - quantity: 10
     weight: 3.5
     reagents:
+    # <Trauma>
+    - Nutriment
+    # <Trauma>
     - Vitamin
     - Kelotane
     - Inaprovaline

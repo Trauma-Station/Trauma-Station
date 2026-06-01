@@ -30,6 +30,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private TurfSystem _turf = default!;
 
+    public static readonly ProtoId<TagPrototype> DirectionalTag = "Directional";
     public static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     private List<EntityUid> _gibQueue = new();
@@ -120,7 +121,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         var anchoredEntities = _map.GetAnchoredEntities(tile.Value.GridUid, mapGridComponent, coords);
         foreach (var x in anchoredEntities)
         {
-            if (_tag.HasTag(x, WallTag))
+            if (_tag.HasTag(x, WallTag) && !_tag.HasTag(x, DirectionalTag))
                 return true;
         }
 

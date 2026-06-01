@@ -15,6 +15,7 @@ using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Content.Trauma.Shared.Heretic.Systems.Side;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
@@ -57,7 +58,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
         SubscribeLocalEvent<ProtectiveBladesComponent, ProtectiveBladeUsedEvent>(OnBladeUsed);
         SubscribeLocalEvent<ProtectiveBladesComponent, BeforeDamageChangedEvent>(OnTakeDamage);
         SubscribeLocalEvent<ProtectiveBladesComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction,
-            after: [typeof(SharedHereticAbilitySystem), typeof(RiposteeSystem)]);
+            after: [typeof(SharedHereticAbilitySystem), typeof(RiposteeSystem), typeof(UnfathomableCurioSystem)]);
         SubscribeLocalEvent<ProtectiveBladesComponent, ProjectileReflectAttemptEvent>(OnProjectileReflectAttempt);
         SubscribeLocalEvent<ProtectiveBladesComponent, HitScanReflectAttemptEvent>(OnHitscanReflectAttempt);
 

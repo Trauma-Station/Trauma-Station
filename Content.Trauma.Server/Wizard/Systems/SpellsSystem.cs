@@ -58,7 +58,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 

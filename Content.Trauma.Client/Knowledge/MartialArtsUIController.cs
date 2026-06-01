@@ -10,12 +10,9 @@ using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Knowledge;
 

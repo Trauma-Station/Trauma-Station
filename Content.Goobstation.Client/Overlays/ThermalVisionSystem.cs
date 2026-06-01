@@ -6,7 +6,6 @@ using Content.Goobstation.Shared.Overlays;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Whitelist;
-using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Overlays;
 

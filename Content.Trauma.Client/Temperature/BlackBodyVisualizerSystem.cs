@@ -4,8 +4,6 @@ using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Trauma.Shared.Temperature;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Shared.Maths;
 
 namespace Content.Trauma.Client.Temperature;

@@ -1,0 +1,8 @@
+- type: antagSpecifier
+  id: PirateCaptain
+  spawnerPrototype: SpawnPointPirateCaptain
+  startingGear: PirateGear
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesDeathCommando

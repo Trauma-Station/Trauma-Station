@@ -6,6 +6,7 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Temperature;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 
@@ -84,6 +85,7 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
 
         EnsureComp<StripMenuInvisibleComponent>(cloak);
         RemCompDeferred<UnholyItemComponent>(cloak);
+        RemCompDeferred<HereticMagicItemComponent>(cloak);
         UpdatePressureProtection(cloak, false);
     }
 
@@ -98,6 +100,7 @@ public abstract partial class SharedVoidCloakSystem : EntitySystem
 
         RemCompDeferred<StripMenuInvisibleComponent>(cloak);
         EnsureComp<UnholyItemComponent>(cloak);
+        EnsureComp<HereticMagicItemComponent>(cloak);
         UpdatePressureProtection(cloak, true);
     }
 

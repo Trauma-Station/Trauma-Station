@@ -1,3 +1,7 @@
+heretic-passive-unlock =
+    {"["}bold]Tier {$tier} passive ability unlocked![/bold]
+    {$desc}
+
 heretic-influence-start = Draining influence...
 heretic-influence-require-drainer = You need a codex to drain influences.
 
@@ -49,14 +53,19 @@ mawed-crucible-flask-full-message = flask is full!
 mirror-maid-examine-message-user = {$ent} seems to fade in and out slightly.
 mirror-maid-examine-message-maid = {$user}'s gaze pierces your every being!
 
-influence-heretic-examine-message =
-    {"["}color=purple]This is [bold]Tier {$tier}[/bold] reality shift.
-    Collecting it with codex will allow you to get one of three random [bold]Tier {$tier}[/bold] side knowledge { $tier ->
-        [3] for half the cost
-        *[other] for free
-    } upon reaching the required path stage.[/color]
-
-
 ui-options-special-volume = Special volume:
 
 block-context-menu-message = You cannot interact with {$entity} via context menu using {$item}!
+
+coin-flip-examine-message = Current side: [bold]{$side}[/bold]
+coin-flip-popup-message = {CAPITALIZE(THE($coin))} lands on {$side}
+
+eldritch-coin-side-heretic = heretic
+eldritch-coin-side-blade = blade
+
+lionhunter-rifle-examine-message =
+    Right click on a distant target in [color=red]Combat Mode[/color] to aim at them.
+    This fires an empowered homing projectile that can go through walls.
+    Only special hunter's ammunition has this effect.
+
+lionhunter-rifle-aim-message = taking aim...

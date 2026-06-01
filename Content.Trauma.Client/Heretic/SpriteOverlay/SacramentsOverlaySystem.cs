@@ -3,7 +3,6 @@
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 

@@ -12,7 +12,7 @@
     mayTransfer: true
     whitelist:
       tags:
-        - CartridgeTurret
+      - CartridgeTurret
     proto: CartridgeTurret
     capacity: 60
   - type: Item
@@ -36,6 +36,33 @@
 - type: entity
   parent: BaseMagazineTurret
   id: BaseMagazineTurretEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: BaseMagazineTurret
+  id: BaseMagazineTurretHeavy
+  name: "pan magazine (.22 short)"
+  suffix: Full
+  description: 240 round low-caliber pan magazine, often used by communists and other assholes.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/maxim.rsi
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeTurret
+    proto: CartridgeTurret
+    capacity: 240
+  - type: Item
+    size: Normal
+
+- type: entity
+  parent: BaseMagazineTurretHeavy
+  id: BaseMagazineTurretHeavyEmpty
   suffix: Empty
   components:
   - type: BallisticAmmoProvider

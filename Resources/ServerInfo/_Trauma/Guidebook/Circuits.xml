@@ -1,0 +1,45 @@
+<Document>
+# Circuits
+
+Circuits on Trauma Station let you easily make node-based programs that can run from a single item, while controlling up to 16 devices directly.
+
+Compared to basic logic gate items, you can do far more of their basic operations in a single item, but also use strings and numbers instead of just booleans (on and off).
+
+They are heavily inspired by Stationeers' IC10 system, but using nodes instead of MIPS. If you've played around with IC10s you'll know how to use circuits already.
+
+The [bold]integrated circuit[/bold] item itself can be printed at a circuit printer.
+
+## Housings
+
+An integrated circuit doesn't have any kind of power supply by itself, you need to print a [bold]circuit housing[/bold] at an autolathe.
+
+The regular one uses LV power and must be anchored, it also has a power switch you can toggle by right clicking it.
+
+The portable one uses a powercell and can go anywhere, even inside your chest cavity...
+As a result of its portability, it also has a much lower range. You may have to figure out how to relay signals to control far away devices, should you need that.
+
+## Circuit Editor Console
+
+You will need this to actually put a program into a circuit.
+Print a board and build a computer like normal, then insert your circuit to begin.
+
+# Ports
+
+On the left and right of the main workspace there are your Input and Output ports.
+These ports can send and receive signals from devices linked to the circuit's housing.
+You can link ports to gates by clicking one then clicking a pin on a gate, or directly to an output port should you need that.
+
+# Gates
+
+In order to actually do anything you have to add gates. Click buttons on the left to add them to the circuit, then move them somewhere nice.
+
+Like ports, gates have their outputs linked by clicking their pins with eachother. If you misclick a pin, just click it again to stop linking from it.
+
+Currently you are limited to 256 gates so you can pretty much go wild.
+
+# Importing / Exporting
+
+You can click Export at the top to export your circuit to a .yml file on your computer.
+You can then import a circuit file later to load existing code onto a circuit, very handy.
+
+</Document>

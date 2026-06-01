@@ -92,6 +92,7 @@
   - BartenderEnvirohelm
   - BartenderEnvirosuit
   - BartenderEnvirogloves
+  - BartenderWeapon # Trauma
   - ExclusiveItems # Trauma
 
 - type: roleLoadout
@@ -510,7 +511,6 @@
   - HeadofSecurityEnvirohelm
   - HeadofSecurityEnvirosuit
   - HeadofSecurityEnvirogloves
-  - HeadofSecurityGloves
   - ExclusiveItems # Trauma
 
 - type: roleLoadout

@@ -16,7 +16,6 @@ using Content.Trauma.Shared.Teleportation;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 

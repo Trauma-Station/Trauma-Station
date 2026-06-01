@@ -79,6 +79,11 @@
       department: Service
       time: 3h
       inverted: true
+    #Civilian
+    Chef: # Anti-raider ops
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 1h
     #Cargo - No intern role, so no limits lmao.
     #Engineering
     StationEngineer:
@@ -200,6 +205,12 @@
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 1h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 1h
+    SpaceNinja:
+    - !type:OverallPlaytimeRequirement
+      time: 3h
     - !type:DepartmentTimeRequirement
       department: Security
       time: 1h

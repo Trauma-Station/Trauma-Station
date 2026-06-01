@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Shadowling;
 
-public sealed class EnthrallOverlay : Overlay
+public sealed partial class EnthrallOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;

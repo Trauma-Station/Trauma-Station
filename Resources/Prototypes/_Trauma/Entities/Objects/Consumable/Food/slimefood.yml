@@ -7,10 +7,8 @@
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/nutrislime.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Nutrislime
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutrislime
+        Quantity: 15

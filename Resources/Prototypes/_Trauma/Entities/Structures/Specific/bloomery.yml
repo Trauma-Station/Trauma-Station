@@ -26,8 +26,9 @@
         layer:
         - MachineLayer
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -177,8 +178,9 @@
     graph: BloomeryCold
     node: bloomerybrasslit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: NormalMode
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PointLight
     radius: 2
     energy: 3
@@ -215,8 +217,9 @@
     graph: BloomeryCold
     node: bloomerysteellit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: NormalMode
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PointLight
     radius: 2
     energy: 3
@@ -253,8 +256,9 @@
     graph: BloomeryCold
     node: bloomeryplasteellit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: NormalMode
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PointLight
     radius: 2
     energy: 3

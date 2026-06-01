@@ -11,7 +11,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.OfficeChair;
 

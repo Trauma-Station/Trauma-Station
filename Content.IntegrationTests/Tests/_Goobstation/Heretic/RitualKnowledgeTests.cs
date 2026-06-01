@@ -2,7 +2,6 @@
 
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Tag;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using Content.Shared.Prototypes;

@@ -1,7 +1,7 @@
 ## Belts that need/have visualizers
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband]
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband, BaseSheathCounterAttackMedium] # Trauma - BaseSheathCounterAttackMedium
   id: ClothingBeltSheath
   name: sabre sheath
   description: An ornate sheath designed to hold an officer's blade.
@@ -37,7 +37,7 @@
   parent: ClothingBeltStorageBase
   id: ClothingBeltQuiver
   name: quiver
-  description: Can hold up to 15 arrows, and fits snug around your waist.
+  description: Can hold up to 16 arrows, and fits snug around your waist.
   components:
   - type: Sprite
     sprite: Clothing/Belt/quiver.rsi

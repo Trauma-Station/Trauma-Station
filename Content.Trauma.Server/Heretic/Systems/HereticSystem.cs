@@ -6,7 +6,6 @@ using Content.Goobstation.Shared.ManifestListings;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
 using Content.Server.Antag;
-using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Hands.Systems;
 using Content.Server.Polymorph.Components;
@@ -42,7 +41,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -64,7 +62,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
     [Dependency] private SharedHereticRitualSystem _ritual = default!;
     [Dependency] private IRobustRandom _rand = default!;
-    [Dependency] private IChatManager _chatMan = default!;
     [Dependency] private IPrototypeManager _proto = default!;
 
     [Dependency] private EntityQuery<HereticMinionComponent> _minionQuery = default!;
@@ -270,35 +267,37 @@ public sealed partial class HereticSystem : SharedHereticSystem
         while (query.MoveNext(out var uid, out var heretic, out var store, out var mind))
         {
             // passive point gain every 20 minutes
-            UpdateMindKnowledge((uid, heretic, store, mind), null, 1f);
+            UpdateMindKnowledge((uid, heretic, store, mind), null, OneKnowledgePoint);
         }
     }
 
     public override void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
         EntityUid? user,
-        float amount,
+        Dictionary<string, FixedPoint2> knowledge,
         bool showText = true,
         bool playSound = true)
     {
-        base.UpdateMindKnowledge(ent, user, amount, showText, playSound);
+        base.UpdateMindKnowledge(ent, user, knowledge, showText, playSound);
 
         var (mindId, heretic, store, mind) = ent;
         var uid = user ?? mind.OwnedEntity;
 
-        _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "KnowledgePoint", amount } }, mindId, store);
+        _store.TryAddCurrency(knowledge, mindId, store);
         _store.UpdateUserInterface(uid, mindId, store);
 
         if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
-            objective.Researched += amount;
+            objective.Researched += knowledge.Values.Sum().Float();
 
         UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));
 
         if (!showText && !playSound)
             return;
 
+        var mainKnowledgeGain = knowledge.GetValueOrDefault(Currency, 0).Float();
+
         if (!PlayerMan.TryGetSessionById(mind.UserId, out var session))
         {
-            heretic.KnowledgeTracker += amount;
+            heretic.KnowledgeTracker += mainKnowledgeGain;
             Dirty(mindId, heretic);
             return;
         }
@@ -310,7 +309,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
             var size = heretic.InfluenceGainTextFontSize;
             var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
             SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
-            _chatMan.ChatMessageToOne(ChatChannel.Server,
+            ChatMan.ChatMessageToOne(ChatChannel.Server,
                 message,
                 loc,
                 default,
@@ -324,7 +323,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
         var couldBreak = heretic.CanBreakBlade;
         var hadAura = heretic.ShouldShowAura;
-        heretic.KnowledgeTracker += amount;
+        heretic.KnowledgeTracker += mainKnowledgeGain;
         Dirty(mindId, heretic);
         var canBreak = heretic.CanBreakBlade;
         var showAura = heretic.ShouldShowAura;
@@ -334,48 +333,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
         if (!hadAura && showAura)
             ShowAura(heretic, uid, session, false);
-    }
-
-    public override void SendNoBreakBladeMessage(HereticComponent heretic, ICommonSession session)
-    {
-        base.SendNoBreakBladeMessage(heretic, session);
-
-        if (heretic.CanBreakBlade)
-            return;
-
-        var msg = Loc.GetString(heretic.BreakBladeAbilityLostMessage);
-        _chatMan.ChatMessageToOne(ChatChannel.Server,
-            msg,
-            msg,
-            default,
-            false,
-            session.Channel,
-            Color.Red);
-    }
-
-    public override void ShowAura(HereticComponent heretic, EntityUid? body, ICommonSession session, bool immediate)
-    {
-        base.ShowAura(heretic, body, session, immediate);
-
-        if (!heretic.ShouldShowAura)
-            return;
-
-        if (body is { } uid)
-        {
-            if (immediate)
-                UpdateHereticAura(uid);
-            else
-                Status.TryUpdateStatusEffectDuration(uid, heretic.HideAuraStatusEffect, heretic.AuraDelayTime);
-        }
-
-        var msg = Loc.GetString(immediate ? heretic.AuraVisibleMessageImmediate : heretic.AuraVisibleMessage);
-        _chatMan.ChatMessageToOne(ChatChannel.Server,
-            msg,
-            msg,
-            default,
-            false,
-            session.Channel,
-            Color.Red);
     }
 
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)
@@ -541,6 +498,13 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (ent.Comp.CurrentPath is not { } path)
             return;
 
+        // Upgrade passive to level 3
+        var ev = new HereticSetPassiveLevelEvent()
+        {
+            Level = 3,
+        };
+        RaiseLocalEvent(ent, ev);
+
         if (TryComp(ent, out ActionsContainerComponent? container))
         {
             foreach (var action in container.Container.ContainedEntities)
@@ -623,7 +587,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
             for (var i = 0; i < amount; i++)
             {
                 var listing = _rand.PickAndTake(value);
-                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, _ => -FixedPoint2.New(1)));
+                listing.AddCostModifier(key, listing.Cost.ToDictionary(x => x.Key, x => -x.Value));
             }
         }
     }

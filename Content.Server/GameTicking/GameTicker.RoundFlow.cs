@@ -166,13 +166,10 @@ namespace Content.Server.GameTicking
             Vector2? offset = null,
             Angle? rot = null)
         {
-            offset ??= proto.MaxRandomOffset != 0f
-                ? _robustRandom.NextVector2(proto.MaxRandomOffset)
-                : Vector2.Zero;
-
-            rot ??= proto.RandomRotation
-                ? _robustRandom.NextAngle()
-                : Angle.Zero;
+            // <Trauma> - replace random offset shit
+            offset ??= Vector2.Zero;
+            rot ??= Angle.Zero;
+            // </Trauma>
 
             opts ??= DeserializationOptions.Default;
             var ev = new PreGameMapLoad(proto, opts.Value, offset.Value, rot.Value);

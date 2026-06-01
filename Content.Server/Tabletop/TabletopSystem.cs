@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Tabletop;
+// </Trauma>
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Server.Tabletop.Components;
@@ -86,7 +89,7 @@ namespace Content.Server.Tabletop
             if (component.Session is not { } session)
                 return;
 
-            if (!_hands.TryGetActiveItem(uid, out var handEnt))
+            if (!_hands.TryGetActiveItem((args.User, hands), out var handEnt)) // Trauma - chess board has no hands, use the user instead
                 return;
 
             if (!TryComp<ItemComponent>(handEnt, out var item))
@@ -105,6 +108,10 @@ namespace Content.Server.Tabletop
             var protoId = meta.EntityPrototype?.ID;
 
             var hologram = Spawn(protoId, session.Position.Offset(-1, 0));
+            // <Trauma>
+            var ev = new TabletopSpawnedEvent();
+            RaiseLocalEvent(hologram, ref ev);
+            // </Trauma>
 
             // Make sure the entity can be dragged and can be removed, move it into the board game world and add it to the Entities hashmap
             EnsureComp<TabletopDraggableComponent>(hologram);

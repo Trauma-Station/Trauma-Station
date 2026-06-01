@@ -23,3 +23,26 @@
         Holy: 50 # Insanely high damage for a nullrod form, however the crossbow takes 10s to reload. so good luck :)
   - type: TimedDespawn
     lifetime: 60 # Can't farm arrows. However can be stolen by others and fired from a normal bow (funny)
+
+- type: entity
+  abstract: true
+  parent: BaseArrow
+  id: BaseArrowImprovised
+  components:
+  - type: ThrowableBlocked
+  - type: DamageOnHit
+    damage:
+      types:
+        Blunt: 1
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 1
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+  - type: Tag
+    tags:
+    - Trash
+    - Arrow

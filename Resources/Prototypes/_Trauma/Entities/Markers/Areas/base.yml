@@ -11,6 +11,7 @@
   - type: Transform
     anchored: true
     noRot: true
+    gridTraversal: false # waste of processing
   - type: Sprite
     noRot: true
     drawdepth: Overdoors
