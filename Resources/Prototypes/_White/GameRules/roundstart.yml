@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseRoundstartAntagRule
+  parent: BaseGameRule
   id: BaseXenomorphsRule
   components:
   - type: AntagObjectives
