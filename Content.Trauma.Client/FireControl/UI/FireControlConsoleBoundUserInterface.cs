@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.FireControl;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Client.FireControl.UI;

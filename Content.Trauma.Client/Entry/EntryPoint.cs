@@ -5,7 +5,6 @@ using Content.Trauma.Client.Input;
 using Content.Trauma.Client.IoC;
 using Content.Trauma.Client.ItemSlotRenderer;
 using Content.Trauma.Client.UserInterface;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.ContentPack;
 

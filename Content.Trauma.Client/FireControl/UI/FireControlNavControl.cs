@@ -9,8 +9,6 @@ using Content.Shared.Shuttles.Systems;
 using Content.Trauma.Client.Radar;
 using Content.Trauma.Common.Radar;
 using Content.Trauma.Shared.FireControl;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;

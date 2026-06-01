@@ -118,8 +118,9 @@
     - Unimplantable
     - StunImmune
   - type: Damageable
-    damageContainer: InorganicMetaphysical
     damageModifierSet: CosmicColossus
+  - type: Injurable
+    damageContainer: InorganicMetaphysical
   - type: MobThresholds
     thresholds:
       0: Alive

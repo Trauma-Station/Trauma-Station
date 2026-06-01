@@ -2,9 +2,12 @@
 
 using Content.Shared.Body;
 using Content.Shared.Examine;
+using Content.Shared.Hands;
 using Content.Shared.Inventory;
+using Content.Shared.Movement.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
+using Content.Shared.Wieldable.Components;
 using Content.Trauma.Shared.Viewcone.Components;
 
 namespace Content.Trauma.Shared.Viewcone;
@@ -17,6 +20,7 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private EntityQuery<ViewconeComponent> _query = default!;
+    [Dependency] private EntityQuery<WieldableComponent> _wieldableQuery = default!;
 
     public override void Initialize()
     {
@@ -29,6 +33,8 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
         Subs.SubscribeWithRelay<ViewconeModifierComponent, ModifyViewconeAngleEvent>(OnModifyAngle, held: false);
         SubscribeLocalEvent<ViewconeModifierComponent, StatusEffectRelayedEvent<ModifyViewconeAngleEvent>>(OnEffectModifyAngle);
         SubscribeLocalEvent<ViewconeModifierComponent, BodyRelayedEvent<ModifyViewconeAngleEvent>>(OnOrganModifyAngle);
+
+        SubscribeLocalEvent<CursorOffsetRequiresWieldComponent, HeldRelayedEvent<ModifyViewconeAngleEvent>>(OnScopeModify);
     }
 
     private void OnExamined(Entity<ViewconeModifierComponent> ent, ref ExaminedEvent args)
@@ -36,8 +42,9 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
         var dir = ent.Comp.AngleModifier < 1f ? "decrease" : "increase";
         var loc = "viewcone-modifier-examine-" + dir;
 
-        var degrees = (int) MathF.Abs(ent.Comp.AngleModifier);
-        args.PushMarkup(Loc.GetString(loc, ("degrees", degrees)));
+        // 1.25 -> 25, 0.6 -> 40
+        var percent = Math.Abs((int) (ent.Comp.AngleModifier * 100f) - 100);
+        args.PushMarkup(Loc.GetString(loc, ("percent", percent)));
     }
 
     private void OnModifyAngle(Entity<ViewconeModifierComponent> ent, ref ModifyViewconeAngleEvent args)
@@ -55,6 +62,12 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
     private void OnOrganModifyAngle(Entity<ViewconeModifierComponent> ent, ref BodyRelayedEvent<ModifyViewconeAngleEvent> args)
     {
         args.Args.ModifyAngle(ent.Comp.AngleModifier);
+    }
+
+    private void OnScopeModify(Entity<CursorOffsetRequiresWieldComponent> ent, ref HeldRelayedEvent<ModifyViewconeAngleEvent> args)
+    {
+        if (_wieldableQuery.TryComp(ent, out var wieldable) && wieldable.Wielded)
+            args.Args.ModifyAngle(ent.Comp.ViewAngleMultiplier);
     }
 
     /// <summary>

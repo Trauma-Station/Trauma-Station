@@ -1,26 +1,3 @@
-# SPDX-FileCopyrightText: 2021 Pancake <Pangogie@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 metalgearsloth <comedian_vs_clown@hotmail.com>
-# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
-# SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 Visne <39844191+Visne@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 metalgearsloth <metalgearsloth@gmail.com>
-# SPDX-FileCopyrightText: 2023 Jeff <velcroboy333@hotmail.com>
-# SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 Velcroboy <107660393+ChilbroBaggins@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 lzk <124214523+lzk228@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 potato1234_x <79580518+potato1234x@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 DieselMohawk <173439801+DieselMohawk@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 RatherUncreative <RatherUncreativeName@proton.me>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   id: Joint
   parent: [BaseCigar, BaseMinorContraband] # Trauma
@@ -44,13 +21,11 @@
   - type: Construction
     graph: smokeableJoint
     node: joint
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 30
-        reagents:
-          - ReagentId: THC
-            Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: THC
+        Quantity: 20
   - type: RandomMetadata
     nameSegments: [NamesRollie]
   - type: StaticPrice #Goobstation
@@ -58,33 +33,33 @@
 
 - type: entity
   id: JointRainbow
-  parent: [Joint, BaseMinorContraband] # Trauma
+  parent: Joint
   name: joint
   suffix: Rainbow
   description: A roll of dried plant matter wrapped in thin paper. Seems to be colorful inside.
   components:
+  # <Trauma>
+  - type: StaticPrice
+    price: 500
+  # </Trauma>
   - type: Construction
     graph: smokeableJointRainbow
     node: jointRainbow
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 20
-        reagents:
-        - ReagentId: SpaceDrugs
-          Quantity: 4
-        - ReagentId: Lipolicide
-          Quantity: 4
-        - ReagentId: MindbreakerToxin
-          Quantity: 2.66
-        - ReagentId: Happiness
-          Quantity: 2.66
-#       - ReagentId: ColorfulReagent
-#         Quantity: 1.33
-        - ReagentId: Psicodine
-          Quantity: 0.8
-  - type: StaticPrice #Goobstation
-    price: 500        #Goobstation
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SpaceDrugs
+        Quantity: 10
+      - ReagentId: Lipolicide
+        Quantity: 5
+      - ReagentId: MindbreakerToxin
+        Quantity: 5
+      - ReagentId: Happiness
+        Quantity: 5
+  #   - ReagentId: ColorfulReagent
+  #     Quantity: 1.33
+      - ReagentId: Psicodine
+        Quantity: 3.67
 
 - type: entity
   id: BluntCigar # Shitmed Change
@@ -109,13 +84,11 @@
   - type: Construction
     graph: smokeableBlunt
     node: blunt
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 30
-        reagents:
-          - ReagentId: THC
-            Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: THC
+        Quantity: 20
   - type: RandomMetadata
     nameSegments: [NamesRollie]
   - type: StaticPrice #Goobstation
@@ -128,25 +101,25 @@
   suffix: Rainbow
   description: A roll of dried plant matter wrapped in a dried tobacco leaf. Seems to be colorful inside.
   components:
+  # <Trauma>
+  - type: StaticPrice
+    price: 500
+  # </Trauma>
   - type: Construction
     graph: smokeableBluntRainbow
     node: bluntRainbow
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 20
-        reagents:
-        - ReagentId: SpaceDrugs
-          Quantity: 4
-        - ReagentId: Lipolicide
-          Quantity: 4
-        - ReagentId: MindbreakerToxin
-          Quantity: 2.66
-        - ReagentId: Happiness
-          Quantity: 2.66
-#       - ReagentId: ColorfulReagent
-#         Quantity: 1.33
-        - ReagentId: Psicodine
-          Quantity: 0.8
-  - type: StaticPrice #Goobstation
-    price: 500        #Goobstation
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SpaceDrugs
+        Quantity: 10
+      - ReagentId: Lipolicide
+        Quantity: 5
+      - ReagentId: MindbreakerToxin
+        Quantity: 5
+      - ReagentId: Happiness
+        Quantity: 5
+  #   - ReagentId: ColorfulReagent
+  #     Quantity: 1.33
+      - ReagentId: Psicodine
+        Quantity: 3.67

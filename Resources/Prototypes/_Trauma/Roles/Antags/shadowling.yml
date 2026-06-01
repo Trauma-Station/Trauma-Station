@@ -1,0 +1,4 @@
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Shadowling
+  prefRoles: [ Shadowling ]

@@ -59,8 +59,9 @@
       0: Alive
       300: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
 
 - type: entity
   name: Brimdemon
@@ -139,8 +140,9 @@
       0: Alive
       300: Dead
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
 
 - type: entity
   name: Rabble
@@ -203,5 +205,6 @@
             sound:
               path: /Audio/Effects/gib1.ogg
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic

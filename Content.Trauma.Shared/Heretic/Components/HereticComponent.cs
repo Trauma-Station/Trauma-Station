@@ -109,12 +109,7 @@ public sealed partial class HereticComponent : Component
     /// Side category -> draft amount
     /// </summary>
     [DataField]
-    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts = new()
-    {
-        { "HereticPathSideT1", 1 }, // 1 free draft of t1 side roundstart
-        { "HereticPathSideT2", 0 },
-        { "HereticPathSideT3", 0 },
-    };
+    public Dictionary<ProtoId<StoreCategoryPrototype>, int> SideKnowledgeDrafts = new();
 
     [DataField]
     public int SideDraftChoiceAmount = 3;
@@ -133,7 +128,7 @@ public sealed partial class HereticComponent : Component
     /// or reaching <see cref="LockBladeBreakKnowledgeAmount"/> knowledge points
     /// </summary>
     [ViewVariables]
-    public bool CanBreakBlade => PathStage < 7 && AvailablePassiveLevel < 2 && !Ascended &&
+    public bool CanBreakBlade => PathStage < 7 && PassiveLevel < 2 && !Ascended &&
                                  KnowledgeTracker < LockBladeBreakKnowledgeAmount;
 
     /// <summary>
@@ -161,27 +156,17 @@ public sealed partial class HereticComponent : Component
     public int SacrificeTracker;
 
     /// <summary>
-    /// Influences gradually spawn with increasing tier after sacrifices
+    /// Influences gradually spawn after sacrifices
     /// <see cref="SacrificeTracker"/> tracks the amount
     /// </summary>
     [DataField]
-    public Dictionary<int, EntProtoId> InfluenceSpawnPerSacrificeAmount = new()
-    {
-        {1, "EldritchInfluenceT2"},
-        {2, "EldritchInfluenceT3"},
-    };
+    public int MaxSacrificeInfluenceSpawn = 2;
 
     /// <summary>
     /// Inactive means either dead or in jaunt
     /// </summary>
     [DataField]
     public bool IsActive = true;
-
-    /// <summary>
-    /// Determines whether heretic can get t2 and t3 passives from the store
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public int AvailablePassiveLevel = 1;
 
     /// <summary>
     /// Current heretic passive ability level

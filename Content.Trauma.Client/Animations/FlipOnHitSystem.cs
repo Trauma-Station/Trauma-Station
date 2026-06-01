@@ -2,7 +2,6 @@
 
 using Content.Trauma.Shared.Animations;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 
 namespace Content.Trauma.Client.Animations;

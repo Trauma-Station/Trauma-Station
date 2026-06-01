@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a24aa586b5bed116c600eaf5e540f9097a43b385/icons/obj/weapons/sword.dmi, https://github.com/tgstation/tgstation/blob/a24aa586b5bed116c600eaf5e540f9097a43b385/icons/mob/inhands/weapons/swords_lefthand.dmi, https://github.com/tgstation/tgstation/blob/a24aa586b5bed116c600eaf5e540f9097a43b385/icons/mob/inhands/weapons/swords_righthand.dmi, inhand sprites modified by Aviu00 (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "inhand-left",
+        "directions": 4
+    },
+    {
+        "name": "inhand-right",
+        "directions": 4
+    },
+    {
+        "name": "icon"
+    }
+  ]
+}

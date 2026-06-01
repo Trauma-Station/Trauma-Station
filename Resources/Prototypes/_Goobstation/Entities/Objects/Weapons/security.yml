@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -102,8 +93,9 @@
     sound:
       path: /Audio/Effects/tesla.ogg
   - type: Damageable
-    damageContainer: OnlyStructural
     damageModifierSet: StructuralImmunity # So only the demolishing round can even damage it
+  - type: Injurable
+    damageContainer: OnlyStructural
   - type: Destructible
     thresholds:
     - trigger:
@@ -152,13 +144,13 @@
     solution: spray
   - type: ExaminableSolution
     solution: spray
-  - type: SolutionContainerManager
-    solutions:
-      spray:
-        maxVol: 50
-        reagents:
-        - ReagentId: OleoresinCapsaicin
-          Quantity: 50
+  - type: Solution
+    id: spray
+    solution:
+      maxVol: 50
+      reagents:
+      - ReagentId: OleoresinCapsaicin
+        Quantity: 50
   - type: Spray
     transferAmount: 10
     sprayVelocity: 3

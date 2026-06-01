@@ -109,7 +109,7 @@
   - type: ContentEye
     maxZoom: 1.5,1.5
     targetZoom: 1.5,1.5
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: InjectableSolution
     solution: chemicals
   - type: Bloodstream

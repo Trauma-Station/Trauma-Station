@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -26,31 +21,6 @@
     exclusiveAntag: true
     roleType: Familiar
   - type: ApprenticeRole
-
-- type: antag
-  id: Apprentice
-  name: roles-antag-apprentice-name
-  antagonist: true
-  setPreference: false
-  objective: roles-antag-apprentice-description
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: BaseAntagSpawner
-  id: SpawnPointWizard
-  components:
-  - type: GhostRole
-    name: roles-antag-wizard-name
-    description: roles-antag-wizard-objective-goob
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgent
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Clothing/Head/Hats/wizardhat.rsi
-        state: icon
 
 - type: entity
   id: SpawnPointMarkerWizard

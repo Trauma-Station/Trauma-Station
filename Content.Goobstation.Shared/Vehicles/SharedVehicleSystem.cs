@@ -151,6 +151,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         if (ent.Comp.RequiredHands == 0)
             return false;
 
+        _virtualItem.DeleteInHandsMatching(driver, ent.Owner, queueDel: false);
         for (var hands = 0; hands < ent.Comp.RequiredHands; hands++)
         {
             if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, driver, false))
@@ -248,10 +249,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         }
         RemComp<RelayInputMoverComponent>(driver);
 
-        if (vehicleComp.HornAction != null)
-            _actions.RemoveAction(driver, vehicleComp.HornAction);
-        if (vehicleComp.SirenAction != null)
-            _actions.RemoveAction(driver, vehicleComp.SirenAction);
+        _actions.RemoveProvidedActions(driver, vehicle);
 
         _virtualItem.DeleteInHandsMatching(driver, vehicle);
 

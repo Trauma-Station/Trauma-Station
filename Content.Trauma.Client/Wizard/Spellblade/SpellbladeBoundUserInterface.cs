@@ -2,9 +2,7 @@
 
 using Content.Trauma.Shared.Wizard.Spellblade;
 using JetBrains.Annotations;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Wizard.Spellblade;
 

@@ -1,3 +1,4 @@
+knowledge-path-cosmos-passive-desc-1 = Cosmic fields speed you up and regenerate stamina.
 knowledge-path-cosmos-passive-desc-2 = Cosmic fields now block explosions, disrupt grenades or signalers from being activated and turn off already primed grenades.
 knowledge-path-cosmos-passive-desc-3 = Cosmic fields now slow projectiles down.
 
@@ -15,7 +16,6 @@ knowledge-path-cosmos-s2-desc =
 
     Your Mansus Grasp will give people a star mark (cosmic ring) and create a cosmic field where you stand.
     People with a star mark can not pass cosmic fields.
-    Cosmic fields speed you up and regenerate stamina.
 
 knowledge-path-cosmos-s3-name = Mark of Cosmos
 knowledge-path-cosmos-s3-desc =

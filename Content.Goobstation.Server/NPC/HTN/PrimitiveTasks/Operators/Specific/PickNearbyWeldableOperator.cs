@@ -16,13 +16,12 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyWeldableOperator : HTNOperator
 {
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _ent = default!;
     private DamageableSystem _damageable = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
-
-    [DataField]
-    public string RangeKey = NPCBlackboard.WeldbotWeldRange;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<WeldbotComponent> _query = default!;
 
     /// <summary>
     /// Target entity to weld
@@ -36,6 +35,8 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
 
+    public const float Range = 4f;
+
     private HashSet<Entity<RepairableComponent>> _targets = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
@@ -45,6 +46,9 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
         _damageable = sysManager.GetEntitySystem<DamageableSystem>();
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+
+        _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
+        _query = _ent.GetEntityQuery<WeldbotComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -52,14 +56,14 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entMan) || !_entMan.TryGetComponent<WeldbotComponent>(owner, out var weldbot))
+        if (!_query.TryComp(owner, out var weldbot))
             return (false, null);
 
-        var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
+        var emagged = _emaggedQuery.HasComp(owner);
 
-        var coords = _entMan.GetComponent<TransformComponent>(owner).Coordinates;
+        var coords = _ent.GetComponent<TransformComponent>(owner).Coordinates;
         _targets.Clear();
-        _lookup.GetEntitiesInRange(coords, range, _targets);
+        _lookup.GetEntitiesInRange(coords, Range, _targets);
         foreach (var target in _targets)
         {
             if (!emagged)
@@ -80,7 +84,7 @@ public sealed partial class PickNearbyWeldableOperator : HTNOperator
             return (true, new Dictionary<string, object>()
             {
                 {TargetKey, target.Owner},
-                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
+                {TargetMoveKey, _ent.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });
         }

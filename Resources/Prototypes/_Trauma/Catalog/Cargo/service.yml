@@ -7,3 +7,13 @@
   cost: 2500
   category: cargoproduct-category-name-service
   group: market
+
+- type: cargoProduct
+  id: CoconutCrabSet
+  icon:
+    sprite: _Trauma/Mobs/Monsters/coconutcrab.rsi
+    state: coconutcrab
+  product: CrateServiceCoconutCrab
+  cost: 7500
+  category: cargoproduct-category-name-service
+  group: market

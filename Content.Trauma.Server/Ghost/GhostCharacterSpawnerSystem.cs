@@ -85,7 +85,7 @@ public sealed partial class GhostCharacterSpawnerSystem : EntitySystem
         }
 
         profile ??= HumanoidCharacterProfile.RandomWithSpecies(ent.Comp.DefaultSpecies);
-        var coords = Transform(ent).Coordinates; // the gamerule happens to be in nullspace
+        var coords = _transform.ToCoordinates(args.Coords);
         args.Entity = _spawning.SpawnPlayerMob(coords, job: null, profile: profile, station: null);
     }
 

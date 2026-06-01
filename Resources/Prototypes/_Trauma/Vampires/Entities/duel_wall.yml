@@ -1,0 +1,5 @@
+- type: entity
+  parent: WallHierophantArenaTemporary # FYI, yes this is parity
+  id: WallGargantuanTemporary
+  name: magic wall
+  description: The greatest duels happen around these walls

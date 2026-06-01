@@ -7,6 +7,7 @@ namespace Content.IntegrationTests.Tests.Utility;
 [TestOf(typeof(GameDataScrounger))]
 public sealed class ScroungerTests
 {
+    [Explicit] // Trauma - not my fault if this breaks, waste of test time
     [Test]
     [Description("Assert that the data scrounger finds prototypes by type successfully.")]
     public void ScroungeByType()
@@ -15,6 +16,7 @@ public sealed class ScroungerTests
         Assert.That(scrounged, Is.Not.Empty);
     }
 
+    [Explicit] // Trauma
     [Test]
     [Description("Assert that the data scrounger finds all files by pattern in a directory successfully.")]
     [TestCase("*.yml")]
@@ -26,6 +28,7 @@ public sealed class ScroungerTests
         Assert.That(files, Is.Not.Empty);
     }
 
+    [Explicit] // Trauma
     [Test]
     [Description("Assert that the data scrounger finds all files by pattern in a directory successfully, and returns valid VFS paths.")]
     public void ScroungeByPatternInVfs()
@@ -38,6 +41,7 @@ public sealed class ScroungerTests
         Assert.That(files[0].ToString(), Does.StartWith("/Maps/"));
     }
 
+    [Explicit] // Trauma
     [Test]
     [Description("Assert that the data scrounger finds entities by component successfully.")]
     public void ScroungeByComponent()

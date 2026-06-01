@@ -1,17 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Lavaland.Shared.Pressure;
-using Content.Lavaland.Shared.Weapons.Upgrades;
+using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
-using Content.Shared.Armor;
-using Content.Shared.Body;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Inventory;
-using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Wieldable;
+using Content.Shared.Atmos;
 
 namespace Content.Lavaland.Server.Pressure;
 
@@ -19,67 +11,29 @@ public sealed partial class PressureEfficiencyChangeSystem : SharedPressureEffic
 {
     [Dependency] private AtmosphereSystem _atmos = default!;
 
-    private EntityQuery<PressureDamageChangeComponent> _query;
-    private EntityQuery<ProjectileComponent> _projectileQuery;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        _query = GetEntityQuery<PressureDamageChangeComponent>();
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
-
-        SubscribeLocalEvent<PressureDamageChangeComponent, GetMeleeDamageEvent>(OnGetDamage,
-            after: [ typeof(GunUpgradeSystem), typeof(SharedWieldableSystem) ]);
-        SubscribeLocalEvent<PressureDamageChangeComponent, ProjectileShotEvent>(OnProjectileShot,
-            after: [ typeof(GunUpgradeSystem) ]); // let this system reduce damage upgrades' added damage automatically
-
-        SubscribeLocalEvent<PressureArmorChangeComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnArmorRelayDamageModify, before: [typeof(SharedArmorSystem)]);
+        SubscribeLocalEvent<PressureTrackerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PressureTrackerComponent, AtmosExposedUpdateEvent>(OnAtmosExposedUpdate);
     }
 
-    private void OnGetDamage(Entity<PressureDamageChangeComponent> ent, ref GetMeleeDamageEvent args)
+    private void OnMapInit(Entity<PressureTrackerComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.ApplyToMelee && ApplyModifier(ent.AsNullable()))
-            args.Damage *= ent.Comp.AppliedModifier;
+        EnsureComp<AtmosExposedComponent>(ent); // should already be the case for mobs, but not necessarily for PKA turrets and stuff
+        // initialize immediately instead of waiting for next atmos tick (up to 0.5s away)
+        ent.Comp.Pressure = _atmos.GetTileMixture((ent.Owner, Transform(ent)))?.Pressure ?? 0f;
+        Dirty(ent);
     }
 
-    private void OnProjectileShot(Entity<PressureDamageChangeComponent> ent, ref ProjectileShotEvent args)
+    private void OnAtmosExposedUpdate(Entity<PressureTrackerComponent> ent, ref AtmosExposedUpdateEvent args)
     {
-        if (!ApplyModifier(ent.AsNullable())
-            || !ent.Comp.ApplyToProjectiles
-            || !_projectileQuery.TryComp(args.FiredProjectile, out var projectile))
+        var pressure = args.GasMixture.Pressure;
+        if (ent.Comp.Pressure == pressure)
             return;
 
-        projectile.Damage *= ent.Comp.AppliedModifier;
-    }
-
-    public bool ApplyModifier(Entity<PressureDamageChangeComponent?> ent)
-    {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return false;
-
-        var pressure = _atmos.GetTileMixture((ent.Owner, Transform(ent)))?.Pressure ?? 0f;
-        return ent.Comp.Enabled && ((pressure >= ent.Comp.LowerBound
-            && pressure <= ent.Comp.UpperBound) == ent.Comp.ApplyWhenInRange);
-    }
-
-    /// <summary>
-    /// Get the damage modifier for a weapon, returning 1 if it doesn't have the component.
-    /// </summary>
-    public float GetModifier(Entity<PressureDamageChangeComponent?> ent)
-        => _query.Resolve(ent, ref ent.Comp, false) ? ent.Comp.AppliedModifier : 1f;
-
-    private void OnArmorRelayDamageModify(Entity<PressureArmorChangeComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
-    {
-        if (!ApplyModifier(ent.Owner) ||
-            args.Args.TargetPart is not {} part ||
-            !TryComp<ArmorComponent>(ent, out var armor))
-            return;
-
-        var coverage = armor.ArmorCoverage;
-        if (!coverage.Contains(part))
-            return;
-
-        args.Args.Damage.ArmorPenetration += ent.Comp.ExtraPenetrationModifier;
+        ent.Comp.Pressure = pressure;
+        Dirty(ent);
     }
 }

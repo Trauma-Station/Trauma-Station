@@ -5,7 +5,7 @@ namespace Content.Trauma.Shared.VentCrawling.Components;
 /// <summary>
 /// A component indicating that the entity is in the process of moving through the venting process
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BeingVentCrawlerComponent : Component
 {
     /// <summary>
@@ -17,6 +17,8 @@ public sealed partial class BeingVentCrawlerComponent : Component
     /// <summary>
     /// Gets or sets up a holder entity
     /// </summary>
+
+    [AutoNetworkedField]
     public EntityUid Holder
     {
         get => _holder;

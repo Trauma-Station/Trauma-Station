@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.ChronoLegionnaire.Components;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 
 namespace Content.Goobstation.Client.ChronoLegionnaire.Overlays;
 
-public sealed class StasisOverlay : Overlay
+public sealed partial class StasisOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IEntityManager _entMan = default!;

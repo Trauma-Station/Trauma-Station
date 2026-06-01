@@ -180,7 +180,7 @@ public abstract partial class SharedTailedEntitySystem : EntitySystem
 
         var (uid, comp, xform) = ent;
 
-        var headPos = TransformSystem.GetWorldPosition(xform);
+        var headPos = TransformSystem.GetWorldPosition(xform) + comp.TailOffset;
 
         if (headPos == ent.Comp1.LastPos)
             return;

@@ -3,3 +3,12 @@
   name: ghost-role-information-morph-name
   objective: ghost-role-information-morph-description
   antagonist: true
+
+- type: antagSpecifier
+  id: Morph
+  spawnerPrototype: GhostRoleSpawnerMorph
+  mindRoles: [ MindRoleMorph ]
+  briefing:
+    text: morph-role-greeting
+    color: lime
+    sound: /Audio/_Trauma/Morph/mutate.ogg

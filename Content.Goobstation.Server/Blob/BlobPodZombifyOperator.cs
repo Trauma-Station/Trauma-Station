@@ -11,15 +11,15 @@ namespace Content.Goobstation.Server.Blob;
 public sealed partial class BlobPodZombifyOperator : HTNOperator
 {
     [Dependency] private IEntityManager _entManager = default!;
-    private BlobPodSystem _blobPodSystem = default!;
+    private BlobPodSystem _blobPod = default!;
 
-    [DataField("zombifyKey")]
+    [DataField(required: true)]
     public string ZombifyKey = string.Empty;
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
-        _blobPodSystem = sysManager.GetEntitySystem<BlobPodSystem>();
+        _blobPod = sysManager.GetEntitySystem<BlobPodSystem>();
     }
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
@@ -41,7 +41,7 @@ public sealed partial class BlobPodZombifyOperator : HTNOperator
 
         if (pod.ZombifyTarget == null)
         {
-            if (_blobPodSystem.NpcStartZombify(owner, target, pod))
+            if (_blobPod.NpcStartZombify(owner, target, pod))
                 return HTNOperatorStatus.Continuing;
             else
                 return HTNOperatorStatus.Failed;

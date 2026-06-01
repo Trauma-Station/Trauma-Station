@@ -1,0 +1,107 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/blob/72610bb4a19340785956715b3549856944c5bfe9/icons/mob/actions/actions.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "vampire_rejuvinate"
+        },
+        {
+            "name": "vampire_glare"
+        },
+        {
+            "name": "vampire_cloak"
+        },
+        {
+            "name": "shadow_snare"
+        },
+        {
+            "name": "vampire_extinguish"
+        },
+        {
+            "name": "blood_spikes"
+        },
+        {
+            "name": "blood_swell_status"
+        },
+        {
+            "name": "OH_YEAAAAH"
+        },
+        {
+            "name": "vampire_claws"
+        },
+        {
+            "name": "blood_pool"
+        },
+        {
+            "name": "vampire_charge"
+        },
+        {
+            "name": "eternal_darkness"
+        },
+        {
+            "name": "blood_bringers_rite"
+        },
+        {
+            "name": "dark_passage"
+        },
+        {
+            "name": "blood_swell"
+        },
+        {
+            "name": "blood_tendrils"
+        },
+        {
+            "name": "select_class"
+        },
+        {
+            "name": "duel"
+        },
+        {
+            "name": "blood_rush"
+        },
+        {
+            "name": "vampire_enthrall"
+        },
+        {
+            "name": "pacify"
+        },
+        {
+            "name": "decoy"
+        },
+        {
+            "name": "thralls_up"
+        },
+        {
+            "name": "hysteria"
+        },
+        {
+            "name": "predator_sense"
+        },
+        {
+            "name": "blood_barrier"
+        },
+        {
+            "name": "shadow_anchor"
+        },
+        {
+            "name": "shadow_boxing"
+        },
+        {
+            "name": "seismic_stomp"
+        },
+        {
+            "name": "subspace_swap"
+        },
+        {
+            "name": "blood_bond"
+        },
+        {
+            "name": "demonic_grasp"
+        }
+    ]
+}

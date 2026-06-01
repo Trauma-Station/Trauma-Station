@@ -1,0 +1,70 @@
+# Base Vampire Alert
+- type: alert
+  id: BloodLevel
+  clickEvent: !type:VampireBloodAlertEvent
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/blood_alert.rsi
+    state: blood_display
+  alertViewEntity: AlertBloodLevelView
+  name: blood-display-name
+  description: blood-display-description
+
+- type: entity
+  id: AlertBloodLevelView
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GenericCounterAlert
+    centerGlyph: false
+  - type: Sprite
+    sprite: Interface/Alerts/essence_counter.rsi # idc its just numbers
+    layers:
+    - map: [ "enum.AlertVisualLayers.Base" ]
+    - map: [ "1" ]
+      offset: 0.5, 0
+    - map: [ "10" ]
+      offset: 0.375, 0
+    - map: [ "100" ]
+      offset: 0.25, 0
+    - map: [ "1000" ]
+      offset: 0.125, 0
+
+# Status Effects
+- type: alert
+  id: BloodSwell
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
+    state: blood_swell
+  name: blood-swell-effect-name
+  description: blood-swell-effect-description
+
+- type: alert
+  id: BloodRush
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
+    state: blood_rush
+  name: blood-rush-effect-name
+  description: blood-rush-effect-description
+
+- type: alert
+  id: Gladiator
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
+    state: mech_damtype_brute
+  name: gladiator-effect-name
+  description: gladiator-effect-description
+
+- type: alert
+  id: CloakOfDarkness
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/status_effects.rsi
+    state: vampire_cloak
+  name: cloak-darkness-effect-name
+  description: cloak-darkness-effect-description
+
+- type: alert
+  id: BloodBond
+  icons:
+  - sprite: /Textures/_Trauma/Vampires/actions.rsi
+    state: blood_bond
+  name: blood-bond-effect-name
+  description: blood-bond-effect-description

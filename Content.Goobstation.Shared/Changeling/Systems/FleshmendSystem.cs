@@ -8,6 +8,8 @@ using Content.Medical.Common.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -25,27 +27,27 @@ public sealed partial class FleshmendSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<FleshmendComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<FleshmendComponent, ComponentRemove>(OnRemoved);
+        SubscribeLocalEvent<FleshmendComponent, StatusEffectAppliedEvent>(OnApplied);
+        SubscribeLocalEvent<FleshmendComponent, StatusEffectRemovedEvent>(OnRemoved);
     }
 
-    private void OnMapInit(Entity<FleshmendComponent> ent, ref MapInitEvent args)
+    private void OnApplied(Entity<FleshmendComponent> ent, ref StatusEffectAppliedEvent args)
     {
         if (ent.Comp.DoVisualEffect)
-            EnsureComp<FleshmendEffectComponent>(ent);
+            EnsureComp<FleshmendEffectComponent>(args.Target);
 
         if (ent.Comp.PassiveSound != null)
             DoFleshmendSound(ent);
 
         ent.Comp.UpdateTimer = _timing.CurTime + ent.Comp.UpdateDelay;
 
-        Cycle(ent);
+        Cycle(ent, args.Target);
     }
 
-    private void OnRemoved(Entity<FleshmendComponent> ent, ref ComponentRemove args)
+    private void OnRemoved(Entity<FleshmendComponent> ent, ref StatusEffectRemovedEvent args)
     {
         if (ent.Comp.DoVisualEffect)
-            RemComp<FleshmendEffectComponent>(ent);
+            RemComp<FleshmendEffectComponent>(args.Target);
 
         if (ent.Comp.PassiveSound != null)
             StopFleshmendSound(ent);
@@ -71,35 +73,35 @@ public sealed partial class FleshmendSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        var query = EntityQueryEnumerator<FleshmendComponent>();
+        var query = EntityQueryEnumerator<FleshmendComponent, StatusEffectComponent>();
         var now = _timing.CurTime;
-        while (query.MoveNext(out var uid, out var comp))
+        while (query.MoveNext(out var uid, out var comp, out var effect))
         {
-            if (comp.UpdateTimer < now)
+            if (effect.AppliedTo is not { } target || comp.UpdateTimer < now)
                 continue;
 
             comp.UpdateTimer = now + comp.UpdateDelay;
 
-            Cycle((uid, comp));
+            Cycle((uid, comp), target);
         }
     }
 
-    private void Cycle(Entity<FleshmendComponent> ent)
+    private void Cycle(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        if (!TryFlammableChecks(ent))
+        if (!TryFlammableChecks(ent, target))
             return;
 
-        DoFleshmend(ent);
+        DoFleshmend(ent, target);
     }
 
-    private bool TryFlammableChecks(Entity<FleshmendComponent> ent)
+    private bool TryFlammableChecks(Entity<FleshmendComponent> ent, EntityUid target)
     {
-        if (TryComp<FlammableComponent>(ent, out var flam)
+        if (TryComp<FlammableComponent>(target, out var flam)
             && flam.OnFire
             && !ent.Comp.IgnoreFire)
         {
             if (ent.Comp.DoVisualEffect)
-                RemComp<FleshmendEffectComponent>(ent);
+                RemComp<FleshmendEffectComponent>(target);
 
             if (ent.Comp.PassiveSound != null)
                 StopFleshmendSound(ent);
@@ -108,7 +110,7 @@ public sealed partial class FleshmendSystem : EntitySystem
         }
 
         if (ent.Comp.DoVisualEffect)
-            EnsureComp<FleshmendEffectComponent>(ent);
+            EnsureComp<FleshmendEffectComponent>(target);
 
         if (ent.Comp.PassiveSound != null
             && ent.Comp.SoundSource == null)
@@ -116,16 +118,16 @@ public sealed partial class FleshmendSystem : EntitySystem
         return true;
     }
 
-    private void DoFleshmend(Entity<FleshmendComponent> ent)
+    private void DoFleshmend(Entity<FleshmendComponent> ent, EntityUid target)
     {
         // heal the damage
         foreach (var (group, amount) in ent.Comp.Healing)
         {
-            _dmg.HealEvenly(ent.Owner, amount, group);
+            _dmg.HealEvenly(target, amount, group);
         }
 
         // heal bleeding and restore blood
-        _bloodstream.TryModifyBleedAmount(ent.Owner, ent.Comp.BleedingAdjust);
-        _bloodstream.TryModifyBloodLevel(ent.Owner, ent.Comp.BloodLevelAdjust);
+        _bloodstream.TryModifyBleedAmount(target, ent.Comp.BleedingAdjust);
+        _bloodstream.TryModifyBloodLevel(target, ent.Comp.BloodLevelAdjust);
     }
 }

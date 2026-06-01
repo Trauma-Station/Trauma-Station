@@ -1,0 +1,40 @@
+# TODO: Add more objectives in the future (maybe after objective shit gets predicted or reworked)
+- type: entity
+  parent: BaseObjective
+  id: BaseVampireObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-vampire
+    unique: true
+    difficulty: 1
+  - type: RoleRequirement
+    roles:
+    - VampireRole
+
+- type: entity
+  parent: BaseVampireObjective
+  id: VampireBloodObjective
+  description: Drink blood.
+  components:
+  - type: Objective
+    icon:
+      sprite: Fluids/tomato_splat.rsi
+      state: puddle-1
+  - type: NumberObjective
+    min: 400
+    max: 800
+    title: objective-condition-blood-title
+    description: objective-condition-blood-description
+  - type: VampireBloodCondition
+
+- type: entity
+  parent: [BaseVampireObjective, BaseSurviveObjective]
+  id: VampireSurviveObjective
+  name: Survive
+  description: You must survive no matter what.
+  components:
+  - type: Objective
+    icon:
+      sprite: Fluids/splatter.rsi
+      state: splatter-5
+      color: Red

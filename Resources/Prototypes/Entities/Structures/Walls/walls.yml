@@ -33,8 +33,9 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Walls # Trauma, was StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -548,8 +549,9 @@
       penetrateDamage: 1000
       damagePenalty: 0.8
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: StructuralMetallicStrong
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: RadiationBlocker
       resistance: 10
 
@@ -592,8 +594,9 @@
     sprite: Structures/Walls/plastitanium_diagonal.rsi
     state: state0
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: RadiationBlocker
     resistance: 10
 
@@ -632,6 +635,23 @@
   id: WallReinforced
   name: reinforced wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  - type: Penetratable
+    penetrateDamage: 100
+    damagePenalty: 0.25
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Iron
+        Quantity: 33
+      - ReagentId: Carbon
+        Quantity: 7
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Structures/Walls/solid.rsi # Trauma
   - type: Icon
@@ -641,8 +661,9 @@
     graph: Girder
     node: reinforcedWall
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -696,24 +717,6 @@
         layer:
         - WallLayer
         density: 2000
-  # <Goobstation>
-  - type: RustRequiresPathStage
-    pathStage: 7 # Toxic blade
-  - type: Penetratable
-    penetrateDamage: 100
-    damagePenalty: 0.25
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 40
-        reagents:
-        - ReagentId: Iron
-          Quantity: 33
-        - ReagentId: Carbon
-          Quantity: 7
-  # </Goobstation>
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: WallReinforced
@@ -774,8 +777,9 @@
     sprite: Structures/Walls/reinforced_diagonal.rsi
     state: state0
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -814,8 +818,9 @@
   - type: Icon
     sprite: Structures/Walls/riveted.rsi
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -957,10 +962,9 @@
         - WallLayer
         density: 2000
   - type: Damageable
+    damageModifierSet: StructuralMetallic # Trauma - was StructuralMetallicStrong
+  - type: Injurable
     damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallic
-  - type: Physics
-    bodyType: Static
   - type: Destructible
     thresholds:
     - trigger:
@@ -1006,8 +1010,9 @@
     convertTo: WallCosmicCult
   # </Trauma>
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -1031,7 +1036,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: StaticPrice
-    price: 250
+    price: 300
   - type: RadiationBlocker
     resistance: 5
   - type: Sprite
@@ -1076,6 +1081,19 @@
   id: WallSolid
   name: solid wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 30
+      reagents:
+      - ReagentId: Iron
+        Quantity: 28
+      - ReagentId: Carbon
+        Quantity: 2
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Structures/Walls/solid.rsi # Trauma
   - type: WallReplacementMarker
@@ -1113,17 +1131,6 @@
   - type: IconSmooth
     key: walls
     base: solid
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
-  - type: SolutionContainerManager # Goobstation
-    solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Iron
-          Quantity: 28
-        - ReagentId: Carbon
-          Quantity: 2
 
 - type: entity
   parent: WallDiagonalBase
@@ -1165,6 +1172,11 @@
   id: WallSolidRust
   suffix: rusted
   components:
+  # <Trauma>
+  - type: RustedWall
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/solid_rust.rsi
   - type: Icon
@@ -1176,7 +1188,6 @@
   - type: IconSmooth
     key: walls
     base: solid
-  - type: RustedWall # Goobstation
   - type: Destructible
     thresholds:
     - trigger:
@@ -1199,8 +1210,6 @@
         node: girder
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: WallPlastitanium
@@ -1443,8 +1452,9 @@
     sprite: Structures/Walls/mining_diagonal.rsi
     state: state0
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -1554,65 +1564,69 @@
   id: WallForce
   name: force wall
   components:
-    - type: TimedDespawn
-      lifetime: 15 # Goob edit
-    - type: Tag
-      tags:
-        - Wall
-        - BlockLightning # Goobstation
-    - type: Physics
-      bodyType: Static
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape:
-            !type:PhysShapeAabb
-            bounds: "-0.5,-0.5,0.5,0.5"
-          mask:
-            - SpecialWallLayer
-          layer:
-            - SpecialWallLayer
-    - type: Airtight
-    - type: Sprite
-      sprite: Structures/Magic/forcewall.rsi
-      layers:
-      - state: forcewall
-        map: [ "base" ]
-    - type: Icon
-      sprite: Structures/Magic/forcewall.rsi
-      state: forcewallspawn
-    # Goobstation start
-    - type: SpawnAnimation
-      animationLength: 1
-    - type: Appearance
-    - type: GenericVisualizer
-      visuals:
-        enum.SpawnAnimationVisuals.Spawned:
-          base:
-            True: { state: forcewall }
-            False: { state: forcewallspawn }
-    - type: RustRequiresPathStage
-      pathStage: 11 # Can't rust
-    - type: PreventCollide
-      whitelist:
-        components:
-        - Wizard
-        - Apprentice
-        - BibleUser
-    - type: Damageable
-    - type: Clickable
-    - type: Destructible
-      thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 350
-        behaviors:
-        - !type:PlaySoundBehavior
-          sound:
-            collection: WindowShatter
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
-    # Goobstation end
+  # <Trauma>
+  - type: SpawnAnimation
+    animationLength: 1
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SpawnAnimationVisuals.Spawned:
+        base:
+          True: { state: forcewall }
+          False: { state: forcewallspawn }
+  - type: RustRequiresPathStage
+    pathStage: 11 # Can't rust
+  - type: PreventCollide
+    whitelist:
+      components:
+      - Wizard
+      - Apprentice
+      - BibleUser
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Clickable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 350
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  # </Trauma>
+  - type: TimedDespawn
+    lifetime: 15 # Trauma - was 10
+  - type: Tag
+    tags:
+    - BlockLightning # Trauma
+    - Wall
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - SpecialWallLayer
+        layer:
+        - SpecialWallLayer
+  - type: Airtight
+  - type: Sprite
+    sprite: Structures/Magic/forcewall.rsi
+    # <Trauma> - replace single state with a mapped layer, for animation to work
+    layers:
+    - state: forcewall
+      map: [ "base" ]
+    # </Trauma>
+  - type: Icon
+    sprite: Structures/Magic/forcewall.rsi
+    state: forcewallspawn # Trauma - was forcewall
 
 - type: entity
   parent: BaseWall
@@ -1752,8 +1766,9 @@
     node: cardwall
     deconstructionTarget: start
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Card
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Physics
     bodyType: Static
   - type: Fixtures

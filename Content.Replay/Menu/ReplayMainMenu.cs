@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.IO.Compression;
 using System.Linq;
 using Content.Client.Message;
@@ -29,7 +22,7 @@ namespace Content.Replay.Menu;
 /// <summary>
 /// Main menu screen for selecting and loading replays.
 /// </summary>
-public sealed class ReplayMainScreen : State
+public sealed partial class ReplayMainScreen : State
 {
     [Dependency] private IResourceManager _resMan = default!;
     [Dependency] private IComponentFactory _factory = default!;

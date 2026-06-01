@@ -1,0 +1,30 @@
+- type: entity
+  parent: BaseEnchant # Broken rn
+  id: CurseBabel
+  name: Curse of Babel
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - Clothing
+      - Armor
+  - type: ComponentsEnchant
+    added:
+    - type: KnowledgeGrantOnWear
+      skills:
+        LanguageRootSpeak: -100
+        LanguageMoffic: -100
+        LanguageDraconic: -100
+        LanguageAzaziba: -100
+        LanguageCalcic: -100
+        LanguageBubblish: -100
+        LanguageNewKinPidgin: -100
+        LanguageXeeplian: -100
+        LanguageElyran: -100
+        LanguageFreespeak: -100
+        LanguageNovuNederic: -100
+        LanguageSolCommon: -100
+        LanguageTauCetiBasic: -100
+        LanguageTradeband: -100
+        LanguageSpaceItalian: -100

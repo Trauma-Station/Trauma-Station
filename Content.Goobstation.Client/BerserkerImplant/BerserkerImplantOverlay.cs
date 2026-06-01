@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 
 namespace Content.Goobstation.Client.BerserkerImplant;
 
-public sealed class BerserkerImplantOverlay : Overlay
+public sealed partial class BerserkerImplantOverlay : Overlay
 {
     [Dependency] private IPrototypeManager _proto = default!;
 

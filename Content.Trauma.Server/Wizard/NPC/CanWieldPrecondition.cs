@@ -23,7 +23,7 @@ public sealed partial class CanWieldPrecondition : HTNPrecondition
 
         var wieldableSystem = _entManager.System<SharedWieldableSystem>();
 
-        if (!wieldableSystem.CanWield(item.Value, wieldable, owner, true))
+        if (!wieldableSystem.CanWield((item.Value, wieldable), owner, true))
             return false ^ Invert;
 
         var beforeWieldEv = new WieldAttemptEvent();

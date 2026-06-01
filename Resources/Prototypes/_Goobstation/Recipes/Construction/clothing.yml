@@ -4,13 +4,11 @@
   targetNode: cloak
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     FabricationKnowledge: 2
   practical:
     ArmorKnowledge: 1
     TailoringKnowledge: 2
-  # </Trauma>
 
 - type: construction
   id: makeshiftvoicechanger
@@ -18,14 +16,12 @@
   targetNode: end
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     FabricationKnowledge: 1
     ElectronicsKnowledge: 2
   practical:
     ElectronicsKnowledge: 3
     TailoringKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: MedicalGlasses
@@ -33,10 +29,8 @@
   targetNode: glassesMed
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: DiagnosticGlasses
@@ -44,10 +38,8 @@
   targetNode: glassesDiag
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: MedicalSecurityGlasses
@@ -55,10 +47,8 @@
   targetNode: glassesMedSec
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: GlassesMedDiag
@@ -66,10 +56,8 @@
   targetNode: glassesMedDiag
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: HudMedDiagHUD
@@ -77,7 +65,5 @@
   targetNode: meddiagHud
   category: construction-category-clothing
   objectType: Item
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 1
-  # </Trauma>

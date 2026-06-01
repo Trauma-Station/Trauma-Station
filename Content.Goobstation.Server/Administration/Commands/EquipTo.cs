@@ -13,7 +13,7 @@ using Robust.Shared.Console;
 namespace Content.Goobstation.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Spawn)]
-public sealed class EquipTo : LocalizedCommands
+public sealed partial class EquipTo : LocalizedCommands
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPrototypeManager _proto = default!;

@@ -36,7 +36,7 @@ public abstract partial class SharedActiveMultihitSystem : EntitySystem
         }
 
         Dirty(ent.Value, active);
-}
+    }
 
     private void OnHit(Entity<ActiveMultihitComponent> ent, ref MeleeHitEvent args)
     {

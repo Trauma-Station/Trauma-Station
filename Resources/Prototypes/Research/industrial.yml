@@ -10,14 +10,16 @@
   tier: 1
   cost: 10000 # Goobstation
   recipeUnlocks:
+  # <Trauma>
+  - DrillHead
+  - WeaponPlasmaCutter
+  - ClothingHandsGlovesDolphin
+  # </Trauma>
   - MiningDrill
-  - DrillHead # Trauma
-  - WeaponPlasmaCutter # Goobstation
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
-  - ClothingHandsGlovesDolphin # Trauma
   # Goobstation R&D Console rework start
   position: 0,-1
   technologyPrerequisites:

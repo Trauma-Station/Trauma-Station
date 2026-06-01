@@ -111,9 +111,9 @@
         Access="Internal"
         Icon="{xe:Tex '/Textures/Interface/info.svg.192dpi.png'}"
         BoundKey = "{x:Static is:ContentKeyFunctions.OpenAHelp}"
-        ToolTip="{Loc 'ui-options-function-open-a-help'}"
+        ToolTip="{Loc 'ui-options-function-open-mentor'}"
         MinSize="42 64"
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonOpenLeft}"
-        />
+        /> <!-- Trauma - Replaced a-help loc -->
 </widgets:GameTopMenuBar>

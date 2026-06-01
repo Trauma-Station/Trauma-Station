@@ -102,6 +102,7 @@
       defaultChannel: Binary
       channels:
       - Binary
+    - type: IntellicardableMind
     # </Trauma>
     - type: Sprite
       sprite: Objects/Specific/Robotics/mmi.rsi

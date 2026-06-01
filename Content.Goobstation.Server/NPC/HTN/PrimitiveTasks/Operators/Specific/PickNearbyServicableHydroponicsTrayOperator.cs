@@ -14,16 +14,15 @@ namespace Content.Goobstation.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOperator
 {
-    [Dependency] private IEntityManager _entMan = default!;
-
+    [Dependency] private IEntityManager _ent = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
+    private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
 
     /// <summary>
     /// Determines how close the bot needs to be to service a tray
     /// </summary>
-    [DataField]
-    public string RangeKey = NPCBlackboard.PlantbotServiceRange;
+    public const float Range = 4f;
 
     /// <summary>
     /// Target entity to service
@@ -45,6 +44,8 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
 
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+
+        _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -52,14 +53,11 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
 
-        if (!blackboard.TryGetValue<float>(RangeKey, out var range, _entMan) || !_entMan.TryGetComponent<PlantbotComponent>(owner, out _))
-            return (false, null);
+        var emagged = _emaggedQuery.HasComp(owner);
 
-        var emagged = _entMan.HasComponent<EmaggedComponent>(owner);
-
-        var coords = _entMan.GetComponent<TransformComponent>(owner).Coordinates;
+        var coords = _ent.GetComponent<TransformComponent>(owner).Coordinates;
         _targets.Clear();
-        _lookup.GetEntitiesInRange(coords, range, _targets);
+        _lookup.GetEntitiesInRange(coords, Range, _targets);
         foreach (var target in _targets)
         {
             if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || target.Comp.Dead || target.Comp.WaterLevel <= 0f))
@@ -75,7 +73,7 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
             return (true, new Dictionary<string, object>()
             {
                 {TargetKey, target.Owner},
-                {TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates},
+                {TargetMoveKey, _ent.GetComponent<TransformComponent>(target).Coordinates},
                 {NPCBlackboard.PathfindKey, path},
             });
         }

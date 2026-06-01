@@ -6,7 +6,6 @@ using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.Examine;
 using Content.Shared.Verbs;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Surgery.Tools;
 

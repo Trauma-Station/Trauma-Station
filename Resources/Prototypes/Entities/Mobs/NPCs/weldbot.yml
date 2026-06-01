@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -35,12 +32,12 @@
         solution: tank
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 100
+  - type: Solution
+    id: tank
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 100
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-mechanical
   - type: Anchorable

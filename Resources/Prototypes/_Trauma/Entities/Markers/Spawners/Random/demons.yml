@@ -1,0 +1,179 @@
+# Minor
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMinorSummoningRune
+  name: random minor demon rune
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: RandomMinorSummoningRuneHostile
+        weight: .25
+      - id: RandomMinorSummoningRuneTame
+        weight: .75
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMinorSummoningRuneHostile
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SummoningRuneGuy
+      - id: SummoningRuneIncel
+      - id: SummoningRuneUrist
+      - id: SummoningRuneIan
+      - id: SummoningRuneVox
+      - id: SummoningRuneVulp
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMinorSummoningRuneTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SummoningRuneGuyTame
+      - id: SummoningRuneIncelTame
+      - id: SummoningRuneUristTame
+      - id: SummoningRuneIanTame
+      - id: SummoningRuneVoxTame
+      - id: SummoningRuneVulpTame
+
+# Medium
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMediumSummoningRune
+  name: random medium demon rune
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: RandomMediumSummoningRuneHostile
+        weight: .5
+      - id: RandomMediumSummoningRuneTame
+        weight: .5
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMediumSummoningRuneHostile
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SummoningRuneChad
+      - id: SummoningRuneGhost
+      - id: SummoningRuneHamlet
+      - id: SummoningRuneDemon64Fat
+      - id: SummoningRuneDemon64Buff
+      - id: SummoningRuneDemon64
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMediumSummoningRuneTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SummoningRuneChadTame
+      - id: SummoningRuneGhostTame
+      - id: SummoningRuneHamletTame
+      - id: SummoningRuneDemon64FatTame
+      - id: SummoningRuneDemon64BuffTame
+      - id: SummoningRuneDemon64Tame
+
+# Major
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMajorSummoningRune
+  name: random major demon rune
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: RandomMajorSummoningRuneHostile
+        weight: .5
+      - id: RandomMajorSummoningRuneTame
+        weight: .5
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMajorSummoningRuneHostile
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SummoningRuneBosche
+      - id: SummoningRuneFeverbird
+      - id: SummoningRuneHanged
+      - id: SummoningRuneHiver
+      - id: SummoningRuneSteamer
+
+- type: entity
+  parent: MarkerBase
+  id: RandomMajorSummoningRuneTame
+  categories: [HideSpawnMenu]
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: SummoningRuneBoscheTame
+      - id: SummoningRuneFeverbirdTame
+      - id: SummoningRuneHangedTame
+      - id: SummoningRuneHiverTame
+      - id: SummoningRuneSteamerTame
+
+# Ink
+
+- type: entity
+  parent: MarkerBase
+  id: RandomInkSpawner
+  name: random magic ink
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: Icon
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MagicInkAsimel
+      - id: MagicInkAshartine
+      - id: MagicInkAzurapetra
+      - id: MagicInkCatwink
+      - id: MagicInkEndozult
+      - id: MagicInkHithine
+      - id: MagicInkHoundsgall
+      - id: MagicInkIndothine
+      - id: MagicInkMarakat
+      - id: MagicInkNillycant
+      - id: MagicInkNocimat
+      - id: MagicInkOrpimentexultant
+      - id: MagicInkPerhibiate
+      - id: MagicInkPerinsabate
+      - id: MagicInkPerinculate
+      - id: MagicInkPorphyrine
+      - id: MagicInkPosithane
+      - id: MagicInkPurpuraatramentum
+      - id: MagicInkPyrathene
+      - id: MagicInkPyroendine
+      - id: MagicInkRaggath
+      - id: MagicInkRubiginosus
+      - id: MagicInkStargallink
+      - id: MagicInkTerragall
+      - id: MagicInkUnden
+      - id: MagicInkUzult
+      - id: MagicInkYewgallink

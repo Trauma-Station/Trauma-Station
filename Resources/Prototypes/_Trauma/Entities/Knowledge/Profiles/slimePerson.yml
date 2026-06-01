@@ -25,10 +25,10 @@
     # Medical Skill
     SurgeryKnowledge: 0
     FirstAidKnowledge: 0
-    ChemistryKnowledge: 0
+    ChemistryKnowledge: 3 # Currently non-functional but they are made of fluids.
     # Physical Skill
     ThrowingKnowledge: 0
-    AthleticsKnowledge: 0
+    AthleticsKnowledge: 1
     StrengthKnowledge: 0
     ToughnessKnowledge: 0
     # Combat Skill

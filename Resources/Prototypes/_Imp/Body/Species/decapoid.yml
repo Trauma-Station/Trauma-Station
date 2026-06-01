@@ -146,8 +146,9 @@
         layer:
         - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Decapoid
+  - type: Injurable
+    damageContainer: Biological
   - type: Vocal
     sounds:
       Male: UnisexDecapoid

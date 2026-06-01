@@ -114,7 +114,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: Sap
-        Quantity: 300
+        Quantity: 300 # Trauma, was 600
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -184,6 +184,8 @@
     allowedStates:
     - Dead
   - type: Rootable
+  - type: Viewcone
+    baseConeAngle: 360
 
 - type: entity
   parent: OrganBaseFleshy # Shitmed - Fleshy

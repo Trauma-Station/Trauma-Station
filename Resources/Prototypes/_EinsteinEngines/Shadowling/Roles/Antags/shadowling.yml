@@ -25,7 +25,7 @@
 - type: antagSmite
   id: Shadowling
   antag: Shadowling
-  rule: Shadowling
+  rule: ShadowlingRoundstart
   ruleComp: ShadowlingRule
   icon:
     sprite: _EinsteinEngines/Shadowling/shadowling_abilities.rsi

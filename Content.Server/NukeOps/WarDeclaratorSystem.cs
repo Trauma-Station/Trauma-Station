@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Server.Audio;
+using Content.Shared.Audio;
+// </Trauma>
 using Content.Goobstation.Shared.SpecialAnimation;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -20,6 +24,10 @@ namespace Content.Server.NukeOps;
 /// </summary>
 public sealed partial class WarDeclaratorSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private SharedSpecialAnimationSystem _specialAnimation = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    // </Trauma>
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
@@ -27,7 +35,6 @@ public sealed partial class WarDeclaratorSystem : EntitySystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
     [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private SharedSpecialAnimationSystem _specialAnimation = default!; // Goob edit
 
     public override void Initialize()
     {
@@ -79,7 +86,10 @@ public sealed partial class WarDeclaratorSystem : EntitySystem
             var title = Loc.GetString(ent.Comp.SenderTitle);
             _chat.DispatchGlobalAnnouncement(ent.Comp.Message, title, true, ent.Comp.Sound, ent.Comp.Color);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has declared war with this text: {ent.Comp.Message}");
-            _specialAnimation.PlayAnimationFiltered(args.Actor, Filter.Broadcast(), "NukeOpsWarAnimation"); // Goob edit
+            // <Trauma>
+            _specialAnimation.PlayAnimationFiltered(args.Actor, Filter.Broadcast(), "NukeOpsWarAnimation");
+            _sound.DispatchStationEventMusic(ent, ent.Comp.Music, StationEventMusicType.Nuke, ent.Comp.Music.Params);
+            // </Trauma>
         }
 
         UpdateUI(ent, ev.Status);

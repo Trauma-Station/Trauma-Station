@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Wieldable;
-using Content.Shared.Wieldable.Components;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -39,8 +38,7 @@ public sealed partial class StealItemSystem : EntityEffectSystem<HandsComponent,
         if (item is not { } stolen)
             return;
 
-        if (TryComp<WieldableComponent>(ent, out var wield))
-            _wield.TryUnwield(stolen, wield, ent, true);
+        _wield.TryUnwield(stolen, ent, true);
 
         if (!_hands.TryDrop(ent.AsNullable(), stolen))
             return;

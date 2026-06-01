@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -25,7 +20,7 @@
     - 0,0,2,1
   - type: Gun
     fireRate: 12.5 # Reduced fireRate and increased projectileSpeed
-    projectileSpeed: 27 # Trauma fire rate breaks past 27 idk why
+    projectileSpeed: 27
     minAngle: 15 # More controlled than before
     maxAngle: 55
     angleDecay: -8 # Intentionally negative, loses accuracy while not shooting

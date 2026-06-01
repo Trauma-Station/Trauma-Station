@@ -3,7 +3,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 

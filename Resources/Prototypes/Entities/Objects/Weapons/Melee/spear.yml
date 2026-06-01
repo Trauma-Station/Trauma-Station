@@ -1,6 +1,6 @@
 - type: entity
   name: spear
-  parent: [BaseItem, BaseMinorContraband, SpearDurabilityWeak] # Trauma - Durability
+  parent: [BaseItem, SolutionSpear, BaseMinorContraband, SpearDurabilityWeak] # Trauma - added durability, use SolutionSpear not dart
   id: Spear
   description: Definition of a Classic. Keeping murder affordable since 200,000 BCE.
   components:
@@ -77,10 +77,6 @@
   - type: Construction
     graph: Spear
     node: spear
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 5 # Trauma - was 2
   - type: MeleeChemicalInjector
     transferAmount: 1 # Goobstation
     solution: melee
@@ -99,6 +95,7 @@
       types:
         Piercing: 8 # Trauma - was 4
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

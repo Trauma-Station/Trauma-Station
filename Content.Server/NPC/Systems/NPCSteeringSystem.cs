@@ -58,8 +58,8 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
 
     // <Trauma>
     [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private EntityQuery<TileMovementComponent> _tileMovementQuery = default!;
     private TimeSpan CurrentTime => _physics.EffectiveCurTime ?? _timing.CurTime;
-    private EntityQuery<TileMovementComponent> _tileMovementQuery;
     // </Trauma>
     [Dependency] private IAdminManager _admin = default!;
     [Dependency] private IConfigurationManager _configManager = default!;
@@ -78,11 +78,13 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCombatModeSystem _combat = default!;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
-    private EntityQuery<MovementSpeedModifierComponent> _modifierQuery;
-    private EntityQuery<NpcFactionMemberComponent> _factionQuery;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
+
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
+    [Dependency] private EntityQuery<MovementSpeedModifierComponent> _modifierQuery = default!;
+    [Dependency] private EntityQuery<NpcFactionMemberComponent> _factionQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
+
     private ObjectPool<HashSet<EntityUid>> _entSetPool =
         new DefaultObjectPool<HashSet<EntityUid>>(new SetPolicy<EntityUid>());
 
@@ -108,12 +110,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         base.Initialize();
 
         Log.Level = LogLevel.Info;
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
-        _modifierQuery = GetEntityQuery<MovementSpeedModifierComponent>();
-        _factionQuery = GetEntityQuery<NpcFactionMemberComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _tileMovementQuery = GetEntityQuery<TileMovementComponent>(); // Tile Movement Change
+
         for (var i = 0; i < InterestDirections; i++)
         {
             Directions[i] = new Angle(InterestRadians * i).ToVec();
