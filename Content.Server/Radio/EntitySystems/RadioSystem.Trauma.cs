@@ -33,7 +33,7 @@ public sealed partial class RadioSystem
             languageColor = Color.InterpolateBetween(Color.White, colorOverride, colorOverride.A); // Changed first param to Color.White so it shows color correctly.
 
         var font = _chat.GetFont(source, speech, language, message);
-        
+
         var nameString = jobIcon is null
             ? name
             : Loc.GetString("chat-radio-message-name-with-icon", ("jobIcon", jobIcon), ("jobName", jobName ?? ""), ("name", name));
