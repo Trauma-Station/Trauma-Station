@@ -16,6 +16,7 @@ phone-options = Phone Options
 phone-category = Phone Category
 phone-name = Phone Name
 
+item-slot-name-phone = phone
 
 phonebook-format = {$name} - {$phonenumber}
 

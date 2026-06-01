@@ -6,7 +6,6 @@
   components:
   # <Trauma>
   - type: LanguageSpeaker
-  - type: Fart
   - type: CollectiveMind
   - type: SpecialAnimationViewer
   - type: Penetratable

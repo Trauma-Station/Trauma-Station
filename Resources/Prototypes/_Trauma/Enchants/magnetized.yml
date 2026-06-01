@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantMagnetized
+  name: Magnetized
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - ProtectedFromStepTriggers
+  - type: ComponentsEnchant
+    added:
+    - type: Magboots

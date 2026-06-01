@@ -357,7 +357,6 @@
     mapPath: /Maps/_Goobstation/Nonstations/wizden.yml # Trauma
   - type: RuleGrids
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn # Trauma
     agentName: wizard-round-end-name
     antags:
     - !type:FixedAntagCount

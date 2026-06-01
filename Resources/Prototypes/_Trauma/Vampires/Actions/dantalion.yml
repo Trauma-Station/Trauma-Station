@@ -39,7 +39,7 @@
   parent: BaseVampireAction
   id: ActionPacify
   name: Pacify
-  description: Select a target within 7 tiles to render them passive for 40 seconds
+  description: Select a target within 7 tiles to render them passive for 40 seconds.
   components:
   - type: Action
     useDelay: 30

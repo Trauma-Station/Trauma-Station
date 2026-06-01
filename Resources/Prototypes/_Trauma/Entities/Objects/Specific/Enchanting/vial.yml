@@ -1,0 +1,69 @@
+- type: entity
+  name: empty blood vial
+  parent: [DrinkBaseMaterialGlass, DrinkBaseCup, DrinkVisualsFillOverlay, BaseMagicalContraband]
+  description: An empty vial, needs to be filled with blood.
+  id: BloodVial
+  components:
+  - type: Spillable
+    solution: drink
+  - type: StaticPrice
+    price: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 100
+      Steel: 50
+  - type: Solution
+    solution:
+      maxVol: 100
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+    layers:
+    - state: icon-empty
+      map: [ "enum.SolutionContainerLayers.Base" ]
+    - state: fill-1
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+    - state: icon-front
+      map: [ "enum.SolutionContainerLayers.Overlay" ]
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: fill-
+    inHandsMaxFillLevels: 3
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Construction
+    graph: DemonBlood
+    node: unfinished
+
+- type: entity
+  name: filled blood vial
+  parent: [BaseItem, BaseMagicalContraband]
+  description: A blood vial embuded with black magic, useful for a variety of things.
+  id: BloodVialFull
+  components:
+  - type: StaticPrice
+    price: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 100
+      Steel: 50
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Tag
+    tags:
+    - BloodVial
+  - type: Construction
+    graph: DemonBlood
+    node: finish

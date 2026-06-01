@@ -56509,22 +56509,6 @@ entities:
     - type: Transform
       pos: 104.41123,19.467571
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
 - proto: ClothingBackpackDebug3
   entities:
   - uid: 4364
@@ -56624,22 +56608,6 @@ entities:
           - 4378
           - 4375
           - 4385
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
 - proto: ClothingBackpackDuffelSurgeryFilled
   entities:
   - uid: 4386

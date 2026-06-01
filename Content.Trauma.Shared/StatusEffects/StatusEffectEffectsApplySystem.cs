@@ -27,7 +27,8 @@ public sealed partial class StatusEffectEffectsApplySystem : EntitySystem
 
     private void OnRemoval(Entity<StatusEffectEffectsApplyComponent> ent, ref StatusEffectRemovedEvent args)
     {
-        if (ent.Comp.EffectsOnRemoval is not { } effectsOnRemoval)
+        if (ent.Comp.EffectsOnRemoval is not { } effectsOnRemoval ||
+            TerminatingOrDeleted(args.Target))
             return;
 
         _effects.ApplyEffects(args.Target, effectsOnRemoval);

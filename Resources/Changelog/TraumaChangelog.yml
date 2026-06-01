@@ -9289,3 +9289,231 @@ Entries:
   id: 1057
   time: '2026-05-29T21:17:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2885
+- author: Aviu
+  changes:
+  - type: Add
+    message: You can counterattack with sheathed weapons, see guidebook for details.
+  - type: Add
+    message: Security katana.
+  - type: Add
+    message: New syndicate weapon - snakesfang.
+  - type: Tweak
+    message: Removed passive parries for all sheathed weapons.
+  - type: Tweak
+    message: Ninja katana damage 30 -> 20.
+  id: 1058
+  time: '2026-05-30T09:18:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2712
+- author: Lumminal
+  changes:
+  - type: Fix
+    message: Various bug-fixes related to Vampires.
+  - type: Tweak
+    message: Vampire guidebook has been updated. It now also includes images.
+  - type: Add
+    message: Vampire Blood Alert now has a counter showing your total blood.
+  - type: Add
+    message: Vampire actions now show the blood required to use them.
+  id: 1059
+  time: '2026-05-30T21:03:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2863
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added an additional chemical to Chilly Peppers
+  - type: Add
+    message: Added 10 more chemicals to botany's random chemical pool
+  - type: Tweak
+    message: Tweaked the amount of potassium, phosphorus, and sugar in Bloonions
+  id: 1060
+  time: '2026-05-31T04:53:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2899
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Clown, Mime and Chaplain reinforcements not being their job.
+  id: 1061
+  time: '2026-05-31T04:54:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2875
+- author: MayasMischief
+  changes:
+  - type: Add
+    message: Revs can now create a subfloor medical fabricator!
+  - type: Add
+    message: Added the Proletariat, an LMG for revs in .22 short!
+  - type: Add
+    message: Added the Maul, a powerful anti-armor tool for revs.
+  - type: Add
+    message: Added the Kunai, a shovel for revs. Yes, shovel. Kunai are shovels.
+  - type: Tweak
+    message: Forged Knife holds 5u of chems instead of 3u.
+  - type: Tweak
+    message: Forged Sword fits in duffelbags. (1x8)
+  - type: Tweak
+    message: Forged Pitchfork fits in the revs backpacks. (1x9)
+  id: 1062
+  time: '2026-05-31T04:55:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2746
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed simplemobs gibbing at total parts damage instead of letting
+      individual bodyparts handle it.
+  id: 1063
+  time: '2026-05-31T06:51:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2925
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Poison/airloss/metaphysical/genetic damage only applies to vital parts.
+  - type: Tweak
+    message: >-
+      Poisons/heals split damage to all parts instead of applying fixed amount
+      of damage to every parts again.
+  id: 1064
+  time: '2026-05-31T07:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2918
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added string UPPER/LOWER circuit gates.
+  id: 1065
+  time: '2026-05-31T07:44:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2923
+- author: DrSmugLeaf, SolStar2, Luminal
+  changes:
+  - type: Add
+    message: >-
+      Added mentor help. You can press F1 to access it. You can use it for
+      requesting assistance regarding a game mechanic, or anything related to
+      the game.
+  - type: Add
+    message: >-
+      Added mentors. They are capable of answering mentor help, and provide
+      assistance to players.
+  id: 1066
+  time: '2026-05-31T08:45:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/1718
+- author: Hoodsie
+  changes:
+  - type: Add
+    message: Added Cocaine slime
+  id: 1067
+  time: '2026-05-31T09:49:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2933
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed holoparasite being disconnected from you when you get polymorphed by
+      wizard, genetics, etc.
+  id: 1068
+  time: '2026-05-31T10:19:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2934
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed bingles speaking tau-ceti basic and having to take the ghost role
+      twice.
+  id: 1069
+  time: '2026-05-31T11:09:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2937
+- author: Armok
+  changes:
+  - type: Add
+    message: Magical Literacy is now tied to several new and exciting things
+  - type: Add
+    message: Magical literacy can be used to summon demons
+  - type: Add
+    message: 15+ new demons
+  - type: Add
+    message: 15+ new enchantments
+  - type: Add
+    message: >-
+      The ability to process demon souls into inks, that can be used to enchant
+      scrolls
+  id: 1070
+  time: '2026-06-01T01:57:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2921
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Surplus bundles can no longer be on sale...
+  id: 1071
+  time: '2026-06-01T07:40:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2944
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood vial crafting not working with blood taken from people.
+  id: 1072
+  time: '2026-06-01T10:11:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2959
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fully predicted clown car interactions.
+  id: 1073
+  time: '2026-06-01T10:33:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2963
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed wizard not picking anyone opted into it roundstart.
+  - type: Fix
+    message: Fixed (now rare) wizard ghost role not having a description.
+  id: 1074
+  time: '2026-06-01T11:13:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2964
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Demonology runes now require magical literacy mastery levels 3-5 to make
+      instead of 1.
+  id: 1075
+  time: '2026-06-01T11:17:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2965
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Renamed some minor demon names to be less stupid.
+  id: 1076
+  time: '2026-06-01T11:28:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2966
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed abductor agent never spawning...
+  id: 1077
+  time: '2026-06-01T17:05:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2971
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added the RFID access scanner, you can craft it from door electronics and
+      some materials.
+  - type: Tweak
+    message: Logic gates and other similar items can now be hidden under floor tiles.
+  id: 1078
+  time: '2026-06-01T17:08:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2969
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI Triumvurate trait leaving the extra 2 cores unpowered.
+  id: 1079
+  time: '2026-06-01T17:20:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2972
+- author: Hoodsie
+  changes:
+  - type: Add
+    message: Zombie immune to drones
+  - type: Remove
+    message: Oil bloodstream from drones
+  id: 1080
+  time: '2026-06-01T17:26:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2812

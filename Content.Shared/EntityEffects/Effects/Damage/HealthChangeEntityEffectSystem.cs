@@ -75,7 +75,7 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     public TemperatureScaling? ScaleByTemperature;
 
     [DataField]
-    public SplitDamageBehavior SplitDamage = SplitDamageBehavior.None;
+    public SplitDamageBehavior SplitDamage = SplitDamageBehavior.SplitEnsureAllOrganic;
 
     [DataField]
     public bool UseTargeting = true;

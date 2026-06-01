@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantLaser
+  name: Laser
+  components:
+  - type: Enchant
+    maxLevel: 1
+  - type: ComponentsEnchant
+    added:
+    - type: Gun
+      soundGunshot: /Audio/Effects/radpulse7.ogg
+      fireRate: 0.5
+      useKey: false
+    - type: AmmoCounter
+    - type: UseDelayOnShoot
+    - type: UseDelay
+      delay: 1.5
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 1.4
+      rechargeSound:
+        path: /Audio/Magic/Cults/ClockCult/steam_whoosh.ogg
+    - type: BasicEntityAmmoProvider
+      proto: LaserCarbineBullet
+      capacity: 1
+      count: 1
