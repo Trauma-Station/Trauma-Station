@@ -372,7 +372,7 @@
     edges:
     - to: finish
       steps:
-      - material: Plasma # Temp fix cause blood is bugged day 1
+      - material: Plasma # Temp fix cause blood is bugged
         amount: 15
       - tool: Screwing
         doAfter: 1
