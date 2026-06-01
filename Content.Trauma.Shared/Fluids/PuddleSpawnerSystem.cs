@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.Fluids;
 
 public sealed partial class PuddleSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
+    [Dependency] private SharedPuddleSystem _puddle = default!;
 
     public override void Initialize()
     {
