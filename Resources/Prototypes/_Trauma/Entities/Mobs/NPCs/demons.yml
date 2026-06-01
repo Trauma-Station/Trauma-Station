@@ -93,9 +93,9 @@
       MutationTwoLeftFeet: 0.1
       MutationAntenna: 0.1
       MutationAdrenalineRush: 0.1
-      Dwarfism: 0.1
-      Acromegaly: 0.1
-      Gigantism: 0.1
+      MutationDwarfism: 0.1
+      MutationAcromegaly: 0.1
+      MutationGigantism: 0.1
   - type: WarpPoint
   - type: PointLight
     radius: 0
@@ -448,7 +448,7 @@
 
 - type: entity
   parent: [ControlledDemon, MediumDemonGhost]
-  id: MinorDemonGhostControlled
+  id: MediumDemonGhostControlled
   suffix: Controlled
 
 - type: entity
@@ -752,7 +752,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Airloss: 5
+        Blunt: 5
     altDisarm: false
     canWideSwing: true
   - type: Destructible
@@ -857,7 +857,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Burn: 15
+        Blunt: 15
     altDisarm: false
     canWideSwing: true
   - type: Destructible

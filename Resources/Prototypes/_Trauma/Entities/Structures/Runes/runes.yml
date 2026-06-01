@@ -26,12 +26,6 @@
   id: BaseCarvedRune
   abstract: true
   components:
-  - type: Spillable
-    solution: rune
-  - type: Solution
-    solution:
-      id: rune
-      maxVol: 100
   - type: Destructible
     thresholds:
     - trigger:
@@ -43,12 +37,7 @@
       - !type:PlaySoundBehavior
         sound:
           path: /Audio/_Goobstation/Heretic/runebreak.ogg
-  - type: SolutionTransfer
-    canChangeTransferAmount: true
-    maxTransferAmount: 10
   - type: InteractionOutline
-  - type: RefillableSolution
-    solution: rune
 # Enchanting
 
 - type: entity
