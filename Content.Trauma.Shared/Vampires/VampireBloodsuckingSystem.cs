@@ -158,12 +158,13 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
             Dirty(ent);
         }
     }
+    #endregion
 
     /// <summary>
     /// Checks whether an entity can do a blood sucking sequence.
     /// </summary>
     /// <returns></returns>
-    private bool CanBloodSuck(EntityUid user)
+    public bool CanBloodSuck(EntityUid user)
     {
         // Our current selected hand must be empty for this to work.
         if (!_hands.ActiveHandIsEmpty(user) || _mobState.IsCritical(user))
@@ -176,7 +177,6 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
 
         return true;
     }
-    #endregion
 }
 
 /// <summary>

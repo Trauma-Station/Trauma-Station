@@ -1,4 +1,4 @@
-using Robust.Client.Player; // Trauma
+using Content.Trauma.Common.CombatMode; // Trauma
 using System.Numerics;
 using Content.Client.Hands.Systems;
 using Content.Shared.Weapons.Ranged.Components;
@@ -36,14 +36,15 @@ public sealed partial class CombatModeIndicatorsOverlay : Overlay // Trauma - ad
     public float Scale = 0.6f;  // 1 is a little big
 
     public CombatModeIndicatorsOverlay(IInputManager input, IEntityManager entMan,
-            IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands, IPlayerManager player) // Trauma - Added player manager
+            IEyeManager eye, CombatModeSystem combatSys, HandsSystem hands)
     {
+        IoCManager.InjectDependencies(this); // Trauma
         _inputManager = input;
         _entMan = entMan;
         _eye = eye;
         _combat = combatSys;
         _hands = hands;
-        _player = player; // Trauma
+        _sprite = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>(); // Trauma
 
         var spriteSys = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _gunSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
@@ -52,7 +53,6 @@ public sealed partial class CombatModeIndicatorsOverlay : Overlay // Trauma - ad
             "gun_bolt_sight"));
         _meleeSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
              "melee_sight"));
-        _bloodSuck = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_Trauma/Interface/Misc/crosshair_pointers.rsi"), "bloodsuck")); // Trauma
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -81,7 +81,16 @@ public sealed partial class CombatModeIndicatorsOverlay : Overlay // Trauma - ad
         var uiScale = (args.ViewportControl as Control)?.UIScale ?? 1f;
         var limitedScale = uiScale > 1.25f ? 1.25f : uiScale;
 
-        var sight = IsBloodsucking() ? _bloodSuck : (isHandGunItem ? (isGunBolted ? _gunSight : _gunBoltSight) : _meleeSight); // Trauma - Added bloodsucking crosshair
+        var sight = isHandGunItem ? (isGunBolted ? _gunSight : _gunBoltSight) : _meleeSight;
+        // <Trauma>
+        if (_player.LocalEntity is { } player)
+        {
+            var ev = new GetCombatModeCursorEvent();
+            _entMan.EventBus.RaiseLocalEvent(player, ref ev);
+            if (ev.Sprite is { } sprite)
+                sight = _sprite.Frame0(sprite);
+        }
+        // </Trauma>
         DrawSight(sight, args.ScreenHandle, mousePos, limitedScale * Scale);
     }
 

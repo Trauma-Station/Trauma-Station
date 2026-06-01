@@ -3,7 +3,6 @@
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -32,12 +31,16 @@ public sealed partial class VampireLairSystem : EntitySystem
     private void OnDamage(Entity<VampireLairComponent> ent, ref DamageDealtEvent args)
     {
         // Only heat can damage this entity, and we don't want to notify the vampire for non-heat damage types cause its gonna spam
-        if (ent.Comp.Vampire is not { } vamp|| !args.Damage.DamageDict.ContainsKey(Heat))
+        if (ent.Comp.Vampire is not { } vamp || !args.Damage.DamageDict.ContainsKey(Heat))
             return;
 
-        // Random chance of getting the popup, so again, it doesn't spam the user but still warns them a lot.
-        if (!SharedRandomExtensions.PredictedProb(_timing, 0.2f, GetNetEntity(ent)))
+        // Cooldown so the vampire doesn't get spammed with popups since fire damage gets dealt a lot of times
+        var now = _timing.CurTime;
+        if (now < ent.Comp.NextPopup)
             return;
+
+        ent.Comp.NextPopup = ent.Comp.PopupCooldown + now;
+        Dirty(ent);
 
         if (_net.IsServer)
             _popup.PopupEntity("Your lair is being attacked!", vamp, vamp, PopupType.LargeCaution);

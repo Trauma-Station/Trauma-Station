@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Vampires.Lair;
 public sealed partial class VampiricRuneVisualsComponent : Component;
 
 [Serializable, NetSerializable]
-public enum VampiricRuneVisuals
+public enum VampiricRuneVisuals : byte
 {
     Color,
 }

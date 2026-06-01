@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
 namespace Content.Trauma.Shared.Vampires.Lair;
 
 /// <summary>
 /// Used on coffins. Holds data on whether this coffin has a vampire owner.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class VampireLairComponent : Component
 {
     /// <summary>
@@ -21,4 +23,14 @@ public sealed partial class VampireLairComponent : Component
     /// </summary>
     [DataField]
     public EntProtoId CoffinStatus = "VampireLairStatusEffect";
+
+    /// <summary>
+    /// How often to send popup to the <see cref="Vampire"/>.
+    /// </summary>
+    [DataField]
+    public TimeSpan PopupCooldown = TimeSpan.FromSeconds(3f);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [AutoPausedField]
+    public TimeSpan NextPopup;
 }
