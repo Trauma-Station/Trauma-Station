@@ -41,4 +41,4 @@
     - EnchantingScroll
   - type: Construction
     graph: EnchantedScroll
-    node: scroll
+    node: finish
