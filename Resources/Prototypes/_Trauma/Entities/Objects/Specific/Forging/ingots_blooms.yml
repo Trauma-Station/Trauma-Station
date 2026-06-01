@@ -321,7 +321,7 @@
   components:
   - type: Sprite
     layers:
-    - state: steel # TODO: gold
+    - state: gold
       shader: Emissive
   - type: Workable
     remaining: 50 # relatively soft metal
@@ -349,7 +349,7 @@
   components:
   - type: Sprite
     layers:
-    - state: ingot_steel # TODO: gold
+    - state: ingot_gold
       shader: Emissive
   - type: PhysicalComposition
     materialComposition:
@@ -376,7 +376,7 @@
   components:
   - type: Sprite
     layers:
-    - state: steel # TODO: silver
+    - state: silver
       shader: Emissive
   - type: Workable
     remaining: 50 # same hardness as gold
@@ -404,7 +404,7 @@
   components:
   - type: Sprite
     layers:
-    - state: ingot_steel # TODO: silver
+    - state: ingot_silver
       shader: Emissive
   - type: PhysicalComposition
     materialComposition:

@@ -63,7 +63,7 @@
   id: Gold
   name: gold
   color: "#ffcc51"
-  ingotSprite: ingot_steel # TODO
+  ingotSprite: ingot_gold
   density: 19.283
   workingTemp: 923
   workingRange: 50
@@ -82,7 +82,7 @@
   id: Silver
   name: silver
   color: "#d7e2e7"
-  ingotSprite: ingot_steel # TODO
+  ingotSprite: ingot_silver
   density: 10.503
   workingTemp: 893
   workingRange: 80
