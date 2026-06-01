@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantMagicSentience
+  name: Sentience
+  components:
+  - type: Enchant
+    maxLevel: 1
+  - type: ComponentsEnchant
+    added:
+    - type: LanguageSpeaker
+      speaks:
+      - TauCetiBasic
+      understands:
+      - TauCetiBasic
+    - type: GhostRole
+      name: ghost-role-information-cursed-name
+      description: ghost-role-information-cursed-desc
+      rules: ghost-role-information-antagonist-rules
+      mindRoles:
+      - MindRoleGhostRoleFamiliar
+    - type: GhostTakeoverAvailable
+    - type: TypingIndicator
+      proto: alien
+    - type: Speech
+      speechVerb: HolierThanThou
+      speechSounds: Hastur

@@ -1,0 +1,34 @@
+- type: entity
+  parent: ActionBlink
+  id: ActionDemonRift
+  name: Demon Blink
+  description: Click somewhere to teleport to it.
+  components:
+  - type: Action
+    useDelay: 20
+    raiseOnAction: false
+    icon:
+      sprite: _Trauma/Actions/demon.rsi
+      state: rift
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Effects/burning.ogg
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:SpawnParticles
+      particleProto: DemonPassage
+
+- type: entity
+  id: ActionDemonGaze
+  name: Demon Gaze
+  description: Generates a massive death beam that eradicates everything in it's path. Has it's own gravitational pull, sucking in new victims.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 30
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: gazer_beam_charge
+  - type: InstantAction
+    event: !type:StarGazeEvent

@@ -134,4 +134,14 @@ public sealed partial class EnchanterSystem : EntitySystem
         }
         return true;
     }
+
+    public bool AddEnchant(Entity<EnchanterComponent?> ent, [ForbidLiteral] EntProtoId<EnchantComponent> id)
+    {
+        ent.Comp ??= EnsureComp<EnchanterComponent>(ent);
+        if (ent.Comp.Enchants.Contains(id))
+            return false;
+
+        ent.Comp.Enchants.Add(id);
+        return true;
+    }
 }
