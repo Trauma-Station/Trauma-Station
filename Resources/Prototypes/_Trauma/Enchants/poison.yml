@@ -8,6 +8,9 @@
     whitelist:
       components:
       - MeleeWeapon
+    blacklist:
+      components:
+      - Solution
   - type: ComponentsEnchant
     added:
     - type: Solution

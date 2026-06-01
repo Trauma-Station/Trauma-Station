@@ -55,6 +55,9 @@
 ## D ##
 
 - type: Tag
+  id: DemonEssense
+
+- type: Tag
   id: DrillHead # for drills durability repair whitelist
 
 - type: Tag

@@ -3,6 +3,7 @@
   id: BaseEnchantingScroll
   description: A scroll embuded with an enchantment. Could do any number of things.
   name: enchanted scroll
+  abstract: true
   components:
   - type: Sprite
     layers:
@@ -255,7 +256,7 @@
   components:
   - type: Enchanter
     enchants:
-    - EnchantElecetrified
+    - EnchantElectrified
   - type: Construction
     graph: EnchantedScroll
     node: EnchantingScrollThunder

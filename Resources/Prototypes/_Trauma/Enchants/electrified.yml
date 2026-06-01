@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseEnchant
-  id: EnchantElecetrified
-  name: Elecetrified
+  id: EnchantElectrified
+  name: Electrified
   components:
   - type: Enchant
     maxLevel: 1

@@ -36,11 +36,11 @@
     guides:
     - Enchanting
   - type: Construction
-    graph: BloodVial
-    node: empty
+    graph: DemonBlood
+    node: unfinished
 
 - type: entity
-  name: prepared blood vial
+  name: filled blood vial
   parent: [BaseItem, BaseMagicalContraband]
   description: A blood vial embuded with black magic, useful for a variety of things.
   id: BloodVialFull
@@ -65,5 +65,5 @@
     tags:
     - BloodVial
   - type: Construction
-    graph: BloodVial
+    graph: DemonBlood
     node: finish

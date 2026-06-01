@@ -24,6 +24,7 @@
       - MeleeWeapon
       - Armor
       - Clothing
+      - StealTarget
   - type: ComponentsEnchant
     added:
     - type: Unremoveable

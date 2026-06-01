@@ -5,6 +5,9 @@
   components:
   - type: Enchant
     maxLevel: 1
+    blacklist:
+      components:
+      - StealTarget
   - type: ComponentsEnchant
     added:
     - type: FadingTimedDespawn

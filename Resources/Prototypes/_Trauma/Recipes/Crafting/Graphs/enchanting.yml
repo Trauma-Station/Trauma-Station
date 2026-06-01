@@ -354,13 +354,12 @@
     entity: EnchantingScrollVanishing
 
 - type: constructionGraph
-  id: BloodVial
+  id: DemonBlood
   start: start
   graph:
-
   - node: start
     edges:
-    - to: empty
+    - to: unfinished
       steps:
       - material: Steel
         amount: 1
@@ -368,19 +367,60 @@
         amount: 2
         doAfter: 1
 
-  - node: empty
+  - node: unfinished
     entity: BloodVial
     edges:
     - to: finish
+      steps:
+      - tool: Screwing
+        doAfter: 1
       conditions:
       - !type:MinSolution
         solution: drink
         reagent:
           ReagentId: Blood
         quantity: 100
-      steps:
-      - tool: Screwing
-        doAfter: 1
-
   - node: finish
-    edges: BloodVialFull
+    entity: BloodVialFull
+
+- type: constructionGraph
+  id: RandomInk
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: DemonEssense
+        name: construction-graph-tag-demonsoul
+        icon:
+          sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+          state: icon
+  - node: finish
+    entity: MagicInkRandom
+
+- type: constructionGraph
+  id: DefaceBible
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: Bible
+        name: construction-graph-tag-bible
+        icon:
+          sprite: Objects/Specific/Chapel/bible.rsi
+          state: icon
+  - node: finish
+    entity: BloodEnchanter

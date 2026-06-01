@@ -1,7 +1,7 @@
 - type: entity
-  description: A vial of magical ink, can be used on a scroll to prepare an encantment or curse.
   parent: [BaseItem, BaseMagicalContraband]
   id: BaseInk
+  description: A vial of magical ink, can be used on a scroll to prepare an encantment or curse.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/inks.rsi
@@ -21,6 +21,20 @@
   - type: Tag
     tags:
     - Placeholder
+
+- type: entity
+  # categories: [HideSpawnMenu]
+  parent: MagicInkNocimat
+  id: MagicInkRandom
+  name: random magic ink
+  components:
+  - type: TimedDespawn
+    lifetime: 0.01
+  - type: SpawnOnDespawn
+    prototype: RandomInkSpawner
+  - type: Construction
+    graph: RandomInk
+    node: finish
 
 - type: entity
   parent: BaseInk
