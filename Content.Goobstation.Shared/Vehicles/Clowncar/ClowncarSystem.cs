@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.ActionBlocker;
+using Content.Shared.Audio.Jukebox;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
@@ -14,6 +16,7 @@ namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 
 public sealed partial class ClowncarSystem : EntitySystem
 {
+    [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedChatSystem _chat = default!;
@@ -30,7 +33,7 @@ public sealed partial class ClowncarSystem : EntitySystem
         SubscribeLocalEvent<ClowncarComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<ClowncarComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
         SubscribeLocalEvent<ClowncarComponent, ThankRiderActionEvent>(OnThankRider);
-        SubscribeLocalEvent<ClowncarComponent, GetVerbsEvent<AlternativeVerb>>(AddVerbs);
+        SubscribeLocalEvent<ClowncarComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<ClowncarComponent, ClownCarOpenTrunkDoAfterEvent>(OnOpenTrunk);
         SubscribeLocalEvent<ClowncarComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<ClowncarComponent, QuietBackThereActionEvent>(OnQuietInTheBack);
@@ -83,7 +86,7 @@ public sealed partial class ClowncarSystem : EntitySystem
     {
         var user = args.Performer;
         if (args.Handled || !TryComp<VehicleComponent>(ent, out var vehicle) ||
-            !_actionBlocker.CanSpeak(user)) // mimes cant thank the driver...
+            !_blocker.CanSpeak(user)) // mimes cant thank the driver...
             return;
 
         ent.Comp.ThankCounter++;
@@ -100,7 +103,7 @@ public sealed partial class ClowncarSystem : EntitySystem
             return;
         }
 
-        var name = Identity.Name(driver);
+        var name = Identity.Name(driver, EntityManager);
         var message = Loc.GetString("clowncar-thank-driver", ("driver", name));
         _chat.TrySendInGameICMessage(user, message, InGameICChatType.Speak, false);
         args.Handled = true;
@@ -111,7 +114,7 @@ public sealed partial class ClowncarSystem : EntitySystem
 
     private void OnGetVerbs(Entity<ClowncarComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        var user = args.user;
+        var user = args.User;
         if (!args.CanInteract ||
             !_container.TryGetContainer(ent.Owner, ent.Comp.Container, out var container) ||
             container.Contains(user))
@@ -136,7 +139,7 @@ public sealed partial class ClowncarSystem : EntitySystem
         _doAfter.TryStartDoAfter(args);
     }
 
-    private void OnOpenTrunk(Entity<ClowncarComponent> ent, ClownCarOpenTrunkDoAfterEvent args)
+    private void OnOpenTrunk(Entity<ClowncarComponent> ent, ref ClownCarOpenTrunkDoAfterEvent args)
     {
         if (!_container.TryGetContainer(ent.Owner, ent.Comp.Container, out var container) ||
             container.Contains(args.User))
