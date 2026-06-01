@@ -29,16 +29,14 @@
     edges:
     - to: finish
       steps:
-      - material: Plasma # Temp fix cause blood is bugged
-        amount: 15
       - tool: Screwing
         doAfter: 1
-      # conditions:
-      # - !type:MinSolution
-      #   solution: drink
-      #   reagent:
-      #     ReagentId: Blood
-      #   quantity: 100
+        conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: Blood
+        quantity: 100
   - node: finish
     entity: BloodVialFull
 
