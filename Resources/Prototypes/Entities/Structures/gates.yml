@@ -22,6 +22,8 @@
   components:
   # <Trauma>
   - type: SubFloorHide # sneaky
+  - type: Visibility
+  - type: CollideOnAnchor
   # </Trauma>
   - type: DeviceNetwork
     deviceNetId: Wireless
