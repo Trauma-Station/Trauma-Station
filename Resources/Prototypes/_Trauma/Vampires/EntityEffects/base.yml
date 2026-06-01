@@ -85,7 +85,7 @@
   effects:
   - !type:Vomit
   - !type:PopupPredicted
-    message: You garlic makes you vomit!
+    message: The garlic makes you vomit!
     visualType: MediumCaution
   - !type:ModifyStatusEffect
     effectProto: StatusEffectDrunk
