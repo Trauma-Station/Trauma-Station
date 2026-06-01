@@ -23,6 +23,7 @@
   spawnerPrototype: SpawnPointGhostWizard
   startingGear: WizardGear # Trauma
   unequipOldGear: true # Trauma
+  prefRoles: [ Wizard ] # Trauma
   roleLoadout:
   - RoleSurvivalEVA # Trauma - was RoleSurvivalExtended
   briefing:
