@@ -51,7 +51,7 @@ public abstract partial class SharedChatSystem
         var fonts = GetFont(source, speech, language, message);
         speech ??= GetSpeechVerb(source, message);
 
-        return Loc.GetString(wrapId,s
+        return Loc.GetString(wrapId,
             ("color", color),
             ("entityName", entityName),
             ("verb", Loc.GetString(fonts.VerbId)),
