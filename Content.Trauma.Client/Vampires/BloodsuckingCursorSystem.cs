@@ -25,6 +25,7 @@ public sealed partial class BloodsuckingCursorSystem : EntitySystem
 
     private void OnCursor(Entity<VampireBloodsuckingComponent> ent, ref GetCombatModeCursorEvent args)
     {
-        args.Sprite = _bloodsucking.CanBloodSuck(ent) ?  BloodsuckingCursor : null;
+        if (_bloodsucking.CanBloodSuck(ent))
+            args.Sprite = BloodsuckingCursor;
     }
 }
