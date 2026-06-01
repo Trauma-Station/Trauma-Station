@@ -1,0 +1,21 @@
+# Filled bag for ERT Engineer admeme loadout
+- type: entity
+  parent: ClothingBackpackERTEngineer
+  id: ClothingBackpackERTEngineerFilled
+  suffix: Admeme, ERT Engineer
+  name: ERT Engineer Backpack
+  components:
+  - type: StorageFill
+    contents:
+    - id: RCDExperimental
+    - id: DoubleEmergencyOxygenTankFilled
+    - id: DoubleEmergencyNitrogenTankFilled
+    - id: DrinkWaterBottleFull
+    - id: FoodSnackNutribrick
+    - id: BoxFlare
+    - id: LanternFlash
+    - id: Flash
+    - id: WeaponPistolN1984
+    - id: MagazineMagnum
+    - id: MagazineMagnum
+    - id: MagazineMagnum
