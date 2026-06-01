@@ -96,6 +96,7 @@
       MutationDwarfism: 0.1
       MutationAcromegaly: 0.1
       MutationGigantism: 0.1
+      MutationInsulated: 0.5
   - type: WarpPoint
   - type: PointLight
     radius: 0
