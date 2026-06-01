@@ -553,14 +553,17 @@ public sealed partial class InjectorSystem : EntitySystem
         else
             _solutionContainer.Refill(target, targetSolution, removedSolution);
 
-        LocId msgSuccess = target == user ? "injector-component-inject-success-message-self" : "injector-component-inject-success-message";
+        // <Trauma> - localize it here, not below
+        var msgSuccess = Loc.GetString(target == user ? "injector-component-inject-success-message-self" : "injector-component-inject-success-message",
+            ("amount", removedSolution.Volume), ("target", Identity.Entity(target, EntityManager)));
+        // </Trauma>
 
         if (selfEv.OverrideMessage != null)
             msgSuccess = selfEv.OverrideMessage;
         else if (ev.OverrideMessage != null)
             msgSuccess = ev.OverrideMessage;
 
-        _popup.PopupClient(Loc.GetString(msgSuccess, ("amount", removedSolution.Volume), ("target", Identity.Entity(target, EntityManager))), target, user);
+        _popup.PopupClient(msgSuccess, target, user); // Trauma - dont localize here
 
         // it is IMPERATIVE that when an injector is instant, that it has a pop-up.
         if (activeMode.InjectPopupTarget != null && target != user)

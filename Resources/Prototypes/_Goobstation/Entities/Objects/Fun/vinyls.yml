@@ -65,7 +65,7 @@
   - type: ItemSlots
     slots:
       vinyl:
-        name: vinyl
+        name: item-slot-name-vinyl
         insertSound: /Audio/_Goobstation/RadioStation/vinyl/vinylEject.ogg
         ejectSound: /Audio/_Goobstation/RadioStation/vinyl/vinylInsert.ogg
         whitelist:

@@ -1097,7 +1097,8 @@
   description: uplink-surplus-bundle-desc
   productEntity: CrateSyndicateSurplusBundle
   cost:
-    Telecrystal: 100 # goob
+    Telecrystal: 100 # Trauma - was 20, 5x
+  discountCategory: null # Trauma - way too free with discounts
   categories:
   - UplinkDisruption
   conditions:

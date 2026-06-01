@@ -348,7 +348,7 @@
   components:
   - type: GhostRole
     name: ghost-role-information-wizard-name
-    description: roles-antag-wizard-objective-goob # Trauma
+    description: roles-antag-wizard-description-goob # Trauma
     rules: ghost-role-information-antagonist-rules
     mindRoles:
     - MindRoleWizard

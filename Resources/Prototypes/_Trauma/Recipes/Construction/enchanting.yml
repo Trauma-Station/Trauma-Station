@@ -1,0 +1,43 @@
+- type: construction
+  id: EnchantingRune
+  graph: EnchantingRune
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Structure
+  placementMode: SnapgridCenter
+  theory:
+    MagicalLiteracyKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: MinorSummoning
+  graph: MinorSummoning
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Structure
+  placementMode: SnapgridCenter
+  theory:
+    MagicalLiteracyKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: MediumSummoning
+  graph: MediumSummoning
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Structure
+  placementMode: SnapgridCenter
+  theory:
+    MagicalLiteracyKnowledge: 2
+  useQuality: false
+
+- type: construction
+  id: MajorSummoning
+  graph: MajorSummoning
+  targetNode: finish
+  category: construction-category-demonology
+  objectType: Structure
+  placementMode: SnapgridCenter
+  theory:
+    MagicalLiteracyKnowledge: 3
+  useQuality: false

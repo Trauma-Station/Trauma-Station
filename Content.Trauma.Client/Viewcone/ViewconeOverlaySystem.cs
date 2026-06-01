@@ -239,7 +239,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         var query = EntityQueryEnumerator<ViewconeOccludableComponent>();
         while (query.MoveNext(out var comp))
         {
-            if (comp.Memory is { } memory)
+            if (comp.Memory is { } memory && !TerminatingOrDeleted(memory))
                 _sprite.SetVisible(memory, false);
         }
 

@@ -9,6 +9,9 @@
 ## B ##
 
 - type: Tag
+  id: BloodVial
+
+- type: Tag
   id: BowImprovised # Construction: AltarConvertOrange, given to improvised shortbow, used to get Iradomini nullrod's altar
 
 - type: Tag
@@ -52,6 +55,9 @@
 ## D ##
 
 - type: Tag
+  id: DemonEssense
+
+- type: Tag
   id: DrillHead # for drills durability repair whitelist
 
 - type: Tag
@@ -79,6 +85,9 @@
 
 - type: Tag
   id: Ed209WeaponsControl
+
+- type: Tag
+  id: EnchantingScroll # Enchanting ink's EnchantAdder whitelist
 
 - type: Tag
   id: EncryptionRevolutionary # Construction: RevTelesphere
@@ -155,6 +164,9 @@
 
 - type: Tag
   id: PlasteelScraps # Construction: BloomeryColdPlasteel
+
+- type: Tag
+  id: Placeholder
 
 ## Q ##
 

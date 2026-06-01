@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: [SolutionHypospraySmall, BaseItem]
-  id: BaseHypospray
+  id: BaseHypoInjector
   components:
   - type: Injector
     solutionName: hypospray
@@ -9,14 +9,21 @@
     allowedModes:
     - HyposprayDynamicMode
     - HyposprayInjectMode
-  - type: Spillable
-    solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
     exactVolume: true
   - type: UseDelay
     delay: 0.5
   - type: Appearance
+
+- type: entity
+  abstract: true
+  parent: BaseHypoInjector
+  id: BaseHypospray
+  components:
+  - type: Spillable
+    solution: hypospray
+    spillWhenThrown: false
 
 - type: entity
   abstract: true
@@ -184,7 +191,7 @@
     delay: 0.0
 
 - type: entity
-  parent: BaseHypospray # I plan to resize medipens to 1x2 eventually:tm:
+  parent: BaseHypoInjector # I plan to resize medipens to 1x2 eventually:tm:
   id: ChemicalMedipen
   name: chemical medipen
   description: A single-dose, non-refillable medipen.
@@ -248,6 +255,7 @@
     emptySpriteName: medipen_empty
   - type: Solution
     solution:
+      maxVol: 15 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Epinephrine
         Quantity: 5 # Trauma - was 15
@@ -287,6 +295,7 @@
     emptySpriteName: penacid_empty
   - type: Solution
     solution:
+      maxVol: 15 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       # <Trauma> - replaced completely
       - ReagentId: Monover
@@ -437,13 +446,12 @@
     emptySpriteName: punctpen_empty
   - type: Solution
     solution:
+      maxVol: 17 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Puncturase
         Quantity: 12
       - ReagentId: TranexamicAcid
         Quantity: 5
-      - ReagentId: Nothing # Needed for visuals to work, idk what else to put here :P
-        Quantity: 3
 
 - type: entity
   parent: ChemicalMedipen
@@ -582,6 +590,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Solution
     solution:
+      maxVol: 10 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Stimulants
         Quantity: 10 # Trauma - was 30
@@ -619,6 +628,7 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Solution
     solution:
+      maxVol: 5 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Stimulants
         Quantity: 5 # Trauma - was 15
