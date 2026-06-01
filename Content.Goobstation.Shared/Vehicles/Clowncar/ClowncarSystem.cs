@@ -120,7 +120,7 @@ public sealed partial class ClowncarSystem : EntitySystem
 
         args.Verbs.Add(new()
         {
-            Text = "Open Trunk";
+            Text = "Open Trunk",
             Act = () => OpenTrunkVerb(ent, user)
         });
     }
@@ -177,7 +177,7 @@ public sealed partial class ClowncarSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void ResetThankCounter(Entity<ClownCarComponent>)
+    private void ResetThankCounter(Entity<ClownCarComponent> ent)
     {
         if (ent.Comp.ThankCounter == 0)
             return;
