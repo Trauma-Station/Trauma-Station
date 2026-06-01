@@ -29,10 +29,6 @@ public sealed partial class RadioSystem
         if (language.SpeechOverride.Color is { } colorOverride)
             languageColor = Color.InterpolateBetween(Color.White, colorOverride, colorOverride.A); // Changed first param to Color.White so it shows color correctly.
 
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
-
         var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
         RaiseLocalEvent(source, ref fontEv);
 
@@ -52,7 +48,6 @@ public sealed partial class RadioSystem
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", nameString),
-            ("message", message),
-            ("language", languageDisplay));
+            ("message", message));
     }
 }

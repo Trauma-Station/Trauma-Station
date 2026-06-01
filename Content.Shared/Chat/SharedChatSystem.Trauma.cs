@@ -52,9 +52,6 @@ public abstract partial class SharedChatSystem
         colorOverride ??= language.SpeechOverride.Color;
         if (colorOverride != null)
             color = Color.InterpolateBetween(color, colorOverride.Value, colorOverride.Value.A);
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
 
         speech ??= GetSpeechVerb(source, message);
         var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
@@ -71,7 +68,6 @@ public abstract partial class SharedChatSystem
             ("fontType", fontEv.Font),
             ("fontSize", fontSizeEv.FontSize),
             ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId),
-            ("message", message),
-            ("language", languageDisplay));
+            ("message", message));
     }
 }
