@@ -1,4 +1,6 @@
-﻿using Content.Trauma.Common.CombatMode;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Trauma.Common.CombatMode;
 using Content.Trauma.Common.Vampires;
 using Content.Trauma.Shared.Vampires;
 
