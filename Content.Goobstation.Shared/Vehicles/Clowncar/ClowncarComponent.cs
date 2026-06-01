@@ -13,10 +13,11 @@ public sealed partial class ClowncarComponent : Component
     public EntProtoId ThankRiderAction = "ActionThankDriver";
 
     [DataField]
-    public EntProtoId QuietInTheBackAction = "ActionQuietBackThere";
-
-    [DataField]
-    public EntProtoId DrunkDrivingAction = "ActionDrivingWithStyle";
+    public List<EntProtoId> DriverActions = new()
+    {
+        "ActionQuietBackThere",
+        "ActionDrivingWithStyle"
+    };
 
     [DataField, AutoNetworkedField]
     public int ThankCounter;

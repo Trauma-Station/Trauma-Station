@@ -36,7 +36,7 @@ public sealed partial class ClowncarSystem : EntitySystem
         SubscribeLocalEvent<ClowncarComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<ClowncarComponent, ClownCarOpenTrunkDoAfterEvent>(OnOpenTrunk);
         SubscribeLocalEvent<ClowncarComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<ClowncarComponent, QuietBackThereActionEvent>(OnQuietInTheBack);
+        SubscribeLocalEvent<ClowncarComponent, QuietBackThereActionEvent>(OnQuietBackThere);
         SubscribeLocalEvent<ClowncarComponent, DrivingWithStyleActionEvent>(OnDrivingWithStyle);
     }
 
