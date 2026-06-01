@@ -9,7 +9,7 @@
   - type: Injurable
     damageContainer: Inorganic
   - type: Fixtures
-    fixtures:
+    fixtures: # TODO: why the fuck is this here?
       rune:
         shape:
           !type:PhysShapeCircle
@@ -20,6 +20,7 @@
         layer:
          - SlipLayer
   - type: Physics
+    canCollide: false
 
 - type: entity
   parent: [BaseStructure, DrinkBase, BaseMagicalContraband]
