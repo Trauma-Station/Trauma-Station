@@ -15,10 +15,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <ProjectReference Include="../Content.Common/Content.Common.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Chat\" />
-    </ItemGroup>
-
     <Import Project="..\RobustToolbox\Imports\Shared.props" />
 
     <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />

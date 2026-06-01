@@ -7,6 +7,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Radio.EntitySystems;
+
 public sealed partial class RadioSystem
 {
     private string WrapRadioMessage(
