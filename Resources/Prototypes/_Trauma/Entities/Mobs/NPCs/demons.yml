@@ -1,8 +1,8 @@
 - type: entity
-  name: demon
+  abstract: true
   parent: [ MobSpaceBasic, MobCombat ]
   id: BaseDemon
-  abstract: true
+  name: demon
   description: It came from hell.
   components:
   - type: HTN
@@ -118,10 +118,9 @@
 # Minor Demons
 
 - type: entity
-  name: 5'11" male
   parent: BaseDemon
   id: MinorDemonGuy
-  description: It came from hell.
+  name: strange man
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/guy.rsi
@@ -154,10 +153,9 @@
   suffix: Controlled
 
 - type: entity
-  name: Jack Pierson
   parent: BaseDemon
   id: MinorDemonIncel
-  description: It came from hell.
+  name: jealousy incarnate
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/incel.rsi
@@ -190,10 +188,9 @@
   suffix: Controlled
 
 - type: entity
-  name: Urist McHands
   parent: [BaseDemon, InventoryBase]
   id: MinorDemonUrist
-  description: It came from hell.
+  name: Urist McHands
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/human.rsi
@@ -235,10 +232,9 @@
   suffix: Controlled
 
 - type: entity
-  name: Flesh Ian
   parent: BaseDemon
   id: MinorDemonIan
-  description: It came from hell.
+  name: Flesh Hound
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/ian.rsi
@@ -279,10 +275,9 @@
   suffix: Controlled
 
 - type: entity
-  name: outcast
   parent: [BaseDemon, InventoryBase]
   id: MinorDemonVox
-  description: It came from hell.
+  name: outcast
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/vox.rsi
@@ -324,10 +319,9 @@
   suffix: Controlled
 
 - type: entity
-  name: man's best friend
   parent: [BaseDemon, InventoryBase]
   id: MinorDemonVulp
-  description: It came from hell.
+  name: wrathful beast
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/vulp.rsi
@@ -371,10 +365,9 @@
 # medium
 
 - type: entity
-  name: demon
   parent: BaseDemon
   id: MediumDemonChad
-  description: It came from hell.
+  name: prideful demon
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/chad.rsi
@@ -408,10 +401,9 @@
   suffix: Controlled
 
 - type: entity
-  name: Pun Pun # todo let him talk to deadchat
   parent: BaseDemon
   id: MediumDemonGhost
-  description: It came from hell.
+  name: Pun Pun # TODO: let him talk to deadchat
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
@@ -453,10 +445,9 @@
   suffix: Controlled
 
 - type: entity
-  name: hellmet
   parent: BaseDemon
   id: MediumDemonHamlet
-  description: It came from hell.
+  name: hellmet
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hamlet.rsi
@@ -511,10 +502,9 @@
 # Major demons
 
 - type: entity
-  name: angel
   parent: BaseDemon
   id: MediumDemon64Fat
-  description: It came from hell.
+  name: angel
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
@@ -550,10 +540,9 @@
   suffix: Controlled
 
 - type: entity
-  name: angel
   parent: BaseDemon
   id: MediumDemon64Buff
-  description: It came from hell.
+  name: angel
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
@@ -592,7 +581,6 @@
   parent: BaseDemon
   id: MediumDemon64
   name: angel
-  description: It came from hell.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
@@ -628,10 +616,9 @@
   suffix: Controlled
 
 - type: entity
-  name: bosche
   parent: BaseDemon
   id: MajorDemonBosche
-  description: It came from hell.
+  name: bosche
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/bosche.rsi
@@ -681,10 +668,9 @@
   suffix: Controlled
 
 - type: entity
-  name: feverbird
   parent: BaseDemon
   id: MajorDemonFeverbird
-  description: It came from hell.
+  name: feverbird
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/feverbird.rsi
@@ -740,10 +726,9 @@
   suffix: Controlled
 
 - type: entity
-  name: hanged
   parent: BaseDemon
   id: MajorDemonHanged
-  description: It came from hell.
+  name: hanged
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hanger.rsi
@@ -793,10 +778,9 @@
   suffix: Controlled
 
 - type: entity
-  name: hiver
   parent: BaseDemon
   id: MajorDemonHiver
-  description: It came from hell.
+  name: hiver
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hiver.rsi
@@ -835,20 +819,18 @@
   suffix: Controlled
 
 - type: entity
-  name: demon bee
   parent: BeeLaughter
   id: BeeLaughterDemon
-  description: It came from hell.
+  name: demon bee
   components:
   - type: FadingTimedDespawn
     lifetime: 5
     fadeOutTime: 5
 
 - type: entity
-  name: steamer
   parent: BaseDemon
   id: MajorDemonSteamer
-  description: It came from hell.
+  name: steamer
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/steamer.rsi
@@ -1122,7 +1104,6 @@
     prototype: MinorDemonVulpControlled
   - type: SpawnOnDespawn
     prototype: MinorDemonVulpControlled
-
 
 # Medium
 
