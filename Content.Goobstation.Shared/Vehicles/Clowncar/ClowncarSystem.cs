@@ -177,7 +177,7 @@ public sealed partial class ClowncarSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void ResetThankCounter(Entity<ClownCarComponent> ent)
+    private void ResetThankCounter(Entity<ClowncarComponent> ent)
     {
         if (ent.Comp.ThankCounter == 0)
             return;
