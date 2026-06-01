@@ -504,7 +504,7 @@
 
 - type: entity
   parent: [ControlledDemon, MediumDemonHamlet]
-  id: MinorDemonHamletControlled
+  id: MediumDemonHamletControlled
   suffix: Controlled
 
 # Major demons
@@ -1161,7 +1161,7 @@
   categories: [HideSpawnMenu]
   components:
   - type: GhostRoleMobSpawner
-    prototype: MinorDemonGhostControlled
+    prototype: MediumDemonGhostControlled
   - type: SpawnOnDespawn
     prototype: MediumDemonGhostControlled
 
@@ -1181,7 +1181,7 @@
   categories: [HideSpawnMenu]
   components:
   - type: GhostRoleMobSpawner
-    prototype: MinorDemonHamletControlled
+    prototype: MediumDemonHamletControlled
   - type: SpawnOnDespawn
     prototype: MediumDemonHamletControlled
 
