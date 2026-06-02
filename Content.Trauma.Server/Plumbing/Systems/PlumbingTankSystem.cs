@@ -1,25 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Interaction;
 using Content.Shared.NodeContainer;
 using Content.Trauma.Common.Plumbing;
 using Content.Trauma.Shared.Plumbing;
 
 namespace Content.Trauma.Server.Plumbing.Systems;
 
-public sealed class PlumbingTankSystem : EntitySystem
+public sealed partial class PlumbingTankSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly PlumbingSystem _plumbing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private PlumbingSystem _plumbing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<FluidTankComponent, PlumbingDeviceUpdateEvent>(OnTankUpdate);
-        SubscribeLocalEvent<FluidTankComponent, AfterInteractUsingEvent>(OnAfterInteract);
     }
 
     private void OnTankUpdate(Entity<FluidTankComponent> ent, ref PlumbingDeviceUpdateEvent args)
@@ -47,23 +43,5 @@ public sealed class PlumbingTankSystem : EntitySystem
             var move = _solution.SplitSolution(buffer, buffer.Comp.Solution.Volume * 0.1f * args.FrameTime);
             _plumbing.InjectIntoNet(net, move);
         }
-    }
-
-    private void OnAfterInteract(Entity<FluidTankComponent> ent, ref AfterInteractUsingEvent args)
-    {
-        if (args.Handled || !args.CanReach)
-            return;
-
-        // Try to get the solution from the item the player is holding (Beaker/Bucket)
-        if (!TryComp<RefillableSolutionComponent>(args.Used, out var refill) || !TryComp<SolutionContainerManagerComponent>(args.Used, out var manager) || !_solution.TryGetRefillableSolution((args.Used, refill, manager), out var itemSol, out var solution))
-            return;
-
-        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferName, out var tankSol) || tankSol is not { } buffer)
-            return;
-
-        var transferred = _solution.TryTransferSolution(buffer, solution, ent.Comp.TransferAmount);
-
-        if (transferred)
-            args.Handled = true;
     }
 }

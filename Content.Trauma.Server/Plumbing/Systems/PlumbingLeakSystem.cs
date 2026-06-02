@@ -10,8 +10,8 @@ namespace Content.Trauma.Server.Plumbing.Systems;
 
 public sealed partial class PlumbingLeakSystem : EntitySystem
 {
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly PlumbingSystem _plumbing = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private PlumbingSystem _plumbing = default!;
 
     public override void Initialize()
     {

@@ -20,8 +20,8 @@ namespace Content.Trauma.Server.Plumbing;
 
 public sealed partial class PlumbingSystem : CommonPlumbingSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly NodeGroupSystem _nodeGroup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private NodeGroupSystem _nodeGroup = default!;
 
     // A collection of all active plumbing networks
     private readonly List<PlumbingNet> _updateList = new();

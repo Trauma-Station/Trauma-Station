@@ -11,7 +11,7 @@ namespace Content.Trauma.Server.Plumbing.Systems;
 
 public sealed partial class PlumbingManifoldSystem : EntitySystem
 {
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private NodeContainerSystem _nodeContainer = default!;
 
     public override void Initialize()
     {

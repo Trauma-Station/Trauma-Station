@@ -371,7 +371,7 @@
             True: { state: heaterOn }
             False: { state: heaterOff }
     - type: GasThermoMachine
-      coefficientOfPerformance: 1.95
+      coefficientOfPerformance: 0.95
     - type: ApcPowerReceiver
       powerDisabled: true #starts off
     - type: Machine

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Server.Pirates.Ransom;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Shared.Chemistry.Components;
@@ -9,7 +8,6 @@ using Content.Shared.Chemistry.Reaction;
 using Content.Shared.FixedPoint;
 using Content.Shared.NodeContainer;
 using Content.Shared.NodeContainer.NodeGroups;
-using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.Plumbing;
 using Robust.Shared.Random;
@@ -17,7 +15,7 @@ using Robust.Shared.Random;
 namespace Content.Trauma.Server.Plumbing;
 
 [NodeGroup(NodeGroupID.Fluid)] // Ensure you added this to the NodeGroupID enum
-public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
+public sealed partial class PlumbingNet : BaseNodeGroup, IPlumbingNet
 {
     [ViewVariables]
     public Solution Liquid { get; set; } = new();
@@ -33,7 +31,7 @@ public sealed class PlumbingNet : BaseNodeGroup, IPlumbingNet
 
     private IEntityManager? _entMan;
 
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     /// Static pressure build-up from external sources (like puddles).

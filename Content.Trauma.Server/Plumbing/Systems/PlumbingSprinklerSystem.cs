@@ -9,11 +9,11 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Plumbing.Systems;
 
-public sealed class FluidSprinklerSystem : EntitySystem
+public sealed partial class FluidSprinklerSystem : EntitySystem
 {
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

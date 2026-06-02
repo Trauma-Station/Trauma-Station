@@ -16,11 +16,11 @@ namespace Content.Trauma.Server.Plumbing.Systems;
 
 public sealed partial class PlumbingInsertionSystem : EntitySystem
 {
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly PlumbingSystem _plumbing = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private PlumbingSystem _plumbing = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {

@@ -8,10 +8,10 @@ using Content.Trauma.Shared.Plumbing.Components;
 
 namespace Content.Trauma.Server.Plumbing.Systems;
 
-public sealed class FluidPumpSystem : EntitySystem
+public sealed partial class FluidPumpSystem : EntitySystem
 {
-    [Dependency] private readonly PlumbingSystem _plumbing = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
+    [Dependency] private PlumbingSystem _plumbing = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {

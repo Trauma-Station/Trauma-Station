@@ -130,24 +130,29 @@
 
 - type: entity
   id: FluidTank
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine]
   name: fluid storage tank
   description: A large tank for storing liquids. It has a manual access port on top.
   placement:
     mode: SnapgridCenter
     snapCardinals: true
   components:
-  - type: SolutionContainerManager
+  - type: Sprite
+    sprite: _Trauma/Structures/Fluids/tank.rsi
+    snapCardinals: true
+    state: icon
+  - type: SolutionManager
     solutions:
-      tank_buffer:
-        maxVol: 1000
+    - SolutionFluidStorageTank
+  - type: MixableSolution
+    solution: tank_buffer
   - type: NodeContainer
     nodes:
       fluid:
         !type:PlumbingNode
         nodeGroupID: Fluid
         maxVolume: 0
-        pipeDirection: South
+        pipeDirection: East
         expectedConnections: 1
   - type: Appearance
   - type: PipeColorVisuals
@@ -155,18 +160,34 @@
   - type: FluidTank
   - type: InjectableSolution
     solution: tank_buffer
+  - type: DrainableSolution
+    solution: tank_buffer
+  - type: RefillableSolution
+    solution: tank_buffer
   - type: DrawableSolution
     solution: tank_buffer
-  - type: Sprite
-    sprite: Objects/Misc/skub.rsi
-    state: icon
-    # sprite: Structures/Piping/Plumbing/tank.rsi
-    # state: tank_base
   # - type: SolutionContainerVisuals
   #   solutionName: tank_buffer # Tells the visualizer which solution to track
   - type: Transform
     anchored: true
   - type: Anchorable
+  - type: PlumbingDevice
+  - type: Tag
+    tags:
+      - Unstackable
+
+- type: entity
+  parent: Solution
+  id: SolutionFluidStorageTank
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: tank_buffer
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 1000
+      maxVol: 1000
 
 - type: entity
   parent: FluidUnaryBase
