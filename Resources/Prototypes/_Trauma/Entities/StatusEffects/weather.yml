@@ -27,7 +27,10 @@
     - AreaMaints
     - AreaSubstation
     - AreaRadstorm
+    - AreaLootRoom
     - AreaPrisonShower # not quite toilet
+    - AreaShuttleAbductor
+    - AreaShuttleNukie
 
 # Schedulers
 

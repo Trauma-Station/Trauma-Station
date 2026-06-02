@@ -10,18 +10,17 @@
   - AllHostile
   #- Wizard # Goob
   - Xenoborg
-  # <Goob>
+  # <Trauma>
   - Heretic
   - Blob
   - Shadowling
-  # <Trauma>
   - Insurgent
-  # </Trauma>
   friendly:
   - Wizard # was hostile, now they're friendly
   - PirateFaction
   - Lavafauna
-  # </Goob>
+  - CrabFaction
+  # </Trauma>
 
 - type: npcFaction
   id: NanoTrasen
@@ -46,6 +45,7 @@
   - Xenoborg
   # <Trauma>
   - Insurgent
+  - CrabFaction
   # </Trauma>
 
 - type: npcFaction
@@ -81,6 +81,7 @@
   - Dragon
   # <Trauma>
   - Insurgent
+  - CrabFaction
   # </Trauma>
 
 - type: npcFaction
@@ -141,6 +142,7 @@
   - Xenoborg
   # <Trauma>
   - Insurgent
+  - CrabFaction
   # </Trauma>
 
 - type: npcFaction
@@ -165,6 +167,7 @@
   - Xenoborg
   # <Trauma>
   - Insurgent
+  - CrabFaction
   # </Trauma>
   friendly: # Goob - wizard is now friendly
   - Wizard
@@ -183,6 +186,7 @@
   - PirateFaction
   - Wraith
   - Lavafauna
+  - CrabFaction
   # </Trauma>
   - NanoTrasen
   - SimpleNeutral
@@ -225,6 +229,7 @@
   - Xenoborg
   # <Trauma>
   - Insurgent
+  - CrabFaction
   # </Trauma>
 
 - type: npcFaction
@@ -254,6 +259,7 @@
   - Xenoborg
   # <Trauma>
   - Insurgent
+  - CrabFaction
   # </Trauma>
 
 - type: npcFaction

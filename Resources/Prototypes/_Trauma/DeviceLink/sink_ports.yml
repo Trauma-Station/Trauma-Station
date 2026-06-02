@@ -1,0 +1,41 @@
+# Circuits
+
+- type: sinkPort
+  id: Circuit1
+  name: signal-port-name-circuit-1
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit2
+  name: signal-port-name-circuit-2
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit3
+  name: signal-port-name-circuit-3
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit4
+  name: signal-port-name-circuit-4
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit5
+  name: signal-port-name-circuit-5
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit6
+  name: signal-port-name-circuit-6
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit7
+  name: signal-port-name-circuit-7
+  description: signal-port-description-circuit-input
+
+- type: sinkPort
+  id: Circuit8
+  name: signal-port-name-circuit-8
+  description: signal-port-description-circuit-input

@@ -52,7 +52,7 @@
           conditions:
           - !type:HasBudgetCondition
           - !type:MaxRuleOccurenceCondition
-        - id: Heretic
+        - id: HereticRoundstart
           weight: 20
           conditions:
           - !type:HasBudgetCondition
@@ -93,7 +93,7 @@
           - !type:MaxRuleOccurenceCondition
           - !type:PlayerCountCondition
             min: 15
-        - id: Shadowling
+        - id: ShadowlingRoundstart
           prob: 0.09
           conditions:
           - !type:HasBudgetCondition

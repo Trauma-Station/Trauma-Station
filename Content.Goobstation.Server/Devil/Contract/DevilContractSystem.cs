@@ -13,7 +13,6 @@ using Content.Shared.Body;
 using Content.Shared.Paper;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Linq;
 using System.Text.RegularExpressions;
 

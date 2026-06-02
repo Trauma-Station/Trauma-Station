@@ -4,7 +4,6 @@ using Content.Client.Gameplay;
 using Content.Client.GameTicking.Managers;
 using Content.Client.UserInterface.Screens;
 using Content.Trauma.Client.UserActions;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Trauma.Client.UserInterface;

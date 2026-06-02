@@ -21,12 +21,11 @@
   - type: Material
   - type: Extractable
     grindableSolutionName: coal
-  - type: SolutionContainerManager
-    solutions:
-      coal:
-        reagents:
-        - ReagentId: Charcoal
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Charcoal
+        Quantity: 10
   - type: PhysicalComposition
     materialComposition:
       Charcoal: 100

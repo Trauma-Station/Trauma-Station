@@ -16,3 +16,6 @@ cooldown = 5
 
 [net]
 pvs_enter_budget = 300 # 200 by default
+
+[adminlogs]
+high_log_playtime = 2 # this kills the raider

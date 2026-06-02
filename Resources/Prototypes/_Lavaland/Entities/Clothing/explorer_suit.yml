@@ -44,6 +44,7 @@
   - type: FireProtection
     reduction: 0.4
   - type: PressureArmorChange
+  - type: PressureEfficiency
   - type: Tag
     tags:
     - ExplorerSuit
@@ -84,6 +85,7 @@
         Heat: 0.65
         Caustic: 0.65
   - type: PressureArmorChange
+  - type: PressureEfficiency
 
 - type: entity
   parent: LavalandEquipmentExplorerSuit

@@ -25,9 +25,6 @@
         Cold: -0.25
         Shock: -0.25
         Caustic: -0.25
-  - type: HeldSpeedModifier # Heavy indeed
-    walkModifier: 0.8
-    sprintModifier: 0.8
   - type: Destructible
     thresholds:
       - trigger:
@@ -48,9 +45,9 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
-    maxParries: 0
-    maxReflects: 5
-    reflectMinSkill: 30
+    maxParries: 2
+    maxReflects: 11
+    reflectMinSkill: 25
     soundOnReflect:
       path: /Audio/Weapons/Guns/Hits/ric4.ogg
       params:
@@ -62,6 +59,11 @@
     - Energy
     soundOnParry:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -11
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: FlashSoundSuppression
+    protectionRange: 1
+  - type: MeleeThrowOnHit
+    distance: 1

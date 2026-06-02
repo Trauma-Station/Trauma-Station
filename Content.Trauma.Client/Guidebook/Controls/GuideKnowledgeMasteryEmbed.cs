@@ -6,8 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Content.Client.Guidebook.Richtext;
 using Content.Trauma.Common.Knowledge.Systems;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Guidebook.Controls;
 

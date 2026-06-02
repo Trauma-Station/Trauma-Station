@@ -1,7 +1,6 @@
 # Spoken by Seafarers and merchants.
 - type: language
   id: NovuNederic
-  isVisibleLanguage: true
   speech:
     color: "#df6e14dd"
   obfuscation:

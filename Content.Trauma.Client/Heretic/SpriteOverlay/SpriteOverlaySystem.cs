@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.SpriteOverlay;
 
@@ -36,7 +35,7 @@ public abstract partial class SpriteOverlaySystem<T> : EntitySystem where T : Ba
     // source is owner of comp (if null it just assumes ent is owner)
     public virtual void AddOverlay(Entity<SpriteComponent?> ent, T comp, EntityUid? source = null)
     {
-        if (comp.Sprite == null)
+        if (comp.Sprite == null || !comp.Active)
         {
             RemoveOverlay(ent, comp);
             return;
@@ -64,6 +63,8 @@ public abstract partial class SpriteOverlaySystem<T> : EntitySystem where T : Ba
 
         if (comp.Offset != Vector2.Zero)
             Sprite.LayerSetOffset(ent, layer, comp.Offset);
+
+        Sprite.LayerSetColor(ent, layer, comp.Color);
 
         UpdateOverlayLayer((ent.Owner, ent.Comp), comp, layer, source);
 

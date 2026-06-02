@@ -28,6 +28,8 @@
   parent: [ BaseGunWieldable, WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
   description: Fires a spread of low-damage kinetic bolts that are half as effective for mining.
   components:
+  - type: PressureDamageChange
+    appliedModifier: 2.5
   - type: Sprite
     sprite: _Lavaland/Objects/Weapons/Guns/Basic/kinetic_shotgun.rsi
     layers:
@@ -96,6 +98,8 @@
   parent: [ WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
   description: Fires a barrage of medium-damage kinetic bolts at a short range.
   components:
+  - type: PressureDamageChange
+    appliedModifier: 3
   - type: Sprite
     sprite: _Lavaland/Objects/Weapons/Guns/Basic/kinetic_repeater.rsi
     layers:
@@ -125,6 +129,8 @@
   parent: [ WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
   description: Fires low-damage kinetic bolts, has a higher mod capacity.
   components:
+  - type: PressureDamageChange
+    appliedModifier: 3
   - type: Sprite
     sprite: _Lavaland/Objects/Weapons/Guns/Basic/kinetic_pistol.rsi
     layers:

@@ -22,6 +22,7 @@ using Content.Shared.Zombies;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Globalization;
+using System.Linq;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -30,6 +31,9 @@ public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponen
     // <Trauma>
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityQuery<PendingZombieComponent> _pendingQuery = default!;
+    [Dependency] private EntityQuery<ZombieImmuneComponent> _immuneQuery = default!;
+    [Dependency] private EntityQuery<ZombifyOnDeathComponent> _zodQuery = default!;
     // </Trauma>
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private ChatSystem _chat = default!;
@@ -42,6 +46,7 @@ public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponen
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private ZombieSystem _zombie = default!;
+    [Dependency] private EntityQuery<ZombieComponent> _zombieQuery = default!;
 
     public override void Initialize()
     {
@@ -84,7 +89,7 @@ public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponen
         else
             args.AddLine(Loc.GetString("zombie-round-end-amount-all"));
 
-        var antags = _antag.GetAntagIdentifiers(uid);
+        var antags = _antag.GetAntagIdentifiers(uid).ToList();
         args.AddLine(Loc.GetString("zombie-round-end-initial-count", ("initialCount", antags.Count)));
         foreach (var (_, data, entName) in antags)
         {
@@ -242,17 +247,20 @@ public sealed partial class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponen
         }
 
         var players = AllEntityQuery<HumanoidProfileComponent, ActorComponent, MobStateComponent, TransformComponent>();
-        var zombers = GetEntityQuery<ZombieComponent>();
-        var zombieImmune = GetEntityQuery<ZombieImmuneComponent>(); // Goobstation
         while (players.MoveNext(out var uid, out _, out _, out var mob, out var xform))
         {
-            // Einstein Engines - Zombie Improvements Take 2
-            if (!_mobState.IsAlive(uid, mob)
-                || HasComp<PendingZombieComponent>(uid) // Do not include infected players in the "Healthy players" list.
-                || HasComp<ZombifyOnDeathComponent>(uid)
-                || zombieImmune.HasComponent(uid) // Goobstation
-                || zombers.HasComponent(uid)
-                || !includeOffStation && !stationGrids.Contains(xform.GridUid ?? EntityUid.Invalid))
+            if (!_mobState.IsAlive(uid, mob))
+                continue;
+
+            if (_zombieQuery.HasComponent(uid))
+                continue;
+            // <Trauma>
+            // do not count immune/infected players as healthy
+            if (_immuneQuery.HasComp(uid) || _pendingQuery.HasComp(uid) || _zodQuery.HasComp(uid))
+                continue;
+            // </Trauma>
+
+            if (!includeOffStation && !stationGrids.Contains(xform.GridUid ?? EntityUid.Invalid))
                 continue;
 
             healthy.Add(uid);

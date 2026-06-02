@@ -37,8 +37,9 @@
         hard: true
   - type: Pullable
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -63,7 +64,7 @@
   - type: MovementSpeedModifier
     baseAcceleration: 8
     baseFriction: 0.2 # wheels dont stop instantly
-    baseSprintSpeed: 6 # Trauma - was 8.5
+    baseSprintSpeed: 6
     baseWalkSpeed: 4.5 # default walking speed
   - type: ItemSlots
     slots:

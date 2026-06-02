@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Silicon.AiCameraWarping;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.Silicon.AiCameraWarping.Ui;
 

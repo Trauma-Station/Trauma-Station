@@ -1,0 +1,10 @@
+# PDA
+- type: loadout
+  id: NanotrasenRepresentativePDA
+  equipment:
+    id: NanotrasenRepresentativePDA
+
+- type: loadout
+  id: AltNanotrasenRepresentativePDA
+  equipment:
+    id: AltNanotrasenRepresentativePDA

@@ -1,0 +1,126 @@
+# Bubbles
+- type: particleEffect
+  id: DarkPassage
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot_big
+  startColor: "#2A1E36"
+  endColor: "#1B1B1B"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.1
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.1
+  - time: 0.2
+    value: 0.2
+  - time: 0.3
+    value: 0.3
+  - time: 0.4
+    value: 0.01
+  - time: 0.6
+    value: 0.1
+  - time: 0.9
+    value: 0.9
+  lifetime: 1.2
+  lifetimeVariance: 0.6
+  speed: 0.0
+  speedVariance: 0.0
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 15
+  burst: true
+  gravity: -10.0
+  drag: -5.0
+  noiseStrength: 1.0
+  noiseFrequency: 10.0
+  spreadAngle: 90
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 0.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleEdge
+    radius: 0.8
+
+# JoJo
+- type: particleEffect
+  id: ShadowBoxing
+  sprite:
+    sprite: Effects/arcs.rsi
+    state: punch
+  startColor: "#2A1E36"
+  endColor: "#1B1B1B"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.1
+  lifetime: 0.2
+  lifetimeVariance: 0.1
+  speed: 0.0
+  speedVariance: 0.0
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 1
+  burst: true
+  gravity: 0.0
+  drag: 0.0
+  noiseStrength: 1.0
+  noiseFrequency: 10.0
+  spreadAngle: 0
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 0.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleFill
+    radius: 0.1
+
+# Ghosts are floating upwards
+- type: particleEffect
+  id: EternalDarkness
+  sprite:
+    sprite: Mobs/Ghosts/ghost_human.rsi
+    state: animated
+  startColor: "#2A1E36"
+  endColor: "#582688"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.8
+    value: 1.0
+  - time: 1.0
+    value: 0.5
+  lifetime: 0.8
+  lifetimeVariance: 0.1
+  speed: 0.0
+  speedVariance: 0.0
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 1
+  burst: true
+  gravity: -5.0
+  drag: 10.0
+  noiseStrength: 1.0
+  noiseFrequency: 1.0
+  spreadAngle: 0
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 0.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleEdge
+    radius: 4.0

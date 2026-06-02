@@ -311,3 +311,10 @@ Entries:
   id: 33
   time: '2026-05-12T20:31:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2551
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed nume red slime 65
+  id: 34
+  time: '2026-05-22T09:25:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2730

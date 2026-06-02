@@ -1,0 +1,38 @@
+- type: constructionGraph
+  id: AccessScanner
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - tag: DoorElectronics # specifically the tag not component, as the component's very poorly named and has nothing to do with doors
+        name: construction-graph-tag-door-electronics-circuit-board
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: door_electronics
+      - material: Steel
+        amount: 4
+        doAfter: 3
+  - node: unfinished
+    entity: AccessScannerUnfinished
+    edges:
+    - to: access scanner
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Cable
+        amount: 3
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 1
+      - material: MetalRod
+        amount: 2
+        doAfter: 1
+      - material: Cable
+        amount: 3
+        doAfter: 2
+      - tool: Cutting
+        doAfter: 1
+  - node: access scanner
+    entity: AccessScanner

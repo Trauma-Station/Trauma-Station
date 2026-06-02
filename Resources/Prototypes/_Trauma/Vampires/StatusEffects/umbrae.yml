@@ -1,0 +1,98 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: CloakOfDarknessStatusEffect
+  name: cloak of darkness
+  components:
+  - type: StatusEffectAlert
+    alert: CloakOfDarkness
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.5
+    walkSpeedModifier: 1.5
+  - type: DarknessStealthStatusEffect
+    triggerAt: 0.9
+    visibility: 0.5
+  - type: DamageModifierStatusEffect
+    modifiers:
+      coefficients:
+        Heat: 1.1
+        Shock: 1.1
+  - type: RemoveOnIgniteStatusEffect
+    effectProto: CloakOfDarknessStatusEffect
+  - type: StatusEffectEffectsApply
+    effectsOnRemoval:
+    - !type:RelayActions # sets the toggle to false so when it gets removed it doesn't start in "On" state
+      whitelist:
+        tags:
+        - CloakOfDarkness
+      effect: !type:SetToggleAction
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Trauma/Vampires/Actions/vampire_cloak.ogg
+        params:
+          volume: -5
+          pitch: 0.85
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: EternalDarknessStatusEffect
+  name: eternal darkness
+  components:
+  - type: StatusEffectEffectsApply
+    effectsOnApply:
+    - !type:AddComponents
+      components:
+      - type: PointLight
+        radius: 8
+        energy: 10
+        color: "#A020F0"
+    effectsOnRemoval:
+    - !type:RelayActions # sets the toggle to false so when it gets removed it doesn't start in "On" state
+      whitelist:
+        tags:
+        - EternalDarkness
+      effect: !type:SetToggleAction
+    - !type:RemoveComponents
+      components:
+      - type: PointLight
+  - type: MusicStatusEffect
+    sound:
+      path: /Audio/_Trauma/Vampires/eternal_darkness.ogg
+      params:
+        volume: -5
+  - type: StatusEffectEffects
+    updateDelay: 1
+    effects:
+    # Removal on death
+    - !type:ModifyStatusEffect
+      conditions:
+      - !type:MobStateCondition
+        mobstate: Alive
+        inverted: true
+      effectProto: EternalDarknessStatusEffect
+      type: Remove
+
+    # Notification on no blood
+    - !type:ModifyStatusEffect
+      conditions:
+      - !type:HasVampireBlood
+        amount: 1
+        inverted: true
+      effectProto: EternalDarknessStatusEffect
+      time: null
+      type: Remove
+
+    # Effect itself
+    - !type:NestedEffect
+      conditions:
+      - !type:HasVampireBlood
+        amount: 1
+      proto: EternalDarkness
+
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: EternalDarknessProjectileStatusEffect
+  name: eternal darkness projectile
+  components:
+  - type: ProjectileModifyStatusEffect
+    modifier: 0.5
+    laser: true

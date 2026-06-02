@@ -553,14 +553,17 @@ public sealed partial class InjectorSystem : EntitySystem
         else
             _solutionContainer.Refill(target, targetSolution, removedSolution);
 
-        LocId msgSuccess = target == user ? "injector-component-inject-success-message-self" : "injector-component-inject-success-message";
+        // <Trauma> - localize it here, not below
+        var msgSuccess = Loc.GetString(target == user ? "injector-component-inject-success-message-self" : "injector-component-inject-success-message",
+            ("amount", removedSolution.Volume), ("target", Identity.Entity(target, EntityManager)));
+        // </Trauma>
 
         if (selfEv.OverrideMessage != null)
             msgSuccess = selfEv.OverrideMessage;
         else if (ev.OverrideMessage != null)
             msgSuccess = ev.OverrideMessage;
 
-        _popup.PopupClient(Loc.GetString(msgSuccess, ("amount", removedSolution.Volume), ("target", Identity.Entity(target, EntityManager))), target, user);
+        _popup.PopupClient(msgSuccess, target, user); // Trauma - dont localize here
 
         // it is IMPERATIVE that when an injector is instant, that it has a pop-up.
         if (activeMode.InjectPopupTarget != null && target != user)
@@ -719,7 +722,7 @@ public sealed partial class InjectorSystem : EntitySystem
                 || !proto.Behavior.HasFlag(InjectorBehavior.Draw))
                 continue;
 
-            ToggleMode(injector, user, proto);
+            ToggleMode(injector, user, proto, false);
             return;
         }
     }
@@ -750,22 +753,24 @@ public sealed partial class InjectorSystem : EntitySystem
                 || !proto.Behavior.HasFlag(InjectorBehavior.Inject))
                 continue;
 
-            ToggleMode(injector, user, proto);
+            ToggleMode(injector, user, proto, false);
             return;
         }
     }
     #endregion Injecting/Drawing
 
     #region Mode Toggling
+
     /// <summary>
     /// Toggle modes of the injector if possible.
     /// </summary>
     /// <param name="injector">The injector whose mode is to be toggled.</param>
     /// <param name="user">The user toggling the mode.</param>
     /// <param name="mode">The desired mode.</param>
+    /// <param name="popup">Whether we should show popup text for the mode being changed.</param>
     /// <remarks>This will still check if the injector can use that mode.</remarks>
     [PublicAPI]
-    public void ToggleMode(Entity<InjectorComponent> injector, EntityUid user, InjectorModePrototype mode)
+    public void ToggleMode(Entity<InjectorComponent> injector, EntityUid user, InjectorModePrototype mode, bool popup = true)
     {
         var index = injector.Comp.AllowedModes.FindIndex(nextMode => mode == nextMode);
 
@@ -774,10 +779,14 @@ public sealed partial class InjectorSystem : EntitySystem
         if (!_prototypeManager.Resolve(injector.Comp.ActiveModeProtoId, out var newMode))
             return;
 
+        Dirty(injector);
+
+        if (!popup)
+            return;
+
         var modeName = Loc.GetString(newMode.Name);
         var message = Loc.GetString("injector-component-mode-changed-text", ("mode", modeName));
         _popup.PopupClient(message, user, user);
-        Dirty(injector);
     }
 
     /// <summary>

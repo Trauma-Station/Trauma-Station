@@ -1,6 +1,6 @@
 - type: entity
   name: wirecutter
-  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
+  parent: BaseItem
   id: Wirecutter
   description: This kills the wire.
   components:
@@ -168,7 +168,7 @@
 
 - type: entity
   name: wrench
-  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
+  parent: BaseItem
   id: Wrench
   description: 'A common tool for assembly and disassembly. Remember: lefty latchy, righty removey.'
   components:
@@ -362,7 +362,7 @@
 #Later on these should switch probably switch damage when changing the tool behavior.
 - type: entity
   name: power drill
-  parent: [BaseItem, MetalToolDurabilityWeak] # Trauma
+  parent: BaseItem
   id: PowerDrill
   description: A simple powered hand drill.
   components:
@@ -656,7 +656,7 @@
 #Other
 - type: entity
   name: shovel
-  parent: [BaseItem, MetalToolDurability] # Trauma
+  parent: BaseItem
   id: Shovel
   description: A large tool for digging and moving dirt.
   components:

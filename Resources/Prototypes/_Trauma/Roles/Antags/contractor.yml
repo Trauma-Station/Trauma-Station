@@ -1,0 +1,19 @@
+- type: antagSpecifier
+  id: Contractor
+  spawnerPrototype: ContractorSpawner
+  startingGear: ContractorGear
+  roleLoadout: [ RoleSurvivalNukie ]
+  mindRoles: [ MindRoleContractor ]
+  briefing:
+    text: contractor-role-greeting
+    color: Red
+    sound: /Audio/Ambience/Antag/traitor_wawa.ogg
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesContractorPrefix
+    - NamesSyndicateElite
+    nameFormat: name-format-standard
+  - type: NpcFactionMember
+    factions:
+    - Syndicate

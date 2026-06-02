@@ -15,7 +15,7 @@ public sealed partial class GeneticsResearchConsoleComponent : Component
     /// Research points given, scaled by its difficulty.
     /// </summary>
     [DataField]
-    public int PointsPerDifficulty = 1000;
+    public int PointsPerDifficulty = 500;
 
     /// <summary>
     /// Channel to send the points message on.

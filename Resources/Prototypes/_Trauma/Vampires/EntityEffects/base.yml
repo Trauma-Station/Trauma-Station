@@ -1,0 +1,93 @@
+- type: entityEffect
+  id: VampireRejuvI
+  effects:
+  - !type:TakeStaminaDamage
+    amount: -100
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: null
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: null
+    type: Remove
+  - !type:RemoveComponents
+    components:
+    - type: KnockedDown # ModifyKnockdown bugs out
+  - !type:SetStanding
+    force: true
+  - !type:ModifyKnockdown
+    time: null
+    type: Remove
+  - !type:ModifyParalysis
+    time: null
+    type: Remove
+  - !type:PopupPredicted
+    message: You healed...
+    visualType: MediumCaution
+
+# Same, but instead purges 10u of any harmful reagent. Heals 10 points each of brute, burn, toxic, and heals 50 of oxyloss
+- type: entityEffect
+  id: VampireRejuvII
+  effects:
+  - !type:TakeStaminaDamage
+    amount: -100
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: null
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: null
+    type: Remove
+  - !type:SetStanding
+    force: true
+  - !type:ModifyKnockdown
+    time: null
+    type: Remove
+  - !type:ModifyParalysis
+    time: null
+    type: Remove
+  - !type:MovementSpeedModifier
+    type: Set
+  - !type:EvenHealthChange
+    damage:
+      Brute: -10
+      Toxin: -10
+      Burn: -10
+      Airloss: -50
+  - !type:AdjustReagentGroup
+    amount: -10
+    group: Toxins
+  - !type:PopupPredicted
+    message: You healed...
+    visualType: MediumCaution
+
+- type: entityEffect
+  id: VampireFlameBurst
+  effects:
+  - !type:Flammable
+    multiplier: 5
+  - !type:Ignite
+
+- type: entityEffect
+  id: VampireHolyWater
+  effects:
+  - !type:Vomit
+    probability: 0.2
+  - !type:TakeStaminaDamage
+    amount: 10
+  - !type:ApplyNullification
+    amount: 5
+
+- type: entityEffect
+  id: VampireGarlic
+  effects:
+  - !type:Vomit
+  - !type:PopupPredicted
+    message: The garlic makes you vomit!
+    visualType: MediumCaution
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectDrunk
+    time: 60
+    type: Add

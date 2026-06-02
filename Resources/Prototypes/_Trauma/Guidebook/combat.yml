@@ -1,4 +1,9 @@
 - type: guideEntry
+  id: CounterAttack
+  name: guide-entry-counterattack
+  text: "/ServerInfo/_Trauma/Guidebook/Combat/CounterAttack.xml"
+
+- type: guideEntry
   id: Tackle
   name: guide-entry-tackle
   text: "/ServerInfo/_Trauma/Guidebook/Combat/Tackle.xml"

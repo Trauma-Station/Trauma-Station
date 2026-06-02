@@ -1,57 +1,30 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Actions;
-using Robust.Shared.Audio;
-
 namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 
-[RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedClowncarSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(ClowncarSystem))]
+[AutoGenerateComponentState]
 public sealed partial class ClowncarComponent : Component
 {
     [DataField]
-    [ViewVariables] //EntProtoId
     public string Container = "clowncar_container";
 
     [DataField]
-    [ViewVariables]
     public EntProtoId ThankRiderAction = "ActionThankDriver";
 
     [DataField]
-    [ViewVariables]
-    public EntProtoId QuietInTheBackAction = "ActionQuietBackThere";
+    public List<EntProtoId> DriverActions = new()
+    {
+        "ActionQuietBackThere",
+        "ActionDrivingWithStyle"
+    };
 
-    [DataField]
-    public EntProtoId DrunkDrivingAction = "ActionDrivingWithStyle";
-
-    [DataField]
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField, AutoNetworkedField]
     public int ThankCounter;
 
-    #region Sound
-    [ViewVariables(VVAccess.ReadWrite)]
+    /// <summary>
+    /// How many times passengers have to use the thank rider action without the driver using quiet in the back to be freed.
+    /// </summary>
     [DataField]
-    public SoundSpecifier CannonActivateSound = new SoundPathSpecifier("/Audio/_Goobstation/Vehicle/Clowncar/clowncar_activate_cannon.ogg");
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
-    public SoundSpecifier CannonDeactivateSound = new SoundPathSpecifier("/Audio/_Goobstation/Vehicle/Clowncar/clowncar_deactivate_cannon.ogg");
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField]
-    public SoundSpecifier FartSound = new SoundPathSpecifier("/Audio/_Goobstation/Vehicle/Clowncar/clowncar_fart.ogg");
-
-    [DataField]
-    public SoundSpecifier ClownMusic =
-            new SoundPathSpecifier("/Audio/_Goobstation/Music/Asgore_runs_over_dess_short.ogg")
-            {
-                Params = AudioParams.Default
-                    .WithVolume(-2f)
-                    .WithRolloffFactor(8f)
-                    .WithMaxDistance(10f)
-            };
-    #endregion
+    public int FreedomThanks = 5;
 }
-
-//public sealed partial class ThankRiderAction : InstantActionEvent { }
-public sealed partial class CannonAction : InstantActionEvent { }

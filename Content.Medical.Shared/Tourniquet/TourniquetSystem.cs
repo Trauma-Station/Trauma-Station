@@ -16,7 +16,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Tourniquet;
 

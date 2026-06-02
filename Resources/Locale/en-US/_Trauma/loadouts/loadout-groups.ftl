@@ -1,3 +1,8 @@
+# PDA
+loadout-group-captain-id = Captain ID
+loadout-group-ntr-id = Nanotrasen Representative ID
+loadout-group-hop-id = Head of Personnel ID
+
 # Errors
 loadout-group-player-restriction = You do not have access to this item.
 

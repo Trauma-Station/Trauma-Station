@@ -11,8 +11,9 @@
     penetrateDamage: 1000
     damagePenalty: 0.8
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: RadiationBlocker
     resistance: 10
   - type: Fixtures

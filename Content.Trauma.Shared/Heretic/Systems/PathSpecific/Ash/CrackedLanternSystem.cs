@@ -52,9 +52,20 @@ public sealed partial class CrackedLanternSystem : EntitySystem
         SubscribeLocalEvent<CrackedLanternComponent, GotEquippedHandEvent>(OnEquipHand);
         SubscribeLocalEvent<CrackedLanternComponent, GotUnequippedHandEvent>(OnUnequipHand);
         SubscribeLocalEvent<CrackedLanternComponent, MeleeHitEvent>(OnMelee);
+        SubscribeLocalEvent<CrackedLanternComponent, EntityUnpausedEvent>(OnUnpaused);
 
         SubscribeLocalEvent<CrackedLanternSummonComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<CrackedLanternSummonComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+    }
+
+    // Refresh hint when heretic exits from jaunt
+    private void OnUnpaused(Entity<CrackedLanternComponent> ent, ref EntityUnpausedEvent args)
+    {
+        var parent = Transform(ent).ParentUid;
+        if (!_mob.IsAlive(parent) || Exists(ent.Comp.Summoned))
+            return;
+
+        SpawnHint(ent, parent);
     }
 
     private void OnMelee(Entity<CrackedLanternComponent> ent, ref MeleeHitEvent args)

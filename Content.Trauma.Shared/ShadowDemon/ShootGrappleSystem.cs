@@ -3,7 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Physics;
 using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.ShadowDemon;
 

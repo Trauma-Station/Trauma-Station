@@ -6,6 +6,7 @@ using Content.Server.Jittering;
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Stunnable;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;
@@ -15,6 +16,7 @@ using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Rituals;
+using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -104,7 +106,11 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
 
             if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryUpdateParalyzeDuration(uid, comp.ParalyzeTime))
             {
-                _heretic.UpdateKnowledge(uid, comp.Reward - comp.CurrentStep, false, false, mindContainer);
+                var dict = new Dictionary<string, FixedPoint2>()
+                {
+                    {SharedHereticSystem.Currency, comp.Reward - comp.CurrentStep}
+                };
+                _heretic.UpdateKnowledge(uid, dict, false, false, mindContainer);
                 RemCompDeferred(uid, comp);
                 continue;
             }
@@ -119,7 +125,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
 
             _popup.PopupEntity(Loc.GetString("feast-of-owls-knowledge-gaim-message"), uid, uid, PopupType.LargeCaution);
 
-            _heretic.UpdateKnowledge(uid, 1, false, false, mindContainer);
+            _heretic.UpdateKnowledge(uid, SharedHereticSystem.OneKnowledgePoint, false, false, mindContainer);
 
             comp.CurrentStep++;
 

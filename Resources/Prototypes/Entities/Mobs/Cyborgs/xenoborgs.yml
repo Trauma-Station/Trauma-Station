@@ -22,7 +22,7 @@
       map: ["light"]
       visible: false
   - type: BorgChassis
-    maxModules: 7
+    maxModules: 8 # Trauma - was 7
     hasMindState: xenoborg_engi_e
     noMindState: xenoborg_engi_e_r
     moduleWhitelist:
@@ -31,6 +31,7 @@
       - XenoborgModuleEngi
       - BorgModuleEngineering
       - BorgModuleGeneric
+      - BorgModuleJanitor # Trauma
   - type: ContainerFill
     containers:
       borg_brain:
@@ -43,6 +44,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
+      - BorgModuleAdvancedCleaning # Trauma
   - type: ShowElectrocutionHUD
   - type: ShowHealthBars
     damageContainers:
@@ -107,11 +109,12 @@
     baseSprintSpeed : 2.2
   - type: MovementAlwaysTouching # it flies in space by pure will power
   - type: FlashImmunity
+    showInExamine: false
   - type: MobThresholds # tankier
     thresholds:
       0: Alive
-      250: Critical
-      500: Dead
+      300: Critical # Trauma - was 250
+      600: Dead # Trauma - was 500
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
@@ -154,7 +157,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      #- XenoborgModuleTool # Trauma - engi xorg exists
+      - XenoborgModuleTool
       - XenoborgModuleLaser
       - XenoborgModuleJammer
   - type: ItemSlots
@@ -208,6 +211,7 @@
       collection: FootstepHoverXenoborg
   - type: MovementAlwaysTouching # it flies in space with tiny thrusters
   - type: FlashImmunity
+    showInExamine: false
   - type: BorgChassis
     maxModules: 4
     hasMindState: xenoborg_scout_e
@@ -225,7 +229,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      #- XenoborgModuleTool # Trauma - engi xorg exists
+      - XenoborgModuleTool
       - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
@@ -296,7 +300,7 @@
       - MMIFilled
       borg_module:
       - XenoborgModuleBasic
-      #- XenoborgModuleTool # Trauma - engi xorg exists
+      - XenoborgModuleTool
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
@@ -341,6 +345,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
+      - BorgModuleAdvancedCleaning # Trauma
   - type: ItemSlots
     slots:
       cell_slot:
@@ -358,7 +363,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      #- XenoborgModuleTool # Trauma - engi xorg exists
+      - XenoborgModuleTool
       - XenoborgModuleLaser
       - XenoborgModuleJammer
   - type: ItemSlots
@@ -378,7 +383,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      #- XenoborgModuleTool # Trauma - engi xorg exists
+      - XenoborgModuleTool
       - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
@@ -398,7 +403,7 @@
       - MMI
       borg_module:
       - XenoborgModuleBasic
-      #- XenoborgModuleTool # Trauma - engi xorg exists
+      - XenoborgModuleTool
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice

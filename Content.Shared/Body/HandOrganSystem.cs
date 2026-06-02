@@ -17,12 +17,8 @@ public sealed partial class HandOrganSystem : EntitySystem
     private void OnGotInserted(Entity<HandOrganComponent> ent, ref OrganGotInsertedEvent args)
     {
         // <Trauma>
-        _hands.AddHand(args.Target.Owner, ent.Comp.HandID, ent.Comp.Data);
-
-        if (ent.Comp.StartingItem is not { } proto) return;
-        var item = PredictedSpawnNextToOrDrop(proto, args.Target);
-        _hands.TryPickup(args.Target.Owner, item, ent.Comp.HandID, animate: false);
-        // </Trauma>
+        _hands.AddHand(args.Target.Owner, ent.Comp.HandID, ent.Comp.Data); // Trauma - use .Owner
+        GiveStartingItem(ent, args.Target); // Trauma
     }
 
     private void OnGotRemoved(Entity<HandOrganComponent> ent, ref OrganGotRemovedEvent args)
@@ -32,5 +28,6 @@ public sealed partial class HandOrganSystem : EntitySystem
             return;
 
         _hands.RemoveHand(args.Target.Owner, ent.Comp.HandID); // Trauma - use .Owner
+        _cuffable.TryUncuff(args.Target.Owner, args.Target.Owner); // Trauma
     }
 }

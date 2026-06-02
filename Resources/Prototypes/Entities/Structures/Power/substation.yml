@@ -151,8 +151,9 @@
 
   # Damage
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PacifismDangerousAttack
 
   # Guidebook

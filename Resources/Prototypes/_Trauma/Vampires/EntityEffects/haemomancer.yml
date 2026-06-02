@@ -1,0 +1,41 @@
+# Blood Eruption
+- type: entityEffect
+  id: BloodEruption
+  effects:
+  - !type:NestedEffect
+    conditions:
+    - !type:ReagentsCondition
+      min: 10
+    proto: BloodEruptionEffects
+
+- type: entityEffect
+  id: BloodEruptionEffects
+  effects:
+  - !type:SpawnAttached
+    entity: BloodSpike
+  - !type:SpawnParticles
+    particleProto: BloodEruption
+  - !type:PlaySoundEffect
+    sound:
+      collection: gib
+
+# Blood Barrier Destruction
+- type: entityEffect
+  id: BloodBarrier
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Structural: 500
+
+- type: entityEffect
+  id: BloodTendrils
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: BloodTendrilSlowdown
+    time: 5
+    type: Set
+  - !type:SpawnEntity
+    entity: BloodTendrilImmobilizeEffect
+  - !type:PlaySoundEffect
+    sound: /Audio/_Trauma/Vampires/vampire_tentacle_hit.ogg

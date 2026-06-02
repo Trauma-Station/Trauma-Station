@@ -47,7 +47,7 @@
     spawned:
     - id: FoodBanana
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+    - id: MaterialBones1
       amount: 3
 
 ## Base
@@ -163,17 +163,13 @@
   suffix: lungs
   description: "A very odd-looking banana, it looks flabby enough to store air or something."
   components:
-  - type: SolutionContainerManager
-    solutions:
-      Lung:
-        maxVol: 100
-        canReact: false
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 4
-        - ReagentId: Vitamin
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: Vitamin
+        Quantity: 2
 
 - type: entity
   parent: [ OrganBananaMenInternal, OrganHumanHeart ]

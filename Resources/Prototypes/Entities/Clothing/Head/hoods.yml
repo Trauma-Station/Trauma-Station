@@ -299,6 +299,7 @@
         Heat: 0.85
         Radiation: 0.01
   - type: IdentityBlocker
+  - type: IngestionBlocker
   - type: BreathMask
   - type: HideLayerClothing
     slots:

@@ -1,0 +1,18 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantRotten
+  name: Rotten
+  components:
+  - type: Enchant
+    maxLevel: 1
+    blacklist:
+      components:
+      - StealTarget
+  - type: ComponentsEnchant
+    added:
+    - type: Perishable
+      rotAfter: 300
+      molsPerSecondPerUnitMass: 0
+    - type: RotInto
+      entity: MobLivingCurse
+      stage: 1

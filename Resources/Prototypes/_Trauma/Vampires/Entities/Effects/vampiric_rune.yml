@@ -1,0 +1,11 @@
+- type: entity
+  id: VampiricRune
+  categories: [ HideSpawnMenu ]
+  description: The marking of a vampire's blood... Usually, a sign that a lair has been manifested.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/vampiric_rune.rsi
+    state: vampiric_rune
+    drawdepth: FloorTiles
+  - type: VampiricRuneVisuals
+  - type: Appearance

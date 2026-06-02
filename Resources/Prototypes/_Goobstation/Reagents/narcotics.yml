@@ -7,6 +7,7 @@
   desc: reagent-desc-fentanyl
   flavor: fentanyl
   physicalDesc: reagent-physical-desc-murky
+  contrabandSeverity: Major
   color: "#6e697d"
   metabolisms:
     Bloodstream:
@@ -99,9 +100,8 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
         type: Add
         time: 3
 
@@ -156,13 +156,12 @@
           reagent: Amnestizine
           min: 4
         effectProto: AmnestizineSlowdownStatusEffect
-      - !type:GenericStatusEffect
+      - !type:ModifyStatusEffect
         conditions:
         - !type:ReagentCondition
           reagent: Amnestizine
           min: 10
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+        effectProto: StatusEffectBlindness
         type: Add
         time: 2
       - !type:Jitter
@@ -329,11 +328,9 @@
       - !type:Emote
         emote: Scream
         probability: 0.2
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
         time: 3.5
-        probability: 1
       - !type:Jitter
       - !type:ModifyStatusEffect
         effectProto: OleoresinSlowdownStatusEffect
@@ -344,6 +341,7 @@
   group: Medicine
   desc: reagent-desc-heroin
   physicalDesc: reagent-physical-desc-thick
+  contrabandSeverity: Major # Does nothing, may as well make it fun (illegal) to have
   flavor: medicine
   color: "#a8a8af"
   metabolisms:

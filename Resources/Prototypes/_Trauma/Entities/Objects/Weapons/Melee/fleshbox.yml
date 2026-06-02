@@ -1,6 +1,6 @@
 - type: entity
   name: flesh toolbox
-  parent: [UnbreakableDurability, ToolboxBase]
+  parent: ToolboxBase
   id: ToolboxMimic
   description: A bright red toolbox, full of teeth and meat...
   components:

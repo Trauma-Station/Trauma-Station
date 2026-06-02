@@ -45,13 +45,12 @@
     sprite: _Goobstation/Heretic/Entities/Potions/crucible_soul.rsi
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/crucible_soul.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 5
-        reagents:
-        - ReagentId: CrucibleSoul
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: CrucibleSoul
+        Quantity: 5
 
 - type: entity
   parent: HereticPotionBase
@@ -63,13 +62,12 @@
     sprite: _Goobstation/Heretic/Entities/Potions/clarity.rsi
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/clarity.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 5
-        reagents:
-        - ReagentId: DuskAndDawn
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: DuskAndDawn
+        Quantity: 5
 
 - type: entity
   parent: HereticPotionBase
@@ -81,13 +79,12 @@
     sprite: _Goobstation/Heretic/Entities/Potions/marshal.rsi
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/marshal.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 5
-        reagents:
-        - ReagentId: WoundedSoldier
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: WoundedSoldier
+        Quantity: 5
 
 - type: entity
   parent: HereticPotionBase
@@ -99,10 +96,9 @@
     sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/Potions/ether.rsi
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 5
-        reagents:
-        - ReagentId: NewbornEther
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 5
+      reagents:
+      - ReagentId: NewbornEther
+        Quantity: 5

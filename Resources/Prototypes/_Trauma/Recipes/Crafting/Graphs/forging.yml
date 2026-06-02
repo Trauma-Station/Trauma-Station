@@ -1,6 +1,5 @@
 - type: constructionGraph
   id: AnvilTop
-  start: start
   graph:
   - node: start
     edges:
@@ -22,7 +21,6 @@
 
 - type: constructionGraph
   id: AnvilBottom
-  start: start
   graph:
   - node: start
     edges:
@@ -44,49 +42,71 @@
 
 - type: constructionGraph
   id: SteelScraps
-  start: start
   graph:
   - node: start
     edges:
-    - to: finish
+    - to: scraps
       steps:
       - material: Steel
         amount: 3
         doAfter: 3
-  - node: finish
+  - node: scraps
     entity: SteelScraps
 
 - type: constructionGraph
   id: PlasteelScraps
-  start: start
   graph:
   - node: start
     edges:
-    - to: finish
+    - to: scraps
       steps:
       - material: Plasteel
         amount: 3
         doAfter: 3
-  - node: finish
+  - node: scraps
     entity: PlasteelScraps
 
 - type: constructionGraph
   id: BrassScraps
-  start: start
   graph:
   - node: start
     edges:
-    - to: finish
+    - to: scraps
       steps:
       - material: Brass
         amount: 3
         doAfter: 3
-  - node: finish
+  - node: scraps
     entity: BrassScraps
 
 - type: constructionGraph
+  id: GoldScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Gold
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: GoldScraps
+
+- type: constructionGraph
+  id: SilverScraps
+  graph:
+  - node: start
+    edges:
+    - to: scraps
+      steps:
+      - material: Silver
+        amount: 3
+        doAfter: 3
+  - node: scraps
+    entity: SilverScraps
+
+- type: constructionGraph
   id: WetBrick
-  start: start
   graph:
   - node: start
     edges:
@@ -103,7 +123,6 @@
 
 - type: constructionGraph # Todo, add leather
   id: ClothingHandsGlovesForge
-  start: start
   graph:
   - node: start
     edges:
