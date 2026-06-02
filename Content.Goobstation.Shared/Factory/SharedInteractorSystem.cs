@@ -142,8 +142,10 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             current = ent.Comp.AltInteract;
         else if (args.Port == ent.Comp.UseInHandPort)
             current = ent.Comp.UseInHand;
-        else
+        else if (args.Port == ent.Comp.HarmModePort)
             current = ent.Comp.HarmMode;
+        else
+            return;
 
         var value = state switch
         {
@@ -157,7 +159,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             SetAltInteract(ent, value);
         else if (args.Port == ent.Comp.UseInHandPort)
             SetUseInHand(ent, value);
-        else
+        else if (args.Port == ent.Comp.HarmModePort)
             SetHarmMode(ent, value);
     }
 
