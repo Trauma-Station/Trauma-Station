@@ -89,7 +89,8 @@ public abstract partial class SharedInteractorSystem : EntitySystem
         var user = args.User;
         (string, Toggle)[] options = [
             ("alt-interact", () => SetAltInteract(ent, !ent.Comp.AltInteract)),
-            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand))
+            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand)),
+            ("harm-mode", () => SetHarmMode(ent, !ent.Comp.HarmMode))
         ];
         foreach (var (id, toggle) in options)
         {
@@ -130,13 +131,16 @@ public abstract partial class SharedInteractorSystem : EntitySystem
 
     private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent args)
     {
-        var alt = args.Port == ent.Comp.AltInteractPort;
-        if (!alt && args.Port != ent.Comp.UseInHandPort)
-            return;
-
         var state = SignalState.Momentary;
         args.Data?.TryGetValue<SignalState>("logic_state", out state);
-        var current = alt ? ent.Comp.AltInteract : ent.Comp.UseInHand;
+        bool current;
+        if (args.Port == ent.Comp.AltInteractPort)
+            current = ent.Comp.AltInteract;
+        else if (args.Port == ent.Comp.UseInHandPort)
+            current = ent.Comp.UseInHand;
+        else
+            current = ent.Comp.HarmMode;
+
         var value = state switch
         {
             SignalState.Momentary => !current,
@@ -144,10 +148,13 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             SignalState.Low => false,
             _ => false
         };
-        if (alt)
+
+        if (args.Port == ent.Comp.AltInteractPort)
             SetAltInteract(ent, value);
-        else
+        else if (args.Port == ent.Comp.UseInHandPort)
             SetUseInHand(ent, value);
+        else
+            SetHarmMode(ent, value);
     }
 
     public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
@@ -225,6 +232,19 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             return use;
 
         ent.Comp.UseInHand = use;
+        Dirty(ent);
+        return use;
+    }
+
+    /// <summary>
+    /// Set <see cref="InteractorComponent.HarmMode"> and dirty it.
+    /// </summary>
+    public bool SetHarmMode(Entity<InteractorComponent> ent, bool use)
+    {
+        if (ent.Comp.HarmMode == use)
+            return use;
+
+        ent.Comp.HarmMode = use;
         Dirty(ent);
         return use;
     }
