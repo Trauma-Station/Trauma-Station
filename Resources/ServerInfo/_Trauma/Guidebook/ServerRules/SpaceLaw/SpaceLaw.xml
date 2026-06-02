@@ -5,7 +5,7 @@
   - 1. The right to follow corporate law.
   - 2. The right to work towards the greater wealth and prosperity of Nanotrasen.
   - 3. The right to respect one's superiors in management and understand the hard work they accomplished to achieve their position.
-  - 4. The right to a Nanotrasen appointed public defender. If no lawyer is currently available, then the security officer who arrested the employee will be appointed as their defender.
+  - 4. The right to a Nanotrasen appointed public defender. If no lawyer is currently available, then a third party will be randomly selected for them.
   - 5. The right to not be prosecuted under a C§ 01 offense. This right is waived if the party fails to comply with lawful orders from security officers that resolves this offence.
 
   ## Treatment Of Prisoners
@@ -17,6 +17,20 @@
   - 3. The right to food and water.
   - 4. The right to their shift mandated PDA, unless tampered with; in which case a replacement will be issued.
   - 5. The right to freedom of movement within the designated brig.
+  - 6. The right to request parole if a permanent prisoner; Conditions are set by the Warden or higher authority.
+
+  ## Parole
+
+  The charter of corporate rights grants the following obligations to parolees, in order of importance.
+  Corporate rights are waived if any of the following conditions are violated.
+
+  - 1. The obligation to remain sober.
+  - 2. The obligation to pursue departmental employment.
+  - 3. The obligation to inform department heads of criminal history.
+  - 4. The obligation to report to the warden when requested.
+  - 5. The obligation to allow any searches, regardless of alert level.
+  - 6. The obligation to notify the warden of any departmental changes.
+  - 7. The obligation to be monitored with the use of coordinate sensors or tracking implants.
 
   ## Security
 
@@ -51,7 +65,7 @@
 
   Schedule A: Any substance that is deemed minor or department-only contraband by the NT chemical compendium.
   Schedule B: Any substance that is deemed major contraband by the NT chemical compendium.
-  Pyrotechnic: Any substance that is used for the purpose of arson or inciendiary attacks.
+  Pyrotechnic: Any substance that is used for the purpose of arson, explosive or inciendiary attacks.
 
   ## Crime Listing
   - [textlink="Crime Listing" link="SpaceLawCrimeList"]
