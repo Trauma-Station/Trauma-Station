@@ -1,0 +1,40 @@
+# This was written by Atakku over the span of three commits; latest version was Ronstation Commit 3e48a3f.
+# I replaced the survival box with the engineering equivalent and added an engineering extended nitrogen tank for species inclusiveness.
+# Adds a couple speed loaders as well for the weapon of the loadout utilizing this.
+- type: entity
+  id: ClothingBackpackSatchelHoldingCentcomFormalFilled
+  parent: ClothingBackpackSatchelHolding
+  suffix: Filled, Centcom Formal, Admeme
+  components:
+  - type: StorageFill
+    contents:
+      - id: ToolDebug
+      - id: WelderExperimental
+      - id: RCDExperimental
+      - id: Multitool
+      - id: BoxSurvivalEngineering
+      - id: ExtendedEmergencyNitrogenTankFilled
+      - id: SpeedLoaderMagnum
+      - id: SpeedLoaderMagnum
+# Written by me (Semper) based off of Atakku's original code and my changes to the survival box. Includes some unique extras to assist with the unique role I wish for Semper to take.
+- type: entity
+  id: ClothingBackpackSatchelHoldingCentcomOfficerFilled
+  parent: ClothingBackpackSatchelHolding
+  suffix: Filled, Centcom Officer, Admeme
+  components:
+  - type: StorageFill
+    contents:
+      - id: ToolDebug
+      - id: WelderExperimental
+      - id: RCDExperimental
+      - id: Multitool
+      - id: BoxSurvivalEngineering
+      - id: ExtendedEmergencyNitrogenTankFilled
+      - id: AgentIDCard
+      - id: WeaponDisablerSMG
+      - id: BoxHandcuff
+      - id: Flash
+      - id: FlashlightSeclite
+      - id: SpeedLoaderMagnum
+      - id: SpeedLoaderMagnum
+      - id: SpeedLoaderMagnum

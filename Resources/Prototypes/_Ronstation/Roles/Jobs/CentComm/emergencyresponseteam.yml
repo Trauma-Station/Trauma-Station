@@ -1,0 +1,19 @@
+# A ready-to-go loadout for an ERT engineer to be used with an existing character. More roles can be added as well.
+- type: startingGear
+  id: ERTEngineerAdmemeGearEVA
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTEngineer
+    back: ClothingBackpackERTEngineerFilled
+    shoes: ClothingShoesBootsMagAdv
+    mask: ClothingMaskGasERT
+    eyes: ClothingEyesGlassesMeson
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTEngineer
+    id: ERTEngineerPDA
+    ears: ClothingHeadsetAltCentCom
+    belt: ClothingBeltChiefEngineerFilled
+    pocket1: Flare
+    pocket2: FlashlightSeclite
+  inhand:
+    - MindShieldImplanter
+    - DeathRattleImplanterCentcomm
