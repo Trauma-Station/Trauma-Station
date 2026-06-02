@@ -7,8 +7,8 @@
     objectives:
     - XenomorphSurviveObjective
   - type: XenomorphsRule
-    minTimeToAnnouncement: 0:15:0
-    maxTimeToAnnouncement: 0:15:0
+    minTimeToAnnouncement: 900
+    maxTimeToAnnouncement: 900
     xenomorphInfestationSound:
       collection: XenoStart
   - type: MaintsSpawnRule
