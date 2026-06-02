@@ -1,0 +1,7 @@
+- type: entity
+  parent: AirlockCentralCommandLocked
+  id: AirlockBlueshieldLocked
+
+- type: entity
+  parent: AirlockCentralCommandGlassLocked
+  id: AirlockBlueshieldGlassLocked

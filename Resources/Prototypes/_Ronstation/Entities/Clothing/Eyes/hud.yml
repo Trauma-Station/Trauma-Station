@@ -1,0 +1,21 @@
+- type: entity
+  parent: ClothingEyesGlassesSecurity
+  id: ClothingEyesVisorSecurity
+  name: security visor
+  description: A heads-up display unit that shows the ID card and wanted status of humanoids in view, patterned after apprehended enemy technology. Looks badass.
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Clothing/Eyes/Hud/secvisor.rsi
+  - type: Clothing
+    sprite: _Ronstation/Clothing/Eyes/Hud/secvisor.rsi
+
+- type: entity
+  parent: ClothingEyesGlassesCommand
+  id: ClothingEyesVisorCommand
+  name: administration visor
+  description: A heads-up display unit that shows the ID card status of humanoids in view. You're not actually sure if the higher ups ever approved it's manufacture. Looks badass anyway.
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Clothing/Eyes/Hud/commandvisor.rsi
+  - type: Clothing
+    sprite: _Ronstation/Clothing/Eyes/Hud/commandvisor.rsi
