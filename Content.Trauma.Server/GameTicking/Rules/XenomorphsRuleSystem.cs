@@ -250,7 +250,8 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
                 _chat.DispatchGlobalAnnouncement(Loc.GetString(component.Announcement), component.Sender != null ? Loc.GetString(component.Sender) : null, colorOverride: component.AnnouncementColor);
 
             _sound.StopStationEventMusic(uid, StationEventMusicType.Xenomorph);
-            _sound.DispatchStationEventMusic(uid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
+            if (component.XenomorphInfestationSound != null)
+                _sound.DispatchStationEventMusic(uid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
         }
 
         CheckRoundEnd(uid, component, gameRule);
