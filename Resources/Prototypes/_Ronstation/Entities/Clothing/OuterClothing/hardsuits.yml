@@ -29,7 +29,6 @@
     walkModifier: 0.9
     sprintModifier: 0.85
   - type: HeldSpeedModifier
-    # flashlight shit copied from syndicate raid suit
   - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
@@ -80,6 +79,5 @@
     clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
   - type: Tag
     tags:
-    # no CorgiWearable because motherfuck that extra spritework
     - Hardsuit
     - WhitelistChameleon
