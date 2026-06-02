@@ -43,7 +43,7 @@ public sealed partial class InteractorComponent : Component
     public bool UseInHand;
 
     /// <summary>
-    /// If the interactor should act as if it is in harmmode and should hit targets with it's held item.
+    /// If the interactor should act as if it is in harmmode and should hit targets with its held item.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool HarmMode;
