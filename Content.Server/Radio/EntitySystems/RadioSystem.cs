@@ -158,7 +158,7 @@ public sealed partial class RadioSystem : EntitySystem
         //     ("channel", $"\\[{channel.LocalizedName}\\]"),
         //     ("name", name),
         //     ("message", content));
-        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, speech, jobIcon, jobName); // Einstein Engines - Language
+        var wrappedMessage = _chat.WrapMessage(null, null, channel, messageSource, name, content, speech, language, null, jobIcon, jobName); // Einstein Engines - Language
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
         // var chat = new ChatMessage(
@@ -177,7 +177,7 @@ public sealed partial class RadioSystem : EntitySystem
         var obfuscated = _language.ObfuscateSpeech(content, language, messageSource);
         // Goobstation - Chat Pings
         // Added GetNetEntity(messageSource), to source
-        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, speech, jobIcon, jobName);
+        var obfuscatedWrapped = _chat.WrapMessage(null, null, channel, messageSource, name, obfuscated, speech, language, null, jobIcon, jobName);
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
         // Einstein Engines - Language end
