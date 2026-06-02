@@ -7,8 +7,8 @@
     objectives:
     - XenomorphSurviveObjective
   - type: XenomorphsRule
-    xenomorphInfestationSound:
-      collection: XenoStart
+    announcement: null
+    xenomorphInfestationSound: null
   - type: MaintsSpawnRule
   - type: AntagSpawner
     prototype: MobXenomorphLarva
