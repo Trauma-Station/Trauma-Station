@@ -122,35 +122,40 @@ public sealed partial class SolutionTransferSystem : EntitySystem
                 out var targetSoln,
                 out _))
         {
-            args.Handled = true; //If we reach this point, the interaction counts as handled.
-
             var transferAmount = ent.Comp.TransferAmount;
             if (targetRefillable.MaxRefill is {} maxRefill)
                 transferAmount = FixedPoint2.Min(transferAmount, maxRefill);
 
-            var transferData = new SolutionTransferData(args.User, ent.Owner, ownerSoln.Value, target, targetSoln.Value, transferAmount);
-            var transferTime = targetRefillable.RefillTime + heldDrainable.DrainTime;
-
-            if (transferTime > TimeSpan.Zero)
+            // <Trauma> - Fix Buckets
+            if (_solution.TryGetSolution(ent.Owner, heldDrainable.Solution, out var heldSolution) && heldSolution?.Comp.Solution.Volume > 0)
             {
-                if (!CanTransfer(transferData))
-                    return;
+                args.Handled = true; //If we reach this point, the interaction counts as handled.
 
-                var doAfterArgs = new DoAfterArgs(EntityManager, args.User, transferTime, new SolutionDrainTransferDoAfterEvent(transferAmount), ent.Owner, target)
+                var transferData = new SolutionTransferData(args.User, ent.Owner, ownerSoln.Value, target, targetSoln.Value, transferAmount);
+                var transferTime = targetRefillable.RefillTime + heldDrainable.DrainTime;
+
+                if (transferTime > TimeSpan.Zero)
                 {
-                    BreakOnDamage = true,
-                    BreakOnMove = true,
-                    NeedHand = true,
-                    Hidden = true,
-                };
-                _doAfter.TryStartDoAfter(doAfterArgs);
-            }
-            else
-            {
-                DrainTransfer(transferData);
-            }
+                    if (!CanTransfer(transferData))
+                        return;
 
-            return;
+                    var doAfterArgs = new DoAfterArgs(EntityManager, args.User, transferTime, new SolutionDrainTransferDoAfterEvent(transferAmount), ent.Owner, target)
+                    {
+                        BreakOnDamage = true,
+                        BreakOnMove = true,
+                        NeedHand = true,
+                        Hidden = true,
+                    };
+                    _doAfter.TryStartDoAfter(doAfterArgs);
+                }
+                else
+                {
+                    DrainTransfer(transferData);
+                }
+
+                return;
+            }
+            // </Trauma>
         }
 
         if (ent.Comp.CanReceive
