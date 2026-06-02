@@ -116,6 +116,7 @@
     - AutoStart
     - AltInteract
     - UseInHand
+    - HarmMode
   - type: DeviceLinkSource
     ports:
     - Started
