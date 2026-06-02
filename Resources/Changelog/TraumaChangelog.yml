@@ -9517,3 +9517,48 @@ Entries:
   id: 1080
   time: '2026-06-01T17:26:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2812
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed helmets having a broken examine for their vision decrease.
+  id: 1081
+  time: '2026-06-01T17:57:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2974
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added a new Captain PDA variant
+  - type: Add
+    message: Added a new HOP PDA variant
+  - type: Add
+    message: Added a new NTR PDA variant
+  id: 1082
+  time: '2026-06-01T18:23:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2783
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now forge with silver and gold. Silver weapons get bonus holy
+      damage, gold is just for show.
+  - type: Tweak
+    message: >-
+      Forged items now have a sale value depending on the material, cost and
+      amount of work to make.
+  id: 1083
+  time: '2026-06-01T18:32:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2943
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Human kidneys now sell for $6000.
+  id: 1084
+  time: '2026-06-01T19:38:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2975
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Making blood vials now needs wood instead of using a screwdriver.
+  id: 1085
+  time: '2026-06-01T20:03:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2976

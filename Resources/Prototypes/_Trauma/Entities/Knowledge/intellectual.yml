@@ -5,7 +5,7 @@
   components:
   - type: Knowledge
     experienceCost: 30
-    costs: [0, 3, 4, 5, 7, 8] # magic is hard...
+    costs: [0, 2] # need to randomly roll MagicalGift to get more, or get a j*b/antag
 
 - type: entity
   parent: BaseIntellectualKnowledge

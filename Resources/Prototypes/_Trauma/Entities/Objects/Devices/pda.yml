@@ -45,6 +45,69 @@
     requireTag: WhitelistChameleonPDA
 
 - type: entity
+  parent: [NanotrasenRepresentativePDA, BaseWidePDA]
+  id: AltNanotrasenRepresentativePDA
+  name: nanotrasen representative's PDA
+  description: Slick design for the one who pushes pencils.
+  components:
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-altnanorep
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-altnanorep
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-altnanorep
+  - type: PdaBorderColor
+    borderColor: "#0d140d"
+
+- type: entity
+  parent: HoPPDA
+  id: AltHoPPDA
+  name: head of personnel PDA
+  description: Themed after everyone's favourite pet.
+  components:
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-althop
+  - type: PdaBorderColor
+    borderColor: "#103152"
+    accentVColor: "#aca54b"
+    accentHColor: "#4e0607"
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-althop
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-althop
+
+- type: entity
+  parent: CaptainPDA
+  id: AltCaptainPDA
+  name: captain PDA
+  description: A stylish, modern, golden and more expensive PDA than yours.
+  components:
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-altcaptain
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-altcaptain
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-altcaptain
+  - type: PdaBorderColor
+    borderColor: "#103152"
+    accentVColor: "#e6a345"
+
+- type: entity
   parent: SyndiCorpsmanPDA
   id: SyndiMedicPDA
   name: syndicate medic PDA

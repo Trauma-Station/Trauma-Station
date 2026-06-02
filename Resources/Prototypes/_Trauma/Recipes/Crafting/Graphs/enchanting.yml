@@ -29,7 +29,8 @@
     edges:
     - to: finish
       steps:
-      - tool: Screwing
+      - material: WoodPlank # TODO: make cork sprite and make a cork item
+        amount: 1
         doAfter: 1
       conditions:
       - !type:MinSolution
