@@ -42,7 +42,7 @@ public sealed partial class XenomorphsRuleComponent : Component
         };
 
     [DataField]
-    public SoundSpecifier XenomorphTakeoverSound =
+    public SoundSpecifier? XenomorphTakeoverSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Music/Colonial_Marines_The_Final_Battle.ogg")
         {
             Params = AudioParams.Default
