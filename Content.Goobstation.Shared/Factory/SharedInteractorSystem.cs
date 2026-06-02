@@ -202,6 +202,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
             return false;
 
         // I turn on combat mode manually for the entity because otherwise the melee attack will fail
+        EnsureComp<CombatModeComponent>(ent.Owner);
         var prev = _combatMode.IsInCombatMode(ent.Owner);
         _combatMode.SetInCombatMode(ent.Owner, true);
         var result = _melee.AttemptLightAttack(ent.Owner, tool.Value, meleeWeapon, target);
