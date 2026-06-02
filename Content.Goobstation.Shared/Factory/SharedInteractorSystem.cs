@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Common.DoAfter;
 using Content.Goobstation.Shared.Factory.Filters;
+using Content.Shared.CombatMode;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DoAfter;
@@ -14,6 +15,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -33,6 +35,8 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedToolSystem _tool = default!;
     [Dependency] protected StartableMachineSystem Machine = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
     private EntityQuery<ActiveDoAfterComponent> _doAfterQuery;
     private EntityQuery<HandsComponent> _handsQuery;
@@ -187,8 +191,22 @@ public abstract partial class SharedInteractorSystem : EntitySystem
         if (!_hands.TryGetActiveItem(ent.Owner, out var tool))
             return _interaction.InteractHand(ent, target);
 
-        var coords = Transform(target).Coordinates;
-        return _interaction.InteractUsing(ent, tool.Value, target, coords);
+        if (!ent.Comp.HarmMode)
+        {
+            var coords = Transform(target).Coordinates;
+            return _interaction.InteractUsing(ent, tool.Value, target, coords);
+        }
+
+        // instead of interacting via the SharedInteractionSystem, attack the target with the held item
+        if (!TryComp<MeleeWeaponComponent>(tool, out var meleeWeapon))
+            return false;
+
+        // I turn on combat mode manually for the entity because otherwise the melee attack will fail
+        var prev = _combatMode.IsInCombatMode(ent.Owner);
+        _combatMode.SetInCombatMode(ent.Owner, true);
+        var result = _melee.AttemptLightAttack(ent.Owner, tool.Value, meleeWeapon, target);
+        _combatMode.SetInCombatMode(ent.Owner, prev);
+        return result;
     }
 
     protected void UpdateAppearance(EntityUid uid)
