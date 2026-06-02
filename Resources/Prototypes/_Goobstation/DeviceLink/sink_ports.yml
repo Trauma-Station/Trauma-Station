@@ -111,6 +111,11 @@
   name: signal-port-name-use-in-hand
   description: signal-port-description-use-in-hand
 
+- type: sinkPort
+  id: HarmMode
+  name: signal-port-name-harm-mode
+  description: signal-port-description-harm-mode
+
 # Autodoc
 
 - type: sinkPort
