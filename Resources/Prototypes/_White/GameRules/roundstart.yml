@@ -22,7 +22,7 @@
   id: XenomorphsInfestationRoundstart
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 50
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
