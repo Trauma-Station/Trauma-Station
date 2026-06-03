@@ -7,6 +7,25 @@
   placement:
     mode: SnapgridCenter
   components:
+  # <Trauma>
+  - type: PlumbingDevice
+  - type: PipeColorVisuals
+  - type: FluidSink
+  - type: NodeContainer
+    nodes:
+      faucet:
+        !type:PlumbingNode
+        nodeGroupID: Fluid
+        pipeDirection: North
+      drain:
+        !type:PlumbingNode
+        nodeGroupID: Fluid
+        maxVolume: 100
+        pipeDirection: South
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+  # </Trauma>
   - type: Clickable
   - type: InteractionOutline
   - type: Sprite
@@ -20,22 +39,17 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: sink-fill-
-    solutionName: drainBuffer
+    solutionName: drain # Trauma - Plumbing
   - type: SolutionManager
     solutions:
-    - SolutionDrainNormal
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-      - ReagentId: Water
-        Quantity: 1
+  # <Trauma>
+    - SolutionSinkInlet 
+    - SolutionSinkOutlet
+  # </Trauma>
   - type: DrainableSolution
-    solution: tank
-  - type: ReagentTank
-  - type: Drain
-    autoDrain: false
-  - type: DumpableSolution
-    solution: drainBuffer
+    solution: faucet # Trauma - Plumbing
+  - type: RefillableSolution
+    solution: drain # Trauma - Plumbing
   - type: Damageable
     damageModifierSet: Metallic
   - type: Injurable
@@ -69,12 +83,6 @@
   parent: SinkEmpty
   id: Sink
   suffix: Water
-  components:
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Water
-        Quantity: 480
 
 - type: entity
   parent: Sink
@@ -113,9 +121,3 @@
   id: SinkStemlessWater
   parent: SinkStemless
   suffix: Water
-  components:
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Water
-        Quantity: 480

@@ -8,7 +8,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
 using Content.Shared.NodeContainer;
 using Content.Trauma.Common.Plumbing;
-using Content.Trauma.Server.Plumbing.Components;
+using Content.Trauma.Shared.Plumbing.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
 

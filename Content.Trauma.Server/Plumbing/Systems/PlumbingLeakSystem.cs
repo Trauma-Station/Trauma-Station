@@ -4,7 +4,7 @@ using System.Linq;
 using Content.Server.Fluids.EntitySystems;
 using Content.Shared.NodeContainer;
 using Content.Trauma.Common.Plumbing;
-using Content.Trauma.Server.Plumbing.Components;
+using Content.Trauma.Shared.Plumbing.Components;
 
 namespace Content.Trauma.Server.Plumbing.Systems;
 

@@ -177,19 +177,6 @@
       - Unstackable
 
 - type: entity
-  parent: Solution
-  id: SolutionFluidStorageTank
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Solution
-    id: tank_buffer
-    solution:
-      reagents:
-      - ReagentId: Water
-        Quantity: 1000
-      maxVol: 1000
-
-- type: entity
   parent: FluidUnaryBase
   id: FluidSprinkler
   name: sprinkler

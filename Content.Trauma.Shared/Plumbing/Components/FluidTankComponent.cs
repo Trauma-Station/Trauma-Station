@@ -11,7 +11,7 @@ public sealed partial class FluidTankComponent : Component
     /// Buffer name for solution container.
     /// </summary>
     [DataField]
-    public string BufferName = "tank_buffer";
+    public string BufferName = "tank";
 
     /// <summary>
     /// The plumbing node name.

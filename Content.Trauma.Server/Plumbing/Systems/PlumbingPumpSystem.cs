@@ -16,6 +16,7 @@ public sealed partial class FluidPumpSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<FluidPumpComponent, PlumbingDeviceUpdateEvent>(OnPumpUpdate);
     }
 

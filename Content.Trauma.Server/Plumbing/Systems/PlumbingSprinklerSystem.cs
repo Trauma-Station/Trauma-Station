@@ -26,7 +26,7 @@ public sealed partial class FluidSprinklerSystem : EntitySystem
     {
         var (uid, comp) = ent;
 
-        // Tmep Check
+        // Temp Check
         var mixture = _atmos.GetContainingMixture(uid);
         if (mixture is { } && mixture.Temperature >= comp.ThermalActivationThreshold)
             comp.Enabled = true;

@@ -1,0 +1,39 @@
+# Tank Solution
+
+- type: entity
+  parent: Solution
+  id: SolutionFluidStorageTank
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: tank
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 10000
+      maxVol: 10000
+
+# Sink Solutions
+
+- type: entity
+  parent: Solution
+  id: SolutionSinkInlet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: faucet
+    solution:
+      maxVol: 500
+      reagents:
+      - ReagentId: Water
+        Quantity: 500
+
+- type: entity
+  parent: Solution
+  id: SolutionSinkOutlet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: drain
+    solution:
+      maxVol: 500

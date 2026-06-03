@@ -127,7 +127,7 @@ public sealed partial class SolutionTransferSystem : EntitySystem
                 transferAmount = FixedPoint2.Min(transferAmount, maxRefill);
 
             // <Trauma> - Fix Buckets
-            if (_solution.TryGetSolution(ent.Owner, heldDrainable.Solution, out var heldSolution) && heldSolution?.Comp.Solution.Volume > 0)
+            if (ownerSoln?.Comp.Solution.Volume > 0)
             {
                 args.Handled = true; //If we reach this point, the interaction counts as handled.
 
