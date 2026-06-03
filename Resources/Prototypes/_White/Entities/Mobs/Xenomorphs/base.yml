@@ -177,9 +177,10 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
-  - type: Prying #Switched from Tools component to this
-    speedModifier: 1.5
+  - type: Prying
+    speedModifier: 5
     pryPowered: true
+    useSound: /Audio/Machines/airlock_creaking.ogg
   - type: ComplexInteraction
   - type: Hands
   - type: ShowHealthIcons
