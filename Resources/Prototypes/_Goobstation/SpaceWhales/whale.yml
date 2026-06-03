@@ -163,6 +163,8 @@
   - type: Physics
     bodyType: Dynamic
   - type: TailedEntitySegment
+  - type: ViewconeOccludable
+    useMemory: true
 
 - type: entity
   id: SpaceLeviathanDespawn

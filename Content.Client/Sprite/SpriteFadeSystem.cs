@@ -56,7 +56,7 @@ public sealed partial class SpriteFadeSystem : EntitySystem
             return;
 
         // <Trauma>
-        var ev = new UpdateSpriteVisibilityEvent(nameof(FadingSpriteComponent),1f);
+        var ev = new UpdateSpriteVisibilityEvent(nameof(FadingSpriteComponent), 1f);
         RaiseLocalEvent(uid, ref ev);
         // _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(component.OriginalAlpha));
         // </Trauma>

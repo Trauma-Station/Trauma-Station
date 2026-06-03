@@ -66,7 +66,7 @@ public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorS
     private void OnShutdown(Entity<ChameleonDisguisedComponent> ent, ref ComponentShutdown args)
     {
         // <Trauma>
-        var ev = new UpdateSpriteVisibilityEvent(nameof(ChameleonDisguiseComponent), 1f);
+        var ev = new UpdateSpriteVisibilityEvent(nameof(ChameleonDisguisedComponent), 1f);
         RaiseLocalEvent(ent, ref ev);
         /*
         if (_spriteQuery.TryComp(ent, out var sprite))

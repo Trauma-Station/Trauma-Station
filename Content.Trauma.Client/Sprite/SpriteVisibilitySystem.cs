@@ -57,6 +57,7 @@ public sealed partial class SpriteVisibilitySystem : EntitySystem
             ent.Comp2.VisibilityModifiers.Count == 1 &&
             ent.Comp2.VisibilityModifiers.ContainsKey(nameof(SpriteComponent)))
         {
+            RemCompDeferred(ent, ent.Comp2);
             SetSpriteVisibility(ent!, 1f);
             return;
         }
