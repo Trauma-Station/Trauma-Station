@@ -10,6 +10,8 @@ namespace Content.Trauma.Client.Heretic.Systems;
 public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 {
     [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
 
     public override void FrameUpdate(float frameTime)
     {
@@ -34,8 +36,7 @@ public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSys
             var viewer = shadow.User.Value == player ? uid : player;
 
             var factor = CalculateVisibilityFactor((uid, comp), viewer);
-            var ev = new UpdateSpriteVisibilityEvent(nameof(ForestAdmonitionsComponent), factor);
-            RaiseLocalEvent(uid, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(ForestAdmonitionsComponent), factor);
         }
     }
 }

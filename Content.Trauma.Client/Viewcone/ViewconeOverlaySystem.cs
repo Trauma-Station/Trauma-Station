@@ -33,6 +33,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private ViewconeAngleSystem _angle = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
     [Dependency] private EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
 
     private ViewconeConeOverlay _coneOverlay = default!;
@@ -283,7 +284,6 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
 
     public void SetAlpha(EntityUid uid, float alpha)
     {
-        var ev = new UpdateSpriteVisibilityEvent(nameof(ViewconeOccludedComponent), alpha);
-        RaiseLocalEvent(uid, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(ViewconeOccludedComponent), alpha);
     }
 }

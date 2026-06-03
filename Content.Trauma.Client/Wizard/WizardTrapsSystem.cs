@@ -8,6 +8,8 @@ namespace Content.Trauma.Client.Wizard;
 public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
 
     public override void Initialize()
     {
@@ -21,7 +23,6 @@ public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
         if (!_appearance.TryGetData(ent, TrapVisuals.Alpha, out float alpha, args.Component))
             return;
 
-        var ev = new UpdateSpriteVisibilityEvent(nameof(WizardTrapComponent), alpha);
-        RaiseLocalEvent(ent, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(WizardTrapComponent), alpha);
     }
 }

@@ -19,6 +19,8 @@ namespace Content.Trauma.Client.Heretic.Systems;
 public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
 
     public override void Initialize()
     {
@@ -101,7 +103,7 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Startup(ent);
 
-        var ev = new UpdateSpriteVisibilityEvent(nameof(ShadowCloakedComponent), 0f);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 0f);
         RaiseLocalEvent(ent, ref ev);
     }
 
@@ -109,7 +111,6 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Shutdown(ent);
 
-        var ev = new UpdateSpriteVisibilityEvent(nameof(ShadowCloakedComponent), 1f);
-        RaiseLocalEvent(ent, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 1f);
     }
 }

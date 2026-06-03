@@ -8,6 +8,8 @@ namespace Content.Trauma.Client.Xenomorphs.Tail;
 
 public sealed partial class TailVentCrawlSystem : EntitySystem
 {
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -31,13 +33,12 @@ public sealed partial class TailVentCrawlSystem : EntitySystem
         if (!TryComp(uid, out TailedEntityComponent? comp))
             return;
 
-        var ev = new UpdateSpriteVisibilityEvent(nameof(BeingVentCrawlerComponent), alpha);
         foreach (var data in comp.TailSegments)
         {
             if (!TryGetEntity(data.Segment, out var ent))
                 continue;
 
-            RaiseLocalEvent(ent.Value, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(ent.Value, nameof(BeingVentCrawlerComponent), alpha);
         }
     }
 }

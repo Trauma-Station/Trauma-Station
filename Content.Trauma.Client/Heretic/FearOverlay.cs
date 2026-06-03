@@ -21,6 +21,7 @@ public sealed partial class FearOverlay : Overlay
     [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
+    private readonly CommonSpriteVisibilitySystem _spriteVis;
     private readonly TransformSystem _transform;
     private readonly ExamineSystem _examine;
 
@@ -39,6 +40,7 @@ public sealed partial class FearOverlay : Overlay
         _shader = _proto.Index(Shader).InstanceUnique();
 
         _sprite = _entMan.System<SpriteSystem>();
+        _spriteVis = _entMan.System<CommonSpriteVisibilitySystem>();
         _examine = _entMan.System<ExamineSystem>();
         _transform = _entMan.System<TransformSystem>();
 
@@ -112,25 +114,22 @@ public sealed partial class FearOverlay : Overlay
         if (_visibleFearTargets.Count == 0)
             return;
 
-        var ev = new UpdateSpriteVisibilityEvent(nameof(DigitalCamouflageComponent), 0f);
-
         var query = _entMan.EntityQueryEnumerator<HumanoidProfileComponent, SpriteComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var sprite, out var xform))
         {
             if (uid == ent.Owner)
                 continue;
 
-            _entMan.EventBus.RaiseLocalEvent(uid, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(DigitalCamouflageComponent), 0f);
             _hiddenEntities.Add((uid, sprite, xform));
         }
     }
 
     private void UnhideEntities()
     {
-        var ev = new UpdateSpriteVisibilityEvent(nameof(DigitalCamouflageComponent), 1f);
         foreach (var ent in _hiddenEntities)
         {
-            _entMan.EventBus.RaiseLocalEvent(ent, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(ent, nameof(DigitalCamouflageComponent), 1f);
         }
 
         _hiddenEntities.Clear();

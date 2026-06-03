@@ -12,6 +12,7 @@ namespace Content.Client.Anomaly;
 
 public sealed partial class AnomalySystem : SharedAnomalySystem
 {
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!; // Trauma
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private FloatingVisualizerSystem _floating = default!;
     [Dependency] private SpriteSystem _sprite = default!;
@@ -76,8 +77,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
 
             var transparency = (byte)(65 * (1f - completion) + 190);
             // <Trauma>
-            var ev = new UpdateSpriteVisibilityEvent(nameof(AnomalyComponent), transparency);
-            RaiseLocalEvent(uid, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(AnomalyComponent), transparency);
             /*
             if (transparency < sprite.Color.AByte)
             {
@@ -94,8 +94,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
 
         _sprite.SetScale((ent.Owner, sprite), Vector2.One);
         // <Trauma>
-        var ev = new UpdateSpriteVisibilityEvent(nameof(AnomalyComponent), 1f);
-        RaiseLocalEvent(ent, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(AnomalyComponent), 1f);
         // _sprite.SetColor((ent.Owner, sprite), sprite.Color.WithAlpha(1f));
         // </Trauma>
     }

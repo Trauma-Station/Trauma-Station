@@ -16,7 +16,10 @@ namespace Content.Client.Polymorph.Systems;
 public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    // [Dependency] private SpriteSystem _sprite = default!; // Trauma
+    // <Trauma>
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+    // [Dependency] private SpriteSystem _sprite = default!;
+    // </Trauma>
 
     [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
     // [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!; // Trauma
@@ -52,8 +55,7 @@ public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorS
     private void OnStartup(Entity<ChameleonDisguisedComponent> ent, ref ComponentStartup args)
     {
         // <Trauma>
-        var ev = new UpdateSpriteVisibilityEvent(nameof(ChameleonDisguisedComponent), 0f);
-        RaiseLocalEvent(ent, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ChameleonDisguisedComponent), 0f);
         /*
         if (!_spriteQuery.TryComp(ent, out var sprite))
             return;
@@ -66,8 +68,7 @@ public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorS
     private void OnShutdown(Entity<ChameleonDisguisedComponent> ent, ref ComponentShutdown args)
     {
         // <Trauma>
-        var ev = new UpdateSpriteVisibilityEvent(nameof(ChameleonDisguisedComponent), 1f);
-        RaiseLocalEvent(ent, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ChameleonDisguisedComponent), 1f);
         /*
         if (_spriteQuery.TryComp(ent, out var sprite))
             _sprite.SetVisible((ent.Owner, sprite), ent.Comp.WasVisible);

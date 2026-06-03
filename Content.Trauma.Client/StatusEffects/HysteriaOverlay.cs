@@ -19,6 +19,7 @@ public sealed partial class HysteriaOverlay : Overlay
     [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
+    private readonly CommonSpriteVisibilitySystem _spriteVis;
     private readonly SharedTransformSystem _transform;
     private readonly EntityLookupSystem _lookup;
 
@@ -74,15 +75,11 @@ public sealed partial class HysteriaOverlay : Overlay
         _nearbyEntities.Clear();
         _lookup.GetEntitiesInRange(xform.Coordinates, _lookupRange, _nearbyEntities);
 
-        var unhideEv = new UpdateSpriteVisibilityEvent(nameof(HysteriaStatusEffectComponent), 1f);
-
         foreach (var uid in _hiddenEntities)
         {
             if (!_nearbyEntities.Contains(uid))
-                _entMan.EventBus.RaiseLocalEvent(uid, ref unhideEv);
+                _spriteVis.UpdateVisibilityModifiers(uid, nameof(HysteriaStatusEffectComponent), 1f);
         }
-
-        var hideEv = new UpdateSpriteVisibilityEvent(nameof(HysteriaStatusEffectComponent), 0f);
 
         _hiddenEntities.IntersectWith(_nearbyEntities);
         foreach (var uid in _nearbyEntities)
@@ -90,7 +87,7 @@ public sealed partial class HysteriaOverlay : Overlay
             if (player == uid || !_entMan.HasComponent<HumanoidProfileComponent>(uid))
                 continue;
 
-            _entMan.EventBus.RaiseLocalEvent(uid, ref hideEv);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(HysteriaStatusEffectComponent), 0f);
             _hiddenEntities.Add(uid);
         }
     }
@@ -155,10 +152,9 @@ public sealed partial class HysteriaOverlay : Overlay
     /// </summary>
     public void RevertHiddenSprites()
     {
-        var ev = new UpdateSpriteVisibilityEvent(nameof(HysteriaStatusEffectComponent), 1f);
         foreach (var uid in _hiddenEntities)
         {
-            _entMan.EventBus.RaiseLocalEvent(uid, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(HysteriaStatusEffectComponent), 1f);
         }
 
         _hiddenEntities.Clear();

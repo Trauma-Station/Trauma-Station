@@ -5,17 +5,14 @@ using Content.Trauma.Common.Sprite;
 
 namespace Content.Trauma.Client.Sprite;
 
-public sealed partial class SpriteVisibilitySystem : EntitySystem
+public sealed partial class SpriteVisibilitySystem : CommonSpriteVisibilitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
-
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<SpriteComponent, UpdateSpriteVisibilityEvent>(OnUpdate);
 
         SubscribeLocalEvent<SpriteVisibilityComponent, ComponentStartup>(OnStartup);
     }
@@ -28,12 +25,15 @@ public sealed partial class SpriteVisibilitySystem : EntitySystem
         ent.Comp.VisibilityModifiers[nameof(SpriteComponent)] = comp.Color.A;
     }
 
-    private void OnUpdate(Entity<SpriteComponent> ent, ref UpdateSpriteVisibilityEvent args)
+    public override void UpdateVisibilityModifiers(EntityUid uid, string key, float alpha)
     {
-        if (args.Alpha >= 1f)
-            RemoveVisibilityModifier(ent.AsNullable(), args.Key);
+        if (!_spriteQuery.TryComp(uid, out var comp))
+            return;
+
+        if (alpha >= 1f)
+            RemoveVisibilityModifier((uid, comp), key);
         else
-            AddVisibilityModifier(ent, args.Key, args.Alpha);
+            AddVisibilityModifier((uid, comp), key, alpha);
     }
 
     private void AddVisibilityModifier(Entity<SpriteComponent> ent, string key, float modifier)

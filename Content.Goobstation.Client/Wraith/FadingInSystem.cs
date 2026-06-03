@@ -7,6 +7,8 @@ namespace Content.Goobstation.Client.Wraith;
 
 public sealed partial class FadingInSystem : EntitySystem
 {
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -16,12 +18,8 @@ public sealed partial class FadingInSystem : EntitySystem
 
     private void OnStartup(EntityUid uid, FadingInComponent fading, ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
-            return;
-
         // Start fully transparent
-        var ev = new UpdateSpriteVisibilityEvent(nameof(FadingInComponent), 0f);
-        RaiseLocalEvent(uid, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(FadingInComponent), 0f);
         fading.Elapsed = 0f;
     }
 
@@ -31,7 +29,7 @@ public sealed partial class FadingInSystem : EntitySystem
 
         var query = EntityQueryEnumerator<FadingInComponent, SpriteComponent>();
 
-        while (query.MoveNext(out var uid, out var fading, out var sprite))
+        while (query.MoveNext(out var uid, out var fading, out _))
         {
             if (fading.Finished)
                 continue;
@@ -39,8 +37,7 @@ public sealed partial class FadingInSystem : EntitySystem
             fading.Elapsed += frameTime;
 
             var alpha = Math.Clamp(fading.Elapsed / fading.FadeInTime, 0f, 1f);
-            var ev = new UpdateSpriteVisibilityEvent(nameof(FadingInComponent), alpha);
-            RaiseLocalEvent(uid, ref ev);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(FadingInComponent), alpha);
         }
     }
 }

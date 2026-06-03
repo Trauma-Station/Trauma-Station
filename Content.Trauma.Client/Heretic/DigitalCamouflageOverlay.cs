@@ -17,7 +17,7 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPlayerManager _player = default!;
-    // private readonly SpriteSystem _sprite; // Trauma
+    private readonly CommonSpriteVisibilitySystem _spriteVis;
 
     private readonly HashSet<Entity<SpriteComponent>> _hiddenEntities = new();
 
@@ -25,7 +25,7 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
-        // _sprite = _entMan.System<SpriteSystem>(); // Trauma
+        _spriteVis = _entMan.System<CommonSpriteVisibilitySystem>();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -47,17 +47,14 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
     {
         if (args.Space == OverlaySpace.ScreenSpace)
         {
-            var unhideEv = new UpdateSpriteVisibilityEvent(nameof(DigitalCamouflageComponent), 1f);
             foreach (var ent in _hiddenEntities)
             {
-                _entMan.EventBus.RaiseLocalEvent(ent, ref unhideEv);
+                _spriteVis.UpdateVisibilityModifiers(ent, nameof(DigitalCamouflageComponent), 1f);
             }
 
             _hiddenEntities.Clear();
             return;
         }
-
-        var hideEv = new UpdateSpriteVisibilityEvent(nameof(DigitalCamouflageComponent), 0f);
 
         var query = _entMan.EntityQueryEnumerator<SpriteComponent>();
         while (query.MoveNext(out var uid, out var sprite))
@@ -67,7 +64,7 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
             if (!ev.Cancelled)
                 continue;
 
-            _entMan.EventBus.RaiseLocalEvent(uid, ref hideEv);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(DigitalCamouflageComponent), 0f);
             _hiddenEntities.Add((uid, sprite));
         }
     }

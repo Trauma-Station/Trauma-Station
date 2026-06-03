@@ -13,6 +13,7 @@ namespace Content.Client.SubFloor;
 
 public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
 {
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!; // Trauma
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
@@ -107,8 +108,7 @@ public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
         }
 
         // <Trauma>
-        var ev = new UpdateSpriteVisibilityEvent(nameof(SubFloorHideComponent), hasVisibleLayer || revealed ? 1f : 0f);
-        RaiseLocalEvent(uid, ref ev);
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(SubFloorHideComponent), hasVisibleLayer || revealed ? 1f : 0f);
         // _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
         // </Trauma>
 
