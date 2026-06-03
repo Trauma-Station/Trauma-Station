@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Humanoid;
 using Content.Shared.Prototypes;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
+using Content.Trauma.Common.Sprite;
+using Content.Trauma.Shared.StatusEffects;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Random;
@@ -22,7 +21,6 @@ public sealed partial class HysteriaOverlay : Overlay
     private readonly SpriteSystem _sprite;
     private readonly SharedTransformSystem _transform;
     private readonly EntityLookupSystem _lookup;
-    private EntityQuery<SpriteComponent> _spriteQuery;
 
     /// <summary>
     /// Attaches an entity to a random entity prototype, and draws the sprite of the entity prototype on top of the entity.
@@ -61,8 +59,6 @@ public sealed partial class HysteriaOverlay : Overlay
         _sprite = _entMan.System<SpriteSystem>();
         _transform = _entMan.System<SharedTransformSystem>();
         _lookup = _entMan.System<EntityLookupSystem>();
-
-        _spriteQuery = _entMan.GetEntityQuery<SpriteComponent>();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -78,14 +74,15 @@ public sealed partial class HysteriaOverlay : Overlay
         _nearbyEntities.Clear();
         _lookup.GetEntitiesInRange(xform.Coordinates, _lookupRange, _nearbyEntities);
 
+        var unhideEv = new UpdateSpriteVisibilityEvent(nameof(HysteriaStatusEffectComponent), 1f);
+
         foreach (var uid in _hiddenEntities)
         {
             if (!_nearbyEntities.Contains(uid))
-            {
-                if (_spriteQuery.TryComp(uid, out var sprite))
-                    _sprite.SetVisible((uid, sprite), true);
-            }
+                _entMan.EventBus.RaiseLocalEvent(uid, ref unhideEv);
         }
+
+        var hideEv = new UpdateSpriteVisibilityEvent(nameof(HysteriaStatusEffectComponent), 0f);
 
         _hiddenEntities.IntersectWith(_nearbyEntities);
         foreach (var uid in _nearbyEntities)
@@ -93,11 +90,8 @@ public sealed partial class HysteriaOverlay : Overlay
             if (player == uid || !_entMan.HasComponent<HumanoidProfileComponent>(uid))
                 continue;
 
-            if (_spriteQuery.TryComp(uid, out var sprite) && sprite.Visible)
-            {
-                _sprite.SetVisible((uid, sprite), false);
-                _hiddenEntities.Add(uid);
-            }
+            _entMan.EventBus.RaiseLocalEvent(uid, ref hideEv);
+            _hiddenEntities.Add(uid);
         }
     }
 
@@ -161,10 +155,10 @@ public sealed partial class HysteriaOverlay : Overlay
     /// </summary>
     public void RevertHiddenSprites()
     {
+        var ev = new UpdateSpriteVisibilityEvent(nameof(HysteriaStatusEffectComponent), 1f);
         foreach (var uid in _hiddenEntities)
         {
-            if (_spriteQuery.TryComp(uid, out var sprite))
-                _sprite.SetVisible((uid, sprite), true);
+            _entMan.EventBus.RaiseLocalEvent(uid, ref ev);
         }
 
         _hiddenEntities.Clear();

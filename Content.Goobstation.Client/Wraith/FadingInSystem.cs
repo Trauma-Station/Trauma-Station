@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Wraith.Components;
+using Content.Trauma.Common.Sprite;
 
 namespace Content.Goobstation.Client.Wraith;
 
 public sealed partial class FadingInSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _sprites = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -21,7 +20,8 @@ public sealed partial class FadingInSystem : EntitySystem
             return;
 
         // Start fully transparent
-        _sprites.SetColor((uid, sprite), sprite.Color.WithAlpha(0f));
+        var ev = new UpdateSpriteVisibilityEvent(nameof(FadingInComponent), 0f);
+        RaiseLocalEvent(uid, ref ev);
         fading.Elapsed = 0f;
     }
 
@@ -39,7 +39,8 @@ public sealed partial class FadingInSystem : EntitySystem
             fading.Elapsed += frameTime;
 
             var alpha = Math.Clamp(fading.Elapsed / fading.FadeInTime, 0f, 1f);
-            _sprites.SetColor((uid, sprite), sprite.Color.WithAlpha(alpha));
+            var ev = new UpdateSpriteVisibilityEvent(nameof(FadingInComponent), alpha);
+            RaiseLocalEvent(uid, ref ev);
         }
     }
 }

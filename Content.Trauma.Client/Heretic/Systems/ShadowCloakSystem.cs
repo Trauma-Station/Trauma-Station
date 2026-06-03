@@ -3,6 +3,7 @@
 using Content.Goobstation.Client.Shaders;
 using Content.Goobstation.Common.Shaders;
 using Content.Trauma.Client.Heretic.SpriteOverlay;
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
@@ -17,7 +18,6 @@ namespace Content.Trauma.Client.Heretic.Systems;
 
 public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private AppearanceSystem _appearance = default!;
 
     public override void Initialize()
@@ -101,18 +101,15 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Startup(ent);
 
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        ent.Comp.WasVisible = sprite.Visible;
-        _sprite.SetVisible((ent, sprite), false);
+        var ev = new UpdateSpriteVisibilityEvent(nameof(ShadowCloakedComponent), 0f);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     protected override void Shutdown(Entity<ShadowCloakedComponent> ent)
     {
         base.Shutdown(ent);
 
-        if (TryComp(ent, out SpriteComponent? sprite))
-            _sprite.SetVisible((ent, sprite), ent.Comp.WasVisible);
+        var ev = new UpdateSpriteVisibilityEvent(nameof(ShadowCloakedComponent), 1f);
+        RaiseLocalEvent(ent, ref ev);
     }
 }

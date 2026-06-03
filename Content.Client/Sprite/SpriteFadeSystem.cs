@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Sprite;
+// </Trauma>
 using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Shared.Sprite;
@@ -27,7 +30,7 @@ public sealed partial class SpriteFadeSystem : EntitySystem
     [Dependency] private IUserInterfaceManager _uiManager = default!;
     [Dependency] private IInputManager _inputManager = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    // [Dependency] private SpriteSystem _sprite = default!; // Trauma
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
     [Dependency] private EntityQuery<SpriteFadeComponent> _fadeQuery = default!;
     [Dependency] private EntityQuery<FadingSpriteComponent> _fadingQuery = default!;
@@ -52,7 +55,11 @@ public sealed partial class SpriteFadeSystem : EntitySystem
         if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
-        _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(component.OriginalAlpha));
+        // <Trauma>
+        var ev = new UpdateSpriteVisibilityEvent(nameof(FadingSpriteComponent),1f);
+        RaiseLocalEvent(uid, ref ev);
+        // _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(component.OriginalAlpha));
+        // </Trauma>
     }
 
     /// <summary>
@@ -126,7 +133,11 @@ public sealed partial class SpriteFadeSystem : EntitySystem
 
                     if (!sprite.Color.A.Equals(newColor))
                     {
-                        _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
+                        // <Trauma>
+                        var ev = new UpdateSpriteVisibilityEvent(nameof(FadingSpriteComponent), newColor);
+                        RaiseLocalEvent(ent, ref ev);
+                        // _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
+                        // </Trauma>
                     }
                 }
             }
@@ -151,7 +162,11 @@ public sealed partial class SpriteFadeSystem : EntitySystem
 
             if (!newColor.Equals(sprite.Color.A))
             {
-                _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(newColor));
+                // <Trauma>
+                var ev = new UpdateSpriteVisibilityEvent(nameof(FadingSpriteComponent), newColor);
+                RaiseLocalEvent(uid, ref ev);
+                // _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(newColor));
+                // </Trauma>
             }
             else
             {

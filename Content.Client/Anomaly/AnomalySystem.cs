@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Sprite;
+// </Trauma>
 using System.Numerics;
 using Content.Client.Gravity;
 using Content.Shared.Anomaly;
@@ -72,10 +75,15 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
             _sprite.SetScale((uid, sprite), new Vector2(scale, scale));
 
             var transparency = (byte)(65 * (1f - completion) + 190);
+            // <Trauma>
+            var ev = new UpdateSpriteVisibilityEvent(nameof(AnomalyComponent), transparency);
+            RaiseLocalEvent(uid, ref ev);
+            /*
             if (transparency < sprite.Color.AByte)
             {
                 _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(transparency));
             }
+            </Trauma> */
         }
     }
 
@@ -85,6 +93,10 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
             return;
 
         _sprite.SetScale((ent.Owner, sprite), Vector2.One);
-        _sprite.SetColor((ent.Owner, sprite), sprite.Color.WithAlpha(1f));
+        // <Trauma>
+        var ev = new UpdateSpriteVisibilityEvent(nameof(AnomalyComponent), 1f);
+        RaiseLocalEvent(ent, ref ev);
+        // _sprite.SetColor((ent.Owner, sprite), sprite.Color.WithAlpha(1f));
+        // </Trauma>
     }
 }

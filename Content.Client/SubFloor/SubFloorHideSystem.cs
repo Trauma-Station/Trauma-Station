@@ -1,4 +1,7 @@
-using Content.Shared.Atmos.Components;  //Goobstation - Ventcrawler
+// <Trauma>
+using Content.Shared.Atmos.Components;
+using Content.Trauma.Common.Sprite;
+// </Trauma>
 using Content.Shared.DrawDepth;
 using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Shared.SubFloor;
@@ -103,7 +106,11 @@ public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
             hasVisibleLayer = true;
         }
 
-        _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
+        // <Trauma>
+        var ev = new UpdateSpriteVisibilityEvent(nameof(SubFloorHideComponent), hasVisibleLayer || revealed ? 1f : 0f);
+        RaiseLocalEvent(uid, ref ev);
+        // _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
+        // </Trauma>
 
         if (ShowAll)
         {

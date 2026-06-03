@@ -2,6 +2,8 @@
 
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
+using Content.Trauma.Common.Sprite;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -110,22 +112,25 @@ public sealed partial class FearOverlay : Overlay
         if (_visibleFearTargets.Count == 0)
             return;
 
+        var ev = new UpdateSpriteVisibilityEvent(nameof(DigitalCamouflageComponent), 0f);
+
         var query = _entMan.EntityQueryEnumerator<HumanoidProfileComponent, SpriteComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var sprite, out var xform))
         {
-            if (!sprite.Visible || uid == ent.Owner)
+            if (uid == ent.Owner)
                 continue;
 
-            _sprite.SetVisible((uid, sprite), false);
+            _entMan.EventBus.RaiseLocalEvent(uid, ref ev);
             _hiddenEntities.Add((uid, sprite, xform));
         }
     }
 
     private void UnhideEntities()
     {
+        var ev = new UpdateSpriteVisibilityEvent(nameof(DigitalCamouflageComponent), 1f);
         foreach (var ent in _hiddenEntities)
         {
-            _sprite.SetVisible(ent.AsNullable(), true);
+            _entMan.EventBus.RaiseLocalEvent(ent, ref ev);
         }
 
         _hiddenEntities.Clear();

@@ -2,6 +2,7 @@
 using Content.Client.Light.Visualizers;
 using Content.Client.PowerCell;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Trauma.Common.Sprite;
 // </Trauma>
 using Content.Client.Effects;
 using Content.Client.Smoking;
@@ -15,10 +16,10 @@ namespace Content.Client.Polymorph.Systems;
 public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorSystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    // [Dependency] private SpriteSystem _sprite = default!; // Trauma
 
     [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
-    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
+    // [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!; // Trauma
 
     public override void Initialize()
     {
@@ -50,17 +51,27 @@ public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorS
 
     private void OnStartup(Entity<ChameleonDisguisedComponent> ent, ref ComponentStartup args)
     {
+        // <Trauma>
+        var ev = new UpdateSpriteVisibilityEvent(nameof(ChameleonDisguisedComponent), 0f);
+        RaiseLocalEvent(ent, ref ev);
+        /*
         if (!_spriteQuery.TryComp(ent, out var sprite))
             return;
 
         ent.Comp.WasVisible = sprite.Visible;
         _sprite.SetVisible((ent.Owner, sprite), false);
+        </Trauma> */
     }
 
     private void OnShutdown(Entity<ChameleonDisguisedComponent> ent, ref ComponentShutdown args)
     {
+        // <Trauma>
+        var ev = new UpdateSpriteVisibilityEvent(nameof(ChameleonDisguiseComponent), 1f);
+        RaiseLocalEvent(ent, ref ev);
+        /*
         if (_spriteQuery.TryComp(ent, out var sprite))
             _sprite.SetVisible((ent.Owner, sprite), ent.Comp.WasVisible);
+        </Trauma> */
     }
 
     private void OnGetFlashEffectTargetEvent(Entity<ChameleonDisguisedComponent> ent, ref GetFlashEffectTargetEvent args)

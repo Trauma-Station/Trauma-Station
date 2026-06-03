@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpaceWhale;
+using Content.Trauma.Common.Sprite;
 
 namespace Content.Goobstation.Client.SpaceWhale;
 
@@ -15,8 +16,20 @@ public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
 
         TransformSystem.OnGlobalMoveEvent += OnMove;
 
+        SubscribeLocalEvent<TailedEntityComponent, UpdateSpriteVisibilityEvent>(OnUpdateVisibility);
         SubscribeLocalEvent<TailedEntityComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
         SubscribeLocalEvent<TailedEntitySegmentComponent, AfterAutoHandleStateEvent>(OnSegmentAfterAutoHandleState);
+    }
+
+    private void OnUpdateVisibility(Entity<TailedEntityComponent> ent, ref UpdateSpriteVisibilityEvent args)
+    {
+        foreach (var data in ent.Comp.TailSegments)
+        {
+            if (!TryGetEntity(data.Segment, out var uid))
+                continue;
+
+            RaiseLocalEvent(uid.Value, ref args);
+        }
     }
 
     private void OnAfterAutoHandleState(Entity<TailedEntityComponent> ent, ref AfterAutoHandleStateEvent args)
