@@ -260,17 +260,16 @@
     sprite: _Trauma/Objects/Specific/Hydroponics/meth_apple.rsi
   - type: Produce
     seedId: apple
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 14
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Vitamin
-          Quantity: 4
-        - ReagentId: Desoxyephedrine
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 14
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Vitamin
+        Quantity: 4
+      - ReagentId: Desoxyephedrine
+        Quantity: 5
   - type: Tag
     tags:
     - Fruit
@@ -287,17 +286,16 @@
   - type: Tag
     tags:
     - ClearCorn
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 100 # its clear so it can store alot of things
-        reagents:
-        - ReagentId: Cornmeal
-          Quantity: 15
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Ethanol
-          Quantity: 15
+  - type: Solution
+    solution:
+      maxVol: 100
+      reagents:
+      - ReagentId: Cornmeal
+        Quantity: 15
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Ethanol
+        Quantity: 15
 
 - type: entity
   parent: FoodProduceBase
@@ -309,14 +307,6 @@
     sprite: _Trauma/Objects/Specific/Hydroponics/peanut.rsi
   - type: Produce
     seedId: Peanut
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        temperature: 293.15
-        canReact: True
-        maxVol: 0
-        name: food
-        reagents: []
   - type: Tag
     tags:
     - Peanut
@@ -327,14 +317,13 @@
   name: magic mushrooms
   description: Mushrooms with just a little bit of magic.
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: THC
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: THC
+        Quantity: 15
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/magicmushrooms.rsi
   - type: Produce
@@ -352,12 +341,11 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/synthmeat.rsi
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Synthflesh
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Synthflesh
+        Quantity: 10
   - type: Produce
     seedId: SynthMeat
   - type: Tag
@@ -389,10 +377,9 @@
         acts: [ "Destruction" ]
       - !type:SpillBehavior
         solution: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 75
+  - type: Solution
+    solution:
+      maxVol: 75
   - type: Tag
     tags:
     - BalloonMelon
@@ -407,16 +394,15 @@
     sprite: _Trauma/Objects/Specific/Hydroponics/steel_wheat.rsi
   - type: Produce
     seedId: SteelWheat
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Lead
-          Quantity: 0.1
-        - ReagentId: Iron
-          Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Lead
+        Quantity: 0.1
+      - ReagentId: Iron
+        Quantity: 2
   - type: Tag
     tags:
     - Wheat
