@@ -104,7 +104,6 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
         base.Startup(ent);
 
         _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 0f);
-        RaiseLocalEvent(ent, ref ev);
     }
 
     protected override void Shutdown(Entity<ShadowCloakedComponent> ent)
