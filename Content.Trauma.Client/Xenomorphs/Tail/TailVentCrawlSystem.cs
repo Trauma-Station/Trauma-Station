@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.SpaceWhale;
 using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.VentCrawling.Components;
 
@@ -17,13 +18,26 @@ public sealed partial class TailVentCrawlSystem : EntitySystem
 
     private void OnStartVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentStartup args)
     {
-        var ev = new UpdateSpriteVisibilityEvent(nameof(BeingVentCrawlerComponent), 0f);
-        RaiseLocalEvent(ent, ref ev);
+        UpdateTailVisibility(ent, 0f);
     }
 
     private void OnStopVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentRemove args)
     {
-        var ev = new UpdateSpriteVisibilityEvent(nameof(BeingVentCrawlerComponent), 1f);
-        RaiseLocalEvent(ent, ref ev);
+        UpdateTailVisibility(ent, 1f);
+    }
+
+    private void UpdateTailVisibility(EntityUid uid, float alpha)
+    {
+        if (!TryComp(uid, out TailedEntityComponent? comp))
+            return;
+
+        var ev = new UpdateSpriteVisibilityEvent(nameof(BeingVentCrawlerComponent), alpha);
+        foreach (var data in comp.TailSegments)
+        {
+            if (!TryGetEntity(data.Segment, out var ent))
+                continue;
+
+            RaiseLocalEvent(ent.Value, ref ev);
+        }
     }
 }
