@@ -27,8 +27,9 @@
     soundHit:
       collection: MetalThud
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -187,15 +188,16 @@
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerCorpsman
-  suffix: Security, Corpsman
+  id: ReinforcementBeaconSpecialistOfficerBrigmedic
+  suffix: Security, Brigmedic
   components:
   - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-corpsman-name
+    job: Brigmedic
+    name: ghost-role-information-reinforcement-specialist-brigmedic-name
   - type: GhostCharacterSpawner
     components:
     - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecCorpsman ]
+      prototypes: [ ReinforcementBeaconOfficerSpecBrigmedic ]
       roleLoadout: [ RoleSurvivalSecurity ]
 
 - type: entity
@@ -520,6 +522,7 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconClown ]
+    - type: Clumsy
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -533,6 +536,7 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconMime ]
+    - type: MimePowers
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -546,6 +550,8 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconChaplain ]
+    - type: CurseImmune
+    - type: BibleUser
 
 - type: entity
   parent: BaseReinforcementBeacon

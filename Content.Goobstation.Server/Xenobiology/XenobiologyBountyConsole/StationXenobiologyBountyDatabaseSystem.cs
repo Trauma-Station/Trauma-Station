@@ -114,7 +114,7 @@ public sealed partial class StationXenobiologyBountyDatabaseSystem : EntitySyste
             string? actorName = null;
             if (actor != null)
             {
-                var getIdentityEvent = new TryGetIdentityShortInfoEvent(ent.Owner, actor.Value);
+                var getIdentityEvent = new TryGetIdentityShortInfoEvent(ent.Owner, actor.Value, false);
                 RaiseLocalEvent(getIdentityEvent);
                 actorName = getIdentityEvent.Title;
             }

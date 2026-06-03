@@ -1,33 +1,3 @@
-# FoodBase without perishable stuff
-- type: entity
-  abstract: true
-  parent: EdibleBase
-  id: FoodUnperishableBase
-  components:
-  # FoodBase, no perishable stuff
-  - type: SpaceGarbage
-  # FoodInjectableBase
-  - type: InjectableSolution
-    solution: food
-  - type: RefillableSolution
-    solution: food
-
-# FoodProduceBase without perishable stuff
-- type: entity
-  abstract: true
-  parent: FoodUnperishableBase
-  id: FoodProduceUnperishableBase
-  components:
-  # FoodProduceBase
-  - type: SolutionContainerManager
-  - type: Sprite
-    state: produce
-  - type: Produce
-  - type: PotencyVisuals
-  - type: Appearance
-  - type: Extractable
-    grindableSolutionName: food
-
 - type: entity
   parent: FoodProduceBase
   id: FoodLemonade
@@ -38,17 +8,15 @@
   - type: FlavorProfile
     flavors:
     - sour
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Napalm
-          Quantity: 5
-        - ReagentId: Vitamin
-          Quantity: 4
-        - ReagentId: ChlorineTrifluoride
-          Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Napalm
+        Quantity: 5
+      - ReagentId: Vitamin
+        Quantity: 4
+      - ReagentId: ChlorineTrifluoride
+        Quantity: 1
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
   - type: Item
@@ -93,6 +61,7 @@
       types:
         Blunt: 25
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -112,17 +81,15 @@
       - !type:PlaySoundBehavior
         sound:
           collection: WoodDestroy
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 40 # More than watermelon bcs rare as fuck
-        reagents:
-        - ReagentId: CoconutFlesh
-          Quantity: 20
-        - ReagentId: Vitamin
-          Quantity: 10
-        - ReagentId: CoconutWater
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: CoconutFlesh
+        Quantity: 20
+      - ReagentId: Vitamin
+        Quantity: 10
+      - ReagentId: CoconutWater
+        Quantity: 10
   - type: Extractable
     juiceSolution:
       reagents:
@@ -159,17 +126,15 @@
   components:
   - type: Item
     size: Small
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: CoconutFlesh
-          Quantity: 10
-        - ReagentId: Vitamin
-          Quantity: 5
-        - ReagentId: CoconutWater
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: CoconutFlesh
+        Quantity: 10
+      - ReagentId: Vitamin
+        Quantity: 5
+      - ReagentId: CoconutWater
+        Quantity: 5
   - type: Extractable
     juiceSolution:
       reagents:
@@ -207,10 +172,9 @@
   - type: PhysicalComposition
     materialComposition:
       Wood: 50 # lol
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 15 # because i cant get the fill sprites to work
+  - type: Solution
+    solution:
+      maxVol: 15 # because i cant get the fill sprites to work
 
 - type: entity
   parent: FoodProduceBase
@@ -222,15 +186,14 @@
   - type: FlavorProfile
     flavors:
       - cherry
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 8
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: Vitamin
-          Quantity: 3
+  - type: Solution
+    solution:
+      maxVol: 8
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 3
+      - ReagentId: Vitamin
+        Quantity: 3
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
   - type: Produce
@@ -248,6 +211,7 @@
       Taco: Cherry
       Burger: Cherry
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

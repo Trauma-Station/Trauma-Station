@@ -16,3 +16,21 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 1.2
     walkSpeedModifier: 1.2
+
+- type: entity
+  parent: StatusEffectBase
+  id: CounterAttackingStatusEffect
+  name: counter attacking
+  components:
+  - type: CounterAttackingStatusEffect
+  - type: StatusEffectAlert
+    alert: CounterAttacking
+
+- type: entity
+  parent: StatusEffectBase
+  id: BlockCounterAttackStatusEffect
+  name: counter attacking blocked
+  components:
+  - type: BlockCounterAttackStatusEffect
+  - type: StatusEffectAlert
+    alert: CounterAttackingBlocked

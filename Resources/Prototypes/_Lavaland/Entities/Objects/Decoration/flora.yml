@@ -35,8 +35,9 @@
   #      children:
   #      - id: FoodSpaceshroom
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

@@ -8,5 +8,11 @@ interactor-verb-toggled-use-in-hand = {$enabled ->
     [true]Enabled
     *[false]Disabled
 } use in hand mode.
+interactor-verb-toggle-harm-mode = Toggle Harm Mode
+interactor-verb-toggled-harm-mode = {$enabled ->
+    [true]Enabled
+    *[false]Disabled
+} harm mode.
+
 
 interactor-verb-no-screwdriver = You need a screwdriver

@@ -37,12 +37,10 @@
         type: Add
         time: 1
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 1
-        refresh: true
       - !type:Jitter
         time: 2
       3:
@@ -57,12 +55,10 @@
         type: Add
         time: 2
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 2
-        refresh: true
       - !type:Jitter
         time: 4
       4:
@@ -77,12 +73,10 @@
         type: Add
         time: 4
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 4
-        refresh: true
       - !type:Jitter
         time: 8
       6:
@@ -97,12 +91,10 @@
         type: Add
         time: 8
         refresh: true
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
-        type: Add
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Update
         time: 8
-        refresh: true
       - !type:HealthChange
         damage:
           types:

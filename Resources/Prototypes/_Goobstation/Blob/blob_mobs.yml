@@ -19,8 +19,9 @@
           - ReagentId: TearGas
             Quantity: 3
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BlobMob
+    - type: Injurable
+      damageContainer: Blob
     - type: Clothing
       quickEquip: false
       sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
@@ -130,8 +131,9 @@
   components:
     - type: ZombieImmune
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BlobBlobbernaut
+    - type: Injurable
+      damageContainer: Blob
     - type: Tag
       tags:
       - Blobbernaut

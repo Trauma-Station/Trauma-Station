@@ -11,12 +11,6 @@ public sealed partial class LanguagePrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     /// <summary>
-    ///     Whether this language will display its name in chat behind a player's name.
-    /// </summary>
-    [DataField]
-    public bool IsVisibleLanguage { get; set; }
-
-    /// <summary>
     /// Obfuscation method used by this language.
     /// </summary>
     [DataField(required: true)]

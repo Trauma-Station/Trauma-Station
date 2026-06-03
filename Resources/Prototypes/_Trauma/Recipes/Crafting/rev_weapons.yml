@@ -64,6 +64,19 @@
     WeaponsKnowledge: 2
 
 - type: construction
+  id: Proletariat
+  graph: RevGuns
+  targetNode: Proletariat
+  category: construction-category-antagonist
+  objectType: Item
+  theory:
+    RevolutionaryKnowledge: 2
+    WeaponsKnowledge: 1
+  practical:
+    GunsmithingKnowledge: 4
+    WeaponsKnowledge: 3
+
+- type: construction
   id: RevIED
   graph: RevIED
   targetNode: IED

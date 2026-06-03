@@ -7,7 +7,6 @@
   event: !type:HereticStartupEvent
     addedComponents:
     - type: WeakToHoly
-    - type: CanEnchant
 
 - type: hereticKnowledge
   id: HeartbeatOfMansus
@@ -105,7 +104,7 @@
   stage: 6
   event: !type:HereticKnowledgeEvent
     addedComponents:
-    - type: TemporaryBlindnessImmunity
+    - type: BlindnessImmunity
     - type: BlurryVisionImmunity
 
 - type: hereticKnowledge

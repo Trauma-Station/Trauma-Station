@@ -1,0 +1,93 @@
+# Looks like smoke, slowly expands outwards.
+- type: particleEffect
+  id: VampireCoffinExit
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot_big
+  startColor: "#FFFFFFFF"
+  endColor: "#FFFFFF00"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.2
+  - time: 0.1
+    value: 0.4
+  - time: 0.4
+    value: 0.15
+  - time: 1.0
+    value: 0.0
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 1.0
+    value: 1.5
+  lifetime: 3.0
+  lifetimeVariance: 1.0
+  speed: 1.0
+  speedVariance: 0.5
+  particleSize: 1.0
+  sizeVariance: 0.2
+  emissionRate: 0
+  maxCount: 20
+  burst: true
+  gravity: -0.05
+  drag: 0.9
+  noiseStrength: 0.5
+  noiseFrequency: 0.5
+  spreadAngle: 360
+  emitAngle: 90
+  startRotation: 0
+  startRotationVariance: 360
+  rotationSpeed: 0.2
+  rotationSpeedVariance: 10
+  shape:
+    type: CircleFill
+    radius: 0.5
+
+# Creates a circle of gray -> red color around the user, and then it floats upwards.
+- type: particleEffect
+  id: VampireGlare
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: cross
+  startColor: "#D3D3D3FF"
+  endColor: "#FF0000FF"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.8
+  - time: 0.2
+    value: 1.0
+  - time: 0.8
+    value: 0.6
+  - time: 1.0
+    value: 0.0
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.2
+  - time: 0.2
+    value: 2.0
+  - time: 0.6
+    value: 0.5
+  - time: 0.9
+    value: 2.5
+  lifetime: 1.0
+  lifetimeVariance: 0.1
+  speed: 0.1
+  speedVariance: 1.5
+  particleSize: 1.0
+  sizeVariance: 0.2
+  emissionRate: 0
+  maxCount: 25
+  burst: true
+  gravity: -5.0
+  drag: 7.0
+  noiseStrength: 1.0
+  noiseFrequency: 9.5
+  spreadAngle: 360
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 360
+  rotationSpeed: 0.5
+  rotationSpeedVariance: 20
+  shape:
+    type: CircleEdge
+    radius: 0.9

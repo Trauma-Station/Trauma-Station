@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Mindshield;
-using Content.Shared.Revolutionary; // GoobStation
-using Content.Server.Revolutionary.Components; // GoobStation
+using Content.Server.Revolutionary.Components;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Mind;
@@ -10,6 +9,7 @@ using Content.Server.Roles;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Revolutionary;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Robust.Shared.Containers;
@@ -34,6 +34,7 @@ public sealed partial class MindShieldSystem : EntitySystem
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
+        SubscribeLocalEvent<MindShieldComponent, AttemptConvertRevolutionaryEvent>(OnAttemptConvert);
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -78,5 +79,10 @@ public sealed partial class MindShieldSystem : EntitySystem
         // </Goob>
 
         RemComp<MindShieldComponent>(args.Implanted);
+    }
+
+    private void OnAttemptConvert(Entity<MindShieldComponent> ent, ref AttemptConvertRevolutionaryEvent args)
+    {
+        args.Cancelled = true;
     }
 }

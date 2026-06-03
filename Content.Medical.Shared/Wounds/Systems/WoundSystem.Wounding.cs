@@ -57,7 +57,7 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, CheckPartBleedingEvent>(OnCheckPartBleeding);
         SubscribeLocalEvent<WoundableComponent, CheckPartWoundedEvent>(OnCheckPartWounded);
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
-        SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<WoundableComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
         SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
@@ -194,16 +194,15 @@ public sealed partial class WoundSystem
         RemoveWound(wound, woundComponent);
     }
 
-    private void OnDamageChanged(EntityUid uid, WoundableComponent component, ref DamageChangedEvent args)
+    private void OnDamageDealt(EntityUid uid, WoundableComponent component, ref DamageDealtEvent args)
     {
         // Skip if there was no damage delta or if wounds aren't allowed
-        if (args.UncappedDamage == null // Goobstation
-            || !component.AllowWounds
+        if (!component.AllowWounds
             || !_net.IsServer)
             return;
 
         // Create or update wounds based on damage changes
-        foreach (var (damageType, damageValue) in args.UncappedDamage.DamageDict)
+        foreach (var (damageType, damageValue) in args.Damage.DamageDict)
         {
             if (damageValue == 0)
                 continue; // Only create wounds for damage or healing
@@ -221,7 +220,7 @@ public sealed partial class WoundSystem
                 TryInduceWound(uid,
                     damageType,
                     damageValue *
-                    args.UncappedDamage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1),
+                    args.Damage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1),
                     out _,
                     component);
             }

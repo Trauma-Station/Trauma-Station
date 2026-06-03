@@ -49,7 +49,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     public void UnloadButton()
     {
-        if (_button is not { } || _button.Disposed)
+        if (_button is not { } || _button == default || _button.Disposed)
             return;
 
         _button.OnPressed -= LanguageButtonPressed;
@@ -81,11 +81,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     public void OnStateExited(GameplayState state)
     {
-        if (_menu is { })
-        {
-            _menu.Dispose();
-            _menu = null;
-        }
+        _menu = null;
 
         CommandBinds.Unregister<LanguageMenuUIController>();
     }

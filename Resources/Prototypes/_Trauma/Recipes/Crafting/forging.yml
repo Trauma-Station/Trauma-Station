@@ -52,6 +52,7 @@
   parent: BaseForgingItem
   id: SteelScraps
   graph: SteelScraps
+  targetNode: scraps
   theory:
     FabricationKnowledge: 0
   practical:
@@ -67,6 +68,16 @@
   parent: SteelScraps
   id: PlasteelScraps
   graph: PlasteelScraps
+
+- type: construction
+  parent: SteelScraps
+  id: GoldScraps
+  graph: GoldScraps
+
+- type: construction
+  parent: SteelScraps
+  id: SilverScraps
+  graph: SilverScraps
 
 - type: construction
   parent: BaseForgingItem

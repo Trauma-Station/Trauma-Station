@@ -1,0 +1,84 @@
+- type: constructionGraph
+  id: EnchantedScroll
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - material: Paper
+        amount: 1
+        doAfter: 1
+  - node: finish
+    entity: EnchantingScrollEmpty
+
+- type: constructionGraph
+  id: DemonBlood
+  graph:
+  - node: start
+    edges:
+    - to: unfinished
+      steps:
+      - material: Steel
+        amount: 1
+      - material: Glass
+        amount: 2
+        doAfter: 1
+
+  - node: unfinished
+    entity: BloodVial
+    edges:
+    - to: finish
+      steps:
+      - material: WoodPlank # TODO: make cork sprite and make a cork item
+        amount: 1
+        doAfter: 1
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: Blood
+        quantity: 100
+  - node: finish
+    entity: BloodVialFull
+
+- type: constructionGraph
+  id: RandomInk
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: DemonEssense
+        name: construction-graph-tag-demonsoul
+        icon:
+          sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+          state: icon
+  - node: finish
+    entity: MagicInkRandom
+
+- type: constructionGraph
+  id: DefaceBible
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: Bible
+        name: construction-graph-tag-bible
+        icon:
+          sprite: Objects/Specific/Chapel/bible.rsi
+          state: icon
+  - node: finish
+    entity: BloodEnchanter

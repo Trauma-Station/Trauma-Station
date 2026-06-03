@@ -1,0 +1,104 @@
+- type: entity
+  parent: [BaseSword, BaseCentcommContraband, BaseGrandTheftContraband]
+  id: Mandate
+  name: mandate
+  description: A ceremonial weapon belonging to the nanotrasen representative of the station. Those who wield it are slowed by its immense mass.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/mandate.back.icon.rsi
+    layers:
+    - state: icon-off
+    - state: icon-on
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: Item
+    size: Ginormous
+    sprite: _Trauma/Objects/Weapons/Melee/mandate.rsi
+    storedSprite:
+      state: equipped-BACKPACK
+      sprite: _Trauma/Objects/Weapons/Melee/mandate.back.icon.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Melee/mandate.back.icon.rsi
+    slots:
+    - Back
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK
+  - type: ItemToggle
+    onUse: false
+    onActivate: false
+    soundActivate:
+      path: /Audio/Weapons/ebladeon.ogg
+    soundDeactivate:
+      path: /Audio/Weapons/ebladeoff.ogg
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Weapons/ebladehum.ogg
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Slash: 25
+        Heat: 10
+      woundSeverityMultipliers:
+        Slash: 2.5
+    activatedSoundOnHit:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        variation: 0.125
+  - type: ComponentToggler
+    components:
+      - type: DisarmMalus
+        malus: 0.8
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: wielded-inhand-left
+        shader: unshaded
+      right:
+      - state: wielded-inhand-right
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: green
+    netsync: false
+  - type: Appearance
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 0.1
+    heavyStaminaCost: 40
+    angle: 80
+    damage:
+      types:
+        Blunt: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: UseDelay
+    delay: 10.0
+  - type: Wieldable
+    wieldSound: null
+  - type: HeldSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.7
+  - type: Parry
+    maxParries: 3
+    maxReflects: 5
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  - type: StaticPrice
+    price: 3000
+  - type: Tag
+    tags:
+      - HighRiskItem

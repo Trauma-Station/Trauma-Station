@@ -34,6 +34,7 @@
 - type: entity
   parent: [ BaseForgedReadyItem, Crowbar ]
   id: ForgedCrowbar
+  name: crowbar
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -49,6 +50,7 @@
 - type: entity
   parent: [ BaseForgedReadyItem, Wrench ]
   id: ForgedWrench
+  name: wrench
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

@@ -31,8 +31,9 @@
     delay: 2.5
     loot: FoodMealCactusFruit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

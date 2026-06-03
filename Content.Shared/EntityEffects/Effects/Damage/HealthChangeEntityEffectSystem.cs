@@ -67,7 +67,7 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     [DataField]
     public bool IgnoreResistances = true;
 
-    // <Shitmed>
+    // <Trauma>
     /// <summary>
     /// How to scale the effect based on the temperature of the target entity.
     /// </summary>

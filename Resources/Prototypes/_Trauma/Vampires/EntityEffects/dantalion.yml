@@ -1,0 +1,18 @@
+- type: entityEffect
+  id: DanRally
+  effects:
+  - !type:NestedEffect
+    proto: VampireRejuvII
+  - !type:SpawnAttached
+    entity: RallyOverlay
+
+- type: entityEffect
+  id: MassHysteria
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: HysteriaStatusEffect
+    time: 30
+  - !type:GenericStatusEffect
+    key: Flashed
+    component: Flashed
+    time: 3

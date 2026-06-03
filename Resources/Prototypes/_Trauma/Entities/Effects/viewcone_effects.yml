@@ -12,12 +12,10 @@
   components:
   - type: ViewconeOccludable
     inverted: true
-    overrideBaseAlpha: true
     useMemory: false # this is the memory
   - type: Sprite
     sprite: _Trauma/Effects/viewcone_effects.rsi
     drawdepth: Effects
-    color: '#FFFFFF00' # 0 alpha by default, will get overriden by setalpha overlay
     loop: false
   - type: Transform
     anchored: true

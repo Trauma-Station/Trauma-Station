@@ -74,8 +74,9 @@
       125: 0.9
       150: 0.8
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: Stamina
     baseCritThreshold: 500
   - type: Fixtures
@@ -176,9 +177,10 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
-  - type: Prying #Switched from Tools component to this
-    speedModifier: 1.5
+  - type: Prying
+    speedModifier: 5
     pryPowered: true
+    useSound: /Audio/Machines/airlock_creaking.ogg
   - type: ComplexInteraction
   - type: Hands
   - type: ShowHealthIcons

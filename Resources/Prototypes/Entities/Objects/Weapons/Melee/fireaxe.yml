@@ -4,18 +4,29 @@
   id: FireAxe
   description: Truly, the weapon of a madman. Who would think to fight fire with an axe?
   components:
+  # <Trauma>
+  - type: Scalpel
+    speed: 0.3
+  - type: BoneSaw
+    speed: 0.5
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
+  - type: CosmicTransmutable
+    transmuteTo: ScytheCosmicCult
+  # </Trauma>
   - type: Tag
     tags:
     - FireAxe
   - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
-    decapitation: true # Goobstation - Decapitation
+    decapitation: true # Trauma
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxe.rsi
     state: icon
   - type: MeleeWeapon
-    heavyStaminaCost: 15 # goob edit
+    heavyStaminaCost: 15 # Trauma
     wideAnimationRotation: 135
     swingLeft: true
     attackRate: 0.75
@@ -25,7 +36,7 @@
         Blunt: 5
         Slash: 10
         Structural: 10
-      woundSeverityMultipliers:
+      woundSeverityMultipliers: # Trauma
         Blunt: 2
         Slash: 2.5
     soundHit:
@@ -43,12 +54,11 @@
     quickEquip: false
     slots:
     - back
-    - suitStorage  # Goobstation
+    - suitStorage
   - type: Tool
     qualities:
+      - Axing # Trauma
       - Prying
-      # Goobstation - Fireaxe plating prying
-      - Axing
   - type: ToolTileCompatible
   - type: Prying
   - type: UseDelay
@@ -57,24 +67,17 @@
     stealGroup: FireAxe
   - type: IgniteOnMeleeHit
     fireStacks: -4
-  - type: Scalpel # Shitmed
-    speed: 0.3
-  - type: BoneSaw # Shitmed
-    speed: 0.5
-  - type: SurgeryTool # Shitmed
-    startSound:
-      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: ScytheCosmicCult
 
 - type: entity
   id: FireAxeFlaming
   name: fire axe
-  parent: [BaseSyndicateContraband, FireAxe]
+  parent: [ BaseSyndicateContraband, FireAxe ]
   description: Why fight fire with an axe when you can fight with fire and axe? Now featuring rugged rubberized handle!
   components:
   - type: MeleeWeapon
-    # Goobstation - fire axe buff
+    wideAnimationRotation: 135
+    swingLeft: true
+  # <Trauma>
     damage:
       types:
         Heat: 5
@@ -83,15 +86,15 @@
       woundSeverityMultipliers:
         Slash: 2.5
         Heat: 2
-  # Goobstation - fire axe buff
   - type: IncreaseDamageOnWield
     damage:
       types:
         Heat: 10
         Slash: 10
         Structural: 80
+  # <Trauma>
   - type: IgniteOnMeleeHit
-    fireStacks: 5 #Goobchange
+    fireStacks: 5 # Trauma - was 1
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
     state: icon
@@ -100,4 +103,4 @@
     quickEquip: false
     slots:
     - back
-    - suitStorage # Goobstation
+    - suitStorage

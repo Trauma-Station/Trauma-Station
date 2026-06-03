@@ -35,15 +35,26 @@
   dontShowInCredits: True
 
 - type: startingGear
-  id: Heretictmidround
+  id: HereticMidround
   storage:
     back:
-    - Inkofimaginination
+    - InkOfImaginination # TODO: just give the knowledge directly holy shit
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Heretic
+  prefRoles: [ Heretic ]
+  jobBlacklist: [ Chaplain ]
+
+- type: antagSpecifier
+  parent: Heretic
+  id: HereticMidround
+  startingGear: HereticMidround
 
 - type: antagSmite
   id: Heretic
   antag: Heretic
-  rule: Heretic
+  rule: HereticRoundstart
   ruleComp: HereticRule
   icon:
     sprite: _Goobstation/Heretic/Blades/eldritch_blade.rsi

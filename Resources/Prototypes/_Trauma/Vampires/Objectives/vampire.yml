@@ -1,0 +1,56 @@
+- type: entity
+  parent: BaseObjective
+  id: BaseVampireObjective
+  components:
+  - type: Objective
+    issuer: objective-issuer-vampire
+    unique: true
+    difficulty: 1
+  - type: RoleRequirement
+    roles:
+    - VampireRole
+
+- type: entity
+  parent: BaseVampireObjective
+  id: VampireBloodObjective
+  description: Drink blood.
+  components:
+  - type: Objective
+    icon:
+      sprite: Fluids/tomato_splat.rsi
+      state: puddle-1
+  - type: NumberObjective
+    min: 600
+    max: 1200
+    title: objective-condition-blood-title
+    description: objective-condition-blood-description
+  - type: VampireBloodCondition
+
+- type: entity
+  parent: BaseVampireObjective
+  id: VampireBloodsuckObjective
+  name: Survive
+  description: Blood suck people.
+  components:
+  - type: Objective
+    icon:
+      sprite: Structures/Storage/Crates/coffin.rsi
+      state: base
+  - type: NumberObjective
+    min: 6
+    max: 12
+    title: objective-condition-bloodsuck-title
+    description: objective-condition-bloodsuck-description
+  - type: VampireSuckCondition
+
+- type: entity
+  parent: [BaseVampireObjective, BaseSurviveObjective]
+  id: VampireSurviveObjective
+  name: Survive
+  description: You must survive no matter what.
+  components:
+  - type: Objective
+    icon:
+      sprite: Fluids/splatter.rsi
+      state: splatter-5
+      color: Red

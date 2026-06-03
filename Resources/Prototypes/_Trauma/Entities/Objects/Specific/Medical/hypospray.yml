@@ -15,10 +15,9 @@
     - state: fill-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 0 # prevent any funnies
+  - type: Solution
+    solution:
+      maxVol: 0 # prevent any funnies
   - type: Injector
     activeModeProtoId: HyposprayInjectMode
     allowedModes:

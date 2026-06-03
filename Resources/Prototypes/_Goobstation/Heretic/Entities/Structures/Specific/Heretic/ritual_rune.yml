@@ -26,6 +26,7 @@
         type: GhoulRecallBoundUserInterface
   - type: IgnoresFingerprints
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Fixtures
     fixtures:

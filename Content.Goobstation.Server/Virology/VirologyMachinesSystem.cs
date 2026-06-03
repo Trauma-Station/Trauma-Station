@@ -160,8 +160,8 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
             if (TryComp<DiseaseEffectComponent>(effectUid, out var effectComp) && meta.EntityPrototype != null)
             {
                 report.AppendLine(Loc.GetString("disease-analyzer-report-effect-line",
-                    ("effect", Loc.GetString(meta.EntityPrototype.Name)),
-                    ("description", Loc.GetString(meta.EntityPrototype.Description)),
+                    ("effect", meta.EntityName),
+                    ("description", meta.EntityDescription),
                     ("severity", effectComp.Severity)));
             }
         }

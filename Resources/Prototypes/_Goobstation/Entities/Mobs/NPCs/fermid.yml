@@ -65,12 +65,12 @@
       types:
         Piercing: 3
         Poison: 3
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        reagents:
-        - ReagentId: SulfuricAcid
-          Quantity: 80
+  - type: Solution
+    id: melee
+    solution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 80
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 2

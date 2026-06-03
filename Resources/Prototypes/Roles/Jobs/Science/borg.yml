@@ -10,7 +10,6 @@
     role: JobBorg
     time: 5h
   weight: 10
-  canBeAntag: false
   icon: JobIconStationAi
   supervisors: job-supervisors-rd
   jobEntity: StationAiBrain
@@ -24,8 +23,7 @@
   playTimeTracker: JobBorg
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 1h # Trauma was 10
-  canBeAntag: false
+      time: 10h
   icon: JobIconBorg
   supervisors: job-supervisors-rd
   jobEntity: PlayerBorgBattery

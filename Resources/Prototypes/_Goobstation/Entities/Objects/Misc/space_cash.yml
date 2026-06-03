@@ -1,5 +1,11 @@
 - type: entity
-  parent: SpaceCash
+  parent: BaseSpaceCash
+  id: SpaceCash
+  components:
+  - type: Cash
+
+- type: entity
+  parent: BaseSpaceCash
   id: SpaceCashCounterfeit
   suffix: Counterfeit
   components:

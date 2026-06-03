@@ -7,6 +7,8 @@
     objectives:
     - XenomorphSurviveObjective
   - type: XenomorphsRule
+    minTimeToAnnouncement: 900
+    maxTimeToAnnouncement: 900
     xenomorphInfestationSound:
       collection: XenoStart
   - type: MaintsSpawnRule
@@ -16,22 +18,13 @@
     agentName: xenomorph-round-end-agent-name
 
 - type: entity
-  parent: BaseXenomorphsRule
+  parent: [ BaseXenomorphsRule, BaseRoundstartAntagRule ]
   id: XenomorphsInfestationRoundstart
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 40
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn
-    definitions:
-    - prefRoles: [ XenomorphsInfestationRoundstart ]
-      spawnerPrototype: SpawnPointGhostXenomorph
-      min: 4
-      max: 4
-      playerRatio: 15
-      pickPlayer: true
-      mindRoles:
-      - MindRoleXenomorph
-      briefing:
-        text: xenomorph-role-greeting
-        color: "#8c3986"
+    antags:
+    - !type:FixedAntagCount
+      proto: Xenomorph
+      count: 4

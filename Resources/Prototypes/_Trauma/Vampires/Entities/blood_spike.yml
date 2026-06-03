@@ -1,0 +1,41 @@
+- type: entity
+  id: BloodSpike
+  name: Blood Spike
+  description: A sharp spike made out of pure blood.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/vampire_effects.rsi
+    state: bloodspike_white
+    color: "#DC143C" # would be cooler if it took the color of the blood, but next time
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      bloodspike:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - MobMask
+        layer:
+        - Impassable
+  - type: TriggerOnCollide
+    fixtureID: bloodspike
+    maxTriggers: 1
+  - type: DamageOnTrigger
+    targetUser: true
+    blacklist:
+      components:
+      - Vampire
+      - VampireThrall
+    damage:
+      types:
+        Slash: 20
+        Blunt: 30
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Tag
+    tags:
+    - HideContextMenu

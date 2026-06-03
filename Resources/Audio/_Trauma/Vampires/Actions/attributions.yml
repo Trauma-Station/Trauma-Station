@@ -1,0 +1,39 @@
+- files: ["dark_passage.ogg", "shadow_anchor.ogg", "shadow_snare.ogg", "shadow_snare_hit.ogg", "vampire_cloak.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/horror-hit-soundpack-1"
+
+- files: ["hysteria.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/space-creature-sfx-pack"
+
+- files: ["pacify.ogg", "subspace_swap.ogg", "vampire_enthrall.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/sound-effects-sfx003"
+
+- files: ["vampire_glare.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/magic-sfx-sample"
+
+- files: ["vampire_rejuv.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from opengameart, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://opengameart.org/content/atmospheric-interaction-sound-pack"
+
+- files: ["vampire_stomp.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from freesound, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://freesound.org/people/AudioPapkin/sounds/827572/"
+
+- files: ["vampire_charge.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from freesound, converted to ogg and mono by @Lumminal (Github)"
+  source: "https://freesound.org/people/AudioPapkin/sounds/812710/"
+
+- files: ["vampire_duel.ogg", "vampire_duel_end.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken from freesound, converted to ogg, mono and cut by @Lumminal (Github)"
+  source: "https://freesound.org/people/Mateusz_Chenc/sounds/520998/"

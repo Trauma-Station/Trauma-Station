@@ -13,3 +13,46 @@
     proto: PelletShotgunBreachingSpread
   - type: SpentAmmoVisuals
     state: "breach"
+
+- type: entity
+  parent: [ BaseSyndicateContraband, SolutionAmmo, SolutionToolVeryTiny, BaseShellShotgun ]
+  id: ShellShotgunHypo
+  name: shell (12 Gauge hypo)
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    layers:
+    - state: hypo
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunTranquilizer
+  - type: ChemicalAmmo
+  - type: Solution
+    solution:
+      maxVol: 7
+  - type: RefillableSolution
+    solution: ammo
+  - type: InjectableSolution
+    solution: ammo
+  - type: SolutionTransfer
+    maxTransferAmount: 7
+  - type: SpentAmmoVisuals
+    state: "hypo"
+
+- type: entity
+  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  id: ShellShotgunTearGas
+  name: shell (12 Gauge tear gas)
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+    - state: practice
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunTearGas
+  - type: SpentAmmoVisuals
+    state: "practice"
