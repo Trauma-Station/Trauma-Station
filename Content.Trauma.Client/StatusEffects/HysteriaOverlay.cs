@@ -58,6 +58,7 @@ public sealed partial class HysteriaOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _sprite = _entMan.System<SpriteSystem>();
+        _spriteVis = _entMan.System<CommonSpriteVisibilitySystem>();
         _transform = _entMan.System<SharedTransformSystem>();
         _lookup = _entMan.System<EntityLookupSystem>();
     }
