@@ -51,6 +51,7 @@ SPDX-License-Identifier: MIT
                                     Text="{Loc 'store-ui-job-listings-button'}"
                                     Visible="False"
                                     StyleClasses="OpenBoth"
+                                    ToggleMode="True"
                                     Margin="0 0 0 10"
                                     />
                             <BoxContainer Name="CategoryListContainer" Orientation="Vertical">

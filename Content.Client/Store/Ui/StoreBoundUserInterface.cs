@@ -42,6 +42,8 @@ public sealed class StoreBoundUserInterface : BoundUserInterface
         _menu.OnCategoryButtonPressed += (_, category) =>
         {
             _menu.CurrentCategory = category;
+            // Trauma - job listings
+            _menu?.UnpressJobListingsButton();
             _menu?.UpdateListing();
         };
 
