@@ -15,8 +15,8 @@ public sealed partial class FluidSinkComponent : Component
     public string OutletName = "drain";
 
     [DataField]
-    public FixedPoint2 FlowRate = FixedPoint2.New(10);
+    public FixedPoint2 FlowRate = FixedPoint2.New(100);
 
     [DataField]
-    public FixedPoint2 DrainRate = FixedPoint2.New(10);
+    public FixedPoint2 DrainRate = FixedPoint2.New(50);
 }

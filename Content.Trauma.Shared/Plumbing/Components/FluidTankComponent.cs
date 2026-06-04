@@ -8,16 +8,10 @@ namespace Content.Trauma.Shared.Plumbing;
 public sealed partial class FluidTankComponent : Component
 {
     /// <summary>
-    /// Buffer name for solution container.
+    /// Name for solution container and fluid node.
     /// </summary>
     [DataField]
-    public string BufferName = "tank";
-
-    /// <summary>
-    /// The plumbing node name.
-    /// </summary>
-    [DataField]
-    public string NodeName = "fluid";
+    public string IntakeName = "tank";
 
     /// <summary>
     /// How much can a player transfer per click?

@@ -145,10 +145,10 @@
     solutions:
     - SolutionFluidStorageTank
   - type: MixableSolution
-    solution: tank_buffer
+    solution: tank
   - type: NodeContainer
     nodes:
-      fluid:
+      tank:
         !type:PlumbingNode
         nodeGroupID: Fluid
         maxVolume: 0
@@ -158,16 +158,17 @@
   - type: PipeColorVisuals
   - type: Rotatable
   - type: FluidTank
+    solution: tank
   - type: InjectableSolution
-    solution: tank_buffer
+    solution: tank
   - type: DrainableSolution
-    solution: tank_buffer
+    solution: tank
   - type: RefillableSolution
-    solution: tank_buffer
+    solution: tank
   - type: DrawableSolution
-    solution: tank_buffer
+    solution: tank
   # - type: SolutionContainerVisuals
-  #   solutionName: tank_buffer # Tells the visualizer which solution to track
+  #   solutionName: tank # Tells the visualizer which solution to track
   - type: Transform
     anchored: true
   - type: Anchorable

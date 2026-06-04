@@ -21,11 +21,11 @@ public sealed partial class PlumbingTankSystem : EntitySystem
     private void OnTankUpdate(Entity<FluidTankComponent> ent, ref PlumbingDeviceUpdateEvent args)
     {
         if (!TryComp<NodeContainerComponent>(ent, out var container) ||
-            !container.Nodes.TryGetValue(ent.Comp.NodeName, out var node) ||
+            !container.Nodes.TryGetValue(ent.Comp.IntakeName, out var node) ||
             node is not PlumbingNode pNode || pNode.PipeNet is not PlumbingNet net)
             return;
 
-        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferName, out var bufferNullable) || bufferNullable is not { } buffer)
+        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.IntakeName, out var bufferNullable) || bufferNullable is not { } buffer)
             return;
 
         var netPressure = (float) (net.Liquid.Volume / net.Liquid.MaxVolume) + net.ExternalPressureForce;
