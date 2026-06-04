@@ -106,11 +106,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                        Visible="False"
                                        Text="{Loc 'pda-bound-user-interface-show-uplink-title'}"
                                        Description="{Loc 'pda-bound-user-interface-show-uplink-description'}"/>
-                <pda:PdaSettingsButton Name = "ShowJobListingsButton"
-                                       Access="Public"
-                                       Visible="False"
-                                       Text="{Loc 'pda-bound-user-interface-show-job-listings-title'}"
-                                       Description="{Loc 'pda-bound-user-interface-show-job-listings-description'}"/>
                 <pda:PdaSettingsButton Name="LockUplinkButton"
                                        Access="Public"
                                        Visible="False"
