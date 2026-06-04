@@ -151,7 +151,7 @@ public sealed partial class SpraySystem : SharedSpraySystem
         if (ev.Cancelled)
         {
             if (ev.CancelPopupMessage != null && user != null)
-                _popupSystem.PopupEntity(Loc.GetString(ev.CancelPopupMessage), entity.Owner, user.Value);
+                _popupSystem.PopupEntity(ev.CancelPopupMessage, entity.Owner, user.Value); // Trauma - removed Loc.GetString, the 1 system using this already does that
             return;
         }
 

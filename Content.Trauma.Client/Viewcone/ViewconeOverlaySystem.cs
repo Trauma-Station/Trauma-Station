@@ -7,6 +7,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Trauma.Client.Viewcone.Overlays;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Popups;
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.Input;
@@ -31,23 +32,14 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private ViewconeAngleSystem _angle = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
     [Dependency] private EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
 
     private ViewconeConeOverlay _coneOverlay = default!;
     private ViewconeSetAlphaOverlay _setAlphaOverlay = default!;
-    private ViewconeResetAlphaOverlay _resetAlphaOverlay = default!;
 
     private const float LerpHalfLife = 0.065f;
-
-    // slightly balls state management, but
-    // done so we don't have to requery within the same frame
-    // this is always cleared at the end of resetting alpha
-    // it is the least thread safe code of all time obviously. but rendering not threaded. so
-    // we can abuse the fact that the overlays will always draw sequentially in the order we expect, and
-    // one wont start rendering in the middle of rendering another
-    internal List<(Entity<SpriteComponent> ent, float baseAlpha)> CachedBaseAlphas = new(128);
 
     // raw grain scale ignoring reduced motion setting
     // reduced motion locks it to 0
@@ -67,6 +59,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
+        SubscribeLocalEvent<ViewconeOccludableComponent, ComponentInit>(OnOccludableInit);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStoppedMessage>(OnPullStopped);
         SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
@@ -74,7 +67,6 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
 
         _coneOverlay = new();
         _setAlphaOverlay = new();
-        _resetAlphaOverlay = new();
 
         Subs.CVar(_cfg, TraumaCVars.VisionGrainScale, SetGrainScale, true);
         Subs.CVar(_cfg, TraumaCVars.DisableVisionCones, SetConesDisabled, true);
@@ -223,7 +215,6 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
 
         _overlay.AddOverlay(_coneOverlay);
         _overlay.AddOverlay(_setAlphaOverlay);
-        _overlay.AddOverlay(_resetAlphaOverlay);
     }
 
     private void RemoveOverlays(bool setActive = true)
@@ -233,23 +224,28 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
 
         _overlay.RemoveOverlay(_coneOverlay);
         _overlay.RemoveOverlay(_setAlphaOverlay);
-        _overlay.RemoveOverlay(_resetAlphaOverlay);
 
         // hide memories
         var query = EntityQueryEnumerator<ViewconeOccludableComponent>();
         while (query.MoveNext(out var comp))
         {
-            if (comp.Memory is { } memory)
-                _sprite.SetVisible(memory, false);
+            if (comp.Memory is { } memory && !TerminatingOrDeleted(memory))
+                SetAlpha(memory, 0f);
         }
 
         // reset everythings opacity
         var query2 = EntityQueryEnumerator<ViewconeOccludedComponent>();
         while (query2.MoveNext(out var uid, out var comp))
         {
-            _sprite.SetVisible(uid, true);
+            SetAlpha(uid, 1f);
             RemCompDeferred(uid, comp);
         }
+    }
+
+    private void OnOccludableInit(Entity<ViewconeOccludableComponent> ent, ref ComponentInit args)
+    {
+        if (ent.Comp.Inverted)
+            SetAlpha(ent, 0f); // wait for overlay to maybe show effects next frame
     }
 
     // Logic for disabling occluding of entities that you're currently pulling.
@@ -290,6 +286,11 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
 
         // if the map changes for any reason, hide the memory
         // this may happen from leaving PVS or FTLing, etc
-        _sprite.SetVisible(memory, false);
+        SetAlpha(memory, 0f);
+    }
+
+    public void SetAlpha(EntityUid uid, float alpha)
+    {
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(ViewconeOccludedComponent), alpha);
     }
 }

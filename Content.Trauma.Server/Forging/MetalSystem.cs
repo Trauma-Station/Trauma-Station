@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Cargo.Components;
 using Content.Server.Construction.Components;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
@@ -88,5 +89,11 @@ public sealed partial class MetalSystem : SharedMetalSystem
     {
         if (t >= ent.Comp.IdealTemp)
             SetWorkable(ent, true);
+    }
+
+    public override void SetPrice(EntityUid uid, double price)
+    {
+        // project 0 api for server-only shit :tears
+        EnsureComp<StaticPriceComponent>(uid).Price = price;
     }
 }

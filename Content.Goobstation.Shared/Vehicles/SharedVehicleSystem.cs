@@ -249,10 +249,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         }
         RemComp<RelayInputMoverComponent>(driver);
 
-        if (vehicleComp.HornAction != null)
-            _actions.RemoveAction(driver, vehicleComp.HornAction);
-        if (vehicleComp.SirenAction != null)
-            _actions.RemoveAction(driver, vehicleComp.SirenAction);
+        _actions.RemoveProvidedActions(driver, vehicle);
 
         _virtualItem.DeleteInHandsMatching(driver, vehicle);
 

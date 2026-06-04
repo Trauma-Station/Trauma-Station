@@ -43,7 +43,7 @@
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesCommand
     #gloves: ClothingHandsGlovesCaptain # Goobstation, moved to loadouts
-    id: CaptainPDA
+    #id: CaptainPDA # Trauma - moved to loadouts
     ears: ClothingHeadsetAltCommand
   storage:
     back:

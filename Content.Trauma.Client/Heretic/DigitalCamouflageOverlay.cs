@@ -2,7 +2,9 @@
 
 using Content.Shared.Movement.Components;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.AudioMuffle;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 
@@ -15,7 +17,7 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPlayerManager _player = default!;
-    private readonly SpriteSystem _sprite;
+    private readonly CommonSpriteVisibilitySystem _spriteVis;
 
     private readonly HashSet<Entity<SpriteComponent>> _hiddenEntities = new();
 
@@ -23,7 +25,7 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
-        _sprite = _entMan.System<SpriteSystem>();
+        _spriteVis = _entMan.System<CommonSpriteVisibilitySystem>();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -47,7 +49,7 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
         {
             foreach (var ent in _hiddenEntities)
             {
-                _sprite.SetVisible(ent.AsNullable(), true);
+                _spriteVis.UpdateVisibilityModifiers(ent, nameof(DigitalCamouflageComponent), 1f);
             }
 
             _hiddenEntities.Clear();
@@ -57,15 +59,12 @@ public sealed partial class DigitalCamouflageOverlay : Overlay
         var query = _entMan.EntityQueryEnumerator<SpriteComponent>();
         while (query.MoveNext(out var uid, out var sprite))
         {
-            if (!sprite.Visible)
-                continue;
-
             var ev = new CanSeeOnCameraEvent(uid);
             _entMan.EventBus.RaiseLocalEvent(uid, ref ev);
             if (!ev.Cancelled)
                 continue;
 
-            _sprite.SetVisible((uid, sprite), false);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(DigitalCamouflageComponent), 0f);
             _hiddenEntities.Add((uid, sprite));
         }
     }

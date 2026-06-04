@@ -3,8 +3,10 @@
 using Content.Goobstation.Shared.Enchanting.Components;
 using Content.Shared.Examine;
 using Content.Shared.Item;
+using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Containers;
 using System.Linq;
 
@@ -19,6 +21,7 @@ public sealed partial class EnchantingSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     private EntityQuery<EnchantComponent> _query;
     private EntityQuery<EnchantedComponent> _enchantedQuery;
@@ -28,6 +31,8 @@ public sealed partial class EnchantingSystem : EntitySystem
     private HashSet<Entity<EnchantingTableComponent>> _tables = new();
     private HashSet<Entity<EnchanterComponent>> _enchanters = new();
     private HashSet<Entity<EnchantedComponent>> _enchantedItems = new();
+
+    private static readonly EntProtoId MagicalLiteracy = "MagicalLiteracyKnowledge";
 
     public override void Initialize()
     {
@@ -56,11 +61,18 @@ public sealed partial class EnchantingSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
+        var mastery = 0;
+        if (_knowledge.GetKnowledge(args.Examiner, MagicalLiteracy) is { } skill)
+            mastery = _knowledge.GetMastery(skill.Comp);
+
         using (args.PushGroup(nameof(EnchantedComponent)))
         {
             foreach (var uid in ent.Comp.Enchants)
             {
                 var comp = _query.Comp(uid);
+                if (mastery < comp.Level)
+                    continue;
+
                 var key = comp.ShowLevel ? "enchant-examine-level" : "enchant-examine";
                 args.PushMarkup(Loc.GetString(key, ("enchant", uid), ("level", comp.Level)));
             }
@@ -213,7 +225,7 @@ public sealed partial class EnchantingSystem : EntitySystem
         }
 
         // spawn a new one
-        if (!TrySpawnInContainer(id, item, comp.ContainerId, out var spawned))
+        if (!PredictedTrySpawnInContainer(id, item, comp.ContainerId, out var spawned))
         {
             Log.Error($"Failed to spawn enchant {id} for {ToPrettyString(item)}!");
             // don't make it shiny without any enchants

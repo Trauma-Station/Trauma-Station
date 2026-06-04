@@ -85,7 +85,7 @@
   - type: ItemSlots
     slots:
       phone:
-        name: phone
+        name: item-slot-name-phone
         insertSound: /Audio/_RMC14/Phone/sound_machines_phones_hang_up.ogg
         ejectSound: /Audio/_RMC14/Phone/sound_machines_phones_pick_up.ogg
         ejectOnInteract: true

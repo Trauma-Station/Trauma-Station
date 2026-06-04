@@ -1,0 +1,366 @@
+- type: entity
+  abstract: true
+  parent: [BaseItem, BaseMagicalContraband]
+  id: BaseInk
+  description: A vial of magical ink, can be used on a scroll to prepare an encantment or curse.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+  - type: Item
+    size: Tiny
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+  - type: EnchantAdder
+    desc: A scroll embued with an enchantment. Could do any number of things.
+    whitelist:
+      tags:
+      - EnchantingScroll
+    blacklist:
+      components:
+      - Enchanter # no doomstacking 20 enchants on 1 scroll
+  - type: GuideHelp
+    guides:
+    - Enchanting
+
+- type: entity
+  parent: BaseItem
+  id: MagicInkRandom
+  name: random magic ink
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: TimedDespawn
+    lifetime: 0.01
+  - type: SpawnOnDespawn
+    prototype: RandomInkSpawner
+  - type: Construction
+    graph: RandomInk
+    node: finish
+
+## Enchants
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkAshartine
+  name: ashartine
+  suffix: Sharpness
+  components:
+  - type: Sprite
+    state: ashartine
+  - type: EnchantAdder
+    enchant: EnchantSharpness
+    name: scroll of blades
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkAsimel
+  name: asimel
+  suffix: Fire Aspect
+  components:
+  - type: Sprite
+    state: asimel
+  - type: EnchantAdder
+    enchant: EnchantFireAspect
+    name: scroll of flames
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkAzurapetra
+  name: azura petra
+  suffix: Fortune
+  components:
+  - type: Sprite
+    state: azurapetra
+  - type: EnchantAdder
+    enchant: EnchantFortune
+    name: scroll of riches
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkCatwink
+  name: catwink
+  suffix: Insulated
+  components:
+  - type: Sprite
+    state: catwink
+  - type: EnchantAdder
+    enchant: EnchantInsulated
+    name: scroll of electric resistance
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkEndozult
+  name: endozult
+  suffix: Knockback
+  components:
+  - type: Sprite
+    state: endozult
+  - type: EnchantAdder
+    enchant: EnchantKnockback
+    name: scroll of force
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkHithine
+  name: hithine
+  suffix: Lavaforged
+  components:
+  - type: Sprite
+    state: hithine
+  - type: EnchantAdder
+    enchant: EnchantLavaforged
+    name: scroll of lava swimming
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkHoundsgall
+  name: houndsgall
+  suffix: Protection
+  components:
+  - type: Sprite
+    state: houndsgall
+  - type: EnchantAdder
+    enchant: EnchantProtection
+    name: scroll of physical resistance
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkIndothine
+  name: indothine
+  suffix: Fire Protection
+  components:
+  - type: Sprite
+    state: indothine
+  - type: EnchantAdder
+    enchant: EnchantProtFire
+    name: scroll of fire resistance
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkMarakat
+  name: marakat
+  suffix: Slippery
+  components:
+  - type: Sprite
+    state: marakat
+  - type: EnchantAdder
+    enchant: EnchantSlippery
+    name: scroll of hatred
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkNillycant
+  name: nillycant
+  suffix: Thorns
+  components:
+  - type: Sprite
+    state: nillycant
+  - type: EnchantAdder
+    enchant: EnchantThorns
+    name: scroll of the sharpened flesh
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkNocimat
+  name: nocimat
+  suffix: Unbreaking
+  components:
+  - type: Sprite
+    state: nocimat
+  - type: EnchantAdder
+    enchant: EnchantUnbreaking
+    name: scroll of steel
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkOrpimentexultant
+  name: orpiment exultant
+  suffix: Unslippable
+  components:
+  - type: Sprite
+    state: orpimentexultant
+  - type: EnchantAdder
+    enchant: EnchantUnslippable
+    name: scroll of the deft runner
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPorphyrine
+  name: porphyrine
+  suffix: Electrified
+  components:
+  - type: Sprite
+    state: porphyrine
+  - type: EnchantAdder
+    enchant: EnchantElectrified
+    name: scroll of thunder
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPosithane
+  name: posithane
+  suffix: Focus
+  components:
+  - type: Sprite
+    state: posithane
+  - type: EnchantAdder
+    enchant: EnchantFocus
+    name: scroll of concentration
+
+- type: entity
+  parent: BaseInk
+  name: pyroendine
+  id: MagicInkPyroendine
+  suffix: Laser
+  components:
+  - type: Sprite
+    state: pyroendine
+  - type: EnchantAdder
+    enchant: EnchantLaser
+    name: scroll of light
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkRaggath
+  name: raggath
+  suffix: Magic Protection
+  components:
+  - type: Sprite
+    state: raggath
+  - type: EnchantAdder
+    enchant: EnchantMagicProtection
+    name: scroll of magical resistance
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkRubiginosus
+  name: rubiginosus
+  suffix: magnetized
+  components:
+  - type: Sprite
+    state: rubiginosus
+  - type: EnchantAdder
+    enchant: EnchantMagnetized
+    name: scroll of magnets
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkStargallink
+  name: stargall
+  suffix: Poison
+  components:
+  - type: Sprite
+    state: stargallink
+  - type: EnchantAdder
+    enchant: EnchantPoison
+    name: scroll of snakes
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkTerragall
+  name: terragall
+  suffix: Rotting
+  components:
+  - type: Sprite
+    state: terragall
+  - type: EnchantAdder
+    enchant: EnchantRotten
+    name: scroll of maggots
+
+## Curses
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPerhibiate
+  name: perhibiate
+  suffix: Curse of Burning
+  components:
+  - type: Sprite
+    state: perhibiate
+  - type: EnchantAdder
+    enchant: CurseBurning
+    name: scroll of seared flesh
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPerinsabate
+  name: perinsabate
+  suffix: Curse of Clumsy
+  components:
+  - type: Sprite
+    state: perinsabate
+  - type: EnchantAdder
+    enchant: CurseClumsy
+    name: scroll of the jester
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPerinculate
+  name: perinculate
+  suffix: Curse of Slowness
+  components:
+  - type: Sprite
+    state: perinculate
+  - type: EnchantAdder
+    enchant: CurseSlowing
+    name: scroll of chains
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPurpuraatramentum
+  name: purpura tramentum
+  suffix: Curse of Gravity
+  components:
+  - type: Sprite
+    state: purpuraatramentum
+  - type: EnchantAdder
+    enchant: CurseGravity
+    name: scroll of the singularity
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkPyrathene
+  name: pyrathene
+  suffix: Curse of Invisibility
+  components:
+  - type: Sprite
+    state: pyrathene
+  - type: EnchantAdder
+    enchant: CurseInvisibility
+    name: scroll of the blinded eye
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkUnden
+  name: unden
+  suffix: Sentience
+  components:
+  - type: Sprite
+    state: unden
+  - type: EnchantAdder
+    enchant: EnchantMagicSentience
+    name: scroll of mind
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkUzult
+  name: uzult
+  suffix: Curse of Binding
+  components:
+  - type: Sprite
+    state: uzult
+  - type: EnchantAdder
+    enchant: CurseUnremovable
+    name: scroll of flesh knitting
+
+- type: entity
+  parent: BaseInk
+  id: MagicInkYewgallink
+  name: yewgall
+  suffix: Curse of Vanishing
+  components:
+  - type: Sprite
+    state: yewgallink
+  - type: EnchantAdder
+    enchant: CurseVanishing
+    name: scroll of decay

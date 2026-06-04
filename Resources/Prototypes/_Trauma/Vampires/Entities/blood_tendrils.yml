@@ -45,14 +45,14 @@
   - type: EntityEffectOnTrigger
     targetUser: true
     effects:
-    - !type:ModifyStatusEffect
-      effectProto: BloodTendrilSlowdown
-      time: 5
-      type: Set
-    - !type:SpawnEntity
-      entity: BloodTendrilImmobilizeEffect
-    - !type:PlaySoundEffect
-      sound: /Audio/_Trauma/Vampires/vampire_tentacle_hit.ogg
+    - !type:NestedEffect
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - Vampire
+          - VampireThrall
+      proto: BloodTendrils
   - type: TimedDespawn
     lifetime: 1.0
 

@@ -1,4 +1,6 @@
-using Content.Shared.Kitchen.Components; // Trauma - moved microwaved event to shared
+// <Trauma>
+using Content.Shared.Kitchen.Components; // moved microwaved event to shared
+// </Trauma>
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;

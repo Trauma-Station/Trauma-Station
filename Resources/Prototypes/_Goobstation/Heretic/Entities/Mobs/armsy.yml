@@ -206,3 +206,5 @@
   - type: TailedEntitySegment
     segmentSpriteState: armsy_mid
     tailSpriteState: armsy_end
+  - type: ViewconeOccludable
+    useMemory: false

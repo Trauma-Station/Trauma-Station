@@ -95,6 +95,7 @@
   - type: UseDelay
     delay: 0.5 # to avoid tps lag machines
   # Fake interaction stuff
+  - type: CombatMode
   - type: DoAfter
     raiseEndedEvent: true # so Completed can be fired off
   - type: Hands
@@ -116,6 +117,7 @@
     - AutoStart
     - AltInteract
     - UseInHand
+    - HarmMode
   - type: DeviceLinkSource
     ports:
     - Started

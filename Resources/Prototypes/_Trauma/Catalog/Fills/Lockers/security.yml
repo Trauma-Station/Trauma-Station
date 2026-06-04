@@ -201,6 +201,8 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: BoxShotgunTearGas
+      amount: 2
     - id: WeaponGaussgun
       amount: 2
     - id: BaseMagazineGaussgun
@@ -220,7 +222,9 @@
   table: !type:AllSelector
     children:
     - id: Truncheon
-      amount: 6
+      amount: 5
+    - id: ClothingBeltSheathKatanaFilled
+      amount: 2
     - id: SecBreachingHammer
       amount: 2
 

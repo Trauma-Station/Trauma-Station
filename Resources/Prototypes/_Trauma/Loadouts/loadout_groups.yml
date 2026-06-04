@@ -1,3 +1,31 @@
+# PDA
+
+- type: loadoutGroup
+  id: HoPPDA
+  name: loadout-group-hop-id
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - HoPPDA
+  - AltHoPPDA
+- type: loadoutGroup
+  id: CaptainPDA
+  name: loadout-group-captain-id
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CaptainPDA
+  - AltCaptainPDA
+
+- type: loadoutGroup
+  id: NanotrasenRepresentativePDA
+  name: loadout-group-ntr-id
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - NanotrasenRepresentativePDA
+  - AltNanotrasenRepresentativePDA
+
 # Geneticist
 
 - type: loadoutGroup
