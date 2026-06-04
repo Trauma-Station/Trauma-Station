@@ -6,7 +6,6 @@
   components:
   # <Trauma>
   - type: LanguageSpeaker
-  - type: Fart
   - type: CollectiveMind
   - type: SpecialAnimationViewer
   - type: Penetratable
@@ -15,6 +14,7 @@
   - type: AnimatedEmotes
   - type: Viewcone
   - type: ViewconeOccludable # if it can move, you probably can't remember it forever?
+    useMemory: false # forgor
   - type: ViewconeFootstepsEffect # if you can hear it move you will see steps effects on screen
   # </Trauma>
   - type: Sprite
@@ -83,6 +83,7 @@
   abstract: true
   components:
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Destructible
     thresholds:
@@ -263,7 +264,7 @@
   id: MobBloodstream
   abstract: true
   components:
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: InjectableSolution
     solution: bloodstream
   - type: Bloodstream

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from paradise station at https://github.com/ParadiseSS13/Paradise/blob/384de2908eee78ed777d8fe0d8568ef2fd21c2f6/icons/obj/weapons/melee.dmi, https://github.com/ParadiseSS13/Paradise/blob/384de2908eee78ed777d8fe0d8568ef2fd21c2f6/icons/mob/inhands/weapons_righthand.dmi, https://github.com/ParadiseSS13/Paradise/blob/384de2908eee78ed777d8fe0d8568ef2fd21c2f6/icons/mob/inhands/weapons_lefthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "inhand-left",
+        "directions": 4
+    },
+    {
+        "name": "inhand-right",
+        "directions": 4
+    },
+    {
+        "name": "icon"
+    }
+  ]
+}

@@ -531,7 +531,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
     private void OnPurchase(Entity<HereticComponent> ent, ref ListingPurchasedEvent args)
     {
-        if (args.Data.Categories.FirstOrNull() is not { } cat)
+        if (!args.Data.IsCostModified || args.Data.Categories.FirstOrNull() is not { } cat)
             return;
 
         if (!ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount))

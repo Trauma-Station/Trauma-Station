@@ -31,6 +31,7 @@
     - Rororium
     - NanoMachines
     - BlackPowder
+    - PolytrinicAcid
     # </Trauma>
     - Omnizine
     - Impedrezene
@@ -49,6 +50,10 @@
     - Tirizene
     - Hercuri
     - GreyMatter
+    - Atropine
+    - Herignis
+    - Lipozine
+    - Fluorosurfactant
     # </Trauma>
     - Cognizine
     - Toxin
@@ -79,6 +84,10 @@
     - Tilenol
     - Morphine
     - Multiver
+    - Bozaide
+    - Musiver
+    - Tramadol
+    - Microplastics
     # </Trauma>
     - Desoxyephedrine
     - ChloralHydrate
@@ -151,6 +160,9 @@
   - quantity: 10
     weight: 3.5
     reagents:
+    # <Trauma>
+    - Nutriment
+    # <Trauma>
     - Vitamin
     - Kelotane
     - Inaprovaline

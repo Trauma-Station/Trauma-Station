@@ -211,7 +211,6 @@
     - Bible
   - type: StealTarget
     stealGroup: Bible
-  - type: EnchantingTool # Goobstation
   - type: StatusEffectOnCollideGhost # Goobstation
     whitelist:
       tags:

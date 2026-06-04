@@ -14,12 +14,12 @@ public sealed partial class VaporizerSystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    private void ProcessVaporizerTank(EntityUid uid, VaporizerComponent vaporizer, GasTankComponent gasTank, SolutionContainerManagerComponent solutionManager)
+    private void ProcessVaporizerTank(EntityUid uid, VaporizerComponent vaporizer, GasTankComponent gasTank)
     {
         if (gasTank.Air.Pressure >= vaporizer.MaxPressure)
             return;
 
-        if (!_solution.TryGetSolution((uid, solutionManager), vaporizer.LiquidTank, out _, out var solution))
+        if (!_solution.TryGetSolution(uid, vaporizer.LiquidTank, out _, out var solution))
             return;
 
         // Look for a valid reagent
@@ -37,13 +37,13 @@ public sealed partial class VaporizerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var enumerator = EntityQueryEnumerator<VaporizerComponent, GasTankComponent, SolutionContainerManagerComponent>();
+        var enumerator = EntityQueryEnumerator<VaporizerComponent, GasTankComponent>();
 
-        while (enumerator.MoveNext(out var uid, out var vaporizer, out var gasTank, out var solutionManager))
+        while (enumerator.MoveNext(out var uid, out var vaporizer, out var gasTank))
         {
             if (_timing.CurTime >= vaporizer.NextProcess)
             {
-                ProcessVaporizerTank(uid, vaporizer, gasTank, solutionManager);
+                ProcessVaporizerTank(uid, vaporizer, gasTank);
                 vaporizer.NextProcess = _timing.CurTime + vaporizer.ProcessDelay;
             }
         }

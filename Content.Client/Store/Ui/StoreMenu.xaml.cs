@@ -86,7 +86,7 @@ public sealed partial class StoreMenu : DefaultWindow
     {
         var sorted = _cachedListings.OrderBy(l => l.Priority)
                 .ThenBy(l => l.Cost.Values.Sum())
-                .ThenBy(l => l.Name == null ? string.Empty : Loc.GetString(l.Name)); // Trauma
+                .ThenBy(l => l.Name == null ? string.Empty : l.Name); // Trauma
 
         // should probably chunk these out instead. to-do if this clogs the internet tubes.
         // maybe read clients prototypes instead?

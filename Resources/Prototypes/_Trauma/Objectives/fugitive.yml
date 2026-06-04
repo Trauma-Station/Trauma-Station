@@ -15,10 +15,22 @@
   id: BaseHunterObjective
   components:
   - type: Objective
-    issuer: objective-issuer-spacepol
+    issuer: objective-issuer-syndicate
   - type: RoleRequirement
     roles:
     - HunterRole
+
+- type: entity
+  abstract: true
+  parent: [BaseHunterObjective, BaseStealObjective]
+  id: BaseHunterStealObjective
+  components:
+  - type: StealCondition
+    verifyMapExistence: false
+  - type: Objective
+    difficulty: 2.75
+  - type: ObjectiveLimit
+    limit: 2
 
 - type: entity
   parent: [BaseFugitiveObjective, BaseLivingObjective]
@@ -32,6 +44,29 @@
       sprite: Markers/jobs.rsi
       state: prisoner
   - type: EscapeShuttleCondition
+
+- type: entity
+  parent: [BaseFugitiveObjective, BaseKillObjective]
+  id: FugitiveKillObjective
+  name: Kill the snitch
+  description: Snitches get stitches. Did they really believe they would get away with selling you out?
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+      state: base
+  - type: TargetObjective
+    title: objective-condition-kill-person-title
+  - type: PickRandomPerson
+    filters:
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - KillPersonCondition
+  - type: KillPersonCondition
+    requireDead: true
+    requireMaroon: true
 
 - type: entity
   parent: [BaseHunterObjective, BaseKillObjective]
@@ -55,7 +90,7 @@
   parent: [BaseHunterObjective, BaseKillObjective]
   id: HunterArrestFugitiveObjective
   name: Apprehend the fugitive
-  description: Locate the fugitive using the report and ensure they do not escape on the evacuation shuttle. Bring them to justice, dead or alive.
+  description: Locate the fugitive using the report and ensure they do not escape on the evacuation shuttle. Bring them to justice, alive.
   components:
   - type: Objective
     difficulty: 1.5
@@ -68,3 +103,205 @@
   - type: KillPersonCondition
     requireDead: false
     requireMaroon: true
+
+- type: entity
+  parent: [BaseHunterObjective, BaseKillObjective]
+  id: HunterKillRandomPersonObjective
+  description: While you're there, do us this favour.
+  components:
+  - type: Objective
+    difficulty: 1.75
+    unique: false
+  - type: TargetObjective
+    title: objective-condition-kill-maroon-title
+  - type: PickRandomPerson
+    filters:
+    - !type:TargetObjectiveMindFilter
+      blacklist:
+        components:
+        - KillPersonCondition
+  - type: KillPersonCondition
+    requireDead: true
+    requireMaroon: true
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealNukeDiskObjective
+  components:
+  - type: Objective
+    difficulty: 4
+  - type: StealCondition
+    stealGroup: NukeDisk
+    owner: objective-condition-steal-station
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealHyposprayObjective
+  components:
+  - type: StealCondition
+    stealGroup: Hypospray
+    owner: job-name-cmo
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealHandTeleporterObjective
+  components:
+  - type: StealCondition
+    stealGroup: HandTeleporter
+    owner: job-name-rd
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealRDHardsuitObjective
+  components:
+  - type: Objective
+    difficulty: 3
+  - type: StealCondition
+    stealGroup: ClothingOuterHardsuitRd
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealMagbootsObjective
+  components:
+  - type: StealCondition
+    stealGroup: ClothingShoesBootsMagAdv
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealClipboardObjective
+  components:
+  - type: StealCondition
+    stealGroup: BoxFolderQmClipboard
+    owner: job-name-qm
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealKnuckleDustersObjective
+  components:
+  - type: StealCondition
+    stealGroup: ClothingHandsKnuckleDustersQM
+    owner: job-name-qm
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealCorgiMeatObjective
+  components:
+  - type: ObjectiveLimit
+    limit: 3
+  - type: StealCondition
+    stealGroup: FoodMeatCorgi
+    owner: objective-condition-steal-Ian
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealCaptainJetpackObjective
+  components:
+  - type: StealCondition
+    stealGroup: JetpackCaptainFilled
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealCaptainGunObjective
+  components:
+  - type: StealCondition
+    stealGroup: WeaponAntiqueLaser
+    owner: job-name-captain
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealLawbringerObjective
+  components:
+  - type: Objective
+    difficulty: 3
+  - type: NotJobRequirement
+    jobs: [ HeadOfSecurity ]
+  - type: StealCondition
+    stealGroup: WeaponEnergyGunLawbringer
+    owner: job-name-hos
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealJusticeObjective
+  components:
+  - type: Objective
+    difficulty: 5
+  - type: NotJobRequirement
+    jobs: [ HeadOfSecurity ]
+  - type: StealCondition
+    stealGroup: WeaponSecHeadSword
+    owner: job-name-hos
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealCMORapidSyringeGunObjective
+  components:
+  - type: Objective
+    difficulty: 3
+  - type: StealCondition
+    stealGroup: RapidSyringeGun
+    owner: job-name-cmo
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealExecutiveBriefcaseObjective
+  components:
+  - type: Objective
+    difficulty: 3
+  - type: NotJobRequirement
+    jobs: [ NanotrasenRepresentative ]
+  - type: StealCondition
+    stealGroup: ExecutiveBriefcase
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealGeminiProjectorObjective
+  components:
+  - type: Objective
+    difficulty: 3.5
+  - type: NotJobRequirement
+    jobs: [ ResearchDirector ]
+  - type: StealCondition
+    stealGroup: ClothingBeltGeminiHoloProjector
+    descriptionText: objective-condition-steal-gemini-projector-description
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealFlippoLighterObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Detective ]
+  - type: StealCondition
+    stealGroup: FlippoEngravedLighter
+  - type: Objective
+    difficulty: 0.8
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealFireAxeObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ AtmosphericTechnician ]
+  - type: StealCondition
+    stealGroup: FireAxe
+  - type: Objective
+    difficulty: 0.8
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealCEToolbeltObjective
+  components:
+  - type: StealCondition
+    stealGroup: ChiefEngineerToolBelt
+  - type: Objective
+    difficulty: 0.7
+
+- type: entity
+  parent: BaseHunterStealObjective
+  id: HunterStealCaptainSwordObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain ]
+  - type: StealCondition
+    stealGroup: CaptainSword
+  - type: Objective
+    difficulty: 1.5

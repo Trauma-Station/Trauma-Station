@@ -5,3 +5,9 @@
 - type: contrabandSeverity
   id: RevMajor
   examineText: contraband-examine-text-RevMajor
+
+# These toys belong to the clown, give them back or get honked
+- type: contrabandSeverity
+  id: Honkraband
+  examineText: contraband-examine-text-Clown
+  color: pink

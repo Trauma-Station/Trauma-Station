@@ -18,8 +18,9 @@
         - FullTileMask
         layer:
         - WallLayer
-  - type: Damageable
+  - type: Injurable
     damageContainer: StructuralInorganic
+  - type: Damageable
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger

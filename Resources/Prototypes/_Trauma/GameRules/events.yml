@@ -23,7 +23,6 @@
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: ParadoxCloneSpawn
     - id: MorphRule
-    - id: FugitiveSpawn
 
 - type: entityTable
   id: ModerateAntagEventsTrauma
@@ -35,6 +34,7 @@
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
+    - id: FugitiveSpawn
 
 - type: entity
   parent: BaseGameRule
@@ -106,26 +106,26 @@
     startAnnouncement: station-event-vent-creatures-start-announcement
     startAudio:
       path: /Audio/Announcements/attention.ogg
-    minimumPlayers: 15
-    weight: 5
+    minimumPlayers: 30
+    weight: 3
     duration: 5
     reoccurrenceDelay: 30
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 6, 8
+      rolls: 4, 8
       children:
       - id: MobCoconutCrab
+        weight: 0.75
       - id: MobCrabTiny
-        weight: 0.625 # Not as scary so make rarer in the event, shrimple as.
       - id: MobCoconutCrabFloofy # because it looks funny
         weight: 0.05 # NEVER BASICALLY
 
 - type: entity
+  parent: BaseAntagGhostRoleRule
   id: FugitiveSpawn
-  parent: BaseGameRule
   components:
   - type: StationEvent
-    weight: 10
+    weight: 3
     duration: null
     earliestStart: 10
     minimumPlayers: 30
@@ -137,63 +137,42 @@
   - type: AntagObjectives
     objectives:
     - FugitiveEscapeObjective
+    - FugitiveKillObjective
   - type: AntagSelection
     agentName: ghost-role-information-fugitive-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostRoleFugitive
-      min: 2
-      max: 2
-      pickPlayer: false
-      startingGear: FugitiveAntagGear
-      briefing:
-        text: fugitive-role-greeting
-        color: Orange
-        sound: /Audio/Misc/thief_greeting.ogg
-      components:
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: RandomMetadata
-      - type: EmitSoundOnSpawn # fell out of the ceiling
-        sound: /Audio/Effects/clang.ogg
-      mindRoles:
-      - MindRoleGhostRoleFugitive
+    antags:
+    - !type:FixedAntagCount
+      proto: Fugitive
+      count: 2
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
       proto: TraitorSkills
 
-
 - type: entity
+  parent: BaseAntagGhostRoleRule
   id: FugitiveHunterRule
-  parent: BaseGameRule
   components:
   - type: AntagGhostCharacterRule
   - type: AntagObjectives
     objectives:
     - HunterKillFugitiveObjective
     - HunterArrestFugitiveObjective
+    - HunterKillRandomPersonObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: HunterObjectiveGroups
+      maxPicks: 3
+    maxDifficulty: 5
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
   - type: AntagSelection
-    agentName: ghost-role-information-fugitive-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostRoleHunter
-      min: 2
-      max: 2
-      pickPlayer: false
-      startingGear: HunterAntagGear
-      briefing:
-        text: hunter-role-greeting
-        color: Blue
-      components:
-      - type: NpcFactionMember
-        factions:
-        - Syndicate
-      - type: RandomMetadata
-      mindRoles:
-      - MindRoleGhostRoleHunter
+    agentName: ghost-role-information-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunter
+      count: 2
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect

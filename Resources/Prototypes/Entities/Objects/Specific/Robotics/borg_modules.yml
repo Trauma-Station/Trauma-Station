@@ -650,7 +650,7 @@
     - item: MiningDrillDiamond
     - item: Shovel
     - item: AdvancedMineralScannerUnpowered
-    - item: OreBagOfHolding
+    - item: BorgOreBagOfHolding
     - item: WeaponProtoKineticAccelerator # Goob
       hand:
         emptyRepresentative: BorgModulePKAPlaceholder

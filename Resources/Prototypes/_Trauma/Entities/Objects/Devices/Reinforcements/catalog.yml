@@ -161,10 +161,10 @@
   restockAfterPurchase: 60
 
 - type: listing
-  id: SecoffReinforcementSpecialistCorpsman
-  name: reinforcement-sec-specialist-corpsman-name
-  description: reinforcement-sec-specialist-corpsman-desc
-  productEntity: ReinforcementBeaconSpecialistOfficerCorpsman
+  id: SecoffReinforcementSpecialistBrigmedic
+  name: reinforcement-sec-specialist-brigmedic-name
+  description: reinforcement-sec-specialist-brigmedic-desc
+  productEntity: ReinforcementBeaconSpecialistOfficerBrigmedic
   icon:
     sprite: Markers/jobs.rsi
     state: brigmedic
@@ -174,7 +174,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 600
 
 - type: listing
   id: ReinforcementCadet

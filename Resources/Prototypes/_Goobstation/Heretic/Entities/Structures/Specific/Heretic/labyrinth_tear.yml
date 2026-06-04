@@ -45,8 +45,6 @@
         - Ghoul
       guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
     effects:
-    - !type:GenericStatusEffect
-      key: TemporaryBlindness
-      component: TemporaryBlindness
-      type: Update
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectBlindness
       time: 20

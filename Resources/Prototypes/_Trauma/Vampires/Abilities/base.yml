@@ -1,0 +1,74 @@
+- type: vampireAbility
+  id: RejuvenateI
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionVampRejuvenateI
+
+- type: vampireAbility
+  id: Glare
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionVampireGlare
+
+- type: vampireAbility
+  id: CreateLair
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionCreateLair
+
+- type: vampireAbility
+  id: RejuvenateII
+  blacklistClass: Gargantua # they get their own rej where it heals based on damage as "passive" once they spec
+  cost: 200
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionVampRejuvenateII
+  - !type:RemoveActions
+    actions:
+    - ActionVampRejuvenateI
+  - !type:PopupPredicted
+    message: You feel like your rejuvenate got upgraded!
+    visualType: Large
+
+- type: vampireAbility
+  id: ChooseSpecialization
+  cost: 150
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionChooseSpecialization
+  - !type:PopupPredicted
+    message: You unlock the ability to specialize.
+    visualType: Large
+
+- type: vampireAbility
+  id: NightVision
+  cost: 500
+  onUnlock:
+  - !type:AddComponents
+    components:
+    - type: NightVision
+  - !type:PopupPredicted
+    message: You gain night vision.
+    visualType: Large
+
+- type: vampireAbility
+  id: BaseFullPower
+  cost: 1000
+  conditions:
+  - !type:HasSuckedVictimsCondition
+    amount: 7
+  onUnlock:
+  - !type:RemoveComponents
+    components:
+    - type: AreaDetector
+    - type: WeakToHoly
+    - type: Nullification
+    - type: AlwaysTakeHoly
+  - !type:PopupPredicted
+    message: You have reached full power!
+    visualType: Large

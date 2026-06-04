@@ -1,0 +1,29 @@
+- type: entity
+  parent: BaseEnchant
+  id: CurseClumsy
+  name: The Clowns Curse
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - Clothing
+      - Armor
+  - type: ComponentsEnchant
+    added:
+    - type: ClothingGrantComponent
+      component:
+      - type: Clumsy
+        gunShootFailDamage:
+          types:
+            Blunt: 5
+            Piercing: 4
+            Heat: 3
+        catchingFailDamage:
+          types:
+            Blunt: 1
+      - type: SleepEmitSound
+        snore: /Audio/Voice/Misc/silly_snore.ogg
+        interval: 10
+      - type: SpeechFontOverride
+        font: LDFComicSans

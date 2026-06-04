@@ -1,0 +1,29 @@
+- type: startingGear
+  parent: SyndicateOperativeClothing
+  id: SyndicateReinforcementGrenadier
+  equipment:
+    pocket1: WeaponPistolViper
+  storage:
+    back:
+    - ExGrenade # 1
+    - ExGrenade # 2
+    - EmpGrenade # 1
+    - EmpGrenade # 2
+    - C4 # 1
+    - C4 # 2
+    - C4 # 3
+    - C4 # 4
+    - RemoteSignallerAdvanced
+    - NetworkConfigurator
+
+- type: startingGear
+  parent: SyndicateOperativeClothing
+  id: SyndicateReinforcementHitman
+  equipment:
+    eyes: ClothingEyesGlassesHiddenSecurity
+    pocket1: WeaponPistolCobra
+  storage:
+    back:
+    - BriefcaseWeaponHushpupFilled
+    - MagazinePistolCaselessRifle
+    - BoxLethalshot

@@ -50,7 +50,7 @@ public sealed partial class WandskySystem : EntitySystem
         ent.Comp.MasterEntity = args.Used;
 
         Dirty(ent);
-        _audio.PlayPvs(commander.EnslaveSound, ent);
+        _audio.PlayPredicted(commander.EnslaveSound, ent, args.User);
     }
 
     public void OnTogglePatrol(Entity<PatrolCommanderComponent> ent, ref TogglePatrolActionEvent args)

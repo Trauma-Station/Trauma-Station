@@ -338,6 +338,24 @@
   id: MindRoleChangeling
   name: Changeling Role
   components:
+  # <Trauma>
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+        interactionRange: 0 # no range or validation because it's on the role and would immediately get closed
+        requireInputValidation: false
+  - type: Store
+    name: store-preset-name-changeling
+    categories:
+    - ChangelingAbilityCombat
+    - ChangelingAbilitySting
+    - ChangelingAbilityUtility
+    currencyWhitelist:
+    - EvolutionPoint
+    balance:
+      EvolutionPoint: 6
+  # </Trauma>
   - type: MindRole
     antagPrototype: Changeling
     exclusiveAntag: true

@@ -155,3 +155,4 @@
     balance:
       Telecrystal: 999999 # Goob - 10x
     expectedFaction: #nulls out the expected faction
+    ignoreListingConditions: true # Trauma # Holy shit, how did we not have an actual DEBUG uplink that has EVERYTHING yet. Having to juggle multiple uplinks because the "debug" one was just a base uplink with more tc is so fucking dumb.

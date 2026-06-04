@@ -148,7 +148,7 @@
     drawdepth: Effects # Draw above trail
   - type: Clickable
   - type: InteractionOutline
-  - type: Damageable
+  - type: Damageable # gets relayed to the heretics mob
   - type: RotationVisuals
   - type: Appearance
   - type: AnimationPlayer
@@ -382,6 +382,7 @@
   - type: InteractionOutline
   - type: Clickable
   - type: Damageable
+  - type: Injurable
     damageContainer: InorganicMetaphysical
   - type: Destructible
     thresholds:

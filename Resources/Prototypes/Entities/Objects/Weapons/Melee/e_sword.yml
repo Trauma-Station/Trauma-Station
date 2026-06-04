@@ -243,8 +243,9 @@
       types:
         Slash: 10
         Heat: 10
-      woundSeverityMultipliers:
+      woundSeverityMultipliers: # Trauma
         Slash: 1
+    deactivatedSecret: true
   - type: ComponentToggler
     components:
     - type: Sharp

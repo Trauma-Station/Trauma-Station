@@ -22,7 +22,7 @@
       map: ["light"]
       visible: false
   - type: BorgChassis
-    maxModules: 7
+    maxModules: 8 # Trauma - was 7
     hasMindState: xenoborg_engi_e
     noMindState: xenoborg_engi_e_r
     moduleWhitelist:
@@ -31,6 +31,7 @@
       - XenoborgModuleEngi
       - BorgModuleEngineering
       - BorgModuleGeneric
+      - BorgModuleJanitor # Trauma
   - type: ContainerFill
     containers:
       borg_brain:
@@ -43,6 +44,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
+      - BorgModuleAdvancedCleaning # Trauma
   - type: ShowElectrocutionHUD
   - type: ShowHealthBars
     damageContainers:
@@ -107,6 +109,7 @@
     baseSprintSpeed : 2.2
   - type: MovementAlwaysTouching # it flies in space by pure will power
   - type: FlashImmunity
+    showInExamine: false
   - type: MobThresholds # tankier
     thresholds:
       0: Alive
@@ -208,6 +211,7 @@
       collection: FootstepHoverXenoborg
   - type: MovementAlwaysTouching # it flies in space with tiny thrusters
   - type: FlashImmunity
+    showInExamine: false
   - type: BorgChassis
     maxModules: 4
     hasMindState: xenoborg_scout_e
@@ -341,6 +345,7 @@
       - BorgModuleCable
       - XenoborgModuleAccessBreaker
       - XenoborgModuleFireExtinguisher
+      - BorgModuleAdvancedCleaning # Trauma
   - type: ItemSlots
     slots:
       cell_slot:

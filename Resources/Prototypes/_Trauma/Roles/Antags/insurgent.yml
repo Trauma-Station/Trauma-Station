@@ -9,6 +9,18 @@
     time: 5h
   guides: [ Insurgents ]
 
+- type: antagSpecifier
+  id: Insurgent
+  spawnerPrototype: GhostRoleSpawnerInsurgent
+  startingGear: Insurgent
+  unequipOldGear: true
+  prefRoles: [ Insurgent ]
+  mindRoles: [ MindRoleInsurgent ]
+  roleLoadout: [ RoleSurvivalStandard ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+
 - type: startingGear
   id: Insurgent
   equipment:

@@ -1,3 +1,13 @@
+- type: listing
+  id: AccessConfiguratorSyndicate
+  name: uplink-syndicate-access-config-name
+  description: uplink-syndicate-access-config-desc
+  productEntity: AccessConfiguratorSyndicate
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkDisruption
+
 # upstream removed it lol
 - type: listing
   id: UplinkSuperSurplusBundle
@@ -6,6 +16,7 @@
   productEntity: CrateSyndicateSuperSurplusBundle
   cost:
     Telecrystal: 200
+  discountCategory: null # WAY too free
   categories:
   - UplinkDisruption
   conditions:
@@ -18,26 +29,3 @@
     blacklist:
       components:
       - SurplusBundle
-
-- type: listing
-  id: AccessConfiguratorSyndicate
-  name: uplink-syndicate-access-config-name
-  description: uplink-syndicate-access-config-desc
-  productEntity: AccessConfiguratorSyndicate
-  cost:
-    Telecrystal: 10
-  categories:
-  - UplinkDisruption
-
-# - type: listing
-#   id: UplinkXenomorphBundle
-#   name: uplink-xenomorph-compatibility-bundle-name
-#   description: uplink-xenomorph-compatibility-bundle-desc
-#   icon:
-#     sprite: /Textures/Structures/Storage/Crates/syndicate.rsi
-#     state: icon
-#   productEntity: CrateXenomorphBundle
-#   cost:
-#     Telecrystal: 100
-#   categories:
-#   - UplinkDisruption

@@ -1,0 +1,23 @@
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: BaseDemonSoulFragment
+  name: demonic soul fragment
+  description: The soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 1
+    color: "#9a0000"
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Tag
+    tags:
+    - DemonEssense

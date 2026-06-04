@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseItem
+  id: VampiricClaws
+  name: Claws of Blood
+  description: Remove bonus blood from the target on hit.
+  components:
+  - type: Execution
+    doAfterDuration: 4.0
+  - type: Sprite
+    sprite: _Trauma/Vampires/vampiric_claws.rsi
+    state: icon
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+      params:
+        pitch: 1.2
+    animation: WeaponArcSlash
+    wideAnimationRotation: 90
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 6
+  - type: DisarmMalus
+    malus: 0
+  - type: Item
+    size: Normal
+    sprite: _Trauma/Vampires/vampiric_claws.rsi
+  - type: EffectsOnMeleeHit
+    targetConditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Bloodstream
+      blacklist:
+        tags:
+        - VimPilot # monkey blood spam doesn't count
+    userEffects:
+    - !type:AdjustVampireBlood
+      amount: 5
+    targetEffects:
+    - !type:ModifyBloodLevel
+      amount: -10
+    - !type:SpawnParticles
+      particleProto: BloodParticles
+  - type: Durability
+    damageProbability: 1.0
+    minDamageRoll: 1
+    maxDamageRoll: 1
+    repairable: false
+    durabilityThresholds:
+      0: Pristine
+      15: Destroyed
+  - type: TriggerOnUse
+  - type: DeleteOnTrigger
+  - type: EmitSoundOnTrigger
+    predicted: true
+    sound:
+      collection: gib

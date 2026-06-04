@@ -48,7 +48,7 @@
     distance: 3 # Goobstation
     speed: 5
   - type: KnockdownOnHit
-    duration: 0
+    duration: 1
     knockdownOnHeavyAttack: false
 
 - type: entity

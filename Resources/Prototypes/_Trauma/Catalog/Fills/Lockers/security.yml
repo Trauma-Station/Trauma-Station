@@ -10,8 +10,9 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafeLaserCarbine
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Gunsafes
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: StationAlertLevelLock
     lockedAlertLevels:
     - green
@@ -157,6 +158,21 @@
       entity_storage: !type:NestedSelector
         tableId: FillGunSafePhaser
 
+- type: entity
+  parent: BaseTraumaGunSafe
+  id: GunSafeHunter
+  name: gun safe
+  suffix: Hunter, Locked
+  components:
+  - type: StationAlertLevelLock
+    lockedAlertLevels: [ ]
+  - type: AccessReader
+    access: [ ["SyndicateAgent"] ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillGunHunter
+
 - type: entityTable
   id: FillGunSafeRiot
   table: !type:AllSelector
@@ -185,6 +201,8 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: BoxShotgunTearGas
+      amount: 2
     - id: WeaponGaussgun
       amount: 2
     - id: BaseMagazineGaussgun
@@ -204,7 +222,9 @@
   table: !type:AllSelector
     children:
     - id: Truncheon
-      amount: 6
+      amount: 5
+    - id: ClothingBeltSheathKatanaFilled
+      amount: 2
     - id: SecBreachingHammer
       amount: 2
 
@@ -221,3 +241,16 @@
     children:
     - id: WeaponLaserSidearm
       amount: 5
+
+- type: entityTable
+  id: FillGunHunter
+  table: !type:AllSelector
+    children:
+    - id: WeaponShotgunEnforcerRubber
+      amount: 2
+    - id: BoxBeanbag
+      amount: 2
+    - id: MagazineBoxPistol
+      amount: 2
+    - id: RiotLaserShield
+    - id: SecBreachingHammer

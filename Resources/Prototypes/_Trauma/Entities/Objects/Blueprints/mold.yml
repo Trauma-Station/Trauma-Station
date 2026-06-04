@@ -13,3 +13,20 @@
   - type: Tag
     tags:
     - ForgeMold
+
+- type: entity
+  parent: [ BaseItem, BaseRevMinorContraband ]
+  id: BlueprintRevMelees
+  name: melee upgrades mold
+  description: A mold for some new melee weapons. It can be inserted into an industrial forge.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/mold.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - ForgeMold
+  - type: Blueprint
+    providedRecipes:
+    - RevMaul
+    - RevKunai

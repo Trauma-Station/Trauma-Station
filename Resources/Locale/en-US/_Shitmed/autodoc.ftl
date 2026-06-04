@@ -71,6 +71,7 @@ autodoc-body-part-Hand = Hand
 autodoc-body-part-Leg = Leg
 autodoc-body-part-Foot = Foot
 autodoc-body-part-Tail = Tail
+autodoc-body-part-Wings = Wings
 
 autodoc-body-symmetry-ignored = Any
 autodoc-body-symmetry-None = None

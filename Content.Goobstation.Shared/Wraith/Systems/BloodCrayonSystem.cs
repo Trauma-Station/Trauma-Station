@@ -7,12 +7,19 @@ using Content.Shared.Crayon;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
+
 public sealed partial class BloodCrayonSystem : EntitySystem
 {
-    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private WraithPointsSystem _wpSystem = default!;
+
+    private static readonly EntityWhitelist CrayonWhitelist = new()
+    {
+        Components = ["BloodCrayon"]
+    };
 
     public override void Initialize()
     {
@@ -29,16 +36,17 @@ public sealed partial class BloodCrayonSystem : EntitySystem
 
         if (ent.Comp.BloodCrayon == null)
         {
-            _handsSystem.AddHand(ent.Owner, ent.Comp.HandName, HandLocation.Middle);
+            _hands.AddHand(ent.Owner, ent.Comp.HandName, HandLocation.Middle,
+                emptyRepresentative: ent.Comp.BloodCrayonEntId, whitelist: CrayonWhitelist);
 
             var crayon = PredictedSpawnAtPosition(ent.Comp.BloodCrayonEntId, Transform(ent.Owner).Coordinates);
-            _handsSystem.TryForcePickup(ent.Owner, crayon, ent.Comp.HandName, false);
+            _hands.TryForcePickup(ent.Owner, crayon, ent.Comp.HandName, false);
 
             ent.Comp.BloodCrayon = crayon;
         }
         else
         {
-            _handsSystem.RemoveHand(ent.Owner, ent.Comp.HandName);
+            _hands.RemoveHand(ent.Owner, ent.Comp.HandName);
             PredictedQueueDel(ent.Comp.BloodCrayon);
             ent.Comp.BloodCrayon = null;
         }

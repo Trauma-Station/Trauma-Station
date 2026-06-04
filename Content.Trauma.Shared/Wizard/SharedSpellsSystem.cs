@@ -21,6 +21,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Friction;
 using Content.Shared.Ghost;
@@ -53,7 +54,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Speech.Components;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Speech.Muting;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
@@ -117,7 +118,8 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private Content.Shared.StatusEffect.StatusEffectsSystem _statusOld = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedJitteringSystem _jitter = default!;
     [Dependency] private SharedStutteringSystem _stutter = default!;
@@ -262,7 +264,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         if (!targetWizard)
             MakeMime(ev.Target);
         else
-            _statusEffects.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true);
+            _statusOld.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true);
 
         ev.Handled = true;
     }
@@ -277,7 +279,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
         var (coords, mapCoords, spawnCoords, velocity) = GetProjectileData(ev.Performer);
 
-        var targets = Lookup.GetEntitiesInRange<StatusEffectsComponent>(coords, ev.Range, LookupFlags.Dynamic);
+        var targets = Lookup.GetEntitiesInRange<MobStateComponent>(coords, ev.Range, LookupFlags.Dynamic);
         var hasTargets = false;
 
         foreach (var (target, _) in targets)
@@ -421,20 +423,12 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         if (HasComp<GhostComponent>(ev.Target) || HasComp<SpectralComponent>(ev.Target))
             return;
 
-        if (!TryComp(ev.Target, out StatusEffectsComponent? status))
-            return;
+        _status.TryUpdateStatusEffectDuration(ev.Target, BlindnessSystem.BlindingStatusEffect, ev.BlindDuration);
 
-        _statusEffects.TryAddStatusEffect<TemporaryBlindnessComponent>(ev.Target,
-            "TemporaryBlindness",
-            ev.BlindDuration,
-            true,
-            status);
-
-        _statusEffects.TryAddStatusEffect<BlurryVisionComponent>(ev.Target,
+        _statusOld.TryAddStatusEffect<BlurryVisionComponent>(ev.Target,
             "BlurryVision",
             ev.BlurDuration,
-            true,
-            status);
+            true);
 
         if (_net.IsServer)
         {

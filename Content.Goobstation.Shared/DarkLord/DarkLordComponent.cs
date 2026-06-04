@@ -5,5 +5,9 @@ namespace Content.Goobstation.Shared.DarkLord;
 [RegisterComponent]
 public sealed partial class DarkLordComponent : Component
 {
+    [DataField]
     public float ChosenOneChance = 0.25f;
+
+    [DataField]
+    public EntProtoId Rule = "ChosenOneMidround";
 }

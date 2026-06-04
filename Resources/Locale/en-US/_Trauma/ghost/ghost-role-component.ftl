@@ -9,7 +9,7 @@ ghost-role-information-reinforcement-specialist-heavy-laser-name = Station Reinf
 ghost-role-information-reinforcement-specialist-shield-name = Station Reinforcement (Security Specialist - Shield)
 ghost-role-information-reinforcement-specialist-bodyguard-name = Station Reinforcement (Security Specialist - Bodyguard)
 ghost-role-information-reinforcement-specialist-advisor-name = Station Reinforcement (Security Specialist - Advisor)
-ghost-role-information-reinforcement-specialist-corpsman-name = Station Reinforcement (Security Specialist - Corpsman)
+ghost-role-information-reinforcement-specialist-brigmedic-name = Station Reinforcement (Security Specialist - Brigmedic)
 ghost-role-information-reinforcement-cadet-name = Station Reinforcement (Security Cadet)
 
 ghost-role-information-reinforcement-doctor-name = Station Reinforcement (Doctor)
@@ -66,6 +66,9 @@ ghost-role-information-coconutcrab-name = Coconut Crab
 ghost-role-information-goidabot-name = goida bot
 ghost-role-information-goidabot-desc = ГОЙДА
 
+ghost-role-information-cursed-name = cursed artifact
+ghost-role-information-cursed-desc = You are an artifact cursed with sentience, drive your wielder insane.
+
 ghost-role-information-animal-name = An animal
 ghost-role-information-animal-rules = You are an [color={role-type-animal-color}][bold]{role-type-animal-name}[/bold][/color]. Act like the animal you are does.
                                          This means to not go around killing people / causing problems for no reason.
@@ -87,9 +90,21 @@ ghost-role-information-pirate-captain-name = Pirate Scooner Captain
 ghost-role-information-pirate-captain-description = Order your crewmen around. Get rich.
 
 ghost-role-information-hunter-name = Fugitive Hunter
-ghost-role-information-hunter-description = You're a Fugitive Hunter. Catch the fugitives.
+ghost-role-information-hunter-description = You are a Syndicate Recovery Agent disguised as a Space Police Officer. You have been tasked with catching the fugitives hiding out in this station. Do not get caught. Do not fail.
 ghost-role-information-hunter-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color]. Focus on catching the fugitives. Try not to kill them or security in the process.
 
 ghost-role-information-fugitive-name = Fugitive
-ghost-role-information-fugitive-description = You're an escaped prisoner. Make it out alive.
+ghost-role-information-fugitive-description = You are a Syndicate Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
 ghost-role-information-fugitive-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-solo-antagonist-name}[/bold][/color]. Focus on laying low rather than engaging the hunters or security directly.
+
+ghost-role-information-syndicate-reinforcement-grenadier-name = Syndicate Grenadier
+ghost-role-information-syndicate-reinforcement-grenadier-description = Someone needs reinforcements. Your expertise is in explosions, use it well.
+
+ghost-role-information-syndicate-reinforcement-hitman-name = Syndicate Hitman
+ghost-role-information-syndicate-reinforcement-hitman-description = Someone needs reinforcements. Your objective is to dispatch of someone that your agent needs gone.
+
+ghost-role-information-demon-name = Demon
+ghost-role-information-demon-desc = KILL THOSE WHO DARE SUMMON YOU!!!
+
+ghost-role-information-demon-tame-name = Demon
+ghost-role-information-demon-tame-desc = Your will is bound to those who summoned you...

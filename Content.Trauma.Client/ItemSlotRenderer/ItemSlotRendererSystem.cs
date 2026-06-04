@@ -10,11 +10,8 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Reflection;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Trauma.Client.ItemSlotRenderer;
 
@@ -27,6 +24,7 @@ public sealed partial class ItemSlotRendererSystem : EntitySystem
     [Dependency] private ItemSlotsSystem _slot = default!;
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -60,35 +58,42 @@ public sealed partial class ItemSlotRendererSystem : EntitySystem
 
     private void OnStartup(EntityUid uid, ItemSlotRendererComponent comp, ComponentStartup args)
     {
-        if(!TryComp<SpriteComponent>(uid, out var sprite))
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
         {
             Log.Error($"ItemSlotRendererComponent requires SpriteComponent to work, but {ToPrettyString(uid)} did not have one. Removing ItemSlotRenderer.");
-            RemComp<ItemSlotRendererComponent>(uid);
+            RemComp(uid, comp);
             return;
         }
 
-        foreach (var kvp in comp.PrototypeLayerMappings)
+        foreach (var (slotId, mapKey) in comp.PrototypeLayerMappings)
         {
-
-            (string slotId, object mapKey) = kvp;
-            bool isEnum = false;
-            if (_reflection.TryParseEnumReference((string)mapKey, out var e))
+            var layer = 0;
+            var ent = (uid, sprite);
+            if (_reflection.TryParseEnumReference(mapKey, out var e))
             {
-                mapKey = e;
-                isEnum = true;
+                if (!_sprite.LayerMapTryGet(ent, e, out layer, comp.ErrorOnMissing))
+                {
+                    if (comp.ErrorOnMissing)
+                        Log.Error($"{ToPrettyString(uid)}: Tried to add a missing layer under the enum key {mapKey}. Skipping missing layer. If this is unwanted, set component's ErrorOnMissing to false.");
+                    continue;
+                }
             }
-            if (!sprite.LayerMapTryGet(mapKey, out _) && comp.ErrorOnMissing)
+            else if (!_sprite.LayerMapTryGet(ent, mapKey, out layer, comp.ErrorOnMissing))
             {
-                Log.Warning($"ItemSlotRenderer: Tried to add a missing layer under the {(isEnum ? "enum" : "string")} key {mapKey}. Skipping missing layer. If this is unwanted, set component's ErrorOnMissing to false.");
+                if (comp.ErrorOnMissing)
+                    Log.Error($"{ToPrettyString(uid)}: Tried to add a missing layer under the string key {mapKey}. Skipping missing layer. If this is unwanted, set component's ErrorOnMissing to false.");
                 continue;
             }
 
-            if(_slot.TryGetSlot(uid, slotId, out var slot))
+            if (_slot.TryGetSlot(uid, slotId, out var slot))
                 comp.CachedEntities[slotId] = slot.Item;
 
-            comp.LayerMappings.Add((mapKey, slotId));
+            comp.LayerMappings.Add((layer, slotId));
 
-            comp.CachedRT.Add(slotId, _clyde.CreateRenderTarget(comp.RenderTargetSize, new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), new TextureSampleParameters { Filter = false }, $"{slotId}-itemrender-rendertarget"));
+            comp.CachedRT.Add(slotId, _clyde.CreateRenderTarget(comp.RenderTargetSize,
+                new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb),
+                new TextureSampleParameters { Filter = false },
+                $"{slotId}-itemrender-rendertarget"));
         }
     }
 }
@@ -99,7 +104,8 @@ public sealed partial class ItemSlotRendererSystem : EntitySystem
 /// </summary>
 public sealed partial class SpriteToLayerBullshitOverlay : Overlay
 {
-    [Dependency] private EntityManager _entMan = default!;
+    [Dependency] private EntityManager _ent = default!;
+    private SpriteSystem? _sprite;
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpaceBelowWorld;
 
@@ -110,15 +116,17 @@ public sealed partial class SpriteToLayerBullshitOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        _sprite ??= _ent.System<SpriteSystem>();
+
         var handle = args.ScreenHandle;
-        var query = _entMan.EntityQueryEnumerator<ItemSlotRendererComponent, SpriteComponent>();
+        var query = _ent.EntityQueryEnumerator<ItemSlotRendererComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var comp, out var sprite))
         {
+            var ent = (uid, sprite);
             for (int i = 0; i < comp.LayerMappings.Count; i++)
             {
-                var (layerKey, slotId) = comp.LayerMappings[i];
-                if (!sprite.LayerMapTryGet(layerKey, out int layerIndex) ||
-                    !sprite.TryGetLayer(layerIndex, out var layer)) // verify that the layer actually exists
+                var (index, slotId) = comp.LayerMappings[i];
+                if (!_sprite.TryGetLayer(ent, index, out var layer, true)) // verify that the layer actually exists
                     continue;
 
                 // if for some reason we can't render the item to a texture (or there is no item to render),
@@ -127,7 +135,7 @@ public sealed partial class SpriteToLayerBullshitOverlay : Overlay
                     !comp.CachedRT.TryGetValue(slotId, out var renderTarget))
                 {
                     if (layer.Texture != Texture.Transparent)
-                        sprite.LayerSetTexture(layerIndex, Texture.Transparent);
+                        _sprite.LayerSetTexture(layer, Texture.Transparent);
                     continue;
                 }
 
@@ -135,7 +143,7 @@ public sealed partial class SpriteToLayerBullshitOverlay : Overlay
                 {
                     handle.DrawEntity(item, renderTarget.Size / 2, Vector2.One, 0); // If this throws due to a missing spritecomp, it's your fault.
                 }, Color.Transparent);
-                sprite.LayerSetTexture(layerIndex, renderTarget.Texture);
+                _sprite.LayerSetTexture(layer, renderTarget.Texture);
             }
         }
     }

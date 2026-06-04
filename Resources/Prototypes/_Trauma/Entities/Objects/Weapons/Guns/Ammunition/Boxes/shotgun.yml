@@ -14,3 +14,35 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: breaching
+
+- type: entity
+  parent: [ AmmoProviderShotgunShell, BaseSyndicateContraband ]
+  id: BoxShotgunHypo
+  name: shell box (hypo)
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHypo
+    capacity: 4
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Boxes/shotgun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: hypo
+
+- type: entity
+  parent: [ AmmoProviderShotgunShell, BaseSecurityContraband ]
+  id: BoxShotgunTearGas
+  name: shell box (12 Gauge tear gas)
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunTearGas
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: sarin

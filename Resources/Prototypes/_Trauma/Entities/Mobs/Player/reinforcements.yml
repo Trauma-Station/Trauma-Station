@@ -147,7 +147,7 @@
     - MagazineRifle # 2
 
 - type: startingGear
-  id: ReinforcementBeaconOfficerSpecCorpsman
+  id: ReinforcementBeaconOfficerSpecBrigmedic
   equipment:
     head: ClothingHeadHatBeretBrigmedic
     eyes: ClothingEyesGlassesMedSec

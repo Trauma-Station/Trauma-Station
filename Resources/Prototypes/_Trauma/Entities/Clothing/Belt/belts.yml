@@ -33,3 +33,143 @@
       storagebase:
         id: ThrowingKnife
         amount: 8
+
+- type: entity
+  id: BaseSheathCounterAttackWeak
+  abstract: true
+  components:
+  - type: SheathCounterattack
+    extraDamageMultiplier: 1.5
+    extraWoundSeverityMultipliers:
+      Slash: 2
+    extraArmorPenetration: 0.5
+  - type: GuideHelp
+    guides:
+    - CounterAttack
+
+- type: entity
+  parent: BaseSheathCounterAttackWeak
+  id: BaseSheathCounterAttackMedium
+  abstract: true
+  components:
+  - type: SheathCounterattack
+    blockEffectTime: 10
+
+- type: entity
+  parent: BaseSheathCounterAttackWeak
+  id: BaseSheathCounterAttackStrong
+  abstract: true
+  components:
+  - type: SheathCounterattack
+    blockEffectTime: 5
+    extraDamageMultiplier: 1.8
+    extraWoundSeverityMultipliers:
+      Slash: 3
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseSheathCounterAttackWeak, BaseSecurityContraband]
+  id: ClothingBeltSheathKatana
+  name: katana sheath
+  description: A sheath designed to hold an officer's blade.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/sec_katana_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/sec_katana_sheath.rsi
+  - type: Item
+    size: Ginormous
+  - type: ItemSlots
+    smartEquip: true
+    slots:
+      item:
+        name: Katana
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Katana
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          tags:
+          - Katana
+  - type: Appearance
+
+- type: entity
+  id: ClothingBeltSheathKatanaFilled
+  parent: ClothingBeltSheathKatana
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - SecurityKatana
+
+- type: entity
+  parent: [BaseMajorContraband, BaseSheathCounterAttackStrong, ClothingBeltSheathKatana]
+  id: ClothingBeltSheathKatanaNinja
+  name: energy katana sheath
+  description: A high tech katana sheath that allows for quick blade movements.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/ninja_katana_sheath.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/ninja_katana_sheath.rsi
+  - type: EnergyKatanaSheath
+
+- type: entity
+  id: ClothingBeltSheathKatanaNinjaFilled
+  parent: ClothingBeltSheathKatanaNinja
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - EnergyKatana
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase, BaseSheathCounterAttackStrong, BaseSyndicateContraband]
+  id: ClothingBeltSheathSnakesfang
+  name: snakesfang scabbard
+  description: Can hold scimitars.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/snakesfang_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/snakesfang_sheath.rsi
+  - type: Item
+    size: Ginormous
+  - type: ItemSlots
+    smartEquip: true
+    slots:
+      item:
+        name: Snakesfang
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Scimitar
+  - type: ItemMapper
+    mapLayers:
+      sheath-blade:
+        whitelist:
+          tags:
+          - Scimitar
+  - type: Appearance
+
+- type: entity
+  id: ClothingBeltSheathSnakesfangFilled
+  parent: ClothingBeltSheathSnakesfang
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - Snakesfang

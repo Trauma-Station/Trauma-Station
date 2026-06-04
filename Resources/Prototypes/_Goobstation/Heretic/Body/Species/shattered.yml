@@ -41,6 +41,7 @@
   - type: FireVisuals
     alternateState: Standing
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:
@@ -136,10 +137,8 @@
     - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
-    - RadiationProtection
     - Adrenaline
   - type: Identity
   - type: IdExaminable
@@ -221,6 +220,7 @@
     defaultChannel: MansusLink
     channels:
     - MansusLink
+  - type: NoSlip
 
 ## Base
 

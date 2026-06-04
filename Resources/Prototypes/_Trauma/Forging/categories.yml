@@ -17,7 +17,7 @@
   id: Bludgeons
   name: bludgeons
   icon:
-    sprite: _Trauma/Objects/Specific/Forging/Unfinished/hammerhead.rsi
+    sprite: _Trauma/Objects/Specific/Forging/Unfinished/warhammer_head.rsi
     state: icon
 
 - type: forgingCategory

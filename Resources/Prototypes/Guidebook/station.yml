@@ -34,9 +34,12 @@
   - Survival
   - Antagonists
   - Glossary
-  - Tackle # Trauma
-  - MartialArts # Goobstation - idk where to put it
-  - Forging # Trauma
+  # <Trauma>
+  - CounterAttack
+  - Tackle
+  - MartialArts
+  - Forging
+  # </Trauma>
 
 - type: guideEntry
   id: Glossary

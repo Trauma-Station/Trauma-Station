@@ -1,0 +1,10 @@
+# PDA
+- type: loadout
+  id: HoPPDA
+  equipment:
+    id: HoPPDA
+
+- type: loadout
+  id: AltHoPPDA
+  equipment:
+    id: AltHoPPDA

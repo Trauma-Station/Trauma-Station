@@ -43,54 +43,20 @@ public sealed partial class AntagSelectionSystem
     }
 
     /// <summary>
-    /// Get all definition blacklists from sessions that have been preselected for antag. | GOOBSTATION
-    /// </summary>
-    public Dictionary<ICommonSession, List<ProtoId<JobPrototype>>> GetPreSelectedAntagSessionsWithBlacklist(AntagSelectionDefinition? except = null)
-    {
-        var result = new Dictionary<ICommonSession, List<ProtoId<JobPrototype>>>();
-        var query = QueryAllRules();
-
-        while (query.MoveNext(out var uid, out var comp, out _))
-        {
-            if (HasComp<EndedGameRuleComponent>(uid))
-                continue;
-
-            foreach (var def in comp.Definitions)
-            {
-                if (def.Equals(except) || !comp.PreSelectedSessions.TryGetValue(def, out var sessions))
-                    continue;
-
-                foreach (var session in sessions)
-                {
-                    // Get the blacklisted jobs for this antag definition
-                    var blacklist = def.JobBlacklist ?? new List<ProtoId<JobPrototype>>();
-
-                    // If session already exists, merge the blacklists
-                    if (result.TryGetValue(session, out var existingBlacklist))
-                    {
-                        existingBlacklist.AddRange(blacklist);
-                    }
-                    else
-                    {
-                        result[session] = new List<ProtoId<JobPrototype>>(blacklist);
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
     /// Type-erased ForceMakeAntag overload
     /// </summary>
-    public void ForceMakeAntag(ICommonSession? player, [ForbidLiteral] EntProtoId defaultRule, [ForbidLiteral] string comp)
+    public void ForceMakeAntag(ICommonSession player, [ForbidLiteral] EntProtoId defaultRule, [ForbidLiteral] string comp)
     {
         var rule = ForceGetGameRuleEnt(defaultRule, comp);
 
-        if (!TryGetNextAvailableDefinition(rule, out var def))
-            def = rule.Comp.Definitions.Last();
-        MakeAntag(rule, player, def.Value);
+        if (TryAssignNextAvailableAntag(rule, player))
+            return;
+
+        if (rule.Comp.Antags.LastOrDefault() is not { } antag || !Proto.Resolve(antag.Proto, out var proto))
+            return;
+
+        PreSelectSession(rule, proto, player);
+        TryInitializeAntag(rule, proto, player);
     }
 
     /// <summary>
@@ -109,7 +75,7 @@ public sealed partial class AntagSelectionSystem
         var ruleEnt = GameTicker.AddGameRule(id);
         RemComp<LoadMapRuleComponent>(ruleEnt);
         var antag = Comp<AntagSelectionComponent>(ruleEnt);
-        antag.AssignmentComplete = true; // don't do normal selection.
+        antag.AssignmentHandled = true; // don't do normal selection.
         GameTicker.StartGameRule(ruleEnt);
         return (ruleEnt, antag);
     }

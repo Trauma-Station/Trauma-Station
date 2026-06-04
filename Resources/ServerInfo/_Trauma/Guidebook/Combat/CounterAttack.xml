@@ -1,0 +1,29 @@
+<Document>
+# Counterattack
+
+Active counterattack is a sheathed weapon combat mechanic.
+
+When weapon is sheathed on your belt, you can [color=yellow]Alt-Click[/color] your opponent with empty hand while in [color=red]Combat Mode[/color] to prepare a counterattack against them.
+
+After preparing counterattack, you will have one second long window, during which, if your opponent attempts to melee attack you, their attack will be blocked and you will deliver an empowered strike against them, with extra damage, wounding and armor penetration.
+
+Preparing counterattack plays unique sound and shows popup.
+
+If you fail to counterattack, this ability goes on cooldown - this does not happen if you have counterattacked successfully, which allows you to continue counterattacking.
+
+<Box>
+  <GuideEntityEmbed Entity="ClothingBeltSheathKatanaFilled"/>
+  <GuideEntityEmbed Entity="ClothingBeltSheathKatanaNinjaFilled"/>
+  <GuideEntityEmbed Entity="ClothingBeltSheathSnakesfangFilled"/>
+</Box>
+
+<Box>
+  <GuideEntityEmbed Entity="ClothingBeltSheathFilled"/>
+  <GuideEntityEmbed Entity="ClothingBeltSheathHeadOfSecurityFilled"/>
+</Box>
+
+Different kind of sheaths/weapons have varying counterattack stats such as damage/wounding/armor penetration or cooldown on failed counterattack.
+
+You cannot counterattack NPCs as they are too unpredictable.
+
+</Document>

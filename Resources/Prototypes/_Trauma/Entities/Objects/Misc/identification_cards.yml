@@ -50,18 +50,16 @@
   - type: AntagCard # D-class? Outside? Can't be.
 
 - type: entity
-  parent: IDCardStandard
-  id: SpacePolIDCard
+  parent: [ AgentIDCard ]
+  id: SpacePolIDCardChameleon
   name: SpacePol ID card
+  suffix: Agent
   components:
-  - type: Sprite
-    layers:
-    - state: default
-    - state: idsecurityofficer
   - type: IdCard
     jobTitle: job-name-spacepol
-    jobIcon: JobIconSecurityOfficer
+    jobIcon: JobIconSpacePol
   - type: Access
     tags:
     - Maintenance
     - SyndicateAgent
+    - External

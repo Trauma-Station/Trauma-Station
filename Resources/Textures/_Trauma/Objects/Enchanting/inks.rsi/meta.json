@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Armok",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ashartine"
+    },
+    {
+      "name": "asimel"
+    },
+    {
+      "name": "azurapetra"
+    },
+    {
+      "name": "catwink"
+    },
+    {
+      "name": "endozult"
+    },
+    {
+      "name": "hithine"
+    },
+    {
+      "name": "houndsgall"
+    },
+    {
+      "name": "indothine"
+    },
+	{
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "marakat"
+    },
+    {
+      "name": "nillycant"
+    },
+    {
+      "name": "nocimat"
+    },
+    {
+      "name": "orpimentexultant"
+    },
+    {
+      "name": "perhibiate"
+    },
+    {
+      "name": "perinsabate"
+    },
+    {
+      "name": "perinculate"
+    },
+    {
+      "name": "porphyrine"
+    },
+    {
+      "name": "posithane"
+    },
+    {
+      "name": "purpuraatramentum"
+    },
+    {
+      "name": "pyrathene"
+    },
+    {
+      "name": "pyroendine"
+    },
+    {
+      "name": "raggath"
+    },
+    {
+      "name": "rubiginosus"
+    },
+    {
+      "name": "stargallink"
+    },
+    {
+      "name": "terragall"
+    },
+    {
+      "name": "unden"
+    },
+    {
+      "name": "uzult"
+    },
+    {
+      "name": "yewgallink"
+    }
+  ]
+}

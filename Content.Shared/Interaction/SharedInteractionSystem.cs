@@ -280,9 +280,9 @@ namespace Content.Shared.Interaction
             if (userEntity.Value == uid)
             // <Trauma> - pull bolas and pray
             {
-                if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && ensnareable.IsEnsnared)
+                if (TryComp<EnsnareableComponent>(uid, out var ensnareable) && _snare.IsEnsnared((uid, ensnareable)))
                 {
-                    foreach (var bola in ensnareable.Container.ContainedEntities.ToList())
+                    foreach (var bola in ensnareable.Container!.ContainedEntities.ToList())
                     {
                         if (TryComp<EnsnaringComponent>(bola, out var ensnaring))
                         {

@@ -114,7 +114,8 @@
 
                     <controls:StripeBack>
                         <PanelContainer>
-                            <Label Text="{Loc 'Controls'}"
+                        	<!-- Trauma - removed Loc -->
+                            <Label Text="Controls"
                                    HorizontalExpand="True"
                                    HorizontalAlignment="Center"/>
                         </PanelContainer>

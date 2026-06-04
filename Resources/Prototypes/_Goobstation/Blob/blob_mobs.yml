@@ -1,17 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Spatison <137375981+Spatison@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 shibe <95730644+shibechef@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Pod
 - type: entity
@@ -33,8 +19,9 @@
           - ReagentId: TearGas
             Quantity: 3
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BlobMob
+    - type: Injurable
+      damageContainer: Blob
     - type: Clothing
       quickEquip: false
       sprite: _Goobstation/Blob/Mobs/blob_mobs.rsi
@@ -125,7 +112,7 @@
     - type: GuideHelp
       guides:
       - Blob
-    - type: MovementIgnoreGravity # Trauma
+    - type: MovementIgnoreGravity
     - type: Bloodstream
       maxBleedAmount: 0 # no bleeding
       bloodReferenceSolution:
@@ -144,8 +131,9 @@
   components:
     - type: ZombieImmune
     - type: Damageable
-      damageContainer: Blob
       damageModifierSet: BlobBlobbernaut
+    - type: Injurable
+      damageContainer: Blob
     - type: Tag
       tags:
       - Blobbernaut
@@ -251,7 +239,7 @@
         - ReagentId: Blood
           Quantity: 300
       bleedReductionAmount: 30
-    - type: MovementIgnoreGravity # Trauma
+    - type: MovementIgnoreGravity
 
 # Observer
 - type: entity

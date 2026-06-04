@@ -124,8 +124,8 @@
 #    minAngle: -19
 #    maxAngle: -16
   - type: Gun
-    minAngle: 4 # # Trauma, was 21
-    maxAngle: 36 # Trauma, was 32
+    minAngle: 4 # # Trauma - was 21
+    maxAngle: 36 # Trauma - was 32
     shotsPerBurst: 5
     fireRate: 8
     availableModes:
@@ -273,7 +273,7 @@
   - type: Gun # Goobstation - I am the one who nerfs the WT.
     minAngle: 2
     maxAngle: 16
-    fireRate: 4 # trauma, was 5
+    fireRate: 4 # Trauma - was 5
     burstFireRate: 8
     angleIncrease: 3
     angleDecay: 16
@@ -334,7 +334,7 @@
     - state: icon-muzzle
       map: ["enum.GunVisualLayers.Base"]
   - type: Gun
-    fireRate: 9
+    fireRate: 6 # Trauma - was 9
     minAngle: 25
     maxAngle: 32
     availableModes:

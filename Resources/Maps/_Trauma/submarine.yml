@@ -108139,25 +108139,6 @@ entities:
     - type: Transform
       pos: 32.301758,9.334082
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackSatchelLeather
   entities:
   - uid: 37630
@@ -109018,35 +108999,6 @@ entities:
     - type: Transform
       pos: -23.672491,42.4774
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: This decreases your speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        - message: >-
-            It provides the following protection:
-
-            - [color=yellow]Blunt[/color] damage reduced by [color=lightblue]60%[/color].
-
-            - [color=yellow]Slash[/color] damage reduced by [color=lightblue]60%[/color].
-
-            - [color=yellow]Piercing[/color] damage reduced by [color=lightblue]30%[/color].
-
-            - [color=yellow]Heat[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=yellow]Caustic[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=orange]Explosion[/color] damage reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
 - proto: ClothingOuterClownPriest
   entities:
   - uid: 14112
@@ -214135,37 +214087,23 @@ entities:
     - type: Transform
       pos: 87.5,38.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 50
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
     - type: StepTrigger
       active: False
-- proto: PuddleFlour
-  entities:
   - uid: 30095
     components:
     - type: Transform
       pos: 87.5,43.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 30
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 30
     - type: StepTrigger
       active: False
   - uid: 30096
@@ -214173,17 +214111,11 @@ entities:
     - type: Transform
       pos: 85.5,40.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 50
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 50
     - type: StepTrigger
       active: False
   - uid: 30097
@@ -214191,17 +214123,11 @@ entities:
     - type: Transform
       pos: 90.5,40.5
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        puddle:
-          temperature: 293.15
-          canReact: True
-          maxVol: 1000
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Blood
-            Quantity: 35
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Blood
+          Quantity: 35
     - type: StepTrigger
       active: False
 - proto: PuddleSparkle

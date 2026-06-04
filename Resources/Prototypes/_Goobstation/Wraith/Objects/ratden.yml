@@ -58,8 +58,9 @@
         maxDistance: 10
         variation: 0.1
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Diona
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
       - trigger:
