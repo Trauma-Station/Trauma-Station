@@ -61,3 +61,5 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RingerAccessUplink
+  - type: StoreJobListings
+    jobCount: 4

@@ -72,6 +72,9 @@ public sealed class StoreBoundUserInterface : BoundUserInterface
 
                 _menu?.UpdateBalance(msg.Balance);
 
+                // Trauma - job listings
+                _menu?.SetJobListingsButtonVisibility(msg.ShowJobListings);
+
                 UpdateListingsWithSearchFilter();
                 _menu?.SetFooterVisibility(msg.ShowFooter);
                 _menu?.UpdateRefund(msg.AllowRefund);

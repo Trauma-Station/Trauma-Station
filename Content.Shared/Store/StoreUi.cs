@@ -12,7 +12,8 @@ public enum StoreUiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class StoreUpdateState : BoundUserInterfaceState
+// Trauma - Made partial
+public sealed partial class StoreUpdateState : BoundUserInterfaceState
 {
     public readonly HashSet<ListingDataWithCostModifiers> Listings;
 
