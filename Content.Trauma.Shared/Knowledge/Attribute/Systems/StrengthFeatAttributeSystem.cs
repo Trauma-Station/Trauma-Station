@@ -4,6 +4,7 @@ using Content.Shared.Popups;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Prying;
 using Content.Trauma.Shared.Knowledge.Attribute.Attribute.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
@@ -11,7 +12,7 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// <summary>
 /// Handles all strength feat related things.
 /// </summary>
-public sealed partial class AttributeStrengthFeatSystem : EntitySystem
+public sealed partial class StrengthFeatAttributeSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
@@ -20,6 +21,7 @@ public sealed partial class AttributeStrengthFeatSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, InstantUncuffEvent>(OnUncuff);
+        SubscribeLocalEvent<KnowledgeHolderComponent, CheckPryEvent>(OnPry);
     }
 
     private void OnUncuff(Entity<KnowledgeHolderComponent> ent, ref InstantUncuffEvent args)
@@ -45,5 +47,28 @@ public sealed partial class AttributeStrengthFeatSystem : EntitySystem
         _popup.PopupClient("Holy shit, you broke free!", ent, ent, PopupType.Medium);
 
         args.CuffsBroken = true;
+    }
+
+    private void OnPry(Entity<KnowledgeHolderComponent> ent, ref CheckPryEvent args)
+    {
+        var selfEv = new GetStrengthFeatEvent();
+        var cuffsEv = new GetStrengthFeatEvent();
+
+        RaiseLocalEvent(ent.Owner, ref selfEv);
+        RaiseLocalEvent(args.PryingTarget, ref cuffsEv);
+
+        var ev = new OpposedContestEvent(args.PryingTarget, 20, selfEv.Mod, 20, cuffsEv.Mod);
+
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Failed)
+        {
+            var malus = EnsureComp<StrengthFeatTierdownComponent>(ent);
+            malus.Mod += 2;
+            _popup.PopupClient("You feel tired.", ent, ent, PopupType.Medium);
+            // TODO: Add a grunt or extertion event. Should cause a voice thingy or stamina damage.
+            return;
+        }
+
+        args.Pry = true;
     }
 }

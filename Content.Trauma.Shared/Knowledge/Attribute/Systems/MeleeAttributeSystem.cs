@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// <summary>
 /// Handles damage related stuff.
 /// </summary>
-public sealed partial class AttributeDamageSystem : EntitySystem
+public sealed partial class MeleeAttributeSystem : EntitySystem
 {
     private static readonly HashSet<ProtoId<DamageTypePrototype>> DamageTypes = new()
     {

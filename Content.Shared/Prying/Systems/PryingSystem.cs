@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Prying;
 using Content.Shared.Timing;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -124,6 +125,13 @@ public sealed partial class PryingSystem : EntitySystem
 
         if (TryComp(user, out UseDelayComponent? delay) && _delay.IsDelayed((user, delay))) // Goobstation
             return false;
+
+        // <Trauma> - Skills 2
+        var checkEv = new CheckPryEvent(target);
+        RaiseLocalEvent(user, ref checkEv);
+        if (checkEv.Pry)
+            return true;
+        // </Trauma>
 
         // We don't care about displaying a message if no tool was used.
         if (!TryComp<PryUnpoweredComponent>(target, out var unpoweredComp) || !CanPry(target, user, out _, unpoweredComp: unpoweredComp))

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using System.Text.RegularExpressions;
 using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
@@ -37,7 +35,6 @@ public abstract partial class SharedKnowledgeSystem
 
         // Experience methods
         SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ListenEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -248,26 +245,4 @@ public abstract partial class SharedKnowledgeSystem
 
         Dirty(unit, comp);
     }
-
-    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
-    {
-        if (args.Source == ent.Owner)
-            return; // Same person, no need.
-
-        if (GetContainer(ent.Owner) is not { } brain)
-            return;
-
-        AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
-
-        var languageId = LanguageUnit(args.Language);
-
-        // Exit obfuscation if they can understand, just in case.
-        if (GetKnowledge(brain, LanguageUnit(args.Language)) is { } unit && GetMastery(unit.Owner) >= 2)
-            return;
-
-        // Use Obfuscate logic through language system.
-        var languageProto = _proto.Index(args.Language);
-        args.Message = _language.ObfuscateSpeech(args.Message, languageProto, ent.Owner);
-    }
-}
 }

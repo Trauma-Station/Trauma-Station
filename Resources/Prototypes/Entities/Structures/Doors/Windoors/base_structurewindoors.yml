@@ -11,6 +11,8 @@
     penetrateDamage: 25
     damagePenalty: 0.1
   - type: ReflectiveSurface
+  - type: StrengthFeatOpposed
+    mod: 10
   # </Trauma>
   - type: Anchorable
     flags:

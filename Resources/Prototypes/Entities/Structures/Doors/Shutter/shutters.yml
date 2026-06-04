@@ -16,6 +16,8 @@
     pryModifier: 0.6 # it's not hard to raise shutters
   - type: SoundBlocker
     soundBlockPercent: 0.5
+  - type: StrengthFeatOpposed
+    mod: 15
   # </Trauma>
   - type: Anchorable
     flags:

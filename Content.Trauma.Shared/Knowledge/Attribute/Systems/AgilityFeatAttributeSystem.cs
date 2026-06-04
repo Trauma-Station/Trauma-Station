@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.Knowledge.Attribute.Attribute.Systems;
 /// <summary>
 /// Handles all agility feat related things.
 /// </summary>
-public sealed partial class AttributeAgilityFeatSystem : EntitySystem
+public sealed partial class AgilityFeatAttributeSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
