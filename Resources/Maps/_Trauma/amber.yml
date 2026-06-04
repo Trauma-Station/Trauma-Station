@@ -64757,22 +64757,6 @@ entities:
     - type: Transform
       pos: 5.5049515,-27.598095
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
 - proto: ClothingBackpackDuffel
   entities:
   - uid: 9249
@@ -64787,25 +64771,6 @@ entities:
     - type: Transform
       pos: 12.441172,-10.7048235
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackDuffelCargo
   entities:
   - uid: 9251
@@ -64820,25 +64785,6 @@ entities:
     - type: Transform
       pos: -50.48092,-44.354164
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackDuffelSyndicatePyjamaBundle
   entities:
   - uid: 9253
@@ -64846,25 +64792,6 @@ entities:
     - type: Transform
       pos: 47.61371,-9.3577
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]90%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBeltChampion
   entities:
   - uid: 9254
@@ -65426,35 +65353,6 @@ entities:
     - type: Transform
       pos: -20.871235,6.678402
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: This decreases your speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        - message: >-
-            It provides the following protection:
-
-            - [color=yellow]Blunt[/color] damage reduced by [color=lightblue]60%[/color].
-
-            - [color=yellow]Slash[/color] damage reduced by [color=lightblue]60%[/color].
-
-            - [color=yellow]Piercing[/color] damage reduced by [color=lightblue]30%[/color].
-
-            - [color=yellow]Heat[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=yellow]Caustic[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=orange]Explosion[/color] damage reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
   - uid: 9334
     components:
     - type: Transform

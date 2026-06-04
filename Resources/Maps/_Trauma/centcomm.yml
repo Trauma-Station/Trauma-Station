@@ -18024,30 +18024,6 @@ entities:
     - type: Transform
       pos: 5.4484487,22.554453
       parent: 1668
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=yellow]This armor reduces incoming damage to your groin[/color]
-
-            - [color=yellow]Blunt[/color] damage reduced by [color=lightblue]5%[/color].
-
-            - [color=yellow]Slash[/color] damage reduced by [color=lightblue]5%[/color].
-
-            - [color=yellow]Piercing[/color] damage reduced by [color=lightblue]5%[/color].
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]95%[/color].
-          priority: 0
-          component: Armor
-        title: null
 - proto: ClothingBeltSheathFilled
   entities:
   - uid: 3725

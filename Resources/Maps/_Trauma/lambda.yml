@@ -97001,25 +97001,6 @@ entities:
     - type: Transform
       pos: 7.524531,40.708504
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            Isso concede as seguintes proteções:
-
-            - Dano de [color=orange]explosão[/color] [color=white]aos conteúdos[/color] reduzido em [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        - message: Diminui sua velocidade de corrida em [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackDuffelClown
   entities:
   - uid: 4900
@@ -97162,23 +97143,6 @@ entities:
       angularDamping: 0
       linearDamping: 0
       canCollide: False
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            Isso concede as seguintes proteções:
-
-            - Dano de [color=orange]explosão[/color] [color=white]aos conteúdos[/color] reduzido em [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
-    - type: InsideEntityStorage
 - proto: ClothingBackpackSatchelClown
   entities:
   - uid: 4902
@@ -97209,22 +97173,6 @@ entities:
       angularDamping: 0
       linearDamping: 0
       canCollide: False
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
     - type: InsideEntityStorage
 - proto: ClothingBackpackSatchelMime
   entities:
@@ -97233,25 +97181,7 @@ entities:
     - type: Transform
       parent: 4957
     - type: Physics
-      angularDamping: 0
-      linearDamping: 0
       canCollide: False
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            Isso concede as seguintes proteções:
-
-            - Dano de [color=orange]explosão[/color] [color=white]aos conteúdos[/color] reduzido em [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
     - type: InsideEntityStorage
 - proto: ClothingBackpackSatchelSalvage
   entities:
@@ -98400,35 +98330,7 @@ entities:
     components:
     - type: Transform
       parent: 15605
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            Isso concede as seguintes proteções:
-
-            - dano de [color=yellow]Contundente[/color] reduzido em [color=lightblue]50%[/color].
-
-            - dano de [color=yellow]Corta[/color] reduzido em [color=lightblue]50%[/color].
-
-            - dano de [color=yellow]Perfurante[/color] reduzido em [color=lightblue]60%[/color].
-
-            - dano de [color=yellow]Calor[/color] reduzido em [color=lightblue]50%[/color].
-
-            - dano de [color=yellow]Cáustico[/color] reduzido em [color=lightblue]10%[/color].
-
-            - [color=orange]Explosão[/color] dano reduzido em [color=lightblue]35%[/color].
-          priority: 0
-          component: Armor
-        title: null
     - type: Physics
-      angularDamping: 0
-      linearDamping: 0
       canCollide: False
     - type: InsideEntityStorage
 - proto: ClothingOuterArmorReflective

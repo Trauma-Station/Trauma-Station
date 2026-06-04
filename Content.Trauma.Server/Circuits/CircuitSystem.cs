@@ -16,8 +16,6 @@ public sealed partial class CircuitSystem : EntitySystem
     [Dependency] private DeviceLinkSystem _device = default!;
     [Dependency] private EntityQuery<CircuitComponent> _query = default!;
 
-    private NetworkPayload _payload = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -185,28 +183,28 @@ public sealed partial class CircuitSystem : EntitySystem
         var port = $"Circuit{i + 1}";
 
         // send new output signal to linked machines
-        _payload.Clear();
+        var payload = new NetworkPayload();
         switch (value)
         {
             case True t:
-                _payload[DeviceNetworkConstants.LogicState] = SignalState.High;
+                payload[DeviceNetworkConstants.LogicState] = SignalState.High;
                 break;
             case False f:
-                _payload[DeviceNetworkConstants.LogicState] = SignalState.Low;
+                payload[DeviceNetworkConstants.LogicState] = SignalState.Low;
                 break;
             case Pulse p:
-                _payload[DeviceNetworkConstants.LogicState] = SignalState.Momentary;
+                payload[DeviceNetworkConstants.LogicState] = SignalState.Momentary;
                 break;
             case Integer n:
-                _payload["logic_int"] = n.Value;
+                payload["logic_int"] = n.Value;
                 break;
             case string s:
-                _payload["logic_string"] = s;
+                payload["logic_string"] = s;
                 break;
             default:
                 Log.Error($"Tried to send unknown output {value} to port {port} of {ToPrettyString(housing)}!");
                 return;
         }
-        _device.InvokePort(housing.Value, port, _payload);
+        _device.InvokePort(housing.Value, port, payload);
     }
 }

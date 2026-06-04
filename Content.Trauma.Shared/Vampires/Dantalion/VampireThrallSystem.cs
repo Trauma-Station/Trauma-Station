@@ -2,6 +2,7 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
@@ -36,6 +37,8 @@ public sealed partial class VampireThrallSystem : EntitySystem
 
         SubscribeLocalEvent<VampireThrallComponent, GlareAttemptEvent>(OnGlare);
         SubscribeLocalEvent<VampireThrallComponent, BloodsuckingAttemptEvent>(OnBloodsucking);
+
+        SubscribeLocalEvent<VampireThrallComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<VampireThrallComponent, ComponentShutdown>(OnShutdown);
     }
 
@@ -91,6 +94,17 @@ public sealed partial class VampireThrallSystem : EntitySystem
     private void OnBloodsucking(Entity<VampireThrallComponent> ent, ref BloodsuckingAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    /// <summary>
+    /// Exists so dantalion knows which thralls belong to them, since multiple dantalion vampires can exist.
+    /// </summary>
+    private void OnExamined(Entity<VampireThrallComponent> ent, ref ExaminedEvent args)
+    {
+        if (args.Examiner != ent.Comp.Vampire)
+            return;
+
+        args.PushMarkup("[color=Green]This thrall belongs to you[/color]");
     }
 
     private void OnShutdown(Entity<VampireThrallComponent> ent, ref ComponentShutdown args)

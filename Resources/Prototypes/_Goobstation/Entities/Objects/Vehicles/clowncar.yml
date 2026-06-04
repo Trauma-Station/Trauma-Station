@@ -10,8 +10,6 @@
     sprite: _Goobstation/Objects/Vehicles/clowncar.rsi
     layers:
     - state: clowncar
-      map: ["enum.ClowncarLayers.Base"]
-    netsync: false
     noRot: true
   - type: Vehicle
     renderOver: North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest
@@ -41,7 +39,6 @@
             volume: -3
   - type: Strap
     buckleOnInteractHand: false
-    addBuckleverb: false
     allowOthersToUnbuckle: false
     unbuckleSound:
       collection: ClowncarCrash
@@ -89,16 +86,7 @@
       - Body
       - Holopad
   - type: Clowncar
-    container: clowncar_container
-    cannonActivateSound:
-      path: "/Audio/_Goobstation/Vehicle/Clowncar/clowncar_activate_cannon.ogg"
-      params:
-        volume: 5
-    cannonDeactivateSound:
-      path: "/Audio/_Goobstation/Vehicle/Clowncar/clowncar_deactivate_cannon.ogg"
-      params:
-        volume: 5
-  - type: TriggerOnSolutionInsert # bringing a full class of car bomb in blows the car up
+  - type: TriggerOnSolutionInsert # bringing a full glass of car bomb in blows the car up
     reagent: IrishCarBomb
     minAmount: 30
   - type: Explosive # Explosive banana peel
@@ -144,13 +132,7 @@
       components:
       - KnockedDown
   - type: ExtendedContainer
-    containerName: clowncar_container
-    deleteContentsOnBreak: false
     capacity: 50
-    insertSound:
-      collection: ClowncarLoad
-      params:
-        volume: 4
 
 - type: entity
   parent: VehicleClowncarBase
@@ -159,10 +141,4 @@
   description: Carry mostly willing passengers around! Be careful with collisions!.
   components:
   - type: ExtendedContainer
-    containerName: clowncar_container
-    deleteContentsOnBreak: false
     capacity: 5
-    insertSound:
-      collection: ClowncarLoad
-      params:
-        volume: 4

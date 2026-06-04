@@ -167,6 +167,7 @@
   suffix: Security, Bodyguard
   components:
   - type: DelayedGhostRole
+    job: SecurityBodyguard
     name: ghost-role-information-reinforcement-specialist-bodyguard-name
   - type: GhostCharacterSpawner
     components:
@@ -180,23 +181,27 @@
   suffix: Security, Advisor
   components:
   - type: DelayedGhostRole
+    job: SecurityAdvisor
     name: ghost-role-information-reinforcement-specialist-advisor-name
+    description: job-description-security-advisor
   - type: GhostCharacterSpawner
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconOfficerSpecAdvisor ]
+      roleLoadout: [ RoleSurvivalSecurity ]
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerCorpsman
-  suffix: Security, Corpsman
+  id: ReinforcementBeaconSpecialistOfficerBrigmedic
+  suffix: Security, Brigmedic
   components:
   - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-corpsman-name
+    job: Brigmedic
+    name: ghost-role-information-reinforcement-specialist-brigmedic-name
   - type: GhostCharacterSpawner
     components:
     - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecCorpsman ]
+      prototypes: [ ReinforcementBeaconOfficerSpecBrigmedic ]
       roleLoadout: [ RoleSurvivalSecurity ]
 
 - type: entity
@@ -521,6 +526,7 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconClown ]
+    - type: Clumsy
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -534,6 +540,7 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconMime ]
+    - type: MimePowers
 
 - type: entity
   parent: BaseReinforcementBeacon
@@ -547,6 +554,8 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconChaplain ]
+    - type: CurseImmune
+    - type: BibleUser
 
 - type: entity
   parent: BaseReinforcementBeacon

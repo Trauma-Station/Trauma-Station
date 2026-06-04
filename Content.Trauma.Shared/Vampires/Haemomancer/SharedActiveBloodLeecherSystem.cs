@@ -116,7 +116,7 @@ public abstract partial class SharedActiveBloodLeecherSystem : EntitySystem
     /// <summary>
     /// Creates a beam server-side from user to target.
     /// </summary>
-    protected virtual void CreateBeam(EntityUid user, EntityUid target, EntProtoId beamProto) { }
+    public virtual void CreateBeam(EntityUid user, EntityUid target, EntProtoId beamProto) { }
 }
 
 /// <summary>

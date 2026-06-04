@@ -114,7 +114,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: Sap
-        Quantity: 600
+        Quantity: 300 # Trauma, was 600
   - type: Reactive
     groups:
       Flammable: [ Touch ]

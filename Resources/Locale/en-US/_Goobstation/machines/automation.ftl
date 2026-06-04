@@ -98,6 +98,9 @@ signal-port-description-alt-interact = Signal port to toggle alt interact mode, 
 signal-port-name-use-in-hand = Use In Hand Mode
 signal-port-description-use-in-hand = Signal port to toggle use in hand mode, or set it to a HIGH/LOW value. This will ignore targets and use Z or Alt+Z on the held tool.
 
+signal-port-name-harm-mode = Harm Mode
+signal-port-description-harm-mode = Signal port to toggle harm mode, or set it to a HIGH/LOW value. This will hit the target with the held tool like the interactor is in harm mode.
+
 # Autodoc
 
 signal-port-name-automation-slot-autodoc-hand = Item: Autodoc Hand

@@ -56447,25 +56447,6 @@ entities:
     - type: Transform
       pos: -13.486658,-8.271662
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
   - uid: 8659
     components:
     - type: Transform
@@ -56476,25 +56457,6 @@ entities:
     - type: Transform
       pos: 70.35672,-17.13944
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackDuffelSyndicateCostumeClown
   entities:
   - uid: 8661
@@ -56893,45 +56855,6 @@ entities:
     - type: Transform
       pos: -12.666273,-50.62381
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=yellow]This armor reduces incoming damage to your torso[/color]
-
-            - [color=yellow]This armor reduces incoming damage to your arms[/color]
-
-            - [color=yellow]This armor reduces incoming damage to your hands[/color]
-
-            - [color=yellow]This armor reduces incoming damage to your legs[/color]
-
-            - [color=yellow]This armor reduces incoming damage to your feet[/color]
-
-            - [color=yellow]This armor reduces incoming damage to your tail[/color]
-
-            - [color=yellow]Blunt[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=yellow]Slash[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=yellow]Piercing[/color] damage reduced by [color=lightblue]10%[/color].
-
-            - [color=yellow]Heat[/color] damage reduced by [color=lightblue]20%[/color].
-
-            - [color=orange]Explosion[/color] damage reduced by [color=lightblue]85%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your speed by [color=yellow]20%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingRandomSpawner
   entities:
   - uid: 8720

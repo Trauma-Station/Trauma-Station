@@ -36,21 +36,12 @@
   #   - XenomorphSentinel
 
 - type: entity
-  parent: BaseMobXenomorphSentinel
+  parent: [ BaseMobXenomorphSentinel, BaseXenomorphGhostRole ]
   id: MobXenomorphSentinel
   components:
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-sentinel-name
     description: ghost-role-information-xenomorph-sentinel-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphSentinel]

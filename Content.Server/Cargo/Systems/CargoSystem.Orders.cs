@@ -302,7 +302,7 @@ namespace Content.Server.Cargo.Systems
                 order.SetApproverData(_identity.GetIdentityShortInfo(player, uid));
 
                 var message = Loc.GetString("cargo-console-unlock-approved-order-broadcast",
-                    ("productName", Loc.GetString(product.Name)),
+                    ("productName", product.Name), // Trauma - remove Loc.GetString its already localized
                     ("orderAmount", order.OrderQuantity),
                     ("approver", order.Approver ?? string.Empty),
                     ("cost", cost));

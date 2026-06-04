@@ -43,6 +43,8 @@
     color: "#650000"
     sound: /Audio/_Trauma/Vampires/vampalert.ogg
   components:
+  - type: WeakToHoly
+  - type: AlwaysTakeHoly
   - type: Vampire               # Holds total and usable blood.
   - type: VampireBloodsucking   # Allows the vampire to drain blood from others.
   - type: VampireAbilities      # Grants abilities to the vampire.

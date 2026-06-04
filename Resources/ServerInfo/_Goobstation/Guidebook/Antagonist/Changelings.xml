@@ -1,17 +1,7 @@
-<!--
-SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Document>
   # Changelings
   <Box>
-    <GuideEntityEmbed Entity="GuidebookChangelingFluff" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Changeling/Guidebook/guidebook_changeling.rsi" State="icon"/>
   </Box>
   A Changeling is an  alien creature able to morph into humanoids. Changelings nautral form is a headslug, but before a shift started, they killed someone and began imitating them.
   The main weapons of the Changeling are its ability to internally synthesize dangerous chemicals, morph into other creatures that it has absorbed, and blend in with humans.

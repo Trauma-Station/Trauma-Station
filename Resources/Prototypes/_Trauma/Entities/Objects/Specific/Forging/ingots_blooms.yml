@@ -19,7 +19,7 @@
   description: Needs to be melted in a bloomery to be made useful.
   components:
   - type: Construction
-    node: finish
+    node: scraps
 
 - type: entity
   abstract: true
@@ -245,7 +245,6 @@
       shader: Emissive
   - type: Construction
     graph: PlasteelScraps
-    node: finish
 
 - type: entity
   parent: [ BaseForgeItem, BaseMetallicPlasteel ]
@@ -300,3 +299,113 @@
   - type: PhysicalComposition
     materialComposition:
       Plasteel: 250
+
+# Gold
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicGold
+  id: GoldOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 1337 # melting point since gold doesnt become brittle, it just melts
+    burnedFoodPrototype: GoldMolten
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicGold ]
+  id: GoldScraps
+  name: gold scraps
+  description: Needs to be heated and shaped into a usable ingot. Gold has no impurities or oxides to need blooming.
+  components:
+  - type: Sprite
+    layers:
+    - state: gold
+      shader: Emissive
+  - type: Workable
+    remaining: 50 # relatively soft metal
+    result: GoldIngot
+  - type: Construction
+    graph: GoldScraps
+
+- type: entity
+  parent: MarkerBase
+  id: GoldMolten
+  name: molten gold spawner
+  components:
+  - type: PuddleSpawner
+    solution:
+      temperature: 1340 # a bit over the edge
+      reagents:
+      - ReagentId: Gold
+        Quantity: 30
+
+- type: entity
+  parent: [ BaseWorkableGold, BaseMetalIngot, GoldOverheatable ]
+  id: GoldIngot
+  name: gold ingot
+  description: A shiny and rare metal, can be forged at low temperatures. You wouldn't make a pickaxe out of this.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_gold
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Gold: 250
+
+# Silver
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicSilver
+  id: SilverOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 1235
+    burnedFoodPrototype: SilverMolten
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseMetalScraps, BaseMetallicSilver ]
+  id: SilverScraps
+  name: silver scraps
+  description: Needs to be heated and shaped into a usable ingot.
+  components:
+  - type: Sprite
+    layers:
+    - state: silver
+      shader: Emissive
+  - type: Workable
+    remaining: 50 # same hardness as gold
+    result: SilverIngot
+  - type: Construction
+    graph: SilverScraps
+
+- type: entity
+  parent: MarkerBase
+  id: SilverMolten
+  name: molten silver spawner
+  components:
+  - type: PuddleSpawner
+    solution:
+      temperature: 1240 # a bit over the edge
+      reagents:
+      - ReagentId: Silver
+        Quantity: 30
+
+- type: entity
+  parent: [ BaseWorkableSilver, BaseMetalIngot, SilverOverheatable ]
+  id: SilverIngot
+  name: silver ingot
+  description: A shiny and relatively cheap metal, can be forged at very low temperatures.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_silver
+      shader: Emissive
+  - type: PhysicalComposition
+    materialComposition:
+      Silver: 250

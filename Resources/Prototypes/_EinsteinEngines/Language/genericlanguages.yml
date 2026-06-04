@@ -13,7 +13,6 @@
 # TODO: Replace this with much better languages. Yes, robots can have languages.
 - type: language
   id: RobotTalk
-  isVisibleLanguage: true
   speech:
     fontId: Monospace
     boldFontId: MonospaceBold
@@ -28,7 +27,6 @@
 # Insanely long.
 - type: language
   id: DroneTalk
-  isVisibleLanguage: true
   speech:
     fontId: Monospace
     boldFontId: MonospaceBold

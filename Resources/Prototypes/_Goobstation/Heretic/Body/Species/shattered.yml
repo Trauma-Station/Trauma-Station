@@ -220,6 +220,7 @@
     defaultChannel: MansusLink
     channels:
     - MansusLink
+  - type: NoSlip
 
 ## Base
 

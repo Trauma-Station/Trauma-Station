@@ -68,6 +68,7 @@
 - type: antagSpecifier
   parent: BaseAbductor
   id: AbductorAgent
+  spawnerPrototype: AbductorAgentSpawner
   startingGear: AbductorAgentGear
   prefRoles: [ AbductorAgentAntag, AbductorScientistAntag ]
   mindRoles: [ MindRoleAbductorAgent ]

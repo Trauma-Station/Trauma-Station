@@ -1,4 +1,3 @@
-# TODO: Add more objectives in the future (maybe after objective shit gets predicted or reworked)
 - type: entity
   parent: BaseObjective
   id: BaseVampireObjective
@@ -21,11 +20,28 @@
       sprite: Fluids/tomato_splat.rsi
       state: puddle-1
   - type: NumberObjective
-    min: 400
-    max: 800
+    min: 600
+    max: 1200
     title: objective-condition-blood-title
     description: objective-condition-blood-description
   - type: VampireBloodCondition
+
+- type: entity
+  parent: BaseVampireObjective
+  id: VampireBloodsuckObjective
+  name: Survive
+  description: Blood suck people.
+  components:
+  - type: Objective
+    icon:
+      sprite: Structures/Storage/Crates/coffin.rsi
+      state: base
+  - type: NumberObjective
+    min: 6
+    max: 12
+    title: objective-condition-bloodsuck-title
+    description: objective-condition-bloodsuck-description
+  - type: VampireSuckCondition
 
 - type: entity
   parent: [BaseVampireObjective, BaseSurviveObjective]

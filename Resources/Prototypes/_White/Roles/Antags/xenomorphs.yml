@@ -2,12 +2,17 @@
   id: Xenomorph
   name: roles-antag-xenomorph-name
   antagonist: true
+  setPreference: true
   objective: roles-antag-xenomorph-objective
+  guides: [ Xenomorphs ]
   creditImage: /Textures/_Trauma/EndCredits/Antags/xenos.png
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 2h
 
 - type: antagSpecifier
   id: Xenomorph
-  prefRoles: [ XenomorphsInfestationRoundstart ]
+  prefRoles: [ Xenomorph ]
   spawnerPrototype: SpawnPointGhostXenomorph
   briefing:
     text: xenomorph-role-greeting

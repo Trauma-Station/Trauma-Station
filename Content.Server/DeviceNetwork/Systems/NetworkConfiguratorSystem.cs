@@ -868,7 +868,7 @@ public sealed partial class NetworkConfiguratorSystem : SharedNetworkConfigurato
             _ => "error"
         };
 
-        _popupSystem.PopupCursor(Loc.GetString(resultText), args.Actor, PopupType.Medium);
+        _popupSystem.PopupCursor(resultText, args.Actor, PopupType.Medium); // Trauma - remove double Loc.GetString bruh
         _uiSystem.SetUiState(
             uid,
             NetworkConfiguratorUiKey.Configure,

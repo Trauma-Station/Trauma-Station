@@ -1,0 +1,50 @@
+# Bubbles
+- type: particleEffect
+  id: DemonPassage
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot_big
+  startColor: "#ff0000"
+  endColor: "#240303"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.1
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.1
+  - time: 0.2
+    value: 0.2
+  - time: 0.3
+    value: 0.3
+  - time: 0.4
+    value: 0.01
+  - time: 0.6
+    value: 0.1
+  - time: 0.9
+    value: 0.9
+  lifetime: 0.6
+  lifetimeVariance: 0.6
+  speed: 0.0
+  speedVariance: 0.0
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 15
+  burst: true
+  gravity: -10.0
+  drag: -5.0
+  noiseStrength: 1.0
+  noiseFrequency: 10.0
+  spreadAngle: 90
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 0.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleEdge
+    radius: 0.8

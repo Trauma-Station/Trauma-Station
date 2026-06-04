@@ -53,7 +53,7 @@
     baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: Input
-    context: "ghost"
+    context: "human"
   - type: MindContainer
   - type: StatusEffects
     allowed:

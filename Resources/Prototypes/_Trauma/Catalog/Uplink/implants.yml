@@ -1,3 +1,4 @@
+
 # this is basically just for reinforcements as they don't get free hypoports.
 - type: listing
   id: UplinkHypoportSecureNukie
@@ -11,6 +12,21 @@
   conditions:
   - !type:StoreWhitelistCondition # traitors can just print a (secure) hypoport on station
     whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkDeathRattleImplanter
+  name: uplink-deathrattle-implanter-name
+  description: uplink-deathrattle-implanter-desc
+  productEntity: DeathRattleImplanter
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkImplants
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
       tags:
       - NukeOpsUplink
 

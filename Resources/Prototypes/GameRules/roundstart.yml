@@ -309,7 +309,7 @@
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
   - type: GameRule
-    minPlayers: 15
+    minPlayers: 20 # Trauma - was 15
   - type: RevolutionaryRule
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
@@ -357,7 +357,6 @@
     mapPath: /Maps/_Goobstation/Nonstations/wizden.yml # Trauma
   - type: RuleGrids
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn # Trauma
     agentName: wizard-round-end-name
     antags:
     - !type:FixedAntagCount
@@ -374,7 +373,7 @@
   id: Wizard
   components:
   - type: GameRule
-    minPlayers: 10
+    minPlayers: 30 # Trauma - was 10
   - type: DynamicRuleCost
     cost: 150
 

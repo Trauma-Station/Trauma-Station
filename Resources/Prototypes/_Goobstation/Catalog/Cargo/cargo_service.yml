@@ -19,7 +19,7 @@
     sprite: Objects/Specific/Chapel/bible.rsi
     state: icon
   product: CrateHolySupplies
-  cost: 2000
+  cost: 15000
   category: cargoproduct-category-name-service
   group: market
 

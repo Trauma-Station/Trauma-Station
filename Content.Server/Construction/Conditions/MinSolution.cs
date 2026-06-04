@@ -37,7 +37,14 @@ public sealed partial class MinSolution : IGraphCondition
         if (!containerSys.TryGetSolution(uid, Solution, out _, out var solution))
             return false;
 
-        solution.TryGetReagentQuantity(Reagent, out var quantity);
+        // <Trauma> - count total reagent regardless of data like dna
+        var quantity = FixedPoint2.Zero;
+        foreach (var quant in solution.Contents)
+        {
+            if (quant.Reagent.Prototype == Reagent.Prototype)
+                quantity += quant.Quantity;
+        }
+        // </Trauma>
         return quantity >= Quantity;
     }
 
