@@ -177,13 +177,6 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
-  - type: SpamEmitSound
-    minInterval: 8
-    maxInterval: 20
-    sound:
-      collection: XenomorphBreathe
-      params:
-        maxDistance: 5
   - type: Prying
     speedModifier: 5
     pryPowered: true
