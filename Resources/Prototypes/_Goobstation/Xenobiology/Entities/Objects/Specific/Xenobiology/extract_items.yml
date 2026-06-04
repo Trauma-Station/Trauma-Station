@@ -189,7 +189,6 @@
   - type: Sprite
     sprite: _Goobstation/Xenobiology/Specific/Xenobiology/adamantine_bar.rsi
     state: icon
-    shader: Emissive # Trauma
   - type: StaticPrice
     price: 10000 # goida
   # <Trauma>
