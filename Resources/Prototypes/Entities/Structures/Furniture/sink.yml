@@ -43,7 +43,7 @@
   - type: SolutionManager
     solutions:
   # <Trauma>
-    - SolutionSinkInlet 
+    - SolutionSinkInlet
     - SolutionSinkOutlet
   # </Trauma>
   - type: DrainableSolution
