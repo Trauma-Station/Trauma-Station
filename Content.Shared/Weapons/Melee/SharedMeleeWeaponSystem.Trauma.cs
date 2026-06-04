@@ -32,6 +32,8 @@ public abstract partial class SharedMeleeWeaponSystem
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 
     public static readonly ProtoId<TagPrototype> WideSwingIgnore = "WideSwingIgnore"; // for mice
+    public static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+    public static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     private float _shoveRange;
     private float _shoveSpeed;
@@ -74,6 +76,15 @@ public abstract partial class SharedMeleeWeaponSystem
         var animated = HasComp<ItemComponent>(target);
 
         _throwing.TryThrow(target, pushVector, force * _shoveSpeed, animated: animated);
+    }
+
+    private void AdjustStaminaDamage(EntityUid user, ref float staminaDamage)
+    {
+        // TODO: use event for this bruh
+        if (_knowledge.GetSkill(user, MeleeKnowledge) is { } melee)
+        {
+            staminaDamage *= 1 - _knowledge.SharpCurve(melee);
+        }
     }
 
     protected bool RaiseInRangeEvent(EntityUid ent,
