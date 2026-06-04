@@ -65,7 +65,7 @@
   #   - XenomorphLarva
 
 - type: entity
-  parent: BaseMobXenomorphLarva
+  parent: [ BaseMobXenomorphLarva, BaseXenomorphGhostRole ]
   id: MobXenomorphLarva
   components:
   - type: XenomorphEvolution
@@ -75,17 +75,8 @@
     - prototype: MobXenomorphSentinel
     - prototype: MobXenomorphHunter
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-larva-name
     description: ghost-role-information-xenomorph-larva-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
   - type: UserInterface
     interfaces:
       enum.RadialSelectorUiKey.Key:

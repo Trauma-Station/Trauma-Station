@@ -244,3 +244,18 @@
     prototype: MobXenomorphTailSegmentBase
     tailOffset: 0, -0.13
     headFollowSegmentRotation: false
+
+- type: entity
+  abstract: true
+  id: BaseXenomorphGhostRole
+  components:
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    rules: ghost-role-information-rules-default-xeno
+    mindRoles:
+    - MindRoleXenomorph
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
