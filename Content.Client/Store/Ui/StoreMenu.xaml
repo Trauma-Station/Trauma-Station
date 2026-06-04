@@ -45,9 +45,19 @@ SPDX-License-Identifier: MIT
                         <PanelContainer.PanelOverride>
                             <gfx:StyleBoxFlat BackgroundColor="#80808005" />
                         </PanelContainer.PanelOverride>
-                        <BoxContainer Name="CategoryListContainer" Orientation="Vertical">
-                            <!--  Category buttons are added here by code  -->
+                        <!-- <Trauma> -->
+                        <BoxContainer Name="ButtonSidePanel" Orientation="Vertical">
+                            <Button Name="JobListingsButton"
+                                    Text="{Loc 'store-ui-job-listings-button'}"
+                                    Visible="False"
+                                    StyleClasses="OpenBoth"
+                                    Margin="0 0 0 10"
+                                    />
+                            <BoxContainer Name="CategoryListContainer" Orientation="Vertical">
+                                <!--  Category buttons are added here by code  -->
+                            </BoxContainer>
                         </BoxContainer>
+                        <!-- </Trauma> -->
                     </PanelContainer>
                     <ScrollContainer
                         Name="StoreListingsScroll"
