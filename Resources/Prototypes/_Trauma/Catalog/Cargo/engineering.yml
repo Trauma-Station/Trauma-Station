@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: EngineeringCement
+  icon:
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: bag_closed
+  product: CrateCement
+  cost: 1500
+  category: cargoproduct-category-name-engineering
+  group: market
