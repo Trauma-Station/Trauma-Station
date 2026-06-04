@@ -418,7 +418,7 @@
   id: AdamantineOverheatable
   components:
   - type: BurnableFood
-    burnTemp: 2100
+    burnTemp: 2200
     burnedFoodPrototype: OverheatedAdamantine
     burnedPrefix: heated-name-text
     burnSound: null
@@ -434,7 +434,7 @@
     - state: adamantine
       shader: Emissive
   - type: Workable
-    remaining: 400 # bring an army, you'll need it
+    remaining: 500 # bring an army, you'll need it
     result: AdamantineIngot
   # No recipe, as this is only the result of breaking an adamantine item
 
@@ -448,8 +448,10 @@
     layers:
     - state: bloomadamantine # not using the overheaded version because it doesn't need to be smashed
       shader: Emissive
+  - type: Temperature
+    currentTemperature: 2200
   - type: Workable
-    remaining: 400 # bring an army, you'll need it
+    remaining: 500 # bring an army, you'll need it
     result: AdamantineIngot
 
 - type: entity

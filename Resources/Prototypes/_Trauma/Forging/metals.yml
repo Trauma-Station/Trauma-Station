@@ -103,7 +103,9 @@
 - type: metal
   id: Adamantine
   name: adamantine
-  color: "#698e98"
+  #color: "#698e98"
+  #color: "#88e6ff"
+  color: "#affaff"
   ingotSprite: ingot_adamantine
   density: 3 # extremely light
   workingTemp: 2050

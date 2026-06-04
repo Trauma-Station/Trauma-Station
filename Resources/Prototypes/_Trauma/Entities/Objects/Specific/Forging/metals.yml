@@ -89,8 +89,8 @@
   components:
   - type: Metallic
     metal: Adamantine
-    minTemp: 2000
-    idealTemp: 2050
+    minTemp: 1975
+    idealTemp: 2025
 
 # Workable, already above ideal temp
 
