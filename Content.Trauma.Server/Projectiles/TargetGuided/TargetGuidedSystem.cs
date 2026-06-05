@@ -13,13 +13,14 @@ namespace Content.Trauma.Server.Projectiles.TargetGuided;
 /// </summary>
 public sealed partial class TargetGuidedSystem : EntitySystem
 {
-    [Dependency] private SharedTransformSystem _transform = null!;
-    [Dependency] private RotateToFaceSystem _rotateToFace = null!;
-    [Dependency] private PhysicsSystem _physics = null!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<TargetGuidedComponent, ProjectileHitEvent>(OnProjectileHit);
     }
 
@@ -120,11 +121,11 @@ public sealed partial class TargetGuidedSystem : EntitySystem
         component.PreviousCursorPosition = component.TargetPosition;
 
         // If the position has changed, reset fallback timers
-        if (component.TargetPosition.HasValue)
+        if (component.TargetPosition is { } oldTarget)
         {
             // Convert both coordinates to map positions to compare them
-            var currentMapPos = coordinates.ToMap(EntityManager, _transform);
-            var previousMapPos = component.TargetPosition.Value.ToMap(EntityManager, _transform);
+            var currentMapPos = _transform.ToMapCoordinates(coordinates);
+            var previousMapPos = _transform.ToMapCoordinates(oldTarget);
 
             // Check if they're on the same map and calculate distance
             if (currentMapPos.MapId == previousMapPos.MapId)
@@ -153,11 +154,11 @@ public sealed partial class TargetGuidedSystem : EntitySystem
     /// </summary>
     private void GuideToTarget(EntityUid uid, TargetGuidedComponent guidedComp, TransformComponent xform, float frameTime)
     {
-        if (!guidedComp.TargetPosition.HasValue)
+        if (guidedComp.TargetPosition is not {} target)
             return;
 
         // Get the positions in map coordinates
-        var targetPos = guidedComp.TargetPosition.Value.ToMap(EntityManager, _transform);
+        var targetPos = _transform.ToMapCoordinates(target);
         var missilePos = _transform.ToMapCoordinates(xform.Coordinates);
 
         // Skip if on different maps

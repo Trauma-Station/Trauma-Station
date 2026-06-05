@@ -2,12 +2,12 @@
 
 using Content.Goobstation.Common.Speech;
 using Content.Goobstation.Shared.Loudspeaker.Components;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Speech;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Loudspeaker.Systems;
@@ -28,8 +28,8 @@ public sealed partial class LoudSpeakerSystem : EntitySystem
         SubscribeLocalEvent<LoudspeakerComponent, GotEquippedHandEvent>(OnEquippedHands);
         SubscribeLocalEvent<LoudspeakerComponent, GotUnequippedHandEvent>(OnUnequippedHands);
 
-        SubscribeLocalEvent<LoudspeakerHolderComponent, GetLoudspeakerEvent>(GetLoudSpeakers);
-        SubscribeLocalEvent<LoudspeakerComponent, GetLoudspeakerDataEvent>(OnGetLoudspeakerData);
+        SubscribeLocalEvent<LoudspeakerHolderComponent, SpeechFontSizeOverrideEvent>(OnGetLoudspeakerHolder);
+        SubscribeLocalEvent<LoudspeakerComponent, SpeechFontSizeOverrideEvent>(OnGetLoudspeakerData);
         SubscribeLocalEvent<LoudspeakerHolderComponent, GetSpeechSoundEvent>(OnGetSpeechSound);
 
         SubscribeLocalEvent<LoudspeakerComponent, ExaminedEvent>(OnExamined);
@@ -73,12 +73,25 @@ public sealed partial class LoudSpeakerSystem : EntitySystem
         DoRemovalCheck(args.User, holder);
     }
 
-    private void GetLoudSpeakers(Entity<LoudspeakerHolderComponent> ent, ref GetLoudspeakerEvent args)
+    private void OnGetLoudspeakerHolder(Entity<LoudspeakerHolderComponent> ent, ref SpeechFontSizeOverrideEvent args)
     {
-        args.Loudspeakers = ent.Comp.Loudspeakers;
+        foreach (var loudspeaker in ent.Comp.Loudspeakers)
+        {
+            var speechEv = new SpeechFontSizeOverrideEvent();
+            RaiseLocalEvent(loudspeaker, ref speechEv);
+            if (speechEv.IsActive)
+            {
+                args.IsActive = true;
+                args.FontSize = speechEv.FontSize;
+                args.AffectRadio = speechEv.AffectRadio;
+                args.AffectChat = speechEv.AffectChat;
+                args.SpeechSounds = speechEv.SpeechSounds;
+                return;
+            }
+        }
     }
 
-    private void OnGetLoudspeakerData(Entity<LoudspeakerComponent> ent, ref GetLoudspeakerDataEvent args)
+    private void OnGetLoudspeakerData(Entity<LoudspeakerComponent> ent, ref SpeechFontSizeOverrideEvent args)
     {
         args.IsActive = ent.Comp.IsActive;
 
@@ -93,18 +106,13 @@ public sealed partial class LoudSpeakerSystem : EntitySystem
         if (args.Handled)
             return;
 
-        foreach (var loudspeaker in ent.Comp.Loudspeakers)
+        var ev = new SpeechFontSizeOverrideEvent();
+        RaiseLocalEvent(ent, ref ev);
+
+        if (ev.SpeechSounds is { })
         {
-            var speechEv = new GetLoudspeakerDataEvent();
-            RaiseLocalEvent(loudspeaker, ref speechEv);
-
-            if (speechEv.SpeechSounds != null)
-            {
-                args.SpeechSoundProtoId = speechEv.SpeechSounds;
-                args.Handled = true;
-                return;
-            }
-
+            args.SpeechSoundProtoId = ev.SpeechSounds;
+            args.Handled = true;
         }
     }
 

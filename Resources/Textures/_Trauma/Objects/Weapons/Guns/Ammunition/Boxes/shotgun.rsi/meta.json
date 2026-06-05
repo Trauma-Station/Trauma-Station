@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Sprites by SpaceRox1244, breaching edit by GoidaYAMLWarrior",
+    "copyright": "Sprites by SpaceRox1244, breaching edit by GoidaYAMLWarrior, hypo edit by dumblenutz. icon-hypo by TechnicFighter",
     "size": {
         "x": 32,
         "y": 32
@@ -24,6 +24,12 @@
         },
         {
             "name": "breaching"
+        },
+        {
+            "name": "hypo"
+        },
+        {
+            "name": "icon-hypo"
         }
     ]
 }

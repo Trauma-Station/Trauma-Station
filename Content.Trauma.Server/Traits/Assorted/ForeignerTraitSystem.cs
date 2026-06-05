@@ -13,7 +13,6 @@ using Content.Shared.Storage;
 
 namespace Content.Trauma.Server.Traits.Assorted;
 
-
 public sealed partial class ForeignerTraitSystem : EntitySystem
 {
     [Dependency] private EntityManager _entMan = default!;
@@ -94,13 +93,10 @@ public sealed partial class ForeignerTraitSystem : EntitySystem
 
         // Try to put the translator into entities bag, if it has one
         if (_inventory.TryGetSlotEntity(uid, "back", out var bag)
-            && TryComp<StorageComponent>(bag, out var storage)
-            && _storage.Insert(bag.Value, translator, out _, null, storage, false, false))
-            return true;
-
-        // If all of the above has failed, just drop it at the same location as the entity
-        // This should ideally never happen, but who knows.
-        Transform(translator).Coordinates = Transform(uid).Coordinates;
+            && TryComp<StorageComponent>(bag, out var storage))
+        {
+            _storage.Insert(bag.Value, translator, out _, null, storage, false, false);
+        }
 
         return true;
     }

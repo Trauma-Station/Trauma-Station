@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Wizard.Traps;
 
 namespace Content.Trauma.Client.Wizard;
 
 public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
 
     public override void Initialize()
     {
@@ -17,12 +20,9 @@ public sealed partial class WizardTrapsSystem : SharedWizardTrapsSystem
 
     private void OnAppearanceChange(Entity<WizardTrapComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (!args.AppearanceData.TryGetValue(TrapVisuals.Alpha, out var alpha))
+        if (!_appearance.TryGetData(ent, TrapVisuals.Alpha, out float alpha, args.Component))
             return;
 
-        if (args.Sprite is not { } sprite)
-            return;
-
-        _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha((float) alpha));
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(WizardTrapComponent), alpha);
     }
 }

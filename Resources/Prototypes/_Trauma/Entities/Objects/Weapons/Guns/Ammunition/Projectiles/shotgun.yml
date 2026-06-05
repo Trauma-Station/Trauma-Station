@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseBulletTrigger
+  id: PelletShotgunTearGas
+  name: bullet (12 Gauge tear gas)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SmokeOnTrigger
+    duration: 5
+    smokePrototype: Smoke
+    solution:
+      reagents:
+      - ReagentId: TearGas
+        Quantity: 20
+    spreadAmount: 1
+  - type: AutoStartTimer
+  - type: TimerTrigger
+    examinable: false
+    delay: 1
+  - type: DeleteOnTrigger
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 10
+  - type: StaminaDamageOnCollide
+    damage: 30
