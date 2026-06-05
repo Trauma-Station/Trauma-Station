@@ -316,15 +316,6 @@ public sealed partial class QualitySystem : EntitySystem
         };
         Dirty(ent);
         ApplyQuality(ent);
-
-        // TODO: limit skill gain based on the recipe used
-        _knowledge.AddExperience(brain, knowledgeToUse, Math.Abs(ent.Comp.Quality / 2) + 3, _knowledge.GetInverseMastery(skillDelta + 2));
-
-        if (lowestId is not { } actualId)
-            return;
-
-        // TODO: above
-        _knowledge.AddExperience(brain, actualId, Math.Abs(ent.Comp.Quality / 2) + 3, _knowledge.GetInverseMastery(skillDelta + 2));
     }
 
     public (EntProtoId, EntProtoId?, int, int) FindLowestDelta(Entity<KnowledgeContainerComponent> brain, Dictionary<EntProtoId, int> levelDeltas)
