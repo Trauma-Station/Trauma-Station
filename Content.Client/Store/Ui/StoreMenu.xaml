@@ -68,37 +68,38 @@ SPDX-License-Identifier: MIT
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">
                         <!-- <Trauma> - for job listings -->
-                        <RichTextLabel
-                            Name="JobListingsAcceptedLabel"
-                            Text="Accepted"
-                            Visible="False"/>
-                        <BoxContainer
-                            Name="JobListingsAcceptedContainer"
-                            MinSize="100 256"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            VerticalExpand="True">
-                            <!--  Side jobs are added here by code  -->
-                        </BoxContainer>
-                        <RichTextLabel
-                            Name="JobListingsAvailableLabel"
-                            Text="Available"
-                            Visible="False"/>
-                        <BoxContainer
-                            Name="JobListingsAvailableContainer"
-                            MinSize="100 256"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            VerticalExpand="True">
-                            <!--  Side jobs are added here by code  -->
-                        </BoxContainer>
-                        <BoxContainer
-                            Name="StoreListingsContainer"
-                            MinSize="100 256"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            VerticalExpand="True">
-                            <!--  Listings are added here by code  -->
+                        <BoxContainer Name="MainPanel" Orientation="Vertical" VerticalExpand="True">
+                            <RichTextLabel
+                                Name="JobListingsAcceptedLabel"
+                                Margin="5 5 5 5"
+                                Text="Accepted"
+                                Visible="False"/>
+                            <BoxContainer
+                                Name="JobListingsAcceptedContainer"
+                                Orientation="Vertical"
+                                SizeFlagsStretchRatio="2"
+                                VerticalExpand="True">
+                                <!--  Side jobs are added here by code  -->
+                            </BoxContainer>
+                            <RichTextLabel
+                                Name="JobListingsAvailableLabel"
+                                Margin="5 5 5 5"
+                                Text="Available"
+                                Visible="False"/>
+                            <BoxContainer
+                                Name="JobListingsAvailableContainer"
+                                Orientation="Vertical"
+                                SizeFlagsStretchRatio="2"
+                                VerticalExpand="True">
+                                <!--  Side jobs are added here by code  -->
+                            </BoxContainer>
+                            <BoxContainer
+                                Name="StoreListingsContainer"
+                                Orientation="Vertical"
+                                SizeFlagsStretchRatio="2"
+                                VerticalExpand="True">
+                                <!--  Listings are added here by code  -->
+                            </BoxContainer>
                         </BoxContainer>
                         <!-- </Trauma> -->
                     </ScrollContainer>
