@@ -27,7 +27,6 @@ public sealed class AllGamePresetsStartTest : AntagTest
     private static string[] _gamePresets = GameDataScrounger.PrototypesOfKind<GamePresetPrototype>().Where(p => !IgnoredPresets.Contains(p)).ToArray();
 
     // Tests that all game modes can start given ideal circumstances.
-    [Explicit] // Trauma - doesnt work for maints spawn rules since whatever test map it uses is empty and has no areas
     [Test]
     [TestOf(typeof(GameTicker)), TestOf(typeof(AntagSelectionSystem)), TestOf(typeof(AntagSelectionComponent))]
     [TestCaseSource(nameof(_gamePresets))]
