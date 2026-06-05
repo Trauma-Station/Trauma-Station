@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Shared.PDA.Ringer;
 using Content.Shared.Store.Components;
-using Content.Trauma.Shared.Store;
+using Content.Trauma.Common.Store;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -83,7 +83,7 @@ public abstract partial class SharedStoreSystem
         var showFooter = HasComp<RingerUplinkComponent>(store);
 
         // <Trauma> for job listings
-        var showJobListings = HasComp<StoreJobListingsComponent>(store) && component.AccountOwner is not null;
+        var showJobListings = HasComp<JobListingsComponent>(store) && component.AccountOwner is not null;
 
         var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, showJobListings);
         // </Trauma>

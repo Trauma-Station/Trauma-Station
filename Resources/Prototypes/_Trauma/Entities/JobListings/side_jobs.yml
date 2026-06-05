@@ -40,17 +40,3 @@
 - type: entity
   id: CaptainGunStealSideJob
   parent: [BaseSideJob, CaptainGunStealObjective]
-
-- type: entityTable
-  id: GrandTheftSideJobs
-  table: !type:GroupSelector
-    children:
-    - id: CMOHyposprayStealSideJob
-    - id: RDHardsuitStealSideJob
-    - id: HandTeleporterStealSideJob
-    - id: MagbootsStealSideJob
-    - id: ClipboardStealSideJob
-    - id: KnuckleDustersStealSideJob
-    - id: CorgiMeatStealSideJob
-    - id: CaptainJCaptainGunSteal
-    - id: SideJobetpackStealSideJob

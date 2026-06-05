@@ -62,6 +62,16 @@
   components:
   - type: RingerAccessUplink
   # <Trauma> - job listings
-  - type: StoreJobListings
+  - type: JobListings
     jobCount: 4
+    sideJobs:
+    - CMOHyposprayStealSideJob
+    - RDHardsuitStealSideJob
+    - HandTeleporterStealSideJob
+    - MagbootsStealSideJob
+    - ClipboardStealSideJob
+    - KnuckleDustersStealSideJob
+    - CorgiMeatStealSideJob
+    - CaptainJetpackStealSideJob
+    - CaptainGunStealSideJob
   # </Trauma>
