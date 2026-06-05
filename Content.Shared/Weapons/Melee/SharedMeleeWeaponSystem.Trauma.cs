@@ -33,7 +33,6 @@ public abstract partial class SharedMeleeWeaponSystem
 
     public static readonly ProtoId<TagPrototype> WideSwingIgnore = "WideSwingIgnore"; // for mice
     public static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
-    public static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     private float _shoveRange;
     private float _shoveSpeed;

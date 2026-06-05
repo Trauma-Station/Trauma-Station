@@ -9827,3 +9827,12 @@ Entries:
   id: 1114
   time: '2026-06-05T13:01:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3058
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Mothroaches can now ventcrawl, syndi mothroaches now have night vision,
+      same with syndicats
+  id: 1115
+  time: '2026-06-05T19:36:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3060
