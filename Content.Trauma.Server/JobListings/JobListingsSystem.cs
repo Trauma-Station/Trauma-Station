@@ -7,6 +7,8 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Store.Components;
 using Content.Trauma.Common.Store;
+using Robust.Server.Containers;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.JobListings;
@@ -19,15 +21,18 @@ public sealed partial class JobListingsSystem : EntitySystem
 {
     [Dependency] private ObjectivesSystem _objectives = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInitialised);
+        SubscribeLocalEvent<JobListingsComponent, MapInitEvent>(OnInit);
     }
 
     /// <summary>
     /// Assign the store owner a random side job.
+    /// When the traitor is assigned their uplink, the traitor's mind becomes the store's owner.
     /// </summary>
     /// <param name="jobBoard">The entity of the store and job board.</param>
     /// <returns>True if successful, false if failure.</returns>
@@ -49,11 +54,45 @@ public sealed partial class JobListingsSystem : EntitySystem
             var job = possibleJobs[index];
             possibleJobs.RemoveAt(index);
 
-            if (_objectives.TryCreateObjective((mind, mindComp), job, out _))
-                return true;
+            if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
+                return false;
+
+            _container.Insert(sideJob.Value, jobBoard.Comp2.AvailableSideJobsContainer);
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Count how many jobs exist on the job board.
+    /// This includes both available and assigned.
+    /// </summary>
+    /// <param name="jobBoard"></param>
+    /// <returns>True if successful, false if failure.</returns>
+    public int CountSideJobs(Entity<StoreComponent, JobListingsComponent> jobBoard)
+    {
+        return jobBoard.Comp2.AvailableSideJobsContainer.Count;
+    }
+
+    /// <summary>
+    /// Assign the traitor side jobs until their available slots are filled.
+    /// </summary>
+    /// <param name="jobBoard"></param>
+    /// <returns>True if successful, false if failure.</returns>
+    public bool FillSideJobs(Entity<StoreComponent, JobListingsComponent> jobBoard)
+    {
+        while (CountSideJobs(jobBoard) < jobBoard.Comp2.JobCount)
+        {
+            if (!AssignSideJob(jobBoard))
+                return false;
+        }
+
+        return true;
+    }
+
+    private void OnInit(Entity<JobListingsComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.AvailableSideJobsContainer = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.AvailableSideJobsContainerId);
     }
 
     private void OnStoreInitialised(ref StoreInitializedEvent args)
@@ -63,9 +102,6 @@ public sealed partial class JobListingsSystem : EntitySystem
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
             return;
 
-        for (var i = 0; i < jobListingsComp.JobCount; i++)
-        {
-            AssignSideJob((args.Store, storeComp, jobListingsComp));
-        }
+        FillSideJobs((args.Store, storeComp, jobListingsComp));
     }
 }
