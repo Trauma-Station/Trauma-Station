@@ -1,0 +1,56 @@
+- type: entity
+  abstract: true
+  id: BaseSideJob
+  parent: BaseTraitorObjective
+
+# grand theft
+
+- type: entity
+  id: CMOHyposprayStealSideJob
+  parent: [BaseSideJob, CMOHyposprayStealObjective]
+
+- type: entity
+  id: RDHardsuitStealSideJob
+  parent: [BaseSideJob, RDHardsuitStealObjective]
+
+- type: entity
+  id: HandTeleporterStealSideJob
+  parent: [BaseSideJob, HandTeleporterStealObjective]
+
+- type: entity
+  id: MagbootsStealSideJob
+  parent: [BaseSideJob, MagbootsStealObjective]
+
+- type: entity
+  id: ClipboardStealSideJob
+  parent: [BaseSideJob, ClipboardStealObjective]
+
+- type: entity
+  id: KnuckleDustersStealSideJob
+  parent: [BaseSideJob, KnuckleDustersStealObjective]
+
+- type: entity
+  id: CorgiMeatStealSideJob
+  parent: [BaseSideJob, CorgiMeatStealObjective]
+
+- type: entity
+  id: CaptainJetpackStealSideJob
+  parent: [BaseSideJob, CaptainJetpackStealObjective]
+
+- type: entity
+  id: CaptainGunStealSideJob
+  parent: [BaseSideJob, CaptainGunStealObjective]
+
+- type: entityTable
+  id: GrandTheftSideJobs
+  table: !type:GroupSelector
+    children:
+    - id: CMOHyposprayStealSideJob
+    - id: RDHardsuitStealSideJob
+    - id: HandTeleporterStealSideJob
+    - id: MagbootsStealSideJob
+    - id: ClipboardStealSideJob
+    - id: KnuckleDustersStealSideJob
+    - id: CorgiMeatStealSideJob
+    - id: CaptainJCaptainGunSteal
+    - id: SideJobetpackStealSideJob
