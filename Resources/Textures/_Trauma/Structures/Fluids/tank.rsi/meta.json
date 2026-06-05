@@ -4,11 +4,15 @@
         "x": 32,
         "y": 32
     },
-    "copyright": "B",
+    "copyright": "Made by GeneRickUsername, pipes from https://github.com/tgstation/tgstation at commit 57cd1d59ca019dd0e7811ac451f295f818e573da",
     "license": "CC-BY-SA-3.0",
     "states": [
         {
             "name": "icon",
+            "directions": 1
+        },
+        {
+            "name": "pipe",
             "directions": 1
         }
     ]
