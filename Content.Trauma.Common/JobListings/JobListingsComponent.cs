@@ -2,7 +2,7 @@
 
 using Robust.Shared.Containers;
 
-namespace Content.Trauma.Common.Store;
+namespace Content.Trauma.Common.JobListings;
 
 /// <summary>
 /// Component added to a store entity to enable side-jobs.
@@ -27,8 +27,8 @@ public sealed partial class JobListingsComponent : Component
     /// <summary>
     /// The container for the entities for available side jobs which can be accepted by the traitor.
     /// </summary>
-    [DataField]
-    public Container AvailableSideJobsContainer;
+    [ViewVariables]
+    public Container AvailableSideJobsContainer = default!;
 
     /// <summary>
     /// ID of the available side jobs container.

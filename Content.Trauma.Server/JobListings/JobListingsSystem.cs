@@ -6,7 +6,7 @@ using Content.Shared.Mind;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Store.Components;
-using Content.Trauma.Common.Store;
+using Content.Trauma.Common.JobListings;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -17,11 +17,10 @@ namespace Content.Trauma.Server.JobListings;
 /// System that manages the side-jobs for progressive traitor.
 /// </summary>
 
-public sealed partial class JobListingsSystem : EntitySystem
+public sealed partial class JobListingsSystem : SharedJobListingsSystem
 {
     [Dependency] private ObjectivesSystem _objectives = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private ContainerSystem _container = default!;
 
     public override void Initialize()
     {

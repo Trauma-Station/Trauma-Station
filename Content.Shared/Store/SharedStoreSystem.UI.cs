@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Shared.PDA.Ringer;
 using Content.Shared.Store.Components;
-using Content.Trauma.Common.Store;
+using Content.Trauma.Common.JobListings;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -83,14 +83,11 @@ public abstract partial class SharedStoreSystem
         var showFooter = HasComp<RingerUplinkComponent>(store);
 
         // <Trauma> for job listings
-        var showJobListings = false;
-        var sideJobs = new List<NetEntity>();
-        if (TryComp<JobListingsComponent>(store, out var storeComp) && component.AccountOwner is not null)
-        {
-            showJobListings = true;
-            sideJobs = storeComp.AvailableSideJobsContainer.ContainedEntities.Select(x => GetNetEntity(x)).ToList();
-        }
-        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, showJobListings, sideJobs);
+        StoreUpdateState state;
+        if (_jobListings.TryGetSideJobs(store, out var sideJobs) && component.AccountOwner is not null)
+            state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, true, sideJobs);
+        else
+            state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
         // </Trauma>
 
         UpdateRemoteStores(store, state);
