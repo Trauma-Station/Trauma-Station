@@ -636,7 +636,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // Get a valid entity to initialize
         if (!TryGetAntagEntity(gameRule, prototype, player, out var antagEnt))
         {
-            Log.Error($"Found no valid entity to initialize player {player.Name} for antag {prototype.ID} of {ToPrettyString(gameRule)}!"); // Trauma
             DeSelectSession(gameRule, prototype, player);
             return false;
         }
@@ -646,7 +645,6 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         // so we must verify here before applying antag components.
         if (!IsEntityValid(antagEnt.Value, prototype))
         {
-            Log.Error($"Found entity {ToPrettyString(antagEnt)} of {player.Name} was invalid for antag {prototype.ID} of {ToPrettyString(gameRule)}!"); // Trauma
             if (antagEnt.Value != player.AttachedEntity)
                 QueueDel(antagEnt.Value);
             DeSelectSession(gameRule, prototype, player);
