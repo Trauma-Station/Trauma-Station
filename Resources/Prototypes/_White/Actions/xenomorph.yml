@@ -179,7 +179,7 @@
 - type: entity
   id: ActionAcid
   parent: BaseAction
-  name: Corrosive acid (200)
+  name: Corrosive acid (100)
   description: Drench an object in acid, destroying it over time.
   components:
   - type: Action
@@ -194,7 +194,7 @@
   - type: EntityTargetAction
     event: !type:AcidActionEvent
   - type: PlasmaCostAction
-    plasmaCost: 200
+    plasmaCost: 100
 
 # Jump action
 - type: entity

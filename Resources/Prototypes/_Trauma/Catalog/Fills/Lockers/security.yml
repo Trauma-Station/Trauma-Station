@@ -201,6 +201,8 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: BoxShotgunTearGas
+      amount: 2
     - id: WeaponGaussgun
       amount: 2
     - id: BaseMagazineGaussgun

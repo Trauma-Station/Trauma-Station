@@ -132,3 +132,37 @@
       enum.MobClassUiKey.Key:
         type: MobClassSelectorBui
   - type: ActionMobClass
+
+# Lair
+- type: entity
+  parent: BaseVampireAction
+  id: ActionCreateLair
+  name: Create Lair
+  description: Use the action on a coffin to make it your lair. You will heal inside the lair, and be able to teleport to it on death. You can only make one lair, so be careful.
+  components:
+  - type: Action
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: lair
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    event: !type:ActionLairEvent
+  - type: ActionLair
+
+- type: entity
+  parent: BaseVampireAction
+  id: ActionTeleportLair
+  name: Teleport To Lair
+  description: Use this action when you are dead or crit, in order to teleport to your lair.
+  components:
+  - type: Action
+    checkCanInteract: false
+    checkConsciousness: false
+    useDelay: 500
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: lair_tp
+  - type: InstantAction
+    event: !type:ActionLairTeleportEvent
+  - type: ActionLairTeleport

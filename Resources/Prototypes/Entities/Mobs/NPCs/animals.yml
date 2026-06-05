@@ -1430,6 +1430,7 @@
   abstract: true
   components:
   # <Trauma>
+  - type: VampireDrainable
   - type: BloodSplatterer
   - type: VentCrawler
     allowInventory: false

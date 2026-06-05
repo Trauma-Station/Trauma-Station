@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.DoAfter;
-
-namespace Content.Trauma.Shared.Vampires;
+namespace Content.Trauma.Common.Vampires;
 
 /// <summary>
 /// Component that allows user to drain blood from a valid entity by attacking them in combat mode,
@@ -36,22 +34,3 @@ public sealed partial class VampireBloodsuckingComponent : Component
     [DataField]
     public TimeSpan BloodsuckingDelay = TimeSpan.FromSeconds(5f);
 }
-
-/// <summary>
-/// Raised on the <see cref="VampireBloodsuckingComponent"/> entity, after the bloodsucking process starts.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class BloodSuckDoAfterEvent : SimpleDoAfterEvent;
-
-/// <summary>
-/// Raised on the entity that does the bloodsucking sequence, and it passes.
-/// </summary>
-/// <param name="BloodRemoved"></param>The blood that was removed from the target during the bloodsucking sequence.
-[ByRefEvent]
-public record struct BloodsuckingSuccessEvent(int BloodRemoved);
-
-/// <summary>
-/// Raised on the target to validate whether they can be drained of their blood.
-/// </summary>
-[ByRefEvent]
-public record struct BloodsuckingAttemptEvent(bool Cancelled = false);

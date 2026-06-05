@@ -25,6 +25,12 @@ public sealed partial class InteractorComponent : Component
     public ProtoId<SinkPortPrototype> UseInHandPort = "UseInHand";
 
     /// <summary>
+    /// Signal port to toggle or enable/disable <see cref="HarmMode"/>.
+    /// </summary>
+    [DataField]
+    public ProtoId<SinkPortPrototype> HarmModePort = "HarmMode";
+
+    /// <summary>
     /// Whether to use alt interaction, i.e. use the highest priority verb on the target entity.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -35,6 +41,12 @@ public sealed partial class InteractorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool UseInHand;
+
+    /// <summary>
+    /// If the interactor should act as if it is in harmmode and should hit targets with its held item.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool HarmMode;
 }
 
 [Serializable, NetSerializable]

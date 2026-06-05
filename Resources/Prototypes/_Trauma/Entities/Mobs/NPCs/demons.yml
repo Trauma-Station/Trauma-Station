@@ -5,6 +5,8 @@
   name: demon
   description: It came from hell.
   components:
+  - type: KnowledgeHolder
+  - type: KnowledgeContainer # no skills lol
   - type: HTN
     rootTask:
       task: SimpleHostileCompound

@@ -212,7 +212,7 @@ public sealed partial class RoboticArmSystem : EntitySystem
 
         // prevent dropping items on walls etc
         var output = _exclusive.GetOutputSlot(ent);
-        if (output != null && IsOutputBlocked(ent))
+        if (output == null && IsOutputBlocked(ent))
             return false;
 
         var filter = _filter.GetSlot(ent);

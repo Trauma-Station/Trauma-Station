@@ -1,0 +1,11 @@
+- type: entity
+  parent: CrateEngineering
+  id: CrateCement
+  name: cement crate
+  description: A crate containing 3 cement bags.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ReagentContainerCement
+        amount: 3

@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi and recoloured by @deltanedas (github), phonemerchant made by John John, DClass made by FatEngineerGaming (Discord/Github), RevolutionEnemy made by @deltanedas (github), SpacePol made by @asardonicsailor (Discord)",
+    "copyright": "Taken from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi and recoloured by @deltanedas (github), phonemerchant made by John John, DClass made by FatEngineerGaming (Discord/Github), RevolutionEnemy made by @deltanedas (github), SpacePol made by @asardonicsailor (Discord), Advisor is from the tg .dmi, not recolored",
     "size": {
         "x": 8,
         "y": 8
@@ -21,6 +21,9 @@
         },
         {
             "name": "SpacePol"
+        },
+        {
+            "name": "Advisor"
         }
     ]
 }

@@ -4,6 +4,7 @@ using System.Text;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Objectives;
+using Content.Trauma.Common.Vampires;
 using Content.Trauma.Shared.MobClass;
 using Content.Trauma.Shared.Vampires;
 

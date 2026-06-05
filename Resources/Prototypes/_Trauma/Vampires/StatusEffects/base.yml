@@ -1,17 +1,40 @@
 - type: entity
+  abstract: true
   parent: MobStatusEffectBase
-  id: VampireCoffinStatusEffect # restores some nullification every few seconds while in a coffin
-  name: vampire coffin
+  id: VampireStatusEffect
   components:
   - type: StatusEffect
     whitelist:
       components:
       - Vampire
+
+- type: entity
+  parent: VampireStatusEffect
+  id: VampireCoffinStatusEffect # restores some nullification every few seconds while in a coffin
+  name: vampire coffin
+  components:
   - type: StatusEffectEffects
     updateDelay: 1
     effects:
     - !type:ApplyNullification
       amount: -1
+
+- type: entity
+  parent: VampireStatusEffect
+  id: VampireLairStatusEffect # restores health while in the coffin
+  name: vampire lair
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 1
+    effects:
+    - !type:EvenHealthChange
+      damage:
+        Burn: -5
+        Brute: -5
+        Toxin: -5
+        Airloss: -5
+        Genetic: -5
+        Metaphysical: -5
 
 - type: entity
   parent: MobStatusEffectBase

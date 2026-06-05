@@ -32,6 +32,7 @@
     objectives:
     - VampireBloodObjective
     - VampireSurviveObjective
+    - VampireBloodsuckObjective
   - type: AntagSelection
     agentName: roles-antag-vampire-name
     antags:

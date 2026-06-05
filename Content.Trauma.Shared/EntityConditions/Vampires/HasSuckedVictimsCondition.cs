@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityConditions;
-using Content.Trauma.Shared.Vampires;
+using Content.Trauma.Common.Vampires;
 
 namespace Content.Trauma.Shared.EntityConditions.Vampires;
 

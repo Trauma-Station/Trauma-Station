@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/blob/384de2908eee78ed777d8fe0d8568ef2fd21c2f6/icons/effects/96x96.dmi",
+    "size": {
+        "x": 96,
+        "y": 96
+    },
+    "states": [
+        {
+            "name": "vampiric_rune"
+        }
+    ]
+}

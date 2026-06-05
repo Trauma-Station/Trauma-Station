@@ -809,7 +809,7 @@
 
 - type: entity
   name: garlic bread
-  parent: [SolutionTiny, FoodBreadSliceBase]
+  parent: [Garlic, SolutionTiny, FoodBreadSliceBase] # Trauma - Added garlic parent
   id: FoodBreadGarlicSlice
   description: Alas, it is limited.
   components:
