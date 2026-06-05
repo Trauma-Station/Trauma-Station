@@ -83,10 +83,16 @@ public abstract partial class SharedStoreSystem
         var showFooter = HasComp<RingerUplinkComponent>(store);
 
         // <Trauma> for job listings
-        var showJobListings = HasComp<JobListingsComponent>(store) && component.AccountOwner is not null;
-
-        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, showJobListings);
+        var showJobListings = false;
+        var sideJobs = new List<NetEntity>();
+        if (TryComp<JobListingsComponent>(store, out var storeComp) && component.AccountOwner is not null)
+        {
+            showJobListings = true;
+            sideJobs = storeComp.AvailableSideJobsContainer.ContainedEntities.Select(x => GetNetEntity(x)).ToList();
+        }
+        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, showJobListings, sideJobs);
         // </Trauma>
+
         UpdateRemoteStores(store, state);
         UI.SetUiState(store, StoreUiKey.Key, state);
     }

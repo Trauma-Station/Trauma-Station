@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Containers;
+
 namespace Content.Trauma.Common.Store;
 
 /// <summary>
@@ -7,7 +9,7 @@ namespace Content.Trauma.Common.Store;
 /// Used for progressive traitor.
 /// </summary>
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class JobListingsComponent : Component
 {
     /// <summary>
@@ -21,4 +23,16 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public List<EntProtoId> SideJobs;
+
+    /// <summary>
+    /// The container for the entities for available side jobs which can be accepted by the traitor.
+    /// </summary>
+    [DataField]
+    public Container AvailableSideJobsContainer;
+
+    /// <summary>
+    /// ID of the available side jobs container.
+    /// </summary>
+    [DataField]
+    public string AvailableSideJobsContainerId = "available-side-jobs";
 }
