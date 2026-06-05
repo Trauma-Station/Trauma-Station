@@ -32,7 +32,6 @@ public sealed partial class AntagGhostRoleTest : AntagTest
 
     private static readonly string[] AntagGameRules = GameDataScrounger.EntitiesWithComponent("AntagSelection");
 
-    [Explicit] // Trauma - takes too long
     [Test]
     [TestOf(typeof(GameTicker)), TestOf(typeof(AntagSelectionSystem)), TestOf(typeof(AntagSelectionComponent)), TestOf(typeof(GhostRoleSystem))]
     [TestCaseSource(nameof(AntagGameRules))]
