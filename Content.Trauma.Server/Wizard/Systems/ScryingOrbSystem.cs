@@ -114,6 +114,6 @@ public sealed partial class ScryingOrbSystem : SharedScryingOrbSystem
             _meta.SetEntityName(ghost, session.Name);
 
         _mind.Visit(mind, ghost, mindComp);
-        _ghost.SetCanReturnToBody(Comp<GhostComponent>(ghost), true);
+        _ghost.SetCanReturnToBody((ghost, null), true);
     }
 }

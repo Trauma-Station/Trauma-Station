@@ -391,15 +391,15 @@ public sealed partial class FireControlSystem : EntitySystem
 
             var weaponX = Transform(localWeapon);
             var currentMapCoords = _xform.GetMapCoordinates(localWeapon, weaponX);
-            var destinationMapCoords = targetCoords.ToMap(EntityManager, _xform);
+            var targetPos = _xform.ToMapCoordinates(targetCoords);
 
-            if (destinationMapCoords.MapId == currentMapCoords.MapId && currentMapCoords.MapId != MapId.Nullspace)
+            if (targetPos.MapId == currentMapCoords.MapId && currentMapCoords.MapId != MapId.Nullspace)
             {
-                var diff = destinationMapCoords.Position - currentMapCoords.Position;
+                var diff = targetPos.Position - currentMapCoords.Position;
                 if (diff.LengthSquared() > 0.01f)
                 {
                     // Only rotate the gun if it has line of sight to the target
-                    if (HasLineOfSight(localWeapon, currentMapCoords.Position, destinationMapCoords.Position, currentMapCoords.MapId))
+                    if (HasLineOfSight(localWeapon, currentMapCoords.Position, targetPos.Position, currentMapCoords.MapId))
                     {
                         var goalAngle = Angle.FromWorldVec(diff);
                         _rotateToFace.TryRotateTo(localWeapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponX);
@@ -407,7 +407,6 @@ public sealed partial class FireControlSystem : EntitySystem
                 }
             }
 
-            var targetPos = targetCoords.ToMap(EntityManager, _xform);
 
             if (targetPos.MapId != weaponX.MapID)
                 continue;
@@ -496,7 +495,7 @@ public sealed partial class FireControlSystem : EntitySystem
         // Get weapon and target positions
         var weaponXform = Transform(weapon);
         var weaponPos = _xform.GetWorldPosition(weaponXform);
-        var targetPos = coords.ToMap(EntityManager, _xform).Position;
+        var targetPos = _xform.ToMapCoordinates(coords).Position;
 
         // Calculate direction
         var direction = targetPos - weaponPos;

@@ -18,9 +18,9 @@ using Content.Shared.StatusIcon;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Card;
-using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 
@@ -31,10 +31,11 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     private TagSystem _tag = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
+    private SharedAudioSystem _audio = default!;
+    private SharedContainerSystem _container = default!;
     private SharedContrabandDetectorSystem _contra = default!;
     private SharedIdCardSystem _card = default!;
-    private SharedAudioSystem _audio = default!;
-    private ContainerSystem _container = default!;
+    private SharedTransformSystem _transform = default!;
     private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     private EntityQuery<MobStateComponent> _mobQuery = default!;
     private EntityQuery<AntagCardComponent> _cardQuery = default!;
@@ -76,10 +77,11 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
         _tag = sysManager.GetEntitySystem<TagSystem>();
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+        _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
+        _container = sysManager.GetEntitySystem<SharedContainerSystem>();
         _contra = sysManager.GetEntitySystem<SharedContrabandDetectorSystem>();
         _card = sysManager.GetEntitySystem<SharedIdCardSystem>();
-        _audio = sysManager.GetEntitySystem<SharedAudioSystem>();
-        _container = sysManager.GetEntitySystem<ContainerSystem>();
+        _transform = sysManager.GetEntitySystem<SharedTransformSystem>();
 
         _cuffableQuery = _entMan.GetEntityQuery<CuffableComponent>();
         _mobQuery = _entMan.GetEntityQuery<MobStateComponent>();
@@ -106,9 +108,9 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
         bool isEmagged = _entMan.HasComponent<EmaggedComponent>(owner);
         MobStateComponent? mobState = null;
 
-        if (targetEnt.Valid && _entMan.TryGetComponent<TransformComponent>(targetEnt, out var transformComp) && _mobQuery.Resolve(targetEnt, ref mobState))
+        if (targetEnt.Valid && _entMan.TryGetComponent<TransformComponent>(targetEnt, out var xform) && _mobQuery.Resolve(targetEnt, ref mobState))
         {
-            if (!BeatUp((targetEnt, mobState), owner, isEmagged) || !ownerCoords.InRange(_entMan, transformComp.Coordinates, range))
+            if (!BeatUp((targetEnt, mobState), owner, isEmagged) || !_transform.InRange(ownerCoords, xform.Coordinates, range))
                 targetEnt = EntityUid.Invalid;
         }
 

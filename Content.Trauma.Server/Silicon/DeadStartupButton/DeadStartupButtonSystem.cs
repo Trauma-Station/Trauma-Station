@@ -6,23 +6,21 @@ using Content.Server.Lightning.Components;
 using Content.Server.Popups;
 using Content.Shared.Audio;
 using Content.Shared.Electrocution;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Silicon.DeadStartupButton;
 
 public sealed partial class DeadStartupButtonSystem : SharedDeadStartupButtonSystem
 {
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private LightningSystem _lightning = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
@@ -41,37 +39,38 @@ public sealed partial class DeadStartupButtonSystem : SharedDeadStartupButtonSys
     {
         if (args.Handled || args.Cancelled
             || !TryComp<MobStateComponent>(uid, out var mobStateComponent)
-            || !_mobState.IsDead(uid, mobStateComponent)
+            || !Mob.IsDead(uid, mobStateComponent)
             || !TryComp<MobThresholdsComponent>(uid, out var mobThresholdsComponent))
             return;
 
-        var damage = _mobThreshold.CheckVitalDamage(uid);
+        var damage = _threshold.CheckVitalDamage(uid);
         // Check if entity has a critical state
-        if (_mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var criticalThreshold, mobThresholdsComponent)
+        if (_threshold.TryGetThresholdForState(uid, MobState.Critical, out var criticalThreshold, mobThresholdsComponent)
             && damage < criticalThreshold)
         {
-            _mobState.ChangeMobState(uid, MobState.Alive, mobStateComponent);
+            Mob.ChangeMobState(uid, MobState.Alive, mobStateComponent);
             return;
         }
 
         // Check if entity has a dead state
-        if (_mobThreshold.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, mobThresholdsComponent)
+        if (_threshold.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, mobThresholdsComponent)
             && damage < deadThreshold)
         {
-            _mobState.ChangeMobState(uid, MobState.Alive, mobStateComponent);
+            Mob.ChangeMobState(uid, MobState.Alive, mobStateComponent);
             return;
         }
 
-        _audio.PlayPvs(comp.BuzzSound, uid, AudioHelpers.WithVariation(0.05f, _robustRandom));
-        _popup.PopupEntity(Loc.GetString("dead-startup-system-reboot-failed", ("target", Name(uid))), uid);
+        Audio.PlayPvs(comp.BuzzSound, uid);
+        var name = Identity.Entity(uid, EntityManager);
+        _popup.PopupEntity(Loc.GetString("dead-startup-system-reboot-failed", ("target", name)), uid);
         Spawn("EffectSparks", Transform(uid).Coordinates);
     }
 
     private void OnElectrocuted(EntityUid uid, DeadStartupButtonComponent comp, ElectrocutedEvent args)
     {
-        if (HasComp<LightningComponent>(args.SourceUid) // Goobstation - Fix IPC shock loops.
+        if (HasComp<LightningComponent>(args.SourceUid)
             || !TryComp<MobStateComponent>(uid, out var mobStateComponent)
-            || !_mobState.IsDead(uid, mobStateComponent)
+            || !Mob.IsDead(uid, mobStateComponent)
             || !_powerCell.TryGetBatteryFromEntityOrSlot(uid, out var battery)
             || _battery.GetCharge(battery.Value.AsNullable()) <= 0)
             return;
@@ -85,8 +84,8 @@ public sealed partial class DeadStartupButtonSystem : SharedDeadStartupButtonSys
         if (args.NewMobState != MobState.Alive)
             return;
 
-        _popup.PopupEntity(Loc.GetString("dead-startup-system-reboot-success", ("target", MetaData(uid).EntityName)), uid);
-        _audio.PlayPvs(comp.Sound, uid);
+        var name = Identity.Entity(uid, EntityManager);
+        _popup.PopupEntity(Loc.GetString("dead-startup-system-reboot-success", ("target", name)), uid);
+        Audio.PlayPvs(comp.Sound, uid);
     }
-
 }
