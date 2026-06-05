@@ -2,6 +2,7 @@
   id: SecurityBodyguard
   name: job-name-security-bodyguard
   description: job-description-security-bodyguard
+  playTimeTracker: JobSecurityBodyguard
   setPreference: false
   requirements:
   - !type:DepartmentTimeRequirement
