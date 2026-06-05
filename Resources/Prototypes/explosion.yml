@@ -128,7 +128,7 @@
     types:
       Heat: 1
       Blunt: 2
-      Slash: 3 # Goob edit
+      Piercing: 3
   lightColor: Orange
   texturePath: /Textures/Effects/fire.rsi
   fireStates: 3
