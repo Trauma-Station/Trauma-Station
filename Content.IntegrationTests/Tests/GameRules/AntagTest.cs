@@ -14,7 +14,7 @@ namespace Content.IntegrationTests.Tests.GameRules;
 /// <summary>
 /// An abstract test fixture which is setup specifically for tests involving antag definitions, to ensure they work correctly!
 /// </summary>
-[Category("GameRuleTests"), Explicit] // Trauma - explicit since the antag tests use 16gb of ram actual dogshit learn to code
+[Category("GameRuleTests")] // Trauma
 public abstract partial class AntagTest : GameTest
 {
     public override PoolSettings PoolSettings => new()
