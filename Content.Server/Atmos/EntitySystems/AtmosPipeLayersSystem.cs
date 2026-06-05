@@ -19,7 +19,7 @@ namespace Content.Server.Atmos.EntitySystems;
 public sealed partial class AtmosPipeLayersSystem : SharedAtmosPipeLayersSystem
 {
     // <Trauma>
-    [Dependency] readonly CommonPlumbingSystem _plumbing = default!;
+    [Dependency] private CommonPlumbingSystem _plumbing = default!;
     // </Trauma>
     [Dependency] private NodeGroupSystem _nodeGroup = default!;
     [Dependency] private PipeRestrictOverlapSystem _pipeRestrictOverlap = default!;
