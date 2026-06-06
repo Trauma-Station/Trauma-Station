@@ -17,14 +17,14 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
-public abstract class SharedBladeArenaSystem : EntitySystem
+public abstract partial class SharedBladeArenaSystem : EntitySystem
 {
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    [Dependency] private readonly EntityQuery<InsideArenaComponent> _insideQuery = default!;
-    [Dependency] protected readonly EntityQuery<HereticArenaParticipantComponent> ParticipantQuery = default!;
+    [Dependency] private EntityQuery<InsideArenaComponent> _insideQuery = default!;
+    [Dependency] protected EntityQuery<HereticArenaParticipantComponent> ParticipantQuery = default!;
 
     public override void Initialize()
     {

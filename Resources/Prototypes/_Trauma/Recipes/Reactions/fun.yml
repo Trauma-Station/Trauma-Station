@@ -13,3 +13,25 @@
       amount: 1
     CapsaicinOil:
       amount: 1
+
+- type: reaction
+  id: Crabon
+  reactants:
+    BahamaMama: # tropical power
+      amount: 1
+    CogChamp: # THROUGH THE POWER OF RATVAR
+      amount: 1
+    CoconutFlesh: # coconut crab
+      amount: 1
+    CrushDepth: # pressure
+      amount: 1
+    DoctorsDelight: # doktor turn off my crab inhibitors
+      amount: 1
+    PinaColada: # more tropical
+      amount: 1
+    WhiteGilgamesh: # chemical suffering
+      amount: 1
+    TheSunAlsoRises: # annoying
+      amount: 1
+  products:
+    Crabon: 8

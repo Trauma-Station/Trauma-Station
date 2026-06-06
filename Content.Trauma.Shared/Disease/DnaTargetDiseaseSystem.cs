@@ -9,10 +9,10 @@ namespace Content.Trauma.Shared.Disease;
 /// <summary>
 /// Handles everything related to DNA targeting diseases.
 /// </summary>
-public sealed class DnaTargetDiseaseSystem : EntitySystem
+public sealed partial class DnaTargetDiseaseSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<DnaComponent> _dnaQuery = default!;
-    [Dependency] private readonly EntityQuery<DnaTargetDiseaseComponent> _query = default!;
+    [Dependency] private EntityQuery<DnaComponent> _dnaQuery = default!;
+    [Dependency] private EntityQuery<DnaTargetDiseaseComponent> _query = default!;
 
     public override void Initialize()
     {

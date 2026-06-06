@@ -7,7 +7,7 @@ namespace Content.Goobstation.Client.TapeRecorder;
 /// <summary>
 /// Required for client side prediction stuff
 /// </summary>
-public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
+public sealed partial class TapeRecorderSystem : SharedTapeRecorderSystem
 {
     private TimeSpan _lastTickTime = TimeSpan.Zero;
 

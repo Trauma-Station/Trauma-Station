@@ -19,14 +19,14 @@ namespace Content.Goobstation.Server.Shadowling.Systems;
 /// <summary>
 /// This handles the Shadowling's System
 /// </summary>
-public sealed class ShadowlingSystem : SharedShadowlingSystem
+public sealed partial class ShadowlingSystem : SharedShadowlingSystem
 {
-    [Dependency] private readonly CodeConditionSystem _codeCondition = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private CodeConditionSystem _codeCondition = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

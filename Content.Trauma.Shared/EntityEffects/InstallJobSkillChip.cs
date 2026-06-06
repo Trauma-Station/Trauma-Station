@@ -18,12 +18,12 @@ public sealed partial class InstallJobSkillChip : EntityEffectBase<InstallJobSki
         => null; // do not fucking make a reagent with this :sob:
 }
 
-public sealed class InstallJobSkillChipSystem : EntityEffectSystem<MindContainerComponent, InstallJobSkillChip>
+public sealed partial class InstallJobSkillChipSystem : EntityEffectSystem<MindContainerComponent, InstallJobSkillChip>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> Head = "Head";
 

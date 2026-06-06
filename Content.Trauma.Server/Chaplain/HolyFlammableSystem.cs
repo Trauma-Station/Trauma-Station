@@ -9,6 +9,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Inventory;
@@ -28,16 +29,18 @@ namespace Content.Trauma.Server.Chaplain;
 /// <summary>
 /// This system takes care of entities that can catch holy fire by leveraging if the entity has the weakToHolyComponent.
 /// </summary>
-public sealed class HolyFlammableSystem : EntitySystem
+public sealed partial class HolyFlammableSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+
+    public static readonly ProtoId<DamageTypePrototype> Holy = "Holy";
 
     private const float InitialGrowthRate = 1f;
     private const float IntermediateGrowthRate = 0.5f;
@@ -55,7 +58,7 @@ public sealed class HolyFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<HolyIgniteOnCollideComponent, StartCollideEvent>(HolyIgniteOnCollide);
         SubscribeLocalEvent<HolyIgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
-        SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<IgniteOnHolyDamageComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<ShouldTakeHolyComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ShouldTakeHolyComponent, ComponentRemove>(OnRemove);
     }
@@ -256,29 +259,17 @@ public sealed class HolyFlammableSystem : EntitySystem
         UpdateAppearance(uid, flammable);
     }
 
-    private void OnDamageChanged(EntityUid uid, IgniteOnHolyDamageComponent component, DamageChangedEvent args)
+    private void OnDamageDealt(Entity<IgniteOnHolyDamageComponent> ent, ref DamageDealtEvent args)
     {
-        // Make sure the entity is flammable
-        if (!TryComp<HolyFlammableComponent>(uid, out var flammable))
+        // Ignite holy flammable entities if they take holy damage
+        if (!TryComp<HolyFlammableComponent>(ent, out var flammable) ||
+            !args.Damage.DamageDict.TryGetValue(Holy, out var value) ||
+            value <= ent.Comp.Threshold)
             return;
 
-        // Make sure the damage delta isn't null
-        if (args.DamageDelta == null)
-            return;
-
-        // Check if its' taken any holy damage, and give the value
-        if (args.DamageDelta.DamageDict.TryGetValue("Holy", out var value))
-        {
-            // Make sure the value is greater than the threshold
-            if (value <= component.Threshold)
-                return;
-
-            // Ignite that sucker
-            flammable.FireStacks += component.FireStacks;
-            HolyIgnite(uid, uid);
-        }
-
-
+        // Ignite that sucker
+        flammable.FireStacks += ent.Comp.FireStacks;
+        HolyIgnite(ent, args.Origin);
     }
 
     public void OnStartup(Entity<ShouldTakeHolyComponent> ent, ref ComponentStartup args)

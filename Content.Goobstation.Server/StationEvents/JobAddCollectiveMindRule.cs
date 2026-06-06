@@ -12,11 +12,11 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.StationEvents;
 
-public sealed class JobAddCollectiveMindRule : StationEventSystem<JobAddCollectiveMindRuleComponent>
+public sealed partial class JobAddCollectiveMindRule : StationEventSystem<JobAddCollectiveMindRuleComponent>
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private SharedJobSystem _job = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     // TODO: delete this and add collective mind entity effect
     protected override void Started(EntityUid uid, JobAddCollectiveMindRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)

@@ -15,10 +15,9 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: GenericPatchSmall-
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
+  - type: Solution
+    solution:
+      maxVol: 30
   - type: MedicalPatch
     singleUse: true
     transferAmount: 0.25
@@ -31,13 +30,11 @@
   components:
   - type: Label
     currentLabel: Bicaridine 30u
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-          - ReagentId: Bicaridine
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Bicaridine
+        Quantity: 30
 
 - type: entity
   parent: MedicalPatchPrefilledBase
@@ -47,10 +44,8 @@
   components:
   - type: Label
     currentLabel: Dermaline 30u
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-          - ReagentId: Dermaline
-            Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Dermaline
+        Quantity: 30

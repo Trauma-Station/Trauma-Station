@@ -12,27 +12,28 @@ using Content.Shared.Whitelist;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
-public sealed class RiposteeSystem : EntitySystem
+public sealed partial class RiposteeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -56,11 +57,14 @@ public sealed class RiposteeSystem : EntitySystem
         if (_player.LocalEntity != user.Value)
             return;
 
-        if (!TryComp(weapon.Value, out MeleeWeaponComponent? melee) ||
-            !TryComp(user.Value, out RiposteeComponent? ripostee))
+        if (!TryComp(weapon.Value, out MeleeWeaponComponent? melee))
             return;
 
-        CounterAttack((weapon.Value, melee), (user.Value, ripostee), target.Value, ev.Data);
+        CounterAttack((weapon.Value, melee),
+            user.Value,
+            target.Value,
+            ev.Sound,
+            ev.Message);
     }
 
     public override void Update(float frameTime)
@@ -103,16 +107,16 @@ public sealed class RiposteeSystem : EntitySystem
 
     private void OnHarmAttempt(Entity<RiposteeComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled)
+        if (args.Cancelled || !args.CanRiposte)
             return;
 
         if (_net.IsClient)
             return;
 
-        if (_mobState.IsIncapacitated(ent))
+        if (TryComp(args.Used, out MeleeWeaponComponent? usedMelee) && !usedMelee.CanParryLight)
             return;
 
-        if (HasComp<RiposteeComponent>(args.User))
+        if (_mobState.IsIncapacitated(ent))
             return;
 
         foreach (var data in ent.Comp.Data.Values)
@@ -169,21 +173,31 @@ public sealed class RiposteeSystem : EntitySystem
             if (data.Cooldown > 0f)
                 data.CanRiposte = false;
 
-            CounterAttack(weapon.Value, ent, args.User, data);
+            if (CounterAttack(weapon.Value, ent, args.User, data.RiposteSound, data.RiposteUsedMessage))
+            {
+                if (data.StunTime > TimeSpan.Zero)
+                    _stun.TryUpdateParalyzeDuration(args.User, data.StunTime);
+
+                if (data.KnockdownTime > TimeSpan.Zero)
+                    _stun.TryKnockdown(args.User, data.KnockdownTime);
+            }
+
             RaiseNetworkEvent(new RiposteUsedEvent(GetNetEntity(ent.Owner),
                     GetNetEntity(args.User),
                     GetNetEntity(weapon.Value.Owner),
-                    data),
+                    data.RiposteSound,
+                    data.RiposteUsedMessage),
                 ent.Owner);
 
             break;
         }
     }
 
-    private void CounterAttack(Entity<MeleeWeaponComponent> weapon,
-        Entity<RiposteeComponent> user,
+    public bool CounterAttack(Entity<MeleeWeaponComponent> weapon,
+        EntityUid user,
         EntityUid target,
-        RiposteData data)
+        SoundSpecifier? sound,
+        LocId? message)
     {
         var nextAttack = weapon.Comp.NextAttack;
         weapon.Comp.NextAttack = TimeSpan.Zero;
@@ -192,19 +206,12 @@ public sealed class RiposteeSystem : EntitySystem
         if (!inCombat)
             _combatMode.SetInCombatMode(user, true);
 
-        if (_melee.AttemptLightAttack(user, weapon.Owner, weapon.Comp, target) && _net.IsServer &&
-            _melee.InRange(user,
-                target,
-                weapon.Comp.Range,
-                CompOrNull<ActorComponent>(user)?.PlayerSession,
-                out _))
-        {
-            if (data.StunTime > TimeSpan.Zero)
-                _stun.TryUpdateParalyzeDuration(target, data.StunTime);
-
-            if (data.KnockdownTime > TimeSpan.Zero)
-                _stun.TryKnockdown(target, data.KnockdownTime);
-        }
+        var result = _melee.AttemptLightAttack(user, weapon.Owner, weapon.Comp, target, false) && _net.IsServer &&
+                     _melee.InRange(user,
+                         target,
+                         weapon.Comp.Range,
+                         CompOrNull<ActorComponent>(user)?.PlayerSession,
+                         out _);
 
         if (!inCombat)
             _combatMode.SetInCombatMode(user, false);
@@ -213,17 +220,24 @@ public sealed class RiposteeSystem : EntitySystem
         Dirty(weapon);
 
         if (_net.IsClient && _player.LocalEntity == target)
-            return;
+            return result;
 
-        _audio.PlayPredicted(data.RiposteSound, user, user);
+        _audio.PlayPredicted(sound, user, user);
 
-        if (data.RiposteUsedMessage != null)
-            _popup.PopupClient(Loc.GetString(data.RiposteUsedMessage), user, user);
+        if (message != null)
+            _popup.PopupClient(Loc.GetString(message), user, user);
+
+        return result;
     }
 }
 
 [Serializable, NetSerializable]
-public sealed class RiposteUsedEvent(NetEntity user, NetEntity target, NetEntity weapon, RiposteData data)
+public sealed class RiposteUsedEvent(
+    NetEntity user,
+    NetEntity target,
+    NetEntity weapon,
+    SoundSpecifier? sound,
+    LocId? message)
     : EntityEventArgs
 {
     public NetEntity User = user;
@@ -232,5 +246,7 @@ public sealed class RiposteUsedEvent(NetEntity user, NetEntity target, NetEntity
 
     public NetEntity Weapon = weapon;
 
-    public RiposteData Data = data;
+    public SoundSpecifier? Sound = sound;
+
+    public LocId? Message = message;
 }

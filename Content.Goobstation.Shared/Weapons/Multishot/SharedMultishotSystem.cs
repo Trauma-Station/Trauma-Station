@@ -12,16 +12,15 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Weapons.Multishot;
 
-public sealed class SharedMultishotSystem : EntitySystem
+public sealed partial class SharedMultishotSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MissChanceSystem _miss = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MissChanceSystem _miss = default!;
 
     public override void Initialize()
     {

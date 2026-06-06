@@ -15,15 +15,15 @@ using System.Runtime.InteropServices;
 
 namespace Content.Server.SurveillanceCamera;
 
-public sealed class SurveillanceCameraMonitorSystem : EntitySystem
+public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 {
-    [Dependency] private readonly SurveillanceCameraSystem _surveillanceCameras = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private SurveillanceCameraSystem _surveillanceCameras = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
 
     // Goobstation
-    [Dependency] private readonly PvsOverrideSystem _pvsOverrideSystem = default!;
-    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private PvsOverrideSystem _pvsOverrideSystem = default!;
+    [Dependency] private EntityManager _entityManager = default!;
 
     public override void Initialize()
     {

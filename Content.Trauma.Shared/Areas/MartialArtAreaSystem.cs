@@ -4,9 +4,9 @@ using Content.Trauma.Shared.MartialArts;
 
 namespace Content.Trauma.Shared.Areas;
 
-public sealed class MartialArtAreaSystem : EntitySystem
+public sealed partial class MartialArtAreaSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private AreaSystem _area = default!;
 
     public override void Initialize()
     {

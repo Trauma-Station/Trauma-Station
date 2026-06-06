@@ -11,6 +11,7 @@
   flavor: bitter
   color: "#ffde7448"
   physicalDesc: reagent-physical-desc-translucent
+  contrabandSeverity: Major # Does nothing, may as well make it fun (illegal) to have
   metabolisms:
     Bloodstream:
       metabolismRate: 0.1

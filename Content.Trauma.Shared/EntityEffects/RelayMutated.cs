@@ -20,9 +20,9 @@ public sealed partial class RelayMutated : EntityEffectBase<RelayMutated>
         => Loc.GetString("entity-effect-guidebook-relay-mutated", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys) ?? string.Empty));
 }
 
-public sealed class RelayMutatedEffectSystem : EntityEffectSystem<MutationComponent, RelayMutated>
+public sealed partial class RelayMutatedEffectSystem : EntityEffectSystem<MutationComponent, RelayMutated>
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<MutationComponent> ent, ref EntityEffectEvent<RelayMutated> args)
     {

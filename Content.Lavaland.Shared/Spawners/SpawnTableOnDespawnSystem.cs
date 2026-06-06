@@ -5,9 +5,9 @@ using Robust.Shared.Spawners;
 
 namespace Content.Lavaland.Shared.Spawners;
 
-public sealed class SpawnTableOnDespawnSystem : EntitySystem
+public sealed partial class SpawnTableOnDespawnSystem : EntitySystem
 {
-    [Dependency] private readonly EntityTableSystem _table = default!;
+    [Dependency] private EntityTableSystem _table = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

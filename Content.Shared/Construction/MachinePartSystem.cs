@@ -10,11 +10,11 @@ namespace Content.Shared.Construction
     /// <summary>
     /// Deals with machine parts and machine boards.
     /// </summary>
-    public sealed class MachinePartSystem : EntitySystem
+    public sealed partial class MachinePartSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototype = default!;
-        [Dependency] private readonly SharedLatheSystem _lathe = default!;
-        [Dependency] private readonly SharedConstructionSystem _construction = default!;
+        [Dependency] private IPrototypeManager _prototype = default!;
+        [Dependency] private SharedLatheSystem _lathe = default!;
+        [Dependency] private SharedConstructionSystem _construction = default!;
 
         public override void Initialize()
         {
@@ -37,7 +37,7 @@ namespace Content.Shared.Construction
 
                     args.PushMarkup(Loc.GetString("machine-board-component-required-element-entry-text",
                         ("amount", amount),
-                        ("requiredElement", Loc.GetString(name))));
+                        ("requiredElement", name))); // Trauma - remove Loc.GetString it's an entity prototype
                 }
 
                 foreach (var (_, info) in component.ComponentRequirements)

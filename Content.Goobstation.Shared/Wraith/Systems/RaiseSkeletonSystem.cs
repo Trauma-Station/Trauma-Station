@@ -11,13 +11,13 @@ using Content.Shared.Mobs.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
-public sealed class RaiseSkeletonSystem : EntitySystem
+public sealed partial class RaiseSkeletonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedRottingSystem _rotting = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
 
     public override void Initialize()
     {

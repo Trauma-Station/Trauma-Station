@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Common.DoAfter;
 using Content.Goobstation.Shared.Factory.Filters;
+using Content.Shared.CombatMode;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DoAfter;
@@ -14,26 +15,28 @@ using Content.Shared.Throwing;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Factory;
 
 internal delegate bool Toggle();
 
-public abstract class SharedInteractorSystem : EntitySystem
+public abstract partial class SharedInteractorSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationFilterSystem _filter = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] protected readonly StartableMachineSystem Machine = default!;
+    [Dependency] private AutomationFilterSystem _filter = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] protected StartableMachineSystem Machine = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
     private EntityQuery<ActiveDoAfterComponent> _doAfterQuery;
     private EntityQuery<HandsComponent> _handsQuery;
@@ -90,7 +93,8 @@ public abstract class SharedInteractorSystem : EntitySystem
         var user = args.User;
         (string, Toggle)[] options = [
             ("alt-interact", () => SetAltInteract(ent, !ent.Comp.AltInteract)),
-            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand))
+            ("use-in-hand", () => SetUseInHand(ent, !ent.Comp.UseInHand)),
+            ("harm-mode", () => SetHarmMode(ent, !ent.Comp.HarmMode))
         ];
         foreach (var (id, toggle) in options)
         {
@@ -131,13 +135,18 @@ public abstract class SharedInteractorSystem : EntitySystem
 
     private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent args)
     {
-        var alt = args.Port == ent.Comp.AltInteractPort;
-        if (!alt && args.Port != ent.Comp.UseInHandPort)
-            return;
-
         var state = SignalState.Momentary;
         args.Data?.TryGetValue<SignalState>("logic_state", out state);
-        var current = alt ? ent.Comp.AltInteract : ent.Comp.UseInHand;
+        bool current;
+        if (args.Port == ent.Comp.AltInteractPort)
+            current = ent.Comp.AltInteract;
+        else if (args.Port == ent.Comp.UseInHandPort)
+            current = ent.Comp.UseInHand;
+        else if (args.Port == ent.Comp.HarmModePort)
+            current = ent.Comp.HarmMode;
+        else
+            return;
+
         var value = state switch
         {
             SignalState.Momentary => !current,
@@ -145,10 +154,13 @@ public abstract class SharedInteractorSystem : EntitySystem
             SignalState.Low => false,
             _ => false
         };
-        if (alt)
+
+        if (args.Port == ent.Comp.AltInteractPort)
             SetAltInteract(ent, value);
-        else
+        else if (args.Port == ent.Comp.UseInHandPort)
             SetUseInHand(ent, value);
+        else if (args.Port == ent.Comp.HarmModePort)
+            SetHarmMode(ent, value);
     }
 
     public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
@@ -181,8 +193,22 @@ public abstract class SharedInteractorSystem : EntitySystem
         if (!_hands.TryGetActiveItem(ent.Owner, out var tool))
             return _interaction.InteractHand(ent, target);
 
-        var coords = Transform(target).Coordinates;
-        return _interaction.InteractUsing(ent, tool.Value, target, coords);
+        if (!ent.Comp.HarmMode)
+        {
+            var coords = Transform(target).Coordinates;
+            return _interaction.InteractUsing(ent, tool.Value, target, coords);
+        }
+
+        // instead of interacting via the SharedInteractionSystem, attack the target with the held item
+        if (!TryComp<MeleeWeaponComponent>(tool, out var meleeWeapon))
+            return false;
+
+        // I turn on combat mode manually for the entity because otherwise the melee attack will fail
+        var prev = _combatMode.IsInCombatMode(ent.Owner);
+        _combatMode.SetInCombatMode(ent.Owner, true);
+        var result = _melee.AttemptLightAttack(ent.Owner, tool.Value, meleeWeapon, target);
+        _combatMode.SetInCombatMode(ent.Owner, prev);
+        return result;
     }
 
     protected void UpdateAppearance(EntityUid uid)
@@ -226,6 +252,19 @@ public abstract class SharedInteractorSystem : EntitySystem
             return use;
 
         ent.Comp.UseInHand = use;
+        Dirty(ent);
+        return use;
+    }
+
+    /// <summary>
+    /// Set <see cref="InteractorComponent.HarmMode"> and dirty it.
+    /// </summary>
+    public bool SetHarmMode(Entity<InteractorComponent> ent, bool use)
+    {
+        if (ent.Comp.HarmMode == use)
+            return use;
+
+        ent.Comp.HarmMode = use;
         Dirty(ent);
         return use;
     }

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Lavaland.Server.Biome;
 using Content.Lavaland.Server.Procedural.Components;
 using Content.Lavaland.Shared.Procedural.Components;
@@ -17,7 +16,7 @@ namespace Content.Lavaland.Server.Procedural.Systems;
 
 public sealed partial class LavalandSystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public bool SetupLavalandPlanet(
         ProtoId<LavalandMapPrototype> mapProto,

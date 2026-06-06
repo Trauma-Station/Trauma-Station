@@ -10,10 +10,10 @@ using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
-public sealed class EldritchSleepStatusEffectSystem : EntitySystem
+public sealed partial class EldritchSleepStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
     {

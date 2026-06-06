@@ -5,16 +5,15 @@ using Content.Client.Items.Systems;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Trauma.Shared.Heretic.Components;
-using Robust.Client.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class ClothingToggleAnimationVisualsSystem : EntitySystem
+public sealed partial class ClothingToggleAnimationVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly ItemSystem _item = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private ItemSystem _item = default!;
 
     public override void Initialize()
     {

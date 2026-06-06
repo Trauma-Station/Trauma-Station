@@ -30,9 +30,8 @@
   opponentEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit3.ogg
-  - !type:GenericStatusEffect
-    key: TemporaryBlindness
-    component: TemporaryBlindness
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlindness
     time: 2
   - !type:GenericStatusEffect
     key: BlurryVision

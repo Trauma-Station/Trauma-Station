@@ -4,16 +4,15 @@ using Content.Client.Lathe.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.ListViewSelector;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface.Controls;
 
 // ReSharper disable InconsistentNaming
 
 namespace Content.Goobstation.Client.ListViewSelector;
 
 [UsedImplicitly]
-public sealed class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private FancyWindow _window = new();
     private BoxContainer? _itemsContainer;

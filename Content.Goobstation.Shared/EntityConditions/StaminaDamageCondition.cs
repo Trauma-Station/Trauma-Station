@@ -20,7 +20,7 @@ public sealed partial class StaminaDamageCondition : EntityConditionBase<Stamina
             ("min", Min));
 }
 
-public sealed class StaminaDamageConditionSystem : EntityConditionSystem<StaminaComponent, StaminaDamageCondition>
+public sealed partial class StaminaDamageConditionSystem : EntityConditionSystem<StaminaComponent, StaminaDamageCondition>
 {
     protected override void Condition(Entity<StaminaComponent> ent, ref EntityConditionEvent<StaminaDamageCondition> args)
     {

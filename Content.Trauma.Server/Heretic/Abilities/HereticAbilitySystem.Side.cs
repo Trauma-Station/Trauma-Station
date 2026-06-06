@@ -16,7 +16,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private readonly List<EntityUid> _bloodStealTargets = new();
     private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();

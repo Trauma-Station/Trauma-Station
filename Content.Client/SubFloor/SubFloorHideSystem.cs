@@ -1,4 +1,7 @@
-using Content.Shared.Atmos.Components;  //Goobstation - Ventcrawler
+// <Trauma>
+using Content.Shared.Atmos.Components;
+using Content.Trauma.Common.Sprite;
+// </Trauma>
 using Content.Shared.DrawDepth;
 using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Shared.SubFloor;
@@ -8,11 +11,12 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SubFloor;
 
-public sealed class SubFloorHideSystem : SharedSubFloorHideSystem
+public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!; // Trauma
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private bool _showAll;
     private bool _showVentPipe; //Goobstation - Ventcrawler
@@ -103,7 +107,10 @@ public sealed class SubFloorHideSystem : SharedSubFloorHideSystem
             hasVisibleLayer = true;
         }
 
-        _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
+        // <Trauma>
+        _spriteVis.UpdateVisibilityModifiers(uid, nameof(SubFloorHideComponent), hasVisibleLayer || revealed ? 1f : 0f);
+        // _sprite.SetVisible((uid, args.Sprite), hasVisibleLayer || revealed);
+        // </Trauma>
 
         if (ShowAll)
         {

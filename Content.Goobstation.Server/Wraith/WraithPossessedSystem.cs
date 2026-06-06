@@ -5,7 +5,7 @@ using Content.Server.Ghost.Roles.Components;
 
 namespace Content.Goobstation.Server.Wraith;
 
-public sealed class WraithPossessedSystem : EntitySystem
+public sealed partial class WraithPossessedSystem : EntitySystem
 {
     /// <inheritdoc/>
     public override void Initialize()

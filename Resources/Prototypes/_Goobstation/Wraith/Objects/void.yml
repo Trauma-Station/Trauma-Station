@@ -23,8 +23,9 @@
             sound:
               path: /Audio/_Goobstation/Wraith/revleave.ogg
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: Clickable
   - type: InteractionOutline
   - type: Examiner

@@ -1,0 +1,60 @@
+- type: entity
+  parent: Stunbaton
+  id: Wandsky
+  name: commander wandsky
+  description: A technological marvel used for directing securitrons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Tools/commanderwandsky.rsi
+    layers:
+    - state: stunbaton_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: StaminaDamageOnCollide
+    damage: 25
+    overtime: 40
+    sound: /Audio/Weapons/egloves.ogg
+  - type: LandAtCursor
+  - type: Clothing
+    sprite: _Trauma/Objects/Tools/commanderwandsky.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: PatrolCommander
+    waypointId: SecuritronWaypoint
+  - type: ActionsContainer
+  - type: ActionGrant
+    actions:
+    - ActionTogglePatrol
+    - ActionCRWaypoint
+    - ActionClearWaypoints
+  - type: ItemActionGrant
+    actions:
+    - ActionTogglePatrol
+    - ActionCRWaypoint
+    - ActionClearWaypoints
+  - type: ContainerContainer
+    containers:
+      actions: !type:Container
+  - type: Construction
+    graph: Wandsky
+    node: bot
+
+- type: entity
+  id: SecuritronWaypoint
+  name: securitron waypoint
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+  - type: Appearance
+  - type: HolopadHologram
+    rsiPath: _Trauma/Mobs/Silicon/Bots/beepsky.rsi
+    rsiState: secbot
+    shaderName: Hologram
+    color1: "#65b8e2"
+    color2: "#3a6981"
+    alpha: 0.9
+    intensity: 2
+    scrollRate: 0.125
+  - type: Waypoint
+  - type: Clickable

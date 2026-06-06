@@ -16,14 +16,14 @@ namespace Content.Trauma.Server.Projectiles;
 /// Compensates for shooter's lag by using flyby fixture to check for where the shooter saw the target at time of shooting.
 /// Uses flyby fixture as for most entities this will overlap with the client's opinion of where the target "currently" is.
 /// </summary>
-public sealed class LagCompProjectileSystem : EntitySystem
+public sealed partial class LagCompProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly LagCompensationSystem _lag = default!;
-    [Dependency] private readonly PredictedProjectileSystem _projectile = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
-    [Dependency] private readonly EntityQuery<LagCompensationComponent> _lagQuery = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private LagCompensationSystem _lag = default!;
+    [Dependency] private PredictedProjectileSystem _projectile = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EntityQuery<LagCompensationComponent> _lagQuery = default!;
 
     /// <summary>
     /// If a projectile is within this distance of a lag-comp'd position for a target, it counts as a hit.

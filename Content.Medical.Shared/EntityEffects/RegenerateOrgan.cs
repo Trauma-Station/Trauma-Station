@@ -28,9 +28,9 @@ public sealed partial class RegenerateOrgan : EntityEffectBase<RegenerateOrgan>
         => Loc.GetString("entity-effect-guidebook-regenerate-part", ("chance", Probability), ("slot", prototype.Index(Slot).Name));
 }
 
-public sealed class RegenerateOrganEffectSystem : EntityEffectSystem<BodyPartComponent, RegenerateOrgan>
+public sealed partial class RegenerateOrganEffectSystem : EntityEffectSystem<BodyPartComponent, RegenerateOrgan>
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
+    [Dependency] private BodyPartSystem _part = default!;
 
     protected override void Effect(Entity<BodyPartComponent> ent, ref EntityEffectEvent<RegenerateOrgan> args)
     {

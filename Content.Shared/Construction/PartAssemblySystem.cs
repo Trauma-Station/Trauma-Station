@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Prototypes;
+// </Trauma>
 using Content.Shared.Construction.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
@@ -8,10 +11,10 @@ namespace Content.Shared.Construction;
 /// <summary>
 /// This handles <see cref="PartAssemblyComponent"/>
 /// </summary>
-public sealed class PartAssemblySystem : EntitySystem
+public sealed partial class PartAssemblySystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -94,7 +97,7 @@ public sealed class PartAssemblySystem : EntitySystem
         if (!component.Parts.TryGetValue(assemblyId, out var tags))
             return false;
 
-        var openTags = new List<string>(tags);
+        var openTags = new List<ProtoId<TagPrototype>>(tags); // Trauma - string -> ProtoId
         var contained = new List<EntityUid>(component.PartsContainer.ContainedEntities);
         foreach (var tag in tags)
         {

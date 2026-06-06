@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 
 public abstract partial class SharedKnowledgeSystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     private void InitializeOnWear()
     {

@@ -1,0 +1,18 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantMagicProtection
+  name: Magic Protection
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - Blocking
+  - type: ComponentsEnchant
+    added:
+    - type: Reflect
+      reflectProb: 1
+      reflects:
+      - Magic
+      slotFlags:
+      - NONE

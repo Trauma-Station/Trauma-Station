@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.HolographicProjector;
 
-public sealed class GenericFieldSystem : EntitySystem
+public sealed partial class GenericFieldSystem : EntitySystem
 {
-    [Dependency] private readonly GenericFieldGeneratorSystem _generator = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private GenericFieldGeneratorSystem _generator = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

@@ -20,17 +20,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
 
-public abstract class SharedDeepFryerSystem : EntitySystem
+public abstract partial class SharedDeepFryerSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] protected SharedSolutionContainerSystem _solution = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     public static readonly ProtoId<ItemSizePrototype> Ginormous = "Ginormous";
 
@@ -61,8 +61,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
 
     private void OnTryClose(Entity<DeepFryerComponent> ent, ref StorageCloseAttemptEvent args)
     {
-        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            || !_solution.TryGetSolution(ent.Owner,
+        if (!_solution.TryGetSolution(ent.Owner,
                 ent.Comp.FryerSolutionContainer,
                 out _,
                 out var deepFryerSolution)
@@ -139,12 +138,12 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         ent.Comp.StoredObjects.Clear();
         ent.Comp.FryFinishTime = TimeSpan.Zero;
 
-        if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            && _solution.TryGetSolution(ent.Owner,
-                ent.Comp.FryerSolutionContainer,
-                out var solution,
-                out _))
+        if (_solution.TryGetSolution(ent.Owner,
+            ent.Comp.FryerSolutionContainer,
+            out var solution))
+        {
             _solution.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
+        }
     }
 
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)

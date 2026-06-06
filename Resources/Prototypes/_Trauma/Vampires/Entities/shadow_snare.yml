@@ -1,0 +1,69 @@
+- type: entity
+  id: ShadowSnare
+  name: Shadow Snare
+  description: Something is off about this trap...
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Clothing/Head/Helmets/reverse_bear_trap.rsi # idc
+    state: icon
+    color: "#800080"
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      shadowsnare:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - MobMask
+        layer:
+        - Impassable
+  # These triggers handle entity effects on collision
+  - type: TriggerOnCollide
+    fixtureID: shadowsnare
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:ModifyStatusEffect
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - VampireThrall
+          - Vampire
+      effectProto: StatusEffectBlindness
+      time: 15
+    - !type:RelayInventory # Note: modsuit lights are borked, im not bothering fixing them. Works for helmets
+      effect: !type:NestedEffect
+        proto: ShadowSnare
+      slotFlags: All
+    - !type:RelayHands
+      effect: !type:NestedEffect
+        proto: ShadowSnare
+
+  # Below is handling damaging the shadow snare
+  - type: DamagedByFlashing
+    flashDamage:
+      types:
+        Heat: 10
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+  - type: Damageable
+  - type: Injurable
+    damageContainer: ShadowHaze # Same because they literally both get destroyed by flash
+
+  # Shadow Snares get deleted when exposed to light for more than 5 seconds
+  - type: LightDetection
+  - type: DeleteOnLightExposure
+    lightLevel: 1.5
+    duration: 5

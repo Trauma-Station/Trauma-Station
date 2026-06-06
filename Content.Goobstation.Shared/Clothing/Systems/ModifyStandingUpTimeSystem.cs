@@ -8,7 +8,7 @@ using Content.Shared.Inventory;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
-public sealed class MultiplyStandingUpTimeSystem : EntitySystem
+public sealed partial class MultiplyStandingUpTimeSystem : EntitySystem
 {
     public override void Initialize()
     {

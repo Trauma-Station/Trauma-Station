@@ -6,9 +6,9 @@ using Content.Shared.Inventory.Events;
 
 namespace Content.Trauma.Shared.Clothing;
 
-public sealed class ClothingConditionsSystem : EntitySystem
+public sealed partial class ClothingConditionsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     public override void Initialize()
     {

@@ -8,11 +8,11 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.ShadowDemon;
 
-public sealed class ShadowCrawlSystem : EntitySystem
+public sealed partial class ShadowCrawlSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <summary>
     /// Actions that should be enabled during crawling.

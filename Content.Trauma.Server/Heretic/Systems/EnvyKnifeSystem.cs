@@ -10,11 +10,11 @@ using Content.Trauma.Shared.Heretic.Components.Side;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class EnvyKnifeSystem : EntitySystem
+public sealed partial class EnvyKnifeSystem : EntitySystem
 {
-    [Dependency] private readonly AbductorVestDisguiseSystem _disguise = default!;
-    [Dependency] private readonly HumanoidProfileSystem _profile = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
+    [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
+    [Dependency] private HumanoidProfileSystem _profile = default!;
+    [Dependency] private HereticSystem _heretic = default!;
 
     public override void Initialize()
     {

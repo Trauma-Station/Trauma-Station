@@ -5,7 +5,8 @@
   By progressing as your main path, you gradually unlock more side knowledge to purchase.
   At the beginning you get access to tier 1 side knowledge and you can also select one of 3 random tier 1 side knowledge for free.
   Tier 1 and 2 side knowledge cost 1 point, and tier 3 cost 2 points.
-  By collecting influences using codex you can get more side knowledge for free or at a discount.
+  All side knowledge can either be purchased by either Main Points or Side Points.
+  By collecting influences using codex get one extra Side Point.
 
   ## Heretic Knowledge
 
@@ -112,6 +113,18 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Mask, Stun Baton, Liver</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides flash immunity and eye protection. Instills great fear in heathens.</Box></ColorBox>
 
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Unfathomable Curio</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Utility belt, 3 Rods, Lungs</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Provides a lot of storage space and recharging shield.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Eldritch Coin</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T1 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">1 Gold, 1 Silver</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Toggles door bolts or opens/closes doors when flipped.</Box></ColorBox>
+
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Carving Knife</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
@@ -159,6 +172,12 @@
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Corpse, Latex gloves, Armor</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a shattered risen, a creature that has high health and regeneration, has two strong melee weapons, but cannot use items or clothes.</Box></ColorBox>
+
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Lionhunter's Rifle</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Wood plank, PDA, organ or limb</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a lionhunter's rifle, a weak ballistic gun that can be aimed at targets by right clicking them in Combat Mode, which causes projectile to be greatly empowered.</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Crimson Cleave</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>

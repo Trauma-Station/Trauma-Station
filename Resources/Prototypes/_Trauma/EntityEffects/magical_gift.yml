@@ -1,0 +1,27 @@
+- type: entityEffect
+  id: MagicalGift
+  conditions:
+  - !type:WhitelistCondition
+    whitelist:
+      components:
+      - KnowledgeHolder
+    blacklist:
+      components:
+      - BorgChassis
+      - Silicon # lol
+  effects:
+  - !type:GrantSkills
+    skills:
+      MagicalLiteracyKnowledge: 80 # need to already have a point in it to become master
+  - !type:ChatMessage
+    channel: Server
+    message: "Something deep inside your spirit has just awoken... You have an epiphany with magic!"
+    color: "#8d12a6"
+
+# All crew have a random chance of being magically gifted, regardless of role
+- type: playerEffects
+  id: MagicalGift
+  effects:
+  - !type:NestedEffect
+    proto: MagicalGift
+    probability: 0.1

@@ -13,16 +13,16 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Body.Part;
 
-public sealed class EnterBodyPartSystem : EntitySystem
+public sealed partial class EnterBodyPartSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IngestionSystem _ingestion = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

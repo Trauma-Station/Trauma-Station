@@ -6,9 +6,9 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Trauma.Shared.Weapons.UseDelay;
 
-public sealed class UseDelayBlockMeleeSystem : EntitySystem
+public sealed partial class UseDelayBlockMeleeSystem : EntitySystem
 {
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {

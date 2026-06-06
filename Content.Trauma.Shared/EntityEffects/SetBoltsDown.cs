@@ -12,9 +12,9 @@ public sealed partial class SetBoltsDown : EntityEffectBase<SetBoltsDown>
     public bool Value;
 }
 
-public sealed class SetBoltsDownEffectSystem : EntityEffectSystem<DoorBoltComponent, SetBoltsDown>
+public sealed partial class SetBoltsDownEffectSystem : EntityEffectSystem<DoorBoltComponent, SetBoltsDown>
 {
-    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
 
     protected override void Effect(Entity<DoorBoltComponent> ent, ref EntityEffectEvent<SetBoltsDown> args)
     {

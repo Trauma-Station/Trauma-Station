@@ -11,10 +11,10 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
 
-public abstract class SharedVoidCurseSystem : EntitySystem
+public abstract partial class SharedVoidCurseSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _modifier = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private MovementSpeedModifierSystem _modifier = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {

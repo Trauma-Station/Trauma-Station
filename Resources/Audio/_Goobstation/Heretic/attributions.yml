@@ -53,6 +53,11 @@
   copyright: "Taken from /tg/station"
   source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/wounds/blood3.ogg"
 
+- files: ["coinflip.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/coinflip.ogg"
+
 - files: ["sheath.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"

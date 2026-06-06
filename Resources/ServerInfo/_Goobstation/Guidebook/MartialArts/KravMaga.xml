@@ -16,7 +16,7 @@
   wish to use in the action bar, then follow it up by performing Harm action on the opponent as normal.
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
   ### Leg Sweep

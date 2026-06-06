@@ -9,11 +9,11 @@ using Content.Shared.Interaction.Events;
 
 namespace Content.Goobstation.Shared.BlockHandsOnBuckle;
 
-public sealed class BlockHandsOnBuckleSystem : EntitySystem
+public sealed partial class BlockHandsOnBuckleSystem : EntitySystem
 {
 
-    [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

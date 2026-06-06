@@ -9,7 +9,7 @@ namespace Content.Server.Store.Systems;
 
 public sealed partial class StoreSystem
 {
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
 
     private void InitializeTrauma()
     {

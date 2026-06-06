@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.Body.Components;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(StomachSystem))]
+[RegisterComponent, NetworkedComponent] // Trauma - Removed access
 public sealed partial class StomachComponent : Component
 {
     /// <summary>

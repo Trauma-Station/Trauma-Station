@@ -15,9 +15,9 @@ public sealed partial class VoidCurse : EntityEffectBase<VoidCurse>
         => "Inflicts void curse.";
 }
 
-public sealed class VoidCurseEffectSystem : EntityEffectSystem<TransformComponent, VoidCurse>
+public sealed partial class VoidCurseEffectSystem : EntityEffectSystem<TransformComponent, VoidCurse>
 {
-    [Dependency] private readonly SharedVoidCurseSystem _voidCurse = default!;
+    [Dependency] private SharedVoidCurseSystem _voidCurse = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<VoidCurse> args)
     {

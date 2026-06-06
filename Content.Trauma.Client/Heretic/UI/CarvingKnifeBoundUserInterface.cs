@@ -3,15 +3,13 @@
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Heretic.UI;
 
 [UsedImplicitly]
-public sealed class CarvingKnifeBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class CarvingKnifeBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private SimpleRadialMenu? _menu;
 
@@ -41,7 +39,7 @@ public sealed class CarvingKnifeBoundUserInterface(EntityUid owner, Enum uiKey) 
 
             models[i] = new RadialMenuActionOption<EntProtoId>(HandleRadialMenuClick, protoId)
             {
-                IconSpecifier = proto.TryGetComponent(out IconComponent? icon)
+                IconSpecifier = proto.TryGetComponent(out IconComponent? icon, EntMan.ComponentFactory)
                     ? new RadialMenuTextureIconSpecifier(icon.Icon)
                     : new RadialMenuEntityPrototypeIconSpecifier(proto),
                 ToolTip = Loc.GetString("carving-knife-ui-tooltip", ("name", proto.Name), ("desc", proto.Description)),

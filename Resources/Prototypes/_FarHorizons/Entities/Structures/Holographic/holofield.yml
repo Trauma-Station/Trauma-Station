@@ -123,8 +123,9 @@
   - type: StaticPrice
     price: 150
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -349,8 +350,9 @@
         collection:
           EnergyMiss
   - type: Damageable
-    damageContainer: Shield
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Shield
   - type: ExaminableDamage
     messages: FieldMessages
   - type: Destructible

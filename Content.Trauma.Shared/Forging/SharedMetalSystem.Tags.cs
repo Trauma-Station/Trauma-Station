@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Forging;
 
 public abstract partial class SharedMetalSystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private void OnTagsChanged(Entity<MetallicTagsComponent> ent, ref MetalWorkableChangedEvent args)
     {

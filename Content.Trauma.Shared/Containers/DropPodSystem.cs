@@ -5,9 +5,9 @@ using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Containers;
 
-public sealed class DropPodSystem : EntitySystem
+public sealed partial class DropPodSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public static readonly EntProtoId DropPod = "DropPodPlayer";
 

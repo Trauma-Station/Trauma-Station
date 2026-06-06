@@ -15,13 +15,13 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Handles the doafter and power transfer when draining.
 /// </summary>
-public sealed class BatteryDrainerSystem : SharedBatteryDrainerSystem
+public sealed partial class BatteryDrainerSystem : SharedBatteryDrainerSystem
 {
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!; // goob edit - sparks everywhere
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SparksSystem _sparks = default!; // goob edit - sparks everywhere
 
     public override void Initialize()
     {

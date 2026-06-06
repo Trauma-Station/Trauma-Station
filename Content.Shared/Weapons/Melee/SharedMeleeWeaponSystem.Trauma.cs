@@ -22,18 +22,17 @@ namespace Content.Shared.Weapons.Melee;
 /// </summary>
 public abstract partial class SharedMeleeWeaponSystem
 {
-    [Dependency] private readonly CommonContestsSystem _contests = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private CommonContestsSystem _contests = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<InteractionRelayComponent> _relayQuery;
 
     public static readonly ProtoId<TagPrototype> WideSwingIgnore = "WideSwingIgnore"; // for mice
     public static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
-    public static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     private float _shoveRange;
     private float _shoveSpeed;

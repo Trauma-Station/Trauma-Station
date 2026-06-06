@@ -7,7 +7,7 @@
 # Basic rod
 - type: entity
   id: FishingRod
-  parent: [BaseItem, WoodDurabilityWeak]
+  parent: BaseItem
   name: fishing rod
   description: It's time to go fishing!
   components:
@@ -65,7 +65,7 @@
 # Golden rod
 - type: entity
   id: FishingRodGolden
-  parent: [FishingRod, MetalToolDurability]
+  parent: FishingRod
   name: golden fishing rod
   description: Finally, you caught 250 fishes. Here's your trophey.
   components:

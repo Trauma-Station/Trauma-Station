@@ -10,7 +10,7 @@ namespace Content.Shared.PowerCell;
 /// </summary>
 public sealed partial class PowerCellSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     private Entity<BatteryComponent>? FindBattery(EntityUid uid)
     {

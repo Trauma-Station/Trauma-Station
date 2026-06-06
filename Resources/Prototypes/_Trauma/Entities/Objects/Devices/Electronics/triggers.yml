@@ -1,19 +1,42 @@
 - type: entity
-  parent: [BaseItem , BaseSyndicateContraband]
-  id: MinibombTimerTrigger
-  name: minibomb timer
-  description: A sinister timer.
+  abstract: true
+  parent: BaseItem
+  id: BaseModularGrenadeTrigger
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
-    state: timer-minibomb
   - type: Item
     size: Small
   - type: StaticPrice
     price: 40
   - type: PayloadTrigger
     components:
+    # *use used below to reduce copypaste
+    - &use
+      type: TriggerOnUse
+      keyOut: startTimer
+    - type: TimerTrigger # but cant use it as a "parent" sadly so this has to be copypasted everywhere
+      keysIn: [ startTimer ]
+      keyOut: trigger
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 75
+      Plastic: 25
+
+- type: entity
+  parent: [BaseModularGrenadeTrigger, BaseSyndicateContraband]
+  id: MinibombTimerTrigger
+  name: minibomb timer trigger
+  description: A sinister timer.
+  components:
+  - type: Sprite
+    state: timer-minibomb
+  - type: PayloadTrigger
+    components:
+    - *use
     - type: TimerTrigger
+      keysIn: [ startTimer ]
+      keyOut: trigger
       delay: 5
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
@@ -21,27 +44,21 @@
         path: /Audio/_Trauma/Machines/BombComponents/minibombbeep.ogg
         params:
           volume: 11
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 75
-      Plastic: 25
 
 - type: entity
-  parent: [BaseItem , BaseSyndicateContraband]
+  parent: [BaseModularGrenadeTrigger, BaseSyndicateContraband]
   id: WhiteHoleTimerTrigger
-  name: whitehole timer
+  name: whitehole timer trigger
   description: A repulsive timer.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-whitehole
-  - type: Item
-    size: Small
-  - type: StaticPrice
-    price: 40
   - type: PayloadTrigger
     components:
+    - *use
     - type: TimerTrigger
+      keysIn: [ startTimer ]
+      keyOut: trigger
       delay: 3
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
@@ -50,27 +67,21 @@
         path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
         params:
           volume: 5
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 75
-      Plastic: 25
 
 - type: entity
-  parent: [BaseItem , BaseSyndicateContraband]
+  parent: [BaseModularGrenadeTrigger, BaseSyndicateContraband]
   id: SupermatterTimerTrigger
   name: supermatter timer
-  description: An atttractive timer.
+  description: An attractive timer. # yes ERP
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-supermatter
-  - type: Item
-    size: Small
-  - type: StaticPrice
-    price: 40
   - type: PayloadTrigger
     components:
+    - *use
     - type: TimerTrigger
+      keysIn: [ startTimer ]
+      keyOut: trigger
       delay: 3
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
@@ -79,55 +90,43 @@
         path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
         params:
           volume: -5
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 75
-      Plastic: 25
 
 - type: entity
-  parent: [BaseItem , BaseSyndicateContraband]
+  parent: [BaseModularGrenadeTrigger, BaseSyndicateContraband]
   id: HolyTimer
-  name: holy timer
+  name: holy timer trigger
   description: For the Grail...
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-holy
-  - type: Item
-    size: Small
-  - type: StaticPrice
-    price: 40
   - type: PayloadTrigger
     components:
+    - *use
     - type: TimerTrigger
+      keysIn: [ startTimer ]
+      keyOut: trigger
       delay: 3
       initialBeepDelay: 1
       delayOptions: [3]
       beepInterval: 3
       beepSound:
         path: /Audio/Effects/hallelujah.ogg
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 75
-      Plastic: 25
 
 - type: entity
-  parent: [BaseItem , BaseSyndicateContraband]
+  parent: [BaseModularGrenadeTrigger, BaseSyndicateContraband]
   id: SilentTimerTrigger
-  name: silent timer
-  description: A silent timer.
+  name: mechanical pin trigger
+  description: A mechanical timer trigger with no beeping.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: timer-silent
-  - type: Item
-    size: Small
-  - type: StaticPrice
-    price: 40
   - type: PayloadTrigger
     components:
+    - *use
     - type: TimerTrigger
-      delay: 5
+      keysIn: [ startTimer ]
+      keyOut: trigger
+      delay: 3
       initialBeepDelay: 0
       beepInterval: 30
       delayOptions: [3, 5, 10, 15, 30]
@@ -135,7 +134,3 @@
         path: /Audio/Items/smoke_grenade_prime.ogg
         params:
           volume: 11
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 75
-      Plastic: 25

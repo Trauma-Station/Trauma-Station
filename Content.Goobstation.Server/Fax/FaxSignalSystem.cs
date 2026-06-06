@@ -10,7 +10,7 @@ namespace Content.Goobstation.Server.Fax;
 /// <summary>
 /// Handles signals for automated fax machines.
 /// </summary>
-public sealed class FaxSignalSystem : EntitySystem
+public sealed partial class FaxSignalSystem : EntitySystem
 {
     public static readonly ProtoId<SinkPortPrototype> CopyPort = "FaxCopy";
 

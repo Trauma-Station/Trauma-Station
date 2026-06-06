@@ -11,15 +11,15 @@ namespace Content.Trauma.Shared.Forging;
 /// <summary>
 /// Lets players start new forged items from ingots using a radial menu BUI.
 /// </summary>
-public sealed class AnvilSystem : EntitySystem
+public sealed partial class AnvilSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly ForgingSystem _forging = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMetalSystem _metal = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private ForgingSystem _forging = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMetalSystem _metal = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private HashSet<Entity<MetalIngotComponent>> _ingots = new();
 

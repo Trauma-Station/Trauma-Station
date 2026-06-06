@@ -12,13 +12,13 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Objectives.Systems;
 
-public sealed class CosmicCultObjectiveSystem : EntitySystem
+public sealed partial class CosmicCultObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -34,15 +34,18 @@ public sealed class CosmicCultObjectiveSystem : EntitySystem
 
     private void OnEffigyRequirementCheck(EntityUid uid, CosmicEffigyConditionComponent comp, ref RequirementCheckEvent args)
     {
-        if (args.Cancelled || !_roles.MindHasRole<CosmicColossusRoleComponent>(args.MindId))
+        if (args.Cancelled || !_roles.MindHasRole<CosmicColossusRoleComponent>(args.MindId) || args.Mind.OwnedEntity is not { } mob)
             return;
 
+        var map = Transform(mob).MapID;
         var warps = new List<EntityUid>();
         var query = EntityQueryEnumerator<WarpPointComponent>();
         while (query.MoveNext(out var warpUid, out var warp))
         {
-            if (_whitelist.IsWhitelistFail(comp.Blacklist, warpUid)
-                && !string.IsNullOrWhiteSpace(warp.Location))
+            if (_whitelist.IsWhitelistFail(comp.Blacklist, warpUid) &&
+                !string.IsNullOrWhiteSpace(warp.Location) &&
+                !warp.Follow && // no effigy in the singularity
+                Transform(warpUid).MapID == map) // no lavaland beacons etc
             {
                 warps.Add(warpUid);
             }

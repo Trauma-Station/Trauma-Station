@@ -13,15 +13,15 @@ namespace Content.Trauma.Shared.Medical.Hypoport;
 /// <summary>
 /// Prevents hypospray injections without a hypoport or if you aren't grabbing the patient.
 /// </summary>
-public sealed class HypoportSystem : EntitySystem
+public sealed partial class HypoportSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly EntityQuery<IgnoreHypoportComponent> _ignoreQuery = default!;
-    [Dependency] private readonly EntityQuery<InjectorComponent> _injectorQuery = default!;
-    [Dependency] private readonly EntityQuery<PullerComponent> _pullerQuery = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private EntityQuery<IgnoreHypoportComponent> _ignoreQuery = default!;
+    [Dependency] private EntityQuery<InjectorComponent> _injectorQuery = default!;
+    [Dependency] private EntityQuery<PullerComponent> _pullerQuery = default!;
 
     public static ProtoId<OrganCategoryPrototype> HypoportCategory = "Hypoport";
 

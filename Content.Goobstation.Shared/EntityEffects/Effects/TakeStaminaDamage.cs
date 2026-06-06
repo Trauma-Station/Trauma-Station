@@ -34,9 +34,9 @@ public sealed partial class TakeStaminaDamage : EntityEffectBase<TakeStaminaDama
             ("deltasign", MathF.Sign(Amount)));
 }
 
-public sealed class TakeStaminaDamageSystem : EntityEffectSystem<StaminaComponent, TakeStaminaDamage>
+public sealed partial class TakeStaminaDamageSystem : EntityEffectSystem<StaminaComponent, TakeStaminaDamage>
 {
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     protected override void Effect(Entity<StaminaComponent> ent, ref EntityEffectEvent<TakeStaminaDamage> args)
     {

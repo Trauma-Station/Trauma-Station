@@ -9,11 +9,11 @@ using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Goobstation.Shared.InternalResources.EntitySystems;
-public sealed class SharedInternalResourcesSystem : EntitySystem
+public sealed partial class SharedInternalResourcesSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private readonly TimeSpan _systemUpdateRate = TimeSpan.FromSeconds(1);
     private TimeSpan _systemNextUpdate = TimeSpan.Zero;

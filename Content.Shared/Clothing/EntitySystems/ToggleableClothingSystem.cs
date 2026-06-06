@@ -23,21 +23,21 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Clothing.EntitySystems;
 
 // GOOBSTATION - MODSUITS - THIS SYSTEM FULLY CHANGED
-public sealed class ToggleableClothingSystem : EntitySystem
+public sealed partial class ToggleableClothingSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
     // </Trauma>
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedStrippableSystem _strippable = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedStrippableSystem _strippable = default!;
 
     public override void Initialize()
     {
@@ -78,7 +78,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || args.Hands == null || comp.ClothingUids.Count == 0 || comp.Container == null)
             return;
 
-        var text = comp.VerbText ?? (comp.ActionEntity == null ? null : Name(comp.ActionEntity.Value));
+        var text = comp.VerbText is { } loc ? Loc.GetString(loc) : (comp.ActionEntity == null ? null : Name(comp.ActionEntity.Value)); // Trauma - use Loc.GetString here
         if (text == null)
             return;
 
@@ -94,7 +94,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
         var verb = new EquipmentVerb()
         {
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/outfit.svg.192dpi.png")),
-            Text = Loc.GetString(text),
+            Text = text, // Trauma - moved Loc.GetString to above
         };
 
         if (user == wearer)
@@ -674,9 +674,9 @@ public sealed class ToggleableClothingSystem : EntitySystem
             return;
 
         // Add prototype from ClothingPrototype and Slot field to ClothingPrototypes dictionary
-        if (comp.ClothingPrototype != null && !string.IsNullOrEmpty(comp.Slot) && !comp.ClothingPrototypes.ContainsKey(comp.Slot))
+        if (comp.ClothingPrototype is { } proto && comp.Slot is { } slot && !comp.ClothingPrototypes.ContainsKey(slot)) // Trauma - use nullables properly for everything
         {
-            comp.ClothingPrototypes.Add(comp.Slot, comp.ClothingPrototype.Value);
+            comp.ClothingPrototypes.Add(slot, proto); // Trauma - use nullables for everything
         }
 
         var xform = Transform(toggleable.Owner);

@@ -30,7 +30,7 @@ public sealed partial class HumanoidProfileEditor
             .Where(o => o.RoundStart &&
                         (o.SpeciesWhitelist is null ||
                          o.SpeciesWhitelist.Contains(Profile.Species)))
-            .OrderBy(o => Loc.GetString(o.ID))
+            .OrderBy(o => o.Name)
             .ToList();
 
         BarkVoiceButton.Clear();

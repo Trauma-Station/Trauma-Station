@@ -4,21 +4,18 @@ using Content.Goobstation.Shared.JoinQueue;
 using Robust.Client.Audio;
 using Robust.Client.Console;
 using Robust.Client.State;
-using Robust.Client.UserInterface;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Client.JoinQueue;
 
-public sealed class QueueState : State
+public sealed partial class QueueState : State
 {
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
-    [Dependency] private readonly IClientConsoleHost _console = default!;
-
+    [Dependency] private IUserInterfaceManager _userInterface = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
 
     private const string JoinSoundPath = "/Audio/Effects/newplayerping.ogg";
 
     private QueueGui? _gui;
-
 
     protected override void Startup()
     {
@@ -36,7 +33,6 @@ public sealed class QueueState : State
         Ding();
     }
 
-
     public void OnQueueUpdate(QueueUpdateMessage msg)
     {
         _gui?.UpdateInfo(msg.Total, msg.Position, msg.IsPatron);
@@ -46,7 +42,6 @@ public sealed class QueueState : State
     {
         _console.ExecuteCommand("quit");
     }
-
 
     private void Ding()
     {

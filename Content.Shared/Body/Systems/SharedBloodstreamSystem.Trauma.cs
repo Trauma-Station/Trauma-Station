@@ -15,7 +15,7 @@ namespace Content.Shared.Body.Systems;
 /// </summary>
 public abstract partial class SharedBloodstreamSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private float _bloodlossMultiplier = 4f;
 

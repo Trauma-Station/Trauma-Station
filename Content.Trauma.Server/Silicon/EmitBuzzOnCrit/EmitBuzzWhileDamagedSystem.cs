@@ -14,14 +14,14 @@ namespace Content.Trauma.Server.Silicon.EmitBuzzOnCrit;
 /// <summary>
 /// This handles the buzzing popup and sound of a silicon based race when it is pretty damaged.
 /// </summary>
-public sealed class EmitBuzzWhileDamagedSystem : EntitySystem
+public sealed partial class EmitBuzzWhileDamagedSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Update(float frameTime)
     {

@@ -6,11 +6,11 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.CombatMode;
 using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -24,20 +24,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Rust;
 
-public sealed class EntropicPlumeSystem : EntitySystem
+public sealed partial class EntropicPlumeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _weapon = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedMeleeWeaponSystem _weapon = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -63,10 +62,8 @@ public sealed class EntropicPlumeSystem : EntitySystem
 
         ent.Comp.AffectedEntities.Add(args.OtherEntity);
 
-        _status.TryAddStatusEffect<TemporaryBlindnessComponent>(args.OtherEntity,
-            "TemporaryBlindness",
-            TimeSpan.FromSeconds(ent.Comp.Duration),
-            true);
+        var blindTime = TimeSpan.FromSeconds(ent.Comp.Duration);
+        _status.TryUpdateStatusEffectDuration(args.OtherEntity, BlindnessSystem.BlindingStatusEffect, blindTime);
 
         var affected = EnsureComp<EntropicPlumeAffectedComponent>(args.OtherEntity);
         affected.ExcludedEntity = CompOrNull<ProjectileComponent>(ent)?.Shooter ?? EntityUid.Invalid;

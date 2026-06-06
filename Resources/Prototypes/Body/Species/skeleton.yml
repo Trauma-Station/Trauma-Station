@@ -96,8 +96,9 @@
   - type: FacehuggerImmune
   # </Trauma>
   - type: Damageable
-    damageContainer: BiologicalMetaphysical
     damageModifierSet: Skeleton
+  - type: Injurable
+    damageContainer: BiologicalMetaphysical
   #- type: DamageVisuals # Shitmed
   #  damageOverlayGroups:
   #    Brute:

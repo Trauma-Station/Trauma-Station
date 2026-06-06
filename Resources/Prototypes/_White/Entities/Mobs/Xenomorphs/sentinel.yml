@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel ]
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel, BaseXenoTailed ]
   id: BaseMobXenomorphSentinel
   name: xenomorph sentinel
   description: A specialized specimen designed to hit targets at a distance. Particularly dangerous in narrow corridors and confined spaces.
@@ -36,21 +36,12 @@
   #   - XenomorphSentinel
 
 - type: entity
-  parent: BaseMobXenomorphSentinel
+  parent: [ BaseMobXenomorphSentinel, BaseXenomorphGhostRole ]
   id: MobXenomorphSentinel
   components:
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-sentinel-name
     description: ghost-role-information-xenomorph-sentinel-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphSentinel]

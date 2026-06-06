@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Server.LinkAccount;
+using Content.Trauma.Common.Chat;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace Content.Server.Chat.Managers;
 internal sealed partial class ChatManager : IChatManager
 {
     // <Trauma>
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
     // </Trauma>
     private static readonly Dictionary<string, string> PatronOocColors = new()
     {
@@ -40,19 +41,19 @@ internal sealed partial class ChatManager : IChatManager
         { "revolutionary", "#aa00ff" }
     };
 
-    [Dependency] private readonly IReplayRecordingManager _replay = default!;
-    [Dependency] private readonly IServerNetManager _netManager = default!;
-    [Dependency] private readonly IMoMMILink _mommiLink = default!;
-    [Dependency] private readonly IAdminManager _adminManager = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    //[Dependency] private readonly DiscordChatLink _discordLink = default!; // Trauma - wasn't cherry picked
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private IReplayRecordingManager _replay = default!;
+    [Dependency] private IServerNetManager _netManager = default!;
+    [Dependency] private IMoMMILink _mommiLink = default!;
+    [Dependency] private IAdminManager _adminManager = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private INetConfigurationManager _netConfigManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private PlayerRateLimitManager _rateLimitManager = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    //[Dependency] private DiscordChatLink _discordLink = default!; // Trauma - wasn't cherry picked
+    [Dependency] private ILogManager _logManager = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -267,6 +268,12 @@ internal sealed partial class ChatManager : IChatManager
         {
             return;
         }
+        // <Trauma>
+        var attemptEv = new PlayerMessageAttemptEvent(player, message);
+        _entityManager.EventBus.RaiseEvent(EventSource.Local, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // </Trauma>
 
         Color? colorOverride = null;
         var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));

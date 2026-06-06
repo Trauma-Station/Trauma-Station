@@ -19,9 +19,9 @@ public sealed partial class ChangeFaction : EntityEffectBase<ChangeFaction>
         => Loc.GetString("reagent-effect-guidebook-change-faction", ("faction", NewFaction));
 }
 
-public sealed class ChangeFactionEffectSystem : EntityEffectSystem<NpcFactionMemberComponent, ChangeFaction>
+public sealed partial class ChangeFactionEffectSystem : EntityEffectSystem<NpcFactionMemberComponent, ChangeFaction>
 {
-    [Dependency] private readonly ChangeFactionStatusEffectSystem _changeFaction = default!;
+    [Dependency] private ChangeFactionStatusEffectSystem _changeFaction = default!;
 
     protected override void Effect(Entity<NpcFactionMemberComponent> ent, ref EntityEffectEvent<ChangeFaction> args)
     {

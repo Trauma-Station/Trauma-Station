@@ -4,10 +4,7 @@
   group: Narcotics
   desc: reagent-desc-cocaine
   physicalDesc: reagent-physical-desc-powdery
-  allowedJobs:
-  - Chemist
-  - Botanist
-  - Bartender
+  contrabandSeverity: Major
   flavor: bitter
   color: "#FAFAFA"
   boilingPoint: 187.0

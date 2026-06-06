@@ -7,11 +7,11 @@ using Content.Shared.StatusEffectNew;
 
 namespace Content.Goobstation.Shared.Emoting;
 
-public abstract class SharedAnimatedEmotesSystem : EntitySystem
+public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly VomitSystem _vomit = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private VomitSystem _vomit = default!;
 
     public override void Initialize()
     {

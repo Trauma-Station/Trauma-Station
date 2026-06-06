@@ -18,16 +18,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;
 
-public sealed class WoundedSoldierSystem : EntitySystem
+public sealed partial class WoundedSoldierSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
-    [Dependency] private readonly SharedSanguineStrikeSystem _lifeSteal = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedSanguineStrikeSystem _lifeSteal = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
 
     private readonly TimeSpan _damageInterval = TimeSpan.FromSeconds(1);
     private TimeSpan _nextDamage = TimeSpan.Zero;

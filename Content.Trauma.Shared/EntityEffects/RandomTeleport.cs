@@ -21,9 +21,9 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     public int TeleportAttempts = 10;
 }
 
-public sealed class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
+public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
 {
-    [Dependency] private readonly RandomTeleportSystem _teleport = default!;
+    [Dependency] private RandomTeleportSystem _teleport = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<RandomTeleport> args)
     {

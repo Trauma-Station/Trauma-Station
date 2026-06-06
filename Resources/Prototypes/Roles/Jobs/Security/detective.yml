@@ -10,8 +10,7 @@
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Forensics
   - Security
   access:
@@ -24,9 +23,9 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # goobstation
+  - !type:AddComponentSpecial # Trauma
     components:
-      - type: SecurityStaff
+    - type: SecurityStaff
 
 - type: startingGear
   id: DetectiveGear

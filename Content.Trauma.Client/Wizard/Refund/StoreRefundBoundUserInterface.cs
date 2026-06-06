@@ -2,12 +2,11 @@
 
 using Content.Trauma.Common.Wizard;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Wizard.Refund;
 
 [UsedImplicitly]
-public sealed class StoreRefundBoundUserInterface : BoundUserInterface
+public sealed partial class StoreRefundBoundUserInterface : BoundUserInterface
 {
     private StoreRefundWindow? _menu;
 

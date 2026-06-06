@@ -81,10 +81,10 @@ public sealed partial class TypedDamageCondition : EntityConditionBase<TypedDama
     }
 }
 
-public sealed class TypedDamageConditionSystem : EntityConditionSystem<DamageableComponent, TypedDamageCondition>
+public sealed partial class TypedDamageConditionSystem : EntityConditionSystem<DamageableComponent, TypedDamageCondition>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     protected override void Condition(Entity<DamageableComponent> ent, ref EntityConditionEvent<TypedDamageCondition> args)
     {

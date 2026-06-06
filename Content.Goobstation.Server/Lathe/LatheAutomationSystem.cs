@@ -6,9 +6,9 @@ using Content.Shared.Lathe;
 
 namespace Content.Goobstation.Server.Lathe;
 
-public sealed class LatheAutomationSystem : EntitySystem
+public sealed partial class LatheAutomationSystem : EntitySystem
 {
-    [Dependency] private readonly LatheSystem _lathe = default!;
+    [Dependency] private LatheSystem _lathe = default!;
 
     public override void Initialize()
     {

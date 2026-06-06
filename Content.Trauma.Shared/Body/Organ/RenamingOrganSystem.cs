@@ -4,9 +4,9 @@ using Content.Shared.Body;
 
 namespace Content.Trauma.Shared.Body.Organ;
 
-public sealed class RenamingOrganSystem : EntitySystem
+public sealed partial class RenamingOrganSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
 
     public override void Initialize()
     {

@@ -2,7 +2,7 @@
   id: Omega
   mapName: 'Omega'
   mapPath: /Maps/_Trauma/omega.yml
-  minPlayers: 7
+  minPlayers: 0
   maxPlayers: 35
   stations:
     Omega:

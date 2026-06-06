@@ -14,10 +14,10 @@ namespace Content.Goobstation.Shared.Changeling.Systems;
 
 public abstract partial class SharedChangelingSystem : EntitySystem
 {
-    [Dependency] protected readonly BodySystem Body = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] protected BodySystem Body = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     public static readonly EntProtoId FakeArmbladePrototype = "FakeArmBladeChangeling";
     public static readonly EntProtoId DartGunPrototype = "DartGunChangeling";

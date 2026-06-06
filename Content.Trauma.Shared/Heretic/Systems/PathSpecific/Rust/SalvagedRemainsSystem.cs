@@ -10,15 +10,15 @@ using Content.Trauma.Shared.Tackle;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Rust;
 
-public sealed class SalvagedRemainsSystem : EntitySystem
+public sealed partial class SalvagedRemainsSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
-    [Dependency] private readonly EntityQuery<SalvagedRemainsComponent> _remainsQuery = default!;
-    [Dependency] private readonly EntityQuery<ToggleableClothingComponent> _toggleableQuery = default!;
+    [Dependency] private EntityQuery<SalvagedRemainsComponent> _remainsQuery = default!;
+    [Dependency] private EntityQuery<ToggleableClothingComponent> _toggleableQuery = default!;
 
     public override void Initialize()
     {

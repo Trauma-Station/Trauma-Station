@@ -10,12 +10,14 @@
     state: icon
   - type: Item
     sprite: _Goobstation/Heretic/Entities/sword-inhands.rsi
-    size: Huge
-    storedRotation: -45
+    size: Large
+    shape:
+    - 0,0,5,1
+    storedRotation: 45
   - type: MeleeWeapon # Same dps, more wounding and range compared to blade, but no AP
     damage:
       types:
-        Slash: 17
+        Slash: 20
       woundSeverityMultipliers:
         Slash: 2
     angle: 90

@@ -7,13 +7,12 @@ using Content.Goobstation.Shared.ManifestListings;
 using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Store;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.ManifestListings;
 
-public sealed class ManifestListingsSystem : EntitySystem
+public sealed partial class ManifestListingsSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

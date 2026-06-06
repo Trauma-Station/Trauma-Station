@@ -6,16 +6,15 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Lavaland.Shared.Aggression;
 
-public sealed class AggressorsSystem : EntitySystem
+public sealed partial class AggressorsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedBossMusicSystem _bossMusic = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedBossMusicSystem _bossMusic = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 

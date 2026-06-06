@@ -10,7 +10,7 @@ namespace Content.Client.Shuttles.UI;
 
 public sealed partial class NavScreen
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!; // Frontier
+    [Dependency] private IPrototypeManager _protoMan = default!; // Frontier
 
     private readonly ButtonGroup _buttonGroup = new();
     public event Action<NetEntity?, InertiaDampeningMode>? OnInertiaDampeningModeChanged;

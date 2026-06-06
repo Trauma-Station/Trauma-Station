@@ -16,31 +16,27 @@ namespace Content.Goobstation.Shared.Autosurgeon;
 
 // There might be some goidacode inside, I warned you.
 // It should also maybe be in _Shitmed instead of here, but who cares.
-public sealed class AutoSurgeonSystem : EntitySystem
+public sealed partial class AutoSurgeonSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AutoSurgeonComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<AutoSurgeonComponent, StrappedEvent>(OnStrapped);
+        SubscribeLocalEvent<AutoSurgeonComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<AutoSurgeonComponent, AutoSurgeonDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<AutoSurgeonComponent, ExaminedEvent>(OnExamined);
     }
 
-    private void OnActivate(Entity<AutoSurgeonComponent> ent, ref ActivateInWorldEvent args)
+    private void OnStrapped(Entity<AutoSurgeonComponent> ent, ref StrappedEvent args)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
         ent.Comp.ActiveSound = _audio.Stop(ent.Comp.ActiveSound);
 
         var user = args.User;
@@ -51,14 +47,7 @@ public sealed class AutoSurgeonSystem : EntitySystem
             return;
         }
 
-        var buckled = Comp<StrapComponent>(ent).BuckledEntities;
-        if (buckled.Count == 0)
-        {
-            _popup.PopupClient($"Nothing is strapped to the {name}!", ent, user, PopupType.SmallCaution);
-            return;
-        }
-
-        var target = buckled.First();
+        var target = args.Buckle.Owner;
         if (!HasComp<BodyComponent>(target))
         {
             _popup.PopupClient($"{Name(target)} can't be operated on!", ent, user, PopupType.SmallCaution);
@@ -80,16 +69,23 @@ public sealed class AutoSurgeonSystem : EntitySystem
             }))
             return;
 
-        _popup.PopupClient("You start up the {name}...", ent, user, PopupType.Medium);
+        _popup.PopupClient($"You start up the {name}...", ent, user, PopupType.Medium);
 
-        var ev = new TransferDnaEvent { Donor = user, Recipient = ent };
-        RaiseLocalEvent(user, ref ev);
+        var ev = new TransferDnaEvent { Donor = target, Recipient = ent };
+        RaiseLocalEvent(target, ref ev);
 
         if (_net.IsClient) // Fuck sound networking
             return;
 
         if (_audio.PlayPvs(ent.Comp.Sound, ent) is {} sound)
             ent.Comp.ActiveSound = sound.Entity;
+    }
+
+    private void OnUnstrapped(Entity<AutoSurgeonComponent> ent, ref UnstrappedEvent args)
+    {
+        // no sound spamming idc about the doafter, just run away
+        _audio.Stop(ent.Comp.ActiveSound);
+        ent.Comp.ActiveSound = null;
     }
 
     private void OnDoAfter(Entity<AutoSurgeonComponent> ent, ref AutoSurgeonDoAfterEvent args)

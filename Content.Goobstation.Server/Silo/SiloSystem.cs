@@ -13,10 +13,10 @@ using Content.Goobstation.Shared.Silo;
 
 namespace Content.Goobstation.Server.Silo;
 
-public sealed class SiloSystem : SharedSiloSystem
+public sealed partial class SiloSystem : SharedSiloSystem
 {
-    [Dependency] private readonly LatheSystem _lathe = default!;
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
+    [Dependency] private LatheSystem _lathe = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
 
     public override void Initialize()
     {

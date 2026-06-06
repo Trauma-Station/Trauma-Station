@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -14,8 +10,6 @@
     sprite: _Goobstation/Objects/Vehicles/clowncar.rsi
     layers:
     - state: clowncar
-      map: ["enum.ClowncarLayers.Base"]
-    netsync: false
     noRot: true
   - type: Vehicle
     renderOver: North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest
@@ -29,7 +23,7 @@
     acceleration: 1
     friction: 1
     baseWalkSpeed: 4.5
-    baseSprintSpeed: 7 # Trauma edit
+    baseSprintSpeed: 7
   - type: ItemSlots
     slots:
       key_slot:
@@ -45,7 +39,6 @@
             volume: -3
   - type: Strap
     buckleOnInteractHand: false
-    addBuckleverb: false
     allowOthersToUnbuckle: false
     unbuckleSound:
       collection: ClowncarCrash
@@ -93,16 +86,7 @@
       - Body
       - Holopad
   - type: Clowncar
-    container: clowncar_container
-    cannonActivateSound:
-      path: "/Audio/_Goobstation/Vehicle/Clowncar/clowncar_activate_cannon.ogg"
-      params:
-        volume: 5
-    cannonDeactivateSound:
-      path: "/Audio/_Goobstation/Vehicle/Clowncar/clowncar_deactivate_cannon.ogg"
-      params:
-        volume: 5
-  - type: TriggerOnSolutionInsert # bringing a full class of car bomb in blows the car up
+  - type: TriggerOnSolutionInsert # bringing a full glass of car bomb in blows the car up
     reagent: IrishCarBomb
     minAmount: 30
   - type: Explosive # Explosive banana peel
@@ -122,8 +106,9 @@
     proto: PuddleSpaceLube
     predicted: true
   - type: Damageable
-    damageContainer: ClowncarDamageContainer
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: ClowncarDamageContainer
   - type: Jukebox
   - type: ActivatableUI
     key: enum.JukeboxUiKey.Key
@@ -147,13 +132,7 @@
       components:
       - KnockedDown
   - type: ExtendedContainer
-    containerName: clowncar_container
-    deleteContentsOnBreak: false
     capacity: 50
-    insertSound:
-      collection: ClowncarLoad
-      params:
-        volume: 4
 
 - type: entity
   parent: VehicleClowncarBase
@@ -162,10 +141,4 @@
   description: Carry mostly willing passengers around! Be careful with collisions!.
   components:
   - type: ExtendedContainer
-    containerName: clowncar_container
-    deleteContentsOnBreak: false
     capacity: 5
-    insertSound:
-      collection: ClowncarLoad
-      params:
-        volume: 4

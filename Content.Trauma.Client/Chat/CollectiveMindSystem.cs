@@ -6,10 +6,10 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Client.Chat;
 
-public sealed class CollectiveMindSystem : EntitySystem
+public sealed partial class CollectiveMindSystem : EntitySystem
 {
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {

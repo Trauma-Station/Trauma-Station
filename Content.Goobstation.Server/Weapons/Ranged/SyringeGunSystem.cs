@@ -10,7 +10,7 @@ namespace Content.Goobstation.Server.Weapons.Ranged;
 /// <summary>
 ///     System for handling projectiles and altering their properties when fired from a Syringe Gun.
 /// </summary>
-public sealed class SyringeGunSystem : EntitySystem
+public sealed partial class SyringeGunSystem : EntitySystem
 {
 
     public override void Initialize()

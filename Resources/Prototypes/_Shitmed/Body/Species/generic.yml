@@ -16,14 +16,13 @@
         Quantity: 5
       - ReagentId: Carbon
         Quantity: 10
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents: # really bad stuff
-        - ReagentId: Microplastics
-          Quantity: 5
-        - ReagentId: LabGrownNutriment
-          Quantity: 10
+  - type: Solution
+    solution:
+      reagents: # really bad stuff
+      - ReagentId: Microplastics
+        Quantity: 5
+      - ReagentId: LabGrownNutriment
+        Quantity: 10
 
 - type: entity
   abstract: true

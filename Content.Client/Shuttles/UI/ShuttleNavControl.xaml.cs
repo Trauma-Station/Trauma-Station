@@ -23,10 +23,10 @@ namespace Content.Client.Shuttles.UI;
 public sealed partial class ShuttleNavControl : BaseShuttleControl
 {
     // <Trauma>
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
     private readonly CommonRadarBlipsSystem _blips;
     // </Trauma>
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private IMapManager _mapManager = default!;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
 

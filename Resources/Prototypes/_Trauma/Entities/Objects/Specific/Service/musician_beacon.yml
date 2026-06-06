@@ -1,0 +1,139 @@
+- type: entity
+  parent: BaseItem
+  id: InstrumentsBeacon
+  name: instruments beacon
+  description: Summon a musical instrument of your choice.
+  components:
+  - type: Sprite
+    sprite: _ShitChap/Objects/armaments_beacon.rsi
+    state: icon
+  - type: Item
+    sprite: _ShitChap/Objects/armaments_beacon.rsi
+  - type: UserInterface
+    interfaces:
+      enum.RadialSelectorUiKey.Key:
+        type: RadialSelectorMenuBUI
+  - type: ActivatableUI
+    key: enum.RadialSelectorUiKey.Key
+    inHandsOnly: true
+    singleUser: true
+  - type: RadialItemSelector
+    entries:
+    - prototype: SpawnInstrumentGlockenspiel
+      icon:
+        sprite: Objects/Fun/Instruments/glockenspiel.rsi
+        state: icon
+    - prototype: SpawnInstrumentMusicBox
+      icon:
+        sprite: Objects/Fun/Instruments/musicbox.rsi
+        state: icon
+    - prototype: SpawnInstrumentXylophone
+      icon:
+        sprite: Objects/Fun/Instruments/structureinstruments.rsi
+        state: xylophone
+    - prototype: SpawnInstrumentMicrophone
+      icon:
+        sprite: Objects/Fun/Instruments/microphone.rsi
+        state: icon
+    - prototype: SpawnInstrumentWoodblock
+      icon:
+        sprite: Objects/Fun/Instruments/woodblock.rsi
+        state: icon
+    - prototype: SpawnInstrumentReverseCymbals
+      icon:
+        sprite: Objects/Fun/Instruments/reversecymbal.rsi
+        state: icon
+    - prototype: SpawnInstrumentElectricGuitar
+      icon:
+        sprite: Objects/Fun/Instruments/eguitar.rsi
+        state: icon
+    - prototype: SpawnInstrumentBassGuitar
+      icon:
+        sprite: Objects/Fun/Instruments/bassguitar.rsi
+        state: icon
+    - prototype: SpawnInstrumentAcousticGuitar
+      icon:
+        sprite: Objects/Fun/Instruments/guitar.rsi
+        state: icon
+    - prototype: SpawnInstrumentBanjo
+      icon:
+        sprite: Objects/Fun/Instruments/banjo.rsi
+        state: icon
+    - prototype: SpawnInstrumentViolin
+      icon:
+        sprite: Objects/Fun/Instruments/violin.rsi
+        state: icon
+    - prototype: SpawnInstrumentViola
+      icon:
+        sprite: Objects/Fun/Instruments/viola.rsi
+        state: icon
+    - prototype: SpawnInstrumentCello
+      icon:
+        sprite: Objects/Fun/Instruments/cello.rsi
+        state: icon
+    - prototype: SpawnInstrumentSaxophone
+      icon:
+        sprite: Objects/Fun/Instruments/saxophone.rsi
+        state: icon
+    - prototype: SpawnInstrumentHarmonica
+      icon:
+        sprite: Objects/Fun/Instruments/harmonica.rsi
+        state: icon
+    - prototype: SpawnInstrumentClarinet
+      icon:
+        sprite: Objects/Fun/Instruments/clarinet.rsi
+        state: icon
+    - prototype: SpawnInstrumentFlute
+      icon:
+        sprite: Objects/Fun/Instruments/flute.rsi
+        state: icon
+    - prototype: SpawnInstrumentRecorder
+      icon:
+        sprite: Objects/Fun/Instruments/recorder.rsi
+        state: icon
+    - prototype: SpawnInstrumentPanFlute
+      icon:
+        sprite: Objects/Fun/Instruments/panflute.rsi
+        state: icon
+    - prototype: SpawnInstrumentOcarina
+      icon:
+        sprite: Objects/Fun/Instruments/ocarina.rsi
+        state: icon
+    - prototype: SpawnInstrumentBagpipe
+      icon:
+        sprite: Objects/Fun/Instruments/bagpipes.rsi
+        state: icon
+    - prototype: SpawnInstrumentSynthesizer
+      icon:
+        sprite: Objects/Fun/Instruments/h_synthesizer.rsi
+        state: icon
+    - prototype: SpawnInstrumentAccordion
+      icon:
+        sprite: Objects/Fun/Instruments/accordion.rsi
+        state: icon
+    - prototype: SpawnInstrumentKalimba
+      icon:
+        sprite: Objects/Fun/Instruments/kalimba.rsi
+        state: icon
+    - prototype: SpawnInstrumentTrumpet
+      icon:
+        sprite: Objects/Fun/Instruments/trumpet.rsi
+        state: icon
+    - prototype: SpawnInstrumentTrombone
+      icon:
+        sprite: Objects/Fun/Instruments/trombone.rsi
+        state: icon
+    - prototype: SpawnInstrumentFrenchHorn
+      icon:
+        sprite: Objects/Fun/Instruments/frenchhorn.rsi
+        state: icon
+    - prototype: SpawnInstrumentEuphonium
+      icon:
+        sprite: Objects/Fun/Instruments/euphonium.rsi
+        state: icon
+    - prototype: SpawnInstrumentGunpet
+      icon:
+        sprite: Objects/Fun/Instruments/gunpet.rsi
+        state: icon
+  - type: StaticPrice
+    price: 500

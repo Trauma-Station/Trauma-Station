@@ -10,12 +10,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class InjectChemicalsActionSystem : EntitySystem
+public sealed partial class InjectChemicalsActionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

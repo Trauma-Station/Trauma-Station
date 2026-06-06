@@ -4,7 +4,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Goobstation.Common.StationReport;
 
-public sealed class CommonNtrStationReportSystem : EntitySystem
+public sealed partial class CommonNtrStationReportSystem : EntitySystem
 {
     //stores the last received station report
     public string? StationReportText { get; private set; } = null;

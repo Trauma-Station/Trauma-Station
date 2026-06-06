@@ -1,0 +1,89 @@
+# Rally
+- type: particleEffect
+  id: BloodBond
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: cross
+  startColor: "#00FF00"
+  endColor: "#800080"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.9
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.15
+    value: 0.4
+  - time: 0.2
+    value: 1.0
+  lifetime: 0.5
+  lifetimeVariance: 0.4
+  speed: 0.0
+  speedVariance: 0.2
+  particleSize: 1.5
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 10
+  burst: true
+  gravity: -5.0
+  drag: 0.0
+  noiseStrength: 2.0
+  noiseFrequency: 2.0
+  spreadAngle: 90
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 6.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleFill
+    radius: 0.4
+
+# Hysteria
+- type: particleEffect
+  id: Hysteria
+  sprite:
+    sprite: _Starfall/Particles/generic.rsi
+    state: soft_dot_big
+  startColor: "#00FF00"
+  endColor: "#800080"
+  alphaOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.08
+    value: 1.0
+  - time: 1.0
+    value: 0.9
+  sizeOverLifetime:
+  - time: 0.0
+    value: 0.5
+  - time: 0.15
+    value: 0.4
+  - time: 0.2
+    value: 1.0
+  lifetime: 1.0
+  lifetimeVariance: 0.4
+  speed: 0.0
+  speedVariance: 0.2
+  particleSize: 1.0
+  sizeVariance: 0.5
+  emissionRate: 0
+  maxCount: 10
+  burst: true
+  gravity: 0.0
+  drag: 0.0
+  noiseStrength: 5.0
+  noiseFrequency: 2.0
+  spreadAngle: 90
+  emitAngle: 0
+  startRotation: 0
+  startRotationVariance: 0
+  rotationSpeed: 6.0
+  rotationSpeedVariance: 0
+  shape:
+    type: CircleEdge
+    radius: 1.5

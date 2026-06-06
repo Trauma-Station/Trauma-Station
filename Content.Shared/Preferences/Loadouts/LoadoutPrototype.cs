@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+// </Trauma>
 using Content.Shared.Preferences.Loadouts.Effects;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
@@ -40,7 +43,7 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
 
     /// <inheritdoc />
     [DataField]
-    public Dictionary<string, EntProtoId> Equipment { get; set; } = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, EntProtoId> Equipment { get; set; } = new(); // Trauma - string -> ProtoId
 
     /// <inheritdoc />
     [DataField]
@@ -48,5 +51,5 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
 
     /// <inheritdoc />
     [DataField]
-    public Dictionary<string, List<EntProtoId>> Storage { get; set; } = new();
+    public Dictionary<ProtoId<InventorySlotPrototype>, List<EntProtoId>> Storage { get; set; } = new(); // Trauma - string -> ProtoId
 }

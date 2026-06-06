@@ -1,0 +1,15 @@
+- type: construction
+  id: WallInsulation
+  graph: WallInsulation
+  targetNode: insulation
+  placementMode: SnapgridCenter
+  category: construction-category-structures
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    FabricationKnowledge: 0
+    FurnitureKnowledge: 0
+  practical:
+    TailoringKnowledge: 1

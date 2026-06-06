@@ -6,9 +6,9 @@ using Content.Shared.Stealth.Components;
 
 namespace Content.Trauma.Shared.Xenomorphs.Stealth;
 
-public sealed class StealthOnWalkSystem : EntitySystem
+public sealed partial class StealthOnWalkSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     public override void Initialize()
     {

@@ -6,9 +6,9 @@ using Content.Lavaland.Shared.Megafauna.Events;
 
 namespace Content.Lavaland.Server.Megafauna.Systems;
 
-public sealed class MegafaunaRejuvenateSystem : EntitySystem
+public sealed partial class MegafaunaRejuvenateSystem : EntitySystem
 {
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
 
     public override void Initialize()
     {

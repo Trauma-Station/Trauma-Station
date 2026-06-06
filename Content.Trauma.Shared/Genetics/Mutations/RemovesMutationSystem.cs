@@ -2,9 +2,9 @@
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
-public sealed class RemovesMutationSystem : EntitySystem
+public sealed partial class RemovesMutationSystem : EntitySystem
 {
-    [Dependency] private readonly MutationSystem _mutation = default!;
+    [Dependency] private MutationSystem _mutation = default!;
 
     public override void Initialize()
     {

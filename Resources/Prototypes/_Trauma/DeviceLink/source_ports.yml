@@ -1,0 +1,87 @@
+# Circuits
+
+- type: sourcePort
+  id: Circuit1
+  name: signal-port-name-circuit-1
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit2
+  name: signal-port-name-circuit-2
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit3
+  name: signal-port-name-circuit-3
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit4
+  name: signal-port-name-circuit-4
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit5
+  name: signal-port-name-circuit-5
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit6
+  name: signal-port-name-circuit-6
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit7
+  name: signal-port-name-circuit-7
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit8
+  name: signal-port-name-circuit-8
+  description: signal-port-description-circuit-output
+
+# Intercom
+
+- type: sourcePort
+  id: RadioMessage
+  name: signal-port-name-radio-message
+  description: signal-port-description-radio-message
+
+# Phones
+
+- type: sourcePort
+  id: PhoneRingPort
+  name: signal-port-name-phone-call
+  description: signal-port-description-phone-call
+
+- type: sourcePort
+  id: PhoneOutgoingPort
+  name: signal-port-name-phone-outgoing
+  description: signal-port-description-phone-outgoing
+
+- type: sourcePort
+  id: PhonePickupPort
+  name: signal-port-name-phone-pickup
+  description: signal-port-description-phone-pickup
+
+- type: sourcePort
+  id: PhoneHangupPort
+  name: signal-port-name-phone-hangup
+  description: signal-port-description-phone-hangup
+
+# Access Scanner
+
+- type: sourcePort
+  id: AccessActive
+  name: signal-port-name-access-active
+  description: signal-port-description-access-active
+
+- type: sourcePort
+  id: AccessName
+  name: signal-port-name-access-name
+  description: signal-port-description-access-name
+
+- type: sourcePort
+  id: AccessJob
+  name: signal-port-name-access-job
+  description: signal-port-description-access-job

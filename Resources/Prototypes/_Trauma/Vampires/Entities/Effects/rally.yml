@@ -1,0 +1,11 @@
+- type: entity
+  id: RallyOverlay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FadingTimedDespawn
+    lifetime: 2
+    fadeOutTime: 0.4
+  - type: Sprite
+    sprite: _Trauma/Vampires/vampire_effects.rsi
+    state: rallyoverlay
+    drawdepth: Effects

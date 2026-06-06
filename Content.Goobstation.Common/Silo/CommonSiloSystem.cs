@@ -2,7 +2,7 @@
 
 namespace Content.Goobstation.Common.Silo;
 
-public abstract class CommonSiloSystem : EntitySystem
+public abstract partial class CommonSiloSystem : EntitySystem
 {
     public abstract EntityUid? GetSilo(EntityUid machine);
 

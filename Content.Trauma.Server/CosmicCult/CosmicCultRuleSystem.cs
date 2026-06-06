@@ -57,31 +57,31 @@ namespace Content.Trauma.Server.CosmicCult;
 /// <summary>
 /// Where all the main stuff for Cosmic Cultists happens.
 /// </summary>
-public sealed class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponent>
+public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRuleComponent>
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly EuiManager _euiMan = default!;
-    [Dependency] private readonly GhostSystem _ghost = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly CuffableSystem _cuffable = default!; // goob edit
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly RottingSystem _rotting = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private ChatSystem _chatSystem = default!;
+    [Dependency] private EuiManager _euiMan = default!;
+    [Dependency] private GhostSystem _ghost = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private CuffableSystem _cuffable = default!; // goob edit
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private RottingSystem _rotting = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_briefing.ogg");
     private readonly SoundSpecifier _deconvertSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_deconvert.ogg");

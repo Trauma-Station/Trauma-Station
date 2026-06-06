@@ -10,9 +10,9 @@ namespace Content.Trauma.Shared.Movement;
 /// Fixes movement status effects not refreshing your movespeed when added.
 /// Youd need to equip clothing etc to refresh it manually.
 /// </summary>
-public sealed class MovementStatusFixSystem : EntitySystem
+public sealed partial class MovementStatusFixSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!; // W
+    [Dependency] private MovementSpeedModifierSystem _speed = default!; // W
 
     public override void Initialize()
     {

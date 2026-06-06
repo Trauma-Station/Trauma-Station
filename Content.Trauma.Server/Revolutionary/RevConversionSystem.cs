@@ -8,10 +8,10 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Revolutionary;
 
-public sealed class RevConversionSystem : EntitySystem
+public sealed partial class RevConversionSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly RevolutionaryRuleSystem _rev = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private RevolutionaryRuleSystem _rev = default!;
 
     public override void Initialize()
     {

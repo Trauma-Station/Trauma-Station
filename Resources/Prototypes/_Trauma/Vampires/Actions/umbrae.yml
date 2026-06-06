@@ -1,0 +1,220 @@
+# Cloak of Darkness
+- type: entity
+  parent: BaseVampireAction
+  id: ActionCloakDarkness
+  name: Cloak of Darkness
+  description: When activated, slightly increases your speed and decreases your visibility by 15% in the dark. Increases burn damage taken by 10%. Completely disabled by fire.
+  components:
+  - type: Action
+    useDelay: 1
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_cloak
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggleConditions:
+    - !type:OnFireCondition # We must not be on fire for this ability to activate
+      inverted: true
+    onToggle:
+    - !type:PopupPredicted
+      message: You start getting consumed!
+    - !type:ModifyStatusEffect
+      effectProto: CloakOfDarknessStatusEffect
+      time: null
+      type: Add
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Trauma/Vampires/Actions/vampire_cloak.ogg
+        params:
+          volume: -5
+    offToggle:
+    - !type:PopupPredicted
+      message: You stop getting consumed!
+    - !type:ModifyStatusEffect
+      effectProto: CloakOfDarknessStatusEffect
+      time: null
+      type: Remove
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Trauma/Vampires/Actions/vampire_cloak.ogg
+        params:
+          volume: -5
+          pitch: 0.85
+  - type: Tag
+    tags:
+    - CloakOfDarkness
+
+# Shadow Snare
+- type: entity
+  parent: BaseVampireAction
+  id: ActionShadowSnare
+  name: Shadow Snare
+  description: Turn a tile into a trap, blinding those who spring it and deactivating any lights they have. Disarm the trap with prolonged exposure to light (about 5 seconds) or by flashing it.
+  components:
+  - type: Action
+    useDelay: 20
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/shadow_snare.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: shadow_snare
+  - type: TargetAction
+    range: 10
+  - type: WorldTargetAction
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: ShadowSnare
+  - type: VampireCostAction
+    bloodCost: 20
+
+# Shadow Anchor
+- type: entity
+  parent: BaseVampireAction
+  id: ActionShadowAnchor
+  name: Shadow Anchor
+  description: Summon a soul anchor at your location after a delay. Recast to teleport yourself back to the anchor. After 2 minutes, a shadow clone will be spawned at the anchor to trick onlookers, and you will become invisible for 4 seconds.
+  components:
+  - type: Action
+    useDelay: 300
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: shadow_anchor
+  - type: InstantAction
+    event: !type:ShadowAnchorActionEvent
+  - type: ActionShadowAnchor
+    fakeRecallDuration: 120
+    effectsOnFakeRecall:
+    - !type:PopupPredicted
+      message: You fake a recall!
+  - type: VampireCostAction
+    bloodCost: 30
+
+
+# Dark Passage
+- type: entity
+  parent: [BaseVampireAction, ActionBlink]
+  id: ActionDarkPassage
+  name: Dark Passage
+  description: Click on a turf to teleport to it. Works even when stunned.
+  components:
+  - type: Action
+    useDelay: 40
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/dark_passage.ogg
+    raiseOnAction: false
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: dark_passage
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:SpawnParticles
+      particleProto: DarkPassage
+  - type: VampireCostAction
+    bloodCost: 30
+
+# Extinguish
+- type: entity
+  parent: BaseVampireAction
+  id: ActionExtinguish
+  name: Extinguish
+  description: Turns off any light sources in view and destroys glowshrooms. Has no effect on fire or flares.
+  components:
+  - type: Action
+    useDelay: 20
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_extinguish
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: PointLight
+      range: 10
+      effect: !type:NestedEffect
+        proto: Extinguish
+
+
+# Shadow Boxing
+- type: entity
+  parent: BaseVampireAction
+  id: ActionShadowBoxing
+  name: Shadow Boxing
+  description: Select a target and send out shadow clones to beat them up. only works if you remain within 2 tiles of the target.
+  components:
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: shadow_boxing
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Body
+    event: !type:ShadowBoxingActionEvent
+  - type: ActionShadowBoxing
+    update: 0.5
+    targetEffects:
+    - !type:HealthChange
+      splitDamage: SplitEnsureAll
+      damage:
+        types:
+          Blunt: 3
+          Slash: 3
+          Piercing: 2
+    - !type:SpawnParticles
+      particleProto: ShadowBoxing
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Trauma/Vampires/Actions/dark_passage.ogg
+        params:
+          pitch: 1.9
+  - type: VampireCostAction
+    bloodCost: 50
+
+# Eternal Darkness
+- type: entity
+  parent: BaseVampireAction
+  id: ActionEternalDarkness
+  name: Eternal Darkness
+  description: Summons a wave of shadow over a massive area around the vampire, which slows/reduces the damage of lasers as they pass through it. Anyone caught in these shadows will have their body temperature slowly reduced, except for the caster.
+  components:
+  - type: Action
+    useDelay: 10
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: eternal_darkness
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggleConditions: # we must have at least 10 usable blood, ensures we don't attach the effect 4noraisin
+    - !type:HasVampireBlood
+      amount: 10
+    onToggle:
+    - !type:PopupPredicted
+      message: The darkness begins!
+    - !type:ModifyStatusEffect
+      effectProto: EternalDarknessStatusEffect
+      time: null
+      type: Add
+    offToggle:
+    - !type:ModifyStatusEffect
+      effectProto: EternalDarknessStatusEffect
+      time: null
+      type: Remove
+    - !type:PopupPredicted
+      message: The darkness stops!
+  - type: Tag
+    tags:
+    - EternalDarkness
+
+- type: entity
+  parent: ActionToggleFov
+  id: ActionUmbralSight
+  name: Umbral Sight
+  description: Gain X-ray vision.

@@ -26,23 +26,23 @@ namespace Content.Trauma.Shared.Morph;
 /// <summary>
 /// Handles all of morph's interactions.
 /// </summary>
-public sealed class MorphSystem : EntitySystem
+public sealed partial class MorphSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChameleonProjectorSystem _chameleon = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityQuery<ChameleonDisguisedComponent> _disguisedQuery = default!;
-    [Dependency] private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
-    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
-    [Dependency] private readonly EntityQuery<MindContainerComponent> _mindQuery = default!;
-    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
-    [Dependency] private readonly EntityQuery<MorphComponent> _query = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChameleonProjectorSystem _chameleon = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<ChameleonDisguisedComponent> _disguisedQuery = default!;
+    [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private EntityQuery<MindContainerComponent> _mindQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<MorphComponent> _query = default!;
 
     public override void Initialize()
     {

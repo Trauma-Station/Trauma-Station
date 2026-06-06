@@ -6,9 +6,9 @@ using Content.Shared.Actions.Components;
 
 namespace Content.Trauma.Shared.Actions;
 
-public sealed class ActionRelaySystem : EntitySystem
+public sealed partial class ActionRelaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {

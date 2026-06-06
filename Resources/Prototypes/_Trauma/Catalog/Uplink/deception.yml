@@ -9,6 +9,16 @@
   - UplinkDeception
 
 - type: listing
+  id: UplinkStorageBriefCase
+  name: uplink-storage-briefcase-name
+  description: uplink-storage-briefcase-desc
+  productEntity: BriefcaseBrownFake
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkDeception
+
+- type: listing
   id: UplinkCodespeakManual
   name: uplink-codespeak-manual-name
   description: uplink-codespeak-manual-desc

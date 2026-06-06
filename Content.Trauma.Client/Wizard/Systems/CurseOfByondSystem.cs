@@ -7,10 +7,10 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class CurseOfByondSystem : EntitySystem
+public sealed partial class CurseOfByondSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     public bool InitPredict;
 
     public override void Initialize()

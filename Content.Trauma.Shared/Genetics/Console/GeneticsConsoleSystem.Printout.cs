@@ -8,8 +8,8 @@ namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem
 {
-    [Dependency] private readonly PaperSystem _paper = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private void InitializePrintout()
     {

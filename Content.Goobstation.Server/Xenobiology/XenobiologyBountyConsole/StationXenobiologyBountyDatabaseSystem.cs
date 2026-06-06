@@ -12,12 +12,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Xenobiology.XenobiologyBountyConsole;
 
-public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
+public sealed partial class StationXenobiologyBountyDatabaseSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly NameIdentifierSystem _nameIdentifier = default!;
-    [Dependency] private readonly XenobiologyBountyConsoleSystem _xenoConsole = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private NameIdentifierSystem _nameIdentifier = default!;
+    [Dependency] private XenobiologyBountyConsoleSystem _xenoConsole = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly ProtoId<NameIdentifierGroupPrototype> BountyNameIdentifierGroup = "Bounty";
 
@@ -114,7 +114,7 @@ public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
             string? actorName = null;
             if (actor != null)
             {
-                var getIdentityEvent = new TryGetIdentityShortInfoEvent(ent.Owner, actor.Value);
+                var getIdentityEvent = new TryGetIdentityShortInfoEvent(ent.Owner, actor.Value, false);
                 RaiseLocalEvent(getIdentityEvent);
                 actorName = getIdentityEvent.Title;
             }

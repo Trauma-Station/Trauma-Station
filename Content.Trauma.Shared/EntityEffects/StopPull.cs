@@ -21,9 +21,9 @@ public sealed partial class StopPull : EntityEffectBase<StopPull>
         => null;
 }
 
-public sealed class StopPullEffectSystem : EntityEffectSystem<PullableComponent, StopPull>
+public sealed partial class StopPullEffectSystem : EntityEffectSystem<PullableComponent, StopPull>
 {
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     protected override void Effect(Entity<PullableComponent> ent, ref EntityEffectEvent<StopPull> args)
     {

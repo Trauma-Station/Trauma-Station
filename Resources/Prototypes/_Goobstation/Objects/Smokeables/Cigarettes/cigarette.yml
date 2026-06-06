@@ -1,13 +1,12 @@
 - type: entity
+  parent: Cigarette
   id: CigaretteMedical
+  name: cigarette
   suffix: Medical
   description: An extra absorbant chemlab cigarette, smells off.
-  parent: Cigarette
-  name: cigarette
   components:
-  - type: SolutionContainerManager
-    solutions:
-      smokable:
-        maxVol: 10
+  - type: Solution
+    solution:
+      maxVol: 10
   - type: RefillableSolution # it would make more sense for all cigerattes to work like this.
     solution: smokable

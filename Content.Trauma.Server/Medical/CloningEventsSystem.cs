@@ -13,9 +13,9 @@ namespace Content.Trauma.Server.Medical;
 /// Connect cloning console to events.
 /// Also handles scanner port connected event for completion
 /// </summary>
-public sealed class CloningEventsSystem : EntitySystem
+public sealed partial class CloningEventsSystem : EntitySystem
 {
-    [Dependency] private readonly CloningConsoleSystem _cloningConsole = default!;
+    [Dependency] private CloningConsoleSystem _cloningConsole = default!;
 
     public override void Initialize()
     {

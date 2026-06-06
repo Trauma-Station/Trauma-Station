@@ -6,7 +6,6 @@ using Content.Server.Popups;
 using Content.Server.Prayer;
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Server.SlaughterDemon;
 
@@ -14,12 +13,12 @@ namespace Content.Goobstation.Server.SlaughterDemon;
 /// This handles the Demonic Whisper logic.
 /// Demonic Whisper lets you send a subtle popup to someone.
 /// </summary>
-public sealed class DemonicWhisperSystem : EntitySystem
+public sealed partial class DemonicWhisperSystem : EntitySystem
 {
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly PrayerSystem _prayer = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
+    [Dependency] private PrayerSystem _prayer = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private IdentitySystem _identity = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
 

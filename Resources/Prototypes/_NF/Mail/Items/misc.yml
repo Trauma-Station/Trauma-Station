@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Mail-only items. If/when these get used for anything else, please move them to another folder.
 # Pranks: admin items or effects put into an envelope, released when opened or damaged.
@@ -49,39 +45,33 @@
   parent: Syringe
   name: cognizine syringe
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 15
-        reagents:
-        - ReagentId: Cognizine
-          Quantity: 15 # Surely three friends is enough.
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Cognizine
+        Quantity: 15 # Surely three friends is enough.
 
 - type: entity
   id: SyringeOpporozidone
   parent: Syringe
   name: opporozidone syringe
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 15
-        reagents:
-        - ReagentId: Opporozidone
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Opporozidone
+        Quantity: 15
 
 - type: entity
   id: ArcryoxChemistryBottle
   parent: BaseChemistryBottleFilled
   name: acryox bottle
   components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Arcryox
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Arcryox
+        Quantity: 30
 
 # Premium Alcohol: wait, it's just marketing?
 # TODO: different sprites would be nice.

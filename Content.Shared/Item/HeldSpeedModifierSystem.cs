@@ -8,10 +8,10 @@ namespace Content.Shared.Item;
 /// <summary>
 /// This handles <see cref="HeldSpeedModifierComponent"/>
 /// </summary>
-public sealed class HeldSpeedModifierSystem : EntitySystem
+public sealed partial class HeldSpeedModifierSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!; // Goobstation
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // Goobstation
 
     /// <inheritdoc/>
     public override void Initialize()

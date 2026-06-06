@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseEnchant
+  id: EnchantPoison
+  name: Poison
+  components:
+  - type: Enchant
+    maxLevel: 1
+    whitelist:
+      components:
+      - MeleeWeapon
+    blacklist:
+      components:
+      - Solution
+  - type: ComponentsEnchant
+    added:
+    - type: Solution
+      id: melee
+      solution:
+        maxVol: 1
+    - type: SolutionRegeneration
+      generated:
+        reagents:
+        - ReagentId: Amatoxin
+          Quantity: 0.1
+    - type: MeleeChemicalInjector
+      transferAmount: 1
+      solution: melee

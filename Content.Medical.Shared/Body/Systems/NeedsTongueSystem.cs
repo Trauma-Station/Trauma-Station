@@ -7,11 +7,11 @@ using Content.Shared.Speech;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class NeedsTongueSystem : EntitySystem
+public sealed partial class NeedsTongueSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<EnabledOrganComponent> _enabledQuery = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<EnabledOrganComponent> _enabledQuery = default!;
 
     public override void Initialize()
     {

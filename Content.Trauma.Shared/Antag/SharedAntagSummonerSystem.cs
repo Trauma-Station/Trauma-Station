@@ -10,14 +10,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Antag;
 
-public abstract class SharedAntagSummonerSystem : EntitySystem
+public abstract partial class SharedAntagSummonerSystem : EntitySystem
 {
-    [Dependency] private readonly AccessReaderSystem _access = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedCargoSystem _cargo = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedCargoSystem _cargo = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     public override void Initialize()
     {

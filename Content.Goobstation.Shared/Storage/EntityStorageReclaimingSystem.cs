@@ -6,9 +6,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Storage;
 
-public sealed class EntityStorageReclaimingSystem : EntitySystem
+public sealed partial class EntityStorageReclaimingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {

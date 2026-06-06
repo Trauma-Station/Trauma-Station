@@ -15,12 +15,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Damage.Systems;
 
-public abstract class SharedGodmodeSystem : EntitySystem
+public abstract partial class SharedGodmodeSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
     // </Trauma>
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
 
     public override void Initialize()
     {

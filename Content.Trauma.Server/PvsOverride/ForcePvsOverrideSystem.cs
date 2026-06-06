@@ -4,9 +4,9 @@ using Robust.Server.GameStates;
 
 namespace Content.Trauma.Server.PvsOverride;
 
-public sealed class ForcePvsOverrideSystem : EntitySystem
+public sealed partial class ForcePvsOverrideSystem : EntitySystem
 {
-    [Dependency] private readonly PvsOverrideSystem _pvs = default!;
+    [Dependency] private PvsOverrideSystem _pvs = default!;
 
     public override void Initialize()
     {

@@ -22,11 +22,11 @@
 
 - type: listing
   id: UplinkBoxReagentGrenades
-  name: Box of Reagent Grenades
-  description: Contains 2 Glue grenades and 2 Lube Grenades
+  name: uplink-reagent-grenades-name
+  description: uplink-reagent-grenades-desc
   productEntity: BoxReagentGrenades
   cost:
-    Telecrystal: 30
+    Telecrystal: 20
   categories:
     -  UplinkDisruption
 
@@ -36,7 +36,7 @@
   description: uplink-sarin-gas-grenade-desc
   productEntity: SarinGasGrenade
   cost:
-    Telecrystal: 10
+    Telecrystal: 15 # Not on the same level as other grenades
   categories:
   - UplinkExplosives
   conditions:
@@ -53,7 +53,7 @@
   description: uplink-sarin-gas-grenade-desc
   productEntity: SarinGasGrenade
   cost:
-    Telecrystal: 5
+    Telecrystal: 10
   categories:
   - UplinkExplosives
   conditions:
@@ -158,7 +158,7 @@
   description: uplink-c4-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   cost:
-    Telecrystal: 26
+    Telecrystal: 24
   categories:
   - UplinkExplosives
   conditions:
@@ -264,7 +264,7 @@
   description: uplink-fire-axe-flaming-desc
   productEntity: FireAxeFlaming
   cost:
-    Telecrystal: 60
+    Telecrystal: 65
   categories:
   - UplinkWeaponry
 
@@ -275,7 +275,7 @@
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Rifles/burner.rsi, state: icon }
   productEntity: WeaponRifleBurner
   cost:
-    Telecrystal: 100 # don't kill me piras
+    Telecrystal: 100
   categories:
   - UplinkWeaponry
   conditions:
@@ -317,7 +317,7 @@
   description: uplink-anaconda-desc
   productEntity: WeaponPistolAnaconda
   cost:
-    Telecrystal: 38 # This + esword = 75 TC
+    Telecrystal: 40
   categories:
   - UplinkWeaponry
   conditions:
@@ -360,7 +360,7 @@
   icon: { sprite: /Textures/Clothing/Head/Helmets/swat_syndicate.rsi, state: icon }
   productEntity: ClothingHeadHelmetSwatSyndicate
   cost:
-    Telecrystal: 10
+    Telecrystal: 15
   categories:
   - UplinkWearables
 
@@ -420,7 +420,7 @@
   icon: { sprite: /Textures/_Goobstation/Clothing/Head/Helmets/reverse_bear_trap.rsi, state: icon }
   productEntity: BoxReverseBearTrap
   cost:
-    Telecrystal: 23 # novelty item for rp
+    Telecrystal: 20 # novelty item for rp
   categories:
   - UplinkWearables
 
@@ -432,7 +432,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Cannons/pie_cannon.rsi, state: piecannon }
   productEntity: LauncherCreamPieRegenerating
   cost:
-    Telecrystal: 40
+    Telecrystal: 35
   categories:
   - UplinkJob
   conditions:
@@ -468,6 +468,10 @@
   - !type:BuyerJobCondition
     whitelist:
     - Chaplain
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 
 
 - type: listing
@@ -476,7 +480,7 @@
   description: Make the floor slippery!
   productEntity: LubeGrenade
   cost:
-    Telecrystal: 14
+    Telecrystal: 10
   categories:
     -  UplinkJob
   conditions:
@@ -539,7 +543,7 @@
   icon: { sprite: _Goobstation/Objects/Devices/communication.rsi, state: radio-syndiroach }
   productEntity: ReinforcementRadioSyndicateSyndiRoach
   cost:
-    Telecrystal: 30
+    Telecrystal: 15
   categories:
     - UplinkAllies
 
@@ -549,7 +553,7 @@
   description: uplink-beenades-desc
   productEntity: BeeGrenade
   cost:
-    Telecrystal: 16
+    Telecrystal: 15
   categories:
   - UplinkJob
   conditions:
@@ -641,7 +645,7 @@
   description: uplink-advanced-combat-medipen-desc
   productEntity: AdvancedCombatMedipen
   cost:
-    Telecrystal: 24
+    Telecrystal: 20
   categories:
   - UplinkChemicals
 
@@ -721,14 +725,14 @@
   icon: { sprite: /Textures/Objects/Specific/Medical/syndi_implanter.rsi, state: implanter0 }
   productEntity: MindcontrolImplanter
   cost:
-    Telecrystal: 25 # Half the budget #bounty someone want it cheaper.
+    Telecrystal: 35 # no longer can you buy 4 mind control implants
   categories:
     - UplinkImplants
   conditions:
     - !type:StoreWhitelistCondition
       blacklist:
         tags:
-          - NukeOpsUplink # i guess we dont let nukies have this, they have to mutch TC
+          - NukeOpsUplink # I guess we don't let nukies have this, they have too much TC
           - ContravendUplink
 
 - type: listing
@@ -936,7 +940,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: blast }
   productEntity: GrenadeBlast
   cost:
-    Telecrystal: 12 # Buying granades this way is ~14% cheaper than getting them from china-lake bundles
+    Telecrystal: 12 # Buying grenades this way is ~14% cheaper than getting them from china-lake bundles
   categories:
   - UplinkAmmo
   conditions:
@@ -952,7 +956,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: frag }
   productEntity: GrenadeFrag
   cost:
-    Telecrystal: 12 # Buying granades this way is ~14% cheaper than getting them from china-lake bundles
+    Telecrystal: 12 # Buying grenades this way is ~14% cheaper than getting them from china-lake bundles
   categories:
   - UplinkAmmo
   conditions:
@@ -1024,39 +1028,6 @@
     whitelist:
       tags:
       - NukeOpsUplink
-
-#- type: listing # A box, really? Why not like... mags?
-#  id: UplinkHighCaliberBox
-#  name: uplink-high-caliber-box-name
-#  description: uplink-high-caliber-box-desc
-#  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Boxes/anti_materiel.rsi, state: base-b }
-#  productEntity: MagazineBoxHighCaliber
-#  cost:
-#    Telecrystal: 40 # ammo should be a big cost for this
-#  categories:
-#  - UplinkAmmo
-
-#- type: listing Trauma, removed with the shotgun
-#  id: UplinkMagazineShotgunHeavy
-#  name: uplink-heavy-shotgun-magazine-name
-#  description: uplink-heavy-shotgun-magazine-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon }
-#  productEntity: MagazineShotgunHeavy
-#  cost:
-#    Telecrystal: 30
-#  categories:
-#  - UplinkAmmo
-
-#- type: listing Trauma, removed with the shotgun
-#  id: UplinkMagazineShotgunHeavySlug
-#  name: uplink-heavy-shotgun-magazine-slug-name
-#  description: uplink-heavy-shotgun-magazine-slug-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon2 }
-#  productEntity: MagazineShotgunHeavySlug
-#  cost:
-#    Telecrystal: 40
-#  categories:
-#  - UplinkAmmo
 
 - type: listing
   id: UplinkHighCapacityMagazinePistol

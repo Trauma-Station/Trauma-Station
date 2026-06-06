@@ -1,30 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using System.Threading.Tasks;
 using Content.Client.Resources;
 using Content.Goobstation.Shared.JumpScare;
 using Robust.Client.Audio;
-using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Audio;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace Content.Goobstation.Client.JumpScare;
 
-public sealed class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
+public sealed partial class ClientFullScreenImageJumpscare : IFullScreenImageJumpscare, IPostInjectInit
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private INetManager _netManager = default!;
 
     public void PostInject()
     {

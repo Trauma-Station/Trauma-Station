@@ -1,0 +1,9 @@
+- type: damageModifierSet
+  id: VampireCoffin
+  coefficients:
+    Heat: 0.1
+
+- type: damageContainer
+  id: VampireCoffin
+  supportedTypes:
+  - Heat

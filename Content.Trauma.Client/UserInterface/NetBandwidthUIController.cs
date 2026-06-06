@@ -2,7 +2,6 @@
 
 using Content.Trauma.Common.Input;
 using Robust.Client.Input;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Input.Binding;
@@ -10,12 +9,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.UserInterface;
 
-public sealed class NetBandwidthUIController : UIController
+public sealed partial class NetBandwidthUIController : UIController
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IInputManager _input = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     public override void Initialize()
     {

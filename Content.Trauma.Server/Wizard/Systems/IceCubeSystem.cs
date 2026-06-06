@@ -20,14 +20,14 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard;
 
-public sealed class IceCubeSystem : SharedIceCubeSystem
+public sealed partial class IceCubeSystem : SharedIceCubeSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     /// <summary>
     /// Damage types that can break ice cubes.
@@ -42,7 +42,7 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
         SubscribeLocalEvent<IceCubeComponent, ComponentStartup>(IceCubeAdded);
         SubscribeLocalEvent<IceCubeComponent, ComponentShutdown>(IceCubeRemoved);
         SubscribeLocalEvent<IceCubeComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
-        SubscribeLocalEvent<IceCubeComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<IceCubeComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<IceCubeComponent, BeforeStaminaDamageEvent>(OnStaminaDamage, before: [typeof(SharedStaminaSystem)]);
         SubscribeLocalEvent<IceCubeOnProjectileHitComponent, ProjectileHitEvent>(OnHit);
     }
@@ -66,17 +66,17 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
             EnsureComp<IceCubeComponent>(args.Target);
     }
 
-    private void OnDamageChanged(Entity<IceCubeComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageDealt(Entity<IceCubeComponent> ent, ref DamageDealtEvent args)
     {
         var (uid, comp) = ent;
 
         if (!TryComp(uid, out TemperatureComponent? temperature))
             return;
 
-        if (args is not { DamageIncreased: true, DamageDelta: not null })
+        if (!args.Damage.AnyPositive())
             return;
 
-        if (args.DamageDelta.DamageDict.TryGetValue("Heat", out var heat))
+        if (args.Damage.DamageDict.TryGetValue("Heat", out var heat))
         {
             _temperature.ForceChangeTemperature(uid,
                 MathF.Min(comp.UnfreezeTemperatureThreshold + 10f,
@@ -85,7 +85,7 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
         }
 
         var total = FixedPoint2.Zero;
-        foreach (var (type, value) in args.DamageDelta.DamageDict)
+        foreach (var (type, value) in args.Damage.DamageDict)
         {
             if (BreakDamages.Contains(type))
                 total += value;

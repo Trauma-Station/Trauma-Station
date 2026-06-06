@@ -10,7 +10,7 @@ namespace Content.Client.Power;
 
 public sealed partial class PowerMonitoringConsoleNavMapControl : NavMapControl
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     // Cable indexing
     // 0: CableType.HighVoltage
