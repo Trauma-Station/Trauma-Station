@@ -308,7 +308,59 @@
   - type: Crawler
   - type: Inventory
     templateId: demon
+    speciesId: vox
+    displacements:
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Goobstation/Mobs/Species/Vox/displacement.rsi
+            state: outerClothing
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: &vox_displacement Mobs/Species/Vox/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: head
+      neck:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: neck
+      back:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: *vox_displacement
+            state: shoes
   - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: *vox_displacement
+          state: hand_l
     activeHandId: Hand
     hands:
       Hand:

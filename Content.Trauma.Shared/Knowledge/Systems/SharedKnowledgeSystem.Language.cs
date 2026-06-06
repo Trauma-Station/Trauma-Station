@@ -2,7 +2,7 @@
 
 using Content.Shared.Body;
 using Content.Shared.Chat;
-using Content.Shared.Speech;
+using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
@@ -15,6 +15,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     private void InitializeLanguage()
@@ -32,7 +33,7 @@ public abstract partial class SharedKnowledgeSystem
 
         // Experience methods
         SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ListenEvent>(OnLanguageHeard);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRangeEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -247,19 +248,26 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(unit, comp);
     }
 
-    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
+    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
         if (args.Source == ent.Owner)
             return; // Same person, no need.
-
-        // Already Obfuscating.
 
         if (GetContainer(ent.Owner) is not { } brain)
             return;
 
         AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
-    }
 
-    public EntityUid? GetActiveLanguage(EntityUid target)
-        => GetContainer(target)?.Comp.ActiveLanguage;
+        var languageId = LanguageUnit(args.Language);
+
+        // Try obfuscate speech if can't listen well.
+        if (GetKnowledge(brain, LanguageUnit(args.Language)) is { } unit && GetMastery(unit.Owner) >= 2)
+            return;
+
+        // Use Obfuscate logic through language system.
+        var languageProto = _proto.Index(args.Language);
+        args.Message = _language.ObfuscateSpeech(args.Message, languageProto, ent.Owner);
+        if (args.Speech is { } speech)
+            args.WrappedMessage = _chat.WrapPublicMessage(args.Source, args.Name, args.Message, speech, languageProto, args.Color);
+    }
 }

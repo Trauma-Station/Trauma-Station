@@ -102,7 +102,7 @@ public sealed partial class PaperSystem : EntitySystem
             if (entity.Comp.StampedBy.Count > 0)
             {
                 var commaSeparated =
-                    string.Join(", ", entity.Comp.StampedBy.Select(s => Loc.GetString(s.StampedName)));
+                    string.Join(", ", entity.Comp.StampedBy.Select(s => Loc.TryGetString(s.StampedName, out var stamped) ? stamped : s.StampedName)); // Trauma - use TryGetString because of signatures setting it to non-loc string
                 args.PushMarkup(
                     Loc.GetString(
                         "paper-component-examine-detail-stamped-by",

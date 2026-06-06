@@ -142,7 +142,7 @@ public sealed partial class ActionsSystem : EntitySystem
             return true;
 
         var tileIndices = _mapSystem.TileIndicesFor(grid, mapGrid, coordinates);
-        return !_anchorable.TileFree(mapGrid, tileIndices, collisionLayer, collisionMask);
+        return !_anchorable.TileFree((grid, mapGrid), tileIndices, collisionLayer, collisionMask);
     }
 
     #endregion

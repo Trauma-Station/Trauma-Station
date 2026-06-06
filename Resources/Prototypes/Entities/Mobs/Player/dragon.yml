@@ -243,7 +243,7 @@
     rechargeSound:
       path: /Audio/Animals/space_dragon_roar.ogg
   - type: BasicEntityAmmoProvider
-    proto: ProjectileDragonsBreath
+    proto: ProjectileDragonsBreathSpread # Trauma - add Spread
     capacity: 1
     count: 1
   - type: Gun
@@ -318,15 +318,22 @@
     event: !type:DevourActionEvent
 
 - type: entity
-  parent: BaseAction
+  parent: [ BaseAction, DragonsBreathGun ] # Trauma - inherit from the gun too
   id: ActionDragonsBreath
   name: "[color=orange]Dragon's Breath[/color]"
   description: Spew out flames at anyone foolish enough to attack you!
   components:
+  # <Trauma>
+  - type: GunAction
+  # </Trauma>
   - type: Action
+    # <Trauma>
+    raiseOnAction: true # action does the logic instead of the mob
+    useDelay: 5
+    # </Trauma>
     # TODO: actual sprite and iconOn
     icon: { sprite : Objects/Weapons/Guns/Projectiles/magic.rsi, state: fireball }
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem # Trauma - was BigAction, dont show lungs
     priority: 2
   - type: TargetAction
     checkCanAccess: false

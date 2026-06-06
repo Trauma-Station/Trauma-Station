@@ -9,3 +9,22 @@
     difficulty: 12
     rarity: Rare
     locked: true # need to get it via lizard dormant mutation
+  - type: ActionMutation
+    action: ActionFireBreath
+
+- type: entity
+  parent: [ BaseMutationAction, ActionDragonsBreath ]
+  id: ActionFireBreath
+  name: "[color=orange]Breathe Fire[/color]"
+  description: Spew out flames from your lungs!
+  components:
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileDragonsBreath # not a spread just 1 line of fire, funny lizard is weaker than a space dragon
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Heat: 4 # spicy
