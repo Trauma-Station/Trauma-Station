@@ -55,7 +55,7 @@
       - ArrowDisabler
       - ArrowFiery
       - ArrowFreeze
-      - ArrowExplosive
+    #  - ArrowExplosive - Trauma
       - ArrowXray
       - ArrowBee
       - ArrowIon
