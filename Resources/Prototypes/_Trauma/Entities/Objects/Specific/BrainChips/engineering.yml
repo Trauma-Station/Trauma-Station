@@ -16,7 +16,7 @@
       WallsKnowledge: 50
       WindowsKnowledge: 50
       SmokeablesKnowledge: 100 # lol
-      MetalworkingKnowledge: 50
+      MetalworkingKnowledge: 50 # Trauma - original didn't have, no idea why
 
 - type: entity
   parent: BaseSkillChip
