@@ -16,6 +16,7 @@
       WallsKnowledge: 50
       WindowsKnowledge: 50
       SmokeablesKnowledge: 100 # lol
+      MetalworkingKnowledge: 50
 
 - type: entity
   parent: BaseSkillChip
@@ -34,6 +35,7 @@
       WallsKnowledge: 26
       WindowsKnowledge: 26
       SmokeablesKnowledge: 50
+      MetalworkingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -52,6 +54,7 @@
       WallsKnowledge: 26
       WindowsKnowledge: 26
       SmokeablesKnowledge: 50
+      MetalworkingKnowledge: 26
 
 - type: entity
   parent: BaseSkillChip
@@ -71,3 +74,4 @@
       WallsKnowledge: 10
       WindowsKnowledge: 10
       SmokeablesKnowledge: 50
+      MetalworkingKnowledge: 10
