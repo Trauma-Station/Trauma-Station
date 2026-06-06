@@ -9,7 +9,7 @@
     - state: icon-surgery
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzer #Trauma - Add a health analyzer to borg surgery modules
+    - item: HandheldHealthAnalyzer
     - item: Scalpel
     - item: SawElectric
     - item: Drill
@@ -40,7 +40,7 @@
     - state: icon-advanced-surgery
   - type: ItemBorgModule
     hands:
-    - item: HandheldHealthAnalyzer #Trauma - Add a health analyzer to borg surgery modules
+    - item: HandheldHealthAnalyzer
     - item: EnergyScalpel
     - item: EnergyCautery
     - item: AdvancedRetractor
