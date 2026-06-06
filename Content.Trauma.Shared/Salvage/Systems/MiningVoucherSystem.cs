@@ -45,7 +45,7 @@ public sealed partial class MiningVoucherSystem : EntitySystem
 
         if (!_power.IsPowered(target))
         {
-            _popup.PopupClient(Loc.GetString("mining-voucher-vendor-unpowered", ("vendor", target)), target, user);
+            _popup.PopupClient($"{Name(target)} has no power!", target, user);
             return;
         }
 
