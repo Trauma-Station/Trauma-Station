@@ -64,7 +64,6 @@ SPDX-License-Identifier: MIT
                         Name="StoreListingsScroll"
                         HScrollEnabled="False"
                         HorizontalExpand="True"
-                        MinSize="100 256"
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">
                         <!-- <Trauma> - for job listings -->
