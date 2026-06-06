@@ -32,7 +32,7 @@ uplink-signaller-desc = A device that can trigger signals at any distance. You c
 # bang bang pew pew eat it up i gota go
 
 uplink-hardlight-bow-name = Hardlight Bow
-uplink-hardlight-bow-desc = A modern bow that can fabricate hardlight arrows, designed for silent takedowns of targets. Has 8 different firing modes. Can be folded.
+uplink-hardlight-bow-desc = A modern bow that can fabricate hardlight arrows, designed for silent takedowns of targets. Has 7 different firing modes. Can be folded.
 
 # Job-specific
 

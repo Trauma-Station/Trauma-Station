@@ -9836,3 +9836,10 @@ Entries:
   id: 1115
   time: '2026-06-05T19:36:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3060
+- author: SpeltIncorrectyl
+  changes:
+  - type: Remove
+    message: Removed explosive mode from the hardlight bow.
+  id: 1116
+  time: '2026-06-06T10:56:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3067
