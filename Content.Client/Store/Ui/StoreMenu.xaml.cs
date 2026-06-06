@@ -44,9 +44,6 @@ public sealed partial class StoreMenu : DefaultWindow
         WithdrawButton.OnButtonDown += OnWithdrawButtonDown;
         RefundButton.OnButtonDown += OnRefundButtonDown;
         SearchBar.OnTextChanged += _ => SearchTextUpdated?.Invoke(this, SearchBar.Text);
-
-        // Trauma - job listings
-        JobListingsButton.OnButtonDown += OnJobListingsButtonPressed;
     }
 
     public void UpdateBalance(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance)
@@ -94,12 +91,6 @@ public sealed partial class StoreMenu : DefaultWindow
         // should probably chunk these out instead. to-do if this clogs the internet tubes.
         // maybe read clients prototypes instead?
         ClearListings();
-
-        // <Trauma> - job listings
-        if (JobListingsSelected)
-            return;
-        // </Trauma>
-
         foreach (var item in sorted)
         {
             AddListingGui(item);

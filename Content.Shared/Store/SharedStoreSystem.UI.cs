@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Shared.PDA.Ringer;
 using Content.Shared.Store.Components;
-using Content.Trauma.Common.JobListings;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -82,14 +81,7 @@ public abstract partial class SharedStoreSystem
         // only tell operatives to lock their uplink if it can be locked
         var showFooter = HasComp<RingerUplinkComponent>(store);
 
-        // <Trauma> for job listings
-        StoreUpdateState state;
-        if (_jobListings.TryGetSideJobs(store, out var sideJobs) && component.AccountOwner is not null)
-            state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, true, sideJobs);
-        else
-            state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
-        // </Trauma>
-
+        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
         UpdateRemoteStores(store, state);
         UI.SetUiState(store, StoreUiKey.Key, state);
     }

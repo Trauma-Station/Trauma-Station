@@ -15,7 +15,7 @@ SPDX-License-Identifier: MIT
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc 'store-ui-default-title'}"
     MinSize="512 512"
-    SetSize="812 512"> <!-- Trauma - Made it wider -->
+    SetSize="512 512">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Margin="4,4,4,4" Orientation="Horizontal">
@@ -45,64 +45,25 @@ SPDX-License-Identifier: MIT
                         <PanelContainer.PanelOverride>
                             <gfx:StyleBoxFlat BackgroundColor="#80808005" />
                         </PanelContainer.PanelOverride>
-                        <!-- <Trauma> for job listings -->
-                        <BoxContainer Name="ButtonSidePanel" Orientation="Vertical">
-                            <Button Name="JobListingsButton"
-                                    Text="{Loc 'store-ui-job-listings-button'}"
-                                    Visible="False"
-                                    StyleClasses="OpenBoth"
-                                    ToggleMode="True"
-                                    Margin="0 0 0 10"
-                                    />
-                            <BoxContainer Name="CategoryListContainer" Orientation="Vertical">
-                                <!--  Category buttons are added here by code  -->
-                            </BoxContainer>
+                        <BoxContainer Name="CategoryListContainer" Orientation="Vertical">
+                            <!--  Category buttons are added here by code  -->
                         </BoxContainer>
-                        <!-- </Trauma> -->
                     </PanelContainer>
                     <ScrollContainer
                         Name="StoreListingsScroll"
                         HScrollEnabled="False"
                         HorizontalExpand="True"
+                        MinSize="100 256"
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">
-                        <!-- <Trauma> - for job listings -->
-                        <BoxContainer Name="MainPanel" Orientation="Vertical" VerticalExpand="True">
-                            <RichTextLabel
-                                Name="JobListingsAcceptedLabel"
-                                Margin="5 5 5 5"
-                                Text="Accepted"
-                                Visible="False"/>
-                            <BoxContainer
-                                Name="JobListingsAcceptedContainer"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="2"
-                                VerticalExpand="True"
-                                Visible="False">
-                                <!--  Side jobs are added here by code  -->
-                            </BoxContainer>
-                            <RichTextLabel
-                                Name="JobListingsAvailableLabel"
-                                Margin="5 5 5 5"
-                                Text="Available"
-                                Visible="False"/>
-                            <BoxContainer
-                                Name="JobListingsAvailableContainer"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="2"
-                                VerticalExpand="True"
-                                Visible="False">
-                                <!--  Side jobs are added here by code  -->
-                            </BoxContainer>
-                            <BoxContainer
-                                Name="StoreListingsContainer"
-                                Orientation="Vertical"
-                                SizeFlagsStretchRatio="2"
-                                VerticalExpand="True">
-                                <!--  Listings are added here by code  -->
-                            </BoxContainer>
+                        <BoxContainer
+                            Name="StoreListingsContainer"
+                            MinSize="100 256"
+                            Orientation="Vertical"
+                            SizeFlagsStretchRatio="2"
+                            VerticalExpand="True">
+                            <!--  Listings are added here by code  -->
                         </BoxContainer>
-                        <!-- </Trauma> -->
                     </ScrollContainer>
                 </BoxContainer>
             </PanelContainer>
