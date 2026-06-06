@@ -765,13 +765,13 @@
       - ReagentId: MindbreakerToxin
         Quantity: 1
       - ReagentId: Tazinide
-        Quantity: 5
+        Quantity: 2
       - ReagentId: Fentanyl
         Quantity: 1
       - ReagentId: Happiness
         Quantity: 10
   - type: MeleeChemicalInjector
-    transferAmount: 17
+    transferAmount: 14
     solution: melee
 
 - type: entity
