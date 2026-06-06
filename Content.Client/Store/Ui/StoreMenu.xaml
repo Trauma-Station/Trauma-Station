@@ -77,7 +77,8 @@ SPDX-License-Identifier: MIT
                                 Name="JobListingsAcceptedContainer"
                                 Orientation="Vertical"
                                 SizeFlagsStretchRatio="2"
-                                VerticalExpand="True">
+                                VerticalExpand="True"
+                                Visible="False">
                                 <!--  Side jobs are added here by code  -->
                             </BoxContainer>
                             <RichTextLabel
@@ -89,7 +90,8 @@ SPDX-License-Identifier: MIT
                                 Name="JobListingsAvailableContainer"
                                 Orientation="Vertical"
                                 SizeFlagsStretchRatio="2"
-                                VerticalExpand="True">
+                                VerticalExpand="True"
+                                Visible="False">
                                 <!--  Side jobs are added here by code  -->
                             </BoxContainer>
                             <BoxContainer

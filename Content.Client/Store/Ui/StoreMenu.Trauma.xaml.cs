@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using Content.Shared.Store;
@@ -59,7 +60,12 @@ public sealed partial class StoreMenu
     {
         JobListingsSelected = true;
         JobListingsAcceptedLabel.Visible = true;
+        if (JobListingsAcceptedContainer.ChildCount > 0)
+            JobListingsAcceptedContainer.Visible = true;
         JobListingsAvailableLabel.Visible = true;
+        if (JobListingsAvailableContainer.ChildCount > 0)
+            JobListingsAvailableContainer.Visible = true;
+        StoreListingsContainer.Visible = false;
         UpdateListing();
 
         foreach (var child in CategoryListContainer.Children)
@@ -74,6 +80,9 @@ public sealed partial class StoreMenu
         JobListingsSelected = false;
         JobListingsButton.Pressed = false;
         JobListingsAcceptedLabel.Visible = false;
+        JobListingsAcceptedContainer.Visible = false;
         JobListingsAvailableLabel.Visible = false;
+        JobListingsAvailableContainer.Visible = false;
+        StoreListingsContainer.Visible = true;
     }
 }
