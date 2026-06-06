@@ -18,6 +18,9 @@ public sealed class CollectiveMindCommand : IConsoleCommand
     public string Description => "Send chat messages to the collective mind.";
     public string Help => "cmsay <text>";
 
+    private ChatSystem? _chat;
+    private MobStateSystem? _mob;
+
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (shell.Player is not ICommonSession player)
@@ -29,21 +32,24 @@ public sealed class CollectiveMindCommand : IConsoleCommand
         if (player.Status != SessionStatus.InGame)
             return;
 
-        if (player.AttachedEntity is not { } playerEntity)
+        if (player.AttachedEntity is not { } mob)
         {
             shell.WriteError("You don't have an entity!");
             return;
         }
 
-        // Check if the collective mind can be used in critical state
-        var entityManager = IoCManager.Resolve<IEntityManager>();
-        entityManager.TryGetComponent<CollectiveMindComponent>(playerEntity, out var mind);
+        var ent = IoCManager.Resolve<IEntityManager>();
+        if (!ent.TryGetComponent<CollectiveMindComponent>(mob, out var mind))
+        {
+            shell.WriteError("You don't have CollectiveMind!");
+            return;
+        }
 
         // Skip dead/critical check if CanUseInCrit is enabled
-        if (mind != null && !mind.CanUseInCrit)
+        if (!mind.CanUseInCrit)
         {
-            var mobStateSystem = EntitySystem.Get<MobStateSystem>();
-            if (mobStateSystem.IsDead(playerEntity) || mobStateSystem.IsCritical(playerEntity))
+            _mob ??= ent.System<MobStateSystem>();
+            if (!_mob.IsAlive(mob))
             {
                 shell.WriteError("You cannot use the collective mind while dead or incapacitated!");
                 return;
@@ -57,6 +63,7 @@ public sealed class CollectiveMindCommand : IConsoleCommand
         if (string.IsNullOrEmpty(message))
             return;
 
-        EntitySystem.Get<ChatSystem>().TrySendInGameICMessage(playerEntity, message, InGameICChatType.CollectiveMind, ChatTransmitRange.Normal);
+        _chat ??= ent.System<ChatSystem>();
+        _chat.TrySendInGameICMessage(mob, message, InGameICChatType.CollectiveMind, ChatTransmitRange.Normal);
     }
 }

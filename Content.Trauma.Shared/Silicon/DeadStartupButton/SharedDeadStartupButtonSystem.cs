@@ -10,28 +10,29 @@ namespace Content.Trauma.Shared.Silicon.DeadStartupButton;
 
 /// <summary>
 /// This creates a Button that can be activated after an entity, usually a silicon or an IPC, died.
-/// This will activate a doAfter and then revive the entity, playing a custom afterward sound.
+/// This will activate a doAfter and then revive the entity, playing a custom sound afterwards.
 /// </summary>
 public abstract partial class SharedDeadStartupButtonSystem : EntitySystem
 {
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private INetManager _net = default!;
+    [Dependency] protected MobStateSystem Mob = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<DeadStartupButtonComponent, GetVerbsEvent<AlternativeVerb>>(AddTurnOnVerb);
     }
 
     private void AddTurnOnVerb(EntityUid uid, DeadStartupButtonComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!_mobState.IsDead(uid)
-            || !args.CanAccess || !args.CanInteract || args.Hands == null)
+        if (!Mob.IsDead(uid)
+            || !args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
             return;
 
-        if (!TryComp(uid, out MobStateComponent? mobStateComponent) || !_mobState.IsDead(uid, mobStateComponent))
+        if (!TryComp(uid, out MobStateComponent? mob) || !Mob.IsDead(uid, mob))
             return;
 
         args.Verbs.Add(new AlternativeVerb()
@@ -45,22 +46,16 @@ public abstract partial class SharedDeadStartupButtonSystem : EntitySystem
 
     private void TryStartup(EntityUid user, EntityUid target, DeadStartupButtonComponent comp)
     {
-        if (!_net.IsServer)
-            return;
-        _audio.PlayPvs(comp.ButtonSound, target);
-        var args = new DoAfterArgs(EntityManager, user, comp.DoAfterInterval, new DeadStartupDoAfterEvent(), target, target:target)
+        Audio.PlayPredicted(comp.ButtonSound, target, user);
+        var args = new DoAfterArgs(EntityManager, user, comp.StartupDelay, new DeadStartupDoAfterEvent(), target, target: target)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
-            MultiplyDelay = false, // Goobstation
+            MultiplyDelay = false,
         };
-        _doAfterSystem.TryStartDoAfter(args);
+        _doAfter.TryStartDoAfter(args);
     }
-
-    [Serializable, NetSerializable]
-    public sealed partial class DeadStartupDoAfterEvent : SimpleDoAfterEvent
-    {
-    }
-
-
 }
+
+[Serializable, NetSerializable]
+public sealed partial class DeadStartupDoAfterEvent : SimpleDoAfterEvent;
