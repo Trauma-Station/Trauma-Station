@@ -66,7 +66,13 @@ internal sealed partial class HandheldGrinderSystem : EntitySystem
         }
 
         if (_reagentGrinder.GetGrinderSolution(item, ent.Comp.Program) is null)
+        // <Trauma> - user feedback..?
+        {
+            var verb = ent.Comp.Program == GrinderProgram.Grind ? "grind" : "juice";
+            _popup.PopupClient("You can't grind that!", ent, args.User);
             return;
+        }
+        // </Trauma>
 
         if (!_solution.ResolveSolution(ent.Owner, ent.Comp.SolutionName, ref ent.Comp.GrinderSolution))
             return;

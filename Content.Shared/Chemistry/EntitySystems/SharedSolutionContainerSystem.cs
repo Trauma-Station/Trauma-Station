@@ -147,15 +147,28 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     }
 
     /// <inheritdoc cref="ResolveSolution(Entity{SolutionManagerComponent?}, string, ref Entity{SolutionComponent}?, out Solution?)"/>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    //[MethodImpl(MethodImplOptions.AggressiveInlining)] // Trauma - this is non-trivial now, force inlining would be horrible
     public bool ResolveSolution(Entity<SolutionManagerComponent?> container, string name, [NotNullWhen(true)] ref Entity<SolutionComponent>? entity)
     {
+        // <Trauma> - add error logs, only double-check the existing solution on debug builds
         if (entity is not null)
         {
-            return TryGetSolution(container, name, out var debugEnt) && debugEnt.Value.Owner == entity.Value.Owner;
+#if DEBUG
+            if (!TryGetSolution(container, name, out var debugEnt) || debugEnt.Value.Owner != entity.Value.Owner)
+            {
+                Log.Debug($"Wrong solution {ToPrettyString(entity)} used for resolving solution {name} on {ToPrettyString(container)}, which was {ToPrettyString(debugEnt)}!\nStack trace: {Environment.StackTrace}");
+                return false;
+            }
+#endif
+            return true;
         }
 
-        return TryGetSolution(container, name, out entity);
+        if (TryGetSolution(container, name, out entity))
+            return true;
+
+        Log.Error($"Failed to resolve solution {name} on {ToPrettyString(container)}!\nStack trace: {Environment.StackTrace}");
+        return false;
+        // </Trauma>
     }
 
     /// <summary>

@@ -33,6 +33,7 @@
     solution: solution
   - type: Appearance
   - type: HandheldGrinder
+    solutionName: solution # Trauma - default didn't exist lol
 
 # Mortars
 - type: entity
