@@ -13,6 +13,22 @@
 - type: entity
   parent: [ OrganBaseTongue, OrganAnimalInternal ]
   id: OrganAnimalTongue
+  # <Trauma>
+  components:
+  - type: AtmosExposed
+  - type: Construction
+    graph: AnimalTongue
+    node: start
+    defaultTarget: braised tongue
+  - type: InternalTemperature
+    thickness: 0.03
+    area: 0.02
+    conductivity: 15
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 25
+  # </Trauma>
+
 
 - type: entity
   parent: [ OrganBaseEars, OrganAnimalInternal ]

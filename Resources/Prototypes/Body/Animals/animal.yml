@@ -26,6 +26,21 @@
 - type: entity
   parent: [ OrganBaseHeart, OrganAnimalInternal, OrganAnimalMetabolizer ]
   id: OrganAnimalHeart
+  # <Trauma>
+  components:
+  - type: AtmosExposed
+  - type: Construction
+    graph: AnimalHeart
+    node: start
+    defaultTarget: anticuchos
+  - type: InternalTemperature
+    thickness: 0.03
+    area: 0.02
+    conductivity: 15
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 25
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseStomach, OrganAnimalInternal, OrganAnimalMetabolizer ]
@@ -34,6 +49,21 @@
 - type: entity
   parent: [ OrganBaseLiver, OrganAnimalInternal, OrganAnimalMetabolizer ]
   id: OrganAnimalLiver
+  # <Trauma>
+  components:
+  - type: AtmosExposed
+  - type: Construction
+    graph: AnimalLiver
+    node: start
+    defaultTarget: kokoretsi
+  - type: InternalTemperature
+    thickness: 0.03
+    area: 0.02
+    conductivity: 15
+  - type: Temperature
+    currentTemperature: 290
+    specificHeat: 25
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseKidneys, OrganAnimalInternal, OrganAnimalMetabolizer ]

@@ -1,0 +1,47 @@
+- type: constructionGraph
+  id: AnimalHeart
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: anticuchos
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: anticuchos
+    entity: FoodMealAnticuchos
+
+- type: constructionGraph
+  id: AnimalLiver
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: kokoretsi
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: kokoretsi
+    entity: FoodMealKokoretsi
+
+- type: constructionGraph
+  id: AnimalTongue
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: braised tongue
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: braised tongue
+    entity: FoodMealOxtongue

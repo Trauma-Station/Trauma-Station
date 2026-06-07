@@ -7,11 +7,10 @@
   name: dirty rice
   description: A traditional Louisiana Creole dish made with kidney and rice.
   components:
-  - type: Item
   - type: FlavorProfile
     flavors:
-      - meaty
-      - spicy
+    - meaty
+    - spicy
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: dirtyrice
@@ -27,10 +26,6 @@
   - type: Tag
     tags:
     - Meat
-  - type: Edible
-    trash:
-    - FoodBowlBig
-# Tastes like kidney, rice, and spice.
 
 - type: entity
   parent: FoodBowlBase
@@ -38,11 +33,10 @@
   name: bopis
   description: A spicy Filipino dish made with lungs, tomatoes, and chili.
   components:
-  - type: Item
   - type: FlavorProfile
     flavors:
-      - meaty
-      - spicy
+    - meaty
+    - spicy
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: bopis
@@ -60,10 +54,6 @@
   - type: Tag
     tags:
     - Meat
-  - type: Edible
-    trash:
-    - FoodBowlBig
-# Tastes like offal and spice.
 
 - type: entity
   parent: FoodMealBase
@@ -71,13 +61,12 @@
   name: kokoretsi
   description: A Greek dish of fried liver on a skewer.
   components:
-  - type: Item
-  - type: Edible
-    trash:
-    - FoodKebabSkewer
+  - type: Construction
+    graph: AnimalLiver
+    node: kokoretsi
   - type: FlavorProfile
     flavors:
-      - meaty
+    - meaty
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: kokoretsi
@@ -91,7 +80,6 @@
   - type: Tag
     tags:
     - Meat
-# Tastes like fried liver.
 
 - type: entity
   parent: FoodMealBase
@@ -99,10 +87,12 @@
   name: braised ox tongue
   description: A roasted tongue, normally from an ox.
   components:
-  - type: Item
+  - type: Construction
+    graph: AnimalTongue
+    node: braised tongue
   - type: FlavorProfile
     flavors:
-      - meaty
+    - meaty
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: oxtongue
@@ -116,7 +106,6 @@
   - type: Tag
     tags:
     - Meat
-# Tastes meaty and chewy.
 
 - type: entity
   parent: FoodMealBase
@@ -124,11 +113,10 @@
   name: haggis
   description: A traditional Scottish dish, made by stuffing the stomach of an animal with oatmeal and seasoning.
   components:
-  - type: Item
   - type: FlavorProfile
     flavors:
-      - meaty
-      - savory
+    - meaty
+    - savory
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: haggis
@@ -144,7 +132,6 @@
   - type: Tag
     tags:
     - Meat
-# Tastes meaty and oaty.
 
 - type: entity
   parent: FoodMealBase
@@ -152,11 +139,10 @@
   name: blood sausage
   description: A sausage filled with dried blood.
   components:
-  - type: Item
   - type: FlavorProfile
     flavors:
-      - meaty
-      - salty
+    - meaty
+    - salty
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: bloodsausage
@@ -172,7 +158,6 @@
   - type: Tag
     tags:
     - Meat
-# Tastes like meat and iron.
 
 - type: entity
   parent: FoodMealBase
@@ -180,14 +165,13 @@
   name: anticuchos
   description: A dish of grilled heart from the Andes mountains.
   components:
-  - type: Item
-  - type: Edible
-    trash:
-    - FoodKebabSkewer
+  - type: Construction
+    graph: AnimalHeart
+    node: anticuchos
   - type: FlavorProfile
     flavors:
-      - meaty
-      - smokey
+    - meaty
+    - smokey
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
     state: anticuchos
@@ -203,4 +187,3 @@
   - type: Tag
     tags:
     - Meat
-# Tastes like grilled heart.

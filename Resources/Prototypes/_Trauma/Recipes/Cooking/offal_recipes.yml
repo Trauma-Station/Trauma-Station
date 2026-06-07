@@ -1,0 +1,48 @@
+# Organ Offal Recipes
+
+- type: microwaveMealRecipe
+  id: RecipeDirtyRice
+  name: dirty rice recipe
+  result: FoodMealDirtyRice
+  time: 20
+  group: Savory
+  reagents:
+    Blackpepper: 1
+  solids:
+    FoodRiceBoiled: 1
+    OrganAnimalKidneys: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBopis
+  name: bopis recipe
+  result: FoodMealBopis
+  time: 15
+  group: Savory
+  solids:
+    FoodBowlBig: 1
+    OrganAnimalLungs: 1
+    FoodTomato: 1
+    FoodChiliPepper: 1
+
+- type: microwaveMealRecipe
+  id: RecipeHaggis
+  name: haggis recipe
+  result: FoodMealHaggis
+  time: 30
+  group: Savory
+  reagents:
+    Oats: 10
+  solids:
+    OrganAnimalStomach: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBloodSausage
+  name: blood sausage recipe
+  result: FoodMealBloodSausage
+  time: 15
+  group: Savory
+  reagents:
+    Blood: 15
+  solids:
+    FoodMeat: 1
+
