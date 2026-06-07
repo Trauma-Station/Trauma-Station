@@ -1223,7 +1223,11 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         solution.Comp.Id = name;
         ContainerSystem.Insert(solution.Owner, container, force: true);
         EntityManager.InitializeAndStartEntity(solution);
-        FlagPredicted(solution.Owner);
+        // <Trauma> - server will never send state for a clientside entity's solution, dont flag if its clientside.
+        // otherwise the solution entity we worked so hard for just gets deleted immediately :)
+        if (!IsClientSide(container.Owner))
+            FlagPredicted(solution.Owner);
+        // </Trauma>
         return solution;
     }
 
