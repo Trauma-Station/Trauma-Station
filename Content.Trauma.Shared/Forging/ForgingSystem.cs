@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
@@ -12,7 +13,7 @@ using Content.Trauma.Common.Construction;
 using Content.Trauma.Shared.BurnableFood;
 using Content.Trauma.Shared.Durability;
 using Robust.Shared.Map;
-using Content.Shared.Destructible;
+
 
 namespace Content.Trauma.Shared.Forging;
 

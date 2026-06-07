@@ -1,7 +1,7 @@
 ## A ##
 
 - type: Tag
-  id: AdamantineScraps
+  id: AdamantineScraps # Construction: AdamantineIngot
 
 - type: Tag
   id: AdvancedMagboots # Construction: RevPlasmaFoundry
