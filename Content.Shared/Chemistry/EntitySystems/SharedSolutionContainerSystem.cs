@@ -148,7 +148,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
 
     /// <inheritdoc cref="ResolveSolution(Entity{SolutionManagerComponent?}, string, ref Entity{SolutionComponent}?, out Solution?)"/>
     //[MethodImpl(MethodImplOptions.AggressiveInlining)] // Trauma - this is non-trivial now, force inlining would be horrible
-    public bool ResolveSolution(Entity<SolutionManagerComponent?> container, string name, [NotNullWhen(true)] ref Entity<SolutionComponent>? entity)
+    public bool ResolveSolution(Entity<SolutionManagerComponent?> container, string name, [NotNullWhen(true)] ref Entity<SolutionComponent>? entity,
+        bool logMissing = true) // Trauma
     {
         // <Trauma> - add error logs, only double-check the existing solution on debug builds
         if (entity is not null)
@@ -156,7 +157,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
 #if DEBUG
             if (!TryGetSolution(container, name, out var debugEnt) || debugEnt.Value.Owner != entity.Value.Owner)
             {
-                Log.Debug($"Wrong solution {ToPrettyString(entity)} used for resolving solution {name} on {ToPrettyString(container)}, which was {ToPrettyString(debugEnt?.Owner)}!\nStack trace: {Environment.StackTrace}");
+                if (logMissing)
+                    Log.Error($"Wrong solution {ToPrettyString(entity)} used for resolving solution {name} on {ToPrettyString(container)}, which was {ToPrettyString(debugEnt?.Owner)}!\nStack trace: {Environment.StackTrace}");
                 return false;
             }
 #endif
@@ -166,7 +168,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         if (TryGetSolution(container, name, out entity))
             return true;
 
-        Log.Error($"Failed to resolve solution {name} on {ToPrettyString(container)}!\nStack trace: {Environment.StackTrace}");
+        if (logMissing)
+            Log.Error($"Failed to resolve solution {name} on {ToPrettyString(container)}!\nStack trace: {Environment.StackTrace}");
         return false;
         // </Trauma>
     }
