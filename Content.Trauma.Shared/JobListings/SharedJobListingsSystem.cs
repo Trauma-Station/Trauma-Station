@@ -15,9 +15,9 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
     /// <summary>
     /// Open the job listings menu UI.
     /// </summary>
-    public void OpenUi(Entity<JobListingsComponent> jobBoard, EntityUid actor)
+    public void OpenUi(EntityUid jobBoard, EntityUid actor)
     {
-        _ui.TryOpenUi(jobBoard.Owner, JobListingsUiKey.Key, actor);
+        _ui.TryOpenUi(jobBoard, JobListingsUiKey.Key, actor);
     }
 
     public bool TryGetSideJobs(Entity<JobListingsComponent?> ent, [NotNullWhen(true)] out List<NetEntity>? result)

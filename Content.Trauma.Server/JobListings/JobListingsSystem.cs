@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Objectives;
+using Content.Server.PDA;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Mind;
+using Content.Shared.PDA;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Trauma.Common.JobListings;
 using Content.Trauma.Shared.JobListings;
@@ -23,13 +26,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 {
     [Dependency] private ObjectivesSystem _objectives = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PdaSystem _pda = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInitialised);
         SubscribeLocalEvent<JobListingsComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<JobListingsComponent, PdaShowJobListingsMessage>(OnMessage);
+        SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
     }
 
     /// <summary>
@@ -109,8 +113,11 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         FillSideJobs((args.Store, storeComp, jobListingsComp));
     }
 
-    private void OnMessage(Entity<JobListingsComponent> jobBoard, ref PdaShowJobListingsMessage msg)
+    private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
     {
-        OpenUi(jobBoard, msg.Actor);
+        // the job board is the same entity as the uplink store
+        if (!_pda.TryGetUnlockedStore(pda, out var jobBoard))
+            return;
+        OpenUi(jobBoard.Value, msg.Actor);
     }
 }
