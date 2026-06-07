@@ -13,36 +13,9 @@ namespace Content.Goobstation.Shared.Chemistry
     }
 
     [Serializable, NetSerializable]
-    public sealed class EnergyReagentDispenserSetDispenseAmountMessage : BoundUserInterfaceMessage
+    public sealed class EnergyReagentDispenserSetDispenseAmountMessage(int amount) : BoundUserInterfaceMessage
     {
-        public readonly EnergyReagentDispenserDispenseAmount EnergyReagentDispenserDispenseAmount;
-
-        public EnergyReagentDispenserSetDispenseAmountMessage(EnergyReagentDispenserDispenseAmount amount)
-        {
-            EnergyReagentDispenserDispenseAmount = amount;
-        }
-
-        /// <summary>
-        ///     Create a new instance from interpreting a String as an integer,
-        ///     throwing an exception if it is unable to parse.
-        /// </summary>
-        public EnergyReagentDispenserSetDispenseAmountMessage(string s)
-        {
-            EnergyReagentDispenserDispenseAmount = s switch
-            {
-                "1" => EnergyReagentDispenserDispenseAmount.U1,
-                "5" => EnergyReagentDispenserDispenseAmount.U5,
-                "10" => EnergyReagentDispenserDispenseAmount.U10,
-                "15" => EnergyReagentDispenserDispenseAmount.U15,
-                "20" => EnergyReagentDispenserDispenseAmount.U20,
-                "25" => EnergyReagentDispenserDispenseAmount.U25,
-                "30" => EnergyReagentDispenserDispenseAmount.U30,
-                "50" => EnergyReagentDispenserDispenseAmount.U50,
-                "100" => EnergyReagentDispenserDispenseAmount.U100,
-                _ => throw new Exception(
-                    $"Cannot convert the string `{s}` into a valid ReagentDispenser DispenseAmount")
-            };
-        }
+        public readonly int Amount = amount;
     }
 
     [Serializable, NetSerializable]
@@ -52,23 +25,7 @@ namespace Content.Goobstation.Shared.Chemistry
     }
 
     [Serializable, NetSerializable]
-    public sealed class EnergyReagentDispenserClearContainerSolutionMessage : BoundUserInterfaceMessage
-    {
-
-    }
-
-    public enum EnergyReagentDispenserDispenseAmount
-    {
-        U1 = 1,
-        U5 = 5,
-        U10 = 10,
-        U15 = 15,
-        U20 = 20,
-        U25 = 25,
-        U30 = 30,
-        U50 = 50,
-        U100 = 100,
-    }
+    public sealed class EnergyReagentDispenserClearContainerSolutionMessage : BoundUserInterfaceMessage;
 
     [Serializable, NetSerializable]
     public sealed class EnergyReagentInventoryItem(string reagentId, string reagentLabel, float powerCostPerUnit, Color reagentColor)
@@ -84,7 +41,7 @@ namespace Content.Goobstation.Shared.Chemistry
         ContainerInfo? outputContainer,
         NetEntity? outputContainerEntity,
         List<EnergyReagentInventoryItem> inventory,
-        EnergyReagentDispenserDispenseAmount selectedDispenseAmount,
+        int selectedDispenseAmount,
         float batteryCharge,
         float batteryMaxCharge,
         float currentReceivingEnergy,
@@ -102,7 +59,7 @@ namespace Content.Goobstation.Shared.Chemistry
         /// </summary>
         public readonly List<EnergyReagentInventoryItem> Inventory = inventory;
 
-        public readonly EnergyReagentDispenserDispenseAmount SelectedDispenseAmount = selectedDispenseAmount;
+        public readonly int SelectedDispenseAmount = selectedDispenseAmount;
         public readonly float BatteryCharge = batteryCharge;
         public readonly float BatteryMaxCharge = batteryMaxCharge;
         public readonly float CurrentReceivingEnergy = currentReceivingEnergy;

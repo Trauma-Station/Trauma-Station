@@ -19,7 +19,6 @@ namespace Content.Goobstation.Shared.Silicon;
 
 public sealed partial class IntellicardExtrasSystem : EntitySystem
 {
-    [Dependency] private INetManager _net = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private NameModifierSystem _nameMod = default!;

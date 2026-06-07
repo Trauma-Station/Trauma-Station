@@ -22,7 +22,7 @@ jobs:
       run: |
         git submodule update --init --recursive
     - name: Pull engine updates
-      uses: Trauma-Station/submodule-dependency@v0.2.1
+      uses: Trauma-Station/submodule-dependency@v0.2.2
       with:
         map: |
           {

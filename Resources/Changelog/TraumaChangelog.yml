@@ -9701,3 +9701,182 @@ Entries:
   id: 1098
   time: '2026-06-03T18:18:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3020
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Enchanting scrolls are now made out of paper, i.e. can burn.
+  id: 1099
+  time: '2026-06-04T09:39:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3037
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed abductor, xeno and slaughter demon ghost roles not spawning you when
+      you win the raffle due to not meeting the playtime requirements.
+  id: 1100
+  time: '2026-06-04T10:08:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3038
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked prices, timers, loadouts, and requirements of some reinforcement
+      roles.
+  id: 1101
+  time: '2026-06-04T15:46:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2738
+- author: Abacondito
+  changes:
+  - type: Add
+    message: Added buyable cement crates to cargo!
+  id: 1102
+  time: '2026-06-04T23:41:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3042
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: >-
+      Xeno resin walls/doors are now 100% soundproof, your screams will not be
+      heard..
+  id: 1103
+  time: '2026-06-04T23:44:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3039
+- author: MoxieIsMoxie
+  changes:
+  - type: Tweak
+    message: Resprited the Outcast & Jealousy Incarnate demons.
+  id: 1104
+  time: '2026-06-04T23:59:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3043
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorphs now emit SPOOKY breathing noises when they sigh
+  id: 1105
+  time: '2026-06-05T00:17:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3033
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added 40, 60 and 120u options to the energy chem dispenser.
+  id: 1106
+  time: '2026-06-05T09:17:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3046
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed firebomb to create a tile fire and not nugget people.
+  id: 1107
+  time: '2026-06-05T09:34:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3048
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed skill gain from crafting things.
+  id: 1108
+  time: '2026-06-05T10:11:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3051
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed outcast demon not looking like a vox when wearing clothes.
+  id: 1109
+  time: '2026-06-05T10:19:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3052
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Fix everyone understanding every language.
+  id: 1110
+  time: '2026-06-05T10:44:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2446
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio extracts not making reagents when doing their reactions.
+  id: 1111
+  time: '2026-06-05T10:57:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3054
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Dragons breath is now actual fire instead of wizard's exploding fireball.
+      It spews fire over a wide area, though still stopped by anything it hits.
+  - type: Add
+    message: >-
+      Implemented Fire Breath mutation as a single-line version of dragons
+      breath.
+  id: 1112
+  time: '2026-06-05T12:02:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3055
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed RD not getting roboticist and geneticist skillchips in their locker.
+  id: 1113
+  time: '2026-06-05T12:59:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3057
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Probably fixed replays randomly not getting saved because of microslop's
+      shitcode
+  id: 1114
+  time: '2026-06-05T13:01:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3058
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Mothroaches can now ventcrawl, syndi mothroaches now have night vision,
+      same with syndicats
+  id: 1115
+  time: '2026-06-05T19:36:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3060
+- author: SpeltIncorrectyl
+  changes:
+  - type: Remove
+    message: Removed explosive mode from the hardlight bow.
+  id: 1116
+  time: '2026-06-06T10:56:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3067
+- author: AirBiscuit
+  changes:
+  - type: Tweak
+    message: Put a health analyzer in borg surgery and advanced surgery modules.
+  id: 1117
+  time: '2026-06-06T13:44:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3063
+- author: Smilez
+  changes:
+  - type: Tweak
+    message: Added metal work knowledge to engi roles
+  id: 1118
+  time: '2026-06-06T16:26:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3072
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed decapoids being able to use more markings than they should.
+  id: 1119
+  time: '2026-06-07T11:45:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3088
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed access scanner not working unless an ID is on the floor, depending
+      on how many ID cards exist on the server. Now it always works as expected.
+  id: 1120
+  time: '2026-06-07T12:08:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3090
+- author: TechnicFighter,
+  changes:
+  - type: Add
+    message: Added the Centifiend, a new Medium Demon.
+  id: 1121
+  time: '2026-06-07T12:19:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3068

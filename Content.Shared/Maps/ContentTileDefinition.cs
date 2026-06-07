@@ -31,8 +31,8 @@ namespace Content.Shared.Maps
 
         public ushort TileId { get; private set; }
 
-        [DataField("name")]
-        public string Name { get; private set; } = "";
+        [DataField(required: true)] // Trauma - required
+        public LocId Name { get; private set; } // Trauma - use LocId
         [DataField("sprite")] public ResPath? Sprite { get; private set; }
 
         [DataField("edgeSprites")] public Dictionary<Direction, ResPath> EdgeSprites { get; private set; } = new();

@@ -59,6 +59,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
+        SubscribeLocalEvent<ViewconeOccludableComponent, ComponentInit>(OnOccludableInit);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStartedMessage>(OnPullStarted);
         SubscribeLocalEvent<ViewconeOccludableComponent, PullStoppedMessage>(OnPullStopped);
         SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
@@ -239,6 +240,12 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
             SetAlpha(uid, 1f);
             RemCompDeferred(uid, comp);
         }
+    }
+
+    private void OnOccludableInit(Entity<ViewconeOccludableComponent> ent, ref ComponentInit args)
+    {
+        if (ent.Comp.Inverted)
+            SetAlpha(ent, 0f); // wait for overlay to maybe show effects next frame
     }
 
     // Logic for disabling occluding of entities that you're currently pulling.

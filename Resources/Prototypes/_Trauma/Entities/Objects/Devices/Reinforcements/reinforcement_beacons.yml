@@ -167,6 +167,7 @@
   suffix: Security, Bodyguard
   components:
   - type: DelayedGhostRole
+    job: SecurityBodyguard
     name: ghost-role-information-reinforcement-specialist-bodyguard-name
   - type: GhostCharacterSpawner
     components:
@@ -180,11 +181,14 @@
   suffix: Security, Advisor
   components:
   - type: DelayedGhostRole
+    job: SecurityAdvisor
     name: ghost-role-information-reinforcement-specialist-advisor-name
+    description: job-description-security-advisor
   - type: GhostCharacterSpawner
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconOfficerSpecAdvisor ]
+      roleLoadout: [ RoleSurvivalSecurity ]
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
