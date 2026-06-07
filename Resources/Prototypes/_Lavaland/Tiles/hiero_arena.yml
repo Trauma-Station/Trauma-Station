@@ -4,7 +4,7 @@
 - type: tile
   parent: FloorBasalt
   id: LavalandFloorHierophantArena
-  name: tiles-heirophant-arena-floor
+  name: tiles-hierophant-arena-floor
   isSubfloor: false
   footstepSounds:
     collection: FootstepFloor
