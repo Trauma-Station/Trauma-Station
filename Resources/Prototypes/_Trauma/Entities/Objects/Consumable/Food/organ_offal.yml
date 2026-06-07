@@ -1,0 +1,206 @@
+
+# Offal Foods
+
+- type: entity
+  parent: FoodBowlBase
+  id: FoodMealDirtyRice
+  name: dirty rice
+  description: A traditional Louisiana Creole dish made with kidney and rice.
+  components:
+  - type: Item
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - spicy
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: dirtyrice
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 20
+      - ReagentId: Protein
+        Quantity: 15
+      - ReagentId: CapsaicinOil
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Meat
+  - type: Edible
+    trash:
+    - FoodBowlBig
+# Tastes like kidney, rice, and spice.
+
+- type: entity
+  parent: FoodBowlBase
+  id: FoodMealBopis
+  name: bopis
+  description: A spicy Filipino dish made with lungs, tomatoes, and chili.
+  components:
+  - type: Item
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - spicy
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: bopis
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 25
+      - ReagentId: Protein
+        Quantity: 20
+      - ReagentId: CapsaicinOil
+        Quantity: 10
+      - ReagentId: Vitamin
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Meat
+  - type: Edible
+    trash:
+    - FoodBowlBig
+# Tastes like offal and spice.
+
+- type: entity
+  parent: FoodMealBase
+  id: FoodMealKokoretsi
+  name: kokoretsi
+  description: A Greek dish of fried liver on a skewer.
+  components:
+  - type: Item
+  - type: Edible
+    trash:
+    - FoodKebabSkewer
+  - type: FlavorProfile
+    flavors:
+      - meaty
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: kokoretsi
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 20
+      - ReagentId: Protein
+        Quantity: 25
+  - type: Tag
+    tags:
+    - Meat
+# Tastes like fried liver.
+
+- type: entity
+  parent: FoodMealBase
+  id: FoodMealOxtongue
+  name: braised ox tongue
+  description: A roasted tongue, normally from an ox.
+  components:
+  - type: Item
+  - type: FlavorProfile
+    flavors:
+      - meaty
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: oxtongue
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 15
+      - ReagentId: Protein
+        Quantity: 10
+  - type: Tag
+    tags:
+    - Meat
+# Tastes meaty and chewy.
+
+- type: entity
+  parent: FoodMealBase
+  id: FoodMealHaggis
+  name: haggis
+  description: A traditional Scottish dish, made by stuffing the stomach of an animal with oatmeal and seasoning.
+  components:
+  - type: Item
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - savory
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: haggis
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 35
+      - ReagentId: Protein
+        Quantity: 25
+      - ReagentId: Vitamin
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Meat
+# Tastes meaty and oaty.
+
+- type: entity
+  parent: FoodMealBase
+  id: FoodMealBloodSausage
+  name: blood sausage
+  description: A sausage filled with dried blood.
+  components:
+  - type: Item
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - salty
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: bloodsausage
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 15
+      - ReagentId: Protein
+        Quantity: 10
+      - ReagentId: Iron
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Meat
+# Tastes like meat and iron.
+
+- type: entity
+  parent: FoodMealBase
+  id: FoodMealAnticuchos
+  name: anticuchos
+  description: A dish of grilled heart from the Andes mountains.
+  components:
+  - type: Item
+  - type: Edible
+    trash:
+    - FoodKebabSkewer
+  - type: FlavorProfile
+    flavors:
+      - meaty
+      - smokey
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/offal_organs.rsi
+    state: anticuchos
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 20
+      - ReagentId: Protein
+        Quantity: 25
+      - ReagentId: Vitamin
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Meat
+# Tastes like grilled heart.

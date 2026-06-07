@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC BY-NC 4.0",
+  "copyright": "Oxnar https://www.artstation.com/christopherwellerman8",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "dirtyrice"
+    },
+    {
+      "name": "bopis"
+    },
+    {
+      "name": "kokoretsi"
+    },
+    {
+      "name": "oxtongue"
+    },
+    {
+      "name": "haggis"
+    },
+    {
+      "name": "bloodsausage"
+    },
+    {
+      "name": "anticuchos"
+    }
+  ]
+}
