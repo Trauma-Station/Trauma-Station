@@ -439,9 +439,6 @@
   - type: Workable
     remaining: 500 # bring an army, you'll need it
     result: AdamantineIngot
-  # No recipe, as this is only the result of breaking an adamantine item
-  # - type: Construction
-  #   graph: AdamantineScraps
 
 - type: entity
   parent: [ BaseForgeItem, BaseMetallicAdamantine ]
