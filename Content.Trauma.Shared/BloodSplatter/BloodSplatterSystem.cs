@@ -62,7 +62,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
         SpawnDecal(ent, bloodstream, ent.Comp.GibbedDecal);
     }
 
-    private void OnDamage(Entity<BloodSplattererComponent> ent, ref DamageDealtEvent args)
+    private void OnDamageDealt(Entity<BloodSplattererComponent> ent, ref DamageDealtEvent args)
     {
         var time = _timing.CurTime;
 
