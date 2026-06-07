@@ -9857,3 +9857,26 @@ Entries:
   id: 1118
   time: '2026-06-06T16:26:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3072
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed decapoids being able to use more markings than they should.
+  id: 1119
+  time: '2026-06-07T11:45:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3088
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed access scanner not working unless an ID is on the floor, depending
+      on how many ID cards exist on the server. Now it always works as expected.
+  id: 1120
+  time: '2026-06-07T12:08:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3090
+- author: TechnicFighter,
+  changes:
+  - type: Add
+    message: Added the Centifiend, a new Medium Demon.
+  id: 1121
+  time: '2026-06-07T12:19:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3068
