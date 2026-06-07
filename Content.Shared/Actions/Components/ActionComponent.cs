@@ -158,12 +158,6 @@ public sealed partial class ActionComponent : Component
     public EntityUid? AttachedEntity;
 
     /// <summary>
-    /// Trauma - Raise event on the action entity instead of user/container.
-    /// </summary>
-    [DataField]
-    public bool RaiseOnAction;
-
-    /// <summary>
     ///     If true, this will cause the the action event to always be raised directed at the action performer/user instead of the action's container/provider.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -192,20 +186,6 @@ public sealed partial class ActionComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? Sound;
-
-    /// <summary>
-    ///     Goobstation.
-    ///     If true, ghosts will be granted this action.
-    /// </summary>
-    [DataField]
-    public bool AllowGhostAction;
-
-    /// <summary>
-    ///     Goobstation.
-    ///     Is this action predicted.
-    /// </summary>
-    [DataField]
-    public bool Predicted = true;
 }
 
 [DataRecord, Serializable, NetSerializable]

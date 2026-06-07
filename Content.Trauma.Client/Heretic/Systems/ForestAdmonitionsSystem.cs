@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
 using Robust.Client.Player;
@@ -9,7 +10,8 @@ namespace Content.Trauma.Client.Heretic.Systems;
 public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
 
     public override void FrameUpdate(float frameTime)
     {
@@ -20,8 +22,8 @@ public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSys
 
         var now = Timing.CurTime;
 
-        var query = EntityQueryEnumerator<ForestAdmonitionsEntityComponent, ShadowCloakEntityComponent, SpriteComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var shadow, out var sprite))
+        var query = EntityQueryEnumerator<ForestAdmonitionsEntityComponent, ShadowCloakEntityComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var shadow))
         {
             if (comp.NextUpdate > now)
                 continue;
@@ -34,7 +36,7 @@ public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSys
             var viewer = shadow.User.Value == player ? uid : player;
 
             var factor = CalculateVisibilityFactor((uid, comp), viewer);
-            _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(factor));
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(ForestAdmonitionsComponent), factor);
         }
     }
 }

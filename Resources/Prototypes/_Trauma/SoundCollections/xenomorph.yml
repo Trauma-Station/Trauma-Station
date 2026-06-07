@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: XenomorphBreathe
+  files:
+  - /Audio/Voice/Misc/lowHiss1.ogg
+  - /Audio/Voice/Misc/lowHiss2.ogg
+  - /Audio/Voice/Misc/lowHiss3.ogg
+  - /Audio/Voice/Misc/lowHiss4.ogg

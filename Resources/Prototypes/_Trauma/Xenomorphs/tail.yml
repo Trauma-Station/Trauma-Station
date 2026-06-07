@@ -9,3 +9,5 @@
     layers:
     - state: XenoTailSegmentBase
     drawdepth: BelowMobs
+  - type: ViewconeOccludable
+    useMemory: false

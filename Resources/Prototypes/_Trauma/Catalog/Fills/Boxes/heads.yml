@@ -65,9 +65,11 @@
         children:
         - id: SkillChipResearchDirector
         - id: SkillChipScientist
-          amount: 3
+          amount: 2
+        - id: SkillChipGeneticist
+        - id: SkillChipRoboticist
         - id: SkillChipResearchAssistant
-          amount: 3
+          amount: 2
 
 - type: entity
   parent: BoxSkillChipsBase

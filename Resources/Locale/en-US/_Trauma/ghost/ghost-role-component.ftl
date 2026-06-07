@@ -9,7 +9,7 @@ ghost-role-information-reinforcement-specialist-heavy-laser-name = Station Reinf
 ghost-role-information-reinforcement-specialist-shield-name = Station Reinforcement (Security Specialist - Shield)
 ghost-role-information-reinforcement-specialist-bodyguard-name = Station Reinforcement (Security Specialist - Bodyguard)
 ghost-role-information-reinforcement-specialist-advisor-name = Station Reinforcement (Security Specialist - Advisor)
-ghost-role-information-reinforcement-specialist-corpsman-name = Station Reinforcement (Security Specialist - Corpsman)
+ghost-role-information-reinforcement-specialist-brigmedic-name = Station Reinforcement (Security Specialist - Brigmedic)
 ghost-role-information-reinforcement-cadet-name = Station Reinforcement (Security Cadet)
 
 ghost-role-information-reinforcement-doctor-name = Station Reinforcement (Doctor)
