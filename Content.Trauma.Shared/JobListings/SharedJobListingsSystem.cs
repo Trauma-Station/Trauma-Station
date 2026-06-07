@@ -3,12 +3,19 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 
-namespace Content.Trauma.Common.JobListings;
+namespace Content.Trauma.Shared.JobListings;
 
 public abstract partial class SharedJobListingsSystem : EntitySystem
 {
     [Dependency] protected SharedContainerSystem _container = default!;
+    [Dependency] protected SharedUserInterfaceSystem _ui = default!;
+
+    /// <summary>
+    /// Open the job listings menu UI.
+    /// </summary>
+    public abstract void OpenUi(Entity<JobListingsComponent> ent);
 
     public bool TryGetSideJobs(Entity<JobListingsComponent?> ent, [NotNullWhen(true)] out List<NetEntity>? result)
     {

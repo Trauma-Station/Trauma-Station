@@ -6,9 +6,10 @@ using Content.Shared.Mind;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Store.Components;
-using Content.Trauma.Common.JobListings;
+using Content.Trauma.Shared.JobListings;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.JobListings;
@@ -27,6 +28,16 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         base.Initialize();
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInitialised);
         SubscribeLocalEvent<JobListingsComponent, MapInitEvent>(OnInit);
+    }
+
+    public override void OpenUi(Entity<JobListingsComponent> ent)
+    {
+        UpdateUi(ent);
+    }
+
+    public void UpdateUi(Entity<JobListingsComponent> ent)
+    {
+
     }
 
     /// <summary>
@@ -92,6 +103,8 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     private void OnInit(Entity<JobListingsComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.AvailableSideJobsContainer = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.AvailableSideJobsContainerId);
+        if(!_ui.HasUi(ent.Owner, JobListingsUiKey.Key))
+            _ui.SetUi(ent.Owner, JobListingsUiKey.Key, new InterfaceData("JobListingsBoundUserInterface"));
     }
 
     private void OnStoreInitialised(ref StoreInitializedEvent args)
