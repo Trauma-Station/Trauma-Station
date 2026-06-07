@@ -1242,7 +1242,10 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         var solution = SpawnSolutionUninitialized(proto);
         ContainerSystem.Insert(solution.Owner, container, force: true);
         EntityManager.InitializeAndStartEntity(solution);
-        FlagPredicted(solution.Owner);
+        // <Trauma> - dont flag if its clientside, see above
+        if (!IsClientSide(container.Owner))
+            FlagPredicted(solution.Owner);
+        // </Trauma>
         return solution;
     }
 
