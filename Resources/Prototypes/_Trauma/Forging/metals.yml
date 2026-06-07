@@ -103,20 +103,18 @@
 - type: metal
   id: Adamantine
   name: adamantine
-  #color: "#698e98"
-  #color: "#88e6ff"
   color: "#affaff"
   ingotSprite: ingot_adamantine
-  density: 3 # extremely light
+  density: 1 # extremely light
   workingTemp: 2050
   workingRange: 50
   meltTemp: 2383
-  workScale: 4 # extremely hard to forge, bring friends or technology
+  workScale: 10 # extremely hard to forge, bring friends or technology
   durability: 10 # that's its bit
   speed: 1.15 # ligher than plasteel = faster than plasteel
   price: 20
   damage:
-    Blunt: 0.4 # just not heavy
+    Blunt: 0.2 # just not heavy
     Slash: 1.4 # the sharpest of edges
     Piercing: 1.5 # on par with plasteel, but it's already stupid strong
   overheated: OverheatedAdamantine

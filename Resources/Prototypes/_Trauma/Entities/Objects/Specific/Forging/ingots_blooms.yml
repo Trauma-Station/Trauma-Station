@@ -424,11 +424,14 @@
     burnSound: null
 
 - type: entity
-  parent: [ BaseMetalScraps, AdamantineOverheatable ]
+  parent: [ BaseForgeItem, AdamantineOverheatable ]
   id: AdamantineScraps
   name: adamantine scraps
   description: Fragments of a once great work of craftsdwarfship, with a great deal of heat it could become workable again.
   components:
+  - type: Tag
+    tags:
+    - AdamantineScraps
   - type: Sprite
     layers:
     - state: adamantine
@@ -437,6 +440,8 @@
     remaining: 500 # bring an army, you'll need it
     result: AdamantineIngot
   # No recipe, as this is only the result of breaking an adamantine item
+  # - type: Construction
+  #   graph: AdamantineScraps
 
 - type: entity
   parent: [ BaseForgeItem, BaseMetallicAdamantine ]
@@ -446,7 +451,7 @@
   components:
   - type: Sprite
     layers:
-    - state: bloomadamantine # not using the overheaded version because it doesn't need to be smashed
+    - state: bloomadamantine # not using the overheated version because it doesn't need to be smashed
       shader: Emissive
   - type: Temperature
     currentTemperature: 2200

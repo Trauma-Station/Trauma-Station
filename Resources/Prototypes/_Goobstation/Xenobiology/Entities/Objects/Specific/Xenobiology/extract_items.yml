@@ -191,12 +191,9 @@
     state: icon
   - type: StaticPrice
     price: 10000 # goida
-  # <Trauma>
   - type: Workable
     remaining: 500 # bring an army, you'll need it
     result: AdamantineIngot
-  # </Trauma>
-
 # todo mind transfer potion
 
 - type: entity

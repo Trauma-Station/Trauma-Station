@@ -12,6 +12,7 @@ using Content.Trauma.Common.Construction;
 using Content.Trauma.Shared.BurnableFood;
 using Content.Trauma.Shared.Durability;
 using Robust.Shared.Map;
+using Content.Shared.Destructible;
 
 namespace Content.Trauma.Shared.Forging;
 
@@ -195,6 +196,14 @@ public sealed partial class ForgingSystem : EntitySystem
         _workable.SetRemaining((uid, workable), work);
         _workable.SetResult((uid, workable), itemProto.Result ?? DefaultResult);
         _workable.SetAmount((uid, workable), itemProto.Amount);
+
+        // calculate the damage an item would take to break, based on total work needed * damage trigger from the YML
+        if (TryComp<DestructibleComponent>(uid, out var destructible))
+        {
+            destructible.Scale = work;
+            Dirty(uid, destructible);
+        }
+
         // TODO: other shit?
         return uid;
     }

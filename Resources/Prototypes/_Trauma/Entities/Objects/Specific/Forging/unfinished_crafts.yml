@@ -28,7 +28,7 @@
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 1200 # TODO: Derive this from work * density or something, somehow. - Speebr0
+        damage: 2 # multiplies with the total work needed in ForgingSystem.cs, item will break if damage exceeds work needed * this number.
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ] # broke it into pieces...
