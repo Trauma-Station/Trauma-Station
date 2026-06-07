@@ -208,6 +208,7 @@
 
 # ATMOS UNARY
 - type: construction
+  parent: GasVentPump # Ron
   id: GasVentPumpAlt1
   hide: true
   graph: GasUnary
@@ -226,6 +227,7 @@
   - GasVentPumpAlt4
 
 - type: construction
+  parent: GasVentPump # Ron
   id: GasVentPumpAlt2
   hide: true
   graph: GasUnary
@@ -244,6 +246,7 @@
   - GasVentPumpAlt4
 
 - type: construction
+  parent: GasVentPump # Ron
   id: GasVentPumpAlt3
   hide: true
   graph: GasUnary
@@ -262,6 +265,7 @@
   - GasVentPumpAlt4
 
 - type: construction
+  parent: GasVentPump # Ron
   id: GasVentPumpAlt4
   hide: true
   graph: GasUnary
@@ -280,6 +284,7 @@
   - GasVentPumpAlt4
 
 - type: construction
+  parent: GasPassiveVent # Ron
   id: GasPassiveVentAlt1
   hide: true
   graph: GasUnary
@@ -298,6 +303,7 @@
   - GasPassiveVentAlt4
 
 - type: construction
+  parent: GasPassiveVent # Ron
   id: GasPassiveVentAlt2
   hide: true
   graph: GasUnary
@@ -316,6 +322,7 @@
   - GasPassiveVentAlt4
 
 - type: construction
+  parent: GasPassiveVent # Ron
   id: GasPassiveVentAlt3
   hide: true
   graph: GasUnary
@@ -334,6 +341,7 @@
   - GasPassiveVentAlt4
 
 - type: construction
+  parent: GasPassiveVent # Ron
   id: GasPassiveVentAlt4
   hide: true
   graph: GasUnary
@@ -352,6 +360,7 @@
   - GasPassiveVentAlt4
 
 - type: construction
+  parent: GasVentScrubber # Ron
   id: GasVentScrubberAlt1
   hide: true
   graph: GasUnary
@@ -370,6 +379,7 @@
   - GasVentScrubberAlt4
 
 - type: construction
+  parent: GasVentScrubber # Ron
   id: GasVentScrubberAlt2
   hide: true
   graph: GasUnary
@@ -388,6 +398,7 @@
   - GasVentScrubberAlt4
 
 - type: construction
+  parent: GasVentScrubber # Ron
   id: GasVentScrubberAlt3
   hide: true
   graph: GasUnary
@@ -406,6 +417,7 @@
   - GasVentScrubberAlt4
 
 - type: construction
+  parent: GasVentScrubber # Ron
   id: GasVentScrubberAlt4
   hide: true
   graph: GasUnary
@@ -424,6 +436,7 @@
   - GasVentScrubberAlt4
 
 - type: construction
+  parent: GasOutletInjector # Ron
   id: GasOutletInjectorAlt1
   hide: true
   graph: GasUnary
@@ -442,6 +455,7 @@
   - GasOutletInjectorAlt4
 
 - type: construction
+  parent: GasOutletInjector # Ron
   id: GasOutletInjectorAlt2
   hide: true
   graph: GasUnary
@@ -460,6 +474,7 @@
   - GasOutletInjectorAlt4
 
 - type: construction
+  parent: GasOutletInjector # Ron
   id: GasOutletInjectorAlt3
   hide: true
   graph: GasUnary
@@ -478,6 +493,7 @@
   - GasOutletInjectorAlt4
 
 - type: construction
+  parent: GasOutletInjector # Ron
   id: GasOutletInjectorAlt4
   hide: true
   graph: GasUnary
@@ -725,6 +741,7 @@
   - SignalControlledValveAlt4
 
 - type: construction
+  parent: GasPort # Ron
   id: GasPortAlt1
   hide: true
   graph: GasBinary
@@ -743,6 +760,7 @@
   - GasPortAlt4
 
 - type: construction
+  parent: GasPort # Ron
   id: GasPortAlt2
   hide: true
   graph: GasBinary
@@ -761,6 +779,7 @@
   - GasPortAlt4
 
 - type: construction
+  parent: GasPort # Ron
   id: GasPortAlt3
   hide: true
   graph: GasBinary
@@ -779,6 +798,7 @@
   - GasPortAlt4
 
 - type: construction
+  parent: GasPort # Ron
   id: GasPortAlt4
   hide: true
   graph: GasBinary
@@ -797,6 +817,7 @@
   - GasPortAlt4
 
 - type: construction
+  parent: GasDualPortVentPump # Ron
   id: GasDualPortVentPumpAlt1
   hide: true
   graph: GasBinary
@@ -815,6 +836,7 @@
   - GasDualPortVentPumpAlt4
 
 - type: construction
+  parent: GasDualPortVentPump # Ron
   id: GasDualPortVentPumpAlt2
   hide: true
   graph: GasBinary
@@ -833,6 +855,7 @@
   - GasDualPortVentPumpAlt4
 
 - type: construction
+  parent: GasDualPortVentPump # Ron
   id: GasDualPortVentPumpAlt3
   hide: true
   graph: GasBinary
@@ -851,6 +874,7 @@
   - GasDualPortVentPumpAlt4
 
 - type: construction
+  parent: GasDualPortVentPump # Ron
   id: GasDualPortVentPumpAlt4
   hide: true
   graph: GasBinary
@@ -869,6 +893,7 @@
   - GasDualPortVentPumpAlt4
 
 - type: construction
+  parent: HeatExchanger # Ron
   id: HeatExchangerAlt1
   hide: true
   graph: GasBinary
@@ -885,6 +910,7 @@
   - HeatExchangerAlt4
 
 - type: construction
+  parent: HeatExchanger # Ron
   id: HeatExchangerAlt2
   hide: true
   graph: GasBinary
@@ -901,6 +927,7 @@
   - HeatExchangerAlt4
 
 - type: construction
+  parent: HeatExchanger # Ron
   id: HeatExchangerAlt3
   hide: true
   graph: GasBinary
@@ -917,6 +944,7 @@
   - HeatExchangerAlt4
 
 - type: construction
+  parent: HeatExchanger # Ron
   id: HeatExchangerAlt4
   hide: true
   graph: GasBinary
@@ -933,6 +961,7 @@
   - HeatExchangerAlt4
 
 - type: construction
+  parent: HeatExchanger # Ron
   id: HeatExchangerBendAlt1
   hide: true
   name: construction-recipe-heat-exchanger-bend
@@ -950,6 +979,7 @@
   - HeatExchangerBendAlt4
 
 - type: construction
+  parent: HeatExchangerBend # Ron
   id: HeatExchangerBendAlt2
   hide: true
   name: construction-recipe-heat-exchanger-bend
@@ -967,6 +997,7 @@
   - HeatExchangerBendAlt4
 
 - type: construction
+  parent: HeatExchangerBend # Ron
   id: HeatExchangerBendAlt3
   hide: true
   name: construction-recipe-heat-exchanger-bend
@@ -984,6 +1015,7 @@
   - HeatExchangerBendAlt4
 
 - type: construction
+  parent: HeatExchangerBend # Ron
   id: HeatExchangerBendAlt4
   hide: true
   name: construction-recipe-heat-exchanger-bend
@@ -1003,6 +1035,7 @@
 
 # ATMOS TRINARY
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterAlt1
   hide: true
   graph: GasTrinary
@@ -1022,6 +1055,7 @@
   - GasFilterAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterAlt2
   hide: true
   graph: GasTrinary
@@ -1041,6 +1075,7 @@
   - GasFilterAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterAlt3
   hide: true
   graph: GasTrinary
@@ -1060,6 +1095,7 @@
   - GasFilterAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterAlt4
   hide: true
   graph: GasTrinary
@@ -1079,6 +1115,7 @@
   - GasFilterAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterFlippedAlt1
   hide: true
   graph: GasTrinary
@@ -1098,6 +1135,7 @@
   - GasFilterFlippedAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterFlippedAlt2
   hide: true
   graph: GasTrinary
@@ -1117,6 +1155,7 @@
   - GasFilterFlippedAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterFlippedAlt3
   hide: true
   graph: GasTrinary
@@ -1136,6 +1175,7 @@
   - GasFilterFlippedAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: GasFilterFlippedAlt4
   hide: true
   graph: GasTrinary
@@ -1155,6 +1195,7 @@
   - GasFilterFlippedAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerAlt1
   hide: true
   graph: GasTrinary
@@ -1174,6 +1215,7 @@
   - GasMixerAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerAlt2
   hide: true
   graph: GasTrinary
@@ -1193,6 +1235,7 @@
   - GasMixerAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerAlt3
   hide: true
   graph: GasTrinary
@@ -1212,6 +1255,7 @@
   - GasMixerAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerAlt4
   hide: true
   graph: GasTrinary
@@ -1231,6 +1275,7 @@
   - GasMixerAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerFlippedAlt1
   hide: true
   graph: GasTrinary
@@ -1250,6 +1295,7 @@
   - GasMixerFlippedAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerFlippedAlt2
   hide: true
   graph: GasTrinary
@@ -1269,6 +1315,7 @@
   - GasMixerFlippedAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerFlippedAlt3
   hide: true
   graph: GasTrinary
@@ -1288,6 +1335,7 @@
   - GasMixerFlippedAlt4
 
 - type: construction
+  parent: GasMixer # Ron
   id: GasMixerFlippedAlt4
   hide: true
   graph: GasTrinary
@@ -1307,6 +1355,7 @@
   - GasMixerFlippedAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: PressureControlledValveAlt1
   hide: true
   graph: GasTrinary
@@ -1325,6 +1374,7 @@
   - PressureControlledValveAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: PressureControlledValveAlt2
   hide: true
   graph: GasTrinary
@@ -1343,6 +1393,7 @@
   - PressureControlledValveAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: PressureControlledValveAlt3
   hide: true
   graph: GasTrinary
@@ -1361,6 +1412,7 @@
   - PressureControlledValveAlt4
 
 - type: construction
+  parent: GasFilter # Ron
   id: PressureControlledValveAlt4
   hide: true
   graph: GasTrinary
