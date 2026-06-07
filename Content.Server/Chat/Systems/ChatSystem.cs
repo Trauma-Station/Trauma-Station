@@ -1,13 +1,10 @@
 // <Trauma>
-using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Speech;
 using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
 using Content.Trauma.Common.Wizard;
-using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.CollectiveMind;
 // </Trauma>
 using System.Globalization;
@@ -76,8 +73,6 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private ExamineSystemShared _examineSystem = default!;
     [Dependency] private EntityQuery<GhostHearingComponent> _ghostHearingQuery = default!;
-
-    public readonly Color DefaultSpeakColor = Color.White; // Einstein Engines - Language
 
     // Floofstation - Emotes and Sign Languages Respect LOS begin
     public const bool SpeakRespectsLOS = false; // You can hear through walls.
@@ -592,8 +587,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             wrappedObfuscated,
             source,
             range,
-            languageOverride: language, // Einstein Engines - Language
-            checkLOS: typeLOS // Floofstation - Check Line-Of-Sight
+            // <Trauma>
+            languageOverride: language,
+            checkLOS: typeLOS,
+            speech: speech,
+            colorOverride: colorOverride
+            // </Trauma>
             );
 
         var ev = new EntitySpokeEvent(source, message, null, false, language); // EE - added language
@@ -923,8 +922,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         EntityUid source,
         ChatTransmitRange range,
         NetUserId? author = null,
-        LanguagePrototype? languageOverride = null, // Einstein Engines - Language
-        bool checkLOS = false // Floofstation - Check Line-Of-Sight
+        // <Trauma>
+        LanguagePrototype? languageOverride = null,
+        bool checkLOS = false,
+        SpeechVerbPrototype? speech = null,
+        Color? colorOverride = null
+        // </Trauma>
         )
     {
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
@@ -943,21 +946,21 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue; // Floofstation - Some things don't go through walls, but they can go through windows!
             EntityUid listener = session.AttachedEntity.Value;
 
-            // Goob edit start
+            // <Trauma>
             // Raises a event for the deaf component
-            var ev = new ChatMessageOverrideInVoiceRange();
+            var ev = new ChatMessageOverrideInVoiceRangeEvent(source, name, language.ID, speech, colorOverride, obfuscated, obfuscatedWrappedMessage);
             RaiseLocalEvent(listener, ref ev);
             if (channel == ChatChannel.Local
                 && language.SpeechOverride.RequireSpeech // Check for whether speech is required.
                 && ev.Cancelled)
                 continue;
-            //Goob edit end
+            // </Trauma>
 
             // If the channel does not support languages, or the entity can understand the message, send the original message, otherwise send the obfuscated version
             if (channel == ChatChannel.LOOC || channel == ChatChannel.Emotes || _language.CanUnderstand(listener, language.ID))
                 _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
             else
-                _chatManager.ChatMessageToOne(channel, obfuscated, obfuscatedWrappedMessage, source, entHideChat, session.Channel, author: author);
+                _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, entHideChat, session.Channel, author: author);
             // Einstein Engines - Language end
         }
 
@@ -1082,86 +1085,6 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         return msg;
     }
-
-    // Einstein Engines - Language begin
-       /// <summary>
-    ///     Wraps a message sent by the specified entity into an "x says y" string.
-    /// </summary>
-    public string WrapPublicMessage(EntityUid source, string name, string message, SpeechVerbPrototype speech, LanguagePrototype? language = null, Color? colorOverride = null)
-    {
-        var wrapId = speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message";
-        return WrapMessage(wrapId, InGameICChatType.Speak, source, name, message, speech, language, colorOverride);
-    }
-
-    /// <summary>
-    ///     Wraps a message whispered by the specified entity into an "x whispers y" string.
-    /// </summary>
-    public string WrapWhisperMessage(EntityUid source, LocId defaultWrap, string entityName, string message, LanguagePrototype? language = null, Color? colorOverride = null)
-    {
-        return WrapMessage(defaultWrap, InGameICChatType.Whisper, source, entityName, message, null, language, colorOverride);
-    }
-
-    /// <summary>
-    ///     Wraps a message sent by the specified entity into the specified wrap string.
-    /// </summary>
-    public string WrapMessage(LocId wrapId, InGameICChatType chatType, EntityUid source, string entityName, string message, SpeechVerbPrototype? speech, LanguagePrototype? language, Color? colorOverride)
-    {
-        language ??= _language.GetLanguage(source);
-
-        // Goobstation - Bolded Language Overrides begin
-        if (language.SpeechOverride.BoldFontId != null && speech?.Bold == true)
-            wrapId = "chat-manager-entity-say-bolded-language-wrap-message";
-        // Goobstation end
-
-        if (language.SpeechOverride.MessageWrapOverrides.TryGetValue(chatType, out var wrapOverride))
-            wrapId = wrapOverride;
-
-        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
-            ? _random.Pick(verbsOverride).ToString()
-            : (speech is null ? "chat-speech-verb-default" : _random.Pick(speech.SpeechVerbStrings));
-        var color = DefaultSpeakColor;
-        colorOverride ??= language.SpeechOverride.Color;
-        if (colorOverride != null)
-            color = Color.InterpolateBetween(color, colorOverride.Value, colorOverride.Value.A);
-
-        // goob start - loudspeakers
-
-        int? loudSpeakFont = null;
-
-        var getLoudspeakerEv = new GetLoudspeakerEvent();
-        RaiseLocalEvent(source, ref getLoudspeakerEv);
-
-        if (getLoudspeakerEv.Loudspeakers != null)
-            foreach (var loudspeaker in getLoudspeakerEv.Loudspeakers)
-            {
-                var loudSpeakerEv = new GetLoudspeakerDataEvent();
-                RaiseLocalEvent(loudspeaker, ref loudSpeakerEv);
-
-                if (loudSpeakerEv.IsActive && loudSpeakerEv.AffectChat)
-                {
-                    loudSpeakFont = loudSpeakerEv.FontSize;
-                    break;
-                }
-            }
-
-        // goob end
-
-        // <Trauma> - allow source entity to replace font
-        speech ??= GetSpeechVerb(source, message);
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
-        RaiseLocalEvent(source, ref fontEv);
-        // </Trauma>
-
-        return Loc.GetString(wrapId,
-            ("color", color),
-            ("entityName", entityName),
-            ("verb", Loc.GetString(verbId)),
-            ("fontType", fontEv.Font), // Trauma - use Font from above
-            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
-            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
-            ("message", message));
-    }
-    // Einstein Engines - Language end
 
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.

@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Server.LinkAccount;
+using Content.Trauma.Common.Chat;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -267,6 +268,12 @@ internal sealed partial class ChatManager : IChatManager
         {
             return;
         }
+        // <Trauma>
+        var attemptEv = new PlayerMessageAttemptEvent(player, message);
+        _entityManager.EventBus.RaiseEvent(EventSource.Local, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // </Trauma>
 
         Color? colorOverride = null;
         var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));

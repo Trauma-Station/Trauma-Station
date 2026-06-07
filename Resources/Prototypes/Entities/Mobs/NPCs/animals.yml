@@ -519,6 +519,7 @@
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
+  - type: VentCrawler # Trauma
   - type: GhostRole
     prob: 0 # Trauma - was 0.25
     makeSentient: true
@@ -3392,6 +3393,12 @@
   parent: MobCatSpace
   description: Explosive kitten.
   components:
+  # <Trauma>
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]

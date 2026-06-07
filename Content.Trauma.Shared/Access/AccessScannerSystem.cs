@@ -18,7 +18,6 @@ namespace Content.Trauma.Shared.Access;
 public sealed partial class AccessScannerSystem : EntitySystem
 {
     [Dependency] private AccessReaderSystem _access = default!;
-    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDeviceLinkSystem _device = default!;
@@ -29,7 +28,6 @@ public sealed partial class AccessScannerSystem : EntitySystem
 
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(0.2);
     private TimeSpan _nextUpdate;
-    private HashSet<Entity<IdCardComponent>> _ids = new();
 
     public override void Initialize()
     {
@@ -57,23 +55,37 @@ public sealed partial class AccessScannerSystem : EntitySystem
                 return;
 
             var range = comp.Settings[comp.Setting].Range;
-            var coords = Transform(uid).Coordinates;
-            _ids.Clear();
-            _lookup.GetEntitiesInRange(coords, range, _ids);
-            foreach (var id in _ids)
+            var range2 = range * range;
+            var coords = _transform.GetMapCoordinates(uid);
+            var map = coords.MapId;
+            var pos = coords.Position;
+            // EntityLookupSystem uses a heuristic based on the component Count to change between query and
+            // a physics lookup thing based on how many entities there are with it.
+            // The physics lookup thing doesnt work e.g. inside your pda, so always use the query version
+            var idQuery = EntityQueryEnumerator<IdCardComponent, TransformComponent>();
+            while (idQuery.MoveNext(out var id, out var idComp, out var idXform))
             {
-                // id may have just entered range, check its access now
-                if (!_access.IsAllowed(id, uid, reader))
-                    continue;
+                if (idXform.MapID != map)
+                    continue; // cant possibly be there
 
-                if (!comp.Scanned.Add(id))
-                    continue; // has access but was already in range
+                var idCoords = _transform.GetMapCoordinates(idXform);
+                if ((idCoords.Position - pos).LengthSquared() > range2)
+                    continue; // outside the scanners range
+
+                if (comp.Scanned.Contains(id))
+                    continue; // already in range with access
+
+                // inside range, id may have just entered it: check its access now
+                if (!_access.IsAllowed(id, uid, reader))
+                    continue; // doesnt have access right now, might change if id is microwaved/modified or the scanner is multitool'd
+
+                comp.Scanned.Add(id);
 
                 // ping
                 UpdateActive((uid, comp));
-                if (id.Comp.FullName is { } name)
+                if (idComp.FullName is { } name)
                     SendString(uid, comp.NamePort, name);
-                if (id.Comp.LocalizedJobTitle is { } job)
+                if (idComp.LocalizedJobTitle is { } job)
                     SendString(uid, comp.JobPort, job);
             }
 
@@ -82,7 +94,12 @@ public sealed partial class AccessScannerSystem : EntitySystem
                 if (TerminatingOrDeleted(id))
                     return true; // lol
 
-                if (!_transform.InRange(coords, Transform(id).Coordinates, range))
+                var idXform = Transform(id);
+                if (idXform.MapID != map)
+                    return true; // went to a different map
+
+                var idCoords = _transform.GetMapCoordinates(idXform);
+                if ((idCoords.Position - pos).LengthSquared() > range2)
                     return true; // moved out of range
 
                 return !_access.IsAllowed(id, uid, reader); // access of the scanner or id was changed
