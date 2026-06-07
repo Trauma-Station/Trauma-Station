@@ -156,7 +156,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
 #if DEBUG
             if (!TryGetSolution(container, name, out var debugEnt) || debugEnt.Value.Owner != entity.Value.Owner)
             {
-                Log.Debug($"Wrong solution {ToPrettyString(entity)} used for resolving solution {name} on {ToPrettyString(container)}, which was {ToPrettyString(debugEnt)}!\nStack trace: {Environment.StackTrace}");
+                Log.Debug($"Wrong solution {ToPrettyString(entity)} used for resolving solution {name} on {ToPrettyString(container)}, which was {ToPrettyString(debugEnt?.Owner)}!\nStack trace: {Environment.StackTrace}");
                 return false;
             }
 #endif
