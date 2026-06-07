@@ -1,5 +1,6 @@
 # ATMOS
 - type: construction
+  parent: GasPipeSensor # Ron
   id: GasPipeSensorAlt3
   hide: true
   graph: GasPipeSensor
@@ -17,6 +18,7 @@
   - GasPipeSensorAlt4
 
 - type: construction
+  parent: GasPipeSensor # Ron
   id: GasPipeSensorAlt4
   hide: true
   graph: GasPipeSensor
@@ -35,6 +37,7 @@
 
 # ATMOS PIPES
 - type: construction
+  parent: GasPipeHalf # Ron
   id: GasPipeHalfAlt3
   hide: true
   graph: GasPipe
@@ -51,6 +54,7 @@
   - GasPipeHalfAlt4
 
 - type: construction
+  parent: GasPipeHalf # Ron
   id: GasPipeHalfAlt4
   hide: true
   graph: GasPipe
@@ -67,6 +71,7 @@
   - GasPipeHalfAlt4
 
 - type: construction
+  parent: GasPipeStraight # Ron
   id: GasPipeStraightAlt3
   hide: true
   graph: GasPipe
@@ -83,6 +88,7 @@
   - GasPipeStraightAlt4
 
 - type: construction
+  parent: GasPipeStraight # Ron
   id: GasPipeStraightAlt4
   hide: true
   graph: GasPipe
@@ -99,6 +105,7 @@
   - GasPipeStraightAlt4
 
 - type: construction
+  parent: GasPipeBend # Ron
   id: GasPipeBendAlt3
   hide: true
   graph: GasPipe
@@ -115,6 +122,7 @@
   - GasPipeBendAlt4
 
 - type: construction
+  parent: GasPipeBend # Ron
   id: GasPipeBendAlt4
   hide: true
   graph: GasPipe
@@ -131,6 +139,7 @@
   - GasPipeBendAlt4
 
 - type: construction
+  parent: GasPipeTJunction # Ron
   id: GasPipeTJunctionAlt3
   hide: true
   graph: GasPipe
@@ -147,6 +156,7 @@
   - GasPipeTJunctionAlt4
 
 - type: construction
+  parent: GasPipeTJunction # Ron
   id: GasPipeTJunctionAlt4
   hide: true
   graph: GasPipe
@@ -163,6 +173,7 @@
   - GasPipeTJunctionAlt4
 
 - type: construction
+  parent: GasPipeFourway # Ron
   id: GasPipeFourwayAlt3
   hide: true
   graph: GasPipe
@@ -179,6 +190,7 @@
   - GasPipeFourwayAlt4
 
 - type: construction
+  parent: GasPipeFourway # Ron
   id: GasPipeFourwayAlt4
   hide: true
   graph: GasPipe
@@ -196,6 +208,7 @@
 
 # ATMOS BINARY
 - type: construction
+  parent: GasPressurePump # Ron
   id: GasPressurePumpAlt3
   hide: true
   graph: GasBinary
@@ -214,6 +227,7 @@
   - GasPressurePumpAlt4
 
 - type: construction
+  parent: GasPressurePump # Ron
   id: GasPressurePumpAlt4
   hide: true
   graph: GasBinary
@@ -232,6 +246,7 @@
   - GasPressurePumpAlt4
 
 - type: construction
+  parent: GasVolumePump # Ron
   id: GasVolumePumpAlt3
   hide: true
   graph: GasBinary
@@ -250,6 +265,7 @@
   - GasVolumePumpAlt4
 
 - type: construction
+  parent: GasVolumePump # Ron
   id: GasVolumePumpAlt4
   hide: true
   graph: GasBinary
@@ -268,6 +284,7 @@
   - GasVolumePumpAlt4
 
 - type: construction
+  parent: GasPassiveGate # Ron
   id: GasPassiveGateAlt3
   hide: true
   graph: GasBinary
@@ -286,6 +303,7 @@
   - GasPassiveGateAlt4
 
 - type: construction
+  parent: GasPassiveGate # Ron
   id: GasPassiveGateAlt4
   hide: true
   graph: GasBinary
@@ -304,6 +322,7 @@
   - GasPassiveGateAlt4
 
 - type: construction
+  parent: GasPressureRegulator # Ron
   id: GasPressureRegulatorAlt3
   hide: true
   graph: GasBinary
@@ -322,6 +341,7 @@
   - GasPressureRegulatorAlt4
 
 - type: construction
+  parent: GasPressureRegulator # Ron
   id: GasPressureRegulatorAlt4
   hide: true
   graph: GasBinary
@@ -340,6 +360,7 @@
   - GasPressureRegulatorAlt4
 
 - type: construction
+  parent: GasValve # Ron
   id: GasValveAlt3
   hide: true
   graph: GasBinary
@@ -358,6 +379,7 @@
   - GasValveAlt4
 
 - type: construction
+  parent: GasValve # Ron
   id: GasValveAlt4
   hide: true
   graph: GasBinary
@@ -376,6 +398,7 @@
   - GasValveAlt4
 
 - type: construction
+  parent: SignalControlledValve # Ron
   id: SignalControlledValveAlt3
   graph: GasBinary
   startNode: start
@@ -393,6 +416,7 @@
   - SignalControlledValveAlt4
 
 - type: construction
+  parent: SignalControlledValve # Ron
   id: SignalControlledValveAlt4
   graph: GasBinary
   startNode: start
