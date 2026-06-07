@@ -6,6 +6,7 @@ using Content.Shared.Mind;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Store.Components;
+using Content.Trauma.Common.JobListings;
 using Content.Trauma.Shared.JobListings;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
@@ -28,16 +29,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         base.Initialize();
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInitialised);
         SubscribeLocalEvent<JobListingsComponent, MapInitEvent>(OnInit);
-    }
-
-    public override void OpenUi(Entity<JobListingsComponent> ent)
-    {
-        UpdateUi(ent);
-    }
-
-    public void UpdateUi(Entity<JobListingsComponent> ent)
-    {
-
+        SubscribeLocalEvent<JobListingsComponent, PdaShowJobListingsMessage>(OnMessage);
     }
 
     /// <summary>
@@ -115,5 +107,10 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return;
 
         FillSideJobs((args.Store, storeComp, jobListingsComp));
+    }
+
+    private void OnMessage(Entity<JobListingsComponent> jobBoard, ref PdaShowJobListingsMessage msg)
+    {
+        OpenUi(jobBoard, msg.Actor);
     }
 }

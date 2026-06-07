@@ -2,6 +2,7 @@ using Content.Client.CartridgeLoader;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.PDA;
+using Content.Trauma.Common.JobListings;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -66,6 +67,13 @@ namespace Content.Client.PDA
             {
                 SendMessage(new PdaShowUplinkMessage());
             };
+
+            // <Trauma> - job listings
+            _menu.ShowJobListingsButton.OnPressed += _ =>
+            {
+                SendMessage(new PdaShowJobListingsMessage());
+            };
+            // </Trauma>
 
             _menu.LockUplinkButton.OnPressed += _ =>
             {

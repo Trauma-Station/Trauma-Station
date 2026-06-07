@@ -7,8 +7,5 @@ namespace Content.Trauma.Client.JobListings;
 
 public sealed class JobListingsSystem : SharedJobListingsSystem
 {
-    public override void OpenUi(Entity<JobListingsComponent> ent)
-    {
-        _ui.OpenUi(ent.Owner, JobListingsUiKey.Key);
-    }
+
 }
