@@ -6,7 +6,7 @@ lobbyduration = 180
 fallbackpreset = "Traitor"
 
 [chat]
-max_announcement_length = 512
+max_announcement_length = 2048
 
 [voice]
 barks_enabled = true
