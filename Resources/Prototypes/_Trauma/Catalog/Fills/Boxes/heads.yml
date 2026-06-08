@@ -10,7 +10,7 @@
 - type: entity
   parent: BoxSkillChipsBase
   id: BoxSkillChipsService
-  name: Service Skill Chips box
+  name: service skillchips box
   description: A large box containing service skillchips. Definitely isn't sterile. Oh well.
   components:
   - type: EntityTableContainerFill

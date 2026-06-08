@@ -25,7 +25,7 @@
   parent: CrateSecgear
   id: CrateSkillChipsSec
   name: Security skill chips
-  description: A crate containing security skillchips. Requires security access
+  description: A crate containing security skillchips. Requires security access to open.
   components:
   - type: EntityTableContainerFill
     containers:
