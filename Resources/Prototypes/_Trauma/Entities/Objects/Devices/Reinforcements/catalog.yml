@@ -129,38 +129,6 @@
   restockAfterPurchase: 300
 
 - type: listing
-  id: SecoffReinforcementSpecialistBodyguard
-  name: reinforcement-sec-specialist-bodyguard-name
-  description: reinforcement-sec-specialist-bodyguard-desc
-  productEntity: ReinforcementBeaconSpecialistOfficerBodyguard
-  icon:
-    sprite: Markers/jobs.rsi
-    state: security_officer
-  cost:
-    Spesos: 20000
-  categories:
-  - ReinforcementsHoS
-  restockTime: 0
-  resetRestockOnPurchase: true
-  restockAfterPurchase: 900
-
-- type: listing
-  id: SecoffReinforcementSpecialistAdvisor
-  name: reinforcement-sec-specialist-advisor-name
-  description: reinforcement-sec-specialist-advisor-desc
-  productEntity: ReinforcementBeaconSpecialistOfficerAdvisor
-  icon:
-    sprite: Markers/jobs.rsi
-    state: security_officer
-  cost:
-    Spesos: 50000
-  categories:
-  - ReinforcementsHoS
-  restockTime: 0
-  resetRestockOnPurchase: true
-  restockAfterPurchase: 1800
-
-- type: listing
   id: SecoffReinforcementSpecialistBrigmedic
   name: reinforcement-sec-specialist-brigmedic-name
   description: reinforcement-sec-specialist-brigmedic-desc
