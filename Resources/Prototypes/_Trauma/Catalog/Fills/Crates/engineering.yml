@@ -13,8 +13,8 @@
 - type: entity
   parent: CrateEngineeringSecure
   id: CrateSkillChipsEngi
-  name: Engineering Skill Chips
-  description: A crate containing engi skillchips. Requires engineering access
+  name: Engineering skill chips
+  description: A crate containing engineering skillchips. Requires engineering access
   components:
   - type: EntityTableContainerFill
     containers:
