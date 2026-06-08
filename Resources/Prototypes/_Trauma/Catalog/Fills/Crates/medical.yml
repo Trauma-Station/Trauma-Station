@@ -2,7 +2,7 @@
   parent: CrateMedicalSecure
   id: CrateSkillChipsMed
   name: Medical skill chips
-  description: A crate containing Medical skillchips. Requires Medical access
+  description: A crate containing Medical skillchips. Requires Medical access to open.
   components:
   - type: EntityTableContainerFill
     containers:
