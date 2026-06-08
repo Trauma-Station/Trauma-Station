@@ -420,7 +420,7 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
         // TODO: kys
         Timer.Spawn(200, () =>
         {
-            SpeakSpell(speaker, caster, toSpeak, school);
+            SpeakSpell(speaker, caster, speech, school);
         });
     }
 
