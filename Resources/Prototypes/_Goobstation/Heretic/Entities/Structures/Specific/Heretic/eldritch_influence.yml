@@ -106,7 +106,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 600
+    lifetime: 1200
   - type: SpawnOnDespawn
     prototype: EldritchInfluenceSpent
 
