@@ -1,8 +1,8 @@
 - type: entity
   parent: CrateScienceSecure
   id: CrateSkillChipsSci
-  name: Science Skill Chips
-  description: A crate containing sci skillchips. Requires science access
+  name: Science skill chips
+  description: A crate containing science skillchips. Requires science access
   components:
   - type: EntityTableContainerFill
     containers:
