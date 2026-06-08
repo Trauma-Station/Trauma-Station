@@ -2638,6 +2638,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: maid
   - type: HereticRitual
+    limit: 4
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform

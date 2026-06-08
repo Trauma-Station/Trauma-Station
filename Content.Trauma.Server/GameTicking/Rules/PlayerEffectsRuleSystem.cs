@@ -25,7 +25,7 @@ public sealed partial class PlayerEffectsRuleSystem : EntitySystem
             if (comp.Jobs is {} jobs && (args.JobId is not {} job || !jobs.Contains(job)))
                 continue;
 
-            _effects.ApplyEffects(args.Mob, comp.Effects);
+            _effects.ApplyEffects(args.Mob, comp.Effects, predicted: false);
         }
     }
 }

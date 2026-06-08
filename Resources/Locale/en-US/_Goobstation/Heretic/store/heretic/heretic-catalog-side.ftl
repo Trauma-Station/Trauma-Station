@@ -220,6 +220,7 @@ knowledge-path-side-t3-maid-desc =
     Allows you to transmute five sheets of glass, any suit with sensors, and a pair of lungs to create a Maid in the Mirror.
     Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, serving as powerful scouts and ambushers.
     Their attacks also apply a stack of void chill.
+    You can only create four at a time.
 
 knowledge-path-side-t3-admonitions-name = Forest Admonitions
 knowledge-path-side-t3-admonitions-desc =

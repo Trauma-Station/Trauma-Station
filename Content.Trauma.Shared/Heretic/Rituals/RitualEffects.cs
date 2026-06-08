@@ -23,7 +23,7 @@ public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereti
 
     public virtual bool ForceApplyOnRitual => false;
 
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user, bool predicted)
     {
         if (raiser is not HereticRitualRaiser ritualRaiser)
             return;
@@ -31,7 +31,7 @@ public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereti
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
         {
             if (ritualRaiser.TryConditions(target, IndividualConditions))
-                base.RaiseEvent(target, raiser, scale, user);
+                base.RaiseEvent(target, raiser, scale, user, predicted);
             return;
         }
 
@@ -40,7 +40,7 @@ public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereti
             if (!ritualRaiser.TryConditions(t, IndividualConditions))
                 continue;
 
-            base.RaiseEvent(t, raiser, scale, user);
+            base.RaiseEvent(t, raiser, scale, user, predicted);
         }
     }
 }
@@ -53,7 +53,7 @@ public abstract partial class OutputRitualEffect<T> : BaseRitualEffect<T> where 
 
 public sealed partial class AddToLimitRitualEffect : OutputRitualEffect<AddToLimitRitualEffect>
 {
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user, bool predicted)
     {
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
             return;
@@ -86,7 +86,7 @@ public sealed partial class AddToLimitRitualEffect : OutputRitualEffect<AddToLim
 
 public sealed partial class SaveResultRitualEffect : OutputRitualEffect<SaveResultRitualEffect>
 {
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user, bool predicted)
     {
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
             return;

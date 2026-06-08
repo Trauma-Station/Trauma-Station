@@ -233,7 +233,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
 
     public void UnGhoulifyEntity(Entity<GhoulComponent> ent)
     {
-        _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove);
+        _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove, predicted: false);
 
         if (!TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
@@ -324,7 +324,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     {
         EntityManager.RemoveComponents(ent, _proto.Index(ComponentsToRemoveOnGhoulify).Components);
 
-        _effect.TryApplyEffect(ent, ent.Comp.SkillEffect);
+        _effect.TryApplyEffect(ent, ent.Comp.SkillEffect, predicted: false);
 
         EnsureComp<WeakToHolyComponent>(ent);
         var ev = new UnholyStatusChangedEvent(ent, ent, true);
@@ -508,7 +508,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         if (!HasComp<BodyComponent>(ent))
             return;
 
-        _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove);
+        _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove, predicted: false);
 
         foreach (var giblet in _gibbing.Gib(ent, ent.Comp.DeathBehavior == GhoulDeathBehavior.GibOrgans))
         {

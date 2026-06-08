@@ -29,7 +29,7 @@ public sealed partial class SpawnInsideSlotEntityEffectSystem : EntityEffectSyst
 
     protected override void Effect(Entity<InventoryComponent> ent, ref EntityEffectEvent<SpawnInsideSlot> args)
     {
-        if (!args.Effect.Predicted && _net.IsClient)
+        if (_net.IsClient && !(args.Effect.Predicted && args.Predicted))
             return;
 
         var quantity = args.Effect.Number * (int) Math.Floor(args.Scale);

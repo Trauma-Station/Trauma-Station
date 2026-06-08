@@ -22,12 +22,12 @@
     effectsOnApply:
     - !type:PopupMessage
       messages:
-      - Your blood swells...
+      - entity-effect-popup-blood-swells
       visualType: MediumCaution
     effectsOnRemoval:
     - !type:PopupMessage
       messages:
-      - Your blood stops swelling...
+      - entity-effect-popup-blood-stops-swelling
       visualType: MediumCaution
   - type: UnableToShootStatusEffect
 

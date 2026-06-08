@@ -37,7 +37,7 @@ public sealed partial class RelayInventoryEffectSystem : EntityEffectSystem<Inve
         while (enumerator.NextItem(out var item))
         {
             _data.CopyData(ent, item);
-            _effects.TryApplyEffect(item, effect.Effect, args.Scale, args.User);
+            _effects.TryApplyEffect(item, effect.Effect, args.Scale, args.User, predicted: args.Predicted);
             _data.ClearData(item);
         }
     }

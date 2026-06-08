@@ -66,6 +66,7 @@
       components:
       - Ghoul
       - BorgChassis
+      - Drone
   - !type:MobStateCondition
     mobstate: Alive
     inverted: true
@@ -171,6 +172,8 @@
     blacklist:
       components:
       - Ghoul
+      - BorgChassis
+      - Drone
   effects:
   - !type:CreateFleshMimic
 

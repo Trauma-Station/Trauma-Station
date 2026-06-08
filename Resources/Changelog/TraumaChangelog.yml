@@ -9923,3 +9923,37 @@ Entries:
   id: 1125
   time: '2026-06-08T12:43:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3103
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed pipes and cables flickering with t-ray scanner. Engis are no longer
+      on suicide watch.
+  id: 1126
+  time: '2026-06-08T13:34:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3104
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed star gazer laser not doing anything.
+  - type: Fix
+    message: Fixed drones being able to become ghouls.
+  - type: Fix
+    message: Fixed ventcrawling xenos having visible tail.
+  - type: Fix
+    message: Fix void pull disarming.
+  - type: Fix
+    message: Fix crimson cleave doubling user bleed amount instead of removing it.
+  - type: Add
+    message: Tailed entities see can their tail ignoring viewcones.
+  - type: Tweak
+    message: Maid in the mirrors are limited to 4 at a time.
+  - type: Tweak
+    message: >-
+      Reality shifts per heretic roundstart 2 -> 1, max rift spawns after
+      sacrifice 2 -> 3.
+  - type: Tweak
+    message: Time for rift to become visible after collecting it 10min -> 20min.
+  id: 1127
+  time: '2026-06-08T15:32:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3106

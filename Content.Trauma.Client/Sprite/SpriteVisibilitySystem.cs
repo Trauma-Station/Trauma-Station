@@ -55,12 +55,18 @@ public sealed partial class SpriteVisibilitySystem : CommonSpriteVisibilitySyste
         }
 
         ent.Comp2.VisibilityModifiers.Remove(key);
-        if (ent.Comp2.VisibilityModifiers.Count == 0 ||
-            ent.Comp2.VisibilityModifiers.Count == 1 &&
-            ent.Comp2.VisibilityModifiers.ContainsKey(nameof(SpriteComponent)))
+        if (ent.Comp2.VisibilityModifiers.Count == 0)
         {
             RemCompDeferred(ent, ent.Comp2);
             SetSpriteVisibility(ent!, 1f);
+            return;
+        }
+
+        if (ent.Comp2.VisibilityModifiers.Count == 1 &&
+            ent.Comp2.VisibilityModifiers.TryGetValue(nameof(SpriteComponent), out var alpha))
+        {
+            RemCompDeferred(ent, ent.Comp2);
+            SetSpriteVisibility(ent!, alpha);
             return;
         }
 
