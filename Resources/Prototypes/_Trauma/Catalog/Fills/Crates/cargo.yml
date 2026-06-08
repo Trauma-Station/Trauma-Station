@@ -2,6 +2,7 @@
   parent: CrateGenericSteel
   id: CrateSkillChipsCargo
   name: Cargo skill chips
+  # TODO: add salvage chips if lavaland DRM is added
   description: A crate containing Cargo skillchips. It seems someone already looted the salv skillchips
   components:
   - type: EntityTableContainerFill
