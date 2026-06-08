@@ -7,8 +7,6 @@ ghost-role-information-reinforcement-specialist-riot-melee-name = Station Reinfo
 ghost-role-information-reinforcement-specialist-riot-ranged-name = Station Reinforcement (Security Specialist - Riot Ranged)
 ghost-role-information-reinforcement-specialist-heavy-laser-name = Station Reinforcement (Security Specialist - Heavy Laser)
 ghost-role-information-reinforcement-specialist-shield-name = Station Reinforcement (Security Specialist - Shield)
-ghost-role-information-reinforcement-specialist-bodyguard-name = Station Reinforcement (Security Specialist - Bodyguard)
-ghost-role-information-reinforcement-specialist-advisor-name = Station Reinforcement (Security Specialist - Advisor)
 ghost-role-information-reinforcement-specialist-brigmedic-name = Station Reinforcement (Security Specialist - Brigmedic)
 ghost-role-information-reinforcement-cadet-name = Station Reinforcement (Security Cadet)
 

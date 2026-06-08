@@ -45,28 +45,6 @@
     requireTag: WhitelistChameleonPDA
 
 - type: entity
-  parent: BaseMedicalPDA
-  id: AdvisorPDA
-  name: security advisor PDA
-  description: An elaborate PDA for renowned veterans.
-  components:
-  - type: Appearance
-    appearanceDataInit:
-      enum.PdaVisuals.PdaType:
-        !type:String
-        pda-advisor
-  - type: Pda
-    id: AdvisorIDCard
-  - type: Icon
-    sprite: _Trauma/Objects/Devices/pda.rsi
-    state: pda-advisor
-  - type: Sprite
-    sprite: _Trauma/Objects/Devices/pda.rsi
-    state: pda-advisor
-  - type: PdaBorderColor
-    borderColor: "#3c94c5"
-
-- type: entity
   parent: [NanotrasenRepresentativePDA, BaseWidePDA]
   id: AltNanotrasenRepresentativePDA
   name: nanotrasen representative's PDA
