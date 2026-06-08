@@ -24,7 +24,7 @@
 - type: entity
   parent: CrateSecgear
   id: CrateSkillChipsSec
-  name: Sec Skill Chips
+  name: Security Skill Chips
   description: A crate containing Sec skillchips. Requires Security access
   components:
   - type: EntityTableContainerFill
