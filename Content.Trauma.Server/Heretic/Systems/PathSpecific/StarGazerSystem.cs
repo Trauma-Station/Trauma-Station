@@ -15,13 +15,11 @@ using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed partial class StarGazerSystem : SharedStarGazerSystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PvsOverrideSystem _pvs = default!;
     [Dependency] private GhostRoleSystem _ghostRole = default!;
     [Dependency] private TeleportSystem _teleport = default!;
@@ -129,22 +127,22 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
     {
         args.Handled = true;
 
-        var starGazer = ResolveStarGazer(ent.Owner, out var spawned);
-        if (starGazer == null || spawned)
+        if (ResolveStarGazer(ent.Owner, out var spawned) is not { } starGazer || spawned)
             return;
 
-        if (TryComp(starGazer.Value, out ActorComponent? actor))
-            starGazer.Value.Comp.ResettingMindSession = actor.PlayerSession;
+        if (TryComp(starGazer, out ActorComponent? actor))
+            starGazer.Comp.ResettingMindSession = actor.PlayerSession;
 
-        EnsureComp<GhostTakeoverAvailableComponent>(starGazer.Value).IgnoreMindCheck = true;
-        var role = EnsureComp<GhostRoleComponent>(starGazer.Value);
+        EnsureComp<GhostTakeoverAvailableComponent>(starGazer).IgnoreMindCheck = true;
+        var role = EnsureComp<GhostRoleComponent>(starGazer);
         _ghostRole.SetTaken(role, false);
-        _ghostRole.RegisterGhostRole((starGazer.Value, role));
+        _ghostRole.RegisterGhostRole((starGazer, role));
+
+        starGazer.Comp.GhostRoleTimer = Timing.CurTime + starGazer.Comp.GhostRoleTime;
     }
 
     private void RemoveGhostRole(Entity<StarGazerComponent, GhostRoleComponent?> ent, bool hasMind, bool resettingMind)
     {
-        ent.Comp1.ResetDistanceTimer = _timing.CurTime + ent.Comp1.ResetDistanceTime;
         ent.Comp1.ResettingMindSession = null;
 
         if (!hasMind || resettingMind || !Resolve(ent, ref ent.Comp2, false) || ent.Comp2.Taken)
@@ -158,7 +156,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
     {
         base.Update(frameTime);
 
-        var now = _timing.CurTime;
+        var now = Timing.CurTime;
 
         var query = EntityQueryEnumerator<StarGazerComponent, HereticMinionComponent, MindContainerComponent,
             TransformComponent>();
@@ -175,7 +173,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
             {
                 if (now > starGazer.GhostRoleTimer)
                 {
-                    starGazer.ResetDistanceTimer = now + starGazer.ResetDistanceTime;
+                    starGazer.GhostRoleTimer = now + starGazer.GhostRoleTime;
 
                     RemoveGhostRole((uid, starGazer, ghostRole), hasMind, resettingMind);
 

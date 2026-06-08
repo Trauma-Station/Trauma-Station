@@ -14,31 +14,30 @@ public sealed partial class TailVentCrawlSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentStartup>(OnStartVentCrawl);
-        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentRemove>(OnStopVentCrawl);
+        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentStartup>((x, _, _) => UpdateTailVisibility(x, 0f));
+        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentShutdown>((x, _, _) => UpdateTailVisibility(x, 1f));
+        SubscribeLocalEvent<TailedEntityComponent, ComponentStartup>(OnTailedStartup);
     }
 
-    private void OnStartVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentStartup args)
+    private void OnTailedStartup(Entity<TailedEntityComponent> ent, ref ComponentStartup args)
     {
-        UpdateTailVisibility(ent, 0f);
-    }
-
-    private void OnStopVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentRemove args)
-    {
-        UpdateTailVisibility(ent, 1f);
-    }
-
-    private void UpdateTailVisibility(EntityUid uid, float alpha)
-    {
-        if (!TryComp(uid, out TailedEntityComponent? comp))
+        if (!HasComp<BeingVentCrawlerComponent>(ent))
             return;
 
-        foreach (var data in comp.TailSegments)
+        UpdateTailVisibility(ent.AsNullable(), 0f);
+    }
+
+    private void UpdateTailVisibility(Entity<TailedEntityComponent?> ent, float alpha)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        foreach (var data in ent.Comp.TailSegments)
         {
-            if (!TryGetEntity(data.Segment, out var ent))
+            if (!TryGetEntity(data.Segment, out var uid))
                 continue;
 
-            _spriteVis.UpdateVisibilityModifiers(ent.Value, nameof(BeingVentCrawlerComponent), alpha);
+            _spriteVis.UpdateVisibilityModifiers(uid.Value, nameof(BeingVentCrawlerComponent), alpha);
         }
     }
 }
