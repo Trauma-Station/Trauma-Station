@@ -36,9 +36,9 @@
     ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 5
-    WeaponsKnowledge: 0
+    WeaponsKnowledge: 3 # The species that is about industry and crafting shouldn't be outclassed by humans at forging
     ArmorKnowledge: 0
-    MetalworkingKnowledge: 0
+    MetalworkingKnowledge: 5
     CarvingKnowledge: 0
     GunsmithingKnowledge: 0
     MechanicsKnowledge: 0
