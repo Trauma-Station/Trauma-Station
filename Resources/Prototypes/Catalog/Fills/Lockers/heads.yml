@@ -124,6 +124,7 @@
     - id: AccessConfigurator
     - id: BoxEncryptionKeyPassenger
     - id: BoxEncryptionKeyService
+    - id: BoxSkillChipsService
     - id: BoxHeadset
     - id: BoxHoPCircuitboards
     - id: BoxHoPStamps

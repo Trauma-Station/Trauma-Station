@@ -9,3 +9,18 @@
       entity_storage:
         id: ReagentContainerCement
         amount: 3
+
+- type: entity
+  parent: CrateEngineeringSecure
+  id: CrateSkillChipsEngi
+  name: Engi Skill Chips
+  description: A crate containing engi skillchips. Requires engineering access
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SkillChipAtmosphericTechnician
+        - id: SkillChipStationEngineer
+        - id: SkillChipTechnicalAssistant
+          amount: 3
