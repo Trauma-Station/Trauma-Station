@@ -7,5 +7,8 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class JobListingsMenu : DefaultWindow
 {
-
+    public JobListingsMenu()
+    {
+        RobustXamlLoader.Load(this);
+    }
 }
