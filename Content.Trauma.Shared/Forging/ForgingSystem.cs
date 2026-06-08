@@ -14,7 +14,6 @@ using Content.Trauma.Shared.BurnableFood;
 using Content.Trauma.Shared.Durability;
 using Robust.Shared.Map;
 
-
 namespace Content.Trauma.Shared.Forging;
 
 /// <summary>
