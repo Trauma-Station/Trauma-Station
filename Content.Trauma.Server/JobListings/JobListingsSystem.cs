@@ -100,7 +100,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         ent.Comp.AvailableSideJobsContainer = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.AvailableSideJobsContainerId);
         if(!_ui.HasUi(ent.Owner, JobListingsUiKey.Key))
-            _ui.SetUi(ent.Owner, JobListingsUiKey.Key, new InterfaceData("JobListingsBoundUserInterface"));
+            _ui.SetUi(ent.Owner, JobListingsUiKey.Key, new InterfaceData("JobListingsBoundUserInterface", -1));
     }
 
     private void OnStoreInitialised(ref StoreInitializedEvent args)
