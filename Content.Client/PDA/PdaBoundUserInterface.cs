@@ -1,8 +1,10 @@
+// <Trauma>
+using Content.Trauma.Common.JobListings;
+// </Trauma>
 using Content.Client.CartridgeLoader;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.PDA;
-using Content.Trauma.Common.JobListings;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
