@@ -639,7 +639,7 @@
 
 - type: entity
   name: garlic
-  parent: FoodProduceBase
+  parent: [Garlic, FoodProduceBase] # Trauma - Added Garlic parent
   id: FoodGarlic
   description: Delicious, but with a potentially overwhelming odor.
   components:

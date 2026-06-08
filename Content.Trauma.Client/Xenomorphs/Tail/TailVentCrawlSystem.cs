@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpaceWhale;
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.VentCrawling.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Xenomorphs.Tail;
 
 public sealed partial class TailVentCrawlSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
 
     public override void Initialize()
     {
@@ -20,19 +20,25 @@ public sealed partial class TailVentCrawlSystem : EntitySystem
 
     private void OnStartVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp<TailedEntityComponent>(ent, out var tailed))
-            return;
-
-        foreach (var segment in tailed.TailSegments)
-            _sprite.SetVisible(GetEntity(segment.Segment), false);
+        UpdateTailVisibility(ent, 0f);
     }
 
     private void OnStopVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentRemove args)
     {
-        if (!TryComp<TailedEntityComponent>(ent, out var tailed))
+        UpdateTailVisibility(ent, 1f);
+    }
+
+    private void UpdateTailVisibility(EntityUid uid, float alpha)
+    {
+        if (!TryComp(uid, out TailedEntityComponent? comp))
             return;
 
-        foreach (var segment in tailed.TailSegments)
-            _sprite.SetVisible(GetEntity(segment.Segment), true);
+        foreach (var data in comp.TailSegments)
+        {
+            if (!TryGetEntity(data.Segment, out var ent))
+                continue;
+
+            _spriteVis.UpdateVisibilityModifiers(ent.Value, nameof(BeingVentCrawlerComponent), alpha);
+        }
     }
 }

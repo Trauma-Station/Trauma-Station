@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/blob/72610bb4a19340785956715b3549856944c5bfe9/icons/mob/actions/actions.dmi",
+    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/blob/72610bb4a19340785956715b3549856944c5bfe9/icons/mob/actions/actions.dmi, lair and lair_tp drawn by @Lumminal (Github)",
     "size": {
         "x": 32,
         "y": 32
@@ -102,6 +102,12 @@
         },
         {
             "name": "demonic_grasp"
+        },
+        {
+            "name": "lair"
+        },
+        {
+            "name": "lair_tp"
         }
     ]
 }

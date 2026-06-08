@@ -74,6 +74,7 @@
       - id: SummoningRuneDemon64Fat
       - id: SummoningRuneDemon64Buff
       - id: SummoningRuneDemon64
+      - id: SummoningRuneCentifiend
 
 - type: entity
   parent: MarkerBase
@@ -89,6 +90,7 @@
       - id: SummoningRuneDemon64FatTame
       - id: SummoningRuneDemon64BuffTame
       - id: SummoningRuneDemon64Tame
+      - id: SummoningRuneCentifiendTame
 
 # Major
 

@@ -1,25 +1,29 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class HereticCombatMarkComponent : BaseSpriteOverlayComponent
 {
     [DataField, AutoNetworkedField]
     public HereticPath Path = HereticPath.Blade;
 
     [DataField]
-    public float MaxDisappearTime = 15f;
+    public TimeSpan MaxDisappearTime = TimeSpan.FromSeconds(15);
 
     [DataField]
-    public float DisappearTime = 15f;
+    public TimeSpan DisappearTime = TimeSpan.FromSeconds(15);
 
     [DataField]
     public int Repetitions = 1;
 
-    public TimeSpan Timer = TimeSpan.Zero;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
+    public TimeSpan NextDisappear;
 
     [DataField]
     public SoundSpecifier? TriggerSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/repulse.ogg");

@@ -13,6 +13,13 @@
     - ActionVampireGlare
 
 - type: vampireAbility
+  id: CreateLair
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionCreateLair
+
+- type: vampireAbility
   id: RejuvenateII
   blacklistClass: Gargantua # they get their own rej where it heals based on damage as "passive" once they spec
   cost: 200
@@ -61,6 +68,7 @@
     - type: AreaDetector
     - type: WeakToHoly
     - type: Nullification
+    - type: AlwaysTakeHoly
   - !type:PopupPredicted
     message: You have reached full power!
     visualType: Large

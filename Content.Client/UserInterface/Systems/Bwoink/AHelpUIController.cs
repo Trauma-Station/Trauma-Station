@@ -104,7 +104,7 @@ public sealed partial class AHelpUIController: UIController, IOnSystemChanged<Bw
         _bwoinkSystem.OnBwoinkTextMessageRecieved += ReceivedBwoink;
 
         _input.SetInputCommand(ContentKeyFunctions.OpenAHelp,
-            InputCmdHandler.FromDelegate(_ => ToggleWindow()));
+            InputCmdHandler.FromDelegate(_ => OnLoad?.Invoke(this))); // Trauma - Changed to open staff help
     }
 
     public void OnSystemUnloaded(BwoinkSystem system)

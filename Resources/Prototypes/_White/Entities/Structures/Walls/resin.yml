@@ -4,6 +4,8 @@
   name: resin wall
   description: Thick resin solidified into a wall.
   components:
+  - type: SoundBlocker
+    soundBlockPercent: 1.0
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_resin_wall.rsi # Goobstation new sprites
   - type: Icon

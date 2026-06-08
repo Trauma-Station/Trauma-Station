@@ -200,6 +200,7 @@
             Poison:
               0.5
       - !type:EvenHealthChange
+        scaling: false
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plasmaman ]

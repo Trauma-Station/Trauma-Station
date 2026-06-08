@@ -32,11 +32,17 @@
               sound:
                 collection: MetalBreak
     - type: Parry
-      maxParries: 3
-      maxReflects: 0
-      parryMinSkill: 30
+      maxParries: 4
       soundOnParry:
         path: /Audio/Weapons/pierce.ogg
-        params:
-          variation: 0.2
-          volume: -11
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 10
+    - type: StaminaDamageOnHit
+      damage: 15
+    - type: MeleeThrowOnHit
+      distance: 1

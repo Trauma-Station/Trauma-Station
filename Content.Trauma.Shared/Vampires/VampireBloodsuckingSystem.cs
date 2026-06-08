@@ -13,6 +13,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Vampires;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -116,7 +117,7 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         Dirty(target, drainable);
 
         // Notify anyone, for example Vampires to update their blood pools
-        var ev = new BloodsuckingSuccessEvent(bloodInt);
+        var ev = new BloodsuckingSuccessEvent(bloodInt, target);
         RaiseLocalEvent(user, ref ev);
 
         _popup.PopupClient("You drain the life force out of them...", user, user, PopupType.MediumCaution);
@@ -157,12 +158,13 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
             Dirty(ent);
         }
     }
+    #endregion
 
     /// <summary>
     /// Checks whether an entity can do a blood sucking sequence.
     /// </summary>
     /// <returns></returns>
-    private bool CanBloodSuck(EntityUid user)
+    public bool CanBloodSuck(EntityUid user)
     {
         // Our current selected hand must be empty for this to work.
         if (!_hands.ActiveHandIsEmpty(user) || _mobState.IsCritical(user))
@@ -175,5 +177,23 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
 
         return true;
     }
-    #endregion
 }
+
+/// <summary>
+/// Raised on the <see cref="VampireBloodsuckingComponent"/> entity, after the bloodsucking process starts.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class BloodSuckDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// Raised on the entity that does the bloodsucking sequence, and it passes.
+/// </summary>
+/// <param name="BloodRemoved"></param>The blood that was removed from the target during the bloodsucking sequence.
+[ByRefEvent]
+public record struct BloodsuckingSuccessEvent(int BloodRemoved, EntityUid TargetSucked);
+
+/// <summary>
+/// Raised on the target to validate whether they can be drained of their blood.
+/// </summary>
+[ByRefEvent]
+public record struct BloodsuckingAttemptEvent(bool Cancelled = false);

@@ -10,6 +10,17 @@
 
 - type: entity
   parent: BaseSkillChip
+  id: SkillChipBrigmedic
+  name: skill chip (brigmedic)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      FirstAidKnowledge: 50
+      SurgeryKnowledge: 26
+      ShootingKnowledge: 26
+
+- type: entity
+  parent: BaseSkillChip
   id: SkillChipDetective
   name: skill chip (detective)
   components:

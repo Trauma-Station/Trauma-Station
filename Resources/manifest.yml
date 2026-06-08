@@ -7,8 +7,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-defaultWindowTitle: Space Station 14
-windowIconSet: /Textures/Logo/icon
-splashLogo: /Textures/Logo/logo.png
+defaultWindowTitle: R.O.N. Station
+windowIconSet: /Textures/_Ronstation/Logo/icon
+splashLogo: /Textures/_Ronstation/Logo/logo.png
 
 # PJB PLEASE

@@ -738,6 +738,7 @@
   description: A comfy coffin, excellent place for the vampires and corpses.
   components:
   # <Trauma>
+  - type: VampireLair
   - type: EffectsOnContainer
     inserted:
     - !type:ModifyStatusEffect
@@ -748,10 +749,6 @@
       effectProto: VampireCoffinStatusEffect
       time: null
       type: Remove
-    #- !type:SpawnParticles TODO: find sound and make it into entityEffect with vampire whitelist
-    #  particleProto: VampireCoffinExit
-    #- !type:PlaySoundEffect
-    #  sound: "/Audio/_Goobstation/Heretic/piano_hit.ogg"
   # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/Crates/coffin.rsi

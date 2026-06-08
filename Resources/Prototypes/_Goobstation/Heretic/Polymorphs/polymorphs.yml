@@ -100,6 +100,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftHonkBot
@@ -115,6 +116,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftAdultSlimesBlue
@@ -130,6 +132,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftBat
@@ -145,6 +148,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftMothroach
@@ -160,6 +164,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftCrab
@@ -175,6 +180,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftGoose
@@ -190,6 +196,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftLizard
@@ -205,6 +212,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftParrot
@@ -220,6 +228,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftGiantSpider
@@ -235,6 +244,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftFox
@@ -250,6 +260,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftCorgi
@@ -265,6 +276,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftCat
@@ -280,6 +292,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftHamster
@@ -295,6 +308,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftCarp
@@ -310,6 +324,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftBingle
@@ -325,6 +340,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftLaserRaptor
@@ -340,6 +356,7 @@
     - component: LanguageSpeaker
     - component: Grammar
     - component: Ghoul
+    - component: HereticMinion
 
 - type: polymorph
   id: ShapeshiftStalkerLock

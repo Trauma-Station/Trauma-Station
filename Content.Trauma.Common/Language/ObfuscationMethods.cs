@@ -41,6 +41,12 @@ public partial class ReplacementObfuscation : ObfuscationMethod
 
     public override void Obfuscate(StringBuilder builder, string message, CommonLanguageSystem context, float ratio = 1.0f)
     {
+        if (context.PseudoRandomNumber(message.GetHashCode() + 1337, 0, 1000) >= (ratio * 1000))
+        {
+            builder.Append(message);
+            return;
+        }
+
         var idx = context.PseudoRandomNumber(message.GetHashCode(), 0, Replacement.Count - 1);
         builder.Append(Replacement[idx]);
     }

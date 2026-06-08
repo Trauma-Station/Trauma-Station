@@ -17,7 +17,7 @@
   Vampires are unable to sustain themselves off of anything other than blood and if the amount of blood staving off hunger needs runs out, a vampire will starve to death.
 
   The usable blood pool is what is consumed when vampires use special powers and as the total usable blood gathered during the round rises, it unlocks more abilities for the vampire.
-  Vampires can feed themselves off any humanoid (not monkeys), but usable blood is only gatherable from sentient (ones with a mind) humanoids.
+  Vampires can feed themselves off any humanoid, but usable blood is only gatherable from sentient (ones with a mind) humanoids.
 
   When starting out as a Vampire one will have zero usable blood and in order to gain usable blood, a vampire will have to drain a player.
   Once a crew member is captured then one will have to target the humanoid's head on harm mode with an empty hand.
@@ -30,9 +30,17 @@
   <Box>
     <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="vampire_glare"/>
     <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="vampire_rejuvinate"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="lair"/>
   </Box>
 
-  Vampires will start with two powers: Glare and Rejuvenate. Using Glare can stun and silence, with the effect varying depending on if you are facing the target, and Rejuvenate will clear all stuns.
+  Vampires will start with three powers: Glare, Rejuvenate and Create Lair. Using Glare can stun and silence, with the effect varying depending on if you are facing the target, and Rejuvenate will clear all stuns.
+
+  The lair ability can be used on any coffin to make it your lair, however only one can be made during the round so don't waste it. The lair ability will be removed and replaced with a "Teleport to Lair" one.
+  After you make a lair, a rune based on your blood color will manifest on the ground. That specific coffin will now give you extra healing on most types of damage, while you stay inside of it.
+  You may use your "Teleport to Lair" ability once you are critical or dead to teleport to your lair, but be considerate of its lengthy cooldown.
+
+  The lair itself can be destroyed [bold]only[/bold] with heat damage (e.g. lasers) and most importantly, fire. Once it starts taking damage, you will be notified via a popup.
+  Once it gets destroyed, you will be unable to teleport to it for the rest of the round.
 
   ## Classes
 

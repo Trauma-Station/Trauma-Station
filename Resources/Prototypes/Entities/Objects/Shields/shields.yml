@@ -10,6 +10,41 @@
       malus: 1
     - type: CosmicTransmutable
       transmuteTo: ShieldCosmicCult
+    - type: Parry
+      maxParries: 3
+      maxReflects: 0
+      parryMinSkill: 30
+      reflectMinSkill: 30
+      soundOnParry:
+        path: /Audio/Weapons/block_metal1.ogg
+        params:
+          variation: 0.2
+          volume: -11
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/ric4.ogg
+        params:
+          variation: 0.2
+          volume: -11
+    - type: HeldSpeedModifier
+      walkModifier: 0.8
+      sprintModifier: 0.8
+    - type: MeleeWeapon
+      wideAnimationRotation: -135
+      attackRate: 0.5
+      damage:
+        types:
+          Blunt: 8
+      soundHit:
+        collection: MetalThud
+      animation: WeaponArcFist
+      heavyStaminaCost: 10
+    - type: StaminaDamageOnHit
+      damage: 10
+    - type: FlashSoundSuppression
+      protectionRange: 2
+    - type: MeleeThrowOnHit
+      distance: 0.5
+      speed: 2
     # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/shields.rsi
@@ -99,12 +134,16 @@
     - type: Parry
       maxParries: 5
       maxReflects: 0
-      parryMinSkill: 30
-      soundOnParry:
-        path: /Audio/Weapons/block_metal1.ogg
-        params:
-          variation: 0.2
-          volume: -11
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 12
+    - type: StaminaDamageOnHit
+      damage: 20
+    - type: FlashSoundSuppression
+      protectionRange: 1
+    - type: MeleeThrowOnHit
+      distance: 1
     # </Trauma>
     - type: StaticPrice
       price: 90
@@ -131,15 +170,13 @@
     - type: Parry
       maxParries: 0
       maxReflects: 5
-      reflectMinSkill: 30
       soundOnReflect:
         path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
-        params:
-          variation: 0.2
-          volume: -11
       reflectSpread: 300
       reflects:
       - Energy
+    - type: FlashSoundSuppression
+      protectionRange: 1
     # </Trauma>
     - type: Sprite
       state: riot_laser-icon
@@ -165,15 +202,19 @@
     - type: Parry
       maxParries: 0
       maxReflects: 5
-      reflectMinSkill: 30
-      soundOnReflect:
-        path: /Audio/Weapons/Guns/Hits/ric4.ogg
-        params:
-          variation: 0.2
-          volume: -11
       reflectSpread: 300
       reflects:
       - NonEnergy
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 10
+    - type: MeleeThrowOnHit
+      distance: 1
     # </Trauma>
     - type: Sprite
       sprite: _Goobstation/Objects/Shields/riotbulletshield.rsi # Trauma
@@ -199,6 +240,21 @@
   id: WoodenBuckler
   description: A small round wooden makeshift shield.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 2
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 5
+    - type: StaminaDamageOnHit
+      damage: 5
+    - type: FlashSoundSuppression
+      protectionRange: 3
+    # </Trauma>
     - type: Sprite
       state: buckler-icon
     - type: Item
@@ -259,17 +315,22 @@
       maxParries: 1
       maxReflects: 0
       parryMinSkill: 0
+      reflectMinSkill: 0
       soundOnParry:
         path: /Audio/Items/Toys/card_tube_bonk.ogg
-        params:
-          variation: 0.2
-          volume: -11
     - type: PhysicalComposition
       materialComposition:
         Cardboard: 300
     - type: Tag
       tags:
       - Trash
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 1
+    - type: StaminaDamageOnHit
+      damage: 1
     # </Trauma>
     - type: Sprite
       state: cardshield-icon
@@ -330,6 +391,19 @@
   id: MakeshiftShield
   description: A rundown looking shield, not good for much.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 1
+      maxReflects: 1
+    - type: PhysicalComposition
+      materialComposition:
+        Steel: 250
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+    # </Trauma>
     - type: Tag #goobstation
       tags:
        - MakeshiftShield
@@ -355,7 +429,7 @@
           Blunt: 0.5
           Slash: 0.5
           Piercing: 0.5
-          Heat: 1
+          Heat: 0.7 # Trauma - was 1
     - type: Construction
       graph: MakeshiftShield
       node: makeshiftShield
@@ -363,13 +437,13 @@
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 40
+            damage: 50 # Trauma - was 40
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 20 #Very weak shield
+            damage: 25 # Trauma - was 20
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -381,26 +455,6 @@
                 SheetSteel:
                   min: 1
                   max: 2
-    # <Trauma>
-    - type: Parry
-      maxParries: 1
-      maxReflects: 1
-      parryMinSkill: 30
-      reflectMinSkill: 30
-      soundOnParry:
-        path: /Audio/Weapons/block_metal1.ogg
-        params:
-          variation: 0.2
-          volume: -11
-      soundOnReflect:
-        path: /Audio/Weapons/Guns/Hits/ric4.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    - type: PhysicalComposition
-      materialComposition:
-        Steel: 250
-    # </Trauma>
 
 - type: entity
   name: web shield
@@ -408,6 +462,21 @@
   id: WebShield
   description: A stringy shield. It's weak, and doesn't seem to do well against heat.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 1
+      maxReflects: 0
+      soundOnParry:
+        path: /Audio/Weapons/slash.ogg
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 5
+    - type: FlashSoundSuppression
+      protectionRange: 3
+    - type: StaminaDamageOnHit
+      damage: 5
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Melee/web-shield.rsi
       state: icon
@@ -454,17 +523,7 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: WoodDestroy
-    # <Trauma>
-    - type: Parry
-      maxParries: 1
-      maxReflects: 0
-      parryMinSkill: 30
-      soundOnParry:
-        path: /Audio/Weapons/slash.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    # </Trauma>
+
 #Magic/Cult Shields (give these to wizard for now)
 
 - type: entity
@@ -473,6 +532,20 @@
   id: ClockworkShield
   description: Ratvar oyrffrf lbh jvgu uvf cebgrpgvba.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 5
+      maxReflects: 0
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 10
+    - type: ReflectiveSurface
+    # </Trauma>
     - type: Sprite
       state: ratvarian-icon
     - type: Item
@@ -495,17 +568,6 @@
           Slash: 1
           Piercing: 1
       #Have it break into brass when clock cult is in
-    # <Trauma>
-    - type: Parry
-      maxParries: 5
-      maxReflects: 0
-      parryMinSkill: 30
-      soundOnParry:
-        path: /Audio/Weapons/block_metal1.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    # </Trauma>
 
 - type: entity
   name: mirror shield
@@ -513,6 +575,22 @@
   id: MirrorShield
   description: Eerily glows red... you hear the geometer whispering
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 0
+      maxReflects: 20
+      reflectMinSkill: 0
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+      reflectSpread: 300
+      reflects:
+        - Energy
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Slash: 10
+    # </Trauma>
     - type: Sprite
       state: mirror-icon
     - type: Item
@@ -554,28 +632,42 @@
                 SheetGlass:
                   min: 5
                   max: 5
-    - type: ReflectiveSurface # Goob
-    # <Trauma>
-    - type: Parry
-      maxParries: 0
-      maxReflects: 20
-      reflectMinSkill: 0
-      soundOnReflect:
-        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
-        params:
-          variation: 0.2
-          volume: -11
-      reflectSpread: 300
-      reflects:
-      - Energy
-    # </Trauma>
 
 - type: entity
   name: energy shield
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseShield, BaseSyndicateContraband] # Trauma - was BaseItem, instead of BaseShield
   id: EnergyShield
   description: Exotic energy shield, when folded, can even fit in your pocket.
   components:
+    # <Trauma>
+    - type: Parry
+      reflects:
+        - energy
+      maxParries: 0
+      maxReflects: 10
+      reflectMinSkill: 50
+      reflectSpread: 300
+      soundOnReflect:
+        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+    - type: HeldSpeedModifier
+      walkModifier: 0.9
+      sprintModifier: 0.9
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Heat: 10
+    - type: StaminaDamageOnHit
+      damage: 15
+    - type: Battery
+      maxCharge: 35
+      startingCharge: 35
+    - type: BatterySelfRecharger
+      autoRechargeRate: 2
+    - type: RechargeableBlocking
+      dischargedRechargeRate: 2
+      chargedRechargeRate: 3
+    # </Trauma>
     - type: ItemToggle
       predictable: false # WD EDIT
       soundActivate:
@@ -658,31 +750,6 @@
     # Trauma - removed Destructible
     - type: StaticPrice
       price: 350
-      # WD EDIT START
-    - type: Battery
-      maxCharge: 35
-      startingCharge: 35
-    - type: BatterySelfRecharger
-      autoRechargeRate: 2
-    - type: RechargeableBlocking
-      dischargedRechargeRate: 2
-      chargedRechargeRate: 3
-      # WD EDIT END
-    # <Trauma>
-    - type: Parry
-      reflects:
-      - energy
-      maxReflects: 10
-      reflectMinSkill: 50
-      maxParries: 0
-      reflectSpread: 300
-      soundOnReflect:
-        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    # </Trauma>
-
 
 - type: entity
   name: broken energy shield
@@ -704,6 +771,15 @@
   id: TelescopicShield
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:
+    # <Trauma>
+    - type: Parry
+      maxParries: 5
+    - type: MeleeWeapon
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 10
+    # </Trauma>
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
@@ -750,7 +826,7 @@
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 50 # Trauma, was 70
+            damage: 50 # Trauma - was 70
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -767,14 +843,3 @@
                   max: 2
     - type: StaticPrice
       price: 150
-    # <Trauma>
-    - type: Parry
-      maxParries: 5
-      maxReflects: 0
-      parryMinSkill: 30
-      soundOnParry:
-        path: /Audio/Weapons/block_metal1.ogg
-        params:
-          variation: 0.2
-          volume: -11
-    # </Trauma>

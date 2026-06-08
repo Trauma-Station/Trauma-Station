@@ -1,3 +1,13 @@
+- type: listing
+  id: AccessConfiguratorSyndicate
+  name: uplink-syndicate-access-config-name
+  description: uplink-syndicate-access-config-desc
+  productEntity: AccessConfiguratorSyndicate
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkDisruption
+
 # upstream removed it lol
 - type: listing
   id: UplinkSuperSurplusBundle
@@ -19,13 +29,3 @@
     blacklist:
       components:
       - SurplusBundle
-
-- type: listing
-  id: AccessConfiguratorSyndicate
-  name: uplink-syndicate-access-config-name
-  description: uplink-syndicate-access-config-desc
-  productEntity: AccessConfiguratorSyndicate
-  cost:
-    Telecrystal: 10
-  categories:
-  - UplinkDisruption

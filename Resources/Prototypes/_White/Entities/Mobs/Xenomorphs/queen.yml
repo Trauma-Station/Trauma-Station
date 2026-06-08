@@ -74,21 +74,12 @@
   #   - XenomorphQueen
 
 - type: entity
-  parent: BaseMobXenomorphQueen
+  parent: [ BaseMobXenomorphQueen, BaseXenomorphGhostRole ]
   id: MobXenomorphQueen
   components:
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-queen-name
     description: ghost-role-information-xenomorph-queen-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphQueen]

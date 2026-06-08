@@ -7,6 +7,8 @@
     objectives:
     - XenomorphSurviveObjective
   - type: XenomorphsRule
+    minTimeToAnnouncement: 900
+    maxTimeToAnnouncement: 900
     xenomorphInfestationSound:
       collection: XenoStart
   - type: MaintsSpawnRule
@@ -20,7 +22,7 @@
   id: XenomorphsInfestationRoundstart
   components:
   - type: GameRule
-    minPlayers: 30
+    minPlayers: 40
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
