@@ -248,7 +248,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         var xform = Transform(ent);
         outPos = new EntityCoordinates();
 
-        if (xform.GridUid is not {} gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
         {
             _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-grid"), ent, ent);
             return false;

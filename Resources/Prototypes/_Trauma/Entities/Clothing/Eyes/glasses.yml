@@ -32,16 +32,3 @@
       OrganDamage: 0.13
       BoneDamage: 0.13
       VeinsDamage: 0
-
-- type: entity
-  parent: [ ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, BaseSecurityContraband, ClothingEyesGlassesSunglasses ]
-  id: ClothingEyesGlassesAdvisor
-  name: security advisor glasses
-  description: Nanotrasen approved sunglasses.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Clothing/Eyes/Glasses/advisor.rsi
-  - type: Clothing
-    sprite: _Trauma/Clothing/Eyes/Glasses/advisor.rsi
-  - type: ShowJobIcons
-  - type: ShowMindShieldIcons

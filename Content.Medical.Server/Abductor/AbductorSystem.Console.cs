@@ -82,7 +82,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         };
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            Log.Error("Failed to start attract doafter for {ToPrettyString(target)} by {ToPrettyString(user)} with {ToPrettyString(ent)}!");
+            Log.Error($"Failed to start attract doafter for {ToPrettyString(target)} by {ToPrettyString(user)} with {ToPrettyString(ent)}!");
             return;
         }
 

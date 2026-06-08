@@ -83,12 +83,3 @@
       reagents:
       - ReagentId: Holywater
         Quantity: 1200
-
-- type: entity
-  parent: [ ClothingBackpack, BaseSecurityContraband ]
-  id: ClothingBackpackAdvisor
-  name: security advisor backpack
-  description: A very patriotic looking backpack.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Clothing/Back/Backpacks/advisor.rsi
