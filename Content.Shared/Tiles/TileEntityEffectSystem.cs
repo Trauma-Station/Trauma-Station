@@ -4,7 +4,7 @@ using Content.Shared.EntityConditions;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.EntityEffects;
 
-namespace Content.Server.Tiles;
+namespace Content.Shared.Tiles; // Trauma - moved to shared
 
 public sealed partial class TileEntityEffectSystem : EntitySystem
 {

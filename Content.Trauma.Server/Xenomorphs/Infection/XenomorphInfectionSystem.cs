@@ -87,7 +87,7 @@ public sealed partial class XenomorphInfectionSystem : EntitySystem
 
             if (infection.Effects.TryGetValue(infection.GrowthStage, out var effects))
             {
-                _effects.ApplyEffects(infection.Infected.Value, effects);
+                _effects.ApplyEffects(infection.Infected.Value, effects, predicted: false);
             }
 
             if (infection.GrowthStage < infection.MaxGrowthStage)

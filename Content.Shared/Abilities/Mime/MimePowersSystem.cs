@@ -108,7 +108,7 @@ public sealed partial class MimePowersSystem : EntitySystem
         _popupSystem.PopupPredicted(messageSelf, messageOthers, ent, ent);
 
         // Make sure we set the invisible wall to despawn properly
-        PredictedSpawnAttachedTo(ent.Comp.WallPrototype, _turf.GetTileCenter(tile.Value)); // Goob edit
+        PredictedSpawnAttachedTo(ent.Comp.WallPrototype, _turf.GetTileCenter(tile.Value)); // Trauma - AttachedTo instead of AtPosition
         // Handle args so cooldown works
         args.Handled = true;
     }

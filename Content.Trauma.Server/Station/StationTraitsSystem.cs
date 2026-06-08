@@ -72,7 +72,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
             try
             {
                 if (trait.Effects is { } effects)
-                    _effects.ApplyEffects(ent, effects);
+                    _effects.ApplyEffects(ent, effects, predicted: false);
             }
             catch (Exception e)
             {
@@ -129,7 +129,7 @@ public sealed partial class StationTraitsSystem : EntitySystem
 
             try
             {
-                _effects.ApplyEffects(station, effects);
+                _effects.ApplyEffects(station, effects, predicted: false);
             }
             catch (Exception e)
             {

@@ -20,15 +20,6 @@ public sealed partial class PlaySoundEffect : EntityEffectBase<PlaySoundEffect>
     /// </summary>
     [DataField]
     public bool Positional = true;
-
-    /// <summary>
-    /// Whether to use predicted methods, or not.
-    /// </summary>
-    [DataField]
-    public bool Predicted = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // idc
 }
 
 public sealed partial class PlaySoundEffectSystem : EntityEffectSystem<TransformComponent, PlaySoundEffect>
@@ -37,7 +28,7 @@ public sealed partial class PlaySoundEffectSystem : EntityEffectSystem<Transform
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PlaySoundEffect> args)
     {
-        var predicted = args.Effect.Predicted;
+        var predicted = args.Predicted;
         var sound = args.Effect.Sound;
         var user = args.User ?? ent.Owner; // only predicted for debug effect stick etc where there is a clear user
 
