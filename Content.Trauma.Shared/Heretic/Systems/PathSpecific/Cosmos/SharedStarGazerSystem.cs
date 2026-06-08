@@ -34,7 +34,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedStarMarkSystem _starMark = default!;
 
-    protected const string JointId = "stargaze";
+    public const string JointId = "stargaze";
 
     public override void Initialize()
     {
