@@ -409,3 +409,60 @@
   - type: PhysicalComposition
     materialComposition:
       Silver: 250
+
+# Adamantine - 2050K -+ 50K range of error
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicAdamantine
+  id: AdamantineOverheatable
+  components:
+  - type: BurnableFood
+    burnTemp: 2200
+    burnedFoodPrototype: OverheatedAdamantine
+    burnedPrefix: heated-name-text
+    burnSound: null
+
+- type: entity
+  parent: [ BaseForgeItem, AdamantineOverheatable ]
+  id: AdamantineScraps
+  name: adamantine scraps
+  description: Fragments of a once great work of craftsdwarfship, with a great deal of heat it could become workable again.
+  components:
+  - type: Tag
+    tags:
+    - AdamantineScraps
+  - type: Sprite
+    layers:
+    - state: adamantine
+      shader: Emissive
+  - type: Workable
+    remaining: 500 # bring an army, you'll need it
+    result: AdamantineIngot
+
+- type: entity
+  parent: [ BaseForgeItem, BaseMetallicAdamantine ]
+  id: OverheatedAdamantine
+  name: overheated adamantine
+  description: The metal has overheated and lost it's shape, could be worked again if brought to the right temperature.
+  components:
+  - type: Sprite
+    layers:
+    - state: bloomadamantine # not using the overheated version because it doesn't need to be smashed
+      shader: Emissive
+  - type: Temperature
+    currentTemperature: 2200
+  - type: Workable
+    remaining: 500 # bring an army, you'll need it
+    result: AdamantineIngot
+
+- type: entity
+  parent: [ BaseWorkableAdamantine, BaseMetalIngot, AdamantineOverheatable ]
+  id: AdamantineIngot
+  name: adamantine ingot
+  description: A metal that is written about more often than it is seen, requires extreme heat to be workable.
+  components:
+  - type: Sprite
+    layers:
+    - state: ingot_adamantine
+      shader: Emissive

@@ -9887,3 +9887,21 @@ Entries:
   id: 1122
   time: '2026-06-07T23:11:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3096
+- author: Speebro, Deltanedas
+  changes:
+  - type: Add
+    message: Added adamantine to forging, you should probably bring a friend.
+  - type: Tweak
+    message: >-
+      Increased ingot costs on most non-knife forged weapons, except for
+      morningstars.
+  - type: Tweak
+    message: >-
+      Forged items will now break if you damage them 2x the amount required to
+      forge them, before completing forging. Use blunt, don't strike while it's
+      too cold, simple as.
+  - type: Fix
+    message: Forged wrench sprite is complete
+  id: 1123
+  time: '2026-06-08T01:57:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3040
