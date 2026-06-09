@@ -79,6 +79,7 @@
   finished: ForgedSword
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/sword_blade.rsi
   work: 150
+  cost: 2
 
 - type: forgedItem
   parent: BaseSword
@@ -87,7 +88,7 @@
   finished: ForgedLongsword
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/longsword_blade.rsi
   work: 200
-  cost: 2
+  cost: 3
 
 - type: forgedItem
   parent: BaseSword
@@ -96,4 +97,4 @@
   finished: ForgedKatana
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/thin_blade.rsi
   work: 220 # while they were out partying, i mastered the blade
-  cost: 2
+  cost: 3 # a good katana is... too good at removing heads, at least make it expensive

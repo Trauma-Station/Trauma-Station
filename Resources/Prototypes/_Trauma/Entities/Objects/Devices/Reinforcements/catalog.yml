@@ -9,12 +9,12 @@
     sprite: Markers/jobs.rsi
     state: detective
   cost:
-    Spesos: 3000
+    Spesos: 5000
   categories:
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 600
 
 - type: listing
   id: SecoffReinforcement
@@ -30,7 +30,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60 # 1 minute, might not keep
+  restockAfterPurchase: 60
 
 - type: listing
   id: SecoffReinforcementExpress
@@ -62,7 +62,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 300
 
 - type: listing
   id: SecoffReinforcementSpecialistRiotMelee
@@ -78,7 +78,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 300
 
 - type: listing
   id: SecoffReinforcementSpecialistRiotRanged
@@ -94,7 +94,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 300
 
 - type: listing
   id: SecoffReinforcementSpecialistHeavyLaser
@@ -110,7 +110,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 600
 
 - type: listing
   id: SecoffReinforcementSpecialistShield
@@ -126,45 +126,13 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 300
 
 - type: listing
-  id: SecoffReinforcementSpecialistBodyguard
-  name: reinforcement-sec-specialist-bodyguard-name
-  description: reinforcement-sec-specialist-bodyguard-desc
-  productEntity: ReinforcementBeaconSpecialistOfficerBodyguard
-  icon:
-    sprite: Markers/jobs.rsi
-    state: security_officer
-  cost:
-    Spesos: 15000
-  categories:
-  - ReinforcementsHoS
-  restockTime: 0
-  resetRestockOnPurchase: true
-  restockAfterPurchase: 60
-
-- type: listing
-  id: SecoffReinforcementSpecialistAdvisor
-  name: reinforcement-sec-specialist-advisor-name
-  description: reinforcement-sec-specialist-advisor-desc
-  productEntity: ReinforcementBeaconSpecialistOfficerAdvisor
-  icon:
-    sprite: Markers/jobs.rsi
-    state: security_officer
-  cost:
-    Spesos: 15000
-  categories:
-  - ReinforcementsHoS
-  restockTime: 0
-  resetRestockOnPurchase: true
-  restockAfterPurchase: 60
-
-- type: listing
-  id: SecoffReinforcementSpecialistCorpsman
-  name: reinforcement-sec-specialist-corpsman-name
-  description: reinforcement-sec-specialist-corpsman-desc
-  productEntity: ReinforcementBeaconSpecialistOfficerCorpsman
+  id: SecoffReinforcementSpecialistBrigmedic
+  name: reinforcement-sec-specialist-brigmedic-name
+  description: reinforcement-sec-specialist-brigmedic-desc
+  productEntity: ReinforcementBeaconSpecialistOfficerBrigmedic
   icon:
     sprite: Markers/jobs.rsi
     state: brigmedic
@@ -174,7 +142,7 @@
   - ReinforcementsHoS
   restockTime: 0
   resetRestockOnPurchase: true
-  restockAfterPurchase: 60
+  restockAfterPurchase: 900
 
 - type: listing
   id: ReinforcementCadet

@@ -25,6 +25,7 @@
       reagents:
       - ReagentId: Cement
         Quantity: 200
+      maxVol: 200
 
 - type: entity
   parent: BaseItem

@@ -82,6 +82,16 @@
     minTemp: 813
     idealTemp: 893
 
+- type: entity
+  abstract: true
+  parent: BaseMetallic
+  id: BaseMetallicAdamantine
+  components:
+  - type: Metallic
+    metal: Adamantine
+    minTemp: 1975
+    idealTemp: 2025
+
 # Workable, already above ideal temp
 
 - type: entity
@@ -133,3 +143,13 @@
     workable: true
   - type: Temperature
     currentTemperature: 973
+
+- type: entity
+  abstract: true
+  parent: BaseMetallicAdamantine
+  id: BaseWorkableAdamantine
+  components:
+  - type: Metallic
+    workable: true
+  - type: Temperature
+    currentTemperature: 2050

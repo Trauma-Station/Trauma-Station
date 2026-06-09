@@ -1,0 +1,26 @@
+- type: entity
+  parent: CrateEngineering
+  id: CrateCement
+  name: cement crate
+  description: A crate containing 3 cement bags.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: ReagentContainerCement
+        amount: 3
+
+- type: entity
+  parent: CrateEngineeringSecure
+  id: CrateSkillChipsEngi
+  name: engineering skillchips crate
+  description: A crate containing engineering skillchips. Requires engineering access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SkillChipAtmosphericTechnician
+        - id: SkillChipStationEngineer
+        - id: SkillChipTechnicalAssistant
+          amount: 3

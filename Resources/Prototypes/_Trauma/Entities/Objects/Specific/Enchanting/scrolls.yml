@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: BasePaper
   id: BaseEnchantingScroll
   name: enchanted scroll
   description: A scroll embuded with an enchantment. Could do any number of things.
@@ -15,6 +15,8 @@
       shader: Enchant
   - type: Item
     size: Small
+  - type: Tag
+    tags: [] # no faxing it etc
   - type: GuideHelp
     guides:
     - Enchanting

@@ -135,7 +135,7 @@ public sealed partial class ChampionHookSystem : EntitySystem
         if (ent.Comp.HookedMob == null || args.Weapon == ent.Comp.Weapon ||
             !HasComp<HereticBladeComponent>(args.Weapon) ||
             !_heretic.TryGetHereticComponent(ent.Owner, out var heretic, out _) || heretic is not
-                { PathStage: >= 7, CurrentPath: HereticPath.Blade } ||
+            { PathStage: >= 7, CurrentPath: HereticPath.Blade } ||
             !TryComp(args.Weapon, out MeleeWeaponComponent? weapon))
             return;
 

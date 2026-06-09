@@ -7,7 +7,6 @@ using Content.Trauma.Client.Viewcone.ComponentTree;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Viewcone.Overlays;
@@ -31,7 +30,6 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
     private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery;
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
-    private readonly EntityQuery<ViewconeClientOverrideComponent> _overrideQuery;
     private readonly EntityQuery<ViewconeOccludedComponent> _occludedQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
@@ -48,13 +46,12 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
         _meta = _ent.System<MetaDataSystem>();
         _container = _ent.System<SharedContainerSystem>();
         _sprite = _ent.System<SpriteSystem>();
-        _xform  = _ent.System<TransformSystem>();
+        _xform = _ent.System<TransformSystem>();
         _cone = _ent.System<ViewconeOverlaySystem>();
         _tree = _ent.System<ViewconeOcclusionSystem>();
 
         _humanoidQuery = _ent.GetEntityQuery<HumanoidProfileComponent>();
         _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
-        _overrideQuery = _ent.GetEntityQuery<ViewconeClientOverrideComponent>();
         _occludedQuery = _ent.GetEntityQuery<ViewconeOccludedComponent>();
     }
 
@@ -99,7 +96,6 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
         var halfAngle = radConeAngle * 0.5f;
         var radConeFeather = MathHelper.DegreesToRadians(cone.ConeFeather);
 
-        _cone.CachedBaseAlphas.Clear();
         var occludables = _tree.QueryAabb(args.MapId, args.WorldBounds);
         var fadeTime = cone.FadeTime.TotalSeconds;
         var now = _timing.CurTime;
@@ -109,7 +105,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             var uid = entry.Uid;
 
             // dynamic clientside disabling, for effects like pulled entities
-            if (_overrideQuery.HasComp(uid))
+            if (_cone.IgnoresViewcone(uid))
                 continue;
 
             if (!_spriteQuery.TryComp(uid, out var sprite))
@@ -136,7 +132,6 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
 
             // calculate opacity for the actual entity first
-            var baseAlpha = sprite.Color.A;
             var angleAlpha = (float) Math.Clamp((angleDist - halfAngle) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
             var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
             var targetAlpha = 1f - Math.Min(angleAlpha, distAlpha);
@@ -146,14 +141,10 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             {
                 // don't want to show memory for invisible things
                 if (comp.Memory is { } oldMemory)
-                    _sprite.SetVisible(oldMemory, false);
+                    _cone.SetAlpha(oldMemory, 0f);
 
-                // save the results so we can use it in resetalpha overlay
-                _cone.CachedBaseAlphas.Add(((uid, sprite), baseAlpha));
-
-                // multiply by the base alpha of the sprite (sprites which were already invisible for other reasons should stay invisible)
-                var alpha = (comp.Inverted ? 1f - targetAlpha : targetAlpha) * (comp.OverrideBaseAlpha ? 1f : baseAlpha);
-                SetAlpha((uid, sprite), alpha);
+                var alpha = comp.Inverted ? 1f - targetAlpha : targetAlpha;
+                _cone.SetAlpha(uid, alpha);
                 continue;
             }
 
@@ -167,9 +158,9 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
                 // hide the memory if it goes back in view
                 if (comp.Memory is { } oldMemory)
-                    _sprite.SetVisible(oldMemory, false);
+                    _cone.SetAlpha(oldMemory, 0f);
                 // and show the real entity again
-                _sprite.SetVisible((uid, sprite), true);
+                _cone.SetAlpha(uid, 1f);
                 _ent.RemoveComponent(uid, occluded);
                 continue;
             }
@@ -186,7 +177,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
                 _meta.SetEntityName(memory, Identity.Name(uid, _ent));
                 _sprite.CopySprite((uid, sprite), memory);
                 // don't show the real entity
-                _sprite.SetVisible((uid, sprite), false);
+                _cone.SetAlpha(uid, 0f);
             }
 
             if (!_spriteQuery.TryComp(memory, out var memorySprite))
@@ -203,7 +194,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             // FIXME: this looks awful for people because the sprite opacity is applied to each layer instead of being deferred somehow
             if (_humanoidQuery.HasComp(uid))
             {
-                _sprite.SetVisible((memory, memorySprite), (diff.TotalSeconds < fadeTime) && !memoryVisible);
+                _cone.SetAlpha(memory, diff.TotalSeconds < fadeTime && !memoryVisible ? 1f : 0f);
                 continue;
             }
 
@@ -214,14 +205,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             if (memoryVisible)
                 memoryAlpha = 0f; // if you can see where a memory was and it's not there, the memory must be wrong
             // now actually fade the memory out
-            SetAlpha((memory, memorySprite), memoryAlpha);
+            _cone.SetAlpha(memory, memoryAlpha);
         }
-    }
-
-    private void SetAlpha(Entity<SpriteComponent> ent, float alpha)
-    {
-        var e = ent.AsNullable();
-        _sprite.SetColor(e, ent.Comp.Color.WithAlpha(alpha));
-        _sprite.SetVisible(e, alpha > 0.01f);
     }
 }

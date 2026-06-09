@@ -163,40 +163,16 @@
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerBodyguard
-  suffix: Security, Bodyguard
+  id: ReinforcementBeaconSpecialistOfficerBrigmedic
+  suffix: Security, Brigmedic
   components:
   - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-bodyguard-name
+    job: Brigmedic
+    name: ghost-role-information-reinforcement-specialist-brigmedic-name
   - type: GhostCharacterSpawner
     components:
     - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecBodyguard ]
-      roleLoadout: [ RoleSurvivalSecurity ]
-
-- type: entity
-  parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerAdvisor
-  suffix: Security, Advisor
-  components:
-  - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-advisor-name
-  - type: GhostCharacterSpawner
-    components:
-    - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecAdvisor ]
-
-- type: entity
-  parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerCorpsman
-  suffix: Security, Corpsman
-  components:
-  - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-corpsman-name
-  - type: GhostCharacterSpawner
-    components:
-    - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecCorpsman ]
+      prototypes: [ ReinforcementBeaconOfficerSpecBrigmedic ]
       roleLoadout: [ RoleSurvivalSecurity ]
 
 - type: entity

@@ -147,7 +147,7 @@ public sealed partial class DroneSystem : SharedDroneSystem
     {
         var xform = Transform(uid);
         _mobs.Clear();
-        _lookup.GetEntitiesInRange(xform.MapPosition, component.InteractionBlockRange, _mobs);
+        _lookup.GetEntitiesInRange(xform.Coordinates, component.InteractionBlockRange, _mobs);
         foreach (var entity in _mobs)
         {
             // Require the entity to be controlled by a player and not a drone or ghost.

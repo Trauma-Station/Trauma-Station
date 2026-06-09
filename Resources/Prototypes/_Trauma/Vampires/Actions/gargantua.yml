@@ -235,7 +235,6 @@
       time: null
       type: Remove
     - !type:PlaySoundEffect
-      predicted: false
       sound: /Audio/_Trauma/Vampires/Actions/vampire_duel_end.ogg
   - type: ActionArena # Makes the arena. Can be re-used for other actions
     delay: 0.5 # So we have time to get thrown there

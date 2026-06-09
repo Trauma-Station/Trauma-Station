@@ -27,7 +27,6 @@ public abstract partial class SharedGunSystem
     [Dependency] private CommonKnowledgeSystem _knowledge = default!;
 
     private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
-    private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.

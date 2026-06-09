@@ -11,7 +11,7 @@
   description: uplink-pistol-viper-desc
   productEntity: WeaponPistolViper
   cost:
-    Telecrystal: 13 # goob - this +1 mag = 15 TC
+    Telecrystal: 13 # Trauma - was 3, 5x and less expensive
   categories:
   - UplinkWeaponry
 
@@ -22,7 +22,7 @@
   description: uplink-pistol-cobra-desc
   productEntity: WeaponPistolCobra
   cost:
-    Telecrystal: 17 # goob - this +1 mag = 20 TC
+    Telecrystal: 17 # Trauma - was 4, 5x and less expensive
   categories:
   - UplinkWeaponry
 
@@ -33,7 +33,7 @@
   description: uplink-rifle-mosin-desc
   productEntity: WeaponSniperMosin
   cost:
-    Telecrystal: 4 # goob
+    Telecrystal: 4 # Trauma - was 1, 5x and less expensive
   categories:
   - UplinkWeaponry
 
@@ -44,7 +44,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   productEntity: EnergySword
   cost:
-    Telecrystal: 37 # goob - desword is 74
+    Telecrystal: 40 # Trauma - was 8, 5x
   categories:
   - UplinkWeaponry
 
@@ -55,7 +55,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_dagger.rsi, state: icon }
   productEntity: EnergyDaggerBox
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkWeaponry
 
@@ -65,7 +65,7 @@
   description: uplink-energycrossbow-desc
   productEntity: WeaponEnergyCrossbow
   cost:
-    Telecrystal: 30 # Trauma
+    Telecrystal: 30 # Trauma - was 5, 5x and more expensive
   categories:
   - UplinkWeaponry
   conditions:
@@ -83,7 +83,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/throwing_knife.rsi, state: icon } # Trauma
   productEntity: ClothingBeltKnifeRig # Trauma
   cost:
-    Telecrystal: 20 # goob - Pretty weak, but resusable ranged crit potential shouldn't be less.
+    Telecrystal: 30 # Trauma - was 6, 5x
   categories:
     - UplinkWeaponry
 
@@ -93,7 +93,7 @@
   description: uplink-gloves-north-star-desc
   productEntity: ClothingHandsGlovesNorthStar
   cost:
-    Telecrystal: 30 # goob
+    Telecrystal: 30 # Trauma - was 8, 5x and less expensive
   categories:
   - UplinkWeaponry
 
@@ -116,7 +116,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
   productEntity: EnergyShield
   cost:
-    Telecrystal: 30 # Trauma, was 15
+    Telecrystal: 30 # Trauma, was 8, 5x and less expensive
   categories:
   - UplinkWeaponry
   conditions: # Trauma, more expensive for nukies
@@ -126,13 +126,13 @@
       - NukeOpsUplink
 
 - type: listing
-  id: uplinkRiggedBoxingGloves
+  id: uplinkRiggedBoxingGlovesBlue # Trauma - added Blue
   name: uplink-rigged-boxing-gloves-name
   description: uplink-rigged-boxing-gloves-desc
   icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: icon }
   productEntity: ClothingHandsGlovesBoxingRiggedBlue # TODO Replace this with the random spawner when it's not bugged
   cost:
-    Telecrystal: 30 # Trauma - was 10, 5x but much cheaper. its a fucking melee weapon
+    Telecrystal: 20 # Trauma - was 10, 5x less expensive because it's a gimmick item and not viable
   categories:
   - UplinkWeaponry
 
@@ -143,7 +143,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: base }
   productEntity: BriefcaseSyndieSniperBundleFilled
   cost:
-    Telecrystal: 50 # Trauma - was 10, 5x
+    Telecrystal: 50 # Trauma - was 10, 5x make sure to not ask any question regarding if a specific type of violence counts
   categories:
   - UplinkWeaponry
 
@@ -155,7 +155,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/hushpup.rsi, state: icon }
   productEntity: BriefcaseWeaponHushpupFilled
   cost:
-    Telecrystal: 50 # Trauma - was 10, 5x
+    Telecrystal: 40 # Trauma - was 10, 5x, and less expensive
   categories:
   - UplinkWeaponry
 
@@ -166,7 +166,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/SMGs/c20r.rsi, state: icon }
   productEntity: BriefcaseWeaponC20Filled
   cost:
-    Telecrystal: 50 # Trauma - was 14, made cheaper and 5x: you could just buy guns so its not so crazy
+    Telecrystal: 50 # Trauma - was 14, 5x and less expensive
   categories:
   - UplinkWeaponry
   # conditions: # Trauma, this gun is fine for nukies
@@ -182,7 +182,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
   productEntity: BriefcaseWeaponBulldogFilled
   cost:
-    Telecrystal: 60 # Trauma - was 14, tiny bit cheaper and 5x
+    Telecrystal: 60 # Trauma - was 14, 5x and less expensive
   categories:
   - UplinkWeaponry
   conditions:
@@ -213,7 +213,7 @@
   description: uplink-estoc-bundle-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
   cost:
-    Telecrystal: 55 # Trauma - was 14, a bit cheaper and 5x: this gun is shit
+    Telecrystal: 55 # Trauma - was 14, 5x and less expensive because the gun is shit
   productEntity: ClothingBackpackDuffelSyndicateFilledRifle
   categories:
   - UplinkWeaponry
@@ -230,7 +230,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Launchers/china_lake.rsi, state: icon }
   productEntity: BriefcaseWeaponChinaLakeFilled
   cost:
-    Telecrystal: 60 # goob
+    Telecrystal: 60 # Trauma - was 20, 5x and less expensive
   categories:
   - UplinkWeaponry
   conditions:
@@ -263,7 +263,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/LMGs/l6.rsi, state: icon }
   productEntity: WeaponLightMachineGunL6
   cost:
-    Telecrystal: 100 # goob
+    Telecrystal: 100 # Trauma - was 30, 5x and less expensive
   categories:
   - UplinkWeaponry
   # <Trauma>
@@ -282,12 +282,12 @@
   description: uplink-explosive-grenade-desc
   productEntity: ExGrenade
   cost:
-    Telecrystal: 10 # Trauma - was 1, 5x and doubled because its pretty strong
+    Telecrystal: 10 # Trauma - was 1, 5x and doubled because it's pretty strong
   categories:
   - UplinkExplosives
   conditions:
   - !type:StoreWhitelistCondition
-    blacklist: # Trauma - inverted, theres a nukie listing separately
+    blacklist: # Trauma - inverted, there's a nukie listing separately
       tags:
       - NukeOpsUplink
 
@@ -297,7 +297,7 @@
   description: uplink-smoke-grenade-desc
   productEntity: SmokeGrenade
   cost:
-    Telecrystal: 4 # Trauma - was 1, 5x but even cheaper because its a smoke grenade
+    Telecrystal: 4 # Trauma - was 1, 5x less expensive because it's a smoke grenade
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -312,7 +312,7 @@
   description: uplink-mini-bomb-desc
   productEntity: SyndieMiniBomb
   cost:
-    Telecrystal: 24 # goob
+    Telecrystal: 24 # Trauma - was 6, 5x and less expensive
   categories:
     - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -328,7 +328,7 @@
   description: uplink-supermatter-grenade-desc
   productEntity: SupermatterGrenade
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
     - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -344,7 +344,7 @@
   description: uplink-penguin-grenade-desc
   productEntity: MobGrenadePenguin
   cost:
-    Telecrystal: 18 # Trauma - was 4, 5x and a tiny bit cheaper
+    Telecrystal: 15 # Trauma - was 4, 5x and less expensive to promote use
   categories:
     - UplinkExplosives
   conditions:
@@ -360,7 +360,7 @@
   description: uplink-c4-desc
   productEntity: C4
   cost:
-    Telecrystal: 8 # goob - We have a ten tens or 100 TC system, lets use the bastard. Better than 13's yet 10 TC's a pretty crappy price.
+    Telecrystal: 8 # Trauma - was 2, 5x and less expensive
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -391,7 +391,7 @@
   description: uplink-c4-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   cost:
-    Telecrystal: 52 # goob - you're buying bulk so its some discount
+    Telecrystal: 48 # Trauma - was 12, 5x you're buying in bulk, so you get a 25% discount
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -406,7 +406,7 @@
   description: uplink-emp-grenade-desc
   productEntity: EmpGrenade
   cost:
-    Telecrystal: 5 # goob - implanter is 10 and infintely better lmao
+    Telecrystal: 5 # Trauma - was 2, 5x implanter is 10 and infinitely better
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -422,7 +422,7 @@
   icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
   productEntity: PenExplodingBox
   cost:
-    Telecrystal: 12 # goob
+    Telecrystal: 12 # Trauma - was 4, 5x and less expensive to promote use
   categories:
   - UplinkExplosives
 
@@ -432,7 +432,7 @@
   description: uplink-exploding-syndicate-bomb-desc
   productEntity: SyndicateBomb
   cost:
-    Telecrystal: 52 # goob
+    Telecrystal: 55 # Trauma - was 11, 5x
   categories:
     - UplinkExplosives
   restockTime: 1800
@@ -448,7 +448,7 @@
   description: uplink-exploding-syndicate-bomb-desc
   productEntity: SyndicateBomb
   cost:
-    Telecrystal: 25 # goob - cheap explosive for nukies
+    Telecrystal: 25 # Trauma - was 11, 5x and less expensive for nukies
   categories:
     - UplinkExplosives
   conditions:
@@ -463,7 +463,7 @@
   description: uplink-shrapnel-grenade-desc
   productEntity: GrenadeShrapnel
   cost:
-    Telecrystal: 8 # goob
+    Telecrystal: 8 # Trauma - was 4, 5x and less expensive
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -478,7 +478,7 @@
   description: uplink-incendiary-grenade-desc
   productEntity: GrenadeIncendiary
   cost:
-    Telecrystal: 8 # goob
+    Telecrystal: 8 # Trauma - was 4, 5x and less expensive
   categories:
   - UplinkExplosives
   conditions: # Goob, two times cheaper for nukies
@@ -496,7 +496,7 @@
   icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi, state: red-icon }
   productEntity: MagazinePistol # Trauma
   cost:
-    Telecrystal: 6
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkAmmo
 
@@ -508,7 +508,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistolSubMachineGun
   cost:
-    Telecrystal: 10 # Trauma - was 2
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkAmmo
 
@@ -520,7 +520,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
   productEntity: MagazineShotgun
   cost:
-    Telecrystal: 5 # Trauma - was 2, cheaper and 5x
+    Telecrystal: 5 # Trauma - was 2, 5x less expensive
   categories:
   - UplinkAmmo
   # <Trauma>
@@ -538,7 +538,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
   productEntity: MagazineShotgunSlug
   cost:
-    Telecrystal: 4 # Trauma - was 2, cheaper (slug -1) and 5x
+    Telecrystal: 4 # Trauma - was 2, 5x less expensive (slug -1)
   categories:
   - UplinkAmmo
   # <Trauma>
@@ -557,7 +557,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: red-icon }
   productEntity: MagazinePistolCaselessRifle
   cost:
-    Telecrystal: 5
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkAmmo
 
@@ -568,7 +568,7 @@
   description: uplink-mosin-ammo-desc
   productEntity: MagazineBoxLightRifle
   cost:
-    Telecrystal: 9 # goob
+    Telecrystal: 10 # Trauma - was 1, 5x and more expensive to not give traitors free ammo
   categories:
   - UplinkAmmo
 
@@ -579,7 +579,7 @@
   description: uplink-estoc-ammo-desc
   productEntity: MagazineRifle
   cost:
-    Telecrystal: 5 # goob - on par with c20
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkAmmo
   # <Trauma>
@@ -597,7 +597,7 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkAmmo
 
@@ -629,7 +629,7 @@
   icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
   productEntity: HypopenBox
   cost:
-    Telecrystal: 10 # Trauma - was 30, hypos are a common crew item now so this is purely to look less sus
+    Telecrystal: 10 # Trauma - was 6, 5x and less expensive to promote abusing people that have hypoports
   categories:
   - UplinkChemicals
 
@@ -641,7 +641,7 @@
   icon: { sprite: /Textures/Objects/Fun/Darts/dart_red.rsi, state: icon }
   productEntity: HypoDartBox
   cost:
-    Telecrystal: 25 # Trauma - was 5, with hypoports existing this is much stronger
+    Telecrystal: 25 # Trauma - was 5, 5x with hypoports existing this is much stronger
   categories:
   - UplinkChemicals
 
@@ -694,7 +694,7 @@
   description: uplink-combat-medkit-desc
   productEntity: MedkitCombatFilled
   cost:
-    Telecrystal: 10 # Trauma - was 3, 5x but even cheaper because its a fucking medkit.
+    Telecrystal: 10 # Trauma - was 3, 5x but even cheaper because it's a fucking medkit.
   categories:
   - UplinkChemicals
 
@@ -704,7 +704,7 @@
   description: uplink-combat-medipen-desc
   productEntity: CombatMedipen
   cost:
-    Telecrystal: 10 # Trauma - was 3, 5x but even cheaper because its a single use omni pen. you can get healing anywhere
+    Telecrystal: 10 # Trauma - was 3, 5x but even cheaper because it's a single use omni pen. you can get healing anywhere
   categories:
   - UplinkChemicals
 
@@ -734,7 +734,7 @@
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkChemicals
 
@@ -744,7 +744,7 @@
   description: uplink-meds-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateMedicalBundleFilled
   cost:
-    Telecrystal: 100 # goob
+    Telecrystal: 100 # Trauma - was 24, 5x and more expensive due to how good it is
   categories:
   - UplinkChemicals
   conditions:
@@ -764,7 +764,7 @@
   description: uplink-syndicate-id-card-desc
   productEntity: SyndicateIDCard
   cost:
-    Telecrystal: 10 # Trauma - inflated was 1
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkDeception
 
@@ -774,7 +774,7 @@
   description: uplink-agent-id-card-desc
   productEntity: AgentIDCard
   cost:
-    Telecrystal: 15 # goob
+    Telecrystal: 15 # Trauma - was 3, 5x
   categories:
   - UplinkDeception
 
@@ -785,7 +785,7 @@
   description: uplink-stealth-box-desc
   productEntity: StealthBox
   cost:
-    Telecrystal: 15 #Trauma, reduce price of gimmick items
+    Telecrystal: 15 # Trauma - was 5, 5x and less expensive to appease the MGS fans
   categories:
   - UplinkDeception
 
@@ -808,7 +808,7 @@
   icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: synd_label }
   productEntity: EncryptionKeySyndie # One for the price of one, but cheaper
   cost:
-    Telecrystal: 3 # goob
+    Telecrystal: 3 # Trauma - was 1, 5x and less expensive to promote traitors working together
   categories:
   - UplinkDeception
   conditions:
@@ -840,7 +840,7 @@
   description: uplink-cyberpen-desc
   productEntity: CyberPen
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkDeception
 
@@ -850,7 +850,7 @@
   description: uplink-decoy-disk-desc
   productEntity: NukeDiskFake
   cost:
-    Telecrystal: 2 # goob - Pointless class item.
+    Telecrystal: 2 # Trauma - was 1, 5x and less to promote pulling off the feat of swapping disks
   categories:
   - UplinkDeception
 
@@ -860,7 +860,7 @@
   description: uplink-bribe-desc
   productEntity: BriefcaseSyndieLobbyingBundleFilled
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
     - UplinkDeception
   conditions: # EE Plasmeme Change: Plasmamen get another listing.
@@ -884,7 +884,7 @@
   description: uplink-exploding-syndicate-bomb-fake-desc
   productEntity: SyndicateBombFake
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 4, 5x and less expensive to promote use
   categories:
   - UplinkDeception
   restockTime: 1800
@@ -917,7 +917,7 @@
   description: uplink-access-breaker-desc
   productEntity: AccessBreaker
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkDisruption
 
@@ -927,7 +927,7 @@
   description: uplink-emag-desc
   productEntity: Emag
   cost:
-    Telecrystal: 20 # goob - not quite worth 25
+    Telecrystal: 20 # Trauma - was 5, 5x and less expensive due to not being worth 25 tc
   categories:
   - UplinkDisruption
 
@@ -938,7 +938,7 @@
   description: uplink-radio-jammer-desc
   productEntity: RadioJammer
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 15 # Trauma - was 3, 5x
   categories:
   - UplinkDisruption
 
@@ -949,7 +949,7 @@
   description: uplink-syndicate-weapon-module-desc
   productEntity: BorgModuleSyndicateWeapon
   cost:
-    Telecrystal: 25 # goob
+    Telecrystal: 25 # Trauma - was 5, 5x
   categories:
   - UplinkDisruption
 
@@ -976,7 +976,7 @@
   productEntity: BorgModuleMartyr
   icon: { sprite: /Textures/Objects/Specific/Robotics/borgmodule.rsi, state: syndicateborgbomb }
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
     - UplinkDisruption
 
@@ -987,7 +987,7 @@
   description: uplink-soap-desc
   productEntity: SoapSyndie
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
   - UplinkDisruption
 
@@ -1009,7 +1009,7 @@
   description: uplink-toolbox-desc
   productEntity: ToolboxSyndicateFilled
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkDisruption
 
@@ -1020,7 +1020,7 @@
   description: uplink-syndicate-jaws-of-life-desc
   productEntity: SyndicateJawsOfLife
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkDisruption
 
@@ -1031,7 +1031,7 @@
   description: uplink-duffel-surgery-desc
   productEntity: ClothingBackpackDuffelSyndicateFilledMedical
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkDisruption
 
@@ -1051,7 +1051,7 @@
   description: uplink-power-sink-desc
   productEntity: PowerSink
   cost:
-    Telecrystal: 32 # goob - worse synd bomb. Requires real skill to pull off. Can get 3, but that blocks any decent item. Bomb balancing applies here.
+    Telecrystal: 32 # Trauma - was 8, 5x and less expensive due to how shit it is
   categories:
   - UplinkExplosives
 
@@ -1098,7 +1098,6 @@
   productEntity: CrateSyndicateSurplusBundle
   cost:
     Telecrystal: 100 # Trauma - was 20, 5x
-  discountCategory: null # Trauma - way too free with discounts
   categories:
   - UplinkDisruption
   conditions:
@@ -1137,7 +1136,7 @@
   description: uplink-singularity-beacon-desc
   productEntity: SingularityBeacon
   cost:
-    Telecrystal: 60 # goob
+    Telecrystal: 60 # Trauma - was 12, 5x
   categories:
     - UplinkDisruption
   conditions:
@@ -1157,7 +1156,7 @@
   description: uplink-cameraBug-desc
   productEntity: CameraBug
   cost:
-    Telecrystal: 10 # Trauma - was 2, 5x # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkDisruption
 
@@ -1170,7 +1169,7 @@
   icon: { sprite: /Textures/Objects/Misc/guardian_info.rsi, state: icon }
   productEntity: BoxHoloparasite
   cost:
-    Telecrystal: 60 # Trauma - was 12, 5x
+    Telecrystal: 50 # Trauma - was 12, 5x and less expensive to promote creating ghostroles
   categories:
   - UplinkAllies
   conditions:
@@ -1187,7 +1186,7 @@
   productEntity: ReinforcementRadioSyndicate
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-urist }
   cost:
-    Telecrystal: 70 # Trauma - was 11, 5x and then some
+    Telecrystal: 55 # Trauma - was 11, 5x and less expensive to promote creating ghostroles
   categories:
   - UplinkAllies
   conditions:
@@ -1206,7 +1205,7 @@
   productEntity: ReinforcementRadioSyndicateNukeops
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-nukeop }
   cost:
-    Telecrystal: 125 # goob
+    Telecrystal: 125 # Trauma - was 30, 5x and less expensive to promote creating ghostroles
   categories:
   - UplinkAllies
   conditions:
@@ -1226,7 +1225,7 @@
   productEntity: ReinforcementRadioSyndicateCyborgAssault
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-borg-assault }
   cost:
-    Telecrystal: 375 # goob
+    Telecrystal: 375 # Trauma - was 65, 5x and more expensive due to how strong it is
   categories:
     - UplinkAllies
   conditions:
@@ -1246,7 +1245,7 @@
   productEntity: ReinforcementRadioSyndicateAncestor
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
   cost:
-    Telecrystal: 30 # goob
+    Telecrystal: 25 # Trauma - was 6, 5x and less expensive to promote creating ghostroles
   categories:
   - UplinkAllies
   conditions:
@@ -1264,7 +1263,7 @@
   productEntity: ReinforcementRadioSyndicateAncestorNukeops
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
   cost:
-    Telecrystal: 40 # goob - Nuke ops have a lot of free gear, and synd eva a common one has been buffed so these need to cost more
+    Telecrystal: 40 # Trauma - was 6, 5x and more expensive due to alot of free gear that nuke ops get to arm these monkeys
   categories:
   - UplinkAllies
   conditions:
@@ -1300,7 +1299,7 @@
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-syndicat }
   productEntity: ReinforcementRadioSyndicateSyndiCat
   cost:
-    Telecrystal: 30 # goob
+    Telecrystal: 25 # Trauma - was 6, 5x and less expensive to promote creating ghostroles
   categories:
     - UplinkAllies
   conditions:
@@ -1317,7 +1316,7 @@
   icon: { sprite: /Textures/Objects/Fun/pai.rsi, state: syndicate-icon-pai-off }
   productEntity: SyndicatePersonalAI
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 5 # Trauma - was 1, 5x
   categories:
     - UplinkAllies
   conditions:
@@ -1338,7 +1337,7 @@
   icon: { sprite: /Textures/Clothing/Back/Backpacks/backpack.rsi, state: icon }
   productEntity: StorageImplanter
   cost:
-    Telecrystal: 40 # goob
+    Telecrystal: 35 # Trauma - was 8, 5x and less expensive to promote use
   categories:
     - UplinkImplants
   conditions:
@@ -1389,7 +1388,7 @@
   icon: { sprite: /Textures/Effects/emp.rsi, state: emp_disable }
   productEntity: EmpImplanter
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
     - UplinkImplants
 
@@ -1400,7 +1399,7 @@
   icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: synd_label }
   productEntity: RadioImplanter
   cost:
-    Telecrystal: 7 # goob - Syndicate Radio Price Adjust
+    Telecrystal: 5 # Trauma - was 2, 5x and less expensive to promote use
   categories:
   - UplinkImplants
   conditions:
@@ -1416,7 +1415,7 @@
   icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
   productEntity: MicroBombImplanter
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 15 # Trauma - was 6, 5x and less expensive to promote use
   categories:
   - UplinkImplants
   conditions:
@@ -1438,7 +1437,7 @@
   icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
   productEntity: MacroBombImplanter
   cost:
-    Telecrystal: 65 # goob
+    Telecrystal: 65 # Trauma - was 13, 5x
   categories:
     - UplinkImplants
   restockTime: 1800
@@ -1456,7 +1455,7 @@
   icon: { sprite: /Textures/Actions/Implants/implants.rsi, state: explosive }
   productEntity: MacroBombImplanter
   cost:
-    Telecrystal: 65
+    Telecrystal: 65 # Trauma - was 13, 5x
   categories:
     - UplinkImplants
   conditions:
@@ -1473,7 +1472,7 @@
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: gib }
   productEntity: DeathAcidifierImplanter
   cost:
-    Telecrystal: 20 # goob # goob - traitor suicide implants
+    Telecrystal: 15 # Trauma - was 4, 5x and less expensive to promote use
   categories:
     - UplinkImplants
   # goob - traitor suicide implants
@@ -1506,7 +1505,7 @@
   description: uplink-deathrattle-implant-desc
   productEntity: BoxDeathRattleImplants
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkImplants
   conditions:
@@ -1518,7 +1517,7 @@
       blacklist:
         components:
           - SurplusBundle
-        tags: [ ContravendUplink ] # Goob
+        tags: [ ContravendUplink ] # Trauma
 
 - type: listing
   id: UplinkFakeMindshield
@@ -1527,7 +1526,7 @@
   icon: { sprite: Interface/Actions/actions_fakemindshield.rsi, state: icon-on }
   productEntity: FakeMindShieldImplanter
   cost:
-    Telecrystal: 15 # goob, I don't like security so x4 instead of x5
+    Telecrystal: 15 # Trauma - was 4, 5x and less expensive to promote infiltrating sec
   categories:
   - UplinkImplants
 
@@ -1560,7 +1559,7 @@
   description: uplink-chest-rig-desc
   productEntity: ClothingBeltMilitaryWebbing
   cost:
-    Telecrystal: 4 # goob
+    Telecrystal: 4 # Trauma - was 1, 5x and less expensive due to being valid
   categories:
   - UplinkWearables
 
@@ -1571,7 +1570,7 @@
   productEntity: ClothingBackpackChameleonFillAgent
   icon: { sprite: /Textures/Clothing/Uniforms/Jumpsuit/rainbow.rsi, state: icon }
   cost:
-    Telecrystal: 15 # goob
+    Telecrystal: 25 # Trauma - was 4, 5x and more expensive due to how much fucking value it has
   categories:
     - UplinkWearables
 
@@ -1582,7 +1581,7 @@
   description: uplink-clothing-no-slips-shoes-desc
   productEntity: ClothingShoesChameleonNoSlips
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkWearables
 
@@ -1593,7 +1592,7 @@
   description: uplink-clothing-chameleon-thieving-gloves-desc
   productEntity: ClothingHandsChameleonThief
   cost:
-    Telecrystal: 30 # Goob
+    Telecrystal: 30 # Trauma
   categories:
   - UplinkWearables
 
@@ -1615,7 +1614,7 @@
   description: uplink-clothing-outer-vest-web-elite-desc
   productEntity: ClothingOuterVestWebElite
   cost:
-    Telecrystal: 25 # goob
+    Telecrystal: 25 # Trauma - was 5, 5x
   categories:
   - UplinkWearables
 
@@ -1673,7 +1672,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
   productEntity: ClothingBackpackSyndicateRaidBundle
   cost:
-    Telecrystal: 50 # goob
+    Telecrystal: 50 # Trauma - was 8, 5x and more expensive because stun res etc
   categories:
   - UplinkWearables
   conditions:
@@ -1693,7 +1692,7 @@
     Telecrystal: 80 # Trauma - was 12, 5x and it's much stronger with lasersec
   categories:
   - UplinkWearables
-  #conditions: # Goobstation - no fuck you
+  #conditions: # Trauma
   #- !type:StoreWhitelistCondition
   #  whitelist:
   #    tags:
@@ -1707,10 +1706,10 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/cybersun.rsi, state: icon } # goobstation - duke nukies
   productEntity: CrateCybersunJuggernautBundle
   cost:
-    Telecrystal: 75 # goob
+    Telecrystal: 75 # Trauma - was 12, 5x and more expensive due to it being strong
   categories:
   - UplinkWearables
-  #conditions: # Goobstation - no fuck you
+  #conditions: # Trauma
   #- !type:StoreWhitelistCondition
   # whitelist:
   #    tags:
@@ -1723,7 +1722,7 @@
   description: uplink-clothing-eyes-hud-syndicate-desc
   productEntity: ClothingEyesHudSyndicate
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
     - UplinkWearables
   conditions:
@@ -1738,7 +1737,7 @@
   description: uplink-backpack-syndicate-desc
   productEntity: ClothingBackpackSyndicate
   cost:
-    Telecrystal: 4 # goob - Pointless valid item.
+    Telecrystal: 4 # Trauma - was 2, Decently useful if going loud
   categories:
     - UplinkWearables
 
@@ -1751,7 +1750,7 @@
   description: uplink-barber-scissors-desc
   productEntity: BarberScissors
   cost:
-    Telecrystal: 2 # goob - Meh, can be useful in preventing metagamers, but pretty pointless.
+    Telecrystal: 2 # Trauma - was 1, 5x Very useful
   categories:
   - UplinkPointless
 
@@ -1761,7 +1760,7 @@
   description: uplink-snack-box-desc
   productEntity: HappyHonkNukieSnacks
   cost:
-    Telecrystal: 5 # goob
+    Telecrystal: 5 # Trauma - was 1, 5x Actually pretty decent
   categories:
   - UplinkPointless
 
@@ -1829,7 +1828,7 @@
   description: uplink-outlaw-glasses-desc
   productEntity: ClothingEyesGlassesOutlawGlasses
   cost:
-    Telecrystal: 2 # goob - Who am i??? less than 5 TC for both to get a set.
+    Telecrystal: 1
   categories:
   - UplinkPointless
 
@@ -1839,7 +1838,7 @@
   description: uplink-costume-pyjama-desc
   productEntity: ClothingBackpackDuffelSyndicatePyjamaBundle
   cost:
-    Telecrystal: 8 # Trauma - was 2x, 5x and cheaper it's just clothes
+    Telecrystal: 8 # Trauma - was 2, 5x and cheaper it's just clothes
   categories:
   - UplinkPointless
 
@@ -1849,7 +1848,7 @@
   description: uplink-costume-clown-desc
   productEntity: ClothingBackpackDuffelSyndicateCostumeClown
   cost:
-    Telecrystal: 10 # goob
+    Telecrystal: 10 # Trauma - was 2, 5x
   categories:
   - UplinkPointless
 
@@ -1892,7 +1891,7 @@
   description: uplink-balloon-desc
   productEntity: BalloonSyn
   cost:
-    Telecrystal: 100 # goob
+    Telecrystal: 100 # Trauma - was 20, 5x
   categories:
   - UplinkPointless
   conditions:
@@ -1953,7 +1952,7 @@
   description: uplink-gatfruit-seeds-desc
   productEntity: GatfruitSeeds
   cost:
-    Telecrystal: 30 # goob
+    Telecrystal: 40 # Trauma - was 6, 5x and more expensive due to how strong they can be
   categories:
   - UplinkJob
   conditions:
@@ -1967,7 +1966,7 @@
   description: uplink-holy-hand-grenade-desc
   productEntity: HolyHandGrenade
   cost:
-    Telecrystal: 100 # goob
+    Telecrystal: 100 # Trauma - was 20, 5x
   categories:
   - UplinkJob
   conditions:
@@ -1996,7 +1995,7 @@
   description: uplink-cluster-banana-peel-desc
   productEntity: ClusterBananaPeel
   cost:
-    Telecrystal: 18 # Trauma - was 5, 5x and cheaper. it's a single use item that is trivial to "defuse"
+    Telecrystal: 15 # Trauma - was 5, 5x and cheaper. it's a single use item that is trivial to "defuse"
   categories:
   - UplinkJob
   conditions:
@@ -2011,7 +2010,7 @@
   icon: { sprite: /Textures/Objects/Fun/figurines.rsi, state: holoclown }
   productEntity: BoxHoloclown
   cost:
-    Telecrystal: 60 # goob
+    Telecrystal: 50 # Trauma - was 12, 5x and less expensive
   categories:
   - UplinkJob
   conditions:
@@ -2025,7 +2024,7 @@
   description: uplink-hot-potato-desc
   productEntity: HotPotato
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkJob
   conditions:
@@ -2042,7 +2041,7 @@
   description: uplink-chimp-upgrade-kit-desc
   productEntity: WeaponPistolCHIMPUpgradeKit
   cost:
-    Telecrystal: 10 # goob - Weak but very cheap
+    Telecrystal: 10 # Trauma - was 4, 5x and less expensive due to how weak it is
   categories:
   - UplinkJob
   conditions:
@@ -2056,7 +2055,7 @@
   description: uplink-proximity-mine-desc
   productEntity: WetFloorSignMineExplosive
   cost:
-    Telecrystal: 16 # goob - was 20, with my buff made it 25 to be closer to minibomb -panzer well no one uses it! 16 TC better.
+    Telecrystal: 16 # Trauma - was 5, 5x and less expensive
   categories:
   - UplinkJob
   conditions:
@@ -2093,7 +2092,7 @@
   icon: { sprite:  Objects/Weapons/Melee/cane.rsi, state: cane}
   productEntity: CaneSheathFilled
   cost:
-    Telecrystal: 20 # Trauma - was 40 in prior goob edit
+    Telecrystal: 20 # Trauma - was 3, 5x and more expensive due to how good it is
   categories:
   - UplinkJob
   conditions:
@@ -2108,7 +2107,7 @@
   icon: { sprite:  Objects/Consumable/Food/Baked/bread.rsi, state: baguette}
   productEntity: CombatBakeryKit
   cost:
-    Telecrystal: 20 # goob
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkJob
   conditions:
@@ -2123,10 +2122,13 @@
   description: uplink-contraband-lighter-desc
   icon: { sprite:  Objects/Tools/Lighters/syndielighter.rsi, state: icon}
   productEntity: UplinkLighterBox
-  cost:
-    Telecrystal: 1
   categories:
   - UplinkPointless
+  # <Trauma>
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  # </Trauma>
 
 - type: listing
   id: UplinkSmugglerSatchel
@@ -2145,7 +2147,7 @@
   icon: { sprite: Clothing/OuterClothing/Armor/cult_armour.rsi, state: icon}
   productEntity: ClothingBackpackDuffelAcolyteBundle
   cost:
-    Telecrystal: 20 # Goobstation
+    Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkJob
   conditions:
@@ -2174,7 +2176,7 @@
   description: uplink-briefcase-gun-desc
   productEntity: WeaponSubMachineGunBriefcase
   cost:
-    Telecrystal: 70 # Trauma - was 14, 5x
+    Telecrystal: 50 # Trauma - was 14, 5x and less expensive
   categories:
   - UplinkJob
   conditions:

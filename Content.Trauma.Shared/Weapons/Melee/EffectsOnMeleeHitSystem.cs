@@ -49,7 +49,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
         }
     }
 
-    #region Helepr
+    #region Helper
 
     /// <summary>
     /// Runs effects on the target and user.

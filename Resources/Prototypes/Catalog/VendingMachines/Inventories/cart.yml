@@ -80,6 +80,20 @@
     ClothingHeadsetService: 2
     ClothingHeadsetCargo: 2
     ClothingHeadsetMedical: 2
+    SkillChipPassenger: 2
+    SkillChipBartender: 2
+    SkillChipBotanist: 2
+    SkillChipChaplain: 2
+    SkillChipChef: 2
+    SkillChipClown: 2
+    SkillChipJanitor: 2
+    SkillChipLawyer: 2
+    SkillChipLibrarian: 2
+    SkillChipMime: 2
+    SkillChipMusician: 2
+    SkillChipRadioHost: 2
+    SkillChipReporter: 2
+    SkillChipServiceWorker: 2
     # </Trauma>
   contrabandInventory:
     BalloonNT: 2
@@ -87,6 +101,7 @@
   emaggedInventory: # Goobstation
     AgentIDCard: 1
     # <Trauma>
+    SkillChipNukie: 2
     SyndiPDANukie: 1
     CyberPen: 1
     # </Trauma>

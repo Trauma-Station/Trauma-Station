@@ -81,6 +81,7 @@
     - TearGasGrenade # 1
     - TearGasGrenade # 2
     - BoxBeanbag
+    - BoxShotgunTearGas
 
 - type: startingGear
   parent: ReinforcementBeaconOfficerTemplate
@@ -109,45 +110,7 @@
     - MagazinePistol # 2
 
 - type: startingGear
-  id: ReinforcementBeaconOfficerSpecBodyguard
-  equipment:
-    eyes: ClothingEyesGlassesSecurity
-    jumpsuit: ClothingUniformJumpsuitLawyerBlack
-    back: ClothingBackpackSatchelLeather
-    shoes: ClothingShoesBootsLaceup
-    id: SecurityPDA
-    ears: ClothingHeadsetSecurity
-    gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterArmourDurathread
-  inhand:
-  - WeaponSubMachineGunBriefcase
-  storage:
-    back:
-    - MagazinePistolSubMachineGun # 1
-    - MagazinePistolSubMachineGun # 2
-
-- type: startingGear
-  id: ReinforcementBeaconOfficerSpecAdvisor
-  equipment:
-    head: ClothingHeadHelmetBasicAlt
-    eyes: ClothingEyesGlassesSecurity
-    jumpsuit: ClothingUniformJumpsuitSeniorOfficer
-    back: ClothingBackpackSecurity
-    shoes: ClothingShoesBootsJackFilled
-    id: SeniorOfficerPDA
-    ears: ClothingHeadsetAltSecurityRegular
-    gloves: ClothingHandsGlovesSecurity
-    outerClothing: ClothingOuterArmorBasicSlim
-    belt: ClothingBeltSecurityFilled
-    pocket1: WeaponLaserSidearm
-    suitstorage: WeaponRifleLecterXL8
-  storage:
-    back:
-    - MagazineRifle # 1
-    - MagazineRifle # 2
-
-- type: startingGear
-  id: ReinforcementBeaconOfficerSpecCorpsman
+  id: ReinforcementBeaconOfficerSpecBrigmedic
   equipment:
     head: ClothingHeadHatBeretBrigmedic
     eyes: ClothingEyesGlassesMedSec

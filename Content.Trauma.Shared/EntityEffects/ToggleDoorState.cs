@@ -6,11 +6,7 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
-public sealed partial class ToggleDoorState : EntityEffectBase<ToggleDoorState>
-{
-    [DataField]
-    public bool Predicted = true;
-}
+public sealed partial class ToggleDoorState : EntityEffectBase<ToggleDoorState>;
 
 public sealed partial class ToggleDoorStateEffectSystem : EntityEffectSystem<DoorComponent, ToggleDoorState>
 {
@@ -18,6 +14,6 @@ public sealed partial class ToggleDoorStateEffectSystem : EntityEffectSystem<Doo
 
     protected override void Effect(Entity<DoorComponent> ent, ref EntityEffectEvent<ToggleDoorState> args)
     {
-        _door.TryToggleDoor(ent, ent.Comp, args.User, args.Effect.Predicted);
+        _door.TryToggleDoor(ent, ent.Comp, args.User, predicted: args.Predicted);
     }
 }

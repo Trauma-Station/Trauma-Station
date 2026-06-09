@@ -9,6 +9,31 @@
 
 - type: entity
   parent: BoxSkillChipsBase
+  id: BoxSkillChipsService
+  name: service skillchips box
+  description: A large box containing service skillchips. Definitely isn't sterile. Oh well.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SkillChipPassenger
+        - id: SkillChipBartender
+        - id: SkillChipBotanist
+        - id: SkillChipChaplain
+        - id: SkillChipChef
+        - id: SkillChipClown
+        - id: SkillChipJanitor
+        - id: SkillChipLawyer
+        - id: SkillChipLibrarian
+        - id: SkillChipMime
+        - id: SkillChipMusician
+        - id: SkillChipRadioHost
+        - id: SkillChipReporter
+        - id: SkillChipServiceWorker
+
+- type: entity
+  parent: BoxSkillChipsBase
   id: BoxSkillChipsCargo
   name: cargo skillchips box
   components:
@@ -65,9 +90,11 @@
         children:
         - id: SkillChipResearchDirector
         - id: SkillChipScientist
-          amount: 3
+          amount: 2
+        - id: SkillChipGeneticist
+        - id: SkillChipRoboticist
         - id: SkillChipResearchAssistant
-          amount: 3
+          amount: 2
 
 - type: entity
   parent: BoxSkillChipsBase

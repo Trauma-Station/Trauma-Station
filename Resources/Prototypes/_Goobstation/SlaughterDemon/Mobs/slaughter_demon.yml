@@ -48,7 +48,7 @@
     description: ghost-role-information-slaughter-demon-description
     rules: ghost-role-information-slaughter-demon-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleSlaughterDemon
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -205,16 +205,8 @@
         Slash: 20
         Structural: 50
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-laughter-demon-name
     description: ghost-role-information-laughter-demon-description
-    rules: ghost-role-information-slaughter-demon-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
-    raffle:
-      settings: default
   - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/sadtrombone.ogg

@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: MedicalSkillChips
+  icon:
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
+    state: icon
+  product: CrateSkillChipsMed
+  cost: 2500
+  category: cargoproduct-category-name-medical
+  group: market

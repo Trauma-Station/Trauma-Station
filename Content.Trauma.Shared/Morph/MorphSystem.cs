@@ -102,7 +102,7 @@ public sealed partial class MorphSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (ent.Comp.Biomass <= ent.Comp.ReplicateCost)
+        if (ent.Comp.Biomass < ent.Comp.ReplicateCost)
         {
             _popup.PopupClient("Not enough biomass!", ent, ent, PopupType.MediumCaution);
             return;

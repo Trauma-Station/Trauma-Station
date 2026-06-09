@@ -225,6 +225,3 @@
     - !type:RoleTimeRequirement
       role: JobBorg
       time: 3h
-    XenomorphsInfestationRoundstart:
-    - !type:OverallPlaytimeRequirement
-      time: 2h

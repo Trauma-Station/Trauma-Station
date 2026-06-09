@@ -17,11 +17,9 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Blunt: 6
-        Slash: 6
-        Piercing: 6
-        Heat: 18
-        Structural: 40
+        Piercing: 15
+        Heat: 15
+        Structural: 45
   - type: Sprite
     sprite: _NF/Objects/Weapons/Melee/energy_pickaxe.rsi
     layers:

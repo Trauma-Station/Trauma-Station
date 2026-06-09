@@ -1,15 +1,9 @@
 // <Trauma>
-using Content.Goobstation.Shared.Communications;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Goobstation.Shared.Radio;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
-using Content.Shared.Access.Systems;
 using Content.Shared.Chat.RadioIconsEvents;
-using Content.Shared.StatusIcon;
 using Content.Shared.Whitelist;
-using Content.Trauma.Common.Speech;
-using System.Linq;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
@@ -164,7 +158,7 @@ public sealed partial class RadioSystem : EntitySystem
         //     ("channel", $"\\[{channel.LocalizedName}\\]"),
         //     ("name", name),
         //     ("message", content));
-        var wrappedMessage = WrapRadioMessage(messageSource, channel, name, content, language, speech, jobIcon, jobName); // Einstein Engines - Language
+        var wrappedMessage = _chat.WrapMessage(null, null, channel, messageSource, name, content, speech, language, null, jobIcon, jobName); // Einstein Engines - Language
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
         // var chat = new ChatMessage(
@@ -183,7 +177,7 @@ public sealed partial class RadioSystem : EntitySystem
         var obfuscated = _language.ObfuscateSpeech(content, language, messageSource);
         // Goobstation - Chat Pings
         // Added GetNetEntity(messageSource), to source
-        var obfuscatedWrapped = WrapRadioMessage(messageSource, channel, name, obfuscated, language, speech, jobIcon, jobName);
+        var obfuscatedWrapped = _chat.WrapMessage(null, null, channel, messageSource, name, obfuscated, speech, language, null, jobIcon, jobName);
         var notUdsMsg = new ChatMessage(ChatChannel.Radio, obfuscated, obfuscatedWrapped, GetNetEntity(messageSource), null);
         var ev = new RadioReceiveEvent(messageSource, channel, msg, notUdsMsg, language, radioSource);
         // Einstein Engines - Language end
@@ -236,72 +230,6 @@ public sealed partial class RadioSystem : EntitySystem
         _replay.RecordServerMessage(msg); // Einstein Engines - Language
         _messages.Remove(message);
     }
-
-    // Einstein Engines - Language begin
-    private string WrapRadioMessage(
-        EntityUid source,
-        RadioChannelPrototype channel,
-        string name,
-        string message,
-        LanguagePrototype language,
-        SpeechVerbPrototype speech,
-        ProtoId<JobIconPrototype>? jobIcon, // Goob edit
-        string? jobName = null) // Gaby Radio icons
-    {
-        // TODO: code duplication with ChatSystem.WrapMessage
-        var languageColor = channel.Color;
-
-        // Goobstation - Bolded Language Overrides begin
-        var wrapId = speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap";
-        if (speech.Bold && language.SpeechOverride.BoldFontId != null)
-            wrapId = "chat-radio-message-wrap-bolded-language";
-        // Goobstation end
-
-        if (language.SpeechOverride.Color is { } colorOverride)
-            languageColor = Color.InterpolateBetween(Color.White, colorOverride, colorOverride.A); // Changed first param to Color.White so it shows color correctly.
-
-        // goob start - loudspeakers
-
-        int? loudSpeakFont = null;
-
-        var getLoudspeakerEv = new GetLoudspeakerEvent();
-        RaiseLocalEvent(source, ref getLoudspeakerEv);
-
-        if (getLoudspeakerEv.Loudspeakers != null)
-            foreach (var loudspeaker in getLoudspeakerEv.Loudspeakers)
-            {
-                var loudSpeakerEv = new GetLoudspeakerDataEvent();
-                RaiseLocalEvent(loudspeaker, ref loudSpeakerEv);
-
-                if (loudSpeakerEv.IsActive && loudSpeakerEv.AffectRadio)
-                {
-                    loudSpeakFont = loudSpeakerEv.FontSize;
-                    break;
-                }
-            }
-
-        var nameString = jobIcon is null // (unrelated to loudspeakers but still goob)
-            ? name
-            : Loc.GetString("chat-radio-message-name-with-icon", ("jobIcon", jobIcon), ("jobName", jobName ?? ""), ("name", name));
-        // goob end
-
-        // <Trauma> - allow source entity to replace font
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
-        RaiseLocalEvent(source, ref fontEv);
-        // </Trauma>
-
-        return Loc.GetString(wrapId,
-            ("color", channel.Color),
-            ("languageColor", languageColor),
-            ("fontType", fontEv.Font), // Trauma - use Font from above
-            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize), // goob edit - "loudSpeakFont"
-            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
-            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-            ("channel", $"\\[{channel.LocalizedName}\\]"),
-            ("name", nameString), // goob
-            ("message", message));
-    }
-    // Einstein Engines - Language end
 
     /// <inheritdoc cref="TelecomServerComponent"/>
     private bool HasActiveServer(MapId mapId, string channelId)

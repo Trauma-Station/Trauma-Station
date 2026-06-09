@@ -9589,3 +9589,416 @@ Entries:
   id: 1088
   time: '2026-06-02T16:13:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2983
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed demons being able to build anything.
+  id: 1089
+  time: '2026-06-02T23:02:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3011
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: buffed xenomorph callout announcement time from 7 minutes to 15
+  id: 1090
+  time: '2026-06-02T23:04:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3004
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: >-
+      xenomorph win condition is higher and their minpop to spawn is now 40,
+      aswell as them having more of a weakness to heat damage
+  id: 1091
+  time: '2026-06-03T03:44:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3014
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: >-
+      Added hyposhells, a syndicate uplink item that can hold 7u of any reagent
+      and inject upon impact. A job unique item for the bartender.
+  - type: Add
+    message: >-
+      Added tear gas shotgun shells, you can find them in the shotgun gun safe
+      or by ordering a swat crate.
+  id: 1092
+  time: '2026-06-03T05:59:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2989
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: Added a harm mode to interactors. Automated forging is now!
+  id: 1093
+  time: '2026-06-03T07:11:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3006
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix morph/chameleon projector disguise, heretic shadow form and similar
+      things not hiding your sprite.
+  - type: Fix
+    message: Fix segmented entity tails not being hidden by viewcones.
+  - type: Fix
+    message: >-
+      Fix lock path losing free side knowledge draft upon buying any side
+      knowledge from its category.
+  - type: Fix
+    message: Fix arm hammer not knocking down on left click.
+  - type: Fix
+    message: Fix flesh stalker shapeshift removing ghoul indicators.
+  - type: Fix
+    message: Fix plasmaman immortality.
+  - type: Tweak
+    message: Shattered risen gets noslip.
+  id: 1094
+  time: '2026-06-03T08:19:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3017
+- author: Octave
+  changes:
+  - type: Fix
+    message: >-
+      Bosche sprite made to be the up-to-date version rather than the
+      placeholder.
+  id: 1095
+  time: '2026-06-03T15:00:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3019
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Deathrattle Implant to non-nukie uplinks, for 10 TC.
+  - type: Add
+    message: Added the M-90 to the uplink, for 50 TC.
+  - type: Tweak
+    message: Reworked ALOT of prices of items in the uplink. Too many to write here.
+  - type: Tweak
+    message: Renault now yields 40 TC, instead of 25.
+  - type: Tweak
+    message: Reworked some weapons, buffs, nerfs, changes, etc.
+  - type: Fix
+    message: >-
+      Killed metagaming rigged boxing gloves, now you can get them as other
+      colours too.
+  - type: Remove
+    message: Removed His Grace from surplus.
+  id: 1096
+  time: '2026-06-03T18:08:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2847
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: >-
+      Fixed turrets being useless. They can't be cheesed by girders or lockers
+      anymore
+  id: 1097
+  time: '2026-06-03T18:11:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3015
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: xenomorph prying has been improved (its faster and makes a noise now)
+  id: 1098
+  time: '2026-06-03T18:18:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3020
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Enchanting scrolls are now made out of paper, i.e. can burn.
+  id: 1099
+  time: '2026-06-04T09:39:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3037
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed abductor, xeno and slaughter demon ghost roles not spawning you when
+      you win the raffle due to not meeting the playtime requirements.
+  id: 1100
+  time: '2026-06-04T10:08:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3038
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked prices, timers, loadouts, and requirements of some reinforcement
+      roles.
+  id: 1101
+  time: '2026-06-04T15:46:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2738
+- author: Abacondito
+  changes:
+  - type: Add
+    message: Added buyable cement crates to cargo!
+  id: 1102
+  time: '2026-06-04T23:41:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3042
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: >-
+      Xeno resin walls/doors are now 100% soundproof, your screams will not be
+      heard..
+  id: 1103
+  time: '2026-06-04T23:44:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3039
+- author: MoxieIsMoxie
+  changes:
+  - type: Tweak
+    message: Resprited the Outcast & Jealousy Incarnate demons.
+  id: 1104
+  time: '2026-06-04T23:59:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3043
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorphs now emit SPOOKY breathing noises when they sigh
+  id: 1105
+  time: '2026-06-05T00:17:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3033
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added 40, 60 and 120u options to the energy chem dispenser.
+  id: 1106
+  time: '2026-06-05T09:17:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3046
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Changed firebomb to create a tile fire and not nugget people.
+  id: 1107
+  time: '2026-06-05T09:34:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3048
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed skill gain from crafting things.
+  id: 1108
+  time: '2026-06-05T10:11:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3051
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed outcast demon not looking like a vox when wearing clothes.
+  id: 1109
+  time: '2026-06-05T10:19:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3052
+- author: GeneRickUsername
+  changes:
+  - type: Fix
+    message: Fix everyone understanding every language.
+  id: 1110
+  time: '2026-06-05T10:44:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2446
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed xenobio extracts not making reagents when doing their reactions.
+  id: 1111
+  time: '2026-06-05T10:57:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3054
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Dragons breath is now actual fire instead of wizard's exploding fireball.
+      It spews fire over a wide area, though still stopped by anything it hits.
+  - type: Add
+    message: >-
+      Implemented Fire Breath mutation as a single-line version of dragons
+      breath.
+  id: 1112
+  time: '2026-06-05T12:02:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3055
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed RD not getting roboticist and geneticist skillchips in their locker.
+  id: 1113
+  time: '2026-06-05T12:59:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3057
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Probably fixed replays randomly not getting saved because of microslop's
+      shitcode
+  id: 1114
+  time: '2026-06-05T13:01:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3058
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Mothroaches can now ventcrawl, syndi mothroaches now have night vision,
+      same with syndicats
+  id: 1115
+  time: '2026-06-05T19:36:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3060
+- author: SpeltIncorrectyl
+  changes:
+  - type: Remove
+    message: Removed explosive mode from the hardlight bow.
+  id: 1116
+  time: '2026-06-06T10:56:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3067
+- author: AirBiscuit
+  changes:
+  - type: Tweak
+    message: Put a health analyzer in borg surgery and advanced surgery modules.
+  id: 1117
+  time: '2026-06-06T13:44:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3063
+- author: Smilez
+  changes:
+  - type: Tweak
+    message: Added metal work knowledge to engi roles
+  id: 1118
+  time: '2026-06-06T16:26:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3072
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed decapoids being able to use more markings than they should.
+  id: 1119
+  time: '2026-06-07T11:45:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3088
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed access scanner not working unless an ID is on the floor, depending
+      on how many ID cards exist on the server. Now it always works as expected.
+  id: 1120
+  time: '2026-06-07T12:08:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3090
+- author: TechnicFighter,
+  changes:
+  - type: Add
+    message: Added the Centifiend, a new Medium Demon.
+  id: 1121
+  time: '2026-06-07T12:19:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3068
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mortar and pestle not working.
+  id: 1122
+  time: '2026-06-07T23:11:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3096
+- author: Speebro, Deltanedas
+  changes:
+  - type: Add
+    message: Added adamantine to forging, you should probably bring a friend.
+  - type: Tweak
+    message: >-
+      Increased ingot costs on most non-knife forged weapons, except for
+      morningstars.
+  - type: Tweak
+    message: >-
+      Forged items will now break if you damage them 2x the amount required to
+      forge them, before completing forging. Use blunt, don't strike while it's
+      too cold, simple as.
+  - type: Fix
+    message: Forged wrench sprite is complete
+  id: 1123
+  time: '2026-06-08T01:57:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3040
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Fixed midround Entropic Colossus spawn being less cool than intended.
+  - type: Fix
+    message: Fixed Entropic Colossus' health indicator sometimes behaving incorrectly.
+  - type: Fix
+    message: Fixed lag spike when cosmic cult finale starts.
+  id: 1124
+  time: '2026-06-08T11:47:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3101
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed BSO
+  id: 1125
+  time: '2026-06-08T12:43:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3103
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed pipes and cables flickering with t-ray scanner. Engis are no longer
+      on suicide watch.
+  id: 1126
+  time: '2026-06-08T13:34:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3104
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed star gazer laser not doing anything.
+  - type: Fix
+    message: Fixed drones being able to become ghouls.
+  - type: Fix
+    message: Fixed ventcrawling xenos having visible tail.
+  - type: Fix
+    message: Fix void pull disarming.
+  - type: Fix
+    message: Fix crimson cleave doubling user bleed amount instead of removing it.
+  - type: Add
+    message: Tailed entities see can their tail ignoring viewcones.
+  - type: Tweak
+    message: Maid in the mirrors are limited to 4 at a time.
+  - type: Tweak
+    message: >-
+      Reality shifts per heretic roundstart 2 -> 1, max rift spawns after
+      sacrifice 2 -> 3.
+  - type: Tweak
+    message: Time for rift to become visible after collecting it 10min -> 20min.
+  id: 1127
+  time: '2026-06-08T15:32:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3106
+- author: Smilez1010
+  changes:
+  - type: Add
+    message: Added Skill chip boxes to cargo catalog
+  - type: Add
+    message: Added Service skill chip box to hop locker
+  - type: Add
+    message: Added Service Skill chips to Ptech
+  - type: Add
+    message: Added Nukie Skill Chip to Emagged Ptech
+  - type: Tweak
+    message: Ptech restock costs 2.5k now
+  id: 1128
+  time: '2026-06-08T17:07:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3102
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed devil contracts mispredicting for the devil.
+  id: 1129
+  time: '2026-06-08T18:51:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3110
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed skill profiles for a few species, dwarves are actually good at
+      forging.
+  id: 1130
+  time: '2026-06-08T23:21:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3116
+- author: SoulOfExistenz
+  changes:
+  - type: Add
+    message: Added Russian accent to insurgents
+  id: 1131
+  time: '2026-06-09T11:06:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3120
+- author: TurboTrackerss14
+  changes:
+  - type: Fix
+    message: IPC and Plasmamen now use their species knowledge.
+  id: 1132
+  time: '2026-06-09T13:43:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3124

@@ -20,9 +20,6 @@ public sealed partial class DropRandomItem : EntityEffectBase<DropRandomItem>
     /// </summary>
     [DataField]
     public EntityEffect[] Effects = [];
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
 }
 
 public sealed partial class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
@@ -49,6 +46,6 @@ public sealed partial class DropRandomItemEffectSystem : EntityEffectSystem<Hand
         if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
             return;
 
-        _effects.ApplyEffects(item, args.Effect.Effects, user: args.User ?? ent.Owner);
+        _effects.ApplyEffects(item, args.Effect.Effects, user: args.User ?? ent.Owner, predicted: args.Predicted);
     }
 }

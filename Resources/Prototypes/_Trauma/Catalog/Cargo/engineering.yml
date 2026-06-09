@@ -1,0 +1,19 @@
+- type: cargoProduct
+  id: EngineeringCement
+  icon:
+    sprite: _Trauma/Objects/Specific/forging.rsi
+    state: bag_closed
+  product: CrateCement
+  cost: 1500
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: EngineeringSkillChips
+  icon:
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
+    state: icon
+  product: CrateSkillChipsEngi
+  cost: 4500
+  category: cargoproduct-category-name-engineering
+  group: market

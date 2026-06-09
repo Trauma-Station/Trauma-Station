@@ -6,7 +6,7 @@
   finished: ForgedHalberd
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/halberd_head.rsi
   work: 200 # its a fucking halberd
-  cost: 2
+  cost: 3
   skills:
     MetalworkingKnowledge: 2
     WeaponsKnowledge: 3
@@ -19,6 +19,7 @@
   finished: ForgedSpear
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/spear_head.rsi
   work: 150
+  cost: 2
   skills:
     MetalworkingKnowledge: 1
     WeaponsKnowledge: 2

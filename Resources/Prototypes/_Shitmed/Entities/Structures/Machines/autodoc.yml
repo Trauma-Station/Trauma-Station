@@ -36,17 +36,9 @@
   - type: ContainerContainer
     containers:
       machine_board: !type:Container
-        showEnts: False
-        occludes: True
-        ents: []
       machine_parts: !type:Container
-        showEnts: False
-        occludes: True
-        ents: []
       storagebase: !type:Container
-        showEnts: False
-        occludes: True
-        ents: []
+      surgery_specific: !type:ContainerSlot
   - type: ApcPowerReceiver
     powerLoad: 10000
   - type: AutomationSlots
@@ -93,6 +85,18 @@
     speedModifier: 1
   - type: GuideHelp
     guides: [ Autodoc ]
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame # so it deconstructs and empties the held item and storage instead of deleting them
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   parent: Autodoc

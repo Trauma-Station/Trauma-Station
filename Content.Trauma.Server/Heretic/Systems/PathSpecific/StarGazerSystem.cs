@@ -1,23 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Goobstation.Common.Physics;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
-using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Popups;
-using Content.Shared.Administration.Logs;
-using Content.Shared.Body;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Database;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Throwing;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
@@ -25,32 +13,20 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
-using Robust.Server.Audio;
 using Robust.Server.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
 public sealed partial class StarGazerSystem : SharedStarGazerSystem
 {
     [Dependency] private PvsOverrideSystem _pvs = default!;
-    [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private DamageableSystem _dmg = default!;
-    [Dependency] private SharedStarMarkSystem _mark = default!;
-    [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private ThrowingSystem _throw = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private AudioSystem _audio = default!;
     [Dependency] private GhostRoleSystem _ghostRole = default!;
     [Dependency] private TeleportSystem _teleport = default!;
-    [Dependency] private BodySystem _body = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
-    private HashSet<Entity<MobStateComponent>> _targets = default!;
+    [Dependency] private EntityQuery<GhostRoleComponent> _ghostRoleQuery = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     public override void Initialize()
     {
@@ -77,7 +53,8 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
 
     private void OnSeekMaster(Entity<StarGazerComponent> ent, ref StarGazerSeekMasterEvent args)
     {
-        if (!TryComp(ent, out Shared.Heretic.Components.Ghoul.HereticMinionComponent? minion) || !Exists(minion.BoundHeretic))
+        if (!TryComp(ent, out HereticMinionComponent? minion) ||
+            !Exists(minion.BoundHeretic))
             return;
 
 
@@ -137,7 +114,7 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
 
         ent.Comp.ResettingMindSession = null;
 
-        if (!TryComp(ent, out Shared.Heretic.Components.Ghoul.HereticMinionComponent? minion) || minion.BoundHeretic is not { } heretic)
+        if (!TryComp(ent, out HereticMinionComponent? minion) || minion.BoundHeretic is not { } heretic)
             return;
 
         _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-user"),
@@ -150,22 +127,22 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
     {
         args.Handled = true;
 
-        var starGazer = ResolveStarGazer(ent.Owner, out var spawned);
-        if (starGazer == null || spawned)
+        if (ResolveStarGazer(ent.Owner, out var spawned) is not { } starGazer || spawned)
             return;
 
-        if (TryComp(starGazer.Value, out ActorComponent? actor))
-            starGazer.Value.Comp.ResettingMindSession = actor.PlayerSession;
+        if (TryComp(starGazer, out ActorComponent? actor))
+            starGazer.Comp.ResettingMindSession = actor.PlayerSession;
 
-        EnsureComp<GhostTakeoverAvailableComponent>(starGazer.Value).IgnoreMindCheck = true;
-        var role = EnsureComp<GhostRoleComponent>(starGazer.Value);
+        EnsureComp<GhostTakeoverAvailableComponent>(starGazer).IgnoreMindCheck = true;
+        var role = EnsureComp<GhostRoleComponent>(starGazer);
         _ghostRole.SetTaken(role, false);
-        _ghostRole.RegisterGhostRole((starGazer.Value, role));
+        _ghostRole.RegisterGhostRole((starGazer, role));
+
+        starGazer.Comp.GhostRoleTimer = Timing.CurTime + starGazer.Comp.GhostRoleTime;
     }
 
     private void RemoveGhostRole(Entity<StarGazerComponent, GhostRoleComponent?> ent, bool hasMind, bool resettingMind)
     {
-        ent.Comp1.GhostRoleAccumulator = 0f;
         ent.Comp1.ResettingMindSession = null;
 
         if (!hasMind || resettingMind || !Resolve(ent, ref ent.Comp2, false) || ent.Comp2.Taken)
@@ -179,354 +156,50 @@ public sealed partial class StarGazerSystem : SharedStarGazerSystem
     {
         base.Update(frameTime);
 
-        var jointQuery = GetEntityQuery<ComplexJointVisualsComponent>();
-        var mobStateQuery = GetEntityQuery<MobStateComponent>();
-        var starGazeQuery = GetEntityQuery<StarGazeComponent>();
-        var ghostRoleQuery = GetEntityQuery<GhostRoleComponent>();
-        var actorQuery = GetEntityQuery<ActorComponent>();
-        var minionQuery = GetEntityQuery<HereticMinionComponent>();
+        var now = Timing.CurTime;
 
-        // TODO: JESUS FUCKING CHRIST
-        var query = EntityQueryEnumerator<StarGazerComponent, MindContainerComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var starGazer, out var mindContainer, out var xform))
+        var query = EntityQueryEnumerator<StarGazerComponent, HereticMinionComponent, MindContainerComponent,
+            TransformComponent>();
+        while (query.MoveNext(out var uid, out var starGazer, out var minion, out var mindContainer, out var xform))
         {
             var hasMind = mindContainer.HasMind;
             var resettingMind = starGazer.ResettingMindSession != null;
-            var changedSession = resettingMind && (!actorQuery.TryComp(uid, out var actor) ||
+            var changedSession = resettingMind && (!_actorQuery.TryComp(uid, out var actor) ||
                                                    actor.PlayerSession != starGazer.ResettingMindSession);
 
-            var minion = minionQuery.CompOrNull(uid);
-
-            if (minion != null && Exists(minion.BoundHeretic))
+            if (changedSession)
+                RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
+            else if (hasMind && resettingMind && _ghostRoleQuery.TryComp(uid, out var ghostRole))
             {
-                if (changedSession)
-                    RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
-                else if (hasMind && resettingMind && ghostRoleQuery.TryComp(uid, out var ghostRole))
+                if (now > starGazer.GhostRoleTimer)
                 {
-                    starGazer.GhostRoleAccumulator += frameTime;
+                    starGazer.GhostRoleTimer = now + starGazer.GhostRoleTime;
 
-                    if (starGazer.GhostRoleAccumulator > starGazer.GhostRoleTimer)
-                    {
-                        RemoveGhostRole((uid, starGazer, ghostRole), hasMind, resettingMind);
-                        _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-fail"),
-                            minion.BoundHeretic.Value,
-                            minion.BoundHeretic.Value,
-                            PopupType.Large);
-                    }
-                }
-                else
-                    RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
+                    RemoveGhostRole((uid, starGazer, ghostRole), hasMind, resettingMind);
 
-                starGazer.ResetDistanceAccumulator += frameTime;
-
-                if (starGazer.ResetDistanceAccumulator > starGazer.ResetDistanceTimer)
-                {
-                    starGazer.ResetDistanceAccumulator = 0f;
-
-                    if (!Xform.InRange((uid, xform), minion.BoundHeretic.Value, starGazer.MaxDistance))
-                        TeleportStarGazer((uid, starGazer), minion.BoundHeretic.Value);
-                }
-            }
-
-            if (!starGazeQuery.TryComp(uid, out var starGaze))
-                continue;
-
-            if (!starGaze.StartedBlasting)
-                continue;
-
-            if (!jointQuery.TryComp(uid, out var joint))
-            {
-                QueueDel(starGaze.Endpoint);
-                RemCompDeferred(uid, starGaze);
-                continue;
-            }
-
-            starGaze.TimeSinceBeamCreation += frameTime;
-
-            var time = starGaze.TimeSinceBeamCreation;
-
-            if (time > starGaze.Duration)
-            {
-                ClearJoints(uid, joint);
-                QueueDel(starGaze.Endpoint);
-                RemCompDeferred(uid, starGaze);
-                continue;
-            }
-
-            var stage = GetBeamStage(time);
-            Dictionary<NetEntity, ComplexJointVisualsData>? jointData = null;
-
-            if (stage != starGaze.LastStage)
-            {
-                starGaze.LastStage = stage;
-
-                jointData = GetJointData(joint);
-                foreach (var data in jointData.Values)
-                {
-                    if (data.Id != JointId)
+                    if (!Exists(minion.BoundHeretic))
                         continue;
 
-                    var startSprite = starGaze.Start2;
-                    var beamSprite = starGaze.Beam2;
-                    var endSprite = starGaze.End2;
-                    switch (stage)
-                    {
-                        case 1:
-                            startSprite = starGaze.Start1;
-                            beamSprite = starGaze.Beam1;
-                            endSprite = starGaze.End1;
-                            break;
-                        case 3:
-                            startSprite = starGaze.Start3;
-                            beamSprite = starGaze.Beam3;
-                            endSprite = starGaze.End3;
-                            break;
-                    }
-
-                    if (data.StartSprite == startSprite)
-                        continue;
-
-                    data.StartSprite = startSprite;
-                    data.Sprite = beamSprite;
-                    data.EndSprite = endSprite;
-                    Dirty(uid, joint);
+                    _popup.PopupEntity(Loc.GetString("heretic-stargazer-consciousness-reset-fail"),
+                        minion.BoundHeretic.Value,
+                        minion.BoundHeretic.Value,
+                        PopupType.Large);
                 }
             }
-
-            starGaze.Accumulator += frameTime;
-
-            if (starGaze.Accumulator < starGaze.UpdateInterval)
-                continue;
-
-            starGaze.Accumulator = 0;
-
-            var exists = Exists(starGaze.Endpoint);
-            if (!exists || starGaze.CursorPosition == null)
-            {
-                ClearJoints(uid, joint, jointData);
-
-                if (exists)
-                    QueueDel(starGaze.Endpoint!.Value);
-
-                RemCompDeferred(uid, starGaze);
-                continue;
-            }
-
-            var target = starGaze.CursorPosition.Value;
-            var endpoint = starGaze.Endpoint!.Value;
-            var endpointXform = Transform(endpoint);
-            var pos = Xform.GetWorldPosition(endpointXform);
-            var dir = target.Position - pos;
-            var len = dir.Length();
-
-            var gazerPos = Xform.GetWorldPosition(xform);
-            var newPos = pos + dir * starGaze.LaserSpeed / len;
-            var dir2 = newPos - gazerPos;
-            var len2 = dir2.Length();
-
-            if (len2 < 0.01f)
-                continue;
-
-            if (len <= starGaze.LaserSpeed)
-                Xform.SetMapCoordinates((endpoint, endpointXform), target);
             else
-            {
-                var newLen = Math.Clamp(len2, starGaze.MinMaxLaserRange.X, starGaze.MinMaxLaserRange.Y);
+                RemoveGhostRole((uid, starGazer), hasMind, resettingMind);
 
-                Xform.SetMapCoordinates((endpoint, endpointXform),
-                    new MapCoordinates(gazerPos + dir2 * newLen / len2, xform.MapID));
-            }
-
-            starGaze.DamageAccumulator += MathF.Max(frameTime, starGaze.UpdateInterval);
-
-            if (starGaze.DamageAccumulator < starGaze.DamageInterval || stage != 2)
+            if (now < starGazer.ResetDistanceTimer)
                 continue;
 
-            starGaze.DamageAccumulator = 0f;
+            starGazer.ResetDistanceTimer = now + starGazer.ResetDistanceTime;
 
-            var c = pos - gazerPos;
-            var cLen = c.Length();
-
-            if (cLen <= 0.01f)
+            if (!Exists(minion.BoundHeretic))
                 continue;
 
-            var cNorm = c / cLen;
-            var angle = c.ToAngle();
-
-            var offset = cNorm * starGaze.BeamScale;
-            var box = new Box2(gazerPos + offset + new Vector2(0f, -starGaze.LaserThickness),
-                gazerPos + offset + new Vector2(cLen, starGaze.LaserThickness));
-            var boxRot = new Box2Rotated(box, angle, gazerPos + offset);
-
-            _targets.Clear();
-            _lookup.GetEntitiesIntersecting(xform.MapID, boxRot, _targets, LookupFlags.Dynamic);
-            foreach (var noob in _targets)
-            {
-                if (noob == minion?.BoundHeretic)
-                    continue;
-
-                if (_mobState.IsIncapacitated(noob, noob.Comp))
-                {
-                    var coords = Transform(noob).Coordinates;
-                    _admin.Add(LogType.Gib,
-                        LogImpact.Medium,
-                        $"{ToPrettyString(uid):user} ashed {ToPrettyString(noob):target} using star gazer laser beam");
-                    /* Annoying popup spam
-                    _popup.PopupCoordinates(Loc.GetString("heretic-stargaze-obliterate-other",
-                            ("uid", Identity.Entity(noob, EntityManager))),
-                        coords,
-                        Filter.PvsExcept(noob),
-                        true,
-                        PopupType.LargeCaution);*/
-                    _popup.PopupCoordinates(Loc.GetString("heretic-stargaze-obliterate-user"),
-                        coords,
-                        noob,
-                        PopupType.LargeCaution);
-                    _audio.PlayPvs(starGaze.ObliterateSound, coords);
-                    Spawn(starGaze.AshProto, coords);
-                    QueueDel(noob); // Goodbye
-                    continue;
-                }
-
-                _mark.TryApplyStarMark(noob.AsNullable());
-                _dmg.TryChangeDamage(noob.Owner,
-                    starGaze.Damage * _body.GetVitalBodyPartRatio(noob.Owner),
-                    origin: uid,
-                    targetPart: TargetBodyPart.All,
-                    splitDamage: SplitDamageBehavior.SplitEnsureAll);
-
-                if (_random.Prob(starGaze.ScreamProb))
-                    _chat.TryEmoteWithChat(noob, "Scream");
-            }
-
-            var boxRot2 = new Box2Rotated(box.Enlarged(starGaze.GravityPullSizeModifier), angle, gazerPos + offset);
-            _targets.Clear();
-            _lookup.GetEntitiesIntersecting(xform.MapID, boxRot2, _targets, LookupFlags.Dynamic);
-            foreach (var noob in _targets)
-            {
-                if (noob == minion?.BoundHeretic)
-                    continue;
-
-                var noobXform = Transform(noob);
-                var noobPos = Xform.GetWorldPosition(noobXform);
-
-                var a = pos + offset - noobPos;
-                var b = gazerPos + offset - noobPos;
-                var aLen = a.Length();
-                var bLen = b.Length();
-
-                if (aLen <= 0.01f || bLen <= 0.01f)
-                    continue;
-
-                var angleac = MathF.Acos(Vector2.Dot(a / aLen, cNorm));
-                var anglebc = MathF.Acos(Vector2.Dot(cNorm, b / -bLen));
-
-                var sinac = MathF.Sin(angleac);
-                var sinbc = MathF.Sin(anglebc);
-                var anothersin = MathF.Sin(angleac + anglebc);
-                var dist = cLen * sinac * sinbc / anothersin;
-
-                var list = new List<(Vector2, float)>([(a / aLen, aLen), (b / bLen, bLen)]);
-
-                var try1 = Angle.FromDegrees(90).RotateVec(cNorm);
-                var try1Pos = noobPos + try1 * dist * 2f;
-                var try2 = -try1;
-                var try2Pos = noobPos + try2 * dist * 2f;
-
-                if (DoIntersect(gazerPos + offset, pos + offset, noobPos, try1Pos))
-                    list.Add((try1, dist));
-                else if (DoIntersect(gazerPos + offset, pos + offset, noobPos, try2Pos))
-                    list.Add((try2, dist));
-
-                var result = list.MinBy(x => x.Item2);
-
-                if (result.Item2 <= 0.01f)
-                    continue;
-
-                var throwDir = result.Item1 * MathF.Min(starGaze.MaxThrowLength, result.Item2);
-                _throw.TryThrow(noob,
-                    throwDir,
-                    starGaze.ThrowSpeed,
-                    recoil: false,
-                    animated: false,
-                    doSpin: false,
-                    playSound: false,
-                    predicted: false);
-            }
+            if (!Xform.InRange((uid, xform), minion.BoundHeretic.Value, starGazer.MaxDistance))
+                TeleportStarGazer((uid, starGazer), minion.BoundHeretic.Value);
         }
-    }
-
-    private static Dictionary<NetEntity, ComplexJointVisualsData> GetJointData(ComplexJointVisualsComponent joint)
-    {
-        return joint.Data.Where(x => x.Value.Id == JointId).ToDictionary();
-    }
-
-    private void ClearJoints(EntityUid uid,
-        ComplexJointVisualsComponent joint,
-        Dictionary<NetEntity, ComplexJointVisualsData>? jointData = null)
-    {
-        jointData ??= GetJointData(joint);
-
-        if (joint.Data.Count >= jointData.Count)
-            RemCompDeferred(uid, joint);
-        else
-        {
-            joint.Data = joint.Data.ExceptBy(jointData.Keys, kvp => kvp.Key).ToDictionary();
-            Dirty(uid, joint);
-        }
-    }
-
-    public static int GetOrientation(Vector2 a, Vector2 b, Vector2 c)
-    {
-        var val = (b.Y - a.Y) * (c.X - b.X) - (b.X - a.X) * (c.Y - b.Y);
-
-        if (val == 0)
-            return 0;
-
-        return val > 0 ? 1 : 2;
-    }
-
-    public static bool OnSegment(Vector2 a, Vector2 b, Vector2 c)
-    {
-        return b.X <= Math.Max(a.X, c.X) && b.X >= Math.Min(a.X, c.X) &&
-               b.Y <= Math.Max(a.Y, c.Y) && b.Y >= Math.Min(a.Y, c.Y);
-    }
-
-    public static bool DoIntersect(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2)
-    {
-        // Find the four orientations needed for general and special cases
-        var o1 = GetOrientation(p1, q1, p2);
-        var o2 = GetOrientation(p1, q1, q2);
-        var o3 = GetOrientation(p2, q2, p1);
-        var o4 = GetOrientation(p2, q2, q1);
-
-        // General case: segments intersect if orientations are different
-        if (o1 != o2 && o3 != o4)
-            return true;
-
-        // Special Cases (collinear points)
-        // p1, q1 and p2 are collinear and p2 lies on segment p1q1
-        if (o1 == 0 && OnSegment(p1, p2, q1))
-            return true;
-
-        // p1, q1 and q2 are collinear and q2 lies on segment p1q1
-        if (o2 == 0 && OnSegment(p1, q2, q1))
-            return true;
-
-        // p2, q2 and p1 are collinear and p1 lies on segment p2q2
-        if (o3 == 0 && OnSegment(p2, p1, q2))
-            return true;
-
-        // p2, q2 and q1 are collinear and q1 lies on segment p2q2
-        if (o4 == 0 && OnSegment(p2, q1, q2))
-            return true;
-
-        return false; // Doesn't fall in any of the above cases
-    }
-
-    private static int GetBeamStage(float time)
-    {
-        return time < 0.8f ? 1 : time > 9.7f ? 3 : 2;
     }
 
     private void OnShutdown(Entity<LaserBeamEndpointComponent> ent, ref ComponentShutdown args)

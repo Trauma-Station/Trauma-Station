@@ -6,6 +6,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: SoundBlocker
+    soundBlockPercent: 1.0
   - type: InteractionOutline
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_resin_door.rsi

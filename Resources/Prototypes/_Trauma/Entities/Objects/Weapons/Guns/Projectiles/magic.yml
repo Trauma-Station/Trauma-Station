@@ -1,0 +1,9 @@
+- type: entity
+  parent: ProjectileDragonsBreath
+  id: ProjectileDragonsBreathSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: ProjectileDragonsBreath
+    count: 3
+    spread: 30
