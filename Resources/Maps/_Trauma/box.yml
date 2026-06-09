@@ -14122,11 +14122,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-43.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 103
 - proto: AltarConvertMaint
   entities:
   - uid: 679
@@ -80760,11 +80755,6 @@ entities:
     - type: Transform
       pos: -2.5,-43.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 103
   - uid: 12935
     components:
     - type: Transform
@@ -107762,11 +107752,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-42.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 103
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 16571
@@ -109233,11 +109218,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-44.5
       parent: 2
-    - type: DeviceNetwork
-      configurators:
-      - invalid
-      deviceLists:
-      - 103
     - type: AtmosPipeColor
       color: '#990000FF'
   - uid: 16758
