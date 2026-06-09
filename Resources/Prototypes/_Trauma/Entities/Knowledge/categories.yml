@@ -73,7 +73,7 @@
   components:
   - type: Knowledge
     category: Language
-    learnedLevel: 26
+    learnedLevel: 25
     experienceCost: 16
     color: "#ADD8E6"
     costs: null # its currently fucked, have to use traits still :(

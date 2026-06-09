@@ -651,9 +651,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
-            >= 76 => 4,
-            >= 51 => 3,
-            >= 26 => 2,
+            >= 75 => 4,
+            >= 50 => 3,
+            >= 25 => 2,
             >= 1 => 1,
             _ => 0,
         };
@@ -675,9 +675,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
-            >= 4 => 76,
-            >= 3 => 51,
-            >= 2 => 26,
+            >= 4 => 75,
+            >= 3 => 50,
+            >= 2 => 25,
             >= 1 => 1,
             _ => 0,
         };
