@@ -183,7 +183,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         ent.Comp.Driver = driver;
         Dirty(ent);
 
-        AddActions(driver, ent);
+        AddActions(ent, driver);
         _appearance.SetData(ent, VehicleState.DrawOver, true);
 
         SetupOverlay(ent);
