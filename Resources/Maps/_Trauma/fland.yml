@@ -29754,12 +29754,6 @@ entities:
     - type: Transform
       pos: 29.5,-45.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: Biogenerator
   entities:
   - uid: 17964
@@ -29767,13 +29761,6 @@ entities:
     - type: Transform
       pos: -7.5,36.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: BiomassReclaimer
   entities:
   - uid: 2167
@@ -188060,13 +188047,6 @@ entities:
     - type: Transform
       pos: 52.5,-16.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapAirlock1
   entities:
   - uid: 29062
@@ -188263,13 +188243,6 @@ entities:
     - type: Transform
       pos: 21.5,15.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 29097
@@ -188294,13 +188267,6 @@ entities:
     - type: Transform
       pos: -8.5,11.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 29101
@@ -205809,13 +205775,6 @@ entities:
     - type: Transform
       pos: 64.5,48.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformScrubsColorBlue
   entities:
   - uid: 31908

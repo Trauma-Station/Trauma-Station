@@ -13096,13 +13096,6 @@ entities:
     - type: Transform
       pos: -4.5,7.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 1830
@@ -13137,13 +13130,6 @@ entities:
     - type: Transform
       pos: 15.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 1836
@@ -13158,13 +13144,6 @@ entities:
     - type: Transform
       pos: -6.5,3.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SheetGlass
   entities:
   - uid: 1594

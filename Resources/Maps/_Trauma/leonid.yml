@@ -99561,8 +99561,6 @@ entities:
     - type: Transform
       pos: -57.5,-49.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 24662
 - proto: CleanerDispenser
   entities:
   - uid: 16094
@@ -104443,12 +104441,6 @@ entities:
     - type: Transform
       pos: -24.5,32.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: CyberPen
   entities:
   - uid: 16865
@@ -114038,8 +114030,6 @@ entities:
     - type: Transform
       pos: -67.5,-49.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 24662
 - proto: ExtendedEmergencyNitrogenTankFilled
   entities:
   - uid: 18497
@@ -159592,23 +159582,6 @@ entities:
     - type: Transform
       pos: -43.5,11.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        24682:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        28787:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        28788:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        18496:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        16093:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialWoodPlank
   entities:
   - uid: 24663
@@ -159724,8 +159697,6 @@ entities:
     - type: Transform
       pos: -61.5,-23.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 24662
 - proto: MedkitAdvancedFilled
   entities:
   - uid: 24683
@@ -183652,13 +183623,6 @@ entities:
     - type: Transform
       pos: -55.5,-47.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapAirlock1
   entities:
   - uid: 28739
@@ -183969,29 +183933,11 @@ entities:
     - type: Transform
       pos: -77.5,29.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 24662
   - uid: 28788
     components:
     - type: Transform
       pos: -64.5,30.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 24662
 - proto: SeedExtractor
   entities:
   - uid: 28789
@@ -184016,13 +183962,6 @@ entities:
     - type: Transform
       pos: -18.5,-3.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 28793
@@ -200135,13 +200074,6 @@ entities:
     - type: Transform
       pos: -28.5,14.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 31344

@@ -11140,13 +11140,6 @@ entities:
     - type: Transform
       pos: 29.5,-17.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: AutolatheMachineCircuitboard
   entities:
   - uid: 611
@@ -11627,12 +11620,6 @@ entities:
     - type: Transform
       pos: 64.5,19.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: Biogenerator
   entities:
   - uid: 699
@@ -70555,12 +70542,6 @@ entities:
     - type: Transform
       pos: 7.5,22.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: OxygenCanister
   entities:
   - uid: 10585
@@ -78475,13 +78456,6 @@ entities:
     - type: Transform
       pos: 52.5,17.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapCamera
   entities:
   - uid: 11891
@@ -78582,13 +78556,6 @@ entities:
     - type: Transform
       pos: 38.5,21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 11908
@@ -78608,13 +78575,6 @@ entities:
     - type: Transform
       pos: 17.5,5.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 11911
@@ -86577,13 +86537,6 @@ entities:
     - type: Transform
       pos: 20.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 13048

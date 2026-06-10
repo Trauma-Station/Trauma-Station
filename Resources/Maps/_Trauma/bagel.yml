@@ -15733,12 +15733,6 @@ entities:
     - type: Transform
       pos: 9.5,12.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: BananaPhoneInstrument
   entities:
   - uid: 811
@@ -63708,12 +63702,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -78.5,-0.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 10009
     components:
     - type: Transform
@@ -126365,13 +126353,6 @@ entities:
     - type: Transform
       pos: -42.5,-10.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapCamera
   entities:
   - uid: 19650
@@ -126549,18 +126530,6 @@ entities:
     - type: Transform
       pos: -26.5,2.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Glass
-      - Plastic
-      - Steel
 - proto: SeedExtractor
   entities:
   - uid: 19682
@@ -126590,13 +126559,6 @@ entities:
     - type: Transform
       pos: -4.5,-35.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 19687
@@ -139645,17 +139607,6 @@ entities:
     - type: Transform
       pos: 4.5,-27.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Cloth
-      - Durathread
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 21715

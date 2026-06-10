@@ -23328,8 +23328,6 @@ entities:
     - type: Transform
       pos: 13.5,-20.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 8679
 - proto: CargoTelepad
   entities:
   - uid: 3449
@@ -28721,12 +28719,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-14.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 4366
     components:
     - type: Transform
@@ -57938,14 +57930,6 @@ entities:
     - type: Transform
       pos: 13.5,-24.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        8764:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        3448:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialWoodPlank
   entities:
   - uid: 8680
@@ -58464,8 +58448,6 @@ entities:
     - type: Transform
       pos: 17.5,-23.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 8679
 - proto: OreProcessorMachineCircuitboard
   entities:
   - uid: 8765
@@ -65861,13 +65843,6 @@ entities:
     - type: Transform
       pos: -10.5,-0.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 10040
@@ -65943,13 +65918,6 @@ entities:
     - type: Transform
       pos: 36.5,10.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 10052
@@ -65964,13 +65932,6 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SheetGlass
   entities:
   - uid: 10054
@@ -72553,13 +72514,6 @@ entities:
     - type: Transform
       pos: -1.5,21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRed
   entities:
   - uid: 11024

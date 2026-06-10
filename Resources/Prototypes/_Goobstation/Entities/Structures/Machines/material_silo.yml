@@ -1,6 +1,6 @@
 - type: entity
   parent: [ BaseMachinePowered, ConstructibleMachine ]
-  id: MaterialSilo
+  id: MachineMasterMaterialSilo
   name: master material silo
   description: Master silo which distributes inserted materials to all silos on the station.
   components:

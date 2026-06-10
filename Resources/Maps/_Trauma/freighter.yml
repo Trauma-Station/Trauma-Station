@@ -16111,25 +16111,11 @@ entities:
     - type: Transform
       pos: 72.5,21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 1165
     components:
     - type: Transform
       pos: -231.5,-11.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: BiomassReclaimer
   entities:
   - uid: 1166
@@ -49460,17 +49446,6 @@ entities:
     - type: Transform
       pos: -176.5,-6.5
       parent: 2
-    - type: Pullable
-      prevFixedRotation: True
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 17287
 - proto: CargoTelepad
   entities:
   - uid: 7805
@@ -58867,26 +58842,12 @@ entities:
     - type: Transform
       pos: -111.5,10.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 9486
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -121.5,-8.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 9487
     components:
     - type: Transform
@@ -67311,8 +67272,6 @@ entities:
     - type: Transform
       pos: 65.5,-12.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17287
 - proto: Error
   entities:
   - uid: 10911
@@ -67360,8 +67319,6 @@ entities:
     - type: Transform
       pos: -105.5,-5.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17287
 - proto: FaceHuggerToys
   entities:
   - uid: 10918
@@ -111776,37 +111733,6 @@ entities:
     - type: Transform
       pos: -176.5,-7.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        7804:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        19667:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        17372:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        19624:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        10917:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        17305:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        19670:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        21563:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        10910:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-    - type: Pullable
-      prevFixedRotation: True
 - proto: MaterialWoodPlank
   entities:
   - uid: 17288
@@ -111907,8 +111833,6 @@ entities:
     - type: Transform
       pos: -42.5,-4.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17287
 - proto: MedkitAdvanced
   entities:
   - uid: 17306
@@ -112325,15 +112249,6 @@ entities:
     - type: Transform
       pos: -198.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 17287
 - proto: OrganHumanHandLeft
   entities:
   - uid: 17373
@@ -124798,15 +124713,6 @@ entities:
     - type: Transform
       pos: -102.5,-5.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17287
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SciFlash
   entities:
   - uid: 1264
@@ -125053,17 +124959,6 @@ entities:
     - type: Transform
       pos: -241.5,3.5
       parent: 2
-    - type: Pullable
-      prevFixedRotation: True
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 17287
 - proto: SeedExtractor
   entities:
   - uid: 19668
@@ -125083,17 +124978,6 @@ entities:
     - type: Transform
       pos: -4.5,-13.5
       parent: 2
-    - type: Pullable
-      prevFixedRotation: True
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 17287
 - proto: ShardCrystalRandom
   entities:
   - uid: 19671
@@ -136861,15 +136745,6 @@ entities:
     - type: Transform
       pos: 39.5,-13.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17287
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 21564

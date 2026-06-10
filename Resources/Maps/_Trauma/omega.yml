@@ -11028,13 +11028,6 @@ entities:
     - type: Transform
       pos: -20.5,12.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: AutolatheMachineCircuitboard
   entities:
   - uid: 1013
@@ -11357,12 +11350,6 @@ entities:
     - type: Transform
       pos: -28.5,32.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: BlastDoor
   entities:
   - uid: 1066
@@ -33033,12 +33020,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 4.5,-40.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ComputerRoboticsControl
   entities:
   - uid: 5212
@@ -62577,12 +62558,6 @@ entities:
     - type: Transform
       pos: 26.5,15.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: OrganHumanAppendix
   entities:
   - uid: 9551
@@ -70147,13 +70122,6 @@ entities:
     - type: Transform
       pos: 3.5,-16.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 10773
@@ -70318,13 +70286,6 @@ entities:
     - type: Transform
       pos: -35.5,20.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 10805
@@ -70349,13 +70310,6 @@ entities:
     - type: Transform
       pos: -17.5,-0.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 10809
@@ -77451,17 +77405,6 @@ entities:
     - type: Transform
       pos: 5.5,24.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Cloth
-      - Durathread
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 11876
