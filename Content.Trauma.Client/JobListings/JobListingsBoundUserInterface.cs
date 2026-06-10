@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Common.JobListings;
 using JetBrains.Annotations;
 
 namespace Content.Trauma.Client.JobListings;
@@ -19,5 +20,17 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     {
         base.Open();
         _menu?.OpenCenteredLeft();
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (state is not JobListingsUserInterfaceState jobListingsState)
+            return;
+
+        _menu?.ClearJobListings();
+        foreach (var sideJob in jobListingsState.AvailableSideJobs)
+        {
+            _menu?.AddAvailableSideJob(sideJob);
+        }
     }
 }

@@ -25,8 +25,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         MinSize="100 256"
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">
+                        <RichTextLabel
+                            Name="AvailableJobListingsLabel"
+                            VerticalExpand="True"
+                            Text="Available:"/>
                         <BoxContainer
-                            Name="JobListingsContainer"
+                            Name="AvailableJobListingsContainer"
                             MinSize="100 256"
                             Orientation="Vertical"
                             SizeFlagsStretchRatio="2"

@@ -13,6 +13,7 @@ using Content.Trauma.Common.JobListings;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
 using Robust.Server.Containers;
+using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -28,6 +29,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     [Dependency] private ObjectivesSystem _objectives = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PdaSystem _pda = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -107,9 +109,30 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         UpdateUi(owner);
     }
 
+    /// <summary>
+    /// Update the job listings ui on an entity.
+    /// </summary>
+    /// <param name="owner">The entity that owns the Ui, probably a PDA.</param>
     public void UpdateUi(EntityUid owner)
     {
+        if (!TryComp<RemoteJobListingsComponent>(owner, out var remoteComp))
+            return;
+        if (!TryComp<JobListingsComponent>(remoteComp.JobListings, out var jobListingsComp))
+            return;
+        if (jobListingsComp.Mind is null)
+            return;
 
+        var availableSideJobs = new List<SideJobInfo>();
+        foreach (var sidejob in jobListingsComp.AvailableSideJobs)
+        {
+            var info = GetInfo(jobListingsComp.Mind.Value, sidejob);
+            if (info is null)
+                continue;
+            availableSideJobs.Add(info.Value);
+        }
+
+        var state = new JobListingsUserInterfaceState(availableSideJobs);
+        _ui.SetUiState(owner, JobListingsUiKey.Key, state);
     }
 
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
