@@ -32,7 +32,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         base.Initialize();
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInitialised);
-        SubscribeLocalEvent<JobListingsComponent, MapInitEvent>(OnInit);
         SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
     }
 
@@ -42,16 +41,16 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// </summary>
     /// <param name="jobBoard">The entity of the store and job board.</param>
     /// <returns>True if successful, false if failure.</returns>
-    public bool AssignSideJob(Entity<StoreComponent, JobListingsComponent> jobBoard)
+    public bool AssignSideJob(Entity<JobListingsComponent> jobBoard)
     {
-        if (jobBoard.Comp1.AccountOwner is null)
+        if (jobBoard.Comp.Mind is null)
             return false;
 
-        var mind = jobBoard.Comp1.AccountOwner.Value;
+        var mind = jobBoard.Comp.Mind.Value;
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return false;
 
-        var possibleJobs = jobBoard.Comp2.SideJobs.ShallowClone();
+        var possibleJobs = jobBoard.Comp.SideJobs.ShallowClone();
 
         var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(jobBoard.Owner));
         while (possibleJobs.Count > 0)
@@ -63,7 +62,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
                 return false;
 
-            jobBoard.Comp2.AvailableSideJobs.Add(sideJob.Value);
+            jobBoard.Comp.AvailableSideJobs.Add(sideJob.Value);
         }
 
         return false;
@@ -75,9 +74,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// </summary>
     /// <param name="jobBoard"></param>
     /// <returns>True if successful, false if failure.</returns>
-    public int CountSideJobs(Entity<StoreComponent, JobListingsComponent> jobBoard)
+    public int CountSideJobs(Entity<JobListingsComponent> jobBoard)
     {
-        return jobBoard.Comp2.AvailableSideJobs.Count;
+        return jobBoard.Comp.AvailableSideJobs.Count;
     }
 
     /// <summary>
@@ -85,9 +84,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// </summary>
     /// <param name="jobBoard"></param>
     /// <returns>True if successful, false if failure.</returns>
-    public bool FillSideJobs(Entity<StoreComponent, JobListingsComponent> jobBoard)
+    public bool FillSideJobs(Entity<JobListingsComponent> jobBoard)
     {
-        while (CountSideJobs(jobBoard) < jobBoard.Comp2.JobCount)
+        while (CountSideJobs(jobBoard) < jobBoard.Comp.JobCount)
         {
             if (!AssignSideJob(jobBoard))
                 return false;
@@ -96,27 +95,33 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         return true;
     }
 
-    private void OnInit(Entity<JobListingsComponent> ent, ref MapInitEvent args)
+    /// <summary>
+    /// Open the job listings ui.
+    /// </summary>
+    /// <param name="owner">The entity which owns the Ui, probably a PDA.</param>
+    /// <param name="actor">The player opening the Ui.</param>
+    public void OpenUi(EntityUid owner, EntityUid actor)
     {
-        if(!_ui.HasUi(ent.Owner, JobListingsUiKey.Key))
-            _ui.SetUi(ent.Owner, JobListingsUiKey.Key, new InterfaceData("JobListingsBoundUserInterface", -1));
+        _ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
+        UpdateUi(owner);
+    }
+
+    public void UpdateUi(EntityUid owner)
+    {
+
     }
 
     private void OnStoreInitialised(ref StoreInitializedEvent args)
     {
-        if (!TryComp<StoreComponent>(args.Store, out var storeComp))
-            return;
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
             return;
 
-        FillSideJobs((args.Store, storeComp, jobListingsComp));
+        jobListingsComp.Mind = args.TargetUser;
+        FillSideJobs((args.Store, jobListingsComp));
     }
 
     private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
     {
-        // the job board is the same entity as the uplink store
-        if (!_pda.TryGetUnlockedStore(pda, out var jobBoard))
-            return;
-        OpenUi(jobBoard.Value, msg.Actor);
+        OpenUi(pda, msg.Actor);
     }
 }

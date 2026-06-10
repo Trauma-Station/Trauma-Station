@@ -29,4 +29,10 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public List<EntityUid> AvailableSideJobs = new();
+
+    /// <summary>
+    ///  The mind of the person (probably traitor) who owns the job board.
+    /// </summary>
+    [DataField]
+    public EntityUid? Mind;
 }

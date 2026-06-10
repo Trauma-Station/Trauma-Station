@@ -108,6 +108,10 @@
         type: InstrumentBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
+      # <Trauma> - job listings
+      enum.JobListingsUiKey.Key:
+        type: JobListingsBoundUserInterface
+      # </Trauma>
   - type: RemoteStore # PDAs can access uplinks so they need this component.
   - type: Tag
     tags:
