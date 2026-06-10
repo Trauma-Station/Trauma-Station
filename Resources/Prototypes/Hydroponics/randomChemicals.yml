@@ -173,17 +173,17 @@
 - type: weightedRandomFillSolution
   id: EvilRandomFillSolution
   fills:
-  - quantity: 0.05 # Common but very low quantity
+  - quantity: 0.2 # Common but very low quantity # Trauma was 0.05 changed to 0.2
     weight: 40
     reagents:
     - Nocturine
     - MuteToxin
     - Lead
-  - quantity: 0.1
+  - quantity: 0.3 # Trauma - Was 0.1
     weight: 5 # 99.9% chance of appearing at least once with 60u of vestine with an average of 6.5 occurances.
     reagents:
     - Vestine
-  - quantity: 1.0 # High quantity but on average only 1 per chemical kit
+  - quantity: 3.0 # High quantity but on average only 1 per chemical kit # Trauma was 1.0 changed to 3.0
     weight: 1
     reagents:
     - Tazinide
