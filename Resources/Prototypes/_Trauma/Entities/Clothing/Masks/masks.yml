@@ -35,7 +35,7 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
   - type: IdentityBlocker
-  
+
   parent: [ ClothingMaskGas, BaseCentcommContraband ]
   id: ClothingHunterMaskGasSwat
   name: spacepol swat gas mask
