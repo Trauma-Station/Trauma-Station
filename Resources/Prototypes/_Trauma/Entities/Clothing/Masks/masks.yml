@@ -35,6 +35,12 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: [ ClothingMaskGas, BaseCentcommContraband ]
