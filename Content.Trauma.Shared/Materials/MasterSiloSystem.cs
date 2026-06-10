@@ -10,7 +10,7 @@ using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Materials;
 
-public sealed class MasterSiloSystem : EntitySystem
+public sealed partial class MasterSiloSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
