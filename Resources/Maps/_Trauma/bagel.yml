@@ -51342,8 +51342,6 @@ entities:
     - type: Transform
       pos: 46.5,5.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17289
 - proto: CargoTelepad
   entities:
   - uid: 7811
@@ -112428,14 +112426,6 @@ entities:
     - type: Transform
       pos: 53.5,6.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        7810:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        17417:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialWoodPlank
   entities:
   - uid: 17290
@@ -113279,16 +113269,6 @@ entities:
     - type: Transform
       pos: 45.5,4.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17289
-    - type: MaterialStorage
-      materialWhiteList:
-      - Steel
-      - Glass
-      - Plasma
-      - Uranium
-      - Gold
-      - Silver
 - proto: OverheatedPlasteel
   entities:
   - uid: 17418
