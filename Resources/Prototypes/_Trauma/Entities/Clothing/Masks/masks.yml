@@ -25,6 +25,24 @@
     node: finished
 
 - type: entity
+  parent: [ ClothingMaskBaseButcherable, BaseMinorContraband ]
+  id: KnittedBalaclava
+  name: 3-hole knit balaclava
+  description: For the budding robber, or the experienced terrorist.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+- type: entity
   parent: [ ClothingMaskGas, BaseCentcommContraband ]
   id: ClothingHunterMaskGasSwat
   name: spacepol swat gas mask
