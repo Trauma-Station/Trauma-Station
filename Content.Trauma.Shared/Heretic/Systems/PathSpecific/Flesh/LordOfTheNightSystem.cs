@@ -37,7 +37,7 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private SharedTransformSystem _transfrm = default!;
     [Dependency] private EntityLookupSystem _look = default!;
-    [Dependency] private SharedEntityEffectsSystem _effect = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -78,7 +78,7 @@ public sealed partial class LordOfTheNightSystem : EntitySystem
             if (!_examine.InRangeUnOccluded(uid, ent, ent.Comp.MadnessRange))
                 continue;
 
-            _effect.ApplyEffects(uid, ent.Comp.MadnessEffects, 1f, ent);
+            _effects.ApplyEffects(uid, ent.Comp.MadnessEffects, user: ent, predicted: false); // dont think mapinit is predicted properly
         }
     }
 

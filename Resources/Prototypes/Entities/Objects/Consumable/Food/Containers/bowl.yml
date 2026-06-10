@@ -30,6 +30,10 @@
   name: bowl
   description: A simple bowl, used for soups and salads.
   components:
+  # <Trauma>
+  - type: FitsInDispenser
+    solution: food
+  # </Trauma>
   - type: Item
     shape:
     - 0,0,1,0

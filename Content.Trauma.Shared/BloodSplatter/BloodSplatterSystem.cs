@@ -18,7 +18,7 @@ namespace Content.Trauma.Shared.BloodSplatter;
 public sealed partial class BloodSplatterSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
@@ -28,7 +28,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<BloodSplattererComponent, DamageChangedEvent>(OnDamage);
+        SubscribeLocalEvent<BloodSplattererComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<BloodSplattererComponent, BeingGibbedEvent>(OnGib);
         SubscribeLocalEvent<BrainSplattererComponent, BeingGibbedEvent>(OnBrainGib);
         SubscribeLocalEvent<BloodSplattererComponent, VomitedEvent>(OnVomit);
@@ -62,20 +62,21 @@ public sealed partial class BloodSplatterSystem : EntitySystem
         SpawnDecal(ent, bloodstream, ent.Comp.GibbedDecal);
     }
 
-    private void OnDamage(Entity<BloodSplattererComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageDealt(Entity<BloodSplattererComponent> ent, ref DamageDealtEvent args)
     {
         var time = _timing.CurTime;
 
         if (ent.Comp.NextSplashAvailable > time)
             return;
 
-        if (!args.DamageIncreased || args.DamageDelta == null)
+        if (!args.Damage.AnyPositive())
             return;
 
-        args.DamageDelta.DamageDict.TryGetValue(PierceProto, out var piercing);
-        args.DamageDelta.DamageDict.TryGetValue(SlashProto, out var slash);
+        args.Damage.DamageDict.TryGetValue(PierceProto, out var piercing);
+        args.Damage.DamageDict.TryGetValue(SlashProto, out var slash);
 
-        if (args.DamageDelta.GetTotal() < ent.Comp.MinimalTriggerDamage
+        var total = args.Damage.GetTotal();
+        if (total < ent.Comp.MinimalTriggerDamage
             || piercing == 0 && slash == 0)
             return;
 
@@ -83,7 +84,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
             || _bloodstream.GetBloodLevel((ent.Owner, bloodstream)) <= 0.5f)
             return;
 
-        ent.Comp.Chance += (float)args.DamageDelta.GetTotal() / 50; // Higher damage has higher change to splatter
+        ent.Comp.Chance += (float) total / 50; // Higher damage has higher change to splatter
 
         if (ent.Comp.Chance >= 1)
             ent.Comp.Chance = 1;
@@ -91,7 +92,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
         if (!_random.Prob(ent.Comp.Chance))
             return;
 
-        if (args.DamageDelta.GetTotal() <= ent.Comp.MinorTriggerDamage)
+        if (total <= ent.Comp.MinorTriggerDamage)
         {
             SpawnDecal(ent, bloodstream, ent.Comp.MinorDecal);
             return;
@@ -104,8 +105,8 @@ public sealed partial class BloodSplatterSystem : EntitySystem
 
     private void SpawnDecal(EntityUid ent, BloodstreamComponent bloodstream, string decal)
     {
-        var entitybloodstream = bloodstream.BloodReferenceSolution;
-        SpawnDecal(ent, entitybloodstream.GetColor(_prototypes), decal);
+        var sol = bloodstream.BloodReferenceSolution;
+        SpawnDecal(ent, sol.GetColor(_proto), decal);
     }
 
     private void SpawnDecal(EntityUid ent, Color color, string decal)

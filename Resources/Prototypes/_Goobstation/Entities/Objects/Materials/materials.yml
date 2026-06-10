@@ -57,6 +57,9 @@
   components:
   - type: Stack
     count: 1
+  - type: Tag
+    tags:
+    - RawMaterial
 
 - type: entity
   parent: MaterialBSCrystal

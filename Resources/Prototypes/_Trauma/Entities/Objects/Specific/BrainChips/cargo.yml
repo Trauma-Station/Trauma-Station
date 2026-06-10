@@ -5,9 +5,9 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-      MeleeKnowledge: 26
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
+      MeleeKnowledge: 25
       FurnitureKnowledge: 10 # crates
       # TODO: piloting and probably mech
 
@@ -18,8 +18,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
       FurnitureKnowledge: 10
       # TODO: piloting
 
@@ -30,8 +30,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-      MeleeKnowledge: 26
-      AthleticsKnowledge: 26
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
+      MeleeKnowledge: 25
+      AthleticsKnowledge: 25
       # TODO: (low?) piloting

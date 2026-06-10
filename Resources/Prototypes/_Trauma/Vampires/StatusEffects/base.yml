@@ -69,6 +69,6 @@
       - !type:OnGridCondition
         inverted: true
       messages:
-      - The sunlight burns you!
-      - You should go away from space...
-      - You look pale!
+      - entity-effect-popup-vampire-light-1
+      - entity-effect-popup-vampire-light-2
+      - entity-effect-popup-vampire-light-3

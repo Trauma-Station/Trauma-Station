@@ -154,8 +154,8 @@
       Cable: 2
 
 - type: entity
-  id: VirologyServerMachineCircuitboard
   parent: BaseMachineCircuitboard
+  id: VirologyServerMachineCircuitboard
   name: virology server machine board
   description: A machine printed circuit board for a virology server.
   components:

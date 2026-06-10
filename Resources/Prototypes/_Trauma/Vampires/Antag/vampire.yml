@@ -31,6 +31,7 @@
     state: puddle-1
 
 - type: antagSpecifier
+  parent: RestrictedAntag
   id: Vampire
   blacklist:
     components:

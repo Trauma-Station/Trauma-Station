@@ -21,7 +21,7 @@ public sealed partial class MapEffectsRuleSystem : GameRuleSystem<MapEffectsRule
             Transform(grid).MapUid is not {} map)
             return;
 
-        _effects.ApplyEffects(map, comp.Effects);
+        _effects.ApplyEffects(map, comp.Effects, predicted: false);
     }
 
     private EntityUid? GetFirstStation()

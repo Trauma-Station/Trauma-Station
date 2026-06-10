@@ -99,3 +99,22 @@
     Holy: 0.75 # per point of original weapon damage
   overheated: SilverMolten
   # TODO: antimagic for armour
+
+- type: metal
+  id: Adamantine
+  name: adamantine
+  color: "#affaff"
+  ingotSprite: ingot_adamantine
+  density: 1 # extremely light
+  workingTemp: 2050
+  workingRange: 50
+  meltTemp: 2383
+  workScale: 10 # extremely hard to forge, bring friends or technology
+  durability: 10 # that's its bit
+  speed: 1.15 # ligher than plasteel = faster than plasteel
+  price: 20
+  damage:
+    Blunt: 0.2 # just not heavy
+    Slash: 1.4 # the sharpest of edges
+    Piercing: 1.5 # on par with plasteel, but it's already stupid strong
+  overheated: OverheatedAdamantine

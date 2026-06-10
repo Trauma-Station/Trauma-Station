@@ -26,21 +26,13 @@ public sealed partial class SpawnFriendlyEffectSystem : EntityEffectSystem<Trans
         var quantity = args.Effect.Number * (int)Math.Floor(args.Scale);
         var proto = args.Effect.Entity;
 
-        if (args.Effect.Predicted)
+        if (_net.IsClient && !(args.Effect.Predicted && args.Predicted))
+            return;
+
+        for (var i = 0; i < quantity; i++)
         {
-            for (var i = 0; i < quantity; i++)
-            {
-                var spawned = PredictedSpawnNextToOrDrop(proto, entity, entity.Comp);
-                _faction.IgnoreEntity(spawned, entity.Owner);
-            }
-        }
-        else if (_net.IsServer)
-        {
-            for (var i = 0; i < quantity; i++)
-            {
-                var spawned = SpawnNextToOrDrop(proto, entity, entity.Comp);
-                _faction.IgnoreEntity(spawned, entity.Owner);
-            }
+            var spawned = PredictedSpawnNextToOrDrop(proto, entity, entity.Comp);
+            _faction.IgnoreEntity(spawned, entity.Owner);
         }
     }
 }

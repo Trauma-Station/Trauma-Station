@@ -5,19 +5,16 @@ using Robust.Shared.Audio;
 namespace Content.Goobstation.Shared.Vehicles;
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class VehicleComponent : Component
 {
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public EntityUid? Driver;
 
-    [ViewVariables]
-    public EntityUid? HornAction;
+    [DataField, AutoNetworkedField]
+    public bool SirenEnabled;
 
-    [ViewVariables]
-    public EntityUid? SirenAction;
-
-    public bool SirenEnabled = false;
-
+    [DataField, AutoNetworkedField]
     public EntityUid? SirenStream;
 
     /// <summary>
@@ -30,7 +27,7 @@ public sealed partial class VehicleComponent : Component
     /// <summary>
     /// Will the vehicle move when a driver buckles
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool EngineRunning;
 
     /// <summary>
@@ -66,7 +63,7 @@ public sealed partial class VehicleComponent : Component
     /// <summary>
     /// if the Vehicle is broken
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool IsBroken;
 
     /// <summary>
@@ -78,7 +75,7 @@ public sealed partial class VehicleComponent : Component
     /// <summary>
     /// The currently active overlay entity, so we can delete it on unbuckle.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid? ActiveOverlay;
 }
 

@@ -60,7 +60,7 @@ public sealed partial class HumanoidProfileSystem : EntitySystem
         if (_prototype.TryIndex(species, out var speciesPrototype))
             return Loc.GetString(speciesPrototype.Name);
 
-        Log.Error("Tried to get representation of unknown species: {speciesId}");
+        Log.Error($"Tried to get representation of unknown species: {species}"); // Trauma - fix it being unformatted
         return Loc.GetString("humanoid-appearance-component-unknown-species");
     }
 

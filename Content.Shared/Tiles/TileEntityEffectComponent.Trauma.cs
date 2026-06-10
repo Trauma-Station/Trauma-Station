@@ -2,7 +2,7 @@
 
 using Content.Shared.EntityConditions;
 
-namespace Content.Server.Tiles;
+namespace Content.Shared.Tiles;
 
 public sealed partial class TileEntityEffectComponent
 {

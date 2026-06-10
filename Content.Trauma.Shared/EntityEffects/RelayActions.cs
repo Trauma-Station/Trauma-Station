@@ -52,7 +52,7 @@ public sealed partial class RelayActionsEffectSystem : EntityEffectSystem<Action
                 continue;
 
             _data.CopyData(ent, action);
-            _effects.TryApplyEffect(action, entEffect, args.Scale, args.User);
+            _effects.TryApplyEffect(action, entEffect, args.Scale, args.User, args.Predicted);
             _data.ClearData(action);
         }
     }

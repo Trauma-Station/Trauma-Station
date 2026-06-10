@@ -16,8 +16,8 @@
   - type: KnowledgeGrantOnWear
     skills:
       FirstAidKnowledge: 50
-      SurgeryKnowledge: 26
-      ShootingKnowledge: 26
+      SurgeryKnowledge: 25
+      ShootingKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -26,7 +26,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
+      MeleeKnowledge: 25
       ShootingKnowledge: 50
       # TODO: something for detecting
 
@@ -48,8 +48,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
+      MeleeKnowledge: 25
+      ShootingKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -61,5 +61,5 @@
       MeleeKnowledge: 50
       ShootingKnowledge: 50
       WeaponsKnowledge: 50
-      FirstAidKnowledge: 26 # Brigmedic isn't real
+      FirstAidKnowledge: 25 # Brigmedic isn't real
       SurgeryKnowledge: 20

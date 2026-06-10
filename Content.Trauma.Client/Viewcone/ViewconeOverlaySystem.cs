@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.Eye;
+using Content.Goobstation.Shared.SpaceWhale;
 using Content.Shared.CCVar;
 using Content.Shared.MouseRotator;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Trauma.Client.Viewcone.Overlays;
 using Content.Trauma.Common.CCVar;
@@ -60,10 +62,11 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         SubscribeLocalEvent<ViewconeComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
 
         SubscribeLocalEvent<ViewconeOccludableComponent, ComponentInit>(OnOccludableInit);
-        SubscribeLocalEvent<ViewconeOccludableComponent, PullStartedMessage>(OnPullStarted);
-        SubscribeLocalEvent<ViewconeOccludableComponent, PullStoppedMessage>(OnPullStopped);
         SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
         SubscribeLocalEvent<ViewconeOccludableComponent, EntParentChangedMessage>(OnOccludableParentChanged);
+
+        SubscribeLocalEvent<PullableComponent, ViewconeOverrideEvent>(OnPullableOverride);
+        SubscribeLocalEvent<TailedEntitySegmentComponent, ViewconeOverrideEvent>(OnTailedOverride);
 
         _coneOverlay = new();
         _setAlphaOverlay = new();
@@ -179,6 +182,22 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         return angleDist < MathHelper.DegreesToRadians(ent.Comp.CurrentConeAngle) * 0.5f;
     }
 
+    private void OnPullableOverride(Entity<PullableComponent> ent, ref ViewconeOverrideEvent args)
+    {
+        if (ent.Comp.Puller != _player.LocalEntity)
+            return;
+
+        args.Override = true;
+    }
+
+    private void OnTailedOverride(Entity<TailedEntitySegmentComponent> ent, ref ViewconeOverrideEvent args)
+    {
+        if (ent.Comp.Head != _player.LocalEntity)
+            return;
+
+        args.Override = true;
+    }
+
     private void OnPlayerAttached(Entity<ViewconeComponent> ent, ref LocalPlayerAttachedEvent args)
     {
         AddOverlays();
@@ -248,30 +267,6 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
             SetAlpha(ent, 0f); // wait for overlay to maybe show effects next frame
     }
 
-    // Logic for disabling occluding of entities that you're currently pulling.
-    private void OnPullStarted(Entity<ViewconeOccludableComponent> ent, ref PullStartedMessage args)
-    {
-        // can this even happen? idk
-        if (args.PullerUid != _player.LocalEntity || !_timing.IsFirstTimePredicted)
-            return;
-
-        EnsureComp<ViewconeClientOverrideComponent>(ent);
-    }
-
-    private void OnPullStopped(Entity<ViewconeOccludableComponent> ent, ref PullStoppedMessage args)
-    {
-        if (args.PullerUid != _player.LocalEntity)
-            return;
-
-        // why the fuck can this even happen? it stops the pull clientside and never restarts it?
-        // is clientside pulling just bugged upstream?
-        // the flow is "applying state -> reset virtual hand ent -> delete it (??) -> AUGHHHH THAT MEANS STOP PULLING I GUESS"
-        if (_timing.ApplyingState)
-            return;
-
-        RemComp<ViewconeClientOverrideComponent>(ent);
-    }
-
     private void OnOccludableShutdown(Entity<ViewconeOccludableComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Memory is { } memory && !TerminatingOrDeleted(memory))
@@ -292,5 +287,12 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     public void SetAlpha(EntityUid uid, float alpha)
     {
         _spriteVis.UpdateVisibilityModifiers(uid, nameof(ViewconeOccludedComponent), alpha);
+    }
+
+    public bool IgnoresViewcone(EntityUid uid)
+    {
+        var ev = new ViewconeOverrideEvent();
+        RaiseLocalEvent(uid, ref ev);
+        return ev.Override;
     }
 }
