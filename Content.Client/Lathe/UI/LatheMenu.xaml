@@ -162,15 +162,15 @@
                     VerticalExpand="True"
                     HorizontalExpand="True">
                     <ui:MaterialStorageControl Name="MaterialsList" SizeFlagsStretchRatio="8"/>
+		            <!-- <Trauma> -->
+		            <BoxContainer Orientation="Vertical" Name="MiningPointsContainer" Visible="False">
+		                <BoxContainer Orientation="Horizontal">
+		                    <Label Name="MiningPointsLabel" HorizontalExpand="True"/>
+		                    <Button Name="MiningPointsClaimButton" Text="{Loc 'lathe-menu-mining-points-claim-button'}"/>
+		                </BoxContainer>
+		            </BoxContainer>
+		            <!-- </Trauma> -->
                 </BoxContainer>
-	            <!-- <Trauma> -->
-	            <BoxContainer Orientation="Vertical" Name="MiningPointsContainer" Visible="False">
-	                <BoxContainer Orientation="Horizontal">
-	                    <Label Name="MiningPointsLabel" HorizontalExpand="True"/>
-	                    <Button Name="MiningPointsClaimButton" Text="{Loc 'lathe-menu-mining-points-claim-button'}"/>
-	                </BoxContainer>
-	            </BoxContainer>
-	            <!-- </Trauma> -->
             </PanelContainer>
         </BoxContainer>
         </BoxContainer>

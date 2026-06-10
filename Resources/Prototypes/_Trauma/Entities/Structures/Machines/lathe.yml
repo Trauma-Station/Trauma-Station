@@ -1,3 +1,10 @@
+- type: entity
+  abstract: true
+  parent: BaseLatheNoSilo
+  id: BaseLathe
+  components:
+  - type: OreSiloClient
+
 # Like BaseLathe but without wire panel or constructible/powered machine
 - type: entity
   abstract: true

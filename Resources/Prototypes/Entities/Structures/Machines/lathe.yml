@@ -1,5 +1,5 @@
 - type: entity
-  id: BaseLathe
+  id: BaseLatheNoSilo # Trauma - add NoSilo, BaseLathe has OreSiloClient
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   abstract: true
   name: lathe
@@ -31,7 +31,6 @@
         maxDistance: 10
         variation: 0.05
   - type: SpamEmitSoundRequirePower
-  - type: OreSiloClient # every lathe should be usable with a silo
   # </Trauma>
   - type: Appearance
   - type: WiresVisuals
@@ -735,7 +734,7 @@
     - HostileCubesStatic
 
 - type: entity
-  parent: BaseLathe
+  parent: BaseLatheNoSilo # Trauma - oreproc doesnt need to use silos
   id: OreProcessor
   name: ore processor
   description: It produces sheets and ingots using ores.
@@ -755,10 +754,10 @@
     - type: Machine
       board: OreProcessorMachineCircuitboard
     - type: MaterialStorage
-      ignoreMaterialWhiteList: true # Goob edit
-      connectToSilo: true # Goob edit
-      disconnectSiloOffMap: true # Goob edit
-      disallowOreEjection: false # Goob edit
+      # <Trauma>
+      ignoreMaterialWhiteList: true
+      disallowOreEjection: false
+      # </Trauma>
       ignoreColor: true
       whitelist:
         tags:

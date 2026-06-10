@@ -1,6 +1,6 @@
 - type: entity
-  id: MaterialSilo
   parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: MaterialSilo
   name: master material silo
   description: Master silo which distributes inserted materials to all silos on the station.
   components:
@@ -16,9 +16,18 @@
     - state: inserting
       visible: false
       map: ["enum.MaterialStorageVisualLayers.Inserting"]
-  # TODO: distribute inserted materials to all silos on the map
   - type: Machine
     board: MaterialSiloMachineCircuitboard
   - type: Appearance
-  - type: MaterialStorage
-    ignoreColor: true
+  - type: MasterSilo
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+    blacklist:
+      components:
+      - Unremoveable
+      - UnclaimedOre
+      tags:
+      - Ore # oreproc uses it not silos
