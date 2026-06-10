@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Goobstation.Common.Silo;
-// </Trauma>
 using System.Linq;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -20,7 +17,6 @@ namespace Content.Shared.Materials;
 /// </summary>
 public abstract partial class SharedMaterialStorageSystem : EntitySystem
 {
-    [Dependency] private CommonSiloSystem _silo = default!; // Goobstation
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
@@ -84,8 +80,6 @@ public abstract partial class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return 0; //you have nothing
-        if (_silo.TryGetMaterialAmount(uid, material, out var amount)) // Goobstation
-            return amount;
         return component.Storage.GetValueOrDefault(material, 0);
     }
 
@@ -99,8 +93,6 @@ public abstract partial class SharedMaterialStorageSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return 0;
-        if (_silo.TryGetTotalMaterialAmount(uid, out var amount)) // Goobstation
-            return amount;
         return component.Storage.Values.Sum();
     }
 
@@ -135,11 +127,8 @@ public abstract partial class SharedMaterialStorageSystem : EntitySystem
             return false;
 
         if (volume > 0 && !component.IgnoreMaterialWhiteList) // Trauma - add these conditions to disable the whitelist check
-            if (component.MaterialWhiteList == null ? false : !component.MaterialWhiteList.Contains(materialId))
+            if (component.MaterialWhiteList != null && !component.MaterialWhiteList.Contains(materialId))
                 return false;
-
-        if (_silo.TryGetMaterialAmount(uid, materialId, out var siloAmount)) // Goobstation
-            return siloAmount + volume >= 0;
 
         var amount = component.Storage.GetValueOrDefault(materialId);
         return amount + volume >= 0;
@@ -182,15 +171,6 @@ public abstract partial class SharedMaterialStorageSystem : EntitySystem
         if (!CanChangeMaterialAmount(uid, materialId, volume, component))
             return false;
 
-        // <Trauma> - change the silo's materials instead, if it's linked to one
-        if (_silo.GetSilo(uid) is {} silo)
-        {
-            uid = silo;
-            if (!TryComp<MaterialStorageComponent>(uid, out component))
-                return false;
-        }
-        // </Trauma>
-
         var existing = component.Storage.GetOrNew(materialId);
 
         existing += volume;
@@ -229,8 +209,6 @@ public abstract partial class SharedMaterialStorageSystem : EntitySystem
                 return false;
         }
 
-        if (entity.Comp.ConnectToSilo) // Goobstation
-            _silo.DirtySilo(entity);
         Dirty(entity, entity.Comp);
         return true;
     }

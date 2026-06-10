@@ -16,32 +16,9 @@
     - state: inserting
       visible: false
       map: ["enum.MaterialStorageVisualLayers.Inserting"]
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-  - type: WirelessNetworkConnection
-    range: 1000
-  - type: DeviceLinkSource
-    range: 1000
-    ports:
-    - MaterialSilo
+  # TODO: distribute inserted materials to all silos on the map
   - type: Machine
     board: MaterialSiloMachineCircuitboard
   - type: Appearance
   - type: MaterialStorage
     ignoreColor: true
-  - type: Silo
-
-- type: entity
-  id: BaseSiloUtilizer
-  abstract: true
-  components:
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-  - type: WirelessNetworkConnection
-    range: 1000
-  - type: DeviceLinkSink
-    ports:
-    - MaterialSiloUtilizer
-  - type: SiloUtilizer
-  - type: MaterialStorage
-    connectToSilo: true

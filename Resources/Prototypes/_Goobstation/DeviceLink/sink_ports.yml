@@ -1,8 +1,3 @@
-- type: sinkPort
-  id: MaterialSiloUtilizer
-  name: signal-port-name-material-silo-utilizer
-  description: signal-port-description-material-silo-utilizer
-
 # Plumbing
 
 - type: sinkPort
