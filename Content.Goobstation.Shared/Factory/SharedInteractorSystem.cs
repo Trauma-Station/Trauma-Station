@@ -19,6 +19,7 @@ using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Goobstation.Shared.Factory;
 
@@ -44,7 +45,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
     [Dependency] private EntityQuery<ThrownItemComponent> _thrownQuery = default!;
 
-    private readonly HashSet<EntityUid> _targets = new();
+    private readonly HashSet<Entity<PhysicsComponent>> _targets = new();
 
     public static readonly SpriteSpecifier VerbIcon = new SpriteSpecifier.Rsi(new("Objects/Tools/screwdriver.rsi"), "screwdriver-map");
     public static readonly ProtoId<ToolQualityPrototype> Screwing = "Screwing";
