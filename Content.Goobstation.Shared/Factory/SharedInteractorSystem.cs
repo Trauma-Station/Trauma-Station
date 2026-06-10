@@ -26,6 +26,7 @@ internal delegate bool Toggle();
 
 public abstract partial class SharedInteractorSystem : EntitySystem
 {
+    [Dependency] private AutomationSystem _automation = default!;
     [Dependency] private AutomationFilterSystem _filter = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -38,10 +39,10 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     [Dependency] private SharedCombatModeSystem _combatMode = default!;
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
-    private EntityQuery<ActiveDoAfterComponent> _doAfterQuery;
-    private EntityQuery<HandsComponent> _handsQuery;
-    private EntityQuery<MapGridComponent> _gridQuery;
-    private EntityQuery<ThrownItemComponent> _thrownQuery;
+    [Dependency] private EntityQuery<ActiveDoAfterComponent> _doAfterQuery = default!;
+    [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<ThrownItemComponent> _thrownQuery = default!;
 
     private readonly HashSet<EntityUid> _targets = new();
 
@@ -51,11 +52,6 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _doAfterQuery = GetEntityQuery<ActiveDoAfterComponent>();
-        _handsQuery = GetEntityQuery<HandsComponent>();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _thrownQuery = GetEntityQuery<ThrownItemComponent>();
 
         SubscribeLocalEvent<InteractorComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<InteractorComponent, ExaminedEvent>(OnExamined);
@@ -165,6 +161,7 @@ public abstract partial class SharedInteractorSystem : EntitySystem
 
     public bool IsValidTarget(Entity<InteractorComponent> ent, EntityUid target)
         => !_thrownQuery.HasComp(target) // thrown items move too fast to be "clicked" on...
+            && _automation.CanMachineDetect(target) // ignore ghosts ninjas etc
             && _filter.IsAllowed(_filter.GetSlot(ent), target); // ignore non-filtered entities
 
     protected bool HasDoAfter(EntityUid uid) => _doAfterQuery.HasComp(uid);
