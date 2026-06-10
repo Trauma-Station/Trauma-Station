@@ -28,7 +28,7 @@
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 600
+        damage: 2 # multiplies with the total work needed in ForgingSystem.cs, item will break if damage exceeds work needed * this number.
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ] # broke it into pieces...
@@ -43,6 +43,7 @@
     layers:
     - state: icon
       shader: Emissive
+      map: [ "enum.MetallicVisuals.Layer" ]
   - type: Item
     inhandVisuals:
       left:

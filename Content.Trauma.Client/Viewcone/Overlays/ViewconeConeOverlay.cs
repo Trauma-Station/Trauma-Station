@@ -2,7 +2,6 @@
 
 using Content.Shared.MouseRotator;
 using Content.Trauma.Shared.Viewcone.Components;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 

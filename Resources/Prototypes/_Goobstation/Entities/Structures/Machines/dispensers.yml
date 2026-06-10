@@ -1,12 +1,8 @@
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: EnergyChemDispenser
   parent: SmallConstructibleMachine
+  id: EnergyChemDispenser
   name: energy chemical dispenser
   suffix: energy
   description: A bluespace Chemical Dispenser that uses station energy to synthesize Reagents. The future is here and now.
@@ -49,8 +45,9 @@
   - type: Anchorable
   - type: Pullable
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -69,7 +66,6 @@
       machine_board: !type:Container
       machine_parts: !type:Container
       energyBeakerSlot: !type:ContainerSlot
-      storagebase: !type:Container
   - type: StaticPrice
     price: 1000
   - type: WiresPanel
@@ -86,9 +82,7 @@
   - type: UserInterface
     interfaces:
       enum.EnergyReagentDispenserUiKey.Key:
-        type: EnergyReagentDispenserBoundUserInterface
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
+        type: EnergyReagentDispenserBUI
   - type: EnergyReagentDispenser #Keep on bottom for view's sake, format is reagentProto: Cost
     energyBeakerSlot:
       whitelistFailPopup: reagent-dispenser-component-cannot-put-entity-message

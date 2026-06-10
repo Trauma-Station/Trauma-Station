@@ -1,0 +1,249 @@
+# Rejuv Garg
+- type: entity
+  parent: BaseRejuvAction
+  id: ActionVampGargRejuv
+  name: Rejuvenate
+  description: Removes any and all stuns. Purges 10u of any harmful reagent. Rejuvenates more health the more damage you've taken, to a maximum of 50 health at 100 damage.
+  components:
+  - type: EffectAction
+    effects:
+    - !type:NestedEffect
+      proto: VampireRejuvGarg
+
+# Blood Swell I and II
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodSwell
+  name: Blood Swell
+  description: For 30 seconds, reduces incoming brute by 60%, stamina and burn damage by 50%. Guns are unusable for the duration.
+  components:
+  - type: Action
+    useDelay: 40
+    sound:
+      path: /Audio/Voice/Slime/slime_squish.ogg
+      params:
+        volume: 2
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_swell
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodSwellStatusEffect
+      time: 30
+  - type: VampireCostAction
+    bloodCost: 30
+
+- type: entity
+  parent: ActionBloodSwell
+  id: ActionBloodSwellII
+  name: Blood Swell II
+  description: For 30 seconds, identical resistance buffs to Blood Swell I, user's melee damage is increased by 10. Guns are unusable for the duration.
+  components:
+  - type: EffectAction
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: BloodSwellStatusEffectII
+      time: 30
+
+# Blood Rush
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodRush
+  name: Blood Rush
+  description: For 10 seconds, doubles movement speed. Instantly stands you up, removes any cuffs and clears knockdowns.
+  components:
+  - type: Action
+    useDelay: 30
+    checkCanInteract: false
+    sound:
+      path: /Audio/_Lavaland/heartbeat.ogg
+      params:
+        pitch: 2
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_rush
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectBloodRush
+      time: 10
+      type: Add
+    - !type:SetStanding
+      force: true
+    - !type:RemoveComponents
+      components:
+      - type: KnockedDown # ModifyKnockdown bugs out
+    - !type:Uncuff
+  - type: VampireCostAction
+    bloodCost: 30
+
+# Gargantuan Stomp
+- type: entity
+  parent: BaseVampireAction
+  id: ActionGargStomp
+  name: Stomp
+  description: You stomp the ground, sending out a shockwave that knocks people back.
+  components:
+  - type: Action
+    useDelay: 60
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_stomp.ogg
+      params:
+        volume: 5
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: seismic_stomp
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: StatusEffects
+      range: 5
+      effect: !type:NestedEffect
+        proto: GargantuaStomp
+    - !type:SpawnParticles
+      particleProto: VampireStompShockwave
+    - !type:SpawnParticles
+      particleProto: VampireStomp
+  - type: VampireCostAction
+    bloodCost: 30
+
+# Overwhelming Force
+- type: entity
+  parent: BaseVampireAction
+  id: ActionOverwhelmingForce
+  name: Overwhelming Force
+  description: When activated, automatically and instantly pry open doors you don't have access to. Also prevents you from being pushed or pulled.
+  components:
+  - type: Action
+    sound:
+      path: /Audio/Items/jaws_pry.ogg
+      params:
+        volume: 2
+        pitch: 2
+    useDelay: 2
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: OH_YEAAAAH
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggle:
+    - !type:AddComponents
+      components:
+      - type: Prying
+        pryPowered: true
+        speedModifier: 100
+      - type: VampirePrying
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectOverwhelmingForce
+      time: null
+      type: Add
+    offToggle:
+    - !type:RemoveComponents
+      components:
+      - type: Prying
+      - type: VampirePrying
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectOverwhelmingForce
+      time: null
+      type: Remove
+
+# Demonic Hand
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDemonicHand
+  name: Demonic Grasp
+  description: Send out a Demonic Hand that grabs and pulls/pushes a target depending on your intent. Harm mode pulls, otherwise it pushes.
+  components:
+  - type: Action
+    useDelay: 30
+    sound:
+      path: /Audio/_Goobstation/Wizard/ghost2.ogg
+      params:
+        pitch: 0.05
+    raiseOnAction: false
+    raiseOnUser: true
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: demonic_grasp
+  - type: TargetAction
+    range: 65
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileDemonicHand
+      speed: 9
+  - type: VampireCostAction
+    bloodCost: 20
+
+# Charge
+- type: entity
+  parent: BaseVampireAction
+  id: ActionGargCharge
+  name: Charge
+  description: Click to charge. Stuns, damages, and knocks back mobs on impact. Completely destroys walls. Also deals 200 damage to mechs and knocks them back.
+  components:
+  - type: Action
+    useDelay: 30
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_charge.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_charge
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:AddComponents
+      components:
+      - type: GargantuaCharging
+        effect: VampireGargCharge
+    - !type:ThrowAtFacingDirection
+    - !type:SpawnParticles
+      particleProto: VampireCharge
+  - type: VampireCostAction
+    bloodCost: 30
+
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDesecratedDuel
+  name: Desecrated Duel
+  description: Click to leap towards a target, and once landing, conjure an arena!
+  components:
+  - type: Action
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_duel.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: duel
+  - type: TargetAction
+    range: 10
+  - type: EntityTargetAction
+    event: !type:ArenaTargetActionEvent
+  - type: ActionDesecratedDuel # Throws us at the target and clears the arena based on conditions.
+    duelDuration: 30
+    endEffects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectVampireGladiator
+      time: null
+      type: Remove
+    - !type:PlaySoundEffect
+      sound: /Audio/_Trauma/Vampires/Actions/vampire_duel_end.ogg
+  - type: ActionArena # Makes the arena. Can be re-used for other actions
+    delay: 0.5 # So we have time to get thrown there
+    wallProto: WallGargantuanTemporary
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectVampireGladiator
+      time: null
+  #- type: VampireCostAction
+  #  bloodCost: 150

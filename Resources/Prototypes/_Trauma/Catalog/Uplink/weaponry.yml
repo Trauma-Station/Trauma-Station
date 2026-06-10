@@ -1,4 +1,45 @@
 - type: listing
+  id: UplinkRevolverPython
+  name: uplink-revolver-python-name
+  description: uplink-revolver-python-desc
+  productEntity: WeaponRevolverPythonAP
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRevolverSnakesfang
+  name: uplink-snakesfang-name
+  description: uplink-snakesfang-desc
+  icon: { sprite: _Trauma/Objects/Weapons/Melee/snakesfang.rsi, state: icon }
+  productEntity: ClothingBeltSheathSnakesfangFilled
+  cost:
+    Telecrystal: 25
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRifleFAL
+  name: uplink-rifle-FAL-name
+  description: uplink-rifle-FAL-description
+  productEntity: WeaponRifleFAL
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: UplinkRifleM90
+  name: uplink-rifle-M90-name
+  description: uplink-rifle-M90-description
+  productEntity: WeaponRifleM90
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkWeaponry
+
+- type: listing
   id: UplinkEshieldNukies
   name: uplink-eshield-name
   description: uplink-eshield-desc
@@ -15,21 +56,34 @@
       - NukeOpsUplink
 
 - type: listing
-  id: UplinkRevolverPython
-  name: uplink-revolver-python-name
-  description: uplink-revolver-python-desc
-  productEntity: WeaponRevolverPythonAP
+  id: uplinkRiggedBoxingGlovesRed
+  name: uplink-rigged-boxing-gloves-name
+  description: uplink-rigged-boxing-gloves-desc
+  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi, state: icon }
+  productEntity: ClothingHandsGlovesBoxingRiggedRed
   cost:
     Telecrystal: 20
   categories:
   - UplinkWeaponry
 
 - type: listing
-  id: UplinkRifleFAL
-  name: uplink-rifle-FAL-name
-  description: uplink-rifle-FAL-description
-  productEntity: WeaponRifleFAL
+  id: uplinkRiggedBoxingGlovesGreen
+  name: uplink-rigged-boxing-gloves-name
+  description: uplink-rigged-boxing-gloves-desc
+  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxinggreen.rsi, state: icon }
+  productEntity: ClothingHandsGlovesBoxingRiggedGreen
   cost:
-    Telecrystal: 50
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+
+- type: listing
+  id: uplinkRiggedBoxingGlovesYellow
+  name: uplink-rigged-boxing-gloves-name
+  description: uplink-rigged-boxing-gloves-desc
+  icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingyellow.rsi, state: icon }
+  productEntity: ClothingHandsGlovesBoxingRiggedYellow
+  cost:
+    Telecrystal: 20
   categories:
   - UplinkWeaponry

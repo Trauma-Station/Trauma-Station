@@ -39,8 +39,8 @@
   ### Keelhaul
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookGrab" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="grab"/>
   </Box>
 
   Kicks an opponent in the head, knocking them down and dealing both Slash and Stamina damage to them,
@@ -49,8 +49,8 @@
   ### Crashing Waves Kick
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookDisarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
   </Box>
 
   Kicks the opponent square in the chest, sending them flying and dealing Slash damage. Only works on standing opponents.
@@ -58,8 +58,8 @@
   ### Gnashing Teeth
 
   <Box>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
-    <GuideEntityEmbed Entity="GuidebookHarm" Caption=""/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
+    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="harm"/>
   </Box>
 
   Deals extra Slash damage, and makes the user shout to strike fear into their opponent's heart.

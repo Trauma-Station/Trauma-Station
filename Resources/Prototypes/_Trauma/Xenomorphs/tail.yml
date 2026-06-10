@@ -1,0 +1,16 @@
+- type: entity
+  id: MobXenomorphTailSegmentBase
+  name: xenomorph tail
+  components:
+  - type: TailedEntitySegment
+  - type: Sprite
+    sprite: _Trauma/Mobs/Xenos/xenotail.rsi
+    noRot: false
+    layers:
+    - state: XenoTailSegmentBase
+    drawdepth: BelowMobs
+  - type: ViewconeOccludable
+    useMemory: false
+  - type: Tag
+    tags:
+    - HideContextMenu

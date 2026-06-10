@@ -38,7 +38,7 @@ public sealed partial class RandomEffectsRuleSystem : GameRuleSystem<RandomEffec
             return;
 
         SetCooldown(comp);
-        _effects.ApplyEffects(comp.Station, comp.Effects);
+        _effects.ApplyEffects(comp.Station, comp.Effects, predicted: false);
     }
 
     private EntityUid? GetFirstStation()

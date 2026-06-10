@@ -1,0 +1,221 @@
+# Enthrall
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDanEnthrall
+  name: Enthrall
+  description: Bends someone to your will after a 15 second channel. Can't thrall mindshielded, vampires, and the chaplain.
+  components:
+  - type: Action
+    raiseOnAction: false
+    raiseOnUser: true # this action requires VampireThrallsComponent which is stored in the body
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/vampire_enthrall.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: vampire_enthrall
+  - type: TargetAction
+    range: 2
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Body
+    blacklist:
+      components:
+      - MindShield    # parity?
+      - BibleUser     # makes sense
+      - VampireThrall # cant thrall other thralls or already thralled
+      - Vampire       # makes sense
+      tags:
+      - VimPilot      # no thralling monkeys (you'd also be f'ing yourself over if you did that)
+    event: !type:DanEnthrallActionEvent
+  - type: DoAfterArgs
+    delay: 15
+    breakOnMove: true
+  - type: VampireCostAction
+    bloodCost: 150
+
+# Pacify
+- type: entity
+  parent: BaseVampireAction
+  id: ActionPacify
+  name: Pacify
+  description: Select a target within 7 tiles to render them passive for 40 seconds.
+  components:
+  - type: Action
+    useDelay: 30
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/pacify.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: pacify
+  - type: TargetAction
+    range: 7
+    checkCanAccess: false
+  - type: EntityTargetAction
+    event: !type:EffectTargetActionEvent
+  - type: EffectAction
+    effects:
+    - !type:GenericStatusEffect # TODO: use new status effects when its ported from upstream
+      key: Pacified
+      component: Pacified
+      time: 40
+  - type: VampireCostAction
+    bloodCost: 10
+
+# Subspace Swap
+- type: entity
+  parent: BaseVampireAction
+  id: ActionSubspaceSwap
+  name: Subspace Swap
+  description: Select a target within 7 tiles and swap positions with them.
+  components:
+  - type: Action
+    useDelay: 30
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/subspace_swap.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: subspace_swap
+  - type: TargetAction
+    range: 7
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Body
+    event: !type:SubspaceSwapActionEvent
+  - type: VampireCostAction
+    bloodCost: 30
+
+# Deploy Decoy
+- type: entity
+  parent: BaseVampireAction
+  id: ActionDeployDecoy
+  name: Deploy Decoy
+  description: Deploy Decoy
+  components:
+  - type: Action
+    useDelay: 40
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: decoy
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:PopupPredicted
+      message: You drop a clone!
+      visualType: MediumCaution
+    - !type:ModifyStatusEffect
+      effectProto: ForcedStealthStatusEffect # its 0 by default
+      time: 6
+    - !type:SpawnClone
+      settings: ShadowCloneSettings
+      componentsToAdd:
+      - type: TimedDespawn
+        lifetime: 8
+      - type: NpcFactionMember
+        factions:
+        - VampireFaction
+      - type: HTN
+        rootTask:
+          task: IdleCompound
+        blackboard:
+          NavClimb: !type:Bool
+            true
+          NavSmash: !type:Bool
+            true
+      componentsToRemove:
+      - type: MindContainer
+      - type: MindExaminable
+      - type: Hands
+  - type: VampireCostAction
+    bloodCost: 30
+
+# Rally Thralls
+- type: entity
+  parent: BaseVampireAction
+  id: ActionRallyThralls
+  name: Rally Thralls
+  description: Instantly remove all incapacitating effects from all thralls within 7 tiles, this includes stamina crit, stuns and sleeping.
+  components:
+  - type: Action
+    useDelay: 100
+    sound:
+      path: /Audio/Magic/blink.ogg
+      params:
+        pitch: 0.4
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: thralls_up
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:PopupPredicted
+      message: You rally up your thralls!
+      visualType: Medium
+    - !type:RelayVampireThralls
+      range: 7
+      effect: !type:NestedEffect
+        proto: DanRally
+  - type: VampireCostAction
+    bloodCost: 100
+
+# Blood Bond
+- type: entity
+  parent: BaseVampireAction
+  id: ActionBloodBond
+  name: Blood Bond
+  description: On cast, link to all nearby thralls. if a thrall goes more than 7 tiles away from you, the link is broken. All members of the network share damage equally between each-other.
+  components:
+  - type: Action
+    raiseOnAction: false # requires thralls to use
+    raiseOnUser: true
+    sound:
+      path: /Audio/_Goobstation/Wizard/ghost2.ogg # idc
+      params:
+        volume: -5
+        pitch: 0.5
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: blood_bond
+  - type: InstantAction
+    event: !type:BloodBondActionEvent
+  - type: EffectAction
+    onPerformed: true
+    effects:
+    - !type:SpawnParticles
+      particleProto: BloodBond
+
+# Mass Hysteria
+- type: entity
+  parent: BaseVampireAction
+  id: ActionMassHysteria
+  name: Mass Hysteria
+  description: Briefly blind anyone within 8 tiles, then cause them to see everyone else as random animals for the duration. Thralls are not affected.
+  components:
+  - type: Action
+    useDelay: 180
+    sound:
+      path: /Audio/_Trauma/Vampires/Actions/hysteria.ogg
+    icon:
+      sprite: _Trauma/Vampires/actions.rsi
+      state: hysteria
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnParticles
+      particleProto: Hysteria
+    - !type:RelayNearby
+      compName: StatusEffects
+      range: 8
+      effect: !type:NestedEffect
+        conditions:
+        - !type:WhitelistCondition
+          blacklist:
+            components:
+              - VampireThrall
+        proto: MassHysteria
+  - type: VampireCostAction
+    bloodCost: 70

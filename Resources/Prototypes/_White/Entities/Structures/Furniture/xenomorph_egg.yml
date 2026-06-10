@@ -23,8 +23,9 @@
           Grown: { state: egg_grown }
           Growning: { state: egg_growing }
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resin
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:

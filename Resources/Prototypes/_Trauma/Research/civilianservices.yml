@@ -1,0 +1,16 @@
+- type: technology
+  id: ServiceBluespaceChemistry
+  name: research-technology-service-energy-chem
+  icon:
+    sprite: _Trauma/Structures/Machines/service_dispenser.rsi
+    state: industrial
+  discipline: CivilianServices
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - EnergyFoodSynthesizerMachineCircuitboard
+  - EnergyBoozeDispenserMachineCircuitboard
+  - EnergySodaDispenserMachineCircuitboard
+  position: -4,7
+  technologyPrerequisites:
+  - MeatManipulation

@@ -20,6 +20,8 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPlayerManager _playerSystem = default!;
 
+    public static readonly EntProtoId BlobRule = "BlobRule";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -68,7 +70,7 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
         }
 
         // start blob rule incase it isn't, for the sweet greentext
-        GameTicker.StartGameRule("BlobRule");
+        GameTicker.StartGameRule(BlobRule);
     }
 
     // Because GameRule spawns just a GhostRoleSpawner, we can't just remove components

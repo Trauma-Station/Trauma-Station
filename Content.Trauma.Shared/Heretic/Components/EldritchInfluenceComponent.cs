@@ -2,6 +2,7 @@
 
 using Content.Shared.Dataset;
 using Content.Shared.EntityEffects;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Heretic.Components;
@@ -32,4 +33,10 @@ public sealed partial class EldritchInfluenceComponent : Component
 
     [DataField]
     public TimeSpan ExamineDelay = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// Blacklist for mobs that can safely examine the influence.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? Blacklist;
 }

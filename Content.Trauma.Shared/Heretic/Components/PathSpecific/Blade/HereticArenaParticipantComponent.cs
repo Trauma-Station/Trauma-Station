@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 

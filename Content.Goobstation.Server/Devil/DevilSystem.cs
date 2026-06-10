@@ -225,27 +225,28 @@ public sealed partial class DevilSystem : EntitySystem
         // hardcoded, but this is just flavor so who cares :godo:
         _jittering.DoJitter(devil, TimeSpan.FromSeconds(4), true);
 
-        if (_timing.CurTime < devil.Comp.LastTriggeredTime + devil.Comp.CooldownDuration)
+        var now = _timing.CurTime;
+        if (now < devil.Comp.LastTriggeredTime + devil.Comp.CooldownDuration)
             return;
 
-        devil.Comp.LastTriggeredTime = _timing.CurTime;
+        devil.Comp.LastTriggeredTime = now;
 
+        var key = "devil-true-name-heard";
         if (HasComp<BibleUserComponent>(args.Source))
         {
             _damageable.ChangeDamage(devil.Owner, devil.Comp.DamageOnTrueName * devil.Comp.BibleUserDamageMultiplier, true);
             _stun.TryAddParalyzeDuration(devil, devil.Comp.ParalyzeDurationOnTrueName * devil.Comp.BibleUserDamageMultiplier);
 
-            var popup = Loc.GetString("devil-true-name-heard-chaplain", ("speaker", args.Source), ("target", devil));
-            _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
+            key = "devil-true-name-heard-chaplain";
         }
         else
         {
             _damageable.ChangeDamage(devil.Owner, devil.Comp.DamageOnTrueName, true);
             _stun.TryAddParalyzeDuration(devil, devil.Comp.ParalyzeDurationOnTrueName);
-
-            var popup = Loc.GetString("devil-true-name-heard", ("speaker", args.Source), ("target", devil));
-            _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
         }
+
+        var popup = Loc.GetString(key, ("speaker", args.Source), ("target", devil));
+        _popup.PopupEntity(popup, devil, PopupType.LargeCaution);
     }
 
     private void OnExorcismDoAfter(Entity<DevilComponent> devil, ref ExorcismDoAfterEvent args)

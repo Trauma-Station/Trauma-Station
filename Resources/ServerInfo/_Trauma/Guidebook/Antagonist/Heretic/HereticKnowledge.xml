@@ -173,6 +173,12 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Corpse, Latex gloves, Armor</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Summons a shattered risen, a creature that has high health and regeneration, has two strong melee weapons, but cannot use items or clothes.</Box></ColorBox>
 
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Lionhunter's Rifle</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">1</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T2 Side</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Wood plank, PDA, organ or limb</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a lionhunter's rifle, a weak ballistic gun that can be aimed at targets by right clicking them in Combat Mode, which causes projectile to be greatly empowered.</Box></ColorBox>
+
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Crimson Cleave</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">2</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">T3 Side</Box></ColorBox>

@@ -60,6 +60,7 @@ public sealed partial class BlobCoreSystem : EntitySystem
     private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
     private static readonly ProtoId<AlertPrototype> BlobResource = "BlobResource";
     private static readonly ProtoId<CurrencyPrototype> BlobMoney = "BlobPoint";
+    private static readonly EntProtoId BlobRule = "BlobRule";
 
     private readonly ReaderWriterLockSlim _pointsChange = new();
 
@@ -259,7 +260,7 @@ public sealed partial class BlobCoreSystem : EntitySystem
         var blobRule = EntityQuery<BlobRuleComponent>().FirstOrDefault();
         if (blobRule == null)
         {
-            _ticker.StartGameRule("BlobRule", out _);
+            _ticker.StartGameRule(BlobRule, out _);
         }
 
         var ev = new CreateBlobObserverEvent(userId);

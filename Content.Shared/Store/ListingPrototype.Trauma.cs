@@ -64,7 +64,7 @@ public sealed partial class ListingDataWithCostModifiers
 
         foreach (var (key, _) in dict.OrderByDescending(x => x.Value))
         {
-            if (!Cost.TryGetValue(key, out var cost) || !balance.TryGetValue(key, out var value) || value <= 0)
+            if (!Cost.TryGetValue(key, out var cost))
                 continue;
 
             if (cost == FixedPoint2.Zero)
@@ -75,11 +75,11 @@ public sealed partial class ListingDataWithCostModifiers
 
             var ratio = sum / cost.Float();
 
-            var oldRemaining = remainingSum;
-            remainingSum = MathF.Max(0f, sum - value.Float() * ratio);
-
             if (ratio == 0f)
-                return null;
+                return selectedCurrencies;
+
+            var oldRemaining = remainingSum;
+            remainingSum = MathF.Max(0f, sum - balance.GetValueOrDefault(key, 0).Float() * ratio);
 
             selectedCurrencies[key] = (oldRemaining - remainingSum) / ratio;
             if (remainingSum <= 0f)

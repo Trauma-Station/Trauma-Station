@@ -19,3 +19,7 @@
     whitelist:
       components:
       - CommandStaff
+    blacklist:
+      components:
+      - DeadMob
+      - Revolutionary

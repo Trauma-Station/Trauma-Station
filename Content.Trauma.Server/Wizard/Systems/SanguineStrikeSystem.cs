@@ -26,6 +26,8 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private PuddleSystem _puddle = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
 
     public override void Initialize()
     {
@@ -107,18 +109,15 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
     {
         base.BloodSteal(user, hitEntities, bloodStealAmount, bloodSpillCoordinates);
 
-        var bloodQuery = GetEntityQuery<BloodstreamComponent>();
-        var solutionQuery = GetEntityQuery<SolutionContainerManagerComponent>();
-
         // I love solutions :)
-        if (!bloodQuery.TryComp(user, out var userBlood) || !solutionQuery.TryComp(user, out var userSolution) ||
-            !_solution.ResolveSolution((user, userSolution), userBlood.BloodSolutionName, ref userBlood.BloodSolution))
+        if (!_bloodQuery.TryComp(user, out var userBlood) || !_solutionQuery.TryComp(user, out var solutions) ||
+            !_solution.ResolveSolution((user, solutions), userBlood.BloodSolutionName, ref userBlood.BloodSolution))
             return;
 
-        List<Entity<BloodstreamComponent, SolutionContainerManagerComponent>> bloodEntities = new();
+        List<Entity<BloodstreamComponent, SolutionManagerComponent>> bloodEntities = new();
         foreach (var hitEnt in hitEntities)
         {
-            if (bloodQuery.TryComp(hitEnt, out var hitBlood) && solutionQuery.TryComp(hitEnt, out var hitSolution))
+            if (_bloodQuery.TryComp(hitEnt, out var hitBlood) && _solutionQuery.TryComp(hitEnt, out var hitSolution))
                 bloodEntities.Add((hitEnt, hitBlood, hitSolution));
         }
 

@@ -1,13 +1,10 @@
 // <Trauma>
-using Content.Goobstation.Common.Chat;
 using Content.Goobstation.Common.Traits;
-using Content.Goobstation.Shared.Loudspeaker.Events;
 using Content.Shared.Speech;
 using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
 using Content.Trauma.Common.Wizard;
-using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.CollectiveMind;
 // </Trauma>
 using System.Globalization;
@@ -33,7 +30,6 @@ using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
 using Content.Shared.Station.Components;
-using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -76,8 +72,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private ExamineSystemShared _examineSystem = default!;
-
-    public readonly Color DefaultSpeakColor = Color.White; // Einstein Engines - Language
+    [Dependency] private EntityQuery<GhostHearingComponent> _ghostHearingQuery = default!;
 
     // Floofstation - Emotes and Sign Languages Respect LOS begin
     public const bool SpeakRespectsLOS = false; // You can hear through walls.
@@ -342,6 +337,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!_critLoocEnabled && _mobStateSystem.IsCritical(source))
             return;
 
+        // Systems can differentiate Looc and DeadChat by type, and cancel the speak attempt if necessary.
+        var ev = new InGameOocMessageAttemptEvent(player, sendType);
+        RaiseLocalEvent(source, ref ev, true);
+        if (ev.Cancelled)
+            return;
+
         switch (sendType)
         {
             case InGameOOCChatType.Dead:
@@ -586,8 +587,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             wrappedObfuscated,
             source,
             range,
-            languageOverride: language, // Einstein Engines - Language
-            checkLOS: typeLOS // Floofstation - Check Line-Of-Sight
+            // <Trauma>
+            languageOverride: language,
+            checkLOS: typeLOS,
+            speech: speech,
+            colorOverride: colorOverride
+            // </Trauma>
             );
 
         var ev = new EntitySpokeEvent(source, message, null, false, language); // EE - added language
@@ -601,18 +606,18 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (originalMessage == message)
         {
             if (name != Name(source))
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(source):user} as {name}: {originalMessage}.");
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {source} as {name}: {originalMessage}.");
             else
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(source):user}: {originalMessage}.");
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {source}: {originalMessage}.");
         }
         else
         {
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Say from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}.");
+                    $"Say from {source} as {name}, original: {originalMessage}, transformed: {message}.");
             else
                 _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Say from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}.");
+                    $"Say from {source}, original: {originalMessage}, transformed: {message}.");
         }
     }
 
@@ -725,18 +730,18 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (originalMessage == message)
             {
                 if (name != Name(source))
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}.");
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {source} as {name}: {originalMessage}.");
                 else
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}.");
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {source}: {originalMessage}.");
             }
             else
             {
                 if (name != Name(source))
                     _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Whisper from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}.");
+                    $"Whisper from {source} as {name}, original: {originalMessage}, transformed: {message}.");
                 else
                     _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Whisper from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}.");
+                    $"Whisper from {source}, original: {originalMessage}, transformed: {message}.");
             }
     }
 
@@ -784,9 +789,9 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         if (!hideLog)
             if (name != Name(source))
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {source} as {name}: {action}");
             else
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {source}: {action}");
     }
 
     // ReSharper disable once InconsistentNaming
@@ -822,7 +827,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             checkLOS: LocalOOCRespectsLOS // Floofstation - Check Line-Of-Sight.
             );
 
-        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {source}: {message}");
     }
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
@@ -840,7 +845,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                 ("userName", player.Channel.UserName),
                 ("message", FormattedMessage.EscapeText(message)));
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin dead chat from {player:Player}: {message}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin dead chat from {source}: {message}");
         }
         else
         {
@@ -849,7 +854,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 ("deadChannelName", Loc.GetString("chat-manager-dead-channel-name")),
                 ("playerName", (playerName)),
                 ("message", FormattedMessage.EscapeText(message)));
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {player:Player}: {message}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {source}: {message}");
         }
 
         _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
@@ -917,8 +922,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         EntityUid source,
         ChatTransmitRange range,
         NetUserId? author = null,
-        LanguagePrototype? languageOverride = null, // Einstein Engines - Language
-        bool checkLOS = false // Floofstation - Check Line-Of-Sight
+        // <Trauma>
+        LanguagePrototype? languageOverride = null,
+        bool checkLOS = false,
+        SpeechVerbPrototype? speech = null,
+        Color? colorOverride = null
+        // </Trauma>
         )
     {
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
@@ -937,21 +946,21 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue; // Floofstation - Some things don't go through walls, but they can go through windows!
             EntityUid listener = session.AttachedEntity.Value;
 
-            // Goob edit start
+            // <Trauma>
             // Raises a event for the deaf component
-            var ev = new ChatMessageOverrideInVoiceRange();
+            var ev = new ChatMessageOverrideInVoiceRangeEvent(source, name, language.ID, speech, colorOverride, obfuscated, obfuscatedWrappedMessage);
             RaiseLocalEvent(listener, ref ev);
             if (channel == ChatChannel.Local
                 && language.SpeechOverride.RequireSpeech // Check for whether speech is required.
                 && ev.Cancelled)
                 continue;
-            //Goob edit end
+            // </Trauma>
 
             // If the channel does not support languages, or the entity can understand the message, send the original message, otherwise send the obfuscated version
             if (channel == ChatChannel.LOOC || channel == ChatChannel.Emotes || _language.CanUnderstand(listener, language.ID))
                 _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
             else
-                _chatManager.ChatMessageToOne(channel, obfuscated, obfuscatedWrappedMessage, source, entHideChat, session.Channel, author: author);
+                _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, entHideChat, session.Channel, author: author);
             // Einstein Engines - Language end
         }
 
@@ -1077,90 +1086,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         return msg;
     }
 
-    // Einstein Engines - Language begin
-       /// <summary>
-    ///     Wraps a message sent by the specified entity into an "x says y" string.
-    /// </summary>
-    public string WrapPublicMessage(EntityUid source, string name, string message, SpeechVerbPrototype speech, LanguagePrototype? language = null, Color? colorOverride = null)
-    {
-        var wrapId = speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message";
-        return WrapMessage(wrapId, InGameICChatType.Speak, source, name, message, speech, language, colorOverride);
-    }
-
-    /// <summary>
-    ///     Wraps a message whispered by the specified entity into an "x whispers y" string.
-    /// </summary>
-    public string WrapWhisperMessage(EntityUid source, LocId defaultWrap, string entityName, string message, LanguagePrototype? language = null, Color? colorOverride = null)
-    {
-        return WrapMessage(defaultWrap, InGameICChatType.Whisper, source, entityName, message, null, language, colorOverride);
-    }
-
-    /// <summary>
-    ///     Wraps a message sent by the specified entity into the specified wrap string.
-    /// </summary>
-    public string WrapMessage(LocId wrapId, InGameICChatType chatType, EntityUid source, string entityName, string message, SpeechVerbPrototype? speech, LanguagePrototype? language, Color? colorOverride)
-    {
-        language ??= _language.GetLanguage(source);
-
-        // Goobstation - Bolded Language Overrides begin
-        if (language.SpeechOverride.BoldFontId != null && speech?.Bold == true)
-            wrapId = "chat-manager-entity-say-bolded-language-wrap-message";
-        // Goobstation end
-
-        if (language.SpeechOverride.MessageWrapOverrides.TryGetValue(chatType, out var wrapOverride))
-            wrapId = wrapOverride;
-
-        var verbId = language.SpeechOverride.SpeechVerbOverrides is { } verbsOverride
-            ? _random.Pick(verbsOverride).ToString()
-            : (speech is null ? string.Empty : _random.Pick(speech.SpeechVerbStrings));
-        var color = DefaultSpeakColor;
-        colorOverride ??= language.SpeechOverride.Color;
-        if (colorOverride != null)
-            color = Color.InterpolateBetween(color, colorOverride.Value, colorOverride.Value.A);
-        var languageDisplay = language.IsVisibleLanguage
-            ? Loc.GetString("chat-manager-language-prefix", ("language", language.ChatName))
-            : "";
-
-        // goob start - loudspeakers
-
-        int? loudSpeakFont = null;
-
-        var getLoudspeakerEv = new GetLoudspeakerEvent();
-        RaiseLocalEvent(source, ref getLoudspeakerEv);
-
-        if (getLoudspeakerEv.Loudspeakers != null)
-            foreach (var loudspeaker in getLoudspeakerEv.Loudspeakers)
-            {
-                var loudSpeakerEv = new GetLoudspeakerDataEvent();
-                RaiseLocalEvent(loudspeaker, ref loudSpeakerEv);
-
-                if (loudSpeakerEv.IsActive && loudSpeakerEv.AffectChat)
-                {
-                    loudSpeakFont = loudSpeakerEv.FontSize;
-                    break;
-                }
-            }
-
-        // goob end
-
-        // <Trauma> - allow source entity to replace font
-        speech ??= GetSpeechVerb(source, message);
-        var fontEv = new SpeechFontOverrideEvent(source, language.SpeechOverride.FontId ?? speech.FontId);
-        RaiseLocalEvent(source, ref fontEv);
-        // </Trauma>
-
-        return Loc.GetString(wrapId,
-            ("color", color),
-            ("entityName", entityName),
-            ("verb", Loc.GetString(verbId)),
-            ("fontType", fontEv.Font), // Trauma - use Font from above
-            ("fontSize", loudSpeakFont ?? language.SpeechOverride.FontSize ?? speech.FontSize),
-            ("boldFontType", language.SpeechOverride.BoldFontId ?? language.SpeechOverride.FontId ?? speech.FontId), // Goob Edit - Custom Bold Fonts
-            ("message", message),
-            ("language", languageDisplay));
-    }
-    // Einstein Engines - Language end
-
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
@@ -1169,10 +1094,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         // TODO proper speech occlusion
 
         var recipients = new Dictionary<ICommonSession, ICChatRecipientData>();
-        var ghostHearing = GetEntityQuery<GhostHearingComponent>();
-        var xforms = GetEntityQuery<TransformComponent>();
 
-        var transformSource = xforms.GetComponent(source);
+        var transformSource = Transform(source);
         var sourceMapId = transformSource.MapID;
         var sourceCoords = transformSource.Coordinates;
 
@@ -1181,12 +1104,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (player.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
 
-            var transformEntity = xforms.GetComponent(playerEntity);
+            var transformEntity = Transform(playerEntity);
 
             if (transformEntity.MapID != sourceMapId)
                 continue;
 
-            var observer = ghostHearing.HasComponent(playerEntity);
+            var observer = _ghostHearingQuery.HasComponent(playerEntity);
 
             // Floofstation - Check Line-Of-Sight begin
             sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance);

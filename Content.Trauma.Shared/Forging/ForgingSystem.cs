@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
@@ -67,6 +68,10 @@ public sealed partial class ForgingSystem : EntitySystem
         ModifyResult(uid, args.User, metalProto, item, itemName);
         if (item.Tag is {} tag)
             _metal.AddUnworkableTag(uid, tag); // added once it cools down
+
+        // for items that dont have any construction steps to finish set the price as soon as its wrought
+        if (item.Result != null)
+            SetPrice(uid, metalProto, item);
     }
 
     private void OnMeleeCompleted(Entity<MeleeWeaponComponent> ent, ref ForgingCompletedEvent args)
@@ -80,7 +85,7 @@ public sealed partial class ForgingSystem : EntitySystem
         if (args.Metal.Damage.Count == 0)
             return;
 
-        ModifyDamage(ent.Comp.Damage.DamageDict, args.Metal.Damage);
+        ModifyDamage(ent.Comp.Damage.DamageDict, args.Metal);
         DirtyField(ent, ent.Comp, nameof(MeleeWeaponComponent.Damage));
     }
 
@@ -89,7 +94,7 @@ public sealed partial class ForgingSystem : EntitySystem
         if (args.Metal.Damage.Count == 0)
             return;
 
-        ModifyDamage(ent.Comp.Damage.DamageDict, args.Metal.Damage);
+        ModifyDamage(ent.Comp.Damage.DamageDict, args.Metal);
         Dirty(ent);
     }
 
@@ -98,7 +103,7 @@ public sealed partial class ForgingSystem : EntitySystem
         if (args.Metal.Damage.Count == 0)
             return;
 
-        ModifyDamage(ent.Comp.BonusDamage.DamageDict, args.Metal.Damage);
+        ModifyDamage(ent.Comp.BonusDamage.DamageDict, args.Metal);
         Dirty(ent);
     }
 
@@ -107,7 +112,7 @@ public sealed partial class ForgingSystem : EntitySystem
         if (args.Metal.Damage.Count == 0)
             return;
 
-        ModifyDamage(ent.Comp.Damage.DamageDict, args.Metal.Damage);
+        ModifyDamage(ent.Comp.Damage.DamageDict, args.Metal);
         Dirty(ent);
     }
 
@@ -147,12 +152,24 @@ public sealed partial class ForgingSystem : EntitySystem
         }
     }
 
-    private void ModifyDamage(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> damage, Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> modifiers)
+    private void ModifyDamage(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> damage, MetalPrototype metal)
     {
-        foreach (var (type, modifier) in modifiers)
+        var baseTotal = FixedPoint2.Zero;
+        foreach (var (type, modifier) in metal.Damage)
         {
             if (damage.TryGetValue(type, out var old))
+            {
+                baseTotal += old;
                 damage[type] = old * modifier;
+            }
+        }
+
+        foreach (var (type, modifier) in metal.DamageBonus)
+        {
+            var bonus = baseTotal * modifier;
+            damage[type] = damage.TryGetValue(type, out var old)
+                ? old + bonus
+                : bonus;
         }
     }
 
@@ -179,6 +196,14 @@ public sealed partial class ForgingSystem : EntitySystem
         _workable.SetRemaining((uid, workable), work);
         _workable.SetResult((uid, workable), itemProto.Result ?? DefaultResult);
         _workable.SetAmount((uid, workable), itemProto.Amount);
+
+        // calculate the damage an item would take to break, based on total work needed * damage trigger from the YML
+        if (TryComp<DestructibleComponent>(uid, out var destructible))
+        {
+            destructible.Scale = work;
+            Dirty(uid, destructible);
+        }
+
         // TODO: other shit?
         return uid;
     }
@@ -258,6 +283,8 @@ public sealed partial class ForgingSystem : EntitySystem
         if (wasHolding)
             _hands.TryPickupAnyHand(user!.Value, uid);
 
+        SetPrice(uid, metal, item);
+
         var ev = new ConstructionChangedEvent(uid);
         RaiseLocalEvent(part, ref ev);
     }
@@ -268,4 +295,11 @@ public sealed partial class ForgingSystem : EntitySystem
     public bool CanMakeFrom(ForgedItemPrototype item, [ForbidLiteral] ProtoId<MetalPrototype> metal)
         => item.Whitelist?.Contains(metal) != false &&
             item.Blacklist?.Contains(metal) != true;
+
+    private void SetPrice(EntityUid uid, MetalPrototype metal, ForgedItemPrototype item)
+    {
+        var totalWork = item.Work * metal.WorkScale;
+        var itemWork = totalWork / item.Amount;
+        _metal.SetPrice(uid, (metal.Price * itemWork * item.Cost).Double());
+    }
 }

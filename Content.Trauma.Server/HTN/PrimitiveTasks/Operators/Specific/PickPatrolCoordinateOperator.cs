@@ -41,31 +41,54 @@ public sealed partial class PickPatrolCoordinateOperator : HTNOperator
 
         if (!_slaveQuery.TryComp(owner, out var slave) ||
             !_commanderQuery.TryComp(slave.MasterEntity, out var master) ||
-            !master.IsPatrolling ||
-            master.Waypoints.ToList() is not { } waypoints ||
-            waypoints.Count <= 0)
+            !master.IsPatrolling)
             return (false, null);
 
-        var nextTargetIndex = 0;
+        EntityUid? targetEntity = null;
+        var waypoints = master.Waypoints;
 
-        if (blackboard.TryGetValue<EntityUid>("LastPatrolWaypoint", out var lastWaypoint, _entMan))
+        if (waypoints.Count <= 0)
+            targetEntity = slave.MasterEntity;
+        else
         {
-            var currentIndex = waypoints.IndexOf(lastWaypoint);
-            nextTargetIndex = (currentIndex + 1) % waypoints.Count;
+            var nextTargetIndex = 0;
+
+            if (blackboard.TryGetValue<EntityUid>("LastPatrolWaypoint", out var lastWaypoint, _entMan))
+            {
+                var currentIndex = 0;
+                foreach (var waypoint in waypoints)
+                {
+                    if (waypoint == lastWaypoint)
+                        break;
+                    currentIndex++;
+                }
+                nextTargetIndex = (currentIndex + 1) % waypoints.Count;
+            }
+
+            var i = 0;
+            foreach (var waypoint in waypoints)
+            {
+                if (i == nextTargetIndex)
+                {
+                    targetEntity = waypoint;
+                    break;
+                }
+                i++;
+            }
         }
 
-        var targetEntity = waypoints[nextTargetIndex];
+        if (targetEntity is not { } target)
+            return (false, null);
 
         var pathRange = SharedInteractionSystem.InteractionRange - 1f;
-        var path = await _pathfinding.GetPath(owner, targetEntity, pathRange, cancelToken);
-
+        var path = await _pathfinding.GetPath(owner, target, pathRange, cancelToken, PathFlags.Access);
         if (path.Result != PathResult.Path)
             return (false, null);
 
         return (true, new Dictionary<string, object>()
         {
-            { "LastPatrolWaypoint", targetEntity },
-            { TargetMoveKey, _entMan.GetComponent<TransformComponent>(targetEntity).Coordinates },
+            { "LastPatrolWaypoint", target },
+            { TargetMoveKey, _entMan.GetComponent<TransformComponent>(target).Coordinates },
             { NPCBlackboard.PathfindKey, path },
         });
     }

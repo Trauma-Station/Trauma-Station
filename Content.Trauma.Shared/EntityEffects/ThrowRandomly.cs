@@ -3,6 +3,7 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.EntityEffects.Throw;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -11,17 +12,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// <summary>
 /// Throws the target entity in a random direction, with a fixed speed.
 /// </summary>
-public sealed partial class ThrowRandomly : EntityEffectBase<ThrowRandomly>
-{
-    [DataField]
-    public float Speed = 10f;
-
-    [DataField]
-    public bool Predicted = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
-}
+public sealed partial class ThrowRandomly : BaseThrowEntityEffect<ThrowRandomly>;
 
 public sealed partial class ThrowRandomlyEffectSystem : EntityEffectSystem<MetaDataComponent, ThrowRandomly>
 {
@@ -39,6 +30,6 @@ public sealed partial class ThrowRandomlyEffectSystem : EntityEffectSystem<MetaD
             direction,
             baseThrowSpeed: effect.Speed,
             user: args.User,
-            predicted: effect.Predicted);
+            predicted: args.Predicted);
     }
 }

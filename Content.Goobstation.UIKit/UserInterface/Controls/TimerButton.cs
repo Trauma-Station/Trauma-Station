@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.UIKit.UserInterface.Controls;

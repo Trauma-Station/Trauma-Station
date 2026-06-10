@@ -35,7 +35,7 @@
       params:
         volume: -12
     Sigh:
-      collection: MaleSigh
+      collection: XenomorphBreathe
     Crying:
       collection: MaleCry
     Whistle:

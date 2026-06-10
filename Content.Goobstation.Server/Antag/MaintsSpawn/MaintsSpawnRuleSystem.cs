@@ -26,10 +26,15 @@ public sealed partial class MaintsSpawnRule : StationEventSystem<MaintsSpawnRule
     protected override void Added(EntityUid uid, MaintsSpawnRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
         base.Added(uid, component, gameRule, args);
+    }
+
+    private void OnSelectLocation(Entity<MaintsSpawnRuleComponent> ent, ref AntagSelectLocationEvent args)
+    {
+        var comp = Comp<GameRuleComponent>(args.GameRule);
 
         if (!TryGetRandomStation(out var station))
         {
-            ForceEndSelf(uid, gameRule);
+            ForceEndSelf(ent, comp);
             return;
         }
 
@@ -54,16 +59,10 @@ public sealed partial class MaintsSpawnRule : StationEventSystem<MaintsSpawnRule
 
         if (validLocations.Count == 0)
         {
-            ForceEndSelf(uid, gameRule);
+            ForceEndSelf(ent, comp);
             return;
         }
 
-        component.Coords = validLocations;
-    }
-
-    private void OnSelectLocation(Entity<MaintsSpawnRuleComponent> ent, ref AntagSelectLocationEvent args)
-    {
-        if (ent.Comp.Coords is {} coords)
-            args.Coordinates.AddRange(coords);
+        args.Coordinates.AddRange(validLocations);
     }
 }

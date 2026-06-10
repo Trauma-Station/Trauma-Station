@@ -26,6 +26,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/_Goobstation/Flock/flockdrone_grump1.ogg
   - type: Damageable
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -56,6 +57,7 @@
     layers:
     - state: totemdead
   - type: Damageable
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:

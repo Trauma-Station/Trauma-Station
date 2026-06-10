@@ -5,7 +5,7 @@ using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("HereticRituals")]
 public sealed partial class HereticRitualComponent : Component
 {
     /// <summary>

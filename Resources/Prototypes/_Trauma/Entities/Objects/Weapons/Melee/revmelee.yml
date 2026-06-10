@@ -23,7 +23,7 @@
     doAfterDuration: 1.0
 
 - type: entity
-  parent: BaseRevForgedWeapon
+  parent: [ BaseRevForgedWeapon, SolutionDart ]
   id: RevMace
   name: forged mace
   description: A robust mace, stuns enemies. Knocks the air out of targets and makes them struggle to speak.
@@ -48,12 +48,7 @@
   - type: MeleeThrowOnHit
     distance: 0.3
     speed: 1
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 1
   - type: SolutionRegeneration
-    solution: melee
     generated:
       reagents:
       - ReagentId: MuteToxin
@@ -79,7 +74,10 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Ginormous
+    size: Huge
+    shape:
+    - 0,0,7,0
+    storedRotation: 45
   - type: IncreaseDamageOnWield
     damage:
       types:
@@ -91,7 +89,7 @@
   - type: Sharp
   - type: Utensil
     types:
-      - Knife
+    - Knife
   - type: Tool
     qualities:
       - Slicing
@@ -112,7 +110,6 @@
         volume: -8
   - type: Construction
     graph: RevSword
-  # <Trauma>
   - type: Parry
     maxParries: 3
     maxReflects: 0
@@ -122,7 +119,6 @@
       params:
         variation: 0.2
         volume: -11
-  # </Trauma>
 
 - type: entity
   parent: BaseRevForgedWeapon
@@ -144,7 +140,10 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Ginormous
+    size: Huge
+    shape:
+    - 0,0,8,0
+    storedRotation: 45
   - type: EmbeddableProjectile
   - type: ThrowingAngle
     angle: 225
@@ -205,7 +204,7 @@
   - type: Sharp
   - type: Utensil
     types:
-      - Knife
+    - Knife
   - type: Tool
     qualities:
       - Slicing
@@ -217,22 +216,22 @@
         Slash: 5
   - type: ThrowingAngle
     angle: 225
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 3
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 3
   - type: MeleeChemicalInjector
-    transferAmount: 3
+    transferAmount: 5
     solution: melee
   - type: RefillableSolution
     solution: melee
   - type: InjectableSolution
     solution: melee
   - type: SolutionInjectOnEmbed
-    transferAmount: 3
+    transferAmount: 5
     solution: melee
   - type: SolutionTransfer
-    maxTransferAmount: 3
+    maxTransferAmount: 5
   - type: UseDelay
   - type: SolutionContainerVisuals
     maxFillLevels: 1
@@ -325,3 +324,128 @@
     damage:
       types:
         Piercing: 10
+
+- type: entity
+  parent: BaseRevForgedWeapon
+  id: RevMaul
+  name: forged maul
+  description: A robust maul, designed to hit through armor. Definitely not a non-lethal option.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/maul.rsi
+    state: icon
+  - type: MeleeWeapon
+    attackRate: 0.625
+    animationRotation: -45
+    heavyStaminaCost: 25
+    range: 1.70
+    damage:
+      types:
+        Blunt: 20
+        Structural: 20
+      armorPenetration: 0.75
+    bluntStaminaDamageFactor: 1.5
+    soundHit:
+      path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
+  - type: Item
+    sprite: _Trauma/Objects/Revs/maul_inhands_64x.rsi
+    size: Ginormous
+  - type: Construction
+    graph: RevMaul
+  - type: MeleeThrowOnHit
+    distance: 0.3
+    speed: 1
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 5
+        Structural: 20
+  - type: Wieldable
+
+- type: entity
+  parent: BaseRevForgedWeapon
+  id: RevKunai
+  name: forged kunai
+  description: A shovel often thrown by weebs, capable of a lot if you know what you're doing. The red handle wards off demons.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/kunai.rsi
+    layers:
+    - state: icon
+    - state: icon1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    size: Small
+    storedRotation: -45
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
+      params:
+        volume: -8
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/knife_drop.ogg
+      params:
+        volume: -8
+  - type: Tag
+    tags:
+    - CombatKnife
+    - Knife
+    - ThrowingKnife
+  - type: Shovel # it's a shovel
+  - type: ToolTileCompatible
+  - type: Sharp
+  - type: Utensil
+    types:
+    - Knife
+  - type: Tool
+    qualities:
+    - Slicing
+  - type: Prying
+  - type: UseDelay
+    delay: 1
+  - type: Construction
+    graph: RevKunai
+  - type: MeleeWeapon
+    animationRotation: -130
+    canWideSwing: false
+    damage:
+      types:
+        Piercing: 10
+        Structural: 15
+        Holy: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+    removalTime: 0.5 # its a shovel, despite penning armor it doesnt go that deep
+  - type: ThrowingAngle
+    angle: 225
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    increaseOnly: true
+    damage:
+      types:
+        Piercing: 15 # 7 to crit
+        Structural: 15
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        maxVol: 3
+  - type: MeleeChemicalInjector
+    transferAmount: 3
+    solution: melee
+  - type: RefillableSolution
+    solution: melee
+  - type: InjectableSolution
+    solution: melee
+  - type: SolutionInjectOnEmbed
+    transferAmount: 3
+    solution: melee
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: icon
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1

@@ -3,6 +3,7 @@
 using Content.Goobstation.Client.Shaders;
 using Content.Goobstation.Common.Shaders;
 using Content.Trauma.Client.Heretic.SpriteOverlay;
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
@@ -12,14 +13,14 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
 using Content.Trauma.Shared.Wizard.Traps;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
 public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+
 
     public override void Initialize()
     {
@@ -35,6 +36,7 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<VoidCurseComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<HereticArenaParticipantComponent>>(UpdateOverlay);
         SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<UnfathomableCurioShieldComponent>>(UpdateOverlay);
+        SubscribeLocalEvent<ShadowCloakedComponent, SpriteOverlayUpdatedEvent<AimedRifleMarkerComponent>>(UpdateOverlay);
 
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShaderEvent>(OnShader);
         SubscribeLocalEvent<ShadowCloakedComponent, SetMultiShadersEvent>(OnShaders);
@@ -101,18 +103,13 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
     {
         base.Startup(ent);
 
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        ent.Comp.WasVisible = sprite.Visible;
-        _sprite.SetVisible((ent, sprite), false);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 0f);
     }
 
     protected override void Shutdown(Entity<ShadowCloakedComponent> ent)
     {
         base.Shutdown(ent);
 
-        if (TryComp(ent, out SpriteComponent? sprite))
-            _sprite.SetVisible((ent, sprite), ent.Comp.WasVisible);
+        _spriteVis.UpdateVisibilityModifiers(ent, nameof(ShadowCloakedComponent), 1f);
     }
 }

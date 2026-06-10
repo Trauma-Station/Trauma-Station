@@ -1,0 +1,15 @@
+- type: ghostRole
+  id: SyndicateAgentGrenadier
+  name: ghost-role-information-syndicate-reinforcement-grenadier-name
+  description: ghost-role-information-syndicate-reinforcement-grenadier-description
+  rules: ghost-role-information-syndicate-reinforcement-rules
+  entityPrototype: MobHumanSyndicateAgentGrenadier
+  iconPrototype: C4
+
+- type: ghostRole
+  id: SyndicateAgentHitman
+  name: ghost-role-information-syndicate-reinforcement-hitman-name
+  description: ghost-role-information-syndicate-reinforcement-hitman-description
+  rules: ghost-role-information-syndicate-reinforcement-rules
+  entityPrototype: MobHumanSyndicateAgentHitman
+  iconPrototype: WeaponShotgunHushpup

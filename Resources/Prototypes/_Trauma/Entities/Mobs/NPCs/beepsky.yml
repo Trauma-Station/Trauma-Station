@@ -42,7 +42,7 @@
   - type: StaminaDamageOnHit
     damage: 25
     overtime: 40
-    lightAttackDamageMultiplier: 5
+    lightAttackDamageMultiplier: 2
     lightAttackOvertimeDamageMultiplier: 0
     sound: /Audio/Weapons/egloves.ogg
   - type: Battery
@@ -94,3 +94,8 @@
   id: MobBeepsky
   name: Officer Beepsky
   description: It's Commander Beep O'sky! Officially the superior officer of all bots on station, Beepsky remains as humble and dedicated to the law as the day he was first fabricated.
+  components:
+  - type: StaminaDamageOnHit
+    lightAttackDamageMultiplier: 3
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.5

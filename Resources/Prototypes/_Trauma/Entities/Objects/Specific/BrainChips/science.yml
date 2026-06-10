@@ -18,8 +18,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ElectronicsKnowledge: 26
-      ScienceKnowledge: 26
+      ElectronicsKnowledge: 25
+      ScienceKnowledge: 25
       # TODO: more??
 
 - type: entity
@@ -29,7 +29,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ElectronicsKnowledge: 26
+      ElectronicsKnowledge: 25
       ScienceKnowledge: 50
       BotsKnowledge: 20 # not as good as robo
 
@@ -52,6 +52,6 @@
   - type: KnowledgeGrantOnWear
     skills:
       ElectronicsKnowledge: 50
-      ScienceKnowledge: 26
+      ScienceKnowledge: 25
       BotsKnowledge: 50
       # TODO: goida mech skill

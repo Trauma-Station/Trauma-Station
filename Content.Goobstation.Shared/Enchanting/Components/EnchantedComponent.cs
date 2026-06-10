@@ -17,13 +17,13 @@ public sealed partial class EnchantedComponent : Component
     /// Can be increased by killing player-controlled mobs on an altar with this on the same tile.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int Tier = 1;
+    public int Tier = 2;
 
     /// <summary>
     /// Players can be sacrificed up to this tier.
     /// </summary>
     [DataField]
-    public int MaxTier = 3;
+    public int MaxTier = 10;
 
     /// <summary>
     /// The ID of the container to add.

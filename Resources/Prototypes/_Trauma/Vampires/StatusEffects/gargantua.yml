@@ -1,0 +1,79 @@
+# Blood Swell
+- type: entity
+  parent: StaminaModifierStatusEffect
+  id: BloodSwellStatusEffect # TODO: Implement halving all stun times...?
+  name: blood swell
+  components:
+  - type: StatusEffectAlert
+    alert: BloodSwell
+  - type: StaminaModifierStatusEffect
+    modifier: 1.5
+  - type: DamageModifierStatusEffect
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Heat: 0.5
+        Shock: 0.5
+        Cold: 0.5
+        Caustic: 0.5
+  - type: StatusEffectEffectsApply # Popups to notify our entity that the effect started/ended
+    effectsOnApply:
+    - !type:PopupMessage
+      messages:
+      - entity-effect-popup-blood-swells
+      visualType: MediumCaution
+    effectsOnRemoval:
+    - !type:PopupMessage
+      messages:
+      - entity-effect-popup-blood-stops-swelling
+      visualType: MediumCaution
+  - type: UnableToShootStatusEffect
+
+- type: entity
+  parent: BloodSwellStatusEffect
+  id: BloodSwellStatusEffectII
+  name: blood swell II
+  components:
+  - type: Rallied
+    ralliedStrength: 1.1 # Increase melee damage by 10%
+    ralliedAttackSpeed: 1.0
+
+# Blood Rush
+- type: entity
+  parent: StatusEffectSpeed
+  id: StatusEffectBloodRush
+  name: blood rush
+  components:
+  - type: StatusEffectAlert
+    alert: BloodRush
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 2.0
+    walkSpeedModifier: 2.0
+
+# Overwhelming Force
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectOverwhelmingForce
+  name: overwhelming force
+  components:
+  - type: PreventPullingStatusEffect
+  - type: PreventPushStatusEffect
+
+# Duel
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectVampireGladiator
+  name: vampire gladiator
+  components: # TODO: Add bleed and wound immune?
+  - type: StatusEffectAlert
+    alert: Gladiator
+  - type: StatusEffectEffects
+    effects:
+    - !type:EvenHealthChange
+      damage:
+        Burn: -5
+        Brute: -5
+    - !type:TakeStaminaDamage
+      amount: -20

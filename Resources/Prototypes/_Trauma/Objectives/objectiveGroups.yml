@@ -1,0 +1,27 @@
+- type: weightedRandom
+  id: HunterObjectiveGroups
+  weights:
+    HunterObjectiveGroupSteal: 1
+
+- type: weightedRandom
+  id: HunterObjectiveGroupSteal
+  weights:
+    HunterStealNukeDiskObjective: 0.5
+    HunterStealHyposprayObjective: 0.5
+    HunterStealHandTeleporterObjective: 0.5
+    HunterStealRDHardsuitObjective: 0.5
+    HunterStealMagbootsObjective: 1
+    HunterStealClipboardObjective: 1
+    HunterStealKnuckleDustersObjective: 1
+    HunterStealCorgiMeatObjective: 1
+    HunterStealCaptainJetpackObjective: 0.25
+    HunterStealCaptainGunObjective: 0.25
+    HunterStealLawbringerObjective: 0.25
+    HunterStealJusticeObjective: 0.25
+    HunterStealCMORapidSyringeGunObjective: 0.5
+    HunterStealExecutiveBriefcaseObjective: 0.5
+    HunterStealGeminiProjectorObjective: 0.5
+    HunterStealFlippoLighterObjective: 1
+    HunterStealFireAxeObjective: 1
+    HunterStealCEToolbeltObjective: 1
+    HunterStealCaptainSwordObjective: 0.5

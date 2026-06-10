@@ -22,28 +22,10 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<DoorjackConditionComponent, ObjectiveGetProgressEvent>(OnDoorjackGetProgress);
-
         SubscribeLocalEvent<SpiderChargeConditionComponent, RequirementCheckEvent>(OnSpiderChargeRequirementCheck);
         SubscribeLocalEvent<SpiderChargeConditionComponent, ObjectiveAfterAssignEvent>(OnSpiderChargeAfterAssign);
 
         SubscribeLocalEvent<StealResearchConditionComponent, ObjectiveGetProgressEvent>(OnStealResearchGetProgress);
-    }
-
-    // doorjack
-
-    private void OnDoorjackGetProgress(EntityUid uid, DoorjackConditionComponent comp, ref ObjectiveGetProgressEvent args)
-    {
-        args.Progress = DoorjackProgress(comp, _number.GetTarget(uid));
-    }
-
-    private float DoorjackProgress(DoorjackConditionComponent comp, int target)
-    {
-        // prevent divide-by-zero
-        if (target == 0)
-            return 1f;
-
-        return MathF.Min(comp.DoorsJacked / (float) target, 1f);
     }
 
     // spider charge
@@ -51,6 +33,12 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
     {
         if (args.Cancelled || !_roles.MindHasRole<NinjaRoleComponent>(args.MindId))
             return;
+        // <Trauma> - get map to check for warp points in below
+        if (args.Mind.OwnedEntity is not { } mob)
+            return;
+
+        var map = Transform(mob).MapID;
+        // </Trauma>
 
         // choose spider charge detonation point
         var warps = new List<EntityUid>();
@@ -59,6 +47,10 @@ public sealed partial class NinjaConditionsSystem : EntitySystem
 
         while (allEnts.MoveNext(out var warpUid, out var warp))
         {
+            // <Trauma> - check map and ignore singularity etc
+            if (warp.Follow || Transform(warpUid).MapID != map)
+                continue;
+            // </Trauma>
             if (_whitelist.IsWhitelistFail(bombingBlacklist, warpUid)
                 && !string.IsNullOrWhiteSpace(warp.Location))
             {

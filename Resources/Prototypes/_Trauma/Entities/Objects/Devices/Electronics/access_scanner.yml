@@ -1,0 +1,61 @@
+- type: entity
+  parent: BaseLogicItem
+  id: AccessScanner
+  name: RFID access scanner
+  description: A LV-powered radio beacon that scans for nearby ID card accesses. Use a screwdriver to modify its range.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/access_scanner.rsi
+    layers:
+    - state: icon
+    - state: powered
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: AccessReader
+  - type: DoorElectronics # :)
+  - type: ActivatableUI
+    key: enum.DoorElectronicsConfigurationUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DoorElectronicsConfigurationUiKey.Key:
+        type: DoorElectronicsBoundUserInterface
+  - type: AccessScanner
+    settings:
+    - range: 1
+      power: 200
+    - range: 3
+      power: 800
+    - range: 6
+      power: 2000
+  - type: DeviceLinkSource
+    ports:
+    - AccessActive
+    - AccessName
+    - AccessJob
+  - type: ExtensionCableReceiver
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Construction
+    graph: AccessScanner
+    node: access scanner
+
+- type: entity
+  parent: BaseItem
+  id: AccessScannerUnfinished
+  name: unfinished access scanner
+  description: A bunch of scrap electronics being fashioned into some kind of radio device.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/access_scanner.rsi
+    state: icon
+  - type: Construction
+    graph: AccessScanner
+    defaultTarget: access scanner
+    node: unfinished

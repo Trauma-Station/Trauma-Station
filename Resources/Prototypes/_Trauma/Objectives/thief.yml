@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseThiefStealStructureObjective
+  id: SodaDispenserStealObjective
+  components:
+  - type: NotJobRequirement
+    jobs: [ Bartender, ServiceWorker ]
+  - type: StealCondition
+    stealGroup: SodaDispenser
+  - type: Objective
+    difficulty: 0.5

@@ -21,19 +21,12 @@ public sealed partial class SpawnAttachedEntityEffectSystem : EntityEffectSystem
         var proto = args.Effect.Entity;
         var coords = entity.Owner.ToCoordinates();
 
-        if (args.Effect.Predicted)
+        if (_net.IsClient && !(args.Effect.Predicted && args.Predicted))
+            return;
+
+        for (var i = 0; i < quantity; i++)
         {
-            for (var i = 0; i < quantity; i++)
-            {
-                PredictedSpawnAttachedTo(proto, coords);
-            }
-        }
-        else if (_net.IsServer)
-        {
-            for (var i = 0; i < quantity; i++)
-            {
-                SpawnAttachedTo(proto, coords);
-            }
+            PredictedSpawnAttachedTo(proto, coords);
         }
     }
 }

@@ -2,8 +2,6 @@
 
 using Content.Goobstation.Shared.Bloodtrak;
 using Content.Shared.Pinpointer;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Goobstation.Client.Bloodtrak;
 

@@ -14,4 +14,4 @@
     description: ghost-role-information-xenomorph-larva-description
     rules: ghost-role-information-rules-default-xeno
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
+    - MindRoleXenomorph

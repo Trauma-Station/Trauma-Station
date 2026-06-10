@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <controls:FancyWindow xmlns="https://spacestation14.io"
 		xmlns:controls="using:Content.Client.UserInterface.Controls"
         HorizontalExpand="True"
-        Title="{Loc 'magic-mirror-window-title'}"
+        Title="Magic Mirror"
         MinSize="800 800">
     <!-- Editor added in constructor -->
 </controls:FancyWindow>

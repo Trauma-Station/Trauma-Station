@@ -84,6 +84,18 @@
   - type: Sprite
     layers:
     - state: tail-icon
+  - type: Woundable
+    boneEntity: null
+    integrity: 500
+    integrityCap: 500
+    thresholds:
+      Minor: 450
+      Moderate: 350
+      Severe: 200
+      Critical: 100
+      Mangled: 0
+    traumaDeductions:
+      Dismemberment: 1.0
   # TODO SHITMED: space flight stuff, give the funny action?
 
 ## Organs
@@ -92,9 +104,7 @@
   parent: [ OrganAnimalLungs, OrganDragonInternal ]
   id: OrganDragonLungs
   components:
-  - type: OrganComponents
-    onAdd:
-    - type: ActionGun
-      action: ActionDragonsBreath
-      gunProto: DragonsBreathGun
+  - type: OrganActions
+    actions:
+    - ActionDragonsBreath
     # intentionally no BreathingImmunity

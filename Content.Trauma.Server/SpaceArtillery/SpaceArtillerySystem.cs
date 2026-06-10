@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Server.FireControl;
 using Content.Trauma.Server.SpaceArtillery.Components;
 using Content.Server.Power.Components;
 using Content.Server.Weapons.Ranged.Systems;
@@ -9,7 +8,6 @@ using Content.Trauma.Shared.SpaceArtillery;
 using Content.Shared.Camera;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
-using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
@@ -25,25 +23,21 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
     [Dependency] private GunSystem _gun = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
-    [Dependency] private SharedCameraRecoilSystem _recoilSystem = default!;
-    [Dependency] private FireControlSystem _fireControl = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
 
     private const float DISTANCE = 100;
     private const float BIG_DAMAGE = 1000;
     private const float BIG_DAMAGE_KICK = 35;
-    private ISawmill _sawmill = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _sawmill = Logger.GetSawmill("SpaceArtillery");
         SubscribeLocalEvent<SpaceArtilleryComponent, AmmoShotEvent>(OnShotEvent);
         SubscribeLocalEvent<SpaceArtilleryComponent, PowerChangedEvent>(OnApcChanged);
         SubscribeLocalEvent<SpaceArtilleryComponent, OnEmptyGunShotEvent>(OnEmptyShotEvent);
         SubscribeLocalEvent<SpaceArtilleryComponent, SignalReceivedEvent>(OnSignalReceived);
         SubscribeLocalEvent<SpaceArtilleryComponent, ChargeChangedEvent>(OnBatteryChargeChanged);
         SubscribeLocalEvent<ShipWeaponProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
-        SubscribeLocalEvent<ShipGunClassComponent, ExaminedEvent>(OnExamined);
     }
 
 
@@ -155,21 +149,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
 
             var vector = _xform.GetWorldPosition(uid) - _xform.GetWorldPosition(playerEnt);
 
-            _recoilSystem.KickCamera(playerEnt, vector.Normalized() * (float)hitEvent.Damage.GetTotal() / BIG_DAMAGE * BIG_DAMAGE_KICK);
+            _recoil.KickCamera(playerEnt, vector.Normalized() * (float)hitEvent.Damage.GetTotal() / BIG_DAMAGE * BIG_DAMAGE_KICK);
         }
-    }
-
-    private void OnExamined(EntityUid uid, ShipGunClassComponent component, ExaminedEvent args)
-    {
-        if (!TryComp<FireControllableComponent>(uid, out var controllable))
-            return;
-        if (!args.IsInDetailsRange)
-            return;
-        args.PushMarkup(
-            Loc.GetString(
-                "ship-gun-class-component-examine-detail",
-                ("processingPower", _fireControl.GetProcessingPowerCost(uid, controllable))
-            )
-        );
     }
 }

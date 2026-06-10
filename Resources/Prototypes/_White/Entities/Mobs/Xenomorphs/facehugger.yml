@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseMob, ClothingMaskBase, MobDamageable]
+  parent: [ BaseMob, ClothingMaskBase, MobDamageable, BaseXenomorphGhostRole ]
   id: MobXenomorphFaceHugger
   name: xenomorph facehugger
   description: A writhing nightmare. The facehugger clings to its victim's face, forcibly inserting a xenomorph fetus.
@@ -16,20 +16,11 @@
     noMovementLayers:
       movement:
         state: facehugger
-  - type: GhostTakeoverAvailable
-  - type: ThrowableFacehugger # Goobstation
-    minThrowForce: 5.0 # Goobstation
+  - type: ThrowableFacehugger
+    minThrowForce: 5.0
   - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
     name: ghost-role-information-facehugger-name
     description: ghost-role-information-facehugger-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: short
   - type: Clothing
     sprite: _Trauma/Mobs/Xenos/clothing/facehuggermask.rsi
     slots: [mask]
@@ -39,8 +30,9 @@
     accent: ReplacementAccent
     replacement: mumble
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: MobThresholds
     thresholds:
       0: Alive

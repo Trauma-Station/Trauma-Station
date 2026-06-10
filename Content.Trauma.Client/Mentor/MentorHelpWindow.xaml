@@ -1,0 +1,17 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<mentor:MentorHelpWindow
+    xmlns="https://spacestation14.io"
+    xmlns:mentor="using:Content.Trauma.Client.Mentor"
+    SetSize="500 300"
+    Title="Mentor Help">
+    <BoxContainer Orientation="Vertical">
+        <OutputPanel Name="Messages" Access="Public" HorizontalExpand="True"
+                     VerticalExpand="True" />
+        <BoxContainer Orientation="Horizontal">
+            <LineEdit Name="Chat" Access="Public" HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</mentor:MentorHelpWindow>

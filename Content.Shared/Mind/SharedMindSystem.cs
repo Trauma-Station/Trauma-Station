@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
@@ -160,7 +161,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     private void OnVisitingTerminating(EntityUid uid, VisitingMindComponent component, ref EntityTerminatingEvent args)
     {
-        if (component.MindId != null)
+        if (component.MindId != null && !TerminatingOrDeleted(component.MindId)) // Trauma - check if the mind is deleted
             UnVisit(component.MindId.Value);
     }
 
@@ -472,6 +473,37 @@ public abstract partial class SharedMindSystem : EntitySystem
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Returns an enumerator of the input minds objectives
+    /// </summary>
+    public IEnumerable<EntityUid> EnumerateObjectives(Entity<MindComponent?> mind)
+    {
+        if (!Resolve(mind, ref mind.Comp))
+            yield break;
+
+        foreach (var obj in mind.Comp.Objectives)
+        {
+            yield return obj;
+        }
+    }
+
+    /// <summary>
+    /// Returns an enumerator of objectives with the specified component.
+    /// </summary>
+    public IEnumerable<EntityUid> EnumerateObjectives<T>(Entity<MindComponent?> mind)  where T : IComponent
+    {
+        if (!Resolve(mind, ref mind.Comp))
+            yield break;
+
+        foreach (var obj in mind.Comp.Objectives)
+        {
+            if (!HasComp<T>(obj))
+                continue;
+
+            yield return obj;
+        }
     }
 
     /// <summary>

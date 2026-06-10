@@ -1,33 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2024 NULL882 <gost6865@yandex.ru>
-# SPDX-FileCopyrightText: 2024 Piras314 <92357316+Piras314@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 ScyronX <166930367+ScyronX@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tristan <traynor123123@gmail.com>
-# SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
-# SPDX-FileCopyrightText: 2024 a_person <40855173+a-person5660@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aineias1 <142914808+Aineias1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Weide <64257676+Lyacs@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 absurd-shaman <165011607+absurd-shaman@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 jvne <juneialduncan21@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Surplus Voidsuits
 
 uplink-hardsuit-syndiemedic-name = Gorlex Agent Hardsuit
@@ -62,7 +32,7 @@ uplink-signaller-desc = A device that can trigger signals at any distance. You c
 # bang bang pew pew eat it up i gota go
 
 uplink-hardlight-bow-name = Hardlight Bow
-uplink-hardlight-bow-desc = A modern bow that can fabricate hardlight arrows, designed for silent takedowns of targets. Has 8 different firing modes. Can be folded.
+uplink-hardlight-bow-desc = A modern bow that can fabricate hardlight arrows, designed for silent takedowns of targets. Has 7 different firing modes. Can be folded.
 
 # Job-specific
 
@@ -294,6 +264,9 @@ uplink-syndicate-weapon-module-advanced-desc = Upgrades a cyborg with an energy 
 
 uplink-carpcaller-name = Space Carp Caller
 uplink-carpcaller-desc = A device exploiting carp psychology that, when anchored, powered, and exposed to open space, will attract wild space carp. Keep in mind you're not their friend.
+
+uplink-reagent-grenades-name = Box of Reagent Grenades
+uplink-reagent-grenades-desc = Contains 2 Glue grenades and 2 Lube Grenades
 
 # Martial Arts
 

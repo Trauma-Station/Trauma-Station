@@ -1,6 +1,13 @@
 - type: markingsGroup
   id: Decapoid
+  onlyGroupWhitelisted: true
   limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
+      required: false
     enum.HumanoidVisualLayers.Eyes:
       limit: 1
       required: true
@@ -146,8 +153,9 @@
         layer:
         - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Decapoid
+  - type: Injurable
+    damageContainer: Biological
   - type: Vocal
     sounds:
       Male: UnisexDecapoid

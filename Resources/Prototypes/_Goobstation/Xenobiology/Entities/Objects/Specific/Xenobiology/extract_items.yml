@@ -20,15 +20,10 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 40
   - type: EmpImmune
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      battery:
-        maxVol: 15
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
+    - SolutionRiggable
+    - SolutionFoodSlime
   - type: Extractable
     juiceSolution:
       reagents:
@@ -71,6 +66,7 @@
   - type: Item
     size: Normal
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 0.1
@@ -185,7 +181,7 @@
     - type: SpeedModifierImmunity
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, AdamantineOverheatable ]
   id: XenobioAdamantineBar
   name: adamantine bar
   description: Theoretically, if you sold a couple of these, you wouldn't need to work on the station any more. It must have it's use, since it costs a fortune to get one of these. But where?
@@ -195,5 +191,20 @@
     state: icon
   - type: StaticPrice
     price: 10000 # goida
-
+  - type: Workable
+    remaining: 500 # bring an army, you'll need it
+    result: AdamantineIngot
 # todo mind transfer potion
+
+- type: entity
+  parent: Solution
+  id: SolutionFoodSlime
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    id: food
+    solution:
+      maxVol: 15
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15

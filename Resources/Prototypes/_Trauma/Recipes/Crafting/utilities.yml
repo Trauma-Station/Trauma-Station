@@ -1,0 +1,9 @@
+- type: construction
+  id: AccessScanner
+  graph: AccessScanner
+  targetNode: access scanner
+  category: construction-category-utilities
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  useQuality: false

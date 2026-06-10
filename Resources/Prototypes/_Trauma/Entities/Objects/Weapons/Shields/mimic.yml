@@ -1,6 +1,6 @@
 - type: entity
   name: flesh shield
-  parent: BaseItem
+  parent: BaseShield
   id: ShieldMimic
   description: A large fleshy closet door, could be used as a shield...
   components:
@@ -30,19 +30,25 @@
         Slash: 1
         Piercing: 1
         Heat: 1
-  - type: Damageable
-    damageContainer: Shield
-  - type: ExaminableDamage
-    messages: ShieldMessages
   - type: Destructible
     thresholds: [] # indestructible
-  - type: StaticPrice
-    price: 100
-  - type: DisarmMalus
-    malus: 1
   - type: Unremoveable
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/Effects/gib2.ogg
       params:
         volume: -7
+  - type: Parry
+    soundOnParry:
+      path: /Audio/Weapons/pierce.ogg
+  - type: HeldSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+  - type: StaminaDamageOnHit
+    damage: 15
+  - type: MeleeThrowOnHit
+    distance: 1

@@ -41,7 +41,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -532,7 +531,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
 
     private void OnPurchase(Entity<HereticComponent> ent, ref ListingPurchasedEvent args)
     {
-        if (args.Data.Categories.FirstOrNull() is not { } cat)
+        if (!args.Data.IsCostModified || args.Data.Categories.FirstOrNull() is not { } cat)
             return;
 
         if (!ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount))

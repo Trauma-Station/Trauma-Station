@@ -98,7 +98,7 @@ public sealed partial class RelayNearbyEffectSystem : EntityEffectSystem<Transfo
                 continue;
 
             _data.CopyData(ent, uid);
-            _effects.TryApplyEffect(uid, relayed, args.Scale, args.User);
+            _effects.TryApplyEffect(uid, relayed, args.Scale, args.User, args.Predicted);
             _data.ClearData(uid);
         }
     }

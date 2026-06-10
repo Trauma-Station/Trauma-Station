@@ -17,7 +17,6 @@ using Content.Shared.Temperature.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Silicon.Charge;
 

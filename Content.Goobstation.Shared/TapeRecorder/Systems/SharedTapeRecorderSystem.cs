@@ -327,7 +327,7 @@ public abstract partial class SharedTapeRecorderSystem : EntitySystem
     /// <param name="mode">The new mode</param>
     private void SetMode(Entity<TapeRecorderComponent> ent, TapeRecorderMode mode)
     {
-        if (mode == ent.Comp.Mode)
+        if (mode == ent.Comp.Mode || TerminatingOrDeleted(ent))
             return;
 
         if (mode == TapeRecorderMode.Stopped)

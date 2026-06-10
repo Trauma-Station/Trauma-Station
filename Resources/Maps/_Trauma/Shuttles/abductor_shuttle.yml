@@ -1152,27 +1152,6 @@ entities:
     - type: Transform
       pos: -0.49884194,-1.3064799
       parent: 1
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=blue]Stamina[/color] damage reduced by [color=lightblue]0%[/color].
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]90%[/color].
-          priority: 0
-          component: Armor
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ComputerIFF
   entities:
   - uid: 180

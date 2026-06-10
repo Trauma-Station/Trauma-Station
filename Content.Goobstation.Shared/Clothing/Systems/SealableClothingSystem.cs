@@ -18,7 +18,6 @@ using Content.Shared.Silicons.StationAi;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Clothing;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 using Vector2 = System.Numerics.Vector2;
 
@@ -156,12 +155,9 @@ public sealed partial class SealableClothingSystem : EntitySystem
         var (uid, comp) = control;
         var user = args.User;
 
-        if (!args.CanComplexInteract)
+        if (!args.CanInteract || !args.CanComplexInteract)
             return;
 
-        // Prevent Station AI from toggling modsuit seals
-        if (HasComp<StationAiHeldComponent>(user))
-            throw new Exception("AI Should never be allowed to get strip verbs");
         // Since sealing control in wearer's container system just won't show verb on args.CanAccess
         if (!_interaction.InRangeUnobstructed(user, uid))
             return;

@@ -4,7 +4,6 @@ using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Systems.Side;
 using Robust.Client.Audio;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;

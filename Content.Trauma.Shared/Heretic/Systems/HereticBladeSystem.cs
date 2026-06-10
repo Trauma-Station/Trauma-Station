@@ -30,7 +30,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
@@ -81,7 +80,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
 
         var aliveMobsCount = args.Args.HitEntities.Count(x => x != user && _mobState.IsAlive(x));
 
-        args.BonusDamage += args.Args.BaseDamage * maelstrom.ExtraDamageMultiplier;
+        args.Args.BonusDamage += args.Args.BaseDamage * maelstrom.ExtraDamageMultiplier;
         if (aliveMobsCount <= 0 || !TryComp<DamageableComponent>(user, out var dmg))
             return;
 

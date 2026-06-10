@@ -1,5 +1,7 @@
 # Trauma Station contribution guidelines and standards
 
+For the basics and anything not listed here, read [SS14's upstream documentation](https://docs.ss14.io)
+
 ## Core guidelines
 
 1. Do not rely on language models to do everything for you. You will be ridiculed for this.
@@ -30,8 +32,6 @@ Remember to test your PR again after making changes to it! Not doing so is one o
 ### Resources
 
 All resources go in a `_Trauma` subdirectory inside the resource's folder, e.g. `Resources/Prototypes/_Trauma` for all YML prototypes.
-
-For entity prototypes, keep everything consistent and sort the top level fields by `abstract > categories > parent > id > name > suffix > description > placement > categories`.
 
 ### Update logic
 
@@ -71,6 +71,49 @@ Doing this eliminates the need for upstream code to be dependent on your random 
 All interactions must be predicted unless you have a very good reason not to do it.
 
 All code should be in shared unless they have a hard dependency in server/client or are only used clientside, with no need to have the server control its existence.
+
+### Tags
+
+Tags you add to `Resources/Prototypes/_Trauma/tags.yml` must be added in alphabetical order, with documentation of how they are used.
+For example, if you add a `Katana` tag for a katana sheath' storage whitelist, add `# Used in ClothingBeltKatanaSheath slot whitelist`
+Try to update this documentation if you add a substatial use of a tag.
+
+### YML style
+
+For entity prototypes, keep everything consistent and sort the top level fields by `type > abstract > parent > id > name > suffix > description > placement > categories`.
+For any other prototypes at least keep `type > abstract > parent > id` in order.
+
+Unindent lists so they are in-line with whatever declared them
+```yml
+# Good
+- type: entity
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+
+# Bad
+- type: entity
+  components:
+    - type: Sprite
+      layers:
+        - state: icon
+```
+
+Instead of copy pasting something in the same file 20 times, use anchors using `&` to define and `*` to reference blocks of data
+```yml
+- type: entity
+  components:
+  - type: EmitSoundOnUse
+    sound: &sound
+      path: /Audio/Items/honk.ogg
+  - type: EmitSoundOnLand
+    sound: *sound
+  - type: EmitSoundOnTrigger
+    sound: *sound
+  - type: MeleeWeapon
+    sound: *sound
+```
 
 ## Commenting changes
 

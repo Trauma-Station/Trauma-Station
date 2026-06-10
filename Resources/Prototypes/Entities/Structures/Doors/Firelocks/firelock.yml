@@ -21,8 +21,9 @@
     - type: DeviceNetworkRequiresPower
     - type: InteractionOutline
     - type: Damageable
+      damageModifierSet: Metallic # Trauma - was StructuralMetallicStrong, dont need invincible firelocks
+    - type: Injurable
       damageContainer: StructuralInorganic
-      damageModifierSet: StrongMetallic
     - type: RCDDeconstructable
       cost: 4
       delay: 6

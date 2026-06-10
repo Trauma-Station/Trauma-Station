@@ -1,0 +1,41 @@
+# Abstract garlic entity used by foods that include garlic, in order for them to apply bad effects on vampires (garlic bad for vamps)
+- type: entity
+  abstract: true
+  id: Garlic
+  components:
+  - type: TriggerOnCollide
+    fixtureID: garlic
+    maxTriggers: 1
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:NestedEffect
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Vampire
+      proto: VampireGarlic
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        hard: false
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      garlic:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        hard: false
+        density: 20
+        mask:
+        - ItemMask
+        - Opaque

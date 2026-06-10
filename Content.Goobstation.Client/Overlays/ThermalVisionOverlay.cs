@@ -4,8 +4,6 @@ using System.Linq;
 using Content.Goobstation.Shared.Overlays;
 using Content.Shared.Body;
 using Content.Shared.Stealth.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;

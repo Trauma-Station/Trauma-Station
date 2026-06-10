@@ -1,0 +1,74 @@
+- type: entity
+  abstract: true
+  parent: MobStatusEffectBase
+  id: VampireStatusEffect
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - Vampire
+
+- type: entity
+  parent: VampireStatusEffect
+  id: VampireCoffinStatusEffect # restores some nullification every few seconds while in a coffin
+  name: vampire coffin
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 1
+    effects:
+    - !type:ApplyNullification
+      amount: -1
+
+- type: entity
+  parent: VampireStatusEffect
+  id: VampireLairStatusEffect # restores health while in the coffin
+  name: vampire lair
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 1
+    effects:
+    - !type:EvenHealthChange
+      damage:
+        Burn: -5
+        Brute: -5
+        Toxin: -5
+        Airloss: -5
+        Genetic: -5
+        Metaphysical: -5
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireChapelStatusEffect # random chance to burst into flames
+  name: vampire chaepl
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 2
+    effects:
+    - !type:NestedEffect
+      probability: 0.1
+      proto: VampireFlameBurst
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: VampireSpaceStatusEffect # you always burn in space
+  name: vampire space
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 5
+    effects:
+    - !type:HealthChange
+      conditions:
+      - !type:OnGridCondition
+        inverted: true
+      splitDamage: SplitEnsureAll
+      damage:
+        types:
+          Cellular: 10
+    - !type:PopupMessage
+      conditions:
+      - !type:OnGridCondition
+        inverted: true
+      messages:
+      - entity-effect-popup-vampire-light-1
+      - entity-effect-popup-vampire-light-2
+      - entity-effect-popup-vampire-light-3

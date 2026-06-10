@@ -26,6 +26,7 @@ namespace Content.Goobstation.Shared.Vehicles;
 public abstract partial class SharedVehicleSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -43,6 +44,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<VehicleComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<VehicleComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<VehicleComponent, BuckleAttemptEvent>(OnBuckleAttempt);
         SubscribeLocalEvent<VehicleComponent, StrapAttemptEvent>(OnStrapAttempt);
         SubscribeLocalEvent<VehicleComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<VehicleComponent, UnstrappedEvent>(OnUnstrapped);
@@ -83,14 +85,13 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             return;
 
         component.EngineRunning = true;
+        Dirty(uid, component);
         _appearance.SetData(uid, VehicleState.Animated, true);
 
         _ambientSound.SetAmbience(uid, true);
 
-        if (component.Driver == null)
-            return;
-
-        Mount(component.Driver.Value, uid);
+        if (component.Driver is { } driver)
+            Mount(driver, uid);
     }
 
     private void OnEject(EntityUid uid, VehicleComponent component, ref EntRemovedFromContainerMessage args)
@@ -98,69 +99,78 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         if (args.Container.ID != component.KeySlot)
             return;
         component.EngineRunning = false;
+        Dirty(uid, component);
         _appearance.SetData(uid, VehicleState.Animated, false);
         _ambientSound.SetAmbience(uid, false);
 
-        if (component.Driver == null)
-            return;
-
-        Dismount(component.Driver.Value, uid);
+        if (component.Driver is { } driver)
+            Dismount(driver, uid);
     }
 
-    private void OnHorn(EntityUid uid, VehicleComponent component, InstantActionEvent args)
+    private void OnHorn(EntityUid uid, VehicleComponent component, HornActionEvent args)
     {
-        if (args.Handled
-        || component.Driver != args.Performer
-        || component.HornSound == null)
+        var user = args.Performer;
+        if (args.Handled || user != component.Driver || component.HornSound == null)
             return;
 
-        _audio.PlayPvs(component.HornSound, uid);
+        _audio.PlayPredicted(component.HornSound, uid, user);
         args.Handled = true;
     }
 
-    private void OnSiren(EntityUid uid, VehicleComponent component, InstantActionEvent args)
+    private void OnSiren(EntityUid uid, VehicleComponent component, SirenActionEvent args)
     {
-        if (args.Handled
-        || component.Driver != args.Performer
-        || component.SirenSound == null)
+        var user = args.Performer;
+        if (args.Handled || user != component.Driver || component.HornSound == null)
             return;
+
+        component.SirenEnabled = !component.SirenEnabled;
+        Dirty(uid, component);
+        args.Handled = true;
+
+        if (_net.IsClient)
+            return; // PlayPredicted return value cant be stored it doesnt use PredictedSpawn
 
         component.SirenStream = component.SirenEnabled ? _audio.Stop(component.SirenStream) : _audio.PlayPvs(component.SirenSound, uid)?.Entity;
-        component.SirenEnabled = !component.SirenEnabled;
-        args.Handled = true;
+    }
+
+    private void OnBuckleAttempt(Entity<VehicleComponent> ent, ref BuckleAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private void OnStrapAttempt(Entity<VehicleComponent> ent, ref StrapAttemptEvent args)
     {
-        var driver = args.Buckle.Owner;
+        if (args.Cancelled)
+            return;
 
+        // no hotswapping drivers
         if (ent.Comp.Driver != null)
         {
             args.Cancelled = true;
             return;
         }
 
-        if (TrySpawnVirtualItems(ent, ref args, driver))
-            return;
-
-        AddHorns(driver, ent);
+        var driver = args.Buckle.Owner;
+        // if you have no hands available you cant drive it
+        args.Cancelled = !TrySpawnVirtualItems(ent, driver);
     }
 
-    private bool TrySpawnVirtualItems(Entity<VehicleComponent> ent, ref StrapAttemptEvent args, EntityUid driver)
+    private bool TrySpawnVirtualItems(Entity<VehicleComponent> ent, EntityUid driver)
     {
         if (ent.Comp.RequiredHands == 0)
-            return false;
+            return true;
 
+        _virtualItem.DeleteInHandsMatching(driver, ent.Owner, queueDel: false);
         for (var hands = 0; hands < ent.Comp.RequiredHands; hands++)
         {
             if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, driver, false))
                 continue;
-            args.Cancelled = true;
+
             _virtualItem.DeleteInHandsMatching(driver, ent.Owner);
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     private void OnStrapped(Entity<VehicleComponent> ent, ref StrappedEvent args)
@@ -171,6 +181,9 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             return;
 
         ent.Comp.Driver = driver;
+        Dirty(ent);
+
+        AddActions(ent, driver);
         _appearance.SetData(ent, VehicleState.DrawOver, true);
 
         SetupOverlay(ent);
@@ -212,15 +225,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         _appearance.SetData(ent, VehicleState.DrawOver, false);
     }
 
-    private void AddHorns(EntityUid driver, EntityUid vehicle)
+    private void AddActions(Entity<VehicleComponent> ent, EntityUid driver)
     {
-        if (!TryComp<VehicleComponent>(vehicle, out var vehicleComp))
-            return;
-
-        if (vehicleComp.HornSound != null)
-            _actions.AddAction(driver, ref vehicleComp.HornAction, HornActionId, vehicle);
-        if (vehicleComp.SirenSound != null)
-            _actions.AddAction(driver, ref vehicleComp.SirenAction, SirenActionId, vehicle);
+        if (ent.Comp.HornSound != null)
+            _actions.AddAction(driver, HornActionId, ent.Owner);
+        if (ent.Comp.SirenSound != null)
+            _actions.AddAction(driver, SirenActionId, ent.Owner);
     }
 
     private void Mount(EntityUid driver, EntityUid vehicle)
@@ -240,6 +250,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             return;
 
         vehicleComp.Driver = null;
+        Dirty(vehicle, vehicleComp);
 
         if (vehicleComp.ActiveOverlay is {} overlay)
         {
@@ -248,10 +259,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         }
         RemComp<RelayInputMoverComponent>(driver);
 
-        if (vehicleComp.HornAction != null)
-            _actions.RemoveAction(driver, vehicleComp.HornAction);
-        if (vehicleComp.SirenAction != null)
-            _actions.RemoveAction(driver, vehicleComp.SirenAction);
+        _actions.RemoveProvidedActions(driver, vehicle);
 
         _virtualItem.DeleteInHandsMatching(driver, vehicle);
 
@@ -273,12 +281,13 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     {
         component.IsBroken = true;
 
-        //remove drivers ability to drive if there is a driver
-        if (component.Driver != null)
-            Dismount(component.Driver.Value, uid);
+        // remove drivers ability to drive if there is a driver
+        if (component.Driver is { } driver)
+            Dismount(driver, uid);
 
-        //stop animation
+        // stop animation
         component.EngineRunning = false;
+        Dirty(uid, component);
         _appearance.SetData(uid, VehicleState.Animated, false);
         _ambientSound.SetAmbience(uid, false);
     }
@@ -294,11 +303,8 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
     private void OnGetAdditionalAccess(EntityUid uid, VehicleComponent component, ref GetAdditionalAccessEvent args)
     {
-        var driver = component.Driver;
-        if (driver == null)
-            return;
-
-        args.Entities.Add(driver.Value);
+        if (component.Driver is { } driver)
+            args.Entities.Add(driver);
     }
 }
 

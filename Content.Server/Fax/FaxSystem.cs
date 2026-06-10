@@ -623,7 +623,7 @@ public sealed partial class FaxSystem : EntitySystem
 
         _deviceNetworkSystem.QueuePacket(uid, component.DestinationFaxAddress, payload);
 
-        if (!args.Actor.IsValid()) // Goobstation - no log for automation
+        if (args.Actor.IsValid()) // Goobstation - no log for automation
         _adminLogger.Add(LogType.Action,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):actor} " +

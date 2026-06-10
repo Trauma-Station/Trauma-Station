@@ -4,27 +4,30 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Silicon.DeadStartupButton;
 
-/// <summary>
-/// This is used for...
-/// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class DeadStartupButtonComponent : Component
 {
-    [DataField("verbText")]
-    public string VerbText = "dead-startup-button-verb";
+    [DataField]
+    public LocId VerbText = "dead-startup-button-verb";
 
-    [DataField("sound")]
+    [DataField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Effects/Arcade/newgame.ogg");
 
-    [DataField("buttonSound")]
+    [DataField]
     public SoundSpecifier ButtonSound = new SoundPathSpecifier("/Audio/Machines/button.ogg");
 
-    [DataField("doAfterInterval"), ViewVariables(VVAccess.ReadWrite)]
-    public float DoAfterInterval = 1f;
+    [DataField]
+    public TimeSpan StartupDelay = TimeSpan.FromSeconds(1);
 
-    [DataField("buzzSound")]
-    public SoundSpecifier BuzzSound = new SoundCollectionSpecifier("buzzes");
+    [DataField]
+    public SoundSpecifier BuzzSound = new SoundCollectionSpecifier("buzzes")
+    {
+        Params = new()
+        {
+            Variation = 0.05f
+        }
+    };
 
-    [DataField("verbPriority"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public int VerbPriority = 1;
 }

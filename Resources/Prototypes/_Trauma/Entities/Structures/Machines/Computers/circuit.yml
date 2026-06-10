@@ -1,0 +1,23 @@
+- type: entity
+  parent: [ BaseComputerAiAccess, BaseCircuitSlot ]
+  id: ComputerCircuitEditor
+  name: circuit editor console
+  components:
+  - type: Computer
+    board: CircuitEditorConsoleCircuitboard
+  - type: CircuitEditor
+  - type: ActivatableUI
+    key: enum.CircuitEditorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CircuitEditorUiKey.Key:
+        type: CircuitEditorBUI
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+      circuit: !type:ContainerSlot
+  - type: GuideHelp
+    guides:
+    - Circuits

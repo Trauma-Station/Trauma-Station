@@ -9,6 +9,7 @@
     - state: icon-surgery
   - type: ItemBorgModule
     hands:
+    - item: HandheldHealthAnalyzer
     - item: Scalpel
     - item: SawElectric
     - item: Drill
@@ -17,7 +18,7 @@
     - item: Cautery
     - item: MedicalStitches
     - item: BoneGel
-    #- item: Bonesetter # Trauma - unused currently
+    #- item: Bonesetter # unused currently
     - hand:
         emptyRepresentative: OrganHumanBrain
         emptyLabel: borg-slot-organ-empty
@@ -39,6 +40,7 @@
     - state: icon-advanced-surgery
   - type: ItemBorgModule
     hands:
+    - item: HandheldHealthAnalyzer
     - item: EnergyScalpel
     - item: EnergyCautery
     - item: AdvancedRetractor

@@ -6,9 +6,7 @@ using Content.Medical.Client.Targeting;
 using Content.Medical.Client.UserInterface.Systems.Targeting.Widgets;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Targeting;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Client.Player;
 
 namespace Content.Medical.Client.UserInterface.Systems.Targeting;

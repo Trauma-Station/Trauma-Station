@@ -10,7 +10,6 @@ using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Side;
 

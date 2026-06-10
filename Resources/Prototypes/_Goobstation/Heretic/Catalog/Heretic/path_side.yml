@@ -433,6 +433,30 @@
     stage: 4
 
 - type: listing
+  id: HereticSideT2Rifle
+  name: knowledge-path-side-t2-rifle-name
+  description: knowledge-path-side-t2-rifle-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/lionhunter-icon.rsi, state: base }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - LionhunterRifle
+    - LionhunterRifleAmmunition
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT2
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 4
+
+- type: listing
   id: HereticSideT3Grasp
   name: knowledge-path-side-t3-grasp-name
   description: knowledge-path-side-t3-grasp-desc

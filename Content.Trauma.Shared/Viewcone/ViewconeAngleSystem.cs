@@ -42,8 +42,9 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
         var dir = ent.Comp.AngleModifier < 1f ? "decrease" : "increase";
         var loc = "viewcone-modifier-examine-" + dir;
 
-        var degrees = (int) MathF.Abs(ent.Comp.AngleModifier);
-        args.PushMarkup(Loc.GetString(loc, ("degrees", degrees)));
+        // 1.25 -> 25, 0.6 -> 40
+        var percent = Math.Abs((int) (ent.Comp.AngleModifier * 100f) - 100);
+        args.PushMarkup(Loc.GetString(loc, ("percent", percent)));
     }
 
     private void OnModifyAngle(Entity<ViewconeModifierComponent> ent, ref ModifyViewconeAngleEvent args)

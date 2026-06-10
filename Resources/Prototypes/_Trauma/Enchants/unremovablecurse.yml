@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseEnchant
+  id: CurseUnremovable
+  name: Binding Curse
+  components:
+  - type: Enchant
+    maxLevel: 1
+    blacklist:
+      components:
+      - StealTarget
+  - type: Unremoveable

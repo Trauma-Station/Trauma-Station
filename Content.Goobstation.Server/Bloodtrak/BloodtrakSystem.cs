@@ -46,6 +46,12 @@ public sealed partial class BloodtrakSystem : SharedBloodtrakSystem
 
         if (component.LastScannedTarget.Equals(target))
         {
+            if (component.ResultList.Count == 0)
+            {
+                _popupSystem.PopupEntity("Nothing scanned!?", user, user);
+                return null;
+            }
+
             // cycle through DNAs already acquired
             component.ResultListOffset++;
             if (component.ResultListOffset == component.ResultList.Count)

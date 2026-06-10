@@ -45,7 +45,7 @@ public sealed partial class CoinFlipSystem : SharedCoinFlipSystem
                 uid);
             Appearance.SetData(uid, CoinFlipVisuals.SpriteState, coin.CurrentSide.SpriteState);
             if (coin.User is { } user)
-                _effects.ApplyEffects(user, coin.CurrentSide.UserEffects);
+                _effects.ApplyEffects(user, coin.CurrentSide.UserEffects, predicted: false);
             coin.User = null;
 
             Dirty(uid, coin);

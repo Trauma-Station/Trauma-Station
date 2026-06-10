@@ -14,6 +14,7 @@
   meltTemp: 1200
   durability: 0.75 # brittle...
   speed: 0.9 # heavy and slow
+  price: 2
   damage:
     Blunt: 1.25 # hit hard ye
     Slash: 0.9 # doesn't hold a good edge
@@ -31,6 +32,7 @@
   meltTemp: 1700
   workScale: 1.5
   durability: 1 # standard material most things use
+  price: 1.5
   damage:
     Blunt: 1.25
   overheated: OverheatedSteel
@@ -49,9 +51,70 @@
   workScale: 2
   durability: 3 # extremely durable
   speed: 1.1 # light and quick
+  price: 3
   damage:
     Blunt: 0.5 # too light to make a good hammer etc
     Slash: 1.25 # decent knives
     Piercing: 1.5 # very pointy spears
   overheated: OverheatedPlasteel
   masteryOffset: 1 # hard to make stuff with it
+
+- type: metal
+  id: Gold
+  name: gold
+  color: "#ffcc51"
+  ingotSprite: ingot_gold
+  density: 19.283
+  workingTemp: 923
+  workingRange: 50
+  meltTemp: 1337 # B)
+  workScale: 0.5 # relatively soft metal
+  durability: 0.1 # lol
+  speed: 0.7 # heavy
+  price: 7.5 # shiny
+  damage:
+    Blunt: 0.6 # heavy but easily deforms
+    Slash: 0.1 # no edge at all
+    Piercing: 0.15 # heavy so a bit better for spears
+  overheated: GoldMolten # just melts completely
+
+- type: metal
+  id: Silver
+  name: silver
+  color: "#d7e2e7"
+  ingotSprite: ingot_silver
+  density: 10.503
+  workingTemp: 893
+  workingRange: 80
+  meltTemp: 1235
+  workScale: 0.75 # work-hardens faster than gold but still somewhat fast
+  durability: 0.15
+  speed: 1.1 # not so heavy
+  price: 6 # less shiny
+  damage:
+    Blunt: 0.4 # easily deforms and not as heavy as gold
+    Slash: 0.2 # barely any edge
+    Piercing: 0.2
+  damageBonus:
+    Holy: 0.75 # per point of original weapon damage
+  overheated: SilverMolten
+  # TODO: antimagic for armour
+
+- type: metal
+  id: Adamantine
+  name: adamantine
+  color: "#affaff"
+  ingotSprite: ingot_adamantine
+  density: 1 # extremely light
+  workingTemp: 2050
+  workingRange: 50
+  meltTemp: 2383
+  workScale: 10 # extremely hard to forge, bring friends or technology
+  durability: 10 # that's its bit
+  speed: 1.15 # ligher than plasteel = faster than plasteel
+  price: 20
+  damage:
+    Blunt: 0.2 # just not heavy
+    Slash: 1.4 # the sharpest of edges
+    Piercing: 1.5 # on par with plasteel, but it's already stupid strong
+  overheated: OverheatedAdamantine

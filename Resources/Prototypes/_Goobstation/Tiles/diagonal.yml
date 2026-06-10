@@ -1,67 +1,21 @@
 - type: tile
+  parent: Lattice
   id: LatticeDiagonalNW
-  name: tiles-lattice-diagonal-NW
   sprite: /Textures/_Goobstation/Tiles/latticeDiagonalNW.png
-  baseTurf: Space
-  isSubfloor: true
-  deconstructTools: [ Cutting ]
-  deconstructTimeMultiplier: 1 # Goobstation
-  weather: true
-  footstepSounds:
-    collection: FootstepCatwalk
-  friction: 1.5
-  isSpace: true
-  itemDrop: PartRodMetal1
-  heatCapacity: 10000
-  mass: 200
+  heatCapacity: 5000 # half of 10kJ
+  mass: 100 # half of 200
 
 - type: tile
+  parent: LatticeDiagonalNW
   id: LatticeDiagonalNE
-  name: tiles-lattice-diagonal-NE
   sprite: /Textures/_Goobstation/Tiles/latticeDiagonalNE.png
-  baseTurf: Space
-  isSubfloor: true
-  deconstructTools: [ Cutting ]
-  deconstructTimeMultiplier: 1 # Goobstation
-  weather: true
-  footstepSounds:
-    collection: FootstepCatwalk
-  friction: 1.5
-  isSpace: true
-  itemDrop: PartRodMetal1
-  heatCapacity: 10000
-  mass: 200
 
 - type: tile
+  parent: LatticeDiagonalNW
   id: LatticeDiagonalSW
-  name: tiles-lattice-diagonal-SW
   sprite: /Textures/_Goobstation/Tiles/latticeDiagonalSW.png
-  baseTurf: Space
-  isSubfloor: true
-  deconstructTools: [ Cutting ]
-  deconstructTimeMultiplier: 1 # Goobstation
-  weather: true
-  footstepSounds:
-    collection: FootstepCatwalk
-  friction: 1.5
-  isSpace: true
-  itemDrop: PartRodMetal1
-  heatCapacity: 10000
-  mass: 200
 
 - type: tile
+  parent: LatticeDiagonalNW
   id: LatticeDiagonalSE
-  name: tiles-lattice-diagonal-SE
   sprite: /Textures/_Goobstation/Tiles/latticeDiagonalSE.png
-  baseTurf: Space
-  isSubfloor: true
-  deconstructTools: [ Cutting ]
-  deconstructTimeMultiplier: 1 # Goobstation
-  weather: true
-  footstepSounds:
-    collection: FootstepCatwalk
-  friction: 1.5
-  isSpace: true
-  itemDrop: PartRodMetal1
-  heatCapacity: 10000
-  mass: 200

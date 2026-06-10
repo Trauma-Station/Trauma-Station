@@ -9,7 +9,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.HTN.PrimitiveTasks.Operators.Specific;
 

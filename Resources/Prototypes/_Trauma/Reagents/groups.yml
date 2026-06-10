@@ -1,0 +1,38 @@
+- type: reagentGroup
+  id: Unknown
+
+- type: reagentGroup
+  id: Toxins
+
+- type: reagentGroup
+  id: Biological
+
+- type: reagentGroup
+  id: Elements
+
+- type: reagentGroup
+  id: Narcotics
+
+- type: reagentGroup
+  id: Pyrotechnic
+
+- type: reagentGroup
+  id: Medicine
+
+- type: reagentGroup
+  id: Botanical
+
+- type: reagentGroup
+  id: Special
+
+- type: reagentGroup
+  id: Foods
+
+- type: reagentGroup
+  id: Drinks
+
+- type: reagentGroup
+  id: NonAlcoholicDrinks
+
+- type: reagentGroup
+  id: AlcoholicDrinks

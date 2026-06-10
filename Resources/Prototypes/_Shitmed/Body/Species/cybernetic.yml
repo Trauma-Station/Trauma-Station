@@ -6,6 +6,7 @@
   id: OrganCybernetic
   components:
   - type: Damageable
+  - type: Injurable
     damageContainer: Silicon
   - type: Cybernetics
   - type: Inorganic

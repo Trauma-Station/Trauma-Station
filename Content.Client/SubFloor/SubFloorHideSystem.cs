@@ -1,4 +1,6 @@
-using Content.Shared.Atmos.Components;  //Goobstation - Ventcrawler
+// <Trauma>
+using Content.Shared.Atmos.Components;
+// </Trauma>
 using Content.Shared.DrawDepth;
 using Content.Client.UserInterface.Systems.Sandbox;
 using Content.Shared.SubFloor;

@@ -17,24 +17,21 @@ public sealed partial class BotanySystem
         foreach (var mutation in seed.Mutations)
         {
             if (mutation.AppliesToProduce)
-                _entityEffects.TryApplyEffect(uid, mutation.Effect);
+                _entityEffects.TryApplyEffect(uid, mutation.Effect,
+                    predicted: false); // Trauma
         }
 
-        if (!_solutionContainerSystem.EnsureSolution(uid,
-                produce.SolutionName,
-                out var solutionContainer,
-                FixedPoint2.Zero))
-            return;
+        _solutionContainerSystem.EnsureSolution(uid, produce.SolutionName, out var solution);
 
-        solutionContainer.RemoveAllSolution();
+        solution.Comp.Solution.RemoveAllSolution();
         foreach (var (chem, quantity) in seed.Chemicals)
         {
             var amount = quantity.Min;
             if (quantity.PotencyDivisor > 0 && seed.Potency > 0)
                 amount += seed.Potency / quantity.PotencyDivisor;
             amount = FixedPoint2.Clamp(amount, quantity.Min, quantity.Max);
-            solutionContainer.MaxVolume += amount;
-            solutionContainer.AddReagent(chem, amount);
+            solution.Comp.Solution.MaxVolume += amount;
+            solution.Comp.Solution.AddReagent(chem, amount);
         }
     }
 
