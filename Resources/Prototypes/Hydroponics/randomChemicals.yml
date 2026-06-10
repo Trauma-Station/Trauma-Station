@@ -173,7 +173,7 @@
 - type: weightedRandomFillSolution
   id: EvilRandomFillSolution
   fills:
-  - quantity: 0.2 # Common but very low quantity # Trauma was 0.05 changed to 0.2
+  - quantity: 0.25 # Common but very low quantity # Trauma was 0.05 changed to 0.2
     weight: 40
     reagents:
     - Nocturine
