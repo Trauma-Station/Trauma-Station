@@ -10,6 +10,7 @@ using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Trauma.Common.Traitor;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -129,6 +130,11 @@ public sealed partial class UplinkSystem : EntitySystem
         }
 
         SetUplink(user, storeEntity, balance, giveDiscounts);
+
+        // <Trauma>
+        var ev2 = new UplinkAssignedEvent(user, storeEntity, uplinkEntity.Value);
+        RaiseLocalEvent(ref ev2);
+        // </Trauma>
 
         return true;
     }

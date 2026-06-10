@@ -14,5 +14,5 @@ public sealed partial class RemoteJobListingsComponent : Component
     /// The entity with the job listings.
     /// </summary>
     [DataField]
-    public EntityUid? JobListings;
+    public EntityUid JobListings;
 }

@@ -10,6 +10,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Trauma.Common.JobListings;
+using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
@@ -31,7 +32,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInitialised);
+        SubscribeLocalEvent<UplinkAssignedEvent>(OnUplinkAssigned);
         SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
     }
 
@@ -111,13 +112,15 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
     }
 
-    private void OnStoreInitialised(ref StoreInitializedEvent args)
+    private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
             return;
 
-        jobListingsComp.Mind = args.TargetUser;
+        jobListingsComp.Mind = args.Mind;
         FillSideJobs((args.Store, jobListingsComp));
+
+        AddComp(args.Host, new RemoteJobListingsComponent {JobListings = args.Store});
     }
 
     private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
