@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.PDA;
 using Content.Server.StoreDiscount.Systems;
@@ -30,6 +31,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PdaSystem _pda = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -140,7 +142,11 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
             return;
 
-        jobListingsComp.Mind = args.Mind;
+        var mind = _mind.GetMind(args.User);
+        if (mind is null)
+            return;
+        jobListingsComp.Mind = mind.Value;
+
         FillSideJobs((args.Store, jobListingsComp));
 
         AddComp(args.Host, new RemoteJobListingsComponent {JobListings = args.Store});
