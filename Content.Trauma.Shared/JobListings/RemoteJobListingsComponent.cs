@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// With side jobs, the JobListingsComponent is also on that store entity and which component is on the pda uplink.
 /// </summary>
 [RegisterComponent]
-public sealed class RemoteJobListingsComponent : Component
+public sealed partial class RemoteJobListingsComponent : Component
 {
     /// <summary>
     /// The entity with the job listings.
