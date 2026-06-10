@@ -10049,3 +10049,10 @@ Entries:
   id: 1137
   time: '2026-06-10T01:34:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3132
+- author: Aineias1
+  changes:
+  - type: Tweak
+    message: Many minor map changes
+  id: 1138
+  time: '2026-06-10T08:51:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3127
