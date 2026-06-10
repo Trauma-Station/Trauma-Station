@@ -10063,3 +10063,12 @@ Entries:
   id: 1139
   time: '2026-06-10T15:43:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2703
+- author: Sulfari
+  changes:
+  - type: Tweak
+    message: Vent mobs no longer have a raffle timer.
+  - type: Tweak
+    message: Snakes from vent horde event should be playable now.
+  id: 1140
+  time: '2026-06-10T16:34:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3134
