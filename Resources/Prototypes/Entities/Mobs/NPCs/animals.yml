@@ -2785,8 +2785,7 @@
     rules: ghost-role-information-giant-spider-rules
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: GhostTakeoverAvailable
 
 - type: entity

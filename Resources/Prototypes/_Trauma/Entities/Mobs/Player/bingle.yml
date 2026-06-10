@@ -39,7 +39,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
-      settings: default
+      settings: short
   - type: MobState
     allowedStates:
       - Alive
