@@ -27,12 +27,6 @@ public sealed partial class JobListingsComponent : Component
     /// <summary>
     /// The container for the entities for available side jobs which can be accepted by the traitor.
     /// </summary>
-    [ViewVariables]
-    public Container AvailableSideJobsContainer = default!;
-
-    /// <summary>
-    /// ID of the available side jobs container.
-    /// </summary>
     [DataField]
-    public string AvailableSideJobsContainerId = "available-side-jobs";
+    public List<EntityUid> AvailableSideJobs = new();
 }

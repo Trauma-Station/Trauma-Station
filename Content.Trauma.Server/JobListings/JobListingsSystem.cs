@@ -63,7 +63,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
                 return false;
 
-            _container.Insert(sideJob.Value, jobBoard.Comp2.AvailableSideJobsContainer);
+            jobBoard.Comp2.AvailableSideJobs.Add(sideJob.Value);
         }
 
         return false;
@@ -77,7 +77,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <returns>True if successful, false if failure.</returns>
     public int CountSideJobs(Entity<StoreComponent, JobListingsComponent> jobBoard)
     {
-        return jobBoard.Comp2.AvailableSideJobsContainer.Count;
+        return jobBoard.Comp2.AvailableSideJobs.Count;
     }
 
     /// <summary>
@@ -98,7 +98,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
     private void OnInit(Entity<JobListingsComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.AvailableSideJobsContainer = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.AvailableSideJobsContainerId);
         if(!_ui.HasUi(ent.Owner, JobListingsUiKey.Key))
             _ui.SetUi(ent.Owner, JobListingsUiKey.Key, new InterfaceData("JobListingsBoundUserInterface", -1));
     }
