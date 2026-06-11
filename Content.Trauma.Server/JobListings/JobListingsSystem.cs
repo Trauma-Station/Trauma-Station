@@ -65,12 +65,13 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             possibleJobs.RemoveAt(index);
 
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
-                return false;
+                continue;
 
             jobBoard.Comp.AvailableSideJobs.Add(sideJob.Value);
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /// <summary>
