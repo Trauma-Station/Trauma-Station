@@ -22,22 +22,19 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         Name="JobListingsScroll"
                         HScrollEnabled="False"
                         HorizontalExpand="True"
-                        MinSize="100 256"
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">
                         <BoxContainer
                             Name="JobListings"
-                            MinSize="100 256"
                             Orientation="Vertical"
                             SizeFlagsStretchRatio="2"
                             VerticalExpand="True">
                             <RichTextLabel
                                 Name="AvailableJobListingsLabel"
-                                VerticalExpand="True"
+                                Margin="5 5 5 5"
                                 Text="Available:"/>
                             <BoxContainer
                                 Name="AvailableJobListingsContainer"
-                                MinSize="100 256"
                                 Orientation="Vertical"
                                 SizeFlagsStretchRatio="2"
                                 VerticalExpand="True">
