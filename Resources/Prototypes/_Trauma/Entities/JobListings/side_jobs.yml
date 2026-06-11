@@ -2,41 +2,50 @@
   abstract: true
   parent: BaseTraitorObjective
   id: BaseSideJob
+  components:
+  - type: SideJob
 
-# grand theft
+# medium
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseMediumSideJob
+  components:
+  - type: GenerateSideJobReward
+    rewardTable: MediumSideJobRewards
 
 - type: entity
-  parent: [BaseSideJob, CMOHyposprayStealObjective]
+  parent: [BaseMediumSideJob, CMOHyposprayStealObjective]
   id: CMOHyposprayStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, RDHardsuitStealObjective]
+  parent: [BaseMediumSideJob, RDHardsuitStealObjective]
   id: RDHardsuitStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, HandTeleporterStealObjective]
+  parent: [BaseMediumSideJob, HandTeleporterStealObjective]
   id: HandTeleporterStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, MagbootsStealObjective]
+  parent: [BaseMediumSideJob, MagbootsStealObjective]
   id: MagbootsStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, ClipboardStealObjective]
+  parent: [BaseMediumSideJob, ClipboardStealObjective]
   id: ClipboardStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, KnuckleDustersStealObjective]
+  parent: [BaseMediumSideJob, KnuckleDustersStealObjective]
   id: KnuckleDustersStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, CorgiMeatStealObjective]
+  parent: [BaseMediumSideJob, CorgiMeatStealObjective]
   id: CorgiMeatStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, CaptainJetpackStealObjective]
+  parent: [BaseMediumSideJob, CaptainJetpackStealObjective]
   id: CaptainJetpackStealSideJob
 
 - type: entity
-  parent: [BaseSideJob, CaptainGunStealObjective]
+  parent: [BaseMediumSideJob, CaptainGunStealObjective]
   id: CaptainGunStealSideJob

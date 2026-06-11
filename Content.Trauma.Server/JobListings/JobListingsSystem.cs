@@ -4,6 +4,7 @@ using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.PDA;
 using Content.Server.StoreDiscount.Systems;
+using Content.Shared.EntityTable;
 using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Random;
@@ -27,17 +28,19 @@ namespace Content.Trauma.Server.JobListings;
 
 public sealed partial class JobListingsSystem : SharedJobListingsSystem
 {
-    [Dependency] private ObjectivesSystem _objectives = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PdaSystem _pda = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private MindSystem _mind = default!;
+    [Dependency] private EntityTableSystem _table = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<UplinkAssignedEvent>(OnUplinkAssigned);
         SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
+
+        InitializeReward();
     }
 
     /// <summary>
@@ -55,7 +58,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return false;
 
-        var possibleJobs = jobBoard.Comp.SideJobs.ShallowClone();
+        var possibleJobs = jobBoard.Comp.MediumSideJobOffers.ShallowClone();
 
         var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(jobBoard.Owner));
         while (possibleJobs.Count > 0)
@@ -69,6 +72,15 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
                 continue;
+
+            var ev = new SideJobCreatedEvent();
+            RaiseLocalEvent(sideJob.Value, ref ev);
+
+            if (ev.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
+            {
+                QueueDel(sideJob);
+                continue;
+            }
 
             jobBoard.Comp.AvailableSideJobs.Add(new SideJob(sideJob.Value, job));
             return true;
@@ -147,9 +159,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return;
 
         var availableSideJobs = new List<SideJobInfo>();
-        foreach (var sidejob in jobListingsComp.AvailableSideJobs)
+        foreach (var sideJob in jobListingsComp.AvailableSideJobs)
         {
-            var info = GetInfo(jobListingsComp.Mind.Value, sidejob.Entity);
+            var info = GetInfo(jobListingsComp.Mind.Value, sideJob.Entity);
             if (info is null)
                 continue;
             availableSideJobs.Add(info.Value);
@@ -179,3 +191,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         OpenUi(pda, msg.Actor);
     }
 }
+
+/// <summary>
+/// Raised on a side job when it is created.
+/// </summary>
+[ByRefEvent]
+public record struct SideJobCreatedEvent(bool Cancelled = false);

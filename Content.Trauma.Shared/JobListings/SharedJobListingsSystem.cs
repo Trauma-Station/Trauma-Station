@@ -12,14 +12,21 @@ namespace Content.Trauma.Shared.JobListings;
 
 public abstract partial class SharedJobListingsSystem : EntitySystem
 {
-    [Dependency] private SharedObjectivesSystem _objectives = default!;
+    [Dependency] protected SharedObjectivesSystem _objectives = default!;
+    [Dependency] protected IPrototypeManager _proto = default!;
 
     public SideJobInfo? GetInfo(EntityUid mind, EntityUid sideJob)
     {
         var basic = _objectives.GetInfo(sideJob, mind);
         if (basic is null)
             return null;
+        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            return null;
+        if (sideJobComp.Reward is null)
+            return null;
+        if (!_proto.Resolve(sideJobComp.Reward.Value, out var rewardProto))
+            return null;
 
-        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress);
+        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, rewardProto.Name);
     }
 }

@@ -1,0 +1,27 @@
+# medium job reward - 15TC
+
+- type: entityTable
+  id: MediumSideJobRewards
+  table: !type:GroupSelector
+    children:
+    - id: Telecrystal10 # 20% of the time give people a raw 10TC to spend on anything
+      weight: 0.25
+    - !type:NestedSelector
+      tableId: MediumSideJobRewardsItems
+
+- type: entityTable
+  id: MediumSideJobRewardsItems
+  table: !type:GroupSelector
+    children:
+    - id: AgentIDCard
+    - id: SarinGasGrenade
+    - id: StealthBox
+    - id: SyndicateLollypopBundle
+    - id: ChameleonProjector
+    - id: RadioJammer
+    - id: DnaScramblerImplanter
+    - id: ClusterBananaPeel
+    - id: CigCartonSyndicate
+    - id: FakeMindShieldImplanter
+    - id: MicroBombImplanter
+    - id: DeathAcidifierImplanter

@@ -9,7 +9,7 @@ public sealed class PdaShowJobListingsMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress);
+public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName);
 
 [Serializable, NetSerializable]
 public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs) : BoundUserInterfaceState

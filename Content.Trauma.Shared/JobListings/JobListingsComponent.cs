@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityTable;
 using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.JobListings;
@@ -19,10 +20,10 @@ public sealed partial class JobListingsComponent : Component
     public int JobCount;
 
     /// <summary>
-    /// List of prototypes of the objectives offered.
+    /// List of prototypes of the objectives offered for medium side jobs.
     /// </summary>
     [DataField]
-    public List<EntProtoId> SideJobs = new();
+    public List<EntProtoId> MediumSideJobOffers = new();
 
     /// <summary>
     /// The container for the entities for available side jobs which can be accepted by the traitor.

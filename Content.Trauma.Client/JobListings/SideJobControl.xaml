@@ -10,6 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 Name="JobListingAcceptButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
+                Text="Accept"
                 Access="Public" />
         </BoxContainer>
         <PanelContainer StyleClasses="HighDivider" />
@@ -22,5 +23,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <Control MinWidth="5"/>
             <RichTextLabel Name="JobListingDescription" />
         </BoxContainer>
+        <RichTextLabel Name="JobListingReward" />
     </BoxContainer>
 </Control>

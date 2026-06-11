@@ -64,7 +64,7 @@
   # <Trauma> - job listings
   - type: JobListings
     jobCount: 4
-    sideJobs:
+    mediumSideJobOffers:
     - CMOHyposprayStealSideJob
     - RDHardsuitStealSideJob
     - HandTeleporterStealSideJob
