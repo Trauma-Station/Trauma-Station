@@ -64,11 +64,32 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             var job = possibleJobs[index];
             possibleJobs.RemoveAt(index);
 
+            if (HasSideJob(jobBoard, job))
+                continue;
+
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
                 continue;
 
-            jobBoard.Comp.AvailableSideJobs.Add(sideJob.Value);
+            jobBoard.Comp.AvailableSideJobs.Add(new SideJob(sideJob.Value, job));
             return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Determines if the job board already has the current side job as either available, accepted or completed.
+    /// Used to avoid adding the same objective twice.
+    /// </summary>
+    /// <param name="jobBoard"></param>
+    /// <param name="sideJob"></param>
+    /// <returns></returns>
+    public bool HasSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJob)
+    {
+        foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs)
+        {
+            if (availableSideJob.Prototype == sideJob)
+                return true;
         }
 
         return false;
@@ -128,7 +149,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         var availableSideJobs = new List<SideJobInfo>();
         foreach (var sidejob in jobListingsComp.AvailableSideJobs)
         {
-            var info = GetInfo(jobListingsComp.Mind.Value, sidejob);
+            var info = GetInfo(jobListingsComp.Mind.Value, sidejob.Entity);
             if (info is null)
                 continue;
             availableSideJobs.Add(info.Value);
