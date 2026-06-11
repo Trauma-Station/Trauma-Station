@@ -234,8 +234,6 @@
     maxItemSize: Ginormous
     grid:
     - 0,0,19,10
-    whitelist:
-      tags: [] #dodging a test fail like the IRS
   - type: PneumaticCannon
     gasUsage: 0
     throwItems: false

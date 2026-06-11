@@ -78,3 +78,42 @@
       uiWindowPos: 0,1
       strippingWindowPos: 1,1
       displayName: Mask
+# Additional Drip - Added by Ronstation
+    - name: jumpsuit
+      slotTexture: uniform
+      slotFlags: INNERCLOTHING
+      uiWindowPos: 0,1
+      strippingWindowPos: 0,2
+      displayName: Jumpsuit
+    - name: outerClothing
+      slotTexture: suit
+      slotFlags: OUTERCLOTHING
+      uiWindowPos: 1,1
+      strippingWindowPos: 1,2
+      displayName: Suit
+    - name: gloves
+      slotTexture: gloves
+      slotFlags: GLOVES
+      uiWindowPos: 2,1
+      strippingWindowPos: 2,2
+      displayName: Gloves
+    - name: eyes
+      slotTexture: glasses
+      slotFlags: EYES
+      uiWindowPos: 0,3
+      strippingWindowPos: 0,0
+      displayName: Eyes
+    - name: ears
+      slotTexture: ears
+      slotFlags: EARS
+      uiWindowPos: 2,2
+      strippingWindowPos: 2,0
+      displayName: Ears
+    - name: belt
+      slotTexture: belt
+      fullTextureName: template_small
+      slotFlags: BELT
+      slotGroup: SecondHotbar
+      uiWindowPos: 3,1
+      strippingWindowPos: 1,5
+      displayName: Belt
