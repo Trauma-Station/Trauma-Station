@@ -70,7 +70,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             jobBoard.Comp.AvailableSideJobs.Add(sideJob.Value);
         }
 
-        return false;
+        return true;
     }
 
     /// <summary>

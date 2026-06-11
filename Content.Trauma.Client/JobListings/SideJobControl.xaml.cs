@@ -13,6 +13,7 @@ public sealed partial class SideJobControl : Control
     public SideJobControl()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
         _sprite = _entity.System<SpriteSystem>();
     }
 
