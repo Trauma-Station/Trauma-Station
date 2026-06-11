@@ -21,8 +21,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 MinSize="48 48"
                 Stretch="KeepAspectCentered" />
             <Control MinWidth="5"/>
-            <RichTextLabel Name="JobListingDescription" />
+            <BoxContainer Orientation="Vertical">
+                <RichTextLabel Name="JobListingDescription" />
+                <RichTextLabel Name="JobListingReward" />
+            </BoxContainer>
         </BoxContainer>
-        <RichTextLabel Name="JobListingReward" />
     </BoxContainer>
 </Control>

@@ -27,6 +27,7 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         if (!_proto.Resolve(sideJobComp.Reward.Value, out var rewardProto))
             return null;
 
-        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, rewardProto.Name);
+        var name = Loc.GetString($"job-listings-ui-reward-name-{rewardProto.ID}");
+        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, name);
     }
 }
