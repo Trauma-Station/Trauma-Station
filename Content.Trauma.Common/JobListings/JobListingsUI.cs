@@ -16,3 +16,9 @@ public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSid
 {
     public List<SideJobInfo> AvailableSideJobs = availableSideJobs;
 }
+
+[Serializable, NetSerializable]
+public enum JobListingsUiKey
+{
+    Key
+}
