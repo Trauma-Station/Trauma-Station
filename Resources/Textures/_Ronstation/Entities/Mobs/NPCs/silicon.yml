@@ -1,0 +1,106 @@
+- type: entity
+  abstract: true
+  parent: MobCleanBot
+  id: MobCleanBotAdmeme
+  suffix: Admeme
+  components:
+  - type: ComplexInteraction
+  - type: Tag
+    tags:
+    - Bot
+    - DoorBumpOpener
+    - SiliconEmotes
+    - Unimplantable
+    - GhostOnlyWarp
+  - type: WarpPoint
+    follow: true
+    location: overclocked cleanbot
+    blacklist:
+      tags:
+      - GhostOnlyWarp
+
+- type: entity
+  parent: MobCleanBotAdmeme
+  id: MobOverclockedCleanBot
+  name: overclocked cleanbot
+  description: Is... it okay?
+  components:
+  - type: Jittering
+  - type: CombatMode
+  - type: Hands
+    hands:
+      hand:
+        location: Left
+    sortedHands:
+    - hand
+  - type: Puller
+    needsHands: false
+  - type: UseDelay
+    delay: 0.4
+  - type: SolutionPurge
+    duration: 0.4
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+  - type: SolutionRegeneration
+    solution: absorbed
+    generated:
+      reagents:
+      - ReagentId: Water
+        Quantity: 30
+  - type: WarpPoint
+    location: overclocked cleanbot
+
+- type: entity
+  parent: MobCleanBotAdmeme
+  id: MobSpaceRoomba
+  name: space roomba
+  description: You can hear a quiet whirr as its sucking up the dust along its way
+  components:
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: .25
+        density: 190
+        mask:
+        - MachineMask
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.0
+    baseSprintSpeed: 1.0
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/miners.rsi
+    state: miner
+    noRot: false
+  - type: ScaleVisuals
+    scale: 0.625, 0.625
+  - type: GuideHelp
+    guides:
+    - GasMiningAndStorage
+  - type: Item
+    size: Ginormous
+  - type: CanEscapeInventory
+  - type: MultiHandedItem
+  - type: WarpPoint
+    location: space roomba
+
+- type: entity
+  parent: [ MobSiliconBase, MobCombat ]
+  id: MobInsultBot
+  name: insultbot
+  suffix: Admeme
+  description: Awww, who gives a fuck?
+  components:
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Silicon/Bots/insultbot.rsi
+    state: insultbot
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3
+  - type: Anchorable
+  - type: HugBot # stealing the interaction cooldown from hugbotcomponent
+  - type: HTN
+    rootTask:
+      task: InsultBotCompound

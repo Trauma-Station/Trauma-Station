@@ -93,7 +93,9 @@
     markingData:
       layers:
       - Chest
-      #- Tail # Trauma - moved to specific Tail part
+      - Tail # Ronstation - Upstream had disabled this,
+             #^ and this is the reason why the tail marking menu for humans wasn't showing.
+             #^ If this causes issues with other species then it will be reverted in a future PR.
       - Overlay
       - TailOverlay
       - UndergarmentTop

@@ -1,0 +1,56 @@
+- type: entity
+  parent: MobMothroach
+  id: MobSyndimothroach
+  name: syndimothroach
+  description: This is the result of a genetic engineering campaign of questionable ethics, aimed at producing a living weapon you can hold gently like a burger.
+  components:
+  - type: GhostRole
+    name: ghost-role-information-syndimothroach-name
+    description: ghost-role-information-syndimothroach-description
+    rules: ghost-role-information-syndimothroach-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Animals/syndimothroach.rsi
+  - type: Clothing
+    sprite: _Carpmosia/Mobs/Animals/syndimothroach.rsi
+  - type: MobPrice
+    price: 700
+  - type: Tag
+    tags:
+    - Trash
+    - CannotSuicide
+    - VimPilot
+    - Unimplantable # better than syndicat when microbomb
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+    - Mouse
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 60
+      behaviors:
+      - !type:GibBehavior { }
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 15
+    animation: WeaponArcBite
+    damage:
+      types:
+        Slash: 4
+        Piercing: 6
+        Structural: 15
+  # Copied from MobCatSpace
+  - type: Temperature
+  - type: TemperatureDamage
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+  - type: MovementAlwaysTouching
+  - type: PressureImmunity
+  - type: Insulated
+  - type: Respirator
+    minSaturation: 5.0

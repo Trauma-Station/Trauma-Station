@@ -1,0 +1,169 @@
+- type: marking
+  id: CatEarsBasic
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      basic_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: basic_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: basic_inner
+
+- type: marking
+  id: CatEarsCurled
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      curled_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: curled_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: curled_inner
+
+- type: marking
+  id: CatEarsDroopy
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      droopy_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: droopy_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: droopy_inner
+
+- type: marking
+  id: CatEarsFuzzy
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      fuzzy_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: basic_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: fuzzy_inner
+
+- type: marking
+  id: CatEarsStubby
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      stubby_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: stubby_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: stubby_inner
+
+- type: marking
+  id: CatEarsTall
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      tall_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: tall_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: tall_inner
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: tall_fuzz
+
+- type: marking
+  id: CatEarsTorn
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      torn_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: torn_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: torn_inner
+
+- type: marking
+  id: CatEarsWide
+  bodyPart: HeadTop
+  groupWhitelist: [Human]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+          category: Hair
+      fallbackTypes:
+      - !type:SkinColoring
+    layers:
+      wide_inner:
+        type:
+          !type:SkinColoring
+  sprites:
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: wide_outer
+  - sprite: _Carpmosia/Mobs/Customization/cat_ears.rsi
+    state: wide_inner

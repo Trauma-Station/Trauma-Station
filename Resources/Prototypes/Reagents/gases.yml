@@ -361,7 +361,7 @@
       - !type:Oxygenate
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Vox, Slime, Cybernetic ] # Goob - added Cybernetic
+          type: [ Vox, Slime, Cybernetic, Avali ] # Goob - added Cybernetic ; Ronstation - added Avali
       # Converts Nitrogen into Ammonia
       - !type:ModifyLungGas
         conditions:
@@ -384,6 +384,15 @@
         ratios:
           NitrousOxide: 0.5
           Nitrogen: -0.5
+      # Ronstation-start - Avali port
+      - !type:ModifyLungGas
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Avali ]
+        ratios:
+          Ammonia: 1.0
+          Nitrogen: -1.0
+      # Ronstation-end - Avali port
 
 - type: reagent
   id: NitrousOxide

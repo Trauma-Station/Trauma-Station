@@ -42,7 +42,7 @@ public sealed partial class ViewconeComponent : Component
     /// Instead, use <see cref="ViewconeAngleSystem.GetAngle"/>
     /// </remarks>
     [DataField]
-    public float BaseConeAngle = 270f; // typical human peripheral vision
+    public float BaseConeAngle = 360f; // typical human peripheral vision - Ronstation Edit: Keeping the component, yet making it not affect players normally unless wearing things that would affect it anyways.
 
     [DataField]
     public float ConeFeather = 24f;

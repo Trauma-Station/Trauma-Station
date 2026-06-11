@@ -7,6 +7,7 @@
   <Box>
     <GuideEntityEmbed Entity="AppearanceHuman" Caption="Human"/>
     <GuideEntityEmbed Entity="AppearanceVox" Caption="Vox"/>
+    <GuideEntityEmbed Entity="AppearanceAvali" Caption="Avali"/> <!-- Ronstation - Avali port -->
     <GuideEntityEmbed Entity="AppearanceMoth" Caption="Moth Person"/>
     <GuideEntityEmbed Entity="AppearanceReptilian" Caption="Reptilian"/>
   </Box>

@@ -1,0 +1,151 @@
+- type: entity
+  id: MobJorge
+  parent:
+  - BaseSimpleMob
+  - MobDamageable
+  - MobPolymorphable
+  - MobBloodstream
+  - MobFlammable
+  name: Jorge
+  description: A sentient potted plant originally mistaken for an anomaly. It's seen some shit.
+  suffix: Ghostrole
+  components:
+  - type: GhostRole
+    prob: 1
+    makeSentient: true
+    allowSpeech: true
+    name: ghost-role-information-jorge-name
+    description: ghost-role-information-jorge-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable
+  - type: CanEscapeInventory
+    baseResistTime: 3
+  - type: Item
+    size: Ginormous
+  - type: MultiHandedItem
+  - type: ComplexInteraction
+  - type: Hands
+    hands:
+      hand:
+        location: Left
+    sortedHands:
+    - hand
+  - type: Access
+    enabled: true
+    tags:
+    - Maintenance
+    - Research
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.15
+    - reagents: [ Blood ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -0.25
+          Burn: -0.25
+    - reagents: [ RobustHarvest ]
+      methods: [ Touch ]
+      effects:
+      - !type:EvenHealthChange
+        damage:
+          Brute: -1
+          Burn: -1
+    - reagents: [ WeedKiller, PlantBGone ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: 1
+  - type: BackwardsAccent
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Pets/jorge.rsi
+    noRot: true
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: jorge-alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: jorge-alive
+      Dead:
+        Base: jorge-dead
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sap
+        Quantity: 50
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Diona
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 160
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Climbing
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - GhostOnlyWarp
+    - Unimplantable
+  - type: Appearance
+  - type: Speech
+    speechVerb: Plant
+    allowedEmotes: ['Chirp']
+  - type: Emoting
+  - type: Vocal
+    sounds:
+      Male: UnisexDiona
+      Female: UnisexDiona
+      Unsexed: UnisexDiona
+  - type: TypingIndicator
+    proto: diona
+  - type: Grammar
+    attributes:
+      proper: true
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0.75
+    baseSprintSpeed: 1.5
+  - type: StaticPrice
+    price: 2000
+  - type: WarpPoint
+    follow: true
+    location: Jorge
+    blacklist:
+      tags:
+      - GhostOnlyWarp

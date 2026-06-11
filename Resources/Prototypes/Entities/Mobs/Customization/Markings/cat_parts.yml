@@ -1,7 +1,7 @@
 - type: marking
   id: CatEars
-  bodyPart: Special
-  groupWhitelist: [] # Trauma - humans are human
+  bodyPart: HeadTop
+  groupWhitelist: [Human] # Ronstation Edit - Cat ears and Tails :)
   coloring:
     default:
       type:
@@ -23,7 +23,7 @@
 - type: marking
   id: CatTail
   bodyPart: Tail
-  groupWhitelist: [] # Trauma - humans are human
+  groupWhitelist: [Human] # Ronstation Edit - Cat ears and Tails :)
   coloring:
     default:
       type:
