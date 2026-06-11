@@ -44,9 +44,6 @@
   description: Boo!
   categories: [ HideSpawnMenu ]
   components:
-  - !type: Viewcone
-  - !type: ViewconeOccluable
-  - !type: ViewconeFootstepsEffect
   - type: Sprite
     sprite: Mobs/Ghosts/ghost_human.rsi
     color: "#fff8"
