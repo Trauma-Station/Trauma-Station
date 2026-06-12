@@ -12,6 +12,11 @@
   - Janitor
   - Maintenance
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipJanitor
+  # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: GarbageDay
     prototype: WeaponRevolverInspector

@@ -74,5 +74,5 @@
     effects:
     - !type:NestedEffect
       proto: InstallHypoportNukie
-    - !type:NestedEffect
-      proto: InstallSkillChipNukie
+    - !type:InstallOrganChip
+      chip: SkillChipNukie

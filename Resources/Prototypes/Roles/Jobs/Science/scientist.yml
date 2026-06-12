@@ -6,11 +6,10 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 1h # Trauma was 2.5
+      time: 2.5h
   startingGear: ScientistGear
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd
-  guides: [ Science ] # goobstation
   access:
   - Research
   - Maintenance
@@ -18,6 +17,12 @@
   extendedAccess:
   - Robotics
   - Genetics
+  guides:
+  - Science
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipScientist
   # </Trauma>
 
 - type: startingGear

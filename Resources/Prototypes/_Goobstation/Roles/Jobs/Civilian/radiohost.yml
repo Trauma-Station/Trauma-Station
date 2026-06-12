@@ -10,6 +10,10 @@
   - Maintenance
   - Journalism
   - Service
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipRadioHost
 
 - type: startingGear
   id: RadioHostGear
