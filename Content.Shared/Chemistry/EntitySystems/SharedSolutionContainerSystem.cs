@@ -149,7 +149,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     /// <inheritdoc cref="ResolveSolution(Entity{SolutionManagerComponent?}, string, ref Entity{SolutionComponent}?, out Solution?)"/>
     //[MethodImpl(MethodImplOptions.AggressiveInlining)] // Trauma - this is non-trivial now, force inlining would be horrible
     public bool ResolveSolution(Entity<SolutionManagerComponent?> container, string name, [NotNullWhen(true)] ref Entity<SolutionComponent>? entity,
-        bool logMissing = true) // Trauma
+        bool logMissing = false)
     {
         // <Trauma> - add error logs, only double-check the existing solution on debug builds
         if (entity is not null)
