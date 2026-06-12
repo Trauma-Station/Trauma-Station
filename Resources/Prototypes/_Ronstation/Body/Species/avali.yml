@@ -254,6 +254,17 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganAvaliExternal ]
   id: OrganAvaliTorso
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Chest
+      - Tail
+      - Overlay
+      - TailOverlay
+      - UndergarmentTop
+      - UndergarmentBottom
+      - Special
 
 - type: entity
   parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganAvaliExternal ]

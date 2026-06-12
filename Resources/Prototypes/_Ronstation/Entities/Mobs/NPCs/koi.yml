@@ -15,7 +15,7 @@
     attackMemoryLength: 10
   - type: Sprite
     drawdepth: Mobs
-    sprite: _Carpmosia/Mobs/Animals/Koi/gold_black.rsi
+    sprite: _Ronstation/Mobs/Animals/Koi/gold_black.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -47,7 +47,7 @@
   suffix: "Red Black"
   components:
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Animals/Koi/red_black.rsi
+    sprite: _Ronstation/Mobs/Animals/Koi/red_black.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -58,7 +58,7 @@
   suffix: "Gold Black"
   components:
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Animals/Koi/gold_black.rsi
+    sprite: _Ronstation/Mobs/Animals/Koi/gold_black.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -69,7 +69,7 @@
   suffix: "Red Circle"
   components:
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Animals/Koi/red_circle.rsi
+    sprite: _Ronstation/Mobs/Animals/Koi/red_circle.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -80,7 +80,7 @@
   suffix: "Blood Skeleton"
   components:
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Animals/Koi/blood_skeleton.rsi
+    sprite: _Ronstation/Mobs/Animals/Koi/blood_skeleton.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -91,7 +91,7 @@
   suffix: "Space Glow"
   components:
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Animals/Koi/space_glow.rsi
+    sprite: _Ronstation/Mobs/Animals/Koi/space_glow.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive

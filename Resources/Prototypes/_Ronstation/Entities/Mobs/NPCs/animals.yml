@@ -11,9 +11,9 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Animals/syndimothroach.rsi
+    sprite: _Ronstation/Mobs/Animals/syndimothroach.rsi
   - type: Clothing
-    sprite: _Carpmosia/Mobs/Animals/syndimothroach.rsi
+    sprite: _Ronstation/Mobs/Animals/syndimothroach.rsi
   - type: MobPrice
     price: 700
   - type: Tag

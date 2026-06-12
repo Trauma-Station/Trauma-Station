@@ -71,7 +71,7 @@
             Heat: 1
   - type: BackwardsAccent
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Pets/jorge.rsi
+    sprite: _Ronstation/Mobs/Pets/jorge.rsi
     noRot: true
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]

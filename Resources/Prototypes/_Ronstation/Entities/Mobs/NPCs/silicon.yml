@@ -94,7 +94,7 @@
   description: Awww, who gives a fuck?
   components:
   - type: Sprite
-    sprite: _Carpmosia/Mobs/Silicon/Bots/insultbot.rsi
+    sprite: _Ronstation/Mobs/Silicon/Bots/insultbot.rsi
     state: insultbot
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
