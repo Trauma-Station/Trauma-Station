@@ -8,7 +8,7 @@
   objective: roles-antag-heretic-description
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 54000 # 15h
+    time: 5h
   - !type:SpeciesRequirement
     inverted: true
     species:

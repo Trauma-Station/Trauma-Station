@@ -3,7 +3,6 @@
 #nullable enable
 using Content.IntegrationTests.Fixtures;
 using Content.Shared.Body;
-using Content.Shared.Roles;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Shared.Knowledge.Systems;
@@ -113,34 +112,6 @@ public sealed class KnowledgeTest : GameTest
             }
 
             Assert.That(missing, Is.Empty, $"The following languages are missing their 'Language<ID>' entity prototypes: \n{string.Join("\n", missing)}");
-        });
-    }
-
-    /// <summary>
-    /// Ensures that every playable job has an associated skill chip.
-    /// </summary>
-    [Test]
-    public async Task TestJobSkillChips()
-    {
-        var pair = Pair;
-        var server = pair.Server;
-        var proto = server.ProtoMan;
-
-        await server.WaitAssertion(() =>
-        {
-            var missing = new List<string>();
-            foreach (var job in proto.EnumeratePrototypes<JobPrototype>())
-            {
-                // only care about playable non-silicon j*bs
-                if (pair.IsTestPrototype(job) || !job.SetPreference || job.JobEntity != null)
-                    continue;
-
-                var chip = "SkillChip" + job.ID;
-                if (!proto.HasIndex<EntityPrototype>(chip))
-                    missing.Add($"- {job.ID} (Expected {chip})");
-            }
-
-            Assert.That(missing, Is.Empty, $"The following jobs are missing their 'SkillChip<ID>' entity prototypes:\n{string.Join("\n", missing)}");
         });
     }
 }

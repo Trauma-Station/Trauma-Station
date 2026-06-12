@@ -18,14 +18,17 @@
   - External
   - Atmospherics
   special:
-  - !type:GiveItemOnHolidaySpecial
-    holiday: FirefighterDay
-    prototype: FireAxe
   # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipAtmosphericTechnician
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
   # </Trauma>
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FirefighterDay
+    prototype: FireAxe
 
 
 - type: startingGear

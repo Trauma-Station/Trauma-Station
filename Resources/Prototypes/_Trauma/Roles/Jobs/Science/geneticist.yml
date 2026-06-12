@@ -6,10 +6,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Science
-    time: 2.5h
-  - !type:DepartmentTimeRequirement
-    department: Medical
-    time: 1h
+    time: 1.5h
   startingGear: GeneticistGear
   icon: JobIconGeneticist
   supervisors: job-supervisors-rd
@@ -18,7 +15,10 @@
   - Research
   - Maintenance
   - Genetics
-  # TODO: skill chip
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipGeneticist
 
 - type: startingGear
   id: GeneticistGear

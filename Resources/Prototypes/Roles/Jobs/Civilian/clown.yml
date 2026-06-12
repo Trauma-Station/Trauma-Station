@@ -10,6 +10,11 @@
   - Theatre
   - Maintenance
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipClown
+  # </Trauma>
   - !type:AddComponentSpecial
     components:
     - type: Clumsy

@@ -329,7 +329,6 @@
     - Eyes
     - Tongue
     - Ears
-    - BrainChip # USB 6.0
 
 - type: entity
   parent: [ OrganIPCExternal, OrganBaseArmLeft ]

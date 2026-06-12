@@ -24,6 +24,9 @@
   - External
   - Cryogenics
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipBrigmedic
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial

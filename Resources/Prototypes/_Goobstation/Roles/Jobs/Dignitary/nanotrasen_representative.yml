@@ -37,13 +37,16 @@
   - Theatre
   - NanotrasenRepresentative
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipNanotrasenRepresentative
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      - type: CommandStaff
-      - type: Condemned
-        soulOwnedNotDevil: true
+    - type: CommandStaff
+    - type: Condemned
+      soulOwnedNotDevil: true
 
 - type: startingGear
   id: NanotrasenRepresentativeGear

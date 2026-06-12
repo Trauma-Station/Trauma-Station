@@ -6,7 +6,7 @@
   objective: roles-antag-cosmiccult-description
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 43200 # 12h
+    time: 2h
   guides: [ CosmicCult ]
   creditImage: /Textures/_Trauma/EndCredits/Antags/cosmiccult.png
 
