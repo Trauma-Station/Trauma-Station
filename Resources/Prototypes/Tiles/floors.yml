@@ -695,12 +695,12 @@
   parent: BaseStationTile
   name: tiles-dirty-steel-floor
   sprite: /Textures/Tiles/steel_dirty.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  #variants: 4 # Trauma - no
+  #placementVariants:
+  #- 1.0
+  #- 1.0
+  #- 1.0
+  #- 1.0
   footstepSounds:
     collection: FootstepPlating
   itemDrop: FloorTileItemDirty
