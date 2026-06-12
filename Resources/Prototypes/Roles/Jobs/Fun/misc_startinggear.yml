@@ -151,9 +151,18 @@
   storage:
     back:
     - GasAnalyzer
-    - trayScanner
     - AccessConfiguratorUniversal
     - Multitool
+    - ToolDebug
+    - WelderExperimental
+    - RCDExperimental
+    - WeaponForceGunAdmin
+    - WeaponTetherGunAdmin
+    - DoorRemoteAll
+    - AnomalyScanner
+    - AnomalyLocatorUnpowered
+    - AdminHypo
+    - SprayPainterRecharging
 
 #Gladiator with spear
 - type: startingGear

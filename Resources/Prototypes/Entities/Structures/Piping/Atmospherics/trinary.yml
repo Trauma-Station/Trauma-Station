@@ -89,6 +89,10 @@
   abstract: true
   parent: GasTrinaryBase
   id: GasFilterBase
+  name: gas filter
+  description: Very useful for filtering gases.
+  placement:
+    mode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   components:
     - type: SubFloorHide
       visibleLayers:
@@ -96,11 +100,20 @@
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/gasfilter.rsi
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasFilter
           map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: GasFilter
+        Secondary: GasFilterAlt1
+        Tertiary: GasFilterAlt2
+        Quaternary: GasFilterAlt3
+        Quinary: GasFilterAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
     - type: Appearance
     - type: GenericVisualizer
       visuals:
@@ -147,6 +160,9 @@
   parent: GasFilterBase
   id: GasFilter
   name: gas filter
+  suffix: Flipped
+  placement:
+    mode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   description: Very useful for filtering gases.
   components:
   - type: Flippable
@@ -163,11 +179,20 @@
     - enum.SubfloorLayers.FirstLayer
   - type: Sprite
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasFilterF
       map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+  # Carpmosia-start - Atmos Alt Prototypes
+  - type: AtmosPipeLayers
+    alternativePrototypes:
+      Primary: GasFilterFlipped
+      Secondary: GasFilterFlippedAlt1
+      Tertiary: GasFilterFlippedAlt2
+      Quaternary: GasFilterFlippedAlt3
+      Quinary: GasFilterFlippedAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   - type: Flippable
     mirrorEntity: GasFilter
   - type: GenericVisualizer
@@ -186,7 +211,7 @@
   name: gas mixer
   description: Very useful for mixing gases.
   placement:
-    mode: SnapgridCenter
+    mode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   components:
     - type: SubFloorHide
       visibleLayers:
@@ -194,11 +219,20 @@
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/gasmixer.rsi
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasMixer
           map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: GasMixer
+        Secondary: GasMixerAlt1
+        Tertiary: GasMixerAlt2
+        Quaternary: GasMixerAlt3
+        Quinary: GasMixerAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
     - type: Appearance
     - type: GenericVisualizer
       visuals:
@@ -248,16 +282,25 @@
   name: gas mixer
   suffix: Flipped
   placement:
-    mode: SnapgridCenter
+    mode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   components:
   - type: Sprite
     sprite: Structures/Piping/Atmospherics/gasmixer.rsi
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasMixerF
       map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+  # Carpmosia-start - Atmos Alt Prototypes
+  - type: AtmosPipeLayers
+    alternativePrototypes:
+      Primary: GasMixerFlipped
+      Secondary: GasMixerFlippedAlt1
+      Tertiary: GasMixerFlippedAlt2
+      Quaternary: GasMixerFlippedAlt3
+      Quinary: GasMixerFlippedAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -301,7 +344,7 @@
   name: pneumatic valve
   description: A bidirectional valve controlled by pressure. Opens if the output pipe is lower than the pressure of the control pipe by 101.325 kPa.
   placement:
-    mode: SnapgridCenter
+    mode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   components:
     - type: AtmosDevice
     - type: Tag
@@ -329,11 +372,20 @@
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/pneumaticvalve.rsi
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: _Carpmosia/Structures/Piping/Atmospherics/pipe.rsi # Carpmosia-edit - 5 pipe layers
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: off
           map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+    # Carpmosia-start - Atmos Alt Prototypes
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: PressureControlledValve
+        Secondary: PressureControlledValveAlt1
+        Tertiary: PressureControlledValveAlt2
+        Quaternary: PressureControlledValveAlt3
+        Quinary: PressureControlledValveAlt4
+    # Carpmosia-end - Atmos Alt Prototypes
     - type: Appearance
     - type: GenericVisualizer
       visuals:

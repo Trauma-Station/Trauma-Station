@@ -14,7 +14,10 @@ namespace Content.Server.Traits;
 
 public sealed partial class TraitSystem : EntitySystem
 {
-    [Dependency] private SharedEntityEffectsSystem _effects = default!; // Trauma
+    // <Trauma>
+    [Dependency] private CommonLanguageSystem _language = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    // </Trauma>
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedHandsSystem _sharedHandsSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
@@ -65,27 +68,25 @@ public sealed partial class TraitSystem : EntitySystem
                 special.AfterEquip(args.Mob);
             }
 
-            _effects.ApplyEffects(args.Mob, traitPrototype.Effects); // Trauma
+            _effects.ApplyEffects(args.Mob, traitPrototype.Effects, predicted: false); // Trauma
 
             // Einstein Engines - Language begin (remove this if trait system refactor)
             // Remove/Add Languages required by the prototype
-            var language = EntityManager.System<CommonLanguageSystem>();
-
             if (traitPrototype.RemoveLanguagesSpoken is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesSpoken)
-                    language.RemoveLanguage(args.Mob, lang, true, false);
+                    _language.RemoveLanguage(args.Mob, lang, true, false);
 
             if (traitPrototype.RemoveLanguagesUnderstood is not null)
                 foreach (var lang in traitPrototype.RemoveLanguagesUnderstood)
-                    language.RemoveLanguage(args.Mob, lang, false, true);
+                    _language.RemoveLanguage(args.Mob, lang, false, true);
 
             if (traitPrototype.LanguagesSpoken is not null)
                 foreach (var lang in traitPrototype.LanguagesSpoken)
-                    language.AddLanguage(args.Mob, lang, true, false);
+                    _language.AddLanguage(args.Mob, lang, true, false);
 
             if (traitPrototype.LanguagesUnderstood is not null)
                 foreach (var lang in traitPrototype.LanguagesUnderstood)
-                    language.AddLanguage(args.Mob, lang, false, true);
+                    _language.AddLanguage(args.Mob, lang, false, true);
             // Einstein Engines - Language end
 
             // Add item required by the trait

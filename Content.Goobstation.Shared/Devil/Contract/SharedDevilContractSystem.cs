@@ -191,7 +191,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
 
         if (contract.Comp.IsContractFullySigned)
         {
-            _popup.PopupCoordinates(Loc.GetString("burn-contract-popup-fail"), coordinates, devil, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("burn-contract-popup-fail"), contract, devil, PopupType.MediumCaution);
             return;
         }
 

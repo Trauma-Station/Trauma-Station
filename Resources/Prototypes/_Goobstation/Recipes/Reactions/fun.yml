@@ -110,17 +110,3 @@
       amount: 4
   products:
     Tilenol: 1
-
-- type: reaction
-  id: CrapoToxin
-  impact: Low
-  quantized: true
-  reactants:
-    CarpoToxin:
-      amount: 1
-    Ammonia:
-      amount: 1
-    Sulfur:
-      amount: 1
-  products:
-    CrapoToxin: 3

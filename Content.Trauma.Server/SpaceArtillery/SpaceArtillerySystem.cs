@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Server.FireControl;
 using Content.Trauma.Server.SpaceArtillery.Components;
 using Content.Server.Power.Components;
 using Content.Server.Weapons.Ranged.Systems;
@@ -24,8 +23,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
     [Dependency] private GunSystem _gun = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
-    [Dependency] private SharedCameraRecoilSystem _recoilSystem = default!;
-    [Dependency] private FireControlSystem _fireControl = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
 
     private const float DISTANCE = 100;
     private const float BIG_DAMAGE = 1000;
@@ -151,7 +149,7 @@ public sealed partial class SpaceArtillerySystem : EntitySystem
 
             var vector = _xform.GetWorldPosition(uid) - _xform.GetWorldPosition(playerEnt);
 
-            _recoilSystem.KickCamera(playerEnt, vector.Normalized() * (float)hitEvent.Damage.GetTotal() / BIG_DAMAGE * BIG_DAMAGE_KICK);
+            _recoil.KickCamera(playerEnt, vector.Normalized() * (float)hitEvent.Damage.GetTotal() / BIG_DAMAGE * BIG_DAMAGE_KICK);
         }
     }
 }

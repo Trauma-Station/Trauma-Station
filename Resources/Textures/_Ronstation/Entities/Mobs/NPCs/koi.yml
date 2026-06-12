@@ -1,0 +1,104 @@
+- type: entity
+  parent: BaseMobCarp
+  id: BaseMobKoi
+  name: space koi
+  description: Result of hundreds of years of selective breeding and genetic engineering, a friendly and colourful variant of the common space carp.
+  abstract: true
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Carpmosia/Mobs/Animals/Koi/gold_black.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: MeleeWeapon # Make sure koi can't break glass
+    damage:
+      types:
+        Piercing: 5
+  # Remove Carp tag to avoid cheezing bounty
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - CannotSuicide
+  - type: StaticPrice
+    price: -800
+
+- type: entity
+  parent: BaseMobKoi
+  id: MobRedBlackKoi
+  suffix: "Red Black"
+  components:
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Animals/Koi/red_black.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+
+- type: entity
+  parent: BaseMobKoi
+  id: MobGoldBlackKoi
+  suffix: "Gold Black"
+  components:
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Animals/Koi/gold_black.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+
+- type: entity
+  parent: BaseMobKoi
+  id: MobRedCircleKoi
+  suffix: "Red Circle"
+  components:
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Animals/Koi/red_circle.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+
+- type: entity
+  parent: BaseMobKoi
+  id: MobBloodSkeletonKoi
+  suffix: "Blood Skeleton"
+  components:
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Animals/Koi/blood_skeleton.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+
+- type: entity
+  parent: BaseMobKoi
+  id: MobSpaceGlowKoi
+  suffix: "Space Glow"
+  components:
+  - type: Sprite
+    sprite: _Carpmosia/Mobs/Animals/Koi/space_glow.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: unshaded
+      shader: unshaded
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#4faffb"

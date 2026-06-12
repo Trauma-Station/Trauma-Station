@@ -1,0 +1,149 @@
+- type: entity
+  parent: EnergyChemDispenser
+  id: ServiceEnergyChemDispenser
+  name: energy food synthesizer
+  suffix: energy
+  description: A bluespace Chemical Dispenser that uses station energy to synthesize organic reagents. The future for chefs is here and now.
+  components:
+  - type: Machine
+    board: EnergyFoodSynthesizerMachineCircuitboard
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/service_dispenser.rsi
+    state: industrial-working
+    snapCardinals: true
+  - type: GuideHelp
+    guides:
+    - Chef
+    - FoodRecipes
+  - type: EnergyReagentDispenser
+    reagents:
+      # Common cooking ingredients
+      Flour: 4
+      Cornmeal: 4
+      Rice: 4
+      Egg: 12
+      Milk: 12
+      Sugar: 3
+      Water: 3
+      # Uncommon ingredients
+      Fat: 20
+      UncookedAnimalProteins: 20
+      MilkSoy: 16
+      Oats: 14
+      Vinegar: 8
+      OilOlive: 5
+      # Condiments
+      TableSalt: 2
+      Blackpepper: 2
+      BbqSauce: 2
+      Soysauce: 4
+      Mustard: 3
+      Ketchup: 3
+      Mayo: 3
+      Hotsauce: 3
+      Syrup: 3
+      Vinaigrette: 4
+      Astrotame: 8
+      HorseradishSauce: 4
+      Cornoil: 4
+
+- type: entity
+  id: EnergyBarDispenserBase
+  parent: EnergyChemDispenser
+  suffix: Energy
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Structures/smalldispensers.rsi
+    drawdepth: SmallObjects
+    snapCardinals: false
+  - type: Rotatable
+  - type: Transform
+    noRot: false
+  - type: GuideHelp
+    guides:
+    - Bartender
+    - Drinks
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        density: 190
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+
+- type: entity
+  parent: EnergyBarDispenserBase
+  id: EnergyBoozeDispenser
+  name: energy booze dispenser
+  description: A drunk mans best dream. Using the power of bluespace, this dispenser uses station energy to produce alcoholic beverages! Now you can get wasted without leaving the bar to restock! Ever!
+  components:
+  - type: Machine
+    board: EnergyBoozeDispenserMachineCircuitboard
+  - type: Sprite
+    state: booze
+  - type: StealTarget
+    stealGroup: BoozeDispenser
+  - type: EnergyReagentDispenser
+    reagents:
+      Absinthe: 5
+      Ale: 5
+      Beer: 5
+      BlueCuracao: 5
+      Cognac: 5
+      Gin: 5
+      Mead: 5
+      Gildlager: 5
+      CoffeeLiqueur: 5
+      MelonLiquor: 5
+      Patron: 5
+      Rum: 5
+      Tequila: 5
+      Vermouth: 5
+      Vodka: 5
+      Whiskey: 5
+      Wine: 5
+      Champagne: 5
+      KelpPodWine: 5
+      Sake: 5
+
+- type: entity
+  parent: EnergyBarDispenserBase
+  id: EnergySodaDispenser
+  name: energy soda dispenser
+  description: Soda? We got it! This bluespace dispenser, using station energy, produces a variety of non alchoholic drinks for the thirsty and the health conscious alike!
+  components:
+  - type: Machine
+    board: EnergySodaDispenserMachineCircuitboard
+  - type: Sprite
+    state: soda
+  - type: StealTarget
+    stealGroup: SodaDispenser
+  - type: EnergyReagentDispenser
+    reagents:
+      CoconutWater: 5
+      Coffee: 5
+      Cola: 5
+      Cream: 5
+      DrGibb: 5
+      EnergyDrink: 5
+      GreenTea: 5
+      Ice: 5
+      JuiceLime: 5
+      Milk: 5
+      JuiceOrange: 5
+      JuicePineapple: 2
+      JuiceWatermelon: 5
+      LemonLime: 5
+      RootBeer: 5
+      SodaWater: 5
+      SpaceMountainWind: 5
+      SpaceUp: 5
+      Sugar: 5
+      Tea: 5
+      TonicWater: 5
+      Water: 1

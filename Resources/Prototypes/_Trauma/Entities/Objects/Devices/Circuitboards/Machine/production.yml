@@ -1,0 +1,52 @@
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: DeepFryerCircuitboard
+  name: deep fryer machine board
+  description: A machine printed circuit board for a deep fryer.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: KitchenDeepFryer
+    stackRequirements:
+      Manipulator: 1
+      Steel: 10
+      CableHV: 4
+
+- type: entity  # Food synthesizer
+  parent: BaseMachineCircuitboard
+  id: EnergyFoodSynthesizerMachineCircuitboard
+  name: energy food synthesizer machine board
+  description: A machine printed circuit board for a energy food synthesizer.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: ServiceEnergyChemDispenser
+    stackRequirements:
+      Manipulator: 3
+      Glass: 5
+      Steel: 5
+      BSCrystal: 1
+    tagRequirements:
+      GlassBeaker:
+        amount: 2
+        defaultPrototype: Beaker
+
+- type: entity
+  parent: EnergyFoodSynthesizerMachineCircuitboard
+  id: EnergyBoozeDispenserMachineCircuitboard
+  name: energy booze dispenser machine board
+  description: A machine printed circuit board for a energy food synthesizer.
+  components:
+  - type: MachineBoard
+    prototype: EnergyBoozeDispenser
+
+- type: entity
+  parent: EnergyFoodSynthesizerMachineCircuitboard
+  id: EnergySodaDispenserMachineCircuitboard
+  name: energy soda dispenser machine board
+  description: A machine printed circuit board for a energy food synthesizer.
+  components:
+  - type: MachineBoard
+    prototype: EnergySodaDispenser

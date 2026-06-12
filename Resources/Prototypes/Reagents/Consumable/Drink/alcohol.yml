@@ -156,6 +156,15 @@
           types:
             Poison: 0.1
       # dwarves take less toxin damage and heal a marginal amount of brute
+      # Ronstation-start - Avali port
+      - !type:HealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition
+           type: Avali
+        damage:
+          types:
+            Bloodloss: 0.5
+      # Ronstation-end - Avali port
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition

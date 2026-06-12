@@ -24,11 +24,3 @@
     state: SpacePol
   jobName: job-name-spacepol
   isCrewJob: false
-
-- type: jobIcon
-  parent: JobIcon
-  id: JobIconAdvisor
-  icon:
-    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
-    state: Advisor
-  jobName: job-name-advisor

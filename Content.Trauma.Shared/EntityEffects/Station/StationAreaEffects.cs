@@ -38,9 +38,6 @@ public sealed partial class StationAreaEffects : EntityEffectBase<StationAreaEff
     /// </summary>
     [DataField]
     public bool CheckBlocked = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
 }
 
 public sealed partial class StationAreaEffectsSystem : EntityEffectSystem<StationDataComponent, StationAreaEffects>
@@ -80,7 +77,7 @@ public sealed partial class StationAreaEffectsSystem : EntityEffectSystem<Statio
                 return;
 
             var area = _random.PickAndTake(_areas);
-            _effects.ApplyEffects(area, e.Effects);
+            _effects.ApplyEffects(area, e.Effects, args.Scale, args.User, args.Predicted);
         }
     }
 }

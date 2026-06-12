@@ -1,0 +1,51 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from vgstation at https://github.com/vgstation-coders/vgstation13/blob/e2923df112df8aa025846d0764697bad6506586a/icons/mob/AI.dmi - modified by chromiumboy. ai_carp taken from https://github.com/tgstation/tgstation/commit/b143783881fb7418213026857cb8c569636e259e#diff-8dd94e19fdb2ff341b57e31bce101298. Station Ai Angel and Devil made by AsheViolet based on human design from https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Mobs/Species/Human/parts.rsi/full.png.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "ai_angel"
+        },
+        {
+            "name": "ai_devil"
+        },
+        {
+            "name": "ai_carp",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "ai_clown"
+        },
+        {
+            "name": "ai_weh"
+        },
+        {
+            "name": "ai_mothroach"
+        },
+        {
+            "name": "ai_dionanymph"
+        }
+    ]
+}

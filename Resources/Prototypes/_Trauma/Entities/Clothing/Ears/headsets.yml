@@ -25,19 +25,3 @@
     sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi
-
-- type: entity
-  parent: [ ClothingHeadsetAltLoudspeaker, BaseSecurityContraband ]
-  id: ClothingHeadsetAltAdvisor
-  name: security advisor over-ear headset
-  components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - EncryptionKeyCommon
-      - EncryptionKeySecurity
-      - EncryptionKeyCommand
-  - type: Sprite
-    sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi
-  - type: Clothing
-    sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi

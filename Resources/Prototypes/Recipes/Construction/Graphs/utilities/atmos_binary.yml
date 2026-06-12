@@ -21,7 +21,7 @@
   - node: start
     edges:
     - to: pressurepump
-      steps:
+      steps: &pressurepump_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -38,8 +38,16 @@
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: pressurepumpAlt3
+      steps: *pressurepump_steps
+
+    - to: pressurepumpAlt4
+      steps: *pressurepump_steps
+    # Carpmosia-end - 5 pipe layers
+
     - to: volumepump
-      steps:
+      steps: &volumepump_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -56,8 +64,16 @@
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: volumepumpAlt3
+      steps: *volumepump_steps
+
+    - to: volumepumpAlt4
+      steps: *volumepump_steps
+    # Carpmosia-end - 5 pipe layers
+
     - to: passivegate
-      steps:
+      steps: &passivegate_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -74,8 +90,16 @@
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: passivegateAlt3
+      steps: *passivegate_steps
+
+    - to: passivegateAlt4
+      steps: *passivegate_steps
+    # Carpmosia-end - 5 pipe layers
+
     - to: valve
-      steps:
+      steps: &valve_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -92,8 +116,16 @@
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: valveAlt3
+      steps: *valve_steps
+
+    - to: valveAlt4
+      steps: *valve_steps
+    # Carpmosia-end - 5 pipe layers
+
     - to: signalvalve
-      steps:
+      steps: &signalvalve_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -110,8 +142,16 @@
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: signalvalveAlt3
+      steps: *signalvalve_steps
+
+    - to: signalvalveAlt4
+      steps: *signalvalve_steps
+    # Carpmosia-end - 5 pipe layers
+
     - to: pressureregulator
-      steps:
+      steps: &pressureregulator_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -128,26 +168,76 @@
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - 5 pipe layers
+    - to: pressureregulatorAlt3
+      steps: *pressureregulator_steps
+
+    - to: pressureregulatorAlt4
+      steps: *pressureregulator_steps
+    # Carpmosia-end - 5 pipe layers
+
     - to: port
-      steps:
+      steps: &port_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
+
+    # Carpmosia-start - Atmos Alt Prototypes
+    - to: portAlt1
+      steps: *port_steps
+
+    - to: portAlt2
+      steps: *port_steps
+
+    - to: portAlt3
+      steps: *port_steps
+
+    - to: portAlt4
+      steps: *port_steps
+    # Carpmosia-end - Atmos Alt Prototypes
 
     - to: dualportventpump
-      steps:
+      steps: &dualportventpump_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
+
+    # Carpmosia-start - Atmos Alt Prototypes
+    - to: dualportventpumpAlt1
+      steps: *dualportventpump_steps
+
+    - to: dualportventpumpAlt2
+      steps: *dualportventpump_steps
+
+    - to: dualportventpumpAlt3
+      steps: *dualportventpump_steps
+
+    - to: dualportventpumpAlt4
+      steps: *dualportventpump_steps
+    # Carpmosia-end - Atmos Alt Prototypes
 
     - to: radiator
-      steps:
+      steps: &radiator_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
 
+    # Carpmosia-start - Atmos Alt Prototypes
+    - to: radiatorAlt1
+      steps: *radiator_steps
+
+    - to: radiatorAlt2
+      steps: *radiator_steps
+
+    - to: radiatorAlt3
+      steps: *radiator_steps
+
+    - to: radiatorAlt4
+      steps: *radiator_steps
+    # Carpmosia-end - Atmos Alt Prototypes
+
     - to: bendradiator
-      steps:
+      steps: &bendradiator_steps # Carpmosia-edit - Cleanup construction graph
       - material: Steel
         amount: 2
         doAfter: 1
@@ -166,9 +256,23 @@
         doAfter: 1
     # </Goobstation>
 
+    # Carpmosia-start - Atmos Alt Prototypes
+    - to: bendradiatorAlt1
+      steps: *bendradiator_steps
+
+    - to: bendradiatorAlt2
+      steps: *bendradiator_steps
+
+    - to: bendradiatorAlt3
+      steps: *bendradiator_steps
+
+    - to: bendradiatorAlt4
+      steps: *bendradiator_steps
+    # Carpmosia-end - Atmos Alt Prototypes
+
   - node: pressurepump
     entity: GasPressurePump
-    edges:
+    edges: &pressurepump_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -214,9 +318,19 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: pressurepumpAlt3
+    entity: GasPressurePumpAlt3
+    edges: *pressurepump_edges
+
+  - node: pressurepumpAlt4
+    entity: GasPressurePumpAlt4
+    edges: *pressurepump_edges
+  # Carpmosia-end - 5 pipe layers
+
   - node: volumepump
     entity: GasVolumePump
-    edges:
+    edges: &volumepump_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -262,9 +376,19 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: volumepumpAlt3
+    entity: GasVolumePumpAlt3
+    edges: *volumepump_edges
+
+  - node: volumepumpAlt4
+    entity: GasVolumePumpAlt4
+    edges: *volumepump_edges
+  # Carpmosia-end - 5 pipe layers
+
   - node: passivegate
     entity: GasPassiveGate
-    edges:
+    edges: &passivegate_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -310,9 +434,19 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: passivegateAlt3
+    entity: GasPassiveGateAlt3
+    edges: *passivegate_edges
+
+  - node: passivegateAlt4
+    entity: GasPassiveGateAlt4
+    edges: *passivegate_edges
+  # Carpmosia-end - 5 pipe layers
+
   - node: valve
     entity: GasValve
-    edges:
+    edges: &valve_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -358,9 +492,19 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: valveAlt3
+    entity: GasValveAlt3
+    edges: *valve_edges
+
+  - node: valveAlt4
+    entity: GasValveAlt4
+    edges: *valve_edges
+  # Carpmosia-end - 5 pipe layers
+
   - node: signalvalve
     entity: SignalControlledValve
-    edges:
+    edges: &signalvalve_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -406,9 +550,19 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: signalvalveAlt3
+    entity: SignalControlledValveAlt3
+    edges: *signalvalve_edges
+
+  - node: signalvalveAlt4
+    entity: SignalControlledValveAlt4
+    edges: *signalvalve_edges
+  # Carpmosia-end - 5 pipe layers
+
   - node: pressureregulator
     entity: GasPressureRegulator
-    edges:
+    edges: &pressureregulator_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -454,9 +608,19 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - 5 pipe layers
+  - node: pressureregulatorAlt3
+    entity: GasPressureRegulatorAlt3
+    edges: *pressureregulator_edges
+
+  - node: pressureregulatorAlt4
+    entity: GasPressureRegulatorAlt4
+    edges: *pressureregulator_edges
+  # Carpmosia-end - 5 pipe layers
+
   - node: port
     entity: GasPort
-    edges:
+    edges: &port_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -469,10 +633,28 @@
       steps:
       - tool: Welding
         doAfter: 1
+
+  # Carpmosia-start - Atmos Alt Prototypes
+  - node: portAlt1
+    entity: GasPortAlt1
+    edges: *port_edges
+
+  - node: portAlt2
+    entity: GasPortAlt2
+    edges: *port_edges
+
+  - node: portAlt3
+    entity: GasPortAlt3
+    edges: *port_edges
+
+  - node: portAlt4
+    entity: GasPortAlt4
+    edges: *port_edges
+  # Carpmosia-end - Atmos Alt Prototypes
 
   - node: dualportventpump
     entity: GasDualPortVentPump
-    edges:
+    edges: &dualportventpump_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -487,10 +669,28 @@
         doAfter: 1
       - tool: Welding
         doAfter: 1
+
+  # Carpmosia-start - Atmos Alt Prototypes
+  - node: dualportventpumpAlt1
+    entity: GasDualPortVentPumpAlt1
+    edges: *dualportventpump_edges
+
+  - node: dualportventpumpAlt2
+    entity: GasDualPortVentPumpAlt2
+    edges: *dualportventpump_edges
+
+  - node: dualportventpumpAlt3
+    entity: GasDualPortVentPumpAlt3
+    edges: *dualportventpump_edges
+
+  - node: dualportventpumpAlt4
+    entity: GasDualPortVentPumpAlt4
+    edges: *dualportventpump_edges
+  # Carpmosia-end - Atmos Alt Prototypes
 
   - node: radiator
     entity: HeatExchanger
-    edges:
+    edges: &radiator_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -506,9 +706,27 @@
       - tool: Welding
         doAfter: 1
 
+  # Carpmosia-start - Atmos Alt Prototypes
+  - node: radiatorAlt1
+    entity: HeatExchangerAlt1
+    edges: *radiator_edges
+
+  - node: radiatorAlt2
+    entity: HeatExchangerAlt2
+    edges: *radiator_edges
+
+  - node: radiatorAlt3
+    entity: HeatExchangerAlt3
+    edges: *radiator_edges
+
+  - node: radiatorAlt4
+    entity: HeatExchangerAlt4
+    edges: *radiator_edges
+  # Carpmosia-end - Atmos Alt Prototypes
+
   - node: bendradiator
     entity: HeatExchangerBend
-    edges:
+    edges: &bendradiator_edges # Carpmosia-edit - Cleanup construction graph
     - to: start
       conditions:
       - !type:EntityAnchored
@@ -523,6 +741,24 @@
         doAfter: 1
       - tool: Welding
         doAfter: 1
+
+  # Carpmosia-start - Atmos Alt Prototypes
+  - node: bendradiatorAlt1
+    entity: HeatExchangerBendAlt1
+    edges: *bendradiator_edges
+
+  - node: bendradiatorAlt2
+    entity: HeatExchangerBendAlt2
+    edges: *bendradiator_edges
+
+  - node: bendradiatorAlt3
+    entity: HeatExchangerBendAlt3
+    edges: *bendradiator_edges
+
+  - node: bendradiatorAlt4
+    entity: HeatExchangerBendAlt4
+    edges: *bendradiator_edges
+  # Carpmosia-end - Atmos Alt Prototypes
 
   # <Goobstation>
   - node: inlineradiator

@@ -85,7 +85,7 @@ public partial class InventorySystem
             return false;
 
         // Let's spawn this first...
-        var item = Spawn(prototype, Transform(uid).Coordinates);
+        var item = PredictedSpawnAtPosition(prototype, Transform(uid).Coordinates); // Trauma - predicted...
 
         // Helper method that deletes the item and returns false.
         bool DeleteItem()

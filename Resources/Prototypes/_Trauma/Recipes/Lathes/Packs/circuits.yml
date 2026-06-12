@@ -1,0 +1,6 @@
+- type: latheRecipePack
+  id: ServiceBoardsTrauma
+  recipes:
+  - EnergyFoodSynthesizerMachineCircuitboard
+  - EnergyBoozeDispenserMachineCircuitboard
+  - EnergySodaDispenserMachineCircuitboard

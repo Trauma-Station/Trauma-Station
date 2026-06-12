@@ -143,6 +143,10 @@ GunSafeLauncherNonLethal: GunSafeRiotLauncher
 
 # 2026-05-31
 BSOManual: null
+
+# 2026-06-09 give bartenders energy dispensers
+BoozeDispenser: EnergyBoozeDispenser
+SodaDispenser: EnergySodaDispenser
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

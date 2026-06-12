@@ -15,7 +15,6 @@ emote-menu-category-farts = Farts
 chat-emote-name-flip = Do a flip
 chat-emote-name-spin = Spin
 chat-emote-name-jump = Jump
-chat-emote-name-tweak = Tweak
 chat-emote-name-flex = Flex muscles
 chat-emote-name-gulp = Gulp
 chat-emote-name-surprised = look surprised

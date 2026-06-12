@@ -237,7 +237,7 @@
         probability: 0.12
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Rat, Vox ]
+          type: [ Rat, Vox, Avali]
           inverted: true
         - !type:ReagentCondition
           reagent: Ammonia

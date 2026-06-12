@@ -17,7 +17,7 @@
   id: Plating
   parent: BasePlating
   name: tiles-plating
-  sprite: /Textures/_Trauma/Tiles/plating.png # Trauma
+  sprite: /Textures/Tiles/plating.png
 
 - type: tile
   id: PlatingRCD
@@ -59,7 +59,7 @@
   id: PlatingDamaged
   parent: BasePlating
   name: tiles-plating
-  sprite: /Textures/_Trauma/Tiles/plating_damaged.png # Trauma
+  sprite: /Textures/Tiles/plating_damaged.png
   variants: 3
   placementVariants:
   - 1.0

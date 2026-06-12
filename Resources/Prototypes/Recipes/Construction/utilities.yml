@@ -426,6 +426,10 @@
   - GasPipeSensor
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeSensorAlt3
+  - GasPipeSensorAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     ElectronicsKnowledge: 0
@@ -447,6 +451,10 @@
   - GasPipeSensor
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeSensorAlt3
+  - GasPipeSensorAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPipeSensor # Trauma
@@ -463,6 +471,10 @@
   - GasPipeSensor
   - GasPipeSensorAlt1
   - GasPipeSensorAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeSensorAlt3
+  - GasPipeSensorAlt4
+  # Carpmosia-end - 5 pipe layers
 
 # ATMOS PIPES
 - type: construction
@@ -478,6 +490,10 @@
   - GasPipeHalf
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeHalfAlt3
+  - GasPipeHalfAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -499,6 +515,10 @@
   - GasPipeHalf
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeHalfAlt3
+  - GasPipeHalfAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPipeHalf # Trauma
@@ -514,6 +534,10 @@
   - GasPipeHalf
   - GasPipeHalfAlt1
   - GasPipeHalfAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeHalfAlt3
+  - GasPipeHalfAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPipeStraight
@@ -527,6 +551,10 @@
   - GasPipeStraight
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeStraightAlt3
+  - GasPipeStraightAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a pipe
@@ -548,6 +576,10 @@
   - GasPipeStraight
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeStraightAlt3
+  - GasPipeStraightAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPipeStraight # Trauma
@@ -563,6 +595,10 @@
   - GasPipeStraight
   - GasPipeStraightAlt1
   - GasPipeStraightAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeStraightAlt3
+  - GasPipeStraightAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPipeBend
@@ -577,6 +613,10 @@
   - GasPipeBend
   - GasPipeBendAlt1
   - GasPipeBendAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeBendAlt3
+  - GasPipeBendAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0 # it's a bent pipe
@@ -598,6 +638,10 @@
   - GasPipeBend
   - GasPipeBendAlt1
   - GasPipeBendAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeBendAlt3
+  - GasPipeBendAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPipeBend # Trauma
@@ -613,6 +657,10 @@
   - GasPipeBend
   - GasPipeBendAlt1
   - GasPipeBendAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeBendAlt3
+  - GasPipeBendAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPipeTJunction
@@ -627,6 +675,10 @@
   - GasPipeTJunction
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeTJunctionAlt3
+  - GasPipeTJunctionAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 1
@@ -648,6 +700,10 @@
   - GasPipeTJunction
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeTJunctionAlt3
+  - GasPipeTJunctionAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPipeTJunction # Trauma
@@ -663,6 +719,10 @@
   - GasPipeTJunction
   - GasPipeTJunctionAlt1
   - GasPipeTJunctionAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeTJunctionAlt3
+  - GasPipeTJunctionAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPipeFourway
@@ -677,6 +737,10 @@
   - GasPipeFourway
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeFourwayAlt3
+  - GasPipeFourwayAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -698,6 +762,10 @@
   - GasPipeFourway
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeFourwayAlt3
+  - GasPipeFourwayAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPipeFourway # Trauma
@@ -713,6 +781,10 @@
   - GasPipeFourway
   - GasPipeFourwayAlt1
   - GasPipeFourwayAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPipeFourwayAlt3
+  - GasPipeFourwayAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPipeManifold
@@ -736,10 +808,18 @@
   startNode: start
   targetNode: ventpump
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasVentPump
+  - GasVentPumpAlt1
+  - GasVentPumpAlt2
+  - GasVentPumpAlt3
+  - GasVentPumpAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -753,10 +833,18 @@
   startNode: start
   targetNode: passivevent
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasPassiveVent
+  - GasPassiveVentAlt1
+  - GasPassiveVentAlt2
+  - GasPassiveVentAlt3
+  - GasPassiveVentAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -770,10 +858,18 @@
   startNode: start
   targetNode: ventscrubber
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasVentScrubber
+  - GasVentScrubberAlt1
+  - GasVentScrubberAlt2
+  - GasVentScrubberAlt3
+  - GasVentScrubberAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -789,10 +885,18 @@
   startNode: start
   targetNode: outletinjector
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
   - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasOutletInjector
+  - GasOutletInjectorAlt1
+  - GasOutletInjectorAlt2
+  - GasOutletInjectorAlt3
+  - GasOutletInjectorAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -817,6 +921,10 @@
   - GasPressurePump
   - GasPressurePumpAlt1
   - GasPressurePumpAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPressurePumpAlt3
+  - GasPressurePumpAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -841,6 +949,10 @@
   - GasPressurePump
   - GasPressurePumpAlt1
   - GasPressurePumpAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPressurePumpAlt3
+  - GasPressurePumpAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -865,6 +977,10 @@
   - GasPressurePump
   - GasPressurePumpAlt1
   - GasPressurePumpAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPressurePumpAlt3
+  - GasPressurePumpAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -888,6 +1004,10 @@
   - GasVolumePump
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasVolumePumpAlt3
+  - GasVolumePumpAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -913,6 +1033,10 @@
   - GasVolumePump
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasVolumePumpAlt3
+  - GasVolumePumpAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasVolumePump # Trauma
@@ -930,6 +1054,10 @@
   - GasVolumePump
   - GasVolumePumpAlt1
   - GasVolumePumpAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasVolumePumpAlt3
+  - GasVolumePumpAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPassiveGate
@@ -945,6 +1073,10 @@
   - GasPassiveGate
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPassiveGateAlt3
+  - GasPassiveGateAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -968,6 +1100,10 @@
   - GasPassiveGate
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPassiveGateAlt3
+  - GasPassiveGateAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPassiveGate # Trauma
@@ -985,6 +1121,10 @@
   - GasPassiveGate
   - GasPassiveGateAlt1
   - GasPassiveGateAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPassiveGateAlt3
+  - GasPassiveGateAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPressureRegulator
@@ -1000,6 +1140,10 @@
   - GasPressureRegulator
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPressureRegulatorAlt3
+  - GasPressureRegulatorAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1025,6 +1169,10 @@
   - GasPressureRegulator
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPressureRegulatorAlt3
+  - GasPressureRegulatorAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasPressureRegulator # Trauma
@@ -1042,6 +1190,10 @@
   - GasPressureRegulator
   - GasPressureRegulatorAlt1
   - GasPressureRegulatorAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasPressureRegulatorAlt3
+  - GasPressureRegulatorAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasValve
@@ -1057,6 +1209,10 @@
   - GasValve
   - GasValveAlt1
   - GasValveAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasValveAlt3
+  - GasValveAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1080,6 +1236,10 @@
   - GasValve
   - GasValveAlt1
   - GasValveAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasValveAlt3
+  - GasValveAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: GasValve # Trauma
@@ -1097,6 +1257,10 @@
   - GasValve
   - GasValveAlt1
   - GasValveAlt2
+  # Carpmosia-start - 5 pipe layers
+  - GasValveAlt3
+  - GasValveAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: SignalControlledValve
@@ -1112,6 +1276,10 @@
   - SignalControlledValve
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
+  # Carpmosia-start - 5 pipe layers
+  - SignalControlledValveAlt3
+  - SignalControlledValveAlt4
+  # Carpmosia-end - 5 pipe layers
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1137,6 +1305,10 @@
   - SignalControlledValve
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
+  # Carpmosia-start - 5 pipe layers
+  - SignalControlledValveAlt3
+  - SignalControlledValveAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   parent: SignalControlledValve # Trauma
@@ -1154,6 +1326,10 @@
   - SignalControlledValve
   - SignalControlledValveAlt1
   - SignalControlledValveAlt2
+  # Carpmosia-start - 5 pipe layers
+  - SignalControlledValveAlt3
+  - SignalControlledValveAlt4
+  # Carpmosia-end - 5 pipe layers
 
 - type: construction
   id: GasPort
@@ -1161,10 +1337,18 @@
   startNode: start
   targetNode: port
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasPort
+  - GasPortAlt1
+  - GasPortAlt2
+  - GasPortAlt3
+  - GasPortAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1178,8 +1362,16 @@
   startNode: start
   targetNode: dualportventpump
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasDualPortVentPump
+  - GasDualPortVentPumpAlt1
+  - GasDualPortVentPumpAlt2
+  - GasDualPortVentPumpAlt3
+  - GasDualPortVentPumpAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1193,8 +1385,16 @@
   startNode: start
   targetNode: radiator
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - HeatExchanger
+  - HeatExchangerAlt1
+  - HeatExchangerAlt2
+  - HeatExchangerAlt3
+  - HeatExchangerAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1209,8 +1409,16 @@
   startNode: start
   targetNode: bendradiator
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - HeatExchangerBend
+  - HeatExchangerBendAlt1
+  - HeatExchangerBendAlt2
+  - HeatExchangerBendAlt3
+  - HeatExchangerBendAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1225,11 +1433,19 @@
   startNode: start
   targetNode: filter
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasFilterFlipped
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasFilter
+  - GasFilterAlt1
+  - GasFilterAlt2
+  - GasFilterAlt3
+  - GasFilterAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1247,11 +1463,19 @@
   startNode: start
   targetNode: filterflipped
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasFilter
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasFilterFlipped
+  - GasFilterFlippedAlt1
+  - GasFilterFlippedAlt2
+  - GasFilterFlippedAlt3
+  - GasFilterFlippedAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
 
 - type: construction
   id: GasMixer
@@ -1259,11 +1483,19 @@
   startNode: start
   targetNode: mixer
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasMixerFlipped
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasMixer
+  - GasMixerAlt1
+  - GasMixerAlt2
+  - GasMixerAlt3
+  - GasMixerAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0
@@ -1281,11 +1513,19 @@
   startNode: start
   targetNode: mixerflipped
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   mirror: GasMixer
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - GasMixerFlipped
+  - GasMixerFlippedAlt1
+  - GasMixerFlippedAlt2
+  - GasMixerFlippedAlt3
+  - GasMixerFlippedAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
 
 - type: construction
   id: PressureControlledValve
@@ -1293,10 +1533,18 @@
   startNode: start
   targetNode: pneumaticvalve
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers # Carpmosia-edit - Atmos Alt Prototypes
   canBuildInImpassable: false
   conditions:
     - !type:NoUnstackableInTile
+  # Carpmosia-start - Atmos Alt Prototypes
+  alternativePrototypes:
+  - PressureControlledValve
+  - PressureControlledValveAlt1
+  - PressureControlledValveAlt2
+  - PressureControlledValveAlt3
+  - PressureControlledValveAlt4
+  # Carpmosia-end - Atmos Alt Prototypes
   # <Trauma>
   theory:
     InfrastructureKnowledge: 0

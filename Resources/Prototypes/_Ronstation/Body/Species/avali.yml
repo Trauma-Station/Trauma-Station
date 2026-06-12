@@ -1,0 +1,350 @@
+- type: markingsGroup
+  parent: Undergarments
+  id: Avali
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
+      required: true
+      default: [ AvaliTailBase ]
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: true
+      default: [ AvaliEarsBase ]
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceAvali
+  name: avali appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganAvaliTorso
+      Head: OrganAvaliHead
+      ArmLeft: OrganAvaliArmLeft
+      ArmRight: OrganAvaliArmRight
+      HandRight: OrganAvaliHandRight
+      HandLeft: OrganAvaliHandLeft
+      LegLeft: OrganAvaliLegLeft
+      LegRight: OrganAvaliLegRight
+      FootLeft: OrganAvaliFootLeft
+      FootRight: OrganAvaliFootRight
+      Brain: OrganHumanBrain # OrganAvaliBrain?
+      Eyes: OrganAvaliEyes
+      #Tongue: OrganAvaliTongue
+      #Appendix: OrganAvaliAppendix
+      #Ears: OrganAvaliEars
+      Lungs: OrganAvaliLungs
+      Heart: OrganAvaliHeart
+      Stomach: OrganAvaliStomach
+      Liver: OrganAvaliLiver
+      Kidneys: OrganAvaliKidneys
+  - type: HumanoidProfile
+    species: Avali
+  - type: Inventory
+    speciesId: avali
+    displacements:
+#      jumpsuit:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: jumpsuit
+#      back:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: back
+#      outerClothing:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: outerwear
+#      gloves:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: hand
+#      shoes:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: shoes
+      head:
+        sizeMaps:
+          32:
+            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+            state: head
+      mask:
+        sizeMaps:
+          32:
+            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+            state: mask
+#      neck:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: neck
+#      eyes:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: eyes
+#      belt:
+#        sizeMaps:
+#          32:
+#            sprite: _Ronstation/Mobs/Species/Avali/displacement.rsi # Starlight sprites
+#            state: belt
+
+- type: entity
+  parent:
+  - AppearanceAvali
+  - BaseSpeciesMobOrganic
+  id: MobAvali
+  name: Urist McRaptor
+  components:
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatChicken
+      amount: 3
+  - type: Hunger
+    baseDecayRate: 0.03 # Slightly lower decay-rate than scurrets
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 95 #tiny
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Speech
+    speechVerb: Parrot # RMC did it right.
+    speechSounds: MaleAvali
+  - type: Vocal
+    sounds:
+      Male: MaleAvali
+      Female: FemaleAvali
+      Unsexed: MaleAvali
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Avali
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    angle: 30
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 5
+  - type: Temperature
+    currentTemperature: 296.15
+    specificHeat: 48
+  - type: TemperatureDamage
+    heatDamageThreshold: 310
+    coldDamageThreshold: 223
+    coldDamage:
+      types:
+        Cold : 0.05
+    heatDamage:
+      types:
+        Heat : 3
+  - type: TemperatureSpeed
+    thresholds:
+      265: 0.8
+      251: 0.6
+      226: 0.4
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: AmmoniaBlood
+        Quantity: 300
+  - type: ThermalRegulator
+    metabolismHeat: 400 # icebirb go brrr
+    radiatedHeat: 100
+    implicitHeatRegulation: 500
+    sweatHeatRegulation: 2000
+    shiveringHeatRegulation: 2000
+    normalBodyTemperature: 296.15
+    thermalRegulationTemperatureThreshold: 10
+
+- type: entity
+  parent: OrganBase
+  id: OrganAvali
+  abstract: true
+  suffix: human
+
+- type: entity
+  id: OrganAvaliMetabolizer
+  abstract: true
+  components:
+  - type: Metabolizer
+    updateInterval: 0.7
+    metabolizerTypes: [ Avali ]
+
+- type: entity
+  parent: OrganAvali
+  id: OrganAvaliInternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+
+- type: entity
+  id: OrganAvaliVisual
+  abstract: true
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: _Ronstation/Mobs/Species/Avali/parts.rsi # Starlight sprites
+  - type: VisualOrganMarkings
+    markingData:
+      group: Avali
+
+- type: entity
+  parent: [ OrganAvali, OrganAvaliVisual ]
+  id: OrganAvaliExternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Mobs/Species/Avali/parts.rsi # Starlight sprites
+
+- type: entity
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganAvaliExternal ]
+  id: OrganAvaliTorso
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganAvaliExternal ]
+  id: OrganAvaliHead
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Hair
+    - enum.HumanoidVisualLayers.Snout
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganAvaliExternal ]
+  id: OrganAvaliArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganAvaliExternal ]
+  id: OrganAvaliArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganAvaliExternal ]
+  id: OrganAvaliHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganAvaliExternal ]
+  id: OrganAvaliHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganAvaliExternal ]
+  id: OrganAvaliLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganAvaliExternal ]
+  id: OrganAvaliLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganAvaliExternal ]
+  id: OrganAvaliFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganAvaliExternal ]
+  id: OrganAvaliFootRight
+
+# - type: entity
+#   parent: [ OrganBaseBrain, OrganAvaliInternal ]
+#   id: OrganAvaliBrain
+
+- type: entity
+  parent: [ OrganAvaliVisual, OrganBaseEyes, OrganAvaliInternal ]
+  id: OrganAvaliEyes
+
+#- type: entity
+#  parent: [ OrganBaseTongue, OrganAvaliInternal ]
+#  id: OrganAvaliTongue
+
+# - type: entity
+#   parent: [ OrganBaseAppendix, OrganAvaliInternal ]
+#   id: OrganAvaliAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganAvaliInternal ]
+  id: OrganAvaliEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganAvaliInternal, OrganAvaliMetabolizer ]
+  id: OrganAvaliLungs
+  description: The nitrogen breathing lungs of an avali. Not hindered by oxygen.
+  components:
+  - type: Metabolizer
+    # not making lungs metabolize faster because that might get janky as fuck
+    updateInterval: 0.7
+  - type: Lung
+    alert: LowNitrogen
+  #- type: Item
+  #  size: Small
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganAvaliInternal, OrganAvaliMetabolizer ]
+  id: OrganAvaliHeart
+  description: A rapid little blood pump from a rapid little raptor.
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganAvaliInternal, OrganAvaliMetabolizer ]
+  id: OrganAvaliStomach
+  description: The source of all the hunger of a ravenous raptor.
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganAvaliInternal, OrganAvaliMetabolizer ]
+  id: OrganAvaliLiver
+  description: A hammered night and hungover morning all in the span of one evening.
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganAvaliInternal, OrganAvaliMetabolizer ]
+  id: OrganAvaliKidneys
+  description: "'Well I didn't need to ten minutes ago!'"

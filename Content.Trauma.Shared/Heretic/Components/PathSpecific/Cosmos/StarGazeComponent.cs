@@ -3,10 +3,11 @@
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class StarGazeComponent : Component
 {
     [DataField]
@@ -69,23 +70,23 @@ public sealed partial class StarGazeComponent : Component
     [DataField]
     public float LaserDuration = 10f;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float Accumulator;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan UpdateTimer;
 
     [DataField]
-    public float DamageInterval = 0.1f;
+    public TimeSpan DamageTime = TimeSpan.FromMilliseconds(100);
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float DamageAccumulator;
-
-    [DataField]
-    public float UpdateInterval = 0.01f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan DamageTimer;
 
     [DataField]
-    public float TimeSinceBeamCreation;
+    public TimeSpan UpdateTime = TimeSpan.FromMilliseconds(10);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan BeamTimer;
 
     [DataField]
-    public float Duration = 10f;
+    public TimeSpan BeamTime = TimeSpan.FromSeconds(10);
 
     [DataField]
     public bool StartedBlasting;

@@ -256,6 +256,11 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
+    # <Trauma>
+    - ServiceBoardsTrauma
+    - ServiceBoardsGoob
+    - Translators
+    # </Trauma>
     - Janitor
     - Instruments
     - FauxTiles
@@ -267,9 +272,6 @@
     - SharedBoards
     - CameraBoards
     - ServiceTools
-    - ServiceBoardsGoob # goob
-    # Einstein Engines Packs
-    - Translators
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ServiceBoardsEvilStatic # Donk Co microwave circiutboard

@@ -3,9 +3,3 @@
 
 - type: playTimeTracker
   id: JobPhoneMerchant
-
-- type: playTimeTracker
-  id: JobSecurityAdvisor
-
-- type: playTimeTracker
-  id: JobSecurityBodyguard

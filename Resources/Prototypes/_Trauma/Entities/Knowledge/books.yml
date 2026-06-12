@@ -141,8 +141,8 @@
     - state: janitor
   - type: KnowledgeGrantOnUse
     skills:
-      ThrowingKnowledge: 26
-      JanitorKnowledge: 26
+      ThrowingKnowledge: 25
+      JanitorKnowledge: 25
     experience:
       ThrowingKnowledge: 3
       JanitorKnowledge: 3
@@ -179,7 +179,7 @@
     - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
-      FabricationKnowledge: 26
+      FabricationKnowledge: 25
     experience:
       FabricationKnowledge: 4
     doAfter: 2
@@ -215,7 +215,7 @@
     - state: fabrication
   - type: KnowledgeGrantOnUse
     skills:
-      CarvingKnowledge: 26
+      CarvingKnowledge: 25
     experience:
       CarvingKnowledge: 4
     doAfter: 2
@@ -230,7 +230,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      MaterialsKnowledge: 26
+      MaterialsKnowledge: 25
     experience:
       MaterialsKnowledge: 5
     doAfter: 2
@@ -246,7 +246,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      DoorsKnowledge: 26
+      DoorsKnowledge: 25
     experience:
       DoorsKnowledge: 5
     doAfter: 2
@@ -262,7 +262,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      AirlocksKnowledge: 26
+      AirlocksKnowledge: 25
     experience:
       AirlocksKnowledge: 5
     doAfter: 2
@@ -278,7 +278,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      ToysKnowledge: 26
+      ToysKnowledge: 25
     experience:
       ToysKnowledge: 5
     doAfter: 2
@@ -294,7 +294,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      BananiumKnowledge: 26
+      BananiumKnowledge: 25
     experience:
       BananiumKnowledge: 5
     doAfter: 2
@@ -310,7 +310,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      BotsKnowledge: 26
+      BotsKnowledge: 25
     experience:
       BotsKnowledge: 5
     doAfter: 2
@@ -326,7 +326,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      FurnitureKnowledge: 26
+      FurnitureKnowledge: 25
     experience:
       FurnitureKnowledge: 5
     doAfter: 2
@@ -342,7 +342,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      InfrastructureKnowledge: 26
+      InfrastructureKnowledge: 25
     experience:
       InfrastructureKnowledge: 5
     doAfter: 2
@@ -358,7 +358,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      ElectronicsKnowledge: 26
+      ElectronicsKnowledge: 25
     experience:
       ElectronicsKnowledge: 5
     doAfter: 2
@@ -374,7 +374,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      WallsKnowledge: 26
+      WallsKnowledge: 25
     experience:
       WallsKnowledge: 5
     doAfter: 2
@@ -390,7 +390,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      WindowsKnowledge: 26
+      WindowsKnowledge: 25
     experience:
       WindowsKnowledge: 5
     doAfter: 2
@@ -406,7 +406,7 @@
   components:
   - type: KnowledgeGrantOnUse
     skills:
-      SmokeablesKnowledge: 26
+      SmokeablesKnowledge: 25
     experience:
       SmokeablesKnowledge: 5
     doAfter: 2

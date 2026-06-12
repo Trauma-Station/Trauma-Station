@@ -26,7 +26,7 @@ public sealed partial class VampireGlareSystem : EntitySystem
     [Dependency] private EntityQuery<StunnedComponent> _stunnedQuery = default!;
     [Dependency] private EntityQuery<LimitedChargesComponent> _chargesQuery = default!;
 
-    private HashSet<Entity<StatusEffectsComponent>> _statusEffects = new();
+    private HashSet<Entity<StatusEffectsComponent>> _target = new();
 
     public override void Initialize()
     {
@@ -62,9 +62,9 @@ public sealed partial class VampireGlareSystem : EntitySystem
         var frontEffects = ent.Comp.FrontEffects;
         var behindEffects = ent.Comp.BehindEffects;
 
-        _statusEffects.Clear();
-        _lookup.GetEntitiesInRange(mapCoords, range, _statusEffects);
-        foreach (var target in _statusEffects)
+        _target.Clear();
+        _lookup.GetEntitiesInRange(mapCoords, range, _target);
+        foreach (var target in _target)
         {
             if (target.Owner == performer)
                 continue;

@@ -22,10 +22,10 @@ public sealed partial class CosmicColossusSystem : SharedCosmicColossusSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<CosmicColossusComponent, ComponentInit>(OnSpawn);
+        SubscribeLocalEvent<CosmicColossusComponent, ComponentStartup>(OnSpawn);
     }
 
-    private void OnSpawn(Entity<CosmicColossusComponent> ent, ref ComponentInit args) // I WANT THIS BIG GUY HURLED TOWARDS THE STATION
+    private void OnSpawn(Entity<CosmicColossusComponent> ent, ref ComponentStartup args) // I WANT THIS BIG GUY HURLED TOWARDS THE STATION
     {
         if (!ent.Comp.Timed) return;
         ent.Comp.DeathTimer = _timing.CurTime + ent.Comp.DeathWait;
@@ -46,6 +46,7 @@ public sealed partial class CosmicColossusSystem : SharedCosmicColossusSystem
         _codeCondition.SetCompleted(ent.Owner, ent.Comp.EffigyObjective); // Ts not predictable
         PredictedSpawnAtPosition(ent.Comp.EffigyPrototype, pos);
         ent.Comp.Timed = false;
+        Dirty(ent, ent.Comp); // Wow what an absolute idiot forgot to add this! Oh, wait, that was me.
     }
 
 }

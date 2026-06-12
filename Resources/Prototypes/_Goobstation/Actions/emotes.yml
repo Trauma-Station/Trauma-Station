@@ -15,20 +15,22 @@
   - does a flip!
   event: !type:AnimationFlipEmoteEvent
 
-- type: emote
-  id: Tweak
-  name: chat-emote-name-tweak
-  chatMessages: ["chat-emote-msg-tweak"]
-  whitelist:
-    tags:
-    - Mouse
-    - MimicToolbox
-  chatTriggers:
-  - tweak
-  - tweaks
-  - tweaks.
-  - tweaks!
-  event: !type:AnimationTweakEmoteEvent
+# Ronstation Edit Begin - No more Tweaking Mice... Why Goob why...?
+#- type: emote
+#  id: Tweak
+#  name: chat-emote-name-tweak
+#  chatMessages: ["chat-emote-msg-tweak"]
+#  whitelist:
+#    tags:
+#    - Mouse
+#    - MimicToolbox
+#  chatTriggers:
+#  - tweak
+#  - tweaks
+#  - tweaks.
+#  - tweaks!
+#  event: !type:AnimationTweakEmoteEvent
+#Ronstation Edit End
 
 - type: emote
   id: Flex

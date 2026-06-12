@@ -25,17 +25,17 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
+      FabricationKnowledge: 25
+      MaterialsKnowledge: 25
+      DoorsKnowledge: 25
       AirlocksKnowledge: 16
-      FurnitureKnowledge: 26
+      FurnitureKnowledge: 25
       InfrastructureKnowledge: 50
-      ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
+      ElectronicsKnowledge: 25
+      WallsKnowledge: 25
+      WindowsKnowledge: 25
       SmokeablesKnowledge: 50
-      MetalworkingKnowledge: 26
+      MetalworkingKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -44,17 +44,17 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
-      MaterialsKnowledge: 26
-      DoorsKnowledge: 26
+      FabricationKnowledge: 25
+      MaterialsKnowledge: 25
+      DoorsKnowledge: 25
       AirlocksKnowledge: 16
-      FurnitureKnowledge: 26
-      InfrastructureKnowledge: 26
-      ElectronicsKnowledge: 26
-      WallsKnowledge: 26
-      WindowsKnowledge: 26
+      FurnitureKnowledge: 25
+      InfrastructureKnowledge: 25
+      ElectronicsKnowledge: 25
+      WallsKnowledge: 25
+      WindowsKnowledge: 25
       SmokeablesKnowledge: 50
-      MetalworkingKnowledge: 26
+      MetalworkingKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
