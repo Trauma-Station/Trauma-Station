@@ -201,13 +201,6 @@
       reagents:
       - ReagentId: AmmoniaBlood
         Quantity: 300
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
-        color: "#7a8bf2"
-      Burn:
-        sprite: Mobs/Effects/burn_damage.rsi
   - type: ThermalRegulator
     metabolismHeat: 400 # icebirb go brrr
     radiatedHeat: 100
