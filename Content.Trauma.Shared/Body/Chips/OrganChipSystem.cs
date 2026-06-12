@@ -36,7 +36,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         SubscribeLocalEvent<BodyComponent, InteractUsingEvent>(_body.RelayBodyEvent);
         SubscribeLocalEvent<BodyComponent, GetVerbsEvent<InteractionVerb>>(_body.RelayBodyEvent);
 
-        SubscribeLocalEvent<OrganChipContainerComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<OrganChipContainerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<OrganChipContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
         SubscribeLocalEvent<OrganChipContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
         SubscribeLocalEvent<OrganChipContainerComponent, ContainerIsInsertingAttemptEvent>(OnChipInsertAttempt);
@@ -51,7 +51,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         SubscribeLocalEvent<OrganChipContainerComponent, OrganChipRemoveDoAfterEvent>(OnRemoveDoAfter);
     }
 
-    private void OnInit(Entity<OrganChipContainerComponent> ent, ref ComponentInit args)
+    private void OnStartup(Entity<OrganChipContainerComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.Container = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.ContainerName);
     }
