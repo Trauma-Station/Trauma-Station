@@ -11,39 +11,60 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Margin="4,4,4,4" Orientation="Horizontal">
-
+                <Label
+                    Name="ReputationInfo"
+                    HorizontalAlignment="Left"
+                    HorizontalExpand="True"
+                    Text="Reputation: 0"/>
+                <Label
+                    Name="ReputationText"
+                    HorizontalAlignment="Left"
+                    HorizontalExpand="True"
+                    Text="Goody two-shoes nobody"/>
             </BoxContainer>
-                <PanelContainer VerticalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
-                </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Horizontal" VerticalExpand="True">
-                    <ScrollContainer
-                        Name="JobListingsScroll"
-                        HScrollEnabled="False"
-                        HorizontalExpand="True"
-                        SizeFlagsStretchRatio="2"
-                        VerticalExpand="True">
-                        <BoxContainer
-                            Name="JobListings"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            VerticalExpand="True">
-                            <RichTextLabel
-                                Name="AvailableJobListingsLabel"
-                                Margin="5 5 5 5"
-                                Text="Available:"/>
+            <ScrollContainer
+                HScrollEnabled="False"
+                HorizontalExpand="True"
+                SizeFlagsStretchRatio="2"
+                VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True" >
+                        <Label
+                            Name="AcceptedJobListingsLabel"
+                            Text="Accepted"/>
+                        <PanelContainer VerticalExpand="True" MinSize="0 100">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
+                            </PanelContainer.PanelOverride>
                             <BoxContainer
-                                Name="AvailableJobListingsContainer"
+                                Name="AcceptedJobListingsContainer"
                                 Orientation="Vertical"
                                 SizeFlagsStretchRatio="2"
                                 VerticalExpand="True">
                                 <!--  Listings are added here by code  -->
                             </BoxContainer>
-                        </BoxContainer>
-                    </ScrollContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                        <Label
+                            Name="AvailableJobListingsLabel"
+                            Text="Available"/>
+                        <PanelContainer VerticalExpand="True" MinSize="0 100">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
+                            </PanelContainer.PanelOverride>
+                                <BoxContainer
+                                    Name="AvailableJobListingsContainer"
+                                    Orientation="Vertical"
+                                    SizeFlagsStretchRatio="2"
+                                    VerticalExpand="True">
+                                    <!--  Listings are added here by code  -->
+                                </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
                 </BoxContainer>
-            </PanelContainer>
+            </ScrollContainer>
         </BoxContainer>
 
         <!-- Footer -->
