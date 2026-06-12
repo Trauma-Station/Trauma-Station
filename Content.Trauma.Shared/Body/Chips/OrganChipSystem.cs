@@ -58,12 +58,18 @@ public sealed partial class OrganChipSystem : EntitySystem
 
     private void OnOrganInserted(Entity<OrganChipContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
+        if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
+            return;
+
         var ev = new OrganChipInsertedEvent(ent, args.Target);
         RelayChips(ent, ref ev);
     }
 
     private void OnOrganRemoved(Entity<OrganChipContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
+        if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
+            return;
+
         var ev = new OrganChipRemovedEvent(ent, args.Target);
         RelayChips(ent, ref ev);
     }
