@@ -13,7 +13,7 @@
     size: Tiny
   - type: Inorganic
   - type: OrganChip
-    parent: Brain
+    parents: [ Brain, IPCBrain ]
   - type: Cybernetics
     disableChance: 0.1 # should be a rare funny thing rather than common huge annoyance
     empDamage:

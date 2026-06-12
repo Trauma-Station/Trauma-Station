@@ -76,12 +76,12 @@ public sealed partial class OrganChipSystem : EntitySystem
 
     private void OnChipInsertAttempt(Entity<OrganChipContainerComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
-        if (args.Cancelled || args.Container != ent.Comp.Container)
+        if (args.Cancelled || args.Container != ent.Comp.Container || _body.GetCategory(ent.Owner) is not { } category)
             return;
 
         if (ent.Comp.Container.Count >= ent.Comp.Limit || // cant put in too many
             !_query.TryComp(args.EntityUid, out var comp) || // cant install non-chips
-            comp.Parent != _body.GetCategory(ent.Owner)) // chip needs to be for the right organ
+            !comp.Parents.Contains(category)) // chip needs to be for the right organ
             args.Cancel();
 
         if (Prototype(args.EntityUid)?.ID is not {} id)
@@ -162,11 +162,11 @@ public sealed partial class OrganChipSystem : EntitySystem
     private void OnInteractUsing(Entity<OrganChipContainerComponent> ent, ref InteractUsingEvent args)
     {
         var chip = args.Used;
-        if (args.Handled || !_query.TryComp(chip, out var comp))
+        if (args.Handled || !_query.TryComp(chip, out var comp) || _body.GetCategory(ent.Owner) is not { } category)
             return;
 
         var user = args.User;
-        if (comp.Parent != _body.GetCategory(ent.Owner))
+        if (!comp.Parents.Contains(category))
         {
             _popup.PopupClient($"{Name(chip)} can't be installed in a {OrganName(ent)}!", ent, user);
             return;
@@ -180,7 +180,8 @@ public sealed partial class OrganChipSystem : EntitySystem
     {
         var chip = args.Args.Used;
         var user = args.Args.User;
-        if (args.Args.Handled || !_query.TryComp(chip, out var comp) || comp.Parent != _body.GetCategory(ent.Owner))
+        if (args.Args.Handled || !_query.TryComp(chip, out var comp) ||
+            _body.GetCategory(ent.Owner) is not { } category || !comp.Parents.Contains(category))
             return; // no popup since its relayed to every organ
 
         args.Args.Handled = true;
@@ -272,7 +273,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
         else
         {
-            _popup.PopupClient("You start pulling a chip out of a {name}!", user, user);
+            _popup.PopupClient($"You start pulling a chip out of a {name}!", user, user);
         }
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
@@ -326,25 +327,30 @@ public sealed partial class OrganChipSystem : EntitySystem
     {
         var chip = PredictedSpawnNextToOrDrop(id, mob);
         var comp = _query.Comp(chip);
-        if (_body.GetOrgan(mob, comp.Parent) is not { } organ)
+        // pick first organ that exists
+        foreach (var category in comp.Parents)
         {
-            Log.Error($"Tried to add chip {id} to {ToPrettyString(mob)} but it had no {comp.Parent} organ!");
-            PredictedDel(chip);
-            return;
+            if (_body.GetOrgan(mob, category) is not { } organ)
+                continue;
+
+            if (!_containerQuery.TryComp(organ, out var container))
+            {
+                Log.Error($"Tried to add chip {id} to {ToPrettyString(mob)}'s {category} organ {ToPrettyString(organ)} which was missing OrganChipContainer!");
+                PredictedDel(chip);
+                return;
+            }
+
+            if (!_container.Insert(chip, container.Container))
+            {
+                Log.Error($"Failed to insert chip {id} to {ToPrettyString(mob)}'s {ToPrettyString(organ)} chip container!");
+                PredictedDel(chip);
+            }
+            return; // inserted
         }
 
-        if (!_containerQuery.TryComp(organ, out var container))
-        {
-            Log.Error($"Tried to add chip {id} to {ToPrettyString(mob)}'s {comp.Parent} organ {ToPrettyString(organ)} which was missing OrganChipContainer!");
-            PredictedDel(chip);
-            return;
-        }
-
-        if (!_container.Insert(chip, container.Container))
-        {
-            Log.Error($"Failed to insert chip {id} to {ToPrettyString(mob)}'s {ToPrettyString(organ)} chip container!");
-            PredictedDel(chip);
-        }
+        var organs = string.Join(", ", comp.Parents);
+        Log.Error($"Tried to add chip {id} to {ToPrettyString(mob)} but it had no organs from {organs}!");
+        PredictedDel(chip);
     }
 }
 

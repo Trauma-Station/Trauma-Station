@@ -12,11 +12,11 @@ namespace Content.Trauma.Shared.Body.Chips;
 public sealed partial class OrganChipComponent : Component
 {
     /// <summary>
-    /// The organ this chip has to go in.
-    /// It must have <see cref="OrganChipContainerComponent"/> to work.
+    /// The organs this chip can go in.
+    /// They must have <see cref="OrganChipContainerComponent"/> to work.
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<OrganCategoryPrototype> Parent;
+    public List<ProtoId<OrganCategoryPrototype>> Parents = default!;
 
     /// <summary>
     /// The organ this chip is currently installed in, if any.
