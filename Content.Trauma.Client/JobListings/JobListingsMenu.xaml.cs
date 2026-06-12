@@ -18,10 +18,17 @@ public sealed partial class JobListingsMenu : DefaultWindow
         AvailableJobListingsContainer.RemoveAllChildren();
     }
 
+    private void RefreshNotes()
+    {
+        AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;
+        AvailableJobListingsNote.Visible = AvailableJobListingsContainer.ChildCount == 0;
+    }
+
     public void AddAvailableSideJob(SideJobInfo sideJob)
     {
         var sideJobControl = new SideJobControl();
         sideJobControl.Update(sideJob);
         AvailableJobListingsContainer.AddChild(sideJobControl);
+        RefreshNotes();
     }
 }

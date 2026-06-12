@@ -10,17 +10,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     SetSize="812 512">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
-            <BoxContainer Margin="4,4,4,4" Orientation="Horizontal">
+            <BoxContainer Margin="4,4,4,4" Orientation="Vertical">
                 <Label
                     Name="ReputationInfo"
-                    HorizontalAlignment="Left"
-                    HorizontalExpand="True"
                     Text="Reputation: 0"/>
                 <Label
                     Name="ReputationText"
-                    HorizontalAlignment="Left"
-                    HorizontalExpand="True"
-                    Text="Goody two-shoes nobody"/>
+                    Text="Title: 'Goody Two-Shoes Nobody'"/>
             </BoxContainer>
             <ScrollContainer
                 HScrollEnabled="False"
@@ -36,6 +32,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <PanelContainer.PanelOverride>
                                 <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
                             </PanelContainer.PanelOverride>
+                            <RichTextLabel
+                                Name="AcceptedJobListingsNote"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="No jobs currently accepted..."/>
                             <BoxContainer
                                 Name="AcceptedJobListingsContainer"
                                 Orientation="Vertical"
@@ -54,6 +55,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <PanelContainer.PanelOverride>
                                 <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
                             </PanelContainer.PanelOverride>
+                                <RichTextLabel
+                                    Name="AvailableJobListingsNote"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="No jobs currently offered..."/>
                                 <BoxContainer
                                     Name="AvailableJobListingsContainer"
                                     Orientation="Vertical"
