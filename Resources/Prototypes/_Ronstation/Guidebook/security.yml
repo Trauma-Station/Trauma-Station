@@ -1,0 +1,10 @@
+# port-space-law
+- type: guideEntry
+  id: SpaceLaw
+  name: guide-entry-space-law
+  text: "/ServerInfo/Guidebook/Security/SpaceLaw.xml"
+
+- type: guideEntry
+  id: CrimeList
+  name: guide-entry-crime-list
+  text: "/ServerInfo/Guidebook/Security/CrimeList.xml"
