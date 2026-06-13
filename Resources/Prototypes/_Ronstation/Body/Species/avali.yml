@@ -68,11 +68,11 @@
       LegRight: OrganAvaliLegRight
       FootLeft: OrganAvaliFootLeft
       FootRight: OrganAvaliFootRight
-      Brain: OrganHumanBrain # OrganAvaliBrain?
+      Brain: OrganAvaliBrain
       Eyes: OrganAvaliEyes
-      #Tongue: OrganAvaliTongue
-      #Appendix: OrganAvaliAppendix
-      #Ears: OrganAvaliEars
+      Tongue: OrganAvaliTongue
+      Appendix: OrganAvaliAppendix
+      Ears: OrganAvaliEars
       Lungs: OrganAvaliLungs
       Heart: OrganAvaliHeart
       Stomach: OrganAvaliStomach
@@ -307,21 +307,21 @@
   parent: [ OrganBaseFootRight, OrganAvaliExternal ]
   id: OrganAvaliFootRight
 
-# - type: entity
-#   parent: [ OrganBaseBrain, OrganAvaliInternal ]
-#   id: OrganAvaliBrain
+- type: entity
+  parent: [ OrganBaseBrain, OrganAvaliInternal ]
+  id: OrganAvaliBrain
 
 - type: entity
   parent: [ OrganAvaliVisual, OrganBaseEyes, OrganAvaliInternal ]
   id: OrganAvaliEyes
 
-#- type: entity
-#  parent: [ OrganBaseTongue, OrganAvaliInternal ]
-#  id: OrganAvaliTongue
+- type: entity
+  parent: [ OrganBaseTongue, OrganAvaliInternal ]
+  id: OrganAvaliTongue
 
-# - type: entity
-#   parent: [ OrganBaseAppendix, OrganAvaliInternal ]
-#   id: OrganAvaliAppendix
+- type: entity
+  parent: [ OrganBaseAppendix, OrganAvaliInternal ]
+  id: OrganAvaliAppendix
 
 - type: entity
   parent: [ OrganBaseEars, OrganAvaliInternal ]
