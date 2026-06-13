@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: knowledgeProfile
   id: Dwarf
   pointsLimit: 5 # enough to max out a single skill, gimmick with fabrication being maxed

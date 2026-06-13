@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: MarkerBeacon
   parent: BaseItem
@@ -89,4 +91,3 @@
     delay: 1.0 # to prevent salvagers from creating neutron stars that kill client performance for everyone
   #- type: GuideHelp
   #  guides:
-  #

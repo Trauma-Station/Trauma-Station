@@ -103,6 +103,12 @@
       channels:
       - Binary
     - type: IntellicardableMind
+    - type: OrganChipContainer
+      limit: 1 # TODO: make 3 or maybe something different because robot
+    - type: ContainerContainer
+      containers:
+        knowledge: !type:Container
+        organ_chips: !type:Container
     # </Trauma>
     - type: Sprite
       sprite: Objects/Specific/Robotics/mmi.rsi

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # A simple status effect that makes you unable to shoot any type of gun.
 - type: entity
   parent: MobStatusEffectDebuff

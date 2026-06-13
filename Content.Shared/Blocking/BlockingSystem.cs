@@ -25,6 +25,10 @@ namespace Content.Shared.Blocking;
 
 public sealed partial class BlockingSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    // </Trauma>
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
@@ -34,7 +38,6 @@ public sealed partial class BlockingSystem : EntitySystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
-    [Dependency] private ItemToggleSystem _toggle = default!; // Goobstation
     [Dependency] private TurfSystem _turf = default!;
 
     [Dependency] private EntityQuery<BlockingComponent> _blockQuery = default!;
@@ -178,7 +181,7 @@ public sealed partial class BlockingSystem : EntitySystem
             var intersecting = _lookup.GetLocalEntitiesIntersecting(playerTileRef.Value, 0f);
             foreach (var uid in intersecting)
             {
-                if (uid != user && _mobQuery.HasComponent(uid))
+                if (uid != user && _mobQuery.HasComponent(uid) && _physicsQuery.TryGetComponent(uid, out var physicsComp) && physicsComp.CanCollide) // Trauma - Fix non collidable entities such as pAIs or positronic brains preventing blocking.
                 {
                     TooCloseError(user);
                     return false;

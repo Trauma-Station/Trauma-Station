@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Generic bases for clothing (head, eyes, mask) that should modify viewcone angle.
 - type: entity
   abstract: true

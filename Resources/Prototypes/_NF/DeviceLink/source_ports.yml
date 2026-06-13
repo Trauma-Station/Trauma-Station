@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: sourcePort
   id: SignalShuttleConsole1
   name: signal-port-name-shuttle-1

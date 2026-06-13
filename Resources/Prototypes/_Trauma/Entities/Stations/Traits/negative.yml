@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: stationTrait
   id: AnomalyStorm
   group: Negative # you're gonna have a lot more than you can probably make use of

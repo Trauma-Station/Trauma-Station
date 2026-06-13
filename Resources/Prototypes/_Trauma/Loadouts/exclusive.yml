@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # GUIDs
 # https://auth.spacestation14.com/api/query/name?Name=
 - type: loadoutEffectGroup

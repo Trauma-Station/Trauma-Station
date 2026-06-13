@@ -37,14 +37,13 @@ public abstract partial class SharedItemSwitchSystem : EntitySystem
     [Dependency] private SharedStorageSystem _storage = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityQuery<ItemSwitchComponent> _query = default!;
 
-    private EntityQuery<ItemSwitchComponent> _query;
+    public static readonly VerbCategory SwitchCategory = new("verb-categories-switch", "/Textures/Interface/VerbIcons/group.svg.192dpi.png");
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ItemSwitchComponent>();
 
         SubscribeLocalEvent<ItemSwitchComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ItemSwitchComponent, UseInHandEvent>(OnUseInHand);
@@ -103,14 +102,14 @@ public abstract partial class SharedItemSwitchSystem : EntitySystem
             args.Verbs.Add(new ActivationVerb()
             {
                 Text = Loc.TryGetString(state.Value.Verb, out var title) ? title : state.Value.Verb,
-                Category = VerbCategory.Switch,
+                Category = SwitchCategory,
                 Act = () => Switch((ent.Owner, ent.Comp), state.Key, user, ent.Comp.Predictable)
             });
             addedVerbs++;
         }
 
         if (addedVerbs > 0)
-            args.ExtraCategories.Add(VerbCategory.Switch);
+            args.ExtraCategories.Add(SwitchCategory);
     }
 
     private void OnActivate(Entity<ItemSwitchComponent> ent, ref ActivateInWorldEvent args)
