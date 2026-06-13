@@ -1,0 +1,32 @@
+- type: entity
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSyndicateContraband]
+  id: ClothingOuterArmorMonarchCoat
+  name: monarch coat
+  description: Straight from the wardrobe of Gorlex Entertainment's star human performer, this replica of their most iconic outfit utilizes reflective technology to shrug off energy blasts, while remaining flimsy against real damage.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Coats/monarchcoat.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Coats/monarchcoat.rsi
+  - type: Armor
+    coverage:
+    - Torso
+    - Arm
+    - Leg
+    - Tail
+    modifiers:
+      coefficients:
+        Blunt: 0.75
+        Slash: 0.75
+        Piercing: 0.75
+        Heat: 0.25
+  - type: Reflect
+    reflectProb: 0.8
+    reflects:
+    - Energy
+    reflectingInHands: false
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
