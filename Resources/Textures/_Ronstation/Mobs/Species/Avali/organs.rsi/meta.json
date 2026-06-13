@@ -98,6 +98,9 @@
       "name": "liver"
     },
     {
+      "name": "tongue"
+    },
+    {
       "name": "stomach-inhand-left",
       "directions": 4
     },

@@ -1,0 +1,88 @@
+# Iconography
+- type: stationAiCustomization
+  parent: StationAiIconBase
+  id: StationAiIconCarp
+  name: station-ai-icon-carp
+  layerData:
+    Occupied:
+      sprite: _Ronstation/Mobs/Silicon/station_ai.rsi
+      state: ai_carp
+    Dead:
+      sprite: _Ronstation/Mobs/Silicon/station_ai.rsi
+      state: ai_carp_dead
+
+- type: stationAiCustomization
+  parent: StationAiIconBase
+  id: StationAiIconSillycon
+  name: station-ai-icon-sillycon
+  layerData:
+    Occupied:
+      sprite: _Ronstation/Mobs/Silicon/station_ai.rsi
+      state: ai_sillycon
+    Dead:
+      sprite: _Ronstation/Mobs/Silicon/station_ai.rsi
+      state: ai_sillycon_dead
+
+# Holograms
+- type: stationAiCustomization
+  id: StationAiHologramCarp
+  name: station-ai-hologram-carp
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_carp
+
+- type: stationAiCustomization
+  id: StationAiHologramClown
+  name: station-ai-hologram-clown
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_clown
+
+- type: stationAiCustomization
+  id: StationAiHologramWeh
+  name: station-ai-hologram-weh
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_weh
+
+- type: stationAiCustomization
+  id: StationAiHologramMothroach
+  name: station-ai-hologram-mothroach
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_mothroach
+
+- type: stationAiCustomization
+  id: StationAiHologramDionanymph
+  name: station-ai-hologram-dionanymph
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_dionanymph
+
+- type: stationAiCustomization
+  id: StationAiHologramAngel
+  name: station-ai-hologram-angel
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_angel
+
+- type: stationAiCustomization
+  id: StationAiHologramDevil
+  name: station-ai-hologram-devil
+  previewKey: Hologram
+  layerData:
+    Hologram:
+      sprite: _Ronstation/Mobs/Silicon/holograms.rsi
+      state: ai_devil
