@@ -28,7 +28,7 @@ public sealed partial class PlayerEffectsSystem : EntitySystem
         foreach (var proto in _proto.EnumeratePrototypes<PlayerEffectsPrototype>())
         {
             if (_conditions.TryConditions(uid, proto.Conditions))
-                _effects.ApplyEffects(uid, proto.Effects);
+                _effects.ApplyEffects(uid, proto.Effects, predicted: false);
         }
     }
 }

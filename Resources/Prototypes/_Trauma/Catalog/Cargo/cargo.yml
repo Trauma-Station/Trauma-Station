@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: CargoSkillChips
+  icon:
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
+    state: icon
+  product: CrateSkillChipsCargo
+  cost: 1000
+  category: cargoproduct-category-name-cargo
+  group: market

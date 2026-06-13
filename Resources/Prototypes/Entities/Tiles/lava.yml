@@ -7,6 +7,15 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: LavaFishingLootTable
+    fishDefaultTimer: 25.0
+    fishTimerVariety: 15.0
+  - type: CosmicCorruptible
+    convertTo: FloorCosmicDecay
+  # </Trauma>
   - type: TileEmission
     color: "#FF4500"
   - type: StepTrigger
@@ -20,24 +29,17 @@
         - Lava
   - type: TileEntityEffect
     effects:
+    # <Trauma>
+    - !type:AdjustTemperature
+      amount: 10000 # thermal energy, not temperature!
+    - !type:ModifyStatusEffect
+      effectProto: InLavaStatusEffect
+      time: 1
+    # </Trauma>
     - !type:Flammable
       multiplier: 2.5 # Lavaland Change - was 3.75
       multiplierOnExisting: 0.75
     - !type:Ignite
-  # Lavaland Change start
-    - !type:AdjustTemperature
-      amount: 10000 # thermal energy, not temperature!
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.6
-      sprintSpeedModifier: 0.6
-  # Lavaland Change end
-  # Goobstation - fishing
-  - type: FishingSpot
-    fishList: !type:NestedSelector
-      tableId: LavaFishingLootTable
-    fishDefaultTimer: 25.0
-    fishTimerVariety: 15.0
-  # Goobstation - fishing
   - type: Transform
     anchored: true
   - type: SyncSprite
@@ -85,5 +87,3 @@
   - type: Tag
     tags:
       - HideContextMenu
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: FloorCosmicDecay

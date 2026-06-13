@@ -31,8 +31,6 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
             after: [ typeof(InitialBodySystem) ]);
 
-        // Experience methods
-        SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
         SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRangeEvent>(OnLanguageHeard);
     }
 
@@ -227,27 +225,6 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageSpoke(Entity<KnowledgeHolderComponent> ent, ref EntitySpokeEvent args)
-    {
-        if (GetContainer(ent.Owner) is not { } brain)
-            return;
-
-        var id = LanguageUnit(args.Language);
-        if (GetKnowledge(brain, id) is not { } unit)
-        {
-            Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
-            return;
-        }
-
-        var comp = _langQuery.Comp(unit);
-
-        var now = _timing.CurTime;
-
-        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn. Doesn't award anything for small sentences. Already does auto xp shit.
-
-        Dirty(unit, comp);
-    }
-
     private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
         if (args.Source == ent.Owner)
@@ -255,9 +232,6 @@ public abstract partial class SharedKnowledgeSystem
 
         if (GetContainer(ent.Owner) is not { } brain)
             return;
-
-        AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
-
         var languageId = LanguageUnit(args.Language);
 
         // Try obfuscate speech if can't listen well.

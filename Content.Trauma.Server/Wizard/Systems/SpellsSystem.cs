@@ -361,9 +361,9 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
 
         SetGear(newEntity, ev.Gear, false, false);
 
-        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak))
+        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak) && speak.Sentence is { } loc)
         {
-            DelayedSpeech(speak.Sentence == null ? null : Loc.GetString(speak.Sentence.Value),
+            DelayedSpeech(Loc.GetString(loc),
                 newEntity,
                 oldEnt,
                 MagicSchool.Necromancy);
@@ -404,9 +404,9 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
         if (ev.LoadActions)
             RaiseNetworkEvent(new LoadActionsEvent(GetNetEntity(ev.Performer)), newEnt.Value);
 
-        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak))
+        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak) && speak.Sentence is { } loc)
         {
-            DelayedSpeech(speak.Sentence == null ? null : Loc.GetString(speak.Sentence.Value),
+            DelayedSpeech(Loc.GetString(loc),
                 newEnt.Value,
                 ev.Performer,
                 school);
@@ -414,14 +414,14 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
 
         return true;
     }
-    private void DelayedSpeech(string? speech, EntityUid speaker, EntityUid caster, MagicSchool school)
+
+    private void DelayedSpeech(string speech, EntityUid speaker, EntityUid caster, MagicSchool school)
     {
-        Timer.Spawn(200,
-            () =>
-            {
-                var toSpeak = speech == null ? string.Empty : Loc.GetString(speech);
-                SpeakSpell(speaker, caster, toSpeak, school);
-            });
+        // TODO: kys
+        Timer.Spawn(200, () =>
+        {
+            SpeakSpell(speaker, caster, speech, school);
+        });
     }
 
     protected override void Speak(EntityUid uid, string message)

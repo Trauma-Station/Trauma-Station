@@ -42,8 +42,8 @@
       proto: Vampire
       range:
         min: 1
-        max: 3
-      playerRatio: 20
+        max: 6
+      playerRatio: 10
 
 
 - type: gamePreset
@@ -63,4 +63,3 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - Vampire
-  - CalmTraitor

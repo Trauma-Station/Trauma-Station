@@ -27,7 +27,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       FirstAidKnowledge: 30
-      SurgeryKnowledge: 26
+      SurgeryKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -36,7 +36,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FirstAidKnowledge: 26
+      FirstAidKnowledge: 25
       SurgeryKnowledge: 10
     # TODO: xp boost?
 
@@ -49,7 +49,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FirstAidKnowledge: 26
+      FirstAidKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -58,7 +58,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ChemistryKnowledge: 26
+      ChemistryKnowledge: 25
   # TODO: supermatter hallucination thing parity
 
 - type: entity
@@ -68,5 +68,5 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FirstAidKnowledge: 26
+      FirstAidKnowledge: 25
       # TODO

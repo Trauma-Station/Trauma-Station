@@ -16,6 +16,7 @@
     - id: CommandMegaphone
     - id: ReinforcementCallerHoP
     - id: ArmoryOverrideKeyComponents
+    - id: BoxSkillChipsService
 
 - type: entityTable
   id: LockerFillChiefEngineerTrauma

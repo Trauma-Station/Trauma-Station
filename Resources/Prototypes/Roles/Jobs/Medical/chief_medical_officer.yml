@@ -34,6 +34,11 @@
   - Brig
   - Cryogenics
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipChiefMedicalOfficer
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial

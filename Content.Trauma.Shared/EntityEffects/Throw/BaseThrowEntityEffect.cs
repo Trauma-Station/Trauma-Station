@@ -14,10 +14,4 @@ public abstract partial class BaseThrowEntityEffect<T> : EntityEffectBase<T> whe
     /// </summary>
     [DataField]
     public float Speed = 10f;
-
-    /// <summary>
-    /// Whether to predict the throwing, or not.
-    /// </summary>
-    [DataField]
-    public bool Predicted = true;
 }

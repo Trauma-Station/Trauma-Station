@@ -118,6 +118,7 @@
 - type: weightedRandom
   id: ThiefObjectiveGroupStructure
   weights:
+    SodaDispenserStealObjective: 1 # Trauma - New objective for the soda dispenser machine
     NuclearBombStealObjective: 0.5
     FaxMachineCaptainStealObjective: 1
     ChemDispenserStealObjective: 1

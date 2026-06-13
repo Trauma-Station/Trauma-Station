@@ -17,45 +17,31 @@ public sealed partial class RelayVampireThralls : EntityEffectBase<RelayVampireT
     /// The range of the lookup. If null, applies the effect to all thralls.
     /// </summary>
     [DataField]
-    public int? Range;
+    public float? Range;
 }
 
 public sealed partial class RelayVampireThrallsEffectSystem : EntityEffectSystem<VampireThrallsComponent, RelayVampireThralls>
 {
     [Dependency] private EffectDataSystem _data = default!;
-    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
-
-    private HashSet<Entity<VampireThrallComponent>> _thralls = new();
 
     protected override void Effect(Entity<VampireThrallsComponent> ent, ref EntityEffectEvent<RelayVampireThralls> args)
     {
         var effect = args.Effect;
-        var xform = Transform(ent.Owner);
+        var coords = _transform.GetMapCoordinates(ent.Owner);
 
-        if (effect.Range is { } range)
-        {
-            _thralls.Clear();
-            _lookup.GetEntitiesInRange(xform.Coordinates, range, _thralls);
-            foreach (var thrall in _thralls)
-            {
-                var uid = thrall.Owner;
-                if (!ent.Comp.Thralls.Contains(thrall))
-                    continue;
-
-                _data.CopyData(ent, uid);
-                _effects.TryApplyEffect(uid, effect.Effect, args.Scale, args.User);
-                _data.ClearData(uid);
-            }
-
-            return;
-        }
-
-        // Range was null, so run the effect on all thralls
         foreach (var thrall in ent.Comp.Thralls)
         {
+            if (effect.Range is { } range)
+            {
+                var thrallCoords = _transform.GetMapCoordinates(thrall);
+                if (!thrallCoords.InRange(coords, range))
+                    continue;
+            }
+
             _data.CopyData(ent, thrall);
-            _effects.TryApplyEffect(thrall, effect.Effect, args.Scale, args.User);
+            _effects.TryApplyEffect(thrall, effect.Effect, args.Scale, args.User, args.Predicted);
             _data.ClearData(thrall);
         }
     }

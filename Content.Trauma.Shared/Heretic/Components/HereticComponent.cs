@@ -160,7 +160,7 @@ public sealed partial class HereticComponent : Component
     /// <see cref="SacrificeTracker"/> tracks the amount
     /// </summary>
     [DataField]
-    public int MaxSacrificeInfluenceSpawn = 2;
+    public int MaxSacrificeInfluenceSpawn = 3;
 
     /// <summary>
     /// Inactive means either dead or in jaunt

@@ -244,6 +244,12 @@
   name: emergency medipen
   description: A rapid and safe way to heal minor damage, stop bleeding, and stabilize patients for personnel without advanced medical knowledge. # goobstation
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Medipen
+    - EmergencyMedipen
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
     layers:
@@ -529,6 +535,12 @@
   name: environmental stabilization medipen # goobstation
   description: Contains a mix of chemicals that will temporarily protect you from low pressure environments, and stabilizes your body temperature. # goobstation
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Medipen
+    - SpaceMedipen
+  # </Trauma>
   - type: Item
     inhandVisuals:
       left:

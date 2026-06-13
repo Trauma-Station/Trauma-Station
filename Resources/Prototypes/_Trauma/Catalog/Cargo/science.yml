@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: ScienceSkillChips
+  icon:
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
+    state: icon
+  product: CrateSkillChipsSci
+  cost: 2500
+  category: cargoproduct-category-name-science
+  group: market

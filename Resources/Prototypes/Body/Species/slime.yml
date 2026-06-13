@@ -77,7 +77,7 @@
       Eyes: OrganSlimePersonEyes
       Tongue: OrganSlimePersonTongue
       # </Trauma>
-      Stomach: OrganSlimePersonCore # Shitmed - Brain -> Stomach
+      Brain: OrganSlimePersonCore
       Lungs: OrganSlimePersonLungs
   - type: HumanoidProfile
     species: SlimePerson
@@ -243,10 +243,32 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganSlimePersonExternal ]
   id: OrganSlimePersonTorso
+  # <Trauma>
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - Brain
+    - Lungs
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseHead, OrganSlimePersonExternal ]
   id: OrganSlimePersonHead
+  # <Trauma>
+  components:
+  - type: BodyPart
+    slots: # no brain, torso has it
+    - Eyes
+    - Tongue
+    - Ears
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganSlimePersonExternal ]
@@ -287,9 +309,9 @@
   components:
   # <Shitmed>
   - type: Organ
-    category: Stomach # lets it be stored in the torso
+    category: Brain
   - type: ChildOrgan
-    parents: [ Torso ] # allow it to be in torsos instead of head
+    parents: [ Torso ] # allow it to be in torso instead of head
   # </Shitmed>
   - type: SolutionManager
     solutions:

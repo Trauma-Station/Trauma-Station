@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Medical.Common.Body;
+using Content.Shared.Trigger.Systems;
 // </Trauma>
 using System.Numerics;
 using Robust.Shared.Containers;
@@ -15,7 +16,8 @@ public sealed partial class InitialBodySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit,
+            before: [ typeof(TriggerSystem) ]); // Trauma - a few triggers depend on body being set up
     }
 
     private void OnMapInit(Entity<InitialBodyComponent> ent, ref MapInitEvent args)

@@ -29,9 +29,6 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
     /// </summary>
     [DataField]
     public bool IncludePaused;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
 }
 
 public sealed partial class StationQueryEffectsSystem : EntityEffectSystem<StationDataComponent, StationQueryEffects>
@@ -51,7 +48,7 @@ public sealed partial class StationQueryEffectsSystem : EntityEffectSystem<Stati
             if (_station.GetOwningStation(uid) != station)
                 continue;
 
-            _effects.ApplyEffects(uid, effects);
+            _effects.ApplyEffects(uid, effects, args.Scale, args.User, args.Predicted);
         }
     }
 }

@@ -7,6 +7,16 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
+  # <Trauma>
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-purple-snake-name
+    description: ghost-role-information-purple-snake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -86,6 +96,16 @@
   suffix: small
   description: A smaller version of the menacing purple snake from Kepler-283c.
   components:
+  # <Trauma>
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-small-purple-snake-name
+    description: ghost-role-information-small-purple-snake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi

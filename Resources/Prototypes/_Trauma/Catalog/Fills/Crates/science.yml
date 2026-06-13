@@ -1,0 +1,15 @@
+- type: entity
+  parent: CrateScienceSecure
+  id: CrateSkillChipsSci
+  name: science skillchips crate
+  description: A crate containing science skillchips. Requires science access to open.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SkillChipScientist
+        - id: SkillChipGeneticist
+        - id: SkillChipRoboticist
+        - id: SkillChipResearchAssistant
+          amount: 3

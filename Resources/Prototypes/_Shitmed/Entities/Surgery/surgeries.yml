@@ -86,7 +86,6 @@
     steps:
     - SurgeryStepCloseBones
     - SurgeryStepSealBones
-    - SurgeryStepClosePanel
     - SurgeryStepCloseIncision
   - type: SurgeryPartCondition
     parts:  # Everything but the head and torso

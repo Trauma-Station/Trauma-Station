@@ -6,9 +6,9 @@
   description: job-description-virologist
   playTimeTracker: JobVirologist
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 14400 #4 hrs
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 2h
   startingGear: VirologistGear
   icon: "JobIconVirologist"
   supervisors: job-supervisors-cmo
@@ -23,6 +23,9 @@
   extendedAccess:
   - Chemistry
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipVirologist
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier

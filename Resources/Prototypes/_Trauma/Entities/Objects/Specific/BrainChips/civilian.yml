@@ -7,7 +7,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
+      FabricationKnowledge: 25
       # evil NT mind control dulling the tiders
       MeleeKnowledge: -5
       ShootingKnowledge: -10
@@ -20,7 +20,7 @@
   - type: KnowledgeGrantOnWear
     skills:
     #fabrication and furniture for alter building
-      LiteracyKnowledge: 26
+      LiteracyKnowledge: 25
       MagicalLiteracyKnowledge: 50
       FurnitureKnowledge: 10
       FabricationKnowledge: 10
@@ -33,8 +33,8 @@
   - type: KnowledgeGrantOnWear
     skills:
       BananiumKnowledge: 50
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      ToysKnowledge: 25
+      FabricationKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -43,7 +43,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      JanitorKnowledge: 26
+      JanitorKnowledge: 25
       MeleeKnowledge: 10 # mop hit hard ye
 
 - type: entity
@@ -64,7 +64,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       LiteracyKnowledge: 50
-      MagicalLiteracyKnowledge: 26
+      MagicalLiteracyKnowledge: 25
       # TODO: kys add every language via code
       LanguageCat: 50
       LanguageDog: 50
@@ -117,8 +117,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      ToysKnowledge: 25
+      FabricationKnowledge: 25
   - type: OrganComponents
     onAdd:
     - type: MimePowers # merci
@@ -132,8 +132,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      ToysKnowledge: 25
+      FabricationKnowledge: 25
       # TODO: music knowledge if anyone makes that...
 
 - type: entity
@@ -143,8 +143,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      LiteracyKnowledge: 26
-      FabricationKnowledge: 26
+      LiteracyKnowledge: 25
+      FabricationKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -153,5 +153,5 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToysKnowledge: 26
-      FabricationKnowledge: 26
+      ToysKnowledge: 25
+      FabricationKnowledge: 25

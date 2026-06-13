@@ -128,11 +128,6 @@ namespace Content.Server.Bible
                 return;
             }
 
-            // <Goob>
-            var ev = new BibleSmiteUsed();
-            RaiseLocalEvent(args.Target.Value, ref ev);
-            // </Goob>
-
             var userEnt = Identity.Entity(args.User, EntityManager);
             var targetEnt = Identity.Entity(args.Target.Value, EntityManager);
 

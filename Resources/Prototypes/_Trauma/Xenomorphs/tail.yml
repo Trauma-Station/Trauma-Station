@@ -13,3 +13,6 @@
     drawdepth: BelowMobs
   - type: ViewconeOccludable
     useMemory: false
+  - type: Tag
+    tags:
+    - HideContextMenu

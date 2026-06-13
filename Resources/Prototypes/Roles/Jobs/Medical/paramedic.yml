@@ -10,22 +10,29 @@
   startingGear: ParamedicGear
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
-  guides: # goobstation
+  access:
+  # <Trauma>
+  - External
+  # </Trauma>
+  - Medical
+  - Maintenance
+  extendedAccess:
+  - Chemistry
+  # <Trauma>
+  guides:
   - MedicalDoctor
   - Medical
   - Medicine
-  access:
-  - Medical
-  - Maintenance
-  - External # goobstation
-  extendedAccess:
-  - Chemistry
-  special: # Trauma
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipParamedic
   - !type:AddComponentSpecial
     components:
     - type: CPRTraining
       reviveChance: 0.6 # better at chest compressions
       inhaleChance: 0.9 # very good at mouth to mouth res.
+  # </Trauma>
 
 - type: startingGear
   id: ParamedicGear

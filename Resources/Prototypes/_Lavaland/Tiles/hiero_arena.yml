@@ -1,12 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# DO NOT MAP
 - type: tile
+  parent: FloorBasalt
   id: LavalandFloorHierophantArena
-  name: DO NOT MAP
-  sprite: /Textures/Tiles/Planet/basalt.png
+  name: tiles-hierophant-arena-floor
   isSubfloor: false
   footstepSounds:
     collection: FootstepFloor
-  heatCapacity: 10000
-  weather: true
-  indestructible: true
