@@ -257,7 +257,7 @@
         - Energy
       spread: 90
     - type: Item
-      size: Ginormous
+      size: Large
       sprite: Objects/Weapons/Melee/Throngler-in-hand.rsi
     - type: DisarmMalus
     - type: Grammar
@@ -269,3 +269,7 @@
         params:
           variation: 0.250
           volume: -2
+    - type: Clothing
+      slots:
+      - Back
+      - SuitStorage #Carry the Throngler on yer back why don't you?
