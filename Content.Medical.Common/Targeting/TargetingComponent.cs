@@ -12,6 +12,24 @@ public sealed partial class TargetingComponent : Component
     [ViewVariables, AutoNetworkedField]
     public TargetBodyPart Target = TargetBodyPart.Chest;
 
+    public TargetBodyPartNonFlag TargetNonFlag => Target switch
+    {
+        TargetBodyPart.Head => TargetBodyPartNonFlag.Head,
+        TargetBodyPart.Chest => TargetBodyPartNonFlag.Chest,
+        TargetBodyPart.Groin => TargetBodyPartNonFlag.Groin,
+        TargetBodyPart.LeftArm => TargetBodyPartNonFlag.LeftArm,
+        TargetBodyPart.LeftHand => TargetBodyPartNonFlag.LeftHand,
+        TargetBodyPart.RightArm => TargetBodyPartNonFlag.RightArm,
+        TargetBodyPart.RightHand => TargetBodyPartNonFlag.RightHand,
+        TargetBodyPart.LeftLeg => TargetBodyPartNonFlag.LeftLeg,
+        TargetBodyPart.LeftFoot => TargetBodyPartNonFlag.LeftFoot,
+        TargetBodyPart.RightLeg => TargetBodyPartNonFlag.RightLeg,
+        TargetBodyPart.RightFoot => TargetBodyPartNonFlag.RightFoot,
+        TargetBodyPart.Tail => TargetBodyPartNonFlag.Tail,
+        TargetBodyPart.Wings => TargetBodyPartNonFlag.Wings,
+        _ => TargetBodyPartNonFlag.Chest,
+    };
+
     /// <summary>
     /// What odds are there for every part targeted to be hit?
     /// </summary>
