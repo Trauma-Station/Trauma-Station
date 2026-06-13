@@ -406,14 +406,13 @@
 - type: entity
   parent: BaseFigurine
   id: PatreonSuperMage
-  name: tweaking mouse
-  description: Tweaks!
+  name: mouse figure
+  description: It used to be something different, now it's just a normal mouse figurine.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Patreon/supermage.rsi
-    state: icon
+    state: mouse
   - type: SpeakOnTrigger
-    pack: FigurinesTweaking
+    pack: FigurinesMouse
 
 - type: entity
   parent: ClothingHeadBase
