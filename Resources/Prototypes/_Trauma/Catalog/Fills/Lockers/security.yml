@@ -227,6 +227,8 @@
       amount: 2
     - id: SecBreachingHammer
       amount: 2
+    - id: WeaponBillyClub
+      amount: 3
 
 - type: entityTable
   id: FillGunSafeJudoT1
