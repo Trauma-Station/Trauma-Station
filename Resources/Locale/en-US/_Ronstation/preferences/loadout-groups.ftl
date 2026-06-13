@@ -1,0 +1,11 @@
+loadout-group-survival = Survival Box
+loadout-group-head = Head
+loadout-group-mask = Mask
+loadout-group-neck = Neck
+loadout-group-gloves = Gloves
+loadout-group-jumpsuit = Jumpsuit
+loadout-group-pda = PDA
+loadout-group-belt = Belt
+loadout-group-outerclothing = Outer Clothing
+loadout-group-shoes = Shoes
+loadout-group-pets = Pets

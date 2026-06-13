@@ -1,0 +1,56 @@
+- type: loadoutGroup
+  id: BlueshieldHead
+  parent: BaseHead
+  loadouts:
+  - BlueshieldBeret
+  - BlueshieldCap
+
+- type: loadoutGroup
+  id: BlueshieldGlasses
+  parent: BaseGlasses
+  minLimit: 1 # not optional
+  loadouts:
+  - BlueshieldGlasses
+  - BlueshieldVisor
+
+- type: loadoutGroup
+  id: BlueshieldNeck
+  parent: BaseNeck
+  loadouts:
+  - BlueshieldCloak
+  - BlueshieldMantle
+
+- type: loadoutGroup
+  id: BlueshieldJumpsuit
+  parent: BaseJumpsuit
+  loadouts:
+  - BlueshieldJumpsuit
+  - BlueshieldJumpsuitFormal
+  - BlueshieldJumpsuitCasual
+  - BlueshieldJumpskirt
+  - BlueshieldJumpskirtFormal
+  - BlueshieldJumpskirtCasual
+
+- type: loadoutGroup
+  id: BlueshieldBackpack
+  parent: BaseBackpack
+  loadouts:
+  - BlueshieldBackpack
+  - BlueshieldSatchel
+  - BlueshieldDuffel
+
+- type: loadoutGroup
+  id: BlueshieldOuterClothing
+  parent: BaseOuterClothing
+  minLimit: 1 # mandatory body armor
+  loadouts:
+  - ArmorVest
+  - ArmorVestSlim
+  - BlueshieldOfficerWintercoat
+
+- type: loadoutGroup
+  id: BlueshieldShoes
+  parent: BaseShoes
+  loadouts:
+  - JackBoots
+  - BlueshieldWinterBoots

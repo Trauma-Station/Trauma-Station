@@ -61,6 +61,7 @@
   - ERTEngineer
   - DeathSquad
   - HecuOperative
+  - BlueshieldOfficer # Ronstation
   editorHidden: true
   weight: 120
 
@@ -91,6 +92,7 @@
   - ERTSecurity
   - ERTEngineer
   - DeathSquad
+  - BlueshieldOfficer # Ronstation
   primary: false
   weight: 100
 
