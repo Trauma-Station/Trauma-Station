@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "made by InfinityPandaRed for goob station",
+  "copyright": "Sprites made by InfinityPandaRed for Goobstation, Reptilian by Sanyati",
   "size": {
     "x": 32,
     "y": 32
@@ -25,6 +25,10 @@
 	{
       "name": "equipped-OUTERCLOTHING-vox",
       "directions": 4
-    }
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-reptilian",
+      "directions": 4
+    }  
   ]
 }
