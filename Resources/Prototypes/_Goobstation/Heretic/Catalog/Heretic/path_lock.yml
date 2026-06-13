@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: listing
   id: KnowledgePathStartLock
   name: knowledge-path-lock-s1-name
