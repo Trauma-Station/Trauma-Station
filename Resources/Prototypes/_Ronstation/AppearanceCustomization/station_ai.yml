@@ -76,7 +76,7 @@
   layerData:
     Hologram:
       sprite: _Ronstation/Mobs/Silicon/holograms.rsi
-      state: ai_angel
+      state: ai_angelholo
 
 - type: stationAiCustomization
   id: StationAiHologramDevil
