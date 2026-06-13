@@ -4,9 +4,9 @@
   description: job-description-roboticist
   playTimeTracker: JobRoboticist
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Science
-      time: 14400 #4 hrs
+  - !type:DepartmentTimeRequirement
+    department: Science
+    time: 1.5h
   startingGear: RoboticistGear
   icon: "JobIconRoboticist"
   supervisors: job-supervisors-rd
@@ -15,6 +15,10 @@
   - Research
   - Maintenance
   - Robotics
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipRoboticist
 
 - type: startingGear
   id: RoboticistGear

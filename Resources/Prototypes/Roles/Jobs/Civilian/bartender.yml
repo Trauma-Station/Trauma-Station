@@ -3,16 +3,13 @@
   name: job-name-bartender
   description: job-description-bartender
   playTimeTracker: JobBartender
-  # requirements: #Trauma
-  #   - !type:DepartmentTimeRequirement
-  #     department: Civilian
-  #     time: 0.5h
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 0.5h
   startingGear: BartenderGear
   icon: "JobIconBartender"
   supervisors: job-supervisors-hop
-  guides: # goobstation
-  - Bartender
-  - Drinks
   access:
   - Service
   - Maintenance
@@ -20,6 +17,15 @@
   extendedAccess:
   - Kitchen
   - Hydroponics
+  # <Trauma>
+  guides:
+  - Bartender
+  - Drinks
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipBartender
+  # </Trauma>
 
 - type: startingGear
   id: BartenderGear

@@ -6,13 +6,13 @@
   objective: roles-antag-shadowling-description
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 54000 # 15 hours
+    time: 5h
   - !type:DepartmentTimeRequirement
     department: Medical
-    time: 7200 # 2 hours
+    time: 1h
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 18000 # 5 hours
+    time: 1h
   guides: [ Shadowlings ]
 
 - type: antag

@@ -5,19 +5,25 @@
   playTimeTracker: JobMime
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 1h # Trauma - was 4h
+      time: 4h
   startingGear: MimeGear
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
   access:
   - Theatre
   - Maintenance
-  #special: # Trauma - moved to skill chip
+  special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipMime
+  # moved to skill chip
   #- !type:AddComponentSpecial
   #  components:
   #  - type: MimePowers
   #    preventWriting: true
   #  - type: FrenchAccent
+  # </Trauma>
 
 - type: startingGear
   id: MimeGear

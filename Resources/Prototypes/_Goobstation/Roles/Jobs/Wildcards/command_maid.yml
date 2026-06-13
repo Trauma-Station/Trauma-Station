@@ -4,11 +4,11 @@
   description: job-description-command-maid
   playTimeTracker: JobCommandMaid
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hrs
-    - !type:RoleTimeRequirement
-      role: JobJanitor
-      time: 3600 #1 hr
+  - !type:OverallPlaytimeRequirement
+    time: 10h
+  - !type:RoleTimeRequirement
+    role: JobJanitor
+    time: 1h
   startingGear: CommandMaidGear
   icon: "JobIconCommandMaid"
   supervisors: job-supervisors-command

@@ -1,4 +1,4 @@
-- type: job # goob edit
+- type: job
   id: Passenger
   name: job-name-passenger
   description: job-description-passenger
@@ -6,11 +6,15 @@
   startingGear: PassengerGear
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
-  guides: [ Civilian ] # Trauma
   access:
   - Maintenance
   # <Trauma>
+  guides:
+  - Civilian
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipPassenger
   - !type:AddComponentSpecial
     components:
     - type: NpcFactionMember

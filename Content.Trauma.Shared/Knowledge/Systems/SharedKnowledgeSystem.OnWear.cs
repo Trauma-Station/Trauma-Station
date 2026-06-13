@@ -5,6 +5,7 @@ using Content.Shared.Clothing;
 using Content.Shared.EntityConditions;
 using Content.Shared.Implants;
 using Content.Trauma.Common.Silicons.Borgs;
+using Content.Trauma.Shared.Body.Chips;
 using Content.Trauma.Shared.Knowledge.Components;
 using Content.Trauma.Shared.MartialArts.Components;
 
@@ -24,6 +25,8 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, BrainRemovedFromBorgEvent>(OnBrainRemovedFromBorg);
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ImplantImplantedEvent>(OnImplantImplanted);
         SubscribeLocalEvent<KnowledgeGrantOnWearComponent, ImplantRemovedEvent>(OnImplantRemoved);
+        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganChipInsertedEvent>(OnGrantKnowledgeChip);
+        SubscribeLocalEvent<KnowledgeGrantOnWearComponent, OrganChipRemovedEvent>(OnRemoveKnowledgeChip);
 
         SubscribeLocalEvent<ModifyKnowledgeGrantComponent, MapInitEvent>(OnModifyGrantMapInit,
             after: [ typeof(InitialBodySystem) ]); // TODO: move this to a partial of KnowledgeGrantSystem bruh...
@@ -52,6 +55,18 @@ public abstract partial class SharedKnowledgeSystem
 
     private void OnImplantRemoved(Entity<KnowledgeGrantOnWearComponent> ent, ref ImplantRemovedEvent args)
         => RemoveKnowledgeModifiers(args.Implanted, ent);
+
+    private void OnGrantKnowledgeChip(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganChipInsertedEvent args)
+    {
+        if (args.Body is { } body)
+            ApplyKnowledgeModifiers(body, ent);
+    }
+
+    private void OnRemoveKnowledgeChip(Entity<KnowledgeGrantOnWearComponent> ent, ref OrganChipRemovedEvent args)
+    {
+        if (args.Body is { } body)
+            RemoveKnowledgeModifiers(body, ent);
+    }
 
     private void OnModifyGrantMapInit(Entity<ModifyKnowledgeGrantComponent> ent, ref MapInitEvent args)
     {
