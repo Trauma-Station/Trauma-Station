@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: antag
   id: LoneAbductorAntag
   name: abductor-lone-ghost-role-name
@@ -9,16 +11,14 @@
   name: abductor-agent-ghost-role-name
   antagonist: true
   objective: roles-antag-abductor-objective
-  # <Goob>
   setPreference: true
   guides: [ Abductors ]
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 180000 #50 hours
+    time: 2h
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 10800 #3 hours
-  # </Goob>
+    time: 1h
   creditImage: /Textures/_Trauma/EndCredits/Antags/abductors.png
 
 - type: antag
@@ -30,10 +30,10 @@
   guides: [ Abductors ]
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 180000 #50 hours
+    time: 2h
   - !type:DepartmentTimeRequirement
     department: Medical
-    time: 10800 #3 hours
+    time: 1h
 
 - type: antag
   id: AbductorVictimAntag

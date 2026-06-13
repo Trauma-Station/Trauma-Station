@@ -15,6 +15,11 @@
   - Kitchen
   - Bar
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipBotanist
+  # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: FourTwenty
     prototype: CannabisSeeds

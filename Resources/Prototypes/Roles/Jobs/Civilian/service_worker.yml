@@ -4,13 +4,12 @@
   description: job-description-serviceworker
   playTimeTracker: JobServiceWorker
   requirements:
-  # - !type:DepartmentTimeRequirement # Trauma
-  #   department: Civilian
-  #   time: 0.5h
+  - !type:DepartmentTimeRequirement
+    department: Civilian
+    time: 0.5h
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
-  guides: [ Service ] # goobstation
   access:
   - Service
   - Maintenance
@@ -18,6 +17,14 @@
   - Kitchen
   extendedAccess:
   - Hydroponics
+  # <Trauma>
+  guides:
+  - Service
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipServiceWorker
+  # </Trauma>
 
 - type: startingGear
   id: ServiceWorkerGear

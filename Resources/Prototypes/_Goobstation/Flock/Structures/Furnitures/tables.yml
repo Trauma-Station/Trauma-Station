@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 #There's no other way I know to make these work, since each sprite is animated. I don't think we have IconSmooth for animated sprites
 - type: entity
   id: BaseTableFlock

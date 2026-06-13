@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Tide Quarterzip for the sophisticated passengers
 - type: loadoutEffectGroup
   id: SophisticatedTider

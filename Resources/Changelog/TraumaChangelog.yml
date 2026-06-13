@@ -10056,3 +10056,56 @@ Entries:
   id: 1138
   time: '2026-06-10T08:51:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3127
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Add
+    message: Added balaclavas as common maints locker loot
+  id: 1139
+  time: '2026-06-10T15:43:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/2703
+- author: Sulfari
+  changes:
+  - type: Tweak
+    message: Vent mobs no longer have a raffle timer.
+  - type: Tweak
+    message: Snakes from vent horde event should be playable now.
+  id: 1140
+  time: '2026-06-10T16:34:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3134
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed being able to learn languages by hearing bots and stuff. Go use
+      the translator implants.
+  id: 1141
+  time: '2026-06-12T20:36:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3147
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reworked skillchips, they can be removed by right clicking instead of
+      needing surgery. They are installed directly into the brain which you can
+      work with as well as the mob itself.
+  - type: Tweak
+    message: Slimepeople's slime core surgery now uses brain instead of stomach.
+  id: 1142
+  time: '2026-06-12T22:56:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3146
+- author: Sulfari, Carolyn3114
+  changes:
+  - type: Add
+    message: Added a new insurgent ship variant.
+  id: 1143
+  time: '2026-06-12T22:57:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3144
+- author: GoidaYAMLWarrior
+  changes:
+  - type: Tweak
+    message: Buffed billy club's attack rate so it swings faster.
+  - type: Tweak
+    message: Added 3 billy clubs to the armory melee locker.
+  id: 1144
+  time: '2026-06-13T05:04:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3153

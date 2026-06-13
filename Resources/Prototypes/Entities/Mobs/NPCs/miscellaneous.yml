@@ -77,8 +77,7 @@
     rules: ghost-role-information-familiar-rules
     mindRoles:
     - MindRoleGhostRoleFamiliar
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: GhostTakeoverAvailable
   - type: CanEscapeInventory
     baseResistTime: 3

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Markings
 
 - type: markingsGroup
@@ -329,7 +331,6 @@
     - Eyes
     - Tongue
     - Ears
-    - BrainChip # USB 6.0
 
 - type: entity
   parent: [ OrganIPCExternal, OrganBaseArmLeft ]

@@ -20,10 +20,10 @@
   extendedAccess:
   - Chemistry
   special:
-  - !type:GiveItemOnHolidaySpecial
-    holiday: DoctorDay
-    prototype: WehMedipen
   # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipMedicalDoctor
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier
@@ -32,6 +32,9 @@
       reviveChance: 0.45 # a bit better at chest compressions
       inhaleChance: 0.75 # decent at mouth to mouth res.
   # </Trauma>
+  - !type:GiveItemOnHolidaySpecial
+    holiday: DoctorDay
+    prototype: WehMedipen
 
 - type: startingGear
   id: DoctorGear

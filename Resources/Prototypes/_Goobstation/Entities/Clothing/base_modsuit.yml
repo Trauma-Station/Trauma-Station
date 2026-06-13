@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Parent for all modsuit pieces in a set
 
 - type: entity

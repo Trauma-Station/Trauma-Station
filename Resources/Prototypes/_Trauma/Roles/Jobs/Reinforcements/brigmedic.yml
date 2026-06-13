@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: job
   id: Brigmedic
   name: job-name-brigmedic
@@ -24,6 +26,9 @@
   - External
   - Cryogenics
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipBrigmedic
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial

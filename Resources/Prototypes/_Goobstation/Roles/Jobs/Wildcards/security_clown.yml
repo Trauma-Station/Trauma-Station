@@ -1,16 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: job
   id: SecurityClown
   name: job-name-security-clown
   description: job-description-security-clown
   playTimeTracker: JobSecurityClown
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hrs
-    - !type:RoleTimeRequirement
-      role: JobClown
-      time: 3600 #1 hr
+  - !type:OverallPlaytimeRequirement
+    time: 10h
+  - !type:RoleTimeRequirement
+    role: JobClown
+    time: 1h
   startingGear: SecurityClownGear
-  icon: "JobIconSecurityClown"
+  icon: JobIconSecurityClown
   supervisors: job-supervisors-security
   setPreference: false
   access:
@@ -22,6 +24,9 @@
   - External
   - Cryogenics
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipSecurityOfficer # TODO: give it some clown one later
   - !type:AddComponentSpecial
     components:
     - type: Clumsy

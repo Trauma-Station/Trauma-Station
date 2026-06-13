@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # where you put the maints chem reactions for tiders, greytide worldwide
 - type: reaction
   id: NitratedSlurryMold
