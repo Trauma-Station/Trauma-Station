@@ -44,9 +44,10 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
-        Blunt: 0
-        Shock: 4
-        Ion: 2
+      # <Trauma>
+        Blunt: 3
+        Shock: 2
+      # </Trauma>
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
