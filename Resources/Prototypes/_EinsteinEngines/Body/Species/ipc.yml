@@ -306,7 +306,7 @@
 ## Parts
 
 - type: entity
-  parent: [ OrganIPCExternal, OrganBaseTorsoSexed, OrganBaseTorso ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganIPCExternal ]
   id: OrganIPCTorso
   components:
   - type: BodyPart
@@ -322,7 +322,7 @@
     - IPCPump
 
 - type: entity
-  parent: [ OrganIPCExternal, OrganBaseHeadSexed, OrganBaseHeadBald ]
+  parent: [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganIPCExternal ]
   id: OrganIPCHead
   components:
   - type: BodyPart
@@ -333,41 +333,41 @@
     - Ears
 
 - type: entity
-  parent: [ OrganIPCExternal, OrganBaseArmLeft ]
+  parent: [ OrganBaseArmLeft, OrganIPCExternal ]
   id: OrganIPCArmLeft
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseArmRight ]
+  parent: [  OrganBaseArmRight, OrganIPCExternal ]
   id: OrganIPCArmRight
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseHandLeft ]
+  parent: [  OrganBaseHandLeft, OrganIPCExternal ]
   id: OrganIPCHandLeft
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseHandRight ]
+  parent: [  OrganBaseHandRight, OrganIPCExternal ]
   id: OrganIPCHandRight
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseLegLeft ]
+  parent: [  OrganBaseLegLeft, OrganIPCExternal ]
   id: OrganIPCLegLeft
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseLegRight ]
+  parent: [  OrganBaseLegRight, OrganIPCExternal ]
   id: OrganIPCLegRight
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseFootLeft ]
+  parent: [  OrganBaseFootLeft, OrganIPCExternal ]
   id: OrganIPCFootLeft
 
 - type: entity
-  parent: [ OrganIPCExternal,  OrganBaseFootRight ]
+  parent: [  OrganBaseFootRight, OrganIPCExternal ]
   id: OrganIPCFootRight
 
 ## Organs
 
 - type: entity
-  parent: [ OrganIPCInternal,  OrganBaseEyes ]
+  parent: [ OrganBaseEyes, OrganIPCInternal ]
   id: OrganIPCEyes
   name: robotic eyes
   description: "01001001 00100000 01110011 01100101 01100101 00100000 01111001 01101111 01110101 00100001"
@@ -377,18 +377,18 @@
       group: IPC
 
 - type: entity
-  parent: [ OrganIPCInternal,  OrganBaseTongue ]
+  parent: [ OrganBaseTongue, OrganIPCInternal ]
   id: OrganIPCTongue
   name: vocal modulator
   description: A vocal modulator, used to produce speech.
 
 - type: entity
-  parent: [ OrganIPCInternal,  OrganBaseEars ]
+  parent: [ OrganBaseEars, OrganIPCInternal ]
   id: OrganIPCEars
   name: sonic receptors
 
 - type: entity
-  parent: [ OrganIPCInternal,  OrganBaseHeart ]
+  parent: [ OrganBaseHeart, OrganIPCInternal ]
   id: OrganIPCPump
   name: micro pump
   description: A micro pump, used to circulate coolant.
