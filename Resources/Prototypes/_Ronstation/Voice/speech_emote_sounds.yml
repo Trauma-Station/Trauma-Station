@@ -7,6 +7,28 @@
       path: /Audio/_Ronstation/Voice/Avali/avali_scream.ogg
     Laugh:
       path: /Audio/_Ronstation/Voice/Avali/avali_laugh.ogg
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
     Honk:
       collection: BikeHorn
     Weh:
@@ -27,6 +49,28 @@
       path: /Audio/_Ronstation/Voice/Avali/avali_scream.ogg
     Laugh:
       path: /Audio/_Ronstation/Voice/Avali/avali_laugh.ogg
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
     Honk:
       collection: BikeHorn
     Weh:

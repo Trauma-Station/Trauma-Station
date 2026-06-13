@@ -8,6 +8,12 @@
   },
   "states": [
     {
+      "name": "appendix"
+    },
+    {
+      "name": "appendix-inflamed"
+    },
+    {
       "name": "brain"
     },
     {
@@ -17,6 +23,23 @@
     {
       "name": "brain-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "ears"
+    },
+    {
+      "name": "eyeballs-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "eyeballs-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "eyeball-l"
+    },
+    {
+      "name": "eyeball-r"
     },
     {
       "name": "heart-off"

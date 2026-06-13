@@ -1,5 +1,5 @@
 - type: speechSounds
-  id: MaleAvali
+  id: MaleResomi
   saySound:
     path: /Audio/_Ronstation/Voice/Talk/avali_1.ogg
   askSound:
@@ -8,7 +8,7 @@
     path: /Audio/_Ronstation/Voice/Talk/avali_1_exclaim.ogg
 
 - type: speechSounds
-  id: FemaleAvali
+  id: FemaleResomi
   saySound:
     path: /Audio/_Ronstation/Voice/Talk/avali_2.ogg
   askSound:

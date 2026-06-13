@@ -161,8 +161,7 @@
         layer:
         - MobLayer
   - type: Speech
-    speechVerb: Parrot # RMC did it right.
-    speechSounds: MaleAvali
+    speechSounds: MaleResomi
   - type: Vocal
     sounds:
       Male: MaleAvali
@@ -230,7 +229,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/organs.rsi
+    sprite: _Ronstation/Mobs/Species/Avali/organs.rsi # Starlight Sprites
 
 - type: entity
   id: OrganAvaliVisual

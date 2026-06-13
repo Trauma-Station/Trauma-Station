@@ -132,6 +132,42 @@
   files:
   - /Audio/Animals/mouse_squeak.ogg
 
+# MaleAvali
+- type: soundCollection
+  id: MaleAvaliBark
+  files:
+  - /Audio/_Ronstation/Voice/Talk/avali_1.ogg
+  - /Audio/_Ronstation/Voice/Talk/avali_1_ask.ogg
+  - /Audio/_Ronstation/Voice/Talk/avali_1_exclaim.ogg
+
+- type: bark
+  id: MaleAvali
+  name: MaleAvali
+  frequency: 0.5
+  volume: 0.7
+  soundCollection:
+    collection: MaleAvaliBark
+  speciesWhitelist:
+  - Avali
+
+# FemaleAvali
+- type: soundCollection
+  id: FemaleAvaliBark
+  files:
+  - /Audio/_Ronstation/Voice/Talk/avali_2.ogg
+  - /Audio/_Ronstation/Voice/Talk/avali_2_ask.ogg
+  - /Audio/_Ronstation/Voice/Talk/avali_2_exclaim.ogg
+
+- type: bark
+  id: FemaleAvali
+  name: FemaleAvali
+  volume: 0.7
+  frequency: 0.5
+  soundCollection:
+    collection: FemaleAvaliBark
+  speciesWhitelist:
+  - Avali
+
 # Pai
 - type: soundCollection
   id: PaiBark
