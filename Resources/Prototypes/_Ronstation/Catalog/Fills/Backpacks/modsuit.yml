@@ -1,0 +1,40 @@
+# Filled modsuit for ERT Engineer admeme loadout, now featuring the relevant modsuit :D
+- type: entity
+  id: ClothingModsuitERTEngineerFilled
+  parent: ClothingModsuitResponsoryEngineering
+  suffix: Admeme, ERT Engineer, Microreactor # Microreactors are standard for these.
+  name: ERT Engineer Backpack
+  components:
+  - type: StorageFill
+    contents:
+    - id: RCDExperimental
+    - id: BoxSurvivalSlotsEngineering
+    - id: DoubleEmergencyNitrogenTankFilled
+    - id: BoxFlare
+    - id: LanternFlash
+    - id: Flash
+    - id: WeaponPistolN1984
+    - id: TelescopicBaton
+    - id: MagazineMagnum
+    - id: MagazineMagnum
+    - id: MagazineMagnum
+# Filled modsuit for ERT leader admeme
+- type: entity
+  parent: ClothingModsuitResponsoryLeader
+  id: ClothingModsuitERTLeaderFilled
+  suffix: Admeme, ERT Leader, Microreactor
+  name: ERT Engineer Backpack
+  components:
+    - type: StorageFill
+      contents:
+      - id: RCDExperimental
+      - id: BoxSurvivalSlotsEngineering
+      - id: DoubleEmergencyNitrogenTankFilled
+      - id: BoxFlare
+      - id: Flash
+      - id: WeaponRevolverMateba
+      - id: SpeedLoaderMagnum
+      - id: SpeedLoaderMagnum
+      - id: SpeedLoaderMagnum
+      - id: MagazineShotgunLeverRifle
+      - id: MagazineShotgunLeverRifle

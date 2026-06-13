@@ -4,7 +4,7 @@
     jumpsuit: ClothingUniformJumpsuitCentcomFormal
     back: ClothingBackpackSatchelHoldingCentcomFormalFilled
     shoes: ClothingShoesBootsCombatFilled
-    eyes: ClothingEyesGlassesSunglasses
+    eyes: ClothingEyesGlassesMedSec
     gloves: ClothingHandsGlovesCombat
     id: CentcomPDA
     ears: ClothingHeadsetCentCom
@@ -37,7 +37,8 @@
     head: ClothingHeadHatCentcomcap
     mask: ClothingMaskGasCentcom
     outerClothing: ClothingOuterArmorCentcommCarapace
-    eyes: ClothingEyesGlassesSecurity
+    gloves: ClothingHandsGlovesCombat # Whoops. Forgot something.
+    eyes: ClothingEyesGlassesDeathsquad # Experimenting. Item in game is called "Central Commander Shades"
     id: CentcomPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSheathFilled
