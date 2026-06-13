@@ -16,7 +16,7 @@
 
 - type: entity
   id: OrganBase
-  name: organ
+  #name: organ # Trauma - less chuddy inheritance
   abstract: true
   parent: BaseItem
   components:
