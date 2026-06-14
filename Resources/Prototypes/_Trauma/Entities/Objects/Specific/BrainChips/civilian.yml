@@ -119,7 +119,7 @@
     skills:
       ToysKnowledge: 25
       FabricationKnowledge: 25
-  - type: OrganComponents
+  - type: OrganChipComponents
     onAdd:
     - type: MimePowers # merci
       preventWriting: true
