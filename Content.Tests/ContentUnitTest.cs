@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Trauma.Client.IoC;
+using Content.Trauma.Server.IoC;
+// </Trauma>
 using System.Collections.Generic;
 using System.Reflection;
 using Content.Client.IoC;
@@ -19,10 +23,16 @@ namespace Content.Tests
 
             if (Project == UnitTestProject.Server)
             {
+                // <Trauma>
+                ServerTraumaContentIoC.Register(dependencies);
+                // </Trauma>
                 ServerContentIoC.Register(dependencies);
             }
             else if (Project == UnitTestProject.Client)
             {
+                // <Trauma>
+                ClientTraumaContentIoC.Register(dependencies);
+                // </Trauma>
                 ClientContentIoC.Register(dependencies);
             }
         }
