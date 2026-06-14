@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Server.LinkAccount;
 using Content.Trauma.Common.Chat;
+using Content.Trauma.Common.LinkAccount;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace Content.Server.Chat.Managers;
 internal sealed partial class ChatManager : IChatManager
 {
     // <Trauma>
-    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private ILinkAccountManager _linkAccount = default!;
     // </Trauma>
     private static readonly Dictionary<string, string> PatronOocColors = new()
     {
@@ -283,7 +283,7 @@ internal sealed partial class ChatManager : IChatManager
             colorOverride = prefs.AdminOOCColor;
         }
         if (  _netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-            _linkAccount.GetPatron(player)?.Tier != null) // RMC - Patreon
+            _linkAccount.IsPatron(player)) // Trauma - replace patron method
         {
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#aa00ff"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message))); // RMC - Patreon
         }

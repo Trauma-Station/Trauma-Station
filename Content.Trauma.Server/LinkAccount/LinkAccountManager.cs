@@ -4,15 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Trauma.Common.LinkAccount;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Color = System.Drawing.Color;
 
-namespace Content.Server.LinkAccount;
+namespace Content.Trauma.Server.LinkAccount;
 
-public sealed partial class LinkAccountManager : IPostInjectInit
+public sealed partial class LinkAccountManager : ILinkAccountManager
 {
     [Dependency] private IServerDbManager _db = default!;
     [Dependency] private INetManager _net = default!;
@@ -57,11 +55,11 @@ public sealed partial class LinkAccountManager : IPostInjectInit
             shoutouts = new SharedRMCRoundEndShoutouts(ntName);
 
 
-        Robust.Shared.Maths.Color? ghostColor = null;
+        Color? ghostColor = null;
         if (patron?.GhostColor is { } patronColor)
         {
-            var sysColor = Color.FromArgb(patronColor);
-            ghostColor = new Robust.Shared.Maths.Color(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
+            var sysColor = System.Drawing.Color.FromArgb(patronColor);
+            ghostColor = new Color(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
         }
 
         _connected[player.UserId] = new SharedRMCPatronFull(sharedTier, linked, ghostColor, lobbyMessage, shoutouts);
@@ -146,13 +144,14 @@ public sealed partial class LinkAccountManager : IPostInjectInit
         _db.SetNTShoutout(user, name);
     }
 
-    private void SetGhostColor(NetUserId user, Robust.Shared.Maths.Color? color)
+    private void SetGhostColor(NetUserId user, Color? color)
     {
         if (GetPatron(user)?.Tier is not { GhostColor: true })
             return;
 
-        Color? sysColor = color == null ? null : Color.FromArgb(color.Value.ToArgb());
-        _db.SetGhostColor(user, sysColor);
+        _db.SetGhostColor(user, color == null
+            ? null
+            : System.Drawing.Color.FromArgb(color.Value.ToArgb()));
 
         if (_connected.TryGetValue(user, out var connected))
         {
@@ -211,15 +210,23 @@ public sealed partial class LinkAccountManager : IPostInjectInit
         _net.ServerSendMessage(msg, player.Channel);
     }
 
+    public IReadOnlyList<SharedRMCPatron> GetPatrons()
+        => _allPatrons;
+
+    public bool IsPatron(ICommonSession player)
+        => GetPatron(player)?.Tier != null;
+
+    public bool IsPatron()
+        => false;
+
+    public bool CanViewPatronPerks()
+        => false;
+
     public SharedRMCPatronFull? GetPatron(ICommonSession player)
-    {
-        return GetPatron(player.UserId);
-    }
+        => GetPatron(player.UserId);
 
     public SharedRMCPatronFull? GetPatron(NetUserId userId)
-    {
-        return _connected.GetValueOrDefault(userId);
-    }
+        => _connected.GetValueOrDefault(userId);
 
     void IPostInjectInit.PostInject()
     {
