@@ -10109,3 +10109,58 @@ Entries:
   id: 1144
   time: '2026-06-13T05:04:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3153
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed all IPC organs/parts just being called "organ".
+  id: 1145
+  time: '2026-06-13T05:44:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3157
+- author: Aviu
+  changes:
+  - type: Add
+    message: Mouse wheel to zoom.
+  - type: Add
+    message: Shift + mouse wheel to change targeting.
+  - type: Add
+    message: Ctrl + mouse wheel to rotate camera.
+  id: 1146
+  time: '2026-06-13T15:15:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3126
+- author: TechnicFighter, Graves
+  changes:
+  - type: Add
+    message: Added the Monarch Coat to the uplink.
+  id: 1147
+  time: '2026-06-13T15:17:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3150
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed IPCs not taking ion damage. Set justice to ion.
+  id: 1148
+  time: '2026-06-13T15:29:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3166
+- author: Sanyati
+  changes:
+  - type: Add
+    message: Added Reptilian stealth suit sprites.
+  id: 1149
+  time: '2026-06-13T16:48:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3159
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed IPC's and people with pAI's not being able to raise shields.
+  id: 1150
+  time: '2026-06-13T20:23:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3160
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix blade path quick infusing with both blades in hand not working.
+  - type: Fix
+    message: Rust mansus grasp now delays the action when rusting objects.
+  id: 1151
+  time: '2026-06-14T15:29:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3172
