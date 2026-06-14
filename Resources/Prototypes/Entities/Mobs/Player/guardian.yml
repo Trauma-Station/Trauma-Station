@@ -170,6 +170,18 @@
   id: MobIfritGuardian
   description: A corrupted jinn, ripped from fitra to serve the wizard's petty needs. It stands wicked, tuning into its owner's life to sustain itself.
   components:
+    # <Trauma>
+    - type: NpcFactionMember
+      factions:
+      - Wizard
+    - type: HTN
+      rootTask:
+        task: SimpleHumanoidHostileCompound
+    - type: Tag
+      tags:
+      - CannotSuicide
+      - ShowWizardIcons
+    # </Trauma>
     - type: GhostRole
       allowMovement: true
       allowSpeech: true
@@ -192,16 +204,6 @@
           map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
           color: "#40a7d7"
           shader: unshaded
-    - type: NpcFactionMember # Goobstation
-      factions:
-        - Wizard
-    - type: HTN # Goobstation
-      rootTask:
-        task: SimpleHumanoidHostileCompound
-    - type: Tag # Goobstation
-      tags:
-        - CannotSuicide
-        - ShowWizardIcons
 
 - type: entity
   name: HoloClown
@@ -209,6 +211,9 @@
   parent: [MobGuardianBase, InventoryBase]
   description: A mesmerising whirl of hard-light patterns weaves a blue colored clown of dubious origin.
   components:
+    # <Trauma>
+    - type: DoAfter # for prying and stuff with held items
+    # </Trauma>
     - type: GhostRole
       allowMovement: true
       allowSpeech: true
@@ -289,22 +294,5 @@
   - type: Action
     icon: Interface/Actions/manifest.png
     useDelay: 2
-    checkCanInteract: false
-    checkConsciousness: false
   - type: InstantAction
     event: !type:GuardianToggleActionEvent
-
-# Goobstation
-- type: entity
-  parent: BaseMentalAction
-  id: ActionSelfToggleGuardian
-  name: Recall Self
-  description: Recalls yourself back into your host's body
-  components:
-  - type: Action
-    icon: Interface/Actions/manifest.png
-    useDelay: 2
-    checkCanInteract: false
-    checkConsciousness: false
-  - type: InstantAction
-    event: !type:GuardianToggleSelfActionEvent # can only recall

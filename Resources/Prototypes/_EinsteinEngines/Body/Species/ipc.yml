@@ -258,7 +258,6 @@
 
 - type: entity
   abstract: true
-  parent: OrganBase
   id: OrganIPC
   suffix: IPC
   components:
