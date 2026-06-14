@@ -1,7 +1,7 @@
 - type: gameMap
   id: Kettle
   mapName: 'Kettle'
-  mapPath: /Maps/_Trauma/kettle.yml
+  mapPath: /Maps/_Ronstation/kettleron.yml
   minPlayers: 35
   stations:
     Kettle:
@@ -19,6 +19,7 @@
           # Command
           Captain: [ 1, 1 ]
           NanotrasenRepresentative: [ 1, 1 ]
+          BlueshieldOfficer: [ 1, 1 ]
           # Silicon
           StationAi: [ 1, 1 ]
           Borg: [ 2, 2 ]

@@ -1,7 +1,7 @@
 - type: gameMap
   id: Leonid
   mapName: 'Leonid Station'
-  mapPath: /Maps/_Trauma/leonid.yml
+  mapPath: /Maps/_Ronstation/leonidron.yml
   minPlayers: 50
   stations:
     Leonid:
@@ -20,6 +20,7 @@
           # Command
           Captain: [ 1, 1 ]
           NanotrasenRepresentative: [ 1, 1 ]
+          BlueshieldOfficer: [ 1, 1 ]
           # Silicon
           StationAi: [ 1, 1 ]
           Borg: [ 4, 4 ]

@@ -1,7 +1,7 @@
 - type: gameMap
   id: Bagel
   mapName: 'Bagel Station'
-  mapPath: /Maps/_Trauma/bagel.yml
+  mapPath: /Maps/_Ronstation/bagelron.yml
   minPlayers: 20
   maxPlayers: 80
   stations:
@@ -19,6 +19,7 @@
             # Command
             Captain: [ 1, 1 ]
             NanotrasenRepresentative: [ 1, 1 ]
+            BlueshieldOfficer: [ 1, 1 ]
             # Silicon
             StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]

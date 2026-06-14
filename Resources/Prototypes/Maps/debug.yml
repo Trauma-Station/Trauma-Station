@@ -16,7 +16,7 @@
 - type: gameMap
   id: Dev
   mapName: Dev
-  mapPath: /Maps/_Trauma/Test/dev_map.yml # Trauma
+  mapPath: /Maps/_Ronstation/Test/dev_mapron.yml # Ronstation
   minPlayers: 0
   stations:
     Dev:
@@ -27,6 +27,8 @@
         - type: StationJobs
           availableJobs:
             Captain: [ -1, -1 ]
+            NanotrasenRepresentative: [ -1, -1 ]
+            BlueshieldOfficer: [ -1, -1 ]
         - type: StationBlobConfig
           stageBegin: 20
           stageCritical: 50
