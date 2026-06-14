@@ -152,7 +152,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseClothingViewconeSmall # Trauma
+  parent: BaseClothingViewconeSmallIncrease # Trauma
   # No parent since we aren't actually an item.
   id: ClothingHeadHardsuitBase
   name: base hardsuit helmet
