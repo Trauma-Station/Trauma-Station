@@ -14,14 +14,14 @@ public sealed partial class LobbyState
 
     private void StartupTrauma()
     {
-        Lobby.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
+        Lobby!.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
         _currency.ClientBalanceChange += UpdatePlayerBalance;
         OnCreated?.Invoke(this);
     }
 
     private void ShutdownTrauma()
     {
-        Lobby.CharacterPreview.PatronPerks.OnPressed -= OnPatronPerksPressed;
+        Lobby!.CharacterPreview.PatronPerks.OnPressed -= OnPatronPerksPressed;
         _currency.ClientBalanceChange -= UpdatePlayerBalance;
     }
 
