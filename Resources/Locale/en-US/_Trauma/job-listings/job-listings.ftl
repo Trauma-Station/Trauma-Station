@@ -1,2 +1,6 @@
 job-listings-ui-default-title = Job Listings
 job-listings-ui-reward = Reward: {$reward}
+job-listings-ui-accepted-label = Accepted
+job-listings-ui-available-label = Available
+job-listings-ui-no-accepted-note = No jobs currently accepted...
+job-listings-ui-no-available-note = No jobs currently offered...

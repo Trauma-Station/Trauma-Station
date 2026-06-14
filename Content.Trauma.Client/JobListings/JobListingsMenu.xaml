@@ -27,7 +27,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <BoxContainer Orientation="Vertical" VerticalExpand="True" >
                         <Label
                             Name="AcceptedJobListingsLabel"
-                            Text="Accepted"/>
+                            Text="{Loc job-listings-ui-accepted-label}"/>
                         <PanelContainer VerticalExpand="True" MinSize="0 100">
                             <PanelContainer.PanelOverride>
                                 <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
@@ -36,7 +36,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                 Name="AcceptedJobListingsNote"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Text="No jobs currently accepted..."/>
+                                Text="{Loc job-listings-ui-no-accepted-note}"/>
                             <BoxContainer
                                 Name="AcceptedJobListingsContainer"
                                 Orientation="Vertical"
@@ -50,7 +50,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <BoxContainer Orientation="Vertical" VerticalExpand="True">
                         <Label
                             Name="AvailableJobListingsLabel"
-                            Text="Available"/>
+                            Text="{Loc job-listings-ui-available-label}"/>
                         <PanelContainer VerticalExpand="True" MinSize="0 100">
                             <PanelContainer.PanelOverride>
                                 <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
@@ -59,7 +59,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                     Name="AvailableJobListingsNote"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Text="No jobs currently offered..."/>
+                                    Text="job-listings-ui-no-available-note"/>
                                 <BoxContainer
                                     Name="AvailableJobListingsContainer"
                                     Orientation="Vertical"
