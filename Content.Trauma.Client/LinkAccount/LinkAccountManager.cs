@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.LinkAccount;
-using Robust.Shared.Network;
+using Robust.Shared.Player;
 
-namespace Content.Client.LinkAccount;
+namespace Content.Trauma.Client.LinkAccount;
 
-public sealed partial class LinkAccountManager : IPostInjectInit
+public sealed partial class LinkAccountManager : ILinkAccountManager
 {
     [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     private readonly List<SharedRMCPatron> _allPatrons = [];
 
@@ -43,14 +44,20 @@ public sealed partial class LinkAccountManager : IPostInjectInit
     }
 
     public IReadOnlyList<SharedRMCPatron> GetPatrons()
-    {
-        return _allPatrons;
-    }
+        => _allPatrons;
+
+    public bool IsPatron(ICommonSession player)
+        => player == _player.LocalSession && IsPatron();
+
+    public bool IsPatron()
+#if DEBUG
+        => true;
+#else
+        => Tier != null;
+#endif
 
     public bool CanViewPatronPerks()
-    {
-        return Tier is { } tier && (tier.GhostColor || tier.LobbyMessage || tier.RoundEndShoutout);
-    }
+        => Tier is { } tier && (tier.GhostColor || tier.LobbyMessage || tier.RoundEndShoutout);
 
     void IPostInjectInit.PostInject()
     {
