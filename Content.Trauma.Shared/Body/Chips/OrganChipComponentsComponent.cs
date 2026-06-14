@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Medical.Common.Body;
+namespace Content.Trauma.Shared.Body.Chips;
 
 /// <summary>
 /// Adds and removes components from the body this organ chip is installed into.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class OrganChipComponentsComponent : Component
 {
     /// <summary>
