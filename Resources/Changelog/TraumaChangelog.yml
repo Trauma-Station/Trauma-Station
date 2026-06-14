@@ -10155,3 +10155,12 @@ Entries:
   id: 1150
   time: '2026-06-13T20:23:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3160
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix blade path quick infusing with both blades in hand not working.
+  - type: Fix
+    message: Rust mansus grasp now delays the action when rusting objects.
+  id: 1151
+  time: '2026-06-14T15:29:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3172
