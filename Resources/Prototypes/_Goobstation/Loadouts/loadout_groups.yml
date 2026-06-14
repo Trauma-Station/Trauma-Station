@@ -1,24 +1,3 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 DarkenedSynergy <70016079+DarkenedSynergy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Theapug <159912420+Teapug@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Weide <64257676+Lyacs@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Jarl <140098675+JarlElbowses@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Jarl <elliotacline@gmail.com>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 grub <unalterableness@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-# SPDX-FileCopyrightText: 2025 shityaml <unalterableness@gmail.com>
-# SPDX-FileCopyrightText: 2025 jvne <juneialduncan21@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # RD
@@ -58,7 +37,6 @@
   maxLimit: 1
   loadouts:
   - ScientistEnvirohelm
-  - RoboticistEnvirohelm
 
 - type: loadoutGroup
   id: ScientistEnvirosuit
@@ -67,7 +45,6 @@
   maxLimit: 1
   loadouts:
   - ScientistEnvirosuit
-  - RoboticistEnvirosuit
 
 - type: loadoutGroup
   id: ScientistEnvirogloves
@@ -75,8 +52,33 @@
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - RoboticistEnvirogloves
   - WhiteEnvirogloves
+
+# Roboticist
+
+- type: loadoutGroup
+  id: RoboticistEnvirohelm
+  name: loadout-group-roboticist-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RoboticistEnvirohelm
+
+- type: loadoutGroup
+  id: RoboticistEnvirosuit
+  name: loadout-group-roboticist-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RoboticistEnvirosuit
+
+- type: loadoutGroup
+  id: RoboticistEnvirogloves
+  name: loadout-group-roboticist-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RoboticistEnvirogloves
 
 # Research Assistant
 
@@ -1011,7 +1013,7 @@
   name: loadout-group-security-neck
   minLimit: 0
   loadouts:
-  - Bodycam # Goobstation - Body cameras
+  - Bodycam
   - ClothingNeckCWPSec
 
 #honkops
@@ -1082,7 +1084,7 @@
   loadouts:
   - RoboticistJumpsuit
   - RoboticistJumpskirt
-  - ResearchMJ # goob
+  - ResearchMJ
 
 - type: loadoutGroup
   id: RoboticistBackpack
@@ -1226,14 +1228,6 @@
   maxLimit: 1
   loadouts:
   - CombatEnvirogloves
-
-- type: loadoutGroup
-  id: HeadofSecurityGloves
-  name: loadout-group-head-of-security-gloves
-  minLimit: 1
-  maxLimit: 1
-  loadouts:
-  - GorillaGloves
 # Brigmedic
 
 - type: loadoutGroup
@@ -1321,7 +1315,7 @@
   loadouts:
    - VirologistJumpsuit
    - VirologistJumpskirt
-   - VirologistMJ # goobin
+   - VirologistMJ
 
 - type: loadoutGroup
   id: VirologistBackpack

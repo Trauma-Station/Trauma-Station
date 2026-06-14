@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent:
   - BaseMob
@@ -74,8 +76,9 @@
       125: 0.9
       150: 0.8
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Xenomorph
+  - type: Injurable
+    damageContainer: Biological
   - type: Stamina
     baseCritThreshold: 500
   - type: Fixtures
@@ -120,10 +123,10 @@
     specificHeat: 42
   - type: TemperatureDamage
     heatDamageThreshold: 600
-    coldDamageThreshold: -150
+    coldDamageThreshold: 100 # Trauma, was -150
     coldDamage: #per second, scales with temperature & other constants
       types:
-        Cold: 0.1
+        Cold: 0.25 # Trauma, was 0.1
     heatDamage: #per second, scales with temperature & other constants
       types:
         Heat: 1.5
@@ -176,9 +179,10 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
-  - type: Prying #Switched from Tools component to this
-    speedModifier: 1.5
+  - type: Prying
+    speedModifier: 5
     pryPowered: true
+    useSound: /Audio/Machines/airlock_creaking.ogg
   - type: ComplexInteraction
   - type: Hands
   - type: ShowHealthIcons
@@ -231,3 +235,29 @@
         false
       Inventory: !type:Bool
         false
+
+- type: entity
+  abstract: true
+  id: BaseXenoTailed
+  components:
+  - type: TailedEntity
+    amount: 17
+    spacing: 0.170
+    prototype: MobXenomorphTailSegmentBase
+    tailOffset: 0, -0.13
+    headFollowSegmentRotation: false
+
+- type: entity
+  abstract: true
+  id: BaseXenomorphGhostRole
+  components:
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    rules: ghost-role-information-rules-default-xeno
+    mindRoles:
+    - MindRoleXenomorph
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable

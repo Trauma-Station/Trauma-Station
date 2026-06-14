@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Goobstation.Server.Wizard.Components;
+namespace Content.Trauma.Server.Wizard.Components;
 
 [RegisterComponent]
 public sealed partial class GravPulseOnMapInitComponent : Component

@@ -10,7 +10,7 @@ public sealed partial class HereticCosmicMarkComponent : Component
     public EntityUid? CosmicDiamondUid;
 
     [DataField, AutoNetworkedField]
-    public int PathStage;
+    public int PassiveLevel;
 
     [DataField]
     public EntProtoId CosmicDiamond = "EffectCosmicDiamond";

@@ -1,7 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -12,12 +8,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-holywater
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Holywater
-          Quantity: 200
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 200
 
 - type: entity
   parent: Jug
@@ -27,12 +22,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-salicylic-acid
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: SalicylicAcid
-          Quantity: 200
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SalicylicAcid
+        Quantity: 200
 
 - type: entity
   parent: Jug
@@ -42,9 +36,8 @@
   components:
   - type: Label
     currentLabel: reagent-name-oxandrolone
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        reagents:
-        - ReagentId: Oxandrolone
-          Quantity: 200
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Oxandrolone
+        Quantity: 200

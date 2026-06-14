@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: gameMap
   id: Fland
   mapName: 'Fland Installation'
@@ -14,7 +16,7 @@
       - type: StationEmergencyShuttle
         emergencyShuttlePath: /Maps/Shuttles/emergency_delta.yml
       - type: StationCargoShuttle
-        path: /Maps/Shuttles/cargo_fland.yml
+        path: /Maps/_Trauma/Shuttles/cargo_fland.yml
       - type: StationJobs
         availableJobs:
           # Command

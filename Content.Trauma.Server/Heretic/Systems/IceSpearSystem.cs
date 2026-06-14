@@ -13,11 +13,11 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class IceSpearSystem : EntitySystem
+public sealed partial class IceSpearSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
 
     public override void Initialize()
     {

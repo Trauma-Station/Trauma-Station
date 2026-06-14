@@ -25,17 +25,17 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 
-public abstract class SharedShadowlingSystem : EntitySystem
+public abstract partial class SharedShadowlingSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedLightDetectionDamageSystem _lightDamage = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private SharedLightDetectionDamageSystem _lightDamage = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     public static readonly ProtoId<OrganCategoryPrototype> TorsoCategory = "Torso";

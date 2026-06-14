@@ -1,13 +1,17 @@
+// <Trauma>
+using Robust.Shared.GameStates;
+// </Trauma>
 using Content.Shared.Destructible.Thresholds;
 
 namespace Content.Shared.Destructible
 {
     /// <summary>
-    ///     Trauma - moved to shared
+    ///     Trauma - moved to shared and networked
     ///     When attached to an <see cref="Robust.Shared.GameObjects.EntityUid"/>, allows it to take damage
     ///     and triggers thresholds when reached.
     /// </summary>
     [RegisterComponent]
+    [NetworkedComponent, AutoGenerateComponentState] // Trauma
     public sealed partial class DestructibleComponent : Component
     {
         /// <summary>

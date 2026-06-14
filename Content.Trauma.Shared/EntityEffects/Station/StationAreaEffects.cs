@@ -38,17 +38,14 @@ public sealed partial class StationAreaEffects : EntityEffectBase<StationAreaEff
     /// </summary>
     [DataField]
     public bool CheckBlocked = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
 }
 
-public sealed class StationAreaEffectsSystem : EntityEffectSystem<StationDataComponent, StationAreaEffects>
+public sealed partial class StationAreaEffectsSystem : EntityEffectSystem<StationDataComponent, StationAreaEffects>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private List<EntityUid> _areas = new();
 
@@ -80,7 +77,7 @@ public sealed class StationAreaEffectsSystem : EntityEffectSystem<StationDataCom
                 return;
 
             var area = _random.PickAndTake(_areas);
-            _effects.ApplyEffects(area, e.Effects);
+            _effects.ApplyEffects(area, e.Effects, args.Scale, args.User, args.Predicted);
         }
     }
 }

@@ -23,17 +23,6 @@
           whitelist:
             components:
               - PowerCell
-    - type: ChameleonClothing
-      slot: [back]
-      default: ClothingModsuitContractor
-    - type: UserInterface
-      interfaces:
-        enum.ChameleonUiKey.Key:
-          type: ChameleonBoundUserInterface
-        enum.ToggleClothingUiKey.Key:
-          type: ToggleableClothingBoundUserInterface
-    - type: ExplosionResistance
-      damageCoefficient: 0.1
 
 - type: entity
   parent: [ClothingModsuitGauntletsStandard, BaseSyndicateContraband]

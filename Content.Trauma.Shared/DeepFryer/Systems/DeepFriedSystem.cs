@@ -7,9 +7,9 @@ using Content.Trauma.Shared.DeepFryer.Components;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
 
-public sealed class DeepFriedSystem : EntitySystem
+public sealed partial class DeepFriedSystem : EntitySystem
 {
-    [Dependency] private static readonly ProtoId<FlavorPrototype> Flavor= "DeepFried";
+    private static readonly ProtoId<FlavorPrototype> Flavor = "DeepFried";
 
     public override void Initialize()
     {

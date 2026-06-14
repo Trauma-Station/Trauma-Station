@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: forgedItem
   id: MorningstarHead
   category: Bludgeons
@@ -6,7 +8,7 @@
   finished: ForgedMorningstar
   sprite: _Trauma/Objects/Specific/Forging/Unfinished/morningstar_head.rsi
   work: 300 # its a fucking morningstar
-  cost: 3
+  cost: 2
   skills:
     MetalworkingKnowledge: 2
     WeaponsKnowledge: 2

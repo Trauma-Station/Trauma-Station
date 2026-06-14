@@ -9,7 +9,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
 using Content.Shared.Physics;
-using System.Numerics;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
@@ -21,12 +20,12 @@ namespace Content.Trauma.Server.FireControl;
 
 public sealed partial class FireControlSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
 
     /// <summary>
     /// Dictionary of entities that have visualization enabled
@@ -392,15 +391,15 @@ public sealed partial class FireControlSystem : EntitySystem
 
             var weaponX = Transform(localWeapon);
             var currentMapCoords = _xform.GetMapCoordinates(localWeapon, weaponX);
-            var destinationMapCoords = targetCoords.ToMap(EntityManager, _xform);
+            var targetPos = _xform.ToMapCoordinates(targetCoords);
 
-            if (destinationMapCoords.MapId == currentMapCoords.MapId && currentMapCoords.MapId != MapId.Nullspace)
+            if (targetPos.MapId == currentMapCoords.MapId && currentMapCoords.MapId != MapId.Nullspace)
             {
-                var diff = destinationMapCoords.Position - currentMapCoords.Position;
+                var diff = targetPos.Position - currentMapCoords.Position;
                 if (diff.LengthSquared() > 0.01f)
                 {
                     // Only rotate the gun if it has line of sight to the target
-                    if (HasLineOfSight(localWeapon, currentMapCoords.Position, destinationMapCoords.Position, currentMapCoords.MapId))
+                    if (HasLineOfSight(localWeapon, currentMapCoords.Position, targetPos.Position, currentMapCoords.MapId))
                     {
                         var goalAngle = Angle.FromWorldVec(diff);
                         _rotateToFace.TryRotateTo(localWeapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponX);
@@ -408,7 +407,6 @@ public sealed partial class FireControlSystem : EntitySystem
                 }
             }
 
-            var targetPos = targetCoords.ToMap(EntityManager, _xform);
 
             if (targetPos.MapId != weaponX.MapID)
                 continue;
@@ -428,7 +426,7 @@ public sealed partial class FireControlSystem : EntitySystem
                 continue;
 
             // If we can fire, fire the weapon
-            _gun.AttemptShoot(localWeapon, localWeapon, gun, targetCoords);
+            _gun.AttemptShoot(localWeapon, (localWeapon, gun), targetCoords);
         }
     }
 
@@ -497,7 +495,7 @@ public sealed partial class FireControlSystem : EntitySystem
         // Get weapon and target positions
         var weaponXform = Transform(weapon);
         var weaponPos = _xform.GetWorldPosition(weaponXform);
-        var targetPos = coords.ToMap(EntityManager, _xform).Position;
+        var targetPos = _xform.ToMapCoordinates(coords).Position;
 
         // Calculate direction
         var direction = targetPos - weaponPos;
@@ -517,7 +515,7 @@ public sealed partial class FireControlSystem : EntitySystem
         // Try to get a gun component and fire the weapon
         if (TryComp<GunComponent>(weapon, out var gun))
         {
-            _gun.AttemptShoot(weapon, user, gun, coords);
+            _gun.AttemptShoot(user, (weapon, gun), coords);
             return true;
         }
 

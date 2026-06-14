@@ -6,9 +6,9 @@ using Content.Shared.Implants.Components;
 
 namespace Content.Trauma.Shared.Implants;
 
-public sealed class ImplantRelaySystem : EntitySystem
+public sealed partial class ImplantRelaySystem : EntitySystem
 {
-    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private SharedSubdermalImplantSystem _implant = default!;
 
     public override void Initialize()
     {

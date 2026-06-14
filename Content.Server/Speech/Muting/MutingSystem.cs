@@ -12,12 +12,12 @@ using Content.Shared.Speech.Muting;
 
 namespace Content.Server.Speech.Muting
 {
-    public sealed class MutingSystem : EntitySystem
+    public sealed partial class MutingSystem : EntitySystem
     {
         // <Trauma>
-        [Dependency] private readonly CommonLanguageSystem _languages = default!;
+        [Dependency] private CommonLanguageSystem _languages = default!;
         // </Trauma>
-        [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private PopupSystem _popupSystem = default!;
 
         public override void Initialize()
         {

@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Mind;
 /// System for seeing if someone is truly evil.
 /// Unrelated to validhood.
 /// </summary>
-public sealed class EvilSystem : EntitySystem
+public sealed partial class EvilSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {

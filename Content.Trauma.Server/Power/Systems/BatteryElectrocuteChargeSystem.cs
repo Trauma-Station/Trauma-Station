@@ -9,11 +9,11 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Power.Systems;
 
-public sealed class BatteryElectrocuteChargeSystem : EntitySystem
+public sealed partial class BatteryElectrocuteChargeSystem : EntitySystem
 {
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BatterySystem _battery = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

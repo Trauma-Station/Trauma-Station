@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 
 public sealed partial class HauntedSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();

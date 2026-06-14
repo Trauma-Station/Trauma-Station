@@ -40,9 +40,9 @@ namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
-        [Dependency] private readonly DiscordWebhook _discord = default!;
-        [Dependency] private readonly RoleSystem _role = default!;
-        [Dependency] private readonly ITaskManager _taskManager = default!;
+        [Dependency] private DiscordWebhook _discord = default!;
+        [Dependency] private RoleSystem _role = default!;
+        [Dependency] private ITaskManager _taskManager = default!;
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",
@@ -166,13 +166,10 @@ namespace Content.Server.GameTicking
             Vector2? offset = null,
             Angle? rot = null)
         {
-            offset ??= proto.MaxRandomOffset != 0f
-                ? _robustRandom.NextVector2(proto.MaxRandomOffset)
-                : Vector2.Zero;
-
-            rot ??= proto.RandomRotation
-                ? _robustRandom.NextAngle()
-                : Angle.Zero;
+            // <Trauma> - replace random offset shit
+            offset ??= Vector2.Zero;
+            rot ??= Angle.Zero;
+            // </Trauma>
 
             opts ??= DeserializationOptions.Default;
             var ev = new PreGameMapLoad(proto, opts.Value, offset.Value, rot.Value);
@@ -761,10 +758,26 @@ namespace Content.Server.GameTicking
             var ev = new RoundRestartCleanupEvent();
             RaiseLocalEvent(ev);
 
-            // So clients' entity systems can clean up too...
-            RaiseNetworkEvent(ev);
+            // <Trauma> - wrap these in try-catch and log exceptions
+            try
+            {
+                // So clients' entity systems can clean up too...
+                RaiseNetworkEvent(ev);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception in RoundRestartCleanup: {e}");
+            }
 
-            EntityManager.FlushEntities();
+            try
+            {
+                EntityManager.FlushEntities();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while flushing entities for round restart: {e}");
+            }
+            // </Trauma>
 
             _mapManager.Restart();
 

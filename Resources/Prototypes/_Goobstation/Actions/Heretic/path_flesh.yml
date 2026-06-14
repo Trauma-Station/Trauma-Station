@@ -1,9 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -29,3 +23,40 @@
   - type: Tag
     tags:
     - SpellIgnoreForestAdmonitions
+
+- type: entity
+  parent: BaseAction
+  id: ActionHereticFleshTransform
+  name: Shed Form
+  description: Shed your fragile form, become one with the arms, become one with the emperor. Instills intense fear in nearby mortals.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 10
+    itemIconStyle: BigAction
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: final_hymn
+  - type: InstantAction
+    event: !type:PolymorphSpellEvent
+      protoId: EldritchHorror
+      loadActions: true
+  - type: SpeakOnAction
+    sentence: heretic-speech-flesh-worm
+  - type: HereticAction
+
+- type: entity
+  parent: BaseAction
+  id: ActionHereticFleshContract
+  name: Force Contract
+  description: Forces your body to contract onto a single tile.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: _Goobstation/Heretic/abilities_heretic.rsi
+      state: worm_contract
+  - type: InstantAction
+    event: !type:TailedEntityForceContractEvent

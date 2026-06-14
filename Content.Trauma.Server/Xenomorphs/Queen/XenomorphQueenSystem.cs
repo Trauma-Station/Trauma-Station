@@ -15,13 +15,13 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Server.Xenomorphs.Queen;
 
-public sealed class XenomorphQueenSystem : EntitySystem
+public sealed partial class XenomorphQueenSystem : EntitySystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly PlasmaSystem _plasma = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private PlasmaSystem _plasma = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     private static readonly ProtoId<XenomorphCastePrototype> PraetorianCaste = "Praetorian";
 

@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: localizedDataset
+  id: NamesDecapoidFirst
+  values:
+    prefix: names-decapoid-first-dataset-
+    count: 25

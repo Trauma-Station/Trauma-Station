@@ -1,19 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Factory.Slots;
+using Content.Shared.Eye;
 using Content.Shared.Prototypes;
+using Content.Shared.Stealth;
+using Content.Shared.Stealth.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Goobstation.Shared.Factory;
 
-public sealed class AutomationSystem : EntitySystem
+public sealed partial class AutomationSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
+    [Dependency] private EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
+    [Dependency] private EntityQuery<StealthComponent> _stealthQuery = default!;
+    [Dependency] private EntityQuery<VisibilityComponent> _visibilityQuery = default!;
 
-    private EntityQuery<AutomationSlotsComponent> _slotsQuery;
-    private EntityQuery<AutomatedComponent> _automatedQuery;
+    public const short NormalMask = (short) VisibilityFlags.Normal;
 
     private List<EntProtoId> _automatable = new();
     /// <summary>
@@ -25,13 +31,10 @@ public sealed class AutomationSystem : EntitySystem
     {
         base.Initialize();
 
-        _slotsQuery = GetEntityQuery<AutomationSlotsComponent>();
-        _automatedQuery = GetEntityQuery<AutomatedComponent>();
-
         SubscribeLocalEvent<AutomationSlotsComponent, ComponentInit>(OnInit);
 
-        SubscribeLocalEvent<AutomatedComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<AutomatedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<AutomationSlotsComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AutomationSlotsComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<PhysicsComponent, AnchorStateChangedEvent>(OnAnchorChanged);
 
@@ -48,23 +51,21 @@ public sealed class AutomationSystem : EntitySystem
         }
     }
 
-    private void OnMapInit(Entity<AutomatedComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<AutomationSlotsComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<AutomationSlotsComponent>(ent, out var comp))
-            return;
-
-        foreach (var slot in comp.Slots)
+        foreach (var slot in ent.Comp.Slots)
         {
             slot.AddPorts();
         }
     }
 
-    private void OnShutdown(Entity<AutomatedComponent> ent, ref ComponentShutdown args)
+    private void OnShutdown(Entity<AutomationSlotsComponent> ent, ref ComponentShutdown args)
     {
-        if (!TryComp<AutomationSlotsComponent>(ent, out var comp))
+        // don't care if the entity is being deleted
+        if (TerminatingOrDeleted(ent))
             return;
 
-        foreach (var slot in comp.Slots)
+        foreach (var slot in ent.Comp.Slots)
         {
             slot.RemovePorts();
         }
@@ -107,10 +108,6 @@ public sealed class AutomationSystem : EntitySystem
         if (!_slotsQuery.Resolve(ent, ref ent.Comp, false))
             return null;
 
-        // automation isn't enabled
-        if (!IsAutomated(ent))
-            return null;
-
         foreach (var slot in ent.Comp.Slots)
         {
             string? id = input ? slot.Input : slot.Output;
@@ -121,12 +118,16 @@ public sealed class AutomationSystem : EntitySystem
         return null;
     }
 
-    public bool IsAutomated(EntityUid uid) => _automatedQuery.HasComp(uid);
-
     public bool HasSlot(Entity<AutomationSlotsComponent?> ent, string port, bool input)
-    {
-        return GetSlot(ent, port, input) != null;
-    }
+        => GetSlot(ent, port, input) != null;
+
+    /// <summary>
+    /// Returns true if an entity has normal visibility bit and not stealthed.
+    /// This is considered visible to machines.
+    /// </summary>
+    public bool CanMachineDetect(EntityUid uid)
+        => (!_visibilityQuery.TryComp(uid, out var visibility) || (visibility.Layer & NormalMask) == NormalMask) &&
+            (!_stealthQuery.TryComp(uid, out var stealth) || !stealth.Enabled || _stealth.GetVisibility(uid, stealth) > stealth.ExamineThreshold);
 
     #endregion
 }

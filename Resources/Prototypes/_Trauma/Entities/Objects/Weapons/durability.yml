@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: NonweaponDurability # Todo, add duct tape
   abstract: true
@@ -102,7 +104,8 @@
     toolRepairAmount: 10, 3
     fuelCost: 5
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -145,7 +148,8 @@
     toolRepairAmount: 10, 15
     fuelCost: 5
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -187,7 +191,8 @@
     toolRepairAmount: 10, 15
     fuelCost: 5
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -225,7 +230,8 @@
     maxDamageRoll: 5
     maxRepairBonus: 0
     repairable: false
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -241,47 +247,6 @@
 
 - type: entity
   id: KnifeDurabilityWeak
-  abstract: true
-  components:
-  - type: Durability
-    durabilityThresholds:
-      0: Pristine
-      50: Worn
-      75: Damaged
-      85: Broken
-      100: Destroyed
-    damageProbability: .75
-    damagePopups:
-      Worn:
-      - durability-blade-0
-      - durability-blade-1
-      Damaged:
-      - durability-blade-2
-      - durability-blade-3
-      - durability-blade-4
-      Broken:
-      - durability-blade-5
-      - durability-blade-6
-      - durability-blade-7
-      Destroyed:
-      - durability-blade-8
-      - durability-blade-9
-      - durability-blade-10
-    minDamageRoll: 5
-    maxDamageRoll: 10
-    maxRepairBonus: 10
-    repairable: true
-    repairMaterials:
-      Whetstone: 15, 25
-    repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
-      sound:
-        collection: MetalBreak
-        params:
-          volume: -6
-
-- type: entity
-  id: KnifeDurability
   abstract: true
   components:
   - type: Durability
@@ -308,21 +273,22 @@
       - durability-blade-8
       - durability-blade-9
       - durability-blade-10
-    minDamageRoll: 2.5
-    maxDamageRoll: 5
+    minDamageRoll: 5
+    maxDamageRoll: 10
     maxRepairBonus: 10
     repairable: true
     repairMaterials:
       Whetstone: 15, 25
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
           volume: -6
 
 - type: entity
-  id: KnifeDurabilityStrong
+  id: KnifeDurability
   abstract: true
   components:
   - type: Durability
@@ -356,7 +322,50 @@
     repairMaterials:
       Whetstone: 15, 25
     repairDoAfter: 3
-    onBreakBehavior: !type:PlaySoundBehavior
+    onBreakEffects:
+    - !type:PlaySoundEffect
+      sound:
+        collection: MetalBreak
+        params:
+          volume: -6
+
+- type: entity
+  id: KnifeDurabilityStrong
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      75: Damaged
+      85: Broken
+      100: Destroyed
+    damageProbability: .12
+    damagePopups:
+      Worn:
+      - durability-blade-0
+      - durability-blade-1
+      Damaged:
+      - durability-blade-2
+      - durability-blade-3
+      - durability-blade-4
+      Broken:
+      - durability-blade-5
+      - durability-blade-6
+      - durability-blade-7
+      Destroyed:
+      - durability-blade-8
+      - durability-blade-9
+      - durability-blade-10
+    minDamageRoll: 2.5
+    maxDamageRoll: 5
+    maxRepairBonus: 10
+    repairable: true
+    repairMaterials:
+      Whetstone: 15, 25
+    repairDoAfter: 3
+    onBreakEffects:
+    - !type:PlaySoundEffect
       sound:
         collection: MetalBreak
         params:
@@ -416,11 +425,10 @@
       - durability-metal-9
       - durability-metal-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPlastic1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPlastic1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -439,7 +447,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-metal-0
@@ -462,11 +470,10 @@
       - durability-metal-9
       - durability-metal-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPlastic1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPlastic1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -508,11 +515,10 @@
       - durability-metal-9
       - durability-metal-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetSteel1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetSteel1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -531,7 +537,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .25
     damagePopups:
       Worn:
       - durability-wood-0
@@ -554,11 +560,11 @@
       - durability-wood-9
       - durability-wood-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        MaterialWoodPlank1:
-          min: 2
-          max: 3
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: MaterialWoodPlank1
+      min: 2
+      number: 3
     minDamageRoll: 5
     maxDamageRoll: 10
     repairDoAfter: 3
@@ -577,7 +583,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .5
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-wood-0
@@ -600,11 +606,11 @@
       - durability-wood-9
       - durability-wood-10
       - durability-handle-7
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        MaterialWoodPlank1:
-          min: 2
-          max: 3
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: MaterialWoodPlank1
+      min: 2
+      number: 3
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -623,7 +629,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .50
+    damageProbability: .12
     damagePopups:
       Worn:
       - durability-blade-1
@@ -639,11 +645,9 @@
       Destroyed:
       - durability-shaft-7
       - durability-shaft-8
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        WoodenHandleLong:
-          min: 1
-          max: 1
+    onBreakEffects:
+    - !type:SpawnEntity
+      entity: WoodenHandleLong
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -663,7 +667,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .50
+    damageProbability: .25
     damagePopups:
       Worn:
       - durability-blade-1
@@ -679,11 +683,9 @@
       Destroyed:
       - durability-shaft-7
       - durability-shaft-8
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        WoodenHandleLong:
-          min: 1
-          max: 1
+    onBreakEffects:
+    - !type:SpawnEntity
+      entity: WoodenHandleLong
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -703,7 +705,7 @@
       65: Damaged
       80: Broken
       100: Destroyed
-    damageProbability: .75
+    damageProbability: .50
     damagePopups:
       Worn:
       - durability-blade-1
@@ -719,11 +721,10 @@
       Destroyed:
       - durability-shaft-7
       - durability-shaft-8
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPlastic1:
-          min: 1
-          max: 2
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPlastic1
+      number: 2
     minDamageRoll: 2.5
     maxDamageRoll: 5
     repairDoAfter: 3
@@ -748,11 +749,9 @@
       - durability-plush-9
       - durability-plush-10
       - durability-plush-11
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        PlushieGore:
-          min: 1
-          max: 1
+    onBreakEffects:
+    - !type:SpawnEntity
+      entity: PlushieGore
     minDamageRoll: 999
     maxDamageRoll: 999
     maxRepairBonus: 0
@@ -772,12 +771,41 @@
       - durability-book-9
       - durability-book-10
       - durability-book-11
-    onBreakBehavior: !type:SpawnEntitiesBehavior
-      spawn:
-        SheetPaper1:
-          min: 3
-          max: 5
+    onBreakEffects:
+    - !type:SpawnRandomEntities
+      entity: SheetPaper1
+      min: 3
+      number: 5
     minDamageRoll: 999
     maxDamageRoll: 999
     maxRepairBonus: 0
     repairable: false
+
+- type: entity
+  id: DrillDurability
+  abstract: true
+  components:
+  - type: Durability
+    durabilityThresholds:
+      0: Pristine
+      50: Worn
+      65: Damaged
+      80: Broken
+      100: Destroyed
+    damageProbability: .1
+    damagePopups:
+      Worn:
+      - durability-drill-0
+      Damaged:
+      - durability-drill-1
+      Broken:
+      - durability-drill-2
+      Destroyed:
+      - durability-drill-3
+    minDamageRoll: 1
+    maxDamageRoll: 2
+    repairDoAfter: 5
+    repairMaterials:
+      DrillHead: 100, 100
+    maxRepairBonus: 0
+    deleteOnDestroyed: false

@@ -1,0 +1,43 @@
+- type: entity
+  abstract: true
+  parent: [SolutionCryo, SolutionCompositeNormalStackable, BaseItem]
+  id: MaterialBase
+  description: A raw material.
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
+  - type: Item
+    sprite: _Trauma/Objects/Materials/materials.rsi # Trauma
+    size: Normal
+  - type: Material
+  - type: Tag
+    tags:
+    - DroneUsable # Trauma
+    - RawMaterial
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Extractable
+    grindableSolutionName: composite
+
+- type: entity
+  abstract: true
+  parent: MaterialBase
+  id: BaseSheet
+  components:
+  - type: Tag
+    tags:
+    - DroneUsable # Trauma
+    - Sheet
+    - ConstructionMaterial
+  - type: StaticPrice
+    price: 0

@@ -2,7 +2,7 @@
 
 using Robust.Shared.Audio;
 
-namespace Content.Shared._White.Xenomorphs.FaceHugger;
+namespace Content.Trauma.Shared.Xenomorphs.FaceHugger;
 
 /// <summary>
 /// Handles the leap action for sentient facehuggers

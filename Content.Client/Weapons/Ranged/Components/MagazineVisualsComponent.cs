@@ -11,24 +11,20 @@ public sealed partial class MagazineVisualsComponent : Component
     /// <summary>
     /// What RsiState we use.
     /// </summary>
-    [DataField("magState")] public string? MagState;
+    [DataField]
+    public string? MagState;
 
     /// <summary>
     /// How many steps there are
     /// </summary>
-    [DataField("steps")] public int MagSteps;
+    [DataField("steps")]
+    public int MagSteps;
 
     /// <summary>
     /// Should we hide when the count is 0
     /// </summary>
-    [DataField("zeroVisible")] public bool ZeroVisible;
-
-    /// <summary>
-    /// Goobstation.
-    /// Whether should only set zero step when there is no ammo left.
-    /// </summary>
     [DataField]
-    public bool ZeroNoAmmo;
+    public bool ZeroVisible;
 }
 
 public enum GunVisualLayers : byte

@@ -24,27 +24,26 @@ using Robust.Shared.Containers;
 
 namespace Content.Medical.Shared.ItemSwitch;
 
-public abstract class SharedItemSwitchSystem : EntitySystem
+public abstract partial class SharedItemSwitchSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private EntityQuery<ItemSwitchComponent> _query = default!;
 
-    private EntityQuery<ItemSwitchComponent> _query;
+    public static readonly VerbCategory SwitchCategory = new("verb-categories-switch", "/Textures/Interface/VerbIcons/group.svg.192dpi.png");
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ItemSwitchComponent>();
 
         SubscribeLocalEvent<ItemSwitchComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ItemSwitchComponent, UseInHandEvent>(OnUseInHand);
@@ -103,14 +102,14 @@ public abstract class SharedItemSwitchSystem : EntitySystem
             args.Verbs.Add(new ActivationVerb()
             {
                 Text = Loc.TryGetString(state.Value.Verb, out var title) ? title : state.Value.Verb,
-                Category = VerbCategory.Switch,
+                Category = SwitchCategory,
                 Act = () => Switch((ent.Owner, ent.Comp), state.Key, user, ent.Comp.Predictable)
             });
             addedVerbs++;
         }
 
         if (addedVerbs > 0)
-            args.ExtraCategories.Add(VerbCategory.Switch);
+            args.ExtraCategories.Add(SwitchCategory);
     }
 
     private void OnActivate(Entity<ItemSwitchComponent> ent, ref ActivateInWorldEvent args)
@@ -204,7 +203,7 @@ public abstract class SharedItemSwitchSystem : EntitySystem
 
         if (TryComp<ItemComponent>(uid, out var item) && _container.TryGetContainingContainer((uid, null, null), out var container))
         {
-            if (TryComp(container.Owner, out StorageComponent? storage))
+            if (container.ID == StorageComponent.ContainerId && TryComp(container.Owner, out StorageComponent? storage))
             {
                 _transform.AttachToGridOrMap(uid);
                 if (!_storage.Insert(container.Owner, uid, out _, null, storage, false))

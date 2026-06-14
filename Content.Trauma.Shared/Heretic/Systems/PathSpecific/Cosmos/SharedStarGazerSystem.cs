@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Common.Physics;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -18,25 +17,24 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 
-public abstract class SharedStarGazerSystem : EntitySystem
+public abstract partial class SharedStarGazerSystem : EntitySystem
 {
-    [Dependency] protected readonly StatusEffectsSystem Status = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly SharedTransformSystem Xform = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected SharedTransformSystem Xform = default!;
 
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _hereticAbility = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStarMarkSystem _starMark = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedHereticAbilitySystem _hereticAbility = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStarMarkSystem _starMark = default!;
 
-    protected const string JointId = "stargaze";
+    public const string JointId = "stargaze";
 
     public override void Initialize()
     {
@@ -152,6 +150,8 @@ public abstract class SharedStarGazerSystem : EntitySystem
 
         args.Handled = true;
 
+        var now = Timing.CurTime;
+
         if (_net.IsServer)
         {
             comp.Endpoint = Spawn(null, Xform.ToCoordinates(comp.CursorPosition.Value));
@@ -159,7 +159,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
             EnsureComp<LaserBeamEndpointComponent>(endpoint);
             EnsureComp<TimedDespawnComponent>(endpoint).Lifetime = comp.LaserDuration;
             var beam = EnsureComp<ComplexJointVisualsComponent>(uid);
-            var data = new ComplexJointVisualsData(JointId, comp.Beam1, comp.Start1, comp.End1, Timing.CurTime)
+            var data = new ComplexJointVisualsData(JointId, comp.Beam1, comp.Start1, comp.End1, now)
             {
                 Scale = new Vector2(comp.BeamScale),
             };
@@ -173,6 +173,7 @@ public abstract class SharedStarGazerSystem : EntitySystem
         }
 
         comp.StartedBlasting = true;
+        comp.BeamTimer = now + comp.BeamTime;
         Dirty(ent);
     }
 

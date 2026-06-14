@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: jukebox
+  id: MindCrawler
+  name: Merct - Mind Crawler
+  path:
+    path: /Audio/_Trauma/Music/mind_crawler.ogg

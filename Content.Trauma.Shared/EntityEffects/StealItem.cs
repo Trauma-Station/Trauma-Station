@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Wieldable;
-using Content.Shared.Wieldable.Components;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -13,10 +12,10 @@ public sealed partial class StealItem : EntityEffectBase<StealItem>
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => null;
 }
 
-public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealItem>
+public sealed partial class StealItemSystem : EntityEffectSystem<HandsComponent, StealItem>
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedWieldableSystem _wield = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedWieldableSystem _wield = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<StealItem> args)
     {
@@ -39,8 +38,7 @@ public sealed class StealItemSystem : EntityEffectSystem<HandsComponent, StealIt
         if (item is not { } stolen)
             return;
 
-        if (TryComp<WieldableComponent>(ent, out var wield))
-            _wield.TryUnwield(stolen, wield, ent, true);
+        _wield.TryUnwield(stolen, ent, true);
 
         if (!_hands.TryDrop(ent.AsNullable(), stolen))
             return;

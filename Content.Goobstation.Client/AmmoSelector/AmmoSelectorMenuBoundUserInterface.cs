@@ -2,17 +2,15 @@
 
 using Content.Trauma.Common.Weapons.AmmoSelector;
 using JetBrains.Annotations;
-using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.UserInterface;
 
 namespace Content.Goobstation.Client.AmmoSelector;
 
 [UsedImplicitly]
-public sealed class AmmoSelectorMenuBoundUserInterface : BoundUserInterface
+public sealed partial class AmmoSelectorMenuBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IClyde _displayManager = default!;
-    [Dependency] private readonly IInputManager _inputManager = default!;
+    [Dependency] private IClyde _display = default!;
+    [Dependency] private IInputManager _input = default!;
 
     private AmmoSelectorMenu? _menu;
 
@@ -29,8 +27,8 @@ public sealed class AmmoSelectorMenuBoundUserInterface : BoundUserInterface
         _menu.SetEntity(Owner);
         _menu.SendAmmoSelectorSystemMessageAction += SendAmmoSelectorSystemMessage;
 
-        var vpSize = _displayManager.ScreenSize;
-        _menu.OpenCenteredAt(_inputManager.MouseScreenPosition.Position / vpSize);
+        var vpSize = _display.ScreenSize;
+        _menu.OpenCenteredAt(_input.MouseScreenPosition.Position / vpSize);
     }
 
     public void SendAmmoSelectorSystemMessage(ProtoId<SelectableAmmoPrototype> protoId)

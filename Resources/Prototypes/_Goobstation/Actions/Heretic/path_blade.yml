@@ -1,7 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseAction
   id: ActionHereticChampionHook
-  name: Champpion Hook
+  name: Champion Hook
   description: Knockdown and hook your next heretic blade light attack target.
   components:
   - type: Action

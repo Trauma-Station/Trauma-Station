@@ -1,18 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Sandevistan;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Client.Sandevistan;
 
-public sealed class SandevistanGlitchSystem : EntitySystem
+public sealed partial class SandevistanGlitchSystem : EntitySystem
 {
     private SandevistanGlitchOverlay _proto = default!;
 
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
 
     public override void Initialize()
     {

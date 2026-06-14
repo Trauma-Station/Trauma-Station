@@ -41,7 +41,7 @@
   color: "#ff4242"
   radioChannel: Security
   acquisitionSlip: PaperAcquisitionSlipSecurity
-  approveAccess: HeadOfSecurity # Trauma
+  approveAccess: Armory # Trauma
 
 - type: cargoAccount
   id: Service

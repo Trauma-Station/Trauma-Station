@@ -23,8 +23,9 @@
         layer:
         - MachineLayer
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -47,6 +48,11 @@
     - TauCetiBasic
     understands:
     - TauCetiBasic
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 5
+    damagePenalty: .5
+  # </Trauma>
 
 - type: entity
   abstract: true

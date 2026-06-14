@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   abstract: true
   id: BaseForgingStructure
@@ -9,7 +11,7 @@
   conditions:
   - !type:TileNotBlocked
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 0
   useQuality: false
 
 - type: construction

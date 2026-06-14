@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: gameMap
   id: Cog
   mapName: 'Cog'
@@ -42,6 +44,8 @@
             Virologist: [ 1, 1 ]
             # Science
             ResearchDirector: [ 1, 1 ]
+            Geneticist: [ 2, 2 ]
+            Roboticist: [ 2, 2 ]
             Scientist: [ 5, 5 ]
             ResearchAssistant: [ 3, 3 ]
             # Security

@@ -11,7 +11,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// Makes sure all empty scroll prayers work without throwing.
 /// For the test to exit cleanly prayers also can't affect anything outside the current map.
 /// </summary>
-[TestFixture]
 public sealed class EmptyScrollTest : GameTest
 {
     public static readonly EntProtoId Human = "MobHuman";

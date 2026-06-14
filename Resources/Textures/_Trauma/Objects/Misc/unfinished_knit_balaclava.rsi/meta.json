@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Icon & inhands taken from https://github.com/tgstation/tgstation/blob/4bb71f6236675e39276723a678a5ac9cff316a5d/icons/obj/clothing/masks.dmi. Edited by GoidaYAMLWarrior (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+    ]
+}

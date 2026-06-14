@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
   id: HereticBladeBaseNoTeleport
@@ -19,7 +21,7 @@
     wideAnimationRotation: -125
     damage:
       types:
-        Slash: 17
+        Slash: 20
       armorPenetration: 0.3
       woundSeverityMultipliers:
         Slash: 1.5
@@ -102,7 +104,7 @@
     - HereticBlade
     - HereticBladeBlade
   - type: Multihit
-    damageMultiplier: 0.65
+    damageMultiplier: 0.75
     multihitWhitelist:
       tags:
       - HereticBladeBlade

@@ -1,0 +1,78 @@
+<Document>
+  # Vampires
+
+  <Box>
+    <GuideEntityEmbed Entity="CrateCoffin" Caption=""/>
+  </Box>
+
+  Vampires are creatures who possess the ability to drain and manipulate life essence from the blood of sapient beings on-station.
+  They are antagonists that will actively seek out and hunt crew members for the simple goal of sustaining themselves off a crew member's blood and completing a few select objectives.
+  Vampires possess special powers that enable them to, among other abilities, teleport using the shadows, hypnotize and capture crew, and perform unique actions based on their vampiric class.
+  Vampires' powers are not without consequence: vampires possess a vital weakness to areas, objects, and individuals of significant spiritual strength.
+  Elements of strong belief–sanctified sites, holy water, fire, and starlight–all spell doom for a vampire.
+
+  ## Beginning Your Reign of Terror
+
+  There are two pools that blood will go into when a vampire drains a humanoid, that is their hunger needs and usable blood pool.
+  Vampires are unable to sustain themselves off of anything other than blood and if the amount of blood staving off hunger needs runs out, a vampire will starve to death.
+
+  The usable blood pool is what is consumed when vampires use special powers and as the total usable blood gathered during the round rises, it unlocks more abilities for the vampire.
+  Vampires can feed themselves off any humanoid, but usable blood is only gatherable from sentient (ones with a mind) humanoids.
+
+  When starting out as a Vampire one will have zero usable blood and in order to gain usable blood, a vampire will have to drain a player.
+  Once a crew member is captured then one will have to target the humanoid's head on harm mode with an empty hand.
+  Once 200u of blood has been gathered from a sentient humanoid it will stop going into the usable blood pool and no more will be gatherable from that specific player for the extent of the round.
+
+  Draining a player will likely result in their death.
+
+  ## Starting Powers
+
+  <Box>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="vampire_glare"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="vampire_rejuvinate"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="lair"/>
+  </Box>
+
+  Vampires will start with three powers: Glare, Rejuvenate and Create Lair. Using Glare can stun and silence, with the effect varying depending on if you are facing the target, and Rejuvenate will clear all stuns.
+
+  The lair ability can be used on any coffin to make it your lair, however only one can be made during the round so don't waste it. The lair ability will be removed and replaced with a "Teleport to Lair" one.
+  After you make a lair, a rune based on your blood color will manifest on the ground. That specific coffin will now give you extra healing on most types of damage, while you stay inside of it.
+  You may use your "Teleport to Lair" ability once you are critical or dead to teleport to your lair, but be considerate of its lengthy cooldown.
+
+  The lair itself can be destroyed [bold]only[/bold] with heat damage (e.g. lasers) and most importantly, fire. Once it starts taking damage, you will be notified via a popup.
+  Once it gets destroyed, you will be unable to teleport to it for the rest of the round.
+
+  ## Classes
+
+  <Box>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="duel"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="blood_bringers_rite"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="eternal_darkness"/>
+    <TextureEmbed Sprite="_Trauma/Vampires/actions.rsi" State="hysteria"/>
+  </Box>
+
+  Vampires have two different types of powers: base powers and class powers. Base powers are abilities that every Vampire has or will be able to unlock regardless of class.
+  After drinking a total of 150 blood, vampires gain access to 4 unique and mutually exclusive skill trees, with increasingly powerful abilities tailored to various play styles.
+  Upon gathering 1,000u of blood from at least 8 different people vampires will and rise to their full power, gaining improved night vision, immunity to holy water, the chapel, nullification, and the chaplain's holiness, becoming a blood-fueled emissary of death and destruction!
+
+  ## Fighting Vampires
+
+  <Box>
+    <GuideEntityEmbed Entity="Nullrod" Caption=""/>
+  </Box>
+
+  - Keeping your distance from a vampire will prevent them from glaring you, which is normally a death sentence. stay back and shoot.
+  - Vampiric abilities can be "nullified", which increases the blood cost of powers; Nullification scales all the way to 100, at which point Vampires cannot use any abilities. A Chaplain's Null Rod or holy water applies nullification.
+  - Vampires will burst into flames if they remain in the chapel for extended periods of time.
+  - Starlight is extraordinarily deadly to even full strength vampires, dealing serious genetic damage while the vampire is in space.
+  - If a vampire attains full power: They gain full immunity to nullification, holy water, and can freely enter holy sites.
+
+  ## Tips
+
+  - Know your victims' species before attempting to bite them! IPCs and Plasmamen have no blood and cannot be drank from!
+  - Keeping track of what powers a vampire has and when they can use them is critical.
+  - Make sure a vampire has already used their rejuvenate before you cuff them, or they may quickly turn the tables.
+  - Glare has no effect if the vampire is blindfolded.
+  - Vampires can still glare you when they are stunned! It will last shorter, but it will prevent you from cuffing them.
+  - Sleeping in coffins reduces nullification of vampires.
+</Document>

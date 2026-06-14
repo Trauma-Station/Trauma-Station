@@ -8,10 +8,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Trigger.Triggers;
 
-public sealed class TriggerOnSolutionInsertSystem : EntitySystem
+public sealed partial class TriggerOnSolutionInsertSystem : EntitySystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

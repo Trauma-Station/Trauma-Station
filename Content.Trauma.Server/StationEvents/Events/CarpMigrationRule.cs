@@ -12,10 +12,10 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.StationEvents.Events;
 
-public sealed class CarpMigrationRule : StationEventSystem<CarpMigrationRuleComponent>
+public sealed partial class CarpMigrationRule : StationEventSystem<CarpMigrationRuleComponent>
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private NPCSystem _npc = default!;
 
     private List<Entity<TransformComponent>> _areas = new();
 

@@ -8,10 +8,10 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.EntityEffects;
 
-public sealed class RandomizeLawsetSystem : EntityEffectSystem<SiliconLawProviderComponent, RandomizeLawset>
+public sealed partial class RandomizeLawsetSystem : EntityEffectSystem<SiliconLawProviderComponent, RandomizeLawset>
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SiliconLawSystem _law = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SiliconLawSystem _law = default!;
 
     protected override void Effect(Entity<SiliconLawProviderComponent> ent, ref EntityEffectEvent<RandomizeLawset> args)
     {

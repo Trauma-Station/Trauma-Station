@@ -21,8 +21,7 @@ public abstract partial class SharedRevolutionarySystem
     private void OnMindshieldRemoval(Entity<HeadRevolutionaryComponent> headRev, ref RemoveMindShieldEvent args)
     {
         _popupSystem.PopupEntity(Loc.GetString("head-rev-break-mindshield"), headRev);
-        SetConvertAbility(headRev, false); // GoobStation - turn off headrev ability to convert
-        //QueueDel(implant); - Goobstation - Headrevs should remove implant before turning on ability
+        SetConvertAbility(headRev, false); // turn off headrev ability to convert
         args.Cancelled = true;
     }
 }

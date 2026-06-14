@@ -1,6 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: currency
   id: Spesos
   displayName: store-currency-display-spesos
   cash:
     1: SpaceCash
+  canWithdraw: true
+
+- type: currency
+  id: SpesosFake
+  displayName: store-currency-display-fake-spesos
+  cash:
+    1: SpaceCashCounterfeit
   canWithdraw: true

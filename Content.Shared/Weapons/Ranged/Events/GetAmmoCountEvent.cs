@@ -6,6 +6,12 @@ namespace Content.Shared.Weapons.Ranged.Events;
 [ByRefEvent]
 public struct GetAmmoCountEvent
 {
+    // <Trauma>
+    // This is currently only used for BatteryAmmoProvider
+    public float FireCostMultiplier = 1f;
+
+    public GetAmmoCountEvent() { }
+    // </Trauma>
     public int Count;
     public int Capacity;
 }

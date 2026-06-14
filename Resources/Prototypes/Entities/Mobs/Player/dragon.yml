@@ -6,6 +6,36 @@
   description: A flying leviathan, loosely related to space carps.
   abstract: true
   components:
+  # <Trauma>
+  - type: CollectiveMind
+    defaultChannel: Dragonmind
+    channels:
+    - Dragonmind
+  - type: Damageable
+    damageModifierSet: Dragon
+  - type: Injurable
+    damageContainer: Biological
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  - type: Fauna
+  - type: LanguageSpeaker # carp language (keeping basic as an option because the space monster gloating is funny)
+    speaks:
+    - TauCetiBasic
+    - Carptongue
+    understands:
+    - TauCetiBasic
+    - Carptongue
+  - type: InnateWaypointer
+    waypointerProtoIds:
+    - NTStationWaypointer
+    - DragonRiftWaypointer
+  - type: DragonAreaRifts
+    areaWhitelist:
+      components:
+      - StationArea # no being a chud
+  # </Trauma>
   - type: Bloodstream
     bleedReductionAmount: 5 #goob
     bloodReferenceSolution:
@@ -108,9 +138,7 @@
   - type: StatusEffects # Overwriting basesimplemob to remove flash, getting flashed as dragon just feelsbad
     allowed:
     - Electrocution
-    - TemporaryBlindness
     - Pacified
-    - RadiationProtection
     - Adrenaline
   - type: Temperature
   - type: TemperatureDamage
@@ -146,14 +174,14 @@
     stomachStorageWhitelist:
       components:
       - MobState
-      - Item
+      - Item # Trauma
     chemical: Ichor
     healRate: 7.5
     whitelist:
       components:
       - MobState
       - Door
-      - Item
+      - Item # Trauma
       tags:
       - Wall
   - type: Tag
@@ -161,14 +189,6 @@
     - CannotSuicide
     - DoorBumpOpener
     - StunImmune
-  # Goobstation - Collective mind
-  - type: CollectiveMind
-    defaultChannel: Dragonmind
-    channels:
-    - Dragonmind
-  - type: Damageable # Goobstation
-    damageContainer: Biological
-    damageModifierSet: Dragon
   - type: Puller
     needsHands: false
   - type: RandomMetadata
@@ -176,36 +196,20 @@
     - NamesDragon
     - NamesDragonTitle
     nameFormat: name-format-dragon
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
-  - type: Fauna # Lavaland Change
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: InnateWaypointer
-    waypointerProtoIds:
-    - NTStationWaypointer
-    - DragonRiftWaypointer
-  - type: LanguageSpeaker # Trauma - carp language (keeping basic as an option because the space monster gloating is funny)
-    speaks:
-    - TauCetiBasic
-    - Carptongue
-    understands:
-    - TauCetiBasic
-    - Carptongue
 
 - type: entity
   parent: BaseMobDragon
   id: MobDragon
   components:
   - type: Dragon
-    # <Trauma>
     spawnRiftAction: ActionSpawnRift
+    # <Trauma>
     carpRiftHealing:
       types:
         Blunt: -1.33
@@ -239,7 +243,7 @@
     rechargeSound:
       path: /Audio/Animals/space_dragon_roar.ogg
   - type: BasicEntityAmmoProvider
-    proto: ProjectileDragonsBreath
+    proto: ProjectileDragonsBreathSpread # Trauma - add Spread
     capacity: 1
     count: 1
   - type: Gun
@@ -314,15 +318,22 @@
     event: !type:DevourActionEvent
 
 - type: entity
-  parent: BaseAction
+  parent: [ BaseAction, DragonsBreathGun ] # Trauma - inherit from the gun too
   id: ActionDragonsBreath
   name: "[color=orange]Dragon's Breath[/color]"
   description: Spew out flames at anyone foolish enough to attack you!
   components:
+  # <Trauma>
+  - type: GunAction
+  # </Trauma>
   - type: Action
+    # <Trauma>
+    raiseOnAction: true # action does the logic instead of the mob
+    useDelay: 5
+    # </Trauma>
     # TODO: actual sprite and iconOn
     icon: { sprite : Objects/Weapons/Guns/Projectiles/magic.rsi, state: fireball }
-    itemIconStyle: BigAction
+    itemIconStyle: NoItem # Trauma - was BigAction, dont show lungs
     priority: 2
   - type: TargetAction
     checkCanAccess: false

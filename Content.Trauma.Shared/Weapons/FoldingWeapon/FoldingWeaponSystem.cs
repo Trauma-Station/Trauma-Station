@@ -9,11 +9,11 @@ using Content.Shared.Wieldable.Components;
 
 namespace Content.Trauma.Shared.Weapons.FoldingWeapon;
 
-public sealed class FoldingWeaponSystem : EntitySystem
+public sealed partial class FoldingWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
-    [Dependency] private readonly ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedWieldableSystem _wieldable = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     public override void Initialize()
     {
@@ -32,8 +32,8 @@ public sealed class FoldingWeaponSystem : EntitySystem
 
     private void OnToggle(Entity<FoldingWeaponComponent> ent, ref ItemToggledEvent args)
     {
-        if (args.User != null && TryComp(ent, out WieldableComponent? wieldable))
-            _wieldable.TryUnwield(ent, wieldable, args.User.Value, true);
+        if (args.User is { } user)
+            _wieldable.TryUnwield(ent.Owner, user, force: true);
 
         if (!ent.Comp.SetPrefix)
             return;

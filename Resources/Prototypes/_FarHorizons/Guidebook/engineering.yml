@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: HolographicGenerator
+  name: guide-entry-holographic-generator
+  text: "/ServerInfo/_FarHorizons/Guidebook/Engineering/HolographicGenerator.xml"

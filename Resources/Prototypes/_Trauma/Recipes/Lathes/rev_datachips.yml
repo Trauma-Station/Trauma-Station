@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   abstract: true
   id: BaseRevDatachip
@@ -26,3 +28,8 @@
   id: DataChipShieldRipper
   parent: BaseRevDatachip
   result: DataChipShieldRipper
+
+- type: latheRecipe
+  id: MoldMeleeUpgrades
+  parent: BaseRevDatachip
+  result: RevDropPodMelees

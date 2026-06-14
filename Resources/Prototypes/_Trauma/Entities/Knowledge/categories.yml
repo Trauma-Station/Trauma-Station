@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: BaseMedicalKnowledge
   parent: BaseKnowledge
@@ -73,11 +75,19 @@
   components:
   - type: Knowledge
     category: Language
-    learnedLevel: 26
+    learnedLevel: 25
     experienceCost: 16
     color: "#ADD8E6"
     costs: null # its currently fucked, have to use traits still :(
   - type: LanguageKnowledge
+
+- type: entity
+  parent: BaseLanguageKnowledge
+  id: BaseLanguageKnowledgeAntag
+  abstract: true
+  components:
+  - type: Knowledge
+    complex: true
 
 - type: entity
   parent: BaseKnowledge

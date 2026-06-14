@@ -1,16 +1,9 @@
-# SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Tap <tapiocaphobe@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ghagliiarghii <68826635+Ghagliiarghii@users.noreply.github.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
+  abstract: true
+  parent: [UnsensoredClothingUniformBase, ClothingHeadBase, ClothingBeltBase]
   id: BaseTowel
   name: base towel
-  abstract: true
   description: If you want to survive out here, you gotta know where your towel is.
-  parent: [ UnsensoredClothingUniformBase, ClothingHeadBase, ClothingBeltBase ]
   components:
   - type: Sprite
     sprite: Clothing/Multiple/towel.rsi
@@ -28,15 +21,9 @@
     spillWhenThrown: false
   - type: Absorbent
     pickupAmount: 15
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      food:
-        maxVol: 30
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 30
-      absorbed:
-        maxVol: 30
+    - SolutionMopSmall
   - type: UseDelay
     delay: 1
   - type: Fiber

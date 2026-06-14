@@ -1,4 +1,5 @@
-# TODO: add recipe categories for them
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   abstract: true
   id: SynthOrgan

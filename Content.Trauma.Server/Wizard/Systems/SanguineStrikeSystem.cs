@@ -14,18 +14,20 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
+public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PointLightSystem _light = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodStream = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PointLightSystem _light = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private BloodstreamSystem _bloodStream = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private PuddleSystem _puddle = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
 
     public override void Initialize()
     {
@@ -107,18 +109,15 @@ public sealed class SanguineStrikeSystem : SharedSanguineStrikeSystem
     {
         base.BloodSteal(user, hitEntities, bloodStealAmount, bloodSpillCoordinates);
 
-        var bloodQuery = GetEntityQuery<BloodstreamComponent>();
-        var solutionQuery = GetEntityQuery<SolutionContainerManagerComponent>();
-
         // I love solutions :)
-        if (!bloodQuery.TryComp(user, out var userBlood) || !solutionQuery.TryComp(user, out var userSolution) ||
-            !_solution.ResolveSolution((user, userSolution), userBlood.BloodSolutionName, ref userBlood.BloodSolution))
+        if (!_bloodQuery.TryComp(user, out var userBlood) || !_solutionQuery.TryComp(user, out var solutions) ||
+            !_solution.ResolveSolution((user, solutions), userBlood.BloodSolutionName, ref userBlood.BloodSolution))
             return;
 
-        List<Entity<BloodstreamComponent, SolutionContainerManagerComponent>> bloodEntities = new();
+        List<Entity<BloodstreamComponent, SolutionManagerComponent>> bloodEntities = new();
         foreach (var hitEnt in hitEntities)
         {
-            if (bloodQuery.TryComp(hitEnt, out var hitBlood) && solutionQuery.TryComp(hitEnt, out var hitSolution))
+            if (_bloodQuery.TryComp(hitEnt, out var hitBlood) && _solutionQuery.TryComp(hitEnt, out var hitSolution))
                 bloodEntities.Add((hitEnt, hitBlood, hitSolution));
         }
 

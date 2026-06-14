@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reaction
   id: Methanol
   reactants:
@@ -54,13 +56,3 @@
       amount: 1
   products:
     Octogen: 4
-
-- type: reaction
-  id: BurniteLemonade
-  reactants:
-    JuiceLemonade:
-      amount: 1
-    Napalm:
-      amount: 1
-  products:
-    Burnite: 1

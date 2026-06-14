@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: material
   id: Charcoal
   stackEntity: Charcoal1
@@ -31,5 +33,14 @@
   name: materials-bracing
   unit: materials-unit-use
   icon: { sprite: _Trauma/Objects/Tools/weaponreinforcement.rsi, state: icon }
+  color: "#000000"
+  price: 0
+
+- type: material
+  id: DrillHead
+  stackEntity: DrillHead
+  name: materials-drillhead
+  unit: materials-unit-use
+  icon: { sprite: _Trauma/Objects/Tools/drillhead.rsi, state: icon }
   color: "#000000"
   price: 0

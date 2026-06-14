@@ -24,21 +24,21 @@ using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.Wizard.BindSoul;
 
-public abstract class SharedBindSoulSystem : EntitySystem
+public abstract partial class SharedBindSoulSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] protected readonly SharedMindSystem Mind = default!;
-    [Dependency] protected readonly SharedStunSystem Stun = default!;
-    [Dependency] protected readonly MetaDataSystem Meta = default!;
-    [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] protected readonly NpcFactionSystem Faction = default!;
-    [Dependency] protected readonly GrammarSystem Grammar = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedGravitySystem _gravity = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
+    [Dependency] protected SharedMindSystem Mind = default!;
+    [Dependency] protected SharedStunSystem Stun = default!;
+    [Dependency] protected MetaDataSystem Meta = default!;
+    [Dependency] protected SharedContainerSystem Container = default!;
+    [Dependency] protected NpcFactionSystem Faction = default!;
+    [Dependency] protected GrammarSystem Grammar = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedGravitySystem _gravity = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly ProtoId<TagPrototype> ActionTag = "BindSoulAction";
 

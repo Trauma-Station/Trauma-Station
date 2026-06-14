@@ -37,25 +37,25 @@ namespace Content.Server.Parallax;
 
 public sealed partial class BiomeSystem : SharedBiomeSystem
 {
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IParallelManager _parallel = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly DecalSystem _decals = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ShuttleSystem _shuttles = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] private IConsoleHost _console = default!;
+    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private IParallelManager _parallel = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private DecalSystem _decals = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ShuttleSystem _shuttles = default!;
+    [Dependency] private TagSystem _tags = default!;
 
-    private EntityQuery<BiomeComponent> _biomeQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
-    private EntityQuery<GhostComponent> _ghostQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
+    [Dependency] private EntityQuery<BiomeComponent> _biomeQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
+    [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private readonly HashSet<EntityUid> _handledEntities = new();
     private const float DefaultLoadRange = 16f;
@@ -84,10 +84,6 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
     {
         base.Initialize();
         Log.Level = LogLevel.Debug;
-        _biomeQuery = GetEntityQuery<BiomeComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
-        _ghostQuery = GetEntityQuery<GhostComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
         SubscribeLocalEvent<BiomeComponent, MapInitEvent>(OnBiomeMapInit);
         SubscribeLocalEvent<FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<ShuttleFlattenEvent>(OnShuttleFlatten);
@@ -844,7 +840,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         }
 
         // Decals
-        var loadedDecals = new Dictionary<uint, Vector2i>();
+        var loadedDecals = new Dictionary<EntityUid, Vector2i>(); // Trauma - decal entities, uint -> EntityUid
         component.LoadedDecals.Add(chunk, loadedDecals);
 
         for (var x = 0; x < ChunkSize; x++)
@@ -919,10 +915,11 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         foreach (var (dec, indices) in component.LoadedDecals[chunk])
         {
             // If we couldn't remove it then flag the tile to never be touched.
-            if (!_decals.RemoveDecal(gridUid, dec))
-            {
+            // <Trauma> - delete if it exists, flag otherwise
+            if (Exists(dec))
+                Del(dec);
+            else
                 modified.Add(indices);
-            }
         }
 
         component.LoadedDecals.Remove(chunk);
@@ -931,11 +928,9 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         // Ideally any entities that aren't modified just get deleted and re-generated later
         // This is because if we want to save the map (e.g. persistent server) it makes the file much smaller
         // and also if the map is enormous will make stuff like physics broadphase much faster
-        var xformQuery = GetEntityQuery<TransformComponent>();
-
         foreach (var (ent, tile) in component.LoadedEntities[chunk])
         {
-            if (Deleted(ent) || !xformQuery.TryGetComponent(ent, out var xform))
+            if (Deleted(ent) || !TryComp(ent, out TransformComponent? xform))
             {
                 modified.Add(tile);
                 continue;

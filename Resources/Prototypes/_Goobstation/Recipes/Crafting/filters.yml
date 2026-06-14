@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   abstract: true
   id: BaseAutomationFilter
@@ -5,7 +7,7 @@
   category: construction-category-misc
   objectType: Item
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
   useQuality: false
 
 - type: construction

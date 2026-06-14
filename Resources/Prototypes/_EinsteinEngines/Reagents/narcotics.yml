@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025 GNUtopia <erainach14@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
@@ -11,6 +8,7 @@
   flavor: bitter
   color: "#ffde7448"
   physicalDesc: reagent-physical-desc-translucent
+  contrabandSeverity: Major # Does nothing, may as well make it fun (illegal) to have
   metabolisms:
     Bloodstream:
       metabolismRate: 0.1

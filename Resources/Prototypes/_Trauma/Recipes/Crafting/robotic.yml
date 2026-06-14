@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: ButtBot
   graph: ButtBot
@@ -5,8 +7,8 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    ToysKnowledge: 1
-    BotsKnowledge: 1
+    ToysKnowledge: 0
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
 
@@ -17,7 +19,7 @@
 #  category: construction-category-utilities
 #  objectType: Item
 #  theory:
-#    BotsKnowledge: 1
+#    BotsKnowledge: 0
 
 - type: construction
   id: DuckBot
@@ -26,8 +28,8 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    CookingKnowledge: 2
-    BotsKnowledge: 1
+    CookingKnowledge: 0
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
 
@@ -38,7 +40,7 @@
   category: construction-category-utilities
   objectType: Item
   theory:
-    ElectronicsKnowledge: 1
-    BotsKnowledge: 1
+    ElectronicsKnowledge: 0
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1

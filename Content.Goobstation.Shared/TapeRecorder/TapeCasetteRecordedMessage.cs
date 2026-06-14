@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Speech;
+using Content.Trauma.Common.Language;
 
 namespace Content.Goobstation.Shared.TapeRecorder;
 
@@ -34,12 +35,19 @@ public sealed partial class TapeCassetteRecordedMessage : IComparable<TapeCasset
     [DataField]
     public string Message = string.Empty;
 
-    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message)
+    /// <summary>
+    /// The language used, falls back to tau-ceti common.
+    /// </summary>
+    [DataField]
+    public ProtoId<LanguagePrototype>? Language;
+
+    public TapeCassetteRecordedMessage(float timestamp, string name, ProtoId<SpeechVerbPrototype> verb, string message, ProtoId<LanguagePrototype>? language)
     {
         Timestamp = timestamp;
         Name = name;
         Verb = verb;
         Message = message;
+        Language = language;
     }
 
     public int CompareTo(TapeCassetteRecordedMessage? other)

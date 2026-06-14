@@ -12,11 +12,11 @@ namespace Content.Client.Waypointer;
 /// <summary>
 /// The client-side system handles initializing the overlay, as well as removing and adding it depending on game actions.
 /// </summary>
-public sealed class WaypointerSystem : SharedWaypointerSystem
+public sealed partial class WaypointerSystem : SharedWaypointerSystem
 {
-    [Dependency] private readonly IPlayerManager  _player = default!;
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IClientGameTiming _timing = default!;
+    [Dependency] private IPlayerManager  _player = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IClientGameTiming _timing = default!;
 
     private WaypointerOverlay _waypointerOverlay = default!;
 

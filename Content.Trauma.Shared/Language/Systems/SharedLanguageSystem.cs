@@ -2,19 +2,22 @@
 
 using System.Linq;
 using System.Text;
+using Content.Shared.GameTicking;
+using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
 using Content.Trauma.Common.Language.Systems;
+using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.Language.Components;
 using Content.Trauma.Shared.Language.Events;
-using Content.Shared.GameTicking;
 
 namespace Content.Trauma.Shared.Language.Systems;
 
-public abstract class SharedLanguageSystem : CommonLanguageSystem
+public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     private StringBuilder _builder = new();
 
@@ -35,10 +38,35 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         return proto;
     }
 
-    public override string ObfuscateSpeech(string message, LanguagePrototype language)
+    public override string ObfuscateSpeech(string message, LanguagePrototype language, EntityUid messageSource)
     {
         _builder.Clear();
-        language.Obfuscation.Obfuscate(_builder, message, this);
+        var ratio = 1.0f;
+        if (_knowledge.GetContainer(messageSource) is { } brain)
+        {
+            if (_knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } skill)
+            {
+                if (_knowledge.GetMastery(skill.Comp) > 1)
+                    ratio = 0.0f;
+                else
+                    ratio = 1.0f - _knowledge.SharpCurve(skill, 0, 26);
+            }
+            else
+            {
+                ratio = 1.0f;
+            }
+        }
+        else
+        {
+            // In case source does not have a knowledge holder then it speaks/listens in perfect tongue.
+            ratio = 0.0f;
+        }
+
+        // Catch incase obfuscation method doesn't use a ratio. Very important, do not remove.
+        if (ratio <= 0.0f)
+            return message;
+
+        language.Obfuscation.Obfuscate(_builder, message, this, ratio);
 
         return _builder.ToString();
     }
@@ -84,7 +112,12 @@ public abstract class SharedLanguageSystem : CommonLanguageSystem
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
-        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language);
+        // Kind of important that knowledge holders don't understand everything so they use the obfuscation logic.
+        var canUnderstand = true;
+        if (_knowledge.GetContainer(ent.Owner) is { } brain)
+            canUnderstand = _knowledge.GetKnowledge(brain, _knowledge.LanguageUnit(language)) is { } unit && _knowledge.GetMastery(unit.Comp) >= 2;
+
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.Understands.Contains(language) && canUnderstand;
     }
 
     public bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)

@@ -6,3 +6,4 @@ materials-steel-ingot = steel ingot
 materials-plasteel-ingot = plasteel ingot
 materials-whetstone = whetstone
 materials-bracing = bracing
+materials-drillhead = drill head

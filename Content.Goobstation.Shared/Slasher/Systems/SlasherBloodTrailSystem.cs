@@ -15,13 +15,13 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 /// <summary>
 /// Handles the Slasher blood trail toggle action and periodically spills blood while active.
 /// </summary>
-public sealed class SlasherBloodTrailSystem : EntitySystem
+public sealed partial class SlasherBloodTrailSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPuddleSystem _puddles = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPuddleSystem _puddles = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     // Next time at which we should drop a blood puddle for an entity.
     private readonly Dictionary<EntityUid, TimeSpan> _nextDropAt = new();

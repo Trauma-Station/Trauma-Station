@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
 # Non-stackable part that can have a use outside of machines
 - type: latheRecipe
   abstract: true

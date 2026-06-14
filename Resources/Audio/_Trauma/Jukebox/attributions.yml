@@ -1,0 +1,125 @@
+# These are all just stereo music converted to mono to be played positionally
+
+# Lobby
+
+- files: ["space_asshole.ogg"]
+  license: "Custom"
+  copyright: "Space Asshole by Chris Remo is used with special permission from the author, under the condition that the project remains non-commercial and open source. The author also requested that a link to his bandcamp be included: https://chrisremo.bandcamp.com/"
+  source: "https://idlethumbs.bandcamp.com/track/space-asshole"
+  # The source is a direct link to the track, but not the "main" bandcamp of the author. Hence the link is also included separately in the copyright.
+
+- files: ["the_wizard.ogg"]
+  license: "Custom"
+  copyright: "The Wizard by Chris Remo is used with special permission from the author, under the condition that the project remains non-commercial and open source. The author also requested that a link to his bandcamp be included: https://chrisremo.bandcamp.com/"
+  source: "https://idlethumbs.bandcamp.com/track/the-wizard"
+  # The source is a direct link the the track, but not the "main" bandcamp of the author. Hence the link is also included separately in the copyright.
+  # Got permission from Chris for this song as well on 02/25/25, requires same attributions
+
+- files: ["absconditus.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Absconditus by ZhayTee. Converted from MP3 to OGG and mono."
+  source: "https://bandcamp.zhaytee.net/track/absconditus"
+
+- files: ["atomicamnesiammx.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Atomic Amnesia MMX by Philip Dyer. Converted from MP3 to OGG and mono."
+  source: "https://soundcloud.com/3kliksphilip/atomic-amnesia-mmx-1"
+
+- files: ["singuloose.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Singuloose by Janis Schiedková. Converted from MP3 to OGG and mono."
+  source: "https://soundcloud.com/js_m/singuloose"
+
+- files: ["title2.ogg"]
+  license: "Custom"
+  copyright: "Originally composed by Jonathan Dunn for RoboCop (Game Boy) published by Ocean Software. Converted to mono. Remixed by Eric Shumaker for his video Dilbert 3. As of October 9th, 2008 nobody owns the rights to this song and copyright action has never been taken against anyone using this song in their projects."
+  source: "https://www.youtube.com/watch?v=4o6_8Unj2mQ"
+
+- files: ["comet_haley.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Comet Haley by Stellardrone. Converted from MP3 to OGG and mono."
+  source: "https://stellardrone.bandcamp.com/track/comet-halley"
+
+- files: ["Spac_Stac.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Spac Stac by Hayabusa. Converted from MP3 to OGG and mono."
+  source: "https://www.youtube.com/watch?v=grUBe-SZgr0"
+
+- files: ["pwmur.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "phoron will make us rich by Sunbeamstress/Lauren Loveless, converted to mono."
+  source: "https://soundcloud.com/sunbeamstress/phoron-will-make-us-rich"
+
+- files: ["lasers_rip_apart_the_bulkhead.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "lasers rip apart the bulkhead by Sunbeamstress/Lauren Loveless, converted to mono."
+  source: "https://soundcloud.com/sunbeamstress/lasers-rip-apart-the-bulkhead"
+
+- files: ["every_light_is_blinking_at_once.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "every light is blinking at once by Sunbeamstress/Lauren Loveless, converted to mono."
+  source: "https://soundcloud.com/sunbeamstress/every-light-is-blinking-at-once"
+
+- files: ["horn.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Honk! by SlendyMawn, Remastered by Scruq, converted to mono"
+  source: "https://www.youtube.com/watch?v=ujY7djCJVwQ"
+
+- files: ["skubstub.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "DJ B1G YAPPA, converted to mono"
+  source: "https://forums.goobstation.com"
+
+- files: ["space_radiation.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Space Radiation by Outer, converted to mono"
+  source: "https://soundcloud.com/user-957617053"
+
+- files: ["redsun.ogg"]
+  license: "CC-BY-NC-SA-4.0"
+  copyright: "Bluecometdude, converted to mono"
+  source: "https://soundcloud.com/bluecometdude/red-sun-in-the-sky-hq-and-extended"
+
+- files: ["chollima.ogg"]
+  license: "CC-BY-NC-SA-3.0"
+  copyright: "Pochonbo Electronic Ensemble, converted to mono"
+  source: "https://goobstation.com"
+
+# Events
+
+- files: ["running_out.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Bolgarich, converted to mono"
+  source: "https://www.youtube.com/watch?v=SzEp2nv6oZ4"
+
+- files: ["sound_station_14.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Donchan, converted to mono"
+  source: "https://www.youtube.com/watch?v=4nUpeYLKUns"
+
+- files: ["countdown.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Created by qwertyquerty, converted to mono"
+  source: "https://github.com/BeeStation/BeeStation-Hornet/commit/7f48971438492805af286023a72e7609a729234a"
+
+- files: ["blatantly_nuclear.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by mrjajkes, converted to mono"
+  source: "https://www.youtube.com/watch?v=f5URIS00IIc"
+
+- files: ["last_call.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by mrjajkes, converted to mono"
+  source: "https://www.youtube.com/watch?v=r29OdkQRYbg"
+
+- files: ["tansume.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Moranbong Band, converted to mono"
+  source: "https://goobstation.com"
+
+# Music
+
+- files: ["Colonial_Marines_The_Final_Battle.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original music by @Bobik-music, converted to mono"
+  source: "https://www.youtube.com/watch?v=tLfHbai7yzc"

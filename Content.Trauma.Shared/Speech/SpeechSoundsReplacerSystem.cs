@@ -20,23 +20,25 @@ public sealed class SpeechSoundsReplacerSystem : EntitySystem
 
     private void OnEquip(Entity<SpeechSoundsReplacerComponent> replacer, ref GotEquippedEvent args)
     {
-        if (!TryComp<SpeechComponent>(args.Equipee, out var speech))
+        var target = args.EquipTarget;
+        if (!TryComp<SpeechComponent>(target, out var speech))
             return;
 
         replacer.Comp.PreviousSound = speech.SpeechSounds;
         speech.SpeechSounds = replacer.Comp.SpeechSounds;
         Dirty(replacer);
-        Dirty(args.Equipee, speech);
+        Dirty(target, speech);
     }
 
     private void OnUnequip(Entity<SpeechSoundsReplacerComponent> replacer, ref GotUnequippedEvent args)
     {
-        if (!TryComp<SpeechComponent>(args.Equipee, out var speech))
+        var target = args.EquipTarget;
+        if (!TryComp<SpeechComponent>(target, out var speech))
             return;
 
         speech.SpeechSounds = replacer.Comp.PreviousSound;
         replacer.Comp.PreviousSound = null;
         Dirty(replacer);
-        Dirty(args.Equipee, speech);
+        Dirty(target, speech);
     }
 }

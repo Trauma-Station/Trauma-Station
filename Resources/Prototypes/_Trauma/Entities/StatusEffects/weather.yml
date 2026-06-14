@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: WeatherSnowfallHeavy
   id: WeatherSnowfallMagic
@@ -25,8 +27,12 @@
     - AreaAiUpload
     # TODO: make AI access area and replace the not really AI sat places with that, then add AreaAi here
     - AreaMaints
+    - AreaSubstation
     - AreaRadstorm
+    - AreaLootRoom
     - AreaPrisonShower # not quite toilet
+    - AreaShuttleAbductor
+    - AreaShuttleNukie
 
 # Schedulers
 

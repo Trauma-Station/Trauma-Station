@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: damageModifierSet
+  id: VampireCoffin
+  coefficients:
+    Heat: 0.1
+
+- type: damageContainer
+  id: VampireCoffin
+  supportedTypes:
+  - Heat

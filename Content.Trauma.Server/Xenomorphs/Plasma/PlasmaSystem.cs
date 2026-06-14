@@ -10,11 +10,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Xenomorphs.Plasma;
 
-public sealed class PlasmaSystem : SharedPlasmaSystem
+public sealed partial class PlasmaSystem : SharedPlasmaSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

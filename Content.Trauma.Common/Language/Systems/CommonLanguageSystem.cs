@@ -4,9 +4,9 @@ using Content.Trauma.Common.Language.Components;
 
 namespace Content.Trauma.Common.Language.Systems;
 
-public abstract class CommonLanguageSystem : EntitySystem
+public abstract partial class CommonLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     /// <summary>
     /// A cached instance of <see cref="PsychomanticPrototype"/>.
@@ -67,7 +67,7 @@ public abstract class CommonLanguageSystem : EntitySystem
     /// <summary>
     ///     Obfuscate a message using the given language.
     /// </summary>
-    public abstract string ObfuscateSpeech(string message, LanguagePrototype language);
+    public abstract string ObfuscateSpeech(string message, LanguagePrototype language, EntityUid messageSource);
 
     public abstract bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language);
 

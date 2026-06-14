@@ -35,6 +35,7 @@ public sealed partial class DevilSystem
             return;
 
         contractComponent.ContractOwner = args.Performer;
+        Dirty(contract, contractComponent);
 
         PlayFwooshSound(devil);
         DoContractFlavor(devil, Identity.Name(devil, EntityManager));

@@ -1,20 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Effects;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Electrocution;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Wizard.Projectile;
-using Content.Trauma.Server.Wizard.Systems;
+using Content.Trauma.Server.Wizard.Components;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class ThrownLightningSystem : EntitySystem
+public sealed partial class ThrownLightningSystem : EntitySystem
 {
-    [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
-    [Dependency] private readonly SpellsSystem _spells = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!;
+    [Dependency] private ElectrocutionSystem _electrocution = default!;
+    [Dependency] private SpellsSystem _spells = default!;
+    [Dependency] private SparksSystem _sparks = default!;
 
     public override void Initialize()
     {

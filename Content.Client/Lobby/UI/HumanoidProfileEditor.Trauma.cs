@@ -13,7 +13,7 @@ namespace Content.Client.Lobby.UI;
 /// </summary>
 public sealed partial class HumanoidProfileEditor
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private uint _lastColorUpdate;
 
     /// <summary>

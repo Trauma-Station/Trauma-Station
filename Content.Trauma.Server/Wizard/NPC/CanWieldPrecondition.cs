@@ -5,11 +5,11 @@ using Content.Server.NPC.HTN.Preconditions;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 
-namespace Content.Goobstation.Server.Wizard.NPC;
+namespace Content.Trauma.Server.Wizard.NPC;
 
 public sealed partial class CanWieldPrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     [DataField]
     public bool Invert;
@@ -23,7 +23,7 @@ public sealed partial class CanWieldPrecondition : HTNPrecondition
 
         var wieldableSystem = _entManager.System<SharedWieldableSystem>();
 
-        if (!wieldableSystem.CanWield(item.Value, wieldable, owner, true))
+        if (!wieldableSystem.CanWield((item.Value, wieldable), owner, true))
             return false ^ Invert;
 
         var beforeWieldEv = new WieldAttemptEvent();

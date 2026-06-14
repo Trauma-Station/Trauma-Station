@@ -20,8 +20,8 @@ namespace Content.Client.Store.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class StoreMenu : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private StoreWithdrawWindow? _withdrawWindow;
 
@@ -86,7 +86,7 @@ public sealed partial class StoreMenu : DefaultWindow
     {
         var sorted = _cachedListings.OrderBy(l => l.Priority)
                 .ThenBy(l => l.Cost.Values.Sum())
-                .ThenBy(l => l.Name == null ? string.Empty : Loc.GetString(l.Name)); // Trauma
+                .ThenBy(l => l.Name == null ? string.Empty : l.Name); // Trauma
 
         // should probably chunk these out instead. to-do if this clogs the internet tubes.
         // maybe read clients prototypes instead?
@@ -169,6 +169,11 @@ public sealed partial class StoreMenu : DefaultWindow
     {
         var text = string.Empty;
 
+        // <Trauma>
+        if (GetListingAltPriceString(listing) is { } altText)
+            return altText;
+        // </Trauma>
+
         if (listing.Cost.Count < 1)
             text = Loc.GetString("store-currency-free");
         else
@@ -205,7 +210,7 @@ public sealed partial class StoreMenu : DefaultWindow
             foreach (var (currency, amount) in relativeModifiersSummary)
             {
                 var currencyPrototype = _prototypeManager.Index(currency);
-                if (sb.Length != 0)
+                if (sb.Length > 1) // Trauma: "!= 0" -> "> 1"
                 {
                     sb.Append(", ");
                 }
@@ -299,7 +304,7 @@ public sealed partial class StoreMenu : DefaultWindow
         RefundButton.Visible = allowRefund;
     }
 
-    private sealed class StoreCategoryButton : Button
+    private sealed partial class StoreCategoryButton : Button
     {
         public string? Id;
     }

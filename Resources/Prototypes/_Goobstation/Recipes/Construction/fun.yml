@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: BananiumSword
   graph: BananiumSword
@@ -5,9 +7,10 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    BananiumKnowledge: 2
+    BananiumKnowledge: 0
   practical:
     WeaponsKnowledge: 2
+    BananiumKnowledge: 2
 
 - type: construction
   id: boomerang

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: ChemistryBottleFormaldehyde
   suffix: formaldehyde
@@ -6,13 +8,11 @@
   components:
   - type: Label
     currentLabel: reagent-name-formaldehyde
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: Formaldehyde
-          Quantity: 30
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Formaldehyde
+        Quantity: 30
 
 - type: entity
   id: CrateMorgue

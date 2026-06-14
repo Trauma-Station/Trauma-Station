@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: constructionGraph
   id: SheetPaper
   start: start
@@ -55,14 +57,6 @@
         icon:
           sprite: _Trauma/Objects/Tools/overridecomponents.rsi
           state: icon
-      - tag: OverrideKeyComponents
-        doAfter: 5
-        name: construction-graph-tag-overridekeycomponents
-        icon:
-          sprite: _Trauma/Objects/Tools/overridecomponents.rsi
-          state: icon
-      - tool: Screwing
-        doAfter: 3
 
   - node: finished
     entity: ArmoryOverrideKey

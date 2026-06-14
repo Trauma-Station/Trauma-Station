@@ -6,9 +6,9 @@ using Content.Trauma.Server.GameTicking.Rules.Components;
 
 namespace Content.Trauma.Server.GameTicking.Rules;
 
-public sealed class PlayerEffectsRuleSystem : EntitySystem
+public sealed partial class PlayerEffectsRuleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -25,7 +25,7 @@ public sealed class PlayerEffectsRuleSystem : EntitySystem
             if (comp.Jobs is {} jobs && (args.JobId is not {} job || !jobs.Contains(job)))
                 continue;
 
-            _effects.ApplyEffects(args.Mob, comp.Effects);
+            _effects.ApplyEffects(args.Mob, comp.Effects, predicted: false);
         }
     }
 }

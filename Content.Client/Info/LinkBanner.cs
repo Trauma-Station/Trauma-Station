@@ -1,6 +1,6 @@
-// <RMC>
+// <Trauma>
 using Content.Trauma.Common.LinkAccount;
-// </RMC>
+// </Trauma>
 using Content.Client.Changelog;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.EscapeMenu;
@@ -13,14 +13,14 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client.Info
 {
-    public sealed class LinkBanner : BoxContainer
+    public sealed partial class LinkBanner : BoxContainer
     {
-        // <RMC>
+        // <Trauma>
         public static Action<LinkBanner>? OnLinkBanner;
         public Action? OnToggleWindow;
-        // </RMC>
+        // </Trauma>
 
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IConfigurationManager _cfg = default!;
 
         private ValueList<(CVarDef<string> cVar, Button button)> _infoLinks;
 

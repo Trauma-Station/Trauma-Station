@@ -11,7 +11,7 @@ namespace Content.Shared.EntityEffects.Effects.EntitySpawning;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class SpawnEntityInContainerOrDropEntityEffectSystem : EntityEffectSystem<ContainerManagerComponent, SpawnEntityInContainerOrDrop>
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     protected override void Effect(Entity<ContainerManagerComponent> entity, ref EntityEffectEvent<SpawnEntityInContainerOrDrop> args)
     {
@@ -21,7 +21,7 @@ public sealed partial class SpawnEntityInContainerOrDropEntityEffectSystem : Ent
 
         var xform = Transform(entity);
 
-        if (args.Effect.Predicted)
+        if (args.Effect.Predicted && args.Predicted) // Trauma - check args.Predicted too
         {
             for (var i = 0; i < quantity; i++)
             {

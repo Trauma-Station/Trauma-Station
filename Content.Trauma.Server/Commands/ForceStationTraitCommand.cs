@@ -8,9 +8,9 @@ using Robust.Shared.Console;
 namespace Content.Trauma.Server.Commands;
 
 [AdminCommand(AdminFlags.Debug)]
-public sealed class ForceStationTraitCommand : IConsoleCommand
+public sealed partial class ForceStationTraitCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
     private StationTraitsSystem? _traits;
 
     public string Command => "forcestationtrait";

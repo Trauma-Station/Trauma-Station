@@ -3,7 +3,7 @@
 using Content.Shared.Alert.Components;
 using Content.Trauma.Shared.Morph;
 
-namespace Content.Goobstation.Client.Morph;
+namespace Content.Trauma.Client.Morph;
 
 /// <summary>
 /// Handles setting the morph's biomass alert UI number

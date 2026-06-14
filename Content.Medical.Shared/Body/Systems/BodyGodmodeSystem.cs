@@ -9,9 +9,9 @@ namespace Content.Medical.Shared.Body;
 /// <summary>
 /// Propogates godmode to all organs and prevents removing them.
 /// </summary>
-public sealed class BodyGodmodeSystem : EntitySystem
+public sealed partial class BodyGodmodeSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
 
     public override void Initialize()
     {

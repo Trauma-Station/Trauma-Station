@@ -19,7 +19,7 @@ using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client.Clothing;
 
-public sealed class ClientClothingSystem : ClothingSystem
+public sealed partial class ClientClothingSystem : ClothingSystem
 {
     public const string Jumpsuit = "jumpsuit";
 
@@ -28,7 +28,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     /// For some context, im currently refactoring inventory. Part of that is slots not being indexed by a massive enum anymore, but by strings.
     /// Problem here: Every rsi-state is using the old enum-names in their state. I already used the new inventoryslots ALOT. tldr: its this or another week of renaming files.
     /// </summary>
-    private static readonly Dictionary<string, string> TemporarySlotMap = new()
+    public static readonly Dictionary<string, string> TemporarySlotMap = new() // Trauma - made public
     {
         {"head", "HELMET"},
         {"eyes", "EYES"},
@@ -47,10 +47,10 @@ public sealed class ClientClothingSystem : ClothingSystem
         {"suitstorage", "SUITSTORAGE"},
     };
 
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly DisplacementMapSystem _displacement = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private DisplacementMapSystem _displacement = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -224,7 +224,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     {
         base.OnGotEquipped(uid, component, args);
 
-        RenderEquipment(args.Equipee, uid, args.Slot, clothingComponent: component);
+        RenderEquipment(args.EquipTarget, uid, args.Slot, clothingComponent: component);
     }
 
     private void RenderEquipment(EntityUid equipee, EntityUid equipment, string slot,
@@ -341,8 +341,12 @@ public sealed class ClientClothingSystem : ClothingSystem
 
             _sprite.LayerSetData((equipee, sprite), index, layerData);
             _sprite.LayerSetOffset(layer, layer.Offset + slotDef.Offset);
-            if (!hiddenEv.Visible) // Goobstation
+            // <Trauma>
+            if (!hiddenEv.Visible)
                 _sprite.LayerSetVisible(layer, false);
+            if (ev.LayersAnimationTime.TryGetValue(key, out var time))
+                _sprite.LayerSetAnimationTime(layer, time);
+            // </Trauma>
 
             if (displacementData is not null)
             {

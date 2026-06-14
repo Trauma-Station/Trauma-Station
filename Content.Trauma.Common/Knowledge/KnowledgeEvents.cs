@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Trauma.Common.Knowledge;
 
 /// <summary>
@@ -23,15 +22,3 @@ public record struct UpdateExperienceEvent();
 /// </summary>
 [ByRefEvent]
 public record struct UpdateItemQualityEvent(EntityUid User);
-
-/// <summary>
-/// Called in order to invoke damage modifiers for martial arts. Call on the art itself.
-/// </summary>
-[ByRefEvent]
-public record struct MartialArtDamageModifierEvent(EntityUid User, float Coefficient = 1.0f);
-
-/// <summary>
-///
-/// </summary>
-[ByRefEvent]
-public record struct MissAttackEvent(int Adjust, bool Miss = false);

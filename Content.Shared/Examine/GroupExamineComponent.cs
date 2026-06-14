@@ -67,7 +67,7 @@ namespace Content.Shared.Examine
         ///     Details shown when hovering over the button.
         /// </summary>
         [DataField]
-        public string HoverMessage = string.Empty;
+        public LocId? HoverMessage; // Trauma - nullable LocId instead of string.Empty
     }
 
     /// <summary>

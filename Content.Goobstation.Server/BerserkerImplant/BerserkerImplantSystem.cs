@@ -6,9 +6,9 @@ using Content.Trauma.Common.Wizard.Projectile;
 
 namespace Content.Goobstation.Server.BerserkerImplant;
 
-public sealed class BerserkerImplantSystem : SharedBerserkerImplantSystem
+public sealed partial class BerserkerImplantSystem : SharedBerserkerImplantSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

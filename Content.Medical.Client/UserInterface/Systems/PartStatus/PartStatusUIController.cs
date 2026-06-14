@@ -6,22 +6,18 @@ using Content.Medical.Client.Targeting;
 using Content.Medical.Client.UserInterface.Systems.PartStatus.Widgets;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.PartStatus;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
 namespace Content.Medical.Client.UserInterface.Systems.PartStatus;
 
-public sealed class PartStatusUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemChanged<TargetingSystem>
+public sealed partial class PartStatusUIController : UIController, IOnStateEntered<GameplayState>, IOnSystemChanged<TargetingSystem>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IEntityNetworkManager _entNet = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IEntityNetworkManager _entNet = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private SpriteSystem _sprite = default!;
 
     private BodyStatusComponent? _comp;

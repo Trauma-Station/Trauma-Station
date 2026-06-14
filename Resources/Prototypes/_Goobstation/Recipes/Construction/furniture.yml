@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: WallTorch
   graph: WallTorchGraph
@@ -24,4 +26,4 @@
   conditions:
     - !type:TileNotBlocked
   theory:
-    FurnitureKnowledge: 1
+    FurnitureKnowledge: 0

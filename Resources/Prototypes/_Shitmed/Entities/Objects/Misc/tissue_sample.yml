@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: FoodMeatBase
   id: XenoTissueSample
@@ -11,12 +13,11 @@
   - type: TissueSample
   - type: StaticPrice
     price: 2500 # coroner gameplay
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: SulfuricAcid
-          Quantity: 20
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SulfuricAcid
+        Quantity: 20
   - type: FlavorProfile
     flavors:
     - meaty

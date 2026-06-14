@@ -9,8 +9,6 @@
   theory:
     FabricationKnowledge: 0
   useQuality: false
-  practical:
-    CarvingKnowledge: 1
   # </Trauma>
 
 - type: construction
@@ -22,56 +20,46 @@
   objectType: Item
   # <Trauma>
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
+  practical:
+    ElectronicsKnowledge: 2
   # </Trauma>
 
 - type: construction
+  parent: LogicGate # Trauma
   id: EdgeDetector
   graph: LogicGate
   startNode: start
   targetNode: edge_detector
   category: construction-category-tools
   objectType: Item
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: LogicGate # Trauma
   id: PowerSensor
   graph: LogicGate
   startNode: start
   targetNode: power_sensor
   category: construction-category-tools
   objectType: Item
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: LogicGate # Trauma
   id: MemoryCell
   graph: LogicGate
   startNode: start
   targetNode: memory_cell
   category: construction-category-tools
   objectType: Item
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
+  parent: LogicGate # Trauma
   id: RandomGate
   graph: LogicGate
   startNode: start
   targetNode: random_gate
   category: construction-category-tools
   objectType: Item
-  # <Trauma>
-  theory:
-    ElectronicsKnowledge: 1
-  # </Trauma>
 
 - type: construction
   id: MakeshiftMortarAndPestle
@@ -96,7 +84,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
+    FabricationKnowledge: 0
   practical:
     CarvingKnowledge: 2
   # </Trauma>
@@ -110,7 +98,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
-    ElectronicsKnowledge: 1
+    FabricationKnowledge: 0
+    ElectronicsKnowledge: 0
     # TODO: some kind of knowledge that you know about separating liquids by centrifugal forces
   # </Trauma>

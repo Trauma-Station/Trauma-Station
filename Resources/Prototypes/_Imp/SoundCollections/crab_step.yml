@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: soundCollection
+  id: FootstepDecapoid
+  files:
+  - /Audio/_Impstation/Effects/Footsteps/crab_step.ogg
+  - /Audio/_Impstation/Effects/Footsteps/crab_step1.ogg
+  - /Audio/_Impstation/Effects/Footsteps/crab_step2.ogg
+  - /Audio/_Impstation/Effects/Footsteps/crab_step3.ogg

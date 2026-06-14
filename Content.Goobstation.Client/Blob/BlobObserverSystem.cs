@@ -6,16 +6,15 @@ using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
-using Robust.Client.Graphics;
 using Robust.Shared.Player;
 //using Content.Shared.Flesh;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed class BlobObserverSystem : SharedBlobObserverSystem
+public sealed partial class BlobObserverSystem : SharedBlobObserverSystem
 {
-    [Dependency] private readonly ILightManager _lightManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private ILightManager _lightManager = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {

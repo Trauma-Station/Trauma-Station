@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
@@ -14,13 +16,3 @@
   - type: Sprite
     sprite: _Trauma/Mobs/ShadowDemon/demon.rsi
     state: shadow_demon
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: SpawnPointGhostShadowDemon
-  id: SpawnPointShadowDemonToken
-  components:
-  - type: GhostRole
-    name: roles-shadow-demon-name-token
-    description: ghost-role-information-description-token-generic
-    rules: ghost-role-information-shadow-demon-rules

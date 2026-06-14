@@ -7,18 +7,17 @@ using Robust.Shared.Timing;
 using Content.Shared.Examine;   // Frontier
 using Content.Shared.Hands.Components;  // Frontier
 using Content.Shared.Verbs;     // Frontier
-using Robust.Shared.Utility;    // Frontier
 
 namespace Content.Trauma.Shared.Storage.EntitySystems;
 
 /// <summary>
 /// <see cref="MaterialStorageMagnetPickupComponent"/>
 /// </summary>
-public sealed class MaterialStorageMagnetPickupSystem : EntitySystem
+public sealed partial class MaterialStorageMagnetPickupSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _storage = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMaterialStorageSystem _storage = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
 

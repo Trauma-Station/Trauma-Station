@@ -10,9 +10,9 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.StationEvents.Events;
 
-public sealed class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
+public sealed partial class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

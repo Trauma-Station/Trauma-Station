@@ -13,8 +13,6 @@ namespace Content.Shared.Examine
             base.Initialize();
 
             SubscribeLocalEvent<GroupExamineComponent, GetVerbsEvent<ExamineVerb>>(OnGroupExamineVerb);
-
-            _ghostQuery = GetEntityQuery<GhostComponent>();
         }
 
         /// <summary>
@@ -37,7 +35,7 @@ namespace Content.Shared.Examine
                         group.Entries.Clear();
                     },
                     Text = Loc.GetString(group.ContextText),
-                    Message = Loc.GetString(group.HoverMessage),
+                    Message = group.HoverMessage is { } message ? Loc.GetString(message) : null, // Trauma - HoverMessage is nullable now
                     Category = VerbCategory.Examine,
                     Icon = group.Icon,
                 };

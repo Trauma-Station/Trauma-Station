@@ -15,10 +15,10 @@ namespace Content.Server.Objectives.Systems;
 /// <summary>
 /// Provides API for other components and handles setting the title.
 /// </summary>
-public sealed class TargetObjectiveSystem : EntitySystem
+public sealed partial class TargetObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private SharedJobSystem _job = default!;
 
     public override void Initialize()
     {
@@ -33,9 +33,12 @@ public sealed class TargetObjectiveSystem : EntitySystem
         if (!GetTarget(uid, out var target, comp))
             return;
 
+        if (comp.Title == null) // Trauma - skip setting name if title is null, also added dynamicName and showJobTitle too
+            return;
+
         _metaData.SetEntityName(uid,
             GetTitle(target.Value, comp.Title, comp.DynamicName, comp.ShowJobTitle),
-            args.Meta); // Goob edit
+            args.Meta); // Trauma - dynamic name stuff was changed
     }
 
     /// <summary>
@@ -63,7 +66,7 @@ public sealed class TargetObjectiveSystem : EntitySystem
         return target != null;
     }
 
-    public string GetTitle(EntityUid target, string title, bool dynamicName = false, bool showJobTitle = true) // Goob edit
+    public string GetTitle(EntityUid target, string? title, bool dynamicName = false, bool showJobTitle = true) // Trauma - title made nullable
     {
         var targetName = "Unknown";
         // Goob edit start
@@ -74,6 +77,9 @@ public sealed class TargetObjectiveSystem : EntitySystem
             else if (mind.CharacterName != null)
                 targetName = FormattedMessage.EscapeText(mind.CharacterName); // Goob Sanitize Text
         }
+
+        if (title == null) // Trauma - return empty if no title is set
+            return string.Empty;
 
         if (!showJobTitle)
             return Loc.GetString(title, ("targetName", targetName));

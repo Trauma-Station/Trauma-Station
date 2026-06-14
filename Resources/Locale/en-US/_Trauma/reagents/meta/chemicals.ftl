@@ -51,6 +51,3 @@ reagent-desc-calcium-oxide = Also known as quicklime, used in cement, reacts wit
 
 reagent-name-calcium-hydroxide = calcium hydroxide
 reagent-desc-calcium-hydroxide = The result of calcium oxide reacting with water.
-
-reagent-name-burnite = burnite
-reagent-desc-burnite = Basically just chemical flame, it can create fires even in space! Well, as long as it's on a tile that is.

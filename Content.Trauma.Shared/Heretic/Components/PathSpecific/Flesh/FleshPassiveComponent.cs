@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Chemistry.Reagent;
-using Content.Shared.FixedPoint;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Metabolism;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 
@@ -10,23 +10,21 @@ public sealed partial class FleshPassiveComponent : Component
 {
     public override bool SessionSpecific => true;
 
-    [DataField, NonSerialized]
-    public List<EntityUid> FleshMimics = new();
-
     [DataField]
-    public int MaxMimics = 10;
-
-    [DataField]
-    public float MimicHealMultiplier = 5f;
+    public List<ProtoId<DamageTypePrototype>> HealthChangeImmuneDamageTypes = new()
+        { "Poison", "Radiation", "Asphyxiation", "Bloodloss", "Cellular", "Caustic" };
 
     [DataField]
     public EntityUid? Stomach;
 
     [DataField]
-    public ProtoId<ReagentPrototype> ReagentId = "RawFlesh";
+    public float Heal = -1;
 
     [DataField]
-    public float ReagentMultiplier = 0.1f;
+    public float BloodHeal = 3f;
+
+    [DataField]
+    public float BleedHeal = -0.5f;
 
     [DataField]
     public float OrganMultiplier = 2f;
@@ -46,9 +44,7 @@ public sealed partial class FleshPassiveComponent : Component
     [DataField]
     public float AscensionMultiplier = 2f;
 
+    // Prevents heretics from vomiting when consuming flesh and other stuff
     [DataField]
-    public FixedPoint2 TrackedDamage;
-
-    [DataField]
-    public FixedPoint2 MimicDamage = 10;
+    public ProtoId<MetabolizerTypePrototype> FleshMetabolizer = "Vox";
 }

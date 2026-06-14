@@ -6,9 +6,9 @@ using Content.Shared.IdentityManagement;
 
 namespace Content.Trauma.Shared.Body.Organ;
 
-public sealed class OrganExamineSystem : EntitySystem
+public sealed partial class OrganExamineSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     public override void Initialize()
     {

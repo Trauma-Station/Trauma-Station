@@ -3,9 +3,9 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.Physics;
 
-public sealed class SharedPreventCollideSystem : EntitySystem
+public sealed partial class SharedPreventCollideSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

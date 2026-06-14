@@ -15,14 +15,14 @@ namespace Content.Trauma.Server.Ghost;
 /// <summary>
 /// Handles ghost character dedicated spawners (reinforcements) and antag rules (e.g. ninja)
 /// </summary>
-public sealed class GhostCharacterSpawnerSystem : EntitySystem
+public sealed partial class GhostCharacterSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly GhostCharacterSystem _character = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
-    [Dependency] private readonly IServerPreferencesManager _prefs = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StationSpawningSystem _spawning = default!;
-    [Dependency] private readonly EntityQuery<GhostRoleComponent> _roleQuery = default!;
+    [Dependency] private GhostCharacterSystem _character = default!;
+    [Dependency] private GhostRoleSystem _ghostRole = default!;
+    [Dependency] private IServerPreferencesManager _prefs = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StationSpawningSystem _spawning = default!;
+    [Dependency] private EntityQuery<GhostRoleComponent> _roleQuery = default!;
 
     public override void Initialize()
     {
@@ -85,7 +85,7 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
         }
 
         profile ??= HumanoidCharacterProfile.RandomWithSpecies(ent.Comp.DefaultSpecies);
-        var coords = Transform(ent).Coordinates; // the gamerule happens to be in nullspace
+        var coords = _transform.ToCoordinates(args.Coords);
         args.Entity = _spawning.SpawnPlayerMob(coords, job: null, profile: profile, station: null);
     }
 

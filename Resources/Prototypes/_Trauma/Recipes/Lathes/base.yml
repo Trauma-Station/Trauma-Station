@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   abstract: true
   id: BaseRedAlert
@@ -7,4 +9,14 @@
   - delta
   - omicron
   - octarine
-  # same as cargo product, intentionally no epsilon
+
+- type: latheRecipe
+  abstract: true
+  id: BaseBlueAlert
+  requiredAlerts:
+  - blue
+  - red
+  - gamma
+  - delta
+  - omicron
+  - octarine

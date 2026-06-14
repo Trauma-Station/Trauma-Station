@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.Genetics.Mutations;
 /// Allows an entity to have mutations.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(MutationSystem))]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class MutatableComponent : Component
 {
     /// <summary>

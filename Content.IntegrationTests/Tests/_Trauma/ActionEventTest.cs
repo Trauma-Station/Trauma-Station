@@ -11,7 +11,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// Makes sure that every TargetAction has an event specified for either Entity or World.
 /// Prevents runtime errors when someone tries to use the action.
 /// </summary>
-[TestFixture]
 public sealed class ActionEventTest : GameTest
 {
     /// <summary>

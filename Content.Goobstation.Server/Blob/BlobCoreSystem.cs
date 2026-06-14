@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Server.Blob.Components;
@@ -37,22 +36,22 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobCoreSystem : EntitySystem
+public sealed partial class BlobCoreSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
-    [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly BlobTileSystem _blobTile = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private AlertLevelSystem _alertLevel = default!;
+    [Dependency] private RoundEndSystem _roundEnd = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private ActionsSystem _action = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private BlobTileSystem _blobTile = default!;
 
     private EntityQuery<BlobTileComponent> _tile;
     private EntityQuery<BlobFactoryComponent> _factory;
@@ -61,6 +60,7 @@ public sealed class BlobCoreSystem : EntitySystem
     private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
     private static readonly ProtoId<AlertPrototype> BlobResource = "BlobResource";
     private static readonly ProtoId<CurrencyPrototype> BlobMoney = "BlobPoint";
+    private static readonly EntProtoId BlobRule = "BlobRule";
 
     private readonly ReaderWriterLockSlim _pointsChange = new();
 
@@ -260,7 +260,7 @@ public sealed class BlobCoreSystem : EntitySystem
         var blobRule = EntityQuery<BlobRuleComponent>().FirstOrDefault();
         if (blobRule == null)
         {
-            _ticker.StartGameRule("BlobRule", out _);
+            _ticker.StartGameRule(BlobRule, out _);
         }
 
         var ev = new CreateBlobObserverEvent(userId);

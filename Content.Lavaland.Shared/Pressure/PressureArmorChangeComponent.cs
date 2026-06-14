@@ -1,21 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Atmos;
-
 namespace Content.Lavaland.Shared.Pressure;
 
+/// <summary>
+/// Increases ArmorPenetration for this armor entity while <see cref="PressureEfficiencyComponent"/> does not apply.
+/// Used to make lavaland armor less protective on station.
+/// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedPressureEfficiencyChangeSystem))]
 public sealed partial class PressureArmorChangeComponent : Component
 {
-    [DataField]
-    public float LowerBound = Atmospherics.OneAtmosphere * 0.2f;
-
-    [DataField]
-    public float UpperBound = Atmospherics.OneAtmosphere * 0.5f;
-
-    [DataField]
-    public bool ApplyWhenInRange;
-
     [DataField]
     public float ExtraPenetrationModifier = 0.5f;
 }

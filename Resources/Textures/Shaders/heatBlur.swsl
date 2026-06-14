@@ -30,5 +30,5 @@ void fragment()
     // Apply Distortion to Screen
     highp vec2 distortedUV = UV + (distortion * strength_scale * heatStrength);
 
-    COLOR = texture2D(SCREEN_TEXTURE, distortedUV);
+    COLOR = zTextureSpec(SCREEN_TEXTURE, distortedUV);
 }

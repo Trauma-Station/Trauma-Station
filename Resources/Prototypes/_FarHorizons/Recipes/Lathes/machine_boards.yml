@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: HolographicFieldGeneratorCircuitboard
+  result: HolographicFieldGeneratorCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseSecurityMachineRecipeCategory ]
+  id: HolographicBarrierGeneratorCircuitboard
+  result: HolographicBarrierGeneratorCircuitboard

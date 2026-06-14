@@ -33,11 +33,11 @@
         children: # goob edited
         - id: DefibrillatorSyndicate
         - id: SawAdvanced
-        - id: Drill
+        - id: EnergyScalpel # Trauma - was Drill
         - id: AdvancedRetractor
         - id: EnergyCautery
         - id: AdvancedBoneGel
-        - id: ScalpelAdvanced
+        #- id: ScalpelAdvanced # Trauma
         - id: ClothingHandsGlovesNitrile
         - id: EmergencyRollerBedSpawnFolded
 
@@ -52,13 +52,9 @@
       storagebase: !type:AllSelector
         children:
         - id: JugBicaridine
-        - id: JugPuncturase
-        - id: JugDermaline
-        - id: JugDylovene
-        - id: JugHyronalin
-        - id: JugSaline
-        - id: JugDexalinPlus
-        - id: JugTranexamicAcid
+        - id: JugPunctTranex
+        - id: JugPyraDerma
+        - id: JugDexPlusSaline
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle

@@ -9,6 +9,13 @@
   access:
   - Library # Trauma - replaced Service
   - Maintenance
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipLawyer
+  # </Trauma>
+
 - type: startingGear
   id: LibrarianGear
   equipment:
@@ -19,12 +26,12 @@
     pocket2: HandLabeler # for making named bestsellers
   storage:
     back:
-    - BookRandom
     # <Trauma>
     - PrintingPressFlatpack
     - Multitool
     - CaneSheathFilled # Temp while I sprite the flaming sword of islam
     # </Trauma>
+    - BookRandom
 
 - type: chameleonOutfit
   id: LibrarianChameleonOutfit

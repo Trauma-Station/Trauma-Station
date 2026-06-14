@@ -33,6 +33,11 @@
 - type: latheRecipePack
   id: ElectronicsStatic
   recipes:
+  # <Trauma>
+  - CameraElectronics
+  - HolographicFieldGeneratorCircuitboard
+  - HolographicBarrierGeneratorCircuitboard
+  # </Trauma>
   - IntercomElectronics
   - FirelockElectronics
   - DoorElectronics
@@ -48,7 +53,6 @@
   - CellRechargerCircuitboard
   - WeaponCapacitorRechargerCircuitboard
   - FreezerElectronics
-  - CameraElectronics # goob
 
 - type: latheRecipePack
   id: EngineeringBoardsStatic

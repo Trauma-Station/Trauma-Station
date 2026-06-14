@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Markings
 
 - type: markingsGroup
@@ -202,14 +204,12 @@
   components:
   - type: Damageable
     damageModifierSet: Plasmaman
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Plasma
-          Quantity: 5
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 5
   - type: Extractable
-    grindableSolutionName: food
     juiceSolution:
       reagents:
       - ReagentId: Plasma
@@ -311,15 +311,14 @@
   parent: [ OrganBaseBrain, OrganPlasmamanInternal ]
   id: OrganPlasmamanBrain
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: GreyMatter
-          Quantity: 5
-        - ReagentId: Plasma
-          Quantity: 5
+  - type: Solution
+    solution:
+      maxVol: 10
+      reagents:
+      - ReagentId: GreyMatter
+        Quantity: 5
+      - ReagentId: Plasma
+        Quantity: 5
 
 - type: entity
   parent: [ OrganBaseEyes, OrganPlasmamanInternal ]

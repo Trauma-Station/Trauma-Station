@@ -2,9 +2,9 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared.Body;
 
-public sealed class HandOrganSystem : EntitySystem
+public sealed partial class HandOrganSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -16,7 +16,9 @@ public sealed class HandOrganSystem : EntitySystem
 
     private void OnGotInserted(Entity<HandOrganComponent> ent, ref OrganGotInsertedEvent args)
     {
+        // <Trauma>
         _hands.AddHand(args.Target.Owner, ent.Comp.HandID, ent.Comp.Data); // Trauma - use .Owner
+        GiveStartingItem(ent, args.Target); // Trauma
     }
 
     private void OnGotRemoved(Entity<HandOrganComponent> ent, ref OrganGotRemovedEvent args)
@@ -26,5 +28,6 @@ public sealed class HandOrganSystem : EntitySystem
             return;
 
         _hands.RemoveHand(args.Target.Owner, ent.Comp.HandID); // Trauma - use .Owner
+        _cuffable.TryUncuff(args.Target.Owner, args.Target.Owner); // Trauma
     }
 }

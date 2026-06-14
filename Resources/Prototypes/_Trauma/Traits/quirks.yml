@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: trait
   id: NoHypoport
   name: trait-no-hypoport-name
@@ -6,5 +8,6 @@
   blacklist:
     components:
     - BorgChassis
+    - Silicon
   components:
   - type: NoHypoport

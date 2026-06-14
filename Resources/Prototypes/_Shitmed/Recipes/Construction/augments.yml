@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Power
 
 - type: construction
@@ -7,10 +9,8 @@
   targetNode: augment
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-  # </Trauma>
 
 - type: construction
   id: AugmentRechargerAPC
@@ -19,10 +19,8 @@
   targetNode: apc
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-  # </Trauma>
 
 - type: construction
   id: AugmentRechargerStation
@@ -31,10 +29,8 @@
   targetNode: station
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-  # </Trauma>
 
 # Arm
 
@@ -45,10 +41,8 @@
   targetNode: "utility tools panel"
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-  # </Trauma>
 
 - type: construction
   id: AugmentBotanyPanel
@@ -57,10 +51,8 @@
   targetNode: "botany tools panel"
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-  # </Trauma>
 
 - type: construction
   id: AugmentSurgicalPanel
@@ -69,10 +61,8 @@
   targetNode: "surgery tools panel"
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
-  # </Trauma>
 
 - type: construction
   id: AugmentStrength
@@ -81,9 +71,7 @@
   targetNode: augment
   category: construction-category-utilities
   canBuildInImpassable: false
-  # <Trauma>
   theory:
     ElectronicsKnowledge: 2
   practical:
     ElectronicsKnowledge: 3
-  # </Trauma>

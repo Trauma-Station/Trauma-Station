@@ -43,11 +43,11 @@ public sealed partial class RelayRandomPart : EntityEffectBase<RelayRandomPart>
         => Loc.GetString("entity-effect-guidebook-relay-random-part", ("effect", Effect.EntityEffectGuidebookText(prototype, entSys)!));
 }
 
-public sealed class RelayRandomPartEffectSystem : EntityEffectSystem<BodyComponent, RelayRandomPart>
+public sealed partial class RelayRandomPartEffectSystem : EntityEffectSystem<BodyComponent, RelayRandomPart>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     private List<EntityUid> _parts = new();
 

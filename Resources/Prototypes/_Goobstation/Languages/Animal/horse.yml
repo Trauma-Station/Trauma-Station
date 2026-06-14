@@ -1,6 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: language
   id: Cheval
-  isVisibleLanguage: true
   speech:
     color: "#964B00"
   obfuscation:

@@ -7,3 +7,9 @@
   license: "CC-BY-3.0"
   copyright: "Created by AudioPapkin, Modified by loltart"
   source: "https://pixabay.com/sound-effects/horror-monster-roar-ps-oo7-306401/"
+
+- files:
+  - field_off.ogg
+  license: "CC-BY-3.0"
+  copyright: "Created by NoElkaTheGod from a combination of Space Station 14 sounds"
+  source: "https://github.com/space-wizards/space-station-14"

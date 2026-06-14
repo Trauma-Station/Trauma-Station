@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Shared.Fishing.Components;
 using Content.Goobstation.Shared.Fishing.Systems;
 using Content.Shared.EntityTable;
@@ -17,13 +16,13 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Fishing;
 
-public sealed class FishingSystem : SharedFishingSystem
+public sealed partial class FishingSystem : SharedFishingSystem
 {
     // Here we calculate the start of fishing, because apparently StartCollideEvent
     // works janky on clientside so we can't predict when fishing starts.
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

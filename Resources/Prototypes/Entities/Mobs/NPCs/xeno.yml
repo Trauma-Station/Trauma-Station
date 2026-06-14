@@ -7,6 +7,16 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
+  # <Trauma>
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-purple-snake-name
+    description: ghost-role-information-purple-snake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -44,12 +54,9 @@
     damage:
       types:
         Piercing: 5
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      melee:
-        reagents:
-        - ReagentId: Toxin
-          Quantity: 50
+    - SolutionVenomPurpleSnake
   - type: MeleeChemicalInjector
     solution: melee
   - type: Fixtures
@@ -72,12 +79,33 @@
     - FootstepSound
 
 - type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomPurpleSnake
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 30
+
+- type: entity
   name: space adder
   parent: [ AppearanceSpaceAdder, MobPurpleSnake ] # Shitmed
   id: MobSmallPurpleSnake
   suffix: small
   description: A smaller version of the menacing purple snake from Kepler-283c.
   components:
+  # <Trauma>
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-small-purple-snake-name
+    description: ghost-role-information-small-purple-snake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi

@@ -2,7 +2,7 @@
 
 using Content.Shared.Mind;
 
-namespace Content.Goobstation.Server.Wizard.Components;
+namespace Content.Trauma.Server.Wizard.Components;
 
 [RegisterComponent]
 public sealed partial class GrantTargetObjectiveOnGhostTakeoverComponent : Component

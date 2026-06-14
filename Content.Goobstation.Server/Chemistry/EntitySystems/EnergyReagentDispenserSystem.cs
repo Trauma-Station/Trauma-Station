@@ -18,7 +18,6 @@ using Robust.Shared.Containers;
 using Content.Shared.Labels.Components;
 using Content.Server.Power.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Power.Components;
 
@@ -29,21 +28,21 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
     /// <seealso cref="EnergyReagentDispenserComponent"/>
     /// </summary>
     [UsedImplicitly]
-    public sealed class EnergyReagentDispenserSystem : EntitySystem
+    public sealed partial class EnergyReagentDispenserSystem : EntitySystem
     {
-        [Dependency] private readonly AudioSystem _audioSystem = default!;
-        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-        [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly BatterySystem _battery = default!;
+        [Dependency] private AudioSystem _audioSystem = default!;
+        [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+        [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private BatterySystem _battery = default!;
 
         public override void Initialize()
         {
             base.Initialize();
 
             SubscribeLocalEvent<EnergyReagentDispenserComponent, ComponentStartup>(SubscribeUpdateUiState);
-            SubscribeLocalEvent<EnergyReagentDispenserComponent, SolutionContainerChangedEvent>(SubscribeUpdateUiState);
+            SubscribeLocalEvent<EnergyReagentDispenserComponent, SolutionChangedEvent>(SubscribeUpdateUiState);
             SubscribeLocalEvent<EnergyReagentDispenserComponent, EntInsertedIntoContainerMessage>(SubscribeUpdateUiState);
             SubscribeLocalEvent<EnergyReagentDispenserComponent, EntRemovedFromContainerMessage>(SubscribeUpdateUiState);
             SubscribeLocalEvent<EnergyReagentDispenserComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
@@ -138,15 +137,19 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             return inventory;
         }
 
-        private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserSetDispenseAmountMessage message)
+        private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> ent, ref EnergyReagentDispenserSetDispenseAmountMessage args)
         {
-            reagentDispenser.Comp.DispenseAmount = message.EnergyReagentDispenserDispenseAmount;
-            UpdateUiState(reagentDispenser);
-            ClickSound(reagentDispenser);
+            var amount = args.Amount;
+            if (ent.Comp.DispenseAmount == amount || amount > ent.Comp.MaxDispenseAmount || amount < ent.Comp.MinDispenseAmount)
+                return;
+
+            ent.Comp.DispenseAmount = amount;
+            UpdateUiState(ent);
+            ClickSound(ent);
         }
 
-        private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref PowerChangedEvent args) =>
-            UpdateUiState(reagentDispenser);
+        private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> ent, ref PowerChangedEvent args) =>
+            UpdateUiState(ent);
 
         private void OnDispenseReagentMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserDispenseReagentMessage message)
         {

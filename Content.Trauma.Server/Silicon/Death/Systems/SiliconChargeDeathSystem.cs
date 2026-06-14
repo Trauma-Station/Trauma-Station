@@ -13,12 +13,12 @@ using Content.Trauma.Shared.Silicon.Systems;
 
 namespace Content.Trauma.Server.Silicon.Death;
 
-public sealed class SiliconDeathSystem : SharedSiliconDeathSystem
+public sealed partial class SiliconDeathSystem : SharedSiliconDeathSystem
 {
-    [Dependency] private readonly SharedCombatModeSystem _combat = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedCombatModeSystem _combat = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {

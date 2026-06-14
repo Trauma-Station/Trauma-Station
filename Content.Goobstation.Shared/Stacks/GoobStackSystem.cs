@@ -8,10 +8,10 @@ namespace Content.Goobstation.Shared.Stacks;
 /// <summary>
 /// Gives every <see cref="StackComponent"/> a split dialog UI.
 /// </summary>
-public sealed class GoobStackSystem : EntitySystem
+public sealed partial class GoobStackSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

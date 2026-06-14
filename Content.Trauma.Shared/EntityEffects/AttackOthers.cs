@@ -22,11 +22,11 @@ public sealed partial class AttackOthers : EntityEffectBase<AttackOthers>
         => Loc.GetString("entity-effect-guidebook-attack-others", ("chance", Probability), ("useHeld", UseHeld));
 }
 
-public sealed class AttackOthersEntityEvent : EntityEffectSystem<CombatModeComponent, AttackOthers>
+public sealed partial class AttackOthersEntityEvent : EntityEffectSystem<CombatModeComponent, AttackOthers>
 {
-    //[Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    //[Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    //[Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    //[Dependency] private SharedMeleeWeaponSystem _melee = default!;
 
     [Dependency] private EntityQuery<MeleeWeaponComponent> _query = default!;
 

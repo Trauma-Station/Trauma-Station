@@ -20,10 +20,10 @@ public sealed partial class RelayImplanted : EntityEffectBase<RelayImplanted>
         => Loc.GetString("entity-effect-guidebook-relay-implanted", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys) ?? string.Empty));
 }
 
-public sealed class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImplantComponent, RelayImplanted>
+public sealed partial class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImplantComponent, RelayImplanted>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<SubdermalImplantComponent> ent, ref EntityEffectEvent<RelayImplanted> args)
     {
@@ -31,7 +31,7 @@ public sealed class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImp
             return;
 
         _data.CopyData(ent, user);
-        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale, args.User);
+        _effects.TryApplyEffect(user, args.Effect.Effect, args.Scale, args.User, args.Predicted);
         _data.ClearData(user);
     }
 }

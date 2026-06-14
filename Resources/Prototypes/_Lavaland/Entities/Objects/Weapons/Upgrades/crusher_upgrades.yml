@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Important Note!
 # Crusher upgrade entities have the exact same ID as their respective TagPrototype.
 # Remember to take this into account when adding new upgrades!
@@ -134,7 +136,7 @@
   - type: WeaponUpgradeDamage
     bonusDamage:
       types:
-        Heat: 5
+        Heat: 3
   - type: WeaponUpgradeEffects
     effects:
     - !type:Flammable
@@ -164,7 +166,7 @@
   - type: WeaponUpgradeDamage
     bonusDamage:
       types:
-        Cold: 4 # Less because no armors protect from it
+        Cold: 2
   - type: WeaponUpgradeEffects
     effects:
     - !type:AdjustTemperature
@@ -190,7 +192,7 @@
   - type: WeaponUpgradeDamage
     bonusDamage:
       types:
-        Slash: 7 # Let's just say crusher hammer becomes extra-sharp on the sides
+        Slash: 4
   - type: Construction
     graph: CrusherUpgradeCrystalConstructionGraph
     node: crystal

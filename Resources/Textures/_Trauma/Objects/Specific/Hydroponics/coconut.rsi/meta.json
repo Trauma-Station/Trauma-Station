@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "created by asardonicsailor, seed sprite by MayasMischief, Dead, Stage, and Harvest sprites by Moxie M. Mockery",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "produce"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "cup"
+    },
+    {
+      "name": "seed"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "harvest"
+    },
+    {
+      "name": "stage-1"
+    },
+    {
+      "name": "stage-2"
+    },
+    {
+      "name": "stage-3"
+    },
+    {
+      "name": "stage-4"
+    },
+    {
+      "name": "stage-5"
+    },
+    {
+      "name": "stage-6"
+    }
+  ]
+}

@@ -198,4 +198,4 @@ public interface IClothingSlots
     SlotFlags Slots { get; }
 }
 
-// <Trauma> - moved to Common
+// Trauma - moved IInventoryRelayEvent to Content.Common

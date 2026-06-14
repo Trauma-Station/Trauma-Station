@@ -2,12 +2,10 @@
 
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.Forging;
-using Robust.Client.UserInterface;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.Forging;
 
-public sealed class ForgingAnvilBUI : BoundUserInterface
+public sealed partial class ForgingAnvilBUI : BoundUserInterface
 {
     private readonly ForgingSystem _forging;
     private readonly SharedMetalSystem _metal;
@@ -61,6 +59,9 @@ public sealed class ForgingAnvilBUI : BoundUserInterface
         foreach (var (category, items) in _forging.AllItems)
         {
             var nested = GetItemsButtons(items);
+            if (nested.Count == 0)
+                continue; // don't add a category if none of its items can be made
+
             buttons.Add(new RadialMenuNestedLayerOption(nested)
             {
                 ToolTip = category.Name,
@@ -76,6 +77,9 @@ public sealed class ForgingAnvilBUI : BoundUserInterface
         var buttons = new List<RadialMenuOptionBase>(items.Count);
         foreach (var item in items)
         {
+            if (!_forging.CanMakeFrom(item, _chosenMetal))
+                continue; // dont show illegal recipes, server wont allow it anyway
+
             buttons.Add(new RadialMenuActionOption<ForgedItemPrototype>(OnItemSelected, item)
             {
                 ToolTip = item.Name,

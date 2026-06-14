@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Salvage;
-using Robust.Client.UserInterface;
 
 namespace Content.Trauma.Client.Salvage.UI;
 
-public sealed class MiningVoucherBoundUserInterface : BoundUserInterface
+public sealed partial class MiningVoucherBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private MiningVoucherMenu? _menu;

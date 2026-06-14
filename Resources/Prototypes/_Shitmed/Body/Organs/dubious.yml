@@ -276,7 +276,7 @@
         - SlipTile
         - SlipEntity
         - ContrabandDetector
-        - Caltrop # Trauma
+        - Caltrop
 
 - type: entity
   parent: OrganDubiousBase

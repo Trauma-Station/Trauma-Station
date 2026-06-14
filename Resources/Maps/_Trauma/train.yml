@@ -11952,12 +11952,6 @@ entities:
     - type: Transform
       pos: 6.5,-271.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 617
     components:
     - type: Transform
@@ -33891,12 +33885,6 @@ entities:
     - type: Transform
       pos: 6.5,-273.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: CargoTelepad
   entities:
   - uid: 7405
@@ -48777,12 +48765,6 @@ entities:
     - type: Transform
       pos: 16.5,-245.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ExosuitFabricator
   entities:
   - uid: 7323
@@ -80988,12 +80970,6 @@ entities:
     - type: Transform
       pos: -1.5,-280.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: OxygenCanister
   entities:
   - uid: 11555
@@ -89051,13 +89027,6 @@ entities:
     - type: Transform
       pos: -4.5,-299.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SciFlash
   entities:
   - uid: 11627
@@ -89123,25 +89092,11 @@ entities:
     - type: Transform
       pos: -5.5,-342.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 17680
     components:
     - type: Transform
       pos: 4.5,-335.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 13233
@@ -89161,13 +89116,6 @@ entities:
     - type: Transform
       pos: 9.5,-124.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardCrystalGreen
   entities:
   - uid: 13235
@@ -96686,13 +96634,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 1.5,-119.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 12406

@@ -4,6 +4,17 @@
   name: camera
   description: A surveillance camera. It's watching you. Kinda.
   components:
+  # <Trauma>
+  - type: ContainerFill
+    containers:
+      board: [ CameraElectronics ]
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: RequireProjectileTarget
+  - type: Viewcone
+    baseConeAngle: 360 # prevent camera vision being messed up
+  # </Trauma>
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -55,8 +66,9 @@
     alwaysRandomize: true
     layoutId: SurveillanceCamera
   - type: Damageable
+    #damageModifierSet: Metallic # Trauma
+  - type: Injurable
     damageContainer: StructuralInorganic
-    # damageModifierSet: Metallic # Goob
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/camera.rsi
@@ -97,15 +109,6 @@
               collection: MetalBreak
               params:
                 volume: -8
-  # <Goob>
-  - type: ContainerFill
-    containers:
-      board: [ CameraElectronics ]
-  - type: ContainerContainer
-    containers:
-      board: !type:Container
-  - type: RequireProjectileTarget
-  # </Goob>
   placement:
     mode: SnapgridCenter
     snap:
@@ -249,8 +252,9 @@
     - type: Transform
       anchored: true
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: Metallic
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Sprite
       drawdepth: WallMountedItems
       sprite: Structures/Wallmounts/camera.rsi

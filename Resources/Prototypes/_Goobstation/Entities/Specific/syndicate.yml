@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem, BaseSyndicateContraband, BaseBookSounds]
   id: CQCManual
   name: old manual
   description: A small, black manual. There are drawn instructions of tactical hand-to-hand combat.
@@ -46,7 +48,7 @@
     - SleepingCarp
 
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem, BaseSyndicateContraband, BaseBookSounds]
   id: CapoeiraManual
   name: choreography manual
   description: Choreography manual — or so it claims. Every second page ends with someone on the floor, not dancing.

@@ -1,17 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Factory;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Singularity.Components;
 
 namespace Content.Goobstation.Server.Singularity;
 
-public sealed class RadCollectorSignalSystem : EntitySystem
+public sealed partial class RadCollectorSignalSystem : EntitySystem
 {
-    [Dependency] private readonly AutomationSystem _automation = default!;
-    [Dependency] private readonly DeviceLinkSystem _device = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public static readonly ProtoId<SourcePortPrototype> EmptyPort = "RadEmpty";
     public static readonly ProtoId<SourcePortPrototype> LowPort = "RadLow";
@@ -24,9 +22,6 @@ public sealed class RadCollectorSignalSystem : EntitySystem
         var query = EntityQueryEnumerator<RadCollectorSignalComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!_automation.IsAutomated(uid))
-                continue;
-
             _appearance.TryGetData<int>(uid, RadiationCollectorVisuals.PressureState, out var rawState);
             var state = rawState switch
             {

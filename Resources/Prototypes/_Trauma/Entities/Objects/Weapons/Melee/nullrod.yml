@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: iradomini
   parent: [ BaseItem, BaseChaplainContraband ]
@@ -43,7 +45,6 @@
   - type: Tag
     tags:
     - Nullrod
-    - Iradomini
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1
@@ -104,7 +105,6 @@
   - type: Tag
     tags:
     - Nullrod
-    - FaithGun
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1

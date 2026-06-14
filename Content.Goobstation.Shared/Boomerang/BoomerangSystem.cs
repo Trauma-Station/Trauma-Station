@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Components;
@@ -9,12 +8,12 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Boomerang;
 
-public sealed class BoomerangSystem : EntitySystem
+public sealed partial class BoomerangSystem : EntitySystem
 {
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private ThrowingSystem _throwingSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
 
     private List<(EntityUid, EntityCoordinates, float, EntityUid?)> _toThrow = new();
 

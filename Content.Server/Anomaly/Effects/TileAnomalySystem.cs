@@ -8,11 +8,11 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.Anomaly.Effects;
 
-public sealed class TileAnomalySystem : SharedTileAnomalySystem
+public sealed partial class TileAnomalySystem : SharedTileAnomalySystem
 {
-    [Dependency] private readonly SharedAnomalySystem _anomaly = default!;
-    [Dependency] private readonly ITileDefinitionManager _tiledef = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
+    [Dependency] private SharedAnomalySystem _anomaly = default!;
+    [Dependency] private ITileDefinitionManager _tiledef = default!;
+    [Dependency] private TileSystem _tile = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

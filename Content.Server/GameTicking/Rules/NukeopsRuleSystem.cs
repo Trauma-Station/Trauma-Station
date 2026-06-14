@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Server.Chat.Systems;
+using Robust.Shared.Timing;
 // </Trauma>
 using Content.Server.Antag;
 using Content.Server.Communications;
@@ -48,31 +49,38 @@ using System.Text;
 
 namespace Content.Server.GameTicking.Rules;
 
-public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
+public sealed partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
     // <Trauma>
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
     // </Trauma>
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    //[Dependency] private readonly NavMapSystem _navMap = default!; // Trauma - no longer used
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    //[Dependency] private readonly SharedContainerSystem _containers = default!; // Trauma - no longer used
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly StationRecordsSystem _records = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EmergencyShuttleSystem _emergency = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
+    [Dependency] private SharedJobSystem _jobs = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    //[Dependency] private NavMapSystem _navMap = default!; // Trauma - no longer used
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private RoundEndSystem _roundEndSystem = default!;
+    //[Dependency] private SharedContainerSystem _containers = default!; // Trauma - no longer used
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationRecordsSystem _records = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
     private static readonly ProtoId<TagPrototype> NukeOpsReinforcementUplinkTagPrototype = "NukeOpsReinforcementUplink"; // Goobstation
+
+    // TODO: This shouldn't be matching by ProtoId.
+    // It would be better if this were checked by component or something,
+    // but it needs to be distinct between the full Nukeops and Loneops rules,
+    // which NukeopsRuleComponent currently isn't.
+    // Better yet, maybe the behaviors this is used for could be moved to the rule component.
+    private static readonly EntProtoId NukeopsGameRule = "Nukeops";
 
     public override void Initialize()
     {
@@ -214,7 +222,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 if (ev.OwningStation == GetOutpost(uid))
                 {
                     nukeops.WinConditions.Add(WinCondition.NukeExplodedOnNukieOutpost);
-                    SetWinType((uid, nukeops), WinType.CrewMajor);
+                    SetWinType((uid, nukeops), WinType.CrewMajor, GameTicker.IsGameRuleActive(NukeopsGameRule)); // End the round ONLY if the actual gamemode is NukeOps.
+                    if (!GameTicker.IsGameRuleActive(NukeopsGameRule)) // End the rule if the LoneOp shuttle got nuked, because that particular LoneOp clearly failed, and should not be considered a Syndie victory even if a future LoneOp wins.
+                        GameTicker.EndGameRule(uid);
                     continue;
                 }
 
@@ -243,9 +253,15 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             {
                 nukeops.WinConditions.Add(WinCondition.NukeExplodedOnIncorrectLocation);
             }
-
-            _roundEndSystem.EndRound();
         }
+
+        // <Trauma> - replace gamerule-specific shitcode, nuke exploding means round ended
+        // Timer.Spawn is evil but round ending shitcode is worse
+        Timer.Spawn(TimeSpan.FromSeconds(10), () =>
+        {
+            _roundEndSystem.EndRound();
+        });
+        // </Trauma>
     }
 
     private void OnRunLevelChanged(GameRunLevelChangedEvent ev)
@@ -490,7 +506,12 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         var nukiesCount = EntityQuery<NukeopsRoleComponent>().Count();
         if (nukiesCount == 0)
             return rule.WarTcAmountPerNukie;
-        var totalPlayersCount = _antag.GetTotalPlayerCount(_player.Sessions);
+        var totalPlayersCount = 0;
+        foreach (var session in _player.Sessions)
+        {
+            if (!_antag.IsDisconnected(session))
+                totalPlayersCount++;
+        }
         var playersCount = Math.Max(0, totalPlayersCount - nukiesCount);
         var maxNukies = totalPlayersCount / rule.WarNukiePlayerRatio;
         var nukiesMissing = Math.Max(0, maxNukies - nukiesCount);

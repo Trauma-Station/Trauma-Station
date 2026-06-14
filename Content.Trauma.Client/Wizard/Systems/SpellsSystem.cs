@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Client.Animations;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.SupermatterHalberd;
@@ -10,11 +9,11 @@ using Content.Trauma.Common.Wizard;
 
 namespace Content.Trauma.Client.Wizard.Systems;
 
-public sealed class SpellsSystem : SharedSpellsSystem
+public sealed partial class SpellsSystem : SharedSpellsSystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly ActionTargetMarkSystem _mark = default!;
-    [Dependency] private readonly RaysSystem _rays = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private ActionTargetMarkSystem _mark = default!;
+    [Dependency] private RaysSystem _rays = default!;
 
     public override event Action? StopTargeting;
 

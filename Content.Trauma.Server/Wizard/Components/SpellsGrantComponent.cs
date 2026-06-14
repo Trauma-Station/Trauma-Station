@@ -2,7 +2,7 @@
 
 using Content.Shared.Random;
 
-namespace Content.Goobstation.Server.Wizard.Components;
+namespace Content.Trauma.Server.Wizard.Components;
 
 [RegisterComponent]
 public sealed partial class SpellsGrantComponent : Component

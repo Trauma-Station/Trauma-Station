@@ -2,18 +2,18 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Effects;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Shared.Timing;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.TelescopicBaton;
 using Robust.Server.Audio;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class UseDelayBlockKnockdownSystem : EntitySystem
+public sealed partial class UseDelayBlockKnockdownSystem : EntitySystem
 {
-    [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SparksSystem _sparks = default!;
 
     public override void Initialize()
     {

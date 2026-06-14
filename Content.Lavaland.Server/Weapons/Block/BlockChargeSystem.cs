@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Lavaland.Server.Weapons.Block;
 
-public sealed class BlockChargeSystem : SharedBlockChargeSystem
+public sealed partial class BlockChargeSystem : SharedBlockChargeSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Update(float frameTime)
     {

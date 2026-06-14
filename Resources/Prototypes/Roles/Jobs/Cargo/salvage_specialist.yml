@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 1h #Trauma was 2.5
+      time: 2.5h
   icon: "JobIconShaftMiner"
   startingGear: SalvageSpecialistGear
   guides: # goobstation
@@ -18,10 +18,15 @@
   - Salvage
   - Maintenance
   - External
-  special: # Trauma - salv greentext
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipSalvageSpecialist
   - !type:AddObjectiveSpecial
     objectives:
     - SalvageMineObjective
+  # </Trauma>
 
 - type: startingGear
   id: SalvageSpecialistGear

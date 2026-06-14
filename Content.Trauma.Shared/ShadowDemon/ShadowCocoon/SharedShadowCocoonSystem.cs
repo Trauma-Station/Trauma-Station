@@ -12,15 +12,15 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Shared.ShadowDemon.ShadowCocoon;
 
 
-public abstract class SharedShadowCocoonSystem : EntitySystem
+public abstract partial class SharedShadowCocoonSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<ShadowCocoonMakerComponent> _makerQuery = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ShadowCocoonMakerComponent> _makerQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

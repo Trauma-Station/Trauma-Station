@@ -18,14 +18,14 @@ namespace Content.Goobstation.Server.Religion.OnPray.HealNearOnPray;
 
 public sealed partial class HealNearOnPraySystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly CommonSiliconSystem _silicon = default!;
-    [Dependency] private readonly EntityQuery<CorporealComponent> _corporealQuery = default!;
-    [Dependency] private readonly EntityQuery<SpectralComponent> _spectralQuery = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private EntityQuery<CorporealComponent> _corporealQuery = default!;
+    [Dependency] private EntityQuery<SpectralComponent> _spectralQuery = default!;
 
     private HashSet<Entity<BodyComponent>> _targets = new();
 

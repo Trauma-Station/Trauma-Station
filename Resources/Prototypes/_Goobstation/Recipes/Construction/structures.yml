@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   id: WallDirectional
   graph: WallDirectional
@@ -8,7 +10,7 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 1
+    WallsKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
 
@@ -20,7 +22,7 @@
   objectType: Structure
   placementMode: SnapgridCenter
   theory:
-    ElectronicsKnowledge: 1
+    ElectronicsKnowledge: 0
 
 # Barricades
 

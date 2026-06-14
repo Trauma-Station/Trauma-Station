@@ -5,9 +5,9 @@ using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
-public sealed class HereticRitualEffectSystem : EntitySystem
+public sealed partial class HereticRitualEffectSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -116,17 +116,17 @@ public sealed class HereticRitualRaiser(
     public Entity<HereticRitualRaiserComponent> Ritual => ritual;
     public IEntityManager EntMan => entMan;
 
-    public void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user)
+    public void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user, bool predicted)
         where T : EntityEffectBase<T>
     {
         if (effect is not IHereticRitualEntry)
         {
-            var ev = new EntityEffectEvent<T>(effect, scale, user);
+            var ev = new EntityEffectEvent<T>(effect, scale, user, predicted);
             entMan.EventBus.RaiseLocalEvent(target, ref ev);
             return;
         }
 
-        var ritualEv = new HereticRitualEffectEvent<T>(effect, ritual, user);
+        var ritualEv = new HereticRitualEffectEvent<T>(effect, ritual, user, predicted);
         entMan.EventBus.RaiseLocalEvent(target, ref ritualEv);
     }
 

@@ -11,7 +11,7 @@ namespace Content.Server.NPC.HTN.Preconditions;
 /// </summary>
 public sealed partial class TargetInRangePrecondition : HTNPrecondition
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
     private SharedTransformSystem _transformSystem = default!;
     private StealthSystem _stealth = default!; // goob edit
 

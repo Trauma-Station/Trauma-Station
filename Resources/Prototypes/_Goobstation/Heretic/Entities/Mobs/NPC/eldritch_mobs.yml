@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [OrganBaseTorso, OrganAnimalSpriteExternal]
   id: OrganTorsoGhoul
@@ -6,6 +8,8 @@
     slots: []
   - type: Woundable
     boneEntity: null
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent:
@@ -48,6 +52,7 @@
       90: Critical
       100: Dead
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: MeleeWeapon
     altDisarm: false
@@ -76,7 +81,6 @@
     - SlowedDown
     - Stutter
     - Electrocution
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
     - Flashed
@@ -339,8 +343,9 @@
         Holy: -1
   - type: Insulated
   - type: Damageable
-    damageContainer: InorganicMetaphysical
     damageModifierSet: MirrorMaid
+  - type: Injurable
+    damageContainer: InorganicMetaphysical
   - type: MovementIgnoreGravity
 
 - type: entity
@@ -434,7 +439,7 @@
   components:
   - type: Ghoul
     spawnOnDeathPrototype: SheetPlasma1
-    totalHealth: 15
+    totalHealth: 25
     ghostRoleName: ghostrole-fire-shark-name
     ghostRoleDesc: ghostrole-fire-shark-desc
   - type: GhostRole
@@ -469,6 +474,7 @@
   - MobFlammable
   - MobAtmosExposed
   - MobPolymorphable
+  abstract: true
   id: MobGhoulRustWalkerBase
   name: rust walker
   description: A grinding, clanking construct which leaches life from its surroundings with every armoured step.
@@ -545,6 +551,7 @@
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
   - type: Damageable
+  - type: Injurable
     damageContainer: SiliconMetaphysical
   - type: HealthExaminable
     examinableTypes:
@@ -645,7 +652,6 @@
     totalHealth: 250
     changeHumanoidProfile: false
     deathBehavior: GibOrgans
-    canDeconvert: false
   - type: RandomMetadata
     nameSegments:
     - NamesFirst

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseSimpleMob, FlyingMobBase ]
   id: MobCosmicBase
@@ -64,9 +66,8 @@
     thresholds:
       0: Alive
       50: Dead
-  - type: Damageable
+  - type: Injurable
     damageContainer: InorganicMetaphysical
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
       - trigger:

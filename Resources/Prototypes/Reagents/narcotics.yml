@@ -257,6 +257,7 @@
   flavorMinimum: 0.05
   color: "#808080"
   physicalDesc: reagent-physical-desc-crystalline
+  contrabandSeverity: Minor # Trauma
   plantMetabolism:
   - !type:PlantAdjustNutrition
     amount: -5
@@ -317,6 +318,7 @@
   group: Narcotics
   desc: reagent-desc-space-drugs
   physicalDesc: reagent-physical-desc-syrupy
+  contrabandSeverity: Minor # Trauma
   flavor: bitter
   color: "#63806e"
   metabolisms:
@@ -333,6 +335,7 @@
   group: Narcotics
   desc: reagent-desc-bananadine
   physicalDesc: reagent-physical-desc-powdery
+  contrabandSeverity: Minor # Trauma
   flavor: bitter
   color: "#ffff00"
   metabolisms:
@@ -427,9 +430,9 @@
           min: 20
         probability: 0.03
         #If anyone wants to add a light dimming or grayscale effect when under 20u, be my guest
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Add
         conditions:
         - !type:ReagentCondition
           reagent: NorepinephricAcid
@@ -484,9 +487,9 @@
       - !type:Emote
         emote: Cough
         probability: 0.08
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
+        type: Add
         conditions:
         - !type:ReagentCondition
           reagent: TearGas

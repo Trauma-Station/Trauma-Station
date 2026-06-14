@@ -7,10 +7,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Humanoid;
 
-public sealed partial class HumanoidProfileSystem : EntitySystem // Trauma - made partial
+public sealed partial class HumanoidProfileSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly GrammarSystem _grammar = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private GrammarSystem _grammar = default!;
 
     public override void Initialize()
     {
@@ -60,7 +60,7 @@ public sealed partial class HumanoidProfileSystem : EntitySystem // Trauma - mad
         if (_prototype.TryIndex(species, out var speciesPrototype))
             return Loc.GetString(speciesPrototype.Name);
 
-        Log.Error("Tried to get representation of unknown species: {speciesId}");
+        Log.Error($"Tried to get representation of unknown species: {species}"); // Trauma - fix it being unformatted
         return Loc.GetString("humanoid-appearance-component-unknown-species");
     }
 

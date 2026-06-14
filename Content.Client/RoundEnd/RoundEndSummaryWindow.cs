@@ -177,7 +177,7 @@ namespace Content.Client.RoundEnd
                     };
                     playerTitleBox.AddChild(playerNameText);
 
-                    var role = Loc.GetString(playerInfo.Role);
+                    var role = playerInfo.Role; // Trauma - remove bad Loc.GetString
                     var playerRoleText = new Label
                     {
                         VerticalAlignment = VAlignment.Bottom,

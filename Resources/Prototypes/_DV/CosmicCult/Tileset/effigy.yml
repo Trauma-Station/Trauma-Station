@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseStructure
   id: CosmicEffigy
@@ -41,8 +43,9 @@
         layer:
         - FlyingMobLayer
   - type: Damageable
-    damageContainer: InorganicMetaphysical
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: InorganicMetaphysical
   - type: Destructible
     thresholds:
       - trigger:

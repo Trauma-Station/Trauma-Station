@@ -7,15 +7,14 @@
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 5h
-    # - !type:DepartmentTimeRequirement # Trauma
-    #   department: Security
-    #   time: 10h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 10h
   weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - SpaceLaw
   - Security
   - KravMaga
@@ -30,11 +29,16 @@
   - GenpopEnter
   - GenpopLeave
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipWarden
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # goobstation
-    components:
-      - type: SecurityStaff
 
 - type: startingGear
   id: WardenGear

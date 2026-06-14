@@ -18,5 +18,6 @@
   </Box>
   <Box>
     <GuideEntityEmbed Entity="AppearanceIPC" Caption="IPC"/>
+  <GuideEntityEmbed Entity="MobDecapoid" Caption="Decapoid"/>
   </Box>
 </Document>

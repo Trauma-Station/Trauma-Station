@@ -2,7 +2,7 @@
 
 using Content.Server.Objectives.Components;
 
-namespace Content.Goobstation.Server.Objectives.Components;
+namespace Content.Trauma.Server.Objectives.Components;
 
 /// <summary>
 /// Sets the target for <see cref="KeepAliveConditionComponent"/>

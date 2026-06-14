@@ -13,7 +13,7 @@ public sealed partial class SpawnAttached : BaseSpawnEntityEntityEffect<SpawnAtt
 
 public sealed partial class SpawnAttachedEntityEffectSystem : EntityEffectSystem<TransformComponent, SpawnAttached>
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<SpawnAttached> args)
     {
@@ -21,19 +21,12 @@ public sealed partial class SpawnAttachedEntityEffectSystem : EntityEffectSystem
         var proto = args.Effect.Entity;
         var coords = entity.Owner.ToCoordinates();
 
-        if (args.Effect.Predicted)
+        if (_net.IsClient && !(args.Effect.Predicted && args.Predicted))
+            return;
+
+        for (var i = 0; i < quantity; i++)
         {
-            for (var i = 0; i < quantity; i++)
-            {
-                PredictedSpawnAttachedTo(proto, coords);
-            }
-        }
-        else if (_net.IsServer)
-        {
-            for (var i = 0; i < quantity; i++)
-            {
-                SpawnAttachedTo(proto, coords);
-            }
+            PredictedSpawnAttachedTo(proto, coords);
         }
     }
 }

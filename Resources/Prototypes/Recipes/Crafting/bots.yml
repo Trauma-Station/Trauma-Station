@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -21,7 +21,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -35,8 +35,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
-    BananiumKnowledge: 1
+    BotsKnowledge: 0
+    BananiumKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -50,7 +50,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -64,8 +64,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
-    ChemistryKnowledge: 1
+    BotsKnowledge: 0
+    ChemistryKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -79,7 +79,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -93,7 +93,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>
@@ -107,7 +107,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    BotsKnowledge: 1
+    BotsKnowledge: 0
   practical:
     ElectronicsKnowledge: 1
   # </Trauma>

@@ -8,10 +8,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Containers;
 
-public sealed class ContentContainerSystem : EntitySystem
+public sealed partial class ContentContainerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

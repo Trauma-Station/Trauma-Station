@@ -7,7 +7,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ToysKnowledge: 2
+    ToysKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>
@@ -21,7 +21,7 @@
   objectType: Item
   # <Trauma>
   theory:
-    ToysKnowledge: 2
+    ToysKnowledge: 0
   practical:
     TailoringKnowledge: 2
   # </Trauma>
@@ -35,8 +35,8 @@
   objectType: Item
   # <Trauma>
   theory:
-    FabricationKnowledge: 2
-    ToysKnowledge: 2
+    FabricationKnowledge: 0
+    ToysKnowledge: 0
   practical:
     TailoringKnowledge: 1
   # </Trauma>

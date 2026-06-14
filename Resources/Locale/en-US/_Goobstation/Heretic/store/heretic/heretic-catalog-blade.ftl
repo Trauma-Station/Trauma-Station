@@ -1,3 +1,13 @@
+knowledge-path-blade-passive-desc-1 =
+    Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down.
+    This effect can only trigger once every 20 seconds.
+
+knowledge-path-blade-passive-desc-2 =
+    Grants you immunity to having limbs dismembered.
+    Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds.
+
+knowledge-path-blade-passive-desc-3 = Riposte cooldown is halved.
+
 knowledge-path-blade-s1-name = The Cutting Edge
 knowledge-path-blade-s1-desc =
     Our great ancestors forged swords and practiced sparring on the eve of great battles.
@@ -11,8 +21,6 @@ knowledge-path-blade-s2-desc =
     The story of the footsoldier has been told since antiquity. It is one of blood and valor, and is championed by sword, steel and silver.
 
     Your Mansus Grasp will cause a short stun when used on someone lying down or facing away from you.
-
-    Being attacked while wielding a Heretic Blade in either hand will deliver a riposte towards your attacker, knocking them down. This effect can only trigger once every 20 seconds.
 
 knowledge-path-blade-s3-name = Mark of the Blade
 knowledge-path-blade-s3-desc =
@@ -31,6 +39,16 @@ knowledge-path-blade-s4-desc =
     knockdown and hook your opponent, allowing you to drag them with you at increased speed while holding a blade.
     You cannot attack with your blade that is actively hooking someone.
     Hook gets broken when victim stands up.
+
+knowledge-path-blade-armor-name = Shattered Panoply
+knowledge-path-blade-armor-desc =
+    The echoing, directionless cacophony of violence reverberates about me.
+    Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers.
+
+    Allows you to transmute a table (or a suit), a mask and a bar of silver to create a Shattered Panoply.
+    Provides baton resistance and shock insulation while worn.
+    Acts as a focus while hooded.
+    Unlocks tier 2 passive ability upgrade when transmuted.
 
 knowledge-path-blade-s5-name = Sacraments of Power
 knowledge-path-blade-s5-desc =
@@ -54,9 +72,6 @@ knowledge-path-blade-s7-desc =
     The second blow will be slightly weaker.
     You are able to infuse your mansus grasp directly into your blades, and your blades are more effective against structures.
     Actively hooking a victim using Champion Hook ability will allow you to attack them at a quickened rate with your offhand blade.
-
-    Grants immunity to having your limbs dismembered, as well as resistance to bloodloss and damage slowdown.
-    Additionally, when damaged below 50% of your maximum health, you gain increased resistance to gaining wounds and resistance to batons.
 
 knowledge-path-blade-s8-name = Wolves Among Sheep
 knowledge-path-blade-s8-desc =

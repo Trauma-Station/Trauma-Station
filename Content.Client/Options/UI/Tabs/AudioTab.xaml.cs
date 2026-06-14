@@ -17,9 +17,9 @@ namespace Content.Client.Options.UI.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class AudioTab : Control
 {
-    [Dependency] private readonly IAudioManager _audio = default!;
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IAudioManager _audio = default!;
+    [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public AudioTab()
     {
@@ -32,12 +32,17 @@ public sealed partial class AudioTab : Control
             scale: ContentAudioSystem.MasterVolumeMultiplier);
         masterVolume.ImmediateValueChanged += OnMasterVolumeSliderChanged;
 
-        // Goob Station - Barks-start
+        // <Trauma>
         Control.AddOptionPercentSlider(
             GoobCVars.BarksVolume,
             SliderVolumeBarks,
             scale: 3f);
-        // Goob Station - Barks-end
+
+        Control.AddOptionPercentSlider(
+            TraumaCVars.SpecialAudioVolume,
+            SliderVolumeSpecial,
+            scale: 1f);
+        // </Trauma>
 
         Control.AddOptionPercentSlider(
             CVars.MidiVolume,

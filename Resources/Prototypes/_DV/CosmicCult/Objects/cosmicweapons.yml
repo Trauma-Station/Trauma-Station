@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: entropic blade
   parent: [BaseSword, BaseCosmicContraband] # Trauma - Contraband marker (YES WE ARE MAKING A NEW ONE)
@@ -48,8 +50,8 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
-    maxParries: 3
-    maxReflects: 6 # No Armok, a melee-focused antag needs some counter to ranged weapons. They don't even get all 6 anyawy because not 100 melee skill.
+    maxParries: 2
+    maxReflects: 0
     soundOnReflect:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
       params:

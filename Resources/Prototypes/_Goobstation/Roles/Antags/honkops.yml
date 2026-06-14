@@ -1,10 +1,37 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antagSpecifier
+  abstract: true
+  id: BaseHonkops
+  roleLoadout: [ RoleSurvivalNukieHonkops ]
+  components:
+  # clown
+  - type: Clumsy
+  - type: SleepEmitSound
+    snore: /Audio/Voice/Misc/silly_snore.ogg
+    interval: 10
+  - type: SpeechFontOverride
+    font: LDFComicSans
+  - type: RandomMetadata
+    nameSegments:
+    - NamesHonkopsPrefix
+    - NamesHonkopsElite # all clowns are created equal
+    nameFormat: name-format-standard
+
+- type: antagSpecifier
+  parent: [ NukeopsCommander, BaseHonkops ]
+  id: HonkopsCommander
+  startingGear: SyndicateCommanderGearFullHonkops
+
+- type: antagSpecifier
+  parent: [ NukeopsMedic, BaseHonkops ]
+  id: HonkopsMedic
+  startingGear: SyndicateOperativeMedicFullHonkops
+
+- type: antagSpecifier
+  parent: [ NukeopsOperative, BaseHonkops ]
+  id: HonkopsOperative
+  startingGear: SyndicateOperativeGearFullHonkops
 
 - type: startingGear
   id: SyndicateOperativeGearFullNoUplinkHonkops

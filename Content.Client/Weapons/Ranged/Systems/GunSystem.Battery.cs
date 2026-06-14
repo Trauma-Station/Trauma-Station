@@ -17,7 +17,9 @@ public sealed partial class GunSystem
         if (args.Control is not BoxesStatusControl boxes)
             return;
 
-        boxes.Update(ent.Comp.Shots, ent.Comp.Capacity);
+        // <Trauma> - use ShotsFloat, CapacityFloat and FireCostMultiplier
+        boxes.Update((int) (ent.Comp.ShotsFloat / args.FireCostMultiplier), (int) (ent.Comp.CapacityFloat / args.FireCostMultiplier));
+        // </Trauma>
     }
 
     private void OnControl(Entity<BatteryAmmoProviderComponent> ent, ref AmmoCounterControlEvent args)

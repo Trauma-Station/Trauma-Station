@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: ContractorBaton
-  parent: [UnbreakableDurability, BaseSyndicateContraband, TelescopicBaton]
+  parent: [BaseSyndicateContraband, TelescopicBaton]
   name: contractor baton
   description: A compact, specialised baton assigned to Syndicate contractors. Applies light electrical shocks to targets.
   components:

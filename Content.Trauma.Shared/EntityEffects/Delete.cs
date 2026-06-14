@@ -9,6 +9,9 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// </summary>
 public sealed partial class Delete : EntityEffectBase<Delete>
 {
+    [DataField]
+    public bool Queued;
+
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-delete-entity", ("chance", Probability));
 }
@@ -17,7 +20,13 @@ public sealed class DeleteEffectSystem : EntityEffectSystem<MetaDataComponent, D
 {
     protected override void Effect(Entity<MetaDataComponent> ent, ref EntityEffectEvent<Delete> args)
     {
-        if (!TerminatingOrDeleted(ent, ent.Comp))
-            PredictedDel(ent.AsNullable());
+        if (TerminatingOrDeleted(ent, ent.Comp))
+            return;
+
+        var meta = ent.AsNullable();
+        if (args.Effect.Queued)
+            PredictedQueueDel(meta);
+        else
+            PredictedDel(meta);
     }
 }

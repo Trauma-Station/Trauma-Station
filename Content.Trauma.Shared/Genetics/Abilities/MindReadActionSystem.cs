@@ -13,18 +13,18 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class MindReadActionSystem : EntitySystem
+public sealed partial class MindReadActionSystem : EntitySystem
 {
-    [Dependency] private readonly EvilSystem _evil = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedChatManager _chatMan = default!;
-    [Dependency] private readonly MindMessagesSystem _messages = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EvilSystem _evil = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedChatManager _chatMan = default!;
+    [Dependency] private MindMessagesSystem _messages = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private SharedCombatModeSystem _combatMode = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     private List<string> _recent = new();
 

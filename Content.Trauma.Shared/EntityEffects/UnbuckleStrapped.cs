@@ -15,9 +15,9 @@ public sealed partial class UnbuckleStrapped : EntityEffectBase<UnbuckleStrapped
         => null; // its just used for crucifying idc
 }
 
-public sealed class UnbuckleStrappedEffectSystem : EntityEffectSystem<StrapComponent, UnbuckleStrapped>
+public sealed partial class UnbuckleStrappedEffectSystem : EntityEffectSystem<StrapComponent, UnbuckleStrapped>
 {
-    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+    [Dependency] private SharedBuckleSystem _buckle = default!;
 
     protected override void Effect(Entity<StrapComponent> ent, ref EntityEffectEvent<UnbuckleStrapped> args)
     {

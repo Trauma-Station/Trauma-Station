@@ -81,3 +81,8 @@ durability-plush-11 = No coming back from that one...
 durability-book-9 = The book explodes into a storm of paper!
 durability-book-10 = The book's stem is completely ripped off!
 durability-book-11 = The book's cover flies across the room!
+
+durability-drill-0 = The drill head is getting dull.
+durability-drill-1 = The drill head is completely dull.
+durability-drill-2 = The drill head is almost useless.
+durability-drill-3 = The drill head needs to be replaced.

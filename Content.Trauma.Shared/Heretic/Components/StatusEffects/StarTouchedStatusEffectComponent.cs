@@ -3,7 +3,7 @@
 
 namespace Content.Trauma.Shared.Heretic.Components.StatusEffects;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class StarTouchedStatusEffectComponent : Component
 {
     [DataField]
@@ -11,4 +11,7 @@ public sealed partial class StarTouchedStatusEffectComponent : Component
 
     [DataField]
     public EntProtoId CosmicCloud = "EffectCosmicCloud";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? User;
 }

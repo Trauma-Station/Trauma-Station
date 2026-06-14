@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reagent
   id: LabGrownNutriment
   name: reagent-name-lab-grown-nutriment
@@ -63,3 +65,13 @@
         messages: [ "reagent-popup-full-fat-oils" ]
         probability: 0.01
   pricePerUnit: 0.1
+
+- type: reagent
+  id: CoconutFlesh
+  parent: Nutriment
+  name: reagent-name-coconut-flesh
+  desc: reagent-desc-coconut-flesh
+  flavor: nutty
+  color: "#f4eadb"
+  slipData:
+    requiredSlipSpeed: 3.5

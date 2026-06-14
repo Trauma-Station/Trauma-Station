@@ -26,10 +26,10 @@ public sealed partial class InventoryAnyNestedCondition : EntityConditionBase<In
         => Loc.GetString(GuidebookText, ("condition", Condition.EntityConditionGuidebookText(prototype)));
 }
 
-public sealed class InventoryAnyNestedConditionSystem : EntityConditionSystem<InventoryComponent, InventoryAnyNestedCondition>
+public sealed partial class InventoryAnyNestedConditionSystem : EntityConditionSystem<InventoryComponent, InventoryAnyNestedCondition>
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     protected override void Condition(Entity<InventoryComponent> ent, ref EntityConditionEvent<InventoryAnyNestedCondition> args)
     {
