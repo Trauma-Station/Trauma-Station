@@ -11883,7 +11883,7 @@ entities:
     - type: Transform
       pos: 8.5,-8.5
       parent: 2
-- proto: MaterialSilo
+- proto: MachineMaterialSilo
   entities:
   - uid: 1684
     components:
@@ -13113,13 +13113,6 @@ entities:
     - type: Transform
       pos: -4.5,7.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 1863
@@ -13154,13 +13147,6 @@ entities:
     - type: Transform
       pos: 15.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 1869
@@ -13175,13 +13161,6 @@ entities:
     - type: Transform
       pos: -6.5,3.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SheetGlass
   entities:
   - uid: 1871

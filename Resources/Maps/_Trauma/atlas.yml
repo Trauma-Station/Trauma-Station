@@ -21477,12 +21477,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -27.5,-11.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 3378
     components:
     - type: Transform
@@ -21494,12 +21488,6 @@ entities:
     - type: Transform
       pos: -23.5,-27.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ComputerRoboticsControl
   entities:
   - uid: 3380
@@ -42227,12 +42215,6 @@ entities:
     - type: Transform
       pos: -39.5,15.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: OxygenCanister
   entities:
   - uid: 6383
@@ -47325,13 +47307,6 @@ entities:
     - type: Transform
       pos: -13.5,-12.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SciFlash
   entities:
   - uid: 7212
@@ -47347,13 +47322,6 @@ entities:
     - type: Transform
       pos: 9.5,21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 7214
@@ -47368,13 +47336,6 @@ entities:
     - type: Transform
       pos: -11.5,7.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SheetGlass
   entities:
   - uid: 7216
@@ -52264,13 +52225,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 27.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 7923

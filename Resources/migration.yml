@@ -147,6 +147,9 @@ BSOManual: null
 # 2026-06-09 give bartenders energy dispensers
 BoozeDispenser: EnergyBoozeDispenser
 SodaDispenser: EnergySodaDispenser
+
+# 2026-06-10
+MaterialSilo: MachineMasterMaterialSilo
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -907,8 +910,6 @@ ToxinChemistryBottle: ChemistryBottleToxin
 
 ClothingMaskBlushingMime: ClothingMaskSexyMime
 ClothingMaskBlushingClown: ClothingMaskSexyMime
-MachineMaterialSilo: null
-CrateMaterialSilo: null
 
 # 2025-03-29
 ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle

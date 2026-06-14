@@ -22629,13 +22629,6 @@ entities:
     - type: Transform
       pos: -25.5,-24.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: AutolatheMachineCircuitboard
   entities:
   - uid: 1912
@@ -23480,12 +23473,6 @@ entities:
     - type: Transform
       pos: 53.5,-51.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: BiomassReclaimer
   entities:
   - uid: 2054
@@ -80523,12 +80510,6 @@ entities:
     - type: Transform
       pos: 54.5,-47.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ComputerRoboticsControl
   entities:
   - uid: 13021
@@ -143270,11 +143251,6 @@ entities:
     - type: Transform
       pos: -39.5,18.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        24737:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialWoodPlank
   entities:
   - uid: 22128
@@ -144264,12 +144240,6 @@ entities:
     - type: Transform
       pos: -47.5,13.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: OxygenCanister
   entities:
   - uid: 22286
@@ -159816,13 +159786,6 @@ entities:
     - type: Transform
       pos: 40.5,-35.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 24725
@@ -159896,32 +159859,11 @@ entities:
     - type: Transform
       pos: 20.5,22.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Glass
-      - Plastic
-      - Steel
   - uid: 24737
     components:
     - type: Transform
       pos: 26.5,29.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: SiloUtilizer
-      silo: 22127
 - proto: SeedExtractor
   entities:
   - uid: 24738
@@ -159941,25 +159883,11 @@ entities:
     - type: Transform
       pos: 6.5,14.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 24741
     components:
     - type: Transform
       pos: -7.5,-14.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 24742
@@ -176483,13 +176411,6 @@ entities:
     - type: Transform
       pos: 2.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRedWithTop
   entities:
   - uid: 26974

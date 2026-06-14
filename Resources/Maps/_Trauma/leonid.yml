@@ -104404,12 +104404,6 @@ entities:
     - type: Transform
       pos: -24.5,32.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: CyberPen
   entities:
   - uid: 16865
@@ -183643,13 +183637,6 @@ entities:
     - type: Transform
       pos: -55.5,-47.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapAirlock1
   entities:
   - uid: 28741
@@ -183960,25 +183947,11 @@ entities:
     - type: Transform
       pos: -77.5,29.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 28790
     components:
     - type: Transform
       pos: -64.5,30.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 28791
@@ -184003,13 +183976,6 @@ entities:
     - type: Transform
       pos: -18.5,-3.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 28795
@@ -200108,13 +200074,6 @@ entities:
     - type: Transform
       pos: -28.5,14.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 31346

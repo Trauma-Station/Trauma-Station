@@ -41981,13 +41981,6 @@ entities:
     - type: Transform
       pos: 34.5,7.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 36658
     components:
     - type: Transform
@@ -194777,13 +194770,6 @@ entities:
     - type: Transform
       pos: 56.5,85.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SecurityWhistle
   entities:
   - uid: 29147

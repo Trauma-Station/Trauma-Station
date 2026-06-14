@@ -18,6 +18,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// <summary>
 /// Checks that every map in a pool has the required areas in the map prototype.
 /// This means it was mapped at least once, maybe it was removed but that seems rare for important areas.
+/// Also checks that there is at least 1 entity mapped for required entities.
 /// </summary>
 [Category("MapTests")]
 public sealed class MapPoolTest : GameTest
@@ -41,15 +42,19 @@ public sealed class MapPoolTest : GameTest
 
             Assert.Multiple(() =>
             {
-                var missing = new HashSet<EntProtoId>();
+                var missingAreas = new HashSet<EntProtoId>();
+                var missingEnts = new HashSet<EntProtoId>();
                 foreach (var pool in proto.EnumeratePrototypes<GameMapPoolPrototype>())
                 {
-                    if (pool.RequiredAreas is not {} requiredAreas)
+                    var requiredAreas = pool.RequiredAreas;
+                    var requiredEnts = pool.RequiredEntities;
+                    if (requiredAreas.Count == 0 && requiredEnts.Count == 0)
                         continue; // don't load anything for pools that dont need to be checked
 
                     foreach (var mapId in pool.Maps)
                     {
-                        var map = proto.Index<GameMapPrototype>(mapId).MapPath;
+                        var mapProto = proto.Index<GameMapPrototype>(mapId);
+                        var map = mapProto.MapPath;
                         if (!loader.TryReadFile(map, out var data))
                         {
                             Assert.Fail($"Failed to read {map}");
@@ -69,10 +74,10 @@ public sealed class MapPoolTest : GameTest
                             continue;
                         }
 
-                        missing.Clear();
+                        missingAreas.Clear();
                         foreach (var area in requiredAreas)
                         {
-                            missing.Add(area);
+                            missingAreas.Add(area);
                         }
 
                         // check that at least 1 grid maybe uses each required area
@@ -88,17 +93,28 @@ public sealed class MapPoolTest : GameTest
                             foreach (var node in areaMap.Values)
                             {
                                 var area = ((ValueDataNode) node).Value;
-                                missing.Remove(area);
-                                if (missing.Count == 0)
-                                    goto done;
+                                missingAreas.Remove(area);
+                                if (missingAreas.Count == 0)
+                                    goto entities;
                             }
                         }
 
-                        Assert.That(missing, Is.Empty,
-                            $"Map {mapId} ({map}) was missing these areas required by the pool: {string.Join(", ", missing)}");
+                        Assert.That(missingAreas, Is.Empty,
+                            $"Map {mapId} ({map}) was missing these areas required by the pool: {string.Join(", ", missingAreas)}");
 
-                    done:
-                        continue;
+                    entities:
+
+                        missingEnts.Clear();
+                        foreach (var id in requiredEnts)
+                        {
+                            if (reader.Prototypes.ContainsKey(id) || mapProto.IgnoredRequiredEntities.Contains(id))
+                                continue;
+
+                            missingEnts.Add(id);
+                        }
+
+                        Assert.That(missingEnts, Is.Empty,
+                            $"Map {mapId} ({map}) was missing these entities required by the pool: {string.Join(", ", missingEnts)}");
                     }
                 }
             });

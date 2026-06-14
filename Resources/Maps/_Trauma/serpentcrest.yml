@@ -17131,35 +17131,16 @@ entities:
     - type: Transform
       pos: -60.5,-4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
   - uid: 1005
     components:
     - type: Transform
       pos: 48.5,-11.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 1006
     components:
     - type: Transform
       pos: 52.5,5.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 28147
     components:
     - type: Transform
@@ -53394,12 +53375,6 @@ entities:
     - type: Transform
       pos: 49.5,-12.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: CargoTelepad
   entities:
   - uid: 8062
@@ -67890,12 +67865,6 @@ entities:
     - type: Transform
       pos: 52.5,4.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: CleanerDispenser
   entities:
   - uid: 10718
@@ -71329,24 +71298,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -14.5,47.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 11285
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 69.5,12.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ComputerRoboticsControl
   entities:
   - uid: 11286
@@ -81190,12 +81147,6 @@ entities:
     - type: Transform
       pos: -60.5,6.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ExosuitFabricator
   entities:
   - uid: 12848
@@ -81203,23 +81154,11 @@ entities:
     - type: Transform
       pos: 57.5,31.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 12849
     components:
     - type: Transform
       pos: 57.5,29.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ExplosivesSignMed
   entities:
   - uid: 12850
@@ -129345,12 +129284,6 @@ entities:
     - type: Transform
       pos: 5.5,-39.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: MedicatedSuture
   entities:
   - uid: 19590
@@ -130215,23 +130148,11 @@ entities:
     - type: Transform
       pos: 44.5,-40.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 19712
     components:
     - type: Transform
       pos: -23.5,-5.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: OrganArachnidEyes
   entities:
   - uid: 11430
@@ -136038,12 +135959,6 @@ entities:
     - type: Transform
       pos: 52.5,3.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: PsychBed
   entities:
   - uid: 20638
@@ -145640,13 +145555,6 @@ entities:
     - type: Transform
       pos: 50.5,10.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapAirlock1
   entities:
   - uid: 22330
@@ -146182,13 +146090,6 @@ entities:
     - type: Transform
       pos: 5.5,17.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 22402
@@ -146208,13 +146109,6 @@ entities:
     - type: Transform
       pos: 11.5,-15.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlassPlasma
   entities:
   - uid: 22405
@@ -160892,13 +160786,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 22.5,47.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRed
   entities:
   - uid: 24500

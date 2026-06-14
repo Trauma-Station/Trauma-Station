@@ -2,7 +2,7 @@
 
 - type: entity
   id: EngineeringTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: engineering techfab
   description: Prints equipment and circuitboards for use by engineering department.
   components:
@@ -71,7 +71,7 @@
 
 - type: entity
   id: CargoTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: cargo techfab
   description: Prints equipment and circuitboards for use by cargo department.
   components:
@@ -135,7 +135,7 @@
 
 - type: entity
   id: ScienceTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: science techfab
   description: Prints equipment and circuitboards for use by science department.
   components:
@@ -222,7 +222,7 @@
 
 - type: entity
   id: ServiceTechFab
-  parent: [BaseLatheLube, BaseSiloUtilizer]
+  parent: BaseLatheLube
   name: service techfab
   description: Prints equipment and circuitboards for use by service department.
   components:

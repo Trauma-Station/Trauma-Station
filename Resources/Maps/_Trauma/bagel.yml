@@ -15733,12 +15733,6 @@ entities:
     - type: Transform
       pos: 9.5,12.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: BananaPhoneInstrument
   entities:
   - uid: 811
@@ -51319,8 +51313,6 @@ entities:
     - type: Transform
       pos: 46.5,5.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17292
 - proto: CargoTelepad
   entities:
   - uid: 7811
@@ -63687,12 +63679,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -78.5,-0.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 10009
     components:
     - type: Transform
@@ -112449,14 +112435,6 @@ entities:
     - type: Transform
       pos: 53.5,6.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        7810:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        17420:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialWoodPlank
   entities:
   - uid: 17293
@@ -113300,16 +113278,6 @@ entities:
     - type: Transform
       pos: 45.5,4.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 17292
-    - type: MaterialStorage
-      materialWhiteList:
-      - Steel
-      - Glass
-      - Plasma
-      - Uranium
-      - Gold
-      - Silver
 - proto: OverheatedPlasteel
   entities:
   - uid: 17421
@@ -126406,13 +126374,6 @@ entities:
     - type: Transform
       pos: -42.5,-10.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ScrapCamera
   entities:
   - uid: 19651
@@ -126590,18 +126551,6 @@ entities:
     - type: Transform
       pos: -26.5,2.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Glass
-      - Plastic
-      - Steel
 - proto: SeedExtractor
   entities:
   - uid: 19683
@@ -126631,13 +126580,6 @@ entities:
     - type: Transform
       pos: -4.5,-35.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 19688
@@ -139663,17 +139605,6 @@ entities:
     - type: Transform
       pos: 4.5,-27.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Cloth
-      - Durathread
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 21715

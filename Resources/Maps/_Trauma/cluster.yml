@@ -28701,12 +28701,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-14.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 4366
     components:
     - type: Transform
@@ -65867,13 +65861,6 @@ entities:
     - type: Transform
       pos: -10.5,-0.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 10043
@@ -65949,13 +65936,6 @@ entities:
     - type: Transform
       pos: 36.5,10.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 10055
@@ -65970,13 +65950,6 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SheetGlass
   entities:
   - uid: 10057
@@ -72541,13 +72514,6 @@ entities:
     - type: Transform
       pos: -1.5,21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRed
   entities:
   - uid: 11027

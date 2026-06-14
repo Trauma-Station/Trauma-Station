@@ -228215,13 +228215,6 @@ entities:
     - type: Transform
       pos: -20.5,43.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SecurityWhistle
   entities:
   - uid: 12312
@@ -246958,13 +246951,6 @@ entities:
     - type: Transform
       pos: 6.5,30.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRed
   entities:
   - uid: 3472
