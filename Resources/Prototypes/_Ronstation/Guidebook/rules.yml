@@ -230,17 +230,17 @@
 
 ## Space Law
 
-- type: guideEntry
-  id: SpaceLaw
-  name: guide-entry-rules-space-law
-  priority: 1
-  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SpaceLaw.xml"
-  children:
-  - SpaceLawCrimeList
+# - type: guideEntry
+#  id: SpaceLaw
+#  name: guide-entry-rules-space-law
+#  priority: 1
+#  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SpaceLaw.xml"
+#  children:
+#  - SpaceLawCrimeList
 
-- type: guideEntry
-  id: SpaceLawCrimeList
-  name: guide-entry-rules-sl-crime-list
-  priority: 5
-  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SLCrimeList.xml"
+#- type: guideEntry
+#  id: SpaceLawCrimeList
+#  name: guide-entry-rules-sl-crime-list
+#  priority: 5
+#  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SLCrimeList.xml"
 
