@@ -6,9 +6,9 @@ using Content.Trauma.Server.Mentor;
 
 namespace Content.Trauma.Server.IoC;
 
-internal static class ServerTraumaContentIoC
+public static class ServerTraumaIoC
 {
-    internal static void Register(IDependencyCollection collection)
+    public static void Register(IDependencyCollection collection)
     {
         collection.Register<MentorManager>();
         collection.Register<ILinkAccountManager, LinkAccountManager>();

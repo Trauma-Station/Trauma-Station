@@ -24,7 +24,7 @@ namespace Content.Tests
             if (Project == UnitTestProject.Server)
             {
                 // <Trauma>
-                ServerTraumaContentIoC.Register(dependencies);
+                ServerTraumaIoC.Register(dependencies);
                 // </Trauma>
                 ServerContentIoC.Register(dependencies);
             }

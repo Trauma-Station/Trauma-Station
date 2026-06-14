@@ -5,9 +5,9 @@ using Content.Trauma.Common.LinkAccount;
 
 namespace Content.Trauma.Client.IoC;
 
-internal static class ContentTraumaClientIoC
+public static class ClientTraumaIoC
 {
-    internal static void Register(IDependencyCollection collection)
+    public static void Register(IDependencyCollection collection)
     {
         collection.Register<ILinkAccountManager, LinkAccountManager>();
         collection.Register<LinkAccountManager>();
