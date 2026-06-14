@@ -137847,6 +137847,9 @@ entities:
           - 21486
   - uid: 21487
     components:
+    - type: Transform
+      pos: -3.677363,40.530094
+      parent: 2
     - type: ActionsContainer
     - type: ContainerContainer
       containers:
