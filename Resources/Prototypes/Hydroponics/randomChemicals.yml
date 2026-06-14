@@ -183,7 +183,7 @@
     weight: 5 # 99.9% chance of appearing at least once with 60u of vestine with an average of 6.5 occurances.
     reagents:
     - Vestine
-  - quantity: 3.0 # Trauma was 1.0 changed to 3.0
+  - quantity: 3.0 # Trauma was 1.0
     weight: 1
     reagents:
     - Tazinide
