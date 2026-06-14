@@ -9,6 +9,7 @@ using Content.Server.Hands.Systems;
 using Content.Server.Roles;
 using Content.Shared.Body;
 using Content.Shared.Chat;
+using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Doors.Components;
@@ -62,6 +63,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
     [Dependency] private HereticSystem _heretic = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private AnchorableSystem _anchor = default!;
 
     private readonly List<TileRef> _tilesToConvert = new();
     private readonly HashSet<Entity<AirtightComponent>> _intersecting = new();
@@ -405,7 +407,9 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
         Entity<MapGridComponent> grid)
     {
         var spawned = Spawn(proto, coords);
-        _transform.AnchorEntity((spawned, Transform(spawned)), grid);
+        var xform = Transform(spawned);
+        if (!xform.Anchored && _anchor.CanAnchorAt(spawned, xform.Coordinates))
+            _transform.AnchorEntity((spawned, xform), grid);
         arena.SpawnedEntities.Add(spawned);
     }
 
