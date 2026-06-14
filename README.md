@@ -1,4 +1,4 @@
-<p align="center"> <img alt="Ronstation" width="750" height="600" src="https://github.com/Timtee/R.O.N.-Station/blob/master/Resources/Textures/_Ronstation/Logo/logo.png" /></p>
+<p align="center"> <img alt="Ronstation" width="750" height="600" src="https://github.com/Timtee/R.O.N.-Station/blob/dev/Resources/Textures/_Ronstation/Logo/logo.png" /></p>
 
 This is a fork of [Trauma Station](https://github.com/Trauma-Station/Trauma-Station) called R.O.N. Station, a new version of the original Ronstation server for Space Station 14.
 
