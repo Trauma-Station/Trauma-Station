@@ -10164,3 +10164,23 @@ Entries:
   id: 1151
   time: '2026-06-14T15:29:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3172
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Engi cargo sci and sec now have departmental material silos for their
+      lathes.
+  - type: Tweak
+    message: >-
+      Cargo's master silo now feeds all department silos instead of storing
+      materials that lathes pull from.
+  id: 1152
+  time: '2026-06-14T16:40:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3135
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed librarians getting the wrong skillchip.
+  id: 1153
+  time: '2026-06-14T21:33:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3185
