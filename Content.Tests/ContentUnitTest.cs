@@ -31,7 +31,7 @@ namespace Content.Tests
             else if (Project == UnitTestProject.Client)
             {
                 // <Trauma>
-                ClientTraumaContentIoC.Register(dependencies);
+                ClientTraumaIoC.Register(dependencies);
                 // </Trauma>
                 ClientContentIoC.Register(dependencies);
             }
