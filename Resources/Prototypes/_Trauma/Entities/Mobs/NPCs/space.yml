@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MobCobraSpace
+  id: MobCobraSpaceVent
+  name: space cobra
+  suffix: DO NOT MAP
+  description: Long fangs and a glowing hood, and the alluring look begs to come closer.
+  components:
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-cobra-space-name
+    description: ghost-role-information-cobra-space-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null
