@@ -18,6 +18,7 @@
     - id: MagazineMagnum
     - id: MagazineMagnum
     - id: MagazineMagnum
+    - id: TelescopicBaton
 # Filled modsuit for ERT leader admeme
 - type: entity
   parent: ClothingModsuitResponsoryLeader
@@ -38,3 +39,4 @@
       - id: SpeedLoaderMagnum
       - id: MagazineShotgunLeverRifle
       - id: MagazineShotgunLeverRifle
+      - id: TelescopicBaton
