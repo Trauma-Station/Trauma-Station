@@ -9,13 +9,13 @@ public sealed class PdaShowJobListingsMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class JobListingsAcceptJobMessage(EntityUid job) : BoundUserInterfaceMessage
+public sealed class JobListingsAcceptJobMessage(NetEntity job) : BoundUserInterfaceMessage
 {
-    public EntityUid Job = job;
+    public NetEntity Job = job;
 }
 
 [Serializable, NetSerializable]
-public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, EntityUid Entity);
+public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, NetEntity Entity);
 
 [Serializable, NetSerializable]
 public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs) : BoundUserInterfaceState

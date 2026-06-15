@@ -39,7 +39,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         }
     }
 
-    private void OnJobAccepted(EntityUid job)
+    private void OnJobAccepted(NetEntity job)
     {
         SendMessage(new JobListingsAcceptJobMessage(job));
     }

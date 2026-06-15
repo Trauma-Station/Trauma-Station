@@ -243,7 +243,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))
             return;
-        AcceptSideJob(jobBoard.Value, msg.Job);
+        AcceptSideJob(jobBoard.Value, GetEntity(msg.Job));
         UpdateUi(owner.Owner);
     }
 }

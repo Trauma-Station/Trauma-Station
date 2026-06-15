@@ -9,9 +9,9 @@ public sealed partial class SideJobControl : Control
 {
     [Dependency] private IEntityManager _entity = default!;
     private SpriteSystem _sprite;
-    private EntityUid? _sideJob;
+    private NetEntity? _sideJob;
 
-    public Action<EntityUid>? OnAccepted;
+    public Action<NetEntity>? OnAccepted;
 
     public SideJobControl()
     {

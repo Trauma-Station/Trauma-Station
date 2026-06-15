@@ -8,7 +8,7 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class JobListingsMenu : DefaultWindow
 {
-    public Action<EntityUid>? OnJobAccepted;
+    public Action<NetEntity>? OnJobAccepted;
 
     public JobListingsMenu()
     {

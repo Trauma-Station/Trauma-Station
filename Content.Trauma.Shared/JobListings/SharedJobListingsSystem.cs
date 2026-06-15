@@ -28,6 +28,6 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
             return null;
 
         var name = Loc.GetString($"job-listings-ui-reward-name-{rewardProto.ID}");
-        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, name, sideJob);
+        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, name, GetNetEntity(sideJob));
     }
 }

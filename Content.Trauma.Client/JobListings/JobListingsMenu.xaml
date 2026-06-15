@@ -59,7 +59,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                     Name="AvailableJobListingsNote"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Text="job-listings-ui-no-available-note"/>
+                                    Text="{Loc job-listings-ui-no-available-note}"/>
                                 <BoxContainer
                                     Name="AvailableJobListingsContainer"
                                     Orientation="Vertical"
