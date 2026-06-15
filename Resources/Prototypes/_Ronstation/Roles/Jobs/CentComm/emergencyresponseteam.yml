@@ -6,7 +6,7 @@
     back: ClothingModsuitERTEngineerFilled
     shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
-    eyes: ClothingEyesGlassesMeson
+    eyes: ClothingEyesGlassesMedDiag
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTEngineer
     id: ERTEngineerPDA
@@ -21,7 +21,7 @@
 - type: startingGear
   id: ERTLeaderAdmemeChesterEVA
   equipment:
-    jumpsuit: ClothingUniformJumpsuitERTEngineer
+    jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingModsuitERTLeaderFilled
     shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT

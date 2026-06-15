@@ -8,9 +8,12 @@
     gloves: ClothingHandsGlovesCombat
     id: CentcomPDA
     ears: ClothingHeadsetCentCom
-    belt: WeaponRevolverMateba
-    pocket1: MindShieldImplanter
-    pocket2: DeathRattleImplanterCentcomm
+    belt: BoxFolderCentComClipboardThreePapers
+    pocket1: WeaponDisablerAdvanced
+    pocket2: WeaponRevolverMateba
+  inhand:
+  - MindShieldImplanter
+  - DeathRattleImplanterCentcomm
 
 - type: startingGear
   id: CentcomInspectorGear
@@ -22,7 +25,7 @@
     gloves: ClothingHandsGlovesCombat
     id: CentcomPDA
     ears: ClothingHeadsetCentCom
-    pocket1: WeaponDisabler
+    pocket1: WeaponDisablerAdvanced
     pocket2: FlashlightSeclite
     suitstorage: OxygenTankFilled
   inhand:
@@ -42,7 +45,7 @@
     id: CentcomPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSheathFilled
-    pocket1: WeaponDisabler
+    pocket1: WeaponDisablerAdvanced
     pocket2: WeaponRevolverMateba
   inhand:
   - MindShieldImplanter
