@@ -1,4 +1,4 @@
-# medium job reward - 15TC
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entityTable
   id: MediumSideJobRewards
