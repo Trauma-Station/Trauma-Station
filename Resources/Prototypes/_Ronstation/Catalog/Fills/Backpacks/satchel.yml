@@ -15,6 +15,7 @@
       - id: BoxSurvivalSlotsEngineering # Slot based box used by actual roles.
       - id: ExtendedEmergencyNitrogenTankFilled
       - id: ExtendedEmergencyPlasmaTankFilled
+      - id: TelescopicBaton
       - id: SpeedLoaderMagnum
       - id: SpeedLoaderMagnum
 # Written by me (Semper) based off of Atakku's original code and my changes to the survival box. Includes some unique extras to assist with the unique role I wish for Semper to take.
@@ -35,6 +36,7 @@
       - id: AgentIDCard
       - id: BoxFolderCentComClipboardThreePapers
       - id: WeaponDisablerSMG
+      - id: TelescopicBaton
       - id: BoxHandcuff
       - id: Flash
       - id: FlashlightSeclite
