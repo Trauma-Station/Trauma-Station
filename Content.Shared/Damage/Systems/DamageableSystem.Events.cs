@@ -252,7 +252,7 @@ public sealed partial class DamageableSystem
         if (!damageDone.Empty)
             OnEntityDamageChanged((ent, damageable), damageDone, args.InterruptsDoAfters, args.Origin);
 
-        args.ModifiedDamage = damageDone;
+        args.ModifiedDamage = damageDone; // Trauma
     }
 }
 

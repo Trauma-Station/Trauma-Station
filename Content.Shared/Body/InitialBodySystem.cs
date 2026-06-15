@@ -5,6 +5,7 @@ using Content.Shared.Trigger.Systems;
 using System.Numerics;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Content.Shared.Body.Systems;
 
 namespace Content.Shared.Body;
 
@@ -17,7 +18,8 @@ public sealed partial class InitialBodySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit,
-            before: [ typeof(TriggerSystem) ]); // Trauma - a few triggers depend on body being set up
+            before: [ typeof(TriggerSystem) ], // Trauma - a few triggers depend on body being set up
+            after: [ typeof(SharedBloodstreamSystem) ]); // Trauma - make sure bloodstream solutions are initialized for damage on body init etc
     }
 
     private void OnMapInit(Entity<InitialBodyComponent> ent, ref MapInitEvent args)
