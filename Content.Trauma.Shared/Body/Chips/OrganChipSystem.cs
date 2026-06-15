@@ -124,6 +124,9 @@ public sealed partial class OrganChipSystem : EntitySystem
 
     private void OnGetVerbs(Entity<OrganChipContainerComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
+            return;
+
         var name = OrganName(ent);
         if (ent.Comp.Container.Count == 0)
         {
