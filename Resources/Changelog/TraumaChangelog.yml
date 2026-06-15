@@ -10184,3 +10184,14 @@ Entries:
   id: 1153
   time: '2026-06-14T21:33:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3185
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix heretic shadow cloak not removing itself on damage.
+  - type: Fix
+    message: Fix mawed crucibles not breaking.
+  - type: Fix
+    message: Void conduit damages airlock assemblies now.
+  id: 1154
+  time: '2026-06-15T18:47:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3189
