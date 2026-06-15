@@ -34,7 +34,7 @@
       - id: DrinkMREFlask
       - id: PinpointerNuclear
       - id: MedkitCombatFilled
-      - id: BoxFolderCentComClipboard
+      - id: BoxFolderCentComClipboardThreePapers # For some reason, the normal prototype doesn't start with paper.
       - id: RubberStampCentcom
       - id: RubberStampApproved
       - id: RubberStampDenied
