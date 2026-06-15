@@ -9,12 +9,21 @@ public sealed partial class SideJobControl : Control
 {
     [Dependency] private IEntityManager _entity = default!;
     private SpriteSystem _sprite;
+    private EntityUid? _sideJob;
+
+    public Action<EntityUid>? OnAccepted;
 
     public SideJobControl()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _sprite = _entity.System<SpriteSystem>();
+
+        JobListingAcceptButton.OnPressed += _ =>
+        {
+            if (_sideJob is not null)
+                OnAccepted?.Invoke(_sideJob.Value);
+        };
     }
 
     public void Update(SideJobInfo info)
@@ -23,5 +32,6 @@ public sealed partial class SideJobControl : Control
         JobListingDescription.Text = info.Description;
         JobListingTexture.Texture = _sprite.Frame0(info.Icon);
         JobListingReward.Text = Loc.GetString("job-listings-ui-reward", ("reward", info.RewardName));
+        _sideJob = info.Entity;
     }
 }

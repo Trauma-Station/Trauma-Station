@@ -11,6 +11,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     public JobListingsBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _menu = this.CreateWindow<JobListingsMenu>();
+        _menu.OnJobAccepted += OnJobAccepted;
     }
 
     [ViewVariables]
@@ -32,5 +33,14 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         {
             _menu?.AddAvailableSideJob(sideJob);
         }
+        foreach (var sideJob in jobListingsState.AcceptedSideJobs)
+        {
+            _menu?.AddAcceptedSideJob(sideJob);
+        }
+    }
+
+    private void OnJobAccepted(EntityUid job)
+    {
+        SendMessage(new JobListingsAcceptJobMessage(job));
     }
 }

@@ -63,7 +63,8 @@
   - type: RingerAccessUplink
   # <Trauma> - job listings
   - type: JobListings
-    jobCount: 4
+    sideJobCount: 4
+    acceptedSideJobCount: 2
     mediumSideJobOffers:
     - CMOHyposprayStealSideJob
     - RDHardsuitStealSideJob

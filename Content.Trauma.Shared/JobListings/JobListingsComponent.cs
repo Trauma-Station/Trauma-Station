@@ -14,10 +14,10 @@ namespace Content.Trauma.Shared.JobListings;
 public sealed partial class JobListingsComponent : Component
 {
     /// <summary>
-    /// How many jobs are offered at once.
+    /// How many jobs can exist at once.
     /// </summary>
     [DataField]
-    public int JobCount;
+    public int SideJobCount;
 
     /// <summary>
     /// List of prototypes of the objectives offered for medium side jobs.
@@ -26,10 +26,22 @@ public sealed partial class JobListingsComponent : Component
     public List<EntProtoId> MediumSideJobOffers = new();
 
     /// <summary>
-    /// The container for the entities for available side jobs which can be accepted by the traitor.
+    /// The list of available side jobs which can be accepted by the traitor.
     /// </summary>
     [DataField]
     public List<SideJob> AvailableSideJobs = new();
+
+    /// <summary>
+    /// How many jobs can be accepted at once.
+    /// </summary>
+    [DataField]
+    public int AcceptedSideJobCount;
+
+    /// <summary>
+    /// The list of side jobs the traitor has accepted.
+    /// </summary>
+    [DataField]
+    public List<SideJob> AcceptedSideJobs = new();
 
     /// <summary>
     ///  The mind of the person (probably traitor) who owns the job board.

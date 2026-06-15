@@ -5,16 +5,23 @@ namespace Content.Trauma.Common.JobListings;
 [Serializable, NetSerializable]
 public sealed class PdaShowJobListingsMessage : BoundUserInterfaceMessage
 {
-    public PdaShowJobListingsMessage() { }
+
 }
 
 [Serializable, NetSerializable]
-public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName);
+public sealed class JobListingsAcceptJobMessage(EntityUid job) : BoundUserInterfaceMessage
+{
+    public EntityUid Job = job;
+}
 
 [Serializable, NetSerializable]
-public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs) : BoundUserInterfaceState
+public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, EntityUid Entity);
+
+[Serializable, NetSerializable]
+public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs) : BoundUserInterfaceState
 {
     public List<SideJobInfo> AvailableSideJobs = availableSideJobs;
+    public List<SideJobInfo> AcceptedSideJobs = acceptedSideJobs;
 }
 
 [Serializable, NetSerializable]
