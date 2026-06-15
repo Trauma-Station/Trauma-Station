@@ -65,6 +65,7 @@ public sealed partial class AristocratSystem : EntitySystem
     private static readonly EntProtoId SnowfallMagic = "WeatherSnowfallMagic";
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
     private static readonly ProtoId<TagPrototype> Window = "Window";
+    private static readonly ProtoId<TagPrototype> AirlockAssembly = "AirlockAssembly";
 
     private static readonly TimeSpan ConduitDelay = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
@@ -276,7 +277,7 @@ public sealed partial class AristocratSystem : EntitySystem
 
                 var dmg = conduit.StructureDamage;
 
-                if (_airlockQuery.HasComp(ent))
+                if (_airlockQuery.HasComp(ent) || _tag.HasTag(ent, AirlockAssembly))
                 {
                     _audio.PlayPvs(conduit.AirlockDamageSound, Transform(ent).Coordinates);
                     ignored.Add(ent);
