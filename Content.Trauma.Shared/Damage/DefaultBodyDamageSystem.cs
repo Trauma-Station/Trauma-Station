@@ -3,7 +3,6 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
-using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 
 namespace Content.Trauma.Shared.Damage;
@@ -17,8 +16,7 @@ public sealed partial class DefaultBodyDamageSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DefaultBodyDamageComponent, BodyInitEvent>(OnBodyInit,
-            after: new[] { typeof(SharedBloodstreamSystem) }); // needs the parts to exist to damage them
+        SubscribeLocalEvent<DefaultBodyDamageComponent, BodyInitEvent>(OnBodyInit); // needs the parts to exist to damage them
     }
 
     private void OnBodyInit(Entity<DefaultBodyDamageComponent> ent, ref BodyInitEvent args)
