@@ -10,3 +10,4 @@ job-listings-ui-reward-name-ClusterBananaPeel = cluster banana peel bomb
 job-listings-ui-reward-name-CigCartonSyndicate = syndicate smokes
 job-listings-ui-reward-name-FakeMindShieldImplanter = fake mindshield implant
 job-listings-ui-reward-name-MicroBombImplanter = micro bomb implant
+job-listings-ui-reward-name-StealthBox = stealth box
