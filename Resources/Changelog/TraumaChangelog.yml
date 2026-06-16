@@ -10209,3 +10209,10 @@ Entries:
   id: 1156
   time: '2026-06-16T07:32:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3199
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not having their powers.
+  id: 1157
+  time: '2026-06-16T10:23:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3186
