@@ -10216,3 +10216,10 @@ Entries:
   id: 1157
   time: '2026-06-16T10:23:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3186
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed edaggers being metagamed just by examining them.
+  id: 1158
+  time: '2026-06-16T15:25:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3208
