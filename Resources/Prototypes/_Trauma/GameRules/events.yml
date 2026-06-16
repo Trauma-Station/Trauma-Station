@@ -29,8 +29,8 @@
   table: !type:AllSelector
     children:
     - id: BlobMidround
-    - id: DuoAbductorSpawn
-    - id: BingleSpawn
+    #- id: DuoAbductorSpawn # Ronstation: Disabled Natural Abductor spawns
+    #- id: BingleSpawn
     - id: XenomorphsInfestation
     #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
