@@ -9,7 +9,7 @@
   name: abductor-agent-ghost-role-name
   antagonist: true
   objective: roles-antag-abductor-objective
-  setPreference: true
+  setPreference: false
   guides: [ Abductors ]
   requirements:
   - !type:OverallPlaytimeRequirement
@@ -24,7 +24,7 @@
   name: abductor-scientist-ghost-role-name
   antagonist: true
   objective: roles-antag-abductor-objective
-  setPreference: true
+  setPreference: false
   guides: [ Abductors ]
   requirements:
   - !type:OverallPlaytimeRequirement

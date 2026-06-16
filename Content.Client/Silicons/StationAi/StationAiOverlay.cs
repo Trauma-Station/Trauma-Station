@@ -90,13 +90,13 @@ public sealed partial class StationAiOverlay : Overlay
         var worldBounds = args.WorldBounds;
 
         var playerEnt = _player.LocalEntity;
-        _entManager.TryGetComponent(playerEnt, out TransformComponent? playerXform);
         // Shitmed - Starlight Abductors Change Start
         if (_entManager.TryGetComponent(playerEnt, out StationAiOverlayComponent? stationAiOverlay)
             && stationAiOverlay.AllowCrossGrid
             && _entManager.TryGetComponent(playerEnt, out RelayInputMoverComponent? relay))
             playerEnt = relay.RelayEntity;
         // Shitmed Change End
+        _entManager.TryGetComponent(playerEnt, out TransformComponent? playerXform);
         var gridUid = playerXform?.GridUid ?? EntityUid.Invalid;
         _entManager.TryGetComponent(gridUid, out MapGridComponent? grid);
         _entManager.TryGetComponent(gridUid, out BroadphaseComponent? broadphase);
