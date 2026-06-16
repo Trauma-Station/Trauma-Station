@@ -733,7 +733,7 @@ public sealed partial class PullingSystem : EntitySystem
             return true;
 
         // <Trauma> - check action blockers so you cant break grabs while stunned asleep etc
-        if (user is { } userUid !_blocker.CanInteract(userUid, pullableUid))
+        if (user is { } userUid && !_blocker.CanInteract(userUid, pullableUid))
             return false;
         // </Trauma>
 
