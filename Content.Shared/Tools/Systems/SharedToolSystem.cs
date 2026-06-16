@@ -69,7 +69,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     private void OnExamine(Entity<ToolComponent> ent, ref ExaminedEvent args)
     {
         // If the tool has no qualities, exit early
-        if (ent.Comp.Qualities.Count == 0)
+        if (ent.Comp.Qualities.Count == 0 || !ent.Comp.Examinable) // Trauma - check examinable too
             return;
 
         var message = new FormattedMessage();
