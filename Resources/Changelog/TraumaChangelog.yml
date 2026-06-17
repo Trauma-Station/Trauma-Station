@@ -10237,3 +10237,10 @@ Entries:
   id: 1160
   time: '2026-06-17T05:15:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3217
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed toggle ghost visibility action not working.
+  id: 1161
+  time: '2026-06-17T06:30:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3219
