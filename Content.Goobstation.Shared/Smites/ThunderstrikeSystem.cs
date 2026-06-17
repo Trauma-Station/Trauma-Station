@@ -37,10 +37,6 @@ public sealed partial class ThunderstrikeSystem : EntitySystem
 
         var text = new SpriteSpecifier.Texture(new ResPath(God));
         _jumpscare.Jumpscare(text, sesh);
-
-        QueueDel(mumu);
-        Spawn("Ash", transform.Coordinates);
-        _popup.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("name", mumu)), mumu, PopupType.LargeCaution);
     }
 
     public void CreateLighting(EntityCoordinates coordinates, int energy = 125, int radius = 15)

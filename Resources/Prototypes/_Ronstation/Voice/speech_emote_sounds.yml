@@ -39,6 +39,8 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: DeathGasp
+    Surprised:
+      path: /Audio/_Goobstation/Voice/surprised.ogg
 
 - type: emoteSounds
   id: FemaleAvali
@@ -81,3 +83,5 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
+    Surprised:
+      path: /Audio/_Goobstation/Voice/surprised.ogg

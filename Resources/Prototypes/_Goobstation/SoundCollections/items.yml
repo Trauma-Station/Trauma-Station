@@ -8,5 +8,13 @@
   id: PipeDrop
   files:
   - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_fall.ogg
   # Uncomment this on april fools
-  #- /Audio/_Goobstation/Items/Pipe/metal_pipe_meme.ogg
+  - /Audio/_Goobstation/Items/Pipe/metal_pipe_meme.ogg
