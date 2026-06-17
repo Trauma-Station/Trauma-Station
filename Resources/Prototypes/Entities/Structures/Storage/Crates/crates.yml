@@ -497,6 +497,9 @@
   description: "A secure lock box. Funds from its sale will be distributed back to the department. Just remember: Cargo always takes a cut."
   abstract: true
   components:
+  # <Trauma>
+  - type: AntiRottingContainer # needed for plant bounties and it costs money so
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Storage/Crates/lockbox.rsi
   - type: GenericVisualizer
