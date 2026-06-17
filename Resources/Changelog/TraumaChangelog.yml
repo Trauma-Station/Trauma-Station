@@ -10244,3 +10244,12 @@ Entries:
   id: 1161
   time: '2026-06-17T06:30:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3219
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed reinforcements not having skill chips, being counted as security,
+      being able to enchant, etc.
+  id: 1162
+  time: '2026-06-17T06:47:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3221
