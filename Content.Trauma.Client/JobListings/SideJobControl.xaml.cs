@@ -31,7 +31,7 @@ public sealed partial class SideJobControl : Control
         JobListingsName.Text = info.Title;
         JobListingDescription.Text = info.Description;
         JobListingTexture.Texture = _sprite.Frame0(info.Icon);
-        JobListingReward.Text = Loc.GetString("job-listings-ui-reward", ("reward", info.RewardName));
+        JobListingReward.Text = Loc.GetString("job-listings-ui-reward", ("reward", info.RewardName), ("rep", info.ReputationGain));
         _sideJob = info.Entity;
     }
 }

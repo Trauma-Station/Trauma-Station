@@ -15,7 +15,7 @@ public sealed class JobListingsAcceptJobMessage(NetEntity job) : BoundUserInterf
 }
 
 [Serializable, NetSerializable]
-public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, NetEntity Entity);
+public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, int ReputationGain, NetEntity Entity);
 
 [Serializable, NetSerializable]
 public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, bool acceptedJobsFull) : BoundUserInterfaceState

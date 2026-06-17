@@ -14,11 +14,19 @@ public sealed partial class SideJobComponent : Component
     /// <summary>
     /// The entity spawned as a reward for completing this side job.
     /// </summary>
+    [DataField]
     public EntProtoId? Reward;
 
     /// <summary>
     /// The entity spawned when the side job is accepted, to be used to complete the job.
     /// For example, it could be a bug that must be planted in an office.
     /// </summary>
+    [DataField]
     public EntProtoId? Tool;
+
+    /// <summary>
+    /// How much reputation you gain from completing the mission.
+    /// </summary>
+    [DataField]
+    public int ReputationGain;
 }
