@@ -43,14 +43,16 @@
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      - type: CommandStaff
       # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
       - type: SurgerySpeedModifier
         speedModifier: 2
       - type: CPRTraining
         reviveChance: 0.9 # excellent training and experience
         inhaleChance: 1 # great kisser too
       # </Trauma>
+      - type: CommandStaff
 
 - type: startingGear
   id: CMOGear
