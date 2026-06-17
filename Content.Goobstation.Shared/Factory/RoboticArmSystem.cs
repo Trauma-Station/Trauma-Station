@@ -21,6 +21,7 @@ namespace Content.Goobstation.Shared.Factory;
 
 public sealed partial class RoboticArmSystem : EntitySystem
 {
+    [Dependency] private AutomationSystem _automation = default!;
     [Dependency] private AutomationFilterSystem _filter = default!;
     [Dependency] private CollisionWakeSystem _wake = default!;
     [Dependency] private ExclusiveSlotsSystem _exclusive = default!;
@@ -212,7 +213,7 @@ public sealed partial class RoboticArmSystem : EntitySystem
 
         // prevent dropping items on walls etc
         var output = _exclusive.GetOutputSlot(ent);
-        if (output != null && IsOutputBlocked(ent))
+        if (output == null && IsOutputBlocked(ent))
             return false;
 
         var filter = _filter.GetSlot(ent);
@@ -224,6 +225,9 @@ public sealed partial class RoboticArmSystem : EntitySystem
             var netEnt = ent.Comp.InputItems[i].Item1;
             if (!TryGetEntity(netEnt, out var item))
                 continue;
+
+            if (!_automation.CanMachineDetect(item.Value))
+                continue; // no moving invisible mice..?
 
             if (_filter.IsBlocked(filter, item.Value))
                 continue;

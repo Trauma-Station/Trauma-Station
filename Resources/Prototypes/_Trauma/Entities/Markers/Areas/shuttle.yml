@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # For areas to be mapped on shuttles
 - type: entity
   abstract: true

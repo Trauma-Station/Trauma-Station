@@ -96,4 +96,12 @@ public abstract partial class SharedMetalSystem : EntitySystem
     /// </summary>
     public ProtoId<MetalPrototype> GetMetalOrThrow(EntityUid uid)
         => _query.Comp(uid).Metal!.Value;
+
+    /// <summary>
+    /// Adds StaticPrice to an entity and sets its price.
+    /// Project 0 shared code
+    /// </summary>
+    public virtual void SetPrice(EntityUid uid, double price)
+    {
+    }
 }

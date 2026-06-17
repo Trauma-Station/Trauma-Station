@@ -60640,22 +60640,6 @@ entities:
       parent: 16657
     - type: Physics
       canCollide: False
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: >-
-            It provides the following protection:
-
-            - [color=orange]Explosion[/color] damage [color=white]to contents[/color] reduced by [color=lightblue]10%[/color].
-          priority: 0
-          component: Armor
-        title: null
     - type: InsideEntityStorage
 - proto: ClothingBeltJanitorFilled
   entities:
@@ -116302,13 +116286,6 @@ entities:
     - type: Transform
       pos: 7.5,30.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 5236
@@ -127153,13 +127130,6 @@ entities:
     - type: Transform
       pos: 40.5,-25.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRedWithTop
   entities:
   - uid: 21032

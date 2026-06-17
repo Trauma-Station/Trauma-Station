@@ -28,7 +28,6 @@ public sealed partial class ThrowAtFacingDirectionEffectSystem : EntityEffectSys
         var throwing = xform.LocalRotation.ToWorldVec() * args.Effect.Distance;
         var direction = xform.Coordinates.Offset(throwing);
 
-        var predicted = args.Effect.Predicted;
         var speed = args.Effect.Speed;
 
         _throwing.TryThrow(
@@ -36,6 +35,6 @@ public sealed partial class ThrowAtFacingDirectionEffectSystem : EntityEffectSys
             coordinates: direction,
             baseThrowSpeed: speed,
             user: args.User,
-            predicted: predicted);
+            predicted: args.Predicted);
     }
 }

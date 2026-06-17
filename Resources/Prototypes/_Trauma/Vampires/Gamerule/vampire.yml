@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseGameRule
   id: Vampire
@@ -32,6 +34,7 @@
     objectives:
     - VampireBloodObjective
     - VampireSurviveObjective
+    - VampireBloodsuckObjective
   - type: AntagSelection
     agentName: roles-antag-vampire-name
     antags:
@@ -39,8 +42,8 @@
       proto: Vampire
       range:
         min: 1
-        max: 3
-      playerRatio: 20
+        max: 6
+      playerRatio: 10
 
 
 - type: gamePreset
@@ -60,4 +63,3 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - Vampire
-  - CalmTraitor

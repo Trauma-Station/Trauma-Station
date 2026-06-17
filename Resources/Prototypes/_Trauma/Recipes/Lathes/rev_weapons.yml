@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   abstract: true
   id: BaseRevWeapon
@@ -5,6 +7,15 @@
   completetime: 15
   materials:
     Steel: 500
+
+- type: latheRecipe
+  abstract: true
+  id: BaseRevWeaponUpgraded
+  categories: [ Weapons ]
+  completetime: 15
+  materials:
+    Steel: 500
+    Plasteel: 500
 
 - type: latheRecipe
   parent: BaseRevWeapon
@@ -30,6 +41,16 @@
   parent: BaseRevWeapon
   id: RevMace
   result: RevMaceHead
+
+- type: latheRecipe
+  parent: BaseRevWeaponUpgraded
+  id: RevMaul
+  result: RevMaulHead
+
+- type: latheRecipe
+  parent: BaseRevWeapon # it is upgraded its just cheap
+  id: RevKunai
+  result: RevKunaiHead
 
 - type: latheRecipe
   parent: BaseRevWeapon

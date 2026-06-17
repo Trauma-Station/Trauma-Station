@@ -14,6 +14,11 @@
   - Chapel
   - Maintenance
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipChaplain
+  # </Trauma>
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles

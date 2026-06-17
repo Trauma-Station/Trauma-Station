@@ -1,38 +1,43 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.SpaceWhale;
+using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.VentCrawling.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.Xenomorphs.Tail;
 
 public sealed partial class TailVentCrawlSystem : EntitySystem
 {
-    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentStartup>(OnStartVentCrawl);
-        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentRemove>(OnStopVentCrawl);
+        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentStartup>((x, _, _) => UpdateTailVisibility(x, 0f));
+        SubscribeLocalEvent<BeingVentCrawlerComponent, ComponentShutdown>((x, _, _) => UpdateTailVisibility(x, 1f));
+        SubscribeLocalEvent<TailedEntityComponent, ComponentStartup>(OnTailedStartup);
     }
 
-    private void OnStartVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentStartup args)
+    private void OnTailedStartup(Entity<TailedEntityComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp<TailedEntityComponent>(ent, out var tailed))
+        if (!HasComp<BeingVentCrawlerComponent>(ent))
             return;
 
-        foreach (var segment in tailed.TailSegments)
-            _sprite.SetVisible(GetEntity(segment.Segment), false);
+        UpdateTailVisibility(ent.AsNullable(), 0f);
     }
 
-    private void OnStopVentCrawl(Entity<BeingVentCrawlerComponent> ent, ref ComponentRemove args)
+    private void UpdateTailVisibility(Entity<TailedEntityComponent?> ent, float alpha)
     {
-        if (!TryComp<TailedEntityComponent>(ent, out var tailed))
+        if (!Resolve(ent, ref ent.Comp, false))
             return;
 
-        foreach (var segment in tailed.TailSegments)
-            _sprite.SetVisible(GetEntity(segment.Segment), true);
+        foreach (var data in ent.Comp.TailSegments)
+        {
+            if (!TryGetEntity(data.Segment, out var uid))
+                continue;
+
+            _spriteVis.UpdateVisibilityModifiers(uid.Value, nameof(BeingVentCrawlerComponent), alpha);
+        }
     }
 }

@@ -15,8 +15,8 @@ using Robust.Server.Player;
 namespace Content.Goobstation.Server.Devil.Contract.Revival;
 public sealed partial class PendingRevivalContractSystem : EntitySystem
 {
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
     [Dependency] private DevilContractSystem _contract = default!;
     [Dependency] private MindSystem _mind = default!;
@@ -40,14 +40,14 @@ public sealed partial class PendingRevivalContractSystem : EntitySystem
         // Non-devils can't offer deals silly.
         if (!HasComp<DevilComponent>(args.User))
         {
-            _popupSystem.PopupEntity(Loc.GetString("devil-sign-invalid-user"), args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("devil-sign-invalid-user"), args.User, PopupType.MediumCaution);
             return;
         }
 
         // Make sure the mind actually exists
         if (!_mind.TryGetMind(target, out var mindId, out var mindComp) || mindComp.CurrentEntity is not { } ghost)
         {
-            _popupSystem.PopupEntity(Loc.GetString("revival-contract-no-mind"), args.User, args.User);
+            _popup.PopupEntity("You can't sign a contract with a soulless corpse...", args.User, args.User);
             return;
         }
 
@@ -55,7 +55,7 @@ public sealed partial class PendingRevivalContractSystem : EntitySystem
         if (HasComp<PendingRevivalContractComponent>(ghost) || HasComp<CondemnedComponent>(target))
         {
             var failedPopup = Loc.GetString("revival-contract-use-failed");
-            _popupSystem.PopupEntity(failedPopup, args.User, args.User);
+            _popup.PopupEntity(failedPopup, args.User, args.User);
             return;
         }
 
@@ -68,7 +68,7 @@ public sealed partial class PendingRevivalContractSystem : EntitySystem
 
         // Show confirmation
         var successPopup = Loc.GetString("revival-contract-use-success", ("target", target));
-        _popupSystem.PopupEntity(successPopup, args.User, args.User);
+        _popup.PopupEntity(successPopup, args.User, args.User);
 
         ent.Comp.Signer = target;
         ent.Comp.ContractOwner = args.User;
@@ -78,13 +78,13 @@ public sealed partial class PendingRevivalContractSystem : EntitySystem
 
     private bool TryOpenUi(EntityUid target)
     {
-        if (!_userInterface.HasUi(target, RevivalContractUiKey.Key))
+        if (!_ui.HasUi(target, RevivalContractUiKey.Key))
             return false;
 
         if (_mind.TryGetMind(target, out _, out var mindComp) &&
             _player.TryGetSessionById(mindComp.UserId, out var session) &&
             session is { } insession)
-            _userInterface.OpenUi(target, RevivalContractUiKey.Key, insession);
+            _ui.OpenUi(target, RevivalContractUiKey.Key, insession);
 
         return true;
     }
@@ -108,7 +108,7 @@ public sealed partial class PendingRevivalContractSystem : EntitySystem
         if (TryComp<RevivalContractComponent>(pending.Contract, out var contract) && contract is { ContractOwner: { Valid: true } contractOwner, Signer: { } signer })
         {
             _rejuvenate.PerformRejuvenate(target);
-            _popupSystem.PopupEntity(Loc.GetString("revival-contract-accepted"), target, target);
+            _popup.PopupEntity(Loc.GetString("revival-contract-accepted"), target, target);
             _contract.TryTransferSouls(contractOwner, signer, 1);
         }
 

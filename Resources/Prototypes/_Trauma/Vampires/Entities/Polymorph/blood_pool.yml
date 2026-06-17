@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseMob ]
   id: PolymorphBloodPool
@@ -53,7 +55,7 @@
     baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: Input
-    context: "ghost"
+    context: "human"
   - type: MindContainer
   - type: StatusEffects
     allowed:

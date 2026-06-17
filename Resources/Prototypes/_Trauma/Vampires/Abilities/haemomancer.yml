@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: vampireAbility
   id: BaseHaemomancerAbility
   class: Haemomancer
@@ -10,7 +12,7 @@
   onUnlock:
   - !type:AddActions
     actions:
-    - ActionBloodSwell
+    - ActionVampiricClaws
 
 - type: vampireAbility
   parent: BaseHaemomancerAbility

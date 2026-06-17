@@ -15,6 +15,11 @@ public static class TraumaKeyFunctions
     public static readonly BoundKeyFunction NetBandwidth = "NetBandwidth";
     public static readonly BoundKeyFunction Strafe = "Strafe";
 
+    // Mouse Wheel
+    public static readonly BoundKeyFunction ZoomMod = "ZoomMod";
+    public static readonly BoundKeyFunction RotateMod = "RotateMod";
+    public static readonly BoundKeyFunction TargetingMod = "TargetingMod";
+
     // Targeting
     public static readonly BoundKeyFunction TargetHead = "TargetHead";
     public static readonly BoundKeyFunction TargetChest = "TargetChest";

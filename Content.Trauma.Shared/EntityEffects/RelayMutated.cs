@@ -27,6 +27,6 @@ public sealed partial class RelayMutatedEffectSystem : EntityEffectSystem<Mutati
     protected override void Effect(Entity<MutationComponent> ent, ref EntityEffectEvent<RelayMutated> args)
     {
         if (ent.Comp.Target is {} mob)
-            _effects.TryApplyEffect(mob, args.Effect.Effect, args.Scale);
+            _effects.TryApplyEffect(mob, args.Effect.Effect, args.Scale, args.User, args.Predicted);
     }
 }

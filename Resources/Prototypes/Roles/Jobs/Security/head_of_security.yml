@@ -37,6 +37,11 @@
   - GenpopEnter
   - GenpopLeave
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipHeadOfSecurity
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial

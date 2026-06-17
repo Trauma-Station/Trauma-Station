@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: [GunSafeBaseSecure, BaseSecurityContraband, AlertLevelLock]
@@ -201,6 +203,8 @@
       amount: 3
     - id: BoxBeanbag
       amount: 3
+    - id: BoxShotgunTearGas
+      amount: 2
     - id: WeaponGaussgun
       amount: 2
     - id: BaseMagazineGaussgun
@@ -220,9 +224,13 @@
   table: !type:AllSelector
     children:
     - id: Truncheon
-      amount: 6
+      amount: 5
+    - id: ClothingBeltSheathKatanaFilled
+      amount: 2
     - id: SecBreachingHammer
       amount: 2
+    - id: WeaponBillyClub
+      amount: 3
 
 - type: entityTable
   id: FillGunSafeJudoT1

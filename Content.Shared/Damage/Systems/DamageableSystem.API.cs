@@ -226,8 +226,18 @@ public sealed partial class DamageableSystem
         // <Goob> - For entities with a body, route damage through body parts. no damage is added to the body's DamageableComponent
         if (_bodyQuery.HasComp(ent))
         {
-            return ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
-                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
+            var vitalDamage = GetVitalDamage(damage);
+            damage -= vitalDamage;
+
+            damage = ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
+                interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly) +
+                ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
+                interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
+
+            var ev = new DamageDealtEvent(damage, origin, interruptsDoAfters, ignoreBlockers, damage);
+            RaiseLocalEvent(ent, ref ev);
+
+            return damage;
         }
         // </Goob>
 
@@ -241,10 +251,10 @@ public sealed partial class DamageableSystem
         // </Goob>
 
         var evt = new DamageDealtEvent(damage, origin, interruptsDoAfters,
-            ignoreBlockers); // Trauma
+            ignoreBlockers, damage); // Trauma
         RaiseLocalEvent(ent, ref evt);
 
-        return damage;
+        return evt.ModifiedDamage; // Trauma - damage -> evt.ModifiedDamage
     }
 
     /// <summary>

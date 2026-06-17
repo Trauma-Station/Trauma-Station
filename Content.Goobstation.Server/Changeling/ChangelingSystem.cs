@@ -17,14 +17,10 @@ using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
-using Content.Shared.Body;
-using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
 using Content.Server.Guardian;
-using Content.Shared.Light.EntitySystems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Store.Systems;
@@ -33,6 +29,8 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
 using Content.Shared.Camera;
 using Content.Shared.Chemistry.Components;
@@ -43,6 +41,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Emp;
 using Content.Shared.FixedPoint;
 using Content.Shared.Flash.Components;
 using Content.Shared.Fluids;
@@ -50,6 +49,7 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Implants;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -92,7 +92,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private MobThresholdSystem _mobThreshold = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private DamageableSystem _damage = default!;
-    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private SharedBloodstreamSystem _blood = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
@@ -120,8 +120,10 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChangelingIdentityComponent, MapInitEvent>(OnIdentityMapInit);
-        SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit);
+        SubscribeLocalEvent<ChangelingIdentityComponent, MapInitEvent>(OnIdentityMapInit,
+            after: [ typeof(SharedBloodstreamSystem)] ); // needs bloodstream's solution to be set up first
+        SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit,
+            after: [ typeof(SharedBloodstreamSystem)] ); // shit subscription ordering system award
 
         SubscribeLocalEvent<ChangelingIdentityComponent, MobStateChangedEvent>(OnMobStateChange);
         SubscribeLocalEvent<ChangelingIdentityComponent, UpdateMobStateEvent>(OnUpdateMobState);

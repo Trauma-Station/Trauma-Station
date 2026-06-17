@@ -116,17 +116,6 @@
     # not putting a BlockMovement component here cause that's funny.
   - type: StealTarget
     stealGroup: CaptainSword
-  # <Trauma>
-  - type: Parry
-    maxParries: 2
-    maxReflects: 0
-    parryMinSkill: 40
-    soundOnParry:
-      path: /Audio/_Goobstation/Heretic/parry.ogg
-      params:
-        variation: 0.2
-        volume: -11
-  # </Trauma>
 
 - type: entity
   name: katana
@@ -134,6 +123,11 @@
   id: Katana
   description: Ancient craftwork made with not so ancient plasteel.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Katana
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/katana.rsi
   - type: MeleeWeapon
@@ -171,9 +165,11 @@
     wideAnimationRotation: -60
     damage:
       types:
-        Slash: 30
+        # <Trauma>
+        Slash: 20 # was 30
       woundSeverityMultipliers:
         Slash: 2
+        # </Trauma>
   - type: Item
     storedSprite:
       state: storage
@@ -191,7 +187,6 @@
     slots:
     - Back
     - Belt
-  - type: Parry # Trauma
 
 #Greatswords
 - type: entity

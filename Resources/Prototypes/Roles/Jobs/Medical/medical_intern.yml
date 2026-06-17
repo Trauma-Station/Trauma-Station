@@ -11,15 +11,18 @@
   startingGear: MedicalInternGear
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
-  guides: # Trauma
-  - MedicalDoctor
-  - Cloning
-  - Medicine
   access:
   - Medical
   - Maintenance
   # <Trauma>
+  guides:
+  - MedicalDoctor
+  - Cloning
+  - Medicine
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipMedicalIntern
   - !type:AddComponentSpecial
     components:
     - type: SurgerySpeedModifier

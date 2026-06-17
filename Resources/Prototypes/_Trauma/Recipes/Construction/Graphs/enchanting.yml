@@ -1,0 +1,141 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: EnchantingRune
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: carved
+      steps:
+        - material: Steel # todo, find a way to replace this with just using a knife on the floor
+          amount: 1
+          doAfter: 0.5
+
+  - node: carved
+    entity: EnchantingRuneCarved
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 0.5
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+
+  - node: finish
+    entity: EnchantingRune
+
+# MinorSummoning
+
+- type: constructionGraph
+  id: MinorSummoning
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: carved
+      steps:
+      - material: Steel # todo, find a way to replace this with just using a knife on the floor
+        amount: 1
+        doAfter: 0.5
+
+  - node: carved
+    entity: MinorRuneCarved
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 0.5
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+
+  - node: finish
+    entity: MinorDemonRune
+
+# MediumSummoning
+
+- type: constructionGraph
+  id: MediumSummoning
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: carved
+      steps:
+      - material: Steel # todo, find a way to replace this with just using a knife on the floor
+        amount: 1
+        doAfter: 0.5
+
+  - node: carved
+    entity: MediumRuneCarved
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 0.5
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+
+  - node: finish
+    entity: MediumDemonRune
+
+# MajorSummoning
+
+- type: constructionGraph
+  id: MajorSummoning
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: carved
+      steps:
+      - material: Steel # todo, find a way to replace this with just using a knife on the floor
+        amount: 1
+        doAfter: 0.5
+
+  - node: carved
+    entity: MajorRuneCarved
+    edges:
+    - to: finish
+      steps:
+      - tool: Slicing
+        doAfter: 0.5
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+
+  - node: finish
+    entity: MajorDemonRune

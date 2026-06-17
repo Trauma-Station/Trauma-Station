@@ -27,14 +27,8 @@ reinforcement-sec-specialist-heavy-laser-desc = Hire an armored security special
 reinforcement-sec-specialist-shield-name = Hire Security Specialist (Shield)
 reinforcement-sec-specialist-shield-desc = Hire an armored security specialist equipped with a ballistic shield. Minimum arrival time of three minutes.
 
-reinforcement-sec-specialist-bodyguard-name = Hire Security Specialist (Bodyguard)
-reinforcement-sec-specialist-bodyguard-desc = Hire a plainclothes security specialist assigned to protect a command member. Minimum arrival time of three minutes.
-
-reinforcement-sec-specialist-advisor-name = Hire Security Specialist (Advisor)
-reinforcement-sec-specialist-advisor-desc = Hire a senior security specialist and tactical advisor. Minimum arrival time of three minutes.
-
-reinforcement-sec-specialist-corpsman-name = Hire Security Specialist (Corpsman)
-reinforcement-sec-specialist-corpsman-desc = Hire a security corpsman trained in both combat and medicine. Minimum arrival time of three minutes.
+reinforcement-sec-specialist-brigmedic-name = Hire Security Specialist (Brigmedic)
+reinforcement-sec-specialist-brigmedic-desc = Hire a security brigmedic trained in both combat and medicine. Minimum arrival time of three minutes.
 
 reinforcement-cadet-name = Hire Security Cadet
 reinforcement-cadet-desc = Hire a security cadet, eager to learn and assist the department. Minimum arrival time of three minutes.

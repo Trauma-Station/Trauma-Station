@@ -20,6 +20,9 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
 
     private void OnHit(Entity<EffectsOnMeleeHitComponent> ent, ref MeleeHitEvent args)
     {
+        if (TerminatingOrDeleted(ent))
+            return;
+
         if (args.HitEntities.Count == 0)
             return;
 
@@ -46,7 +49,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
         }
     }
 
-    #region Helepr
+    #region Helper
 
     /// <summary>
     /// Runs effects on the target and user.

@@ -1,17 +1,4 @@
-- type: listing
-  id: UplinkFoxDie
-  name: uplink-foxdie-name
-  description: uplink-foxdie-desc
-  productEntity: DiseaseDnaSamplerFoxDie
-  cost:
-    Telecrystal: 50 # you can fucking genocide with it if you are smart
-  categories:
-  - UplinkJob
-  conditions:
-  - !type:BuyerJobCondition
-    whitelist:
-    - Virologist
-    - Geneticist # gene therapy..?
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
   id: UplinkNecronomicon # dog
@@ -30,3 +17,33 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkHypoShell
+  name: uplink-hyposhell-name
+  description: uplink-hyposhell-desc
+  icon: { sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Boxes/shotgun.rsi, state: icon-hypo }
+  productEntity: BoxShotgunHypo
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Bartender
+
+- type: listing
+  id: UplinkFoxDie
+  name: uplink-foxdie-name
+  description: uplink-foxdie-desc
+  productEntity: DiseaseDnaSamplerFoxDie
+  cost:
+    Telecrystal: 50 # you can fucking genocide with it if you are smart
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Virologist
+    - Geneticist # gene therapy..?

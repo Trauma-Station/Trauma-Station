@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: vampireAbility
   id: RejuvenateI
   onUnlock:
@@ -11,6 +13,13 @@
   - !type:AddActions
     actions:
     - ActionVampireGlare
+
+- type: vampireAbility
+  id: CreateLair
+  onUnlock:
+  - !type:AddActions
+    actions:
+    - ActionCreateLair
 
 - type: vampireAbility
   id: RejuvenateII
@@ -61,6 +70,7 @@
     - type: AreaDetector
     - type: WeakToHoly
     - type: Nullification
+    - type: AlwaysTakeHoly
   - !type:PopupPredicted
     message: You have reached full power!
     visualType: Large

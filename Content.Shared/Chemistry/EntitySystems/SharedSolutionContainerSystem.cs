@@ -147,15 +147,31 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     }
 
     /// <inheritdoc cref="ResolveSolution(Entity{SolutionManagerComponent?}, string, ref Entity{SolutionComponent}?, out Solution?)"/>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool ResolveSolution(Entity<SolutionManagerComponent?> container, string name, [NotNullWhen(true)] ref Entity<SolutionComponent>? entity)
+    //[MethodImpl(MethodImplOptions.AggressiveInlining)] // Trauma - this is non-trivial now, force inlining would be horrible
+    public bool ResolveSolution(Entity<SolutionManagerComponent?> container, string name, [NotNullWhen(true)] ref Entity<SolutionComponent>? entity,
+        bool logMissing = true) // Trauma
     {
+        // <Trauma> - add error logs, only double-check the existing solution on debug builds
         if (entity is not null)
         {
-            return TryGetSolution(container, name, out var debugEnt) && debugEnt.Value.Owner == entity.Value.Owner;
+#if DEBUG
+            if (!TryGetSolution(container, name, out var debugEnt) || debugEnt.Value.Owner != entity.Value.Owner)
+            {
+                if (logMissing)
+                    Log.Error($"Wrong solution {ToPrettyString(entity)} used for resolving solution {name} on {ToPrettyString(container)}, which was {ToPrettyString(debugEnt?.Owner)}!\nStack trace: {Environment.StackTrace}");
+                return false;
+            }
+#endif
+            return true;
         }
 
-        return TryGetSolution(container, name, out entity);
+        if (TryGetSolution(container, name, out entity))
+            return true;
+
+        if (logMissing)
+            Log.Error($"Failed to resolve solution {name} on {ToPrettyString(container)}!\nStack trace: {Environment.StackTrace}");
+        return false;
+        // </Trauma>
     }
 
     /// <summary>
@@ -1210,7 +1226,11 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         solution.Comp.Id = name;
         ContainerSystem.Insert(solution.Owner, container, force: true);
         EntityManager.InitializeAndStartEntity(solution);
-        FlagPredicted(solution.Owner);
+        // <Trauma> - server will never send state for a clientside entity's solution, dont flag if its clientside.
+        // otherwise the solution entity we worked so hard for just gets deleted immediately :)
+        if (!IsClientSide(container.Owner))
+            FlagPredicted(solution.Owner);
+        // </Trauma>
         return solution;
     }
 
@@ -1222,7 +1242,10 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         var solution = SpawnSolutionUninitialized(proto);
         ContainerSystem.Insert(solution.Owner, container, force: true);
         EntityManager.InitializeAndStartEntity(solution);
-        FlagPredicted(solution.Owner);
+        // <Trauma> - dont flag if its clientside, see above
+        if (!IsClientSide(container.Owner))
+            FlagPredicted(solution.Owner);
+        // </Trauma>
         return solution;
     }
 

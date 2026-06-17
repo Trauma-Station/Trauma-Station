@@ -10,6 +10,11 @@
   - Maintenance # TODO Remove maint access for all gimmick jobs once access work is completed
   - Theatre
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipMusician
+  # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: MikuDay
     prototype: BoxPerformer

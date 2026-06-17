@@ -123,7 +123,7 @@ public sealed partial class WraithPointsSystem : EntitySystem
     /// <param name="ent"></param> The entity
     public void AdjustWraithPoints(FixedPoint2 wraithPoints, Entity<WraithPointsComponent?> ent)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
         ent.Comp.WraithPoints = FixedPoint2.Clamp(ent.Comp.WraithPoints + wraithPoints, 0, FixedPoint2.MaxValue);

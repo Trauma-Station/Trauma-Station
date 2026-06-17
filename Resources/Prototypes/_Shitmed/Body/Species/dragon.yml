@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Mob
 
 - type: entity
@@ -104,9 +106,7 @@
   parent: [ OrganAnimalLungs, OrganDragonInternal ]
   id: OrganDragonLungs
   components:
-  - type: OrganComponents
-    onAdd:
-    - type: ActionGun
-      action: ActionDragonsBreath
-      gunProto: DragonsBreathGun
+  - type: OrganActions
+    actions:
+    - ActionDragonsBreath
     # intentionally no BreathingImmunity

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   abstract: true
   id: BaseRevMachine
@@ -63,6 +65,11 @@
   parent: BaseRevMachine
   id: RevPlasmaFoundry
   targetNode: plasma foundry
+
+- type: construction
+  parent: BaseRevMachine
+  id: RevMedFab
+  targetNode: hidden medifab
 
 # Turrets
 

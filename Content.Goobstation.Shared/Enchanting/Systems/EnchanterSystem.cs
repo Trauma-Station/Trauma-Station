@@ -122,8 +122,8 @@ public sealed partial class EnchanterSystem : EntitySystem
                 total += 1f;
         }
 
-        _audio.PlayPvs(ent.Comp.Sound, item);
-        _popup.PopupEntity(Loc.GetString("enchanter-enchanted", ("item", item)), item, PopupType.Large);
+        _audio.PlayPredicted(ent.Comp.Sound, item, user);
+        _popup.PopupPredicted(Loc.GetString("enchanter-enchanted", ("item", item)), item, user, PopupType.Large);
 
         _adminLogger.Add(LogType.EntityDelete, LogImpact.Low, $"{ToPrettyString(user):player} enchanted {ToPrettyString(item):item} using {ToPrettyString(ent):enchanter}");
 
@@ -132,6 +132,16 @@ public sealed partial class EnchanterSystem : EntitySystem
             ent.Comp.Enchants = new(); // prevent double enchanting by malf client
             PredictedQueueDel(ent);
         }
+        return true;
+    }
+
+    public bool AddEnchant(Entity<EnchanterComponent?> ent, [ForbidLiteral] EntProtoId<EnchantComponent> id)
+    {
+        ent.Comp ??= EnsureComp<EnchanterComponent>(ent);
+        if (ent.Comp.Enchants.Contains(id))
+            return false;
+
+        ent.Comp.Enchants.Add(id);
         return true;
     }
 }

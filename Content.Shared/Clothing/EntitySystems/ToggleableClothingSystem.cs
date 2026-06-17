@@ -75,10 +75,11 @@ public sealed partial class ToggleableClothingSystem : EntitySystem
     {
         var comp = toggleable.Comp;
 
-        if (!args.CanAccess || !args.CanInteract || args.Hands == null || comp.ClothingUids.Count == 0 || comp.Container == null)
+        if (!args.CanAccess || !args.CanInteract || args.Hands == null || comp.ClothingUids.Count == 0 || comp.Container == null ||
+            !args.CanComplexInteract) // Trauma
             return;
 
-        var text = comp.VerbText ?? (comp.ActionEntity == null ? null : Name(comp.ActionEntity.Value));
+        var text = comp.VerbText is { } loc ? Loc.GetString(loc) : (comp.ActionEntity == null ? null : Name(comp.ActionEntity.Value)); // Trauma - use Loc.GetString here
         if (text == null)
             return;
 
@@ -94,7 +95,7 @@ public sealed partial class ToggleableClothingSystem : EntitySystem
         var verb = new EquipmentVerb()
         {
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/outfit.svg.192dpi.png")),
-            Text = Loc.GetString(text),
+            Text = text, // Trauma - moved Loc.GetString to above
         };
 
         if (user == wearer)

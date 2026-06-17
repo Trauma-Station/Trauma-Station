@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   id: MobSpaceLeviathanSegmentBase
@@ -163,6 +165,8 @@
   - type: Physics
     bodyType: Dynamic
   - type: TailedEntitySegment
+  - type: ViewconeOccludable
+    useMemory: false
 
 - type: entity
   id: SpaceLeviathanDespawn

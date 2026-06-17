@@ -12,18 +12,24 @@
   startingGear: LawyerGear
   icon: "JobIconLawyer"
   supervisors: job-supervisors-hop
-  guides: # goobstation
-  - SpaceLaw
   access:
   #- Service # Trauma - piss off
   - Lawyer
   - Brig
   - Maintenance
-  special: # Goobstation - Everyone knows lawyers are soulless.
+  # <Trauma>
+  guides:
+  - SpaceLaw
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipLawyer
+  # Everyone knows lawyers are soulless.
   - !type:AddComponentSpecial
     components:
     - type: Condemned
       soulOwnedNotDevil: true
+  # </Trauma>
 
 - type: startingGear
   id: LawyerGear

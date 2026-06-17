@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: MobXenomorphTailSegmentBase
   name: xenomorph tail
@@ -9,3 +11,8 @@
     layers:
     - state: XenoTailSegmentBase
     drawdepth: BelowMobs
+  - type: ViewconeOccludable
+    useMemory: false
+  - type: Tag
+    tags:
+    - HideContextMenu

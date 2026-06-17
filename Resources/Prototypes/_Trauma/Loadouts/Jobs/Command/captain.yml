@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# PDA
+- type: loadout
+  id: CaptainPDA
+  equipment:
+    id: CaptainPDA
+
+- type: loadout
+  id: AltCaptainPDA
+  equipment:
+    id: AltCaptainPDA

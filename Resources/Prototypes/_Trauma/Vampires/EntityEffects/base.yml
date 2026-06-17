@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entityEffect
   id: VampireRejuvI
   effects:
@@ -79,3 +81,15 @@
     amount: 10
   - !type:ApplyNullification
     amount: 5
+
+- type: entityEffect
+  id: VampireGarlic
+  effects:
+  - !type:Vomit
+  - !type:PopupPredicted
+    message: The garlic makes you vomit!
+    visualType: MediumCaution
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectDrunk
+    time: 60
+    type: Add

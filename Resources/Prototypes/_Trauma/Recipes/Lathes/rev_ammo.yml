@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: latheRecipe
   abstract: true
   parent: BaseRevWeapon
@@ -56,6 +58,14 @@
   parent: BaseRevMagazine
   id: RevTurretMagazine
   result: BaseMagazineTurretEmpty
+
+- type: latheRecipe
+  parent: BaseRevMagazine
+  id: RevTurretMagazineHeavy
+  completetime: 15
+  materials:
+    Steel: 500
+  result: BaseMagazineTurretHeavyEmpty
 
 - type: latheRecipe
   parent: BaseRevMagazine

@@ -30,7 +30,7 @@ public sealed partial class RelayHandsEffectSystem : EntityEffectSystem<HandsCom
         foreach (var item in _hands.EnumerateHeld(ent.AsNullable()))
         {
             _data.CopyData(ent, item);
-            _effects.TryApplyEffect(item, effect.Effect, args.Scale, args.User);
+            _effects.TryApplyEffect(item, effect.Effect, args.Scale, args.User, predicted: args.Predicted);
             _data.ClearData(item);
         }
     }

@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseFoodCondimentPacketDrink
+  id: FoodCondimentPacketCocoa
+  name: cocoa powder
+  description: A sweet cocoa-based flavoring.
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: CocoaPowder
+        Quantity: 5
+  - type: Icon
+    state: packet-soysauce
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: packet-solid-

@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Change this if you want to alter how damage types affect part severing/integrity.
 - type: damageModifierSet
   id: PartDamage

@@ -40,3 +40,25 @@ public enum TargetBodyPart : ushort
 
     Vital = Head | Chest,
 }
+
+/// <summary>
+/// Used by part cycling via scrolling
+/// </summary>
+public enum TargetBodyPartNonFlag : byte
+{
+    Head = 0,
+    Chest,
+    Groin,
+    LeftArm,
+    LeftHand,
+    RightArm,
+    RightHand,
+    LeftLeg,
+    LeftFoot,
+    RightLeg,
+    RightFoot,
+    Tail,
+    Wings,
+
+    Max = RightFoot, // Wings and Tail do not work
+}

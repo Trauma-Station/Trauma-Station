@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
   abstract: true
   id: BaseForgingItem
@@ -52,6 +54,7 @@
   parent: BaseForgingItem
   id: SteelScraps
   graph: SteelScraps
+  targetNode: scraps
   theory:
     FabricationKnowledge: 0
   practical:
@@ -67,6 +70,16 @@
   parent: SteelScraps
   id: PlasteelScraps
   graph: PlasteelScraps
+
+- type: construction
+  parent: SteelScraps
+  id: GoldScraps
+  graph: GoldScraps
+
+- type: construction
+  parent: SteelScraps
+  id: SilverScraps
+  graph: SilverScraps
 
 - type: construction
   parent: BaseForgingItem

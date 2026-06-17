@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseMobXenomorphAdult, AppearanceXenomorphHunter, BaseXenoTailed ]
   id: BaseMobXenomorphHunter
@@ -51,21 +53,12 @@
   #   - XenomorphHunter
 
 - type: entity
-  parent: BaseMobXenomorphHunter
+  parent: [ BaseMobXenomorphHunter, BaseXenomorphGhostRole ]
   id: MobXenomorphHunter
   components:
   - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
     name: ghost-role-information-xenomorph-hunter-name
     description: ghost-role-information-xenomorph-hunter-description
-    rules: ghost-role-information-rules-default-xeno
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostTakeoverAvailable
 
 - type: entity
   parent: [BaseMobXenomorphDungeon, BaseMobXenomorphHunter]

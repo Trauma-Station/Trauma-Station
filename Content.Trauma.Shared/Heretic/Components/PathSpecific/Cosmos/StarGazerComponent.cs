@@ -3,10 +3,11 @@
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class StarGazerComponent : Component
 {
     [DataField]
@@ -19,16 +20,16 @@ public sealed partial class StarGazerComponent : Component
     public ICommonSession? ResettingMindSession;
 
     [DataField]
-    public float GhostRoleTimer = 20f;
+    public TimeSpan GhostRoleTime = TimeSpan.FromSeconds(20);
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float GhostRoleAccumulator;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan GhostRoleTimer;
 
     [DataField]
-    public float ResetDistanceTimer = 5f;
+    public TimeSpan ResetDistanceTime = TimeSpan.FromSeconds(5);
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float ResetDistanceAccumulator;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan ResetDistanceTimer;
 
     [DataField]
     public EntProtoId TeleportEffect = "EffectCosmicCloud";

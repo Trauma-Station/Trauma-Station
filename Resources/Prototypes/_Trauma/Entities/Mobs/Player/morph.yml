@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: SimpleMobBase
@@ -175,7 +177,7 @@
     description: ghost-role-information-morph-description
     rules: ghost-role-information-rules-team-antagonist
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
+    - MindRoleMorph
   - type: GhostTakeoverAvailable
 
 - type: entity

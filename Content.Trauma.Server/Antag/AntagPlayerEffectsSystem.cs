@@ -18,6 +18,6 @@ public sealed partial class AntagPlayerEffectsSystem : EntitySystem
 
     private void OnEntitySelected(Entity<AntagPlayerEffectsComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        _effects.ApplyEffects(args.EntityUid, ent.Comp.Effects);
+        _effects.ApplyEffects(args.EntityUid, ent.Comp.Effects, predicted: false);
     }
 }

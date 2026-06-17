@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Mob
 
 - type: entity
@@ -220,6 +222,7 @@
     defaultChannel: MansusLink
     channels:
     - MansusLink
+  - type: NoSlip
 
 ## Base
 

@@ -224,6 +224,9 @@ public sealed partial class DamageableSystem
 
     private void OnDamageDealt(Entity<InjurableComponent> ent, ref DamageDealtEvent args)
     {
+        if (_bodyQuery.HasComp(ent)) // Trauma - don't change damagedict for entities with body, damage should be applied to body parts
+            return;
+
         if (!_damageableQuery.TryGetComponent(ent, out var damageable))
             return;
 
@@ -248,6 +251,8 @@ public sealed partial class DamageableSystem
 
         if (!damageDone.Empty)
             OnEntityDamageChanged((ent, damageable), damageDone, args.InterruptsDoAfters, args.Origin);
+
+        args.ModifiedDamage = damageDone; // Trauma
     }
 }
 
@@ -304,8 +309,8 @@ public sealed class DamageModifyEvent(EntityUid target, DamageSpecifier damage, 
 /// <param name="Origin">The originator of the damage</param>
 /// <param name="InterruptsDoAfters">If the damage being dealt will interrupt do-afters</param>
 [ByRefEvent]
-public readonly record struct DamageDealtEvent(DamageSpecifier Damage, EntityUid? Origin, bool InterruptsDoAfters,
-    bool IgnoreBlockers); // Trauma - Whether or not wounding should ignore blockers
+public record struct DamageDealtEvent(DamageSpecifier Damage, EntityUid? Origin, bool InterruptsDoAfters,
+    bool IgnoreBlockers, DamageSpecifier ModifiedDamage); // Trauma - Whether or not wounding should ignore blockers. Removed readonly, added ModifiedDamage
 
 [Obsolete("Will be replaced with damage-model specific events; general 'took damage' can be served by DamageDealtEvent")]
 public sealed class DamageChangedEvent : EntityEventArgs

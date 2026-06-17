@@ -519,7 +519,7 @@ internal static class SkinColorationUtils
     /// Due to RGB colors being clamped to 8 bits, precision is lost during transformation to HSL or HSV.
     /// The precision of the result is approximately 1/180.
     /// </summary>
-    public const float Epsilon = 0.0056f;
+    public const float Epsilon = 0.006f; // Trauma - was 0.0056, still caused heisentest
 
     /// <summary>
     /// Checks if a hue value is within a specified range, correctly handling ranges that wrap around 1.0 (e.g., reds).

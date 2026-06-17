@@ -108,21 +108,6 @@
   parent: BaseMindRole
   id: MindRoleJob
   name: Job Role
-  # <Trauma>
-  components:
-  - type: RoleEffects # every job gets its skillchip by default
-    singleUse: true
-    added:
-    - !type:InstallJobSkillChip
-      conditions:
-      - !type:WhitelistCondition
-        whitelist:
-          components:
-          - Body
-        blacklist:
-          components:
-          - BorgChassis # dont think they get this but just incase
-  # </Trauma>
   # JobPrototype is filled by SharedJobSystem
 
 # Silicon

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: Ratma
   parent: [ MobSpaceBasic, MobCombat ]
@@ -103,7 +105,7 @@
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     raffle:
-      settings: default
+      settings: short
   - type: JumpAbility
     action: ActionRatmaJump
     jumpDistance: 0.5
@@ -111,10 +113,6 @@
       path: /Audio/Effects/demon_attack1.ogg
       params:
         variation: 0.15
-  - type: PointLight
-    radius: 0
-    energy: 0
-    color: "#4faffb"
   - type: NoSlip
 
 - type: entity
@@ -315,7 +313,7 @@
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     raffle:
-      settings: default
+      settings: short
   - type: PointLight
     radius: 0
     energy: 0

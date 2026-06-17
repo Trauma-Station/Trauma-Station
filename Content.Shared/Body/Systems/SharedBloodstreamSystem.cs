@@ -508,7 +508,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
     public bool TryBleedOut(Entity<BloodstreamComponent?> ent, FixedPoint2 amount)
     {
         if (!Resolve(ent, ref ent.Comp, logMissing: false)
-            || !SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution)
+            || !SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, logMissing: false) // Trauma - logMissing: false, might not have init yet
             || amount <= 0)
         {
             return false;

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: cargoProduct
   id: SecurityWeaponLaserSidearm
   icon:
@@ -16,4 +18,14 @@
   product: CrateSecurityGunpowder
   cost: 15000
   category: cargoproduct-category-name-armory
+  group: market
+
+- type: cargoProduct
+  id: SecuritySkillChips
+  icon:
+    sprite: _Trauma/Objects/Specific/brain_chips.rsi
+    state: icon
+  product: CrateSkillChipsSec
+  cost: 8000
+  category: cargoproduct-category-name-security
   group: market

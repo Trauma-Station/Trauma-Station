@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Cloak of Darkness
 - type: entity
   parent: BaseVampireAction
@@ -161,6 +163,7 @@
     update: 0.5
     targetEffects:
     - !type:HealthChange
+      splitDamage: SplitEnsureAll
       damage:
         types:
           Blunt: 3

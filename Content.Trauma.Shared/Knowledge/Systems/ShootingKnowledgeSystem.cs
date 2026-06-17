@@ -6,13 +6,13 @@ using Content.Shared.Projectiles;
 using Content.Trauma.Common.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
+
 public sealed partial class ShootingKnowledgeSystem : EntitySystem
 {
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private MobStateSystem _mobState = default!;
 
     private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
-    private static readonly EntProtoId WeaponsKnowledge = "WeaponsKnowledge";
 
     public override void Initialize()
     {
@@ -28,7 +28,6 @@ public sealed partial class ShootingKnowledgeSystem : EntitySystem
             return;
         // TODO: scale it based on the gun, pistols are easier to shoot than railguns
         _knowledge.AddExperience(brain, ShootingKnowledge, 1, 20);
-        _knowledge.AddExperience(brain, WeaponsKnowledge, 1, 20);
     }
 
     private void OnHitShootingExperience(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)

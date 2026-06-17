@@ -40145,23 +40145,11 @@ entities:
     - type: Transform
       pos: 11.5,37.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 1296
     components:
     - type: Transform
       pos: -22.5,15.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: AutolatheMachineCircuitboard
   entities:
   - uid: 1297
@@ -99192,8 +99180,6 @@ entities:
     - type: Transform
       pos: 7.5,33.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 25855
 - proto: CargoTelepad
   entities:
   - uid: 12980
@@ -111324,19 +111310,6 @@ entities:
     - type: Transform
       pos: -71.458015,-37.449062
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackDuffelSyndicatePyjamaBundle
   entities:
   - uid: 15032
@@ -111344,19 +111317,6 @@ entities:
     - type: Transform
       pos: 99.50743,-1.3897237
       parent: 2
-    - type: GroupExamine
-      group:
-      - hoverMessage: ""
-        contextText: verb-examine-group-other
-        icon: /Textures/Interface/examine-star.png
-        components:
-        - Armor
-        - ClothingSpeedModifier
-        entries:
-        - message: This decreases your running speed by [color=yellow]10%[/color].
-          priority: 0
-          component: ClothingSpeedModifier
-        title: null
 - proto: ClothingBackpackDuffelVirology
   entities:
   - uid: 15033
@@ -115557,12 +115517,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -25.5,-26.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ComputerRoboticsControl
   entities:
   - uid: 15700
@@ -130461,23 +130415,11 @@ entities:
     - type: Transform
       pos: -6.5,-41.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
   - uid: 18070
     components:
     - type: Transform
       pos: -7.5,-41.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ExtinguisherCabinetFilled
   entities:
   - uid: 18071
@@ -186767,11 +186709,6 @@ entities:
     - type: Transform
       pos: 16.5,34.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        12979:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialSmileExtract
   entities:
   - uid: 25856
@@ -188066,13 +188003,6 @@ entities:
     - type: Transform
       pos: 30.5,29.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: OrganDionaStomach
   entities:
   - uid: 26049
@@ -211681,13 +211611,6 @@ entities:
     - type: Transform
       pos: -3.5,-31.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screen
   entities:
   - uid: 29625
@@ -211817,13 +211740,6 @@ entities:
     - type: Transform
       pos: 51.5,3.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 29648
@@ -211848,13 +211764,6 @@ entities:
     - type: Transform
       pos: -28.5,41.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 29652
@@ -231961,13 +231870,6 @@ entities:
     - type: Transform
       pos: -13.5,2.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRed
   entities:
   - uid: 15390

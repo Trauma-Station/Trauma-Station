@@ -6,7 +6,7 @@ namespace Content.Shared.Speech;
 
 public sealed class ListenEvent : EntityEventArgs
 {
-    public readonly string Message;
+    public string Message; // Trauma - removed readonly
     public readonly EntityUid Source;
     public readonly ProtoId<LanguagePrototype> Language; // Trauma
 
