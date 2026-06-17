@@ -27,7 +27,7 @@ public sealed partial class SpriteVisibilitySystem : CommonSpriteVisibilitySyste
 
     public override void UpdateVisibilityModifiers(EntityUid uid, string key, float alpha)
     {
-        if (!_spriteQuery.TryComp(uid, out var comp))
+        if (!_spriteQuery.TryComp(uid, out var comp) || TerminatingOrDeleted(uid))
             return;
 
         if (alpha >= 1f)
