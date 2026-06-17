@@ -10262,3 +10262,12 @@ Entries:
   id: 1163
   time: '2026-06-17T17:12:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3200
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Moderately increased the amount of chemicals you get from putting Vestine
+      into botany plants
+  id: 1164
+  time: '2026-06-17T17:52:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3138
