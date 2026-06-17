@@ -4,8 +4,8 @@
   id: MediumSideJobRewards
   table: !type:GroupSelector
     children:
-    - id: Telecrystal10 # 20% of the time give people a raw 10TC to spend on anything
-      weight: 0.25
+    - id: Telecrystal10 # 2/3 of the time you get straight TC (but less value)
+      weight: 2
     - !type:NestedSelector
       tableId: MediumSideJobRewardsItems
 
