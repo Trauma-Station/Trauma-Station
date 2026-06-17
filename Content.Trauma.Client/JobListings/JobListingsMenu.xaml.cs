@@ -18,6 +18,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public void ClearJobListings()
     {
         AvailableJobListingsContainer.RemoveAllChildren();
+        AcceptedJobListingsContainer.RemoveAllChildren();
     }
 
     public void AddAvailableSideJob(SideJobInfo sideJob)

@@ -137,7 +137,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <returns>True if successful, false if failure.</returns>
     public int CountSideJobs(Entity<JobListingsComponent> jobBoard)
     {
-        return jobBoard.Comp.AvailableSideJobs.Count + jobBoard.Comp.AcceptedSideJobCount;
+        return jobBoard.Comp.AvailableSideJobs.Count + jobBoard.Comp.AcceptedSideJobs.Count;
     }
 
     /// <summary>
