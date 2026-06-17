@@ -10253,3 +10253,12 @@ Entries:
   id: 1162
   time: '2026-06-17T06:47:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3221
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added Lawyershot, now you can shut up the lawyer.
+  - type: Remove
+    message: Killed powergaming command asking for devil deals.
+  id: 1163
+  time: '2026-06-17T17:12:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3200
