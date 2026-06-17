@@ -23,6 +23,7 @@ public sealed partial class SideJobControl : Control
     public void UpdateAsAvailable(SideJobInfo info)
     {
         Update(info);
+        JobListingNegativeButton.Visible = false;
     }
 
     public void UpdateAsAccepted(SideJobInfo info)

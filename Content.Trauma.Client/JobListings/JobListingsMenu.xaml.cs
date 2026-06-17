@@ -24,7 +24,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public void AddAvailableSideJob(SideJobInfo sideJob)
     {
         var sideJobControl = new SideJobControl();
-        sideJobControl.Update(sideJob);
+        sideJobControl.UpdateAsAvailable(sideJob);
         sideJobControl.OnAccepted += job => OnJobAccepted?.Invoke(job);
         AvailableJobListingsContainer.AddChild(sideJobControl);
         RefreshNotes();
@@ -33,7 +33,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public void AddAcceptedSideJob(SideJobInfo sideJob)
     {
         var sideJobControl = new SideJobControl();
-        sideJobControl.Update(sideJob);
+        sideJobControl.UpdateAsAccepted(sideJob);
         AcceptedJobListingsContainer.AddChild(sideJobControl);
         RefreshNotes();
     }
@@ -44,7 +44,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
         {
             if (control is not SideJobControl sideJobControl)
                 continue;
-            sideJobControl.JobListingAcceptButton.Disabled = true;
+            sideJobControl.JobListingPositiveButton.Disabled = true;
         }
     }
 
