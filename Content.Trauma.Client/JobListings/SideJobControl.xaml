@@ -7,10 +7,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <BoxContainer Orientation="Horizontal">
             <Label Name="JobListingsName" HorizontalExpand="True" />
             <Button
-                Name="JobListingAcceptButton"
+                Name="JobListingPositiveButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
-                Text="Accept"
+                Text="{Loc job-listings-ui-accept-button}"
                 Access="Public" />
         </BoxContainer>
         <PanelContainer StyleClasses="HighDivider" />

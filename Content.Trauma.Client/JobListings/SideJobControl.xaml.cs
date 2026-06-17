@@ -18,15 +18,28 @@ public sealed partial class SideJobControl : Control
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _sprite = _entity.System<SpriteSystem>();
+    }
 
-        JobListingAcceptButton.OnPressed += _ =>
+    public void UpdateAsAvailable(SideJobInfo info)
+    {
+        Update(info);
+    }
+
+    public void UpdateAsAccepted(SideJobInfo info)
+    {
+        Update(info);
+        JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-claim-button");
+        var canClaim = info.Progress >= 0.999f;
+        JobListingPositiveButton.Disabled = !canClaim;
+
+        JobListingPositiveButton.OnPressed += _ =>
         {
             if (_sideJob is not null)
                 OnAccepted?.Invoke(_sideJob.Value);
         };
     }
 
-    public void Update(SideJobInfo info)
+    private void Update(SideJobInfo info)
     {
         JobListingsName.Text = info.Title;
         JobListingDescription.Text = info.Description;
