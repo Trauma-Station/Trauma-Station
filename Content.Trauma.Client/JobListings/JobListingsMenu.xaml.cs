@@ -38,6 +38,16 @@ public sealed partial class JobListingsMenu : DefaultWindow
         RefreshNotes();
     }
 
+    public void DisableAcceptButtons()
+    {
+        foreach (var control in AvailableJobListingsContainer.Children)
+        {
+            if (control is not SideJobControl sideJobControl)
+                continue;
+            sideJobControl.JobListingAcceptButton.Disabled = true;
+        }
+    }
+
     private void RefreshNotes()
     {
         AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;

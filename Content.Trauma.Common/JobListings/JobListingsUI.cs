@@ -18,10 +18,11 @@ public sealed class JobListingsAcceptJobMessage(NetEntity job) : BoundUserInterf
 public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, NetEntity Entity);
 
 [Serializable, NetSerializable]
-public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs) : BoundUserInterfaceState
+public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, bool acceptedJobsFull) : BoundUserInterfaceState
 {
-    public List<SideJobInfo> AvailableSideJobs = availableSideJobs;
-    public List<SideJobInfo> AcceptedSideJobs = acceptedSideJobs;
+    public readonly List<SideJobInfo> AvailableSideJobs = availableSideJobs;
+    public readonly List<SideJobInfo> AcceptedSideJobs = acceptedSideJobs;
+    public readonly bool AcceptedJobsFull = acceptedJobsFull;
 }
 
 [Serializable, NetSerializable]

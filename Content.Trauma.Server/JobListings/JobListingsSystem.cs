@@ -196,7 +196,8 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             acceptedSideJobs.Add(info.Value);
         }
 
-        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs);
+        var acceptedJobsFull = acceptedSideJobs.Count >= jobBoard.Value.Comp.AcceptedSideJobCount;
+        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, acceptedJobsFull);
         _ui.SetUiState(owner, JobListingsUiKey.Key, state);
     }
 

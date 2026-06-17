@@ -37,6 +37,9 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         {
             _menu?.AddAcceptedSideJob(sideJob);
         }
+
+        if (jobListingsState.AcceptedJobsFull)
+            _menu?.DisableAcceptButtons();
     }
 
     private void OnJobAccepted(NetEntity job)
