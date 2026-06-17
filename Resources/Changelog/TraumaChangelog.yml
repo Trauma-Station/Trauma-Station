@@ -10230,3 +10230,10 @@ Entries:
   id: 1159
   time: '2026-06-16T18:47:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3209
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Hitler Dead. Windoors aren't cancer anymore
+  id: 1160
+  time: '2026-06-17T05:15:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3217
