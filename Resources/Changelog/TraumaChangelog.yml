@@ -10184,3 +10184,72 @@ Entries:
   id: 1153
   time: '2026-06-14T21:33:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3185
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix heretic shadow cloak not removing itself on damage.
+  - type: Fix
+    message: Fix mawed crucibles not breaking.
+  - type: Fix
+    message: Void conduit damages airlock assemblies now.
+  id: 1154
+  time: '2026-06-15T18:47:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3189
+- author: shoebill
+  changes:
+  - type: Add
+    message: Added a low blood alert to the health analyzer.
+  id: 1155
+  time: '2026-06-15T22:47:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3187
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to use the break grab keybind while stunned, dead, etc.
+  id: 1156
+  time: '2026-06-16T07:32:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3199
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not having their powers.
+  id: 1157
+  time: '2026-06-16T10:23:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3186
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed edaggers being metagamed just by examining them.
+  id: 1158
+  time: '2026-06-16T15:25:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3208
+- author: TechnicViriato
+  changes:
+  - type: Add
+    message: Added cocoa powder to the chefvend and to the chef's closet.
+  id: 1159
+  time: '2026-06-16T18:47:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3209
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Hitler Dead. Windoors aren't cancer anymore
+  id: 1160
+  time: '2026-06-17T05:15:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3217
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed toggle ghost visibility action not working.
+  id: 1161
+  time: '2026-06-17T06:30:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3219
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed reinforcements not having skill chips, being counted as security,
+      being able to enchant, etc.
+  id: 1162
+  time: '2026-06-17T06:47:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3221

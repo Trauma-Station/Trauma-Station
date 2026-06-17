@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BaseItem
+  id: MailCapsulePrimed
   name: mail capsule
   suffix: Primed
-  id: MailCapsulePrimed
-  parent: BaseItem
   components:
   - type: ThrowingAngle
     angle: 180
@@ -18,14 +18,13 @@
   - type: Sprite
     sprite: _NF/Objects/Misc/mail_capsule.rsi
     layers:
-      - state: icon-empty
+    - state: icon-empty
   - type: ItemSlots
     slots:
       mail_slot:
-        insertVerbText: Put in Mail
-        ejectVerbText: Take out Mail
-        name: Mail
-        startingItem: null
+        insertVerbText: mail-capsule-verb-insert-mail
+        ejectVerbText: mail-capsule-verb-eject-mail
+        name: mail-capsule-slot-mail
         whitelist:
           tags:
           - Book
@@ -36,25 +35,23 @@
         insertOnInteract: true
         priority: 3
       food_slot:
-        insertVerbText: Put in Food
-        ejectVerbText: Take out Food
-        name: Food
-        startingItem: null
+        insertVerbText: mail-capsule-verb-insert-food
+        ejectVerbText: mail-capsule-verb-eject-food
+        name: mail-capsule-slot-food
         whitelist:
           components:
           - Edible
         insertOnInteract: true
-        priority: 1 # Goob Edit - Spesos are both food and money, so check for money first
+        priority: 1
       cash_slot:
-        insertVerbText: Put in Cash
-        ejectVerbText: Take out Cash
-        name: Cash
-        startingItem: null
+        insertVerbText: mail-capsule-verb-insert-cash
+        ejectVerbText: mail-capsule-verb-eject-cash
+        name: mail-capsule-slot-cash
         whitelist:
           components:
-          - Cash # Goob Edit - Turns out, Currency is server-only
+          - Cash
         insertOnInteract: true
-        priority: 2 # Goob Edit - Spesos are both food and money, so check for money first
+        priority: 2
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
