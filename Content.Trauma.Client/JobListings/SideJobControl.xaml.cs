@@ -23,6 +23,13 @@ public sealed partial class SideJobControl : Control
     public void UpdateAsAvailable(SideJobInfo info)
     {
         Update(info);
+        JobListingNegativeButton.Visible = false;
+
+        JobListingPositiveButton.OnPressed += _ =>
+        {
+            if (_sideJob is not null)
+                OnAccepted?.Invoke(_sideJob.Value);
+        };
     }
 
     public void UpdateAsAccepted(SideJobInfo info)
@@ -31,12 +38,6 @@ public sealed partial class SideJobControl : Control
         JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-claim-button");
         var canClaim = info.Progress >= 0.999f;
         JobListingPositiveButton.Disabled = !canClaim;
-
-        JobListingPositiveButton.OnPressed += _ =>
-        {
-            if (_sideJob is not null)
-                OnAccepted?.Invoke(_sideJob.Value);
-        };
     }
 
     private void Update(SideJobInfo info)
