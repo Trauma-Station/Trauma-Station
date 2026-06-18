@@ -168,16 +168,16 @@ public abstract partial class SharedBorgSystem : EntitySystem
         if (args.Container != chassis.Comp.BrainContainer)
             return;
 
-        if (HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(args.Entity, out var mindId, out var mind))
-        {
-            _mind.TransferTo(mindId, chassis.Owner, mind: mind);
-        }
         // <Trauma>
         var ev = new BorgBrainInsertedEvent(chassis, args.Entity);
         RaiseLocalEvent(args.Entity, ref ev);
         var borgEv = new BrainInsertedIntoBorgEvent(args.Entity);
         RaiseLocalEvent(chassis, ref borgEv);
         // </Trauma>
+        if (HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(args.Entity, out var mindId, out var mind))
+        {
+            _mind.TransferTo(mindId, chassis.Owner, mind: mind);
+        }
     }
 
     protected virtual void OnRemoved(Entity<BorgChassisComponent> chassis, ref EntRemovedFromContainerMessage args)
