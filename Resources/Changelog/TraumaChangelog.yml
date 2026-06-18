@@ -10294,3 +10294,14 @@ Entries:
   id: 1167
   time: '2026-06-18T09:50:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3212
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed MMI borgs not understanding any languages etc.
+  - type: Fix
+    message: >-
+      Fixed xenoborgs not being able to pick up some items in their construction
+      bag.
+  id: 1168
+  time: '2026-06-18T18:15:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3233
