@@ -1142,7 +1142,7 @@
   description: uplink-sleeping-carp-desc
   productEntity: SleepingCarpScroll
   cost:
-    Telecrystal: 70
+    Telecrystal: 100 # Trauma, scarp is bought too frequently by traitors, higher price should incentivize more creativity w/ other less expensive melee options
   categories:
   - UplinkWeaponry
   conditions:
