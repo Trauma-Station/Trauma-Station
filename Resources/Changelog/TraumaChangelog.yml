@@ -10305,3 +10305,10 @@ Entries:
   id: 1168
   time: '2026-06-18T18:15:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3233
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mrbeast infinite steel giveaway with construction.
+  id: 1169
+  time: '2026-06-18T18:55:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3234
