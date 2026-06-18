@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: UndeterminedSelectorBoxingRiggedRadial
+  name: boxing gloves selector
+  description: A small remote utilizing bluespace technology to drop in a pair of rigged boxing gloves of your choosing.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi
+    state: standard
+  - type: UserInterface
+    interfaces:
+      enum.RadialSelectorUiKey.Key:
+        type: RadialSelectorMenuBUI
+  - type: ActivatableUI
+    key: enum.RadialSelectorUiKey.Key
+    inHandsOnly: true
+    singleUser: true
+  - type: RadialItemSelector
+    entries:
+    - prototype: ClothingHandsGlovesBoxingRiggedBlue
+      icon:
+        sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi
+        state: icon
+    - prototype: ClothingHandsGlovesBoxingRiggedGreen
+      icon:
+        sprite: Clothing/Hands/Gloves/Boxing/boxinggreen.rsi
+        state: icon
+    - prototype: ClothingHandsGlovesBoxingRiggedRed
+      icon:
+        sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+        state: icon
+    - prototype: ClothingHandsGlovesBoxingRiggedYellow
+      icon:
+        sprite: Clothing/Hands/Gloves/Boxing/boxingyellow.rsi
+        state: icon
