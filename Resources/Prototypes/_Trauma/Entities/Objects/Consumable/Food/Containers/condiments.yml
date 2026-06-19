@@ -8,6 +8,7 @@
   components:
   - type: Solution
     solution:
+      maxVol: 5
       reagents:
       - ReagentId: CocoaPowder
         Quantity: 5
