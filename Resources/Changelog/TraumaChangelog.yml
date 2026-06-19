@@ -10319,3 +10319,10 @@ Entries:
   id: 1170
   time: '2026-06-19T06:18:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3227
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the chances of side gamemode Traitor actually rolling
+  id: 1171
+  time: '2026-06-19T08:04:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3245
