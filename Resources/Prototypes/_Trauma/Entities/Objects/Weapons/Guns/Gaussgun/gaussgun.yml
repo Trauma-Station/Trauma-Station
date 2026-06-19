@@ -129,6 +129,11 @@
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
     size: Small
