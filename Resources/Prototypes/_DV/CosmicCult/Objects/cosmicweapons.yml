@@ -17,13 +17,12 @@
     angle: 90
     animation: WeaponArcCosmic
     attackRate: 1
-    clickDamageModifier: 1.1
     damage:
       types:
-        Slash: 20
-        Asphyxiation: 15
+        Slash: 12
+        Asphyxiation: 9
         Structural: 15
-        Ion: 25
+        Ion: 15
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg
       params:
@@ -81,9 +80,9 @@
     attackRate: 0.6
     damage:
       types:
-        Piercing: 30
-        Asphyxiation: 10
-        Ion: 25
+        Piercing: 18
+        Asphyxiation: 6
+        Ion: 15
     animationRotation: 225
     wideAnimationRotation: 225
     soundHit:
@@ -207,7 +206,7 @@
     heavyStaminaCost: 0 # This thing is challenging enough to use already, and you can't lightswing anyway
     damage:
       types:
-        Slash: 20
+        Slash: 12
     soundHit:
       path: /Audio/_DV/CosmicCult/cosmicsword_hit.ogg
       params:
