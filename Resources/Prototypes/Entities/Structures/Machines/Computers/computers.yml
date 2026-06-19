@@ -1100,7 +1100,7 @@
     energy: 1.6
     color: "#b89f25"
   - type: AccessReader
-    access: [["Cargo"]] # Trauma - This being QM access means it genuinely never gets used. Dropping it down to Cargo so cargotechs can actually skip bad bounties.
+    access: [["Cargo"]] # Trauma - Was QM.
   - type: GuideHelp
     guides:
     - CargoBounties
