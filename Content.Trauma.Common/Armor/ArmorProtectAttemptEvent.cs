@@ -6,4 +6,4 @@ namespace Content.Trauma.Common.Armor;
 /// Event raised on armor when trying to protect from damage, potentially coming from a source entity.
 /// </summary>
 [ByRefEvent]
-public record struct ArmorProtectAttemptEvent(EntityUid? Origin, bool Cancelled = false);
+public record struct ArmorProtectAttemptEvent(EntityUid? Origin, bool IsPreciseHit, float Multiplier = 1f);

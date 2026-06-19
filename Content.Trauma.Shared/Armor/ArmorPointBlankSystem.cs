@@ -19,10 +19,11 @@ public sealed partial class ArmorPointBlankSystem : EntitySystem
 
     private void OnProtectAttempt(Entity<ArmorPointBlankComponent> ent, ref ArmorProtectAttemptEvent args)
     {
-        if (args.Cancelled || ent.Comp.Range <= 0f || args.Origin is not { } origin)
+        if (!args.IsPreciseHit || args.Multiplier <= 0f || ent.Comp.Range <= 0f || args.Origin is not { } origin)
             return;
 
-        args.Cancelled = _transform.InRange(ent.Owner, origin, ent.Comp.Range);
+        if (_transform.InRange(ent.Owner, origin, ent.Comp.Range))
+            args.Multiplier *= ent.Comp.ResistancePenalty;
     }
 
     private void OnArmorExamine(Entity<ArmorPointBlankComponent> ent, ref ArmorExamineEvent args)
@@ -31,6 +32,6 @@ public sealed partial class ArmorPointBlankSystem : EntitySystem
             return;
 
         args.Msg.PushNewline();
-        args.Msg.AddMarkupOrThrow($"Protection is [color=red]bypassed[/color] within a {ent.Comp.Range}m range");
+        args.Msg.AddMarkupOrThrow($"Protection is [color=red]multplied by {ent.Comp.ResistancePenalty}x[/color] within a {ent.Comp.Range}m range on precise hit");
     }
 }

@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.Armor;
 
 /// <summary>
-/// Makes armor get ignored by attacks below a certain distance.
+/// Makes armor values get reduced by precise attacks below a certain distance.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(ArmorPointBlankSystem))]
 public sealed partial class ArmorPointBlankComponent : Component
@@ -13,4 +13,10 @@ public sealed partial class ArmorPointBlankComponent : Component
     /// </summary>
     [DataField]
     public float Range = 1.25f;
+
+    /// <summary>
+    /// Value that we multiply armor resistances by
+    /// </summary>
+    [DataField]
+    public float ResistancePenalty = 0.5f;
 }

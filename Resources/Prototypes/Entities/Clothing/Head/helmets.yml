@@ -96,7 +96,7 @@
   # <Trauma>
   - type: FlashSoundSuppression
   - type: ArmorPointBlank
-    range: 0.7 # eyes are protected
+    range: 1
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Helmets/swat.rsi
@@ -148,7 +148,7 @@
   # <Trauma>
   - type: FaceHuggerBlocker
   - type: ArmorPointBlank
-    range: 0.5 # it's a melee helmet so shorter range
+    range: 1
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Helmets/light_riot.rsi
@@ -175,6 +175,7 @@
   # <Trauma>
   - type: ArmorPointBlank
     range: 0 # it's fully covered
+  - type: FaceHuggerBlocker
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Helmets/bombsuit.rsi
@@ -190,7 +191,6 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-  - type: FaceHuggerBlocker # Trauma
   - type: HideLayerClothing
     layers:
       Hair: HEAD
@@ -452,7 +452,7 @@
   components:
   # <Trauma>
   - type: ArmorPointBlank
-    range: 0.5 # very good face coverage + its ert
+    range: 1
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Helmets/ert_leader.rsi

@@ -669,7 +669,6 @@ public abstract partial class SharedGunSystem : EntitySystem
                     // <Trauma>
                     var pelletEv = new SpreadPelletFiredEvent(newuid);
                     RaiseLocalEvent(ammoEnt, ref pelletEv);
-                    SetProjectilePerfectHitEntities(newuid, user, new MapCoordinates(toMap, fromMap.MapId));
                     // </Trauma>
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, user, targetCoordinates: toMapBeforeRecoil); // Trauma - add target coords
                     shotProjectiles.Add(newuid);

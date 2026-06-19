@@ -114,10 +114,9 @@
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun_back.rsi
   - type: Gun
+    fireRate: 1
     minAngle: 40
     maxAngle: 50
-  - type: Gun
-    fireRate: 1
   - type: Construction
     graph: GaussRifleGraph
     node: finish
