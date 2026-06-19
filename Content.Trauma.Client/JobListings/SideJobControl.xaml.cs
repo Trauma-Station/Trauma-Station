@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Common.JobListings;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.JobListings;
 
@@ -8,10 +9,17 @@ namespace Content.Trauma.Client.JobListings;
 public sealed partial class SideJobControl : Control
 {
     [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IGameTiming _timing = default!;
     private SpriteSystem _sprite;
+
     private NetEntity? _sideJob;
+    private bool _cancelAlreadyPressed = false;
+    private TimeSpan? _cancelPressTime;
+
+    private readonly TimeSpan _cancelSafetyDuration = TimeSpan.FromSeconds(1.0);
 
     public Action<NetEntity>? OnAccepted;
+    public Action<NetEntity>? OnCancelled;
 
     public SideJobControl()
     {
@@ -38,6 +46,34 @@ public sealed partial class SideJobControl : Control
         JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-claim-button");
         var canClaim = info.Progress >= 0.999f;
         JobListingPositiveButton.Disabled = !canClaim;
+
+        JobListingNegativeButton.OnPressed += _ => OnCancelButtonPressed();
+    }
+
+    private void OnCancelButtonPressed()
+    {
+        if (_sideJob is null)
+            return;
+
+        if (!_cancelAlreadyPressed)
+        {
+            _cancelAlreadyPressed = true;
+            _cancelPressTime = _timing.CurTime;
+            JobListingNegativeButton.Text = Loc.GetString("job-listings-ui-confirmation-button");
+            return;
+        }
+
+        OnCancelled?.Invoke(_sideJob.Value);
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        if (_cancelAlreadyPressed && _cancelPressTime is not null && _timing.CurTime >= _cancelPressTime.Value + _cancelSafetyDuration)
+        {
+            _cancelAlreadyPressed = false;
+            JobListingNegativeButton.Text = Loc.GetString("job-listings-ui-cancel-button");
+        }
     }
 
     private void Update(SideJobInfo info)

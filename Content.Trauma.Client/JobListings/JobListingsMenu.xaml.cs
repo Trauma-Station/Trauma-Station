@@ -9,6 +9,7 @@ namespace Content.Trauma.Client.JobListings;
 public sealed partial class JobListingsMenu : DefaultWindow
 {
     public Action<NetEntity>? OnJobAccepted;
+    public Action<NetEntity>? OnJobCancelled;
 
     public JobListingsMenu()
     {
@@ -34,6 +35,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     {
         var sideJobControl = new SideJobControl();
         sideJobControl.UpdateAsAccepted(sideJob);
+        sideJobControl.OnCancelled += job => OnJobCancelled?.Invoke(job);
         AcceptedJobListingsContainer.AddChild(sideJobControl);
         RefreshNotes();
     }

@@ -12,6 +12,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     {
         _menu = this.CreateWindow<JobListingsMenu>();
         _menu.OnJobAccepted += OnJobAccepted;
+        _menu.OnJobCancelled += OnJobCancelled;
     }
 
     [ViewVariables]
@@ -45,5 +46,10 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     private void OnJobAccepted(NetEntity job)
     {
         SendMessage(new JobListingsAcceptJobMessage(job));
+    }
+
+    private void OnJobCancelled(NetEntity job)
+    {
+        SendMessage(new JobListingsCancelJobMessage(job));
     }
 }

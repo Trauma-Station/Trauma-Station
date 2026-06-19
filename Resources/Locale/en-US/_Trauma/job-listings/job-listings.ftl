@@ -4,6 +4,7 @@ job-listings-ui-accepted-label = Accepted
 job-listings-ui-available-label = Available
 job-listings-ui-accept-button = Accept
 job-listings-ui-cancel-button = Cancel
+job-listings-ui-confirmation-button = Sure?
 job-listings-ui-claim-button = Claim
 job-listings-ui-no-accepted-note = No jobs currently accepted...
 job-listings-ui-no-available-note = No jobs currently offered...

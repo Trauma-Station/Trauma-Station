@@ -42,6 +42,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         SubscribeLocalEvent<UplinkAssignedEvent>(OnUplinkAssigned);
         SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
+        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsCancelJobMessage>(OnMessage);
 
         InitializeReward();
     }
@@ -109,6 +110,16 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         jobBoard.Comp.AvailableSideJobs.Remove(accepted);
         jobBoard.Comp.AcceptedSideJobs.Add(accepted);
         return true;
+    }
+
+    /// <summary>
+    /// Cancel an already accepted job.
+    /// </summary>
+    /// <param name="jobBoard"></param>
+    /// <param name="sideJob"></param>
+    public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
+    {
+        jobBoard.Comp.AcceptedSideJobs.RemoveAll(job => job.Entity == sideJob);
     }
 
     /// <summary>
@@ -245,6 +256,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!GetJobBoard(owner.Owner, out var jobBoard))
             return;
         AcceptSideJob(jobBoard.Value, GetEntity(msg.Job));
+        UpdateUi(owner.Owner);
+    }
+
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
         UpdateUi(owner.Owner);
     }
 }

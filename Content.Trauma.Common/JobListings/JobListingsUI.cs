@@ -15,6 +15,12 @@ public sealed class JobListingsAcceptJobMessage(NetEntity job) : BoundUserInterf
 }
 
 [Serializable, NetSerializable]
+public sealed class JobListingsCancelJobMessage(NetEntity job) : BoundUserInterfaceMessage
+{
+    public NetEntity Job = job;
+}
+
+[Serializable, NetSerializable]
 public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, int ReputationGain, NetEntity Entity);
 
 [Serializable, NetSerializable]
