@@ -59,5 +59,5 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     /// The time between skipping bounties.
     /// </summary>
     [DataField]
-    public TimeSpan SkipDelay = TimeSpan.FromMinutes(3);
+    public TimeSpan SkipDelay = TimeSpan.FromMinutes(3); // Trauma - Changed this from 15 to 3. 15 minutes per bounty makes it pretty easy for Cargo to get clogged with bad tasks, 3 should allow players to actively have a bounty they can work on even on long shifts.
 }
