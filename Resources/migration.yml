@@ -50,9 +50,6 @@ BoxMagazineMagnumSubMachineGun: BoxMagazineRifle
 # 2025-01-01 Trauma Remove scurret poster
 PosterLegitHelio: null
 
-# 2026-01-05 Actually use the ToiletCisternLoot table.
-ToiletEmpty: ToiletFilled
-
 # 2026-01-07
 GunSafeDisabler: GunSafePhaser
 WeaponDisabler: WeaponLaserSidearm
