@@ -97,6 +97,7 @@
   parent: DiseaseBase
   name: turbo cancer
   description: Deals lots of genetic damage to the infected. Better prepare the funeral.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Disease
     infectionRate: 0.1
