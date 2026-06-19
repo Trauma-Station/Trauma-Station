@@ -703,7 +703,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (shooter != null)
             Projectiles.SetShooter(uid, projectile, shooter.Value);
 
-        Physics.UpdateIsPredicted(uid, physics); // Trauma - predict this shit
+        // <Trauma> - predict this shit
+        Physics.UpdateIsPredicted(uid, physics);
+        projectile.OriginalShooter = projectile.Shooter;
+        // </Trauma>
 
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);
         // <Trauma>

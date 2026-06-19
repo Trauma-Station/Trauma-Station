@@ -7,16 +7,10 @@ namespace Content.Shared.Weapons.Melee;
 public sealed partial class MeleeWeaponComponent
 {
     /// <summary>
-    /// If false, light attacks by this weapon cannot be parried
+    /// If false, attacks by this weapon cannot be parried
     /// </summary>
     [DataField]
-    public bool CanParryLight = true;
-
-    /// <summary>
-    /// If false, wide attacks by this weapon cannot be parried
-    /// </summary>
-    [DataField]
-    public bool CanParryWide = true;
+    public bool CanBeParried = true;
 
     /// <summary>
     /// If true, alt attack will use click rather than wide swing

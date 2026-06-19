@@ -105,8 +105,7 @@
   - type: Parry # Trauma - replaces Reflect
     reflects:
     - Energy
-    maxParries: 0
-    maxReflects: 10
+    reflectExhaustionCost: 0.125
     reflectSpread: 60
   - type: IgnitionSource
     temperature: 700
@@ -185,8 +184,8 @@
     components:
     # <Trauma>
     - type: Parry
-      maxReflects: 3
-      maxParries: 0
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.5
       reflectSpread: 120
     # </Trauma>
     - type: Sharp
@@ -262,8 +261,8 @@
     components:
     # <Trauma>
     - type: Parry
-      maxReflects: 3
-      maxParries: 0
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.5
       reflectSpread: 120
     # </Trauma>
     - type: Sharp
@@ -432,9 +431,8 @@
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
   - type: Parry # Trauma
-    maxReflects: 15
-    maxParries: 0
-    reflectSpread: 30
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.0625
   - type: FlipOnHit # WD EDIT
     lightAttackOnly: true
     statusEffect: StatusEffectFlipDesword
