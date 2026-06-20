@@ -1,6 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
-using Content.Client.LinkAccount;
+using Content.Trauma.Common.LinkAccount;
 // </Trauma>
 using System.Linq;
 using Content.Client.UserInterface.Screens;
@@ -19,7 +19,7 @@ namespace Content.Client.Options.UI.Tabs;
 public sealed partial class MiscTab : Control
 {
     // <Trauma>
-    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private ILinkAccountManager _linkAccount = default!;
     //[Dependency] private IPlayerManager _playerManager = default!; // no longer used
     // </Trauma>
     [Dependency] private IPrototypeManager _prototypeManager = default!;
@@ -45,7 +45,7 @@ public sealed partial class MiscTab : Control
 
         // Channel can be null in replays so.
         // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
-        ShowOocPatronColor.Visible = _linkAccount.Tier != null; // Trauma - use rmc patron system
+        ShowOocPatronColor.Visible = _linkAccount.IsPatron(); // Trauma - use rmc patron system
 
         Control.AddOptionDropDown(CVars.InterfaceTheme, DropDownHudTheme, themeEntries);
         Control.AddOptionDropDown(CCVars.UILayout, DropDownHudLayout, layoutEntries);

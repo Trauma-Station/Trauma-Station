@@ -34,7 +34,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedStarMarkSystem _starMark = default!;
 
-    protected const string JointId = "stargaze";
+    public const string JointId = "stargaze";
 
     public override void Initialize()
     {
@@ -150,6 +150,8 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
 
         args.Handled = true;
 
+        var now = Timing.CurTime;
+
         if (_net.IsServer)
         {
             comp.Endpoint = Spawn(null, Xform.ToCoordinates(comp.CursorPosition.Value));
@@ -157,7 +159,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
             EnsureComp<LaserBeamEndpointComponent>(endpoint);
             EnsureComp<TimedDespawnComponent>(endpoint).Lifetime = comp.LaserDuration;
             var beam = EnsureComp<ComplexJointVisualsComponent>(uid);
-            var data = new ComplexJointVisualsData(JointId, comp.Beam1, comp.Start1, comp.End1, Timing.CurTime)
+            var data = new ComplexJointVisualsData(JointId, comp.Beam1, comp.Start1, comp.End1, now)
             {
                 Scale = new Vector2(comp.BeamScale),
             };
@@ -171,6 +173,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
         }
 
         comp.StartedBlasting = true;
+        comp.BeamTimer = now + comp.BeamTime;
         Dirty(ent);
     }
 

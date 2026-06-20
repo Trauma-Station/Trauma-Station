@@ -129,6 +129,10 @@ public sealed partial class DrainSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        // <Trauma> - prediction ticks might have it empty before it has applied server state for the solutions
+        if (!_timing.IsFirstTimePredicted)
+            return;
+        // </Trauma>
 
         var query = EntityQueryEnumerator<DrainComponent>();
         var curTime = _timing.CurTime;

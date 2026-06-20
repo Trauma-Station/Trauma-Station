@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
@@ -195,6 +196,14 @@ public sealed partial class ForgingSystem : EntitySystem
         _workable.SetRemaining((uid, workable), work);
         _workable.SetResult((uid, workable), itemProto.Result ?? DefaultResult);
         _workable.SetAmount((uid, workable), itemProto.Amount);
+
+        // calculate the damage an item would take to break, based on total work needed * damage trigger from the YML
+        if (TryComp<DestructibleComponent>(uid, out var destructible))
+        {
+            destructible.Scale = work;
+            Dirty(uid, destructible);
+        }
+
         // TODO: other shit?
         return uid;
     }

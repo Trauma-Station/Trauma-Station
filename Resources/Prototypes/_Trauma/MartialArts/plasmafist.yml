@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: combo
   id: TornadoSweep
   attacks:
@@ -6,9 +8,6 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
-  - !type:PopupMessage
-    messages:
-    - plasmafist-tornadosweep
   opponentEffects:
   levelRequired: 26
 
@@ -30,8 +29,5 @@
   userEffects:
   - !type:PlaySoundEffect
     sound: /Audio/Weapons/genhit2.ogg
-  - !type:PopupMessage
-    messages:
-    - plasmafist-plasmafist
   opponentEffects:
   levelRequired: 26

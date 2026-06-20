@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Installs a hypoport to the target mob's head
 - type: entityEffect
   id: InstallHypoport

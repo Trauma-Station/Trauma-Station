@@ -161,7 +161,7 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     private void OnVisitingTerminating(EntityUid uid, VisitingMindComponent component, ref EntityTerminatingEvent args)
     {
-        if (component.MindId != null)
+        if (component.MindId != null && !TerminatingOrDeleted(component.MindId)) // Trauma - check if the mind is deleted
             UnVisit(component.MindId.Value);
     }
 

@@ -21,12 +21,6 @@ public sealed partial class AddMutation : EntityEffectBase<AddMutation>
     /// </summary>
     [DataField]
     public bool Automatic;
-
-    [DataField]
-    public bool Predicted;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // if you add this to a reagent make a guidebook string...
 }
 
 public sealed partial class AddMutationEffectSystem : EntityEffectSystem<MutatableComponent, AddMutation>
@@ -37,6 +31,6 @@ public sealed partial class AddMutationEffectSystem : EntityEffectSystem<Mutatab
     {
         var e = args.Effect;
         _mutation.AddMutation(ent.AsNullable(), e.Mutation, user: args.User,
-            automatic: e.Automatic, predicted: e.Predicted);
+            automatic: e.Automatic, predicted: args.Predicted);
     }
 }

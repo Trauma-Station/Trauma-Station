@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Parts
 
 - type: entity
@@ -7,7 +9,7 @@
   components:
   - type: BodyPart
     slots:
-    - Stomach # sentient slime core
+    - Brain # sentient slime core
     - Lungs # slime lungs
   - type: Woundable
     boneEntity: null

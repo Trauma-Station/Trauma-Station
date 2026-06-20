@@ -15,9 +15,6 @@ public sealed partial class RelayStrapped : EntityEffectBase<RelayStrapped>
     /// </summary>
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // cbf
 }
 
 public sealed partial class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponent, RelayStrapped>
@@ -30,7 +27,7 @@ public sealed partial class RelayStrappedEffectSystem : EntityEffectSystem<Strap
         foreach (var strapped in ent.Comp.BuckledEntities)
         {
             _data.CopyData(ent, strapped);
-            _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale, args.User);
+            _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale, args.User, args.Predicted);
             _data.ClearData(strapped);
         }
     }

@@ -1,7 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## A ##
 
 - type: Tag
+  id: AdamantineScraps # Construction: AdamantineIngot
+
+- type: Tag
   id: AdvancedMagboots # Construction: RevPlasmaFoundry
+
+- type: Tag
+  id: AirlockAssembly # Used for airlock assemblies so that heretic void conduit can damage them
 
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down

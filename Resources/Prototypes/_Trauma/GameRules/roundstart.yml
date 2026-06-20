@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # i love this dogshit system nobody has improved for 2 years :)
 - type: entity
   parent: BaseGameRule
@@ -15,11 +17,24 @@
       prob: 0.02
 
 - type: entity
-  parent: BaseRoundstartAntagRule
+  parent: BaseGameRule
   id: Insurgency
   components:
   - type: GameRule
-    minPlayers: 5 # no insurgents on deadpop
+    minPlayers: 5
+  - type: NestedRule
+    rules: !type:GroupSelector
+      children:
+      - id: InsurgencyShipVariantTide
+        weight: 30
+      - id: InsurgencyShipVariantInsurgents
+        weight: 70
+
+- type: entity
+  abstract: true
+  parent: BaseRoundstartAntagRule
+  id: BaseInsurgencyRule
+  components:
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
@@ -43,13 +58,27 @@
       playerRatio: 10
 
 - type: entity
+  parent: BaseInsurgencyRule
+  id: InsurgencyShipVariantInsurgents
+  components:
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
+
+- type: entity
+  parent: BaseInsurgencyRule
+  id: InsurgencyShipVariantTide
+  components:
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/tide_insurgents.yml
+
+- type: entity
   parent: BaseGameRule
   id: SubTraitorRandom
   components:
   - type: SubGamemodes
     rules:
     - id: SubTraitor
-      prob: 0.5
+      prob: 0.2
 
 - type: entity
   parent: [ BaseShadowlingRule, BaseRoundstartAntagRule ]
@@ -74,5 +103,5 @@
     effects:
     - !type:NestedEffect
       proto: InstallHypoportNukie
-    - !type:NestedEffect
-      proto: InstallSkillChipNukie
+    - !type:InstallOrganChip
+      chip: SkillChipNukie

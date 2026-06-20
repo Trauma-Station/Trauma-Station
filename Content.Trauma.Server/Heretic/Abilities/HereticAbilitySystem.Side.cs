@@ -143,8 +143,6 @@ public sealed partial class HereticAbilitySystem
             _bloodStealTargets.Add(target);
         }
 
-        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
-
         if (!hasTargets)
             return;
 
@@ -152,6 +150,8 @@ public sealed partial class HereticAbilitySystem
         {
             _container.EmptyContainer(woundable.Wounds);
         }
+
+        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
 
         _aud.PlayPvs(args.Sound, args.Target);
     }

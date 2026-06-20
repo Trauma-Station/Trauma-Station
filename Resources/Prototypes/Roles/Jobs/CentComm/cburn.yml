@@ -13,9 +13,14 @@
   - CentralCommand
   # Goobstation
   - NanotrasenRepresentative
-  special: # Goobstation
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCBURN
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
+  # </Trauma>
 
 - type: startingGear # Goobstation - Start - Sol
   id: CBURNGear

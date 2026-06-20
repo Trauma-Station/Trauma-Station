@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # TODO: dont use a fucking lathe, use crowbar to toggle charcoal / ash
 - type: entity
   parent: BaseMachine

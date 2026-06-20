@@ -87,7 +87,7 @@ public sealed partial class MaterialDisplay : PanelContainer
             {
                 Name = $"{sheetsToEject}",
                 Access = AccessLevel.Public,
-                Text = Loc.GetString($"{sheetsToEject}"),
+                Text = $"{sheetsToEject}", // Trauma - remove loc for a fucking number, an iq too high
                 MinWidth = 45,
                 StyleClasses = { styleClass }
             };

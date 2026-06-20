@@ -314,7 +314,7 @@
   parent: [ AppearanceSpaceCobra, MobSpaceBasic ] # Shitmed
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
-    # <Goob>
+    # <Trauma>
     - type: Fauna
     - type: LanguageSpeaker
       speaks:
@@ -325,7 +325,12 @@
     - type: NpcFactionMember
       factions:
       - Xeno # Aligning them with Space Adders
-    # </Goob>
+    - type: NightVision
+      color: "#808080"
+      activateSound: null
+      deactivateSound: null
+    - type: VentCrawler
+    # </Trauma>
     - type: Sprite
       drawdepth: Mobs
       sprite: Mobs/Animals/spacecobra.rsi

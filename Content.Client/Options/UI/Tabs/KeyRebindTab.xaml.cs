@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.CCVar;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Input;
 // </Trauma>
 using System.Numerics;
@@ -186,6 +187,12 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.ToggleKnockdown);
 
             AddHeader("ui-options-header-camera");
+            // <Trauma>
+            AddToggleCvarCheckBox("ui-options-mouse-wheel-zoom", TraumaCVars.MouseWheelZoom);
+            AddToggleCvarCheckBox("ui-options-mouse-wheel-rotate", TraumaCVars.MouseWheelRotate);
+            AddButton(TraumaKeyFunctions.ZoomMod);
+            AddButton(TraumaKeyFunctions.RotateMod);
+            // </Trauma>
             AddButton(EngineKeyFunctions.CameraRotateLeft);
             AddButton(EngineKeyFunctions.CameraRotateRight);
             AddButton(EngineKeyFunctions.CameraReset);
@@ -263,8 +270,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.EscapeContext);
 
             // <Trauma>
-            // TODO: change to scrolling x/y
             AddHeader("ui-options-header-targeting");
+            AddToggleCvarCheckBox("ui-options-mouse-wheel-targeting", TraumaCVars.MouseWheelTargeting);
+            AddButton(TraumaKeyFunctions.TargetingMod);
             AddButton(TraumaKeyFunctions.TargetHead);
             AddButton(TraumaKeyFunctions.TargetChest);
             AddButton(TraumaKeyFunctions.TargetGroin);

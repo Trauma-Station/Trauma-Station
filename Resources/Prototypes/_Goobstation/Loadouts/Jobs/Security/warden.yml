@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: loadoutEffectGroup
   id: SeniorWarden #masterwarden doesn't exist, but it'd be 20 hours, not this slop

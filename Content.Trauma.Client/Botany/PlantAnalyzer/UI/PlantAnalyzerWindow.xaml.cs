@@ -2,6 +2,7 @@
 
 using System.Text;
 using Content.Client.UserInterface.Controls;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Random;
 using Content.Trauma.Common.Botany;
 using Content.Trauma.Shared.Botany.Components;
@@ -12,7 +13,8 @@ namespace Content.Trauma.Client.Botany.PlantAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PlantAnalyzerWindow : FancyWindow
 {
-    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _ent = default!;
+    private SharedAtmosphereSystem _atmos = default!;
     private readonly ButtonGroup _buttonGroupTop = new();
 
     private const string IndentedNewline = "\n   ";
@@ -29,6 +31,8 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        _atmos = _ent.System<SharedAtmosphereSystem>();
 
         Tabs.OnTabChanged += _ =>
         {
@@ -100,12 +104,12 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
                 }
                 foreach (var gene in _internalConsumeGasesDatabank)
                 {
-                    var gas = Loc.GetString("gases-" + gene.GasID.ToString().ToLower());
+                    var gas = Loc.GetString(_atmos.GetGas(gene.GasID).Name);
                     DatabaseList.AddItem($"Consume {gas}: {gene.GasValue}");
                 }
                 foreach (var gene in _internalExudeGasesDatabank)
                 {
-                    var gas = Loc.GetString("gases-" + gene.GasID.ToString().ToLower());
+                    var gas = Loc.GetString(_atmos.GetGas(gene.GasID).Name);
                     DatabaseList.AddItem($"Exude {gas}: {gene.GasValue}");
                 }
                 foreach (var gene in _internalChemicalsDatabank)
@@ -125,7 +129,7 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
     }
     public void Populate(PlantAnalyzerScannedSeedPlantInformation msg)
     {
-        var target = _entityManager.GetEntity(msg.TargetEntity);
+        var target = _ent.GetEntity(msg.TargetEntity);
         Title = Loc.GetString("plant-analyzer-interface-title");
 
         if (target == null)

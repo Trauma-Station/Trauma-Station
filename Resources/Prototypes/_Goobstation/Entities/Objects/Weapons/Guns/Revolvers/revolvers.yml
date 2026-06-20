@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity # Goob, the normal revolver but no ammo counter
   name: Russian Revolver
   parent: BaseItem

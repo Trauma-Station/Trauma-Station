@@ -12,7 +12,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
-using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Silicon.DeadStartupButton;
 
@@ -20,7 +19,6 @@ public sealed partial class DeadStartupButtonSystem : SharedDeadStartupButtonSys
 {
     [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private LightningSystem _lightning = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private SharedBatterySystem _battery = default!;

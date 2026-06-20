@@ -42,13 +42,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// Every knowledge prototype and its data.
     /// </summary>
     public Dictionary<EntProtoId, KnowledgeComponent> AllKnowledges = new();
-    public static readonly LocId[] MasteryNames = [
-        "unskilled",
-        "novice",
-        "average",
-        "advanced",
-        "expert",
-        "master"
+    public static readonly string[] MasteryNames = [
+        "Unskilled",
+        "Novice",
+        "Average",
+        "Advanced",
+        "Expert",
+        "Master"
     ];
 
     private bool _skillGain;
@@ -644,16 +644,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
     public override string GetMasteryString(int mastery)
-        => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
+        => MasteryNames[Math.Clamp(mastery, 0, 5)];
 
     public override int GetMastery(int level)
         => level switch
         {
             >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
-            >= 76 => 4,
-            >= 51 => 3,
-            >= 26 => 2,
+            >= 75 => 4,
+            >= 50 => 3,
+            >= 25 => 2,
             >= 1 => 1,
             _ => 0,
         };
@@ -675,9 +675,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
-            >= 4 => 76,
-            >= 3 => 51,
-            >= 2 => 26,
+            >= 4 => 75,
+            >= 3 => 50,
+            >= 2 => 25,
             >= 1 => 1,
             _ => 0,
         };
