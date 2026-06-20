@@ -12,6 +12,8 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public Action<NetEntity>? OnJobAccepted;
     public Action<NetEntity>? OnJobCancelled;
 
+    public int MaximumAcceptedSideJobs;
+
     public JobListingsMenu()
     {
         RobustXamlLoader.Load(this);
@@ -41,13 +43,23 @@ public sealed partial class JobListingsMenu : DefaultWindow
         Refresh();
     }
 
-    public void DisableAcceptButtons()
+    private void DisableAcceptButtons()
     {
         foreach (var control in AvailableJobListingsContainer.Children)
         {
             if (control is not SideJobControl sideJobControl)
                 continue;
             sideJobControl.JobListingPositiveButton.Disabled = true;
+        }
+    }
+
+    private void EnableAcceptButtons()
+    {
+        foreach (var control in AvailableJobListingsContainer.Children)
+        {
+            if (control is not SideJobControl sideJobControl)
+                continue;
+            sideJobControl.JobListingPositiveButton.Disabled = false;
         }
     }
 
@@ -75,5 +87,9 @@ public sealed partial class JobListingsMenu : DefaultWindow
     {
         AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;
         AvailableJobListingsNote.Visible = AvailableJobListingsContainer.ChildCount == 0;
+        if (AcceptedJobListingsContainer.ChildCount >= MaximumAcceptedSideJobs)
+            DisableAcceptButtons();
+        else
+            EnableAcceptButtons();
     }
 }

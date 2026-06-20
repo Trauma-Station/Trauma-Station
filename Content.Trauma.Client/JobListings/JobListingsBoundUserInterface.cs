@@ -29,6 +29,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         if (state is not JobListingsUserInterfaceState jobListingsState)
             return;
 
+        _menu?.MaximumAcceptedSideJobs = jobListingsState.MaximumAcceptedSideJobs;
         _menu?.ClearJobListings();
         foreach (var sideJob in jobListingsState.AvailableSideJobs)
         {
@@ -38,9 +39,6 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         {
             _menu?.AddAcceptedSideJob(sideJob);
         }
-
-        if (jobListingsState.AcceptedJobsFull)
-            _menu?.DisableAcceptButtons();
     }
 
     private void OnJobAccepted(NetEntity job)

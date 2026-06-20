@@ -35,7 +35,7 @@ public sealed partial class JobListingsComponent : Component
     /// How many jobs can be accepted at once.
     /// </summary>
     [DataField]
-    public int AcceptedSideJobCount;
+    public int MaximumAcceptedSideJobs;
 
     /// <summary>
     /// The list of side jobs the traitor has accepted.

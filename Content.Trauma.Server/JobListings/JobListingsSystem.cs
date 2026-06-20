@@ -100,7 +100,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <param name="sideJob"></param>
     public bool AcceptSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
-        if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.AcceptedSideJobCount)
+        if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs)
             return false;
 
         if (jobBoard.Comp.AvailableSideJobs.All(job => job.Entity != sideJob))
@@ -207,8 +207,8 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             acceptedSideJobs.Add(info.Value);
         }
 
-        var acceptedJobsFull = acceptedSideJobs.Count >= jobBoard.Value.Comp.AcceptedSideJobCount;
-        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, acceptedJobsFull);
+        var acceptedJobsFull = acceptedSideJobs.Count >= jobBoard.Value.Comp.MaximumAcceptedSideJobs;
+        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.MaximumAcceptedSideJobs);
         _ui.SetUiState(owner, JobListingsUiKey.Key, state);
     }
 
