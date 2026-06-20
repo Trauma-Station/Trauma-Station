@@ -10367,3 +10367,10 @@ Entries:
   id: 1175
   time: '2026-06-20T14:00:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3256
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorph drone, hunter, and sentinel now have scarier sprites
+  id: 1176
+  time: '2026-06-20T15:49:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3249
