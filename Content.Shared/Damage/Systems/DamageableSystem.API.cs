@@ -229,10 +229,15 @@ public sealed partial class DamageableSystem
             var vitalDamage = GetVitalDamage(damage);
             damage -= vitalDamage;
 
-            return ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
+            damage = ApplyDamageToBodyParts(ent, damage, origin, ignoreResistances,
                 interruptsDoAfters, targetPart, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly) +
                 ApplyDamageToBodyParts(ent, vitalDamage, origin, ignoreResistances,
                 interruptsDoAfters, TargetBodyPart.Vital, partMultiplier, ignoreBlockers, splitDamage, canMiss, increaseOnly);
+
+            var ev = new DamageDealtEvent(damage, origin, interruptsDoAfters, ignoreBlockers, damage);
+            RaiseLocalEvent(ent, ref ev);
+
+            return damage;
         }
         // </Goob>
 
@@ -246,10 +251,10 @@ public sealed partial class DamageableSystem
         // </Goob>
 
         var evt = new DamageDealtEvent(damage, origin, interruptsDoAfters,
-            ignoreBlockers); // Trauma
+            ignoreBlockers, damage); // Trauma
         RaiseLocalEvent(ent, ref evt);
 
-        return damage;
+        return evt.ModifiedDamage; // Trauma - damage -> evt.ModifiedDamage
     }
 
     /// <summary>

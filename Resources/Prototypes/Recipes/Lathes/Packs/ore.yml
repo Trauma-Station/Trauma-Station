@@ -3,6 +3,9 @@
 - type: latheRecipePack
   id: OreSmelting
   recipes:
+  # <Trauma>
+  - ArtifactFragment1
+  # </Trauma>
   - SheetSteel
   - SheetGlass1
   - SheetPlasma1
@@ -11,7 +14,6 @@
   - IngotSilver1
   - MaterialBananium1
   - MaterialDiamond
-  - ArtifactFragment1 # Lavaland Change
 
 - type: latheRecipePack
   id: RGlassSmelting

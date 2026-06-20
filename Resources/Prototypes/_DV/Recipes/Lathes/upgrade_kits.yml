@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # a bit more expensive than igniter + hyper-convection X board, its more convenient
 - type: latheRecipe
   abstract: true

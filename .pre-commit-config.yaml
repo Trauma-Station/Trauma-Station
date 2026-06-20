@@ -43,6 +43,13 @@ repos:
     args: ["-c", "^\\s*(<!--.*?-->)?\\s*", "-H", "<!--\nSPDX-License-Identifier: AGPL-3.0-or-later\n-->"]
     # Applies to all modules
     files: "^Content\\.(Trauma|Goobstation|Lavaland|Medical)\\..+/.*\\.xaml$"
+  - id: license-headers-yml
+    name: "Update License Headers (YML)"
+    entry: pre_commit_hooks/license-headers.py
+    language: python
+    args: ["-c", "^(\\s*#[^\\n]*\\n)*\\s*", "-H", "# SPDX-License-Identifier: AGPL-3.0-or-later"]
+    # Applies to all prototypes from AGPL codebases
+    files: "^Resources/Prototypes/_(DV|EinsteinEngines|Goobstation|Lavaland|Mono|NF|Shitmed|SimpleStation|Trauma)/.*\\.yml$"
 
 ci:
   autofix_commit_msg: "[pre-commit] automated pr fixes"

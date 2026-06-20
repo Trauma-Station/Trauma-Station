@@ -60,9 +60,11 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
     }
 
     /// <inheritdoc cref="ApplyEffects(EntityUid,EntityEffect[],float,EntityUid?)"/>
-    public void ApplyEffects(EntityUid target, EntityEffect[] effects, FixedPoint2 scale, EntityUid? user = null)
+    public void ApplyEffects(EntityUid target, EntityEffect[] effects, FixedPoint2 scale, EntityUid? user = null,
+        bool predicted = true) // Trauma
     {
-        ApplyEffects(target, effects, scale.Float());
+        ApplyEffects(target, effects, scale.Float(),
+            user: user, predicted: predicted); // Trauma
     }
 
     /// <summary>
@@ -72,12 +74,14 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
     /// <param name="effects">Effects we're applying to the entity</param>
     /// <param name="scale">Optional scale multiplier for the effects</param>
     /// <param name="user">The entity causing the effect.</param>
-    public void ApplyEffects(EntityUid target, EntityEffect[] effects, float scale = 1f, EntityUid? user = null)
+    public void ApplyEffects(EntityUid target, EntityEffect[] effects, float scale = 1f, EntityUid? user = null,
+        bool predicted = true) // Trauma
     {
         // do all effects, if conditions apply
         foreach (var effect in effects)
         {
-            TryApplyEffect(target, effect, scale, user);
+            TryApplyEffect(target, effect, scale, user,
+                predicted: predicted); // Trauma
         }
     }
 
@@ -89,7 +93,8 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
     /// <param name="scale">Optional scale multiplier for the effect.</param>
     /// <param name="user">The entity causing the effect.</param>
     /// <returns>True if all conditions pass!</returns>
-    public bool TryApplyEffect(EntityUid target, EntityEffect effect, float scale = 1f, EntityUid? user = null)
+    public bool TryApplyEffect(EntityUid target, EntityEffect effect, float scale = 1f, EntityUid? user = null,
+        bool predicted = true) // Trauma
     {
         if (scale < effect.MinScale)
             return false;
@@ -102,7 +107,8 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
         if (!_condition.TryConditions(target, effect.Conditions))
             return false;
 
-        ApplyEffect(target, effect, scale, user);
+        ApplyEffect(target, effect, scale, user,
+            predicted: predicted); // Trauma
         return true;
     }
 
@@ -114,7 +120,8 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
     /// <param name="effect">Effect we're applying</param>
     /// <param name="scale">Optional scale multiplier for the effect.</param>
     /// <param name="user">The entity causing the effect.</param>
-    public void ApplyEffect(EntityUid target, EntityEffect effect, float scale = 1f, EntityUid? user = null)
+    public void ApplyEffect(EntityUid target, EntityEffect effect, float scale = 1f, EntityUid? user = null,
+        bool predicted = true) // Trauma
     {
         // Clamp the scale if the effect doesn't allow scaling.
         if (!effect.Scaling)
@@ -132,15 +139,17 @@ public sealed partial class SharedEntityEffectsSystem : EntitySystem, IEntityEff
             );
         }
 
-        effect.RaiseEvent(target, this, scale, user);
+        effect.RaiseEvent(target, this, scale, user,
+            predicted: predicted); // Trauma
     }
 
     /// <summary>
     /// Raises an effect to an entity. You should not be calling this unless you know what you're doing.
     /// </summary>
-    public void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user) where T : EntityEffectBase<T>
+    public void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user, bool predicted = true) where T : EntityEffectBase<T> // Trauma - added predicted
     {
-        var effectEv = new EntityEffectEvent<T>(effect, scale, user);
+        var effectEv = new EntityEffectEvent<T>(effect, scale, user,
+            predicted); // Trauma
         RaiseLocalEvent(target, ref effectEv);
     }
 }
@@ -166,5 +175,5 @@ public abstract partial class EntityEffectSystem<T, TEffect> : EntitySystem wher
 /// </summary>
 public interface IEntityEffectRaiser
 {
-    void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user) where T : EntityEffectBase<T>;
+    void RaiseEffectEvent<T>(EntityUid target, T effect, float scale, EntityUid? user, bool predicted = true) where T : EntityEffectBase<T>; // Trauma - added predicted
 }

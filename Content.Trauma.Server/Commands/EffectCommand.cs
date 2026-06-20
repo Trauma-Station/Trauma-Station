@@ -28,10 +28,9 @@ public sealed class EffectCommand : ToolshedCommand
     public void Effect(
         [PipedArgument] EntityUid uid,
         [CommandArgument] ProtoId<EntityEffectPrototype> id,
-        [CommandArgument] float scale = 1f)
+        [CommandArgument] float scale = 1f,
+        [CommandArgument] EntityUid? user = null)
     {
-        // TODO: predicted: false
-        // TODO: pass user
-        Effects.TryApplyEffect(uid, id, scale);
+        Effects.TryApplyEffect(uid, id, scale, user: user, predicted: false);
     }
 }

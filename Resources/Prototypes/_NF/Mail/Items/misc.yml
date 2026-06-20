@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Mail-only items. If/when these get used for anything else, please move them to another folder.
 # Pranks: admin items or effects put into an envelope, released when opened or damaged.
 - type: entity

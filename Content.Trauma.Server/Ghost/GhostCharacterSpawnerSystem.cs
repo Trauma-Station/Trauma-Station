@@ -48,9 +48,12 @@ public sealed partial class GhostCharacterSpawnerSystem : EntitySystem
         _character.AddSpawnedCharacter(user, profile.Name);
         _character.SendData(args.Player);
 
-        var mob = _spawning.SpawnPlayerMob(coords, job: null, profile: profile, station: null);
+        var mob = _spawning.SpawnPlayerMob(coords, null, profile: profile, station: null);
         _transform.AttachToGridOrMap(mob);
         EntityManager.AddComponents(mob, ent.Comp.Components);
+
+        if (ghostRole.JobProto is { } job)
+            _spawning.DoJobSpecials(job, mob);
 
         var ev = new GhostRoleSpawnerUsedEvent(ent, mob);
         RaiseLocalEvent(mob, ev, true);

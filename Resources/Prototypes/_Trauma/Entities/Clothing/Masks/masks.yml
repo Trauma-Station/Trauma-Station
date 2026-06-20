@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ ClothingMaskGas, BaseRevMajorContraband ]
   id: ClothingMaskGasRev
@@ -25,43 +27,27 @@
     node: finished
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseCentcommContraband ]
-  id: ClothingHunterMaskGasSwat
-  name: spacepol swat gas mask
-  description: A standard issue gas mask for SpacePol Officers
+  parent: [ ClothingMaskBaseButcherable, BaseMinorContraband ]
+  id: KnittedBalaclava
+  name: 3-hole knit balaclava
+  description: For the budding robber, or the experienced terrorist.
   components:
   - type: Sprite
-    sprite: _Trauma/Clothing/Mask/spacepol.rsi
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
   - type: Clothing
-    sprite: _Trauma/Clothing/Mask/spacepol.rsi
-  - type: Tag
-    tags:
-    - WhitelistChameleon
-    - IPCMaskWearable
+    sprite: _Trauma/Clothing/Mask/knit_balaclava.rsi
+  - type: IdentityBlocker
   - type: HideLayerClothing
     slots:
     - Hair
     - Snout
     - HeadTop
     - HeadSide
-    hideOnToggle: true
-  - type: Armor
-    coverage:
-    - Head
-    modifiers:
-      coefficients:
-        Blunt: 0.8
-        Slash: 0.8
-        Piercing: 0.9
-        Heat: 0.9
-  - type: IngestionBlocker
-    blockSmokeIngestion: true
-  - type: Hailer
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseSecurityContraband ]
-  id: ClothingMaskGasSwatAdvisor
-  name: security advisor swat gas mask
+  parent: [ ClothingMaskGas, BaseCentcommContraband ]
+  id: ClothingHunterMaskGasSwat
+  name: spacepol swat gas mask
   description: A standard issue gas mask for SpacePol Officers
   components:
   - type: Sprite

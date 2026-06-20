@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # All actions in here are the base actions of the vampire that hasn't specialized yet.
-#
 # Therefore, this file does not include class-specific actions.
-#
 # Abstract Actions
 - type: entity
   parent: BaseAction

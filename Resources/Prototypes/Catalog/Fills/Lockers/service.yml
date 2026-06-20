@@ -70,6 +70,7 @@
     - !type:AllSelector
       rolls: 3
       children:
+      - id: FoodCondimentPacketCocoa # Trauma
       - id: FoodCondimentPacketSalt
       - id: FoodCondimentPacketPepper
     - id: PlushieLizardJobChef

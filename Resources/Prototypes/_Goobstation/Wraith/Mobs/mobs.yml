@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This holds all simplemobs summoned by void portal.
 
 - type: entity

@@ -55,7 +55,7 @@ public sealed partial class ThiefUndeterminedBackpackSystem : EntitySystem
                 {
                     if (spawnedStorage != null)
                         _storage.Insert(spawnedStorage.Value, ent, out _, playSound: false);
-                    else
+                    else if (!_hands.TryPickupAnyHand(args.Actor, ent)) // Trauma - try pick up the items if theres no storage
                         _transform.DropNextTo(ent, backpack.Owner);
                 }
             }

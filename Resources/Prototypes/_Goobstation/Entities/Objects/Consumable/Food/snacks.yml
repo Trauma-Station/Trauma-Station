@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Snacks
 - type: entity
   parent: FoodSnackBase
@@ -592,7 +593,6 @@
     state: stick
   - type: Item
 
-#
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: FoodPacketLunacakeTrash

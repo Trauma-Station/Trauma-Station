@@ -101,7 +101,8 @@ public sealed partial class DurabilitySystem : EntitySystem
         DirtyField(args.Weapon, comp, nameof(DurabilityComponent.CustomDurabilityModifiers));
     }
 
-    public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null, EntityUid? attacker = null, HashSet<EntityUid>? targets = null, EntityUid? used = null)
+    public bool DamageEntity(EntityUid uid, FixedPoint2 amount, DurabilityComponent? comp = null,
+        EntityUid? attacker = null, HashSet<EntityUid>? targets = null, EntityUid? used = null)
     {
         if (!Resolve(uid, ref comp))
             return false;
@@ -125,14 +126,15 @@ public sealed partial class DurabilitySystem : EntitySystem
         // Don't raise the event if it didn't actually change.
         if (comp.DurabilityState != oldState)
         {
-            var stateEv = new DurabilityStateChangedEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
+            var stateEv = new DurabilityStateChangedEvent(oldState,
+                comp.DurabilityState, uid, attacker, targets, used);
             RaiseLocalEvent(uid, ref stateEv);
         }
 
         if (used is { } item)
         {
-            var stateUsedEv =
-                new DurabilityStateChangedByEvent(oldState, comp.DurabilityState, uid, attacker, targets, used);
+            var stateUsedEv = new DurabilityStateChangedByEvent(oldState,
+                comp.DurabilityState, uid, attacker, targets, used);
             RaiseLocalEvent(item, ref stateUsedEv);
         }
 
@@ -370,7 +372,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             return;
 
         if (ent.Comp.OnBreakEffects is { } effects)
-            _effects.ApplyEffects(ent, effects, 1f, args.Attacker);
+            _effects.ApplyEffects(ent, effects, user: args.Attacker);
         if (!ent.Comp.DeleteOnDestroyed)
             return;
         PredictedQueueDel(ent.Owner);

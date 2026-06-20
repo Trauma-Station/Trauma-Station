@@ -257783,13 +257783,6 @@ entities:
     - type: Transform
       pos: 58.5,82.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SciFlash
   entities:
   - uid: 39894
@@ -258406,13 +258399,6 @@ entities:
     - type: Transform
       pos: 138.5,113.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 3717
@@ -258458,13 +258444,6 @@ entities:
     - type: Transform
       pos: 70.5,135.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 18420
@@ -281201,13 +281180,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 75.5,150.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformScrubsColorBlue
   entities:
   - uid: 2577

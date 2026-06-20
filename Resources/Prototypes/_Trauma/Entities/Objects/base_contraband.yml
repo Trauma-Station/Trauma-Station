@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Valid rev items that you can get flogged for
 - type: entity
   abstract: true

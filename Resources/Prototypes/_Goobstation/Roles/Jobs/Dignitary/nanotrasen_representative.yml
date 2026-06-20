@@ -37,13 +37,17 @@
   - Theatre
   - NanotrasenRepresentative
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipNanotrasenRepresentative
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      - type: CommandStaff
-      - type: Condemned
+      - type: Condemned # Nanotrasen owns your soul pal.
         soulOwnedNotDevil: true
+      - type: Lawyer
+      - type: CommandStaff
 
 - type: startingGear
   id: NanotrasenRepresentativeGear

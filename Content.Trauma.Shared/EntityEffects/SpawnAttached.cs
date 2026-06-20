@@ -21,7 +21,7 @@ public sealed partial class SpawnAttachedEntityEffectSystem : EntityEffectSystem
         var proto = args.Effect.Entity;
         var coords = entity.Owner.ToCoordinates();
 
-        if (_net.IsClient && !args.Effect.Predicted)
+        if (_net.IsClient && !(args.Effect.Predicted && args.Predicted))
             return;
 
         for (var i = 0; i < quantity; i++)

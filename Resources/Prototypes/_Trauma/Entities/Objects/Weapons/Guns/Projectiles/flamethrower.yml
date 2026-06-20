@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # TODO: make this an actual flame that sticks to the ground/whatever it hits
 # not a fucking very hot bullet
 - type: entity

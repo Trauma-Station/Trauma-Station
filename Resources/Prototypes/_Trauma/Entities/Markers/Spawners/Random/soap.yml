@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entityTable # max size 1x2
   id: AllSoapsCheap
   table: !type:GroupSelector
