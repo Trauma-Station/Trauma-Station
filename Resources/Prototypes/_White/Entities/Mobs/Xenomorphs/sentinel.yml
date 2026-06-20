@@ -8,6 +8,7 @@
   abstract: true
   components:
   - type: Sprite
+    scale: 1.15, 1.15
     sprite: _White/Mobs/Aliens/Xenomorphs/sentinel.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
