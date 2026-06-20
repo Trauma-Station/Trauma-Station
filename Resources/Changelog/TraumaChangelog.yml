@@ -10332,7 +10332,7 @@ Entries:
     message: >-
       Made changes to the Cargo Bounty computer. It now only takes Cargo access
       to skip bounties and the cooldown between skips has been reduced to 3
-      minutes. 
+      minutes.
   id: 1172
   time: '2026-06-19T14:14:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3242
