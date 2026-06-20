@@ -10343,3 +10343,34 @@ Entries:
   id: 1173
   time: '2026-06-20T10:09:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3255
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked vampires guidebook to tell you the conditions to actually
+      bloodsuck someone
+  - type: Tweak
+    message: >-
+      Increased vampire's glare stamina damage so it can properly stamina crit
+      someone
+  - type: Tweak
+    message: >-
+      Increased vampire's glare mute time so you can now properly restrain them
+      without them calling for help
+  id: 1174
+  time: '2026-06-20T13:57:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3252
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed the inhand sprites of the Wooden Wand.
+  id: 1175
+  time: '2026-06-20T14:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3256
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorph drone, hunter, and sentinel now have scarier sprites
+  id: 1176
+  time: '2026-06-20T15:49:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3249
