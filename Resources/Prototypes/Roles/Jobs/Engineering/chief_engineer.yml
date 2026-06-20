@@ -40,8 +40,12 @@
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
+      # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
+      - type: EngineeringStaff
+      # </Trauma>
       - type: CommandStaff
-      - type: EngineeringStaff # Goobstation
 
 - type: startingGear
   id: ChiefEngineerGear

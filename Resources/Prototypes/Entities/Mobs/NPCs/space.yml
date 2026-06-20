@@ -315,14 +315,6 @@
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Trauma>
-    - type: GhostTakeoverAvailable
-    - type: GhostRole
-      name: ghost-role-information-cobra-space-name
-      description: ghost-role-information-cobra-space-description
-      rules: ghost-role-information-antagonist-rules
-      mindRoles:
-      - MindRoleGhostRoleTeamAntagonist
-      raffle: null
     - type: Fauna
     - type: LanguageSpeaker
       speaks:
@@ -333,6 +325,11 @@
     - type: NpcFactionMember
       factions:
       - Xeno # Aligning them with Space Adders
+    - type: NightVision
+      color: "#808080"
+      activateSound: null
+      deactivateSound: null
+    - type: VentCrawler
     # </Trauma>
     - type: Sprite
       drawdepth: Mobs

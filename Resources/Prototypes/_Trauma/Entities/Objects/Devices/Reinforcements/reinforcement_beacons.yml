@@ -486,6 +486,7 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconLawyer ]
+    - type: Lawyer
 
 - type: entity
   parent: BaseReinforcementBeacon

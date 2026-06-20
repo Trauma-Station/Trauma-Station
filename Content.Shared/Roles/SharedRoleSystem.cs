@@ -267,7 +267,15 @@ public abstract partial class SharedRoleSystem : EntitySystem
 
         // Update player character window
         if (Player.TryGetSessionById(comp.UserId, out var session))
-            RaiseNetworkEvent(new MindRoleTypeChangedEvent(), session.Channel);
+        // <Trauma> - predict the event properly
+        {
+            var ev = new MindRoleTypeChangedEvent();
+            if (_net.IsServer)
+                RaiseNetworkEvent(ev, session.Channel);
+            else if (session == Player.LocalSession)
+                RaiseLocalEvent(ev);
+        }
+        // </Trauma>
         else
         {
             var error = $"The Character Window of {_minds.MindOwnerLoggingString(comp)} potentially did not update immediately : session error";

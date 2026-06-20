@@ -129,6 +129,15 @@
   protoId: BulletBigshot
   fireCost: 80
 
+- type: selectableAmmo
+  id: BulletEnergyGunLawyershot
+  desc: A projectile capable of shutting up lawyers, and only lawyers.
+  icon:
+    sprite: Clothing/Neck/Misc/lawyerbadge.rsi
+    state: icon
+  color: black
+  protoId: BulletLawyershot
+  fireCost: 40
 
 # Pulse Rifle
 

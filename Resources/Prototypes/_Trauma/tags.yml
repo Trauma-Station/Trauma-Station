@@ -9,6 +9,9 @@
   id: AdvancedMagboots # Construction: RevPlasmaFoundry
 
 - type: Tag
+  id: AirlockAssembly # Used for airlock assemblies so that heretic void conduit can damage them
+
+- type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
 
 ## B ##

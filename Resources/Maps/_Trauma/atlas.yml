@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 275.2.0
+  engineVersion: 277.0.0
   forkId: ""
   forkVersion: ""
-  time: 06/13/2026 19:24:59
+  time: 06/17/2026 16:35:59
   entityCount: 9302
 maps:
 - 1
@@ -506,9 +506,9 @@ entities:
             color: '#EFB34196'
             id: CheckerNWSE
           decals:
-          - -40,8
           - -40,10
           - -40,9
+          - -40,8
           - -39,9
           - -39,8
           - -39,10
@@ -586,10 +586,10 @@ entities:
           - -24,21
           - -24,20
           - -24,16
-          - -23,11
-          - -23,20
-          - -23,17
           - -23,15
+          - -23,11
+          - -23,17
+          - -23,20
           - -21,21
           - -20,22
           - -19,20
@@ -718,14 +718,14 @@ entities:
           - -34,0
           - -34,-1
           - -33,0
+          - -33,1
           - -33,7
-          - -33,5
           - -33,-3
           - -33,4
-          - -33,1
           - -33,3
-          - -33,-1
           - -33,2
+          - -33,-1
+          - -33,5
           - -31,2
         - node:
             color: '#FFFFFFFF'
@@ -1172,9 +1172,9 @@ entities:
           - -44,-15
           - -43,-15
           - -43,-14
+          - -42,-14
           - -42,-15
           - -42,-16
-          - -42,-14
           - -41,-14
           - -41,-15
           - -41,-16
@@ -1498,9 +1498,9 @@ entities:
           - -23,-13
           - -23,-19
           - -23,-28
-          - -22,-28
           - -22,-19
           - -22,-13
+          - -22,-28
           - -21,-19
           - -21,-13
           - -21,-28
@@ -2009,18 +2009,18 @@ entities:
           - 17,26
           - 17,25
           - 18,27
-          - 18,29
-          - 18,26
-          - 18,25
           - 18,28
+          - 18,29
+          - 18,25
+          - 18,26
           - 19,26
           - 19,28
           - 19,27
           - 19,25
           - 19,29
-          - 20,27
           - 20,26
           - 20,28
+          - 20,27
           - 20,25
         - node:
             color: '#DE3A3A96'
@@ -4598,7 +4598,7 @@ entities:
       pos: 4.5,19.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -100784.945
+      secondsUntilStateChange: -100943.01
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -41778,6 +41778,13 @@ entities:
     - type: Transform
       pos: -1.5,-9.5
       parent: 2
+- proto: MachineMasterMaterialSilo
+  entities:
+  - uid: 6333
+    components:
+    - type: Transform
+      pos: -18.5,13.5
+      parent: 2
 - proto: MachineMaterialSilo
   entities:
   - uid: 6319
@@ -41872,13 +41879,6 @@ entities:
       parent: 2
     - type: Physics
       canCollide: False
-- proto: MaterialSilo
-  entities:
-  - uid: 6333
-    components:
-    - type: Transform
-      pos: -18.5,13.5
-      parent: 2
 - proto: MaterialWoodPlank
   entities:
   - uid: 6334
@@ -47307,6 +47307,13 @@ entities:
     - type: Transform
       pos: -13.5,-12.5
       parent: 2
+    - type: TechnologyDatabase
+      supportedDisciplines:
+      - Industrial
+      - Arsenal
+      - Experimental
+      - Robotics
+      - CivilianServices
 - proto: SciFlash
   entities:
   - uid: 7212
@@ -47322,6 +47329,13 @@ entities:
     - type: Transform
       pos: 9.5,21.5
       parent: 2
+    - type: TechnologyDatabase
+      supportedDisciplines:
+      - Industrial
+      - Arsenal
+      - Experimental
+      - Robotics
+      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 7214
@@ -47336,6 +47350,13 @@ entities:
     - type: Transform
       pos: -11.5,7.5
       parent: 2
+    - type: TechnologyDatabase
+      supportedDisciplines:
+      - Industrial
+      - Arsenal
+      - Experimental
+      - Robotics
+      - CivilianServices
 - proto: SheetGlass
   entities:
   - uid: 7216
@@ -52225,6 +52246,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: 27.5,-4.5
       parent: 2
+    - type: TechnologyDatabase
+      supportedDisciplines:
+      - Industrial
+      - Arsenal
+      - Experimental
+      - Robotics
+      - CivilianServices
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 7923
@@ -52402,10 +52430,8 @@ entities:
       parent: 2
   - uid: 7950
     components:
-    - type: MetaData
-      name: Hot drinks machine
     - type: Transform
-      pos: -6.5,-6.5
+      pos: -5.5,-6.5
       parent: 2
 - proto: VendingMachineColaRed
   entities:
@@ -52465,10 +52491,10 @@ entities:
       parent: 2
 - proto: VendingMachineGames
   entities:
-  - uid: 7959
+  - uid: 9303
     components:
     - type: Transform
-      pos: -5.5,-6.5
+      pos: -4.5,-9.5
       parent: 2
 - proto: VendingMachineHydrobe
   entities:

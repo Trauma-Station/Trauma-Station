@@ -10177,3 +10177,200 @@ Entries:
   id: 1152
   time: '2026-06-14T16:40:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3135
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed librarians getting the wrong skillchip.
+  id: 1153
+  time: '2026-06-14T21:33:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3185
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix heretic shadow cloak not removing itself on damage.
+  - type: Fix
+    message: Fix mawed crucibles not breaking.
+  - type: Fix
+    message: Void conduit damages airlock assemblies now.
+  id: 1154
+  time: '2026-06-15T18:47:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3189
+- author: shoebill
+  changes:
+  - type: Add
+    message: Added a low blood alert to the health analyzer.
+  id: 1155
+  time: '2026-06-15T22:47:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3187
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to use the break grab keybind while stunned, dead, etc.
+  id: 1156
+  time: '2026-06-16T07:32:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3199
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mimes not having their powers.
+  id: 1157
+  time: '2026-06-16T10:23:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3186
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed edaggers being metagamed just by examining them.
+  id: 1158
+  time: '2026-06-16T15:25:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3208
+- author: TechnicViriato
+  changes:
+  - type: Add
+    message: Added cocoa powder to the chefvend and to the chef's closet.
+  id: 1159
+  time: '2026-06-16T18:47:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3209
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Hitler Dead. Windoors aren't cancer anymore
+  id: 1160
+  time: '2026-06-17T05:15:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3217
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed toggle ghost visibility action not working.
+  id: 1161
+  time: '2026-06-17T06:30:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3219
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed reinforcements not having skill chips, being counted as security,
+      being able to enchant, etc.
+  id: 1162
+  time: '2026-06-17T06:47:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3221
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added Lawyershot, now you can shut up the lawyer.
+  - type: Remove
+    message: Killed powergaming command asking for devil deals.
+  id: 1163
+  time: '2026-06-17T17:12:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3200
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Moderately increased the amount of chemicals you get from putting Vestine
+      into botany plants
+  id: 1164
+  time: '2026-06-17T17:52:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3138
+- author: HenhenIII
+  changes:
+  - type: Fix
+    message: missing vends from the library were added back
+  id: 1165
+  time: '2026-06-17T17:58:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3201
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Lockboxes now prevent food from rotting, so you can actually do food
+      bounties.
+  id: 1166
+  time: '2026-06-17T19:53:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3225
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Boxing Rigged Gloves now get a selector.
+  id: 1167
+  time: '2026-06-18T09:50:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3212
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed MMI borgs not understanding any languages etc.
+  - type: Fix
+    message: >-
+      Fixed xenoborgs not being able to pick up some items in their construction
+      bag.
+  id: 1168
+  time: '2026-06-18T18:15:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3233
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mrbeast infinite steel giveaway with construction.
+  id: 1169
+  time: '2026-06-18T18:55:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3234
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the SpacePolShuttle, now the airlock isn't trash
+  id: 1170
+  time: '2026-06-19T06:18:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3227
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the chances of side gamemode Traitor actually rolling
+  id: 1171
+  time: '2026-06-19T08:04:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3245
+- author: 0-Anon
+  changes:
+  - type: Tweak
+    message: >-
+      Made changes to the Cargo Bounty computer. It now only takes Cargo access
+      to skip bounties and the cooldown between skips has been reduced to 3
+      minutes.
+  id: 1172
+  time: '2026-06-19T14:14:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3242
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sec and borgs being able to roll devil..?
+  id: 1173
+  time: '2026-06-20T10:09:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3255
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked vampires guidebook to tell you the conditions to actually
+      bloodsuck someone
+  - type: Tweak
+    message: >-
+      Increased vampire's glare stamina damage so it can properly stamina crit
+      someone
+  - type: Tweak
+    message: >-
+      Increased vampire's glare mute time so you can now properly restrain them
+      without them calling for help
+  id: 1174
+  time: '2026-06-20T13:57:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3252
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed the inhand sprites of the Wooden Wand.
+  id: 1175
+  time: '2026-06-20T14:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3256
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorph drone, hunter, and sentinel now have scarier sprites
+  id: 1176
+  time: '2026-06-20T15:49:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3249

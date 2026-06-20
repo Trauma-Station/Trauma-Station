@@ -330,7 +330,6 @@
     accent-scottish-words-62: accent-scottish-words-replace-62
     accent-scottish-words-63: accent-scottish-words-replace-63
     accent-scottish-words-64: accent-scottish-words-replace-64
-    accent-scottish-words-65: accent-scottish-words-replace-65
     accent-scottish-words-66: accent-scottish-words-replace-66
     accent-scottish-words-67: accent-scottish-words-replace-67
     accent-scottish-words-68: accent-scottish-words-replace-68
@@ -354,7 +353,6 @@
     accent-scottish-words-86: accent-scottish-words-replace-86
     accent-scottish-words-87: accent-scottish-words-replace-87
     accent-scottish-words-88: accent-scottish-words-replace-88
-    accent-scottish-words-89: accent-scottish-words-replace-89
     accent-scottish-words-90: accent-scottish-words-replace-90
     accent-scottish-words-91: accent-scottish-words-replace-91
     accent-scottish-words-92: accent-scottish-words-replace-92
@@ -375,22 +373,15 @@
     accent-scottish-words-107: accent-scottish-words-replace-107
     accent-scottish-words-108: accent-scottish-words-replace-108
     accent-scottish-words-109: accent-scottish-words-replace-109
-    accent-scottish-words-110: accent-scottish-words-replace-110
     accent-scottish-words-111: accent-scottish-words-replace-111
     accent-scottish-words-112: accent-scottish-words-replace-112
     accent-scottish-words-113: accent-scottish-words-replace-113
     accent-scottish-words-114: accent-scottish-words-replace-114
     accent-scottish-words-115: accent-scottish-words-replace-115
     accent-scottish-words-116: accent-scottish-words-replace-116
-    accent-scottish-words-117: accent-scottish-words-replace-117
-    accent-scottish-words-118: accent-scottish-words-replace-118
-    accent-scottish-words-119: accent-scottish-words-replace-119
-    accent-scottish-words-120: accent-scottish-words-replace-120
     accent-scottish-words-121: accent-scottish-words-replace-121
     accent-scottish-words-122: accent-scottish-words-replace-122
     accent-scottish-words-123: accent-scottish-words-replace-123
-    accent-scottish-words-124: accent-scottish-words-replace-124
-    accent-scottish-words-125: accent-scottish-words-replace-125
     accent-scottish-words-126: accent-scottish-words-replace-126
     accent-scottish-words-127: accent-scottish-words-replace-127
     accent-scottish-words-128: accent-scottish-words-replace-128
@@ -543,7 +534,6 @@
     accent-medieval-words-122: accent-medieval-words-replace-122
     accent-medieval-words-123: accent-medieval-words-replace-123
     accent-medieval-words-124: accent-medieval-words-replace-124
-    accent-medieval-words-125: accent-medieval-words-replace-125
     accent-medieval-words-126: accent-medieval-words-replace-126
     accent-medieval-words-127: accent-medieval-words-replace-127
     accent-medieval-words-128: accent-medieval-words-replace-128
@@ -654,9 +644,6 @@
     accent-medieval-words-233: accent-medieval-words-replace-233
     accent-medieval-words-234: accent-medieval-words-replace-234
     accent-medieval-words-235: accent-medieval-words-replace-235
-    accent-medieval-words-236: accent-medieval-words-replace-236
-    accent-medieval-words-237: accent-medieval-words-replace-237
-    accent-medieval-words-238: accent-medieval-words-replace-238
 
 - type: accent
   id: cheese
