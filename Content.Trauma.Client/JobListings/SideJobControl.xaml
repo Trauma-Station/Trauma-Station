@@ -7,18 +7,24 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <BoxContainer Orientation="Horizontal">
             <Label Name="JobListingsName" HorizontalExpand="True" />
             <Button
-                Name="JobListingNegativeButton"
+                Name="JobListingCancelButton"
                 StyleClasses="negative"
                 MinWidth="64"
                 HorizontalAlignment="Right"
-                Text="{Loc job-listings-ui-cancel-button}"
-                Access="Public" />
+                Access="Public"
+                Text="{Loc job-listings-ui-cancel-button}"/>
             <Button
-                Name="JobListingPositiveButton"
+                Name="JobListingAcceptButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
-                Text="{Loc job-listings-ui-accept-button}"
-                Access="Public" />
+                Access="Public"
+                Text="{Loc job-listings-ui-accept-button}"/>
+            <Button
+                Name="JobListingClaimButton"
+                MinWidth="64"
+                HorizontalAlignment="Right"
+                Access="Public"
+                Text="{Loc job-listings-ui-claim-button}"/>
         </BoxContainer>
         <PanelContainer StyleClasses="HighDivider" />
         <BoxContainer HorizontalExpand="True" Orientation="Horizontal">

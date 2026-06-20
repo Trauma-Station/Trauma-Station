@@ -49,7 +49,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
         {
             if (control is not SideJobControl sideJobControl)
                 continue;
-            sideJobControl.JobListingPositiveButton.Disabled = true;
+            sideJobControl.JobListingAcceptButton.Disabled = true;
         }
     }
 
@@ -59,7 +59,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
         {
             if (control is not SideJobControl sideJobControl)
                 continue;
-            sideJobControl.JobListingPositiveButton.Disabled = false;
+            sideJobControl.JobListingAcceptButton.Disabled = false;
         }
     }
 
