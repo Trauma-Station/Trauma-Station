@@ -31,6 +31,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <BoxContainer Orientation="Vertical">
                 <RichTextLabel Name="JobListingDescription" />
                 <RichTextLabel Name="JobListingReward" />
+                <ProgressBar Name="JobListingProgress"
+                             HorizontalAlignment="Left"
+                             MinValue="0"
+                             MaxValue="1"
+                             SetSize="250 20"/>
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

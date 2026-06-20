@@ -32,6 +32,7 @@ public sealed partial class SideJobControl : Control
     {
         Update(info);
         JobListingNegativeButton.Visible = false;
+        JobListingProgress.Visible = false;
         JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-accept-button");
         JobListingPositiveButton.Disabled = false;
 
@@ -42,9 +43,11 @@ public sealed partial class SideJobControl : Control
     {
         Update(info);
         JobListingNegativeButton.Visible = true;
+        JobListingProgress.Visible = true;
         JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-claim-button");
         var canClaim = info.Progress >= 0.999f;
         JobListingPositiveButton.Disabled = !canClaim;
+        JobListingProgress.Value = info.Progress;
 
         JobListingNegativeButton.OnPressed += OnCancelButtonPressed;
     }
