@@ -18,7 +18,7 @@
   creditImage: /Textures/_Trauma/EndCredits/Antags/devil.png
 
 - type: antagSpecifier
-  parent: CommandBlacklistedAntag
+  parent: RestrictedAntag
   id: Devil
   prefRoles: [ Devil ]
   jobBlacklist: [ Chaplain, Mime ] # chaplain is obvious, mime can't write.
