@@ -22,7 +22,7 @@ public sealed partial class VentClogRule : StationEventSystem<VentClogRuleCompon
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var chosenStation))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
             return;
 
         // TODO: "safe random" for chems. Right now this includes admin chemicals.
@@ -32,7 +32,7 @@ public sealed partial class VentClogRule : StationEventSystem<VentClogRuleCompon
 
         foreach (var (_, transform) in EntityQuery<GasVentPumpComponent, TransformComponent>())
         {
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station != chosenStation)
+            if (transform.GridUid is not { } grid || !stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
             {
                 continue;
             }

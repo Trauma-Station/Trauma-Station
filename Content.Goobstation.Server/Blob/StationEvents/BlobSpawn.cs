@@ -3,12 +3,10 @@
 using System.Linq;
 using Content.Goobstation.Common.Blob;
 using Content.Server.Ghost.Roles.Events;
-using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -35,22 +33,15 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var station))
-        {
+        if (GetRandomStationGrids() is not { } stationGrids)
             return;
-        }
 
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
-        while (locations.MoveNext(out _, out _, out var transform))
+        while (locations.MoveNext(out _, out _, out var xform))
         {
-            if (!HasComp<BecomesStationComponent>(transform.GridUid))
-                continue;
-
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
-            {
-                validLocations.Add(transform.Coordinates);
-            }
+            if (xform.GridUid is { } grid && stationGrids.Contains(grid))
+                validLocations.Add(xform.Coordinates);
         }
 
         if (validLocations.Count == 0)

@@ -22,7 +22,7 @@ namespace Content.Server.StationEvents.Events
         {
             base.Started(uid, component, gameRule, args);
 
-            if (!TryGetRandomStation(out var chosenStation))
+            if (GetRandomStationGrids(out var chosenStation) is not { } stationGrids) // Trauma - get grids instead of comparing station
                 return;
 
             component.AffectedStation = chosenStation.Value;
@@ -30,7 +30,7 @@ namespace Content.Server.StationEvents.Events
             var query = AllEntityQuery<ApcComponent, TransformComponent>();
             while (query.MoveNext(out var apcUid ,out var apc, out var transform))
             {
-                if (apc.MainBreakerEnabled && CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == chosenStation)
+                if (apc.MainBreakerEnabled && transform.GridUid is { } grid && stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
                     component.Powered.Add(apcUid);
             }
 
