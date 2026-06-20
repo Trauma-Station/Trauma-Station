@@ -10312,3 +10312,27 @@ Entries:
   id: 1169
   time: '2026-06-18T18:55:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3234
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the SpacePolShuttle, now the airlock isn't trash
+  id: 1170
+  time: '2026-06-19T06:18:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3227
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the chances of side gamemode Traitor actually rolling
+  id: 1171
+  time: '2026-06-19T08:04:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3245
+- author: 0-Anon
+  changes:
+  - type: Tweak
+    message: >-
+      Made changes to the Cargo Bounty computer. It now only takes Cargo access
+      to skip bounties and the cooldown between skips has been reduced to 3
+      minutes. 
+  id: 1172
+  time: '2026-06-19T14:14:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3242
