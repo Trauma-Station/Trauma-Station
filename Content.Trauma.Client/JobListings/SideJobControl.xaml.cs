@@ -32,25 +32,30 @@ public sealed partial class SideJobControl : Control
     {
         Update(info);
         JobListingNegativeButton.Visible = false;
+        JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-accept-button");
+        JobListingPositiveButton.Disabled = false;
 
-        JobListingPositiveButton.OnPressed += _ =>
-        {
-            if (_sideJob is not null)
-                OnAccepted?.Invoke(_sideJob.Value);
-        };
+        JobListingPositiveButton.OnPressed += OnAcceptButtonPressed;
     }
 
     public void UpdateAsAccepted(SideJobInfo info)
     {
         Update(info);
+        JobListingNegativeButton.Visible = true;
         JobListingPositiveButton.Text = Loc.GetString("job-listings-ui-claim-button");
         var canClaim = info.Progress >= 0.999f;
         JobListingPositiveButton.Disabled = !canClaim;
 
-        JobListingNegativeButton.OnPressed += _ => OnCancelButtonPressed();
+        JobListingNegativeButton.OnPressed += OnCancelButtonPressed;
     }
 
-    private void OnCancelButtonPressed()
+    private void OnAcceptButtonPressed(BaseButton.ButtonEventArgs args)
+    {
+        if (_sideJob is not null)
+            OnAccepted?.Invoke(_sideJob.Value);
+    }
+
+    private void OnCancelButtonPressed(BaseButton.ButtonEventArgs args)
     {
         if (_sideJob is null)
             return;

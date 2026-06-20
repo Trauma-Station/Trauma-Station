@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Trauma.Common.JobListings;
 using Robust.Client.UserInterface.CustomControls;
 
@@ -26,18 +27,18 @@ public sealed partial class JobListingsMenu : DefaultWindow
     {
         var sideJobControl = new SideJobControl();
         sideJobControl.UpdateAsAvailable(sideJob);
-        sideJobControl.OnAccepted += job => OnJobAccepted?.Invoke(job);
+        sideJobControl.OnAccepted += job => OnAccepted(job, sideJobControl, sideJob);
         AvailableJobListingsContainer.AddChild(sideJobControl);
-        RefreshNotes();
+        Refresh();
     }
 
     public void AddAcceptedSideJob(SideJobInfo sideJob)
     {
         var sideJobControl = new SideJobControl();
         sideJobControl.UpdateAsAccepted(sideJob);
-        sideJobControl.OnCancelled += job => OnJobCancelled?.Invoke(job);
+        sideJobControl.OnCancelled += job => OnCancelled(job, sideJobControl, sideJob);
         AcceptedJobListingsContainer.AddChild(sideJobControl);
-        RefreshNotes();
+        Refresh();
     }
 
     public void DisableAcceptButtons()
@@ -50,7 +51,27 @@ public sealed partial class JobListingsMenu : DefaultWindow
         }
     }
 
-    private void RefreshNotes()
+    private void OnAccepted(NetEntity job, SideJobControl control, SideJobInfo info)
+    {
+        // predict the ui change
+        AvailableJobListingsContainer.RemoveChild(control);
+        control.UpdateAsAccepted(info);
+        AcceptedJobListingsContainer.AddChild(control);
+        Refresh();
+        // invoke the event so the BUI sends a message to the server and calculates the REAL state
+        OnJobAccepted?.Invoke(job);
+    }
+
+    private void OnCancelled(NetEntity job, SideJobControl control, SideJobInfo info)
+    {
+        // predict ui change
+        AcceptedJobListingsContainer.RemoveChild(control);
+        Refresh();
+        // invoke event
+        OnJobCancelled?.Invoke(job);
+    }
+
+    private void Refresh()
     {
         AcceptedJobListingsNote.Visible = AcceptedJobListingsContainer.ChildCount == 0;
         AvailableJobListingsNote.Visible = AvailableJobListingsContainer.ChildCount == 0;

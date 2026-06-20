@@ -28,7 +28,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <Label
                             Name="AcceptedJobListingsLabel"
                             Text="{Loc job-listings-ui-accepted-label}"/>
-                        <PanelContainer VerticalExpand="True" MinSize="0 100">
+                        <PanelContainer VerticalExpand="True" MinSize="0 50">
                             <PanelContainer.PanelOverride>
                                 <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
                             </PanelContainer.PanelOverride>
@@ -51,7 +51,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         <Label
                             Name="AvailableJobListingsLabel"
                             Text="{Loc job-listings-ui-available-label}"/>
-                        <PanelContainer VerticalExpand="True" MinSize="0 100">
+                        <PanelContainer VerticalExpand="True" MinSize="0 50">
                             <PanelContainer.PanelOverride>
                                 <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
                             </PanelContainer.PanelOverride>
