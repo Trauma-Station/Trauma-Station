@@ -46,6 +46,6 @@ public sealed partial class VentSpawnRule : StationEventSystem<VentSpawnRuleComp
             return;
         }
 
-        args.Coordinates.AddRange(coords);
+        args.Coordinates.AddRange(validLocations);
     }
 }
