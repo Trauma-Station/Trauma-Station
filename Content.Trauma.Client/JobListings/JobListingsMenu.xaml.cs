@@ -29,6 +29,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public void AddAvailableSideJob(SideJobInfo info)
     {
         var control = CreateControl(info);
+        control.UpdateAsAvailable(info);
         AvailableJobListingsContainer.AddChild(control);
         Refresh();
     }
@@ -36,6 +37,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     public void AddAcceptedSideJob(SideJobInfo info)
     {
         var control = CreateControl(info);
+        control.UpdateAsAccepted(info);
         AcceptedJobListingsContainer.AddChild(control);
         Refresh();
     }
