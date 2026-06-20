@@ -705,6 +705,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma> - predict this shit
         Physics.UpdateIsPredicted(uid, physics);
         projectile.OriginalShooter = projectile.Shooter;
+        Dirty(uid, projectile);
         // </Trauma>
 
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);

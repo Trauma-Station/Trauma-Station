@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  id: ClothingHeadHatArmoreredBeret
+  id: ClothingHeadHatArmoredBeret
   components:
   - type: ArmorPointBlank
     range: 1.5
@@ -23,7 +23,7 @@
         Heat: 0.8
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease]
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease]
   id: ClothingHeadHatBeretSergeant
   name: sergeant beret
   description: The beret of a security member who has seen more than anyone. Make sure you salute them, they're probably the reason why you're alive today.

@@ -52,7 +52,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Trauma - contraband marking and armor
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Trauma - contraband marking and armor
   id: ClothingHeadHatBeretSecurity
   name: security beret
   description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
@@ -71,7 +71,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Trauma - contraband marking and armor
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Trauma - contraband marking and armor
   id: ClothingHeadHatSecurityTrooper
   name: trooper hat
   description: A campaign hat for the Nanotrasen Troopers. It's supposed to come with a case, too...
@@ -162,7 +162,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatBeretRND, BaseSecurityCommandContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseSecurityCommandContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
   id: ClothingHeadHatBeretHoS
   name: head of security's beret
   description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
@@ -181,7 +181,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatBeretRND, BaseSecurityContraband] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseSecurityContraband] # Goob / Trauma edit
   id: ClothingHeadHatBeretWarden
   name: warden's beret
   description: A corporate-blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety.
@@ -211,7 +211,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Goob / Trauma edit
   id: ClothingHeadHatBeretBrigmedic
   name: brigmedical beret
   description: A white beret for brigmedics.
@@ -226,7 +226,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ ClothingHeadHatArmoreredBeret, ClothingHeadBase, BaseClothingViewconeSmallIncrease ] # Trauma
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseClothingViewconeSmallIncrease ] # Trauma
   id: ClothingHeadHatBeretMerc
   name: mercenary beret
   description: An olive beret with a badge depicting a jackal on a rock.
@@ -274,7 +274,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ ClothingHeadHatArmoreredBeret, ClothingHeadHatBeretRND, BaseCommandContraband ] # Trauma - armor
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseCommandContraband ] # Trauma - armor
   id: ClothingHeadHatCaptain
   name: captain's hardhat
   description: Feels good being the king.
@@ -308,7 +308,7 @@
   - type: IngestionBlocker
 
 - type: entity
-  parent: [ ClothingHeadHatArmoreredBeret, ClothingHeadBase, BaseCentcommContraband ] # Trauma - armor
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCentcommContraband ] # Trauma - armor
   id: ClothingHeadHatCentcom
   name: CentComm brand hat
   description: Feels good being the king's boss.
@@ -431,7 +431,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadBase, BaseCommandContraband] # Trauma - armor
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCommandContraband] # Trauma - armor
   id: ClothingHeadHatHoshat
   name: head of security cap
   description: A stylish cap worn by the Head of Security. Shows the officers who's in charge.
@@ -761,7 +761,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadBase, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
   id: ClothingHeadHatWarden
   name: warden's cap
   description: This hat emphasizes that you are THE LAW.
@@ -1197,7 +1197,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadBase] # Trauma - armor
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase] # Trauma - armor
   id: ClothingHeadHatCapcap
   name: cap cap
   description: A grand, stylish cap worn by the Captain. Shows the station who's in charge.
@@ -1222,7 +1222,7 @@
   - type: BlockMovement
 
 - type: entity
-  parent: [ ClothingHeadHatArmoreredBeret, ClothingHeadBase, BaseCentcommContraband ]
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCentcommContraband ]
   id: ClothingHeadHatCentcomcap
   name: CentComm cap
   description: An extravagant, stylish cap worn by CentComm officials. Shows the Captain who's in charge.

@@ -64,13 +64,13 @@ public sealed partial class MeleeWeaponComponent
     /// Shitmed Change: Part damage is multiplied by this amount for single-target attacks
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float ClickPartDamageMultiplier = 1.00f;
+    public float ClickPartDamageMultiplier = 1f;
 
     /// <summary>
     /// Shitmed Change: Part damage is multiplied by this amount for heavy swings
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float HeavyPartDamageMultiplier = 0.75f;
+    public float HeavyPartDamageMultiplier = 1f;
 
     [DataField, AutoNetworkedField]
     public bool CanWideSwing = true;

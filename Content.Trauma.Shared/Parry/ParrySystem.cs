@@ -169,9 +169,7 @@ public sealed partial class ParrySystem : EntitySystem
         EntityUid? shooter = null;
         if (Resolve(projectile, ref projectile.Comp, false))
         {
-            _adminLogger.Add(LogType.BulletHit,
-                LogImpact.Medium,
-                $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)} from {ToPrettyString(projectile.Comp.Weapon)} shot by {projectile.Comp.Shooter}");
+            _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{user} reflected {projectile} from {projectile.Comp.Weapon} shot by {projectile.Comp.Shooter}");
 
             shooter = projectile.Comp.OriginalShooter;
             projectile.Comp.Shooter = user;
@@ -180,9 +178,7 @@ public sealed partial class ParrySystem : EntitySystem
         }
         else
         {
-            _adminLogger.Add(LogType.BulletHit,
-                LogImpact.Medium,
-                $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)}");
+            _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{user} reflected {projectile}");
         }
 
         PlayAudioAndPopup(reflector.Comp.SoundOnReflect, user, shooter);
@@ -217,15 +213,11 @@ public sealed partial class ParrySystem : EntitySystem
 
         if (shooter != null)
         {
-            _adminLogger.Add(LogType.HitScanHit,
-                LogImpact.Medium,
-                $"{ToPrettyString(user)} reflected hitscan from {ToPrettyString(shotSource)} shot by {ToPrettyString(shooter.Value)}");
+            _adminLogger.Add(LogType.HitScanHit, LogImpact.Medium, $"{user} reflected hitscan from {shotSource} shot by {shooter.Value}");
         }
         else
         {
-            _adminLogger.Add(LogType.HitScanHit,
-                LogImpact.Medium,
-                $"{ToPrettyString(user)} reflected hitscan from {ToPrettyString(shotSource)}");
+            _adminLogger.Add(LogType.HitScanHit, LogImpact.Medium, $"{user} reflected hitscan from {shotSource}");
         }
 
         return true;
@@ -241,9 +233,7 @@ public sealed partial class ParrySystem : EntitySystem
 
         PlayAudioAndPopup(reflector.Comp.SoundOnParry, user, attacker);
 
-        _adminLogger.Add(LogType.MeleeHit,
-            LogImpact.Medium,
-            $"{ToPrettyString(user)} parried a melee strike from {ToPrettyString(attacker)}");
+        _adminLogger.Add(LogType.MeleeHit, LogImpact.Medium, $"{user} parried a melee strike from {attacker}");
 
         return true;
     }

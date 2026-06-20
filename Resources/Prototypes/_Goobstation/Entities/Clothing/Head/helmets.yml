@@ -138,7 +138,7 @@
 
 # Western Undetermined Set
 - type: entity
-  parent: [ClothingHeadHatArmoreredBeret, ClothingHeadHatCowboyBrown, BaseMajorContraband]
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatCowboyBrown, BaseMajorContraband]
   id: ClothingHeadHatCowboyBrownRobust
   name: authentic brown cowboy hat
   description: "\"This station ain't big enough for the two of us.\""

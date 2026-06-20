@@ -141,13 +141,11 @@ public sealed partial class ReflectSystem : EntitySystem
         // <Trauma>
         var ev = new ProjectileReflectedEvent(reflector, user);
         RaiseLocalEvent(projectile, ref ev);
-        // </Trauma>
-
-        /* <Trauma> - moved below
+        /* moved below
         PlayAudioAndPopup(reflector.Comp, user);
         */
         EntityUid? shooter = null;
-        //</Trauma>
+        // </Trauma>
 
         if (Resolve(projectile, ref projectile.Comp, false))
         {
@@ -171,7 +169,7 @@ public sealed partial class ReflectSystem : EntitySystem
             _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)}");
         }
 
-        PlayAudioAndPopup(reflector.Comp, user, shooter);
+        PlayAudioAndPopup(reflector.Comp, user, shooter); // Trauma
 
         return true;
     }
