@@ -158,7 +158,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <returns>True if successful, false if failure.</returns>
     public bool FillSideJobs(Entity<JobListingsComponent> jobBoard)
     {
-        while (CountSideJobs(jobBoard) < jobBoard.Comp.SideJobCount)
+        while (CountSideJobs(jobBoard) < jobBoard.Comp.MaximumSideJobs)
         {
             if (!AssignSideJob(jobBoard))
                 return false;

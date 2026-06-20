@@ -17,7 +17,7 @@ public sealed partial class JobListingsComponent : Component
     /// How many jobs can exist at once.
     /// </summary>
     [DataField]
-    public int SideJobCount;
+    public int MaximumSideJobs;
 
     /// <summary>
     /// List of prototypes of the objectives offered for medium side jobs.
