@@ -94,7 +94,7 @@
     - !type:GenericStatusEffect
       key: Muted
       component: Muted
-      time: 20
+      time: 16
       type: Add
     - !type:Flash
       slowTo: 1
