@@ -88,13 +88,13 @@
   - type: ActionVampireGlare
     frontEffects:
     - !type:TakeStaminaDamage
-      amount: 70
+      amount: 100
     - !type:ModifyKnockdown
       time: 12
     - !type:GenericStatusEffect
       key: Muted
       component: Muted
-      time: 8
+      time: 16
       type: Add
     - !type:Flash
       slowTo: 1
@@ -102,7 +102,7 @@
       duration: 1
     sideEffects:
     - !type:TakeStaminaDamage
-      amount: 40
+      amount: 50
     - !type:ModifyKnockdown
       time: 5
     - !type:ModifyStatusEffect
@@ -110,7 +110,7 @@
       time: 8
     behindEffects:
     - !type:TakeStaminaDamage
-      amount: 40
+      amount: 50
     - !type:ModifyStatusEffect
       effectProto: StatusEffectScrambled
       time: 8
