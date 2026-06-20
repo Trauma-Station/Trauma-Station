@@ -12,6 +12,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     {
         _menu = this.CreateWindow<JobListingsMenu>();
         _menu.OnJobAccepted += OnJobAccepted;
+        _menu.OnJobClaimed += OnJobClaimed;
         _menu.OnJobCancelled += OnJobCancelled;
     }
 
@@ -29,6 +30,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         if (state is not JobListingsUserInterfaceState jobListingsState)
             return;
 
+        _menu?.SetReputation(jobListingsState.Reputation);
         _menu?.MaximumAcceptedSideJobs = jobListingsState.MaximumAcceptedSideJobs;
         _menu?.ClearJobListings();
         foreach (var sideJob in jobListingsState.AvailableSideJobs)
@@ -44,6 +46,11 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     private void OnJobAccepted(NetEntity job)
     {
         SendMessage(new JobListingsAcceptJobMessage(job));
+    }
+
+    private void OnJobClaimed(NetEntity job)
+    {
+        SendMessage(new JobListingsClaimJobMessage(job));
     }
 
     private void OnJobCancelled(NetEntity job)

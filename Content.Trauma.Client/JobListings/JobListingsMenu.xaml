@@ -11,9 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Margin="4,4,4,4" Orientation="Vertical">
-                <Label
-                    Name="ReputationInfo"
-                    Text="Reputation: 0"/>
+                <Label Name="ReputationInfo"/>
                 <Label
                     Name="ReputationText"
                     Text="Title: 'Goody Two-Shoes Nobody'"/>

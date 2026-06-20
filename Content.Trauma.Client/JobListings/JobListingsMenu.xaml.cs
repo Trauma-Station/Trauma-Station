@@ -11,6 +11,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
 {
     public Action<NetEntity>? OnJobAccepted;
     public Action<NetEntity>? OnJobCancelled;
+    public Action<NetEntity>? OnJobClaimed;
 
     public int MaximumAcceptedSideJobs;
 
@@ -25,22 +26,32 @@ public sealed partial class JobListingsMenu : DefaultWindow
         AcceptedJobListingsContainer.RemoveAllChildren();
     }
 
-    public void AddAvailableSideJob(SideJobInfo sideJob)
+    public void AddAvailableSideJob(SideJobInfo info)
     {
-        var sideJobControl = new SideJobControl();
-        sideJobControl.UpdateAsAvailable(sideJob);
-        sideJobControl.OnAccepted += job => OnAccepted(job, sideJobControl, sideJob);
-        AvailableJobListingsContainer.AddChild(sideJobControl);
+        var control = CreateControl(info);
+        AvailableJobListingsContainer.AddChild(control);
         Refresh();
     }
 
-    public void AddAcceptedSideJob(SideJobInfo sideJob)
+    public void AddAcceptedSideJob(SideJobInfo info)
     {
-        var sideJobControl = new SideJobControl();
-        sideJobControl.UpdateAsAccepted(sideJob);
-        sideJobControl.OnCancelled += job => OnCancelled(job, sideJobControl, sideJob);
-        AcceptedJobListingsContainer.AddChild(sideJobControl);
+        var control = CreateControl(info);
+        AcceptedJobListingsContainer.AddChild(control);
         Refresh();
+    }
+
+    public void SetReputation(int reputation)
+    {
+        ReputationText.Text = Loc.GetString("job-listings-ui-reputation", ("reputation", reputation));
+    }
+
+    private SideJobControl CreateControl(SideJobInfo info)
+    {
+        var control = new SideJobControl();
+        control.OnAccepted += job => OnAccepted(job, control, info);
+        control.OnClaimed += job => OnClaimed(job, control, info);
+        control.OnCancelled += job => OnCancelled(job, control, info);
+        return control;
     }
 
     private void DisableAcceptButtons()
@@ -72,6 +83,15 @@ public sealed partial class JobListingsMenu : DefaultWindow
         Refresh();
         // invoke the event so the BUI sends a message to the server and calculates the REAL state
         OnJobAccepted?.Invoke(job);
+    }
+
+    private void OnClaimed(NetEntity job, SideJobControl control, SideJobInfo info)
+    {
+        // predict ui change
+        AcceptedJobListingsContainer.RemoveChild(control);
+        Refresh();
+        // invoke event
+        OnJobClaimed?.Invoke(job);
     }
 
     private void OnCancelled(NetEntity job, SideJobControl control, SideJobInfo info)

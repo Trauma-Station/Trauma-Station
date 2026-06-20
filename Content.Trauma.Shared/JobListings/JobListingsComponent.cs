@@ -29,7 +29,7 @@ public sealed partial class JobListingsComponent : Component
     /// The list of available side jobs which can be accepted by the traitor.
     /// </summary>
     [DataField]
-    public List<SideJob> AvailableSideJobs = new();
+    public List<EntityUid> AvailableSideJobs = new();
 
     /// <summary>
     /// How many jobs can be accepted at once.
@@ -41,18 +41,17 @@ public sealed partial class JobListingsComponent : Component
     /// The list of side jobs the traitor has accepted.
     /// </summary>
     [DataField]
-    public List<SideJob> AcceptedSideJobs = new();
+    public List<EntityUid> AcceptedSideJobs = new();
 
     /// <summary>
     ///  The mind of the person (probably traitor) who owns the job board.
     /// </summary>
     [DataField]
     public EntityUid? Mind;
-}
 
-/// <summary>
-/// A struct that stores all necessary information about a side job.
-/// </summary>
-/// <param name="Entity"></param>
-/// <param name="Prototype"></param>
-public record struct SideJob(EntityUid Entity, EntProtoId Prototype);
+    /// <summary>
+    /// The reputation of the traitor who owns the job board.
+    /// </summary>
+    [DataField]
+    public int Reputation = 0;
+}

@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.PDA;
@@ -35,6 +36,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private EntityTableSystem _table = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -42,6 +44,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         SubscribeLocalEvent<UplinkAssignedEvent>(OnUplinkAssigned);
         SubscribeLocalEvent<PdaComponent, PdaShowJobListingsMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
+        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsClaimJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsCancelJobMessage>(OnMessage);
 
         InitializeReward();
@@ -86,7 +89,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
                 continue;
             }
 
-            jobBoard.Comp.AvailableSideJobs.Add(new SideJob(sideJob.Value, job));
+            jobBoard.Comp.AvailableSideJobs.Add(sideJob.Value);
             return true;
         }
 
@@ -102,13 +105,11 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs)
             return false;
-
-        if (jobBoard.Comp.AvailableSideJobs.All(job => job.Entity != sideJob))
+        if (!jobBoard.Comp.AvailableSideJobs.Contains(sideJob))
             return false;
 
-        var accepted = jobBoard.Comp.AvailableSideJobs.Find(job => job.Entity == sideJob);
-        jobBoard.Comp.AvailableSideJobs.Remove(accepted);
-        jobBoard.Comp.AcceptedSideJobs.Add(accepted);
+        jobBoard.Comp.AvailableSideJobs.Remove(sideJob);
+        jobBoard.Comp.AcceptedSideJobs.Add(sideJob);
         return true;
     }
 
@@ -119,7 +120,38 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <param name="sideJob"></param>
     public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
-        jobBoard.Comp.AcceptedSideJobs.RemoveAll(job => job.Entity == sideJob);
+        jobBoard.Comp.AcceptedSideJobs.Remove(sideJob);
+        QueueDel(sideJob);
+    }
+
+    /// <summary>
+    /// Claim a completed job.
+    /// </summary>
+    /// <param name="jobBoard"></param>
+    /// <param name="actor"></param>
+    /// <param name="sideJob"></param>
+    public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
+    {
+        if (jobBoard.Comp.Mind is null)
+            return;
+        var info = GetInfo(jobBoard.Comp.Mind.Value, sideJob);
+        if (info is null)
+            return;
+        if (info.Value.Progress < 0.999F)
+            return;
+        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            return;
+
+        jobBoard.Comp.AcceptedSideJobs.Remove(sideJob);
+
+        if (sideJobComp.Reward is not null)
+        {
+            var reward = Spawn(sideJobComp.Reward.Value);
+            _hands.PickupOrDrop(actor, reward);
+        }
+
+        jobBoard.Comp.Reputation += sideJobComp.ReputationGain;
+        QueueDel(sideJob);
     }
 
     /// <summary>
@@ -127,13 +159,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// Used to avoid adding the same objective twice.
     /// </summary>
     /// <param name="jobBoard"></param>
-    /// <param name="sideJob"></param>
+    /// <param name="sideJobProtoId"></param>
     /// <returns></returns>
-    public bool HasSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJob)
+    public bool HasSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJobProtoId)
     {
         foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs)
         {
-            if (availableSideJob.Prototype == sideJob)
+            var availableSideJobProto = MetaData(availableSideJob).EntityPrototype;
+            if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
                 return true;
         }
 
@@ -192,7 +225,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         var availableSideJobs = new List<SideJobInfo>();
         foreach (var sideJob in jobBoard.Value.Comp.AvailableSideJobs)
         {
-            var info = GetInfo(jobBoard.Value.Comp.Mind.Value, sideJob.Entity);
+            var info = GetInfo(jobBoard.Value.Comp.Mind.Value, sideJob);
             if (info is null)
                 continue;
             availableSideJobs.Add(info.Value);
@@ -201,14 +234,13 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         var acceptedSideJobs = new List<SideJobInfo>();
         foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs)
         {
-            var info = GetInfo(jobBoard.Value.Comp.Mind.Value, sideJob.Entity);
+            var info = GetInfo(jobBoard.Value.Comp.Mind.Value, sideJob);
             if (info is null)
                 continue;
             acceptedSideJobs.Add(info.Value);
         }
 
-        var acceptedJobsFull = acceptedSideJobs.Count >= jobBoard.Value.Comp.MaximumAcceptedSideJobs;
-        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.MaximumAcceptedSideJobs);
+        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, jobBoard.Value.Comp.MaximumAcceptedSideJobs);
         _ui.SetUiState(owner, JobListingsUiKey.Key, state);
     }
 
@@ -256,6 +288,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!GetJobBoard(owner.Owner, out var jobBoard))
             return;
         AcceptSideJob(jobBoard.Value, GetEntity(msg.Job));
+        UpdateUi(owner.Owner);
+    }
+
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        ClaimSideJob(jobBoard.Value, msg.Actor,GetEntity(msg.Job));
         UpdateUi(owner.Owner);
     }
 

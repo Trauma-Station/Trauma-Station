@@ -20,6 +20,7 @@ public sealed partial class SideJobControl : Control
 
     public Action<NetEntity>? OnAccepted;
     public Action<NetEntity>? OnCancelled;
+    public Action<NetEntity>? OnClaimed;
 
     public SideJobControl()
     {
@@ -28,6 +29,7 @@ public sealed partial class SideJobControl : Control
         _sprite = _entity.System<SpriteSystem>();
         AcceptButton.OnPressed += OnAcceptButtonPressed;
         CancelButton.OnPressed += OnCancelButtonPressed;
+        ClaimButton.OnPressed += OnClaimButtonPressed;
     }
 
     public void UpdateAsAvailable(SideJobInfo info)
@@ -54,6 +56,12 @@ public sealed partial class SideJobControl : Control
     {
         if (_sideJob is not null)
             OnAccepted?.Invoke(_sideJob.Value);
+    }
+
+    private void OnClaimButtonPressed(BaseButton.ButtonEventArgs args)
+    {
+        if (_sideJob is not null)
+            OnClaimed?.Invoke(_sideJob.Value);
     }
 
     private void OnCancelButtonPressed(BaseButton.ButtonEventArgs args)

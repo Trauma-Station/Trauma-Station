@@ -29,4 +29,10 @@ public sealed partial class SideJobComponent : Component
     /// </summary>
     [DataField]
     public int ReputationGain;
+
+    /// <summary>
+    /// If this side job can be repeated. Theft objectives can't be repeated while murder objectives can be.
+    /// </summary>
+    [DataField]
+    public bool Repeatable = false;
 }
