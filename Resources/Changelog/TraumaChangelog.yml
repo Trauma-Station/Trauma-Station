@@ -10360,3 +10360,10 @@ Entries:
   id: 1174
   time: '2026-06-20T13:57:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3252
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed the inhand sprites of the Wooden Wand.
+  id: 1175
+  time: '2026-06-20T14:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3256
