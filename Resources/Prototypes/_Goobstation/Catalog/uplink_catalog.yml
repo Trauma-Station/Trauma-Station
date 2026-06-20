@@ -1143,6 +1143,7 @@
   productEntity: SleepingCarpScroll
   cost:
     Telecrystal: 100
+  discountCategory: null
   categories:
   - UplinkWeaponry
   conditions:
