@@ -26,28 +26,28 @@ public sealed partial class SideJobControl : Control
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _sprite = _entity.System<SpriteSystem>();
-        JobListingAcceptButton.OnPressed += OnAcceptButtonPressed;
-        JobListingCancelButton.OnPressed += OnCancelButtonPressed;
+        AcceptButton.OnPressed += OnAcceptButtonPressed;
+        CancelButton.OnPressed += OnCancelButtonPressed;
     }
 
     public void UpdateAsAvailable(SideJobInfo info)
     {
         Update(info);
-        JobListingAcceptButton.Visible = true;
-        JobListingCancelButton.Visible = false;
-        JobListingClaimButton.Visible = false;
-        JobListingProgress.Visible = false;
+        AcceptButton.Visible = true;
+        CancelButton.Visible = false;
+        ClaimButton.Visible = false;
+        ProgressBar.Visible = false;
     }
 
     public void UpdateAsAccepted(SideJobInfo info)
     {
         Update(info);
-        JobListingAcceptButton.Visible = false;
-        JobListingCancelButton.Visible = true;
-        JobListingCancelButton.Text = Loc.GetString("job-listings-ui-cancel-button");
+        AcceptButton.Visible = false;
+        CancelButton.Visible = true;
+        CancelButton.Text = Loc.GetString("job-listings-ui-cancel-button");
         _cancelAlreadyPressed = false;
-        JobListingClaimButton.Visible = true;
-        JobListingProgress.Visible = true;
+        ClaimButton.Visible = true;
+        ProgressBar.Visible = true;
     }
 
     private void OnAcceptButtonPressed(BaseButton.ButtonEventArgs args)
@@ -65,7 +65,7 @@ public sealed partial class SideJobControl : Control
         {
             _cancelAlreadyPressed = true;
             _cancelPressTime = _timing.CurTime;
-            JobListingCancelButton.Text = Loc.GetString("job-listings-ui-confirmation-button");
+            CancelButton.Text = Loc.GetString("job-listings-ui-confirmation-button");
             return;
         }
 
@@ -78,19 +78,19 @@ public sealed partial class SideJobControl : Control
         if (_cancelAlreadyPressed && _cancelPressTime is not null && _timing.CurTime >= _cancelPressTime.Value + _cancelSafetyDuration)
         {
             _cancelAlreadyPressed = false;
-            JobListingCancelButton.Text = Loc.GetString("job-listings-ui-cancel-button");
+            CancelButton.Text = Loc.GetString("job-listings-ui-cancel-button");
         }
     }
 
     private void Update(SideJobInfo info)
     {
-        JobListingsName.Text = info.Title;
-        JobListingDescription.Text = info.Description;
-        JobListingTexture.Texture = _sprite.Frame0(info.Icon);
-        JobListingReward.Text = Loc.GetString("job-listings-ui-reward", ("reward", info.RewardName), ("rep", info.ReputationGain));
+        NameLabel.Text = info.Title;
+        DescriptionLabel.Text = info.Description;
+        ListingTexture.Texture = _sprite.Frame0(info.Icon);
+        RewardLabel.Text = Loc.GetString("job-listings-ui-reward", ("reward", info.RewardName), ("rep", info.ReputationGain));
         var canClaim = info.Progress >= 0.999f;
-        JobListingClaimButton.Disabled = !canClaim;
-        JobListingProgress.Value = info.Progress;
+        ClaimButton.Disabled = !canClaim;
+        ProgressBar.Value = info.Progress;
         _sideJob = info.Entity;
     }
 }

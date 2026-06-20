@@ -5,22 +5,22 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <Control xmlns="https://spacestation14.io">
     <BoxContainer Margin="8,8,8,8" Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
-            <Label Name="JobListingsName" HorizontalExpand="True" />
+            <Label Name="NameLabel" HorizontalExpand="True" />
             <Button
-                Name="JobListingCancelButton"
+                Name="CancelButton"
                 StyleClasses="negative"
                 MinWidth="64"
                 HorizontalAlignment="Right"
                 Access="Public"
                 Text="{Loc job-listings-ui-cancel-button}"/>
             <Button
-                Name="JobListingAcceptButton"
+                Name="AcceptButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
                 Access="Public"
                 Text="{Loc job-listings-ui-accept-button}"/>
             <Button
-                Name="JobListingClaimButton"
+                Name="ClaimButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
                 Access="Public"
@@ -29,15 +29,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <PanelContainer StyleClasses="HighDivider" />
         <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
             <TextureRect
-                Name="JobListingTexture"
+                Name="ListingTexture"
                 Margin="0,0,4,0"
                 MinSize="48 48"
                 Stretch="KeepAspectCentered" />
             <Control MinWidth="5"/>
             <BoxContainer Orientation="Vertical">
-                <RichTextLabel Name="JobListingDescription" />
-                <RichTextLabel Name="JobListingReward" />
-                <ProgressBar Name="JobListingProgress"
+                <RichTextLabel Name="DescriptionLabel" />
+                <RichTextLabel Name="RewardLabel" />
+                <ProgressBar Name="ProgressBar"
                              HorizontalAlignment="Left"
                              MinValue="0"
                              MaxValue="1"
