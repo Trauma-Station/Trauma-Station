@@ -80,20 +80,14 @@
   - type: UseDelay
     delay: 0.5
   - type: EmitSoundOnUse
-    sound:
+    sound: &desecration
       collection: desecration
       params:
         variation: 0.125
   - type: EmitSoundOnLand
-    sound:
-      collection: desecration
-      params:
-        variation: 0.125
+    sound: *desecration
   - type: EmitSoundOnCollide
-    sound:
-      collection: desecration
-      params:
-        variation: 0.125
+    sound: *desecration
   - type: Destructible
     thresholds:
     - trigger:
