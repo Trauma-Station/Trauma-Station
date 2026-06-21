@@ -10411,3 +10411,12 @@ Entries:
   id: 1181
   time: '2026-06-21T02:39:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3266
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed towercap, steelcap and glasstle. They give 5x as much and can be
+      thrown into a recycler.
+  id: 1182
+  time: '2026-06-21T05:42:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3268
