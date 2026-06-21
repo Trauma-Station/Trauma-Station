@@ -1,6 +1,8 @@
+// <Trauma>
+using Content.Shared.Inventory;
+// </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.DoAfter;
-using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Serialization;
 

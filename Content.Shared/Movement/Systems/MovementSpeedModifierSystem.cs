@@ -108,7 +108,7 @@ namespace Content.Shared.Movement.Systems
             var isImmune = false;
             if (HasComp<SpeedModifierImmunityComponent>(uid))
                 isImmune = true;
-            // </Goobstation Change>
+            // </Trauma>
 
             var ev = new RefreshMovementSpeedModifiersEvent(isImmune);
             RaiseLocalEvent(uid, ev);
@@ -121,7 +121,6 @@ namespace Content.Shared.Movement.Systems
             if (MathHelper.CloseTo(ev2.WalkModifier, move.WalkSpeedModifier) &&
                 MathHelper.CloseTo(ev2.SprintModifier, move.SprintSpeedModifier))
                 return;
-
 
             move.WalkSpeedModifier = Math.Min(ev2.WalkModifier, _maxSpeed);
             move.SprintSpeedModifier = Math.Min(ev2.SprintModifier, _maxSpeed);
