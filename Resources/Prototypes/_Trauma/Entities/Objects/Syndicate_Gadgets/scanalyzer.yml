@@ -1,0 +1,10 @@
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband ]
+  id: SyndicateScanalyzer
+  name: syndicate scanalyzer
+  description: It fiendish device that reverse engineers the schematics for cutting edge technology.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_scanalyzer.rsi
+    layers:
+    - state: icon
