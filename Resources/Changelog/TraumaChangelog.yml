@@ -10397,3 +10397,10 @@ Entries:
   id: 1179
   time: '2026-06-21T01:03:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3263
+- author: Sulfari
+  changes:
+  - type: Tweak
+    message: Pets should no longer attack AI turrets.
+  id: 1180
+  time: '2026-06-21T02:01:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3210
