@@ -26,22 +26,18 @@ public sealed class SlowdownResistanceSystem : EntitySystem
         if (!HasComp<ClothingComponent>(ent))
             return;
 
-        var reduction = $"{1f - ent.Comp.Factor:0.00}";
+        var reduction = MathF.Round(ent.Comp.Reduction * 100f);
         args.PushMarkup(Loc.GetString("slowdown-resistance-component-examine-message", ("reduction", reduction)));
     }
 
     private void OnBeforeModifierApplied(Entity<SlowdownResistanceComponent> ent, ref BeforeMovespeedModifierAppliedEvent args)
     {
-        args.WalkModifier = ModifySlowdown(args.WalkModifier, ent.Comp.Factor);
-        args.SprintModifier = ModifySlowdown(args.SprintModifier, ent.Comp.Factor);
+        args.WalkModifier = ModifySlowdown(args.WalkModifier, ent.Comp.Reduction);
+        args.SprintModifier = ModifySlowdown(args.SprintModifier, ent.Comp.Reduction);
     }
 
-    private float ModifySlowdown(float movementModifier, float factor)
+    private float ModifySlowdown(float movementModifier, float reduction)
     {
-        if (movementModifier >= 1f)
-            return movementModifier;
-        var slowdown = 1f - movementModifier;
-        var modified = slowdown * factor;
-        return 1f - modified;
+        return MathF.Min(MathF.Max(1f, movementModifier), movementModifier + reduction);
     }
 }

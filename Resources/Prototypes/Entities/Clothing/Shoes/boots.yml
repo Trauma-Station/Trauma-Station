@@ -6,7 +6,7 @@
   components:
   # <Trauma>
   - type: SlowdownResistance
-    factor: 0.9
+    reduction: 0.1
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/workboots.rsi

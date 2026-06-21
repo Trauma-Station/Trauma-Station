@@ -13,7 +13,7 @@
   - type: ClothingSlowOnDamageModifier
     modifier: 0.5
   - type: SlowdownResistance
-    factor: 0.9
+    reduction: 0.1
   - type: Construction
     graph: RevBoots
     defaultTarget: finished

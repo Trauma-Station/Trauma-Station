@@ -1,5 +1,6 @@
 using Content.Shared.Alert;
 using Content.Shared.DoAfter;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Serialization;
 
@@ -65,7 +66,12 @@ public record struct StandUpAttemptEvent(bool Autostand)
 /// </summary>
 /// <param name="DoAfterTime"></param>
 [ByRefEvent]
-public record struct GetStandUpTimeEvent(TimeSpan DoAfterTime);
+// <Trauma> - IInventoryRelayedEvent
+public record struct GetStandUpTimeEvent(TimeSpan DoAfterTime) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.FEET;
+}
+// </Trauma>
 
 /// <summary>
 /// Raised when an entity is forcing itself to stand, allows for the stamina damage it is taking to be modified.
