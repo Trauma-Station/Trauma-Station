@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.Spawners;
 
 /// <summary>
-/// Roundstart spawnpoint that puts spawned players inside of a drop pod.
+/// Marker component for EvilPunPun trait to move pun pun to perma.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class DropPodSpawnPointComponent : Component;
+public sealed partial class PunPunSpawnerComponent : Component;
