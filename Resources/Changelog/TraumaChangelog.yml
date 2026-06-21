@@ -10467,3 +10467,28 @@ Entries:
   id: 1185
   time: '2026-06-21T19:10:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3241
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Warhammer not prying.
+  - type: Fix
+    message: Fixed ALL shuttle event roles not having skills/skill chips.
+  - type: Fix
+    message: Fixed ALL animal mindroles being incorrect.
+  - type: Fix
+    message: Fixed Coconut Halves not being able to be turned into seeds.
+  - type: Fix
+    message: Fixed Ichor not healing bones.
+  - type: Fix
+    message: Fixed the Goliath Hardsuit Helmet GMOD erroring for lizards.
+  - type: Fix
+    message: Fixed Slimes showing up as an X on examine.
+  - type: Fix
+    message: Fixed BZ gas description being wrong.
+  - type: Add
+    message: >-
+      Made it so Holo Clowns and Holo Parasites now can always understand the
+      language of their master.
+  id: 1186
+  time: '2026-06-21T19:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3259
