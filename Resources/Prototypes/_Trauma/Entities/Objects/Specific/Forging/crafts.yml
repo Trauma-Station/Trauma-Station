@@ -296,8 +296,6 @@
     shape:
     - 0,0,0,4
   - type: MeleeWeapon
-    autoAttack: true
-    attackRate: 3
     #armorPenetration: -0.7 # Currently not working
     damage:
       types:
