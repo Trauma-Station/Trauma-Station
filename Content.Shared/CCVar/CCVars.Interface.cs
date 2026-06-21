@@ -126,4 +126,10 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> AdminStripMenuOverlayDefault =
         CVarDef.Create("ui.admin_strip_menu_overlay_default", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// A newline-separated list of saved labels for the hand labeler tool
+    /// </summary>
+    public static readonly CVarDef<string> HandLabelerSavedLabels =
+        CVarDef.Create("interface.hand_labeler_saved_labels", "", CVar.CLIENTONLY | CVar.ARCHIVE);
 }
