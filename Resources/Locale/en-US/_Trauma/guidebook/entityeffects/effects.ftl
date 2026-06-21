@@ -106,3 +106,8 @@ entity-effect-guidebook-move-organ = {$chance ->
     [1] moves
     *[other] move
 } the target's {$organ} to its {$dest}
+
+entity-effect-guidebook-heal-bone-damage = { $chance ->
+     [1] heals
+     *[other] heal
+} {NATURALFIXED($amount, 2)} bone damage

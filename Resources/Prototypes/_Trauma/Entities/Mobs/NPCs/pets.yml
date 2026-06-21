@@ -5,3 +5,23 @@
   id: MobPigPinecone
   name: pinecone
   description: Pinecone pig. Oink!
+
+- type: entity
+  parent: MobMonkeyPunpun
+  id: MobMonkeyPunpunPrisoner
+  suffix: Prisoner
+  components:
+  - type: GhostRole
+    rules: ghost-role-information-animal-rules
+    mindRoles:
+    - MindRoleGhostRoleAnimal
+  - type: Loadout
+    prototypes: [ PunpunPrisoner ]
+
+- type: startingGear
+  parent: MobMonkeyGear # what an amazing name for pun pun's starting gear
+  id: PunpunPrisoner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    mask: CigaretteSpent
+    id: DClassIDCard # fuck you

@@ -60,3 +60,31 @@
   - Zombie
   - Revolutionary
   - AllHostile
+
+- type: npcFaction
+  id: StationAiFaction
+  hostile:
+  - Changeling
+  - Heretic
+  - Blob
+  - Shadowling
+  - PirateFaction
+  - Wraith
+  - Lavafauna
+  - NanoTrasen
+  - Dragon
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleHostile
+  - SimpleNeutral
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - Wizard
+  - Xenoborg
+  - Insurgent
+  - CrabFaction
+  - Assistant
+  - DevilFaction

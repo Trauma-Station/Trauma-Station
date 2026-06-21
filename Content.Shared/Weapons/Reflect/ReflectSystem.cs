@@ -141,9 +141,11 @@ public sealed partial class ReflectSystem : EntitySystem
         // <Trauma>
         var ev = new ProjectileReflectedEvent(reflector, user);
         RaiseLocalEvent(projectile, ref ev);
-        // </Trauma>
-
+        /* moved below
         PlayAudioAndPopup(reflector.Comp, user);
+        */
+        EntityUid? shooter = null;
+        // </Trauma>
 
         if (Resolve(projectile, ref projectile.Comp, false))
         {
@@ -157,6 +159,7 @@ public sealed partial class ReflectSystem : EntitySystem
 
             _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)} from {ToPrettyString(projectile.Comp.Weapon)} shot by {projectile.Comp.Shooter}");
 
+            shooter = projectile.Comp.Shooter; // Trauma
             projectile.Comp.Shooter = user;
             projectile.Comp.Weapon = user;
             Dirty(projectile, projectile.Comp);
@@ -165,6 +168,8 @@ public sealed partial class ReflectSystem : EntitySystem
         {
             _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)}");
         }
+
+        PlayAudioAndPopup(reflector.Comp, user, shooter); // Trauma
 
         return true;
     }
@@ -192,7 +197,7 @@ public sealed partial class ReflectSystem : EntitySystem
             return false;
         }
 
-        PlayAudioAndPopup(reflector.Comp, user);
+        PlayAudioAndPopup(reflector.Comp, user, shooter); // Trauma - added shooter
 
         // WD EDIT START
         if (reflector.Comp.DamageOnReflectModifier != 0 && damage != null)
@@ -210,14 +215,11 @@ public sealed partial class ReflectSystem : EntitySystem
         return true;
     }
 
-    private void PlayAudioAndPopup(ReflectComponent reflect, EntityUid user)
+    private void PlayAudioAndPopup(ReflectComponent reflect, EntityUid user, EntityUid? shooter) // Trauma - added shooter
     {
-        // <Trauma> - clientside only, all clients predict projectiles (also fun note that user is not the user)
-        if (_netManager.IsServer || !_timing.IsFirstTimePredicted)
-            return;
-
-        _popup.PopupEntity(Loc.GetString("reflect-shot"), user);
-        _audio.PlayLocal(reflect.SoundOnReflect, user, null);
+        // <Trauma>
+        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, shooter);
+        _audio.PlayPredicted(reflect.SoundOnReflect, user, shooter);
         // </Trauma>
     }
 

@@ -31,8 +31,7 @@
     resetOnHandSelected: false
     altClickAttack: true
     canMiss: false
-    canParryLight: false
-    canParryWide: false
+    canBeParried: false
     damage:
       types:
         Heat: 0

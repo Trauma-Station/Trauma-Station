@@ -29,14 +29,14 @@ public sealed partial class BreakerFlipRule : StationEventSystem<BreakerFlipRule
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var chosenStation))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
             return;
 
         var stationApcs = new List<Entity<ApcComponent>>();
         var query = EntityQueryEnumerator<ApcComponent, TransformComponent>();
         while (query.MoveNext(out var apcUid, out var apc, out var xform))
         {
-            if (apc.MainBreakerEnabled && CompOrNull<StationMemberComponent>(xform.GridUid)?.Station == chosenStation)
+            if (apc.MainBreakerEnabled && xform.GridUid is { } grid && stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
             {
                 stationApcs.Add((apcUid, apc));
             }
