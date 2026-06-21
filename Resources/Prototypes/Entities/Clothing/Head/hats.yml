@@ -51,9 +51,8 @@
     - Recyclable
     - WhitelistChameleon
 
-# TODO: Make a single ClothingHeadHatArmoreredBeret in goob namespace so all these items dont need to have armor values listed seperately, since they wont have seperate armor values ANYWAY!
 - type: entity
-  parent: [ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] #goobstation - contraband marking
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Trauma - contraband marking and armor
   id: ClothingHeadHatBeretSecurity
   name: security beret
   description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
@@ -70,23 +69,9 @@
     - CorgiWearable
     - HamsterWearable
     - WhitelistChameleon
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
-  parent: [ClothingHeadHatBeret, BaseSecurityContraband] #goobstation - contraband marking
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Trauma - contraband marking and armor
   id: ClothingHeadHatSecurityTrooper
   name: trooper hat
   description: A campaign hat for the Nanotrasen Troopers. It's supposed to come with a case, too...
@@ -99,20 +84,6 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
   parent: ClothingHeadHatBeret
@@ -191,7 +162,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatBeretRND, BaseSecurityCommandContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseSecurityCommandContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
   id: ClothingHeadHatBeretHoS
   name: head of security's beret
   description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
@@ -208,23 +179,9 @@
     - Recyclable
     - HamsterWearable
     - WhitelistChameleon
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
-  parent: [ClothingHeadHatBeretRND, BaseSecurityContraband] # Goob edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseSecurityContraband] # Goob / Trauma edit
   id: ClothingHeadHatBeretWarden
   name: warden's beret
   description: A corporate-blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety.
@@ -233,20 +190,6 @@
     sprite: Clothing/Head/Hats/beret_warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_warden.rsi
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
   - type: Tag
     tags:
     - PetWearable
@@ -268,7 +211,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ClothingHeadHatBeret, BaseSecurityContraband] # Goob edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Goob / Trauma edit
   id: ClothingHeadHatBeretBrigmedic
   name: brigmedical beret
   description: A white beret for brigmedics.
@@ -277,27 +220,13 @@
     sprite: Clothing/Head/Hats/beret_brigmedic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_brigmedic.rsi
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
   - type: Tag
     tags:
     - PetWearable
     - CorgiWearable
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseClothingViewconeSmallIncrease ] # Trauma
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseClothingViewconeSmallIncrease ] # Trauma
   id: ClothingHeadHatBeretMerc
   name: mercenary beret
   description: An olive beret with a badge depicting a jackal on a rock.
@@ -345,7 +274,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ ClothingHeadHatBeretRND, BaseCommandContraband ]
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseCommandContraband ] # Trauma - armor
   id: ClothingHeadHatCaptain
   name: captain's hardhat
   description: Feels good being the king.
@@ -362,20 +291,6 @@
     - Recyclable
     - HamsterWearable
     - WhitelistChameleon
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
   parent: ClothingHeadBase
@@ -393,7 +308,7 @@
   - type: IngestionBlocker
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseCentcommContraband ]
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCentcommContraband ] # Trauma - armor
   id: ClothingHeadHatCentcom
   name: CentComm brand hat
   description: Feels good being the king's boss.
@@ -402,20 +317,6 @@
     sprite: Clothing/Head/Hats/centcom.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/centcom.rsi
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
   - type: Tag
     tags:
     - PetWearable
@@ -530,7 +431,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseCommandContraband]
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCommandContraband] # Trauma - armor
   id: ClothingHeadHatHoshat
   name: head of security cap
   description: A stylish cap worn by the Head of Security. Shows the officers who's in charge.
@@ -547,20 +448,6 @@
     - Recyclable
     - HamsterWearable
     - WhitelistChameleon
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
   parent: ClothingHeadBase
@@ -874,7 +761,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
   id: ClothingHeadHatWarden
   name: warden's cap
   description: This hat emphasizes that you are THE LAW.
@@ -885,20 +772,6 @@
     sprite: Clothing/Head/Hats/warden.rsi
   - type: StealTarget
     stealGroup: ClothingHeadHatWarden
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
   - type: Tag
     tags:
     - PetWearable
@@ -1324,7 +1197,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase] # Trauma - armor
   id: ClothingHeadHatCapcap
   name: cap cap
   description: A grand, stylish cap worn by the Captain. Shows the station who's in charge.
@@ -1347,23 +1220,9 @@
     flavorKind: station-event-random-sentience-flavor-inanimate
     weight: 0.0002 # 5,000 times less likely than 1 regular animal
   - type: BlockMovement
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseCentcommContraband ]
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCentcommContraband ]
   id: ClothingHeadHatCentcomcap
   name: CentComm cap
   description: An extravagant, stylish cap worn by CentComm officials. Shows the Captain who's in charge.
@@ -1382,20 +1241,6 @@
     - Recyclable
     - WhitelistChameleon
     - HamsterWearable
-  - type: Armor # Goob
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8
 
 - type: entity
   parent: ClothingHeadBase

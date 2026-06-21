@@ -119,8 +119,6 @@
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
   - type: Parry
-    maxParries: 3
-    maxReflects: 0
     parryMinSkill: 40
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg
@@ -293,8 +291,7 @@
     damage: 10
   - type: Wieldable
   - type: Parry
-    maxParries: 4
-    maxReflects: 0
+    parryExhaustionCost: 0.25
     parryMinSkill: 40
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg
@@ -381,8 +378,7 @@
     slotFlags:
     - BACK
   - type: Parry
-    maxParries: 5
-    maxReflects: 0
+    parryExhaustionCost: 0.25
     parryMinSkill: 0
 
 

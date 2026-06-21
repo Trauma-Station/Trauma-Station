@@ -163,8 +163,6 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: DisarmMalus
   - type: Parry
-    maxParries: 1
-    maxReflects: 0
     parryMinSkill: 50
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg
@@ -227,8 +225,6 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: DisarmMalus
   - type: Parry
-    maxParries: 1
-    maxReflects: 0
     parryMinSkill: 50
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg
