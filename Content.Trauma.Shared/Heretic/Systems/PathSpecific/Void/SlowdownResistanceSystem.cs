@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Clothing.Components;
+using Content.Shared.Examine;
+using Content.Shared.Inventory;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 
@@ -11,7 +14,20 @@ public sealed class SlowdownResistanceSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SlowdownResistanceComponent, BeforeMovespeedModifierAppliedEvent>(OnBeforeModifierApplied);
+        Subs.SubscribeWithRelay<SlowdownResistanceComponent, BeforeMovespeedModifierAppliedEvent>(
+            OnBeforeModifierApplied,
+            held: false);
+
+        SubscribeLocalEvent<SlowdownResistanceComponent, ExaminedEvent>(OnExamine);
+    }
+
+    private void OnExamine(Entity<SlowdownResistanceComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasComp<ClothingComponent>(ent))
+            return;
+
+        var reduction = $"{1f - ent.Comp.Factor:0.00}";
+        args.PushMarkup(Loc.GetString("slowdown-resistance-component-examine-message", ("reduction", reduction)));
     }
 
     private void OnBeforeModifierApplied(Entity<SlowdownResistanceComponent> ent, ref BeforeMovespeedModifierAppliedEvent args)
