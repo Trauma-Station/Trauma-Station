@@ -240,7 +240,16 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             acceptedSideJobs.Add(info.Value);
         }
 
-        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, jobBoard.Value.Comp.MaximumAcceptedSideJobs);
+        var reputationLevel = 0;
+        foreach (var bracket in jobBoard.Value.Comp.ReputationLevels)
+        {
+            if (jobBoard.Value.Comp.Reputation >= bracket)
+                reputationLevel += 1;
+            else
+                break;
+        }
+
+        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, reputationLevel, jobBoard.Value.Comp.MaximumAcceptedSideJobs);
         _ui.SetUiState(owner, JobListingsUiKey.Key, state);
     }
 

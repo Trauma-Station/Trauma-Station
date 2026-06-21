@@ -42,9 +42,10 @@ public sealed partial class JobListingsMenu : DefaultWindow
         Refresh();
     }
 
-    public void SetReputation(int reputation)
+    public void SetReputation(int reputation, int level)
     {
         ReputationText.Text = Loc.GetString("job-listings-ui-reputation", ("reputation", reputation));
+        ReputationInfo.Text = Loc.GetString($"job-listings-ui-reputation-level-{level}");
     }
 
     private SideJobControl CreateControl(SideJobInfo info)

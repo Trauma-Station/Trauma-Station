@@ -9,3 +9,9 @@ job-listings-ui-confirmation-button = Sure?
 job-listings-ui-claim-button = Claim
 job-listings-ui-no-accepted-note = No jobs currently accepted...
 job-listings-ui-no-available-note = No jobs currently offered...
+
+job-listings-ui-reputation-level-0 = Goody Two-Shoes Nobody
+job-listings-ui-reputation-level-1 = Up-and-Coming Crook
+job-listings-ui-reputation-level-2 = Front Page News
+job-listings-ui-reputation-level-3 = Terrifying Presence
+job-listings-ui-reputation-level-4 = Living Legend

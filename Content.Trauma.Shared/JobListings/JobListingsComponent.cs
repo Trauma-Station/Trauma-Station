@@ -54,4 +54,11 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public int Reputation = 0;
+
+    /// <summary>
+    /// Reputation required to reach each level.
+    /// Level 0 by default, first element in list is rep required for level 1, second element is rep required for level 2, and so on.
+    /// </summary>
+    [DataField]
+    public List<int> ReputationLevels;
 }

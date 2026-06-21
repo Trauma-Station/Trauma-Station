@@ -30,11 +30,12 @@ public sealed class JobListingsClaimJobMessage(NetEntity job) : BoundUserInterfa
 public record struct SideJobInfo(string Title, string Description, SpriteSpecifier Icon, float Progress, string RewardName, int ReputationGain, NetEntity Entity);
 
 [Serializable, NetSerializable]
-public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, int reputation, int maximumAcceptedSideJob) : BoundUserInterfaceState
+public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, int reputation, int reputationLevel, int maximumAcceptedSideJob) : BoundUserInterfaceState
 {
     public readonly List<SideJobInfo> AvailableSideJobs = availableSideJobs;
     public readonly List<SideJobInfo> AcceptedSideJobs = acceptedSideJobs;
     public readonly int Reputation = reputation;
+    public readonly int ReputationLevel = reputationLevel;
     public readonly int MaximumAcceptedSideJobs = maximumAcceptedSideJob;
 }
 
