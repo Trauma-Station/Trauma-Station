@@ -196,6 +196,10 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      - !type:HealBoneDamage
+        amount: 1.5
+      # </Trauma>
       - !type:SatiateThirst
         factor: 1.5
     # Dragon doesn't require airloss healing, so omnizine is still best for humans.

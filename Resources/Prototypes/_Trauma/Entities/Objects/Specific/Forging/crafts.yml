@@ -203,7 +203,7 @@
   parent: [ BaseForgedProductSeparateHead, BaseSword ]
   id: ForgedLongsword
   name: longsword
-  description: "It's like a sword, but longer. Needs two hands to wield properly."
+  description: It's like a sword, but longer. Needs two hands to wield properly.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -266,6 +266,9 @@
     qualities:
     - Prying
     - Hammering
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Prying
 
 # Pickaxe
 
