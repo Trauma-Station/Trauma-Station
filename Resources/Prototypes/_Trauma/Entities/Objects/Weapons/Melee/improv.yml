@@ -24,6 +24,18 @@
     tags:
     - BaseballBat
     - Recyclable
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 5
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Glennium
+        Quantity: 5
+  - type: MeleeChemicalInjector
+    transferAmount: 5
+    solution: melee
 
 # - type: entity
 #   name: unfinished nail board
@@ -34,22 +46,22 @@
   # - type: Construction
   #   graph: WoodenBat
   #   node: bat
-  - type: PhysicalComposition
-    materialComposition:
-      Wood: 250
-  - type: Tag
-    tags:
-    - Recyclable
+  # - type: PhysicalComposition
+  #   materialComposition:
+  #     Wood: 250
+  # - type: Tag
+  #   tags:
+  #   - Recyclable
 
 - type: entity
   name: nail board
-  parent: [BaseItem, BaseMinorContraband, WoodDurability]
+  parent: [BaseItem, BaseMinorContraband, WoodDurabilityWeak]
   id: NailBoardWeapon
   description: A nasty weapon that also works as a trap.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/nailboard.rsi
-    state: icon
+    state: finished
   - type: MeleeWeapon
     animationRotation: -135 # WWDP
     heavyStaminaCost: 15 # goob edit
@@ -151,7 +163,7 @@
 
 - type: entity
   name: bomb spear
-  parent: [BaseItem, BaseMinorContraband, SpearDurabilityWeak, TimerGrenadeBase]
+  parent: [BaseItem, BaseMinorContraband, SpearDurabilityWeak]
   id: SpearPipebomb
   description: Risky, but deadly.
   components:
@@ -164,13 +176,11 @@
       types:
         Blunt: 1
   - type: EmbeddableProjectile
+    removalTime: 1
     offset: -0.15,0.0
   - type: ThrowingAngle
     angle: 225
   - type: LandAtCursor
-  - type: Tag
-    tags:
-    - Spear
   - type: Fixtures
     fixtures:
       fix1:
@@ -189,7 +199,8 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/spear_pipebomb.rsi
     layers:
-    - state: icon
+    - state: base
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: MeleeWeapon
     canWideSwing: false
     range: 2.2
@@ -215,41 +226,15 @@
   # - type: Construction
   #   graph: Spear
   #   node: spear
-  - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 10
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          PartRodMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 4
   - type: UseDelay
   - type: Appearance
-  - type: TriggerOnActivate
   - type: TimerTrigger
     delay: 5
     examinable: false
     initialBeepDelay: 0
     beepSound: /Audio/Effects/lightburn.ogg
   - type: RandomTimerTrigger
-    min: 1
+    min: 3
     max: 5
   - type: ExplodeOnTrigger
     keysIn:
@@ -260,8 +245,26 @@
     intensitySlope: 5
     maxIntensity: 6
     canCreateVacuum: false
-  - type: Appearance
   - type: TimerTriggerVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.ConstructionVisuals.Layer:
+          Primed: { state: active }
+          Unprimed: { state: icon }
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - Grenade # Goob
+    - HandGrenade
+    - Spear
+  - type: TriggerOnEmbed
+  - type: ToggleComponentsOnTrigger
+    components:
+      - type: PointLight
+        radius: 3
+        energy: 15
+        color: "#b85425"
 
 - type: entity
   name: bomb spear
@@ -272,7 +275,8 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/spear_IED.rsi
     layers:
-    - state: icon
+    - state: base
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: SpawnOnTrigger
     keysIn:
     - timer
@@ -358,7 +362,7 @@
         Slash: 5
     heavyStaminaCost: 6
     soundHit:
-      collection: MetalThud
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Large
     shape:
@@ -385,7 +389,7 @@
         Blunt: 12
     heavyStaminaCost: 6
     soundHit:
-      path: /Audio/Weapons/bladeslice.ogg
+      collection: MetalThud
   - type: Item
     size: Large
     shape:

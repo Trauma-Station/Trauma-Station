@@ -12,11 +12,11 @@
     prototype: RoboticArm
     stackRequirements:
       Manipulator: 4
-      Steel: 6
+      Steel: 1
       Cable: 5
     tagRequirements:
       BorgArm:
-        amount: 2
+        amount: 1
         defaultPrototype: LeftArmBorg
 
 - type: entity
@@ -31,11 +31,11 @@
     prototype: Constructor
     stackRequirements:
       Manipulator: 5
-      Steel: 10
+      Steel: 1
       Cable: 5
     tagRequirements:
       BorgArm:
-        amount: 4
+        amount: 2
         defaultPrototype: LeftArmBorg
 
 - type: entity
@@ -62,7 +62,7 @@
     prototype: Interactor
     stackRequirements:
       Manipulator: 4
-      Plastic: 4
+      Plastic: 1
       Cable: 5
     tagRequirements:
       BorgArm:

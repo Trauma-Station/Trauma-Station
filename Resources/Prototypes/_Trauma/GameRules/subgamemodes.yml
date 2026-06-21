@@ -35,7 +35,7 @@
   - type: AntagSelection
     antags:
     - !type:LinearAntagCount
-      proto: Heretic
+      proto: Vampire
       range:
         min: 1
         max: 2

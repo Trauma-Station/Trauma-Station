@@ -133,6 +133,16 @@
       BarbedWire: 100
   - type: Item
     heldPrefix: wire
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Trauma/Footsteps/barbedwire.ogg
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Trauma/Footsteps/barbedwire.ogg
+      params:
+        volume: -4
 
 - type: entity
   parent: BarbedWire
