@@ -25,7 +25,7 @@ namespace Content.Server.StationEvents.Events
             if (GetRandomStationGrids(out var chosenStation) is not { } stationGrids) // Trauma - get grids instead of comparing station
                 return;
 
-            component.AffectedStation = chosenStation.Value;
+            component.AffectedStation = chosenStation!.Value; // Trauma - add !, shit language nullables
 
             var query = AllEntityQuery<ApcComponent, TransformComponent>();
             while (query.MoveNext(out var apcUid ,out var apc, out var transform))

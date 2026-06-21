@@ -16,17 +16,12 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
     /// <summary>
     /// Get a random station's OwnedGrids.
     /// Almost every gamerule should be using station's owned grids instead of station members so they dont hit cargo shuttle and stuff.
-    /// Do not use station if the returned grids are null.
     /// </summary>
-    public HashSet<EntityUid>? GetRandomStationGrids([NotNull] out EntityUid? station)
+    public HashSet<EntityUid>? GetRandomStationGrids(out EntityUid? station)
         => TryGetRandomStation(out station) && TryComp<StationDataComponent>(station, out var data)
             ? data.OwnedGrids
             : null;
 
-    /// <summary>
-    /// Get a random station's OwnedGrids.
-    /// Almost every gamerule should be using station's owned grids instead of station members so they dont hit cargo shuttle and stuff.
-    /// </summary>
     public HashSet<EntityUid>? GetRandomStationGrids()
         => GetRandomStationGrids(out _);
 
