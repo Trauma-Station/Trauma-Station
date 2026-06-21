@@ -15,14 +15,6 @@
   name: signal-port-name-holographic-generator-field-disconnected
   description: signal-port-description-holographic-generator-field-disconnected
 
-# Vitals Monitor
-
-- type: sourcePort
-  id: VitalsMonitorSender
-  name: signal-port-name-vitals-monitor-sender
-  description: signal-port-description-vitals-monitor-sender
-  defaultLinks: [ VitalsMonitorReceiverMed, VitalsMonitorReceiverStasis, BodyScannerReceiver ]
-
 # Nuclear Reactor
 
 - type: sourcePort
@@ -31,7 +23,27 @@
   description: signal-port-description-nuclear-reactor-data-sender
   defaultLinks: [ NuclearReactorDataReceiver ]
 
+- type: sourcePort
+  id: ControlRodsAvg
+  name: signal-port-name-nuclear-reactor-control-rods-avg
+  description: signal-port-description-nuclear-reactor-control-rods-avg
+
+- type: sourcePort
+  id: CasingTemperature
+  name: signal-port-name-nuclear-reactor-casing-temp
+  description: signal-port-description-nuclear-reactor-casing-temp
+
+- type: sourcePort
+  id: ReactorThermalPower
+  name: signal-port-name-nuclear-reactor-thermal-power
+  description: signal-port-description-nuclear-reactor-thermal-power
+
 # Gas Turbine
+
+- type: sourcePort
+  id: TurbineSpeed
+  name: signal-port-name-gas-turbine-speed
+  description: signal-port-description-gas-turbine-speed
 
 - type: sourcePort
   id: TurbineSpeedHigh
@@ -42,6 +54,16 @@
   id: TurbineSpeedLow
   name: signal-port-name-gas-turbine-speed-low
   description: signal-port-description-gas-turbine-speed-low
+
+- type: sourcePort
+  id: TurbineGenerated
+  name: signal-port-name-gas-turbine-generated
+  description: signal-port-description-gas-turbine-generated
+
+- type: sourcePort
+  id: TurbineSupply
+  name: signal-port-name-gas-turbine-supply
+  description: signal-port-description-gas-turbine-supply
 
 - type: sourcePort
   id: GasTurbineDataSender

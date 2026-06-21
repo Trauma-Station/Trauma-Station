@@ -6,12 +6,6 @@ gas-turbine-examine-stator = It has a stator.
 gas-turbine-examine-blade-null = It seems to be missing a turbine blade.
 gas-turbine-examine-blade = It has a turbine blade.
 
-turbine-spinning-0 = The blades are not spinning.
-turbine-spinning-1 = The blades are turning slowly.
-turbine-spinning-2 = The blades are spinning.
-turbine-spinning-3 = The blades are spinning quickly.
-turbine-spinning-4 = [color=red]The blades are spinning out of control![/color]
-
 turbine-damaged-0 = It appears to be in good condition.[/color]
 turbine-damaged-1 = The turbine looks a bit scuffed.[/color]
 turbine-damaged-2 = [color=yellow]The turbine looks badly damaged.[/color]
@@ -37,11 +31,9 @@ gas-turbine-repair-fail-stator = You need to replace the stator before this can 
 turbine-repair-ruined = You repair the {$target}'s casing with the {$tool}.
 turbine-repair = You repair some of the damage to the {$target} using the {$tool}.
 turbine-no-damage = There is no damage to repair on the {$target} using the {$tool}.
-turbine-show-damage = BladeHealth {$health}, BladeHealthMax {$healthMax}.
 
 # Anchoring warnings
 turbine-unanchor-warning = You cannot unanchor the gas turbine while the turbine is spinning!
-turbine-anchor-warning = Invalid anchor position.
 
 gas-turbine-eject-fail-speed = You cannot remove turbine parts while the turbine is spinning!
 gas-turbine-insert-fail-speed = You cannot insert turbine parts while the turbine is spinning!

@@ -1,8 +1,7 @@
 - type: entity
-  id: BaseNuclearReactor
-  parent: BaseStructure
   abstract: true
-  categories: [ HideSpawnMenu ]
+  parent: [ BaseStructure, BaseNuclearPropertiesSteel ]
+  id: BaseNuclearReactor
   name: nuclear reactor
   description: A nuclear reactor vessel, with slots for fuel rods and other components. Hey wait, didn't one of these explode once?
   components:
@@ -10,8 +9,7 @@
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/nuclear_reactor.rsi
     layers:
     - state: reactor
-      visible: true
-      map: [ "enum.ReactorVisualLayers.Sprite" ]
+      map: [ "enum.ReactorVisualLayers.Base" ]
     - state: reactor_status_active
       shader: unshaded
       visible: false
@@ -36,10 +34,10 @@
       map: [ "enum.ReactorVisualLayers.Fire" ]
   - type: GenericVisualizer
     visuals:
-      enum.ReactorVisuals.Sprite:
-        enum.ReactorVisualLayers.Sprite:
-          Normal: { state: reactor }
-          Melted: { state: reactorbroken }
+      enum.ReactorVisuals.Melted:
+        enum.ReactorVisualLayers.Base:
+          True: { state: reactorbroken }
+          False: { state: reactor }
       enum.ReactorVisuals.Status:
         enum.ReactorVisualLayers.Status:
           Off: { visible: false}
@@ -83,8 +81,9 @@
         - MachineLayer
         - HighImpassable
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralReactorCasing
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -108,16 +107,21 @@
     navMapBlip: Thermoregulator
   - type: RadiationSource
     intensity: 0
+  - type: RadiationBlockingContainer
+    resistance: 100 # rods inside dont directly irradiate anything
   - type: ContainerContainer
     containers:
-      part_slot: !type:ContainerSlot {}
+      reactor_parts: !type:Container
+      part_slot: !type:ContainerSlot
   - type: ItemSlots
     slots:
       part_slot:
         whitelist:
           components:
-            - ReactorPart
+          - ReactorPart
   - type: NuclearReactor
+  - type: NuclearMachine
+    arrowPrototype: ReactorFlowArrow
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -126,18 +130,20 @@
   - type: DeviceLinkSource
     range: 50
     ports:
-      - NuclearReactorDataSender
+    - NuclearReactorDataSender
+    - ControlRodsAvg
+    - CasingTemperature
+    - ReactorThermalPower
   - type: DeviceLinkSink
     ports:
-      - InsertControlRods
-      - RetractControlRods
+    - ControlRodInsertion
   - type: ActivatableUI
     key: enum.NuclearReactorUiKey.Key
   - type: ActivatableUIRequiresAnchor
   - type: UserInterface
     interfaces:
       enum.NuclearReactorUiKey.Key:
-        type: NuclearReactorBoundUserInterface
+        type: NuclearReactorBUI
   - type: GuideHelp
     guides:
     - NuclearReactor
@@ -145,10 +151,8 @@
 
 # Crew nuclear reactors
 - type: entity
-  id: NuclearReactorCrew
   parent: BaseNuclearReactor
-  abstract: true
-  categories: [ HideSpawnMenu ]
+  id: NuclearReactorCrew
   components:
   - type: AccessReader # You got a permit for that meltdown?
     access: [["Engineering"]]
@@ -161,36 +165,32 @@
       - GhostOnlyWarp
 
 - type: entity
-  id: NuclearReactorNormal
   parent: NuclearReactorCrew
-
-- type: entity
   id: NuclearReactorEmpty
-  parent: NuclearReactorCrew
   suffix: Empty
   components:
   - type: NuclearReactor
-    prefab: ReactorPrefabEmpty
+    prefab: Empty
 
 - type: entity
-  id: NuclearReactorRandom
   parent: NuclearReactorCrew
+  id: NuclearReactorRandom
   suffix: Random
   components:
   - type: NuclearReactor
-    prefab: random
+    prefab: null
 
 - type: entity
-  id: NuclearReactorMeltdown
   parent: NuclearReactorCrew
+  id: NuclearReactorMeltdown
   suffix: Meltdown
   components:
   - type: NuclearReactor
-    prefab: ReactorPrefab7x7Meltdown
+    prefab: 7x7Meltdown
 
 - type: entity
+  parent: [ BaseStructure, BaseNuclearPropertiesSteel ]
   id: NuclearReactorMelted # This is more of a decoration than anything else
-  parent: BaseStructure
   suffix: Melted
   name: nuclear reactor
   description: A broken nuclear reactor vessel. It glows with heat and radiation.
@@ -223,8 +223,8 @@
 
 # Small crew nuclear reactors
 - type: entity
-  id: NuclearReactorSmall
   parent: NuclearReactorCrew
+  id: NuclearReactorSmall
   name: small nuclear reactor
   components:
   - type: Sprite
@@ -243,15 +243,16 @@
         - HighImpassable
   - type: NuclearReactor
     thermalMass: 302400
-    reactorGridWidth: 5
-    reactorGridHeight: 5
-    prefab: ReactorPrefab5x5Normal
+    gridWidth: 5
+    gridHeight: 5
+    prefab: 5x5Normal
+    gridbounds: [ 12, 11, 0, 0 ]
+  - type: NuclearMachine
     inletPos: -1, 1
     inletRot: 180
     outletPos: 1, 1
     outletRot: 180
     arrowPrototype: ReactorSmallFlowArrow
-    gridbounds: [ 12, 11, 0, 0 ]
   - type: Destructible
     thresholds:
     - trigger:
@@ -270,18 +271,18 @@
           collection: MetalBreak
 
 - type: entity
-  id: NuclearReactorSmallRandom
   parent: NuclearReactorSmall
+  id: NuclearReactorSmallRandom
   suffix: Random
   components:
   - type: NuclearReactor
-    prefab: random
+    prefab: null
 
 - type: entity
-  id: NuclearReactorSmallMelted
   parent: NuclearReactorMelted
-  suffix: Melted
+  id: NuclearReactorSmallMelted
   name: small nuclear reactor
+  suffix: Melted
   description: A broken nuclear reactor vessel. It glows with heat and radiation.
   components:
   - type: Sprite
@@ -305,35 +306,34 @@
 
 # Salvage nuclear reactors
 - type: entity
-  id: NuclearReactorSalvage
-  parent: BaseNuclearReactor
   abstract: true
-  categories: [ HideSpawnMenu ]
+  parent: BaseNuclearReactor
+  id: NuclearReactorSalvage
 
 - type: entity
-  id: NuclearReactorNormalSalvage
   parent: NuclearReactorSalvage
+  id: NuclearReactorNormalSalvage
   suffix: Salvage
 
 - type: entity
-  id: NuclearReactorEmptySalvage
   parent: NuclearReactorSalvage
+  id: NuclearReactorEmptySalvage
   suffix: "Empty, Salvage"
   components:
   - type: NuclearReactor
-    prefab: ReactorPrefabEmpty
+    prefab: Empty
 
 - type: entity
-  id: NuclearReactorRandomSalvage
   parent: NuclearReactorSalvage
+  id: NuclearReactorRandomSalvage
   suffix: "Random, Salvage"
   components:
   - type: NuclearReactor
-    prefab: random
+    prefab: null
 
 - type: entity
-  id: NuclearReactorMeltedSalvage
   parent: NuclearReactorMelted
+  id: NuclearReactorMeltedSalvage
   suffix: "Melted, Salvage"
   description: A nuclear reactor vessel, long since melted down. It still glows with residual heat and radiation.
   components:
@@ -344,10 +344,10 @@
 
 # Small salvage nuclear reactors
 - type: entity
-  id: NuclearReactorSmallSalvage
   parent: NuclearReactorSalvage
-  suffix: Salvage
+  id: NuclearReactorSmallSalvage
   name: small nuclear reactor
+  suffix: Salvage
   components:
   - type: Sprite
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/small_nuclear_reactor.rsi
@@ -365,27 +365,28 @@
         - HighImpassable
   - type: NuclearReactor
     thermalMass: 302400
-    reactorGridWidth: 5
-    reactorGridHeight: 5
-    prefab: ReactorPrefab5x5Normal
+    gridWidth: 5
+    gridHeight: 5
+    prefab: 5x5Normal
+    gridbounds: [ 12, 11, 0, 0 ]
+  - type: NuclearMachine
     inletPos: -1, 1
     inletRot: 180
     outletPos: 1, 1
     outletRot: 180
     arrowPrototype: ReactorSmallFlowArrow
-    gridbounds: [ 12, 11, 0, 0 ]
 
 - type: entity
-  id: NuclearReactorSmallRandomSalvage
   parent: NuclearReactorSmall
+  id: NuclearReactorSmallRandomSalvage
   suffix: "Random, Salvage"
   components:
   - type: NuclearReactor
-    prefab: random
+    prefab: null
 
 - type: entity
-  id: NuclearReactorSmallMeltedSalvage
   parent: NuclearReactorSmallMelted
+  id: NuclearReactorSmallMeltedSalvage
   suffix: "Melted, Salvage"
   description: A nuclear reactor vessel, long since melted down. It still glows with residual heat and radiation.
   components:
@@ -396,8 +397,8 @@
 
 # Nuclear debris resultant from a meltdown
 - type: entity
-  id: NuclearDebrisChunk
   parent: BaseItem
+  id: NuclearDebrisChunk
   name: nuclear debris
   description: You do not see the graphite on the floor. You're in shock. Report to medical.
   categories: [ HideSpawnMenu ]
@@ -405,8 +406,8 @@
   - type: Sprite
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/nuclear_debris.rsi
     layers:
-      - state: graphite_damaged_0
-        map: [ "base" ]
+    - state: graphite_damaged_0
+      map: [ "base" ]
   - type: Item
     size: Huge
   - type: RandomSprite
@@ -425,44 +426,44 @@
   - type: RadiationSource
     intensity: 1.6
 
-# Arrows to indicate flow
+# Arrows to indicate flow for nuclear reactors and turbines
 - type: entity
   id: ReactorFlowArrow
   categories: [ HideSpawnMenu ]
   components:
-    - type: Sprite
-      sprite: Markers/teg_arrow.rsi
-      color: "#FFFFFFBB"
-      layers:
-        - state: arrow
-          rotation: 90
-          offset: 3, 1
-        - state: arrow
-          rotation: 90
-          offset: -3, -1
-    - type: TimedDespawn
-      lifetime: 2
-    - type: Tag
-      tags:
-        - HideContextMenu
+  - type: Sprite
+    sprite: Markers/teg_arrow.rsi
+    color: "#FFFFFFBB"
+    layers:
+    - state: arrow
+      rotation: 90
+      offset: 3, 1
+    - state: arrow
+      rotation: 90
+      offset: -3, -1
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Tag
+    tags:
+    - HideContextMenu
 
 - type: entity
-  id: ReactorSmallFlowArrow
   parent: ReactorFlowArrow
+  id: ReactorSmallFlowArrow
   categories: [ HideSpawnMenu ]
   components:
-    - type: Sprite
-      layers:
-        - state: arrow
-          rotation: 0
-          offset: -1, 2
-        - state: arrow
-          rotation: 180
-          offset: 1, 2
+  - type: Sprite
+    layers:
+    - state: arrow
+      rotation: 0
+      offset: -1, 2
+    - state: arrow
+      rotation: 180
+      offset: 1, 2
 
 # Pipes the reactor uses to connect to the pipe network
 - type: entity
-  id: ReactorGasPipe
+  id: NuclearMachineGasPipe
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform
@@ -470,20 +471,17 @@
   - type: Anchorable
   - type: NodeContainer
     nodes:
-      pipe:
-        !type:PipeNode
+      pipe: !type:PipeNode
         nodeGroupID: Pipe
         pipeDirection: South
         volume: 1000
         pipeLayer: 0
-      pipe1:
-        !type:PipeNode
+      pipe1: !type:PipeNode
         nodeGroupID: Pipe
         pipeDirection: South
         volume: 1000
         pipeLayer: 1
-      pipe2:
-        !type:PipeNode
+      pipe2: !type:PipeNode
         nodeGroupID: Pipe
         pipeDirection: South
         volume: 1000
@@ -497,7 +495,7 @@
   - type: PipeRestrictOverlap
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
 
 - type: entity
   id: ReactorAlarmEntity

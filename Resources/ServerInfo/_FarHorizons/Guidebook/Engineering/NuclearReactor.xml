@@ -5,7 +5,7 @@
 
 	## The Nuclear Reactor
 	<Box>
-		<GuideEntityEmbed Entity="NuclearReactorNormal"/>
+		<GuideEntityEmbed Entity="NuclearReactorCrew"/>
 	</Box>
 
 	The Nuclear Reactor is the primary source of heat the generator uses to make power.
@@ -123,6 +123,14 @@
 
 	100% insertion means the control rods are as effective as possible and 0% insertion means the control rods are functionally disabled.
 
+  ### Circuit control
+
+  Integrated circuits can work well with reactors.
+
+  You can read the current control rod insertion percentage, casing temperature and thermal power generation as integer inputs.
+
+  You can write the target control rod insertion percentage too, allowing you to indirectly control the fission rate.
+
 	## Cooling the Reactor
 	The Reactor is cooled through the use of gasses, but some gasses have effects on the Reactor when in sufficient quantities:
 
@@ -200,6 +208,14 @@
 	The Turbine has an optimal RPM, where it will produce the most power.
 
 	Going faster or slower than optimal will result in poor performance.
+
+  ### Circuit control
+
+  Like a reactor, turbines can be controlled by integrated circuits.
+
+  Both the flow rate and stator load can be set to integer values.
+
+  You can read the current speed as well as the power generated and being used.
 
 	## Turbine Status Indicators
 	The Turbine has a set of status indicators to warn operators of dangerous conditions or faults.

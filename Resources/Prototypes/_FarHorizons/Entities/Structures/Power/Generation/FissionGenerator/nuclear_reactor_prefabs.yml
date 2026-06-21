@@ -1,10 +1,9 @@
 - type: nuclearReactorPrefab
-  id: ReactorPrefabEmpty
-  parts:
-   -1,-1: BaseReactorPart # Can't be empty, so I'll put this nothing part in an inaccessible spot
+  id: Empty
+  parts: {}
 
 - type: nuclearReactorPrefab
-  id: ReactorPrefab7x7Normal
+  id: 7x7Normal
   parts:
     2,0: SteelReactorGasChannel
     2,2: SteelReactorGasChannel
@@ -28,7 +27,7 @@
     3,4: BohrumReactorControlRod
 
 - type: nuclearReactorPrefab
-  id: ReactorPrefab7x7Debug
+  id: 7x7Debug
   parts:
     2,0: SteelReactorGasChannel
     2,2: SteelReactorGasChannel
@@ -56,7 +55,7 @@
     3,5: CerenkiteReactorFuelRod
 
 - type: nuclearReactorPrefab
-  id: ReactorPrefab7x7Meltdown
+  id: 7x7Meltdown
   parts:
     0,0: PlutoniumReactorFuelRod
     1,0: PlutoniumReactorFuelRod
@@ -115,7 +114,7 @@
     6,6: PlutoniumReactorFuelRod
 
 - type: nuclearReactorPrefab
-  id: ReactorPrefab7x7Arachne
+  id: 7x7Arachne
   parts:
     0,0: SteelReactorGasChannel
     0,2: SteelReactorGasChannel
@@ -171,7 +170,7 @@
     5,5: CerenkiteReactorFuelRod
 
 - type: nuclearReactorPrefab
-  id: ReactorPrefab7x7Lens
+  id: 7x7Lens
   parts:
     0,0: SteelReactorGasChannel
     0,2: SteelReactorGasChannel
@@ -227,7 +226,7 @@
     5,5: CerenkiteReactorFuelRod
 
 - type: nuclearReactorPrefab
-  id: ReactorPrefab5x5Normal
+  id: 5x5Normal
   parts:
     0,0: SteelReactorGasChannel
     0,2: SteelReactorGasChannel

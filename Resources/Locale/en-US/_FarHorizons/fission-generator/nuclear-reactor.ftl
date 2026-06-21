@@ -6,7 +6,6 @@ reactor-fire-stop = The {$owner} stops burning.
 
 reactor-unanchor-melted = You cannot unanchor the nuclear reactor, it's melted into the hull!
 reactor-unanchor-warning = You cannot unanchor the nuclear reactor while it's not empty or hotter than 80C!
-reactor-anchor-warning = Invalid anchor position.
 
 ### Messages
 reactor-smoke-start-message = ALERT: The {$owner} has reached a dangerous temperature: {$temperature}K. Intervene immediately to prevent meltdown.

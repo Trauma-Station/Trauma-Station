@@ -47,7 +47,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         if (!RandomTeleport(args.User, ent.Comp, out var wp, user: args.User))
             return;
 
-        _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.User):actor} randomly teleported to {wp} using {ToPrettyString(ent):used}");
+        _adminLog.Add(LogType.Action, LogImpact.Low, $"{args.User:actor} randomly teleported to {wp} using {ent:used}");
 
         if (!ent.Comp.ConsumeOnUse)
             return;

@@ -9,7 +9,7 @@
     snapCardinals: true
     layers:
     - state: centrifuge
-      map: ["enum.NuclearCentrifugeVisualLayers.Processing"]
+      map: ["enum.NuclearCentrifugeVisuals.Layer"]
     # - state: panel
     #   map: ["enum.WiresVisualLayers.MaintenancePanel"]
     #   visible: false
@@ -18,7 +18,7 @@
   - type: GenericVisualizer
     visuals:
       enum.NuclearCentrifugeVisuals.Processing:
-        enum.NuclearCentrifugeVisualLayers.Processing:
+        enum.NuclearCentrifugeVisuals.Layer:
           True: { state: centrifuge_process }
           False: { state: centrifuge }
       enum.PowerDeviceVisuals.Powered:

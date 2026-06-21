@@ -251,7 +251,6 @@
     #- AtmosTools - Goobstation - Moved to Engifab
     #- EngineeringWeapons - Goobstation - Moved to Scifab and Engifab
     #- Chemistry - Goobstation
-    - ReactorPartsBasic
     - Janitor
     - Instruments
     - Equipment # Goobstation note: handheld mass scanner is removed
@@ -326,6 +325,10 @@
     - SecurityBoardsStaticGoob
     - ServiceBoardsStaticGoob
     dynamicPacks:
+    # <Trauma>
+    - SharedBoards
+    - ReactorCircuitboards
+    # </Trauma>
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
@@ -334,9 +337,6 @@
     - CameraBoards
     #- MechBoards - Goobstation - split between departmental lathes
     - ShuttleBoards
-    # Goobstation Packs
-    - SharedBoards
-    - ReactorCircuitboards # FH edit
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient

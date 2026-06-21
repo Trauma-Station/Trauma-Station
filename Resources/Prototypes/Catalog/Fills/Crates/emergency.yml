@@ -107,6 +107,9 @@
     containers:
       entity_storage: !type:AllSelector
         children:
+        # <Trauma>
+        - id: RadiationBlockingProjector
+        # </Trauma>
         - id: ClothingOuterSuitRad
           amount: 2
         - id: GeigerCounter
@@ -114,7 +117,6 @@
         - id: DrinkVodkaBottleFull
         - id: DrinkShotGlass
           amount: 2
-        - id: RadiationBlockingProjector # Far Horizons
 
 - type: entity
   parent: CratePlastic

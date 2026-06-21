@@ -1,6 +1,6 @@
 - type: entity
-  id: Turbine
   parent: BaseStructure
+  id: Turbine
   name: gas turbine
   description: A large turbine used for generating power using hot gas.
   components:
@@ -8,7 +8,6 @@
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/turbine.rsi
     layers:
     - state: turbine
-      visible: true
       map: [ "enum.TurbineVisualLayers.TurbineSpeed" ]
     - state: turbinebroken
       visible: false
@@ -50,8 +49,9 @@
         layer:
         - MachineLayer
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Anchorable
     delay: 10
   - type: NodeContainer
@@ -76,21 +76,25 @@
     requirePower: false
   - type: ContainerContainer
     containers:
-      blade_slot: !type:ContainerSlot {}
-      stator_slot: !type:ContainerSlot {}
+      blade_slot: !type:ContainerSlot
+      stator_slot: !type:ContainerSlot
   - type: ItemSlots
     slots:
       blade_slot:
         startingItem: SteelGasTurbineBlade
         whitelist:
           components:
-            - GasTurbineBlade
+          - GasTurbineBlade
       stator_slot:
         startingItem: SteelGasTurbineStator
         whitelist:
           components:
-            - GasTurbineStator
+          - GasTurbineStator
   - type: Turbine
+  - type: NuclearMachine
+    inletPos: -1,-1
+    outletPos: 1,-1
+    arrowPrototype: TurbineFlowArrow
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -99,20 +103,23 @@
   - type: DeviceLinkSource
     range: 50
     ports:
-      - TurbineSpeedHigh
-      - TurbineSpeedLow
-      - GasTurbineDataSender
+    - TurbineSpeed
+    - TurbineSpeedHigh
+    - TurbineSpeedLow
+    - TurbineGenerated
+    - TurbineSupply
+    - GasTurbineDataSender
   - type: DeviceLinkSink
     ports:
-      - IncreaseStatorLoad
-      - DecreaseStatorLoad
+    - TurbineStatorLoad
+    - TurbineFlowRate
   - type: ActivatableUI
     key: enum.TurbineUiKey.Key
   - type: ActivatableUIRequiresAnchor
   - type: UserInterface
     interfaces:
       enum.TurbineUiKey.Key:
-        type: TurbineBoundUserInterface
+        type: TurbineBUI
   - type: AccessReader # Keeps some random tider from blowing up the turbine
     access: [["Engineering"]]
   - type: Lock
@@ -147,6 +154,7 @@
   - type: Turbine
     turbineMass: 400
     powerMultiplier: 0.4
+  - type: NuclearMachine
     inletPos: 1, -1
     inletRot: 0
     outletPos: -1, -1
@@ -158,74 +166,35 @@
   id: TurbineFlowArrow
   categories: [ HideSpawnMenu ]
   components:
-    - type: Sprite
-      sprite: Markers/teg_arrow.rsi
-      color: "#FFFFFFBB"
-      layers:
-        - state: arrow
-          rotation: 90
-          offset: 2, -1
-        - state: arrow
-          rotation: 90
-          offset: -2, -1
-    - type: TimedDespawn
-      lifetime: 2
-    - type: Tag
-      tags:
-        - HideContextMenu
-
-- type: entity
-  id: TurbineSmallFlowArrow
-  parent: TurbineFlowArrow
-  categories: [ HideSpawnMenu ]
-  components:
-    - type: Sprite
-      layers:
-        - state: arrow
-          rotation: 180
-          offset: 1, -2
-        - state: arrow
-          rotation: 0
-          offset: -1, -2
-
-# Pipes the turbine uses to connect to the pipe network
-- type: entity
-  id: TurbineGasPipe
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Transform
-    anchored: true
-  - type: Anchorable
-  - type: NodeContainer
-    nodes:
-      pipe:
-        !type:PipeNode
-        nodeGroupID: Pipe
-        pipeDirection: South
-        volume: 1000
-        pipeLayer: 0
-      pipe1:
-        !type:PipeNode
-        nodeGroupID: Pipe
-        pipeDirection: South
-        volume: 1000
-        pipeLayer: 1
-      pipe2:
-        !type:PipeNode
-        nodeGroupID: Pipe
-        pipeDirection: South
-        volume: 1000
-        pipeLayer: 2
-  - type: GasPipeManifold
-    inlets:
-    - pipe1
-    - pipe2
-    outlets:
-    - pipe
-  - type: PipeRestrictOverlap
+  - type: Sprite
+    sprite: Markers/teg_arrow.rsi
+    color: "#FFFFFFBB"
+    layers:
+    - state: arrow
+      rotation: 90
+      offset: 2, -1
+    - state: arrow
+      rotation: 90
+      offset: -2, -1
+  - type: TimedDespawn
+    lifetime: 2
   - type: Tag
     tags:
-      - HideContextMenu
+    - HideContextMenu
+
+- type: entity
+  parent: TurbineFlowArrow
+  id: TurbineSmallFlowArrow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: arrow
+      rotation: 180
+      offset: 1, -2
+    - state: arrow
+      rotation: 0
+      offset: -1, -2
 
 - type: entity
   id: GasTurbineAlarmEntity
