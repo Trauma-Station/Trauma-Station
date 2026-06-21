@@ -307,9 +307,9 @@
     #armorPenetration: -0.7 # Currently not working
     damage:
       types:
-        Slash: 5
+        Slash: 15
       woundSeverityMultipliers:
-        Slash: 5
+        Slash: 2
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tag
