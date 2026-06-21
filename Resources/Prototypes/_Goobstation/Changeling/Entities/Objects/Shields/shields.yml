@@ -32,7 +32,6 @@
               sound:
                 collection: MetalBreak
     - type: Parry
-      maxParries: 4
       soundOnParry:
         path: /Audio/Weapons/pierce.ogg
     - type: HeldSpeedModifier

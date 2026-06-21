@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Clothing.Components;
-using Content.Goobstation.Shared.Standing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
+using Content.Shared.Stunnable;
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
 
@@ -14,9 +14,7 @@ public sealed partial class MultiplyStandingUpTimeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ModifyStandingUpTimeComponent, GetStandingUpTimeMultiplierEvent>(OnGetMultiplier);
-        SubscribeLocalEvent<ModifyStandingUpTimeComponent, InventoryRelayedEvent<GetStandingUpTimeMultiplierEvent>>(
-            OnInventoryGetMultiplier);
+        Subs.SubscribeWithRelay<ModifyStandingUpTimeComponent, GetStandUpTimeEvent>(OnGetTime, held: false);
         SubscribeLocalEvent<ModifyStandingUpTimeComponent, ExaminedEvent>(OnExamined);
     }
 
@@ -30,13 +28,8 @@ public sealed partial class MultiplyStandingUpTimeSystem : EntitySystem
         args.PushMarkup(msg);
     }
 
-    private void OnInventoryGetMultiplier(Entity<ModifyStandingUpTimeComponent> ent, ref InventoryRelayedEvent<GetStandingUpTimeMultiplierEvent> args)
+    private void OnGetTime(Entity<ModifyStandingUpTimeComponent> ent, ref GetStandUpTimeEvent args)
     {
-        args.Args.Multiplier *= ent.Comp.Multiplier;
-    }
-
-    private void OnGetMultiplier(Entity<ModifyStandingUpTimeComponent> ent, ref GetStandingUpTimeMultiplierEvent args)
-    {
-        args.Multiplier *= ent.Comp.Multiplier;
+        args.DoAfterTime *= ent.Comp.Multiplier;
     }
 }

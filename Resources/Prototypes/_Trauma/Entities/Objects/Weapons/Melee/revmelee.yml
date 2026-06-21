@@ -113,8 +113,7 @@
   - type: Construction
     graph: RevSword
   - type: Parry
-    maxParries: 3
-    maxReflects: 0
+    parryExhaustionCost: 0.25
     parryMinSkill: 40
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg

@@ -31,4 +31,10 @@ public sealed partial class ProjectileComponent
 
     [DataField]
     public Vector2 TargetCoordinates;
+
+    /// <summary>
+    /// Original shooter, used for prediction purposes
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? OriginalShooter;
 }

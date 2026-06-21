@@ -89,7 +89,7 @@ public sealed partial class VentHordeRule : StationEventSystem<VentHordeRuleComp
     private EntityUid? ChooseVent()
     {
         // Get a station
-        if (!TryGetRandomStation(out var station))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
         {
             return null;
         }
@@ -107,7 +107,7 @@ public sealed partial class VentHordeRule : StationEventSystem<VentHordeRuleComp
             if (HasComp<VentHordeSpawnerComponent>(uid))
                 continue;
 
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
+            if (transform.GridUid is { } grid && stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
             {
                 validLocations.Add(uid);
             }

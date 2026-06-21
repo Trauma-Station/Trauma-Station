@@ -12,6 +12,8 @@
     sprite: _Trauma/Clothing/Shoes/Boots/workboots.rsi
   - type: ClothingSlowOnDamageModifier
     modifier: 0.5
+  - type: SlowdownResistance
+    reduction: 0.1
   - type: Construction
     graph: RevBoots
     defaultTarget: finished

@@ -2,6 +2,7 @@
 
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Inventory;
+using Content.Shared.Stunnable;
 using Content.Trauma.Common.Glue;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Lube;
@@ -31,5 +32,7 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GluedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, LubedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, ModifyViewconeAngleEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, GetStandUpTimeEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, BeforeMovespeedModifierAppliedEvent>(_inventory.RelayEvent);
     }
 }

@@ -1,9 +1,13 @@
 - type: entity
-  parent: ClothingShoesBaseButcherable
+  parent: [ClothingShoesBaseButcherable, BaseEngineeringCargoContraband] # Trauma - contraband
   id: ClothingShoesBootsWork
   name: workboots
   description: Engineering lace-up work boots for the especially blue-collar.
   components:
+  # <Trauma>
+  - type: SlowdownResistance
+    reduction: 0.1
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/Boots/workboots.rsi
   - type: Clothing

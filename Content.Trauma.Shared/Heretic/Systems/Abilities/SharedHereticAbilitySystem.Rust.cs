@@ -71,7 +71,7 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnBeforeHarmfulAction(Entity<RustbringerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled || args.Type == HarmfulActionType.Harm)
+        if (args.Cancelled || args.Type is HarmfulActionType.Disarm or HarmfulActionType.Grab)
             return;
 
         if (!IsOnRust(ent))
