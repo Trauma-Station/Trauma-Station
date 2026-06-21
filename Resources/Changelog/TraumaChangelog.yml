@@ -10374,3 +10374,10 @@ Entries:
   id: 1176
   time: '2026-06-20T15:49:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3249
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to instantly kill locker mimics with a screwdriver.
+  id: 1177
+  time: '2026-06-21T00:08:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3264
