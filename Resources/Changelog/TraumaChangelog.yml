@@ -10385,7 +10385,8 @@ Entries:
   changes:
   - type: Tweak
     message: >-
-      Changed forged katanas to have higher base damage and less attack speed. They focus on delimbing compared to swords.
+      Changed forged katanas to have higher base damage and less attack speed.
+      They focus on delimbing compared to swords.
   id: 1178
   time: '2026-06-21T00:58:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3265
@@ -10446,3 +10447,14 @@ Entries:
   id: 1183
   time: '2026-06-21T09:11:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3246
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      Workboots now give 10% slowdown resistance, also they are now engi/cargo
+      restricted contra and are available for cargo tech.
+  - type: Fix
+    message: Fix combat boots not actually reducing time to stand.
+  id: 1184
+  time: '2026-06-21T11:29:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3269
