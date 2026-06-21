@@ -67,6 +67,10 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        // <Trauma>
+        if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
+            return;
+        // </Trauma>
 
         var curTime = _timing.CurTime;
         var query = EntityQueryEnumerator<BloodstreamComponent>();
