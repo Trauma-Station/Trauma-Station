@@ -301,7 +301,7 @@
       types:
         Slash: 15
       woundSeverityMultipliers:
-        Slash: 2
+        Slash: 5
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tag

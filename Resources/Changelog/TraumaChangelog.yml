@@ -10385,8 +10385,7 @@ Entries:
   changes:
   - type: Tweak
     message: >-
-      Changed forged katanas to have higher base damage and less wound
-      multipliers.
+      Changed forged katanas to have higher base damage and less attack speed. They focus on delimbing compared to swords.
   id: 1178
   time: '2026-06-21T00:58:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3265
