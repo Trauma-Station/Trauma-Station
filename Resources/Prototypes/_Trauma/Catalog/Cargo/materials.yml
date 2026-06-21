@@ -1,0 +1,29 @@
+- type: cargoProduct
+  id: MaterialWood
+  icon:
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: wood_3
+  product: CrateMaterialWood
+  cost: 1000
+  category: cargoproduct-category-name-materials
+  group: market
+
+- type: cargoProduct
+  id: MaterialSilver
+  icon:
+    sprite: Objects/Materials/ingots.rsi
+    state: silver_3
+  product: CrateMaterialSilver
+  cost: 4000
+  category: cargoproduct-category-name-materials
+  group: market
+
+- type: cargoProduct
+  id: MaterialGold
+  icon:
+    sprite: Objects/Materials/ingots.rsi
+    state: gold_3
+  product: CrateMaterialGold
+  cost: 5000
+  category: cargoproduct-category-name-materials
+  group: market

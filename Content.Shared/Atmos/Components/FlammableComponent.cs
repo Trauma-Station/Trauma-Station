@@ -48,7 +48,7 @@ namespace Content.Shared.Atmos.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public float MaximumFireStacks = 15f; // Goob - was 10f
+        public float MaximumFireStacks = 10f;
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]

@@ -107,10 +107,10 @@
       weight: 3.0
     - id: XenoArtifactHealAll
       weight: 1.0
-    - id: XenoArtifactTesla # Goob edit - funny
-      weight: 0.1
-    - id: XenoArtifactSingularity
-      weight: 0.1
+    # - id: XenoArtifactTesla # Trauma, These fucking suck
+    #   weight: 0.1
+    # - id: XenoArtifactSingularity # Trauma, These fucking suck
+    #   weight: 0.1
     - id: XenoArtifactExplosionScary
       weight: 1.0
     - id: XenoArtifactBoom
@@ -1283,37 +1283,37 @@
         Cold: -100
         Shock: -100
 
-- type: entity
-  id: XenoArtifactTesla
-  parent: BaseOneTimeXenoArtifactEffect
-  description: Mass destruction
-  components:
-  - type: XAEApplyComponents
-    applyIfAlreadyHave: true
-    refreshOnReactivate: true
-    components:
-    - type: EntityTableSpawner
-      absolute: true # Trauma
-      deleteSpawnerAfterSpawn: false
-      table: !type:AllSelector
-        children:
-        - id: Singularity
+# - type: entity # Trauma, these fucking suck
+#   id: XenoArtifactTesla
+#   parent: BaseOneTimeXenoArtifactEffect
+#   description: Mass destruction
+#   components:
+#   - type: XAEApplyComponents
+#     applyIfAlreadyHave: true
+#     refreshOnReactivate: true
+#     components:
+#     - type: EntityTableSpawner
+#       absolute: true # Trauma
+#       deleteSpawnerAfterSpawn: false
+#       table: !type:AllSelector
+#         children:
+#         - id: Singularity
 
-- type: entity
-  id: XenoArtifactSingularity
-  parent: BaseOneTimeXenoArtifactEffect
-  description: Imminent doom
-  components:
-  - type: XAEApplyComponents
-    applyIfAlreadyHave: true
-    refreshOnReactivate: true
-    components:
-    - type: EntityTableSpawner
-      absolute: true # Trauma
-      deleteSpawnerAfterSpawn: false
-      table: !type:AllSelector
-        children:
-        - id: TeslaEnergyBall
+# - type: entity # Trauma, these fucking suck
+#   id: XenoArtifactSingularity
+#   parent: BaseOneTimeXenoArtifactEffect
+#   description: Imminent doom
+#   components:
+#   - type: XAEApplyComponents
+#     applyIfAlreadyHave: true
+#     refreshOnReactivate: true
+#     components:
+#     - type: EntityTableSpawner
+#       absolute: true # Trauma
+#       deleteSpawnerAfterSpawn: false
+#       table: !type:AllSelector
+#         children:
+#         - id: TeslaEnergyBall
 
 - type: entity
   id: XenoArtifactExplosionScary

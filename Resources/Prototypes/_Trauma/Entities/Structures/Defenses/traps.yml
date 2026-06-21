@@ -1,0 +1,106 @@
+- type: entity
+  parent: [ BaseStructure, BaseMinorContraband ]
+  id: BarbedWireStructure
+  name: barbed wire
+  description: A large mass of steel wire with nasty barbs.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/barbwire.rsi
+    state: structure
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BarbedWire1:
+            min: 0
+            max: 1
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+  - type: Physics
+    bodyType: Static
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: _Trauma/Footsteps/barbedwire.ogg
+      params:
+        volume: 8
+  - type: DamageContacts
+    damage:
+      types:
+        Slash: 3
+  # - type: Construction
+  #   graph: RevMachine
+  #   deconstructionTarget: null
+  #   node: unfinished
+
+- type: entity
+  parent: [ MiscSignallerBase, BaseMinorContraband ]
+  id: BarbedWireStructure
+  name: trip wire
+  description: A wire that sends a signal when walked over, can be disarmed with wirecutters.
+  components:
+  - type: TriggerOnCollide
+    fixtureID: floortrap
+    maxTriggers: 1
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/trap_tripwire.rsi
+    state: icon
+  # - type: Construction
+  #   graph: PipeBomb
+  #   node: cable
+  #   defaultTarget: pipebomb
+
+- type: entity
+  parent: [ BaseStructure, BaseMinorContraband ]
+  id: BarbedWireStructure
+  name: pipe bomb trap
+  description: A pipebomb linked to a remote signal. Can be disarmed with wirecutters.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/trap_pipebomb.rsi
+    state: icon
+  # - type: Construction
+  #   graph: PipeBomb
+  #   node: cable
+  #   defaultTarget: pipebomb
+  - type: TimerTrigger
+    delay: 1
+    examinable: false
+    initialBeepDelay: 0
+    beepSound: /Audio/Effects/lightburn.ogg
+  - type: RandomTimerTrigger
+    min: 1
+    max: 2
+  - type: ExplodeOnTrigger
+    keysIn:
+    - timer
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 50
+    intensitySlope: 5
+    maxIntensity: 6
+    canCreateVacuum: false
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+  - type: TriggerOnSignal
+  - type: DeviceLinkSink
+    ports:
+    - Trigger

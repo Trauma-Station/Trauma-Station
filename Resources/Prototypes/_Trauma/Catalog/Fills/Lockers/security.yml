@@ -99,15 +99,16 @@
 - type: entity
   parent: BaseTraumaGunSafe
   id: GunSafeLaserSpec
-  name: specialist laser safe
+  name: surplus ballistic safe
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:NestedSelector
-        tableId: FillGunSafeLaserT2
+        tableId: FillGunSafeRandomBallistic
   - type: StationAlertLevelLock
     lockedAlertLevels:
     - green
+    - blue
     - yellow
 
 - type: entity
@@ -194,6 +195,10 @@
       amount: 2
     - id: WeaponLaserGunAssault
       amount: 1
+    - id: WeaponTemperatureGun
+      amount: 1
+    - id: WeaponEnergyIonRifle
+      amount: 1
 
 - type: entityTable
   id: FillGunSafeShotgunsT1
@@ -213,11 +218,66 @@
       amount: 2
 
 - type: entityTable
-  id: FillGunSafeLaserT2
+  id: FillGunSafeRandomBallistic
   table: !type:AllSelector
     children:
-    - id: WeaponTemperatureGun
-    - id: WeaponEnergyIonRifle
+    - id: WeaponRifleLecter
+      prob: 0.2
+      amount: 1
+    - id: WeaponRifleLecter
+      prob: 0.2
+      amount: 1
+    - id: WeaponPistolMk58
+      prob: 0.6
+      amount: 1
+    - id: WeaponPistolMk58
+      prob: 0.6
+      amount: 1
+    - id: WeaponPistolMk58
+      prob: 0.6
+      amount: 1
+    - id: WeaponSubMachineGunDrozd
+      prob: 0.5
+      amount: 1
+    - id: WeaponSubMachineGunDrozd
+      prob: 0.5
+      amount: 1
+    - id: WeaponSubMachineGunWt550
+      prob: 0.3
+      amount: 1
+    - id: WeaponSubMachineGunWt550
+      prob: 0.3
+      amount: 1
+    - id: WeaponRevolverDeckard
+      prob: 0.1
+      amount: 1
+    - id: WeaponRevolverDeckard
+      prob: 0.1
+      amount: 1
+    - id: WeaponShotgunDoubleBarreled
+      prob: 0.4
+      amount: 1
+    - id: WeaponShotgunDoubleBarreled
+      prob: 0.4
+      amount: 1
+    - id: WeaponShotgunKammerer
+      prob: 0.3
+      amount: 1
+    - id: WeaponShotgunKammerer
+      prob: 0.3
+      amount: 1
+    - id: WeaponShotgunEnforcer
+      prob: 0.2
+      amount: 1
+    - id: WeaponShotgunEnforcer
+      prob: 0.2
+      amount: 1
+    - id: WeaponRifleAnnie
+      prob: 0.01
+      amount: 1
+    - id: WeaponShotgunAntelope
+      prob: 0.01
+      amount: 1
 
 - type: entityTable
   id: FillGunSafeMeleeT1

@@ -963,11 +963,11 @@
     Telecrystal: 20 # Trauma - was 4, 5x
   categories:
   - UplinkDisruption
-  #conditions: # Goob - no
-  #- !type:StoreWhitelistCondition
-  #  blacklist:
-  #    tags:
-  #    - NukeOpsUplink
+  conditions:
+  - !type:StoreWhitelistCondition
+   blacklist:
+     tags:
+     - NukeOpsUplink
 
 - type: listing
   id: UplinkSyndicateMartyrModule

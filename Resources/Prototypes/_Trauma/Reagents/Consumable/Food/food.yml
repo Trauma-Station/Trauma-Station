@@ -36,8 +36,20 @@
         type: Local
         messages: [ "reagent-popup-lab-grown-nutriment" ]
         probability: 0.05
-  pricePerUnit: -300
+      - !type:InfectDisease
+        probability: 0.05
+        scaleProbability: true
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Rat, Vox ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: LabGrownNutriment
+          min: 0.01
+        disease: DiseaseGutWorms
+        mutate: false
 
+  pricePerUnit: -300
 - type: reagent
   id: FullFatOils
   name: reagent-name-full-fat-oils

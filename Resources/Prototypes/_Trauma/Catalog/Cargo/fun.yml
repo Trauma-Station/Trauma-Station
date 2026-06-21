@@ -9,3 +9,13 @@
   cost: 2000
   category: cargoproduct-category-name-fun
   group: market
+
+- type: cargoProduct
+  id: FunAnvil
+  icon:
+    sprite: _Trauma/Structures/Forging/anvil.rsi
+    state: icon
+  product: AnvilComplete
+  cost: 7500
+  category: cargoproduct-category-name-fun
+  group: market
