@@ -10381,3 +10381,12 @@ Entries:
   id: 1177
   time: '2026-06-21T00:08:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3264
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed forged katanas to have higher base damage and less wound
+      multipliers.
+  id: 1178
+  time: '2026-06-21T00:58:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3265
