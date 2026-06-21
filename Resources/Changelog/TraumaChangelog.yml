@@ -10458,3 +10458,12 @@ Entries:
   id: 1184
   time: '2026-06-21T11:29:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3269
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Raised scarp's price in the uplink. Suffer.
+  - type: Remove
+    message: Removed scarp's ability to be discounted. Suffer.
+  id: 1185
+  time: '2026-06-21T19:10:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3241
