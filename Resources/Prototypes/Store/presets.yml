@@ -71,8 +71,6 @@
     - HandTeleporterStealSideJob
     - MagbootsStealSideJob
     - ClipboardStealSideJob
-    - KnuckleDustersStealSideJob
-    - CorgiMeatStealSideJob
     - CaptainJetpackStealSideJob
     - CaptainGunStealSideJob
     # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000

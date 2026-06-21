@@ -39,14 +39,6 @@
   id: ClipboardStealSideJob
 
 - type: entity
-  parent: [BaseMediumSideJob, KnuckleDustersStealObjective]
-  id: KnuckleDustersStealSideJob
-
-- type: entity
-  parent: [BaseMediumSideJob, CorgiMeatStealObjective]
-  id: CorgiMeatStealSideJob
-
-- type: entity
   parent: [BaseMediumSideJob, CaptainJetpackStealObjective]
   id: CaptainJetpackStealSideJob
 
