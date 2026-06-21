@@ -858,7 +858,7 @@
   id: CargoTechnicianShoes
   name: loadout-group-cargo-technician-shoes
   loadouts:
-  - BlackShoes
+  - WorkBoots # Trauma - was BlackShoes
   - CargoWinterBoots
 
 - type: loadoutGroup
