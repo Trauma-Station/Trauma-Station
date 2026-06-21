@@ -202,6 +202,8 @@
   - type: PhysicalComposition
     materialComposition:
       Wood: 500
+  - type: StaticPrice
+    price: 50
   # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/towercap.rsi
@@ -226,6 +228,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 500 # 5 sheets
+  - type: StaticPrice
+    price: 75
   # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/steelcap.rsi
