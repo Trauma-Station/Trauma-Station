@@ -10420,3 +10420,30 @@ Entries:
   id: 1182
   time: '2026-06-21T05:42:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3268
+- author: Aviu
+  changes:
+  - type: Add
+    message: Parries/reflects reworked.
+  - type: Fix
+    message: Fix eshield breaking.
+  - type: Fix
+    message: Fix guns not being able to target anything other than chest.
+  - type: Tweak
+    message: Gauss guns buffed.
+  - type: Tweak
+    message: Esword, web vest and swat helmet are cheaper.
+  - type: Tweak
+    message: Coscult weapons damage nerfed by 40%
+  - type: Tweak
+    message: Helmets resistance is reduced up close on precise hits now.
+  - type: Tweak
+    message: Statveka slowdown nerfed.
+  - type: Tweak
+    message: Increased chances of part tareting.
+  - type: Tweak
+    message: Desword deals slightly more damage on light attacks.
+  - type: Tweak
+    message: energy bola is 1x2 again.
+  id: 1183
+  time: '2026-06-21T09:11:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3246
