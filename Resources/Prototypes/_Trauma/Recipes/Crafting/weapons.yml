@@ -70,3 +70,31 @@
   practical:
     MetalworkingKnowledge: 1
   useQuality: false
+
+- type: construction
+  id: barbedbat
+  graph: WoodenBat
+  startNode: start
+  targetNode: barbedwire
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
+  id: nailboard
+  graph: NailBoard
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 2

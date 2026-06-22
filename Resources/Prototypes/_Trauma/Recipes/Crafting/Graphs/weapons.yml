@@ -365,3 +365,61 @@
 
   - node: finish
     entity: CartridgeBallBearing
+
+# NailBoard
+
+- type: constructionGraph
+  id: NailBoard
+  start: start
+  graph:
+
+    - node: start
+      edges:
+        - to: incompleteBoard
+          steps:
+            - material: WoodPlank
+              amount: 1
+
+    - node: incompleteBoard
+      entity: NailBoardUnfinished
+      edges:
+        - to: finish
+          steps:
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+          - tag: Nail
+            name: construction-graph-tag-nail
+            icon:
+              sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+              state: icon
+          - tool: Hammering
+            doAfter: 0.1
+
+    - node: finish
+      entity: NailBoardWeapon

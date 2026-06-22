@@ -13,9 +13,9 @@
         Blunt: 10
         Slash: 2
         Structural: 5
-  # - type: Construction
-  #   graph: WoodenBat
-  #   node: bat
+  - type: Construction
+    graph: WoodenBat
+    node: barbedwire
   - type: PhysicalComposition
     materialComposition:
       Wood: 250
@@ -37,22 +37,24 @@
     transferAmount: 5
     solution: melee
 
-# - type: entity
-
-#   parent: [BaseItem, BaseMinorContraband]
-#   id: NailBoardWeapon
-#   name: unfinished nail board
-#   description: Needs some nails.
-#   components:
-  # - type: Construction
-  #   graph: WoodenBat
-  #   node: bat
-  # - type: PhysicalComposition
-  #   materialComposition:
-  #     Wood: 250
-  # - type: Tag
-  #   tags:
-  #   - Recyclable
+- type: entity
+  parent: [BaseItem, BaseMinorContraband]
+  id: NailBoardUnfinished
+  name: unfinished nail board
+  description: Needs some nails.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 250
+  - type: Tag
+    tags:
+    - Recyclable
+  - type: Construction
+    graph: NailBoard
+    node: incompleteBoard
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/nailboard.rsi
+    state: icon
 
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, WoodDurabilityWeak ]
@@ -77,9 +79,6 @@
     size: Large
     shape:
     - 0,0,0,3
-  # - type: Construction
-  #   graph: WoodenBat
-  #   node: bat
   - type: PhysicalComposition
     materialComposition:
       Wood: 250
@@ -93,6 +92,9 @@
     prototype: NailBoardTrap
     doAfter: 0.5
     removeOnInteract: true
+  - type: Construction
+    graph: NailBoard
+    node: finish
 
 - type: entity
   parent: [ BaseItem, BaseRevMinorContraband ]
@@ -142,6 +144,8 @@
         Piercing: 15
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

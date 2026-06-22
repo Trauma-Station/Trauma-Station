@@ -50,10 +50,21 @@
           bounds: "-0.5,-0.5,0.5,0.5"
         layer:
         - MidImpassable
-  # - type: Construction
-  #   graph: RevMachine
-  #   deconstructionTarget: null
-  #   node: unfinished
+  - type: Construction
+    graph: BarbedWire
+    deconstructionTarget: null
+    node: finish
+  - type: InteractionOutline
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Slash: 5
+    popupText: barbed-contact-damage
+    interactSound: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
   parent: [ BaseMinorContraband ]
@@ -112,6 +123,8 @@
     range: 40
   - type: Damageable
   - type: InteractionOutline
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -122,10 +135,10 @@
         acts: ["Destruction"]
   - type: TriggerOnDamage
     threshold: 1
-  # - type: Construction
-  #   graph: PipeBomb
-  #   node: cable
-  #   defaultTarget: pipebomb
+  - type: Construction
+    graph: TripWire
+    node: finish
+    defaultTarget: null
 
 - type: entity
   parent: [ BaseStructure, BaseMinorContraband ]

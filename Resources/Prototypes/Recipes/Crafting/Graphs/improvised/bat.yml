@@ -33,3 +33,14 @@
 
     - node: bat
       entity: BaseBallBat
+      # <Trauma>
+      edges:
+        - to: barbedwire
+          steps:
+            - material: BarbedWire
+              amount: 3
+              doAfter: 5
+
+    - node: barbedwire
+      entity: BaseBallBatBarb
+      # </Trauma>

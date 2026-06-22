@@ -21,6 +21,30 @@
     RevolutionaryKnowledge: 3
 
 - type: construction
+  id: BarbWireStructure
+  graph: BarbedWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: TripWire
+  graph: TripWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+  useQuality: false
+
+- type: construction
   abstract: true
   id: BaseRepairItem
   targetNode: finish

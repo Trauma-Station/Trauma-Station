@@ -96,3 +96,63 @@
           amount: 1
   - node: finish
     entity: Whetstone
+
+- type: constructionGraph
+  id: BarbedWire
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - material: BarbedWire
+          amount: 2
+          doAfter: 3
+
+  - node: finish
+    entity: BarbedWireStructure
+    edges:
+    - to: finish
+      completed:
+      - !type:SpawnPrototype
+          prototype: BarbedWire1
+          amount: 2
+      - !type:DeleteEntity {}
+      steps:
+        - tool: Cutting
+          doAfter: 5
+
+# TripWire
+
+- type: constructionGraph
+  id: TripWire
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - material: CableLV
+          amount: 5
+          doAfter: 3
+        - tag: RemoteSignaller
+          name: construction-graph-tag-remotesignaller
+          icon:
+            sprite: Objects/Devices/signaller.rsi
+            state: signaller
+
+  - node: finish
+    entity: TrapTripWire
+    edges:
+    - to: finish
+      completed:
+      - !type:SpawnPrototype
+          prototype: RemoteSignaller
+          amount: 1
+      - !type:SpawnPrototype
+          prototype: RemoteSignaller
+          amount: 1
+      - !type:DeleteEntity {}
+      steps:
+        - tool: Cutting
+          doAfter: 5
