@@ -1,7 +1,8 @@
-using Content.Shared.Inventory;
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared.Waypointer.Events;
+using Content.Shared.Inventory;
+
+namespace Content.Trauma.Shared.Waypointer.Events;
 
 /// <summary>
 /// Whenever a clothing that shows waypointers is equipped.
