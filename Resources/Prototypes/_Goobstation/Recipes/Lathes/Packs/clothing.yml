@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# This could be put into wizden packs *but* this should break less
 - type: latheRecipePack
   id: ClothingCasualJumpsuits # if you're adding more, split them into departments
   recipes:

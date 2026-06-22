@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Root selector
 - type: megafaunaSelector
   id: Hierophant
   selector: !type:AllMegafaunaSelector

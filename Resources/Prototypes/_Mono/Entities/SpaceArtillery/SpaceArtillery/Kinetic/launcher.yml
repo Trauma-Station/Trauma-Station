@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# L85 20mm
+
 - type: entity
   id: WeaponShuttleKineticL85
   name: L85 20mm autocannon

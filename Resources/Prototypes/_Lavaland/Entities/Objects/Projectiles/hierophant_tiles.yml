@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# hierophant damaging thing
 - type: entity
   id: LavalandHierophantSquare
   categories: [ DoNotMap ]

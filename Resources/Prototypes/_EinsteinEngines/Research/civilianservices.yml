@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Tier 2
 - type: technology
   id: BasicTranslation
   name: research-technology-basic-translation

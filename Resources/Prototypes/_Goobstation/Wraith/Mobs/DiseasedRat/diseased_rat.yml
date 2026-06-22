@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# This holds all forms of the diseased rat
 - type: diseasedRatFormUnlock
   id: MediumDiseasedRat
   filthRequired: 6

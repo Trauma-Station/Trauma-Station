@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Slugcat AI hologram (iterator??)
 - type: stationAiCustomization
   id: StationAiHologramScurret
   name: station-ai-hologram-scurret

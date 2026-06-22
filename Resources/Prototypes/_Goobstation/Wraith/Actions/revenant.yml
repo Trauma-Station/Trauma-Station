@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# This is the only true revenant
+# 1. 9. 8. 4.
+
 - type: entity
   id: ActionRevenantPush
   name: Push

@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# random bits and bobs used to craft other items
+
 - type: construction
   id: HexNutDouble
   graph: HexNutDouble

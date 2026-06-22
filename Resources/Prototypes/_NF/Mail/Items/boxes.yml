@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Mail-only boxes. If/when something uses these outside of the mail, move the entry into Catalog/Fills.
+
 - type: entity
   name: scented soap sampler pack
   parent: BoxCardboard

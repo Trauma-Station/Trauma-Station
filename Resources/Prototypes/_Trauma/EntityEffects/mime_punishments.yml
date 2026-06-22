@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Effect ran on mimes when they break vow
 - type: entityEffect
   id: MimePunishments
   effects:

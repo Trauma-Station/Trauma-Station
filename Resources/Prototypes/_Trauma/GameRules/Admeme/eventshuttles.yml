@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+## Autocall CBURN Shuttle
 - type: entity
   parent: BaseGameRule
   id: SpawnCBURNNoAnnounce

@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Sol Common (Humans/Dwarves)
 - type: font
   id: NotoSansSC
   path: /Fonts/NotoSans/NotoSansSC-Regular.ttf

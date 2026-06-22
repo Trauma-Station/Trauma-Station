@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# The universal language. This is technically used as a fallback for simulating the pre-languages
+# style of Chat, and is not normally accessible by players.
 - type: language
   id: Universal
   obfuscation:

@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# /tg/ gases
+
 - type: reagent
   id: BZ
   name: reagent-name-bz

@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Ripley MK-II
 - type: latheRecipe
   id: RipleyMKIIHarness
   result: RipleyMKIIHarness

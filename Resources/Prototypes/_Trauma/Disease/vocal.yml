@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# From Metal Gear Solid V: The Phantom Pain, created by Hideo Kojima
+
 - type: entity
   abstract: true
   parent: DiseaseBase

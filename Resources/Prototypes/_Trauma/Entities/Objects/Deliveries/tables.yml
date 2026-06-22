@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+## Letters
+
+# keep weights in sync with LetterCommonEntityTable
 - type: entityTable
   id: LetterCommonTrauma
   table: !type:GroupSelector

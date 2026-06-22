@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# The ID is what is searched for on the paper, coming after the target identifier.
+# Any spaces on the written portion will be removed, so keep it all lowercase and one word.
+
 - type: clause
   id: soulownership
   clauseWeight: 25

@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Papers (letters, ad copy)
+# TODO: these should really be based on localization strings.
 - type: entity
   id: PaperMailNFPowerTool
   name: Hazard Fraught advertisement

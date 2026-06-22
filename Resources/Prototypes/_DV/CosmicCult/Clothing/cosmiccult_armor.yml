@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+############ [ HARDSUIT ] ############
+
+# COSMIC CULT HARDSUIT BODY
 - type: entity
   parent: [ ClothingOuterHardsuitBase ]
   id: ClothingOuterHardsuitCosmicCult

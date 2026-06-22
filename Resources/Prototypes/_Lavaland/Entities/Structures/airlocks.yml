@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# this goes on lavaland, unlimited
 - type: entity
   parent: AirlockGlassShuttle
   id: AirlockExternalGlassShuttleMining

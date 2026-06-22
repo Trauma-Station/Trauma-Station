@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Mime Malaise
 - type: entity
   parent: ActionMimeMalaise
   id: ActionMimeMalaiseII

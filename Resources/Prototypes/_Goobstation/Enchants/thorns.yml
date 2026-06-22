@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Deals damage to melee attackers, scaling linearly with level
 - type: entity
   parent: BaseEnchant
   id: EnchantThorns

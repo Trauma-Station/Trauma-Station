@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+## Antag schedulers: runs a limited number of midround antags
+
 - type: entity
   parent: BaseGameRule
   id: BasicAntagEventScheduler

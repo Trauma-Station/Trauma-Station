@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Accents that work off of full replacements rather than word replacements.
+
 - type: accent
   id: gondola
   fullReplacements:

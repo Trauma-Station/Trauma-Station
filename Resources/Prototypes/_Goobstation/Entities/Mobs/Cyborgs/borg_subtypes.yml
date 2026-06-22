@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Generic subtypes
 - type: borgSubtype
   parentBorgType: generic
   id: generic_default

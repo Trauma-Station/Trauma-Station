@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# The "Default Language" for everyone other than Universal.
+# Previously known as GalacticCommon, assume any reference is to this.
 - type: language
   id: TauCetiBasic
   obfuscation:

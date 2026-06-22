@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# TODO: BRUH DO THIS WITH CODE
+
+# Unloaded
+
 - type: entity
   parent: BaseStructure
   id: BloomeryCold
