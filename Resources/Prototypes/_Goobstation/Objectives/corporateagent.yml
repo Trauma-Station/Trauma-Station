@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Normal Traitor Objectives
-
 - type: entity
   abstract: true
   parent: BaseTraitorObjective

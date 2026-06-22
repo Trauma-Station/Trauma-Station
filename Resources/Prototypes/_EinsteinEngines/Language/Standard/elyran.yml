@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Spoken by the Republic of Elyra.
 - type: language
   id: Elyran
   speech:

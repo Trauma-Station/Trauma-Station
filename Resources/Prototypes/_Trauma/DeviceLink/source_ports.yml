@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Circuits
-
 - type: sourcePort
   id: Circuit1
   name: signal-port-name-circuit-1

@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# First we lava, then we land... Let's Lavaland!
 - type: biomeTemplate
   id: LavaLand
   layers:

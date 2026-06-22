@@ -1,9 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Tier 1
-
-# Tier 2
-
 - type: technology
   id: AdvancedTreatment
   name: research-technology-advanced-treatment

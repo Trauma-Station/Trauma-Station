@@ -1,9 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-## Buckshot
-
-# Carpshot
-
 - type: entity
   id: HighCaliberPelletShotgun
   name: pellet (8 Gauge carpshot)

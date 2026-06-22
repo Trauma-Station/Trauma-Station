@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Exosuit
 - type: latheCategory
   id: Vim
   name: lathe-category-mechs-vim

@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# strong but can be killed with holy easily
 - type: damageModifierSet
   id: SlaughterDemon
   coefficients:

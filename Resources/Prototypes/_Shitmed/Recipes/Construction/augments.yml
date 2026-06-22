@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Power
-
 - type: construction
   id: AugmentPowerCellSlot
   graph: AugmentPowerCellSlot

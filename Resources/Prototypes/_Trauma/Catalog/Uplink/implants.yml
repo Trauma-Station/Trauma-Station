@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# this is basically just for reinforcements as they don't get free hypoports.
 - type: listing
   id: UplinkHypoportSecureNukie
   name: uplink-hypoport-secure-nukie-name

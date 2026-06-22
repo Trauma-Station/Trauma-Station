@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Goobstation TODO: this should be in a goobstation folder
 - type: marking
   id: HumanHairBraidedExtension
   bodyPart: Hair

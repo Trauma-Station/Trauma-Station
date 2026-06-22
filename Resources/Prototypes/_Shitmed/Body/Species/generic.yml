@@ -1,10 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# not really a species but whatever
-
-## Base
-
-# TODO: if anyone makes an organ rejection mechanic, make these immune to it
 - type: entity
   abstract: true
   parent: OrganBaseFleshy

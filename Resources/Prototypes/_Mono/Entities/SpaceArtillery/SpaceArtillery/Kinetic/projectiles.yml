@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# CHARON
-
 - type: entity
   id: ShipRailgunProjectile
   name: M381 CHARON 280mm 75.25 kg slug

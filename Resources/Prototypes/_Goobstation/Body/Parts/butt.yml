@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# TODO: if someone ever makes a photocopier port ass.dmi or whatever and give every species a unique one
 - type: entity
   parent: [ OrganBase, ClothingHeadBase ]
   id: Butt

@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Throws mobs back when you hit them
 - type: entity
   parent: BaseEnchant
   id: EnchantKnockback

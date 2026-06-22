@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# TODO: A trait that removes your secondary language so that players have options besides taking foreigner
-
 - type: trait
   id: Calcic
   name: language-Calcic-name # The other language traits have identical name and desc anyway, so why bother copy-pasting locale?

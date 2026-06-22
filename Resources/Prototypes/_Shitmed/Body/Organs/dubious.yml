@@ -1,8 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Abductor glands
-# chicken is best
-
 - type: entity
   abstract: true
   id: OrganDubiousBase

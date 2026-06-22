@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Linear bonus damage to melee attacks with this item
 - type: entity
   parent: BaseEnchant
   id: EnchantSharpness

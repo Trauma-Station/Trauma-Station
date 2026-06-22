@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-## Parent File to easily add more attributes, here it's used for plasmaman mostly
 - type: entity
   abstract: true
   parent: ClothingOuterBase

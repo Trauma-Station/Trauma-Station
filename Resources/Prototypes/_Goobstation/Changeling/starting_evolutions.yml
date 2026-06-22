@@ -1,8 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-## These are the starting "evolutions" presets for changelings.
-
-## Roundstart changelings (typically)
 - type: changelingStartingEvolution
   id: DefaultChangeling
   components:

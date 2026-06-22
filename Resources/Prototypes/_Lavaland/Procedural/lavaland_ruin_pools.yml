@@ -1,9 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Lavaland ruins are loaded as separate grids.
-# HugeRuins should contain the biggest and most valuable ruins,
-# while SmallRuins should spawn only small and not important ruins.
-
 - type: lavalandRuinPool
   id: LavalandRuins
   gridRuins:

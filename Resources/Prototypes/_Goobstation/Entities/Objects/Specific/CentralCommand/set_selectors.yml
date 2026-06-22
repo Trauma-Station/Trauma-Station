@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# ERT
-
 - type: entity
   id: ERTSecurityUndeterminedWeapon
   name: emergency response weaponry pack

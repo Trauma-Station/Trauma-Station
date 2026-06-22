@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Trauma.Client.Weapons.Ranged;
 
 public sealed partial class BulletHoleVisualizerSystem : EntitySystem

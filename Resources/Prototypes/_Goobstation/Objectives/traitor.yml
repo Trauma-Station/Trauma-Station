@@ -1,9 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Kill
-
-# random person
-# This is a separate objective to prevent metagaming by having a different condition for killing traitors, by also requiring you just kill someone entirely
 - type: entity
   parent: [BaseTraitorObjective, BaseKillObjective]
   id: PermaKillRandomPersonObjective

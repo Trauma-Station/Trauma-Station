@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# like HolosignWetFloor but no sprite or crucially, TimedDespawn
-# this is so holofans can never run out
 - type: entity
   abstract: true
   id: BaseHolosign

@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# indestructible and invisible occluder wall, makes it look like floor just fades into nothing
 - type: entity
   parent: BaseStructure
   id: WallDimension

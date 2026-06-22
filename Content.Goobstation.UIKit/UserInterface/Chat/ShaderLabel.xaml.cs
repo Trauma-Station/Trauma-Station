@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 namespace Content.Goobstation.UIKit.UserInterface.Chat;
 
 public sealed class ShaderLabel : Label

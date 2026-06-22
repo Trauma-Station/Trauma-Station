@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# The Modsuit Itself, This is just a Deathsquad modsuit, but reskined for CC Officials
 - type: entity
   parent: [ ClothingModsuitStandardNoStorage, BaseSyndicateContraband ]
   id: ClothingModsuitContractor

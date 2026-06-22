@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Hierophant club
 - type: entity
   id: ActionHierophantClubTileMovement
   name: Curse of Tile Movement

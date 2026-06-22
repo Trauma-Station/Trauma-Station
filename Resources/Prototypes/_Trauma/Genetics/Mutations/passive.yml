@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# no Biotech Compatibility as there are no skillchips
-
 - type: entity
   parent: BaseMutation
   id: MutationClever
