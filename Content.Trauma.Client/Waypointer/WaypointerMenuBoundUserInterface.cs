@@ -1,19 +1,18 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Actions.Components;
-using Content.Shared.Waypointer;
-using Content.Shared.Waypointer.Components;
-using Content.Shared.Waypointer.Events;
+using Content.Trauma.Shared.Waypointer;
+using Content.Trauma.Shared.Waypointer.Components;
+using Content.Trauma.Shared.Waypointer.Events;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
-namespace Content.Client.Waypointer;
+namespace Content.Trauma.Client.Waypointer;
 
 [UsedImplicitly]
 public sealed partial class WaypointerMenuBoundUserinterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private SimpleRadialMenu? _menu;
 
@@ -56,7 +55,7 @@ public sealed partial class WaypointerMenuBoundUserinterface(EntityUid owner, En
         // This iterates through every waypointer to add them as options.
         foreach (var pair in waypointer.WaypointerProtoIds)
         {
-            if (!_prototype.Resolve(pair.Key, out var prototype))
+            if (!_proto.Resolve(pair.Key, out var prototype))
                 continue;
             // If the waypointer is active, we want to the get sprite for disabling it.
             var waypointerState = pair.Value ? "disable"  : "enable";
