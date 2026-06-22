@@ -1,0 +1,163 @@
+- type: entity
+  categories: [HideSpawnMenu]
+  id: AlienFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      ClothingCostumeAbductorHead: 1
+      ClothingCostumeAbductor: 1
+      PlushieAbductor: 1
+      ClothingBackpackDuffelAbductor: 0.25
+      ClothingBackpackAbductor: 0.25
+      ClothingAbductorBelt: 0.25
+      ClothingOuterCoatAbductor: 0.10
+      ClothingHeadHelmetAbductor: 0.10
+      ClothingAbductorBeltFilled: 0.05
+      ClothingBackpackDuffelAbductorFilled: 0.05
+      AbductorHandcuffs: 0.05
+      WeaponAlien: 0.01
+      ClothingHeadsetAltAbductor: 0.01
+      ClothingOuterArmorAbductor: 0.01
+      RandomHumanoidVisitorAlien: 0.01
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: BingleFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      ChemistryBottleBingleJuice: 1
+      FloorTileItemBingleFull: 1
+      PlushieBongle: 0.5
+      PlushieBingle: 0.5
+      CargoBingleSpawnCoin: 0.5
+      PlushieBinglePony: 0.5
+      PlushieBingleSmall: 0.5
+      FoodSoupBingle: 0.5
+      MobBingleHunk: 0.10
+      MobBingleSlavering: 0.10
+      MobBingleBoney: 0.10
+      BinglePit: 0.01
+      MobTurkle: 0.01
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: BoyfisherFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      MobLivingCurse: 1
+      ClothingMaskGoldenCursed: 0.5
+      LavalandCursedHeart: 0.5
+      BaseBarrelChemRadioactiveFilledUranium: 0.5
+      BaseBarrelChemRadioactiveFilledRadium: 0.5
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: NukeDiskFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      VinylSleeveNukeDisk: 1
+      NukeDiskFake: 1
+      NukeCodePaperStation: 0.01
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: GibFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      GreedStick: 0.999
+      MeleeDebugGib: 0.001
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: MutantFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      OrganShadowDemonHeart: 0.05
+      OrganCarpHeart: 0.05
+      OrganBloodsuckerHeart: 0.05
+      OrganCarpLungs: 0.05
+      OrganXenomorphEyes: 0.05
+      OrganLaserEyes: 0.05
+      OrganDragonLungs: 0.05
+      OrganGoliathHeart: 0.05
+      OrganSlaughterDemonHeart: 0.05
+      OrganMouseEggSack: 0.05
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: NukerFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      PinpointerSyndicateNuclearFission: 0.5
+      ToyNuke: 1
+      NukeOpsDeclarationOfWarBroken: 0.5
+      PlushieNuke: 1
+      BalloonOperative: 0.25
+      BalloonJuggernaut: 0.25
+      BalloonCommander: 0.25
+      BalloonElite: 0.25
+      ToySword: 0.99
+      EnergySword: 0.01
+      BalloonSyn: 0.25
+      BaseUplinkRadio50TCNukeOps: 0.01
+      ClothingOuterHardsuitSyndie: 0.01
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: ToxicFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      BeeAmatoxin: 0.25
+      BeeBuzzochloricBees: 0.25
+      BeeChloralHydrate: 0.25
+      BeeImpedrezene: 0.25
+      BeeLicoxide: 0.25
+      BeeLexorin: 0.25
+      ReagentSlimeNocturine: 0.25
+      ReagentSlimeCocaine: 0.25
+      ReagentSlimeCrackCocaine: 0.25
+      ReagentSlimePax: 0.25
+      ReagentSlimeToxin: 0.25
+      ReagentSlimeMuteToxin: 0.25
+
+- type: entity
+  categories: [HideSpawnMenu]
+  id: AbductorFishLootTable
+  parent: MarkerBase
+  components:
+  - type: RandomChanceSpawner
+    toSpawn:
+      OrganDubiousVentcrawler: 0.1
+      OrganDubiousHealth: 0.1
+      OrganDubiousInvisible: 0.1
+      OrganDubiousSpaceAdaptation: 0.1
+      OrganDubiousScrambleDna: 0.1
+      OrganDubiousScrambleLocation: 0.1
+      OrganDubiousArtifact: 0.1
+      OrganDubiousSteptriggerImmune: 0.1
+      OrganDubiousRepairable: 0.1
+      OrganDubiousShock: 0.1
+      OrganDubiousGoliath: 0.1
+      OrganDubiousEMP: 0.1
+      OrganDubiousGravityWell: 0.1
+      OrganDubiousFlash: 0.1
+      OrganDubiousSmoke: 0.1
+      OrganDubiousGas: 0.1
+      OrganDubiousAA: 0.1
+      OrganDubiousSpiderEggs: 0.1
+      OrganDubiousSlimeEggs: 0.1

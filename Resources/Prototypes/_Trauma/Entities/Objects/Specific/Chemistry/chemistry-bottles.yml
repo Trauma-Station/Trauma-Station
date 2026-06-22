@@ -1,0 +1,10 @@
+- type: entity
+  id: ChemistryBottleBingleJuice
+  suffix: vingle juice
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BingleJuice
+        Quantity: 30

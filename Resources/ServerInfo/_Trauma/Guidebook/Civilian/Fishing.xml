@@ -1,0 +1,37 @@
+<Document>
+# Fishing
+Fishing is a way to get renewable resources as well as a decent amount of food! It also has access to some items otherwise unavalible...
+
+# Getting Started
+Start by getting a fishing rod. You can craft rods, or order them from cargo. Not all rods perform the same.
+
+  <Box>
+    <GuideEntityEmbed Entity="FishingRodMakeshift" Caption="Crafted rod"/>
+    <GuideEntityEmbed Entity="FishingRod" Caption="Ordered rod"/>
+    <GuideEntityEmbed Entity="FishingRodGolden" Caption="Secret rod..."/>
+  </Box>
+
+Once you have a rod, find a fishing spot. You can currently fish in the following structures:
+
+  <Box>
+    <GuideEntityEmbed Entity="WaterFishingPool" Caption="Ordered from cargo"/>
+    <GuideEntityEmbed Entity="LavaFishingPool" Caption="Ordered from cargo"/>
+    <GuideEntityEmbed Entity="PlasmaFishingPool" Caption="Ordered from cargo"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="FloorWaterEntity" Caption="Found Nautrally"/>
+    <GuideEntityEmbed Entity="FloorLavaEntity" Caption="Found Nautrally"/>
+    <GuideEntityEmbed Entity="FloorLiquidPlasmaEntity" Caption="Found Nautrally"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="ToiletDirtyWater" Caption="Ew!"/>
+  </Box>
+
+# Minigame
+
+Once you hook a fish, spam the "Z" button to reel it in! It's that simple.
+</Document>
+
+# Loot
+
+Every fishing spot has different loot to get, most will give you fish, but some have special secret items or other useful things.

@@ -33,6 +33,7 @@
       types:
         Asphyxiation: 0
   - type: Butcherable
+    butcherDelay: 2
     spawned:
     - id: FoodMeatFish
       amount: 2
@@ -66,6 +67,11 @@
     state: alien
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: AlienFishLootTable
 
 - type: entity
   id: FishAngler
@@ -102,6 +108,11 @@
     state: bingle
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatBingle
+      amount: 2
+    - id: BingleFishLootTable
 
 - type: entity
   id: FishBlob
@@ -138,6 +149,11 @@
     state: boy_fisher
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: MobMouseCancer
+      amount: 5
+    - id: BoyfisherFishLootTable
 
 - type: entity
   id: FishCat
@@ -179,6 +195,11 @@
     state: disk
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: NukeDiskFishLootTable
 
 - type: entity
   id: FishGib
@@ -191,6 +212,11 @@
     state: gib
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: GibFishLootTable
 
 - type: entity
   id: FishMutant
@@ -203,6 +229,11 @@
     state: mutant
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: MutantFishLootTable
 
 - type: entity
   id: FishNuker
@@ -215,6 +246,11 @@
     state: nuker
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: NukerFishLootTable
 
 - type: entity
   id: FishPuffer
@@ -263,6 +299,11 @@
     state: toxic
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: ToxicFishLootTable
 
 - type: entity
   id: FishTropical
@@ -292,3 +333,8 @@
     state: ian
   - type: Item
     sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatCorgi
+      amount: 2
+    - id: MaterialHideCorgi

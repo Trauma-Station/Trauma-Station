@@ -1,0 +1,69 @@
+- type: entity
+  parent: BaseFish
+  id: BaseFishTrauma
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Fishing/fish.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Specific/Fishing/fish.rsi
+
+- type: entity
+  parent: BaseFishTrauma
+  id: FishAbductor
+  name: abductor fish
+  description: It's creepy..
+  components:
+  - type: Sprite
+    state: abductor
+  - type: Item
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: AbductorFishLootTable
+
+- type: entity
+  parent: BaseFishTrauma
+  id: FishDumb
+  name: dumb fish
+  description: He doesn't even have three dimensions! What a dummy.
+  components:
+  - type: Sprite
+    state: dumbguy
+  - type: Item
+
+- type: entity
+  parent: BaseFishTrauma
+  id: FishFatFuckingCunt
+  name: fat fucking cunt fish
+  description: Kill him out of mercy.
+  components:
+  - type: Sprite
+    state: fatfuckingcunt
+  - type: Item
+
+- type: entity
+  parent: BaseFishTrauma
+  id: FishNeedle
+  name: needle fish
+  description: His flesh was human once.
+  components:
+  - type: Sprite
+    state: needlefish
+  - type: Item
+
+- type: entity
+  parent: BaseFishTrauma
+  id: FishSquid
+  name: squid
+  description: Full of ink!
+  components:
+  - type: Sprite
+    state: squid
+  - type: Item
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+    - id: MagicInkRandom
+      amount: 5
