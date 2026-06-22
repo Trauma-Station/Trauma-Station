@@ -2,7 +2,7 @@
   parent: BaseBallBat
   id: BaseBallBatBarb
   name: barbwire baseball bat
-  description: A robust barbed baseball bat.
+  description: A robust baseball bat with barbed wire.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/bat_barbwire.rsi
@@ -36,6 +36,33 @@
   - type: MeleeChemicalInjector
     transferAmount: 5
     solution: melee
+
+- type: entity
+  parent: BaseBallBat
+  id: BaseBallBatNail
+  name: nailed baseball bat
+  description: A robust baseball bat with nails.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/bat_nail.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+        Piercing: 2
+        Structural: 5
+  - type: Construction
+    graph: WoodenBat
+    node: nail
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 250
+      Steel: 50
+  - type: Tag
+    tags:
+    - BaseballBat
+    - Recyclable
 
 - type: entity
   parent: [BaseItem, BaseMinorContraband]

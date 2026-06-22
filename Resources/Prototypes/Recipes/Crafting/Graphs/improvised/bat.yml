@@ -41,6 +41,32 @@
               amount: 3
               doAfter: 5
 
+        - to: nail
+          steps:
+            - material: Nail
+              amount: 1
+            - tool: Hammering
+              doAfter: 0.5
+            - material: Nail
+              amount: 1
+            - tool: Hammering
+              doAfter: 0.5
+            - material: Nail
+              amount: 1
+            - tool: Hammering
+              doAfter: 0.5
+            - material: Nail
+              amount: 1
+            - tool: Hammering
+              doAfter: 0.5
+            - material: Nail
+              amount: 1
+            - tool: Hammering
+              doAfter: 0.5
+
     - node: barbedwire
+      entity: BaseBallBatBarb
+
+    - node: nail
       entity: BaseBallBatBarb
       # </Trauma>

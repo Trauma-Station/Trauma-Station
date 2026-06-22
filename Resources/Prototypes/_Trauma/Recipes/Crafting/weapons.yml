@@ -86,6 +86,20 @@
     CarvingKnowledge: 4
 
 - type: construction
+  id: nailbat
+  graph: WoodenBat
+  startNode: start
+  targetNode: nail
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    WeaponsKnowledge: 0
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
   id: nailboard
   graph: NailBoard
   startNode: start
