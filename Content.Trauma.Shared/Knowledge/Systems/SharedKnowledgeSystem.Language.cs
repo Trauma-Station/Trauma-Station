@@ -113,7 +113,7 @@ public abstract partial class SharedKnowledgeSystem
         ent.Comp.Speaks.AddRange(ev.SpokenLanguages);
         ent.Comp.Understands.AddRange(ev.UnderstoodLanguages);
 
-        _language.EnsureValidLanguage(ent);
+        _language.EnsureValidLanguage(ent.AsNullable());
 
         SpeakerToKnowledge(ent);
     }
@@ -174,7 +174,7 @@ public abstract partial class SharedKnowledgeSystem
         else
         {
             langComp.Speaks = !args.RemoveSpoken;
-            langComp.Understands = !args.RemoveSpoken;
+            langComp.Understands = !args.RemoveUnderstood;
             Dirty(unit, langComp);
         }
 
