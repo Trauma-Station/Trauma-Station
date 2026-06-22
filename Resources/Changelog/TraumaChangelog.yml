@@ -10501,3 +10501,12 @@ Entries:
   id: 1187
   time: '2026-06-22T02:33:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3277
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ALL custom languages giving you the wrong translator and fixed
+      translator shitcode.
+  id: 1188
+  time: '2026-06-22T04:11:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3274
