@@ -1656,7 +1656,7 @@
 - type: listing
   id: UplinkHardsuitSyndie
   name: uplink-hardsuit-syndie-name
-  description: uplink-hardsuit-traumasyndie-desc
+  description: uplink-hardsuit-traumasyndie-desc # trauma - lore change
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
   cost:
@@ -1684,7 +1684,11 @@
 
 - type: listing
   id: UplinkHardsuitSyndieElite
+<<<<<<< HEAD
+  name: uplink-hardsuit-syndieelite-name 
+=======
   name: uplink-hardsuit-elite-name
+>>>>>>> da6806b796da6efa7790b2e00cd1da32b7faa83c
   description: uplink-hardsuit-traumaelite-desc # trauma - lore change
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
