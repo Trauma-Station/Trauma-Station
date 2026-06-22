@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: CrateCommandSecure
+  id: CrateVendingMachineRestockPTechFilled
+  name: PTech restock crate
+  description: Contains a restock box for the PTech vending machine.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: VendingMachineRestockPTech
