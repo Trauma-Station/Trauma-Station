@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseMagicalContraband ]
+  parent: [ ArmorHeretic, ClothingHeadBase, BaseMagicalContraband ]
   id: ClothingHeadHatHoodHeretic
   name: ominous hood
   description: A torn, dust-caked hood. Strange eyes line the inside.
@@ -23,29 +23,14 @@
   - type: Armor
     coverage:
     - Head
-    modifiers:
-      # Resists are so high because regular helmets have insanely high resists
-      coefficients:
-        Blunt: 0.3
-        Slash: 0.3
-        Piercing: 0.2
-        Heat: 0.3
-        Caustic: 0.3
-    traumaDeductions:
-      Dismemberment: 0.5
-      OrganDamage: 0.5
-      BoneDamage: 0.5
-      VeinsDamage: 0
   - type: FaceHuggerBlocker
   - type: PressureProtection
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
-  - type: ExplosionResistance
-    damageCoefficient: 0.5
   - type: IdentityBlocker
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticRust, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticRust
   components:
   - type: Sprite
@@ -74,39 +59,43 @@
       - Head
       modifiers:
         coefficients:
-          Blunt: 0.15
-          Slash: 0.15
-          Piercing: 0.1
-          Heat: 0.15
-          Caustic: 0.15
+          Blunt: 0.4
+          Slash: 0.4
+          Piercing: 0.4
+          Heat: 0.4
+          Caustic: 0.4
       traumaDeductions:
-        Dismemberment: 0.7
-        OrganDamage: 0.7
-        BoneDamage: 0.7
-        VeinsDamage: 0
+        Dismemberment: 0.4
+        OrganDamage: 0.4
+        BoneDamage: 0.4
+        VeinsDamage: 0.0
     - type: ExplosionResistance
       damageCoefficient: 0
+    - type: FireProtection
+      reduction: 0.6
     deactivateComponents:
     - type: Armor
       coverage:
       - Head
       modifiers:
         coefficients:
-          Blunt: 0.3
-          Slash: 0.3
-          Piercing: 0.1
-          Heat: 0.3
-          Caustic: 0.3
+          Blunt: 0.7
+          Slash: 0.7
+          Piercing: 0.7
+          Heat: 0.7
+          Caustic: 0.7
       traumaDeductions:
-        Dismemberment: 0.5
-        OrganDamage: 0.5
-        BoneDamage: 0.5
-        VeinsDamage: 0
+        Dismemberment: 0.2
+        OrganDamage: 0.2
+        BoneDamage: 0.2
+        VeinsDamage: 0.0
     - type: ExplosionResistance
-      damageCoefficient: 0.5
+      damageCoefficient: 0.50
+    - type: FireProtection
+      reduction: 0.3
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticVoid, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticVoid
   components:
   - type: Sprite
@@ -116,7 +105,7 @@
     sprite: _Goobstation/Heretic/Clothing/Head/void_hood.rsi
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticAsh, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticAsh
   components:
   - type: Sprite
@@ -126,7 +115,7 @@
     sprite: _Goobstation/Heretic/Clothing/Head/ashen_hood.rsi
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticFlesh, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticFlesh
   components:
   - type: Sprite
@@ -140,7 +129,7 @@
       collection: OrganInteraction
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticBlade, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticBlade
   components:
   - type: Sprite
@@ -150,7 +139,7 @@
     sprite: _Goobstation/Heretic/Clothing/Head/blade_hood.rsi
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticCosmos, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticCosmos
   components:
   - type: Sprite
@@ -160,7 +149,7 @@
     sprite: _Goobstation/Heretic/Clothing/Head/cosmos_hood.rsi
 
 - type: entity
-  parent: ClothingHeadHatHoodHeretic
+  parent: [ ArmorHereticLock, ClothingHeadHatHoodHeretic ]
   id: ClothingHeadHatHoodHereticLock
   components:
   - type: Sprite
@@ -175,7 +164,7 @@
         type: VoiceMaskBoundUserInterface
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ ArmorHereticVoidCloak, ClothingHeadBase ]
   id: ClothingHeadHatHoodVoidCloakHeretic
   name: void hood
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
@@ -192,18 +181,4 @@
   - type: Armor
     coverage:
     - Head
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.4
-        Heat: 0.5
-        Caustic: 0.5
-    traumaDeductions:
-      Dismemberment: 0.3
-      OrganDamage: 0.3
-      BoneDamage: 0.3
-      VeinsDamage: 0.0
   - type: FaceHuggerBlocker
-  - type: ExplosionResistance
-    damageCoefficient: 0.7

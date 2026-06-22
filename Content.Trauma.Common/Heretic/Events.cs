@@ -53,7 +53,10 @@ public record struct GetGrabMovespeedEvent(float Speed);
 public record struct CanStandWhileImmobileEvent(bool CanStand = false);
 
 [ByRefEvent]
-public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier);
+public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.FEET;
+}
 
 [ByRefEvent]
 public record struct GetExamineRangeEvent(float Range);

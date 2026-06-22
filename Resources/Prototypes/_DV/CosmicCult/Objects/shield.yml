@@ -47,8 +47,8 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
-    maxParries: 2
-    maxReflects: 11
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.125
     reflectMinSkill: 25
     soundOnReflect:
       path: /Audio/Weapons/Guns/Hits/ric4.ogg

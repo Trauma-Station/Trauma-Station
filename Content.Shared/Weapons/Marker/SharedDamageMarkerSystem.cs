@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Lavaland.Common.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Lavaland.Common.Weapons.Marker;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
@@ -18,6 +18,7 @@ namespace Content.Shared.Weapons.Marker;
 
 public abstract partial class SharedDamageMarkerSystem : EntitySystem
 {
+    [Dependency] private MobStateSystem _mobState = default!; // Trauma
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _netManager = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -40,7 +41,7 @@ public abstract partial class SharedDamageMarkerSystem : EntitySystem
         RemCompDeferred<DamageMarkerComponent>(uid);
         _audio.PlayPredicted(component.Sound, uid, args.User);
 
-        if (TryComp<LeechOnMarkerComponent>(args.Used, out var leech))
+        if (TryComp<LeechOnMarkerComponent>(args.Used, out var leech) && !_mobState.IsDead(uid)) // Trauma - added mobState check
         {
             _damageable.TryChangeDamage(args.User, leech.Leech, true, false, origin: args.Used, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed Change
         }

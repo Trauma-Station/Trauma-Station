@@ -212,4 +212,4 @@
     layers:
       - state: green
       - sprite: _Goobstation/Xenobiology/Mobs/slimesBaby.rsi
-    state: base
+        state: base

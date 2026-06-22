@@ -29,12 +29,11 @@ public sealed partial class TeleportRandomAreaSystem : EntityEffectSystem<Transf
             ? _ => true
             : IsTileUnsafe;
         _areas.Clear();
-        _area.AddOpenAreas(map, _areas, pred);
+        _area.AddOpenAreas(map, _areas, args.Effect.CompName, pred);
         if (_areas.Count == 0)
             return;
 
         var area = _random.PickAndTake(_areas);
-        // TODO: add poof effects
         _teleport.Teleport(ent.Owner, area.Comp.Coordinates);
     }
 

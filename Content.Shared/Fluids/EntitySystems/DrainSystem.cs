@@ -130,7 +130,7 @@ public sealed partial class DrainSystem : EntitySystem
     {
         base.Update(frameTime);
         // <Trauma> - prediction ticks might have it empty before it has applied server state for the solutions
-        if (!_timing.IsFirstTimePredicted)
+        if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
             return;
         // </Trauma>
 

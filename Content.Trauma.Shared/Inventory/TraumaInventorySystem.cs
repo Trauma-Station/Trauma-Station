@@ -2,6 +2,7 @@
 
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Inventory;
+using Content.Shared.Stunnable;
 using Content.Trauma.Common.Glue;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Lube;
@@ -9,6 +10,7 @@ using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Tackle;
 using Content.Trauma.Shared.Viewcone;
+using Content.Trauma.Shared.Waypointer.Events;
 using Content.Trauma.Shared.Weapons.SheathCounterattack;
 
 namespace Content.Trauma.Shared.Inventory;
@@ -31,5 +33,8 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GluedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, LubedPickUpAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, ModifyViewconeAngleEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, GetStandUpTimeEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, BeforeMovespeedModifierAppliedEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, WaypointerChangedEvent>(_inventory.RelayEvent);
     }
 }

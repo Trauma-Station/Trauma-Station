@@ -11,8 +11,7 @@
     - type: CosmicTransmutable
       transmuteTo: ShieldCosmicCult
     - type: Parry
-      maxParries: 3
-      maxReflects: 0
+      parryExhaustionCost: 0.25
       parryMinSkill: 30
       reflectMinSkill: 30
       soundOnParry:
@@ -131,9 +130,6 @@
   description: A large tower shield. Good for controlling crowds.
   components:
     # <Trauma>
-    - type: Parry
-      maxParries: 5
-      maxReflects: 0
     - type: MeleeWeapon
       damage:
         types:
@@ -168,8 +164,8 @@
   components:
     # <Trauma>
     - type: Parry
-      maxParries: 0
-      maxReflects: 5
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.25
       soundOnReflect:
         path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
       reflectSpread: 300
@@ -199,12 +195,6 @@
   description: A shield built for protecting against ballistics, but not much else.
   components:
     # <Trauma>
-    - type: Parry
-      maxParries: 0
-      maxReflects: 5
-      reflectSpread: 300
-      reflects:
-      - NonEnergy
     - type: HeldSpeedModifier
       walkModifier: 0.9
       sprintModifier: 0.9
@@ -242,7 +232,7 @@
   components:
     # <Trauma>
     - type: Parry
-      maxParries: 2
+      parryExhaustionCost: 0.5
     - type: HeldSpeedModifier
       walkModifier: 0.9
       sprintModifier: 0.9
@@ -312,8 +302,7 @@
   components:
     # <Trauma>
     - type: Parry
-      maxParries: 1
-      maxReflects: 0
+      parryExhaustionCost: 1
       parryMinSkill: 0
       reflectMinSkill: 0
       soundOnParry:
@@ -393,8 +382,7 @@
   components:
     # <Trauma>
     - type: Parry
-      maxParries: 1
-      maxReflects: 1
+      parryExhaustionCost: 0.5
     - type: PhysicalComposition
       materialComposition:
         Steel: 250
@@ -464,8 +452,7 @@
   components:
     # <Trauma>
     - type: Parry
-      maxParries: 1
-      maxReflects: 0
+      parryExhaustionCost: 1
       soundOnParry:
         path: /Audio/Weapons/slash.ogg
     - type: MeleeWeapon
@@ -533,9 +520,6 @@
   description: Ratvar oyrffrf lbh jvgu uvf cebgrpgvba.
   components:
     # <Trauma>
-    - type: Parry
-      maxParries: 5
-      maxReflects: 0
     - type: HeldSpeedModifier
       walkModifier: 0.9
       sprintModifier: 0.9
@@ -577,8 +561,8 @@
   components:
     # <Trauma>
     - type: Parry
-      maxParries: 0
-      maxReflects: 20
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.05
       reflectMinSkill: 0
       soundOnReflect:
         path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
@@ -641,14 +625,7 @@
   components:
     # <Trauma>
     - type: Parry
-      reflects:
-        - energy
-      maxParries: 0
-      maxReflects: 10
-      reflectMinSkill: 50
-      reflectSpread: 300
-      soundOnReflect:
-        path: /Audio/Weapons/Guns/Hits/laser_sear_wall.ogg
+      parryExhaustionCost: 1.1
     - type: HeldSpeedModifier
       walkModifier: 0.9
       sprintModifier: 0.9
@@ -720,11 +697,11 @@
       energy: 0.7 # WD EDIT
       color: "#678AD9" # WD EDIT
     - type: ItemTogglePointLight
-    # - type: Reflect - Trauma
-    #   reflectProb: 1 # WD EDIT
-    #   damageOnReflectModifier: 1 # Goob edit
-    #   reflects:
-    #     - Energy
+    - type: Reflect
+      reflectProb: 1 # WD EDIT
+      damageOnReflectModifier: 1 # Goob edit
+      reflects:
+        - Energy
     - type: Blocking
       passiveBlockModifier:
         coefficients:
@@ -747,7 +724,9 @@
       damageContainer: Shield
     - type: ExaminableDamage
       messages: EnergyShieldMessages
-    # Trauma - removed Destructible
+    # Trauma - removed Destructible thresholds
+    - type: Destructible
+      thresholds: []
     - type: StaticPrice
       price: 350
 
@@ -772,8 +751,6 @@
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:
     # <Trauma>
-    - type: Parry
-      maxParries: 5
     - type: MeleeWeapon
       attackRate: 1
       damage:

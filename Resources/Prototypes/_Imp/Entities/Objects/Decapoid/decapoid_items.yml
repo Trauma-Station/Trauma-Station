@@ -5,7 +5,7 @@
   id: DecapoidClawItem
   name: decapoid claw
   suffix: Unremoveable
-  description: 'A large claw. Not very good for fine manipulation, but very strong and very sharp.'
+  description: A large claw. Not very good for fine manipulation, but very strong and very sharp.
   components:
   - type: Sprite
     sprite: _Impstation/Objects/Decapoid/claw.rsi
@@ -59,10 +59,10 @@
     endSound: /Audio/_Impstation/Items/Decapoid/claw_prying.ogg
 
 - type: entity
-  name: vaporizer
   parent: ClothingMaskGas
-  id: DecapoidBreathingApparatus
-  description: 'A neck-mounted breathing apparatus for Decapoids. Moistens your gills, if you have them. Also functions as a brain-to-voice translator.'
+  id: ClothingNeckDecapoidVaporizer
+  name: vaporizer
+  description: A neck-mounted breathing apparatus for Decapoids. Moistens your gills, if you have them. Also functions as a brain-to-voice translator.
   components:
   - type: Sprite
     sprite: _Impstation/Objects/Decapoid/vaporizer.rsi
@@ -93,7 +93,7 @@
   id: DecapoidVaporTank
   name: vapor tank
   suffix: Filled
-  description: 'An alien contraption consisting of two tanks. The smaller tank takes in water and converts it into vapor, which is stored in the larger tank. It can hold 5 L of gas, and 30u of fluid.'
+  description: An alien contraption consisting of two tanks. The smaller tank takes in water and converts it into vapor, which is stored in the larger tank. It can hold 5 L of gas, and 30u of fluid.
   components:
   - type: Sprite
     sprite: _Impstation/Objects/Tanks/vapor.rsi

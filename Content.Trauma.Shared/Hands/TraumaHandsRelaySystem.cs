@@ -4,7 +4,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Overlays;
-using Content.Trauma.Common.Parry;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Viewcone;
 
@@ -19,7 +19,7 @@ public sealed partial class TraumaHandsRelaySystem : EntitySystem
         SubscribeLocalEvent<HandsComponent, CheckMagicItemEvent>(_hands.RelayEvent);
 
         // By-ref events.
-        SubscribeLocalEvent<HandsComponent, ParryAttemptEvent>(_hands.RefRelayEvent);
+        SubscribeLocalEvent<HandsComponent, BeforeHarmfulActionEvent>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthBarsComponent>>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, RefreshEquipmentHudEvent<ShowHealthIconsComponent>>(_hands.RefRelayEvent);
         SubscribeLocalEvent<HandsComponent, ModifyViewconeAngleEvent>(_hands.RefRelayEvent);

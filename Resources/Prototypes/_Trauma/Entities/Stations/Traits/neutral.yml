@@ -18,6 +18,7 @@
     effects:
     - !type:TeleportRandomArea
       safe: true
+    # TODO: spawn poof effects
 
 - type: stationTrait
   id: UniqueAI

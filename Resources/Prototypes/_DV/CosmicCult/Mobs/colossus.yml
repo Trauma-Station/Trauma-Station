@@ -182,7 +182,7 @@
     altDisarm: false
     animation: WeaponArcCosmic
     attackRate: 0.5
-    canParryLight: false # Parry this you filthy casual
+    canBeParried: false # Parry this you filthy casual
     range: 2
     damage:
       types:

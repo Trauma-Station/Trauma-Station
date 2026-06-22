@@ -198,6 +198,13 @@
   name: tower-cap log
   description: It's better than bad, it's good!
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 500
+  - type: StaticPrice
+    price: 50
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/towercap.rsi
   - type: Item
@@ -209,6 +216,7 @@
   - type: Produce
     seedId: towercap
   - type: Log
+    spawnCount: 5 # Trauma
 
 - type: entity
   parent: ProduceBase
@@ -216,6 +224,13 @@
   name: steel-cap log
   description: Steel doesn't grow on trees! It grows on mushrooms, of course.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 500 # 5 sheets
+  - type: StaticPrice
+    price: 75
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/steelcap.rsi
   - type: Item
@@ -228,7 +243,7 @@
     seedId: steelcap
   - type: Log
     spawnedPrototype: SheetSteel1
-    spawnCount: 1
+    spawnCount: 5 # Trauma - 5x, steel costs are so hyperinflated
 
 - type: entity
   parent: ProduceBaseRuminant
@@ -1792,6 +1807,11 @@
   id: FoodGlasstle
   description: A fragile crystal plant with lot of spiky thorns.
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Glass: 500 # 5 sheets, same as from welding it
+  # </Trauma>
   - type: Item
     size: Small
     sprite: Objects/Specific/Hydroponics/glasstle.rsi
@@ -1817,7 +1837,7 @@
     damageContainer: Inorganic
   - type: ToolRefinable
     refineResult:
-    - id: SheetGlass1
+    - id: SheetGlass5 # Trauma - 5x so its not a total waste of time making it
   - type: Destructible
     thresholds:
     - trigger:

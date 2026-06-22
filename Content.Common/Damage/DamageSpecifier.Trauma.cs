@@ -3,6 +3,7 @@
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Damage;
 
@@ -19,6 +20,9 @@ public sealed partial class DamageSpecifier
 
     [DataField]
     public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> WoundSeverityMultipliers = new();
+
+    [DataField]
+    public DamageFlags Flags = DamageFlags.None;
 
     public DamageSpecifier(float armorPenetration,
         float partVariation,
@@ -37,6 +41,7 @@ public sealed partial class DamageSpecifier
         ArmorPenetration = src.ArmorPenetration;
         PartDamageVariation = src.PartDamageVariation;
         WoundSeverityMultipliers = new(src.WoundSeverityMultipliers);
+        Flags = src.Flags;
     }
 
     /// <summary>
@@ -81,5 +86,12 @@ public sealed partial class DamageSpecifier
         }
 
         return result;
+    }
+
+    [Flags, Serializable, NetSerializable]
+    public enum DamageFlags : byte
+    {
+        None = 0,
+        PreciseHit = 1 << 0,
     }
 }

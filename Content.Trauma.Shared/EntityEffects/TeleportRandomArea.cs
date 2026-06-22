@@ -16,6 +16,9 @@ public sealed partial class TeleportRandomArea : EntityEffectBase<TeleportRandom
     [DataField]
     public bool Safe;
 
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
+    /// <summary>
+    /// Name of the component to search for, can be used to filter to more specific areas.
+    /// </summary>
+    [DataField]
+    public string CompName = "Area";
 }

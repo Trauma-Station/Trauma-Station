@@ -425,7 +425,7 @@
     codewordShowAll: true
 
 - type: entity
-  name: envelope
+  name: eenvelope
   parent: BaseItem
   id: Envelope
   description: 'A small envelope for keeping prying eyes off of your sensitive documents.'
@@ -479,7 +479,7 @@
     tags:
     - Trash
     - Document
-  #- type: Appearance, hide stamp marks until we have some kind of displacement
+  - type: Appearance # Trauma - I'd much rather have weird stamps than no fire, go do displacements yourself
   - type: Flammable
     fireSpread: true
     canResistFire: false

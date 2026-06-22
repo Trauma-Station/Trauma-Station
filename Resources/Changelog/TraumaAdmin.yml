@@ -223,3 +223,12 @@ Entries:
   id: 29
   time: '2026-06-01T08:48:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2960
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ALL antag reinforcements not showing up as antags to the admin
+      overlay.
+  id: 30
+  time: '2026-06-21T19:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3259
