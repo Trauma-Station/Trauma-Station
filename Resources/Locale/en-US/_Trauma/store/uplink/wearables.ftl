@@ -7,4 +7,3 @@ uplink-monarch-desc = Directly taken from the wardrobe of Gorlex Entertainmentâ€
 uplink-hardsuit-traumasyndie-desc = Gorlex Entertainment's most well known hardsuit, capable of space walks and trauma-resistant.
 
 uplink-hardsuit-traumaelite-desc = An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor, for those operatives who want to stand tall for the camera. Property of Gorlex Entertainment.
-

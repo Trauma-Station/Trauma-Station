@@ -1684,7 +1684,7 @@
 
 - type: listing
   id: UplinkHardsuitSyndieElite
-  name: uplink-hardsuit-elite-name 
+  name: uplink-hardsuit-elite-name
   description: uplink-hardsuit-traumaelite-desc # trauma - lore change
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
