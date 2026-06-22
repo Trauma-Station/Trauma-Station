@@ -28,10 +28,6 @@
         type: [ Vox, Slime ] # Vox literally eat trash, and slimes are highly resistant to various poisons
         inverted: true
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Cellular: 0.04 # 4 damage per snack. Not great, not terrible
       - !type:PopupMessage
         type: Local
         messages: [ "reagent-popup-lab-grown-nutriment" ]

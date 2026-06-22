@@ -1,0 +1,14 @@
+- type: entity
+  parent: [Handcuffs, BaseMinorContraband]
+  id: BarbHandcuffs # Dont make these obtainable until you take slash damage upon trying to remove them
+  name: barbed wire handcuffs
+  description: Used to detain people you intend to kill.
+  components:
+  - type: Handcuff
+    cuffedRSI: _Trauma/Objects/Misc/cuffs_barbwire.rsi
+    bodyIconState: body-overlay
+  - type: Sprite
+    sprite: _Trauma/Objects/Misc/cuffs_barbwire.rsi
+    state: icon
+  - type: UseDelay
+    delay: 3

@@ -235,7 +235,7 @@
   table: !type:GroupSelector
     children:
       - !type:NestedSelector
-        tableId: HostileFishTable
+        tableId: HostileFishTableWater
         weight: 4
       - !type:NestedSelector
         tableId: GrossTable

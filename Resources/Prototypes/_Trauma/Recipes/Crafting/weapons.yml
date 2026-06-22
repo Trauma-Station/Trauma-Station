@@ -160,7 +160,7 @@
   targetNode: finish
   category: construction-category-weapons
   objectType: Item
-  qualityPrototype: Base
+  qualityPrototype: BaseQuality
   theory:
     FabricationKnowledge: 1
   practical:
@@ -174,7 +174,7 @@
   targetNode: finish
   category: construction-category-weapons
   objectType: Item
-  qualityPrototype: Base
+  qualityPrototype: BaseQuality
   theory:
     FabricationKnowledge: 2
   practical:
@@ -188,7 +188,7 @@
   targetNode: finish
   category: construction-category-weapons
   objectType: Item
-  qualityPrototype: Base
+  qualityPrototype: BaseQuality
   theory:
     FabricationKnowledge: 2
   practical:
@@ -203,7 +203,7 @@
   targetNode: finish
   category: construction-category-weapons
   objectType: Item
-  qualityPrototype: Base
+  qualityPrototype: BaseQuality
   theory:
     FabricationKnowledge: 2
   practical:
