@@ -13,6 +13,7 @@ guidebook-reagent-effect-description =
 guidebook-reagent-name = [bold][color={$color}]{CAPITALIZE($name)}[/color][/bold]
 guidebook-reagent-recipes-header = Recipe
 guidebook-reagent-recipes-reagent-display = [bold]{$reagent}[/bold] \[{$ratio}\]
+guidebook-reagent-recipes-solid-product-display = [bold]{$product}[/bold] \[{$amount}\]
 guidebook-reagent-sources-header = Sources
 guidebook-reagent-sources-ent-wrapper = [bold]{$name}[/bold] \[1\]
 guidebook-reagent-sources-gas-wrapper = [bold]{$name} (gas)[/bold] \[1\]

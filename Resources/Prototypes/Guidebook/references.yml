@@ -34,6 +34,7 @@
   text: "/ServerInfo/Guidebook/Service/FoodRecipes.xml"
   filterEnabled: True
   children:
+  - MixingRecipes
   - PizzaRecipes
   - SavoryRecipes
   - BreadRecipes
@@ -49,6 +50,12 @@
   - OtherRecipes
   - MedicinalRecipes
   - SecretRecipes
+
+- type: guideEntry
+  id: MixingRecipes
+  name: guide-entry-mixing-recipes
+  text: "/ServerInfo/Guidebook/Service/MixingRecipes.xml"
+  filterEnabled: True
 
 - type: guideEntry
   id: PizzaRecipes

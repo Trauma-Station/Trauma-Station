@@ -12,6 +12,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodCheese
+  group: Food
 
 - type: reaction
   id: ChevreCurdling
@@ -27,6 +28,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodChevre
+  group: Food
 
 - type: reaction
   id: CreateDough
@@ -41,6 +43,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodDough
+  group: Food
 
 - type: reaction
   id: CreateCornmealDough
@@ -57,6 +60,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodDoughCornmeal
+  group: Food
 
 - type: reaction
   id: CreateTortillaDough
@@ -71,6 +75,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodDoughTortilla
+  group: Food
 
 - type: reaction
   id: CreateDoughCotton
@@ -87,6 +92,7 @@
   effects:
   - !type:SpawnEntity
     entity: FoodDoughCotton
+  group: Food
 
 - type: reaction
   id: CreateCakeBatter
@@ -107,6 +113,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodCakeBatter
+  group: Food
 
 - type: reaction
   id: CreateButter
@@ -122,6 +129,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodButter
+  group: Food
 
 - type: reaction
   id: CreatePieDough
@@ -140,6 +148,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodDoughPie
+  group: Food
 
 # TG has a cake recipe that uses soy milk instead of eggs.
 # but afaik it spawns the exact same cake batter entity.
@@ -159,6 +168,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodCakeBatter
+  group: Food
 
 - type: reaction
   id: CreateTofu
@@ -174,6 +184,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodTofu
+  group: Food
 
 - type: reaction
   id: CreateMeatball
@@ -190,6 +201,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodMeatMeatball
+  group: Food
 
 - type: reaction
   id: CreateChocolate
@@ -206,6 +218,7 @@
   effects:
     - !type:SpawnEntity
       entity: FoodSnackChocolateBarOrganic # Trauma - homemade chocolate isnt slop
+  group: Food
 
 # Condiments
 
