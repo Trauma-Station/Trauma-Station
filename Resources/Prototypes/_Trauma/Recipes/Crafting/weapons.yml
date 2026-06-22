@@ -165,7 +165,7 @@
     FabricationKnowledge: 1
   practical:
     WeaponsKnowledge: 2
-    CarvingKnowledge: 3
+    CarvingKnowledge: 2
 
 - type: construction
   id: NailSword
