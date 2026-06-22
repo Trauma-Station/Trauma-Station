@@ -105,8 +105,7 @@
   - type: Parry # Trauma - replaces Reflect
     reflects:
     - Energy
-    maxParries: 0
-    maxReflects: 10
+    reflectExhaustionCost: 0.125
     reflectSpread: 60
   - type: IgnitionSource
     temperature: 700
@@ -185,8 +184,8 @@
     components:
     # <Trauma>
     - type: Parry
-      maxReflects: 3
-      maxParries: 0
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.5
       reflectSpread: 120
     # </Trauma>
     - type: Sharp
@@ -262,8 +261,8 @@
     components:
     # <Trauma>
     - type: Parry
-      maxReflects: 3
-      maxParries: 0
+      parryExhaustionCost: 1.1
+      reflectExhaustionCost: 0.5
       reflectSpread: 120
     # </Trauma>
     - type: Sharp
@@ -371,6 +370,23 @@
   abstract: true # Goob edit
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  # <Trauma>
+  - type: Parry
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.0625
+  - type: FlipOnHit
+    lightAttackOnly: true
+    statusEffect: StatusEffectFlipDesword
+    hitWhitelist:
+      components:
+      - MobState
+  - type: ThrowableBlocker
+    blockSound:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+        volume: -2
+  # </Trauma>
   - type: ItemToggle
     predictable: false # Goobstation - wielded weapons sound prediction is broken
     onUse: false # wielding events control it instead
@@ -412,7 +428,10 @@
   - type: Wieldable
     wieldSound: null # esword light sound instead
   - type: MeleeWeapon
-    heavyStaminaCost: 0 # goob edit
+    # <Trauma>
+    clickDamageModifier: 1.1
+    heavyStaminaCost: 0
+    # </Trauma>
     wideAnimationRotation: -135
     attackRate: 1 #Goob Station rebalance, was originally 1.5
     angle: 100
@@ -431,22 +450,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-  - type: Parry # Trauma
-    maxReflects: 15
-    maxParries: 0
-    reflectSpread: 30
-  - type: FlipOnHit # WD EDIT
-    lightAttackOnly: true
-    statusEffect: StatusEffectFlipDesword
-    hitWhitelist:
-      components:
-      - MobState
-  - type: ThrowableBlocker # Goobstation
-    blockSound:
-      path: /Audio/Weapons/eblade1.ogg
-      params:
-        variation: 0.250
-        volume: -2
 
 - type: entity # Goobstation
   parent: EnergySwordDoubleBase

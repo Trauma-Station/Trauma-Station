@@ -106,7 +106,6 @@
       tags:
       - FitsInCharger
     - type: Parry
-      maxParries: 5
       soundOnParry:
         path: /Audio/Weapons/pierce.ogg
     - type: HeldSpeedModifier

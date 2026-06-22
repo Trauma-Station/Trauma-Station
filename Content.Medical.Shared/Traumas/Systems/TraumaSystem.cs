@@ -3,6 +3,7 @@
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Body;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Systems;
@@ -36,5 +37,15 @@ public sealed partial class TraumaSystem : EntitySystem
         InitProcess();
         InitBones();
         InitOrgans();
+    }
+    /// <summary>
+    /// Heals bone damage on a woundable, if it has a bone. Does nothing if it has no bone.
+    /// </summary>
+    public void HealBone(Entity<WoundableComponent> woundable, FixedPoint2 amount)
+    {
+        if (GetBone(woundable.AsNullable()) is not { } bone)
+            return;
+
+        ApplyDamageToBone(bone, -amount, bone.Comp);
     }
 }

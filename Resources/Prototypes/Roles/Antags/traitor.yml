@@ -55,8 +55,8 @@
   prefRoles:
   - Traitor
   - GenericTeamAntagonist # Matters for Antag bans.
-  mindRoles:
-  - MindRoleTraitorReinforcement
+#  mindRoles:
+#  - MindRoleTraitorReinforcement
 
 # Syndicate Operative Outfit - Monkey
 - type: startingGear

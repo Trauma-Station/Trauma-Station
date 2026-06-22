@@ -130,19 +130,19 @@ public sealed partial class SandevistanUserComponent : Component
     /// Speed multiplier for mobs in the slowfield.
     /// </summary>
     [DataField]
-    public float MobSpeedMultiplier = 0.15f;
+    public float MobSpeedMultiplier = 0.5f;
 
     /// <summary>
     /// Speed multiplier for thrown items in the slowfield.
     /// </summary>
     [DataField]
-    public float ThrownItemSpeedMultiplier = 0.05f;
+    public float ThrownItemSpeedMultiplier = 0.1f;
 
     /// <summary>
     /// Speed multiplier for projectiles in the slowfield.
     /// </summary>
     [DataField]
-    public float ProjectileSpeedMultiplier = 0.05f;
+    public float ProjectileSpeedMultiplier = 0.1f;
 
     #endregion
 }

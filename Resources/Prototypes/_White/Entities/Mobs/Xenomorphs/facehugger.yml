@@ -51,7 +51,7 @@
         Base: facehugger_dead
   - type: MeleeWeapon
     hidden: true
-    canHeavyAttack: false
+    canWideSwing: false
     angle: 0
     damage:
       types:

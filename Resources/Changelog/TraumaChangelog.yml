@@ -10332,7 +10332,202 @@ Entries:
     message: >-
       Made changes to the Cargo Bounty computer. It now only takes Cargo access
       to skip bounties and the cooldown between skips has been reduced to 3
-      minutes. 
+      minutes.
   id: 1172
   time: '2026-06-19T14:14:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3242
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed sec and borgs being able to roll devil..?
+  id: 1173
+  time: '2026-06-20T10:09:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3255
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked vampires guidebook to tell you the conditions to actually
+      bloodsuck someone
+  - type: Tweak
+    message: >-
+      Increased vampire's glare stamina damage so it can properly stamina crit
+      someone
+  - type: Tweak
+    message: >-
+      Increased vampire's glare mute time so you can now properly restrain them
+      without them calling for help
+  id: 1174
+  time: '2026-06-20T13:57:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3252
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed the inhand sprites of the Wooden Wand.
+  id: 1175
+  time: '2026-06-20T14:00:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3256
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorph drone, hunter, and sentinel now have scarier sprites
+  id: 1176
+  time: '2026-06-20T15:49:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3249
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to instantly kill locker mimics with a screwdriver.
+  id: 1177
+  time: '2026-06-21T00:08:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3264
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changed forged katanas to have higher base damage and less attack speed.
+      They focus on delimbing compared to swords.
+  id: 1178
+  time: '2026-06-21T00:58:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3265
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Most station events no longer affect the cargo shuttle, ATS, etc.
+  id: 1179
+  time: '2026-06-21T01:03:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3263
+- author: Sulfari
+  changes:
+  - type: Tweak
+    message: Pets should no longer attack AI turrets.
+  id: 1180
+  time: '2026-06-21T02:01:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3210
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Sometimes Pun Pun will be missing from the bar.
+  id: 1181
+  time: '2026-06-21T02:39:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3266
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed towercap, steelcap and glasstle. They give 5x as much and can be
+      thrown into a recycler.
+  id: 1182
+  time: '2026-06-21T05:42:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3268
+- author: Aviu
+  changes:
+  - type: Add
+    message: Parries/reflects reworked.
+  - type: Fix
+    message: Fix eshield breaking.
+  - type: Fix
+    message: Fix guns not being able to target anything other than chest.
+  - type: Tweak
+    message: Gauss guns buffed.
+  - type: Tweak
+    message: Esword, web vest and swat helmet are cheaper.
+  - type: Tweak
+    message: Coscult weapons damage nerfed by 40%
+  - type: Tweak
+    message: Helmets resistance is reduced up close on precise hits now.
+  - type: Tweak
+    message: Statveka slowdown nerfed.
+  - type: Tweak
+    message: Increased chances of part tareting.
+  - type: Tweak
+    message: Desword deals slightly more damage on light attacks.
+  - type: Tweak
+    message: energy bola is 1x2 again.
+  id: 1183
+  time: '2026-06-21T09:11:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3246
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      Workboots now give 10% slowdown resistance, also they are now engi/cargo
+      restricted contra and are available for cargo tech.
+  - type: Fix
+    message: Fix combat boots not actually reducing time to stand.
+  id: 1184
+  time: '2026-06-21T11:29:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3269
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Raised scarp's price in the uplink. Suffer.
+  - type: Remove
+    message: Removed scarp's ability to be discounted. Suffer.
+  id: 1185
+  time: '2026-06-21T19:10:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3241
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Warhammer not prying.
+  - type: Fix
+    message: Fixed ALL shuttle event roles not having skills/skill chips.
+  - type: Fix
+    message: Fixed ALL animal mindroles being incorrect.
+  - type: Fix
+    message: Fixed Coconut Halves not being able to be turned into seeds.
+  - type: Fix
+    message: Fixed Ichor not healing bones.
+  - type: Fix
+    message: Fixed the Goliath Hardsuit Helmet GMOD erroring for lizards.
+  - type: Fix
+    message: Fixed Slimes showing up as an X on examine.
+  - type: Fix
+    message: Fixed BZ gas description being wrong.
+  - type: Add
+    message: >-
+      Made it so Holo Clowns and Holo Parasites now can always understand the
+      language of their master.
+  id: 1186
+  time: '2026-06-21T19:34:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3259
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Increased PTech restock price to 7500, also gave it a command secure crate
+      as it was way too free.
+  id: 1187
+  time: '2026-06-22T02:33:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3277
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ALL custom languages giving you the wrong translator and fixed
+      translator shitcode.
+  id: 1188
+  time: '2026-06-22T04:11:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3274
+- author: assripper.
+  changes:
+  - type: Add
+    message: new scream sounds for xenomorphs
+  id: 1189
+  time: '2026-06-22T04:14:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3272
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass shards and caltrops not damaging your feet specifically.
+  id: 1190
+  time: '2026-06-22T04:29:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3279
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Tweaked the Baseball Bat, it is now 1x4, and normal size.
+  id: 1191
+  time: '2026-06-22T19:22:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3258
