@@ -10492,3 +10492,12 @@ Entries:
   id: 1186
   time: '2026-06-21T19:34:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3259
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Increased PTech restock price to 7500, also gave it a command secure crate
+      as it was way too free.
+  id: 1187
+  time: '2026-06-22T02:33:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3277
