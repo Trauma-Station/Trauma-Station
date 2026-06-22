@@ -80,7 +80,7 @@
   components:
   - type: PhysicalComposition
     materialComposition:
-      Wood: 250
+      Wood: 100
   - type: Tag
     tags:
     - Recyclable
@@ -122,7 +122,7 @@
     storedRotation: -45
   - type: PhysicalComposition
     materialComposition:
-      Wood: 250
+      Wood: 100
       Steel: 50
   - type: Tag
     tags:
