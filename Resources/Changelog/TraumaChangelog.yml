@@ -10517,3 +10517,10 @@ Entries:
   id: 1189
   time: '2026-06-22T04:14:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3272
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass shards and caltrops not damaging your feet specifically.
+  id: 1190
+  time: '2026-06-22T04:29:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3279
