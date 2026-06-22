@@ -10531,3 +10531,134 @@ Entries:
   id: 1191
   time: '2026-06-22T19:22:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3258
+- author: Armok
+  changes:
+  - type: Add
+    message: >-
+      New tool quality, sharpening. Currently only whetstone has it, but more
+      tools will soon.
+  - type: Add
+    message: A new whetstone sound
+  - type: Add
+    message: >-
+      Uses for more crafting skills, focusing on crafting, metalworking,
+      electronics, and mechanics.
+  - type: Add
+    message: Nail-bat
+  - type: Add
+    message: Barbed wire bat (Instantly kills players named Glenn)
+  - type: Add
+    message: Wooden Sword
+  - type: Add
+    message: Nail Sword
+  - type: Add
+    message: Scrap Sword
+  - type: Add
+    message: Welded Sword
+  - type: Add
+    message: Nailboard weapon
+  - type: Add
+    message: Nailboard trap
+  - type: Add
+    message: Pipe Shiv
+  - type: Add
+    message: Firebomb Spear
+  - type: Add
+    message: Pipebomb Spear
+  - type: Add
+    message: Fishing Guidebook
+  - type: Add
+    message: 5 new fish
+  - type: Add
+    message: Rare loot table for every single rare fish
+  - type: Add
+    message: 3 new fishing loot pools, one for lava, toilets, and plasma.
+  - type: Add
+    message: Three new cargo purchases, porta
+  - type: Add
+    message: The stick of greed
+  - type: Add
+    message: Adamantine to lava fishing
+  - type: Add
+    message: Security Ballistic Surplus crate to armory.
+  - type: Add
+    message: Complete
+  - type: Add
+    message: Barbed wire
+  - type: Add
+    message: Barbed wire traps
+  - type: Add
+    message: Tripwires
+  - type: Add
+    message: Pipebomb traps
+  - type: Add
+    message: >-
+      New static disease; Gutworms, you can get it from eating raw meat or
+      vending machine food.
+  - type: Add
+    message: >-
+      Vampire sub gamemode, they will now spawn in small numbers in 20% of
+      rounds
+  - type: Add
+    message: Barbed wire handcuffs
+  - type: Remove
+    message: Damage from vending machine food.
+  - type: Remove
+    message: Remove singularity and tesla from science artifacts.
+  - type: Remove
+    message: Frezon, Tritium, and ammonia artifact triggers
+  - type: Tweak
+    message: Made fishing significantly faster [45+-15 > 20+-15]
+  - type: Tweak
+    message: Remove electronics knowledge requirement from coilguns
+  - type: Tweak
+    message: Increase fabrication knowledge requirement for coilguns [2 > 3]
+  - type: Tweak
+    message: Melee skill nerfed to be in line with strength.
+  - type: Tweak
+    message: Boosted wardens roundstart funds [2500 > 10,000]
+  - type: Tweak
+    message: Nerf forge katana [15 > 12]
+  - type: Tweak
+    message: Nerf Plasteel forge values [Piercing > 1.5 > 1.25]
+  - type: Tweak
+    message: Nerf Steel forge values [Blunt > 1.25 > 1]
+  - type: Tweak
+    message: Buff Adamantine forge values [Slash > 1.4 > 1.5]
+  - type: Tweak
+    message: Tweak Brass forge values [Blunt > 1.25 > 1.1] [Pierce > 0.75 > 0.9]
+  - type: Tweak
+    message: Nerf firestacks significantly
+  - type: Tweak
+    message: All departments start with 10K, cargo now gets 90% of station profits.
+  - type: Tweak
+    message: Quality damage scaling slightly nerfed [1.05 < 1.03]
+  - type: Tweak
+    message: Shotguns now deal less damage over more shots.
+  - type: Tweak
+    message: >-
+      Anti-bullet armors have flat reduction, so shotguns are not great against
+      armored targets.
+  - type: Tweak
+    message: Syndicate stealth suit no longer has armor protection and is slower.
+  - type: Tweak
+    message: All automation structures made significantly cheaper.
+  - type: Tweak
+    message: Double syndicate turret price for nukies
+  - type: Tweak
+    message: Finished bloomeries break in one hit
+  - type: Tweak
+    message: Insulation can be placed on the same tiles as rev buildings.
+  - type: Tweak
+    message: Ninja EMP more expensive for the ninja to use.
+  - type: Tweak
+    message: Default shotgun shells no longer break walls.
+  - type: Tweak
+    message: No more sandevistan northstar massace
+  - type: Fix
+    message: Johntonine now digests
+  - type: Fix
+    message: 'Issue where some goob sounds were stereo '
+  id: 1192
+  time: '2026-06-22T20:55:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3273
