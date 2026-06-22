@@ -622,7 +622,7 @@
   parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit # Goob edit
-  description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
+  description: A heavily armored hardsuit designed for live-action stuntwork and terrorism alike, and is typically seen as the hardsuit of a "faceless grunt". Property of Gorlex Entertainment. # Trauma - corporation retheming
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
@@ -675,7 +675,7 @@
   parent: [ClothingOuterHardsuitSyndie, BaseSyndicateContraband]
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit # Goob edit
-  description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
+  description: A heavily armored and agile advanced hardsuit specifically so that the medic wearing it stands out among their fellow operatives as they heal their injuries. Property of Gorlex Entertainment. # Trauma - corporation retheming
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
@@ -699,7 +699,7 @@
   parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit # Goob edit
-  description: An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor. Property of Gorlex Marauders. # Trauma - align desc with resistances
+  description: An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor, for those operatives who want to stand tall for the camera. Property of Gorlex Entertainment. # Trauma - align desc with resistances and lore
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
@@ -749,7 +749,7 @@
   parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
   id: ClothingOuterHardsuitSyndieCommander
   name: syndicate commander hardsuit # Goob edit
-  description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights. # Goob edit
+  description: A luxury variant of the blood-red hardsuit, purposely-built for the commander of a syndicate operative squad to stand out and act like the villain that Gorlex wants them to be. Has slightly improved armor and greatly improved mobility. # Trauma - corporation retheming
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
@@ -770,11 +770,11 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Radiation: 0.5
+        Blunt: 0.4 # Trauma - was 0.5
+        Slash: 0.4 # Trauma - was 0.5
+        Piercing: 0.4 # Trauma - was 0.5
+        Heat: 0.35 # Trauma - was 0.5
+        Radiation: 0.4 # Trauma - was 0.5
   - type: ClothingSpeedModifier
     walkModifier: 1 # Trauma, was 0.9
     sprintModifier: 1 # Trauma, was 0.9
