@@ -121,7 +121,7 @@
       Wood: 100 # lol
 
 - type: entity
-  parent: ProduceSliceBase
+  parent: [ FoodProduceBase, ProduceSliceBase ]
   id: FoodCoconutHalf
   name: coconut half
   description: The perfect defense... if you're an octopus.

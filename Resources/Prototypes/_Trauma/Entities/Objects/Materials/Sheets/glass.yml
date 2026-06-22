@@ -9,3 +9,13 @@
     state: glass_2
   - type: Stack
     count: 15
+
+- type: entity
+  parent: SheetGlass
+  id: SheetGlass5
+  suffix: 5
+  components:
+  - type: Sprite
+    state: glass_1
+  - type: Stack
+    count: 5

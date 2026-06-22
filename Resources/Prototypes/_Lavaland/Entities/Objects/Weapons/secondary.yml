@@ -147,8 +147,6 @@
   - type: Scalpel # Shitmed
     speed: 0.55
   - type: Parry
-    maxParries: 3
-    maxReflects: 0
     parryMinSkill: 40
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg

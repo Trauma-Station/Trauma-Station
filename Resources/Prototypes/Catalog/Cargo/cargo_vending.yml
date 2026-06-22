@@ -155,11 +155,11 @@
   icon:
     sprite: Objects/Specific/Service/vending_machine_restock.rsi
     state: base
-  product: VendingMachineRestockPTech
-  container:
-    entity: WrappedParcel
-    containerId: contents
-  cost: 2500 # Trauma - was 1200, increased due to skillchips being included
+  product: CrateVendingMachineRestockPTechFilled # Trauma - was VendingMachineRestockPTech
+  #container: Trauma
+  #  entity: WrappedParcel
+  #  containerId: contents
+  cost: 7500 # Trauma - was 1200, increased due to skillchips being included
   category: cargoproduct-category-name-service
   group: market
 

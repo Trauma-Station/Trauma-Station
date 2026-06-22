@@ -93,13 +93,6 @@ public sealed partial class MeleeWeaponComponent : Component
     [DataField, AutoNetworkedField]
     public float Range = 1.5f;
 
-    // goob edit - stunmeta
-    /// <summary>
-    ///     Applies stamina damage on each successful wideswing hit to the attacker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float HeavyStaminaCost = 10f;
-
     /// <summary>
     /// Total width of the angle for wide attacks.
     /// </summary>
@@ -107,32 +100,10 @@ public sealed partial class MeleeWeaponComponent : Component
     public Angle Angle = Angle.FromDegrees(60);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Animation = "WeaponArcThrust"; // Goob Edit
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId MissAnimation = "WeaponArcPunch"; // Goob Edit
-
-    [DataField, AutoNetworkedField]
-    public bool FlipAnimation = true; // Goob Edit
+    public EntProtoId Animation = "WeaponArcThrust";
 
     [DataField, AutoNetworkedField]
     public EntProtoId WideAnimation = "WeaponArcSlash";
-
-    // WD EDIT START
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId DisarmAnimation = "WeaponArcDisarm";
-
-    [DataField, AutoNetworkedField]
-    public bool CanHeavyAttack = true;
-
-    /// <summary>
-    /// Rotation of the animation.
-    /// 0 degrees means the top faces the attacker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public Angle AnimationRotation = Angle.Zero;
-    // WD EDIT END
 
     /// <summary>
     /// Rotation of the animation.
@@ -143,7 +114,6 @@ public sealed partial class MeleeWeaponComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SwingLeft;
-
 
     // Sounds
 
@@ -179,30 +149,6 @@ public sealed partial class MeleeWeaponComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool MustBeEquippedToUse = false;
-
-    // Shitmed Change Start
-
-    /// <summary>
-    ///     Shitmed Change: Part damage is multiplied by this amount for single-target attacks
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float ClickPartDamageMultiplier = 1.00f;
-
-    /// <summary>
-    ///     Shitmed Change: Part damage is multiplied by this amount for heavy swings
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float HeavyPartDamageMultiplier = 1.00f;
-
-    // Shitmed Change End
-
-    // Goobstation
-    [DataField, AutoNetworkedField]
-    public bool CanWideSwing = true;
-
-    // Goobstation
-    [DataField, AutoNetworkedField]
-    public float HeavyAttackWoundMultiplier = 0.5f;
 }
 
 /// <summary>

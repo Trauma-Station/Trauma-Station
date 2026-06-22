@@ -14,7 +14,7 @@
   - !type:GroupLoadoutEffect
     proto: Aquatic
   equipment:
-    mask: DecapoidBreathingApparatus
+    mask: ClothingNeckDecapoidVaporizer
     suitstorage: DecapoidVaporTank
     outerClothing: ClothingOuterVestTank
 
@@ -26,7 +26,7 @@
     proto: Aquatic
   storage:
     back:
-    - DecapoidBreathingApparatus
+    - ClothingNeckDecapoidVaporizer
 
 - type: loadout
   id: EmergencyVapor

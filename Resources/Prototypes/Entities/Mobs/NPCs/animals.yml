@@ -1611,6 +1611,7 @@
 - type: entity
   name: monkey
   id: MobBaseSyndicateMonkey
+  abstract: true # Trauma
   parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
@@ -1777,6 +1778,7 @@
 
 - type: entity
   id: MobBaseSyndicateKobold
+  abstract: true # Trauma
   parent: MobBaseKobold
   suffix: syndicate base
   components:

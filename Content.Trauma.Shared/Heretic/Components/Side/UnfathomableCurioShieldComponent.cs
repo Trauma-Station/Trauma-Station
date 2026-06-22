@@ -14,7 +14,10 @@ public sealed partial class UnfathomableCurioShieldComponent : BaseSpriteOverlay
     public override SpriteSpecifier? Sprite { get; set; } =
         new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "unfathomable_shield");
 
-    [DataField] public override Color Color { get; set; } = Color.LimeGreen;
+    [DataField]
+    public override Color Color { get; set; } = Color.LimeGreen;
+
+    public override bool Unshaded { get; set; } = false;
 
     [DataField, AutoNetworkedField]
     public override bool Active { get; set; }
