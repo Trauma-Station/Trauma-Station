@@ -1,0 +1,17 @@
+- type: entity
+  parent: DiseaseBase
+  id: DiseaseGutWorms
+  name: gut worms
+  description: Foodborn parasites infest the subject.
+  components:
+  - type: Disease
+    diseaseType: Parasite
+    genotype: 7361
+    infectionRate: 0.005
+    immunityGainRate: 0.5
+    mutationRate: 0
+    effects:
+      DiseaseBehaviorFightImmunity: 1
+      DiseaseBehaviorSluggish: 1
+      DiseaseBehaviorFeelUnwell: 1
+      DiseaseBehaviorVomit: 1

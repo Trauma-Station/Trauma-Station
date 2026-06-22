@@ -1,0 +1,25 @@
+- type: entity
+  parent: MobPlasmaman
+  id: MobPlasmamanRandom
+  suffix: Random Appearance
+  components:
+  - type: RandomHumanoidAppearance
+
+- type: entity
+  parent: MobPlasmamanRandom
+  id: MobPlasmamanFishing
+  categories: [HideSpawnMenu]
+  components:
+  - type: RandomHumanoidAppearance
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: FactionException
+  - type: NpcFactionMember
+    factions:
+      - Passive
+  - type: HTN
+    rootTask:
+      task: MonkeyCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true

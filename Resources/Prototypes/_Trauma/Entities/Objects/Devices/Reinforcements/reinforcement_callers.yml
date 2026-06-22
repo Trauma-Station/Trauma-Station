@@ -20,7 +20,7 @@
   - type: Store
     name: store-preset-name-reinforcements
     balance:
-      Spesos: 2500
+      Spesos: 10000
     currencyWhitelist:
     - Spesos
     ownerOnly: false

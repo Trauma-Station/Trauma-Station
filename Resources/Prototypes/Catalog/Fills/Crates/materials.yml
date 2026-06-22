@@ -58,6 +58,7 @@
     containers:
       entity_storage:
         id: MaterialWoodPlank
+        amount: 3 # Trauma, was 1
 
 - type: entity
   parent: CrateGenericSteel

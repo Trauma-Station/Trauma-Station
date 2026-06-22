@@ -1,0 +1,23 @@
+- type: entity
+  name: gib stick
+  parent: BaseItem
+  id: GreedStick
+  description: hit hard ye
+  suffix: DEBUG
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/debug.rsi
+    state: icon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 1
+  - type: Item
+    size: Tiny
+    sprite: Objects/Weapons/Melee/debug.rsi
+  - type: DamageOnHolding
+    enabled: true
+    damage:
+      types:
+        Blunt: 20000
+  - type: TriggerOnMeleeHit

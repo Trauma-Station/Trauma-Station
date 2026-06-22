@@ -1,0 +1,154 @@
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseFishingPool
+  name: fishing pond
+  description: A fishing pool linked via portal to a massive hatchery.
+  components:
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: WaterFishingLootTable
+    fishDefaultTimer: 10.0
+    fishTimerVariety: 5.0
+  - type: Sprite
+    sprite: _Trauma/Structures/Fishing/pond.rsi
+    state: icon
+  - type: Appearance
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        layer:
+        - ItemMask
+        mask:
+        - HighImpassable
+        density: 1000
+        hard: false
+  - type: Solution
+    id: tank
+    solution:
+      maxVol: 1000
+      reagents:
+      - ReagentId: Water
+        Quantity: 1000
+  - type: DrainableSolution
+    solution: tank
+  - type: Anchorable
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 120
+    canCreateVacuum: false
+  - type: InteractionOutline
+  - type: PhysicsGunBlacklist
+  - type: StaticPrice
+    price: 5000
+  - type: Climbable
+  - type: Clickable
+
+- type: entity
+  parent: BaseFishingPool
+  id: WaterFishingPool
+  name: fishing pond
+  description: A fishing pool linked via portal to a massive hatchery.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Fishing/pond.rsi
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: WaterFishingLootTable
+
+- type: entity
+  parent: BaseFishingPool
+  id: LavaFishingPool
+  name: lava fishing pond
+  description: A fishing pool linked via portal to a massive hatchery. This one is full of lava!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Fishing/lavapond.rsi
+  - type: PointLight
+    color: "#FF4500"
+    energy: 5
+    radius: 5
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+  - type: TileEntityEffect
+    effects:
+    - !type:AdjustTemperature
+      amount: 10000
+    - !type:ModifyStatusEffect
+      effectProto: InLavaStatusEffect
+      time: 1
+    - !type:Flammable
+      multiplier: 10
+      multiplierOnExisting: 0.75
+    - !type:Ignite
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: LavaFishingLootTable
+  - type: Solution
+    id: tank
+    solution:
+      reagents:
+      - ReagentId: Iron
+        Quantity: 1000
+
+- type: entity
+  parent: BaseFishingPool
+  id: PlasmaFishingPool
+  name: plasma fishing pond
+  description: A fishing pool linked via portal to a massive hatchery. This one is full of plasma!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Fishing/plasmapond.rsi
+  - type: PointLight
+    color: "#974988"
+    energy: 5
+    radius: 5
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+  - type: TileEntityEffect
+    effects:
+    - !type:AdjustTemperature
+      amount: 10000
+    - !type:ModifyStatusEffect
+      effectProto: InLavaStatusEffect
+      time: 1
+    - !type:Flammable
+      multiplier: 10
+      multiplierOnExisting: 0.75
+    - !type:Ignite
+  - type: FishingSpot
+    fishList: !type:NestedSelector
+      tableId: PlasmaFishingLootTable
+  - type: Solution
+    id: tank
+    solution:
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 1000

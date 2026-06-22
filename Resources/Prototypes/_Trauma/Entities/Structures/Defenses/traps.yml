@@ -1,0 +1,200 @@
+- type: entity
+  parent: [ BaseStructure, BaseMinorContraband ]
+  id: BarbedWireStructure
+  name: barbed wire
+  description: A large mass of steel wire with nasty barbs.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/barbwire.rsi
+    state: structure
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BarbedWire1:
+            min: 0
+            max: 1
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.3
+    sprintSpeedModifier: 0.3
+  - type: Physics
+    bodyType: Static
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/_Trauma/Footsteps/barbedwire.ogg
+      params:
+        volume: 8
+  - type: DamageContacts
+    damage:
+      types:
+        Slash: 3
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: Construction
+    graph: BarbedWire
+    deconstructionTarget: null
+    node: finish
+  - type: InteractionOutline
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: DamageOnAttacked
+    damage:
+      types:
+        Slash: 5
+    popupText: barbed-contact-damage
+    interactSound: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  parent: [ BaseMinorContraband ]
+  id: TrapTripWire
+  name: trip wire
+  description: A wire that sends a signal when walked over, can be disarmed with wirecutters.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: StepTrigger
+    intersectRatio: 0.2
+    requiredTriggeredSpeed: 0
+    stepOn: true
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/trap_tripwire.rsi
+    state: icon
+  - type: Anchorable
+  - type: CollisionWake
+    enabled: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        layer:
+          - LowImpassable
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 30
+        mask:
+        - ItemMask
+  - type: LandMine
+    sound:
+      path: /Audio/Effects/beep_landmine.ogg
+      params:
+        maxDistance: 10
+  - type: TriggerOnVerb
+    text: trigger-on-verb-detonation
+  - type: SignalOnTrigger
+    port: Triggered
+  - type: DeviceLinkSource
+    ports:
+    - Triggered
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 40
+  - type: Damageable
+  - type: InteractionOutline
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: TriggerOnDamage
+    threshold: 1
+  - type: Construction
+    graph: TripWire
+    node: finish
+    defaultTarget: null
+
+- type: entity
+  parent: [ BaseStructure, BaseMinorContraband ]
+  id: TrapPipeBomb
+  name: pipe bomb trap
+  description: A pipebomb linked to a remote signal. Can be disarmed with wirecutters.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Defences/trap_pipebomb.rsi
+    state: icon
+  - type: TimerTrigger
+    delay: 1
+    examinable: false
+    initialBeepDelay: 0
+    beepSound: /Audio/Effects/lightburn.ogg
+  - type: RandomTimerTrigger
+    min: 0
+    max: 1
+  - type: ExplodeOnTrigger
+    keysIn:
+    - timer
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 50
+    intensitySlope: 5
+    maxIntensity: 6
+    canCreateVacuum: false
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+  - type: TriggerOnSignal
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,0.35,0.4,0.5"
+        density: 190
+        mask:
+        - None
+        layer:
+        - TabletopMachineLayer
+  - type: InteractionOutline
+  - type: Construction
+    graph: PipeBombTrap
+    node: finish
+    defaultTarget: null

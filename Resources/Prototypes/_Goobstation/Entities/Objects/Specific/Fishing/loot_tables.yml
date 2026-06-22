@@ -1,8 +1,154 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-# This should be on every other fishing table
 - type: entityTable
-  id: BasicFishingLootTable
+  id: CommonFishTable
+  table: !type:GroupSelector
+    children:
+    - id: FishAngler
+    - id: FishBass
+    - id: FishBlob
+    - id: FishBlueFintuna
+    - id: FishCat
+    - id: FishTropicalClown
+    - id: FishPuffer
+    - id: FishSilver
+    - id: FishTropicalSun
+    - id: FishTropical
+    - id: FishDumb
+    - id: FishFatFuckingCunt
+    - id: FishNeedle
+    - id: MobCrab
+
+- type: entityTable
+  id: RareFishTable
+  table: !type:GroupSelector
+    children:
+    - id: FishAlien
+    - id: FishBingle
+    - id: FishBoyFisher
+    - id: FishNukeDisk
+    - id: FishGib
+    - id: FishMutant
+    - id: FishNuker
+    - id: FishToxic
+    - id: FishIan
+    - id: FishAbductor
+    - id: FishSquid
+
+- type: entityTable
+  id: HostileFishTableWater
+  table: !type:GroupSelector
+    children:
+    - id: MobCarp
+      weight: 5
+    - id: MobCoconutCrab
+      weight: 2.5
+    - id: MobCoconutCrabFloofy
+      weight: 2.5
+    - id: MobCarpMagic
+      weight: 2
+    - id: MobCarpHolo
+      weight: 2
+    - id: MobCarpRainbow
+      weight: 2
+    - id: MobShark
+      weight: 1
+    - id: MobDragonDungeon
+      weight: 0.1
+
+- type: entityTable
+  id: GrossTable
+  table: !type:GroupSelector
+    children:
+    - id: FoodMeatRotten
+      weight: 10
+    - id: FoodRot
+      weight: 10
+    - id: MobCockroach
+      weight: 10
+    - id: MobMothroach
+      weight: 10
+    - id: MobMothmaggot
+      weight: 10
+    - id: Garbage
+      weight: 10
+    - id: MobRatServant
+      weight: 5
+    - id: FoodBurgerMothRoach
+      weight: 5
+    - id: MobPlagueRatLarge
+      weight: 2
+    - id: MobRatma
+      weight: 1
+    - id: MobRatKing
+      weight: 1
+    - id: MobRatKingBuff
+      weight: 1
+    - id: MobGlockroach
+      weight: 1
+    - id: MobMothSyndy
+      weight: 1
+    - id: MobMoproach
+      weight: 1
+
+- type: entityTable
+  id: FishingOreCrabTable
+  table: !type:GroupSelector
+    children:
+    - id: MobCoalCrab
+      weight: 1
+    - id: MobBananiumCrab
+      weight: 1
+    - id: MobUraniumCrab
+      weight: 1
+    - id: MobGoldCrab
+      weight: 1
+    - id: MobIronCrab
+      weight: 1
+    - id: MobQuartzCrab
+      weight: 1
+    - id: MobSilverCrab
+      weight: 1
+
+- type: entityTable
+  id: LavaLandHostile
+  table: !type:GroupSelector
+    children:
+    - id: MobHivelord
+      weight: 3
+    - id: MobGoliath
+      weight: 4
+    - id: MobWatcherLavaland
+      weight: 1
+    - id: MobWatcherIcewing
+      weight: 1
+    - id: MobWatcherMagmawing
+      weight: 1
+    - id: LavalandMobLegionMonkey
+      weight: 1
+    - id: LavalandEliteLegionnaire
+      weight: 1
+    - id: LavalandEliteGoliathBroodmother
+      weight: 1
+    - id: LavalandEliteHerald
+      weight: 1
+    - id: LavalandMobAshWhelp
+      weight: 1
+    - id: LavalandMobBrimdemon
+      weight: 1
+
+- type: entityTable
+  id: PreciousMetals
+  table: !type:GroupSelector
+    children:
+    - id: SilverIngot
+      weight: 2
+    - id: GoldIngot
+      weight: 2
+    - id: AdamantineIngot
+      weight: 1
+
+
+- type: entityTable
+  id: FishingScrapLootTable
   table: !type:GroupSelector
     children:
     # 75% chance of scrap of some kind
@@ -19,62 +165,20 @@
     - !type:NestedSelector
       tableId: GenericTrashItems
       weight: 15
-    # 10% chance of low-value treasure or maintenance tools
+    # 9% chance of low-value treasure or maintenance tools
     - !type:GroupSelector
-      weight: 10
+      weight: 9
       children:
       - !type:NestedSelector
         tableId: SalvageTreasureCommon
       - !type:NestedSelector
         tableId: MaintToolsTable
-
-# All types of the rare and unique fishes
-- type: entityTable
-  id: RareFishTable
-  table: !type:GroupSelector
-    children:
-    - id: FishAlien
-    - id: FishBingle
-    - id: FishBoyFisher
-    - id: FishNukeDisk
-    - id: FishGib
-    - id: FishMutant
-    - id: FishNuker
-    - id: FishToxic
-    - id: FishIan
-
-# Fish from water
-- type: entityTable
-  id: WaterFishTable
-  table: !type:GroupSelector
-    children:
-    - id: FishAngler
-    - id: FishBass
-    - id: FishBlob
-    - id: FishBlueFintuna
-    - id: FishCat
-    - id: FishTropicalClown
-    - id: FishPuffer
-    - id: FishSilver
-    - id: FishTropicalSun
-    - id: FishTropical
-
-- type: entityTable
-  id: HostileFishTable
-  table: !type:GroupSelector
-    children:
-    - id: MobCarp
-      weight: 50
-    - id: MobCarpMagic
-      weight: 20
-    - id: MobCarpHolo
-      weight: 20
-    - id: MobCarpRainbow
-      weight: 9
-    - id: MobShark
-      weight: 1 # Oh crikey its a whooper!
-    - id: MobCoconutCrab
-      weight: 1 # this is crabtually insane
+    # 9% chance of low-value treasure or maintenance tools
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: FishingRodGolden
+    # 1% Chance of golden rod
 
 # Items from Water
 - type: entityTable
@@ -82,48 +186,60 @@
   table: !type:GroupSelector
     children:
       - !type:NestedSelector
-        tableId: BasicFishingLootTable
-        weight: 70
-      - !type:NestedSelector
-        tableId: WaterFishTable
-        weight: 15
+        tableId: CommonFishTable
+        weight: 7
       - !type:NestedSelector
         tableId: RareFishTable
-        weight: 10
+        weight: 1
       - !type:NestedSelector
-        tableId: HostileFishTable
-        weight: 5
+        tableId: FishingScrapLootTable
+        weight: 1
+      - !type:NestedSelector
+        tableId: HostileFishTableWater
+        weight: 1
 
 # Items from Lava
 - type: entityTable
   id: LavaFishingLootTable
   table: !type:GroupSelector
     children:
-      # TODO: lava/plasma fish
       - !type:NestedSelector
-        tableId: BasicFishingLootTable
+        tableId: FishingScrapLootTable
+        weight: 5
+      - !type:NestedSelector
+        tableId: FishingOreCrabTable
+        weight: 3
+      - !type:NestedSelector
+        tableId: LavaLandHostile
+        weight: 1
+      - !type:NestedSelector
+        tableId: PreciousMetals
+        weight: 2
 
 # Items from Plasma
 - type: entityTable
   id: PlasmaFishingLootTable
   table: !type:GroupSelector
     children:
-    # TODO: lava/plasma fish
       - !type:NestedSelector
-        tableId: BasicFishingLootTable
+        tableId: FishingScrapLootTable # Make this one better
+        weight: 5
+      - !type:GroupSelector
+        weight: 5
+        children:
+        - id: MobPlasmamanRandom
 
 # Items from Toilets
 - type: entityTable
   id: ToiletFishingLootTable
   table: !type:GroupSelector
     children:
-      # like water but no rare fishes
       - !type:NestedSelector
-        tableId: BasicFishingLootTable
-        weight: 80
+        tableId: HostileFishTableWater
+        weight: 4
       - !type:NestedSelector
-        tableId: WaterFishTable
-        weight: 15
-      - !type:NestedSelector
-        tableId: HostileFishTable
+        tableId: GrossTable
         weight: 5
+      - !type:NestedSelector
+        tableId: CommonFishTable
+        weight: 1

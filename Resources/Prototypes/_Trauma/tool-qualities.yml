@@ -1,0 +1,6 @@
+- type: tool
+  id: Sharpening
+  name: tool-quality-sharpening-name
+  toolName: tool-quality-sharpening-tool-name
+  spawn: Whetstone
+  icon: { sprite: _Trauma/Objects/Tools/whetstone.rsi, state: icon }

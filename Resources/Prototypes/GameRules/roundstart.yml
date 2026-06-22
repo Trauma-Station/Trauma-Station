@@ -45,6 +45,8 @@
       prob: 0.05
     - id: WraithRoundstart
       prob: 0.02
+    - id: SubVampire
+      prob: 0.2
     # </Trauma>
 
 - type: entity
@@ -91,6 +93,8 @@
       prob: 0.05
     - id: WraithRoundstart
       prob: 0.02
+    - id: SubVampire
+      prob: 0.2
     # </Trauma>
 
 - type: entity

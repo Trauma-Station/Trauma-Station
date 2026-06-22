@@ -12,6 +12,9 @@
     keysIn:
     - timer
     proto: MolotovFire
+  - type: Tag
+    tags:
+    - Firebomb
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Bombs/ied.rsi
