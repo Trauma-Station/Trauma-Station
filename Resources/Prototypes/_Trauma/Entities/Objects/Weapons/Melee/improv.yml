@@ -153,6 +153,8 @@
   - type: Anchorable
     flags:
     - Anchorable
+  - type: Physics
+    bodyType: Static
   - type: CollisionWake
     enabled: false
   - type: Fixtures

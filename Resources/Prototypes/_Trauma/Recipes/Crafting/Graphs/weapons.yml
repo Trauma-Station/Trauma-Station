@@ -638,21 +638,21 @@
 
     - to: unfinished
       steps:
-        - material: Steel
-          amount: 5
-          doAfter: 4
+      - material: Steel
+        amount: 5
+        doAfter: 4
 
   - node: unfinished
     entity: SwordWeldedUnfinished
     edges:
     - to: finish
       steps:
-        - tool: Welding
-          doAfter: 5
-        - tool: Welding
-          doAfter: 5
-        - tool: Sharpening
-          doAfter: 5
+      - tool: Welding
+        doAfter: 5
+      - tool: Welding
+        doAfter: 5
+      - tool: Sharpening
+        doAfter: 5
 
   - node: finish
     entity: SwordWelded
@@ -666,9 +666,9 @@
     edges:
     - to: finish
       steps:
-        - material: BarbedWire
-          amount: 2
-          doAfter: 3
+      - material: BarbedWire
+        amount: 2
+        doAfter: 3
 
   - node: finish
     entity: BarbHandcuffs
