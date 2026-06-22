@@ -59,37 +59,26 @@
   useQuality: false
 
 - type: construction
-  id: BarbedWireMaterial
+  abstract: true
+  id: BaseBarbedWire
   graph: BarbedWireMaterial
-  startNode: start
+  category: construction-category-materials
+  objectType: Item
+
+- type: construction
+  parent: BaseBarbedWire
+  id: BarbedWireLV
   targetNode: BarbedWire
-  category: construction-category-materials
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 0
-  useQuality: false
 
 - type: construction
-  id: BarbedWireMaterial0
-  graph: BarbedWireMaterial
-  startNode: start
+  parent: BaseBarbedWire
+  id: BarbedWireMV
   targetNode: BarbedWire0
-  category: construction-category-materials
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 0
-  useQuality: false
 
 - type: construction
-  id: BarbedWireMaterial1
-  graph: BarbedWireMaterial
-  startNode: start
+  parent: BaseBarbedWire
+  id: BarbedWireHV
   targetNode: BarbedWire1
-  category: construction-category-materials
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 0
-  useQuality: false
 
 - type: construction
   abstract: true

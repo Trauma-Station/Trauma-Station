@@ -1,12 +1,12 @@
 - type: entity
   parent: [ BaseStructure, BaseMinorContraband ]
   id: BarbedWireStructure
+  name: barbed wire
+  description: A large mass of steel wire with nasty barbs.
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
-  name: barbed wire
-  description: A large mass of steel wire with nasty barbs.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Materials/barbwire.rsi
@@ -69,12 +69,12 @@
 - type: entity
   parent: [ BaseMinorContraband ]
   id: TrapTripWire
+  name: trip wire
+  description: A wire that sends a signal when walked over, can be disarmed with wirecutters.
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
-  name: trip wire
-  description: A wire that sends a signal when walked over, can be disarmed with wirecutters.
   components:
   - type: StepTrigger
     intersectRatio: 0.2

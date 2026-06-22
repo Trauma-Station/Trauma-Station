@@ -36,6 +36,10 @@
   - type: MeleeChemicalInjector
     transferAmount: 5
     solution: melee
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: _Trauma/Objects/Weapons/Melee/bat_barbwire.rsi
 
 - type: entity
   parent: BaseBallBat
@@ -63,6 +67,10 @@
     tags:
     - BaseballBat
     - Recyclable
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: _Trauma/Objects/Weapons/Melee/bat_nail.rsi
 
 - type: entity
   parent: [BaseItem, BaseMinorContraband]
@@ -82,6 +90,11 @@
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/nailboard.rsi
     state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,0,2
+    storedRotation: -45
 
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, WoodDurabilityWeak ]
@@ -105,7 +118,8 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,0,3
+    - 0,0,0,2
+    storedRotation: -45
   - type: PhysicalComposition
     materialComposition:
       Wood: 250
@@ -196,7 +210,7 @@
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, SpearDurabilityWeak ]
   id: SpearPipebomb
-  name: bomb spear
+  name: pipe bomb spear
   description: Risky, but deadly.
   components:
   - type: ThrowableBlocked
@@ -301,7 +315,7 @@
 - type: entity
   parent: SpearPipebomb
   id: SpearIED
-  name: bomb spear
+  name: fire bomb spear
   description: Risky, but deadly.
   components:
   - type: Sprite
@@ -326,8 +340,8 @@
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]
   id: PipeSpear
-  name: pipe spear
-  description: A pipe sharpened to a nasty point.
+  name: pipe shank
+  description: A pipe sharpened to a nasty point, could be a great throwing weapon.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/spear_pipe.rsi
@@ -343,68 +357,77 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Large
+    size: Small
     shape:
     - 0,0,2,0
-  # - type: Construction
-  #   graph: Hammer
-  #   node: hammer
+    storedRotation: 90
+  - type: Construction
+    graph: PipeShank
+    node: finish
+  - type: EmbeddableProjectile
+    offset: -0.15,0.0
+  - type: ThrowingAngle
+    angle: 180
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 15
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
-  id: SwordNail
-  name: nail sword
-  description: A wooden sword with nails sticking out of it.
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: PipeSpearUnfinished
+  name: unfinished pipe shank
+  description: Needs to be sharpened.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Melee/sword_nail.rsi
-    state: icon
+    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    state: pipeStraight
   - type: MeleeWeapon
     animationRotation: -90
     wideAnimationRotation: -135
     attackRate: 1
     damage:
       types:
-        Blunt: 12
-        Piercing: 3
-    heavyStaminaCost: 6
-    soundHit:
-      collection: MetalThud
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,0,5
-  # - type: Construction
-  #   graph: Hammer
-  #   node: hammer
-
-- type: entity
-  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
-  id: SwordScrap
-  name: scrap sword
-  description: A wooden sword with jagged metal sticking out of it.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Melee/sword_scrap.rsi
-    state: icon
-  - type: MeleeWeapon
-    animationRotation: -90
-    wideAnimationRotation: -135
-    attackRate: 1
-    damage:
-      types:
-        Blunt: 12
-        Slash: 5
+        Piercing: 10
     heavyStaminaCost: 6
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+  - type: Construction
+    graph: PipeShank
+    node: unfinished
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,2,0
+    storedRotation: 90
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: IncompleteWoodenSword
+  name: incomplete wooden sword
+  description: An uncarved wooden sword.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/incomplete_bat.rsi
+    state: icon
   - type: Item
     size: Large
     shape:
     - 0,0,0,5
-  # - type: Construction
-  #   graph: Hammer
-  #   node: hammer
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/incomplete_bat.rsi
+    sprite: Objects/Weapons/Melee/incomplete_bat.rsi
+  - type: Construction
+    graph: WoodenSword
+    node: uncarved
+  - type: Tag
+    tags:
+    - Recyclable
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 250
 
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
@@ -421,7 +444,7 @@
     attackRate: 1
     damage:
       types:
-        Blunt: 12
+        Blunt: 10
     heavyStaminaCost: 6
     soundHit:
       collection: MetalThud
@@ -429,15 +452,135 @@
     size: Large
     shape:
     - 0,0,0,5
-  # - type: Construction
-  #   graph: Hammer
-  #   node: hammer
+    storedRotation: -45
+  - type: Construction
+    graph: WoodenSword
+    node: finish
+  - type: Tag
+    tags:
+    - WoodenSword
+    - Recyclable
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 250
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: SwordNailUnfinished
+  name: unfinished nail sword
+  description: Still needs some nails.
+  components:
+  - type: Construction
+    graph: NailSword
+    node: unfinished
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/sword_wooden.rsi
+    state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,0,5
+    storedRotation: -45
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: SwordScrapUnfinished
+  name: unfinished scrap sword
+  description: Still needs some blades.
+  components:
+  - type: Construction
+    graph: ScrapSword
+    node: unfinished
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/sword_wooden.rsi
+    state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,0,5
+    storedRotation: -45
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
+  id: SwordNail
+  name: nail sword
+  description: A wooden sword with nails sticking out of it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/sword_nail.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -90
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 10
+        Piercing: 3
+    heavyStaminaCost: 6
+    soundHit:
+      collection: MetalThud
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,0,5
+    storedRotation: -45
+  - type: Construction
+    graph: NailSword
+    node: finish
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
+  id: SwordScrap
+  name: scrap sword
+  description: A wooden sword with jagged metal sticking out of it.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/sword_scrap.rsi
+    state: icon
+  - type: MeleeWeapon
+    animationRotation: -90
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 10
+        Slash: 5
+    heavyStaminaCost: 6
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,0,5
+    storedRotation: -45
+  - type: Construction
+    graph: ScrapSword
+    node: finish
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: SwordWeldedUnfinished
+  name: unfinished welded sword
+  description: An unfinished welded sword.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/sword_welded_unfinished.rsi
+    state: icon
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,0,6
+    storedRotation: -45
+  - type: Construction
+    graph: WeldedSword
+    node: unfinished
 
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]
   id: SwordWelded
   name: welded sword
-  description: A sword made by welding two pieces of metal to a tang.
+  description: A sword made by welding two pieces of metal to a tang, a bit unwieldy.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/sword_welded.rsi
@@ -445,7 +588,7 @@
   - type: MeleeWeapon
     animationRotation: -90
     wideAnimationRotation: -135
-    attackRate: 1
+    attackRate: 0.8
     damage:
       types:
         Slash: 18
@@ -455,7 +598,8 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,0,5
-  # - type: Construction
-  #   graph: Hammer
-  #   node: hammer
+    - 0,0,0,6
+    storedRotation: -45
+  - type: Construction
+    graph: WeldedSword
+    node: finish

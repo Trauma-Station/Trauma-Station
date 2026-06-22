@@ -116,5 +116,5 @@
   damage:
     Blunt: 0.2 # just not heavy
     Slash: 1.5 # the sharpest of edges
-    Piercing: 1.5 # on par with plasteel, but it's already stupid strong
+    Piercing: 1.5 # the sharpest of points
   overheated: OverheatedAdamantine

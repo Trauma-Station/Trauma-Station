@@ -243,6 +243,7 @@
     noPowerPopup: ninja-no-power
   # core ninja suit stuff
   - type: NinjaSuit
+    empCharge: 300 # Trauma
   - type: EmpResistance
     strengthMultiplier: 0
   - type: UseDelay

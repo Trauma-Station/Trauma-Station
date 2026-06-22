@@ -83,5 +83,5 @@
       entity: BaseBallBatBarb
 
     - node: nail
-      entity: BaseBallBatBarb
+      entity: BaseBallBatNail
       # </Trauma>

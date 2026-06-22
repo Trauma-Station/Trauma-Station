@@ -99,7 +99,6 @@
 
 - type: constructionGraph
   id: BarbedWire
-  start: start
   graph:
   - node: start
     edges:
@@ -147,11 +146,10 @@
     - to: finish
       completed:
       - !type:SpawnPrototype
-          prototype: RemoteSignaller
-          amount: 1
+        prototype: RemoteSignaller
       - !type:SpawnPrototype
-          prototype: CableApcStack1
-          amount: 5
+        prototype: CableApcStack1
+        amount: 5
       - !type:DeleteEntity {}
       steps:
         - tool: Cutting
@@ -192,18 +190,14 @@
     - to: finish
       completed:
       - !type:SpawnPrototype
-          prototype: PipeBomb
-          amount: 1
+        prototype: PipeBomb
       - !type:SpawnPrototype
-          prototype: CableApcStack1
-          amount: 5
+        prototype: CableApcStack1
       - !type:SpawnPrototype
-          prototype: Igniter
-          amount: 1
+        prototype: Igniter
       - !type:SpawnPrototype
-          prototype: SignalTrigger
-          amount: 1
-      - !type:DeleteEntity {}
+        prototype: SignalTrigger
+      - !type:DeleteEntity
       steps:
         - tool: Cutting
           doAfter: 5
@@ -212,11 +206,9 @@
 
 - type: constructionGraph
   id: BarbedWireMaterial
-  start: start
   graph:
   - node: start
     edges:
-
     - to: BarbedWire
       completed:
         - !type:SetStackCount
@@ -244,62 +236,11 @@
           amount: 10
           doAfter: 3
 
-    - node: BarbedWire
-      entity: BarbedWire
+  - node: BarbedWire
+    entity: BarbedWire
 
-    - node: BarbedWire0
-      entity: BarbedWire
+  - node: BarbedWire0
+    entity: BarbedWire
 
-    - node: BarbedWire1
-      entity: BarbedWire
-
-
-# Spear bomb
-
-- type: constructionGraph
-  id: IEDSpear
-  start: start
-  graph:
-  - node: start
-    edges:
-    - to: finish
-      steps:
-        - tag: Spear
-          name: construction-graph-tag-any-spear
-          icon:
-            sprite: Objects/Weapons/Melee/spear.rsi
-            state: spear
-        - material: Cable
-          amount: 5
-          doAfter: 3
-        - tag: Firebomb
-          name: construction-graph-tag-firebomb
-          icon:
-            sprite: Objects/Weapons/Bombs/ied.rsi
-            state: base
-  - node: finish
-    entity: SpearIED
-
-- type: constructionGraph
-  id: IEDSpear
-  start: start
-  graph:
-  - node: start
-    edges:
-    - to: finish
-      steps:
-        - tag: Spear
-          name: construction-graph-tag-any-spear
-          icon:
-            sprite: Objects/Weapons/Melee/spear.rsi
-            state: spear
-        - material: Cable
-          amount: 5
-          doAfter: 3
-        - tag: Pipebomb
-          name: construction-graph-tag-pipebomb
-          icon:
-            sprite: Objects/Weapons/Bombs/pipebomb.rsi
-            state: base
-  - node: finish
-    entity: SpearPipebomb
+  - node: BarbedWire1
+    entity: BarbedWire

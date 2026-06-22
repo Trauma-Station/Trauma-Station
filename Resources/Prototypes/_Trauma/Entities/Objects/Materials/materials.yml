@@ -124,9 +124,6 @@
   - type: Stack
     stackType: BarbedWire
     count: 30
-    baseLayer: icon
-    layerStates:
-    - icon
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -144,7 +141,7 @@
       params:
         volume: -4
   - type: Construction
-    graph: BarbedWire
+    graph: BarbedWireMaterial
     node: BarbedWire
 
 - type: entity

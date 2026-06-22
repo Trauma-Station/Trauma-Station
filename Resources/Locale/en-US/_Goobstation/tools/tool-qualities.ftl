@@ -12,3 +12,8 @@ tool-quality-hammering-tool-name = Hammer
 
 tool-quality-painting-name = Painting
 tool-quality-painting-tool-name = Spray Painter
+
+tool-quality-sharpening-name = Sharpening
+tool-quality-sharpening-tool-name = Sharpening Tool
+
+

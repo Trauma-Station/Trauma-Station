@@ -537,7 +537,7 @@
           type: [ Rat, Vox ]
           inverted: true
         - !type:ReagentCondition
-          reagent: LabGrownNutriment
+          reagent: UncookedAnimalProteins
           min: 0.01
         disease: DiseaseGutWorms
         mutate: false

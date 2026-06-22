@@ -237,9 +237,6 @@
   id: SpaceWhaleSegment # Prevents space whale tail self collision
 
 - type: Tag
-  id: Spear
-
-- type: Tag
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
 
 - type: Tag
@@ -284,3 +281,6 @@
 
 - type: Tag
   id: Whetstone # Durability repair of spears and knives
+
+- type: Tag
+  id: WoodenSword
