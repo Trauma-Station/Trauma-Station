@@ -1,7 +1,7 @@
 - type: entity
-  name: barbwire baseball bat
   parent: BaseBallBat
   id: BaseBallBatBarb
+  name: barbwire baseball bat
   description: A robust barbed baseball bat.
   components:
   - type: Sprite
@@ -38,9 +38,10 @@
     solution: melee
 
 # - type: entity
-#   name: unfinished nail board
+
 #   parent: [BaseItem, BaseMinorContraband]
 #   id: NailBoardWeapon
+#   name: unfinished nail board
 #   description: Needs some nails.
 #   components:
   # - type: Construction
@@ -54,9 +55,9 @@
   #   - Recyclable
 
 - type: entity
-  name: nail board
-  parent: [BaseItem, BaseMinorContraband, WoodDurabilityWeak]
+  parent: [ BaseItem, BaseMinorContraband, WoodDurabilityWeak ]
   id: NailBoardWeapon
+  name: nail board
   description: A nasty weapon that also works as a trap.
   components:
   - type: Sprite
@@ -95,8 +96,8 @@
 
 - type: entity
   parent: [ BaseItem, BaseRevMinorContraband ]
-  name: nail board
   id: NailBoardTrap
+  name: nail board
   description: A nasty trap, probbaly gonna give your foot an infection.
   placement:
     mode: SnapgridCenter
@@ -162,9 +163,9 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  name: bomb spear
-  parent: [BaseItem, BaseMinorContraband, SpearDurabilityWeak]
+  parent: [ BaseItem, BaseMinorContraband, SpearDurabilityWeak ]
   id: SpearPipebomb
+  name: bomb spear
   description: Risky, but deadly.
   components:
   - type: ThrowableBlocked
@@ -267,9 +268,9 @@
         color: "#b85425"
 
 - type: entity
-  name: bomb spear
   parent: SpearPipebomb
   id: SpearIED
+  name: bomb spear
   description: Risky, but deadly.
   components:
   - type: Sprite
@@ -289,9 +290,9 @@
     canCreateVacuum: false
 
 - type: entity
-  name: pipe spear
-  parent: [BaseItem, BaseMinorContraband, MetalToolDurability]
+  parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]
   id: PipeSpear
+  name: pipe spear
   description: A pipe sharpened to a nasty point.
   components:
   - type: Sprite
@@ -316,9 +317,9 @@
   #   node: hammer
 
 - type: entity
-  name: nail sword
-  parent: [BaseItem, BaseMinorContraband, WoodDurability]
+  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
   id: SwordNail
+  name: nail sword
   description: A wooden sword with nails sticking out of it.
   components:
   - type: Sprite
@@ -344,9 +345,9 @@
   #   node: hammer
 
 - type: entity
-  name: scrap sword
-  parent: [BaseItem, BaseMinorContraband, WoodDurability]
+  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
   id: SwordScrap
+  name: scrap sword
   description: A wooden sword with jagged metal sticking out of it.
   components:
   - type: Sprite
@@ -372,9 +373,9 @@
   #   node: hammer
 
 - type: entity
-  name: wooden sword
-  parent: [BaseItem, BaseMinorContraband, WoodDurability]
+  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
   id: SwordWood
+  name: wooden sword
   description: A wooden sword.
   components:
   - type: Sprite
@@ -399,9 +400,9 @@
   #   node: hammer
 
 - type: entity
-  name: welded sword
-  parent: [BaseItem, BaseMinorContraband, MetalToolDurability]
+  parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]
   id: SwordWelded
+  name: welded sword
   description: A sword made by welding two pieces of metal to a tang.
   components:
   - type: Sprite

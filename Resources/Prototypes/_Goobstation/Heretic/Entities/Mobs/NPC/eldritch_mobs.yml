@@ -246,7 +246,7 @@
   - type: Eye
     drawFov: false
   - type: Viewcone
-    BaseConeAngle: 360
+    baseConeAngle: 360
 
 - type: entity
   parent: [BaseMobGhoulLock, MobGhoulProphetBase]

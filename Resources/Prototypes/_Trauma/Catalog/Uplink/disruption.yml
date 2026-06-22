@@ -33,7 +33,7 @@
       - SurplusBundle
 
 - type: listing
-  id: UplinkDisposableTurret
+  id: UplinkDisposableTurretNukie
   name: uplink-disposable-turret-name
   description: uplink-disposable-turret-desc
   productEntity: ToolboxElectricalTurretFilled
