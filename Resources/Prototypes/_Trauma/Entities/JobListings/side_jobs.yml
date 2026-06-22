@@ -28,32 +28,53 @@
     objectiveNoOwnerText: side-job-steal-title-no-owner
     objectiveText: side-job-steal-title
     descriptionText: side-job-steal-description
-    requireScan: true
+  - type: StealConditionRequireScan
 
 - type: entity
   parent: [BaseStealSideJob, CMOHyposprayStealObjective]
   id: CMOHyposprayStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerCMOHypospray
 
 - type: entity
   parent: [BaseStealSideJob, RDHardsuitStealObjective]
   id: RDHardsuitStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerRDHardsuit
 
 - type: entity
   parent: [BaseStealSideJob, HandTeleporterStealObjective]
   id: HandTeleporterStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerHandTeleporter
 
 - type: entity
   parent: [BaseStealSideJob, MagbootsStealObjective]
   id: MagbootsStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerMagboots
 
 - type: entity
   parent: [BaseStealSideJob, ClipboardStealObjective]
   id: ClipboardStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerClipboard
 
 - type: entity
   parent: [BaseStealSideJob, CaptainJetpackStealObjective]
   id: CaptainJetpackStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerCaptainJetpack
 
 - type: entity
   parent: [BaseStealSideJob, CaptainGunStealObjective]
   id: CaptainGunStealSideJob
+  components:
+  - type: SideJob
+    tool: SyndicateScanalyzerCaptainGun

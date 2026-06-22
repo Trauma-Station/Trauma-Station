@@ -46,6 +46,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsClaimJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsCancelJobMessage>(OnMessage);
+        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsForceReloadMessage>(OnMessage);
 
         InitializeReward();
     }
@@ -99,25 +100,30 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <summary>
     /// Accept an already assigned job.
     /// </summary>
-    /// <param name="jobBoard"></param>
-    /// <param name="sideJob"></param>
-    public bool AcceptSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
+    public bool AcceptSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
         if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs)
             return false;
         if (!jobBoard.Comp.AvailableSideJobs.Contains(sideJob))
             return false;
+        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            return false;
 
         jobBoard.Comp.AvailableSideJobs.Remove(sideJob);
         jobBoard.Comp.AcceptedSideJobs.Add(sideJob);
+
+        if (sideJobComp.Tool is not null)
+        {
+            var reward = Spawn(sideJobComp.Tool.Value);
+            _hands.PickupOrDrop(actor, reward);
+        }
+
         return true;
     }
 
     /// <summary>
     /// Cancel an already accepted job.
     /// </summary>
-    /// <param name="jobBoard"></param>
-    /// <param name="sideJob"></param>
     public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
         jobBoard.Comp.AcceptedSideJobs.Remove(sideJob);
@@ -125,11 +131,8 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     }
 
     /// <summary>
-    /// Claim a completed job.
+    /// Claim a completed job and retrieve the rewards.
     /// </summary>
-    /// <param name="jobBoard"></param>
-    /// <param name="actor"></param>
-    /// <param name="sideJob"></param>
     public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
         if (jobBoard.Comp.Mind is null)
@@ -158,9 +161,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// Determines if the job board already has the current side job as either available, accepted or completed.
     /// Used to avoid adding the same objective twice.
     /// </summary>
-    /// <param name="jobBoard"></param>
-    /// <param name="sideJobProtoId"></param>
-    /// <returns></returns>
     public bool HasSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJobProtoId)
     {
         foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs)
@@ -177,8 +177,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// Count how many jobs exist on the job board.
     /// This includes both available and assigned.
     /// </summary>
-    /// <param name="jobBoard"></param>
-    /// <returns>True if successful, false if failure.</returns>
     public int CountSideJobs(Entity<JobListingsComponent> jobBoard)
     {
         return jobBoard.Comp.AvailableSideJobs.Count + jobBoard.Comp.AcceptedSideJobs.Count;
@@ -187,8 +185,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <summary>
     /// Assign the traitor side jobs until their available slots are filled.
     /// </summary>
-    /// <param name="jobBoard"></param>
-    /// <returns>True if successful, false if failure.</returns>
     public bool FillSideJobs(Entity<JobListingsComponent> jobBoard)
     {
         while (CountSideJobs(jobBoard) < jobBoard.Comp.MaximumSideJobs)
@@ -203,8 +199,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <summary>
     /// Open the job listings ui.
     /// </summary>
-    /// <param name="owner">The entity which owns the Ui, probably a PDA.</param>
-    /// <param name="actor">The player opening the Ui.</param>
     public void OpenUi(EntityUid owner, EntityUid actor)
     {
         _ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
@@ -256,9 +250,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// <summary>
     /// Find a job board from an entity that has a <see cref="RemoteJobListingsComponent"/>.
     /// </summary>
-    /// <param name="owner"></param>
-    /// <param name="jobBoard"></param>
-    /// <returns></returns>
     public bool GetJobBoard(EntityUid owner, [NotNullWhen(true)] out Entity<JobListingsComponent>? jobBoard)
     {
         jobBoard = null;
@@ -296,7 +287,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     {
         if (!GetJobBoard(owner.Owner, out var jobBoard))
             return;
-        AcceptSideJob(jobBoard.Value, GetEntity(msg.Job));
+        AcceptSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
         UpdateUi(owner.Owner);
     }
 
@@ -314,6 +305,11 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return;
         CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
         UpdateUi(owner.Owner);
+    }
+
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsForceReloadMessage msg)
+    {
+        UpdateUi(owner);
     }
 }
 
