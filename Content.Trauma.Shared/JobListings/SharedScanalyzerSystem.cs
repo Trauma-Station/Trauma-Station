@@ -24,7 +24,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ScanalyzerComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<ScanalyzerComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<StealTargetComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<ScanalyzerComponent, ScanalyzerScanDoAfterEvent>(OnScan);
     }
 
@@ -48,27 +48,27 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     /// <summary>
     /// Check if the scanalyzer can scan the target.
     /// </summary>
-    public bool CanScan(Entity<ScanalyzerComponent> entity, EntityUid target)
+    public bool CanScan(Entity<ScanalyzerComponent> entity, Entity<StealTargetComponent> target)
     {
         if (entity.Comp.Used)
             return false;
-        if (!TryComp<StealTargetComponent>(target, out var steal))
-            return false;
-        if (entity.Comp.StealTarget != steal.StealGroup)
+        if (entity.Comp.StealTarget != target.Comp.StealGroup)
             return false;
         return true;
     }
 
     protected virtual void AfterScan(Entity<ScanalyzerComponent> entity, EntityUid user, ProtoId<StealTargetGroupPrototype> target) {}
 
-    private void OnInteractUsing(Entity<ScanalyzerComponent> entity, ref InteractUsingEvent args)
+    private void OnInteractUsing(Entity<StealTargetComponent> entity, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
-        if (!CanScan(entity, args.Target))
+        if (!TryComp<ScanalyzerComponent>(args.Used, out var scanalyzer))
+            return;
+        if (!CanScan((args.Used, scanalyzer), entity))
             return;
 
-        StartScan(entity, args.User, args.Target);
+        StartScan((args.Used, scanalyzer), args.User, entity.Owner);
         args.Handled = true;
     }
 
