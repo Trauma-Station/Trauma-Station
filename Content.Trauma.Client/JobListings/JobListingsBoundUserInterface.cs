@@ -30,7 +30,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         if (state is not JobListingsUserInterfaceState jobListingsState)
             return;
 
-        _menu?.SetReputation(jobListingsState.Reputation, jobListingsState.Level);
+        _menu?.SetReputation(jobListingsState.Reputation, jobListingsState.ReputationLevel);
         _menu?.MaximumAcceptedSideJobs = jobListingsState.MaximumAcceptedSideJobs;
         _menu?.ClearJobListings();
         foreach (var sideJob in jobListingsState.AvailableSideJobs)
