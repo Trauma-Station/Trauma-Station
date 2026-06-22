@@ -10524,3 +10524,10 @@ Entries:
   id: 1190
   time: '2026-06-22T04:29:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3279
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Tweaked the Baseball Bat, it is now 1x4, and normal size.
+  id: 1191
+  time: '2026-06-22T19:22:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3258
