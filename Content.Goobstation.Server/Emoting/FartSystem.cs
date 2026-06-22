@@ -24,13 +24,11 @@ public sealed partial class FartSystem : SharedFartSystem
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IRobustRandom _rng = default!;
-    [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private IEntityManager _entMan = default!;
-    [Dependency] private SharedTransformSystem _transformSystem = default!;
-    [Dependency] private SharedCameraRecoilSystem _recoilSystem = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
-
 
     private readonly string[] _fartSounds = [
         "/Audio/Effects/Emotes/parp1.ogg",
@@ -161,14 +159,14 @@ public sealed partial class FartSystem : SharedFartSystem
             _audio.PlayEntity(_superFartSounds[0], Filter.Pvs(uid), uid, true, AudioParams.Default.WithVolume(0f));
 
             // Screen shake
-            var xformSystem = _entMan.System<SharedTransformSystem>();
-            CameraShake(10f, xformSystem.GetMapCoordinates(uid), 0.75f);
+            var coords = _transform.GetMapCoordinates(uid);
+            CameraShake(10f, coords, 0.75f);
 
             // Release ammonia into the air
             var tileMix = _atmos.GetTileMixture(uid, excite: true);
             tileMix?.AdjustMoles(component.GasToFart, component.MolesAmmoniaPerFart * 2);
 
-            _entMan.SpawnEntity("Butt", xformSystem.GetMapCoordinates(uid));
+            Spawn("Butt", coords);
 
             _popup.PopupEntity(Loc.GetString("emote-fart-super-fart"), uid, uid);
 
@@ -185,14 +183,14 @@ public sealed partial class FartSystem : SharedFartSystem
     private void CameraShake(float range, MapCoordinates epicenter, float totalIntensity)
     {
         var players = Filter.Empty();
-        players.AddInRange(epicenter, range, _playerManager, EntityManager);
+        players.AddInRange(epicenter, range, _player, EntityManager);
 
         foreach (var player in players.Recipients)
         {
             if (player.AttachedEntity is not EntityUid uid)
                 continue;
 
-            var playerPos = _transformSystem.GetWorldPosition(player.AttachedEntity!.Value);
+            var playerPos = _transform.GetWorldPosition(player.AttachedEntity!.Value);
             var delta = epicenter.Position - playerPos;
 
             if (delta.EqualsApprox(Vector2.Zero))
@@ -201,7 +199,7 @@ public sealed partial class FartSystem : SharedFartSystem
             var distance = delta.Length();
             var effect = 5 * MathF.Pow(totalIntensity, 0.5f) * (1 - distance / range);
             if (effect > 0.01f)
-                _recoilSystem.KickCamera(uid, -delta.Normalized() * effect);
+                _recoil.KickCamera(uid, -delta.Normalized() * effect);
         }
     }
 
@@ -229,8 +227,7 @@ public sealed partial class FartSystem : SharedFartSystem
                 _rng.Shuffle(_superFartSounds);
                 _audio.PlayEntity(_superFartSounds[0], Filter.Pvs(near), near, true, AudioParams.Default.WithVolume(0f));
             }
-            var xformSystem = _entMan.System<SharedTransformSystem>();
-            CameraShake(10f, xformSystem.GetMapCoordinates(near), 1.5f);
+            CameraShake(10f, _transform.GetMapCoordinates(near), 1.5f);
             return;
         }
     }
