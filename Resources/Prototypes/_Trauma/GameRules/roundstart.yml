@@ -7,8 +7,21 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
+    - id: Devil
+      prob: 0.02
+    - id: ShadowlingRoundstart
+      prob: 0.02
+    - id: WraithRoundstart
+      prob: 0.02
+
+- type: entity
+  parent: BaseGameRule
+  id: SubGamemodesRuleNoSpy
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: SubHeretic
+      prob: 0.2
     - id: Devil
       prob: 0.02
     - id: ShadowlingRoundstart
@@ -56,6 +69,28 @@
         min: 1
         max: 4
       playerRatio: 10
+
+- type: entity
+  parent: BaseRoundstartAntagRule
+  id: Spies
+  components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+  - type: SpyRule
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    agentName: spy-round-end-agent-name
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      playerRatio: 5
+      proto: Spy
+      range:
+        min: 1
+        max: 10
 
 - type: entity
   parent: BaseInsurgencyRule

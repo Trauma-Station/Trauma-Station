@@ -1,0 +1,27 @@
+- type: antag
+  id: Spy
+  name: roles-antag-spy-name
+  objective: roles-antag-spy-objective
+  antagonist: true
+  setPreference: true
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 1h
+  guides: [ Spy ]
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Spy
+  prefRoles:
+  - Spy
+  mindRoles:
+  - MindRoleSpy
+
+- type: antagSmite
+  id: Spy
+  antag: Spy
+  rule: Spies
+  ruleComp: SpyRule
+  icon:
+    sprite: Clothing/Mask/gas.rsi # TODO
+    state: icon

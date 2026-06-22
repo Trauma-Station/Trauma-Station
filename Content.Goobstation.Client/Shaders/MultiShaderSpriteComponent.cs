@@ -11,5 +11,8 @@ public sealed partial class MultiShaderSpriteComponent : Component
     [DataField]
     public Dictionary<string, MultiShaderData> PostShaders = new();
 
+    // shader protoId -> instance
+    public Dictionary<string, ShaderInstance> CurrentShaders = new();
+
     public IRenderTexture? RenderTarget;
 }

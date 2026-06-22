@@ -1,0 +1,173 @@
+- type: spyBounty
+  id: Hypospray
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: Hypospray
+
+- type: spyBounty
+  id: ClothingOuterHardsuitRd
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingOuterHardsuitRd
+
+- type: spyBounty
+  id: HandTeleporter
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: HandTeleporter
+
+- type: spyBounty
+  id: ClothingShoesBootsMagAdv
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingShoesBootsMagAdv
+
+- type: spyBounty
+  id: BoxFolderQmClipboard
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: BoxFolderQmClipboard
+
+- type: spyBounty
+  id: ClothingHandsKnuckleDustersQM
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingHandsKnuckleDustersQM
+
+- type: spyBounty
+  id: CaptainIDCard
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: CaptainIDCard
+
+- type: spyBounty
+  id: JetpackCaptainFilled
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: JetpackCaptainFilled
+
+- type: spyBounty
+  id: WeaponAntiqueLaser
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: WeaponAntiqueLaser
+
+- type: spyBounty
+  id: WeaponEnergyGunLawbringer
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: WeaponEnergyGunLawbringer
+
+- type: spyBounty
+  id: WeaponSecHeadSword
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: WeaponSecHeadSword
+
+- type: spyBounty
+  id: RapidSyringeGun
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: RapidSyringeGun
+
+- type: spyBounty
+  id: ExecutiveBriefcase
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ExecutiveBriefcase
+
+- type: spyBounty
+  id: ClothingBeltGeminiHoloProjector
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingBeltGeminiHoloProjector
+
+- type: spyBounty
+  id: ComputerCargoOrdersSecurity
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoOrdersSecurity
+
+- type: spyBounty
+  id: ComputerFundingAllocation
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerFundingAllocation
+
+- type: spyBounty
+  id: ComputerRoboticsControl
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerRoboticsControl
+
+- type: spyBounty
+  id: StationAiUploadComputer
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: StationAiUploadComputer
+
+- type: spyBounty
+  id: StationAiFixerComputer
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: StationAiFixerComputer
+
+- type: spyBounty
+  id: ComputerId
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerId
+
+- type: spyBounty
+  id: VendingMachineCart
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineCart
+
+- type: spyBounty
+  id: VendingMachineSec
+  difficulty: Hard
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineSec
+
+- type: spyBounty
+  id: FaxMachineCaptain
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: FaxMachineCaptain
+
+- type: spyBounty
+  id: ToiletGoldenDirtyWater
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ToiletGoldenDirtyWater
+
+- type: spyBounty
+  id: CaptainSword
+  difficulty: Hard
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: CaptainSword
+
+- type: spyBounty
+  id: PlayerStationAi
+  difficulty: Hard
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: PlayerStationAi
+    queryComp: StationAiCore
+    areas: [AreaAiCore]
+
+- type: spyBounty
+  id: WeaponEnergyTurretAI
+  difficulty: Hard
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: WeaponEnergyTurretAI
+    queryComp: StationAiTurret
+    areas: [AreaAi, AreaAiCore, AreaAiUpload]
+
+- type: spyBounty
+  id: WeaponEnergyTurretSecurity
+  difficulty: Hard
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: WeaponEnergyTurretSecurity
+    queryComp: TurretTargetSettings
+    areas: [AreaArmory]

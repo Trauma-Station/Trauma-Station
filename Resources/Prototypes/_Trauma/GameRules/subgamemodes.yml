@@ -38,3 +38,18 @@
       proto: AbductorScientist
     - !type:FixedAntagCount
       proto: AbductorAgent
+
+- type: entity
+  parent: Spies
+  id: SubSpies
+  components:
+  - type: GameRule
+    minPlayers: 5
+  - type: AntagSelection
+    antags:
+    - !type:LinearAntagCount
+      proto: Traitor
+      range:
+        min: 1
+        max: 5
+      playerRatio: 15

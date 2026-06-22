@@ -28,13 +28,15 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
     # <Trauma>
+    #- id: Thief
+    #  prob: 0.5
     #- id: SubWizard # not real
     #  prob: 0.05
     #- id: SubXenoborgs # no
     #  prob: 0.05
+    - id: SubSpies
+      prob: 0.3
     - id: SubHeretic
       prob: 0.2
     - id: Devil
@@ -53,11 +55,13 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
     # <Trauma>
+    #- id: Thief
+    #  prob: 0.5
     #- id: SubXenoborgs
     #  prob: 0.05
+    - id: SubSpies
+      prob: 0.3
     - id: SubHeretic
       prob: 0.2
     - id: Devil
@@ -76,11 +80,13 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: Thief
-      prob: 0.5
     # <Trauma>
+    #- id: Thief
+    #  prob: 0.5
     #- id: SubWizard # not real
     #  prob: 0.05
+    - id: SubSpies
+      prob: 0.3
     - id: SubHeretic
       prob: 0.2
     - id: Devil

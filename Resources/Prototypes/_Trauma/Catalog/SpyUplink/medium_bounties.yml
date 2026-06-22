@@ -1,0 +1,288 @@
+- type: spyBounty
+  id: EnergyChemDispenser
+  difficulty: Medium
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: EnergyChemDispenser
+    queryComp: EnergyReagentDispenser
+    areas: [AreaChem]
+
+- type: spyBounty
+  id: ComputerScienceXenobiologyBounty
+  difficulty: Medium
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: ComputerScienceXenobiologyBounty
+    queryComp: XenobiologyBountyConsole
+    areas: [AreaXenobio]
+
+- type: spyBounty
+  id: ComputerShuttleCargo
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerShuttleCargo
+
+- type: spyBounty
+  id: ComputerShuttleMiningLavaland
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerShuttleMiningLavaland
+
+- type: spyBounty
+  id: ComputerCargoOrders
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoOrders
+
+- type: spyBounty
+  id: ComputerCargoOrdersEngineering
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoOrdersEngineering
+
+- type: spyBounty
+  id: ComputerCargoOrdersMedical
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoOrdersMedical
+
+- type: spyBounty
+  id: ComputerCargoOrdersScience
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoOrdersScience
+
+- type: spyBounty
+  id: ComputerCargoOrdersService
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoOrdersService
+
+- type: spyBounty
+  id: ComputerCargoBounty
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCargoBounty
+
+- type: spyBounty
+  id: ComputerSurveillanceCameraMonitor
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerSurveillanceCameraMonitor
+
+- type: spyBounty
+  id: ComputerPalletConsole
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerPalletConsole
+
+- type: spyBounty
+  id: ComputerAtmosMonitoring
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerAtmosMonitoring
+
+- type: spyBounty
+  id: ComputerPowerMonitoring
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerPowerMonitoring
+
+- type: spyBounty
+  id: ComputerCriminalRecords
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCriminalRecords
+
+- type: spyBounty
+  id: ComputerStationRecords
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerStationRecords
+
+- type: spyBounty
+  id: ComputerCrewMonitoring
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerCrewMonitoring
+
+- type: spyBounty
+  id: ComputerResearchAndDevelopment
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerResearchAndDevelopment
+
+- type: spyBounty
+  id: ComputerAnalysisConsole
+  difficulty: Medium
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: ComputerAnalysisConsole
+    queryComp: AnalysisConsole
+
+- type: spyBounty
+  id: ComputerGeneticsConsole
+  difficulty: Medium
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: ComputerGeneticsConsole
+    queryComp: GeneticsConsole
+    areas: [AreaGenetics]
+
+- type: spyBounty
+  id: MedicalBiofabricator
+  difficulty: Medium
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: MedicalBiofabricator
+    queryComp: Lathe
+
+- type: spyBounty
+  id: ExosuitFabricator
+  difficulty: Medium
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: ExosuitFabricator
+    queryComp: Lathe
+    areas: [AreaRobotics, AreaRoboticsMechBay]
+
+- type: spyBounty
+  id: EngineeringTechFab
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: EngineeringTechFab
+
+- type: spyBounty
+  id: CargoTechFab
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: CargoTechFab
+
+- type: spyBounty
+  id: ScienceTechFab
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ScienceTechFab
+
+- type: spyBounty
+  id: ServiceTechFab
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ServiceTechFab
+
+- type: spyBounty
+  id: VendingMachineEngivend
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineEngivend
+
+- type: spyBounty
+  id: VendingMachineMedical
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineMedical
+
+- type: spyBounty
+  id: VendingMachineRobotics
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineRobotics
+
+- type: spyBounty
+  id: VendingMachineSalvage
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineSalvage
+
+- type: spyBounty
+  id: VendingMachineChemicals
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineChemicals
+
+- type: spyBounty
+  id: Emitter
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: Emitter
+    queryComp: Emitter
+    areas: [AreaEngineSM, AreaEngineSMRoom]
+
+- type: spyBounty
+  id: CargoTelepad
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: CargoTelepad
+    queryComp: CargoTelepad
+
+- type: spyBounty
+  id: Teg
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: Teg
+
+- type: spyBounty
+  id: PlantRD
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: PlantRD
+
+- type: spyBounty
+  id: AnimalIan
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalIan
+
+- type: spyBounty
+  id: AnimalRenault
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalRenault
+
+- type: spyBounty
+  id: AnimalShiva
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalShiva
+
+- type: spyBounty
+  id: ForensicScanner
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ForensicScanner
+
+- type: spyBounty
+  id: FlippoEngravedLighter
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: FlippoEngravedLighter
+
+- type: spyBounty
+  id: ClothingHeadHatWarden
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingHeadHatWarden
+
+- type: spyBounty
+  id: ClothingOuterHardsuitVoidParamed
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingOuterHardsuitVoidParamed
+
+- type: spyBounty
+  id: FireAxe
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: FireAxe
+
+- type: spyBounty
+  id: ChiefEngineerToolBelt
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ChiefEngineerToolBelt
+
+- type: spyBounty
+  id: WantedListCartridge
+  difficulty: Medium
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: WantedListCartridge
+
+- type: spyBounty
+  id: TelescopicBaton
+  difficulty: Medium
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: TelescopicBaton

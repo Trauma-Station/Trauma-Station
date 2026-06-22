@@ -3,6 +3,16 @@
   copyright: "Taken from /tg/station and converted to mono by @deltanedas (github)"
   source: "https://github.com/tgstation/tgstation/blob/f32d8aa19eae9c250990d83b26546d384666597f/sound/items/weapons/sear.ogg"
 
+- files: ["pshoom.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/blob/7e201733d03edf9495c54a0e8652f0d3c248ecce/sound/items/pshoom/pshoom.ogg"
+
+- files: ["wewewew.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from /tg/station"
+  source: "https://github.com/tgstation/tgstation/blob/7e201733d03edf9495c54a0e8652f0d3c248ecce/sound/machines/wewewew.ogg"
+
 - files: ["queenroarstart.ogg"]
   license: "CC-BY-3.0"
   copyright: "Created by AudioPapkin, Modified by loltart"

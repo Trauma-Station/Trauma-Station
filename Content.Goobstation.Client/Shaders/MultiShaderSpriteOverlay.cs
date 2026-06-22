@@ -35,13 +35,15 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
 
         var handle = args.WorldHandle;
         var bounds = args.WorldAABB.Enlarged(2f);
+        var mapId = args.MapId;
 
         var localMatrix = viewport.GetWorldToLocalMatrix();
 
         var query = _entMan.EntityQueryEnumerator<MultiShaderSpriteComponent, SpriteComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var multi, out var sprite, out var xform))
         {
-            if (multi.PostShaders.Count == 0 || !sprite.Visible || _container.IsEntityInContainer(uid))
+            if (multi.PostShaders.Count == 0 || !sprite.Visible || xform.MapID != mapId ||
+                _container.IsEntityInContainer(uid))
                 continue;
 
             var (pos, rot) = _transform.GetWorldPositionRotation(xform);
@@ -122,7 +124,12 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
                     foreach (var (protoId, data) in multi.PostShaders.OrderBy(x => x.Value.RenderOrder))
                     {
                         var proto = _proto.Index<ShaderPrototype>(protoId);
-                        var shader = data.Mutable ? proto.Instance() : proto.InstanceUnique();
+                        if (!multi.CurrentShaders.TryGetValue(protoId, out var shader))
+                        {
+                            shader = data.Mutable ? proto.Instance() : proto.InstanceUnique();
+                            multi.CurrentShaders[protoId] = shader;
+                        }
+
                         if (data.RaiseShaderEvent)
                         {
                             var ev = new BeforePostMultiShaderRenderEvent(proto, shader, sprite, viewport);

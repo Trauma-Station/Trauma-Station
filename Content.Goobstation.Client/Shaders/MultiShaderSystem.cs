@@ -43,6 +43,7 @@ public sealed partial class MultiShaderSystem : EntitySystem
                 foreach (var proto in args.PostShaders.Keys)
                 {
                     multi.PostShaders.Remove(proto);
+                    multi.CurrentShaders.Remove(proto);
                 }
             }
 
@@ -69,6 +70,7 @@ public sealed partial class MultiShaderSystem : EntitySystem
                 return;
 
             multi.PostShaders.Remove(args.Proto);
+            multi.CurrentShaders.Remove(args.Proto);
 
             UpdateMultiShaderComp((ent, multi));
             return;

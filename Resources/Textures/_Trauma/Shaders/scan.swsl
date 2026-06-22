@@ -1,0 +1,36 @@
+uniform highp float ratio;
+uniform highp vec3 scanColor;
+uniform highp float scanDensity;
+uniform highp float scanAlpha;
+
+void fragment()
+{
+    highp vec4 sprite = zTexture(UV);
+
+    if (sprite.a == 0.0) {
+        discard;
+    }
+
+    highp vec4 effectColor = vec4(0.0);
+
+    highp float scanned = abs(UV.x - ratio);
+
+    if (UV.x <= ratio)
+    {
+        highp float scanPattern = sin(UV.x * scanDensity) * 0.5 + 0.5;
+
+        highp vec3 areaColor = scanColor * (scanPattern * 0.6 + 0.4);
+        effectColor = vec4(areaColor, scanAlpha);
+    }
+
+    float laserCore = smoothstep(0.005, 0.0, scanned);
+    float laserGlow = exp(-scanned * 100.0);
+
+    highp vec3 glowColor = scanColor * (laserCore + laserGlow * 0.6);
+
+    effectColor.rgb += glowColor;
+    effectColor.a = max(effectColor.a, laserCore + laserGlow) * sprite.a;
+
+    COLOR.rgb = mix(sprite.rgb, effectColor.rgb, effectColor.a);
+    COLOR.a = sprite.a;
+}

@@ -1,0 +1,240 @@
+- type: spyBounty
+  id: ComputerMassMedia
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerMassMedia
+
+- type: spyBounty
+  id: ComputerSolarControl
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ComputerSolarControl
+    queryComp: SolarControlConsole
+
+- type: spyBounty
+  id: ComputerRadar
+  difficulty: Easy
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: ComputerRadar
+    queryComp: RadarConsole
+
+- type: spyBounty
+  id: VendingMachineCondiments
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineCondiments
+
+- type: spyBounty
+  id: BoozeDispenser
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: BoozeDispenser
+
+- type: spyBounty
+  id: VendingMachineChefvend
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineChefvend
+
+- type: spyBounty
+  id: VendingMachineDinnerware
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineDinnerware
+
+- type: spyBounty
+  id: VendingMachineTheater
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineDinnerware
+
+- type: spyBounty
+  id: VendingMachineVendomat
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineVendomat
+
+- type: spyBounty
+  id: VendingMachineYouTool
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineYouTool
+
+- type: spyBounty
+  id: VendingMachineGames
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineGames
+
+- type: spyBounty
+  id: VendingMachineHappyHonk
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineHappyHonk
+
+- type: spyBounty
+  id: KitchenDeepFryer
+  difficulty: Easy
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: KitchenDeepFryer
+    queryComp: DeepFryer
+    areas: [AreaKitchen]
+
+- type: spyBounty
+  id: KitchenMicrowave
+  difficulty: Easy
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: KitchenMicrowave
+    queryComp: Microwave
+    areas: [AreaKitchen]
+
+- type: spyBounty
+  id: BorgCharger
+  difficulty: Easy
+  selector: !type:SpySpecificEntityBountySelectorEvent
+    proto: BorgCharger
+    queryComp: Charger
+
+- type: spyBounty
+  id: XenoArtifact
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: XenoArtifact
+
+- type: spyBounty
+  id: FreezerHeater
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: FreezerHeater
+
+- type: spyBounty
+  id: AnimalNamedCat
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalNamedCat
+
+- type: spyBounty
+  id: AnimalMcGriff
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalMcGriff
+
+- type: spyBounty
+  id: AnimalWalter
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalWalter
+
+- type: spyBounty
+  id: AnimalMorty
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalMorty
+
+- type: spyBounty
+  id: AnimalTropico
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AnimalTropico
+
+- type: spyBounty
+  id: HeadCloak
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: HeadCloak
+
+- type: spyBounty
+  id: HeadBedsheet
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: HeadBedsheet
+
+- type: spyBounty
+  id: Stamp
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: Stamp
+
+- type: spyBounty
+  id: DoorRemote
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: DoorRemote
+
+- type: spyBounty
+  id: AmePartFlatpack
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: AmePartFlatpack
+
+- type: spyBounty
+  id: Bible
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: Bible
+
+- type: spyBounty
+  id: ClothingNeckGoldmedal
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingNeckGoldmedal
+
+- type: spyBounty
+  id: ClothingNeckClownmedal
+  difficulty: Easy
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: ClothingNeckClownmedal
+
+- type: spyBounty
+  id: Stunbaton
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: Stunbaton
+
+- type: spyBounty
+  id: WeaponLaserSidearm
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: WeaponLaserSidearm
+
+- type: spyBounty
+  id: ClothingHandsGlovesColorYellow
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ClothingHandsGlovesColorYellow
+
+- type: spyBounty
+  id: ClothingEyesGlassesMeson
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ClothingEyesGlassesMeson
+
+- type: spyBounty
+  id: ClothingEyesGlassesSecurity
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ClothingEyesGlassesSecurity
+
+- type: spyBounty
+  id: MachineAPE
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: MachineAPE
+
+- type: spyBounty
+  id: AnomalyScanner
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: AnomalyScanner
+
+- type: spyBounty
+  id: ClothingEyesGlassesThermal
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: ClothingEyesGlassesThermal
+
+- type: spyBounty
+  id: VendingMachineNutri
+  difficulty: Easy
+  selector: !type:SpyPrototypeBountySelectorEvent
+    proto: VendingMachineNutri
