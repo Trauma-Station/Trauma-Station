@@ -1,8 +1,6 @@
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared.Waypointer.Components;
+namespace Content.Trauma.Shared.Waypointer.Components;
 
 /// <summary>
 /// This signifies an entity with an active waypointer trying to track something.

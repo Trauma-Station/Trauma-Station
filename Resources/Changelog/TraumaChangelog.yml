@@ -10501,3 +10501,26 @@ Entries:
   id: 1187
   time: '2026-06-22T02:33:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3277
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: >-
+      Fixed ALL custom languages giving you the wrong translator and fixed
+      translator shitcode.
+  id: 1188
+  time: '2026-06-22T04:11:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3274
+- author: assripper.
+  changes:
+  - type: Add
+    message: new scream sounds for xenomorphs
+  id: 1189
+  time: '2026-06-22T04:14:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3272
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass shards and caltrops not damaging your feet specifically.
+  id: 1190
+  time: '2026-06-22T04:29:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3279

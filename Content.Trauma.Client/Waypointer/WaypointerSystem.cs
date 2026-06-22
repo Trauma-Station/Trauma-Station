@@ -1,13 +1,14 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Actions.Components;
-using Content.Shared.Waypointer;
-using Content.Shared.Waypointer.Components;
-using Content.Shared.Waypointer.Events;
-using Robust.Client.Graphics;
+using Content.Trauma.Shared.Waypointer;
+using Content.Trauma.Shared.Waypointer.Components;
+using Content.Trauma.Shared.Waypointer.Events;
 using Robust.Client.Player;
 using Robust.Client.Timing;
 using Robust.Shared.Player;
 
-namespace Content.Client.Waypointer;
+namespace Content.Trauma.Client.Waypointer;
 
 /// <summary>
 /// The client-side system handles initializing the overlay, as well as removing and adding it depending on game actions.
