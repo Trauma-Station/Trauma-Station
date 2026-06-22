@@ -21,6 +21,8 @@ construction-graph-tag-overridekeycomponents = override key components
 # structures
 construction-graph-tag-nail = a nail
 construction-graph-tag-remotesignaller = any remote signaller
+construction-graph-tag-pipebomb = a pipebomb
+construction-graph-tag-signaltrigger = a signal trigger
 
 # robots
 construction-graph-tag-butt = a butt

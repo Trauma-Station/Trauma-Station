@@ -171,6 +171,9 @@
   id: PartCapacitor # Construction: WeaponGaussgunImprov
 
 - type: Tag
+  id: Pipebomb
+
+- type: Tag
   id: PlasteelScraps # Construction: BloomeryColdPlasteel
 
 - type: Tag

@@ -132,7 +132,7 @@
     edges:
     - to: finish
       steps:
-        - material: CableLV
+        - material: Cable
           amount: 5
           doAfter: 3
         - tag: RemoteSignaller
@@ -150,9 +150,105 @@
           prototype: RemoteSignaller
           amount: 1
       - !type:SpawnPrototype
-          prototype: RemoteSignaller
+          prototype: CableApcStack1
+          amount: 5
+      - !type:DeleteEntity {}
+      steps:
+        - tool: Cutting
+          doAfter: 5
+
+# Pipe bomb trap
+
+- type: constructionGraph
+  id: PipeBombTrap
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - tag: Pipebomb
+          name: construction-graph-tag-pipebomb
+          icon:
+            sprite: Objects/Weapons/Bombs/pipebomb.rsi
+            state: base
+        - tag: Igniter
+          name: construction-graph-tag-igniter
+          icon:
+            sprite: Objects/Devices/igniter.rsi
+            state: icon
+        - tag: SignalTrigger
+          name: construction-graph-tag-signaltrigger
+          icon:
+            sprite: Objects/Devices/signaltrigger.rsi
+            state: signaltrigger
+        - material: Cable
+          amount: 5
+          doAfter: 3
+
+  - node: finish
+    entity: TrapPipeBomb
+    edges:
+    - to: finish
+      completed:
+      - !type:SpawnPrototype
+          prototype: PipeBomb
+          amount: 1
+      - !type:SpawnPrototype
+          prototype: CableApcStack1
+          amount: 5
+      - !type:SpawnPrototype
+          prototype: Igniter
+          amount: 1
+      - !type:SpawnPrototype
+          prototype: SignalTrigger
           amount: 1
       - !type:DeleteEntity {}
       steps:
         - tool: Cutting
           doAfter: 5
+
+# Barbed Wire
+
+- type: constructionGraph
+  id: BarbedWire
+  start: start
+  graph:
+  - node: start
+    edges:
+
+    - to: BarbedWire
+      completed:
+        - !type:SetStackCount
+          amount: 1
+      steps:
+        - material: Cable
+          amount: 30
+          doAfter: 3
+
+    # - to: BarbedWire0
+    #   completed:
+    #     - !type:SetStackCount
+    #       amount: 1
+    #   steps:
+    #     - material: CableMV
+    #       amount: 20
+    #       doAfter: 3
+
+    # - to: BarbedWire1
+    #   completed:
+    #     - !type:SetStackCount
+    #       amount: 1
+    #   steps:
+    #     - material: CableHV
+    #       amount: 10
+    #       doAfter: 3
+
+    - node: BarbedWire
+      entity: BarbedWire
+
+    # - node: BarbedWire0
+    #   entity: BarbedWire
+
+    # - node: BarbedWire1
+    #   entity: BarbedWire

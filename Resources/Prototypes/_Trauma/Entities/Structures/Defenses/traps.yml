@@ -149,10 +149,6 @@
   - type: Sprite
     sprite: _Trauma/Structures/Defences/trap_pipebomb.rsi
     state: icon
-  # - type: Construction
-  #   graph: PipeBomb
-  #   node: cable
-  #   defaultTarget: pipebomb
   - type: TimerTrigger
     delay: 1
     examinable: false
@@ -198,3 +194,7 @@
         layer:
         - TabletopMachineLayer
   - type: InteractionOutline
+  - type: Construction
+    graph: PipeBombTrap
+    node: finish
+    defaultTarget: null
