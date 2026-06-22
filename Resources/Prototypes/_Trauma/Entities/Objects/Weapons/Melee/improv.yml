@@ -255,9 +255,6 @@
     shape:
     - 0,0,8,0
     storedRotation: 45
-  # - type: Construction
-  #   graph: Spear
-  #   node: spear
   - type: UseDelay
   - type: Appearance
   - type: TimerTrigger
@@ -297,6 +294,9 @@
         radius: 3
         energy: 15
         color: "#b85425"
+  - type: Construction
+    graph: PipebombSpear
+    node: finish
 
 - type: entity
   parent: SpearPipebomb
@@ -319,6 +319,9 @@
     intensitySlope: 5
     maxIntensity: 3
     canCreateVacuum: false
+  - type: Construction
+    graph: IEDSpear
+    node: finish
 
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]

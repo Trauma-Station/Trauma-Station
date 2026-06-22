@@ -31,7 +31,8 @@ construction-graph-tag-egg = any egg
 
 # weapons
 construction-graph-tag-improvised-bow = an improvised bow
-
+construction-graph-tag-any-spear = any spear
+construction-graph-tag-firebomb = a firebomb
 # food
 construction-graph-tag-CookedEgg = a cooked egg
 

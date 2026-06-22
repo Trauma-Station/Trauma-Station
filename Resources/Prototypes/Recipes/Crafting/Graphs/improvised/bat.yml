@@ -43,24 +43,39 @@
 
         - to: nail
           steps:
-            - material: Nail
-              amount: 1
+            - tag: Nail
+              name: construction-graph-tag-nail
+              icon:
+                sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+                state: icon
             - tool: Hammering
               doAfter: 0.5
-            - material: Nail
-              amount: 1
+            - tag: Nail
+              name: construction-graph-tag-nail
+              icon:
+                sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+                state: icon
             - tool: Hammering
               doAfter: 0.5
-            - material: Nail
-              amount: 1
+            - tag: Nail
+              name: construction-graph-tag-nail
+              icon:
+                sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+                state: icon
             - tool: Hammering
               doAfter: 0.5
-            - material: Nail
-              amount: 1
+            - tag: Nail
+              name: construction-graph-tag-nail
+              icon:
+                sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+                state: icon
             - tool: Hammering
               doAfter: 0.5
-            - material: Nail
-              amount: 1
+            - tag: Nail
+              name: construction-graph-tag-nail
+              icon:
+                sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
+                state: icon
             - tool: Hammering
               doAfter: 0.5
 

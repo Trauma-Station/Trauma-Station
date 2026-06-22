@@ -103,6 +103,9 @@
 ## F ##
 
 - type: Tag
+  id: Firebomb
+
+- type: Tag
   id: FlamethrowerBackpack # used for rev flamethrower's ammo provider
 
 - type: Tag
@@ -232,6 +235,9 @@
 
 - type: Tag
   id: SpaceWhaleSegment # Prevents space whale tail self collision
+
+- type: Tag
+  id: Spear
 
 - type: Tag
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
