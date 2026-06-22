@@ -656,3 +656,19 @@
 
   - node: finish
     entity: SwordWelded
+
+# Barbcuffs
+
+- type: constructionGraph
+  id: BarbCuffs
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - material: BarbedWire
+          amount: 2
+          doAfter: 3
+
+  - node: finish
+    entity: BarbHandcuffs

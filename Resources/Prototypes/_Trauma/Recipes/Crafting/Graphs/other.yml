@@ -211,8 +211,8 @@
     edges:
     - to: BarbedWire
       completed:
-        - !type:SetStackCount
-          amount: 1
+      - !type:SetStackCount
+        amount: 1
       steps:
         - material: Cable
           amount: 30
@@ -220,8 +220,8 @@
 
     - to: BarbedWire0
       completed:
-        - !type:SetStackCount
-          amount: 1
+      - !type:SetStackCount
+        amount: 1
       steps:
         - material: CableMV
           amount: 20
@@ -229,8 +229,8 @@
 
     - to: BarbedWire1
       completed:
-        - !type:SetStackCount
-          amount: 1
+      - !type:SetStackCount
+        amount: 1
       steps:
         - material: CableHV
           amount: 10

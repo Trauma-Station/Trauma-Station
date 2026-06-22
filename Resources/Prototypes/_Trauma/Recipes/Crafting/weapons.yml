@@ -209,3 +209,15 @@
   practical:
     WeaponsKnowledge: 2
     MetalworkingKnowledge: 4
+
+- type: construction
+  id: BarbCuffs
+  graph: BarbCuffs
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: BaseQuality
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
