@@ -1,4 +1,5 @@
 job-listings-ui-default-title = Job Listings
+job-listings-ui-reputation = Reputation: {$reputation}
 job-listings-ui-reward = Reward: {$reward} + {$rep} rep
 job-listings-ui-accepted-label = Accepted
 job-listings-ui-available-label = Available
