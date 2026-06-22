@@ -1,6 +1,6 @@
-using Robust.Shared.GameStates;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared.Waypointer.Components;
+namespace Content.Trauma.Shared.Waypointer.Components;
 
 /// <summary>
 /// This is on entities that ARE NOT GRIDS to be trackable by Waypointers.

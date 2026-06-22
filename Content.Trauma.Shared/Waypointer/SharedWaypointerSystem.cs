@@ -1,15 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
-using Content.Shared.Waypointer.Components;
-using Content.Shared.Waypointer.Events;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
+using Content.Trauma.Shared.Waypointer.Components;
+using Content.Trauma.Shared.Waypointer.Events;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.Waypointer;
+namespace Content.Trauma.Shared.Waypointer;
 
 /// <summary>
 /// This solely handles giving the Waypoint component to equipees. This cannot be done on client, or else it would.

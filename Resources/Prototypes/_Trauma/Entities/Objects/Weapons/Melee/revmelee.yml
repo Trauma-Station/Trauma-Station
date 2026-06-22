@@ -314,7 +314,9 @@
     slipData:
       launchForwardsMultiplier: 0
   - type: TriggerOnStepTrigger
-  - type: DamageUserOnTrigger
+  - type: DamageOnTrigger
+    targetPart: Feet
+    targetUser: true
     damage:
       types:
         Piercing: 15

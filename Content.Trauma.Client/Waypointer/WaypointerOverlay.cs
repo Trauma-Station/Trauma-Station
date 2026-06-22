@@ -1,22 +1,20 @@
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using System.Numerics;
 using Content.Client.Shuttles.Systems;
 using Content.Client.Station;
 using Content.Shared.CombatMode;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
-using Content.Shared.Waypointer;
-using Content.Shared.Waypointer.Components;
 using Content.Shared.Whitelist;
+using Content.Trauma.Shared.Waypointer;
+using Content.Trauma.Shared.Waypointer.Components;
 using Robust.Client.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
 
-namespace Content.Client.Waypointer;
+namespace Content.Trauma.Client.Waypointer;
 
 /// <summary>
 /// This Overlay draws the waypointers on the screen.
@@ -27,7 +25,7 @@ public sealed partial class WaypointerOverlay : Overlay
 
     [Dependency] private IEntityManager _entity = default!;
     [Dependency] private IPlayerManager  _player = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SharedCombatModeSystem _combatMode = default!;
     private readonly SharedPhysicsSystem _physics;
@@ -53,7 +51,7 @@ public sealed partial class WaypointerOverlay : Overlay
         _sprite = _entity.System<SpriteSystem>();
         _station = _entity.System<StationSystem>();
         _transform = _entity.System<TransformSystem>();
-        _unshadedShader = _prototype.Index(UnshadedShader).Instance();
+        _unshadedShader = _proto.Index(UnshadedShader).Instance();
         _shuttle = _entity.System<ShuttleSystem>();
         _whitelist = _entity.System<EntityWhitelistSystem>();
     }
@@ -85,7 +83,7 @@ public sealed partial class WaypointerOverlay : Overlay
             if (!waypointerPair.Value)
                 continue;
 
-            if (!_prototype.Resolve(waypointerPair.Key, out var prototype)
+            if (!_proto.Resolve(waypointerPair.Key, out var prototype)
                 // Check if the waypointer works on grid and combat
                 || !prototype.WorkOnGrid && playerXform.GridUid != null
                 || !prototype.WorkInCombat && _combatMode.IsInCombatMode(player))

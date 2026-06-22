@@ -1,13 +1,12 @@
-using Content.Shared.Actions;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Shared.Waypointer.Events;
+using Content.Shared.Actions;
+
+namespace Content.Trauma.Shared.Waypointer.Events;
 
 /// <summary>
 /// This is a simple action for when someone wants to manage their waypointers.
 /// </summary>
-[ByRefEvent]
 public sealed partial class ActionManageWaypointersEvent : InstantActionEvent;
 
 /// <summary>
