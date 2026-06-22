@@ -10582,8 +10582,6 @@ Entries:
   - type: Add
     message: Security Ballistic Surplus crate to armory.
   - type: Add
-    message: Complete
-  - type: Add
     message: Barbed wire
   - type: Add
     message: Barbed wire traps
@@ -10658,7 +10656,9 @@ Entries:
   - type: Fix
     message: Johntonine now digests
   - type: Fix
-    message: 'Issue where some goob sounds were stereo '
+    message: Issue where some goob sounds were stereo
+  - type: Fix
+    message: Add prices to gold, silver, and adamantine ingots.
   id: 1192
   time: '2026-06-22T20:55:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3273
