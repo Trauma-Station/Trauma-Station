@@ -30,7 +30,6 @@ public sealed partial class FartSystem : SharedFartSystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
 
-
     private readonly string[] _fartSounds = [
         "/Audio/Effects/Emotes/parp1.ogg",
         "/Audio/_Goobstation/Voice/Human/fart2.ogg",
@@ -167,7 +166,7 @@ public sealed partial class FartSystem : SharedFartSystem
             var tileMix = _atmos.GetTileMixture(uid, excite: true);
             tileMix?.AdjustMoles(component.GasToFart, component.MolesAmmoniaPerFart * 2);
 
-            SpawnEntity("Butt", coords);
+            Spawn("Butt", coords);
 
             _popup.PopupEntity(Loc.GetString("emote-fart-super-fart"), uid, uid);
 
