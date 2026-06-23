@@ -162,6 +162,7 @@
         - MobLayer
   - type: Speech
     speechSounds: MaleResomi
+    allowedEmotes: ['Trill', 'Warble', 'Wurble' ]
   - type: Vocal
     sounds:
       Male: MaleAvali
@@ -358,3 +359,4 @@
   parent: [ OrganBaseKidneys, OrganAvaliInternal, OrganAvaliMetabolizer ]
   id: OrganAvaliKidneys
   description: "'Well I didn't need to ten minutes ago!'"
+

@@ -26,7 +26,7 @@
     Sigh:
       collection: MaleSigh
     Crying:
-      collection: MaleCry
+      collection: ResomiCry
     Whistle:
       collection: Whistles
     Honk:
@@ -41,6 +41,12 @@
       collection: DeathGasp
     Surprised:
       path: /Audio/_Goobstation/Voice/surprised.ogg
+    Trill:
+      collection: Trill
+    Wurble:
+      collection: Wurble
+    Warble:
+      collection: Warble
 
 - type: emoteSounds
   id: FemaleAvali
@@ -70,7 +76,7 @@
     Sigh:
       collection: FemaleSigh
     Crying:
-      collection: FemaleCry
+      collection: ResomiCry
     Whistle:
       collection: Whistles
     Honk:
@@ -85,3 +91,9 @@
       collection: FemaleDeathGasp
     Surprised:
       path: /Audio/_Goobstation/Voice/surprised.ogg
+    Trill:
+      collection: Trill
+    Wurble:
+      collection: Wurble
+    Warble:
+      collection: Warble
