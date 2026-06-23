@@ -39,6 +39,7 @@ public sealed partial class SideJobControl : Control
         CancelButton.Visible = false;
         ClaimButton.Visible = false;
         ProgressBar.Visible = false;
+        ProgressLabel.Visible = false;
     }
 
     public void UpdateAsAccepted(SideJobInfo info)
@@ -50,6 +51,7 @@ public sealed partial class SideJobControl : Control
         _cancelAlreadyPressed = false;
         ClaimButton.Visible = true;
         ProgressBar.Visible = true;
+        ProgressLabel.Visible = true;
     }
 
     private void OnAcceptButtonPressed(BaseButton.ButtonEventArgs args)
