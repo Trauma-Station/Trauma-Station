@@ -10669,3 +10669,10 @@ Entries:
   id: 1193
   time: '2026-06-23T22:21:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3284
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed roundstart wraith being weak.
+  id: 1194
+  time: '2026-06-23T22:56:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3294
