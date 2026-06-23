@@ -36,12 +36,6 @@ public sealed class JobListingsClaimJobMessage(NetEntity job) : BoundUserInterfa
 }
 
 /// <summary>
-/// Message sent by job listings bui to force a new updated state to be sent by the client.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class JobListingsForceReloadMessage : BoundUserInterfaceMessage;
-
-/// <summary>
 /// Info describing a side job.
 /// </summary>
 [Serializable, NetSerializable]

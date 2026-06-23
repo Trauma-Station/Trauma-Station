@@ -46,7 +46,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsClaimJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsCancelJobMessage>(OnMessage);
-        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsForceReloadMessage>(OnMessage);
 
         InitializeReward();
     }
@@ -305,11 +304,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return;
         CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
         UpdateUi(owner.Owner);
-    }
-
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsForceReloadMessage msg)
-    {
-        UpdateUi(owner);
     }
 }
 
