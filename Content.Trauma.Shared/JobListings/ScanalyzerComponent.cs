@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// <summary>
 /// Component on a tool given to progtot traitors to scan grand theft items.
 /// </summary>
-[RegisterComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ScanalyzerComponent : Component
 {
     /// <summary>

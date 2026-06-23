@@ -37,6 +37,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
         {
             BreakOnDamage = true,
             BreakOnMove = true,
+            NeedHand = true,
             BreakOnDropItem = true,
             BreakOnHandChange = true,
             BreakOnWeightlessMove = true,
@@ -99,4 +100,5 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
 
 }
 
+[Serializable, NetSerializable]
 public sealed partial class ScanalyzerScanDoAfterEvent : SimpleDoAfterEvent;
