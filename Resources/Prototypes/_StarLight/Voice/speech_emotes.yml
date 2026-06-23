@@ -3,7 +3,7 @@
   name: chat-emote-name-scree
   category: Vocal
   available: false
-  icon: { sprite: _Starlight/Actions/resomi.rsi, state: bird_call }
+  icon: _Goobstation/Interface/Emotes/caw.png
   whitelist:
       components:
           - Vocal
@@ -30,7 +30,7 @@
   name: chat-emote-name-call
   category: Vocal
   available: false
-  icon: { sprite: _Starlight/Actions/resomi.rsi, state: bird_call }
+  icon: _Goobstation/Interface/Emotes/caw.png
   whitelist:
       components:
           - Vocal
@@ -57,7 +57,7 @@
   name: chat-emote-name-squawk
   category: Vocal
   available: false
-  icon: { sprite: _Starlight/Actions/resomi.rsi, state: bird_call }
+  icon: _Goobstation/Interface/Emotes/caw.png
   whitelist:
       components:
           - Vocal

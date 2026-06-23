@@ -53,10 +53,9 @@
 - type: soundCollection
   id: Trill
   files:
-  #   - /Audio/_Goobstation/Voice/Resomi/trill.ogg # Omu - it sounds so bad...
-  - /Audio/_Starlight/Voice/Resomi/trill1.ogg # Omu start
+  - /Audio/_Starlight/Voice/Resomi/trill1.ogg
   - /Audio/_Starlight/Voice/Resomi/trill2.ogg
-  - /Audio/_Starlight/Voice/Resomi/trill3.ogg # Omu end - added from starlight
+  - /Audio/_Starlight/Voice/Resomi/trill3.ogg
 
 - type: soundCollection
   id: Warble
