@@ -1,0 +1,16 @@
+# Rifle
+- type: entity
+  parent: CaseSecurity
+  id: CaseSecurityDragunov
+  name: security case Dragunov
+  suffix: Filled
+  components:
+  - type: Storage
+    grid:
+    - 0,0,4,2
+    - 6,0,8,1
+  - type: StorageFill
+    contents:
+      - id: WeaponRifleDragunov
+      - id: MagazineRifle762Sniper
+        amount: 3

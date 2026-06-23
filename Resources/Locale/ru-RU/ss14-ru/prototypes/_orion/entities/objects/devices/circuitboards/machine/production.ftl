@@ -1,0 +1,11 @@
+ent-QuantumServerMachineCircuitboard = квантовый сервер (машинная плата)
+    .suffix = Машинная плата
+    .desc = Машинная плата для квантового сервера.
+ent-NetpodMachineCircuitboard = нейрокапсула (машинная плата)
+    .suffix = Машинная плата
+    .desc = Машинная плата для нейрокапсулы.
+ent-ByteforgeMachineCircuitboard = материализатор данных (машинная плата)
+    .suffix = Машинная плата
+    .desc = Машинная плата для материализатора данных.
+ent-QuantumConsoleCircuitboard = квантовая консоль (плата компьютера)
+    .desc = Компьютерная плата для консоли управления квантовым доменом.

@@ -1,0 +1,17 @@
+- type: technology
+  id: Bitrunning
+  name: research-technology-bitrunning-name
+  icon:
+    sprite: _Orion/Objects/Specific/Cargo/Bitrunning/encrypted_cache.rsi
+    state: icon
+  discipline: Experimental
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - QuantumConsoleCircuitboard
+  - QuantumServerMachineCircuitboard
+  - NetpodMachineCircuitboard
+  - ByteforgeMachineCircuitboard
+  position: -5,-2
+  technologyPrerequisites:
+   - BluespaceTheory

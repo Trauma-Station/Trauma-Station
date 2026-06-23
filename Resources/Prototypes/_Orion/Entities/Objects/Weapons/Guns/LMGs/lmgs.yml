@@ -1,0 +1,119 @@
+- type: entity
+  parent: [BaseWeaponLightMachineGun, BaseMajorContraband]
+  id: WeaponLightMachineGunRPD
+  name: RPD
+  description: A cheap and robust machinegun, sometimes better known as an 'RPD'. Despite lacking attachment points beyond its underbarrel, remains a popular product on the black market with its cheap cost, high capacity and higher than usual caliber rounds.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/LMGs/rpd/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/LMGs/rpd/tiny.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/LMGs/rpd/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -30
+    maxAngle: -50
+  - type: Gun
+    minAngle: 37
+    maxAngle: 59
+    cameraRecoilScalar: 3
+    fireRate: 5
+    projectileSpeed: 30
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/Snipers/svd.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineLightMachineGunRPD
+        insertSound: /Audio/_Orion/Weapons/Guns/Rifles/ak47_reload.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Rifles/ak47_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineLightMachineGunRPD
+      gun_chamber:
+        startingItem: CartridgeRifle762
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle762
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+  - type: Appearance
+  - type: HeldSpeedModifier
+    sprintModifier: 0.9
+
+- type: entity
+  parent: [BaseWeaponLightMachineGun, BaseSecurityContraband]
+  id: WeaponRifleM41
+  name: M-41
+  description: The M-41 is a large man portable machine, allowing for sustained, accurate suppressive firepower at the cost of mobility and handling. Commonly seen where their preferred tactics of fast, mobile aggression is ill suited.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/LMGs/t42/big.rsi
+    scale: 0.9, 0.9
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/LMGs/t42/tiny.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/LMGs/t42/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -30
+    maxAngle: -50
+  - type: Gun
+    angleDecay: 10
+    angleIncrease: 2
+    minAngle: 32
+    maxAngle: 60
+    cameraRecoilScalar: 1.5
+    fireRate: 6
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/LMGs/m41.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineHeavyRifleM41
+        insertSound: /Audio/_Orion/Weapons/Guns/LMGs/m60_reload.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/LMGs/m60_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineHeavyRifleM41
+      gun_chamber:
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+  - type: Appearance
+  - type: GunRequiresWield
+  - type: HeldSpeedModifier
+    sprintModifier: 0.9
+
+- type: entity
+  parent: WeaponLightMachineGunL6C
+  id: WeaponLightMachineGunL6CInfinite
+  description: The L6 SAW with an integrated self-charging system. An internal nanofabricator synthesizes rounds in real-time, powered by a self-discharging battery.
+  suffix: Infinite
+  components:
+    - type: Gun 
+      minAngle: 12
+      maxAngle: 20
+      fireRate: 3
+    - type: ProjectileBatteryAmmoProvider
+      fireCost: 10

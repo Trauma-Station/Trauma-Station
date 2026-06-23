@@ -33,3 +33,9 @@
   - OreProcessorIndustrialMachineCircuitboard
   - CargoTelepadMachineCircuitboard
   #- ShuttleGunKineticCircuitboard - Goobstation - Moved to MiningBoards
+  # Orion-Start
+  - QuantumConsoleCircuitboard
+  - QuantumServerMachineCircuitboard
+  - NetpodMachineCircuitboard
+  - ByteforgeMachineCircuitboard
+  # Orion-End

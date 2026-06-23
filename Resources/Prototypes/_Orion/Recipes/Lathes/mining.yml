@@ -1,0 +1,42 @@
+- type: latheRecipe
+  id: QuantumConsoleCircuitboard
+  result: QuantumConsoleCircuitboard
+  categories:
+  - Circuitry
+  completetime: 4
+  materials:
+    Steel: 500
+    Glass: 300
+
+- type: latheRecipe
+  id: QuantumServerMachineCircuitboard
+  result: QuantumServerMachineCircuitboard
+  categories:
+  - Circuitry
+  completetime: 4
+  materials:
+    Steel: 600
+    Glass: 400
+    Plastic: 200
+
+- type: latheRecipe
+  id: NetpodMachineCircuitboard
+  result: NetpodMachineCircuitboard
+  categories:
+  - Circuitry
+  completetime: 4
+  materials:
+    Steel: 450
+    Glass: 300
+    Plastic: 100
+
+- type: latheRecipe
+  id: ByteforgeMachineCircuitboard
+  result: ByteforgeMachineCircuitboard
+  categories:
+  - Circuitry
+  completetime: 4
+  materials:
+    Steel: 550
+    Glass: 350
+    Plastic: 150

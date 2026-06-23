@@ -491,6 +491,7 @@
     - Cargo
     - Maintenance
     - Salvage
+    - Bitrun # Orion
   - type: Dumpable
   - type: Storage
     maxItemSize: Huge

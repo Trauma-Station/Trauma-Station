@@ -1,0 +1,12 @@
+ent-MobAssistantBatBitrunning = агрессивный ассистент
+    .suffix = Битраннинг, Бита
+    .desc = { ent-MobHuman.desc }
+ent-MobAssistantAxeBitrunning = агрессивный ассистент
+    .suffix = Битраннинг, Топор
+    .desc = { ent-MobHuman.desc }
+ent-MobAssistantToolboxBitrunning = агрессивный ассистент
+    .suffix = Битраннинг, Ящик
+    .desc = { ent-MobHuman.desc }
+ent-MobAssistantSpearBitrunning = агрессивный ассистент
+    .suffix = Битраннинг, Копьё
+    .desc = { ent-MobHuman.desc }

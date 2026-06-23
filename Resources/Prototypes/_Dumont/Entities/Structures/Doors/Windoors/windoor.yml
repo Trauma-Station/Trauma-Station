@@ -1,0 +1,17 @@
+- type: entity
+  parent: WindoorCargoLocked
+  id: WindoorBitrunnerLocked
+  suffix: Bitrunner, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsBitrunner ]
+
+- type: entity
+  parent: WindoorSecureCargoLocked
+  id: WindoorSecureBitrunnerLocked
+  suffix: Bitrunner, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsBitrunner ]

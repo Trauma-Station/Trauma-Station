@@ -1,0 +1,137 @@
+# Extraction point for avatars when a domain run is completed or aborted.
+- type: entity
+  id: BitrunningExitMarker
+  name: exit marker
+  suffix: Bitrunning
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    drawdepth: Overdoors
+    sprite: _Orion/Structures/Machines/byteforge.rsi
+    layers:
+    - state: on_particles
+      shader: unshaded
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      sensor:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+        density: 0
+        hard: false
+  - type: PointLight
+    enabled: true
+    radius: 1
+    power: 2
+    color: "#67e8ff"
+  - type: BitrunningExitMarker
+
+# Anchor point for the domain's main objective area.
+- type: entity
+  parent: MarkerBase
+  id: BitrunningGoalMarker
+  name: goal marker
+  suffix: Bitrunning
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: BitrunningGoalMarker
+
+# Spawn point for collectible encrypted cache objectives.
+- type: entity
+  parent: MarkerBase
+  id: BitrunningObjectiveEncryptedCacheSpawnMarker
+  name: encrypted cache spawn marker
+  suffix: Bitrunning
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: BitrunningObjectiveEncryptedCacheSpawnMarker
+
+# Spawn point for objective crates used by delivery missions.
+- type: entity
+  parent: MarkerBase
+  id: BitrunningObjectiveCacheCrateSpawnMarker
+  name: cache crate spawn marker
+  suffix: Bitrunning
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: BitrunningObjectiveCacheCrateSpawnMarker
+
+# Spawn point for reward cache crate that appears when objective is completed.
+- type: entity
+  parent: MarkerBase
+  id: BitrunningRewardCacheSpawnMarker
+  name: reward cache spawn marker
+  suffix: Bitrunning
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: BitrunningRewardCacheSpawnMarker
+
+# Spawn point used for avatars placement.
+- type: entity
+  id: BitrunningAvatarSpawnMarker
+  name: avatar spawn marker
+  suffix: Bitrunning
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    drawdepth: Overdoors
+    sprite: _Orion/Structures/Machines/byteforge.rsi
+    layers:
+    - state: on_particles_angry
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    radius: 1
+    power: 2
+    color: "#cc2222"
+  - type: BitrunningAvatarSpawnMarker
+
+# Physical delivery zone sensor.
+- type: entity
+  id: BitrunningObjectiveCacheDeliveryPointMarker
+  name: cache delivery marker
+  suffix: Bitrunning
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    drawdepth: BelowFloor
+    sprite: _Orion/Structures/Specific/Cargo/Bitrunning/bitrunning_circuit_floor.rsi
+    layers:
+    - state: icon
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      sensor:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        mask:
+        - CrateMask
+        layer:
+        - SlipLayer
+        density: 0
+        hard: false
+  - type: PointLight
+    enabled: true
+    radius: 1
+    power: 2
+    color: "#67e8ff"
+  - type: BitrunningObjectiveDeliveryPoint

@@ -1,0 +1,25 @@
+- type: entity
+  parent: ClothingOuterHardsuitDeathsquad
+  id: ClothingOuterHardsuitDeathsquadUnremovable
+  suffix: Unremoveable
+  components:
+  - type: Unremoveable
+
+- type: entity
+  parent: ClothingOuterHardsuitCybersunDreadnought
+  id: ClothingOuterHardsuitCybersunDreadnoughtexperimental
+  name: Syndicate dreadnought experimental suit
+  description: This experimental hardsuit uses nanites for continuous tissue regeneration. WARNING! The side effects of nanites are irreversible, your life expectancy is shortened to one year.
+  suffix: Healing
+  components:
+  - type: ClothingGrantComponent
+    component:
+    - type: DamageOverTime
+      damage:
+        types:
+          Blunt: -1.0
+          Slash: -1.0
+          Piercing: -1.5
+          Asphyxiation: -10.0
+          Bloodloss: -10.0
+          Heat: -0.5

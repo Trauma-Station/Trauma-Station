@@ -1,0 +1,15 @@
+- type: startingGear
+  id: DeathSquadBaseGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDeathSquad
+    back: ClothingBackpackDeathSquad
+    mask: ClothingMaskGasDeathSquad
+    suitstorage: OxygenTankFilled   
+    eyes: ClothingEyesGlassesDeathsquad
+    neck: ExecutiveIDCard
+    gloves: ClothingHandsGlovesDeathsquadUnremovable
+    outerClothing: ClothingOuterHardsuitDeathsquadUnremovable
+    shoes: ClothingShoesBootsMagDeathsquadOn
+    head: ClothingHeadHelmetHardsuitDeathsquad 
+    id: DeathsquadPDA
+    belt: ClothingBeltDeathsquadWebbing

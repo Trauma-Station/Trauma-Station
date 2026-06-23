@@ -1,0 +1,71 @@
+- type: tile
+  id: FloorSteelPavementAlt
+  name: tiles-steel-floor-pavement-alt
+  sprite: /Textures/_Orion/Tiles/steel_pavement.png
+  variants: 4
+  placementVariants:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteHerringboneAlt
+  name: tiles-white-floor-herringbone-alt
+  sprite: /Textures/_Orion/Tiles/white_herringbone.png
+  variants: 4
+  placementVariants:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemWhite
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhitePavementAlt
+  name: tiles-white-floor-pavement-alt
+  sprite: /Textures/_Orion/Tiles/white_pavement.png
+  variants: 4
+  placementVariants:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemWhite
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhitePavementVerticalAlt
+  name: tiles-white-floor-pavement-vertical-alt
+  sprite: /Textures/_Orion/Tiles/white_pavement_vertical.png
+  variants: 4
+  placementVariants:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: FloorTileItemWhite
+  heatCapacity: 10000

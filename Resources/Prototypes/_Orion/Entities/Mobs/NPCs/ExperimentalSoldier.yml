@@ -1,0 +1,27 @@
+- type: entity
+  parent: MobSyndicateFootsoldier
+  id: MobSyndicateSoldierBitrunning
+  name: Syndicate soldier
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+  - type: Perishable 
+    molsPerSecondPerUnitMass: 0
+
+- type: entity
+  parent: MobSyndicateSoldierBitrunning
+  id: MobNukeopsSoldierBitrunning
+  name: Syndicate soldier
+  suffix: Bitrunning
+  components:
+  - type: Loadout
+    prototypes: [ NukeopsSoldierGear ]
+
+- type: entity
+  parent: MobSyndicateSoldierBitrunning
+  id: MobExperimentalSoldierBitrunning
+  name: Experimental syndicate soldier
+  suffix: Bitrunning
+  components:
+  - type: Loadout
+    prototypes: [ ExperimentalSoldierGear ]

@@ -1,0 +1,19 @@
+- type: entity
+  parent: MarkerBase
+  id: StatueRandom
+  name: random statue spawner
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Structures/Decoration/statues.rsi
+          state: bananium_clown
+    - type: RandomSpawner
+      rarePrototypes:
+        - StatueBananiumClown
+      rareChance: 0.1
+      prototypes:
+        - StatueVenusRed
+        - StatueVenusBlue
+      chance: 0.9
+      offset: 0.0

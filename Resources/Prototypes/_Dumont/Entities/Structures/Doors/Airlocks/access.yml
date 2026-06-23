@@ -1,0 +1,24 @@
+- type: entity
+  parent: AirlockBitrunner
+  id: AirlockBitrunnerLocked
+  suffix: Bitrunner, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsBitrunner ]
+
+- type: entity
+  parent: AirlockBitrunnerGlass
+  id: AirlockBitrunnerGlassLocked
+  suffix: Bitrunner, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsBitrunner ]
+
+- type: entity
+  parent: AirlockBitrunnerLocked
+  id: AirlockMaintBitrunnerLocked
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/maint.rsi

@@ -1,0 +1,35 @@
+- type: entity
+  parent: ClothingBackpackMessengerBase
+  id: ClothingBackpackMessengerCamouflage
+  name: camouflage messenger bag
+  description: A robust messenger bag with a camouflage pattern.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon-base
+      color: "#535533"
+    - state: icon-sling
+      color: "#616133"
+    - state: icon-clasp
+      color: "#3a3b24"
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: base-equipped-BACKPACK
+        color: "#535533"
+      - state: sling-equipped-BACKPACK
+        color: "#616133"
+      - state: clasp-equipped-BACKPACK
+        color: "#3a3b24"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-inhand-left
+        color: "#535533"
+      - state: clasp-inhand-left
+        color: "#3a3b24"
+      right:
+      - state: base-inhand-right
+        color: "#535533"
+      - state: clasp-inhand-right
+        color: "#3a3b24"

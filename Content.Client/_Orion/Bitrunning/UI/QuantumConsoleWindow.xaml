@@ -1,0 +1,66 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               MinSize="640 640"
+               SetSize="640 640"
+               Title="{Loc 'bitrunning-ui-title'}">
+    <BoxContainer Orientation="Vertical" SeparationOverride="3">
+        <PanelContainer Name="DomainsPanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="3" Margin="6 6 6 6">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <Label Name="VirtualDomainsHeader" HorizontalExpand="True" Text="{Loc 'bitrunning-ui-virtual-domains'}"/>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                        <CheckBox Name="BroadcastToggle" Text="{Loc 'bitrunning-ui-broadcast'}" ToolTip="{Loc 'bitrunning-ui-broadcast-tooltip'}"/>
+                        <Button Name="RandomButton" Text="{Loc 'bitrunning-ui-button-random-short'}"/>
+                        <PanelContainer Name="PointsBadge">
+                            <Label Name="PointsValue" Margin="6 1 6 1" Text="0"/>
+                        </PanelContainer>
+                    </BoxContainer>
+                </BoxContainer>
+
+                <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                    <Button Name="DifficultyPeaceful" HorizontalExpand="True"/>
+                    <Button Name="DifficultyEasy" HorizontalExpand="True"/>
+                    <Button Name="DifficultyMedium" HorizontalExpand="True"/>
+                    <Button Name="DifficultyHard" HorizontalExpand="True"/>
+                    <Button Name="DifficultyExtreme" HorizontalExpand="True"/>
+                </BoxContainer>
+
+                <ScrollContainer VerticalExpand="True" MinSize="0 285">
+                    <BoxContainer Name="DomainList" Orientation="Vertical" SeparationOverride="2"/>
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer Name="ClientsPanel">
+            <BoxContainer Orientation="Vertical" SeparationOverride="3" Margin="6 4 6 4">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <Label Name="ClientsHeader" HorizontalExpand="True" Text="{Loc 'bitrunning-ui-clients-header'}"/>
+                    <Button Name="RefreshButton" Text="{Loc 'bitrunning-ui-button-refresh'}"/>
+                </BoxContainer>
+                <ScrollContainer VerticalExpand="True" MinSize="0 76">
+                    <BoxContainer Name="ClientList" Orientation="Vertical" SeparationOverride="2"/>
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+
+        <PanelContainer Name="ActiveDomainPanel">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4" Margin="6 4 6 4">
+                <PanelContainer Name="ActiveDomainBadge" HorizontalExpand="True">
+                    <Label Name="CurrentDomainValue" Margin="6 2 6 2" HorizontalExpand="True" Text="-"/>
+                </PanelContainer>
+                <Button Name="StopButton" Text="{Loc 'bitrunning-ui-button-stop'}"/>
+            </BoxContainer>
+        </PanelContainer>
+
+        <BoxContainer Name="MetaRow" Orientation="Vertical" SeparationOverride="4">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                <Label Name="ConnectedValue" HorizontalExpand="True" Text="-"/>
+                <Label Name="ScannerValue" Text="-"/>
+                <Label Name="StateValue" Text="-"/>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                <Label Name="CooldownLabel" Text="-"/>
+                <ProgressBar Name="CooldownBar" HorizontalExpand="True" MinValue="0" MaxValue="1" Value="1"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

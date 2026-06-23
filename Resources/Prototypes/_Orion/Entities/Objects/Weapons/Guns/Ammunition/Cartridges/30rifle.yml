@@ -1,0 +1,75 @@
+- type: entity
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: BaseCartridgeRifle762
+  name: cartridge (7.62mm rifle)
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CartridgeRifle762
+  - type: CartridgeAmmo
+    proto: BulletRifle762
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Casings/30_casing.rsi
+    scale: 0.9, 0.9
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: base
+
+- type: entity
+  parent: BaseCartridgeRifle762
+  id: CartridgeRifle762
+  name: cartridge (7.62mm rifle)
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. Standard kinetic ammunition is common and useful in most situations.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifle762
+
+- type: entity
+  parent: BaseCartridgeRifle762
+  id: CartridgeRifle762Practice
+  name: cartridge (7.62mm practice)
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. Chalk ammunition is generally non-harmful, used for practice.
+  components:
+  - type: SpentAmmoVisuals
+    state: training
+  - type: CartridgeAmmo
+    proto: BulletRifle762Practice
+  - type: Sprite
+    layers:
+      - state: training
+        map: [ "enum.AmmoVisualLayers.Base" ]
+
+- type: entity
+  parent: BaseCartridgeRifle762
+  id: CartridgeRifle762Incendiary
+  name: cartridge (7.62mm incendiary)
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. Incendiary ammunition contains a self-igniting compound that sets the target ablaze.
+  components:
+  - type: SpentAmmoVisuals
+    state: incendiary
+  - type: CartridgeAmmo
+    proto: BulletRifle762Incendiary
+  - type: Sprite
+    layers:
+      - state: incendiary
+        map: [ "enum.AmmoVisualLayers.Base" ]
+
+- type: entity
+  parent: BaseCartridgeRifle762
+  id: CartridgeRifle762Uranium
+  name: cartridge (7.62mm uranium)
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating the target from the inside.
+  components:
+  - type: SpentAmmoVisuals
+    state: uranium
+  - type: CartridgeAmmo
+    proto: BulletRifle762Uranium
+  - type: Sprite
+    layers:
+      - state: uranium
+        map: [ "enum.AmmoVisualLayers.Base" ]

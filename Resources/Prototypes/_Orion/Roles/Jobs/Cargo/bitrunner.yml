@@ -1,0 +1,39 @@
+- type: job
+  id: Bitrunner
+  name: job-name-bitrunner
+  description: job-description-bitrunner
+  playTimeTracker: JobBitrunner
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Cargo
+      time: 9000 # 2.5 hrs
+  icon: "JobIconBitrunner"
+  startingGear: BitrunnerGear
+  guides:
+  # - Bitrunner
+  - Cargo
+  goobcoins: 20
+  supervisors: job-supervisors-qm
+  access:
+  - Bitrun
+  - Cargo
+  - Maintenance
+  extendedAccess:
+  - Salvage
+
+- type: startingGear
+  id: BitrunnerGear
+  equipment:
+    id: BitrunnerPDA
+    ears: ClothingHeadsetCargo
+
+- type: chameleonOutfit
+  id: BitrunnerChameleonOutfit
+  job: Bitrunner
+  equipment:
+    head: ClothingHeadHatCargosoft
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterWinterCargo
+    neck: ClothingNeckScarfStripedBrown
+    gloves: ClothingHandsGlovesColorBlack

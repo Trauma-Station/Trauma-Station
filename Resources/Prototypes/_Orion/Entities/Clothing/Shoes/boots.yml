@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingShoesBootsMagDeathsquad
+  id: ClothingShoesBootsMagDeathsquadOn
+  suffix: Unremoveable, On
+  components:
+  - type: ItemToggle
+    activated: true
+  - type: Unremoveable

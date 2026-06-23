@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tg station at https://github.com/tgstation/tgstation/blob/ba8471b8dbf2c83345809bac7154880e37da7120/icons/mob/clothing/under/cargo.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "icon"
+    },
+    {
+        "name": "equipped-INNERCLOTHING",
+        "directions": 4
+    },
+    {
+        "name": "folded-equipped-INNERCLOTHING",
+        "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

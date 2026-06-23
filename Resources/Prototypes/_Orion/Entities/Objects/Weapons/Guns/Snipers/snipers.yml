@@ -1,0 +1,113 @@
+- type: entity
+  parent: [ BaseMajorContraband, BaseWeaponRifle ]
+  id: WeaponRifleSR127
+  name: SR-127 Bauer bolt action rifle
+  description: The Bauer SR-127 is the standard issue bolt action rifle used by the United Earth Gov. Known for its long range accuracy and use by marksmen despite its age and lack of IFF. It has an irremovable scope. Uses .60 anti-material magazines.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Snipers/snl177/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/Snipers/snl177/tiny.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/Snipers/snl177/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -23
+    maxAngle: -43
+  - type: Gun
+    fireRate: 1.5
+    cameraRecoilScalar: 5
+    minAngle: 24
+    maxAngle: 45
+    soundGunshot:
+      collection: 50bmgShot
+    soundEmpty:
+      path: /Audio/_Orion/Weapons/Guns/Rifles/rifle_empty.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/_Orion/Weapons/Guns/Snipers/tl-127_bolt.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineRifleSR50
+        insertSound: /Audio/_Orion/Weapons/Guns/Rifles/762_reload.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Rifles/m28_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineAntiMaterielRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: GunRequiresWield
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.7
+    sprintModifier: 0.5
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 5
+    pvsIncrease: 0.5
+  - type: UseDelay
+    delay: 1
+  - type: UseDelayBlockShoot
+
+- type: entity
+  parent: [ BaseSecurityContraband, BaseWeaponRifle ]
+  id: WeaponRifleDragunov
+  name: Dragunov
+  description: A semiautomatic sniper rifle, famed for its marksmanship, and is built from the ground up for it.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Snipers/dragunov/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/Snipers/dragunov/tiny.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/Snipers/dragunov/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -23
+    maxAngle: -44
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    minAngle: 24
+    maxAngle: 45
+    cameraRecoilScalar: 3
+    fireRate: 3
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/Snipers/svd.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/_Orion/Weapons/Guns/Snipers/svd_cocked.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineRifle762Sniper
+        insertSound: /Audio/_Orion/Weapons/Guns/Snipers/svd_reload.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Snipers/svd_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle762Sniper
+      gun_chamber:
+        startingItem: CartridgeRifle762
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle762
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance

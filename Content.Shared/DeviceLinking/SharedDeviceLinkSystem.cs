@@ -101,7 +101,7 @@ public abstract partial class SharedDeviceLinkSystem : EntitySystem
         {
             if (TryComp(sourceUid, out DeviceLinkSourceComponent? source))
                 RemoveSinkFromSourceInternal(sourceUid, sink, source, sink);
-            else
+            else if (!TerminatingOrDeleted(sourceUid)) // Orion-Edit: Random test fail fix
                 Log.Error($"Device sink {ToPrettyString(sink)} source list contains invalid entity: {ToPrettyString(sourceUid)}");
         }
     }
@@ -415,8 +415,8 @@ public abstract partial class SharedDeviceLinkSystem : EntitySystem
         {
             foreach (var (sourcePort, sinkPort) in ports)
             {
-                RaiseLocalEvent(sourceUid, new PortDisconnectedEvent(sourcePort));
-                RaiseLocalEvent(sinkUid, new PortDisconnectedEvent(sinkPort));
+                RaiseLocalEvent(sourceUid, new PortDisconnectedEvent(sourcePort, sinkUid));
+                RaiseLocalEvent(sinkUid, new PortDisconnectedEvent(sinkPort, sourceUid));
             }
         }
 

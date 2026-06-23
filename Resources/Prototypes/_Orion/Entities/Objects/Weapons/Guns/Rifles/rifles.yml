@@ -1,0 +1,105 @@
+# 5.45
+- type: entity
+  parent: [BaseWeaponRifle, BaseSecurityContraband]
+  id: WeaponRifleM16A4
+  name: M16A4
+  description: A light, versatile assault rifle. The 4th generation in the M16 platform, this FN variant has added automatic fire selection and retains relevance among mercenaries and militias thanks to its high customizability. it is incredibly good at rapid burst fire, but must be paced correctly.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Rifles/m16/big.rsi
+    scale: 0.9, 0.9
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/Rifles/m16/tiny.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/Rifles/m16/tiny.rsi
+  - type: Gun
+    angleDecay: 20
+    minAngle: 24
+    maxAngle: 38
+    fireRate: 5.5
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/Rifles/556rifle.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Rifles/556_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+      gun_chamber:
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: [BaseWeaponRifle, BaseSecurityContraband]
+  id: WeaponRifleFamas
+  name: Famas
+  description: A light, versatile assault rifle.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Rifles/famas/big.rsi
+    scale: 0.9, 0.9
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/Rifles/famas/tiny.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/Rifles/famas/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -23
+    maxAngle: -43
+    angleIncrease: -5
+  - type: Gun
+    angleDecay: 45
+    angleIncrease: 15
+    minAngle: 24
+    maxAngle: 45
+    burstFireRate: 14
+    burstCooldown: 0.35
+    fireRate: 4
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/Rifles/556rifle.ogg
+    selectedMode: Burst
+    availableModes:
+      - SemiAuto
+      - Burst
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazineRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Rifles/556_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+      gun_chamber:
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance

@@ -1,0 +1,45 @@
+- type: shopInventory
+  id: BitrunningVendorInventory
+  listings:
+  - id: FoodSnackBoritos
+    cost: 65
+  - id: DrinkSpaceMountainWindCan
+    cost: 65
+  - id: DrinkPwrGameCan
+    cost: 130
+  - id: MedkitBruteFilled
+    cost: 325
+  - id: MedkitBurnFilled
+    cost: 325
+  - id: ClothingEyesGlassesSunglasses
+    cost: 650
+  - id: ClothingOuterCoatJacketLeather
+    cost: 650
+  - id: ClothingShoesBootsJack
+    cost: 650
+  - id: BitrunningExtensionPlayerAppearanceDisk
+    cost: 100
+  - id: BitrunningGearSimpleDisk
+    cost: 487
+  - id: BitrunningGearComplexDisk
+    cost: 812
+  - id: BitrunningGearAdvancedDisk
+    cost: 1300
+  - id: BitrunningProgramBasicDisk
+    cost: 487
+  - id: BitrunningProgramComplexDisk
+    cost: 974
+  - id: BitrunningProgramEliteDisk
+    cost: 1625
+#  - id: BitrunningGimmickSportsDisk # TODO
+#    cost: 487
+#  - id: BitrunningGimmickDungeonCrawlingDisk # TODO
+#    cost: 812
+  - id: BitrunningGearPKAModsDisk
+    cost: 487
+  - id: BitrunningGearPremiumPKAModsDisk
+    cost: 1040
+  - id: BitrunningGearCrusherModsDisk
+    cost: 487
+  - id: BitrunningGearPremiumCrusherModsDisk
+    cost: 1040

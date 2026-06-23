@@ -1,0 +1,76 @@
+- type: entity
+  parent: BaseAction
+  id: ActionBitrunningDisconnectAvatar
+  name: Disconnect avatar
+  description: Return to your body and end the current avatar session.
+  components:
+  - type: Action
+    icon:
+      sprite: _Orion/Structures/Machines/netpod.rsi
+      state: netpod_closed_active
+  - type: InstantAction
+    event: !type:BitrunningDisconnectAvatarActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionBitrunningProgramBasicCheese
+  name: Summon Cheese
+  description: Spawns cheese wheels in a 3x3 area around you.
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Consumable/Food/ingredients.rsi
+      state: cheesewheel
+  - type: InstantAction
+    event: !type:BitrunningSpawnCheeseActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionBitrunningProgramBasicLesserHeal
+  name: Lesser Heal
+  description: Heals minor brute and burn damage.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: treatment-module
+  - type: InstantAction
+    event: !type:BitrunningLesserHealActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionBitrunningProgramEliteDragon
+  name: Dragon Morph
+  description: Temporarily transforms you into a dragon avatar.
+  components:
+  - type: Action
+    useDelay: 8
+    itemIconStyle: BigAction
+    icon:
+      sprite: Mobs/Aliens/Carps/space.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:PolymorphSpellEvent
+      protoId: BitrunningAvatarDragonPolymorph
+      loadActions: true
+
+- type: entity
+  parent: BaseAction
+  id: ActionBitrunningProgramEliteBear
+  name: Bear Morph
+  description: Temporarily transforms you into a bear avatar.
+  components:
+  - type: Action
+    useDelay: 8
+    itemIconStyle: BigAction
+    icon:
+      sprite: Mobs/Animals/bear.rsi
+      state: bear
+  - type: InstantAction
+    event: !type:PolymorphSpellEvent
+      protoId: BitrunningAvatarBearPolymorph
+      loadActions: true

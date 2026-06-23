@@ -1,0 +1,23 @@
+- type: polymorph
+  id: BitrunningAvatarDragonPolymorph
+  configuration:
+    entity: MobBitrunningAvatarDragon
+    forced: false
+    inventory: None
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    allowRepeatedMorphs: false
+
+- type: polymorph
+  id: BitrunningAvatarBearPolymorph
+  configuration:
+    entity: MobBitrunningAvatarBear
+    forced: false
+    inventory: None
+    transferName: true
+    transferDamage: true
+    revertOnCrit: true
+    revertOnDeath: true
+    allowRepeatedMorphs: false

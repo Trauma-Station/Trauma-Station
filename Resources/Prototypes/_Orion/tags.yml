@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2026 Space Station 14 Contributors
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: Tag
+  id: CartridgeRifle762
+
+- type: Tag
+  id: MagazineAntiMaterielRifle
+
+- type: Tag
+  id: MagazineHeavyRifleM41
+
+- type: Tag
+  id: MagazineLightMachineGunRPD
+
+- type: Tag
+  id: MagazineSMGP90
+
+- type: Tag
+  id: MagazinePulseShotgun
+
+- type: Tag
+  id: MegaCell
+
+- type: Tag
+  id: MagazineRifle762
+
+- type: Tag
+  id: MagazineRifle762Sniper
+
+- type: Tag
+  id: PulseBullet
+
+- type: Tag
+  id: ShellShotgunPulse

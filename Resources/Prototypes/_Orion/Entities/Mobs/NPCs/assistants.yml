@@ -1,0 +1,63 @@
+- type: entity
+  parent: MobCivilian
+  id: MobAssistantBat
+  name: aggressive assistant
+  description: Looks like they are not in the mood to talk.
+  components:
+  - type: Loadout
+    prototypes: [ AssistantBatGear ]
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+
+- type: entity
+  parent: MobAssistantBat
+  id: MobAssistantAxe
+  components:
+  - type: Loadout
+    prototypes: [ AssistantAxeGear ]
+
+- type: entity
+  parent: MobAssistantBat
+  id: MobAssistantToolbox
+  components:
+  - type: Loadout
+    prototypes: [ AssistantToolboxGear ]
+
+- type: entity
+  parent: MobAssistantBat
+  id: MobAssistantSpear
+  components:
+  - type: Loadout
+    prototypes: [ AssistantSpearGear ]
+
+- type: entity
+  parent: MobAssistantBat
+  id: MobAssistantBatBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobAssistantAxe
+  id: MobAssistantAxeBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobAssistantToolbox
+  id: MobAssistantToolboxBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobAssistantSpear
+  id: MobAssistantSpearBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective

@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by discord:𝘽𝙚𝙡𝙖𝙮#7441 / Taken from backmen https://github.com/Rxup/space-station-14/tree/master/Resources/Textures/Backmen/Objects/Weapons/Gunsx64",
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "base-spent"
+        }
+    ]
+}

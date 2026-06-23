@@ -1,0 +1,12 @@
+- type: entity
+  id: SpawnPointBitrunner
+  parent: SpawnPointJobBase
+  name: bitrunner
+  components:
+  - type: SpawnPoint
+    job_id: Bitrunner
+  - type: Sprite
+    layers:
+      - state: green
+      - sprite: _Dumont/Markers/jobs.rsi
+        state: bitrunner

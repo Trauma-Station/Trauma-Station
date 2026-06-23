@@ -1,0 +1,13 @@
+- type: entity
+  parent: CartridgeHighCaliber
+  id: CartridgeHighCaliberAP
+  name: cartridge (.50 armor-piercing)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletHighCaliberAP
+  - type: Sprite
+    layers:
+    - state: fast
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: SpentAmmoVisuals
+    state: fast

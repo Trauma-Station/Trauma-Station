@@ -1,0 +1,6 @@
+- type: entity
+  parent: MobHierophant
+  id: MobHierophantBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective

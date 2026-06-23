@@ -1,0 +1,11 @@
+- type: entity
+  parent: SuitStorageBase
+  id: SuitStorageExplorerSuit
+  suffix: Explorer suit
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillShaftMinerExplorerSuit
+  - type: AccessReader # Nuh?
+    access: [["Bitrun"]]

@@ -82,17 +82,17 @@
     damageContainer: Biological
   - type: Stamina
     baseCritThreshold: 500
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.25
-        density: 200
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
+#  - type: Fixtures # Orion-Edit
+#    fixtures:
+#      fix1:
+#        shape:
+#          !type:PhysShapeCircle
+#          radius: 0.25
+#        density: 200
+#        mask:
+#        - MobMask
+#        layer:
+#        - MobLayer
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:

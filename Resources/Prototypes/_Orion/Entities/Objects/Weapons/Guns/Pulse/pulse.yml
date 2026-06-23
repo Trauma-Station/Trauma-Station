@@ -1,0 +1,93 @@
+- type: entity
+  parent: BaseItem
+  id: BaseWeaponEnergyRifle
+  name: BaseWeaponRifle
+  description: A rooty tooty point and shooty.
+  abstract: true
+  components:
+  - type: Sprite
+  - type: Item
+    size: Huge
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 5
+    projectileSpeed: 25
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/Pulse/ap12j.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        insertSound: /Audio/_Orion/Weapons/Guns/Pistols/divet_magin.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Pistols/divet_magout.ogg
+        priority: 1
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: StaticPrice
+    price: 5500
+  - type: Appearance
+  - type: Wieldable
+  - type: MagazineAmmoProvider
+    autoEject: true
+    soundAutoEject: /Audio/_Orion/Misc/Guns/empty_alarm.ogg
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Orion/Items/weapons/Pulse/pickup1.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RiflesDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RiflesDrop
+
+- type: entity
+  parent: [ BaseWeaponEnergyRifle, BaseCentcommContraband ]
+  id: WeaponPulseShotgunHellHammer
+  name: Hell Hammer
+  description: The Auto Impulse shotgun, uses a motorized firing mechanism. The Pulse Shotgun is the standard-issue service shotgun of the Earth Special Force.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Battery/Pulse/hellhamer/big.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: mag-unshaded-0
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/Battery/Pulse/hellhamer/tiny.rsi
+  - type: Clothing
+    sprite: _Orion/Objects/Weapons/Guns/Battery/Pulse/hellhamer/tiny.rsi
+  - type: Gun
+    fireRate: 2
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundEmpty: /Audio/_Orion/Weapons/Guns/Shotguns/v51_empty.ogg
+    soundGunshot:
+      path: /Audio/_Orion/Weapons/Guns/Pulse/hellhammer.ogg
+  - type: GunRequiresWield
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        startingItem: MagazinePulseShotgun
+        priority: 1
+        whitelist:
+          tags:
+            - MagazinePulseShotgun

@@ -1,0 +1,7 @@
+- type: entity
+  parent: PhoronSabre
+  id: PhoronSabreOn
+  suffix: On
+  components:
+  - type: ItemToggle
+    activated: true

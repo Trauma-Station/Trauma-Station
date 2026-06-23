@@ -1,0 +1,99 @@
+- type: entity
+  parent: MobHuman
+  id: MobPirateEvaCutlass
+  name: pirate
+  suffix: AI, EVA, EnergyCutlass
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateFaction
+  - type: Loadout
+    prototypes:
+    - PirateEvaCutlassGear
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: Perishable # Nuh, no.
+    molsPerSecondPerUnitMass: 0
+
+- type: entity
+  parent: MobHuman
+  id: MobPirateEvaLaserCarbine
+  name: pirate
+  suffix: AI, EVA, Laser Carbine
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateFaction
+  - type: Loadout
+    prototypes:
+    - PirateEvaLaserCarbineGear
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+  - type: Perishable # Nuh, no.
+    molsPerSecondPerUnitMass: 0
+
+- type: entity
+  parent: MobHuman
+  id: MobPirateCutlass
+  name: pirate
+  suffix: AI, EnergyCutlass
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateFaction
+  - type: Loadout
+    prototypes:
+    - PirateCutlassGear
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: Perishable # Nuh, no.
+    molsPerSecondPerUnitMass: 0
+
+- type: entity
+  parent: MobHuman
+  id: MobPirateFlintlock
+  name: pirate
+  suffix: AI, WeaponPistolFlintlock
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateFaction
+  - type: Loadout
+    prototypes:
+    - PirateFlintlockGear
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+  - type: Perishable # Nuh, no.
+    molsPerSecondPerUnitMass: 0
+
+- type: entity
+  parent: MobPirateEvaCutlass
+  id: MobPirateEvaCutlassBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobPirateEvaLaserCarbine
+  id: MobPirateEvaLaserCarbineBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobPirateCutlass
+  id: MobPirateCutlassBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobPirateFlintlock
+  id: MobPirateFlintlockBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective

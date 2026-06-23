@@ -1,0 +1,107 @@
+- type: entity
+  parent: ClothingUniformEnvirosuitCustomBase
+  id: ClothingUniformEnvirosuitBitrunner
+  name: bitrunner envirosuit
+  description: A sturdy and comfortable envirosuit, handed out to bitrunners so they can enjoy a cozy little rest in the netpod while their brains are gently cooked by a quantum-scale computing technology still under analysis.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      color: "#39393f"
+    - state: plaintop-icon
+      color: "#39393f"
+    - state: accent2-icon
+      color: "#915d2b"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#39393f"
+      - state: accent2-inhand-left
+        color: "#915d2b"
+      right:
+      - state: inhand-right
+        color: "#39393f"
+      - state: accent2-inhand-right
+        color: "#915d2b"
+  - type: Clothing
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#39393f"
+      - state: accent2-equipped-INNERCLOTHING
+        color: "#915d2b"
+      - state: soles-equipped-INNERCLOTHING
+        color: "#794421"
+
+- type: entity
+  parent: ClothingUniformEnvirosuitCustomBase
+  id: ClothingUniformEnvirosuitCamouflage
+  name: camouflage envirosuit
+  description: Everything necessary is hidden.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      color: "#535533"
+    - state: plaintop-icon
+      color: "#535533"
+    - state: accent2-icon
+      color: "#616133"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#535533"
+      - state: accent2-inhand-left
+        color: "#616133"
+      right:
+      - state: inhand-right
+        color: "#535533"
+      - state: accent2-inhand-right
+        color: "#616133"
+  - type: Clothing
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#535533"
+      - state: accent2-equipped-INNERCLOTHING
+        color: "#616133"
+      - state: soles-equipped-INNERCLOTHING
+        color: "#3a3b24"
+
+- type: entity
+  parent: ClothingUniformEnvirosuitCustomBase
+  id: ClothingUniformEnvirosuitERTSecurity
+  name: ERT security envirosuit
+  description: A special suit made for the elite security under CentComm.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      color: "#e2d2c6"
+    - state: plaintop-icon
+      color: "#e2d2c6"
+    - state: accent2-icon
+      color: "#6e6f87"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e2d2c6"
+      - state: accent2-inhand-left
+        color: "#6e6f87"
+      right:
+      - state: inhand-right
+        color: "#e2d2c6"
+      - state: accent2-inhand-right
+        color: "#6e6f87"
+  - type: Clothing
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING
+        color: "#e2d2c6"
+      - state: accent2-equipped-INNERCLOTHING
+        color: "#6e6f87"
+      - state: soles-equipped-INNERCLOTHING
+        color: "#384149"

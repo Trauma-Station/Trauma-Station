@@ -1,0 +1,20 @@
+- type: entity
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  id: ShellShotgunPulse
+  name: shell (pulse)
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunPulse
+    - ShellShotgun
+  - type: CartridgeAmmo
+    proto: PulseBulletSpread
+    soundEject:
+      collection: ShellLand
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Casings/battery.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals

@@ -8,6 +8,7 @@
   - CargoTechnician
   - Quartermaster
   - SalvageSpecialist
+  - Bitrunner # Orion
 
 - type: department
   id: Civilian

@@ -1,0 +1,27 @@
+- type: startingGear
+  id: ExperimentalSoldierGear
+  equipment:
+    mask: ClothingMaskGasSyndicate
+    eyes: ClothingEyesHudSyndicate
+    jumpsuit: ClothingUniformJumpsuitOperative
+    shoes: ClothingShoesBootsMagSyndie
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitCybersunDreadnoughtexperimental
+    head: ClothingHeadHelmetHardsuitDreadnought
+    id: HighCommandPDA
+  inhand:
+  - WeaponLightMachineGunL6CInfinite
+
+- type: startingGear
+  id: NukeopsSoldierGear
+  equipment:
+    mask: ClothingMaskGasSyndicate
+    eyes: ClothingEyesHudSyndicate
+    jumpsuit: ClothingUniformJumpsuitOperative
+    shoes: ClothingShoesBootsMagSyndie
+    gloves: ClothingHandsGlovesCombat
+    back: ClothingBackpackDuffelSyndicate
+    belt: ClothingBeltMilitaryRigGrenadier
+    outerClothing: ClothingOuterHardsuitSyndie
+    head: ClothingHeadHelmetHardsuitSyndie
+    id: SyndiPDA

@@ -1,0 +1,162 @@
+- type: entity
+  parent: BaseItem
+  id: BaseBitrunningDisk
+  abstract: true
+  name: bitrunning disk
+  description: A specialized data disk for bitrunning supply systems.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Specific/Research/data_disk.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+  - type: UserInterface
+    interfaces:
+      enum.BitrunningDiskUiKey.Key:
+        type: BitrunningDiskBoundUserInterface
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningExtensionPlayerAppearanceDisk
+  name: "bitrunning extension: digital appearance"
+  description: Lets your avatar load your appearance instead of the default human shell.
+  components:
+  - type: BitrunningProfileDisk
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearSimpleDisk
+  name: "bitrunning gear: simple"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-pizza-box: FoodBoxPizza
+      bitrunning-disk-option-medical-beam-gun: MedicalBeamGun
+      bitrunning-disk-option-c4: C4
+      bitrunning-disk-option-boombox: BoomboxSlavFull
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearComplexDisk
+  name: "bitrunning gear: complex"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-luxury-medipen: LuxuryMedipen
+      bitrunning-disk-option-viper: WeaponPistolViper
+      bitrunning-disk-option-armor-vest: ClothingOuterArmorBasic
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearAdvancedDisk
+  name: "bitrunning gear: advanced"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-advanced-laser-gun: WeaponAdvancedLaser
+      bitrunning-disk-option-double-energy-sword: EnergySwordDouble
+      bitrunning-disk-option-energy-scythe: PlasmaScythe
+      bitrunning-disk-option-syndicate-mini-bomb: SyndieMiniBomb
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningProgramBasicDisk
+  name: "bitrunning program: basic"
+  description: Use in hand to choose one program action.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Action
+    options:
+      bitrunning-disk-option-summon-cheese: ActionBitrunningProgramBasicCheese
+      bitrunning-disk-option-lesser-heal: ActionBitrunningProgramBasicLesserHeal
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningProgramComplexDisk
+  name: "bitrunning program: complex"
+  description: Use in hand to choose one program action.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Action
+    options:
+      bitrunning-disk-option-fireball: ActionFireball
+      bitrunning-disk-option-lightning-bolt: ActionLightningBolt
+      bitrunning-disk-option-force-wall: ActionForceWall
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningProgramEliteDisk
+  name: "bitrunning program: elite"
+  description: Use in hand to choose one program action.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Action
+    options:
+      bitrunning-disk-option-dragon-morph: ActionBitrunningProgramEliteDragon
+      bitrunning-disk-option-bear-morph: ActionBitrunningProgramEliteBear
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGimmickSportsDisk
+  name: "bitrunning gimmick: sports"
+  description: Will grant a selectable sports loadout case in a future update.
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGimmickDungeonCrawlingDisk
+  name: "bitrunning gimmick: dungeon crawling"
+  description: Will grant a selectable dungeon crawling loadout case in a future update.
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearPKAModsDisk
+  name: "bitrunning gear: proto-kinetic accelerator mods"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-range-modkit: PKAUpgradeRange
+      bitrunning-disk-option-fire-rate-modkit: PKAUpgradeFireRate
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearPremiumPKAModsDisk
+  name: "bitrunning gear: premium proto-kinetic accelerator mods"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-damage-modkit: PKAUpgradeDamage
+      bitrunning-disk-option-space-modkit: PKAUpgradeSpace
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearCrusherModsDisk
+  name: "bitrunning gear: proto-kinetic crusher mods"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-proto-kinetic-crusher: WeaponCrusher
+      bitrunning-disk-option-proto-kinetic-glaive: WeaponCrusherGlaive
+
+- type: entity
+  parent: BaseBitrunningDisk
+  id: BitrunningGearPremiumCrusherModsDisk
+  name: "bitrunning gear: premium proto-kinetic crusher mods"
+  description: Use in hand to choose a one-time gear package.
+  components:
+  - type: BitrunningAbilityDisk
+    grantMode: Item
+    options:
+      bitrunning-disk-option-proto-kinetic-hammer: WeaponCrusherHammer
+      bitrunning-disk-option-proto-kinetic-machete: LavalandWeaponKineticMachete

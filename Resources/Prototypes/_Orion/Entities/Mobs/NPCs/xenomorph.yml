@@ -1,0 +1,41 @@
+- type: entity
+  parent: MobXenomorphLarvaDungeon
+  id: MobXenomorphLarvaBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobXenomorphDroneDungeon
+  id: MobXenomorphDroneBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobXenomorphHunterDungeon
+  id: MobXenomorphHunterBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobXenomorphPraetorianDungeon
+  id: MobXenomorphPraetorianBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobXenomorphSentinelDungeon
+  id: MobXenomorphSentinelBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobXenomorphQueenDungeon
+  id: MobXenomorphQueenBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective

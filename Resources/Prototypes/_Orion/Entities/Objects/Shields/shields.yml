@@ -1,0 +1,50 @@
+# UEG
+- type: entity
+  parent: BaseShield
+  id: UEGShield
+  name: assault tower shield
+  description: Shield that covers the wearer from head to toe, not everyone can lift this.
+  components:
+    - type: Sprite
+      sprite: _Orion/Objects/Weapons/Melee/ueg_shield.rsi
+      state: ueg-icon
+    - type: Item
+      sprite: _Orion/Objects/Weapons/Melee/ueg_shield.rsi
+      size: Huge
+      heldPrefix: ueg
+    - type: StaticPrice
+      price: 200
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 0.7
+          Slash: 0.7
+          Piercing: 0.7
+          Heat: 0.7
+      activeBlockModifier:
+        coefficients:
+          Blunt: 0.5
+          Slash: 0.5
+          Piercing: 0.5
+          Heat: 0.5
+        flatReductions:
+          Blunt: 5
+          Slash: 5
+          Piercing: 5
+          Heat: 5
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 190 #This is probably enough damage before it breaks
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetPlasteel1:
+                  min: 2
+                  max: 4

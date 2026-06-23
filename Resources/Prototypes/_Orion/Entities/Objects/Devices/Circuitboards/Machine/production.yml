@@ -1,0 +1,49 @@
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: QuantumServerMachineCircuitboard
+  name: quantum server machine board
+  description: A machine printed circuit board for a quantum server.
+  components:
+  - type: MachineBoard
+    prototype: QuantumServer
+    stackRequirements:
+#      Capacitor: 2
+#      ScanningModule: 1
+      Manipulator: 2
+      Cable: 5
+      Glass: 4
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: NetpodMachineCircuitboard
+  name: netpod machine board
+  description: A machine printed circuit board for a neural link netpod.
+  components:
+  - type: MachineBoard
+    prototype: Netpod
+    stackRequirements:
+      Manipulator: 1
+      Cable: 3
+      Glass: 3
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: ByteforgeMachineCircuitboard
+  name: byteforge machine board
+  description: A machine printed circuit board for a byteforge.
+  components:
+  - type: MachineBoard
+    prototype: Byteforge
+    stackRequirements:
+      Manipulator: 2
+      Cable: 4
+      Glass: 4
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: QuantumConsoleCircuitboard
+  name: quantum console board
+  description: A computer printed circuit board for a quantum domain control console.
+  components:
+  - type: ComputerBoard
+    prototype: QuantumConsole

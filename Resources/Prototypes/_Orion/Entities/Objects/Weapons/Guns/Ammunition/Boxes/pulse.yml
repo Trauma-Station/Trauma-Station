@@ -1,0 +1,33 @@
+- type: entity
+  parent: [BaseItem, BaseSecurityContraband]
+  id: MagazineBoxRiflePulse
+  name: charging plasmablock (pulse)
+  description: Standard EarthGov type of impulse magazines
+  components:
+  - type: BallisticAmmoProvider
+    soundInsert: /Audio/_Orion/Items/weapons/Pulse/pulsebox.ogg
+    fillDelay: 0.3
+    mayTransfer: true
+    cycleable: false
+    capacity: 120
+    proto: PulseBullet
+    whitelist:
+      tags:
+        - PulseBullet
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Item
+    size: Small
+  - type: Sprite
+    netsync: false
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Boxes/pulse.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+  - type: Appearance

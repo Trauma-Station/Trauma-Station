@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseWall
+  id: WallBinaryIndestructible
+  name: tear in the fabric of reality
+  suffix: Indestructible
+  components:
+  - type: Sprite
+    sprite: _Orion/Structures/Walls/binary.rsi
+    noRot: true
+    layers:
+    - state: full
+      shader: unshaded
+  - type: Icon
+    sprite: _Orion/Structures/Walls/binary.rsi
+  - type: Destructible
+  - type: RustRequiresPathStage
+    pathStage: 11 # Can't rust

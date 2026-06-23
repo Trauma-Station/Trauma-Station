@@ -1,0 +1,17 @@
+- type: entity
+  parent: MobDragonDungeon
+  id: MobBitrunningAvatarDragon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+
+- type: entity
+  parent: MobBearSpace
+  id: MobBitrunningAvatarBear
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen

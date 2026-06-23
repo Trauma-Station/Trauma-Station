@@ -1,0 +1,13 @@
+- type: soundCollection
+  id: ShellLand
+  files:
+  - /Audio/_Orion/Weapons/ShotgunShell/shotgun_shell1.ogg
+  - /Audio/_Orion/Weapons/ShotgunShell/shotgun_shell2.ogg
+  - /Audio/_Orion/Weapons/ShotgunShell/shotgun_shell3.ogg
+
+- type: soundCollection
+  id: 50bmgShot
+  files:
+  - /Audio/_Orion/Weapons/Guns/Snipers/50bmg1.ogg
+  - /Audio/_Orion/Weapons/Guns/Snipers/50bmg2.ogg
+  - /Audio/_Orion/Weapons/Guns/Snipers/50bmg3.ogg

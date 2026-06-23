@@ -1,0 +1,50 @@
+- type: startingGear
+  id: PirateEvaCutlassGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHelmetHardsuitPirateEVA
+    outerClothing: ClothingOuterHardsuitPirateEVA
+  inhand:
+  - Cutlass
+
+- type: startingGear
+  id: PirateEvaLaserCarbineGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHelmetHardsuitPirateEVA
+    outerClothing: ClothingOuterHardsuitPirateEVA
+  inhand:
+  - WeaponLaserCarbine
+
+- type: startingGear
+  id: PirateCaptainLaserCarbineGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadBandRed
+    outerClothing: ClothingOuterHardsuitPirateCap
+  inhand:
+  - WeaponLaserCarbine
+  - EnergyCutlass
+
+- type: startingGear
+  id: PirateCutlassGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadBandRed
+  inhand:
+  - Cutlass
+
+- type: startingGear
+  id: PirateFlintlockGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadBandRed
+    neck: ClothingNeckCloakPirateCap
+    outerClothing: ClothingOuterCoatPirate
+  inhand:
+  - WeaponPistolFlintlockBitrunning

@@ -1,0 +1,68 @@
+- type: entity
+  parent: BaseItem
+  id: BaseMagazineHeavyRifle762
+  abstract: true
+  components:
+  - type: Item
+    size: Normal
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 100
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseMagazineHeavyRifle762
+  id: MagazineLightMachineGunRPD
+  name: RPD magazine (7.62mm rifle)
+  components:
+  - type: Tag
+    tags:
+      - MagazineLightMachineGunRPD
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle762
+    whitelist:
+      tags:
+        - CartridgeRifle762
+    capacity: 80
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Magazines/Heavy/rpd.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseMagazineHeavyRifle762
+  id: MagazineHeavyRifleM41
+  name: M-41 magazine (5.56mm rifle)
+  components:
+  - type: Tag
+    tags:
+      - MagazineHeavyRifleM41
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle
+    capacity: 150
+    whitelist:
+      tags:
+        - CartridgeRifle
+  - type: Sprite
+    sprite: /Textures/_Orion/Objects/Weapons/Guns/Ammunition/Magazines/Heavy/v41.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

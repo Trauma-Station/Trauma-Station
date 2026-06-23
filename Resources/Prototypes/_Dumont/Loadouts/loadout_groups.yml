@@ -1,0 +1,53 @@
+# Cargo
+- type: loadoutGroup
+  id: BitrunnerJumpsuit
+  name: loadout-group-bitrunner-jumpsuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BitrunnerJumpsuit
+  - BitrunnerJumpsuitMilitary
+
+- type: loadoutGroup
+  id: BitrunnerBackpack
+  name: loadout-group-bitrunner-backpack
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CommonBackpack
+  - CommonSatchel
+  - CommonDuffel
+  - CommonMessenger
+
+- type: loadoutGroup
+  id: BitrunnerShoes
+  name: loadout-group-bitrunner-shoes
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BlackShoes
+  - LaceupShoes
+
+- type: loadoutGroup
+  id: BitrunnerEnvirohelm
+  name: loadout-group-bitrunner-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BitrunnerEnvirohelm
+
+- type: loadoutGroup
+  id: BitrunnerEnvirosuit
+  name: loadout-group-bitrunner-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BitrunnerEnvirosuit
+
+- type: loadoutGroup
+  id: BitrunnerEnvirogloves
+  name: loadout-group-bitrunner-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BlackEnvirogloves

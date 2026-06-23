@@ -1,0 +1,199 @@
+# ---- Abductor Mobs ----
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAbductorAgentPistol
+  name: spawner Abductor Agent Pistol
+  suffix: AI, Alien Pistol
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Shitmed/Mobs/Species/Abductor/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSimpleAbductorAgentPistol
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAbductorAgentWonderprod
+  name: spawner Abductor Agent Wonderprod
+  suffix: AI, Wonderprod
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Shitmed/Mobs/Species/Abductor/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSimpleAbductorAgentWonderprod
+
+# ---- Assistant Mobs ----
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAssistantBat
+  name: spawner Assistant Bat
+  categories: [ Spawner ]
+  suffix: AI, Bat
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAssistantBat
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAssistantAxe
+  name: spawner Assistant Axe
+  categories: [ Spawner ]
+  suffix: AI, Axe
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAssistantAxe
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAssistantToolbox
+  name: spawner Assistant Toolbox
+  categories: [ Spawner ]
+  suffix: AI, Toolbox
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAssistantToolbox
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAssistantSpear
+  name: spawner Assistant Spear
+  categories: [ Spawner ]
+  suffix: AI, Spear
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAssistantSpear
+
+# ---- Pirate Mobs ----
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobPirateEvaCutlass
+  name: pirate spawner
+  suffix: Cutlass
+  categories: [ Spawner ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPirateEvaCutlass
+
+- type: entity
+  parent: SpawnMobPirateEvaCutlass
+  id: SpawnMobPirateEvaLaserCarbine
+  name: pirate spawner
+  suffix: Laser Carbine
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPirateEvaLaserCarbine
+
+- type: entity
+  parent: SpawnMobPirateEvaCutlass
+  id: SpawnMobPirateCutlass
+  name: pirate spawner
+  suffix: Energy Cutlass
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPirateCutlass
+
+- type: entity
+  parent: SpawnMobPirateEvaCutlass
+  id: SpawnMobPirateFlintlock
+  name: pirate spawner
+  suffix: Pistol Flintlock
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPirateFlintlock
+
+# ---- DeathSquad Mobs ----
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDeathSquadPulseRifle
+  name: Death Squad spawner
+  categories: [ Spawner ]
+  suffix: AI, Pulse rifle
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDeathSquadPulseRifleBitrunning
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDeathSquadPhoronSabre
+  name: Death Squad spawner
+  categories: [ Spawner ]
+  suffix: AI, Phoron sabre
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDeathSquadPhoronSabreBitrunning
+
+# ---- DeathSquad Mobs ----
+
+- type: entity
+  parent: SpawnMobDeathSquadPhoronSabre
+  id: SpawnMobNukeopsSoldier
+  name:  Nukeops Soldier spawner
+  suffix: AI
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobNukeopsSoldierBitrunning
+
+- type: entity
+  parent: SpawnMobDeathSquadPhoronSabre
+  id: SpawnMobExperimentalSoldier
+  name: Experimental Syndicate soldier spawner
+  suffix: AI 
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobExperimentalSoldierBitrunning
+
+- type: entity
+  parent: SpawnMobDeathSquadPhoronSabre
+  id: SpawnMobSyndicateSoldier
+  name: Syndicate soldier spawner
+  suffix: AI 
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSyndicateSoldierBitrunning

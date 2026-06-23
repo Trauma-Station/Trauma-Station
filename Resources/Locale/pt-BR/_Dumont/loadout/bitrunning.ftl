@@ -1,0 +1,31 @@
+# Plasmaman
+loadout-bitrunneravatarplasmamangear = {loadout-bitrunneravatargear}
+loadout-bitrunneravatarpassengerplasmamangear = {loadout-bitrunneravatarpassengergear}
+loadout-bitrunneravatarclownplasmamangear = {loadout-bitrunneravatarclowngear}
+loadout-bitrunneravatarmimeplasmamangear = {loadout-bitrunneravatarmimegear}
+loadout-bitrunneravatarcaptainplasmamangear = {loadout-bitrunneravatarcaptaingear}
+loadout-bitrunneravatarengineerplasmamangear = {loadout-bitrunneravatarengineergear}
+loadout-bitrunneravatarmedicaldoctorplasmamangear = {loadout-bitrunneravatarmedicaldoctorgear}
+loadout-bitrunneravatarscientistplasmamangear = {loadout-bitrunneravatarscientistgear}
+loadout-bitrunneravatarsecurityofficerplasmamangear = {loadout-bitrunneravatarsecurityofficergear}
+loadout-bitrunneravatarcargotechnicianplasmamangear = {loadout-bitrunneravatarcargotechniciangear}
+loadout-bitrunneravatarsalvagespecialistplasmamangear = {loadout-bitrunneravatarsalvagespecialistgear}
+loadout-bitrunneravatarshaftminerplasmamangear = {loadout-bitrunneravatarshaftminergear}
+loadout-bitrunneravatarsecurityofficermodplasmamangear = {loadout-bitrunneravatarsecurityofficermodgear}
+loadout-bitrunneravatarxenonautenplasmamangear = {loadout-bitrunneravatarxenonautengear}
+
+# Vox
+loadout-bitrunneravatarvoxgear = {loadout-bitrunneravatargear}
+loadout-bitrunneravatarpassengervoxgear = {loadout-bitrunneravatarpassengergear}
+loadout-bitrunneravatarclownvoxgear = {loadout-bitrunneravatarclowngear}
+loadout-bitrunneravatarmimevoxgear = {loadout-bitrunneravatarmimegear}
+loadout-bitrunneravatarcaptainvoxgear = {loadout-bitrunneravatarcaptaingear}
+loadout-bitrunneravatarengineervoxgear = {loadout-bitrunneravatarengineergear}
+loadout-bitrunneravatarmedicaldoctorvoxgear = {loadout-bitrunneravatarmedicaldoctorgear}
+loadout-bitrunneravatarscientistvoxgear = {loadout-bitrunneravatarscientistgear}
+loadout-bitrunneravatarsecurityofficervoxgear = {loadout-bitrunneravatarsecurityofficergear}
+loadout-bitrunneravatarcargotechnicianvoxgear = {loadout-bitrunneravatarcargotechniciangear}
+loadout-bitrunneravatarsalvagespecialistvoxgear = {loadout-bitrunneravatarsalvagespecialistgear}
+loadout-bitrunneravatarshaftminervoxgear = {loadout-bitrunneravatarshaftminergear}
+loadout-bitrunneravatarsecurityofficermodvoxgear = {loadout-bitrunneravatarsecurityofficermodgear}
+loadout-bitrunneravatarxenonautenvoxgear = {loadout-bitrunneravatarxenonautengear}

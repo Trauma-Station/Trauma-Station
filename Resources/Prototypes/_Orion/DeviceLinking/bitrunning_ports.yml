@@ -1,0 +1,19 @@
+- type: sourcePort
+  id: BitrunningServerSource
+  name: signal-port-name-bitrunning-server-source
+  description: signal-port-description-bitrunning-server-source
+
+- type: sinkPort
+  id: BitrunningConsoleSink
+  name: signal-port-name-bitrunning-console-sink
+  description: signal-port-description-bitrunning-console-sink
+
+- type: sinkPort
+  id: BitrunningNetpodSink
+  name: signal-port-name-bitrunning-netpod-sink
+  description: signal-port-description-bitrunning-netpod-sink
+
+- type: sinkPort
+  id: BitrunningByteforgeSink
+  name: signal-port-name-bitrunning-byteforge-sink
+  description: signal-port-description-bitrunning-byteforge-sink

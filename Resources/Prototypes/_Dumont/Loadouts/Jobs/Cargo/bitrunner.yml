@@ -1,0 +1,29 @@
+# Jumpsuit
+- type: loadout
+  id: BitrunnerJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBitrunner
+
+- type: loadout
+  id: BitrunnerJumpsuitMilitary
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryBitrunner
+
+# Plasmaman
+- type: loadout
+  id: BitrunnerEnvirosuit
+  equipment:
+    jumpsuit: ClothingUniformEnvirosuitBitrunner
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BitrunnerEnvirohelm
+  equipment:
+    head: ClothingHeadEnvirohelmBitrunner
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman

@@ -1,0 +1,12 @@
+loadout-bitrunneravatargear = Bitrunner
+loadout-bitrunneravatarpassengergear = Passageiro
+loadout-bitrunneravatarclowngear = Palhaço
+loadout-bitrunneravatarmimegear = Mímico
+loadout-bitrunneravatarcaptaingear = Capitão
+loadout-bitrunneravatarengineergear = Engenheiro
+loadout-bitrunneravatarmedicaldoctorgear = Médico
+loadout-bitrunneravatarscientistgear = Cientista
+loadout-bitrunneravatarsecurityofficergear = Segurança
+loadout-bitrunneravatarcargotechniciangear = Cargo
+loadout-bitrunneravatarsalvagespecialistgear = Salvatagem
+loadout-bitrunneravatarshaftminergear = Minerador

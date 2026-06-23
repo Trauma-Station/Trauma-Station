@@ -1,0 +1,14 @@
+- type: entity
+  id: InvisibleLightWarm
+  name: invisible light emitter
+  description: Emits strong warm light.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: PointLight
+    enabled: true
+    radius: 24
+    energy: 3
+    softness: 10
+    color: "#fff2b5"
+    castShadows: false

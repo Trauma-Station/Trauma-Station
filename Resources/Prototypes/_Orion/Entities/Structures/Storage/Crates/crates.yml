@@ -1,0 +1,73 @@
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateGolden
+  name: golden crate
+  components:
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/gold.rsi
+  - type: Sprite
+    sprite: _Orion/Structures/Storage/Crates/gold.rsi
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateSilver
+  name: silver crate
+  components:
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/silver.rsi
+  - type: Sprite
+    sprite: _Orion/Structures/Storage/Crates/silver.rsi
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateWooden
+  name: wooden crate
+  components:
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/wood.rsi
+  - type: Sprite
+    sprite: _Orion/Structures/Storage/Crates/wood.rsi
+
+# Secure Crates
+
+- type: entity
+  parent: [ CrateBaseSecure, CrateGenericSteel ]
+  id: CrateBitrunSecure
+  name: bitrunning crate
+  components:
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/bitrun_secure.rsi
+  - type: Sprite
+    sprite: _Orion/Structures/Storage/Crates/bitrun_secure.rsi
+  - type: AccessReader
+    access: [["Bitrun"]]
+
+- type: entity
+  parent: CrateBitrunSecure
+  id: CrateBitrunSecureReward
+  name: cache crate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: BitrunningDespawnOnOpen
+
+- type: entity
+  parent: [ CrateBaseSecure, CrateGenericSteel ]
+  id: CrateInterdyneSecure
+  name: Interdyne crate
+  description: Crate belonging to Interdyne Pharmaceutics. Hopefully doesn't have bioweapons inside...
+  components:
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/interdyne_secure.rsi
+  - type: Sprite
+    sprite: _Orion/Structures/Storage/Crates/interdyne_secure.rsi
+
+- type: entity
+  parent: [ CrateBaseSecure, CrateFreezer ]
+  id: CrateFreezerInterdyneSecure
+  name: Interdyne freezer
+  description: This is an Interdyne Pharmaceuticals branded freezer. May or may not contain fresh organs.
+  components:
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/interdyne-freezer_secure.rsi
+  - type: Sprite
+    sprite: _Orion/Structures/Storage/Crates/interdyne-freezer_secure.rsi

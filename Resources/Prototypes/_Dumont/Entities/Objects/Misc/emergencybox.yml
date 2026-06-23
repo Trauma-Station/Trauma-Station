@@ -1,0 +1,21 @@
+- type: entity
+  parent: BoxSurvivalSlots
+  id: BoxSurvivalSlotsBasic
+  suffix: Standard Basic
+  components:
+  - type: ContainerFill
+    containers:
+      water:
+      - DrinkWaterBottleFull
+      nutriblock:
+      - FoodSnackNutribrick
+      flare:
+      - Flare
+      tank:
+      - EmergencyFunnyTankFilled
+      mask:
+      - ClothingMaskBreath
+      emergencypen:
+      - EmergencyMedipen
+      spacepen:
+      - SpaceMedipen

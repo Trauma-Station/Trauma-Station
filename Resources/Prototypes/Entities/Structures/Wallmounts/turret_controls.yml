@@ -127,6 +127,7 @@
     - Security
     - Service
     - Theatre
+    - Bitrun # Orion
   - type: DeviceList
     isAllowList: true
   - type: DeviceNetwork

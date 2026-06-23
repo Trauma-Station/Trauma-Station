@@ -1,0 +1,10 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               MinSize="340 520"
+               SetSize="340 520"
+               Title="{Loc 'bitrunning-netpod-ui-title'}">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="6 6 6 6">
+        <Label Text="{Loc 'bitrunning-netpod-ui-select-outfit'}"/>
+        <LineEdit Name="Search" PlaceHolder="{Loc 'bitrunning-netpod-ui-search'}"/>
+        <ItemList Name="OutfitList" VerticalExpand="True"/>
+    </BoxContainer>
+</DefaultWindow>

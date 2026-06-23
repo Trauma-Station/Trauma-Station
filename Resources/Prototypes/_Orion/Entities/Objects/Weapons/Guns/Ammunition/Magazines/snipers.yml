@@ -1,0 +1,45 @@
+- type: entity
+  parent: BaseMagazineHighCaliber
+  id: MagazineRifleSR50
+  name: rifle magazine (.50 BMG)
+  description: Standard EarthGov type of heavy magazines.
+  components:
+  - type: Tag
+    tags:
+      - MagazineAntiMaterielRifle
+  - type: BallisticAmmoProvider
+    capacity: 10
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Magazines/Snipers/sr127_mag.rsi
+
+- type: entity
+  parent: MagazineRifleSR50
+  id: MagazineRifleSR50AP
+  name: rifle magazine (.50 BMG AM)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHighCaliberAP
+
+- type: entity
+  parent: BaseMagazineHeavyRifle762
+  id: MagazineRifle762Sniper
+  name: rifle magazine (7.62mm rifle)
+  description: Standard USSP and EarthGov type of heavy magazines.
+  components:
+  - type: Tag
+    tags:
+      - MagazineRifle762Sniper
+      - MagazineRifle762
+  - type: BallisticAmmoProvider
+    capacity: 20
+    proto: CartridgeRifle762
+    whitelist:
+      tags:
+        - CartridgeRifle762
+  - type: Item
+    size: Small
+  - type: Sprite
+    netsync: false
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Magazines/Snipers/svd_mag.rsi
+  - type: MagazineVisuals
+    steps: 2

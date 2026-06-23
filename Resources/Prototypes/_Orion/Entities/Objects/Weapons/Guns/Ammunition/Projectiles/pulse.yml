@@ -1,0 +1,74 @@
+- type: entity
+  parent: BaseBullet
+  id: PulseBullet
+  name: pulse bullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Effects/muzzle/pulse.rsi
+    layers:
+    - state: pulse
+      shader: unshaded
+  - type: Ammo
+    muzzleFlash: MuzzlePulseEffect
+  - type: Projectile
+    impactEffect: BulletPulseEffect
+    damage:
+      types:
+        Heat: 8
+        Shock: 7
+        Piercing: 4
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: Tag
+    tags:
+      - PulseBullet
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Opaque
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Opaque
+        - Impassable
+        hard: False
+
+- type: entity # shot on hell hammer
+  parent: PulseBullet
+  id: PulseBulletSpread
+  name: pulse bullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 4
+        Shock: 2
+        Piercing: 2
+  - type: ProjectileSpread
+    proto: PulseBulletSpreadShotgun
+    count: 9
+    spread: 15
+
+- type: entity # bullet on hell hammer
+  parent: PulseBullet
+  id: PulseBulletSpreadShotgun
+  name: pulse bullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 4
+        Shock: 2
+        Piercing: 2

@@ -61,6 +61,7 @@
   - Medical
   - GenpopEnter
   - GenpopLeave
+  - Bitrun # Orion
   special:
   # <Trauma>
   - !type:OrganChipsSpecial

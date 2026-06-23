@@ -1,0 +1,73 @@
+- type: entity
+  id: EncryptedCacheNode
+  name: encrypted cache
+  description: A secured objective cache containing encrypted bitrunning verification data.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Specific/Cargo/Bitrunning/encrypted_cache.rsi
+    drawdepth: Effects
+    noRot: true
+    layers:
+      - state: icon
+        shader: unshaded
+      - state: overlay
+        shader: unshaded
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: AmbientSound
+    volume: -4
+    sound:
+      path: /Audio/Ambience/ambitech3.ogg
+  - type: PointLight
+    enabled: true
+    radius: 1.7
+    power: 2
+    color: "#67e8ff"
+  - type: BitrunningObjectivePoint
+
+- type: entity
+  id: BitrunningObjectiveCacheStructure
+  name: cache crate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    offset: "0.0,0.25"
+    sprite: _Orion/Structures/Storage/Crates/bitrun_secure.rsi
+    state: icon
+    layers:
+      - state: icon
+      - state: locked
+        shader: unshaded
+  - type: Icon
+    sprite: _Orion/Structures/Storage/Crates/bitrun_secure.rsi
+    state: icon
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4625,0.4,0.2275"
+        density: 25
+        mask:
+        - CrateMask
+        layer:
+        - MachineLayer
+  - type: Physics
+    bodyType: Dynamic
+  - type: Reflect
+    reflects:
+    - Energy
+    reflectProb: 0.2
+    spread: 90
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Pullable
+  - type: BitrunningObjectiveCargo

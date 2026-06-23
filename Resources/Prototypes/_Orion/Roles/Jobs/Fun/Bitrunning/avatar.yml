@@ -1,0 +1,167 @@
+# --- Base Avatar Gear ---
+
+- type: startingGear
+  id: BitrunnerAvatarGear
+  equipment:
+    id: BitrunAvatarIDCard
+    jumpsuit: ClothingUniformJumpsuitBitrunner
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackMessenger
+  storage:
+    back:
+      - BoxSurvivalSlotsBasic
+      - FlashlightLantern
+      - MedkitFilled
+
+# --- Avatar Loadouts (Netpod) ---
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarPassengerGear
+  equipment:
+    head: ClothingHeadHatXmasCrown
+    neck: ClothingHeadHatFlowerWreath
+    outerClothing: ClothingOuterClownPriest
+    mask: ClothingMaskClown
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarClownGear
+  equipment:
+    mask: ClothingMaskGas
+    neck: ClothingNeckMantle
+    gloves: ClothingHandsGlovesFingerlessInsulated
+    jumpsuit: ClothingUniformJumpsuitClown
+    shoes: ClothingShoesClown
+    back: ClothingBackpackMessengerClown
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarMimeGear
+  equipment:
+    head: ClothingHeadHatBeret
+    mask: ClothingMaskMime
+    belt: ClothingBeltSuspendersRed
+    gloves: ClothingHandsGlovesColorWhite
+    jumpsuit: ClothingUniformJumpsuitMime
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackMessengerMime
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarCaptainGear
+  equipment:
+    neck: ClothingNeckMantleCap
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackMessengerCaptain
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarEngineerGear
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+    gloves: ClothingHandsGlovesFingerlessInsulated
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    shoes: ClothingShoesBootsWork
+    back: ClothingBackpackMessengerEngineering
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarMedicalDoctorGear
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    gloves: ClothingHandsGlovesNitrile
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackMessengerMedical
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarScientistGear
+  equipment:
+    head: ClothingHeadHatBeretRND
+    gloves: ClothingHandsGlovesLatex
+    jumpsuit: ClothingUniformJumpsuitScientist
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackMessengerScience
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarSecurityOfficerGear
+  equipment:
+    gloves: ClothingHandsGlovesFingerless
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackMessengerSecurity
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarCargoTechnicianGear
+  equipment:
+    head: ClothingHeadHatCargosoft
+    gloves: ClothingHandsGlovesFingerless
+    jumpsuit: ClothingUniformJumpsuitCargo
+    shoes: ClothingShoesColorBlack
+    back: ClothingBackpackMessengerCargo
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarSalvageSpecialistGear
+  equipment:
+    gloves: ClothingHandsGlovesColorBlack
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    neck: ClothingNeckScarfStripedBrown
+    shoes: ClothingShoesBootsSalvage
+    back: ClothingBackpackMessengerSalvage
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarShaftMinerGear
+  equipment:
+    gloves: ClothingHandsGlovesColorBlack
+    jumpsuit: ClothingUniformJumpsuitShaftMiner
+    neck: ClothingNeckScarfStripedBrown
+    shoes: ClothingShoesBootsSalvage
+    back: ClothingBackpackMessengerSalvage
+
+# --- Domain Loadouts ---
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarSecurityOfficerMODGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+#    head: ClothingModsuitHelmetSecurity
+#    shoes: ClothingModsuitBootsSecurity
+#    gloves: ClothingModsuitGauntletsSecurity
+#    outerClothing: ClothingModsuitChestplateSecurity
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsCombat
+    back: ClothingModsuitSecurityPowerCell
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarXenonautenGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCamouflage
+    head: ClothingHeadHelmetXenonauten
+    outerClothing: ClothingOuterArmorXenonautenHeavy
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackMessengerCamouflage
+
+- type: startingGear
+  parent: BitrunnerAvatarGear
+  id: BitrunnerAvatarERTSecurityGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    back: ClothingBackpackERTSecurity
+    shoes: ClothingShoesBootsMagEmergencyResponseTeam
+    eyes: ClothingEyesGlassesSecurity
+    mask: ClothingMaskGasERT
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTSecurity
+    belt: FlashlightSeclite

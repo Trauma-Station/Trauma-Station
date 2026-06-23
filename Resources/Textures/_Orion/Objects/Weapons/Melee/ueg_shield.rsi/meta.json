@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprited by no_mad (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ueg-icon"
+    },
+    {
+      "name": "ueg-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "ueg-inhand-left",
+      "directions": 4
+    }
+  ]
+}

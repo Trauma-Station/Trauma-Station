@@ -1,0 +1,22 @@
+- type: entity
+  parent: CargoPDA
+  id: BitrunnerPDA
+  name: bitrunner PDA
+  description: PDA for the guys that surf the nanonet.
+  components:
+  - type: Pda
+    id: BitrunnerIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-bitrunner
+  - type: PdaBorderColor
+    borderColor: "#484848"
+    accentVColor: "#e39751"
+  - type: Icon
+    sprite: _Dumont/Objects/Devices/pda.rsi
+    state: pda-bitrunner
+  - type: Sprite
+    sprite: _Dumont/Objects/Devices/pda.rsi
+    state: pda-bitrunner

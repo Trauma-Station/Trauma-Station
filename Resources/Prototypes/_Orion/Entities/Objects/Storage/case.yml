@@ -1,0 +1,66 @@
+# BASE
+
+- type: entity
+  parent: [ BaseStorageItem, ContentsExplosionResistanceBase ]
+  id: BaseCase
+  abstract: true
+  name: case
+  description: I wonder what's in it?
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,4
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 220
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity # For pistols and little items
+  parent: BaseCase
+  id: BaseCaseMini
+  abstract: true
+  name: case
+  description: I wonder what's in it?
+  components:
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,2
+
+# CASES
+
+- type: entity
+  parent: [BaseCase, BaseSecurityContraband]
+  id: CaseSecurity
+  name: security case
+  suffix: Security, Empty
+  description: Red and black case with a sec logo, I wonder what's in there?
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Storage/security_case.rsi
+    state: icon
+
+- type: entity
+  parent: [BaseCaseMini, BaseSecurityContraband]
+  id: CaseSecurityMini
+  name: security mini case
+  suffix: Security, Empty
+  description: Little red and black case with a sec logo, I wonder what's in there?
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Storage/security_case_mini.rsi
+    state: icon

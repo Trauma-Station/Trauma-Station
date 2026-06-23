@@ -1,0 +1,11 @@
+loadout-bitrunneravatarpassengergear = Assistant
+loadout-bitrunneravatarclowngear = Clown
+loadout-bitrunneravatarmimegear = Mime
+loadout-bitrunneravatarcaptaingear = Captain
+loadout-bitrunneravatarengineergear = Station Engineer
+loadout-bitrunneravatarmedicaldoctorgear = Medical Doctor
+loadout-bitrunneravatarscientistgear = Scientist
+loadout-bitrunneravatarsecurityofficergear = Security Officer
+loadout-bitrunneravatarcargotechniciangear = Cargo Technician
+loadout-bitrunneravatarsalvagespecialistgear = Salvage Specialist
+loadout-bitrunneravatarshaftminergear = Shaft Miner

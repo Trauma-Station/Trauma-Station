@@ -1,0 +1,35 @@
+- type: startingGear
+  id: AssistantBatGear
+  equipment:
+    mask: ClothingMaskGas
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+  inhand:
+  - BaseBallBat
+
+- type: startingGear
+  id: AssistantAxeGear
+  equipment:
+    mask: ClothingMaskGas
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+  inhand:
+  - FireAxe
+
+- type: startingGear
+  id: AssistantToolboxGear
+  equipment:
+    mask: ClothingMaskGas
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+  inhand:
+  - ToolboxMechanical
+
+- type: startingGear
+  id: AssistantSpearGear
+  equipment:
+    mask: ClothingMaskGas
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+  inhand:
+  - Spear

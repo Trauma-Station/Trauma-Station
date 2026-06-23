@@ -1,0 +1,24 @@
+- type: entity
+  parent: ClothingOuterArmorBase
+  id: ClothingOuterArmorXenonautenHeavy
+  name: heavy shell armor
+  description: XN-H vest, also known as Xenonauten, a set vest with modular attachments made to work in many enviroments. This one seems to be a heavy variant.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/OuterClothing/Armor/chestplate_heavy.rsi
+  - type: Clothing
+    sprite: _Orion/Clothing/OuterClothing/Armor/chestplate_heavy.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.2
+        Heat: 0.3
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: Item
+    size: Huge
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75

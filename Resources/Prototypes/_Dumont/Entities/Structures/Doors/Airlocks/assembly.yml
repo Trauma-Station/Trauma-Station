@@ -1,0 +1,18 @@
+#Bitrunner
+- type: entity
+  parent: AirlockAssembly
+  id: AirlockAssemblyBitrunner
+  suffix: Bitrunner
+  components:
+  - type: Sprite
+    sprite: _Dumont/Structures/Doors/Airlocks/Standard/bitrunning.rsi
+    state: "assembly"
+
+- type: entity
+  parent: AirlockAssembly
+  id: AirlockAssemblyBitrunnerGlass
+  suffix: Bitrunner, Glass
+  components:
+  - type: Sprite
+    sprite: _Dumont/Structures/Doors/Airlocks/Glass/bitrunning.rsi
+    state: "assembly"

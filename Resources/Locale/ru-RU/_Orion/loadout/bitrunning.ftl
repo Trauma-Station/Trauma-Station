@@ -1,0 +1,11 @@
+loadout-bitrunneravatarpassengergear = Ассистент
+loadout-bitrunneravatarclowngear = Клоун
+loadout-bitrunneravatarmimegear = Мим
+loadout-bitrunneravatarcaptaingear = Капитан
+loadout-bitrunneravatarengineergear = Инженер
+loadout-bitrunneravatarmedicaldoctorgear = Врач
+loadout-bitrunneravatarscientistgear = Учёный
+loadout-bitrunneravatarsecurityofficergear = Офицер СБ
+loadout-bitrunneravatarcargotechniciangear = Грузчик
+loadout-bitrunneravatarsalvagespecialistgear = Утилизатор
+loadout-bitrunneravatarshaftminergear = Шахтёр

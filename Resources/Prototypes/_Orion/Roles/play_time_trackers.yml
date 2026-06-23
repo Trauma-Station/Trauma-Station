@@ -1,0 +1,5 @@
+- type: playTimeTracker
+  id: JobBitrunner
+
+- type: playTimeTracker
+  id: JobBitrunAvatar

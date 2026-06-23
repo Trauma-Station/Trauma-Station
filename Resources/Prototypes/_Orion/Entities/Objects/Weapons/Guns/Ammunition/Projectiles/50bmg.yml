@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseBullet
+  id: BulletHighCaliberAP
+  name: bullet (.50 armor-piercing)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+        Structural: 120
+      armorPenetration: 0.8
+    penetrationThreshold: 50

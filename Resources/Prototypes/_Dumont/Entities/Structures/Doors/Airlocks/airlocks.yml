@@ -1,0 +1,19 @@
+- type: entity
+  parent: Airlock
+  id: AirlockBitrunner
+  suffix: Bitrunner
+  components:
+  - type: Sprite
+    sprite: _Dumont/Structures/Doors/Airlocks/Standard/bitrunning.rsi
+  - type: Wires
+    layoutId: AirlockCargo
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockBitrunnerGlass
+  suffix: Bitrunner
+  components:
+  - type: Sprite
+    sprite: _Dumont/Structures/Doors/Airlocks/Glass/bitrunning.rsi
+  - type: Wires
+    layoutId: AirlockCargo

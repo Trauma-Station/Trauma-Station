@@ -1,0 +1,8 @@
+# Cargo
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsBitrunner
+  suffix: Bitrunner, Locked
+  components:
+  - type: AccessReader
+    access: [["Bitrun"]]

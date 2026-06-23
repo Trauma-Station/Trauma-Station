@@ -1,0 +1,114 @@
+﻿- type: entity
+  parent: [SimpleSpaceMobBase, StripableInventoryBase]
+  id: MobBaseNPC
+  abstract: true
+  components:
+  - type: UniversalLanguageSpeaker
+  - type: CombatMode
+#  - type: SurgeryTarget
+  - type: Stripping
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+  - type: ComplexInteraction
+  - type: StatusEffects
+    allowed:
+      - Stun
+      - KnockedDown
+      - SlowedDown
+      - Stutter
+      - Electrocution
+      - ForcedSleep
+      - StatusEffectBlindness
+      - StaminaModifier
+  - type: ZombieImmune
+  - type: Rotatable
+  - type: InputMover
+  - type: MobMover
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcFist
+    soundHit:
+        collection: Punch
+    damage:
+        types:
+          Blunt: 5
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      # NavSmash: !type:Bool
+      #   true
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: NpcFactionMember
+    factions:
+      - SimpleNeutral
+  - type: Inventory
+    templateId: human
+  - type: Hands
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 300
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      50: 0.5
+  - type: Stamina
+    critThreshold: 200
+  - type: Bloodstream
+    bloodReagent: Blood
+    bloodMaxVolume: 10
+    bloodlossThreshold: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          OrganAnimalHeart:
+            min: 1
+            max: 1
+  - type: Puller
+  - type: Body
+    prototype: AnimalHuman
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeat
+      amount: 5
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - FootstepSound
+#      - CanPilot

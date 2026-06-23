@@ -1,0 +1,49 @@
+- type: entity
+  parent: BaseBullet
+  id: BulletRifle762
+  name: bullet (7.62mm rifle)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 24
+      armorPenetration: 0.25
+
+- type: entity
+  parent: BaseBulletPractice
+  id: BulletRifle762Practice
+  name: bullet (7.62mm practice)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 6
+      armorPenetration: -0.5
+
+- type: entity
+  parent: BaseBulletIncendiary
+  id: BulletRifle762Incendiary
+  name: bullet (7.62mm incendiary)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 7
+        Heat: 8
+      armorPenetration: 0.2
+
+- type: entity
+  parent: BaseBulletUranium
+  id: BulletRifle762Uranium
+  name: bullet (7.62mm uranium)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Radiation: 7
+        Piercing: 13
+      armorPenetration: 0.4

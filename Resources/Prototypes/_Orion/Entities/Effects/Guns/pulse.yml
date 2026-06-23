@@ -1,0 +1,38 @@
+- type: entity
+  id: MuzzlePulseEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    netsync: false
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _Orion/Objects/Weapons/Guns/Effects/muzzle/pulse.rsi
+      state: muzzle_pulse
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+      - HideContextMenu
+  - type: AnimationPlayer
+
+- type: entity
+  id: BulletPulseEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Effects/muzzle/pulse.rsi
+    netsync: false
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      state: impact_pulse
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+      - HideContextMenu

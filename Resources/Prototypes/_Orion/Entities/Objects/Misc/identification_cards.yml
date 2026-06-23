@@ -1,0 +1,25 @@
+﻿- type: entity
+  parent: IDCardStandard
+  id: BitrunnerIDCard
+  name: bitrunner ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - sprite: _Orion/Objects/Misc/id_cards.rsi
+      state: bitrunner
+  - type: PresetIdCard
+    job: Bitrunner
+
+- type: entity
+  parent: IDCardStandard
+  id: BitrunAvatarIDCard
+  name: bitrun avatar ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - sprite: _Orion/Objects/Misc/id_cards.rsi
+      state: bitrun-avatar
+  - type: PresetIdCard
+    job: BitrunAvatar

@@ -1,0 +1,22 @@
+- type: job
+  id: BitrunAvatar
+  name: job-name-bitrun-avatar
+  description: job-description-bitrun-avatar
+  playTimeTracker: JobBitrunAvatar
+  setPreference: false
+  startingGear: BitrunAvatarGear
+  icon: "JobIconBitrunAvatar"
+  supervisors: job-supervisors-qm
+  canBeAntag: false
+  goobcoins: 20
+  access:
+  - Cargo
+  - Bitrun
+  - Maintenance
+  extendedAccess:
+  - Salvage
+
+- type: startingGear
+  id: BitrunAvatarGear
+  equipment:
+    id: BitrunAvatarIDCard

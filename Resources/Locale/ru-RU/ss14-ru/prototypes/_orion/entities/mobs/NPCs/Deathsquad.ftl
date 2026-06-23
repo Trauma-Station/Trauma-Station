@@ -1,0 +1,9 @@
+ent-BaseMobDeathSquad = Оперативник Отряда Смерти
+    .suffix = ИИ
+    .desc = { ent-MobHuman.desc }
+ent-MobDeathSquadPhoronSabreBitrunning = Оперативник Отряда Смерти
+    .suffix = Битраннинг, Энергетический меч
+    .desc = { ent-MobHuman.desc }
+ent-MobDeathSquadPulseRifleBitrunning = Оперативник Отряда Смерти
+    .suffix = Битраннинг, Импульсная винтовка
+    .desc = { ent-MobHuman.desc }

@@ -1,0 +1,36 @@
+﻿- type: entity
+  parent: VendingMachine
+  id: VendingMachineBitrunning
+  name: Bitrunning Supplies Order
+  description: A supplies order vending that exchanges bitrunning points for bitrunning goods.
+  components:
+  - type: VendingMachine
+    pack: EmptyVendingMachineInventory
+    offState: off
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: _Orion/Structures/Machines/VendingMachines/bitrun.rsi
+    noRot: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    color: "#4f8dcf"
+    autoRot: true
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+    rotateWhilePulling: true
+  - type: ShopVendor
+    pack: BitrunningVendorInventory
+  - type: UserInterface
+    interfaces:
+      enum.VendingMachineUiKey.Key:
+        type: ShopVendorBoundUserInterface
+  - type: BitrunningPointsVendor

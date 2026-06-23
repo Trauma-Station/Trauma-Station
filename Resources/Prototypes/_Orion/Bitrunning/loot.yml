@@ -1,0 +1,111 @@
+# x1 multiply
+- type: entityTable
+  id: BitrunningDeliveryPeacefulLoot
+  table: !type:GroupSelector
+    rolls: !type:RangeNumberSelector
+      range: 15, 30
+    children:
+    - id: SteelOre1Unprocessed
+      weight: 30
+    - id: SpaceQuartz1Unprocessed
+      weight: 20
+    - id: SilverOre1Unprocessed
+      weight: 7
+    - id: SpaceCash100
+      weight: 2
+
+# x2 multiply
+- type: entityTable
+  id: BitrunningDeliveryEasyLoot
+  table: !type:GroupSelector
+    rolls: !type:RangeNumberSelector
+      range: 30, 60
+    children:
+    - id: SteelOre1Unprocessed
+      weight: 30
+    - id: SpaceQuartz1Unprocessed
+      weight: 20
+    - id: SilverOre1Unprocessed
+      weight: 7
+    - id: SpaceCash100
+      weight: 2
+
+# x4 multiply
+- type: entityTable
+  id: BitrunningDeliveryMediumLoot
+  table: !type:GroupSelector
+    rolls: !type:RangeNumberSelector
+      range: 60, 120
+    children:
+    - id: SteelOre1Unprocessed
+      weight: 25
+    - id: SpaceQuartz1Unprocessed
+      weight: 18
+    - id: SilverOre1Unprocessed
+      weight: 10
+    - id: PlasmaOre1Unprocessed
+      weight: 10
+    - id: GoldOre1Unprocessed
+      weight: 6
+    - id: UraniumOre1Unprocessed
+      weight: 4
+    - id: DiamondOre1Unprocessed
+      weight: 3
+    - id: MaterialBSCrystal1Unprocessed
+      weight: 2
+    - id: SpaceCash100
+      weight: 2
+    - id: SpaceCash500
+      weight: 1
+
+# x6 multiply
+- type: entityTable
+  id: BitrunningDeliveryHardLoot
+  table: !type:GroupSelector
+    rolls: !type:RangeNumberSelector
+      range: 90, 180
+    children:
+    - id: SteelOre1Unprocessed
+      weight: 22
+    - id: SpaceQuartz1Unprocessed
+      weight: 16
+    - id: SilverOre1Unprocessed
+      weight: 10
+    - id: PlasmaOre1Unprocessed
+      weight: 11
+    - id: GoldOre1Unprocessed
+      weight: 8
+    - id: UraniumOre1Unprocessed
+      weight: 7
+    - id: DiamondOre1Unprocessed
+      weight: 5
+    - id: MaterialBSCrystal1Unprocessed
+      weight: 3
+    - id: SpaceCash500
+      weight: 1
+
+# x8 multiply
+- type: entityTable
+  id: BitrunningDeliveryExtremeLoot
+  table: !type:GroupSelector
+    rolls: !type:RangeNumberSelector
+      range: 120, 240
+    children:
+    - id: SteelOre1Unprocessed
+      weight: 20
+    - id: SpaceQuartz1Unprocessed
+      weight: 14
+    - id: SilverOre1Unprocessed
+      weight: 10
+    - id: PlasmaOre1Unprocessed
+      weight: 12
+    - id: GoldOre1Unprocessed
+      weight: 9
+    - id: UraniumOre1Unprocessed
+      weight: 8
+    - id: DiamondOre1Unprocessed
+      weight: 7
+    - id: MaterialBSCrystal1Unprocessed
+      weight: 5
+    - id: SpaceCash500
+      weight: 1

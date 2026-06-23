@@ -1,0 +1,24 @@
+- type: roleLoadout
+  id: JobBitrunner
+  groups:
+  - GroupTankHarness
+  - BitrunnerJumpsuit
+  - BitrunnerBackpack
+  - BitrunnerShoes
+  - Glasses
+  - Survival
+  - Trinkets
+  - Animals
+  - GroupSpeciesBreathTool
+  - CivilianJumpsuit
+  - CivilianBackpack
+  - CivilianNeck
+  - CivilianHat
+  - CivilianFace
+  - CivilianGloves
+  - CivilianShoes
+  - CivilianOuterClothing
+  - CivilianBelt
+  - BitrunnerEnvirohelm
+  - BitrunnerEnvirosuit
+  - BitrunnerEnvirogloves

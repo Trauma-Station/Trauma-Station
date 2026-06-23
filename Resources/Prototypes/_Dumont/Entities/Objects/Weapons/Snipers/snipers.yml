@@ -1,0 +1,63 @@
+- type: entity
+  name: flintlock pistol
+  parent: [BaseItem, BaseMajorContraband]
+  id: WeaponPistolFlintlockBitrunning
+  description: A pirate's companion. Yarrr! Loads one round of .45 Magnum.
+  components:
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedRotation: 0
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Snipers/flintlock.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Snipers/flintlock.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: StaticPrice
+    price: 0
+  - type: BasicEntityAmmoProvider
+    proto: CartridgeMagnum
+    capacity: 1
+    count: 1
+  - type: Gun
+    fireRate: 0.30
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 0.30
+    rechargeSound:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+      params:
+        volume: -100
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SnipersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SnipersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SnipersDrop
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud

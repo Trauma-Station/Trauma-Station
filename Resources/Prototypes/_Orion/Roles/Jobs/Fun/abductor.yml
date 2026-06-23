@@ -1,0 +1,6 @@
+- type: startingGear
+  id: AbductorAgentNpcGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAbductor
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackAbductor

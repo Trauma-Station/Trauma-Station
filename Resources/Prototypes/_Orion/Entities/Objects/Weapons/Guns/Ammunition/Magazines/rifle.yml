@@ -1,0 +1,59 @@
+- type: entity
+  parent: [ BaseMagazineRifle, BaseSecurityContraband ]
+  id: MagazineRifle762
+  name: magazine (7.62mm rifle)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle762
+    capacity: 30
+    whitelist:
+      tags:
+        - CartridgeRifle762
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Ammunition/Magazines/Rifle/762_mag.rsi
+    scale: 0.9, 0.9
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Tag
+    tags:
+      - MagazineRifle762
+      - MagazineRifle
+
+- type: entity
+  parent: MagazineRifle762
+  id: MagazineRifle762Empty
+  name: magazine (7.62mm any)
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  parent: MagazineRifle762
+  id: MagazineRifle762Practice
+  name: magazine (7.62mm practice)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle762Practice
+
+- type: entity
+  parent: MagazineRifle762
+  id: MagazineRifle762Incendiary
+  name: magazine (7.62mm incendiary)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle762Incendiary
+
+- type: entity
+  parent: MagazineRifle762
+  id: MagazineRifle762Uranium
+  name: magazine (7.62mm uranium)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeRifle762Uranium

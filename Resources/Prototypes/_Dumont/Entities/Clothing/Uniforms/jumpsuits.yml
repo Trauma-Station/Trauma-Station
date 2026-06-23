@@ -1,0 +1,16 @@
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  id: ClothingUniformJumpsuitBitrunner
+  name: bitrunner jumpsuit
+  description: A sturdy and comfortable jumpsuit, handed out to bitrunners so they can enjoy a cozy little rest in the netpod while their brains are gently cooked by a quantum-scale computing technology still under analysis.
+  components:
+  - type: Sprite
+    sprite: _Dumont/Clothing/Uniforms/Jumpsuit/Cargo/bitrunner.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#3f3f3f"
+      right:
+      - state: inhand-right
+        color: "#3f3f3f"

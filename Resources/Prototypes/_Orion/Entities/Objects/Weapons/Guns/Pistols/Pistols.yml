@@ -1,0 +1,38 @@
+- type: entity
+  parent: [BaseWeaponPistol, BaseSecurityContraband]
+  id: WeaponPistolG22
+  name: G-22
+  description: A popular police firearm in the modern day. Chambered in 9mm rounds.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Guns/Pistols/glock22/big.rsi
+    scale: 0.9, 0.9
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Guns/Pistols/glock22/tiny.rsi
+  - type: Gun
+    angleDecay: 7
+    angleIncrease: 2
+    cameraRecoilScalar: 0.5
+    fireRate: 5
+    maxAngle: 13
+    minAngle: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: MagazinePistol
+        insertSound: /Audio/_Orion/Weapons/Guns/Pistols/beretta_reload.ogg
+        ejectSound: /Audio/_Orion/Weapons/Guns/Pistols/beretta_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistol
+      gun_chamber:
+        startingItem: CartridgePistol
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true

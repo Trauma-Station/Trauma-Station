@@ -1,0 +1,205 @@
+# --- --- ---
+#  PEACEFUL
+# --- --- ---
+
+- type: bitrunningVirtualDomain
+  id: BeachBar
+  name: bitrunning-domain-beach-bar-name
+  description: bitrunning-domain-beach-bar-desc
+  difficulty: Peaceful
+  serverRewardPoints: 1
+  bitrunningRewardPoints: 30
+  completionLoot:
+    BeachBall: 1
+  mapPath: /Maps/_Orion/Bitrun/beach-bar.yml
+  objectiveType: OverhydrateStomach
+
+- type: bitrunningVirtualDomain
+  id: BreezeBay
+  name: bitrunning-domain-breeze-bay-name
+  description: bitrunning-domain-breeze-bay-desc
+  difficulty: Peaceful
+  serverRewardPoints: 1
+  bitrunningRewardPoints: 60
+  mapPath: /Maps/_Orion/Bitrun/breeze-bay.yml
+  objectiveType: CatchFish
+  objectiveTarget: 5
+
+- type: bitrunningVirtualDomain
+  id: GrasslandHunt
+  name: bitrunning-domain-grassland-hunt-name
+  description: bitrunning-domain-grassland-hunt-desc
+  difficulty: Peaceful
+  serverRewardPoints: 1
+  bitrunningRewardPoints: 45
+  mapPath: /Maps/_Orion/Bitrun/grassland-hunt.yml
+  objectiveType: EliminateEnemies
+  objectiveTarget: 8
+
+- type: bitrunningVirtualDomain
+  id: CosmicVestige
+  name: bitrunning-domain-cosmic-vestige-name
+  description: bitrunning-domain-cosmic-vestige-desc
+  difficulty: Peaceful
+  rewardLootDifficulty: Medium
+  serverRewardPoints: 0
+  cost: 20
+  bitrunningRewardPoints: 600 # Because cost overprice etc...
+  completionLoot:
+    SpaceCash500: 4
+  mapPath: /Maps/_Orion/Bitrun/cosmic-vestige.yml
+  objectiveType: DeliveryCacheCrate
+
+# --- --- ---
+#    EASY
+# --- --- ---
+
+- type: bitrunningVirtualDomain
+  id: XenomorphInfestation
+  name: bitrunning-domain-xenomorph-infestation-name
+  description: bitrunning-domain-xenomorph-infestation-desc
+  difficulty: Easy
+  cost: 1
+  serverRewardPoints: 3
+  bitrunningRewardPoints: 150
+  completionLoot:
+    PlushieRouny: 1
+  forcedLoadout: BitrunnerAvatarXenonautenGear
+  forcedLoadoutSpecie:
+    Plasmaman: BitrunnerAvatarXenonautenPlasmamanGear
+    Vox: BitrunnerAvatarXenonautenVoxGear
+  isModular: true
+  mapPath: /Maps/_Orion/Bitrun/xenomorph-infestation.yml
+  objectiveTypePool:
+  - DeliveryCacheCrate
+  - EliminateEnemies
+  objectiveTargetByType:
+    DeliveryCacheCrate: 1
+    EliminateEnemies: 0
+
+- type: bitrunningVirtualDomain
+  id: MetaCentral
+  name: bitrunning-domain-meta-central-name
+  description: bitrunning-domain-meta-central-desc
+  difficulty: Easy
+  cost: 1
+  serverRewardPoints: 3
+  bitrunningRewardPoints: 150
+  forcedLoadout: BitrunnerAvatarSecurityOfficerMODGear
+  forcedLoadoutSpecie:
+    Plasmaman: BitrunnerAvatarSecurityOfficerMODPlasmamanGear
+    Vox: BitrunnerAvatarSecurityOfficerMODVoxGear
+  isModular: true
+  completionLoot:
+    ClothingNeckFellForItAward: 1
+  mapPath: /Maps/_Orion/Bitrun/meta-central.yml
+  objectiveTypePool:
+  - DeliveryCacheCrate
+  - EliminateEnemies
+  objectiveTargetByType:
+    DeliveryCacheCrate: 1
+    EliminateEnemies: 0
+
+# --- --- ---
+#   MEDIUM
+# --- --- ---
+
+- type: bitrunningVirtualDomain
+  id: AbductorShip
+  name: bitrunning-domain-abductor-ship-name
+  description: bitrunning-domain-abductor-ship-desc
+  difficulty: Medium
+  cost: 2
+  serverRewardPoints: 4
+  bitrunningRewardPoints: 250
+  completionLoot:
+    PlushieAbductor: 1
+  isModular: true
+  mapPath: /Maps/_Orion/Bitrun/abductor-ship.yml
+  objectiveType: DeliveryCacheCrate
+
+- type: bitrunningVirtualDomain
+  id: PizzaParty
+  name: bitrunning-domain-pizza-party-name
+  description: bitrunning-domain-pizza-party-desc
+  difficulty: Medium
+  cost: 2
+  serverRewardPoints: 4
+  bitrunningRewardPoints: 180
+  completionLoot:
+    FoodPizzaMeatSlice: 1
+  isModular: true
+  mapPath: /Maps/_Orion/Bitrun/pizza-party.yml
+  objectiveType: DeliveryCacheCrate
+
+- type: bitrunningVirtualDomain
+  id: CorsairCove
+  name: bitrunning-domain-corsair-cove-name
+  description: bitrunning-domain-corsair-cove-desc
+  difficulty: Medium
+  cost: 2
+  serverRewardPoints: 4
+  bitrunningRewardPoints: 220
+  completionLoot:
+    IngotGold1: 1
+  mapPath: /Maps/_Orion/Bitrun/corsair-cove.yml
+  objectiveTypePool:
+  - DeliveryCacheCrate
+  - EliminateEnemies
+  objectiveTargetByType:
+    DeliveryCacheCrate: 1
+    EliminateEnemies: 0
+
+# --- --- ---
+#    HARD
+# --- --- ---
+
+- type: bitrunningVirtualDomain
+  id: ZealotArena
+  name: bitrunning-domain-zealot-arena-name
+  description: bitrunning-domain-zealot-arena-desc
+  difficulty: Hard
+  cost: 3
+  serverRewardPoints: 6
+  bitrunningRewardPoints: 600
+  mapPath: /Maps/_Orion/Bitrun/zealot-arena.yml
+  objectiveType: EliminateEnemies
+
+- type: bitrunningVirtualDomain
+  id: ExperimentalSoldier
+  name: bitrunning-domain-experimental-soldier-name
+  description: bitrunning-domain-experimental-soldier-desc
+  difficulty: Hard
+  cost: 3
+  serverRewardPoints: 6
+  bitrunningRewardPoints: 600
+  forcedLoadout: BitrunnerAvatarERTSecurityGear
+  forcedLoadoutSpecie:
+    Plasmaman: BitrunnerAvatarERTSecurityPlasmamanGear
+    Vox: BitrunnerAvatarERTSecurityVoxGear
+  mapPath: /Maps/_Orion/Bitrun/Experimental-Soldier.yml
+  objectiveType: CollectEncryptedCaches
+
+# --- --- ---
+#  EXTREME 🗣️
+# --- --- ---
+
+- type: bitrunningVirtualDomain
+  id: SpecialSquad
+  name: bitrunning-domain-special-squad-name
+  description: bitrunning-domain-special-squad-desc
+  difficulty: Extreme
+  cost: 5
+  serverRewardPoints: 8
+  bitrunningRewardPoints: 900
+  isModular: true
+  completionLoot:
+    FoodSnackLollypopWrappedMysteryEvil: 3
+    BalloonSyn: 1
+  mapPath: /Maps/_Orion/Bitrun/Special-squad.yml
+  objectiveTypePool:
+  - DeliveryCacheCrate
+  - EliminateEnemies
+  objectiveTargetByType:
+    DeliveryCacheCrate: 1
+    EliminateEnemies: 0

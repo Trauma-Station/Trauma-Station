@@ -2,6 +2,8 @@
 
 using Content.Shared.Access.Systems;
 using Content.Trauma.Shared.Salvage.Systems;
+using Content.Shared._Orion.Bitrunning.Components;
+using Content.Shared._Orion.Bitrunning.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Popups;
 using Content.Shared.Power;
@@ -23,6 +25,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private BitrunningPointsSystem _bitrunningPoints = default!; // Orion
 
     public override void Initialize()
     {
@@ -30,6 +33,10 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
 
         SubscribeLocalEvent<PointsVendorComponent, ShopVendorBalanceEvent>(OnPointsBalance);
         SubscribeLocalEvent<PointsVendorComponent, ShopVendorPurchaseEvent>(OnPointsPurchase);
+        // Orion-Start
+        SubscribeLocalEvent<BitrunningPointsVendorComponent, ShopVendorBalanceEvent>(OnBitrunningPointsBalance);
+        SubscribeLocalEvent<BitrunningPointsVendorComponent, ShopVendorPurchaseEvent>(OnBitrunningPointsPurchase);
+        // Orion-End
 
         SubscribeLocalEvent<ShopVendorComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<ShopVendorComponent, BreakageEventArgs>(OnBreak);
@@ -60,10 +67,30 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
 
     private void OnPointsPurchase(Entity<PointsVendorComponent> ent, ref ShopVendorPurchaseEvent args)
     {
+        // Orion-Start
+        if (args.Paid)
+            return;
+        // Orion-End
+
         if (_points.GetPointComp(args.User) is {} idCard && _points.RemovePoints(idCard, args.Cost)) // Goobstation - borg Miningpoints
             args.Paid = true;
     }
 
+    // Orion-Start
+    private void OnBitrunningPointsBalance(Entity<BitrunningPointsVendorComponent> ent, ref ShopVendorBalanceEvent args)
+    {
+        args.Balance = _bitrunningPoints.GetPointComp(args.User)?.Comp?.Points ?? 0;
+    }
+
+    private void OnBitrunningPointsPurchase(Entity<BitrunningPointsVendorComponent> ent, ref ShopVendorPurchaseEvent args)
+    {
+        if (args.Paid)
+            return;
+
+        if (_bitrunningPoints.GetPointComp(args.User) is {} account && _bitrunningPoints.RemovePoints(account, args.Cost))
+            args.Paid = true;
+    }
+    // Orion-End
     #endregion
 
     private void OnPowerChanged(Entity<ShopVendorComponent> ent, ref PowerChangedEvent args)

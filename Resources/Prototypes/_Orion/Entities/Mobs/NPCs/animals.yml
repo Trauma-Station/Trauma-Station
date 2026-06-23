@@ -1,0 +1,13 @@
+- type: entity
+  parent: MobReindeerBuck
+  id: MobReindeerBuckBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective
+
+- type: entity
+  parent: MobReindeerDoe
+  id: MobReindeerDoeBitrunning
+  suffix: Bitrunning
+  components:
+  - type: BitrunningDomainEnemyObjective

@@ -1,0 +1,251 @@
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: QuantumServer
+  name: quantum server
+  description: High density simulation hardware for virtual domains.
+  components:
+  - type: Sprite
+    sprite: _Orion/Structures/Machines/quantum_server.rsi
+    noRot: true
+    layers:
+    - state: qserver
+      map: ["qserver_base"]
+    - state: qserver_panel
+      visible: false
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.QuantumServerVisuals.QuantumServerState:
+        qserver_base:
+          Unpowered: { state: qserver }
+          Ready: { state: qserver }
+          Cooling: { state: qserver_off }
+          Running: { state: qserver_on }
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: WiresPanel
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: QuantumServer
+  - type: Machine
+    board: QuantumServerMachineCircuitboard
+  - type: DeviceLinkSource
+    ports:
+    - BitrunningServerSource
+  - type: AutoLinkTransmitter
+    channel: BitrunningHub
+
+- type: entity
+  parent: BaseComputer
+  id: QuantumConsole
+  name: quantum console
+  description: Console for selecting and controlling bitrunning domains.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+    - sprite: _Dumont/Structures/Machines/computers.rsi
+      state: bitrunner
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ActivatableUI
+    key: enum.QuantumConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.QuantumConsoleUiKey.Key:
+        type: QuantumConsoleBoundUserInterface
+  - type: QuantumConsole
+  - type: Computer
+    board: QuantumConsoleCircuitboard
+  - type: DeviceLinkSink
+    ports:
+    - BitrunningConsoleSink
+  - type: AutoLinkReceiver
+    channel: BitrunningHub
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: Netpod
+  name: netpod
+  description: Neural link pod for bitrunning avatar sessions.
+  components:
+  - type: Sprite
+    sprite: _Orion/Structures/Machines/netpod.rsi
+    noRot: true
+    layers:
+    - state: netpod
+      map: ["base"]
+    - state: netpod_panel
+      visible: false
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.NetpodVisuals.State:
+        base:
+          Open: { state: netpod }
+          Closed: { state: netpod_closed }
+          Active: { state: netpod_closed_active }
+          OpenActive: { state: netpod_open_active }
+          Opening: { state: netpod_opening }
+          Closing: { state: netpod_closing }
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: WiresPanel
+  - type: Physics
+    canCollide: false
+  - type: ContainerContainer
+    containers:
+      netpod-body:
+        !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+      - netpod-body
+  - type: DragInsertContainer
+    containerId: netpod-body
+    entryDelay: 1
+  - type: ExitContainerOnMove
+    containerId: netpod-body
+  - type: NetpodContainer
+  - type: ActivatableUI
+    key: enum.NetpodUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.NetpodUiKey.Key:
+        type: NetpodBoundUserInterface
+  - type: Machine
+    board: NetpodMachineCircuitboard
+  - type: DeviceLinkSink
+    ports:
+    - BitrunningNetpodSink
+  - type: AutoLinkReceiver
+    channel: BitrunningHub
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SurveillanceCameraEntertainment
+    transmitFrequencyId: SurveillanceCamera
+  - type: Eye # Fallback
+  - type: SurveillanceCamera
+    networkSet: true
+    nameSet: true
+    mobile: true
+  - type: Netpod
+    allowedLoadout:
+    - BitrunnerAvatarGear
+    - BitrunnerAvatarPassengerGear
+    - BitrunnerAvatarClownGear
+    - BitrunnerAvatarMimeGear
+    - BitrunnerAvatarCaptainGear
+    - BitrunnerAvatarEngineerGear
+    - BitrunnerAvatarMedicalDoctorGear
+    - BitrunnerAvatarScientistGear
+    - BitrunnerAvatarSecurityOfficerGear
+    - BitrunnerAvatarCargoTechnicianGear
+    - BitrunnerAvatarSalvageSpecialistGear
+    - BitrunnerAvatarShaftMinerGear
+    allowedLoadoutSpecie:
+      Plasmaman:
+      - BitrunnerAvatarPlasmamanGear
+      - BitrunnerAvatarPassengerPlasmamanGear
+      - BitrunnerAvatarClownPlasmamanGear
+      - BitrunnerAvatarMimePlasmamanGear
+      - BitrunnerAvatarCaptainPlasmamanGear
+      - BitrunnerAvatarEngineerPlasmamanGear
+      - BitrunnerAvatarMedicalDoctorPlasmamanGear
+      - BitrunnerAvatarScientistPlasmamanGear
+      - BitrunnerAvatarSecurityOfficerPlasmamanGear
+      - BitrunnerAvatarCargoTechnicianPlasmamanGear
+      - BitrunnerAvatarSalvageSpecialistPlasmamanGear
+      - BitrunnerAvatarShaftMinerPlasmamanGear
+      Vox:
+      - BitrunnerAvatarVoxGear
+      - BitrunnerAvatarPassengerVoxGear
+      - BitrunnerAvatarClownVoxGear
+      - BitrunnerAvatarMimeVoxGear
+      - BitrunnerAvatarCaptainVoxGear
+      - BitrunnerAvatarEngineerVoxGear
+      - BitrunnerAvatarMedicalDoctorVoxGear
+      - BitrunnerAvatarScientistVoxGear
+      - BitrunnerAvatarSecurityOfficerVoxGear
+      - BitrunnerAvatarCargoTechnicianVoxGear
+      - BitrunnerAvatarSalvageSpecialistVoxGear
+      - BitrunnerAvatarShaftMinerVoxGear
+    preferredLoadoutSpecie:
+      Plasmaman: BitrunnerAvatarPlasmamanGear
+      Vox: BitrunnerAvatarVoxGear
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: Byteforge
+  name: byteforge
+  description: A quantum processor that recompiles delivered cache crates into physical rewards.
+  components:
+  - type: Sprite
+    sprite: _Orion/Structures/Machines/byteforge.rsi
+    noRot: true
+    layers:
+    - state: byteforge
+      map: ["byteforge_base"]
+    - state: on_overlay
+      visible: false
+      map: ["byteforge_on"]
+    - state: on_particles
+      visible: false
+      drawDepth: Effects
+      map: ["byteforge_particles"]
+    - state: byteforge_panel
+      visible: false
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ByteforgeVisuals.ByteforgeActive:
+        byteforge_on:
+          True: { visible: true }
+          False: { visible: false }
+      enum.ByteforgeVisuals.ByteforgePowered:
+        byteforge_particles:
+          True: { visible: true }
+          False: { visible: false }
+      enum.ByteforgeVisuals.ByteforgeAngry:
+        byteforge_on:
+          True: { state: on_overlay_angry }
+          False: { state: on_overlay }
+        byteforge_particles:
+          True: { state: on_particles_angry }
+          False: { state: on_particles }
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: WiresPanel
+  - type: Physics
+    canCollide: false
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Byteforge
+  - type: Machine
+    board: ByteforgeMachineCircuitboard
+  - type: DeviceLinkSink
+    ports:
+    - BitrunningByteforgeSink
+  - type: AutoLinkReceiver
+    channel: BitrunningHub

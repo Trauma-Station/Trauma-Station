@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCamouflage
+  name: camouflage uniform
+  description: Everything necessary is hidden.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Uniforms/Jumpsuit/camouflage.rsi
+  - type: Clothing
+    sprite: _Orion/Clothing/Uniforms/Jumpsuit/camouflage.rsi

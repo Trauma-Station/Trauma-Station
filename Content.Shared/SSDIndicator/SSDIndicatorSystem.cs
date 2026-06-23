@@ -5,6 +5,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.NPC;
 
 namespace Content.Shared.SSDIndicator;
 
@@ -48,6 +49,9 @@ public sealed partial class SSDIndicatorSystem : EntitySystem
 
     private void OnPlayerDetached(EntityUid uid, SSDIndicatorComponent component, PlayerDetachedEvent args)
     {
+        if (HasComp<ActiveNPCComponent>(uid)) // Dumont
+            return;
+
         component.IsSSD = true;
 
         // Sets the time when the entity should fall asleep
@@ -62,7 +66,7 @@ public sealed partial class SSDIndicatorSystem : EntitySystem
     // Prevents mapped mobs to go to sleep immediately
     private void OnMapInit(EntityUid uid, SSDIndicatorComponent component, MapInitEvent args)
     {
-        if (!_icSsdSleep || !component.IsSSD)
+        if (!_icSsdSleep || !component.IsSSD || HasComp<ActiveNPCComponent>(uid)) // Dumont
             return;
 
         component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
@@ -86,7 +90,8 @@ public sealed partial class SSDIndicatorSystem : EntitySystem
             if (!ssd.IsSSD
                 || ssd.NextUpdate > curTime
                 || ssd.FallAsleepTime > curTime
-                || TerminatingOrDeleted(uid))
+                || TerminatingOrDeleted(uid)
+                || HasComp<ActiveNPCComponent>(uid)) // Dumont
                 continue;
 
             _statusEffects.TryUpdateStatusEffectDuration(uid, StatusEffectSSDSleeping);

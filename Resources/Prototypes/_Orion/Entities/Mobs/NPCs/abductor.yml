@@ -1,0 +1,51 @@
+- type: entity
+  parent: [ MobAbductor, MobBaseNPC ]
+  id: MobSimpleAbductorAgentPistol
+  name: abductor agent
+  suffix: AI, Alien Pistol
+  components:
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+  - type: RandomMetadata
+    nameSegments:
+    - AbductorAgentPrefix
+    - AbductorNames
+    nameFormat: name-format-standard
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+  - type: InnateTool
+    tools:
+    - id: WeaponAlien
+  - type: Loadout
+    prototypes:
+    - AbductorAgentNpcGear
+  - type: Perishable # Nuh, no.
+    molsPerSecondPerUnitMass: 0
+
+- type: entity
+  parent: [ MobAbductor, MobBaseNPC ]
+  id: MobSimpleAbductorAgentWonderprod
+  name: abductor agent
+  suffix: AI, Wonderprod
+  components:
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+  - type: RandomMetadata
+    nameSegments:
+    - AbductorAgentPrefix
+    - AbductorNames
+    nameFormat: name-format-standard
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: InnateTool
+    tools:
+    - id: WonderprodBitrunning
+  - type: Loadout
+    prototypes:
+    - AbductorAgentNpcGear
+  - type: Perishable # Nuh, no.
+    molsPerSecondPerUnitMass: 0

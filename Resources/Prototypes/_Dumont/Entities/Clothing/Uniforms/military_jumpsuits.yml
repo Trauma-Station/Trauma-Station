@@ -1,0 +1,41 @@
+## Cargo
+- type: entity
+  parent: ClothingUniformJumpsuitBitrunner
+  id: ClothingUniformJumpsuitMilitaryBitrunner
+  suffix: Military
+  components:
+  - type: Sprite
+    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
+    layers:
+    - state: icon-base-bottom
+      color: "#1f2026"
+    - state: icon-base-top-jumpsuit
+      color: "#2d2d33"
+    - state: icon-decor-department
+      color: "#39393f"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base-bottom
+        color: "#1f2026"
+      - state: inhand-left-base-top-jumpsuit
+        color: "#2d2d33"
+      - state: inhand-left-decor-department
+        color: "#39393f"
+      right:
+      - state: inhand-right-base-bottom
+        color: "#1f2026"
+      - state: inhand-right-base-top-jumpsuit
+        color: "#2d2d33"
+      - state: inhand-right-decor-department
+        color: "#39393f"
+  - type: Clothing
+    sprite: _NF/Clothing/Uniforms/Jumpsuit/military.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-base-bottom
+        color: "#1f2026"
+      - state: equipped-base-top-jumpsuit
+        color: "#2d2d33"
+      - state: equipped-decor-department
+        color: "#39393f"

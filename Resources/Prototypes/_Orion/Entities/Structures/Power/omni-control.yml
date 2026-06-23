@@ -1,0 +1,28 @@
+# APC that provides OMNI-power with gravity (compact? uhh uhh...)
+- type: entity
+  parent: DebugAPCRecharging
+  id: OmniControlUnit
+  name: omni-control unit
+  description: A compact all-in-one utility core that provides power and local gravity.
+  suffix: Power-Gravity
+  components:
+  - type: Battery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50000
+  - type: PowerNetworkBattery
+    maxSupply: 1.0e9
+    maxChargeRate: 1.0e9
+    supplyRampTolerance: 1.0e9
+    supplyRampRate: 1.0e9
+  - type: GravitySource
+
+- type: entity
+  parent: OmniControlUnit
+  id: OmniControlUnitUnlocked
+  name: omni-control unit
+  description: A compact all-in-one utility core that provides power and local gravity.
+  suffix: Power-Gravity, Unlocked
+  components:
+  - type: AccessReader
+    access: [ ]

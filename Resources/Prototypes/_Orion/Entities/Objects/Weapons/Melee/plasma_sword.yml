@@ -1,0 +1,78 @@
+- type: entity
+  parent: [ BaseMajorContraband, BaseMeleeWeaponEnergy ]
+  id: BaseMeleeWeaponPlasma
+  abstract: true
+  components:
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_Orion/Weapons/Melee/plasma/plasma_on.ogg
+      params:
+        volume: 3
+    soundDeactivate:
+      path: /Audio/_Orion/Weapons/Melee/plasma/plasma_off.ogg
+      params:
+        volume: 3
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/_Orion/Weapons/Melee/plasma/plasma_hit.ogg
+      params:
+        variation: 0.250
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/punchmiss.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnSwing:
+      path: /Audio/_Orion/Weapons/Melee/plasma/plasma_swing.ogg
+      params:
+        variation: 0.125
+  - type: Welder
+    fuelSolutionName: plasma
+    fuelReagent: Plasma
+    fuelLitCost: 2
+  - type: RefillableSolution
+    solution: plasma
+  - type: SolutionContainerManager
+    solutions:
+      plasma:
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 250
+        maxVol: 250
+  - type: SolutionRegeneration
+    solution: plasma
+    generated:
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 0.005
+  - type: ComponentToggler
+    components:
+    - type: Cautery # Shitmed
+      speed: 1.25
+    - type: SurgeryTool # Shitmed
+      startSound:
+        collection: Welder
+      endSound:
+        collection: WelderOff
+    - type: Execution
+      doAfterDuration: 4.0
+  - type: ScannableForPoints # Goob
+    points: 1
+
+- type: entity
+  parent: [ BaseMeleeWeaponPlasma, EnergySwordDouble ]
+  id: PlasmaScythe
+  name: plasma scythe
+  description: This can be stored in pockets.
+  components:
+  - type: Sprite
+    sprite: _Orion/Objects/Weapons/Melee/plasma_sword_double.rsi
+  - type: Item
+    sprite: _Orion/Objects/Weapons/Melee/plasma_sword_double-inhands.rsi
+  - type: SolutionContainerManager
+    solutions:
+      plasma:
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 300
+        maxVol: 300
