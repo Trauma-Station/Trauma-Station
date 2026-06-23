@@ -75,7 +75,7 @@
       sprite: _Trauma/Objects/Weapons/Melee/bat_nail.rsi
 
 - type: entity
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [ BaseItem, BaseMinorContraband ]
   id: NailBoardUnfinished
   name: unfinished nail board
   description: Needs some nails.
@@ -108,8 +108,8 @@
     sprite: _Trauma/Objects/Weapons/Melee/nailboard.rsi
     state: finished
   - type: MeleeWeapon
-    animationRotation: -135 # WWDP
-    heavyStaminaCost: 15 # goob edit
+    animationRotation: -135
+    heavyStaminaCost: 15
     wideAnimationRotation: -135
     damage:
       types:
@@ -236,8 +236,8 @@
       fix1:
         shape: !type:PolygonShape
           vertices:
-            - -0.08,-0.06 # Goob edit
-            - -0.06,-0.08 # Goob edit
+            - -0.08,-0.06
+            - -0.06,-0.08
             - 0.40,0.30
             - 0.30,0.40
         density: 20
@@ -259,7 +259,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 10 # Trauma - was 12
+        Piercing: 10
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -302,7 +302,7 @@
   - type: AnimationPlayer
   - type: Tag
     tags:
-    - Grenade # Goob
+    - Grenade
     - HandGrenade
     - Spear
   - type: TriggerOnEmbed

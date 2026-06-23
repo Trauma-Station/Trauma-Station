@@ -306,9 +306,11 @@
   - type: Projectile
     damage:
       types:
-        # Radiation: 5 # Trauma
-        Piercing: 4
-      armorPenetration: 0.5 # Trauma
+      # <Trauma>
+      #  Radiation: 5
+        Piercing: 4 # was 5
+      armorPenetration: 0.5
+      # </Trauma>
 
 - type: entity
   parent: PelletShotgunUranium

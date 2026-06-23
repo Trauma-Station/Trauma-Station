@@ -10,7 +10,7 @@
 - type: entity
   parent: MobPlasmamanRandom
   id: MobPlasmamanFishing
-  categories: [HideSpawnMenu]
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomHumanoidAppearance
   - type: NPCRetaliation
@@ -18,10 +18,17 @@
   - type: FactionException
   - type: NpcFactionMember
     factions:
-      - Passive
+    - Passive
   - type: HTN
     rootTask:
       task: MonkeyCompound
     blackboard:
       NavInteract: !type:Bool
         true
+
+- type: entity
+  parent: MobDecapoid
+  id: MobDecapoidRandom
+  suffix: Random Appearance
+  components:
+  - type: RandomHumanoidAppearance

@@ -77,10 +77,8 @@
               Piercing: 0.5
               Radiation: 0.1
               Caustic: 0.4
-            # <Trauma> - This is done so shotguns are worse against armor
-            flatReductions:
+            flatReductions: # This is done so shotguns are worse against armor
               Piercing: 2
-            # </Trauma>
         - type: StaminaResistance
           damageCoefficient: 0.5
         - type: ExplosionResistance

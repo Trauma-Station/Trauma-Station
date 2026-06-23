@@ -31,10 +31,8 @@
         Piercing: 0.5
         Heat: 0.5
         Radiation: 0.1
-      # <Trauma> - This is done so shotguns are worse against armor
-      flatReductions:
+      flatReductions: # This is done so shotguns are worse against armor
         Piercing: 3
-      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
@@ -91,10 +89,8 @@
         Piercing: 0.5
         Heat: 0.5
         Radiation: 0.1
-      # <Trauma> - This is done so shotguns are worse against armor
-      flatReductions:
+      flatReductions: # This is done so shotguns are worse against armor
         Piercing: 3
-      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -137,10 +133,8 @@
         Piercing: 0.3
         Heat: 0.5
         Radiation: 0.1
-      # <Trauma> - This is done so shotguns are worse against armor
-      flatReductions:
+      flatReductions: # This is done so shotguns are worse against armor
         Piercing: 3
-      # </Trauma>
   - type: ClothingSpeedModifier
     walkModifier: 0.60
     sprintModifier: 0.60

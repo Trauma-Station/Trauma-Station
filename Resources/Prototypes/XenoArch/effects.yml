@@ -107,7 +107,7 @@
       weight: 3.0
     - id: XenoArtifactHealAll
       weight: 1.0
-    # - id: XenoArtifactTesla
+    # - id: XenoArtifactTesla Trauma
     #   weight: 10
     # - id: XenoArtifactSingularity
     #   weight: 10
