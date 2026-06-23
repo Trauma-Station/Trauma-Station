@@ -15,6 +15,7 @@ namespace Content.Trauma.Server.JobListings;
 public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
 {
     [Dependency] private MindSystem _mind = default!;
+    [Dependency] private JobListingsSystem _jobs = default!;
 
     public override void Initialize()
     {
@@ -47,6 +48,7 @@ public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
         if (!_mind.TryGetMind(user, out var mind, out var mindComp))
             return;
         RegisterScan((mind, mindComp), target);
+        _jobs.UpdateUis((mind, mindComp));
     }
 
     private void OnGetProgress(Entity<StealConditionRequireScanComponent> entity, ref ObjectiveGetProgressEvent args)

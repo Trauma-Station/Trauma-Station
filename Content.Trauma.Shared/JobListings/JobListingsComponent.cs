@@ -61,4 +61,11 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public List<int> ReputationLevels;
+
+    /// <summary>
+    /// A list of <see cref="RemoteJobListingsComponent"/> that are targeting this entity.
+    /// Should only be edited by <see cref="JobListingsSystem.Link"/>
+    /// </summary>
+    [DataField]
+    public List<EntityUid> Remotes;
 }

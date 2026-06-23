@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server.Database.Migrations.Postgres;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Objectives;
@@ -247,6 +248,29 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     }
 
     /// <summary>
+    /// Update the entities with uis that point to this job board.
+    /// </summary>
+    public void UpdateUis(Entity<JobListingsComponent> jobBoard)
+    {
+        foreach (var remote in jobBoard.Comp.Remotes)
+        {
+            UpdateUi(remote);
+        }
+    }
+
+    /// <summary>
+    /// Update the entities with uis that point to the job board owned by this mind.
+    /// </summary>
+    public void UpdateUis(Entity<MindComponent> mind)
+    {
+        if (!TryComp<JobListingsOwnerComponent>(mind.Owner, out var jobBoard))
+            return;
+        if (!TryComp<JobListingsComponent>(jobBoard.JobListings, out var jobListingsComp) )
+            return;
+        UpdateUis((jobBoard.JobListings, jobListingsComp));
+    }
+
+    /// <summary>
     /// Find a job board from an entity that has a <see cref="RemoteJobListingsComponent"/>.
     /// </summary>
     public bool GetJobBoard(EntityUid owner, [NotNullWhen(true)] out Entity<JobListingsComponent>? jobBoard)
@@ -262,6 +286,15 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         return true;
     }
 
+    /// <summary>
+    /// Link an entity with a ui (like a pda) to a job board.
+    /// </summary>
+    public void Link(Entity<JobListingsComponent> jobBoard, EntityUid remote)
+    {
+        AddComp(remote, new RemoteJobListingsComponent {JobListings = jobBoard.Owner});
+        jobBoard.Comp.Remotes.Add(remote);
+    }
+
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
@@ -271,10 +304,10 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (mind is null)
             return;
         jobListingsComp.Mind = mind.Value;
+        AddComp(mind.Value, new JobListingsOwnerComponent{JobListings = args.Store});
 
         FillSideJobs((args.Store, jobListingsComp));
-
-        AddComp(args.Host, new RemoteJobListingsComponent {JobListings = args.Store});
+        Link((args.Store, jobListingsComp), args.Host);
     }
 
     private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)
