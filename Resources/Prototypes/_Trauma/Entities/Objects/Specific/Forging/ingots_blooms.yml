@@ -330,6 +330,8 @@
     result: GoldIngot
   - type: Construction
     graph: GoldScraps
+  - type: StaticPrice
+    price: 225
 
 - type: entity
   parent: MarkerBase
@@ -356,7 +358,8 @@
   - type: PhysicalComposition
     materialComposition:
       Gold: 250
-
+  - type: StaticPrice
+    price: 225
 # Silver
 
 - type: entity
@@ -385,6 +388,8 @@
     result: SilverIngot
   - type: Construction
     graph: SilverScraps
+  - type: StaticPrice
+    price: 180
 
 - type: entity
   parent: MarkerBase
@@ -411,7 +416,8 @@
   - type: PhysicalComposition
     materialComposition:
       Silver: 250
-
+  - type: StaticPrice
+    price: 180
 # Adamantine - 2050K -+ 50K range of error
 
 - type: entity
@@ -468,3 +474,5 @@
     layers:
     - state: ingot_adamantine
       shader: Emissive
+  - type: StaticPrice
+    price: 10000

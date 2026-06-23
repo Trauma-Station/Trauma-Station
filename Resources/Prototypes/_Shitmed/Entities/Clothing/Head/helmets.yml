@@ -17,6 +17,10 @@
         Heat: 0.35
         Radiation: 0.5
         Caustic: 0.5
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3.5
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: Sprite

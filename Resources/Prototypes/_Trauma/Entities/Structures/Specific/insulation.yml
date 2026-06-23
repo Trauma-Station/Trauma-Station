@@ -15,11 +15,11 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.5,-0.5,0.5,-0.28125"
-        density: 500
+        density: 190
         mask:
-        - FullTileMask
+        - None
         layer:
-        - WallLayer
+        - TabletopMachineLayer
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: Damageable

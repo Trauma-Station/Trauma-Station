@@ -238,7 +238,7 @@
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
-        Heat: 0.5 # goob edit - ash heretic must weep
+        Heat: 0.1 # Trauma, 10% fire damage to fix issues with limb damage, was 1.5
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning

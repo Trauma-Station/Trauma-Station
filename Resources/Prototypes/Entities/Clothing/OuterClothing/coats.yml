@@ -89,6 +89,10 @@
         Piercing: 0.55
         Heat: 0.55
         Caustic: 0.6
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 3
     knockdownTimeDelta: -3
