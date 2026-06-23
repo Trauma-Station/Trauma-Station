@@ -67,5 +67,5 @@ public sealed partial class JobListingsComponent : Component
     /// Should only be edited by <see cref="JobListingsSystem.Link"/>
     /// </summary>
     [DataField]
-    public List<EntityUid> Remotes;
+    public List<EntityUid> Remotes = new();
 }

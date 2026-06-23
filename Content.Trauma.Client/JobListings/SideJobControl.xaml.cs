@@ -99,6 +99,7 @@ public sealed partial class SideJobControl : Control
         var canClaim = info.Progress >= 0.999f;
         ClaimButton.Disabled = !canClaim;
         ProgressBar.Value = info.Progress;
+        ProgressLabel.Text = Loc.GetString("job-listings-ui-progress", ("progress", info.Progress.ToString("P0")));
         _sideJob = info.Entity;
     }
 }

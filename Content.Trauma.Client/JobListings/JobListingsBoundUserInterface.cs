@@ -25,11 +25,6 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         _menu?.OpenCenteredLeft();
     }
 
-    public void ForceReload()
-    {
-        SendMessage(new JobListingsForceReloadMessage());
-    }
-
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         if (state is not JobListingsUserInterfaceState jobListingsState)
