@@ -10662,3 +10662,10 @@ Entries:
   id: 1192
   time: '2026-06-22T20:55:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3273
+- author: assripper.
+  changes:
+  - type: Add
+    message: xenomorphs footsteps now give you ptsd
+  id: 1193
+  time: '2026-06-23T22:21:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3284
