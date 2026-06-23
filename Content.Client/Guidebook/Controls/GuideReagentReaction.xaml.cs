@@ -23,6 +23,7 @@ namespace Content.Client.Guidebook.Controls;
 public sealed partial class GuideReagentReaction : BoxContainer, ISearchableControl
 {
     private static readonly ProtoId<MixingCategoryPrototype> DefaultMixingCategory = "DummyMix";
+    private readonly ILocalizationManager _locManager = IoCManager.Resolve<ILocalizationManager>();
 
     private readonly IPrototypeManager _protoMan;
 
@@ -193,8 +194,8 @@ public sealed partial class GuideReagentReaction : BoxContainer, ISearchableCont
         foreach (var (product, amount) in solidProducts.OrderByDescending(p => p.Value))
         {
             var msg  = new FormattedMessage();
-            msg.AddMarkupOrThrow(Loc.GetString("guidebook-reagent-recipes-solid-product-display",
-                ("product", Loc.GetString(product)),
+            msg.AddMarkupOrThrow(_locManager.GetString("guidebook-reagent-recipes-solid-product-display",
+                ("product", _locManager.TryGetString(product,out var localizedName) ? localizedName : product),
                 ("amount", amount)));
 
             var label = new GuidebookRichPrototypeLink();

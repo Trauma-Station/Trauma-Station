@@ -20,6 +20,7 @@
   effects:
     - !type:SpawnEntity
       entity: WetCement
+  group: Other
 
 - type: reaction
   id: SodiumBicarbonate

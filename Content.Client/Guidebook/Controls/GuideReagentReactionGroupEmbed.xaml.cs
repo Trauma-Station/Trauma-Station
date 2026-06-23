@@ -22,7 +22,6 @@ public sealed partial class GuideReagentReactionGroupEmbed : BoxContainer, IDocu
 
     public GuideReagentReactionGroupEmbed()
     {
-        _sawmill.Debug("Test1");
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         MouseFilter = MouseFilterMode.Stop;
