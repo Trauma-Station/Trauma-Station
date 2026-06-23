@@ -61,6 +61,10 @@
         Slash: 0.7
         Piercing: 0.3
         Heat: 0.8
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown

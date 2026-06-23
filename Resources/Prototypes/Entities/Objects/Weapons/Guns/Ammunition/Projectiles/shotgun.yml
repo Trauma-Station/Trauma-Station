@@ -40,8 +40,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 7 # Trauma, was 10
-        Structural: 15
+        Piercing: 3 # Trauma, was 10
+        Structural: 5 # Trauma, was 15
 
 - type: entity
   parent: PelletShotgun
@@ -50,8 +50,8 @@
   components:
   - type: ProjectileSpread
     proto: PelletShotgun
-    count: 6
-    spread: 15
+    count: 15 # Trauma, was 6
+    spread: 10 # Trauma, was 15
 
 - type: entity
   parent: [BaseBulletIncendiary, BaseBulletKinetic] # Trauma
@@ -62,7 +62,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 5 # Trauma, was 7
+        Piercing: 2 # Trauma, was 7
         # Heat: 3 # Trauma
   - type: IgnitionSource
     ignited: true
@@ -74,8 +74,8 @@
   components:
   - type: ProjectileSpread
     proto: PelletShotgunIncendiary
-    count: 6 # Trauma, was 4
-    spread: 15
+    count: 15 # Trauma, was 4
+    spread: 10 # Trauma, was 15
 
 - type: entity
   parent: BaseBulletPractice
@@ -95,8 +95,8 @@
   components:
   - type: ProjectileSpread
     proto: PelletShotgunPractice
-    count: 6
-    spread: 15
+    count: 15 # Trauma, was 6
+    spread: 10 # Trauma, was 15
 
 - type: entity
   parent: BaseBulletKinetic # Trauma
@@ -196,7 +196,7 @@
     damage:
       types:
         # Radiation: 5 # Trauma
-        Piercing: 5
+        Piercing: 4
       armorPenetration: 0.5 # Trauma
 
 - type: entity
@@ -206,8 +206,8 @@
   components:
   - type: ProjectileSpread
     proto: PelletShotgunUranium
-    count: 6 # Trauma, was 5
-    spread: 6
+    count: 10 # Trauma, was 5
+    spread: 10 # Trauma, was 6
 
 - type: entity
   parent: BaseBullet

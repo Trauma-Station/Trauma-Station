@@ -25,6 +25,10 @@
         Slash: 0.70
         Piercing: 0.70
         Heat: 0.70
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitCombatStandard
@@ -60,6 +64,10 @@
         Slash: 0.85
         Piercing: 0.85
         Heat: 0.85
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
 
 # Riot Combat Hardsuits
 - type: entity
@@ -83,3 +91,7 @@
         Slash: 0.65
         Piercing: 0.65
         Heat: 0.65
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>

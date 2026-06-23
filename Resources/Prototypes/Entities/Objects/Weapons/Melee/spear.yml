@@ -242,6 +242,7 @@
   - type: Tag
     tags:
     - Trash
+    - Spear
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/bone_spear.rsi

@@ -44,6 +44,10 @@
         Slash: 0.5 # Trauma, was 0.7
         Piercing: 0.1 # Trauma, was 0.7
         Heat: 0.5 # Trauma, was 0.7
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3.5
+      # </Trauma>
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -114,6 +118,10 @@
         Slash: 0.35
         Piercing: 0.35
         Heat: 0.35
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3.5
+      # </Trauma>
         # Radiation: 0.75 # Trauma
         # Caustic: 0.75 # Trauma
   - type: ExplosionResistance

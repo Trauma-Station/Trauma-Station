@@ -63,6 +63,7 @@
   - type: Tag
     tags:
     - Trash
+    - Recyclable # Trauma
   - type: SpaceGarbage
   - type: Damageable
     damageModifierSet: Glass

@@ -110,7 +110,7 @@
     proto: BulletDebug
 
 - type: entity
-  name: goob stick gibber # Goobstation edit
+  name: gib stick
   parent: BaseItem
   id: MeleeDebugGib
   description: hit hard ye

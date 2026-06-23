@@ -8,11 +8,11 @@
   - type: Knowledge
     experienceCost: 15
   - type: MeleeSpeedKnowledge
-    # 75% to 125% speed scaling with level, tapers off
-    # midlevel at lvl 25
-    curve: !type:RootSkillCurve
-      curveScale: 0.5
-      curveOffset: 0.75
+    # -12% to +25%, no change around lvl 45
+    curve: !type:CubicSkillCurve
+      skillScale: 1.13
+      skillOffset: -0.5
+      curveOffset: 1
 
 - type: entity
   parent: BaseWarKnowledge

@@ -10,6 +10,7 @@
   color: "#1abcff"
   metabolisms:
     Bloodstream:
+      metabolismRate: 1
       conditions:
       - !type:NameContainsCondition
         name: John
@@ -37,6 +38,25 @@
         emote: Scream
         probability: 0.1
       - !type:Jitter
+
+- type: reagent
+  id: Glennium
+  name: reagent-name-glennium
+  group: Toxins
+  desc: reagent-desc-glennium
+  physicalDesc: reagent-physical-desc-powdery
+  color: "#1abcff"
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 1
+      conditions:
+      - !type:NameContainsCondition
+        name: Glenn
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: 99999
 
 - type: reagent
   id: NitricAcid

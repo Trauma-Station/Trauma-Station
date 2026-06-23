@@ -35,6 +35,14 @@
   - type: Stack
     stackType: FloorTileBingle
 
+- type: entity
+  id: FloorTileItemBingleFull
+  parent: FloorTileItemBingle
+  components:
+  - type: Stack
+    stackType: FloorTileBingle
+    count: 30
+
 - type: stack
   id: FloorTileBingle
   name: stack-bingle-tile

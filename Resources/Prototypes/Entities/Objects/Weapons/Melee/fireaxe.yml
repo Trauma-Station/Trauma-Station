@@ -80,21 +80,21 @@
   # <Trauma>
     damage:
       types:
-        Heat: 5
+        Blunt: 5 # Trauma, was heat
         Slash: 10
         Structural: 20
       woundSeverityMultipliers:
         Slash: 2.5
-        Heat: 2
+        Blunt: 2 # Trauma, was heat
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Heat: 10
+        # Heat: 10
         Slash: 10
-        Structural: 80
+        Structural: 40 # Trauma, was 80
   # <Trauma>
   - type: IgniteOnMeleeHit
-    fireStacks: 5 # Trauma - was 1
+    fireStacks: 2 # Trauma - was 1
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
     state: icon

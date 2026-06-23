@@ -96,3 +96,151 @@
           amount: 1
   - node: finish
     entity: Whetstone
+
+- type: constructionGraph
+  id: BarbedWire
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - material: BarbedWire
+          amount: 2
+          doAfter: 3
+
+  - node: finish
+    entity: BarbedWireStructure
+    edges:
+    - to: finish
+      completed:
+      - !type:SpawnPrototype
+          prototype: BarbedWire1
+          amount: 2
+      - !type:DeleteEntity {}
+      steps:
+        - tool: Cutting
+          doAfter: 5
+
+# TripWire
+
+- type: constructionGraph
+  id: TripWire
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - material: Cable
+          amount: 5
+          doAfter: 3
+        - tag: RemoteSignaller
+          name: construction-graph-tag-remotesignaller
+          icon:
+            sprite: Objects/Devices/signaller.rsi
+            state: signaller
+
+  - node: finish
+    entity: TrapTripWire
+    edges:
+    - to: finish
+      completed:
+      - !type:SpawnPrototype
+        prototype: RemoteSignaller
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 5
+      - !type:DeleteEntity {}
+      steps:
+        - tool: Cutting
+          doAfter: 5
+
+# Pipe bomb trap
+
+- type: constructionGraph
+  id: PipeBombTrap
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+        - tag: Pipebomb
+          name: construction-graph-tag-pipebomb
+          icon:
+            sprite: Objects/Weapons/Bombs/pipebomb.rsi
+            state: base
+        - tag: Igniter
+          name: construction-graph-tag-igniter
+          icon:
+            sprite: Objects/Devices/igniter.rsi
+            state: icon
+        - tag: SignalTrigger
+          name: construction-graph-tag-signaltrigger
+          icon:
+            sprite: Objects/Devices/signaltrigger.rsi
+            state: signaltrigger
+        - material: Cable
+          amount: 5
+          doAfter: 3
+
+  - node: finish
+    entity: TrapPipeBomb
+    edges:
+    - to: finish
+      completed:
+      - !type:SpawnPrototype
+        prototype: PipeBomb
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+      - !type:SpawnPrototype
+        prototype: Igniter
+      - !type:SpawnPrototype
+        prototype: SignalTrigger
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 5
+
+# Barbed Wire
+
+- type: constructionGraph
+  id: BarbedWireMaterial
+  graph:
+  - node: start
+    edges:
+    - to: BarbedWire
+      completed:
+      - !type:SetStackCount
+        amount: 1
+      steps:
+      - material: Cable
+        amount: 30
+        doAfter: 3
+
+    - to: BarbedWire0
+      completed:
+      - !type:SetStackCount
+        amount: 1
+      steps:
+      - material: CableMV
+        amount: 20
+        doAfter: 3
+
+    - to: BarbedWire1
+      completed:
+      - !type:SetStackCount
+        amount: 1
+      steps:
+      - material: CableHV
+        amount: 10
+        doAfter: 3
+
+  - node: BarbedWire
+    entity: BarbedWire
+
+  - node: BarbedWire0
+    entity: BarbedWire
+
+  - node: BarbedWire1
+    entity: BarbedWire

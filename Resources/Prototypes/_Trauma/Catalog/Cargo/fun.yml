@@ -9,3 +9,43 @@
   cost: 2000
   category: cargoproduct-category-name-fun
   group: market
+
+- type: cargoProduct
+  id: FunAnvil
+  icon:
+    sprite: _Trauma/Structures/Forging/anvil.rsi
+    state: icon
+  product: AnvilComplete
+  cost: 7500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: FunWaterFishing
+  icon:
+    sprite: _Trauma/Structures/Fishing/pond.rsi
+    state: icon
+  product: WaterFishingPool
+  cost: 7500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: FunLavaFishing
+  icon:
+    sprite: _Trauma/Structures/Fishing/lavapond.rsi
+    state: icon
+  product: LavaFishingPool
+  cost: 15000
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: FunPlasmaFishing
+  icon:
+    sprite: _Trauma/Structures/Fishing/plasmapond.rsi
+    state: icon
+  product: PlasmaFishingPool
+  cost: 15000
+  category: cargoproduct-category-name-fun
+  group: market
