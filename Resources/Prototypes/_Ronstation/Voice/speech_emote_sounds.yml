@@ -47,6 +47,12 @@
       collection: Wurble
     Warble:
       collection: Warble
+    Squawk:
+      collection: ResomiSquawk
+    Call:
+      collection: ResomiCalls
+    Scree:
+      collection: ResomiScrees
 
 - type: emoteSounds
   id: FemaleAvali
@@ -97,3 +103,9 @@
       collection: Wurble
     Warble:
       collection: Warble
+    Squawk:
+      collection: ResomiSquawk
+    Call:
+      collection: ResomiCalls
+    Scree:
+      collection: ResomiScrees

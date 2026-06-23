@@ -162,7 +162,7 @@
         - MobLayer
   - type: Speech
     speechSounds: MaleResomi
-    allowedEmotes: ['Trill', 'Warble', 'Wurble' ]
+    allowedEmotes: ['Trill', 'Warble', 'Wurble', 'Squawk', 'Call', 'Scree' ]
   - type: Vocal
     sounds:
       Male: MaleAvali
