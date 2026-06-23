@@ -9,5 +9,6 @@ public sealed partial class BeingScannedComponent : Component
     [DataField]
     public int MultiShaderOrder = 20;
 
-    public ShaderInstance? Shader;
+    [DataField]
+    public float Ratio;
 }

@@ -1,3 +1,5 @@
+light_mode unshaded;
+
 uniform highp float ratio;
 uniform highp vec3 scanColor;
 uniform highp float scanDensity;
@@ -11,7 +13,7 @@ void fragment()
         discard;
     }
 
-    highp vec4 effectColor = vec4(0.0);
+    highp vec4 effectColor = sprite;
 
     highp float scanned = abs(UV.x - ratio);
 
@@ -24,13 +26,13 @@ void fragment()
     }
 
     float laserCore = smoothstep(0.005, 0.0, scanned);
-    float laserGlow = exp(-scanned * 100.0);
+    float laserGlow = exp(-scanned * 20.0);
 
     highp vec3 glowColor = scanColor * (laserCore + laserGlow * 0.6);
 
     effectColor.rgb += glowColor;
-    effectColor.a = max(effectColor.a, laserCore + laserGlow) * sprite.a;
+    effectColor.a = max(effectColor.a, laserCore + laserGlow);
 
-    COLOR.rgb = mix(sprite.rgb, effectColor.rgb, effectColor.a);
+    COLOR.rgb = mix(effectColor.rgb, sprite.rgb, effectColor.a) * sprite.a;
     COLOR.a = sprite.a;
 }

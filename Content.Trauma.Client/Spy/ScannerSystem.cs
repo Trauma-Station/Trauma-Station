@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Spy;
 
-public sealed class ScannerSystem : EntitySystem
+public sealed partial class ScannerSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlayMan = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -21,8 +21,8 @@ public sealed class ScannerSystem : EntitySystem
         SubscribeLocalEvent<ActiveScannerComponent, AfterAutoHandleStateEvent>(OnState);
         SubscribeLocalEvent<ActiveScannerComponent, ComponentShutdown>(OnScannerShutdown);
 
-        SubscribeLocalEvent<BeingScannedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BeingScannedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<BeingScannedComponent, ComponentStartup>(OnScannedStartup);
+        SubscribeLocalEvent<BeingScannedComponent, ComponentShutdown>(OnScannedShutdown);
         SubscribeLocalEvent<BeingScannedComponent, BeforePostMultiShaderRenderEvent>(OnBeforeRender);
     }
 
@@ -41,13 +41,12 @@ public sealed class ScannerSystem : EntitySystem
         if (!Exists(ent.Comp.Scanner) || !TryComp(ent.Comp.Scanner, out ActiveScannerComponent? scanner))
             return;
 
-        var factor = InverseLerp(scanner.ScanStartTime, scanner.ScanEndTime, _timing.CurTime);
-        args.Instance.SetParameter("factor", factor);
-        args.Instance.SetParameter("scanColor", scanner.ScanColor);
-        ent.Comp.Shader = args.Instance;
+        var ratio = InverseLerp(scanner.ScanStartTime, scanner.ScanEndTime, _timing.CurTime);
+        args.Instance.SetParameter("ratio", ratio);
+        ent.Comp.Ratio = ratio;
     }
 
-    private void OnShutdown(Entity<BeingScannedComponent> ent, ref ComponentShutdown args)
+    private void OnScannedShutdown(Entity<BeingScannedComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -60,11 +59,8 @@ public sealed class ScannerSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
-    private void OnStartup(Entity<BeingScannedComponent> ent, ref ComponentStartup args)
+    private void OnScannedStartup(Entity<BeingScannedComponent> ent, ref ComponentStartup args)
     {
-        if (!Exists(ent.Comp.Scanner))
-            RemCompDeferred(ent, ent.Comp);
-
         var ev = new SetMultiShaderEvent(ScanShader,
             true,
             ent.Comp.MultiShaderOrder,
@@ -73,20 +69,20 @@ public sealed class ScannerSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
-    private void OnState(Entity<ActiveScannerComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        if (!Exists(ent.Comp.ScannedObject))
-            return;
-
-        EnsureComp<BeingScannedComponent>(ent.Comp.ScannedObject).Scanner = ent;
-    }
-
     private void OnScannerShutdown(Entity<ActiveScannerComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent.Comp.ScannedObject))
             return;
 
         RemCompDeferred<BeingScannedComponent>(ent.Comp.ScannedObject);
+    }
+
+    private void OnState(Entity<ActiveScannerComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (!Exists(ent.Comp.ScannedObject))
+            return;
+
+        EnsureComp<BeingScannedComponent>(ent.Comp.ScannedObject).Scanner = ent;
     }
 
     private float InverseLerp(TimeSpan min, TimeSpan max, TimeSpan value)

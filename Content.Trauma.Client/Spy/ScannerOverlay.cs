@@ -3,22 +3,20 @@ using Robust.Shared.Enums;
 
 namespace Content.Trauma.Client.Spy;
 
-public sealed class ScannerOverlay : Overlay
+public sealed partial class ScannerOverlay : Overlay
 {
     [Dependency] private IEntityManager _entMan = default!;
 
     private TransformSystem _xform;
     private SpriteSystem _sprite;
 
-    private readonly List<Vector2> _vertices = new(3);
-
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+
+    private readonly Vector2[] _vertices = new[] { Vector2.Zero, Vector2.Zero, Vector2.Zero };
 
     public ScannerOverlay()
     {
         IoCManager.InjectDependencies(this);
-
-        ZIndex = 1; // Draw after MultiShaderOverlay so we can reuse shader
 
         _xform = _entMan.System<TransformSystem>();
         _sprite = _entMan.System<SpriteSystem>();
@@ -40,22 +38,19 @@ public sealed class ScannerOverlay : Overlay
         while (query.MoveNext(out var scanner, out var xform))
         {
             var scanned = scanner.ScannedObject;
-            if (!_entMan.EntityExists(scanned) || !beingScannedQuery.TryComp(scanned, out var comp) ||
-                comp.Shader is not { } shader || !spriteQuery.TryComp(scanned, out var sprite))
+            if (!_entMan.EntityExists(scanned) || !beingScannedQuery.TryComp(scanned, out var comp)
+                || !spriteQuery.TryComp(scanned, out var sprite))
                 continue;
 
             var ourPos = _xform.GetWorldPosition(xform, xformQuery);
             var (pos, rot) = _xform.GetWorldPositionRotation(scanned);
-
-            _vertices.Clear();
-            _vertices.Add(ourPos);
             var spriteBB = _sprite.CalculateBounds((scanned, sprite), pos, rot, eyeRot);
-            _vertices.Add(spriteBB.BottomLeft);
-            _vertices.Add(spriteBB.BottomRight);
 
-            handle.UseShader(shader);
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _vertices, Color.White);
-            handle.UseShader(null);
+            _vertices[0] = ourPos;
+            _vertices[1] = Vector2.Lerp(spriteBB.TopLeft, spriteBB.TopRight, comp.Ratio);
+            _vertices[2] = Vector2.Lerp(spriteBB.BottomLeft, spriteBB.BottomRight, comp.Ratio);
+
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _vertices, Color.Red.WithAlpha(0.1f));
         }
     }
 }

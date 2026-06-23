@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// TODO PR this to engine, otherwise I have no clue how to fix lighting not applying properly
+
 using System.Linq;
 using Robust.Shared.Enums;
 
@@ -151,7 +153,9 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
                 Color.Transparent);
 
             handle.UseShader(null);
-            var angle = sprite.NoRotation ? -eye.Rotation : rot;
+            var angle = sprite.NoRotation ? Angle.Zero : rot;
+            if (_sprite.LayerGetDirectionCount((uid, sprite), 0) > 1)
+                angle -= eye.Rotation;
             var mat = Matrix3x2.CreateTranslation(pos + angle.RotateVec(sprite.Offset) - spriteBB.Center);
             handle.SetTransform(mat);
             handle.DrawTextureRectRegion(target.Texture, spriteBB);

@@ -43,13 +43,14 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         RemCompDeferred<ActiveScannerComponent>(ent);
 
         if (args.Cancelled || args.Handled || args.Target is not { } target || !TryGetEntity(args.Rule, out var rule) ||
-            !TryComp(rule, out SpyRuleComponent? ruleComp) || IsStealable(target, args.Bounty))
+            !TryComp(rule, out SpyRuleComponent? ruleComp) || !IsStealable(target, args.Bounty))
             return;
 
         // TODO chance to send it to black market when its real
         var despawn = EnsureComp<FadingTimedDespawnComponent>(target);
         despawn.Lifetime = 0f;
         despawn.FadeOutTime = 2f;
+        Dirty(target, despawn);
 
         args.Handled = true;
 
@@ -207,18 +208,4 @@ public sealed partial class SpyUplinkSystem : EntitySystem
 
         return bounty.ValidEntities.Contains(GetNetEntity(uid));
     }
-}
-
-[Serializable, NetSerializable]
-public sealed partial class SpyStealDoAfterEvent(SpyBounty bounty, NetEntity rule) : DoAfterEvent
-{
-    [DataField]
-    public SpyBounty Bounty = bounty;
-
-    [DataField]
-    public NetEntity Rule = rule;
-
-    public SpyStealDoAfterEvent() : this(new SpyBounty(), NetEntity.Invalid) { }
-
-    public override DoAfterEvent Clone() => new SpyStealDoAfterEvent(Bounty, Rule);
 }
