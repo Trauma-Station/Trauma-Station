@@ -37,6 +37,10 @@
   id: Traitors
   name: guide-entry-traitors
   text: "/ServerInfo/Guidebook/Antagonist/Traitors.xml"
+  # <Trauma>
+  children:
+  - ProgTot
+  # </Trauma>
 
 - type: guideEntry
   id: NuclearOperatives
