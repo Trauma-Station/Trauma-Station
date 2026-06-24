@@ -67,7 +67,7 @@
   - type: InteractionOutline
   - type: PhysicsGunBlacklist
   - type: StaticPrice
-    price: 5000
+    price: 2000
   - type: Climbable
   - type: Clickable
 
