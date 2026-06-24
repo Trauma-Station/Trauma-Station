@@ -15,3 +15,193 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle: null
+
+- type: entity
+  parent: MobBearSpace
+  id: MobBearSea
+  name: sea bear
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/bear.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bear
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+
+- type: entity
+  parent: MobKangarooSpace
+  id: MobSquidSea
+  name: sea squid
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/squid.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: squid
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: squid
+        BaseUnshaded: glow
+      Critical:
+        Base: squid_dead
+      Dead:
+        Base: squid_dead
+
+- type: entity
+  parent: MobSpiderSpace
+  id: MobSpiderCrabSea
+  name: spider crab
+  description: It looks dangerous.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/spider_crab.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spider_crab
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: spider_crab
+        BaseUnshaded: glow
+      Critical:
+        Base: spider_crab_dead
+      Dead:
+        Base: spider_crab_dead
+
+- type: entity
+  parent: MobCobraSpace
+  id: MobKraitSea
+  name: krait cobra
+  description: Beautiful colours and hypnotising moves, and the alluring eyes beg to come closer.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/krait.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: krait
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: krait
+        BaseUnshaded: glow
+      Dead:
+        Base: krait_dead
+
+- type: entity
+  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  id: BaseMobArcher
+  name: archer fish
+  description: It's an archer fish.
+  abstract: true
+  components:
+  - type: WeatherImmune
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - Lavafauna
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/archer.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: archer
+  - type: CombatMode
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  - type: BatteryAmmoProvider
+    proto: WatcherBolt
+    fireCost: 50
+  - type: BatterySelfRecharger
+    autoRechargeRate: 50
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: Gun
+    projectileSpeed: 20
+    fireRate: 0.5
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4.5
+  - type: Stamina
+    baseCritThreshold: 100
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: archer
+      Dead:
+        Base: archer_dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatFish
+      amount: 2
+  - type: TypingIndicator
+    proto: alien
+  - type: Tag
+    tags:
+    - Carp
+    - DoorBumpOpener
+    - CannotSuicide
+  - type: LanguageSpeaker
+    speaks:
+    - Carptongue
+    understands:
+    - TauCetiBasic
+    - Carptongue
+  - type: Speech
+    speechVerb: LargeMob
+  - type: InteractionPopup
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactFailureSound:
+      path: /Audio/Effects/bite.ogg
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  - type: VentCrawler
+  - type: Fauna
+
+- type: entity
+  parent: BaseMobArcher
+  id: MobArcherSea
+  name: archer fish
