@@ -214,7 +214,7 @@
     - FootstepSound
   - type: XenomorphShoveTracker
     shoveThreshold: 1
-    duration: 3
+    knockdownDuration: 3
   - type: MovementAlwaysTouching # Trauma
 
 - type: entity
