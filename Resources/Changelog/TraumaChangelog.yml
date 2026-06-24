@@ -10709,3 +10709,18 @@ Entries:
   id: 1197
   time: '2026-06-24T18:16:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3299
+- author: TechnicFighter, Graves
+  changes:
+  - type: Tweak
+    message: Rewrote the description of some syndicate items to fit with Trauma's lore!
+  - type: Tweak
+    message: >-
+      Buffed the Commander Hardsuit to have better stats. General 65% instead of
+      50%, and faster movespeed by 10%.
+  - type: Remove
+    message: >-
+      Removed ARC, BLF, Tiger Cooperative and NLF from the list of traitor
+      flavour texts.
+  id: 1198
+  time: '2026-06-24T18:18:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3300
