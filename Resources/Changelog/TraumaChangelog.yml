@@ -10695,3 +10695,10 @@ Entries:
   id: 1195
   time: '2026-06-24T01:49:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3280
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Resprited brullbars. Go check maints.
+  id: 1196
+  time: '2026-06-24T03:40:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3297

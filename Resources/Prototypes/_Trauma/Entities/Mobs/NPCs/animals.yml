@@ -31,3 +31,19 @@
       reagents:
       - ReagentId: MouseBites
         Quantity: 1
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 2

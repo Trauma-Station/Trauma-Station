@@ -2850,6 +2850,14 @@
   id: MobClownSpider
   description: Combines the two most terrifying things in existence, spiders and clowns.
   components:
+    # <Trauma>
+    - type: SolutionManager
+      solutions:
+      - SolutionClownSpider
+    - type: MeleeChemicalInjector
+      transferAmount: 4
+      solution: melee
+    # </Trauma>
     - type: Sprite
       drawdepth: Mobs
       layers:
@@ -2871,7 +2879,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        180: Dead
+        240: Dead
     - type: Spider
       webPrototype: SpiderWebClown
     - type: MeleeWeapon
