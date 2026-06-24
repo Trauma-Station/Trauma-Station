@@ -1,6 +1,6 @@
 - type: entity
   name: moproach
-  parent: MobMothroach
+  parent: [ SolutionMopNormal, MobMothroach ] # Trauma - added SolutionMopNormal
   id: MobMoproach
   description: This little mothroach has mopshoes on its feet! How adorable!
   components:
@@ -39,9 +39,9 @@
     preserve:
       - Water
     quantity: 10
-  - type: SolutionManager
-    solutions:
-    - SolutionMopNormal
+#  - type: SolutionManager Trauma
+#    solutions:
+#    - SolutionMopNormal
   - type: InteractionPopup
     interactSuccessString: petting-success-cleanbot
     interactFailureString: petting-failure-cleanbot
