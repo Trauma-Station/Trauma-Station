@@ -574,7 +574,7 @@
   # <Trauma>
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - SyndicateCatridgesStatic
+    - SyndicateCartridgesStatic
   # </Trauma>
   - type: Sprite
     sprite: Structures/Machines/techfab.rsi

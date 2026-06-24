@@ -783,7 +783,7 @@
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.4 # Trauma - was 0.5
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.5 # Goob edit
   - type: Armor
@@ -794,18 +794,18 @@
       VeinsDamage: 0
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.5
-        Radiation: 0.5
+        Blunt: 0.35 # Trauma - was 0.5
+        Slash: 0.35 # Trauma - was 0.5
+        Piercing: 0.35 # Trauma - was 0.5
+        Heat: 0.35 # Trauma - was 0.5
+        Radiation: 0.35 # Trauma - was 0.5
       # <Trauma> - This is done so shotguns are worse against armor
       flatReductions:
         Piercing: 3
       # </Trauma>
   - type: ClothingSpeedModifier
-    walkModifier: 1 # Trauma, was 0.9
-    sprintModifier: 1 # Trauma, was 0.9
+    walkModifier: 1.1 # Trauma, was 0.9
+    sprintModifier: 1.1 # Trauma, was 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:

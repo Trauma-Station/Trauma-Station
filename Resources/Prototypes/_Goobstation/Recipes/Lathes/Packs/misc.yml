@@ -36,7 +36,7 @@
   - Pen
 
 - type: latheRecipePack
-  id: SyndicateCatridgesStatic
+  id: SyndicateCartridgesStatic
   recipes:
   - CartridgeEphedrine
   - CartridgePuncturase
