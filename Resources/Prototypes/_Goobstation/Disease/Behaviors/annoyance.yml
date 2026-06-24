@@ -26,6 +26,23 @@
     delayMax: 60
 
 - type: entity
+  id: DiseaseBehaviorVomitNoSpread
+  parent: DiseaseBehaviorBase
+  name: Vomiting
+  description: Makes you periodically vomit.
+  components:
+  - type: DiseaseEffect
+    complexity: 12 # can make you constantly hungry
+  - type: DiseaseEntityEffect
+    timeScale: false
+    effects:
+    - !type:Vomit
+  # also a low-power infect
+  - type: DiseasePeriodicCondition
+    delayMin: 20
+    delayMax: 60
+
+- type: entity
   id: DiseaseBehaviorFeelUnwell
   parent: DiseaseBehaviorBase
   name: Feeling unwell
