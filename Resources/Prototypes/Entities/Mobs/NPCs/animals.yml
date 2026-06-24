@@ -1839,11 +1839,9 @@
     hungerUsage: 20
     eggLayAction: MouseMultiply
     hungerRequired: true
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-      - ReagentId: MouseBites
-        Quantity: 1
+  - type: SolutionManager
+    solutions:
+    - SolutionMouseBites
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
@@ -2687,17 +2685,17 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      90: Dead
+      120: Dead # Trauma - was 90
   - type: SolutionManager
     solutions:
     - SolutionVenomSpider
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-      - ReagentId: Mechanotoxin
-        Quantity: 1
+#  - type: SolutionRegeneration # Trauma - moved to solution SolutionVenomSpider
+#    generated:
+#      reagents:
+#      - ReagentId: Mechanotoxin
+#        Quantity: 1
   - type: MeleeChemicalInjector
-    transferAmount: 0.75
+    transferAmount: 1.5 # Trauma - was 0.75
     solution: melee
   - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
@@ -2766,6 +2764,19 @@
   parent: [SolutionWeapon, SolutionTiny]
   id: SolutionVenomSpider
   categories: [ HideSpawnMenu ]
+  # <Trauma>
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mechanotoxin
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Mechanotoxin
+        Quantity: 0.75
+  # </Trauma>
 
 - type: entity
   parent: MobSpiderBase

@@ -13,3 +13,19 @@
   components:
   - type: GhostRole
     prob: 1
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionMouseBites
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 5
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 1
