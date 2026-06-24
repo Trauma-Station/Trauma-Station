@@ -68,4 +68,11 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public List<EntityUid> Remotes = new();
+
+    /// <summary>
+    /// Non-repeating objectives that have already been completed.
+    /// You will only be asked to steal the CE's magboots once, for example.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId> CompletedObjectives = new();
 }

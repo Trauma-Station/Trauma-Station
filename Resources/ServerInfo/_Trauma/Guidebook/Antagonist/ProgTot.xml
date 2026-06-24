@@ -1,0 +1,18 @@
+<Document>
+  # Traitor Job Board
+  <Box>
+      <GuideEntityEmbed Entity="MobHumanSyndicateAgentBase" Caption="Urist McEvil says:"/>
+      [italic]
+        "You want to make a name for yourself?
+        Well, you can start by planting this bug in the CMO's office for me..."
+      [/italic]
+  </Box>
+
+  Your [color=#ff0000]employers[/color] have provided you with a job board app hidden inside your uplink.
+
+  Each job listing is a mini-objective you can complete for a small reward, like extra telecrystals or sometimes even an uplink item.
+
+  The more side jobs you do, the more your reputation within the syndicate will grow, and the tougher and more rewarding your work will be.
+
+  Do you think you have what it takes to go down in history as a [color=#ff0000]Living Legend[/color]?
+</Document>
