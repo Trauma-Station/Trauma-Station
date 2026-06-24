@@ -597,7 +597,7 @@
   name: brullbar king
   id: MobBrullbarKing
   parent: MobBrullbar
-  description: Looks mean, is mean. You better run.
+  description: Does it remember what it was? Oh god.
   components:
   - type: Sprite
     drawdepth: Mobs
