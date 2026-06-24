@@ -10724,3 +10724,10 @@ Entries:
   id: 1198
   time: '2026-06-24T18:18:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3300
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the price of all fishing spots in the cargo catalogue
+  id: 1199
+  time: '2026-06-24T21:54:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3295
