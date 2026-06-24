@@ -10740,3 +10740,16 @@ Entries:
   id: 1200
   time: '2026-06-24T22:01:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3309
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added 22 new animals!
+  - type: Tweak
+    message: Made special types of carps have different resistances.
+  - type: Tweak
+    message: >-
+      Tweaked the animal spawns and item spawns of some artifacts, xenobio
+      stuff, etc.
+  id: 1201
+  time: '2026-06-24T22:45:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3244
