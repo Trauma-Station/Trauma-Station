@@ -10702,3 +10702,10 @@ Entries:
   id: 1196
   time: '2026-06-24T03:40:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3297
+- author: Armok
+  changes:
+  - type: Tweak
+    message: 'Worms no longer spread '
+  id: 1197
+  time: '2026-06-24T18:16:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3299
