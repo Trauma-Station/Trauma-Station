@@ -10731,3 +10731,12 @@ Entries:
   id: 1199
   time: '2026-06-24T21:54:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3295
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: >-
+      xenomorphs shove stun has been tweaked to stun in one hit, but the stun
+      only lasts for 3 seconds
+  id: 1200
+  time: '2026-06-24T22:01:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3309
