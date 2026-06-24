@@ -7,8 +7,6 @@ ghost-role-information-reinforcement-specialist-riot-melee-name = Station Reinfo
 ghost-role-information-reinforcement-specialist-riot-ranged-name = Station Reinforcement (Security Specialist - Riot Ranged)
 ghost-role-information-reinforcement-specialist-heavy-laser-name = Station Reinforcement (Security Specialist - Heavy Laser)
 ghost-role-information-reinforcement-specialist-shield-name = Station Reinforcement (Security Specialist - Shield)
-ghost-role-information-reinforcement-specialist-bodyguard-name = Station Reinforcement (Security Specialist - Bodyguard)
-ghost-role-information-reinforcement-specialist-advisor-name = Station Reinforcement (Security Specialist - Advisor)
 ghost-role-information-reinforcement-specialist-brigmedic-name = Station Reinforcement (Security Specialist - Brigmedic)
 ghost-role-information-reinforcement-cadet-name = Station Reinforcement (Security Cadet)
 
@@ -108,3 +106,12 @@ ghost-role-information-demon-desc = KILL THOSE WHO DARE SUMMON YOU!!!
 
 ghost-role-information-demon-tame-name = Demon
 ghost-role-information-demon-tame-desc = Your will is bound to those who summoned you...
+
+ghost-role-information-cobra-space-name = Cobra
+ghost-role-information-cobra-space-description = Long fangs and a glowing hood, and the alluring look begs to come closer.
+
+ghost-role-information-purple-snake-name = Purple Snake
+ghost-role-information-purple-snake-description = A menacing purple snake from Kepler-283c.
+
+ghost-role-information-small-purple-snake-name = Small Purple Snake
+ghost-role-information-small-purple-snake-description = A smaller version of the menacing purple snake from Kepler-283c.

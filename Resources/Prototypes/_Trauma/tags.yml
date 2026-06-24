@@ -1,10 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## A ##
 
 - type: Tag
   id: Apple
 
 - type: Tag
+  id: AdamantineScraps # Construction: AdamantineIngot
+
+- type: Tag
   id: AdvancedMagboots # Construction: RevPlasmaFoundry
+
+- type: Tag
+  id: AirlockAssembly # Used for airlock assemblies so that heretic void conduit can damage them
 
 - type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
@@ -119,6 +127,9 @@
   id: Fish
 
 - type: Tag
+  id: Firebomb
+
+- type: Tag
   id: FlamethrowerBackpack # used for rev flamethrower's ammo provider
 
 - type: Tag
@@ -194,6 +205,9 @@
 
 - type: Tag
   id: MethApple
+
+- type: Tag
+  id: Pipebomb
 
 - type: Tag
   id: PlasteelScraps # Construction: BloomeryColdPlasteel
@@ -324,3 +338,6 @@
 
 - type: Tag
   id: Whetstone # Durability repair of spears and knives
+
+- type: Tag
+  id: WoodenSword

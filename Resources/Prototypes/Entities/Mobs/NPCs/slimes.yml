@@ -136,8 +136,7 @@
     name: ghost-role-information-slimes-name
     description: ghost-role-information-slimes-description
     rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
@@ -177,8 +176,7 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-      raffle:
-        settings: short
+      raffle: null # Trauma - removed mob raffle timer
 
 - type: entity
   name: green slime
@@ -217,8 +215,7 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-      raffle:
-        settings: short
+      raffle: null # Trauma - removed mob raffle timer
 
 - type: entity
   name: yellow slime
@@ -256,5 +253,4 @@
       rules: ghost-role-information-angry-slimes-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonist
-      raffle:
-        settings: short
+      raffle: null # Trauma - removed mob raffle timer

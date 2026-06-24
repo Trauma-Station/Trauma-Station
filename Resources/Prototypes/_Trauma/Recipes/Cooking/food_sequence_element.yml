@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Fallback used for non-food items in burgers etc
 # The item prototype's sprite is used instead
 - type: foodSequenceElement

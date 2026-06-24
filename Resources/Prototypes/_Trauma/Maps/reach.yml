@@ -1,9 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: gameMap
   id: Reach
   mapName: 'Reach'
   mapPath: /Maps/_Trauma/reach.yml
   minPlayers: 0
   maxPlayers: 10
+  ignoredRequiredEntities:
+  - MachineMasterMaterialSilo # 1 department silo can probably cover the whole ship be real
   stations:
     Reach:
       stationProto: StandardNanotrasenStation

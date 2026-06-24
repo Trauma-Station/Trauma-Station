@@ -1,6 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: DiseaseBehaviorVomit
+  parent: DiseaseBehaviorVomitNoSpread
+  components:
+  # also a low-power infect
+  - type: DiseaseSpreadEffect
+    arc: 360
+    range: 2
+    timeScale: false
+    spreadParams:
+      power: 0.5
+      chance: 0.5
+      spreadType: Aerial
+
+- type: entity
   parent: DiseaseBehaviorBase
+  id: DiseaseBehaviorVomitNoSpread
   name: Vomiting
   description: Makes you periodically vomit.
   components:
@@ -11,14 +27,6 @@
     effects:
     - !type:Vomit
   # also a low-power infect
-  - type: DiseaseSpreadEffect
-    arc: 360
-    range: 2
-    timeScale: false
-    spreadParams:
-      power: 0.5
-      chance: 0.5
-      spreadType: Aerial
   - type: DiseasePeriodicCondition
     delayMin: 20
     delayMax: 60

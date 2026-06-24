@@ -519,6 +519,7 @@
   id: MobMothroach
   description: This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches.
   components:
+  - type: VentCrawler # Trauma
   - type: GhostRole
     prob: 0 # Trauma - was 0.25
     makeSentient: true
@@ -1610,6 +1611,7 @@
 - type: entity
   name: monkey
   id: MobBaseSyndicateMonkey
+  abstract: true # Trauma
   parent: [ AppearanceMonkey, MobBaseAncestor ] # Shitmed
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
@@ -1776,6 +1778,7 @@
 
 - type: entity
   id: MobBaseSyndicateKobold
+  abstract: true # Trauma
   parent: MobBaseKobold
   suffix: syndicate base
   components:
@@ -1836,11 +1839,9 @@
     hungerUsage: 20
     eggLayAction: MouseMultiply
     hungerRequired: true
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-      - ReagentId: MouseBites
-        Quantity: 1
+  - type: SolutionManager
+    solutions:
+    - SolutionMouseBites
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee
@@ -2684,17 +2685,17 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      90: Dead
+      120: Dead # Trauma - was 90
   - type: SolutionManager
     solutions:
     - SolutionVenomSpider
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-      - ReagentId: Mechanotoxin
-        Quantity: 1
+#  - type: SolutionRegeneration # Trauma - moved to solution SolutionVenomSpider
+#    generated:
+#      reagents:
+#      - ReagentId: Mechanotoxin
+#        Quantity: 1
   - type: MeleeChemicalInjector
-    transferAmount: 0.75
+    transferAmount: 1.5 # Trauma - was 0.75
     solution: melee
   - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
@@ -2763,6 +2764,19 @@
   parent: [SolutionWeapon, SolutionTiny]
   id: SolutionVenomSpider
   categories: [ HideSpawnMenu ]
+  # <Trauma>
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mechanotoxin
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Mechanotoxin
+        Quantity: 0.75
+  # </Trauma>
 
 - type: entity
   parent: MobSpiderBase
@@ -2784,8 +2798,7 @@
     rules: ghost-role-information-giant-spider-rules
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: short
+    raffle: null # Trauma - removed mob raffle timer
   - type: GhostTakeoverAvailable
 
 - type: entity
@@ -2837,6 +2850,14 @@
   id: MobClownSpider
   description: Combines the two most terrifying things in existence, spiders and clowns.
   components:
+    # <Trauma>
+    - type: SolutionManager
+      solutions:
+      - SolutionClownSpider
+    - type: MeleeChemicalInjector
+      transferAmount: 4
+      solution: melee
+    # </Trauma>
     - type: Sprite
       drawdepth: Mobs
       layers:
@@ -2858,7 +2879,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        180: Dead
+        240: Dead
     - type: Spider
       webPrototype: SpiderWebClown
     - type: MeleeWeapon
@@ -3392,6 +3413,12 @@
   parent: MobCatSpace
   description: Explosive kitten.
   components:
+  # <Trauma>
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  # </Trauma>
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]

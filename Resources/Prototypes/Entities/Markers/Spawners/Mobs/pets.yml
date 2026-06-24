@@ -218,6 +218,9 @@
   name: Pun Pun Spawner
   suffix: Bartender Pet
   components:
+  # <Trauma>
+  - type: PunPunSpawner # for EvilPunPun station trait to find it
+  # </Trauma>
   - type: Sprite
     layers:
     - state: green

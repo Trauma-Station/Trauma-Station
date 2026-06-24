@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: BlueSlimeExtract
   parent: BaseSlimeExtract
@@ -26,23 +28,17 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:RelaySolution
-        name: extract
-        effects:
-        - !type:AdjustReagent
-          reagent: FrostOil
-          amount: 15
+      - !type:AdjustReagent
+        reagent: FrostOil
+        amount: 15
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:RelaySolution
-        name: extract
-        effects:
-        - !type:AdjustReagent
-          reagent: XenobioJellyBlue
-          amount: 1
+      - !type:AdjustReagent
+        reagent: XenobioJellyBlue
+        amount: 1
   - type: Tag
     tags:
     - XenobiologyBlueExtract

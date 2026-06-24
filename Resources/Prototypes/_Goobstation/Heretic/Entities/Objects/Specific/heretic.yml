@@ -429,7 +429,6 @@
         range: 5
         flags: Static
         effect: !type:ToggleDoorState
-          predicted: false
     - name: eldritch-coin-side-blade
       spriteState: blade
       userEffects:
@@ -459,4 +458,3 @@
         range: 5
         flags: Static
         effect: !type:ToggleDoorBolts
-          predicted: false

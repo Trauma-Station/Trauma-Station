@@ -335,6 +335,7 @@
     - BulletEnergyGunExecute
     - BulletEnergyGunHotshot
     - BulletEnergyGunSleepshot
+    - BulletEnergyGunLawyershot
   - type: UserInterface
     interfaces:
       enum.AmmoSelectorUiKey.Key:

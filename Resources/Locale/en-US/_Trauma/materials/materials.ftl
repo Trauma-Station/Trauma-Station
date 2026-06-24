@@ -1,5 +1,6 @@
 materials-bone = bone
 materials-charcoal = charcoal
+materials-barbedwire = barbed wire
 materials-brick = brick
 materials-brass-ingot = brass ingot
 materials-steel-ingot = steel ingot

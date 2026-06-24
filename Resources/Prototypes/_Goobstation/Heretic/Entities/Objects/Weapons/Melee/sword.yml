@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: ragged sword
   description: This blade feels cold and faintly resonant to the touch. Its surface swims with impossible, fleeting geometries that strain the eye, and it will cut bits off mortals and immortals just fine.
@@ -42,8 +44,6 @@
     conditions:
     - !type:MultihitUserHereticEvent
   - type: Parry
-    maxParries: 3
-    maxReflects: 0
     parryMinSkill: 40
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg

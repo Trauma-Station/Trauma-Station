@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # It's best to use fadeIn and interruptable parameters when creating a new ambientMusic prototype for areas,
 # with a high priority number (e.g. 10) so it has a higher chance to play the music.
 # IMPORTANT, set general department area (e.g. medical) priority to around 5 then set specific areas (e.g. morgue) to around 10 this will give the department general ambience but will allow for sub areas to have its own ambience
-#
 # Rules
 - type: rules
   id: InServiceArea

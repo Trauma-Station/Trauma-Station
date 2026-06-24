@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Minor
 
 - type: entity
@@ -74,6 +76,7 @@
       - id: SummoningRuneDemon64Fat
       - id: SummoningRuneDemon64Buff
       - id: SummoningRuneDemon64
+      - id: SummoningRuneCentifiend
 
 - type: entity
   parent: MarkerBase
@@ -89,6 +92,7 @@
       - id: SummoningRuneDemon64FatTame
       - id: SummoningRuneDemon64BuffTame
       - id: SummoningRuneDemon64Tame
+      - id: SummoningRuneCentifiendTame
 
 # Major
 

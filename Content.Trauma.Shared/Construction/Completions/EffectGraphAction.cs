@@ -19,6 +19,6 @@ public sealed partial class EffectGraphAction : IGraphAction
     {
         _effects ??= entMan.System<SharedEntityEffectsSystem>();
 
-        _effects.ApplyEffects(uid, Effects, user: userUid);
+        _effects.ApplyEffects(uid, Effects, user: userUid, predicted: false); // construction prediction coming in 2050
     }
 }

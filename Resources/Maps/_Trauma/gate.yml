@@ -157438,13 +157438,6 @@ entities:
     - type: Transform
       pos: 77.5,63.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 5784
@@ -172166,13 +172159,6 @@ entities:
     - type: Transform
       pos: -20.5,81.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: UniformShortsRed
   entities:
   - uid: 1021

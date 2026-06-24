@@ -145,7 +145,7 @@
     animatePanel: false
     openUnlitVisible: true
     # needed so that windoors loop between closing and reopening less often even though they don't crush
-    safety: true
+    safety: false # Trauma - was true # keep this shit false
   - type: NavMapDoor
   - type: DoorBolt
   - type: Electrified

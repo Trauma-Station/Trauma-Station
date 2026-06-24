@@ -1100,7 +1100,7 @@
     energy: 1.6
     color: "#b89f25"
   - type: AccessReader
-    access: [["Quartermaster"]]
+    access: [["Cargo"]] # Trauma - Was QM.
   - type: GuideHelp
     guides:
     - CargoBounties

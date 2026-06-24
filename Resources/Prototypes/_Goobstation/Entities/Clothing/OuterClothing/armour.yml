@@ -20,6 +20,8 @@
         Slash: 0.7
         Piercing: 0.4
         Heat: 0.6
+      flatReductions: # This is done so shotguns are worse against armor
+        Piercing: 3
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: ModifyDelayedKnockdown # Goobstation
@@ -48,6 +50,8 @@
         Slash: 0.7
         Piercing: 0.6
         Heat: 0.4
+      flatReductions: # This is done so shotguns are worse against armor
+        Piercing: 2
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: ModifyDelayedKnockdown # Goobstation

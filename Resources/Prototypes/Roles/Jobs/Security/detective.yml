@@ -6,7 +6,7 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
-    time: 1h # Trauma, was 5
+    time: 5h
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
@@ -21,11 +21,16 @@
   - Cryogenics
   - External
   special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # Trauma
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipDetective
+  - !type:AddComponentSpecial
     components:
     - type: SecurityStaff
+  # </Trauma>
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
 
 - type: startingGear
   id: DetectiveGear

@@ -15,9 +15,14 @@
   access:
   - NanotrasenRepresentative # Trauma
   - CentralCommand
-  special: # Trauma - all the implants
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCaptain # TODO: better chip
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
+  # </Trauma>
 
 - type: startingGear # Goobstation - Start - SolsticeOfTheWinter
   id: CentcommGear

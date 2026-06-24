@@ -1514,8 +1514,17 @@
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
         whitelist:
+          # <Trauma> - mirror XenoborgMaterialBag's whitelist so you can use it properly
           tags:
+          - Sheet
           - ConstructionMaterial
+          - RawMaterial
+          - Ingot
+          components:
+          - Circuitboard
+          - Flatpack
+          - FloorTile
+          # </Trauma>
     - item: XenoborgMaterialBag
     - item: PinpointerMothership
     - item: HandheldGPSBasic

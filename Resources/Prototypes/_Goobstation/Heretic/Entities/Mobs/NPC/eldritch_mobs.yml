@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [OrganBaseTorso, OrganAnimalSpriteExternal]
   id: OrganTorsoGhoul
@@ -243,6 +245,8 @@
     drawOverlay: false
   - type: Eye
     drawFov: false
+  - type: Viewcone
+    baseConeAngle: 360
 
 - type: entity
   parent: [BaseMobGhoulLock, MobGhoulProphetBase]

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseAntagSpawner
   id: SpawnPointGhostXenomorph
@@ -14,4 +16,4 @@
     description: ghost-role-information-xenomorph-larva-description
     rules: ghost-role-information-rules-default-xeno
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
+    - MindRoleXenomorph

@@ -29,6 +29,10 @@
         Slash: 0.65 # Trauma, was 0.7
         Piercing: 0.65 # Trauma, was 0.7
         Heat: 0.80
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 2
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.75 # Trauma, was 0.9
   - type: ModifyDelayedKnockdown # Goobstation
@@ -85,6 +89,10 @@
         Slash: 0.8
         Piercing: 0.3
         Heat: 0.8
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.65 # Trauma - was 0.8
   - type: StaminaResistance # Goobstation
@@ -213,6 +221,10 @@
         Slash: 0.7
         Piercing: 0.3
         Heat: 0.8
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
 
 #Elite web vest
 - type: entity
@@ -289,7 +301,10 @@
         Slash: 0.5
         Piercing: 0.5
         Heat: 0.8
-
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Piercing: 3
+      # </Trauma>
 # Armor covering multiple body parts including limbs
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSyndicateContraband ]

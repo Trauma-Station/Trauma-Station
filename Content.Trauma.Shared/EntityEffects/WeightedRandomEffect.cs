@@ -72,7 +72,7 @@ public sealed partial class WeightedRandomEffectSystem : EntityEffectSystem<Meta
             total += child.Weight;
             if (total >= target)
             {
-                _effects.TryApplyEffect(ent, child.Effect, args.Scale, args.User);
+                _effects.TryApplyEffect(ent, child.Effect, args.Scale, args.User, args.Predicted);
                 return;
             }
         }
@@ -85,6 +85,7 @@ public partial record struct WeightedEffect()
     [DataField(required: true)]
     public EntityEffect Effect = default!;
 
+    // see RT#6556 for why this cant be a single line struct
     [DataField]
     public float Weight = 1f;
 }

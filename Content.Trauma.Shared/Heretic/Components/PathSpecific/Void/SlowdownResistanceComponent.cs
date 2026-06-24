@@ -6,5 +6,5 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Void;
 public sealed partial class SlowdownResistanceComponent : Component
 {
     [DataField]
-    public float Factor = 0.75f;
+    public float Reduction = 0.2f;
 }

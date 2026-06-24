@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # TODO: BRUH DO THIS WITH CODE
 
 # Unloaded
@@ -279,7 +281,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 5
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -305,7 +307,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 20
+        damage: 5
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -331,7 +333,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 5
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]

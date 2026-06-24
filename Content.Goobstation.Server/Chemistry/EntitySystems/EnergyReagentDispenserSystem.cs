@@ -137,15 +137,19 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             return inventory;
         }
 
-        private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserSetDispenseAmountMessage message)
+        private void OnSetDispenseAmountMessage(Entity<EnergyReagentDispenserComponent> ent, ref EnergyReagentDispenserSetDispenseAmountMessage args)
         {
-            reagentDispenser.Comp.DispenseAmount = message.EnergyReagentDispenserDispenseAmount;
-            UpdateUiState(reagentDispenser);
-            ClickSound(reagentDispenser);
+            var amount = args.Amount;
+            if (ent.Comp.DispenseAmount == amount || amount > ent.Comp.MaxDispenseAmount || amount < ent.Comp.MinDispenseAmount)
+                return;
+
+            ent.Comp.DispenseAmount = amount;
+            UpdateUiState(ent);
+            ClickSound(ent);
         }
 
-        private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref PowerChangedEvent args) =>
-            UpdateUiState(reagentDispenser);
+        private void OnPowerChanged(Entity<EnergyReagentDispenserComponent> ent, ref PowerChangedEvent args) =>
+            UpdateUiState(ent);
 
         private void OnDispenseReagentMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserDispenseReagentMessage message)
         {

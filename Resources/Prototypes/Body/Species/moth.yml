@@ -195,7 +195,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 2.5 # moths burn more easily
+        Heat: 0.25 # Trauma, was 2.5
   - type: Temperature
     currentTemperature: 310.15
     specificHeat: 46

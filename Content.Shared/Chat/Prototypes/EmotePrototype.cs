@@ -19,7 +19,7 @@ public sealed partial class EmotePrototype : IPrototype
     ///     Localization string for the emote name. Displayed in the radial UI.
     /// </summary>
     [DataField(required: true)]
-    public string Name = default!;
+    public LocId Name; // Trauma - use LocId
 
     /// <summary>
     ///     Determines if emote available to all by default
@@ -59,7 +59,7 @@ public sealed partial class EmotePrototype : IPrototype
     ///     Will be picked randomly from list.
     /// </summary>
     [DataField]
-    public List<string> ChatMessages = new();
+    public List<LocId> ChatMessages = new(); // Trauma - use LocId
 
     /// <summary>
     ///     Trigger words for emote. Case independent.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: FoodProduceBase
   id: FoodLemonade
@@ -119,7 +121,7 @@
       Wood: 100 # lol
 
 - type: entity
-  parent: ProduceSliceBase
+  parent: [ FoodProduceBase, ProduceSliceBase ]
   id: FoodCoconutHalf
   name: coconut half
   description: The perfect defense... if you're an octopus.

@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ MindRoleGhostRoleNeutral ]
   id: MindRoleGhostRoleAnimal
   name: Ghost Role (Animal)
   components:
   - type: MindRole
-    roleType: FreeAgent
+    roleType: Animal
     sortWeight: 30

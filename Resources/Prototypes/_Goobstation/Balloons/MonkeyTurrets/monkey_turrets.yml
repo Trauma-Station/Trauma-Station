@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ SimpleSpaceMobBase, BaseWeaponBallisticTurret ] # Using SimpleSpaceMobBase since there is no current way to give them space immunity.
   id: MonkeyTurretDartBase

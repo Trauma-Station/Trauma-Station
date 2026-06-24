@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: MobMonkey
   id: MobMonkeyGhostrole # Exists soley to make ghostrole monkey shuttles for gimmicks.
@@ -13,3 +15,35 @@
   components:
   - type: GhostRole
     prob: 1
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionMouseBites
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 5
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 1
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 2

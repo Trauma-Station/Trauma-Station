@@ -779,6 +779,14 @@
   id: MobSpiderShiva
   description: The first defender of the station.
   components:
+  # <Trauma>
+  - type: SolutionManager
+    solutions:
+    - SolutionShivaSpider
+  - type: MeleeChemicalInjector
+    transferAmount: 2
+    solution: melee
+  # </Trauma>
   - type: InteractionPopup
     successChance: 0.5 # spider is mean
     interactSuccessString: petting-success-tarantula

@@ -82,12 +82,12 @@ public sealed partial class DesecratedDuelSystem : EntitySystem
     /// </summary>
     private void ExitArena(Entity<ActionDesecratedDuelComponent> action)
     {
+        // Remove status effects
+        _effects.ApplyEffects(action.Comp.Duelist, action.Comp.EndEffects);
+
         // mispredicts happening here sadly
         if (_net.IsClient)
             return;
-
-        // Remove status effects
-        _effects.ApplyEffects(action.Comp.Duelist, action.Comp.EndEffects);
 
         _arena.DestroyArena(action.Owner);
     }

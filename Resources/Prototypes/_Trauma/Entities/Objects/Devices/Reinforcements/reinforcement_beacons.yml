@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   id: BaseReinforcementBeacon
@@ -160,31 +162,6 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconOfficerSpecShield ]
-
-- type: entity
-  parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerBodyguard
-  suffix: Security, Bodyguard
-  components:
-  - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-bodyguard-name
-  - type: GhostCharacterSpawner
-    components:
-    - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecBodyguard ]
-      roleLoadout: [ RoleSurvivalSecurity ]
-
-- type: entity
-  parent: ReinforcementBeaconSecurityOfficer
-  id: ReinforcementBeaconSpecialistOfficerAdvisor
-  suffix: Security, Advisor
-  components:
-  - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-specialist-advisor-name
-  - type: GhostCharacterSpawner
-    components:
-    - type: Loadout
-      prototypes: [ ReinforcementBeaconOfficerSpecAdvisor ]
 
 - type: entity
   parent: ReinforcementBeaconSecurityOfficer
@@ -509,6 +486,7 @@
     components:
     - type: Loadout
       prototypes: [ ReinforcementBeaconLawyer ]
+    - type: Lawyer
 
 - type: entity
   parent: BaseReinforcementBeacon

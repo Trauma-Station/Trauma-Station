@@ -30,6 +30,6 @@ public sealed partial class ThrowRandomlyEffectSystem : EntityEffectSystem<MetaD
             direction,
             baseThrowSpeed: effect.Speed,
             user: args.User,
-            predicted: effect.Predicted);
+            predicted: args.Predicted);
     }
 }

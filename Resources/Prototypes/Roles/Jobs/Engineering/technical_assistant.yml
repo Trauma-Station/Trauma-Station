@@ -13,16 +13,19 @@
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
-  guides: # Trauma
-  - Construction
-  - Power
-  - Networking
   access:
   - Maintenance
   - Engineering
   - External
   # <Trauma>
+  guides:
+  - Construction
+  - Power
+  - Networking
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipTechnicalAssistant
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff

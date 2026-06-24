@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent:
   - BaseMob
@@ -177,6 +179,11 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepXenomorph
+      params:
+        volume: -6
   - type: Prying
     speedModifier: 5
     pryPowered: true
@@ -244,3 +251,18 @@
     prototype: MobXenomorphTailSegmentBase
     tailOffset: 0, -0.13
     headFollowSegmentRotation: false
+
+- type: entity
+  abstract: true
+  id: BaseXenomorphGhostRole
+  components:
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    rules: ghost-role-information-rules-default-xeno
+    mindRoles:
+    - MindRoleXenomorph
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable

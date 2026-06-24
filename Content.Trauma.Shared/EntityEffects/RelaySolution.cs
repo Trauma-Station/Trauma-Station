@@ -23,9 +23,6 @@ public sealed partial class RelaySolution : EntityEffectBase<RelaySolution>
     /// </summary>
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // cbf
 }
 
 public sealed partial class RelaySolutionEffectSystem : EntityEffectSystem<SolutionManagerComponent, RelaySolution>
@@ -41,7 +38,7 @@ public sealed partial class RelaySolutionEffectSystem : EntityEffectSystem<Solut
 
         var uid = solution.Value.Owner;
         _data.CopyData(ent, uid);
-        _effects.ApplyEffects(uid, args.Effect.Effects, args.Scale, args.User);
+        _effects.ApplyEffects(uid, args.Effect.Effects, args.Scale, args.User, args.Predicted);
         _data.ClearData(uid);
     }
 }

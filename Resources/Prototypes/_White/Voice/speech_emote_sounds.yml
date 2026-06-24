@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: emoteSounds
   parent: BaseMobEmotes
   id: Xenomorph
@@ -35,7 +37,7 @@
       params:
         volume: -12
     Sigh:
-      collection: MaleSigh
+      collection: XenomorphBreathe
     Crying:
       collection: MaleCry
     Whistle:

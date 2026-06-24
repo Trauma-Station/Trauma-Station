@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseSkillChip
   id: SkillChipHeadOfPersonnel
@@ -14,8 +16,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
+      MeleeKnowledge: 25
+      ShootingKnowledge: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -24,7 +26,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FabricationKnowledge: 26
+      FabricationKnowledge: 25
       SmokeablesKnowledge: 50
 
 - type: entity
@@ -36,7 +38,7 @@
     skills:
       MartialArtCQCChef: 1 # work your way up chuddy
       MeleeKnowledge: 10
-      CookingKnowledge: 26
+      CookingKnowledge: 25
       LanguageSpaceItalian: 100 # born and raised
 
 - type: entity

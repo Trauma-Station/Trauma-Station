@@ -9,6 +9,7 @@ using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -106,10 +107,14 @@ public sealed partial class HealthAnalyzerControl
 
         PartView.Visible = SpriteView.Visible;
 
+        var bloodLevelLow = !float.IsNaN(state.BloodLevel)
+                            && _entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream)
+                            && state.BloodLevel < bloodstream.BloodlossThreshold;
+
         switch (state.ScanState)
         {
             case HealthAnalyzerBodyState body:
-                PopulateBody(target, state, body);
+                PopulateBody(target, state, body, bloodLevelLow);
                 break;
             case HealthAnalyzerOrgansState organs:
                 PopulateOrgans(organs);
@@ -131,7 +136,7 @@ public sealed partial class HealthAnalyzerControl
 
     #region Scan state populate methods
 
-    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body)
+    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body, bool bloodLevelLow = false)
     {
         var part = _entityManager.GetEntity(state.Part);
         if (part != null)
@@ -175,6 +180,13 @@ public sealed partial class HealthAnalyzerControl
             ConditionsListContainer.AddChild(new RichTextLabel
             {
                 Text = Loc.GetString("condition-body-unrevivable", ("entity", identity)),
+                Margin = new Thickness(0, 4),
+            });
+
+        if (bloodLevelLow)
+            ConditionsListContainer.AddChild(new RichTextLabel
+            {
+                Text = Loc.GetString("condition-body-low-blood", ("entity", identity)),
                 Margin = new Thickness(0, 4),
             });
 

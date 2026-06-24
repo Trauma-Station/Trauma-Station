@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseRevMajorContraband ]
   id: ClothingOuterArmorRev
@@ -59,6 +61,8 @@
         Slash: 0.7
         Piercing: 0.3
         Heat: 0.8
+      flatReductions: # This is done so shotguns are worse against armor
+        Piercing: 3
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown

@@ -1,8 +1,4 @@
-- type: sourcePort
-  id: MaterialSilo
-  name: signal-port-name-material-silo
-  description: signal-port-description-material-silo
-  defaultLinks: [ MaterialSiloUtilizer ]
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: sourcePort
   id: SignalContrabandDetected

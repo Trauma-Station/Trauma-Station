@@ -30,7 +30,6 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
     private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery;
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
-    private readonly EntityQuery<ViewconeClientOverrideComponent> _overrideQuery;
     private readonly EntityQuery<ViewconeOccludedComponent> _occludedQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
@@ -47,13 +46,12 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
         _meta = _ent.System<MetaDataSystem>();
         _container = _ent.System<SharedContainerSystem>();
         _sprite = _ent.System<SpriteSystem>();
-        _xform  = _ent.System<TransformSystem>();
+        _xform = _ent.System<TransformSystem>();
         _cone = _ent.System<ViewconeOverlaySystem>();
         _tree = _ent.System<ViewconeOcclusionSystem>();
 
         _humanoidQuery = _ent.GetEntityQuery<HumanoidProfileComponent>();
         _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
-        _overrideQuery = _ent.GetEntityQuery<ViewconeClientOverrideComponent>();
         _occludedQuery = _ent.GetEntityQuery<ViewconeOccludedComponent>();
     }
 
@@ -107,7 +105,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             var uid = entry.Uid;
 
             // dynamic clientside disabling, for effects like pulled entities
-            if (_overrideQuery.HasComp(uid))
+            if (_cone.IgnoresViewcone(uid))
                 continue;
 
             if (!_spriteQuery.TryComp(uid, out var sprite))

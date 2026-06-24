@@ -93,7 +93,7 @@ public sealed partial class ShadowlingAscensionEggSystem : EntitySystem
             new Verb
             {
                 Act = () => TryAscend(args.User, args.Target, component),
-                Text = Loc.GetString(component.VerbName),
+                Text = component.VerbName,
                 Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")) //todo: custom icon
             });
     }

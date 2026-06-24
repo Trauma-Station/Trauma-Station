@@ -2,7 +2,7 @@
 
 using Content.Shared.Body;
 using Content.Shared.Chat;
-using Content.Shared.Speech;
+using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Components;
@@ -15,6 +15,7 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public abstract partial class SharedKnowledgeSystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private EntityQuery<LanguageKnowledgeComponent> _langQuery = default!;
 
     private void InitializeLanguage()
@@ -30,9 +31,7 @@ public abstract partial class SharedKnowledgeSystem
         SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
             after: [ typeof(InitialBodySystem) ]);
 
-        // Experience methods
-        SubscribeLocalEvent<KnowledgeHolderComponent, EntitySpokeEvent>(OnLanguageSpoke);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ListenEvent>(OnLanguageHeard);
+        SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRangeEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -112,7 +111,7 @@ public abstract partial class SharedKnowledgeSystem
         ent.Comp.Speaks.AddRange(ev.SpokenLanguages);
         ent.Comp.Understands.AddRange(ev.UnderstoodLanguages);
 
-        _language.EnsureValidLanguage(ent);
+        _language.EnsureValidLanguage(ent.AsNullable());
 
         SpeakerToKnowledge(ent);
     }
@@ -173,7 +172,7 @@ public abstract partial class SharedKnowledgeSystem
         else
         {
             langComp.Speaks = !args.RemoveSpoken;
-            langComp.Understands = !args.RemoveSpoken;
+            langComp.Understands = !args.RemoveUnderstood;
             Dirty(unit, langComp);
         }
 
@@ -226,40 +225,23 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageSpoke(Entity<KnowledgeHolderComponent> ent, ref EntitySpokeEvent args)
-    {
-        if (GetContainer(ent.Owner) is not { } brain)
-            return;
-
-        var id = LanguageUnit(args.Language);
-        if (GetKnowledge(brain, id) is not { } unit)
-        {
-            Log.Warning($"{ToPrettyString(ent)} spoke in language {args.Language} while not having knowledge of it!?");
-            return;
-        }
-
-        var comp = _langQuery.Comp(unit);
-
-        var now = _timing.CurTime;
-
-        AddExperience(unit.AsNullable(), ent, Math.Min(args.Message.Length / 10, 8)); // The more you speak, the more you learn. Doesn't award anything for small sentences. Already does auto xp shit.
-
-        Dirty(unit, comp);
-    }
-
-    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ListenEvent args)
+    private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
         if (args.Source == ent.Owner)
             return; // Same person, no need.
 
-        // Already Obfuscating.
-
         if (GetContainer(ent.Owner) is not { } brain)
             return;
+        var languageId = LanguageUnit(args.Language);
 
-        AddExperience(brain, LanguageUnit(args.Language), Math.Min(args.Message.Length / 10, 8));
+        // Try obfuscate speech if can't listen well.
+        if (GetKnowledge(brain, LanguageUnit(args.Language)) is { } unit && GetMastery(unit.Owner) >= 2)
+            return;
+
+        // Use Obfuscate logic through language system.
+        var languageProto = _proto.Index(args.Language);
+        args.Message = _language.ObfuscateSpeech(args.Message, languageProto, ent.Owner);
+        if (args.Speech is { } speech)
+            args.WrappedMessage = _chat.WrapPublicMessage(args.Source, args.Name, args.Message, speech, languageProto, args.Color);
     }
-
-    public EntityUid? GetActiveLanguage(EntityUid target)
-        => GetContainer(target)?.Comp.ActiveLanguage;
 }

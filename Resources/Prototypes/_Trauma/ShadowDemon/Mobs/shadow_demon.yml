@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Note: ShadowGrapple exists on the heart of the shadow demon
 - type: entity
   parent: [AppearanceShadowDemon, SimpleSpaceMobBase, FlyingMobBase]

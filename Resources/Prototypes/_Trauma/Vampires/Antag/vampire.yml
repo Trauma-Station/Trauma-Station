@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: antag
   id: Vampire
   name: roles-antag-vampire-name
@@ -31,6 +33,7 @@
     state: puddle-1
 
 - type: antagSpecifier
+  parent: RestrictedAntag
   id: Vampire
   blacklist:
     components:

@@ -18,7 +18,7 @@ public sealed partial class AreaDetectorSystem : EntitySystem
         if (TerminatingOrDeleted(ent) || args.Entity.Comp1.MapUid == null)
             return;
 
-        if (_area.GetArea(ent.Owner) is not { } area)
+        if (_area.GetArea(ent.Owner) is not { } area || TerminatingOrDeleted(area))
         {
             // If we were in an area before, and we enter a place where there's no areas, then raise an early event.
             if (ent.Comp.Area is { } areaWas)
@@ -33,7 +33,7 @@ public sealed partial class AreaDetectorSystem : EntitySystem
         }
 
         // We enter the new area, whilst previous one was null.
-        if (ent.Comp.Area is not {  } areaIn)
+        if (ent.Comp.Area is not { } areaIn || TerminatingOrDeleted(areaIn))
         {
             var midEv = new AreaDetectorChangedEvent(null, area);
             RaiseLocalEvent(ent.Owner, ref midEv);

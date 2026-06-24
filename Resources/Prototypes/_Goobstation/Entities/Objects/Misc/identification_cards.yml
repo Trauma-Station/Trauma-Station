@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Chrono Legioneers
 - type: entity
   parent: IDCardStandard

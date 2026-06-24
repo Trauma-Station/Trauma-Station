@@ -31,7 +31,7 @@ public sealed partial class RelayPullerEffectSystem : EntityEffectSystem<Pullabl
             return;
 
         _data.CopyData(ent, puller);
-        _effects.TryApplyEffect(puller, args.Effect.Effect, args.Scale, args.User);
+        _effects.TryApplyEffect(puller, args.Effect.Effect, args.Scale, args.User, args.Predicted);
         _data.ClearData(puller);
     }
 }

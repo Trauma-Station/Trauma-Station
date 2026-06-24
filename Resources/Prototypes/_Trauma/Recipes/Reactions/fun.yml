@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reaction # "Cure" to the gondola infection, TGstation used pepper spray, but I like the idea of service getting to do something
   id: TranqulityNeutralizationHotsauce
   reactants:

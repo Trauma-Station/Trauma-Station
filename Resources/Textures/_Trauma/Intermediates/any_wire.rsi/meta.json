@@ -1,0 +1,21 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Nimfar11 (GitHub) for Space Station 14",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon",
+            "delays": [
+                [
+                    0.5,
+                    0.5,
+                    0.5
+                ]
+            ]
+        }
+    ]
+}

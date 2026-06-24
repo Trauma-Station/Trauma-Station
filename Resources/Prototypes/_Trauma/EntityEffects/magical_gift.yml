@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entityEffect
   id: MagicalGift
   conditions:
@@ -12,7 +14,7 @@
   effects:
   - !type:GrantSkills
     skills:
-      MagicalLiteracyKnowledge: 80 # need to already have a point in it to become master
+      MagicalLiteracyKnowledge: 90 # need to already have a point in it to become master
   - !type:ChatMessage
     channel: Server
     message: "Something deep inside your spirit has just awoken... You have an epiphany with magic!"
