@@ -10808,3 +10808,10 @@ Entries:
   id: 1208
   time: '2026-06-25T11:55:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3305
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Chems like inaprovaline now heal in softcrit, not just hardcrit.
+  id: 1209
+  time: '2026-06-25T12:21:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3335
