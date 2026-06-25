@@ -79,11 +79,9 @@
     - id: MobPlagueRatLarge
       weight: 2
     - id: MobRatma
-      weight: 1
+      weight: 0.2
     - id: MobRatKing
-      weight: 1
-    - id: MobRatKingBuff
-      weight: 1
+      weight: 0.2
     - id: MobGlockroach
       weight: 1
     - id: MobMothSyndy
