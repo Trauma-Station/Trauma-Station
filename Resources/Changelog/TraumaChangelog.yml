@@ -10760,3 +10760,12 @@ Entries:
   id: 1202
   time: '2026-06-25T02:24:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3320
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      The master material silo now directly feeds service and medical techfabs
+      since they don't have department silos for 1 lathe.
+  id: 1203
+  time: '2026-06-25T04:25:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3325
