@@ -10769,3 +10769,10 @@ Entries:
   id: 1203
   time: '2026-06-25T04:25:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3325
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed grilles health to 30, down from 100.
+  id: 1204
+  time: '2026-06-25T04:47:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3328
