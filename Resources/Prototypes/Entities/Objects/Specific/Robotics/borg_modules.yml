@@ -1220,6 +1220,7 @@
     - item: BorgHydroponicsToolMiniHoe # Trauma - Durability
     - item: BorgHydroponicsToolSpade # Trauma - Durability
     - item: BorgHydroponicsToolClippers # Trauma - Durability
+    - item: PlantAnalyzer # Trauma
     - item: Syringe # Trauma
     - item: Bucket
     - hand: # Trauma - make service borgs 1% useful
