@@ -236,7 +236,7 @@
   tags: ["station", "markings"]
   sprite:
     sprite: _Trauma/Decals/tile.rsi
-    state: threethreequartertile_dark_90
+    state: threequartertile_dark_90
 
 - type: decal
   id: threequartertile_steel_90
