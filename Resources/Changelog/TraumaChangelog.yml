@@ -10815,3 +10815,10 @@ Entries:
   id: 1209
   time: '2026-06-25T12:21:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3335
+- author: Bon-Man
+  changes:
+  - type: Fix
+    message: Fixed Salicylic Acid and Oxandrolone overdose not working
+  id: 1210
+  time: '2026-06-25T12:25:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3336
