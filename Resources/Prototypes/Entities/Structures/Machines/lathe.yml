@@ -744,6 +744,7 @@
     - type: MiningPoints
     - type: MiningPointsLathe
     - type: MaterialStorageMagnetPickup
+      magnetEnabled: true
     - type: MasterSiloFeeder # shitsalv 1984
     # </Trauma>
     - type: Sprite
