@@ -896,6 +896,12 @@
     soundHit:
       collection: BikeHorn
     animation: WeaponArcFist
+  - type: SolutionManager
+    solutions:
+    - SolutionClownSpider
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 2
   - type: Vocal
     sounds:
       Male: ClownGoblin
