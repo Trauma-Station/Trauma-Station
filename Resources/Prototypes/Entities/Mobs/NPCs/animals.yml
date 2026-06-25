@@ -2836,7 +2836,10 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Piercing: 6
+        # <Trauma>
+        Slash: 3
+        Piercing: 3 # was 6, split into slash so it can (slowly) break grilles
+        # </Trauma>
 
 - type: entity
   parent:
@@ -2890,7 +2893,10 @@
         path: /Audio/Effects/bite.ogg
       damage:
         types:
-          Piercing: 8
+          # <Trauma>
+          Slash: 4
+          Piercing: 4 # was 8, split into slash so it can break grilles
+          # </Trauma>
     - type: FootstepModifier
       footstepSoundCollection:
         collection: FootstepClownFast
