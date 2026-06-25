@@ -2,7 +2,6 @@
 
 using Content.Shared.Interaction;
 using Content.Shared.Materials;
-using Content.Shared.Materials.OreSilo;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Stacks;
@@ -54,7 +53,7 @@ public sealed partial class MasterSiloSystem : EntitySystem
         if (Transform(ent).GridUid is not { } grid)
             return; // should always exist if powered...
 
-        if (!FindSilosAccepting(grid, item))
+        if (!FindSilosAccepting(grid, (item, composition)))
         {
             _popup.PopupEntity("No powered silos on station!", ent, user);
             return;
@@ -82,10 +81,10 @@ public sealed partial class MasterSiloSystem : EntitySystem
         _popup.PopupEntity($"Distributed {multiplier} {Name(item)} between {count} material silos", ent, user);
     }
 
-    private bool FindSilosAccepting(EntityUid grid, EntityUid item)
+    private bool FindSilosAccepting(EntityUid grid, Entity<PhysicalCompositionComponent> item)
     {
         _silos.Clear();
-        var query = EntityQueryEnumerator<OreSiloComponent, MaterialStorageComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<MasterSiloClientComponent, MaterialStorageComponent, TransformComponent>();
         while (query.MoveNext(out var silo, out _, out var storage, out var xform))
         {
             if (xform.GridUid != grid || !_power.IsPowered(silo))
@@ -93,6 +92,23 @@ public sealed partial class MasterSiloSystem : EntitySystem
 
             if (_whitelist.IsWhitelistFail(storage.Whitelist, item))
                 continue;
+
+            // inserting will fail and delete materials if this isnt checked now
+            if (storage.MaterialWhiteList is { } whitelist)
+            {
+                var valid = true;
+                foreach (var material in item.Comp.MaterialComposition.Keys)
+                {
+                    if (!whitelist.Contains(material))
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (!valid)
+                    continue;
+            }
 
             _silos.Add((silo, storage));
         }

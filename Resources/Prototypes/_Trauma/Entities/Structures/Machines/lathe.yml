@@ -217,6 +217,7 @@
     energy: 5.0
   - type: OreSilo
     range: 15
+  - type: MasterSiloClient # theft
   - type: MaterialStorage
     ignoreColor: true
     whitelist:
