@@ -10794,3 +10794,10 @@ Entries:
   id: 1206
   time: '2026-06-25T05:09:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3329
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed martial arts combos not being predicted.
+  id: 1207
+  time: '2026-06-25T06:07:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3330
