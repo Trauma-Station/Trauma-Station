@@ -10801,3 +10801,10 @@ Entries:
   id: 1207
   time: '2026-06-25T06:07:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3330
+- author: Joel The
+  changes:
+  - type: Tweak
+    message: Resprited almost all tiles and some tile related decals
+  id: 1208
+  time: '2026-06-25T11:55:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3305
