@@ -10829,3 +10829,10 @@ Entries:
   id: 1211
   time: '2026-06-25T14:03:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3323
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: removed 1 hit gib buff rat king from fishing drops. Poshel nahui armok
+  id: 1212
+  time: '2026-06-25T14:05:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3338
