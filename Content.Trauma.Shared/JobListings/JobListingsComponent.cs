@@ -75,4 +75,10 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public List<EntProtoId> CompletedObjectives = new();
+
+    /// <summary>
+    /// If the job board's objectives can be refreshed.
+    /// </summary>
+    [DataField]
+    public bool CanRefresh = false;
 }

@@ -41,6 +41,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                         </PanelContainer>
                     </BoxContainer>
 
+                    <BoxContainer Orientation="Horizontal" VerticalAlignment="Top">
+                        <Label Name="RefreshTimerLabel" Text="{Loc job-listings-ui-refresh-timer-label}"/>
+                        <ProgressBar Name="RefreshTimerProgressBar"
+                            HorizontalExpand="True"
+                            HorizontalAlignment="Stretch"
+                            Margin="5 0 0 0"/>
+                        <Button Name="RefreshButton" HorizontalAlignment="Right" Text="{Loc job-listings-ui-refresh-button}"/>
+                    </BoxContainer>
+
                     <BoxContainer Orientation="Vertical" VerticalAlignment="Top">
                         <Label
                             Name="AvailableJobListingsLabel"
