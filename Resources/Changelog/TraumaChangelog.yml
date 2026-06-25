@@ -10785,3 +10785,12 @@ Entries:
   id: 1205
   time: '2026-06-25T05:03:30.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3327
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Split spider bite damage into half slash half pierce so it can break
+      grilles.
+  id: 1206
+  time: '2026-06-25T05:09:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3329
