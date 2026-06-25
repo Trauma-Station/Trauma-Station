@@ -74,7 +74,7 @@
               acts: ["Destruction"]
         - trigger:
             !type:DamageTrigger
-            damage: 100
+            damage: 30 # Trauma - was 100, way too tanky (window has 50 hp lol)
           behaviors:
             - !type:ChangeConstructionNodeBehavior
               node: grilleBroken
