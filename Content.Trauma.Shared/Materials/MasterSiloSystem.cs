@@ -84,7 +84,7 @@ public sealed partial class MasterSiloSystem : EntitySystem
     private bool FindSilosAccepting(EntityUid grid, EntityUid item)
     {
         _silos.Clear();
-        var query = EntityQueryEnumerator<MaterialSiloClientComponent, MaterialStorageComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<MasterSiloClientComponent, MaterialStorageComponent, TransformComponent>();
         while (query.MoveNext(out var silo, out _, out var storage, out var xform))
         {
             if (xform.GridUid != grid || !_power.IsPowered(silo))
