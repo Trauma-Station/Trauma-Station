@@ -123,7 +123,7 @@ public sealed partial class XenomorphEvolutionSystem : EntitySystem
         var afterEv = new AfterXenomorphEvolutionEvent(newXeno, mindUid, args.Caste);
         RaiseLocalEvent(uid, ref afterEv);
 
-        _adminLog.Add(LogType.Mind, $"{ToPrettyString(uid)} evolved into {ToPrettyString(newXeno)}");
+        _adminLog.Add(LogType.Mind, $"{uid:player} evolved into {newXeno:xeno}");
 
         Del(uid);
 

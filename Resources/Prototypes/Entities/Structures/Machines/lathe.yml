@@ -325,6 +325,10 @@
     - SecurityBoardsStaticGoob
     - ServiceBoardsStaticGoob
     dynamicPacks:
+    # <Trauma>
+    - SharedBoards
+    - ReactorCircuitboards
+    # </Trauma>
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
@@ -333,8 +337,6 @@
     - CameraBoards
     #- MechBoards - Goobstation - split between departmental lathes
     - ShuttleBoards
-    # Goobstation Packs
-    - SharedBoards
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
   - type: OreSiloClient

@@ -126,7 +126,7 @@ public sealed partial class WraithPossessedSystem : EntitySystem
 
             _wraithRevenant.SetPassiveDamageValues((ent.Owner, rev), ent.Comp.RevenantDamageOvertime, alive);
 
-            _admin.Add(LogType.Mind, LogImpact.High, $"{ToPrettyString(possessor)} made a revenant (possessed) out of ${ToPrettyString(ent.Owner)}");
+            _admin.Add(LogType.Mind, LogImpact.High, $"{possessor:user} made a revenant (possessed) out of {ent.Owner:target}");
             return;
         }
 
@@ -138,7 +138,7 @@ public sealed partial class WraithPossessedSystem : EntitySystem
             ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.PossessionDuration;
             Dirty(ent);
 
-            _admin.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(possessor)} possessed the object ${ToPrettyString(ent.Owner)}");
+            _admin.Add(LogType.Mind, LogImpact.Medium, $"{possessor:user} possessed the object {ent.Owner:target}");
         }
     }
 

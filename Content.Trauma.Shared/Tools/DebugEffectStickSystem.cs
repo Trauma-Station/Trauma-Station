@@ -50,7 +50,7 @@ public sealed partial class DebugEffectStickSystem : EntitySystem
         if (ent.Comp.Effect == args.Effect || !IsWorthy(user))
             return;
 
-        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{ToPrettyString(user)} changed DEBUG EFFECT STICK {ToPrettyString(ent)} to {args.Effect}");
+        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{user:user} changed DEBUG EFFECT STICK {ent.Owner:stick} to {args.Effect:effect}");
         ent.Comp.Effect = args.Effect;
         Dirty(ent);
     }
@@ -69,7 +69,7 @@ public sealed partial class DebugEffectStickSystem : EntitySystem
         if (ent.Comp.Unsafe && !IsWorthy(user))
             return;
 
-        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{ToPrettyString(user)} used DEBUG EFFECT STICK {ToPrettyString(ent)} on {ToPrettyString(target)} with effect {effect}");
+        _adminLogger.Add(LogType.AdminCommands, LogImpact.High, $"{user:user} used DEBUG EFFECT STICK {ent.Owner:stick} on {target:target} with effect {effect:effect}");
 
         _data.SetTool(target, ent);
         _effects.TryApplyEffect(target, effect, user: user);
