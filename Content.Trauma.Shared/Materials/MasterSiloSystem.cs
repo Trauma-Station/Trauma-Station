@@ -97,7 +97,7 @@ public sealed partial class MasterSiloSystem : EntitySystem
             if (storage.MaterialWhiteList is { } whitelist)
             {
                 var valid = true;
-                foreach (var material in item.Comp.MaterialComposition)
+                foreach (var material in item.Comp.MaterialComposition.Keys)
                 {
                     if (!whitelist.Contains(material))
                     {
