@@ -49,3 +49,20 @@
   id: Dionasigh
   files:
   - /Audio/_Goobstation/Voice/Diona/dionasigh.ogg
+
+- type: soundCollection
+  id: Trill
+  files:
+  - /Audio/_Starlight/Voice/Resomi/trill1.ogg
+  - /Audio/_Starlight/Voice/Resomi/trill2.ogg
+  - /Audio/_Starlight/Voice/Resomi/trill3.ogg
+
+- type: soundCollection
+  id: Warble
+  files:
+  - /Audio/_Goobstation/Voice/Resomi/warble.ogg
+
+- type: soundCollection
+  id: Wurble
+  files:
+  - /Audio/_Goobstation/Voice/Resomi/wurble.ogg
