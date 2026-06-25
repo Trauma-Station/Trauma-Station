@@ -13,6 +13,8 @@ public sealed partial class AnyCondition : EntityConditionBase<AnyCondition>
     [DataField(required: true)]
     public EntityCondition[] Conditions = default!;
 
+    private List<string> _conditions = new();
+
     public override string EntityConditionGuidebookText(IPrototypeManager proto)
     {
         _conditions.Clear();
@@ -20,7 +22,7 @@ public sealed partial class AnyCondition : EntityConditionBase<AnyCondition>
         {
             _conditions.Add(condition.EntityConditionGuidebookText(proto));
         }
-        return ContentLocalizationManager.FormatListToOr(conditions);
+        return ContentLocalizationManager.FormatListToOr(_conditions);
     }
 }
 
