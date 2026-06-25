@@ -515,8 +515,8 @@
           types:
             Poison: -3
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
       - !type:HealthChange
         damage:
           types:
@@ -879,8 +879,8 @@
           Burn: -2
           Toxin: -2
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
         - !type:ReagentCondition
           reagent: Atropine
           min: 0
