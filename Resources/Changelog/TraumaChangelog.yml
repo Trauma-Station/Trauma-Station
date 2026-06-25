@@ -10776,3 +10776,12 @@ Entries:
   id: 1204
   time: '2026-06-25T04:47:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3328
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Ore processors now distribute materials through the master silo
+      automatically.
+  id: 1205
+  time: '2026-06-25T05:03:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3327
