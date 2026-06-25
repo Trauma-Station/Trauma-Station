@@ -26,7 +26,7 @@
     Sigh:
       collection: MaleSigh
     Crying:
-      collection: MaleCry
+      collection: ResomiCry
     Whistle:
       collection: Whistles
     Honk:
@@ -38,9 +38,21 @@
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
-      collection: DeathGasp
+      path: /Audio/_Starlight/Voice/Resomi/resomi_deathgasp.ogg
     Surprised:
       path: /Audio/_Goobstation/Voice/surprised.ogg
+    Trill:
+      collection: Trill
+    Wurble:
+      collection: Wurble
+    Warble:
+      collection: Warble
+    Squawk:
+      collection: ResomiSquawk
+    Call:
+      collection: ResomiCalls
+    Scree:
+      collection: ResomiScrees
 
 - type: emoteSounds
   id: FemaleAvali
@@ -70,7 +82,7 @@
     Sigh:
       collection: FemaleSigh
     Crying:
-      collection: FemaleCry
+      collection: ResomiCry
     Whistle:
       collection: Whistles
     Honk:
@@ -82,6 +94,18 @@
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
-      collection: FemaleDeathGasp
+      path: /Audio/_Starlight/Voice/Resomi/resomi_deathgasp.ogg
     Surprised:
       path: /Audio/_Goobstation/Voice/surprised.ogg
+    Trill:
+      collection: Trill
+    Wurble:
+      collection: Wurble
+    Warble:
+      collection: Warble
+    Squawk:
+      collection: ResomiSquawk
+    Call:
+      collection: ResomiCalls
+    Scree:
+      collection: ResomiScrees
