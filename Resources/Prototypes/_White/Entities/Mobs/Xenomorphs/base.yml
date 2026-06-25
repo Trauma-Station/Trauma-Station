@@ -213,7 +213,7 @@
     - DoorBumpOpener
     - FootstepSound
   - type: GrabStagesOverride
-    startingStage: Hard    
+    startingStage: Hard
   #- type: XenomorphShoveTracker
     #shoveThreshold: 1
     #knockdownDuration: 3
