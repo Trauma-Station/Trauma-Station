@@ -740,6 +740,12 @@
   name: ore processor
   description: It produces sheets and ingots using ores.
   components:
+    # <Trauma>
+    - type: MiningPoints
+    - type: MiningPointsLathe
+    - type: MaterialStorageMagnetPickup
+    - type: MasterSiloFeeder # shitsalv 1984
+    # </Trauma>
     - type: Sprite
       sprite: Structures/Machines/ore_processor.rsi
       layers:
@@ -774,9 +780,6 @@
       staticPacks:
       - OreSmelting
       - RGlassSmelting
-    - type: MiningPoints # DeltaV - Source of mining points for miners
-    - type: MiningPointsLathe # DeltaV
-    - type: MaterialStorageMagnetPickup # Frontier
 
 - type: entity
   parent: OreProcessor

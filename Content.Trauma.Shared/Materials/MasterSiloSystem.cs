@@ -6,6 +6,7 @@ using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
+using Content.Trauma.Common.Materials;
 
 namespace Content.Trauma.Shared.Materials;
 
@@ -26,37 +27,58 @@ public sealed partial class MasterSiloSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MasterSiloComponent, InteractUsingEvent>(OnInteractUsing);
+
+        SubscribeLocalEvent<MasterSiloFeederComponent, MaterialStorageInsertAttemptEvent>(OnFeedAttempt);
     }
 
     private void OnInteractUsing(Entity<MasterSiloComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !SiloAccepts(ent.Comp, args.Used))
             return;
 
-        var user = args.User;
-        var item = args.Used;
+        args.Handled = TryDistribute(ent, args.Used, args.User);
+    }
+
+    private void OnFeedAttempt(Entity<MasterSiloFeederComponent> ent, ref MaterialStorageInsertAttemptEvent args)
+    {
+        var item = args.Item;
+        if (args.Handled ||
+            Transform(ent).GridUid is not { } grid)
+            return;
+
+        args.Handled = FindValidMasterSilo(grid, item) is { } silo &&
+            SiloAccepts(silo.Comp, item) &&
+            TryDistribute(silo, item, args.User);
+    }
+
+    public bool SiloAccepts(MasterSiloComponent comp, EntityUid item)
+        => _whitelist.CheckBoth(item, comp.Blacklist, comp.Whitelist);
+
+    /// <summary>
+    /// Try to distribute a material item to master silo clients, turning true if it was consumed and distributed.
+    /// </summary>
+    public bool TryDistribute(Entity<MasterSiloComponent> ent, EntityUid item, EntityUid user)
+    {
         if (TerminatingOrDeleted(item) ||
-            !_compositionQuery.TryComp(item, out var composition) ||
-            !_whitelist.CheckBoth(item, ent.Comp.Blacklist, ent.Comp.Whitelist))
-            return;
+            !_compositionQuery.TryComp(item, out var composition))
+            return false;
 
-        args.Handled = true;
         if (!_power.IsPowered(ent.Owner))
         {
             _popup.PopupClient("It isn't powered!", ent, user);
-            return;
+            return false;
         }
 
         if (_net.IsClient)
-            return; // client wont have every silo in pvs range
+            return true; // client wont have every silo in pvs range, but assume it succeeded
 
         if (Transform(ent).GridUid is not { } grid)
-            return; // should always exist if powered...
+            return false; // should always exist if powered...
 
         if (!FindSilosAccepting(grid, (item, composition)))
         {
             _popup.PopupEntity("No powered silos on station!", ent, user);
-            return;
+            return false;
         }
 
         var multiplier = _stackQuery.CompOrNull(item)?.Count ?? 1;
@@ -79,6 +101,19 @@ public sealed partial class MasterSiloSystem : EntitySystem
             }
         }
         _popup.PopupEntity($"Distributed {multiplier} {Name(item)} between {count} material silos", ent, user);
+        return true;
+    }
+
+    private Entity<MasterSiloComponent>? FindValidMasterSilo(EntityUid grid, EntityUid item)
+    {
+        var query = EntityQueryEnumerator<MasterSiloComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var xform))
+        {
+            if (xform.GridUid == grid && _power.IsPowered(uid) && SiloAccepts(comp, item))
+                return (uid, comp);
+        }
+
+        return null;
     }
 
     private bool FindSilosAccepting(EntityUid grid, Entity<PhysicalCompositionComponent> item)
