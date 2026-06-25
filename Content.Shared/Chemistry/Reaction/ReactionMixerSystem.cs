@@ -16,6 +16,7 @@ namespace Content.Shared.Chemistry.Reaction;
 public sealed partial class ReactionMixerSystem : EntitySystem
 {
     // <Trauma>
+    [Dependency] private INetManager _net = default!;
     // </Trauma>
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
@@ -65,7 +66,7 @@ public sealed partial class ReactionMixerSystem : EntitySystem
         {
             _audio.Stop(ent.Comp.AudioStream);
             if (_net.IsServer)
-                ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.MixingSound, ent, args.User)?.Entity;
+                ent.Comp.AudioStream = _audio.PlayPvs(ent.Comp.MixingSound, ent)?.Entity;
         }
         // </Trauma>
     }
