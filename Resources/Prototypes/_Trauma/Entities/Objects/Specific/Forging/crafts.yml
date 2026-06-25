@@ -165,8 +165,6 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: DisarmMalus
   - type: Parry
-    maxParries: 1
-    maxReflects: 0
     parryMinSkill: 50
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg
@@ -207,7 +205,7 @@
   parent: [ BaseForgedProductSeparateHead, BaseSword ]
   id: ForgedLongsword
   name: longsword
-  description: "It's like a sword, but longer. Needs two hands to wield properly."
+  description: It's like a sword, but longer. Needs two hands to wield properly.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -229,8 +227,6 @@
       path: /Audio/Weapons/bladeslice.ogg
   - type: DisarmMalus
   - type: Parry
-    maxParries: 1
-    maxReflects: 0
     parryMinSkill: 50
     soundOnParry:
       path: /Audio/_Goobstation/Heretic/parry.ogg
@@ -272,6 +268,9 @@
     qualities:
     - Prying
     - Hammering
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Prying
 
 # Pickaxe
 
@@ -302,12 +301,10 @@
     shape:
     - 0,0,0,4
   - type: MeleeWeapon
-    autoAttack: true
-    attackRate: 3
     #armorPenetration: -0.7 # Currently not working
     damage:
       types:
-        Slash: 5
+        Slash: 12
       woundSeverityMultipliers:
         Slash: 5
     soundHit:

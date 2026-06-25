@@ -6,7 +6,7 @@ using Content.Shared.Whitelist;
 namespace Content.Trauma.Shared.Materials;
 
 /// <summary>
-/// Distributes inserted materials between all powered material silos on the same grid.
+/// Distributes inserted materials between all powered material silos with <see cref="MasterSiloClientComponent"/> on the same grid.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class MasterSiloComponent : Component

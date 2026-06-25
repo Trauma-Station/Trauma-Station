@@ -157,7 +157,7 @@ public sealed partial class SheathCounterAttackSystem : EntitySystem
         // Predicting would result in lunge animation playing twice for args.User
         if (_net.IsClient || args.Cancelled || !args.CanRiposte || !CanCounterAttack(ent.Owner) ||
             !_blocker.CanInteract(ent.Owner, args.Target) ||
-            TryComp(args.Used, out MeleeWeaponComponent? melee) && !melee.CanParryLight)
+            TryComp(args.Used, out MeleeWeaponComponent? melee) && !melee.CanBeParried)
             return;
 
         if (!_status.TryEffectsWithComp<CounterAttackingStatusEffectComponent>(ent, out var effects) ||

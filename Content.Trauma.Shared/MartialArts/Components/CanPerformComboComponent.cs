@@ -37,7 +37,7 @@ public sealed partial class CanPerformComboComponent : Component
     /// <summary>
     /// Current combo list.
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public List<ComboPrototype> AllowedCombos = new();
 
     /// <summary>

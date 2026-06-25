@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Mobs;
 using Robust.Shared.Timing;
@@ -26,9 +25,6 @@ public sealed partial class InjectOnMobStateSystem : EntitySystem
             return;
 
         if (ent.Comp.NextUse > _timing.CurTime)
-            return;
-
-        if (!HasComp<SolutionContainerManagerComponent>(ent))
             return;
 
         if (!_solutionContainers.TryGetInjectableSolution(ent.Owner, out var targetSoln, out var targetSolution))

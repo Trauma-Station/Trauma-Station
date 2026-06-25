@@ -529,6 +529,18 @@
         - !type:MetabolizerTypeCondition
           type: [ Animal, Vox, Plant ]
           inverted: true
+      - !type:InfectDisease
+        probability: 0.05
+        scaleProbability: true
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Rat, Vox ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: UncookedAnimalProteins
+          min: 0.01
+        disease: DiseaseGutWorms
+        mutate: false
     Bloodstream:
     # </Trauma>
       effects:

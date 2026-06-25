@@ -203,6 +203,7 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
             ent.Comp.Speaks.Remove(language);
         if (removeUnderstood)
             ent.Comp.Understands.Remove(language);
+        EnsureValidLanguage(ent.AsNullable());
         Dirty(ent);
     }
 
@@ -211,8 +212,11 @@ public abstract partial class SharedLanguageSystem : CommonLanguageSystem
     ///   If not, sets it to the first entry of its SpokenLanguages list, or universal if it's empty.
     /// </summary>
     /// <returns>True if the current language was modified, false otherwise.</returns>
-    public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent> ent)
+    public bool EnsureValidLanguage(Entity<LanguageSpeakerComponent?> ent)
     {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return false;
+
         if (!ent.Comp.Speaks.Contains(ent.Comp.CurrentLanguage))
         {
             ent.Comp.CurrentLanguage = ent.Comp.Speaks.FirstOrDefault(UniversalPrototype);

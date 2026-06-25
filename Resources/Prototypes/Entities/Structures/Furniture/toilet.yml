@@ -9,7 +9,7 @@
   - type: FishingSpot
     fishList: !type:NestedSelector
       tableId: ToiletFishingLootTable
-    fishDefaultTimer: 45.0
+    fishDefaultTimer: 20.0
     fishTimerVariety: 15.0
   # </Trauma>
   - type: Sprite

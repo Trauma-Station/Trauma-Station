@@ -31,3 +31,18 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkDisposableTurretNukie
+  name: uplink-disposable-turret-name
+  description: uplink-disposable-turret-desc
+  productEntity: ToolboxElectricalTurretFilled
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+   whitelist:
+     tags:
+     - NukeOpsUplink

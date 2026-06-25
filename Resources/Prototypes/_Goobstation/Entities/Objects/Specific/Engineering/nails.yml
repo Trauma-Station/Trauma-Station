@@ -25,7 +25,7 @@
       tags:
       - Wall # TODO: more types of nails for different structures
   - type: MeleeWeapon
-    canHeavyAttack: false # How can you swing a nail
+    canWideSwing: false # How can you swing a nail
     damage:
       types:
         Piercing: 1

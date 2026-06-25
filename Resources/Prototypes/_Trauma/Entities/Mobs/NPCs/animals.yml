@@ -15,3 +15,1145 @@
   components:
   - type: GhostRole
     prob: 1
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase ]
+  id: MobBunnySea
+  name: sea bunny
+  description: A cute, fluffy, sea bunny.
+  components:
+  - type: VentCrawler
+  - type: GhostRole
+    prob: 0.5
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-sea-bunny-name
+    description: ghost-role-information-sea-bunny-description
+    rules: ghost-role-information-nonantagonist-rules
+  - type: GhostTakeoverAvailable
+  - type: Speech
+    speechVerb: SmallMob
+    speechSounds: Squeak
+    allowedEmotes: ['Squeak']
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/bunny.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: sea_bunny
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 12
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Critical
+      60: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.5
+    baseSprintSpeed : 4
+  - type: Inventory
+    speciesId: hamster
+    templateId: hamster
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: sea_bunny
+      Critical:
+        Base: sea_bunny_dead
+      Dead:
+        Base: sea_bunny_dead
+  - type: Edible
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Hunger
+    baseDecayRate: 0.3
+  - type: Extractable
+    grindableSolutionName: food
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Blood
+        Quantity: 55
+      - ReagentId: Fat
+        Quantity: 5
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  - type: Tag
+    tags:
+    - VimPilot
+    - ChefPilot
+    - Trash
+    - Hamster
+    - Meat
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.25
+    damageRecovery:
+      types:
+        Asphyxiation: -0.25
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.1
+  - type: CombatMode
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 2
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: NPCRetaliation
+  - type: FactionException
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+  - type: InteractionPopup
+    successChance: 0.4
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/fox_squeak.ogg
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 60
+  - type: MobPrice
+    price: 60
+  - type: NonSpreaderZombie
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 120
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+
+- type: entity
+  parent: MobBunnySea
+  id: MobBunny
+  name: bunny
+  description: A cute, fluffy, bunny.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/bunny.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bunny
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bunny
+      Critical:
+        Base: bunny_dead
+      Dead:
+        Base: bunny_dead
+
+- type: entity
+  parent: MobBunnySea
+  id: MobBunnyEvil
+  name: bunny
+  description: A cute, fluffy, bunny. It wants to kill you.
+  components:
+  - type: GhostRole
+    rules: ghost-role-information-antagonist-rules
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/bunny.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bunny_evil
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Critical
+      100: Dead
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bunny_evil
+      Critical:
+        Base: bunny_dead
+      Dead:
+        Base: bunny_dead
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 20
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: NPCRetaliation
+  - type: FactionException
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  parent: SimpleMobBase
+  id: MobEelSea
+  name: eel
+  description: A slippery, slithering fish that delivers a shocking bite.
+  components:
+  - type: VentCrawler
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 6
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/eel.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: eel
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 8
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      30: Critical
+      60: Dead
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: eel
+      Critical:
+        Base: eel_dead
+      Dead:
+        Base: eel_dead
+  - type: CombatMode
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/sparks4.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Shock: 12
+        Piercing: 3
+  - type: StaminaDamageOnHit
+    damage: 2
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: NPCRetaliation
+    attackMemoryLength: 5
+  - type: FactionException
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Insulated
+  - type: InteractionPopup
+    successChance: 0.3
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 40
+  - type: Tag
+    tags:
+    - VimPilot
+
+- type: entity
+  parent: MobSnake
+  id: MobSnakeGrass
+  name: grass snake
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: grass_snake
+      sprite: _Trauma/Mobs/Animals/grass_snake.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: grass_snake
+      Critical:
+        Base: grass_snake_dead
+      Dead:
+        Base: grass_snake_dead
+
+- type: entity
+  parent: [ AppearanceSpaceCobra, SimpleMobBase ]
+  id: MobCobra
+  name: cobra
+  description: A patterned hood and a venomous bite. Best admired from a distance.
+  components:
+  - type: Fauna
+  - type: LanguageSpeaker
+    speaks:
+    - Xeno
+    understands:
+    - Xeno
+    - TauCetiBasic
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+  - type: VentCrawler
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/cobra.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: cobra
+      - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+        state: glow
+        shader: unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 120
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSnake
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      70: Dead
+  - type: Stamina
+    baseCritThreshold: 150
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: cobra
+        BaseUnshaded: glow
+      Dead:
+        Base: cobra_dead
+  - type: Butcherable
+    spawned:
+      - id: FoodMeatSnake
+        amount: 2
+      - id: UraniumOre1
+        amount: 1
+      - id: ClothingShoesSnakeskinBoots
+        amount: 1
+        prob: 0.3
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 10
+        Poison: 5
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomCobra
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 2
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: ReplacementAccent
+    accent: xeno
+  - type: InteractionPopup
+    successChance: 0.2
+    interactSuccessString: petting-success-snake
+    interactFailureString: petting-failure-generic
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cryoxadone
+        Quantity: 200
+  - type: PointLight
+    radius: 1.1
+    energy: 2.7
+    color: "#4faffb"
+  - type: Stealth
+    enabledOnDeath: false
+    maxVisibility: 1.2
+  - type: StealthOnMove
+    passiveVisibilityRate: -0.25
+    movementVisibilityRate: 0.25
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomCobra
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Hemorrhinol
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Hemorrhinol
+        Quantity: 1
+
+- type: entity
+  parent: MobPurpleSnake
+  id: MobYellowBellySnake
+  name: yellow belly snake
+  description: A menacing yellow-bellied snake.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/yellow_belly.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: yellow_belly
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: yellow_belly
+        BaseUnshaded: glow
+      Critical:
+        Base: yellow_belly_dead
+      Dead:
+        Base: yellow_belly_dead
+
+- type: entity
+  parent: [ AppearanceSpaceCobra, SimpleMobBase ]
+  id: MobMantis
+  name: Mantis
+  description: A stealthy predator.
+  components:
+  - type: VentCrawler
+  - type: Fauna
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/mantis.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: mantis
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: Stamina
+    baseCritThreshold: 150
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: mantis
+      Critical:
+        Base: mantis_dead
+      Dead:
+        Base: mantis_dead
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: InsectBlood
+        Quantity: 200
+  - type: CombatMode
+  - type: MeleeWeapon
+    attackRate: 2
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 15
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4.5
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: GhostTakeoverAvailable
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: InteractionPopup
+    successChance: 0.25
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat ]
+  id: MobMantisShrimp
+  name: mantis shrimp
+  description: A deceptively small crustacean with a punch that can shatter bone. Do not let it near the glass.
+  components:
+  - type: Fauna
+  - type: VentCrawler
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/mantis_shrimp.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: mantis_shrimp
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Dead
+  - type: Stamina
+    baseCritThreshold: 150
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 5.5
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 25
+        Structural: 20
+  - type: MeleeThrowOnHit
+    distance: 6
+    speed: 15
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:GibBehavior
+        deleteGibs: true
+        recursive: false
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 150
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: InteractionPopup
+    successChance: 0.1
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactFailureSound:
+      path: /Audio/Effects/bite.ogg
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat ]
+  id: MobShrimp
+  name: shrimp
+  description: A dangerous crustacean, try to dodge its bubbles.
+  components:
+  - type: Fauna
+  - type: VentCrawler
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - Lavafauna
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Trauma/Mobs/Animals/shrimp.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: shrimp
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Dead
+  - type: Stamina
+    baseCritThreshold: 150
+  - type: BatteryAmmoProvider
+    proto: BulletBubble
+    fireCost: 50
+  - type: BatterySelfRecharger
+    autoRechargeRate: 50
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: Gun
+    projectileSpeed: 20
+    fireRate: 0.5
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 5.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:GibBehavior
+          deleteGibs: true
+          recursive: false
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 150
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: InteractionPopup
+    successChance: 0.1
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactFailureSound:
+      path: /Audio/Effects/bite.ogg
+  - type: NightVision
+    color: "#808080"
+    activateSound: null
+    deactivateSound: null
+
+- type: entity
+  abstract: true
+  parent: SimpleMobBase
+  id: MobDartFrogBase
+  name: dart frog
+  description: A brilliantly colored amphibian. Its skin secretes a potent paralytic toxin.
+  components:
+  - type: Extractable
+    grindableSolutionName: poison
+  - type: VentCrawler
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 4
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 50
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 20
+  - type: Item
+    size: Tiny
+  - type: CombatMode
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 1
+        Poison: 10
+  - type: InteractionPopup
+    successChance: 0.6
+    interactSuccessString: petting-success-frog
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/frog_ribbit.ogg
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: NPCRetaliation
+    attackMemoryLength: 5
+  - type: FactionException
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: Tag
+    tags:
+    - VimPilot
+
+- type: entity
+  parent: MobDartFrogBase
+  id: MobDartFrog1
+  name: strawberry poison frog
+  description: Small, colorful, and deceptively dangerous. Its skin secretes toxins strong enough to discourage most predators.
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dart_frog1
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dart_frog1
+      Dead:
+        Base: frog_dead1
+  - type: Solution
+    id: poison
+    solution:
+      reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Blood
+          Quantity: 5
+        - ReagentId: BatrachoToxin
+          Quantity: 1
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomDartFrog1
+  - type: MeleeChemicalInjector
+    transferAmount: 2
+    solution: melee
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomDartFrog1
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 2
+
+- type: entity
+  parent: MobDartFrogBase
+  id: MobDartFrog2
+  name: golden poison frog
+  description: A brilliantly marked poison frog carrying one of nature's deadliest toxins. Even predators know to keep their distance.
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dart_frog2
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dart_frog2
+      Dead:
+        Base: frog_dead2
+  - type: Solution
+    id: poison
+    solution:
+      reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Blood
+          Quantity: 5
+        - ReagentId: BatrachoToxin
+          Quantity: 2
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomDartFrog2
+  - type: MeleeChemicalInjector
+    transferAmount: 4
+    solution: melee
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomDartFrog2
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 15
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 4
+
+- type: entity
+  parent: MobDartFrogBase
+  id: MobDartFrog3
+  name: azure poison frog
+  description: A striking blue poison frog with mild but effective chemical defenses. Best appreciated without direct contact.
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dart_frog3
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dart_frog3
+      Dead:
+        Base: frog_dead3
+  - type: Solution
+    id: poison
+    solution:
+      reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Blood
+          Quantity: 5
+        - ReagentId: BatrachoToxin
+          Quantity: 0.75
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomDartFrog3
+  - type: MeleeChemicalInjector
+    transferAmount: 1.5
+    solution: melee
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomDartFrog3
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 1.5
+
+- type: entity
+  parent: MobDartFrogBase
+  id: MobDartFrog4
+  name: green-and-black poison frog
+  description: Bright warning colors advertise a respectable toxin load. Beautiful to look at, less pleasant to handle.
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dart_frog4
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dart_frog4
+      Dead:
+        Base: frog_dead4
+  - type: Solution
+    id: poison
+    solution:
+      reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Blood
+          Quantity: 5
+        - ReagentId: BatrachoToxin
+          Quantity: 1.5
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomDartFrog4
+  - type: MeleeChemicalInjector
+    transferAmount: 3
+    solution: melee
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomDartFrog4
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 15
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 3
+
+- type: entity
+  parent: MobDartFrogBase
+  id: MobDartFrog5
+  name: kokoe poison frog
+  description: A dark forest-dwelling poison frog whose potent skin toxins make it a dangerous catch for anything hungry enough to try.
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dart_frog5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dart_frog5
+      Dead:
+        Base: frog_dead5
+  - type: Solution
+    id: poison
+    solution:
+      reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Blood
+          Quantity: 5
+        - ReagentId: BatrachoToxin
+          Quantity: 2.5
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomDartFrog5
+  - type: MeleeChemicalInjector
+    transferAmount: 5
+    solution: melee
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomDartFrog5
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 25
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 5
+
+- type: entity
+  parent: MobDartFrogBase
+  id: MobDartFrog6
+  name: rose poison frog
+  description: A rare pink poison frog whose toxins are comparatively weak, though still unpleasant for the unwary.
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: dart_frog6
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: dart_frog6
+      Dead:
+        Base: frog_dead6
+  - type: Solution
+    id: poison
+    solution:
+      reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Blood
+          Quantity: 5
+        - ReagentId: BatrachoToxin
+          Quantity: 0.5
+  - type: SolutionManager
+    solutions:
+    - SolutionVenomDartFrog6
+  - type: MeleeChemicalInjector
+    transferAmount: 1
+    solution: melee
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVenomDartFrog6
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 10
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: BatrachoToxin
+        Quantity: 1
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionMouseBites
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 5
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: MouseBites
+        Quantity: 1
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Honk
+        Quantity: 2

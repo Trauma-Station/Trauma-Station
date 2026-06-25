@@ -124,7 +124,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         // rev shitcode is horrific...
         RemComp<RevolutionEnemyComponent>(target);
         _faction.AddFaction(target, Faction);
-        _adminLog.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(user)} converted {ToPrettyString(target)} into a Revolutionary");
+        _adminLog.Add(LogType.Mind, LogImpact.Medium, $"{user:user} converted {target:target} into a Revolutionary");
 
         // good boy points
         if (_mind.TryGetMind(user, out var userMindId, out var userMind) &&

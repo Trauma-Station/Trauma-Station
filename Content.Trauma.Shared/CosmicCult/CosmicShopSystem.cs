@@ -8,11 +8,10 @@ namespace Content.Trauma.Shared.CosmicCult;
 
 public sealed partial class CosmicShopSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private IEntityManager _entMan = default!;
 
     public override void Initialize()
     {
@@ -34,7 +33,7 @@ public sealed partial class CosmicShopSystem : EntitySystem
     private void OnInfluenceSelected(Entity<CosmicShopComponent> ent, ref InfluenceSelectedMessage args)
     {
         var user = args.Actor;
-        if (!_prototype.TryIndex(args.InfluenceProtoId, out var proto) || !TryComp<CosmicCultComponent>(user, out var cultComp))
+        if (!_proto.TryIndex(args.InfluenceProtoId, out var proto) || !TryComp<CosmicCultComponent>(user, out var cultComp))
             return;
 
         if (cultComp.EntropyBudget < proto.Cost || cultComp.OwnedInfluences.Contains(proto))
@@ -51,10 +50,10 @@ public sealed partial class CosmicShopSystem : EntitySystem
         else
         {
             if (proto.Add != null)
-                _entMan.AddComponents(args.Actor, proto.Add);
+                EntityManager.AddComponents(args.Actor, proto.Add);
 
             if (proto.Remove != null)
-                _entMan.RemoveComponents(args.Actor, proto.Remove);
+                EntityManager.RemoveComponents(args.Actor, proto.Remove);
         }
 
         cultComp.EntropyBudget -= proto.Cost;
@@ -73,7 +72,7 @@ public sealed partial class CosmicShopSystem : EntitySystem
 
         foreach (var influence in cultComp.OwnedInfluences)
         {
-            if (!_prototype.Resolve(influence, out var proto)) continue;
+            if (!_proto.Resolve(influence, out var proto)) continue;
             cultComp.OwnedInfluences.Remove(influence);
             cultComp.UnlockedInfluences.Add(influence);
             cultComp.EntropyBudget += proto.Cost;
@@ -81,10 +80,10 @@ public sealed partial class CosmicShopSystem : EntitySystem
             if (proto.Passive)
             {
                 if (proto.Add != null)
-                    _entMan.RemoveComponents(args.Actor, proto.Add);
+                    EntityManager.RemoveComponents(args.Actor, proto.Add);
 
                 if (proto.Remove != null)
-                    _entMan.AddComponents(args.Actor, proto.Remove); // This will probably not work well, but there are currently no influences that remove components. Should be careful with those in the future.
+                    EntityManager.AddComponents(args.Actor, proto.Remove); // This will probably not work well, but there are currently no influences that remove components. Should be careful with those in the future.
             }
         }
         foreach (var action in cultComp.ActionEntities)

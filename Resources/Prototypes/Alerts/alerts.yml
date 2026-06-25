@@ -6,6 +6,7 @@
   order:
   - category: Health
   - category: Stamina
+  - alertType: ParryExhaustion # Trauma
   - alertType: ChangelingBiomass # goobstation - changelings
   - alertType: ChangelingChemicals # goobstation - changelings
   - alertType: SuitPower

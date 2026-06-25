@@ -14,9 +14,9 @@
     - type: Targeting
     - type: LanguageSpeaker
       speaks:
-      - TauCetiBasic
+      - Universal
       understands:
-      - TauCetiBasic
+      - Universal
     # </Trauma>
     - type: LagCompensation
     - type: GhostRole

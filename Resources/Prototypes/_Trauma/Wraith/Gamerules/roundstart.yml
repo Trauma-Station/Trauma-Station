@@ -7,7 +7,7 @@
   - type: GameRule
     minPlayers: 35
   - type: AntagSpawner
-    prototype: MobWraithMidround
+    prototype: MobWraith
   - type: AntagRandomSpawn
   - type: AntagSelection
     agentName: wraith-round-end-agent-name

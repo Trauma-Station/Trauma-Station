@@ -91,16 +91,16 @@
             state: back
   - type: InitialBody
     organs:
-      Torso: TorsoDecapoid
-      Head: HeadDecapoid
-      ArmRight: RightArmDecapoid
-      ArmLeft: LeftArmDecapoid
-      HandRight: RightHandDecapoid
-      HandLeft: LeftHandDecapoid
-      LegRight: RightLegDecapoid
-      LegLeft: LeftLegDecapoid
-      FootRight: RightFootDecapoid
-      FootLeft: LeftFootDecapoid
+      Torso: OrganDecapoidTorso
+      Head: OrganDecapoidHead
+      ArmRight: OrganDecapoidArmRight
+      ArmLeft: OrganDecapoidArmLeft
+      HandRight: OrganDecapoidHandRight
+      HandLeft: OrganDecapoidHandLeft
+      LegRight: OrganDecapoidLegRight
+      LegLeft: OrganDecapoidLegLeft
+      FootRight: OrganDecapoidFootRight
+      FootLeft: OrganDecapoidFootLeft
       Lungs: OrganDecapoidLungs
       Stomach: OrganDecapoidStomach
       Brain: OrganDecapoidBrain
@@ -208,7 +208,7 @@
 - type: entity
   abstract: true
   parent: OrganBaseFleshy
-  id: BaseDecapoidOrgan
+  id: OrganDecapoid
   suffix: "decapoid"
   components:
   - type: Sprite
@@ -218,8 +218,8 @@
 
 - type: entity
   abstract: true
-  parent: BaseDecapoidOrgan
-  id: BaseDecapoidOrganExternal
+  parent: OrganDecapoid
+  id: OrganDecapoidExternal
   components:
   - type: Sprite
     sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
@@ -231,61 +231,61 @@
       group: Decapoid
 
 - type: entity
-  id: TorsoDecapoid
+  id: OrganDecapoidTorso
   name: "decapoid torso"
-  parent: [OrganBaseTorso, BaseDecapoidOrganExternal]
+  parent: [OrganBaseTorso, OrganDecapoidExternal]
 
 - type: entity
-  id: HeadDecapoid
+  id: OrganDecapoidHead
   name: "decapoid head"
-  parent: [OrganBaseHead, BaseDecapoidOrganExternal]
+  parent: [OrganBaseHead, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftArmDecapoid
+  id: OrganDecapoidArmLeft
   name: "left decapoid arm"
-  parent: [OrganBaseArmLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseArmLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightArmDecapoid
+  id: OrganDecapoidArmRight
   name: "right decapoid arm"
-  parent: [OrganBaseArmRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseArmRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftHandDecapoid
+  id: OrganDecapoidHandLeft
   name: "decapoid major claw"
-  parent: [OrganBaseHandLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseHandLeft, OrganDecapoidExternal]
   components:
   - type: HandOrgan
     startingItem: DecapoidClawItem
 
 - type: entity
-  id: RightHandDecapoid
+  id: OrganDecapoidHandRight
   name: "right minor claw"
-  parent: [OrganBaseHandRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseHandRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftLegDecapoid # these are the front legs
+  id: OrganDecapoidLegLeft # these are the front legs
   name: "front decapoid legs"
-  parent: [OrganBaseLegLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseLegLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightLegDecapoid # these are the back legs
+  id: OrganDecapoidLegRight # these are the back legs
   name: "back decapoid legs"
-  parent: [OrganBaseLegRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseLegRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftFootDecapoid # these are the front feet
+  id: OrganDecapoidFootLeft # these are the front feet
   name: "front decapoid feet"
-  parent: [OrganBaseFootLeft, BaseDecapoidOrganExternal]
+  parent: [OrganBaseFootLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightFootDecapoid # these are the back feet
+  id: OrganDecapoidFootRight # these are the back feet
   name: "back decapoid feet"
-  parent: [OrganBaseFootRight, BaseDecapoidOrganExternal]
+  parent: [OrganBaseFootRight, OrganDecapoidExternal]
 
 - type: entity # These are a bit evil
   id: OrganDecapoidEyes
-  parent: [OrganBaseEyes, BaseDecapoidOrgan]
+  parent: [OrganBaseEyes, OrganDecapoid]
   components:
   - type: VisualOrgan
     data:
@@ -296,7 +296,7 @@
 
 - type: entity
   id: OrganDecapoidLungs
-  parent: [OrganBaseLungs, BaseDecapoidOrgan]
+  parent: [OrganBaseLungs, OrganDecapoid]
   name: decapoid respiratory system
   description: "Extracts dissolved oxygen from water, and utilizes it for cell maintenance."
   components:
@@ -305,36 +305,35 @@
 
 - type: entity
   id: OrganDecapoidStomach
-  parent: [OrganBaseStomach, BaseDecapoidOrgan]
+  parent: [OrganBaseStomach, OrganDecapoid]
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
 
 - type: entity
   id: OrganDecapoidBrain
-  parent: [OrganBaseBrain, BaseDecapoidOrgan]
-
+  parent: [OrganBaseBrain, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidTongue
-  parent: [OrganBaseTongue, BaseDecapoidOrgan]
+  parent: [OrganBaseTongue, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidAppendix
-  parent: [OrganBaseAppendix, BaseDecapoidOrgan]
+  parent: [OrganBaseAppendix, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidEars
-  parent: [OrganBaseEars, BaseDecapoidOrgan]
+  parent: [OrganBaseEars, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidHeart
-  parent: [OrganBaseHeart, BaseDecapoidOrgan]
+  parent: [OrganBaseHeart, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidLiver
-  parent: [OrganBaseLiver, BaseDecapoidOrgan]
+  parent: [OrganBaseLiver, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidKidneys
-  parent: [OrganBaseKidneys, BaseDecapoidOrgan]
+  parent: [OrganBaseKidneys, OrganDecapoid]

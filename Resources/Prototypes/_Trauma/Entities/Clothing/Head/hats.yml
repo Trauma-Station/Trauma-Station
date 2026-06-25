@@ -1,7 +1,29 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease]
+  abstract: true
+  id: ClothingHeadHatArmoredBeret
+  components:
+  - type: ArmorPointBlank
+    range: 1.5
+    resistancePenalty: 0
+  - type: Armor
+    coverage:
+    - Head
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.2
+      BoneDamage: 0.2
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+
+- type: entity
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease]
   id: ClothingHeadHatBeretSergeant
   name: sergeant beret
   description: The beret of a security member who has seen more than anyone. Make sure you salute them, they're probably the reason why you're alive today.
@@ -18,17 +40,3 @@
     - CorgiWearable
     - HamsterWearable
     - WhitelistChameleon
-  - type: Armor
-    coverage:
-    - Head
-    traumaDeductions:
-      Dismemberment: 0.2
-      OrganDamage: 0.2
-      BoneDamage: 0.2
-      VeinsDamage: 0
-    modifiers:
-      coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
-        Heat: 0.8

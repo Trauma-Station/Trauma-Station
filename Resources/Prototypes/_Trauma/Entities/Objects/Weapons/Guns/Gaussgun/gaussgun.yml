@@ -9,10 +9,6 @@
     size: Ginormous
     shape:
     - 0,0,8,1
-  - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
-  - type: HeldSpeedModifier
   - type: StaticPrice
     price: 1500
   - type: EmitSoundOnPickup
@@ -26,8 +22,8 @@
       collection: SnipersDrop
   - type: AmmoCounter
   - type: Gun
-    minAngle: 30
-    maxAngle: 40
+    minAngle: 3
+    maxAngle: 10
     fireRate: 1
     angleIncrease: 3
     angleDecay: 16
@@ -40,7 +36,7 @@
   - type: MultiMagazineAmmoProvider
     slots:
       gun_magazine: null # Use ammo provied by gun magazine
-      gun_magazine_cell: 0.34 # Don't use battery projectiles, multiply fire cost by 0.34 (45 shots for high-cap cell)
+      gun_magazine_cell: 0.5 # Don't use battery projectiles, multiply fire cost by 0.5 (30 shots for high-cap cell)
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -77,9 +73,9 @@
   - type: Appearance
 
 - type: entity
-  parent: [ BaseWeaponGaussgun, BaseSecurityContraband ]
+  parent: [ BaseSecurityContraband, BaseGunWieldable, BaseWeaponGaussgun ]
   id: WeaponGaussgun
-  name: gauss rifle
+  name: coil gun
   description: Requires both a battery and ammunition to operate, a cheaper alternative to ballistic firearms.
   components:
   - type: Sprite
@@ -99,16 +95,12 @@
     - Back
     - suitStorage
   - type: Gun
-    fireRate: 1
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -30
+    fireRate: 2
 
 - type: entity
-  parent: [ WeaponGaussgun, BaseMajorContraband ]
+  parent: [ BaseMajorContraband, WeaponGaussgun ]
   id: WeaponGaussgunImprov
+  name: gauss rifle
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun.rsi
@@ -117,20 +109,26 @@
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/improv_gaussgun_back.rsi
   - type: Gun
-    minAngle: 40
-    maxAngle: 50
+    fireRate: 1.5
+    minAngle: 26
+    maxAngle: 37
   - type: Construction
     graph: GaussRifleGraph
     node: finish
 
 - type: entity
-  parent: [ WeaponGaussgun, BaseMajorContraband ]
+  parent: [ BaseMajorContraband, BaseWeaponGaussgun ]
   id: WeaponGaussgunPistol
   name: gauss pistol
-  description: A much ligher alternative to the Gaussgun, but far more innacurate and only semiautomatic.
+  description: A much ligher alternative to the gauss gun, but far more innacurate and only semiautomatic.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Item
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
     size: Small
@@ -139,9 +137,11 @@
     - 0,1,1,1
   - type: Clothing
     sprite: _Trauma/Objects/Weapons/Guns/Gaussguns/gausspistol.rsi
+    quickEquip: false
+    slots:
+    - belt
+    - suitStorage
   - type: Gun
-    minAngle: 10
-    maxAngle: 20
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

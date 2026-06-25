@@ -115,3 +115,12 @@ ghost-role-information-purple-snake-description = A menacing purple snake from K
 
 ghost-role-information-small-purple-snake-name = Small Purple Snake
 ghost-role-information-small-purple-snake-description = A smaller version of the menacing purple snake from Kepler-283c.
+
+ghost-role-information-sea-bunny-name = Sea Bunny
+ghost-role-information-sea-bunny-description = A sea version of the adorable bunny.
+
+ghost-role-information-bunny-name = Bunny
+ghost-role-information-bunny-description = The beloved bunny, cute, fluffy, and adorable.
+
+ghost-role-information-evil-bunny-name = Evil Bunny
+ghost-role-information-evil-bunny-description = KILL, MAIM, SLAUGHTER!!!

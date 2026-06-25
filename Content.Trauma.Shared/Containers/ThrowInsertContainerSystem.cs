@@ -67,7 +67,7 @@ public sealed partial class ThrowInsertContainerSystem : EntitySystem
             _audio.PlayLocal(ent.Comp.InsertSound, ent, null);
 
         if (thrower.IsValid())
-            _adminLogger.Add(LogType.Landed, LogImpact.Low, $"{ToPrettyString(args.Thrown)} thrown by {ToPrettyString(thrower):player} landed in {ToPrettyString(ent)}");
+            _adminLogger.Add(LogType.Landed, LogImpact.Low, $"{args.Thrown} thrown by {thrower:player} landed in {ent.Owner}");
     }
 }
 

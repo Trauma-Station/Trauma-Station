@@ -1,7 +1,7 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# Holographic Generator
 
 - type: cargoProduct
-  id: HolographicFieldGeneratorPurchase
+  id: HolographicFieldGenerator
   icon:
     sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_field_generator.rsi
     state: icon
@@ -11,11 +11,73 @@
   group: market
 
 - type: cargoProduct
-  id: HolographicBarrierGeneratorPurchase
+  id: HolographicBarrierGenerator
   icon:
     sprite: _FarHorizons/Structures/Machines/HolographicGenerators/holographic_barrier_generator.rsi
     state: icon
   product: CrateSecurityHolographicBarrierGenerator
   cost: 2000
   category: cargoproduct-category-name-security
+  group: market
+
+# Nuclear Reactor
+
+- type: cargoProduct
+  id: NuclearReactorFlatpackPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/cargo_icons.rsi
+    state: reactor
+  product: NuclearReactorFlatpack
+  cost: 15000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: GasTurbineFlatpackPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/cargo_icons.rsi
+    state: turbine
+  product: GasTurbineFlatpack
+  cost: 10000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: CerenkiteFuelRodPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
+    state: default_rod
+  product: CrateCerenkiteFuelRod
+  cost: 4000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: BohrumControlRodPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
+    state: default_rod
+  product: CrateBohrumControlRod
+  cost: 2000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: SteelGasChannelPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
+    state: default_rod
+  product: CrateSteelGasChannel
+  cost: 1000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: SteelHeatExhangerPurchase
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
+    state: default_rod
+  product: CrateSteelHeatExhanger
+  cost: 1000
+  category: cargoproduct-category-name-engineering
   group: market

@@ -39,3 +39,11 @@
   components:
   - type: Contraband
     allowedJobs: [ Chaplain ]
+
+- type: entity
+  abstract: true
+  id: BaseEngineeringCargoContraband # for workboots
+  parent: BaseRestrictedContraband
+  components:
+  - type: Contraband
+    allowedDepartments: [ Engineering, Cargo ]

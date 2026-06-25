@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "moxie_is_moxie",
+  "size": {
+    "x": 16,
+    "y": 16
+  },
+  "states": [
+    {
+      "name": "dart_frog1",
+      "directions": 4
+    },
+    {
+      "name": "dart_frog2",
+      "directions": 4
+    },
+    {
+      "name": "dart_frog3",
+      "directions": 4
+    },
+    {
+      "name": "dart_frog4",
+      "directions": 4
+    },
+    {
+      "name": "dart_frog5",
+      "directions": 4
+    },
+    {
+      "name": "dart_frog6",
+      "directions": 4
+    },
+    {
+      "name": "frog_dead1"
+    },
+    {
+      "name": "frog_dead2"
+    },
+    {
+      "name": "frog_dead3"
+    },
+    {
+      "name": "frog_dead4"
+    },
+    {
+      "name": "frog_dead5"
+    },
+    {
+      "name": "frog_dead6"
+    }
+  ]
+}

@@ -76,7 +76,7 @@
   - type: StationAiWhitelist
   - type: NpcFactionMember
     factions:
-    - AllHostile
+    - StationAiFaction # Trauma - Was AllHostile, New faction for station Ai
   - type: BatteryAmmoProvider
     proto: BulletEnergyTurretDisabler
     fireCost: 100

@@ -28,7 +28,7 @@
   - type: FishingSpot
     fishList: !type:NestedSelector
       tableId: PlasmaFishingLootTable
-    fishDefaultTimer: 25.0
+    fishDefaultTimer: 20.0
     fishTimerVariety: 15.0
   # Goobstation - fishing
   - type: Transform

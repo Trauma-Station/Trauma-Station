@@ -515,8 +515,8 @@
           types:
             Poison: -3
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
       - !type:HealthChange
         damage:
           types:
@@ -763,9 +763,12 @@
         - !type:ReagentCondition
           reagent: SalicylicAcid
           max: 25
-      - !type:EvenHealthChange
+      - !type:HealthChange
         damage:
-          Brute: 3
+         types:
+          Blunt: 1
+          Slash: 1
+          Piercing : 1
         conditions:
         - !type:ReagentCondition
           reagent: SalicylicAcid
@@ -818,9 +821,11 @@
         - !type:ReagentCondition
           reagent: Oxandrolone
           max: 25
-      - !type:EvenHealthChange
+      - !type:HealthChange
         damage:
-          Burn: 4
+         types:
+          Heat: 2
+          Cold: 2
         conditions:
         - !type:ReagentCondition
           reagent: Oxandrolone
@@ -879,8 +884,8 @@
           Burn: -2
           Toxin: -2
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        - !type:NestedCondition
+          proto: MobCritical
         - !type:ReagentCondition
           reagent: Atropine
           min: 0

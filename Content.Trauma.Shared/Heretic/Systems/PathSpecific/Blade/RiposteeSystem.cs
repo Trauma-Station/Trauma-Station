@@ -113,7 +113,7 @@ public sealed partial class RiposteeSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp(args.Used, out MeleeWeaponComponent? usedMelee) && !usedMelee.CanParryLight)
+        if (TryComp(args.Used, out MeleeWeaponComponent? usedMelee) && !usedMelee.CanBeParried)
             return;
 
         if (_mobState.IsIncapacitated(ent))

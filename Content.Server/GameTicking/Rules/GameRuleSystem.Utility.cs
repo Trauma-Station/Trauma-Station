@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Server.Station.Systems;
-using Content.Shared.Maps;
-// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Station.Components;
@@ -16,11 +12,6 @@ namespace Content.Server.GameTicking.Rules;
 
 public abstract partial class GameRuleSystem<T> where T: IComponent
 {
-    // <Goob>
-    [Dependency] private StationSystem _station = default!;
-    [Dependency] private TurfSystem _turf = default!;
-    // </Goob>
-
     protected EntityQueryEnumerator<ActiveGameRuleComponent, T, GameRuleComponent> QueryActiveRules()
     {
         return EntityQueryEnumerator<ActiveGameRuleComponent, T, GameRuleComponent>();
@@ -88,8 +79,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
         return false;
     }
 
-    // Goobstation start
-    // Goobstation - refactored this method. Split into 3 smaller methods and made it so that it picks main station grid.
+    // <Trauma> - refactored this method. Split into 3 smaller methods and made it so that it picks main station grid.
     protected bool TryFindRandomTileOnStation(Entity<StationDataComponent> station,
         out Vector2i tile,
         out EntityUid targetGrid,
@@ -105,59 +95,7 @@ public abstract partial class GameRuleSystem<T> where T: IComponent
         targetGrid = grid.Owner;
         return TryFindTileOnGrid(grid, out tile, out targetCoords);
     }
-
-    protected Entity<MapGridComponent>? GetStationMainGrid(Entity<StationDataComponent> station)
-    {
-        if (GetStationGridUid(station) is not {} grid ||
-            !TryComp(grid, out MapGridComponent? gridComp))
-            return null;
-
-        return (grid, gridComp);
-    }
-
-    protected EntityUid? GetStationGridUid(Entity<StationDataComponent> station)
-    {
-        foreach (var grid in station.Comp.Grids)
-        {
-            if (HasComp<BecomesStationComponent>(grid))
-                return grid;
-        }
-
-        return _station.GetLargestGrid((station, station));
-    }
-
-    protected bool TryFindTileOnGrid(Entity<MapGridComponent> grid,
-        out Vector2i tile,
-        out EntityCoordinates targetCoords,
-        int tries = 10)
-    {
-        tile = default;
-        targetCoords = EntityCoordinates.Invalid;
-
-        var aabb = grid.Comp.LocalAABB;
-
-        for (var i = 0; i < tries; i++)
-        {
-            var randomX = RobustRandom.Next((int) aabb.Left, (int) aabb.Right);
-            var randomY = RobustRandom.Next((int) aabb.Bottom, (int) aabb.Top);
-
-            tile = new Vector2i(randomX, randomY);
-
-            if (!_map.TryGetTile(grid.Comp, tile, out var selectedTile) || selectedTile.IsEmpty ||
-                _turf.IsSpace(selectedTile))
-                continue;
-
-            if (_atmosphere.IsTileSpace(grid.Owner, Transform(grid.Owner).MapUid, tile)
-                || _atmosphere.IsTileAirBlockedCached(grid.Owner, tile))
-                continue;
-
-            targetCoords = _map.GridTileToLocal(grid.Owner, grid.Comp, tile);
-            return true;
-        }
-
-        return false;
-    }
-    // Goobstation end
+    // </Trauma>
 
     protected void ForceEndSelf(EntityUid uid, GameRuleComponent? component = null)
     {
