@@ -10822,3 +10822,10 @@ Entries:
   id: 1210
   time: '2026-06-25T12:25:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3336
+- author: jhrushbe, deltanedas
+  changes:
+  - type: Add
+    message: Engi has been taken off of suicide watch.
+  id: 1211
+  time: '2026-06-25T14:03:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3323
