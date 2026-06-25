@@ -23,17 +23,17 @@ public partial class MartialArtsSystem
 
     private void InitializeCanPerformCombo()
     {
-        SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CanPerformComboComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
     }
 
-    private void OnMapInit(Entity<CanPerformComboComponent> ent, ref MapInitEvent args)
+    private void OnInit(Entity<CanPerformComboComponent> ent, ref ComponentInit args)
     {
+        ent.Comp.AllowedCombos.Clear();
         foreach (var item in ent.Comp.RoundstartCombos)
         {
             ent.Comp.AllowedCombos.Add(_proto.Index(item));
         }
-        Dirty(ent);
     }
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
