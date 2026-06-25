@@ -212,9 +212,11 @@
     tags:
     - DoorBumpOpener
     - FootstepSound
-  - type: XenomorphShoveTracker
-    shoveThreshold: 1
-    knockdownDuration: 3
+  - type: GrabStagesOverride
+    startingStage: Hard    
+  #- type: XenomorphShoveTracker
+    #shoveThreshold: 1
+    #knockdownDuration: 3
   - type: MovementAlwaysTouching # Trauma
 
 - type: entity
