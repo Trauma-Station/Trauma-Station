@@ -10753,3 +10753,10 @@ Entries:
   id: 1201
   time: '2026-06-24T22:45:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3244
+- author: TechnicViriato
+  changes:
+  - type: Tweak
+    message: Made it so snakes dont 2 hit kill you anymore.
+  id: 1202
+  time: '2026-06-25T02:24:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3320
