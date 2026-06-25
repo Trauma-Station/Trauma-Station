@@ -15,6 +15,7 @@
     receiveFrequencyId: BasicDevice
   - type: WirelessNetworkConnection
     range: 30
+  - type: MasterSiloClient # all silos get fed by the master silo
   # </Trauma>
   - type: Sprite
     sprite: Structures/Machines/silo.rsi

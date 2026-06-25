@@ -2,7 +2,6 @@
 
 using Content.Shared.Interaction;
 using Content.Shared.Materials;
-using Content.Shared.Materials.OreSilo;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Stacks;
@@ -85,7 +84,7 @@ public sealed partial class MasterSiloSystem : EntitySystem
     private bool FindSilosAccepting(EntityUid grid, EntityUid item)
     {
         _silos.Clear();
-        var query = EntityQueryEnumerator<OreSiloComponent, MaterialStorageComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<MaterialSiloClientComponent, MaterialStorageComponent, TransformComponent>();
         while (query.MoveNext(out var silo, out _, out var storage, out var xform))
         {
             if (xform.GridUid != grid || !_power.IsPowered(silo))

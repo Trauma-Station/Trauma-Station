@@ -256,15 +256,12 @@
     - TapeRecorderStatic
     - CondimentStatic
     dynamicPacks:
-    # <Trauma>
     - ServiceBoardsTrauma
     - ServiceBoardsGoob
     - Translators
-    # </Trauma>
     - Janitor
     - Instruments
     - FauxTiles
-    # - ServiceWeapons
     - MedicalMisc
     - MechBoardsCivilian
     - MechWeaponsCivilian
@@ -275,6 +272,7 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ServiceBoardsEvilStatic # Donk Co microwave circiutboard
+  - type: MasterSiloClient # probably only lathe in service
   - type: MaterialStorage
     whitelist:
       tags:
