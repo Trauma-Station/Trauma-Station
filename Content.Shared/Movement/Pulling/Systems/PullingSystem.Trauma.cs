@@ -243,7 +243,7 @@ public sealed partial class PullingSystem
             newStage = ev.Stage;
         }
         // allow entities to override starting grab stage
-        if (newStage == GrabStage.Soft && puller.Comp.StartingGrabStage != GrabStage.Soft)
+        else if (newStage == GrabStage.Soft && puller.Comp.StartingGrabStage != GrabStage.Soft)
         {
             newStage = puller.Comp.StartingGrabStage;
         }
