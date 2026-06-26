@@ -1,0 +1,4 @@
+- type: soundCollection # Omu start
+  id: ResomiCry
+  files:
+  - /Audio/_Floofstation/Voice/Avali/avali_cry.ogg

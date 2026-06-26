@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Common.Parry;
 using Content.Trauma.Common.Weapons;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
@@ -502,9 +501,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
                     return false;
                 break;
             default:
-                if (!weapon.CanHeavyAttack) // Goobstation
-                    return false;
-
                 if (!Blocker.CanAttack(user, weapon: (weaponUid, weapon)))
                     return false;
                 break;
@@ -589,7 +585,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     {
         // If I do not come back later to fix Light Attacks being Heavy Attacks you can throw me in the spider pit -Errant
         var damage = GetDamage(meleeUid, user, component) * GetHeavyDamageModifier(meleeUid, user, component);
-        var coords = GetCoordinates(ev.Coordinates); // Goobstation
         var weapon = GetEntity(ev.Weapon); // Goobstation - Edit
         var target = GetEntity(ev.Target);
         var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
@@ -664,22 +659,13 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         // somewhat messy scuffle. See also, heavy attacks.
         Interaction.DoContactInteraction(user, target);
 
-        // <Trauma>
-        if (component.CanParryLight && ev.CanParry)
-        {
-            var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, target.Value);
-            RaiseLocalEvent(target.Value, ref parryAttemptEv);
-            if (parryAttemptEv.Parried)
-                return;
-        }
-        // </Trauma>
-
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
         RaiseLocalEvent(target.Value, attackedEvent);
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
         // <Goob>
         modifiedDamage = DamageSpecifier.ApplyModifierSets(modifiedDamage, attackedEvent.ModifiersList);
+        modifiedDamage.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
         var comboEv = new ComboAttackPerformedEvent(user, target.Value, meleeUid, ComboAttackType.Harm);
         RaiseLocalEvent(user, ref comboEv);
         // </Goob>
@@ -845,16 +831,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
                 targets.RemoveAt(i);
                 continue;
             }
-
-            // <Trauma>
-            if (component.CanParryWide)
-            {
-                var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, entity);
-                RaiseLocalEvent(entity, ref parryAttemptEv);
-                if (parryAttemptEv.Parried)
-                    continue;
-            }
-            // </Trauma>
 
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);

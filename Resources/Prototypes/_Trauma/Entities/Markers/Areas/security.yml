@@ -100,6 +100,7 @@
   id: AreaPrison
   name: prison
   components:
+  - type: PrisonArea
   - type: Sprite
     state: sec_prison
 

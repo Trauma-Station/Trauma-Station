@@ -48,7 +48,7 @@ namespace Content.Shared.Movement.Components
             {
                 if (MathHelper.CloseToPercent(GrabRange, value)) return;
                 GrabRange = value;
-                Dirty();
+                //Dirty(); // Trauma - removed IComponent.Dirty, VV is automatically networked now anyway
             }
         }
 
@@ -60,7 +60,7 @@ namespace Content.Shared.Movement.Components
             {
                 if (MathHelper.CloseToPercent(PushStrength, value)) return;
                 PushStrength = value;
-                Dirty();
+                //Dirty(); // Trauma
             }
         }
     }
