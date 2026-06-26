@@ -17,7 +17,7 @@
   durability: 1.05
   shield: 1.05
   shieldFlat: 1.05
-  meleeDamage: 1.05
+  meleeDamage: 1.03
   price: 1.25
 
 - type: quality

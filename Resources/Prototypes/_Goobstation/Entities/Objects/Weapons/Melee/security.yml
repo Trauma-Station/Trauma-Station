@@ -135,6 +135,7 @@
   - type: Tag
     tags:
     - SecBeltEquip
+    - Spear
 
 - type: entity
   id: Betty

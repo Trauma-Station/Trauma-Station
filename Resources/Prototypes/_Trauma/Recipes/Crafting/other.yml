@@ -21,6 +21,77 @@
     RevolutionaryKnowledge: 3
 
 - type: construction
+  id: BarbWireStructure
+  graph: BarbedWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    FabricationKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: TripWire
+  graph: TripWire
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: PipeBombTrap
+  graph: PipeBombTrap
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  targetNode: finish
+  category: construction-category-structures
+  theory:
+    ElectronicsKnowledge: 1
+    MechanicsKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: BarbedWireMaterial
+  graph: BarbedWireMaterial
+  startNode: start
+  targetNode: BarbedWire
+  category: construction-category-materials
+  objectType: Item
+  theory:
+    MaterialsKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: BarbedWireMaterial0
+  graph: BarbedWireMaterial
+  startNode: start
+  targetNode: BarbedWire0
+  category: construction-category-materials
+  objectType: Item
+  theory:
+    MaterialsKnowledge: 0
+  useQuality: false
+
+- type: construction
+  id: BarbedWireMaterial1
+  graph: BarbedWireMaterial
+  startNode: start
+  targetNode: BarbedWire1
+  category: construction-category-materials
+  objectType: Item
+  theory:
+    MaterialsKnowledge: 0
+  useQuality: false
+
+- type: construction
   abstract: true
   id: BaseRepairItem
   targetNode: finish

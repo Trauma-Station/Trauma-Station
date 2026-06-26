@@ -179,6 +179,11 @@
   id: BaseMobXenomorphAdult
   abstract: true
   components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepXenomorph
+      params:
+        volume: -6
   - type: Prying
     speedModifier: 5
     pryPowered: true
@@ -208,6 +213,8 @@
     - DoorBumpOpener
     - FootstepSound
   - type: XenomorphShoveTracker
+    shoveThreshold: 1
+    knockdownDuration: 3
   - type: MovementAlwaysTouching # Trauma
 
 - type: entity

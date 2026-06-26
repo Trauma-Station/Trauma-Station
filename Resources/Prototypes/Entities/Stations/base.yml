@@ -9,6 +9,7 @@
   abstract: true
   components:
     - type: StationBankAccount
+      primaryCut: 0.9 # Trauma
     - type: StationCargoOrderDatabase
       orders:
         Cargo: [ ]

@@ -11,7 +11,7 @@
   - type: FishingSpot
     fishList: !type:NestedSelector
       tableId: LavaFishingLootTable
-    fishDefaultTimer: 25.0
+    fishDefaultTimer: 20.0
     fishTimerVariety: 15.0
   - type: CosmicCorruptible
     convertTo: FloorCosmicDecay

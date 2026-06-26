@@ -10,6 +10,15 @@
   price: 0.1 # $10 for 1 unit
 
 - type: material
+  id: BarbedWire
+  stackEntity: BarbedWire1
+  name: materials-barbedwire
+  unit: materials-unit-roll
+  icon: { sprite: /Textures/_Trauma/Objects/Materials/barbwire.rsi, state: icon }
+  color: "#929292"
+  price: 0.1 # $10 for 1 unit
+
+- type: material
   id: Brick
   stackEntity: Brick1
   name: materials-brick

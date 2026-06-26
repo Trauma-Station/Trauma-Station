@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Materials;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -342,6 +345,13 @@ public abstract partial class SharedMaterialStorageSystem : EntitySystem
 
         if (!Resolve(toInsert, ref material, ref composition, false))
             return false;
+
+        // <Trauma>
+        var attemptEv = new MaterialStorageInsertAttemptEvent(toInsert, user);
+        RaiseLocalEvent(receiver, ref attemptEv);
+        if (attemptEv.Handled)
+            return !attemptEv.Cancelled;
+        // </Trauma>
 
         if (_whitelistSystem.IsWhitelistFail(storage.Whitelist, toInsert))
             return false;
