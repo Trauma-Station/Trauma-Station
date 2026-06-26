@@ -76,7 +76,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             var job = possibleJobs[index];
             possibleJobs.RemoveAt(index);
 
-            if (HasSideJob(jobBoard, job))
+            if (!CanAddSideJob(jobBoard, job))
                 continue;
 
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
@@ -154,6 +154,13 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             _hands.PickupOrDrop(actor, reward);
         }
 
+        if (!sideJobComp.Repeatable)
+        {
+            var availableSideJobProto = MetaData(sideJob).EntityPrototype;
+            if (availableSideJobProto is not null)
+                jobBoard.Comp.CompletedObjectives.Add(availableSideJobProto.ID);
+        }
+
         jobBoard.Comp.Reputation += sideJobComp.ReputationGain;
         QueueDel(sideJob);
     }
@@ -162,16 +169,19 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// Determines if the job board already has the current side job as either available, accepted or completed.
     /// Used to avoid adding the same objective twice.
     /// </summary>
-    public bool HasSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJobProtoId)
+    public bool CanAddSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJobProtoId)
     {
+        if (jobBoard.Comp.CompletedObjectives.Contains(sideJobProtoId))
+            return false;
+
         foreach (var availableSideJob in jobBoard.Comp.AvailableSideJobs)
         {
             var availableSideJobProto = MetaData(availableSideJob).EntityPrototype;
             if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
-                return true;
+                return false;
         }
 
-        return false;
+        return true;
     }
 
     /// <summary>

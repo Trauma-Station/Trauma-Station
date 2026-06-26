@@ -103,7 +103,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
     }
 
     private String FormatTime(TimeSpan time) {
-        return $"{time.TotalMinutes:0}m {time.Seconds}s";
+        return $"{time.TotalMinutes.Floor():0}m {time.Seconds}s";
     }
 
     private SideJobControl CreateControl(SideJobInfo info)
