@@ -31,6 +31,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
             return;
 
         _menu?.SetReputation(jobListingsState.Reputation, jobListingsState.ReputationLevel);
+        _menu?.SetRefresh(jobListingsState.BonusRefresh, jobListingsState.RefreshTime, jobListingsState.RefreshWaitDuration);
         _menu?.MaximumAcceptedSideJobs = jobListingsState.MaximumAcceptedSideJobs;
         _menu?.ClearJobListings();
         foreach (var sideJob in jobListingsState.AvailableSideJobs)

@@ -243,7 +243,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
                 break;
         }
 
-        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, reputationLevel, jobBoard.Value.Comp.MaximumAcceptedSideJobs);
+        var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, reputationLevel, jobBoard.Value.Comp.MaximumAcceptedSideJobs, jobBoard.Value.Comp.BonusRefresh, jobBoard.Value.Comp.RefreshTime, jobBoard.Value.Comp.RefreshWaitDuration);
         _ui.SetUiState(owner, JobListingsUiKey.Key, state);
     }
 
@@ -295,6 +295,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         jobBoard.Comp.Remotes.Add(remote);
     }
 
+    /// <summary>
+    /// Set the time when the refresh button on this job board will become available.
+    /// </summary>
+    public void SetRefreshTime(Entity<JobListingsComponent> jobBoard)
+    {
+        jobBoard.Comp.RefreshTime = _timing.CurTime + jobBoard.Comp.RefreshWaitDuration;
+    }
+
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
@@ -308,6 +316,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
         FillSideJobs((args.Store, jobListingsComp));
         Link((args.Store, jobListingsComp), args.Host);
+        SetRefreshTime((args.Store, jobListingsComp));
     }
 
     private void OnMessage(Entity<PdaComponent> pda, ref PdaShowJobListingsMessage msg)

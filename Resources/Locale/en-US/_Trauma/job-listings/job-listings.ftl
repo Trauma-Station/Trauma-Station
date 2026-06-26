@@ -10,6 +10,7 @@ job-listings-ui-confirmation-button = Sure?
 job-listings-ui-claim-button = Claim
 job-listings-ui-refresh-button = Refresh
 job-listings-ui-refresh-timer-label = Refresh in: {$time}
+job-listings-ui-refresh-timer-label-available = Refresh Available
 job-listings-ui-no-accepted-note = No jobs currently accepted...
 job-listings-ui-no-available-note = No jobs currently offered...
 

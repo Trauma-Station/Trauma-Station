@@ -3,21 +3,29 @@
 using System.Linq;
 using Content.Trauma.Common.JobListings;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.JobListings;
 
 [GenerateTypedNameReferences]
 public sealed partial class JobListingsMenu : DefaultWindow
 {
+    [Dependency] private IGameTiming _timing = default!;
+
+    private TimeSpan? _refreshTimerBarTime;
+
     public Action<NetEntity>? OnJobAccepted;
     public Action<NetEntity>? OnJobCancelled;
     public Action<NetEntity>? OnJobClaimed;
+    public Action? OnRefresh;
 
     public int MaximumAcceptedSideJobs;
 
     public JobListingsMenu()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
+        RefreshButton.OnPressed += _ => OnRefresh?.Invoke();
     }
 
     public void ClearJobListings()
@@ -46,6 +54,56 @@ public sealed partial class JobListingsMenu : DefaultWindow
     {
         ReputationText.Text = Loc.GetString("job-listings-ui-reputation", ("reputation", reputation));
         ReputationInfo.Text = Loc.GetString($"job-listings-ui-reputation-level-{level}");
+    }
+
+    public void SetRefresh(bool bonus, TimeSpan? refreshTime, TimeSpan refreshWaitDuration) {
+        RefreshButton.Disabled = true;
+
+        if (bonus)
+        {
+            RefreshTimerProgressBar.MaxValue = 1;
+            RefreshTimerProgressBar.Value = 1;
+            RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label-available");
+            RefreshButton.Disabled = false;
+            _refreshTimerBarTime = null;
+            return;
+        }
+
+        if (refreshTime is null) {
+            RefreshTimerProgressBar.MaxValue = 1;
+            RefreshTimerProgressBar.Value = 0;
+            RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label", ("time", FormatTime(refreshWaitDuration)));
+            _refreshTimerBarTime = null;
+            return;
+        }
+
+        RefreshTimerProgressBar.MaxValue = (float) refreshWaitDuration.TotalSeconds;
+        _refreshTimerBarTime = refreshTime.Value;
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        if (_refreshTimerBarTime is null)
+            return;
+
+        RefreshButton.Disabled = true;
+
+        if (_timing.CurTime >= _refreshTimerBarTime.Value) {
+            RefreshTimerProgressBar.MaxValue = 1;
+            RefreshTimerProgressBar.Value = 1;
+            RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label-available");
+            RefreshButton.Disabled = false;
+            return;
+        }
+
+        var time = _refreshTimerBarTime.Value - _timing.CurTime;
+        RefreshTimerProgressBar.Value = (float) time.TotalSeconds;
+        RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label", ("time", FormatTime(time)));
+    }
+
+    private String FormatTime(TimeSpan time) {
+        return $"{time.TotalMinutes:0}m {time.Seconds}s";
     }
 
     private SideJobControl CreateControl(SideJobInfo info)

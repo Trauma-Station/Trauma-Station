@@ -77,8 +77,20 @@ public sealed partial class JobListingsComponent : Component
     public List<EntProtoId> CompletedObjectives = new();
 
     /// <summary>
-    /// If the job board's objectives can be refreshed.
+    /// If the job board has a bonus refresh available from leveling up.
     /// </summary>
     [DataField]
-    public bool CanRefresh = false;
+    public bool BonusRefresh = false;
+
+    /// <summary>
+    /// The time when the job board's refresh button becomes available.
+    /// </summary>
+    [DataField]
+    public TimeSpan? RefreshTime;
+
+    /// <summary>
+    /// How long it takes for the job board's refresh button to become available.
+    /// </summary>
+    [DataField]
+    public TimeSpan RefreshWaitDuration = TimeSpan.FromMinutes(1);
 }

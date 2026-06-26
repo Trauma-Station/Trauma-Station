@@ -45,13 +45,16 @@ public record struct SideJobInfo(string Title, string Description, SpriteSpecifi
 /// Bui state describing a job board.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, int reputation, int reputationLevel, int maximumAcceptedSideJob) : BoundUserInterfaceState
+public sealed class JobListingsUserInterfaceState(List<SideJobInfo> availableSideJobs, List<SideJobInfo> acceptedSideJobs, int reputation, int reputationLevel, int maximumAcceptedSideJob, bool bonusRefresh, TimeSpan? refreshTime, TimeSpan refreshWaitDuration) : BoundUserInterfaceState
 {
     public readonly List<SideJobInfo> AvailableSideJobs = availableSideJobs;
     public readonly List<SideJobInfo> AcceptedSideJobs = acceptedSideJobs;
     public readonly int Reputation = reputation;
     public readonly int ReputationLevel = reputationLevel;
     public readonly int MaximumAcceptedSideJobs = maximumAcceptedSideJob;
+    public readonly bool BonusRefresh = bonusRefresh;
+    public readonly TimeSpan? RefreshTime = refreshTime;
+    public readonly TimeSpan RefreshWaitDuration = refreshWaitDuration;
 }
 
 [Serializable, NetSerializable]
