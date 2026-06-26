@@ -98,7 +98,7 @@ public sealed partial class JobListingsMenu : DefaultWindow
         }
 
         var time = _refreshTimerBarTime.Value - _timing.CurTime;
-        RefreshTimerProgressBar.Value = (float) time.TotalSeconds;
+        RefreshTimerProgressBar.Value = RefreshTimerProgressBar.MaxValue - (float) time.TotalSeconds;
         RefreshTimerLabel.Text = Loc.GetString("job-listings-ui-refresh-timer-label", ("time", FormatTime(time)));
     }
 

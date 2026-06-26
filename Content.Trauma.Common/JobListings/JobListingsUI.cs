@@ -36,6 +36,15 @@ public sealed class JobListingsClaimJobMessage(NetEntity job) : BoundUserInterfa
 }
 
 /// <summary>
+/// Message send by job listings bui when the refresh button is pressed.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class JobListingsRefreshMessage : BoundUserInterfaceMessage
+{
+
+}
+
+/// <summary>
 /// Info describing a side job.
 /// </summary>
 [Serializable, NetSerializable]

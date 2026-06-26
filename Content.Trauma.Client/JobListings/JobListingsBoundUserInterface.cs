@@ -14,6 +14,7 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
         _menu.OnJobAccepted += OnJobAccepted;
         _menu.OnJobClaimed += OnJobClaimed;
         _menu.OnJobCancelled += OnJobCancelled;
+        _menu.OnRefresh += OnRefresh;
     }
 
     [ViewVariables]
@@ -57,5 +58,10 @@ public sealed class JobListingsBoundUserInterface : BoundUserInterface
     private void OnJobCancelled(NetEntity job)
     {
         SendMessage(new JobListingsCancelJobMessage(job));
+    }
+
+    private void OnRefresh()
+    {
+        SendMessage(new JobListingsRefreshMessage());
     }
 }

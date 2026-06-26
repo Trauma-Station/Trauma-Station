@@ -47,6 +47,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsAcceptJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsClaimJobMessage>(OnMessage);
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsCancelJobMessage>(OnMessage);
+        SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsRefreshMessage>(OnMessage);
 
         InitializeReward();
     }
@@ -303,6 +304,32 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         jobBoard.Comp.RefreshTime = _timing.CurTime + jobBoard.Comp.RefreshWaitDuration;
     }
 
+    /// <summary>
+    /// Determines if the job board can be refreshed at this current time.
+    /// This is a final server-side check.
+    /// </summary>
+    public bool CanRefresh(Entity<JobListingsComponent> jobBoard)
+    {
+        return jobBoard.Comp.BonusRefresh || jobBoard.Comp.RefreshTime is not null && _timing.CurTime >= jobBoard.Comp.RefreshTime;
+    }
+
+    /// <summary>
+    /// Refresh the job board.
+    /// This has no checks and should only be called if <see cref="CanRefresh"/> returns true.
+    /// This method deletes every job not currently accepted and then assigns jobs until the job board is full.
+    /// </summary>
+    public void Refresh(Entity<JobListingsComponent> jobBoard)
+    {
+        foreach (var job in jobBoard.Comp.AvailableSideJobs)
+        {
+            QueueDel(job);
+        }
+        jobBoard.Comp.AvailableSideJobs.Clear();
+
+        SetRefreshTime(jobBoard);
+        FillSideJobs(jobBoard);
+    }
+
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
         if (!TryComp<JobListingsComponent>(args.Store, out var jobListingsComp))
@@ -345,6 +372,16 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!GetJobBoard(owner.Owner, out var jobBoard))
             return;
         CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
+        UpdateUi(owner.Owner);
+    }
+
+    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
+    {
+        if (!GetJobBoard(owner.Owner, out var jobBoard))
+            return;
+        if (!CanRefresh(jobBoard.Value))
+            return;
+        Refresh(jobBoard.Value);
         UpdateUi(owner.Owner);
     }
 }
