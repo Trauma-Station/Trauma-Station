@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseFish
   id: BaseFishTrauma
   components:
@@ -17,7 +18,6 @@
   components:
   - type: Sprite
     state: abductor
-  - type: Item
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -32,7 +32,6 @@
   components:
   - type: Sprite
     state: dumbguy
-  - type: Item
 
 - type: entity
   parent: BaseFishTrauma
@@ -42,7 +41,6 @@
   components:
   - type: Sprite
     state: fatfuckingcunt
-  - type: Item
 
 - type: entity
   parent: BaseFishTrauma
@@ -52,17 +50,15 @@
   components:
   - type: Sprite
     state: needlefish
-  - type: Item
 
 - type: entity
-  parent: BaseFishTrauma
+  parent: [ BaseFishTrauma, BaseMagicalContraband ]
   id: FishSquid
   name: squid
   description: Full of ink!
   components:
   - type: Sprite
     state: squid
-  - type: Item
   - type: Butcherable
     spawned:
     - id: FoodMeatFish

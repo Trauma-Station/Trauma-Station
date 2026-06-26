@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [FoodMeatBase, BaseGrandTheftContraband]
+  id: FoodMeatCorgiFish
+  name: prime-cut corgi meat
+  suffix: Fish
+  description: The stinky gift of an evil fish. The meat may be delicious, but at what cost?
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - HighRiskItem
+    - Meat
+  - type: Sprite
+    state: corgi
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 10
+      - ReagentId: Bicaridine
+        Quantity: 20
+  - type: StaticPrice
+    price: 750 # still good money
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: corgi-inhand-left
+      right:
+      - state: corgi-inhand-right
