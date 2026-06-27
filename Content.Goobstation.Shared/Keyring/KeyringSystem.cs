@@ -69,7 +69,7 @@ public sealed partial class KeyringSystem : EntitySystem
         var popup = Loc.GetString("keyring-start-unlock-popup");
         _popup.PopupClient(popup, args.User, args.User);
 
-        _audio.PlayClient(keyring.Comp.UseSound, keyring, args.User);
+        _audio.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
 
         args.Handled = true;
     }
