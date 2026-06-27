@@ -7,13 +7,12 @@ using Content.Goobstation.Shared.Clothing;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Clothing.Systems;
 
-public sealed class SealableClothingVisualizerSystem : VisualizerSystem<SealableClothingVisualsComponent>
+public sealed partial class SealableClothingVisualizerSystem : VisualizerSystem<SealableClothingVisualsComponent>
 {
-    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
+    [Dependency] private SharedItemSystem _itemSystem = default!;
 
     public override void Initialize()
     {

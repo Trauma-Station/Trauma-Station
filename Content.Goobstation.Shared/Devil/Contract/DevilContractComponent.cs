@@ -16,7 +16,7 @@ public sealed partial class DevilContractComponent : Component
     /// <summary>
     /// The entity who created the contract, AKA, the entity who gains the soul.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? ContractOwner;
 
     /// <summary>

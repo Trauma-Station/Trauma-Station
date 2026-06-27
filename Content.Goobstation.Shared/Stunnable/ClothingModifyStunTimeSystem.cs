@@ -5,7 +5,7 @@ using Content.Shared.Inventory;
 
 namespace Content.Goobstation.Shared.Stunnable;
 
-public sealed class ClothingModifyStunTimeSystem : EntitySystem
+public sealed partial class ClothingModifyStunTimeSystem : EntitySystem
 {
     public override void Initialize()
     {

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: seed
   id: Lemonade
   name: seeds-lemonade-name
@@ -74,18 +76,18 @@
   nutrientConsumption: 1
   idealLight: 8
   chemicals:
-    CoconutWater:
+    CoconutFlesh:
       Min: 1
       Max: 20
-      PotencyDivisor: 5
+      PotencyDivisor: 2
     Vitamin:
       Min: 1
       Max: 10
-      PotencyDivisor: 5
-    Nutriment:
+      PotencyDivisor: 2
+    CoconutWater:
       Min: 1
       Max: 10
-      PotencyDivisor: 5
+      PotencyDivisor: 2
 
 - type: seed
   id: CherryBomb

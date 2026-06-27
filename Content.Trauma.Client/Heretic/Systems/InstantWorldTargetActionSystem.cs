@@ -8,9 +8,9 @@ using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class InstantWorldTargetActionSystem : SharedInstantWorldTargetActionSystem
+public sealed partial class InstantWorldTargetActionSystem : SharedInstantWorldTargetActionSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private ActionsSystem _actions = default!;
 
     public override void Initialize()
     {

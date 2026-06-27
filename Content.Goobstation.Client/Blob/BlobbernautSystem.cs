@@ -3,16 +3,15 @@
 using Content.Client.DamageState;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Blob;
 
-public sealed class BlobbernautSystem : SharedBlobbernautSystem
+public sealed partial class BlobbernautSystem : SharedBlobbernautSystem
 {
 
 }
 
-public sealed class BlobbernautVisualizerSystem : VisualizerSystem<BlobbernautComponent>
+public sealed partial class BlobbernautVisualizerSystem : VisualizerSystem<BlobbernautComponent>
 {
     public override void Initialize()
     {

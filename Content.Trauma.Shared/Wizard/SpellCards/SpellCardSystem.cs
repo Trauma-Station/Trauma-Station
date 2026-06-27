@@ -12,13 +12,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Wizard.SpellCards;
 
-public sealed class SpellCardSystem : EntitySystem
+public sealed partial class SpellCardSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly TileFrictionController _tileFriction = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private TileFrictionController _tileFriction = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<HomingProjectileComponent> _homingQuery;

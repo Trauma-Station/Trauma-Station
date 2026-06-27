@@ -5,23 +5,38 @@ using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
+using Content.Shared.Interaction.Events;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Content.Trauma.Shared.Heretic.Components.Side;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedGhoulSystem : EntitySystem
+public abstract partial class SharedGhoulSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
-    [Dependency] private readonly EntityQuery<BrainComponent> _brainQuery = default!;
-    [Dependency] private readonly EntityQuery<WoundableComponent> _woundableQuery = default!;
+    [Dependency] private EntityQuery<BrainComponent> _brainQuery = default!;
+    [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<GhoulComponent, BeforeMindSwappedEvent>(OnBeforeMindSwap);
+
+        SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
     }
+
+    private void OnTryAttack(Entity<HereticMinionComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        if (target == ent.Comp.BoundHeretic || HasComp<ShadowCloakEntityComponent>(target) &&
+            Transform(target).ParentUid == ent.Comp.BoundHeretic)
+            args.Cancel();
+    }
+
 
     private void OnBeforeMindSwap(Entity<GhoulComponent> ent, ref BeforeMindSwappedEvent args)
     {

@@ -20,22 +20,22 @@ namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly GeneticsDiskSystem _disk = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly MutationSystem _mutation = default!;
-    [Dependency] private readonly MutatorSystem _mutator = default!;
-    [Dependency] private readonly ScannedGenomeSystem _genome = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityQuery<MaterialStorageComponent> _materialQuery = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private GeneticsDiskSystem _disk = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private MutationSystem _mutation = default!;
+    [Dependency] private MutatorSystem _mutator = default!;
+    [Dependency] private ScannedGenomeSystem _genome = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMaterialStorageSystem _material = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityQuery<MaterialStorageComponent> _materialQuery = default!;
 
     private StringBuilder _builder = new();
 
@@ -105,7 +105,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         if (now < ent.Comp.NextScramble)
             return;
 
-        _adminLog.Add(LogType.Genetics, LogImpact.High, $"Scrambled genome of {ToPrettyString(mob)} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.High, $"Scrambled genome of {mob:target} by {args.Actor:user} using console {ent.Owner:console}");
 
         _damage.ChangeDamage(mob, ent.Comp.ScrambleDamage);
 
@@ -165,7 +165,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             return;
 
         // incase some shitter runs in and erases all your progress on your monkey idk
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(mob)} sequence {args.Index} was reset by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mob:target} sequence {args.Index} was reset by {args.Actor:user} using console {ent.Owner:console}");
 
         sequence.Bases = sequence.OriginalBases;
         UpdateUI(ent.Owner);
@@ -228,7 +228,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         ent.Comp.NextWrite = now + ent.Comp.WriteDelay;
         DirtyField(ent.AsNullable(), nameof(GeneticsConsoleComponent.NextWrite));
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mutation} from {ToPrettyString(mob)} was written to {ToPrettyString(disk)} by {ToPrettyString(args.Actor)} using console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mutation} from {mob:target} was written to {disk.Owner:disk} by {args.Actor:user} using console {ent.Owner:console}");
         _audio.PlayPvs(ent.Comp.WriteSound, ent);
         _disk.SetMutation(disk, mutation);
     }
@@ -304,7 +304,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
         Speak(ent, "combined");
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"{result} combined from {mutation} and {diskMutation} by {ToPrettyString(args.User)} using console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"{result} combined from {mutation} and {diskMutation} by {args.User:user} using console {ent.Owner}");
 
         // it isn't discovered so you have to figure out what it is before it's too late...
         _genome.TryAddSequence(mob, result);
@@ -345,7 +345,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         _mutator.AddMutation(item, mutation);
         _audio.PlayPredicted(ent.Comp.PrintSound, ent, user);
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"Printed {ToPrettyString(item)} with {mutation} by {ToPrettyString(user)} using console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Medium, $"Printed {item:item} with {mutation} by {user:user} using console {ent.Owner:console}");
     }
 
     private void Speak(EntityUid uid, string suffix)

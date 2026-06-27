@@ -20,12 +20,12 @@ namespace Content.Trauma.Shared.MartialArts;
 /// </summary>
 public sealed partial class MartialArtsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    //[Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    //[Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     /// <summary>
     /// Minimum velocity in m/s to scale capoeira effects (like damage) with the user's level.

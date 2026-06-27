@@ -17,12 +17,12 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class SpellbladeSystem : SharedSpellbladeSystem
+public sealed partial class SpellbladeSystem : SharedSpellbladeSystem
 {
-    [Dependency] private readonly LightningSystem _lightning = default!;
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private LightningSystem _lightning = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

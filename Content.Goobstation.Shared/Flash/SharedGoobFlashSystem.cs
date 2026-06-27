@@ -6,10 +6,10 @@ using Robust.Shared.Configuration;
 
 namespace Content.Goobstation.Shared.Flash;
 
-public sealed class SharedGoobFlashSystem : EntitySystem
+public sealed partial class SharedGoobFlashSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private  readonly IConfigurationManager _cfg = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private bool _checkDirection = true;
     /// <inheritdoc/>

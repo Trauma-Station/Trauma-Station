@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ ClothingNeckBase, BaseRevMajorContraband ]
   id: ClothingRevolutionaryIFF
@@ -25,6 +27,8 @@
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Neck/bombcollar.rsi
+  - type: AddAccentClothing
+    accent: RussianAccent
   - type: Unremoveable
   - type: FactionClothing
     faction: Insurgent

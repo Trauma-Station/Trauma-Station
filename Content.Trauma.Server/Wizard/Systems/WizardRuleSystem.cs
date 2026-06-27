@@ -36,19 +36,19 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
+public sealed partial class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
 {
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly AtmosphereSystem _atmos = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
-    [Dependency] private readonly IAdminLogManager _log = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private IAdminLogManager _log = default!;
+    [Dependency] private IChatManager _chatManager = default!;
 
     public static readonly ProtoId<NpcFactionPrototype> Faction = "Wizard";
 

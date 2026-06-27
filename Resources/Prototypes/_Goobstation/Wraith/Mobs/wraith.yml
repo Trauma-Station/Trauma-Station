@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This is where the wraith mob exists, and all its variants (Harbinger, Plaguebringer, Trickster)
 
 - type: entity
@@ -57,8 +59,9 @@
     - Stun
     - Corporeal
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: NoSlip
   - type: PointLight
     enabled: true

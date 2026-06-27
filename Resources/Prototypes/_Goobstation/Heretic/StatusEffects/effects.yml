@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: StatusEffectBase
@@ -44,15 +46,6 @@
     - type: EntropicPlumeAffected
       duration: null
       sprite: null
-
-- type: entity
-  parent: MobStatusEffectBase
-  id: StatusEffectCurseOfBlindness
-  name: curse of blindness
-  components:
-  - type: GrantComponentsStatusEffect
-    components:
-    - type: TemporaryBlindness
 
 - type: entity
   parent: MobStatusEffectBase

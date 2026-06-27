@@ -12,14 +12,14 @@ using Robust.Server.Player;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class ScryingOrbSystem : SharedScryingOrbSystem
+public sealed partial class ScryingOrbSystem : SharedScryingOrbSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedGhostSystem _ghost = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedGhostSystem _ghost = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private static readonly EntProtoId ObserverProto = "MobObserverWizard";
 
@@ -114,6 +114,6 @@ public sealed class ScryingOrbSystem : SharedScryingOrbSystem
             _meta.SetEntityName(ghost, session.Name);
 
         _mind.Visit(mind, ghost, mindComp);
-        _ghost.SetCanReturnToBody(Comp<GhostComponent>(ghost), true);
+        _ghost.SetCanReturnToBody((ghost, null), true);
     }
 }

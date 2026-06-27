@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: listing
   id: UplinkUltrabrightLantern
   name: uplink-ultrabright-lantern-name
@@ -5,6 +7,16 @@
   productEntity: LanternFlash
   cost:
     Telecrystal: 5 # literal maints gear, its more useful to just have a backup light option
+  categories:
+  - UplinkDeception
+
+- type: listing
+  id: UplinkStorageBriefCase
+  name: uplink-storage-briefcase-name
+  description: uplink-storage-briefcase-desc
+  productEntity: BriefcaseBrownFake
+  cost:
+    Telecrystal: 5
   categories:
   - UplinkDeception
 

@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Client.LinkAccount;
-// </Trauma>
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -69,8 +66,6 @@ namespace Content.Client.IoC
             collection.Register<ClientsidePlaytimeTrackingManager>();
             collection.Register<ClientFeedbackManager>();
             collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
-            collection.Register<IPostInjectInit, LinkAccountManager>(); // Trauma - RMC - Patreon
-            collection.Register<LinkAccountManager>(); // Trauma - RMC - Patreon
         }
     }
 }

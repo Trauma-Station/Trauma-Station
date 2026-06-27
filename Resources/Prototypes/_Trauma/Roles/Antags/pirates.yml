@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antagSpecifier
+  id: PirateCaptain
+  spawnerPrototype: SpawnPointPirateCaptain
+  startingGear: PirateGear
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - NamesDeathCommando

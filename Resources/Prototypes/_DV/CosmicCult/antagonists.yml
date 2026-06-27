@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: antag
   id: CosmicAntagCultist
   name: roles-antag-cosmiccult-name
@@ -6,7 +8,7 @@
   objective: roles-antag-cosmiccult-description
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 43200 # 12h
+    time: 2h
   guides: [ CosmicCult ]
   creditImage: /Textures/_Trauma/EndCredits/Antags/cosmiccult.png
 
@@ -15,6 +17,24 @@
   name: ghost-role-information-colossus-name
   antagonist: true
   objective: ghost-role-colossus-objective
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: CosmicCultist
+  jobBlacklist: [ Chaplain ]
+  components:
+  - type: CosmicCult
+  prefRoles: [ CosmicAntagCultist ]
+  mindRoles: [ MindRoleCosmicCult ]
+
+- type: antagSpecifier
+  id: CosmicColossus
+  spawnerPrototype: SpawnPointCosmicColossus
+  briefing:
+    text: ghost-role-colossus-briefing
+    color: CadetBlue
+    sound: /Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg
+  mindRoles: [ MindRoleCosmicColossus ]
 
 - type: antagSmite
   id: CosmicCultist

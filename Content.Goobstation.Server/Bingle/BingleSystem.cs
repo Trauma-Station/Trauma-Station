@@ -16,12 +16,12 @@ using Robust.Shared.Map;
 // TODO: predict everything but polymorph bruh
 namespace Content.Goobstation.Server.Bingle;
 
-public sealed class BingleSystem : EntitySystem
+public sealed partial class BingleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public static readonly EntProtoId ActionBingleUpgrade = "ActionBingleUpgrade";
 

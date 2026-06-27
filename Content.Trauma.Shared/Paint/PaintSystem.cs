@@ -13,12 +13,12 @@ using Content.Trauma.Shared.Tools;
 
 namespace Content.Trauma.Shared.Paint;
 
-public sealed class PaintSystem : EntitySystem
+public sealed partial class PaintSystem : EntitySystem
 {
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<PaintCanComponent> _query = default!;
+    [Dependency] private OpenableSystem _openable = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<PaintCanComponent> _query = default!;
 
     public override void Initialize()
     {

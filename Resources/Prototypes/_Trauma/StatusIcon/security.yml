@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: securityIcon
+  parent: SecurityIcon
+  id: SecurityIconBrutalize
+  icon:
+    sprite: /Textures/Interface/Misc/security_icons.rsi
+    state: hud_brutalize
+
+- type: securityIcon
+  parent: SecurityIcon
+  id: SecurityIconDemote
+  icon:
+    sprite: /Textures/Interface/Misc/security_icons.rsi
+    state: hud_demote

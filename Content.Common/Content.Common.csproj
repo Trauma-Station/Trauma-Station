@@ -6,10 +6,6 @@
     </PropertyGroup>
     <Import Project="../MSBuild/Content.props" />
 
-    <ItemGroup>
-      <ProjectReference Include="..\Content.ModuleManager\Content.ModuleManager.csproj" />
-    </ItemGroup>
-
     <Import Project="../RobustToolbox/Imports/Shared.props" />
     <Import Project="../RobustToolbox/MSBuild/Robust.Properties.targets" />
 </Project>

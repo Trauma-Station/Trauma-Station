@@ -216,6 +216,8 @@
       prob: 0.25
     - id: EmptyScroll
       prob: 0.001
+    - id: KnittedBalaclava
+      prob: 0.35
     # </Trauma>
     # Tools
     - !type:NestedSelector

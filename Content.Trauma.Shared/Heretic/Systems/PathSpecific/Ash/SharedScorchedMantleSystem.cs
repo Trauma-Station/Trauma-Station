@@ -9,9 +9,9 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
-public abstract class SharedScorchedMantleSystem : EntitySystem
+public abstract partial class SharedScorchedMantleSystem : EntitySystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

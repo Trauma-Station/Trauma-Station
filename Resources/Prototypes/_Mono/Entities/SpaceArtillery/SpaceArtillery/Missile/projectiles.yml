@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # VESPERA
 
 - type: entity
@@ -44,6 +46,7 @@
     launchSpeed: 60
     maxSpeed: 150
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -100,6 +103,7 @@
     launchSpeed: 100
     maxSpeed: 180
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -156,6 +160,7 @@
     launchSpeed: 50
     maxSpeed: 110
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -217,6 +222,7 @@
     launchSpeed: 100
     maxSpeed: 300
   - type: Damageable
+  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

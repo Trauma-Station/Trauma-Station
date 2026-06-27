@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: Circuits
+  name: guide-entry-circuits
+  text: "/ServerInfo/_Trauma/Guidebook/Circuits.xml"

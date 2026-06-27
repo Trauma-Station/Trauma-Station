@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: damageModifierSet
   id: Walls
   coefficients:
@@ -35,19 +37,59 @@
   id: Morph
   coefficients:
     Radiation: 0
-    Heat: 2
+    Heat: 1.5
 
 - type: damageModifierSet
   id: CoconutCrab
   coefficients:
     Blunt: 0.5
-    Slash: 0.5
+    Slash: 0.75
     Piercing: 0.75
-    Heat: 0.75
-    Cold: 0.75
+    Heat: 0.5
+    Caustic: 2
+    Holy: 2
   flatReductions:
-    Blunt: 2.5
-    Slash: 2.5
-    Piercing: 2.5
-    Heat: 2.5
-    Cold: 2.5
+    Slash: 5
+
+- type: damageModifierSet
+  id: CoconutCrabUnshelled
+  coefficients:
+    Slash: 0.9
+    Caustic: 2
+    Holy: 2
+
+- type: damageModifierSet
+  id: HoloCarp
+  coefficients:
+    Blunt: 0
+    Slash: 0
+    Piercing: 0
+    Heat: 3
+    Caustic: 0
+    Cold: 0
+    Shock: 0
+    Poison: 0
+    Radiation: 0
+    Cellular: 0
+    Holy: 1
+    Ion: 0
+    Bloodloss: 0
+  ignoreArmorPierceFlags: All
+
+- type: damageModifierSet
+  id: MagicCarp
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Heat: 0.5
+    Caustic: 0.5
+    Cold: 0.5
+    Shock: 0.5
+    Poison: 0.5
+    Radiation: 0.5
+    Cellular: 0.5
+    Holy: 3
+    Ion: 0.5
+    Bloodloss: 0.5
+  ignoreArmorPierceFlags: All

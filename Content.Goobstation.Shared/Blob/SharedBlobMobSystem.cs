@@ -8,9 +8,9 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract class SharedBlobMobSystem : EntitySystem
+public abstract partial class SharedBlobMobSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<BlobTileComponent> _tileQuery;
     private EntityQuery<BlobMobComponent> _mobQuery;

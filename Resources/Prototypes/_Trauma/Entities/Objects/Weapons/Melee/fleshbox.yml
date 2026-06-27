@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: flesh toolbox
-  parent: [UnbreakableDurability, ToolboxBase]
+  parent: ToolboxBase
   id: ToolboxMimic
   description: A bright red toolbox, full of teeth and meat...
   components:

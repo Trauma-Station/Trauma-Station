@@ -1,3 +1,4 @@
+knowledge-path-void-passive-desc-1 = Grants you immunity to cold temperatures.
 knowledge-path-void-passive-desc-2 = You no longer need to breathe.
 knowledge-path-void-passive-desc-3 = Grants you partial resistance to all slowdowns.
 
@@ -16,7 +17,6 @@ knowledge-path-void-s2-desc =
     They are quiet. This isn't the end of the mystery.
 
     Your Mansus Grasp will temporarily mute and chill the victim.
-    You become immune to cold temperatures.
 
 knowledge-path-void-s3-name = Mark of Void
 knowledge-path-void-s3-desc =

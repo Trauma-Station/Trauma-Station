@@ -22,20 +22,19 @@ namespace Content.Server.Ninja.Systems;
 /// <summary>
 /// Main ninja system that handles ninja setup, provides helper methods for the rest of the code to use.
 /// </summary>
-public sealed class SpaceNinjaSystem : SharedSpaceNinjaSystem
+public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly CodeConditionSystem _codeCondition = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SparksSystem _sparks = default!; // goob edit - sparks everywhere
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private CodeConditionSystem _codeCondition = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SparksSystem _sparks = default!; // goob edit - sparks everywhere
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpaceNinjaComponent, EmaggedSomethingEvent>(OnDoorjack);
         SubscribeLocalEvent<SpaceNinjaComponent, ResearchStolenEvent>(OnResearchStolen);
         SubscribeLocalEvent<SpaceNinjaComponent, ThreatCalledInEvent>(OnThreatCalledIn);
         SubscribeLocalEvent<SpaceNinjaComponent, CriminalRecordsHackedEvent>(OnCriminalRecordsHacked);
@@ -113,23 +112,6 @@ public sealed class SpaceNinjaSystem : SharedSpaceNinjaSystem
     public override bool TryUseCharge(EntityUid user, float charge)
     {
         return GetNinjaBattery(user, out var uid, out var battery) && _battery.TryUseCharge((uid.Value, battery), charge);
-    }
-
-    /// <summary>
-    /// Increment greentext when emagging a door.
-    /// </summary>
-    private void OnDoorjack(EntityUid uid, SpaceNinjaComponent comp, ref EmaggedSomethingEvent args)
-    {
-        // incase someone lets ninja emag non-doors double check it here
-        if (!HasComp<DoorComponent>(args.Target))
-            return;
-
-        // this popup is serverside since door emag logic is serverside (power funnies)
-        Popup.PopupEntity(Loc.GetString("ninja-doorjack-success", ("target", Identity.Entity(args.Target, EntityManager))), uid, uid, PopupType.Medium);
-
-        // handle greentext
-        if (_mind.TryGetObjectiveComp<DoorjackConditionComponent>(uid, out var obj))
-            obj.DoorsJacked++;
     }
 
     /// <summary>

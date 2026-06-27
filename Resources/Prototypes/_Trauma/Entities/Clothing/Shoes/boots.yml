@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ClothingShoesMilitaryBase, BaseRevMajorContraband]
   id: ClothingShoesBootsRev
@@ -10,6 +12,8 @@
     sprite: _Trauma/Clothing/Shoes/Boots/workboots.rsi
   - type: ClothingSlowOnDamageModifier
     modifier: 0.5
+  - type: SlowdownResistance
+    reduction: 0.1
   - type: Construction
     graph: RevBoots
     defaultTarget: finished

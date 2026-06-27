@@ -21,14 +21,14 @@ namespace Content.Goobstation.Server.Pirates.Siphon;
 
 public sealed partial class ResourceSiphonSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly StationAnchorSystem _anchor = default!;
-    [Dependency] private readonly CargoSystem _cargo = default!;
-    [Dependency] private readonly PricingSystem _pricing = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private StationAnchorSystem _anchor = default!;
+    [Dependency] private CargoSystem _cargo = default!;
+    [Dependency] private PricingSystem _pricing = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     private float TickTimer = 1f;
 

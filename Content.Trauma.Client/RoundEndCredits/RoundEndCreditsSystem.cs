@@ -1,28 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.LinkAccount;
 using Content.Shared.GameTicking;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.CCVar;
-using Robust.Client.Graphics;
+using Content.Trauma.Common.LinkAccount;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.RoundEndCredits;
 
-public sealed class RoundEndCreditsSystem : EntitySystem
+public sealed partial class RoundEndCreditsSystem : EntitySystem
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IClyde _clyde = default!;
+    [Dependency] private ILinkAccountManager _linkAccount = default!;
+    [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     private float _timer;
     private EndRoundCreditsControl? _creditsContainer;
@@ -55,8 +52,9 @@ public sealed class RoundEndCreditsSystem : EntitySystem
             return;
 
         var shoutout = "John Nanotrasen";
-        if (_linkAccount.GetPatrons().Count != 0)
-            shoutout = _random.Pick(_linkAccount.GetPatrons()).Name;
+        var patrons = _linkAccount.GetPatrons();
+        if (patrons.Count != 0)
+            shoutout = _random.Pick(patrons).Name;
 
         var credits = new EndRoundCreditsControl();
         credits.SetSize = _clyde.MainWindow.Size / _uiScale;

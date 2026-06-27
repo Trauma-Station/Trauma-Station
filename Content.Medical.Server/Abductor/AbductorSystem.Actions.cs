@@ -13,15 +13,14 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Server.Abductor;
 
 public sealed partial class AbductorSystem : SharedAbductorSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly BuckleSystem _buckle = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private BuckleSystem _buckle = default!;
 
     private static readonly EntProtoId<ActionComponent> SendYourself = "ActionSendYourself";
     private static readonly EntProtoId<ActionComponent> ExitAction = "ActionExitConsole";
@@ -146,7 +145,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         if (!TryComp<StrapComponent>(padFound, out var strap) || strap.BuckledEntities.Count == 0)
         {
-            _popup.PopupEntity(Loc.GetString("abductor-send-pad-not-buckled"), user, user);
+            _popup.PopupEntity("Nobody is on the pad!", user, user);
             ev.Handled = true;
             return;
         }

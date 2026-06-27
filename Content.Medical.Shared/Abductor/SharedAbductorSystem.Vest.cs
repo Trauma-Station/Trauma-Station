@@ -12,7 +12,7 @@ namespace Content.Medical.Shared.Abductor;
 // TODO SHITMED: this is awful bruh
 public abstract partial class SharedAbductorSystem
 {
-    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private ClothingSystem _clothing = default!;
 
     private void InitializeVest()
     {

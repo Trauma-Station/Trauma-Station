@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private void InitializeHandheld()
     {
@@ -103,7 +103,7 @@ public sealed partial class GeneticsConsoleSystem
         linked.Scanners.Add(ent.Owner);
         Dirty(target, linked);
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(user)} linked {ToPrettyString(target)} to {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{user:user} linked {target:target} to {ent.Owner:console}");
         _ui.TryOpenUi(ent.Owner, GeneticsConsoleUiKey.Key, user);
     }
 

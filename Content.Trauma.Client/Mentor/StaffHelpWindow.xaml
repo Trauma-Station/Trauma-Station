@@ -1,0 +1,15 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<mentor:StaffHelpWindow
+    xmlns="https://spacestation14.io"
+    xmlns:mentor="using:Content.Trauma.Client.Mentor"
+    Title="Admin and Mentor Help">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Text="For reporting issues with another player to an admin" />
+        <Button Name="AdminHelpButton" Access="Public" Text="Admin Help" StyleClasses="OpenBoth" />
+        <RichTextLabel Text="For asking questions about the game" Margin="0 20 0 0" />
+        <Button Name="MentorHelpButton" Access="Public" Text="Mentor Help" StyleClasses="OpenBoth" />
+    </BoxContainer>
+</mentor:StaffHelpWindow>

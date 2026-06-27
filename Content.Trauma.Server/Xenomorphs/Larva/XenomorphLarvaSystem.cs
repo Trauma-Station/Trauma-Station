@@ -17,13 +17,13 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Xenomorphs.Larva;
 
-public sealed class XenomorphLarvaSystem : EntitySystem
+public sealed partial class XenomorphLarvaSystem : EntitySystem
 {
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly JitteringSystem _jitter = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private JitteringSystem _jitter = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

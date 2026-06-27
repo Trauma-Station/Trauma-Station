@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.Enchanting.Systems;
 /// <summary>
 /// Controls <see cref="SlipperyComponent"/> values with the enchant level.
 /// </summary>
-public sealed class SlipperyEnchantSystem : EntitySystem
+public sealed partial class SlipperyEnchantSystem : EntitySystem
 {
     public override void Initialize()
     {

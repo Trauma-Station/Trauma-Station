@@ -20,16 +20,13 @@ public sealed partial class DropRandomItem : EntityEffectBase<DropRandomItem>
     /// </summary>
     [DataField]
     public EntityEffect[] Effects = [];
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
 }
 
-public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
+public sealed partial class DropRandomItemEffectSystem : EntityEffectSystem<HandsComponent, DropRandomItem>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private List<EntityUid> _items = new();
 
@@ -49,6 +46,6 @@ public sealed class DropRandomItemEffectSystem : EntityEffectSystem<HandsCompone
         if (!_hands.TryDrop(ent.AsNullable(), item)) // glued etc
             return;
 
-        _effects.ApplyEffects(item, args.Effect.Effects, user: args.User ?? ent.Owner);
+        _effects.ApplyEffects(item, args.Effect.Effects, user: args.User ?? ent.Owner, predicted: args.Predicted);
     }
 }

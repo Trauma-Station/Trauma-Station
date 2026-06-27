@@ -2,25 +2,26 @@
 
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
+using Content.Trauma.Common.Sprite;
+using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Heretic.Components.Side;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Client.Heretic;
 
-public sealed class FearOverlay : Overlay
+public sealed partial class FearOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Horror";
 
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SpriteSystem _sprite;
+    private readonly CommonSpriteVisibilitySystem _spriteVis;
     private readonly TransformSystem _transform;
     private readonly ExamineSystem _examine;
 
@@ -39,6 +40,7 @@ public sealed class FearOverlay : Overlay
         _shader = _proto.Index(Shader).InstanceUnique();
 
         _sprite = _entMan.System<SpriteSystem>();
+        _spriteVis = _entMan.System<CommonSpriteVisibilitySystem>();
         _examine = _entMan.System<ExamineSystem>();
         _transform = _entMan.System<TransformSystem>();
 
@@ -80,7 +82,8 @@ public sealed class FearOverlay : Overlay
     {
         foreach (var (uid, sprite, xform) in _hiddenEntities)
         {
-            var random = new Random(_entMan.GetNetEntity(uid).Id);
+            IRobustRandom random = new RobustRandom();
+            random.SetSeed(_entMan.GetNetEntity(uid).Id);
             var toRender = random.Pick(_visibleFearTargets);
             var (pos, rot) = _transform.GetWorldPositionRotation(xform);
             _sprite.RenderSprite(toRender,
@@ -114,10 +117,10 @@ public sealed class FearOverlay : Overlay
         var query = _entMan.EntityQueryEnumerator<HumanoidProfileComponent, SpriteComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var sprite, out var xform))
         {
-            if (!sprite.Visible || uid == ent.Owner)
+            if (uid == ent.Owner)
                 continue;
 
-            _sprite.SetVisible((uid, sprite), false);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(DigitalCamouflageComponent), 0f);
             _hiddenEntities.Add((uid, sprite, xform));
         }
     }
@@ -126,7 +129,7 @@ public sealed class FearOverlay : Overlay
     {
         foreach (var ent in _hiddenEntities)
         {
-            _sprite.SetVisible(ent.AsNullable(), true);
+            _spriteVis.UpdateVisibilityModifiers(ent, nameof(DigitalCamouflageComponent), 1f);
         }
 
         _hiddenEntities.Clear();

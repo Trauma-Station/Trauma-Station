@@ -4,9 +4,9 @@ using Content.Shared.Tag;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;
 
-public sealed class TagMutationSystem : EntitySystem
+public sealed partial class TagMutationSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {

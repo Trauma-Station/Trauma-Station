@@ -19,13 +19,13 @@ using System.Text.RegularExpressions;
 
 namespace Content.Goobstation.Shared.Devil.Contract;
 
-public abstract class SharedDevilContractSystem : EntitySystem
+public abstract partial class SharedDevilContractSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] protected readonly IPrototypeManager Proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] protected IPrototypeManager Proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedExplosionSystem _explosion = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public static readonly EntityWhitelist SoulBlacklist = new()
     {
@@ -191,7 +191,7 @@ public abstract class SharedDevilContractSystem : EntitySystem
 
         if (contract.Comp.IsContractFullySigned)
         {
-            _popup.PopupCoordinates(Loc.GetString("burn-contract-popup-fail"), coordinates, devil, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("burn-contract-popup-fail"), contract, devil, PopupType.MediumCaution);
             return;
         }
 

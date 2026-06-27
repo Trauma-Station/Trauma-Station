@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: VendingMachineSec
+  id: VendingMachineSecUnlocked
+  suffix: Unlocked
+  components:
+  - type: AccessReader
+    access: []

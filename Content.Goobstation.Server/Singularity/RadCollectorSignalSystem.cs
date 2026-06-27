@@ -6,10 +6,10 @@ using Content.Shared.Singularity.Components;
 
 namespace Content.Goobstation.Server.Singularity;
 
-public sealed class RadCollectorSignalSystem : EntitySystem
+public sealed partial class RadCollectorSignalSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _device = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public static readonly ProtoId<SourcePortPrototype> EmptyPort = "RadEmpty";
     public static readonly ProtoId<SourcePortPrototype> LowPort = "RadLow";

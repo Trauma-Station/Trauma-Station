@@ -5,9 +5,9 @@ using Content.Shared.UserInterface;
 
 namespace Content.Trauma.Shared.Paper;
 
-public sealed class BlockReadingSystem : EntitySystem
+public sealed partial class BlockReadingSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<BlockReadingComponent> _query = default!;
+    [Dependency] private EntityQuery<BlockReadingComponent> _query = default!;
 
     public override void Initialize()
     {

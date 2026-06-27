@@ -14,15 +14,15 @@ using Robust.Shared.Random;
 namespace Content.Server.StationEvents.Events;
 
 [UsedImplicitly]
-public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
+public sealed partial class VentClogRule : StationEventSystem<VentClogRuleComponent>
 {
-    [Dependency] private readonly SmokeSystem _smoke = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
 
     protected override void Started(EntityUid uid, VentClogRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!TryGetRandomStation(out var chosenStation))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
             return;
 
         // TODO: "safe random" for chems. Right now this includes admin chemicals.
@@ -32,7 +32,7 @@ public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
 
         foreach (var (_, transform) in EntityQuery<GasVentPumpComponent, TransformComponent>())
         {
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station != chosenStation)
+            if (transform.GridUid is not { } grid || !stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
             {
                 continue;
             }

@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace Content.Trauma.Shared.Lockers;
 
-public abstract class SharedStationAlertLevelLockSystem : EntitySystem
+public abstract partial class SharedStationAlertLevelLockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

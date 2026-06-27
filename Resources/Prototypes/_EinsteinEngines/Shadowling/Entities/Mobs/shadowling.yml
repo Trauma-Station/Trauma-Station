@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [SimpleSpaceMobBase,FlyingMobBase]
   id: BaseMobShadowlingAscendant
@@ -20,8 +22,9 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: shadowling_ascend
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: ShadowlingAscendant
+  - type: Injurable
+    damageContainer: Biological
   - type: MobMover
   - type: InputMover
   - type: InteractionOutline

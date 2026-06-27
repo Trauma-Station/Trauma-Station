@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: localizedDataset
+  id: FugitiveCrimes
+  values:
+    prefix: fugitive-crime-
+    count: 104

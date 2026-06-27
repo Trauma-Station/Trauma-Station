@@ -20,15 +20,20 @@ construction-graph-tag-overridekeycomponents = override key components
 
 # structures
 construction-graph-tag-nail = a nail
+construction-graph-tag-remotesignaller = any remote signaller
+construction-graph-tag-pipebomb = a pipebomb
+construction-graph-tag-signaltrigger = a signal trigger
 
 # robots
-
 construction-graph-tag-butt = a butt
 construction-graph-tag-cyber-butt = an ipc groin
 construction-graph-tag-egg = any egg
 
 # weapons
 construction-graph-tag-improvised-bow = an improvised bow
+construction-graph-tag-any-spear = any spear
+construction-graph-tag-firebomb = a firebomb
+construction-graph-tag-woodensword = a wooden sword
 
 # food
 construction-graph-tag-CookedEgg = a cooked egg
@@ -54,3 +59,11 @@ construction-graph-tag-arrow-shaft = an arrow shaft
 construction-graph-tag-recharging-board = any recharger circuit board
 construction-graph-tag-part-capacitor = a capacitor
 construction-graph-tag-part-metal-container = any metal container
+
+# Security
+construction-graph-tag-stun-baton = stun baton
+
+# Demonology
+construction-graph-tag-bloodvial = a full blood vial
+construction-graph-tag-demonsoul = a demonic soul fragment
+construction-graph-tag-bible = any holy book

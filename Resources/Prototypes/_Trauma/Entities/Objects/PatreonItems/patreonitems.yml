@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BasePlushie
   id: PatreonTia
@@ -282,16 +284,17 @@
     baseDecayRate: 0.25
   - type: Extractable
     grindableSolutionName: food
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 50
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 50
   - type: Butcherable
     spawned:
     - id: FoodMeatSlime
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:
@@ -361,7 +364,7 @@
     sprite: _Trauma/Objects/Patreon/ltKRY/helmet.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: ClothingNeckBase
   id: PatreonDrOktober
   name: futuristic jacket
   description: Looks like it came from a scifi novel!

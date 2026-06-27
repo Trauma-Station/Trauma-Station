@@ -11,6 +11,12 @@
   - Maintenance
   extendedAccess:
   - Chemistry
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipPsychologist
+  # </Trauma>
 
 - type: startingGear
   id: PsychologistGear
@@ -18,6 +24,7 @@
     shoes: ClothingShoesLeather
     id: PsychologistPDA
     ears: ClothingHeadsetMedical
+    pocket1: PillCanisterSpaceDrugs
   storage:
     back:
     - RubberStampPsychologist

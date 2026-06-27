@@ -7,9 +7,9 @@ using Content.Shared.Physics;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class TeslaBlastSystem : SharedTeslaBlastSystem
+public sealed partial class TeslaBlastSystem : SharedTeslaBlastSystem
 {
-    [Dependency] private readonly LightningSystem _lightning = default!;
+    [Dependency] private LightningSystem _lightning = default!;
 
     public override void ShootRandomLightnings(EntityUid performer,
         float power,

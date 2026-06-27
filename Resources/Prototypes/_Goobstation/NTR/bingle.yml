@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # cargo bingle
 - type: entity
   id: MobBingleCargo
@@ -61,8 +63,9 @@
     overtime: 5
     sound: /Audio/Weapons/egloves.ogg
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Effects/Footsteps/slime1.ogg

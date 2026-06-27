@@ -13,9 +13,9 @@ namespace Content.Trauma.Shared.Language;
 /// Codespeak text generation.
 /// Based on tg's generate_code_phrase logic.
 /// </summary>
-public sealed class CodespeakSystem : EntitySystem
+public sealed partial class CodespeakSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public static ProtoId<LocalizedDatasetPrototype> NamesFirstMale = "NamesFirstMale";
     public static ProtoId<LocalizedDatasetPrototype> NamesFirstFemale = "NamesFirstFemale";

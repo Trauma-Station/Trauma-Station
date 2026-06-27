@@ -17,15 +17,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Electrocution;
 
-public sealed class ExplosiveShockSystem : EntitySystem
+public sealed partial class ExplosiveShockSystem : EntitySystem
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedExplosionSystem _explosion = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {
@@ -52,7 +52,7 @@ public sealed class ExplosiveShockSystem : EntitySystem
             return;
 
         _popup.PopupEntity(Loc.GetString("explosive-shock-sizzle", ("item", uid)), uid);
-        _adminLogger.Add(LogType.Electrocution, $"{ToPrettyString(args.Args.TargetUid):entity} triggered explosive shock item {ToPrettyString(uid):entity}");
+        _adminLogger.Add(LogType.Electrocution, $"{args.Args.TargetUid:target} triggered explosive shock item {uid:entity}");
         EnsureComp<ExplosiveShockIgnitedComponent>(uid, out var ignited);
         ignited.ExplodeAt = _timing.CurTime + explosiveShock.ExplosionDelay;
     }

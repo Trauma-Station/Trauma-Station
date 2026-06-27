@@ -1,9 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseWall
   id: WallResin
   name: resin wall
   description: Thick resin solidified into a wall.
   components:
+  - type: SoundBlocker
+    soundBlockPercent: 1.0
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_resin_wall.rsi # Goobstation new sprites
   - type: Icon
@@ -13,8 +17,9 @@
     key: walls
     base: resin
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Resin
+  - type: Injurable
+    damageContainer: Biological
   - type: MeleeSound
     soundGroups:
       Brute:

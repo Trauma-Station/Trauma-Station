@@ -7,10 +7,10 @@ using Content.Shared.Verbs;
 
 namespace Content.Shared.Tools.EntitySystems;
 
-public sealed class ToolOpenableSystem : EntitySystem
+public sealed partial class ToolOpenableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedToolSystem _tool = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -100,7 +100,7 @@ public sealed class ToolOpenableSystem : EntitySystem
 
     private void OnExamine(Entity<ToolOpenableComponent> entity, ref ExaminedEvent args)
     {
-        if (!args.IsInDetailsRange)
+        if (!args.IsInDetailsRange || !entity.Comp.ShowExamine) // Trauma - check ShowExamine
             return;
 
         string msg;

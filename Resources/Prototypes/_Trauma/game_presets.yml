@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: gamePreset
   id: Insurgency
   alias:
@@ -33,7 +35,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRuleNoHeretic
-  - HereticGamemode
+  - HereticRoundstart
   - CalmTraitor
 
 - type: gamePreset
@@ -53,24 +55,4 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - ShadowlingGamemode
-  - CalmTraitor
-
-- type: gamePreset
-  id: Wraith
-  alias:
-  - wraith
-  - ayyghost
-  - ghostie
-  name: wraith-title
-  description: wraith-description
-  showInVote: false
-  rules:
-  - BasicRoundstartVariation
-  - BasicStationEventScheduler
-  - BasicAntagEventScheduler
-  - ModerateAntagEventScheduler
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlEventScheduler
-  - SubGamemodesRule
-  - WraithRoundstart
   - CalmTraitor

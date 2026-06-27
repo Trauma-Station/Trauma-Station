@@ -9,8 +9,6 @@ using Content.Shared.Shuttles.Systems;
 using Content.Trauma.Client.Radar;
 using Content.Trauma.Common.Radar;
 using Content.Trauma.Shared.FireControl;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -21,9 +19,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.FireControl.UI;
 
-public sealed class FireControlNavControl : BaseShuttleControl
+public sealed partial class FireControlNavControl : BaseShuttleControl
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private IMapManager _mapManager = default!;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;

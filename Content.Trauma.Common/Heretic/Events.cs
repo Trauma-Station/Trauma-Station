@@ -53,13 +53,19 @@ public record struct GetGrabMovespeedEvent(float Speed);
 public record struct CanStandWhileImmobileEvent(bool CanStand = false);
 
 [ByRefEvent]
-public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier);
+public record struct BeforeMovespeedModifierAppliedEvent(float WalkModifier, float SprintModifier) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.FEET;
+}
 
 [ByRefEvent]
 public record struct GetExamineRangeEvent(float Range);
 
 [ByRefEvent]
 public record struct ShouldBlockContextMenuEvent(EntityUid Target, bool ShouldBlock = false);
+
+[ByRefEvent]
+public readonly record struct FireStacksChangedEvent(EntityUid Uid, float FireStacks);
 
 [ByRefEvent]
 public record struct GetFirestackPassiveModifierEvent(bool OnFire, bool Resisting, float Modifier) : IInventoryRelayEvent

@@ -11,7 +11,7 @@ namespace Content.Shared.Eye.Blinding.Systems;
 /// </summary>
 public sealed partial class BlindableSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private BodySystem _body = default!;
 
     private void UpdateEyeOrganDamage(EntityUid uid, int amount)
     {

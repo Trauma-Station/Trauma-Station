@@ -5,9 +5,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Commands;
 
-public sealed class CheckDelaySystem : EntitySystem
+public sealed partial class CheckDelaySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

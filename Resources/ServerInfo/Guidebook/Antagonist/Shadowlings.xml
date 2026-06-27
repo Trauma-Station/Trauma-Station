@@ -1,7 +1,7 @@
 <Document>
   # Shadowlings
   <Box>
-    <GuideEntityEmbed Entity="GuidebookShadowling" Caption=""/>
+    <TextureEmbed Sprite="_EinsteinEngines/Shadowling/Guidebook/guidebook.rsi" State="icon"/>
   </Box>
   They aren't gods. But they want to become one...
   These enigmatic aliens have baffled even the most advanced research divisions.

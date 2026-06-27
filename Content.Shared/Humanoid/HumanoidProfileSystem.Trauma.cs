@@ -17,9 +17,9 @@ namespace Content.Shared.Humanoid;
 /// </summary>
 public sealed partial class HumanoidProfileSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public static readonly ProtoId<BarkPrototype> DefaultBarkVoice = "Alto";
 

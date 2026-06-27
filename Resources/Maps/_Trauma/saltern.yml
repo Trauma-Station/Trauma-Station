@@ -6593,13 +6593,6 @@ entities:
     - type: Transform
       pos: -27.5,7.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: BalloonSyn
   entities:
   - uid: 402
@@ -6679,17 +6672,11 @@ entities:
     - type: Transform
       pos: 7.7243433,-13.122412
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        beaker:
-          temperature: 293.15
-          canReact: True
-          maxVol: 50
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Leporazine
-            Quantity: 40
+    - type: Solution
+      solution:
+        reagents:
+        - ReagentId: Leporazine
+          Quantity: 40
   - uid: 415
     components:
     - type: Transform
@@ -6954,12 +6941,6 @@ entities:
     - type: Transform
       pos: -2.5,-33.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: BiomassReclaimer
   entities:
   - uid: 459
@@ -23509,8 +23490,6 @@ entities:
     - type: Transform
       pos: 12.5,9.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 8280
 - proto: CargoTelepad
   entities:
   - uid: 3733
@@ -29142,12 +29121,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -17.5,-20.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - CivilianServices
 - proto: ComputerRoboticsControl
   entities:
   - uid: 4751
@@ -52443,14 +52416,6 @@ entities:
     - type: Transform
       pos: 23.5,9.5
       parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        8345:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
-        3732:
-        - - MaterialSilo
-          - MaterialSiloUtilizer
 - proto: MaterialWoodPlank1
   entities:
   - uid: 8281
@@ -52900,8 +52865,6 @@ entities:
     - type: Transform
       pos: 18.5,13.5
       parent: 2
-    - type: SiloUtilizer
-      silo: 8280
 - proto: OxygenCanister
   entities:
   - uid: 8346
@@ -59305,13 +59268,6 @@ entities:
     - type: Transform
       pos: -17.5,-21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: Screwdriver
   entities:
   - uid: 9406
@@ -59339,13 +59295,6 @@ entities:
     - type: Transform
       pos: -11.5,16.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: SeedExtractor
   entities:
   - uid: 9410
@@ -59360,13 +59309,6 @@ entities:
     - type: Transform
       pos: -27.5,1.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
 - proto: ShardGlass
   entities:
   - uid: 9412
@@ -65631,17 +65573,6 @@ entities:
     - type: Transform
       pos: 8.5,21.5
       parent: 2
-    - type: TechnologyDatabase
-      supportedDisciplines:
-      - Industrial
-      - Arsenal
-      - Experimental
-      - Robotics
-      - CivilianServices
-    - type: MaterialStorage
-      materialWhiteList:
-      - Cloth
-      - Durathread
 - proto: UniqueLockerNanorepFilled
   entities:
   - uid: 10296

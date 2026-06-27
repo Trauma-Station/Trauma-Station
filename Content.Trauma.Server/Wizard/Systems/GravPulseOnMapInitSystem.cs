@@ -5,9 +5,9 @@ using Content.Trauma.Server.Wizard.Components;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class GravPulseOnMapInitSystem : EntitySystem
+public sealed partial class GravPulseOnMapInitSystem : EntitySystem
 {
-    [Dependency] private readonly GravityWellSystem _gravityWell = default!;
+    [Dependency] private GravityWellSystem _gravityWell = default!;
 
     public override void Initialize()
     {

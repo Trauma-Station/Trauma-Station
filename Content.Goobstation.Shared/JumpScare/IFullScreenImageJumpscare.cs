@@ -2,7 +2,6 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.JumpScare;
 

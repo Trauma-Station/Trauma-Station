@@ -12,7 +12,7 @@ namespace Content.Trauma.Server.Wizard.NPC;
 
 public sealed partial class WieldOperator : HTNOperator
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
     {
@@ -25,7 +25,7 @@ public sealed partial class WieldOperator : HTNOperator
         var owner = blackboard.GetValueOrDefault<EntityUid>(NPCBlackboard.Owner, _entManager);
         var wieldableSystem = _entManager.System<SharedWieldableSystem>();
 
-        return wieldableSystem.TryWield(item.Value, wieldable, owner)
+        return wieldableSystem.TryWield((item.Value, wieldable), owner)
             ? HTNOperatorStatus.Finished
             : HTNOperatorStatus.Failed;
     }

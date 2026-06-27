@@ -22,9 +22,9 @@ public sealed partial class SetGrabStage : EntityEffectBase<SetGrabStage>
         => null;
 }
 
-public sealed class SetGrabStageEffectSystem : EntityEffectSystem<PullableComponent, SetGrabStage>
+public sealed partial class SetGrabStageEffectSystem : EntityEffectSystem<PullableComponent, SetGrabStage>
 {
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private PullingSystem _pulling = default!;
 
     protected override void Effect(Entity<PullableComponent> ent, ref EntityEffectEvent<SetGrabStage> args)
     {

@@ -11,10 +11,10 @@ namespace Content.Trauma.Server.StationEvents;
 /// <summary>
 /// Makes sure random sentience targets can speak/understand Tau Ceti Basic.
 /// </summary>
-public sealed class RandomSentienceLanguageSystem : EntitySystem
+public sealed partial class RandomSentienceLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
 
     public static readonly ProtoId<LanguagePrototype> TauCetiBasic = "TauCetiBasic";
 

@@ -1,3 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseLatheNoSilo
+  id: BaseLathe
+  components:
+  - type: OreSiloClient
+
 # Like BaseLathe but without wire panel or constructible/powered machine
 - type: entity
   abstract: true
@@ -57,6 +66,7 @@
   - type: Construction
     deconstructionTarget: null
     graph: RevMachine
+  - type: OreSiloClient
 
 - type: entity
   parent: BaseRevIndustry
@@ -123,7 +133,7 @@
     node: printing press
 
 - type: entity
-  parent: BaseMachine
+  parent: BaseLatheLube
   id: CrewPrintingPress
   suffix: crew
   name: printing press
@@ -150,18 +160,6 @@
     layers:
     - state: icon
       map: ["enum.LatheVisualLayers.IsRunning"]
-  - type: Appearance
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.4"
-        density: 190
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -172,26 +170,6 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: ActivatableUI
-    key: enum.LatheUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.LatheUiKey.Key:
-        type: LatheBoundUserInterface
-      enum.ResearchClientUiKey.Key:
-        type: ResearchClientBoundUserInterface
-  - type: StaticPrice
-    price: 800
-  - type: TechnologyDatabase
-  - type: AutomationSlots
-    slots:
-    - !type:AutomatedMaterialStorage
-      input: AutomationSlotMaterials
-      output: null
-  - type: Animateable
-  - type: LightningTarget
-    priority: 1
-
 
 - type: entity
   parent: BaseRevIndustry
@@ -237,15 +215,21 @@
     color: "#ffffff"
     radius: 1.5
     energy: 5.0
-  - type: WirelessNetworkConnection
-    range: 1000
-  - type: DeviceLinkSource
-    range: 1000
-    ports:
-    - MaterialSilo
+  - type: OreSilo
+    range: 15
+  - type: MasterSiloClient # theft
   - type: MaterialStorage
     ignoreColor: true
-  - type: Silo
+    whitelist:
+      tags:
+      - Sheet
+      - Ingot
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.OreSiloUiKey.Key:
+        type: OreSiloBoundUserInterface
 
 - type: entity
   parent: BaseRevIndustry
@@ -428,3 +412,43 @@
     whitelist:
       tags:
       - T45Frame
+
+- type: entity
+  parent: BaseRevIndustry
+  id: RevMedFab
+  name: hidden medifab
+  description: A hidden subfloor fabricator that can make medical equipment.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/hiddenmedifab.rsi
+  - type: SubFloorHide
+  - type: Visibility # This kills the test fail.
+  - type: CollideOnAnchor # This kills the test fail.
+  - type: Physics # This kills the test fail.
+    bodyType: Static
+    canCollide: false
+  - type: Lathe
+    producingSound:
+      path: /Audio/Machines/uniformprinter.ogg
+    runningState: icon
+    staticPacks:
+    - RevMedicalStatic
+    - ChemistryStatic
+    - SurgeryStatic
+    - MedicalStatic
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
+  - type: ContainerContainer
+    containers:
+      blueprint: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
+  - type: Construction
+    node: hidden medifab

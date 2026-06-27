@@ -11,15 +11,15 @@ namespace Content.Trauma.Shared.Forging;
 /// <summary>
 /// Lets players start new forged items from ingots using a radial menu BUI.
 /// </summary>
-public sealed class AnvilSystem : EntitySystem
+public sealed partial class AnvilSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly ForgingSystem _forging = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMetalSystem _metal = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private ForgingSystem _forging = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMetalSystem _metal = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private HashSet<Entity<MetalIngotComponent>> _ingots = new();
 
@@ -66,7 +66,7 @@ public sealed class AnvilSystem : EntitySystem
             ent, user, PopupType.Medium);
         _audio.PlayPredicted(ent.Comp.StartSound, ent, user);
 
-        _adminLog.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(user):player} created {ToPrettyString(uid):item} on anvil {ToPrettyString(ent):used}");
+        _adminLog.Add(LogType.EntitySpawn, LogImpact.Low, $"{user:player} created {uid:item} on anvil {ent.Owner:used}");
     }
 
     private EntityCoordinates FindIngots(Entity<ForgingAnvilComponent> ent, [ForbidLiteral] ProtoId<MetalPrototype> metal)

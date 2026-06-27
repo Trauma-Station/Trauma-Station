@@ -10,11 +10,11 @@ namespace Content.Trauma.Shared.Standing;
 /// <summary>
 /// Makes crawling speed depend on held items sizes.
 /// </summary>
-public sealed class CrawlSpeedSystem : EntitySystem
+public sealed partial class CrawlSpeedSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
 
     /// <summary>
     /// How many hands you need for 100% base crawling speed.

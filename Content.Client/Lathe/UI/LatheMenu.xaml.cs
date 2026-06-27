@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Trauma.Common.Salvage;
-using Content.Goobstation.Common.Silo;
 // </Trauma>
 using System.Linq;
 using System.Text;
@@ -22,8 +21,8 @@ namespace Content.Client.Lathe.UI;
 [GenerateTypedNameReferences]
 public sealed partial class LatheMenu : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private readonly SpriteSystem _spriteSystem;
     private readonly LatheSystem _lathe;

@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: knowledgeProfile
   id: Arachnid
-  pointsLimit: 5 #Human but with max spidercraft
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
@@ -28,7 +30,7 @@
     ChemistryKnowledge: 0
     # Physical Skill
     ThrowingKnowledge: 0
-    AthleticsKnowledge: 0
+    AthleticsKnowledge: 2 # Jumping spider larp.
     StrengthKnowledge: 0
     ToughnessKnowledge: 0
     # Combat Skill

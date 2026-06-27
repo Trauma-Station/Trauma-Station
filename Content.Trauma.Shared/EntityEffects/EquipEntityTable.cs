@@ -23,11 +23,11 @@ public sealed partial class EquipEntityTable : EntityEffectBase<EquipEntityTable
     public bool Silent;
 }
 
-public sealed class EquipEntityTableSystem : EntityEffectSystem<InventoryComponent, EquipEntityTable>
+public sealed partial class EquipEntityTableSystem : EntityEffectSystem<InventoryComponent, EquipEntityTable>
 {
-    [Dependency] private readonly EntityTableSystem _table = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private EntityTableSystem _table = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     protected override void Effect(Entity<InventoryComponent> ent, ref EntityEffectEvent<EquipEntityTable> args)
     {

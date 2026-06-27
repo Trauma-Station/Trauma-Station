@@ -29,15 +29,12 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
     /// </summary>
     [DataField]
     public bool IncludePaused;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
 }
 
-public sealed class StationQueryEffectsSystem : EntityEffectSystem<StationDataComponent, StationQueryEffects>
+public sealed partial class StationQueryEffectsSystem : EntityEffectSystem<StationDataComponent, StationQueryEffects>
 {
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedStationSystem _station = default!;
 
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationQueryEffects> args)
     {
@@ -51,7 +48,7 @@ public sealed class StationQueryEffectsSystem : EntityEffectSystem<StationDataCo
             if (_station.GetOwningStation(uid) != station)
                 continue;
 
-            _effects.ApplyEffects(uid, effects);
+            _effects.ApplyEffects(uid, effects, args.Scale, args.User, args.Predicted);
         }
     }
 }

@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # language for carp and dragons
 - type: language
   id: Carptongue
-  isVisibleLanguage: true
   speech:
     color: "#e00d4c"
   obfuscation:

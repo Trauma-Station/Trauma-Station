@@ -14,7 +14,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
-    [Dependency] private readonly TeleportSystem _teleport = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     protected virtual void SubscribeCosmos()
     {

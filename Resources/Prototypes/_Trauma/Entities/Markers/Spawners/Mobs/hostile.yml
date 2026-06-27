@@ -1,0 +1,214 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBearSea
+  name: Sea Bear Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: _Trauma/Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBearSea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSquidSea
+  name: Sea Squid Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: squid
+      sprite: _Trauma/Mobs/Animals/squid.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSquidSea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSpiderCrabSea
+  name: Spider Crab Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: spider_crab
+      sprite: _Trauma/Mobs/Animals/spider_crab.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSpiderCrabSea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobKraitSea
+  name: Krait Cobra Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: krait
+      sprite: _Trauma/Mobs/Animals/krait.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobKraitSea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobArcherSea
+  name: Archer Fish Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: archer
+      sprite: _Trauma/Mobs/Animals/archer.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArcherSea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBunnyEvil
+  name: Evil Bunny Spawner
+  suffix: Hostile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bunny_evil
+      sprite: _Trauma/Mobs/Animals/bunny.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBunnyEvil
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobEelSea
+  name: Eel Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: eel
+      sprite: _Trauma/Mobs/Animals/eel.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobEelSea
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobYellowBellySnake
+  name: Yellow Belly Snake Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: yellow_belly
+      sprite: _Trauma/Mobs/Animals/yellow_belly.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobYellowBellySnake
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobMantis
+  name: Mantis Spawner
+  suffix: Hostile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: mantis
+      sprite: _Trauma/Mobs/Animals/mantis.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobMantis
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobMantisShrimp
+  name: Mantis Shrimp Spawner
+  suffix: Hostile
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: mantis_shrimp
+      sprite: _Trauma/Mobs/Animals/mantis_shrimp.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobMantisShrimp
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobShrimp
+  name: Shrimp Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: shrimp
+      sprite: _Trauma/Mobs/Animals/shrimp.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobShrimp
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDartFrog2
+  name: Golden Poison Frog Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dart_frog2
+      sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDartFrog2
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDartFrog4
+  name: Green-and-Black Poison Frog Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dart_frog4
+      sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDartFrog4
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDartFrog5
+  name: Kokoe Poison Frog Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: dart_frog5
+      sprite: _Trauma/Mobs/Animals/dart_frog.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDartFrog5
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobCobra
+  name: Cobra Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cobra
+      sprite: _Trauma/Mobs/Animals/cobra.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCobra

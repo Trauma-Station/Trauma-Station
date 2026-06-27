@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ ClothingBackpack, BaseRevMajorContraband ]
   id: ClothingBackpackRev
@@ -78,10 +80,8 @@
   - type: Sprite
     sprite: _Trauma/Clothing/Back/Backpacks/holybackpacktank.rsi
     state: icon
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 1200
-        reagents:
-        - ReagentId: Holywater
-          Quantity: 1200
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Holywater
+        Quantity: 1200

@@ -32,8 +32,9 @@
       node: grille
       deconstructionTarget: start
     - type: Damageable
-      damageContainer: StructuralInorganic
       damageModifierSet: PerforatedMetallic
+    - type: Injurable
+      damageContainer: StructuralInorganic
     - type: Electrified
       requirePower: true
       noWindowInTile: true
@@ -73,7 +74,7 @@
               acts: ["Destruction"]
         - trigger:
             !type:DamageTrigger
-            damage: 100
+            damage: 30 # Trauma - was 100, way too tanky (window has 50 hp lol)
           behaviors:
             - !type:ChangeConstructionNodeBehavior
               node: grilleBroken
@@ -139,8 +140,9 @@
     tags:
     - ForceNoFixRotations
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: FlimsyMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

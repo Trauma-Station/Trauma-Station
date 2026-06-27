@@ -10,7 +10,7 @@ namespace Content.Shared.Mind;
 /// </summary>
 public abstract partial class SharedMindSystem
 {
-    [Dependency] private readonly CommonLanguageSystem _language = default!;
+    [Dependency] private CommonLanguageSystem _language = default!;
 
     // TODO: make it only delete certain objectives and not all of them in case an antag is ever converted and then deconverted.
     public void ClearObjectives(Entity<MindComponent?> mind)

@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared.Timing;
+using Content.Trauma.Common.Prying;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
@@ -20,16 +21,16 @@ namespace Content.Shared.Prying.Systems;
 /// <summary>
 /// Handles prying of entities (e.g. doors)
 /// </summary>
-public sealed class PryingSystem : EntitySystem
+public sealed partial class PryingSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
     // </Trauma>
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
@@ -138,6 +139,15 @@ public sealed class PryingSystem : EntitySystem
 
     private bool CanPry(EntityUid target, EntityUid user, out string? message, PryingComponent? comp = null, PryUnpoweredComponent? unpoweredComp = null)
     {
+        // <Trauma>
+        var attemptEv = new PryAttemptEvent(target);
+        RaiseLocalEvent(user, ref attemptEv);
+        if (attemptEv.Cancelled)
+        {
+            message = null;
+            return false;
+        }
+        // </Trauma>
         BeforePryEvent canev;
 
         if (comp != null || Resolve(user, ref comp, false))
@@ -208,6 +218,10 @@ public sealed class PryingSystem : EntitySystem
             _audioSystem.PlayPredicted(comp.UseSound, args.Used.Value, args.User);
         }
 
+        // <Trauma>
+        var userEv = new PriedSuccessEvent();
+        RaiseLocalEvent(args.User, ref userEv);
+        // </Trauma>
         var ev = new PriedEvent(args.User);
         RaiseLocalEvent(uid, ref ev);
 

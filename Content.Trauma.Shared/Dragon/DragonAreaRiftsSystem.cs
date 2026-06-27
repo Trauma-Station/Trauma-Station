@@ -6,10 +6,10 @@ using Content.Trauma.Shared.Areas;
 
 namespace Content.Trauma.Shared.Dragon;
 
-public sealed class DragonAreaRiftsSystem : EntitySystem
+public sealed partial class DragonAreaRiftsSystem : EntitySystem
 {
-    [Dependency] private readonly AreaSystem _area = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private AreaSystem _area = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

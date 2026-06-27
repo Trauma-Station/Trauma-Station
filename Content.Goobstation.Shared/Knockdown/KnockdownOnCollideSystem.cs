@@ -7,9 +7,9 @@ using Content.Trauma.Common.Knockdown;
 
 namespace Content.Goobstation.Shared.Knockdown;
 
-public sealed class KnockdownOnCollideSystem : EntitySystem
+public sealed partial class KnockdownOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

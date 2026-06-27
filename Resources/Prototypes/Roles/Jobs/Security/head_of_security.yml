@@ -12,16 +12,15 @@
       time: 1h # knowing how to use the tools is important
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
-      time: 3h # Trauma, was 5
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 5h # Trauma, was 10
+      time: 10h
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Security
   - SpaceLaw
   - Command
@@ -38,12 +37,21 @@
   - GenpopEnter
   - GenpopLeave
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipHeadOfSecurity
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
+      # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
+      - type: SecurityStaff
+      # </Trauma>
       - type: CommandStaff
-      - type: SecurityStaff # goobstation
 
 - type: startingGear
   id: HoSGear

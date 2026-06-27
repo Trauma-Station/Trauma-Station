@@ -2,7 +2,7 @@
 
 namespace Content.Goobstation.Shared.Smites;
 
-public abstract class ToggleableSmiteSystem<T> : EntitySystem where T : Component
+public abstract partial class ToggleableSmiteSystem<T> : EntitySystem where T : Component
 {
     public override void Initialize()
     {

@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MobPurpleSnake
+  id: MobPurpleSnakeVent
+  name: space adder
+  suffix: DO NOT MAP
+  description: A menacing purple snake from Kepler-283c.
+  components:
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-purple-snake-name
+    description: ghost-role-information-purple-snake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null
+
+- type: entity
+  parent: MobSmallPurpleSnake
+  id: MobSmallPurpleSnakeVent
+  name: space adder
+  suffix: DO NOT MAP
+  description: A smaller version of the menacing purple snake from Kepler-283c.
+  components:
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-small-purple-snake-name
+    description: ghost-role-information-small-purple-snake-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle: null

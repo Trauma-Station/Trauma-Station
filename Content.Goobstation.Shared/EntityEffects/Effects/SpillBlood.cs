@@ -20,10 +20,10 @@ public sealed partial class SpillBlood : EntityEffectBase<SpillBlood>
         => "Spills target blood.";
 }
 
-public sealed class SpillBloodEffectSystem : EntityEffectSystem<BloodstreamComponent, SpillBlood>
+public sealed partial class SpillBloodEffectSystem : EntityEffectSystem<BloodstreamComponent, SpillBlood>
 {
-    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedPuddleSystem _puddle = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     protected override void Effect(Entity<BloodstreamComponent> ent, ref EntityEffectEvent<SpillBlood> args)
     {

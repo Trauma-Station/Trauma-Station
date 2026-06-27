@@ -6,6 +6,7 @@ using Content.Server.Jittering;
 using Content.Server.Popups;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Stunnable;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;
@@ -15,25 +16,26 @@ using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Rituals;
+using Content.Trauma.Shared.Heretic.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class FeastOfOwlsSystem : EntitySystem
+public sealed partial class FeastOfOwlsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly JitteringSystem _jitter = default!;
-    [Dependency] private readonly StutteringSystem _stutter = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly HereticRitualSystem _ritual = default!;
-    [Dependency] private readonly EntityQuery<VocalComponent> _vocalQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private JitteringSystem _jitter = default!;
+    [Dependency] private StutteringSystem _stutter = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private HereticSystem _heretic = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private HereticRitualSystem _ritual = default!;
+    [Dependency] private EntityQuery<VocalComponent> _vocalQuery = default!;
 
     private readonly ProtoId<TagPrototype> _feastOfOwlsTag = "RitualFeastOfOwls";
     private readonly ProtoId<TagPrototype> _ascensionTag = "RitualAscension";
@@ -104,7 +106,11 @@ public sealed class FeastOfOwlsSystem : EntitySystem
 
             if (comp.CurrentStep + 1 < comp.Reward && !_stun.TryUpdateParalyzeDuration(uid, comp.ParalyzeTime))
             {
-                _heretic.UpdateKnowledge(uid, comp.Reward - comp.CurrentStep, false, false, mindContainer);
+                var dict = new Dictionary<string, FixedPoint2>()
+                {
+                    {SharedHereticSystem.Currency, comp.Reward - comp.CurrentStep}
+                };
+                _heretic.UpdateKnowledge(uid, dict, false, false, mindContainer);
                 RemCompDeferred(uid, comp);
                 continue;
             }
@@ -119,7 +125,7 @@ public sealed class FeastOfOwlsSystem : EntitySystem
 
             _popup.PopupEntity(Loc.GetString("feast-of-owls-knowledge-gaim-message"), uid, uid, PopupType.LargeCaution);
 
-            _heretic.UpdateKnowledge(uid, 1, false, false, mindContainer);
+            _heretic.UpdateKnowledge(uid, SharedHereticSystem.OneKnowledgePoint, false, false, mindContainer);
 
             comp.CurrentStep++;
 

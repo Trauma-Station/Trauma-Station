@@ -8,3 +8,6 @@ reagent-popup-full-fat-oils = You can feel your cholesterol levels rising after 
 
 reagent-name-nutrislime = nutrislime
 reagent-desc-nutrislime = Highly condensed superfood, specifically designed for slimes to eat.
+
+reagent-name-coconut-flesh = coconut flesh
+reagent-desc-coconut-flesh = The flesh of a coconut, which despite their name are not nuts.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponFlamethrower
@@ -31,8 +33,9 @@
   - type: UseDelay
     delay: 1
   - type: ClothingSlotAmmoProvider
+  - type: SlotBasedConnectedContainer
     targetSlot: BACK
-    providerWhitelist:
+    containerWhitelist:
       tags:
       - FlamethrowerBackpack
   - type: Tag

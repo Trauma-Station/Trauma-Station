@@ -8,11 +8,11 @@ using Robust.Shared.Asynchronous;
 
 namespace Content.Goobstation.Server.ServerCurrency;
 
-public sealed class ServerCurrencyManager : ICommonCurrencyManager
+public sealed partial class ServerCurrencyManager : ICommonCurrencyManager
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
-    [Dependency] private readonly ITaskManager _task = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IServerDbManager _db = default!;
+    [Dependency] private ITaskManager _task = default!;
+    [Dependency] private IPlayerManager _player = default!;
     private readonly List<Task> _pendingSaveTasks = new();
 
     // supposedly this is needed to implement the interface, so...
@@ -85,6 +85,9 @@ public sealed class ServerCurrencyManager : ICommonCurrencyManager
         return userId == null ? 0 : Task.Run(() => GetBalanceAsync(userId.Value)).GetAwaiter().GetResult();
     }
 
+    public Task Wipe()
+        => _db.WipeServerCurrency();
+
     #region Internal/Async tasks
 
     /// <summary>
@@ -107,9 +110,8 @@ public sealed class ServerCurrencyManager : ICommonCurrencyManager
     /// </summary>
     /// <param name="userId">The player's NetUserId</param>
     /// <param name="amount">The amount of currency that will be set.</param>
-    /// <param name="oldAmount">The amount of currency that will be set.</param>
     /// <remarks>This and its calees will block server shutdown until execution finishes.</remarks>
-    private async Task SetBalanceAsyncInternal(NetUserId userId, int amount, int oldAmount)
+    private async Task SetBalanceAsyncInternal(NetUserId userId, int amount)
     {
         var task = Task.Run(() => _db.SetServerCurrency(userId, amount));
         TrackPending(task);
@@ -125,9 +127,8 @@ public sealed class ServerCurrencyManager : ICommonCurrencyManager
     /// <remarks>Use the return value instead of calling <see cref="GetBalance(NetUserId)"/> prior to this.</remarks>
     private async Task<int> SetBalanceAsync(NetUserId userId, int amount)
     {
-        // We need to block it first to ensure we don't read our own amount, hence sync function
         var oldAmount = GetBalance(userId);
-        await SetBalanceAsyncInternal(userId, amount, oldAmount);
+        await SetBalanceAsyncInternal(userId, amount);
         return oldAmount;
     }
 

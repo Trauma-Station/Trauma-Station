@@ -7,10 +7,10 @@ using Content.Shared.Prying.Systems;
 
 namespace Content.Trauma.Shared.Doors;
 
-public sealed class PoweredDoorSystem : EntitySystem
+public sealed partial class PoweredDoorSystem : EntitySystem
 {
-    [Dependency] private readonly PryingSystem _prying = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] private PryingSystem _prying = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     public override void Initialize()
     {

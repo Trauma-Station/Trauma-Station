@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # threats called in by playing the Number Station CD
 - type: weightedRandom
   id: NumberStationThreats

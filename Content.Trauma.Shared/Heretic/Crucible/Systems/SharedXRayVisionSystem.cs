@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Crucible.Systems;
 
-public abstract class SharedXRayVisionSystem : EntitySystem
+public abstract partial class SharedXRayVisionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

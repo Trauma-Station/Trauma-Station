@@ -142,7 +142,7 @@
     - Sidearm
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 2 # Trauma, was 1.5
+    fireRate: 2
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -246,8 +246,9 @@
     endSound:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/laser_lmg.ogg
   - type: ClothingSlotAmmoProvider
+  - type: SlotBasedConnectedContainer
     targetSlot: BACK
-    providerWhitelist:
+    containerWhitelist:
       tags:
       - LaserLMGBackpack
   - type: Tag

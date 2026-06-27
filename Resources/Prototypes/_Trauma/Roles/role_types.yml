@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: roleType
   id: Animal
   name: role-type-animal-name

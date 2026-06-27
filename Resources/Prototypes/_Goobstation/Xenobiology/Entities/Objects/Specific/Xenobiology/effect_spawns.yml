@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: XenoExtractChronofield
   parent: Chronofield
@@ -36,8 +38,9 @@
     drawdepth: WallMountedItems
   - type: Clickable
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Slime
+  - type: Injurable
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:
@@ -94,6 +97,25 @@
   components:
   - type: RandomSpawner
     prototypes:
+    - MobBearSea
+    - MobSquidSea
+    - MobSpiderCrabSea
+    - MobKraitSea
+    - MobArcherSea
+    - MobBunnyEvil
+    - MobEelSea
+    - MobCobra
+    - MobYellowBellySnake
+    - MobMantis
+    - MobMantisShrimp
+    - MobShrimp
+    - MobDartFrog2
+    - MobDartFrog4
+    - MobDartFrog5
+    - MobGorillaAngry
+    - MobBearSpace
+    - MobKangarooSpace
+    - MobAdultSlimesYellowAngry
     - MobAngryBee
     - MobBrullbar
     - MobWhiteWolf
@@ -141,6 +163,11 @@
   components:
   - type: RandomSpawner
     prototypes:
+    - MobDartFrog1
+    - MobDartFrog3
+    - MobDartFrog6
+    - MobBunny
+    - MobBunnySea
     - MobBee
     - MobGorilla
     - MobKangaroo

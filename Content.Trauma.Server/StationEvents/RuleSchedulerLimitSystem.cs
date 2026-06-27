@@ -5,9 +5,9 @@ using Content.Trauma.Common.StationEvents;
 
 namespace Content.Trauma.Server.StationEvents;
 
-public sealed class RuleSchedulerLimitSystem : EntitySystem
+public sealed partial class RuleSchedulerLimitSystem : EntitySystem
 {
-    [Dependency] private readonly GameTicker _ticker = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     public override void Initialize()
     {

@@ -2,4 +2,4 @@
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 
-public abstract class SharedEnthrallSystem : EntitySystem;
+public abstract partial class SharedEnthrallSystem : EntitySystem;

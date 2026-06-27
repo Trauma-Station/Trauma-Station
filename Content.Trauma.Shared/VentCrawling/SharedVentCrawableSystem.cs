@@ -17,14 +17,14 @@ namespace Content.Trauma.Shared.VentCrawling;
 /// <summary>
 /// A system that handles the crawling behavior for vent creatures.
 /// </summary>
-public sealed class SharedVentCrawableSystem : EntitySystem
+public sealed partial class SharedVentCrawableSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVentTubeSystem _tube = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedVentTubeSystem _tube = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

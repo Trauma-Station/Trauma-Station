@@ -17,23 +17,23 @@ namespace Content.Trauma.Shared.MartialArts;
 /// </summary>
 public partial class MartialArtsSystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private readonly EntityQuery<CanPerformComboComponent> _comboQuery = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private EntityQuery<CanPerformComboComponent> _comboQuery = default!;
 
     private void InitializeCanPerformCombo()
     {
-        SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CanPerformComboComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
     }
 
-    private void OnMapInit(Entity<CanPerformComboComponent> ent, ref MapInitEvent args)
+    private void OnInit(Entity<CanPerformComboComponent> ent, ref ComponentInit args)
     {
+        ent.Comp.AllowedCombos.Clear();
         foreach (var item in ent.Comp.RoundstartCombos)
         {
             ent.Comp.AllowedCombos.Add(_proto.Index(item));
         }
-        Dirty(ent);
     }
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)

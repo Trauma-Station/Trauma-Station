@@ -30,4 +30,13 @@ You should make an anvil next, it is required to make metal items.
     <GuideEntityEmbed Entity="SteelBloom" Caption="Bloom"/>
     <GuideEntityEmbed Entity="SteelIngot" Caption="Ingot"/>
   </Box>
+
+# Soft metals
+
+Pure and soft metals like [bold]silver and gold[/bold] can be used and are much faster to work with from their very low softening temperatures.
+Instead of using a bloomery, you can directly heat and work the scraps into an ingot by hand.
+However, instead of becoming brittle from overheating they will completely melt into a puddle! No refunds.
+
+Silver items will deal a nice amount of bonus damage to unholy creatures and gold items will sell for the best price, on top of being shiny.
+
 </Document>

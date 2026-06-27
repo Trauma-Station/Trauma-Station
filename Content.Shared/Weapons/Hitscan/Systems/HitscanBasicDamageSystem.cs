@@ -8,13 +8,13 @@ using Content.Shared.Weapons.Hitscan.Events;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
-public sealed class HitscanBasicDamageSystem : EntitySystem
+public sealed partial class HitscanBasicDamageSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     // </Trauma>
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     public override void Initialize()
     {
@@ -31,13 +31,8 @@ public sealed class HitscanBasicDamageSystem : EntitySystem
 
         var dmg = ent.Comp.Damage * _damage.UniversalHitscanDamageModifier;
 
-        // <Trauma> - add targetPart and canBeCancelled
-        var user = args.Data.Shooter ?? args.Data.Gun;
-        var targetPart = _gun.GetTargetPart(
-            user,
-            _transform.GetMapCoordinates(user),
-            _transform.GetMapCoordinates(target));
-        if(!_damage.TryChangeDamage(target, dmg, out var damageDealt, origin: args.Data.Gun, targetPart: targetPart, canBeCancelled: true))
+        // <Trauma> - canBeCancelled
+        if(!_damage.TryChangeDamage(target, dmg, out var damageDealt, origin: args.Data.Gun, canBeCancelled: true))
             return;
         // </Trauma>
 

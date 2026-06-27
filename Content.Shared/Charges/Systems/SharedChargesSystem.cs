@@ -9,10 +9,10 @@ using Content.Trauma.Common.Charges; // Trauma
 
 namespace Content.Shared.Charges.Systems;
 
-public abstract class SharedChargesSystem : EntitySystem
+public abstract partial class SharedChargesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!; // Trauma
-    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!; // Trauma
+    [Dependency] protected IGameTiming _timing = default!;
 
     /*
      * Despite what a bunch of systems do you don't need to continuously tick linear number updates and can just derive it easily.

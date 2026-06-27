@@ -8,10 +8,10 @@ using Content.Trauma.Shared.Teleportation.Systems;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class RandomTeleportOnProjectileHitSystem : EntitySystem
+public sealed partial class RandomTeleportOnProjectileHitSystem : EntitySystem
 {
-    [Dependency] private readonly RandomTeleportSystem _teleport = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private RandomTeleportSystem _teleport = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {

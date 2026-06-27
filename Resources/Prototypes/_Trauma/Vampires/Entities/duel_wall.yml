@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: WallHierophantArenaTemporary # FYI, yes this is parity
+  id: WallGargantuanTemporary
+  name: magic wall
+  description: The greatest duels happen around these walls

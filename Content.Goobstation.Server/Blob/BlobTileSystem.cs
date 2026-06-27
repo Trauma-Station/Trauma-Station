@@ -22,16 +22,16 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Blob;
 
-public sealed class BlobTileSystem : SharedBlobTileSystem
+public sealed partial class BlobTileSystem : SharedBlobTileSystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly BlobCoreSystem _core = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedEmpSystem _emp = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private BlobCoreSystem _core = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SharedEmpSystem _emp = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     private EntityQuery<BlobCoreComponent> _blobCoreQuery;
 

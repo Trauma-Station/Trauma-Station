@@ -29,7 +29,7 @@ public sealed partial class SiliconLawset
         var laws = new List<string>(Laws.Count);
         foreach (var law in Laws)
         {
-            laws.Add($"{law.Order}: {Loc.GetString(law.LawString)}");
+            laws.Add($"{law.Order}: {(Loc.TryGetString(law.LawString, out var line) ? line : law.LawString)}"); // Trauma - use Loc.TryGetString, it might be loc from prototype or already localized
         }
 
         return string.Join(" / ", laws);

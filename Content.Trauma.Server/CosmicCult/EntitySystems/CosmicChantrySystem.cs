@@ -25,28 +25,26 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
-public sealed class CosmicChantrySystem : EntitySystem
+public sealed partial class CosmicChantrySystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private readonly EntityManager _entMan = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private CosmicCultRuleSystem _cultRule = default!;
 
     /// <summary>
     /// Mind role to add to colossi.
@@ -76,7 +74,7 @@ public sealed class CosmicChantrySystem : EntitySystem
                 comp.SpawnTimer = _timing.CurTime + comp.SpawningTime;
                 var indicatedLocation = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, Transform(uid))));
                 _sound.PlayGlobalOnStation(uid, _audio.ResolveSound(comp.ChantryAlarm));
-                _chatSystem.DispatchStationAnnouncement(uid,
+                _chat.DispatchStationAnnouncement(uid,
                 Loc.GetString("cosmiccult-chantry-location", ("location", indicatedLocation)),
                 null, false, null,
                 Color.FromHex("#cae8e8"));
@@ -99,9 +97,9 @@ public sealed class CosmicChantrySystem : EntitySystem
 
                 if (!TryComp<BorgChassisComponent>(victim, out var borgComp) || borgComp.BrainEntity is not { } borgBrain) return;
                 var newBrain = Spawn(comp.Mindsink);
-                _containerSystem.EmptyContainer(borgComp.BrainContainer);
+                _container.EmptyContainer(borgComp.BrainContainer);
                 // fully replaced the brain with a mindsink
-                _containerSystem.Insert(newBrain, borgComp.BrainContainer);
+                _container.Insert(newBrain, borgComp.BrainContainer);
                 if (_mind.TryGetMind(victim, out var mindEnt, out _))
                     _mind.TransferTo(mindEnt, newBrain);
                 else
@@ -126,8 +124,8 @@ public sealed class CosmicChantrySystem : EntitySystem
                 };
                 _doAfter.TryStartDoAfter(doAfterArgs);
             }
-            if (_entMan.IsQueuedForDeletion(uid))
-                _containerSystem.EmptyContainer(comp.Container); // Try prevent the borg from getting deleted because the event sometimes fails mysteriously.
+            if (TerminatingOrDeleted(uid))
+                _container.EmptyContainer(comp.Container); // Try prevent the borg from getting deleted because the event sometimes fails mysteriously.
         }
     }
 
@@ -139,9 +137,9 @@ public sealed class CosmicChantrySystem : EntitySystem
 
     private void OnChantryDestroyed(Entity<CosmicChantryComponent> ent, ref DestructionEventArgs args)
     {
-        _containerSystem.EmptyContainer(ent.Comp.Container);
+        _container.EmptyContainer(ent.Comp.Container);
         _sound.PlayGlobalOnStation(ent, _audio.ResolveSound(ent.Comp.ChantryDestructionAnnouncement));
-        _chatSystem.DispatchStationAnnouncement(ent,
+        _chat.DispatchStationAnnouncement(ent,
         Loc.GetString("cosmiccult-chantry-destruction"),
         null, false, null,
         Color.FromHex("#cae8e8"));
@@ -171,11 +169,11 @@ public sealed class CosmicChantrySystem : EntitySystem
         Spawn(ent.Comp.SpawnVFX, tgtpos);
         RemComp<CosmicChantryVictimComponent>(victim);
 
-        _containerSystem.EmptyContainer(ent.Comp.Container);
+        _container.EmptyContainer(ent.Comp.Container);
         if (TryComp<CosmicColossusComponent>(colossus, out var colossusComp))
         {
-            colossusComp.Container = _containerSystem.EnsureContainer<ContainerSlot>(colossus, colossusComp.ContainerId);
-            _containerSystem.Insert(victim, colossusComp.Container);
+            colossusComp.Container = _container.EnsureContainer<ContainerSlot>(colossus, colossusComp.ContainerId);
+            _container.Insert(victim, colossusComp.Container);
         }
 
         QueueDel(ent);

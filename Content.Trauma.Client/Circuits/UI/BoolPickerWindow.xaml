@@ -1,0 +1,16 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<circuits:BoolPickerWindow xmlns="https://spacestation14.io"
+        xmlns:circuits="using:Content.Trauma.Client.Circuits.UI"
+        MinSize="300 150"
+        Title="Circuit Constant: Boolean">
+    <BoxContainer Orientation="Vertical" Align="Center">
+        <BoxContainer Orientation="Horizontal" Align="Center" Margin="8">
+            <Label Text="Value" Margin="6"/>
+            <Button Name="ToggleButton" Text="true" ToggleMode="True" Pressed="True" MaxWidth="60"/>
+        </BoxContainer>
+        <Button Name="CreateButton" Text="Create" MaxWidth="80"/>
+    </BoxContainer>
+</circuits:BoolPickerWindow>

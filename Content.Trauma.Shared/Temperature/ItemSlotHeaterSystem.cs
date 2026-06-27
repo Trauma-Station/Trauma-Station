@@ -9,12 +9,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Temperature;
 
-public sealed class ItemSlotHeaterSystem : EntitySystem
+public sealed partial class ItemSlotHeaterSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedTemperatureSystem _temp = default!;
-    [Dependency] private readonly EntityQuery<TemperatureComponent> _temperatureQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private SharedTemperatureSystem _temp = default!;
+    [Dependency] private EntityQuery<TemperatureComponent> _temperatureQuery = default!;
 
     public override void Initialize()
     {

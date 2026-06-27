@@ -22,8 +22,14 @@ namespace Content.Goobstation.Server.Chemistry.Components
         [DataField]
         public SoundSpecifier ClickSound = new SoundPathSpecifier("/Audio/Machines/machine_switch.ogg");
 
-        [ViewVariables(VVAccess.ReadWrite)]
-        public EnergyReagentDispenserDispenseAmount DispenseAmount = EnergyReagentDispenserDispenseAmount.U10;
+        [DataField]
+        public int DispenseAmount = 10;
+
+        [DataField]
+        public int MinDispenseAmount = 1;
+
+        [DataField]
+        public int MaxDispenseAmount = 120;
 
         [DataField, ViewVariables]
         public SoundSpecifier PowerSound = new SoundPathSpecifier("/Audio/Machines/buzz-sigh.ogg");

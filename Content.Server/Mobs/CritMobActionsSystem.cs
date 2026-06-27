@@ -17,17 +17,17 @@ namespace Content.Server.Mobs;
 /// <summary>
 ///     Handles performing crit-specific actions.
 /// </summary>
-public sealed partial class CritMobActionsSystem : EntitySystem // Goob - made partial
+public sealed partial class CritMobActionsSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly CommonXenomorphSystem _xeno = default!;
+    [Dependency] private CommonXenomorphSystem _xeno = default!;
     // </Trauma>
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DeathgaspSystem _deathgasp = default!;
-    [Dependency] private readonly IServerConsoleHost _host = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DeathgaspSystem _deathgasp = default!;
+    [Dependency] private IServerConsoleHost _host = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private QuickDialogSystem _quickDialog = default!;
 
     private const int MaxLastWordsLength = 30;
 

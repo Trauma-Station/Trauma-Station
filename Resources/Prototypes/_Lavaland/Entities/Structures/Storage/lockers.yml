@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: LockerSalvageSpecialist
+  id: LockerShaftMiner
+  name: shaft miner's locker
+  description: Contains equipment useful for planet exploration.
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: mining
+    stateDoorOpen: mining_open
+    stateDoorClosed: mining_door

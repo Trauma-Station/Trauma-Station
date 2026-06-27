@@ -8,9 +8,9 @@ using Content.Shared.Fluids.Components;
 
 namespace Content.Trauma.Shared.Heretic.Rituals.EntityEffects;
 
-public sealed class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
+public sealed partial class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _sol = default!;
+    [Dependency] private SharedSolutionContainerSystem _sol = default!;
 
 
     protected override void Condition(Entity<PuddleComponent> entity,

@@ -6,7 +6,7 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.SpaceWhale;
 
-public sealed class TailedEntitySystem : SharedTailedEntitySystem
+public sealed partial class TailedEntitySystem : SharedTailedEntitySystem
 {
     public override void Initialize()
     {

@@ -676,7 +676,7 @@
     spawned:
     - id: FoodMeat
       amount: 3
-    - id: Telecrystal25 # Goobstation - Telecrystal rework
+    - id: Telecrystal40 # Trauma - was 5, 5x and more this way captain is actually incentivized to not let Renault be kidnapped/killed
       amount: 1
   - type: Grammar
     attributes:
@@ -779,6 +779,14 @@
   id: MobSpiderShiva
   description: The first defender of the station.
   components:
+  # <Trauma>
+  - type: SolutionManager
+    solutions:
+    - SolutionShivaSpider
+  - type: MeleeChemicalInjector
+    transferAmount: 2
+    solution: melee
+  # </Trauma>
   - type: InteractionPopup
     successChance: 0.5 # spider is mean
     interactSuccessString: petting-success-tarantula

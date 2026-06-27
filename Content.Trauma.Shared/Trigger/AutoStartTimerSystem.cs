@@ -5,9 +5,9 @@ using Content.Shared.Trigger.Systems;
 
 namespace Content.Trauma.Shared.Trigger;
 
-public sealed class AutoStartTimerSystem : EntitySystem
+public sealed partial class AutoStartTimerSystem : EntitySystem
 {
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

@@ -15,22 +15,19 @@ public sealed partial class RelayStrapped : EntityEffectBase<RelayStrapped>
     /// </summary>
     [DataField(required: true)]
     public EntityEffect[] Effects = default!;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // cbf
 }
 
-public sealed class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponent, RelayStrapped>
+public sealed partial class RelayStrappedEffectSystem : EntityEffectSystem<StrapComponent, RelayStrapped>
 {
-    [Dependency] private readonly EffectDataSystem _data = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EffectDataSystem _data = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     protected override void Effect(Entity<StrapComponent> ent, ref EntityEffectEvent<RelayStrapped> args)
     {
         foreach (var strapped in ent.Comp.BuckledEntities)
         {
             _data.CopyData(ent, strapped);
-            _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale, args.User);
+            _effects.ApplyEffects(strapped, args.Effect.Effects, args.Scale, args.User, args.Predicted);
             _data.ClearData(strapped);
         }
     }

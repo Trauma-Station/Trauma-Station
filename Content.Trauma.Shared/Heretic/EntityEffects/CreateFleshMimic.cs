@@ -21,10 +21,10 @@ public sealed partial class CreateFleshMimic : EntityEffectBase<CreateFleshMimic
     public FixedPoint2 Health = 50;
 }
 
-public sealed class CreateFleshMimicEffectSystem : EntityEffectSystem<MobStateComponent, CreateFleshMimic>
+public sealed partial class CreateFleshMimicEffectSystem : EntityEffectSystem<MobStateComponent, CreateFleshMimic>
 {
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     protected override void Effect(Entity<MobStateComponent> entity, ref EntityEffectEvent<CreateFleshMimic> args)
     {

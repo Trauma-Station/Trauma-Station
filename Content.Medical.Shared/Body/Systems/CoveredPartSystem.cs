@@ -8,12 +8,12 @@ using Content.Shared.Inventory.Events;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class CoveredPartSystem : EntitySystem
+public sealed partial class CoveredPartSystem : EntitySystem
 {
-    [Dependency] private readonly BodyPartSystem _part = default!;
-    [Dependency] private readonly EntityQuery<ArmorComponent> _armorQuery = default!;
-    [Dependency] private readonly EntityQuery<CoveredPartComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<InventoryComponent> _inventoryQuery = default!;
+    [Dependency] private BodyPartSystem _part = default!;
+    [Dependency] private EntityQuery<ArmorComponent> _armorQuery = default!;
+    [Dependency] private EntityQuery<CoveredPartComponent> _query = default!;
+    [Dependency] private EntityQuery<InventoryComponent> _inventoryQuery = default!;
 
     public override void Initialize()
     {

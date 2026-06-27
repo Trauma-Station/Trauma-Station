@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseWall
   id: WallCosmicCult
@@ -52,10 +54,10 @@
   - type: SmoothEdge
 
 - type: entity
+  parent: WindowRCDResistant
   id: WindowCosmicCult
   name: malign pane
   description: An odd-looking window. Something about it unnerves you.
-  parent: WindowRCDResistant
   components:
   - type: Sprite
     drawdepth: WallTops
@@ -64,8 +66,9 @@
     sprite: _DV/CosmicCult/Tileset/cosmicwindow.rsi
     state: full
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: Glass
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:

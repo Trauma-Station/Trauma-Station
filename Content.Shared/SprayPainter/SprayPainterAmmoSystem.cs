@@ -11,11 +11,11 @@ namespace Content.Shared.SprayPainter;
 /// <summary>
 /// The system handles interactions with spray painter ammo.
 /// </summary>
-public sealed class SprayPainterAmmoSystem : EntitySystem
+public sealed partial class SprayPainterAmmoSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Trauma
-    [Dependency] private readonly SharedChargesSystem _charges = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!; // Trauma
+    [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

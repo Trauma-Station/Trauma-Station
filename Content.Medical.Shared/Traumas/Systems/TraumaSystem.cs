@@ -3,6 +3,7 @@
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Body;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Systems;
@@ -17,16 +18,16 @@ namespace Content.Medical.Shared.Traumas;
 
 public sealed partial class TraumaSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly AlertsSystem _alert = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private WoundSystem _wound = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private AlertsSystem _alert = default!;
 
     private static readonly ProtoId<AlertPrototype> _brokenBonesAlertId = "BrokenBones";
 
@@ -36,5 +37,15 @@ public sealed partial class TraumaSystem : EntitySystem
         InitProcess();
         InitBones();
         InitOrgans();
+    }
+    /// <summary>
+    /// Heals bone damage on a woundable, if it has a bone. Does nothing if it has no bone.
+    /// </summary>
+    public void HealBone(Entity<WoundableComponent> woundable, FixedPoint2 amount)
+    {
+        if (GetBone(woundable.AsNullable()) is not { } bone)
+            return;
+
+        ApplyDamageToBone(bone, -amount, bone.Comp);
     }
 }

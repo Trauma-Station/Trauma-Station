@@ -31,20 +31,20 @@ namespace Content.Shared.Weapons.Reflect;
 /// <summary>
 /// This handles reflecting projectiles and hitscan shots.
 /// </summary>
-public sealed class ReflectSystem : EntitySystem
+public sealed partial class ReflectSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
     // </Trauma>
-    [Dependency] private readonly INetManager _netManager = default!;
-    //[Dependency] private readonly IRobustRandom _random = default!; // Trauma - replaced by predicted random
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private INetManager _netManager = default!;
+    //[Dependency] private IRobustRandom _random = default!; // Trauma - replaced by predicted random
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -141,9 +141,11 @@ public sealed class ReflectSystem : EntitySystem
         // <Trauma>
         var ev = new ProjectileReflectedEvent(reflector, user);
         RaiseLocalEvent(projectile, ref ev);
-        // </Trauma>
-
+        /* moved below
         PlayAudioAndPopup(reflector.Comp, user);
+        */
+        EntityUid? shooter = null;
+        // </Trauma>
 
         if (Resolve(projectile, ref projectile.Comp, false))
         {
@@ -157,6 +159,7 @@ public sealed class ReflectSystem : EntitySystem
 
             _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)} from {ToPrettyString(projectile.Comp.Weapon)} shot by {projectile.Comp.Shooter}");
 
+            shooter = projectile.Comp.Shooter; // Trauma
             projectile.Comp.Shooter = user;
             projectile.Comp.Weapon = user;
             Dirty(projectile, projectile.Comp);
@@ -165,6 +168,8 @@ public sealed class ReflectSystem : EntitySystem
         {
             _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(user)} reflected {ToPrettyString(projectile)}");
         }
+
+        PlayAudioAndPopup(reflector.Comp, user, shooter); // Trauma
 
         return true;
     }
@@ -192,7 +197,7 @@ public sealed class ReflectSystem : EntitySystem
             return false;
         }
 
-        PlayAudioAndPopup(reflector.Comp, user);
+        PlayAudioAndPopup(reflector.Comp, user, shooter); // Trauma - added shooter
 
         // WD EDIT START
         if (reflector.Comp.DamageOnReflectModifier != 0 && damage != null)
@@ -210,14 +215,11 @@ public sealed class ReflectSystem : EntitySystem
         return true;
     }
 
-    private void PlayAudioAndPopup(ReflectComponent reflect, EntityUid user)
+    private void PlayAudioAndPopup(ReflectComponent reflect, EntityUid user, EntityUid? shooter) // Trauma - added shooter
     {
-        // <Trauma> - clientside only, all clients predict projectiles (also fun note that user is not the user)
-        if (_netManager.IsServer || !_timing.IsFirstTimePredicted)
-            return;
-
-        _popup.PopupEntity(Loc.GetString("reflect-shot"), user);
-        _audio.PlayLocal(reflect.SoundOnReflect, user, null);
+        // <Trauma>
+        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, shooter);
+        _audio.PlayPredicted(reflect.SoundOnReflect, user, shooter);
         // </Trauma>
     }
 

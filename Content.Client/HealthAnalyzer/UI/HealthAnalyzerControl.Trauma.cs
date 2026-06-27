@@ -9,6 +9,7 @@ using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Body;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -106,10 +107,14 @@ public sealed partial class HealthAnalyzerControl
 
         PartView.Visible = SpriteView.Visible;
 
+        var bloodLevelLow = !float.IsNaN(state.BloodLevel)
+                            && _entityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream)
+                            && state.BloodLevel < bloodstream.BloodlossThreshold;
+
         switch (state.ScanState)
         {
             case HealthAnalyzerBodyState body:
-                PopulateBody(target, state, body);
+                PopulateBody(target, state, body, bloodLevelLow);
                 break;
             case HealthAnalyzerOrgansState organs:
                 PopulateOrgans(organs);
@@ -131,7 +136,7 @@ public sealed partial class HealthAnalyzerControl
 
     #region Scan state populate methods
 
-    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body)
+    public void PopulateBody(EntityUid target, HealthAnalyzerUiState state, HealthAnalyzerBodyState body, bool bloodLevelLow = false)
     {
         var part = _entityManager.GetEntity(state.Part);
         if (part != null)
@@ -175,6 +180,13 @@ public sealed partial class HealthAnalyzerControl
             ConditionsListContainer.AddChild(new RichTextLabel
             {
                 Text = Loc.GetString("condition-body-unrevivable", ("entity", identity)),
+                Margin = new Thickness(0, 4),
+            });
+
+        if (bloodLevelLow)
+            ConditionsListContainer.AddChild(new RichTextLabel
+            {
+                Text = Loc.GetString("condition-body-low-blood", ("entity", identity)),
                 Margin = new Thickness(0, 4),
             });
 
@@ -279,18 +291,7 @@ public sealed partial class HealthAnalyzerControl
         ConditionsListContainer.RemoveAllChildren();
         GroupsContainer.RemoveAllChildren();
 
-        var solutions = new Dictionary<NetEntity, Solution>();
-        foreach (var netEnt in state.SolutionEntities)
-        {
-            var uid = _entityManager.GetEntity(netEnt);
-
-            foreach (var (_, solution) in _solution.EnumerateSolutions(uid))
-            {
-                solutions.Add(netEnt, solution.Comp.Solution);
-            }
-        }
-
-        DrawSolutionDiagnostics(solutions);
+        DrawSolutionDiagnostics(state.SolutionEntities);
 
         ConditionsListContainer.AddChild(new RichTextLabel
         {
@@ -395,41 +396,45 @@ public sealed partial class HealthAnalyzerControl
         GroupsContainer.AddChild(groupContainer);
     }
 
-    private void DrawSolutionDiagnostics(Dictionary<NetEntity, Solution> solutions)
+    private void DrawSolutionDiagnostics(List<NetEntity> sources)
     {
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-        foreach (var (ent, data) in solutions)
+        foreach (var source in sources)
         {
-            // TODO SHITMED: get SolutionComponent off ent??? it should be networked
-            var groupTitleText = Loc.GetString("group-solution-name",
-                ("solution", data.Name ?? Loc.GetString("group-solution-unknown")));
-
-            var groupContainer = new BoxContainer
+            var uid = _entityManager.GetEntity(source);
+            foreach (var (name, ent) in _solution.EnumerateSolutions(uid))
             {
-                Align = BoxContainer.AlignMode.Begin,
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-            };
+                // TODO SHITMED: get SolutionComponent off ent??? it should be networked
+                var groupTitleText = Loc.GetString("group-solution-name",
+                    ("solution", name ?? Loc.GetString("group-solution-unknown")));
 
-            groupContainer.AddChild(CreateDiagnosticGroupTitle(textInfo.ToTitleCase(groupTitleText), "metaphysical"));
+                var groupContainer = new BoxContainer
+                {
+                    Align = BoxContainer.AlignMode.Begin,
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                };
 
-            GroupsContainer.AddChild(groupContainer);
+                groupContainer.AddChild(CreateDiagnosticGroupTitle(textInfo.ToTitleCase(groupTitleText), "metaphysical"));
 
-            foreach (var reagent in data.Contents)
-            {
-                if (reagent.Quantity == 0)
-                    continue;
+                GroupsContainer.AddChild(groupContainer);
 
-                var reagentName = Loc.GetString("chem-master-window-unknown-reagent-text");
-                if (_prototypes.Resolve<ReagentPrototype>(reagent.Reagent.Prototype, out var proto))
-                    reagentName = proto.LocalizedName;
+                foreach (var reagent in ent.Comp.Solution.Contents)
+                {
+                    if (reagent.Quantity == 0)
+                        continue;
 
-                var reagentString = $"{Loc.GetString(
-                    "group-solution-contents",
-                    ("reagent", textInfo.ToTitleCase(reagentName)),
-                    ("quantity", reagent.Quantity)
-                )}";
+                    var reagentName = Loc.GetString("chem-master-window-unknown-reagent-text");
+                    if (_prototypes.Resolve<ReagentPrototype>(reagent.Reagent.Prototype, out var proto))
+                        reagentName = proto.LocalizedName;
 
-                groupContainer.AddChild(CreateDiagnosticItemLabel(reagentString.Insert(0, " · ")));
+                    var reagentString = $"{Loc.GetString(
+                        "group-solution-contents",
+                        ("reagent", textInfo.ToTitleCase(reagentName)),
+                        ("quantity", reagent.Quantity)
+                    )}";
+
+                    groupContainer.AddChild(CreateDiagnosticItemLabel(reagentString.Insert(0, " · ")));
+                }
             }
         }
     }

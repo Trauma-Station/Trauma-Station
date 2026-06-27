@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Random;
@@ -16,12 +17,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Server.Botany.Systems;
 
-public sealed class PlantAnalyzerSystem : EntitySystem
+public sealed partial class PlantAnalyzerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedAtmosphereSystem _atmos = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -242,7 +244,6 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         return ret;
     }
 
-    //Funkystation - Adjusted to work for new gases
     public string[] GetGasFlags(IEnumerable<Gas> gases)
     {
         int gasLength = gases.Count();
@@ -250,7 +251,7 @@ public sealed class PlantAnalyzerSystem : EntitySystem
         int i = 0;
         foreach (var gas in gases)
         {
-            plantGases[i] = Loc.GetString($"gases-{gas}");
+            plantGases[i] = Loc.GetString(_atmos.GetGas(gas).Name);
             i++;
         }
         return plantGases;

@@ -8,10 +8,10 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
-public sealed class LabyrinthHandbookSystem : EntitySystem
+public sealed partial class LabyrinthHandbookSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     public override void Initialize()
     {

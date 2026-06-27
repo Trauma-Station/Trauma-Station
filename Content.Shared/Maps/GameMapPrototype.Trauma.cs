@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared.Maps;
 
 /// <summary>
@@ -13,4 +15,11 @@ public sealed partial class GameMapPrototype
     /// </summary>
     [DataField]
     public List<string> Planets = new() { "Lavaland" };
+
+    /// <summary>
+    /// The map pool's <c>RequiredEntities</c> that this map gets to leave out and still pass tests.
+    /// These should have a good reason to not be mapped.
+    /// </summary>
+    [DataField]
+    public HashSet<EntProtoId> IgnoredRequiredEntities = new();
 }

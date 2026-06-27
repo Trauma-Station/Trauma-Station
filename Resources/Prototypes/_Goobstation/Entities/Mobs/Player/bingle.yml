@@ -1,43 +1,4 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-# SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 GMWQ <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 Gareth Quaile <garethquaile@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-# SPDX-FileCopyrightText: 2025 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 unknown <Administrator@DESKTOP-PMRIVVA.kommune.indresogn.no>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
-# This is for random skins
-- type: entity
-  id: MobBingleRandom
-  parent: MarkerBase
-  name: bingle
-  suffix: Random
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Mobs/Bingle/bingle.rsi
-    state: alive
-  - type: EntityTableSpawner
-    table: !type:GroupSelector
-      children:
-      - id: MobBingleHunk
-        weight: 1
-      - id: MobBingleSlavering
-        weight: 1
-      - id: MobBingleBoney
-        weight: 1
-
 
 # Base bingle
 - type: entity
@@ -56,7 +17,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
-      settings: default
+      settings: short
   - type: Sprite
     drawdepth: Mobs
     sprite: _Goobstation/Mobs/Bingle/bingle.rsi
@@ -110,8 +71,9 @@
     overtime: 40
     sound: /Audio/Weapons/egloves.ogg
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Effects/Footsteps/slime1.ogg
@@ -123,6 +85,7 @@
     speechVerb: Bingle
     speechSounds: Slime
   - type: LanguageSpeaker
+    currentLanguage: Bingle
     speaks:
     - Bingle
     understands:
@@ -204,8 +167,9 @@
         Structural: 28
         Ion: 7
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: BingleUpgraded
+  - type: Injurable
+    damageContainer: Biological
 
 # Skin - turkle
 - type: entity

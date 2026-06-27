@@ -1,3 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: listing
+  id: AccessConfiguratorSyndicate
+  name: uplink-syndicate-access-config-name
+  description: uplink-syndicate-access-config-desc
+  productEntity: AccessConfiguratorSyndicate
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkDisruption
+
 # upstream removed it lol
 - type: listing
   id: UplinkSuperSurplusBundle
@@ -6,6 +18,7 @@
   productEntity: CrateSyndicateSuperSurplusBundle
   cost:
     Telecrystal: 200
+  discountCategory: null # WAY too free
   categories:
   - UplinkDisruption
   conditions:
@@ -19,15 +32,17 @@
       components:
       - SurplusBundle
 
-# - type: listing
-#   id: UplinkXenomorphBundle
-#   name: uplink-xenomorph-compatibility-bundle-name
-#   description: uplink-xenomorph-compatibility-bundle-desc
-#   icon:
-#     sprite: /Textures/Structures/Storage/Crates/syndicate.rsi
-#     state: icon
-#   productEntity: CrateXenomorphBundle
-#   cost:
-#     Telecrystal: 100
-#   categories:
-#   - UplinkDisruption
+- type: listing
+  id: UplinkDisposableTurretNukie
+  name: uplink-disposable-turret-name
+  description: uplink-disposable-turret-desc
+  productEntity: ToolboxElectricalTurretFilled
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+   whitelist:
+     tags:
+     - NukeOpsUplink

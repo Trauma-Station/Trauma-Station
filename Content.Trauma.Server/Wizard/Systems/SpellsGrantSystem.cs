@@ -22,17 +22,17 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class SpellsGrantSystem : EntitySystem
+public sealed partial class SpellsGrantSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly ObjectivesSystem _objectives = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
-    [Dependency] private readonly TraumaTargetObjectiveSystem _traumaTarget = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
+    [Dependency] private TraumaTargetObjectiveSystem _traumaTarget = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -134,11 +134,8 @@ public sealed class SpellsGrantSystem : EntitySystem
 
         comp.Granted = true;
 
-        if (comp.AntagProfile != null)
-        {
-            _player.TryGetSessionById(args.Mind.Comp.UserId, out var session);
-            _antag.ForceMakeAntag<SpellsGrantComponent>(session, comp.AntagProfile);
-        }
+        if (comp.AntagProfile is { } rule && _player.TryGetSessionById(args.Mind.Comp.UserId, out var session))
+            _antag.ForceMakeAntag<SpellsGrantComponent>(session, rule);
 
         var container = EnsureComp<ActionsContainerComponent>(args.Mind.Owner);
 

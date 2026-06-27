@@ -15,13 +15,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Possession;
 
-public abstract class SharedPossessionSystem : EntitySystem
+public abstract partial class SharedPossessionSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] protected readonly SharedContainerSystem _container = default!;
-    [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] protected SharedContainerSystem _container = default!;
+    [Dependency] protected SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

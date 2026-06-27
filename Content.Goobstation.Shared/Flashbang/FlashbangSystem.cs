@@ -10,10 +10,10 @@ using Content.Shared.Stunnable;
 
 namespace Content.Goobstation.Shared.Flashbang;
 
-public sealed class FlashbangSystem : EntitySystem
+public sealed partial class FlashbangSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ using Content.Shared.Verbs;
 
 namespace Content.Goobstation.Shared.Blob;
 
-public abstract class SharedBlobTileSystem : EntitySystem
+public abstract partial class SharedBlobTileSystem : EntitySystem
 {
     protected EntityQuery<BlobObserverComponent> ObserverQuery;
     protected EntityQuery<BlobCoreComponent> CoreQuery;

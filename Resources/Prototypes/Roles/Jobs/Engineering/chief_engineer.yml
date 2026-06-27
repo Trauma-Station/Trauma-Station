@@ -6,20 +6,19 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobAtmosphericTechnician
-      time: 1h # Trauma was 2.5
+      time: 2.5h
     - !type:RoleTimeRequirement
       role: JobStationEngineer
-      time: 2h # Trauma was 5
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 5h # Trauma was 10
+      time: 10h
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
-  #canBeAntag: false
-  antagAdvantage: 75 # Goobstation
-  guides: # goobstation
+  antagAdvantage: 75 # Trauma
+  guides: # Trauma
   - Engineering
   - Command
   access:
@@ -32,12 +31,21 @@
   - Brig
   - Cryogenics
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipChiefEngineer
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
+      # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
+      - type: EngineeringStaff
+      # </Trauma>
       - type: CommandStaff
-      - type: EngineeringStaff # Goobstation
 
 - type: startingGear
   id: ChiefEngineerGear

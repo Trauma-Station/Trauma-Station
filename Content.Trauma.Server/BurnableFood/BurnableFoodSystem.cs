@@ -10,10 +10,10 @@ namespace Content.Trauma.Server.BurnableFood;
 
 public sealed partial class BurnableFoodSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private List<Entity<BurnableFoodComponent>> _burned = new();
 

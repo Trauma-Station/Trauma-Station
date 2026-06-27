@@ -18,7 +18,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -27,29 +26,29 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 {
-    [Dependency] protected readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly IPrototypeManager _proto = default!;
-    [Dependency] protected readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly EntityQuery<AwakeMobComponent> _awakeQuery = default!;
-    [Dependency] private readonly EntityQuery<KnowledgeComponent> _query = default!;
-    [Dependency] private readonly EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
-    [Dependency] private readonly EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
+    [Dependency] protected IConfigurationManager _cfg = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected IPrototypeManager _proto = default!;
+    [Dependency] protected ISharedPlayerManager _player = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
+    [Dependency] private EntityQuery<AwakeMobComponent> _awakeQuery = default!;
+    [Dependency] private EntityQuery<KnowledgeComponent> _query = default!;
+    [Dependency] private EntityQuery<KnowledgeContainerComponent> _containerQuery = default!;
+    [Dependency] private EntityQuery<KnowledgeHolderComponent> _holderQuery = default!;
 
     /// <summary>
     /// Every knowledge prototype and its data.
     /// </summary>
     public Dictionary<EntProtoId, KnowledgeComponent> AllKnowledges = new();
-    public static readonly LocId[] MasteryNames = [
-        "unskilled",
-        "novice",
-        "average",
-        "advanced",
-        "expert",
-        "master"
+    public static readonly string[] MasteryNames = [
+        "Unskilled",
+        "Novice",
+        "Average",
+        "Advanced",
+        "Expert",
+        "Master"
     ];
 
     private bool _skillGain;
@@ -645,16 +644,16 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetMasteryString(GetMastery(ent.Comp.NetLevel));
 
     public override string GetMasteryString(int mastery)
-        => Loc.GetString("knowledge-mastery-" + MasteryNames[Math.Clamp(mastery, 0, 5)]);
+        => MasteryNames[Math.Clamp(mastery, 0, 5)];
 
     public override int GetMastery(int level)
         => level switch
         {
             >= 100 => 6, // 6th mastery doesn't exist, but we can use this to say max level
             >= 88 => 5,
-            >= 76 => 4,
-            >= 51 => 3,
-            >= 26 => 2,
+            >= 75 => 4,
+            >= 50 => 3,
+            >= 25 => 2,
             >= 1 => 1,
             _ => 0,
         };
@@ -676,9 +675,9 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             >= 6 => 100, // 6th mastery doesn't exist, but we can use this to say max level
             >= 5 => 88,
-            >= 4 => 76,
-            >= 3 => 51,
-            >= 2 => 26,
+            >= 4 => 75,
+            >= 3 => 50,
+            >= 2 => 25,
             >= 1 => 1,
             _ => 0,
         };
