@@ -259,7 +259,7 @@ public abstract partial class SharedFishingSystem : EntitySystem
         {
             RemComp(fisher.Value, fisherComp);
 
-            ToggleFishingActions(ent, fisher.Value, false);
+            ToggleFishingActions((ent, ent.Comp), fisher.Value, false);
         }
 
         ent.Comp.FishingLure = null;
@@ -333,7 +333,7 @@ public abstract partial class SharedFishingSystem : EntitySystem
             _throwing.TryThrow(attachedEnt, direction, 4f, player);
         }
 
-        StopFishing(ent, player);
+        StopFishing(ent.AsNullable(), player);
         ToggleFishingActions(ent, player, false);
     }
 
@@ -350,7 +350,7 @@ public abstract partial class SharedFishingSystem : EntitySystem
         // Anything that is an active fisher should be fine.
         if (!_fisherQuery.HasComp(args.Transform.ParentUid))
         {
-            StopFishing(ent, args.OldParent);
+            StopFishing(ent.AsNullable(), args.OldParent);
         }
     }
 
