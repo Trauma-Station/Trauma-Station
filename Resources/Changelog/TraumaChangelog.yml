@@ -10842,3 +10842,10 @@ Entries:
     message: Removed memory leak that raider was usig to kill the server.
   id: 1213
   time: '2026-06-26T17:15:00.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed round end summary not listing jobs properly.
+  id: 1214
+  time: '2026-06-27T19:57:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3356
