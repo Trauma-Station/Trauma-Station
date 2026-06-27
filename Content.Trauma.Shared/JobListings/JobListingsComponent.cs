@@ -20,10 +20,10 @@ public sealed partial class JobListingsComponent : Component
     public int MaximumSideJobs;
 
     /// <summary>
-    /// List of prototypes of the objectives offered for medium side jobs.
+    /// List of prototypes of the objectives offered for major side jobs.
     /// </summary>
     [DataField]
-    public List<EntProtoId> MediumSideJobOffers = new();
+    public List<EntProtoId> MajorSideJobOffers = new();
 
     /// <summary>
     /// The list of available side jobs which can be accepted by the traitor.

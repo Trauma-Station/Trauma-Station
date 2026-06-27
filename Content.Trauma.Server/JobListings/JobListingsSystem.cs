@@ -67,7 +67,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return false;
 
-        var possibleJobs = jobBoard.Comp.MediumSideJobOffers.ShallowClone();
+        var possibleJobs = jobBoard.Comp.MajorSideJobOffers.ShallowClone();
 
         var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(jobBoard.Owner));
         while (possibleJobs.Count > 0)
@@ -161,7 +161,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
                 jobBoard.Comp.CompletedObjectives.Add(availableSideJobProto.ID);
         }
 
-        jobBoard.Comp.Reputation += sideJobComp.ReputationGain;
+        GainReputation(jobBoard, sideJobComp.ReputationGain);
         QueueDel(sideJob);
     }
 
@@ -245,14 +245,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             acceptedSideJobs.Add(info.Value);
         }
 
-        var reputationLevel = 0;
-        foreach (var bracket in jobBoard.Value.Comp.ReputationLevels)
-        {
-            if (jobBoard.Value.Comp.Reputation >= bracket)
-                reputationLevel += 1;
-            else
-                break;
-        }
+        var reputationLevel = GetReputationLevel(jobBoard.Value);
 
         var state = new JobListingsUserInterfaceState(availableSideJobs, acceptedSideJobs, jobBoard.Value.Comp.Reputation, reputationLevel, jobBoard.Value.Comp.MaximumAcceptedSideJobs, jobBoard.Value.Comp.BonusRefresh, jobBoard.Value.Comp.RefreshTime, jobBoard.Value.Comp.RefreshWaitDuration);
         _ui.SetUiState(owner, JobListingsUiKey.Key, state);
@@ -338,6 +331,35 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
 
         SetRefreshTime(jobBoard);
         FillSideJobs(jobBoard);
+    }
+
+    /// <summary>
+    /// Work out the level (and therefore title) the traitor should have based on
+    /// </summary>
+    public int GetReputationLevel(Entity<JobListingsComponent> jobBoard)
+    {
+        var reputationLevel = 0;
+        foreach (var bracket in jobBoard.Value.Comp.ReputationLevels)
+        {
+            if (jobBoard.Value.Comp.Reputation >= bracket)
+                reputationLevel += 1;
+            else
+                break;
+        }
+        return reputationLevel;
+    }
+
+    /// <summary>
+    /// Increase the traitor's reputation by a certain amount.
+    /// Grain a bonus refresh if they level up.
+    /// </summary>
+    public int GainReputation(Entity<JobListingsComponent> jobBoard, int reputationGain)
+    {
+        var oldLevel = GetReputationLevel(jobBoard);
+        jobBoard.Comp.Reputation += reputationGain;
+        var newLevel = GetReputationLevel(jobBoard);
+        if (newLevel > oldLevel)
+            jobBoard.Comp.BonusRefresh = true;
     }
 
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)

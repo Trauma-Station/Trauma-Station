@@ -65,7 +65,7 @@
   - type: JobListings
     maximumSideJobs: 4
     maximumAcceptedSideJobs: 2
-    mediumSideJobOffers:
+    majorSideJobOffers:
     - CMOHyposprayStealSideJob
     - RDHardsuitStealSideJob
     - HandTeleporterStealSideJob
@@ -79,4 +79,5 @@
     - 500 # 1 minor + 2 majors
     - 1000 # 1 minor + 2 majors + 1 extreme
     - 10000 # 1 final
+    refreshWaitDuration: 600 # 10 minutes
   # </Trauma>
