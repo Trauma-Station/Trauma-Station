@@ -74,7 +74,7 @@ public sealed class DrawingHandleMultiShader(
         handle.DrawRect(in rect, color, filled);
     }
 
-    public override void DrawRectsUnmodulated(ReadOnlySpan<WorldRect> rects);
+    public override void DrawRectsUnmodulated(ReadOnlySpan<WorldRect> rects)
     {
         handle.DrawRectsUnmodulated(rects);
     }
