@@ -10849,3 +10849,10 @@ Entries:
   id: 1214
   time: '2026-06-27T19:57:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3356
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed colossus not being attacked by NPCs and turrets.
+  id: 1215
+  time: '2026-06-27T20:11:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3359
