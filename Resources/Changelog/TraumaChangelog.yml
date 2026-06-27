@@ -10856,3 +10856,10 @@ Entries:
   id: 1215
   time: '2026-06-27T20:11:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3359
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed infinite morph glitch.
+  id: 1216
+  time: '2026-06-27T20:15:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3358
