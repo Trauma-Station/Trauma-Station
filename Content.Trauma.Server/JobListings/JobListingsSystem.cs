@@ -180,6 +180,12 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
                 return false;
         }
+        foreach (var acceptedSideJob in jobBoard.Comp.AcceptedSideJobs)
+        {
+            var acceptedSideJobProto = MetaData(acceptedSideJob).EntityPrototype;
+            if (acceptedSideJobProto is not null && acceptedSideJobProto.ID == sideJobProtoId)
+                return false;
+        }
 
         return true;
     }
@@ -328,6 +334,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             QueueDel(job);
         }
         jobBoard.Comp.AvailableSideJobs.Clear();
+        jobBoard.Comp.BonusRefresh = false;
 
         SetRefreshTime(jobBoard);
         FillSideJobs(jobBoard);
@@ -339,9 +346,9 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     public int GetReputationLevel(Entity<JobListingsComponent> jobBoard)
     {
         var reputationLevel = 0;
-        foreach (var bracket in jobBoard.Value.Comp.ReputationLevels)
+        foreach (var bracket in jobBoard.Comp.ReputationLevels)
         {
-            if (jobBoard.Value.Comp.Reputation >= bracket)
+            if (jobBoard.Comp.Reputation >= bracket)
                 reputationLevel += 1;
             else
                 break;
@@ -353,7 +360,7 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     /// Increase the traitor's reputation by a certain amount.
     /// Grain a bonus refresh if they level up.
     /// </summary>
-    public int GainReputation(Entity<JobListingsComponent> jobBoard, int reputationGain)
+    public void GainReputation(Entity<JobListingsComponent> jobBoard, int reputationGain)
     {
         var oldLevel = GetReputationLevel(jobBoard);
         jobBoard.Comp.Reputation += reputationGain;
