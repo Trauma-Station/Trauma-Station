@@ -95,7 +95,6 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] protected IMapManager MapManager = default!;
-    [Dependency] protected IPrototypeManager ProtoMan = default!;
     [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] protected EntityLookupSystem Lookup = default!;
     [Dependency] private RandomTeleportSystem _randomTeleport = default!;
