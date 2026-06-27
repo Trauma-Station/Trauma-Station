@@ -10863,3 +10863,10 @@ Entries:
   id: 1216
   time: '2026-06-27T20:15:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3358
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Service borgs now get plant analyzers
+  id: 1217
+  time: '2026-06-27T21:31:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3361
