@@ -231,6 +231,9 @@
   - type: InnateWaypointer
     waypointerProtoIds:
     - NTStationWaypointer
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
 
 - type: entity
   parent: [ MobCosmicColossusBase ]
