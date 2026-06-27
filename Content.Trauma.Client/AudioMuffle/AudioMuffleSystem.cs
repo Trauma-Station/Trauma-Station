@@ -29,7 +29,6 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     [Dependency] private EntityLookupSystem _lookup = default!;
 
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
     [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
@@ -282,7 +281,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             _xform.GetMapId(PlayerGrid.Value.Owner) == pos.MapId)
             return PlayerGrid.Value;
 
-        if (_mapManager.TryFindGridAt(pos, out var grid, out var gridComp))
+        if (_map.TryFindGridAt(pos, out var grid, out var gridComp))
             PlayerGrid = (grid, gridComp);
         else
             PlayerGrid = null;
@@ -308,7 +307,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
         {
             PlayerGrid = null;
             OldPlayerTile = null;
-            if (_mapManager.TryFindGridAt(newPos, out var g, out var gC))
+            if (_map.TryFindGridAt(newPos, out var g, out var gC))
             {
                 PlayerGrid = (g, gC);
                 var tile = _map.TileIndicesFor((g, gC), newPos);
@@ -320,7 +319,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
             return;
         }
 
-        if (!_mapManager.TryFindGridAt(newPos, out var grid, out var gridComp))
+        if (!_map.TryFindGridAt(newPos, out var grid, out var gridComp))
         {
             PlayerGrid = null;
             OldPlayerTile = null;
@@ -453,7 +452,7 @@ public sealed partial class AudioMuffleSystem : SharedAudioMuffleSystem
     public Entity<MapGridComponent>? TryFindCommonPlayerGrid(MapCoordinates pos, MapCoordinates other)
     {
         if (ResolvePlayerGrid(pos) is { } grid &&
-            _mapManager.TryFindGridAt(other, out var gridB, out _) && grid.Owner == gridB)
+            _map.TryFindGridAt(other, out var gridB, out _) && grid.Owner == gridB)
             return grid;
 
         return null;

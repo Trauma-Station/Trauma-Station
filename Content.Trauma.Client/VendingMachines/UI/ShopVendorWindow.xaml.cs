@@ -118,7 +118,7 @@ public sealed partial class ShopVendorWindow : FancyWindow
             var proto = _proto.Index(listing.Id);
             var text = listing.OverrideName != null ? Loc.GetString(listing.OverrideName) : proto.Name;
 
-            if (proto.TryGetComponent<StackComponent>(out var stack, _factory) && stack.Count > 1)
+            if (proto.TryComp<StackComponent>(out var stack, _factory) && stack.Count > 1)
             {
                 text += " ";
                 text += Loc.GetString("shop-vendor-stack-suffix", ("count", stack.Count));
