@@ -47,3 +47,11 @@
   components:
   - type: Contraband
     allowedDepartments: [ Engineering, Cargo ]
+
+- type: entity
+  abstract: true
+  id: BaseLibrarianContraband # for librarian blade non-traitor edition
+  parent: BaseRestrictedContraband
+  components:
+  - type: Contraband
+    allowedJobs: [ Librarian ]
