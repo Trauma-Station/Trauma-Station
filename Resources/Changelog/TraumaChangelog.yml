@@ -10870,3 +10870,12 @@ Entries:
   id: 1217
   time: '2026-06-27T21:31:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3361
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 3 new chemicals that botanists can make, Check the guidebook for
+      more details
+  id: 1218
+  time: '2026-06-28T21:18:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3364
