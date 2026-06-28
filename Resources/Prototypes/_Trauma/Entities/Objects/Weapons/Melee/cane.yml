@@ -1,11 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: cane blade
-  suffix: Libarian
   parent: [BaseItem, BaseLibrarianContraband, KnifeDurabilitySharpenOnly]
   id: CaneBladeLibrarian
+  suffix: Libarian
+  name: cane blade
   description: A sharp blade with a cane shaped hilt. Folded 5000 times, just to flex on ninjas.
+  components:
   - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane_blade.rsi
