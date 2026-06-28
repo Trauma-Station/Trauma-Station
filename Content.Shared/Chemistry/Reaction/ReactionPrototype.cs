@@ -95,6 +95,9 @@ namespace Content.Shared.Chemistry.Reaction
         [DataField]
         public bool Source;
 
+        [DataField("group")]
+        public string? Group;
+
         /// <summary>
         ///     Comparison for creating a sorted set of reactions. Determines the order in which reactions occur.
         /// </summary>
@@ -114,6 +117,7 @@ namespace Content.Shared.Chemistry.Reaction
 
             return string.Compare(ID, other.ID, StringComparison.Ordinal);
         }
+
     }
 
     /// <summary>

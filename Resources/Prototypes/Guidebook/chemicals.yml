@@ -24,6 +24,7 @@
   - Special
   - Others
   - Solids # Trauma
+  - OtherReactions # Ronstation
   filterEnabled: True
 
 - type: guideEntry

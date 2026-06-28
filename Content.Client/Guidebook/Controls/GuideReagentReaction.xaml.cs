@@ -5,6 +5,7 @@ using Content.Shared.Atmos.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Shared.FixedPoint;
 using Content.Shared.Localizations;
 using JetBrains.Annotations;
@@ -22,6 +23,7 @@ namespace Content.Client.Guidebook.Controls;
 public sealed partial class GuideReagentReaction : BoxContainer, ISearchableControl
 {
     private static readonly ProtoId<MixingCategoryPrototype> DefaultMixingCategory = "DummyMix";
+    private readonly ILocalizationManager _locManager = IoCManager.Resolve<ILocalizationManager>();
 
     private readonly IPrototypeManager _protoMan;
 
@@ -43,6 +45,23 @@ public sealed partial class GuideReagentReaction : BoxContainer, ISearchableCont
                 products.Add(reagent, reactantProto.Amount);
         }
         SetReagents(products, ref productContainer, protoMan, false);
+
+        var solidProducts = new Dictionary<string, int>();
+        foreach (var effect in prototype.Effects)
+        {
+            if (effect is SpawnEntity spawnEntityEffect)
+            {
+                if (_protoMan.HasIndex<EntityPrototype>(spawnEntityEffect.Entity))
+                {
+                    var entity = _protoMan.Index<EntityPrototype>(spawnEntityEffect.Entity);
+                    string product = entity.Name;
+                    int amount = (spawnEntityEffect.Number > 1) ? spawnEntityEffect.Number : 1;
+
+                    solidProducts.Add(product, amount);
+                }
+            }
+        }
+        SetSolidProducts(solidProducts);
 
         var mixingCategories = new List<MixingCategoryPrototype>();
         if (prototype.MixingCategories != null)
@@ -168,6 +187,21 @@ public sealed partial class GuideReagentReaction : BoxContainer, ISearchableCont
             container.AddChild(label);
         }
         container.Visible = true;
+    }
+
+    private void SetSolidProducts(Dictionary<string, int> solidProducts)
+    {
+        foreach (var (product, amount) in solidProducts.OrderByDescending(p => p.Value))
+        {
+            var msg  = new FormattedMessage();
+            msg.AddMarkupOrThrow(_locManager.GetString("guidebook-reagent-recipes-solid-product-display",
+                ("product", _locManager.TryGetString(product,out var localizedName) ? localizedName : product),
+                ("amount", amount)));
+
+            var label = new GuidebookRichPrototypeLink();
+            label.SetMessage(msg);
+            ProductsContainer.AddChild(label);
+        }
     }
 
     private void SetMixingCategory(IReadOnlyList<ProtoId<MixingCategoryPrototype>> mixingCategories, ReactionPrototype? prototype, IEntitySystemManager sysMan)
