@@ -1138,21 +1138,21 @@
 #   categories:
 #   - UplinkWeaponry
 
-- type: listing
-  id: UplinkMysteriousScroll
-  name: uplink-sleeping-carp-name
-  description: uplink-sleeping-carp-desc
-  productEntity: SleepingCarpScroll
-  cost:
-    Telecrystal: 100
-  discountCategory: null
-  categories:
-  - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
+# This is blatantly uncounterable and extremely unfair. You get an instant stun for free and are able to deflect projectiles. NO.
+#- type: listing
+#  id: UplinkMysteriousScroll
+#  name: uplink-sleeping-carp-name
+#  description: uplink-sleeping-carp-desc
+#  productEntity: SleepingCarpScroll
+#  cost:
+#    Telecrystal: 70
+#  categories:
+#  - UplinkWeaponry
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    blacklist:
+#      tags:
+#      - NukeOpsUplink
 
 # Explosives
 
