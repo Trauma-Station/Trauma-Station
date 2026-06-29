@@ -1,0 +1,101 @@
+- type: entity
+  parent: MobSkeletonPerson
+  id: Aerskeleton
+  name: Urist McAer
+  components:
+  - type: AnomalousEntity
+    researchPerSecond: 1000
+    contained: false
+    researchOnBehaviour: 100000
+  - type: AerSkeletonBehaviours
+
+- type: entity
+  parent: SoapHomemadeBanana
+  id: Aersoap
+  name: Aer Soap
+  components:
+  - type: AnomalousEntity
+    researchPerSecond: 0
+    contained: false
+    researchOnBehaviour: 100000
+  - type: AerSkeletonBehaviours
+
+
+    
+- type: entity
+  parent: BaseItem
+  id: AerScanner
+  name: AER scanner
+  description: A hand-held scanner built to collect information on AERs.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Research/anomalyscanner.rsi
+    layers:
+      - state: icon
+        map: ["enum.AnomalyScannerVisualLayers.Base"]
+      - map: ["enum.AnomalyScannerVisualLayers.Screen"]
+        visible: false
+        shader: unshaded
+      - state: severity_mask
+        map: ["enum.AnomalyScannerVisualLayers.SeverityMask"]
+        visible: false
+        shader: unshaded
+      - map: ["enum.AnomalyScannerVisualLayers.Stability"]
+        visible: false
+        shader: unshaded
+      - visible: false
+        map: ["enum.AnomalyScannerVisualLayers.Pulse"]
+        shader: unshaded
+      - state: supercritical
+        map: ["enum.AnomalyScannerVisualLayers.Supercritical"]
+        shader: unshaded
+        visible: false
+  - type: Appearance
+  - type: AnomalousEntityScanner
+  - type: Item
+    storedRotation: -90
+  - type: PhysicalComposition #Goobstation - Recycle update
+    materialComposition:
+      Steel: 100
+      Glass: 25
+
+- type: entity
+  id: MachineAERContainmentSensor
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: AER analysis sensor
+  description: A sensor able to examine an anomalous entity to produce usable it into research data.
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: Structures/Specific/Atmospherics/sensor.rsi
+    layers:
+    - state: gsensor1
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Transform
+    noRot: false
+  - type: Physics
+    canCollide: false
+  - type: AnomalousEntityContainment
+  - type: ResearchClient
+  - type: ActivatableUI
+    key: enum.ResearchClientUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#fca3c0"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak

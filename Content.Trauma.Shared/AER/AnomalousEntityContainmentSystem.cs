@@ -23,6 +23,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, ResearchServerGetPointsPerSecondEvent>(OnAnomalousContainmentGetPointsPerSecond);
         SubscribeLocalEvent<AnomalyShutdownEvent>(OnAnomalousContainmentShutdown);
+        //SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourEvent>(OnAerBehaviourEvent);
     }
 
     private void OnContainmentShutdown(EntityUid uid, AnomalousEntityContainmentComponent component, ComponentShutdown args)
@@ -39,8 +40,8 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
     private void OnAnomalousContainmentInteractUsing(EntityUid uid, AnomalousEntityContainmentComponent component, InteractUsingEvent args)
     {
         if (component.AnomalousEntity != null ||
-            !TryComp<AnomalyScannerComponent>(args.Used, out var scanner) ||
-            scanner.ScannedAnomaly is not { } anomalousEntity)
+            !TryComp<AnomalousEntityScannerComponent>(args.Used, out var scanner) ||
+            scanner.ScannedAER is not { } anomalousEntity)
         {
             return;
         }
@@ -48,7 +49,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         if (!TryComp<AnomalousEntityComponent>(anomalousEntity, out var anomalousEntityComponent) || anomalousEntityComponent.ConnectedContainment != null)
             return;
 
-        component.AnomalousEntity = scanner.ScannedAnomaly;
+        component.AnomalousEntity = scanner.ScannedAER;
         anomalousEntityComponent.ConnectedContainment = uid;
         //_radiation.SetSourceEnabled(uid, true);//no rads for now
         //UpdateVesselAppearance(uid,  component);//todo different apperances
@@ -90,4 +91,24 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
             //_explosion.TriggerExplosive(ent);
         }
     }
+
+    /*private void OnAerBehaviourEvent(Entity<AnomalousEntityComponent> ent, ref AerBehaviourEvent args)
+    {
+        if (ent.Comp is not { } anomalousEntityComp)
+            return;
+
+        if (ent.Comp.ConnectedContainment == null || ent.Comp.ConnectedContainment == null)
+            return;
+
+        var aerContainmentId = ent.Comp.ConnectedContainment;
+        //spawn I.D. Gear
+        var query = EntityQueryEnumerator<AnomalousEntityContainmentComponent>();
+        while (query.MoveNext(out var aerSensor, out var component))
+        {
+            if (aerSensor == aerContainmentId)
+            {
+                Spawn("SoapHomemadeBanana", Transform(aerSensor).Coordinates);
+            }
+        }
+    }*/
 }

@@ -1,10 +1,26 @@
+using Content.Goobstation.Shared.Wraith.Components.Mobs;
 using Content.Shared.Research.Systems;
 
 namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AnomalousEntitySystem : EntitySystem
 {
-    //[Dependency] private ResearchSystem _research = default!;
+    [Dependency] private SharedResearchSystem _research = default!;
+
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        //SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourEvent>(OnAerBehaviourEvent);
+    }
+
+    /*private void OnAerBehaviourEvent(Entity<AnomalousEntityComponent> ent, ref AerBehaviourEvent args)
+    {
+        //shit that give research
+        
+
+        //shit that spawns I.D. Gear
+    }*/
 
     /// <summary>
     /// calculates the pointa value of the AER
@@ -19,4 +35,5 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
 
         return (int) component.ResearchPerSecond;
     }
+
 }

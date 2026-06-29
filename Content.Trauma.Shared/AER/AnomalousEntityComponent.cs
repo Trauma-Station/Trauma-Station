@@ -13,7 +13,7 @@ public sealed partial class AnomalousEntityComponent : Component
     /// quantity of research per second produced when contained
     /// </summary>
     [DataField]
-    public float ResearchPerSecond = new();
+    public int ResearchPerSecond = new();
     /// <summary>
     /// if the entity is contained
     /// </summary>
