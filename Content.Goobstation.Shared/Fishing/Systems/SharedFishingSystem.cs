@@ -3,13 +3,23 @@
 using Content.Goobstation.Shared.Fishing.Components;
 using Content.Goobstation.Shared.Fishing.Events;
 using Content.Shared.Actions;
+using Content.Shared.EntityTable;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Item;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Goobstation.Shared.Fishing.Systems;
 
@@ -18,149 +28,122 @@ namespace Content.Goobstation.Shared.Fishing.Systems;
 /// </summary>
 public abstract partial class SharedFishingSystem : EntitySystem
 {
-    [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] protected INetManager Net = default!;
-    [Dependency] protected ThrowingSystem Throwing = default!;
-    [Dependency] protected SharedTransformSystem Xform = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private EntityTableSystem _table = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-
-    protected EntityQuery<ActiveFisherComponent> FisherQuery;
-    protected EntityQuery<ActiveFishingSpotComponent> ActiveFishSpotQuery;
-    protected EntityQuery<FishingSpotComponent> FishSpotQuery;
-    protected EntityQuery<FishingRodComponent> FishRodQuery;
-    protected EntityQuery<FishingLureComponent> FishLureQuery;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private EntityQuery<FishingSpotComponent> _spotQuery = default!;
+    [Dependency] private EntityQuery<ActiveFisherComponent> _fisherQuery;
+    [Dependency] private EntityQuery<ActiveFishingRodComponent> _activeRodQuery;
+    [Dependency] private EntityQuery<FishingRodComponent> _rodQuery;
+    [Dependency] private EntityQuery<FishingLureComponent> _lureQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        FisherQuery = GetEntityQuery<ActiveFisherComponent>();
-        ActiveFishSpotQuery = GetEntityQuery<ActiveFishingSpotComponent>();
-        FishSpotQuery = GetEntityQuery<FishingSpotComponent>();
-        FishRodQuery = GetEntityQuery<FishingRodComponent>();
-        FishLureQuery = GetEntityQuery<FishingLureComponent>();
-
         SubscribeLocalEvent<FishingRodComponent, MapInitEvent>(OnFishingRodInit);
         SubscribeLocalEvent<FishingRodComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<FishingRodComponent, ThrowFishingLureActionEvent>(OnThrowFloat);
-        SubscribeLocalEvent<FishingRodComponent, PullFishingLureActionEvent>(OnPullFloat);
+        SubscribeLocalEvent<FishingRodComponent, PullFishingLureActionEvent>(OnPullLure);
         SubscribeLocalEvent<FishingRodComponent, EntParentChangedMessage>(OnRodParentChanged);
+        SubscribeLocalEvent<FishingRodComponent, UseInHandEvent>(OnRodUseInHand);
 
         SubscribeLocalEvent<FishingRodComponent, EntityTerminatingEvent>(OnRodTerminating);
         SubscribeLocalEvent<FishingLureComponent, EntityTerminatingEvent>(OnLureTerminating);
-        SubscribeLocalEvent<ActiveFishingSpotComponent, EntityTerminatingEvent>(OnSpotTerminating);
+
+        SubscribeLocalEvent<FishingLureComponent, StartCollideEvent>(OnLureCollide);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        UpdateFishing();
-    }
 
-    private void UpdateFishing()
-    {
-        if (!Timing.IsFirstTimePredicted)
+        if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
             return;
 
-        var currentTime = Timing.CurTime;
+        var now = _timing.CurTime;
         var activeFishers = EntityQueryEnumerator<ActiveFisherComponent>();
         while (activeFishers.MoveNext(out var fisher, out var fisherComp))
         {
-            // Get fishing rod, then float, then spot... ReCurse.
-            if (TerminatingOrDeleted(fisherComp.FishingRod) ||
-                !FishRodQuery.TryComp(fisherComp.FishingRod, out var fishingRodComp) ||
-                TerminatingOrDeleted(fishingRodComp.FishingLure) ||
-                !FishLureQuery.TryComp(fishingRodComp.FishingLure, out var fishingFloatComp) ||
-                TerminatingOrDeleted(fishingFloatComp.AttachedEntity) ||
-                !ActiveFishSpotQuery.TryComp(fishingFloatComp.AttachedEntity, out var activeSpotComp))
+            var rod = fisherComp.FishingRod;
+            if (!_rodQuery.TryComp(rod, out var rodComp) ||
+                rodComp.FishingLure is not { } lure ||
+                !_activeRodQuery.TryComp(rod, out var active))
+            {
+                RemCompDeferred(fisher, fisherComp);
                 continue;
-
-            var fishRod = fisherComp.FishingRod;
-            var fishSpot = fishingFloatComp.AttachedEntity.Value;
-
-            fisherComp.TotalProgress ??= fishingRodComp.StartingProgress;
-            fisherComp.NextStruggle ??= Timing.CurTime + TimeSpan.FromSeconds(fishingRodComp.StartingStruggleTime);
+            }
 
             // Fish fighting logic
-            CalculateFightingTimings((fisher, fisherComp), activeSpotComp);
+            CalculateFightingTimings((fisher, fisherComp), active);
 
-            switch (fisherComp.TotalProgress)
+            if (fisherComp.TotalProgress < 0)
             {
-                case < 0f:
-                    // It's over
-                    _popup.PopupEntity(Loc.GetString("fishing-progress-fail"), fisher, fisher);
-                    StopFishing((fishRod, fishingRodComp), fisher);
-                    continue;
+                // It's over
+                _popup.PopupClient(Loc.GetString("fishing-progress-fail"), fisher, fisher);
+                StopFishing((rod, rodComp), fisher);
+            }
+            else if (fisherComp.TotalProgress >= 1)
+            {
+                if (active.Fish is { } fish)
+                {
+                    ThrowFishReward(fish, lure, fisher);
+                    _popup.PopupClient(Loc.GetString("fishing-progress-success"), fisher, fisher);
+                }
 
-                case >= 1f:
-                    if (activeSpotComp.Fish != null)
-                    {
-                        ThrowFishReward(activeSpotComp.Fish.Value, fishSpot, fisher);
-                        _popup.PopupEntity(Loc.GetString("fishing-progress-success"), fisher, fisher);
-                    }
-
-                    StopFishing((fishRod, fishingRodComp), fisher);
-                    break;
+                StopFishing((rod, rodComp), fisher);
             }
         }
 
-        var fishingSpots = EntityQueryEnumerator<ActiveFishingSpotComponent>();
-        while (fishingSpots.MoveNext(out var activeSpotComp))
+        var fishingSpots = EntityQueryEnumerator<ActiveFishingRodComponent>();
+        while (fishingSpots.MoveNext(out var rod, out var active))
         {
-            if (currentTime < activeSpotComp.FishingStartTime || activeSpotComp.IsActive || activeSpotComp.FishingStartTime == null)
+            if (active.Reeling || active.FishingStartTime == null || now < active.FishingStartTime)
                 continue;
 
             // Trigger start of the fishing process
-            if (TerminatingOrDeleted(activeSpotComp.AttachedFishingLure))
+            if (!_rodQuery.TryComp(rod, out var comp) || TerminatingOrDeleted(active.Fisher))
+            {
+                RemCompDeferred(rod, active);
                 continue;
+            }
 
-            // Get fishing lure, then rod, then player... ReCurse.
-            if (!FishLureQuery.TryComp(activeSpotComp.AttachedFishingLure, out var fishingFloatComp) ||
-                TerminatingOrDeleted(fishingFloatComp.FishingRod) ||
-                !FishRodQuery.TryComp(fishingFloatComp.FishingRod, out var fishRodComp))
-                continue;
-
-            var fishRod = fishingFloatComp.FishingRod;
-
-            if (TerminatingOrDeleted(fishingFloatComp.FishingRod))
-                continue;
-
-            var fisher = Transform(fishingFloatComp.FishingRod).ParentUid;
-
-            if (!Exists(fisher) || TerminatingOrDeleted(fisher))
-                continue;
-
+            var fisher = active.Fisher;
             var activeFisher = EnsureComp<ActiveFisherComponent>(fisher);
-            activeFisher.FishingRod = fishRod;
-            activeFisher.ProgressPerUse *= fishRodComp.Efficiency;
-            activeFisher.TotalProgress = fishRodComp.StartingProgress;
-            activeFisher.NextStruggle = Timing.CurTime + TimeSpan.FromSeconds(fishRodComp.StartingStruggleTime); // Compensate ping for 0.3 seconds
+            activeFisher.FishingRod = rod;
+            activeFisher.ProgressPerUse *= comp.Efficiency;
+            activeFisher.TotalProgress = comp.StartingProgress;
+            activeFisher.NextStruggle = now + comp.StartingStruggleTime; // Compensate for ping, give them a bit of time
+            Dirty(fisher, activeFisher);
 
-            // Predicted because it works like 99.9% of the time anyway.
-            _popup.PopupPredicted(Loc.GetString("fishing-progress-start"), fisher, fisher);
-            activeSpotComp.IsActive = true;
+            _popup.PopupClient(Loc.GetString("fishing-progress-start"), fisher, fisher);
+            active.Reeling = true;
         }
 
         var fishingLures = EntityQueryEnumerator<FishingLureComponent, TransformComponent>();
         while (fishingLures.MoveNext(out var fishingLure, out var lureComp, out var xform))
         {
-            if (lureComp.NextUpdate > Timing.CurTime)
+            if (now < lureComp.NextUpdate)
                 continue;
 
-            lureComp.NextUpdate = Timing.CurTime + TimeSpan.FromSeconds(lureComp.UpdateInterval);
+            lureComp.NextUpdate = now + lureComp.UpdateInterval;
 
             if (TerminatingOrDeleted(lureComp.FishingRod) ||
-                !FishRodQuery.TryComp(lureComp.FishingRod, out var fishingRodComp))
+                !_rodQuery.TryComp(lureComp.FishingRod, out var fishingRodComp))
                 continue;
 
-            var lurePos = Xform.GetMapCoordinates(fishingLure, xform);
-            var rodPos = Xform.GetMapCoordinates(lureComp.FishingRod);
+            var lurePos = _transform.GetMapCoordinates(xform);
+            var rodPos = _transform.GetMapCoordinates(lureComp.FishingRod);
             var distance = lurePos.Position - rodPos.Position;
             var fisher = Transform(lureComp.FishingRod).ParentUid;
 
-            if (!Exists(fisher) || TerminatingOrDeleted(fisher) ||
+            if (TerminatingOrDeleted(fisher) ||
                 distance.Length() > fishingRodComp.BreakOnDistance ||
                 lurePos.MapId != rodPos.MapId ||
                 !_hands.IsHolding(fisher, lureComp.FishingRod) ||
@@ -179,7 +162,7 @@ public abstract partial class SharedFishingSystem : EntitySystem
     /// </summary>
     private void ToggleFishingActions(Entity<FishingRodComponent> ent, EntityUid fisher, bool addPulling)
     {
-        if (TerminatingOrDeleted(ent) || !Exists(fisher) || TerminatingOrDeleted(fisher))
+        if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(fisher))
             return;
 
         if (addPulling)
@@ -194,99 +177,105 @@ public abstract partial class SharedFishingSystem : EntitySystem
         }
     }
 
-    protected abstract void CalculateFightingTimings(Entity<ActiveFisherComponent> fisher, ActiveFishingSpotComponent activeSpotComp);
+    private void CalculateFightingTimings(Entity<ActiveFisherComponent> fisher, ActiveFishingRodComponent active)
+    {
+        if (_timing.CurTime < fisher.Comp.NextStruggle)
+            return;
+
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(fisher));
+        fisher.Comp.NextStruggle = _timing.CurTime + TimeSpan.FromSeconds(rand.NextFloat(0.06f, 0.18f));
+        fisher.Comp.TotalProgress -= active.FishDifficulty;
+        Dirty(fisher);
+    }
 
     /// <summary>
-    /// Server-side only, sets up fishing float and throws it
+    /// Sets up fishing lure and throws it
     /// </summary>
-    protected abstract void SetupFishingFloat(Entity<FishingRodComponent> fishingRod, EntityUid player, EntityCoordinates target);
+    private void SpawnLure(Entity<FishingRodComponent> ent, EntityUid player, EntityCoordinates target)
+    {
+        var (uid, comp) = ent;
+        var targetCoords = _transform.ToMapCoordinates(target);
+        var playerCoords = _transform.GetMapCoordinates(player);
+
+        var lure = PredictedSpawnNextToOrDrop(comp.FloatPrototype, player);
+        comp.FishingLure = lure;
+        Dirty(uid, comp);
+
+        // Calculate throw direction
+        var direction = targetCoords.Position - playerCoords.Position;
+        if (direction == Vector2.Zero)
+            direction = Vector2.UnitX; // If the user somehow manages to click directly in the center of themself, just toss it to the right i guess.
+
+        // Yeet
+        _throwing.TryThrow(lure, direction, 15f, player, 2f, null, true);
+
+        // Set up lure component
+        var lureComp = EnsureComp<FishingLureComponent>(lure);
+        lureComp.FishingRod = uid;
+        lureComp.Fisher = player;
+        Dirty(lure, lureComp);
+
+        // Rope visuals
+        var visuals = EnsureComp<JointVisualsComponent>(lure);
+        visuals.Sprite = comp.RopeSprite;
+        visuals.OffsetA = comp.RopeLureOffset;
+        visuals.OffsetB = comp.RopeUserOffset;
+        visuals.Target = uid;
+        Dirty(lure, visuals);
+    }
 
     /// <summary>
-    /// Server-side only, spawns a fish and throws it to our player!
+    /// Spawns a fish and throws it to our player!
     /// </summary>
-    protected abstract void ThrowFishReward(EntProtoId fishId, EntityUid fishSpot, EntityUid target);
+    private void ThrowFishReward(EntProtoId fishId, EntityUid lure, EntityUid target)
+    {
+        var position = Transform(lure).Coordinates;
+        var fish = PredictedSpawnAtPosition(fishId, position);
+        // Throw da fish back to the player because it looks funny
+        var direction = _transform.GetWorldPosition(target) - _transform.ToWorldPosition(position);
+        if (direction == Vector2.Zero)
+            return;
+
+        var length = direction.Length();
+        var distance = Math.Clamp(length, 0.5f, 15f);
+        direction *= distance / length;
+
+        _throwing.TryThrow(fish, direction, 7f);
+    }
 
     /// <summary>
     /// Reels the fishing rod back and stops fishing progress if arguments are passed to it.
     /// </summary>
-    private void StopFishing(
-        Entity<FishingRodComponent> fishingRod,
-        EntityUid? fisher)
+    private void StopFishing(Entity<FishingRodComponent?> ent, EntityUid? fisher)
     {
-        var nullOrDeleted =
-            fishingRod.Comp.FishingLure == null || TerminatingOrDeleted(fishingRod.Comp.FishingLure.Value);
+        if (!_rodQuery.Resolve(ent, ref ent.Comp, false))
+            return;
 
-        if (!nullOrDeleted && FishLureQuery.TryComp(fishingRod.Comp.FishingLure, out var lureComp) &&
-            !TerminatingOrDeleted(lureComp.AttachedEntity) &&
-            ActiveFishSpotQuery.TryComp(lureComp.AttachedEntity, out var activeSpotComp))
-            RemCompDeferred(lureComp.AttachedEntity.Value, activeSpotComp);
+        RemComp<ActiveFishingRodComponent>(ent);
 
-        if (!nullOrDeleted && Net.IsServer)
-            QueueDel(fishingRod.Comp.FishingLure);
+        PredictedQueueDel(ent.Comp.FishingLure);
 
-        if (Exists(fisher) && !TerminatingOrDeleted(fisher) && FisherQuery.TryComp(fisher, out var fisherComp))
+        if (_fisherQuery.TryComp(fisher, out var fisherComp))
         {
-            RemCompDeferred(fisher.Value, fisherComp);
+            RemComp(fisher.Value, fisherComp);
 
-            ToggleFishingActions(fishingRod, fisher.Value, false);
+            ToggleFishingActions((ent, ent.Comp), fisher.Value, false);
         }
 
-        fishingRod.Comp.FishingLure = null;
+        ent.Comp.FishingLure = null;
+        Dirty(ent, ent.Comp);
     }
 
     #region Terminating Events
 
     private void OnRodTerminating(Entity<FishingRodComponent> ent, ref EntityTerminatingEvent args)
     {
-        TryStopFishing(ent);
+        StopFishing(ent.AsNullable(), fisher: Transform(ent).ParentUid);
     }
 
     private void OnLureTerminating(Entity<FishingLureComponent> ent, ref EntityTerminatingEvent args)
     {
-        TryStopFishing(ent);
-    }
-
-    private void OnSpotTerminating(Entity<ActiveFishingSpotComponent> ent, ref EntityTerminatingEvent args)
-    {
-        TryStopFishing(ent);
-    }
-
-    #endregion
-
-    #region Deletion Helpers
-
-    /// <summary>
-    /// Stops fishing by taking only the Fishing rod as an argument.
-    /// </summary>
-    private void TryStopFishing(Entity<FishingRodComponent> rod)
-    {
-        var player = Transform(rod).ParentUid;
-        StopFishing(rod, player);
-    }
-
-    /// <summary>
-    /// Stops fishing by taking only the Fishing lure as an argument.
-    /// </summary>
-    private void TryStopFishing(Entity<FishingLureComponent> lure)
-    {
-        if (!FishRodQuery.TryComp(lure.Comp.FishingRod, out var rodComp))
-            return;
-
-        TryStopFishing((lure.Comp.FishingRod, rodComp));
-    }
-
-    /// <summary>
-    /// Stops fishing by taking only the Active spot as an argument.
-    /// </summary>
-    private void TryStopFishing(Entity<ActiveFishingSpotComponent> spot)
-    {
-        if (!FishLureQuery.TryComp(spot.Comp.AttachedFishingLure, out var lureComp))
-            return;
-
-        if (!FishRodQuery.TryComp(lureComp.FishingRod, out var rodComp))
-            return;
-
-        TryStopFishing((lureComp.FishingRod, rodComp));
+        StopFishing(ent.Comp.FishingRod, ent.Comp.Fisher);
     }
 
     #endregion
@@ -295,62 +284,57 @@ public abstract partial class SharedFishingSystem : EntitySystem
 
     private void OnThrowFloat(Entity<FishingRodComponent> ent, ref ThrowFishingLureActionEvent args)
     {
-        if (args.Handled || !Timing.IsFirstTimePredicted)
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        if (ent.Comp.FishingLure != null || !_transform.IsValid(args.Target))
             return;
 
         var player = args.Performer;
-
-        if (ent.Comp.FishingLure != null || !Xform.IsValid(args.Target))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        SetupFishingFloat(ent, player, args.Target);
+        SpawnLure(ent, player, args.Target);
         ToggleFishingActions(ent, player, true);
-        args.Handled = true;
     }
 
-    private void OnPullFloat(Entity<FishingRodComponent> ent, ref PullFishingLureActionEvent args)
+    private void OnPullLure(Entity<FishingRodComponent> ent, ref PullFishingLureActionEvent args)
     {
-        if (args.Handled || !Timing.IsFirstTimePredicted)
+        if (args.Handled)
             return;
 
-        var player = args.Performer;
-        var (uid, component) = ent;
+        args.Handled = true;
 
-        if (component.FishingLure == null)
+        var player = args.Performer;
+        var (uid, comp) = ent;
+
+        if (comp.FishingLure == null)
         {
             ToggleFishingActions(ent, player, true);
-            args.Handled = true;
             return;
         }
 
-        _popup.PopupPredicted(Loc.GetString("fishing-rod-remove-lure", ("ent", Name(uid))), uid, uid);
+        _popup.PopupClient(Loc.GetString("fishing-rod-remove-lure", ("ent", Name(uid))), uid, uid);
 
-        if (!FishLureQuery.TryComp(component.FishingLure, out var lureComp))
+        if (!_lureQuery.TryComp(comp.FishingLure, out var lureComp))
             return;
 
-        if (lureComp.AttachedEntity != null && Exists(lureComp.AttachedEntity))
+        if (lureComp.AttachedEntity is { } attachedEnt && Exists(attachedEnt))
         {
             // TODO: so this kinda just lets you pull anything right up to you, it should instead just apply an impulse in your direction modfiied by the weight of the player vs the object
             // Also we need to autoreel/snap the line if the player gets too far away
             // Also we should probably PVS override the lure if the rod is in PVS, and vice versa to stop the joint visuals from popping in/out
-            var attachedEnt = lureComp.AttachedEntity.Value;
-            var targetCoords = Xform.GetMapCoordinates(Transform(attachedEnt));
-            var playerCoords = Xform.GetMapCoordinates(Transform(player));
-            var rand = new Random((int) Timing.CurTick.Value); // evil random prediction hack
+            var targetCoords = _transform.GetMapCoordinates(attachedEnt);
+            var playerCoords = _transform.GetMapCoordinates(player);
+            var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid));
 
             // Calculate throw direction
             var direction = (playerCoords.Position - targetCoords.Position) * rand.NextFloat(0.2f, 0.85f);
 
             // Yeet
-            Throwing.TryThrow(attachedEnt, direction, 4f, player);
+            _throwing.TryThrow(attachedEnt, direction, 4f, player);
         }
 
-        StopFishing(ent, player);
+        StopFishing(ent.AsNullable(), player);
         ToggleFishingActions(ent, player, false);
-        args.Handled = true;
     }
 
     private void OnFishingRodInit(Entity<FishingRodComponent> ent, ref MapInitEvent args)
@@ -364,9 +348,9 @@ public abstract partial class SharedFishingSystem : EntitySystem
             return;
 
         // Anything that is an active fisher should be fine.
-        if (!FisherQuery.HasComp(args.Transform.ParentUid))
+        if (!_fisherQuery.HasComp(args.Transform.ParentUid))
         {
-            StopFishing(ent, args.OldParent);
+            StopFishing(ent.AsNullable(), args.OldParent);
         }
     }
 
@@ -378,5 +362,69 @@ public abstract partial class SharedFishingSystem : EntitySystem
             args.AddAction(ref ent.Comp.PullLureActionEntity, ent.Comp.PullLureActionId);
     }
 
+    private void OnRodUseInHand(Entity<FishingRodComponent> ent, ref UseInHandEvent args)
+    {
+        if (args.Handled || !_fisherQuery.TryComp(args.User, out var fisherComp))
+            return;
+
+        args.Handled = true;
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        fisherComp.TotalProgress += fisherComp.ProgressPerUse * ent.Comp.Efficiency;
+        Dirty(args.User, fisherComp);
+    }
+
+    private void OnLureCollide(Entity<FishingLureComponent> ent, ref StartCollideEvent args)
+    {
+        // TODO: make it so this can collide with any unacnchored objects (items, mobs, etc) but not the player casting it (get parent of rod?)
+        // Fishing spot logic
+        var attachedEnt = args.OtherEntity;
+
+        if (!_spotQuery.TryComp(attachedEnt, out var spotComp))
+        {
+            if (args.OtherBody.BodyType == BodyType.Static)
+                return;
+
+            Anchor(ent, attachedEnt);
+            return;
+        }
+
+        // Anchor fishing float on an entity
+        Anchor(ent, attachedEnt);
+
+        // Currently we don't support multiple loots from this
+        var fish = _table.GetSpawns(spotComp.FishList).First();
+
+        // Get fish difficulty
+        _proto.Index(fish).TryGetComponent(out FishComponent? fishComp, Factory);
+
+        // Assign things that depend on the fish
+        var rod = ent.Comp.FishingRod;
+        var active = EnsureComp<ActiveFishingRodComponent>(rod);
+        active.Fish = fish;
+        active.FishDifficulty = fishComp?.FishDifficulty ?? FishComponent.DefaultDifficulty;
+
+        // Assign things that depend on the spot
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(rod));
+        var time = spotComp.FishDefaultTimer + rand.NextFloat(-spotComp.FishTimerVariety, spotComp.FishTimerVariety);
+        active.FishingStartTime = _timing.CurTime + TimeSpan.FromSeconds(time);
+        active.Fisher = ent.Comp.Fisher;
+        Dirty(rod, active);
+    }
+
     #endregion
+
+    private void Anchor(Entity<FishingLureComponent> ent, EntityUid attachedEnt)
+    {
+        var spotPosition = _transform.GetWorldPosition(attachedEnt);
+        _transform.SetWorldPosition(ent, spotPosition);
+        _transform.SetParent(ent, attachedEnt);
+        _physics.SetLinearVelocity(ent, Vector2.Zero);
+        _physics.SetAngularVelocity(ent, 0f);
+        ent.Comp.AttachedEntity = attachedEnt;
+        Dirty(ent);
+        RemComp<ItemComponent>(ent);
+        RemComp<PullableComponent>(ent);
+    }
 }
