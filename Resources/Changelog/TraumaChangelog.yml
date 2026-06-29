@@ -10879,3 +10879,33 @@ Entries:
   id: 1218
   time: '2026-06-28T21:18:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3364
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reactor control rods are now built in to fuel rods rather than a separate
+      part.
+  - type: Add
+    message: >-
+      Added neutron reflectors that make reactors more powerful for the same
+      fuel use.
+  - type: Tweak
+    message: >-
+      Changed reactor thermal masses to actually reflect a ~15kg part rather
+      than literally half the reactor itself in every part. Parts now heat up
+      and transfer heat much faster.
+  - type: Fix
+    message: Fixed reactor thermal power calculation being wrong.
+  - type: Fix
+    message: Fixed reactor UI having flipped X/Y axes.
+  - type: Tweak
+    message: >-
+      Non-spent fuel rods are no longer radioactive, it makes no sense and
+      allowed lowest effort cheese ever with rad collectors.
+  - type: Tweak
+    message: >-
+      The reactor itself is no longer radioactive at low radiation levels,
+      radiation shielding is a thing.
+  id: 1219
+  time: '2026-06-29T18:28:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3370
