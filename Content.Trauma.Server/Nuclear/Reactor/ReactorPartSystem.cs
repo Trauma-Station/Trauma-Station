@@ -31,8 +31,8 @@ public sealed partial class ReactorPartSystem : EntitySystem
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;
     [Dependency] private EntityQuery<NuclearPropertiesComponent> _propsQuery = default!;
+    [Dependency] private EntityQuery<NuclearReactorComponent> _reactorQuery = default!;
     [Dependency] private EntityQuery<ReactorControlRodComponent> _controlQuery = default!;
-    [Dependency] private EntityQuery<ReactorFuelRodComponent> _fuelQuery = default!;
     [Dependency] private EntityQuery<ReactorGasChannelComponent> _channelQuery = default!;
 
     private static readonly ProtoId<DamageTypePrototype> Heat = "Heat";
@@ -87,11 +87,10 @@ public sealed partial class ReactorPartSystem : EntitySystem
     private void OnMapInit(Entity<NuclearPropertiesComponent> ent, ref MapInitEvent args)
     {
         var (uid, comp) = ent;
-        var radvalue = (comp.Radioactivity * 0.1f) + (comp.NeutronRadioactivity * 0.15f);
-        if (radvalue > 0)
+        if (comp.SpentFuel > 0)
         {
             var source = EnsureComp<RadiationSourceComponent>(uid);
-            _radiation.SetIntensity((uid, source), radvalue);
+            _radiation.SetIntensity((uid, source), comp.SpentFuel);
         }
 
         if (comp.NeutronRadioactivity > 0)
@@ -157,6 +156,7 @@ public sealed partial class ReactorPartSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        // TODO: staggered update
         _accumulator += frameTime;
         if (_accumulator > _threshold)
         {
@@ -167,28 +167,31 @@ public sealed partial class ReactorPartSystem : EntitySystem
 
     private void AccUpdate()
     {
-        var query = EntityQueryEnumerator<ReactorPartComponent>();
-        while (query.MoveNext(out var uid, out var component))
+        var query = EntityQueryEnumerator<ReactorPartComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var xform))
         {
+            if (_reactorQuery.HasComp(xform.ParentUid))
+                continue; // ignore parts inside of a reactor they're physically separated from the outside
+
             var gasMix = _atmos.GetTileMixture(uid, true) ?? GasMixture.SpaceGas;
-            var DeltaT = (component.Temperature - gasMix.Temperature) * 0.01f;
+            var DeltaT = (comp.Temperature - gasMix.Temperature) * 0.01f;
 
             if (Math.Abs(DeltaT) < 0.1)
                 continue;
 
-            // This viloates the laws of physics, but if energy is conserved, then pulling out a hot rod will turn the room into an oven
+            // This violates the laws of physics, but if energy is conserved, then pulling out a hot rod will turn the room into an oven
             // Also does not take into account thermal mass
-            component.Temperature -= DeltaT;
+            comp.Temperature -= DeltaT;
             if (!gasMix.Immutable) // This prevents it from heating up space itself
                 gasMix.Temperature += DeltaT;
 
             var burncomp = EnsureComp<DamageOnInteractComponent>(uid);
 
-            burncomp.IsDamageActive = component.Temperature > _hotTemp;
+            burncomp.IsDamageActive = comp.Temperature > _hotTemp;
 
             if (burncomp.IsDamageActive)
             {
-                var damage = Math.Max((component.Temperature - _hotTemp) / _burnDiv, 0);
+                var damage = Math.Max((comp.Temperature - _hotTemp) / _burnDiv, 0);
 
                 burncomp.Damage = new()
                 {
@@ -390,6 +393,13 @@ public sealed partial class ReactorPartSystem : EntitySystem
         var csa = _rate * part.NeutronCrossSection;
         foreach (var neutron in flux)
         {
+            if (_random.Prob(part.ReflectChance)) // reflection
+            {
+                // A really complicated way of saying do a 180 or a 180+/-45
+                neutron.Dir = (neutron.Dir.GetOpposite().ToAngle() + (_random.NextAngle() / 4) - (MathF.Tau / 8)).GetDir();
+                continue;
+            }
+
             if (!Prob(props.Density * csa * _bias))
                 continue;
 
@@ -402,7 +412,7 @@ public sealed partial class ReactorPartSystem : EntitySystem
                     neutrons.Add(new(_random.NextAngle().GetDir(), _random.Next(2, 4)));
                 }
                 neutrons.Remove(neutron);
-                part.Temperature += 75f;
+                part.Temperature += 75f * props.NeutronRadioactivity;
             }
             else if (neutron.Velocity <= 5 && Prob(_rate * props.Radioactivity * _bias)) // stimulated emission
             {
@@ -413,14 +423,11 @@ public sealed partial class ReactorPartSystem : EntitySystem
                     neutrons.Add(new(_random.NextAngle().GetDir(), _random.Next(1, 4)));
                 }
                 neutrons.Remove(neutron);
-                part.Temperature += 50f;
+                part.Temperature += 50f * props.Radioactivity;
             }
             else
             {
-                if (Prob(_rate * props.Hardness)) // reflection, based on hardness
-                    // A really complicated way of saying do a 180 or a 180+/-45
-                    neutron.Dir = (neutron.Dir.GetOpposite().ToAngle() + (_random.NextAngle() / 4) - (MathF.Tau / 8)).GetDir();
-                else if (isControlRod)
+                if (isControlRod)
                     neutron.Velocity = 0;
                 else
                     neutron.Velocity--;
@@ -454,14 +461,15 @@ public sealed partial class ReactorPartSystem : EntitySystem
 
         if (isControlRod)
         {
-            var current = part.NeutronCrossSection;
+            // cross section of a fuel rod is inversely proportional to its control rod insertion
+            var current = 1f - part.NeutronCrossSection;
             var target = control!.ConfiguredInsertionLevel;
             if (!part.Melted && part.NeutronCrossSection != target)
             {
                 if (target < current)
-                    part.NeutronCrossSection -= Math.Min(0.1f, current - target);
+                    part.NeutronCrossSection += Math.Min(0.1f, current - target);
                 else
-                    part.NeutronCrossSection += Math.Min(0.1f, target - current);
+                    part.NeutronCrossSection -= Math.Min(0.1f, target - current);
             }
         }
 

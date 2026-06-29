@@ -163,9 +163,9 @@ public sealed partial class NuclearReactorWindow : FancyWindow
     public void InitReactorGrid()
     {
         _data = new ReactorSlotBUIData[_width * _height];
-        for (var x = 0; x < _width; x++)
+        for (var y = 0; y < _height; y++)
         {
-            for (var y = 0; y < _height; y++)
+            for (var x = 0; x < _width; x++)
             {
                 var styleBox = new StyleBoxFlat();
                 var icon = new TextureRect()
@@ -181,10 +181,10 @@ public sealed partial class NuclearReactorWindow : FancyWindow
                     TooltipDelay = 0.5f
                 };
 
-                var vect = new Vector2i(x, y);
-                _reactorGrid.Add(vect, styleBox);
-                _reactorRect.Add(vect, icon);
-                _reactorButton.Add(vect, button);
+                var pos = new Vector2i(x, y);
+                _reactorGrid.Add(pos, styleBox);
+                _reactorRect.Add(pos, icon);
+                _reactorButton.Add(pos, button);
 
                 var control = new PanelContainer
                 {
@@ -194,8 +194,7 @@ public sealed partial class NuclearReactorWindow : FancyWindow
                     VerticalExpand = true,
                 };
                 control.AddChild(button);
-                var nvect = new Vector2i(x, y);
-                button.OnPressed += _ => SetTarget(nvect);
+                button.OnPressed += _ => SetTarget(pos);
                 button.AddChild(icon);
                 ReactorGrid.AddChild(control);
             }
