@@ -10922,3 +10922,10 @@ Entries:
   id: 1220
   time: '2026-06-29T19:33:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3360
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed problems with nuclear centrifuge.
+  id: 1221
+  time: '2026-06-29T21:58:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3375
