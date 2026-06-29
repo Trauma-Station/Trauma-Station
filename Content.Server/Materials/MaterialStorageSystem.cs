@@ -79,11 +79,6 @@ public sealed partial class MaterialStorageSystem : SharedMaterialStorageSystem
             var proto = _prototypeManager.Index<EntityPrototype>(material.StackEntity);
             if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, Factory))
                 return;
-
-            if (proto.TryGetComponent<TagComponent>(out var tag, EntityManager.ComponentFactory)
-                && component.DisallowOreEjection
-                && _tag.HasTag(tag, OreTag))
-                return;
             // Goobstation Change End
 
             var volumePerSheet = composition.MaterialComposition.FirstOrDefault(kvp => kvp.Key == msg.Material).Value;

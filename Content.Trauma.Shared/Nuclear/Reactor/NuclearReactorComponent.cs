@@ -186,7 +186,7 @@ public sealed partial class NuclearReactorComponent : Component
     /// The soft maximum radiation the reactor is expected to produce, beyond which radiation increases logarithmically. Also used for alarms and UI.
     /// </summary>
     [DataField]
-    public float MaximumRadiation = 50;
+    public float MaximumRadiation = 30;
 
     /// <summary>
     /// The maximum thermal power the reactor is expected to produce
