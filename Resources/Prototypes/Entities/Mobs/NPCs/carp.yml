@@ -124,6 +124,10 @@
   id: MobCarpMagic
   description: Looks like some kind of fish. Might be magical.
   components:
+    # <Trauma>
+    - type: Damageable
+      damageModifierSet: MagicCarp
+    # </Trauma>
     - type: Sprite
       sprite: Mobs/Aliens/Carps/magic.rsi
     - type: TypingIndicator
@@ -135,6 +139,10 @@
   id: MobCarpHolo
   description: Carp made out of holographic energies. Sadly for you, it is very much real.
   components:
+    # <Trauma>
+    - type: Damageable
+      damageModifierSet: HoloCarp
+    # </Trauma>
     - type: Sprite
       sprite: Mobs/Aliens/Carps/holo.rsi
     - type: Physics

@@ -103,6 +103,9 @@
 ## F ##
 
 - type: Tag
+  id: Firebomb
+
+- type: Tag
   id: FlamethrowerBackpack # used for rev flamethrower's ammo provider
 
 - type: Tag
@@ -169,6 +172,9 @@
 
 - type: Tag
   id: PartCapacitor # Construction: WeaponGaussgunImprov
+
+- type: Tag
+  id: Pipebomb
 
 - type: Tag
   id: PlasteelScraps # Construction: BloomeryColdPlasteel
@@ -275,3 +281,6 @@
 
 - type: Tag
   id: Whetstone # Durability repair of spears and knives
+
+- type: Tag
+  id: WoodenSword

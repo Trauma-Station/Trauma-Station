@@ -25,3 +25,19 @@
     jumpsuit: ClothingUniformJumpsuitPrisoner
     mask: CigaretteSpent
     id: DClassIDCard # fuck you
+
+- type: entity
+  parent: [ SolutionWeapon, SolutionTiny ]
+  id: SolutionShivaSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: HeartbreakerToxin
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: HeartbreakerToxin
+        Quantity: 1

@@ -295,6 +295,13 @@
   id: SolutionVenomSpiderSpace
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: ChloralHydrate
+        Quantity: 2
+  # </Trauma>
   - type: Solution
     solution:
       reagents:
@@ -419,6 +426,13 @@
   id: SolutionVenomCobraSpace
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: NorepinephricAcid
+        Quantity: 3
+  # </Trauma>
   - type: Solution
     solution:
       reagents:

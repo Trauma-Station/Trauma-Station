@@ -35,7 +35,7 @@ public sealed partial class MalignRiftSpawnRule : StationEventSystem<MalignRiftS
         if (!TryComp<StationEventComponent>(uid, out _))
             return;
 
-        AdminLogManager.Add(LogType.EventAnnounced, $"Event added / announced: {ToPrettyString(uid)}");
+        AdminLogManager.Add(LogType.EventAnnounced, $"Event added / announced: {uid}");
     }
     protected override void Started(EntityUid uid, MalignRiftSpawnRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

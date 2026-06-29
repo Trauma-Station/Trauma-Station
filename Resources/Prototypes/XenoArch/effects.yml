@@ -107,10 +107,10 @@
       weight: 3.0
     - id: XenoArtifactHealAll
       weight: 1.0
-    - id: XenoArtifactTesla # Goob edit - funny
-      weight: 0.1
-    - id: XenoArtifactSingularity
-      weight: 0.1
+    # - id: XenoArtifactTesla Trauma
+    #   weight: 10
+    # - id: XenoArtifactSingularity
+    #   weight: 10
     - id: XenoArtifactExplosionScary
       weight: 1.0
     - id: XenoArtifactBoom
@@ -915,6 +915,29 @@
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
+        # <Trauma>
+        - id: MobSnakeGrass
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobBunny
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobBunnySea
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobSnake
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobDartFrog1
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobDartFrog3
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobDartFrog6
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        # </Trauma>
         - id: MobMouse
         - id: MobPig
         - id: MobParrot
@@ -963,6 +986,25 @@
       deleteSpawnerAfterSpawn: false
       table: !type:GroupSelector
         children:
+        # <Trauma>
+        - id: MobBearSea
+        - id: MobSquidSea
+        - id: MobSpiderCrabSea
+        - id: MobKraitSea
+        - id: MobArcherSea
+        - id: MobBunnyEvil
+        - id: MobEelSea
+        - id: MobYellowBellySnake
+        - id: MobMantis
+        - id: MobMantisShrimp
+        - id: MobShrimp
+        - id: MobDartFrog2
+        - id: MobDartFrog4
+        - id: MobDartFrog5
+        - id: MobCobra
+        - id: MobCobraSpace
+        - id: MobGorillaAngry
+        # </Trauma>
         - id: MobAdultSlimesYellowAngry
         - id: MobAngryBee
         - id: MobBearSpace
@@ -993,6 +1035,12 @@
         rolls: !type:RangeNumberSelector
           range: 2, 4
         children:
+        # <Trauma>
+        - id: SpaceCash10000
+          weight: 0.01
+        - id: SpaceCash1000000
+          weight: 0.0001
+        # </Trauma>
         - id: SpaceCash10
           weight: 0.75
         - id: SpaceCash100
@@ -1052,6 +1100,7 @@
     maxFoamAmount: 30
     replaceDescription: true
     reagents:
+    - BatrachoToxin # Trauma
     - Tritium
     - Plasma
     - SulfuricAcid
@@ -1284,6 +1333,7 @@
         Shock: -100
 
 - type: entity
+  abstract: true # Trauma
   id: XenoArtifactTesla
   parent: BaseOneTimeXenoArtifactEffect
   description: Mass destruction
@@ -1300,6 +1350,7 @@
         - id: Singularity
 
 - type: entity
+  abstract: true # Trauma
   id: XenoArtifactSingularity
   parent: BaseOneTimeXenoArtifactEffect
   description: Imminent doom

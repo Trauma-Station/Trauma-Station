@@ -6,7 +6,6 @@
   id: BaseMetallic
   components:
   - type: Damageable
-    damageModifierSet: Metallic
   - type: Injurable
     damageContainer: Inorganic
   - type: Metallic

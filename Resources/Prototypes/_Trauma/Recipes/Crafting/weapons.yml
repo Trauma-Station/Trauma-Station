@@ -22,7 +22,6 @@
   objectType: Item
   theory:
     FabricationKnowledge: 3
-    ElectronicsKnowledge: 2
   practical:
     GunsmithingKnowledge: 3
     WeaponsKnowledge: 2
@@ -37,8 +36,7 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 2
-    ElectronicsKnowledge: 2
+    FabricationKnowledge: 3
   practical:
     GunsmithingKnowledge: 3
     WeaponsKnowledge: 2
@@ -53,7 +51,7 @@
   category: construction-category-weapons
   objectType: Item
   theory:
-    FabricationKnowledge: 1
+    FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
   useQuality: false
@@ -69,4 +67,157 @@
     FabricationKnowledge: 0
   practical:
     MetalworkingKnowledge: 1
+  useQuality: false
+
+- type: construction
+  id: barbedbat
+  graph: WoodenBat
+  startNode: start
+  targetNode: barbedwire
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
+  id: nailbat
+  graph: WoodenBat
+  startNode: start
+  targetNode: nail
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
+  id: nailboard
+  graph: NailBoard
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 2
+
+- type: construction
+  id: IEDSpear
+  graph: IEDSpear
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
+  id: PipebombSpear
+  graph: PipebombSpear
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
+  id: PipeShank
+  graph: PipeShank
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: ShitCraft
+  theory:
+    FabricationKnowledge: 0
+  practical:
+    WeaponsKnowledge: 4
+    CarvingKnowledge: 4
+
+- type: construction
+  id: WoodenSword
+  graph: WoodenSword
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: BaseQuality
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 2
+
+- type: construction
+  id: NailSword
+  graph: NailSword
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: BaseQuality
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 3
+
+- type: construction
+  id: ScrapSword
+  graph: ScrapSword
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: BaseQuality
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    WeaponsKnowledge: 2
+    CarvingKnowledge: 3
+    MetalworkingKnowledge: 3
+
+- type: construction
+  id: WeldedSword
+  graph: WeldedSword
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: BaseQuality
+  theory:
+    FabricationKnowledge: 2
+  practical:
+    WeaponsKnowledge: 2
+    MetalworkingKnowledge: 4
+
+- type: construction
+  id: BarbCuffs
+  graph: BarbCuffs
+  startNode: start
+  targetNode: finish
+  category: construction-category-weapons
+  objectType: Item
+  qualityPrototype: BaseQuality
+  theory:
+    FabricationKnowledge: 0
   useQuality: false

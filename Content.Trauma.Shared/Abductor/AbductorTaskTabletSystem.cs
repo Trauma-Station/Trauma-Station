@@ -75,7 +75,7 @@ public sealed partial class AbductorTaskTabletSystem : EntitySystem
             return;
 
         var user = args.Actor;
-        _adminLog.Add(LogType.AntagObjective, $"Abductor tasks created for {ToPrettyString(target)} by {ToPrettyString(user)}");
+        _adminLog.Add(LogType.AntagObjective, $"Abductor tasks created for {target:target} by {user:user}");
 
         EnsureComp<AbductorSubjectComponent>(target);
         _audio.PlayPredicted(ent.Comp.ScanSound, ent, user);
@@ -96,7 +96,7 @@ public sealed partial class AbductorTaskTabletSystem : EntitySystem
             return;
         }
 
-        _adminLog.Add(LogType.AntagObjective, $"Abductor task {task} completed on {ToPrettyString(target)} by {ToPrettyString(user)}");
+        _adminLog.Add(LogType.AntagObjective, $"Abductor task {task} completed on {target:target} by {user:user}");
 
         var ev = new AbductorTaskCompleteEvent();
         RaiseLocalEvent(user, ref ev);

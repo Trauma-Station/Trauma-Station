@@ -1,6 +1,16 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: guideEntry
   id: HolographicGenerator
   name: guide-entry-holographic-generator
   text: "/ServerInfo/_FarHorizons/Guidebook/Engineering/HolographicGenerator.xml"
+
+- type: guideEntry
+  id: NuclearReactor
+  name: guide-entry-nuclear-reactor
+  text: "/ServerInfo/_FarHorizons/Guidebook/Engineering/NuclearReactor.xml"
+  children:
+  - NuclearMaterials
+
+- type: guideEntry
+  id: NuclearMaterials
+  name: guide-entry-nuclear-materials
+  text: "/ServerInfo/_FarHorizons/Guidebook/Engineering/NuclearMaterials.xml"

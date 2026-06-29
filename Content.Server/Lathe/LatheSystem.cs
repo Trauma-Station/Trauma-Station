@@ -246,22 +246,12 @@ namespace Content.Server.Lathe
                 var currentRecipe = _proto.Index(comp.CurrentRecipe.Value);
                 if (currentRecipe.Result is { } resultProto)
                 {
-                    // <Goob> - try output to material storage instead of spawning
-                    var prototype = _proto.Index(resultProto);
-                    if (comp.OutputToStorage && prototype.TryGetComponent<PhysicalCompositionComponent>(out var composition, Factory))
-                    {
-                        _materialStorage.TryChangeMaterialAmount(uid, composition.MaterialComposition);
-                    }
-                    else
-                    {
-                        var result = Spawn(resultProto, Transform(uid).Coordinates);
-                        _stack.TryMergeToContacts(result);
-                        // <Trauma>
-                        var ev = new ProducedByLatheEvent();
-                        RaiseLocalEvent(result, ref ev);
-                        // </Trauma>
-                    }
-                    // </Goob>
+                    var result = Spawn(resultProto, Transform(uid).Coordinates);
+                    _stack.TryMergeToContacts(result);
+                    // <Trauma>
+                    var ev = new ProducedByLatheEvent();
+                    RaiseLocalEvent(result, ref ev);
+                    // </Trauma>
                 }
 
                 if (currentRecipe.ResultReagents is { } resultReagents &&

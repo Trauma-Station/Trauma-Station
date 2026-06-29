@@ -85,6 +85,13 @@
       reagents:
       - ReagentId: Toxin
         Quantity: 30
+  # <Trauma>
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+        - ReagentId: Toxin
+          Quantity: 0.5
+  # </Trauma>
 
 - type: entity
   name: space adder

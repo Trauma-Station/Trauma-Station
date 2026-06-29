@@ -4,6 +4,11 @@
   name: pipe bomb
   description: An improvised explosive made from pipes and wire.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Pipebomb
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Bombs/pipebomb.rsi
     layers:

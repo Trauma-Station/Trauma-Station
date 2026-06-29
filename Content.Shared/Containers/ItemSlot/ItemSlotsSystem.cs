@@ -637,10 +637,10 @@ namespace Content.Shared.Containers.ItemSlots
         /// </returns>
         public bool TryEjectToHands(EntityUid uid, ItemSlot slot, EntityUid? user, bool excludeUserAudio = false, bool doAfter = true)
         {
-            // Lavaland Change start
+            // <Trauma>
             if (doAfter && slot.EjectDelay != null)
                 return TryStartEjectDoAfter(slot, uid, user);
-            // Lavaland Change end
+            // </Trauma>
 
             if (!TryEject(uid, slot, user, out var item, excludeUserAudio, doAfter))
                 return false;

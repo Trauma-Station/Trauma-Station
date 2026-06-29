@@ -304,7 +304,7 @@
     #armorPenetration: -0.7 # Currently not working
     damage:
       types:
-        Slash: 15
+        Slash: 12
       woundSeverityMultipliers:
         Slash: 5
     soundHit:

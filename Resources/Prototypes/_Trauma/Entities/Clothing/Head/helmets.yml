@@ -28,6 +28,8 @@
         Slash: 0.3
         Piercing: 0.3
         Heat: 0.3
+      flatReductions:
+        Piercing: 3.5
   - type: ExplosionResistance
     damageCoefficient: 0.75
 

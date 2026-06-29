@@ -66,7 +66,7 @@ public sealed partial class AnvilSystem : EntitySystem
             ent, user, PopupType.Medium);
         _audio.PlayPredicted(ent.Comp.StartSound, ent, user);
 
-        _adminLog.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(user):player} created {ToPrettyString(uid):item} on anvil {ToPrettyString(ent):used}");
+        _adminLog.Add(LogType.EntitySpawn, LogImpact.Low, $"{user:player} created {uid:item} on anvil {ent.Owner:used}");
     }
 
     private EntityCoordinates FindIngots(Entity<ForgingAnvilComponent> ent, [ForbidLiteral] ProtoId<MetalPrototype> metal)

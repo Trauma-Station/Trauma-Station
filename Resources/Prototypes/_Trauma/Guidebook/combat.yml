@@ -14,3 +14,8 @@
   id: Forging
   name: guide-entry-forging
   text: "/ServerInfo/_Trauma/Guidebook/Civilian/Forging.xml"
+
+- type: guideEntry
+  id: Fishing
+  name: guide-entry-fishing
+  text: "/ServerInfo/_Trauma/Guidebook/Civilian/Fishing.xml"
