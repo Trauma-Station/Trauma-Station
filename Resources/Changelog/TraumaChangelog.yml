@@ -10909,3 +10909,16 @@ Entries:
   id: 1219
   time: '2026-06-29T18:28:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3370
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fishing no longer locks others out of fishing in that spot.
+  - type: Tweak
+    message: Fishing is now fully predicted.
+  - type: Fix
+    message: Fixed not being able to sell fish.
+  - type: Remove
+    message: Removed organs from fish, no more lag.
+  id: 1220
+  time: '2026-06-29T19:33:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3360
