@@ -1,0 +1,13 @@
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: BaseSyndicateBug
+  name: syndicate bug
+  description: A rather conspicious listening device used to spy on important people.
+  # abstract: true
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_bug.rsi
+    layers:
+    - state: icon
+  - type: Anchorable
+    delay: 5
