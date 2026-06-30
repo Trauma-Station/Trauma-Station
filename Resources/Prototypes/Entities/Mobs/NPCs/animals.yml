@@ -2858,7 +2858,7 @@
       solutions:
       - SolutionClownSpider
     - type: MeleeChemicalInjector
-      transferAmount: 4
+      transferAmount: 6
       solution: melee
     # </Trauma>
     - type: Sprite
@@ -2905,7 +2905,7 @@
     - type: Bloodstream
       bloodReferenceSolution:
         reagents:
-        - ReagentId: Laughter
+        - ReagentId: SpaceLube # Trauma - was Laughter
           Quantity: 150
 - type: entity
   name: wizard spider
