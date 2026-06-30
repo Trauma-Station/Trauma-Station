@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Traitor;
+// </Trauma>
 using System.Linq;
 using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
@@ -10,7 +13,6 @@ using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Content.Trauma.Common.Traitor;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 

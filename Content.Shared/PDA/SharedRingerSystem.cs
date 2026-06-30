@@ -1,9 +1,11 @@
+// <Trauma>
+using Content.Trauma.Common.JobListings;
+// </Trauma>
 using Content.Shared.Mind;
 using Content.Shared.PDA.Ringer;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Store;
-using Content.Trauma.Common.JobListings;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
