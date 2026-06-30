@@ -17,7 +17,6 @@ using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Trauma.Common.JobListings;
 using Content.Trauma.Common.Traitor;
-using Content.Trauma.Shared.JobListings;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -30,8 +29,10 @@ namespace Content.Trauma.Server.JobListings;
 /// System that manages the side-jobs for progressive traitor.
 /// </summary>
 
-public sealed partial class JobListingsSystem : SharedJobListingsSystem
+public sealed partial class JobListingsSystem : EntitySystem
 {
+    [Dependency] private ObjectivesSystem _objectives = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private PdaSystem _pda = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
@@ -50,6 +51,25 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
         SubscribeLocalEvent<RemoteJobListingsComponent, JobListingsRefreshMessage>(OnMessage);
 
         InitializeReward();
+    }
+
+    /// <summary>
+    /// Similar to the method on the ObjectivesSystem but with extra info for side jobs.
+    /// </summary>
+    public SideJobInfo? GetInfo(EntityUid mind, EntityUid sideJob)
+    {
+        var basic = _objectives.GetInfo(sideJob, mind);
+        if (basic is null)
+            return null;
+        if (!TryComp<SideJobComponent>(sideJob, out var sideJobComp))
+            return null;
+        if (sideJobComp.Reward is null)
+            return null;
+        if (!_proto.Resolve(sideJobComp.Reward.Value, out var rewardProto))
+            return null;
+
+        var name = Loc.GetString($"job-listings-ui-reward-name-{rewardProto.ID}");
+        return new SideJobInfo(basic.Value.Title, basic.Value.Description, basic.Value.Icon, basic.Value.Progress, name, sideJobComp.ReputationGain, GetNetEntity(sideJob));
     }
 
     /// <summary>

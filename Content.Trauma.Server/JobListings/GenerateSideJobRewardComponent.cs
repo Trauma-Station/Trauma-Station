@@ -2,7 +2,7 @@
 
 using Content.Shared.EntityTable;
 
-namespace Content.Trauma.Shared.JobListings;
+namespace Content.Trauma.Server.JobListings;
 
 /// <summary>
 /// Generates a reward for a side job by pulling a prototype from a table.

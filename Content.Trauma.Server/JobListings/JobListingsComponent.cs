@@ -3,7 +3,7 @@
 using Content.Shared.EntityTable;
 using Robust.Shared.Containers;
 
-namespace Content.Trauma.Shared.JobListings;
+namespace Content.Trauma.Server.JobListings;
 
 /// <summary>
 /// Component added to a store entity to enable side-jobs.

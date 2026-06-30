@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Trauma.Shared.JobListings;
+namespace Content.Trauma.Server.JobListings;
 
 /// <summary>
 /// Component which points to a remote job listings entity.

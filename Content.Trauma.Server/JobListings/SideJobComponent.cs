@@ -2,7 +2,7 @@
 
 using Content.Shared.EntityTable;
 
-namespace Content.Trauma.Shared.JobListings;
+namespace Content.Trauma.Server.JobListings;
 
 /// <summary>
 /// A component attached to an objective entity to make it into a side job.
