@@ -10929,3 +10929,14 @@ Entries:
   id: 1221
   time: '2026-06-29T21:58:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3375
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked the injection values and what reagents the Clown Spider and Clown
+      Goblin use.
+  - type: Tweak
+    message: Tweaked the bloodstream of clown spiders.
+  id: 1222
+  time: '2026-06-30T17:08:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3345
