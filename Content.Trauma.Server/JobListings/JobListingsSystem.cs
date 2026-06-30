@@ -28,7 +28,6 @@ namespace Content.Trauma.Server.JobListings;
 /// <summary>
 /// System that manages the side-jobs for progressive traitor.
 /// </summary>
-
 public sealed partial class JobListingsSystem : EntitySystem
 {
     [Dependency] private ObjectivesSystem _objectives = default!;
