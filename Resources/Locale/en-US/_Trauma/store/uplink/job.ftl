@@ -30,3 +30,6 @@ uplink-kudzu-grenade-desc = A grenade containing mutated kudzu that spreads fast
 
 uplink-banana-esword-name = Bananium Energy Sword
 uplink-banana-esword-desc = A bananium-modified energy sword that slips whoever it slices.
+
+uplink-behonker-name = Behonker Operative Reinforcement
+uplink-behonker-desc = Calls in a specially trained behonker operative to assist you.

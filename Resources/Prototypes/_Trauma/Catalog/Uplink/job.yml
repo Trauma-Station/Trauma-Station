@@ -173,3 +173,18 @@
     whitelist:
     - Virologist
     - Geneticist # gene therapy..?
+
+- type: listing
+  id: BehonkerOperativeReinforcement
+  name: uplink-behonker-name
+  description: uplink-behonker-desc
+  productEntity: ReinforcementRadioSyndicateBehonker
+  icon: { sprite: _Trauma/Objects/Devices/communication64x64.rsi, state: behonker }
+  cost:
+    Telecrystal: 100
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Clown
