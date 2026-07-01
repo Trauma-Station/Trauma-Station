@@ -14,7 +14,6 @@
     name: ghost-role-information-nukie-mouse-name
     description: ghost-role-information-nukie-mouse-description
   - type: RandomMetadata
-    nameFormat: name-format-nukie-operator
     nameSegments: [ NamesMouseDeathCommando ]
   - type: NpcFactionMember
     factions:
@@ -192,6 +191,11 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
       state: mouth
       shader: unshaded
+  - type: PointLight
+    radius: 3
+    energy: 2.3
+    offset: 0, -2
+    color: green
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -230,3 +234,50 @@
       reagents:
       - ReagentId: CarpoToxin
         Quantity: 1
+
+- type: entity
+  parent: BaseMobBehonker
+  id: MobNukieBehonker
+  name: nuclear operative behonker
+  description: Gorlex thought it would be funny to have a behonker. It was.
+  suffix: syndicate
+  components:
+  - type: GhostRole
+    name: ghost-role-information-behonker-name
+    description: ghost-role-information-behonker-desc
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+  - type: RandomMetadata
+    nameFormat: name-format-nukie-operator
+    nameSegments: [ NamesNukieBehonker ]
+  - type: PointLight
+    radius: 3
+    energy: 2.3
+    offset: 0, -2
+    color: green
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: Access
+    tags:
+    - NuclearOperative
+    - SyndicateAgent
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Syndicate
+  - type: ActiveRadio
+    channels:
+    - Syndicate
+  - type: Damageable
+    damageModifierSet: NukieSpider
+  - type: LanguageSpeaker
+    speaks:
+    - Universal
+    understands:
+    - Universal
+  - type: MovementIgnoreGravity

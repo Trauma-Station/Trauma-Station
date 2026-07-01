@@ -27,3 +27,6 @@ uplink-omnimed-tool-desc = A compact surgical omnitool conveniently packed like 
 
 uplink-kudzu-grenade-name = Kudzu grenade
 uplink-kudzu-grenade-desc = A grenade containing mutated kudzu that spreads faster and deals damage to anyone caught inside, excluding diona.
+
+uplink-banana-esword-name = Bananium Energy Sword
+uplink-banana-esword-desc = A bananium-modified energy sword that slips whoever it slices.

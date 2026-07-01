@@ -1,6 +1,20 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
+  id: UplinkBananiumSword
+  name: uplink-banana-esword-name
+  description: uplink-banana-esword-desc
+  productEntity: BananiumSword
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Clown
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
   id: UplinkMimanaStealthy
   name: uplink-mimana-stealthy-name
   description: uplink-mimana-stealthy-desc

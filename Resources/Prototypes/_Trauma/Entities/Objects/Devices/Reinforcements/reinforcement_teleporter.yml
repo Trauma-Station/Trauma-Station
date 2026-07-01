@@ -90,3 +90,20 @@
       settings: default
   - type: GhostRoleMobSpawner
     prototype: PlayerBorgSyndicateMedicalBattery
+
+- type: entity
+  parent: ReinforcementRadio
+  id: ReinforcementRadioSyndicateBehonker
+  name: behonker reinforcement radio
+  description: Calls in a behonker to assist you in your tomfoolery.
+  components:
+  - type: GhostRole
+    name: ghost-role-information-behonker-name
+    description: ghost-role-information-behonker-desc
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: MobNukieBehonker

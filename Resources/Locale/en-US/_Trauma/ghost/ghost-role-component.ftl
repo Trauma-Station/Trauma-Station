@@ -126,3 +126,6 @@ ghost-role-information-evil-bunny-name = Evil Bunny
 ghost-role-information-evil-bunny-description = KILL, MAIM, SLAUGHTER!!!
 
 ghost-role-information-syndicate-cyborg-medical-name = Syndicate Medical Cyborg
+
+ghost-role-information-behonker-name = Syndicate Behonker
+ghost-role-information-behonker-desc = A disciple of the Honkmother needs you. Aid them in their time of need.
