@@ -657,7 +657,7 @@
   categories:
   - UplinkChemicals
 
-#- type: listing Trauma - pending zombie rework
+#- type: listing Trauma - Pending zombie rework
 #  id: UplinkZombieBundle
 #  name: uplink-zombie-bundle-name
 #  description: uplink-zombie-bundle-desc
