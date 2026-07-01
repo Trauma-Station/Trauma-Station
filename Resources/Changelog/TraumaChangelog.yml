@@ -10940,3 +10940,22 @@ Entries:
   id: 1222
   time: '2026-06-30T17:08:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3345
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Stripping Update is here.
+  - type: Add
+    message: You can now open people's bags, belts and pockets of their outer clothing.
+  - type: Tweak
+    message: You can now strip only as many items at a time as you have free hands.
+  - type: Tweak
+    message: Tweaked strip time on specific clothing slots.
+  - type: Tweak
+    message: Different strip times/opening people's clothes if they are cuffed or dead.
+  - type: Tweak
+    message: >-
+      You can't remove someone's jumpsuit if they have Outer Clothing on. Remove
+      it first.
+  id: 1223
+  time: '2026-07-01T12:07:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3289
