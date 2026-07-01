@@ -4,6 +4,11 @@
   keycode: ";"
   frequency: 1459
   color: "#2cdb2c"
+ # <Trauma>
+  sendWhitelist:
+    components:
+    - Intercom
+ # <Trauma>
 
 - type: radioChannel
   id: CentCom
