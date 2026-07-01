@@ -27,7 +27,7 @@
   parent: CrateSyndicate
   id: CrateSyndicateShuttleBundle
   name: shuttle bundle crate
-  description: Everything but the shuttle board. It's a shuttle in a crate* (Some assembly required)
+  description: The bare necessities for a shuttle.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -36,17 +36,7 @@
         - id: GyroscopeFlatpack
         - id: ThrusterFlatpack
           amount: 4
-        - id: CableMVStack
-        - id: CableHVStack
-        - id: CableApcStack
-          amount: 2
-        - id: Multitool
         - id: WallmountSubstationElectronics
         - id: APCElectronics
         - id: WallmountGeneratorAPUElectronics
           amount: 2
-        - id: SheetSteel
-        - id: PartRodMetal
-        - id: MicroManipulatorStockPart
-        - id: PowerCellSmall
-        - id: SheetGlass

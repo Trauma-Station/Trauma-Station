@@ -137,7 +137,7 @@
         ToughnessKnowledge: 51
         AthleticsKnowledge: 51
         WeaponsKnowledge: 51
-  # </Trauma>
+    # </Trauma>
 
 - type: entity
   id: BorgChassisSyndicateMedical
