@@ -1,4 +1,4 @@
-﻿names-nukie-behonker-dataset-1 = Honkmother
+names-nukie-behonker-dataset-1 = Honkmother
 names-nukie-behonker-dataset-2 = Bozo
 names-nukie-behonker-dataset-3 = Pennywise
 names-nukie-behonker-dataset-4 = Cluwne
