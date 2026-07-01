@@ -35,6 +35,6 @@ public sealed partial class HasOrganConditionSystem : EntityConditionSystem<Body
     protected override void Condition(Entity<BodyComponent> entity, ref EntityConditionEvent<HasOrgan> args)
     {
         args.Result = _body.GetOrgan(entity.AsNullable(), args.Condition.OrganCategory) is {} organ &&
-            _conditions.TryConditions(organ, args.Condition.Conditions);
+            _conditions.TryConditions(organ, args.Condition.Conditions, args.User);
     }
 }

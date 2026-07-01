@@ -5,6 +5,8 @@
   attacks:
   - Disarm
   - Disarm
+  userConditions:
+  - !type:StandingCondition
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 80
@@ -15,6 +17,8 @@
     damage:
       types:
         Slash: 10
+  - !type:StopPull
+  - !type:GrabThrow
   levelRequired: 10
 
 - type: combo
@@ -24,12 +28,20 @@
   - Harm
   - Harm
   - Grab
+  conditions:
+  - !type:MobStateCondition
+    mobstate: Dead
+  - !type:HasOrgan
+    organCategory: Head
   opponentEffects:
-  - !type:HealthChange
-    targetPart: Head
-    damage:
-      types:
-        Slash: 100
+  - !type:RelayOrgan
+    category: Head
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Slash: 100
+    - !type:DetachOrgan
   levelRequired: 10
 
 - type: combo

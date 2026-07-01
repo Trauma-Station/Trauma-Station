@@ -49,9 +49,9 @@ public sealed partial class HereticRitualEffectSystem : EntitySystem
         }
     }
 
-    public bool TryCondition(EntityUid uid, EntityCondition condition, Entity<HereticRitualRaiserComponent> ritual)
+    public bool TryCondition(EntityUid uid, EntityCondition condition, Entity<HereticRitualRaiserComponent> ritual, EntityUid? user = null)
     {
-        return condition.Inverted != condition.RaiseEvent(uid, ritual.Comp.Raiser);
+        return condition.Inverted != condition.RaiseEvent(uid, user, ritual.Comp.Raiser);
     }
 
     public bool AnyCondition(EntityUid target, EntityCondition[]? conditions, Entity<HereticRitualRaiserComponent> ritual)
@@ -130,16 +130,16 @@ public sealed class HereticRitualRaiser(
         entMan.EventBus.RaiseLocalEvent(target, ref ritualEv);
     }
 
-    public bool RaiseConditionEvent<T>(EntityUid target, T condition) where T : EntityConditionBase<T>
+    public bool RaiseConditionEvent<T>(EntityUid target, EntityUid? user, T condition) where T : EntityConditionBase<T>
     {
         if (condition is not IHereticRitualEntry)
         {
-            var ev = new EntityConditionEvent<T>(condition);
+            var ev = new EntityConditionEvent<T>(condition, user);
             entMan.EventBus.RaiseLocalEvent(target, ref ev);
             return ev.Result;
         }
 
-        var ritualEv = new HereticRitualConditionEvent<T>(condition, ritual);
+        var ritualEv = new HereticRitualConditionEvent<T>(condition, ritual, user);
         entMan.EventBus.RaiseLocalEvent(target, ref ritualEv);
         return ritualEv.Result;
     }
