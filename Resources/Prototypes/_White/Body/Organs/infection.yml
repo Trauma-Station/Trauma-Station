@@ -17,7 +17,8 @@
     price: 2000
   - type: XenomorphInfection
     maxGrowthStage: 6
-    growProb: 0.75
+    growProb: 1.0
+    growTime: 40
     infectedIcons:
       0: XenomorphInfectionIconStageZero
       1: XenomorphInfectionIconStageOne
