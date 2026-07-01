@@ -889,19 +889,20 @@
       collection: FootstepClown
   - type: CombatMode
   - type: MeleeWeapon
-    attackRate: 2
+    attackRate: 1.5 # Trauma - Was 2 - stop being fucking annoying, clown goblin.
     damage:
       types:
         Blunt: 0.5
     soundHit:
       collection: BikeHorn
     animation: WeaponArcFist
-  - type: SolutionManager
-    solutions:
-    - SolutionClownSpider
-  - type: MeleeChemicalInjector
-    transferAmount: 3
-    solution: melee
+# Trauma - remove honk injection
+#  - type: SolutionManager
+#    solutions:
+#    - SolutionClownSpider
+#  - type: MeleeChemicalInjector
+#    transferAmount: 3
+#    solution: melee
   - type: Vocal
     sounds:
       Male: ClownGoblin
