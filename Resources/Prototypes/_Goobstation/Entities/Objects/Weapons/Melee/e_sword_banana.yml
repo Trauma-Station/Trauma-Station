@@ -59,7 +59,7 @@
       wideAnimationRotation: -135
       damage:
         types:
-          Heat: 0.5
+          Blunt: 0
     - type: ItemToggleMeleeWeapon
       activatedSoundOnHit:
         path: /Audio/_Goobstation/Weapons/Banana/bananaeblade1.ogg
