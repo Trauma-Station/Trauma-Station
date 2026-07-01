@@ -1,4 +1,6 @@
-﻿- type: localizedDataset
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: localizedDataset
   id: NamesNukieBehonker
   values:
     prefix: names-nukie-behonker-dataset-
