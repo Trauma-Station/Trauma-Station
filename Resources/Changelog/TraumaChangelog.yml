@@ -10959,3 +10959,10 @@ Entries:
   id: 1223
   time: '2026-07-01T12:07:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3289
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed martial arts damage being split up between all limbs.
+  id: 1224
+  time: '2026-07-01T18:27:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3391
