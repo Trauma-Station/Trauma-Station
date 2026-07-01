@@ -26,6 +26,7 @@
   - !type:TakeStaminaDamage
     amount: 25
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 15
@@ -44,6 +45,7 @@
     sound: /Audio/Weapons/genhit1.ogg
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 40

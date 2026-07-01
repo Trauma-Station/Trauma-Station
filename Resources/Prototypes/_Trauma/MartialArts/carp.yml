@@ -26,6 +26,7 @@
     - carp-saying-cowabunga
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Slash: 20
@@ -42,6 +43,7 @@
   - !type:ModifyParalysis
     time: 6
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 10

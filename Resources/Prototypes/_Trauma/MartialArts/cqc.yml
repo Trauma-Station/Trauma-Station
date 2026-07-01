@@ -33,6 +33,7 @@
   - !type:TakeStaminaDamage
     amount: 25
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 12
@@ -49,6 +50,7 @@
   - Harm
   opponentEffects:
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 8
@@ -72,6 +74,7 @@
   - !type:TakeStaminaDamage
     amount: 25
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 12
@@ -95,6 +98,7 @@
   - !type:TakeStaminaDamage
     amount: 40
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 20
@@ -189,6 +193,7 @@
   - !type:TakeStaminaDamage
     amount: 20
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 5
@@ -211,6 +216,7 @@
   - !type:TakeStaminaDamage
     amount: 40
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 10
@@ -234,6 +240,7 @@
     effectProto: StatusEffectForcedSleeping
     time: 7
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Blunt: 30
