@@ -74,13 +74,11 @@
     - cqc-slam
   opponentEffects:
   - !type:HealthChange
-    scaling: false
     damage:
       types:
         Blunt: 5
     targetPart: Legs
   - !type:ModifyKnockdown
-    scaling: false
     time: 4
     type: Update
   levelRequired: 26
@@ -97,13 +95,11 @@
     - cqc-kick
   opponentEffects:
   - !type:HealthChange
-    scaling: false
     damage:
       types:
         Blunt: 5
     targetPart: Head
   - !type:GenericStatusEffect
-    scaling: false
     key: Muted
     component: Muted
     time: 20
@@ -120,16 +116,13 @@
     - cqc-restrain
   opponentEffects:
   - !type:TakeStaminaDamage
-    scaling: false
     amount: 30
   - !type:GenericStatusEffect
-    scaling: false
     key: Stutter
     component: StutteringAccent
     time: 10
     type: Update
   # TODO: status effect
   - !type:BlockedBreathing
-    scaling: false
     time: 10
   levelRequired: 26

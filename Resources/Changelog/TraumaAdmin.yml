@@ -232,3 +232,10 @@ Entries:
   id: 30
   time: '2026-06-21T19:34:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3259
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed access scanners detecting your universal ID cards.
+  id: 31
+  time: '2026-07-01T13:10:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3390

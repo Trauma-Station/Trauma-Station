@@ -1431,6 +1431,7 @@
   abstract: true
   components:
   # <Trauma>
+  - type: BagAccess
   - type: VampireDrainable
   - type: BloodSplatterer
   - type: VentCrawler
