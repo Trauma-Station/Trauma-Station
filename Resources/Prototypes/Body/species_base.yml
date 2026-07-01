@@ -11,6 +11,7 @@
   save: false
   components:
   # <Trauma>
+  - type: BagAccess
   - type: Targeting
   - type: BodyStatus
   - type: Carriable
