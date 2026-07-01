@@ -10976,3 +10976,12 @@ Entries:
   id: 1225
   time: '2026-07-01T19:38:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3395
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Shadowlings now only spawn alone.
+  - type: Tweak
+    message: Wraiths are now more common roundstart.
+  id: 1226
+  time: '2026-07-01T19:48:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3383
