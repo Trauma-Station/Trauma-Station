@@ -25,6 +25,6 @@ public sealed partial class MutatedNestedConditionSystem : EntityConditionSystem
     protected override void Condition(Entity<MutationComponent> ent, ref EntityConditionEvent<MutatedNestedCondition> args)
     {
         if (ent.Comp.Target is {} target)
-            args.Result = _conditions.TryCondition(target, args.Condition.Condition);
+            args.Result = _conditions.TryCondition(target, args.Condition.Condition, args.User);
     }
 }

@@ -47,7 +47,7 @@ public sealed partial class EffectActionSystem : EntitySystem
         bool targetState = !ent.Comp.Toggled;
         if (targetState && ent.Comp.OnToggleConditions is { } conditions)
         {
-            if (!_conditions.TryConditions(args.Performer, conditions))
+            if (!_conditions.TryConditions(args.Performer, conditions, user: args.Performer))
             {
                 return;
             }

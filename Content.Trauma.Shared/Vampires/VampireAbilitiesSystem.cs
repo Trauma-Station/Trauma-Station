@@ -79,7 +79,7 @@ public sealed partial class VampireAbilitiesSystem : EntitySystem
                 continue;
 
             // We tried to unlock an ability, but we didn't pass the extra conditions
-            if (abilityProto.Conditions is { } conditions && !_conditions.TryConditions(user, conditions))
+            if (abilityProto.Conditions is { } conditions && !_conditions.TryConditions(user, conditions, user))
                 continue;
 
             _effects.ApplyEffects(user, abilityProto.OnUnlock);

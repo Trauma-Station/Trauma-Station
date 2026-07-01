@@ -102,7 +102,7 @@ public partial class MartialArtsSystem
     private bool CheckCombo(Entity<CanPerformComboComponent> ent,
         ComboPrototype proto,
         int level,
-        EntityUid performer,
+        EntityUid user,
         EntityUid target)
     {
         var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
@@ -114,8 +114,8 @@ public partial class MartialArtsSystem
 
         if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
             !list.SequenceEqual(attackList) ||
-            !_conditions.TryConditions(performer, proto.UserConditions) ||
-            !_conditions.TryConditions(target, proto.Conditions))
+            !_conditions.TryConditions(user, proto.UserConditions, user: user) ||
+            !_conditions.TryConditions(target, proto.Conditions, user: user))
             return false;
 
         return true;

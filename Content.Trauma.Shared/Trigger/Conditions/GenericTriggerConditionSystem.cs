@@ -27,6 +27,6 @@ public sealed partial class GenericTriggerConditionSystem : EntitySystem
             return;
         }
 
-        args.Cancelled |= !_conditions.TryCondition(target, ent.Comp.Condition);
+        args.Cancelled |= !_conditions.TryCondition(target, ent.Comp.Condition, args.User);
     }
 }
