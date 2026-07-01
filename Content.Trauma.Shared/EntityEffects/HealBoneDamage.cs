@@ -17,7 +17,7 @@ public sealed partial class HealBoneDamage : EntityEffectBase<HealBoneDamage>
     public FixedPoint2 Amount = 1;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-heal-bone-damage", ("chance", Probability), ("amount", Amount));
+        => Loc.GetString("entity-effect-guidebook-heal-bone-damage", ("chance", Probability), ("amount", Amount.Float()));
 }
 
 /// <summary>
