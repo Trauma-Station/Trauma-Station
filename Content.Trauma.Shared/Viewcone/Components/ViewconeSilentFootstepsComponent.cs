@@ -8,9 +8,7 @@ namespace Content.Trauma.Shared.Viewcone.Components;
 /// Worn clothing with this component suppresses footstep viewcone effects while equipped.
 /// </summary>
 [RegisterComponent]
-public sealed partial class ViewconeSilentFootstepsComponent : Component
-{
-}
+public sealed partial class ViewconeSilentFootstepsComponent : Component;
 
 /// <summary>
 /// Cancels the viewcone footstep effect when the wearer has silent footstep clothing equipped.
