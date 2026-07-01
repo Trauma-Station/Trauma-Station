@@ -69,7 +69,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
                 if (idXform.MapID != map)
                     continue; // cant possibly be there
 
-                if (_blacklistQuery.HasComp(id)))
+                if (_blacklistQuery.HasComp(id))
                     continue; // ignored
 
                 var idCoords = _transform.GetMapCoordinates(idXform);
