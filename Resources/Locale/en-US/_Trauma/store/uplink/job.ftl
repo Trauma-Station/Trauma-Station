@@ -19,9 +19,6 @@ uplink-utility-knife-desc = A utility knife with special grooves that can hold u
 uplink-appraisal-tool-jammer-name = Appraisal Tool Radio Jammer
 uplink-appraisal-tool-jammer-desc = A radio jammer hidden inside an appraisal tool. You can both jam their comms and price check the corpse!
 
-uplink-banana-esword-name = Real Bananium Energy Sword
-uplink-banana-esword-desc = A bananium-modified energy sword that slips whoever it slices. This one does real damage.
-
 uplink-mimana-stealthy-name = Stealthy Mimana Peel
 uplink-mimana-stealthy-desc = A mutated mimana that seems to fade into the background. Don't lose it!
 

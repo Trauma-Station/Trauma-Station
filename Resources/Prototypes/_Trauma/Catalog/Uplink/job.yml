@@ -146,20 +146,6 @@
     - Medical
 
 - type: listing
-  id: UplinkRealBananiumSword
-  name: uplink-banana-esword-name
-  description: uplink-banana-esword-desc
-  productEntity: RealBananiumSword
-  cost:
-    Telecrystal: 50
-  categories:
-  - UplinkJob
-  conditions:
-  - !type:BuyerJobCondition
-    whitelist:
-    - Clown
-
-- type: listing
   id: UplinkFoxDie
   name: uplink-foxdie-name
   description: uplink-foxdie-desc
