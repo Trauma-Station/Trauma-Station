@@ -32,6 +32,7 @@
   - !type:ModifyParalysis
     time: 9
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Slash: 10
@@ -49,6 +50,7 @@
   - !type:ModifyParalysis
     time: 7
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Slash: 20

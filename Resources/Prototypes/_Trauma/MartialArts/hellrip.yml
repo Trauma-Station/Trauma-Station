@@ -9,6 +9,7 @@
   - !type:ModifyParalysis
     time: 6
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Slash: 10
@@ -23,6 +24,7 @@
   - Grab
   opponentEffects:
   - !type:HealthChange
+    targetPart: Head
     damage:
       types:
         Slash: 100
@@ -38,6 +40,7 @@
   - !type:TakeStaminaDamage
     amount: 50
   - !type:HealthChange
+    targetPart: Chest
     damage:
       types:
         Slash: 60
