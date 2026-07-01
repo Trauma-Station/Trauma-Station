@@ -10966,3 +10966,13 @@ Entries:
   id: 1224
   time: '2026-07-01T18:27:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3391
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      xenomorph infection growth has now been changed from a random chance to a
+      flat timer, the larva will always grow every 40 seconds (4 minutes to
+      burst)
+  id: 1225
+  time: '2026-07-01T19:38:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3395
