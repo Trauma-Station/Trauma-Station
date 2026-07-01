@@ -10985,3 +10985,10 @@ Entries:
   id: 1226
   time: '2026-07-01T19:48:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3383
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deep fryer disappearing if it lost power while active.
+  id: 1227
+  time: '2026-07-01T19:55:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3397
