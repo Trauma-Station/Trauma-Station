@@ -10992,3 +10992,12 @@ Entries:
   id: 1227
   time: '2026-07-01T19:55:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3397
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Properly implemented CQC's kick move and hell ripte's drop kick / head rip
+      moves.
+  id: 1228
+  time: '2026-07-01T20:37:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3396
