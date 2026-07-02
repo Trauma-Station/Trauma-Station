@@ -5,4 +5,4 @@ trait-swedish-name = Swedish
 trait-swedish-desc = A horrible mutation originating from the distant past. Makes you speak like a real svede.
 
 trait-caveman-name = Caveman
-trait-caveman-desc = Booga, me want insuls!
+trait-caveman-desc = Ooga Booga, me want insuls!
