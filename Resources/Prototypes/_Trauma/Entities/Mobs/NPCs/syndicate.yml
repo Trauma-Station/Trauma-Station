@@ -5,7 +5,7 @@
   id: MobNukieMouse
   name: nuclear operative mouse
   description: A Nuclear Operative... MOUSE?!
-  suffix: syndicate
+  suffix: Syndicate
   components:
   - type: GhostRole
     makeSentient: true
@@ -62,7 +62,7 @@
   id: MobNukieSpider
   name: nuclear operative tarantula
   description: A spider? A NUKIE SPIDER?!
-  suffix: syndicate
+  suffix: Syndicate
   components:
   - type: GhostRole
     makeSentient: true
@@ -177,7 +177,7 @@
   id: MobNukieCarp
   name: nuclear operative carp
   description: A blood-red carp trained in carp-to-carp combat.
-  suffix: syndicate
+  suffix: Syndicate
   components:
   - type: RandomMetadata
     nameFormat: name-format-nukie-operator
@@ -240,7 +240,7 @@
   id: MobNukieBehonker
   name: nuclear operative behonker
   description: Gorlex thought it would be funny to have a behonker. It was.
-  suffix: syndicate
+  suffix: Syndicate
   components:
   - type: GhostRole
     name: ghost-role-information-behonker-name
