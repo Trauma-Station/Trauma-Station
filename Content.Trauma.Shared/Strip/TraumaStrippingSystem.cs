@@ -38,6 +38,12 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
         EnsureComp<ActiveStrippingComponent>(user.Owner);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        UpdateBagAccess();
+    }
+    
     private void OnStripAttempt(Entity<ActiveStrippingComponent> user, ref DoAfterAttemptEvent<StrippableDoAfterEvent> args)
     {
         // Only limit removals, inserting items back doesn't require a free hand slot.

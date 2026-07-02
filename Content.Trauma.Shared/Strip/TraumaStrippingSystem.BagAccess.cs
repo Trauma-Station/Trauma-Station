@@ -4,6 +4,7 @@ using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -14,6 +15,7 @@ using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Shared.Strip.Components;
 using Content.Trauma.Shared.Strip.Events;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Strip;
 
@@ -24,14 +26,58 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedStorageSystem _storage = default!;
     [Dependency] private SharedStrippableSystem _strippable = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
+    
 
     private void InitializeBagAccess()
     {
         SubscribeLocalEvent<StrippingComponent, GetVerbsEvent<Verb>>(OnGetBagAccessVerbs);
         SubscribeLocalEvent<BagAccessComponent, BagAccessDoAfterEvent>(OnBagAccessDoAfter);
         SubscribeLocalEvent<BoundUIClosedEvent>(OnStorageUiClosed);
+    }
+
+    private void UpdateBagAccess()
+    {
+        var curTime = _timing.CurTime;
+        var query = EntityQueryEnumerator<ActiveStrippingComponent>();
+        while (query.MoveNext(out var uid, out var active))
+        {
+            if (active.BagAccessOpenedStorages.Count == 0)
+                continue;
+
+            if (active.NextBagAccessCheck > curTime)
+                continue;
+
+            active.NextBagAccessCheck += active.BagAccessCheckInterval;
+
+            if (!_xformQuery.TryComp(uid, out var userXform))
+                continue;
+
+            var userCoords = userXform.Coordinates;
+
+            // Copy since closing a bag's UI removes it from BagAccessOpenedStorages, and we can't modify the set while looping over it.
+            foreach (var bagEntity in new List<EntityUid>(active.BagAccessOpenedStorages))
+            {
+                if (!Exists(bagEntity) || !_xformQuery.TryComp(bagEntity, out var bagXform))
+                {
+                    active.BagAccessOpenedStorages.Remove(bagEntity);
+                    continue;
+                }
+
+                if (!userCoords.TryDistance(EntityManager, bagXform.Coordinates, out var distance) ||
+                    distance > SharedInteractionSystem.InteractionRange)
+                {
+                    _ui.CloseUi(bagEntity, StorageComponent.StorageUiKey.Key);
+                }
+            }
+
+            if (active.BagAccessOpenedStorages.Count == 0)
+                RemComp<IgnoreUIRangeComponent>(uid);
+        }
     }
 
     private void OnGetBagAccessVerbs(Entity<StrippingComponent> ent, ref GetVerbsEvent<Verb> args)
@@ -138,10 +184,13 @@ public sealed partial class TraumaStrippingSystem
             return;
 
         // Temporarily bypass UI range checks so the user can open a bag they aren't holding.
+        // UpdateBagAccess enforces our own range limit instead.
+        var activeComp = EnsureComp<ActiveStrippingComponent>(args.User);
         EnsureComp<IgnoreUIRangeComponent>(args.User);
         _storage.OpenStorageUI(bagEntity, args.User, storage, args.Stealth);
         // Don't remove IgnoreUIRangeComponent yet, remove it when the UI closes.
-        var activeComp = EnsureComp<ActiveStrippingComponent>(args.User);
+        if (activeComp.BagAccessOpenedStorages.Count == 0)
+            activeComp.NextBagAccessCheck = _timing.CurTime + activeComp.BagAccessCheckInterval;
         activeComp.BagAccessOpenedStorages.Add(bagEntity);
         args.Handled = true;
     }
