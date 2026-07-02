@@ -27,7 +27,7 @@
 - type: entity
   parent: [BaseCassette, BaseSyndicateContraband]
   id: BloodredCassette
-  name: bloodred cassette player
+  name: blood-red cassette player
   description: The least subtle way to enjoy your favorite tunes.
   components:
   - type: Sprite

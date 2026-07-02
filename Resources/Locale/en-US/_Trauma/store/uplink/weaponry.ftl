@@ -9,3 +9,5 @@ uplink-rifle-M90-description = An older bullpup carbine model, a revision of the
 
 uplink-foam-cutlass-name = Sharp Foam Cutlass
 uplink-foam-cutlass-desc = A blade disguised as a toy foam cutlass. Perfect for assassins that pretend playing around.
+
+uplink-bulk-mosin-name-trauma = Syndicate Bulk Rifle Crate

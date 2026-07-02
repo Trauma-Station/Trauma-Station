@@ -1,7 +1,7 @@
-uplink-foxdie-name = FOXDIE retrovirus
+uplink-foxdie-name = FOXDIE Retrovirus
 uplink-foxdie-desc = A dna sampler for the legendary FOXDIE retrovirus. Scan something with your target's DNA and it will kill only them, while spreading harmlessly through everyone else.
 
-uplink-hyposhell-name = Box of hyposhells
+uplink-hyposhell-name = Box of Hyposhells
 uplink-hyposhell-desc = A box containing four hyposhells, shotgun shells that can hold 7u of any chemical.
 
 uplink-appraisal-tool-gun-name = Appraisal Tool Gun
@@ -25,11 +25,17 @@ uplink-mimana-stealthy-desc = A mutated mimana that seems to fade into the backg
 uplink-omnimed-tool-name = Gorlex Surgical Omnitool
 uplink-omnimed-tool-desc = A compact surgical omnitool conveniently packed like a swiss army knife. Can perform surgery through clothing.
 
-uplink-kudzu-grenade-name = Kudzu grenade
+uplink-kudzu-grenade-name = Kudzu Grenade
 uplink-kudzu-grenade-desc = A grenade containing mutated kudzu that spreads faster and deals damage to anyone caught inside, excluding diona.
 
 uplink-banana-esword-name = Bananium Energy Sword
 uplink-banana-esword-desc = A bananium-modified energy sword that slips whoever it slices.
 
-uplink-behonker-name = Behonker Operative Reinforcement
+uplink-behonker-name = Behonker Operative Teleporter
 uplink-behonker-desc = Calls in a specially trained behonker operative to assist you.
+
+uplink-lube-grenade-name = Lube Grenade
+uplink-lube-grenade-desc = Make the floor slippery!
+
+uplink-glue-grenade-name = Glue Grenade
+uplink-glue-grenade-desc = Make the floor hard to walk in!

@@ -12,3 +12,5 @@ uplink-shuttle-bundle-desc = The bare necessities for a shuttle.
 
 uplink-shuttle-iff-name = Syndicate IFF Console Board
 uplink-shuttle-iff-desc = Allows you to control the IFF and stealth characteristics of this vessel.
+
+uplink-cameraBug-name-trauma = Camera Bug

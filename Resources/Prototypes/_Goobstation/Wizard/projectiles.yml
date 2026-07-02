@@ -502,7 +502,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Grenades/beenades.rsi
+    sprite: _Goobstation/Objects/Weapons/Grenades/beenade.rsi
     layers:
     - state: icon
   - type: Projectile

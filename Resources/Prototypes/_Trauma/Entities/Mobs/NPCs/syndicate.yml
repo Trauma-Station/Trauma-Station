@@ -176,7 +176,7 @@
   parent: BaseMobCarp
   id: MobNukieCarp
   name: nuclear operative carp
-  description: A bloodred carp trained in carp-to-carp combat.
+  description: A blood-red carp trained in carp-to-carp combat.
   suffix: syndicate
   components:
   - type: RandomMetadata
