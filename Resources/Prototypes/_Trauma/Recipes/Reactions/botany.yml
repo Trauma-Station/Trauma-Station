@@ -9,3 +9,42 @@
       amount: 1
   products:
     AmmoniumNitrate: 2
+
+- type: reaction
+  id: UnstableCompound
+  reactants:
+    Omnizine:
+      amount: 1
+    UnstableMutagen:
+      amount: 1
+    Plasma:
+      amount: 1
+      catalyst: true
+  products:
+    UnstableCompound: 2
+
+- type: reaction
+  id: ReaperDelight
+  reactants:
+    Amatoxin:
+      amount: 2
+    RobustHarvest:
+      amount: 1
+    UnstableMutagen:
+      amount: 1
+    Desoxyephedrine:
+      amount: 1
+  products:
+      ReaperDelight: 2
+
+- type: reaction
+  id: Stellarium
+  reactants:
+    Dylovene:
+      amount: 1
+    Stellibinin:
+      amount: 1
+    Ammonia:
+      amount: 1
+  products:
+    Stellarium: 3

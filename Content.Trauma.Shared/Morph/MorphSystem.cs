@@ -92,9 +92,12 @@ public sealed partial class MorphSystem : EntitySystem
         else
             _popup.PopupClient(Loc.GetString("morph-no-biomass-target"), ent, user, PopupType.MediumCaution);
 
-       // make sure the food is dead
+        // make sure the food is dead
         if (_mobQuery.TryComp(target, out var mob) && !_mob.IsDead(target, mob))
-           _mob.ChangeMobState(target, MobState.Dead, mob);
+            _mob.ChangeMobState(target, MobState.Dead, mob);
+
+        // no infinite food
+        EnsureComp<MorphBiomassBlacklistComponent>(target);
     }
 
     private void OnMorphReplicate(Entity<MorphComponent> ent, ref MorphReplicateActionEvent args)

@@ -92,6 +92,5 @@ public sealed partial class DeepFryerComponent : Component
 public enum DeepFryerVisuals : byte
 {
     Open,
-    Frying,
     BigFrying
 }

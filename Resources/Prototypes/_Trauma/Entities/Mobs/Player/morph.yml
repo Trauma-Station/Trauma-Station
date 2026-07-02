@@ -109,6 +109,7 @@
       components:
       - BorgChassis
       - Silicon
+      - MorphBiomassBlacklist
       tags:
       - Bot # no biomass if its a bot
       - SiliconMob # no biomass if its borg or ipc

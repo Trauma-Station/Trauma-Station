@@ -25,6 +25,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedToolSystem _tool = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<AccessScannerBlacklistComponent> _blacklistQuery = default!;
 
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(0.2);
     private TimeSpan _nextUpdate;
@@ -67,6 +68,9 @@ public sealed partial class AccessScannerSystem : EntitySystem
             {
                 if (idXform.MapID != map)
                     continue; // cant possibly be there
+
+                if (_blacklistQuery.HasComp(id))
+                    continue; // ignored
 
                 var idCoords = _transform.GetMapCoordinates(idXform);
                 if ((idCoords.Position - pos).LengthSquared() > range2)

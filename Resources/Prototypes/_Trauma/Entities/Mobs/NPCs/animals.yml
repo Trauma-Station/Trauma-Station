@@ -1152,8 +1152,16 @@
       reagents:
       - ReagentId: Honk
         Quantity: 30
+      - ReagentId: Happiness
+        Quantity: 30
+      - ReagentId: Laughter
+        Quantity: 30
   - type: SolutionRegeneration
     generated:
       reagents:
       - ReagentId: Honk
+        Quantity: 2
+      - ReagentId: Happiness
+        Quantity: 2
+      - ReagentId: Laughter
         Quantity: 2

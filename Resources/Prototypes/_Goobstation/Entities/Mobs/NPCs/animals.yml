@@ -826,7 +826,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Dead
+      100: Dead
   - type: Physics
   - type: HTN
     rootTask:
@@ -835,7 +835,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150
+        damage: 100
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -900,8 +900,8 @@
     solutions:
     - SolutionClownSpider
   - type: MeleeChemicalInjector
+    transferAmount: 3
     solution: melee
-    transferAmount: 2
   - type: Vocal
     sounds:
       Male: ClownGoblin

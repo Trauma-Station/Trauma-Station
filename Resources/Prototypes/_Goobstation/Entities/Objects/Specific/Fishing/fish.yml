@@ -1,55 +1,31 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: BaseFish
-  parent: [SimpleMobBase, BaseItem]
   abstract: true
+  parent: BaseItem
+  id: BaseFish
   name: fish
   description: Water-born creature from the infinite sea... Or toilet.
   components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
+  - type: Item
+    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Fish
     difficulty: 0.029
   - type: StaticPrice
     price: 250
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      1: Critical
-      5: Dead
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 0.1
-    baseSprintSpeed: 0.1
-  - type: PassiveDamage
-    allowedStates:
-    - Alive
-    damage:
-      types:
-        Asphyxiation: 1
-  - type: Respirator
-    damage:
-      types:
-        Asphyxiation: 1.0
-    damageRecovery:
-      types:
-        Asphyxiation: 0
   - type: Butcherable
     butcherDelay: 2
     spawned:
     - id: FoodMeatFish
       amount: 2
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 20
-  - type: ZombieImmune
 
 - type: entity
-  id: BaseFishRare
-  parent: BaseFish
   abstract: true
+  parent: BaseFish
+  id: BaseFishRare
   name: rare fish
-  description: Water-born creature from the infinite sea... Or toilet.
   components:
   - type: Fish
     difficulty: 0.038
@@ -57,16 +33,13 @@
     price: 750
 
 - type: entity
-  id: FishAlien
   parent: BaseFishRare
+  id: FishAlien
   name: alien fish
   description: Looks pretty... Abductory.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: alien
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -74,40 +47,31 @@
     - id: AlienFishLootTable
 
 - type: entity
-  id: FishAngler
   parent: BaseFish
+  id: FishAngler
   name: angler fish
   description: Scariest thing in existence, after bingles.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: angler
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishBass
   parent: BaseFish
+  id: FishBass
   name: bass fish
   description: Probably the most normal fish in existence. Unless you use it as bass guitar.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: bass
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishBingle
   parent: BaseFishRare
+  id: FishBingle
   name: bingle fish
   description: bingle
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: bingle
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatBingle
@@ -115,40 +79,31 @@
     - id: BingleFishLootTable
 
 - type: entity
-  id: FishBlob
   parent: BaseFish
+  id: FishBlob
   name: blob fish
   description: Unfortuantly, this is not a 5th level bio-hazard threat.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: blob
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishBlueFintuna
   parent: BaseFish
+  id: FishBlueFintuna
   name: blue fintuna
   description: It's looking straight to you...
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: blue_fintuna
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishBoyFisher
   parent: BaseFishRare
+  id: FishBoyFisher
   name: boy fisher
-  description: You like kissing fish, don't you?
+  description: You like kissing kois, don't you?
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: boy_fisher
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: MobMouseCancer
@@ -156,45 +111,31 @@
     - id: BoyfisherFishLootTable
 
 - type: entity
-  id: FishCat
   parent: BaseFish
+  id: FishCat
   name: cat fish
   description: Ironically this looks nothing like a cat. And it doesn't meow.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: catfish
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishTropicalClown
   parent: BaseFish
+  id: FishTropicalClown
   name: clown clown fish
   description: That is almost certanly some kind of joke.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: clown
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Laughter
-        Quantity: 20
 
 - type: entity
-  id: FishNukeDisk
   parent: BaseFishRare
+  id: FishNukeDisk
   name: nuke disk fish
   description: Erm, Actually, it's a bad idea trying to fit a fish inside a nuclear explosion device.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: disk
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -202,16 +143,13 @@
     - id: NukeDiskFishLootTable
 
 - type: entity
-  id: FishGib
   parent: BaseFishRare
+  id: FishGib
   name: gib stick fish
   description: "My face when i open a present and get gibstick:"
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: gib
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -219,16 +157,13 @@
     - id: GibFishLootTable
 
 - type: entity
-  id: FishMutant
   parent: BaseFishRare
+  id: FishMutant
   name: mutant fish
   description: Anomalous fish that looks like it ate some nuclear waste.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: mutant
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -236,16 +171,13 @@
     - id: MutantFishLootTable
 
 - type: entity
-  id: FishNuker
   parent: BaseFishRare
+  id: FishNuker
   name: nuclear operative fish
   description: Predator of the nuke disk fish.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: nuker
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -253,52 +185,40 @@
     - id: NukerFishLootTable
 
 - type: entity
-  id: FishPuffer
   parent: BaseFish
+  id: FishPuffer
   name: puffer fish
   description: It is poisonous... in many ways.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: pufferfish
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishSilver
   parent: BaseFish
+  id: FishSilver
   name: silver fish
   description: Actually contains silver.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: silverfish
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishTropicalSun
   parent: BaseFish
+  id: FishTropicalSun
   name: tropical sun fish
   description: It probably looked at the sun for too long...?
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: sun_tropical
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  id: FishToxic
   parent: BaseFishRare
+  id: FishToxic
   name: toxic waste fish
   description: "Looking at this fish, you understand how much it was a bad idea to allow nuclear waste to be dumped into rivers."
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: toxic
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
     - id: FoodMeatFish
@@ -306,35 +226,24 @@
     - id: ToxicFishLootTable
 
 - type: entity
-  id: FishTropical
   parent: BaseFish
+  id: FishTropical
   name: clown fish
   description: This fish is always searching for something... Or maybe someone?
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: tropical
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Laughter
-        Quantity: 10
 
 - type: entity
-  id: FishIan
   parent: BaseFishRare
+  id: FishIan
   name: ian fish
   description: Water-born ian from the sea.
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
     state: ian
-  - type: Item
-    sprite: _Goobstation/Objects/Specific/Fishing/fish.rsi
   - type: Butcherable
     spawned:
-    - id: FoodMeatCorgi
+    - id: FoodMeatCorgiFish
       amount: 2
     - id: MaterialHideCorgi

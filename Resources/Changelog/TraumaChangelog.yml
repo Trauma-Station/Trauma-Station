@@ -10836,3 +10836,168 @@ Entries:
   id: 1212
   time: '2026-06-25T14:05:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3338
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed memory leak that raider was usig to kill the server.
+  id: 1213
+  time: '2026-06-26T17:15:00.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed round end summary not listing jobs properly.
+  id: 1214
+  time: '2026-06-27T19:57:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3356
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed colossus not being attacked by NPCs and turrets.
+  id: 1215
+  time: '2026-06-27T20:11:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3359
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed infinite morph glitch.
+  id: 1216
+  time: '2026-06-27T20:15:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3358
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Service borgs now get plant analyzers
+  id: 1217
+  time: '2026-06-27T21:31:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3361
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 3 new chemicals that botanists can make, Check the guidebook for
+      more details
+  id: 1218
+  time: '2026-06-28T21:18:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3364
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reactor control rods are now built in to fuel rods rather than a separate
+      part.
+  - type: Add
+    message: >-
+      Added neutron reflectors that make reactors more powerful for the same
+      fuel use.
+  - type: Tweak
+    message: >-
+      Changed reactor thermal masses to actually reflect a ~15kg part rather
+      than literally half the reactor itself in every part. Parts now heat up
+      and transfer heat much faster.
+  - type: Fix
+    message: Fixed reactor thermal power calculation being wrong.
+  - type: Fix
+    message: Fixed reactor UI having flipped X/Y axes.
+  - type: Tweak
+    message: >-
+      Non-spent fuel rods are no longer radioactive, it makes no sense and
+      allowed lowest effort cheese ever with rad collectors.
+  - type: Tweak
+    message: >-
+      The reactor itself is no longer radioactive at low radiation levels,
+      radiation shielding is a thing.
+  id: 1219
+  time: '2026-06-29T18:28:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3370
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fishing no longer locks others out of fishing in that spot.
+  - type: Tweak
+    message: Fishing is now fully predicted.
+  - type: Fix
+    message: Fixed not being able to sell fish.
+  - type: Remove
+    message: Removed organs from fish, no more lag.
+  id: 1220
+  time: '2026-06-29T19:33:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3360
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed problems with nuclear centrifuge.
+  id: 1221
+  time: '2026-06-29T21:58:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3375
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked the injection values and what reagents the Clown Spider and Clown
+      Goblin use.
+  - type: Tweak
+    message: Tweaked the bloodstream of clown spiders.
+  id: 1222
+  time: '2026-06-30T17:08:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3345
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Stripping Update is here.
+  - type: Add
+    message: You can now open people's bags, belts and pockets of their outer clothing.
+  - type: Tweak
+    message: You can now strip only as many items at a time as you have free hands.
+  - type: Tweak
+    message: Tweaked strip time on specific clothing slots.
+  - type: Tweak
+    message: Different strip times/opening people's clothes if they are cuffed or dead.
+  - type: Tweak
+    message: >-
+      You can't remove someone's jumpsuit if they have Outer Clothing on. Remove
+      it first.
+  id: 1223
+  time: '2026-07-01T12:07:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3289
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed martial arts damage being split up between all limbs.
+  id: 1224
+  time: '2026-07-01T18:27:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3391
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      xenomorph infection growth has now been changed from a random chance to a
+      flat timer, the larva will always grow every 40 seconds (4 minutes to
+      burst)
+  id: 1225
+  time: '2026-07-01T19:38:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3395
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Shadowlings now only spawn alone.
+  - type: Tweak
+    message: Wraiths are now more common roundstart.
+  id: 1226
+  time: '2026-07-01T19:48:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3383
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deep fryer disappearing if it lost power while active.
+  id: 1227
+  time: '2026-07-01T19:55:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3397
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Properly implemented CQC's kick move and hell ripte's drop kick / head rip
+      moves.
+  id: 1228
+  time: '2026-07-01T20:37:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3396

@@ -14,19 +14,19 @@
             "name": "base_cap"
         },
         {
-            "name": "control_cap"
+            "name": "reflector_cap"
         },
         {
-            "name": "control_cap_melted_1"
+            "name": "reflector_cap_melted_1"
         },
         {
-            "name": "control_cap_melted_2"
+            "name": "reflector_cap_melted_2"
         },
         {
-            "name": "control_cap_melted_3"
+            "name": "reflector_cap_melted_3"
         },
         {
-            "name": "control_cap_melted_4"
+            "name": "reflector_cap_melted_4"
         },
         {
             "name": "fuel_cap"

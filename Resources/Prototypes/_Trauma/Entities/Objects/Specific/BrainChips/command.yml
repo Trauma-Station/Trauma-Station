@@ -12,7 +12,7 @@
       LiteracyKnowledge: 50 # your whole job is to delegate and lead :godo:
       StrengthKnowledge: 20
       ToughnessKnowledge: 10
-  # TODO: nuke disk serial parity
+  # TODO: nuke disk serial parity, also add some funny thing when looking at FishNukeDisk
 
 - type: entity
   parent: BaseSkillChip

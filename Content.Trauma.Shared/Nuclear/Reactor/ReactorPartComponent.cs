@@ -53,6 +53,12 @@ public sealed partial class ReactorPartComponent : Component
     public float NeutronCrossSection = 0.5f;
 
     /// <summary>
+    /// Chance to reflect a neutron instead of absorbing it / letting it pass.
+    /// </summary>
+    [DataField]
+    public float ReflectChance;
+
+    /// <summary>
     /// Max health to set <see cref="MeltHealth"/> to on init.
     /// </summary>
     [DataField]
@@ -79,7 +85,7 @@ public sealed partial class ReactorPartComponent : Component
     /// <summary>
     /// Thermal mass. Basically how much energy it takes to heat this up by 1 Kelvin.
     /// </summary>
-    [DataField]
-    public float ThermalMass = 420 * 250; //specific heat capacity of steel (420 J/KgK) * mass of part (Kg)
+    [DataField(required: true)]
+    public float ThermalMass;
     #endregion
 }

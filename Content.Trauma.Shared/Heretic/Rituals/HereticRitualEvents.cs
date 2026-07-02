@@ -19,7 +19,7 @@ public readonly record struct HereticRitualEffectEvent<T>(T Effect, Entity<Heret
 }
 
 [ByRefEvent]
-public record struct HereticRitualConditionEvent<T>(T Condition, Entity<HereticRitualRaiserComponent> Ritual)
+public record struct HereticRitualConditionEvent<T>(T Condition, Entity<HereticRitualRaiserComponent> Ritual, EntityUid? user)
     where T : EntityConditionBase<T>
 {
     [DataField]
@@ -28,6 +28,8 @@ public record struct HereticRitualConditionEvent<T>(T Condition, Entity<HereticR
     public readonly T Condition = Condition;
 
     public readonly Entity<HereticRitualRaiserComponent> Ritual = Ritual;
+
+    public readonly EntityUid? User = user;
 }
 
 [ByRefEvent]
