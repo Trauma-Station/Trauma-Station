@@ -1,8 +1,8 @@
-﻿accent-caveman-prefix-1 = Ooga,
+accent-caveman-prefix-1 = Ooga,
 accent-caveman-prefix-2 = Fooga booga!
 accent-caveman-prefix-3 = Unga, Foo,
 accent-caveman-prefix-4 = Booga
-accent-caveman-prefix-5 = Ruugh, 
+accent-caveman-prefix-5 = Ruugh,
 
 accent-caveman-suffix-1 =  Unga
 accent-caveman-suffix-2 =  Rugh roh!
@@ -51,7 +51,7 @@ accent-caveman-words-13 = nukie
 accent-caveman-words-replace-13 = red boom tribe
 
 accent-caveman-words-14 = heretic
-accent-caveman-words-replace-14 = bad shaman 
+accent-caveman-words-replace-14 = bad shaman
 
 accent-caveman-words-15 = syndi
 accent-caveman-words-replace-15 = red tribe
@@ -395,7 +395,7 @@ accent-caveman-words-replace-127 = angrys
 accent-caveman-words-128 = revs
 accent-caveman-words-replace-128 = angrys
 
-accent-caveman-words-129 = rev 
+accent-caveman-words-129 = rev
 accent-caveman-words-replace-129 = angry
 
 accent-caveman-words-130 = revolutionary
