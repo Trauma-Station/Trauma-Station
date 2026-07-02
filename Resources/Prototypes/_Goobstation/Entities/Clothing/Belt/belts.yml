@@ -165,8 +165,6 @@
     state: sheath
   - type: Clothing
     sprite: _Goobstation/Clothing/Belt/hossheath.rsi
-  - type: Item
-    size: Ginormous
   - type: ItemSlots
     slots:
       item:
@@ -184,7 +182,6 @@
         whitelist:
           tags:
           - Justice
-  - type: Appearance
 
 - type: entity
   parent: [ ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSyndicateContraband ]

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
@@ -27,16 +28,19 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private SharedStorageSystem _storage = default!;
     [Dependency] private SharedStrippableSystem _strippable = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
-    
+    [Dependency] private EntityQuery<ItemSlotsComponent> _itemSlotsQuery = default!;
+    [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
 
     private void InitializeBagAccess()
     {
         SubscribeLocalEvent<StrippingComponent, GetVerbsEvent<Verb>>(OnGetBagAccessVerbs);
         SubscribeLocalEvent<BagAccessComponent, BagAccessDoAfterEvent>(OnBagAccessDoAfter);
+        SubscribeLocalEvent<BagAccessComponent, QuickDrawDoAfterEvent>(OnQuickDrawDoAfter);
         SubscribeLocalEvent<BoundUIClosedEvent>(OnStorageUiClosed);
     }
 
@@ -105,20 +109,37 @@ public sealed partial class TraumaStrippingSystem
         var enumerator = _inventory.GetSlotEnumerator(args.Target);
         while (enumerator.NextItem(out var slotEntity, out var slotDef))
         {
-            if (!_storageQuery.HasComponent(slotEntity))
-                continue;
-
-            var capturedSlotName = slotDef.Name;
-            var capturedNetEnt = GetNetEntity(slotEntity);
-
-            var verb = new Verb
+            if (_storageQuery.HasComponent(slotEntity))
             {
-                Act = () => StartBagAccess(user, target, capturedSlotName, capturedNetEnt),
-                Text = Loc.GetString("trauma-bag-access-verb", ("slot", slotDef.Name)),
-                Priority = -1,
-            };
+                var capturedSlotName = slotDef.Name;
+                var capturedNetEnt = GetNetEntity(slotEntity);
 
-            args.Verbs.Add(verb);
+                args.Verbs.Add(new Verb
+                {
+                    Act = () => StartBagAccess(user, target, capturedSlotName, capturedNetEnt),
+                    Text = Loc.GetString("trauma-bag-access-verb", ("slot", slotDef.Name)),
+                    Priority = -1,
+                });
+            }
+
+            if (_quickDrawableQuery.HasComponent(slotEntity) && _itemSlotsQuery.TryComp(slotEntity, out var itemSlots))
+            {
+                foreach (var (slotId, slot) in itemSlots.Slots)
+                {
+                    if (!_itemSlots.CanEject(slotEntity, user, slot))
+                        continue;
+
+                    var capturedSlotId = slotId;
+                    var capturedDrawNetEnt = GetNetEntity(slotEntity);
+
+                    args.Verbs.Add(new Verb
+                    {
+                        Act = () => StartQuickDraw(user, target, capturedSlotId, capturedDrawNetEnt),
+                        Text = Loc.GetString("trauma-quickdraw-verb"),
+                        Priority = -1,
+                    });
+                }
+            }
         }
     }
 
@@ -192,6 +213,74 @@ public sealed partial class TraumaStrippingSystem
         if (activeComp.BagAccessOpenedStorages.Count == 0)
             activeComp.NextBagAccessCheck = _timing.CurTime + activeComp.BagAccessCheckInterval;
         activeComp.BagAccessOpenedStorages.Add(bagEntity);
+        args.Handled = true;
+    }
+
+    private void StartQuickDraw(EntityUid user, Entity<BagAccessComponent> target, string slotId, NetEntity netSlotEntity)
+    {
+        var delay = GetBagAccessDelay(target);
+        var (_, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, TimeSpan.Zero);
+
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            user,
+            delay,
+            new QuickDrawDoAfterEvent(netSlotEntity, slotId, stealth),
+            eventTarget: target.Owner,
+            target: target.Owner,
+            used: null)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            DuplicateCondition = DuplicateConditions.SameTool,
+            Hidden = stealth,
+        };
+
+        _doAfter.TryStartDoAfter(doAfterArgs);
+
+        // Notify alive, uncuffed targets when the doafter starts.
+        if (!stealth && !_mobState.IsDead(target.Owner))
+        {
+            if (!TryComp<CuffableComponent>(target.Owner, out var cuffable) || cuffable.CuffedHandCount == 0)
+            {
+                var userName = Identity.Name(user, EntityManager);
+                _popup.PopupEntity(
+                    Loc.GetString("trauma-quickdraw-popup", ("user", userName)),
+                    target.Owner,
+                    target.Owner,
+                    PopupType.LargeCaution);
+            }
+        }
+
+        // Increment immediately. OnQuickDrawDoAfter decrements on finish/cancel.
+        var activeComp = EnsureComp<ActiveStrippingComponent>(user);
+        activeComp.ActiveCount++;
+        Dirty(user, activeComp);
+    }
+
+    private void OnQuickDrawDoAfter(Entity<BagAccessComponent> ent, ref QuickDrawDoAfterEvent args)
+    {
+        // Always decrement, fires on both success and cancellation.
+        if (TryComp<ActiveStrippingComponent>(args.User, out var active))
+            DecrementActiveCount((args.User, active));
+
+        if (args.Cancelled || args.Handled)
+            return;
+
+        var slotEntity = GetEntity(args.SlotEntity);
+        if (!Exists(slotEntity))
+            return;
+
+        if (!_itemSlots.TryGetSlot(slotEntity, args.SlotId, out var slot))
+            return;
+
+        if (!_itemSlots.CanEject(slotEntity, args.User, slot))
+            return;
+
+        // doAfter: false, otherwise ItemSlots tries to start its own doafter too and we'd get two.
+        _itemSlots.TryEjectToHands(slotEntity, slot, args.User, excludeUserAudio: true, doAfter: false);
         args.Handled = true;
     }
 

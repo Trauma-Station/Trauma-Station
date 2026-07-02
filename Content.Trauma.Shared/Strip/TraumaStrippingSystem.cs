@@ -43,7 +43,7 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
         base.Update(frameTime);
         UpdateBagAccess();
     }
-    
+
     private void OnStripAttempt(Entity<ActiveStrippingComponent> user, ref DoAfterAttemptEvent<StrippableDoAfterEvent> args)
     {
         // Only limit removals, inserting items back doesn't require a free hand slot.
