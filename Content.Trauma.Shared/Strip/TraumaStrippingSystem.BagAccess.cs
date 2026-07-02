@@ -36,9 +36,9 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private EntityQuery<ItemSlotsComponent> _itemSlotsQuery = default!;
     [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
 
-    private void InitializeBagAccess()
+    private void InitializeStripActions()
     {
-        SubscribeLocalEvent<StrippingComponent, GetVerbsEvent<Verb>>(OnGetBagAccessVerbs);
+        SubscribeLocalEvent<StrippingComponent, GetVerbsEvent<Verb>>(OnGetStripActionVerbs);
         SubscribeLocalEvent<BagAccessComponent, BagAccessDoAfterEvent>(OnBagAccessDoAfter);
         SubscribeLocalEvent<BagAccessComponent, QuickDrawDoAfterEvent>(OnQuickDrawDoAfter);
         SubscribeLocalEvent<BoundUIClosedEvent>(OnStorageUiClosed);
@@ -84,12 +84,12 @@ public sealed partial class TraumaStrippingSystem
         }
     }
 
-    private void OnGetBagAccessVerbs(Entity<StrippingComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void OnGetStripActionVerbs(Entity<StrippingComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Target == args.User)
             return;
 
-        // Target must have BagAccessComponent.
+        // Target must have BagAccessComponent - used by both bag access and quickdraw verbs.
         if (!TryComp<BagAccessComponent>(args.Target, out var bagAccess))
             return;
 
@@ -145,7 +145,7 @@ public sealed partial class TraumaStrippingSystem
 
     private void StartBagAccess(EntityUid user, Entity<BagAccessComponent> target, string slotName, NetEntity netBagEntity)
     {
-        var delay = GetBagAccessDelay(target);
+        var delay = GetStripActionDelay(target);
         var (_, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, TimeSpan.Zero);
 
         var doAfterArgs = new DoAfterArgs(
@@ -182,7 +182,7 @@ public sealed partial class TraumaStrippingSystem
             }
         }
 
-        // Increment immediately; OnBagAccessDoAfter decrements on finish/cancel.
+        // Increment immediately. OnBagAccessDoAfter decrements on finish/cancel.
         var activeComp = EnsureComp<ActiveStrippingComponent>(user);
         activeComp.ActiveCount++;
         Dirty(user, activeComp);
@@ -218,7 +218,7 @@ public sealed partial class TraumaStrippingSystem
 
     private void StartQuickDraw(EntityUid user, Entity<BagAccessComponent> target, string slotId, NetEntity netSlotEntity)
     {
-        var delay = GetBagAccessDelay(target);
+        var delay = GetStripActionDelay(target);
         var (_, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, TimeSpan.Zero);
 
         var doAfterArgs = new DoAfterArgs(
@@ -300,7 +300,7 @@ public sealed partial class TraumaStrippingSystem
             RemComp<IgnoreUIRangeComponent>(args.Actor);
     }
 
-    private TimeSpan GetBagAccessDelay(Entity<BagAccessComponent> target)
+    private TimeSpan GetStripActionDelay(Entity<BagAccessComponent> target)
     {
         if (_mobState.IsDead(target.Owner))
             return target.Comp.DeadDelay;
