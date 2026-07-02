@@ -3,13 +3,38 @@ accent-caveman-prefix-2 = Fooga booga!
 accent-caveman-prefix-3 = Unga, Foo,
 accent-caveman-prefix-4 = Booga
 accent-caveman-prefix-5 = Ruugh,
+accent-caveman-prefix-6 = Grug say,
+accent-caveman-prefix-7 = Oog,
+accent-caveman-prefix-8 = Mmg,
+accent-caveman-prefix-9 = Ugga ugga,
+accent-caveman-prefix-10 = Hoo hoo,
+accent-caveman-prefix-11 = Rok rok,
+accent-caveman-prefix-12 = Bonk,
+accent-caveman-prefix-13 = Grah,
+accent-caveman-prefix-14 = Oogly boogly,
+accent-caveman-prefix-15 = Duh,
+accent-caveman-prefix-16 = Waaugh,
+accent-caveman-prefix-17 = Rrrgh,
+accent-caveman-prefix-18 = Gruk say,
+accent-caveman-prefix-19 = Ho,
+accent-caveman-prefix-20 = Mog mog,
 
-accent-caveman-suffix-1 =  Unga
-accent-caveman-suffix-2 =  Rugh roh!
-accent-caveman-suffix-3 =  Rahh!
-accent-caveman-suffix-4 =  Dooga.
-accent-caveman-suffix-5 =  Grumble grumble..
-accent-caveman-suffix-6 =  Yum yom!
+accent-caveman-suffix-1 =  , Unga.
+accent-caveman-suffix-2 =  . Rugh roh!
+accent-caveman-suffix-3 =  . Rahh!
+accent-caveman-suffix-4 =  , Dooga.
+accent-caveman-suffix-5 =  , Grumble grumble..
+accent-caveman-suffix-6 =  . Yum yom!
+accent-caveman-suffix-7 =  , Ooga booga.
+accent-caveman-suffix-8 =  . Grok say so!
+accent-caveman-suffix-9 =  , Bonk bonk.
+accent-caveman-suffix-10 =  . Argh!
+accent-caveman-suffix-11 =  , Rok.
+accent-caveman-suffix-12 =  . Hrrn!
+accent-caveman-suffix-13 =  , Ugga.
+accent-caveman-suffix-14 =  . Mog!
+accent-caveman-suffix-15 =  , Foo foo.
+accent-caveman-suffix-16 =  . Grug happy!
 
 accent-caveman-words-1 = my
 accent-caveman-words-replace-1 = me
@@ -1090,3 +1115,12 @@ accent-caveman-words-replace-359 = stay alive
 
 accent-caveman-words-360 = survivor
 accent-caveman-words-replace-360 = alive one
+
+accent-caveman-words-361 = ntr
+accent-caveman-words-replace-361 = weak meanie
+
+accent-caveman-words-362 = ce
+accent-caveman-words-replace-362 = chief cavemaker
+
+accent-caveman-words-363 = cap
+accent-caveman-words-replace-363 = chief of cave

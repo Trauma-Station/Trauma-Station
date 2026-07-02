@@ -21,5 +21,6 @@
   category: SpeechTraits
   cost: 1
   components:
+  - type: CavemanAccent
   - type: ReplacementAccent
     accent: Caveman

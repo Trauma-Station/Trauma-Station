@@ -2,19 +2,6 @@
 
 - type: accent
   id: Caveman
-  prefix:
-    - accent-caveman-prefix-1
-    - accent-caveman-prefix-2
-    - accent-caveman-prefix-3
-    - accent-caveman-prefix-4
-    - accent-caveman-prefix-5
-  suffix:
-    - accent-caveman-suffix-1
-    - accent-caveman-suffix-2
-    - accent-caveman-suffix-3
-    - accent-caveman-suffix-4
-    - accent-caveman-suffix-5
-    - accent-caveman-suffix-6
   wordReplacements:
     accent-caveman-words-1: accent-caveman-words-replace-1
     accent-caveman-words-2: accent-caveman-words-replace-2
@@ -376,3 +363,6 @@
     accent-caveman-words-358: accent-caveman-words-replace-358
     accent-caveman-words-359: accent-caveman-words-replace-359
     accent-caveman-words-360: accent-caveman-words-replace-360
+    accent-caveman-words-361: accent-caveman-words-replace-361
+    accent-caveman-words-362: accent-caveman-words-replace-362
+    accent-caveman-words-363: accent-caveman-words-replace-363
