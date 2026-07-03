@@ -228,7 +228,7 @@
 
 - type: damageModifierSet
   # <Trauma>
-  id: Zombie 
+  id: Zombie
   coefficients:
     Blunt: 0.75
     Piercing: 1.25
