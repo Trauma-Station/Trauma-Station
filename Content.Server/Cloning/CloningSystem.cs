@@ -94,20 +94,21 @@ public sealed partial class CloningSystem : SharedCloningSystem
 
         // Add equipment first so that SetEntityName also renames the ID card.
         if (settings.CopyEquipment != null)
-            CopyEquipment(original, clone.Value, settings.CopyEquipment.Value, settings.Whitelist, settings.Blacklist, settings.MakeEquipmentUnremoveable, settings.CopyStorage, settings.InternalContentsUnremoveable); // Goob edit
+            CopyEquipment(original, clone.Value, settings.CopyEquipment.Value, settings.EquipmentWhitelist, settings.EquipmentBlacklist,
+                settings.MakeEquipmentUnremoveable, settings.CopyStorage, settings.InternalContentsUnremoveable); // Trauma
 
         // Copy storage on the mob itself as well.
         // This is needed for slime storage.
         if (settings.CopyInternalStorage)
-            CopyStorage(original, clone.Value, settings.Whitelist, settings.Blacklist);
+            CopyStorage(original, clone.Value, settings.EquipmentWhitelist, settings.EquipmentBlacklist);
 
         // copy implants and their storage contents
         if (settings.CopyImplants)
-            CopyImplants(original, clone.Value, settings.CopyInternalStorage, settings.Whitelist, settings.Blacklist);
+            CopyImplants(original, clone.Value, settings.CopyInternalStorage, settings.EquipmentWhitelist, settings.EquipmentBlacklist);
 
         // Copy permanent status effects
         if (settings.CopyStatusEffects)
-            CopyStatusEffects(original, clone.Value);
+            CopyStatusEffects(original, clone.Value, settings.StatusEffectWhitelist, settings.StatusEffectBlacklist);
 
         var originalName = _nameMod.GetBaseName(original);
 
@@ -215,21 +216,13 @@ public sealed partial class CloningSystem : SharedCloningSystem
         RaiseLocalEvent(original, ref cloningEv); // used for datafields that cannot be directly copied using CopyComp
     }
 
-<<<<<<< HEAD
-    public void CopyEquipment(
-=======
     public override void CopyEquipment(
->>>>>>> f6b458f7613 (Add changeling flesh clothing transformation (#43590))
         Entity<InventoryComponent?> original,
         Entity<InventoryComponent?> clone,
         SlotFlags slotFlags,
         EntityWhitelist? whitelist = null,
-<<<<<<< HEAD
         EntityWhitelist? blacklist = null,
         bool makeUnremoveable = false, bool copyStorage = true, bool internalContentsUnremoveable = false) // Trauma
-=======
-        EntityWhitelist? blacklist = null)
->>>>>>> f6b458f7613 (Add changeling flesh clothing transformation (#43590))
     {
         if (!Resolve(original, ref original.Comp) || !Resolve(clone, ref clone.Comp))
             return;
@@ -240,7 +233,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
         var slotEnumerator = _inventory.GetSlotEnumerator(original, slotFlags);
         while (slotEnumerator.NextItem(out var item, out var slot))
         {
-            var cloneItem = CopyItem(item, coords, whitelist, blacklist, copyStorage);
+            var cloneItem = CopyItem(item, coords, whitelist, blacklist, copyStorage); // Trauma - pass copyStorage
 
             // Goob edit start
             if (cloneItem == null)
@@ -317,23 +310,12 @@ public sealed partial class CloningSystem : SharedCloningSystem
         }
     }
 
-<<<<<<< HEAD
-    /// <summary>
-    ///     Copies an item and its storage recursively, placing all items at the same position in grid storage.
-    ///     This uses the original prototype of the items, so any changes to components that are done after spawning are lost!
-    /// </summary>
-    /// <remarks>
-    ///     This is not perfect and only considers item in storage containers.
-    ///     Some components have their own additional spawn logic on map init, so we cannot just copy all containers.
-    /// </remarks>
-    public EntityUid? CopyItem(EntityUid original, EntityCoordinates coords, EntityWhitelist? whitelist = null, EntityWhitelist? blacklist = null, bool copyStorage = true) // Goob edit
-=======
     public override EntityUid? CopyItem(
         EntityUid original,
         EntityCoordinates coords,
         EntityWhitelist? whitelist = null,
-        EntityWhitelist? blacklist = null)
->>>>>>> f6b458f7613 (Add changeling flesh clothing transformation (#43590))
+        EntityWhitelist? blacklist = null,
+        bool copyStorage = true) // Trauma
     {
         // we use a whitelist and blacklist to be sure to exclude any problematic entities
         if (!_whitelist.CheckBoth(original, blacklist, whitelist))

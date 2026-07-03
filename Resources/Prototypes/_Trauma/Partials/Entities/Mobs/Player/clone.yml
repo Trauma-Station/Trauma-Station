@@ -1,6 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: cloningSettings
+  id: TraitsMental
+  components:
+  - ForeignerTrait
+
+- type: cloningSettings
   id: Body
   components:
   - Heretic
@@ -13,10 +18,10 @@
   - EncryptionKeyHolder
 
 - type: cloningSettings
-  id: TraitsMental
-  components:
-  - ForeignerTrait
-
-- type: cloningSettings
   id: ParadoxCloningSettings
   forceCloning: true # allow paradox ipc/vox which cant be cloned ingame
+
+- type: cloningSettings
+  id: Special
+  components:
+  - !Remove MindShield # it's an implant...
