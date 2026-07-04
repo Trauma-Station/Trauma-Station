@@ -1,6 +1,5 @@
 // <Trauma>
 using System.Linq;
-using Content.Shared.Strip.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.ActionBlocker;
