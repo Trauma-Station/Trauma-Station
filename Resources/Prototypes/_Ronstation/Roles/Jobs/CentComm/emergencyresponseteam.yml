@@ -22,19 +22,40 @@
   id: ERTLeaderAdmemeChesterEVA
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
-    back: ClothingModsuitERTLeaderFilled
+    back: ClothingModsuitERTLeaderChesterFilled
     shoes: ClothingShoesBootsMagAdv
     mask: ClothingMaskGasERT
-    eyes: ClothingEyesGlassesMedSec
+    eyes: ClothingEyesGlassesCentCommNoThermal
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTLeader
-    neck: ExecutiveIDCard # This is effectively an access breaker. Probably should only be in possession by admins.
+    neck: ExecutiveIDCard # This is effectively an access breaker. Keep that in mind when making custom loadouts with it.
     id: ERTLeaderPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltAssaultFilled
     pocket1: Flare
     pocket2: FlashlightSeclite
     suitstorage: WeaponLeverChester # This gun is interesting and feels fitting for the leader.
+  inhand:
+    - MindShieldImplanter
+    - DeathRattleImplanterCentcomm
+# Ready-to-go loadout for an ERT leader. Comes with a beast designed to shoulder the weight of impossible missions.
+- type: startingGear
+  id: ERTLeaderAdmemeAnnieEVA
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTLeader
+    back: ClothingModsuitERTLeaderAnnieFilled
+    shoes: ClothingShoesBootsMagAdv
+    mask: ClothingMaskGasERT
+    eyes: ClothingEyesGlassesCentCommNoThermal
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTLeader
+    neck: ExecutiveIDCard
+    id: ERTLeaderPDA
+    ears: ClothingHeadsetAltCentCom
+    belt: ClothingBeltAssaultFilled
+    pocket1: Flare
+    pocket2: FlashlightSeclite
+    suitstorage: WeaponRifleAnnie # Its the Annie. If you've never had the pleasure of using it, its an amazing rifle
   inhand:
     - MindShieldImplanter
     - DeathRattleImplanterCentcomm

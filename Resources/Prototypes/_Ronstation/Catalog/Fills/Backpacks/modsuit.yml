@@ -3,7 +3,7 @@
   id: ClothingModsuitERTEngineerFilled
   parent: ClothingModsuitResponsoryEngineering
   suffix: Admeme, ERT Engineer, Microreactor # Microreactors are standard for these.
-  name: ERT Engineer Backpack
+  name: ERT Engineer Modsuit
   components:
   - type: StorageFill
     contents:
@@ -19,12 +19,12 @@
     - id: MagazineMagnum
     - id: MagazineMagnum
     - id: TelescopicBaton
-# Filled modsuit for ERT leader admeme
+# Filled modsuit for ERT leader admeme, Chester clips
 - type: entity
   parent: ClothingModsuitResponsoryLeader
-  id: ClothingModsuitERTLeaderFilled
-  suffix: Admeme, ERT Leader, Microreactor
-  name: ERT Engineer Backpack
+  id: ClothingModsuitERTLeaderChesterFilled
+  suffix: Admeme, ERT Leader, Chester
+  name: ERT Leader Modsuit
   components:
     - type: StorageFill
       contents:
@@ -36,7 +36,30 @@
       - id: WeaponRevolverMateba
       - id: SpeedLoaderMagnum
       - id: SpeedLoaderMagnum
-      - id: SpeedLoaderMagnum
+      - id: MagazineShotgunLeverRifle
       - id: MagazineShotgunLeverRifle
       - id: MagazineShotgunLeverRifle
       - id: TelescopicBaton
+      - id: JawsOfLife
+# Filled modsuit for ERT leader admeme, Annie mags
+- type: entity
+  parent: ClothingModsuitResponsoryLeader
+  id: ClothingModsuitERTLeaderAnnieFilled
+  suffix: Admeme, ERT Leader, Annie
+  name: ERT Leader Modsuit
+  components:
+    - type: StorageFill
+      contents:
+      - id: RCDExperimental
+      - id: BoxSurvivalSlotsEngineering
+      - id: DoubleEmergencyNitrogenTankFilled
+      - id: BoxFlare
+      - id: Flash
+      - id: WeaponRevolverMateba
+      - id: SpeedLoaderMagnum
+      - id: MagazineLightRifle
+      - id: MagazineLightRifle
+      - id: MagazineLightRifle
+      - id: MagazineLightRifle
+      - id: TelescopicBaton
+      - id: JawsOfLife
