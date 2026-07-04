@@ -12,11 +12,11 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourEvent>(OnAerBehaviourEvent);
+        SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourAddResearchEvent>(OnAerBehaviourResearch);
     }
 
 
-    private void OnAerBehaviourEvent(Entity<AnomalousEntityComponent> ent, ref AerBehaviourEvent args)
+    private void OnAerBehaviourResearch(Entity<AnomalousEntityComponent> ent, ref AerBehaviourAddResearchEvent args)
     {
         if (ent.Comp is not { } anomalousEntityComp)
             return;

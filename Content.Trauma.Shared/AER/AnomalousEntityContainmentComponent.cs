@@ -17,4 +17,7 @@ public sealed partial class AnomalousEntityContainmentComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float PointMultiplier = 1;
+
+    [ViewVariables]
+    public EntProtoId IDGear = new EntProtoId("SoapHomemadeBanana");
 }

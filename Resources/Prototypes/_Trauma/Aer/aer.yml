@@ -6,8 +6,8 @@
   - type: AnomalousEntity
     researchPerSecond: 1000
     contained: false
-    researchOnBehaviour: 100000
-  - type: AerSkeletonBehaviours
+    researchOnBehaviour: 0
+    iDGear: SoapHomemadeBanana
 
 - type: entity
   parent: SoapHomemadeBanana
@@ -18,7 +18,8 @@
     researchPerSecond: 0
     contained: false
     researchOnBehaviour: 100000
-  - type: AerSkeletonBehaviours
+    iDGear: SoapHomemadeBanana
+  - type: AerSoapBehaviours
 
 
     

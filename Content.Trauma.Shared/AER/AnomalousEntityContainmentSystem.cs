@@ -23,7 +23,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, ResearchServerGetPointsPerSecondEvent>(OnAnomalousContainmentGetPointsPerSecond);
         SubscribeLocalEvent<AnomalyShutdownEvent>(OnAnomalousContainmentShutdown);
-        //SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourEvent>(OnAerBehaviourEvent);
+        SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourSpawnGearEvent>(OnAerBehaviourSpawnGear);
     }
 
     private void OnContainmentShutdown(EntityUid uid, AnomalousEntityContainmentComponent component, ComponentShutdown args)
@@ -51,6 +51,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 
         component.AnomalousEntity = scanner.ScannedAER;
         anomalousEntityComponent.ConnectedContainment = uid;
+        component.IDGear = "SoapHomemadeBanana";//temporary shit i need to push
         //_radiation.SetSourceEnabled(uid, true);//no rads for now
         //UpdateVesselAppearance(uid,  component);//todo different apperances
         //Popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), uid);//boh
@@ -92,7 +93,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         }
     }
 
-    /*private void OnAerBehaviourEvent(Entity<AnomalousEntityComponent> ent, ref AerBehaviourEvent args)
+    private void OnAerBehaviourSpawnGear(Entity<AnomalousEntityComponent> ent, ref AerBehaviourSpawnGearEvent args)
     {
         if (ent.Comp is not { } anomalousEntityComp)
             return;
@@ -107,8 +108,12 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         {
             if (aerSensor == aerContainmentId)
             {
-                Spawn("SoapHomemadeBanana", Transform(aerSensor).Coordinates);
+                TryComp<AnomalousEntityComponent>(component.AnomalousEntity, out var aer);//move this shit to linking scan thing and place extra variable in entity containment
+                if (aer != null)
+                {
+                    PredictedSpawnAtPosition(aer.IDGear, Transform(aerSensor).Coordinates);
+                }
             }
         }
-    }*/
+    }
 }

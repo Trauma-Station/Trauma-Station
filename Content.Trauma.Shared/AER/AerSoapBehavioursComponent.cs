@@ -5,7 +5,7 @@ namespace Content.Trauma.Shared.AER;
 /// identifies anomalous entities that can be contained for research points
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class AerSkeletonBehavioursComponent : Component
+public sealed partial class AerSoapBehavioursComponent : Component
 {
 
 }

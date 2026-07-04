@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using Content.Trauma.Shared.Circuits;
 
@@ -24,6 +25,9 @@ public sealed partial class AnomalousEntityComponent : Component
     /// </summary>
     [DataField]
     public float ResearchOnBehaviour = new();
+
+    [DataField]
+    public EntProtoId? IDGear = new EntProtoId("SoapHomemadeBanana");
 
     //containment sensor connected to the entity
     [ViewVariables]

@@ -4,12 +4,12 @@ namespace Content.Trauma.Shared.AER;
 
 //i dunno event definition?
 [ByRefEvent]
-public record struct AerBehaviourEvent
+public record struct AerBehaviourAddResearchEvent
 {
     public EntityUid Aer;
 
     //constructor
-    public AerBehaviourEvent(EntityUid aer)
+    public AerBehaviourAddResearchEvent(EntityUid aer)
     {
         Aer = aer;
     }
