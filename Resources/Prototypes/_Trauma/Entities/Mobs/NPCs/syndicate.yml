@@ -277,3 +277,11 @@
     understands:
     - Universal
   - type: MovementIgnoreGravity
+  - type: ThermalVision
+    thermalShader: null
+    color: "#BF40BF"
+    activateSound: null
+    deactivateSound: null
+  - type: BatteryAmmoProvider
+    proto: XrayCannonBullet
+    fireCost: 62.5
