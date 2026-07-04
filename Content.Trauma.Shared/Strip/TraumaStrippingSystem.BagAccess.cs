@@ -145,8 +145,8 @@ public sealed partial class TraumaStrippingSystem
 
     private void StartBagAccess(EntityUid user, Entity<BagAccessComponent> target, string slotName, NetEntity netBagEntity)
     {
-        var delay = GetStripActionDelay(target);
-        var (_, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, TimeSpan.Zero);
+        var baseDelay = GetStripActionDelay(target);
+        var (delay, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, baseDelay); // Use baseDelay through so thieving reduction applies
 
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
@@ -218,8 +218,8 @@ public sealed partial class TraumaStrippingSystem
 
     private void StartQuickDraw(EntityUid user, Entity<BagAccessComponent> target, string slotId, NetEntity netSlotEntity)
     {
-        var delay = GetStripActionDelay(target);
-        var (_, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, TimeSpan.Zero);
+        var baseDelay = GetStripActionDelay(target);
+        var (delay, stealth) = _strippable.GetStripTimeModifiers(user, target.Owner, null, baseDelay); // Use baseDelay through so thieving reduction applies
 
         var doAfterArgs = new DoAfterArgs(
             EntityManager,

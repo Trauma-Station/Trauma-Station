@@ -401,6 +401,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
         // prevent spamming bag open / honkerton honk sound
         silent |= TryComp<UseDelayComponent>(uid, out var useDelay) && UseDelay.IsDelayed((uid, useDelay), id: OpenUiUseDelayID);
+        silent |= _thieving.IsStealthy(entity); // Trauma - Stealthy thieves open storage silently
         if (!CanInteract(entity, (uid, storageComp), silent: silent))
             return;
 
@@ -697,7 +698,8 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
             if (_sharedHandsSystem.TryPickupAnyHand(player, item, handsComp: player.Comp)
                 && storage.Comp.StorageRemoveSound != null
-                && !_tag.HasTag(player, storage.Comp.SilentStorageUserTag))
+                && !_tag.HasTag(player, storage.Comp.SilentStorageUserTag)
+                && !_thieving.IsStealthy(player)) // Trauma - Stealthy thieves take items silently
             {
                 Audio.PlayPredicted(storage.Comp.StorageRemoveSound, storage, player, _audioParams);
             }
@@ -1155,7 +1157,10 @@ public abstract partial class SharedStorageSystem : EntitySystem
         // If there is an user, the sound will not play if they have the SilentStorageUserTag
         // If there is no user, only playSound is checked.
         var canPlaySound = playSound && (user == null || !_tag.HasTag(user.Value, storageComp.SilentStorageUserTag));
-
+        // <Trauma> - Stealthy thieves insert silently    
+        if (user != null && _thieving.IsStealthy(user.Value))
+            canPlaySound = false;
+        // </Trauma>
         if (!stackAutomatically || !_stackQuery.TryGetComponent(insertEnt, out var insertStack))
         {
             if (!ContainerSystem.Insert(insertEnt, storageComp.Container))

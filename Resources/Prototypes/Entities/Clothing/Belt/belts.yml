@@ -107,6 +107,7 @@
   name: shoulder holster
   description: 'A holster to carry a handgun and ammo. WARNING: Badasses only.'
   components:
+  - type: QuickDrawable # Trauma
   - type: Sprite
     sprite: Clothing/Belt/holster.rsi
   - type: Clothing

@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Shared.DoAfter;
 using System.Linq;
+using Content.Shared.Strip.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.ActionBlocker;
@@ -573,6 +573,11 @@ namespace Content.Shared.Containers.ItemSlots
                 _adminLogger.Add(LogType.Action,
                     LogImpact.Low,
                     $"{ToPrettyString(user.Value)} ejected {ToPrettyString(item)} from {slot.ContainerSlot?.ID + " slot of "}{ToPrettyString(uid)}");
+
+            // <Trauma>
+            if (user != null && _thieving.IsStealthy(user.Value))
+                return; // Stealthy thieves don't announce ejects with sound
+            // </Trauma>
 
             _audioSystem.PlayPredicted(slot.EjectSound, uid, excludeUserAudio ? user : null);
         }
