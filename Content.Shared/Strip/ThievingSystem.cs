@@ -19,6 +19,8 @@ public sealed partial class ThievingSystem : EntitySystem
         SubscribeLocalEvent<ThievingComponent, ToggleThievingEvent>(OnToggleStealthy);
         SubscribeLocalEvent<ThievingComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<ThievingComponent, ComponentRemove>(OnCompRemoved);
+
+        InitializeTrauma(); // Trauma - Hook up stealth-check event relay
     }
 
     private void OnBeforeStrip(EntityUid uid, ThievingComponent component, BeforeStripEvent args)

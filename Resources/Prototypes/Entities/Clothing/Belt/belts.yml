@@ -11,8 +11,8 @@
     state: sheath
   - type: Clothing
     sprite: Clothing/Belt/sheath.rsi
-#  - type: Item Trauma - Useless now that we parent BaseClothingBeltSheath
-#    size: Ginormous
+  - type: Item
+    size: Ginormous
   - type: ItemSlots
     slots:
       item:
@@ -30,7 +30,7 @@
         whitelist:
           tags:
           - CaptainSabre
-#  - type: Appearance
+  - type: Appearance
 
 - type: entity
   parent: ClothingBeltStorageBase

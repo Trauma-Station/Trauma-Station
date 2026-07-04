@@ -32,9 +32,11 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
-    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
     [Dependency] private EntityQuery<ItemSlotsComponent> _itemSlotsQuery = default!;
     [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+
+    private readonly List<EntityUid> _bagAccessScratch = new(); // Reused buffer for UpdateBagAccess, avoid per-tick allocation
 
     private void InitializeStripActions()
     {
@@ -58,22 +60,21 @@ public sealed partial class TraumaStrippingSystem
 
             active.NextBagAccessCheck += active.BagAccessCheckInterval;
 
-            if (!_xformQuery.TryComp(uid, out var userXform))
-                continue;
-
-            var userCoords = userXform.Coordinates;
+            var userCoords = Transform(uid).Coordinates;
 
             // Copy since closing a bag's UI removes it from BagAccessOpenedStorages, and we can't modify the set while looping over it.
-            foreach (var bagEntity in new List<EntityUid>(active.BagAccessOpenedStorages))
+            _bagAccessScratch.Clear();
+            _bagAccessScratch.AddRange(active.BagAccessOpenedStorages);
+
+            foreach (var bagEntity in _bagAccessScratch)
             {
-                if (!Exists(bagEntity) || !_xformQuery.TryComp(bagEntity, out var bagXform))
+                if (!Exists(bagEntity))
                 {
                     active.BagAccessOpenedStorages.Remove(bagEntity);
                     continue;
                 }
 
-                if (!userCoords.TryDistance(EntityManager, bagXform.Coordinates, out var distance) ||
-                    distance > SharedInteractionSystem.InteractionRange)
+                if (!_transform.InRange(userCoords, Transform(bagEntity).Coordinates, SharedInteractionSystem.InteractionRange))
                 {
                     _ui.CloseUi(bagEntity, StorageComponent.StorageUiKey.Key);
                 }
