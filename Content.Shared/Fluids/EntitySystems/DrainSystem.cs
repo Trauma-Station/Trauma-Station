@@ -145,7 +145,7 @@ public sealed partial class DrainSystem : EntitySystem
             Dirty(uid, drain);
 
             // Best to do this one every second rather than once every tick...
-            if (!_solutionContainerSystem.ResolveSolution(uid, DrainComponent.SolutionName, ref drain.Solution, out var drainSolution))
+            if (!_solutionContainerSystem.ResolveSolution(uid, DrainComponent.SolutionName, ref drain.Solution, out var drainSolution, logMissing: false)) // Trauma - don't log if its missing because ApplyGameState doesnt fucking set ApplyingState
                 continue;
 
             if (drainSolution.Volume <= 0 && !drain.AutoDrain)
