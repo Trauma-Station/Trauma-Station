@@ -1,4 +1,6 @@
-﻿namespace Content.Trauma.Server.Speech.Components;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Server.Speech.Components;
 
 [RegisterComponent]
 public sealed partial class CavemanAccentComponent : Component;

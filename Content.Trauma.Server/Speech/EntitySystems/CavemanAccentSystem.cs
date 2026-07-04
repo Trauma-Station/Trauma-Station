@@ -1,4 +1,6 @@
-﻿using Content.Server.Speech.EntitySystems;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Speech.EntitySystems;
 using Robust.Shared.Random;
 using Content.Shared.Speech;
 using Content.Trauma.Server.Speech.Components;
