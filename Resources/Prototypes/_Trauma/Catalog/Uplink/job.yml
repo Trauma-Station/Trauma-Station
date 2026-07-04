@@ -179,7 +179,7 @@
   name: uplink-behonker-name
   description: uplink-behonker-desc
   productEntity: ReinforcementRadioSyndicateBehonker
-  icon: { sprite: _Trauma/Objects/Devices/communication64x64.rsi, state: behonker }
+  icon: { sprite: _Trauma/Mobs/Monsters/Demons/syndie_behonker.rsi, state: alive }
   cost:
     Telecrystal: 100
   categories:
