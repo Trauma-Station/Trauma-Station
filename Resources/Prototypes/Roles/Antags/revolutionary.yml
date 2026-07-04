@@ -36,7 +36,7 @@
   - type: HeadRevolutionary
   mindRoles:
   - MindRoleHeadRevolutionary
-  jobBlacklist: [ Mime ] # Trauma - mimes cant convert people without breaking vow...
+#  jobBlacklist: [ Mime ] Trauma - Originally blacklisted as mime had to break vow to convert
 
 # TODO: Make it so creating new revolutionaries uses antag prototypes! This saves a *lot* of boilerplate for conversion antags.
 
