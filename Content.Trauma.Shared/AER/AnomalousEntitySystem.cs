@@ -7,21 +7,6 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
 {
     [Dependency] private SharedResearchSystem _research = default!;
 
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        //SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourEvent>(OnAerBehaviourEvent);
-    }
-
-    /*private void OnAerBehaviourEvent(Entity<AnomalousEntityComponent> ent, ref AerBehaviourEvent args)
-    {
-        //shit that give research
-        
-
-        //shit that spawns I.D. Gear
-    }*/
-
     /// <summary>
     /// calculates the pointa value of the AER
     /// Can be null.
@@ -33,7 +18,7 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
 
         //var multiplier = 1f;
 
-        return (int) component.ResearchPerSecond;
+        return component.ResearchPerSecond;
     }
 
 }

@@ -6,8 +6,6 @@
   - type: AnomalousEntity
     researchPerSecond: 1000
     contained: false
-    researchOnBehaviour: 0
-    iDGear: SoapHomemadeBanana
 
 - type: entity
   parent: SoapHomemadeBanana
@@ -68,7 +66,7 @@
   components:
   - type: Sprite
     drawdepth: FloorObjects
-    sprite: Structures/Specific/Atmospherics/sensor.rsi
+    sprite: _Trauma/Structures/Aer/aerSensor.rsi
     layers:
     - state: gsensor1
       map: [ "enum.PowerDeviceVisualLayers.Powered" ]

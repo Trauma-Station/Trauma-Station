@@ -2,6 +2,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Anomaly;
 using Content.Shared.Popups;
+using Content.Shared.Examine;
+
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.AER;
@@ -37,6 +39,7 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
 
         SubscribeLocalEvent<AnomalousEntityScannerComponent, ScannerDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<AnomalousEntityScannerComponent, AfterInteractEvent>(OnScannerAfterInteract);
+        SubscribeLocalEvent<AnomalousEntityScannerComponent, ExaminedEvent>(OnExamined);
         //SubscribeLocalEvent<AnomalyShutdownEvent>(OnScannerAnomalyShutdown);
     }
 
@@ -130,6 +133,16 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
             DistanceThreshold = 2f
         };
         _doAfter.TryStartDoAfter(doAfterArgs);
+    }
+
+    private void OnExamined(EntityUid uid, AnomalousEntityScannerComponent component, ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        args.PushText(component.ScannedAER == null
+            ? Loc.GetString("anomaly-vessel-component-not-assigned")
+            : (Loc.GetString("anomaly-vessel-component-assigned") + " it contains a scan of " + Name((EntityUid) component.ScannedAER)));
     }
 
 

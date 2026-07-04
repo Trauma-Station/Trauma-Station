@@ -14,20 +14,20 @@ public sealed partial class AnomalousEntityComponent : Component
     /// quantity of research per second produced when contained
     /// </summary>
     [DataField]
-    public int ResearchPerSecond = new();
+    public int ResearchPerSecond;
     /// <summary>
     /// if the entity is contained
     /// </summary>
     [DataField]
-    public bool Contained = new();
+    public bool Contained;
     /// <summary>
     /// quantity of research obtained when interacting with the entity
     /// </summary>
     [DataField]
-    public float ResearchOnBehaviour = new();
+    public int ResearchOnBehaviour;
 
     [DataField]
-    public EntProtoId? IDGear = new EntProtoId("SoapHomemadeBanana");
+    public EntProtoId? IDGear = "";
 
     //containment sensor connected to the entity
     [ViewVariables]

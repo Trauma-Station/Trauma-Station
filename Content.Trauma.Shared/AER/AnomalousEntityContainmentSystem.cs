@@ -2,6 +2,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Examine;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Research.Components;
+using Content.Shared.Popups;
 using Content.Trauma.Shared.AER;
 
 namespace Content.Trauma.Shared.AER;
@@ -9,6 +10,7 @@ namespace Content.Trauma.Shared.AER;
 public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 {
     [Dependency] private AnomalousEntitySystem _anomalousEntitySystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -51,10 +53,14 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 
         component.AnomalousEntity = scanner.ScannedAER;
         anomalousEntityComponent.ConnectedContainment = uid;
-        component.IDGear = "SoapHomemadeBanana";//temporary shit i need to push
+        TryComp<AnomalousEntityComponent>(component.AnomalousEntity, out var aer);//move this shit to linking scan thing and place extra variable in entity containment
+        if (aer != null && aer.IDGear.HasValue)
+        {
+            component.IDGear = aer.IDGear;
+        }
         //_radiation.SetSourceEnabled(uid, true);//no rads for now
         //UpdateVesselAppearance(uid,  component);//todo different apperances
-        //Popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), uid);//boh
+        _popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), uid);
     }
 
     private void OnExamined(EntityUid uid, AnomalousEntityContainmentComponent component, ExaminedEvent args)
@@ -84,6 +90,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
                 continue;
 
             component.AnomalousEntity = null;
+            component.IDGear = null;
             //UpdateVesselAppearance(ent,  component); to do appearance
             //_radiation.SetSourceEnabled(ent, false); no rads
 
@@ -108,11 +115,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         {
             if (aerSensor == aerContainmentId)
             {
-                TryComp<AnomalousEntityComponent>(component.AnomalousEntity, out var aer);//move this shit to linking scan thing and place extra variable in entity containment
-                if (aer != null)
-                {
-                    PredictedSpawnAtPosition(aer.IDGear, Transform(aerSensor).Coordinates);
-                }
+                PredictedSpawnAtPosition(component.IDGear, Transform(aerSensor).Coordinates);
             }
         }
     }
