@@ -1,4 +1,4 @@
-﻿using Content.Shared.Inventory;
+using Content.Shared.Inventory;
 using Content.Shared.Strip.Components;
 using Content.Trauma.Common.Inventory;
 using Robust.Shared.Prototypes;
