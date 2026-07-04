@@ -1124,3 +1124,7 @@ accent-caveman-words-replace-362 = chief cavemaker
 
 accent-caveman-words-363 = cap
 accent-caveman-words-replace-363 = chief of cave
+
+accent-caveman-words-363 = engi
+accent-caveman-words-replace-363 = cavemake tribe
+
