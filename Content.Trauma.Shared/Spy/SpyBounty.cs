@@ -21,7 +21,7 @@ public sealed partial class SpyBounty : IEquatable<SpyBounty>
     /// Prototype of target entity.
     /// Used for ui (sprite) or direct check for stealing
     /// </summary>
-    public EntProtoId? Proto;
+    public List<EntProtoId>? Protos;
 
     public ProtoId<SpyBountyPrototype> BountyProto;
 
@@ -120,18 +120,18 @@ public sealed partial class SpyStealTargetBountySelectorEvent : BaseSpyBountySel
 public sealed partial class SpyPrototypeBountySelectorEvent : BaseSpyBountySelectorEvent
 {
     [DataField(required: true)]
-    public EntProtoId Proto;
+    public List<EntProtoId> Protos;
 
     public override BaseSpyBountySelectorEvent GetEvent()
     {
-        return new SpyPrototypeBountySelectorEvent { Proto = Proto };
+        return new SpyPrototypeBountySelectorEvent { Protos = new(Protos) };
     }
 }
 
 public sealed partial class SpySpecificEntityBountySelectorEvent : BaseSpyBountySelectorEvent
 {
     [DataField(required: true)]
-    public EntProtoId Proto;
+    public List<EntProtoId> Protos;
 
     [DataField(required: true)]
     public string QueryComp;
@@ -143,7 +143,7 @@ public sealed partial class SpySpecificEntityBountySelectorEvent : BaseSpyBounty
     {
         return new SpySpecificEntityBountySelectorEvent
         {
-            Proto = Proto, QueryComp = QueryComp, Areas = Areas is not { } areas ? null : new(areas)
+            Protos = new(Protos), QueryComp = QueryComp, Areas = Areas is not { } areas ? null : new(areas)
         };
     }
 }

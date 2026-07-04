@@ -6,6 +6,7 @@ namespace Content.Trauma.Client.Spy;
 public sealed partial class ScannerOverlay : Overlay
 {
     [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private TransformSystem _xform;
     private SpriteSystem _sprite;
@@ -14,12 +15,18 @@ public sealed partial class ScannerOverlay : Overlay
 
     private readonly Vector2[] _vertices = new[] { Vector2.Zero, Vector2.Zero, Vector2.Zero };
 
+    private readonly ShaderInstance _unshadedShader;
+
+    public static readonly ProtoId<ShaderPrototype> Unshaded = "unshaded";
+
     public ScannerOverlay()
     {
         IoCManager.InjectDependencies(this);
 
         _xform = _entMan.System<TransformSystem>();
         _sprite = _entMan.System<SpriteSystem>();
+
+        _unshadedShader = _proto.Index(Unshaded).Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -50,7 +57,10 @@ public sealed partial class ScannerOverlay : Overlay
             _vertices[1] = Vector2.Lerp(spriteBB.TopLeft, spriteBB.TopRight, comp.Ratio);
             _vertices[2] = Vector2.Lerp(spriteBB.BottomLeft, spriteBB.BottomRight, comp.Ratio);
 
+            handle.UseShader(_unshadedShader);
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _vertices, Color.Red.WithAlpha(0.1f));
         }
+
+        handle.UseShader(null);
     }
 }

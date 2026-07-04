@@ -22,8 +22,8 @@ public sealed partial class SpyBountyControl : Control
         BountyDescription.Text = Loc.GetString("spy-uplink-description-label", ("desc", data.Description));
         if (data.Sprite is { } sprite)
             BountyTexture.Texture = spriteSys.Frame0(sprite);
-        else if (data.Proto is { } proto)
-            BountyTexture.Texture = spriteSys.Frame0(_prototype.Index(proto));
+        else if (data.Protos is { } protos)
+            BountyTexture.Texture = spriteSys.Frame0(_prototype.Index(protos[0]));
 
         var listing = _prototype.Index(data.Reward);
 

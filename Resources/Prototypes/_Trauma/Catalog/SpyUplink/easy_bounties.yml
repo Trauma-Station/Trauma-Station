@@ -2,27 +2,27 @@
   id: ComputerMassMedia
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerMassMedia
+    protos: [ComputerMassMedia]
 
 - type: spyBounty
   id: ComputerSolarControl
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerSolarControl
+    protos: [ComputerSolarControl]
     queryComp: SolarControlConsole
 
 - type: spyBounty
   id: ComputerRadar
   difficulty: Easy
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: ComputerRadar
+    protos: [ComputerRadar]
     queryComp: RadarConsole
 
 - type: spyBounty
   id: VendingMachineCondiments
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineCondiments
+    protos: [VendingMachineCondiments]
 
 - type: spyBounty
   id: BoozeDispenser
@@ -34,49 +34,49 @@
   id: VendingMachineChefvend
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineChefvend
+    protos: [VendingMachineChefvend]
 
 - type: spyBounty
   id: VendingMachineDinnerware
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineDinnerware
+    protos: [VendingMachineDinnerware]
 
 - type: spyBounty
   id: VendingMachineTheater
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineDinnerware
+    protos: [VendingMachineDinnerware]
 
 - type: spyBounty
   id: VendingMachineVendomat
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineVendomat
+    protos: [VendingMachineVendomat]
 
 - type: spyBounty
   id: VendingMachineYouTool
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineYouTool
+    protos: [VendingMachineYouTool]
 
 - type: spyBounty
   id: VendingMachineGames
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineGames
+    protos: [VendingMachineGames]
 
 - type: spyBounty
   id: VendingMachineHappyHonk
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineHappyHonk
+    protos: [VendingMachineHappyHonk]
 
 - type: spyBounty
   id: KitchenDeepFryer
   difficulty: Easy
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: KitchenDeepFryer
+    protos: [KitchenDeepFryer]
     queryComp: DeepFryer
     areas: [AreaKitchen]
 
@@ -84,7 +84,7 @@
   id: KitchenMicrowave
   difficulty: Easy
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: KitchenMicrowave
+    protos: [KitchenMicrowave]
     queryComp: Microwave
     areas: [AreaKitchen]
 
@@ -92,7 +92,7 @@
   id: BorgCharger
   difficulty: Easy
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: BorgCharger
+    protos: [BorgCharger]
     queryComp: Charger
 
 - type: spyBounty
@@ -189,52 +189,52 @@
   id: Stunbaton
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: Stunbaton
+    protos: [Stunbaton]
 
 - type: spyBounty
   id: WeaponLaserSidearm
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: WeaponLaserSidearm
+    protos: [WeaponLaserSidearm]
 
 - type: spyBounty
   id: ClothingHandsGlovesColorYellow
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ClothingHandsGlovesColorYellow
+    protos: [ClothingHandsGlovesColorYellow]
 
 - type: spyBounty
   id: ClothingEyesGlassesMeson
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ClothingEyesGlassesMeson
+    protos: [ClothingEyesGlassesMeson]
 
 - type: spyBounty
   id: ClothingEyesGlassesSecurity
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ClothingEyesGlassesSecurity
+    protos: [ClothingEyesGlassesSecurity]
 
 - type: spyBounty
   id: MachineAPE
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: MachineAPE
+    protos: [MachineAPE]
 
 - type: spyBounty
   id: AnomalyScanner
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: AnomalyScanner
+    protos: [AnomalyScanner]
 
 - type: spyBounty
   id: ClothingEyesGlassesThermal
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ClothingEyesGlassesThermal
+    protos: [ClothingEyesGlassesThermal]
 
 - type: spyBounty
   id: VendingMachineNutri
   difficulty: Easy
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineNutri
+    protos: [VendingMachineNutri]

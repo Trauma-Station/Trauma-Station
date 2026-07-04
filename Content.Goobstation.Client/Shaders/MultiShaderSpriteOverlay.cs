@@ -53,6 +53,10 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
             if (!bounds.Contains(pos))
                 continue;
 
+            var multipleDirs = sprite.AllLayers.Any(x => x is SpriteComponent.Layer l && _sprite.LayerGetDirectionCount(l) > 1);
+
+            var rotAdjusted = multipleDirs && !sprite.NoRotation ? -eye.Rotation : Angle.Zero;
+            var finalRot = rot + rotAdjusted;
             var spriteBB = _sprite.CalculateBounds((uid, sprite), pos, rot, eye.Rotation);
             var screenBB = localMatrix.TransformBox(spriteBB.Box);
             var screenSpriteSize = (Vector2i) screenBB.Size.Rounded();
@@ -88,11 +92,12 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
 
             var postHandle = new DrawingHandleMultiShader(Texture.White, handle);
 
+            var rotation = multipleDirs ? rot : -eye.Rotation;
+
             postHandle.RenderInRenderTarget(target,
                 () =>
                 {
                     var position = target.LocalToWorld(eye, (Vector2) screenSpriteSize * 0.5f, viewport.RenderScale);
-                    var rotation = sprite.NoRotation ? rot : -eye.Rotation;
                     var angle = rotation + eye.Rotation;
                     angle = angle.Reduced().FlipPositive();
 
@@ -128,13 +133,13 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
                         var proto = _proto.Index<ShaderPrototype>(protoId);
                         if (!multi.CurrentShaders.TryGetValue(protoId, out var shader))
                         {
-                            shader = data.Mutable ? proto.Instance() : proto.InstanceUnique();
+                            shader = data.Mutable ? proto.InstanceUnique() : proto.Instance();
                             multi.CurrentShaders[protoId] = shader;
                         }
 
                         if (data.RaiseShaderEvent)
                         {
-                            var ev = new BeforePostMultiShaderRenderEvent(proto, shader, sprite, viewport);
+                            var ev = new BeforePostMultiShaderRenderEvent(proto.ID, shader, sprite, viewport);
                             _entMan.EventBus.RaiseLocalEvent(uid, ref ev);
                         }
 
@@ -142,21 +147,18 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
                         postHandle.DrawTextureRectRegion(target.Texture, quad, data.Color);
                     }
 
-                    if (sprite.PostShader == null)
-                        return;
+                    // if (sprite.PostShader == null)
+                    //     return;
 
-                    postHandle.UseShader(sprite.PostShader);
-                    if (sprite.RaiseShaderEvent)
-                        _entMan.EventBus.RaiseLocalEvent(uid, new BeforePostShaderRenderEvent(sprite, viewport));
-                    postHandle.DrawTextureRectRegion(target.Texture, quad);
+                    // postHandle.UseShader(sprite.PostShader);
+                    // if (sprite.RaiseShaderEvent)
+                    //     _entMan.EventBus.RaiseLocalEvent(uid, new BeforePostShaderRenderEvent(sprite, viewport));
+                    // postHandle.DrawTextureRectRegion(target.Texture, quad);
                 },
                 Color.Transparent);
 
             handle.UseShader(null);
-            var angle = sprite.NoRotation ? Angle.Zero : rot;
-            if (_sprite.LayerGetDirectionCount((uid, sprite), 0) > 1)
-                angle -= eye.Rotation;
-            var mat = Matrix3x2.CreateTranslation(pos + angle.RotateVec(sprite.Offset) - spriteBB.Center);
+            var mat = Matrix3x2.CreateTranslation(pos + (rotation - rot).RotateVec(sprite.Offset) - spriteBB.Center);
             handle.SetTransform(mat);
             handle.DrawTextureRectRegion(target.Texture, spriteBB);
             handle.SetTransform(Matrix3x2.Identity);

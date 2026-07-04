@@ -47,10 +47,9 @@ public sealed partial class SpyUplinkSystem : EntitySystem
             return;
 
         // TODO chance to send it to black market when its real
-        var despawn = EnsureComp<FadingTimedDespawnComponent>(target);
+        var despawn = Factory.GetComponent<FadingTimedDespawnComponent>();
         despawn.Lifetime = 0f;
-        despawn.FadeOutTime = 2f;
-        Dirty(target, despawn);
+        AddComp(target, despawn);
 
         args.Handled = true;
 
@@ -204,7 +203,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
             return false;
 
         if (bounty.ValidEntities.Count == 0)
-            return Prototype(uid)?.ID is { } id && id == bounty.Proto;
+            return bounty.Protos is { } protos && Prototype(uid)?.ID is { } id && protos.Contains(id);
 
         return bounty.ValidEntities.Contains(GetNetEntity(uid));
     }

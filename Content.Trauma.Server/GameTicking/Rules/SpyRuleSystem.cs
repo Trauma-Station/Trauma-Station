@@ -256,10 +256,10 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
     private void OnPrototype(Entity<SpyRuleComponent> ent, ref SpyPrototypeBountySelectorEvent args)
     {
-        var proto = _proto.Index(args.Proto);
+        var proto = _proto.Index(args.Protos[0]);
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
-            Proto = args.Proto,
+            Protos = args.Protos,
             BountyProto = args.Id,
             Difficulty = args.Difficulty,
             TheftTime = args.TheftTime,
@@ -271,7 +271,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
     private void OnSpecific(Entity<SpyRuleComponent> ent, ref SpySpecificEntityBountySelectorEvent args)
     {
-        var proto = _proto.Index(args.Proto);
+        var proto = _proto.Index(args.Protos[0]);
         var type = Factory.GetComponent(args.QueryComp).GetType();
 
         Dictionary<string, List<NetEntity>> validEntities = [];
@@ -281,7 +281,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         var query = EntityManager.AllEntityQueryEnumerator(type);
         while (query.MoveNext(out var uid, out _))
         {
-            if (ent.Comp.StationMaps.Contains(Transform(uid).MapID) || Prototype(uid) is not { } p || p != args.Proto)
+            if (ent.Comp.StationMaps.Contains(Transform(uid).MapID) || Prototype(uid) is not { } p || !args.Protos.Contains(p))
                 continue;
 
             if (depts == null)
@@ -312,7 +312,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
             ValidEntities = list,
-            Proto = args.Proto,
+            Protos = args.Protos,
             BountyProto = args.Id,
             Difficulty = args.Difficulty,
             TheftTime = args.TheftTime,

@@ -2,7 +2,7 @@
   id: EnergyChemDispenser
   difficulty: Medium
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: EnergyChemDispenser
+    protos: [EnergyChemDispenser]
     queryComp: EnergyReagentDispenser
     areas: [AreaChem]
 
@@ -10,7 +10,7 @@
   id: ComputerScienceXenobiologyBounty
   difficulty: Medium
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: ComputerScienceXenobiologyBounty
+    protos: [ComputerScienceXenobiologyBounty]
     queryComp: XenobiologyBountyConsole
     areas: [AreaXenobio]
 
@@ -18,110 +18,110 @@
   id: ComputerShuttleCargo
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerShuttleCargo
+    protos: [ComputerShuttleCargo]
 
 - type: spyBounty
   id: ComputerShuttleMiningLavaland
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerShuttleMiningLavaland
+    protos: [ComputerShuttleMiningLavaland]
 
 - type: spyBounty
   id: ComputerCargoOrders
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoOrders
+    protos: [ComputerCargoOrders]
 
 - type: spyBounty
   id: ComputerCargoOrdersEngineering
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoOrdersEngineering
+    protos: [ComputerCargoOrdersEngineering]
 
 - type: spyBounty
   id: ComputerCargoOrdersMedical
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoOrdersMedical
+    protos: [ComputerCargoOrdersMedical]
 
 - type: spyBounty
   id: ComputerCargoOrdersScience
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoOrdersScience
+    protos: [ComputerCargoOrdersScience]
 
 - type: spyBounty
   id: ComputerCargoOrdersService
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoOrdersService
+    protos: [ComputerCargoOrdersService]
 
 - type: spyBounty
   id: ComputerCargoBounty
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoBounty
+    protos: [ComputerCargoBounty]
 
 - type: spyBounty
   id: ComputerSurveillanceCameraMonitor
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerSurveillanceCameraMonitor
+    protos: [ComputerSurveillanceCameraMonitor]
 
 - type: spyBounty
   id: ComputerPalletConsole
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerPalletConsole
+    protos: [ComputerPalletConsole]
 
 - type: spyBounty
   id: ComputerAtmosMonitoring
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerAtmosMonitoring
+    protos: [ComputerAtmosMonitoring]
 
 - type: spyBounty
   id: ComputerPowerMonitoring
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerPowerMonitoring
+    protos: [ComputerPowerMonitoring]
 
 - type: spyBounty
   id: ComputerCriminalRecords
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCriminalRecords
+    protos: [ComputerCriminalRecords]
 
 - type: spyBounty
   id: ComputerStationRecords
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerStationRecords
+    protos: [ComputerStationRecords]
 
 - type: spyBounty
   id: ComputerCrewMonitoring
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCrewMonitoring
+    protos: [ComputerCrewMonitoring]
 
 - type: spyBounty
   id: ComputerResearchAndDevelopment
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerResearchAndDevelopment
+    protos: [ComputerResearchAndDevelopment]
 
 - type: spyBounty
   id: ComputerAnalysisConsole
   difficulty: Medium
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: ComputerAnalysisConsole
+    protos: [ComputerAnalysisConsole]
     queryComp: AnalysisConsole
 
 - type: spyBounty
   id: ComputerGeneticsConsole
   difficulty: Medium
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: ComputerGeneticsConsole
+    protos: [ComputerGeneticsConsole, ComputerGeneticsConsoleEmpty]
     queryComp: GeneticsConsole
     areas: [AreaGenetics]
 
@@ -129,14 +129,14 @@
   id: MedicalBiofabricator
   difficulty: Medium
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: MedicalBiofabricator
+    protos: [MedicalBiofabricator]
     queryComp: Lathe
 
 - type: spyBounty
   id: ExosuitFabricator
   difficulty: Medium
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: ExosuitFabricator
+    protos: [ExosuitFabricator]
     queryComp: Lathe
     areas: [AreaRobotics, AreaRoboticsMechBay]
 
@@ -144,61 +144,61 @@
   id: EngineeringTechFab
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: EngineeringTechFab
+    protos: [EngineeringTechFab]
 
 - type: spyBounty
   id: CargoTechFab
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: CargoTechFab
+    protos: [CargoTechFab]
 
 - type: spyBounty
   id: ScienceTechFab
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ScienceTechFab
+    protos: [ScienceTechFab]
 
 - type: spyBounty
   id: ServiceTechFab
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ServiceTechFab
+    protos: [ServiceTechFab]
 
 - type: spyBounty
   id: VendingMachineEngivend
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineEngivend
+    protos: [VendingMachineEngivend]
 
 - type: spyBounty
   id: VendingMachineMedical
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineMedical
+    protos: [VendingMachineMedical]
 
 - type: spyBounty
   id: VendingMachineRobotics
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineRobotics
+    protos: [VendingMachineRobotics]
 
 - type: spyBounty
   id: VendingMachineSalvage
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineSalvage
+    protos: [VendingMachineSalvage]
 
 - type: spyBounty
   id: VendingMachineChemicals
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineChemicals
+    protos: [VendingMachineChemicals]
 
 - type: spyBounty
   id: Emitter
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: Emitter
+    protos: [Emitter]
     queryComp: Emitter
     areas: [AreaEngineSM, AreaEngineSMRoom]
 
@@ -206,7 +206,7 @@
   id: CargoTelepad
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: CargoTelepad
+    protos: [CargoTelepad]
     queryComp: CargoTelepad
 
 - type: spyBounty
@@ -285,4 +285,4 @@
   id: TelescopicBaton
   difficulty: Medium
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: TelescopicBaton
+    protos: [TelescopicBaton]

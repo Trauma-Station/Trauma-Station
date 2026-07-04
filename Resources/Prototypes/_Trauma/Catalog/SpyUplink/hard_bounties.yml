@@ -86,49 +86,49 @@
   id: ComputerCargoOrdersSecurity
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerCargoOrdersSecurity
+    protos: [ComputerCargoOrdersSecurity]
 
 - type: spyBounty
   id: ComputerFundingAllocation
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerFundingAllocation
+    protos: [ComputerFundingAllocation]
 
 - type: spyBounty
   id: ComputerRoboticsControl
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerRoboticsControl
+    protos: [ComputerRoboticsControl]
 
 - type: spyBounty
   id: StationAiUploadComputer
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: StationAiUploadComputer
+    protos: [StationAiUploadComputer]
 
 - type: spyBounty
   id: StationAiFixerComputer
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: StationAiFixerComputer
+    protos: [StationAiFixerComputer]
 
 - type: spyBounty
   id: ComputerId
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: ComputerId
+    protos: [ComputerId]
 
 - type: spyBounty
   id: VendingMachineCart
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineCart
+    protos: [VendingMachineCart]
 
 - type: spyBounty
   id: VendingMachineSec
   difficulty: Hard
   selector: !type:SpyPrototypeBountySelectorEvent
-    proto: VendingMachineSec
+    protos: [VendingMachineSec]
 
 - type: spyBounty
   id: FaxMachineCaptain
@@ -152,7 +152,7 @@
   id: PlayerStationAi
   difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: PlayerStationAi
+    protos: [PlayerStationAi]
     queryComp: StationAiCore
     areas: [AreaAiCore]
 
@@ -160,7 +160,7 @@
   id: WeaponEnergyTurretAI
   difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: WeaponEnergyTurretAI
+    protos: [WeaponEnergyTurretAI]
     queryComp: StationAiTurret
     areas: [AreaAi, AreaAiCore, AreaAiUpload]
 
@@ -168,6 +168,6 @@
   id: WeaponEnergyTurretSecurity
   difficulty: Hard
   selector: !type:SpySpecificEntityBountySelectorEvent
-    proto: WeaponEnergyTurretSecurity
+    protos: [WeaponEnergyTurretSecurity]
     queryComp: TurretTargetSettings
     areas: [AreaArmory]
