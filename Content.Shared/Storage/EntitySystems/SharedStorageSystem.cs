@@ -1157,7 +1157,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
         // If there is an user, the sound will not play if they have the SilentStorageUserTag
         // If there is no user, only playSound is checked.
         var canPlaySound = playSound && (user == null || !_tag.HasTag(user.Value, storageComp.SilentStorageUserTag));
-        // <Trauma> - Stealthy thieves insert silently    
+        // <Trauma> - Stealthy thieves insert silently
         if (user != null && _thieving.IsStealthy(user.Value))
             canPlaySound = false;
         // </Trauma>

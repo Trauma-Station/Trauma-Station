@@ -1,4 +1,4 @@
-﻿using Content.Shared.Strip;
+using Content.Shared.Strip;
 
 namespace Content.Shared.Storage.EntitySystems;
 
