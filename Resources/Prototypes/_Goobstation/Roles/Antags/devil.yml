@@ -21,7 +21,7 @@
   parent: RestrictedAntag
   id: Devil
   prefRoles: [ Devil ]
-  jobBlacklist: [ Chaplain, Mime ] # chaplain is obvious, mime can't write.
+  jobBlacklist: [ Chaplain ] # chaplain is obvious, mime can't write. Trauma - removed mime blacklist
   mindRoles: [ DevilMindRole ]
   startingGear: DevilStartingGear
   mindComponents:
