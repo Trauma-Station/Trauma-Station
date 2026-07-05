@@ -11,6 +11,17 @@
   - UplinkWeaponry
 
 - type: listing
+  id: UplinkRealFoamCutlass
+  name: uplink-foam-cutlass-name
+  description: uplink-foam-cutlass-desc
+  productEntity: RealFoamCutlass
+  icon: { sprite: /Textures/Objects/Weapons/Melee/cutlass.rsi, state: foam_icon }
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkWeaponry
+
+- type: listing
   id: UplinkRevolverSnakesfang
   name: uplink-snakesfang-name
   description: uplink-snakesfang-desc

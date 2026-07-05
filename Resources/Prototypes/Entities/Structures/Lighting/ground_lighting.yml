@@ -94,6 +94,7 @@
     range: 200
   - type: DeviceLinkSink
     ports:
+      - Control # Trauma
       - On
       - Off
       - Toggle

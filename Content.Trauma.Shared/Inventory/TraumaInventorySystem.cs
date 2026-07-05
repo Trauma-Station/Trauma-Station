@@ -36,5 +36,6 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GetStandUpTimeEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeMovespeedModifierAppliedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, WaypointerChangedEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, CanSpawnFootstepsEvent>(_inventory.RelayEvent);
     }
 }

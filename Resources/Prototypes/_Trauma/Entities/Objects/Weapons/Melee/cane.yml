@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ CaneBladeNanotrasen, BaseLibrarianContraband ]
+  id: CaneBladeLibrarian
+  suffix: Libarian
+  name: cane blade
+  description: A sharp blade with a cane shaped hilt. Folded 5000 times, just to flex on ninjas.
+  components:
+  - type: MeleeWeapon
+    attackRate: 1.15
+
+- type: entity
+  parent: CaneSheath
+  id: CaneSheathFilledLibrarian
+  suffix: Filled, Libarian
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - CaneBladeLibrarian

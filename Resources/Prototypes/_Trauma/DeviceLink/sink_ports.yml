@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: sinkPort
+  id: Control
+  name: signal-port-name-control
+  description: signal-port-description-control
+
 # Circuits
 
 - type: sinkPort

@@ -124,7 +124,7 @@
 
 - type: entity
   name: syndiroach
-  id: MobMothSyndy
+  id: MobMothSyndie
   parent: MobMothroach
   description: Explosive moth.
   components:

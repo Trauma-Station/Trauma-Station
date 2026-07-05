@@ -448,10 +448,10 @@
       types:
         Piercing: 15 # 7 to crit
         Structural: 15
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 3
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 3
   - type: MeleeChemicalInjector
     transferAmount: 3
     solution: melee

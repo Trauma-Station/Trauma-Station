@@ -2896,7 +2896,8 @@
         types:
           # <Trauma>
           Slash: 4
-          Piercing: 4 # was 8, split into slash so it can break grilles
+          Piercing: 2 # was 8, split into slash and blunt so it can break grilles and windows
+          Blunt: 2
           # </Trauma>
     - type: FootstepModifier
       footstepSoundCollection:

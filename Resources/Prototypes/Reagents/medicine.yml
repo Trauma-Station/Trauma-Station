@@ -40,7 +40,7 @@
           min: 20
         damage:
           types:
-            Blunt: 2
+            Blunt: 4 # Trauma - Was 2
       - !type:Jitter
         conditions:
         - !type:ReagentCondition
@@ -153,22 +153,22 @@
         conditions:
         - !type:ReagentCondition
           reagent: Bicaridine
-          min: 15
+          min: 12 # Trauma - Was 15
         damage:
           types:
-            Asphyxiation: 0.5
-            Poison: 1.5
+            Asphyxiation: 1.5 # Trauma - Was 0.5
+            Poison: 3 # Trauma - Was 1.5
       - !type:Vomit
         conditions:
         - !type:ReagentCondition
           reagent: Bicaridine
-          min: 30
+          min: 26 # Trauma - Was 30
         probability: 0.02
       - !type:Jitter
         conditions:
         - !type:ReagentCondition
           reagent: Bicaridine
-          min: 15
+          min: 12 # Trauma - Was 15
       - !type:Drunk
 
 - type: reagent
@@ -1388,8 +1388,8 @@
           max: 213.0
           scale: 1.6
         damage:
-          Brute: -3
-          Burn: -3
+          Brute: -4.5 # Trauma - Was 3
+          Burn: -4.5 # Trauma - Was 3
 
 - type: reagent
   id : Aloxadone

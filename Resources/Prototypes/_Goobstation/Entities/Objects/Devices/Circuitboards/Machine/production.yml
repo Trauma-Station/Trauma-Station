@@ -144,7 +144,7 @@
         Manipulator: 1
         Glass: 5
         Steel: 5
-        BSCrystal: 2
+        BSCrystal: 1
       tagRequirements:
         GlassBeaker:
           amount: 2
