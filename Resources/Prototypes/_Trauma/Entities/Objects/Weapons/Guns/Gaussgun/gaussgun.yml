@@ -5,6 +5,8 @@
   id: BaseWeaponGaussgun
   abstract: true
   components:
+  - type: WeaponClass
+    class: Laser # probably similar since no cartridges, explosion or crazy recoil of firearms
   - type: Item
     size: Ginormous
     shape:

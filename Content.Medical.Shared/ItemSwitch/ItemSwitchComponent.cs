@@ -69,7 +69,7 @@ public sealed partial class ItemSwitchComponent : Component
 }
 
 [DataDefinition]
-public sealed partial class ItemSwitchState : BoundUserInterfaceMessage
+public sealed partial class ItemSwitchState
 {
     [DataField]
     public string? Verb;

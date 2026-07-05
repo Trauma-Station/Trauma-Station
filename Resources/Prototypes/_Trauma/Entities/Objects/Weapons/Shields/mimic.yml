@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: flesh shield
   parent: BaseShield
   id: ShieldMimic
+  name: flesh shield
   description: A large fleshy closet door, could be used as a shield...
   components:
   - type: Sprite

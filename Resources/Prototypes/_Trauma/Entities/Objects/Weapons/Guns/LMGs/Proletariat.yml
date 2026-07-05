@@ -6,6 +6,8 @@
   name: Proletariat
   description: An ancient LMG named for the classes it was used to oppress, until that class got ahold of it. Takes .22 short turret mags.
   components:
+  - type: WeaponClass
+    class: Rifle # .22, it's like a 2-handed pistol come on
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/LightMachineGuns/proletariat.rsi
     layers:

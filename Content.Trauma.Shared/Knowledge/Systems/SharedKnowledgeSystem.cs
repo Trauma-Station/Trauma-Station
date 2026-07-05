@@ -480,6 +480,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
             ? GetKnowledge(ent, id)
             : null;
 
+    /// <summary>
+    /// Get the net level of knowledge an entity has for an ID, defaulting to 0 if missing.
+    /// </summary>
+    public int GetKnowledgeLevel(EntityUid target, [ForbidLiteral] EntProtoId id)
+        => GetKnowledge(target, id)?.Comp.NetLevel ?? 0;
+
     public Entity<KnowledgeComponent>? GetKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)
         => ent.Comp.KnowledgeDict.TryGetValue(id, out var unit) && _query.TryComp(unit, out var comp)
             ? (unit, comp)

@@ -1,12 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: cane blade
-  suffix: Nanotrasen
   parent: [BaseItem, BaseCentcommContraband, KnifeDurabilitySharpenOnly]
   id: CaneBladeNanotrasen
+  name: cane blade
+  suffix: Nanotrasen
   description: A sharp blade with a cane shaped hilt, a Nanotrasen logo is engraved on the blade.
   components:
+  - type: WeaponClass
+    class: Sword
   - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane_blade.rsi
@@ -29,8 +31,8 @@
   - type: Execution
 
 - type: entity
-  id: CaneSheathFilledNanotrasen
   parent: CaneSheath
+  id: CaneSheathFilledNanotrasen
   suffix: Filled, Nanotrasen
   components:
   - type: ContainerFill

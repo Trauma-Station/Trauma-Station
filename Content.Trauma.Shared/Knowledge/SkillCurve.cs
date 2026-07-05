@@ -4,6 +4,7 @@ namespace Content.Trauma.Shared.Knowledge;
 
 /// <summary>
 /// A skill curve which takes skills from 0 to 100 and outputs a float around 1 by default.
+/// Use a graphing calculator when working with these.
 /// </summary>
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class SkillCurve
@@ -48,7 +49,7 @@ public abstract partial class SkillCurve
     /// Get the y value for a given x value.
     /// By default x is within [0, 1]
     /// </summary>
-    protected abstract float GetValue(float x);
+    internal abstract float GetValue(float x);
 }
 
 /// <summary>
@@ -56,7 +57,7 @@ public abstract partial class SkillCurve
 /// </summary>
 public sealed partial class LinearSkillCurve : SkillCurve
 {
-    protected override float GetValue(float x)
+    internal override float GetValue(float x)
         => x;
 }
 
@@ -66,7 +67,7 @@ public sealed partial class LinearSkillCurve : SkillCurve
 /// </summary>
 public sealed partial class RootSkillCurve : SkillCurve
 {
-    protected override float GetValue(float x)
+    internal override float GetValue(float x)
         => MathF.Sqrt(x);
 }
 
@@ -77,7 +78,7 @@ public sealed partial class RootSkillCurve : SkillCurve
 /// </summary>
 public sealed partial class QuadraticSkillCurve : SkillCurve
 {
-    protected override float GetValue(float x)
+    internal override float GetValue(float x)
         => x * x;
 }
 
@@ -87,6 +88,25 @@ public sealed partial class QuadraticSkillCurve : SkillCurve
 /// </summary>
 public sealed partial class CubicSkillCurve : SkillCurve
 {
-    protected override float GetValue(float x)
+    internal override float GetValue(float x)
         => x * x * x;
+}
+
+/// <summary>
+/// A sum of multiple curves.
+/// </summary>
+public sealed partial class SumSkillCurve : SkillCurve
+{
+    [DataField(required: true)]
+    public List<SkillCurve> Curves = default!;
+
+    internal override float GetValue(float x)
+    {
+        var sum = 0f;
+        foreach (var curve in Curves)
+        {
+            sum += curve.GetValue(x);
+        }
+        return sum;
+    }
 }

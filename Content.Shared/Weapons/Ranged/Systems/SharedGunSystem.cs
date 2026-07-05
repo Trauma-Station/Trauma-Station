@@ -654,7 +654,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             if (TryComp<ProjectileSpreadComponent>(ammoEnt, out var ammoSpreadComp))
             {
-                var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread);
+                var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread, user); // Trauma - pass user
                 RaiseLocalEvent(gun, ref spreadEvent);
 
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,

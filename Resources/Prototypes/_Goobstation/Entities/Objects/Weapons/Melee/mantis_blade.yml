@@ -5,8 +5,10 @@
   parent: [BaseItem, BaseSyndicateContraband]
   id: MantisBlade
   name: mantis blade
-  description: They won’t see the steel until it’s too late.
+  description: "They won't see the steel until it's too late."
   components:
+  - type: WeaponClass
+    class: Sword
   - type: Sharp
   - type: Execution
     doAfterDuration: 4.0

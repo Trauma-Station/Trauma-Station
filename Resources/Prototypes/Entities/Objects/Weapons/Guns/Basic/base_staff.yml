@@ -3,24 +3,8 @@
   abstract: true
   parent: [BaseItem, BaseMagicalContraband] # Goob edit
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Basic/staves.rsi
-  - type: Item
-    heldPrefix: staff
-    size: Huge # Goob edit
-  - type: Gun
-    soundEmpty: null # Goobstation
-    soundMode: null # Goobstation
-    clumsyProof: true # Goobstation
-    fireRate: 1.5 # Goob edit
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-  - type: AmmoCounter
-  # All staves recharge. Wands are not.
-  - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 30
-  - type: Clothing # Goobstation
+  # <Trauma>
+  - type: Clothing
     quickEquip: false
     slots:
       - Back
@@ -30,7 +14,27 @@
       - state: equipped-BACKPACK
       suitstorage:
       - state: equipped-BACKPACK
-  - type: StaticPrice # Goobstation
+  - type: StaticPrice
     price: 30000
-  - type: Tag # Goob
+  - type: Tag
     tags: [ WizardStaff ]
+  # </Trauma>
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Basic/staves.rsi
+  - type: Item
+    heldPrefix: staff
+    size: Huge # Goob edit
+  - type: Gun
+    # <Trauma>
+    soundEmpty: null
+    soundMode: null
+    clumsyProof: true
+    fireRate: 1.5
+    # <Trauma>
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: AmmoCounter
+  # All staves recharge. Wands are not.
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 30

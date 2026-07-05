@@ -20,6 +20,11 @@
 # Traitor
 
 - type: storeCategory
+  id: UplinkSkills
+  name: store-category-skills
+  priority: 12
+
+- type: storeCategory
   id: DiscountedItems
   name: store-discounted-items
   priority: 200
