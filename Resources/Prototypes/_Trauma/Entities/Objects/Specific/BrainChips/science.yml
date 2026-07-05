@@ -5,7 +5,6 @@
   parent: [ BaseSkillChip, BaseScienceContraband ]
   id: BaseSkillChipScience
   components:
-  components:
   - type: KnowledgeGrantOnWear
     skills:
       ElectronicsKnowledge: 25

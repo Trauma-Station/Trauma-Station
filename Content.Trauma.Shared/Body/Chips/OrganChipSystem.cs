@@ -160,14 +160,18 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
 
         var user = args.User;
-        var i = 1;
+        // you remember which skill chip is installing in yourself, for others they are just numbered
+        var known = _body.GetBody(ent.Owner) == user;
+
+        var i = 0;
         foreach (var chip in ent.Comp.Container.ContainedEntities)
         {
+            i++;
             var chipCopy = chip; // amazing language
             var canRemove = true; // TODO: make it support self unremovable chips
             args.Verbs.Add(new()
             {
-                Text = $"Remove {name} chip {i++}",
+                Text = known ? $"Remove {Name(chip)}" : $"Remove {name} chip {i++}",
                 Category = ChipsCategory,
                 Disabled = !canRemove,
                 Act = () => StartRemovingChip(ent, chipCopy, user)
