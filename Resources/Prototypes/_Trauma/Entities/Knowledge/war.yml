@@ -16,6 +16,9 @@
   id: MeleeKnowledge # holdover
   name: Unarmed Training
   description: How good you are at punching others, usually with your bare hands or claws.
+  components:
+  - type: Knowledge
+    costs: [0, 1, 2, 3] # lots of people get in fights
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
