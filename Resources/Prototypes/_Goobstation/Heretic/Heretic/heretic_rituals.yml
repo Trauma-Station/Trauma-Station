@@ -35,6 +35,7 @@
           whitelist:
             components:
             - Heretic
+            - HereticBody
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -380,6 +381,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:OnFireCondition
     - !type:SacrificeEffect
       applyOn: Targets
@@ -542,6 +544,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:HasOrgan
         organCategory: Head
         inverted: true
@@ -916,6 +919,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -924,7 +928,7 @@
         result: Targets
         min: 4
         max: 4
-        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+        cancelLoc: heretic-ritual-fail-sacrifice-soul
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1084,6 +1088,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -1092,7 +1097,7 @@
         result: Targets
         min: 3
         max: 3
-        cancelLoc: heretic-ritual-fail-sacrifice-not-enough
+        cancelLoc: heretic-ritual-fail-sacrifice-soul
     - !type:EffectsRitualEffect
       applyOn: Mind
       effects:
@@ -1245,6 +1250,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:WhitelistCondition
         whitelist:
           components:
@@ -1417,6 +1423,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
     - !type:SacrificeEffect
       applyOn: Targets
       conditions:
@@ -1678,6 +1685,7 @@
       - !type:MobStateCondition
         mobstate: Alive
         inverted: true
+      - !type:HadMindCondition
       - !type:HasOrgan
         organCategory: Heart
         inverted: true
@@ -1891,6 +1899,7 @@
     state: fire_shark_icon
   - type: HereticRitual
     limit: 6
+    limitGhoulCleanupIterations: 3
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform
