@@ -16,7 +16,6 @@
   - RevCuffs
   - RevBallBearings
 
-
 - type: latheRecipePack
   id: RevPrintingPress
   recipes:
