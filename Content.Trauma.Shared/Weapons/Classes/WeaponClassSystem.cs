@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.Weapons.Classes;
 /// </summary>
 public sealed partial class WeaponClassSystem : EntitySystem
 {
-    [Dependency] private SharedKnowledgeSystem _knowledge;
+    [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     public override void Initialize()
     {
