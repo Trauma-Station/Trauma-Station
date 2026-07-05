@@ -16,10 +16,3 @@
   id: SpellbookBundles
   name: store-caregory-spellbook-bundles
   priority: 7
-
-# Traitor
-
-- type: storeCategory
-  id: DiscountedItems
-  name: store-discounted-items
-  priority: 200
