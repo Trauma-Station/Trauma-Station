@@ -1383,7 +1383,7 @@
         conditions:
         - !type:TemperatureCondition
           max: 213.0
-        scaleByTemperature: #Trauma
+        scaleByTemperature: # Trauma
           min: 100.0
           max: 213.0
           scale: 1.6
