@@ -21,4 +21,10 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
         return component.ResearchPerSecond;
     }
 
+    /*private void OnContainmentShutdown(Entity<AnomalousEntityComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp is not { } anomalousEntityComp)
+            return;
+        if (ent.Owner != 
+    }*/
 }

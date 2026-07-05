@@ -4,6 +4,7 @@ using Content.Shared.Anomaly.Components;
 using Content.Shared.Research.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.AER;
+using Content.Shared.Coordinates;
 
 namespace Content.Trauma.Shared.AER;
 
@@ -11,6 +12,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 {
     [Dependency] private AnomalousEntitySystem _anomalousEntitySystem = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -53,7 +55,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 
         component.AnomalousEntity = scanner.ScannedAER;
         anomalousEntityComponent.ConnectedContainment = uid;
-        TryComp<AnomalousEntityComponent>(component.AnomalousEntity, out var aer);//move this shit to linking scan thing and place extra variable in entity containment
+        TryComp<AnomalousEntityComponent>(component.AnomalousEntity, out var aer);
         if (aer != null && aer.IDGear.HasValue)
         {
             component.IDGear = aer.IDGear;
@@ -77,8 +79,19 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
     {
         if (component.AnomalousEntity is not { } anomalousEntity)
             return;
+        if (!TryComp<AnomalousEntityComponent>(anomalousEntity, out var comp))
+            return;
 
-        args.Points += (int) (_anomalousEntitySystem.GetAnomalousEntityPointValue(anomalousEntity) * component.PointMultiplier);
+
+        if (_transform.InRange(anomalousEntity.ToCoordinates(), uid.ToCoordinates(), component.Range))
+        {
+            comp.Contained = true;
+            args.Points += (int) (_anomalousEntitySystem.GetAnomalousEntityPointValue(anomalousEntity) * component.PointMultiplier);
+        }
+        else
+        {
+            comp.Contained = false;
+        }
     }
 
     private void OnAnomalousContainmentShutdown(ref AnomalyShutdownEvent args)
@@ -113,7 +126,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         var query = EntityQueryEnumerator<AnomalousEntityContainmentComponent>();
         while (query.MoveNext(out var aerSensor, out var component))
         {
-            if (aerSensor == aerContainmentId)
+            if (aerSensor == aerContainmentId && ent.Comp.Contained)
             {
                 PredictedSpawnAtPosition(component.IDGear, Transform(aerSensor).Coordinates);
             }

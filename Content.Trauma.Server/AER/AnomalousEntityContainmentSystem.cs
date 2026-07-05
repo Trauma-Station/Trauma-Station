@@ -1,4 +1,6 @@
+using Content.Goobstation.Shared.Bloodtrak;
 using Content.Server.Research.Systems;
+using Content.Shared.Coordinates;
 using Content.Trauma.Shared.AER;
 
 
@@ -26,13 +28,13 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
             if (!_research.TryGetClientServer((EntityUid) ent.Comp.ConnectedContainment, out var server, out var serverComponent))
                 return;
 
-            if (server != null)
+            if (server != null && ent.Comp.Contained)
             {
-                _research.ModifyServerPoints(server.Value, (int) ent.Comp.ResearchOnBehaviour, serverComponent);
+
+                _research.ModifyServerPoints(server.Value, ent.Comp.ResearchOnBehaviour, serverComponent);
 
             }
         }
     }
-
 }
 

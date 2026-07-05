@@ -3,8 +3,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Anomaly;
 using Content.Shared.Popups;
 using Content.Shared.Examine;
+using Content.Shared.Anomaly.Components;
 
 using Robust.Shared.Audio.Systems;
+using System.ComponentModel;
 
 namespace Content.Trauma.Shared.AER;
 
@@ -40,7 +42,7 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
         SubscribeLocalEvent<AnomalousEntityScannerComponent, ScannerDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<AnomalousEntityScannerComponent, AfterInteractEvent>(OnScannerAfterInteract);
         SubscribeLocalEvent<AnomalousEntityScannerComponent, ExaminedEvent>(OnExamined);
-        //SubscribeLocalEvent<AnomalyShutdownEvent>(OnScannerAnomalyShutdown);
+        SubscribeLocalEvent<AnomalousEntityComponent, ComponentShutdown>(OnAerShutdown);
     }
 
     /// <summary> Updates device with passed anomaly data. </summary>
@@ -139,10 +141,26 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
+        if (component.ScannedAER == null)
+            return;
 
         args.PushText(component.ScannedAER == null
             ? Loc.GetString("anomaly-vessel-component-not-assigned")
             : (Loc.GetString("anomaly-vessel-component-assigned") + " it contains a scan of " + Name((EntityUid) component.ScannedAER)));
+    }
+
+    private void OnAerShutdown(Entity<AnomalousEntityComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp is not { } anomalousEntityComp)
+            return;
+        var query = EntityQueryEnumerator<AnomalousEntityScannerComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (component.ScannedAER != ent.Owner)
+                continue;
+
+            component.ScannedAER = null;
+        }
     }
 
 
@@ -196,34 +214,6 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
         }
     }*/
 
-    /*private void OnScannerAnomalyBehaviorChanged(ref AnomalyBehaviorChangedEvent args)
-    {
-        var query = EntityQueryEnumerator<AnomalyScannerComponent>();
-        while (query.MoveNext(out var uid, out var component))
-        {
-            if (component.ScannedAnomaly != args.Anomaly)
-                continue;
-
-            UpdateScannerUi(uid, component);
-            // If a field becomes secret, we want to set it to 0 or stable
-            // If a field becomes visible, we need to set it to the correct value, so we need to get the AnomalyComponent
-            if (!TryComp<AnomalyComponent>(args.Anomaly, out var anomalyComp))
-                return;
-
-            TryComp<AppearanceComponent>(uid, out var appearanceComp);
-            TryComp<SecretDataAnomalyComponent>(args.Anomaly, out var secretDataComp);
-
-            var severity = _secretData.IsSecret(args.Anomaly, AnomalySecretData.Severity, secretDataComp)
-                ? 0
-                : anomalyComp.Severity;
-            Appearance.SetData(uid, AnomalyScannerVisuals.AnomalySeverity, severity, appearanceComp);
-
-            var stability = _secretData.IsSecret(args.Anomaly, AnomalySecretData.Stability, secretDataComp)
-                ? AnomalyStabilityVisuals.Stable
-                : _anomaly.GetStabilityVisualOrStable((args.Anomaly, anomalyComp));
-            Appearance.SetData(uid, AnomalyScannerVisuals.AnomalyStability, stability, appearanceComp);
-        }
-    }*/
 
     /*private void UpdateScannerPulseTimers(Entity<AnomalyComponent> anomalyEnt, double secondsUntilNextPulse)
     {

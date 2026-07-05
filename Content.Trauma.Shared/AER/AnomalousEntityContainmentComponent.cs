@@ -18,6 +18,9 @@ public sealed partial class AnomalousEntityContainmentComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float PointMultiplier = 1;
 
+    [DataField]
+    public float Range = 1.6f;
+
     [ViewVariables]
     public EntProtoId? IDGear = "";
 }
