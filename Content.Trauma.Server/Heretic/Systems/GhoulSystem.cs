@@ -360,7 +360,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         else
         {
             // If the body had a mind at some point (for example if head got decapped) and old mind is not controlling
-            // any mob - return old mind to the bodu, otherwise let npc control it
+            // any mob - return old mind to the body, otherwise let npc control it
             if (!hasMind && TryComp(ent, out MindContainerComponent? mindContainer) &&
                 TryComp(mindContainer.OldMind, out MindComponent? oldMindComp) &&
                 oldMindComp.UserId != null &&
