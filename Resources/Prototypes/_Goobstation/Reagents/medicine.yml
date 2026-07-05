@@ -260,7 +260,7 @@
       - !type:EvenHealthChange
         damage:
           # powerful due to abundance of food, but very inconvienient to use
-          Brute: -4
+          Brute: -2
           Burn: -2
       - !type:ModifyBleed
         amount: -0.5
