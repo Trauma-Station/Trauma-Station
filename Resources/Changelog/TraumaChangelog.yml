@@ -11001,3 +11001,72 @@ Entries:
   id: 1228
   time: '2026-07-01T20:37:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3396
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: xeno shove stun has been removed in favor of instant hardgrab
+  id: 1229
+  time: '2026-07-04T00:19:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3340
+- author: assripper.
+  changes:
+  - type: Add
+    message: when someone is crit xenomorph larvas will take twice the time to grow
+  id: 1230
+  time: '2026-07-04T00:21:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3417
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Gutworms are curable with vitamins for now
+  id: 1231
+  time: '2026-07-04T08:53:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3416
+- author: Weax
+  changes:
+  - type: Tweak
+    message: Clown Goblins no longer inject Honk
+  id: 1232
+  time: '2026-07-04T08:53:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3385
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Caveman Accent. Ooga Booga, me want insuls!
+  id: 1233
+  time: '2026-07-04T09:05:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3411
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the amount of plasma needed to make Opporozidone
+  - type: Tweak
+    message: Increased the amount of Unstable Compound you get per reaction
+  id: 1234
+  time: '2026-07-04T09:05:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3418
+- author: Graaves... Brains...
+  changes:
+  - type: Tweak
+    message: >-
+      Adjusted zombie healing and damage resistance, they no longer get 1 tapped
+      by everything but don't have extreme regen.
+  id: 1235
+  time: '2026-07-04T09:15:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3425
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI getting doxxed by unpowered cameras.
+  id: 1236
+  time: '2026-07-04T20:27:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3434
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Lights now have a logic control port for setting it on/off with a single
+      signal's value.
+  id: 1237
+  time: '2026-07-05T03:59:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3435

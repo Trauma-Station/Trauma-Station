@@ -105,13 +105,13 @@ public sealed partial class ZombieComponent : Component
     [DataField("passiveHealing")]
     public DamageSpecifier PassiveHealing = new()
     {
-        DamageDict = new () ///Changed to be higher for goob
+        DamageDict = new ()
         {
-            { "Blunt", -2 },
-            { "Slash", -1 },
-            { "Piercing", -1 },
-            { "Heat", -1 },
-            { "Shock", -1 }
+            { "Blunt", -0.4 },
+            { "Slash", -0.2 },
+            { "Piercing", -0.2 },
+            { "Heat", -0.02 },
+            { "Shock", -0.02 }
         }
     };
 

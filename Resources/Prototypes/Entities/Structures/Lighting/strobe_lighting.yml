@@ -118,6 +118,7 @@
       on: base
   - type: DeviceLinkSink
     ports:
+      - Control # Trauma
       - On
       - Off
       - Toggle

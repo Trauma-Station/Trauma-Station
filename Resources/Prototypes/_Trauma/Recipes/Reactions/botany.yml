@@ -21,7 +21,7 @@
       amount: 1
       catalyst: true
   products:
-    UnstableCompound: 2
+    UnstableCompound: 3
 
 - type: reaction
   id: ReaperDelight

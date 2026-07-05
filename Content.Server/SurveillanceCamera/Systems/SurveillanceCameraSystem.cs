@@ -256,7 +256,7 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
         // Send a targetted event to all monitors.
         foreach (var monitor in component.ActiveMonitors)
         {
-            RaiseLocalEvent(monitor, ev, true);
+            RaiseLocalEvent(monitor, ev); // Trauma - don't broadcast it, its already broadcast below
         }
 
         component.ActiveMonitors.Clear();
