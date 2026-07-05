@@ -191,9 +191,9 @@
     SodiumPolyacrylate:
       amount: 10
     Phenol:
-      amount: 10
+      amount: 5
     Blood:
-      amount: 10
+      amount: 5
     Carbon:
       amount: 10
   products:
