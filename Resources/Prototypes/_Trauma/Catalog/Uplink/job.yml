@@ -27,6 +27,7 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
+    - Mime
 
 - type: listing
   id: UplinkEmergencyMedipenMute
@@ -55,6 +56,20 @@
   - !type:BuyerJobCondition
     whitelist:
     - Mime
+
+- type: listing
+  id: UplinkUtilityKnifeReagent
+  name: uplink-utility-knife-name
+  description: uplink-utility-knife-desc
+  productEntity: UtilityKnifeReagent
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerDepartmentCondition
+    whitelist:
+    - Cargo
 
 - type: listing
   id: UplinkKudzuGrenade
@@ -126,20 +141,6 @@
     Telecrystal: 20
   categories:
   - UplinkJob
-  conditions:
-  - !type:BuyerDepartmentCondition
-    whitelist:
-    - Cargo
-
-- type: listing
-  id: UplinkUtilityKnifeReagent
-  name: uplink-utility-knife-name
-  description: uplink-utility-knife-desc
-  productEntity: UtilityKnifeReagent
-  cost:
-    Telecrystal: 20
-  categories:
-    - UplinkJob
   conditions:
   - !type:BuyerDepartmentCondition
     whitelist:
