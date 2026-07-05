@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
@@ -42,6 +43,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         SubscribeLocalEvent<OrganChipContainerComponent, ContainerIsInsertingAttemptEvent>(OnChipInsertAttempt);
         SubscribeLocalEvent<OrganChipContainerComponent, EntInsertedIntoContainerMessage>(OnChipInserted);
         SubscribeLocalEvent<OrganChipContainerComponent, EntRemovedFromContainerMessage>(OnChipRemoved);
+        SubscribeLocalEvent<OrganChipContainerComponent, PolymorphedEvent>(OnPolymorphed);
 
         SubscribeLocalEvent<OrganChipContainerComponent, GetVerbsEvent<InteractionVerb>>(OnGetVerbs);
         SubscribeLocalEvent<OrganChipContainerComponent, BodyRelayedEvent<GetVerbsEvent<InteractionVerb>>>(OnGetVerbs);
@@ -120,6 +122,24 @@ public sealed partial class OrganChipSystem : EntitySystem
         RaiseLocalEvent(args.Entity, ref ev);
         chip.Organ = null;
         Dirty(args.Entity, chip);
+    }
+
+    private void OnPolymorphed(Entity<OrganChipContainerComponent> ent, ref PolymorphedEvent args)
+    {
+        if (ent.Owner != args.OldEntity)
+            return;
+
+        var target = args.NewEntity;
+        if (!_containerQuery.TryComp(target, out var comp))
+            return;
+
+        // go through each chip in reverse + not using foreach since it gets modified
+        var chips = ent.Comp.Container.ContainedEntities;
+        for (int i = chips.Count - 1; i >= 0; i++)
+        {
+            var chip = chips[i];
+            _container.Insert(chip, comp.Container);
+        }
     }
 
     private void OnGetVerbs(Entity<OrganChipContainerComponent> ent, ref GetVerbsEvent<InteractionVerb> args)

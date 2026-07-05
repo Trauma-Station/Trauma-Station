@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Examine;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Shared.Knowledge.Systems;
 
 namespace Content.Trauma.Shared.Weapons.Classes;
@@ -20,7 +20,7 @@ public sealed partial class WeaponClassSystem : EntitySystem
 
         SubscribeLocalEvent<WeaponClassComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<WeaponClassComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
-        SubscribeLocalEvent<WeaponClassComponent, GunGetAmmoSpreadEvent>(OnGetAmmoSpread);
+        SubscribeLocalEvent<WeaponClassComponent, GetRecoilModifiersEvent>(OnGetRecoilModifiers);
     }
 
     private void OnExamined(Entity<WeaponClassComponent> ent, ref ExaminedEvent args)
@@ -40,14 +40,14 @@ public sealed partial class WeaponClassSystem : EntitySystem
     }
 
     // TODO: reduce aiming time instead of spread slop
-    private void OnGetAmmoSpread(Entity<WeaponClassComponent> ent, ref GunGetAmmoSpreadEvent args)
+    private void OnGetRecoilModifiers(Entity<WeaponClassComponent> ent, ref GetRecoilModifiersEvent args)
     {
-        if (args.User is not { } user)
-            return; // welp
+        if (args.User == ent.Owner)
+            return; // no actual user welp
 
         var proto = ProtoMan.Index(ent.Comp.Class);
-        var level = GetSkillLevel(proto, user);
-        args.Spread *= proto.AimSpeed.GetCurve(level);
+        var level = GetSkillLevel(proto, args.User);
+        args.Modifier /= proto.AimSpeed.GetCurve(level);
     }
 
     public int GetSkillLevel(Entity<WeaponClassComponent> ent, EntityUid user)

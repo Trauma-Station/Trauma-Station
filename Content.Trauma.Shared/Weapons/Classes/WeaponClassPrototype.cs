@@ -28,19 +28,31 @@ public sealed partial class WeaponClassPrototype : IPrototype
 
     /// <summary>
     /// Skill curve to scale melee weapon damage by.
-    /// Default is [-13%, +43%]
+    /// Default is [-21%, +43%] neutral at lvl 28
     /// </summary>
     [DataField]
-    public SkillCurve MeleeDamage = new CubicSkillCurve()
+    public SkillCurve MeleeDamage = new SumSkillCurve()
     {
-        SkillOffset = -0.4f,
-        CurveScale = 2f,
-        CurveOffset = 1f
+        Curves = new()
+        {
+            // constant base increase in damage
+            new LinearSkillCurve()
+            {
+                CurveScale = 0.2f
+            },
+            // cubic on top
+            new CubicSkillCurve()
+            {
+                SkillOffset = -0.45f,
+                CurveScale = 1.7f,
+                CurveOffset = 0.95f
+            }
+        }
     };
 
     /// <summary>
     /// Skill curve to scale gun aiming speed by.
-    /// Default is [-30%, +60%]
+    /// Default is [-30%, +60%] neutral at lvl 30
     /// </summary>
     [DataField]
     public SkillCurve AimSpeed = new SumSkillCurve()

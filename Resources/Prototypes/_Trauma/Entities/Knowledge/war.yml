@@ -72,7 +72,12 @@
   id: ShootingKnowledge # not training
   name: Marksmanship
   description: How good your aim is with most guns. Training with the relevant weapon is much better, but a good eye puts you ahead of the rest.
-  # TODO: replace explicit checks with events and a comp
+  components:
+  - type: AimSpeedKnowledge
+    # [-5%, +12%] neutral at lvl 28
+    curve: !type:RootSkillCurve
+      skillOffset: 2.5
+      curveScale: 0.6
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged

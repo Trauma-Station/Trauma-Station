@@ -485,7 +485,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     /// </summary>
     public int GetKnowledgeLevel(EntityUid target, [ForbidLiteral] EntProtoId id)
         => GetContainer(target) is { } ent
-            ? GetKnowledge(ent, id)?.Comp.NetLevel ?? 0;
+            ? GetKnowledge(ent, id)?.Comp.NetLevel ?? 0
             : 0;
 
     public Entity<KnowledgeComponent>? GetKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)

@@ -38,9 +38,13 @@ public abstract partial class SkillCurve
     public float CurveOffset;
 
     public float GetCurve(int skill)
-    {
         // skill is always within [0, 1] before any variables are applied
-        var x = (0.01f * skill) * SkillScale + SkillOffset;
+        => GetFinalValue(0.01f * skill);
+
+    internal float GetFinalValue(float x)
+    {
+        x *= SkillScale;
+        x += SkillOffset;
         var y = GetValue(x);
         return y * CurveScale + CurveOffset;
     }
@@ -105,7 +109,7 @@ public sealed partial class SumSkillCurve : SkillCurve
         var sum = 0f;
         foreach (var curve in Curves)
         {
-            sum += curve.GetValue(x);
+            sum += curve.GetFinalValue(x);
         }
         return sum;
     }
