@@ -92,7 +92,7 @@
     attackRate: 4
     damage:
       types:
-        #Piercing: 6 # Trauma
+        Piercing: 6 # Trauma
         Structural: 31 # Trauma - was 30
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
