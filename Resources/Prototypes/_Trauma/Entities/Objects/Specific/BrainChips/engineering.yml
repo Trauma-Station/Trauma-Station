@@ -11,7 +11,6 @@
       KnowledgeWeaponsTool: 80 # nailgun in chief
       # TODO: O LORD KILL THIS SLOP
       FabricationKnowledge: 50
-      MaterialsKnowledge: 50
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
       FurnitureKnowledge: 50
@@ -32,7 +31,6 @@
       KnowledgeWeaponsBludgeon: 20 # axe hit hard
       KnowledgeWeaponsTool: 40
       FabricationKnowledge: 25
-      MaterialsKnowledge: 25
       DoorsKnowledge: 25
       AirlocksKnowledge: 16
       FurnitureKnowledge: 25
@@ -52,7 +50,6 @@
     skills:
       KnowledgeWeaponsTool: 30
       FabricationKnowledge: 25
-      MaterialsKnowledge: 25
       DoorsKnowledge: 25
       AirlocksKnowledge: 16
       FurnitureKnowledge: 25
@@ -73,7 +70,6 @@
       KnowledgeWeaponsTool: 10
       # TODO: make this just 1 or 2 types
       FabricationKnowledge: 10
-      MaterialsKnowledge: 10
       DoorsKnowledge: 10
       AirlocksKnowledge: 10
       FurnitureKnowledge: 10

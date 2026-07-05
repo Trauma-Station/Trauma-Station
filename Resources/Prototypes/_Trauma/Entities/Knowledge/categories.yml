@@ -68,9 +68,10 @@
     timeBetweenExperience: 1
 
 - type: entity
+  abstract: true
   parent: BaseKnowledge
   id: BaseLanguageKnowledge
-  abstract: true
+  description: The ability to speak and understand a language.
   components:
   - type: Knowledge
     category: Language

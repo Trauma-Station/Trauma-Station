@@ -6,7 +6,6 @@
   mastery:
     # Crafting Recipe Skills - Dwarves dont care for much but making stuff with their hands
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
     DoorsKnowledge: 0
     AirlocksKnowledge: 0
     ToysKnowledge: 0
@@ -16,7 +15,6 @@
     InfrastructureKnowledge: 0
     ElectronicsKnowledge: 0
     WallsKnowledge: 0
-    ScienceKnowledge: 0
     WindowsKnowledge: 0
     SmokeablesKnowledge: 0
     # Intelectual Skills
@@ -35,6 +33,8 @@
     ToughnessKnowledge: 2
     # Combat Skill
     MeleeKnowledge: 2
+    KnowledgeWeaponsBludgeon: 2
+    KnowledgeWeaponsMining: 3
     ShootingKnowledge: 0
     # Crafting Quality
     FabricationKnowledge: 5
