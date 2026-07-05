@@ -197,7 +197,7 @@
     Carbon:
       amount: 10
   products:
-    Hydroxide: 5 # frankly it's there so that this recipe appears in the guidebook at all
+    Hydroxide: 2.5 # frankly it's there so that this recipe appears in the guidebook at all
   effects:
     - !type:SpawnEntity
       entity: FoodMeatSynth
