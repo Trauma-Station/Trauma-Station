@@ -40,7 +40,7 @@
           min: 20
         damage:
           types:
-            Blunt: 2
+            Blunt: 4 # Trauma - Was 2
       - !type:Jitter
         conditions:
         - !type:ReagentCondition
