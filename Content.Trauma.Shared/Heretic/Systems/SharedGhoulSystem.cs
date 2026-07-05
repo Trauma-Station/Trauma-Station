@@ -21,7 +21,6 @@ namespace Content.Trauma.Shared.Heretic.Systems;
 
 public abstract partial class SharedGhoulSystem : EntitySystem
 {
-    [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] protected ISharedPlayerManager Player = default!;
 
     [Dependency] private INetManager _net = default!;
@@ -107,7 +106,7 @@ public abstract partial class SharedGhoulSystem : EntitySystem
             return true;
         }
 
-        var dmg = new DamageSpecifier(Proto.Index(Blunt), ent.Comp.TotalHealth * 1.2f);
+        var dmg = new DamageSpecifier(ProtoMan.Index(Blunt), ent.Comp.TotalHealth * 1.2f);
         _dmg.ChangeDamage(ent.Owner, dmg, targetPart: TargetBodyPart.Vital, ignoreResistances: true, increaseOnly: true);
 
         // Ghoul component should automatically be removed on death in most cases, or ghoul gets givved

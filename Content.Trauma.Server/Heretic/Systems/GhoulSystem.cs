@@ -263,11 +263,11 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         if (ent.Comp.OldSkinColor is { } skinColor)
             _humanoid.SetSkinColor(ent, skinColor);
 
-        var species = Proto.Index(humanoid.Species);
-        var prototype = Proto.Index(species.Prototype);
+        var species = ProtoMan.Index(humanoid.Species);
+        var prototype = ProtoMan.Index(species.Prototype);
 
         var comps = prototype.Components
-            .IntersectBy(Proto.Index(ComponentsToRemoveOnGhoulify).Components.Keys, x => x.Key)
+            .IntersectBy(ProtoMan.Index(ComponentsToRemoveOnGhoulify).Components.Keys, x => x.Key)
             .ToDictionary();
 
         EntityManager.AddComponents(ent, new ComponentRegistry(comps));
@@ -319,12 +319,12 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         if (TryComp(ent, out HolyFlammableComponent? holyFlam))
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
-        EntityManager.RemoveComponents(ent, Proto.Index(ComponentsToRemoveOnUnGhoulify).Components);
+        EntityManager.RemoveComponents(ent, ProtoMan.Index(ComponentsToRemoveOnUnGhoulify).Components);
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
     {
-        EntityManager.RemoveComponents(ent, Proto.Index(ComponentsToRemoveOnGhoulify).Components);
+        EntityManager.RemoveComponents(ent, ProtoMan.Index(ComponentsToRemoveOnGhoulify).Components);
 
         _effect.TryApplyEffect(ent, ent.Comp.SkillEffect, predicted: false);
 
