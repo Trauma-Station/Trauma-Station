@@ -27,6 +27,7 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedStorageSystem _storage = default!;
     [Dependency] private SharedStrippableSystem _strippable = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -34,7 +35,6 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     [Dependency] private EntityQuery<ItemSlotsComponent> _itemSlotsQuery = default!;
     [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly List<EntityUid> _bagAccessScratch = new(); // Reused buffer for UpdateBagAccess, avoid per-tick allocation
 

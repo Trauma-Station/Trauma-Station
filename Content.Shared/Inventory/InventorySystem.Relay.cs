@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Shared.Strip;
+using Content.Trauma.Common.Strip;
 // </Trauma>
 using Content.Shared.Armor;
 using Content.Shared.Atmos;

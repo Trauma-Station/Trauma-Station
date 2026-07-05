@@ -1,5 +1,6 @@
 using Content.Shared.Inventory;
 using Content.Shared.Strip.Components;
+using Content.Trauma.Common.Strip;
 
 namespace Content.Shared.Strip;
 
@@ -7,12 +8,10 @@ public sealed partial class ThievingSystem
 {
     private void InitializeTrauma()
     {
-        SubscribeLocalEvent<ThievingComponent, ThievingStealthCheckEvent>(OnStealthCheck);
-        SubscribeLocalEvent<ThievingComponent, InventoryRelayedEvent<ThievingStealthCheckEvent>>((e, c, ev) =>
-            OnStealthCheck(e, c, ev.Args));
+        Subs.SubscribeWithRelay<ThievingComponent, ThievingStealthCheckEvent>(OnStealthCheck);
     }
 
-    private void OnStealthCheck(EntityUid uid, ThievingComponent component, ThievingStealthCheckEvent args)
+    private void OnStealthCheck(EntityUid uid, ThievingComponent component, ref ThievingStealthCheckEvent args)
     {
         args.Stealthy |= component.Stealthy;
     }
@@ -27,16 +26,4 @@ public sealed partial class ThievingSystem
         RaiseLocalEvent(user, ref ev);
         return ev.Stealthy;
     }
-}
-
-/// <summary>
-/// Raised on a user to check whether they're currently a stealthy thief, either directly
-/// (ex: thief antag ThievingComponent on the mob itself) or via equipped gloves (relayed).
-/// </summary>
-[ByRefEvent]
-public sealed class ThievingStealthCheckEvent : EntityEventArgs, IInventoryRelayEvent
-{
-    public bool Stealthy;
-
-    public SlotFlags TargetSlots { get; } = SlotFlags.GLOVES;
 }
