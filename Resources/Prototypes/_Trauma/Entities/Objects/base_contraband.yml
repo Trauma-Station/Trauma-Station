@@ -50,8 +50,8 @@
 
 - type: entity
   abstract: true
-  id: BaseLibrarianContraband # for librarian blade non-traitor edition
   parent: BaseRestrictedContraband
+  id: BaseLibrarianContraband # for librarian blade non-traitor edition
   components:
   - type: Contraband
     allowedJobs: [ Librarian ]
