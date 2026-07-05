@@ -947,9 +947,9 @@
       - !type:HealthChange # this + explosion rounds out to ~90dmg/15u
         damage:
           types:
-            Heat: 1.5
-            Blunt: 1.5
-            Piercing: 1.5
+            Heat: 1
+            Blunt: 1
+            Piercing: 1
       - !type:Explosion
         explosionType: Default
         maxIntensity: 0.4
