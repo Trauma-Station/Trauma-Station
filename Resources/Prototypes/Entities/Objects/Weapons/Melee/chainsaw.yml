@@ -12,6 +12,7 @@
       path: /Audio/Weapons/chainsaw_pull.ogg
     endSound:
       path: /Audio/Weapons/chainsaw_rev.ogg
+  - type: Weapon
   # <Trauma>
   - type: Wieldable
     wieldSound: !type:SoundPathSpecifier
