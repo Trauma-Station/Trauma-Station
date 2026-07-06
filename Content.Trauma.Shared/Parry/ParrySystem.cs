@@ -47,7 +47,7 @@ public sealed partial class ParrySystem : EntitySystem
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
     [Dependency] private EntityQuery<ReflectiveComponent> _reflectiveQuery = default!;
 
-    private static readonly EntProtoId MeleeKnowledge = "MeleeKnowledge";
+    private static readonly EntProtoId AthleticsKnowledge = "AthleticsKnowledge";
     private static readonly TimeSpan ExhaustionRegenDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextRegen = TimeSpan.Zero;
 
