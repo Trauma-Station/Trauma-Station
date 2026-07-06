@@ -2,11 +2,11 @@
 
 - type: listing
   id: UplinkCrateSydicateCombatSkillChips
-  name: uplink-skill-chip-combat--name
-  description: uplink-skill-chip-weapons-melee-desc
+  name: uplink-skill-chip-bundle-name
+  description: uplink-skill-chip-bundle-desc
   productEntity: CrateSydicateCombatSkillChips
   cost:
-    Telecrystal: 45
+    Telecrystal: 20
   categories:
   - UplinkSkills
   # useless with no army and takes too much TC
@@ -26,7 +26,7 @@
   description: uplink-skill-chip-weapons-unarmed-desc
   productEntity: SkillChipUnarmed
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null # takes away from real sales + cheap enough anyway
   categories:
   - UplinkSkills
@@ -37,7 +37,7 @@
   description: uplink-skill-chip-weapons-bludgeon-desc
   productEntity: SkillChipBludgeon
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -48,7 +48,7 @@
   description: uplink-skill-chip-weapons-knife-desc
   productEntity: SkillChipShortBlade
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -59,7 +59,7 @@
   description: uplink-skill-chip-weapons-sword-desc
   productEntity: SkillChipLongBlade
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -70,7 +70,7 @@
   description: uplink-skill-chip-weapons-polearm-desc
   productEntity: SkillChipPolearm
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -81,7 +81,7 @@
   description: uplink-skill-chip-weapons-non-lethal-desc
   productEntity: SkillChipNonLethal
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -92,7 +92,7 @@
   description: uplink-skill-chip-weapons-tool-desc
   productEntity: SkillChipTool
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -105,7 +105,7 @@
   description: uplink-skill-chip-weapons-pistol-desc
   productEntity: SkillChipPistol
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -116,7 +116,7 @@
   description: uplink-skill-chip-weapons-rifle-desc
   productEntity: SkillChipRifle
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -127,7 +127,7 @@
   description: uplink-skill-chip-weapons-shotgun-desc
   productEntity: SkillChipShotgun
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -138,7 +138,7 @@
   description: uplink-skill-chip-weapons-sniper-desc
   productEntity: SkillChipSniper
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -149,7 +149,7 @@
   description: uplink-skill-chip-weapons-laser-desc
   productEntity: SkillChipLaser
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills
@@ -160,7 +160,7 @@
   description: uplink-skill-chip-weapons-heavy-desc
   productEntity: SkillChipHeavy
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   discountCategory: null
   categories:
   - UplinkSkills

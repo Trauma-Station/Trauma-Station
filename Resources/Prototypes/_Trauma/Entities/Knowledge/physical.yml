@@ -37,7 +37,7 @@
   parent: BasePhysicalKnowledge
   id: AthleticsKnowledge
   name: Athletics
-  description: Gives you more stamina, making it harder to stun you among other things. Sometimes known as shitter-fu.
+  description: Gives you more stamina, making it harder to stun you among other things. Also allows you to parry attacks and reflect lasers.
   components:
   - type: Knowledge
     experienceCost: 12

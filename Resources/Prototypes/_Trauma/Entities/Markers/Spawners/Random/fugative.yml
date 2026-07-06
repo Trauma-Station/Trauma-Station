@@ -1,4 +1,4 @@
-- type: entityTable
+- type: entity
   parent: BaseGameRule
   id: FugitiveHunterRandom
   components:

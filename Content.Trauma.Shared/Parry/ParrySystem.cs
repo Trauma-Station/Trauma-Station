@@ -248,7 +248,7 @@ public sealed partial class ParrySystem : EntitySystem
 
     private int GetSkillLevel(EntityUid user)
     {
-        return _proto.Resolve(MeleeKnowledge, out var skillProto)
+        return _proto.Resolve(AthleticsKnowledge, out var skillProto)
                && _knowledge.GetContainer(user) is { } brain
                && _knowledge.GetKnowledge(brain, skillProto) is { } skill
             ? skill.Comp.NetLevel

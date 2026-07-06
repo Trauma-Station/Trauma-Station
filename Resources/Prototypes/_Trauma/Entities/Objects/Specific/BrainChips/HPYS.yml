@@ -24,7 +24,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      AthleticsKnowledge: 25 # ~ 9.25% stam damage reduction
+      AthleticsKnowledge: 28 # ~ 9.25% stam damage reduction
 
 - type: entity
   parent: BaseSkillChipHPYS
@@ -42,7 +42,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ToughnessKnowledge: 25 # ~ 9.25% stam damage reduction
+      ToughnessKnowledge: 28 # ~ 9.25% stam damage reduction
 
 
 - type: entity
