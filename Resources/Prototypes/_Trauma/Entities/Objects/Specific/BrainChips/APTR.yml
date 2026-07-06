@@ -138,17 +138,6 @@
       MeleeKnowledge: 28
 
 - type: entity
-  parent: BaseSkillChipAPTR
-  id: SkillChipThrowingTampered
-  name: APTR-Chip (Combat Clone Training)
-  components:
-  - type: KnowledgeGrantOnWear
-    skills:
-      KnowledgeWeaponsNonLethal: 28
-      ShootingKnowledge: 28
-      ThrowingKnowledge: 50
-
-- type: entity
   parent: BaseSkillChipMRAM
   id: SkillChipCombatHOS
   name: MRAM-Chip (Extended Combat Training)

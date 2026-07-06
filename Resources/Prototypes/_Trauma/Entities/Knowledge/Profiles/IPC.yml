@@ -2,13 +2,12 @@
 
 - type: knowledgeProfile
   id: IPC
-  pointsLimit: 2
+  pointsLimit: 5
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
-    FabricationKnowledge: 1
     BananiumKnowledge: 0
     BotsKnowledge: 2 # I AM
     FurnitureKnowledge: 1

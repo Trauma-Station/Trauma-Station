@@ -8,7 +8,6 @@
     CookingKnowledge: 0
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
-    FabricationKnowledge: 1
     BananiumKnowledge: 0 # Not roundstart, blueprint required.
     BotsKnowledge: 0 # Not roundstart, blueprint required.
     FurnitureKnowledge: 1

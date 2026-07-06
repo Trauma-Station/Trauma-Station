@@ -9,7 +9,7 @@
   components:
   - type: Knowledge
     category: MeleeCombat
-    costs: [0, 1, 3, 6] # reasonable that you could get good at a random melee style
+    costs: [0, 2, 4]
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
@@ -17,8 +17,6 @@
   name: Unarmed Training
   description: How good you are at punching others, usually with your bare hands or claws.
   components:
-  - type: Knowledge
-    costs: [0, 1, 2, 3] # lots of people get in fights
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
@@ -32,8 +30,6 @@
   name: Short Blade Training
   description: Using knives and other small blades effectively needs quick and powerful stabs and cuts.
   components:
-  - type: Knowledge
-    costs: [0, 1, 2, 3] # knives are really common
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
@@ -68,7 +64,7 @@
   components:
   - type: Knowledge
     category: RangedCombat
-    costs: [0, 2, 4] # harder to be trained with assault rifles and shit as a random assistant
+    costs: [0, 2, 4]
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
