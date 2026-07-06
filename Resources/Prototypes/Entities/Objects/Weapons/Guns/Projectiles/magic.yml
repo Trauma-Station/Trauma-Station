@@ -319,7 +319,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 300
+        Ballistic: 300 # Trauma
     ignoreResistances: true
   - type: Reflective
     reflective: Magic
@@ -354,7 +354,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Ballistic: 20 # Trauma
         Cold: 20
         Structural: 50
 

@@ -9,7 +9,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 5
+        Ballistic: 5
   - type: Solution
     id: ammo
     solution:
@@ -28,7 +28,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 5
+        Ballistic: 5
   - type: Solution
     id: ammo
     solution:

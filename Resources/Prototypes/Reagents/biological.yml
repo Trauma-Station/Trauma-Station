@@ -224,6 +224,7 @@
             Blunt: -5
             Slash: -5
             Piercing: -5
+            Ballistic: -5 # Trauma
       - !type:ModifyBleed
         amount: -1.5
   plantMetabolism:

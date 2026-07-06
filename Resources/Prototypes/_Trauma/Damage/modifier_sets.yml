@@ -3,30 +3,25 @@
 - type: damageModifierSet
   id: Walls
   coefficients:
-    Shock: 1.2
-    Heat: 1.2
-    Structural: 0.5
+    Structural: 1
   flatReductions:
-    Blunt: 10
-    Slash: 10
-    Piercing: 30
-    Heat: 10
-    Structural: 10
+    Blunt: 20
+    Slash: 20
+    Piercing: 20
+    Ballistic: 20
+    Heat: 20
 
 - type: damageModifierSet
   id: Gunsafes
   coefficients:
-    Shock: 0
-    Heat: 1
     Structural: 0.5
-    Ion: 0
-    Caustic: 0
   flatReductions:
-    Blunt: 15
-    Slash: 15
-    Piercing: 15
-    Heat: 15
-    Structural: 15
+    Structural: 10
+    Blunt: 20
+    Slash: 20
+    Piercing: 20
+    Ballistic: 20
+    Heat: 20
 
 - type: damageModifierSet
   id: NormalMode
@@ -64,6 +59,7 @@
     Blunt: 0
     Slash: 0
     Piercing: 0
+    Ballistic: 0
     Heat: 3
     Caustic: 0
     Cold: 0
@@ -82,6 +78,7 @@
     Blunt: 0.5
     Slash: 0.5
     Piercing: 0.5
+    Ballistic: 0.5
     Heat: 0.5
     Caustic: 0.5
     Cold: 0.5
@@ -101,6 +98,7 @@
     Blunt: 0.5
     Slash: 0.5
     Piercing: 0.5
+    Ballistic: 0.5
     Heat: 0.5
     Radiation: 0.5
     Caustic: 0.5

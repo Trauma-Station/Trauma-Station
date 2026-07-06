@@ -560,6 +560,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic
     - Heat
     - Shock
     locPrefix: silicon

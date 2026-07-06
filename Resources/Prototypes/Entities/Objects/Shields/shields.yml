@@ -117,6 +117,7 @@
         Slash: -20
         Piercing: -20
         Heat: -20
+        Ballistic: -20 # Trauma
     fuelCost: 10 # 1/2 of a Welder for a full repair
     doAfterDelay: 5
     allowSelfRepair: false
@@ -215,12 +216,12 @@
     - type: Blocking
       passiveBlockModifier:
         coefficients:
-          Piercing: 0.7
+          Ballistic: 0.7 # Trauma
       activeBlockModifier:
         coefficients:
-          Piercing: 0.5
+          Ballistic: 0.5 # Trauma
         flatReductions:
-          Piercing: 1
+          Ballistic: 1 # Trauma
 
 #Craftable shields
 

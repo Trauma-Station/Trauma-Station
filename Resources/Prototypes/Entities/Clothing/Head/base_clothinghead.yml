@@ -160,7 +160,6 @@
   components:
   # <Trauma>
   - type: DiseaseProtection
-    # really strong protection
     incoming:
       powerModifiers:
         Aerial: -1
