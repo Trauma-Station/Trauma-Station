@@ -7837,7 +7837,7 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -1000.5,32.5
+      pos: -75.5,32.5
       parent: 1
   - uid: 1244
     components:
@@ -7909,7 +7909,7 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -1000.5,31.5
+      pos: -75.5,31.5
       parent: 1
   - uid: 1256
     components:
@@ -8263,13 +8263,13 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -1000.5,32.5
+      pos: -100.5,32.5
       parent: 1
   - uid: 1315
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -1000.5,33.5
+      pos: -100.5,33.5
       parent: 1
   - uid: 1316
     components:

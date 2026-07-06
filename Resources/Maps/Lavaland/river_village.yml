@@ -6554,7 +6554,7 @@ entities:
   - uid: 1329
     components:
     - type: Transform
-      rot: -1000.53096491487331 rad
+      rot: -100.53096491487331 rad
       pos: 45.824608,13.288155
       parent: 1
 - proto: SheetSteel
@@ -6780,7 +6780,7 @@ entities:
   - uid: 1359
     components:
     - type: Transform
-      rot: -1000.53096491487331 rad
+      rot: -100.53096491487331 rad
       pos: 19.353966,18.67235
       parent: 1
 - proto: WallReinforced
