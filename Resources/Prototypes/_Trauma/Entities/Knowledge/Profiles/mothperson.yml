@@ -35,7 +35,7 @@
     MeleeKnowledge: 0
     ShootingKnowledge: 0
     # Crafting Quality
-
+    FabricationKnowledge: 0
     WeaponsKnowledge: 0
     ArmorKnowledge: 0
     MetalworkingKnowledge: 0

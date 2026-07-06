@@ -265,7 +265,7 @@
 - type: entity
   parent: BaseSkillChipMRAM
   id: SkillChipMagLit
-  name: MRAM-Chip (Memories of a cultist)
+  name: MRAM-Chip (Memories of a Cultist)
   components:
   - type: KnowledgeGrantOnWear
     skills:
