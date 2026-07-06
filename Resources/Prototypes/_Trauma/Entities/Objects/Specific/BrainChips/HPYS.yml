@@ -1,0 +1,85 @@
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStrength
+  name: APTR-Chip (Strength Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStrengthTampered
+  name: APTR-Chip (Tampered Strength Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      StrengthKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStamina
+  name: APTR-Chip (Stamina Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      AthleticsKnowledge: 25 # ~ 9.25% stam damage reduction
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipStaminaTampered
+  name: APTR-Chip (Tampered Stamina Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      AthleticsKnowledge: 50 # ~ 18.5% stam damage reduction
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipToughness
+  name: APTR-Chip (Pain Dampening)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToughnessKnowledge: 25 # ~ 9.25% stam damage reduction
+
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipToughnessTampered
+  name: APTR-Chip (Tampered Pain Dampening)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ToughnessKnowledge: 50 # ~ 18.5% damage reduction
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipThrowing
+  name: APTR-Chip (Hand-Eye Coordination)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipThrowingTampered
+  name: APTR-Chip (Tampered Hand-Eye Coordination)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 50
+
+- type: entity
+  parent: BaseSkillChipHPYS
+  id: SkillChipEnhancer
+  name: APTR-Chip (EGP-Enhancer)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ThrowingKnowledge: 25
+      ToughnessKnowledge: 25
+      StrengthKnowledge: 25
+      AthleticsKnowledge: 25

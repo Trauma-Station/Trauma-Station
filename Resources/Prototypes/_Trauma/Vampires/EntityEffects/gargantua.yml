@@ -25,7 +25,7 @@
   id: VampireRejuvGarg
   effects:
   - !type:TakeStaminaDamage
-    amount: -100
+    amount: -1000
   - !type:ModifyStatusEffect
     effectProto: StatusEffectForcedSleeping
     time: null

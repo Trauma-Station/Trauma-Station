@@ -22,7 +22,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipSalvageSpecialist
+    - SkillChipCombatEducation
+    - SkillChipMining
+    - SkillChipShortblade
   - !type:AddObjectiveSpecial
     objectives:
     - SalvageMineObjective

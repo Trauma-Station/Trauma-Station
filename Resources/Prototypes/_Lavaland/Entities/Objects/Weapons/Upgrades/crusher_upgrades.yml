@@ -170,7 +170,7 @@
   - type: WeaponUpgradeEffects
     effects:
     - !type:AdjustTemperature
-      amount: -7500 # thermal energy, not temperature! That's not that great actually, but it slows down the target after enough hits
+      amount: -100000 # thermal energy, not temperature! That's not that great actually, but it slows down the target after enough hits
   - type: Construction
     graph: CrusherUpgradeIceCrystalConstructionGraph
     node: crystal

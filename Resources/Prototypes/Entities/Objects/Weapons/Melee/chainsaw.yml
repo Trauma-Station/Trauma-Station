@@ -5,6 +5,8 @@
   description: A very large chainsaw. Usually you use this for cutting down trees... usually.
   components:
   # Trauma>
+  - type: WeaponClass
+    class: Tool
   - type: BoneSaw
     speed: 0.5 # TODO: arm-mounted version becomes 0.65
   - type: SurgeryTool
@@ -12,7 +14,6 @@
       path: /Audio/Weapons/chainsaw_pull.ogg
     endSound:
       path: /Audio/Weapons/chainsaw_rev.ogg
-  - type: Weapon
   # <Trauma>
   - type: Wieldable
     wieldSound: !type:SoundPathSpecifier

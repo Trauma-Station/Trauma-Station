@@ -362,7 +362,7 @@
       - IceCrust
   - type: TempAffectingAnomaly
     tempChangePerSecond: -25
-    hotspotExposeTemperature: -1000
+    hotspotExposeTemperature: -10000
   - type: GasProducerAnomaly
     releasedGas: 8 # Frezon. Please replace if there is a better way to specify this
     releaseOnMaxSeverity: true

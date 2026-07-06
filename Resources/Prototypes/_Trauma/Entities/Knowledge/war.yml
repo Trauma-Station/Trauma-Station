@@ -28,8 +28,8 @@
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
-  id: KnowledgeWeaponsKnife
-  name: Knife Training
+  id: KnowledgeWeaponsShortBlade
+  name: Short Blade Training
   description: Using knives and other small blades effectively needs quick and powerful stabs and cuts.
   components:
   - type: Knowledge
@@ -37,8 +37,8 @@
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
-  id: KnowledgeWeaponsSword
-  name: Sword Training
+  id: KnowledgeWeaponsLongBlade
+  name: Long Blade Training
   description: Large blades are best used by stabbing and slashing your enemies, with enough heft to even parry attacks.
 
 - type: entity
@@ -91,7 +91,7 @@
 - type: entity
   parent: BaseKnowledgeWeaponsRanged
   id: KnowledgeWeaponsRifle
-  name: Rifle Training
+  name: Longarm Training
   description: How good you are with ballistic long arms like assault rifles and mosins.
 
 - type: entity
@@ -107,7 +107,7 @@
   description: "How well you can snipe using a scoped rifle at long range. 🦋"
   components:
   - type: Knowledge
-    costs: [0, 3, 6] # not exactly common
+    costs: null # my sparkledog med intern actually used to be an isis rocketeer
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged

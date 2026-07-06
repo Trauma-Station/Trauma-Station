@@ -303,7 +303,7 @@
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
-      ToysKnowledge: 80 # the clown's bitch
+      FabricationKnowledge: 80 # the clown's bitch
       BotsKnowledge: 50 # honk
   # </Trauma>
 

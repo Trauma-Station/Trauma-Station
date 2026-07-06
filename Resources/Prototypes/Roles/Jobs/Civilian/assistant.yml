@@ -14,7 +14,8 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipPassenger
+    - SkillChipTiderDampener
+    - SkillChipEducation
   - !type:AddComponentSpecial
     components:
     - type: NpcFactionMember

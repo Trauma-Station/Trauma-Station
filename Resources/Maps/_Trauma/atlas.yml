@@ -4598,7 +4598,7 @@ entities:
       pos: 4.5,19.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -100943.01
+      secondsUntilStateChange: -1000943.01
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -26188,7 +26188,7 @@ entities:
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: -75.5,1.5
+      pos: -1000.5,1.5
       parent: 2
   - uid: 4109
     components:
@@ -40128,12 +40128,12 @@ entities:
   - uid: 6071
     components:
     - type: Transform
-      pos: -75.5,14.5
+      pos: -1000.5,14.5
       parent: 2
   - uid: 6072
     components:
     - type: Transform
-      pos: -75.5,13.5
+      pos: -1000.5,13.5
       parent: 2
   - uid: 6073
     components:
@@ -40158,7 +40158,7 @@ entities:
   - uid: 6077
     components:
     - type: Transform
-      pos: -75.5,12.5
+      pos: -1000.5,12.5
       parent: 2
   - uid: 6078
     components:

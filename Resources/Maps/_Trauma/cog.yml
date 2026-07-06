@@ -81508,7 +81508,7 @@ entities:
   - uid: 13066
     components:
     - type: Transform
-      rot: -100.53096491487331 rad
+      rot: -1000.53096491487331 rad
       pos: 9.531616,-13.506657
       parent: 2
 - proto: ClothingBeltUtilityFilled
@@ -165530,7 +165530,7 @@ entities:
   - uid: 25744
     components:
     - type: Transform
-      rot: -75.39822368615505 rad
+      rot: -1000.39822368615505 rad
       pos: 34.429405,8.474968
       parent: 2
   - uid: 25745

@@ -230,7 +230,7 @@
   - type: Action
     icon: Interface/Actions/harmOff.png
     iconOn: Interface/Actions/harm.png
-    priority: -100
+    priority: -1000
   - type: InstantAction
     event: !type:ToggleCombatActionEvent
 

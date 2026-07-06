@@ -1,16 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseSkillChip, BaseCentcommContraband ]
+  parent: [ BaseSkillChipPSON, BaseCentcommContraband ]
   id: SkillChipDeathSquad
-  name: skill chip (deathsquad)
+  name: PSON-Chip (Deathsquad Overwrite)
   components:
   - type: KnowledgeGrantOnWear
     skills:
       CookingKnowledge: 100
       DoorsKnowledge: 100
       AirlocksKnowledge: 100
-      ToysKnowledge: 100
       BananiumKnowledge: 100
       BotsKnowledge: 100
       FurnitureKnowledge: 100
@@ -19,7 +18,6 @@
       WallsKnowledge: 100
       WindowsKnowledge: 100
       LiteracyKnowledge: 100
-      MagicalLiteracyKnowledge: 100
       LanguageSolCommon: 100
       SurgeryKnowledge: 100
       FirstAidKnowledge: 100
@@ -51,27 +49,48 @@
       JanitorKnowledge: 100
 
 - type: entity
-  parent: [ BaseSkillChip, BaseCentcommContraband ]
-  id: SkillChipCBURN
-  name: skill chip (CBURN)
+  parent: [ BaseSkillChipPSON, BaseCentcommContraband ]
+  id: SkillChipERT
+  name: PSON-Chip (ERT Overwrite)
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      SurgeryKnowledge: 60
-      FirstAidKnowledge: 60
-      ThrowingKnowledge: 40
-      AthleticsKnowledge: 60
-      StrengthKnowledge: 60
-      ToughnessKnowledge: 60
-      MeleeKnowledge: 60
-      ShootingKnowledge: 60
-      KnowledgeWeaponsKnife: 60
-      KnowledgeWeaponsSword: 60
-      KnowledgeWeaponsPolearm: 60
-      KnowledgeWeaponsPistol: 60
-      KnowledgeWeaponsRifle: 60
-      KnowledgeWeaponsShotgun: 60
-      KnowledgeWeaponsLaser: 60
-      # for cading..?
-      FabricationKnowledge: 100
-      MetalworkingKnowledge: 100
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BananiumKnowledge: 50
+      BotsKnowledge: 50
+      FurnitureKnowledge: 50
+      InfrastructureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+      LiteracyKnowledge: 100
+      LanguageSolCommon: 100
+      SurgeryKnowledge: 50
+      FirstAidKnowledge: 50
+      ChemistryKnowledge: 50
+      ThrowingKnowledge: 50
+      AthleticsKnowledge: 50
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 50
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      KnowledgeWeaponsBludgeon: 50
+      KnowledgeWeaponsKnife: 50
+      KnowledgeWeaponsSword: 50
+      KnowledgeWeaponsPolearm: 50
+      KnowledgeWeaponsPistol: 50
+      KnowledgeWeaponsRifle: 50
+      KnowledgeWeaponsShotgun: 50
+      KnowledgeWeaponsSniper: 50
+      KnowledgeWeaponsHeavy: 50
+      KnowledgeWeaponsLaser: 50
+      FabricationKnowledge: 50
+      WeaponsKnowledge: 50
+      ArmorKnowledge: 50
+      MetalworkingKnowledge: 50
+      CarvingKnowledge: 50
+      GunsmithingKnowledge: 50
+      MechanicsKnowledge: 50
+      TailoringKnowledge: 50
+      JanitorKnowledge: 50

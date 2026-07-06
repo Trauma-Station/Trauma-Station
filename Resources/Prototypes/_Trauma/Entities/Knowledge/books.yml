@@ -257,22 +257,6 @@
 
 - type: entity
   parent: BookSchematic
-  id: BookToys
-  suffix: toys
-  description: A blueprint with designs for toys.
-  components:
-  - type: KnowledgeGrantOnUse
-    skills:
-      ToysKnowledge: 25
-    experience:
-      ToysKnowledge: 5
-    doAfter: 2
-  - type: Sprite
-    layers:
-    - state: toys
-
-- type: entity
-  parent: BookSchematic
   id: BookBananium
   suffix: bananium
   description: A blueprint with designs for bananium structures.

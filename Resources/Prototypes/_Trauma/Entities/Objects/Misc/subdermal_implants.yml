@@ -10,3 +10,16 @@
   - type: ComponentsImplant
     added:
     # - type: GrantHellRip
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: RadioImplantRev
+  name: radio implant
+  description: This implant grants access to the Revolutionary channel without a headset.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+  - type: RadioImplant
+    radioChannels:
+    - Revolutionary
+    - HeadRevolutionary

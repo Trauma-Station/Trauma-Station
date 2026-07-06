@@ -1325,12 +1325,12 @@
       - MobState
     damage:
       types:
-        Blunt: -100
-        Piercing: -100
-        Slash: -100
-        Heat: -100
-        Cold: -100
-        Shock: -100
+        Blunt: -1000
+        Piercing: -1000
+        Slash: -1000
+        Heat: -1000
+        Cold: -1000
+        Shock: -1000
 
 - type: entity
   abstract: true # Trauma
