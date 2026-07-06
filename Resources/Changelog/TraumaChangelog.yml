@@ -11202,3 +11202,49 @@ Entries:
   id: 1241
   time: '2026-07-05T22:21:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3319
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Metal barricades no longer use walls knowledge as required theory skills.
+  id: 1242
+  time: '2026-07-06T00:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3448
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added 11 weapon classes which most weapons are now a part of, you can see
+      the class by examining them.
+  - type: Add
+    message: >-
+      Added skills for training with each weapon class, most can be used in the
+      character editor.
+  - type: Tweak
+    message: >-
+      Replaced melee skill with unarmed combat, it applies to punches and
+      hand-slot punching weapons like boxing gloves to make them stronger.
+  - type: Add
+    message: Added descriptions to skills, shown by hovering over them.
+  - type: Add
+    message: >-
+      Added skillchips for each weapon class to the uplink as well as a skill
+      chips surplus bundle.
+  - type: Add
+    message: >-
+      Most weapon class skillchips are in the sectech for officers to
+      specialize.
+  - type: Add
+    message: Added a mining weapons skillchip to the points vendor.
+  - type: Tweak
+    message: >-
+      Most jobs now have relevant weapon class training, e.g. bartender is good
+      with shotguns not general shooting.
+  - type: Tweak
+    message: You can now use 2 skillchips at once.
+  - type: Fix
+    message: Skillchips now get transferred by polymorphs like bananamen.
+  - type: Remove
+    message: Removed useless slop materials and science skills.
+  id: 1243
+  time: '2026-07-06T00:15:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3436

@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: resonant scythe
-  description: The answer seems to be here… But the fruit isnt sweet enough just yet.
   parent: BaseItem
   id: ReverbScythe
+  name: resonant scythe
+  description: "The answer seems to be here... but the fruit isn't sweet enough just yet."
   components:
+  - type: WeaponClass
+    class: Tool
   - type: Sharp
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/breverb.rsi

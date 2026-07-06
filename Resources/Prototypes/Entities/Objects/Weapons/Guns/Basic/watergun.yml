@@ -110,6 +110,10 @@
   name: super water blaster
   description: No! No! Not in the eyes!
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Rifle # big boy toy
+  # </Trauma>
   - type: Gun
     cameraRecoilScalar: 0 #no recoil
     fireRate: 8

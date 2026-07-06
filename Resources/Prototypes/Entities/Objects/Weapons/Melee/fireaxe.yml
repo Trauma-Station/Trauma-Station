@@ -14,6 +14,8 @@
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: CosmicTransmutable
     transmuteTo: ScytheCosmicCult
+  - type: WeaponClass
+    class: Bludgeon # not really but you use it like one
   # </Trauma>
   - type: Tag
     tags:

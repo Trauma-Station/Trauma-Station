@@ -11,6 +11,7 @@
   parent: BaseCraftingKnowledge
   id: FabricationKnowledge
   name: Fabrication
+  description: Higher tiers of fabrication allow you to craft and construct more advanced recipes from memory.
   components:
   - type: Knowledge
     experienceCost: 15
@@ -19,37 +20,44 @@
 - type: entity
   parent: BaseCraftingKnowledge
   id: WeaponsKnowledge
-  name: Weaponsmith
+  name: Weaponsmithing
+  description: Determines quality of handmade and forged weapons.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: ArmorKnowledge
-  name: Armorsmith
+  name: Armorsmithing
+  description: Determines quality of handmade armor.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: MetalworkingKnowledge
   name: Metalworking
+  description: Determines quality of metal construction and all forged items.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: CarvingKnowledge
   name: Carving
+  description: Determines quality of wooden construction.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: GunsmithingKnowledge
   name: Gunsmithing
+  description: Determines quality of handmade firearms.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: MechanicsKnowledge
   name: Mechanics
+  description: Determines quality of some machines and improvised devices.
 
 - type: entity
   parent: BaseCraftingKnowledge
   id: TailoringKnowledge
   name: Tailoring
+  description: Determines quality of handmade clothing.
 
 # - type: entity - Also effects quality, but has a few recipes.
 #   parent: BaseCraftingKnowledge

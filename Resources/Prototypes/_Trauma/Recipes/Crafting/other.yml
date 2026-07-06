@@ -1,14 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
+  parent: BaseMaterial
   id: SheetPaper
   graph: SheetPaper
   targetNode: paper sheet
-  category: construction-category-materials
-  objectType: Item
   theory: {} # it's folding paper bro
-  practical:
-    MaterialsKnowledge: 0 # its folding paper bro
   useQuality: false
 
 - type: construction
@@ -59,37 +56,21 @@
   useQuality: false
 
 - type: construction
+  parent: BaseMaterial
   id: BarbedWireMaterial
   graph: BarbedWireMaterial
-  startNode: start
   targetNode: BarbedWire
-  category: construction-category-materials
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 0
-  useQuality: false
 
 - type: construction
-  id: BarbedWireMaterial0
-  graph: BarbedWireMaterial
-  startNode: start
+  parent: BarbedWireMaterial
+  id: BarbedWireMaterialMV
   targetNode: BarbedWire0
-  category: construction-category-materials
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 0
-  useQuality: false
 
 - type: construction
-  id: BarbedWireMaterial1
+  parent: BarbedWireMaterial
+  id: BarbedWireMaterialHV
   graph: BarbedWireMaterial
-  startNode: start
   targetNode: BarbedWire1
-  category: construction-category-materials
-  objectType: Item
-  theory:
-    MaterialsKnowledge: 0
-  useQuality: false
 
 - type: construction
   abstract: true
@@ -98,7 +79,6 @@
   category: construction-category-tools
   objectType: Item
   theory:
-    MaterialsKnowledge: 1
     FabricationKnowledge: 1
   useQuality: false
 

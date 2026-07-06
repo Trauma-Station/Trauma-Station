@@ -4,6 +4,7 @@ using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Shared.Knowledge.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -18,8 +19,20 @@ public sealed partial class ShootingKnowledgeSystem : EntitySystem
     {
         base.Initialize();
 
+        // TODO: change to aim speed
+        SubscribeLocalEvent<AimSpeedKnowledgeComponent, GetRecoilModifiersEvent>(OnGetRecoilModifiers);
+
         SubscribeLocalEvent<KnowledgeHolderComponent, AmmoShotUserEvent>(OnAddShootingExperience);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnHitShootingExperience);
+    }
+
+    private void OnGetRecoilModifiers(Entity<AimSpeedKnowledgeComponent> ent, ref GetRecoilModifiersEvent args)
+    {
+        if (args.Gun == args.User)
+            return; // ignore laser eyes or whatever
+
+        var level = _knowledge.GetLevel(ent);
+        args.Modifier /= ent.Comp.Curve.GetCurve(level);
     }
 
     private void OnAddShootingExperience(Entity<KnowledgeHolderComponent> ent, ref AmmoShotUserEvent args)

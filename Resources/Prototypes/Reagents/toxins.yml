@@ -630,7 +630,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Honk
-          min: 30
+          min: 50
       - !type:Emote
         emote: Honk
         showInChat: true

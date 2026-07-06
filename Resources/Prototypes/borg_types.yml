@@ -25,8 +25,7 @@
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
-      ScienceKnowledge: 50 # not good at much else
-      MaterialsKnowledge: 10
+      FabricationKnowledge: 50 # not good at much else
       BotsKnowledge: 50
       InfrastructureKnowledge: 20
       WallsKnowledge: 20 # containing anoms or whatever
@@ -82,7 +81,6 @@
       CarvingKnowledge: 40
       MechanicsKnowledge: 40
       # recipes
-      MaterialsKnowledge: 50
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
       BotsKnowledge: 30
@@ -90,7 +88,6 @@
       FurnitureKnowledge: 50
       ElectronicsKnowledge: 50
       WallsKnowledge: 50
-      ScienceKnowledge: 10 # sciborg is better
       WindowsKnowledge: 50
   # </Trauma>
 
@@ -187,7 +184,7 @@
   - type: ModifyKnowledgeGrant
     skills:
       JanitorKnowledge: 100 # mankind is dead. trash is fuel. disposals is full.
-      MaterialsKnowledge: 10
+      FabricationKnowledge: 10
       InfrastructureKnowledge: 10
       WallsKnowledge: 10
   # </Trauma>

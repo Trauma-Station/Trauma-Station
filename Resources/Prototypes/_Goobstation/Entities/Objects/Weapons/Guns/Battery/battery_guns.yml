@@ -1,10 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# TODO: clean up, person below is an idiot
 - type: entity # literally BaseWeaponPowerCell cuz we can't get rid of components in children HELL YEA
   id: BaseWeaponCustomCell
   parent: BaseItem
   abstract: true
   components:
+  - type: WeaponClass
+    class: Laser
   - type: Sprite
   - type: Item
     size: Huge
@@ -26,20 +29,20 @@
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-            - PowerCell
-            - PowerCellSmall
+          - PowerCell
+          - PowerCellSmall
   - type: Appearance
   - type: StaticPrice
     price: 500
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
-  - type: Cautery # Shitmed
+  - type: Cautery
     speed: 0.9
-  - type: SurgeryTool # Shitmed
+  - type: SurgeryTool
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: AlwaysHot # Goobstation V
+  - type: AlwaysHot
   - type: MeleeWeapon
     damage:
       types:
@@ -47,7 +50,7 @@
     angle: 0
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
-      collection: MetalThud # Goobstation ^
+      collection: MetalThud
   - type: EmitSoundOnPickup
     sound:
       collection: LasersPickUp
@@ -86,9 +89,9 @@
       collection: MetalThud # Goobstation ^
 
 - type: entity
-  name: plasma rifle
   parent: BaseWeaponBattery
   id: WeaponPlasmaRifle
+  name: plasma rifle
   description: It may or may not explode in your face.
   components:
   - type: Sprite

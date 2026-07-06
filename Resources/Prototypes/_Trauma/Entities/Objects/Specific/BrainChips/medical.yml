@@ -9,6 +9,7 @@
     skills:
       FirstAidKnowledge: 50
       SurgeryKnowledge: 50
+      KnowledgeWeaponsPistol: 15 # john syringe gun
 
 - type: entity
   parent: BaseSkillChip
@@ -28,6 +29,7 @@
     skills:
       FirstAidKnowledge: 30
       SurgeryKnowledge: 25
+      KnowledgeWeaponsKnife: -10 # do no harm
 
 - type: entity
   parent: BaseSkillChip
@@ -38,9 +40,10 @@
     skills:
       FirstAidKnowledge: 25
       SurgeryKnowledge: 10
+      KnowledgeWeaponsKnife: 5 # no oath taken
     # TODO: xp boost?
 
-# TODO: make surgeon skillchip if someone makes organ loadouts
+# TODO: make surgeon skillchip if someone makes chip loadouts
 
 - type: entity
   parent: BaseSkillChip
@@ -49,7 +52,9 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      FirstAidKnowledge: 25
+      FirstAidKnowledge: 40
+      SurgeryKnowledge: 10
+      KnowledgeWeaponsKnife: -10 # fuck you validhunting parameds
 
 - type: entity
   parent: BaseSkillChip

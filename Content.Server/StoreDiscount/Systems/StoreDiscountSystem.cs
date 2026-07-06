@@ -14,7 +14,7 @@ namespace Content.Server.StoreDiscount.Systems;
 /// </summary>
 public sealed partial class StoreDiscountSystem : EntitySystem
 {
-    private static readonly ProtoId<StoreCategoryPrototype> DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
+    public static readonly ProtoId<StoreCategoryPrototype> DiscountedStoreCategoryPrototypeKey = "DiscountedItems"; // Trauma - made public
 
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

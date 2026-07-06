@@ -1,18 +1,18 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: BaseMedicalKnowledge
-  parent: BaseKnowledge
   abstract: true
+  parent: BaseKnowledge
+  id: BaseMedicalKnowledge
   components:
   - type: Knowledge
     category: Medical
     color: "#1865d8"
 
 - type: entity
-  id: BasePhysicalKnowledge
-  parent: BaseKnowledge
   abstract: true
+  parent: BaseKnowledge
+  id: BasePhysicalKnowledge
   components:
   - type: Knowledge
     category: Physical
@@ -20,14 +20,13 @@
     color: "#16e720"
 
 - type: entity
-  id: BaseWarKnowledge
-  parent: BaseKnowledge
   abstract: true
+  parent: BaseKnowledge
+  id: BaseWarKnowledge
   components:
   - type: Knowledge
-    category: War
-    costs: [0, 2, 6, 9]
     color: "#f71818"
+    experienceCost: 15
 
 - type: entity
   parent: BaseKnowledge
@@ -69,9 +68,10 @@
     timeBetweenExperience: 1
 
 - type: entity
+  abstract: true
   parent: BaseKnowledge
   id: BaseLanguageKnowledge
-  abstract: true
+  description: The ability to speak and understand a language.
   components:
   - type: Knowledge
     category: Language
@@ -125,8 +125,12 @@
   name: knowledge-category-Languages
 
 - type: knowledgeCategory
-  id: War
-  name: knowledge-category-Combat
+  id: MeleeCombat
+  name: knowledge-category-MeleeCombat
+
+- type: knowledgeCategory
+  id: RangedCombat
+  name: knowledge-category-RangedCombat
 
 - type: knowledgeCategory
   id: Medical

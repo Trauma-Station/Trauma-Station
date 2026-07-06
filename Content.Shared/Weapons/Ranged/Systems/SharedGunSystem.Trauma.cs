@@ -6,9 +6,6 @@ using Content.Shared.Power;
 using Content.Shared.Projectiles;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Trauma.Common.Knowledge;
-using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.Knowledge.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -24,9 +21,6 @@ public abstract partial class SharedGunSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
-
-    private static readonly EntProtoId ShootingKnowledge = "ShootingKnowledge";
 
     /// <summary>
     /// Get a predicted random instance for an entity, specific to this tick.
@@ -71,7 +65,7 @@ public abstract partial class SharedGunSystem
     /// <param name="start">Start angle in degrees</param>
     /// <param name="end">End angle in degrees</param>
     /// <param name="intervals">How many shots there are</param>
-    public Angle[] LinearSpread(Angle start, Angle end, int intervals) // Goob edit
+    public Angle[] LinearSpread(Angle start, Angle end, int intervals)
     {
         var angles = new Angle[intervals];
         DebugTools.Assert(intervals > 1);
@@ -87,49 +81,27 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Trauma - changed component to Entity, added user, made public
     /// </summary>
-    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null, float spreadScale = 1.0f)
+    public Angle GetRecoilAngle(TimeSpan curTime, Entity<GunComponent> ent, Angle direction, EntityUid? user = null)
     {
         var (uid, comp) = ent;
         var timeSinceLastFire = (curTime - comp.LastFire).TotalSeconds;
-        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + spreadScale * comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0), comp.MaxAngleModified.Theta);
+        var newTheta = MathHelper.Clamp(comp.CurrentAngle.Theta + comp.AngleIncreaseModified.Theta - comp.AngleDecayModified.Theta * timeSinceLastFire, comp.MinAngleModified.Theta, comp.MaxAngleModified.Theta);
         comp.CurrentAngle = new Angle(newTheta);
         comp.LastFire = comp.NextFire;
 
         // Convert it so angle can go either side.
         var random = Random(uid).NextFloat(-0.5f, 0.5f);
 
-        // <Goob>
         var angleEv = new GetRecoilModifiersEvent(uid, user ?? uid);
         if (user != null)
             RaiseLocalEvent(user.Value, ref angleEv);
         RaiseLocalEvent(uid, ref angleEv);
         random *= angleEv.Modifier;
-        // </Goob>
 
-        var spread = comp.CurrentAngle.Theta * random * spreadScale;
-        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random * spreadScale);
-        //DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * spreadScale || spread <= comp.MinAngleModified.Theta + 0.05f * Math.Max(spreadScale - 1.0f, 0));
+        var spread = comp.CurrentAngle.Theta * random;
+        var angle = new Angle(direction.Theta + comp.CurrentAngle.Theta * random);
+        DebugTools.Assert(spread <= comp.MaxAngleModified.Theta * angleEv.Modifier);
         return angle;
-    }
-
-    /// <summary>
-    /// Gets recoil scale for gun according to knowledge system.
-    /// </summary>
-    private float GetRecoilScale(EntityUid? userUid, EntityUid gun)
-    {
-        if (userUid is not {} user || !HasComp<KnowledgeHolderComponent>(user))
-            return 1;
-
-        if (TryComp<GunComponent>(gun, out var gunComp) && gunComp.UnaffectedBySkill)
-            return 1;
-
-        if (_knowledge.GetKnowledge(user, ShootingKnowledge) is not {} shooting)
-            return 3;
-
-        var level = shooting.Comp.NetLevel;
-        return level < 26
-            ? 3.0f - level / 26.0f - _knowledge.SharpCurve(shooting)
-            : (float) Math.Max(1.0f - Math.Pow((level - 50) / 50.0f, 2), 0.2f);
     }
 
     public (float, float) GetBatteryShotsFloat(Entity<BatteryAmmoProviderComponent> ent)

@@ -338,10 +338,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public (ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
     {
-        var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
+        var meta = MetaData(ent);
+        var name = meta.EntityName;
+        var desc = meta.EntityDescription;
+        var levelStr = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)));
+        var knowledgeInfo = new KnowledgeInfo(name, desc, levelStr, ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
         // TODO: make this an event raised on ent
-        var name = Name(ent);
-        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
         if (_langQuery.TryComp(ent, out var languageKnowledge))
         {
             var locKey = (languageKnowledge.Speaks, languageKnowledge.Understands) switch
@@ -479,6 +481,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetContainer(target) is { } ent
             ? GetKnowledge(ent, id)
             : null;
+
+    /// <summary>
+    /// Get the net level of knowledge an entity has for an ID, defaulting to 0 if missing.
+    /// </summary>
+    public int GetKnowledgeLevel(EntityUid target, [ForbidLiteral] EntProtoId id)
+        => GetContainer(target) is { } ent
+            ? GetKnowledge(ent, id)?.Comp.NetLevel ?? 0
+            : 0;
 
     public Entity<KnowledgeComponent>? GetKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)
         => ent.Comp.KnowledgeDict.TryGetValue(id, out var unit) && _query.TryComp(unit, out var comp)

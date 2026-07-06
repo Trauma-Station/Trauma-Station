@@ -104,6 +104,8 @@
   name: nail board
   description: A nasty weapon that also works as a trap.
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/nailboard.rsi
     state: finished
@@ -217,6 +219,8 @@
   name: pipe bomb spear
   description: Risky, but deadly.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: ThrowableBlocked
   - type: UndetectableContraband
   - type: CosmicTransmutable
@@ -322,6 +326,8 @@
   name: fire bomb spear
   description: Risky, but deadly.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/spear_IED.rsi
     layers:
@@ -347,6 +353,8 @@
   name: pipe shank
   description: A pipe sharpened to a nasty point, could be a great throwing weapon.
   components:
+  - type: WeaponClass
+    class: Knife
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/spear_pipe.rsi
     state: icon
@@ -384,6 +392,8 @@
   name: unfinished pipe shank
   description: Needs to be sharpened.
   components:
+  - type: WeaponClass
+    class: Knife
   - type: Sprite
     sprite: Structures/Piping/Atmospherics/pipe.rsi
     state: pipeStraight
@@ -393,7 +403,7 @@
     attackRate: 1
     damage:
       types:
-        Piercing: 10
+        Blunt: 3
     heavyStaminaCost: 6
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
@@ -439,6 +449,8 @@
   name: wooden sword
   description: A wooden sword.
   components:
+  - type: WeaponClass
+    class: Bludgeon # can't exactly stab with it
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/sword_wooden.rsi
     state: icon
@@ -510,6 +522,8 @@
   name: nail sword
   description: A wooden sword with nails sticking out of it.
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/sword_nail.rsi
     state: icon
@@ -539,6 +553,8 @@
   name: scrap sword
   description: A wooden sword with jagged metal sticking out of it.
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/sword_scrap.rsi
     state: icon
@@ -586,6 +602,8 @@
   name: welded sword
   description: A sword made by welding two pieces of metal to a tang, a bit unwieldy.
   components:
+  - type: WeaponClass
+    class: Sword
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Melee/sword_welded.rsi
     state: icon

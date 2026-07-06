@@ -6,6 +6,8 @@
   id: Justice
   description: An expensive & self-recharging energy sword, designed specifically for the Head of Security. If it were not for injustice, man would not know justice.
   components:
+  - type: WeaponClass
+    class: NonLethal # it can be...
   - type: Item
     sprite: _Goobstation/Objects/Weapons/Melee/justice.rsi
     size: Ginormous # Use your sheath.
