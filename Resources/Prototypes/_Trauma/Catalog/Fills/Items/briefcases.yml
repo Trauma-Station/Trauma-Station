@@ -232,19 +232,6 @@
         - id: BowHardlight
 
 - type: entity
-  id: BriefcaseWeaponEstocFilled
-  parent: BriefcaseWeapon
-  name: secure Esctoc DMR case
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: BriefcaseWeaponHardlightBowFilled
-        - id: MagazineRifle
-        - id: SkillChipRifle
-
-- type: entity
   id: BriefcaseWeaponFireaxeFilled
   parent: BriefcaseWeapon
   name: secure Fireaxe case
