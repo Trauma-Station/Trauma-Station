@@ -30,7 +30,6 @@
     - id: BookSurvival
     - id: BookDoors
     - id: BookAirlocks
-    - id: BookToys
     - id: BookBananium
     - id: BookBots
     - id: BookFurniture

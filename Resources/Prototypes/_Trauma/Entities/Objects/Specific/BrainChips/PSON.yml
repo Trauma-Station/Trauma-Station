@@ -9,7 +9,7 @@
 
 - type: entity
   parent: BaseSkillChipPSON
-  id: SkillChipMagicalDampener
+  id: SkillChipCombatDampener
   name: PSON-Chip (Purge Combat Talent)
   components:
   - type: KnowledgeGrantOnWear
@@ -31,7 +31,7 @@
 
 - type: entity # Todo, add drooling marking when this gets used on you
   parent: BaseSkillChipPSON
-  id: SkillChipMagicalDampener
+  id: SkillChipMindPurge
   name: PSON-Chip (Purge Mind)
   components:
   - type: KnowledgeGrantOnWear

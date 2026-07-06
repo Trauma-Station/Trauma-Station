@@ -29,8 +29,8 @@
       MeleeKnowledge: 100
       ShootingKnowledge: 100
       KnowledgeWeaponsBludgeon: 100
-      KnowledgeWeaponsKnife: 100
-      KnowledgeWeaponsSword: 100
+      KnowledgeWeaponsShortBlade: 100
+      KnowledgeWeaponsLongBlade: 100
       KnowledgeWeaponsPolearm: 100
       KnowledgeWeaponsPistol: 100
       KnowledgeWeaponsRifle: 100
@@ -76,8 +76,8 @@
       MeleeKnowledge: 50
       ShootingKnowledge: 50
       KnowledgeWeaponsBludgeon: 50
-      KnowledgeWeaponsKnife: 50
-      KnowledgeWeaponsSword: 50
+      KnowledgeWeaponsShortBlade: 50
+      KnowledgeWeaponsLongBlade: 50
       KnowledgeWeaponsPolearm: 50
       KnowledgeWeaponsPistol: 50
       KnowledgeWeaponsRifle: 50

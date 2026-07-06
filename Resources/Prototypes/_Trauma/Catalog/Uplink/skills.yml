@@ -43,10 +43,10 @@
   - UplinkSkills
 
 - type: listing
-  id: UplinkSkillChipKnife
+  id: UplinkSkillChipShortBlade
   name: uplink-skill-chip-weapons-knife-name
   description: uplink-skill-chip-weapons-knife-desc
-  productEntity: SkillChipKnife
+  productEntity: SkillChipShortBlade
   cost:
     Telecrystal: 10
   discountCategory: null
@@ -54,10 +54,10 @@
   - UplinkSkills
 
 - type: listing
-  id: UplinkSkillChipSword
+  id: UplinkSkillChipLongBlade
   name: uplink-skill-chip-weapons-sword-name
   description: uplink-skill-chip-weapons-sword-desc
-  productEntity: SkillChipSword
+  productEntity: SkillChipLongBlade
   cost:
     Telecrystal: 10
   discountCategory: null

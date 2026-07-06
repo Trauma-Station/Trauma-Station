@@ -44,7 +44,12 @@
           amount: 3
         - id: SkillChipToughness
           amount: 3
-        - id: SkillChipUnarmed
+        - id: SkillChipMagicalDampener
+          amount: 2
+        - id: SkillChipCombatDampener
+          amount: 2
+        - id: SkillChipMindPurge
+          amount: 1
 
 - type: entity
   parent: BoxSkillChipsBase

@@ -16,8 +16,8 @@
           children:
           - id: SkillChipUnarmed
           - id: SkillChipBludgeon
-          - id: SkillChipKnife
-          - id: SkillChipSword
+          - id: SkillChipShortBlade
+          - id: SkillChipLongBlade
           - id: SkillChipPolearm
           - id: SkillChipNonLethal
           - id: SkillChipTool

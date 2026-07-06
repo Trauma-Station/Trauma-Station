@@ -20,7 +20,7 @@
     chips:
     - SkillChipEducation
     - SkillChipTool
-    - SkillChipSmoke
+    - SkillChipStoner
   # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: FourTwenty

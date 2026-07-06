@@ -28,7 +28,9 @@
   special:
   - !type:OrganChipsSpecial
     chips:
-    - SkillChipBrigmedic
+    - SkillChipCombatEducation
+    - SkillChipDoctor
+    - SkillChipSurgeon
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
