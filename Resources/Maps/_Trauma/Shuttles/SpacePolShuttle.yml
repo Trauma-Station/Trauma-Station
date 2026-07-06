@@ -4,8 +4,8 @@ meta:
   engineVersion: 278.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/06/2026 09:12:03
-  entityCount: 202
+  time: 07/06/2026 18:32:08
+  entityCount: 204
 maps: []
 grids:
 - 1
@@ -524,6 +524,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,9.5
       parent: 1
+  - uid: 201
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,9.5
+      parent: 1
 - proto: ClosetWallOrange
   entities:
   - uid: 64
@@ -636,19 +642,12 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 73
-- proto: ComputerComms
+- proto: ComputerIFFSyndicate
   entities:
   - uid: 79
     components:
     - type: Transform
       pos: -0.5,10.5
-      parent: 1
-- proto: ComputerIFFSyndicate
-  entities:
-  - uid: 80
-    components:
-    - type: Transform
-      pos: 1.5,10.5
       parent: 1
 - proto: ComputerShuttle
   entities:
@@ -739,12 +738,11 @@ entities:
       parent: 1
 - proto: GhostWarpPoint
   entities:
-  - uid: 98
+  - uid: 137
     components:
     - type: MetaData
       name: Fugitive Hunter Shuttle
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 0.5,4.5
       parent: 1
 - proto: GravityGeneratorMini
@@ -1033,12 +1031,17 @@ entities:
       parent: 67
     - type: Physics
       canCollide: False
-- proto: SpawnPointNukies
+- proto: SpawnPointGhostRoleHunterSpacepol
   entities:
-  - uid: 137
+  - uid: 98
     components:
     - type: Transform
-      pos: 0.5,4.5
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 200
+    components:
+    - type: Transform
+      pos: -0.5,9.5
       parent: 1
 - proto: SubstationWallBasic
   entities:
@@ -1050,6 +1053,11 @@ entities:
       parent: 1
 - proto: TableReinforced
   entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 1.5,10.5
+      parent: 1
   - uid: 139
     components:
     - type: Transform

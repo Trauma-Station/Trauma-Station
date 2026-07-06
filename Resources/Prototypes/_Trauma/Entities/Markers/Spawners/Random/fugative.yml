@@ -1,9 +1,13 @@
 - type: entityTable
-  id: FugativeHunterRandom
-  table: !type:GroupSelector
-    children:
-    - id: FugitiveHunterRuleSpacepol
-    - id: FugitiveHunterRuleSyndicate
-      weight: 0.5
-    # - id: HunterRussians
-    # - id: HunterBounty
+  parent: BaseGameRule
+  id: FugitiveHunterRandom
+  components:
+  - type: NestedRule
+    rules: !type:GroupSelector
+      children:
+      - id: FugitiveHunterRuleSpacepol
+      - id: FugitiveHunterRuleRussians
+      - id: FugitiveHunterRuleBountyHunter
+        weight: 0.5
+      - id: FugitiveHunterRuleSyndicate
+        weight: 0.5

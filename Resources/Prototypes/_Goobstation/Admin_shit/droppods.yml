@@ -79,7 +79,7 @@
     sprite: _Goobstation/Objects/Specific/DropPod/item.rsi
     state: DROPPOD
   - type: Item
-    maxItemSize: Ginormous
+    size: Ginormous
   - type: Visibility
     layer: 2 #ghost layer
   - type: DragInsertContainer

@@ -332,6 +332,7 @@
   - type: AntagObjectives
     objectives:
     - HunterArrestFugitiveObjective
+    - HunterArrestFugitiveObjective
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/SpacePolShuttle.yml
@@ -341,6 +342,52 @@
     - !type:FixedAntagCount
       proto: FugitiveHunterSpacepol
       count: 2
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleRussians
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterArrestFugitiveObjective
+    - HunterKillFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/RussianHunterShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-russian-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterRussian
+      count: 4
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: FugitiveHunterRuleBountyHunter
+  components:
+  - type: AntagGhostCharacterRule
+  - type: AntagObjectives
+    objectives:
+    - HunterKillFugitiveObjective
+    - HunterKillFugitiveObjective
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/MercHunterShuttle.yml
+  - type: AntagSelection
+    agentName: ghost-role-information-bounty-hunter-name
+    antags:
+    - !type:FixedAntagCount
+      proto: FugitiveHunterBounty
+      count: 1
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect

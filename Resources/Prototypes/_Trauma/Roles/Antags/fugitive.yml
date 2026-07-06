@@ -28,7 +28,7 @@
 
 - type: antagSpecifier
   id: FugitiveHunterSyndicate
-  spawnerPrototype: SpawnPointGhostRoleHunterSyndicate
+  spawnerPrototype: SpawnPointGhostRoleHunterSpacepol
   startingGear: HunterAntagGearSpacepol
   briefing:
     text: hunter-syndicate-role-greeting
@@ -64,7 +64,7 @@
 # Russians
 
 - type: startingGear
-  id: FugitiveHunterRussian
+  id: HunterAntagGearRussian
   equipment:
     jumpsuit: ClothingUniformJumpsuitPrisoner
     shoes: ClothingShoesBootsCombat
@@ -84,10 +84,21 @@
     - BarbHandcuffs
     - ForensicScanner
 
+- type: antagSpecifier
+  id: FugitiveHunterRussian
+  spawnerPrototype: SpawnPointGhostRoleHunterRussian
+  startingGear: HunterAntagGearRussian
+  briefing:
+    text: hunter-spacepol-role-greeting
+    color: red
+  components:
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
 # Bounty Hunter
 
 - type: startingGear
-  id: FugitiveHunterBounty
+  id: HunterAntagGearBounty
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryContractor
     shoes: ClothingShoesBootsCombatFilled
@@ -105,6 +116,18 @@
     - WeaponRevolverDeckard
     - ForensicScanner
     - FoodBurgerMcrib
+
+- type: antagSpecifier
+  id: FugitiveHunterBounty
+  spawnerPrototype: SpawnPointGhostRoleHunterBounty
+  startingGear: HunterAntagGearBounty
+  briefing:
+    text: hunter-spacepol-role-greeting
+    color: red
+  components:
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
 
 # Fugitives
   # Convict

@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 277.0.0
+  engineVersion: 278.0.0
   forkId: ""
   forkVersion: ""
-  time: 06/17/2026 23:15:42
-  entityCount: 205
+  time: 07/06/2026 18:30:57
+  entityCount: 207
 maps: []
 grids:
 - 1
@@ -26,6 +26,8 @@ entities:
     components:
     - type: MetaData
       name: grid
+    - type: Transform
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -522,6 +524,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,9.5
       parent: 1
+  - uid: 206
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,9.5
+      parent: 1
 - proto: ClosetWallOrange
   entities:
   - uid: 64
@@ -634,19 +642,12 @@ entities:
       canCollide: False
     - type: InsideEntityStorage
       storage: 73
-- proto: ComputerComms
+- proto: ComputerIFFSyndicate
   entities:
   - uid: 79
     components:
     - type: Transform
       pos: -0.5,10.5
-      parent: 1
-- proto: ComputerIFFSyndicate
-  entities:
-  - uid: 80
-    components:
-    - type: Transform
-      pos: 1.5,10.5
       parent: 1
 - proto: ComputerShuttle
   entities:
@@ -1059,12 +1060,17 @@ entities:
       parent: 67
     - type: Physics
       canCollide: False
-- proto: SpawnPointNukies
+- proto: SpawnPointGhostRoleHunterSyndicate
   entities:
-  - uid: 137
+  - uid: 207
     components:
     - type: Transform
-      pos: 0.5,4.5
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 208
+    components:
+    - type: Transform
+      pos: -0.5,9.5
       parent: 1
 - proto: SubstationWallBasic
   entities:
@@ -1076,6 +1082,11 @@ entities:
       parent: 1
 - proto: TableReinforced
   entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 1.5,10.5
+      parent: 1
   - uid: 139
     components:
     - type: Transform
