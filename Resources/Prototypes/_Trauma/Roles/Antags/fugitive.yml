@@ -54,9 +54,6 @@
     text: hunter-spacepol-role-greeting
     color: red
   components:
-  - type: NpcFactionMember
-    factions:
-    - Nanotrasen
   - type: RandomMetadata
   mindRoles:
   - MindRoleGhostRoleHunter

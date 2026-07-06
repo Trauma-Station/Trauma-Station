@@ -247,7 +247,7 @@
   name: uplink-contractor-baton-name
   description: uplink-contractor-baton-desc
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Melee/contractor_baton.rsi, state: uplink }
-  productEntity: ContractorBaton
+  productEntity: BriefcaseWeaponContractorBatonFilled
   cost:
     Telecrystal: 35
   categories:
@@ -264,7 +264,8 @@
   id: UplinkFireAxeFlaming
   name: uplink-fire-axe-flaming-name
   description: uplink-fire-axe-flaming-desc
-  productEntity: FireAxeFlaming
+  icon: { sprite: /Textures/Objects/Weapons/Melee/fireaxeflaming.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponFireaxeFilled # Trauma
   cost:
     Telecrystal: 65
   categories:
@@ -275,7 +276,7 @@
   name: uplink-weapon-burner-name
   description: uplink-weapon-burner-desc
   icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Rifles/burner.rsi, state: icon }
-  productEntity: WeaponRifleBurner
+  productEntity: BriefcaseWeaponBurnerFilled
   cost:
     Telecrystal: 100
   categories:
@@ -291,7 +292,7 @@
   name: uplink-hardlight-bow-name
   description: uplink-hardlight-bow-desc
   icon: { sprite:  /Textures/_Goobstation/Objects/Weapons/Guns/Bow/hardlight_bow.rsi, state: icon }
-  productEntity: BowHardlight
+  productEntity: BriefcaseWeaponHardlightBowFilled
   cost:
     Telecrystal: 60
   categories:
@@ -317,7 +318,8 @@
   id: UplinkPistolAnaconda
   name: uplink-anaconda-name
   description: uplink-anaconda-desc
-  productEntity: WeaponPistolAnaconda
+  icon: { sprite:  /Textures/_Goobstation/Objects/Weapons/Guns/Pistols/anaconda.rsi, state: icon }
+  productEntity: BriefcaseWeaponAnacondaFilled
   cost:
     Telecrystal: 40
   categories:
@@ -1251,7 +1253,7 @@
   name: uplink-energy-pickaxe-name
   description: uplink-energy-pickaxe-desc
   icon: { sprite: /Textures/_NF/Objects/Weapons/Melee/energy_pickaxe.rsi, state: icon }
-  productEntity: NFEnergyPickaxe
+  productEntity: BriefcaseWeaponEnergyPickaxeFilled
   cost:
     Telecrystal: 32 # Worse than esword for combat, better for breaching
   categories:

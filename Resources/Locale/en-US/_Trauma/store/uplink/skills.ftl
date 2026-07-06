@@ -22,6 +22,9 @@ uplink-skill-chip-weapons-non-lethal-desc = A skill chip that makes the user pro
 uplink-skill-chip-weapons-tool-name = APTR-Chip (Tool Combat Training)
 uplink-skill-chip-weapons-tool-desc = A skill chip that makes the user proficent with work tools.
 
+uplink-skill-chip-weapons-energy-name = APTR-Chip (Energy Weapon Training)
+uplink-skill-chip-weapons-energy-desc = A skill chip that makes the user proficent with energy weapons.
+
 uplink-skill-chip-weapons-pistol-name = APTR-Chip (Pistol Training)
 uplink-skill-chip-weapons-pistol-desc = A skill chip that makes the user proficent with pistols.
 
@@ -39,6 +42,9 @@ uplink-skill-chip-weapons-laser-desc = A skill chip that makes the user proficen
 
 uplink-skill-chip-weapons-heavy-name = APTR-Chip (Heavy Weapon Training)
 uplink-skill-chip-weapons-heavy-desc = A skill chip that makes the user proficent with heavy weapons.
+
+uplink-skill-chip-weapons-smg-name = APTR-Chip (SMG Training)
+uplink-skill-chip-weapons-smg-desc = A skill chip that makes the user proficent with SMGs.
 
 
 

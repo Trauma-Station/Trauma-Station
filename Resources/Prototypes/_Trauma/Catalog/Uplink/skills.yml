@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
-  id: UplinkCrateSydicateCombatSkillChips
+  id: UplinkCrateSyndicateCombatSkillChips
   name: uplink-skill-chip-bundle-name
   description: uplink-skill-chip-bundle-desc
-  productEntity: CrateSydicateCombatSkillChips
+  productEntity: CrateSyndicateCombatSkillChips
   cost:
     Telecrystal: 20
   categories:
@@ -97,6 +97,27 @@
   categories:
   - UplinkSkills
 
+- type: listing
+  id: UplinkSkillChipEnergy
+  name: uplink-skill-chip-weapons-energy-name
+  description: uplink-skill-chip-weapons-energy-desc
+  productEntity: SkillChipEnergy
+  cost:
+    Telecrystal: 5
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipSmg
+  name: uplink-skill-chip-weapons-smg-name
+  description: uplink-skill-chip-weapons-smg-desc
+  productEntity: SkillChipSMG
+  cost:
+    Telecrystal: 5
+  discountCategory: null
+  categories:
+  - UplinkSkills
 ## Ranged ##
 
 - type: listing

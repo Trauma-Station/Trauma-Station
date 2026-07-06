@@ -402,7 +402,7 @@
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
     offset: -0.15,0.0
-    removalTime: 1.5
+    removalTime: 0.5 # Trauma, was 1.5
   - type: LandAtCursor
   - type: DamageOtherOnHit
     increaseOnly: true # Trauma - apply modifiers, but ignore decreases

@@ -41,6 +41,12 @@
   name: tool
   knowledge: KnowledgeWeaponsTool
 
+# energy weapons like eswords
+- type: weaponClass
+  id: Energy
+  name: energy
+  knowledge: KnowledgeWeaponsEnergy
+
 ## Ranged ##
 
 # one handed gun with relatively low recoil
@@ -54,6 +60,12 @@
   id: Rifle
   name: rifle
   knowledge: KnowledgeWeaponsRifle
+
+# Sub machine guns, high rate of fire and tricky to account for recoil.
+- type: weaponClass
+  id: SMG
+  name: SMG
+  knowledge: KnowledgeWeaponsSMG
 
 # high recoil and awkward loading method
 - type: weaponClass

@@ -53,6 +53,15 @@
   name: Tool Combat Training
   description: Most laymen think it's easy to fight with hedge trimmers and nailguns, a real tradie knows the secret to it.
 
+- type: entity
+  parent: BaseKnowledgeWeaponsMelee
+  id: KnowledgeWeaponsEnergy
+  name: Energy Weapon Training
+  description: Modern energy weapons are highly dangerous and unintuitive, it takes lots of training to use them correctly.
+  components:
+  - type: Knowledge
+    costs: null # Eswords
+
 # Ranged Combat
 
 - type: entity
@@ -87,6 +96,12 @@
   id: KnowledgeWeaponsRifle
   name: Longarm Training
   description: How good you are with ballistic long arms like assault rifles and mosins.
+
+- type: entity
+  parent: BaseKnowledgeWeaponsRanged
+  id: KnowledgeWeaponsSMG
+  name: SMG Training
+  description: How good you are with ballistic sub machine guns.
 
 - type: entity
   parent: BaseKnowledgeWeaponsRanged

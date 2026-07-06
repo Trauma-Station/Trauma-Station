@@ -9,7 +9,8 @@
   id: UplinkPistolViper
   name: uplink-pistol-viper-name
   description: uplink-pistol-viper-desc
-  productEntity: WeaponPistolViper
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Pistols/viper.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponViperFilled # Trauma
   cost:
     Telecrystal: 13 # Trauma - was 3, 5x and less expensive
   categories:
@@ -20,7 +21,8 @@
   id: UplinkPistolCobra
   name: uplink-pistol-cobra-name
   description: uplink-pistol-cobra-desc
-  productEntity: WeaponPistolCobra
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Pistols/cobra.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponCobraFilled # Trauma
   cost:
     Telecrystal: 17 # Trauma - was 4, 5x and less expensive
   categories:
@@ -42,7 +44,7 @@
   name: uplink-esword-name
   description: uplink-esword-desc
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
-  productEntity: EnergySword
+  productEntity: BriefcaseWeaponEnergySwordFilled # Trauma
   cost:
     Telecrystal: 35 # Trauma - was 8, 5x and less expensive
   categories:
@@ -53,7 +55,7 @@
   name: uplink-edagger-name
   description: uplink-edagger-desc
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_dagger.rsi, state: icon }
-  productEntity: EnergyDaggerBox
+  productEntity: BriefcaseWeaponEDaggerFilled # Trauma
   cost:
     Telecrystal: 10 # Trauma - was 2, 5x
   categories:
@@ -63,7 +65,8 @@
   id: UplinkEnergyCrossbow
   name: uplink-energycrossbow-name
   description: uplink-energycrossbow-desc
-  productEntity: WeaponEnergyCrossbow
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Basic/energy_crossbow.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponEnergyCrossbowFilled # Trauma
   cost:
     Telecrystal: 30 # Trauma - was 5, 5x and more expensive
   categories:
@@ -91,7 +94,8 @@
   id: UplinkGlovesNorthStar
   name: uplink-gloves-north-star-name
   description: uplink-gloves-north-star-desc
-  productEntity: ClothingHandsGlovesNorthStar
+  icon: { sprite: /Textures/Clothing/Hands/Gloves/northstar.rsi, state: icon } # Trauma
+  productEntity: BriefcaseWeaponNorthStarFilled # Trauma
   cost:
     Telecrystal: 30 # Trauma - was 8, 5x and less expensive
   categories:
@@ -114,7 +118,7 @@
   name: uplink-eshield-name
   description: uplink-eshield-desc
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
-  productEntity: EnergyShield
+  productEntity: BriefcaseWeaponEnergyShieldFilled # Trauma
   cost:
     Telecrystal: 30 # Trauma, was 8, 5x and less expensive
   categories:
@@ -130,7 +134,7 @@
   name: uplink-rigged-boxing-gloves-name
   description: uplink-rigged-boxing-gloves-desc
   icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: icon }
-  productEntity: UndeterminedSelectorBoxingRiggedRadial # Trauma - was ClothingHandsGlovesBoxingRiggedBlue
+  productEntity: BriefcaseWeaponBoxingGlovesFilled # Trauma - was ClothingHandsGlovesBoxingRiggedBlue
   cost:
     Telecrystal: 20 # Trauma - was 10, 5x less expensive because it's a gimmick item and not viable
   categories:
@@ -214,7 +218,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Rifles/estoc.rsi, state: icon }
   cost:
     Telecrystal: 55 # Trauma - was 14, 5x and less expensive because the gun is shit
-  productEntity: ClothingBackpackDuffelSyndicateFilledRifle
+  productEntity: BriefcaseWeaponEstocFilled # Trauma
   categories:
   - UplinkWeaponry
   conditions:
@@ -261,7 +265,7 @@
   name: uplink-l6-saw-name #goob
   description: uplink-l6-saw-desc #goob
   icon: { sprite: /Textures/Objects/Weapons/Guns/LMGs/l6.rsi, state: icon }
-  productEntity: WeaponLightMachineGunL6
+  productEntity: BriefcaseWeaponL6Filled # Trauma
   cost:
     Telecrystal: 100 # Trauma - was 30, 5x and less expensive
   categories:

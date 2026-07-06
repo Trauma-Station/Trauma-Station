@@ -21,6 +21,8 @@
       KnowledgeWeaponsRifle: 50
       KnowledgeWeaponsSniper: 50
       KnowledgeWeaponsHeavy: 50
+      KnowledgeWeaponsEnergy: 50
+      KnowledgeWeaponsSMG: 50
       KnowledgeWeaponsLaser: 20 # better than tiders
       StrengthKnowledge: 50
       ToughnessKnowledge: 50

@@ -50,7 +50,6 @@
   - type: Parry
     parryExhaustionCost: 0.25
     reflectExhaustionCost: 0.125
-    reflectMinSkill: 25
     soundOnReflect:
       path: /Audio/Weapons/Guns/Hits/ric4.ogg
       params:
