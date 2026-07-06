@@ -313,8 +313,8 @@
         Piercing: 0.55
         Ballistic: 0.3
         Heat: 0.7
-    flatReductions: # This is done so shotguns are worse against armor
-      Ballistic: 3
+      flatReductions: # This is done so shotguns are worse against armor
+        Ballistic: 3
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: ModifyDelayedKnockdown

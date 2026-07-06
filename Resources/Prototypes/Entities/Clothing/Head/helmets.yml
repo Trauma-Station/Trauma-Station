@@ -561,8 +561,8 @@
         Heat: 0.35
         Caustic: 0.35
     # <Trauma> - This is done so shotguns are worse against armor
-    flatReductions:
-      Ballistic: 3.5
+      flatReductions:
+        Ballistic: 3.5
     # </Trauma>
   - type: FaceHuggerBlocker # Trauma
  # - type: HideLayerClothing  #Goobstation

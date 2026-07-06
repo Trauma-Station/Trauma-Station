@@ -347,10 +347,10 @@
         Ballistic: 0.3 # Trauma
         Heat: 0.5
         # Caustic: 0.3
-    # <Trauma> - This is done so shotguns are worse against armor
-    flatReductions:
-      Ballistic: 3
-    # </Trauma>
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
@@ -514,10 +514,10 @@
         Ballistic: 0.2 # Trauma
         Heat: 0.5
         Radiation: 0
-    # <Trauma> - This is done so shotguns are worse against armor
-    flatReductions:
-      Ballistic: 3
-    # </Trauma>
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
@@ -570,10 +570,10 @@
         Heat: 0.4
         Radiation: 0.1
         Caustic: 0.1
-    # <Trauma> - This is done so shotguns are worse against armor
-    flatReductions:
-      Ballistic: 3
-    # </Trauma>
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier # Goobstation
     walkModifier: 1.0
     sprintModifier: 1.0
