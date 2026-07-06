@@ -18,7 +18,7 @@
     WindowsKnowledge: 1
     SmokeablesKnowledge: 0 # Not roundstart, blueprint required.
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 0
     # Language Skills
     LanguageSolCommon: 3

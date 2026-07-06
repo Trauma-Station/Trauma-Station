@@ -17,7 +17,7 @@
     WindowsKnowledge: 1
     SmokeablesKnowledge: 4
     # Intelectual Skills
-    LiteracyKnowledge: 4
+    LiteracyKnowledge: 0
     MagicalLiteracyKnowledge: 1 # Preemptive magical knowledge for when it matters. Magic tree ent lore larp or smth.
     # Language Skills
     LanguageRootSpeak: 3

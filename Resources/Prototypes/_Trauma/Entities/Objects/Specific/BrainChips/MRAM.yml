@@ -125,6 +125,26 @@
 
 - type: entity
   parent: BaseSkillChipMRAM
+  id: SkillChipElectronics
+  name: MRAM-Chip (Memories of an Electrician)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ElectronicsKnowledge:: 50
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
+  id: SkillChipElectronics2
+  name: MRAM-Chip (Memories of a Master Electrician)
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      ElectronicsKnowledge: 75
+      FabricationKnowledge: 25
+
+- type: entity
+  parent: BaseSkillChipMRAM
   id: SkillChipTailor
   name: MRAM-Chip (Memories of a Tailor)
   components:
