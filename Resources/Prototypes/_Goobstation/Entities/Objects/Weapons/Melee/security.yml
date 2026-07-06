@@ -112,7 +112,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 6
+        Piercing: 10
   - type: MeleeWeapon
     canWideSwing: false
     range: 2.2
@@ -120,8 +120,7 @@
     attackRate: 0.8
     damage:
       types:
-        Blunt: 5
-        Piercing: 5
+        Piercing: 10
     soundHit:
       collection: MetalThud
   - type: Appearance

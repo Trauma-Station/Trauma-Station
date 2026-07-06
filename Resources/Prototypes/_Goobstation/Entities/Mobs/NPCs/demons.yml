@@ -181,6 +181,7 @@
           Blunt: -0.33
           Slash: -0.33
           Piercing: -0.33
+          Ballistic: -0.33
     - type: Butcherable
       spawned:
         - id: MaterialBananium1
@@ -269,6 +270,7 @@
           Blunt: -0.33
           Slash: -0.33
           Piercing: -0.33
+          Ballistic: -0.33
     - type: StaticPrice
       price: 3000
     - type: TileMovement

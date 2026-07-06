@@ -26,7 +26,8 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.4
+        Piercing: 0.6 # Trauma, was 0.4
+        Ballistic: 0.5 # Trauma
         Heat: 0.5
         Asphyxiation: 0.6 # Kinda their whole thing so why not
   - type: ModifyDelayedKnockdown # You can't have 20 cultists anymore, so this is kinda needed
@@ -122,6 +123,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5 # Trauma
         Heat: 0.5
         Radiation: 0.5
         Caustic: 0.5

@@ -62,6 +62,7 @@
         Blunt: -1
         Slash: -1
         Piercing: -1
+        Ballistic: -1
   - type: MeleeWeapon
     range: 0.75
     attackRate: 0.1

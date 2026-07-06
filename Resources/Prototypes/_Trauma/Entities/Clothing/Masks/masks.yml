@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseRevMajorContraband ]
+  parent: [ ClothingMaskGas, BaseRevMajorContraband, BaseClothingViewconeSmall ]
   id: ClothingMaskGasRev
   name: gas mask
   description: A reliable military-style gas mask.

@@ -17,6 +17,7 @@
         Blunt: -8
         Slash: -8
         Piercing: -8
+        Ballistic: -8
         Heat: -8
         Shock: -8
         Structural: -8
@@ -36,7 +37,7 @@
     onlyCollideWhenShot: true
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
       armorPenetration: -1.75 # Very shitty against armor. Pro tip: target unarmored body parts
   - type: Fixtures
     fixtures:
@@ -87,7 +88,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
       armorPenetration: 0.65
   - type: ProjectileDamageWhitelist
     damage: # Slightly worse for repairs
