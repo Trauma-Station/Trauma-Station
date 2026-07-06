@@ -24,7 +24,7 @@
     BolaEnergy: 5 # was Bola: 6
     PepperSpray: 3
     SkillChipBludgeon: 2
-    SkillChipShortblade: 2
+    SkillChipShortBlade: 2
     SkillChipPolearm: 2
     SkillChipNonLethal: 2
     SkillChipPistol: 2
@@ -32,7 +32,7 @@
     SkillChipShotgun: 2
     SkillChipLaser: 2
     SkillChipMarksmanship: 2
-    SkillChipLongblade: 2
+    SkillChipLongBlade: 2
     SkillChipUnarmed: 2
     SecHypo: 2
     CartridgeEpinephrine: 2

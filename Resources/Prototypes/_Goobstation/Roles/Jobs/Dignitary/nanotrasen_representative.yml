@@ -40,7 +40,7 @@
   - !type:OrganChipsSpecial
     chips:
     - SkillChipEchelonEducation
-    - SkillChipLongblade
+    - SkillChipLongBlade
     - SkillChipLaser
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

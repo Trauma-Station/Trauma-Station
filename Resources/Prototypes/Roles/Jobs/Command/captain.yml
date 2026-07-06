@@ -34,7 +34,7 @@
     chips:
     - SkillChipEchelonEducation
     - SkillChipLaser
-    - SkillChipLongblade
+    - SkillChipLongBlade
   # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

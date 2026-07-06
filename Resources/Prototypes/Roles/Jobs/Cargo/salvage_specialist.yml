@@ -24,7 +24,7 @@
     chips:
     - SkillChipCombatEducation
     - SkillChipMining
-    - SkillChipShortblade
+    - SkillChipShortBlade
   - !type:AddObjectiveSpecial
     objectives:
     - SalvageMineObjective

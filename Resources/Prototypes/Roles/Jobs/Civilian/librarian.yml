@@ -14,7 +14,7 @@
   - !type:OrganChipsSpecial
     chips:
     - SkillChipLibrarian
-    - SkillChipLongblade
+    - SkillChipLongBlade
   # </Trauma>
 
 - type: startingGear

@@ -94,7 +94,7 @@
 
 - type: entity
   parent: BaseSkillChipAPTR
-  id: SkillChipShortblade
+  id: SkillChipShortBlade
   name: APTR-Chip (Short Blade Training)
   components:
   - type: KnowledgeGrantOnWear
@@ -103,7 +103,7 @@
 
 - type: entity
   parent: BaseSkillChipAPTR
-  id: SkillChipLongblade
+  id: SkillChipLongBlade
   name: APTR-Chip (Long Blade Training)
   components:
   - type: KnowledgeGrantOnWear
