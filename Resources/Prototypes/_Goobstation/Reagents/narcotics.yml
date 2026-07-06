@@ -99,11 +99,12 @@
   meltingPoint: 36.0
   metabolisms:
     Bloodstream:
+      metabolismRate: 10 # Trauma
       effects:
       - !type:ModifyStatusEffect
         effectProto: StatusEffectBlindness
         type: Add
-        time: 3
+        time: 10
 
 - type: reagent
   id: Amnestizine

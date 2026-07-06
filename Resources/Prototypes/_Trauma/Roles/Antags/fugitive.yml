@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Hunters
-  # SpacePol
+  # SyndiePol
 - type: startingGear
-  id: HunterAntagGear
+  id: HunterAntagGearSpacepol
   equipment:
     head: ClothingHeadHelmetSwat # maybe keep justice for shits and giggles?
     eyes: ClothingEyesGlassesSecurity
@@ -27,11 +27,11 @@
     - MedkitCombatFilled
 
 - type: antagSpecifier
-  id: FugitiveHunter
-  spawnerPrototype: SpawnPointGhostRoleHunter
-  startingGear: HunterAntagGear
+  id: FugitiveHunterSyndicate
+  spawnerPrototype: SpawnPointGhostRoleHunterSyndicate
+  startingGear: HunterAntagGearSpacepol
   briefing:
-    text: hunter-role-greeting
+    text: hunter-syndicate-role-greeting
     color: red
   components:
   - type: NpcFactionMember
@@ -39,8 +39,24 @@
     - Syndicate
   - type: AutoImplant
     implants:
-    - FakeMindShieldImplant
     - DeathAcidifierImplant
+  - type: RandomMetadata
+  mindRoles:
+  - MindRoleGhostRoleHunter
+
+# Spacepol
+
+- type: antagSpecifier
+  id: FugitiveHunterSpacepol
+  spawnerPrototype: SpawnPointGhostRoleHunterSpacepol
+  startingGear: HunterAntagGearSpacepol
+  briefing:
+    text: hunter-spacepol-role-greeting
+    color: red
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Nanotrasen
   - type: RandomMetadata
   mindRoles:
   - MindRoleGhostRoleHunter
@@ -62,6 +78,7 @@
     belt:
     - BarberScissors
     - Telecrystal25
+    - BaseUplinkRadio
 
 - type: antagSpecifier
   id: Fugitive
@@ -74,9 +91,6 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
-  - type: AutoImplant
-    implants:
-    - UplinkImplant
   - type: RandomMetadata
   - type: EmitSoundOnSpawn # fell out of the ceiling
     sound: /Audio/Effects/clang.ogg

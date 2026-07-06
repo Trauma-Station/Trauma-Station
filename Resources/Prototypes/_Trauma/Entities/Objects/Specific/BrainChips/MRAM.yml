@@ -130,7 +130,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      ElectronicsKnowledge:: 50
+      ElectronicsKnowledge: 50
       FabricationKnowledge: 25
 
 - type: entity
@@ -226,8 +226,8 @@
     skills:
       LiteracyKnowledge: 100
       LanguageTauCetiBasic: 100
-      StrengthKnowledge: 25
-      ToughnessKnowledge: 25
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 28
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
       BotsKnowledge: 50
@@ -248,8 +248,8 @@
     skills:
       LiteracyKnowledge: 100
       LanguageTauCetiBasic: 100
-      StrengthKnowledge: 25
-      ToughnessKnowledge: 25
+      StrengthKnowledge: 50
+      ToughnessKnowledge: 28
       KnowledgeWeaponsBludgeon: 28 # Telebatong
       DoorsKnowledge: 50
       AirlocksKnowledge: 50

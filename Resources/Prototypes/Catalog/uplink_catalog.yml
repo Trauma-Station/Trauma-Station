@@ -1099,6 +1099,7 @@
     Telecrystal: 100 # Trauma - was 20, 5x
   categories:
   - UplinkDisruption
+  restockTime: 900
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:

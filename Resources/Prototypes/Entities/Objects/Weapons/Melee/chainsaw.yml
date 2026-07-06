@@ -27,12 +27,12 @@
     autoAttack: true
     angle: 0
     wideAnimationRotation: -135
-    attackRate: 4
+    attackRate: 10 # Trauma, was 4
     damage:
       types:
-        Slash: 2
-        Blunt: 2
-        Structural: 4
+        Slash: 1
+        # Blunt: 2
+        # Structural: 4
       woundSeverityMultipliers:
         Slash: 2
         Blunt: 2
@@ -43,8 +43,8 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 4
-        Structural: 4
+        Slash: 1 # Trauma, was 4
+        Structural: 10 # Trauma, was 4
   - type: Item
     size: Large
   # <Trauma>

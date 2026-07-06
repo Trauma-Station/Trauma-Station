@@ -86,8 +86,8 @@
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
-  id: SpawnPointGhostRoleHunter
-  name: fugitive hunter spawn
+  id: SpawnPointGhostRoleHunterSyndicate
+  name: fugitive hunter spawn (syndicate)
   components:
   - type: GhostRole
     name: ghost-role-information-hunter-name
@@ -103,6 +103,12 @@
       state: green
     - sprite: Clothing/Head/Helmets/justice.rsi
       state: icon
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: SpawnPointGhostRoleHunterSyndicate
+  id: SpawnPointGhostRoleHunterSpacepol
+  name: fugitive hunter spawn (spacepol)
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]

@@ -1,6 +1,7 @@
-fugitive-role-greeting = You are a Syndicate Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
+fugitive-role-greeting = You are an Escaped Convict. Your past has finally caught up to you, but you won't let it catch you. Not today.
 
-hunter-role-greeting = You are a Syndicate Recovery Agent disguised as a Space Police Officer. You have been tasked with catching the fugitives hiding out in this station. Do not get caught. Do not fail.
+hunter-syndicate-role-greeting = You are a Syndicate Recovery Agent disguised as a Space Police Officer. You have been tasked with catching the fugitives hiding out in this station. Do not get caught. Do not fail.
+hunter-spacepol-role-greeting = You are a Space Police Officer. You have been tasked with catching the fugatives hiding out in this station. The stations security forces might not coorperate with you. Keep violence to a minimum.
 
 fugitive-announcement-spacepol = SpacePol
 
