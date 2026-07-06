@@ -28,7 +28,6 @@
   id: KnowledgeWeaponsShortBlade
   name: Short Blade Training
   description: Using knives and other small blades effectively needs quick and powerful stabs and cuts.
-  components:
 
 - type: entity
   parent: BaseKnowledgeWeaponsMelee
