@@ -8,7 +8,6 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 0
-    FabricationKnowledge: 0 # billions must honk
   practical:
     FabricationKnowledge: 1
   # </Trauma>
@@ -23,7 +22,6 @@
   # <Trauma>
   theory:
     FabricationKnowledge: 0
-    FabricationKnowledge: 0 # billions must ...
   practical:
     FabricationKnowledge: 1
   # </Trauma>
