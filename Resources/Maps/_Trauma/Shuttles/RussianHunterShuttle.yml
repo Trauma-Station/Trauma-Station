@@ -4,8 +4,8 @@ meta:
   engineVersion: 278.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/06/2026 18:23:22
-  entityCount: 249
+  time: 07/06/2026 23:20:45
+  entityCount: 250
 maps: []
 grids:
 - 1
@@ -835,6 +835,14 @@ entities:
     - type: Transform
       pos: 1.5,11.5
       parent: 1
+- proto: Gyroscope
+  entities:
+  - uid: 250
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -3.5,3.5
+      parent: 1
 - proto: LockerSteel
   entities:
   - uid: 138
@@ -1162,7 +1170,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.5,5.5
       parent: 1
-- proto: SpawnPointGhostRoleHunterRussian
+- proto: SpawnPointNukies
   entities:
   - uid: 137
     components:
@@ -1177,12 +1185,12 @@ entities:
   - uid: 248
     components:
     - type: Transform
-      pos: 1.5,5.5
+      pos: -0.5,1.5
       parent: 1
   - uid: 249
     components:
     - type: Transform
-      pos: -0.5,1.5
+      pos: 1.5,5.5
       parent: 1
 - proto: SubstationBasic
   entities:
