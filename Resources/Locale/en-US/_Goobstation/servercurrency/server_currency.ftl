@@ -6,8 +6,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Trauma - changed all Goob Coin to Evil Coin
-server-currency-name-singular = Evil Coin
-server-currency-name-plural = Evil Coins
+# RonStation - changed all Evil Coin to RonCoin
+server-currency-name-singular = RonCoin
+server-currency-name-plural = RonCoins
 
 ## Commands
 
@@ -65,9 +66,9 @@ gs-balanceui-shop-footer = ⚠ Ahelp to use your token. Only 1 use per day.
 gs-balanceui-shop-token-label = Tokens
 gs-balanceui-shop-tittle-label = Titles
 
-gs-balanceui-shop-buy-token-antag = Buy an Antag Token - {$price} Evil Coins
-gs-balanceui-shop-buy-token-admin-abuse = Buy an Admin Abuse Token - {$price} Evil Coins
-gs-balanceui-shop-buy-token-hat = Buy a Hat Token - {$price} Evil Coins
+gs-balanceui-shop-buy-token-antag = Buy an Antag Token - {$price} RoinCoins
+gs-balanceui-shop-buy-token-admin-abuse = Buy an Admin Abuse Token - {$price} RonCoins
+gs-balanceui-shop-buy-token-hat = Buy a Hat Token - {$price} RonCoins
 
 gs-balanceui-shop-token-antag = High Tier Antag Token
 gs-balanceui-shop-token-admin-abuse = Admin Abuse Token
