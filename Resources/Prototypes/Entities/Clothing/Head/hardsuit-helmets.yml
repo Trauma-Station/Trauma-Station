@@ -1273,6 +1273,5 @@
       coefficients:
         Blunt: 0.85
         Slash: 0.9
-
-        : 0.85
+        Piercing: 0.85
         Caustic: 0.8
