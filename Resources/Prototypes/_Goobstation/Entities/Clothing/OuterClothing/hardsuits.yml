@@ -31,6 +31,7 @@
         Blunt: 0.01
         Slash: 0.01
         Piercing: 0.01
+        Ballistic: 0.01
         Heat: 0.01
         Cold: 0.01
         Shock: 0.01
@@ -126,6 +127,7 @@
         Blunt: 0.1
         Slash: 0.1 # holy shit bruv
         Piercing: 0.1
+        Ballistic: 0.1
         Heat: 0.1
         Radiation: 0.25 # do people even know rad ammo exists? anyway making rad its weakness is kinda fair
         Caustic: 0.4
@@ -180,10 +182,11 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.8
         Radiation: 0.6
       flatReductions: # This is done so shotguns are worse against armor
-        Piercing: 2
+        Ballistic: 2
   - type: ClothingSpeedModifier
     sprintModifier: 0.85
     walkModifier: 0.85
@@ -246,7 +249,8 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.75
+        Piercing: 0.8
+        Ballistic: 0.75
         Heat: 0.8
         Radiation: 0.7
         Caustic: 0.7

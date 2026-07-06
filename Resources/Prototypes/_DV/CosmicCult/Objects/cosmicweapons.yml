@@ -80,8 +80,8 @@
     attackRate: 0.6
     damage:
       types:
-        Piercing: 18
-        Asphyxiation: 6
+        Piercing: 12
+        Asphyxiation: 10
         Ion: 15
     animationRotation: 225
     wideAnimationRotation: 225
@@ -124,7 +124,6 @@
     damage:
       types:
         Piercing: 10
-        Asphyxiation: 5
   - type: Item
     size: Large
     shape:
@@ -179,6 +178,7 @@
         Blunt: -20
         Slash: -20
         Piercing: -20
+        Ballistic: -20
         Heat: -20
         Cold: -20
         Shock: -20

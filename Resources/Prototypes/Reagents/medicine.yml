@@ -1154,6 +1154,7 @@
         damage:
           types:
             Piercing: -2.5 # 10 per u
+            Ballistic: -2.5 # 10 per u # Trauma
             Radiation: 0.05 # 0.2 per u, 3 for 15u
       - !type:HealthChange
         conditions:

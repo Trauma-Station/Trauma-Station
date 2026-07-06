@@ -48,7 +48,8 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: Nitrogen
-        Quantity: 100
+        Quantity: 50
+    bleedReductionAmount: 1
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
@@ -103,6 +104,8 @@
         Blunt: -0.16
         Slash: -0.16
         Piercing: -0.16
+        Ballistic: -0.16
+        Radiation: -0.16
         Heat: -0.13
         Cold: -0.13
         Shock: -0.13

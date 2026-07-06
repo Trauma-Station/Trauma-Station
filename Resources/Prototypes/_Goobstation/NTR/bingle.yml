@@ -89,6 +89,8 @@
         Blunt: -0.17
         Slash: -0.17
         Piercing: -0.17
+        Ballistic: -0.17
+        Radiation: -0.17
         Heat: -0.13
         Cold: -0.13
         Shock: -0.13

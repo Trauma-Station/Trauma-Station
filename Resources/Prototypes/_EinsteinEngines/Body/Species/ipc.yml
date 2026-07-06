@@ -205,9 +205,10 @@
     selfRepairPenalty: 2.0
     damage:
       types:
-        Blunt: -15
-        Piercing: -15
-        Slash: -15
+        Blunt: -10
+        Piercing: -10
+        Slash: -10
+        Ballistic: -10
   - type: DamagedSiliconAccent
     enableChargeCorruption: false
   - type: Uncloneable # it a fucking robot

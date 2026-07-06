@@ -42,11 +42,12 @@
       coefficients:
         Blunt: 0.5 # Trauma, was 0.7
         Slash: 0.5 # Trauma, was 0.7
-        Piercing: 0.1 # Trauma, was 0.7
+        Piercing: 0.5 # Trauma, was 0.7
+        Ballistic: 0.1 # Trauma
         Heat: 0.5 # Trauma, was 0.7
       # <Trauma> - This is done so shotguns are worse against armor
       flatReductions:
-        Piercing: 3.5
+        Ballistic: 3.5
       # </Trauma>
   - type: Tag
     tags:
@@ -117,10 +118,11 @@
         Blunt: 0.35
         Slash: 0.35
         Piercing: 0.35
+        Ballistic: 0.35 # Trauma
         Heat: 0.35
       # <Trauma> - This is done so shotguns are worse against armor
       flatReductions:
-        Piercing: 3.5
+        Ballistic: 3.5
       # </Trauma>
         # Radiation: 0.75 # Trauma
         # Caustic: 0.75 # Trauma
@@ -168,7 +170,7 @@
       coefficients:
         Blunt: 0.1 # Trauma, was 0.35
         Slash: 0.1 # Trauma, was 0.35
-        Piercing: 0.8
+        Piercing: 0.1 # Trauma, was 0.8
   #- type: HideLayerClothing  #Goobstation
   #  layers:
   #    Hair: HEAD
@@ -239,6 +241,7 @@
         Slash: 0.45
         Piercing: 0.45
         Heat: 0.45
+        Ballistic: 0.45 # Trauma
   #- type: HideLayerClothing  #Goobstation
   #  layers:
   #    Hair: HEAD
@@ -330,6 +333,7 @@
         Slash: 0.45
         Piercing: 0.45
         Heat: 0.45
+        Ballistic: 0.45 # Trauma
   - type: FaceHuggerBlocker # Goobstation
   #- type: HideLayerClothing  #Goobstation
   #  layers:
@@ -443,6 +447,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5 # Trauma
         Heat: 0.5
         Caustic: 0.5
   - type: FaceHuggerBlocker # Goobstation
@@ -552,8 +557,13 @@
         Blunt: 0.35
         Slash: 0.35
         Piercing: 0.35
+        Ballistic: 0.35 # Trauma
         Heat: 0.35
         Caustic: 0.35
+    # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3.5
+    # </Trauma>
   - type: FaceHuggerBlocker # Trauma
  # - type: HideLayerClothing  #Goobstation
  #   layers:

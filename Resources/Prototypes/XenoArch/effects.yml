@@ -1331,6 +1331,7 @@
         Heat: -1000
         Cold: -1000
         Shock: -1000
+        Ballistic: -1000 # Trauma
 
 - type: entity
   abstract: true # Trauma

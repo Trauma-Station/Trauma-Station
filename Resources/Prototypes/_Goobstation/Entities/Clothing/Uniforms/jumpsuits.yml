@@ -161,7 +161,8 @@
       coefficients:
         Blunt: 0.65
         Slash: 0.65
-        Piercing: 0.60
+        Piercing: 0.65
+        Ballistic: 0.6
         Heat: 0.65
 
 - type: entity
@@ -185,7 +186,8 @@
       coefficients:
         Blunt: 0.60
         Slash: 0.60
-        Piercing: 0.55
+        Piercing: 0.6
+        Ballistic: 0.55
         Heat: 0.60
 
 - type: entity
@@ -209,7 +211,8 @@
       coefficients:
         Blunt: 0.65
         Slash: 0.65
-        Piercing: 0.60
+        Piercing: 0.65
+        Ballistic: 0.6
         Heat: 0.65
 
 - type: entity
@@ -239,7 +242,8 @@
       coefficients:
         Blunt: 0.75
         Slash: 0.75
-        Piercing: 0.70
+        Piercing: 0.75
+        Ballistic: 0.7
         Heat: 0.75
 
 - type: entity

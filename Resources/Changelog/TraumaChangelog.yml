@@ -11248,3 +11248,10 @@ Entries:
   id: 1243
   time: '2026-07-06T00:15:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3436
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Pierce damage is now split into pierce and ballistic damage
+  id: 1244
+  time: '2026-07-06T02:15:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3450

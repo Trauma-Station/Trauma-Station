@@ -24,9 +24,10 @@
         Blunt: 0.70
         Slash: 0.70
         Piercing: 0.70
+        Ballistic: 0.70
         Heat: 0.70
       flatReductions: # This is done so shotguns are worse against armor
-        Piercing: 3
+        Ballistic: 3
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitCombatStandard
@@ -61,9 +62,10 @@
         Blunt: 0.85
         Slash: 0.85
         Piercing: 0.85
+        Ballistic: 0.85
         Heat: 0.85
       flatReductions: # This is done so shotguns are worse against armor
-        Piercing: 3
+        Ballistic: 3
 
 # Riot Combat Hardsuits
 - type: entity
@@ -86,6 +88,7 @@
         Blunt: 0.65
         Slash: 0.65
         Piercing: 0.65
+        Ballistic: 0.65
         Heat: 0.65
       flatReductions: # This is done so shotguns are worse against armor
-        Piercing: 3
+        Ballistic: 3

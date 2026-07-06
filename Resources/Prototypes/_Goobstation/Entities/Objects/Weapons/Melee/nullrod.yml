@@ -164,6 +164,7 @@
         Blunt: -7.5
         Slash: -7.5
         Piercing: -7.5
+        Ballistic: -7.5
         Heat: -7.5
         Cold: -7.5
         Shock: -7.5
@@ -362,12 +363,14 @@
         Blunt: 1
         Slash: 1
         Piercing: 1
+        Ballistic: 1
         Heat: 1
     activeBlockModifier:
       coefficients:
         Blunt: 1
         Slash: 1
         Piercing: 1
+        Ballistic: 1
         Heat: 1
   - type: Tag
     tags:
