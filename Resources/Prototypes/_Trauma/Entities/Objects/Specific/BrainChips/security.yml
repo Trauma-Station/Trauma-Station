@@ -1,7 +1,29 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseSkillChip
+  abstract: true
+  parent: [ BaseSkillChip, BaseSecurityContraband ]
+  id: BaseSkillChipSecurity
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      MeleeKnowledge: 25
+      ShootingKnowledge: 25
+      # NT basic training
+      # batoong and laser focused, with some alt weapons, the rest is just to be better than tiders
+      KnowledgeWeaponsNonLethal: 40
+      KnowledgeWeaponsLaser: 40
+      KnowledgeWeaponsBludgeon: 30
+      KnowledgeWeaponsKnife: 30
+      KnowledgeWeaponsRifle: 25
+      KnowledgeWeaponsShotgun: 25
+      KnowledgeWeaponsSniper: 25
+      KnowledgeWeaponsSword: 20
+      KnowledgeWeaponsPolearm: 20
+      KnowledgeWeaponsHeavy: 20
+
+- type: entity
+  parent: BaseSkillChipSecurity
   id: SkillChipHeadOfSecurity
   name: skill chip (HOS)
   components:
@@ -9,9 +31,11 @@
     skills:
       MeleeKnowledge: 60
       ShootingKnowledge: 60
+      KnowledgeWeaponsNonLethal: 60
+      KnowledgeWeaponsRifle: 40
 
 - type: entity
-  parent: BaseSkillChip
+  parent: BaseSkillChipSecurity
   id: SkillChipBrigmedic
   name: skill chip (brigmedic)
   components:
@@ -19,21 +43,21 @@
     skills:
       FirstAidKnowledge: 50
       SurgeryKnowledge: 25
-      ShootingKnowledge: 25
+      KnowledgeWeaponsNonLethal: 5 # actual self defence only chud
 
 - type: entity
-  parent: BaseSkillChip
+  parent: BaseSkillChipSecurity
   id: SkillChipDetective
   name: skill chip (detective)
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 25
-      ShootingKnowledge: 50
+      KnowledgeWeaponsPistol: 50 # Six shots. I've got six shots.
+      KnowledgeWeaponsNonLethal: 20 # discourage det actively arresting people
       # TODO: something for detecting
 
 - type: entity
-  parent: BaseSkillChip
+  parent: BaseSkillChipSecurity
   id: SkillChipSecurityCadet
   name: skill chip (cadet)
   components:
@@ -41,27 +65,26 @@
     skills:
       MeleeKnowledge: 20
       ShootingKnowledge: 20
+      KnowledgeWeaponsNonLethal: 20 # anti raider tech
     # TODO: xp gain boost
 
 - type: entity
-  parent: BaseSkillChip
+  parent: BaseSkillChipSecurity
   id: SkillChipSecurityOfficer
   name: skill chip (security)
-  components:
-  - type: KnowledgeGrantOnWear
-    skills:
-      MeleeKnowledge: 25
-      ShootingKnowledge: 25
 
 - type: entity
-  parent: BaseSkillChip
+  parent: BaseSkillChipSecurity
   id: SkillChipWarden
   name: skill chip (warden)
   components:
+  # TODO: area DRM
   - type: KnowledgeGrantOnWear
     skills:
       MeleeKnowledge: 50
       ShootingKnowledge: 50
       WeaponsKnowledge: 50
+      KnowledgeWeaponsShotgun: 50 # the shotgun doesn't miss
+      KnowledgeWeaponsHeavy: 30 # only sec member that should be decent with a rocket launcher
       FirstAidKnowledge: 25 # Brigmedic isn't real
       SurgeryKnowledge: 20

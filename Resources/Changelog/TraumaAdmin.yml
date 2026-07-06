@@ -239,3 +239,10 @@ Entries:
   id: 31
   time: '2026-07-01T13:10:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3390
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: CC fax alert shows the player and fax used.
+  id: 32
+  time: '2026-07-06T00:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3448

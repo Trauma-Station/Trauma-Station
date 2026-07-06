@@ -201,7 +201,6 @@
     - type: ModifyKnowledgeGrant
       skills:
         FabricationKnowledge: 60
-        MaterialsKnowledge: 60
         DoorsKnowledge: 60
         AirlocksKnowledge: 60
         FurnitureKnowledge: 60

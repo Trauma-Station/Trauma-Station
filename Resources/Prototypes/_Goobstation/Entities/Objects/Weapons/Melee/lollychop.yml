@@ -6,6 +6,8 @@
   id: LollyChop
   description: Fill (split) your buddies' tummies (skulls) with this delicious candy (cold steel).
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Tag
     tags:
     - FireAxe

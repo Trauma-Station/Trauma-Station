@@ -49,8 +49,10 @@
   - type: Tackler
   - type: CounterAttacker
   - type: KnowledgeHolder
-  - type: VampireDrainable
   - type: PressureTracker # avoid initial mispredict with PKAs and stuff, might be used by other stuff in the future too
+  - type: WeaponClass
+    class: Unarmed
+    examinable: false
   # </Trauma>
   # Shitmed - woundable visuals used instead
   #- type: DamageVisuals
@@ -228,6 +230,7 @@
     - Viral
     - Bacterial
     - Parasite
+  - type: VampireDrainable
   # </Trauma>
   - type: Hunger
   - type: Thirst

@@ -24,11 +24,6 @@
 # Blueprints
 
 - type: latheRecipe
-  id: BookMaterials
-  parent: BaseBluePrintRecipe
-  result: BookMaterials
-
-- type: latheRecipe
   id: BookDoors
   parent: BaseBluePrintRecipe
   result: BookDoors

@@ -1,0 +1,166 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: listing
+  id: UplinkCrateSydicateCombatSkillChips
+  name: uplink-skill-chip-combat--name
+  description: uplink-skill-chip-weapons-melee-desc
+  productEntity: CrateSydicateCombatSkillChips
+  cost:
+    Telecrystal: 45
+  categories:
+  - UplinkSkills
+  # useless with no army and takes too much TC
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+# parametric prototypes when...
+
+## Melee ##
+
+- type: listing
+  id: UplinkSkillChipUnarmed
+  name: uplink-skill-chip-weapons-unarmed-name
+  description: uplink-skill-chip-weapons-unarmed-desc
+  productEntity: SkillChipUnarmed
+  cost:
+    Telecrystal: 10
+  discountCategory: null # takes away from real sales + cheap enough anyway
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipBludgeon
+  name: uplink-skill-chip-weapons-bludgeon-name
+  description: uplink-skill-chip-weapons-bludgeon-desc
+  productEntity: SkillChipBludgeon
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipKnife
+  name: uplink-skill-chip-weapons-knife-name
+  description: uplink-skill-chip-weapons-knife-desc
+  productEntity: SkillChipKnife
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipSword
+  name: uplink-skill-chip-weapons-sword-name
+  description: uplink-skill-chip-weapons-sword-desc
+  productEntity: SkillChipSword
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipPolearm
+  name: uplink-skill-chip-weapons-polearm-name
+  description: uplink-skill-chip-weapons-polearm-desc
+  productEntity: SkillChipPolearm
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipNonLethal
+  name: uplink-skill-chip-weapons-non-lethal-name
+  description: uplink-skill-chip-weapons-non-lethal-desc
+  productEntity: SkillChipNonLethal
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipTool
+  name: uplink-skill-chip-weapons-tool-name
+  description: uplink-skill-chip-weapons-tool-desc
+  productEntity: SkillChipTool
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+## Ranged ##
+
+- type: listing
+  id: UplinkSkillChipPistol
+  name: uplink-skill-chip-weapons-pistol-name
+  description: uplink-skill-chip-weapons-pistol-desc
+  productEntity: SkillChipPistol
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipRifle
+  name: uplink-skill-chip-weapons-rifle-name
+  description: uplink-skill-chip-weapons-rifle-desc
+  productEntity: SkillChipRifle
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChip
+  name: uplink-skill-chip-weapons-shotgun-name
+  description: uplink-skill-chip-weapons-shotgun-desc
+  productEntity: SkillChipShotgun
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipSniper
+  name: uplink-skill-chip-weapons-sniper-name
+  description: uplink-skill-chip-weapons-sniper-desc
+  productEntity: SkillChipSniper
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipLaser
+  name: uplink-skill-chip-weapons-laser-name
+  description: uplink-skill-chip-weapons-laser-desc
+  productEntity: SkillChipLaser
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipHeavy
+  name: uplink-skill-chip-weapons-heavy-name
+  description: uplink-skill-chip-weapons-heavy-desc
+  productEntity: SkillChipHeavy
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills

@@ -59,7 +59,7 @@ public abstract partial class SharedPressureEfficiencyChangeSystem : EntitySyste
             return;
 
         localeKey += ent.Comp.ApplyWhenInRange ? "in-range-" : "out-range-";
-        localeKey += modifier > 1f ? "debuff" : "buff";
+        localeKey += modifier < 1f ? "debuff" : "buff";
 
         modifier = Math.Abs(modifier);
         var min = Math.Round(ent.Comp.LowerBound);

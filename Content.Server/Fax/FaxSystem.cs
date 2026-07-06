@@ -321,7 +321,11 @@ public sealed partial class FaxSystem : EntitySystem
                     args.Data.TryGetValue(FaxConstants.FaxPaperSenderFaxNameData, out string? senderFaxName);
 
                     var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false, senderFaxName);
-                    Receive(uid, printout, args.SenderAddress);
+                    // <Trauma>
+                    args.Data.TryGetValue("fax_data_sender", out EntityUid? sender);
+                    args.Data.TryGetValue("fax_data_user", out EntityUid? user); // hopefully nobody makes a custom packet sender...
+                    Receive(uid, printout, args.SenderAddress, component, user, sender); // pass component, user and sender
+                    // </Trauma>
 
                     break;
                 // Goobstation
@@ -597,7 +601,10 @@ public sealed partial class FaxSystem : EntitySystem
 
         var payload = new NetworkPayload()
         {
-            // Goobstation merge conflict landmine: if how faxes work is changed FaxSlipSystem.cs might become broken
+            // <Trauma>
+            { "fax_data_sender", uid },
+            { "fax_data_user", args.Actor },
+            // </Trauma>
             { DeviceNetworkConstants.Command, FaxConstants.FaxPrintCommand },
             { FaxConstants.FaxPaperNameData, nameMod?.BaseName ?? metadata.EntityName },
             { FaxConstants.FaxPaperLabelData, labelComponent?.CurrentLabel },
@@ -643,7 +650,8 @@ public sealed partial class FaxSystem : EntitySystem
     ///     If has parameter "notifyAdmins" also output a special message to admin chat.
     /// </summary>
     // Goobstation - make printout nullable
-    public void Receive(EntityUid uid, FaxPrintout? printout, string? fromAddress = null, FaxMachineComponent? component = null)
+    public void Receive(EntityUid uid, FaxPrintout? printout, string? fromAddress = null, FaxMachineComponent? component = null,
+        EntityUid? user = null, EntityUid? sender = null) // Trauma
     {
         if (!Resolve(uid, ref component))
             return;
@@ -655,7 +663,7 @@ public sealed partial class FaxSystem : EntitySystem
             _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
 
         if (component.NotifyAdmins)
-            NotifyAdmins(faxName);
+            NotifyAdmins(faxName, user, sender); // Trauma - pass user and sender
 
         if (printout != null) // Goobstation
             component.PrintingQueue.Enqueue(printout);
@@ -698,9 +706,15 @@ public sealed partial class FaxSystem : EntitySystem
         _adminLogger.Add(LogType.Action, LogImpact.Low, $"\"{component.FaxName}\" {ToPrettyString(uid):tool} printed {ToPrettyString(printed):subject}: {printout.Content}");
     }
 
-    private void NotifyAdmins(string faxName)
+    private void NotifyAdmins(string faxName,
+        EntityUid? user, EntityUid? sender) // Trauma
     {
-        _chat.SendAdminAnnouncement(Loc.GetString("fax-machine-chat-notify", ("fax", faxName)));
+        // <Trauma>
+        if (user == null || user == EntityUid.Invalid)
+            return; // don't spam notify if its automated
+        // replaced shitty loc string with real info
+        _chat.SendAdminAnnouncement($"Received new fax message from {ToPrettyString(user)} using fax '{faxName}' {ToPrettyString(sender)}");
+        // </Trauma>
 
         // Goobstation - Admin Notifications / Admin Notifications
         // _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));
