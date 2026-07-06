@@ -15,18 +15,18 @@
     added:
     - type: KnowledgeGrantOnWear
       skills:
-        LanguageRootSpeak: -1000
-        LanguageMoffic: -1000
-        LanguageDraconic: -1000
-        LanguageAzaziba: -1000
-        LanguageCalcic: -1000
-        LanguageBubblish: -1000
-        LanguageNewKinPidgin: -1000
-        LanguageXeeplian: -1000
-        LanguageElyran: -1000
-        LanguageFreespeak: -1000
-        LanguageNovuNederic: -1000
-        LanguageSolCommon: -1000
-        LanguageTauCetiBasic: -1000
-        LanguageTradeband: -1000
-        LanguageSpaceItalian: -1000
+        LanguageRootSpeak: -100
+        LanguageMoffic: -100
+        LanguageDraconic: -100
+        LanguageAzaziba: -100
+        LanguageCalcic: -100
+        LanguageBubblish: -100
+        LanguageNewKinPidgin: -100
+        LanguageXeeplian: -100
+        LanguageElyran: -100
+        LanguageFreespeak: -100
+        LanguageNovuNederic: -100
+        LanguageSolCommon: -100
+        LanguageTauCetiBasic: -100
+        LanguageTradeband: -100
+        LanguageSpaceItalian: -100

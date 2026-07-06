@@ -75,7 +75,7 @@
       - state: blade-equipped-BELT
         color: "#00FFFF"
   - type: ChangeTemperatureOnHit
-    heat: -1000000 # Low temperature also slows you down, so the change is lower than on lava katana
+    heat: -100000 # Low temperature also slows you down, so the change is lower than on lava katana
 
 - type: entity
   parent: [ LavalandBaseKatana, BaseMajorContraband ]

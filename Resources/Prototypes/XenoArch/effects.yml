@@ -1325,6 +1325,7 @@
       - MobState
     damage:
       types:
+<<<<<<< HEAD
         Blunt: -1000
         Piercing: -1000
         Slash: -1000
@@ -1332,6 +1333,14 @@
         Cold: -1000
         Shock: -1000
         Ballistic: -1000 # Trauma
+=======
+        Blunt: -100
+        Piercing: -100
+        Slash: -100
+        Heat: -100
+        Cold: -100
+        Shock: -100
+>>>>>>> parent of 3a6149e3dd (fat chud)
 
 - type: entity
   abstract: true # Trauma

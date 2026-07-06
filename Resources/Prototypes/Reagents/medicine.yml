@@ -545,7 +545,7 @@
         conditions:
         - !type:TemperatureCondition
           min: 293.15
-        amount: -100000
+        amount: -10000
       - !type:PopupMessage
         type: Local
         visualType: Medium

@@ -278,7 +278,7 @@
         conditions:
         - !type:TemperatureCondition
           min: 160.15 # not quite enough for cryo, but can speed it up if you wanna take the risk
-        amount: -100000
+        amount: -10000
       - !type:MovementSpeedModifier
         conditions:
         - !type:ReagentCondition

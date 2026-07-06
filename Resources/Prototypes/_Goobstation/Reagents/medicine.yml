@@ -221,7 +221,7 @@
         - !type:ReagentCondition
           reagent: Probital
           min: 20
-        amount: -1000 # power nap
+        amount: -100 # power nap
         immediate: true
       - !type:AdjustReagent
         reagent: Mitogen
@@ -647,7 +647,7 @@
         conditions:
         - !type:TemperatureCondition
           min: 293.15
-        amount: -10000
+        amount: -1000
       - !type:HealthChange
         damage:
           types:
@@ -990,7 +990,7 @@
         conditions:
         - !type:TemperatureCondition
           min: 160.15
-        amount: -100000
+        amount: -10000
   metabolisms:
     Bloodstream:
       effects:
@@ -1011,7 +1011,7 @@
         conditions:
         - !type:TemperatureCondition
           min: 160.15 # entire syringe lands you at -20 degrees celcius, not incredibly dangerous
-        amount: -100000
+        amount: -10000
       - !type:AdjustTemperature
         amount: -150
 
