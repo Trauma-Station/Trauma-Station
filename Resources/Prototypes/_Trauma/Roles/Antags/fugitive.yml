@@ -61,6 +61,51 @@
   mindRoles:
   - MindRoleGhostRoleHunter
 
+# Russians
+
+- type: startingGear
+  id: FugitiveHunterRussian
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    shoes: ClothingShoesBootsCombat
+    head: ClothingHeadHatUshanka
+    eyes: ClothingEyesGlassesSunglasses
+    mask: KnittedBalaclava
+    outerClothing: ClothingOuterCoatBomber
+    back: ClothingBackpackSatchelLeather
+    id: AgentIDCard
+    ears: ClothingHeadsetAltFreelancer
+    gloves: ClothingHandsGlovesCombat
+    neck: ClothingNeckBombCollarBroken
+    belt: ClothingBeltUtilityEngineering
+  storage:
+    back:
+    - Stunprod
+    - BarbHandcuffs
+    - ForensicScanner
+
+# Bounty Hunter
+
+- type: startingGear
+  id: FugitiveHunterBounty
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryContractor
+    shoes: ClothingShoesBootsCombatFilled
+    head: ClothingHeadHatCorpsoft
+    eyes: ClothingEyesThermalVisionGogglesSyndie
+    outerClothing: ClothingOuterCoatJacketLeather
+    back: ClothingBackpackRev
+    id: AgentIDCard
+    ears: ClothingHeadsetAltFreelancer
+    gloves: ClothingHandsGlovesCombat
+    belt: ClothingBeltSecurityWebbingFilled
+  storage:
+    back:
+    - Katana
+    - WeaponRevolverDeckard
+    - ForensicScanner
+    - FoodBurgerMcrib
+
 # Fugitives
   # Convict
 - type: startingGear
