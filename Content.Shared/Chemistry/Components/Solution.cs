@@ -38,6 +38,12 @@ namespace Content.Shared.Chemistry.Components
         [DataField("maxVol")]
         public FixedPoint2 MaxVolume { get; set; } = FixedPoint2.Zero;
 
+        /// <summary>
+        ///     If true, this solution has no capacity limit.
+        /// </summary>
+        [DataField]
+        public bool Unlimited { get; set; } = false;
+
         public float FillFraction => MaxVolume == 0 ? 1 : Volume.Float() / MaxVolume.Float();
 
         /// <summary>
