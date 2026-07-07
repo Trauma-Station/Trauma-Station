@@ -27,7 +27,7 @@
   name: uplink-snakesfang-name
   description: uplink-snakesfang-desc
   icon: { sprite: _Trauma/Objects/Weapons/Melee/snakesfang.rsi, state: icon }
-  productEntity: BriefcaseWeaponSnakesfangFilled
+  productEntity: ClothingBeltSheathSnakesfangFilled
   cost:
     Telecrystal: 25
   categories:

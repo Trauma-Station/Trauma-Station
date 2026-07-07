@@ -177,7 +177,3 @@
     containers:
       item:
       - Snakesfang
-  - type: Item
-    size: Ginormous
-    shape:
-    - 0,0,2,1

@@ -73,17 +73,17 @@
         - id: UndeterminedSelectorBoxingRiggedRadial
         - id: SkillChipUnarmed
 
-- type: entity
-  id: BriefcaseWeaponSnakesfangFilled
-  parent: BriefcaseWeaponSmall
-  name: secure snakesfang case
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ClothingBeltSheathSnakesfangFilled
-        - id: SkillChipLongBlade
+# - type: entity
+#   id: BriefcaseWeaponSnakesfangFilled
+#   parent: BriefcaseWeaponSmall
+#   name: secure snakesfang case
+#   components:
+#   - type: EntityTableContainerFill
+#     containers:
+#       storagebase: !type:AllSelector
+#         children:
+#         - id: ClothingBeltSheathSnakesfangFilled
+#         - id: SkillChipLongBlade
 
 - type: entity
   id: BriefcaseWeaponBetrayalKnifeFilled
