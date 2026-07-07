@@ -8,6 +8,7 @@
     organs:
       # Parts
       Torso: OrganHumanTorso
+      Head: OrganHumanHead
       # Organs
       Heart: OrganAnimalHeart
       Lungs: OrganCarpLungs
