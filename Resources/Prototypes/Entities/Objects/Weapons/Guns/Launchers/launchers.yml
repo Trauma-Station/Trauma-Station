@@ -5,6 +5,10 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Heavy
+  # </Trauma>
   - type: Sprite
   - type: Clothing
     sprite: Objects/Weapons/Guns/Launchers/china_lake.rsi

@@ -19,6 +19,7 @@
         Blunt: 0.35
         Slash: 0.35
         Piercing: 0.35
+        Ballistic: 0.35
         Heat: 0.35
         Caustic: 0.35
   - type: BreathMask
@@ -162,7 +163,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.9
+        Piercing: 0.5
   - type: Tag
     tags:
     - HidesHair

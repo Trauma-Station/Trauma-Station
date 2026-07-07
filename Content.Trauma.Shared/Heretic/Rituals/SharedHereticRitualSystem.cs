@@ -7,6 +7,7 @@ using Content.Shared.Examine;
 using Content.Shared.Gibbing;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
@@ -29,6 +30,7 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public abstract partial class SharedHereticRitualSystem : EntitySystem
 {
+    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -47,6 +49,8 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedHereticCurseSystem _curse = default!;
     [Dependency] private FleshGraspSystem _fleshGrasp = default!;
+    [Dependency] private SharedGhoulSystem _ghoul = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
@@ -127,6 +131,19 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         if (ent.Comp2.Limit > 0)
         {
             ent.Comp2.LimitedOutput = ent.Comp2.LimitedOutput.Where(Exists).ToList();
+            Dirty(ent, ent.Comp2);
+
+            // In case this is a ghoul creation ritual, we try to free up some space
+            var difference = ent.Comp2.LimitedOutput.Count + ent.Comp2.LimitGhoulCleanupIterations - ent.Comp2.Limit;
+            if (difference > 0)
+            {
+                for (var i = 0; i < difference; i++)
+                {
+                    if (!ent.Comp2.LimitedOutput.Any(x => _ghoul.TryKillAndDeconvertInactiveGhoul(x)))
+                        break;
+                }
+            }
+
             if (ent.Comp2.LimitedOutput.Count >= ent.Comp2.Limit)
             {
                 if (ent.Comp2.LimitReachedEffects is { } limitReachedEffects)

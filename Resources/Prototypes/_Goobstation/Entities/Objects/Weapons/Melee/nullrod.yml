@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity # Making a base item with allow for creating more variants easier. Probably.
+  abstract: true
   parent: BaseItem
   id: BaseNullrod
-  abstract: true
   components:
   - type: DivineIntervention
   - type: EffectsOnMeleeHit
@@ -34,6 +34,7 @@
   id: Nullrod
   description: The old classic. Does nothing special, really.
   components:
+  # no class, easy for any chap to use
   - type: MeleeWeapon
     heavyStaminaCost: 2.5
     attackRate: 1
@@ -58,6 +59,8 @@
   id: HolyClaymore
   description: A weapon fit for a crusade! A sword capable of stealing life from evil-doers.
   components:
+  - type: WeaponClass
+    class: Sword
   - type: Item
     size: Large
   - type: Nullrod
@@ -161,6 +164,7 @@
         Blunt: -7.5
         Slash: -7.5
         Piercing: -7.5
+        Ballistic: -7.5
         Heat: -7.5
         Cold: -7.5
         Shock: -7.5
@@ -178,6 +182,8 @@
   description: A holy, fiery gift from the gods. You won't drop this one.
   suffix: Unremoveable
   components:
+  - type: WeaponClass
+    class: Unarmed # it is your hand now
   - type: Item
     size: Ginormous
     sprite: _ShitChap/Objects/Weapons/Nullrod/godhand.rsi
@@ -226,6 +232,8 @@
   name: arrythmic knife
   description: They say fear is the true mind killer, but stabbing them in the head works too. Slows you down and speeds you up randomly.
   components:
+  - type: WeaponClass
+    class: Knife
   - type: Nullrod
     damageOnUntrainedUse:
       types:
@@ -268,6 +276,8 @@
   name: monk's staff
   description: A long, tall staff made of polished wood. Traditionally used in ancient old-Earth martial arts, now used to harass the clown.
   components:
+  - type: WeaponClass
+    class: Polearm # not enough staves for its own class, close enough
   - type: Nullrod
     damageOnUntrainedUse:
       types:
@@ -313,6 +323,8 @@
   id: Bulwark
   description: An absolutely enormous two handed shield, very difficult to use if not planted in place.
   components:
+  - type: WeaponClass
+    class: Bludgeon # kinda
   - type: Nullrod
     damageOnUntrainedUse:
       types: {}
@@ -322,7 +334,7 @@
     attackRate: 0.5
     damage:
       types:
-        Slash: 5
+        Blunt: 5
         Holy: 10
     soundHit:
       collection: MetalThud
@@ -351,12 +363,14 @@
         Blunt: 1
         Slash: 1
         Piercing: 1
+        Ballistic: 1
         Heat: 1
     activeBlockModifier:
       coefficients:
         Blunt: 1
         Slash: 1
         Piercing: 1
+        Ballistic: 1
         Heat: 1
   - type: Tag
     tags:
@@ -381,13 +395,14 @@
     parryExhaustionCost: 0.25
     parryMinSkill: 0
 
-
 - type: entity
   name: Honkmother's Maw
   parent: BaseNullrod
   id: HonkmotherMaw
   description: a-HEAD of you lies a path most hilarious.
   components:
+  - type: WeaponClass
+    class: Bludgeon
   - type: Item
     size: Huge
     sprite: _ShitChap/Objects/Weapons/Nullrod/honkmother.rsi
@@ -429,6 +444,8 @@
   description: The tide beckons.
   suffix: Unremoveable
   components:
+  - type: WeaponClass
+    class: Unarmed
   - type: PointLight
     radius: 4
     energy: 1
@@ -521,6 +538,8 @@
   description: And because it's fuckin' FUN! AHAHA! AHAHAHA! AHAH-AAAAAAAA-MEN!
   suffix: Unremoveable
   components:
+  - type: WeaponClass
+    class: Tool
   - type: Wieldable
     wieldSound: !type:SoundPathSpecifier
       path: /Audio/Weapons/chainsaw_pull.ogg
@@ -575,6 +594,8 @@
   id: WeaponPistolCasul
   description: The first of two huge pistols, capable of firing regenerating silver bullets. Incapable of firing without its sister gun.
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Nullrod
     damageOnUntrainedUse:
       types:
@@ -653,6 +674,7 @@
   id: BlessingOfTheReaper
   description: A special undroppable armblade nullrod, it's blessed by the dark gods.
   components:
+  # armblades have no class
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/blessing_reaper.rsi
     state: icon
@@ -675,6 +697,8 @@
   name: ancient spear
   description: An ancient spear made of brass, I mean gold, I mean bronze. It looks highly mechanical.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: Nullrod
     damageOnUntrainedUse:
       types:

@@ -533,9 +533,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         // <Trauma> - prevent shooting with 0,0 direction
         if (mapDirection == Vector2.Zero)
             return;
-        var recoilScale = GetRecoilScale(user, gun);
         var mapAngle = mapDirection.ToAngle();
-        var angle = GetRecoilAngle(Timing.CurTime, gun, mapDirection.ToAngle(), user, recoilScale); // Trauma - pass user
+        var angle = GetRecoilAngle(Timing.CurTime, gun, mapDirection.ToAngle(), user); // Trauma - pass user
         // </Trauma>
 
         userImpulse = true;
@@ -633,7 +632,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             // <Trauma>
             if (userImpulse)
-                Recoil(user, mapDirection, gun.Comp.CameraRecoilScalarModified * recoilScale);
+                Recoil(user, mapDirection, gun.Comp.CameraRecoilScalarModified);
             // </Trauma>
         }
 
@@ -654,7 +653,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             if (TryComp<ProjectileSpreadComponent>(ammoEnt, out var ammoSpreadComp))
             {
-                var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread);
+                var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread, user); // Trauma - pass user
                 RaiseLocalEvent(gun, ref spreadEvent);
 
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,

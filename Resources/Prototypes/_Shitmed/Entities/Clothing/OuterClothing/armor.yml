@@ -42,6 +42,7 @@
               Slash: 0.7
               Heat: 0.8
               Piercing: 0.7
+              Ballistic: 0.7
               Radiation: 0.1
               Caustic: 0.4
         - type: ExplosionResistance
@@ -75,10 +76,11 @@
               Slash: 0.5
               Heat: 0.5
               Piercing: 0.5
+              Ballistic: 0.5
               Radiation: 0.1
               Caustic: 0.4
             flatReductions: # This is done so shotguns are worse against armor
-              Piercing: 2
+              Ballistic: 2
         - type: StaminaResistance
           damageCoefficient: 0.5
         - type: ExplosionResistance

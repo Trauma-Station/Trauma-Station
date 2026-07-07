@@ -120,18 +120,16 @@
   # Goobstation
   - NanotrasenRepresentative
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipChaplain
+    - SkillChipRifle
+  # </Trauma>
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
     - type: CurseImmune # Goobstation - Wraith
-    # <Trauma>
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 50
-        ShootingKnowledge: 50
-        MagicalLiteracyKnowledge: 50
-        LiteracyKnowledge: 50
-    # </Trauma>
   - !type:AddImplantSpecial
      implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
 
@@ -222,30 +220,15 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
+  # <Trauma>
   - NanotrasenRepresentative
-  special: # Goobstation
+  special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  # <Trauma>
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          FabricationKnowledge: 50
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
-          MaterialsKnowledge: 50
-          DoorsKnowledge: 50
-          AirlocksKnowledge: 50
-          ToysKnowledge: 50
-          BotsKnowledge: 50
-          FurnitureKnowledge: 50
-          InfrastructureKnowledge: 50
-          ElectronicsKnowledge: 50
-          WallsKnowledge: 50
-          WindowsKnowledge: 50
-          SmokeablesKnowledge: 50
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipChiefEngineer
+    - SkillChipRifle
   # </Trauma>
 
 - type: startingGear
@@ -358,21 +341,15 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
+  # <Trauma>
   - NanotrasenRepresentative
-  special: # Goobstation
+  special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
-  # <Trauma>
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
-          StrengthKnowledge: 50
-          ToughnessKnowledge: 50
-          AthleticsKnowledge: 50
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipSecurityOfficer
+    - SkillChipRifle
   # </Trauma>
 
 - type: startingGear
@@ -544,20 +521,15 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
+  # <Trauma>
   - NanotrasenRepresentative
-  special: # Goobstation
+  special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  # <Trauma>
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
-          SurgeryKnowledge: 50
-          FirstAidKnowledge: 50
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipMedicalDoctor
+    - SkillChipRifle
   # </Trauma>
 
 - type: startingGear
@@ -658,19 +630,15 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
+  # <Trauma>
   - NanotrasenRepresentative
-  special: # Goobstation
+  special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm]
-  # <Trauma>
-  - !type:AddComponentSpecial
-    components:
-      - type: KnowledgeGrant
-        skills:
-          MeleeKnowledge: 50
-          ShootingKnowledge: 50
-          JanitorKnowledge: 50
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipJanitor
+    - SkillChipRifle
   # </Trauma>
 
 - type: startingGear

@@ -58,11 +58,14 @@ public sealed partial class KnowledgeProfileEditor : BoxContainer
         EnabledSkills.RemoveAllChildren();
         foreach (var (id, comp) in _knowledge.AllKnowledges)
         {
-            var name = _proto.Index(id).Name;
+            var proto = _proto.Index(id);
+            var name = proto.Name;
+            var desc = proto.Description;
             if (comp.Costs is not { } costs)
                 continue;
 
             var control = new SkillControl(name, costs);
+            control.ToolTip = desc;
             var racialBase = _parent.Profile.Mastery.GetValueOrDefault(id);
             var mastery = _profile.Mastery.GetValueOrDefault(id) + racialBase;
 

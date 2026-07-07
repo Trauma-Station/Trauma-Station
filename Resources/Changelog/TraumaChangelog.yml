@@ -11102,3 +11102,156 @@ Entries:
   id: 1239
   time: '2026-07-05T09:12:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3439
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: >-
+      Librarian now has their own caneblade style, with the old igniting
+      caneblade returning to being syndicate only.
+  id: 1240
+  time: '2026-07-05T22:18:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3355
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Bomb Collar Kit, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Syndicate Shuttle Crate, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Syndicate Shuttle Console Board, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Syndicate IFF Console Board, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Syndicate Kudzu Greande, you can buy it for 15 TC.
+  - type: Add
+    message: Added the S.L.A.Y.E.R Overcoat, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Syndicate Door Remote, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Sticky Explosive Grenade, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Syndicate Zombie Bundle, you can buy it for 200 TC.
+  - type: Add
+    message: Added the Chemical Utility Knife, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Gorlex Surgical Omnitool, you can buy it for 30 TC.
+  - type: Add
+    message: Added the Appraisal Tool Radio Jammer, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Silent Shoes, you can buy them for 10 TC.
+  - type: Add
+    message: Added the Mute Toxin Auto Injector, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Stealthy Miama Peel, you can buy it for 5 TC.
+  - type: Add
+    message: >-
+      Added the Network Configurator Signaler, you can find it by emagging a
+      Vendomat.
+  - type: Add
+    message: >-
+      Added the Hidden Storage Warning Cone, you can find it by emagging an
+      Engi-Vend.
+  - type: Add
+    message: >-
+      Added Magic and Holo dehydrated carp variants, you can buy them both for 7
+      TC each.
+  - type: Add
+    message: Added the Nukie Mouse, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Nukie Carp, you can buy it for 30 TC.
+  - type: Add
+    message: Added the Nukie Spider, you can buy it for 50 TC.
+  - type: Add
+    message: Added the Saboteur Borg, you can buy it for 300 TC.
+  - type: Add
+    message: Added the Medical Borg, you can buy it for 300 TC.
+  - type: Add
+    message: >-
+      Added Tranquiliser and Poison mags for the Cobra, you can buy them for 20
+      TC and 25 TC respectively.
+  - type: Add
+    message: Added the Observation Kit, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Handheld Records Tablet, you can buy it for 2 TC.
+  - type: Add
+    message: Added the Shrapnel Foam Grenade, you can buy it for 12 TC.
+  - type: Add
+    message: Added the Appraisal Tool Gun, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Sharp Foam Cutlass, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Chameleon Armored Vest, you can buy it for 25 TC.
+  - type: Add
+    message: Added 8 new Syndicate Cyborg Modules. These also include new items.
+  - type: Fix
+    message: Fixed Clown Spiders not being able to break windows.
+  - type: Fix
+    message: Fixed forged kunai not injecting chemicals.
+  - type: Fix
+    message: Fixed Syndicate Cyborgs not having skills.
+  - type: Fix
+    message: Fixed ALL bunny sprites not being centered for clothing.
+  - type: Tweak
+    message: Tweaked Syndicate Cyborg Chassis, 7 max modules, instead of 3.
+  - type: Tweak
+    message: Tweaked the starting modules of ALL Syndicate Cyborgs.
+  - type: Tweak
+    message: The Radio Jammer no longer jams the syndicate frequency.
+  - type: Tweak
+    message: Tweaked naming not being consistent across the uplink.
+  id: 1241
+  time: '2026-07-05T22:21:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3319
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Metal barricades no longer use walls knowledge as required theory skills.
+  id: 1242
+  time: '2026-07-06T00:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3448
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added 11 weapon classes which most weapons are now a part of, you can see
+      the class by examining them.
+  - type: Add
+    message: >-
+      Added skills for training with each weapon class, most can be used in the
+      character editor.
+  - type: Tweak
+    message: >-
+      Replaced melee skill with unarmed combat, it applies to punches and
+      hand-slot punching weapons like boxing gloves to make them stronger.
+  - type: Add
+    message: Added descriptions to skills, shown by hovering over them.
+  - type: Add
+    message: >-
+      Added skillchips for each weapon class to the uplink as well as a skill
+      chips surplus bundle.
+  - type: Add
+    message: >-
+      Most weapon class skillchips are in the sectech for officers to
+      specialize.
+  - type: Add
+    message: Added a mining weapons skillchip to the points vendor.
+  - type: Tweak
+    message: >-
+      Most jobs now have relevant weapon class training, e.g. bartender is good
+      with shotguns not general shooting.
+  - type: Tweak
+    message: You can now use 2 skillchips at once.
+  - type: Fix
+    message: Skillchips now get transferred by polymorphs like bananamen.
+  - type: Remove
+    message: Removed useless slop materials and science skills.
+  id: 1243
+  time: '2026-07-06T00:15:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3436
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Pierce damage is now split into pierce and ballistic damage
+  id: 1244
+  time: '2026-07-06T02:15:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3450

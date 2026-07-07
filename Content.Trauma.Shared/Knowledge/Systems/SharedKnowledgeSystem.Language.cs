@@ -67,7 +67,7 @@ public abstract partial class SharedKnowledgeSystem
     /// <summary>
     /// Get the corresponding knowledge entity prototype for a given language.
     /// </summary>
-    public EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
+    public override EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
     {
         var id = $"Language{lang}";
         DebugTools.Assert(_proto.HasIndex<EntityPrototype>(id), $"Language {lang} has no knowledge prototype!");
@@ -146,6 +146,8 @@ public abstract partial class SharedKnowledgeSystem
         var lang = args.Language;
         if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
         {
+            existing.Comp.LearnedLevel = Math.Max(26, existing.Comp.LearnedLevel);
+            Dirty(existing);
             UpdateEntityLanguages(ent);
             return;
         }

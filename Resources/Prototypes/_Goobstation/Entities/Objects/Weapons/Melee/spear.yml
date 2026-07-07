@@ -6,6 +6,8 @@
   name: Grey Tide
   description: Recovered from the aftermath of a revolt aboard Defense Outpost Theta Aegis, in which a seemingly endless tide of Assistants caused heavy casualties among Nanotrasen military forces.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: EmbeddableProjectile
     offset: -0.15,0.0
   - type: ThrowingAngle
@@ -44,7 +46,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 18
+        Piercing: 10
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -82,7 +84,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 6
+        Piercing: 14
   - type: UseDelay
   - type: Appearance
   - type: SolutionContainerVisuals

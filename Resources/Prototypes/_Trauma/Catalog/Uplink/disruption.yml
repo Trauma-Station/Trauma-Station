@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
-  id: AccessConfiguratorSyndicate
+  id: UplinkAccessConfiguratorSyndicate
   name: uplink-syndicate-access-config-name
   description: uplink-syndicate-access-config-desc
   productEntity: AccessConfiguratorSyndicate
@@ -9,6 +9,64 @@
     Telecrystal: 10
   categories:
   - UplinkDisruption
+
+- type: listing
+  id: UplinkSyndicateShuttleBoard
+  name: uplink-shuttle-board-name
+  description: uplink-shuttle-board-desc
+  productEntity: SyndicateShuttleConsoleCircuitboard
+  icon: { sprite: Objects/Misc/module.rsi, state: cpu_syndicate }
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkDisruption
+
+- type: listing
+  id: UplinkSyndicateShuttleBundle
+  name: uplink-shuttle-bundle-name
+  description: uplink-shuttle-bundle-desc
+  productEntity: CrateSyndicateShuttleBundle
+  icon: { sprite: Structures/Shuttles/thruster.rsi, state: base }
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkDisruption
+
+- type: listing
+  id: UplinkDoorRemoteSyndicate
+  name: uplink-syndicate-remote-name
+  description: uplink-syndicate-remote-desc
+  productEntity: DoorRemoteSyndicate
+  icon: { sprite: _Trauma/Objects/Devices/device_remote.rsi, state: icon }
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkDisruption
+
+- type: listing
+  id: UplinkComputerIFFSyndicateCircuitboard
+  name: uplink-shuttle-iff-name
+  description: uplink-shuttle-iff-desc
+  productEntity: ComputerIFFSyndicateCircuitboard
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkDisruption
+
+- type: listing
+  id: UplinkDisposableTurretNukie
+  name: uplink-disposable-turret-name
+  description: uplink-disposable-turret-desc
+  productEntity: ToolboxElectricalTurretFilled
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 # upstream removed it lol
 - type: listing
@@ -31,18 +89,3 @@
     blacklist:
       components:
       - SurplusBundle
-
-- type: listing
-  id: UplinkDisposableTurretNukie
-  name: uplink-disposable-turret-name
-  description: uplink-disposable-turret-desc
-  productEntity: ToolboxElectricalTurretFilled
-  cost:
-    Telecrystal: 40
-  categories:
-  - UplinkDisruption
-  conditions:
-  - !type:StoreWhitelistCondition
-   whitelist:
-     tags:
-     - NukeOpsUplink

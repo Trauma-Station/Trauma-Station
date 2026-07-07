@@ -13,6 +13,15 @@
       # Nukies are well-trained
       MeleeKnowledge: 50
       ShootingKnowledge: 50
+      KnowledgeWeaponsBludgeon: 50
+      KnowledgeWeaponsKnife: 50
+      KnowledgeWeaponsSword: 50
+      KnowledgeWeaponsPolearm: 20 # training wasnt focused on spear ops
+      KnowledgeWeaponsPistol: 50
+      KnowledgeWeaponsRifle: 50
+      KnowledgeWeaponsSniper: 50
+      KnowledgeWeaponsHeavy: 50
+      KnowledgeWeaponsLaser: 20 # better than tiders
       StrengthKnowledge: 50
       ToughnessKnowledge: 50
       AthleticsKnowledge: 50
@@ -25,38 +34,30 @@
       FabricationKnowledge: 25
 
 - type: entity
-  parent: BaseSkillChip
+  parent: SkillChipNukie
   id: SkillChipSyndieSoldierTeamLeader
   name: skill chip (syndicate leader)
   components:
-  - type: Cybernetics
-    disableChance: 0.01
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 50
-      ShootingKnowledge: 50
-      StrengthKnowledge: 50
-      ToughnessKnowledge: 50
-      AthleticsKnowledge: 50
-      FirstAidKnowledge: 25
       MartialArtCQC: 50
 
 - type: entity
-  parent: BaseSkillChip
+  parent: SkillChipNukie
   id: SkillChipSyndieSoldier
   name: skill chip (syndicate soldier)
   components:
   - type: Cybernetics
-    disableChance: 0.3
+    disableChance: 0.3 # budget cuts...
   - type: KnowledgeGrantOnWear
     skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-      AthleticsKnowledge: 26
-      FirstAidKnowledge: 25
-      MartialArtCQC: 26
+      # still trained with guns but not much else
+      MeleeKnowledge: 25
+      ShootingKnowledge: 25
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
+      AthleticsKnowledge: 25
+      MartialArtCQC: 25
 
 - type: entity
   parent: BaseSkillChip
@@ -69,6 +70,8 @@
     skills:
       MeleeKnowledge: 15
       ShootingKnowledge: 15
+      KnowledgeWeaponsKnife: 10
+      KnowledgeWeaponsPistol: 10
       StrengthKnowledge: 15
       ToughnessKnowledge: 15
       AthleticsKnowledge: 15
@@ -84,6 +87,10 @@
     skills:
       MeleeKnowledge: 50
       ShootingKnowledge: 35
+      KnowledgeWeaponsKnife: 20
+      KnowledgeWeaponsSword: 80 # yarr
+      KnowledgeWeaponsPistol: 50
+      KnowledgeWeaponsRifle: 50
       StrengthKnowledge: 35
       ToughnessKnowledge: 35
       AthleticsKnowledge: 35
@@ -100,6 +107,10 @@
     skills:
       MeleeKnowledge: 30
       ShootingKnowledge: 25
+      KnowledgeWeaponsKnife: 20
+      KnowledgeWeaponsSword: 40 # yarr
+      KnowledgeWeaponsPistol: 25
+      KnowledgeWeaponsRifle: 25
       StrengthKnowledge: 25
       ToughnessKnowledge: 25
       AthleticsKnowledge: 25
@@ -116,6 +127,8 @@
     skills:
       MeleeKnowledge: 20
       ShootingKnowledge: 20
+      KnowledgeWeaponsKnife: 10
+      KnowledgeWeaponsPistol: 10
       StrengthKnowledge: 20
       ToughnessKnowledge: 20
       AthleticsKnowledge: 20
@@ -131,6 +144,9 @@
     skills:
       MeleeKnowledge: 25
       ShootingKnowledge: 25
+      KnowledgeWeaponsBludgeon: 10
+      KnowledgeWeaponsKnife: 10
+      KnowledgeWeaponsRifle: 30
       StrengthKnowledge: 25
       ToughnessKnowledge: 25
       AthleticsKnowledge: 25

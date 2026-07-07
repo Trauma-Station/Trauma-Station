@@ -90,6 +90,8 @@ public sealed partial class HereticSystem : SharedHereticSystem
         SubscribeLocalEvent<HereticComponent, MindGotRemovedEvent>(OnMindRemoved);
         SubscribeLocalEvent<HereticComponent, MindGotAddedEvent>(OnMindAdded);
 
+        SubscribeLocalEvent<HereticBodyComponent, MindAddedMessage>(OnHereticBodyMindAdded);
+
         SubscribeLocalEvent<GetVisMaskEvent>(OnGetVisMask);
         SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
@@ -113,6 +115,11 @@ public sealed partial class HereticSystem : SharedHereticSystem
         {
             RaiseLocalEvent(minion, ref ev);
         }
+    }
+
+    private void OnHereticBodyMindAdded(Entity<HereticBodyComponent> ent, ref MindAddedMessage args)
+    {
+        RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
@@ -166,6 +173,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (TerminatingOrDeleted(args.Container) || !HasComp<MobStateComponent>(args.Container))
             return;
 
+        EnsureComp<HereticBodyComponent>(args.Container);
         SetMinionsMaster(ent, null);
         RaiseKnowledgeEvents(ent, args.Container, true);
     }

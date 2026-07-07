@@ -387,7 +387,7 @@
 
 - type: listing
   id: UplinkC4Bundle
-  name: uplink-c4-bundle-name
+  name: uplink-c4-bundle-name-trauma # Trauma - Added -trauma
   description: uplink-c4-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   cost:
@@ -417,7 +417,7 @@
 
 - type: listing
   id: UplinkExplodingPen
-  name: uplink-exploding-pen-name
+  name: uplink-exploding-pen-name-trauma # Trauma - Added -trauma
   description: uplink-exploding-pen-desc
   icon: { sprite: /Textures/Objects/Misc/pens.rsi, state: pen }
   productEntity: PenExplodingBox
@@ -503,7 +503,7 @@
 # For the C20R
 - type: listing
   id: UplinkMagazinePistolSubMachineGun
-  name: uplink-pistol-magazine-c20r-name
+  name: uplink-pistol-magazine-c20r-name-trauma # Trauma - Added -trauma
   description: uplink-pistol-magazine-c20r-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
   productEntity: MagazinePistolSubMachineGun
@@ -515,7 +515,7 @@
 # For the Bulldog
 - type: listing
   id: UplinkMagazineShotgunPellet
-  name: uplink-magazine-bulldog-pellet-name
+  name: uplink-magazine-bulldog-pellet-name-trauma # Trauma - Added -trauma
   description: uplink-magazine-bulldog-pellet-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
   productEntity: MagazineShotgun
@@ -533,7 +533,7 @@
 
 - type: listing
   id: UplinkMagazineShotgunSlug
-  name: uplink-magazine-bulldog-slug-name
+  name: uplink-magazine-bulldog-slug-name-trauma # Trauma - Added -trauma
   description: uplink-magazine-bulldog-slug-desc
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: slug }
   productEntity: MagazineShotgunSlug
@@ -564,7 +564,7 @@
 # For the mosin
 - type: listing
   id: UplinkMosinAmmo
-  name: uplink-mosin-ammo-name
+  name: uplink-mosin-ammo-name-trauma # Trauma - Added -trauma
   description: uplink-mosin-ammo-desc
   productEntity: MagazineBoxLightRifle
   cost:
@@ -575,7 +575,7 @@
 # For the Estoc
 - type: listing
   id: UplinkEstocAmmo
-  name: uplink-estoc-ammo-name
+  name: uplink-estoc-ammo-name-trauma # Trauma - Added -trauma
   description: uplink-estoc-ammo-desc
   productEntity: MagazineRifle
   cost:
@@ -593,7 +593,7 @@
 # for the hristov
 - type: listing
   id: UplinkHristovAmmo
-  name: uplink-sniper-ammo-name
+  name: uplink-sniper-ammo-name-trauma # Trauma - Added -trauma
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
@@ -657,15 +657,14 @@
   categories:
   - UplinkChemicals
 
-# Goobstaiton - Disable Zombie Kit
-#- type: listing
+#- type: listing Trauma - Pending zombie rework
 #  id: UplinkZombieBundle
 #  name: uplink-zombie-bundle-name
 #  description: uplink-zombie-bundle-desc
 #  icon: { sprite: /Textures/Structures/Wallmounts/signs.rsi, state: bio }
 #  productEntity: ClothingBackpackDuffelZombieBundle
 #  cost:
-#    Telecrystal: 200 # goob
+#    Telecrystal: 200 # Trauma - was 40, 5x
 #  categories:
 #  - UplinkChemicals
 #  conditions:
@@ -1152,7 +1151,7 @@
 
 - type: listing
   id: UplinkCameraBug
-  name: uplink-cameraBug-name
+  name: uplink-cameraBug-name-trauma # Trauma - Added -trauma
   description: uplink-cameraBug-desc
   productEntity: CameraBug
   cost:
@@ -1220,10 +1219,10 @@
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateCyborgAssault
-  name:  uplink-reinforcement-radio-cyborg-assault-name
+  name:  uplink-reinforcement-radio-cyborg-assault-name-trauma # Trauma - added -trauma
   description: uplink-reinforcement-radio-cyborg-assault-desc
   productEntity: ReinforcementRadioSyndicateCyborgAssault
-  icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-borg-assault }
+  icon: { sprite: _Trauma/Mobs/Silicon/synd_assault.rsi, state: icon } # Trauma - was sprite: Objects/Devices/communication.rsi, state: old-radio-borg-assault
   cost:
     Telecrystal: 375 # Trauma - was 65, 5x and more expensive due to how strong it is
   categories:
@@ -1240,7 +1239,7 @@
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestor
-  name: uplink-reinforcement-radio-ancestor-name
+  name: uplink-reinforcement-radio-ancestor-name-trauma # Trauma - added -trauma
   description: uplink-reinforcement-radio-ancestor-desc
   productEntity: ReinforcementRadioSyndicateAncestor
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
@@ -1258,7 +1257,7 @@
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestorNukeops # Version for Nukeops that spawns a syndicate monkey with the NukeOperative component.
-  name: uplink-reinforcement-radio-ancestor-name
+  name: uplink-reinforcement-radio-ancestor-name-trauma # Trauma - added -trauma
   description: uplink-reinforcement-radio-ancestor-desc
   productEntity: ReinforcementRadioSyndicateAncestorNukeops
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
@@ -1311,7 +1310,7 @@
 
 - type: listing
   id: UplinkSyndicatePersonalAI
-  name: uplink-syndicate-pai-name
+  name: uplink-syndicate-pai-name-trauma # Trauma - Added -trauma
   description: uplink-syndicate-pai-desc
   icon: { sprite: /Textures/Objects/Fun/pai.rsi, state: syndicate-icon-pai-off }
   productEntity: SyndicatePersonalAI
@@ -1577,7 +1576,7 @@
 
 - type: listing
   id: UplinkClothingNoSlipsShoes
-  name: uplink-clothing-no-slips-shoes-name
+  name: uplink-clothing-no-slips-shoes-name-trauma # Trauma - Added -trauma
   description: uplink-clothing-no-slips-shoes-desc
   productEntity: ClothingShoesChameleonNoSlips
   cost:
@@ -1620,7 +1619,7 @@
 
 - type: listing
   id: UplinkClothingShoesBootsMagSyndie
-  name: uplink-clothing-shoes-boots-mag-syndie-name
+  name: uplink-clothing-shoes-boots-mag-syndie-name-trauma # Trauma - Added -trauma
   description: uplink-clothing-shoes-boots-mag-syndie-desc
   productEntity: ClothingShoesBootsMagSyndie
   cost:
@@ -1902,7 +1901,7 @@
 
 - type: listing
   id: UplinkScarfSyndieRed
-  name: uplink-scarf-syndie-red-name
+  name: uplink-scarf-syndie-red-name-trauma # Trauma - Added -trauma
   description: uplink-scarf-syndie-red-desc
   productEntity: ClothingNeckScarfStripedSyndieRed
   categories:
@@ -1913,7 +1912,7 @@
 
 - type: listing
   id: UplinkScarfSyndieGreen
-  name: uplink-scarf-syndie-green-name
+  name: uplink-scarf-syndie-green-name-trauma # Trauma - Added -trauma
   description: uplink-scarf-syndie-green-desc
   productEntity: ClothingNeckScarfStripedSyndieGreen
   categories:

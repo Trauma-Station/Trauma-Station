@@ -16,7 +16,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 15
+        Ballistic: 15
         Structural: 25
 
 - type: entity
@@ -99,7 +99,7 @@
       damage:
         types:
           Radiation: 8
-          Piercing: 8
+          Ballistic: 8
 
 - type: entity
   id: HighCaliberPelletShotgunUraniumSpread
@@ -125,7 +125,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 65
+        Ballistic: 65
 
 - type: entity
   id: BulletSlugEnsnaring
@@ -141,7 +141,7 @@
     deleteOnCollide: false
     damage:
       types:
-        Piercing: 16 #Low damage, but ensnaring
+        Ballistic: 16 #Low damage, but ensnaring
   - type: Ensnaring
     canThrowTrigger: true
     destroyOnRemove: true
@@ -176,7 +176,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 12
+        Ballistic: 12
         Ion: 20
 
 - type: entity
@@ -204,7 +204,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Ballistic: 20
 
 - type: entity
   id: BulletSlugBeanbagHighCaliber
@@ -244,7 +244,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 15
+        Ballistic: 15
 
 # Heavy shotgun
 
@@ -261,7 +261,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 7
+        Ballistic: 7
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: HardBomb # Boom
@@ -310,7 +310,7 @@
     deleteOnCollide: false # ScatteringGrenade manages deletion
     damage:
       types:
-        Piercing: 30
+        Ballistic: 30
       armorPenetration: 0.5
   - type: StaminaDamageOnCollide
     damage: 40
@@ -341,7 +341,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 6 # Total 120 damage
+        Ballistic: 6 # Total 120 damage
 
 - type: entity
   id: HighCaliberPelletGrenadeSpread

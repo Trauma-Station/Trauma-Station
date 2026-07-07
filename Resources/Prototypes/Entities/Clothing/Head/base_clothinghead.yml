@@ -158,6 +158,15 @@
   name: base hardsuit helmet
   categories: [ HideSpawnMenu ]
   components:
+  # <Trauma>
+  - type: DiseaseProtection
+    incoming:
+      powerModifiers:
+        Aerial: -1
+      chanceMultipliers:
+        Aerial: 0
+  # </Trauma>
+
 # SlotBlocker blocked until UI change
 #  - type: SlotBlock
 #    slots: [ears, eyes, mask]

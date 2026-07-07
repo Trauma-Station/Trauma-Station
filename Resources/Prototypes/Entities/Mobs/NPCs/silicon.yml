@@ -109,6 +109,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic # Trauma
     - Heat
     - Shock
     locPrefix: silicon

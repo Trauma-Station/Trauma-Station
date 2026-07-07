@@ -190,6 +190,8 @@
   name: viltrumite prosthetic
   description: Stand ready for my arrival, worm.
   components:
+  - type: WeaponClass
+    class: Unarmed
   - type: Sprite
     sprite: _Goobstation/Clothing/Hands/Gloves/conquest.rsi
   - type: Clothing
@@ -238,6 +240,8 @@
   id: ClothingHandsKnuckleDustersBase
   abstract: true
   components:
+  - type: WeaponClass
+    class: Unarmed # still hitting people
   - type: Sprite
     sprite: _Goobstation/Clothing/Hands/Gloves/knuckleduster.rsi
     state: knuckleduster

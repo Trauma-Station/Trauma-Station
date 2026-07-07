@@ -2,23 +2,48 @@
 
 - type: entity
   parent: CrateSyndicate
-  id: CrateXenomorphBundle
-  suffix: Xenomorph Bundle
-  description: A crate containing all the tools and organs necessary to kickstart your army of biological terror!
+  id: CrateSydicateCombatSkillChips
+  name: combat skill chips crate
+  description: A sinister looking crate filled with the finest skill chips taken from a landfill.
   components:
-    - type: StorageFill
-      contents:
-      - id: OrganXenomorphEyes
-      - id: OrganXenomorphResinSpinner
-      - id: OrganXenomorphNeurotoxinGland
-      - id: OrganXenomorphAcidGland
-      - id: OrganXenomorphPlasmaVessel
-      - id: OrganXenomorphEggSack
-      - id: OrganXenomorphHiveNode
-      - id: OmnimedTool
-      - id: MonkeyCubeWrapped
-        amount: 3
-      - id: ClothingMaskGasSyndicate
-      - id: XenoTissueSample
-        amount: 3
-      - id: XenoCompatibilityImplanter
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:GroupSelector
+        rolls: 8
+        children:
+        - !type:GroupSelector
+          weight: 0.5 # melee is probably less desired for a raid squad
+          children:
+          - id: SkillChipUnarmed
+          - id: SkillChipBludgeon
+          - id: SkillChipKnife
+          - id: SkillChipSword
+          - id: SkillChipPolearm
+          - id: SkillChipNonLethal
+          - id: SkillChipTool
+        - !type:GroupSelector
+          children:
+          - id: SkillChipPistol
+          - id: SkillChipRifle
+          - id: SkillChipShotgun
+          - id: SkillChipSniper
+          - id: SkillChipLaser
+          - id: SkillChipHeavy
+
+- type: entity
+  parent: CrateSyndicate
+  id: CrateSyndicateShuttleBundle
+  name: shuttle bundle crate
+  description: The bare necessities for a shuttle.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: GyroscopeFlatpack
+        - id: ThrusterFlatpack
+          amount: 4
+        - id: WallmountSubstationElectronics
+        - id: APCElectronics
+        - id: WallmountGeneratorAPUElectronics
+          amount: 2

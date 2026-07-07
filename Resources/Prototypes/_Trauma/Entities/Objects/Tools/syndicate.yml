@@ -1,5 +1,40 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entity
+  parent: [ NetworkConfigurator, RemoteSignallerAdvanced ]
+  id: NetworkConfiguratorSignallerAdvanced
+  suffix: Signaller
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/network_configurator.rsi
+    layers:
+    - state: icon
+    - state: mode-link
+      map: ["enum.NetworkConfiguratorLayers.ModeLight"]
+      shader: unshaded
+    - state: signaller
+      sprite: Objects/Devices/signaller.rsi
+      visible: false
+    - state: advanced
+      sprite: Objects/Devices/signaller.rsi
+      visible: false
+    - state: advanced-inhand-left
+      sprite: Objects/Devices/signaller.rsi
+      visible: false
+    - state: advanced-inhand-right
+      sprite: Objects/Devices/signaller.rsi
+      visible: false
+  - type: Item
+    sprite: Objects/Tools/network_configurator.rsi
+    size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        sprite: Objects/Tools/network_configurator.rsi
+      right:
+      - state: inhand-right
+        sprite: Objects/Tools/network_configurator.rsi
+
 # - type: entity # Todo, add a way for this to be charge based
 #   name: flashlight
 #   parent: FlashlightLantern

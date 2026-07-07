@@ -6,7 +6,6 @@
   mastery:
     # Crafting Recipe Skills
     CookingKnowledge: 0
-    MaterialsKnowledge: 0
     DoorsKnowledge: 0
     AirlocksKnowledge: 0
     ToysKnowledge: 0
@@ -16,7 +15,6 @@
     InfrastructureKnowledge: 0
     ElectronicsKnowledge: 0
     WallsKnowledge: 0
-    ScienceKnowledge: 0
     WindowsKnowledge: 0
     SmokeablesKnowledge: 0
     # Intelectual Skills

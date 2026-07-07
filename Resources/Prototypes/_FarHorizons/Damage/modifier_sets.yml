@@ -6,10 +6,12 @@
     Piercing: 0.1       # gonna
     Shock: 0.2          # do
     Heat: 0.1           # shit
+    Ballistic: 0.1
     Structural: 0.25
   flatReductions:
     Blunt: 10
     Slash: 10
     Piercing: 10
+    Ballistic: 10
     Heat: 10
     Structural: 10

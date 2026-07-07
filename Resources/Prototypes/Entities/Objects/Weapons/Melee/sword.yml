@@ -6,6 +6,12 @@
   id: BaseSword
   abstract: true
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Sword
+  - type: CosmicTransmutable
+    transmuteTo: SwordCosmicCult
+  # </Trauma>
   - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
@@ -23,8 +29,6 @@
   - type: Tool
     qualities:
     - Slicing
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: SwordCosmicCult
 
 #Shortswords
 - type: entity
@@ -82,11 +86,11 @@
   id: CaptainSabre
   description: A ceremonial weapon belonging to the captain of the station.
   components:
-  # Goobstation edit start
+  # <Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
-  # Goobstation edit start
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/captain_sabre.rsi
   - type: MeleeWeapon
@@ -195,6 +199,15 @@
   id: Claymore
   description: An ancient war blade.
   components:
+  # <Trauma>
+  - type: Parry
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/claymore.rsi
   - type: MeleeWeapon
@@ -218,15 +231,6 @@
     - Back
     - SuitStorage #Bigger than the other swords, easier to strap to your suit.
   - type: DisarmMalus
-  # <Trauma>
-  - type: Parry
-    parryMinSkill: 40
-    soundOnParry:
-      path: /Audio/_Goobstation/Heretic/parry.ogg
-      params:
-        variation: 0.2
-        volume: -11
-  # </Trauma>
 
 #Other/Weird
 - type: entity

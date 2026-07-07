@@ -40,6 +40,7 @@
         Blunt: 0.1 # Best armor in the game - Yeah no shit.
         Slash: 0.1
         Piercing: 0.1
+        Ballistic: 0.1
         Heat: 0.1
         Cold: 0.1
         Cellular: 0.1

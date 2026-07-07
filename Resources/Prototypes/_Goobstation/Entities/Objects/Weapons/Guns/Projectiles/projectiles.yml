@@ -96,7 +96,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 35
+        Ballistic: 35
       armorPenetration: 0.5
     penetrationThreshold: 50
 
@@ -461,7 +461,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3
+        Ballistic: 3
         Holy: 4
 
 - type: entity
@@ -515,7 +515,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 1
+        Ballistic: 1
     angle: 315
   - type: Sprite
     sprite: Objects/Fun/Darts/dart_red.rsi
@@ -533,7 +533,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Ballistic: 20
   - type: EntityEffectOnTrigger
     targetUser: true # user is actually hit entity in this case
     effects:

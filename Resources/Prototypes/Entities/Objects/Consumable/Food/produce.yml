@@ -357,6 +357,7 @@
         Blunt: -50
         Slash: -50
         Piercing: -50
+        Ballistic: -50 # Trauma
         Heat: -10
         Shock: -10
     healingBeginSound:
