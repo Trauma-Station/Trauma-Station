@@ -730,6 +730,7 @@
   name: dart frog
   description: A brilliantly colored amphibian. Its skin secretes a potent paralytic toxin.
   components:
+  - type: ZombieImmune
   - type: Extractable
     grindableSolutionName: poison
   - type: VentCrawler

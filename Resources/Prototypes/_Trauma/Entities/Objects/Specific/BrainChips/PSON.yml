@@ -6,6 +6,7 @@
   - type: KnowledgeGrantOnWear
     skills:
       MagicalLiteracyKnowledge: -1000
+  - type: UnremoveableOrgan # Todo, make these work
 
 - type: entity
   parent: BaseSkillChipPSON
@@ -28,6 +29,7 @@
       KnowledgeWeaponsNonLethal: -1000
       KnowledgeWeaponsPolearm: -1000
       MeleeKnowledge: -1000
+  - type: UnremoveableOrgan
 
 - type: entity # Todo, add drooling marking when this gets used on you
   parent: BaseSkillChipPSON
