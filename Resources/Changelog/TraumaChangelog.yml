@@ -11114,6 +11114,8 @@ Entries:
 - author: TechnicFighter
   changes:
   - type: Add
+    message: Added the Syndicate Behonker, you can buy it for 100 TC.
+  - type: Add
     message: Added the Bomb Collar Kit, you can buy it for 20 TC.
   - type: Add
     message: Added the Syndicate Shuttle Crate, you can buy it for 10 TC.
