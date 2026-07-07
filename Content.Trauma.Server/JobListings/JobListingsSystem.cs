@@ -75,9 +75,7 @@ public sealed partial class JobListingsSystem : EntitySystem
     /// Assign the store owner a random side job.
     /// When the traitor is assigned their uplink, the traitor's mind becomes the store's owner.
     /// </summary>
-    /// <param name="jobBoard">The entity of the store and job board.</param>
-    /// <returns>True if successful, false if failure.</returns>
-    public bool AssignSideJob(Entity<JobListingsComponent> jobBoard)
+    public bool AssignSideJob(Entity<JobListingsComponent> jobBoard, int effectiveLevel)
     {
         if (jobBoard.Comp.Mind is null)
             return false;
@@ -86,9 +84,9 @@ public sealed partial class JobListingsSystem : EntitySystem
         if (!TryComp<MindComponent>(mind, out var mindComp))
             return false;
 
-        var possibleJobs = jobBoard.Comp.MajorSideJobOffers.ShallowClone();
-
+        var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
         var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(jobBoard.Owner));
+
         while (possibleJobs.Count > 0)
         {
             var index = random.Next(possibleJobs.Count);
@@ -101,7 +99,7 @@ public sealed partial class JobListingsSystem : EntitySystem
             if (!_objectives.TryCreateObjective((mind, mindComp), job, out var sideJob))
                 continue;
 
-            var ev = new SideJobCreatedEvent();
+            var ev = new SideJobCreatedEvent(effectiveLevel);
             RaiseLocalEvent(sideJob.Value, ref ev);
 
             if (ev.Cancelled || !TryComp<SideJobComponent>(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
@@ -223,10 +221,31 @@ public sealed partial class JobListingsSystem : EntitySystem
     /// </summary>
     public bool FillSideJobs(Entity<JobListingsComponent> jobBoard)
     {
+        var effectiveLevel = GetReputationLevel(jobBoard);
+        var jobsAssignedOfCurrentLevel = 0;
+
         while (CountSideJobs(jobBoard) < jobBoard.Comp.MaximumSideJobs)
         {
-            if (!AssignSideJob(jobBoard))
+            if (!AssignSideJob(jobBoard, effectiveLevel))
+            {
+                // if we are above 0 effective level, try reduce it by 1 and try again to assign
+                if (effectiveLevel > 0)
+                {
+                    effectiveLevel -= 1;
+                    continue;
+                }
+
                 return false;
+            }
+
+            // if we reached the limit then start assigning jobs of the level below
+            // this is so that when we reach a new level we still get some jobs of the old level to keep things interesting
+            jobsAssignedOfCurrentLevel += 1;
+            if (jobsAssignedOfCurrentLevel >= jobBoard.Comp.SideJobsPerLevel && effectiveLevel > 0)
+            {
+                jobsAssignedOfCurrentLevel = 0;
+                effectiveLevel -= 1;
+            }
         }
 
         return true;
@@ -448,4 +467,4 @@ public sealed partial class JobListingsSystem : EntitySystem
 /// Raised on a side job when it is created.
 /// </summary>
 [ByRefEvent]
-public record struct SideJobCreatedEvent(bool Cancelled = false);
+public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = false);

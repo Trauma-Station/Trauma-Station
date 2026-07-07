@@ -65,7 +65,16 @@
   - type: JobListings
     maximumSideJobs: 4
     maximumAcceptedSideJobs: 2
-    majorSideJobOffers:
+    sideJobsPerLevel: 2
+    sideJobOffers:
+    # minor - bug
+    - BugAreaSideJobCmo
+    - BugAreaSideJobCE
+    - BugAreaSideJobHop
+    - BugAreaSideJobHos
+    - BugAreaSideJobRd
+    - BugAreaSideJobQm
+    # major - steal
     - CMOHyposprayStealSideJob
     - RDHardsuitStealSideJob
     - HandTeleporterStealSideJob

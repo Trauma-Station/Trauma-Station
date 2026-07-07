@@ -23,7 +23,7 @@ public sealed partial class JobListingsComponent : Component
     /// List of prototypes of the objectives offered for major side jobs.
     /// </summary>
     [DataField]
-    public List<EntProtoId> MajorSideJobOffers = new();
+    public List<EntProtoId> SideJobOffers = new();
 
     /// <summary>
     /// The list of available side jobs which can be accepted by the traitor.
@@ -36,6 +36,15 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField]
     public int MaximumAcceptedSideJobs;
+
+    /// <summary>
+    /// How many sidejobs can be from the current highest reputation level.
+    /// When you reach level 1 and start seeing major missions, we still want some minor missions.
+    /// So if you set this field to 2, then you get 2 major missions and then the rest are minor missions.
+    /// If you are level 2, you get 2 extreme missions then 2 major missions then the rest are minor (if there is room).
+    /// </summary>
+    [DataField]
+    public int SideJobsPerLevel;
 
     /// <summary>
     /// The list of side jobs the traitor has accepted.

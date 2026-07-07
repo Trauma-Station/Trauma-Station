@@ -31,6 +31,12 @@ public sealed partial class SideJobComponent : Component
     public int ReputationGain;
 
     /// <summary>
+    /// The minimum reputation level you must have for this job to be offered.
+    /// </summary>
+    [DataField]
+    public int MinimumLevel;
+
+    /// <summary>
     /// If this side job can be repeated. Theft objectives can't be repeated while murder objectives can be.
     /// </summary>
     [DataField]

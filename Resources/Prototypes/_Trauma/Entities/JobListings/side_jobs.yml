@@ -5,23 +5,105 @@
   parent: BaseTraitorObjective
   id: BaseSideJob
   components:
+  - type: Objective
+    difficulty: 1
   - type: SideJob
 
-# medium
+# minor
 - type: entity
   abstract: true
   parent: BaseSideJob
-  id: BaseMediumSideJob
+  id: BaseMinorSideJob
+  components:
+  - type: SideJob
+    reputationGain: 100
+  - type: LevelRestrictedSideJob
+    level: 0
+  - type: GenerateSideJobReward
+    rewardTable: MinorSideJobRewards
+
+# minor - bug area
+- type: entity
+  abstract: true
+  parent: BaseMinorSideJob
+  id: BaseBugAreaSideJob
+  components:
+  - type: BugAreaCondition
+    objectiveName: bug-objective-name
+    objectiveDescription: bug-objective-description
+    iconEntity: SyndicateBugCmo # use the cmo bug for all of them because all the bugs look the same
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobCmo
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeCmo
+  - type: SideJob
+    tool: SyndicateBugBoxCmo
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobCE
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeCE
+  - type: SideJob
+    tool: SyndicateBugBoxCE
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobHop
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeHop
+  - type: SideJob
+    tool: SyndicateBugBoxHop
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobHos
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeHos
+  - type: SideJob
+    tool: SyndicateBugBoxHos
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobRd
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeRd
+  - type: SideJob
+    tool: SyndicateBugBoxRd
+
+- type: entity
+  parent: BaseBugAreaSideJob
+  id: BugAreaSideJobQm
+  components:
+  - type: BugAreaCondition
+    targetArea: AreaOfficeQm
+  - type: SideJob
+    tool: SyndicateBugBoxQm
+
+# major
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseMajorSideJob
   components:
   - type: SideJob
     reputationGain: 200
+  - type: LevelRestrictedSideJob
+    level: 1
   - type: GenerateSideJobReward
-    rewardTable: MediumSideJobRewards
+    rewardTable: MajorSideJobRewards
 
-# medium - grant theft
+# major - grant theft
 - type: entity
   abstract: true
-  parent: BaseMediumSideJob
+  parent: BaseMajorSideJob
   id: BaseStealSideJob
   components:
   - type: StealCondition

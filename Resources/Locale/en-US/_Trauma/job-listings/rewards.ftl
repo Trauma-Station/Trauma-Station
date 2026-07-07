@@ -1,3 +1,23 @@
+# minor
+job-listings-ui-reward-name-Telecrystal7 = 7 telecrystals
+job-listings-ui-reward-name-SupermatterGrenade = supermatter grenade
+job-listings-ui-reward-name-LubeGrenade = lube grenade
+job-listings-ui-reward-name-FoodBoxPizzaBomb = pizza bomb
+job-listings-ui-reward-name-DeathRattleImplanter = death rattle implant
+job-listings-ui-reward-name-ExGrenade = explosive grenade
+job-listings-ui-reward-name-HypopenBox = hypopen
+job-listings-ui-reward-name-MedkitCombatFilled = combat medikit
+job-listings-ui-reward-name-CombatMedipen = combat medipen
+job-listings-ui-reward-name-SyndicateBombFake = fake syndicate bomb
+job-listings-ui-reward-name-ToolboxSyndicateFilled = syndicate toolbox
+job-listings-ui-reward-name-SyndicateJawsOfLife = syndicate jaws of life
+job-listings-ui-reward-name-CameraBug = camrea bug
+job-listings-ui-reward-name-FreedomImplanter = freedom implant
+job-listings-ui-reward-name-EmpImplanter = emp implant
+job-listings-ui-reward-name-VoiceMaskImplanter = voice mask implant
+job-listings-ui-reward-name-ClothingShoesChameleonNoSlips = no slip shoes
+job-listings-ui-reward-name-ClothingShoesBootsMagSyndie = syndicate mag boots
+
 # medium
 job-listings-ui-reward-name-Telecrystal10 = 10 telecrystals
 job-listings-ui-reward-name-AgentIDCard = agent id card

@@ -1,16 +1,47 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entityTable
-  id: MediumSideJobRewards
+  id: MinorSideJobRewards
+  table: !type:GroupSelector
+    children:
+    - id: Telecrystal7
+      weight: 2 # 2/3 of the time you get straight TC (but less value)
+    - !type:NestedSelector
+      tableId: MinorSideJobRewardsItems
+
+- type: entityTable
+  id: MinorSideJobRewardsItems
+  table: !type:GroupSelector
+    children:
+    - id: SupermatterGrenade
+    - id: LubeGrenade
+    - id: FoodBoxPizzaBomb
+    - id: DeathRattleImplanter
+    - id: ExGrenade
+    - id: HypopenBox
+    - id: MedkitCombatFilled
+    - id: CombatMedipen
+    - id: SyndicateBombFake
+    - id: ToolboxSyndicateFilled
+    - id: SyndicateJawsOfLife
+    - id: CameraBug
+    - id: FreedomImplanter
+    - id: EmpImplanter
+    - id: VoiceMaskImplanter
+    - id: ClothingShoesChameleonNoSlips
+    - id: ClothingShoesBootsMagSyndie
+
+- type: entityTable
+  id: MajorSideJobRewards
   table: !type:GroupSelector
     children:
     - id: Telecrystal10 # 2/3 of the time you get straight TC (but less value)
       weight: 2
     - !type:NestedSelector
-      tableId: MediumSideJobRewardsItems
+      tableId: MajorSideJobRewardsItems
 
 - type: entityTable
-  id: MediumSideJobRewardsItems
+  id: MajorSideJobRewardsItems
   table: !type:GroupSelector
     children:
     - id: AgentIDCard
