@@ -79,7 +79,7 @@
   - type: Sprite
     sprite: Objects/Storage/Briefcases/weapon_case.rsi
   - type: Item
-    size: Large
+    size: Ginormous
   - type: Storage
     maxItemSize: Ginormous
     grid:

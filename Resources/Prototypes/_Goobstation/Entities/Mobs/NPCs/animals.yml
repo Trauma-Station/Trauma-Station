@@ -364,6 +364,7 @@
       types:
         Blunt: 10
         Slash: 10
+        Structural: 10
   - type: TypingIndicator
     proto: alien
   - type: Tag
