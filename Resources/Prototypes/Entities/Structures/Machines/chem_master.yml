@@ -111,7 +111,7 @@
   - type: Solution # Chemmaster is special in how it interacts with reagents. For now.
     id: buffer
     solution:
-      unlimited: true
+      unlimitedVolume: true
   - type: DumpableSolution
     solution: buffer
     unlimited: true

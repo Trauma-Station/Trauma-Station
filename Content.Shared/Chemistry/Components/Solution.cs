@@ -42,7 +42,7 @@ namespace Content.Shared.Chemistry.Components
         ///     If true, this solution has no capacity limit.
         /// </summary>
         [DataField]
-        public bool Unlimited { get; set; } = false;
+        public bool UnlimitedVolume { get; set; } = false;
 
         public float FillFraction => MaxVolume == 0 ? 1 : Volume.Float() / MaxVolume.Float();
 
