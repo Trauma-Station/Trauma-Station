@@ -1,5 +1,5 @@
-traumasan-word-1 = fym
-traumasan-replacement-1 = fuck you mean
+chatsan-word-trauma-1 = fym
+chatsan-replacement-trauma-1 = fuck you mean
 
-traumasan-word-2 = fml
-traumasan-replacement-2 = fuck my life
+chatsan-word-trauma-2 = fml
+chatsan-replacement-trauma-2 = fuck my life
