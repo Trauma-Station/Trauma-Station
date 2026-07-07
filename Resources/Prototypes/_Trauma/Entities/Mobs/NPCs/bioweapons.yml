@@ -6,9 +6,6 @@
   description: A bioweapon supplied to security by one of Nanotrasens many human genetic experimentation subsidiaries. It follow the orders of whoever has it's translator.
   name: Bioweapon
   components:
-  - type: NpcFactionMember
-    factions:
-      - Nanotrasen
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3
