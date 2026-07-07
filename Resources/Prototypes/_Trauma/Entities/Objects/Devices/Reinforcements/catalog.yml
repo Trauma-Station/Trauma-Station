@@ -162,6 +162,40 @@
   resetRestockOnPurchase: true
   restockAfterPurchase: 60
 
+# Bioweapons
+
+- type: listing
+  id: BioweaponManual
+  name: bioweapon-manual-name
+  description: bioweapon-manual-desc
+  productEntity: MilTechManual
+  icon:
+    sprite: Objects/Misc/books.rsi
+    state: cover_old
+  cost:
+    Spesos: 1000
+  categories:
+  - Bioweapons
+  restockTime: 0
+  resetRestockOnPurchase: false
+  restockAfterPurchase: 0
+
+- type: listing
+  id: Bioweapon
+  name: bioweapon-name
+  description: bioweapon-desc
+  productEntity: MilTechManual
+  icon:
+    sprite: _Trauma/Mobs/Monsters/bioweapon.rsi
+    state: alive
+  cost:
+    Spesos: 10000
+  categories:
+  - Bioweapons
+  restockTime: 600
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 300
+
 # Medical
 
 - type: listing
