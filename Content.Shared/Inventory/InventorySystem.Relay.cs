@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Strip;
-// </Trauma>
 using Content.Shared.Armor;
 using Content.Shared.Atmos;
 using Content.Shared.Chat;
@@ -41,7 +38,6 @@ public partial class InventorySystem
 {
     public void InitializeRelay()
     {
-        SubscribeLocalEvent<InventoryComponent, ThievingStealthCheckEvent>(RelayInventoryEvent); // Trauma - Relay to gloves, powers ThievingSystem.IsStealthy
         SubscribeLocalEvent<InventoryComponent, DamageModifyEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, ElectrocutionAttemptEvent>(RelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, SlipAttemptEvent>(RelayInventoryEvent);
