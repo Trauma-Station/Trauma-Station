@@ -62,6 +62,10 @@
   - type: SolutionInjectOnEmbed
     transferAmount: 8 # Since it is shattered on hit - inject everything
     solution: melee
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 8
   - type: SolutionTransfer
     maxTransferAmount: 8
   - type: Wieldable
