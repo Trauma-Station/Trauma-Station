@@ -60,10 +60,10 @@ public abstract partial class SharedIceCubeSystem : EntitySystem
         SubscribeLocalEvent<IceCubeComponent, BeforeStaminaDamageEvent>(OnStamina);
         SubscribeLocalEvent<IceCubeComponent, KnockDownAttemptEvent>(OnKnockDown);
         SubscribeLocalEvent<IceCubeComponent, BeforeStatusEffectAddedEvent>(OnStatus);
-        SubscribeLocalEvent<IceCubeComponent, AfterInteractTargetEvent>(OnAfterInteractTarget);
+        SubscribeLocalEvent<IceCubeComponent, CanBeInteractedWithEvent>(OnCanBeInteractedWith);
     }
 
-    private void OnAfterInteractTarget(Entity<IceCubeComponent> ent, ref AfterInteractTargetEvent args)
+    private void OnCanBeInteractedWith(Entity<IceCubeComponent> ent, ref CanBeInteractedWithEvent args)
     {
         // This prevents cuffs/hyposprays/etc but allows pulls
         args.Handled = true;

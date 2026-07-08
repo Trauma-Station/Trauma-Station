@@ -1146,7 +1146,7 @@ namespace Content.Shared.Interaction
             // <Trauma>
             if (target is { } t)
             {
-                var afterInteractTargetEvent = new AfterInteractTargetEvent(user, used, t, clickLocation, canReach);
+                var afterInteractTargetEvent = new CanBeInteractedWithEvent(user, used, t, clickLocation, canReach);
                 RaiseLocalEvent(t, ref afterInteractTargetEvent);
                 if (afterInteractTargetEvent.Handled)
                 {

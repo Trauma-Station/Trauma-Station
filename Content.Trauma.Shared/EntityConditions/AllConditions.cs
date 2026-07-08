@@ -6,7 +6,7 @@ using Content.Shared.Localizations;
 namespace Content.Trauma.Shared.EntityConditions;
 
 /// <summary>
-/// Checks the target entity against multiple conditions, passing if at least 1 does.
+/// Checks the target entity against multiple conditions, passing if all do.
 /// </summary>
 public sealed partial class AllConditions : EntityConditionBase<AllConditions>
 {

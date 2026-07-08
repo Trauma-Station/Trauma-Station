@@ -4,8 +4,12 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Common.Interaction;
 
+/// <summary>
+/// Raised on target before AfterInteractEvent, used to block interaction with and object
+/// Used for low-priority interactions facilitated by the used entity.
+/// </summary>
 [ByRefEvent]
-public record struct AfterInteractTargetEvent(EntityUid User,
+public record struct CanBeInteractedWithEvent(EntityUid User,
     EntityUid Used,
     EntityUid Target,
     EntityCoordinates ClickLocation,

@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Shared.DoAfter;
 using Content.Shared.Wires;
-using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Doors;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Access.Components;
