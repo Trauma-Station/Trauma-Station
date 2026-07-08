@@ -21,7 +21,6 @@ using Content.Shared.Emp;
 using Content.Shared.Ensnaring;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Jaunt;
 using Content.Shared.Magic.Events;
 using Content.Shared.Mind;
@@ -30,7 +29,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
@@ -70,8 +68,6 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] protected ExamineSystemShared Examine = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
 
-    [Dependency] private SharedProjectileSystem _projectile = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ThrowingSystem _throw = default!;
@@ -107,6 +103,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             { "Blunt", 1 },
             { "Slash", 1 },
             { "Piercing", 1 },
+            { "Ballistic", 1 },
             { "Heat", 1 },
             { "Cold", 1 },
             { "Shock", 1 },

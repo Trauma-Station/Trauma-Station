@@ -251,6 +251,29 @@
     stage: 3
 
 - type: listing
+  id: HereticSideT1IceSpear
+  name: knowledge-path-side-t1-ice-spear-name
+  description: knowledge-path-side-t1-ice-spear-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/ice_spear.rsi, state: spear }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - MysteriesOfCreation
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT1
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 3
+
+- type: listing
   id: HereticSideT2RustWalker
   name: knowledge-path-side-t2-rustwalker-name
   description: knowledge-path-side-t2-rustwalker-desc
@@ -282,29 +305,6 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - CarvingKnife
-  cost:
-    KnowledgePoint: 1
-    SideKnowledgePoint: 1
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT2
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 4
-
-- type: listing
-  id: HereticSideT2IceSpear
-  name: knowledge-path-side-t2-ice-spear-name
-  description: knowledge-path-side-t2-ice-spear-desc
-  icon: { sprite: _Goobstation/Heretic/Entities/ice_spear.rsi, state: spear }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - MysteriesOfCreation
   cost:
     KnowledgePoint: 1
     SideKnowledgePoint: 1

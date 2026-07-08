@@ -6,8 +6,6 @@ using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
 using Content.Shared.Ensnaring.Components;
-using Content.Shared.Hands.Components;
-using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.Heretic.Components.Side;
@@ -21,7 +19,6 @@ public abstract partial class SharedHereticAbilitySystem
     protected virtual void SubscribeSide()
     {
         SubscribeLocalEvent<EventHereticCloak>(OnCloak);
-        SubscribeLocalEvent<EventHereticIceSpear>(OnIceSpear);
         SubscribeLocalEvent<EventHereticRealignment>(OnRealignment);
         SubscribeLocalEvent<EventEmp>(OnEmp);
 
@@ -39,6 +36,7 @@ public abstract partial class SharedHereticAbilitySystem
             {
                 PredictedQueueDel(effect.Owner);
             }
+
             args.Handled = true;
             return;
         }
@@ -109,53 +107,5 @@ public abstract partial class SharedHereticAbilitySystem
     {
         _emp.EmpPulse(Transform(ev.Performer).Coordinates, ev.Range, ev.EnergyConsumption, ev.Duration, ev.Performer);
         ev.Handled = true;
-    }
-
-    private void OnIceSpear(EventHereticIceSpear args)
-    {
-        if (!TryComp(args.Action, out IceSpearActionComponent? spearAction))
-            return;
-
-        if (!TryUseAbility(args, false))
-            return;
-
-        var ent = args.Performer;
-
-        if (!TryComp(ent, out HandsComponent? hands))
-            return;
-
-        if (Exists(spearAction.CreatedSpear))
-        {
-            var spear = spearAction.CreatedSpear.Value;
-
-            if (_hands.IsHolding((ent, hands), spear) || !_hands.TryGetEmptyHand((ent, hands), out var hand))
-                return;
-
-            args.Handled = true;
-
-            if (_net.IsClient)
-                return;
-
-            if (TryComp(spear, out EmbeddableProjectileComponent? embeddable) && embeddable.EmbeddedIntoUid != null)
-                _projectile.EmbedDetach(spear, embeddable);
-
-            _transform.AttachToGridOrMap(spear);
-            _transform.SetCoordinates(spear, Transform(ent).Coordinates);
-            _hands.TryPickup(ent, spear, hand, false, handsComp: hands);
-            return;
-        }
-
-        var newSpear = PredictedSpawnAtPosition(spearAction.SpearProto, Transform(ent).Coordinates);
-        if (!_hands.TryForcePickupAnyHand(ent, newSpear, false, hands))
-        {
-            PredictedQueueDel(newSpear);
-            _actions.SetIfBiggerCooldown(args.Action.AsNullable(), TimeSpan.FromSeconds(1));
-            return;
-        }
-
-        args.Handled = true;
-
-        spearAction.CreatedSpear = newSpear;
-        EnsureComp<IceSpearComponent>(newSpear).ActionId = args.Action;
     }
 }

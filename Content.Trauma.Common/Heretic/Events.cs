@@ -68,6 +68,12 @@ public record struct ShouldBlockContextMenuEvent(EntityUid Target, bool ShouldBl
 public readonly record struct FireStacksChangedEvent(EntityUid Uid, float FireStacks);
 
 [ByRefEvent]
+public record struct ShouldDoorCrushEvent(bool ShouldCrush, TimeSpan CrushDelay);
+
+[ByRefEvent]
+public record struct DoorOpenedEvent(EntityUid Door, EntityUid? User);
+
+[ByRefEvent]
 public record struct GetFirestackPassiveModifierEvent(bool OnFire, bool Resisting, float Modifier) : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;

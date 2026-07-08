@@ -93,13 +93,15 @@ knowledge-path-side-t1-coin-desc =
     Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
     The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
-## T2
-knowledge-path-side-t2-ice-spear-name = Mysteries of Creation
-knowledge-path-side-t2-ice-spear-desc =
+knowledge-path-side-t1-ice-spear-name = Mysteries of Creation
+knowledge-path-side-t1-ice-spear-desc =
     Artifacts linked to the Winter Dawn exude unnatural stillness. Time slows around them. Fires choke. Thoughts become brittle. Proximity breeds hallucinations of endless white fields, a sky with no sun, and a voice that speaks only in cracking ice.
 
-    Grants you Mysteries of Creation, a spell that allows you to summon the Glacier Spear at will. This magical spear chills victims upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube. If the spear is destroyed, activating this ability will create a new one, otherwise it will summon the existing spear into your hand.
+    Allows you to transmute a spear in a cold environment to create Glacier Spear. This magical spear chills victims
+    upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube.
+    Spear can be freely recalled in your hand unless it is destroyed.
 
+## T2
 knowledge-path-side-t2-rustwalker-name = Rusted Ritual
 knowledge-path-side-t2-rustwalker-desc =
     I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out.

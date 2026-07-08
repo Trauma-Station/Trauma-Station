@@ -1655,6 +1655,50 @@
         LabyrinthHandbook: 1
 
 - type: entity
+  id: RitualSerpentclave
+  name: Wrong Key
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/serpentclave.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            requireAll: true
+            components:
+            - Insulated
+            - Clothing
+            - FingerprintMask
+          name: heretic-ritual-ingredient-insuls
+        - whitelist:
+            tags:
+            - Wirecutter
+          name: heretic-ritual-ingredient-wirecutter
+        - whitelist:
+            tags:
+            - Screwdriver
+          name: heretic-ritual-ingredient-screwdriver
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        Serpentclave: 1
+
+- type: entity
   id: RitualAscensionLock
   name: Unlock the Labyrinth
   components:
@@ -2201,6 +2245,44 @@
       applyOn: Platform
       output:
         EldritchCoin: 1
+
+- type: entity
+  id: RitualIceSpear
+  name: Mysteries of Creation
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/ice_spear.rsi
+    state: spear
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ConditionsRitualCondition
+        applyOn: Platform
+        conditions:
+        - !type:EnvironmentTemperatureCondition
+        cancelLoc: heretic-ritual-fail-temperature-hot
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            tags:
+            - Spear
+          name: heretic-ritual-ingredient-spear
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        SpearIceHeretic: 1
 
 ## T2
 - type: entity

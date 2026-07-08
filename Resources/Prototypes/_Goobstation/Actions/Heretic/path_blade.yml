@@ -2,24 +2,6 @@
 
 - type: entity
   parent: BaseAction
-  id: ActionHereticChampionHook
-  name: Champion Hook
-  description: Knockdown and hook your next heretic blade light attack target.
-  components:
-  - type: Action
-    checkCanInteract: false
-    itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: hook
-    iconOn:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: hook_on
-  - type: InstantAction
-    event: !type:EventHereticToggleChampionHook
-
-- type: entity
-  parent: BaseAction
   id: ActionHereticSacraments
   name: Sacraments of Power
   description: Become immune to all damage temporarily, sending it back to attackers.
