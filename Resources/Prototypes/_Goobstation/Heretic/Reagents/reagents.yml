@@ -254,17 +254,17 @@
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
-      conditions:
-      - !type:WhitelistCondition
-        checkMind: true
-        inverted: true
-        whitelist:
-          components:
-          - Heretic
-          - Ghoul
-        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
       - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
         splitDamage: Split
         ignoreResistances: false
         damage:
@@ -274,6 +274,15 @@
             Slash: 5
           partDamageVariation: 2
       - !type:Emote
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
         emote: Scream
         probability: 0.8
 
