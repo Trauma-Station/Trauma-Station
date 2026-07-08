@@ -19,7 +19,7 @@ using Content.Shared.Singularity.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Doors;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
