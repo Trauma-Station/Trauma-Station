@@ -9,9 +9,9 @@ namespace Content.Trauma.Common.Strip;
 /// (ex: thief antag ThievingComponent on the mob itself) or via equipped gloves (relayed).
 /// </summary>
 [ByRefEvent]
-public sealed class ThievingStealthCheckEvent : EntityEventArgs, IInventoryRelayEvent
+public struct ThievingStealthCheckEvent : IInventoryRelayEvent
 {
     public bool Stealthy;
 
-    public SlotFlags TargetSlots { get; } = SlotFlags.GLOVES;
+    public SlotFlags TargetSlots => SlotFlags.GLOVES;
 }

@@ -6,6 +6,7 @@ using Content.Shared.Stunnable;
 using Content.Trauma.Common.Glue;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Lube;
+using Content.Trauma.Common.Strip;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Tackle;
@@ -23,6 +24,7 @@ public sealed partial class TraumaInventorySystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<InventoryComponent, ThievingStealthCheckEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, TackleEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, GetCounterAttackSheathEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, CalculateTackleModifierEvent>(_inventory.RelayEvent);
