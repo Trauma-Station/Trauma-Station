@@ -11255,3 +11255,19 @@ Entries:
   id: 1244
   time: '2026-07-06T02:15:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3450
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role time requirements have been increased.
+  - type: Add
+    message: NukeOps Commander now requires HoS playtime, lead from the front.
+  id: 1245
+  time: '2026-07-08T08:38:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3483
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Tool Combat Training to Botanist Skillchips
+  id: 1246
+  time: '2026-07-08T09:56:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3484
