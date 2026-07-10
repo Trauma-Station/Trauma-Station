@@ -261,7 +261,7 @@ public sealed partial class WoundSystem
 
     public DamageGroupPrototype? GetDamageGroupByType(string id)
     {
-        return (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
+        return (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>()
                 where @group.DamageTypes.Contains(id)
                 select @group).FirstOrDefault();
     }
@@ -304,7 +304,7 @@ public sealed partial class WoundSystem
             return true;
 
         var protoId = damageGroup?.Id ??
-            (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
+            (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>()
                 where @group.DamageTypes.Contains(woundId)
                 select @group).FirstOrDefault()?.ID;
 
@@ -859,7 +859,7 @@ public sealed partial class WoundSystem
         /*if (!Resolve(parent, ref woundableComp, false)
             || !Resolve(wound, ref woundComp, false)
             || !Resolve(body, ref bodyComp, false)
-            || !_prototype.TryIndex(woundComp.DamageType, out DamageTypePrototype? damageType))
+            || !ProtoMan.TryIndex(woundComp.DamageType, out DamageTypePrototype? damageType))
             return;
 
         var bodyPart = Comp<BodyPartComponent>(severed);
@@ -1180,7 +1180,7 @@ public sealed partial class WoundSystem
     private bool IsWoundPrototypeValid(string protoId)
     {
         // TODO SHITMED: HasComp<WoundComponent>(protoId)
-        return _prototype.TryIndex<EntityPrototype>(protoId, out var woundPrototype)
+        return ProtoMan.TryIndex<EntityPrototype>(protoId, out var woundPrototype)
                && woundPrototype.TryGetComponent<WoundComponent>(out _, Factory);
     }
 
@@ -1501,13 +1501,13 @@ public sealed partial class WoundSystem
         if (healable)
         {
             return GetWoundableWounds(targetEntity, targetWoundable)
-                .Where(wound => _prototype.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
+                .Where(wound => ProtoMan.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
                 .Where(wound => CanHealWound(wound, wound.Comp, ignoreBlockers))
                 .Aggregate(FixedPoint2.Zero, (current, wound) => current + wound.Comp.WoundSeverityPoint);
         }
 
         return GetWoundableWounds(targetEntity, targetWoundable)
-            .Where(wound => _prototype.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
+            .Where(wound => ProtoMan.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
             .Aggregate(FixedPoint2.Zero, (current, wound) => current + wound.Comp.WoundSeverityPoint);
     }
 
@@ -1533,7 +1533,7 @@ public sealed partial class WoundSystem
 
         var wounds = GetWoundableWounds(targetEntity, targetWoundable);
         if (damageGroup != null)
-            wounds.RemoveAll(wound => _prototype.Index(wound.Comp.DamageGroup)?.ID != damageGroup);
+            wounds.RemoveAll(wound => ProtoMan.Index(wound.Comp.DamageGroup)?.ID != damageGroup);
         if (healable)
             wounds.RemoveAll(wound => !CanHealWound(wound, wound.Comp, ignoreBlockers));
 

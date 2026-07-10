@@ -6,6 +6,8 @@
   id: WeaponPistolIradomini
   description: A powerful crossbow for the crusader with style.
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Nullrod
     damageOnUntrainedUse:
       types:
@@ -62,6 +64,8 @@
   name: faith
   description: "`Cause you gotta have Faith."
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Nullrod
     damageOnUntrainedUse:
       types:

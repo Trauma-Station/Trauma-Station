@@ -62,7 +62,8 @@ public abstract partial class SharedPoweredLightSystem : EntitySystem
     private void OnInit(EntityUid uid, PoweredLightComponent light, ComponentInit args)
     {
         light.LightBulbContainer = ContainerSystem.EnsureContainer<ContainerSlot>(uid, LightBulbContainer);
-        _deviceLink.EnsureSinkPorts(uid, light.OnPort, light.OffPort, light.TogglePort);
+        _deviceLink.EnsureSinkPorts(uid, light.OnPort, light.OffPort, light.TogglePort,
+            light.ControlPort); // Trauma
     }
 
     private void OnRemoved(Entity<PoweredLightComponent> light, ref EntRemovedFromContainerMessage args)
@@ -125,6 +126,23 @@ public abstract partial class SharedPoweredLightSystem : EntitySystem
             SetState(ent, true, ent.Comp);
         else if (args.Port == ent.Comp.TogglePort)
             ToggleLight(ent, ent.Comp);
+        // <Trauma> - allow logic signals to set it directly instead of just toggling, no need for edge detector
+        else if (args.Port == ent.Comp.ControlPort)
+        {
+            if (args.Data is not { } data)
+                return; // non-logic signal
+
+            var value = false;
+            if (data.TryGetValue(DeviceNetworkConstants.LogicState, out SignalState state))
+                value = state == SignalState.High;
+            else if (data.TryGetValue("logic_int", out int i))
+                value = i != 0; // so circuits dont have to convert it
+            else
+                return; // unsupported signal (string or something)
+
+            SetState(ent, value, ent.Comp);
+        }
+        // </Trauma>
     }
 
     /// <summary>

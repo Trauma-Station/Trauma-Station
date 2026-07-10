@@ -22,7 +22,8 @@ namespace Content.Server.Atmos.EntitySystems
     public sealed partial class BarotraumaSystem : EntitySystem
     {
         // <Trauma>
-        [Dependency] private CommonSpellbladeSystem _spellblade = default!; // Goobstation
+        [Dependency] private CommonSpellbladeSystem _spellblade = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
         // </Trauma>
         [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private DamageableSystem _damageableSystem = default!;
@@ -60,14 +61,15 @@ namespace Content.Server.Atmos.EntitySystems
         }
 
         // Goobstation - Modsuits - Update component state on toggle
+        // TODO: move it out
         private void OnPressureProtectionChanged(EntityUid uid, PressureProtectionComponent pressureProtection, EntityEventArgs args)
         {
             var protectionTarget = uid;
             string? slotTarget = null;
 
-            if (_inventorySystem.TryGetContainingEntity(uid, out var entity) && _inventorySystem.TryGetContainingSlot(uid, out var slot))
+            if (_container.TryGetContainingContainer(uid, out var container) && _inventorySystem.TryGetContainingSlot(uid, out var slot))
             {
-                protectionTarget = entity.Value;
+                protectionTarget = container.Owner;
                 slotTarget = slot.Name;
             }
 

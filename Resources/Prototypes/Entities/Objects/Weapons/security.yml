@@ -16,6 +16,8 @@
   - type: Tag
     tags:
     - StunBaton
+  - type: WeaponClass
+    class: NonLethal
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunbaton.rsi
@@ -130,6 +132,8 @@
   - type: KnowledgeGrantOnWear
     blocked:
       MartialArtCorporateJudo: true
+  - type: WeaponClass
+    class: Bludgeon
   # <Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/truncheon.rsi

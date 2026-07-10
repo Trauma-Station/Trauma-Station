@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: weaponClass
+  id: Unarmed
+  name: unarmed combat
+  knowledge: MeleeKnowledge # holdover
+
+# blunt weapons you swing at people
+- type: weaponClass
+  id: Bludgeon
+  name: bludgeon
+  knowledge: KnowledgeWeaponsBludgeon
+
+# small blade to stab or slash with
+- type: weaponClass
+  id: Knife
+  name: knife
+  knowledge: KnowledgeWeaponsKnife
+
+# large blade to stab, slash or parry with
+- type: weaponClass
+  id: Sword
+  name: sword
+  knowledge: KnowledgeWeaponsSword
+
+# long usually pointy stick you thrust at people ( ͡° ͜ʖ ͡°)
+- type: weaponClass
+  id: Polearm
+  name: polearm
+  knowledge: KnowledgeWeaponsPolearm
+
+# trying to zap people without killing them
+- type: weaponClass
+  id: NonLethal
+  name: non-lethal
+  knowledge: KnowledgeWeaponsNonLethal
+
+# effectively using a hedge trimmer in combat is harder than it might seem
+- type: weaponClass
+  id: Tool
+  name: tool
+  knowledge: KnowledgeWeaponsTool
+
+## Ranged ##
+
+# one handed gun with relatively low recoil
+- type: weaponClass
+  id: Pistol
+  name: pistol
+  knowledge: KnowledgeWeaponsPistol
+
+# long arms with a magazine or hand fed: hunting rifles, assault rifles, etc.
+- type: weaponClass
+  id: Rifle
+  name: rifle
+  knowledge: KnowledgeWeaponsRifle
+
+# high recoil and awkward loading method
+- type: weaponClass
+  id: Shotgun
+  name: shotgun
+  knowledge: KnowledgeWeaponsShotgun
+
+# long-range scoped rifles
+- type: weaponClass
+  id: Sniper
+  name: sniper rifle
+  knowledge: KnowledgeWeaponsSniper
+
+# tf2 heavy weapons guy
+- type: weaponClass
+  id: Heavy
+  name: heavy weapons
+  knowledge: KnowledgeWeaponsHeavy
+
+# less recoil and more heat management, heavier batteries
+- type: weaponClass
+  id: Laser
+  name: laser weaponry
+  knowledge: KnowledgeWeaponsLaser
+
+# PKA and other mining weapons
+- type: weaponClass
+  id: Mining
+  name: mining tool
+  knowledge: KnowledgeWeaponsMining

@@ -778,19 +778,16 @@ entities:
   - uid: 101
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 2.5,10.5
       parent: 1
   - uid: 102
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -1.5,10.5
       parent: 1
   - uid: 103
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 5.5,4.5
       parent: 1
   - uid: 104
@@ -801,19 +798,16 @@ entities:
   - uid: 105
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -0.5,11.5
       parent: 1
   - uid: 106
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 0.5,11.5
       parent: 1
   - uid: 107
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 1.5,11.5
       parent: 1
 - proto: GunSafeHunter
@@ -1207,16 +1201,12 @@ entities:
           showEnts: False
           occludes: True
           ent: 83
-        disposals: !type:Container
+        DisposalUnitComponent: !type:Container
           showEnts: False
           occludes: True
           ents:
           - 84
           - 85
-        solutions: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
 - proto: ToolboxElectricalTurretFilled
   entities:
   - uid: 155

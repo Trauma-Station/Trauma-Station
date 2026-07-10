@@ -5,6 +5,11 @@
   description: The original rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: UnwieldOnShoot
+  - type: UseDelayBlockShoot
+  - type: UndetectableContraband # its wood
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Bow/bow.rsi
   - type: Item
@@ -46,9 +51,6 @@
       projectiles: !type:ContainerSlot
   - type: ContainerAmmoProvider
     container: projectiles
-  - type: UnwieldOnShoot # Goobstation
-  - type: UseDelayBlockShoot # Goobstation
-  - type: UndetectableContraband #Goobstation-Contraband detector
 
 - type: entity
   id: BowImprovised
@@ -56,6 +58,10 @@
   name: improvised shortbow
   components:
   # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 500
+      Cloth: 250
   - type: Tag
     tags:
     - BowImprovised
@@ -104,9 +110,3 @@
   - type: Construction
     graph: ImprovisedBow
     node: ImprovisedBow
-  # <Truama>
-  - type: PhysicalComposition
-    materialComposition:
-      Wood: 500
-      Cloth: 250
-  #</Trauma>

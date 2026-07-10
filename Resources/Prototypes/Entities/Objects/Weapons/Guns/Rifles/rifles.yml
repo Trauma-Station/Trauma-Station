@@ -5,6 +5,10 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Rifle
+  # </Trauma>
   - type: Sprite
   - type: Item
     size: Huge

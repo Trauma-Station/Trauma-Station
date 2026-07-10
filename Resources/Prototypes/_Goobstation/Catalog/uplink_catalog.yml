@@ -156,7 +156,7 @@
 
 - type: listing
   id: UplinkC4BundleNukeops
-  name: uplink-c4-bundle-name
+  name: uplink-c4-bundle-name-trauma # Trauma - Added -trauma
   description: uplink-c4-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   cost:
@@ -330,7 +330,7 @@
 
 - type: listing
   id: UplinkBulkMosin
-  name: uplink-bulk-mosin-name
+  name: uplink-bulk-mosin-name-trauma # Trauma - Added -trauma
   description: uplink-bulk-mosin-desc
   productEntity: CrateSyndicateBulkMosin
   cost:
@@ -478,8 +478,8 @@
 
 - type: listing
   id: UplinkLubeGrenade
-  name: Lube grenade
-  description: Make the floor slippery!
+  name: uplink-lube-grenade-name
+  description: uplink-lube-grenade-desc
   productEntity: LubeGrenade
   cost:
     Telecrystal: 10
@@ -494,8 +494,8 @@
 
 - type: listing
   id: UplinkGlueGrenade
-  name: Glue grenade
-  description: Make the floor hard to walk in!
+  name: uplink-glue-grenade-name
+  description: uplink-glue-grenade-desc
   productEntity: GlueGrenade
   cost:
     Telecrystal: 5
@@ -550,9 +550,9 @@
     - UplinkAllies
 
 - type: listing
-  id: uplinkBeeNades    #goob - bee update
-  name: uplink-beenades-name
-  description: uplink-beenades-desc
+  id: UplinkBeeNades  #goob - bee update
+  name: uplink-beenade-name
+  description: uplink-beenade-desc
   productEntity: BeeGrenade
   cost:
     Telecrystal: 15

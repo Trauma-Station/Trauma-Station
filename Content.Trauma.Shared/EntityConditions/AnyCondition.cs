@@ -32,6 +32,6 @@ public sealed partial class AnyConditionSystem : EntityConditionSystem<MetaDataC
 
     protected override void Condition(Entity<MetaDataComponent> ent, ref EntityConditionEvent<AnyCondition> args)
     {
-        args.Result = _conditions.TryAnyCondition(ent, args.Condition.Conditions);
+        args.Result = _conditions.TryAnyCondition(ent, args.Condition.Conditions, args.User);
     }
 }

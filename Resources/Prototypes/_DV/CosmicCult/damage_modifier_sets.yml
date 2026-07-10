@@ -6,6 +6,7 @@
     Blunt: 0.75
     Slash: 0.6
     Piercing: 0.6
+    Ballistic: 0.6 # Trauma
     Shock: 1.2
   flatReductions:
     Blunt: 10

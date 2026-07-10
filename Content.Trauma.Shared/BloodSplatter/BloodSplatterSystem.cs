@@ -18,7 +18,6 @@ namespace Content.Trauma.Shared.BloodSplatter;
 public sealed partial class BloodSplatterSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
@@ -106,7 +105,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
     private void SpawnDecal(EntityUid ent, BloodstreamComponent bloodstream, string decal)
     {
         var sol = bloodstream.BloodReferenceSolution;
-        SpawnDecal(ent, sol.GetColor(_proto), decal);
+        SpawnDecal(ent, sol.GetColor(ProtoMan), decal);
     }
 
     private void SpawnDecal(EntityUid ent, Color color, string decal)

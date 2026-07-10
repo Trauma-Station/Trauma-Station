@@ -29,7 +29,6 @@ namespace Content.Goobstation.Shared.Fishing.Systems;
 public abstract partial class SharedFishingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityTableSystem _table = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
@@ -397,7 +396,7 @@ public abstract partial class SharedFishingSystem : EntitySystem
         var fish = _table.GetSpawns(spotComp.FishList).First();
 
         // Get fish difficulty
-        _proto.Index(fish).TryGetComponent(out FishComponent? fishComp, Factory);
+        ProtoMan.Index(fish).TryGetComponent(out FishComponent? fishComp, Factory);
 
         // Assign things that depend on the fish
         var rod = ent.Comp.FishingRod;

@@ -52,7 +52,6 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private EntityQuery<WizardTrapComponent> _trapQuery = default!;
 
     public override void Initialize()
@@ -94,7 +93,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         bool IsTileValid((EntityCoordinates, TileRef) data)
         {

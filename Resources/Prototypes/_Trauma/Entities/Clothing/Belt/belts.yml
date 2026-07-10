@@ -1,6 +1,18 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
+  parent: [ ClothingBeltBase, ClothingSlotBase ]
+  id: BaseClothingBeltSheath
+  components:
+  - type: Item
+    size: Ginormous
+  - type: ItemSlots
+    smartEquip: true
+  - type: Appearance
+  - type: QuickDrawable
+
+- type: entity
   parent: [ ClothingBeltStorageBase, BaseRevMajorContraband ]
   id: ClothingBeltRevWebbing
   name: chest rig
@@ -69,7 +81,7 @@
       Slash: 3
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseSheathCounterAttackWeak, BaseSecurityContraband]
+  parent: [ BaseClothingBeltSheath, BaseSheathCounterAttackWeak, BaseSecurityContraband ]
   id: ClothingBeltSheathKatana
   name: katana sheath
   description: A sheath designed to hold an officer's blade.
@@ -79,10 +91,7 @@
     state: sheath
   - type: Clothing
     sprite: _Trauma/Clothing/Belt/sec_katana_sheath.rsi
-  - type: Item
-    size: Ginormous
   - type: ItemSlots
-    smartEquip: true
     slots:
       item:
         name: Katana
@@ -99,7 +108,6 @@
         whitelist:
           tags:
           - Katana
-  - type: Appearance
 
 - type: entity
   id: ClothingBeltSheathKatanaFilled
@@ -112,7 +120,7 @@
       - SecurityKatana
 
 - type: entity
-  parent: [BaseMajorContraband, BaseSheathCounterAttackStrong, ClothingBeltSheathKatana]
+  parent: [ BaseMajorContraband, BaseSheathCounterAttackStrong, ClothingBeltSheathKatana ]
   id: ClothingBeltSheathKatanaNinja
   name: energy katana sheath
   description: A high tech katana sheath that allows for quick blade movements.
@@ -134,7 +142,7 @@
       - EnergyKatana
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseSheathCounterAttackStrong, BaseSyndicateContraband]
+  parent: [ BaseClothingBeltSheath, BaseSheathCounterAttackStrong, BaseSyndicateContraband ]
   id: ClothingBeltSheathSnakesfang
   name: snakesfang scabbard
   description: Can hold scimitars.
@@ -144,10 +152,7 @@
     state: sheath
   - type: Clothing
     sprite: _Trauma/Clothing/Belt/snakesfang_sheath.rsi
-  - type: Item
-    size: Ginormous
   - type: ItemSlots
-    smartEquip: true
     slots:
       item:
         name: Snakesfang
@@ -164,7 +169,6 @@
         whitelist:
           tags:
           - Scimitar
-  - type: Appearance
 
 - type: entity
   id: ClothingBeltSheathSnakesfangFilled

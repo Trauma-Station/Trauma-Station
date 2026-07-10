@@ -67,10 +67,10 @@ public abstract partial class SharedKnowledgeSystem
     /// <summary>
     /// Get the corresponding knowledge entity prototype for a given language.
     /// </summary>
-    public EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
+    public override EntProtoId LanguageUnit(ProtoId<LanguagePrototype> lang)
     {
         var id = $"Language{lang}";
-        DebugTools.Assert(_proto.HasIndex<EntityPrototype>(id), $"Language {lang} has no knowledge prototype!");
+        DebugTools.Assert(ProtoMan.HasIndex<EntityPrototype>(id), $"Language {lang} has no knowledge prototype!");
         return id;
     }
 
@@ -146,6 +146,8 @@ public abstract partial class SharedKnowledgeSystem
         var lang = args.Language;
         if (GetKnowledge(brain, LanguageUnit(lang)) is { } existing)
         {
+            existing.Comp.LearnedLevel = Math.Max(26, existing.Comp.LearnedLevel);
+            Dirty(existing);
             UpdateEntityLanguages(ent);
             return;
         }
@@ -239,7 +241,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         // Use Obfuscate logic through language system.
-        var languageProto = _proto.Index(args.Language);
+        var languageProto = ProtoMan.Index(args.Language);
         args.Message = _language.ObfuscateSpeech(args.Message, languageProto, ent.Owner);
         if (args.Speech is { } speech)
             args.WrappedMessage = _chat.WrapPublicMessage(args.Source, args.Name, args.Message, speech, languageProto, args.Color);

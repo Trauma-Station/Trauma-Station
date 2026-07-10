@@ -199,6 +199,7 @@
         Heat: 0.90
         Radiation: 0.25
   - type: ToggleableClothing
+    verbText: toggle-clothing-verb-helmet
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:Container {}
@@ -289,6 +290,19 @@
     transmuteTo: ClothingOuterHardsuitCosmicCult
 
 - type: entity
+  parent: ClothingOuterEVASuitBase
+  id: ClothingOuterEVASuitBaseToggleable
+  abstract: true
+  components:
+  - type: ToggleableClothing
+    #slot: head # Trauma - killed by modsuits
+    verbText: toggle-clothing-verb-helmet
+    #action: ActionToggleSuitPiece # Trauma
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:Container {} # Trauma - removed Slot
+
+- type: entity
   parent: ClothingOuterBase
   id: ClothingOuterBaseToggleable
   name: hoodie with hood
@@ -297,6 +311,7 @@
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodWinterDefault
+    verbText: toggle-clothing-verb-hood
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:Container {}

@@ -16,7 +16,6 @@ namespace Content.Goobstation.Client.Weapons.LaserPointer;
 public sealed partial class LaserPointerSystem : SharedLaserPointerSystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IInputManager _input = default!;
@@ -28,7 +27,7 @@ public sealed partial class LaserPointerSystem : SharedLaserPointerSystem
     {
         base.Initialize();
 
-        _overlay.AddOverlay(new LaserPointerOverlay(EntityManager, _prototype));
+        _overlay.AddOverlay(new LaserPointerOverlay(EntityManager, ProtoMan));
     }
 
     public override void Shutdown()

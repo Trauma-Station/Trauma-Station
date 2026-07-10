@@ -6,10 +6,15 @@
   name: biomass spike
   description: Hardened biomass, shaped into a spike. Very pointy!
   components:
+  - type: Sharp
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Throwable/tonguespike.rsi
     state: icon
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: EmbeddableProjectile
     offset: -0.2,0
   - type: ThrowingAngle
@@ -17,7 +22,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 30 # bit stronger than a spear considering the reload process
+        Ballistic: 30 # bit stronger than a spear considering the reload process
   - type: TriggerOnLand
   - type: EntityEffectOnTrigger
     effects:
@@ -34,5 +39,5 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 5 # it's more of a utility
+        Ballistic: 5 # it's more of a utility
   - type: ChemTransferProjectile

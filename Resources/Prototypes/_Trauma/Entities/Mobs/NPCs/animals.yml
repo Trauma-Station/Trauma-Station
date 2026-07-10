@@ -17,7 +17,7 @@
     prob: 1
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase ]
+  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, BaseSlicingRefinable ]
   id: MobBunnySea
   name: sea bunny
   description: A cute, fluffy, sea bunny.
@@ -98,10 +98,9 @@
         Quantity: 55
       - ReagentId: Fat
         Quantity: 5
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
-      amount: 1
   - type: LanguageSpeaker
     speaks:
     - Mouse
@@ -339,7 +338,7 @@
         Base: grass_snake_dead
 
 - type: entity
-  parent: [ AppearanceSpaceCobra, SimpleMobBase ]
+  parent: [ AppearanceSpaceCobra, SimpleMobBase, MobNightVision, BaseSlicingRefinable ]
   id: MobCobra
   name: cobra
   description: A patterned hood and a venomous bite. Best admired from a distance.
@@ -351,10 +350,6 @@
     understands:
     - Xeno
     - TauCetiBasic
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: VentCrawler
   - type: Sprite
     drawdepth: Mobs
@@ -392,15 +387,13 @@
         BaseUnshaded: glow
       Dead:
         Base: cobra_dead
-  - type: Butcherable
-    spawned:
-      - id: FoodMeatSnake
-        amount: 2
-      - id: UraniumOre1
-        amount: 1
-      - id: ClothingShoesSnakeskinBoots
-        amount: 1
-        prob: 0.3
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatSnake
+      amount: 2
+    - id: UraniumOre1
+    - id: ClothingShoesSnakeskinBoots
+      prob: 0.3
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -544,7 +537,7 @@
     interactFailureString: petting-failure-generic
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ SimpleMobBase, MobCombat, MobNightVision ]
   id: MobMantisShrimp
   name: mantis shrimp
   description: A deceptively small crustacean with a punch that can shatter bone. Do not let it near the glass.
@@ -627,13 +620,9 @@
     interactFailureString: petting-failure-generic
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ SimpleMobBase, MobCombat, MobNightVision ]
   id: MobShrimp
   name: shrimp
   description: A dangerous crustacean, try to dodge its bubbles.
@@ -718,14 +707,10 @@
     interactFailureString: petting-failure-generic
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   abstract: true
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseSlicingRefinable ]
   id: MobDartFrogBase
   name: dart frog
   description: A brilliantly colored amphibian. Its skin secretes a potent paralytic toxin.
@@ -785,10 +770,9 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/frog_ribbit.ogg
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
-      amount: 1
   - type: NPCRetaliation
     attackMemoryLength: 5
   - type: FactionException

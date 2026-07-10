@@ -15,7 +15,6 @@ namespace Content.Trauma.Shared.Vampires;
 public abstract partial class SharedActionLairSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ActionLairTeleportSystem _lair = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -88,7 +87,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         if (_bloodQuery.TryComp(user, out var blood))
         {
-            _appearance.SetData(vampiricRune, VampiricRuneVisuals.Color, blood.BloodReferenceSolution.GetColor(_proto));
+            _appearance.SetData(vampiricRune, VampiricRuneVisuals.Color, blood.BloodReferenceSolution.GetColor(ProtoMan));
         }
 
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
@@ -106,7 +105,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.CreationSound, target, user);
 
-        EntityManager.AddComponents(target, _proto.Index(ent.Comp.LairComponents).Components);
+        EntityManager.AddComponents(target, ProtoMan.Index(ent.Comp.LairComponents).Components);
         if (!_lairQuery.TryComp(target, out var lair))
             return;
 

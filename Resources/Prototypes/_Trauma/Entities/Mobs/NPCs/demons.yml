@@ -43,6 +43,7 @@
         Blunt: -1
         Slash: -1
         Piercing: -1
+        Ballistic: -1
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -65,6 +66,7 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
+    showInExamine: false
   - type: Puller
     needsHands: false
   - type: GhostRole

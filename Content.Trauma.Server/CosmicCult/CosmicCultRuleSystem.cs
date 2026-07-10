@@ -81,7 +81,6 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_briefing.ogg");
     private readonly SoundSpecifier _deconvertSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_deconvert.ogg");
@@ -380,7 +379,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         EnsureComp<CosmicCultAssociatedRuleComponent>(uid, out var associatedComp);
         EnsureComp<ZombieImmuneComponent>(uid);
 
-        foreach (var influenceProto in _proto.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == cultComp.CurrentLevel))
+        foreach (var influenceProto in ProtoMan.EnumeratePrototypes<InfluencePrototype>().Where(influenceProto => influenceProto.Tier == cultComp.CurrentLevel))
             cultComp.UnlockedInfluences.Add(influenceProto.ID);
 
         associatedComp.CultGamerule = rule;

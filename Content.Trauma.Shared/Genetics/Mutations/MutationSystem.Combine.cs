@@ -21,7 +21,7 @@ public sealed partial class MutationSystem
     {
         Recipes.Clear();
         ResultRecipes.Clear();
-        foreach (var recipe in _proto.EnumeratePrototypes<MutationRecipePrototype>())
+        foreach (var recipe in ProtoMan.EnumeratePrototypes<MutationRecipePrototype>())
         {
             var id = recipe.ID;
             // index recipes by the result
@@ -71,7 +71,7 @@ public sealed partial class MutationSystem
 
         foreach (var recipeId in results)
         {
-            var recipe = _proto.Index(recipeId);
+            var recipe = ProtoMan.Index(recipeId);
             // TODO: if you ever want more than 2 required mutations change this function
             if (recipe.Required.Contains(b))
                 return recipe.Result;

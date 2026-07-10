@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: blobTile
+  id: Core
+  name: "Blob Core"
+  cost: 0
+  entity: CoreBlobTile
+
+- type: blobTile
+  id: Resource
+  name: "Resource Blob"
+  cost: 60
+  entity: ResourceBlobTile
+
+- type: blobTile
+  id: Factory
+  name: "Blob Factory"
+  cost: 80
+  entity: FactoryBlobTile
+
+- type: blobTile
+  id: Node
+  name: "Blob Node"
+  cost: 50
+  entity: NodeBlobTile
+  blockNearNodes: false # no nodemaxxing
+
+- type: blobTile
+  id: Reflective
+  name: "Reflective Blob"
+  cost: 15
+  entity: ReflectiveBlobTile
+  canChangeChem: false
+
+- type: blobTile
+  id: Strong
+  name: "Strong Blob"
+  cost: 15
+  entity: StrongBlobTile
+
+- type: blobTile
+  id: Normal
+  name: "Blob Tile"
+  cost: 6
+  entity: NormalBlobTile
+
+# TODO
+#- type: blobTile
+#  id: Storage
+#  name: "Storage Blob"
+#  cost: 50
+#  entity: StorageBlobTile
+
+#- type: blobTile
+#  id: Turret
+#  name: "Turret Blob"
+#  cost: 75
+#  entity: TurretBlobTile

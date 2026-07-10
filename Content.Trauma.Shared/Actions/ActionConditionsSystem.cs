@@ -20,11 +20,12 @@ public sealed partial class ActionConditionsSystem : EntitySystem
 
     private void OnAttempt(Entity<ActionConditionsComponent> ent, ref ActionAttemptEvent args)
     {
+        var user = args.User;
         args.Cancelled = ent.Comp.Any
-            ? !_conditions.TryAnyCondition(args.User, ent.Comp.Conditions)
-            : !_conditions.TryConditions(args.User, ent.Comp.Conditions);
+            ? !_conditions.TryAnyCondition(user, ent.Comp.Conditions, user: user)
+            : !_conditions.TryConditions(user, ent.Comp.Conditions, user: user);
 
-        DoPopup(args.Cancelled, ent.Comp.FailPopup, args.User);
+        DoPopup(args.Cancelled, ent.Comp.FailPopup, user);
     }
 
     #region  Helper

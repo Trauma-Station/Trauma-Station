@@ -16,7 +16,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Kitchen.EntitySystems;
 
-internal sealed partial class HandheldGrinderSystem : EntitySystem
+public sealed partial class HandheldGrinderSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private INetManager _net = default!;

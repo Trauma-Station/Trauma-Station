@@ -181,7 +181,7 @@
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: ProjectileDemonicHand
-      speed: 9
+      projectileSpeed: 9
   - type: VampireCostAction
     bloodCost: 20
 

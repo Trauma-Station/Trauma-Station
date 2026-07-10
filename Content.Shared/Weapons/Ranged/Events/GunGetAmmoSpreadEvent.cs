@@ -5,4 +5,4 @@ namespace Content.Shared.Weapons.Ranged.Events;
 /// </summary>
 /// <param name="Spread">The spread of the ammo, can be changed by handlers.</param>
 [ByRefEvent]
-public record struct GunGetAmmoSpreadEvent(Angle Spread);
+public record struct GunGetAmmoSpreadEvent(Angle Spread, EntityUid? User); // Trauma - added user

@@ -4,6 +4,7 @@
   parent: BasePhysicalKnowledge
   id: ToughnessKnowledge
   name: Toughness
+  description: How resistant your ha and ka are to damage.
   components:
   - type: Knowledge
     experienceCost: 20
@@ -21,6 +22,7 @@
   parent: BasePhysicalKnowledge
   id: StrengthKnowledge
   name: Strength
+  description: How powerful your arm muscles are, mostly affects melee weapons.
   components:
   - type: Knowledge
     experienceCost: 12
@@ -35,6 +37,7 @@
   parent: BasePhysicalKnowledge
   id: AthleticsKnowledge
   name: Athletics
+  description: Gives you more stamina, making it harder to stun you among other things. Sometimes known as shitter-fu.
   components:
   - type: Knowledge
     experienceCost: 12
@@ -51,6 +54,7 @@
   parent: BasePhysicalKnowledge
   id: ThrowingKnowledge
   name: Throwing
+  description: Makes you throw items faster and with more precision.
   components:
   - type: Knowledge
     experienceCost: 5

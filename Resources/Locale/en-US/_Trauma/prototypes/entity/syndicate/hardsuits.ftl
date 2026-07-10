@@ -5,7 +5,7 @@ ent-ClothingOuterHardsuitSyndie = blood-red hardsuit
 ent-ClothingOuterHardsuitSyndieMedic = blood-red medic hardsuit
     .desc = A heavily armored and agile advanced hardsuit specifically so that the medic wearing it stands out among their fellow operatives as they heal their injuries. Property of Gorlex Entertainment.
 
-ent-ClothingOuterHardsuitSyndieCommander = syndicate commander hardsuit
+ent-ClothingOuterHardsuitSyndieCommander = blood-red commander hardsuit
     .desc = A luxury variant of the blood-red hardsuit, purposely-built for the commander of a syndicate operative squad to stand out and act like the villain that Gorlex wants them to be. Has slightly improved armor and greatly improved mobility.
 
 ent-ClothingOuterHardsuitSyndieElite = syndicate elite hardsuit

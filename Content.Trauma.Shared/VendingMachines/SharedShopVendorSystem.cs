@@ -18,7 +18,6 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private MiningPointsSystem _points = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
@@ -89,7 +88,7 @@ public abstract partial class SharedShopVendorSystem : EntitySystem
         if (ent.Comp.Ejecting != null || ent.Comp.Broken || !_power.IsPowered(ent.Owner))
             return;
 
-        var pack = _proto.Index(ent.Comp.Pack);
+        var pack = ProtoMan.Index(ent.Comp.Pack);
         if (args.Index < 0 || args.Index >= pack.Listings.Count)
             return;
 

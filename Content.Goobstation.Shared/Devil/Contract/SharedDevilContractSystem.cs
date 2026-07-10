@@ -22,7 +22,6 @@ namespace Content.Goobstation.Shared.Devil.Contract;
 public abstract partial class SharedDevilContractSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedExplosionSystem _explosion = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -271,7 +270,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
 
             var clauseKey = match.Groups["clause"].Value.Trim().ToLowerInvariant().Replace(" ", "");
 
-            if (!Proto.TryIndex(clauseKey, out DevilClausePrototype? clauseProto)
+            if (!ProtoMan.TryIndex(clauseKey, out DevilClausePrototype? clauseProto)
                 || !contract.Comp.CurrentClauses.Add(clauseProto))
                 continue;
 

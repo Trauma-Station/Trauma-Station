@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Shared.Surgery.Tools;
-using Content.Shared.Kitchen.Components;
 using Robust.Shared.Audio;
 
 namespace Content.Medical.Shared.Surgery;
@@ -21,9 +20,10 @@ public sealed partial class GhettoSurgerySystem : EntitySystem
 
     private void OnSharpInit(Entity<SharpComponent> ent, ref MapInitEvent args)
     {
+        var dirty = false;
         if (EnsureComp<SurgeryToolComponent>(ent, out var tool))
         {
-            ent.Comp.HadSurgeryTool = true;
+            ent.Comp.HadSurgeryTool = dirty = true;
         }
         else
         {
@@ -34,7 +34,7 @@ public sealed partial class GhettoSurgerySystem : EntitySystem
 
         if (EnsureComp<ScalpelComponent>(ent, out var scalpel))
         {
-            ent.Comp.HadScalpel = true;
+            ent.Comp.HadScalpel = dirty = true;
         }
         else
         {
@@ -44,13 +44,16 @@ public sealed partial class GhettoSurgerySystem : EntitySystem
 
         if (EnsureComp<BoneSawComponent>(ent, out var saw))
         {
-            ent.Comp.HadBoneSaw = true;
+            ent.Comp.HadBoneSaw = dirty = true;
         }
         else
         {
             saw.Speed = 0.2f;
             Dirty(ent.Owner, saw);
         }
+
+        if (dirty)
+            Dirty(ent);
     }
 
     private void OnSharpShutdown(Entity<SharpComponent> ent, ref ComponentShutdown args)

@@ -56,3 +56,5 @@ verb-common-close = Close
 verb-common-open = Open
 verb-common-close-ui = Close UI
 verb-common-open-ui = Open UI
+verb-common-enter = Enter
+verb-common-exit = Exit

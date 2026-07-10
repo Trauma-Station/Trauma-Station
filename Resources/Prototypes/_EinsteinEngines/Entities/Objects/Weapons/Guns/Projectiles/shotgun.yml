@@ -13,7 +13,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 3.333
+        Ballistic: 3.333
 
 - type: entity
   id: PelletShotgunSpreadBirdshot
@@ -38,7 +38,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 15
+        Ballistic: 15
 
 - type: entity
   id: PelletShotgunSpread00Buckshot
@@ -63,7 +63,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
+        Ballistic: 20
 
 - type: entity
   id: PelletShotgunSpread0000Buckshot

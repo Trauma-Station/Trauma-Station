@@ -5,6 +5,7 @@
   - BaseMob
   - MobCombat
   - FlyingMobBase
+  - MobNightVision
   id: MobStarGazer
   name: star gazer
   description: A creature that has been tasked to watch over the stars.
@@ -80,6 +81,7 @@
     baseWalkSpeed: 4
     baseSprintSpeed: 4
   - type: FlashImmunity
+    showInExamine: false
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
@@ -109,11 +111,6 @@
   - type: WarpPoint
     follow: true
     location: star gazer
-  - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
   - type: SupermatterImmune
   - type: EventHorizonIgnore
   - type: SpacetimeSpellbladeEnchantment # It's not a spellblade, trust

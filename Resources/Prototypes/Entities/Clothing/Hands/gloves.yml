@@ -3,6 +3,10 @@
   parent: ClothingHandsBase
   id: ClothingHandsGlovesBoxingBase
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Unarmed # you are still just hitting people
+  # </Trauma>
   - type: StaminaDamageOnHit
     damage: 8 #Stam damage values seem a bit higher than regular damage because of the decay, etc
     # This needs to be moved to boxinggloves
@@ -366,7 +370,7 @@
         Shock: 0.75
 
 - type: entity
-  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat ]
+  parent: [ BaseSecurityCargoContraband, ClothingHandsGlovesCombat, BaseSlicingRefinable ]
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
@@ -375,9 +379,8 @@
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/mercbattle.rsi
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: ClothingHandsGlovesMercFingerless
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -463,6 +466,10 @@
   name: gloves of the north star
   description: These gloves allow you to punch incredibly fast.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Unarmed # you are still just hitting people just really fast
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Hands/Gloves/northstar.rsi
   - type: Clothing

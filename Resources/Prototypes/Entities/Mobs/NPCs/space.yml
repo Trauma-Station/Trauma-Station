@@ -1,7 +1,7 @@
 - type: entity
   name: basic
   id: MobSpaceBasic
-  parent: SimpleSpaceMobBase
+  parent: [ SimpleSpaceMobBase, MobNightVision ]
   abstract: true
   description: It looks friendly. Why don't you give it a hug?
   components:
@@ -74,7 +74,7 @@
 - type: entity
   name: space bear
   id: MobBearSpace
-  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
+  parent: [AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Fauna # Goob
@@ -96,8 +96,8 @@
         Base: bear_dead
       Dead:
         Base: bear_dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatBear
       amount: 3
     - id: MaterialHideBear
@@ -106,8 +106,7 @@
   - type: ReplacementAccent
     accent: genericAggressive
   - type: Vocal
-    sounds:
-      Unsexed: Bear
+    emoteSounds: Bear
   - type: InteractionPopup
     successChance: 0.25
     interactSuccessString: petting-success-bear
@@ -125,9 +124,15 @@
 - type: entity
   name: space kangaroo
   id: MobKangarooSpace
-  parent: [ AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase ] # Shitmed
+  parent: [AppearanceSpaceAnimal, MobSpaceBasic, StripableInventoryBase, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
   description: It looks friendly. Why don't you give it a hug?
   components:
+  # <Trauma>
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBounce
+  - type: Fauna
+  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/kangaroo.rsi
@@ -164,26 +169,21 @@
     speciesId: kangaroo
     templateId: spacekangaroo
   - type: Vocal
-    sounds:
-      Unsexed: Kangaroo
-  - type: FootstepModifier # Trauma - revert upstream removal
-    footstepSoundCollection:
-      collection: FootstepBounce
-  - type: LanguageSpeaker # Einstein Engines - Language
+    emoteSounds: Kangaroo
+  - type: LanguageSpeaker # Trauma - language instead of accent
     speaks:
     - Kangaroo
     understands:
     - Kangaroo
     - TauCetiBasic
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeat
       amount: 1
-  - type: Fauna # Lavaland Change
   - type: MobThresholds
     thresholds:
       0: Alive
-      120: Dead # Lavaland Change: 60 -> 120
+      120: Dead # Trauma - was 60
 
 - type: entity
   id: MobKangarooSpaceSalvage
@@ -195,7 +195,7 @@
 - type: entity
   name: space spider
   id: MobSpiderSpace
-  parent: [ AppearanceSpaceAnimal, MobSpaceBasic ] # Shitmed
+  parent: [AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceAnimal
   description: It's so glowing, it looks dangerous.
   components:
   # <Goob>
@@ -224,8 +224,8 @@
         BaseUnshaded: glow
       Dead:
         Base: spacespider_dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSpider
       amount: 2
     - id: EggSpider
@@ -283,10 +283,7 @@
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
   - type: Vocal
-    sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
+    emoteSounds: UnisexArachnid
   - type: TypingIndicator
     proto: spider
 
@@ -318,7 +315,7 @@
 - type: entity
   name: space cobra
   id: MobCobraSpace
-  parent: [ AppearanceSpaceCobra, MobSpaceBasic ] # Shitmed
+  parent: [AppearanceSpaceCobra, MobSpaceBasic, BaseSlicingRefinable] # Trauma - added AppearanceSpaceCobra
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     # <Trauma>
@@ -332,10 +329,6 @@
     - type: NpcFactionMember
       factions:
       - Xeno # Aligning them with Space Adders
-    - type: NightVision
-      color: "#808080"
-      activateSound: null
-      deactivateSound: null
     - type: VentCrawler
     # </Trauma>
     - type: Sprite
@@ -363,15 +356,15 @@
           BaseUnshaded: glow
         Dead:
           Base: dead_spacecobra
-    - type: Butcherable
-      spawned:
-        - id: FoodMeatSnake
-          amount: 2
-        - id: UraniumOre1
-          amount: 1
-        - id: ClothingShoesSnakeskinBoots
-          amount: 1
-          prob: 0.3
+    - type: ToolRefinable
+      refineResult:
+      - id: FoodMeatSnake
+        amount: 2
+      - id: UraniumOre1
+        amount: 1
+      - id: ClothingShoesSnakeskinBoots
+        amount: 1
+        prob: 0.3
     - type: Bloodstream
       bloodReferenceSolution:
         reagents:
@@ -447,7 +440,98 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: [SimpleSpaceMobBase, BaseMobAnimal, SolutionVermin]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobSheepBase ]
+  id: MobSheepSpace
+  name: space sheep
+  description: A sheep... in space!
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - state: space_sheep_bare
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+      visible: true
+      sprite: Mobs/Animals/sheep.rsi
+    - state: space_sheep_wool_glowmask
+      map: [ "wooly" ]
+      visible: true
+      sprite: Mobs/Animals/sheep.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.ShearableVisuals.Shearable:
+        wooly:
+          True: {visible: true}
+          False: {visible: false}
+      enum.MobStateVisuals.State:
+        wooly:
+          Alive: {state: space_sheep_wool_glowmask}
+          Dead: {state: space_sheep_wool_dead}
+          Critical: {state: space_sheep_wool_dead}
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.35
+        density: 150
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: Reproductive
+    partnerWhitelist:
+      tags:
+      - Sheep
+    offspring:
+    - id: MobSheep
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: space_sheep_harvested
+      Critical:
+        Base: space_sheep_dead
+      Dead:
+        Base: space_sheep_dead
+  - type: Shearable
+    targetSolutionName: wool
+    shearedProductId: MaterialDurathread1
+    solutionPerProduct: 10
+    toolQuality: Shearing
+    shearableMarkupText: space-sheep-shearable-examine-markup
+    unShearableMarkupText: space-sheep-not-shearable-examine-markup
+    # Caused problems (SAD), to be re-implemented when we get a real particle system.
+  # - type: ActiveJetpack # Pretty particles
+  #   effectCooldown: 4
+  #   maxDistance: 0.3
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0.6
+    baseSprintSpeed: 2.0
+  - type: PointLight # Glows a little bit to see better in deep space.
+    radius: 2.0
+    energy: 1.0
+    color: "#4795ff" # Light blue colour.
+  - type: InteractionPopup
+    successChance: 0.8 #SHEEP so FRIEND!!! HUG! SQUISHY! SOFT!
+    interactDelay: 1
+    interactSuccessString: petting-success-sheep
+    interactFailureString: petting-failure-sheep
+    interactSuccessSpawn: EffectHearts #🥰
+    interactSuccessSound:
+      collection: SheepSpace
+      params:
+        variation: 0.05
+  - type: MobPrice
+    price: 600
+  - type: Wooly
+    quantity: 10
+    growthDelay: 120 #2 minutes
+  - type: Speech
+    speechSounds: SheepSpace
+    speechVerb: Sheep
+  - type: Vocal
+    emoteSounds: SheepSpace
+
+- type: entity
+  parent: [SimpleSpaceMobBase, BaseMobAnimal, SolutionVermin, MobNightVision]
   id: MobSnail
   name: snail
   description: Revolting unless you're french.

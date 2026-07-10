@@ -14,11 +14,13 @@
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: CosmicTransmutable
     transmuteTo: ScytheCosmicCult
+  - type: WeaponClass
+    class: Bludgeon # not really but you use it like one
+  - type: Sharp
   # </Trauma>
   - type: Tag
     tags:
     - FireAxe
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true # Trauma
@@ -57,8 +59,11 @@
     - suitStorage
   - type: Tool
     qualities:
-      - Axing # Trauma
-      - Prying
+    - Axing # Trauma
+    - Prying
+    - Prying
+    - Slicing
+    - Sawing
   - type: ToolTileCompatible
   - type: Prying
   - type: UseDelay

@@ -4,6 +4,11 @@
   id: WeaponImprovisedPneumaticCannon
   description: Improvised using nothing but a pipe, some zipties, and a pneumatic cannon. Doesn't accept tanks without enough gas.
   components:
+  # <Trauma>
+  - type: PacifismAllowedGun # thief major
+  - type: WeaponClass
+    class: Heavy
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Cannons/pneumatic_cannon.rsi
     layers:
@@ -61,8 +66,6 @@
       storagebase: !type:Container
         ents: []
       gas_tank: !type:ContainerSlot
-  - type: PacifismAllowedGun
-
 
 - type: entity
   parent: BaseStorageItem
@@ -71,6 +74,11 @@
   suffix: Empty
   description: Load cream pie for optimal results.
   components:
+  # <Trauma>
+  - type: PacifismAllowedGun # thief clown major
+  - type: WeaponClass
+    class: Heavy
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Cannons/pie_cannon.rsi
     layers:

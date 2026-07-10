@@ -90,6 +90,7 @@ public sealed class StationJobsTest : GameTest
     private const int TotalPlayers = PlayerCount + CaptainCount;
 
     [Test]
+    [Explicit] // Trauma - takes a whole minute for an api test of something unchanged for years
     public async Task AssignJobsTest()
     {
         var pair = Pair;

@@ -65,6 +65,7 @@
   clauseWeight: -15
   addedComponents:
   - type: FlashImmunity
+    showInExamine: false
 
 - type: clause
   id: fearofelectricity

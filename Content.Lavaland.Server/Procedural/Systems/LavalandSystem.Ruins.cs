@@ -256,7 +256,7 @@ public sealed partial class LavalandSystem
 
         foreach (var (protoId, count) in protos)
         {
-            var proto = _proto.Index(protoId);
+            var proto = ProtoMan.Index(protoId);
             for (var i = 0; i < count; i++)
             {
                 list.Add(proto);
@@ -271,7 +271,7 @@ public sealed partial class LavalandSystem
         var list = new List<LavalandDungeonRuinPrototype>();
         foreach (var (protoId, count) in protos)
         {
-            var proto = _proto.Index(protoId);
+            var proto = ProtoMan.Index(protoId);
             for (var i = 0; i < count; i++)
             {
                 list.Add(proto);
@@ -298,7 +298,8 @@ public sealed partial class LavalandSystem
         var center = box.Center;
         var roomTransform = Matrix3Helpers.CreateTranslation(center.X, center.Y);
         var seed = _random.Next();
-        var random = new System.Random(seed);
+        IRobustRandom random = new RobustRandom();
+        random.SetSeed(seed);
 
         // Copy all tiles
         _tiles.Clear();

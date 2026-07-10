@@ -8,13 +8,11 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Magic;
 using Content.Shared.Popups;
-using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Mimery;
 
 public sealed partial class AdvancedMimerySystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedMagicSystem _magic = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -69,7 +67,7 @@ public sealed partial class AdvancedMimerySystem : EntitySystem
         foreach (var position in _magic.GetInstantSpawnPositions(transform, new TargetInFront()))
         {
             args.Handled = true;
-            PredictedSpawnAttachedTo(ent.Comp.WallPrototype, position.SnapToGrid(EntityManager, _mapMan));
+            PredictedSpawnAttachedTo(ent.Comp.WallPrototype, position.SnapToGrid(EntityManager));
         }
 
         if (!args.Handled)

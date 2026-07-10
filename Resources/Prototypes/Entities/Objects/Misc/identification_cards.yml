@@ -963,6 +963,12 @@
   suffix: Admin
   description: An ID card that gives you access beyond your wildest dreams.
   components:
+  # <Trauma>
+  - type: AccessScannerBlacklist # dont let default aghost get doxxed
+  - type: NanoChatCard
+    notificationsMuted: true
+    listNumber: false
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/id_cards.rsi
     layers:
@@ -990,9 +996,6 @@
     - SyndicateAgent
     - Wizard
     - Xenoborg
-  - type: NanoChatCard # DeltaV
-    notificationsMuted: true
-    listNumber: false
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener
