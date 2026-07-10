@@ -491,13 +491,6 @@ public sealed partial class GoobCVars
 
     #endregion
 
-    #region Flash
-
-    public static readonly CVarDef<bool> FlashDirectionCheck =
-        CVarDef.Create("flash.direction_check", true, CVar.ARCHIVE | CVar.REPLICATED);
-
-    #endregion
-
     /// <summary>
     /// Controls how often GPS updates.
     /// </summary>
