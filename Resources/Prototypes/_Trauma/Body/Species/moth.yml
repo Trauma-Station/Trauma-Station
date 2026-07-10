@@ -12,6 +12,26 @@
       state: empty # no sprite since the markings actually control it
   - type: SpeedModifierOrgan
     weightlessAcceleration: 0.5 # 50% faster base acceleration in space/0G
+  - type: DashWings
+    speciesWhitelist:
+    # need to have a body adapted to controlling wings
+    - Moth
+    - Vox # They are birds I guess
+    toAdd:
+    - type: TackleModifier # Innate tackle
+      allowCollision: false
+      speedMultiplier: 1
+      rangeMultiplier: 1
+      cooldownMultiplier: 2.167 # Roughly 6.5s
+      userEffects:
+      - !type:Emote
+        emote: Flip
+      - !type:PlaySoundEffect
+        positional: false
+        sound: /Audio/_Goobstation/Effects/moth_wings.ogg
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectProjectileImmunity # Dark souls
+        time: 0.65
 
 - type: entity
   parent: OrganMothWings
