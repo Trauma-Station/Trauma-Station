@@ -19,7 +19,6 @@ public sealed partial class OrganChipSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -29,6 +28,8 @@ public sealed partial class OrganChipSystem : EntitySystem
     [Dependency] private EntityQuery<OrganChipContainerComponent> _containerQuery = default!;
 
     public static readonly VerbCategory ChipsCategory = new("verb-categories-organ-chips", "/Textures/_Trauma/Objects/Specific/brain_chips.rsi/icon.png");
+
+    private List<EntityUid> _chips = new();
 
     public override void Initialize()
     {
@@ -134,10 +135,10 @@ public sealed partial class OrganChipSystem : EntitySystem
             return;
 
         // go through each chip in reverse + not using foreach since it gets modified
-        var chips = ent.Comp.Container.ContainedEntities;
-        for (int i = chips.Count - 1; i >= 0; i++)
+        _chips.Clear();
+        _chips.AddRange(ent.Comp.Container.ContainedEntities);
+        foreach (var chip in _chips)
         {
-            var chip = chips[i];
             _container.Insert(chip, comp.Container);
         }
     }
@@ -347,7 +348,7 @@ public sealed partial class OrganChipSystem : EntitySystem
 
     private string OrganName(EntityUid uid)
         => _body.GetCategory(uid) is { } category
-            ? _proto.Index(category).Name.ToLower()
+            ? ProtoMan.Index(category).Name.ToLower()
             : Name(uid);
 
     public void InstallChip(EntityUid mob, [ForbidLiteral] EntProtoId<OrganChipComponent> id)

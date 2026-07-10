@@ -143,7 +143,7 @@
     seedId: sugarcane
 
 - type: entity
-  parent: ProduceBase
+  parent: [ProduceBase, BaseSlicingRefinable]
   id: Papercane
   name: papercane roll
   description: Why do we even need to grow paper?
@@ -154,9 +154,10 @@
     heldPrefix: produce
   - type: Produce
     seedId: papercane
-  - type: Log
-    spawnedPrototype: SheetPaper1
-    spawnCount: 2
+  - type: ToolRefinable
+    refineResult:
+    - id: SheetPaper1
+      amount: 2
 
 - type: entity
   parent: FoodProduceBase
@@ -193,7 +194,7 @@
     - Ruminant
 
 - type: entity
-  parent: ProduceBase
+  parent: [ProduceBase, BaseSlicingRefinable]
   id: Log
   name: tower-cap log
   description: It's better than bad, it's good!
@@ -215,11 +216,14 @@
         Blunt: 10
   - type: Produce
     seedId: towercap
-  - type: Log
-    spawnCount: 5 # Trauma
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: MaterialWoodPlank1
+      amount: 5 # Trauma
 
 - type: entity
-  parent: ProduceBase
+  parent: [ProduceBase, BaseSlicingRefinable]
   id: SteelLog
   name: steel-cap log
   description: Steel doesn't grow on trees! It grows on mushrooms, of course.
@@ -241,9 +245,11 @@
         Blunt: 12
   - type: Produce
     seedId: steelcap
-  - type: Log
-    spawnedPrototype: SheetSteel1
-    spawnCount: 5 # Trauma - 5x, steel costs are so hyperinflated
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetSteel1
+      amount: 5 # Trauma - 5x, steel costs are so hyperinflated
 
 - type: entity
   parent: ProduceBaseRuminant
@@ -344,7 +350,7 @@
 
 - type: entity
   name: banana
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodBanana
   description: Rich in potassium.
   components:
@@ -371,9 +377,8 @@
   - type: Edible
     trash:
     - TrashBananaPeel
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: TrashBananaPeel
   - type: Solution
     solution:
@@ -406,7 +411,7 @@
 
 - type: entity
   name: mimana
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodMimana
   description: Mime's favorite.
   components:
@@ -417,9 +422,8 @@
   - type: Edible
     trash:
     - TrashMimanaPeel
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: TrashMimanaPeel
   - type: Solution
     solution:
@@ -874,7 +878,7 @@
 
 - type: entity
   name: pineapple
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodPineapple
   description: Mmm, tropical.
   components:
@@ -908,9 +912,10 @@
       reagents:
       - ReagentId: JuicePineapple
         Quantity: 10
-  - type: SliceableFood
-    count: 5
-    slice: FoodPineappleSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodPineappleSlice
+      amount: 5
   - type: Tag
     tags:
     - Fruit
@@ -1240,7 +1245,7 @@
 
 - type: entity
   name: ear of corn
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinable]
   id: FoodCorn
   description: Needs some butter! And some cooking...
   components:
@@ -1250,9 +1255,8 @@
   - type: Edible
     trash:
     - FoodCornTrash
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodCornTrash #no idea why you'd ever do this, but it's just here for consistency
   - type: Solution
     solution:
@@ -1305,7 +1309,7 @@
 
 - type: entity
   name: onion
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodOnion
   description: Nothing to cry over.
   components:
@@ -1327,16 +1331,17 @@
     heldPrefix: produce
   - type: Produce
     seedId: onion
-  - type: SliceableFood
-    count: 5
-    slice: FoodOnionSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodOnionSlice
+      amount: 5
   - type: Tag
     tags:
     - Vegetable
 
 - type: entity
   name: red onion
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   id: FoodOnionRed
   description: Purple despite the name.
   components:
@@ -1358,9 +1363,10 @@
     heldPrefix: produce
   - type: Produce
     seedId: onionred
-  - type: SliceableFood
-    count: 5
-    slice: FoodOnionRedSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodOnionRedSlice
+      amount: 5
   - type: Tag
     tags:
     - Vegetable
@@ -1911,7 +1917,7 @@
 
 - type: entity
   name: gatfruit
-  parent: [ FoodProduceBase, BaseSyndicateContraband ]
+  parent: [ FoodProduceBase, BaseSyndicateContraband, BaseSlicingRefinable ]
   id: FoodGatfruit
   description: A delicious, gun-shaped fruit with a thick wooden stem.
   components:
@@ -1934,9 +1940,8 @@
   - type: Edible
     trash:
     - WeaponRevolverPython
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: WeaponRevolverPython
   - type: Tag
     tags:
@@ -1948,7 +1953,7 @@
 
 - type: entity
   name: capfruit
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinable]
   id: FoodRealCapfruit
   description: A soft but smooth gun-shaped fruit.
   components:
@@ -1973,9 +1978,8 @@
   - type: Edible
     trash:
     - RevolverCapGun
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: RevolverCapGun
   - type: Tag
     tags:
@@ -1987,7 +1991,7 @@
 
 - type: entity
   name: capfruit
-  parent: FoodRealCapfruit
+  parent: [FoodRealCapfruit, BaseSlicingRefinable]
   id: FoodFakeCapfruit
   suffix: Fake
   components:
@@ -1996,9 +2000,8 @@
   - type: Edible
     trash:
     - RevolverCapGunFake
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: RevolverCapGunFake
 
 - type: entity
@@ -2117,7 +2120,7 @@
 
 - type: entity
   name: watermelon
-  parent: [FoodProduceBase, ItemHeftyBase]
+  parent: [FoodProduceBase, ItemHeftyBase, BaseSlicingRefinableFood]
   id: FoodWatermelon
   description: Round green object that you can slice and eat.
   components:
@@ -2176,13 +2179,12 @@
         solution: food
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SliceableFood
-    count: 4
-    slice: FoodWatermelonSlice
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodWatermelonSlice
+      amount: 4
     - id: ClothingHeadHatWatermelon
+      prob: 0.5
   - type: Tag
     tags:
     - Fruit
@@ -2230,7 +2232,7 @@
 
 - type: entity
   name: holymelon
-  parent: [FoodProduceBase, ItemHeftyBase]
+  parent: [FoodProduceBase, ItemHeftyBase, BaseSlicingRefinableFood]
   id: FoodHolymelon
   description: The water within this melon has been blessed by some deity that's particularly fond of watermelon.
   components:
@@ -2289,13 +2291,12 @@
         solution: food
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: SliceableFood
-    count: 4
-    slice: FoodHolymelonSlice
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodHolymelonSlice
+      amount: 4
     - id: ClothingHeadHatHolyWatermelon
+      prob: 0.5
   - type: Tag
     tags:
     - Fruit
@@ -2412,7 +2413,7 @@
 
 - type: entity
   name: bungo fruit
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinable]
   id: FoodBungo
   description: The humble bungo fruit.
   components:
@@ -2422,9 +2423,8 @@
   - type: Edible
     trash:
     - FoodBungoPit
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodBungoPit
   - type: Solution
     solution:
@@ -2541,7 +2541,7 @@
 
 - type: entity
   name: pumpkin
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinable]
   id: FoodPumpkin
   description: A large, orange... berry. Seriously.
   components:
@@ -2580,9 +2580,8 @@
         solution: food
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: CarvedPumpkin
     - id: PumpkinSeeds
   - type: Tag
@@ -2648,7 +2647,7 @@
   name: cotton boll
   description: Moth people's favorite snack, and just as fluffy as them.
   id: CottonBol
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/cotton.rsi
@@ -2664,9 +2663,10 @@
         Quantity: 5
       - ReagentId: Cellulose
         Quantity: 10
-  - type: Log
-    spawnedPrototype: MaterialCotton1
-    spawnCount: 2
+  - type: ToolRefinable
+    refineResult:
+    - id: MaterialCotton1
+      amount: 2
   - type: Produce
     seedId: cotton
   - type: Tag
@@ -2681,7 +2681,7 @@
   name: pyrotton boll
   description: This will probably set you on fire.
   id: PyrottonBol
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinableFood]
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/pyrotton.rsi
@@ -2699,9 +2699,10 @@
         Quantity: 5
       - ReagentId: Cellulose
         Quantity: 5
-  - type: Log
-    spawnedPrototype: MaterialPyrotton1
-    spawnCount: 2
+  - type: ToolRefinable
+    refineResult:
+    - id: MaterialPyrotton1
+      amount: 2
   - type: Produce
     seedId: pyrotton
   - type: Tag
@@ -2716,7 +2717,7 @@
 
 - type: entity
   name: cherry
-  parent: FoodProduceBase
+  parent: [FoodProduceBase, BaseSlicingRefinable]
   id: FoodCherry
   description: Juicy red cherry with a pit inside.
   components:
@@ -2726,9 +2727,8 @@
   - type: Edible
     trash:
     - TrashCherryPit
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: TrashCherryPit
   - type: Solution
     solution:

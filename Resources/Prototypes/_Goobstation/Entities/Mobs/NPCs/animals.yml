@@ -3,12 +3,13 @@
 - type: entity
   name: gondola
   parent:
-    - MobRespirator
-    - MobAtmosStandard
-    - BaseSimpleMob
-    - MobBloodstream
-    - MobFlammable
-    - BaseMobAnimal
+  - MobRespirator
+  - MobAtmosStandard
+  - BaseSimpleMob
+  - MobBloodstream
+  - MobFlammable
+  - BaseMobAnimal
+  - BaseSlicingRefinable
   id: MobGondola
   description: Having no hands he embodies the Taoist principle of wu-wei (non-action) while his smiling facial expression shows his utter and complete acceptance of the world as it is.
   components:
@@ -45,18 +46,18 @@
     baseSprintSpeed: 2
   - type: RandomSprite
     available:
-        - enum.DamageStateVisualLayers.Base:
-            gondola_body_long: GondolaBrowns
-            gondola_body_medium: GondolaBrowns
-          enum.DamageStateVisualLayers.BaseUnshaded:
-            gondola_moustache_large: ""
-            gondola_moustache_small: ""
-        - enum.DamageStateVisualLayers.Base:
-            gondola_body_medium: GondolaBrowns
-            gondola_body_short: GondolaBrowns
-          enum.DamageStateVisualLayers.BaseUnshaded:
-            gondola_moustache_large_short: ""
-            gondola_moustache_small_short: ""
+    - enum.DamageStateVisualLayers.Base:
+        gondola_body_long: GondolaBrowns
+        gondola_body_medium: GondolaBrowns
+      enum.DamageStateVisualLayers.BaseUnshaded:
+        gondola_moustache_large: ""
+        gondola_moustache_small: ""
+    - enum.DamageStateVisualLayers.Base:
+        gondola_body_medium: GondolaBrowns
+        gondola_body_short: GondolaBrowns
+      enum.DamageStateVisualLayers.BaseUnshaded:
+        gondola_moustache_large_short: ""
+        gondola_moustache_small_short: ""
   - type: Sprite
     sprite: _Goobstation/Mobs/Animals/gondola.rsi
     layers:
@@ -82,8 +83,8 @@
         Base: gondola_dead
       Dead:
         Base: gondola_dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatGondola
       amount: 3
   - type: Bloodstream
@@ -123,15 +124,11 @@
   - type: Perishable
 
 - type: entity
-  name: syndiroach
+  parent: [ MobMothroach, MobNightVision ]
   id: MobMothSyndie
-  parent: MobMothroach
+  name: syndiroach
   description: Explosive moth.
   components:
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: Sprite
     sprite: _Goobstation/Mobs/Animals/syndiroach.rsi
   - type: Clothing
@@ -198,9 +195,9 @@
         3
 
 - type: entity
-  name: lootbug
+  parent: [ SimpleSpaceMobBase, BaseSlicingRefinable ]
   id: MobLootbug
-  parent: SimpleSpaceMobBase
+  name: lootbug
   description: It eats metal, maybe it's eaten something of value?
   components:
   - type: Sprite
@@ -260,9 +257,9 @@
     tags:
     - Trash
     - VimPilot
-  - type: Butcherable
-    spawned:
-      - id: SpawnLootLootbug
+  - type: ToolRefinable
+    refineResult:
+    - id: SpawnLootLootbug
   - type: NpcFactionMember # they're pests, makes them the target of shiva and aves
     factions:
       - Mouse
@@ -293,10 +290,11 @@
   - type: MobPrice
     price: 500
 
+# TDOO: why does it not inherit from regular carp
 - type: entity
-  name: space carp
+  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobNightVision, BaseSlicingRefinable ]
   id: MobCarpSentient
-  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  name: space carp
   description: It's a space carp. Used to be a person.
   components:
   - type: InputMover
@@ -347,8 +345,8 @@
       Dead:
         Base: dead
         BaseUnshaded: dead_mouth
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: MaterialToothSpaceCarp1
@@ -375,10 +373,6 @@
     interactFailureString: petting-failure-carp
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic # Is sentient, should have TauCeti since it's the norm.
@@ -559,10 +553,7 @@
     emotes:
     - BrullbarHowl
   - type: Vocal
-    sounds:
-      Male: Brullbar
-      Female: Brullbar
-      Unsexed: Brullbar
+    emoteSounds: Brullbar
   - type: NpcFactionMember
     factions:
     - SimpleHostile
@@ -897,10 +888,7 @@
       collection: BikeHorn
     animation: WeaponArcFist
   - type: Vocal
-    sounds:
-      Male: ClownGoblin
-      Female: ClownGoblin
-      Unsexed: ClownGoblin
+    emoteSounds: ClownGoblin
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic

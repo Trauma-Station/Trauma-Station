@@ -29,7 +29,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] protected IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected IPrototypeManager _proto = default!;
     [Dependency] protected ISharedPlayerManager _player = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedLanguageSystem _language = default!;
@@ -216,7 +215,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         AllKnowledges.Clear();
         var name = Factory.GetComponentName<KnowledgeComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: replace with TryComp after engine update
             if (!proto.TryGetComponent<KnowledgeComponent>(name, out var comp))
@@ -270,7 +269,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (GetKnowledge(ent, id) is not { } unit)
         {
             // Can't add it with experience if you can't comprehend complexity.
-            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+            if (ProtoMan.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
                 return;
 
             // if you don't have it, you have a small change to learn it when gaining some xp

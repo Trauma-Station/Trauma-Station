@@ -432,13 +432,13 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Markers/teg_arrow.rsi
+    sprite: Markers/directional_arrow_indicator.rsi
     color: "#FFFFFFBB"
     layers:
-    - state: arrow
+    - state: blue_arrow
       rotation: 90
       offset: 3, 1
-    - state: arrow
+    - state: blue_arrow
       rotation: 90
       offset: -3, -1
   - type: TimedDespawn
@@ -454,10 +454,10 @@
   components:
   - type: Sprite
     layers:
-    - state: arrow
+    - state: blue_arrow
       rotation: 0
       offset: -1, 2
-    - state: arrow
+    - state: blue_arrow
       rotation: 180
       offset: 1, 2
 

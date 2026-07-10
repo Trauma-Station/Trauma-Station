@@ -639,10 +639,7 @@
     - type: SpecialLowTempImmunity
     - type: SpecialPressureImmunity
     - type: NightVision
-      color: white
-      activateSound: null
-      deactivateSound: null
-      drawOverlay: false
+      lightingColor: white
   actionPrototypes:
   - ActionResetStarGazerConsciousness
 
@@ -705,10 +702,7 @@
   event: !type:HereticXRayVisionEvent
     addedComponents:
     - type: NightVision
-      color: white
-      activateSound: null
-      deactivateSound: null
-      drawOverlay: false
+      lightingColor: white
 
 - type: hereticKnowledge
   id: BurglarsFinesse

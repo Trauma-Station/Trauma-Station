@@ -8,7 +8,6 @@ namespace Content.Trauma.Shared.CosmicCult;
 
 public sealed partial class CosmicShopSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -33,7 +32,7 @@ public sealed partial class CosmicShopSystem : EntitySystem
     private void OnInfluenceSelected(Entity<CosmicShopComponent> ent, ref InfluenceSelectedMessage args)
     {
         var user = args.Actor;
-        if (!_proto.TryIndex(args.InfluenceProtoId, out var proto) || !TryComp<CosmicCultComponent>(user, out var cultComp))
+        if (!ProtoMan.TryIndex(args.InfluenceProtoId, out var proto) || !TryComp<CosmicCultComponent>(user, out var cultComp))
             return;
 
         if (cultComp.EntropyBudget < proto.Cost || cultComp.OwnedInfluences.Contains(proto))
@@ -72,7 +71,7 @@ public sealed partial class CosmicShopSystem : EntitySystem
 
         foreach (var influence in cultComp.OwnedInfluences)
         {
-            if (!_proto.Resolve(influence, out var proto)) continue;
+            if (!ProtoMan.Resolve(influence, out var proto)) continue;
             cultComp.OwnedInfluences.Remove(influence);
             cultComp.UnlockedInfluences.Add(influence);
             cultComp.EntropyBudget += proto.Cost;

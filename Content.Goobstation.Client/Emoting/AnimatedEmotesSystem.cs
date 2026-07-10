@@ -13,7 +13,6 @@ namespace Content.Goobstation.Client.Emoting;
 public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 {
     [Dependency] private AnimationPlayerSystem _anim = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private CommonRaysSystem _rays = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TransformSystem _transform = default!;
@@ -68,7 +67,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
 
     private void OnAutoHandleState(Entity<AnimatedEmotesComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (_proto.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is { } ev)
+        if (ProtoMan.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is { } ev)
             RaiseLocalEvent(ent, ev);
     }
 

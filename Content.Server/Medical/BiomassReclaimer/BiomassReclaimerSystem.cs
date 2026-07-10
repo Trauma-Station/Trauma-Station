@@ -15,6 +15,7 @@ using Content.Shared.Climbing.Events;
 using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -29,6 +30,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Throwing;
+using Content.Shared.Tools.Components;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -260,11 +262,16 @@ namespace Content.Server.Medical.BiomassReclaimer
                 _solution.ResolveSolution(toProcess, stream.BloodSolutionName, ref stream.BloodSolution, out var solution))
             {
                 component.BloodReagents = solution.Clone();
-                //component.BloodReagents.ScaleSolution(50 / component.BloodReagents.Volume); // Trauma - this makes no sense + divide by 0 for fully drained mobs
+                var scale = component.BloodReagents.Volume <= FixedPoint2.Zero ? 0 : 50 / component.BloodReagents.Volume;
+                component.BloodReagents.ScaleSolution(scale);
             }
-            if (TryComp<ButcherableComponent>(toProcess, out var butcherableComponent))
+            if (TryComp<ToolRefinableComponent>(toProcess, out var refinable))
             {
-                component.SpawnedEntities.AddRange(butcherableComponent.SpawnedEntities); // Goobstation
+                component.SpawnedEntities = refinable.RefineResult;
+            }
+            else
+            {
+                component.SpawnedEntities = new();
             }
 
             var expectedYield = physics.FixturesMass * component.YieldPerUnitMass;

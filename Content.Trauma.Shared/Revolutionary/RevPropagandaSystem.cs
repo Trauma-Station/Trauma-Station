@@ -31,7 +31,6 @@ public sealed partial class RevPropagandaSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
@@ -55,7 +54,7 @@ public sealed partial class RevPropagandaSystem : EntitySystem
         SubscribeLocalEvent<RevPropagandaComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RevPropagandaComponent, AfterInteractEvent>(OnAfterInteract);
 
-        _speechLocalization = _proto.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
+        _speechLocalization = ProtoMan.Index<LocalizedDatasetPrototype>(RevConvertSpeechProto);
     }
 
     private void OnUseInHand(Entity<RevPropagandaComponent> ent, ref UseInHandEvent args)

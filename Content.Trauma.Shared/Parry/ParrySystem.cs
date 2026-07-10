@@ -34,7 +34,6 @@ public sealed partial class ParrySystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -248,7 +247,7 @@ public sealed partial class ParrySystem : EntitySystem
 
     private int GetSkillLevel(EntityUid user)
     {
-        return _proto.Resolve(MeleeKnowledge, out var skillProto)
+        return ProtoMan.Resolve(MeleeKnowledge, out var skillProto)
                && _knowledge.GetContainer(user) is { } brain
                && _knowledge.GetKnowledge(brain, skillProto) is { } skill
             ? skill.Comp.NetLevel

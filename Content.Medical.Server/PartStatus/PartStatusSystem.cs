@@ -29,7 +29,6 @@ public sealed partial class PartStatusSystem : EntitySystem
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private IChatManager _chat = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private WoundSystem _wound = default!;
@@ -137,7 +136,7 @@ public sealed partial class PartStatusSystem : EntitySystem
             partStatusSet.Add(new PartStatus(
                 part.PartType,
                 part.Symmetry,
-                _proto.Index(category).Name.ToLowerInvariant(), // looks better lowercase
+                ProtoMan.Index(category).Name.ToLowerInvariant(), // looks better lowercase
                 woundable.Comp.WoundableSeverity,
                 damageSeverities,
                 boneSev,
@@ -163,7 +162,7 @@ public sealed partial class PartStatusSystem : EntitySystem
                 !damageSeverities.TryGetValue(wound.Comp.DamageType, out var existingSeverity) ||
                 wound.Comp.WoundSeverity > existingSeverity)
                 damageSeverities[wound.Comp.TextString == null
-                    ? _proto.Index(wound.Comp.DamageGroup).ID
+                    ? ProtoMan.Index(wound.Comp.DamageGroup).ID
                     : wound.Comp.TextString] = wound.Comp.WoundSeverity;
 
             if (TryComp<BleedInflicterComponent>(wound, out var bleeds) && bleeds.IsBleeding)
@@ -324,7 +323,7 @@ public sealed partial class PartStatusSystem : EntitySystem
 
     private bool WoundSeverityCheck(string type)
     {
-        return !_proto.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
+        return !ProtoMan.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
     }
 
     private List<string> GetTraumaDescriptions(PartStatus partStatus, bool inspectingSelf)

@@ -7,79 +7,79 @@
     NanotrasenRepresentative:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 3h
+      time: 5h
     # Command
     Captain:
     - !type:RoleTimeRequirement
       role: JobHeadOfSecurity
-      time: 1h
+      time: 2h
     - !type:RoleTimeRequirement
       role: JobChiefMedicalOfficer
-      time: 1h
+      time: 2h
     - !type:RoleTimeRequirement
       role: JobQuartermaster
-      time: 1h
+      time: 2h
     - !type:RoleTimeRequirement
       role: JobResearchDirector
-      time: 1h
+      time: 2h
     - !type:RoleTimeRequirement
       role: JobChiefEngineer
-      time: 1h
+      time: 2h
     Quartermaster:
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 3h
+      time: 5h
     HeadOfPersonnel:
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 1.5h
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Service
-      time: 1.5h
+      time: 5h
     ChiefEngineer:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 3h
+      time: 5h
     ChiefMedicalOfficer:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 3h
+      time: 5h
     ResearchDirector:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 3h
+      time: 5h
     HeadOfSecurity:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 3h
+      time: 5h
     #Intern
     SecurityCadet:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 3h
+      time: 5h
       inverted: true
     - !type:OverallPlaytimeRequirement
       time: 2h
     TechnicalAssistant:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 3h
+      time: 5h
       inverted: true
     MedicalIntern:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 3h
+      time: 5h
       inverted: true
     ResearchAssistant:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 3h
+      time: 5h
       inverted: true
     ServiceWorker:
     # consider removing this if it gets turned into waiter
     - !type:DepartmentTimeRequirement
       department: Service
-      time: 3h
+      time: 5h
       inverted: true
     # Service
     Chef: # Anti-raider ops
@@ -91,98 +91,98 @@
     SalvageSpecialist:
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 1h
+      time: 2h
     # Engineering
     StationEngineer:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 1h
+      time: 2h
     AtmosphericTechnician:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 1h
+      time: 2h
     # Medical
     Chemist:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 1h
+      time: 2h
     MedicalDoctor:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 1h
+      time: 2h
     Paramedic:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 1h
+      time: 2h
     # Science
     Scientist:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 1h
+      time: 2h
     # Security
     SecurityOfficer:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h
+      time: 2h
     Detective:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h
+      time: 2h
     Warden:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 2h # muh intermediary role, also kinda has to know a bit more law.
+      time: 4h # muh intermediary role, also kinda has to know a bit more law.
     # Silicon
     StationAi:
     - !type:RoleTimeRequirement
       role: JobBorg
-      time: 3h
+      time: 5h
     Borg:
     - !type:OverallPlaytimeRequirement
       time: 2h
   antags:
     Changeling:
     - !type:OverallPlaytimeRequirement
-      time: 2h
+      time: 5h
     HeadRev:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 2h
+      time: 5h
     Nukeops:
     - !type:OverallPlaytimeRequirement
       time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h
+      time: 2h
     NukeopsMedic:
     - !type:OverallPlaytimeRequirement
       time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h
+      time: 2h
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 1h
+      time: 2h
     NukeopsCommander:
     - !type:OverallPlaytimeRequirement
+      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobHeadOfSecurity
       time: 3h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 1h
     SpaceNinja:
     - !type:OverallPlaytimeRequirement
-      time: 3h
+      time: 5h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h
+      time: 2h
     Wizard:
     - !type:OverallPlaytimeRequirement
       time: 5h
     MothershipCore:
     - !type:RoleTimeRequirement
       role: JobStationAi
-      time: 3h
+      time: 5h
     Xenoborg:
     - !type:RoleTimeRequirement
       role: JobBorg
-      time: 3h
+      time: 5h

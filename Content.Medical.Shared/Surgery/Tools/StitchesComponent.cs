@@ -8,11 +8,7 @@ namespace Content.Medical.Shared.Surgery.Tools;
 ///     It lets you fucking stitch your ass up
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class StitchesComponent : Component, ISurgeryToolComponent
+public sealed partial class StitchesComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "stitches";
-    [DataField]
-    public bool? Used { get; set; } = null;
-    [DataField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "stitches";
 }

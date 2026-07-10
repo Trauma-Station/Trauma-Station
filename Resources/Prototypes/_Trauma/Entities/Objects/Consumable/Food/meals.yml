@@ -8,9 +8,9 @@
   components:
   - type: FlavorProfile
     flavors:
-      - offensive
-      - meat
-      - carrot
+    - offensive
+    - meaty
+    - carrot
   - type: Sprite
     sprite: _Trauma/Objects/Consumable/Food/binglesoup.rsi
     layers:
@@ -108,9 +108,9 @@
         Quantity: 10
   - type: FlavorProfile
     flavors:
-      - offensive
-      - meat
-      - bread
+    - offensive
+    - meaty
+    - bread
   - type: Edible
     trash:
     - FoodKebabSkewer
@@ -134,9 +134,9 @@
         Quantity: 10
   - type: FlavorProfile
     flavors:
-      - offensive
-      - meat
-      - bread
+    - offensive
+    - meaty
+    - bread
 
 - type: entity
   parent: FoodInjectableBase
@@ -157,9 +157,9 @@
         Quantity: 10
   - type: FlavorProfile
     flavors:
-      - offensive
-      - meat
-      - bread
+    - offensive
+    - meaty
+    - bread
   - type: Construction
     graph: EggToast
     node: finish
@@ -254,8 +254,8 @@
         Quantity: 5
   - type: FlavorProfile
     flavors:
-      - meat
-      - pasta
+    - meaty
+    - pasta
   - type: Tag
     tags:
     - Meat
@@ -277,7 +277,7 @@
         Quantity: 20
   - type: FlavorProfile
     flavors:
-      - meat
+    - meaty
   - type: Tag
     tags:
     - Meat
@@ -301,9 +301,9 @@
         Quantity: 65
   - type: FlavorProfile
     flavors:
-      - meat
-      - apple
-      - mushroom
+    - meaty
+    - apple
+    - mushroom
   - type: Tag
     tags:
     - Meat
@@ -336,7 +336,7 @@
         Quantity: 10
   - type: FlavorProfile
     flavors:
-      - meat
+    - meaty
   - type: Tag
     tags:
     - Meat
@@ -358,9 +358,9 @@
         Quantity: 99999
   - type: FlavorProfile
     flavors:
-      - meat
-      - apotheosis
-      - bread
+    - meaty
+    - apotheosis
+    - bread
   - type: Tag
     tags:
     - Meat

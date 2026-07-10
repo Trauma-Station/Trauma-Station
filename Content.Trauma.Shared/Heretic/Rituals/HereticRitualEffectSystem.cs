@@ -7,7 +7,6 @@ namespace Content.Trauma.Shared.Heretic.Rituals;
 
 public sealed partial class HereticRitualEffectSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -101,7 +100,7 @@ public sealed partial class HereticRitualEffectSystem : EntitySystem
         Entity<HereticRitualRaiserComponent> ritual,
         EntityUid? user)
     {
-        var proto = _proto.Index(id);
+        var proto = ProtoMan.Index(id);
         if (TryConditions(target, proto.Conditions, ritual))
             ApplyEffects(target, proto.Effects, ritual, user);
     }

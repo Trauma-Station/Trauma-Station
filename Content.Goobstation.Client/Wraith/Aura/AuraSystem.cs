@@ -13,15 +13,13 @@ public sealed partial class AuraSystem : EntitySystem
 {
     private static readonly ProtoId<ShaderPrototype> Shader = "Aura";
 
-    [Dependency] private IPrototypeManager _protoMan = default!;
-
     private ShaderInstance _shader = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
 
-        _shader = _protoMan.Index(Shader).InstanceUnique();
+        _shader = ProtoMan.Index(Shader).InstanceUnique();
 
         SubscribeLocalEvent<AuraComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<AuraComponent, ComponentStartup>(OnStartup);

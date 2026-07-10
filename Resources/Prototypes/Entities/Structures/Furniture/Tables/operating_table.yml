@@ -4,16 +4,9 @@
   name: operating table
   description: Used for advanced medical procedures. # Shitmed
   components:
-  - type: Sprite
-    sprite: Structures/Furniture/Tables/optable.rsi
-    state: operating_table
-    noRot: true
-  - type: Icon
-    sprite: Structures/Furniture/Tables/optable.rsi
-    state: operating_table
+  # <Trauma>
   - type: OperatingTable
-    speedModifier: 1.5 # Shitmed
-  # Begin Shitmed Changes
+    speedModifier: 1.5
   - type: Construction
     graph: Machine
     node: machine
@@ -33,4 +26,12 @@
     range: 2
     ports:
     - OperatingTable
-  # End Shitmed Changes
+  # </Trauma>
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/optable.rsi
+    state: operating_table
+    noRot: true
+  - type: Icon
+    sprite: Structures/Furniture/Tables/optable.rsi
+    state: operating_table
+  - type: AmbientMusicMarkerMedical

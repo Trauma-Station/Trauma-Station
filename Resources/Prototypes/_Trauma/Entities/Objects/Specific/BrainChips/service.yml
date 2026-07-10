@@ -28,6 +28,7 @@
     skills:
       FabricationKnowledge: 25
       SmokeablesKnowledge: 50
+      KnowledgeWeaponsTool: 25
 
 - type: entity
   parent: BaseSkillChip

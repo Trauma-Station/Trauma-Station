@@ -36,6 +36,7 @@
   - MobCombat
   - MobAtmosStandard
   - MobFlammable
+  - MobNightVision
   id: MobShattered
   components:
   - type: FootprintOwner
@@ -80,10 +81,6 @@
         Holy: -2
   - type: Targeting
   - type: PressureImmunity
-  - type: NightVision
-    color: "#177698"
-    activateSound: null
-    deactivateSound: null
   - type: ZombieImmune
   - type: MobThresholds
     thresholds:
@@ -182,10 +179,7 @@
     speechSounds: null
   - type: DamageForceSay
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+    emoteSounds: MaleHuman
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
@@ -217,6 +211,7 @@
         volume: -8
   - type: Insulated
   - type: FlashImmunity
+    showInExamine: false
   - type: FlashSoundSuppression
     protectionRange: 0
   - type: CollectiveMind

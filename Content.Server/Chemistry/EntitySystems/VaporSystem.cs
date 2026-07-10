@@ -14,8 +14,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using System.Numerics;
 using Content.Shared.Vapor;
@@ -25,12 +23,10 @@ namespace Content.Server.Chemistry.EntitySystems
     [UsedImplicitly]
     public sealed partial class VaporSystem : EntitySystem // Trauma - made public
     {
-        [Dependency] private IPrototypeManager _protoManager = default!;
         [Dependency] private ReactiveSystem _reactive = default!;
         [Dependency] private ThrowingSystem _throwing = default!;
         [Dependency] private SharedAppearanceSystem _appearance = default!;
         [Dependency] private SharedMapSystem _map = default!;
-        [Dependency] private SharedPhysicsSystem _physics = default!;
         [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
         [Dependency] private SharedTransformSystem _transformSystem = default!;
 
@@ -78,9 +74,6 @@ namespace Content.Server.Chemistry.EntitySystems
             // Set Move
             if (TryComp(vapor, out PhysicsComponent? physics))
             {
-                _physics.SetLinearDamping(vapor, physics, 0f);
-                _physics.SetAngularDamping(vapor, physics, 0f);
-
                 _throwing.TryThrow(vapor, dir, speed, user: user,
                     predicted: false); // Trauma
 
@@ -99,7 +92,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
             if (TryComp<AppearanceComponent>(vapor, out var appearance))
             {
-                _appearance.SetData(vapor, VaporVisuals.Color, newSolution.GetColor(_protoManager).WithAlpha(1f), appearance);
+                _appearance.SetData(vapor, VaporVisuals.Color, newSolution.GetColor(ProtoMan).WithAlpha(1f), appearance);
                 _appearance.SetData(vapor, VaporVisuals.State, true, appearance);
             }
 
@@ -140,7 +133,7 @@ namespace Content.Server.Chemistry.EntitySystems
                         if (reagentQuantity.Quantity == FixedPoint2.Zero)
                             continue;
 
-                        var reagent = _protoManager.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+                        var reagent = ProtoMan.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
 
                         // Limit the reaction amount to a minimum value to ensure no floating point funnies.
                         // Ex: A solution with a low percentage transfer amount will slowly approach 0.01... and never get deleted

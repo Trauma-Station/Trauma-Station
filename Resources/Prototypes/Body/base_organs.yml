@@ -40,12 +40,32 @@
   - type: Organ
 
 - type: entity
-  parent: OrganBaseExternal # Shitmed
+  id: OrganBaseOrganic
+  name: organ
+  abstract: true
+  parent: [ OrganBaseFleshy, SolutionFood, SolutionTiny ] # Trauma - use OrganBaseFleshy
+  components:
+  - type: FlavorProfile
+    flavors:
+    - chicken # INTRODUCING OUR NEW EVERY-MEAT BURRITO, IT'S GOT EVERY MEAT!
+  - type: Edible
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 20
+  - type: Tag # I am nearing my limit of tolerance for TagComponent.
+    tags:
+    - Raw
+    - Meat
+
+- type: entity
+  parent: OrganBaseExternal # Trauma
   id: OrganBaseTorso
   name: torso
   abstract: true
   components:
-  # <Shitmed>
+  # <Trauma>
   - type: BodyPart
     partType: Torso
     slots:
@@ -70,8 +90,8 @@
   - type: UnremoveableOrgan # root part lol
   - type: Woundable
     canRemove: false # root part
-    integrity: 400 # Trauma - was 200
-    integrityCap: 400 # Trauma - was 200
+    integrity: 200
+    integrityCap: 200
     thresholds:
       Minor: 180
       Moderate: 120
@@ -80,7 +100,7 @@
       Mangled: 0
   - type: WoundableVisuals
     bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
-  # </Shitmed>
+  # </Trauma>
   - type: Organ
     category: Torso
   - type: Sprite
@@ -405,6 +425,13 @@
   - type: Examiner
   - type: BlockMovement
   - type: BadFood
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 15
+      - ReagentId: GreyMatter
+        Quantity: 10
   - type: FoodSequenceElement
     entries:
       Burger: Brain

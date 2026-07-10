@@ -157,11 +157,12 @@
     doAfterDuration: 4.0
 
 - type: entity
-  name: astral razor
   parent: [BaseItem, BaseCosmicContraband]
+  name: astral razor
   id: ScytheCosmicCult
   description: An preternatural scythe, wrought of indescribable material. Even just looking at it makes you feel cold.
   components:
+  - type: Sharp
   - type: CosmicEquipment
   - type: Sprite
     sprite: _DV/CosmicCult/Objects/cosmicscythe.rsi
@@ -242,8 +243,12 @@
     slots:
     - Back
     - suitStorage
-  - type: UnholyItem # Goobstation Shitchap
-  - type: Sharp
+  - type: UnholyItem
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true

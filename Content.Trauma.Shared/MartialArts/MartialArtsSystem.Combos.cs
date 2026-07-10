@@ -32,7 +32,7 @@ public partial class MartialArtsSystem
         ent.Comp.AllowedCombos.Clear();
         foreach (var item in ent.Comp.RoundstartCombos)
         {
-            ent.Comp.AllowedCombos.Add(_proto.Index(item));
+            ent.Comp.AllowedCombos.Add(ProtoMan.Index(item));
         }
     }
 
@@ -69,7 +69,7 @@ public partial class MartialArtsSystem
 
         if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
         {
-            var proto = _proto.Index(queued);
+            var proto = ProtoMan.Index(queued);
             var level = _knowledge.GetLevel(ent.Owner);
 
             if (!CheckCombo(ent, proto, level, user, args.Target))

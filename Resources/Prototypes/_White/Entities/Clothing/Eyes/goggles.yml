@@ -13,8 +13,9 @@
   - type: Clothing
     sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
   - type: NightVision
-    flashDurationMultiplier: 2
-    isEquipment: true
+    #flashDurationMultiplier: 2
+    relayOverlay: true
+    overlayColor: "#98FB9833"
   - type: IdentityBlocker
     coverage: EYES
 

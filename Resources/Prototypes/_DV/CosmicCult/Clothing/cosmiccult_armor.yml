@@ -133,8 +133,5 @@
   - type: TypingIndicatorClothing
     proto: CosmicTyping
   - type: SpeechOverride
-    emoteIDs:
-      Unsexed: CosmicEmotes
-      Female: CosmicEmotes
-      Male: CosmicEmotes
-    speechIDs: CosmicSpeech
+    emoteSounds: CosmicEmotes
+    speechSounds: CosmicSpeech

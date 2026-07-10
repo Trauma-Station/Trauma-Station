@@ -15,7 +15,11 @@
         Blunt: 1
   - type: WeaponClass
     class: Polearm
+  - type: Sharp
   # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: EmbeddableProjectile
     offset: -0.15,0.0
   - type: ThrowingAngle
@@ -39,7 +43,6 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: Sharp
   - type: Sprite
     sprite: Objects/Weapons/Melee/spear.rsi
     layers:
@@ -103,9 +106,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        # <Trauma> - removed 30 damage trigger
-        damage: 10 # was 20
-        # </Trauma>
+        damage: 10 # Trauma - was 20
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -252,12 +253,6 @@
     graph: SpearBone
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 40 # Goob edit, excess damage avoids cost of spawning entities.
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20

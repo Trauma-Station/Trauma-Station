@@ -11114,6 +11114,8 @@ Entries:
 - author: TechnicFighter
   changes:
   - type: Add
+    message: Added the Syndicate Behonker, you can buy it for 100 TC.
+  - type: Add
     message: Added the Bomb Collar Kit, you can buy it for 20 TC.
   - type: Add
     message: Added the Syndicate Shuttle Crate, you can buy it for 10 TC.
@@ -11129,8 +11131,6 @@ Entries:
     message: Added the Syndicate Door Remote, you can buy it for 15 TC.
   - type: Add
     message: Added the Sticky Explosive Grenade, you can buy it for 15 TC.
-  - type: Add
-    message: Added the Syndicate Zombie Bundle, you can buy it for 200 TC.
   - type: Add
     message: Added the Chemical Utility Knife, you can buy it for 10 TC.
   - type: Add
@@ -11255,3 +11255,74 @@ Entries:
   id: 1244
   time: '2026-07-06T02:15:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3450
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role time requirements have been increased.
+  - type: Add
+    message: NukeOps Commander now requires HoS playtime, lead from the front.
+  id: 1245
+  time: '2026-07-08T08:38:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3483
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Tool Combat Training to Botanist Skillchips
+  id: 1246
+  time: '2026-07-08T09:56:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3484
+- author: Joel
+  changes:
+  - type: Remove
+    message: Removed ling pending rework
+  id: 1247
+  time: '2026-07-08T16:20:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3482
+- author: Graves
+  changes:
+  - type: Add
+    message: Returned zombie bundle to the commander uplink! Go nuts, Gorlex!
+  id: 1248
+  time: '2026-07-10T03:47:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3495
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed changelings and other polymorphs breaking if you have skillchips.
+  id: 1249
+  time: '2026-07-10T09:31:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3497
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: >-
+      Added extra depth to the Stripping Update, you can now unsheathe and draw
+      weapons from people's holsters. 
+  - type: Tweak
+    message: >-
+      You are now stealthier with thief gloves, you will make no sound when
+      opening your bag, or when picking up items, or putting them in your bag.
+  - type: Fix
+    message: >-
+      Fixed a bug that allowed you to keep someone's inventory open forever, and
+      allowed you to modify it.
+  - type: Fix
+    message: >-
+      Fixed visual and audio cues that announced that you had stolen from
+      someone.
+  - type: Fix
+    message: Fixed thief gloves not making the doafter of the new verbs faster.
+  - type: Fix
+    message: Fixed a bug that made you need 2 hands to strip someone.
+  id: 1250
+  time: '2026-07-10T10:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3400
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Taming xenobio slimes by petting them actually works now...
+  - type: Add
+    message: Added super dwarves...
+  id: 1251
+  time: '2026-07-10T11:36:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3485

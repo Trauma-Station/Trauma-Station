@@ -407,7 +407,7 @@
     node: start
   - type: Strap
     buckleOnInteractHand: false
-    addBuckleverb: false
+    addBuckleVerb: false
     buckleOffset: "0, 0.2"
     whitelist:
       tags:

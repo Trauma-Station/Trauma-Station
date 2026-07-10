@@ -20,7 +20,7 @@ public sealed partial class DecalSystem : SharedDecalSystem
     {
         base.Initialize();
 
-        _overlay = new DecalOverlay(_sprites, EntityManager, PrototypeManager);
+        _overlay = new DecalOverlay(_sprites, EntityManager, ProtoMan);
         _overlayManager.AddOverlay(_overlay);
     }
 

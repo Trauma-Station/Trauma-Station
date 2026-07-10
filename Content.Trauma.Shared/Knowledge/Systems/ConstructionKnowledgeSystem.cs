@@ -16,7 +16,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 /// </summary>
 public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private QualitySystem _quality = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -34,7 +33,7 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 
     private void OnConstructAttempt(Entity<KnowledgeHolderComponent> ent, ref ConstructAttemptEvent args)
     {
-        if (args.Cancelled || !_proto.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
+        if (args.Cancelled || !ProtoMan.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
             return;
 
         if (_knowledge.GetContainer(ent) is not { } brain)
@@ -54,7 +53,7 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
                 if (args.LogError)
                 {
                     var masteryName = _knowledge.GetMasteryString(mastery);
-                    var name = _proto.Index(id).Name;
+                    var name = ProtoMan.Index(id).Name;
                     _popup.PopupEntity($"You are missing {masteryName} {name} to construct that!", ent, ent, PopupType.MediumCaution);
                 }
                 args.Cancelled = true;
@@ -65,7 +64,7 @@ public sealed partial class ConstructionKnowledgeSystem : EntitySystem
 
     private void OnConstructed(Entity<KnowledgeHolderComponent> ent, ref ConstructedEvent args)
     {
-        if (!_proto.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
+        if (!ProtoMan.Resolve<ConstructionPrototype>(args.Prototype, out var proto))
             return;
 
         // TODO: grant xp when building shit

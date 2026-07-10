@@ -20,7 +20,6 @@ using Content.Server.Body.Components;
 using Content.Server.DoAfter;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
-using Content.Server.Guardian;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Store.Systems;
@@ -46,6 +45,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Flash.Components;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Guardian.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Implants;
@@ -58,6 +58,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Polymorph;
 using Content.Shared.Preferences;
 using Content.Shared.Projectiles;
@@ -90,7 +91,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private SharedBloodstreamSystem _blood = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
@@ -192,7 +192,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (ent.Comp.ReagentDivisor <= 0)
             return;
 
-        if (!_proto.TryIndex(ent.Comp.StingConfiguration, out var configuration))
+        if (!ProtoMan.TryIndex(ent.Comp.StingConfiguration, out var configuration))
             return;
 
         TryInjectReagents(args.Target,
@@ -464,7 +464,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (!TryComp(action.Action, out ChangelingReagentStingComponent? reagentSting))
             return false;
 
-        if (!_proto.TryIndex(reagentSting.Configuration, out var configuration))
+        if (!ProtoMan.TryIndex(reagentSting.Configuration, out var configuration))
             return false;
 
         if (!TryInjectReagents(target, configuration.Reagents))
@@ -549,7 +549,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         if (data != null)
         {
-            if (!_proto.TryIndex(data.Profile.Species, out var species))
+            if (!ProtoMan.TryIndex(data.Profile.Species, out var species))
                 return null;
             pid = species.Prototype;
         }
@@ -706,7 +706,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (ent.Comp.EvolutionsAssigned) // this is solely because polymorph will cause mega errors otherwise
             return;
 
-        if (!_proto.TryIndex(ent.Comp.EvolutionsProto, out var evoProto))
+        if (!ProtoMan.TryIndex(ent.Comp.EvolutionsProto, out var evoProto))
             return;
 
         foreach (var startingComp in evoProto.Components)

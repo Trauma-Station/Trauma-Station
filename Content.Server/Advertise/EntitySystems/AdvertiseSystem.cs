@@ -11,7 +11,6 @@ namespace Content.Server.Advertise.EntitySystems;
 
 public sealed partial class AdvertiseSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private ChatSystem _chat = default!;
@@ -62,7 +61,7 @@ public sealed partial class AdvertiseSystem : EntitySystem
         if (attemptEvent.Cancelled)
             return;
 
-        if (_prototypeManager.TryIndex(advert.Pack, out var advertisements))
+        if (ProtoMan.TryIndex(advert.Pack, out var advertisements))
             _chat.TrySendInGameICMessage(uid, Loc.GetString(_random.Pick(advertisements.Values)), InGameICChatType.Speak, hideChat: true);
     }
 

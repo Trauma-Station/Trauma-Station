@@ -80,8 +80,8 @@
           Radiation: 0.0
     - type: FireProtection
       reduction: 0.2
-    - type: FlashImmunity # Goobstation
-    - type: FlashSoundSuppression # Goobstation
+    - type: FlashImmunity
+    - type: FlashSoundSuppression
       protectionRange: 0
     - type: ShowHealthBars
       damageContainers:

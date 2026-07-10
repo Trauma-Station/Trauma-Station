@@ -13,7 +13,7 @@ namespace Content.Server.StationEvents.Events;
 public sealed partial class SpaceSpawnRule : StationEventSystem<SpaceSpawnRuleComponent>
 {
     // <Trauma>
-    [Dependency] private IMapManager _map = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     // </Trauma>
     [Dependency] private SharedTransformSystem _transform = default!;
 

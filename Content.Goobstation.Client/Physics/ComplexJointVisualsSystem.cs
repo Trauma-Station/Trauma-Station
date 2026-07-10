@@ -7,13 +7,12 @@ namespace Content.Goobstation.Client.Physics;
 public sealed partial class ComplexJointVisualsSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlay = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _overlay.AddOverlay(new ComplexJointVisualsOverlay(EntityManager, _protoMan, _timing));
+        _overlay.AddOverlay(new ComplexJointVisualsOverlay(EntityManager, ProtoMan, _timing));
     }
 
     public override void Shutdown()

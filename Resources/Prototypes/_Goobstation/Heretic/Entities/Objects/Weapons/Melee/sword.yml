@@ -26,7 +26,6 @@
     range: 2
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-  - type: Sharp
   - type: Clothing
     quickEquip: false
     sprite: _Goobstation/Heretic/Entities/sword.rsi

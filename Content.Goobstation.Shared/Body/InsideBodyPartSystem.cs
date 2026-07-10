@@ -20,7 +20,6 @@ public sealed partial class InsideBodyPartSystem : CommonInsideBodyPartSystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private DamageableSystem _damage = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -92,7 +91,7 @@ public sealed partial class InsideBodyPartSystem : CommonInsideBodyPartSystem
             return;
 
         _damage.TryChangeDamage(part, ent.Comp.BurstDamage, ignoreResistances: true);
-        _wound.TryCreateWound(part, Trauma, 20, out _, _proto.Index(Brute));
+        _wound.TryCreateWound(part, Trauma, 20, out _, ProtoMan.Index(Brute));
 
         var target = part;
         if (_body.GetBody(part) is {} body)

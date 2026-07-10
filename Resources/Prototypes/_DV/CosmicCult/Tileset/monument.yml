@@ -142,7 +142,7 @@
     - state: stage2-relocate-in
       shader: unshaded
     offset: 0,1
-    drawdepth: 11
+    drawdepth: Overdoors
   - type: Fixtures
     fixtures:
       fix1:

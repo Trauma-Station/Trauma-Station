@@ -13,8 +13,10 @@
     maxItemSize: Small
     blacklist:
       components:
-      - Sharp
+      - Scalpel
       - MindContainer
+      tags:
+      - Knife
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
