@@ -1053,6 +1053,7 @@
     Telecrystal: 32 # Trauma - was 8, 5x and less expensive due to how shit it is
   categories:
   - UplinkExplosives
+  restockTime: 1800 # Trauma - pre 30 minute powersink is no more
 
 # Goob - Not buyable anymore in favor of the custom lawboard.
 #- type: listing
