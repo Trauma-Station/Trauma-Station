@@ -305,8 +305,8 @@ public sealed partial class TackleSystem : EntitySystem
             animated: false,
             doSpin: false);
 
-        if (mod.UserEffects is { } effects)
-            _effects.ApplyEffects(ent, effects, user: ent, predicted: false);
+        if (mod.UserEffect is { } effect)
+            _effects.TryApplyEffect(ent, effect, user: ent);
 
         return true;
     }

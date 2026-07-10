@@ -13,14 +13,7 @@ public sealed partial class DashWingsSystem : EntitySystem
     [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
     [Dependency] private EntityQuery<TacklerComponent> _tacklerQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<DashWingsComponent, OrganGotInsertedEvent>(OnInserted);
-        SubscribeLocalEvent<DashWingsComponent, OrganGotRemovedEvent>(OnRemoved);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInserted(Entity<DashWingsComponent> ent, ref OrganGotInsertedEvent args)
     {
         if (_timing.ApplyingState || ent.Comp.Changed || !_tacklerQuery.TryComp(args.Target, out var tackler))
@@ -41,6 +34,7 @@ public sealed partial class DashWingsSystem : EntitySystem
         EntityManager.AddComponents(args.Target, ent.Comp.ToAdd);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoved(Entity<DashWingsComponent> ent, ref OrganGotRemovedEvent args)
     {
         if (!ent.Comp.Changed || _timing.ApplyingState)

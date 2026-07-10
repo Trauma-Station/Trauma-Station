@@ -122,6 +122,6 @@ public sealed partial class TackleModifierComponent : Component
     /// <summary>
     /// Effects applied to user when tackling
     /// </summary>
-    [DataField]
-    public EntityEffect[]? UserEffects;
+    [DataField, AutoNetworkedField]
+    public ProtoId<EntityEffectPrototype>? UserEffect;
 }
