@@ -15,6 +15,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Emp;
@@ -94,27 +95,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 
-    public static readonly DamageSpecifier AllDamage = new()
-    {
-        DamageDict =
-        {
-            { "Blunt", 1 },
-            { "Slash", 1 },
-            { "Piercing", 1 },
-            { "Ballistic", 1 },
-            { "Heat", 1 },
-            { "Cold", 1 },
-            { "Shock", 1 },
-            { "Asphyxiation", 1 },
-            { "Bloodloss", 1 },
-            { "Caustic", 1 },
-            { "Poison", 1 },
-            { "Radiation", 1 },
-            { "Cellular", 1 },
-            { "Ion", 1 },
-            { "Holy", 1 },
-        },
-    };
+    public static readonly DamageSpecifier AllDamage = new();
 
     public static ProtoId<CollectiveMindPrototype> MansusLinkMind = "MansusLink";
 
@@ -122,6 +103,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     {
         base.Initialize();
 
+        // TODO: kill
         SubscribeAsh();
         SubscribeBlade();
         SubscribeRust();
@@ -131,13 +113,27 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeSide();
         SubscribeLock();
 
-        SubscribeLocalEvent<HereticActionComponent, BeforeCastSpellEvent>(OnBeforeCast);
-        SubscribeLocalEvent<HereticActionComponent, ActionAttemptEvent>(OnAttempt);
-        SubscribeLocalEvent<JauntComponent, HereticMagicCastAttemptEvent>(OnJauntMagicAttempt);
-
-        SubscribeLocalEvent<MindContainerComponent, BeforeTouchSpellAbilityUsedEvent>(OnBeforeTouchSpell);
+        CacheDamageTypes();
     }
 
+    [SubscribeLocalEvent]
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<DamageTypePrototype>())
+            CacheDamageTypes();
+    }
+
+    private void CacheDamageTypes()
+    {
+        var damage = AllDamage.DamageDict;
+        damage.Clear();
+        foreach (var type in ProtoMan.EnumeratePrototypes<DamageTypePrototype>())
+        {
+            damage[type.ID] = 1;
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnBeforeTouchSpell(Entity<MindContainerComponent> ent, ref BeforeTouchSpellAbilityUsedEvent args)
     {
         if (!TryUseAbility(args.Args, false))
@@ -164,9 +160,10 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         return ProtoMan.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
-    private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnActionAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
     {
-        if (StatusNew .HasEffectComp<BlockHereticActionsStatusEffectComponent>( args.User))
+        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>( args.User))
             args.Cancelled = true;
     }
 
@@ -211,11 +208,13 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         return result;
     }
 
+    [SubscribeLocalEvent]
     private void OnJauntMagicAttempt(Entity<JauntComponent> ent, ref HereticMagicCastAttemptEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeCast(Entity<HereticActionComponent> ent, ref BeforeCastSpellEvent args)
     {
         var attemptEv = new HereticMagicCastAttemptEvent(args.Performer, ent);

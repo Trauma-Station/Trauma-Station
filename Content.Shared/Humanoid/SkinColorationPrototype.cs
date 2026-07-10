@@ -356,7 +356,7 @@ public sealed partial class HueNodeClampedHsvColoration : ISkinColorationStrateg
     /// Due to RGB colors being clamped to 8 bits, precision is lost during transformation to HSL or HSV.
     /// The precision of the result _should be_ approximately 1/180.
     /// </remarks>
-    public const float HSVTolerance = 0.019f;
+    public const float HSVTolerance = 0.05f; // Trauma - was 0.019, not enough
 
     /// <summary>
     /// List of valid nodes in this coloration.

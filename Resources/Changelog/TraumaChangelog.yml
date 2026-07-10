@@ -11326,3 +11326,57 @@ Entries:
   id: 1251
   time: '2026-07-10T11:36:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3485
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic ice spear is now t1 ritual instead of t2 spell.
+  - type: Add
+    message: >-
+      Blade heretic hook and lock burglar spell are now passives that trigger on
+      alt-click on target with blade in combat mode.
+  - type: Add
+    message: >-
+      New lock path knowledge, replacing caretakers last refuge, see guidebook
+      for details.
+  - type: Tweak
+    message: Lock eldritch id now has doafter for linking doors.
+  id: 1252
+  time: '2026-07-10T12:03:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3480
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to heal gunshots with surgery.
+  - type: Fix
+    message: A bunch of things now heal/check for ballistic damage.
+  id: 1253
+  time: '2026-07-10T12:52:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3502
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Xeno queen roar now checks for line of sight.
+  id: 1254
+  time: '2026-07-10T13:31:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3504
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Skillchips now list their skills when examined.
+  id: 1255
+  time: '2026-07-10T14:20:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3506
+- author: deltanedas
+  changes:
+  - type: Add
+    message: rework ling pending Removed.
+  id: 1256
+  time: '2026-07-10T14:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3508
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Plasma is now called phoron
+  id: 1257
+  time: '2026-07-10T14:44:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3505

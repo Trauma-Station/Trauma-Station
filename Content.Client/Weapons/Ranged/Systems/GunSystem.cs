@@ -476,7 +476,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private bool CheckFixtures(Entity<FixturesComponent?> entity)
     {
-        if (!Resolve(entity, ref entity.Comp))
+        if (!Resolve(entity, ref entity.Comp, false)) // Trauma - add false, no reason to error for effects and stuff
             return false;
 
         foreach (var fix in entity.Comp.Fixtures)

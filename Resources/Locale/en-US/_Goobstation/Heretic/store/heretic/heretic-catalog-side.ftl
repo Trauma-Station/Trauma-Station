@@ -36,9 +36,9 @@ knowledge-path-side-t1-shark-name = Scorching Shark
 knowledge-path-side-t1-shark-desc =
     The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators.
 
-    Allows you to transmute three piles of ash, a liver, and three sheets of plasma into three Fire Sharks.
+    Allows you to transmute three piles of ash, a liver, and three sheets of phoron into three Fire Sharks.
     Fire Sharks are fast and strong in groups, but die quickly. They are also highly resistant against fire attacks.
-    Fire Sharks ignite their victims and drop plasma sheet once they die.
+    Fire Sharks ignite their victims and drop phoron sheet once they die.
     You can only create six at a time.
 
 knowledge-path-side-t1-ether-name = Ether Of The Newborn

@@ -47,6 +47,8 @@
       prob: 0.02
     - id: SubVampire
       prob: 0.2
+    - id: SubChangeling
+      prob: 0.1 # extinct predator species...
     # </Trauma>
 
 - type: entity
@@ -70,6 +72,8 @@
       prob: 0.05
     - id: WraithRoundstart
       prob: 0.02
+    - id: SubChangeling
+      prob: 0.1
     # </Trauma>
 
 - type: entity
@@ -95,6 +99,8 @@
       prob: 0.02
     - id: SubVampire
       prob: 0.2
+    - id: SubChangeling
+      prob: 0.1
     # </Trauma>
 
 - type: entity
@@ -283,7 +289,7 @@
       proto: ChangelingSkills
   # </Trauma>
   - type: GameRule
-    minPlayers: 15 # Trauma - was 25
+    minPlayers: 25
   - type: AntagSelection
     lateJoinAdditional: true # Trauma
     selectionTime: PrePlayerSpawn

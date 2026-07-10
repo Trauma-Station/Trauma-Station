@@ -7,6 +7,7 @@ namespace Content.Trauma.Shared.Heretic.Curses.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class FragileCurseComponent : Component
 {
+    // TODO: just double all damage
     [DataField]
     public DamageModifierSet ModifierSet = new()
     {

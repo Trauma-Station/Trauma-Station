@@ -227,7 +227,7 @@
 - type: entity
   parent: SheetPGlass
   id: SheetPGlass1
-  name: plasma glass
+  #name: plasma glass # Trauma - commented out (why the FUCK is it here the name is inherited already)
   suffix: Single
   components:
   - type: Sprite
@@ -279,7 +279,7 @@
 - type: entity
   parent: SheetRPGlass
   id: SheetRPGlass1
-  name: reinforced plasma glass
+  #name: reinforced plasma glass # Trauma - commented out
   suffix: Single
   components:
   - type: Sprite
