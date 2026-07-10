@@ -657,7 +657,7 @@
   categories:
   - UplinkChemicals
 
-- type: listing 
+- type: listing
   id: UplinkZombieBundle
   name: uplink-zombie-bundle-name
   description: uplink-zombie-bundle-desc
@@ -671,7 +671,7 @@
   - !type:StoreWhitelistCondition
     whitelist:
       tags:
-      - NukeOpsCommanderUplink # Trauma - Was NukeOpsUplink 
+      - NukeOpsCommanderUplink # Trauma - Was NukeOpsUplink
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
