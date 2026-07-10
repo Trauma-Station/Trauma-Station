@@ -482,7 +482,7 @@
     maxDuration: 20
   - type: VentHordeRule
     table: !type:GroupSelector
-      rolls: 4, 8
+      rolls: 2, 4 # R.O.N Station - was 4, 8
       children:
       - id: MobGiantSpiderAngry
 
