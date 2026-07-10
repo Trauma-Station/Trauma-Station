@@ -458,3 +458,22 @@
         range: 5
         flags: Static
         effect: !type:ToggleDoorBolts
+
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: Serpentclave
+  name: serpentclave
+  description: A strange key made of bones. You can tell by glance that no door will accept it.
+  components:
+  - type: UnholyItem
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/serpentclave.rsi
+    layers:
+    - state: icon
+  - type: Item
+    storedRotation: -90
+    size: Small
+  - type: Serpentclave
+  - type: Tag
+    tags:
+    - HereticItem

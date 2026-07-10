@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Shared.Inventory;
+using Robust.Shared.Containers;
 // </Trauma>
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
@@ -18,6 +19,7 @@ public sealed partial class LungSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     // </Trauma>
     [Dependency] private SharedAtmosphereSystem _atmos = default!;
     [Dependency] private SharedInternalsSystem _internals = default!;
@@ -27,7 +29,6 @@ public sealed partial class LungSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<LungComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<BreathToolComponent, ComponentInit>(OnBreathToolInit); // Goobstation - Modsuits - Update on component toggle
         SubscribeLocalEvent<BreathToolComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<BreathToolComponent, GotUnequippedEvent>(OnGotUnequipped);
     }
@@ -60,20 +61,23 @@ public sealed partial class LungSystem : EntitySystem
     }
 
     // Goobstation - Update component state on component toggle TODO move this shit out
+    [SubscribeLocalEvent]
     private void OnBreathToolInit(Entity<BreathToolComponent> ent, ref ComponentInit args)
     {
         var comp = ent.Comp;
 
-        if (!_inventory.TryGetContainingEntity(ent.Owner, out var parent) || !_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot) ||
+            !_container.TryGetContainingContainer(ent.Owner, out var container))
             return;
 
         if ((slot.SlotFlags & comp.AllowedSlots) == 0)
             return;
 
+        var parent = container.Owner;
         if (TryComp(parent, out InternalsComponent? internals))
         {
             ent.Comp.ConnectedInternalsEntity = parent;
-            _internals.ConnectBreathTool((parent.Value, internals), ent);
+            _internals.ConnectBreathTool((parent, internals), ent);
         }
     }
 

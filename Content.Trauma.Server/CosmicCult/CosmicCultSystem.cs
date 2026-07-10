@@ -54,9 +54,6 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         SubscribeLocalEvent<CosmicImposingComponent, ComponentInit>(OnStartImposition);
         SubscribeLocalEvent<CosmicImposingComponent, ComponentRemove>(OnEndImposition);
         SubscribeLocalEvent<CosmicImposingComponent, RefreshMovementSpeedModifiersEvent>(OnImpositionMoveSpeed);
-
-        SubscribeLocalEvent<SpeechOverrideComponent, GotEquippedEvent>(OnGotSpeechOverrideEquipped);
-        SubscribeLocalEvent<SpeechOverrideComponent, GotUnequippedEvent>(OnGotSpeechOverrideUnequipped);
     }
 
     public override void Update(float frameTime)
@@ -148,42 +145,41 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
         RemComp<CosmicDegenComponent>(args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotSpeechOverrideEquipped(Entity<SpeechOverrideComponent> ent, ref GotEquippedEvent args)
     {
+        ent.Comp.OldEmoteSounds = null;
+        ent.Comp.OldSpeechSounds = null;
+
         var target = args.EquipTarget;
-        if (ent.Comp.EmoteIDs is { } emoteIDs && TryComp<VocalComponent>(target, out var vocalComp))
+        if (ent.Comp.EmoteSounds is { } emoteSounds && TryComp<VocalComponent>(target, out var vocal))
         {
-            ent.Comp.EmoteStoredIDs = vocalComp.Sounds;
-            vocalComp.Sounds = emoteIDs;
-            var ev = new EmoteSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            ent.Comp.OldEmoteSounds = vocal.EmoteSounds;
+            vocal.EmoteSounds = emoteSounds;
+            Dirty(target, vocal);
         }
-        if (ent.Comp.SpeechIDs is { } speechIDs && TryComp<SpeechComponent>(target, out var speechComp))
+        if (ent.Comp.SpeechSounds is { } speechSounds && TryComp<SpeechComponent>(target, out var speech))
         {
-            ent.Comp.SpeechStoredIDs = speechComp.SpeechSounds;
-            speechComp.SpeechSounds = speechIDs;
-            var ev = new SpeechSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            ent.Comp.OldSpeechSounds = speech.SpeechSounds;
+            speech.SpeechSounds = speechSounds;
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGotSpeechOverrideUnequipped(Entity<SpeechOverrideComponent> ent, ref GotUnequippedEvent args)
     {
         var target = args.EquipTarget;
-        if (ent.Comp.EmoteStoredIDs is { } emoteIDs && TryComp<VocalComponent>(target, out var vocalComp))
+        if (ent.Comp.OldEmoteSounds is { } emoteSounds && TryComp<VocalComponent>(target, out var vocal))
         {
-            ent.Comp.EmoteStoredIDs = null;
-            vocalComp.Sounds = emoteIDs;
-            var ev = new EmoteSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            vocal.EmoteSounds = emoteSounds;
+            Dirty(target, vocal);
         }
-        if (ent.Comp.SpeechStoredIDs is { } speechIDs && TryComp<SpeechComponent>(target, out var speechComp))
+        if (ent.Comp.OldSpeechSounds is { } speechSounds && TryComp<SpeechComponent>(target, out var speech))
         {
-            ent.Comp.SpeechStoredIDs = null;
-            speechComp.SpeechSounds = speechIDs;
-            var ev = new SpeechSoundsChangedEvent();
-            RaiseLocalEvent(target, ref ev);
+            speech.SpeechSounds = speechSounds;
         }
+        ent.Comp.OldEmoteSounds = null;
+        ent.Comp.OldSpeechSounds = null;
     }
     #endregion
 

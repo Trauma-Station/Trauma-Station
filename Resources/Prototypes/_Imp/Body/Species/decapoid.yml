@@ -138,7 +138,6 @@
     footstepSoundCollection:
       collection: FootstepDecapoid
   - type: Butcherable # No bones. No I didn't forget go fuck yourself.
-    butcheringType: Spike
     spawned:
     - id: FoodMeatCrab # maybe custom someday. as-is, it's fine
       amount: 3
@@ -159,10 +158,7 @@
   - type: Injurable
     damageContainer: Biological
   - type: Vocal
-    sounds:
-      Male: UnisexDecapoid
-      Female: UnisexDecapoid
-      Unsexed: UnisexDecapoid # male and female sounds have to 1) exist and 2) come first, otherwise urists will spawn without emote sounds 66% of the time, because this game is poorly programmed
+    emoteSounds: UnisexDecapoid
   - type: MovementSpeedModifier
     weightlessAcceleration: 1.5 # move more easily in space
     weightlessFrictionNoInput: 2 # more control over movement in space

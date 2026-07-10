@@ -17,7 +17,6 @@ namespace Content.Medical.Shared.Traumas;
 
 public partial class TraumaSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     private void InitBones()
     {
@@ -38,7 +37,7 @@ public partial class TraumaSystem
             return;
 
         // TODO SHITMED: predict bone damage!!?!
-        var partName = _proto.Index(category).Name;
+        var partName = ProtoMan.Index(category).Name;
         _popup.PopupEntity(Loc.GetString($"popup-trauma-BoneDamage-{args.NewSeverity}", ("part", partName)),
             body,
             body,

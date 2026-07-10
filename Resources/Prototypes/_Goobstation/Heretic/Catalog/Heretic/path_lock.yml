@@ -179,11 +179,11 @@
   id: HereticLockPath8
   name: knowledge-path-lock-s8-name
   description: knowledge-path-lock-s8-desc
-  icon: { sprite: _Goobstation/Heretic/abilities_heretic.rsi, state: last_refuge }
+  icon: { sprite: _Goobstation/Heretic/Entities/serpentclave.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
-    - CaretakersLastRefuge
+    - WrongKey
   cost:
     KnowledgePoint: 2
   categories:

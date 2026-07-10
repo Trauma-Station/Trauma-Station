@@ -9,6 +9,11 @@
   - type: WeaponClass
     class: Tool
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/breverb.rsi
     state: icon
@@ -19,7 +24,7 @@
       types:
         Slash: 65
     soundHit:
-        path: /Audio/Weapons/bladeslice.ogg
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Normal
     sprite: _Goobstation/Objects/Weapons/Melee/breverb.rsi

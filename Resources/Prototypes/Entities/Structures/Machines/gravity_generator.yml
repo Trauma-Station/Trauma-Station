@@ -1,11 +1,17 @@
 - type: entity
-  id: GravityGenerator
   parent: BaseMachinePowered
+  id: GravityGenerator
   name: gravity generator
   description: It's what keeps you to the floor.
   placement:
     mode: AlignTileAny
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Structure
+    - IgnoreImmovableRod
+  # </Trauma>
   - type: StationAiWhitelist
   - type: AmbientSound
     enabled: false
@@ -79,17 +85,19 @@
     color: "#a8ffd9"
   - type: StaticPrice
     price: 5000
-  - type: Tag # Goobstation
-    tags:
-    - Structure
-    - IgnoreImmovableRod
 
 - type: entity
-  id: GravityGeneratorMini
   parent: [ GravityGenerator, ConstructibleMachine ]
+  id: GravityGeneratorMini
   name: mini gravity generator
+  suffix: Charged
   description: It's what keeps you to the floor, now in fun size.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Structure
+  # </Trauma>
   - type: StationAiWhitelist
   - type: Sprite
     sprite: Structures/Machines/gravity_generator_mini.rsi
@@ -143,6 +151,11 @@
     lightRadiusMax: 2.5
   - type: StaticPrice
     price: 2000
-  - type: Tag # Goobstation
-    tags:
-    - Structure
+
+- type: entity
+  id: GravityGeneratorMiniUncharged
+  parent: GravityGeneratorMini
+  suffix: Uncharged
+  components:
+  - type: PowerCharge
+    charge: 0

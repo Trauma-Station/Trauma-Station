@@ -6,6 +6,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -20,6 +22,9 @@ public sealed partial class SkinnableSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+
+    public static readonly ProtoId<ToolQualityPrototype> Slicing = "Slicing";
 
     public override void Initialize()
     {
@@ -45,7 +50,7 @@ public sealed partial class SkinnableSystem : EntitySystem
             ent.Comp.Skinned ||
             args.Using is not {} used ||
             _whitelist.IsWhitelistFail(ent.Comp.Whitelist, ent) ||
-            !HasComp<SharpComponent>(used))
+            !_tool.HasQuality(used, Slicing))
             return;
 
         var user = args.User;

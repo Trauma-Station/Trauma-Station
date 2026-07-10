@@ -15,6 +15,7 @@ public sealed partial class FragileCurseComponent : Component
             {"Blunt", 2},
             {"Slash", 2},
             {"Piercing", 2},
+            {"Ballistic", 2},
             {"Heat", 2},
             {"Cold", 2},
             {"Shock", 2},

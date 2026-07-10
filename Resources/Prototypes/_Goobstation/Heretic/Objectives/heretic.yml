@@ -7,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-heretic
+    issuer: Heretic
 
 - type: entity
   parent: BaseHereticObjective

@@ -2,7 +2,6 @@
 
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
@@ -43,21 +42,7 @@ public sealed partial class IceCubeSystem : SharedIceCubeSystem
         SubscribeLocalEvent<IceCubeComponent, ComponentShutdown>(IceCubeRemoved);
         SubscribeLocalEvent<IceCubeComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
         SubscribeLocalEvent<IceCubeComponent, DamageDealtEvent>(OnDamageDealt);
-        SubscribeLocalEvent<IceCubeComponent, BeforeStaminaDamageEvent>(OnStaminaDamage, before: [typeof(SharedStaminaSystem)]);
         SubscribeLocalEvent<IceCubeOnProjectileHitComponent, ProjectileHitEvent>(OnHit);
-    }
-
-    private void OnStaminaDamage(Entity<IceCubeComponent> ent, ref BeforeStaminaDamageEvent args)
-    {
-        if (args.Value <= 0)
-            return;
-
-        if (!TryComp(ent, out TemperatureComponent? temperature))
-            return;
-
-        ent.Comp.SustainedDamage += args.Value * ent.Comp.StaminaDamageMeltProbabilityMultiplier;
-        if (ShouldUnfreeze(ent, temperature.CurrentTemperature))
-            RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnHit(Entity<IceCubeOnProjectileHitComponent> ent, ref ProjectileHitEvent args)

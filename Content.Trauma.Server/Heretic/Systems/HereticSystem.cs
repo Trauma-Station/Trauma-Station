@@ -62,7 +62,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private AbductorVestDisguiseSystem _disguise = default!;
     [Dependency] private SharedHereticRitualSystem _ritual = default!;
     [Dependency] private IRobustRandom _rand = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     [Dependency] private EntityQuery<HereticMinionComponent> _minionQuery = default!;
 
@@ -313,7 +312,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (showText)
         {
             var baseMessage = heretic.InfluenceGainBaseMessage;
-            var message = _rand.Pick(_proto.Index(heretic.InfluenceGainMessages));
+            var message = _rand.Pick(ProtoMan.Index(heretic.InfluenceGainMessages));
             var size = heretic.InfluenceGainTextFontSize;
             var loc = Loc.GetString(baseMessage, ("size", size), ("text", message));
             SharedChatSystem.UpdateFontSize(size, ref message, ref loc);

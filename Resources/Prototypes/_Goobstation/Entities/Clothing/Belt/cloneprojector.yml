@@ -49,8 +49,7 @@
         1: 0.45
         0: 0.00
     - type: Vocal
-      sounds:
-        Unsexed: UnisexSilicon
+      emoteSounds: UnisexSilicon
     - type: UnblockableSpeech
     - type: ProtectedFromStepTriggers
     - type: MobState

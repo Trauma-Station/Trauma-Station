@@ -14,7 +14,6 @@ namespace Content.Trauma.Shared.Heretic.Systems;
 public abstract partial class SharedHereticCombatMarkSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private EntityLookupSystem _look = default!;
@@ -25,7 +24,7 @@ public abstract partial class SharedHereticCombatMarkSystem : EntitySystem
     public void ApplyMarkEffect(EntityUid target, HereticCombatMarkComponent mark, EntityUid user)
     {
         var protoId = $"HereticMark{mark.Path.ToString()}";
-        if (_proto.HasIndex<EntityEffectPrototype>(protoId))
+        if (ProtoMan.HasIndex<EntityEffectPrototype>(protoId))
             _effects.TryApplyEffect(target, protoId, 1f, user);
 
         _audio.PlayPredicted(mark.TriggerSound, target, user);

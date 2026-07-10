@@ -2,35 +2,6 @@
 
 - type: entity
   parent: BaseAction
-  id: ActionHereticBurglarsFinesse
-  name: Burglar's Finesse
-  description: Steal a random item from the victim's backpack.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    predicted: false
-    useDelay: 15
-    itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Heretic/abilities_heretic.rsi
-      state: bulglar_finesse
-  - type: TargetAction
-    checkCanAccess: false
-    range: 6
-  - type: EntityTargetAction
-    whitelist:
-      components:
-      - Inventory
-    canTargetSelf: false
-    event: !type:EventHereticBulglarFinesse
-  - type: HereticAction
-    requireMagicItem: false
-  - type: SpeakOnAction
-    sentence: heretic-speech-bulglar-finesse
-    chatType: Whisper
-
-- type: entity
-  parent: BaseAction
   id: ActionHereticLastRefuge
   name: Caretaker’s Last Refuge
   description: Shifts you into the Caretaker's Refuge, rendering you translucent and intangible. While in the Refuge your movement is unrestricted, but you cannot use your hands or cast any spells. You cannot enter the Refuge while near other sentient beings, and you can be removed from it upon contact with antimagical artifacts.

@@ -14,7 +14,6 @@ namespace Content.Trauma.Server.Station;
 /// </summary>
 public sealed partial class JobSlotsOverrideSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private StationJobsSystem _stationJobs = default!;
 
@@ -75,7 +74,7 @@ public sealed partial class JobSlotsOverrideSystem : EntitySystem
     private JobSlotsOverridePrototype? GetSlotsOverride()
     {
         int pop = _player.PlayerCount;
-        foreach (var proto in _proto.EnumeratePrototypes<JobSlotsOverridePrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<JobSlotsOverridePrototype>())
         {
             if (proto.Min is {} min && pop < min || proto.Max is {} max && pop > max)
                 continue;

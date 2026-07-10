@@ -5,7 +5,7 @@
   id: BaseVampireObjective
   components:
   - type: Objective
-    issuer: objective-issuer-vampire
+    issuer: Vampire
     unique: true
     difficulty: 1
   - type: RoleRequirement

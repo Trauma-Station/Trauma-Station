@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.Access;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Audio;
@@ -31,6 +30,9 @@ public sealed partial class EldritchIdCardComponent : Component
 
     [DataField]
     public SoundSpecifier EatSound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/eatfood.ogg");
+
+    [DataField]
+    public TimeSpan PortalCreationTime = TimeSpan.FromSeconds(1.5);
 }
 
 [Serializable, NetSerializable]

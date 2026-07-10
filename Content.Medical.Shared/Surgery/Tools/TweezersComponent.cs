@@ -8,11 +8,7 @@ namespace Content.Medical.Shared.Surgery.Tools;
 ///     Like Hemostat but lets ghetto tools be used differently for clamping and removing organs.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class TweezersComponent : Component, ISurgeryToolComponent
+public sealed partial class TweezersComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "tweezers";
-    [DataField]
-    public bool? Used { get; set; } = null;
-    [DataField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "tweezers";
 }

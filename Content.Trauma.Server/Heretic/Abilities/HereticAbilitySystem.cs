@@ -56,7 +56,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private StationSystem _station = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
@@ -158,7 +157,7 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
             var isOnStation = targetStation != null && targetStation == ownStation;
 
             var ang = Angle.Zero;
-            if (_mapMan.TryFindGridAt(_transform.GetMapCoordinates(Transform(uid)), out var grid, out _))
+            if (_map.TryFindGridAt(_transform.GetMapCoordinates(Transform(uid)), out var grid, out _))
                 ang = Transform(grid).LocalRotation;
 
             var vector = targetMapCoords.Position - ourMapCoords.Position;

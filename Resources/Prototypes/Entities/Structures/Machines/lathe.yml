@@ -640,6 +640,7 @@
   - type: OreSiloClient
   #- type: LatheAnnouncing # Trauma - not cherry picked
   #  channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseLathe

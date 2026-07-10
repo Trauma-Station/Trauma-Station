@@ -55,12 +55,6 @@ public sealed partial record PolymorphConfiguration
     public bool AttachToGridOrMap;
 
     /// <summary>
-    /// Skip revert action confirmation
-    /// </summary>
-    [DataField]
-    public bool SkipRevertConfirmation;
-
-    /// <summary>
     /// Whether to strip name modifier if transferring name.
     /// Can be disabled if you want the modifier suffix to be transferred.
     /// </summary>

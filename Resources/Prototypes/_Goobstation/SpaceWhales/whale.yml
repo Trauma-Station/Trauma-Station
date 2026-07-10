@@ -45,8 +45,8 @@
       - SpaceWhaleSegment
 
 - type: entity
+  parent: [MobSpaceLeviathanSegmentBase, SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobNightVision]
   id: SpaceLeviathan
-  parent: [MobSpaceLeviathanSegmentBase, SimpleSpaceMobBase, FlyingMobBase, MobCombat]
   name: space whale
   description: When the space becomes too quiet, there is no hope, there is no escape, but there is this.
   components:
@@ -84,10 +84,6 @@
     interactFailureString: petting-failure-leviathan
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: AmbientSound
     enabled: true
     volume: 1

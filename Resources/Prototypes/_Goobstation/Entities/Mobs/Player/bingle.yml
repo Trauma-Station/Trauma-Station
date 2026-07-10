@@ -2,9 +2,9 @@
 
 # Base bingle
 - type: entity
-  name: bingle
+  parent: [ MobSpaceBasic, BaseSlicingRefinable, MobNightVision ]
   id: MobBingle
-  parent: MobSpaceBasic
+  name: bingle
   description: bingle
   components:
   - type: Bingle
@@ -111,15 +111,12 @@
         Shock: -0.13
         Caustic: -0.13
         Poison: -0.5
-  - type: NightVision
-    color: "#008080"
-    activateSound: null
-    deactivateSound: null
   - type: FlashImmunity
+    showInExamine: false
   - type: ScannableForPoints # NTR update
     points: 2 # this would be abused so much if i made it more
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatBingle
       amount: 3
   - type: PointLight
@@ -176,9 +173,9 @@
 
 # Skin - turkle
 - type: entity
-  name: turkle
-  id: MobTurkle
   parent: MobBingle
+  id: MobTurkle
+  name: turkle
   description: A bingle from foreign lands lost to time. Seems very proud of their homeland.
   components:
   - type: Bingle
@@ -195,18 +192,14 @@
     - map: ["enum.BingleVisual.Combat"]
       state: combat
       visible: false
-  - type: NightVision
-    color: "#802000"
-    activateSound: null
-    deactivateSound: null
   - type: PointLight
     radius: 1.2
     energy: 2
     color: "#ad2a33"
 
 - type: entity
-  id: MobTurkleUpgraded
   parent: MobBingleUpgraded
+  id: MobTurkleUpgraded
   suffix: Upgraded
   components:
   - type: Bingle

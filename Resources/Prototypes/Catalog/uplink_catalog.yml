@@ -657,25 +657,25 @@
   categories:
   - UplinkChemicals
 
-#- type: listing Trauma - Pending zombie rework
-#  id: UplinkZombieBundle
-#  name: uplink-zombie-bundle-name
-#  description: uplink-zombie-bundle-desc
-#  icon: { sprite: /Textures/Structures/Wallmounts/signs.rsi, state: bio }
-#  productEntity: ClothingBackpackDuffelZombieBundle
-#  cost:
-#    Telecrystal: 200 # Trauma - was 40, 5x
-#  categories:
-#  - UplinkChemicals
-#  conditions:
-#  - !type:StoreWhitelistCondition
-#    whitelist:
-#      tags:
-#      - NukeOpsUplink
-#  - !type:BuyerWhitelistCondition
-#    blacklist:
-#      components:
-#      - SurplusBundle
+- type: listing
+  id: UplinkZombieBundle
+  name: uplink-zombie-bundle-name
+  description: uplink-zombie-bundle-desc
+  icon: { sprite: /Textures/Structures/Wallmounts/signs.rsi, state: bio }
+  productEntity: ClothingBackpackDuffelZombieBundle
+  cost:
+    Telecrystal: 200 # Trauma - was 40, 5x
+  categories:
+  - UplinkChemicals
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsCommanderUplink # Trauma - Was NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 
 - type: listing
   id: UplinkNocturineChemistryBottle
@@ -2199,3 +2199,7 @@
     whitelist:
       components:
       - HijackTradeStationCondition
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

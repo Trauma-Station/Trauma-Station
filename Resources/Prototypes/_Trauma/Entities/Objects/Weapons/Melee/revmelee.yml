@@ -62,6 +62,7 @@
     transferAmount: 0.1
     solution: melee
 
+# TODO: inherit BaseSword
 - type: entity
   parent: [BaseRevForgedWeapon, KnifeDurabilitySharpenOnly]
   id: RevSword
@@ -93,13 +94,15 @@
   - type: Tag
     tags:
     - Knife
-  - type: Sharp
   - type: Utensil
     types:
     - Knife
+  - type: Sharp
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/knife_pickup.ogg
@@ -167,6 +170,7 @@
   - type: Construction
     graph: RevPitchfork
 
+# TDOO: inhherit BaseKnife if nothing is unwanted
 - type: entity
   parent: [BaseRevForgedWeapon, KnifeDurabilitySharpenOnly]
   id: RevKnife
@@ -211,13 +215,13 @@
   - type: Tag
     tags:
     - Knife
-  - type: Sharp
   - type: Utensil
     types:
     - Knife
+  - type: Sharp
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/bladeslice.ogg
   - type: DamageOtherOnHit
@@ -413,10 +417,10 @@
     - ThrowingKnife
   - type: Shovel # it's a shovel
   - type: ToolTileCompatible
-  - type: Sharp
   - type: Utensil
     types:
     - Knife
+  - type: Sharp
   - type: Tool
     qualities:
     - Slicing

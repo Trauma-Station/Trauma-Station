@@ -28,7 +28,6 @@ namespace Content.Goobstation.Server.NTR;
 public sealed partial class NtrTaskSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private NameIdentifierSystem _nameIdentifier = default!;
     [Dependency] private PopupSystem _popup = default!;
@@ -105,8 +104,9 @@ public sealed partial class NtrTaskSystem : EntitySystem
             || !TryGetTaskFromId(station, args.TaskId, out var taskData))
             return;
 
-        if (!_proto.TryIndex(taskData.Value.Task, out var taskProto))
+        if (!ProtoMan.Resolve(taskData.Value.Task, out var taskProto))
             return;
+
         for (int i = 0; i < db.Tasks.Count; i++)
         {
             if (db.Tasks[i].Id == taskData.Value.Id)
@@ -182,7 +182,7 @@ public sealed partial class NtrTaskSystem : EntitySystem
     {
         if (!TryComp<NtrTaskDatabaseComponent>(station, out var db)
             || !TryComp<NtrBankAccountComponent>(station, out var account)
-            || !_proto.Resolve(taskData.Task, out NtrTaskPrototype? taskProto))
+            || !ProtoMan.Resolve(taskData.Task, out NtrTaskPrototype? taskProto))
             return;
 
         var amount = success ? taskProto.Reward : -taskProto.Penalty;
@@ -244,7 +244,7 @@ public sealed partial class NtrTaskSystem : EntitySystem
 
         foreach (var task in db.Tasks.Where(t => t.IsActive))
         {
-            if (!_proto.TryIndex(task.Task, out var proto)
+            if (!ProtoMan.TryIndex(task.Task, out var proto)
                 || !proto.IsReagentTask)
                 continue;
 
@@ -284,7 +284,7 @@ public sealed partial class NtrTaskSystem : EntitySystem
     {
         if (_station.GetOwningStation(console) is not {} station
             || !TryComp<NtrTaskDatabaseComponent>(station, out var db)
-            || !_proto.TryIndex(taskId, out NtrTaskPrototype? task))
+            || !ProtoMan.TryIndex(taskId, out NtrTaskPrototype? task))
             return false;
 
         if (!TryGetActiveTask(station, task, out var taskData))
@@ -322,7 +322,7 @@ public sealed partial class NtrTaskSystem : EntitySystem
     {
         var stamps = new HashSet<string>();
         foreach (var taskId in doc.Tasks)
-            if (_proto.TryIndex(taskId, out var task))
+            if (ProtoMan.TryIndex(taskId, out var task))
                 stamps.UnionWith(task.Entries.SelectMany(e => e.Stamps));
 
         return stamps;
@@ -346,7 +346,7 @@ public sealed partial class NtrTaskSystem : EntitySystem
 
         foreach (var (reagentProtoId, requiredAmount) in task.Reagents)
         {
-            if (!_proto.TryIndex(reagentProtoId, out var requiredReagentProto))
+            if (!ProtoMan.TryIndex(reagentProtoId, out var requiredReagentProto))
             {
                 _popup.PopupEntity(Loc.GetString("ntr-console-invalid-reagent-proto", ("reagentId", reagentProtoId)), container);
                 return false;
@@ -450,7 +450,7 @@ public sealed partial class NtrTaskSystem : EntitySystem
     }
     private List<NtrTaskPrototype> GetAvailableTasks(NtrTaskDatabaseComponent db)
     {
-        return _proto.EnumeratePrototypes<NtrTaskPrototype>()
+        return ProtoMan.EnumeratePrototypes<NtrTaskPrototype>()
             .Where(proto => IsTaskAvailable(proto, db))
             .ToList();
     }

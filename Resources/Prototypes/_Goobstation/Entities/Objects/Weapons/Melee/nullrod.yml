@@ -106,7 +106,6 @@
     flavorKind: station-event-random-sentience-flavor-inanimate
     weight: 0.50
   - type: MedievalAccent
-  - type: Sharp
   - type: Execution # OFF WITH HIS HEAD!!
     doAfterDuration: 3.0
   - type: Scalpel
@@ -116,9 +115,10 @@
   - type: Tag
     tags:
     - HolyClaymore
+  - type: Sharp
   - type: Tool
     qualities:
-      - Slicing
+    - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
   - type: Parry
@@ -260,6 +260,9 @@
       components:
       - BibleUser
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: Scalpel # Why? Because it's funny. That's why.
@@ -553,6 +556,14 @@
     UntrainedUseString: nullrod-chainsaw-untrained-usage-popup
   - type: Unremoveable
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    - Sawing
+    useSound: &chainsaw_rev_sound
+      path: /Audio/Weapons/chainsaw_rev.ogg
+      params:
+        volume: -3
   - type: Sprite
     sprite: _ShitChap/Objects/Weapons/Nullrod/divinechainsaw.rsi
     state: icon
@@ -569,23 +580,19 @@
         Slash: 3
         Structural: 20
         Holy: 3
-    soundHit:
-      path: /Audio/Weapons/chainsaw_rev.ogg
-      params:
-        volume: -3
+    soundHit: *chainsaw_rev_sound
   - type: Item
     size: Ginormous
     sprite: _ShitChap/Objects/Weapons/Nullrod/divinechainsaw.rsi
-  - type: BoneSaw # Shitmed
+  - type: BoneSaw
     speed: 0.65
-  - type: SurgeryTool # Shitmed
+  - type: SurgeryTool
     startSound:
       path: /Audio/Weapons/chainsaw_pull.ogg
-    endSound:
-      path: /Audio/Weapons/chainsaw_rev.ogg
+    endSound: *chainsaw_rev_sound
   - type: Tag
     tags:
-      - HolyChainsaw
+    - HolyChainsaw
 
 # Casul & Jackal
 - type: entity
@@ -760,6 +767,9 @@
         restitution: 0.3
         friction: 0.2
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: MeleeChemicalInjector
     transferAmount: 1
     solution: melee

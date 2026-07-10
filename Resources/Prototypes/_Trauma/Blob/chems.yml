@@ -1,0 +1,127 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: blobChem
+  id: BlazingOil
+  name: "blazing oil"
+  info: |
+    Deals 15 burn damage and lights targets on fire.
+    Makes you vulnerable to water.
+  color: "#937000"
+  damage:
+    types:
+      Heat: 15
+      Structural: 150
+  smokeSolution:
+    temperature: 1000
+    reagents:
+    - ReagentId: Phlogiston
+      Quantity: 30
+  attackEffects:
+  - !type:Flammable
+    multiplier: 2
+  - !type:Ignite
+
+- type: blobChem
+  id: ReactiveSpines
+  name: "reactive spines"
+  color: "#637b19"
+  info: |
+    Deals 25 brute damage.
+  damage:
+    types:
+      Blunt: 9
+      Slash: 8
+      Piercing: 8
+      Structural: 150
+  smokeSolution:
+    reagents:
+    - ReagentId: Mold
+      Quantity: 30
+
+- type: blobChem
+  id: ExplosiveLattice
+  name: "explosive lattice"
+  info: |
+    Deals 5 burn damage and explodes the target, dealing 10 brute damage.
+    Spores explode on death.
+    You become immune to explosions.
+    You take 50% more damage from burns and electrical shock.
+  color: "#6e1900"
+  damage:
+    types:
+      Heat: 5
+      Structural: 150
+  smokeSolution:
+    temperature: 1000
+    reagents:
+    - ReagentId: Lexorin
+      Quantity: 30
+  attackEffects:
+  - !type:Explosion
+    explosionType: Blob
+    intensityPerUnit: 1.8
+    intensitySlope: 0.5
+    maxIntensity: 6
+    tileBreakScale: 0
+  podDeathEffects:
+  - !type:Explosion
+    explosionType: Blob
+    intensityPerUnit: 4
+    intensitySlope: 1
+    maxIntensity: 2
+    tileBreakScale: 0
+  damageModifiers: ExplosiveLatticeBlob
+  explosionResistance: 1 # no suicide
+
+- type: blobChem
+  id: ElectromagneticWeb
+  name: "electromagnetic web"
+  info:
+    Deals 20 burn damage, 20% chance to cause an EMP pulse when attacking.
+    Blob tiles cause an EMP pulse when destroyed.
+    You take 25% more brute and heat damage.
+  color: "#0d7777"
+  damage:
+    types:
+      Heat: 20
+      Structural: 150
+  smokeSolution:
+    canReact: false
+    reagents:
+    - ReagentId: Aluminium
+      Quantity: 10
+    - ReagentId: Iron
+      Quantity: 10
+    - ReagentId: Uranium
+      Quantity: 10
+  attackEffects:
+  - !type:Emp
+    probability: 0.2
+    rangeModifier: 3
+    energyConsumption: 50
+    duration: 3
+  destructionEffects:
+  - !type:Emp
+    rangeModifier: 3
+    energyConsumption: 50
+    duration: 3
+  damageModifiers: ElectromagneticWebBlob
+
+- type: blobChem
+  id: RegenerativeMateria
+  name: "regenerative materia"
+  info:
+    Deals 6 blunt damage and 15 toxin damage.
+    The blob core regenerates health 5 times faster than normal and generates 1 extra resource.
+  color: "#441e59"
+  damage:
+    types:
+      Blunt: 6
+      Poison: 15
+      Structural: 150
+  smokeSolution:
+    reagents:
+    - ReagentId: Bicaridine
+      Quantity: 30
+  healingScale: 5
+  bonusPoints: 1

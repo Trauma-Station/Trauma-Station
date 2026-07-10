@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Random;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
 
@@ -8,7 +9,7 @@ namespace Content.Lavaland.Shared.EntityShapes.Shapes;
 /// </summary>
 public sealed partial class SingleEntityShape : EntityShape
 {
-    protected override List<Vector2> GetShapeImplementation(System.Random rand, IPrototypeManager proto)
+    protected override List<Vector2> GetShapeImplementation(IRobustRandom rand, IPrototypeManager proto)
     {
         return new List<Vector2> { Offset };
     }

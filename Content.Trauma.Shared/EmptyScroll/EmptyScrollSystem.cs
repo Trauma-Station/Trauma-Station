@@ -15,7 +15,6 @@ public sealed partial class EmptyScrollSystem : EntitySystem
 {
     [Dependency] private EntityTableSystem _entityTable = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
@@ -75,7 +74,7 @@ public sealed partial class EmptyScrollSystem : EntitySystem
     {
         AllPrayers.Clear();
         AllPrayerTexts.Clear();
-        foreach (var prayer in _proto.EnumeratePrototypes<ScrollPrayerPrototype>())
+        foreach (var prayer in ProtoMan.EnumeratePrototypes<ScrollPrayerPrototype>())
         {
             foreach (var subject in prayer.Subjects)
             {

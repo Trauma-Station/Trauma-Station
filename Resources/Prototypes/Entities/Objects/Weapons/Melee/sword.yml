@@ -11,8 +11,8 @@
     class: Sword
   - type: CosmicTransmutable
     transmuteTo: SwordCosmicCult
-  # </Trauma>
   - type: Sharp
+  # </Trauma>
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true # Goobstation - Decapitation

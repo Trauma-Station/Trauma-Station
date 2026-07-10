@@ -19,7 +19,6 @@ namespace Content.Shared.Holosign;
 public sealed partial class HolosignSystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tag = default!;
@@ -48,7 +47,7 @@ public sealed partial class HolosignSystem
         // places the holographic sign at the click location, snapped to grid.
         var coords = args.ClickLocation.SnapToGrid(EntityManager);
         var mapCoords = _transform.ToMapCoordinates(coords);
-        var look = _mapMan.TryFindGridAt(mapCoords, out var grid, out var gridComp)
+        var look = _map.TryFindGridAt(mapCoords, out var grid, out var gridComp)
             ? _map.GetAnchoredEntities((grid, gridComp), mapCoords)
             : _lookup.GetEntitiesInRange(mapCoords, 0.1f);
         foreach (var entity in look)

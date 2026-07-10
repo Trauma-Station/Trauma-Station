@@ -34,15 +34,38 @@
   parent: AltarBase
   name: nanotrasen altar
   components:
+  # <Trauma>
+  - type: Construction
+    graph: AltarsGraph
+    node: NanotrasenAltarNode
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Altars/Gods/nanotrasen.rsi
     state: nanotrasen
   - type: Icon
     sprite: Structures/Furniture/Altars/Gods/nanotrasen.rsi
     state: nanotrasen
-  - type: Construction
-    graph: AltarsGraph
-    node: NanotrasenAltarNode
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 5
+          MaterialCloth1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StealTarget
+    stealGroup: AltarNanotrasen
 
 - type: entity
   id: AltarChaos
@@ -187,6 +210,27 @@
   - type: Icon
     sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
     state: festival
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroyHeavy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 5
+          MaterialCloth1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: Tag
     tags:
     - Wooden
@@ -378,6 +422,15 @@
   parent: AltarBase
   name: heaven altar
   components:
+  # <Trauma>
+  - type: Construction
+    graph: AltarsGraph
+    node: HeavenAltarNode
+  - type: AltarSource
+    rodProto: HolyClaymore
+    effectProto: EffectSpark
+    soundPath: /Audio/Effects/hallelujah.ogg
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Altars/Cults/heaven.rsi
     layers:
@@ -387,13 +440,22 @@
   - type: Icon
     sprite: Structures/Furniture/Altars/Cults/heaven.rsi
     state: full
-  - type: Construction
-    graph: AltarsGraph
-    node: HeavenAltarNode
-  - type: AltarSource
-    rodProto: HolyClaymore
-    effectProto: EffectSpark
-    soundPath: /Audio/Effects/hallelujah.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 5
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: PointLight
     radius: 1.5
     energy: 1

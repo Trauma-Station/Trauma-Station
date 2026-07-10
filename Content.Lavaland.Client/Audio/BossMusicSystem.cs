@@ -19,7 +19,6 @@ namespace Content.Lavaland.Client.Audio;
 // TODO: Port this system to Shared and optimize it.
 public sealed partial class BossMusicSystem : SharedBossMusicSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private ContentAudioSystem _audioContent = default!;
     [Dependency] private AudioSystem _audio = default!;
@@ -85,7 +84,7 @@ public sealed partial class BossMusicSystem : SharedBossMusicSystem
 
         _audioContent.DisableAmbientMusic();
 
-        var sound = _proto.Index(music);
+        var sound = ProtoMan.Index(music);
         _musicProto = sound;
 
         var stream = _audio.PlayGlobal(

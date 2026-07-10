@@ -62,7 +62,6 @@ public abstract partial class SharedMagicSystem : EntitySystem
     [Dependency] private CommonWizardSystem _wizard = default!;
     // </Trauma>
     [Dependency] private ISerializationManager _seriMan = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedGunSystem _gunSystem = default!;
@@ -405,27 +404,26 @@ public abstract partial class SharedMagicSystem : EntitySystem
 
         ev.Handled = true;
 
+        /* Trauma - fuck you predict it
         if (!_net.IsServer)
             return; // client returns handled for predicted audio
+        */
 
         var xform = Transform(ev.Performer);
         var fromCoords = xform.Coordinates;
+        var toCoords = ev.Target;
+        var userVelocity = _physics.GetMapLinearVelocity(ev.Performer);
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
         var fromMap = _transform.ToMapCoordinates(fromCoords);
-
-        var spawnCoords = _mapManager.TryFindGridAt(fromMap, out var gridUid, out _)
-            ? _transform.WithEntityId(fromCoords, gridUid)
-            : new(_mapSystem.GetMap(fromMap.MapId), fromMap.Position);
-        var userVelocity = _physics.GetMapLinearVelocity(spawnCoords); // Goob edit
-
-        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma
-        var direction = _transform.ToMapCoordinates(ev.Target).Position -
-                        fromMap.Position;
-        _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.Speed); // Goob - put speed in event instead of hardcoded
-
-        if (ev.Entity != null) // Goobstation
-            _gunSystem.SetTarget(ent, ev.Entity.Value, out _);
+        var ent = PredictedSpawnAtPosition(ev.Prototype, _transform.ToCoordinates(fromMap)); // Trauma - predict
+        var direction = _transform.ToMapCoordinates(toCoords).Position -
+                         fromMap.Position;
+        // <Trauma>
+        if (ev.Entity is { } target)
+            _gunSystem.SetTarget(ent, target, out _);
+        // </Trauma>
+        _gunSystem.ShootProjectile(ent, direction, userVelocity, ev.Performer, ev.Performer, ev.ProjectileSpeed);
     }
     // End Projectile Spells
     #endregion
@@ -484,7 +482,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        var ent = Spawn(proto, position.SnapToGrid(EntityManager, _mapManager));
+        var ent = Spawn(proto, position.SnapToGrid(EntityManager));
 
         if (lifetime != null)
         {

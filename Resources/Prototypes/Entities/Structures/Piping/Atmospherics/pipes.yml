@@ -7,6 +7,13 @@
   placement:
     mode: SnapgridCenter
   components:
+  # <Trauma>
+  - type: RCDDeconstructable
+    cost: 1
+    delay: 2
+    fx: EffectRCDDeconstruct2
+    rpd: true
+  # </Trauma>
   - type: Visibility
     layer: 1
   - type: Item
@@ -21,11 +28,7 @@
   - type: CollideOnAnchor
   - type: Anchorable
   - type: Rotatable
-  - type: RCDDeconstructable
-    cost: 1
-    delay: 2
-    fx: EffectRCDDeconstruct2
-    rpd: true
+    increment: 90
   - type: Destructible
     thresholds:
     - trigger: # for nukes

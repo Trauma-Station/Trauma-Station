@@ -138,6 +138,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
   - type: FlashImmunity
+    showInExamine: false
   - type: MeleeWeapon
     animation: WeaponArcClaw
     damage:
@@ -146,7 +147,7 @@
         Piercing: 10
 
 - type: entity
-  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase]
+  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase, MobNightVision]
   id: MobGhoulStalker
   components:
   - type: Ghoul
@@ -164,11 +165,7 @@
     - ActionActivateEmp
     - ActionHereticShapeshift
   - type: ThermalVision
-    thermalShader: null
-    isActive: true
     color: white
-    drawOverlay: false
-    lightRadius: 0
     toggleAction: null
 
 - type: entity
@@ -239,10 +236,7 @@
     mindRoles:
     - MindRoleGhoul
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: Eye
     drawFov: false
   - type: Viewcone
@@ -289,10 +283,9 @@
     baseWalkSpeed: 5
     baseSprintSpeed: 5
   - type: FlashImmunity
+    showInExamine: false
   - type: NightVision
-    color: aquamarine
-    activateSound: null
-    deactivateSound: null
+    lightingColor: aquamarine
   - type: MeleeWeapon
     animation: WeaponArcPunch
     soundHit:
@@ -584,6 +577,7 @@
     baseWalkSpeed: 4.5
     baseSprintSpeed: 4.5
   - type: FlashImmunity
+    showInExamine: false
   - type: HTN
     rootTask:
       task: HereticSummonCompound

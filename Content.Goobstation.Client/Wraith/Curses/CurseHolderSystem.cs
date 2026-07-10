@@ -7,7 +7,6 @@ namespace Content.Goobstation.Client.Wraith.Curses;
 
 public sealed partial class CurseHolderSystem : SharedCurseHolderSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -23,7 +22,7 @@ public sealed partial class CurseHolderSystem : SharedCurseHolderSystem
 
         foreach (var curseIcon in ent.Comp.CurseStatusIcons)
         {
-            var icon = _proto.Index(curseIcon);
+            var icon = ProtoMan.Index(curseIcon);
             args.StatusIcons.Add(icon);
         }
     }

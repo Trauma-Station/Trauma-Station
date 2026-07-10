@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Stunnable;
 using Content.Shared.Jittering;
 using Content.Shared.Speech.EntitySystems;
 // </Trauma>
+using System.Globalization;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
@@ -134,7 +135,7 @@ public abstract partial class SharedStunSystem : EntitySystem
     }
 
     // TODO STUN: Make events for different things. (Getting modifiers, attempt events, informative events...)
-    public bool TryAddStunDuration(EntityUid uid, TimeSpan duration)
+    public bool TryAddStunDuration(EntityUid uid, TimeSpan duration, bool visualized = false)
     {
         // <Goob>
         var modifierEv = new GetClothingStunModifierEvent(uid);
@@ -148,11 +149,11 @@ public abstract partial class SharedStunSystem : EntitySystem
         if (!_status.TryAddStatusEffectDuration(uid, StunId, duration))
             return false;
 
-        OnStunnedSuccessfully(uid, duration);
+        OnStunnedSuccessfully(uid, duration, visualized);
         return true;
     }
 
-    public bool TryUpdateStunDuration(EntityUid uid, TimeSpan? duration)
+    public bool TryUpdateStunDuration(EntityUid uid, TimeSpan? duration, bool visualized = false)
     {
         // <Goob>
         var modifierEv = new GetClothingStunModifierEvent(uid);
@@ -163,11 +164,11 @@ public abstract partial class SharedStunSystem : EntitySystem
         if (!_status.TryUpdateStatusEffectDuration(uid, StunId, duration))
             return false;
 
-        OnStunnedSuccessfully(uid, duration);
+        OnStunnedSuccessfully(uid, duration, visualized);
         return true;
     }
 
-    private void OnStunnedSuccessfully(EntityUid uid, TimeSpan? duration)
+    private void OnStunnedSuccessfully(EntityUid uid, TimeSpan? duration, bool visualized)
     {
         // <Goob>
         if (duration is {} time)
@@ -183,8 +184,11 @@ public abstract partial class SharedStunSystem : EntitySystem
         var evDropHands = new DropHandItemsEvent();
         RaiseLocalEvent(uid, ref evDropHands);
 
+        if (visualized)
+            TrySeeingStars(uid);
+
         var timeForLogs = duration.HasValue
-            ? duration.Value.Seconds.ToString()
+            ? duration.Value.TotalSeconds.ToString(CultureInfo.CurrentCulture)
             : "Infinite";
         _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} stunned for {timeForLogs} seconds");
     }
@@ -321,7 +325,7 @@ public abstract partial class SharedStunSystem : EntitySystem
         if (time != null)
         {
             UpdateKnockdownTime((uid, component), time.Value, refresh);
-            _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} was knocked down for {time.Value.Seconds} seconds");
+            _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} was knocked down for {time.Value.TotalSeconds} seconds");
         }
         else
         {
@@ -336,7 +340,7 @@ public abstract partial class SharedStunSystem : EntitySystem
     public bool KnockdownOrStun(EntityUid uid, TimeSpan? duration)
         => TryKnockdown(uid, duration) || TryUpdateParalyzeDuration(uid, duration);
 
-    public bool TryAddParalyzeDuration(EntityUid uid, TimeSpan? duration) // Goob - made duration optional
+    public bool TryAddParalyzeDuration(EntityUid uid, TimeSpan? duration, bool visualized = false)
     {
         // <Goob> - made duration optional
         if (duration == null)
@@ -348,19 +352,19 @@ public abstract partial class SharedStunSystem : EntitySystem
 
         // We can't exit knockdown when we're stunned, so this prevents knockdown lasting longer than the stun.
         Knockdown(uid, null, false, true, true);
-        OnStunnedSuccessfully(uid, duration);
+        OnStunnedSuccessfully(uid, duration, visualized);
 
         return true;
     }
 
-    public bool TryUpdateParalyzeDuration(EntityUid uid, TimeSpan? duration)
+    public bool TryUpdateParalyzeDuration(EntityUid uid, TimeSpan? duration, bool visualized = false)
     {
         if (!_status.TryUpdateStatusEffectDuration(uid, StunId, duration))
             return false;
 
         // We can't exit knockdown when we're stunned, so this prevents knockdown lasting longer than the stun.
         Knockdown(uid, null, false, true, true);
-        OnStunnedSuccessfully(uid, duration);
+        OnStunnedSuccessfully(uid, duration, visualized);
 
         return true;
     }

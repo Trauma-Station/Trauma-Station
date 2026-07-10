@@ -80,7 +80,7 @@ public sealed partial class HereticAbilitySystem
         var xform = Transform(uid);
         var mapCoords = _transform.GetMapCoordinates(uid, xform);
 
-        if (_mapMan.TryFindGridAt(mapCoords, out var gridUid, out var mapGrid) &&
+        if (_map.TryFindGridAt(mapCoords, out var gridUid, out var mapGrid) &&
             _map.TryGetTileRef(gridUid, mapGrid, xform.Coordinates, out var tile) &&
             (!_weather.CanWeatherAffect((gridUid, mapGrid), tile) ||
              _atmos.GetTileMixture(gridUid, xform.MapUid, tile.GridIndices)?.Pressure is
