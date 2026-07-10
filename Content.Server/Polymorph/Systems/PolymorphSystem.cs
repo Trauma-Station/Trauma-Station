@@ -507,7 +507,8 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
         }
 
         // <Trauma>
-        EnsureComp<MindSwappingComponent>(uid);
+        if (!TerminatingOrDeleted(uid))
+            EnsureComp<MindSwappingComponent>(uid);
         // </Trauma>
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
