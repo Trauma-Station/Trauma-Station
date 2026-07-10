@@ -7,8 +7,6 @@ namespace Content.Goobstation.Client.Emoting;
 
 public sealed partial class FartSystem : SharedFartSystem
 {
-    [Dependency] private IPrototypeManager _prot = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -18,8 +16,8 @@ public sealed partial class FartSystem : SharedFartSystem
 
     private void OnHandleState(EntityUid uid, FartComponent component, ref ComponentHandleState args)
     {
-        if (args.Current is not FartComponentState state
-        || !_prot.TryIndex(state.Emote, out var emote))
+        if (args.Current is not FartComponentState state ||
+            !ProtoMan.Resolve(state.Emote, out var emote))
             return;
 
         if (emote.Event != null)

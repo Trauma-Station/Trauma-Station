@@ -15,8 +15,11 @@
       types:
         Blunt: 100
   - type: ReflectiveSurface
-  # </Trauma>
   - type: Sharp
+  # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite

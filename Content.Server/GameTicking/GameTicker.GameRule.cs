@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Text;
 using Content.Server.Administration;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Administration;
@@ -274,6 +275,22 @@ public sealed partial class GameTicker
     }
 
     /// <summary>
+    /// Returns true if a game rule that passes the whitelist and blacklist has been added.
+    /// </summary>
+    /// <param name="ruleWhitelist">whitelist for the game rules</param>
+    /// <param name="ruleBlacklist">blacklist for the game rules</param>
+    public bool IsGameRuleAdded(EntityWhitelist? ruleWhitelist, EntityWhitelist? ruleBlacklist = null)
+    {
+        foreach (var ruleEntity in GetAddedGameRules())
+        {
+            if (_whitelist.CheckBoth(ruleEntity, ruleBlacklist, ruleWhitelist))
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
     ///     Returns true if a game rule with the given component is active..
     /// </summary>
     public bool IsGameRuleActive<T>()
@@ -299,6 +316,22 @@ public sealed partial class GameTicker
         foreach (var ruleEntity in GetActiveGameRules())
         {
             if (MetaData(ruleEntity).EntityPrototype?.ID == rule)
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Returns true if a game rule that passes the whitelist and blacklist is active.
+    /// </summary>
+    /// <param name="ruleWhitelist">whitelist for the game rules</param>
+    /// <param name="ruleBlacklist">blacklist for the game rules</param>
+    public bool IsGameRuleActive(EntityWhitelist? ruleWhitelist, EntityWhitelist? ruleBlacklist = null)
+    {
+        foreach (var ruleEntity in GetActiveGameRules())
+        {
+            if (_whitelist.CheckBoth(ruleEntity, ruleBlacklist, ruleWhitelist))
                 return true;
         }
 
@@ -370,10 +403,10 @@ public sealed partial class GameTicker
     public IEnumerable<EntityPrototype> GetAllGameRulePrototypes()
     {
         // <Trauma> - remove abstract check, replace slop component check.
-        var ruleName = Factory.GetComponentName<GameRuleComponent>();
-        foreach (var proto in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
+        var ruleName = Factory.CompName<GameRuleComponent>();
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.Components.ContainsKey(ruleName))
+            if (proto.HasComp(ruleName))
                 yield return proto;
         }
         // </Trauma>
@@ -436,7 +469,7 @@ public sealed partial class GameTicker
 
         foreach (var rule in args)
         {
-            if (!_prototypeManager.HasIndex(rule))
+            if (!ProtoMan.HasIndex(rule))
             {
                 shell.WriteError($"Invalid game rule {rule} was skipped.");
 
@@ -514,22 +547,24 @@ public sealed partial class GameTicker
         if (_allPreviousGameRules.Count > 0)
         {
             var sortedRules = _allPreviousGameRules.OrderBy(rule => rule.Item1).ToList();
-            var message = "\n";
+            var message = new StringBuilder();
+            message.AppendLine();
 
             if (!forChatWindow)
             {
                 var header = Loc.GetString("list-gamerule-admin-header");
-                message += $"\n{header}\n";
-                message += "|------------|------------------\n";
+                message.AppendLine();
+                message.AppendLine(header);
+                message.AppendLine("|------------|------------------");
             }
 
             foreach (var (time, rule) in sortedRules)
             {
                 var formattedTime = time.ToString(@"hh\:mm\:ss");
-                message += $"| {formattedTime,-10} | {rule,-16} \n";
+                message.AppendLine($"| {formattedTime,-10} | {rule,-16} ");
             }
 
-            return message;
+            return message.ToString().TrimEnd('\n');
         }
         else
         {

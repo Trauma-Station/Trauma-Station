@@ -79,9 +79,6 @@ public sealed partial class ToggleableClothingSystem : EntitySystem
             !args.CanComplexInteract) // Trauma
             return;
 
-        var text = comp.VerbText is { } loc ? Loc.GetString(loc) : (comp.ActionEntity == null ? null : Name(comp.ActionEntity.Value)); // Trauma - use Loc.GetString here
-        if (text == null)
-            return;
 
         if (!_inventorySystem.InSlotWithFlags(toggleable.Owner, comp.RequiredFlags))
             return;
@@ -95,7 +92,7 @@ public sealed partial class ToggleableClothingSystem : EntitySystem
         var verb = new EquipmentVerb()
         {
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/outfit.svg.192dpi.png")),
-            Text = text, // Trauma - moved Loc.GetString to above
+            Text = comp.ActionEntity is { } action ? Name(action) : Loc.GetString(comp.VerbText), // Trauma - use action's name if it exists
         };
 
         if (user == wearer)

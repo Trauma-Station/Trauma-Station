@@ -14,7 +14,6 @@ public sealed partial class AntagVerbSystem : EntitySystem
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -28,12 +27,12 @@ public sealed partial class AntagVerbSystem : EntitySystem
         var session = args.Session;
         var verbs = args.Verbs.Verbs;
 
-        foreach (var smite in _proto.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
+        foreach (var smite in ProtoMan.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
         {
             if (!_whitelist.CheckBoth(args.Target, blacklist: smite.Blacklist, whitelist: smite.Whitelist))
                 continue;
 
-            var antag = _proto.Index(smite.Antag);
+            var antag = ProtoMan.Index(smite.Antag);
             var name = Loc.GetString(antag.Name);
             verbs.Add(new Verb()
             {

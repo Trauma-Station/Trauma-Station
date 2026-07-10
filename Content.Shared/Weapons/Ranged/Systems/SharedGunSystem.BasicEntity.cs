@@ -29,7 +29,7 @@ public abstract partial class SharedGunSystem
     {
         // <Trauma>
         WeightedRandomEntityPrototype? prototypes = null;
-        if (ent.Comp.Proto == null && (!ProtoManager.Resolve(ent.Comp.Prototypes, out prototypes) ||
+        if (ent.Comp.Proto == null && (!ProtoMan.Resolve(ent.Comp.Prototypes, out prototypes) ||
                                         prototypes.Weights.Count == 0))
             return;
         var rand = Random(ent);

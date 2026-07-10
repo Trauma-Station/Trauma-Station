@@ -10,6 +10,9 @@
   - type: WeaponClass
     class: Sword
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: Objects/Weapons/Melee/cane_blade.rsi
     state: icon

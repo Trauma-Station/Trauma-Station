@@ -914,6 +914,11 @@
   name: Engi-Vend
   description: Spare tool vending. What? Did you expect some witty description?
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - DroneUsable
+  # </Trauma>
   - type: VendingMachine
     pack: EngiVendInventory
     offState: off
@@ -937,9 +942,7 @@
     radius: 2
     energy: 1.6
     color: "#b89e2a"
-  - type: Tag
-    tags:
-    - DroneUsable # Goobstation
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: VendingMachine
@@ -976,6 +979,7 @@
   - type: GuideHelp
     guides:
     - MedicalDoctor
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachineMedicalBase
@@ -1822,6 +1826,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Chemistry"]]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachine
@@ -1882,6 +1887,7 @@
     color: "#b89e2a"
   - type: AccessReader
     access: [["Engineering"]]
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: VendingMachine
@@ -1914,6 +1920,7 @@
     color: "#b89e2a"
   - type: AccessReader
     access: [["Engineering"]]
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: VendingMachine
@@ -2118,6 +2125,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Genetics"]] # Trauma - was Medical
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachine
@@ -2146,6 +2154,7 @@
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: AccessReader
     access: [["Medical"]]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachine
@@ -2304,6 +2313,7 @@
     guides:
     - Chemicals
     - Chemist
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: VendingMachineChemicals

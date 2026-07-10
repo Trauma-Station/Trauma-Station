@@ -11,15 +11,15 @@
     sprite: _Trauma/Objects/Specific/Fishing/fish.rsi
 
 - type: entity
-  parent: BaseFishTrauma
+  parent: [ BaseFishTrauma, BaseSlicingRefinable ]
   id: FishAbductor
   name: abductor fish
   description: It's creepy..
   components:
   - type: Sprite
     state: abductor
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: AbductorFishLootTable
@@ -52,15 +52,15 @@
     state: needlefish
 
 - type: entity
-  parent: [ BaseFishTrauma, BaseMagicalContraband ]
+  parent: [ BaseFishTrauma, BaseSlicingRefinable, BaseMagicalContraband ]
   id: FishSquid
   name: squid
   description: Full of ink!
   components:
   - type: Sprite
     state: squid
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
     - id: MagicInkRandom

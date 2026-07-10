@@ -13,19 +13,22 @@ public sealed partial class MegafaunaSystem
 {
     public void StartupMegafauna(Entity<MegafaunaAiComponent> ent)
     {
-        RaiseLocalEvent(ent, new MegafaunaStartupEvent());
+        var ev = new MegafaunaStartupEvent();
+        RaiseLocalEvent(ent, ref ev);
         ent.Comp.Active = true;
     }
 
     public void ShutdownMegafauna(Entity<MegafaunaAiComponent> ent)
     {
-        RaiseLocalEvent(ent, new MegafaunaShutdownEvent());
+        var ev = new MegafaunaShutdownEvent();
+        RaiseLocalEvent(ent, ref ev);
         ent.Comp.Active = false;
     }
 
     public void KillMegafauna(Entity<MegafaunaAiComponent> ent)
     {
-        RaiseLocalEvent(ent, new MegafaunaKilledEvent());
+        var ev = new MegafaunaKilledEvent();
+        RaiseLocalEvent(ent, ref ev);
         ent.Comp.Active = false;
     }
 
@@ -50,8 +53,7 @@ public sealed partial class MegafaunaSystem
         var uid = args.Entity;
         var mapId = Transform(uid).MapID;
 
-        var randomVector = new Vector2(args.Random.NextFloat(-radius, radius), args.Random.NextFloat(-radius, radius));
-        var position = _xform.GetWorldPosition(uid) + randomVector;
+        var position = _xform.GetWorldPosition(uid) + args.Random.NextVector2(radius);
         var newMapCoords = new MapCoordinates(position, mapId);
         var coords = _xform.ToCoordinates(newMapCoords);
 

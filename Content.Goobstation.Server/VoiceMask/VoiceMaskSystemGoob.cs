@@ -13,7 +13,6 @@ namespace Content.Goobstation.Server.VoiceMask;
 
 public sealed partial class VoiceMaskSystemGoob : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedJobSystem _job = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private VoiceMaskSystem _voiceMask = default!;
@@ -27,7 +26,7 @@ public sealed partial class VoiceMaskSystemGoob : EntitySystem
 
     private void OnChangeJobIcon(Entity<VoiceMaskComponent> entity, ref VoiceMaskChangeJobIconMessage ev)
     {
-        if (!_proto.TryIndex(ev.JobIconProtoId, out var proto)
+        if (!ProtoMan.TryIndex(ev.JobIconProtoId, out var proto)
             || !proto.AllowSelection)
             return;
 

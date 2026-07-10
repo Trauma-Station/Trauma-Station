@@ -8,7 +8,6 @@ using Content.Shared.Popups;
 
 public sealed partial class GoobLatheSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private LatheSystem _lathe = default!;
     [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -34,7 +33,7 @@ public sealed partial class GoobLatheSystem : EntitySystem
         // there is no test to make sure this doesn't give infinite mats... goida
         foreach (var batch in comp.Queue)
         {
-            var recipe = _proto.Index(batch.Recipe);
+            var recipe = ProtoMan.Index(batch.Recipe);
             var count = batch.ItemsRequested - batch.ItemsPrinted;
             foreach (var (mat, amount) in recipe.Materials)
             {

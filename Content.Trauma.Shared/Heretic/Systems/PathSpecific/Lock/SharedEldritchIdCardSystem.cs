@@ -21,7 +21,6 @@ namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
 public abstract partial class SharedEldritchIdCardSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IComponentFactory _compFact = default!;
 
@@ -229,7 +228,7 @@ public abstract partial class SharedEldritchIdCardSystem : EntitySystem
         _idCard.TryChangeFullName(ent, config.FullName, ent.Comp2, user);
         _idCard.TryChangeJobDepartment(ent, config.Departments, ent.Comp2);
         _idCard.TryChangeJobTitle(ent, config.JobTitle, ent.Comp2, user);
-        _idCard.TryChangeJobIcon(ent, _proto.Index(config.JobIcon), ent.Comp2, user);
+        _idCard.TryChangeJobIcon(ent, ProtoMan.Index(config.JobIcon), ent.Comp2, user);
 
         ent.Comp1.CurrentProto = config.CardPrototype;
         DirtyField(ent.Owner, ent.Comp1, nameof(EldritchIdCardComponent.CurrentProto));

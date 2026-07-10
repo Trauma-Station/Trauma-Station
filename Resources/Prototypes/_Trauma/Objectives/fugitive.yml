@@ -6,7 +6,7 @@
   id: BaseFugitiveObjective
   components:
   - type: Objective
-    issuer: objective-issuer-unknown
+    issuer: Unknown
   - type: RoleRequirement
     roles:
     - FugitiveRole
@@ -17,7 +17,7 @@
   id: BaseHunterObjective
   components:
   - type: Objective
-    issuer: objective-issuer-syndicate
+    issuer: TheSyndicate
   - type: RoleRequirement
     roles:
     - HunterRole

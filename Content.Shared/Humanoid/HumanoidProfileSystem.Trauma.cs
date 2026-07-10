@@ -40,7 +40,7 @@ public sealed partial class HumanoidProfileSystem
         var voicePrototypeId = DefaultBarkVoice;
         var species = ent.Comp.Species;
         if (barkvoiceId != null &&
-            _prototype.TryIndex(barkvoiceId, out var bark) &&
+            ProtoMan.TryIndex(barkvoiceId, out var bark) &&
             bark.SpeciesWhitelist?.Contains(species) != false)
         {
             voicePrototypeId = barkvoiceId.Value;
@@ -48,7 +48,7 @@ public sealed partial class HumanoidProfileSystem
         else
         {
             // use first valid bark as a fallback
-            foreach (var o in _prototype.EnumeratePrototypes<BarkPrototype>())
+            foreach (var o in ProtoMan.EnumeratePrototypes<BarkPrototype>())
             {
                 if (o.RoundStart && o.SpeciesWhitelist?.Contains(species) != false)
                 {
@@ -68,7 +68,7 @@ public sealed partial class HumanoidProfileSystem
     {
         ent.Comp.Knowledge = profile;
 
-        var parent = _prototype.Index(ent.Comp.Species).Knowledge;
+        var parent = ProtoMan.Index(ent.Comp.Species).Knowledge;
         _knowledge.ApplyProfile(ent, parent, profile);
     }
 
@@ -90,6 +90,7 @@ public sealed partial class HumanoidProfileSystem
             ent.Comp.Species,
             ent.Comp.Age,
             ent.Comp.Sex,
+            ent.Comp.Voice,
             ent.Comp.Gender,
             appearance,
             // not spawning player don't care about anything here
@@ -162,8 +163,6 @@ public sealed partial class HumanoidProfileSystem
 
         ent.Comp.Sex = sex;
         Dirty(ent);
-        var ev = new SexChangedEvent(old, sex);
-        RaiseLocalEvent(ent, ref ev);
     }
 
     public void SetGender(Entity<HumanoidProfileComponent> ent, Gender gender)

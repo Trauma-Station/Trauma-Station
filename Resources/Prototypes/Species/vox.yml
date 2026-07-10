@@ -12,3 +12,9 @@
   sexes:
   - Unsexed
   knowledge: Vox # Trauma
+  defaultSoundsBySex:
+  - UnisexVox
+  - UnisexVox
+  - UnisexVox
+  voices:
+  - UnisexVox

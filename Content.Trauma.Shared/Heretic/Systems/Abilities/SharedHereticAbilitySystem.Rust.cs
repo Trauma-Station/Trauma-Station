@@ -120,7 +120,7 @@ public abstract partial class SharedHereticAbilitySystem
     public bool IsTileRust(EntityCoordinates coords, [NotNullWhen(true)] out Vector2i? tileCoords)
     {
         tileCoords = null;
-        if (!_mapMan.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var mapGrid))
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var mapGrid))
             return false;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);
@@ -168,7 +168,7 @@ public abstract partial class SharedHereticAbilitySystem
         var circle = new Circle(mapPos.Position, radius);
         var grids = new List<Entity<MapGridComponent>>();
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(radius, radius));
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         var tiles = new List<(EntityCoordinates, TileRef, EntityUid, MapGridComponent)>();
         foreach (var grid in grids)
@@ -211,7 +211,7 @@ public abstract partial class SharedHereticAbilitySystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         var tiles = new List<(EntityCoordinates, TileRef, EntityUid, MapGridComponent)>();
         foreach (var grid in grids)

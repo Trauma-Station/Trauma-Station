@@ -14,7 +14,6 @@ namespace Content.Trauma.Shared.Forging;
 public sealed partial class AnvilSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private ForgingSystem _forging = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -35,8 +34,8 @@ public sealed partial class AnvilSystem : EntitySystem
 
     private void OnStartItem(Entity<ForgingAnvilComponent> ent, ref AnvilStartItemMessage args)
     {
-        if (!_proto.TryIndex(args.Metal, out var metal) ||
-            !_proto.TryIndex(args.Item, out var item) ||
+        if (!ProtoMan.TryIndex(args.Metal, out var metal) ||
+            !ProtoMan.TryIndex(args.Item, out var item) ||
             !_forging.CanMakeFrom(item, args.Metal))
             return;
 

@@ -35,7 +35,6 @@ namespace Content.Trauma.Shared.Knowledge.Quality;
 public sealed partial class QualitySystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private NameModifierSystem _nameModifier = default!;
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
@@ -84,7 +83,7 @@ public sealed partial class QualitySystem : EntitySystem
     private void OnGunRefreshModifiers(Entity<QualityComponent> ent, ref GunRefreshModifiersEvent args)
     {
         // 60% spread at +5, 170% at -5
-        var modifier = QualityModifier(_proto.Index(ent.Comp.QualityFactors).Gun);
+        var modifier = QualityModifier(ProtoMan.Index(ent.Comp.QualityFactors).Gun);
         args.MinAngle *= modifier;
         args.MaxAngle *= modifier;
     }
@@ -278,7 +277,7 @@ public sealed partial class QualitySystem : EntitySystem
     {
         _nameModifier.RefreshNameModifiers(ent.Owner);
 
-        if (!_proto.Resolve(ent.Comp.QualityFactors, out var proto))
+        if (!ProtoMan.Resolve(ent.Comp.QualityFactors, out var proto))
             return;
 
         var ev = new ApplyQualityEvent(ent.Comp.Quality, proto);

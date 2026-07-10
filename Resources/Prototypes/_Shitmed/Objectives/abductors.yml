@@ -7,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-abductors
+    issuer: Abductor
   - type: RoleRequirement
     roles:
     - Abductor
@@ -34,7 +34,7 @@
   components:
   - type: Objective
     difficulty: 1
-    issuer: objective-issuer-voices
+    issuer: AbductorVictim
   - type: RoleplayObjective
   - type: RoleRequirement
     roles:

@@ -42,8 +42,7 @@
     speechSounds: Duende
     allowedEmotes: [Laugh]
   - type: Vocal
-    sounds:
-      Unsexed: Duende
+    emoteSounds: Duende
   - type: LanguageSpeaker
     speaks:
     - FloorGoblin
@@ -63,8 +62,6 @@
     tags:
     - Trash
     - VimPilot
-  - type: Butcherable
-    spawned: []
   - type: NpcFactionMember
     factions:
       - SimpleNeutral

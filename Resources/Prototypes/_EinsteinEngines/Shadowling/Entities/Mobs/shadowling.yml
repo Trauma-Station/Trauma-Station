@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [SimpleSpaceMobBase,FlyingMobBase]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobNightVision ]
   id: BaseMobShadowlingAscendant
   name: shadowling ascendant
   suffix: ""
@@ -50,10 +50,6 @@
     radius: 2
     softness: 1
     energy: 50
-  - type: NightVision
-    color: "#BF40BF"
-    activateSound: null
-    deactivateSound: null
   - type: PressureImmunity
   - type: BreathingImmunity
   - type: SpecialLowTempImmunity

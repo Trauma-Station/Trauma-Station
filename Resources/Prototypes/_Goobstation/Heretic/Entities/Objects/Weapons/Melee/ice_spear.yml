@@ -29,6 +29,9 @@
         restitution: 0.3
         friction: 0.2
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/ice_spear.rsi
     layers:

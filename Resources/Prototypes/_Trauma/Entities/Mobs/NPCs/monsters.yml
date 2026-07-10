@@ -2,7 +2,7 @@
 
 - type: entity
   name: Ratma
-  parent: [ MobSpaceBasic, MobCombat ]
+  parent: [ MobSpaceBasic, MobCombat, BaseSlicingRefinable ]
   id: MobRatma
   description: It came from the maintenence tunnels.
   components:
@@ -44,16 +44,16 @@
           radius: 0.40
         density: 100
         mask:
-          - MobMask
+        - MobMask
         layer:
-          - MobLayer
+        - MobLayer
   - type: MobThresholds
     thresholds:
       0: Alive
       200: Dead
   - type: PassiveDamage
     allowedStates:
-      - Alive
+    - Alive
     damage:
       types:
         Heat: -3
@@ -61,10 +61,10 @@
         Slash: -1
         Piercing: -1
         Ballistic: -1
-  - type: Butcherable
-    spawned:
-      - id: FoodMeatRat
-        amount: 10
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatRat
+      amount: 10
   - type: MeleeWeapon
     range: 2.5
     soundHit:
@@ -97,6 +97,7 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
+    showInExamine: false
   - type: Puller
     needsHands: false
   - type: GhostRole
@@ -117,16 +118,17 @@
   - type: NoSlip
 
 - type: entity
-  name: breadling
+  parent: [FoodBase, SimpleMobBase, MobCombat, BaseSlicingRefinable]
   id: MobBreadLing
-  parent: [FoodBase, SimpleMobBase, MobCombat]
+  name: breadling
   description: Be kind to him, he is not long for this world.
   components:
   - type: FlavorProfile
     flavors:
     - bread
-  - type: SliceableFood
-    slice: FoodBreadPlainSlice
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodBreadPlainSlice
   - type: Solution
     solution:
       maxVol: 25
@@ -305,6 +307,7 @@
   - type: Stamina
     baseCritThreshold: 9999
   - type: FlashImmunity
+    showInExamine: false
   - type: Puller
     needsHands: false
   - type: GhostRole
@@ -353,7 +356,7 @@
     canWideSwing: true
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat]
+  parent: [ SimpleMobBase, MobCombat, BaseSlicingRefinable]
   categories: [ HideSpawnMenu ] # You don't need to spawn shellless coconut crabs via the menu
   id: MobCoconutCrabShellless
   name: coconut crab
@@ -442,8 +445,8 @@
   - type: Injurable
     damageContainer: Biological
   - type: WeakToHoly
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatCrab
       amount: 5
 

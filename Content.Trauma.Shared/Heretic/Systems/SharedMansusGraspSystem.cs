@@ -44,7 +44,6 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tile = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
@@ -62,7 +61,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     [Dependency] private SharedStaminaSystem _stamina = default!;
     [Dependency] private SharedRatvarianLanguageSystem _language = default!;
     [Dependency] private UseDelaySystem _delay = default!;
-    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedHereticAbilitySystem _ability = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -421,12 +420,12 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!args.ClickLocation.IsValid(EntityManager))
             return;
 
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(args.ClickLocation),
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(args.ClickLocation),
                 out var gridUid,
                 out var mapGrid))
             return;
 
-        var tileRef = _mapSystem.GetTileRef(gridUid, mapGrid, args.ClickLocation);
+        var tileRef = _map.GetTileRef(gridUid, mapGrid, args.ClickLocation);
         var tileDef = (ContentTileDefinition) _tile[tileRef.Tile.TypeId];
 
         if (!_ability.CanRustTile(tileDef))

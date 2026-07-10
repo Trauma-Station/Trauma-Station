@@ -4,7 +4,20 @@
   id: ArmBlade
   description: A grotesque blade made out of bone and flesh that cleaves through people as a hot knife through butter.
   components:
-  - type: Sharp
+  # <Trauma>
+  - type: UseDelay # for instant prying
+    delay: 1
+  - type: Scalpel
+    speed: 0.3
+  - type: BoneSaw
+    speed: 0.75
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
+  # </Trauma>
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: Sprite
@@ -21,12 +34,3 @@
     size: Normal
     sprite: Objects/Weapons/Melee/armblade.rsi
   - type: Prying
-  - type: UseDelay # Goobstation - For insta prying
-    delay: 1
-  - type: Scalpel # Shitmed
-    speed: 0.3
-  - type: BoneSaw # Shitmed
-    speed: 0.75
-  - type: SurgeryTool # Shitmed
-    startSound:
-      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg

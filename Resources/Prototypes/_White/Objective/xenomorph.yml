@@ -7,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1
-    issuer: objective-issuer-xenomorph-hive
+    issuer: Xenos
   - type: RoleRequirement
     roles:
     - XenomorphRole

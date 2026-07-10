@@ -27,6 +27,7 @@ public abstract partial class SharedDestructibleSystem
 {
     [Dependency] public IRobustRandom Random = default!;
     public new IEntityManager EntityManager => base.EntityManager;
+    public IPrototypeManager PrototypeManager => ProtoMan;
 
     [Dependency] public SharedAtmosphereSystem AtmosphereSystem = default!;
     [Dependency] public SharedAudioSystem AudioSystem = default!;
@@ -38,7 +39,6 @@ public abstract partial class SharedDestructibleSystem
     [Dependency] public SharedSolutionContainerSystem SolutionContainerSystem = default!;
     [Dependency] public SharedPuddleSystem PuddleSystem = default!;
     [Dependency] public SharedContainerSystem ContainerSystem = default!;
-    [Dependency] public IPrototypeManager PrototypeManager = default!;
     [Dependency] public ISharedAdminLogManager AdminLogger = default!;
 
     public bool TryGetDestroyedAt(Entity<DestructibleComponent?> ent, [NotNullWhen(true)] out FixedPoint2? destroyedAt)

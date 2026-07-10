@@ -5,17 +5,14 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Weapons.Melee;
-using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 
 namespace Content.Goobstation.Server.Chemistry;
 
 public sealed partial class SpillableMeleePuddleSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
-
-    [Dependency] private MapSystem _map = default!;
-    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private PuddleSystem _puddle = default!;
 
@@ -55,7 +52,7 @@ public sealed partial class SpillableMeleePuddleSystem : EntitySystem
 
         var splitSolution = _solution.SplitSolution(soln.Value, args.Amount);
 
-        if (!_mapMan.TryFindGridAt(coords, out var gridUid, out var mapGrid))
+        if (!_map.TryFindGridAt(coords, out var gridUid, out var mapGrid))
             return;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);

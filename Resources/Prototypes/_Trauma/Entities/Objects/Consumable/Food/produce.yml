@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: FoodProduceBase
+  parent: [ FoodProduceBase, BaseSlicingRefinable ]
   id: FoodLemonade
   name: lemonade
   description: When life gives you lemons, commit arson. With the lemons.
@@ -36,13 +36,12 @@
   - type: Edible
     trash:
     - LemonGrenade
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: LemonGrenade
 
 - type: entity
-  parent: FoodProduceBase
+  parent: [ FoodProduceBase, BaseSlicingRefinable ]
   id: FoodCoconut
   name: coconut
   description: Should probably split it before eating...
@@ -106,22 +105,19 @@
     tags:
     - Fruit
     - CannonBall # lmao
-  - type: SliceableFood
-    count: 2
-    slice: FoodCoconutHalf
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodCoconutHalf
+      amount: 2
   - type: Edible
     trash:
     - TrashCoconutShell
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
-    - id: TrashCoconutShell
   - type: PhysicalComposition
     materialComposition:
       Wood: 100 # lol
 
 - type: entity
-  parent: [ FoodProduceBase, ProduceSliceBase ]
+  parent: [ FoodProduceBase, ProduceSliceBase, BaseSlicingRefinable ]
   id: FoodCoconutHalf
   name: coconut half
   description: The perfect defense... if you're an octopus.
@@ -150,9 +146,8 @@
   - type: Edible
     trash:
     - TrashCoconutShell
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: TrashCoconutShell
   - type: PhysicalComposition
     materialComposition:

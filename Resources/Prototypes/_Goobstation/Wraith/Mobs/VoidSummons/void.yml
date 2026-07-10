@@ -2,8 +2,8 @@
 
 # This holds all mobs that can be summoned by Summon void creature action
 - type: entity
+  parent: [ BaseMob, MobCombat, MobNightVision ]
   id: MobSkeletonCommander
-  parent: [ BaseMob, MobCombat ]
   name: skeleton commander
   description: A bulky skeleton here to encourage his friends.
   components:
@@ -35,10 +35,7 @@
   - type: Vocal
     wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
     wilhelmProbability: 0.1
-    sounds:
-      Male: Skeleton
-      Female: Skeleton
-      Unsexed: Skeleton
+    emoteSounds: Skeleton
   - type: Sprite
     drawdepth: Mobs
     sprite: _Goobstation/Wraith/Mobs/skeletoncommander.rsi
@@ -103,19 +100,15 @@
               OrganSkeletonPersonHead:
                 min: 1
                 max: 1
-  - type: NightVision # Goobstation - Nigthvision
-    color: white
-    activateSound: null
-    deactivateSound: null
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5
 
 - type: entity
-  name: Tentacle fiend
-  parent: MobCorgiNarsi
+  parent: [ MobCorgiNarsi, MobNightVision ]
   id: MobVoidSpiker
+  name: tentacle fiend
   description: Standing still is probably not a good idea.
   components:
   - type: MindContainer
@@ -192,29 +185,22 @@
       gender: male
       proper: true
   - type: Vocal
-    sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
+    emoteSounds: UnisexArachnid
   - type: LanguageSpeaker
     speaks:
     - Dog
     understands:
     - Dog
     - TauCetiBasic
-  - type: NightVision # Goobstation - Nigthvision
-    color: purple
-    activateSound: null
-    deactivateSound: null
   - type: Prying
     pryPowered: true
     force: true
     speedModifier: 2.5
 
 - type: entity
-  name: Voidhound
-  parent: MobCorgiNarsi
+  parent: [ MobCorgiNarsi, MobNightVision ]
   id: MobVoidHound
+  name: voidhound
   description: You probably shouldn't be staring at this thing.
   components:
   - type: MindContainer
@@ -276,10 +262,7 @@
     - DoorBumpOpener
     - VimPilot
   - type: Vocal
-    sounds:
-      Male: Cerberus
-      Female: Cerberus
-      Unsexed: Cerberus
+    emoteSounds: Cerberus
   - type: LanguageSpeaker
     speaks:
     - Dog
@@ -289,10 +272,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5
     baseSprintSpeed: 5
-  - type: NightVision # Goobstation - Nigthvision
-    color: purple
-    activateSound: null
-    deactivateSound: null
   - type: Prying
     pryPowered: true
     force: true

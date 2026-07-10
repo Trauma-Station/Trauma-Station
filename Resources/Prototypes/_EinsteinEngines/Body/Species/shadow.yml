@@ -50,6 +50,7 @@
   parent:
   - AppearanceShadow
   - BaseSpeciesMobOrganic
+  - MobNightVision
   id: MobShadow
   name: Urist McShadow
   components:
@@ -77,10 +78,6 @@
       - ReagentId: FluorosulfuricAcid
         Quantity: 300
   - type: PressureImmunity
-  - type: NightVision
-    color: "#BF40BF"
-    activateSound: null
-    deactivateSound: null
   - type: ThermalVision
     thermalShader: null
     color: "#BF40BF"

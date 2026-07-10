@@ -19,7 +19,6 @@ namespace Content.Trauma.Shared.Wizard.Mutate;
 public abstract partial class SharedHulkSystem : EntitySystem
 {
     [Dependency] private SharedCuffableSystem _cuffs = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     public static readonly EntProtoId StatusEffectStunned = "StatusEffectStunned";
     public static readonly ProtoId<DamageTypePrototype> Structural = "Structural";
@@ -43,7 +42,7 @@ public abstract partial class SharedHulkSystem : EntitySystem
     private void OnStartup(Entity<HulkComponent> ent, ref ComponentStartup args)
     {
         UpdateColorStartup(ent);
-        ent.Comp.StructuralDamage ??= new DamageSpecifier(_prototype.Index(Structural), 80f);
+        ent.Comp.StructuralDamage ??= new DamageSpecifier(ProtoMan.Index(Structural), 80f);
     }
 
     private void OnMeleeHit(Entity<HulkComponent> ent, ref MeleeHitEvent args)

@@ -12,7 +12,6 @@ namespace Content.Goobstation.Server.ManifestListings;
 
 public sealed partial class ManifestListingsSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -141,9 +140,9 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                 else
                 {
                     if (data.ProductEntity != null)
-                        name = Loc.GetString(_proto.Index(data.ProductEntity.Value).Name);
+                        name = Loc.GetString(ProtoMan.Index(data.ProductEntity.Value).Name);
                     else if (data.ProductAction != null)
-                        name = Loc.GetString(_proto.Index(data.ProductAction.Value).Name);
+                        name = Loc.GetString(ProtoMan.Index(data.ProductAction.Value).Name);
                 }
 
                 var costSb = new StringBuilder();
@@ -155,7 +154,7 @@ public sealed partial class ManifestListingsSystem : EntitySystem
                     if (costSb.Length > 0)
                         costSb.Append(", ");
 
-                    var currency = _proto.Index(currencyId);
+                    var currency = ProtoMan.Index(currencyId);
                     costSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
                 }
 
@@ -182,7 +181,7 @@ public sealed partial class ManifestListingsSystem : EntitySystem
             if (totalSpentSb.Length > 0)
                 totalSpentSb.Append(", ");
 
-            var currency = _proto.Index(currencyId);
+            var currency = ProtoMan.Index(currencyId);
             totalSpentSb.Append($"{amount} {Loc.GetString(currency.DisplayName)}");
         }
 
@@ -197,7 +196,7 @@ public sealed partial class ManifestListingsSystem : EntitySystem
         sprite = "";
         state = "";
 
-        if (!_proto.Index(proto).TryGetComponent("Action", out ActionComponent? actionComp) || actionComp.Icon == null)
+        if (!ProtoMan.Index(proto).TryGetComponent("Action", out ActionComponent? actionComp) || actionComp.Icon == null)
             return false;
 
         switch (actionComp.Icon)

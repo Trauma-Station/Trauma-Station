@@ -320,13 +320,10 @@
   name: ninja visor
   description: An advanced visor protecting a ninja's eyes from flashing lights.
   components:
-  - type: Sprite
-    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
-  - type: Clothing
-    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
-  - type: FlashImmunity
+  # <Trauma>
   - type: NightVision
-    isEquipment: true
+    overlayColor: "#98FB9833"
+    relayOverlay: true
   - type: Armor
     coverage:
     - Head
@@ -341,6 +338,12 @@
       OrganDamage: 0.07
       BoneDamage: 0.07
       VeinsDamage: 0
+  # </Trauma>
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: FlashImmunity
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]

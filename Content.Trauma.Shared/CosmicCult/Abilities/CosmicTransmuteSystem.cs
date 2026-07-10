@@ -15,7 +15,6 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
     [Dependency] private SharedCosmicCultSystem _cult = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedHandsSystem _hand = default!;
     [Dependency] private PullingSystem _pull = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -33,7 +32,7 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
 
     private void OnDetailedExamine(Entity<CosmicTransmutableComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
     {
-        if (!_cult.EntityIsCultist(args.User) || !_proto.TryIndex(ent.Comp.TransmuteTo, out var result)) //non-cultists don't need to know this
+        if (!_cult.EntityIsCultist(args.User) || !ProtoMan.TryIndex(ent.Comp.TransmuteTo, out var result)) //non-cultists don't need to know this
             return;
 
         var msg = new FormattedMessage();
@@ -74,7 +73,7 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
         if (_pull.GetPulling(ent.Owner) is not { } target)
             return false;
         if (!TryComp<CosmicTransmutableComponent>(target, out var comp)
-        || !_proto.TryIndex(comp.TransmuteTo, out var proto))
+        || !ProtoMan.TryIndex(comp.TransmuteTo, out var proto))
         {
             _message = "cosmicability-transmute-not-transmutable";
             return false;
@@ -98,7 +97,7 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
         || item is not { } target)
             return false;
         if (!TryComp<CosmicTransmutableComponent>(target, out var comp)
-        || !_proto.TryIndex(comp.TransmuteTo, out var proto))
+        || !ProtoMan.TryIndex(comp.TransmuteTo, out var proto))
         {
             _message ??= "cosmicability-transmute-not-transmutable";
             return false;

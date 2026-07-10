@@ -48,7 +48,9 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
 
@@ -84,7 +86,6 @@
     appliedModifier: 1.75
   - type: PressureEfficiency
     lowerBound: 0
-  - type: Sharp
   - type: Prying
   - type: UseDelay
     delay: 1
@@ -113,7 +114,6 @@
   - type: UseDelay
     delay: 1
   - type: Appearance
-  - type: Sharp
   - type: Execution
     doAfterDuration: 4.0
   - type: DisarmMalus

@@ -56,7 +56,7 @@
   - type: Fauna # Lavaland Change
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteSlurva
   name: slurva
   description: A pathetic creature, incapable of doing much.
@@ -78,8 +78,8 @@
     thresholds:
       0: Alive
       30: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 1
   - type: MovementSpeedModifier
@@ -91,7 +91,7 @@
         Blunt: 3
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteBarrier
   name: barrier
   components:
@@ -112,8 +112,8 @@
     thresholds:
       0: Alive
       30: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 1
   - type: Fixtures
@@ -133,7 +133,7 @@
         Blunt: 3
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteSkitter
   name: skitter
   description: A devious little alien... Make sure they don't run off with your rations!
@@ -152,8 +152,8 @@
     thresholds:
       0: Alive
       30: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 1
   - type: Fixtures
@@ -173,7 +173,7 @@
         Slash: 3
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteSwiper
   name: swiper
   description: Where did that stack of steel go?
@@ -192,15 +192,15 @@
     thresholds:
       0: Alive
       60: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MovementSpeedModifier
     baseSprintSpeed : 5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteMolder
   name: molder
   components:
@@ -218,8 +218,8 @@
     thresholds:
       0: Alive
       100: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MovementSpeedModifier
@@ -227,7 +227,7 @@
     baseWalkSpeed : 3.5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocytePouncer
   name: pouncer
   components:
@@ -245,8 +245,8 @@
     thresholds:
       0: Alive
       100: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -256,7 +256,7 @@
         Slash: 7.5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteGlider
   name: glider
   components:
@@ -274,8 +274,8 @@
     thresholds:
       0: Alive
       100: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -288,7 +288,7 @@
     baseWalkSpeed: 4.5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteHarvester
   name: harvester
   components:
@@ -306,8 +306,8 @@
     thresholds:
       0: Alive
       150: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -318,7 +318,7 @@
         Structural: 5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteCrawler
   name: crawler
   description: Deadly, pack-animals that maul unsuspecting travelers.
@@ -337,8 +337,8 @@
     thresholds:
       0: Alive
       150: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 2
   - type: MeleeWeapon
@@ -352,7 +352,7 @@
     baseWalkSpeed: 5
 
 - type: entity
-  parent: BaseMobArgocyte
+  parent: [BaseMobArgocyte, BaseSlicingRefinable]
   id: MobArgocyteEnforcer
   name: enforcer
   components:
@@ -370,8 +370,8 @@
     thresholds:
       0: Alive
       300: Dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatXeno
       amount: 3
   - type: MeleeWeapon
@@ -401,7 +401,6 @@
       Dead:
         Base: founder_dead
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatXeno
       amount: 5
@@ -447,7 +446,6 @@
       Dead:
         Base: leviathing_dead
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatXeno
       amount: 10

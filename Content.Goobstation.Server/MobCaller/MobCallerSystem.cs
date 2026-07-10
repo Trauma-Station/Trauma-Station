@@ -20,9 +20,9 @@ public sealed partial class MobCallerSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private NPCSystem _npc = default!;
     [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _map = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()

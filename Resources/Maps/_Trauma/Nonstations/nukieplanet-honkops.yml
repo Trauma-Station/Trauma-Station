@@ -6076,49 +6076,41 @@ entities:
   - uid: 920
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 31.5,-17.5
       parent: 2
   - uid: 921
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 32.5,-17.5
       parent: 2
   - uid: 922
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 33.5,-17.5
       parent: 2
   - uid: 923
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 31.5,-19.5
       parent: 2
   - uid: 924
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 32.5,-19.5
       parent: 2
   - uid: 925
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 34.5,-17.5
       parent: 2
   - uid: 926
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 33.5,-19.5
       parent: 2
   - uid: 927
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: 34.5,-16.5
       parent: 2
   - uid: 928

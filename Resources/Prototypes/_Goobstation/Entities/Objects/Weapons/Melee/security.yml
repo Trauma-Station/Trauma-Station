@@ -95,6 +95,9 @@
   - type: ComponentToggler
     components:
       - type: Sharp
+      - type: Tool
+        qualities:
+        - Slicing
       - type: DisarmMalus
         malus: 0.6
       - type: Wieldable
@@ -161,7 +164,8 @@
     shape:
     - 0,0,2,0
     storedRotation: 45
-  - type: Sharp
+  - type: Tool
+    qualities: Slicing
   - type: MeleeWeapon
     animationRotation: 225
     wideAnimationRotation: -135
@@ -184,7 +188,8 @@
           shape:
           - 0,0,2,0
           storedRotation: 45
-        - type: Sharp
+        - type: Tool
+          qualities: Slicing
         - type: MeleeWeapon
           animationRotation: 225
           wideAnimationRotation: -135

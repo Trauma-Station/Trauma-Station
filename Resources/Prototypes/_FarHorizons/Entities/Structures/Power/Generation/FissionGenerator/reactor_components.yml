@@ -47,7 +47,7 @@
     forceFeedDelay: 60
   - type: FlavorProfile
     flavors:
-    - metal
+    - metallic
     - electrons
   - type: BadFood
   - type: Solution

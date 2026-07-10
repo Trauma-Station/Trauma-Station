@@ -54,10 +54,8 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private INetManager _net = default!;
 
-    [Dependency] protected IPrototypeManager Proto = default!;
     [Dependency] protected ITileDefinitionManager Tile = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] protected IGameTiming Timing = default!;
@@ -151,7 +149,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             return;
         }
 
-        if (!Proto.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
+        if (!ProtoMan.Index(args.Args.TouchSpell).HasComponent<MansusGraspComponent>())
             return;
 
         if (!Heretic.TryGetHereticComponent(ent.AsNullable(), out var heretic, out var mind))
@@ -166,7 +164,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
             return ent.Comp.MansusGraspProto;
 
         var pathSpecific = ent.Comp.MansusGraspProto + ent.Comp.CurrentPath;
-        return Proto.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
+        return ProtoMan.HasIndex(pathSpecific) ? pathSpecific : ent.Comp.MansusGraspProto;
     }
 
     private void OnAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
@@ -268,7 +266,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         var toCoords = coords;
 
         var fromMap = _transform.ToMapCoordinates(fromCoords);
-        var spawnCoords = _mapMan.TryFindGridAt(fromMap, out var gridUid, out _)
+        var spawnCoords = _map.TryFindGridAt(fromMap, out var gridUid, out _)
             ? _transform.WithEntityId(fromCoords, gridUid)
             : new(_map.GetMap(fromMap.MapId), fromMap.Position);
 

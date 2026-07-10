@@ -8,7 +8,6 @@ namespace Content.Goobstation.Shared.Factory.Plumbing;
 
 public sealed partial class PlumbingFilterSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     private EntityQuery<PlumbingFilterComponent> _query;
@@ -37,7 +36,7 @@ public sealed partial class PlumbingFilterSystem : EntitySystem
             return;
         }
 
-        var name = _proto.Index(filter).LocalizedName;
+        var name = ProtoMan.Index(filter).LocalizedName;
         args.PushMarkup(Loc.GetString("plumbing-filter-set", ("reagent", name)));
     }
 
@@ -45,11 +44,11 @@ public sealed partial class PlumbingFilterSystem : EntitySystem
     {
         if (args.Filter == ent.Comp.Filter
             || (args.Filter is {} filter
-            && !_proto.HasIndex(filter)))
+            && !ProtoMan.HasIndex(filter)))
             return;
 
         var msg = args.Filter is {} filter2 // chud language
-            ? Loc.GetString("plumbing-filter-changed", ("reagent", _proto.Index(filter2).LocalizedName))
+            ? Loc.GetString("plumbing-filter-changed", ("reagent", ProtoMan.Index(filter2).LocalizedName))
             : Loc.GetString("plumbing-filter-removed");
         _popup.PopupClient(msg, ent, args.Actor);
 

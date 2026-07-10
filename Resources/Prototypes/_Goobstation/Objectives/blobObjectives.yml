@@ -6,7 +6,7 @@
   id: BaseBlobObjective
   components:
   - type: Objective
-    issuer: objective-issuer-blob
+    issuer: Blob
     unique: true
     difficulty: 1
     icon:
@@ -17,9 +17,9 @@
     - BlobRole
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: BaseBlobObjective
   id: BlobCaptureObjective
+  name: Take over the station
   components:
   - type: BlobCaptureCondition
     target: 400

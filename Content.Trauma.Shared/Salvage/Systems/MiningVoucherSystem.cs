@@ -15,7 +15,6 @@ public sealed partial class MiningVoucherSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
@@ -60,7 +59,7 @@ public sealed partial class MiningVoucherSystem : EntitySystem
             return;
 
         var user = args.Actor;
-        var kit = _proto.Index(ent.Comp.Kits[index]);
+        var kit = ProtoMan.Index(ent.Comp.Kits[index]);
         var name = Loc.GetString(kit.Name);
         _popup.PopupEntity(Loc.GetString("mining-voucher-selected", ("kit", name)), user, user);
 
@@ -84,7 +83,7 @@ public sealed partial class MiningVoucherSystem : EntitySystem
         if (_net.IsClient) // wut da hell
             return;
 
-        var kit = _proto.Index(ent.Comp.Kits[index]);
+        var kit = ProtoMan.Index(ent.Comp.Kits[index]);
         var xform = Transform(ent);
         foreach (var id in kit.Content)
         {

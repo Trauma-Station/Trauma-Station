@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [SolutionFood, SolutionToolSmall, Clothing]
+  parent: [SolutionFood, SolutionToolSmall, Clothing, BaseSlicingRefinable]
   id: ClothingNeckBase
   components:
   - type: Item
@@ -11,9 +11,8 @@
     - neck
   - type: Sprite
     state: icon
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialCloth1
       amount: 2
   - type: PhysicalComposition # 50% of the amount of cloth you'd obtain upon butchering
@@ -37,12 +36,17 @@
   parent: ClothingNeckBase
   id: ClothingScarfBase
   components:
+  # <Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 50
+  # </Trauma>
   - type: Tag
     tags:
     - Scarf
     - ClothMade
     - Recyclable
     - WhitelistChameleon
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Cloth: 50
+  - type: TemperatureProtection
+    heatingCoefficient: 1.025
+    coolingCoefficient: 0.5

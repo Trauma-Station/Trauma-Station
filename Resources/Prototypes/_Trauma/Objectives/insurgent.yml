@@ -6,7 +6,7 @@
   id: BaseInsurgentObjective
   components:
   - type: Objective
-    issuer: objective-issuer-insurgents
+    issuer: Insurgents
   - type: RoleRequirement
     roles:
     - InsurgentRole

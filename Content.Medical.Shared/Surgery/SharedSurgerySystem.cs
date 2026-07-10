@@ -38,7 +38,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
@@ -390,7 +389,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     public EntityUid? GetSingleton(EntProtoId surgeryOrStep)
     {
-        if (!_prototypes.HasIndex(surgeryOrStep))
+        if (!ProtoMan.HasIndex(surgeryOrStep))
             return null;
 
         // This (for now) assumes that surgery entity data remains unchanged between client
@@ -452,7 +451,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         _surgeries.Clear();
 
         _allSurgeries.Clear();
-        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        foreach (var entity in ProtoMan.EnumeratePrototypes<EntityPrototype>())
             if (entity.HasComponent<SurgeryComponent>())
                 _allSurgeries.Add(new EntProtoId(entity.ID));
     }

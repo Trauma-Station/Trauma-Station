@@ -175,9 +175,10 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
+  - type: ToggleableClothing
+    clothingPrototypes: # Trauma - changed to dictionary for modsuits
       head: ClothingHeadHatHoodRad
+    verbText: toggle-clothing-verb-hood
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: HideClothingLayerClothing # Goobstation
@@ -340,6 +341,7 @@
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodIan
+    verbText: toggle-clothing-verb-hood
   - type: Construction
     graph: ClothingOuterSuitIan
     node: suit
@@ -361,6 +363,11 @@
   name: carp suit
   description: A special suit that makes you look just like a space carp, if your eyesight is bad.
   components:
+  # <Trauma>
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
+  # </Trauma>
   - type: AllowSuitStorage
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
@@ -371,9 +378,10 @@
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
       head: ClothingHeadHatHoodCarp
-  - type: HideClothingLayerClothing # Goobstation
-    hiddenSlots:
-    - jumpsuit
+    verbText: toggle-clothing-verb-hood
+  - type: HideLayerClothing
+    slots:
+    - Tail
 
 - type: entity
   parent: ClothingOuterSuitCarp

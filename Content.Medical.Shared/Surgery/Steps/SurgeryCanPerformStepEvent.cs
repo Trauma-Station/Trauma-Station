@@ -13,7 +13,7 @@ public record struct SurgeryCanPerformStepEvent(
     SlotFlags TargetSlots,
     string? Popup = null,
     StepInvalidReason Invalid = StepInvalidReason.None,
-    ISurgeryToolComponent? ValidTool = null
+    BaseSurgeryToolComponent? ValidTool = null
 ) : IInventoryRelayEvent
 {
     public bool IsValid => Invalid == StepInvalidReason.None;

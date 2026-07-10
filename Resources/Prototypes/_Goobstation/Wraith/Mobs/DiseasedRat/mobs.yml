@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: [ BaseMob, MobCombat, MobNightVision ]
   id: MobPlagueRatSmall
-  suffix: Wraith
-  parent: [ BaseMob, MobCombat ]
   name: plague rat
+  suffix: Wraith
   description: A diseased looking rat.
   components:
   - type: MindContainer
@@ -123,10 +123,6 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
-  - type: NightVision # Goobstation - Nigthvision
-    color: "#00FF00"
-    activateSound: null
-    deactivateSound: null
 
 - type: entity
   id: MobPlagueRatMedium
