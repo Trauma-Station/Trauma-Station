@@ -30,6 +30,8 @@ public sealed partial class OrganChipSystem : EntitySystem
 
     public static readonly VerbCategory ChipsCategory = new("verb-categories-organ-chips", "/Textures/_Trauma/Objects/Specific/brain_chips.rsi/icon.png");
 
+    private List<EntityUid> _chips = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -134,10 +136,10 @@ public sealed partial class OrganChipSystem : EntitySystem
             return;
 
         // go through each chip in reverse + not using foreach since it gets modified
-        var chips = ent.Comp.Container.ContainedEntities;
-        for (int i = chips.Count - 1; i >= 0; i++)
+        _chips.Clear();
+        _chips.AddRange(ent.Comp.Container.ContainedEntities);
+        foreach (var chip in _chips)
         {
-            var chip = chips[i];
             _container.Insert(chip, comp.Container);
         }
     }
