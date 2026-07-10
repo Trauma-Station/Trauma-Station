@@ -15,6 +15,8 @@
   - type: DashWings
     speciesWhitelist:
     # need to have a body adapted to controlling wings
+    # every species still gets tackle bonus and innate tacklea but it knocks you down and doesn't dodge bullets
+    # if you aren't moth or vox
     - Moth
     - Vox # They are birds I guess
     toAdd:
@@ -43,6 +45,13 @@
 
 - type: entityEffect
   id: MothDash
+  conditions:
+  - !type:AnyCondition
+    conditions:
+    - !type:SpeciesCondition
+      species: Moth
+    - !type:SpeciesCondition
+      species: Vox
   effects:
   - !type:Emote
     emote: Flip

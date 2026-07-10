@@ -22,16 +22,17 @@ public sealed partial class DashWingsSystem : EntitySystem
         ent.Comp.Changed = true;
         tackler.SkillMod += ent.Comp.SkillMod;
         tackler.Range += ent.Comp.RangeModifier;
-        tackler.KnockdownUser = false;
         Dirty(ent);
         Dirty(args.Target, tackler);
+
+        EntityManager.AddComponents(args.Target, ent.Comp.ToAdd);
 
         if (ent.Comp.SpeciesWhitelist is { } whitelist &&
             !(_humanoidQuery.TryComp(args.Target, out var humanoid) &&
             whitelist.Contains(humanoid.Species)))
             return;
 
-        EntityManager.AddComponents(args.Target, ent.Comp.ToAdd);
+        tackler.KnockdownUser = false;
     }
 
     [SubscribeLocalEvent]
