@@ -33,7 +33,7 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: -0.75 # Trauma - Was -1.5
+            Poison: -0.75 # Trauma - Was -1
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -150,7 +150,7 @@
       effects:
       - !type:EvenHealthChange
         damage:
-          Brute: -1.0 # Trauma - was -2
+          Brute: -1.0 # Trauma - was -1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
@@ -246,9 +246,9 @@
       - !type:HealthChange
         damage:
           types:
-            Heat: -1 # Trauma - Was 2
-            Shock: -1 # Trauma - Was 2
-            Cold: -1 # Trauma - Was 2
+            Heat: -1 # Trauma - Was 1.5
+            Shock: -1 # Trauma - Was 1.5
+            Cold: -1 # Trauma - Was 1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
