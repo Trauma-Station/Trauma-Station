@@ -18,8 +18,6 @@ public sealed partial class BugSystem : SharedBugSystem
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
 
-    private readonly EntProtoId BugEntity = "SyndicateBugCmo";
-
     public override void Initialize()
     {
         base.Initialize();
