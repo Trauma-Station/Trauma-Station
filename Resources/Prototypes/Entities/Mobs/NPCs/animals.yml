@@ -2686,7 +2686,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      120: Dead # Trauma - was 90
+      120: Dead # Trauma - was 90 / R.O.N. Station - Might be changed later, this comment till be here just incase
   - type: SolutionManager
     solutions:
     - SolutionVenomSpider
@@ -2696,7 +2696,7 @@
 #      - ReagentId: Mechanotoxin
 #        Quantity: 1
   - type: MeleeChemicalInjector
-    transferAmount: 1.5 # Trauma - was 0.75
+    transferAmount: 0.5 # Trauma - was 0.75 / R.O.N. Station - Returned to 0.75 from 1.5
     solution: melee
   - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
