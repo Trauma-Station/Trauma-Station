@@ -18,8 +18,6 @@ public sealed partial class BugSystem : SharedBugSystem
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
 
-    private readonly EntProtoId BugEntity = "SyndicateBugCmo";
-
     public override void Initialize()
     {
         base.Initialize();
@@ -55,7 +53,7 @@ public sealed partial class BugSystem : SharedBugSystem
 
         _metaData.SetEntityName(entity.Owner, Loc.GetString("bug-objective-name", ("area", name)));
         _metaData.SetEntityDescription(entity.Owner, Loc.GetString("bug-objective-description", ("area", name)));
-        _objectives.SetIcon(entity.Owner, new SpriteSpecifier.EntityPrototype(BugEntity));
+        _objectives.SetIcon(entity.Owner, new SpriteSpecifier.EntityPrototype(entity.Comp.IconEntity));
     }
 
     private void OnGetObjectiveProgress(Entity<BugAreaConditionComponent> entity, ref ObjectiveGetProgressEvent args)
