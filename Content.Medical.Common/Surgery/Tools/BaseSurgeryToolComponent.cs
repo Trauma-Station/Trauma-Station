@@ -19,5 +19,5 @@ public abstract partial class BaseSurgeryToolComponent : Component
     ///     This is per-type so you can have something that's a good scalpel but a bad retractor.
     /// </summary>
     [DataField]
-    public float Speed { get; set; }
+    public float Speed { get; set; } = 1f;
 }
