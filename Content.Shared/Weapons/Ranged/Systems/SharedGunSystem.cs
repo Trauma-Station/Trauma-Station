@@ -389,7 +389,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             if (attemptEv.Message != null)
             {
-                PopupSystem.PopupClient(attemptEv.Message, gun, user);
+                PopupSystem.PopupEntity(attemptEv.Message, gun, user);
             }
             // <Trauma>
             if (!gun.Comp.LockOnTargetBurst || gun.Comp.ShootCoordinates == null)
@@ -723,8 +723,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         // </Trauma>
     }
-
-    protected abstract void Popup(string message, EntityUid? uid, EntityUid? user);
 
     /// <summary>
     /// Call this whenever the ammo count for a gun changes.

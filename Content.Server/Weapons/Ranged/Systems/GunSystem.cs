@@ -51,8 +51,6 @@ public sealed partial class GunSystem : SharedGunSystem
 
     // Trauma - moved almost everything to shared
 
-    protected override void Popup(string message, EntityUid? uid, EntityUid? user) { }
-
     protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null)
     {
         var filter = Filter.Pvs(gunUid, entityManager: EntityManager);
