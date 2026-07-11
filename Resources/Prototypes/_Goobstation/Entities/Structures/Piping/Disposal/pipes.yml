@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: DisposalBlocker
   parent: DisposalPipeBase
+  id: DisposalBlocker
   name: disposal pipe blocker
   description: A pipe that allows movement of objects on one side and blocks it on the other.
   suffix: DO NOT MAP # mapping it is anti fun
@@ -14,11 +14,8 @@
     - map: [ "pipe" ]
       state: conpipe-blocker
   - type: DisposalTube
-    containerId: DisposalBlocker
-  - type: DisposalBlocker
-  - type: ContainerContainer
-    containers:
-      DisposalBlocker: !type:Container
+    exits:
+    - South
   - type: GenericVisualizer
     visuals:
       enum.DisposalTubeVisuals.VisualState:

@@ -6,7 +6,6 @@ namespace Content.Goobstation.Client.Mindcontrol;
 
 public sealed partial class MindcontrolSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -14,7 +13,7 @@ public sealed partial class MindcontrolSystem : EntitySystem
     }
     private void OnGetStatusIconsEvent(Entity<Shared.Mindcontrol.MindcontrolledComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (_prototype.TryIndex(ent.Comp.MindcontrolIcon, out var iconPrototype))
+        if (ProtoMan.TryIndex(ent.Comp.MindcontrolIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 }

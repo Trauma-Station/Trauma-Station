@@ -28,7 +28,6 @@
     - id: BookJanitor
     - id: BookFabrication
     - id: BookSurvival
-    - id: BookMaterials
     - id: BookDoors
     - id: BookAirlocks
     - id: BookToys
@@ -223,22 +222,6 @@
     doAfter: 2
 
 # Blueprints
-
-- type: entity
-  parent: BookSchematic
-  id: BookMaterials
-  suffix: materials
-  description: A blueprint with designs for materials.
-  components:
-  - type: KnowledgeGrantOnUse
-    skills:
-      MaterialsKnowledge: 25
-    experience:
-      MaterialsKnowledge: 5
-    doAfter: 2
-  - type: Sprite
-    layers:
-    - state: materials
 
 - type: entity
   parent: BookSchematic

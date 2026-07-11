@@ -16,10 +16,10 @@ namespace Content.Goobstation.Shared.Keyring;
 public sealed partial class KeyringSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private SharedDoorSystem _doorSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
     [Dependency] private AccessReaderSystem _access = default!;
-    [Dependency] private SharedAudioSystem _audioSystem = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IRobustRandom _random = default!;
     public override void Initialize()
     {
@@ -67,9 +67,9 @@ public sealed partial class KeyringSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
 
         var popup = Loc.GetString("keyring-start-unlock-popup");
-        _popupSystem.PopupClient(popup, args.User, args.User);
+        _popup.PopupClient(popup, args.User, args.User);
 
-        _audioSystem.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
+        _audio.PlayPredicted(keyring.Comp.UseSound, keyring, args.User);
 
         args.Handled = true;
     }
@@ -84,10 +84,10 @@ public sealed partial class KeyringSystem : EntitySystem
 
         if (_access.AreAccessTagsAllowed(keyring.Comp.Tags, accessReader))
         {
-            _doorSystem.StartOpening(target);
+            _door.StartOpening(target);
 
             var successPopup = Loc.GetString("keyring-finish-unlock-popup");
-            _popupSystem.PopupPredicted(successPopup, args.User, args.User);
+            _popup.PopupClient(successPopup, args.User, args.User);
 
             args.Handled = true;
 
@@ -96,7 +96,7 @@ public sealed partial class KeyringSystem : EntitySystem
 
 
         var failPopup = Loc.GetString("keyring-unlock-fail-popup");
-        _popupSystem.PopupPredicted(failPopup, args.User, args.User);
+        _popup.PopupClient(failPopup, args.User, args.User);
 
         args.Handled = true;
     }

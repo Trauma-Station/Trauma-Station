@@ -124,10 +124,10 @@
 
 # Blobbernaut
 - type: entity
+  parent: [ SimpleSpaceMobBase, MobNightVision ]
   id: MobBlobBlobbernaut
   name: Blobbernaut
   description: Juggernaut, but blob! when the station crew shows full hatred of you, with the help of such strong men you can organize a blitzkriek if you tell them the plan in advance.
-  parent: SimpleSpaceMobBase
   categories: [ HideSpawnMenu ]
   components:
     - type: ZombieImmune
@@ -226,10 +226,6 @@
       flexDefaultState: blobbernaut
       flexDamageState: blobbernaut_flex_damage
       flexDefaultDamageState: nautdamage
-    - type: NightVision
-      color: "#808080"
-      activateSound: null
-      deactivateSound: null
     - type: GuideHelp
       guides:
       - Blob

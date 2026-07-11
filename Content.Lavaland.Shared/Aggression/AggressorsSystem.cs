@@ -115,8 +115,10 @@ public sealed partial class AggressorsSystem : EntitySystem
         var aggComp = EnsureComp<AggressorComponent>(aggressor);
         aggComp.Aggressives.Add(uid);
 
-        RaiseLocalEvent(uid, new AggressorAddedEvent(aggressor));
-        RaiseLocalEvent(aggressor, new AggressiveAddedEvent(uid));
+        var ev = new AggressorAddedEvent(aggressor);
+        RaiseLocalEvent(uid, ref ev);
+        var ev2 = new AggressiveAddedEvent(uid);
+        RaiseLocalEvent(aggressor, ref ev2);
 
         Dirty(uid, comp);
         Dirty(aggressor, aggComp);
@@ -124,32 +126,34 @@ public sealed partial class AggressorsSystem : EntitySystem
 
     public void RemoveAggressor(Entity<AggressiveComponent> ent, Entity<AggressorComponent?> aggressor)
     {
-        if (!Resolve(aggressor, ref aggressor.Comp))
-            return;
-
         ent.Comp.Aggressors.Remove(aggressor);
-        aggressor.Comp.Aggressives.Remove(ent);
-
-        if (aggressor.Comp.Aggressives.Count == 0)
-            RemComp(aggressor, aggressor.Comp);
+        RemoveAggressorFrom(ent, aggressor);
     }
 
     public void RemoveAllAggressors(Entity<AggressiveComponent> ent)
     {
         foreach (var aggressor in ent.Comp.Aggressors)
         {
-            if (!TryComp<AggressorComponent>(aggressor, out var aggressorComp))
-                continue;
-
-            aggressorComp.Aggressives.Remove(ent.Owner);
-            if (aggressorComp.Aggressives.Count == 0)
-            {
-                RaiseLocalEvent(aggressor, new AggressiveRemovedEvent(ent.Owner));
-                RemComp(aggressor, aggressorComp);
-            }
+            RemoveAggressorFrom(ent, aggressor);
         }
 
         ent.Comp.Aggressors.Clear();
+    }
+
+    private void RemoveAggressorFrom(Entity<AggressiveComponent> ent, Entity<AggressorComponent?> aggressor)
+    {
+        if (!Resolve(aggressor, ref aggressor.Comp))
+            return;
+
+        aggressor.Comp.Aggressives.Remove(ent);
+        if (aggressor.Comp.Aggressives.Count > 0)
+            return;
+
+        var ev = new AggressorRemovedEvent(aggressor);
+        RaiseLocalEvent(ent, ref ev);
+        var ev2 = new AggressiveRemovedEvent(ent);
+        RaiseLocalEvent(aggressor, ref ev2);
+        RemComp(aggressor, aggressor.Comp);
     }
 
     #endregion

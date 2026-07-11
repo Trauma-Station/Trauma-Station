@@ -94,8 +94,6 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
 
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected IRobustRandom Random = default!;
-    [Dependency] protected IMapManager MapManager = default!;
-    [Dependency] protected IPrototypeManager ProtoMan = default!;
     [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] protected EntityLookupSystem Lookup = default!;
     [Dependency] private RandomTeleportSystem _randomTeleport = default!;
@@ -1319,7 +1317,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         var mapCoords = TransformSystem.ToMapCoordinates(coords);
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
-        var spawnCoords = MapManager.TryFindGridAt(mapCoords, out var gridUid, out _)
+        var spawnCoords = Map.TryFindGridAt(mapCoords, out var gridUid, out _)
             ? TransformSystem.WithEntityId(coords, gridUid)
             : new(Map.GetMapOrInvalid(mapCoords.MapId), mapCoords.Position);
 

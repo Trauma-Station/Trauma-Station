@@ -17,7 +17,6 @@ namespace Content.Trauma.Server.Heretic.Systems;
 public sealed partial class HereticRitualSystem : SharedHereticRitualSystem
 {
     [Dependency] private PolymorphSystem _polymorph = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _rand = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IChatManager _chat = default!;
@@ -69,7 +68,7 @@ public sealed partial class HereticRitualSystem : SharedHereticRitualSystem
 
         foreach (var (id, amount) in ent.Comp.Datasets)
         {
-            var dataset = _proto.Index(id);
+            var dataset = ProtoMan.Index(id);
             for (var i = 0; i < amount; i++)
             {
                 ent.Comp.Ingredients.Add(_rand.Pick(dataset.Ingredients));

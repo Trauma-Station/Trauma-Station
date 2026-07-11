@@ -19,7 +19,6 @@ namespace Content.Goobstation.Server.Wraith;
 public sealed partial class WraithEvolveSystem : EntitySystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private TransformSystem _transformSystem = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private ActionsSystem _actions = default!;
@@ -72,7 +71,7 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     {
         var uid = ent.Owner;
         if (evolve == null
-            || !_proto.TryIndex(evolve, out var evolvePrototype)
+            || !ProtoMan.TryIndex(evolve, out var evolvePrototype)
             || !evolvePrototype.HasComponent<WraithComponent>()
             || !_mind.TryGetMind(uid, out var mindUid, out var mind))
             return;

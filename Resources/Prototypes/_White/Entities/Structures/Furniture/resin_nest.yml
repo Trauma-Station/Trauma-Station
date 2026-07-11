@@ -62,6 +62,7 @@
         Blunt: -0.05
         Slash: -0.05
         Piercing: -0.05
+        Ballistic: -0.05
         Caustic: -0.05
         Cold: -0.03
         Asphyxiation: -0.8

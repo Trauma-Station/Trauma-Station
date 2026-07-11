@@ -20,7 +20,6 @@ public sealed partial class PendingPirateRuleSystem : GameRuleSystem<PendingPira
 {
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private IRobustRandom _rand = default!;
-    [Dependency] private IPrototypeManager _prot = default!;
     [Dependency] private GameTicker _gt = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private CargoSystem _cargo = default!;
@@ -112,7 +111,7 @@ public sealed partial class PendingPirateRuleSystem : GameRuleSystem<PendingPira
         var announcer = pprule.Comp.LocAnnouncer;
 
         if (pprule.Comp.LocAnnouncers != null)
-            announcer = _rand.Pick(_prot.Index<DatasetPrototype>(pprule.Comp.LocAnnouncers).Values);
+            announcer = _rand.Pick(ProtoMan.Index<DatasetPrototype>(pprule.Comp.LocAnnouncers).Values);
 
         var type = atype.ToString().ToLower();
         var announcement = Loc.GetString($"pirates-announcement-{announcer}-{type}");

@@ -34,7 +34,7 @@
 
 - type: gas
   id: Plasma
-  name: gas-plasma
+  name: gas-phoron # Trauma - plasma -> phoron
   abbreviation: gas-plasma-abbreviation
   molarHeatCapacity: 200
   heatCapacityRatio: 1.7

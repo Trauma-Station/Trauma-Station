@@ -49,6 +49,8 @@
       prob: 0.02
     - id: SubVampire
       prob: 0.2
+    - id: SubChangeling
+      prob: 0.1 # extinct predator species...
     # </Trauma>
 
 - type: entity
@@ -74,6 +76,8 @@
       prob: 0.05
     - id: WraithRoundstart
       prob: 0.02
+    - id: SubChangeling
+      prob: 0.1
     # </Trauma>
 
 - type: entity
@@ -101,6 +105,8 @@
       prob: 0.02
     - id: SubVampire
       prob: 0.2
+    - id: SubChangeling
+      prob: 0.1
     # </Trauma>
 
 - type: entity
@@ -126,24 +132,19 @@
   parent: BaseGameRule
   components:
   - type: DeathMatchRule
-    rewardSpawns:
-    - id: HealingToolbox
-    - id: ClothingOuterArmorBasicSlim
-      orGroup: loot
-    - id: ClothingHeadHelmetBasic
-      orGroup: loot
-    - id: SoapNT
-      orGroup: loot
-    - id: Bola
-      orGroup: loot
-    - id: Spear
-      orGroup: loot
-    - id: ClothingShoesGaloshes
-      orGroup: loot
-    - id: FoodPieBananaCream
-      orGroup: loot
-    - id: Stimpack
-      orGroup: loot
+    rewardSpawns: !type:AllSelector
+      children:
+      - id: HealingToolbox
+      - !type:GroupSelector
+        children:
+        - id: ClothingOuterArmorBasicSlim
+        - id: ClothingHeadHelmetBasic
+        - id: SoapNT
+        - id: Bola
+        - id: Spear
+        - id: ClothingShoesGaloshes
+        - id: FoodPieBananaCream
+        - id: Stimpack
   - type: KillCalloutRule
   - type: PointManager
   - type: RespawnDeadRule
@@ -221,11 +222,10 @@
   - type: DynamicRuleCost
     cost: 200
 
-# Goobstation
 - type: entity
   abstract: true
   parent: BaseGameRule
-  id: BaseTraitorRuleNoObjectives
+  id: BaseTraitorRuleNoObjectives # Trauma - add NoObjectives, added objectives separately
   components:
   # <Trauma>
   - type: AntagPlayerEffects
@@ -238,6 +238,8 @@
   # TODO: uplink in yml
   - type: AntagSelection
     agentName: traitor-round-end-agent-name
+  - type: DynamicRuleCost
+    cost: 100
 
 - type: entity
   abstract: true
@@ -293,7 +295,7 @@
       proto: ChangelingSkills
   # </Trauma>
   - type: GameRule
-    minPlayers: 15 # Trauma - was 25
+    minPlayers: 25
   - type: AntagSelection
     lateJoinAdditional: true # Trauma
     selectionTime: PrePlayerSpawn

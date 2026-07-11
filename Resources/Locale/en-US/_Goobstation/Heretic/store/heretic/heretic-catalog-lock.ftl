@@ -61,8 +61,7 @@ knowledge-path-lock-s6-name = Burglar's Finesse
 knowledge-path-lock-s6-desc =
     Consorting with Burglar spirits is frowned upon, but a Steward will always want to learn about new doors.
 
-    Grants you Burglar's Finesse, a single-target spell that puts a random item from the victims backpack into your hand.
-    Doesn't require focus to cast.
+    You can now steal your opponent's held item by alt-clicking them with your blade in combat mode at a cost of a delaying your next attack slightly.
 
 knowledge-path-lock-s7-name = Opening Blade
 knowledge-path-lock-s7-desc =
@@ -70,13 +69,14 @@ knowledge-path-lock-s7-desc =
 
     Your blade has better wounding and a chance to cause a weeping avulsion on attack.
 
-knowledge-path-lock-s8-name = Caretaker's Last Refuge
+knowledge-path-lock-s8-name = Wrong Key
 knowledge-path-lock-s8-desc =
-    Jealously, the Guard and the Hound hunted me. But I unlocked my form, and was but a haze, untouchable.
+    There are keys that open doors; then there are keys that alter the reality itself.
+    The Steward knows which key fits the keyhole and which will curse the door with madness.
 
-    Gives you a spell that makes you transparent and not dense. Cannot be used near living sentient beings.
-    While in refuge, you cannot use your hands or spells, and you are immune to slowdown.
-    You are invincible but unable to harm anything. Cancelled by being hit with an anti-magic item.
+    Allows you to transmute a screwdriver, a pair of insulated gloves and a wirecutter to create a Serpentclave.
+    It can trap airlocks; trapped doors will pull heathens with a tentacle and crush them when attempted to be interacted with, dealing damage and stunning them.
+    Doors linked by the eldritch ID cannot be trapped.
 
 knowledge-path-lock-s9-name = Unlock the Labyrinth
 knowledge-path-lock-s9-desc =

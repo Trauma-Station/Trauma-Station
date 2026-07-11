@@ -64,6 +64,8 @@
   name: Anaconda
   description: A heavy pistol capable of supplying itself with the ammo on the way using a built-in fabricator.
   components:
+  - type: WeaponClass
+    class: Pistol
   - type: Item
     size: Small
     shape:

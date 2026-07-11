@@ -16,7 +16,7 @@
         amount: 3
         doAfter: 3
       - material: Cloth
-        amount: 1
+        amount: 3
         doAfter: 1
   #Base Altar
   - node: AltarConvertNode
@@ -29,7 +29,7 @@
         amount: 3
       - !type:SpawnPrototype
         prototype: MaterialCloth1
-        amount: 1
+        amount: 3
       - !type:DeleteEntity {}
       conditions:
       - !type:EntityAnchored

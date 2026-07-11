@@ -79,6 +79,27 @@
 - type: weightedRandomEntity
   id: WabbajackAnimal
   weights:
+    MobBearSea: 1
+    MobSquidSea: 1
+    MobSpiderCrabSea: 1
+    MobKraitSea: 1
+    MobArcherSea: 1
+    MobEelSea: 1
+    MobCobra: 1
+    MobSnakeGrass: 1
+    MobYellowBellySnake: 1
+    MobMantis: 1
+    MobMantisShrimp: 1
+    MobShrimp: 1
+    MobDartFrog1: 1
+    MobDartFrog2: 1
+    MobDartFrog3: 1
+    MobDartFrog4: 1
+    MobDartFrog5: 1
+    MobDartFrog6: 1
+    MobBunny: 1
+    MobBunnySea: 1
+    MobBunnyEvil: 1
     MobBat: 1
     MobBee: 1
     MobChicken: 0.33

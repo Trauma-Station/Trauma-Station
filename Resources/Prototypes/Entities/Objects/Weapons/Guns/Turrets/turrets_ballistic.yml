@@ -20,13 +20,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 250 # Goobstation
+        damage: 250 # Trauma - was 100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]

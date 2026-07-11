@@ -26,7 +26,7 @@
     sprite: _Trauma/Structures/Fishing/pond.rsi
     state: icon
   product: WaterFishingPool
-  cost: 7500
+  cost: 2500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -36,7 +36,7 @@
     sprite: _Trauma/Structures/Fishing/lavapond.rsi
     state: icon
   product: LavaFishingPool
-  cost: 15000
+  cost: 7500
   category: cargoproduct-category-name-fun
   group: market
 
@@ -46,6 +46,6 @@
     sprite: _Trauma/Structures/Fishing/plasmapond.rsi
     state: icon
   product: PlasmaFishingPool
-  cost: 15000
+  cost: 7500
   category: cargoproduct-category-name-fun
   group: market

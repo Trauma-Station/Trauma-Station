@@ -217,7 +217,7 @@
     sprite: _Trauma/Objects/Patreon/toasterStrudels.rsi
 
 - type: entity
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseSlicingRefinable ]
   id: PatreonBumblebirb
   name: Dwingle
   description: It's dwingling itself.
@@ -290,8 +290,8 @@
       reagents:
       - ReagentId: Slime
         Quantity: 50
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatSlime
   - type: Damageable
   - type: Injurable

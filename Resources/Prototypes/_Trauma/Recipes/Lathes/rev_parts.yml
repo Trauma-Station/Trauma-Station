@@ -36,3 +36,10 @@
   result: RevHandcuffs
   materials:
     Steel: 200
+
+- type: latheRecipe
+  parent: BaseRevComponent
+  id: RevBallBearings
+  result: RevBallBearings
+  materials:
+    Steel: 300

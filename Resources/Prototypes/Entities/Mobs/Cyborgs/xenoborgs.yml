@@ -59,7 +59,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 60
-      MaterialsKnowledge: 60
       DoorsKnowledge: 60
       AirlocksKnowledge: 60
       FurnitureKnowledge: 60
@@ -169,7 +168,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 20
-      MaterialsKnowledge: 20
       DoorsKnowledge: 20
       AirlocksKnowledge: 20
       FurnitureKnowledge: 20
@@ -241,7 +239,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 20
-      MaterialsKnowledge: 20
       DoorsKnowledge: 20
       AirlocksKnowledge: 20
       FurnitureKnowledge: 20
@@ -313,7 +310,6 @@
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 20
-      MaterialsKnowledge: 20
       DoorsKnowledge: 20
       AirlocksKnowledge: 20
       FurnitureKnowledge: 20

@@ -343,7 +343,7 @@ public struct CustomRichTextEntry
                 }
 
                 var advance = font.DrawChar(handle, rune, baseLine, uiScale, color);
-                baseLine += new Vector2(advance, 0);
+                baseLine.X += advance;
 
                 globalBreakCounter += 1;
             }
@@ -392,9 +392,9 @@ public struct CustomRichTextEntry
                         Angle.Zero);
             }
 
-            var advanceX = control.SetWidth;
+            var advanceX = control.DesiredSize.X + control.Margin.Right;
             controlYAdvance = Math.Max(0f, (control.DesiredPixelSize.Y - GetLineHeight(font, uiScale, lineHeightScale)) * invertedScale);
-            baseLine += new Vector2(advanceX, 0);
+            baseLine.X += advanceX;
         }
 
         var boxPadding = (BoxPadding * uiScale);

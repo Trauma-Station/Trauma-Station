@@ -3,7 +3,6 @@ using Content.Server.Cargo.Systems;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
@@ -39,7 +38,7 @@ public sealed partial class GunSystem : SharedGunSystem
         if (string.IsNullOrEmpty(ent.Comp.Proto) || ent.Comp.UnspawnedCount == 0)
             return;
 
-        if (!ProtoManager.TryIndex<EntityPrototype>(ent.Comp.Proto, out var proto))
+        if (!ProtoMan.TryIndex<EntityPrototype>(ent.Comp.Proto, out var proto))
         {
             Log.Error($"Unable to find fill prototype for price on {ent.Comp.Proto} on {ToPrettyString(ent)}");
             return;

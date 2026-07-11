@@ -6,6 +6,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
@@ -18,7 +19,6 @@ public sealed partial class OrganChipSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -28,6 +28,8 @@ public sealed partial class OrganChipSystem : EntitySystem
     [Dependency] private EntityQuery<OrganChipContainerComponent> _containerQuery = default!;
 
     public static readonly VerbCategory ChipsCategory = new("verb-categories-organ-chips", "/Textures/_Trauma/Objects/Specific/brain_chips.rsi/icon.png");
+
+    private List<EntityUid> _chips = new();
 
     public override void Initialize()
     {
@@ -42,6 +44,7 @@ public sealed partial class OrganChipSystem : EntitySystem
         SubscribeLocalEvent<OrganChipContainerComponent, ContainerIsInsertingAttemptEvent>(OnChipInsertAttempt);
         SubscribeLocalEvent<OrganChipContainerComponent, EntInsertedIntoContainerMessage>(OnChipInserted);
         SubscribeLocalEvent<OrganChipContainerComponent, EntRemovedFromContainerMessage>(OnChipRemoved);
+        SubscribeLocalEvent<OrganChipContainerComponent, PolymorphedEvent>(OnPolymorphed);
 
         SubscribeLocalEvent<OrganChipContainerComponent, GetVerbsEvent<InteractionVerb>>(OnGetVerbs);
         SubscribeLocalEvent<OrganChipContainerComponent, BodyRelayedEvent<GetVerbsEvent<InteractionVerb>>>(OnGetVerbs);
@@ -122,6 +125,24 @@ public sealed partial class OrganChipSystem : EntitySystem
         Dirty(args.Entity, chip);
     }
 
+    private void OnPolymorphed(Entity<OrganChipContainerComponent> ent, ref PolymorphedEvent args)
+    {
+        if (ent.Owner != args.OldEntity)
+            return;
+
+        var target = args.NewEntity;
+        if (!_containerQuery.TryComp(target, out var comp))
+            return;
+
+        // go through each chip in reverse + not using foreach since it gets modified
+        _chips.Clear();
+        _chips.AddRange(ent.Comp.Container.ContainedEntities);
+        foreach (var chip in _chips)
+        {
+            _container.Insert(chip, comp.Container);
+        }
+    }
+
     private void OnGetVerbs(Entity<OrganChipContainerComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
@@ -140,14 +161,18 @@ public sealed partial class OrganChipSystem : EntitySystem
         }
 
         var user = args.User;
-        var i = 1;
+        // you remember which skill chip is installing in yourself, for others they are just numbered
+        var known = _body.GetBody(ent.Owner) == user;
+
+        var i = 0;
         foreach (var chip in ent.Comp.Container.ContainedEntities)
         {
+            i++;
             var chipCopy = chip; // amazing language
             var canRemove = true; // TODO: make it support self unremovable chips
             args.Verbs.Add(new()
             {
-                Text = $"Remove {name} chip {i++}",
+                Text = known ? $"Remove {Name(chip)}" : $"Remove {name} chip {i++}",
                 Category = ChipsCategory,
                 Disabled = !canRemove,
                 Act = () => StartRemovingChip(ent, chipCopy, user)
@@ -323,7 +348,7 @@ public sealed partial class OrganChipSystem : EntitySystem
 
     private string OrganName(EntityUid uid)
         => _body.GetCategory(uid) is { } category
-            ? _proto.Index(category).Name.ToLower()
+            ? ProtoMan.Index(category).Name.ToLower()
             : Name(uid);
 
     public void InstallChip(EntityUid mob, [ForbidLiteral] EntProtoId<OrganChipComponent> id)

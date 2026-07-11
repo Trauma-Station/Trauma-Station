@@ -45,7 +45,6 @@
   - type: KnowledgeGrant
     skills:
       FabricationKnowledge: 50
-      MaterialsKnowledge: 50
       DoorsKnowledge: 50
       AirlocksKnowledge: 50
       ToysKnowledge: 50

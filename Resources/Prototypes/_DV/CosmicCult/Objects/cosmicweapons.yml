@@ -80,8 +80,8 @@
     attackRate: 0.6
     damage:
       types:
-        Piercing: 18
-        Asphyxiation: 6
+        Piercing: 12
+        Asphyxiation: 10
         Ion: 15
     animationRotation: 225
     wideAnimationRotation: 225
@@ -124,7 +124,6 @@
     damage:
       types:
         Piercing: 10
-        Asphyxiation: 5
   - type: Item
     size: Large
     shape:
@@ -158,11 +157,12 @@
     doAfterDuration: 4.0
 
 - type: entity
-  name: astral razor
   parent: [BaseItem, BaseCosmicContraband]
+  name: astral razor
   id: ScytheCosmicCult
   description: An preternatural scythe, wrought of indescribable material. Even just looking at it makes you feel cold.
   components:
+  - type: Sharp
   - type: CosmicEquipment
   - type: Sprite
     sprite: _DV/CosmicCult/Objects/cosmicscythe.rsi
@@ -179,6 +179,7 @@
         Blunt: -20
         Slash: -20
         Piercing: -20
+        Ballistic: -20
         Heat: -20
         Cold: -20
         Shock: -20
@@ -242,8 +243,12 @@
     slots:
     - Back
     - suitStorage
-  - type: UnholyItem # Goobstation Shitchap
-  - type: Sharp
+  - type: UnholyItem
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Items/Culinary/chop.ogg
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true

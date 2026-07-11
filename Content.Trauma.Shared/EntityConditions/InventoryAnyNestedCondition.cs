@@ -40,7 +40,7 @@ public sealed partial class InventoryAnyNestedConditionSystem : EntityConditionS
         var condition = args.Condition.Condition;
         while (slots.NextItem(out var item))
         {
-            if (_conditions.TryCondition(item, condition))
+            if (_conditions.TryCondition(item, condition, args.User))
             {
                 args.Result = true;
                 return;

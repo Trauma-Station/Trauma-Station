@@ -66,3 +66,12 @@
         min: 1
         max: 5
       playerRatio: 15
+
+- type: entity
+  parent: Changeling
+  id: SubChangeling
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Changeling

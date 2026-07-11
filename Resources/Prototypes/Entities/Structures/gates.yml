@@ -10,7 +10,6 @@
     layers:
     - state: base
   - type: Anchorable
-  - type: Rotatable
   - type: Construction
     graph: LogicGate
     node: empty

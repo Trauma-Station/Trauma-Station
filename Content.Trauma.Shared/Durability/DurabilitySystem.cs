@@ -35,7 +35,6 @@ public sealed partial class DurabilitySystem : EntitySystem
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly Dictionary<DurabilityState, Color> AssociatedColors = new()
     {
@@ -182,7 +181,7 @@ public sealed partial class DurabilitySystem : EntitySystem
         ExamineMats.Clear();
         foreach (var material in comp.RepairMaterials.Keys)
         {
-            if (!_proto.Resolve(material, out var proto))
+            if (!ProtoMan.Resolve(material, out var proto))
                 continue;
             ExamineMats.Add(proto);
         }

@@ -901,6 +901,9 @@ public abstract partial class SharedActionsSystem : EntitySystem
             if (GetAction(actionId) is not {} ent)
                 return;
 
+            if (ent.Comp.DetachedItemAction) // Trauma
+                continue;
+
             if (ent.Comp.Container == container)
                 RemoveAction((performer, comp), (ent, ent));
         }

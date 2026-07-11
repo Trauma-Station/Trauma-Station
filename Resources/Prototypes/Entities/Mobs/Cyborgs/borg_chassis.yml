@@ -115,7 +115,7 @@
           map: ["light"]
           visible: false
     - type: BorgChassis
-      maxModules: 3
+      maxModules: 7 # Trauma - was 3
       moduleWhitelist:
         tags:
           - BorgModuleGeneric
@@ -128,6 +128,16 @@
       interactFailureString: petting-failure-syndicate-cyborg
       interactSuccessSound:
         path: /Audio/Ambience/Objects/periodic_beep.ogg
+    # <Trauma>
+    - type: ModifyKnowledgeGrant
+      skills:
+        MeleeKnowledge: 51
+        StrengthKnowledge: 51
+        ShootingKnowledge: 51
+        ToughnessKnowledge: 51
+        AthleticsKnowledge: 51
+        WeaponsKnowledge: 51
+    # </Trauma>
 
 - type: entity
   id: BorgChassisSyndicateMedical
@@ -135,6 +145,19 @@
   name: syndicate medical cyborg
   description: A combat medical cyborg. Has limited offensive potential, but makes more than up for it with its support capabilities.
   components:
+    # <Trauma>
+    - type: ModifyKnowledgeGrant
+      skills:
+        SurgeryKnowledge: 60
+        FirstAidKnowledge: 60
+        ChemistryKnowledge: 60
+        MeleeKnowledge: 20
+        StrengthKnowledge: 20
+        ShootingKnowledge: 20
+        ToughnessKnowledge: 20
+        AthleticsKnowledge: 20
+        WeaponsKnowledge: 20
+    # </Trauma>
     - type: Sprite
       layers:
         - state: synd_medical
@@ -147,7 +170,7 @@
           map: ["light"]
           visible: false
     - type: BorgChassis
-      maxModules: 3
+      maxModules: 7 # Trauma - was 3
       moduleWhitelist:
         tags:
           - BorgModuleGeneric
@@ -174,6 +197,28 @@
   name: syndicate saboteur cyborg
   description: A streamlined engineering cyborg, equipped with covert modules. Its chameleon projector lets it disguise itself as a Nanotrasen cyborg.
   components:
+    # <Trauma>
+    - type: ModifyKnowledgeGrant
+      skills:
+        FabricationKnowledge: 60
+        DoorsKnowledge: 60
+        AirlocksKnowledge: 60
+        FurnitureKnowledge: 60
+        InfrastructureKnowledge: 60
+        ElectronicsKnowledge: 60
+        WallsKnowledge: 60
+        WindowsKnowledge: 60
+        MetalworkingKnowledge: 60
+        GunsmithingKnowledge: 60
+        MechanicsKnowledge: 60
+        BotsKnowledge: 60
+        MeleeKnowledge: 20
+        StrengthKnowledge: 20
+        ShootingKnowledge: 20
+        ToughnessKnowledge: 20
+        AthleticsKnowledge: 20
+        WeaponsKnowledge: 20
+    # </Trauma>
     - type: Sprite
       layers:
         - state: synd_engi
@@ -186,7 +231,7 @@
           map: ["light"]
           visible: false
     - type: BorgChassis
-      maxModules: 3
+      maxModules: 7 # Trauma - was 3
       moduleWhitelist:
         tags:
           - BorgModuleGeneric

@@ -29,7 +29,6 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     [Dependency] protected IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected IPrototypeManager _proto = default!;
     [Dependency] protected ISharedPlayerManager _player = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedLanguageSystem _language = default!;
@@ -216,7 +215,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
     {
         AllKnowledges.Clear();
         var name = Factory.GetComponentName<KnowledgeComponent>();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             // TODO: replace with TryComp after engine update
             if (!proto.TryGetComponent<KnowledgeComponent>(name, out var comp))
@@ -270,7 +269,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         if (GetKnowledge(ent, id) is not { } unit)
         {
             // Can't add it with experience if you can't comprehend complexity.
-            if (_proto.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
+            if (ProtoMan.Index(id).TryGetComponent<KnowledgeComponent>(out var knowledge, Factory) && knowledge?.Complex == true)
                 return;
 
             // if you don't have it, you have a small change to learn it when gaining some xp
@@ -338,10 +337,12 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
 
     public (ProtoId<KnowledgeCategoryPrototype> Category, KnowledgeInfo Info) GetKnowledgeInfo(Entity<KnowledgeComponent> ent)
     {
-        var knowledgeInfo = new KnowledgeInfo("", "", ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
+        var meta = MetaData(ent);
+        var name = meta.EntityName;
+        var desc = meta.EntityDescription;
+        var levelStr = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)));
+        var knowledgeInfo = new KnowledgeInfo(name, desc, levelStr, ent.Comp.Color, ent.Comp.Sprite, ent.Comp.LearnedLevel, ent.Comp.NetLevel, ent.Comp.Experience, ent.Comp.ExperienceCost);
         // TODO: make this an event raised on ent
-        var name = Name(ent);
-        knowledgeInfo.Description = Loc.GetString("knowledge-info-description", ("level", ent.Comp.NetLevel), ("mastery", GetMasteryString(ent)), ("exp", ent.Comp.Experience));
         if (_langQuery.TryComp(ent, out var languageKnowledge))
         {
             var locKey = (languageKnowledge.Speaks, languageKnowledge.Understands) switch
@@ -479,6 +480,14 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         => GetContainer(target) is { } ent
             ? GetKnowledge(ent, id)
             : null;
+
+    /// <summary>
+    /// Get the net level of knowledge an entity has for an ID, defaulting to 0 if missing.
+    /// </summary>
+    public int GetKnowledgeLevel(EntityUid target, [ForbidLiteral] EntProtoId id)
+        => GetContainer(target) is { } ent
+            ? GetKnowledge(ent, id)?.Comp.NetLevel ?? 0
+            : 0;
 
     public Entity<KnowledgeComponent>? GetKnowledge(Entity<KnowledgeContainerComponent> ent, [ForbidLiteral] EntProtoId id)
         => ent.Comp.KnowledgeDict.TryGetValue(id, out var unit) && _query.TryComp(unit, out var comp)

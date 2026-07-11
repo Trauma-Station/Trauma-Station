@@ -377,8 +377,8 @@
       edges:
         - to: incompleteBoard
           steps:
-            - material: WoodPlank
-              amount: 1
+          - material: WoodPlank
+            amount: 1
 
     - node: incompleteBoard
       entity: NailBoardUnfinished
@@ -434,19 +434,19 @@
     edges:
     - to: finish
       steps:
-        - tag: Spear
-          name: construction-graph-tag-any-spear
-          icon:
-            sprite: Objects/Weapons/Melee/spear.rsi
-            state: spear
-        - material: Cable
-          amount: 5
-          doAfter: 3
-        - tag: Firebomb
-          name: construction-graph-tag-firebomb
-          icon:
-            sprite: Objects/Weapons/Bombs/ied.rsi
-            state: base
+      - tag: Spear
+        name: construction-graph-tag-any-spear
+        icon:
+          sprite: Objects/Weapons/Melee/spear.rsi
+          state: spear
+      - material: Cable
+        amount: 5
+        doAfter: 3
+      - tag: Firebomb
+        name: construction-graph-tag-firebomb
+        icon:
+          sprite: Objects/Weapons/Bombs/ied.rsi
+          state: base
   - node: finish
     entity: SpearIED
 
@@ -458,19 +458,19 @@
     edges:
     - to: finish
       steps:
-        - tag: Spear
-          name: construction-graph-tag-any-spear
-          icon:
-            sprite: Objects/Weapons/Melee/spear.rsi
-            state: spear
-        - material: Cable
-          amount: 5
-          doAfter: 3
-        - tag: Pipebomb
-          name: construction-graph-tag-pipebomb
-          icon:
-            sprite: Objects/Weapons/Bombs/pipebomb.rsi
-            state: base
+      - tag: Spear
+        name: construction-graph-tag-any-spear
+        icon:
+          sprite: Objects/Weapons/Melee/spear.rsi
+          state: spear
+      - material: Cable
+        amount: 5
+        doAfter: 3
+      - tag: Pipebomb
+        name: construction-graph-tag-pipebomb
+        icon:
+          sprite: Objects/Weapons/Bombs/pipebomb.rsi
+          state: base
   - node: finish
     entity: SpearPipebomb
 
@@ -484,12 +484,12 @@
     edges:
     - to: unfinished
       steps:
-        - tag: Pipe
-          icon:
-            sprite: Structures/Piping/Atmospherics/pipe.rsi
-            state: pipeStraight
-          name: construction-graph-tag-pipe
-          doAfter: 1
+      - tag: Pipe
+        icon:
+          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          state: pipeStraight
+        name: construction-graph-tag-pipe
+        doAfter: 1
 
   - node: unfinished
     entity: PipeSpearUnfinished
@@ -512,16 +512,16 @@
     edges:
     - to: uncarved
       steps:
-        - material: WoodPlank
-          amount: 5
-          doAfter: 4
+      - material: WoodPlank
+        amount: 5
+        doAfter: 4
   - node: uncarved
     entity: IncompleteWoodenSword
     edges:
     - to: finish
       steps:
-        - tool: Slicing
-          doAfter: 4
+      - tool: Slicing
+        doAfter: 4
   - node: finish
     entity: SwordWood
 

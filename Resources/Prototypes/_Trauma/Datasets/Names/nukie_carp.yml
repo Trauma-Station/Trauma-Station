@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: localizedDataset
+  id: NamesNukieCarp
+  values:
+    prefix: names-nukie-carp-dataset-
+    count: 40

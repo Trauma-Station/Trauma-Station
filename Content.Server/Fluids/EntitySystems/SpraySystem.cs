@@ -32,7 +32,6 @@ public sealed partial class SpraySystem : SharedSpraySystem
 {
     // <Trauma>
     [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
@@ -191,7 +190,7 @@ public sealed partial class SpraySystem : SharedSpraySystem
 
                 if (TryComp(vapor, out AppearanceComponent? appearance))
                 {
-                    _appearance.SetData(vapor, VaporVisuals.Color, solution.GetColor(_proto).WithAlpha(1f), appearance);
+                    _appearance.SetData(vapor, VaporVisuals.Color, solution.GetColor(ProtoMan).WithAlpha(1f), appearance);
                     _appearance.SetData(vapor, VaporVisuals.State, true, appearance);
                 }
 

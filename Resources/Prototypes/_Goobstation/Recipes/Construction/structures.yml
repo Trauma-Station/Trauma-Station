@@ -36,8 +36,10 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 1 # good cading is hard
+    FabricationKnowledge: 0
+    WallsKnowledge: 0
   practical:
+    WallsKnowledge: 1 # good cading is hard
     MetalworkingKnowledge: 4
 
 - type: construction
@@ -50,8 +52,10 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 2
+    FabricationKnowledge: 0
+    WallsKnowledge: 0
   practical:
+    WallsKnowledge: 2
     MetalworkingKnowledge: 4
 
 - type: construction
@@ -64,8 +68,10 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 2
+    FabricationKnowledge: 1
+    WallsKnowledge: 0
   practical:
+    WallsKnowledge: 2
     MetalworkingKnowledge: 4
 
 - type: construction
@@ -78,8 +84,10 @@
   canRotate: true
   canBuildInImpassable: true
   theory:
-    WallsKnowledge: 2
+    FabricationKnowledge: 1
+    WallsKnowledge: 0
   practical:
+    WallsKnowledge: 2
     MetalworkingKnowledge: 4
 
 # Airlocks

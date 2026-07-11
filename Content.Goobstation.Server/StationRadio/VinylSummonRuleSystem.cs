@@ -31,7 +31,6 @@ public sealed partial class VinylSummonRuleSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private SharedContainerSystem _containers = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private StationSystem _stationSystem = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
@@ -212,13 +211,13 @@ public sealed partial class VinylSummonRuleSystem : EntitySystem
         threat = null;
 
         // Check if it's a weighted random pool
-        if (_prototypeManager.TryIndex<WeightedRandomPrototype>(gameRuleIdentifier, out var weightedPool))
+        if (ProtoMan.TryIndex<WeightedRandomPrototype>(gameRuleIdentifier, out var weightedPool))
         {
             // Pick a random threat ID from the weighted pool
             var threatId = weightedPool.Pick(_random);
 
             // Look up the threat prototype to get the actual game rule ID
-            if (_prototypeManager.TryIndex<NinjaHackingThreatPrototype>(threatId, out threat))
+            if (ProtoMan.TryIndex<NinjaHackingThreatPrototype>(threatId, out threat))
                 return threat.Rule;
 
             return null;

@@ -12,7 +12,6 @@ namespace Content.Goobstation.Server.NTR.Documents
         [Dependency] private ILocalizationManager _loc = default!;
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private PaperSystem _paper = default!;
-        [Dependency] private IPrototypeManager _proto = default!;
 
         public override void Initialize()
         {
@@ -29,7 +28,7 @@ namespace Content.Goobstation.Server.NTR.Documents
         private string GenerateDocument(ProtoId<DocumentTypePrototype> docType)
         {
             if (string.IsNullOrEmpty(docType.Id) // i hate this
-                || !_proto.TryIndex(docType, out var docProto))
+                || !ProtoMan.TryIndex(docType, out var docProto))
                 return string.Empty;
 
             var curDate = DateTime.Now.AddYears(1000);

@@ -30,7 +30,6 @@ public sealed partial class BingleSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<BingleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BingleComponent, AttackAttemptEvent>(OnAttackAttempt);
-        SubscribeLocalEvent<BingleComponent, Shared.Overlays.ToggleNightVisionEvent>(OnNightvision);
         SubscribeLocalEvent<BingleComponent, ToggleCombatActionEvent>(OnCombatToggle);
         SubscribeLocalEvent<BingleComponent, BingleUpgradeActionEvent>(OnUpgradeAction);
     }
@@ -97,14 +96,6 @@ public sealed partial class BingleSystem : EntitySystem
         //Prevent Friendly Bingle fire
         if (HasComp<BinglePitComponent>(args.Target) || HasComp<BingleComponent>(args.Target))
             args.Cancel();
-    }
-
-    private void OnNightvision(EntityUid uid, BingleComponent component, Shared.Overlays.ToggleNightVisionEvent args)
-    {
-        if (!TryComp<FlashImmunityComponent>(uid, out var flashComp))
-            return;
-
-        flashComp.Enabled = !flashComp.Enabled;
     }
 
     private void OnCombatToggle(EntityUid uid, BingleComponent component, ToggleCombatActionEvent args)

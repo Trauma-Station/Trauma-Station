@@ -68,8 +68,7 @@
   - type: TypingIndicator
     proto: robot
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
+    emoteSounds: UnisexSilicon
   - type: Emoting
   - type: ZombieImmune
   - type: ProtectedFromStepTriggers
@@ -109,6 +108,7 @@
     - Blunt
     - Slash
     - Piercing
+    - Ballistic # Trauma
     - Heat
     - Shock
     locPrefix: silicon
@@ -150,7 +150,7 @@
     speechSounds: Pai #couldn't decide if this should be borg or pai sounds so I flipped a coin.
 
 - type: entity
-  parent: [MobSiliconBase, SolutionFireExtinguisherMini]
+  parent: [MobSiliconBase, SolutionFireExtinguisherBot] # Trauma - was SolutionFireExtinguisherMini
   id: MobFireBot
   name: firebot
   description: A little fire extinguishing bot. He looks rather anxious.
@@ -164,11 +164,11 @@
   - type: HTN
     rootTask:
       task: FirebotCompound
-  - type: SolutionRegeneration
-    generated:
-      reagents:
-        - ReagentId: Water
-          Quantity: 10
+#  - type: SolutionRegeneration Trauma
+#    generated:
+#      reagents:
+#        - ReagentId: Water
+#          Quantity: 10
   - type: Spray
     transferAmount: 10
     pushbackAmount: 60
@@ -289,8 +289,7 @@
       params:
         variation: 0.125
   - type: Vocal
-    sounds:
-      Unsexed: Cluwne
+    emoteSounds: Cluwne
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default

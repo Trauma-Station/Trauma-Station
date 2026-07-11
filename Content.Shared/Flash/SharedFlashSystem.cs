@@ -1,13 +1,11 @@
 // <Trauma>
 using Content.Goobstation.Common.Flash;
-using Content.Shared.Mobs.Components;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -17,7 +15,7 @@ using Content.Shared.Light;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Timing;
@@ -46,31 +44,43 @@ public abstract partial class SharedFlashSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
-    [Dependency] private EntityQuery<StatusEffectsComponent> _statusEffectsQuery = default!;
     [Dependency] private EntityQuery<DamagedByFlashingComponent> _damagedByFlashingQuery = default!;
 
-    private HashSet<EntityUid> _entSet = new();
+    private readonly HashSet<EntityUid> _entSet = [];
 
     // The tag to add when a flash has no charges left.
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
-    // The key string for the status effect.
-    public ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
+    // The status effect entity applied to flashed targets.
+    public static readonly EntProtoId FlashedKey = "StatusEffectFlashed";
+
+    // Handle the flash visuals
+    // TODO: Replace this with something like sprite flick once that exists to get rid of the update loop.
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var curTime = _timing.CurTime;
+        var query = EntityQueryEnumerator<ActiveFlashComponent>();
+        while (query.MoveNext(out var uid, out var active))
+        {
+            // reset the visuals and remove the component
+            if (active.ActiveUntil < curTime)
+            {
+                _appearance.SetData(uid, FlashVisuals.Flashing, false);
+                RemCompDeferred<ActiveFlashComponent>(uid);
+            }
+        }
+    }
 
     public static readonly ProtoId<TagPrototype> IgnoreResistancesTag = "FlashIgnoreResistances"; // Goobstation
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<FlashComponent, MeleeHitEvent>(OnFlashMeleeHit);
-        SubscribeLocalEvent<FlashComponent, UseInHandEvent>(OnFlashUseInHand);
-        SubscribeLocalEvent<FlashComponent, BeforeRangedInteractEvent>(OnRangedInteract);
-        SubscribeLocalEvent<FlashComponent, LightToggleEvent>(OnLightToggle);
-        SubscribeLocalEvent<PermanentBlindnessComponent, FlashAttemptEvent>(OnPermanentBlindnessFlashAttempt);
         Subs.SubscribeWithRelay<FlashImmunityComponent, FlashAttemptEvent>(OnFlashImmunityFlashAttempt, held: false);
-        SubscribeLocalEvent<FlashImmunityComponent, ExaminedEvent>(OnExamine);
     }
 
+    [SubscribeLocalEvent]
     private void OnFlashMeleeHit(Entity<FlashComponent> ent, ref MeleeHitEvent args)
     {
         if (!ent.Comp.FlashOnMelee ||
@@ -92,6 +102,7 @@ public abstract partial class SharedFlashSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnFlashUseInHand(Entity<FlashComponent> ent, ref UseInHandEvent args)
     {
         if (!ent.Comp.FlashOnUse || args.Handled || !TryUseFlashItem(ent.AsNullable(), args.User))
@@ -106,6 +117,7 @@ public abstract partial class SharedFlashSystem : EntitySystem
     // TODO: This or most of the other systems subscribing to BeforeRangedInteractEvent shouldn't be using this event as handling it stops contact interaction with the used tool,
     // but this will need some cleanup of how SharedInteractionSystem handles the code flow. Also the event is raised for both in-range and out of range interactions, which
     // is what the subscribers are using it for, but does not seem originally intended from the naming convention.
+    [SubscribeLocalEvent]
     private void OnRangedInteract(Entity<FlashComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (!ent.Comp.FlashOnRangedInteract || args.Handled || !TryUseFlashItem(ent.AsNullable(), args.User))
@@ -119,6 +131,7 @@ public abstract partial class SharedFlashSystem : EntitySystem
 
     // needed for the flash lantern and interrogator lamp
     // TODO: This is awful and all the different components for toggleable lights need to be unified and changed to use Itemtoggle
+    [SubscribeLocalEvent]
     private void OnLightToggle(Entity<FlashComponent> ent, ref LightToggleEvent args)
     {
         if (!args.IsOn || !TryUseFlashItem(ent.AsNullable(), null))
@@ -127,6 +140,30 @@ public abstract partial class SharedFlashSystem : EntitySystem
         FlashArea(ent.Owner, null, ent.Comp.Range, ent.Comp.AoeFlashDuration, ent.Comp.SlowTo, true, ent.Comp.Probability);
         var ev = new AfterFlashActivatedEvent(null, null); // TODO: Add user once someone made toggleable lights not a total mess.
         RaiseLocalEvent(ent, ref ev);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPermanentBlindnessFlashAttempt(Entity<PermanentBlindnessComponent> ent, ref FlashAttemptEvent args)
+    {
+        // check for total blindness
+        if (ent.Comp.Blindness == 0)
+            args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnExamine(Entity<FlashImmunityComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.ShowInExamine)
+            args.PushMarkup(Loc.GetString("flash-protection"));
+    }
+
+    private void OnFlashImmunityFlashAttempt(Entity<FlashImmunityComponent> ent, ref FlashAttemptEvent args)
+    {
+        if (TryComp<MaskComponent>(ent, out var mask) && mask.IsToggled)
+            return;
+
+        if (ent.Comp.Enabled)
+            args.Cancelled = true;
     }
 
     /// <summary>
@@ -214,7 +251,7 @@ public abstract partial class SharedFlashSystem : EntitySystem
         // Goobstation end
 
         // don't paralyze, slowdown or convert to rev if the target is immune to flashes
-        if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(target, FlashedKey, flashDuration, true))
+        if (!_statusEffectsSystem.TryAddStatusEffectDuration(target, FlashedKey, flashDuration))
             return;
 
         // <Goob> - multiply durations by multiplier
@@ -262,7 +299,7 @@ public abstract partial class SharedFlashSystem : EntitySystem
                 continue;
 
             // Is the entity affected by the flash either through status effects or by taking damage?
-            if (!_statusEffectsQuery.HasComponent(entity) && !_damagedByFlashingQuery.HasComponent(entity))
+            if (!_statusEffectsSystem.CanAddStatusEffect(entity, FlashedKey) && !_damagedByFlashingQuery.HasComponent(entity))
                 continue;
 
             // Check for entites in view.
@@ -277,49 +314,5 @@ public abstract partial class SharedFlashSystem : EntitySystem
         }
 
         _audio.PlayPredicted(sound, source, user, AudioParams.Default.WithVolume(1f).WithMaxDistance(3f));
-    }
-
-    // Handle the flash visuals
-    // TODO: Replace this with something like sprite flick once that exists to get rid of the update loop.
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<ActiveFlashComponent>();
-        while (query.MoveNext(out var uid, out var active))
-        {
-            // reset the visuals and remove the component
-            if (active.ActiveUntil < curTime)
-            {
-                _appearance.SetData(uid, FlashVisuals.Flashing, false);
-                RemCompDeferred<ActiveFlashComponent>(uid);
-            }
-        }
-    }
-
-    private void OnPermanentBlindnessFlashAttempt(Entity<PermanentBlindnessComponent> ent, ref FlashAttemptEvent args)
-    {
-        // check for total blindness
-        if (ent.Comp.Blindness == 0)
-            args.Cancelled = true;
-    }
-
-    private void OnFlashImmunityFlashAttempt(Entity<FlashImmunityComponent> ent, ref FlashAttemptEvent args)
-    {
-        if (TryComp<MaskComponent>(ent, out var mask) && mask.IsToggled)
-            return;
-
-        if (ent.Comp.Enabled)
-            args.Cancelled = true;
-    }
-
-    private void OnExamine(Entity<FlashImmunityComponent> ent, ref ExaminedEvent args)
-    {
-        if (HasComp<MobStateComponent>(args.Examined)) // Goobstation - dont add exmained value to mobs with flash protection
-            return;
-
-        if (ent.Comp.ShowInExamine)
-            args.PushMarkup(Loc.GetString("flash-protection"));
     }
 }

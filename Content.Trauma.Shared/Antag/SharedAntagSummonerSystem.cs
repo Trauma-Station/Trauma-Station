@@ -65,7 +65,7 @@ public abstract partial class SharedAntagSummonerSystem : EntitySystem
         ent.Comp.NextSummon = now + ent.Comp.Cooldown;
         Dirty(ent);
 
-        _adminLog.Add(LogType.InteractHand, LogImpact.High, $"{ToPrettyString(user):user} summoned an antag with {ToPrettyString(ent):used}!");
+        _adminLog.Add(LogType.InteractHand, LogImpact.High, $"{user:user} summoned an antag with {ent:used}!");
         Popup.PopupEntity("You pressed the red button...", ent, user, PopupType.LargeCaution);
         _cargo.TryAdjustBankAccount(station, ent.Comp.Account, ent.Comp.Reward);
     }

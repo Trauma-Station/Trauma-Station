@@ -23,17 +23,17 @@ public partial class MartialArtsSystem
 
     private void InitializeCanPerformCombo()
     {
-        SubscribeLocalEvent<CanPerformComboComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CanPerformComboComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<CanPerformComboComponent, ComboAttackPerformedEvent>(OnComboAttackPerformed);
     }
 
-    private void OnMapInit(Entity<CanPerformComboComponent> ent, ref MapInitEvent args)
+    private void OnInit(Entity<CanPerformComboComponent> ent, ref ComponentInit args)
     {
+        ent.Comp.AllowedCombos.Clear();
         foreach (var item in ent.Comp.RoundstartCombos)
         {
-            ent.Comp.AllowedCombos.Add(_proto.Index(item));
+            ent.Comp.AllowedCombos.Add(ProtoMan.Index(item));
         }
-        Dirty(ent);
     }
 
     private void OnComboAttackPerformed(Entity<CanPerformComboComponent> ent, ref ComboAttackPerformedEvent args)
@@ -69,7 +69,7 @@ public partial class MartialArtsSystem
 
         if (TryComp<ComboActionsComponent>(ent, out var comboActions) && comboActions.QueuedPrototype is { } queued)
         {
-            var proto = _proto.Index(queued);
+            var proto = ProtoMan.Index(queued);
             var level = _knowledge.GetLevel(ent.Owner);
 
             if (!CheckCombo(ent, proto, level, user, args.Target))
@@ -102,7 +102,7 @@ public partial class MartialArtsSystem
     private bool CheckCombo(Entity<CanPerformComboComponent> ent,
         ComboPrototype proto,
         int level,
-        EntityUid performer,
+        EntityUid user,
         EntityUid target)
     {
         var sum = ent.Comp.LastAttacks.Count - proto.AttackTypes.Count;
@@ -114,8 +114,8 @@ public partial class MartialArtsSystem
 
         if (level < proto.LevelRequired || (level > proto.LevelExceeded && proto.LevelExceeded > 0) ||
             !list.SequenceEqual(attackList) ||
-            !_conditions.TryConditions(performer, proto.UserConditions) ||
-            !_conditions.TryConditions(target, proto.Conditions))
+            !_conditions.TryConditions(user, proto.UserConditions, user: user) ||
+            !_conditions.TryConditions(target, proto.Conditions, user: user))
             return false;
 
         return true;

@@ -39,7 +39,7 @@
 
 #Emergency EVA
 - type: entity
-  parent: [ ClothingOuterEVASuitBase, ClothingOuterBaseToggleable ]
+  parent: ClothingOuterEVASuitBaseToggleable
   id: ClothingOuterSuitEmergency
   name: emergency EVA suit
   description: An emergency EVA suit with a built-in helmet. It's horribly slow and lacking in temperature protection, but enough to buy you time from the harsh vacuum of space.
@@ -55,6 +55,9 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.75
     coolingCoefficient: 0.5
+  - type: ToggleableClothing
+    clothingPrototypes: # Trauma - changed to dict for modsuits
+      head: ClothingHeadHelmetEVALarge
   - type: Tag
     tags:
     - SuitEVA
@@ -63,9 +66,6 @@
     - MonkeyWearable
     - WhitelistChameleon
     - Softsuit # OuterSlotClothingPenalty
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHelmetEVALarge
 
 #Prisoner EVA
 - type: entity
@@ -111,7 +111,7 @@
 #Paramedic Voidsuit
 #Despite having resistances and looking like a hardsuit, this parents off the EVA suit so it goes here.
 - type: entity
-  parent: [ ClothingOuterEVASuitBase, ClothingOuterBaseToggleable, BaseMedicalContraband ] # Trauma - Made it contraband
+  parent: [ClothingOuterEVASuitBaseToggleable, BaseMedicalContraband] #Despite "Voidsuits are light hardsuits", since it parents of EVA Suits, it goes with the other softsuits
   id: ClothingOuterHardsuitVoidParamed
   name: paramedic hardsuit # Goob edit - it has high pressure protection and resistances, call it a hardsuit
   description: A hardsuit made for paramedics. # Goob edit
@@ -147,6 +147,6 @@
   - type: GroupExamine
   - type: StealTarget
     stealGroup: ClothingOuterHardsuitVoidParamed
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
+  - type: ToggleableClothing
+    clothingPrototypes: # Trauma - changed to dict for modsuits
       head: ClothingHeadHelmetVoidParamed

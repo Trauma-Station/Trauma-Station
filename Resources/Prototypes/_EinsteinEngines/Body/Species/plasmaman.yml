@@ -106,16 +106,12 @@
   - type: Vocal
     wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg" # Goobstation
     wilhelmProbability: 0.1 # Goobstation
-    sounds:
-      Male: UnisexPlasmaman
-      Female: UnisexPlasmaman
-      Unsexed: UnisexPlasmaman
+    emoteSounds: UnisexPlasmaman
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: SheetPlasma1
       amount: 8
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+    - id: MaterialBones1
       amount: 3
   - type: Inventory
     templateId: plasmaman
@@ -225,7 +221,7 @@
 
 - type: entity
   abstract: true
-  parent: OrganPlasmaman
+  parent: [ OrganPlasmaman, BaseSlicingRefinable ]
   id: OrganPlasmamanExternal
   components:
   - type: Sprite
@@ -242,12 +238,9 @@
   - type: IgniteFromGasPart
     gas: Oxygen
     fireStacks: 0.02
-  - type: Butcherable
-    butcheringType: Knife
-    butcherDelay: 4.0
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: SheetPlasma1
-      amount: 1
 
 - type: entity
   abstract: true
@@ -263,9 +256,8 @@
   components:
   - type: IgniteFromGasPart
     fireStacks: 0.12
-  - type: Butcherable
-    butcherDelay: 6
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: SheetPlasma1
       amount: 6
 

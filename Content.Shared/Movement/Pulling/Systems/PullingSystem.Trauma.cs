@@ -242,6 +242,11 @@ public sealed partial class PullingSystem
             RaiseLocalEvent(puller, ref ev);
             newStage = ev.Stage;
         }
+        // allow entities to override starting grab stage
+        else if (newStage == GrabStage.Soft && puller.Comp.StartingGrabStage != GrabStage.Soft)
+        {
+            newStage = puller.Comp.StartingGrabStage;
+        }
 
         if (grabStageOverride != null)
         {
@@ -313,19 +318,18 @@ public sealed partial class PullingSystem
         _blocker.UpdateCanMove(pullable);
         _modifierSystem.RefreshMovementSpeedModifiers(puller);
 
-        _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-target",
-                ("puller", Identity.Entity(puller, EntityManager))),
+        var stageKey = puller.Comp.GrabStage.ToString().ToLower();
+        var pullerName = Identity.Entity(puller, EntityManager);
+        var pulledName = Identity.Entity(pullable, EntityManager);
+        _popup.PopupEntity(Loc.GetString($"popup-grab-{stageKey}-target", ("puller", pullerName)),
             pullable,
             pullable,
             popupType);
-        _popup.PopupClient(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-self",
-                ("target", Identity.Entity(pullable, EntityManager))),
+        _popup.PopupClient(Loc.GetString($"popup-grab-{stageKey}-self", ("target", pulledName)),
             pullable,
             puller,
             PopupType.Medium);
-        _popup.PopupEntity(Loc.GetString($"popup-grab-{puller.Comp.GrabStage.ToString().ToLower()}-others",
-                ("target", Identity.Entity(pullable, EntityManager)),
-                ("puller", Identity.Entity(puller, EntityManager))),
+        _popup.PopupEntity(Loc.GetString($"popup-grab-{stageKey}-others", ("target", pulledName), ("puller", pullerName)),
             pullable,
             filter,
             true,

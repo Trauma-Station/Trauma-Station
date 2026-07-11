@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.DoAfter;
 using System.Linq;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -574,6 +573,11 @@ namespace Content.Shared.Containers.ItemSlots
                     LogImpact.Low,
                     $"{ToPrettyString(user.Value)} ejected {ToPrettyString(item)} from {slot.ContainerSlot?.ID + " slot of "}{ToPrettyString(uid)}");
 
+            // <Trauma>
+            if (user != null && _thieving.IsStealthy(user.Value))
+                return; // Stealthy thieves don't announce ejects with sound
+            // </Trauma>
+
             _audioSystem.PlayPredicted(slot.EjectSound, uid, excludeUserAudio ? user : null);
         }
 
@@ -637,10 +641,10 @@ namespace Content.Shared.Containers.ItemSlots
         /// </returns>
         public bool TryEjectToHands(EntityUid uid, ItemSlot slot, EntityUid? user, bool excludeUserAudio = false, bool doAfter = true)
         {
-            // Lavaland Change start
+            // <Trauma>
             if (doAfter && slot.EjectDelay != null)
                 return TryStartEjectDoAfter(slot, uid, user);
-            // Lavaland Change end
+            // </Trauma>
 
             if (!TryEject(uid, slot, user, out var item, excludeUserAudio, doAfter))
                 return false;

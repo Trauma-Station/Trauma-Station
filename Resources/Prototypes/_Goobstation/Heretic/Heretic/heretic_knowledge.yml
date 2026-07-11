@@ -178,8 +178,6 @@
   id: ChampionHook
   path: Blade
   stage: 4
-  actionPrototypes:
-  - ActionHereticChampionHook
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ChampionHook
@@ -641,10 +639,7 @@
     - type: SpecialLowTempImmunity
     - type: SpecialPressureImmunity
     - type: NightVision
-      color: white
-      activateSound: null
-      deactivateSound: null
-      drawOverlay: false
+      lightingColor: white
   actionPrototypes:
   - ActionResetStarGazerConsciousness
 
@@ -707,17 +702,12 @@
   event: !type:HereticXRayVisionEvent
     addedComponents:
     - type: NightVision
-      color: white
-      activateSound: null
-      deactivateSound: null
-      drawOverlay: false
+      lightingColor: white
 
 - type: hereticKnowledge
   id: BurglarsFinesse
   path: Lock
   stage: 6
-  actionPrototypes:
-  - ActionHereticBurglarsFinesse
 
 - type: hereticKnowledge
   id: OpeningBlade
@@ -725,11 +715,11 @@
   stage: 7
 
 - type: hereticKnowledge
-  id: CaretakersLastRefuge
+  id: WrongKey
   path: Lock
   stage: 8
-  actionPrototypes:
-  - ActionHereticLastRefuge
+  ritualPrototypes:
+  - RitualSerpentclave
 
 - type: hereticKnowledge
   id: AscensionLock
@@ -817,6 +807,12 @@
   ritualPrototypes:
   - RitualEldritchCoin
 
+- type: hereticKnowledge
+  id: MysteriesOfCreation
+  stage: 4
+  ritualPrototypes:
+  - RitualIceSpear
+
 ## T2
 - type: hereticKnowledge
   id: RustedRitual
@@ -829,12 +825,6 @@
   stage: 5
   ritualPrototypes:
   - RitualCarvingKnife
-
-- type: hereticKnowledge
-  id: MysteriesOfCreation
-  stage: 5
-  actionPrototypes:
-  - ActionHereticIceSpear
 
 - type: hereticKnowledge
   id: CodexMorbus

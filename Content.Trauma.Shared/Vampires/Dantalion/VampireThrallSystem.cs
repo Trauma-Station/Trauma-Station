@@ -4,6 +4,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
@@ -48,22 +49,26 @@ public sealed partial class VampireThrallSystem : EntitySystem
         var target = args.Target;
         var cap = ent.Comp.ThrallCap;
 
-        if (!_mind.TryGetMind(target, out var mindId, out _))
-        {
-            _popup.PopupClient("The target has no mind!", user, user, PopupType.MediumCaution);
-            return;
-        }
-
         if (ent.Comp.Thralls.Count == cap)
         {
             _popup.PopupClient($"You can't have more than {cap} thralls!", user, user, PopupType.MediumCaution);
             return;
         }
 
+        // client can only predict having a mind, not which entity the mind is
+        // so this will always fail for clients
+        if (!_mind.TryGetMind(target, out var mindId, out _))
+        {
+            // but since HasMind is networked it controls the popup to not mispredict user feedback
+            if (TryComp<MindContainerComponent>(target, out var mc) && !mc.HasMind)
+                _popup.PopupClient("The target has no mind!", user, user, PopupType.MediumCaution);
+            return;
+        }
+
         ent.Comp.Thralls.Add(target);
         Dirty(ent);
 
-        _popup.PopupClient("You gain a new thrall!", user, user, PopupType.Medium);
+        _popup.PopupEntity("You gain a new thrall!", user, user, PopupType.Medium);
 
         var comp = EnsureComp<VampireThrallComponent>(target);
         comp.Vampire = user;

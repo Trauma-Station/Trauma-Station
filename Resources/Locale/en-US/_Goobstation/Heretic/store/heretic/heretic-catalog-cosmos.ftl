@@ -46,7 +46,7 @@ knowledge-path-cosmos-armor-desc =
     Like radiant cords, the stars shone in union across the silken shape of a billowing cloak, that at once does and does not drape my shoulders.
     The eyes of the Beast rested upon me, and through me.
 
-    Allows you to transmute a table (or a suit), a mask and a sheet of plasma to create a Starwoven Cloak,
+    Allows you to transmute a table (or a suit), a mask and a sheet of phoron to create a Starwoven Cloak,
     grants protection from the hazards of space while granting to the user the ability to move freely in no gravity.
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.

@@ -1,15 +1,19 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: [ BaseItem, BaseMagicalContraband, KnifeDurabilitySharpenOnly]
   id: HereticBladeBaseNoTeleport
-  abstract: true
   name: eldritch blade
   description: A sickly green crescent blade, decorated with an ornamental eye. You feel like you're being watched...
   components:
   - type: UnholyItem
   - type: HereticBlade
-  - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
     sprite: _Goobstation/Heretic/Blades/eldritch_blade.rsi
     state: icon

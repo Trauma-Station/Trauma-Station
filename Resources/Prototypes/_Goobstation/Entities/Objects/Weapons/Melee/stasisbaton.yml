@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: futuristic stunbaton
   parent: Stunbaton
   id: StasisBaton
+  name: futuristic stunbaton
   description: An advanced security baton for shutting down interfering tiders
   components:
   - type: Sprite

@@ -55,7 +55,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingShoesBase
+  parent: [ClothingShoesBase, BaseSlicingRefinable]
   id: ClothingShoesBaseButcherable
   components:
   # <Trauma>
@@ -64,9 +64,8 @@
     shape:
     - 0,0,1,0
   # <Trauma>
-  - type: Butcherable
-    butcheringType: Knife
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: MaterialCloth1
       amount: 1
   - type: PhysicalComposition # 50% of the amount of cloth you'd obtain upon butchering

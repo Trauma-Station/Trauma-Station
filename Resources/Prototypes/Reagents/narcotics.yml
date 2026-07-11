@@ -229,15 +229,19 @@
         amount: -1.5
       - !type:EvenHealthChange
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        # <Trauma> - allow softcrit
+        - !type:NestedCondition
+          proto: MobCritical
+        # </Trauma>
         damage: # Doesn't heal poison because if you OD'd I'm not giving you a safety net
           Burn: -0.5
           Brute: -0.5
       - !type:HealthChange
         conditions:
-        - !type:MobStateCondition
-          mobstate: Critical
+        # <Trauma> - allow softcrit
+        - !type:NestedCondition
+          proto: MobCritical
+        # </Trauma>
         damage:
           types:
             Asphyxiation: -2

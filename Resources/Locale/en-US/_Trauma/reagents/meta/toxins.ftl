@@ -9,3 +9,6 @@ reagent-desc-nitric-acid = A corrosive chemical used in the production of explos
 
 reagent-name-tiring-solution = tiring solution
 reagent-desc-tiring-solution = An extremely weak stamina-toxin that tires out the target. Completely harmless.
+
+reagent-name-batracho-toxin = batrachotoxin
+reagent-desc-batracho-toxin = A potent paralytic secreted by the skin of dart frogs. Causes progressive paralysis and organ failure in sufficient quantities.

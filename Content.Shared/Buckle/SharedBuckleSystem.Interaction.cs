@@ -178,7 +178,7 @@ public abstract partial class SharedBuckleSystem
             args.User != uid &&
             StrapHasSpace(uid, buckle, component) &&
             _interaction.InRangeUnobstructed(args.User, args.Target, range: buckle.Range) &&
-            component.AddBuckleverb) //Goobstation - Clowncar
+            component.AddBuckleVerb) //Goobstation - Clowncar
         {
             InteractionVerb verb = new()
             {
@@ -194,7 +194,7 @@ public abstract partial class SharedBuckleSystem
             TryComp<BuckleComponent>(@using, out var usingBuckle) &&
             StrapHasSpace(uid, usingBuckle, component) &&
             _interaction.InRangeUnobstructed(@using, args.Target, range: usingBuckle.Range) &&
-            component.AddBuckleverb) //Goobstation - Clowncar
+            component.AddBuckleVerb) //Goobstation - Clowncar
         {
             // Check that the entity is unobstructed from the target (ignoring the user).
             bool Ignored(EntityUid entity) => entity == args.User || entity == args.Target || entity == @using;

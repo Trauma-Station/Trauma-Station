@@ -28,12 +28,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -139,12 +133,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -213,12 +201,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 50
       behaviors:
       - !type:PlaySoundBehavior
@@ -245,7 +227,7 @@
 - type: entity
   parent: SheetPGlass
   id: SheetPGlass1
-  name: plasma glass
+  #name: plasma glass # Trauma - commented out (why the FUCK is it here the name is inherited already)
   suffix: Single
   components:
   - type: Sprite
@@ -297,7 +279,7 @@
 - type: entity
   parent: SheetRPGlass
   id: SheetRPGlass1
-  name: reinforced plasma glass
+  #name: reinforced plasma glass # Trauma - commented out
   suffix: Single
   components:
   - type: Sprite
@@ -335,12 +317,6 @@
     node: SheetUGlass
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 50
@@ -458,12 +434,6 @@
     node: SheetClockworkGlass
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 50

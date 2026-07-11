@@ -1,0 +1,214 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+## Nuclear properties for reactor parts and what not
+## Not physically based in any way.
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesSteel
+  components:
+  - type: NuclearProperties
+    color: "#808080"
+    electrical: 5
+    thermal: 6
+    hard: 3
+    density: 4
+    chemical: 6
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesGold
+  components:
+  - type: NuclearProperties
+    color: "#FFD700"
+    electrical: 7
+    thermal: 7
+    hard: 2
+    density: 6
+    reflective: 6
+    chemical: 6
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesSilver
+  components:
+  - type: NuclearProperties
+    color: "#C0C0C0"
+    electrical: 6
+    thermal: 6
+    hard: 2
+    density: 4
+    reflective: 6
+    chemical: 6
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesBrass
+  components:
+  - type: NuclearProperties
+    color: "#b18b25"
+    electrical: 6
+    thermal: 7
+    hard: 2
+    density: 5
+    chemical: 7
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesPlasteel
+  components:
+  - type: NuclearProperties
+    color: "#696969"
+    electrical: 5
+    thermal: 6
+    hard: 3
+    density: 7
+    chemical: 6
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesBohrum
+  components:
+  - type: NuclearProperties
+    color: "#566558"
+    electrical: 5
+    thermal: 6
+    hard: 5
+    density: 6
+    chemical: 7
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesCerenkite
+  components:
+  - type: NuclearProperties
+    color: "#828aa4"
+    electrical: 6
+    thermal: 6
+    hard: 2
+    density: 4
+    chemical: 6
+    radioactive: 5
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesPlutonium
+  components:
+  - type: NuclearProperties
+    color: "#404888"
+    electrical: 7
+    thermal: 6
+    hard: 7
+    density: 8
+    chemical: 6
+    radioactive: 3
+    n_radioactive: 5
+
+# Glass
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesGlass
+  components:
+  - type: NuclearProperties
+    color: "#a8ccd7"
+    electrical: 3
+    thermal: 3
+    hard: 3
+    density: 2
+    chemical: 5
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesPlasmaGlass
+  components:
+  - type: NuclearProperties
+    color: "#b35989"
+    electrical: 3
+    thermal: 3
+    hard: 7
+    density: 3
+    chemical: 5
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesUraniumGlass
+  components:
+  - type: NuclearProperties
+    color: "#3cab38"
+    # Interpolated properties, 50/50 glass/uranium
+    electrical: 3.5
+    thermal: 3
+    hard: 4
+    density: 4.5
+    chemical: 5.5
+    radioactive: 2 # Making something out of uranium is radioactive... imagine that
+    n_radioactive: 1.5
+
+# Misc materials
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesPlasma
+  components:
+  - type: NuclearProperties
+    color: "#7e009e"
+    electrical: 5
+    thermal: 3
+    hard: 2
+    density: 1
+    flammable: 8
+    chemical: 5
+    radioactive: 2
+    plasma_offgas: 10
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesUranium
+  components:
+  - type: NuclearProperties
+    color: "#32a852"
+    electrical: 4
+    thermal: 3
+    hard: 5
+    density: 7
+    chemical: 6
+    radioactive: 4
+    n_radioactive: 3
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesBananium
+  components:
+  - type: NuclearProperties
+    color: "#e2e24c"
+    # Interpolated properties, 50/50 biomass/uranium
+    electrical: 4
+    thermal: 4
+    hard: 4
+    density: 5
+    flammable: 1.5
+    chemical: 4.5
+    radioactive: 7 # Not interpolated, PRAISE THE HONKMOTHER
+    n_radioactive: 1.5
+
+- type: entity
+  abstract: true
+  id: BaseNuclearPropertiesDiamond
+  components:
+  - type: NuclearProperties
+    color: "#80ffff"
+    electrical: 3
+    thermal: 3
+    hard: 7
+    density: 6
+    chemical: 5
+
+- type: entity
+  abstract: true
+  parent: BaseNuclearPropertiesDiamond
+  id: BaseNuclearPropertiesGraphite
+  components:
+  - type: NuclearProperties
+    color: "#404040"
+    density: 4

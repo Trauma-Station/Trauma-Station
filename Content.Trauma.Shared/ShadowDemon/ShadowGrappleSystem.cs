@@ -28,6 +28,7 @@ public sealed partial class ShadowGrappleSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private EntityQuery<HandheldLightComponent> _handheldQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
@@ -60,9 +61,9 @@ public sealed partial class ShadowGrappleSystem : EntitySystem
             shooter,
             anchorA: Vector2.Zero,
             anchorB: Vector2.Zero,
-            id: GrappleJoint);
+            id: $"{GrappleJoint}_{GetNetEntity(ent.Owner)}");
 
-        joint.MinLength = 0.35f;
+        joint.MinLength = ent.Comp.MinJointLength;
         joint.Stiffness = 10f;
         joint.Damping = 5f;
         Dirty(ent);
@@ -79,17 +80,24 @@ public sealed partial class ShadowGrappleSystem : EntitySystem
         if (_mobQuery.HasComp(target))
         {
             _damage.TryChangeDamage(target, ent.Comp.DamageOnHit);
-            BreakLightsOnTarget(target);
+            if (ent.Comp.BreakLights)
+                BreakLightsOnTarget(target);
 
             _stun.TryAddParalyzeDuration(target, ent.Comp.StunTime);
 
-            _throwing.TryThrow(target, Transform(shooter).Coordinates, 10f, shooter, doSpin: true);
+            _physics.SetLinearVelocity(target, Vector2.Zero, wakeBody: false);
+            _throwing.TryThrow(target, Transform(shooter).Coordinates, 10f, shooter, doSpin: true, compensateFriction: true);
             return;
         }
 
         // Not a body, just destroy nearby lights and throw us there
-        _throwing.TryThrow(shooter, Transform(target).Coordinates, 10f, shooter, doSpin: true);
-        BreakNearbyLights(target, args.Shooter, ent.Comp.BreakLightsRange);
+        if (ent.Comp.PullUser)
+        {
+            _physics.SetLinearVelocity(shooter, Vector2.Zero, wakeBody: false);
+            _throwing.TryThrow(shooter, Transform(target).Coordinates, 10f, shooter, doSpin: true, compensateFriction: true);
+        }
+        if (ent.Comp.BreakLights)
+            BreakNearbyLights(target, args.Shooter, ent.Comp.BreakLightsRange);
     }
 
     private void OnMapInit(Entity<ShadowGrappleComponent> ent, ref MapInitEvent args)

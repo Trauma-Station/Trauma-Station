@@ -17,7 +17,6 @@ public sealed partial class RoundEndCreditsSystem : EntitySystem
     [Dependency] private IClyde _clyde = default!;
     [Dependency] private ILinkAccountManager _linkAccount = default!;
     [Dependency] private IResourceCache _cache = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
 
@@ -58,7 +57,7 @@ public sealed partial class RoundEndCreditsSystem : EntitySystem
 
         var credits = new EndRoundCreditsControl();
         credits.SetSize = _clyde.MainWindow.Size / _uiScale;
-        credits.Populate(message, _cache, _proto, shoutout, Debug);
+        credits.Populate(message, _cache, ProtoMan, shoutout, Debug);
 
         var rand = new RobustRandom();
         rand.SetSeed(message.RoundId);

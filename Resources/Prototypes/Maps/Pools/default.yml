@@ -6,23 +6,24 @@
   - AreaMaints # for ambience and maints spawn rules
   - AreaHallway # for carp migration
   requiredEntities:
+  - SpawnPointExtraAiCore # for maps with AI (almost all of them) to work with triumvirate station trait
   - MachineMaterialSilo # for main departments
   - MachineMasterMaterialSilo # for cargo to easily distribute mats to department silos
   maps:
-  - Atlas
-  - Amber
+  #- Atlas # SpawnPointExtraAiCore
+  #- Amber # needs SpawnPointExtraAiCore mapped
   - Bagel
   - Box
-  - Cluster
+  #- Cluster # SpawnPointExtraAiCore
   - Fland
   #- Loop # needs full area coverage
   - Marathon
   - Meta
   - Oasis
-  - Omega
+  #- Omega # SpawnPointExtraAiCore
   - Origin
   #- Saltern # DEATH TO SALTERN
-  - Packed
+  #- Packed # SpawnPointExtraAiCore
   #- Barratry
   - Kettle
   #- Submarine
@@ -32,5 +33,5 @@
   - Cog
   - Reach
   #- Serpentcrest
-  - Nume
+  #- Nume # slop
   - Freighter

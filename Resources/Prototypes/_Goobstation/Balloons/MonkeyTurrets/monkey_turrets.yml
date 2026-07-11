@@ -40,7 +40,6 @@
       Dead:
         Base: dead
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeat
       amount: 3

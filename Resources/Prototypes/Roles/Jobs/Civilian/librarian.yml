@@ -29,7 +29,7 @@
     # <Trauma>
     - PrintingPressFlatpack
     - Multitool
-    - CaneSheathFilled # Temp while I sprite the flaming sword of islam
+    - CaneSheathFilledLibrarian # mini update, removes the ignite. makes NT blade but slower.
     # </Trauma>
     - BookRandom
 

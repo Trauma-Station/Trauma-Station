@@ -11,15 +11,9 @@ namespace Content.Medical.Shared.Body;
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(fieldDeltas: true)]
-public sealed partial class BodyPartComponent : Component, ISurgeryToolComponent
+public sealed partial class BodyPartComponent : BaseSurgeryToolComponent
 {
-    [DataField]
-    public string ToolName { get; set; } = "A body part";
-
-    [DataField]
-    public float Speed { get; set; } = 1f;
-
-    public bool? Used { get; set; }
+    public override string ToolName => "A body part";
 
     [DataField(required: true)]
     public BodyPartType PartType;

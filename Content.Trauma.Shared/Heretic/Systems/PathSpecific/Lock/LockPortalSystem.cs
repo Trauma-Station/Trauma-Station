@@ -8,6 +8,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Physics;
+using Content.Shared.Popups;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.MartialArts;
@@ -24,14 +25,19 @@ public sealed partial class LockPortalSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private IRobustRandom _random = default!;
 
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private PullingSystem _pulling = default!;
     [Dependency] private SharedDoorSystem _door = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private EntityLookupSystem _look = default!;
 
+    [Dependency] private EntityQuery<FirelockComponent> _firelockQuery = default!;
+    [Dependency] private EntityQuery<LockTrappedDoorComponent> _trapQuery = default!;
+
     private readonly List<Entity<DoorComponent, TransformComponent>> _possibleDestinations = new();
     private readonly HashSet<Entity<PhysicsComponent>> _intersecting = new();
+    private readonly HashSet<Entity<LockPortalComponent>> _portals = new();
 
     public const int LockPortalMask = (int) CollisionGroup.InteractImpassable;
     public const int BlockerTeleportMask = (int) CollisionGroup.Impassable;
@@ -209,8 +215,7 @@ public sealed partial class LockPortalSystem : EntitySystem
         _possibleDestinations.Clear();
         while (query.MoveNext(out var uid, out var door, out var body, out var xform))
         {
-            if (!door.BumpOpen && !door.ClickOpen ||
-                (body.CollisionLayer & LockPortalMask) == 0 || uid == ourAirlock ||
+            if (IsDoorValid((uid, door, body)) || uid == ourAirlock ||
                 xform.MapID != ourXform.MapID ||
                 xform.GridUid != ourXform.GridUid)
                 continue;
@@ -219,5 +224,28 @@ public sealed partial class LockPortalSystem : EntitySystem
         }
 
         return _possibleDestinations.Count == 0 ? null : _random.Pick(_possibleDestinations);
+    }
+
+    public bool IsDoorValid(Entity<DoorComponent?, PhysicsComponent?> door)
+    {
+        if (!Resolve(door, ref door.Comp1, ref door.Comp2, false))
+            return false;
+
+        return door.Comp1 is not { BumpOpen: false, ClickOpen: false } &&
+               (door.Comp2.CollisionLayer & LockPortalMask) != 0 &&
+               !_firelockQuery.HasComp(door) && !_trapQuery.HasComp(door);
+    }
+
+    public bool IsDoorOccupied(EntityUid door, EntityUid? user)
+    {
+        _portals.Clear();
+        var coords = Transform(door).Coordinates;
+        _look.GetEntitiesInRange(coords, 0.4f, _portals, LookupFlags.StaticSundries | LookupFlags.Sensors);
+
+        var result = _portals.Count > 0;
+        if (result && user is { } u)
+            _popup.PopupClient(Loc.GetString("heretic-ability-fail-tile-occupied"), u, u);
+
+        return result;
     }
 }

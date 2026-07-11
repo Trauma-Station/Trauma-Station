@@ -11,7 +11,6 @@ public sealed partial class VulgarAccentSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ILocalizationManager _loc = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -29,7 +28,7 @@ public sealed partial class VulgarAccentSystem : EntitySystem
             //Every word has a percentage chance to be replaced by a random swear word from the component's array.
             if (_random.Prob(component.SwearProb))
             {
-                if (!_proto.Resolve(component.Pack, out var messagePack))
+                if (!ProtoMan.Resolve(component.Pack, out var messagePack))
                     return message;
 
                 string swearWord = _loc.GetString(_random.Pick(messagePack.Values));

@@ -1,6 +1,19 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: listing
+  id: HandheldStationMapRecordsTablet
+  name: uplink-records-tablet-name
+  description: uplink-records-tablet-desc
+  icon:
+    sprite: _Trauma/Objects/Devices/tablets.rsi
+    state: icon
+  productEntity: HandheldStationMapRecordsTablet
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDeception
+
+- type: listing
   id: UplinkUltrabrightLantern
   name: uplink-ultrabright-lantern-name
   description: uplink-ultrabright-lantern-desc
@@ -27,5 +40,18 @@
   productEntity: DeluxeCodespeakManual
   cost:
     Telecrystal: 15 # 3 TC on tg
+  categories:
+  - UplinkDeception
+
+- type: listing
+  id: UplinkObservationKitSyndie
+  name: uplink-observation-kit-name
+  description: uplink-observation-kit-desc-trauma
+  icon:
+    sprite: Objects/Storage/boxicons.rsi
+    state: tracks
+  productEntity: ObservationKitSyndie
+  cost:
+    Telecrystal: 20
   categories:
   - UplinkDeception

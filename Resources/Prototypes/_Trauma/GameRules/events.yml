@@ -67,8 +67,8 @@
       time: null # it removes itself when done
 
 - type: entity
-  id: RatmaSpawn
   parent: BaseStationEventShortDelay
+  id: RatmaSpawn
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
@@ -84,8 +84,8 @@
       amount: 1, 1
 
 - type: entity
-  id: WailingHorseSpawn
   parent: BaseStationEventShortDelay
+  id: WailingHorseSpawn
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
@@ -101,8 +101,8 @@
       amount: 1, 1
 
 - type: entity
-  id: CoconutCrabSpawn
   parent: BaseStationEventShortDelay
+  id: CoconutCrabSpawn
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
@@ -121,6 +121,150 @@
       - id: MobCrabTiny
       - id: MobCoconutCrabFloofy # because it looks funny
         weight: 0.05 # NEVER BASICALLY
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: DartFrogSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobDartFrog1
+      - id: MobDartFrog2
+      - id: MobDartFrog3
+      - id: MobDartFrog4
+      - id: MobDartFrog5
+      - id: MobDartFrog6
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: MantisSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobMantis
+      - id: MobMantisShrimp
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: ShrimpSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobMantisShrimp
+      - id: MobShrimp
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: SnakeSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobCobra
+      - id: MobYellowBellySnake
+      - id: MobKraitSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: EelSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobEelSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: BunnySpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobBunny
+      - id: MobBunnySea
+      - id: MobBunnyEvil
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: SpiderCrabSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 20
+    minimumPlayers: 30
+    weight: 2
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobSpiderCrabSea
 
 - type: entity
   parent: BaseAntagGhostRoleRule

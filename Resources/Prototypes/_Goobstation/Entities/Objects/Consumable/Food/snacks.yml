@@ -94,9 +94,6 @@
   name: lunacake
   description: Now with 20% less lawsuit enabling rhegolith!
   components:
-  - type: FlavorProfile
-    flavors:
-      - vanilla
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Food/bay_food.rsi
     state: lunacake

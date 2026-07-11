@@ -1,1 +1,1 @@
-barbed-contact-damage = The barbed wires tears into your flesh!
+barbed-contact-damage = The barbed wires tear into your flesh!

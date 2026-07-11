@@ -155,11 +155,7 @@ public abstract partial class SharedStasisSystem : EntitySystem
         if (!_statusEffects.TryAddStatusEffect<InsideStasisComponent>(target, "Stasis", statusTime.Value, refresh))
             return false;
 
-        var ev = new StasisEvent();
-        RaiseLocalEvent(target, ref ev);
-
-        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(target):entity} was send into stasis");
-
+        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{target:entity} was sent into stasis");
         return true;
     }
 

@@ -4,6 +4,11 @@
   name: official security anti-inflatable armament
   description: A specialty weapon used in the destruction of unique syndicate morale-boosting equipment.
   components:
+  # <Trauma>
+  - type: ThrowableBlocked
+  - type: WeaponClass
+    class: Polearm # :^)
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/needle.rsi
     state: icon
@@ -23,4 +28,3 @@
   - type: ThrowingAngle
     angle: -135
   - type: LandAtCursor
-  - type: ThrowableBlocked # Goobstation

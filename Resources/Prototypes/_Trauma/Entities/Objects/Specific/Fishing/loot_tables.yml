@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# TODO: change these to entity table prototypes if butchering ever gets refactored
 - type: entity
-  categories: [HideSpawnMenu]
-  id: AlienFishLootTable
   parent: MarkerBase
+  id: AlienFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -24,9 +25,9 @@
       RandomHumanoidVisitorAlien: 0.01
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: BingleFishLootTable
   parent: MarkerBase
+  id: BingleFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -45,9 +46,9 @@
       MobTurkle: 0.01
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: BoyfisherFishLootTable
   parent: MarkerBase
+  id: BoyfisherFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -58,9 +59,9 @@
       BaseBarrelChemRadioactiveFilledRadium: 0.5
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: NukeDiskFishLootTable
   parent: MarkerBase
+  id: NukeDiskFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -69,9 +70,9 @@
       NukeCodePaperStation: 0.01
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: GibFishLootTable
   parent: MarkerBase
+  id: GibFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -79,9 +80,9 @@
       MeleeDebugGib: 0.001
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: MutantFishLootTable
   parent: MarkerBase
+  id: MutantFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -97,9 +98,9 @@
       OrganMouseEggSack: 0.05
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: NukerFishLootTable
   parent: MarkerBase
+  id: NukerFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -118,9 +119,9 @@
       ClothingOuterHardsuitSyndie: 0.01
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: ToxicFishLootTable
   parent: MarkerBase
+  id: ToxicFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:
@@ -138,9 +139,9 @@
       ReagentSlimeMuteToxin: 0.25
 
 - type: entity
-  categories: [HideSpawnMenu]
-  id: AbductorFishLootTable
   parent: MarkerBase
+  id: AbductorFishLootTable
+  categories: [ HideSpawnMenu ]
   components:
   - type: RandomChanceSpawner
     toSpawn:

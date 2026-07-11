@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Shared.DoAfter;
 using Content.Shared.Wires;
+using Content.Trauma.Common.Doors;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Access.Components;
@@ -374,6 +375,11 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
+        // <Trauma>
+        var ev = new DoorOpenedEvent(uid, user);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
+
         if (predicted)
             Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
         else if (_net.IsServer)
@@ -544,8 +550,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!Resolve(uid, ref door))
             return;
 
-        if (!door.CanCrush)
+        // <Trauma>
+        var ev = new ShouldDoorCrushEvent(door.CanCrush, door.DoorStunTime);
+        RaiseLocalEvent(uid, ref ev);
+
+        if (!ev.ShouldCrush)
             return;
+        // <Trauma>
 
         // Find entities and apply curshing effects
         var stunTime = door.DoorStunTime + door.OpenTimeOne;
@@ -562,7 +573,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             return;
 
         // queue the door to open so that the player is no longer stunned once it has FINISHED opening.
-        door.NextStateChange = GameTiming.CurTime + door.DoorStunTime;
+        door.NextStateChange = GameTiming.CurTime + ev.CrushDelay; // Trauma - door.DoorStunTime -> ev.CrushDelay
         door.Partial = false;
     }
 

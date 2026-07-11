@@ -84,8 +84,8 @@
     slots:
     - Snout
   - type: SpeechOverride # Using Trauma's version here, this one can't replace SpeechVerbs, should probably do that at some point
-    speechIDs: Decapoid
-    emoteIDs: null # Someone tell me why did I make this a required field
+    speechSounds: Decapoid
+    emoteSounds: null # Someone tell me why did I make this a required field
 
 
 - type: entity

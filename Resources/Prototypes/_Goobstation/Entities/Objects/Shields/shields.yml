@@ -67,18 +67,21 @@
           Blunt: 3
           Slash: 3
           Piercing: 3
+          Ballistic: 3
           Heat: 3
       activeBlockModifier:
         coefficients:
           Blunt: 2
           Slash: 2
           Piercing: 2
+          Ballistic: 2
           Heat: 2
         flatReductions:
           Heat: 3
           Blunt: 3
           Slash: 3
           Piercing: 3
+          Ballistic: 3
     - type: Appearance
     - type: Damageable
     - type: Injurable

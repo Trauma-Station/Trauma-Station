@@ -104,9 +104,9 @@
     edges:
     - to: finish
       steps:
-        - material: BarbedWire
-          amount: 2
-          doAfter: 3
+      - material: BarbedWire
+        amount: 2
+        doAfter: 3
 
   - node: finish
     entity: BarbedWireStructure
@@ -118,8 +118,8 @@
           amount: 2
       - !type:DeleteEntity {}
       steps:
-        - tool: Cutting
-          doAfter: 5
+      - tool: Cutting
+        doAfter: 5
 
 # TripWire
 
@@ -131,14 +131,14 @@
     edges:
     - to: finish
       steps:
-        - material: Cable
-          amount: 5
-          doAfter: 3
-        - tag: RemoteSignaller
-          name: construction-graph-tag-remotesignaller
-          icon:
-            sprite: Objects/Devices/signaller.rsi
-            state: signaller
+      - material: Cable
+        amount: 5
+        doAfter: 3
+      - tag: RemoteSignaller
+        name: construction-graph-tag-remotesignaller
+        icon:
+          sprite: Objects/Devices/signaller.rsi
+          state: signaller
 
   - node: finish
     entity: TrapTripWire
@@ -152,8 +152,8 @@
         amount: 5
       - !type:DeleteEntity {}
       steps:
-        - tool: Cutting
-          doAfter: 5
+      - tool: Cutting
+        doAfter: 5
 
 # Pipe bomb trap
 
@@ -165,24 +165,24 @@
     edges:
     - to: finish
       steps:
-        - tag: Pipebomb
-          name: construction-graph-tag-pipebomb
-          icon:
-            sprite: Objects/Weapons/Bombs/pipebomb.rsi
-            state: base
-        - tag: Igniter
-          name: construction-graph-tag-igniter
-          icon:
-            sprite: Objects/Devices/igniter.rsi
-            state: icon
-        - tag: SignalTrigger
-          name: construction-graph-tag-signaltrigger
-          icon:
-            sprite: Objects/Devices/signaltrigger.rsi
-            state: signaltrigger
-        - material: Cable
-          amount: 5
-          doAfter: 3
+      - tag: Pipebomb
+        name: construction-graph-tag-pipebomb
+        icon:
+          sprite: Objects/Weapons/Bombs/pipebomb.rsi
+          state: base
+      - tag: Igniter
+        name: construction-graph-tag-igniter
+        icon:
+          sprite: Objects/Devices/igniter.rsi
+          state: icon
+      - tag: SignalTrigger
+        name: construction-graph-tag-signaltrigger
+        icon:
+          sprite: Objects/Devices/signaltrigger.rsi
+          state: signaltrigger
+      - material: Cable
+        amount: 5
+        doAfter: 3
 
   - node: finish
     entity: TrapPipeBomb

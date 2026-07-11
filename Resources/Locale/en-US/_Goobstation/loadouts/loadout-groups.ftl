@@ -215,4 +215,4 @@ loadout-group-boxer-envirohelm = Boxer envirohelm
 loadout-group-boxer-envirosuit = Boxer envirosuit
 
 # Misc
-loadout-group-plasma-tank = Plasma tank
+loadout-group-plasma-tank = Phoron tank

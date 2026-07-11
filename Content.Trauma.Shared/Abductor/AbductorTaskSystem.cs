@@ -12,7 +12,6 @@ namespace Content.Trauma.Shared.Abductor;
 public sealed partial class AbductorTaskSystem : EntitySystem
 {
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private EntityQuery<AbductorSubjectComponent> _query = default!;
 
@@ -60,7 +59,7 @@ public sealed partial class AbductorTaskSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllTasks.Clear();
-        foreach (var task in _proto.EnumeratePrototypes<AbductorTaskPrototype>())
+        foreach (var task in ProtoMan.EnumeratePrototypes<AbductorTaskPrototype>())
         {
             if (task.Random)
                 AllTasks.Add(task);
@@ -98,7 +97,7 @@ public sealed partial class AbductorTaskSystem : EntitySystem
     /// </summary>
     public bool IsTaskComplete(EntityUid target, [ForbidLiteral] ProtoId<AbductorTaskPrototype> id)
     {
-        var task = _proto.Index(id);
+        var task = ProtoMan.Index(id);
         return task.Completed is {} completed
             ? _conditions.TryConditions(target, completed)
             : !_conditions.TryConditions(target, task.Valid);
