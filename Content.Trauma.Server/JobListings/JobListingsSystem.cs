@@ -132,7 +132,7 @@ public sealed partial class JobListingsSystem : EntitySystem
 
         if (sideJobComp.Tool is not null)
         {
-            var reward = Spawn(sideJobComp.Tool.Value);
+            var reward = Spawn(sideJobComp.Tool.Value, Transform(actor).Coordinates);
             _hands.PickupOrDrop(actor, reward);
         }
 
@@ -167,7 +167,7 @@ public sealed partial class JobListingsSystem : EntitySystem
 
         if (sideJobComp.Reward is not null)
         {
-            var reward = Spawn(sideJobComp.Reward.Value);
+            var reward = Spawn(sideJobComp.Reward.Value, Transform(actor).Coordinates);
             _hands.PickupOrDrop(actor, reward);
         }
 
