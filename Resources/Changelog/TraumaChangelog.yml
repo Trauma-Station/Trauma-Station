@@ -11396,3 +11396,12 @@ Entries:
   id: 1259
   time: '2026-07-10T15:24:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3507
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: >-
+      Powersink now has a 30 minute delay before being purchasable from the
+      uplink.
+  id: 1260
+  time: '2026-07-11T01:27:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3512

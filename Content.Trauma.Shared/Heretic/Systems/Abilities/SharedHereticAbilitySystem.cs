@@ -125,12 +125,13 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
 
     private void CacheDamageTypes()
     {
-        var damage = AllDamage.DamageDict;
+        var damage = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
         damage.Clear();
         foreach (var type in ProtoMan.EnumeratePrototypes<DamageTypePrototype>())
         {
             damage[type.ID] = 1;
         }
+        AllDamage.DamageDict = damage;
     }
 
     [SubscribeLocalEvent]
