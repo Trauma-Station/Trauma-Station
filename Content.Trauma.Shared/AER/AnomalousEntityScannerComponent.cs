@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.AER;
 public sealed partial class AnomalousEntityScannerComponent : Component
 {
     /// <summary>
-    /// The anomalous entities that was last scanned by this scanner.
+    /// The anomalous entity that was last scanned by this scanner.
     /// </summary>
     [ViewVariables]
     public EntityUid? ScannedAER;

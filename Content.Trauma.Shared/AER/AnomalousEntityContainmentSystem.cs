@@ -26,10 +26,10 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, InteractUsingEvent>(OnAnomalousContainmentInteractUsing);
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<AnomalousEntityContainmentComponent, ResearchServerGetPointsPerSecondEvent>(OnAnomalousContainmentGetPointsPerSecond);
-        SubscribeLocalEvent<AnomalyShutdownEvent>(OnAnomalousContainmentShutdown);
         SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourSpawnGearEvent>(OnAerBehaviourSpawnGear);
     }
 
+    //on containment component removal uncontains the aer and sets connected containment on the aer to null
     private void OnContainmentShutdown(EntityUid uid, AnomalousEntityContainmentComponent component, ComponentShutdown args)
     {
         if (component.AnomalousEntity is not { } anomalousEntity)
@@ -39,8 +39,10 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
             return;
 
         anomalousEntityComp.Contained = false;
+        anomalousEntityComp.ConnectedContainment = null;
     }
 
+    //sets id gear and contained aer on interaction with aer scanner
     private void OnAnomalousContainmentInteractUsing(EntityUid uid, AnomalousEntityContainmentComponent component, InteractUsingEvent args)
     {
         if (component.AnomalousEntity != null ||
@@ -65,6 +67,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), uid);
     }
 
+    /*stolen code from anom vessels*/
     private void OnExamined(EntityUid uid, AnomalousEntityContainmentComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -75,6 +78,8 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
             : Loc.GetString("anomaly-vessel-component-assigned"));
     }
 
+    /*adds the aer's research points per second when ResearchServerGetPointsPerSecondEvent gets called
+      also sets containment status depending on distance from the sensor*/
     private void OnAnomalousContainmentGetPointsPerSecond(EntityUid uid, AnomalousEntityContainmentComponent component, ref ResearchServerGetPointsPerSecondEvent args)
     {
         if (component.AnomalousEntity is not { } anomalousEntity)
@@ -94,25 +99,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         }
     }
 
-    private void OnAnomalousContainmentShutdown(ref AnomalyShutdownEvent args)
-    {
-        var query = EntityQueryEnumerator<AnomalousEntityContainmentComponent>();
-        while (query.MoveNext(out var ent, out var component))
-        {
-            if (args.Anomaly != component.AnomalousEntity)
-                continue;
-
-            component.AnomalousEntity = null;
-            component.IDGear = null;
-            //UpdateVesselAppearance(ent,  component); to do appearance
-            //_radiation.SetSourceEnabled(ent, false); no rads
-
-            //if (!args.Supercritical)//no supercritical so no explosion either
-            //    continue;
-            //_explosion.TriggerExplosive(ent);
-        }
-    }
-
+    //spawns I.D. gear on anom behaviour 
     private void OnAerBehaviourSpawnGear(Entity<AnomalousEntityComponent> ent, ref AerBehaviourSpawnGearEvent args)
     {
         if (ent.Comp is not { } anomalousEntityComp)

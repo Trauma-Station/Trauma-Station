@@ -25,11 +25,15 @@ public sealed partial class AnomalousEntityComponent : Component
     /// </summary>
     [DataField]
     public int ResearchOnBehaviour;
-
+    /// <summary>
+    /// protoId of the I.D. gear to spawn on behaviours
+    /// </summary>
     [DataField]
     public EntProtoId? IDGear = "";
 
-    //containment sensor connected to the entity
+    /// <summary>
+    /// containment sensor connected to the entity
+    /// </summary>
     [ViewVariables]
     public EntityUid? ConnectedContainment;
 

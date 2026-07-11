@@ -17,7 +17,9 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourAddResearchEvent>(OnAerBehaviourResearch);
     }
 
-
+    /// <summary>
+    /// Add a research tantum on AerBehaviourResearchEvents
+    /// </summary>
     private void OnAerBehaviourResearch(Entity<AnomalousEntityComponent> ent, ref AerBehaviourAddResearchEvent args)
     {
         if (ent.Comp is not { } anomalousEntityComp)
