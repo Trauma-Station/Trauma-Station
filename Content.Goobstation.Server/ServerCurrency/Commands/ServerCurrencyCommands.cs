@@ -117,7 +117,7 @@ public sealed partial class GiftServerCurrencyCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Host)]
+[AdminCommand(AdminFlags.FullAdmin)]
 public sealed partial class AddServerCurrencyCommand : IConsoleCommand
 {
     [Dependency] private ICommonCurrencyManager _currency = default!;
@@ -162,7 +162,7 @@ public sealed partial class AddServerCurrencyCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Host)]
+[AdminCommand(AdminFlags.FullAdmin)]
 public sealed partial class RemoveServerCurrencyCommand : IConsoleCommand
 {
     [Dependency] private ICommonCurrencyManager _currency = default!;
@@ -207,7 +207,7 @@ public sealed partial class RemoveServerCurrencyCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Host)]
+[AdminCommand(AdminFlags.FullAdmin)]
 public sealed partial class SetServerCurrencyCommand : IConsoleCommand
 {
     [Dependency] private ICommonCurrencyManager _currency = default!;
@@ -253,7 +253,7 @@ public sealed partial class SetServerCurrencyCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Host)]
+[AdminCommand(AdminFlags.FullAdmin)]
 public sealed partial class GetServerCurrencyCommand : IConsoleCommand
 {
     [Dependency] private ICommonCurrencyManager _currency = default!;
