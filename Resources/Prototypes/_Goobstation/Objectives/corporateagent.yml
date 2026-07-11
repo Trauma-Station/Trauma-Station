@@ -105,8 +105,8 @@
   - type: TargetObjective
     title: objective-condition-kill-maroon-title
   - type: PickRandomPerson
-    filters:
-    - !type:BodyMindFilter
+    conditions:
+    - !type:BodyWhitelistCondition
       whitelist:
         components:
         - CommandStaff
@@ -128,8 +128,8 @@
   - type: TargetObjective
     title: objective-condition-other-traitor-alive-title
   - type: PickRandomPerson
-    filters:
-    - !type:HasRoleMindFilter
+    conditions:
+    - !type:RoleCondition
       whitelist:
         components:
         - TraitorRole
@@ -144,8 +144,8 @@
   - type: TargetObjective
     title: objective-condition-other-traitor-progress-title
   - type: PickRandomPerson
-    filters:
-    - !type:HasRoleMindFilter
+    conditions:
+    - !type:RoleCondition
       whitelist:
         components:
         - TraitorRole

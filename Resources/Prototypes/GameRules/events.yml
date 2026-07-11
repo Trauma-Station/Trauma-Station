@@ -284,14 +284,16 @@
     reoccurrenceDelay: 20
     minimumPlayers: 15
   - type: ParadoxCloneRule
+    # <Trauma>
+    targetBlacklist:
+      components:
+      - BorgBrain # No copying the AI or borgs.
+      - BorgChassis
+      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, etc)
+    # </Trauma>
     objectiveBlacklist:
       tags:
       - ParadoxCloneObjectiveBlacklist
-    targetBlacklist: # Goobstation
-      components:
-      - BorgBrain # No copying the AI or borgs.
-      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, Ghost bar, etcetera.)
-
   - type: AntagObjectives
     objectives:
     - ParadoxCloneKillObjective

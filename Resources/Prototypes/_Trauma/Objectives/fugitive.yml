@@ -61,8 +61,8 @@
   - type: TargetObjective
     title: objective-condition-kill-person-title
   - type: PickRandomPerson
-    filters:
-    - !type:TargetObjectiveMindFilter
+    conditions:
+    - !type:ObjectiveTargetCondition
       blacklist:
         components:
         - KillPersonCondition
@@ -117,8 +117,8 @@
   - type: TargetObjective
     title: objective-condition-kill-maroon-title
   - type: PickRandomPerson
-    filters:
-    - !type:TargetObjectiveMindFilter
+    conditions:
+    - !type:ObjectiveTargetCondition
       blacklist:
         components:
         - KillPersonCondition
