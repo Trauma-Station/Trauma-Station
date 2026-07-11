@@ -9,6 +9,7 @@ namespace Content.Trauma.Client.Spy;
 public sealed partial class SpyUplinkMenu : FancyWindow
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private List<SpyBounty> _cachedBounties = new();
 
@@ -26,6 +27,12 @@ public sealed partial class SpyUplinkMenu : FancyWindow
         UpdateRefreshTime();
     }
 
+    public void UpdateTabs()
+    {
+        SpyTabs.SetTabTitle(0, Loc.GetString("spy-uplink-bounties"));
+        SpyTabs.SetTabTitle(1, Loc.GetString("spy-uplink-rewards"));
+    }
+
     public void UpdateBounties(List<SpyBounty> bounties)
     {
         _cachedBounties = bounties;
@@ -35,7 +42,7 @@ public sealed partial class SpyUplinkMenu : FancyWindow
 
     public void UpdateBounties()
     {
-        var sorted = _cachedBounties.OrderBy(l => l.Difficulty).ThenBy(l => l.Name);
+        var sorted = _cachedBounties.OrderBy(l => _proto.Index(l.BountyProto).Difficulty).ThenBy(l => l.Name);
 
         ClearBounties();
         foreach (var item in sorted)

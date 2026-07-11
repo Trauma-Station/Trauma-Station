@@ -18,7 +18,7 @@ public sealed partial class SpyBounty : IEquatable<SpyBounty>
     public List<NetEntity> ValidEntities = new();
 
     /// <summary>
-    /// Prototype of target entity.
+    /// Prototypes of target entity.
     /// Used for ui (sprite) or direct check for stealing
     /// </summary>
     public List<EntProtoId>? Protos;
@@ -27,21 +27,17 @@ public sealed partial class SpyBounty : IEquatable<SpyBounty>
 
     public SpriteSpecifier? Sprite;
 
-    public SpyBountyDifficulty Difficulty;
-
     public string Name = string.Empty;
 
     public string Description = string.Empty;
 
-    public ProtoId<ListingPrototype> Reward;
-
-    public TimeSpan TheftTime;
+    public ProtoId<SpyRewardPrototype> Reward;
 
     public bool Equals(SpyBounty? other)
     {
         if (other is null)
             return false;
-        return ReferenceEquals(this, other) || BountyProto.Equals(other.Reward);
+        return ReferenceEquals(this, other) || BountyProto.Equals(other.BountyProto);
     }
 
     public override bool Equals(object? obj)
@@ -80,28 +76,43 @@ public sealed partial class SpyBountyPrototype : IPrototype
     public TimeSpan TheftTime = TimeSpan.FromSeconds(2);
 }
 
+[Prototype]
+public sealed partial class SpyRewardPrototype : IPrototype
+{
+    [IdDataField]
+    public string ID { get; private set; } = default!;
+
+    [DataField(required: true)]
+    public SpyBountyDifficulty Difficulty;
+
+    [DataField(required: true)]
+    public List<ProtoId<ListingPrototype>> RewardSelection = new();
+
+    [DataField]
+    public LocId? RewardNameOverride;
+
+    [DataField]
+    public LocId? RewardDescriptionOverride;
+
+    [DataField]
+    public bool RemoveOnClaim = true;
+}
+
 [ImplicitDataDefinitionForInheritors]
 public abstract partial class BaseSpyBountySelectorEvent : EntityEventArgs
 {
-    public ProtoId<ListingPrototype> Reward;
-
-    public SpyBountyDifficulty Difficulty;
-
-    public TimeSpan TheftTime;
-
     public ProtoId<SpyBountyPrototype> Id;
+
+    public ProtoId<SpyRewardPrototype> Reward;
 
     public abstract BaseSpyBountySelectorEvent GetEvent();
 
-    public object Initialize(ProtoId<ListingPrototype> reward,
-        SpyBountyDifficulty difficulty,
-        TimeSpan theftTime,
-        ProtoId<SpyBountyPrototype> id)
+    public object Initialize(
+        ProtoId<SpyBountyPrototype> id,
+        ProtoId<SpyRewardPrototype> reward)
     {
-        Reward = reward;
-        Difficulty = difficulty;
-        TheftTime = theftTime;
         Id = id;
+        Reward = reward;
         return this;
     }
 }

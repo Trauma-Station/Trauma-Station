@@ -6,7 +6,7 @@ namespace Content.Trauma.Client.Spy;
 [GenerateTypedNameReferences]
 public sealed partial class SpyBountyControl : Control
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IEntityManager _entity = default!;
 
     public SpyBountyControl(SpyBounty data)
@@ -16,23 +16,29 @@ public sealed partial class SpyBountyControl : Control
 
         var spriteSys = _entity.System<SpriteSystem>();
 
+        var bountyProto = _proto.Index(data.BountyProto);
+        var rewardProto = _proto.Index(data.Reward);
+        var listing = _proto.Index(rewardProto.RewardSelection[0]);
+
         BountyName.Text = data.Name;
-        BountyName.SetOnlyStyleClass($"SpyBounty{data.Difficulty}");
+        BountyName.SetOnlyStyleClass($"SpyBounty{bountyProto.Difficulty}");
 
         BountyDescription.Text = Loc.GetString("spy-uplink-description-label", ("desc", data.Description));
         if (data.Sprite is { } sprite)
             BountyTexture.Texture = spriteSys.Frame0(sprite);
         else if (data.Protos is { } protos)
-            BountyTexture.Texture = spriteSys.Frame0(_prototype.Index(protos[0]));
-
-        var listing = _prototype.Index(data.Reward);
+            BountyTexture.Texture = spriteSys.Frame0(_proto.Index(protos[0]));
 
         BountyReward.Title = Loc.GetString("spy-uplink-reward",
             ("reward",
-                ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, _prototype)));
+                rewardProto.RewardNameOverride is { } overrideName
+                    ? Loc.GetString(overrideName)
+                    : ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, _proto)));
         BountyRewardDescription.Text = Loc.GetString("spy-uplink-description-label",
             ("desc",
-                ListingLocalisationHelpers.GetLocalisedDescriptionOrEntityDescription(listing, _prototype)));
+                rewardProto.RewardDescriptionOverride is { } overrideDesc
+                    ? Loc.GetString(overrideDesc)
+                    : ListingLocalisationHelpers.GetLocalisedDescriptionOrEntityDescription(listing, _proto)));
 
         Texture? texture = null;
 

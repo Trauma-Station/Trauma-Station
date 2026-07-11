@@ -23,7 +23,6 @@ namespace Content.Trauma.Server.GameTicking.Rules;
 public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private MindSystem _mind = default!;
@@ -32,18 +31,6 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [Dependency] private RoleSystem _role = default!;
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private StationSystem _station = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SpyRuleComponent, AfterAntagEntitySelectedEvent>(AfterEntitySelected);
-        SubscribeLocalEvent<SpyRuleComponent, SpyStealTargetBountySelectorEvent>(OnStealTarget);
-        SubscribeLocalEvent<SpyRuleComponent, SpyPrototypeBountySelectorEvent>(OnPrototype);
-        SubscribeLocalEvent<SpyRuleComponent, SpySpecificEntityBountySelectorEvent>(OnSpecific);
-
-        SubscribeLocalEvent<SpyRoleComponent, GetBriefingEvent>(OnGetBriefing);
-    }
 
     protected override void ActiveTick(EntityUid uid,
         SpyRuleComponent component,
@@ -77,7 +64,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     private void GenerateLootPool(SpyRuleComponent comp)
     {
         var tc = UplinkSystem.TelecrystalCurrencyPrototype;
-        foreach (var proto in _proto.EnumeratePrototypes<ListingPrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<ListingPrototype>())
         {
             if (!proto.OriginalCost.TryGetValue(tc, out var cost) ||
                 !proto.Categories.Intersect(comp.ValidCategories).Any())
@@ -93,6 +80,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
                 difficulty = value;
             }
 
+            // TODO change this
             comp.LootPool.GetOrNew(difficulty)[proto.ID] = 1f;
         }
     }
@@ -139,10 +127,10 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
     private void FillBountyPool(SpyRuleComponent rule, ProtoId<WeightedRandomPrototype> random, bool recursion = true)
     {
-        var index = _proto.Index(random);
+        var index = ProtoMan.Index(random);
         foreach (var (key, value) in index.Weights)
         {
-            if (_proto.HasIndex<SpyBountyPrototype>(key))
+            if (ProtoMan.HasIndex<SpyBountyPrototype>(key))
             {
                 if (!rule.UnavailableBounties.Contains(key) && !rule.ClaimedBounties.Contains(key))
                     rule.BountyPool![key] = value;
@@ -155,7 +143,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
                 continue;
             }
 
-            if (!_proto.HasIndex<WeightedRandomPrototype>(key))
+            if (!ProtoMan.HasIndex<WeightedRandomPrototype>(key))
             {
                 Log.Error($"Expected {key} to be SpyBountyPrototype or WeightedRandomPrototype");
                 continue;
@@ -165,11 +153,13 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGetBriefing(Entity<SpyRoleComponent> ent, ref GetBriefingEvent args)
     {
         args.Append(ent.Comp.Briefing);
     }
 
+    [SubscribeLocalEvent]
     private void AfterEntitySelected(Entity<SpyRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         MakeSpy(args.EntityUid, ent);
@@ -212,18 +202,17 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
     public void GetRandomBounty(EntityUid uid, SpyRuleComponent comp, ProtoId<SpyBountyPrototype> bountyId)
     {
-        var index = _proto.Index(bountyId);
-        var difficulty = index.Difficulty;
-        var theftTime = index.TheftTime;
+        var index = ProtoMan.Index(bountyId);
         var reward = _random.Pick(comp.LootPool[index.Difficulty]);
 
         var ev = index.Selector.GetEvent();
-        RaiseLocalEvent(uid, ev.Initialize(reward, difficulty, theftTime, bountyId));
+        RaiseLocalEvent(uid, ev.Initialize(bountyId, reward));
     }
 
+    [SubscribeLocalEvent]
     private void OnStealTarget(Entity<SpyRuleComponent> ent, ref SpyStealTargetBountySelectorEvent args)
     {
-        var target = _proto.Index(args.StealTarget);
+        var target = ProtoMan.Index(args.StealTarget);
         List<NetEntity> validEntities = [];
         var query = EntityQueryEnumerator<StealTargetComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
@@ -246,32 +235,30 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
             ValidEntities = validEntities,
             BountyProto = args.Id,
             Sprite = target.Sprite,
-            Difficulty = args.Difficulty,
-            TheftTime = args.TheftTime,
             Name = target.Name,
             Description = "Test Description",
             Reward = args.Reward,
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototype(Entity<SpyRuleComponent> ent, ref SpyPrototypeBountySelectorEvent args)
     {
-        var proto = _proto.Index(args.Protos[0]);
+        var proto = ProtoMan.Index(args.Protos[0]);
         ent.Comp.CurrentBounties.Add(new SpyBounty
         {
             Protos = args.Protos,
             BountyProto = args.Id,
-            Difficulty = args.Difficulty,
-            TheftTime = args.TheftTime,
             Name = proto.Name,
             Description = proto.Description,
             Reward = args.Reward,
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnSpecific(Entity<SpyRuleComponent> ent, ref SpySpecificEntityBountySelectorEvent args)
     {
-        var proto = _proto.Index(args.Protos[0]);
+        var proto = ProtoMan.Index(args.Protos[0]);
         var type = Factory.GetComponent(args.QueryComp).GetType();
 
         Dictionary<string, List<NetEntity>> validEntities = [];
@@ -314,8 +301,6 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
             ValidEntities = list,
             Protos = args.Protos,
             BountyProto = args.Id,
-            Difficulty = args.Difficulty,
-            TheftTime = args.TheftTime,
             Name = proto.Name,
             Description = proto.Description,
             Reward = args.Reward,

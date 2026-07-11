@@ -58,7 +58,7 @@ public sealed partial class SpyRuleComponent : Component
     };
 
     [DataField]
-    public Dictionary<SpyBountyDifficulty, Dictionary<ProtoId<ListingPrototype>, float>> LootPool = new();
+    public Dictionary<SpyBountyDifficulty, Dictionary<ProtoId<SpyRewardPrototype>, float>> LootPool = new();
 
     [DataField]
     public SortedDictionary<FixedPoint2, SpyBountyDifficulty> CostToDifficulty = new()

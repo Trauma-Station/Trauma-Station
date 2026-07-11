@@ -28,16 +28,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private AudioSystem _audio = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SpyUplinkComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<SpyUplinkComponent, GetVerbsEvent<Verb>>(OnGetVerb);
-        SubscribeLocalEvent<SpyUplinkComponent, BeforeRangedInteractEvent>(OnInteract);
-        SubscribeLocalEvent<SpyUplinkComponent, SpyStealDoAfterEvent>(OnSteal);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSteal(Entity<SpyUplinkComponent> ent, ref SpyStealDoAfterEvent args)
     {
         RemCompDeferred<ActiveScannerComponent>(ent);
@@ -56,9 +47,10 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         args.Bounty.Claimed = true;
         _audio.PlayPvs(ent.Comp.StealEndSound, ent);
         RefreshUi(ruleComp.NextRefresh, ruleComp.CurrentBounties);
-        // TODO reward
+        // TODO reward, remove from pool
     }
 
+    [SubscribeLocalEvent]
     private void OnInteract(Entity<SpyUplinkComponent> ent, ref BeforeRangedInteractEvent args)
     {
         if (!args.CanReach || args.Handled || args.Target is not { } target || HasComp<ActiveScannerComponent>(ent))
@@ -73,6 +65,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
             args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetVerb(Entity<SpyUplinkComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanComplexInteract || !args.CanInteract || !args.CanAccess)
@@ -92,6 +85,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<SpyUplinkComponent> ent, ref ExaminedEvent args)
     {
         if (!_mind.TryGetMind(args.Examiner, out var mind, out _) || ent.Comp.OwnerMind != mind)
@@ -126,9 +120,10 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         SpyBounty bounty,
         EntityUid rule)
     {
+        var proto = ProtoMan.Index(bounty.BountyProto);
         var doArgs = new DoAfterArgs(EntityManager,
             user,
-            bounty.TheftTime,
+            proto.TheftTime,
             new SpyStealDoAfterEvent(bounty, GetNetEntity(rule)),
             uplink,
             uid,
@@ -151,7 +146,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         var scanner = EnsureComp<ActiveScannerComponent>(uplink);
         scanner.ScannedObject = uid;
         scanner.ScanStartTime = now;
-        scanner.ScanEndTime = now + bounty.TheftTime;
+        scanner.ScanEndTime = now + proto.TheftTime;
         Dirty(uplink, scanner);
     }
 
