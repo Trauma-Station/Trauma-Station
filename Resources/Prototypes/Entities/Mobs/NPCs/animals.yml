@@ -2696,7 +2696,7 @@
 #      - ReagentId: Mechanotoxin
 #        Quantity: 1
   - type: MeleeChemicalInjector
-    transferAmount: 0.5 # Trauma - was 0.75 / R.O.N. Station - Returned to 0.75 from 1.5
+    transferAmount: 0.5 # Trauma - was 0.75 / R.O.N. Station - Returned to 0.5 from 1.5
     solution: melee
   - type: LanguageSpeaker # Einstein Engines - Language
     speaks:
