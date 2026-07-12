@@ -44,7 +44,6 @@
     startingCharge: 1200
     maxCharge: 1200
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 40
   - type: BatteryAmmoProvider
     proto: BulletLaserGendarme

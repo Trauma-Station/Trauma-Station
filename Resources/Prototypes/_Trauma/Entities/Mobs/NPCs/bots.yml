@@ -7,9 +7,6 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Silicon/Bots/buttbot.rsi
     state: buttbot
-  - type: AutoEmote
-    emotes:
-    - Fart
   - type: HTN
     rootTask:
       task: RuminantCompound
@@ -35,9 +32,6 @@
     graph: ButtBot
     node: bot
   - type: Fart
-  - type: EmoteOnDamage
-    emotes:
-    - Fart
 
 - type: entity
   parent: MobButtBot

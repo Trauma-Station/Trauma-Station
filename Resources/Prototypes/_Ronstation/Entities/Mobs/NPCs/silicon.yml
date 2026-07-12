@@ -86,21 +86,22 @@
   - type: WarpPoint
     location: space roomba
 
-- type: entity
-  parent: [ MobSiliconBase, MobCombat ]
-  id: MobInsultBot
-  name: insultbot
-  suffix: Admeme
-  description: Awww, who gives a fuck?
-  components:
-  - type: Sprite
-    sprite: _Ronstation/Mobs/Silicon/Bots/insultbot.rsi
-    state: insultbot
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3
-  - type: Anchorable
-  - type: HugBot # stealing the interaction cooldown from hugbotcomponent
-  - type: HTN
-    rootTask:
-      task: InsultBotCompound
+#Ronstation : wtf, no
+#- type: entity
+#  parent: [ MobSiliconBase, MobCombat ]
+#  id: MobInsultBot
+#  name: insultbot
+#  suffix: Admeme
+#  description: Awww, who gives a fuck?
+#  components:
+#  - type: Sprite
+#    sprite: _Ronstation/Mobs/Silicon/Bots/insultbot.rsi
+#    state: insultbot
+#  - type: MovementSpeedModifier
+#    baseWalkSpeed: 2
+#    baseSprintSpeed: 3
+#  - type: Anchorable
+#  - type: HugBot # stealing the interaction cooldown from hugbotcomponent
+#  - type: HTN
+#    rootTask:
+#      task: InsultBotCompound

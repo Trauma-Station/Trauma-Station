@@ -15,7 +15,6 @@
   icon: "JobIconNanotrasen"
   requireAdminNotify: true
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   access:
   - Brig
   - Command
