@@ -101,7 +101,7 @@ public sealed partial class BatteryDrinkerSystem : EntitySystem
             return;
         }
 
-        var networked = sourceBattery.Value.Comp.NetSyncEnabled;
+        var networked = sourceBattery.NetSyncEnabled;
         if (!networked && _net.IsClient)
             return; // client cant predict APCs, SMESes, etc just batteries
 
