@@ -95,7 +95,6 @@
 - type: entity
   id: SteelOre1Unprocessed
   parent: SteelOreUnprocessed
-  name: unprocessed iron ore
   suffix: Single
   components:
   - type: Stack
@@ -104,7 +103,6 @@
 - type: entity
   id: SteelOre60Unprocessed
   parent: SteelOreUnprocessed
-  name: unprocessed iron ore
   suffix: Sixty
   components:
   - type: Stack
@@ -122,7 +120,7 @@
 - type: entity
   parent: PlasmaOre
   id: PlasmaOreUnprocessed
-  name: unprocessed plasma ore
+  name: unprocessed phoron ore
   suffix: Full
   components:
   - type: Stack
@@ -133,7 +131,6 @@
 - type: entity
   parent: PlasmaOreUnprocessed
   id: PlasmaOre1Unprocessed
-  name: unprocessed plasma ore
   suffix: Single
   components:
   - type: Stack
@@ -153,7 +150,6 @@
 - type: entity
   parent: SilverOreUnprocessed
   id: SilverOre1Unprocessed
-  name: unprocessed silver ore
   suffix: Single
   components:
   - type: Stack
