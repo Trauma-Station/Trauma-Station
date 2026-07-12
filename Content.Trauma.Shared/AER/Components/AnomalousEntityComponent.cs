@@ -21,6 +21,11 @@ public sealed partial class AnomalousEntityComponent : Component
     [DataField]
     public bool Contained;
     /// <summary>
+    /// if the entity is active (ex alive, powered, ecc.) if false stops research production
+    /// </summary>
+    [DataField]
+    public bool Active = true;
+    /// <summary>
     /// quantity of research obtained when interacting with the entity
     /// </summary>
     [DataField]

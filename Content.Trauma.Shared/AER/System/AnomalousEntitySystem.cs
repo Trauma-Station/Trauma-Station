@@ -11,6 +11,7 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<AnomalousEntityComponent, ComponentShutdown>(OnAnomalousEntityShutdown);
+        SubscribeLocalEvent<AnomalousEntityComponent, AerUpdateActiveStatusEvent>(OnAerActiveUpdate);
     }
 
     /// <summary>
@@ -48,5 +49,11 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
 
             component.ScannedAER = null;
         }
+    }
+
+    private void OnAerActiveUpdate(Entity<AnomalousEntityComponent> aer, ref AerUpdateActiveStatusEvent args)
+    {
+        var component = aer.Comp;
+        component.Active = args.Active;
     }
 }

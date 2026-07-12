@@ -91,7 +91,8 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         if (_transform.InRange(anomalousEntity.ToCoordinates(), uid.ToCoordinates(), component.Range))
         {
             comp.Contained = true;
-            args.Points += (int) (_anomalousEntitySystem.GetAnomalousEntityPointValue(anomalousEntity) * component.PointMultiplier);
+            if (comp.Active)
+                args.Points += (int) (_anomalousEntitySystem.GetAnomalousEntityPointValue(anomalousEntity) * component.PointMultiplier);
         }
         else
         {

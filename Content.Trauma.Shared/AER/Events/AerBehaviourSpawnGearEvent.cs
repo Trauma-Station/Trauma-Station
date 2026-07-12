@@ -1,8 +1,8 @@
 namespace Content.Trauma.Shared.AER;
 
-
-
-//i dunno event definition?
+/// <summary>
+/// event raised for spawning an aer I.D. gear on an aer behaviour
+/// </summary>
 [ByRefEvent]
 public record struct AerBehaviourSpawnGearEvent
 {

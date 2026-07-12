@@ -2,7 +2,9 @@ namespace Content.Trauma.Shared.AER;
 
 
 
-//i dunno event definition?
+/// <summary>
+/// event raised for giving research on an aer behaviour
+/// </summary>
 [ByRefEvent]
 public record struct AerBehaviourAddResearchEvent
 {
