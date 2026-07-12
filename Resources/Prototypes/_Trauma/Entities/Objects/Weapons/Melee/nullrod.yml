@@ -44,9 +44,6 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
-  - type: Tag
-    tags:
-    - Nullrod
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1
@@ -106,9 +103,6 @@
       path: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
       params:
         volume: 0.1
-  - type: Tag
-    tags:
-    - Nullrod
   - type: DivineIntervention
   - type: Reflect
     reflectProb: 1

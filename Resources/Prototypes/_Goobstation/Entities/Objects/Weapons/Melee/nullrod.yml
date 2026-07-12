@@ -24,9 +24,6 @@
     - NONE
   - type: DisarmMalus
     malus: 0
-  - type: Tag
-    tags:
-    - Nullrod
 
 - type: entity
   name: Null Rod
