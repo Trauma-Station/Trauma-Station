@@ -14,7 +14,7 @@ barks_enabled = true
 
 [shuttle]
 cooldown = 5
-auto_call_time = 150
+auto_call_time = 90
 arrivals_returns = true
 mass_limit = 1200
 
