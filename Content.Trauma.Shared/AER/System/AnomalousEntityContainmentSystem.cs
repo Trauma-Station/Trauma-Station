@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Interaction;
 using Content.Shared.Examine;
 using Content.Shared.Anomaly.Components;
@@ -100,7 +102,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         }
     }
 
-    //spawns I.D. gear on anom behaviour 
+    //spawns I.D. gear on anom behaviour
     private void OnAerBehaviourSpawnGear(Entity<AnomalousEntityComponent> ent, ref AerBehaviourSpawnGearEvent args)
     {
         if (ent.Comp is not { } anomalousEntityComp)

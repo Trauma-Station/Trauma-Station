@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Bloodtrak;
 using Content.Server.Research.Systems;
 using Content.Shared.Coordinates;
@@ -39,4 +41,3 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         }
     }
 }
-

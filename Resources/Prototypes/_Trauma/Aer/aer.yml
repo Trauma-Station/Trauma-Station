@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: MobSkeletonPerson
   id: Aerskeleton
@@ -20,7 +22,7 @@
   - type: AerSoapBehaviours
 
 
-#scaner for aer 
+#scaner for aer
 - type: entity
   parent: BaseItem
   id: AerScanner
@@ -58,7 +60,7 @@
       Steel: 100
       Glass: 25
 
-# Aer sensor machine that must be used in containment chamber it analyses a anomalous entity in range linked with a 
+# Aer sensor machine that must be used in containment chamber it analyses a anomalous entity in range linked with a
 - type: entity
   id: MachineAERContainmentSensor
   parent: [ BaseMachinePowered, ConstructibleMachine ]
