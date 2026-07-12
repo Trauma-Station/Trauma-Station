@@ -1017,7 +1017,7 @@
   time: 10
   group: Soup
   reagents:
-    Soysauce: 10
+    Soysauce: 1 # Trauma - was 10, 80ml of soy sauce is a toxic soup lol
   solids:
     FoodBowlBig: 1
     FoodMeatXenoCutlet: 5
@@ -1029,7 +1029,7 @@
   time: 10
   group: Soup
   reagents:
-    Soysauce: 5
+    Soysauce: 1 # Trauma - was 5, 40ml is still awful
   solids:
     FoodBowlBig: 1
     FoodMeatSpider: 2
