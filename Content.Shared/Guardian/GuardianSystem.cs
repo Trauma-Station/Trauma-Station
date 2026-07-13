@@ -391,7 +391,8 @@ public sealed partial class GuardianSystem : EntitySystem
             return;
 
         // <Trauma> - moves you closer instead of retracting
-        if (_transform.InRange(guardianXform.Coordinates, hostXform.Coordinates, guardian.Comp.DistanceAllowed))
+        // TODO: change this to a physics joint holy shit
+        if (_timing.ApplyingState || _transform.InRange(guardianXform.Coordinates, hostXform.Coordinates, guardian.Comp.DistanceAllowed))
             return;
 
         if (hostXform.MapID != guardianXform.MapID)
