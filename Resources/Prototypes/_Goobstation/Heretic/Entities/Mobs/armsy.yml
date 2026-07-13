@@ -186,6 +186,8 @@
     needsHands: false
   - type: Pullable
     canBeGrabbed: false
+  - type: Viewcone
+    baseConeAngle: 360
 
 - type: entity
   parent: MobHereticFleshAscendSegmentBase

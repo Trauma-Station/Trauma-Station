@@ -815,8 +815,9 @@ namespace Content.Server.Administration.Systems
             var sendsWebhook = _webhookUrl != string.Empty;
             if (sendsWebhook && bwoinkParams.SendWebhook)
             {
-                if (!_messageQueues.ContainsKey(bwoinkParams.SenderId))
-                    _messageQueues[bwoinkParams.SenderId] = new Queue<DiscordRelayedData>();
+                var recipient = bwoinkParams.Message.UserId;
+                if (!_messageQueues.ContainsKey(recipient))
+                    _messageQueues[recipient] = new Queue<DiscordRelayedData>();
 
                 var str = bwoinkParams.Message.Text;
                 var unameLength = bwoinkParams.SenderName.Length;
@@ -838,7 +839,7 @@ namespace Content.Server.Administration.Systems
                     adminOnly: bwoinkParams.Message.AdminOnly,
                     noReceivers: nonAfkAdmins.Count == 0
                 );
-                _messageQueues[bwoinkParams.SenderId].Enqueue(GenerateAHelpMessage(messageParams));
+                _messageQueues[recipient].Enqueue(GenerateAHelpMessage(messageParams));
             }
 
             if (admins.Count != 0 || sendsWebhook)

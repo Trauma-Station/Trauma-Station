@@ -10,20 +10,20 @@
   - MachineMaterialSilo # for main departments
   - MachineMasterMaterialSilo # for cargo to easily distribute mats to department silos
   maps:
-  #- Atlas # SpawnPointExtraAiCore
-  #- Amber # needs SpawnPointExtraAiCore mapped
+  - Atlas
+  - Amber
   - Bagel
   - Box
-  #- Cluster # SpawnPointExtraAiCore
+  - Cluster
   - Fland
   #- Loop # needs full area coverage
   - Marathon
   - Meta
   - Oasis
-  #- Omega # SpawnPointExtraAiCore
+  - Omega
   - Origin
   #- Saltern # DEATH TO SALTERN
-  #- Packed # SpawnPointExtraAiCore
+  - Packed
   #- Barratry
   - Kettle
   #- Submarine

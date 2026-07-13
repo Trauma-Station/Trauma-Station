@@ -225,6 +225,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         // Whether the user and the target are too far apart.
         if (args.Target != null)
         {
+            if (TerminatingOrDeleted(args.Target.Value)) return true; // Trauma
             if (args.DistanceThreshold != null)
             {
                 if (!_interaction.InRangeUnobstructed(args.User, args.Target.Value, args.DistanceThreshold.Value))
@@ -235,6 +236,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         // Whether the distance between the tool and the user has grown too much.
         if (args.Used != null)
         {
+            if (TerminatingOrDeleted(args.Used.Value)) return true; // Trauma
             if (args.DistanceThreshold != null)
             {
                 if (!_interaction.InRangeUnobstructed(args.User,

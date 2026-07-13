@@ -19,3 +19,7 @@ pvs_enter_budget = 300 # 200 by default
 
 [adminlogs]
 high_log_playtime = 2 # this kills the raider
+
+[afk]
+time = 1500 # 25m
+confirm_timeout = 90 # 1.5m

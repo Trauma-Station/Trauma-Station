@@ -153,7 +153,7 @@ public sealed partial class GuardianSystem : EntitySystem
 
     private void OnGuardianAttackAttempt(Entity<GuardianComponent> ent, ref AttackAttemptEvent args)
     {
-        if (args.Cancelled || args.Target != ent.Comp.Host)
+        if (args.Cancelled || args.Target != ent.Comp.Host || ent.Comp.Host == null) // Trauma - add null host check
             return;
 
         _popup.PopupPredictedCursor(Loc.GetString("guardian-attack-host"), ent.Owner, PopupType.LargeCaution);
@@ -267,6 +267,7 @@ public sealed partial class GuardianSystem : EntitySystem
         if (TryComp<GuardianComponent>(guardian, out var guardianComp))
         {
             guardianComp.Host = args.Args.Target.Value;
+            Dirty(guardian, guardianComp); // Trauma - networking for babbies
             _audio.PlayPredicted(ent.Comp.UsedSound,
                 ent.Owner,
                 args.Args.Target);

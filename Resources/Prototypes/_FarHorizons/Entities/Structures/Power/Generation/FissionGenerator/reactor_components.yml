@@ -107,11 +107,11 @@
 - type: entity
   parent: [ BaseReactorFuelRod, BaseNuclearPropertiesPlasma ]
   id: PlasmaReactorFuelRod
-  name: plasma fuel rod
+  name: phoron fuel rod
   components:
   - type: ReactorPart
-    # assume plasma is 1.4kJ/kgK and 3kg/L
-    # 0.45 kg of plasma -> 630 J/K
+    # assume phoron is 1.4kJ/kgK and 3kg/L
+    # 0.45 kg of phoron -> 630 J/K
     thermalMass: 2289
 
 - type: entity
@@ -152,7 +152,7 @@
     neutronCrossSection: 0.2 # decent
     reflectChance: 0.8
     # 6 kg of steel -> 2520 J/K
-    # 0.75 kg of plasma -> 1040 J/K
+    # 0.75 kg of phoron -> 1040 J/K
     thermalMass: 5250
   - type: PhysicalComposition
     materialComposition:
@@ -297,9 +297,9 @@
   name: plasteel gas channel rod
   components:
   - type: ReactorPart
-    # plasteel is half plasma half steel by volume
+    # plasteel is half phoron half steel by volume
     # 4 kg of steel -> 1680 J/K
-    # 1.5 kg of plasma -> 2100 J/K
+    # 1.5 kg of phoron -> 2100 J/K
     thermalMass: 5460
   - type: PhysicalComposition
     materialComposition:
@@ -323,11 +323,11 @@
 - type: entity
   parent: [ BaseReactorGasChannel, BaseNuclearPropertiesPlasmaGlass ]
   id: PlasmaGlassReactorGasChannel
-  name: plasma glass gas channel rod
+  name: phoron glass gas channel rod
   components:
   - type: ReactorPart
-    # half plasma half glass by volume
-    # 1.5 kg of plasma -> 2100 J/K
+    # half phoron half glass by volume
+    # 1.5 kg of phoron -> 2100 J/K
     # 1.1 kg of glass -> 825 J/K
     thermalMass: 4605
   - type: PhysicalComposition
@@ -426,7 +426,7 @@
   components:
   - type: ReactorPart
     # 3 kg of steel -> 1244 J/K
-    # 1.1 kg of plasma -> 1540 J/K
+    # 1.1 kg of phoron -> 1540 J/K
     thermalMass: 4464
   - type: PhysicalComposition
     materialComposition:
@@ -449,11 +449,11 @@
 - type: entity
   parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesPlasmaGlass ]
   id: PlasmaGlassReactorHeatExchanger
-  name: plasma glass heat exchanger rod
+  name: phoron glass heat exchanger rod
   components:
   - type: ReactorPart
     # 0.8 kg of glass -> 619 J/K
-    # 1.1 kg of plasma -> 1540 J/K
+    # 1.1 kg of phoron -> 1540 J/K
     thermalMass: 3839
   - type: PhysicalComposition
     materialComposition:

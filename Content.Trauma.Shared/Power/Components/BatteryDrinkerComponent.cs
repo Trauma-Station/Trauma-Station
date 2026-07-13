@@ -1,22 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Whitelist; // Goobstation - Energycrit
+using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Power.Components;
 
-// Goobstation - Moved from EE server to EE shared
 [RegisterComponent]
 public sealed partial class BatteryDrinkerComponent : Component
 {
-    // Goobstation - Energycrit: Remove DrinkAll
-    /*
-    /// <summary>
-    ///     Is this drinker allowed to drink batteries not tagged as <see cref="BatteryDrinkSource"/>?
-    /// </summary>
-    [DataField]
-    public bool DrinkAll;
-    */
-
     /// <summary>
     ///     How long it takes to drink from a battery, in seconds.
     ///     Is multiplied by the source.
@@ -31,16 +21,6 @@ public sealed partial class BatteryDrinkerComponent : Component
     [DataField]
     public float DrinkMultiplier = 5f;
 
-    // Goobstation - Energycrit: Remove DrinkAll
-    /*
-    /// <summary>
-    ///     The multiplier for how long it takes to drink a non-source battery, if <see cref="DrinkAll"/> is true.
-    /// </summary>
-    [DataField]
-    public float DrinkAllMultiplier = 2.5f;
-    */
-
-    // Goobstation - Energycrit: BatteryDrinker blacklist.
     /// <summary>
     ///     Blacklist for battery containers that can not be drank from.
     /// </summary>

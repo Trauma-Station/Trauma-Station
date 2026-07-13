@@ -11405,3 +11405,61 @@ Entries:
   id: 1260
   time: '2026-07-11T01:27:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3512
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Viewcone decrease on masks and helmets lowered.
+  - type: Remove
+    message: Berets no longer increase viewcone.
+  - type: Tweak
+    message: Sec/ert/syndi/swat/half gas masks no longer modify your viewcone.
+  - type: Tweak
+    message: Flesh worm now has 360 degree vision.
+  id: 1261
+  time: '2026-07-11T14:46:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3517
+- author: ImWeax
+  changes:
+  - type: Add
+    message: You can now drink bleach to kill gutworms.
+  - type: Add
+    message: You can also take actual deworming medicine.
+  id: 1262
+  time: '2026-07-11T20:49:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3399
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mail tearing not stopping if you moved the mail away
+  - type: Fix
+    message: IPC battery alert now works, and battery draining is predicted.
+  - type: Fix
+    message: >-
+      Fixed wing fang chu recipe using 83ml of soy sauce (2.9 oz) now its just 1
+      packet's worth.
+  - type: Fix
+    message: Fixed decapoids and plasmamen using human sounds.
+  id: 1263
+  time: '2026-07-12T22:03:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3533
+- author: Aineias1
+  changes:
+  - type: Tweak
+    message: Re-rotated atlas, amber, cluster, omega and packed temporarily.
+  id: 1264
+  time: '2026-07-12T22:09:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3528
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to transform faith/iradomini into other nullrods.
+  id: 1265
+  time: '2026-07-12T23:38:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3539
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed detailed examine items in chat rendering badly.
+  id: 1266
+  time: '2026-07-13T02:03:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3540
