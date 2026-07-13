@@ -21,6 +21,9 @@ public readonly record struct IncrementHereticObjectiveProgressEvent(EntProtoId 
 public readonly record struct SpawnHereticInfluenceEvent(int Amount = 1);
 
 [ByRefEvent]
+public record struct HereticBladeBreakFailOverrideEvent(EntityUid User, bool ShouldShatter = false);
+
+[ByRefEvent]
 public readonly record struct UserInvokeTouchSpellEvent;
 
 [DataDefinition]

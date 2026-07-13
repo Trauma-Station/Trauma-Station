@@ -20,10 +20,6 @@
       - HereticRitualRune # This is handled by HereticRitualSystem, blacklisting rune makes it so grasp doesn't disappear when interacting with it.
       - MawedCrucible # Requires for anchoring/unanchoring of the crucible with a grasp
   - type: MansusGrasp
-  - type: BlockContextMenu
-    whitelist:
-      components:
-      - MobState
   - type: MeleeWeapon
     clickAttackWhitelist:
       components:

@@ -1,32 +1,49 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
-public sealed partial class UnfathomableCurioShieldComponent : BaseSpriteOverlayComponent
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+public sealed partial class UnfathomableCurioShieldComponent : Component
 {
-    public override Enum Key { get; set; } = CurioShieldKey.Key;
+    [DataField]
+    public Color Color = Color.LimeGreen;
 
     [DataField]
-    public override SpriteSpecifier? Sprite { get; set; } =
-        new SpriteSpecifier.Rsi(new ResPath("_Goobstation/Heretic/Effects/effects.rsi"), "unfathomable_shield");
+    public TimeSpan ActivateDelay = TimeSpan.FromSeconds(20);
 
     [DataField]
-    public override Color Color { get; set; } = Color.LimeGreen;
-
-    public override bool Unshaded { get; set; } = false;
+    public TimeSpan FadeTime = TimeSpan.FromMilliseconds(500);
 
     [DataField, AutoNetworkedField]
-    public override bool Active { get; set; }
+    public bool Active;
 
-    [DataField]
-    public TimeSpan ActivateDelay = TimeSpan.FromSeconds(30);
-
+    /// <summary>
+    /// Time when shield did or will activate
+    /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
     public TimeSpan ActivateTime;
+
+    /// <summary>
+    /// Time when shield did deactivate
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
+    public TimeSpan DeactivateTime;
+
+    [DataField]
+    public float SlowdownRadius = 1.5f;
+
+    [DataField]
+    public float BulletSlowdown = 0.02f;
+
+    [DataField]
+    public EntityWhitelist BulletWhitelist = new()
+    {
+        Components = new[] { "Projectile" },
+    };
 
     [DataField]
     public SoundSpecifier RechargeSound = new SoundPathSpecifier("/Audio/Magic/forcewall.ogg")
@@ -39,9 +56,4 @@ public sealed partial class UnfathomableCurioShieldComponent : BaseSpriteOverlay
     {
         Params = AudioParams.Default.WithVolume(-3f)
     };
-}
-
-public enum CurioShieldKey : byte
-{
-    Key,
 }

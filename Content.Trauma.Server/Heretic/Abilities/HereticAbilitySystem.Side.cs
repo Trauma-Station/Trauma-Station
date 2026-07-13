@@ -115,17 +115,18 @@ public sealed partial class HereticAbilitySystem
 
         args.Handled = true;
 
-        if (!args.Target.IsValid(EntityManager))
+        if (!args.Target.IsValid())
             return;
 
-        Spawn(args.Effect, args.Target);
+        var coords = Transform(args.Target).Coordinates;
+        Spawn(args.Effect, coords);
 
         var hasTargets = false;
 
         TryComp(args.Performer, out DamageableComponent? damageable);
 
         _bloodStealTargets.Clear();
-        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, args.Target))
+        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, coords))
         {
             if (target == args.Performer)
                 continue;

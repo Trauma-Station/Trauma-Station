@@ -53,7 +53,7 @@ knowledge-path-lock-armor-desc =
     Familiarity is treachery, even to oneself.
 
     Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise.
-    It grants you camouflage from cameras, hides your voice and muffles your footsteps.
+    It grants you camouflage from cameras, makes you invisible for people far away, hides your voice and muffles your footsteps.
     Acts as a focus while hooded.
     Unlocks tier 2 passive ability upgrade when transmuted.
 

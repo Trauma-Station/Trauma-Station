@@ -4,6 +4,9 @@
 using System.Linq;
 using Content.Goobstation.Common.BlockTeleport;
 using Content.Goobstation.Common.Weapons;
+using Content.Shared.Actions.Components;
+using Content.Shared.Charges.Components;
+using Content.Shared.Charges.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Components;
 using Content.Shared.EntityEffects;
@@ -15,6 +18,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Shared.Heretic.Components;
@@ -49,26 +53,15 @@ public sealed partial class HereticBladeSystem : EntitySystem
     [Dependency] private SharedSanguineStrikeSystem _sanguine = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedChargesSystem _charges = default!;
 
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    [Dependency] private EntityQuery<HereticActionBladeBreakRechargeComponent> _bladeBreakRechargeQuery = default!;
+    [Dependency] private EntityQuery<LimitedChargesComponent> _limitedQuery = default!;
 
-        SubscribeLocalEvent<HereticBladeComponent, UseInHandEvent>(OnInteract);
-        SubscribeLocalEvent<HereticBladeComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<HereticBladeComponent, MeleeHitEvent>(OnMeleeHit);
-        SubscribeLocalEvent<HereticBladeComponent, GetLightAttackRangeEvent>(OnGetRange);
-        SubscribeLocalEvent<HereticBladeComponent, LightAttackSpecialInteractionEvent>(OnSpecial);
-        SubscribeLocalEvent<HereticBladeComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<HereticBladeComponent, HereticBladeBonusDamageEvent>(OnDamageBonus);
-        SubscribeLocalEvent<HereticBladeComponent, HereticBladeBonusWoundingEvent>(OnWoundingBonus);
-        SubscribeLocalEvent<HereticBladeComponent, CosmosBladeBonusEvent>(OnCosmosBlade);
-        SubscribeLocalEvent<HereticBladeComponent, BladeBladeBonusEvent>(OnBladeBlade);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBladeBlade(Entity<HereticBladeComponent> ent, ref BladeBladeBonusEvent args)
     {
         args.Args.BonusDamage += args.BonusDamage;
@@ -89,6 +82,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
         _sanguine.LifeSteal((user, dmg), heal);
     }
 
+    [SubscribeLocalEvent]
     private void OnCosmosBlade(Entity<HereticBladeComponent> ent, ref CosmosBladeBonusEvent args)
     {
         args.Args.BonusDamage += args.BonusDamage;
@@ -101,6 +95,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
         _combo.ComboProgress(args.Args.User, args.PathStage, hitEnts);
     }
 
+    [SubscribeLocalEvent]
     private void OnWoundingBonus(Entity<HereticBladeComponent> ent, ref HereticBladeBonusWoundingEvent args)
     {
         var stage = args.PathStage;
@@ -117,11 +112,13 @@ public sealed partial class HereticBladeSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageBonus(Entity<HereticBladeComponent> ent, ref HereticBladeBonusDamageEvent args)
     {
         args.Args.BonusDamage += args.BonusDamage;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetRange(Entity<HereticBladeComponent> ent, ref GetLightAttackRangeEvent args)
     {
         if (args.Target == null)
@@ -166,7 +163,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
     }
 
     // Void seeking blade
-
+    [SubscribeLocalEvent]
     private void OnSpecial(Entity<HereticBladeComponent> ent, ref LightAttackSpecialInteractionEvent args)
     {
         if (args.Target == null)
@@ -176,6 +173,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
             args.Cancel = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<HereticBladeComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Target == null)
@@ -265,14 +263,40 @@ public sealed partial class HereticBladeSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
+    private void OnInteract(Entity<ActionsContainerComponent> ent, ref HereticBladeBreakFailOverrideEvent args)
+    {
+        foreach (var action in ent.Comp.Container.ContainedEntities)
+        {
+            if (!_limitedQuery.TryComp(action, out var limited) || limited.LastCharges >= limited.MaxCharges)
+                continue;
+
+            if (!_bladeBreakRechargeQuery.TryComp(action, out var rechargeComp))
+                continue;
+
+            _charges.AddCharges((action, limited), rechargeComp.ChargeGain);
+            _popup.PopupEntity(Loc.GetString("heretic-blade-break-spell-recharge-message", ("spell", action)),
+                args.User,
+                args.User);
+            args.ShouldShatter = true;
+            return;
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnInteract(Entity<HereticBladeComponent> ent, ref UseInHandEvent args)
     {
-        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out _))
+        if (!_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
         if (!heretic.CanBreakBlade)
         {
-            _popup.PopupClient(Loc.GetString("heretic-blade-break-fail-message"), args.User, args.User);
+            var overrideEv = new HereticBladeBreakFailOverrideEvent(args.User);
+            RaiseLocalEvent(mind, ref overrideEv);
+            if (overrideEv.ShouldShatter)
+                ShatterBlade(ent, args.User);
+            else
+                _popup.PopupEntity(Loc.GetString("heretic-blade-break-fail-message"), args.User, args.User);
             return;
         }
 
@@ -285,12 +309,18 @@ public sealed partial class HereticBladeSystem : EntitySystem
             return;
 
         _teleport.RandomTeleport(args.User, rtp, sound: false, user: args.User);
-        PredictedQueueDel(ent);
-        _audio.PlayPredicted(ent.Comp.ShatterSound, args.User, args.User);
-        _popup.PopupClient(Loc.GetString("heretic-blade-use"), args.User, args.User);
+        ShatterBlade(ent, args.User);
+        _popup.PopupEntity(Loc.GetString("heretic-blade-use"), args.User, args.User);
         args.Handled = true;
     }
 
+    private void ShatterBlade(Entity<HereticBladeComponent> ent, EntityUid user)
+    {
+        PredictedQueueDel(ent);
+        _audio.PlayPredicted(ent.Comp.ShatterSound, user, user);
+    }
+
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<HereticBladeComponent> ent, ref ExaminedEvent args)
     {
         if (!HasComp<RandomTeleportComponent>(ent))
@@ -302,18 +332,19 @@ public sealed partial class HereticBladeSystem : EntitySystem
         args.PushMarkup(Loc.GetString("heretic-blade-examine"));
     }
 
+    [SubscribeLocalEvent]
     private void OnMeleeHit(Entity<HereticBladeComponent> ent, ref MeleeHitEvent args)
     {
-        if (!args.IsHit || ent.Comp.Path == null)
+        if (!args.IsHit)
             return;
 
-        _heretic.TryGetHereticComponent(args.User, out var hereticComp, out _);
+        ApplyBladeHitEffects(ent, args.User, args.HitEntities, out var heretic);
 
         if (TryComp(args.User, out HereticBladeUserBonusDamageComponent? bonus) &&
             (bonus.Path == null || bonus.Path == ent.Comp.Path))
         {
             args.BonusDamage += args.BaseDamage * bonus.BonusMultiplier;
-            if (hereticComp == null)
+            if (heretic == null)
             {
                 foreach (var hit in args.HitEntities)
                 {
@@ -322,26 +353,41 @@ public sealed partial class HereticBladeSystem : EntitySystem
             }
         }
 
-        if (hereticComp == null || ent.Comp.Path != hereticComp.CurrentPath)
-            return;
-
-        if (hereticComp.PathStage >= 7 && ent.Comp.BonusEvent is { } ev)
+        if (heretic?.PathStage >= 7 && ent.Comp.BonusEvent is { } ev)
         {
             ev.Args = args;
-            ev.PathStage = hereticComp.PathStage;
+            ev.PathStage = heretic.PathStage;
             RaiseLocalEvent(ent, (object) ev);
         }
+    }
 
-        foreach (var hit in args.HitEntities)
+    [SubscribeLocalEvent]
+    private void OnThrowHit(Entity<HereticBladeComponent> ent, ref ThrowDoHitEvent args)
+    {
+        if (args.Component.Thrower is { } user && HasComp<DamageOtherOnHitComponent>(ent))
+            ApplyBladeHitEffects(ent, user, new List<EntityUid>() { args.Target }, out _);
+    }
+
+    private void ApplyBladeHitEffects(Entity<HereticBladeComponent> ent, EntityUid user, IReadOnlyList<EntityUid> targets, out HereticComponent? heretic)
+    {
+        _heretic.TryGetHereticComponent(user, out heretic, out _);
+
+        if (ent.Comp.Path == null)
+            return;
+
+        if (heretic == null || ent.Comp.Path != heretic.CurrentPath)
+            return;
+
+        foreach (var hit in targets)
         {
-            if (hit == args.User)
+            if (hit == user)
                 continue;
 
             if (TryComp<HereticCombatMarkComponent>(hit, out var mark))
-                _combatMark.ApplyMarkEffect(hit, mark, args.User);
+                _combatMark.ApplyMarkEffect(hit, mark, user);
 
-            if (hereticComp.PathStage >= 7)
-                ApplySpecialEffect(args.User, hit, ent);
+            if (heretic.PathStage >= 7)
+                ApplySpecialEffect(user, hit, ent);
         }
     }
 }

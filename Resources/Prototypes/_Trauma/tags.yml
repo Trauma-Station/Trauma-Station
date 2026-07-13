@@ -237,6 +237,9 @@
   id: SpaceWhaleSegment # Prevents space whale tail self collision
 
 - type: Tag
+  id: SharpMedal # Heretic - Sharp Medal item, used for blades boomerang throw logic
+
+- type: Tag
   id: SpellIgnoreForestAdmonitions # Heretic: Action tag that prevents revealing forest admonitions cloak when used, normally it does reveal
 
 - type: Tag

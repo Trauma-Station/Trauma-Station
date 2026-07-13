@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Trauma.Common.Throwing;
+// </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Coordinates;
@@ -45,8 +48,15 @@ public abstract partial class SharedDamageOtherOnHitSystem
         if (TerminatingOrDeleted(args.Target))
             return;
 
-        if (args.Target == args.Component.Thrower) // Goobstation - Mjolnir
+        // <Trauma>
+        if (args.Target == args.Component.Thrower)
             return;
+
+        var attemptEv = new DamageOtherOnHitAttemptEvent();
+        RaiseLocalEvent(uid, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // </Trauma>
 
         var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances,
             origin: args.Component.Thrower, increaseOnly: component.IncreaseOnly);

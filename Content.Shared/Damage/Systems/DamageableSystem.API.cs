@@ -157,7 +157,7 @@ public sealed partial class DamageableSystem
         if (damage.Empty)
             return damageDone;
 
-        var before = new BeforeDamageChangedEvent(damage, origin,
+        var before = new BeforeDamageChangedEvent(damage, ent, origin, // Trauma - added ent
             false, canBeCancelled, targetPart); // Shitmed
         RaiseLocalEvent(ent, ref before);
 

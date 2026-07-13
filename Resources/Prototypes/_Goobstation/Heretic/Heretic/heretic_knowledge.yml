@@ -449,15 +449,10 @@
     - type: MovementAlwaysTouching
     - type: CanMoveInAir
     - type: NoSlip
-    # TODO clientside light instead of thermals
-    - type: ThermalVision
-      color: "#b4babf"
-      isActive: true
-      lightRadius: 7.5
-      flashDurationMultiplier: 1
-      activateSound: null
-      deactivateSound: null
-      thermalShader: null
+    - type: NightVision
+      lightingColor: "#b4babf33"
+      prioritized: false
+      relayOverlay: false # In case default value ever changes
 
 ## rust path
 - type: hereticKnowledge
@@ -796,12 +791,6 @@
   - RitualMaskOfMadness
 
 - type: hereticKnowledge
-  id: UnfathomableCurio
-  stage: 4
-  ritualPrototypes:
-  - RitualUnfathomableCurio
-
-- type: hereticKnowledge
   id: EldritchCoin
   stage: 4
   ritualPrototypes:
@@ -814,6 +803,12 @@
   - RitualIceSpear
 
 ## T2
+- type: hereticKnowledge
+  id: UnfathomableCurio
+  stage: 5
+  ritualPrototypes:
+  - RitualUnfathomableCurio
+
 - type: hereticKnowledge
   id: RustedRitual
   stage: 5
@@ -904,3 +899,9 @@
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ForestAdmonitions
+
+- type: hereticKnowledge
+  id: SharpMedal
+  stage: 7
+  ritualPrototypes:
+  - RitualSharpMedal
