@@ -93,15 +93,11 @@ public struct CustomRichTextEntry
             if (!tagManager.TryGetMarkupTagHandler(node.Name, _tagsAllowed, out var handler) || !handler.TryCreateControl(node, out var control))
                 continue;
 
-            // Markup tag handler instances are shared across controls. We need to ensure that the hanlder doesn't
+            // Markup tag handler instances are shared across controls. We need to ensure that the handler doesn't
             // store state information and return the same control for each rich text entry.
             DebugTools.Assert(handler.TryCreateControl(node, out var other) && other != control);
 
             parent.Children.Add(control);
-            // StaticSprite
-            var controlTyped = control as StaticSpriteView;
-            if (controlTyped is not null)
-                control.Visible = false;
 
             tagControls ??= new Dictionary<int, Control>();
             tagControls.Add(nodeIndex, control);
@@ -231,14 +227,9 @@ public struct CustomRichTextEntry
     {
         if (Controls == null)
             return;
+
         foreach (var control in Controls.Values)
         {
-            var controlTyped = control as StaticSpriteView;
-            if (controlTyped is not null)
-            {
-                controlTyped.IsVisible = false;
-                continue;
-            }
             control.Visible = false;
         }
     }
@@ -316,10 +307,8 @@ public struct CustomRichTextEntry
         var lineBreakIndex = 0;
         var baseLine = drawBox.TopLeft + new Vector2(margin - sPixelWidth, defaultFont.GetAscent(uiScale) + verticalOffset);
         var baseLineBase = baseLine;
-        var controlYAdvance = 0f;
 
         var screenHandle = (DrawingHandleScreen) handle;
-
 
         var nodeIndex = -1;
         foreach (var node in Message)
@@ -337,8 +326,7 @@ public struct CustomRichTextEntry
                 if (lineBreakIndex < LineBreaks.Count &&
                     LineBreaks[lineBreakIndex] == globalBreakCounter)
                 {
-                    baseLine = new Vector2(drawBox.Left + margin - sPixelWidth, baseLine.Y + GetLineHeight(font, uiScale, lineHeightScale) + controlYAdvance);
-                    controlYAdvance = 0;
+                    baseLine = new Vector2(drawBox.Left + margin - sPixelWidth, baseLine.Y + GetLineHeight(font, uiScale, lineHeightScale));
                     lineBreakIndex += 1;
                 }
 
@@ -353,18 +341,13 @@ public struct CustomRichTextEntry
 
             // Controls may have been previously hidden via HideControls due to being "out-of frame".
             // If this ever gets replaced with RectClipContents / scissor box testing, this can be removed.
-            var staticSprite = control as StaticSpriteView;
-            if (staticSprite is not null)
-                staticSprite.IsVisible = true;
-            else
-                control.Visible = true;
+            control.Visible = true;
 
             var invertedScale = 1f / uiScale;
             var pos = new Vector2(baseLine.X * invertedScale, (baseLine.Y - defaultFont.GetAscent(uiScale)) * invertedScale);
             LayoutContainer.SetPosition(control, pos);
             control.Measure(new Vector2(Width, Height));
-            if (staticSprite is not null &&
-                staticSprite.IsVisible &&
+            if (control is StaticSpriteView staticSprite &&
                 staticSprite.Entity is not null &&
                 _entManager.TryGetComponent<MetaDataComponent>(staticSprite.Entity, out var metaData) &&
                 _entManager.TryGetComponent<SpriteComponent>(staticSprite.Entity, out var spriteComp) &&
@@ -393,7 +376,6 @@ public struct CustomRichTextEntry
             }
 
             var advanceX = control.DesiredSize.X + control.Margin.Right;
-            controlYAdvance = Math.Max(0f, (control.DesiredPixelSize.Y - GetLineHeight(font, uiScale, lineHeightScale)) * invertedScale);
             baseLine.X += advanceX;
         }
 
