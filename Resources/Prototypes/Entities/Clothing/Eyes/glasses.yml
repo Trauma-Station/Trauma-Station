@@ -315,15 +315,12 @@
       - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase, BaseHighlyIllegalContraband]
+  parent: [ClothingEyesBase, BaseNightVisionGoggles, BaseHighlyIllegalContraband] # Trauma - give it night vision
   id: ClothingEyesVisorNinja
   name: ninja visor
   description: An advanced visor protecting a ninja's eyes from flashing lights.
   components:
   # <Trauma>
-  - type: NightVision
-    overlayColor: "#98FB9833"
-    relayOverlay: true
   - type: Armor
     coverage:
     - Head
