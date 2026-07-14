@@ -4,6 +4,7 @@ using Content.Server.DoAfter;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Jittering;
 using Content.Server.Popups;
+using Content.Goobstation.Shared.Changeling.Components;
 using Content.Trauma.Shared.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Larva;
 using Content.Shared.DoAfter;
@@ -84,6 +85,6 @@ public sealed partial class XenomorphLarvaSystem : EntitySystem
             return;
 
         _container.Remove(uid, container);
-        _gibbing.Gib(victim);
+        EnsureComp<AbsorbedComponent>(victim);
     }
 }
