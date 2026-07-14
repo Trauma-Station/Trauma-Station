@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Actions;
+using Content.Shared.Blocking.Components;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -41,9 +42,9 @@ public sealed partial class BlockingSystem : EntitySystem
     [Dependency] private TurfSystem _turf = default!;
 
     [Dependency] private EntityQuery<BlockingComponent> _blockQuery = default!;
+    [Dependency] private EntityQuery<BlockingUserComponent> _userQuery = default!;
     [Dependency] private EntityQuery<HandsComponent> _handQuery = default!;
     [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
-    [Dependency] private EntityQuery<BlockingUserComponent> _userQuery = default!;
 
     public override void Initialize()
     {
@@ -197,13 +198,13 @@ public sealed partial class BlockingSystem : EntitySystem
             return false;
         }
         _actionsSystem.SetToggled(component.BlockingToggleActionEntity, true);
-        _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
+        _popupSystem.PopupEntity(msgUser, msgOther, user, user);
 
         if (TryComp<PhysicsComponent>(user, out var physicsComponent))
         {
             _fixtureSystem.TryCreateFixture(user,
                 component.Shape,
-                BlockingComponent.BlockFixtureID,
+                BlockingComponent.BlockFixtureId,
                 hard: true,
                 collisionLayer: (int)CollisionGroup.WallLayer,
                 body: physicsComponent);
@@ -218,13 +219,13 @@ public sealed partial class BlockingSystem : EntitySystem
     private void CantBlockError(EntityUid user)
     {
         var msgError = Loc.GetString("action-popup-blocking-user-cant-block");
-        _popupSystem.PopupClient(msgError, user, user);
+        _popupSystem.PopupEntity(msgError, user, user);
     }
 
     private void TooCloseError(EntityUid user)
     {
         var msgError = Loc.GetString("action-popup-blocking-user-too-close");
-        _popupSystem.PopupClient(msgError, user, user);
+        _popupSystem.PopupEntity(msgError, user, user);
     }
 
     /// <summary>
@@ -256,9 +257,9 @@ public sealed partial class BlockingSystem : EntitySystem
                 _transformSystem.Unanchor(user, xform, false);
 
             _actionsSystem.SetToggled(component.BlockingToggleActionEntity, false);
-            _fixtureSystem.DestroyFixture(user, BlockingComponent.BlockFixtureID, body: physicsComponent);
+            _fixtureSystem.DestroyFixture(user, BlockingComponent.BlockFixtureId, body: physicsComponent);
             _physics.SetBodyType(user, blockingUserComponent.OriginalBodyType, body: physicsComponent);
-            _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
+            _popupSystem.PopupEntity(msgUser, msgOther, user, user);
         }
 
         component.IsBlocking = false;
@@ -297,15 +298,17 @@ public sealed partial class BlockingSystem : EntitySystem
         component.User = null;
     }
 
+    private DamageModifierSet GetBlockingModifier(Entity<BlockingComponent> entity)
+    {
+        return entity.Comp.IsRaised ? entity.Comp.ActiveBlockModifier ?? entity.Comp.PassiveBlockModifier : entity.Comp.PassiveBlockModifier;
+    }
+
     private void OnVerbExamine(EntityUid uid, BlockingComponent component, GetVerbsEvent<ExamineVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        var fraction = component.IsBlocking ? component.ActiveBlockFraction : component.PassiveBlockFraction;
-        if (!_toggle.IsActivated(uid)) // Goobstation
-            fraction = 0f;
-        var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
+        var modifier = GetBlockingModifier((uid, component));
 
         var msg = new FormattedMessage();
         msg.AddMarkupOrThrow(Loc.GetString("blocking-fraction-trauma", ("value", MathF.Round(fraction * 100, 1)))); // Trauma - use custom examine

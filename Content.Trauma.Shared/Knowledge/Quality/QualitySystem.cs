@@ -162,7 +162,7 @@ public sealed partial class QualitySystem : EntitySystem
         ent.Comp.PassiveBlockFraction *= modifierPlus;
         ent.Comp.ActiveBlockFraction *= modifierPlus;
 
-        if (ent.Comp.PassiveBlockDamageModifer is { } passive)
+        if (ent.Comp.PassiveBlockModifier is { } passive)
         {
             foreach (var (key, number) in passive.Coefficients)
             {
@@ -174,7 +174,7 @@ public sealed partial class QualitySystem : EntitySystem
             }
         }
 
-        if (ent.Comp.ActiveBlockDamageModifier is { } active)
+        if (ent.Comp.ActiveBlockModifier is { } active)
         {
             foreach (var (key, number) in active.Coefficients)
             {
