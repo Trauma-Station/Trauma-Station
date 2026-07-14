@@ -69,6 +69,7 @@
   ## Mansus Grasp
 
   A powerful spell that garbles target speech, knocks them down and deals 40 stamina damage. It has additional effects based on your chosen path.
+  [color=red]Important:[/color] Mansus Grasp cannot be used by clicking a mob using context menu. But it works in [color=red]Combat Mode[/color], Left click in combat mode only affects mobs, and right click acts like left click, but affects everything. Note that Mansus Grasp cannot miss.
 
   ## The Heretic Blade
 
@@ -122,7 +123,6 @@ Once the aura appears, there is no hiding what you are. Plan accordingly.
   ## Tips
   - All heretic blades penetrate armor to some extent, trigger marks, and can be used in hand to teleport away from danger.
   - Your Mansus Grasp will temporarily garble the speech of people who you use it on. This can let you get away with murder while comms are online. It also breaks their suit sensors temporarily, making them invisible on crew monitors.
-  - Mansus grasp and other touch spells work in [color=red]Combat Mode[/color], Left click in combat mode only affects mobs, and right click acts like left click, but affects everything.
   - Your blade and your mark act as surgery tools. You can use them to extract organs from people or heal yourself as a last resort.
   - Your blade creation ritual has a limited amount of blades you can create. 2 for most paths and 4 for blade path. Performing this ritual again, while limit is reached, will instead teleport one of your lost blades on the transmutation rune.
   - Need vomit for rituals? Spin or do a flip multiple times in a quick succession to make yourself vomit.
