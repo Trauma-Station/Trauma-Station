@@ -1,3 +1,4 @@
+using Content.Trauma.Common.CCVar; // Trauma
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -276,7 +277,8 @@ namespace Content.Server.Voting.Managers
 
             if (alone)
                 options.InitiatorTimeout = TimeSpan.FromSeconds(10);
-            // <Trauma> - only allow calling map vote when it matters
+            // <Trauma> 
+            // Only allow calling map vote when it matters
             var roundEnd = _entityManager.System<RoundEndSystem>();
             if (_gameTicker?.RunLevel == GameRunLevel.InRound && !roundEnd.IsRoundEndRequested())
             {
@@ -288,6 +290,12 @@ namespace Content.Server.Voting.Managers
                 }
                 return;
             }
+            // Trim the vote options
+            var maxCount = _cfg.GetCVar(TraumaCVars.MapVoteOptions);
+            while (maps.Count > maxCount)
+                maps.Remove(_random.Pick(maps.Keys));
+
+            options.Options.Add(("Random", "Random")); // This is kinda evil but it's the best way I can think of
             // </Trauma>
 
             foreach (var (k, v) in maps)
@@ -308,6 +316,15 @@ namespace Content.Server.Voting.Managers
                     _chatManager.DispatchServerAnnouncement(
                         Loc.GetString("ui-vote-map-tie", ("picked", maps[picked])));
                 }
+                // <Trauma>
+                else if (args.Winner is string winner && winner == "Random")
+                {
+                    // Random map voted, select random elgigible map
+                    picked = _random.Pick((IReadOnlyList<GameMapPrototype>) _gameMapManager.CurrentlyEligibleMaps());
+                    _chatManager.DispatchServerAnnouncement(
+                        Loc.GetString("ui-vote-map-random", ("picked", picked.MapName)));
+                }
+                // </Trauma>
                 else
                 {
                     picked = (GameMapPrototype) args.Winner;
