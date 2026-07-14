@@ -1816,8 +1816,8 @@
   name: Priest's Ritual
   components:
   - type: Sprite
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
+    sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi
+    state: icon
   - type: HereticRitual
     effects:
     - !type:LookupRitualEffect

@@ -7,6 +7,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Map;
 using Content.Trauma.Common.Throwing;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Item;
 
 namespace Content.Goobstation.Shared.Boomerang;
 
@@ -28,7 +29,14 @@ public sealed partial class BoomerangSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnAttempt(Entity<BoomerangComponent> ent, ref DamageOtherOnHitAttemptEvent args)
+    private void OnPickUpAttempt(Entity<BoomerangComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (ent.Comp.Thrower is { } thrower && args.User != thrower)
+            args.Cancel();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnBeforeDamageOnHit(Entity<BoomerangComponent> ent, ref BeforeDamageOtherOnHitEvent args)
     {
         if (ent.Comp.IsReturning)
             args.Cancelled = true;
@@ -110,11 +118,8 @@ public sealed partial class BoomerangSystem : EntitySystem
 
         if (distance < ent.Comp.PickupDistance)
         {
-            // if we fail to pick up throw with no user so it can hit you
-            if (!_handsSystem.TryPickup(thrower, ent))
-                _toThrow.Add((ent, throwerXform.Coordinates, ent.Comp.ReturnSpeed, null));
-
             SetThrower(ent, null); // don't throw it anymore
+            _handsSystem.TryPickup(thrower, ent);
             return;
         }
 

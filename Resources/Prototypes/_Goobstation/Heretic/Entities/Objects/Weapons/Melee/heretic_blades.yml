@@ -54,6 +54,9 @@
         armorPenetration: 0.3
         woundSeverityMultipliers:
           Slash: 1.5
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+      forceSound: true
     - type: ItemToggleOnTrigger
       keysIn: [deactivate]
       canActivate: false
@@ -156,7 +159,7 @@
   components:
   - type: HereticBlade
     bonusEvent: !type:BladeBladeBonusEvent
-      bonusDamage:
+      extraDamage:
         types:
           Structural: 10
     path: Blade
@@ -265,7 +268,7 @@
   components:
   - type: HereticBlade
     bonusEvent: !type:HereticBladeBonusDamageEvent
-      bonusDamage:
+      extraDamage:
         types:
           Poison: 8
     effects:
@@ -307,7 +310,7 @@
   components:
   - type: HereticBlade
     bonusEvent: !type:CosmosBladeBonusEvent
-      bonusDamage:
+      extraDamage:
         types:
           Heat: 5
     effects:

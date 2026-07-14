@@ -24,3 +24,9 @@ public sealed class ActiveFishingSpotComponentState : ComponentState
         AttachedFishingLure = attachedFishingLure;
     }
 }
+
+/// <summary>
+/// Raised on a fish reward entity when spawned by fishing
+/// </summary>
+[ByRefEvent]
+public readonly record struct FishCaughtEvent(EntityUid Fish, EntityUid User);

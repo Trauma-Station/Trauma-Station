@@ -24,7 +24,7 @@
   id: HereticSideT1Flask
   name: knowledge-path-side-t1-flask-name
   description: knowledge-path-side-t1-flask-desc
-  icon: { sprite: _Goobstation/Heretic/items.rsi, state: eldritch_flask }
+  icon: { sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
