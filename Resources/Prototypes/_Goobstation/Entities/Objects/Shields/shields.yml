@@ -41,6 +41,7 @@
           shader: unshaded
           map: [ "shield" ]
     - type: Item
+      sprite: _Goobstation/Objects/Shields/blueshieldshield.rsi
       size: Large
     - type: UseDelay
       delay: 0.5
