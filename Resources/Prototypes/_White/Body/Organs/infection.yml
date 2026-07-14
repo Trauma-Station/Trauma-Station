@@ -102,6 +102,6 @@
         damage:
           types:
             Blunt: 1000
-            Pierce: 1000
+            Piercing: 1000
       - !type:Jitter
         time: 16
