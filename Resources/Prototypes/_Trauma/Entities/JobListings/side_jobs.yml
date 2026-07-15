@@ -192,7 +192,7 @@
 - type: entity
   parent: [ BaseExtremeSideJob, BaseKillObjective ]
   id: KillHeadSideJob
-  description: This is no longer about contract killing - we need to make Nanotrasen afraid. Kill one of them.
+  description: This is no longer about contract killing - we need to make Nanotrasen afraid. Kill one of them. Kill a head of staff.
   components:
   - type: SideJob
     repeatable: true
@@ -206,3 +206,27 @@
       whitelist:
         components:
         - CommandStaff
+
+# final
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseFinalSideJob
+  components:
+  - type: SideJob
+    reputationGain: 10000
+    reward: SyndicateFinalReward
+  - type: LevelRestrictedSideJob
+    level: 3
+
+# final - battlecruiser
+- type: entity
+  parent: BaseFinalSideJob
+  id: BattlecruiserSideJob
+  name: Call in the syndicate battlecruiser
+  description: You have done great work. The station is weak. Hack the communications console and broadcast out to the whole syndicate. They will come.
+  components:
+  - type: Objective
+    icon:
+      sprite: _Trauma/Objects/Syndicate/syndicate_final_reward.rsi
+      state: icon

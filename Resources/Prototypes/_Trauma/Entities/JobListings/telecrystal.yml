@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: entity
-  parent: Telecrystal
-  id: Telecrystal7
-  suffix: 7 TC
-  components:
-  - type: Stack
-    count: 7
