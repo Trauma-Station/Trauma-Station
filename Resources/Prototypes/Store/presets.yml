@@ -66,6 +66,9 @@
     maximumSideJobs: 4
     maximumAcceptedSideJobs: 2
     sideJobsPerLevel: 2
+    prioritySideJobOffers: # priority exists so kill is actually picked when it is outnumbered 7 to 1 by steal objectives
+    # major - kill
+    - KillSideJob
     sideJobOffers:
     # minor - bug
     - BugAreaSideJobCmo

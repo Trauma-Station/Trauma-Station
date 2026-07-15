@@ -20,10 +20,17 @@ public sealed partial class JobListingsComponent : Component
     public int MaximumSideJobs;
 
     /// <summary>
-    /// List of prototypes of the objectives offered for major side jobs.
+    /// List of prototypes of the objectives offered for side jobs.
     /// </summary>
     [DataField]
     public List<EntProtoId> SideJobOffers = new();
+
+    /// <summary>
+    /// List of prototypes of the objectives offered for side jobs, except this one is always pooled from first.
+    /// For the kill objectives because otherwise they would get picked super rarely because there is 1 kill objective and 10 different steal objectives.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId> PrioritySideJobOffers = new();
 
     /// <summary>
     /// The list of available side jobs which can be accepted by the traitor.

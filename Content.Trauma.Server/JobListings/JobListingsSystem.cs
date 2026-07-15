@@ -38,6 +38,7 @@ public sealed partial class JobListingsSystem : EntitySystem
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private EntityTableSystem _table = default!;
     [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private EntityQuery<JobListingsComponent> _jobListingsQuery = default!;
 
     public override void Initialize()
     {
@@ -85,13 +86,24 @@ public sealed partial class JobListingsSystem : EntitySystem
             return false;
 
         var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
+        var possiblePriorityJobs = jobBoard.Comp.PrioritySideJobOffers.ShallowClone();
         var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(jobBoard.Owner));
 
-        while (possibleJobs.Count > 0)
+        while (possiblePriorityJobs.Count > 0 || possibleJobs.Count > 0)
         {
-            var index = random.Next(possibleJobs.Count);
-            var job = possibleJobs[index];
-            possibleJobs.RemoveAt(index);
+            EntProtoId job;
+            if (possiblePriorityJobs.Count > 0)
+            {
+                var index = random.Next(possiblePriorityJobs.Count);
+                job = possiblePriorityJobs[index];
+                possiblePriorityJobs.RemoveAt(index);
+            }
+            else
+            {
+                var index = random.Next(possibleJobs.Count);
+                job = possibleJobs[index];
+                possibleJobs.RemoveAt(index);
+            }
 
             if (!CanAddSideJob(jobBoard, job))
                 continue;
