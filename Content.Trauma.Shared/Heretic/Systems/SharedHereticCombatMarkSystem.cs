@@ -41,7 +41,7 @@ public abstract partial class SharedHereticCombatMarkSystem : EntitySystem
         _look.GetEntitiesInRange(coords, 5f, _lookupHumanoid, LookupFlags.Dynamic);
         var look = _lookupHumanoid.Where(x => x.Owner != target && !_heretic.IsHereticOrGhoul(x))
             .OrderBy(x => (byte?) (_mobQuery.CompOrNull(x)?.CurrentState) ?? byte.MaxValue) // Prioritize living mobs
-            .ThenByDescending(x => coords.TryDistance(EntityManager, Transform(x).Coordinates, out var dist) ? dist : float.MaxValue) // Prioritize mobs nearby
+            .ThenBy(x => coords.TryDistance(EntityManager, Transform(x).Coordinates, out var dist) ? dist : float.MaxValue) // Prioritize mobs nearby
             .ToArray();
         if (look.Length == 0)
             return;
