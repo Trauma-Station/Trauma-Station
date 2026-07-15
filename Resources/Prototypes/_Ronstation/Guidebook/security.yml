@@ -3,6 +3,8 @@
   id: SpaceLaw
   name: guide-entry-space-law
   text: "/ServerInfo/Guidebook/Security/SpaceLaw.xml"
+  children:
+  - CrimeList
 
 - type: guideEntry
   id: CrimeList
