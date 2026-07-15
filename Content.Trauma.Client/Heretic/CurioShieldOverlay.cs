@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Client.Overlays;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
@@ -9,10 +10,10 @@ namespace Content.Trauma.Client.Heretic;
 public sealed partial class CurioShieldOverlay : Overlay
 {
     [Dependency] private IEntityManager _entMan = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     private readonly SharedTransformSystem _transform;
+    private readonly ShaderCacheSystem _cache;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
@@ -25,6 +26,7 @@ public sealed partial class CurioShieldOverlay : Overlay
         ZIndex = (int) Content.Shared.DrawDepth.DrawDepth.FloorEffects;
 
         _transform = _entMan.System<SharedTransformSystem>();
+        _cache = _entMan.System<ShaderCacheSystem>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -34,7 +36,7 @@ public sealed partial class CurioShieldOverlay : Overlay
         var curTime = _timing.CurTime;
 
         var query = _entMan.EntityQueryEnumerator<UnfathomableCurioShieldComponent, TransformComponent>();
-        while (query.MoveNext(out _, out var shield, out var xform))
+        while (query.MoveNext(out var uid, out var shield, out var xform))
         {
             var factor = shield.Active
                 ? InverseLerp(shield.ActivateTime,
@@ -50,7 +52,7 @@ public sealed partial class CurioShieldOverlay : Overlay
             if (!bounds.Contains(pos))
                 continue;
 
-            var shader = _prototype.Index(Shader).InstanceUnique();
+            var shader = _cache.GetOrCreateShader(uid, nameof(UnfathomableCurioShieldComponent), Shader);
             shader.SetParameter("color", shield.Color);
             shader.SetParameter("radius", factor * 0.5f);
             handle.UseShader(shader);

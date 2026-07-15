@@ -74,6 +74,15 @@ public abstract partial class SharedUnfathomableCurioSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnShutdown(Entity<UnfathomableCurioShieldComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        ResetShield(ent, false, null);
+    }
+
+    [SubscribeLocalEvent]
     private void OnTakeDamage(Entity<UnfathomableCurioShieldComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (!ent.Comp.Active || args.Cancelled || args.Damage.GetTotal() < 5)
@@ -101,7 +110,7 @@ public abstract partial class SharedUnfathomableCurioSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void ResetShield(Entity<UnfathomableCurioShieldComponent> ent, bool playSound, EntityUid? origin, bool resetDeactivateTime = true)
+    protected virtual void ResetShield(Entity<UnfathomableCurioShieldComponent> ent, bool playSound, EntityUid? origin, bool resetDeactivateTime = true)
     {
         var now = _timing.CurTime;
         ent.Comp.Active = false;
