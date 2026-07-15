@@ -85,8 +85,9 @@
     - ClipboardStealSideJob
     - CaptainJetpackStealSideJob
     - CaptainGunStealSideJob
-    # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000
-    reputationLevels:
+    # extreme - kill head
+    - KillHeadSideJob
+    reputationLevels: # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000
     - 100 # 1 minor
     - 500 # 1 minor + 2 majors
     - 1000 # 1 minor + 2 majors + 1 extreme

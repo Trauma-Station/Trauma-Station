@@ -187,3 +187,22 @@
     level: 2
   - type: GenerateSideJobReward
     rewardTable: ExtremeSideJobRewards
+
+# extreme - kill head
+- type: entity
+  parent: [ BaseExtremeSideJob, BaseKillObjective ]
+  id: KillHeadSideJob
+  description: This is no longer about contract killing - we need to make Nanotrasen afraid. Kill one of them.
+  components:
+  - type: SideJob
+    repeatable: true
+  - type: TargetObjective
+    title: side-job-kill-title
+  - type: KillPersonCondition
+    requireDead: true
+  - type: PickRandomPerson
+    filters:
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - CommandStaff
