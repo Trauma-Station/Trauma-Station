@@ -170,7 +170,7 @@
     guides:
     - IPC
   - type: Silicon
-    entityType: enum.SiliconType.Player
+    entityType: Player
     batteryPowered: true
     drainPerSecond: 1.5
     chargeThresholdMid: 0.80

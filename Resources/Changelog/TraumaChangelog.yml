@@ -11418,3 +11418,132 @@ Entries:
   id: 1261
   time: '2026-07-11T14:46:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3517
+- author: ImWeax
+  changes:
+  - type: Add
+    message: You can now drink bleach to kill gutworms.
+  - type: Add
+    message: You can also take actual deworming medicine.
+  id: 1262
+  time: '2026-07-11T20:49:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3399
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mail tearing not stopping if you moved the mail away
+  - type: Fix
+    message: IPC battery alert now works, and battery draining is predicted.
+  - type: Fix
+    message: >-
+      Fixed wing fang chu recipe using 83ml of soy sauce (2.9 oz) now its just 1
+      packet's worth.
+  - type: Fix
+    message: Fixed decapoids and plasmamen using human sounds.
+  id: 1263
+  time: '2026-07-12T22:03:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3533
+- author: Aineias1
+  changes:
+  - type: Tweak
+    message: Re-rotated atlas, amber, cluster, omega and packed temporarily.
+  id: 1264
+  time: '2026-07-12T22:09:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3528
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to transform faith/iradomini into other nullrods.
+  id: 1265
+  time: '2026-07-12T23:38:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3539
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed detailed examine items in chat rendering badly.
+  id: 1266
+  time: '2026-07-13T02:03:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3540
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed infinite nullrod glitch from reinforcements
+  id: 1267
+  time: '2026-07-13T02:05:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to toggle night vision goggles, which are also green
+      again.
+  id: 1268
+  time: '2026-07-13T02:12:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3541
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Flashes work now.
+  id: 1269
+  time: '2026-07-13T02:19:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3511
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed memory leak from holoparasite log spamming.
+  id: 1270
+  time: '2026-07-13T18:14:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3545
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a new guidebook entry for Synthflesh in the solids section
+  - type: Tweak
+    message: >-
+      Decreased the metabolism speed for Dermaline, Bicardine and Dylovene down
+      to 0.25u however healing and OD damage has been adjusted to heal the same
+      amount
+  - type: Tweak
+    message: >-
+      Medibots now inject less Tricordrazine and now inject Morphine instead of
+      Chloral Hydrate when Emagged
+  id: 1271
+  time: '2026-07-13T18:46:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3466
+- author: Aviu
+  changes:
+  - type: Add
+    message: Moths got innate tackle (dash) and tackle bonus tied to wings.
+  - type: Fix
+    message: >-
+      Fix tackles and stun baton delayed knockdown hardstunning mobs that can't
+      be knocked down.
+  id: 1272
+  time: '2026-07-13T18:48:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3500
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Freighter Transport was updated once more. Thank you for the feedback.
+  id: 1273
+  time: '2026-07-14T05:57:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3519
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: >-
+      the xenomorph praetorians color palette is now more consistent with the
+      other xenomorphs
+  id: 1274
+  time: '2026-07-14T06:18:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3548
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed your bag getting bricked, and auto closing.
+  - type: Fix
+    message: Fixed the Flesh Shield not having inhand sprites.
+  - type: Fix
+    message: Fixed the Greatshield not having inhand sprites.
+  id: 1275
+  time: '2026-07-15T04:04:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3556

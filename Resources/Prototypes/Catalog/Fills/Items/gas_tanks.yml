@@ -191,7 +191,7 @@
 - type: entity
   id: PlasmaTankFilled
   parent: PlasmaTank
-  name: plasma tank
+  #name: plasma tank # Trauma - learn how inheritance works
   suffix: Filled
   components:
   - type: GasTank

@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.CosmicCult.Components;
 /// Added to entities to tag that they are a cosmic cultist. Holds nearly all cultist-relevant data! Removal of this component is used to call for a deconversion
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState] // TODO: use field deltas holy shit
 public sealed partial class CosmicCultComponent : Component
 {
     #region Housekeeping

@@ -57,7 +57,7 @@ public sealed partial class WoolySystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            if (!_solutionContainer.ResolveSolution(uid, wooly.SolutionName, ref wooly.Solution, out var solution))
+            if (!_solutionContainer.ResolveSolution(uid, wooly.SolutionName, ref wooly.Solution, out var solution, logMissing: false)) // Trauma - dont log missing
                 continue;
 
             if (solution.AvailableVolume == 0)

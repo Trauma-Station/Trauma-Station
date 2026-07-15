@@ -276,7 +276,8 @@ public abstract partial class SharedStunSystem : EntitySystem
     /// <param name="autoStand">Whether we want to automatically stand when knockdown ends.</param>
     /// <param name="drop">Whether we should drop items.</param>
     /// <param name="force">Should we force the status effect?</param>
-    public bool TryKnockdown(Entity<CrawlerComponent?> entity, TimeSpan? time, bool refresh = true, bool autoStand = true, bool drop = true, bool force = false)
+    public bool TryKnockdown(Entity<CrawlerComponent?> entity, TimeSpan? time, bool refresh = true, bool autoStand = true, bool drop = true, bool force = false,
+        bool stunOnFail = true) // Trauma - added stunOnFail
     {
         if (!CanKnockdown(entity.Owner, ref time, ref autoStand, ref drop, force))
             return false;
@@ -284,7 +285,7 @@ public abstract partial class SharedStunSystem : EntitySystem
         // If the entity can't crawl they also need to be stunned, and therefore we should be using paralysis status effect.
         // Also time shouldn't be null if we're and trying to add time but, we check just in case anyways.
         if (!Resolve(entity, ref entity.Comp, false))
-            return refresh || time == null ? TryUpdateParalyzeDuration(entity, time) : TryAddParalyzeDuration(entity, time.Value);
+            return stunOnFail && (refresh || time == null ? TryUpdateParalyzeDuration(entity, time) : TryAddParalyzeDuration(entity, time.Value)); // Trauma - added stunOnFail
 
         Knockdown(entity, time, refresh, autoStand, drop);
         return true;

@@ -199,11 +199,6 @@
         visible: false
         shader: unshaded
     - type: Flash
-      # <Trauma>
-      meleeDuration: 7.0
-      aoeFlashDuration: 6.0
-      meleeStunDuration: 2.5
-      # </Trauma>
     - type: RevolutionaryConverter
     - type: LimitedCharges
       maxCharges: 5

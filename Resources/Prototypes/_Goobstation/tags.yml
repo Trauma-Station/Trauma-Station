@@ -435,7 +435,7 @@
   id: NukeOpsReinforcementUplink
 
 - type: Tag
-  id: Nullrod
+  id: Nullrod # Allows transforming it into an altar's specific nullrod. Given to the Nullrod entity specifically.
 
 - type: Tag
   id: NunHood

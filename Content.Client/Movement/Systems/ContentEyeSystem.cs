@@ -53,24 +53,23 @@ public sealed partial class ContentEyeSystem : SharedContentEyeSystem
         RaisePredictiveEvent(new RequestEyeEvent(drawFov, drawLight));
     }
 
+    // <Trauma> - make them call a shared method instead of copy pasting everything, which only processes the LocalEntity not everything in pvs!!
+    private void UpdateLocalEye()
+    {
+        if (_player.LocalEntity is { } uid && TryComp<EyeComponent>(uid, out var eye))
+            UpdateEyeOffset((uid, eye));
+    }
+
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
-        var eyeEntities = AllEntityQuery<ContentEyeComponent, EyeComponent>();
-        while (eyeEntities.MoveNext(out var entity, out ContentEyeComponent? contentComponent, out EyeComponent? eyeComponent))
-        {
-            UpdateEyeOffset((entity, eyeComponent));
-        }
+        UpdateLocalEye();
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        // TODO: Ideally we wouldn't want this to run in both FrameUpdate and Update, but we kind of have to since the visual update happens in FrameUpdate, but interaction update happens in Update. It's a workaround and a better solution should be found.
-        var eyeEntities = AllEntityQuery<ContentEyeComponent, EyeComponent>();
-        while (eyeEntities.MoveNext(out var entity, out ContentEyeComponent? contentComponent, out EyeComponent? eyeComponent))
-        {
-            UpdateEyeOffset((entity, eyeComponent));
-        }
+        UpdateLocalEye();
     }
+    // </Trauma>
 }

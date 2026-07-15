@@ -91,9 +91,11 @@ public sealed partial class CosmicCultSystem : SharedCosmicCultSystem
     {
         base.OnLevelUpConfirmed(ent, ref args);
 
-        if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp)) return;
+        if (!TryComp<CosmicCultComponent>(args.Actor, out var cultComp))
+            return;
+
         _cultRule.UpdateCultData((args.Actor, cultComp));
-        _antag.SendBriefing(ent, Loc.GetString("cosmiccult-role-levelup-briefing"), Color.FromHex("#4cabb3"), _levelupSound);
+        _antag.SendBriefing(ent, "You attune your influence and the cult grows more powerful!", Color.FromHex("#4cabb3"), _levelupSound);
     }
 
     #region Init Cult

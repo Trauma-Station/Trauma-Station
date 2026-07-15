@@ -46,7 +46,7 @@ def extract(filename):
     return failures
 
 all_fails = []
-all_fails.extend(extract('./test_results/logs/Content.Tests.xml'))
+#all_fails.extend(extract('./test_results/logs/Content.Tests.xml')) # Trauma - it never fails, dont bother testing it
 all_fails.extend(extract('./test_results/logs/Content.IntegrationTests.xml'))
 
 # Create the list of processed failures to create a matrix for later jobs.

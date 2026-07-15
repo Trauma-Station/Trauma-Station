@@ -17,3 +17,9 @@
   sexes:
   - Unsexed
   knowledge: Plasmaman
+  defaultSoundsBySex:
+  - UnisexPlasmaman
+  - UnisexPlasmaman
+  - UnisexPlasmaman
+  voices:
+  - UnisexPlasmaman

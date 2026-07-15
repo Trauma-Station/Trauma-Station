@@ -59,6 +59,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
     private readonly Dictionary<uint, Entity<GhostRoleComponent>> _ghostRoles = new();
     private readonly Dictionary<uint, Entity<GhostRoleRaffleComponent>> _ghostRoleRaffles = new();
+    private readonly List<uint> _badRoles = new(1); // Trauma
 
     private readonly Dictionary<ICommonSession, GhostRolesEui> _openUis = new();
     private readonly Dictionary<ICommonSession, MakeGhostRoleEui> _openMakeGhostRoleUis = new();
@@ -642,6 +643,21 @@ public sealed partial class GhostRoleSystem : EntitySystem
     {
         var roles = new List<GhostRoleInfo>();
 
+        // <Trauma> - some bullshit isnt cleaning up ghost roles properly, prevent it throwing
+        _badRoles.Clear();
+        foreach (var (id, ent) in _ghostRoles)
+        {
+            if (Exists(ent))
+                continue;
+
+            Log.Debug($"Ghost role {id} had deleted entity {id} but was not cleaned up!");
+            _badRoles.Add(id);
+        }
+        foreach (var id in _badRoles)
+        {
+            _ghostRoles.Remove(id);
+        }
+        // </Trauma>
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
             if (MetaData(uid).EntityPaused)

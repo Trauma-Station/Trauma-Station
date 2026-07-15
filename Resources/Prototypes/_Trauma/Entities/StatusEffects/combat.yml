@@ -8,13 +8,19 @@
   - type: FlippingStatusEffect
 
 - type: entity
-  parent: [StatusEffectSpeed, StatusEffectFlip]
-  id: StatusEffectFlipDesword
-  name: flip and dodge
+  parent: StatusEffectBase
+  id: StatusEffectProjectileImmunity
+  name: dodge bullets
   components:
   - type: GrantComponentsStatusEffect
     components:
     - type: ProjectileImmunity
+
+- type: entity
+  parent: [StatusEffectSpeed, StatusEffectFlip, StatusEffectProjectileImmunity]
+  id: StatusEffectFlipDesword
+  name: flip and dodge
+  components:
   - type: MovementModStatusEffect
     sprintSpeedModifier: 1.2
     walkSpeedModifier: 1.2

@@ -511,7 +511,7 @@ public sealed partial class InjectorSystem : EntitySystem
             // <Trauma> - use the fucking override message!?
             if (ev.OverrideMessage is {} msg)
             {
-                _popup.PopupPredicted(msg, user, user);
+                _popup.PopupEntity(msg, target, user, PopupType.SmallCaution);
                 return true;
             }
             // </Trauma>

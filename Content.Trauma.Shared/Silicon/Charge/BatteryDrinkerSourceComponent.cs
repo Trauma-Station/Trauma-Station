@@ -4,16 +4,15 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Silicon.Charge;
 
-// Goobstation - Energycrit: Moved from server to shared.
 [RegisterComponent]
 public sealed partial class BatteryDrinkerSourceComponent : Component
 {
     /// <summary>
     ///     The max amount of power this source can provide in one sip.
-    ///     No limit if null.
+    ///     No limit if zero.
     /// </summary>
     [DataField]
-    public int? MaxAmount = null;
+    public float MaxAmount;
 
     /// <summary>
     ///     The multiplier for the drink speed.
