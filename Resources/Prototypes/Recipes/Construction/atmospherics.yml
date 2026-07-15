@@ -1,5 +1,4 @@
-# Base
-
+# region Base
 - type: construction
   abstract: true
   id: BaseAtmos
@@ -66,8 +65,9 @@
     MetalworkingKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
+# endregion Base
 
-# Machines
+# region Machines
 - type: construction
   parent: BaseAtmos
   id: AirAlarmFixture
@@ -114,8 +114,9 @@
   id: GasPipeSensorAlt2
   hide: true
   targetNode: sensorAlt2
+# endregion Machines
 
-# ATMOS PIPES
+# region Pipes
 - type: construction
   parent: BaseGasPipe
   id: GasPipeHalf
@@ -236,8 +237,9 @@
   practical:
     MetalworkingKnowledge: 2 # way more intricate
   # </Trauma>
+# endregion Pipes
 
-# ATMOS UNARY
+# region Unary
 - type: construction
   parent: BaseGasUnary
   id: GasVentPump
@@ -273,8 +275,9 @@
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
   # </Trauma>
+# endregion Unary
 
-  # ATMOS BINARY
+# region Binary
 - type: construction
   parent: BaseGasBinary
   id: GasPressurePump
@@ -463,8 +466,9 @@
   name: construction-recipe-heat-exchanger-bend
   targetNode: bendradiator
   placementMode: SnapgridCenter
+# endregion Binary
 
-# ATMOS TRINARY
+# region Trinary
 - type: construction
   parent: BaseGasTrinary
   id: GasFilter
@@ -476,6 +480,7 @@
   id: GasFilterFlipped
   hide: true
   targetNode: filterflipped
+  mirror: GasFilter
 
 - type: construction
   parent: BaseGasTrinary
@@ -488,8 +493,10 @@
   id: GasMixerFlipped
   hide: true
   targetNode: mixerflipped
+  mirror: GasMixer
 
 - type: construction
   parent: BaseGasTrinary
   id: PressureControlledValve
   targetNode: pneumaticvalve
+# endregion Trinary
