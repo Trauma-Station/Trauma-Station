@@ -290,8 +290,8 @@
     initialBeepDelay: 0
     beepSound: /Audio/Effects/lightburn.ogg
   - type: RandomTimerTrigger
-    min: 3
-    max: 5
+    min: 5
+    max: 8
   - type: ExplodeOnTrigger
     keysIn:
     - timer

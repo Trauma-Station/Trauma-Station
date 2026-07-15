@@ -42,6 +42,21 @@
       BoneDamage: 1
 
 - type: entity
+  parent: Blunt
+  id: Fracture
+  name: fracture
+  components:
+  - type: TraumaInflicter
+    minTraumaSeverityDelta: 0
+    traumasChances:
+      Dismemberment: -1.5
+      OrganDamage: 0.2
+      BoneDamage: 0.9
+      VeinsDamage: 0
+    mangledMultipliers:
+      BoneDamage: 1.2
+
+- type: entity
   id: Piercing
   parent: WoundBase
   components:
@@ -73,6 +88,24 @@
   - type: BleedInflicter
     severityThreshold: 9
     scalingSpeed: 0.5
+
+- type: entity
+  parent: Piercing
+  id: Puncture
+  name: puncture
+  components:
+  - type: TraumaInflicter
+    minTraumaSeverityDelta: 0
+    traumasChances:
+      Dismemberment: -1.5
+      OrganDamage: 0.12
+      BoneDamage: 0.2
+      VeinsDamage: -0.2
+    mangledMultipliers:
+      BoneDamage: 0.2
+  - type: BleedInflicter
+    severityThreshold: 0
+    scalingSpeed: 0.8
 
 - type: entity
   parent: Piercing
@@ -138,6 +171,23 @@
     scalingSpeed: 1.7
 
 - type: entity
+  parent: Slash
+  id: Laceration
+  name: laceration
+  components:
+  - type: TraumaInflicter
+    minTraumaSeverityDelta: 0
+    traumasChances:
+      Dismemberment: 0.35
+      OrganDamage: 0
+      BoneDamage: 0
+      VeinsDamage: 0.4
+    mangledMultipliers:
+      BoneDamage: 0.3
+  - type: BleedInflicter
+    scalingSpeed: 2
+
+- type: entity
   id: Heat
   parent: WoundBase
   components:
@@ -163,6 +213,19 @@
       VeinsDamage: 0.34
   - type: BleedRemover
     severityThreshold: 3
+
+- type: entity
+  parent: Heat
+  id: Burns
+  name: burns
+  components:
+  - type: TraumaInflicter
+    minTraumaSeverityDelta: 0
+    traumasChances:
+      Dismemberment: 0
+      OrganDamage: -0.1
+      BoneDamage: -0.16
+      VeinsDamage: 0.45
 
 - type: entity
   id: Ion
