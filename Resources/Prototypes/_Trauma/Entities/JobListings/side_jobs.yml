@@ -173,3 +173,17 @@
     title: side-job-kill-title
   - type: KillPersonCondition
     requireDead: true
+  - type: PickRandomPerson
+
+# extreme
+- type: entity
+  abstract: true
+  parent: BaseSideJob
+  id: BaseExtremeSideJob
+  components:
+  - type: SideJob
+    reputationGain: 500
+  - type: LevelRestrictedSideJob
+    level: 2
+  - type: GenerateSideJobReward
+    rewardTable: ExtremeSideJobRewards

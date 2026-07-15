@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# minor
 - type: entityTable
   id: MinorSideJobRewards
   table: !type:GroupSelector
@@ -31,6 +32,7 @@
     - id: ClothingShoesChameleonNoSlips
     - id: ClothingShoesBootsMagSyndie
 
+# major
 - type: entityTable
   id: MajorSideJobRewards
   table: !type:GroupSelector
@@ -55,3 +57,39 @@
     - id: CigCartonSyndicate
     - id: FakeMindShieldImplanter
     - id: MicroBombImplanter
+
+# extreme
+- type: entityTable
+  id: ExtremeSideJobRewards
+  table: !type:GroupSelector
+  children:
+  - id: Telecrystal15
+    weight: 2 # 2/3 of the time you get straight TC (but less value)
+  - !type:NestedSelector
+    tableId: ExtremeSideJobRewardsItems
+
+- type: entityTable
+  id: ExtremeSideJobRewardsItems
+  table: !type:GroupSelector
+    children:
+    - id: AdvancedCombatMedipen
+    - id: WeaponRevolverPythonAP
+    - id: ClothingHandsGlovesGuerrilla
+    - !type:NestedSelector
+      tableId: AnyRiggedGloves
+    - id: ExperimentalSyndicateTeleporter
+    - id: SupermatterGrenade
+    - id: SyndicateBombFake
+    - id: AccessBreaker
+    - id: Emag
+    - id: ToolboxElectricalTurretFilled
+
+# put rigged gloves in their own table so you arent 4x more likely to get them
+- type: entityTable
+  id: AnyRiggedGloves
+  table: !type:GroupSelector
+    children:
+    - id: ClothingHandsGlovesBoxingRiggedRed
+    - id: ClothingHandsGlovesBoxingRiggedGreen
+    - id: ClothingHandsGlovesBoxingRiggedYellow
+    - id: ClothingHandsGlovesBoxingRiggedBlue

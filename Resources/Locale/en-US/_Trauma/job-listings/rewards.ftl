@@ -18,7 +18,7 @@ job-listings-ui-reward-name-VoiceMaskImplanter = voice mask implant
 job-listings-ui-reward-name-ClothingShoesChameleonNoSlips = no slip shoes
 job-listings-ui-reward-name-ClothingShoesBootsMagSyndie = syndicate mag boots
 
-# medium
+# major
 job-listings-ui-reward-name-Telecrystal10 = 10 telecrystals
 job-listings-ui-reward-name-AgentIDCard = agent id card
 job-listings-ui-reward-name-SarinGasGrenade = sarin gas grenade
@@ -31,3 +31,19 @@ job-listings-ui-reward-name-CigCartonSyndicate = syndicate smokes
 job-listings-ui-reward-name-FakeMindShieldImplanter = fake mindshield implant
 job-listings-ui-reward-name-MicroBombImplanter = micro bomb implant
 job-listings-ui-reward-name-StealthBox = stealth box
+
+# extreme
+job-listings-ui-reward-name-Telecrystal15 = 15 telecrystals
+job-listings-ui-reward-name-AdvancedCombatMedipen = advanced combat medipen
+job-listings-ui-reward-name-WeaponRevolverPythonAP = python revolver
+job-listings-ui-reward-name-ClothingHandsGlovesGuerrilla = guerrilla gloves
+job-listings-ui-reward-name-ClothingHandsGlovesBoxingRiggedRed = rigged boxing gloves
+job-listings-ui-reward-name-ClothingHandsGlovesBoxingRiggedGreen = rigged boxing gloves
+job-listings-ui-reward-name-ClothingHandsGlovesBoxingRiggedYellow = rigged boxing gloves
+job-listings-ui-reward-name-ClothingHandsGlovesBoxingRiggedBlue = rigged boxing gloves
+job-listings-ui-reward-name-ExperimentalSyndicateTeleporter = experimental syndicate teleporter
+job-listings-ui-reward-name-SupermatterGrenade = supermatter grenade
+job-listings-ui-reward-name-SyndicateBombFake = fake syndicate bomb
+job-listings-ui-reward-name-AccessBreaker = access breaker
+job-listings-ui-reward-name-Emag = emag
+job-listings-ui-reward-name-ToolboxElectricalTurretFilled = disposable turret
