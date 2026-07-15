@@ -17,7 +17,7 @@
 - type: entity
   parent: BaseBlueprintDatachip
   id: DataChipAIBoard
-  name: data chip [AI Override Board]
+  name: data chip (AI Override Board)
   components:
   - type: Blueprint
     providedRecipes:
@@ -26,7 +26,7 @@
 - type: entity
   parent: BaseBlueprintDatachip
   id: DataChipReflectivePlate
-  name: data chip [Reflective Plate]
+  name: data chip (Reflective Plate)
   components:
   - type: Blueprint
     providedRecipes:
@@ -35,7 +35,7 @@
 - type: entity
   parent: BaseBlueprintDatachip
   id: DataChipFakeMindshield
-  name: data chip [Fake Mindshield]
+  name: data chip (Fake Mindshield)
   components:
   - type: Blueprint
     providedRecipes:
@@ -44,7 +44,7 @@
 - type: entity
   parent: BaseBlueprintDatachip
   id: DataChipShieldRipper
-  name: data chip [Mindshield Ripper]
+  name: data chip (Mindshield Ripper)
   components:
   - type: Blueprint
     providedRecipes:
