@@ -7,7 +7,7 @@
     mask: ClothingMaskGasChameleon
     outerClothing: ClothingOuterArmourInvisibleChameleon
     neck: ClothingNeckChameleon
-    eyes: ClothingEyesGlassesAgent
+    eyes: ClothingEyesGlassesCCInsideAgent
     gloves: ClothingAdmemeHandsChameleonInsulated # Certified NT stolen-and-improved Syndicate technology.
     id: ChameleonAgentPDA
     ears: ClothingHeadsetChameleon

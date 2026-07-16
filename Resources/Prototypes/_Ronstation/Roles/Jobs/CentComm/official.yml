@@ -47,7 +47,7 @@
     outerClothing: ClothingOuterArmorCentcommCarapace
     neck: ExecutiveIDCard
     gloves: ClothingHandsGlovesCombat
-    eyes: ClothingEyesGlassesDeathsquad # Experimenting. Item in game is called "Central Commander Shades"
+    eyes: ClothingEyesGlassesCCInsideAgent
     id: CentcomPDA
     ears: ClothingHeadsetAltCentCom
     belt: ClothingBeltSheathFilled
