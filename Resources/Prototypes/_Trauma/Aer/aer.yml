@@ -46,7 +46,7 @@
       Steel: 100
       Glass: 25
 
-# Aer sensor machine that must be used in containment chamber it analyses a linked anomalous entity in range 
+# Aer sensor machine that must be used in containment chamber it analyses a linked anomalous entity in range
 - type: entity
   id: MachineAERContainmentSensor
   parent: [ BaseMachinePowered, ConstructibleMachine ]

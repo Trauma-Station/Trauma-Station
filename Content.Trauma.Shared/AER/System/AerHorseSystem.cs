@@ -29,7 +29,7 @@ public sealed partial class AerHorseSystem : EntitySystem
     }
 
     /// <summary>
-    /// handling of the aer active status for mobs it determines if aer is healty enough to produce rd points  
+    /// handling of the aer active status for mobs it determines if aer is healty enough to produce rd points
     /// </summary>
     private void OnMobStateChanged(Entity<AerHorseComponent> ent, ref MobStateChangedEvent args)
     {
