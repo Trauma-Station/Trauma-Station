@@ -27,7 +27,7 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
     private void OnRunLevelChanged(GameRunLevelChangedEvent args)
     {
         if (!_cfg.GetCVar(TraumaCVars.AutomaticMapVote)
-        || !_cfg.GetCVar(TraumaCVars.GameLobbyEnabled)
+        || !_cfg.GetCVar(CCVars.GameLobbyEnabled)
         || args.New != GameRunLevel.PreRoundLobby) return;
         _vote.CreateStandardVote(null, StandardVoteType.Map);
     }
