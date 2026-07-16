@@ -277,7 +277,7 @@ namespace Content.Server.Voting.Managers
 
             if (alone)
                 options.InitiatorTimeout = TimeSpan.FromSeconds(10);
-            // <Trauma> 
+            // <Trauma>
             // Only allow calling map vote when it matters
             var roundEnd = _entityManager.System<RoundEndSystem>();
             if (_gameTicker?.RunLevel == GameRunLevel.InRound && !roundEnd.IsRoundEndRequested())
