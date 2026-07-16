@@ -19,6 +19,7 @@
         Blunt: 0.35
         Slash: 0.35
         Piercing: 0.35
+        Ballistic: 0.35
         Heat: 0.35
         Caustic: 0.35
   - type: BreathMask
@@ -72,7 +73,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseSyndicateContraband ] # Trauma - Syndicate contraband mark
+  parent: [ ClothingHeadBase, BaseSyndicateContraband ]
   id: ReverseBearTrap
   name: reverse bear trap
   description: A horrifying set of shut metal jaws, rigged to a kitchen timer and secured by padlock to a head-mounted clamp. To apply, hit someone with it
@@ -138,25 +139,10 @@
 
 # Western Undetermined Set
 - type: entity
-  parent: [ClothingHeadHatCowboyBrown, BaseMajorContraband]
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatCowboyBrown, BaseMajorContraband]
   id: ClothingHeadHatCowboyBrownRobust
   name: authentic brown cowboy hat
   description: "\"This station ain't big enough for the two of us.\""
-  components:
-    - type: Armor
-      coverage:
-      - Head
-      traumaDeductions:
-        Dismemberment: 0.2
-        OrganDamage: 0.2
-        BoneDamage: 0.2
-        VeinsDamage: 0
-      modifiers:
-        coefficients:
-          Blunt: 0.7
-          Slash: 0.7
-          Piercing: 0.7
-          Heat: 0.8
 
 # Shitchap
 - type: entity
@@ -177,7 +163,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.9
+        Piercing: 0.5
   - type: Tag
     tags:
     - HidesHair

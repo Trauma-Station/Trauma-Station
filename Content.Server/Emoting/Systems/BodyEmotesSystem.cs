@@ -7,23 +7,15 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Emoting.Systems;
 
-public sealed class BodyEmotesSystem : EntitySystem
+public sealed partial class BodyEmotesSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<BodyEmotesComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<BodyEmotesComponent, EmoteEvent>(OnEmote);
-    }
 
-    private void OnStartup(EntityUid uid, BodyEmotesComponent component, ComponentStartup args)
-    {
-        if (component.SoundsId == null)
-            return;
-        _proto.TryIndex(component.SoundsId, out component.Sounds);
+        SubscribeLocalEvent<BodyEmotesComponent, EmoteEvent>(OnEmote);
     }
 
     private void OnEmote(EntityUid uid, BodyEmotesComponent component, ref EmoteEvent args)
@@ -44,6 +36,9 @@ public sealed class BodyEmotesSystem : EntitySystem
         if (!TryComp(uid, out HandsComponent? hands) || hands.Count <= 0)
             return false;
 
-        return _chat.TryPlayEmoteSound(uid, component.Sounds, emote);
+        if (!ProtoMan.Resolve(component.SoundsId, out var sounds))
+            return false;
+
+        return _chat.TryPlayEmoteSound(uid, sounds, emote);
     }
 }

@@ -11,10 +11,10 @@ using Content.Trauma.Common.Damage;
 
 namespace Content.Goobstation.Server.Weapons.DelayedKnockdown;
 
-public sealed class DelayedKnockdownOnHitSystem : EntitySystem
+public sealed partial class DelayedKnockdownOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
     public override void Initialize()
     {
@@ -89,7 +89,7 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
             if (comp.Time > 0)
                 continue;
 
-            _stun.TryKnockdown(uid, TimeSpan.FromSeconds(comp.KnockdownTime), comp.Refresh);
+            _stun.TryKnockdown(uid, TimeSpan.FromSeconds(comp.KnockdownTime), comp.Refresh, stunOnFail: false);
 
             RemCompDeferred(uid, comp);
         }

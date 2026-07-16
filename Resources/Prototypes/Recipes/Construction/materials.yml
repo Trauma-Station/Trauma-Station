@@ -1,96 +1,69 @@
 - type: construction
+  parent: BaseMaterial # Trauma
   id: MetalRod
   graph: MetalRod
   startNode: start
   targetNode: MetalRod
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRGlass
   graph: Glass
   startNode: start
   targetNode: SheetRGlass
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetClockworkGlass
   graph: Glass
   startNode: start
   targetNode: SheetClockworkGlass
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetPGlass
   graph: Glass
   startNode: start
   targetNode: SheetPGlass
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRPGlass
   graph: Glass
   startNode: start
   targetNode: SheetRPGlass
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRPGlass0
   graph: Glass
   startNode: start
   targetNode: SheetRPGlass0
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRPGlass1
   graph: Glass
   startNode: start
   targetNode: SheetRPGlass1
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 # <Trauma> remove durathread handcraft
 #- type: construction
+#  parent: BaseMaterial # Trauma
 #  id: MaterialDurathread
 #  graph: Durathread
 #  startNode: start
@@ -100,53 +73,37 @@
 # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetUGlass
   graph: Glass
   startNode: start
   targetNode: SheetUGlass
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRUGlass
   graph: Glass
   startNode: start
   targetNode: SheetRUGlass
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRUGlass0
   graph: Glass
   startNode: start
   targetNode: SheetRUGlass0
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>
 
 - type: construction
+  parent: BaseMaterial # Trauma
   id: SheetRUGlass1
   graph: Glass
   startNode: start
   targetNode: SheetRUGlass1
   category: construction-category-materials
   objectType: Item
-  # <Trauma>
-  theory: # TODO should reqire tools to make
-    MaterialsKnowledge: 0
-  useQuality: false
-  # </Trauma>

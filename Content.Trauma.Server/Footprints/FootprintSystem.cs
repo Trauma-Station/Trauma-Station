@@ -15,24 +15,22 @@ using Content.Trauma.Shared.Footprints;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Configuration;
-using System.Numerics;
 
 namespace Content.Trauma.Server.Footprints;
 
-public sealed class FootprintSystem : EntitySystem
+public sealed partial class FootprintSystem : EntitySystem
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
-    [Dependency] private readonly DecalDespawnSystem _despawn = default!;
-    [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
-    [Dependency] private readonly EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
-    [Dependency] private readonly EntityQuery<PuddleComponent> _puddleQuery = default!;
+    [Dependency] private DecalSystem _decal = default!;
+    [Dependency] private DecalDespawnSystem _despawn = default!;
+    [Dependency] private GravitySystem _gravity = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<NoFootprintsComponent> _noFootprintsQuery = default!;
+    [Dependency] private EntityQuery<PuddleComponent> _puddleQuery = default!;
 
     public static readonly ProtoId<DecalPrototype> Footprint = "Footprint";
     public static readonly ProtoId<DecalPrototype> BodySmear = "BodySmear";
@@ -125,7 +123,7 @@ public sealed class FootprintSystem : EntitySystem
             return false;
 
         // just replace the old color it's not really important
-        ent.Comp.Color = sol.GetColor(_proto);
+        ent.Comp.Color = sol.GetColor(ProtoMan);
         // and add some steps, 1 footstep per u, capped
         ent.Comp.Steps += sol.Volume.Int();
         ent.Comp.Steps = Math.Min(ent.Comp.Steps, MaxStepsStuck);
@@ -152,7 +150,7 @@ public sealed class FootprintSystem : EntitySystem
         if (!_decal.TryAddDecal(id, coords, out var decal, color, rot, zIndex: 1, cleanable: true))
             return; // failed to add it somehow...
 
-        _despawn.QueueDespawn(grid, decal);
+        _despawn.QueueDespawn(decal);
 
         // consume the step, it got placed
         ent.Comp.Steps = step;

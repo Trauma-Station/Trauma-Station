@@ -18,29 +18,21 @@ public sealed partial class SpawnFriendly : BaseSpawnEntityEntityEffect<SpawnFri
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class SpawnFriendlyEffectSystem : EntityEffectSystem<TransformComponent, SpawnFriendly>
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
 
     protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<SpawnFriendly> args)
     {
         var quantity = args.Effect.Number * (int)Math.Floor(args.Scale);
         var proto = args.Effect.Entity;
 
-        if (args.Effect.Predicted)
+        if (_net.IsClient && !(args.Effect.Predicted && args.Predicted))
+            return;
+
+        for (var i = 0; i < quantity; i++)
         {
-            for (var i = 0; i < quantity; i++)
-            {
-                var spawned = PredictedSpawnNextToOrDrop(proto, entity, entity.Comp);
-                _faction.IgnoreEntity(spawned, entity.Owner);
-            }
-        }
-        else if (_net.IsServer)
-        {
-            for (var i = 0; i < quantity; i++)
-            {
-                var spawned = SpawnNextToOrDrop(proto, entity, entity.Comp);
-                _faction.IgnoreEntity(spawned, entity.Owner);
-            }
+            var spawned = PredictedSpawnNextToOrDrop(proto, entity, entity.Comp);
+            _faction.IgnoreEntity(spawned, entity.Owner);
         }
     }
 }

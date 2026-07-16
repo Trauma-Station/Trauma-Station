@@ -18,13 +18,13 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 /// This system is hardcoded for Wraith, so don't re-use this.
 /// Use the devil system instead. im sorry and sybau im not unhardocoding ts
 /// </summary>
-public sealed class WraithPossessedSystem : EntitySystem
+public sealed partial class WraithPossessedSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly WraithRevenantSystem _wraithRevenant = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private WraithRevenantSystem _wraithRevenant = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -126,7 +126,7 @@ public sealed class WraithPossessedSystem : EntitySystem
 
             _wraithRevenant.SetPassiveDamageValues((ent.Owner, rev), ent.Comp.RevenantDamageOvertime, alive);
 
-            _admin.Add(LogType.Mind, LogImpact.High, $"{ToPrettyString(possessor)} made a revenant (possessed) out of ${ToPrettyString(ent.Owner)}");
+            _admin.Add(LogType.Mind, LogImpact.High, $"{possessor:user} made a revenant (possessed) out of {ent.Owner:target}");
             return;
         }
 
@@ -138,7 +138,7 @@ public sealed class WraithPossessedSystem : EntitySystem
             ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.PossessionDuration;
             Dirty(ent);
 
-            _admin.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(possessor)} possessed the object ${ToPrettyString(ent.Owner)}");
+            _admin.Add(LogType.Mind, LogImpact.Medium, $"{possessor:user} possessed the object {ent.Owner:target}");
         }
     }
 

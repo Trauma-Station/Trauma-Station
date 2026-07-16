@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: listing
   id: UplinkBribePlasmaman
-  name: uplink-bribe-plasmaman-name
+  name: uplink-bribe-name
   description: uplink-bribe-plasmaman-desc
   productEntity: BriefcaseSyndieLobbyingBundlePlasmamanFilled
   cost:

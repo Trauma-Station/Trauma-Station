@@ -2,19 +2,18 @@
 
 using System.Linq;
 using Content.Server.Chat.Managers;
-using Content.Server.DoAfter;
 using Content.Server.Gravity;
 using Content.Server.Mind;
 using Content.Server.Pinpointer;
-using Content.Server.Popups;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Popups;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffect;
 using Content.Trauma.Common.Heretic;
@@ -23,35 +22,31 @@ using Content.Trauma.Shared.Heretic.Components.Side.Carvings;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.Traps;
-using Robust.Server.Audio;
-using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
 // TODO: most of this shit can be moved to shared
-public sealed class CarvingKnifeSystem : EntitySystem
+public sealed partial class CarvingKnifeSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly HereticSystem _heretic = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
-
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private GravitySystem _gravity = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _statusNew = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private HereticSystem _heretic = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     private static readonly EntProtoId AlertEffect = "CarvingAlertedStatusEffect";
     private HashSet<Entity<HereticCarvingComponent>> _carvings = new();
@@ -123,11 +118,7 @@ public sealed class CarvingKnifeSystem : EntitySystem
         if (!TryComp(args.Victim, out StatusEffectsComponent? status))
             return;
 
-        _status.TryAddStatusEffect<TemporaryBlindnessComponent>(args.Victim,
-            "TemporaryBlindness",
-            ent.Comp.BlindnessTime,
-            true,
-            status);
+        _statusNew.TryUpdateStatusEffectDuration(args.Victim, BlindnessSystem.BlindingStatusEffect, ent.Comp.BlindnessTime);
 
         _status.TryAddStatusEffect<MutedComponent>(args.Victim,
             "Muted",
@@ -160,7 +151,7 @@ public sealed class CarvingKnifeSystem : EntitySystem
             ("uid", netUser.Id),
             ("coords", coordsLoc));
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
-        _chatManager.ChatMessageToOne(ChatChannel.Server,
+        _chat.ChatMessageToOne(ChatChannel.Server,
             message,
             wrappedMessage,
             default,
@@ -260,7 +251,7 @@ public sealed class CarvingKnifeSystem : EntitySystem
 
     private bool CanDrawRune(EntityUid user, MapCoordinates mapCoords)
     {
-        if (!_mapMan.TryFindGridAt(mapCoords, out var gridUid, out var gridComp))
+        if (!_map.TryFindGridAt(mapCoords, out var gridUid, out var gridComp))
             return !_gravity.IsWeightless(user);
 
         if (!_map.TryGetTileDef(gridComp, _map.TileIndicesFor(gridUid, gridComp, mapCoords), out var tile))

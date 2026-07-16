@@ -1,12 +1,10 @@
 // <Trauma>
-using Content.Goobstation.Common.CCVar;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Common.Parry;
+using Content.Trauma.Common.Weapons;
 using Content.Goobstation.Common.Weapons;
 using Content.Lavaland.Common.Weapons;
 using Content.Shared.Coordinates;
-using Content.Shared.Random.Helpers;
 using Robust.Shared.Physics.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -54,28 +52,29 @@ using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components
 
 namespace Content.Shared.Weapons.Melee;
 
-public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma - made partial
+public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] protected readonly IMapManager MapManager = default!;
-    //[Dependency] private   readonly INetManager _netMan = default!; // Trauma - now unused
-    [Dependency] private   readonly IPrototypeManager _protoManager = default!;
-    //[Dependency] private   readonly IRobustRandom _random = default!; // Trauma - now unused
-    [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
-    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
-    [Dependency] protected readonly DamageableSystem Damageable = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
-    [Dependency] private   readonly InventorySystem _inventory = default!;
-    [Dependency] private   readonly MeleeSoundSystem _meleeSound = default!;
-    [Dependency] protected readonly MobStateSystem MobState = default!;
-    [Dependency] private   readonly SharedAudioSystem _audio = default!;
-    [Dependency] protected readonly SharedCombatModeSystem CombatMode = default!;
-    [Dependency] protected readonly SharedInteractionSystem Interaction = default!;
-    [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    //[Dependency] private INetManager _netMan = default!; // Trauma - now unused
+    //[Dependency] private IRobustRandom _random = default!; // Trauma - now unused
+    [Dependency] protected ISharedAdminLogManager AdminLogger = default!;
+    [Dependency] protected ActionBlockerSystem Blocker = default!;
+    [Dependency] protected DamageableSystem Damageable = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MeleeSoundSystem _meleeSound = default!;
+    [Dependency] protected MobStateSystem MobState = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] protected SharedCombatModeSystem CombatMode = default!;
+    [Dependency] protected SharedMapSystem Maps = default!;
+    [Dependency] protected SharedInteractionSystem Interaction = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] protected SharedPopupSystem PopupSystem = default!;
+    [Dependency] protected SharedTransformSystem TransformSystem = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private DamageExamineSystem _damageExamine = default!;
+
+    [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
 
     public const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque); // WD EDIT: private -> public
 
@@ -395,7 +394,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         AttemptAttack(user, weaponUid, weapon, new LightAttackEvent(null, GetNetEntity(weaponUid), GetNetCoordinates(coordinates)), null);
     }
 
-    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target)
+    public bool AttemptLightAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, EntityUid target, bool canParry = true) // Trauma - added CanParry
     {
         if (!TryComp(target, out TransformComponent? targetXform))
             return false;
@@ -415,7 +414,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
     /// Called when a windup is finished and an attack is tried.
     /// </summary>
     /// <returns>True if attack successful</returns>
-    private bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session)
+    public bool AttemptAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, AttackEvent attack, ICommonSession? session) // Trauma - made public
     {
         var curTime = Timing.CurTime;
 
@@ -454,6 +453,23 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 if (weaponUid == target)
                     return false;
 
+                // <Trauma>
+                if (target is not { } t)
+                {
+                    if (!weapon.CanMiss)
+                        return false;
+                }
+                else
+                {
+                    if (!weapon.CanMiss && (TerminatingOrDeleted(t) || !HasComp<DamageableComponent>(t)))
+                        return false;
+
+                    var whitelist = light.IsLeftClick ? weapon.ClickAttackWhitelist : weapon.AltClickAttackWhitelist;
+                    if (_whitelist.IsWhitelistFail(whitelist, t))
+                        return false;
+                }
+                // </Trauma>
+
                 // Goobstation start
                 var specialEv = new LightAttackSpecialInteractionEvent(target, user, weapon.Range);
                 RaiseLocalEvent(weaponUid, ref specialEv);
@@ -484,9 +500,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                     return false;
                 break;
             default:
-                if (!weapon.CanHeavyAttack) // Goobstation
-                    return false;
-
                 if (!Blocker.CanAttack(user, weapon: (weaponUid, weapon)))
                     return false;
                 break;
@@ -509,7 +522,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
 
         // Do this AFTER attack so it doesn't spam every tick
-        var ev = new AttemptMeleeEvent(user, weaponUid, weapon); // Lavaland Change: WHY ARENT YOU FUCKS PASSING THE USER RAHHHHHHHHHHH
+        var ev = new AttemptMeleeEvent(user, weaponUid, weapon, attack); // Lavaland Change: WHY ARENT YOU FUCKS PASSING THE USER RAHHHHHHHHHHH
         RaiseLocalEvent(weaponUid, ref ev);
         RaiseLocalEvent(user, ref ev); // Shitmed Change
 
@@ -571,7 +584,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
     {
         // If I do not come back later to fix Light Attacks being Heavy Attacks you can throw me in the spider pit -Errant
         var damage = GetDamage(meleeUid, user, component) * GetHeavyDamageModifier(meleeUid, user, component);
-        var coords = GetCoordinates(ev.Coordinates); // Goobstation
         var weapon = GetEntity(ev.Weapon); // Goobstation - Edit
         var target = GetEntity(ev.Target);
         var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
@@ -614,12 +626,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
             return;
         }
 
-        // Goobstation start
-        var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.Harm);
-        RaiseLocalEvent(target.Value, beforeEvent);
+        // <Trauma>
+        var beforeEvent = new BeforeHarmfulActionEvent(user, target.Value, HarmfulActionType.Harm, meleeUid, ev.CanParry);
+        RaiseLocalEvent(target.Value, ref beforeEvent);
         if (beforeEvent.Cancelled)
+        {
+            DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(target.Value.ToCoordinates()), rangeEv.Range, component.Animation, component.AnimationRotation, component.FlipAnimation, source);
             return;
-        // Goobstation end
+        }
+        // </Trauma>
 
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
@@ -643,22 +658,13 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         // somewhat messy scuffle. See also, heavy attacks.
         Interaction.DoContactInteraction(user, target);
 
-        // <Trauma>
-        if (component.CanParryLight)
-        {
-            var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, target.Value);
-            RaiseLocalEvent(target.Value, ref parryAttemptEv);
-            if (parryAttemptEv.Parried)
-                return;
-        }
-        // </Trauma>
-
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
         RaiseLocalEvent(target.Value, attackedEvent);
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
         // <Goob>
         modifiedDamage = DamageSpecifier.ApplyModifierSets(modifiedDamage, attackedEvent.ModifiersList);
+        modifiedDamage.Flags |= DamageSpecifier.DamageFlags.PreciseHit;
         var comboEv = new ComboAttackPerformedEvent(user, target.Value, meleeUid, ComboAttackType.Harm);
         RaiseLocalEvent(user, ref comboEv);
         // </Goob>
@@ -687,7 +693,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
 
         if (damageResult.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(target.Value))
         {
@@ -771,20 +777,18 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         }
 
         var targets = new List<EntityUid>();
-        var damageQuery = GetEntityQuery<DamageableComponent>();
-
         foreach (var entity in entities)
         {
             if (entity == user ||
-                !damageQuery.HasComponent(entity))
+                !_damageQuery.HasComponent(entity))
                 continue;
 
-            // Goobstation start
-            var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.Harm);
-            RaiseLocalEvent(entity, beforeEvent);
+            // <Trauma>
+            var beforeEvent = new BeforeHarmfulActionEvent(user, entity, HarmfulActionType.Harm, meleeUid);
+            RaiseLocalEvent(entity, ref beforeEvent);
             if (beforeEvent.Cancelled)
                 continue;
-            // Goobstation end
+            // </Trauma>
 
             targets.Add(entity);
         }
@@ -826,16 +830,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
                 targets.RemoveAt(i);
                 continue;
             }
-
-            // <Trauma>
-            if (component.CanParryWide)
-            {
-                var parryAttemptEv = new ParryAttemptEvent(meleeUid, user, entity);
-                RaiseLocalEvent(entity, ref parryAttemptEv);
-                if (parryAttemptEv.Parried)
-                    continue;
-            }
-            // </Trauma>
 
             var attackedEvent = new AttackedEvent(meleeUid, user, GetCoordinates(ev.Coordinates));
             RaiseLocalEvent(entity, attackedEvent);
@@ -885,7 +879,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (entities.Count != 0)
         {
             var target = entities.First();
-            _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+            _meleeSound.PlayHitSound(target, user, GetHighestDamageSound(appliedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
         }
 
         if (appliedDamage.GetTotal() > FixedPoint2.Zero && targets.Count > 0)
@@ -1038,15 +1032,15 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem // Trauma -
         if (!InRange(user, target, component.Range, session, out _)) // Trauma - out _
             return false;
 
-        // Goobstation start
-        var beforeEvent = new BeforeHarmfulActionEvent(user, HarmfulActionType.Disarm);
-        RaiseLocalEvent(target, beforeEvent);
+        // <Trauma>
+        var beforeEvent = new BeforeHarmfulActionEvent(user, target, HarmfulActionType.Disarm);
+        RaiseLocalEvent(target, ref beforeEvent);
         if (beforeEvent.Cancelled)
-            return false;
+            return true; // play animation anyway
 
         var comboEv = new ComboAttackPerformedEvent(user, target, meleeUid, ComboAttackType.Disarm);
         RaiseLocalEvent(user, ref comboEv);
-        // Goobstation end
+        // </Trauma>
 
         PhysicalShove(user, target);
         Interaction.DoContactInteraction(user, target);

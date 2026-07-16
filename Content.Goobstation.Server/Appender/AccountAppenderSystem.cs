@@ -12,9 +12,8 @@ using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Appender;
 
-public sealed class AccountAppenderSystem : EntitySystem
+public sealed partial class AccountAppenderSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
 
     FrozenDictionary<string, AccountAppendPrototype> _protoIds = default!;
 
@@ -23,7 +22,7 @@ public sealed class AccountAppenderSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<MobStateComponent, PlayerDetachedEvent>(OnPlayerDetached);
 
-        _protoIds = _protoMan.GetInstances<AccountAppendPrototype>();
+        _protoIds = ProtoMan.GetInstances<AccountAppendPrototype>();
     }
 
     private void OnPlayerAttached(Entity<MobStateComponent> ent, ref PlayerAttachedEvent args)

@@ -5,9 +5,9 @@ using Content.Shared.Trigger;
 
 namespace Content.Trauma.Shared.Trigger.Conditions;
 
-public sealed class GenericTriggerConditionSystem : EntitySystem
+public sealed partial class GenericTriggerConditionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     public override void Initialize()
     {
@@ -27,6 +27,6 @@ public sealed class GenericTriggerConditionSystem : EntitySystem
             return;
         }
 
-        args.Cancelled |= !_conditions.TryCondition(target, ent.Comp.Condition);
+        args.Cancelled |= !_conditions.TryCondition(target, ent.Comp.Condition, args.User);
     }
 }

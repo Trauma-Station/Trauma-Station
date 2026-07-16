@@ -75,6 +75,13 @@
     scalingSpeed: 0.5
 
 - type: entity
+  parent: Piercing
+  id: Ballistic
+  components:
+  - type: Wound
+    damageType: Ballistic
+
+- type: entity
   id: ArmorPiercing
   parent: WoundBase
   components:

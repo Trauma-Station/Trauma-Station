@@ -15,16 +15,16 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed partial class DamageableSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedChemistryGuideDataSystem _chemistryGuideData = default!;
-    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private INetManager _netMan = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedChemistryGuideDataSystem _chemistryGuideData = default!;
+    [Dependency] private SharedExplosionSystem _explosion = default!;
 
-    private EntityQuery<AppearanceComponent> _appearanceQuery;
-    private EntityQuery<DamageableComponent> _damageableQuery;
+    [Dependency] private EntityQuery<AppearanceComponent> _appearanceQuery = default!;
+    [Dependency] private EntityQuery<DamageableComponent> _damageableQuery = default!;
+    [Dependency] private EntityQuery<InjurableComponent> _injurableQuery = default!;
 
     public float UniversalAllDamageModifier { get; private set; } = 1f;
     public float UniversalAllHealModifier { get; private set; } = 1f;
@@ -51,14 +51,10 @@ public sealed partial class DamageableSystem : EntitySystem
         Entity<DamageableComponent> ent,
         DamageSpecifier? damageDelta = null,
         bool interruptsDoAfters = true,
-        EntityUid? origin = null,
-        // <Goob>
-        bool ignoreBlockers = false,
-        DamageSpecifier? uncappedDamage = null
-        // </Goob>
+        EntityUid? origin = null
     )
     {
-        ent.Comp.Damage.GetDamagePerGroup(_prototypeManager, ent.Comp.DamagePerGroup);
+        ent.Comp.Damage.GetDamagePerGroup(ProtoMan, ent.Comp.DamagePerGroup);
         ent.Comp.TotalDamage = ent.Comp.Damage.GetTotal();
         Dirty(ent);
 
@@ -70,12 +66,25 @@ public sealed partial class DamageableSystem : EntitySystem
                 new DamageVisualizerGroupData(ent.Comp.DamagePerGroup.Keys.ToList()),
                 appearance
             );
+
+            if (ent.Comp.Displacement != null)
+            {
+                _appearance.SetData(
+                    ent,
+                    DamageVisualizerKeys.Displacement,
+                    ent.Comp.Displacement.Value.Id,
+                    appearance
+                );
+            }
+            else
+            {
+                _appearance.RemoveData(ent, DamageVisualizerKeys.Displacement);
+            }
         }
 
         // TODO DAMAGE
         // byref struct event.
-        RaiseLocalEvent(ent, new DamageChangedEvent(ent.Comp, damageDelta, interruptsDoAfters, origin,
-            ignoreBlockers, uncappedDamage)); // Goob - add ignoreBlockers, uncappedDamage
+        RaiseLocalEvent(ent, new DamageChangedEvent(ent.Comp, damageDelta, interruptsDoAfters, origin));
     }
 
     /// <summary>
@@ -88,7 +97,7 @@ public sealed partial class DamageableSystem : EntitySystem
 
         foreach (var (damageGroupId, _) in damagePerGroup)  //go through each group
         {
-            var group = _prototypeManager.Index<DamageGroupPrototype>(damageGroupId);  //get group
+            var group = ProtoMan.Index<DamageGroupPrototype>(damageGroupId);  //get group
             foreach (var type in group.DamageTypes) //go through each type inside that group
             {
                 if (!damage.DamageDict.TryGetValue(type, out var damageValue) || damageValue == 0) //get value and make sure it isn't 0

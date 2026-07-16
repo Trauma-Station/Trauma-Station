@@ -6,16 +6,14 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Antag;
-using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Trauma.Server.Antag;
 
-public sealed class AntagVerbSystem : EntitySystem
+public sealed partial class AntagVerbSystem : EntitySystem
 {
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -29,12 +27,12 @@ public sealed class AntagVerbSystem : EntitySystem
         var session = args.Session;
         var verbs = args.Verbs.Verbs;
 
-        foreach (var smite in _proto.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
+        foreach (var smite in ProtoMan.EnumeratePrototypes<AntagSmitePrototype>().OrderBy(p => p.ID))
         {
             if (!_whitelist.CheckBoth(args.Target, blacklist: smite.Blacklist, whitelist: smite.Whitelist))
                 continue;
 
-            var antag = _proto.Index(smite.Antag);
+            var antag = ProtoMan.Index(smite.Antag);
             var name = Loc.GetString(antag.Name);
             verbs.Add(new Verb()
             {

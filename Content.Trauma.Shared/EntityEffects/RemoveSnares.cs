@@ -5,7 +5,7 @@ using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Removes bolas from the target entity.
@@ -16,17 +16,20 @@ public sealed partial class RemoveSnares : EntityEffectBase<RemoveSnares>
         => Loc.GetString("entity-effect-guidebook-remove-snares", ("chance", Probability));
 }
 
-public sealed class RemoveSnaresEffectSystem : EntityEffectSystem<EnsnareableComponent, RemoveSnares>
+public sealed partial class RemoveSnaresEffectSystem : EntityEffectSystem<EnsnareableComponent, RemoveSnares>
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected override void Effect(Entity<EnsnareableComponent> ent, ref EntityEffectEvent<RemoveSnares> args)
     {
+        if (ent.Comp.Container is not { } container)
+            return;
+
         var user = args.User ?? ent.Owner;
 
         // snare api is dogshit and i cbf to improve it
-        foreach (var bola in ent.Comp.Container.ContainedEntities)
+        foreach (var bola in container.ContainedEntities)
         {
             _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, 0, new EnsnareableDoAfterEvent(), user, user, bola));
             _transform.DropNextTo(bola, user);

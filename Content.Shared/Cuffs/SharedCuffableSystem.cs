@@ -45,20 +45,20 @@ namespace Content.Shared.Cuffs
     // TODO remove all the IsServer() checks.
     public abstract partial class SharedCuffableSystem : EntitySystem
     {
-        [Dependency] private readonly INetManager _net = default!;
-        [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-        [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-        [Dependency] private readonly AlertsSystem _alerts = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedContainerSystem _container = default!;
-        [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-        [Dependency] private readonly SharedHandsSystem _hands = default!;
-        [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
-        [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly SharedTransformSystem _transform = default!;
-        [Dependency] private readonly UseDelaySystem _delay = default!;
-        [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
+        [Dependency] private INetManager _net = default!;
+        [Dependency] private ISharedAdminLogManager _adminLog = default!;
+        [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+        [Dependency] private AlertsSystem _alerts = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedContainerSystem _container = default!;
+        [Dependency] private SharedDoAfterSystem _doAfter = default!;
+        [Dependency] private SharedHandsSystem _hands = default!;
+        [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
+        [Dependency] private SharedInteractionSystem _interaction = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private UseDelaySystem _delay = default!;
+        [Dependency] private SharedCombatModeSystem _combatMode = default!;
 
         public override void Initialize()
         {
@@ -581,8 +581,11 @@ namespace Content.Shared.Cuffs
         /// /// <param name="target">The entity to be checked</param>
         /// <param name="requireFullyCuffed">when true, return false if the target is only partially cuffed (for things with more than 2 hands)</param>
         /// <returns></returns>
-        public bool IsCuffed(Entity<CuffableComponent> target, bool requireFullyCuffed = true)
+        public bool IsCuffed(Entity<CuffableComponent?> target, bool requireFullyCuffed = true)
         {
+            if (!Resolve(target, ref target.Comp, false))
+                return false;
+
             if (!TryComp<HandsComponent>(target, out var hands))
                 return false;
 
@@ -613,7 +616,7 @@ namespace Content.Shared.Cuffs
         /// <param name="cuff">The handcuff entity we're attempting to remove.</param>
         public void TryUncuff(Entity<CuffableComponent?> target, EntityUid user, Entity<HandcuffComponent?> cuff)
         {
-            if (!Resolve(target, ref target.Comp) || !Resolve(cuff, ref cuff.Comp))
+            if (!Resolve(target, ref target.Comp, false) || !Resolve(cuff, ref cuff.Comp)) // Trauma - logMissing false for target
                 return;
 
             var isOwner = user == target.Owner;
@@ -811,14 +814,14 @@ namespace Content.Shared.Cuffs
         private void OnEquipAttempt(EntityUid uid, CuffableComponent component, IsEquippingAttemptEvent args)
         {
             // is this a self-equip, or are they being stripped?
-            if (args.Equipee == uid)
+            if (args.User == uid)
                 CheckAct(uid, component, args);
         }
 
         private void OnUnequipAttempt(EntityUid uid, CuffableComponent component, IsUnequippingAttemptEvent args)
         {
             // is this a self-equip, or are they being stripped?
-            if (args.Unequipee == uid)
+            if (args.User == uid)
                 CheckAct(uid, component, args);
         }
 
@@ -870,7 +873,7 @@ namespace Content.Shared.Cuffs
         /// <returns>The most recently added cuff or null if none exists.</returns>
         public EntityUid? GetLastCuffOrNull(Entity<CuffableComponent?> entity)
         {
-            if (!Resolve(entity, ref entity.Comp))
+            if (!Resolve(entity, ref entity.Comp, false)) // Trauma - false
                 return null;
 
             return entity.Comp.Container.ContainedEntities.Count == 0 ? null : entity.Comp.Container.ContainedEntities.Last();

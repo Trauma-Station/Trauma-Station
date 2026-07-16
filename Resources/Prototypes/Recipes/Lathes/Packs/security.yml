@@ -2,6 +2,7 @@
 
 - type: latheRecipePack
   id: SecurityEquipmentStatic
+  parent: TraumaSecurityEquipmentStatic # Trauma
   recipes:
   - ClothingEyesHudSecurity
   - ForensicPad

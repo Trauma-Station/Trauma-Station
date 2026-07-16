@@ -8,11 +8,10 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Factory;
 
-public abstract class SharedConstructorSystem : EntitySystem
+public abstract partial class SharedConstructorSystem : EntitySystem
 {
-    [Dependency] protected readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] protected readonly IPrototypeManager Proto = default!;
-    [Dependency] protected readonly SharedTransformSystem _transform = default!;
+    [Dependency] protected ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] protected SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -32,7 +31,7 @@ public abstract class SharedConstructorSystem : EntitySystem
             return;
 
         var msg = ent.Comp.Construction is {} id
-            ? Loc.GetString("constructor-examine", ("name", Proto.Index(id).Name ?? id))
+            ? Loc.GetString("constructor-examine", ("name", ProtoMan.Index(id).Name ?? id))
             : Loc.GetString("constructor-examine-unset");
         args.PushMarkup(msg);
     }
@@ -43,12 +42,12 @@ public abstract class SharedConstructorSystem : EntitySystem
     private void OnSetProto(Entity<ConstructorComponent> ent, ref ConstructorSetProtoMessage args)
     {
         if (ent.Comp.Construction == args.Id
-            || !Proto.HasIndex(args.Id))
+            || !ProtoMan.HasIndex(args.Id))
             return;
 
         ent.Comp.Construction = args.Id;
         Dirty(ent);
-        _adminLogger.Add(LogType.Construction, LogImpact.Low, $"{ToPrettyString(args.Actor):user} set {ToPrettyString(ent):target} construction to {args.Id}");
+        _adminLogger.Add(LogType.Construction, LogImpact.Low, $"{args.Actor:user} set {ent.Owner:target} construction to {args.Id}");
     }
 
     public EntityCoordinates OutputPosition(EntityUid uid)

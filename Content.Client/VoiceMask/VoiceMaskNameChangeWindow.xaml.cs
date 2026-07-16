@@ -10,7 +10,7 @@ namespace Content.Client.VoiceMask;
 [GenerateTypedNameReferences]
 public sealed partial class VoiceMaskNameChangeWindow : FancyWindow
 {
-    [Dependency] private readonly IEntitySystemManager _entitySystem = default!; // Goob radio icons
+    [Dependency] private IEntitySystemManager _entitySystem = default!; // Goob radio icons
     private readonly SpriteSystem _spriteSystem; // Goob radio icons
 
     public Action<string>? OnNameChange;

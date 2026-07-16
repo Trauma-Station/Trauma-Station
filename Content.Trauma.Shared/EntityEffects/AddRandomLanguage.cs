@@ -36,10 +36,10 @@ public sealed partial class AddRandomLanguage : EntityEffectBase<AddRandomLangua
         => null;
 }
 
-public sealed class AddRandomLanguageSystem : EntityEffectSystem<LanguageSpeakerComponent, AddRandomLanguage>
+public sealed partial class AddRandomLanguageSystem : EntityEffectSystem<LanguageSpeakerComponent, AddRandomLanguage>
 {
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     protected override void Effect(Entity<LanguageSpeakerComponent> ent, ref EntityEffectEvent<AddRandomLanguage> args)
     {

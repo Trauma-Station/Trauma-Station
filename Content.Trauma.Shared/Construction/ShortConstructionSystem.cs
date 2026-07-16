@@ -9,10 +9,10 @@ namespace Content.Trauma.Shared.Construction;
 /// Handles making the client open the UI.
 /// Actual construction is done by <c>ConstructionSystem</c> not this.
 /// </summary>
-public sealed class ShortConstructionSystem : EntitySystem
+public sealed partial class ShortConstructionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: selectableAmmo
@@ -137,6 +129,15 @@
   protoId: BulletBigshot
   fireCost: 80
 
+- type: selectableAmmo
+  id: BulletEnergyGunLawyershot
+  desc: A projectile capable of shutting up lawyers, and only lawyers.
+  icon:
+    sprite: Clothing/Neck/Misc/lawyerbadge.rsi
+    state: icon
+  color: black
+  protoId: BulletLawyershot
+  fireCost: 40
 
 # Pulse Rifle
 

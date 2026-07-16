@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Body;
 using Content.Goobstation.Common.Changeling;
@@ -18,14 +17,9 @@ using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.Overlays;
 using Content.Server.Actions;
 using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
-using Content.Shared.Body;
-using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
-using Content.Server.Guardian;
-using Content.Shared.Light.EntitySystems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Store.Systems;
@@ -34,6 +28,8 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Body;
+using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
 using Content.Shared.Camera;
 using Content.Shared.Chemistry.Components;
@@ -44,13 +40,16 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Emp;
 using Content.Shared.FixedPoint;
 using Content.Shared.Flash.Components;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Guardian.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Implants;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -59,6 +58,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Overlays;
 using Content.Shared.Polymorph;
 using Content.Shared.Preferences;
 using Content.Shared.Projectiles;
@@ -82,47 +82,48 @@ namespace Content.Goobstation.Server.Changeling;
 public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
     // this is one hell of a star wars intro text
-    [Dependency] private readonly CommonMutationSystem _mutation = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly StoreSystem _store = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly HumanoidProfileSystem _humanoid = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly SharedEmpSystem _emp = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly GravitySystem _gravity = default!;
-    [Dependency] private readonly PullingSystem _pull = default!;
-    [Dependency] private readonly SharedCuffableSystem _cuffs = default!;
-    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
-    [Dependency] private readonly ChangelingRuleSystem _changelingRuleSystem = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
-    [Dependency] private readonly EntityQuery<ChangelingIdentityComponent> _lingQuery = default!;
+    [Dependency] private CommonMutationSystem _mutation = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private StoreSystem _store = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private HumanoidProfileSystem _humanoid = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private SharedEmpSystem _emp = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPoweredLightSystem _light = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private GravitySystem _gravity = default!;
+    [Dependency] private PullingSystem _pull = default!;
+    [Dependency] private SharedCuffableSystem _cuffs = default!;
+    [Dependency] private SharedPuddleSystem _puddle = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private ExplosionSystem _explosionSystem = default!;
+    [Dependency] private ChangelingRuleSystem _changelingRuleSystem = default!;
+    [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private EntityQuery<ChangelingIdentityComponent> _lingQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChangelingIdentityComponent, MapInitEvent>(OnIdentityMapInit);
-        SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit);
+        SubscribeLocalEvent<ChangelingIdentityComponent, MapInitEvent>(OnIdentityMapInit,
+            after: [ typeof(SharedBloodstreamSystem)] ); // needs bloodstream's solution to be set up first
+        SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit,
+            after: [ typeof(SharedBloodstreamSystem)] ); // shit subscription ordering system award
 
         SubscribeLocalEvent<ChangelingIdentityComponent, MobStateChangedEvent>(OnMobStateChange);
         SubscribeLocalEvent<ChangelingIdentityComponent, UpdateMobStateEvent>(OnUpdateMobState);
@@ -191,7 +192,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (ent.Comp.ReagentDivisor <= 0)
             return;
 
-        if (!_proto.TryIndex(ent.Comp.StingConfiguration, out var configuration))
+        if (!ProtoMan.TryIndex(ent.Comp.StingConfiguration, out var configuration))
             return;
 
         TryInjectReagents(args.Target,
@@ -463,7 +464,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (!TryComp(action.Action, out ChangelingReagentStingComponent? reagentSting))
             return false;
 
-        if (!_proto.TryIndex(reagentSting.Configuration, out var configuration))
+        if (!ProtoMan.TryIndex(reagentSting.Configuration, out var configuration))
             return false;
 
         if (!TryInjectReagents(target, configuration.Reagents))
@@ -548,7 +549,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         if (data != null)
         {
-            if (!_proto.TryIndex(data.Profile.Species, out var species))
+            if (!ProtoMan.TryIndex(data.Profile.Species, out var species))
                 return null;
             pid = species.Prototype;
         }
@@ -570,8 +571,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             RevertOnDeath = false
         };
 
-        if (!HasComp<ThermalVisionComponent>(uid))
-            Log.Error("Ling didnt have thermal vision!");
+        var hadThermal = HasComp<ThermalVisionComponent>(uid);
 
         if (_polymorph.PolymorphEntity(uid, config) is not {} newEnt)
             return null;
@@ -588,8 +588,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         foreach (var type in types)
             _polymorph.CopyPolymorphComponent(uid, newEnt, type);
 
-        if (!HasComp<ThermalVisionComponent>(newEnt))
-            Log.Error("Ling didnt have thermal vision after transform!");
+        if (HasComp<ThermalVisionComponent>(newEnt) != hadThermal)
+            Log.Error("Ling didnt retain thermal vision after transform!");
 
         if (data != null)
         {
@@ -706,7 +706,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (ent.Comp.EvolutionsAssigned) // this is solely because polymorph will cause mega errors otherwise
             return;
 
-        if (!_proto.TryIndex(ent.Comp.EvolutionsProto, out var evoProto))
+        if (!ProtoMan.TryIndex(ent.Comp.EvolutionsProto, out var evoProto))
             return;
 
         foreach (var startingComp in evoProto.Components)

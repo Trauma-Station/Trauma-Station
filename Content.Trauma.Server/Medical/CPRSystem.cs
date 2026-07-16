@@ -6,10 +6,10 @@ using Content.Trauma.Shared.Medical;
 
 namespace Content.Trauma.Server.Medical;
 
-public sealed class CPRSystem : SharedCPRSystem
+public sealed partial class CPRSystem : SharedCPRSystem
 {
-    [Dependency] private readonly RespiratorSystem _respirator = default!;
-    [Dependency] private readonly EntityQuery<RespiratorComponent> _respiratorQuery = default!;
+    [Dependency] private RespiratorSystem _respirator = default!;
+    [Dependency] private EntityQuery<RespiratorComponent> _respiratorQuery = default!;
 
     protected override void TryInhale(EntityUid uid)
     {

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   id: KitchenDeepFryer
@@ -8,13 +10,10 @@
     sprite: _Trauma/Structures/Machines/Service/deep_fryer.rsi
     layers:
     - state: deep_fryer_open
-      map: ["fryer_open"]
+      map: ["open"]
     - state: deep_fryer_closed
       visible: false
-      map: ["fryer_closed"]
-    - state: deep_fryer_closed_big
-      visible: false
-      map: ["fryer_closed_big"]
+      map: ["closed"]
   - type: Transform
     noRot: false
   # Deep fryer stuff
@@ -23,10 +22,10 @@
     - storagebase
     componentsToAdd:
     - type: DeepFried
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          maxVol: 15
+    - type: Solution
+      id: food
+      solution:
+        maxVol: 15
     - type: NameModifier
     componentsToAddObjects:
     - type: Edible
@@ -90,7 +89,6 @@
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
-      solutions: !type:Container
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: Climbable
@@ -103,10 +101,10 @@
       path: /Audio/_Trauma/Machines/DeepFryer/deep_fryer_ambience.ogg
   - type: ApcPowerReceiver
     powerLoad: 700
-  - type: SolutionContainerManager
-    solutions:
-      fryer:
-        maxVol: 300
+  - type: Solution
+    id: fryer
+    solution:
+      maxVol: 300
   - type: MixableSolution
     solution: fryer
   - type: RefillableSolution
@@ -122,17 +120,16 @@
   - type: GenericVisualizer
     visuals:
       enum.DeepFryerVisuals.Open:
-        fryer_open:
+        open:
           True: { visible: true }
           False: { visible: false }
-      enum.DeepFryerVisuals.Frying:
-        fryer_closed:
-          True: { visible: true }
-          False: { visible: false }
+        closed:
+          True: { visible: false }
+          False: { visible: true }
       enum.DeepFryerVisuals.BigFrying:
-        fryer_closed_big:
-          True: { visible: true }
-          False: { visible: false }
+        closed:
+          True: { state: deep_fryer_closed_big }
+          False: { state: deep_fryer_closed }
   - type: Destructible
     thresholds:
     - trigger:

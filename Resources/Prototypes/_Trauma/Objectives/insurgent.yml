@@ -1,10 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseObjective
   id: BaseInsurgentObjective
   components:
   - type: Objective
-    issuer: objective-issuer-insurgents
+    issuer: Insurgents
   - type: RoleRequirement
     roles:
     - InsurgentRole

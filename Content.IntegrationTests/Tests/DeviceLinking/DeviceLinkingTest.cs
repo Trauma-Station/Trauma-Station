@@ -34,23 +34,22 @@ public sealed class DeviceLinkingTest : GameTest
         var server = pair.Server;
         var protoMan = server.ProtoMan;
         var compFact = server.ResolveDependency<IComponentFactory>();
-        var mapMan = server.ResolveDependency<IMapManager>();
         var mapSys = server.System<SharedMapSystem>();
         var deviceLinkSys = server.System<DeviceLinkSystem>();
 
-        var sinkName = compFact.GetComponentName<DeviceLinkSinkComponent>(); // Trauma
+        var sinkName = compFact.CompName<DeviceLinkSinkComponent>(); // Trauma
         await server.WaitAssertion(() =>
         {
             using (Assert.EnterMultipleScope())
             {
                 var proto = protoMan.Index(protoKey);
-                Assert.That(proto.TryGetComponent<DeviceLinkSinkComponent>(sinkName, out var protoSinkComp)); // Trauma - use cached name
+                Assert.That(proto.TryComp<DeviceLinkSinkComponent>(sinkName, out var protoSinkComp)); // Trauma - use cached name
 
                 foreach (var port in protoSinkComp!.Ports)
                 {
                     // Create a map for each entity/port combo so they can't interfere
                     mapSys.CreateMap(out var mapId);
-                    var grid = mapMan.CreateGridEntity(mapId);
+                    var grid = mapSys.CreateGridEntity(mapId);
                     mapSys.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
                     var coord = new EntityCoordinates(grid.Owner, 0, 0);
 

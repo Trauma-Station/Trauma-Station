@@ -12,15 +12,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems.PathSpecific;
 
-public sealed class RustSpreaderSystem : EntitySystem
+public sealed partial class RustSpreaderSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private ITileDefinitionManager _tiles = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly HereticAbilitySystem _ability = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private HereticAbilitySystem _ability = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
 
     private static readonly TimeSpan RustSpreadInterval = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
@@ -41,7 +40,7 @@ public sealed class RustSpreaderSystem : EntitySystem
     private void OnInit(Entity<RustSpreaderComponent> ent, ref MapInitEvent args)
     {
         var coords = _xform.GetMapCoordinates(ent.Owner);
-        if (!_mapManager.TryFindGridAt(coords, out var gridUid, out var grid))
+        if (!_map.TryFindGridAt(coords, out var gridUid, out var grid))
         {
             QueueDel(ent);
             return;
@@ -146,7 +145,7 @@ public sealed class RustSpreaderSystem : EntitySystem
                     spreader.ProcessedTiles.Add(neighbor);
                 }
 
-                var tileDef = (ContentTileDefinition) _tileDefinitionManager[tile.Tile.TypeId];
+                var tileDef = (ContentTileDefinition) _tiles[tile.Tile.TypeId];
 
                 if (_ability.CanRustTile(tileDef))
                     _ability.MakeRustTile(tile.GridUid, mapGrid, tile, spreader.TileRune);

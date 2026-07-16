@@ -14,13 +14,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Chat;
 
-public sealed class SharedSuicideSystem : EntitySystem
+public sealed partial class SharedSuicideSystem : EntitySystem
 {
     private static readonly ProtoId<DamageTypePrototype> FallbackDamageType = "Blunt";
 
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!; // Goobstation
+    // <Trauma>
+    [Dependency] private MobThresholdSystem _threshold = default!;
+    // </Trauma>
+    [Dependency] private DamageableSystem _damageableSystem = default!;
 
     /// <summary>
     /// Applies lethal damage spread out across the damage types given.
@@ -41,7 +42,7 @@ public sealed class SharedSuicideSystem : EntitySystem
         // Mob thresholds are sorted from alive -> crit -> dead,
         // grabbing the last key will give us how much damage is needed to kill a target from zero
         // The exact lethal damage amount is adjusted based on their current damage taken
-        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - _mobThreshold.CheckVitalDamage(target.AsNullable()); // Trauma - use vital damage
+        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - _threshold.CheckVitalDamage(target.AsNullable()); // Trauma - use vital damage
         var totalDamage = appliedDamageSpecifier.GetTotal();
 
         // Removing structural because it causes issues against entities that cannot take structural damage,
@@ -74,13 +75,13 @@ public sealed class SharedSuicideSystem : EntitySystem
         // Mob thresholds are sorted from alive -> crit -> dead,
         // grabbing the last key will give us how much damage is needed to kill a target from zero
         // The exact lethal damage amount is adjusted based on their current damage taken
-        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - _mobThreshold.CheckVitalDamage(target.AsNullable()); // Trauma - use vital damage
+        var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - _threshold.CheckVitalDamage(target.AsNullable()); // Trauma - use vital damage
 
         // We don't want structural damage for the same reasons listed above
-        if (!_prototypeManager.TryIndex(damageType, out var damagePrototype) || damagePrototype.ID == "Structural")
+        if (!ProtoMan.TryIndex(damageType, out var damagePrototype) || damagePrototype.ID == "Structural")
         {
             Log.Error($"{nameof(SharedSuicideSystem)} could not find the damage type prototype associated with {damageType}. Falling back to {FallbackDamageType}");
-            damagePrototype = _prototypeManager.Index(FallbackDamageType);
+            damagePrototype = ProtoMan.Index(FallbackDamageType);
         }
 
         var damage = new DamageSpecifier(damagePrototype, lethalAmountOfDamage);

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # TODO: BRUH DO THIS WITH CODE
 
 # Unloaded
@@ -26,8 +28,9 @@
         layer:
         - MachineLayer
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
@@ -177,8 +180,9 @@
     graph: BloomeryCold
     node: bloomerybrasslit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: NormalMode
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PointLight
     radius: 2
     energy: 3
@@ -215,8 +219,9 @@
     graph: BloomeryCold
     node: bloomerysteellit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: NormalMode
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PointLight
     radius: 2
     energy: 3
@@ -253,8 +258,9 @@
     graph: BloomeryCold
     node: bloomeryplasteellit
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: NormalMode
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: PointLight
     radius: 2
     energy: 3
@@ -275,7 +281,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 5
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -301,7 +307,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 20
+        damage: 5
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -327,7 +333,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 5
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]

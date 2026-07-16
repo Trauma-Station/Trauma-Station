@@ -25,17 +25,16 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Shadowling.Systems;
 
-public abstract class SharedShadowlingSystem : EntitySystem
+public abstract partial class SharedShadowlingSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedLightDetectionDamageSystem _lightDamage = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
+    [Dependency] private SharedLightDetectionDamageSystem _lightDamage = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     public static readonly ProtoId<OrganCategoryPrototype> HeadCategory = "Head";
     public static readonly ProtoId<OrganCategoryPrototype> TorsoCategory = "Torso";
@@ -124,7 +123,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
 
     public void OnPhaseChanged(EntityUid uid, ShadowlingComponent component, ShadowlingPhases phase)
     {
-        var defaultAbilities = _protoMan.Index(component.PostHatchComponents);
+        var defaultAbilities = ProtoMan.Index(component.PostHatchComponents);
         switch (phase)
         {
             case ShadowlingPhases.PostHatch:
@@ -137,9 +136,9 @@ public abstract class SharedShadowlingSystem : EntitySystem
             {
                 // Remove all previous actions
                 EntityManager.RemoveComponents(uid, defaultAbilities);
-                EntityManager.RemoveComponents(uid, _protoMan.Index(component.ObtainableComponents));
+                EntityManager.RemoveComponents(uid, ProtoMan.Index(component.ObtainableComponents));
 
-                EntityManager.AddComponents(uid, _protoMan.Index(component.PostAscensionComponents));
+                EntityManager.AddComponents(uid, ProtoMan.Index(component.PostAscensionComponents));
 
                 var ev = new ShadowlingAscendEvent(uid);
                 RaiseLocalEvent(ev);
@@ -149,7 +148,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
             {
                 // git gud bro :sob: :pray:
                 EntityManager.RemoveComponents(uid, defaultAbilities);
-                EntityManager.RemoveComponents(uid, _protoMan.Index(component.ObtainableComponents));
+                EntityManager.RemoveComponents(uid, ProtoMan.Index(component.ObtainableComponents));
 
                 // this is such a big L that even the code is losing and all variables are hardcoded.
                 _status.TryAddStatusEffect(uid, "ShadowlingAbominationStatusEffect", out _);
@@ -240,7 +239,7 @@ public abstract class SharedShadowlingSystem : EntitySystem
 
         var thrall = EnsureComp<ThrallComponent>(target);
         thrall.Converter = uid;
-        var comps = _protoMan.Index(components);
+        var comps = ProtoMan.Index(components);
         EntityManager.AddComponents(target, comps);
 
         if (TryComp<ShadowlingComponent>(uid, out var sling))

@@ -13,10 +13,10 @@ public sealed partial class EjectMechPilot : EntityEffectBase<EjectMechPilot>
     public TimeSpan ParalyzeDuration = TimeSpan.Zero;
 }
 
-public sealed class EjectMechPilotEffectSystem : EntityEffectSystem<MechComponent, EjectMechPilot>
+public sealed partial class EjectMechPilotEffectSystem : EntityEffectSystem<MechComponent, EjectMechPilot>
 {
-    [Dependency] private readonly SharedMechSystem _mech = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedMechSystem _mech = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     protected override void Effect(Entity<MechComponent> ent, ref EntityEffectEvent<EjectMechPilot> args)
     {

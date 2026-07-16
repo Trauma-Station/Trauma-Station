@@ -16,11 +16,10 @@ using Content.Trauma.Shared.DeepFryer.Systems;
 
 namespace Content.Trauma.Server.DeepFryer;
 
-public sealed class DeepFryerSystem : SharedDeepFryerSystem
+public sealed partial class DeepFryerSystem : SharedDeepFryerSystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
     private static readonly ProtoId<DamageTypePrototype> damageType = "Heat";
 
@@ -88,7 +87,7 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
     {
         AllRecipes.Clear();
 
-        foreach (var proto in _proto.EnumeratePrototypes<DeepFryerRecipePrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<DeepFryerRecipePrototype>())
         {
             AllRecipes.Add(proto);
         }
@@ -101,7 +100,7 @@ public sealed class DeepFryerSystem : SharedDeepFryerSystem
 
     private void AddHeatDamage(Entity<DeepFryerComponent> ent, float frameTime)
     {
-        var heatProto = _proto.Index(damageType);
+        var heatProto = ProtoMan.Index(damageType);
 
         foreach (var entity in ent.Comp.StoredObjects)
         {

@@ -1,22 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Dataset;
-using Content.Shared.Tag;
+using Content.Trauma.Shared.Heretic.Prototypes;
+using Content.Trauma.Shared.Heretic.Rituals;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HereticKnowledgeRitualComponent : Component
 {
-    [DataField]
-    public ProtoId<DatasetPrototype> KnowledgeDataset = "EligibleTags";
+    [DataField(required: true)]
+    public Dictionary<ProtoId<RitualIngredientDatasetPrototype>, int> Datasets;
 
-    [DataField]
-    public float TagAmount = 4;
-
-    /// <summary>
-    /// Required tags for ritual of knowledge
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public HashSet<ProtoId<TagPrototype>> KnowledgeRequiredTags = new();
+    [DataField, AutoNetworkedField]
+    public List<RitualIngredient> Ingredients = new();
 }

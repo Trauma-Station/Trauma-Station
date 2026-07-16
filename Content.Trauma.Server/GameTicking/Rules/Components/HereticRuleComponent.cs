@@ -11,9 +11,6 @@ public sealed partial class HereticRuleComponent : Component
     [DataField]
     public int RealityShiftPerHeretic = 1;
 
-    [DataField]
-    public EntProtoId RealityShift = "EldritchInfluenceT1";
-
     public readonly List<EntityUid> Minds = new();
 
     public static readonly List<ProtoId<StoreCategoryPrototype>> StoreCategories = new()
@@ -25,7 +22,7 @@ public sealed partial class HereticRuleComponent : Component
         "HereticPathVoid",
         "HereticPathRust",
         "HereticPathCosmos",
-        "HereticPathSideSpecial",
+        "HereticPathSpecial",
         "HereticPathSideT1",
         "HereticPathSideT2",
         "HereticPathSideT3",

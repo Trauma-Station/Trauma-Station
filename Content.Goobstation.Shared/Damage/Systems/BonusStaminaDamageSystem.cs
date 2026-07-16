@@ -5,7 +5,7 @@ using Content.Goobstation.Shared.Damage.Components;
 
 namespace Content.Goobstation.Shared.Damage.System;
 
-public sealed class BonusStaminaDamageSystem : EntitySystem
+public sealed partial class BonusStaminaDamageSystem : EntitySystem
 {
     public override void Initialize()
     {

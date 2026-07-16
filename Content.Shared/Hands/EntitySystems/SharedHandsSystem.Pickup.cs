@@ -80,6 +80,10 @@ public abstract partial class SharedHandsSystem
         if (handId == null)
             return false;
 
+        // don't try to pick up the item if it's being deleted anyways
+        if (TerminatingOrDeleted(entity) || EntityManager.IsQueuedForDeletion(entity))
+            return false;
+
         if (!Resolve(entity, ref item, false))
             return false;
 
@@ -88,6 +92,11 @@ public abstract partial class SharedHandsSystem
 
         if (!BeforeDoPickup((uid, handsComp), entity))
             return false;
+
+        // <Trauma>
+        if (_thieving.IsStealthy(uid))
+            animate = false;
+        // </Trauma>
 
         if (animate)
         {

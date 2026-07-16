@@ -23,12 +23,12 @@ public abstract partial class SharedHereticRitualSystem
         SubscribeLocalEvent<HereticComponent, HereticRitualConditionEvent<CanAscendCondition>>(OnCanAscend);
         SubscribeLocalEvent<HereticComponent, HereticRitualConditionEvent<ObjectivesCompleteCondition>>(
             OnObjectivesComplete);
-        SubscribeLocalEvent<HereticKnowledgeRitualComponent, HereticRitualConditionEvent<FilterKnowledgeTagsCondition>>(
-            OnKnowledge);
         SubscribeLocalEvent<HereticRitualComponent, HereticRitualConditionEvent<TryApplyEffectSequenceCondition>>(
             OnApplySequence);
 
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<HereticMinStageCondition>>(OnMinStage);
+        SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<HereticMinPassiveLevelCondition>>(
+            OnMinLevel);
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<BackstabCondition>>(OnBackstab);
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<TryMakeRustWallCondition>>(OnRustWall);
         SubscribeLocalEvent<TransformComponent, HereticRitualConditionEvent<FleshGhoulLimitCondition>>(
@@ -45,8 +45,18 @@ public abstract partial class SharedHereticRitualSystem
 
         fleshMind.Ghouls = fleshMind.Ghouls.Where(Exists).ToList();
         args.Result = fleshMind.Ghouls.Count < fleshMind.GhoulLimit;
+
+        // Below we kill 1 existing ghoul that is ssd to free up the limit
+        // This _net check WILL cause misspredicts if any ghoul is successfully killed, but it is checking for
+        // player sessions which client doesn't see anyway
+        if (args.Result || _net.IsClient)
+            return;
+
+        if (fleshMind.Ghouls.Any(x => _ghoul.TryKillAndDeconvertInactiveGhoul(x)))
+            args.Result = fleshMind.Ghouls.Count < fleshMind.GhoulLimit;
+
         if (!args.Result)
-            _popup.PopupClient(Loc.GetString("heretic-ritual-fail-ghoul-limit"), user, user);
+            _popup.PopupEntity(Loc.GetString("heretic-ritual-fail-ghoul-limit"), user, user);
     }
 
     private void OnRustWall(Entity<TransformComponent> ent,
@@ -70,6 +80,15 @@ public abstract partial class SharedHereticRitualSystem
             args.Condition.ShowPopup,
             args.Condition.PlaySound,
             args.Condition.AlwaysBackstabLaying);
+    }
+
+    private void OnMinLevel(Entity<TransformComponent> ent,
+        ref HereticRitualConditionEvent<HereticMinPassiveLevelCondition> args)
+    {
+        if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) || !TryComp(mind, out HereticComponent? heretic))
+            return;
+
+        args.Result = heretic.PassiveLevel >= args.Condition.MinLevel;
     }
 
     private void OnMinStage(Entity<TransformComponent> ent,
@@ -127,13 +146,15 @@ public abstract partial class SharedHereticRitualSystem
         var toDelete = new HashSet<EntityUid>();
         var toSplit = new Dictionary<Entity<StackComponent>, int>();
 
-        var ingredientAmounts = Enumerable.Repeat(0, args.Condition.Ingredients.Length).ToList();
+        var ingredients = CompOrNull<HereticKnowledgeRitualComponent>(ent)?.Ingredients ?? args.Condition.Ingredients;
+
+        var ingredientAmounts = Enumerable.Repeat(0, ingredients.Count).ToList();
 
         foreach (var look in args.Ritual.Comp.Raiser.GetTargets<EntityUid>(args.Condition.ApplyOn))
         {
-            for (var i = 0; i < args.Condition.Ingredients.Length; i++)
+            for (var i = 0; i < ingredients.Count; i++)
             {
-                var ritIng = args.Condition.Ingredients[i];
+                var ritIng = ingredients[i];
                 var compAmount = ingredientAmounts[i];
 
                 if (compAmount >= ritIng.Amount)
@@ -154,9 +175,9 @@ public abstract partial class SharedHereticRitualSystem
             }
         }
 
-        for (var i = 0; i < args.Condition.Ingredients.Length; i++)
+        for (var i = 0; i < ingredients.Count; i++)
         {
-            var ritIng = args.Condition.Ingredients[i];
+            var ritIng = ingredients[i];
             var difference = ritIng.Amount - ingredientAmounts[i];
             if (difference > 0)
                 missingList.Add(ritIng.Name, difference);
@@ -191,40 +212,5 @@ public abstract partial class SharedHereticRitualSystem
         }
 
         args.Result = IsSacrificeTarget((mind, heretic), ent);
-    }
-
-    private void OnKnowledge(Entity<HereticKnowledgeRitualComponent> ent,
-        ref HereticRitualConditionEvent<FilterKnowledgeTagsCondition> args)
-    {
-        if (args.Condition.ApplyOn == string.Empty)
-            return;
-
-        var output = new HashSet<EntityUid>();
-        var missingTags = ent.Comp.KnowledgeRequiredTags.ToHashSet();
-        foreach (var uid in args.Ritual.Comp.Raiser.GetTargets<EntityUid>(args.Condition.ApplyOn))
-        {
-            if (!_tagQuery.TryComp(uid, out var tags))
-                continue;
-
-            missingTags.RemoveWhere(tag =>
-            {
-                if (!_tag.HasTag(tags, tag))
-                    return false;
-
-                output.Add(uid);
-                return true;
-            });
-        }
-
-        if (missingTags.Count > 0)
-        {
-            var missing = string.Join(", ", missingTags);
-            var cancelString = Loc.GetString("heretic-ritual-fail-items", ("itemlist", missing));
-            CancelCondition(args.Ritual, ref args, cancelString);
-            return;
-        }
-
-        args.Ritual.Comp.Blackboard[args.Condition.Result] = output;
-        args.Result = true;
     }
 }

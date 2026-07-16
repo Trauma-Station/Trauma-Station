@@ -1,19 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.GhostColor;
-using Robust.Client.GameObjects;
 
 namespace Content.Trauma.Client.GhostColor;
 
-public sealed class GhostColorSystem : EntitySystem
+public sealed partial class GhostColorSystem : EntitySystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
+    private static Color DefaultColor = Color.FromHex("#FFFFFF88");
+
     public override void Update(float frameTime)
     {
-        var defaultColor = Color.FromHex("#FFFFFF88");
-        var colors = EntityQueryEnumerator<GhostColorComponent, SpriteComponent>();
-        while (colors.MoveNext(out var color, out var sprite))
+        var query = EntityQueryEnumerator<GhostColorComponent, SpriteComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var sprite))
         {
-            sprite.Color = color.Color ?? defaultColor;
+            _sprite.SetColor((uid, sprite), comp.Color ?? DefaultColor);
         }
     }
 }

@@ -11,9 +11,9 @@ using Content.Trauma.Shared.Silicon.Components;
 
 namespace Content.Trauma.Shared.Silicon.Systems;
 
-public sealed class SharedSiliconChargeSystem : CommonSiliconSystem
+public sealed partial class SharedSiliconChargeSystem : CommonSiliconSystem
 {
-    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private AlertsSystem _alertsSystem = default!;
 
     private static readonly ProtoId<DamageTypePrototype> IonDamageType = "Ion";
 
@@ -122,13 +122,5 @@ public enum SiliconType
 /// <summary>
 ///     Event raised when a Silicon's charge state needs to be updated.
 /// </summary>
-[Serializable, NetSerializable]
-public sealed class SiliconChargeStateUpdateEvent : EntityEventArgs
-{
-    public short ChargePercent { get; }
-
-    public SiliconChargeStateUpdateEvent(short chargePercent)
-    {
-        ChargePercent = chargePercent;
-    }
-}
+[ByRefEvent]
+public record struct SiliconChargeStateUpdateEvent(short ChargePercent);

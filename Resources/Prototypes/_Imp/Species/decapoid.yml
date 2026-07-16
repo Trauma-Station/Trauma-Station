@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: species
   id: Decapoid
   name: species-name-decapoid
@@ -11,4 +13,10 @@
   lastNames: NamesDecapoidLast
   sexes:
   - Unsexed
-  knowledge: Human # Idk make a custom one if you really want to
+  knowledge: Decapoid
+  defaultSoundsBySex:
+  - UnisexDecapoid
+  - UnisexDecapoid
+  - UnisexDecapoid
+  voices:
+  - UnisexDecapoid

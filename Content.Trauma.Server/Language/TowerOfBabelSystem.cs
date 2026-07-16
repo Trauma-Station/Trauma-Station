@@ -6,10 +6,9 @@ using Content.Trauma.Shared.Language.Systems;
 
 namespace Content.Trauma.Server.Language;
 
-public sealed class TowerOfBabelSystem : EntitySystem
+public sealed partial class TowerOfBabelSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedLanguageSystem _language = default!;
+    [Dependency] private SharedLanguageSystem _language = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed class TowerOfBabelSystem : EntitySystem
 
         var spoken = speaker.Speaks;
         spoken.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<LanguagePrototype>())
+        foreach (var proto in ProtoMan.EnumeratePrototypes<LanguagePrototype>())
         {
             spoken.Add(proto.ID);
         }

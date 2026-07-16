@@ -14,11 +14,11 @@ namespace Content.Trauma.Server.Abductor;
 /// <summary>
 /// Manages experiment task count going up and tying abductors to their rule.
 /// </summary>
-public sealed class AbductorRuleSystem : EntitySystem
+public sealed partial class AbductorRuleSystem : EntitySystem
 {
-    [Dependency] private readonly NumberObjectiveSystem _number = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
+    [Dependency] private NumberObjectiveSystem _number = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
 
     public override void Initialize()
     {

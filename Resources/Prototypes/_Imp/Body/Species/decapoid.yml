@@ -1,5 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: markingsGroup
   id: Decapoid
+  onlyGroupWhitelisted: true
   limits:
     enum.HumanoidVisualLayers.Hair:
       limit: 0
@@ -76,18 +79,28 @@
           32:
             sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
             state: neck
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: back
+      back:
+        sizeMaps:
+          32:
+            sprite: _Impstation/Mobs/Species/Decapoid/displacement.rsi
+            state: back
   - type: InitialBody
     organs:
-      Torso: TorsoDecapoid
-      Head: HeadDecapoid
-      ArmRight: RightArmDecapoid
-      ArmLeft: LeftArmDecapoid
-      HandRight: RightHandDecapoid
-      HandLeft: LeftHandDecapoid
-      LegRight: RightLegDecapoid
-      LegLeft: LeftLegDecapoid
-      FootRight: RightFootDecapoid
-      FootLeft: LeftFootDecapoid
+      Torso: OrganDecapoidTorso
+      Head: OrganDecapoidHead
+      ArmRight: OrganDecapoidArmRight
+      ArmLeft: OrganDecapoidArmLeft
+      HandRight: OrganDecapoidHandRight
+      HandLeft: OrganDecapoidHandLeft
+      LegRight: OrganDecapoidLegRight
+      LegLeft: OrganDecapoidLegLeft
+      FootRight: OrganDecapoidFootRight
+      FootLeft: OrganDecapoidFootLeft
       Lungs: OrganDecapoidLungs
       Stomach: OrganDecapoidStomach
       Brain: OrganDecapoidBrain
@@ -125,7 +138,6 @@
     footstepSoundCollection:
       collection: FootstepDecapoid
   - type: Butcherable # No bones. No I didn't forget go fuck yourself.
-    butcheringType: Spike
     spawned:
     - id: FoodMeatCrab # maybe custom someday. as-is, it's fine
       amount: 3
@@ -142,13 +154,11 @@
         layer:
         - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Decapoid
+  - type: Injurable
+    damageContainer: Biological
   - type: Vocal
-    sounds:
-      Male: UnisexDecapoid
-      Female: UnisexDecapoid
-      Unsexed: UnisexDecapoid # male and female sounds have to 1) exist and 2) come first, otherwise urists will spawn without emote sounds 66% of the time, because this game is poorly programmed
+    emoteSounds: UnisexDecapoid
   - type: MovementSpeedModifier
     weightlessAcceleration: 1.5 # move more easily in space
     weightlessFrictionNoInput: 2 # more control over movement in space
@@ -194,7 +204,7 @@
 - type: entity
   abstract: true
   parent: OrganBaseFleshy
-  id: BaseDecapoidOrgan
+  id: OrganDecapoid
   suffix: "decapoid"
   components:
   - type: Sprite
@@ -204,8 +214,8 @@
 
 - type: entity
   abstract: true
-  parent: BaseDecapoidOrgan
-  id: BaseDecapoidOrganExternal
+  parent: OrganDecapoid
+  id: OrganDecapoidExternal
   components:
   - type: Sprite
     sprite: _Impstation/Mobs/Species/Decapoid/parts.rsi
@@ -217,61 +227,61 @@
       group: Decapoid
 
 - type: entity
-  id: TorsoDecapoid
+  id: OrganDecapoidTorso
   name: "decapoid torso"
-  parent: [BaseDecapoidOrganExternal, OrganBaseTorso]
+  parent: [OrganBaseTorso, OrganDecapoidExternal]
 
 - type: entity
-  id: HeadDecapoid
+  id: OrganDecapoidHead
   name: "decapoid head"
-  parent: [BaseDecapoidOrganExternal, OrganBaseHead]
+  parent: [OrganBaseHead, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftArmDecapoid
+  id: OrganDecapoidArmLeft
   name: "left decapoid arm"
-  parent: [BaseDecapoidOrganExternal, OrganBaseArmLeft]
+  parent: [OrganBaseArmLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightArmDecapoid
+  id: OrganDecapoidArmRight
   name: "right decapoid arm"
-  parent: [BaseDecapoidOrganExternal, OrganBaseArmRight]
+  parent: [OrganBaseArmRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftHandDecapoid
-  name: "decapoid claw"
-  parent: [BaseDecapoidOrganExternal, OrganBaseHandLeft]
+  id: OrganDecapoidHandLeft
+  name: "decapoid major claw"
+  parent: [OrganBaseHandLeft, OrganDecapoidExternal]
   components:
   - type: HandOrgan
     startingItem: DecapoidClawItem
 
 - type: entity
-  id: RightHandDecapoid
-  name: "right decapoid hand"
-  parent: [BaseDecapoidOrganExternal, OrganBaseHandRight]
+  id: OrganDecapoidHandRight
+  name: "right minor claw"
+  parent: [OrganBaseHandRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftLegDecapoid # these are the front legs
+  id: OrganDecapoidLegLeft # these are the front legs
   name: "front decapoid legs"
-  parent: [BaseDecapoidOrganExternal, OrganBaseLegLeft]
+  parent: [OrganBaseLegLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightLegDecapoid # these are the back legs
+  id: OrganDecapoidLegRight # these are the back legs
   name: "back decapoid legs"
-  parent: [BaseDecapoidOrganExternal, OrganBaseLegRight]
+  parent: [OrganBaseLegRight, OrganDecapoidExternal]
 
 - type: entity
-  id: LeftFootDecapoid # these are the front feet
+  id: OrganDecapoidFootLeft # these are the front feet
   name: "front decapoid feet"
-  parent: [BaseDecapoidOrganExternal, OrganBaseFootLeft]
+  parent: [OrganBaseFootLeft, OrganDecapoidExternal]
 
 - type: entity
-  id: RightFootDecapoid # these are the back feet
+  id: OrganDecapoidFootRight # these are the back feet
   name: "back decapoid feet"
-  parent: [BaseDecapoidOrganExternal, OrganBaseFootRight]
+  parent: [OrganBaseFootRight, OrganDecapoidExternal]
 
 - type: entity # These are a bit evil
   id: OrganDecapoidEyes
-  parent: [BaseDecapoidOrgan, OrganBaseEyes]
+  parent: [OrganBaseEyes, OrganDecapoid]
   components:
   - type: VisualOrgan
     data:
@@ -282,65 +292,44 @@
 
 - type: entity
   id: OrganDecapoidLungs
-  parent: [BaseDecapoidOrgan, OrganBaseLungs]
+  parent: [OrganBaseLungs, OrganDecapoid]
   name: decapoid respiratory system
   description: "Extracts dissolved oxygen from water, and utilizes it for cell maintenance."
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
-  - type: SolutionContainerManager # Test fail without this for some reason
-    solutions:
-      food:
-        temperature: 293.15
-        canReact: True
-        maxVol: 15
-        name: null
-        reagents:
-        - data: []
-          ReagentId: UncookedAnimalProteins
-          Quantity: 12
-        - data: []
-          ReagentId: Fat
-          Quantity: 3
-      Lung:
-        temperature: 293.15
-        canReact: False
-        maxVol: 100
-        name: Lung
-        reagents: []
 
 - type: entity
   id: OrganDecapoidStomach
-  parent: [BaseDecapoidOrgan, OrganBaseStomach]
+  parent: [OrganBaseStomach, OrganDecapoid]
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
 
 - type: entity
   id: OrganDecapoidBrain
-  parent: [BaseDecapoidOrgan, OrganBaseBrain]
-
+  parent: [OrganBaseBrain, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidTongue
-  parent: [BaseDecapoidOrgan, OrganBaseTongue]
+  parent: [OrganBaseTongue, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidAppendix
-  parent: [BaseDecapoidOrgan, OrganBaseAppendix]
+  parent: [OrganBaseAppendix, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidEars
-  parent: [BaseDecapoidOrgan, OrganBaseEars]
+  parent: [OrganBaseEars, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidHeart
-  parent: [BaseDecapoidOrgan, OrganBaseHeart]
+  parent: [OrganBaseHeart, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidLiver
-  parent: [BaseDecapoidOrgan, OrganBaseLiver]
+  parent: [OrganBaseLiver, OrganDecapoid]
 
 - type: entity
   id: OrganDecapoidKidneys
-  parent: [BaseDecapoidOrgan, OrganBaseKidneys]
+  parent: [OrganBaseKidneys, OrganDecapoid]

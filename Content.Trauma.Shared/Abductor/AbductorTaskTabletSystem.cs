@@ -12,14 +12,14 @@ namespace Content.Trauma.Shared.Abductor;
 /// <summary>
 /// Handles all interactions with the task tablet.
 /// </summary>
-public sealed class AbductorTaskTabletSystem : EntitySystem
+public sealed partial class AbductorTaskTabletSystem : EntitySystem
 {
-    [Dependency] private readonly AbductorTaskSystem _task = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private AbductorTaskSystem _task = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -75,7 +75,7 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
             return;
 
         var user = args.Actor;
-        _adminLog.Add(LogType.AntagObjective, $"Abductor tasks created for {ToPrettyString(target)} by {ToPrettyString(user)}");
+        _adminLog.Add(LogType.AntagObjective, $"Abductor tasks created for {target:target} by {user:user}");
 
         EnsureComp<AbductorSubjectComponent>(target);
         _audio.PlayPredicted(ent.Comp.ScanSound, ent, user);
@@ -96,7 +96,7 @@ public sealed class AbductorTaskTabletSystem : EntitySystem
             return;
         }
 
-        _adminLog.Add(LogType.AntagObjective, $"Abductor task {task} completed on {ToPrettyString(target)} by {ToPrettyString(user)}");
+        _adminLog.Add(LogType.AntagObjective, $"Abductor task {task} completed on {target:target} by {user:user}");
 
         var ev = new AbductorTaskCompleteEvent();
         RaiseLocalEvent(user, ref ev);

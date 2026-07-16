@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeLionhunter
+  name: cartridge (.60 hunter's)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLionhunter
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+    - CartridgeLionhunter

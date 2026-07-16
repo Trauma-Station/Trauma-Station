@@ -6,16 +6,16 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 1h # Trauma was 2.5
+      time: 2.5h
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 1h # Trauma was 2.5
+      time: 2.5h
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 1h # Trauma was 2.5
+      time: 2.5h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 1h # Trauma was 2.5
+      time: 2.5h
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
@@ -26,7 +26,6 @@
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
-  canBeAntag: false
   access:
   # <Trauma>
   - Journalism
@@ -63,17 +62,26 @@
   - GenpopEnter
   - GenpopLeave
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipHeadOfPersonnel
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
+      # <Trauma>
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
+      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
   id: HoPGear
   equipment:
     shoes: ClothingShoesColorBrown
-    id: HoPPDA
+    #id: HoPPDA # Trauma - moved to loadouts
     #gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
     belt: BoxFolderClipboardThreePapers

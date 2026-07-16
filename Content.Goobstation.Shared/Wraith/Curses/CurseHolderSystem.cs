@@ -9,14 +9,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;
 
-public abstract class SharedCurseHolderSystem : EntitySystem
+public abstract partial class SharedCurseHolderSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     public override void Initialize()
     {
@@ -54,7 +53,7 @@ public abstract class SharedCurseHolderSystem : EntitySystem
         // remove any components applied from the curse
         foreach (var curse in ent.Comp.ActiveCurses)
         {
-            if (!_proto.TryIndex(curse, out var curseIndex)
+            if (!ProtoMan.TryIndex(curse, out var curseIndex)
                 || curseIndex.Components == null)
                 continue;
 
@@ -68,7 +67,7 @@ public abstract class SharedCurseHolderSystem : EntitySystem
             ent.Comp.Curser = args.Curser;
 
         if (ent.Comp.ActiveCurses.Contains(args.Curse)
-            || !_proto.TryIndex(args.Curse, out var curseIndex))
+            || !ProtoMan.TryIndex(args.Curse, out var curseIndex))
         {
             args.Cancelled = true; // so the actions don't go to cooldown
             return;
@@ -97,7 +96,7 @@ public abstract class SharedCurseHolderSystem : EntitySystem
         if (_netManager.IsClient)
             return;
 
-        if (!_proto.TryIndex(curse, out var curseIndex))
+        if (!ProtoMan.TryIndex(curse, out var curseIndex))
             return;
 
         // roll the chance

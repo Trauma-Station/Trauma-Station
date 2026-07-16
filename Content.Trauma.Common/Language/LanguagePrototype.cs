@@ -11,12 +11,6 @@ public sealed partial class LanguagePrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     /// <summary>
-    ///     Whether this language will display its name in chat behind a player's name.
-    /// </summary>
-    [DataField]
-    public bool IsVisibleLanguage { get; set; }
-
-    /// <summary>
     /// Obfuscation method used by this language.
     /// </summary>
     [DataField(required: true)]
@@ -64,9 +58,6 @@ public sealed partial class SpeechOverrideInfo
 
     [DataField]
     public string? BoldFontId; // Goob Edit - Custom Bolded Fonts
-
-    [DataField]
-    public bool AllowRadio = true;
 
     /// <summary>
     ///     If false, the entity can use this language even when it's unable to speak (i.e. muffled or muted),

@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Shared.Waddle;
 using Content.Shared.Movement.Components;
 using Robust.Client.Animations;
-using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 
 namespace Content.Goobstation.Client.Waddle;
 
-public sealed class WaddleAnimationSystem : SharedWaddleAnimationSystem
+public sealed partial class WaddleAnimationSystem : SharedWaddleAnimationSystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -58,8 +57,8 @@ public sealed class WaddleAnimationSystem : SharedWaddleAnimationSystem
             return;
 
         // FIXME: this interferes with laying down and stuff since it just bulldozes the rotation
-        sprite.Offset = new Vector2();
-        sprite.Rotation = Angle.FromDegrees(0);
+        _sprite.SetOffset((ent, sprite), Vector2.Zero);
+        _sprite.SetRotation((ent, sprite), Angle.Zero);
     }
 
     private void PlayAnimation(Entity<WaddleAnimationComponent> ent)

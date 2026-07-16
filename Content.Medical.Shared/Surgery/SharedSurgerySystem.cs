@@ -34,25 +34,24 @@ namespace Content.Medical.Shared.Surgery;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] protected readonly StatusEffectsSystem Status = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly WoundSystem _wounds = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private RotateToFaceSystem _rotateToFace = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] protected StatusEffectsSystem Status = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
+    [Dependency] private WoundSystem _wounds = default!;
 
     private EntityQuery<BodyComponent> _bodyQuery;
     private EntityQuery<StackComponent> _stackQuery;
@@ -390,7 +389,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     public EntityUid? GetSingleton(EntProtoId surgeryOrStep)
     {
-        if (!_prototypes.HasIndex(surgeryOrStep))
+        if (!ProtoMan.HasIndex(surgeryOrStep))
             return null;
 
         // This (for now) assumes that surgery entity data remains unchanged between client
@@ -452,7 +451,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         _surgeries.Clear();
 
         _allSurgeries.Clear();
-        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        foreach (var entity in ProtoMan.EnumeratePrototypes<EntityPrototype>())
             if (entity.HasComponent<SurgeryComponent>())
                 _allSurgeries.Add(new EntProtoId(entity.ID));
     }

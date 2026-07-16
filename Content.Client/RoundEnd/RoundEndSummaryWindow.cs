@@ -177,7 +177,10 @@ namespace Content.Client.RoundEnd
                     };
                     playerTitleBox.AddChild(playerNameText);
 
-                    var role = Loc.GetString(playerInfo.Role);
+                    // <Trauma> - use TryGetString, it's usually a locid but not always
+                    if (!Loc.TryGetString(playerInfo.Role, out var role))
+                        role = playerInfo.Role;
+                    // </Trauma>
                     var playerRoleText = new Label
                     {
                         VerticalAlignment = VAlignment.Bottom,

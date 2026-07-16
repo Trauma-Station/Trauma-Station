@@ -113,7 +113,7 @@
       amount: 3
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganHuman
   abstract: true
   suffix: human
@@ -239,3 +239,8 @@
 - type: entity
   parent: [ OrganBaseKidneys, OrganHumanInternal, OrganHumanMetabolizer ]
   id: OrganHumanKidneys
+  # <Trauma>
+  components:
+  - type: StaticPrice
+    price: 6000 # what a deal
+  # </Trauma>

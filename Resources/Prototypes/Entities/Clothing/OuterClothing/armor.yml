@@ -6,7 +6,7 @@
 #Basic armor vest for inheritance
 - type: entity
   abstract: true
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSecurityContraband]
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
   id: ClothingOuterArmorBase
   name: armor vest
   description: A standard Type I armored vest that provides decent protection against most types of damage.
@@ -28,7 +28,12 @@
         Blunt: 0.65 # Trauma, was 0.7
         Slash: 0.65 # Trauma, was 0.7
         Piercing: 0.65 # Trauma, was 0.7
+        Ballistic: 0.65 # Trauma
         Heat: 0.80
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 2
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.75 # Trauma, was 0.9
   - type: ModifyDelayedKnockdown # Goobstation
@@ -37,9 +42,9 @@
   - type: StaminaResistance # Goobstation
     damageCoefficient: 0.5
 
-#Standard armor vest, allowed for security and bartenders
+#Standard armor vest, allowed for security only
 - type: entity
-  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBase]
+  parent: [ BaseSecurityContraband, ClothingOuterArmorBase ]
   id: ClothingOuterArmorBasic
   components:
   - type: Tag
@@ -47,9 +52,9 @@
     - CorgiWearable
     - WhitelistChameleon
 
-#Alternate / slim basic armor vest
+#Alternate / slim basic armor vest, allowed for security and bartenders
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBasic ]
   id: ClothingOuterArmorBasicSlim
   name: armor vest
   suffix: slim
@@ -61,7 +66,7 @@
     sprite: Clothing/OuterClothing/Armor/security_slim.rsi
 
 - type: entity
-  parent: ClothingOuterArmorBase
+  parent: ClothingOuterArmorBasic
   id: ClothingOuterArmorBulletproof
   name: bulletproof vest
   description: A Type III heavy bulletproof vest that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent.
@@ -83,15 +88,20 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.3
+        Piercing: 0.8 # Trauma, was 0.3
+        Ballistic: 0.3
         Heat: 0.8
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.65 # Trauma - was 0.8
   - type: StaminaResistance # Goobstation
     damageCoefficient: 0.5
 
 - type: entity
-  parent: ClothingOuterArmorBase
+  parent: ClothingOuterArmorBasic
   id: ClothingOuterArmorReflective
   name: reflective vest
   description: An armored vest with advanced shielding to protect against energy weapons.
@@ -120,7 +130,7 @@
 
 #Detective's vest
 - type: entity
-  parent: [ClothingOuterArmorBase, BaseSecurityContraband]
+  parent: [ClothingOuterArmorBasic, BaseSecurityContraband]
   id: ClothingOuterVestDetective
   name: detective's vest
   description: A hard-boiled private investigator's armored vest.
@@ -152,7 +162,8 @@
       coefficients:
         Blunt: 0.6
         Slash: 0.6
-        Piercing: 0.3
+        Piercing: 0.6 # Trauma, was 0.4
+        Ballistic: 0.3 # Trauma
         Heat: 0.5
   - type: ExplosionResistance
     damageCoefficient: 0.3 # Trauma - was 0.65
@@ -211,13 +222,18 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.3
+        Piercing: 0.7 # Trauma, was 0.3
+        Ballistic: 0.3 # Trauma
         Heat: 0.8
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
 
 #Elite web vest
 - type: entity
-  parent: [BaseSyndicateContraband, ClothingOuterArmorBase, AllowSuitStorageClothing,
-    ClothingOuterStorageBase] # Trauma
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband,
+    AllowSuitStorageClothing] # Trauma
   id: ClothingOuterVestWebElite
   name: elite web vest
   description: A synthetic armor vest. This one has added webbing and heat resistant fibers.
@@ -248,9 +264,9 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.8
+        Piercing: 0.7 # Trauma, was 0.8
+        Ballistic: 0.8 # Trauma
         Heat: 0.3
-        Radiation: 0.3
         Caustic: 0.3
   - type: ExplosionResistance
     damageCoefficient: 0.3 # Trauma - was 0.5
@@ -288,8 +304,12 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5 # Trauma
         Heat: 0.8
-
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
 # Armor covering multiple body parts including limbs
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSyndicateContraband ]
@@ -324,8 +344,13 @@
         Blunt: 0.3
         Slash: 0.3
         Piercing: 0.3
+        Ballistic: 0.3 # Trauma
         Heat: 0.5
-        Caustic: 0.3
+        # Caustic: 0.3
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
@@ -410,7 +435,7 @@
       coefficients:
         Blunt: 0.35
         Slash: 0.35
-        Piercing: 0.8
+        Piercing: 0.35 # Trauma, was 0.7
         Heat: 0.8
   - type: ExplosionResistance
     damageCoefficient: 0.75 # Trauma - was 0.9, it doesnt cover head/hands/feet
@@ -447,6 +472,7 @@
         Blunt: 0.4
         Slash: 0.4
         Piercing: 0.4
+        Ballistic: 0.5 # Trauma
         Heat: 0.5
   - type: GroupExamine
   - type: ModifyDelayedKnockdown # Goobstation
@@ -485,8 +511,13 @@
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
+        Ballistic: 0.2 # Trauma
         Heat: 0.5
         Radiation: 0
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: GroupExamine
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
@@ -535,9 +566,14 @@
         Blunt: 0.4
         Slash: 0.4
         Piercing: 0.4
+        Ballistic: 0.4 # Trauma
         Heat: 0.4
         Radiation: 0.1
         Caustic: 0.1
+      # <Trauma> - This is done so shotguns are worse against armor
+      flatReductions:
+        Ballistic: 3
+      # </Trauma>
   - type: ClothingSpeedModifier # Goobstation
     walkModifier: 1.0
     sprintModifier: 1.0
@@ -592,6 +628,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
+        Ballistic: 0.5 # Trauma
         Heat: 0.5
         Caustic: 0.5
   - type: ClothingSpeedModifier
@@ -683,7 +720,7 @@
       coefficients:
         Blunt: 0.3
         Slash: 0.3
-        Piercing: 0.7
+        Piercing: 0.3 # Trauma, was 0.7
         Heat: 0.7
   - type: GroupExamine
   - type: ProtectedFromStepTriggers

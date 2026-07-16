@@ -2,6 +2,7 @@
 
 using Content.Shared.EntityTable;
 using Content.Shared.EntityTable.EntitySelectors;
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Trauma.Shared.EntityTable.EntitySelectors;
@@ -18,7 +19,7 @@ public sealed partial class RepeatSelector : EntityTableSelector
     [DataField(required: true)]
     public int Count;
 
-    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
+    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(IRobustRandom rand,
         IEntityManager entMan,
         IPrototypeManager proto,
         EntityTableContext ctx)

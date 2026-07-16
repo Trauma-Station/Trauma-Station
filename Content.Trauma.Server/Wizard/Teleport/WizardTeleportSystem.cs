@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Goobstation.Common.BlockTeleport;
 using Content.Server.Pinpointer;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -19,16 +18,16 @@ using Robust.Shared.Physics;
 
 namespace Content.Trauma.Server.Wizard.Teleport;
 
-public sealed class WizardTeleportSystem : SharedWizardTeleportSystem
+public sealed partial class WizardTeleportSystem : SharedWizardTeleportSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SpellsSystem _spells = default!;
-    [Dependency] private readonly TeleportSystem _teleport = default!;
-    [Dependency] private readonly WizardRuleSystem _wizard = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SpellsSystem _spells = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private WizardRuleSystem _wizard = default!;
 
     private static readonly EntProtoId SmokeProto = "AdminInstantEffectSmoke10";
 

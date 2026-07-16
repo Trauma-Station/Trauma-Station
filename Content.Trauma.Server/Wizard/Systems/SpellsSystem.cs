@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Common.Actions;
 using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Server.Antag;
@@ -46,7 +44,7 @@ using Content.Shared.Speech.Components;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Server.Knowledge;
-using Content.Trauma.Shared.Teleportation.Systems;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.BindSoul;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
@@ -60,32 +58,30 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class SpellsSystem : SharedSpellsSystem
+public sealed partial class SpellsSystem : SharedSpellsSystem
 {
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedEmpSystem _emp = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly SpreaderSystem _spreader = default!;
-    [Dependency] private readonly GravityWellSystem _gravityWell = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly ServerInventorySystem _inventory = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly SharedRandomTeleportSystem _teleport = default!;
-    [Dependency] private readonly NpcFactionSystem _faction = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly KnowledgeSystem _knowledge = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedEmpSystem _emp = default!;
+    [Dependency] private SmokeSystem _smoke = default!;
+    [Dependency] private SpreaderSystem _spreader = default!;
+    [Dependency] private GravityWellSystem _gravityWell = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private ServerInventorySystem _inventory = default!;
+    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private GunSystem _gun = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedItemSystem _item = default!;
+    [Dependency] private KnowledgeSystem _knowledge = default!;
 
     public override event Action? StopTargeting;
 
@@ -201,7 +197,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
         var xform = Transform(ev.Performer);
         var mapCoords = TransformSystem.GetMapCoordinates(ev.Performer, xform);
 
-        if (!MapManager.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
+        if (!Map.TryFindGridAt(mapCoords, out var gridUid, out var grid) ||
             !Map.TryGetTileRef(gridUid, grid, xform.Coordinates, out var tileRef) ||
             tileRef.Tile.IsEmpty)
             return;
@@ -365,9 +361,9 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
         SetGear(newEntity, ev.Gear, false, false);
 
-        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak))
+        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak) && speak.Sentence is { } loc)
         {
-            DelayedSpeech(speak.Sentence == null ? null : Loc.GetString(speak.Sentence.Value),
+            DelayedSpeech(Loc.GetString(loc),
                 newEntity,
                 oldEnt,
                 MagicSchool.Necromancy);
@@ -408,9 +404,9 @@ public sealed class SpellsSystem : SharedSpellsSystem
         if (ev.LoadActions)
             RaiseNetworkEvent(new LoadActionsEvent(GetNetEntity(ev.Performer)), newEnt.Value);
 
-        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak))
+        if (TryComp(ev.Action.Owner, out SpeakOnActionComponent? speak) && speak.Sentence is { } loc)
         {
-            DelayedSpeech(speak.Sentence == null ? null : Loc.GetString(speak.Sentence.Value),
+            DelayedSpeech(Loc.GetString(loc),
                 newEnt.Value,
                 ev.Performer,
                 school);
@@ -418,14 +414,14 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
         return true;
     }
-    private void DelayedSpeech(string? speech, EntityUid speaker, EntityUid caster, MagicSchool school)
+
+    private void DelayedSpeech(string speech, EntityUid speaker, EntityUid caster, MagicSchool school)
     {
-        Timer.Spawn(200,
-            () =>
-            {
-                var toSpeak = speech == null ? string.Empty : Loc.GetString(speech);
-                SpeakSpell(speaker, caster, toSpeak, school);
-            });
+        // TODO: kys
+        Timer.Spawn(200, () =>
+        {
+            SpeakSpell(speaker, caster, speech, school);
+        });
     }
 
     protected override void Speak(EntityUid uid, string message)
@@ -624,12 +620,5 @@ public sealed class SpellsSystem : SharedSpellsSystem
 
         PopupCharged(uid, ev.Performer, false);
         return true;
-    }
-
-    protected override void Blink(BlinkSpellEvent ev)
-    {
-        base.Blink(ev);
-
-        _teleport.RandomTeleport(ev.Performer, ev.Radius);
     }
 }

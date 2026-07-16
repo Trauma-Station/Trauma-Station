@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.DoAfter;
 using System.Linq;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -30,13 +29,13 @@ namespace Content.Shared.Containers.ItemSlots
     /// </remarks>
     public sealed partial class ItemSlotsSystem : EntitySystem
     {
-        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-        [Dependency] private readonly SharedContainerSystem _containers = default!;
-        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
-        [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+        [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
+        [Dependency] private SharedContainerSystem _containers = default!;
+        [Dependency] private SharedPopupSystem _popupSystem = default!;
+        [Dependency] private SharedHandsSystem _handsSystem = default!;
+        [Dependency] private SharedAudioSystem _audioSystem = default!;
+        [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
 
         public override void Initialize()
         {
@@ -574,6 +573,11 @@ namespace Content.Shared.Containers.ItemSlots
                     LogImpact.Low,
                     $"{ToPrettyString(user.Value)} ejected {ToPrettyString(item)} from {slot.ContainerSlot?.ID + " slot of "}{ToPrettyString(uid)}");
 
+            // <Trauma>
+            if (user != null && _thieving.IsStealthy(user.Value))
+                return; // Stealthy thieves don't announce ejects with sound
+            // </Trauma>
+
             _audioSystem.PlayPredicted(slot.EjectSound, uid, excludeUserAudio ? user : null);
         }
 
@@ -637,10 +641,10 @@ namespace Content.Shared.Containers.ItemSlots
         /// </returns>
         public bool TryEjectToHands(EntityUid uid, ItemSlot slot, EntityUid? user, bool excludeUserAudio = false, bool doAfter = true)
         {
-            // Lavaland Change start
+            // <Trauma>
             if (doAfter && slot.EjectDelay != null)
                 return TryStartEjectDoAfter(slot, uid, user);
-            // Lavaland Change end
+            // </Trauma>
 
             if (!TryEject(uid, slot, user, out var item, excludeUserAudio, doAfter))
                 return false;
@@ -675,7 +679,7 @@ namespace Content.Shared.Containers.ItemSlots
                         continue;
 
                     var verbSubject = slot.Name != string.Empty
-                        ? Loc.GetString(slot.Name)
+                        ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString, like 50 things dont use loc strings...
                         : Name(args.Using.Value);
 
                     AlternativeVerb verb = new()
@@ -729,7 +733,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var verbSubject = slot.Name != string.Empty
-                    ? Loc.GetString(slot.Name)
+                    ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString
                     : Comp<MetaDataComponent>(slot.Item.Value).EntityName ?? string.Empty;
 
                 AlternativeVerb verb = new()
@@ -770,7 +774,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var verbSubject = slot.Name != string.Empty
-                    ? Loc.GetString(slot.Name)
+                    ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString
                     : Name(slot.Item!.Value);
 
                 InteractionVerb takeVerb = new()
@@ -798,7 +802,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var verbSubject = slot.Name != string.Empty
-                    ? Loc.GetString(slot.Name)
+                    ? Loc.TryGetString(slot.Name, out var name) ? name : slot.Name // Trauma - use TryGetString
                     : Name(args.Using.Value);
 
                 InteractionVerb insertVerb = new()

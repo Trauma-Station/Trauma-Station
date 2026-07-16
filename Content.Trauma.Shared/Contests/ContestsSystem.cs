@@ -13,9 +13,9 @@ namespace Content.Trauma.Shared.Contests;
 
 public sealed partial class ContestsSystem : CommonContestsSystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private MobThresholdSystem _mobThreshold = default!;
 
     public override void Initialize()
     {

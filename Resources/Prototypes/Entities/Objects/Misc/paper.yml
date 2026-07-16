@@ -1,16 +1,16 @@
 - type: entity
-  parent: BaseItem
+  parent: [SolutionFood, BaseItem]
   id: BasePaper
   abstract: true
   components:
-  # <Goob>
+  # <Trauma>
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_Goobstation/Items/handling/paper_pickup.ogg
       params:
         volume: -6
   - type: EmitSoundOnDrop
-    sound:
+    sound: &drop_sound
       path: /Audio/_Goobstation/Items/handling/paper_drop.ogg
       params:
         volume: -6
@@ -21,16 +21,13 @@
       params:
         volume: -6
   - type: EmitSoundOnCollide
-    sound:
-      path: /Audio/_Goobstation/Items/handling/paper_drop.ogg
-      params:
-        volume: -6
+    sound: *drop_sound
   - type: EmitSoundOnThrow
     sound:
       path: /Audio/_Goobstation/Items/handling/paper_throw.ogg
       params:
         volume: -6
-  # </Goob>
+  # </Trauma>
   - type: Tag
     tags:
     - Document
@@ -53,14 +50,9 @@
     normalState: fire
   - type: Damageable
     damageModifierSet: Wood
+  - type: Injurable
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
         damage: 15
@@ -79,13 +71,12 @@
     flavors:
     - paper
   - type: BadFood
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 1
-        reagents:
-        - ReagentId: Fiber
-          Quantity: 1
+  - type: Solution
+    solution:
+      maxVol: 2.5 # I consider paper to be like material sheets, so we divide their capacity by 12
+      reagents:
+      - ReagentId: Fiber
+        Quantity: 1.25
   - type: Item
     size: Tiny
   - type: PhysicalComposition
@@ -93,10 +84,10 @@
       Paper: 25
 
 - type: entity
-  name: paper
   parent: BasePaper
   id: Paper
-  description: 'A piece of white paper.'
+  name: paper
+  description: A piece of white paper.
   components:
   # <Trauma>
   - type: ActivatableUIRequiresVision # can't read if you're blind
@@ -124,6 +115,7 @@
       enum.PaperUiKey.Key:
         type: PaperBoundUserInterface
   - type: FaxableObject
+  - type: PaperVisualizer
   - type: PaperVisuals
   - type: StationAiWhitelist
 
@@ -427,7 +419,7 @@
     codewordShowAll: true
 
 - type: entity
-  name: envelope
+  name: eenvelope
   parent: BaseItem
   id: Envelope
   description: 'A small envelope for keeping prying eyes off of your sensitive documents.'
@@ -481,7 +473,7 @@
     tags:
     - Trash
     - Document
-  #- type: Appearance, hide stamp marks until we have some kind of displacement
+  - type: Appearance # Trauma - I'd much rather have weird stamps than no fire, go do displacements yourself
   - type: Flammable
     fireSpread: true
     canResistFire: false
@@ -504,4 +496,5 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Injurable
   - type: StationAiWhitelist

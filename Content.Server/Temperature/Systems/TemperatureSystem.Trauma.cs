@@ -12,7 +12,7 @@ namespace Content.Server.Temperature.Systems;
 /// </summary>
 public sealed partial class TemperatureSystem
 {
-    [Dependency] private readonly CommonSpellbladeSystem _spellblade = default!;
+    [Dependency] private CommonSpellbladeSystem _spellblade = default!;
 
     // it was already hardcoded so idc
     private const float IdealTemperature = Atmospherics.T37C;

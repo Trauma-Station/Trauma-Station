@@ -7,19 +7,18 @@ using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class TelepathyActionSystem : EntitySystem
+public sealed partial class TelepathyActionSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly ISharedChatManager _chatMan = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private ISharedChatManager _chatMan = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     public override void Initialize()
     {
@@ -81,7 +80,7 @@ public sealed class TelepathyActionSystem : EntitySystem
         // start the delay now that a message is being sent
         _actions.StartUseDelay(ent.Owner);
 
-        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(user)} sent a telepathic message to {ToPrettyString(target)}: {msg}");
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{user:user} sent a telepathic message to {target:target}: {msg}");
 
         // TODO: handle mind magic protection with -popup-blocked
         Tell(channel, msg);

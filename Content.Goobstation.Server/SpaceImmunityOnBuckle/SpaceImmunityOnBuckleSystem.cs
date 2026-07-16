@@ -7,7 +7,7 @@ using Content.Shared.Buckle.Components;
 
 namespace Content.Goobstation.Server.SpaceImmunityOnBuckle;
 
-public sealed class SpaceImmunityOnBuckleSystem : EntitySystem
+public sealed partial class SpaceImmunityOnBuckleSystem : EntitySystem
 {
 
     public override void Initialize()

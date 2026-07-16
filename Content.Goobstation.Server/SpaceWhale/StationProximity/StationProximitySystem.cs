@@ -24,14 +24,14 @@ namespace Content.Goobstation.Server.SpaceWhale.StationProximity;
 /// <summary>
 /// Hardcoded to space whale spawn
 /// </summary>
-public sealed class StationProximitySystem : EntitySystem
+public sealed partial class StationProximitySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _moveSpeed = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private MovementSpeedModifierSystem _moveSpeed = default!;
 
     private bool _spaceWhaleEnabled;
     private float _spaceWhaleSpawnDistance = 2000f;
@@ -88,10 +88,12 @@ public sealed class StationProximitySystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (_timing.CurTime > _nextCheck)
+        var now = _timing.CurTime;
+
+        if (now < _nextCheck)
             return;
 
-        _nextCheck = _timing.CurTime + CheckDelay;
+        _nextCheck = now + CheckDelay;
         CheckStationProximity();
     }
 

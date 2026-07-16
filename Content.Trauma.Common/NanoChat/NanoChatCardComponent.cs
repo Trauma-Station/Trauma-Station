@@ -69,3 +69,12 @@ public sealed partial class NanoChatCardComponent : Component
     [DataField]
     public bool IsClosed;
 }
+
+/// <summary>
+/// Message to change an agent ID card's nanochat number.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class AgentIDSetNumberMessage(uint number) : BoundUserInterfaceMessage
+{
+    public readonly uint Number = number;
+}

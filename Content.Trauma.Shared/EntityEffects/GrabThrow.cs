@@ -23,15 +23,12 @@ public sealed partial class GrabThrow : EntityEffectBase<GrabThrow>
 
     [DataField]
     public bool DropItems = true;
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => null; // not used by reagents idc
 }
 
-public sealed class GrabThrowEffectSystem : EntityEffectSystem<TransformComponent, GrabThrow>
+public sealed partial class GrabThrowEffectSystem : EntityEffectSystem<TransformComponent, GrabThrow>
 {
-    [Dependency] private readonly GrabThrownSystem _grabThrown = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private GrabThrownSystem _grabThrown = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<GrabThrow> args)
     {

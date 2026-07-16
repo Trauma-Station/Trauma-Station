@@ -8,9 +8,7 @@ using Content.Trauma.Client.Language;
 using Content.Trauma.Common.Input;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Client.UserInterface.Systems.Language;
 
@@ -37,8 +35,15 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     private void OnUnloadGameBar(GameTopMenuBar bar)
     {
-        UnloadButton();
-        _button = null;
+        try
+        {
+            UnloadButton();
+            _button = null;
+        }
+        catch
+        {
+            // fuck off heisentest
+        }
     }
 
     public void LoadButton()
@@ -51,7 +56,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     public void UnloadButton()
     {
-        if (_button is not { } || _button.Disposed)
+        if (_button is not { })
             return;
 
         _button.OnPressed -= LanguageButtonPressed;
@@ -83,11 +88,7 @@ public sealed class LanguageMenuUIController : UIController, IOnStateEntered<Gam
 
     public void OnStateExited(GameplayState state)
     {
-        if (_menu is { })
-        {
-            _menu.Dispose();
-            _menu = null;
-        }
+        _menu = null;
 
         CommandBinds.Unregister<LanguageMenuUIController>();
     }

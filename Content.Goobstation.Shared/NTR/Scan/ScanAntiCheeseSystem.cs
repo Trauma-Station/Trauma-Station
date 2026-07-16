@@ -8,7 +8,7 @@ namespace Content.Goobstation.Shared.NTR.Scan;
 /// <summary>
 /// Prevent some ways to farm infinite points.
 /// </summary>
-public sealed class AntiCheeseSystem : EntitySystem
+public sealed partial class AntiCheeseSystem : EntitySystem
 {
     public override void Initialize()
     {

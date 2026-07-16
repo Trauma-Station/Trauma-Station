@@ -16,9 +16,9 @@ namespace Content.Trauma.Shared.Silicon.Death;
 /// <remarks>
 ///     This is horrible.
 /// </remarks>
-public abstract class SharedSiliconDeathSystem : EntitySystem
+public abstract partial class SharedSiliconDeathSystem : EntitySystem
 {
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {

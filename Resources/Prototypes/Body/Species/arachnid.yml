@@ -120,7 +120,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: CopperBlood
-        Quantity: 300
+        Quantity: 300 # Trauma, was 600
   - type: MeleeWeapon
     animation: WeaponArcBite
     soundHit:
@@ -140,10 +140,7 @@
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter']
   - type: Vocal
-    sounds:
-      Male: UnisexArachnid
-      Female: UnisexArachnid
-      Unsexed: UnisexArachnid
+    emoteSounds: UnisexArachnid
   - type: TypingIndicator
     proto: spider
   - type: CreamPied
@@ -152,7 +149,7 @@
       state: creampie_arachnid
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganArachnid
   abstract: true
   suffix: Arachnid
@@ -238,6 +235,11 @@
 - type: entity
   parent: [ OrganArachnidVisual, OrganBaseEyes, OrganArachnidInternal ]
   id: OrganArachnidEyes
+  # <Trauma>
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.25 # 8 eyes are better than 2
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseTongue, OrganArachnidInternal ]

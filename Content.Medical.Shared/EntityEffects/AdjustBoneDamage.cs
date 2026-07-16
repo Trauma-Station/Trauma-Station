@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Medical.Shared.Traumas;
+using Content.Shared.Body;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
-using System.Linq;
 
 namespace Content.Medical.Shared.EntityEffects;
 
@@ -16,16 +15,16 @@ namespace Content.Medical.Shared.EntityEffects;
 public sealed partial class AdjustBoneDamage : EntityEffectBase<AdjustBoneDamage>
 {
     [DataField(required: true)]
-    public FixedPoint2 Amount = default!;
+    public FixedPoint2 Amount;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("reagent-effect-guidebook-adjust-bone-damage", ("amount", Amount));
 }
 
-public sealed class AdjustBoneDamageEffectSystem : EntityEffectSystem<BodyComponent, AdjustBoneDamage>
+public sealed partial class AdjustBoneDamageEffectSystem : EntityEffectSystem<BodyComponent, AdjustBoneDamage>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
 
     protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<AdjustBoneDamage> args)
     {

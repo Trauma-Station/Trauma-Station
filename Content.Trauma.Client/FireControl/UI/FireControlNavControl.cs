@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Client.Shuttles.UI;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.BUIStates;
@@ -10,8 +9,6 @@ using Content.Shared.Shuttles.Systems;
 using Content.Trauma.Client.Radar;
 using Content.Trauma.Common.Radar;
 using Content.Trauma.Shared.FireControl;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -22,9 +19,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.FireControl.UI;
 
-public sealed class FireControlNavControl : BaseShuttleControl
+public sealed partial class FireControlNavControl : BaseShuttleControl
 {
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    private readonly SharedMapSystem _map;
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;
@@ -64,6 +61,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
     public FireControlNavControl() : base(64f, 512f, 512f)
     {
         IoCManager.InjectDependencies(this);
+        _map = EntManager.System<SharedMapSystem>();
         _shuttles = EntManager.System<SharedShuttleSystem>();
         _transform = EntManager.System<SharedTransformSystem>();
         _blips = EntManager.System<RadarBlipsSystem>();
@@ -234,7 +232,7 @@ public sealed class FireControlNavControl : BaseShuttleControl
 
         _grids.Clear();
         var maxRange = new Vector2(WorldRange, WorldRange);
-        _mapManager.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - maxRange, mapPos.Position + maxRange), ref _grids, approx: true, includeMap: false);
+        _map.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - maxRange, mapPos.Position + maxRange), ref _grids, approx: true, includeMap: false);
 
         foreach (var grid in _grids)
         {

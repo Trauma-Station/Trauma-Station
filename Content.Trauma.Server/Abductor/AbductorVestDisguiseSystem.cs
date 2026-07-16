@@ -11,16 +11,15 @@ using Content.Trauma.Shared.Body.Organ;
 
 namespace Content.Trauma.Server.Abductor;
 
-public sealed class AbductorVestDisguiseSystem : EntitySystem
+public sealed partial class AbductorVestDisguiseSystem : EntitySystem
 {
-    [Dependency] private readonly HumanoidProfileSystem _humanoidProfile = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly EntityQuery<VisualOrganMarkingsComponent> _organMarkingsQuery = default!;
+    [Dependency] private HumanoidProfileSystem _humanoidProfile = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private EntityQuery<VisualOrganMarkingsComponent> _organMarkingsQuery = default!;
 
     private static readonly List<EntProtoId> HumanVisualOrgans = new()
     {
@@ -162,7 +161,7 @@ public sealed class AbductorVestDisguiseSystem : EntitySystem
 
         foreach (var protoId in HumanVisualOrgans)
         {
-            var entityProto = _prototype.Index<EntityPrototype>(protoId);
+            var entityProto = ProtoMan.Index<EntityPrototype>(protoId);
             if (!entityProto.TryGetComponent<VisualOrganComponent>(out var visualOrgan, Factory) ||
                 !entityProto.TryGetComponent<VisualOrganMarkingsComponent>(out var markings, Factory))
                 continue;

@@ -9,13 +9,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.VentHorde.Systems;
 
-public sealed class VentHordeSystem : EntitySystem
+public sealed partial class VentHordeSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
 
     public override void Initialize()
     {
@@ -97,7 +97,8 @@ public sealed class VentHordeSystem : EntitySystem
             var spawned = Spawn(spawn, Transform(entity).Coordinates);
             var direction = _random.NextVector2() * _random.NextFloat(entity.Comp.MinThrowDistance, entity.Comp.MaxThrowDistance);
             var throwSpeed = _random.NextFloat(entity.Comp.MinThrowSpeed, entity.Comp.MaxThrowSpeed);
-            _throwing.TryThrow(spawned, direction, throwSpeed);
+            _throwing.TryThrow(spawned, direction, throwSpeed,
+                predicted: false); // Trauma
         }
 
         RemCompDeferred<VentHordeSpawnerComponent>(entity);

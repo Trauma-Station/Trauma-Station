@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseStructure
   id: CMBaseXenoStructure
@@ -24,8 +26,9 @@
     mode: SnapgridCenter
   components:
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: Biological
   - type: Appearance
   - type: PlacementReplacement
     key: walls

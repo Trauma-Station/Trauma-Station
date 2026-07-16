@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Common.Bulletholes;
 using Content.Trauma.Shared.Weapons.Ranged;
 using Content.Trauma.Shared.Weapons.Ranged.Ammo;
@@ -11,9 +10,9 @@ namespace Content.Trauma.Server.Bulletholes;
 /// <summary>
 /// Handles giving bullet holes a position and sending it to the client
 /// </summary>
-public sealed class BulletHoleSystem : EntitySystem
+public sealed partial class BulletHoleSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

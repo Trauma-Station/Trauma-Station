@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: phoneCategory
   id: Command
   text: phone-category-command

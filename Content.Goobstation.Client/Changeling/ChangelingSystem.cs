@@ -8,9 +8,8 @@ using Content.Shared.StatusIcon.Components;
 
 namespace Content.Goobstation.Client.Changeling;
 
-public sealed class ChangelingSystem : SharedChangelingSystem
+public sealed partial class ChangelingSystem : SharedChangelingSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -39,7 +38,7 @@ public sealed class ChangelingSystem : SharedChangelingSystem
 
     private void GetChanglingIcon(Entity<ChangelingIdentityComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (HasComp<HivemindComponent>(ent) && _prototype.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
+        if (HasComp<HivemindComponent>(ent) && ProtoMan.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 }

@@ -10,20 +10,16 @@ using Content.Trauma.Common.Input;
 using Content.Trauma.Common.Knowledge;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Trauma.Client.Knowledge;
 
-public sealed class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
+public sealed partial class MartialArtsUIController : UIController, IOnStateChanged<GameplayState>
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IResourceCache _cache = default!;
     [UISystemDependency] private readonly KnowledgeSystem _knowledge = default!;
     [UISystemDependency] private readonly PopupSystem _popup = default!;
 
@@ -105,8 +101,8 @@ public sealed class MartialArtsUIController : UIController, IOnStateChanged<Game
         var buttons = GetButtons();
         if (buttons.Count < 2) // always have 1 from no martial art option
         {
-            var player = _player.LocalEntity;
-            _popup.PopupClient(Loc.GetString("knowledge-no-martial-art"), player);
+            if (_player.LocalEntity is { } player)
+                _popup.PopupEntity(Loc.GetString("knowledge-no-martial-art"), player);
             _button?.Pressed = false;
             return;
         }

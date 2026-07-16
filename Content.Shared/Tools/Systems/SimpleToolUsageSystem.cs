@@ -8,8 +8,8 @@ namespace Content.Shared.Tools.Systems;
 
 public sealed partial class SimpleToolUsageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly SharedToolSystem _tools = default!;
+    [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private SharedToolSystem _tools = default!;
 
     public override void Initialize()
     {
@@ -66,7 +66,7 @@ public sealed partial class SimpleToolUsageSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, ent.Comp.DoAfter, new SimpleToolDoAfterEvent(), ent, tool)
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, ent.Comp.DoAfter, new SimpleToolDoAfterEvent(), ent, target: ent, used: tool) // Trauma - set correct target and used
         {
             BreakOnDamage = true,
             BreakOnDropItem = true,

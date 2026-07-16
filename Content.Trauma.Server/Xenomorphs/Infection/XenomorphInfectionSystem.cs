@@ -13,15 +13,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Xenomorphs.Infection;
 
-public sealed class XenomorphInfectionSystem : EntitySystem
+public sealed partial class XenomorphInfectionSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -73,7 +73,8 @@ public sealed class XenomorphInfectionSystem : EntitySystem
             if (!infection.Infected.HasValue || infection.GrowthStage >= infection.MaxGrowthStage || time < infection.NextPointsAt)
                 continue;
 
-            infection.NextPointsAt = time + infection.GrowTime;
+            var growTime = _mobState.IsCritical(infection.Infected.Value) ? infection.GrowTime * 2 : infection.GrowTime;
+            infection.NextPointsAt = time + growTime;
 
             if (_mobState.IsDead(infection.Infected.Value) || !_random.Prob(infection.GrowProb))
                 continue;
@@ -87,7 +88,7 @@ public sealed class XenomorphInfectionSystem : EntitySystem
 
             if (infection.Effects.TryGetValue(infection.GrowthStage, out var effects))
             {
-                _effects.ApplyEffects(infection.Infected.Value, effects);
+                _effects.ApplyEffects(infection.Infected.Value, effects, predicted: false);
             }
 
             if (infection.GrowthStage < infection.MaxGrowthStage)

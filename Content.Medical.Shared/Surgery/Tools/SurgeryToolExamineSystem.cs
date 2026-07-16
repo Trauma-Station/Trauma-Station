@@ -6,16 +6,15 @@ using Content.Medical.Shared.Body;
 using Content.Shared.Body;
 using Content.Shared.Examine;
 using Content.Shared.Verbs;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Surgery.Tools;
 
 /// <summary>
 ///     Examining a surgical or ghetto tool shows everything it can be used for.
 /// </summary>
-public sealed class SurgeryToolExamineSystem : EntitySystem
+public sealed partial class SurgeryToolExamineSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     public override void Initialize()
     {
@@ -51,7 +50,7 @@ public sealed class SurgeryToolExamineSystem : EntitySystem
             Loc.GetString("surgery-tool-examinable-verb-message"));
     }
 
-    public void OnExamined(EntityUid uid, ISurgeryToolComponent comp, ref SurgeryToolExaminedEvent args)
+    public void OnExamined(EntityUid uid, BaseSurgeryToolComponent comp, ref SurgeryToolExaminedEvent args)
     {
         var msg = args.Message;
         var color = comp.Speed switch

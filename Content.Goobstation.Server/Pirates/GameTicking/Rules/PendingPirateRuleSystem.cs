@@ -18,12 +18,11 @@ namespace Content.Goobstation.Server.Pirates.GameTicking.Rules;
 
 public sealed partial class PendingPirateRuleSystem : GameRuleSystem<PendingPirateRuleComponent>
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly IPrototypeManager _prot = default!;
-    [Dependency] private readonly GameTicker _gt = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly CargoSystem _cargo = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private GameTicker _gt = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private CargoSystem _cargo = default!;
 
     private static readonly EntProtoId PirateSpawnRule = "PiratesSpawn";
 
@@ -112,7 +111,7 @@ public sealed partial class PendingPirateRuleSystem : GameRuleSystem<PendingPira
         var announcer = pprule.Comp.LocAnnouncer;
 
         if (pprule.Comp.LocAnnouncers != null)
-            announcer = _rand.Pick(_prot.Index<DatasetPrototype>(pprule.Comp.LocAnnouncers).Values);
+            announcer = _rand.Pick(ProtoMan.Index<DatasetPrototype>(pprule.Comp.LocAnnouncers).Values);
 
         var type = atype.ToString().ToLower();
         var announcement = Loc.GetString($"pirates-announcement-{announcer}-{type}");

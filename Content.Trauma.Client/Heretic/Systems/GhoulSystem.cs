@@ -6,10 +6,9 @@ using Robust.Client.Player;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
-public sealed class GhoulSystem : SharedGhoulSystem
+public sealed partial class GhoulSystem : SharedGhoulSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -26,12 +25,12 @@ public sealed class GhoulSystem : SharedGhoulSystem
         if (TryComp(player, out Shared.Heretic.Components.Ghoul.HereticMinionComponent? minion))
         {
             if (minion.BoundHeretic == args.Uid)
-                args.StatusIcons.Add(_prototype.Index(minion.MasterIcon));
+                args.StatusIcons.Add(ProtoMan.Index(minion.MasterIcon));
 
             if (TryComp(args.Uid, out Shared.Heretic.Components.Ghoul.HereticMinionComponent? minion2) && minion2.MinionId == minion.MinionId)
-                args.StatusIcons.Add(_prototype.Index(minion.GhoulIcon));
+                args.StatusIcons.Add(ProtoMan.Index(minion.GhoulIcon));
         }
         else if (TryComp(args.Uid, out Shared.Heretic.Components.Ghoul.HereticMinionComponent? minion2) && minion2.BoundHeretic == player)
-            args.StatusIcons.Add(_prototype.Index(minion2.GhoulIcon));
+            args.StatusIcons.Add(ProtoMan.Index(minion2.GhoulIcon));
     }
 }

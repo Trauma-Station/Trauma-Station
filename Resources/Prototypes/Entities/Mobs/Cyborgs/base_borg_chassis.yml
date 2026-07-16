@@ -92,6 +92,7 @@
       - Blunt
       - Slash
       - Piercing
+      - Ballistic # Trauma
       - Heat
       - Shock
     locPrefix: silicon
@@ -187,8 +188,7 @@
     - Crying
     - Whistle
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSilicon
+    emoteSounds: UnisexSilicon
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
   - type: UnblockableSpeech
@@ -209,9 +209,11 @@
     - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
+    damageModifierSet: Silicon # Trauma - ion damage
+  - type: Injurable
     damageContainer: Silicon
-    damageModifierSet: Silicon #Goobstation - Iondamage
   - type: Destructible
+    generateOverkillThreshold: false
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -229,13 +231,15 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-      - !type:EmptyContainersBehaviour
-        containers:
-        - borg_brain
-        - borg_module
-        - cell_slot
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+      - !type:GibBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapGlass:
+            min: 1
+            max: 1
+          SheetSteel:
+            min: 10
+            max: 20
   - type: HandheldLight
     toggleOnInteract: false
     wattage: 0.2
@@ -392,6 +396,18 @@
   parent: BaseBorgChassis
   abstract: true
   components:
+  # <Trauma>
+  - type: Damageable
+    damageModifierSet: SiliconProtected
+  - type: Injurable
+    damageContainer: Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: FlashImmunity
+    showInExamine: false
+  - type: SpeechSynthesis
+    voice: BorgSyndie
+  # </Trauma>
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -424,22 +440,11 @@
     - Whistle
     # end Goobstation - Cyborg emote sounds
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove syndieborg brains.
-  # <Goob>
-  - type: Damageable
-    damageContainer: Silicon
-    damageModifierSet: SiliconProtected
-  - type: ExplosionResistance
-    damageCoefficient: 0.5
-  - type: FlashImmunity
-  - type: SpeechSynthesis
-    voice: BorgSyndie
-  # </Goob>
 
 - type: entity
   id: BaseBorgChassisDerelict
@@ -489,8 +494,7 @@
     allowedEmotes:
     - Laugh
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconSyndicate
+    emoteSounds: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
   - type: BypassLock
@@ -541,6 +545,11 @@
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
+    # <Trauma>
+    brainWhitelist:
+      components:
+      - MMI # No infinite posibrain xorgs
+    # </Trauma>
   - type: TypingIndicator
     proto: xenoborg
   - type: Speech
@@ -554,8 +563,7 @@
     - Whistle
     # end Goobstation - Cyborg emote sounds
   - type: Vocal
-    sounds:
-      Unsexed: UnisexSiliconXenoborg
+    emoteSounds: UnisexSiliconXenoborg
     wilhelmProbability: 0
   - type: DamagedSiliconAccent
   - type: UnblockableSpeech
@@ -625,11 +633,3 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
-  # <Trauma>
-  - type: KnowledgeGrantOnWear # gets added to the brain
-    skills:
-      MeleeKnowledge: 26
-      ShootingKnowledge: 26
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-  # </Trauma>

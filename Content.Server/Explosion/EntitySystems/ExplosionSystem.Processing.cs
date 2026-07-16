@@ -505,7 +505,6 @@ public sealed partial class ExplosionSystem
                 dir,
                 physics,
                 xform,
-                _projectileQuery,
                 throwForce,
                 predicted: false); // Trauma
         }
@@ -589,6 +588,10 @@ public sealed partial class ExplosionSystem
         return stack[0]; // If the stack is somehow empty, this will throw, but we will have at least removed it from dict first!
     }
 
+/// <summary>
+/// Attempts to dirty the <see cref="TileHistoryComponent"/> of a given entity.
+/// </summary>
+/// <param name="grid"></param>
     public void DirtyHistory(EntityUid grid)
     {
         if (!_tileHistoryQuery.TryComp(grid, out var history))
@@ -694,13 +697,6 @@ sealed class Explosion
     /// </summary>
     private readonly Dictionary<Entity<MapGridComponent>, List<(Vector2i, Tile)>> _tileUpdateDict = new();
 
-    // Entity Queries
-    private readonly EntityQuery<TransformComponent> _xformQuery;
-    private readonly EntityQuery<PhysicsComponent> _physicsQuery;
-    private readonly EntityQuery<DamageableComponent> _damageQuery;
-    private readonly EntityQuery<ProjectileComponent> _projectileQuery;
-    private readonly EntityQuery<TagComponent> _tagQuery;
-
     /// <summary>
     ///     Total area that the explosion covers.
     /// </summary>
@@ -765,12 +761,6 @@ sealed class Explosion
         _canCreateVacuum = canCreateVacuum;
         _entMan = entMan;
         _damageable = damageable;
-
-        _xformQuery = entMan.GetEntityQuery<TransformComponent>();
-        _physicsQuery = entMan.GetEntityQuery<PhysicsComponent>();
-        _damageQuery = entMan.GetEntityQuery<DamageableComponent>();
-        _tagQuery = entMan.GetEntityQuery<TagComponent>();
-        _projectileQuery = entMan.GetEntityQuery<ProjectileComponent>();
 
         if (spaceData != null)
         {

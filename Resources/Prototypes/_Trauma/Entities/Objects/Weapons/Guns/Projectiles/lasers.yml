@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: SidearmBulletBase
   parent: BaseBullet
@@ -51,7 +53,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 10 # This is a super shitty ranged weapon it should not be good DPS wise.
+        Heat: 12 # This is a super shitty ranged weapon it should not be good DPS wise.
 
 # Longarms
 
@@ -75,7 +77,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 10
+        Heat: 14
 
 - type: entity
   parent: SidearmBulletBase

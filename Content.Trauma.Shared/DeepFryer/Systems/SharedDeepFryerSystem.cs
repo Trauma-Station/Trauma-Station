@@ -20,17 +20,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.DeepFryer.Systems;
 
-public abstract class SharedDeepFryerSystem : EntitySystem
+public abstract partial class SharedDeepFryerSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] protected readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
+    [Dependency] protected SharedSolutionContainerSystem _solution = default!;
+    [Dependency] protected IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private NameModifierSystem _nameModifier = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     public static readonly ProtoId<ItemSizePrototype> Ginormous = "Ginormous";
 
@@ -50,6 +50,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
     private void OnOpen(Entity<DeepFryerComponent> ent, ref StorageAfterOpenEvent args)
     {
         _appearance.SetData(ent.Owner, DeepFryerVisuals.Open, true);
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
         Deactivate(ent);
     }
 
@@ -61,22 +62,22 @@ public abstract class SharedDeepFryerSystem : EntitySystem
 
     private void OnTryClose(Entity<DeepFryerComponent> ent, ref StorageCloseAttemptEvent args)
     {
-        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            || !_solution.TryGetSolution(ent.Owner,
+        if (!_solution.TryGetSolution(ent.Owner,
                 ent.Comp.FryerSolutionContainer,
                 out _,
                 out var deepFryerSolution)
             || deepFryerSolution.Volume <= 100f)
         {
             args.Cancelled = true;
-            _popup.PopupEntity(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner);
+            _popup.PopupClient(Loc.GetString("deep-fryer-not-enough-liquid"), ent.Owner, args.User);
             return;
         }
 
         if (!_power.IsPowered(ent.Owner))
         {
             args.Cancelled = true;
-            _popup.PopupEntity(Loc.GetString("deep-fryer-no-power"), ent.Owner);
+            _popup.PopupClient(Loc.GetString("deep-fryer-no-power"), ent.Owner, args.User);
+            return;
         }
 
         ent.Comp.LastUser = args.User;
@@ -92,14 +93,11 @@ public abstract class SharedDeepFryerSystem : EntitySystem
     private void OnActivated(Entity<ActiveDeepFryerComponent> ent, ref ComponentStartup args)
     {
         _ambientSound.SetAmbience(ent.Owner, true);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, true);
     }
 
     private void OnDeactivated(Entity<ActiveDeepFryerComponent> ent, ref ComponentShutdown args)
     {
         _ambientSound.SetAmbience(ent.Owner, false);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.Frying, false);
-        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
     }
 
     #region Helper Methods
@@ -116,6 +114,7 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         if (!TryComp<EntityStorageComponent>(ent.Owner, out var entStorage))
             return;
 
+        _appearance.SetData(ent.Owner, DeepFryerVisuals.BigFrying, false);
         foreach (var entity in entStorage.Contents.ContainedEntities)
         {
             ent.Comp.StoredObjects.Add(entity);
@@ -139,12 +138,12 @@ public abstract class SharedDeepFryerSystem : EntitySystem
         ent.Comp.StoredObjects.Clear();
         ent.Comp.FryFinishTime = TimeSpan.Zero;
 
-        if (TryComp<SolutionContainerManagerComponent>(ent.Owner, out _)
-            && _solution.TryGetSolution(ent.Owner,
-                ent.Comp.FryerSolutionContainer,
-                out var solution,
-                out _))
+        if (_solution.TryGetSolution(ent.Owner,
+            ent.Comp.FryerSolutionContainer,
+            out var solution))
+        {
             _solution.SetTemperature(solution.Value, 293.7f); // Reset the temp when its opened
+        }
     }
 
     protected void DeepFryItems(Entity<DeepFryerComponent> ent)

@@ -1,6 +1,9 @@
+// <Trauma>
+using Content.Goobstation.Common.Examine;
+using Robust.Shared.Utility;
+// </Trauma>
 using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement.Components;
-using Robust.Shared.Utility; // Goob
 
 namespace Content.Shared.IdentityManagement;
 
@@ -28,6 +31,16 @@ public static class Identity
         var meta = ent.GetComponent<MetaDataComponent>(uid);
         if (meta.EntityLifeStage <= EntityLifeStage.Initializing)
             return FormattedMessage.EscapeText(meta.EntityName); // Goob Sanitize Text
+
+        // <Trauma>
+        if (viewer is { } view)
+        {
+            var ev = new GetExamineNameEvent((uid, meta));
+            ent.EventBus.RaiseLocalEvent(view, ref ev);
+            if (ev.Result is { } str)
+                return FormattedMessage.EscapeText(str);
+        }
+        // </Trauma>
 
         var uidName = meta.EntityName;
 

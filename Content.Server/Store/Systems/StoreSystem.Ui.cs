@@ -27,16 +27,16 @@ namespace Content.Server.Store.Systems;
 public sealed partial class StoreSystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedGameTicker _ticker = default!;
+    [Dependency] private SharedGameTicker _ticker = default!;
     // </Trauma>
-    [Dependency] private readonly IAdminLogManager _admin = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly ActionUpgradeSystem _actionUpgrade = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
+    [Dependency] private IAdminLogManager _admin = default!;
+    [Dependency] private ActionContainerSystem _actionContainer = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private ActionUpgradeSystem _actionUpgrade = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private StackSystem _stack = default!;
 
     private void InitializeUi()
     {
@@ -110,9 +110,17 @@ public sealed partial class StoreSystem
                 return;
         }
 
+        // <Trauma>
+        var cost = listing.TryGetSelectedCurrenciesForPurchase(component.Balance, out var skipped);
+        if (skipped)
+            cost = listing.Cost.ToDictionary();
+        else if (cost == null)
+            return;
+        // </Trauma>
+
         //check that we have enough money
         // var cost = listing.Cost; // Goobstation
-        foreach (var (currency, amount) in listing.Cost)
+        foreach (var (currency, amount) in cost)
         {
             if (amount == FixedPoint2.Zero) // Trauma - skip balance check if listing costs 0
                 continue;
@@ -123,7 +131,7 @@ public sealed partial class StoreSystem
             }
         }
         if (HasComp<NtrClientAccountComponent>(uid))
-            RaiseLocalEvent(uid, new NtrListingPurchaseEvent(listing.Cost.First().Value));
+            RaiseLocalEvent(uid, new NtrListingPurchaseEvent(cost.First().Value));
         OnPurchase(listing); // Goob edit - ntr shittery
 
         // Goobstation start
@@ -138,7 +146,7 @@ public sealed partial class StoreSystem
         //    DisableRefund(uid, component);
 
         //subtract the cash
-        foreach (var (currency, amount) in listing.Cost)
+        foreach (var (currency, amount) in cost)
         {
             if (amount > FixedPoint2.Zero) // Trauma - skip balance check if listing costs 0
                 component.Balance[currency] -= amount;
@@ -156,7 +164,7 @@ public sealed partial class StoreSystem
 
             RaiseLocalEvent(product, new ItemPurchasedEvent(buyer));
 
-            HandleRefundComp(uid, component, product, listing.Cost, listing); // Goob edit
+            HandleRefundComp(uid, component, product, cost, listing); // Trauma - added cost and listing
 
             var xForm = Transform(product);
 
@@ -185,7 +193,7 @@ public sealed partial class StoreSystem
             // And then add that action entity to the relevant product upgrade listing, if applicable
             if (actionId != null)
             {
-                HandleRefundComp(uid, component, actionId.Value, listing.Cost, listing); // Goob edit
+                HandleRefundComp(uid, component, actionId.Value, cost, listing); // Trauma - added cost and listing
 
                 if (listing.ProductUpgradeId != null)
                 {
@@ -204,15 +212,15 @@ public sealed partial class StoreSystem
         if (listing is { ProductUpgradeId: not null, ProductActionEntity: not null })
         {
             ListingDataWithCostModifiers? originalListing = null; // Goobstation
-            var cost = listing.Cost.ToDictionary(); // Goobstation
+            var costCopy = cost.ToDictionary(); // Goobstation
             if (listing.ProductActionEntity != null)
             {
                 if (TryComp(listing.ProductActionEntity.Value, out StoreRefundComponent? storeRefund)) // Goobstation
                 {
                     foreach (var (key, value) in storeRefund.BalanceSpent)
                     {
-                        cost.TryAdd(key, FixedPoint2.Zero);
-                        cost[key] += value;
+                        costCopy.TryAdd(key, FixedPoint2.Zero);
+                        costCopy[key] += value;
                     }
                     originalListing = storeRefund.Data;
                 }
@@ -222,7 +230,7 @@ public sealed partial class StoreSystem
             if (!_actionUpgrade.TryUpgradeAction(listing.ProductActionEntity, out var upgradeActionId))
             {
                 if (listing.ProductActionEntity != null)
-                    HandleRefundComp(uid, component, listing.ProductActionEntity.Value, cost, originalListing, true); // Goob edit
+                    HandleRefundComp(uid, component, listing.ProductActionEntity.Value, costCopy, originalListing, true); // Trauma - added costCopy, originalListing and true
 
                 return;
             }
@@ -230,7 +238,7 @@ public sealed partial class StoreSystem
             listing.ProductActionEntity = upgradeActionId;
 
             if (upgradeActionId != null)
-                HandleRefundComp(uid, component, upgradeActionId.Value, cost, originalListing, true); // Goob edit
+                HandleRefundComp(uid, component, upgradeActionId.Value, cost, originalListing, true); // Trauma - added cost, originalListing and true
         }
 
         if (listing.ProductEvent != null)
@@ -245,11 +253,13 @@ public sealed partial class StoreSystem
                 RaiseLocalEvent(buyer, listing.ProductEvent);
         }
 
-        // Goob edit start
-        /* if (listing.DisableRefund)
+        // <Trauma>
+        /*
+        if (listing.DisableRefund)
         {
             component.RefundAllowed = false;
-        } */
+        }
+        */
         if (listing.BlockRefundListings.Count > 0)
         {
             foreach (var listingData in component.FullListingsCatalog.Where(x => listing.BlockRefundListings.Contains(x.ID)))
@@ -258,8 +268,8 @@ public sealed partial class StoreSystem
             }
         }
 
-        listing.PurchaseCostHistory.Add(listing.Cost.ToDictionary());
-        // Goob edit end
+        listing.PurchaseCostHistory.Add(cost);
+        // </Trauma>
 
         //log dat shit.
         var logImpact = LogImpact.Low;
@@ -278,7 +288,7 @@ public sealed partial class StoreSystem
 
         _admin.Add(LogType.StorePurchase,
             logImpact,
-            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, Proto)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
+            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, ProtoMan)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
 
         listing.PurchaseAmount++; //track how many times something has been purchased
         if (msg.SoundSource != null && GetEntity(msg.SoundSource) != null)
@@ -309,7 +319,7 @@ public sealed partial class StoreSystem
     /// This would need to be done should a currency with decimal values need to use it.
     /// not quite sure how to handle that
     /// </remarks>
-    public void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
+    private void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
     {
         if (msg.Amount <= 0)
             return;
@@ -319,7 +329,7 @@ public sealed partial class StoreSystem
             return;
 
         //make sure a malicious client didn't send us random shit
-        if (!Proto.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
+        if (!ProtoMan.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
             return;
 
         //we need an actually valid entity to spawn. This check has been done earlier, but just in case.
@@ -346,7 +356,7 @@ public sealed partial class StoreSystem
         UpdateUserInterface(buyer, uid, component);
     }
 
-    public void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
+    private void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
     {
         // TODO: Remove guardian/holopara
 
@@ -424,7 +434,7 @@ public sealed partial class StoreSystem
                     refundComp.Data == null || refundComp.StoreEntity != uid || refundComp.Data.DisableRefund)
                     continue;
 
-                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, Proto);
+                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, ProtoMan);
                 listings.Add(new RefundListingData(GetNetEntity(bought), name));
             }
 
@@ -488,7 +498,7 @@ public sealed partial class StoreSystem
         EntityUid purchase,
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> cost,
         ListingDataWithCostModifiers? data,
-        bool overrideCost = false) // Goob edit
+        bool overrideCost = false) // Trauma - added cost, data and overrideCost
     {
         component.BoughtEntities.Add(purchase);
         var refundComp = EnsureComp<StoreRefundComponent>(purchase);

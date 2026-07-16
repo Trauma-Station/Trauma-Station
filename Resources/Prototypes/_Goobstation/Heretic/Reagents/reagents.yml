@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: flavor
@@ -29,11 +24,6 @@
   id: ether
   flavorType: Complex
   description: flavor-complex-ether
-
-- type: flavor
-  id: raw
-  flavorType: Complex
-  description: flavor-complex-raw
 
 - type: reagent
   id: EldritchEssence
@@ -75,7 +65,6 @@
         - DuskAndDawn
         - WoundedSoldier
         - NewbornEther
-        - RawFlesh
       - !type:ModifyStatusEffect
         effectProto: StatusEffectSeeingRainbow
         time: 50
@@ -88,22 +77,26 @@
         time: 50
         type: Remove
     Bloodstream:
+      # Either predicted random is broken or some entity effect shitcode but setting probability of paralysis to below 1
+      # results in it either not doing anything or paralyzing repeatedly over and over.
+      # So we have this instead.
+      metabolismRate: 5
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
-      - !type:Electrocute
-        electrocuteTime: 1
-        probability: 0.3
+      - !type:ModifyParalysis
+        time: 1
       - !type:HealthChange
         damage:
           types:
-            Poison: 3
+            Poison: 15
   tileReactions:
   - !type:ChangeTileReaction # Rusts tile
 
@@ -145,15 +138,16 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
       - !type:MovementSpeedModifier
-        walkSpeedModifier: 0.35
-        sprintSpeedModifier: 0.35
+        walkSpeedModifier: 0.3
+        sprintSpeedModifier: 0.3
 
 - type: reagent
   id: DuskAndDawn
@@ -187,15 +181,15 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
         guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
-      - !type:GenericStatusEffect
-        key: TemporaryBlindness
-        component: TemporaryBlindness
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectBlindness
         type: Add
         time: 3
 
@@ -234,10 +228,13 @@
         time: 60
         type: Set
     Bloodstream:
+      # Slash damage is split into all parts, which means vital damage is gonna be less, compensate high damage by high metabolism rate
+      metabolismRate : 2.0
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -247,10 +244,47 @@
         splitDamage: Split
         damage:
           types:
-            Slash: 5
+            Slash: 32
           woundSeverityMultipliers:
-            Slash: 2
+            Slash: 5
           partDamageVariation: 2
+      - !type:Emote
+        emote: Scream
+        probability: 0.8
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        splitDamage: Split
+        ignoreResistances: false
+        damage:
+          types:
+            Slash: 12
+          woundSeverityMultipliers:
+            Slash: 5
+          partDamageVariation: 2
+      - !type:Emote
+        conditions:
+        - !type:WhitelistCondition
+          checkMind: true
+          inverted: true
+          whitelist:
+            components:
+            - Heretic
+            - Ghoul
+          guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
+        emote: Scream
+        probability: 0.8
 
 - type: reagent
   id: NewbornEther
@@ -287,7 +321,8 @@
       conditions:
       - !type:WhitelistCondition
         checkMind: true
-        blacklist:
+        inverted: true
+        whitelist:
           components:
           - Heretic
           - Ghoul
@@ -305,38 +340,3 @@
         effectProto: StatusEffectForcedSleeping
         time: 9
         delay: 5
-
-- type: reagent
-  id: RawFlesh
-  group: Unknown
-  name: reagent-name-raw-flesh
-  desc: reagent-desc-raw-flesh
-  physicalDesc: reagent-physical-desc-raw
-  flavor: raw
-  color: red
-  metabolisms:
-    Bloodstream:
-      conditions:
-      - !type:WhitelistCondition
-        checkMind: true
-        whitelist:
-          components:
-          - Heretic
-          - Ghoul
-        guidebookText: entity-condition-guidebook-heretic-or-ghoul
-      effects:
-      - !type:ModifyBloodLevel
-        amount: 2
-      - !type:EvenHealthChange
-        damage:
-          Burn: -2
-          Toxin: -2
-          Airloss: -2
-          Brute: -2
-          Genetic: -2
-          Metaphysical: -3
-      - !type:ModifyBleed
-        amount: -0.5
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.15
-        sprintSpeedModifier: 1.15

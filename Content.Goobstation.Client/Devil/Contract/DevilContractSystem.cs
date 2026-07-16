@@ -4,4 +4,4 @@ using Content.Goobstation.Shared.Devil.Contract;
 
 namespace Content.Goobstation.Client.Devil.Contract;
 
-public sealed class DevilContractSystem : SharedDevilContractSystem;
+public sealed partial class DevilContractSystem : SharedDevilContractSystem;

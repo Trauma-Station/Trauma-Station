@@ -12,7 +12,7 @@ public sealed partial class GeneticsConsoleSystem
 {
     private List<SequenceState> _sequences = new();
 
-    [Dependency] private readonly EntityQuery<GeneticsScannerComponent> _scannerQuery = default!;
+    [Dependency] private EntityQuery<GeneticsScannerComponent> _scannerQuery = default!;
 
     private void InitializeScanner()
     {
@@ -101,7 +101,7 @@ public sealed partial class GeneticsConsoleSystem
             return;
         }
 
-        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{ToPrettyString(mob)} was scanned by {ToPrettyString(args.User)} with console {ToPrettyString(ent)}");
+        _adminLog.Add(LogType.Genetics, LogImpact.Low, $"{mob:target} was scanned by {args.User:user} with console {ent.Owner:console}");
         _audio.PlayPredicted(ent.Comp.ScanSound, ent, args.User);
 
         Speak(ent, "scanned");

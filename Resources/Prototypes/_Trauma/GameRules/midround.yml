@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Antag schedulers: runs a limited number of midround antags
 
 - type: entity
@@ -35,9 +37,10 @@
 ## Morph
 
 - type: entity
-  parent: BaseGameRule
+  parent: [ BaseRoundstartAntagRule ]
   id: MorphRule
   components:
+  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 20
     weight: 3
@@ -49,17 +52,9 @@
   - type: AntagSpawner
     prototype: MobMorph
   - type: AntagSelection
-    selectionTime: PostPlayerSpawn
-    definitions:
-    - spawnerPrototype: GhostRoleSpawnerMorph
-      min: 1
-      max: 1
-      briefing:
-        text: morph-role-greeting
-        color: lime
-        sound: /Audio/_Trauma/Morph/mutate.ogg
-      mindRoles:
-      - MindRoleMorph
+    antags:
+    - !type:FixedAntagCount
+      proto: Morph
 
 ## Shadow demon
 
@@ -70,54 +65,33 @@
   components:
   - type: AntagSpawner
     prototype: BaseMobShadowDemon
-  - type: AntagRandomSpawn
-
-- type: entity
-  parent: BaseShadowDemonRule
-  id: ShadowDemonSummon
-  components:
+  - type: MaintsSpawnRule
   - type: AntagSelection
     agentName: shadow-demon-round-end-agent-name
-    definitions:
-    - spawnerPrototype: SpawnPointGhostShadowDemon
-      min: 1
-      max: 1
-      pickPlayer: false
-      mindRoles:
-      - MindRoleShadowDemon
-      briefing:
-        text: shadow-demon-role-greeting
-        color: Red
-        sound: /Audio/_Trauma/Mobs/ShadowDemon/briefing/shadowdemonbriefing.ogg
-      components:
-      - type: RandomMetadata  # Left as is since they are demonic names
-        nameSegments:
-        - NamesSlaughterTitle
-        - NamesSlaughter
-        nameFormat: name-format-slaughter
-      - type: LightImmunity # Grants temporary light immunity so it survives AntagRandomSpawn | Remove once we get better spawns
-        duration: 20
+    antags:
+    - !type:FixedAntagCount
+      proto: ShadowDemon
+
+- type: entity
+  parent: [ BaseShadowDemonRule, BaseAntagGhostRoleRule ]
+  id: ShadowDemonSummon
+  components:
+  - type: GhostroleAlert
 
 ## Shadowling
 
 - type: entity
-  parent: BaseShadowlingRule
+  parent: [ BaseShadowlingRule, BaseAntagGhostRoleRule ]
   id: ShadowlingMidround
   components:
+  - type: GhostroleAlert
   - type: AntagSpawner
     prototype: MobShadowling
   - type: MaintsSpawnRule
   - type: AntagSelection
-    definitions:
-    - min: 1
-      max: 1
-      playerRatio: 1
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleShadowling
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: Shadowling
 
 ## Sleeper agents ninja threat, the ninja does the announcement
 
@@ -133,18 +107,13 @@
     duration: null # the rule has to last the whole round not 1 second
     occursDuringRoundEnd: false
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ TraitorSleeper ]
-      fallbackRoles: [ Traitor ]
-      min: 1
-      max: 2
+    antags:
+    - !type:LinearAntagCount
+      proto: TraitorSleeper
+      range:
+        min: 1
+        max: 2
       playerRatio: 10
-      blacklist:
-        components:
-        - AntagImmune
-        - CommandStaff
-      mindRoles:
-      - MindRoleTraitorSleeper
 
 ## Quiet version of wailing horse
 

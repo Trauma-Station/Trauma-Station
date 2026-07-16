@@ -6,10 +6,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Light;
 
-public sealed class RandomPointLightSystem : EntitySystem
+public sealed partial class RandomPointLightSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
 
     public override void Initialize()
     {

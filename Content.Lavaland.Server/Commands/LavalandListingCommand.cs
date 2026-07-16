@@ -8,9 +8,9 @@ using Robust.Shared.Console;
 namespace Content.Lavaland.Server.Commands;
 
 [AdminCommand(AdminFlags.Admin)]
-public sealed class LavalandListingCommand : IConsoleCommand
+public sealed partial class LavalandListingCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _ent = default!;
 
     public string Command => "listlavaland";
 
@@ -20,11 +20,11 @@ public sealed class LavalandListingCommand : IConsoleCommand
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var lavalands = _entityManager.System<LavalandSystem>().GetLavalands();
+        var lavalands = _ent.System<LavalandSystem>().GetLavalands();
 
         foreach (var (owner, comp) in lavalands)
         {
-            var mapId = _entityManager.GetComponent<TransformComponent>(owner).MapID;
+            var mapId = _ent.GetComponent<TransformComponent>(owner).MapID;
             var lavalandString = $"Type: {comp.PrototypeId} | MapID: {mapId} | MapUid: {owner} | Seed: {comp.Seed}";
             shell.WriteLine(lavalandString);
         }

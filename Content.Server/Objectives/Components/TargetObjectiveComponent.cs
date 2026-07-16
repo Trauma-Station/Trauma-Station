@@ -8,9 +8,10 @@ public sealed partial class TargetObjectiveComponent : Component
     /// <summary>
     /// Locale id for the objective title.
     /// It is passed "targetName" and "job" arguments.
+    /// If null, the objective title will not be set.
     /// </summary>
-    [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
-    public string Title = string.Empty;
+    [DataField, ViewVariables(VVAccess.ReadWrite)] // Trauma - was required: true
+    public string? Title;
 
     /// <summary>
     /// Mind entity id of the target.

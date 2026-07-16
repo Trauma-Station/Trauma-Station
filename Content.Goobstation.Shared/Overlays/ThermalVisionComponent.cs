@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
+using Content.Shared.Whitelist;
 
 namespace Content.Goobstation.Shared.Overlays;
 
@@ -16,6 +17,12 @@ public sealed partial class ThermalVisionComponent : SwitchableVisionOverlayComp
 
     [DataField]
     public string? ThermalShader = "ThermalVision";
+
+    [DataField]
+    public EntityWhitelist? UserWhitelist;
+
+    [DataField]
+    public bool WhitelistCheckMind;
 }
 
 public sealed partial class ToggleThermalVisionEvent : InstantActionEvent;

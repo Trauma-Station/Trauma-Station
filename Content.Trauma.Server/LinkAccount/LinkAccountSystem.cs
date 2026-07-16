@@ -2,7 +2,6 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Server.GameTicking;
-using Content.Server.LinkAccount;
 using Content.Shared.Ghost;
 using Content.Trauma.Common.LinkAccount;
 using Content.Trauma.Shared.GhostColor;
@@ -13,12 +12,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.LinkAccount;
 
-public sealed class LinkAccountSystem : EntitySystem
+public sealed partial class LinkAccountSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private TimeSpan _timeBetweenLobbyMessages;
     private TimeSpan _nextLobbyMessageTime;

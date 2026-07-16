@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
@@ -17,20 +16,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ShadowDemon;
 
-public sealed class ShadowGrappleSystem : EntitySystem
+public sealed partial class ShadowGrappleSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedPoweredLightSystem _poweredLight = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityQuery<HandheldLightComponent> _handheldQuery = default!;
-    [Dependency] private readonly EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedJointSystem _joints = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedPoweredLightSystem _poweredLight = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private EntityQuery<HandheldLightComponent> _handheldQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     private const string GrappleJoint = "grappling";
 
@@ -61,9 +61,9 @@ public sealed class ShadowGrappleSystem : EntitySystem
             shooter,
             anchorA: Vector2.Zero,
             anchorB: Vector2.Zero,
-            id: GrappleJoint);
+            id: $"{GrappleJoint}_{GetNetEntity(ent.Owner)}");
 
-        joint.MinLength = 0.35f;
+        joint.MinLength = ent.Comp.MinJointLength;
         joint.Stiffness = 10f;
         joint.Damping = 5f;
         Dirty(ent);
@@ -80,17 +80,24 @@ public sealed class ShadowGrappleSystem : EntitySystem
         if (_mobQuery.HasComp(target))
         {
             _damage.TryChangeDamage(target, ent.Comp.DamageOnHit);
-            BreakLightsOnTarget(target);
+            if (ent.Comp.BreakLights)
+                BreakLightsOnTarget(target);
 
             _stun.TryAddParalyzeDuration(target, ent.Comp.StunTime);
 
-            _throwing.TryThrow(target, Transform(shooter).Coordinates, 10f, shooter, doSpin: true);
+            _physics.SetLinearVelocity(target, Vector2.Zero, wakeBody: false);
+            _throwing.TryThrow(target, Transform(shooter).Coordinates, 10f, shooter, doSpin: true, compensateFriction: true);
             return;
         }
 
         // Not a body, just destroy nearby lights and throw us there
-        _throwing.TryThrow(shooter, Transform(target).Coordinates, 10f, shooter, doSpin: true);
-        BreakNearbyLights(target, args.Shooter, ent.Comp.BreakLightsRange);
+        if (ent.Comp.PullUser)
+        {
+            _physics.SetLinearVelocity(shooter, Vector2.Zero, wakeBody: false);
+            _throwing.TryThrow(shooter, Transform(target).Coordinates, 10f, shooter, doSpin: true, compensateFriction: true);
+        }
+        if (ent.Comp.BreakLights)
+            BreakNearbyLights(target, args.Shooter, ent.Comp.BreakLightsRange);
     }
 
     private void OnMapInit(Entity<ShadowGrappleComponent> ent, ref MapInitEvent args)

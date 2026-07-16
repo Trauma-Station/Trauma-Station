@@ -12,9 +12,9 @@ namespace Content.Medical.Shared.Traumas;
 /// Implements gameplay effects when you have broken bones.
 /// </summary>
 // TODO: make this 1000x better this is such a nothingburger
-public sealed class BoneEffectsSystem : EntitySystem
+public sealed partial class BoneEffectsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private SharedVirtualItemSystem _virtual = default!;
 
     public override void Initialize()
     {

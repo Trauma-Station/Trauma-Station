@@ -13,7 +13,6 @@ using Content.Trauma.Common.Knowledge.Prototypes;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Knowledge.Systems;
 using Content.Trauma.Shared.MartialArts.Components;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Trauma.Client.Knowledge;
 
@@ -85,7 +84,7 @@ public sealed class KnowledgeSystem : SharedKnowledgeSystem
         var above = editor.MarkingsTab;
         var index = above.GetPositionInParent();
 
-        var tab = new KnowledgeProfileEditor(_proto, this);
+        var tab = new KnowledgeProfileEditor(ProtoMan, this);
         tab.OnSave += knowledge =>
         {
             editor.Profile = editor.Profile?.WithKnowledge(knowledge);

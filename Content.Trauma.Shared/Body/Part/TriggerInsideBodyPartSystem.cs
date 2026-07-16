@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Body.Part;
 
-public sealed class TriggerInsideBodyPartSystem : EntitySystem
+public sealed partial class TriggerInsideBodyPartSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

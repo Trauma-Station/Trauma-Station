@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: RitualCircleInact
   name: Summoning portal
@@ -26,8 +28,9 @@
         - WallLayer
         hard: false
   - type: Damageable
-    damageContainer: StructuralInorganic
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
       - trigger:

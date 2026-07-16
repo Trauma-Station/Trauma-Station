@@ -3,16 +3,18 @@
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
+using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.IdentityManagement;
 
 /// <summary>
 /// Updates your identity when you toggle a mask up or down.
 /// </summary>
-public sealed class IdentityBlockerToggleSystem : EntitySystem
+public sealed partial class IdentityBlockerToggleSystem : EntitySystem
 {
-    [Dependency] private readonly IdentitySystem _identity = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private IdentitySystem _identity = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityQuery<InventoryComponent> _invQuery = default!;
 
     public override void Initialize()
     {
@@ -26,8 +28,8 @@ public sealed class IdentityBlockerToggleSystem : EntitySystem
     {
         var target = uid;
 
-        if (_inventory.TryGetContainingEntity(uid, out var containing))
-            target = containing.Value;
+        if (_container.TryGetContainingContainer(uid, out var container) && _invQuery.HasComp(container.Owner))
+            target = container.Owner;
 
         _identity.QueueIdentityUpdate(target);
     }

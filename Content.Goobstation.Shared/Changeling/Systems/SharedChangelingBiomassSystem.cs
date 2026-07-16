@@ -21,18 +21,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Changeling.Systems;
 
-public abstract class SharedChangelingBiomassSystem : EntitySystem
+public abstract partial class SharedChangelingBiomassSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly DamageableSystem _dmg = default!;
-    [Dependency] private readonly MobThresholdSystem _mob = default!;
-    [Dependency] private readonly SharedBloodstreamSystem _blood = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private DamageableSystem _dmg = default!;
+    [Dependency] private MobThresholdSystem _mob = default!;
+    [Dependency] private SharedBloodstreamSystem _blood = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPuddleSystem _puddle = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     private EntityQuery<AbsorbedComponent> _absorbQuery;
     private EntityQuery<BloodstreamComponent> _bloodQuery;
@@ -169,7 +168,7 @@ public abstract class SharedChangelingBiomassSystem : EntitySystem
     public readonly ProtoId<DamageTypePrototype> Genetic = "Cellular";
     private void KillChangeling(Entity<ChangelingBiomassComponent> ent)
     {
-        var genetic = _proto.Index(Genetic);
+        var genetic = ProtoMan.Index(Genetic);
 
         if (!_mob.TryGetDeadThreshold(ent, out var totalDamage))
             return;

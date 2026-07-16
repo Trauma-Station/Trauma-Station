@@ -1,5 +1,6 @@
 using Content.Shared.Alert;
 using Content.Shared.Damage;
+using Content.Shared.DisplacementMap;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Prototypes;
@@ -48,7 +49,7 @@ namespace Content.Shared.Atmos.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public float MaximumFireStacks = 15f; // Goob - was 10f
+        public float MaximumFireStacks = 10f;
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
@@ -115,5 +116,11 @@ namespace Content.Shared.Atmos.Components
 
         [DataField]
         public ProtoId<AlertPrototype> FireAlert = "Fire";
+
+        /// <summary>
+        /// If set, applies the displacement map associated with the <see cref="DisplacementDataPrototype"/>.
+        /// </summary>
+        [DataField]
+        public ProtoId<DisplacementDataPrototype>? Displacement;
     }
 }

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [OrganBaseTorso, OrganAnimalSpriteExternal]
   id: OrganTorsoGhoul
@@ -50,6 +52,7 @@
       90: Critical
       100: Dead
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: MeleeWeapon
     altDisarm: false
@@ -78,7 +81,6 @@
     - SlowedDown
     - Stutter
     - Electrocution
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
     - Flashed
@@ -136,6 +138,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: stalker
   - type: FlashImmunity
+    showInExamine: false
   - type: MeleeWeapon
     animation: WeaponArcClaw
     damage:
@@ -144,7 +147,7 @@
         Piercing: 10
 
 - type: entity
-  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase]
+  parent: [BaseMobHereticGhoul, MobGhoulStalkerBase, MobNightVision]
   id: MobGhoulStalker
   components:
   - type: Ghoul
@@ -162,11 +165,7 @@
     - ActionActivateEmp
     - ActionHereticShapeshift
   - type: ThermalVision
-    thermalShader: null
-    isActive: true
     color: white
-    drawOverlay: false
-    lightRadius: 0
     toggleAction: null
 
 - type: entity
@@ -237,12 +236,11 @@
     mindRoles:
     - MindRoleGhoul
   - type: NightVision
-    color: white
-    activateSound: null
-    deactivateSound: null
-    drawOverlay: false
+    lightingColor: white
   - type: Eye
     drawFov: false
+  - type: Viewcone
+    baseConeAngle: 360
 
 - type: entity
   parent: [BaseMobGhoulLock, MobGhoulProphetBase]
@@ -285,10 +283,9 @@
     baseWalkSpeed: 5
     baseSprintSpeed: 5
   - type: FlashImmunity
+    showInExamine: false
   - type: NightVision
-    color: aquamarine
-    activateSound: null
-    deactivateSound: null
+    lightingColor: aquamarine
   - type: MeleeWeapon
     animation: WeaponArcPunch
     soundHit:
@@ -341,8 +338,9 @@
         Holy: -1
   - type: Insulated
   - type: Damageable
-    damageContainer: InorganicMetaphysical
     damageModifierSet: MirrorMaid
+  - type: Injurable
+    damageContainer: InorganicMetaphysical
   - type: MovementIgnoreGravity
 
 - type: entity
@@ -471,6 +469,7 @@
   - MobFlammable
   - MobAtmosExposed
   - MobPolymorphable
+  abstract: true
   id: MobGhoulRustWalkerBase
   name: rust walker
   description: A grinding, clanking construct which leaches life from its surroundings with every armoured step.
@@ -547,12 +546,14 @@
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
   - type: Damageable
+  - type: Injurable
     damageContainer: SiliconMetaphysical
   - type: HealthExaminable
     examinableTypes:
     - Blunt
     - Slash
     - Piercing
+    - Ballistic
     - Heat
     - Shock
     locPrefix: silicon
@@ -576,6 +577,7 @@
     baseWalkSpeed: 4.5
     baseSprintSpeed: 4.5
   - type: FlashImmunity
+    showInExamine: false
   - type: HTN
     rootTask:
       task: HereticSummonCompound

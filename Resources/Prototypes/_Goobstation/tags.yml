@@ -1,10 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Alphabetical order people!
 
 - type: Tag
   id: ArrythmicKnife
-
-- type: Tag
-  id: AthiestsFedora
 
 - type: Tag
   id: AnchorHereticStructure
@@ -436,7 +435,7 @@
   id: NukeOpsReinforcementUplink
 
 - type: Tag
-  id: Nullrod
+  id: Nullrod # Allows transforming it into an altar's specific nullrod. Given to the Nullrod entity specifically.
 
 - type: Tag
   id: NunHood
@@ -577,9 +576,6 @@
   id: MakeshiftShield
 
 - type: Tag
-  id: MolotovConstruction
-
-- type: Tag
   id: IgnitionSource
 
 - type: Tag
@@ -604,16 +600,10 @@
   id: WallLight
 
 - type: Tag
-  id: WaterTank
-
-- type: Tag
   id: WeaponDisabler
 
 - type: Tag
   id: Flash
-
-- type: Tag
-  id: RevFlash
 
 - type: Tag
   id: WeaponPistolDualetta

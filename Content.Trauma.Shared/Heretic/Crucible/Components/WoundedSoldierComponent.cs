@@ -11,7 +11,7 @@ public sealed partial class WoundedSoldierComponent : Component
     public float LifeStealMultiplier = 0.3f;
 
     [DataField]
-    public float StaminaHealMultiplier = 0.3f;
+    public float StaminaHealMultiplier = 0.5f;
 
     [DataField]
     public float OvertimeDamageThresholdRatio = 0.1f;

@@ -27,14 +27,14 @@ public sealed partial class HasOrgan : EntityConditionBase<HasOrgan>
             ("organ", OrganCategory));
 }
 
-public sealed class HasOrganConditionSystem : EntityConditionSystem<BodyComponent, HasOrgan>
+public sealed partial class HasOrganConditionSystem : EntityConditionSystem<BodyComponent, HasOrgan>
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     protected override void Condition(Entity<BodyComponent> entity, ref EntityConditionEvent<HasOrgan> args)
     {
         args.Result = _body.GetOrgan(entity.AsNullable(), args.Condition.OrganCategory) is {} organ &&
-            _conditions.TryConditions(organ, args.Condition.Conditions);
+            _conditions.TryConditions(organ, args.Condition.Conditions, args.User);
     }
 }

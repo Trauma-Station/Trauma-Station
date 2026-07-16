@@ -2,7 +2,7 @@
 
 using Content.Trauma.Server.Wizard.Systems;
 
-namespace Content.Goobstation.Server.Wizard.Components;
+namespace Content.Trauma.Server.Wizard.Components;
 
 [RegisterComponent, Access(typeof(WizardRuleSystem))]
 public sealed partial class RuleOnWizardDeathRuleComponent : Component

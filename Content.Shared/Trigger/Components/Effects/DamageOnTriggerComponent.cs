@@ -1,4 +1,3 @@
-using Content.Medical.Common.Targeting; // Trauma
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 
@@ -23,10 +22,4 @@ public sealed partial class DamageOnTriggerComponent : BaseXOnTriggerComponent
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public DamageSpecifier Damage = default!;
-
-    /// <summary>
-    /// Trauma - body part to target damage with.
-    /// </summary>
-    [DataField]
-    public TargetBodyPart? TargetPart;
 }

@@ -23,11 +23,11 @@ namespace Content.Shared.Damage.Systems;
 /// </summary>
 public abstract partial class SharedDamageOtherOnHitSystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedCameraRecoilSystem _recoil = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
 
     private List<EntityUid> _target = new(1);
 
@@ -48,9 +48,8 @@ public abstract partial class SharedDamageOtherOnHitSystem
         if (args.Target == args.Component.Thrower) // Goobstation - Mjolnir
             return;
 
-        var targetPart = _gun.GetTargetPart(args.Component.Thrower, args.Target);
         var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances,
-            targetPart: targetPart, origin: args.Component.Thrower, increaseOnly: component.IncreaseOnly);
+            origin: args.Component.Thrower, increaseOnly: component.IncreaseOnly);
 
         // <Goob>
         // For stuff that cares about it being attacked.

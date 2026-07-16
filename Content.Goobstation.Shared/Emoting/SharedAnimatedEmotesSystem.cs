@@ -7,11 +7,10 @@ using Content.Shared.StatusEffectNew;
 
 namespace Content.Goobstation.Shared.Emoting;
 
-public abstract class SharedAnimatedEmotesSystem : EntitySystem
+public abstract partial class SharedAnimatedEmotesSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly VomitSystem _vomit = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private VomitSystem _vomit = default!;
 
     public override void Initialize()
     {
@@ -23,7 +22,7 @@ public abstract class SharedAnimatedEmotesSystem : EntitySystem
 
     private void OnBeforeEmote(Entity<AnimatedEmotesComponent> ent, ref BeforeEmoteEvent args)
     {
-        var emote = _proto.Index<EmotePrototype>(args.Emote);
+        var emote = ProtoMan.Index<EmotePrototype>(args.Emote);
         if (emote.Event is not AnimationEmoteEvent { CausesVomit: true })
             return;
 
@@ -35,7 +34,7 @@ public abstract class SharedAnimatedEmotesSystem : EntitySystem
     {
         PlayEmoteAnimation(ent.AsNullable(), args.Emote.ID);
 
-        var emote = _proto.Index<EmotePrototype>(args.Emote);
+        var emote = ProtoMan.Index<EmotePrototype>(args.Emote);
         if (emote.Event is not AnimationEmoteEvent { CausesVomit: true })
             return;
 

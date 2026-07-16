@@ -12,14 +12,13 @@ namespace Content.Shared.Silicons.Borgs;
 /// Implements borg type switching.
 /// </summary>
 /// <seealso cref="BorgSwitchableTypeComponent"/>
-public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
+public abstract partial class SharedBorgSwitchableTypeSystem : EntitySystem
 {
     // TODO: Allow borgs to be reset to default configuration.
 
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
-    [Dependency] protected readonly IPrototypeManager Prototypes = default!;
-    [Dependency] private readonly InteractionPopupSystem _interactionPopup = default!;
+    [Dependency] private SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private InteractionPopupSystem _interactionPopup = default!;
 
     public static readonly EntProtoId ActionId = "ActionSelectBorgType";
 
@@ -77,10 +76,10 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
         if (ent.Comp.SelectedBorgType != null)
             return;
 
-        if (!Prototypes.HasIndex(args.Prototype) || !Prototypes.HasIndex(args.Subtype))
+        if (!ProtoMan.HasIndex(args.Prototype) || !ProtoMan.HasIndex(args.Subtype)) // Trauma - check subtype too
             return;
 
-        SelectBorgModule(ent, args.Prototype, args.Subtype);
+        SelectBorgModule(ent, args.Prototype, args.Subtype); // Trauma - pass subtype
     }
 
     //
@@ -112,14 +111,14 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
 
     protected void UpdateEntityAppearance(Entity<BorgSwitchableTypeComponent> entity)
     {
-        // <Goob> - get subtype too
-        if (!Prototypes.Resolve(entity.Comp.SelectedBorgType, out var proto) ||
+        // <Trauma> - get subtype too
+        if (!ProtoMan.Resolve(entity.Comp.SelectedBorgType, out var proto) ||
             !TryComp<BorgSwitchableSubtypeComponent>(entity, out var subtype) ||
-            !Prototypes.Resolve(subtype.BorgSubtype, out var subtypeProto))
+            !ProtoMan.Resolve(subtype.BorgSubtype, out var subtypeProto))
             return;
 
         UpdateEntityAppearance(entity, proto, subtypeProto);
-        // </Goob>
+        // </Trauma>
     }
 
     protected virtual void UpdateEntityAppearance(

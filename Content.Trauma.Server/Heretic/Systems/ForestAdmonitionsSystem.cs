@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Physics;
 using Content.Trauma.Shared.Heretic.Components.Side;
@@ -12,11 +11,11 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
+public sealed partial class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
     private readonly HashSet<Entity<PhysicsComponent>> _lookupPhysics = new();
 
@@ -59,10 +58,10 @@ public sealed class ForestAdmonitionsSystem : SharedForestAdmonitionsSystem
                 if (!_random.Prob(Math.Clamp(chance, 0f, 1f)))
                     continue;
 
-                var pos = coords.Offset(offset).SnapToGrid(EntityManager, _mapMan);
+                var pos = coords.Offset(offset).SnapToGrid(EntityManager);
                 var mapPos = XForm.ToMapCoordinates(pos);
 
-                if (offset != Vector2.Zero && !_mapMan.TryFindGridAt(mapPos, out _, out _))
+                if (offset != Vector2.Zero && !_map.TryFindGridAt(mapPos, out _, out _))
                     continue;
 
                 const int mask = (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable);

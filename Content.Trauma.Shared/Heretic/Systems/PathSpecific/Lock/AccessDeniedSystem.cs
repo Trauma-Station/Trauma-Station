@@ -7,9 +7,9 @@ using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Lock;
 
-public sealed class AccessDeniedSystem : EntitySystem
+public sealed partial class AccessDeniedSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     public override void Initialize()
     {

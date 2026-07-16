@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
+using Robust.Shared.Random;
 using JetBrains.Annotations;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
@@ -50,7 +50,7 @@ public abstract partial class EntityShape
     /// Calculates this shape and also lets you customize some parameters of shape's generation.
     /// </summary>
     public List<Vector2> GetShape(
-        System.Random rand,
+        IRobustRandom rand,
         IPrototypeManager proto,
         Vector2? center = null,
         int? size = null,
@@ -66,5 +66,5 @@ public abstract partial class EntityShape
         return GetShapeImplementation(rand, proto);
     }
 
-    protected abstract List<Vector2> GetShapeImplementation(System.Random rand, IPrototypeManager proto);
+    protected abstract List<Vector2> GetShapeImplementation(IRobustRandom rand, IPrototypeManager proto);
 }

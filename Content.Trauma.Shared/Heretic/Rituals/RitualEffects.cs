@@ -2,10 +2,13 @@
 
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Polymorph;
+using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Trauma.Shared.Heretic.Rituals;
 
@@ -20,7 +23,7 @@ public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereti
 
     public virtual bool ForceApplyOnRitual => false;
 
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user, bool predicted)
     {
         if (raiser is not HereticRitualRaiser ritualRaiser)
             return;
@@ -28,7 +31,7 @@ public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereti
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
         {
             if (ritualRaiser.TryConditions(target, IndividualConditions))
-                base.RaiseEvent(target, raiser, scale, user);
+                base.RaiseEvent(target, raiser, scale, user, predicted);
             return;
         }
 
@@ -37,7 +40,7 @@ public abstract partial class BaseRitualEffect<T> : EntityEffectBase<T>, IHereti
             if (!ritualRaiser.TryConditions(t, IndividualConditions))
                 continue;
 
-            base.RaiseEvent(t, raiser, scale, user);
+            base.RaiseEvent(t, raiser, scale, user, predicted);
         }
     }
 }
@@ -50,7 +53,7 @@ public abstract partial class OutputRitualEffect<T> : BaseRitualEffect<T> where 
 
 public sealed partial class AddToLimitRitualEffect : OutputRitualEffect<AddToLimitRitualEffect>
 {
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user, bool predicted)
     {
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
             return;
@@ -83,7 +86,7 @@ public sealed partial class AddToLimitRitualEffect : OutputRitualEffect<AddToLim
 
 public sealed partial class SaveResultRitualEffect : OutputRitualEffect<SaveResultRitualEffect>
 {
-    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user)
+    public override void RaiseEvent(EntityUid target, IEntityEffectRaiser raiser, float scale, EntityUid? user, bool predicted)
     {
         if (ApplyOn == string.Empty || ForceApplyOnRitual)
             return;
@@ -154,8 +157,8 @@ public sealed partial class FindLostLimitedOutputEffect : OutputRitualEffect<Fin
 
 public sealed partial class UpdateKnowledgeEffect : BaseRitualEffect<UpdateKnowledgeEffect>
 {
-    [DataField(required: true)]
-    public float Amount;
+    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, CurrencyPrototype>))]
+    public Dictionary<string, FixedPoint2> Knowledge;
 }
 
 public sealed partial class RemoveRitualsEffect : BaseRitualEffect<RemoveRitualsEffect>

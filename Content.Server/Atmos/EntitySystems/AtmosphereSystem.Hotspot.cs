@@ -33,8 +33,8 @@ public sealed partial class AtmosphereSystem
     /// </summary>
     private static readonly ProtoId<SoundCollectionPrototype> DefaultHotspotSounds = "AtmosHotspot";
 
-    [Dependency] private readonly DecalSystem _decalSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private DecalSystem _decalSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
     /// Number of cycles the hotspot system must process before it can play another sound
@@ -114,7 +114,7 @@ public sealed partial class AtmosphereSystem
 
             foreach (var set in tileDecals)
             {
-                if (Array.IndexOf(_burntDecals, set.Decal.Id) == -1)
+                if (Array.IndexOf(_burntDecals, set.Comp.Data.Id) == -1) // Trauma - decal entities
                     continue;
 
                 tileBurntDecals++;

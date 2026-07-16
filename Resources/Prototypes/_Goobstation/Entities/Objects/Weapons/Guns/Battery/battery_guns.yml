@@ -1,36 +1,13 @@
-# SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Icepick <122653407+Icepicked@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot02@gmail.com>
-# SPDX-FileCopyrightText: 2025 Creatorbot01 <creatorbot20@gmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-# SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 SolsticeOfTheWinter <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
-# SPDX-FileCopyrightText: 2025 Tim Falken <tim@sparklingsociety.net>
-# SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-# SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# TODO: clean up, person below is an idiot
 - type: entity # literally BaseWeaponPowerCell cuz we can't get rid of components in children HELL YEA
   id: BaseWeaponCustomCell
   parent: BaseItem
   abstract: true
   components:
+  - type: WeaponClass
+    class: Laser
   - type: Sprite
   - type: Item
     size: Huge
@@ -52,20 +29,20 @@
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-            - PowerCell
-            - PowerCellSmall
+          - PowerCell
+          - PowerCellSmall
   - type: Appearance
   - type: StaticPrice
     price: 500
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
-  - type: Cautery # Shitmed
+  - type: Cautery
     speed: 0.9
-  - type: SurgeryTool # Shitmed
+  - type: SurgeryTool
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: AlwaysHot # Goobstation V
+  - type: AlwaysHot
   - type: MeleeWeapon
     damage:
       types:
@@ -73,7 +50,7 @@
     angle: 0
     wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
     soundHit:
-      collection: MetalThud # Goobstation ^
+      collection: MetalThud
   - type: EmitSoundOnPickup
     sound:
       collection: LasersPickUp
@@ -112,9 +89,9 @@
       collection: MetalThud # Goobstation ^
 
 - type: entity
-  name: plasma rifle
   parent: BaseWeaponBattery
   id: WeaponPlasmaRifle
+  name: plasma rifle
   description: It may or may not explode in your face.
   components:
   - type: Sprite
@@ -361,7 +338,7 @@
     - BulletEnergyGunExecute
     - BulletEnergyGunHotshot
     - BulletEnergyGunSleepshot
-    #- BulletEnergyGunBigshot # Trauma - no chud anti-base instant win ammo
+    - BulletEnergyGunLawyershot
   - type: UserInterface
     interfaces:
       enum.AmmoSelectorUiKey.Key:

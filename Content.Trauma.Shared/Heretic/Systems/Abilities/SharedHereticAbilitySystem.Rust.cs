@@ -2,7 +2,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -16,7 +15,7 @@ using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
-using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
 using Content.Trauma.Shared.Heretic.Events;
@@ -72,13 +71,13 @@ public abstract partial class SharedHereticAbilitySystem
 
     private void OnBeforeHarmfulAction(Entity<RustbringerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
-        if (args.Cancelled || args.Type == HarmfulActionType.Harm)
+        if (args.Cancelled || args.Type is HarmfulActionType.Disarm or HarmfulActionType.Grab)
             return;
 
         if (!IsOnRust(ent))
             return;
 
-        args.Cancel();
+        args.Cancelled = true;
     }
 
     private void OnElectrocuteAttempt(Entity<RustbringerComponent> ent, ref ElectrocutionAttemptEvent args)
@@ -121,7 +120,7 @@ public abstract partial class SharedHereticAbilitySystem
     public bool IsTileRust(EntityCoordinates coords, [NotNullWhen(true)] out Vector2i? tileCoords)
     {
         tileCoords = null;
-        if (!_mapMan.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var mapGrid))
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(coords), out var gridUid, out var mapGrid))
             return false;
 
         var tileRef = _map.GetTileRef(gridUid, mapGrid, coords);
@@ -169,7 +168,7 @@ public abstract partial class SharedHereticAbilitySystem
         var circle = new Circle(mapPos.Position, radius);
         var grids = new List<Entity<MapGridComponent>>();
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(radius, radius));
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         var tiles = new List<(EntityCoordinates, TileRef, EntityUid, MapGridComponent)>();
         foreach (var grid in grids)
@@ -201,8 +200,9 @@ public abstract partial class SharedHereticAbilitySystem
         var uid = args.Performer;
 
         Heretic.TryGetHereticComponent(uid, out var heretic, out _);
-        var effectiveStage = MathF.Max(heretic?.PathStage ?? 9f - 4f, 1f);
-        var multiplier = heretic?.CurrentPath is null or HereticPath.Rust ? MathF.Sqrt(effectiveStage) : 1f;
+        var effectiveStrength = MathF.Max(heretic?.PassiveLevel ?? 2, 1);
+        var multiplier = heretic?.CurrentPath is null or HereticPath.Rust ? effectiveStrength : 1f;
+        multiplier = (multiplier + 3f) / 2f;
 
         var aoeRadius = MathF.Max(args.AoeRadius, args.AoeRadius * multiplier);
         var range = MathF.Max(args.Range, args.Range * multiplier);
@@ -211,7 +211,7 @@ public abstract partial class SharedHereticAbilitySystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _map.FindGridsIntersecting(mapPos.MapId, box, ref grids);
 
         var tiles = new List<(EntityCoordinates, TileRef, EntityUid, MapGridComponent)>();
         foreach (var grid in grids)
@@ -245,7 +245,7 @@ public abstract partial class SharedHereticAbilitySystem
         if (!TryComp(target, out RustRequiresPathStageComponent? requiresPathStage))
             return true;
 
-        var stage = heretic == null ? 10 : heretic.PathStage;
+        var stage = heretic?.PathStage ?? 10;
         surfaceStrength = requiresPathStage.PathStage;
 
         if (surfaceStrength <= stage)

@@ -7,10 +7,10 @@ using Content.Shared.Damage.Systems;
 
 namespace Content.Trauma.Shared.Damage;
 
-public sealed class DefaultBodyDamageSystem : EntitySystem
+public sealed partial class DefaultBodyDamageSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     public override void Initialize()
     {

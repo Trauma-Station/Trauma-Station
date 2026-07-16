@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -24,7 +15,7 @@
     channel: Tidemind
 
 - type: entity
-  parent: BaseGameRule
+  parent: BaseAntagGhostRoleRule
   id: DerelictCyborgSyndicateSpawn
   components:
   - type: StationEvent
@@ -38,22 +29,24 @@
   - type: AntagSpawner
     prototype: PlayerBorgDerelictSyndicateAssaultBattery
   - type: AntagSelection
-    definitions:
-    - spawnerPrototype: SpawnPointGhostDerelictCyborgSyndicate
-      min: 1
-      max: 1
-      pickPlayer: false
+    antags:
+    - !type:FixedAntagCount
+      proto: DerelictCyborgSyndicate
 
-- type: entity # Goobstation
-  id: JobDistributionError
+- type: antagSpecifier
+  id: DerelictCyborgSyndicate
+  spawnerPrototype: SpawnPointGhostDerelictCyborgSyndicate
+
+- type: entity
   parent: BaseGameRule
+  id: JobDistributionError
   components:
   - type: StationEvent
     startAnnouncement: station-event-job-distribution-error-announcement
     minimumPlayers: 25
     weight: 3
     duration: 1
-  - type: JobDistributionErrorRule # Goobstation
+  - type: JobDistributionErrorRule
     jobs:
     - SecurityClown
     - PartyMaker

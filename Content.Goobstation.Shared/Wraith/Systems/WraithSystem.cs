@@ -13,15 +13,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
-public sealed class WraithSystem : EntitySystem
+public sealed partial class WraithSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto  = default!;
-    [Dependency] private readonly WraithPointsSystem _wraithPoints = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly AbsorbCorpseSystem _corpse = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private WraithPointsSystem _wraithPoints = default!;
+    [Dependency] private StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private AbsorbCorpseSystem _corpse = default!;
+    [Dependency] private INetManager _netManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private EntityQuery<WraithPointsComponent> _wraithPointsQuery;
     private EntityQuery<PassiveWraithPointsComponent> _passiveWraithPointsQuery;
@@ -45,7 +44,7 @@ public sealed class WraithSystem : EntitySystem
     }
 
     private void OnMapInit(Entity<WraithComponent> ent, ref MapInitEvent args) =>
-        EntityManager.AddComponents(ent.Owner, _proto.Index(ent.Comp.Abilities));
+        EntityManager.AddComponents(ent.Owner, ProtoMan.Index(ent.Comp.Abilities));
 
     private void OnBanishment(Entity<WraithComponent> ent, ref BanishmentEvent args)
     {

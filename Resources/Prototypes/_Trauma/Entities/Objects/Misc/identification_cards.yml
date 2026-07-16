@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: IDCardStandard
   id: GeneticistIDCard
@@ -47,3 +49,19 @@
     - Recyclable
   - type: StaticPrice # MassProduced NT Slop
     price: 0
+  - type: AntagCard # D-class? Outside? Can't be.
+
+- type: entity
+  parent: [ AgentIDCard ]
+  id: SpacePolIDCardChameleon
+  name: SpacePol ID card
+  suffix: Agent
+  components:
+  - type: IdCard
+    jobTitle: job-name-spacepol
+    jobIcon: JobIconSpacePol
+  - type: Access
+    tags:
+    - Maintenance
+    - SyndicateAgent
+    - External

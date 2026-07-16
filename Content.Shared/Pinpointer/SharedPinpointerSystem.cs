@@ -10,12 +10,12 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared.Pinpointer;
 
-public abstract class SharedPinpointerSystem : EntitySystem
+public abstract partial class SharedPinpointerSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] protected readonly EntityWhitelistSystem Whitelist = default!; // Goob edit
-    [Dependency] private readonly SharedPopupSystem _popup = default!; // Goob edit
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] protected EntityWhitelistSystem Whitelist = default!; // Goob edit
+    [Dependency] private SharedPopupSystem _popup = default!; // Goob edit
 
     public override void Initialize()
     {

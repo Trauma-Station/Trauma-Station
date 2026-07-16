@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entityEffect
   id: HereticBladeGraspEffect
   conditions:
@@ -66,6 +68,7 @@
       components:
       - Ghoul
       - BorgChassis
+      - Drone
   - !type:MobStateCondition
     mobstate: Alive
     inverted: true
@@ -92,8 +95,8 @@
       - heretic-lock-unlocked
   - !type:SetBlackboardValuesRitualEffect
     conditions:
-    - !type:HereticMinStageCondition
-      minStage: 7
+    - !type:HereticMinPassiveLevelCondition
+      minLevel: 2
     values:
       InvokeGrasp: false
       ApplyGraspDefaultEffects: false
@@ -148,13 +151,15 @@
 - type: entityEffect
   id: HereticMarkAsh
   effects:
-  - !type:TakeStaminaDamage
-    amount: 6
-    immediate: true
+  - !type:ReduceActionsCooldown
+    actionWhitelist:
+      components:
+      - HereticAction
+    targetUser: true
   - !type:HealthChange
     damage:
       types:
-        Heat: 3
+        Heat: 15
     targetPart: Vital
 
 - type: entityEffect
@@ -164,6 +169,13 @@
 
 - type: entityEffect
   id: HereticMarkFlesh
+  conditions:
+  - !type:WhitelistCondition
+    blacklist:
+      components:
+      - Ghoul
+      - BorgChassis
+      - Drone
   effects:
   - !type:CreateFleshMimic
 

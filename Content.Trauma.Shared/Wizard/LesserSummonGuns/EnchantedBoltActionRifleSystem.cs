@@ -14,16 +14,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Wizard.LesserSummonGuns;
 
-public sealed class EnchantedBoltActionRifleSystem : EntitySystem
+public sealed partial class EnchantedBoltActionRifleSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private ThrowingSystem _throwingSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private SharedWieldableSystem _wieldable = default!;
 
     public override void Initialize()
     {
@@ -58,8 +58,7 @@ public sealed class EnchantedBoltActionRifleSystem : EntitySystem
         if (oldHand == null || _hands.GetHeldItem((user, hands), oldHand) != uid)
             return;
 
-        if (TryComp(uid, out WieldableComponent? wieldable))
-            _wieldable.TryUnwield(uid, wieldable, user, true);
+        _wieldable.TryUnwield(uid, user, force: true);
 
         if (!_hands.TryDrop((user, hands), oldHand, null, false, false))
             return;
@@ -119,8 +118,7 @@ public sealed class EnchantedBoltActionRifleSystem : EntitySystem
         newComp.Caster = comp.Caster;
         Dirty(gun, newComp);
 
-        if (TryComp(gun, out WieldableComponent? newWieldable))
-            _wieldable.TryWield(gun, newWieldable, user, false);
+        _wieldable.TryWield(gun, user);
     }
 
     private bool IsHandValid(Entity<HandsComponent> ent, string hand)

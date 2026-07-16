@@ -11,22 +11,13 @@ public sealed partial class ChampionHookComponent : Component
     public override bool SessionSpecific => true;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? Action;
-
-    [DataField, AutoNetworkedField]
-    public bool IsEnabled;
-
-    [DataField, AutoNetworkedField]
     public EntityUid? HookedMob;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Weapon;
 
     [DataField]
-    public TimeSpan KnockdownTime = TimeSpan.FromSeconds(5);
-
-    [DataField]
-    public TimeSpan Cooldown = TimeSpan.FromSeconds(20);
+    public TimeSpan KnockdownTime = TimeSpan.FromSeconds(2);
 
     [DataField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_Goobstation/Heretic/blood3.ogg");
@@ -35,14 +26,14 @@ public sealed partial class ChampionHookComponent : Component
     public float OffhandAttackSpeedBuff = 0.35f;
 
     [DataField]
-    public float MovespeedBuff = 0.5f;
+    public float MovespeedBuff = 0.3f;
 
     [DataField]
     public DamageSpecifier ExtraDamage = new()
     {
         DamageDict =
         {
-            { "Slash", 20 },
+            { "Slash", 5 },
         },
     };
 }

@@ -2,7 +2,6 @@
 
 using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Projectiles;
-using Robust.Client.GameObjects;
 using Robust.Client.Physics;
 
 namespace Content.Trauma.Client.Projectiles;
@@ -10,9 +9,9 @@ namespace Content.Trauma.Client.Projectiles;
 /// <summary>
 /// Hides the server-spawned projectile when firing a predicted gun.
 /// </summary>
-public sealed class PredictedProjectileSystem : EntitySystem
+public sealed partial class PredictedProjectileSystem : EntitySystem
 {
-    [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {

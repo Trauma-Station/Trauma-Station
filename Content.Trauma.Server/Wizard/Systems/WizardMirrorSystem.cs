@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Guardian;
 using Content.Server.Mind;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
@@ -13,16 +12,15 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Polymorph;
 using Content.Shared.Preferences;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
+public sealed partial class WizardMirrorSystem : SharedWizardMirrorSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public override void Initialize()
     {
@@ -57,14 +55,8 @@ public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
     {
         var age = humanoid.Age;
         if (humanoid.Species != profile.Species && component.AllowedSpecies.Contains(profile.Species) &&
-            _proto.TryIndex(profile.Species, out var speciesProto))
+            ProtoMan.TryIndex(profile.Species, out var speciesProto))
         {
-            if (HasComp<GuardianHostComponent>(target))
-            {
-                _popup.PopupEntity(Loc.GetString("wizard-mirror-guardian-change-species-fail"), target, target);
-                return;
-            }
-
             var config = new PolymorphConfiguration
             {
                 Entity = speciesProto.Prototype,
@@ -83,10 +75,6 @@ public sealed class WizardMirrorSystem : SharedWizardMirrorSystem
                     new("Apprentice", mirror: true),
                     new("UniversalLanguageSpeaker", mirror: true),
                     new("TowerOfBabel", mirror: true),
-                    new("CanEnchant", mirror: true),
-                    new("CanPerformCombo"),
-                    new("MartialArtsKnowledge"),
-                    new("NinjutsuSneakAttack"),
                     new("NpcFactionMember"),
                 },
             };

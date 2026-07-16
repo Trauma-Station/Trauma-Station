@@ -4,9 +4,9 @@ using Content.Shared.StatusEffectNew;
 
 namespace Content.Goobstation.Shared.StatusEffects;
 
-public sealed class StatusEffectsOnStatusRemoveSystem : EntitySystem
+public sealed partial class StatusEffectsOnStatusRemoveSystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
 
     private readonly Dictionary<EntityUid, Dictionary<EntProtoId, TimeSpan>> _toApply = new();
 

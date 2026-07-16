@@ -6,12 +6,11 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
-    time: 1h # Trauma, was 5
+    time: 5h
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
-  canBeAntag: false
-  guides: # goobstation
+  guides: # Trauma
   - Forensics
   - Security
   access:
@@ -22,11 +21,16 @@
   - Cryogenics
   - External
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipDetective
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial # goobstation
-    components:
-      - type: SecurityStaff
 
 - type: startingGear
   id: DetectiveGear

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, BaseSecurityContraband, ClothingEyesGlassesSunglasses]
   id: ClothingEyesGlassesMedSec
@@ -24,6 +26,7 @@
       sprite: Clothing/Eyes/Glasses/glasses.rsi
     - type: VisionCorrection
     - type: Damageable
+    - type: Injurable
       damageContainer: Inorganic
     - type: Tag
       tags:

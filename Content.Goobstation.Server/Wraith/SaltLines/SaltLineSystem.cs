@@ -3,7 +3,6 @@
 using Content.Goobstation.Shared.Wraith.SaltLines;
 using Content.Server.Administration.Logs;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
@@ -12,17 +11,15 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Goobstation.Server.Wraith.SaltLines;
 
-public sealed class SaltLineSystem : EntitySystem
+public sealed partial class SaltLineSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     private static readonly ProtoId<ReagentPrototype> ReagentSalt = "TableSalt";
-
-    private EntityQuery<SolutionContainerManagerComponent> _solutionContainerManQuery;
 
     public override void Initialize()
     {
@@ -34,8 +31,6 @@ public sealed class SaltLineSystem : EntitySystem
         SubscribeLocalEvent<SaltLinePlacerComponent, AfterInteractEvent>(OnSaltLineAfterInteract);
 
         SubscribeLocalEvent<ConsumeOnSaltLineComponent, AttemptSaltLineEvent>(OnAttemptSaltLine);
-
-        _solutionContainerManQuery = GetEntityQuery<SolutionContainerManagerComponent>();
     }
 
     private void OnMapInit(Entity<SaltLineComponent> ent, ref MapInitEvent args) =>
@@ -84,22 +79,14 @@ public sealed class SaltLineSystem : EntitySystem
 
     private void OnAttemptSaltLine(Entity<ConsumeOnSaltLineComponent> ent, ref AttemptSaltLineEvent args)
     {
-        if (!_solutionContainerManQuery.TryComp(ent.Owner, out var solMan))
+        foreach (var (_, solution) in _solution.EnumerateSolutions(ent.Owner))
         {
-            args.Cancelled = true;
-            return;
-        }
-
-        foreach (var container in solMan.Containers)
-        {
-            if (!_solution.TryGetSolution(ent.Owner, container, out var solution)
-                || solution?.Comp.Solution is not { } sol
-                || !sol.ContainsPrototype(ReagentSalt))
+            if (!solution.Comp.Solution.ContainsPrototype(ReagentSalt))
                 continue;
 
             // Try remove salt from the first found solution, if there's no salt return and check next container,
             // else exit the function without cancelling it
-            if (TryRemoveSalt(solution.Value, ent, args.User))
+            if (TryRemoveSalt(solution, ent, args.User))
                 return;
         }
 

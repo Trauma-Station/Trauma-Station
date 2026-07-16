@@ -20,12 +20,12 @@ public sealed partial class NestedCondition : EntityConditionBase<NestedConditio
 /// <summary>
 /// Handles <see cref="NestedCondition"/>.
 /// </summary>
-public sealed class NestedConditionSystem : EntityConditionSystem<TransformComponent, NestedCondition>
+public sealed partial class NestedConditionSystem : EntityConditionSystem<TransformComponent, NestedCondition>
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     protected override void Condition(Entity<TransformComponent> ent, ref EntityConditionEvent<NestedCondition> args)
     {
-        args.Result = _conditions.TryCondition(ent, args.Condition.Proto);
+        args.Result = _conditions.TryCondition(ent, args.Condition.Proto, args.User); // Trauma - pass user
     }
 }

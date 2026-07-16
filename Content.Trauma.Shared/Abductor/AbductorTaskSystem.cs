@@ -9,12 +9,11 @@ namespace Content.Trauma.Shared.Abductor;
 /// Gives abductor tasks to mobs when <see cref="AbductorSubjectComponent"/> is added.
 /// Provides API for working with it.
 /// </summary>
-public sealed class AbductorTaskSystem : EntitySystem
+public sealed partial class AbductorTaskSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EntityQuery<AbductorSubjectComponent> _query = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private EntityQuery<AbductorSubjectComponent> _query = default!;
 
     // min-max random tasks to add
     // gland task is always added after this
@@ -60,7 +59,7 @@ public sealed class AbductorTaskSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllTasks.Clear();
-        foreach (var task in _proto.EnumeratePrototypes<AbductorTaskPrototype>())
+        foreach (var task in ProtoMan.EnumeratePrototypes<AbductorTaskPrototype>())
         {
             if (task.Random)
                 AllTasks.Add(task);
@@ -98,7 +97,7 @@ public sealed class AbductorTaskSystem : EntitySystem
     /// </summary>
     public bool IsTaskComplete(EntityUid target, [ForbidLiteral] ProtoId<AbductorTaskPrototype> id)
     {
-        var task = _proto.Index(id);
+        var task = ProtoMan.Index(id);
         return task.Completed is {} completed
             ? _conditions.TryConditions(target, completed)
             : !_conditions.TryConditions(target, task.Valid);

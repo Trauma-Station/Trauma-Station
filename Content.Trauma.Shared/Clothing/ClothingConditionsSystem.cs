@@ -6,9 +6,9 @@ using Content.Shared.Inventory.Events;
 
 namespace Content.Trauma.Shared.Clothing;
 
-public sealed class ClothingConditionsSystem : EntitySystem
+public sealed partial class ClothingConditionsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
     public override void Initialize()
     {
@@ -27,7 +27,7 @@ public sealed class ClothingConditionsSystem : EntitySystem
             return;
 
         var identity = Identity.Entity(target, EntityManager);
-        var user = args.Equipee;
+        var user = args.User;
         args.Reason = Loc.GetString(ent.Comp.Reason, ("target", identity), ("self", target == user));
         args.Cancel();
     }

@@ -1,23 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Trauma.Shared.Weapons.Ranged;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
 using Robust.Shared.Graphics.RSI;
-using Robust.Shared.Utility;
+using System.Runtime.InteropServices;
 
 namespace Content.Trauma.Client.Weapons.Ranged;
 
 /// <summary>
 /// Draws bullet holes on objects
 /// </summary>
-public sealed class BulletHoleOverlay : Overlay
+public sealed partial class BulletHoleOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entMan    = default!;
-    [Dependency] private readonly IResourceCache _resources = default!;
+    [Dependency] private IEntityManager _entMan    = default!;
+    [Dependency] private IResourceCache _resources = default!;
 
     private readonly TransformSystem _xform;
 
@@ -27,6 +24,7 @@ public sealed class BulletHoleOverlay : Overlay
     private static readonly Box2 HoleBox = Box2.CenteredAround(Vector2.Zero, DrawSize);
 
     private Texture? _texture;
+    private List<WorldTextureRect> _bulletRects = new(64);
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -55,22 +53,23 @@ public sealed class BulletHoleOverlay : Overlay
 
         var handle = args.WorldHandle;
         var bounds = args.WorldBounds;
-        var query  = _entMan.AllEntityQueryEnumerator<BulletHoleComponent>();
+        var map = args.MapUid;
+        var query = _entMan.AllEntityQueryEnumerator<BulletHoleComponent, TransformComponent>();
         var expandedBounds = bounds.Enlarged(2f);
 
-        while (query.MoveNext(out var uid, out var holes))
+        _bulletRects.Clear();
+        while (query.MoveNext(out var uid, out var holes, out var xform))
         {
-            if (holes.HolePositions.Count == 0 || !_entMan.TryGetComponent<TransformComponent>(uid, out var xform))
+            if (holes.HolePositions.Count == 0 || xform.MapUid != map)
                 continue;
 
-            var worldPos = _xform.GetWorldPosition(uid);
-
+            var worldPos = _xform.GetWorldPosition(xform);
             if (!expandedBounds.Contains(worldPos))
                 continue;
 
-            var gridUid = xform.GridUid;
-            var gridRot = gridUid != null
-                ? _xform.GetWorldRotation(gridUid.Value)
+            // have offsets be done grid-relative, not absolute
+            var gridRot = xform.GridUid is { } grid
+                ? _xform.GetWorldRotation(grid)
                 : Angle.Zero;
 
             var bulletRot = Matrix3x2.CreateRotation((float) gridRot);
@@ -79,14 +78,15 @@ public sealed class BulletHoleOverlay : Overlay
                 var worldOffset = Vector2.Transform(localOffset, bulletRot);
                 var center = worldPos + worldOffset;
 
-                handle.SetTransform(
-                    bulletRot *
-                    Matrix3x2.CreateTranslation(center));
-
-                handle.DrawTextureRect(texture, HoleBox);
+                var quad = new Box2Rotated(HoleBox.Translated(center), gridRot);
+                _bulletRects.Add(new(quad));
             }
         }
 
+        if (_bulletRects.Count == 0)
+            return;
+
         handle.SetTransform(Matrix3x2.Identity);
+        handle.DrawTextureRectsUnmodulated(texture, CollectionsMarshal.AsSpan(_bulletRects));
     }
 }

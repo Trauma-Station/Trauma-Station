@@ -2,6 +2,6 @@
 
 using Content.Trauma.Shared.Medical;
 
-namespace Content.Trauma.Server.Medical;
+namespace Content.Trauma.Client.Medical;
 
 public sealed class CPRSystem : SharedCPRSystem;

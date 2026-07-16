@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseSkillChip
   id: SkillChipQuartermaster
@@ -5,9 +7,10 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-      MeleeKnowledge: 26
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
+      MeleeKnowledge: 25
+      KnowledgeWeaponsMining: 60 # gotta keep the miners under control
       FurnitureKnowledge: 10 # crates
       # TODO: piloting and probably mech
 
@@ -18,8 +21,8 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
       FurnitureKnowledge: 10
       # TODO: piloting
 
@@ -30,8 +33,19 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      StrengthKnowledge: 26
-      ToughnessKnowledge: 26
-      MeleeKnowledge: 26
-      AthleticsKnowledge: 26
+      StrengthKnowledge: 25
+      ToughnessKnowledge: 25
+      KnowledgeWeaponsKnife: 25 # fuck the carp up
+      KnowledgeWeaponsMining: 50
+      AthleticsKnowledge: 25
       # TODO: (low?) piloting
+
+- type: entity
+  parent: BaseSkillChip
+  id: SkillChipMining
+  name: skill chip (mining)
+  description: Premium software update that allows you to mine faster, deeper and harder!
+  components:
+  - type: KnowledgeGrantOnWear
+    skills:
+      KnowledgeWeaponsMining: 50 # brings a salv up to 100

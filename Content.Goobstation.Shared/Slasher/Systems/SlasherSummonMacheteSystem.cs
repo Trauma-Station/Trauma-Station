@@ -9,13 +9,12 @@ using Content.Shared.Popups;
 
 namespace Content.Goobstation.Shared.Slasher.Systems;
 
-public sealed class SlasherSummonMacheteSystem : EntitySystem
+public sealed partial class SlasherSummonMacheteSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IPrototypeManager _protos = default!;
-    [Dependency] private readonly SharedTransformSystem _xform = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -54,7 +53,7 @@ public sealed class SlasherSummonMacheteSystem : EntitySystem
 
         if (machete == null || Deleted(machete))
         {
-            if (!_protos.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
+            if (!ProtoMan.TryIndex(ent.Comp.MachetePrototype, out EntityPrototype? _))
                 return;
 
             machete = PredictedSpawnAtPosition(ent.Comp.MachetePrototype, _xform.GetMoverCoordinates(ent.Owner));

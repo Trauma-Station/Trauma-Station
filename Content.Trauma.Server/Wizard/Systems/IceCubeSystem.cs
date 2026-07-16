@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
@@ -11,6 +9,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Whitelist;
+using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Wizard.Traps;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
@@ -20,19 +19,19 @@ using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.Wizard;
 
-public sealed class IceCubeSystem : SharedIceCubeSystem
+public sealed partial class IceCubeSystem : SharedIceCubeSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private FixtureSystem _fixtures = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     /// <summary>
     /// Damage types that can break ice cubes.
     /// </summary>
-    public static readonly HashSet<ProtoId<DamageTypePrototype>> BreakDamages = new() { "Blunt", "Slash", "Piercing", "Heat" };
+    public static readonly HashSet<ProtoId<DamageTypePrototype>> BreakDamages = new() { "Blunt", "Slash", "Piercing", "Ballistic", "Heat" };
     private const string IceCubeFixture = "ice-cube-fixture";
 
     public override void Initialize()
@@ -42,22 +41,8 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
         SubscribeLocalEvent<IceCubeComponent, ComponentStartup>(IceCubeAdded);
         SubscribeLocalEvent<IceCubeComponent, ComponentShutdown>(IceCubeRemoved);
         SubscribeLocalEvent<IceCubeComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
-        SubscribeLocalEvent<IceCubeComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<IceCubeComponent, BeforeStaminaDamageEvent>(OnStaminaDamage, before: [typeof(SharedStaminaSystem)]);
+        SubscribeLocalEvent<IceCubeComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<IceCubeOnProjectileHitComponent, ProjectileHitEvent>(OnHit);
-    }
-
-    private void OnStaminaDamage(Entity<IceCubeComponent> ent, ref BeforeStaminaDamageEvent args)
-    {
-        if (args.Value <= 0)
-            return;
-
-        if (!TryComp(ent, out TemperatureComponent? temperature))
-            return;
-
-        ent.Comp.SustainedDamage += args.Value * ent.Comp.StaminaDamageMeltProbabilityMultiplier;
-        if (ShouldUnfreeze(ent, temperature.CurrentTemperature))
-            RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnHit(Entity<IceCubeOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
@@ -66,17 +51,17 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
             EnsureComp<IceCubeComponent>(args.Target);
     }
 
-    private void OnDamageChanged(Entity<IceCubeComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageDealt(Entity<IceCubeComponent> ent, ref DamageDealtEvent args)
     {
         var (uid, comp) = ent;
 
         if (!TryComp(uid, out TemperatureComponent? temperature))
             return;
 
-        if (args is not { DamageIncreased: true, DamageDelta: not null })
+        if (!args.Damage.AnyPositive())
             return;
 
-        if (args.DamageDelta.DamageDict.TryGetValue("Heat", out var heat))
+        if (args.Damage.DamageDict.TryGetValue("Heat", out var heat))
         {
             _temperature.ForceChangeTemperature(uid,
                 MathF.Min(comp.UnfreezeTemperatureThreshold + 10f,
@@ -85,7 +70,7 @@ public sealed class IceCubeSystem : SharedIceCubeSystem
         }
 
         var total = FixedPoint2.Zero;
-        foreach (var (type, value) in args.DamageDelta.DamageDict)
+        foreach (var (type, value) in args.Damage.DamageDict)
         {
             if (BreakDamages.Contains(type))
                 total += value;

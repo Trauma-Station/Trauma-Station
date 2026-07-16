@@ -9,6 +9,7 @@ public record struct TackleEvent(
     float Range,
     float Speed,
     float StaminaCost,
+    float SkillMod,
     TimeSpan KnockdownTime,
     EntityUid User,
     EntityUid? Source = null) : IInventoryRelayEvent
@@ -17,4 +18,7 @@ public record struct TackleEvent(
 }
 
 [ByRefEvent]
-public record struct CalculateTackleModifierEvent(float Modifier = 0f);
+public record struct CalculateTackleModifierEvent(float Modifier = 0f, bool CanTackle = true) : IInventoryRelayEvent
+{
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+}

@@ -6,11 +6,10 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 1h # Trauma was 5
+      time: 5h
   startingGear: StationEngineerGear
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce
-  guides: [ Engineering ] # goobstation
   access:
   - Maintenance
   - Engineering
@@ -18,11 +17,17 @@
   extendedAccess:
   - Atmospherics
   # <Trauma>
+  guides:
+  - Engineering
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipStationEngineer
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
   # </Trauma>
+
 - type: startingGear
   id: StationEngineerGear
   equipment:

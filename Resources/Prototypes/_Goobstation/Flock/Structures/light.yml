@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: AlwaysPoweredFlockLight
   name: shining cabochon
@@ -27,8 +29,9 @@
     netsync: false
     offset: "0, -0.5"
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -106,8 +109,9 @@
         layer:
         - TabletopMachineLayer
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Random;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Lavaland.Shared.EntityShapes.Shapes;
 
@@ -14,7 +14,7 @@ public sealed partial class LineEntityShape : EntityShape
     [DataField]
     public Vector2 Direction = Vector2.UnitX;
 
-    protected override List<Vector2> GetShapeImplementation(System.Random rand, IPrototypeManager proto)
+    protected override List<Vector2> GetShapeImplementation(IRobustRandom rand, IPrototypeManager proto)
     {
         return ShapeHelpers.MakeLine(Offset, Size, Direction).ToList();
     }

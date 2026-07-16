@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: jobIcon
   parent: JobIcon
   id: JobIconPhoneMerchant
@@ -14,3 +16,13 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: DClass
   jobName: job-name-d-class
+  isCrewJob: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSpacePol
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: SpacePol
+  jobName: job-name-spacepol
+  isCrewJob: false

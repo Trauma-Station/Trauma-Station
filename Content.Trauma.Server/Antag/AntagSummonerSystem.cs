@@ -9,11 +9,11 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Antag;
 
-public sealed class AntagSummonerSystem : SharedAntagSummonerSystem
+public sealed partial class AntagSummonerSystem : SharedAntagSummonerSystem
 {
-    [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     private int _minPlayers;
 

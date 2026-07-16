@@ -16,7 +16,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    [Dependency] private readonly EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private readonly List<EntityUid> _bloodStealTargets = new();
     private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
@@ -80,7 +80,7 @@ public sealed partial class HereticAbilitySystem
         var xform = Transform(uid);
         var mapCoords = _transform.GetMapCoordinates(uid, xform);
 
-        if (_mapMan.TryFindGridAt(mapCoords, out var gridUid, out var mapGrid) &&
+        if (_map.TryFindGridAt(mapCoords, out var gridUid, out var mapGrid) &&
             _map.TryGetTileRef(gridUid, mapGrid, xform.Coordinates, out var tile) &&
             (!_weather.CanWeatherAffect((gridUid, mapGrid), tile) ||
              _atmos.GetTileMixture(gridUid, xform.MapUid, tile.GridIndices)?.Pressure is
@@ -102,10 +102,9 @@ public sealed partial class HereticAbilitySystem
     {
         if (TryComp(uid, out PolymorphedEntityComponent? morphed) && HasComp<SpectralComponent>(uid))
             _poly.Revert((uid, morphed));
-        else if (TryUseAbility(args))
-            _poly.PolymorphEntity(uid, polymorph);
-        else
+        else if (!TryUseAbility(args) || _poly.PolymorphEntity(uid, polymorph) == null)
             return false;
+
         return true;
     }
 
@@ -144,8 +143,6 @@ public sealed partial class HereticAbilitySystem
             _bloodStealTargets.Add(target);
         }
 
-        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
-
         if (!hasTargets)
             return;
 
@@ -153,6 +150,8 @@ public sealed partial class HereticAbilitySystem
         {
             _container.EmptyContainer(woundable.Wounds);
         }
+
+        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
 
         _aud.PlayPvs(args.Sound, args.Target);
     }

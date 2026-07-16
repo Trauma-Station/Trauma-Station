@@ -6,10 +6,10 @@ using Content.Trauma.Shared.Lockers;
 
 namespace Content.Trauma.Server.Lockers;
 
-public sealed class StationAlertLevelLockSystem : SharedStationAlertLevelLockSystem
+public sealed partial class StationAlertLevelLockSystem : SharedStationAlertLevelLockSystem
 {
-    [Dependency] private readonly AlertLevelSystem _level = default!;
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private AlertLevelSystem _level = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {

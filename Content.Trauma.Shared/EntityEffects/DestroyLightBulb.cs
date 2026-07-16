@@ -15,9 +15,9 @@ public sealed partial class DestroyLightBulb : EntityEffectBase<DestroyLightBulb
         => null;
 }
 
-public sealed class DestroyLightBulbEffectSystem : EntityEffectSystem<PoweredLightComponent, DestroyLightBulb>
+public sealed partial class DestroyLightBulbEffectSystem : EntityEffectSystem<PoweredLightComponent, DestroyLightBulb>
 {
-    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
+    [Dependency] private SharedPoweredLightSystem _light = default!;
 
     protected override void Effect(Entity<PoweredLightComponent> ent, ref EntityEffectEvent<DestroyLightBulb> args)
     {

@@ -5,14 +5,13 @@ using Content.Server.Antag;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Station.Components;
 using Robust.Shared.Map;
 
 namespace Content.Trauma.Server.StationEvents.Events;
 
-public sealed class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
+public sealed partial class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -25,7 +24,7 @@ public sealed class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
     {
         var comp = Comp<GameRuleComponent>(args.GameRule);
 
-        if (!TryGetRandomStation(out var station))
+        if (GetRandomStationGrids() is not { } stationGrids)
         {
             ForceEndSelf(ent, comp);
             return;
@@ -33,12 +32,12 @@ public sealed class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
 
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<MapCoordinates>();
-        while (locations.MoveNext(out _, out _, out var transform))
+        while (locations.MoveNext(out _, out _, out var xform))
         {
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station != station)
+            if (xform.GridUid is not { } grid || !stationGrids.Contains(grid))
                 continue;
 
-            validLocations.Add(_transform.GetMapCoordinates(transform));
+            validLocations.Add(_transform.GetMapCoordinates(xform));
         }
 
         if (validLocations.Count == 0)
@@ -47,9 +46,6 @@ public sealed class VentSpawnRule : StationEventSystem<VentSpawnRuleComponent>
             return;
         }
 
-        if (validLocations is { } coords)
-        {
-            args.Coordinates.AddRange(coords);
-        }
+        args.Coordinates.AddRange(validLocations);
     }
 }

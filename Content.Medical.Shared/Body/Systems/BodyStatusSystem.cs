@@ -6,10 +6,10 @@ using Content.Shared.Mobs;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class BodyStatusSystem : EntitySystem
+public sealed partial class BodyStatusSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     public override void Initialize()
     {

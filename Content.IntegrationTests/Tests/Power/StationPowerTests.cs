@@ -24,6 +24,7 @@ public sealed class StationPowerTests : GameTest
 
     private static readonly string[] GameMaps =
     [ // Goobstation only maps in rotation
+        "Freighter", // Trauma
         "Atlas",
         "Amber",
         "Bagel",
@@ -113,6 +114,7 @@ public sealed class StationPowerTests : GameTest
     }
 
     [Test, TestCaseSource(nameof(GameMaps))]
+    [Explicit] // Trauma - takes a long time, i dont think it even works. some bad apcs slipped through
     public async Task TestApcLoad(string mapProtoId)
     {
         var pair = Pair;

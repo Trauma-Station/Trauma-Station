@@ -8,19 +8,17 @@ using Content.Shared.Chat;
 using Content.Shared.Speech;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Speech
 {
-    public sealed class SpeechSoundSystem : EntitySystem
+    public sealed partial class SpeechSoundSystem : EntitySystem
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!; // Goob
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IPrototypeManager _protoManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private IConfigurationManager _cfg = default!; // Goob
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
 
         private bool _barksEnabled; // Goob
 
@@ -34,14 +32,14 @@ namespace Content.Server.Speech
 
         public SoundSpecifier? GetSpeechSound(Entity<SpeechComponent> ent, string message)
         {
-            // <Goob>
+            // <Trauma> - get prototype differently
             var getSpeechSoundEv = new GetSpeechSoundEvent();
             RaiseLocalEvent(ent, ref getSpeechSoundEv);
             SpeechSoundsPrototype? prototype;
             if (getSpeechSoundEv.Handled)
             {
                 if (getSpeechSoundEv.SpeechSoundProtoId is not { } protoId ||
-                    !_protoManager.TryIndex(protoId, out prototype))
+                    !ProtoMan.Resolve(protoId, out prototype))
                     return null;
             }
             else
@@ -49,9 +47,9 @@ namespace Content.Server.Speech
                 if (ent.Comp.SpeechSounds == null)
                     return null;
 
-                prototype = _protoManager.Index<SpeechSoundsPrototype>(ent.Comp.SpeechSounds);
+                prototype = ProtoMan.Index<SpeechSoundsPrototype>(ent.Comp.SpeechSounds);
             }
-            // </Goob>
+            // </Trauma>
 
             // Play speech sound
             SoundSpecifier? contextSound;

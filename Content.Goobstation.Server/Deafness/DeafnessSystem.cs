@@ -1,16 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Goobstation.Common.Traits;
-using Content.Server.Chat.V2;
 using Content.Server.Radio;
-using Content.Server.Chat;
-using Content.Shared.Chat;
-using Content.Goobstation.Common.Chat;
+using Content.Trauma.Common.Chat;
 
 namespace Content.Goobstation.Server.Deafness;
 
-public sealed class DeafnessSystem : EntitySystem
+public sealed partial class DeafnessSystem : EntitySystem
 {
     private EntityQuery<DeafComponent> _deafQuery;
 
@@ -20,10 +16,10 @@ public sealed class DeafnessSystem : EntitySystem
 
         _deafQuery = GetEntityQuery<DeafComponent>();
         SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
-        SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRange>(OnOverrideInVoiceRange);
+        SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRangeEvent>(OnOverrideInVoiceRange);
     }
 
-    private void OnOverrideInVoiceRange(EntityUid uid, DeafComponent comp, ref ChatMessageOverrideInVoiceRange args)  // blocks normal chat
+    private void OnOverrideInVoiceRange(EntityUid uid, DeafComponent comp, ref ChatMessageOverrideInVoiceRangeEvent args)  // blocks normal chat
     {
         args.Cancel();
     }

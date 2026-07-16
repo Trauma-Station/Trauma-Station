@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Base
 
 - type: entity
@@ -60,14 +62,14 @@
         Quantity: 3
       - ReagentId: Blood
         Quantity: 10
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 12
-        - ReagentId: Fat
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 12
+      - ReagentId: Fat
+        Quantity: 3
 
 - type: entity
   abstract: true
@@ -83,14 +85,14 @@
       reagents:
       - ReagentId: Sugar
         Quantity: 15
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Sugar
-          Quantity: 12
-        - ReagentId: Nutriment
-          Quantity: 3
+  - type: Solution
+    id: food
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 12
+      - ReagentId: Nutriment
+        Quantity: 3
 
 ## Parts
 
@@ -177,7 +179,7 @@
     markingData:
       layers:
       - Head
-      - Face # Trauma - where the fuck else would it go
+      - Face
       - Snout
       - SnoutCover
       - HeadSide

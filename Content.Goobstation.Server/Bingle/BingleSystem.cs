@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Shared.Bingle;
 using Content.Server.Polymorph.Components;
@@ -17,12 +16,12 @@ using Robust.Shared.Map;
 // TODO: predict everything but polymorph bruh
 namespace Content.Goobstation.Server.Bingle;
 
-public sealed class BingleSystem : EntitySystem
+public sealed partial class BingleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public static readonly EntProtoId ActionBingleUpgrade = "ActionBingleUpgrade";
 
@@ -31,7 +30,6 @@ public sealed class BingleSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<BingleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BingleComponent, AttackAttemptEvent>(OnAttackAttempt);
-        SubscribeLocalEvent<BingleComponent, Shared.Overlays.ToggleNightVisionEvent>(OnNightvision);
         SubscribeLocalEvent<BingleComponent, ToggleCombatActionEvent>(OnCombatToggle);
         SubscribeLocalEvent<BingleComponent, BingleUpgradeActionEvent>(OnUpgradeAction);
     }
@@ -98,14 +96,6 @@ public sealed class BingleSystem : EntitySystem
         //Prevent Friendly Bingle fire
         if (HasComp<BinglePitComponent>(args.Target) || HasComp<BingleComponent>(args.Target))
             args.Cancel();
-    }
-
-    private void OnNightvision(EntityUid uid, BingleComponent component, Shared.Overlays.ToggleNightVisionEvent args)
-    {
-        if (!TryComp<FlashImmunityComponent>(uid, out var flashComp))
-            return;
-
-        flashComp.Enabled = !flashComp.Enabled;
     }
 
     private void OnCombatToggle(EntityUid uid, BingleComponent component, ToggleCombatActionEvent args)

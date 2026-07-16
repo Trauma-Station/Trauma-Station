@@ -20,6 +20,7 @@ salvage-asteroid-name = Asteroid
 salvage-magnet-window-title = Salvage magnet
 salvage-expedition-window-progression = Progression
 
+# Trauma - plasma -> phoron
 salvage-magnet-resources = {$resource ->
     [OreIron] Iron
     [OreCoal] Coal
@@ -28,7 +29,7 @@ salvage-magnet-resources = {$resource ->
     [OreGold] Gold
     [OreDiamond] Diamond
     [OreSilver] Silver
-    [OrePlasma] Plasma
+    [OrePlasma] Phoron
     [OreUranium] Uranium
     [OreArtifactFragment] Artifact fragments
     [OreBananium] Bananium

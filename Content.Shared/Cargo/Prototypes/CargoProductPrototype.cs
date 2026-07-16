@@ -107,8 +107,8 @@ namespace Content.Shared.Cargo.Prototypes
         /// <summary>
         ///     The prototype category of the product. (e.g. Engineering, Medical)
         /// </summary>
-        [DataField]
-        public string Category { get; private set; } = string.Empty;
+        [DataField(required: true)] // Trauma - was [Datafield]
+        public LocId Category { get; private set; } = string.Empty; // Trauma - was string instead of LocId
 
         /// <summary>
         ///     The prototype group of the product. (e.g. Contraband)

@@ -1,20 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Projectiles;
-using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Goobstation.Client.Projectiles;
 
-public sealed class DodgeEffectOverlay : Overlay
+public sealed partial class DodgeEffectOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> ShaderProto = "Dodge";
 
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private SharedTransformSystem _transform = default!;
 
@@ -26,7 +24,7 @@ public sealed class DodgeEffectOverlay : Overlay
     public DodgeEffectOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _protoMan.Index(ShaderProto).InstanceUnique();
+        _shader = _proto.Index(ShaderProto).InstanceUnique();
         _transform = _entMan.System<SharedTransformSystem>();
     }
 

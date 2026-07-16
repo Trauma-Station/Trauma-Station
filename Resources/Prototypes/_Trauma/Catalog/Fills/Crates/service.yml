@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: CrateRotaryPhone
   parent: CrateGenericSteel
@@ -9,3 +11,18 @@
       entity_storage:
         id: RotaryPhoneFlatPack
         amount: 5
+
+- type: entity
+  parent: CrateHydroSecure
+  id: CrateServiceCoconutCrab
+  name: coconut crab crate
+  description: This is crabtually insane!
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MobCoconutCrab
+          amount: 1
+        - id: MobCrabTiny
+          amount: 6

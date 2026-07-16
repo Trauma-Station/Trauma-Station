@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: FeatherzoneCockpit
   parent: BaseStructure
@@ -131,6 +133,7 @@
         - MidImpassable, LowImpassable, BulletImpassable
   - type: Damageable
     damageModifierSet: RGlass
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -182,6 +185,7 @@
         - MidImpassable, LowImpassable, BulletImpassable
   - type: Damageable
     damageModifierSet: RGlass
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -233,6 +237,7 @@
         - MidImpassable, LowImpassable, BulletImpassable
   - type: Damageable
     damageModifierSet: RGlass
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -270,6 +275,7 @@
     state: featherzone_signoff
   - type: Damageable
     damageModifierSet: RGlass
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
@@ -308,6 +314,7 @@
     castShadows: true
   - type: Damageable
     damageModifierSet: RGlass
+  - type: Injurable
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:

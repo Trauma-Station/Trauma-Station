@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Text;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Shared.EntityEffects;
@@ -8,17 +9,15 @@ using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using System.Text;
 
 namespace Content.Trauma.Server.Station;
 
-public sealed class StationTraitsSystem : EntitySystem
+public sealed partial class StationTraitsSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     /// <summary>
     /// All trait prototypes organized per group.
@@ -67,12 +66,12 @@ public sealed class StationTraitsSystem : EntitySystem
         // then apply them
         foreach (var id in ent.Comp.Picked)
         {
-            var trait = _proto.Index(id);
+            var trait = ProtoMan.Index(id);
             Log.Info($"Added station trait {id}");
             try
             {
-                if (trait.Effects is {} effects)
-                    _effects.ApplyEffects(ent, effects);
+                if (trait.Effects is { } effects)
+                    _effects.ApplyEffects(ent, effects, predicted: false);
             }
             catch (Exception e)
             {
@@ -123,13 +122,13 @@ public sealed class StationTraitsSystem : EntitySystem
         var station = ent.Owner;
         foreach (var id in ent.Comp.Picked)
         {
-            var trait = _proto.Index(id);
-            if (getEffects(trait) is not {} effects)
+            var trait = ProtoMan.Index(id);
+            if (getEffects(trait) is not { } effects)
                 continue;
 
             try
             {
-                _effects.ApplyEffects(station, effects);
+                _effects.ApplyEffects(station, effects, predicted: false);
             }
             catch (Exception e)
             {
@@ -147,7 +146,7 @@ public sealed class StationTraitsSystem : EntitySystem
     private void LoadPrototypes()
     {
         AllTraits.Clear();
-        foreach (var trait in _proto.EnumeratePrototypes<StationTraitPrototype>())
+        foreach (var trait in ProtoMan.EnumeratePrototypes<StationTraitPrototype>())
         {
             if (!AllTraits.TryGetValue(trait.Group, out var list))
                 AllTraits[trait.Group] = list = new();
@@ -193,8 +192,8 @@ public sealed class StationTraitsSystem : EntitySystem
         sb.AppendLine("[bold]Identified shift divergencies:[/bold]");
         foreach (var id in traits.Reported)
         {
-            var trait = _proto.Index(id);
-            if (trait.Report is {} report) // should always be true...
+            var trait = ProtoMan.Index(id);
+            if (trait.Report is { } report) // should always be true...
                 sb.AppendLine($"[italic]{trait.Name}[/italic] - {report}");
         }
     }
@@ -206,7 +205,7 @@ public sealed class StationTraitsSystem : EntitySystem
     /// </summary>
     public bool ForceTrait(string id)
     {
-        if (!_enabled || !_proto.HasIndex<StationTraitPrototype>(id))
+        if (!_enabled || !ProtoMan.HasIndex<StationTraitPrototype>(id))
             return false;
 
         _forced.Add(id);
@@ -218,7 +217,7 @@ public sealed class StationTraitsSystem : EntitySystem
     /// </summary>
     public void ForceAllTraits()
     {
-        foreach (var trait in _proto.EnumeratePrototypes<StationTraitPrototype>())
+        foreach (var trait in ProtoMan.EnumeratePrototypes<StationTraitPrototype>())
         {
             ForceTrait(trait.ID);
         }

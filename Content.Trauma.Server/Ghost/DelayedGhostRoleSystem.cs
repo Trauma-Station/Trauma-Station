@@ -10,11 +10,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Ghost;
 
-public sealed class DelayedGhostRoleSystem : EntitySystem
+public sealed partial class DelayedGhostRoleSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityQuery<DelayedGhostRoleComponent> _query = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<DelayedGhostRoleComponent> _query = default!;
 
     // yeah this doesn't support persistence, tuff
     // also 2 separate buffers so there's no need for arbitrary insert, just push at the end of the buffer

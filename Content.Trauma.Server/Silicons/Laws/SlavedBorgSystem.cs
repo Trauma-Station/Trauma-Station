@@ -12,9 +12,8 @@ namespace Content.Trauma.Server.Silicons.Laws;
 /// Handles adding the slave law for the first time.
 /// Borg chassis switches preserve this on its own.
 /// </summary>
-public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
+public sealed partial class SlavedBorgSystem : SharedSlavedBorgSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -59,7 +58,7 @@ public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
     /// </summary>
     public void AddLaw(SiliconLawset lawset, ProtoId<SiliconLawPrototype> law)
     {
-        lawset.Laws.Insert(0, _proto.Index(law).ShallowClone());
+        lawset.Laws.Insert(0, ProtoMan.Index(law).ShallowClone());
     }
 
     /// <summary>
@@ -67,7 +66,7 @@ public sealed class SlavedBorgSystem : SharedSlavedBorgSystem
     /// </summary>
     public void RemoveLaw(SiliconLawset lawset, ProtoId<SiliconLawPrototype> law)
     {
-        var target = _proto.Index(law).LawString;
+        var target = ProtoMan.Index(law).LawString;
         lawset.Laws.RemoveAll(law => law.LawString == target);
     }
 }

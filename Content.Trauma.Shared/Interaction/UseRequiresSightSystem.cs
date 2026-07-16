@@ -6,10 +6,10 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.Interaction;
 
-public sealed class UseRequiresSightSystem : EntitySystem
+public sealed partial class UseRequiresSightSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityQuery<BlindableComponent> _query = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityQuery<BlindableComponent> _query = default!;
 
     public override void Initialize()
     {

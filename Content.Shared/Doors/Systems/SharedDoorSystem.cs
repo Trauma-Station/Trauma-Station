@@ -1,6 +1,7 @@
 // <Trauma>
 using Content.Shared.DoAfter;
 using Content.Shared.Wires;
+using Content.Trauma.Common.Doors;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Access.Components;
@@ -34,27 +35,27 @@ namespace Content.Shared.Doors.Systems;
 public abstract partial class SharedDoorSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private readonly SharedToolSystem _tools = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedWiresSystem _wires = default!;
+    [Dependency] private SharedToolSystem _tools = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedWiresSystem _wires = default!;
     // </Trauma>
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] protected readonly IGameTiming GameTiming = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly SharedPhysicsSystem PhysicsSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly SharedStunSystem _stunSystem = default!;
-    [Dependency] protected readonly TagSystem Tags = default!;
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] protected readonly SharedAppearanceSystem AppearanceSystem = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
-    [Dependency] private readonly PryingSystem _pryingSystem = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] protected IGameTiming GameTiming = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] protected SharedPhysicsSystem PhysicsSystem = default!;
+    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedStunSystem _stunSystem = default!;
+    [Dependency] protected TagSystem Tags = default!;
+    [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] protected SharedAppearanceSystem AppearanceSystem = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
+    [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
+    [Dependency] private PryingSystem _pryingSystem = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
 
     public static readonly ProtoId<TagPrototype> DoorBumpTag = "DoorBumpOpener";
 
@@ -338,6 +339,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (door.State == DoorState.Welded)
             return false;
 
+        if (Paused(uid))
+            return false;
+
         var ev = new BeforeDoorOpenedEvent() { User = user };
         RaiseLocalEvent(uid, ev);
         if (ev.Cancelled)
@@ -370,6 +374,11 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
         if (!SetState(uid, DoorState.Opening, door))
             return;
+
+        // <Trauma>
+        var ev = new DoorOpenedEvent(uid, user);
+        RaiseLocalEvent(uid, ref ev);
+        // </Trauma>
 
         if (predicted)
             Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
@@ -443,6 +452,9 @@ public abstract partial class SharedDoorSystem : EntitySystem
         // since both closing/closed and welded are door states, we need to prevent 'closing'
         // a welded door or else there will be weird state bugs
         if (door.State is DoorState.Welded or DoorState.Closed)
+            return false;
+
+        if (Paused(uid))
             return false;
 
         var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck, partial);
@@ -538,8 +550,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!Resolve(uid, ref door))
             return;
 
-        if (!door.CanCrush)
+        // <Trauma>
+        var ev = new ShouldDoorCrushEvent(door.CanCrush, door.DoorStunTime);
+        RaiseLocalEvent(uid, ref ev);
+
+        if (!ev.ShouldCrush)
             return;
+        // <Trauma>
 
         // Find entities and apply curshing effects
         var stunTime = door.DoorStunTime + door.OpenTimeOne;
@@ -556,7 +573,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             return;
 
         // queue the door to open so that the player is no longer stunned once it has FINISHED opening.
-        door.NextStateChange = GameTiming.CurTime + door.DoorStunTime;
+        door.NextStateChange = GameTiming.CurTime + ev.CrushDelay; // Trauma - door.DoorStunTime -> ev.CrushDelay
         door.Partial = false;
     }
 

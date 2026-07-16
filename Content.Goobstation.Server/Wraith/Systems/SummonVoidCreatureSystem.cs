@@ -11,13 +11,12 @@ using Robust.Server.GameObjects;
 
 namespace Content.Goobstation.Server.Wraith.Systems;
 
-public sealed class SummonVoidCreatureSystem : EntitySystem
+public sealed partial class SummonVoidCreatureSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -54,7 +53,7 @@ public sealed class SummonVoidCreatureSystem : EntitySystem
     private void OnSummonVoidCreatureSelected(Entity<ChooseVoidCreatureComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         if (args.SelectedItem is not { } proto
-            || !_proto.TryIndex(proto, out var summon)
+            || !ProtoMan.TryIndex(proto, out var summon)
             || !summon.HasComponent<WraithMinionComponent>()
             || !_mind.TryGetMind(ent.Owner, out var mindUid, out var mind))
             return;

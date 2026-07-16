@@ -10,10 +10,10 @@ namespace Content.Trauma.Shared.Mobs;
 /// <summary>
 /// Manages adding and removing per-state components to mobs.
 /// </summary>
-public sealed class MobStateComponentsSystem : EntitySystem
+public sealed partial class MobStateComponentsSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly EntityQuery<SleepingComponent> _sleepingQuery = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<SleepingComponent> _sleepingQuery = default!;
 
     public override void Initialize()
     {

@@ -10,8 +10,8 @@ namespace Content.Goobstation.Shared.Trigger.Triggers;
 
 public sealed partial class TriggerOnDamageSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
 
     public override void Initialize()
     {

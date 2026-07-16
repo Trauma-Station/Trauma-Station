@@ -16,19 +16,18 @@ using Robust.Shared.Containers;
 
 namespace Content.Goobstation.Shared.Body;
 
-public sealed class InsideBodyPartSystem : CommonInsideBodyPartSystem
+public sealed partial class InsideBodyPartSystem : CommonInsideBodyPartSystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedJitteringSystem _jittering = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedJitteringSystem _jittering = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private static readonly EntProtoId Trauma = "BoneDamage";
     private static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
@@ -92,7 +91,7 @@ public sealed class InsideBodyPartSystem : CommonInsideBodyPartSystem
             return;
 
         _damage.TryChangeDamage(part, ent.Comp.BurstDamage, ignoreResistances: true);
-        _wound.TryCreateWound(part, Trauma, 20, out _, _proto.Index(Brute));
+        _wound.TryCreateWound(part, Trauma, 20, out _, ProtoMan.Index(Brute));
 
         var target = part;
         if (_body.GetBody(part) is {} body)

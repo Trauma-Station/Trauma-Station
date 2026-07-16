@@ -1,16 +1,3 @@
-# SPDX-FileCopyrightText: 2017 PJB3005 <pieterjan.briers@gmail.com>
-# SPDX-FileCopyrightText: 2018 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-# SPDX-FileCopyrightText: 2018 Remie Richards <remierichards@gmail.com>
-# SPDX-FileCopyrightText: 2019 Silver <Silvertorch5@gmail.com>
-# SPDX-FileCopyrightText: 2020 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-# SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
-# SPDX-FileCopyrightText: 2021 Swept <sweptwastaken@protonmail.com>
-# SPDX-FileCopyrightText: 2021 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 #!/usr/bin/env python3
 """
 Installs git hooks, updates them, updates submodules, that kind of thing.
@@ -62,9 +49,6 @@ def update_submodules():
     if os.path.isfile("DISABLE_SUBMODULE_AUTOUPDATE"):
         return
 
-    if shutil.which("git") is None:
-        raise FileNotFoundError("git not found in PATH")
-
     # If the status doesn't match, force VS to reload the solution.
     # status = run_command(["git", "submodule", "status"], capture=True)
     run_command(["git", "submodule", "update", "--init", "--recursive"])
@@ -80,6 +64,16 @@ def install_hooks():
     """
     Installs the necessary git hooks into .git/hooks.
     """
+
+    # <Trauma> - shill
+    if shutil.which("rg") is None:
+        print("")
+        print("#######################################################################################")
+        print("#     You should install ripgrep (install cargo then run cargo install ripgrep)       #")
+        print("# It will let you instantly search the entire codebase, your life will be 10x easier! #")
+        print("#######################################################################################")
+        print("")
+    # </Trauma>
 
     # Read version file.
     if os.path.isfile("INSTALLED_HOOKS_VERSION"):
@@ -130,12 +124,19 @@ def check_for_zip_download():
               "Such as information to download the engine or even the ability to even be able to create contributions. \n"
               "Please read and follow https://docs.spacestation14.com/en/general-development/setup/setting-up-a-development-environment.html \n"
               "If you just want a Sandbox Server, you are following the wrong guide! You can download a premade server following the instructions here:"
-              "https://docs.spacestation14.com/en/general-development/setup/server-hosting-tutorial.html \n"
-              "Closing automatically in 30 seconds.")
-        time.sleep(30)
+              "https://docs.spacestation14.com/en/general-development/setup/server-hosting-tutorial.html")
+        exit(1)
+
+def check_path_for_git():
+    """
+    Check git is invokable before trying to invoke it.
+    """
+    if shutil.which("git") is None:
+        print("git not found in PATH. Ensure git is installed and in PATH and run this program again!")
         exit(1)
 
 if __name__ == '__main__':
+    check_path_for_git()
     check_for_zip_download()
     install_hooks()
     update_submodules()

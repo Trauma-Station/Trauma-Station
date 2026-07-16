@@ -6,10 +6,10 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Trauma.Shared.ChangeFactionOnEmag;
 
-public sealed class ChangeFactionOnEmagSystem : EntitySystem
+public sealed partial class ChangeFactionOnEmagSystem : EntitySystem
 {
-    [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private NpcFactionSystem _factionSystem = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     public override void Initialize()
     {

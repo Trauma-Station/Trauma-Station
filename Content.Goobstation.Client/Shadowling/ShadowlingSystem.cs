@@ -10,10 +10,8 @@ namespace Content.Goobstation.Client.Shadowling;
 /// This handles status icons for slings and thralls
 /// This also handles alerts
 /// </summary>
-public sealed class ShadowlingSystem : SharedShadowlingSystem
+public sealed partial class ShadowlingSystem : SharedShadowlingSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -27,13 +25,13 @@ public sealed class ShadowlingSystem : SharedShadowlingSystem
         if (HasComp<ShadowlingComponent>(ent))
             return;
 
-        var iconProto = _prototype.Index(ent.Comp.StatusIcon);
+        var iconProto = ProtoMan.Index(ent.Comp.StatusIcon);
         args.StatusIcons.Add(iconProto);
     }
 
     private void GetShadowlingIcon(Entity<ShadowlingComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (_prototype.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
+        if (ProtoMan.TryIndex(ent.Comp.StatusIcon, out var iconPrototype))
             args.StatusIcons.Add(iconPrototype);
     }
 }

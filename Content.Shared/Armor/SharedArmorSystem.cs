@@ -18,9 +18,9 @@ namespace Content.Shared.Armor;
 /// <summary>
 ///     This handles logic relating to <see cref="ArmorComponent" />
 /// </summary>
-public abstract class SharedArmorSystem : EntitySystem
+public abstract partial class SharedArmorSystem : EntitySystem
 {
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -55,16 +55,32 @@ public abstract class SharedArmorSystem : EntitySystem
             return;
 
         // <Trauma>
-        if (args.Args.TargetPart is not {} partType || !component.ArmorCoverage.Contains(partType))
+        if (args.Args.TargetPart is not { } partType || !component.ArmorCoverage.Contains(partType))
             return;
 
-        var ev = new ArmorProtectAttemptEvent(args.Args.Origin);
+        var isPrecise = (args.Args.Damage.Flags & DamageSpecifier.DamageFlags.PreciseHit) != 0;
+        var ev = new ArmorProtectAttemptEvent(args.Args.Origin, isPrecise);
         RaiseLocalEvent(uid, ref ev);
-        if (ev.Cancelled)
+        var mult = ev.Multiplier;
+        if (mult <= 0f)
             return;
 
-        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
-            DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration)); // apply penetration to base modifiers
+        // apply penetration to base modifiers
+        var modifierSet = DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.Damage.ArmorPenetration);
+        if (mult >= 1f)
+        {
+            args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, modifierSet);
+            return;
+        }
+
+        var newModifierSet = new DamageModifierSet();
+        foreach (var (key, value) in modifierSet.Coefficients)
+        {
+            newModifierSet.Coefficients[key] = 1f - (1f - value) * mult;
+        }
+
+        newModifierSet.FlatReduction = modifierSet.FlatReduction;
+        args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage, newModifierSet);
         // </Trauma>
     }
 

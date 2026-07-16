@@ -10,9 +10,9 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Server.Xenomorphs.Queen;
 
-public sealed class XenomorphQueenDeathSystem : EntitySystem
+public sealed partial class XenomorphQueenDeathSystem : EntitySystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

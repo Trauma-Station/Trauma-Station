@@ -11,22 +11,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedHereticCombatMarkSystem : EntitySystem
+public abstract partial class SharedHereticCombatMarkSystem : EntitySystem
 {
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _lookupHumanoid = new();
 
     public void ApplyMarkEffect(EntityUid target, HereticCombatMarkComponent mark, EntityUid user)
     {
         var protoId = $"HereticMark{mark.Path.ToString()}";
-        if (_proto.HasIndex<EntityEffectPrototype>(protoId))
-            _effects.TryApplyEffect(target, protoId, mark.Repetitions, user);
+        if (ProtoMan.HasIndex<EntityEffectPrototype>(protoId))
+            _effects.TryApplyEffect(target, protoId, 1f, user);
 
         _audio.PlayPredicted(mark.TriggerSound, target, user);
         RemCompDeferred(target, mark);

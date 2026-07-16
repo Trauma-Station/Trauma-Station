@@ -6,21 +6,25 @@ using Content.Shared.DoAfter;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Goobstation.Shared.Skinnable;
 
-public sealed class SkinnableSystem : EntitySystem
+public sealed partial class SkinnableSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popups = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
+
+    public static readonly ProtoId<ToolQualityPrototype> Slicing = "Slicing";
 
     public override void Initialize()
     {
@@ -46,7 +50,7 @@ public sealed class SkinnableSystem : EntitySystem
             ent.Comp.Skinned ||
             args.Using is not {} used ||
             _whitelist.IsWhitelistFail(ent.Comp.Whitelist, ent) ||
-            !HasComp<SharpComponent>(used))
+            !_tool.HasQuality(used, Slicing))
             return;
 
         var user = args.User;
@@ -90,17 +94,17 @@ public sealed class SkinnableSystem : EntitySystem
             _whitelist.IsWhitelistFail(target.Comp.Whitelist, target))
             return;
 
-        Skin(target);
+        Skin(target, args.User);
     }
 
-    private void Skin(Entity<SkinnableComponent> ent)
+    private void Skin(Entity<SkinnableComponent> ent, EntityUid? user)
     {
         if (ent.Comp.Skinned)
             return;
 
         ent.Comp.Skinned = true;
         Dirty(ent, ent.Comp);
-        _damageable.TryChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned);
+        _damageable.ChangeDamage(ent.Owner, ent.Comp.DamageOnSkinned, origin: user);
         // mfw no api :face_holding_back_tears:
         foreach (var organ in _body.GetOrgans<VisualOrganComponent>(ent.Owner))
         {

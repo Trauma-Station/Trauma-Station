@@ -11,10 +11,10 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.Atmos.Piping.Binary.EntitySystems;
 
-public sealed class GasValveSystem : SharedGasValveSystem
+public sealed partial class GasValveSystem : SharedGasValveSystem
 {
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSoundSystem = default!;
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSoundSystem = default!;
+    [Dependency] private NodeContainerSystem _nodeContainer = default!;
 
     public override void Set(EntityUid uid, GasValveComponent component, bool value)
     {

@@ -107,6 +107,9 @@
     containers:
       entity_storage: !type:AllSelector
         children:
+        # <Trauma>
+        - id: RadiationBlockingProjector
+        # </Trauma>
         - id: ClothingOuterSuitRad
           amount: 2
         - id: GeigerCounter

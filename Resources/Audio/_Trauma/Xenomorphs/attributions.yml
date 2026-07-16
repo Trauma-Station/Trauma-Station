@@ -1,0 +1,4 @@
+- files: ["step1.ogg", "step2.ogg", "step3.ogg", "step4.ogg", "step5.ogg", "step6.ogg", "step7.ogg", "step8.ogg", "step9.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Taken from BlueMoon station and converted to mono by assripper"
+  source: "https://github.com/BlueMoon-Labs/BlueMoon-Station/tree/dfba0114e1ba1e34fa49e98221808735adf08971/sound/alien/Effects"

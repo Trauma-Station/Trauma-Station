@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseMutation
@@ -44,7 +46,7 @@
   components:
   - type: Mutation
     instability: 35
-    difficulty: 32 # powergamers delight
+    difficulty: 20 # powergamers delight
     rarity: Mythical
     conflicts:
     - MutationPressureAdaptation

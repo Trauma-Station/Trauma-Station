@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseAreaStation
@@ -54,6 +56,7 @@
   components:
   - type: Sprite
     state: chapel
+  - type: HolyArea
 
 - type: entity
   parent: AreaChapel
@@ -62,6 +65,7 @@
   components:
   - type: Sprite
     state: chapel_office
+  - type: HolyArea
 
 - type: entity
   parent: AreaChapel
@@ -70,6 +74,7 @@
   components:
   - type: Sprite
     state: cremate
+  - type: HolyArea
 
 - type: entity
   parent: BaseAreaCivilian

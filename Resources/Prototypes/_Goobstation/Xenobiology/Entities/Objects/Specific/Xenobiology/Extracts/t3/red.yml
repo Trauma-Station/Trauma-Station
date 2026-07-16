@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: RedSlimeExtract
   parent: BaseSlimeExtract
@@ -22,12 +24,9 @@
       effects:
       - !type:NestedEffect
         proto: XenobioExtractReagent
-      - !type:RelaySolution
-        name: extract
-        effects:
-        - !type:AdjustReagent
-          reagent: XenobioJellyRed
-          amount: 1
+      - !type:AdjustReagent
+        reagent: XenobioJellyRed
+        amount: 1
     - reagents: [ Blood ]
       methods: [ Touch, Injection ]
       effects:

@@ -13,10 +13,10 @@ using Content.Medical.Common.Targeting;
 
 namespace Content.Goobstation.Shared.Religion;
 
-public sealed class WeakToHolySystem : SharedWeakToHolySystem
+public sealed partial class WeakToHolySystem : SharedWeakToHolySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<ShouldTakeHolyComponent>> _toUpdate = new();
 
@@ -70,7 +70,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        ChangeUnholyStatus(ent, args.Equipee, false);
+        ChangeUnholyStatus(ent, args.EquipTarget, false);
     }
 
     private void OnEquip(Entity<UnholyItemComponent> ent, ref GotEquippedEvent args)
@@ -78,7 +78,7 @@ public sealed class WeakToHolySystem : SharedWeakToHolySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        ChangeUnholyStatus(ent, args.Equipee, true);
+        ChangeUnholyStatus(ent, args.EquipTarget, true);
     }
 
     private void ChangeUnholyStatus(EntityUid source, EntityUid user, bool status)

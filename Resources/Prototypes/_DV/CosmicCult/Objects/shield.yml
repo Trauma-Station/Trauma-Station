@@ -1,7 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   name: malign barrier
   parent: [ BaseRepairableShield, BaseCosmicContraband ]
-  id: ShieldCosmicCult
+  id: CosmicCultShield
   description: A heavy shield wrought of constantly shifting malign plating, it appears to slightly bend reality to protect it's user.
   components:
   - type: Sprite
@@ -21,13 +23,11 @@
         Blunt: -0.25
         Slash: -0.25
         Piercing: -0.25
+        Ballistic: -0.25
         Heat: -0.25
         Cold: -0.25
         Shock: -0.25
         Caustic: -0.25
-  - type: HeldSpeedModifier # Heavy indeed
-    walkModifier: 0.8
-    sprintModifier: 0.8
   - type: Destructible
     thresholds:
       - trigger:
@@ -48,9 +48,9 @@
   - type: CosmicTransmutable
     transmuteTo: null # No reforging
   - type: Parry
-    maxParries: 0
-    maxReflects: 5
-    reflectMinSkill: 30
+    parryExhaustionCost: 0.25
+    reflectExhaustionCost: 0.125
+    reflectMinSkill: 25
     soundOnReflect:
       path: /Audio/Weapons/Guns/Hits/ric4.ogg
       params:
@@ -62,6 +62,11 @@
     - Energy
     soundOnParry:
       path: /Audio/_DV/CosmicCult/cosmicsword_glance.ogg
-      params:
-        variation: 0.2
-        volume: -11
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: FlashSoundSuppression
+    protectionRange: 1
+  - type: MeleeThrowOnHit
+    distance: 1

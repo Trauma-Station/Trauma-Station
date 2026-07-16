@@ -152,7 +152,7 @@ public sealed partial class TraumaCVars
     /// How long despawning decals like footprints and blood splatters last before despawning.
     /// </summary>
     public static readonly CVarDef<float> DecalDespawnTime =
-        CVarDef.Create("trauma.decal_despawn_time", 300f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_time", 900f, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// How many decals are allowed to be despawning at the same time.
@@ -160,7 +160,7 @@ public sealed partial class TraumaCVars
     /// If this value is changed ingame it will only take affected after restarting the round.
     /// </summary>
     public static readonly CVarDef<int> DecalDespawnLimit =
-        CVarDef.Create("trauma.decal_despawn_limit", 128, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("trauma.decal_despawn_limit", 1024, CVar.SERVER | CVar.REPLICATED);
 
     #endregion
 
@@ -213,6 +213,16 @@ public sealed partial class TraumaCVars
     /// </summary>
     public static readonly CVarDef<int> ParticleGlobalBudget =
         CVarDef.Create("particles.global_budget", 8000, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    #endregion
+
+    #region Audio
+
+    /// <summary>
+    /// Special audio volume like fear sounds.
+    /// </summary>
+    public static readonly CVarDef<float> SpecialAudioVolume =
+        CVarDef.Create("trauma.special_audio_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     #endregion
 }

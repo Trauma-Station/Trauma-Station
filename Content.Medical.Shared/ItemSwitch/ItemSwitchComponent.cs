@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.ItemSwitch;
 
@@ -70,7 +69,7 @@ public sealed partial class ItemSwitchComponent : Component
 }
 
 [DataDefinition]
-public sealed partial class ItemSwitchState : BoundUserInterfaceMessage
+public sealed partial class ItemSwitchState
 {
     [DataField]
     public string? Verb;

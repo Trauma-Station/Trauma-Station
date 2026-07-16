@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using System.Numerics;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Emoting;
+using Content.Shared.Guardian.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
@@ -19,17 +19,16 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Spawners;
-using Content.Trauma.Common.Wizard.Guardian;
 
 namespace Content.Trauma.Shared.Wizard.TimeStop;
 
-public sealed class FreezeContactsSystem : EntitySystem
+public sealed partial class FreezeContactsSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> FrozenIgnoreMindActionTag = "FrozenIgnoreMindAction";
 
@@ -221,7 +220,7 @@ public sealed class FreezeContactsSystem : EntitySystem
             return;
         }
 
-        if (IsImmune(otherUid) || TryComp(otherUid, out GuardianSharedComponent? guardian) && IsImmune(guardian.Host))
+        if (IsImmune(otherUid) || TryComp<GuardianComponent>(otherUid, out var guardian) && guardian.Host is { } host && IsImmune(host))
             return;
 
         EnsureComp<FrozenComponent>(otherUid).FreezeTime = despawn.Lifetime;

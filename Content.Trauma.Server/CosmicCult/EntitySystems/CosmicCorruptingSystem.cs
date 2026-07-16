@@ -13,9 +13,9 @@ using Content.Shared.Coordinates;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
-public sealed class CosmicCorruptingSystem : EntitySystem
+public sealed partial class CosmicCorruptingSystem : EntitySystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private MapSystem _map = default!;
 
     private readonly HashSet<Vector2i> _neighbourPositions =
     [
@@ -30,12 +30,12 @@ public sealed class CosmicCorruptingSystem : EntitySystem
         new(1, -1),
     ];
 
-    [Dependency] private readonly IRobustRandom _rand = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinition = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TurfSystem _turfs = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IRobustRandom _rand = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinition = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TurfSystem _turfs = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     /// <remarks>
     ///     this system is a mostly generic way of replacing tiles around an entity. the only hardcoded behaviour is secret

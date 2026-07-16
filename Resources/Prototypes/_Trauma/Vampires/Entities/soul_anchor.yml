@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ShadowAnchor
+  name: Shadow Anchor
+  description: a shadow anchor.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Vampires/soul_anchor.rsi
+    state: pylon
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: TriggerOnSpawn
+  - type: EmitSoundOnTrigger
+    predicted: true
+    sound: /Audio/_Trauma/Vampires/Actions/shadow_anchor.ogg

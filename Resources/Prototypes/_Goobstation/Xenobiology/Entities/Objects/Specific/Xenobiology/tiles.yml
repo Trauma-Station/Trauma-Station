@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: FloorBluespaceEntity
   name: bluespace carpet
@@ -18,8 +20,9 @@
     footstepSoundCollection:
       collection: FootstepHoverBorg
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -73,8 +76,9 @@
     footstepSoundCollection:
       collection: FootstepFloor
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:

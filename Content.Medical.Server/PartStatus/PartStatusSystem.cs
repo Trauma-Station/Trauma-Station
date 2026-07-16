@@ -21,19 +21,17 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Server.PartStatus;
 
-public sealed class PartStatusSystem : EntitySystem
+public sealed partial class PartStatusSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly TraumaSystem _trauma = default!;
-    [Dependency] private readonly WoundSystem _wound = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private TraumaSystem _trauma = default!;
+    [Dependency] private WoundSystem _wound = default!;
 
     private static readonly BodyPartType[] BodyPartOrder =
     [
@@ -95,9 +93,12 @@ public sealed class PartStatusSystem : EntitySystem
             Act = () =>
             {
                 var markup = CreateMarkup(uid, args.User, component, damage);
+                var userEv = new UserExaminedEvent(markup, uid);
+                RaiseLocalEvent(args.User, ref userEv);
+                markup = userEv.Message;
                 _examine.SendExamineTooltip(args.User, uid, markup, false, false);
-                var examineCompletedEvent = new ExamineCompletedEvent(markup, uid, args.User, true); // Goobstation
-                RaiseLocalEvent(uid, examineCompletedEvent); // Goobstation
+                var examineCompletedEvent = new ExamineCompletedEvent(markup, uid, args.User, true);
+                RaiseLocalEvent(uid, ref examineCompletedEvent);
             },
             Text = Loc.GetString("health-examinable-verb-text"),
             Category = VerbCategory.Examine,
@@ -135,7 +136,7 @@ public sealed class PartStatusSystem : EntitySystem
             partStatusSet.Add(new PartStatus(
                 part.PartType,
                 part.Symmetry,
-                _proto.Index(category).Name.ToLowerInvariant(), // looks better lowercase
+                ProtoMan.Index(category).Name.ToLowerInvariant(), // looks better lowercase
                 woundable.Comp.WoundableSeverity,
                 damageSeverities,
                 boneSev,
@@ -161,7 +162,7 @@ public sealed class PartStatusSystem : EntitySystem
                 !damageSeverities.TryGetValue(wound.Comp.DamageType, out var existingSeverity) ||
                 wound.Comp.WoundSeverity > existingSeverity)
                 damageSeverities[wound.Comp.TextString == null
-                    ? _proto.Index(wound.Comp.DamageGroup).ID
+                    ? ProtoMan.Index(wound.Comp.DamageGroup).ID
                     : wound.Comp.TextString] = wound.Comp.WoundSeverity;
 
             if (TryComp<BleedInflicterComponent>(wound, out var bleeds) && bleeds.IsBleeding)
@@ -322,7 +323,7 @@ public sealed class PartStatusSystem : EntitySystem
 
     private bool WoundSeverityCheck(string type)
     {
-        return !_proto.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
+        return !ProtoMan.HasIndex<DamageGroupPrototype>(type) || type is "Brute" or "Burn";
     }
 
     private List<string> GetTraumaDescriptions(PartStatus partStatus, bool inspectingSelf)

@@ -12,12 +12,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Wizard.ArcaneBarrage;
 
-public sealed class ArcaneBarrageSystem : EntitySystem
+public sealed partial class ArcaneBarrageSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {

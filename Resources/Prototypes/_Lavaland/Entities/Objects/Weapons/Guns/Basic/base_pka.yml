@@ -1,7 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  id: WeaponProtoKineticAcceleratorBase
   abstract: true
   parent: BaseItem
+  id: WeaponProtoKineticAcceleratorBase
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Basic/kinetic_accelerator.rsi
@@ -11,7 +13,9 @@
     shape:
     - 0,0,1,1
   - type: PressureDamageChange
+    appliedModifier: 3.75
     applyToMelee: false
+  - type: PressureEfficiency
   - type: UpgradeableWeapon
   - type: ContainerContainer
     containers:
@@ -92,7 +96,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
-      params: # Trauma - no earrape
+      params:
         volume: -5
   - type: AmmoCounter
   - type: Appearance
@@ -107,7 +111,7 @@
     rechargeCooldown: 0.5
     rechargeSound:
       path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
-      params: # Trauma - no earrape
+      params:
         volume: -5
   - type: BasicEntityAmmoProvider
     proto: BulletKinetic
@@ -121,7 +125,7 @@
     - Belt
   - type: UseDelay
     delay: 1
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 250
       Glass: 125
@@ -136,3 +140,5 @@
         Blunt: 5
   - type: AltFireMelee
     attackType: Heavy
+  - type: WeaponClass
+    class: Mining

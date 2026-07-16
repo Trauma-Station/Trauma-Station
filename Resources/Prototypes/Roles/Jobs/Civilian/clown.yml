@@ -10,6 +10,11 @@
   - Theatre
   - Maintenance
   special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipClown
+  # </Trauma>
   - !type:AddComponentSpecial
     components:
     - type: Clumsy
@@ -26,7 +31,6 @@
       interval: 10
     - type: SpeechFontOverride # Trauma - ss13 parity
       font: LDFComicSans
-
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant ]
 

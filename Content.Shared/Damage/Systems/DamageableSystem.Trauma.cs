@@ -12,10 +12,10 @@ namespace Content.Shared.Damage.Systems;
 /// </summary>
 public sealed partial class DamageableSystem
 {
-    [Dependency] private readonly CommonBodyPartSystem _part = default!;
-    [Dependency] private readonly EntityQuery<BodyComponent> _bodyQuery = default!;
-    [Dependency] private readonly EntityQuery<InorganicComponent> _inorganicQuery = default!;
-    [Dependency] private readonly EntityQuery<InternalOrganComponent> _internalQuery = default!;
+    [Dependency] private CommonBodyPartSystem _part = default!;
+    [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
+    [Dependency] private EntityQuery<InorganicComponent> _inorganicQuery = default!;
+    [Dependency] private EntityQuery<InternalOrganComponent> _internalQuery = default!;
 
     private static readonly ProtoId<DamageGroupPrototype>[] _vitalOnlyDamageGroups = { "Airloss", "Toxin", "Genetic", "Metaphysical" };
     private readonly List<ProtoId<DamageTypePrototype>> _vitalOnlyDamageTypes = new();
@@ -25,7 +25,7 @@ public sealed partial class DamageableSystem
         _vitalOnlyDamageTypes.Clear();
         foreach (var groupId in _vitalOnlyDamageGroups)
         {
-            var group = _prototypeManager.Index(groupId);
+            var group = ProtoMan.Index(groupId);
             foreach (var type in group.DamageTypes)
             {
                 _vitalOnlyDamageTypes.Add(type);

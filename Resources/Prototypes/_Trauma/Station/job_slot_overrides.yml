@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Make a ton more jobs available and infinite interns on very high pop
 - type: jobSlotsOverride
   id: HighPop

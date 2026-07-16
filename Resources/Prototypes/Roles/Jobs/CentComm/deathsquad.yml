@@ -7,7 +7,6 @@
   startingGear: DeathSquadGear
   icon: "JobIconDeathSquad"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
   accessGroups:
   - AllAccess
   access:
@@ -16,6 +15,9 @@
   - NanotrasenRepresentative
   # <Trauma>
   special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipDeathSquad
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
   - !type:AddComponentSpecial

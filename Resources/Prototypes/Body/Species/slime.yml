@@ -77,7 +77,7 @@
       Eyes: OrganSlimePersonEyes
       Tongue: OrganSlimePersonTongue
       # </Trauma>
-      Stomach: OrganSlimePersonCore # Shitmed - Brain -> Stomach
+      Brain: OrganSlimePersonCore
       Lungs: OrganSlimePersonLungs
   - type: HumanoidProfile
     species: SlimePerson
@@ -126,10 +126,7 @@
   - type: TypingIndicator
     proto: slime
   - type: Vocal
-    sounds:
-      Male: MaleSlime
-      Female: FemaleSlime
-      Unsexed: MaleSlime
+    emoteSounds: MaleSlime
   - type: Damageable
     damageModifierSet: Slime
   - type: PassiveDamage # Around 8 damage a minute healed
@@ -152,7 +149,7 @@
     bloodReferenceSolution: # TODO Color slime blood based on their slime color or smth
       reagents:
       - ReagentId: Slime
-        Quantity: 300
+        Quantity: 300 # Trauma, was 600
   - type: Barotrauma
     damage:
       types:
@@ -180,7 +177,6 @@
         messages: [ "slime-hurt-by-water-popup" ]
         probability: 0.25
   - type: Butcherable
-    butcheringType: Spike
     spawned:
     - id: FoodMeatSlime
       amount: 5
@@ -194,18 +190,17 @@
     maxSaturation: 15
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy???
+  parent: OrganBaseOrganic
   id: OrganSlimePerson
   abstract: true
   suffix: slime person
   # <Shitmed>
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
   # </Shitmed>
 
 - type: entity
@@ -244,10 +239,32 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganSlimePersonExternal ]
   id: OrganSlimePersonTorso
+  # <Trauma>
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - Brain
+    - Lungs
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseHead, OrganSlimePersonExternal ]
   id: OrganSlimePersonHead
+  # <Trauma>
+  components:
+  - type: BodyPart
+    slots: # no brain, torso has it
+    - Eyes
+    - Tongue
+    - Ears
+  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganSlimePersonExternal ]
@@ -288,20 +305,13 @@
   components:
   # <Shitmed>
   - type: Organ
-    category: Stomach # lets it be stored in the torso
+    category: Brain
   - type: ChildOrgan
-    parents: [ Torso ] # allow it to be in torsos instead of head
+    parents: [ Torso ] # allow it to be in torso instead of head
   # </Shitmed>
-  - type: SolutionContainerManager
+  - type: SolutionManager
     solutions:
-      stomach:
-        maxVol: 50.0
-      # <Shitmed>
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
-      # </Shitmed>
+    - SolutionStomach
   - type: Stomach
   - type: Metabolizer
     maxReagents: 6
@@ -314,15 +324,11 @@
   name: gas sacs
   components:
   # <Shitmed>
-  - type: SolutionContainerManager
-    solutions:
-      Lung:
-        maxVol: 100.0
-        canReact: false
-      food:
-        reagents:
-        - ReagentId: Slime
-          Quantity: 15
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
   # </Shitmed>
   - type: Lung
     alert: LowNitrogen

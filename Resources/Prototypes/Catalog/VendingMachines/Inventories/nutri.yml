@@ -28,3 +28,7 @@
     Joint: 1
     ChemistryBottleLeft4Zed: 1
     ChemistryBottleBananadine: 1 # Trauma
+  # <Trauma>
+  emaggedInventory:
+    SyringePoisonFent: 2
+  # </Trauma>

@@ -14,19 +14,19 @@ namespace Content.Server.StationEvents.Events;
 /// <summary>
 /// Variant of <see cref="VentCrittersRule"/> that selects a single vent and spawns all entities there.
 /// </summary>
-public sealed class VentHordeRule : StationEventSystem<VentHordeRuleComponent>
+public sealed partial class VentHordeRule : StationEventSystem<VentHordeRuleComponent>
 {
     /*
      * DO NOT COPY PASTE THIS TO MAKE YOUR MOB EVENT.
      * USE THE PROTOTYPE.
      */
 
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityTableSystem _table = default!;
-    [Dependency] private readonly VentHordeSystem _horde = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityTableSystem _table = default!;
+    [Dependency] private VentHordeSystem _horde = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     protected override void Added(EntityUid uid, VentHordeRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
@@ -89,7 +89,7 @@ public sealed class VentHordeRule : StationEventSystem<VentHordeRuleComponent>
     private EntityUid? ChooseVent()
     {
         // Get a station
-        if (!TryGetRandomStation(out var station))
+        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
         {
             return null;
         }
@@ -107,7 +107,7 @@ public sealed class VentHordeRule : StationEventSystem<VentHordeRuleComponent>
             if (HasComp<VentHordeSpawnerComponent>(uid))
                 continue;
 
-            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
+            if (transform.GridUid is { } grid && stationGrids.Contains(grid)) // Trauma - check stationGrids instead of StationMemberComponent
             {
                 validLocations.Add(uid);
             }

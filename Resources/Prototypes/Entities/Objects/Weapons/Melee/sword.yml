@@ -2,11 +2,17 @@
 
 #BaseSword
 - type: entity
-  parent: [BaseItem, KnifeDurability] # Trauma - Durability
+  parent: [BaseItem, KnifeDurabilitySharpenOnly] # Trauma - Durability
   id: BaseSword
   abstract: true
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Sword
+  - type: CosmicTransmutable
+    transmuteTo: SwordCosmicCult
   - type: Sharp
+  # </Trauma>
   - type: Execution
     doAfterDuration: 4.0
     decapitation: true # Goobstation - Decapitation
@@ -23,8 +29,6 @@
   - type: Tool
     qualities:
     - Slicing
-  - type: CosmicTransmutable # Trauma
-    transmuteTo: SwordCosmicCult
 
 #Shortswords
 - type: entity
@@ -78,15 +82,15 @@
 #Longswords
 - type: entity
   name: captain's sabre
-  parent: [ KnifeDurabilityStrong, BaseSword, BaseCommandContraband ] # Trauma - durability
+  parent: [ BaseSword, BaseCommandContraband ]
   id: CaptainSabre
   description: A ceremonial weapon belonging to the captain of the station.
   components:
-  # Goobstation edit start
+  # <Trauma>
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_Goobstation/Items/handling/sabre_drop.ogg
-  # Goobstation edit start
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/captain_sabre.rsi
   - type: MeleeWeapon
@@ -116,17 +120,6 @@
     # not putting a BlockMovement component here cause that's funny.
   - type: StealTarget
     stealGroup: CaptainSword
-  # <Trauma>
-  - type: Parry
-    maxParries: 3
-    maxReflects: 0
-    parryMinSkill: 40
-    soundOnParry:
-      path: /Audio/_Goobstation/Heretic/parry.ogg
-      params:
-        variation: 0.2
-        volume: -11
-  # </Trauma>
 
 - type: entity
   name: katana
@@ -134,6 +127,11 @@
   id: Katana
   description: Ancient craftwork made with not so ancient plasteel.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Katana
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/katana.rsi
   - type: MeleeWeapon
@@ -171,9 +169,11 @@
     wideAnimationRotation: -60
     damage:
       types:
-        Slash: 30
+        # <Trauma>
+        Slash: 20 # was 30
       woundSeverityMultipliers:
         Slash: 2
+        # </Trauma>
   - type: Item
     storedSprite:
       state: storage
@@ -191,7 +191,6 @@
     slots:
     - Back
     - Belt
-  - type: Parry # Trauma
 
 #Greatswords
 - type: entity
@@ -200,6 +199,15 @@
   id: Claymore
   description: An ancient war blade.
   components:
+  # <Trauma>
+  - type: Parry
+    parryMinSkill: 40
+    soundOnParry:
+      path: /Audio/_Goobstation/Heretic/parry.ogg
+      params:
+        variation: 0.2
+        volume: -11
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/claymore.rsi
   - type: MeleeWeapon
@@ -223,17 +231,6 @@
     - Back
     - SuitStorage #Bigger than the other swords, easier to strap to your suit.
   - type: DisarmMalus
-  # <Trauma>
-  - type: Parry
-    maxParries: 3
-    maxReflects: 0
-    parryMinSkill: 40
-    soundOnParry:
-      path: /Audio/_Goobstation/Heretic/parry.ogg
-      params:
-        variation: 0.2
-        volume: -11
-  # </Trauma>
 
 #Other/Weird
 - type: entity

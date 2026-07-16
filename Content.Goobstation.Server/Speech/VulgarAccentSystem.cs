@@ -7,11 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Goobstation.Server.Speech;
 
-public sealed class VulgarAccentSystem : EntitySystem
+public sealed partial class VulgarAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ILocalizationManager _loc = default!;
 
     public override void Initialize()
     {
@@ -29,7 +28,7 @@ public sealed class VulgarAccentSystem : EntitySystem
             //Every word has a percentage chance to be replaced by a random swear word from the component's array.
             if (_random.Prob(component.SwearProb))
             {
-                if (!_proto.Resolve(component.Pack, out var messagePack))
+                if (!ProtoMan.Resolve(component.Pack, out var messagePack))
                     return message;
 
                 string swearWord = _loc.GetString(_random.Pick(messagePack.Values));

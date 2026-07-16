@@ -432,7 +432,6 @@
   components:
     # <Trauma>
     - type: CurseImmune
-    - type: CanEnchant
     # </Trauma>
     - type: BibleUser
     - type: GhostRole
@@ -805,6 +804,13 @@
   id: SyndieSoldierTeamLeader
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipSyndieSoldierTeamLeader
+    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -825,6 +831,13 @@
   id: SyndieSoldier
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipSyndieSoldier
+    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -845,6 +858,13 @@
   id: SyndieVisitor
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipSyndieVisitor
+    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -862,6 +882,13 @@
   id: PirateScooner
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipPirateScooner
+    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -881,6 +908,13 @@
   id: PirateCaptainScooner
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipPirateCaptainScooner
+    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -902,6 +936,13 @@
   id: VisitorBlackmarketeer
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipBlackmarketeer
+    # </Trauma>
     - type: GhostRole
       name: ghost-role-information-blackmarketeer-name
       description: ghost-role-information-blackmarketeer-description
@@ -918,6 +959,13 @@
   id: Cossack
   parent: EventHumanoid
   components:
+    # <Trauma>
+    - type: TriggerOnSpawn
+    - type: EntityEffectOnTrigger
+      effects:
+      - !type:InstallOrganChip
+        chip: SkillChipCossack
+    # </Trauma>
     - type: RussianAccent
     - type: ScrambledAccent
     - type: SlurredAccent

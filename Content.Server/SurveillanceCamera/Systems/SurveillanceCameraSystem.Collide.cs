@@ -8,9 +8,9 @@ namespace Content.Server.SurveillanceCamera;
 
 public partial class SurveillanceCameraSystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly EntityQuery<CameraActiveOnCollideComponent> _cameraQuery = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private EntityQuery<CameraActiveOnCollideComponent> _cameraQuery = default!;
 
     public void InitializeCollide()
     {
@@ -81,6 +81,11 @@ public partial class SurveillanceCameraSystem
 
         if (!_cameraQuery.TryComp(args.OtherEntity, out var cameraCollider))
             return;
+
+        // <Trauma> - don't show AI if its not powered, it can't see through it here
+        if (!_power.IsPowered(args.OtherEntity))
+            return;
+        // </Trauma>
 
         cameraCollider.Enabled = true;
         Dirty(args.OtherEntity, cameraCollider);

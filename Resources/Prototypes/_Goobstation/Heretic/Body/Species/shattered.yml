@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 ## Mob
 
 - type: entity
@@ -34,6 +36,7 @@
   - MobCombat
   - MobAtmosStandard
   - MobFlammable
+  - MobNightVision
   id: MobShattered
   components:
   - type: FootprintOwner
@@ -41,6 +44,7 @@
   - type: FireVisuals
     alternateState: Standing
   - type: Damageable
+  - type: Injurable
     damageContainer: Biological
   - type: Tag
     tags:
@@ -64,6 +68,7 @@
         Blunt: -2
         Slash: -2
         Piercing: -2
+        Ballistic: -2
         Heat: -2
         Cold: -2
         Shock: -2
@@ -76,10 +81,6 @@
         Holy: -2
   - type: Targeting
   - type: PressureImmunity
-  - type: NightVision
-    color: "#177698"
-    activateSound: null
-    deactivateSound: null
   - type: ZombieImmune
   - type: MobThresholds
     thresholds:
@@ -136,10 +137,8 @@
     - RatvarianLanguage
     - PressureImmunity
     - Muted
-    - TemporaryBlindness
     - Pacified
     - StaminaModifier
-    - RadiationProtection
     - Adrenaline
   - type: Identity
   - type: IdExaminable
@@ -180,10 +179,7 @@
     speechSounds: null
   - type: DamageForceSay
   - type: Vocal
-    sounds:
-      Male: MaleHuman
-      Female: FemaleHuman
-      Unsexed: MaleHuman
+    emoteSounds: MaleHuman
   - type: LanguageSpeaker
     speaks:
     - TauCetiBasic
@@ -215,12 +211,14 @@
         volume: -8
   - type: Insulated
   - type: FlashImmunity
+    showInExamine: false
   - type: FlashSoundSuppression
     protectionRange: 0
   - type: CollectiveMind
     defaultChannel: MansusLink
     channels:
     - MansusLink
+  - type: NoSlip
 
 ## Base
 

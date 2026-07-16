@@ -1,20 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Client.Graphics;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Client.Physics;
 
-public sealed class ComplexJointVisualsSystem : EntitySystem
+public sealed partial class ComplexJointVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _overlay.AddOverlay(new ComplexJointVisualsOverlay(EntityManager, _protoMan, _timing));
+        _overlay.AddOverlay(new ComplexJointVisualsOverlay(EntityManager, ProtoMan, _timing));
     }
 
     public override void Shutdown()

@@ -11,21 +11,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
-public sealed class CosmicColossusSystem : SharedCosmicColossusSystem
+public sealed partial class CosmicColossusSystem : SharedCosmicColossusSystem
 {
-    [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly ThrowingSystem _throw = default!;
-    [Dependency] private readonly CodeConditionSystem _codeCondition = default!;
+    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ThrowingSystem _throw = default!;
+    [Dependency] private CodeConditionSystem _codeCondition = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<CosmicColossusComponent, ComponentInit>(OnSpawn);
+        SubscribeLocalEvent<CosmicColossusComponent, ComponentStartup>(OnSpawn);
     }
 
-    private void OnSpawn(Entity<CosmicColossusComponent> ent, ref ComponentInit args) // I WANT THIS BIG GUY HURLED TOWARDS THE STATION
+    private void OnSpawn(Entity<CosmicColossusComponent> ent, ref ComponentStartup args) // I WANT THIS BIG GUY HURLED TOWARDS THE STATION
     {
         if (!ent.Comp.Timed) return;
         ent.Comp.DeathTimer = _timing.CurTime + ent.Comp.DeathWait;
@@ -46,6 +46,7 @@ public sealed class CosmicColossusSystem : SharedCosmicColossusSystem
         _codeCondition.SetCompleted(ent.Owner, ent.Comp.EffigyObjective); // Ts not predictable
         PredictedSpawnAtPosition(ent.Comp.EffigyPrototype, pos);
         ent.Comp.Timed = false;
+        Dirty(ent, ent.Comp); // Wow what an absolute idiot forgot to add this! Oh, wait, that was me.
     }
 
 }

@@ -1,0 +1,28 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from baystation at commit https://github.com/Baystation12/Baystation12/commit/a929584d9db319eb7484113221be25cfa1d5dc09, recolored by infinityPandaRed",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon-muzzle"
+        },
+        {
+            "name": "inhand-left-muzzle",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right-muzzle",
+            "directions": 4
+        },
+        {
+            "name": "bolt-open"
+        },
+        {
+            "name": "base"
+        }
+    ]
+}

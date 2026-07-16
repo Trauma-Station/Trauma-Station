@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Trauma.Common.Input;
-// </Trauma>
 using Content.Shared.Input;
 using Robust.Shared.Input;
 
@@ -37,7 +34,6 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.RotateStoredItem);
             common.AddFunction(ContentKeyFunctions.SaveItemLocation);
             common.AddFunction(ContentKeyFunctions.Point);
-            common.AddFunction(TraumaKeyFunctions.ResistGrab); // Goobstation - Grab Intent
             common.AddFunction(ContentKeyFunctions.ZoomOut);
             common.AddFunction(ContentKeyFunctions.ZoomIn);
             common.AddFunction(ContentKeyFunctions.ResetZoom);
@@ -61,7 +57,6 @@ namespace Content.Client.Input
             human.AddFunction(EngineKeyFunctions.MoveLeft);
             human.AddFunction(EngineKeyFunctions.MoveRight);
             human.AddFunction(EngineKeyFunctions.Walk);
-            human.AddFunction(TraumaKeyFunctions.Sprint); // Goobstation
             human.AddFunction(ContentKeyFunctions.ToggleKnockdown);
             human.AddFunction(ContentKeyFunctions.SwapHands);
             human.AddFunction(ContentKeyFunctions.SwapHandsReverse);
@@ -70,9 +65,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
-            human.AddFunction(TraumaKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
-            human.AddFunction(TraumaKeyFunctions.Tackle); // Trauma
             human.AddFunction(ContentKeyFunctions.ThrowItemInHand);
             human.AddFunction(ContentKeyFunctions.AltActivateItemInWorld);
             human.AddFunction(ContentKeyFunctions.TryPullObject);
@@ -98,20 +91,6 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.Arcade1);
             human.AddFunction(ContentKeyFunctions.Arcade2);
             human.AddFunction(ContentKeyFunctions.Arcade3);
-            human.AddFunction(TraumaKeyFunctions.OpenMartialArtsMenu); // Trauma
-            // Shitmed Change Start - TODO: Add hands, feet and groin targeting.
-            human.AddFunction(ContentKeyFunctions.TargetHead);
-            human.AddFunction(ContentKeyFunctions.TargetChest);
-            human.AddFunction(ContentKeyFunctions.TargetGroin);
-            human.AddFunction(ContentKeyFunctions.TargetLeftArm);
-            human.AddFunction(ContentKeyFunctions.TargetLeftHand);
-            human.AddFunction(ContentKeyFunctions.TargetRightArm);
-            human.AddFunction(ContentKeyFunctions.TargetRightHand);
-            human.AddFunction(ContentKeyFunctions.TargetLeftLeg);
-            human.AddFunction(ContentKeyFunctions.TargetLeftFoot);
-            human.AddFunction(ContentKeyFunctions.TargetRightLeg);
-            human.AddFunction(ContentKeyFunctions.TargetRightFoot);
-            // Shitmed Change End
 
             // actions should be common (for ghosts, mobs, etc)
             common.AddFunction(ContentKeyFunctions.OpenActionsMenu);

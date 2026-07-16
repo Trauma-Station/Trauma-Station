@@ -12,12 +12,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Xenobiology.XenobiologyBountyConsole;
 
-public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
+public sealed partial class StationXenobiologyBountyDatabaseSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly NameIdentifierSystem _nameIdentifier = default!;
-    [Dependency] private readonly XenobiologyBountyConsoleSystem _xenoConsole = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private NameIdentifierSystem _nameIdentifier = default!;
+    [Dependency] private XenobiologyBountyConsoleSystem _xenoConsole = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private static readonly ProtoId<NameIdentifierGroupPrototype> BountyNameIdentifierGroup = "Bounty";
 
@@ -53,9 +52,11 @@ public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
         if (!Resolve(database, ref database.Comp))
             return;
 
-        var bounties = _proto.EnumeratePrototypes<XenobiologyBountyPrototype>();
+        var bounties = ProtoMan.EnumeratePrototypes<XenobiologyBountyPrototype>();
         foreach (var bounty in bounties)
+        {
             TryAddBounty(database, bounty);
+        }
 
         SortBounties(database.Comp);
         _xenoConsole.UpdateBountyConsoles();
@@ -71,9 +72,9 @@ public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
     }
 
     [PublicAPI]
-    public bool TryAddBounty(EntityUid uid, string bountyId, StationXenobiologyBountyDatabaseComponent? component = null)
+    public bool TryAddBounty(EntityUid uid, [ForbidLiteral] ProtoId<XenobiologyBountyPrototype> id, StationXenobiologyBountyDatabaseComponent? component = null)
     {
-        return _proto.TryIndex<XenobiologyBountyPrototype>(bountyId, out var bounty) && TryAddBounty(uid, bounty, component);
+        return ProtoMan.Resolve(id, out var bounty) && TryAddBounty(uid, bounty, component);
     }
 
     public bool TryAddBounty(EntityUid uid, XenobiologyBountyPrototype bounty, StationXenobiologyBountyDatabaseComponent? component = null)
@@ -114,7 +115,7 @@ public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
             string? actorName = null;
             if (actor != null)
             {
-                var getIdentityEvent = new TryGetIdentityShortInfoEvent(ent.Owner, actor.Value);
+                var getIdentityEvent = new TryGetIdentityShortInfoEvent(ent.Owner, actor.Value, false);
                 RaiseLocalEvent(getIdentityEvent);
                 actorName = getIdentityEvent.Title;
             }
@@ -149,6 +150,6 @@ public sealed class StationXenobiologyBountyDatabaseSystem : EntitySystem
 
     public void SortBounties(StationXenobiologyBountyDatabaseComponent db)
     {
-        db.Bounties = db.Bounties.OrderBy(bounty => !_proto.TryIndex(bounty.Bounty, out var proto) ? 0 : proto.PointsAwarded).ToList();
+        db.Bounties = db.Bounties.OrderBy(bounty => !ProtoMan.TryIndex(bounty.Bounty, out var proto) ? 0 : proto.PointsAwarded).ToList();
     }
 }

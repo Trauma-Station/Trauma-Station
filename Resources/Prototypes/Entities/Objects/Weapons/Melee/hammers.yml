@@ -1,21 +1,13 @@
-# SPDX-FileCopyrightText: 2025 ActiveMammmoth <140334666+ActiveMammmoth@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ActiveMammmoth <kmcsmooth@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 keronshb <54602815+keronshb@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 - type: entity
   name: sledgehammer
-  parent: [BaseItem, MetalToolDurabilityStrong] # Trauma - Durability
+  parent: BaseItem
   id: Sledgehammer
   description: The perfect tool for wanton carnage.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Bludgeon
+  # <Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/sledgehammer.rsi
     state: icon
@@ -44,9 +36,15 @@
   name: Mjollnir
   description: A weapon worthy of a god, able to strike with the force of a lightning bolt. It crackles with barely contained energy.
   components:
+  # <Trauma>
+  - type: MeleeRequiresWield
+  - type: Boomerang
+    maxHops: 20
+  - type: WeaponClass
+    class: Bludgeon
+  # <Trauma>
   - type: Wieldable
     useDelayOnWield: false # GoobStation Edit
-  - type: MeleeRequiresWield # Goobstation
   - type: LandAtCursor
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/mjollnir.rsi # GoobStation Edit
@@ -86,8 +84,6 @@
         Blunt: 2
   - type: Item
     size: Ginormous
-  - type: Boomerang # Goobstation
-    maxHops: 20
   - type: StaticPrice
     price: 50000
 
@@ -97,6 +93,10 @@
   name: Singularity Hammer
   description: The pinnacle of close combat technology, the hammer harnesses the power of a miniaturized singularity to deal crushing blows.
   components:
+  # <Trauma>
+  - type: WeaponClass
+    class: Bludgeon
+  # </Trauma>
   - type: Wieldable
     useDelayOnWield: false
   - type: MeleeRequiresWield

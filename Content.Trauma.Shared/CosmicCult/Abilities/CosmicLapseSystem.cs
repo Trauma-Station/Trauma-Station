@@ -10,13 +10,12 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public sealed class CosmicLapseSystem : EntitySystem
+public sealed partial class CosmicLapseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedCosmicCultSystem _cult = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedPolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private SharedCosmicCultSystem _cult = default!;
+    [Dependency] private SharedPolymorphSystem _polymorph = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
 
     private static readonly ProtoId<PolymorphPrototype> HumanLapse = "CosmicLapseMobHuman";
     public override void Initialize()
@@ -50,9 +49,9 @@ public sealed class CosmicLapseSystem : EntitySystem
             ent);
         var species = Comp<HumanoidProfileComponent>(action.Target).Species;
         ProtoId<PolymorphPrototype> polymorphId = "CosmicLapseMob" + species;
-        if (!_prototype.HasIndex(polymorphId))
+        if (!ProtoMan.HasIndex(polymorphId))
             polymorphId = HumanLapse;
-        if (!_prototype.Resolve(polymorphId, out var polymorph)) return;
+        if (!ProtoMan.Resolve(polymorphId, out var polymorph)) return;
         var copy = polymorph.Configuration;
 
         if (_cult.EntityIsCultist(action.Target))

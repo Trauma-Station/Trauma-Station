@@ -2,21 +2,15 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
 using Content.Shared.EntityEffects;
-using Content.Shared.Flash;
-using Content.Shared.Flash.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Maps;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
-using Content.Shared.StatusEffect;
 using Content.Shared.StatusIcon.Components;
-using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -26,21 +20,18 @@ namespace Content.Goobstation.Shared.Disease.Systems;
 
 public partial class SharedDiseaseSystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedChatSystem _chat = default!;
-    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private readonly SharedFlashSystem _flash = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedChatSystem _chat = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TileSystem _tile = default!;
 
     public const float MaxEffectSeverity = 1f; // magic numbers are EVIL and BAD
+
+    private CompName _effectName;
 
     protected virtual void InitializeEffects()
     {
@@ -49,12 +40,13 @@ public partial class SharedDiseaseSystem
         SubscribeLocalEvent<DiseaseSpreadEffectComponent, DiseaseEffectEvent>(OnDiseaseSpreadEffect);
         SubscribeLocalEvent<DiseaseForceSpreadEffectComponent, DiseaseEffectEvent>(OnDiseaseForceSpreadEffect);
         SubscribeLocalEvent<DiseaseFightImmunityEffectComponent, DiseaseEffectEvent>(OnFightImmunityEffect);
-        SubscribeLocalEvent<DiseaseFlashEffectComponent, DiseaseEffectEvent>(OnFlashEffect);
         SubscribeLocalEvent<DiseasePopupEffectComponent, DiseaseEffectEvent>(OnPopupEffect);
         SubscribeLocalEvent<DiseasePryTileEffectComponent, DiseaseEffectEvent>(OnPryTileEffect);
         SubscribeLocalEvent<DiseaseEntityEffectComponent, DiseaseEffectEvent>(OnEntityEffect);
         SubscribeLocalEvent<DiseaseGrantComponentEffectComponent, DiseaseEffectEvent>(OnGrantComponentEffect);
         SubscribeLocalEvent<DiseaseGrantComponentEffectComponent, DiseaseEffectFailedEvent>(OnGrantComponentEffectFail);
+
+        _effectName = Factory.CompName<DiseaseEffectComponent>();
     }
 
     private void OnGrantComponentEffect(Entity<DiseaseGrantComponentEffectComponent> ent, ref DiseaseEffectEvent args)
@@ -140,20 +132,6 @@ public partial class SharedDiseaseSystem
         ChangeImmunityProgress((args.Disease, args.Disease.Comp), ent.Comp.Amount * GetScale(args, ent.Comp));
     }
 
-    private void OnFlashEffect(Entity<DiseaseFlashEffectComponent> ent, ref DiseaseEffectEvent args)
-    {
-        if (_net.IsClient) // flashes twice if ran on both server and client
-            return;
-
-        var scale = GetScale(args, ent.Comp);
-        var duration = ent.Comp.Duration * scale;
-        _status.TryAddStatusEffect<FlashedComponent>(args.Ent, _flash.FlashedKey, duration, true);
-        _movementMod.TryUpdateMovementSpeedModDuration(args.Ent, MovementModStatusSystem.FlashSlowdown, duration, ent.Comp.SlowTo);
-
-        if (ent.Comp.StunDuration is {} stun)
-            _stun.TryUpdateParalyzeDuration(args.Ent, stun * scale);
-    }
-
     private void OnPopupEffect(Entity<DiseasePopupEffectComponent> ent, ref DiseaseEffectEvent args)
     {
         if (_net.IsClient)
@@ -171,7 +149,7 @@ public partial class SharedDiseaseSystem
             return;
         var xform = Transform(args.Ent);
         var mapPos = _transform.GetMapCoordinates(xform);
-        if (!_mapMan.TryFindGridAt(mapPos, out var gridUid, out var grid))
+        if (!_map.TryFindGridAt(mapPos, out var gridUid, out var grid))
             return;
         for (var i = 0; i < ent.Comp.Attempts; i++)
         {
@@ -219,7 +197,7 @@ public partial class SharedDiseaseSystem
 
     private Entity<DiseaseEffectComponent>? AddRandomEffect(Entity<DiseaseComponent> ent, bool negativeOnly = false)
     {
-        if (!_proto.TryIndex(ent.Comp.AvailableEffects, out var effects))
+        if (!ProtoMan.TryIndex(ent.Comp.AvailableEffects, out var effects))
         {
             Log.Error($"Disease {ToPrettyString(ent)} attempted to mutate to add an effect, but there are no valid effects for its type.");
             return null;
@@ -227,8 +205,8 @@ public partial class SharedDiseaseSystem
 
         var weights = new Dictionary<string, float>(effects.Weights);
         if (negativeOnly)
-            weights = weights.Where(w => _proto.Resolve<EntityPrototype>(w.Key, out var effProto)
-                                        && effProto.TryGetComponent<DiseaseEffectComponent>(out _, Factory)
+            weights = weights.Where(w => ProtoMan.Resolve<EntityPrototype>(w.Key, out var effProto)
+                                        && effProto.HasComp(_effectName)
                                     ).ToDictionary(w => w.Key, w => w.Value);
 
         foreach (var diseaseEffect in ent.Comp.Effects.ContainedEntities) // no rolling effects we have
@@ -244,9 +222,9 @@ public partial class SharedDiseaseSystem
         }
 
         var protoId = new EntProtoId(_random.Pick(weights));
-        var proto = _proto.Index(protoId);
+        var proto = ProtoMan.Index(protoId);
         Entity<DiseaseEffectComponent>? effect = null;
-        if (proto.TryGetComponent<DiseaseEffectComponent>(out var effectComp, Factory))
+        if (proto.TryComp<DiseaseEffectComponent>(_effectName, out var effectComp))
             TryAdjustEffect((ent, ent.Comp), proto, out effect, _random.NextFloat(effectComp.MinSeverity, 1f));
 
         Dirty(ent);
@@ -264,7 +242,7 @@ public partial class SharedDiseaseSystem
         if (!Resolve(ent, ref ent.Comp))
             return false;
 
-        var effectProto = _proto.Index(effectId);
+        var effectProto = ProtoMan.Index(effectId);
         foreach (var effectUid in ent.Comp.Effects.ContainedEntities)
         {
             if (effectProto != Prototype(effectUid))

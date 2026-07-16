@@ -8,10 +8,8 @@ namespace Content.Goobstation.Client.Revolutionary;
 /// <summary>
 /// Gives enemies of the revolution a status icon.
 /// </summary>
-public sealed class RevolutionaryEnemySystem : EntitySystem
+public sealed partial class RevolutionaryEnemySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -21,7 +19,7 @@ public sealed class RevolutionaryEnemySystem : EntitySystem
 
     private void OnGetStatusIcons(Entity<RevolutionEnemyComponent> ent, ref GetStatusIconsEvent args)
     {
-        if (_proto.Resolve(ent.Comp.StatusIcon, out var icon))
+        if (ProtoMan.Resolve(ent.Comp.StatusIcon, out var icon))
             args.StatusIcons.Add(icon);
     }
 }

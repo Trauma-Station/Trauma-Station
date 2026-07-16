@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/tgstation/tgstation/blob/de7e4f0de0d568cd6e1f0d7bcc3fd34700598acb/icons/mob/mob.dmi, edited by MayasMischief",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4
+    }
+  ]
+}

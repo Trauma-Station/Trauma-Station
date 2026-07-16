@@ -14,7 +14,7 @@ public sealed partial class SubtypeSelection : Control
 {
     public event Action? SubtypeSelected;
 
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
     public BorgSubtypePrototype? SelectedBorgSubtype;
 
     public SubtypeSelection()

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: componentRegistry
   id: ComponentsToRemoveOnGhoulify
   components:
@@ -21,6 +23,7 @@
     hungerPerArmyUse: 25
   - type: Dragon
     carpRiftHealing: !type:DamageSpecifier
+  - type: DiseaseCarrier
 
 - type: componentRegistry
   id: ComponentsToRemoveOnUnGhoulify

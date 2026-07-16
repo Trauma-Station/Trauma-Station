@@ -1,21 +1,25 @@
 // <Trauma>
 using Content.Medical.Common.Body;
+using Content.Shared.Trigger.Systems;
 // </Trauma>
 using System.Numerics;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Content.Shared.Body.Systems;
 
 namespace Content.Shared.Body;
 
-public sealed class InitialBodySystem : EntitySystem
+public sealed partial class InitialBodySystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit,
+            before: [ typeof(TriggerSystem) ], // Trauma - a few triggers depend on body being set up
+            after: [ typeof(SharedBloodstreamSystem) ]); // Trauma - make sure bloodstream solutions are initialized for damage on body init etc
     }
 
     private void OnMapInit(Entity<InitialBodyComponent> ent, ref MapInitEvent args)

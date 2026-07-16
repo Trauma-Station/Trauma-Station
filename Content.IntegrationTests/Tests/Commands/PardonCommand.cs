@@ -24,7 +24,7 @@ namespace Content.IntegrationTests.Tests.Commands
 {
     [TestFixture]
     [TestOf(typeof(PardonCommand))]
-    public sealed class PardonCommand : GameTest
+    public sealed partial class PardonCommand : GameTest
     {
         private static readonly TimeSpan MarginOfError = TimeSpan.FromMinutes(1);
 

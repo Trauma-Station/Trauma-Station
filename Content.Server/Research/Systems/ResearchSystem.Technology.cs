@@ -55,7 +55,7 @@ public sealed partial class ResearchSystem
         ResearchClientComponent? component = null,
         TechnologyDatabaseComponent? clientDatabase = null)
     {
-        if (!PrototypeManager.TryIndex<TechnologyPrototype>(prototypeid, out var prototype))
+        if (!ProtoMan.TryIndex<TechnologyPrototype>(prototypeid, out var prototype))
             return false;
 
         return UnlockTechnology(client, prototype, user, component, clientDatabase);
@@ -99,7 +99,7 @@ public sealed partial class ResearchSystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (!PrototypeManager.TryIndex<TechnologyPrototype>(technology, out var prototype))
+        if (!ProtoMan.TryIndex<TechnologyPrototype>(technology, out var prototype))
             return;
         AddTechnology(uid, prototype, component);
     }
@@ -120,15 +120,17 @@ public sealed partial class ResearchSystem
         }
 
         component.UnlockedTechnologies.Add(technology.ID);
+        var addedRecipes = new List<string>();
         foreach (var unlock in technology.RecipeUnlocks)
         {
             if (component.UnlockedRecipes.Contains(unlock))
                 continue;
             component.UnlockedRecipes.Add(unlock);
+            addedRecipes.Add(unlock);
         }
         Dirty(uid, component);
 
-        var ev = new TechnologyDatabaseModifiedEvent(technology.RecipeUnlocks); // Goobstation - Lathe message on recipes update
+        var ev = new TechnologyDatabaseModifiedEvent(addedRecipes);
         RaiseLocalEvent(uid, ref ev);
     }
 

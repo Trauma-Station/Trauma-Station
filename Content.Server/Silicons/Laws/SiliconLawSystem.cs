@@ -37,21 +37,20 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server.Silicons.Laws;
 
-public sealed class SiliconLawSystem : SharedSiliconLawSystem
+public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 {
     // <Trauma>
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IonLawSystem _ionLaw = default!;
-    [Dependency] private readonly ResearchSystem _research = default!;
-    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IonLawSystem _ionLaw = default!;
+    [Dependency] private ResearchSystem _research = default!;
+    [Dependency] private RadioSystem _radio = default!;
     // </Trauma>
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedRoleSystem _roles = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private EmagSystem _emag = default!;
 
     private static readonly ProtoId<SiliconLawsetPrototype> DefaultCrewLawset = "Crewsimov";
 
@@ -107,10 +106,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnLawProviderMindRemoved(Entity<SiliconLawProviderComponent> ent, ref MindRemovedMessage args)
     {
-        if (!ent.Comp.Subverted)
+        if (!ent.Comp.Subverted || args.TransferEntity == null)
             return;
-        RemoveSubvertedSiliconRole(args.Mind);
 
+        RemoveSubvertedSiliconRole(args.Mind);
     }
 
 
@@ -285,14 +284,14 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     /// </summary>
     public SiliconLawset GetLawset(ProtoId<SiliconLawsetPrototype> lawset)
     {
-        var proto = _prototype.Index(lawset);
+        var proto = ProtoMan.Index(lawset);
         var laws = new SiliconLawset()
         {
             Laws = new List<SiliconLaw>(proto.Laws.Count)
         };
         foreach (var law in proto.Laws)
         {
-            laws.Laws.Add(_prototype.Index<SiliconLawPrototype>(law).ShallowClone());
+            laws.Laws.Add(ProtoMan.Index<SiliconLawPrototype>(law).ShallowClone());
         }
         laws.ObeysTo = proto.ObeysTo;
 
@@ -430,7 +429,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     private SiliconLawset GetRandomLaws(ProtoId<WeightedRandomPrototype> availableSetsId)
     {
         // try to swap it out with a random lawset
-        var lawsets = _prototype.Index(availableSetsId);
+        var lawsets = ProtoMan.Index(availableSetsId);
         var lawset = lawsets.Pick(_random);
         var laws = GetLawset(lawset);
 

@@ -30,14 +30,13 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Medical.Shared.Wounds;
 
 public sealed partial class WoundSystem
 {
-    [Dependency] private readonly BodyStatusSystem _bodyStatus = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
+    [Dependency] private BodyStatusSystem _bodyStatus = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
 
     private const string WoundContainerId = "Wounds";
     private const string BoneContainerId = "Bone";
@@ -58,7 +57,7 @@ public sealed partial class WoundSystem
         SubscribeLocalEvent<WoundableComponent, CheckPartBleedingEvent>(OnCheckPartBleeding);
         SubscribeLocalEvent<WoundableComponent, CheckPartWoundedEvent>(OnCheckPartWounded);
         SubscribeLocalEvent<WoundableComponent, HealBleedingWoundsEvent>(OnHealBleedingWounds);
-        SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<WoundableComponent, DamageDealtEvent>(OnDamageDealt);
         SubscribeLocalEvent<WoundableComponent, DamageSetEvent>(OnDamageSet);
         SubscribeLocalEvent<HandOrganComponent, BodyRelayedEvent<ModifyDoAfterDelayEvent>>(OnModifyDoAfterDelay);
         SubscribeLocalEvent<TraumaInflicterComponent, TraumaBeingRemovedEvent>(OnTraumaBeingRemoved);
@@ -195,16 +194,15 @@ public sealed partial class WoundSystem
         RemoveWound(wound, woundComponent);
     }
 
-    private void OnDamageChanged(EntityUid uid, WoundableComponent component, ref DamageChangedEvent args)
+    private void OnDamageDealt(EntityUid uid, WoundableComponent component, ref DamageDealtEvent args)
     {
         // Skip if there was no damage delta or if wounds aren't allowed
-        if (args.UncappedDamage == null // Goobstation
-            || !component.AllowWounds
+        if (!component.AllowWounds
             || !_net.IsServer)
             return;
 
         // Create or update wounds based on damage changes
-        foreach (var (damageType, damageValue) in args.UncappedDamage.DamageDict)
+        foreach (var (damageType, damageValue) in args.Damage.DamageDict)
         {
             if (damageValue == 0)
                 continue; // Only create wounds for damage or healing
@@ -222,7 +220,7 @@ public sealed partial class WoundSystem
                 TryInduceWound(uid,
                     damageType,
                     damageValue *
-                    args.UncappedDamage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1),
+                    args.Damage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1),
                     out _,
                     component);
             }
@@ -263,7 +261,7 @@ public sealed partial class WoundSystem
 
     public DamageGroupPrototype? GetDamageGroupByType(string id)
     {
-        return (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
+        return (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>()
                 where @group.DamageTypes.Contains(id)
                 select @group).FirstOrDefault();
     }
@@ -306,7 +304,7 @@ public sealed partial class WoundSystem
             return true;
 
         var protoId = damageGroup?.Id ??
-            (from @group in _prototype.EnumeratePrototypes<DamageGroupPrototype>()
+            (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>()
                 where @group.DamageTypes.Contains(woundId)
                 select @group).FirstOrDefault()?.ID;
 
@@ -861,7 +859,7 @@ public sealed partial class WoundSystem
         /*if (!Resolve(parent, ref woundableComp, false)
             || !Resolve(wound, ref woundComp, false)
             || !Resolve(body, ref bodyComp, false)
-            || !_prototype.TryIndex(woundComp.DamageType, out DamageTypePrototype? damageType))
+            || !ProtoMan.TryIndex(woundComp.DamageType, out DamageTypePrototype? damageType))
             return;
 
         var bodyPart = Comp<BodyPartComponent>(severed);
@@ -1182,7 +1180,7 @@ public sealed partial class WoundSystem
     private bool IsWoundPrototypeValid(string protoId)
     {
         // TODO SHITMED: HasComp<WoundComponent>(protoId)
-        return _prototype.TryIndex<EntityPrototype>(protoId, out var woundPrototype)
+        return ProtoMan.TryIndex<EntityPrototype>(protoId, out var woundPrototype)
                && woundPrototype.TryGetComponent<WoundComponent>(out _, Factory);
     }
 
@@ -1503,13 +1501,13 @@ public sealed partial class WoundSystem
         if (healable)
         {
             return GetWoundableWounds(targetEntity, targetWoundable)
-                .Where(wound => _prototype.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
+                .Where(wound => ProtoMan.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
                 .Where(wound => CanHealWound(wound, wound.Comp, ignoreBlockers))
                 .Aggregate(FixedPoint2.Zero, (current, wound) => current + wound.Comp.WoundSeverityPoint);
         }
 
         return GetWoundableWounds(targetEntity, targetWoundable)
-            .Where(wound => _prototype.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
+            .Where(wound => ProtoMan.Index(wound.Comp.DamageGroup)?.ID == damageGroup || damageGroup == null)
             .Aggregate(FixedPoint2.Zero, (current, wound) => current + wound.Comp.WoundSeverityPoint);
     }
 
@@ -1535,7 +1533,7 @@ public sealed partial class WoundSystem
 
         var wounds = GetWoundableWounds(targetEntity, targetWoundable);
         if (damageGroup != null)
-            wounds.RemoveAll(wound => _prototype.Index(wound.Comp.DamageGroup)?.ID != damageGroup);
+            wounds.RemoveAll(wound => ProtoMan.Index(wound.Comp.DamageGroup)?.ID != damageGroup);
         if (healable)
             wounds.RemoveAll(wound => !CanHealWound(wound, wound.Comp, ignoreBlockers));
 

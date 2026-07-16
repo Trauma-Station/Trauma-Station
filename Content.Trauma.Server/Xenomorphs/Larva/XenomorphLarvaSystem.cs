@@ -8,6 +8,7 @@ using Content.Trauma.Shared.Xenomorphs;
 using Content.Trauma.Shared.Xenomorphs.Larva;
 using Content.Shared.DoAfter;
 using Content.Shared.Gibbing;
+using Content.Shared.Traits.Assorted;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
@@ -17,13 +18,13 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Xenomorphs.Larva;
 
-public sealed class XenomorphLarvaSystem : EntitySystem
+public sealed partial class XenomorphLarvaSystem : EntitySystem
 {
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly JitteringSystem _jitter = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private JitteringSystem _jitter = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -84,6 +85,6 @@ public sealed class XenomorphLarvaSystem : EntitySystem
             return;
 
         _container.Remove(uid, container);
-        _gibbing.Gib(victim);
+        EnsureComp<UnrevivableComponent>(victim);
     }
 }

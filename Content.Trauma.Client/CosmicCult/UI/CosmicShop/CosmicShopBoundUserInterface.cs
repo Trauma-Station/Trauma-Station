@@ -3,16 +3,14 @@
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
-using Robust.Client.UserInterface;
 using Robust.Client.Player;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 
-public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables] private CosmicShopMenu? _menu;
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     protected override void Open()
     {
@@ -25,11 +23,12 @@ public sealed class CosmicShopBoundUserInterface(EntityUid owner, Enum uiKey) : 
         _menu.OnRespecConfirmed += OnRespecConfirmed;
     }
 
+    // TODO: frame update and check component for changes, not this slop
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
-        if (state is not CosmicShopBuiState buiState
-        || !_entMan.TryGetComponent<CosmicCultComponent>(_player.LocalEntity, out var comp))
+        if (state is not CosmicShopBuiState buiState ||
+            !EntMan.TryGetComponent<CosmicCultComponent>(_player.LocalEntity, out var comp))
             return;
 
         _menu?.UpdateState(comp);

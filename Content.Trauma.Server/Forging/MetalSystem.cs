@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Cargo.Components;
 using Content.Server.Construction.Components;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
@@ -14,11 +15,11 @@ namespace Content.Trauma.Server.Forging;
 /// All the serverside metal, working and forging logic.
 /// Only exists because temperature and construction shitcode is serverside.
 /// </summary>
-public sealed class MetalSystem : SharedMetalSystem
+public sealed partial class MetalSystem : SharedMetalSystem
 {
-    [Dependency] private readonly DamageOnHoldingSystem _damageOnHolding = default!;
-    [Dependency] private readonly TemperatureSystem _temperature = default!;
-    [Dependency] private readonly EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
+    [Dependency] private DamageOnHoldingSystem _damageOnHolding = default!;
+    [Dependency] private TemperatureSystem _temperature = default!;
+    [Dependency] private EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
 
     public override void Initialize()
     {
@@ -60,7 +61,7 @@ public sealed class MetalSystem : SharedMetalSystem
     private void OnTemperatureForged(Entity<TemperatureComponent> ent, ref ItemForgedEvent args)
     {
         // TODO: base it off your input metals if that matters in the future
-        var temp = Proto.Index(GetMetalOrThrow(ent)).WorkingTemp;
+        var temp = ProtoMan.Index(GetMetalOrThrow(ent)).WorkingTemp;
         _temperature.ForceChangeTemperature(ent, temp, ent.Comp);
         if (_internalQuery.TryComp(ent, out var comp))
             comp.Temperature = temp;
@@ -88,5 +89,11 @@ public sealed class MetalSystem : SharedMetalSystem
     {
         if (t >= ent.Comp.IdealTemp)
             SetWorkable(ent, true);
+    }
+
+    public override void SetPrice(EntityUid uid, double price)
+    {
+        // project 0 api for server-only shit :tears
+        EnsureComp<StaticPriceComponent>(uid).Price = price;
     }
 }

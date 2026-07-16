@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: constructionGraph
   id: RevMachine
   start: start
@@ -8,7 +10,7 @@
       steps:
       - material: Steel
         amount: 5
-        doAfter: 5
+        doAfter: 1
   - node: unfinished
     entity: RevUnfinishedMachine
     edges:
@@ -30,7 +32,7 @@
       - material: RevBolt
       - material: RevNut
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: microelectronics assembler # Techfab sabotage required
       steps:
       - tag: TechfabMachineBoard
@@ -51,7 +53,7 @@
       - material: RevNut
         amount: 7
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: 3D printer # Engi required
       steps:
       - tag: RCD
@@ -60,28 +62,28 @@
           sprite: Objects/Tools/rcd.rsi
           state: icon
       - tool: Welding
-        doAfter: 3
+        doAfter: 1
       - material: Cable
         amount: 5
         doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 5
       - material: RevNut
         amount: 5
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: Plastic
         amount: 1
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: RevBolt
         amount: 3
       - material: RevNut
         amount: 2
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: telesphere # RD exclusive
       steps:
       - tag: EncryptionRevolutionary
@@ -89,24 +91,24 @@
         icon:
           sprite: _Trauma/Objects/Devices/encryption_keys.rsi
           state: rev_label
-      - tag: HandTeleporter
-        name: construction-graph-tag-hand-teleporter
-        icon:
-          sprite: Objects/Devices/hand_teleporter.rsi
-          state: icon
+      # - component: HandTeleporter - temp remove for econ purposes
+      #   name: construction-graph-tag-hand-teleporter
+      #   icon:
+      #     sprite: Objects/Devices/hand_teleporter.rsi
+      #     state: icon
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: Cable
         amount: 8
-        doAfter: 2
+        doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
@@ -126,25 +128,25 @@
           sprite: Objects/Misc/qm_clipboard.rsi
           state: qm_clipboard
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: Cable
         amount: 8
-        doAfter: 2
+        doAfter: 1
       - tool: Cutting
-        doAfter: 2
-      - material: RevBolt
-        amount: 10
-      - material: RevNut
-        amount: 10
-      - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
       - tool: Anchoring
         doAfter: 1
-    - to: plasma foundry # CE exclusive
+      - material: RevBolt
+        amount: 10
+      - material: RevNut
+        amount: 10
+      - tool: Anchoring
+        doAfter: 1
+    - to: phoron foundry # CE exclusive
       steps:
       - material: RevGunParts
       - tool: Screwing
@@ -155,22 +157,40 @@
           sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
           state: icon
       - tool: Welding
-        doAfter: 4
+        doAfter: 1
       - material: Cable
         amount: 8
-        doAfter: 2
+        doAfter: 1
       - tool: Cutting
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
       - material: RevBolt
         amount: 10
       - material: RevNut
         amount: 10
+      - tool: Anchoring
+        doAfter: 1
+    - to: hidden medifab
+      steps:
+      - tag: HudMedical # Bully medical for it
+        name: construction-graph-tag-medical-hud
+        icon:
+      - tool: Screwing
+        doAfter: 1
+      - material: Glass
+        amount: 5
+      - material: Cable
+        amount: 5
+        doAfter: 1
+      - material: RevBolt
+        amount: 7
+      - material: RevNut
+        amount: 7
       - tool: Anchoring
         doAfter: 1
   - node: gear
@@ -180,7 +200,7 @@
       - material: RevGear
       - material: RevGear
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: printing press
       steps:
       - tool: Anchoring
@@ -190,7 +210,7 @@
       - material: RevNut
         amount: 2
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: bullet press
       steps:
       - material: RevGunParts
@@ -201,7 +221,7 @@
       - material: RevNut
         amount: 5
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
     - to: uniform printer
       steps:
       - tool: Screwing
@@ -211,7 +231,7 @@
       - material: RevNut
         amount: 5
       - tool: Anchoring
-        doAfter: 2
+        doAfter: 1
   - node: industrial forge
     entity: RevForge
   - node: printing press
@@ -230,5 +250,7 @@
     entity: RevUniformPrinter
   - node: tech analyzer
     entity: RevTechAnalyzer
-  - node: plasma foundry
+  - node: phoron foundry
     entity: RevPlasmaFoundry
+  - node: hidden medifab
+    entity: RevMedFab

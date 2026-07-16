@@ -9,9 +9,9 @@ namespace Content.Trauma.Shared.Damage;
 /// Trauma - moved this out of server
 /// Damages the thrown item when it lands.
 /// </summary>
-public sealed class DamageOnLandSystem : EntitySystem
+public sealed partial class DamageOnLandSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

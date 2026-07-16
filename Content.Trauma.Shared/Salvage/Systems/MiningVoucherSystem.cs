@@ -10,16 +10,15 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Salvage.Systems;
 
-public sealed class MiningVoucherSystem : EntitySystem
+public sealed partial class MiningVoucherSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -45,7 +44,7 @@ public sealed class MiningVoucherSystem : EntitySystem
 
         if (!_power.IsPowered(target))
         {
-            _popup.PopupClient(Loc.GetString("mining-voucher-vendor-unpowered", ("vendor", target)), target, user);
+            _popup.PopupClient($"{Name(target)} has no power!", target, user);
             return;
         }
 
@@ -60,7 +59,7 @@ public sealed class MiningVoucherSystem : EntitySystem
             return;
 
         var user = args.Actor;
-        var kit = _proto.Index(ent.Comp.Kits[index]);
+        var kit = ProtoMan.Index(ent.Comp.Kits[index]);
         var name = Loc.GetString(kit.Name);
         _popup.PopupEntity(Loc.GetString("mining-voucher-selected", ("kit", name)), user, user);
 
@@ -84,7 +83,7 @@ public sealed class MiningVoucherSystem : EntitySystem
         if (_net.IsClient) // wut da hell
             return;
 
-        var kit = _proto.Index(ent.Comp.Kits[index]);
+        var kit = ProtoMan.Index(ent.Comp.Kits[index]);
         var xform = Transform(ent);
         foreach (var id in kit.Content)
         {

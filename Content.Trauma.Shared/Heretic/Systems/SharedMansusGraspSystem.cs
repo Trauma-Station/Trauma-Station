@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
+using Content.Shared.Crayon;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Maps;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
@@ -36,42 +39,48 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public abstract class SharedMansusGraspSystem : EntitySystem
+public abstract partial class SharedMansusGraspSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ITileDefinitionManager _tile = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ITileDefinitionManager _tile = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] protected readonly Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
-    [Dependency] protected readonly TouchSpellSystem TouchSpell = default!;
+    [Dependency] protected Content.Shared.StatusEffectNew.StatusEffectsSystem Status = default!;
+    [Dependency] protected TouchSpellSystem TouchSpell = default!;
 
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _look = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedRatvarianLanguageSystem _language = default!;
-    [Dependency] private readonly UseDelaySystem _delay = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedHereticAbilitySystem _ability = default!;
-    [Dependency] private readonly SharedHereticSystem _heretic = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly HereticRitualEffectSystem _effects = default!;
-    [Dependency] private readonly SharedHereticRitualSystem _ritual = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private EntityLookupSystem _look = default!;
+    [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedRatvarianLanguageSystem _language = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedHereticAbilitySystem _ability = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private HereticRitualEffectSystem _effects = default!;
+    [Dependency] private SharedHereticRitualSystem _ritual = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _lookupMobs = new();
 
+    private static readonly EntProtoId RitualRune = "HereticRuneRitual";
+    private static readonly EntProtoId RitualAnimation = "HereticRuneRitualDrawAnimation";
+
     public static readonly EntProtoId GraspAffectedStatus = "MansusGraspAffectedStatusEffect";
+
+    private static readonly List<ProtoId<TagPrototype>> PenTags = new() { "Pen", "Write" };
 
     public static readonly EntityWhitelist GraspWhitelist = new()
     {
-        Components = ["MansusGrasp"],
+        Components = new[] { "MansusGrasp" },
     };
 
     public static readonly ProtoId<TagPrototype> HereticBladeBlade = "HereticBladeBlade";
@@ -93,7 +102,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         SubscribeLocalEvent<AreaMansusGraspComponent, AreaGraspChannelDoAfterEvent>(OnDoAfter);
 
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract,
-            before: new[] { typeof(TouchSpellSystem) });
+            before: new[] { typeof(TouchSpellSystem), typeof(SharedCrayonSystem) });
         SubscribeLocalEvent<RustGraspComponent, TouchSpellAttemptEvent>(OnRustAttempt);
 
         SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
@@ -102,6 +111,10 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         SubscribeLocalEvent<MansusGraspComponent, TouchSpellUsedEvent>(OnTouchSpellUsed);
 
         SubscribeLocalEvent<MindContainerComponent, MansusGraspSpecialEvent>(OnSpecial);
+
+        SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract,
+            before: new[] { typeof(TouchSpellSystem), typeof(SharedCrayonSystem) });
+        SubscribeLocalEvent<DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
     }
 
     private void OnSpecial(Entity<MindContainerComponent> ent, ref MansusGraspSpecialEvent args)
@@ -112,11 +125,11 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
     private bool InfuseOurBlades(EntityUid uid)
     {
-        if (!_heretic.TryGetHereticComponent(uid, out var heretic, out _) ||
+        if (!_heretic.TryGetHereticComponent(uid, out var heretic, out var mind) ||
             heretic.CurrentPath != HereticPath.Blade || heretic.PathStage < 7)
             return false;
 
-        if (!_heretic.TryGetRitual((uid, heretic), BladeBladeRitualTag, out var ritual))
+        if (!_heretic.TryGetRitual((mind, heretic), BladeBladeRitualTag, out var ritual))
             return false;
 
         var xformQuery = GetEntityQuery<TransformComponent>();
@@ -169,7 +182,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
             return;
 
         _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime);
-        _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage);
+        _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage, source: args.User, ignoreResist: true);
         _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
         Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);
     }
@@ -328,10 +341,10 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         }
 
         if (heretic.Comp.PathStage >= 3)
-            ApplyMark(target, path, heretic.Comp.PathStage);
+            ApplyMark(target, path, heretic.Comp.PassiveLevel);
     }
 
-    public void ApplyMark(EntityUid target, HereticPath path, int pathStage = 3)
+    public void ApplyMark(EntityUid target, HereticPath path, int passiveLevel = 1)
     {
         if (!HasComp<MobStateComponent>(target))
             return;
@@ -350,7 +363,7 @@ public abstract class SharedMansusGraspSystem : EntitySystem
 
         var cosmosMark = EnsureComp<HereticCosmicMarkComponent>(target);
         cosmosMark.CosmicDiamondUid = Spawn(cosmosMark.CosmicDiamond, Transform(target).Coordinates);
-        cosmosMark.PathStage = pathStage;
+        cosmosMark.PassiveLevel = passiveLevel;
         _transform.AttachToGridOrMap(cosmosMark.CosmicDiamondUid.Value);
         Dirty(target, cosmosMark);
     }
@@ -407,12 +420,12 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         if (!args.ClickLocation.IsValid(EntityManager))
             return;
 
-        if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(args.ClickLocation),
+        if (!_map.TryFindGridAt(_transform.ToMapCoordinates(args.ClickLocation),
                 out var gridUid,
                 out var mapGrid))
             return;
 
-        var tileRef = _mapSystem.GetTileRef(gridUid, mapGrid, args.ClickLocation);
+        var tileRef = _map.GetTileRef(gridUid, mapGrid, args.ClickLocation);
         var tileDef = (ContentTileDefinition) _tile[tileRef.Tile.TypeId];
 
         if (!_ability.CanRustTile(tileDef))
@@ -424,15 +437,85 @@ public abstract class SharedMansusGraspSystem : EntitySystem
         TouchSpell.InvokeTouchSpell(uid, args.User, TimeSpan.Zero);
     }
 
-    public void ResetRustGraspDelay(Entity<RustGraspComponent, UseDelayComponent> ent,
+    public void ResetRustGraspDelay(Entity<RustGraspComponent, UseDelayComponent, TouchSpellComponent?> ent,
         int pathStage,
         float multiplier = 1f)
     {
-        var (uid, comp, delay) = ent;
+        var (uid, comp, delay, touch) = ent;
+
+        if (!Resolve(uid, ref touch))
+            return;
+
         // Less delay the higher the path stage is
         var length = float.Lerp(comp.MaxUseDelay, comp.MinUseDelay, pathStage / 10f) * multiplier;
-        _delay.SetLength((uid, delay), TimeSpan.FromSeconds(length), comp.Delay);
+        var time = TimeSpan.FromSeconds(length);
+        _delay.SetLength((uid, delay), time, comp.Delay);
         _delay.TryResetDelay((uid, delay), false, comp.Delay);
+        _actions.SetIfBiggerCooldown(touch.Action, time);
+    }
+
+    private void OnAfterInteract(Entity<TagComponent> ent, ref AfterInteractEvent args)
+    {
+        if (!args.CanReach
+            || !args.ClickLocation.IsValid(EntityManager)
+            || !_heretic.TryGetHereticComponent(args.User, out _, out _) // not a heretic - how???
+            || HasComp<ActiveDoAfterComponent>(args.User)) // prevent rune shittery
+            return;
+
+        var runeProto = RitualAnimation;
+        float time = 14;
+
+        var canScribe = true;
+        if (TryComp(ent, out TransmutationRuneScriberComponent? scriber)) // if it is special rune scriber
+        {
+            canScribe = _toggle.IsActivated(ent.Owner);
+            runeProto = scriber.RuneDrawingEntity ?? runeProto;
+            time = scriber.Time ?? time;
+        }
+        else if (TouchSpell.FindTouchSpell(args.User, GraspWhitelist) == null || // No grasp
+                 !_tag.HasAnyTag(ent.Comp, PenTags)) // not a pen
+            return;
+
+        // remove our rune if clicked
+        if (args.Target != null && HasComp<HereticRitualRuneComponent>(args.Target))
+        {
+            args.Handled = true;
+            // todo: add more fluff
+            PredictedQueueDel(args.Target);
+            return;
+        }
+
+        if (!canScribe)
+            return;
+
+        args.Handled = true;
+
+        // spawn our rune
+        var rune = PredictedSpawnAtPosition(runeProto, args.ClickLocation);
+        _transform.AttachToGridOrMap(rune);
+        var dargs = new DoAfterArgs(EntityManager,
+            args.User,
+            time,
+            new DrawRitualRuneDoAfterEvent(GetNetEntity(rune), GetNetCoordinates(args.ClickLocation)),
+            args.User)
+        {
+            BreakOnDamage = true,
+            BreakOnHandChange = true,
+            BreakOnMove = true,
+            CancelDuplicate = false,
+            MultiplyDelay = false,
+            Broadcast = true,
+        };
+        _doAfter.TryStartDoAfter(dargs);
+    }
+
+    private void OnRitualRuneDoAfter(DrawRitualRuneDoAfterEvent ev)
+    {
+        // delete the animation rune regardless
+        PredictedQueueDel(GetEntity(ev.RitualRune));
+
+        if (!ev.Cancelled)
+            _transform.AttachToGridOrMap(PredictedSpawnAtPosition(RitualRune, GetCoordinates(ev.Coords)));
     }
 }
 

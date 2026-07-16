@@ -9,9 +9,9 @@ namespace Content.Trauma.Server.ChangeOnCool;
 
 public sealed partial class ChangeOnCoolSystem : EntitySystem
 {
-    [Dependency] private readonly EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
+    [Dependency] private EntityQuery<InternalTemperatureComponent> _internalQuery = default!;
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

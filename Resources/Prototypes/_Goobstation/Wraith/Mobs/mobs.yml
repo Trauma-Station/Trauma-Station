@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # This holds all simplemobs summoned by void portal.
 
 - type: entity
@@ -55,8 +57,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: Skeleton
+  - type: Injurable
+    damageContainer: Inorganic
   - type: NoSlip
   - type: Pullable
   - type: ZombieImmune
@@ -85,10 +88,7 @@
   - type: Vocal
     wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
     wilhelmProbability: 0.1
-    sounds:
-      Male: Skeleton
-      Female: Skeleton
-      Unsexed: Skeleton
+    emoteSounds: Skeleton
   - type: SkeletonAccent
   - type: TypingIndicator
     proto: skeleton
@@ -144,8 +144,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: NoSlip
   - type: Pullable
   - type: Speech
@@ -224,8 +225,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: HeavyArmorSyndi # Massive daamge reduction, but very low health.
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: NoSlip
   - type: Pullable
   - type: Speech
@@ -280,8 +282,9 @@
       0: Alive
       35: Dead
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Biological
   - type: MeleeWeapon
     altDisarm: false
     animation: WeaponArcBite
@@ -363,8 +366,9 @@
         layer:
           - MobLayer
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Biological
   - type: NoSlip
   - type: Pullable
   - type: Destructible
@@ -404,8 +408,9 @@
       Dead:
         Base: lion_dead
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Bingle
+  - type: Injurable
+    damageContainer: Biological
   - type: MindContainer
   - type: MindExaminable
   - type: MobState
@@ -493,8 +498,9 @@
         maxDistance: 12
         variation: 0.05
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: HeavyArmorSyndi
+  - type: Injurable
+    damageContainer: Inorganic
   - type: PointLight
     enabled: true
     color: "#790c24"
@@ -595,8 +601,9 @@
     footstepSoundCollection:
       collection: FootstepHeavySuit
   - type: Damageable
-    damageContainer: Inorganic
     damageModifierSet: HeavyArmorSyndi
+  - type: Injurable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
       - trigger:

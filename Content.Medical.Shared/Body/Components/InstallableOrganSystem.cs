@@ -8,12 +8,11 @@ using Content.Shared.Popups;
 
 namespace Content.Medical.Shared.Body;
 
-public sealed class InstallableOrganSystem : EntitySystem
+public sealed partial class InstallableOrganSystem : EntitySystem
 {
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -42,7 +41,7 @@ public sealed class InstallableOrganSystem : EntitySystem
 
         if (_body.GetOrgan(user, category) != null)
         {
-            _popup.PopupClient($"You already have a {_proto.Index(category).Name}!",
+            _popup.PopupClient($"You already have a {ProtoMan.Index(category).Name}!",
                 user, user, PopupType.SmallCaution);
             return;
         }

@@ -197,7 +197,6 @@ loadout-group-chemist-envirogloves = Chemist envirogloves
 loadout-group-head-of-security-envirohelm = Head of Security envirohelm
 loadout-group-head-of-security-envirosuit = Head of Security envirosuit
 loadout-group-head-of-security-envirogloves = Head of Security envirogloves
-loadout-group-head-of-security-gloves = Head of Security gloves
 
 # Brigmedic
 loadout-group-brigmedic-envirohelm = Brigmedic envirohelm
@@ -216,4 +215,4 @@ loadout-group-boxer-envirohelm = Boxer envirohelm
 loadout-group-boxer-envirosuit = Boxer envirosuit
 
 # Misc
-loadout-group-plasma-tank = Plasma tank
+loadout-group-plasma-tank = Phoron tank

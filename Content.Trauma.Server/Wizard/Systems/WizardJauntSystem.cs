@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Wizard.Components;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Polymorph;
 using Content.Trauma.Common.Wizard.Projectile;
+using Content.Trauma.Server.Wizard.Components;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
-namespace Content.Goobstation.Server.Wizard.Systems;
+namespace Content.Trauma.Server.Wizard.Systems;
 
-public sealed class WizardJauntSystem : EntitySystem
+public sealed partial class WizardJauntSystem : EntitySystem
 {
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     public override void Initialize()
     {

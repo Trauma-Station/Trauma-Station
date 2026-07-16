@@ -4,15 +4,12 @@ using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Trauma.Shared.DeepFryer.Components;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Trauma.Client.DeepFryer;
 
-public sealed class DeepFriedSystem : EntitySystem
+public sealed partial class DeepFriedSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly ProtoId<ShaderPrototype> ShaderName = "Fried";
     private ShaderInstance _shader = default!;
@@ -21,7 +18,7 @@ public sealed class DeepFriedSystem : EntitySystem
     {
         base.Initialize();
 
-        _shader = _protoMan.Index(ShaderName).InstanceUnique();
+        _shader = ProtoMan.Index(ShaderName).InstanceUnique();
 
         SubscribeLocalEvent<DeepFriedComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
         SubscribeLocalEvent<DeepFriedComponent, AppearanceChangeEvent>(OnAppearanceChange);

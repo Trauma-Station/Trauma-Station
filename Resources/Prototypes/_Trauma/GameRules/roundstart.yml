@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # i love this dogshit system nobody has improved for 2 years :)
 - type: entity
   parent: BaseGameRule
@@ -9,15 +11,30 @@
       prob: 0.5
     - id: Devil
       prob: 0.02
-    - id: Shadowling
+    - id: ShadowlingRoundstart
       prob: 0.02
+    - id: WraithRoundstart
+      prob: 0.1
 
 - type: entity
   parent: BaseGameRule
   id: Insurgency
   components:
   - type: GameRule
-    minPlayers: 5 # no insurgents on deadpop
+    minPlayers: 5
+  - type: NestedRule
+    rules: !type:GroupSelector
+      children:
+      - id: InsurgencyShipVariantTide
+        weight: 30
+      - id: InsurgencyShipVariantInsurgents
+        weight: 70
+
+- type: entity
+  abstract: true
+  parent: BaseRoundstartAntagRule
+  id: BaseInsurgencyRule
+  components:
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
@@ -31,22 +48,28 @@
     - Plasmaman # instantly dies
   - type: InsurgencyRule
   - type: AntagSelection
-    selectionTime: PrePlayerSpawn # need to move them to their shittle
     agentName: insurgent-round-end-agent-name
-    definitions:
-    - prefRoles: [ Insurgent ]
-      spawnerPrototype: GhostRoleSpawnerInsurgent
-      startingGear: Insurgent
-      unequipOldGear: true
-      max: 4
+    antags:
+    - !type:LinearAntagCount
+      proto: Insurgent
+      range:
+        min: 1
+        max: 4
       playerRatio: 10
-      roleLoadout:
-      - RoleSurvivalStandard
-      components:
-      - type: RandomHumanoidAppearance
-        randomizeName: true
-      mindRoles:
-      - MindRoleInsurgent
+
+- type: entity
+  parent: BaseInsurgencyRule
+  id: InsurgencyShipVariantInsurgents
+  components:
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
+
+- type: entity
+  parent: BaseInsurgencyRule
+  id: InsurgencyShipVariantTide
+  components:
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/tide_insurgents.yml
 
 - type: entity
   parent: BaseGameRule
@@ -55,58 +78,26 @@
   - type: SubGamemodes
     rules:
     - id: SubTraitor
-      prob: 0.5
+      prob: 0.2
 
 - type: entity
-  parent: BaseGameRule
-  id: HereticGamemode
-  components:
-  - type: HereticRule
-  - type: GameRule
-    minPlayers: 15
-  - type: AntagObjectives
-    objectives:
-    - HereticKnowledgeObjective
-    - HereticSacrificeObjective
-    - HereticSacrificeHeadObjective
-  - type: AntagSelection
-    selectionTime: IntraPlayerSpawn
-    agentName: heretic-roundend-name
-    definitions:
-    - prefRoles: [ Heretic ]
-      max: 6
-      playerRatio: 10
-      lateJoinAdditional: true
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleHeretic
-
-- type: entity
-  parent: BaseShadowlingRule
+  parent: [ BaseShadowlingRule, BaseRoundstartAntagRule ]
   id: ShadowlingGamemode
   components:
   - type: GameRule
     minPlayers: 30
   - type: AntagSelection
-    definitions:
-    - prefRoles: [ Shadowling ]
-      max: 3
-      playerRatio: 25
-      blacklist:
-        components:
-        - CommandStaff
-      mindRoles:
-      - MindRoleShadowling
+    antags:
+    - !type:FixedAntagCount
+      proto: Shadowling
 
 - type: entity
-  id: TraitorReinforcementNukeOps
   parent: TraitorReinforcement
+  id: TraitorReinforcementNukeOps
   components:
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect
       proto: InstallHypoportNukie
-    - !type:NestedEffect
-      proto: InstallSkillChipNukie
+    - !type:InstallOrganChip
+      chip: SkillChipNukie

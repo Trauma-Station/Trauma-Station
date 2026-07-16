@@ -25,7 +25,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbBase
+    public abstract partial class ServerDbBase // Trauma - made partial
     {
         private readonly ISawmill _opsLog;
         public event Action<DatabaseNotification>? OnNotificationReceived;
@@ -217,6 +217,7 @@ namespace Content.Server.Database
             profile.Species = humanoid.Species;
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
+            profile.Voice = humanoid.Voice.ToString();
             profile.Gender = humanoid.Gender.ToString();
             profile.EyeColor = appearance.EyeColor.ToHex();
             profile.SkinColor = appearance.SkinColor.ToHex();
@@ -615,41 +616,6 @@ namespace Content.Server.Database
                 player.LastSeenHWId);
         }
 
-        public async Task<int> GetServerCurrency(NetUserId userId) // Goobstation
-        {
-            await using var db = await GetDb();
-
-            return await db.DbContext.Player
-                .Where(dbPlayer => dbPlayer.UserId == userId)
-                .Select(dbPlayer => dbPlayer.ServerCurrency)
-                .SingleOrDefaultAsync();
-        }
-
-        public async Task SetServerCurrency(NetUserId userId, int currency) // Goobstation
-        {
-            await using var db = await GetDb();
-
-            var dbPlayer = await db.DbContext.Player.Where(dbPlayer => dbPlayer.UserId == userId).SingleOrDefaultAsync();
-            if (dbPlayer == null)
-                return;
-
-            dbPlayer.ServerCurrency = currency;
-            await db.DbContext.SaveChangesAsync();
-        }
-
-        public async Task<int> ModifyServerCurrency(NetUserId userId, int currencyDelta) // Goobstation
-        {
-            await using var db = await GetDb();
-
-            var dbPlayer = await db.DbContext.Player.Where(dbPlayer => dbPlayer.UserId == userId).SingleOrDefaultAsync();
-            if (dbPlayer == null)
-                return currencyDelta;
-
-            dbPlayer.ServerCurrency += currencyDelta;
-            await db.DbContext.SaveChangesAsync();
-            return dbPlayer.ServerCurrency;
-        }
-
         #endregion
 
         #region Connection Logs
@@ -913,7 +879,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                     if (attempt >= maxRetryAttempts)
                     {
                         _opsLog.Error($"Max retry attempts reached. Failed to save {logs.Count} admin logs.");
-                        return;
+                        throw;
                     }
 
                     _opsLog.Warning($"Retrying in {retryDelay.TotalSeconds} seconds...");
@@ -1293,24 +1259,37 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         public async Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player)
         {
-            await using var db = await GetDb();
-            List<IAdminRemarksRecord> notes = new();
-            notes.AddRange(
-                (await (from note in db.DbContext.AdminNotes
-                        where note.PlayerUserId == player &&
-                              !note.Deleted &&
-                              (note.ExpirationTime == null || DateTime.UtcNow < note.ExpirationTime)
-                        select note)
-                    .Include(note => note.Round)
-                    .ThenInclude(r => r!.Server)
-                    .Include(note => note.CreatedBy)
-                    .Include(note => note.LastEditedBy)
-                    .Include(note => note.Player)
-                    .ToListAsync()).Select(MakeAdminNoteRecord));
-            notes.AddRange(await GetActiveWatchlistsImpl(db, player));
-            notes.AddRange(await GetMessagesImpl(db, player));
-            notes.AddRange(await GetBansAsNotesForUser(db, player));
-            return notes;
+            return await ParallelCollect<IAdminRemarksRecord>(
+                async () =>
+                {
+                    await using var db = await GetDb();
+                    return (await (from note in db.DbContext.AdminNotes
+                            where note.PlayerUserId == player &&
+                                  !note.Deleted &&
+                                  (note.ExpirationTime == null || DateTime.UtcNow < note.ExpirationTime)
+                            select note)
+                        .Include(note => note.Round)
+                        .ThenInclude(r => r!.Server)
+                        .Include(note => note.CreatedBy)
+                        .Include(note => note.LastEditedBy)
+                        .Include(note => note.Player)
+                        .ToListAsync()).Select(MakeAdminNoteRecord);
+                },
+                async () =>
+                {
+                    await using var db = await GetDb();
+                    return await GetActiveWatchlistsImpl(db, player);
+                },
+                async () =>
+                {
+                    await using var db = await GetDb();
+                    return await GetMessagesImpl(db, player);
+                },
+                async () =>
+                {
+                    await using var db = await GetDb();
+                    return await GetBansAsNotesForUser(db, player);
+                });
         }
         public async Task EditAdminNote(int id, string message, NoteSeverity severity, bool secret, Guid editedBy, DateTimeOffset editedAt, DateTimeOffset? expiryTime)
         {
@@ -1612,134 +1591,6 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
-        #region RMC14
-
-        public async Task<Guid?> GetLinkingCode(Guid player)
-        {
-            await using var db = await GetDb();
-            var linking = await db.DbContext.RMCLinkingCodes.FirstOrDefaultAsync(l => l.PlayerId == player);
-            return linking?.Code;
-        }
-
-        public async Task SetLinkingCode(Guid player, Guid code)
-        {
-            await using var db = await GetDb();
-            var linking = await db.DbContext.RMCLinkingCodes.FirstOrDefaultAsync(l => l.PlayerId == player);
-            if (linking == null)
-            {
-                linking = new RMCLinkingCodes { PlayerId = player };
-                db.DbContext.RMCLinkingCodes.Add(linking);
-            }
-
-            linking.Code = code;
-            linking.CreationTime = DateTime.UtcNow;
-            await db.DbContext.SaveChangesAsync();
-        }
-
-        public async Task<bool> HasLinkedAccount(Guid player, CancellationToken cancel)
-        {
-            await using var db = await GetDb(cancel);
-            return await db.DbContext.RMCLinkedAccounts.AnyAsync(l => l.PlayerId == player, cancel);
-
-        }
-
-        public async Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel)
-        {
-            await using var db = await GetDb(cancel);
-            var patron = await db.DbContext.RMCPatrons
-                .Include(p => p.Tier)
-                .Include(p => p.LobbyMessage)
-                .Include(p => p.RoundEndNTShoutout)
-                .FirstOrDefaultAsync(p => p.PlayerId == player, cancellationToken: cancel);
-            return patron;
-        }
-
-        public async Task<List<RMCPatron>> GetAllPatrons()
-        {
-            await using var db = await GetDb();
-            return await db.DbContext.RMCPatrons
-                .Include(p => p.Player)
-                .Include(p => p.Tier)
-                .ToListAsync();
-        }
-
-        public async Task SetGhostColor(Guid player, System.Drawing.Color? color)
-        {
-            await using var db = await GetDb();
-            var patron = await db.DbContext.RMCPatrons.FirstOrDefaultAsync(p => p.PlayerId == player);
-            if (patron == null)
-                return;
-
-            patron.GhostColor = color?.ToArgb();
-            await db.DbContext.SaveChangesAsync();
-        }
-
-        public async Task SetLobbyMessage(Guid player, string message)
-        {
-            await using var db = await GetDb();
-            var msg = await db.DbContext.RMCPatronLobbyMessages
-                .Include(l => l.Patron)
-                .FirstOrDefaultAsync(p => p.PatronId == player);
-            msg ??= db.DbContext.RMCPatronLobbyMessages
-                .Add(new RMCPatronLobbyMessage
-                {
-                    PatronId = player,
-                    Message = message,
-                })
-                .Entity;
-            msg.Message = message;
-
-            await db.DbContext.SaveChangesAsync();
-        }
-
-        public async Task SetNTShoutout(Guid player, string name)
-        {
-            await using var db = await GetDb();
-            var msg = await db.DbContext.RMCPatronRoundEndNTShoutouts
-                .Include(s => s.Patron)
-                .FirstOrDefaultAsync(p => p.PatronId == player);
-            msg ??= db.DbContext.RMCPatronRoundEndNTShoutouts
-                .Add(new RMCPatronRoundEndNTShoutout()
-                {
-                    PatronId = player,
-                    Name = name,
-                })
-                .Entity;
-            msg.Name = name;
-
-            await db.DbContext.SaveChangesAsync();
-        }
-
-        public async Task<List<(string Message, string User)>> GetLobbyMessages()
-        {
-            await using var db = await GetDb();
-            var messages = await db.DbContext.RMCPatronLobbyMessages
-                .Include(p => p.Patron)
-                .ThenInclude(p => p.Player)
-                .Where(p => p.Patron.Tier.LobbyMessage)
-                .Where(p => !string.IsNullOrWhiteSpace(p.Message))
-                .Select(p => new { p.Message, p.Patron.Player.LastSeenUserName })
-                .Select(p => new ValueTuple<string, string>(p.Message, p.LastSeenUserName))
-                .ToListAsync();
-
-            return messages;
-        }
-
-        public async Task<List<string>> GetShoutouts()
-        {
-            await using var db = await GetDb();
-            var ntNames = await db.DbContext.RMCPatronRoundEndNTShoutouts
-                .Include(p => p.Patron)
-                .Where(p => p.Patron.Tier.RoundEndShoutout)
-                .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
-                .ToListAsync();
-
-            return ntNames;
-        }
-
-        #endregion
-
         # region IPIntel
 
         public async Task<bool> UpsertIPIntelCache(DateTime time, IPAddress ip, float score)
@@ -1807,166 +1658,64 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
-        #region Goob Polls
+        #region Custom vote logging
 
-        public async Task<int> CreatePollAsync(Poll poll)
+        public async Task<int> CustomVoteLogAdd(
+            string title,
+            int roundId,
+            Guid? initiator,
+            ImmutableArray<string> options)
         {
             await using var db = await GetDb();
-            db.DbContext.Polls.Add(poll);
-            await db.DbContext.SaveChangesAsync();
-            return poll.Id;
-        }
 
-        public async Task<Poll?> GetPollAsync(int pollId, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            return await db.DbContext.Polls
-                .Include(p => p.Options)
-                .Include(p => p.Votes)
-                .Include(p => p.CreatedBy)
-                .AsSplitQuery()
-                .SingleOrDefaultAsync(p => p.Id == pollId, cancel);
-        }
-
-        public async Task<List<Poll>> GetActivePollsAsync(CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            return await db.DbContext.Polls
-                .Include(p => p.Options)
-                .Include(p => p.CreatedBy)
-                .AsSplitQuery()
-                .Where(p => p.Active && (p.EndTime == null || p.EndTime > DateTime.UtcNow))
-                .OrderByDescending(p => p.StartTime)
-                .ToListAsync(cancel);
-        }
-
-        public async Task<List<Poll>> GetAllPollsAsync(bool includeInactive = true, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            var query = db.DbContext.Polls
-                .Include(p => p.Options)
-                .Include(p => p.CreatedBy)
-                .AsSplitQuery();
-
-            if (!includeInactive)
-                query = query.Where(p => p.Active);
-
-            return await query.OrderByDescending(p => p.StartTime).ToListAsync(cancel);
-        }
-
-        public async Task UpdatePollStatusAsync(int pollId, bool active, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            var poll = await db.DbContext.Polls.SingleOrDefaultAsync(p => p.Id == pollId, cancel);
-            if (poll == null)
-                return;
-
-            poll.Active = active;
-            await db.DbContext.SaveChangesAsync(cancel);
-        }
-
-        public async Task<bool> AddPollVoteAsync(int pollId, int optionId, NetUserId userId, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            var poll = await db.DbContext.Polls
-                .Include(p => p.Options)
-                .SingleOrDefaultAsync(p => p.Id == pollId, cancel);
-
-            if (poll?.Active != true)
-                return false;
-
-            if (poll.EndTime < DateTime.UtcNow)
-                return false;
-
-            if (!poll.Options.Any(o => o.Id == optionId))
-                return false;
-
-            var existingVote = await db.DbContext.PollVotes
-                .AnyAsync(v => v.PollId == pollId && v.PollOptionId == optionId && v.PlayerUserId == userId.UserId, cancel);
-
-            if (existingVote)
-                return false;
-
-            if (!poll.AllowMultipleChoices)
+            var log = new CustomVoteLog
             {
-                var existingVotes = await db.DbContext.PollVotes
-                    .Where(v => v.PollId == pollId && v.PlayerUserId == userId.UserId)
-                    .ToListAsync(cancel);
-
-                db.DbContext.PollVotes.RemoveRange(existingVotes);
-            }
-
-            var vote = new PollVote
-            {
-                PollId = pollId,
-                PollOptionId = optionId,
-                PlayerUserId = userId.UserId,
-                VotedAt = DateTime.UtcNow
+                Title = title,
+                RoundId = roundId,
+                InitiatorId = initiator,
+                State = CustomVoteState.Active,
+                TimeCreated = DateTime.UtcNow,
+                Options = options.Select((o, i) => new CustomVoteLogOption
+                    {
+                        Text = o,
+                        OptionIdx = (short)i,
+                        VoteCount = 0,
+                    })
+                    .ToList(),
             };
 
-            db.DbContext.PollVotes.Add(vote);
-            await db.DbContext.SaveChangesAsync(cancel);
-            return true;
+            db.DbContext.CustomVoteLog.Add(log);
+            await db.DbContext.SaveChangesAsync();
+
+            return log.Id;
         }
 
-        public async Task<bool> RemovePollVoteAsync(int pollId, int optionId, NetUserId userId, CancellationToken cancel = default)
+        public async Task CustomVoteLogFinish(int voteId, ImmutableArray<int> voteCounts)
         {
-            await using var db = await GetDb(cancel);
+            await using var db = await GetDb();
 
-            var vote = await db.DbContext.PollVotes
-                .FirstOrDefaultAsync(v => v.PollId == pollId && v.PollOptionId == optionId && v.PlayerUserId == userId.UserId, cancel);
+            var log = await db.DbContext.CustomVoteLog
+                .Include(cvl => cvl.Options)
+                .SingleAsync(v => v.Id == voteId);
 
-            if (vote == null)
-                return false;
+            log.State = CustomVoteState.Finished;
 
-            db.DbContext.PollVotes.Remove(vote);
-            await db.DbContext.SaveChangesAsync(cancel);
-            return true;
+            for (var i = 0; i < log.Options!.Count; i++)
+            {
+                log.Options[i].VoteCount = voteCounts[i];
+            }
+
+            await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<PollVote>> GetPollVotesAsync(int pollId, CancellationToken cancel = default)
+        public async Task CustomVoteLogCancel(int voteId)
         {
-            await using var db = await GetDb(cancel);
+            await using var db = await GetDb();
 
-            return await db.DbContext.PollVotes
-                .Include(v => v.Player)
-                .Include(v => v.PollOption)
-                .Where(v => v.PollId == pollId)
-                .ToListAsync(cancel);
-        }
+            var log = await db.DbContext.CustomVoteLog.SingleAsync(v => v.Id == voteId);
+            log.State = CustomVoteState.Cancelled;
 
-        public async Task<List<PollVote>> GetPlayerVotesAsync(int pollId, NetUserId userId, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            return await db.DbContext.PollVotes
-                .Include(v => v.PollOption)
-                .Where(v => v.PollId == pollId && v.PlayerUserId == userId.UserId)
-                .ToListAsync(cancel);
-        }
-
-        public async Task<bool> HasPlayerVotedAsync(int pollId, NetUserId userId, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            return await db.DbContext.PollVotes
-                .AnyAsync(v => v.PollId == pollId && v.PlayerUserId == userId.UserId, cancel);
-        }
-
-        public async Task<Dictionary<int, int>> GetPollResultsAsync(int pollId, CancellationToken cancel = default)
-        {
-            await using var db = await GetDb(cancel);
-
-            return await db.DbContext.PollVotes
-                .Where(v => v.PollId == pollId)
-                .GroupBy(v => v.PollOptionId)
-                .Select(g => new { OptionId = g.Key, Count = g.Count() })
-                .ToDictionaryAsync(x => x.OptionId, x => x.Count, cancel);
+            await db.DbContext.SaveChangesAsync();
         }
 
         #endregion
@@ -2027,6 +1776,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             }
 
             return [..results];
+        }
+
+        private static async Task<List<T>> ParallelCollect<T>(params IEnumerable<Func<Task<IEnumerable<T>>>> tasks)
+        {
+            var taskInstances = tasks.Select(a => a());
+            var results = await Task.WhenAll(taskInstances);
+            return results.SelectMany(x => x).ToList();
         }
     }
 }

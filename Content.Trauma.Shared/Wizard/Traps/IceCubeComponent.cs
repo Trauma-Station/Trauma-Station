@@ -7,7 +7,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.Wizard.Traps;
 
@@ -42,10 +41,7 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
     public float TemperaturePerHeatDamageIncrease = 5f;
 
     [DataField]
-    public float SustainedDamageMeltProbabilityMultiplier = 4f;
-
-    [DataField]
-    public float StaminaDamageMeltProbabilityMultiplier = 5f;
+    public float SustainedDamageMeltProbabilityMultiplier = 3f;
 
     [DataField]
     public float DamageMeltProbabilityThreshold = 60f;
@@ -60,7 +56,7 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
     public int CollisionLayer = (int) CollisionGroup.WallLayer;
 
     [DataField]
-    public TimeSpan BreakFreeDelay = TimeSpan.FromSeconds(10);
+    public TimeSpan BreakFreeDelay = TimeSpan.FromSeconds(15);
 
     [DataField]
     public DamageModifierSet DamageReduction = new()
@@ -70,6 +66,7 @@ public sealed partial class IceCubeComponent : BaseSpriteOverlayComponent
             { "Blunt", 0.35f },
             { "Slash", 0.35f },
             { "Piercing", 0.35f },
+            { "Ballistic", 0.35f },
         },
     };
 

@@ -7,12 +7,11 @@ using Robust.Shared.Random;                     //skill issue.
 // todo: clean these usings
 namespace Content.Goobstation.Server.NTR.Documents
 {
-    public sealed class RandomDocumentSystem : EntitySystem
+    public sealed partial class RandomDocumentSystem : EntitySystem
     {
-        [Dependency] private readonly ILocalizationManager _loc = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly PaperSystem _paper = default!;
-        [Dependency] private readonly IPrototypeManager _proto = default!;
+        [Dependency] private ILocalizationManager _loc = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private PaperSystem _paper = default!;
 
         public override void Initialize()
         {
@@ -29,7 +28,7 @@ namespace Content.Goobstation.Server.NTR.Documents
         private string GenerateDocument(ProtoId<DocumentTypePrototype> docType)
         {
             if (string.IsNullOrEmpty(docType.Id) // i hate this
-                || !_proto.TryIndex(docType, out var docProto))
+                || !ProtoMan.TryIndex(docType, out var docProto))
                 return string.Empty;
 
             var curDate = DateTime.Now.AddYears(1000);

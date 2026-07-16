@@ -20,18 +20,18 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 
-public sealed class AbsorbCorpseSystem : EntitySystem
+public sealed partial class AbsorbCorpseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly WraithPointsSystem _wraithPoints = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private WraithPointsSystem _wraithPoints = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedRottingSystem _rotting = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
     private EntityQuery<WraithAbsorbableComponent> _absorbableQuery;
 

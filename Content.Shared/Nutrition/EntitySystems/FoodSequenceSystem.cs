@@ -19,17 +19,16 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
-public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Trauma - made partial
+public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly IngestionSystem _ingestion = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private IngestionSystem _ingestion = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tag = default!;
 
     public override void Initialize()
     {
@@ -64,7 +63,7 @@ public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Tra
         if (!TryComp<FoodSequenceStartPointComponent>(args.Start, out var start))
             return;
 
-        if (!_proto.Resolve(args.Proto, out var elementProto))
+        if (!ProtoMan.Resolve(args.Proto, out var elementProto))
             return;
 
         if (!ent.Comp.OnlyFinal || elementProto.Final || start.FoodLayers.Count == start.MaxLayers)
@@ -76,7 +75,7 @@ public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Tra
     private bool TryMetamorph(Entity<FoodSequenceStartPointComponent> start)
     {
         List<MetamorphRecipePrototype> availableRecipes = new();
-        foreach (var recipe in _proto.EnumeratePrototypes<MetamorphRecipePrototype>())
+        foreach (var recipe in ProtoMan.EnumeratePrototypes<MetamorphRecipePrototype>())
         {
             if (recipe.Key != start.Comp.Key)
                 continue;
@@ -84,7 +83,7 @@ public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Tra
             bool allowed = true;
             foreach (var rule in recipe.Rules)
             {
-                if (!rule.Check(_proto, EntityManager, start, start.Comp.FoodLayers))
+                if (!rule.Check(ProtoMan, EntityManager, start, start.Comp.FoodLayers))
                 {
                     allowed = false;
                     break;
@@ -153,7 +152,7 @@ public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Tra
         }
         // </Trauma>
 
-        if (!_proto.Resolve(elementProto, out var elementIndexed))
+        if (!ProtoMan.Resolve(elementProto, out var elementIndexed))
             return false;
 
         //if we run out of space, we can still put in one last, final finishing element.
@@ -223,7 +222,7 @@ public sealed partial class FoodSequenceSystem : SharedFoodSequenceSystem // Tra
         var nameCounter = 1;
         foreach (var proto in existedContentNames)
         {
-            if (!_proto.Resolve(proto, out var protoIndexed))
+            if (!ProtoMan.Resolve(proto, out var protoIndexed))
                 continue;
 
             if (protoIndexed.Name is null)

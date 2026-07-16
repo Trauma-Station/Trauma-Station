@@ -1,12 +1,3 @@
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-# SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
-#
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
@@ -15,6 +6,8 @@
   id: Justice
   description: An expensive & self-recharging energy sword, designed specifically for the Head of Security. If it were not for injustice, man would not know justice.
   components:
+  - type: WeaponClass
+    class: NonLethal # it can be...
   - type: Item
     sprite: _Goobstation/Objects/Weapons/Melee/justice.rsi
     size: Ginormous # Use your sheath.
@@ -43,6 +36,9 @@
     - Security
     - Antagonists
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Execution
     doAfterDuration: 4.0
   - type: MeleeWeapon
@@ -57,10 +53,6 @@
       path: /Audio/Weapons/bladeslice.ogg
     angle: 60
     animation: WeaponArcThrust
-  - type: Parry
-    maxParries: 3
-    maxReflects: 0
-    parryMinSkill: 30
   - type: GhostRole
     name: justice-role-name
     description: justice-role-description
@@ -103,8 +95,6 @@
             path: /Audio/Weapons/bladeslice.ogg
           angle: 60
           animation: WeaponArcThrust
-        - type: Parry
-          maxReflects: 0
 
       stun: !type:ItemSwitchState
         verb: stun
@@ -123,8 +113,6 @@
           animation: WeaponArcThrust
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
-        - type: Parry
-          maxReflects: 2
         - type: StaminaDamageOnHit
           damage: 25
           overtime: 10
@@ -151,8 +139,6 @@
           animation: WeaponArcThrust
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
-        - type: Parry
-          maxReflects: 2
         soundStateActivate:
           collection: sparks
           params:
@@ -178,8 +164,6 @@
           animation: WeaponArcThrust
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
-        - type: Parry
-          maxReflects: 2
         soundStateActivate:
           collection: sparks
           params:
@@ -212,8 +196,6 @@
               Heat: 25
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
-        - type: Parry
-          maxReflects: 2
         soundStateActivate:
           collection: sparks
           params:

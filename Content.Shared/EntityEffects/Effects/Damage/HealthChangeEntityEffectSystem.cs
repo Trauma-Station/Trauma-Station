@@ -22,7 +22,7 @@ namespace Content.Shared.EntityEffects.Effects.Damage;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<DamageableComponent, HealthChange>
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     protected override void Effect(Entity<DamageableComponent> entity, ref EntityEffectEvent<HealthChange> args)
     {
@@ -64,10 +64,13 @@ public sealed partial class HealthChange : EntityEffectBase<HealthChange>
     [DataField(required: true)]
     public DamageSpecifier Damage = default!;
 
+    /// <summary>
+    /// Should this effect ignore damage resistances?
+    /// </summary>
     [DataField]
     public bool IgnoreResistances = true;
 
-    // <Shitmed>
+    // <Trauma>
     /// <summary>
     /// How to scale the effect based on the temperature of the target entity.
     /// </summary>

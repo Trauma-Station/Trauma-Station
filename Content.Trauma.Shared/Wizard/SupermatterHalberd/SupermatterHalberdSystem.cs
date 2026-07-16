@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -13,14 +12,14 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.Wizard.SupermatterHalberd;
 
-public sealed class SupermatterHalberdSystem : EntitySystem
+public sealed partial class SupermatterHalberdSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RaysSystem _rays = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private RaysSystem _rays = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -99,11 +98,15 @@ public sealed class SupermatterHalberdSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed partial class SmHalberdExecuteDoAfterEvent(NetEntity? rayEffect) : DoAfterEvent
+public sealed partial class SmHalberdExecuteDoAfterEvent : DoAfterEvent
 {
-    public NetEntity? RayEffect = rayEffect;
+    public NetEntity? RayEffect;
 
-    public SmHalberdExecuteDoAfterEvent() : this(null) { }
+    public SmHalberdExecuteDoAfterEvent(NetEntity? rayEffect = null)
+    {
+        RayEffect = rayEffect;
+    }
+    public SmHalberdExecuteDoAfterEvent(SmHalberdExecuteDoAfterEvent other) : this(other.RayEffect) { }
 
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => new SmHalberdExecuteDoAfterEvent(this);
 }
