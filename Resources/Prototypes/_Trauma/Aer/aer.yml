@@ -8,6 +8,7 @@
   - type: AnomalousEntity
     researchPerSecond: 1000
     contained: false
+  - type: AerMobActive
 
 - type: entity
   parent: SoapHomemadeBanana

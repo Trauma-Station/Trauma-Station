@@ -356,6 +356,7 @@
     researchOnBehaviour: 100000
     idGear: SoapHomemadeBanana
   - type: AerHorse
+  - type: AerMobActive
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat]
