@@ -16,8 +16,6 @@
       - Abductor
   - type: Emagged # so cargo orders aren't announced and can bypass alert levels
     emagType: All
-  - type: GlueImmune # magic
-  - type: LubeImmune
   # </Trauma>
   - type: ContentEye
     maxZoom: 8.916104, 8.916104
@@ -126,6 +124,8 @@
   - type: BypassInteractionChecks
   - type: ExplosionResistance
     damageCoefficient: 0
+  - type: GluedImmune
+  - type: LubedImmune
 
 - type: entity
   abstract: true
