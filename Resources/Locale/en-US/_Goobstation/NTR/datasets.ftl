@@ -151,7 +151,7 @@ ntr-document-funny-cargo1-1 = Cargo is meant to keep the station supplied with e
 ntr-document-funny-cargo1-2 = It has come to corporate's attention that cargo techs are [bold]running an unlicensed betting ring[/bold] and salvagers are [bold]bringing home artifacts that may or may not be cursed[/bold]. This document serves as a friendly reminder that cargo's job is to supply the station, not prepare for intergalactic warfare or an underground rebellion.
 ntr-document-funny-cargo1-3 = Cargo is a department dedicated to [bold]station operations[/bold], not [bold]funding personal projects or fueling suspicious market trends[/bold].
 ntr-document-funny-cargo1-4 = Our [bold]private investigation team[/bold] has found that one of cargo's salvagers did a really good job with finding enemy outposts on lavaland. Our [bold]secret service team[/bold] has already taken care of that.
-ntr-document-funny-cargo1-5 = The Quartermaster has threatened to 'touch the interns' if RD doesn't get to the front fast enough. Corporate is horrified to know this and advises you to not share this information and just [bold]live with it.[/bold]
+ntr-document-funny-cargo1-5 = The Quartermaster has threatened to 'punch the interns' if RD doesn't get to the front fast enough. Corporate is horrified to know this and advises you to remind them of company HR guidelines.
 
 # funny verbs CARGO 2
 ntr-document-funny-cargo2-1 = If cargo continues prioritizing "Plushie lizard crate" shipments over materials for the research department, we'll have their quartermaster's office [bold]filled to the brim with unpaid invoices and possibly death threats.[/bold]
@@ -192,7 +192,7 @@ ntr-document-funny-med2-8 = one of your chemists set a world record of producing
 
 # funny verbs MEDICAL 3
 ntr-document-funny-med3-1 = If chemistry keeps producing [bold]industrial quantities of methamphetamine[/bold], all future chemical shipments will be replaced with [bold]holy water[/bold], because this is not how god intended the use of chems.
-ntr-document-funny-med3-2 = Because of everything above, surgeons are no longer allowed to [bold]lobotomize[/bold] patients without their consent. (unless it's a felinid)
+ntr-document-funny-med3-2 = Because of everything above, surgeons are no longer allowed to [bold]lobotomize[/bold] patients without their consent.
 ntr-document-funny-med3-3 = Any doctor caught [bold]accidentally eating a patient's brain[/bold] will be forced to [bold]write a formal apology letter to the family of the person whose brain he ate.[/bold]
 ntr-document-funny-med3-4 = If anyone renames leporazine into "UwU coldies meowies", they will be [bold]force-fed 50u of razorium, no questions asked.[/bold]
 ntr-document-funny-med3-5 = Because of that, chemists who insist on making 8 gallons of space drugs will be required to [bold]personally consume every single jug of those narcotics[/bold] in public.
@@ -204,7 +204,7 @@ ntr-document-funny-med4-2 = acknowledge the fact that [bold]there is nothing goi
 ntr-document-funny-med4-3 = swear that nobody [bold]is currently high on their own supply.[/bold]
 ntr-document-funny-med4-4 = agree that overdosing [bold]is only funny the first three times.[/bold]
 ntr-document-funny-med4-5 = promise that [bold]no brains will be "accidentally" consumed today.[/bold]
-ntr-document-funny-med4-6 = swear that you would go [bold]kill yourself.[/bold]
+ntr-document-funny-med4-6 = swear that you will only [bold]'accidentally' malpractice twice this shift[/bold]
 ntr-document-funny-med4-7 = declare that patient survival [bold]is now at an all-time high of 50%[/bold].
 ntr-document-funny-med4-8 = solemnly swear that the [bold]cloning process will not be used for pranks.[/bold]
 ntr-document-funny-med4-9 = officially agree that [bold]cryo is working fine and there is absolutely nothing wrong with it.[/bold]
@@ -259,7 +259,7 @@ ntr-document-funny-engi4-10 = solemnly swear that [bold]at least one containment
 ntr-document-funny-sci1-1 = It seems that every scientific breakthough is followed by at least [bold]one[/bold] catastrophic incident, including
 ntr-document-funny-sci1-2 = It seems that R&D is pushing the boundaries of what can legally be called "progress", recent events include
 ntr-document-funny-sci1-3 = Upon review, it has been discovered, that anomalies are being stored inside [bold]living people[/bold], and recent events include
-ntr-document-funny-sci1-4 = Despite having an enitre department dedicated to tech advancement, [bold]most of the breakthoughs appear to be either accidental or morally questionable.[/bold] examples include
+ntr-document-funny-sci1-4 = Despite having an entire department dedicated to tech advancement, [bold]most of the breakthoughs appear to be either accidental or morally questionable.[/bold] examples include
 ntr-document-funny-sci1-5 = It appears that instead of solving existing problems, R&D has been creating entirely new and significanlty worse ones, examples include
 ntr-document-funny-sci1-6 = Scientific innovation is encouraged, but many recent developments pose a direct threat to the station, its crew, and some fundamental laws of physics, including
 ntr-document-funny-sci1-7 = But it appears that instead of improving the station, most research project have resulted in chaos, notable examples include
@@ -301,6 +301,6 @@ ntr-document-funny-sci4-2 = that you will not resign.
 ntr-document-funny-sci4-3 = that there is nothing to worry about.
 ntr-document-funny-sci4-4 = that you are granting permission to examine your body when you are dead.
 ntr-document-funny-sci4-5 = that the AI has not malfunctioned.
-ntr-document-funny-sci4-6 = that bong bing bung being bing boongl
+ntr-document-funny-sci4-6 = that //REDACTED//
 ntr-document-funny-sci4-7 = that sci is not doing arms race with sec.
 ntr-document-funny-sci4-8 = that all discoveries are less likely to cause panic than excitement.
