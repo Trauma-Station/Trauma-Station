@@ -5,7 +5,7 @@
   - type: AlertLevelLocking
     requiredLevel: blue
     lockedLevel: red
-    lockTime: 5m # if you change this update the alert levels guidebook too
+    lockTime: 1m # if you change this update the alert levels guidebook too
 
 - type: entity
   abstract: true

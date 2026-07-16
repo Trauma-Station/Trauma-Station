@@ -401,7 +401,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
             ChemicalReactionSystem.FullyReactSolution(solution, mixerComponent);
 
         var overflow = solution.Comp.Solution.Volume - solution.Comp.Solution.MaxVolume;
-        if (overflow > FixedPoint2.Zero)
+        if (overflow > FixedPoint2.Zero && !solution.Comp.Solution.UnlimitedVolume)
         {
             var split = solution.Comp.Solution.SplitSolution(overflow);
             var overflowEv = new SolutionOverflowEvent(split);

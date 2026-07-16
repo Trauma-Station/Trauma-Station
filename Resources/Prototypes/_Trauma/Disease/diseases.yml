@@ -10,7 +10,9 @@
     diseaseType: Parasite
     genotype: 7361
     infectionRate: 0.05
-    immunityGainRate: 0.5
+    immunityGainRate: 5 # Ronstation - was 0.5
+    # Even though we've made it so that LabGrownNutriment has 0 probability of giving people parasites
+    # in case it does happen or if we wanna try it again, I'm increasing the immunity gain rate by a lot
     mutationRate: 0
     effects:
       DiseaseBehaviorSluggish: 1
