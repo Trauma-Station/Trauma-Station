@@ -1,26 +1,33 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
+using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Tackle;
 
 /// <summary>
 /// Added to special equipment or mobs to allow tackles
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TackleModifierComponent : Component
 {
     /// <summary>
     /// Multiplier to tackle throw speed
     /// </summary>
-    [DataField]
-    public float SpeedMultiplier = 1f;
+    [DataField, AutoNetworkedField]
+    public float SpeedMultiplier = 1.5f;
 
     /// <summary>
     /// Multiplier to tackle throw range
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float RangeMultiplier = 1f;
+
+    /// <summary>
+    /// Multiplier to tackle cooldown
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CooldownMultiplier = 1f;
 
     /// <summary>
     /// Multiplier to knockdown time when performing tackle
@@ -89,6 +96,12 @@ public sealed partial class TackleModifierComponent : Component
     };
 
     /// <summary>
+    /// Will this even collide and cause knockdown/stamina/damage on user or target?
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AllowCollision = true;
+
+    /// <summary>
     /// Base time the user will be knocked on tackle collision
     /// </summary>
     [DataField]
@@ -105,4 +118,10 @@ public sealed partial class TackleModifierComponent : Component
     /// </summary>
     [DataField]
     public float BaseTargetKnockdownTime = 2f;
+
+    /// <summary>
+    /// Effects applied to user when tackling
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<EntityEffectPrototype>? UserEffect;
 }

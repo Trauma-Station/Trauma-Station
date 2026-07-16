@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reaction
+  id: Dewormer
+  reactants:
+    Immurin:
+      amount: 2
+    SodiumHydroxide:
+      amount: 1
+    TableSalt:
+      amount: 1
+  products:
+    Dewormer: 5

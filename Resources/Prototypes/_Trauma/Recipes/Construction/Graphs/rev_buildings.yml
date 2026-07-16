@@ -146,7 +146,7 @@
         amount: 10
       - tool: Anchoring
         doAfter: 1
-    - to: plasma foundry # CE exclusive
+    - to: phoron foundry # CE exclusive
       steps:
       - material: RevGunParts
       - tool: Screwing
@@ -250,7 +250,7 @@
     entity: RevUniformPrinter
   - node: tech analyzer
     entity: RevTechAnalyzer
-  - node: plasma foundry
+  - node: phoron foundry
     entity: RevPlasmaFoundry
   - node: hidden medifab
     entity: RevMedFab

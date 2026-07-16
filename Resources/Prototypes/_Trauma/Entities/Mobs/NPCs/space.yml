@@ -101,11 +101,11 @@
         Base: krait_dead
 
 - type: entity
-  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  abstract: true
+  parent: [ AppearanceCarp, SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobNightVision, BaseSlicingRefinable ]
   id: BaseMobArcher
   name: archer fish
   description: It's an archer fish.
-  abstract: true
   components:
   - type: WeatherImmune
   - type: InputMover
@@ -170,8 +170,8 @@
         Base: archer
       Dead:
         Base: archer_dead
-  - type: Butcherable
-    spawned:
+  - type: ToolRefinable
+    refineResult:
     - id: FoodMeatFish
       amount: 2
   - type: TypingIndicator
@@ -194,10 +194,6 @@
     interactFailureString: petting-failure-generic
     interactFailureSound:
       path: /Audio/Effects/bite.ogg
-  - type: NightVision
-    color: "#808080"
-    activateSound: null
-    deactivateSound: null
   - type: VentCrawler
   - type: Fauna
 

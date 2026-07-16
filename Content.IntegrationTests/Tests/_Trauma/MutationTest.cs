@@ -92,7 +92,9 @@ public sealed class MutationTest : GameTest
             genome.ScanGenome(dorf);
             var started = entMan.GetComponent<ScannedGenomeComponent>(dorf).Sequences.Count;
 
-            // dwarf must start with dwarfism
+            // give the dwarf dwarfism
+            Assert.That(mutation.AddMutation(dorf, TestMutation),
+                $"Failed to give {entMan.ToPrettyString(dorf)} {TestMutation}!");
             Assert.That(mutation.HasMutation(dorf, TestMutation),
                 $"{TestMutation} was not present in {entMan.ToPrettyString(dorf)}!");
 

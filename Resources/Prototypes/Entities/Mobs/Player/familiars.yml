@@ -4,6 +4,14 @@
   id: MobBatRemilia
   description: The chaplain's familiar. Likes fruit.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Mouse
+    understands:
+    - Mouse
+    - TauCetiBasic
+  # </Trauma>
   - type: GhostRole
     makeSentient: true
     allowMovement: true
@@ -32,12 +40,6 @@
     - PetsNT
   - type: Alerts
   - type: Familiar
-  - type: LanguageSpeaker
-    speaks:
-    - Mouse
-    understands:
-    - Mouse
-    - TauCetiBasic
 
 - type: entity
   name: Cerberus
@@ -45,6 +47,14 @@
   id: MobCorgiCerberus
   description: This pupper is not wholesome.
   components:
+  # <Trauma>
+  - type: LanguageSpeaker
+    speaks:
+    - Dog
+    understands:
+    - Dog
+    - TauCetiBasic
+  # </Trauma>
   - type: GhostRole
     makeSentient: true
     allowMovement: true
@@ -96,13 +106,4 @@
   - type: MindExaminable
   - type: Familiar
   - type: Vocal
-    sounds:
-      Male: Cerberus
-      Female: Cerberus
-      Unsexed: Cerberus
-  - type: LanguageSpeaker
-    speaks:
-    - Dog
-    understands:
-    - Dog
-    - TauCetiBasic
+    emoteSounds: Cerberus

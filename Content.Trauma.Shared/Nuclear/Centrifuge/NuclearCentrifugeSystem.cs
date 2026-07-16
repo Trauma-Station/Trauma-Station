@@ -60,7 +60,7 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
             }
             Dirty(uid, comp);
 
-            RemCompDeferred(uid, active);
+            RemComp(uid, active);
 
             // clients will predict it so server doesnt care about the sound
             if (_net.IsClient && _timing.IsFirstTimePredicted)
@@ -104,7 +104,8 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
 
         if (props.SpentFuel < 0.1)
         {
-            _popup.PopupClient(Loc.GetString("nuclear-centrifuge-unfit-item", ("item", item)), ent, user);
+            if (_net.IsServer) // its not networked
+                _popup.PopupEntity(Loc.GetString("nuclear-centrifuge-unfit-item", ("item", item)), ent, user);
             return;
         }
 
@@ -112,14 +113,15 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         _popup.PopupPredicted(Loc.GetString("nuclear-centrifuge-insert-item", ("user", ident), ("machine", ent.Owner), ("item", item)), ent, user);
         _audio.PlayPredicted(ent.Comp.SoundLoad, ent, user);
 
-        PredictedQueueDel(item);
-
         ent.Comp.FuelToExtract += props.SpentFuel;
         Dirty(ent);
 
         var active = EnsureComp<ActiveNuclearCentrifugeComponent>(ent);
         active.NextExtract += ent.Comp.ExtractTime * props.SpentFuel;
         Dirty(ent, active);
+
+        props.SpentFuel = 0; // bye bye
+        PredictedQueueDel(item);
     }
 
     private void OnPowerChanged(Entity<NuclearCentrifugeComponent> ent, ref PowerChangedEvent args)

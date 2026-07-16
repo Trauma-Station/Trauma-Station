@@ -28,6 +28,8 @@ using Content.Shared.Projectiles;
 using Content.Shared.Radiation.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Content.Shared.Tools;
+using Content.Shared.Tools.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -54,8 +56,11 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private StationSystem _station = default!;
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
+
+    public static readonly ProtoId<ToolQualityPrototype> Slicing = "Slicing";
 
     private DelamType _delamType = DelamType.Explosion;
 
@@ -639,7 +644,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         if (sm.SliverRemoved)
             return;
 
-        if (!HasComp<SharpComponent>(args.Used))
+        if (!_tool.HasQuality(args.Used, Slicing))
             return;
 
         var dae = new DoAfterArgs(EntityManager, args.User, 30f, new SupermatterDoAfterEvent(), uid)

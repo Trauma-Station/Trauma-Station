@@ -55,7 +55,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
             {
                 var layerID = _sprite.AddRsiLayer(entSprite, EmptyState, rsi);
                 _sprite.LayerMapSet(entSprite, FormatMap(new(x, y)), layerID);
-                _sprite.LayerSetOffset(entSprite, layerID, new((xspace * (y - yAdj)) - xoff, (-yspace * (x - xAdj)) - yoff));
+                _sprite.LayerSetOffset(entSprite, layerID, new((xspace * (x - xAdj)) - xoff, (-yspace * (y - yAdj)) - yoff));
                 _sprite.LayerSetColor(entSprite, layerID, Color.Black);
             }
         }

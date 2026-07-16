@@ -11,7 +11,6 @@ public sealed partial class SharedInternalResourcesActionSystem : EntitySystem
 {
     [Dependency] private SharedInternalResourcesSystem _internalResources = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -28,7 +27,7 @@ public sealed partial class SharedInternalResourcesActionSystem : EntitySystem
 
         if (!_internalResources.TryGetResourceType(args.User, action.Comp.ResourceProto, out var data) || data.CurrentAmount < actionCost)
         {
-            var typeName = Loc.GetString(_prototypeManager.Index(action.Comp.ResourceProto).Name);
+            var typeName = Loc.GetString(ProtoMan.Index(action.Comp.ResourceProto).Name);
 
             _popupSystem.PopupClient(Loc.GetString("internal-resources-action-no-resources", ("type", typeName)), args.User, args.User);
             args.Cancelled = true;

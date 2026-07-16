@@ -170,7 +170,7 @@ public partial class TraumaSystem
         var nearestSeverity = organ.OrganSeverity;
         foreach (var (severity, value) in organ.IntegrityThresholds.OrderByDescending(kv => kv.Value))
         {
-            if (organ.OrganIntegrity > value)
+            if (organ.OrganIntegrity < value)
                 continue;
 
             nearestSeverity = severity;

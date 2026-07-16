@@ -14,7 +14,6 @@ namespace Content.Goobstation.Shared.Wraith.Revenant;
 /// </summary>
 public sealed partial class WraithRevenantSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -28,7 +27,7 @@ public sealed partial class WraithRevenantSystem : EntitySystem
     }
 
     private void OnMapInit(Entity<WraithRevenantComponent> ent, ref MapInitEvent args) =>
-        EntityManager.AddComponents(ent.Owner, _proto.Index(ent.Comp.RevenantAbilities));
+        EntityManager.AddComponents(ent.Owner, ProtoMan.Index(ent.Comp.RevenantAbilities));
 
     private void OnMobStateChanged(Entity<WraithRevenantComponent> ent, ref MobStateChangedEvent args)
     {
@@ -52,7 +51,7 @@ public sealed partial class WraithRevenantSystem : EntitySystem
     #region Helpers
     private void Reset(Entity<WraithRevenantComponent> ent)
     {
-        EntityManager.RemoveComponents(ent.Owner, _proto.Index(ent.Comp.RevenantAbilities));
+        EntityManager.RemoveComponents(ent.Owner, ProtoMan.Index(ent.Comp.RevenantAbilities));
 
         if (!TryComp<PassiveDamageComponent>(ent.Owner, out var comp)
             || ent.Comp.OldDamageSpecifier == null)

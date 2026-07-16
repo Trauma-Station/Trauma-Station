@@ -8,7 +8,6 @@
   - type: KnowledgeGrantOnWear
     skills:
       CookingKnowledge: 100
-      MaterialsKnowledge: 100
       DoorsKnowledge: 100
       AirlocksKnowledge: 100
       ToysKnowledge: 100
@@ -18,9 +17,7 @@
       InfrastructureKnowledge: 100
       ElectronicsKnowledge: 100
       WallsKnowledge: 100
-      ScienceKnowledge: 100
       WindowsKnowledge: 100
-      SmokeablesKnowledge: 100
       LiteracyKnowledge: 100
       MagicalLiteracyKnowledge: 100
       LanguageSolCommon: 100
@@ -33,6 +30,16 @@
       ToughnessKnowledge: 100
       MeleeKnowledge: 100
       ShootingKnowledge: 100
+      KnowledgeWeaponsBludgeon: 100
+      KnowledgeWeaponsKnife: 100
+      KnowledgeWeaponsSword: 100
+      KnowledgeWeaponsPolearm: 100
+      KnowledgeWeaponsPistol: 100
+      KnowledgeWeaponsRifle: 100
+      KnowledgeWeaponsShotgun: 100
+      KnowledgeWeaponsSniper: 100
+      KnowledgeWeaponsHeavy: 100
+      KnowledgeWeaponsLaser: 100
       FabricationKnowledge: 100
       WeaponsKnowledge: 100
       ArmorKnowledge: 100
@@ -58,6 +65,13 @@
       ToughnessKnowledge: 60
       MeleeKnowledge: 60
       ShootingKnowledge: 60
+      KnowledgeWeaponsKnife: 60
+      KnowledgeWeaponsSword: 60
+      KnowledgeWeaponsPolearm: 60
+      KnowledgeWeaponsPistol: 60
+      KnowledgeWeaponsRifle: 60
+      KnowledgeWeaponsShotgun: 60
+      KnowledgeWeaponsLaser: 60
       # for cading..?
       FabricationKnowledge: 100
       MetalworkingKnowledge: 100

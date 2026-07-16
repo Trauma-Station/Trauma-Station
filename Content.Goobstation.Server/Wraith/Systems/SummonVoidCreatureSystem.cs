@@ -14,7 +14,6 @@ namespace Content.Goobstation.Server.Wraith.Systems;
 public sealed partial class SummonVoidCreatureSystem : EntitySystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private MindSystem _mind = default!;
@@ -54,7 +53,7 @@ public sealed partial class SummonVoidCreatureSystem : EntitySystem
     private void OnSummonVoidCreatureSelected(Entity<ChooseVoidCreatureComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         if (args.SelectedItem is not { } proto
-            || !_proto.TryIndex(proto, out var summon)
+            || !ProtoMan.TryIndex(proto, out var summon)
             || !summon.HasComponent<WraithMinionComponent>()
             || !_mind.TryGetMind(ent.Owner, out var mindUid, out var mind))
             return;

@@ -51,3 +51,12 @@
       proto: AbductorScientist
     - !type:FixedAntagCount
       proto: AbductorAgent
+
+- type: entity
+  parent: Changeling
+  id: SubChangeling
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Changeling

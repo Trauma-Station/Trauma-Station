@@ -1,12 +1,12 @@
 // <Trauma>
 using Content.Trauma.Common.Inventory;
+using Robust.Shared.Serialization;
 // </Trauma>
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.Clothing.Components;
 
@@ -25,7 +25,7 @@ public sealed partial class ToggleableClothingComponent : Component
     ///     Action used to toggle the clothing on or off.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId Action = "ActionToggleSuitPiece";
+    public EntProtoId? Action;
 
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
@@ -87,7 +87,7 @@ public sealed partial class ToggleableClothingComponent : Component
     ///     Text shown in the toggle-clothing verb. Defaults to using the name of the <see cref="ActionEntity"/> action.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string? VerbText;
+    public LocId VerbText = "toggle-clothing-verb-default";
 
     /// <summary>
     ///     If true it will block unequip of this entity until all attached clothing are removed
@@ -102,6 +102,7 @@ public sealed partial class ToggleableClothingComponent : Component
     public bool ReplaceCurrentClothing = false;
 }
 
+// TODO: move modsuit shit to modules...
 [Serializable, NetSerializable]
 public enum ToggleClothingUiKey : byte
 {

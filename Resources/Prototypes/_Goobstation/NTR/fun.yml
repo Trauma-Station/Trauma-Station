@@ -22,6 +22,8 @@
     - 0,0,2,0
     storedRotation: 45
   - type: Sharp
+  - type: Tool
+    qualities: Slicing
   - type: MeleeWeapon
     animationRotation: 225
     wideAnimationRotation: -135
@@ -45,6 +47,8 @@
           - 0,0,2,0
           storedRotation: 45
         - type: Sharp
+        - type: Tool
+          qualities: Slicing
         - type: MeleeWeapon
           animationRotation: 225
           wideAnimationRotation: -135

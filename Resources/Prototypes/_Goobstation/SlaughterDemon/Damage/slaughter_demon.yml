@@ -7,6 +7,7 @@
     Blunt: 0.5
     Slash: 0.5
     Piercing: 0.5
+    Ballistic: 0.5
     Shock: 0.5
     Heat: 0.1
     Holy: 3.0

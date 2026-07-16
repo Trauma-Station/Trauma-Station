@@ -66,6 +66,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
+        Ballistic: 0.7
         Heat: 0.8
   - type: ModifyDelayedKnockdown
     delayDelta: 1.5

@@ -27,7 +27,6 @@ namespace Content.Shared.Fluids.EntitySystems;
 public sealed partial class DrainSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -145,7 +144,7 @@ public sealed partial class DrainSystem : EntitySystem
             Dirty(uid, drain);
 
             // Best to do this one every second rather than once every tick...
-            if (!_solutionContainerSystem.ResolveSolution(uid, DrainComponent.SolutionName, ref drain.Solution, out var drainSolution))
+            if (!_solutionContainerSystem.ResolveSolution(uid, DrainComponent.SolutionName, ref drain.Solution, out var drainSolution, logMissing: false)) // Trauma - don't log if its missing because ApplyGameState doesnt fucking set ApplyingState
                 continue;
 
             if (drainSolution.Volume <= 0 && !drain.AutoDrain)
@@ -192,7 +191,7 @@ public sealed partial class DrainSystem : EntitySystem
                     var transferSolution = _solutionContainerSystem.SplitSolution(puddle.Comp.Solution.Value,
                         FixedPoint2.Min(FixedPoint2.New(amount), puddleSolution.Volume, drainSolution.AvailableVolume));
 
-                    drainSolution.AddSolution(transferSolution, _prototype);
+                    drainSolution.AddSolution(transferSolution, ProtoMan);
 
                     if (puddleSolution.Volume <= 0)
                         PredictedQueueDel(puddle);

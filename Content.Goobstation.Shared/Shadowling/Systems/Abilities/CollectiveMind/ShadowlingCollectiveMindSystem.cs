@@ -18,7 +18,6 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPopupSystem _popups = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
@@ -63,7 +62,7 @@ public sealed partial class ShadowlingCollectiveMindSystem : EntitySystem
             if (comp.UnlockedAbilities.Contains(unlock))
                 continue;
 
-            var proto = _protoMan.Index(unlock);
+            var proto = ProtoMan.Index(unlock);
 
             if (comp.AmountOfThralls < proto.UnlockAtThralls)
                 continue;

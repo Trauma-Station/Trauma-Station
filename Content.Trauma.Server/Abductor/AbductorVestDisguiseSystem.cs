@@ -17,7 +17,6 @@ public sealed partial class AbductorVestDisguiseSystem : EntitySystem
     [Dependency] private SharedVisualBodySystem _visualBody = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private IdentitySystem _identity = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private EntityQuery<VisualOrganMarkingsComponent> _organMarkingsQuery = default!;
@@ -162,7 +161,7 @@ public sealed partial class AbductorVestDisguiseSystem : EntitySystem
 
         foreach (var protoId in HumanVisualOrgans)
         {
-            var entityProto = _prototype.Index<EntityPrototype>(protoId);
+            var entityProto = ProtoMan.Index<EntityPrototype>(protoId);
             if (!entityProto.TryGetComponent<VisualOrganComponent>(out var visualOrgan, Factory) ||
                 !entityProto.TryGetComponent<VisualOrganMarkingsComponent>(out var markings, Factory))
                 continue;

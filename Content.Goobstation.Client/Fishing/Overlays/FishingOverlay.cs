@@ -41,9 +41,15 @@ public sealed partial class FishingOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        // only do anything while fishing
+        if (_player.LocalEntity is not { } uid ||
+            !_ent.TryGetComponent<ActiveFisherComponent>(uid, out var comp) ||
+            comp.TotalProgress < 0 ||
+            !_ent.TryGetComponent<SpriteComponent>(uid, out var sprite))
+            return;
+
         var handle = args.WorldHandle;
         var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
-        var xformQuery = _ent.GetEntityQuery<TransformComponent>();
 
         const float scale = 1f;
         var scaleMatrix = Matrix3Helpers.CreateScale(new Vector2(scale, scale));
@@ -51,7 +57,6 @@ public sealed partial class FishingOverlay : Overlay
 
         // Define bounds for culling entities outside the viewport
         var bounds = args.WorldAABB.Enlarged(5f);
-        var localEnt = _player.LocalSession?.AttachedEntity;
 
         // Calculate the size of the texture in world units
         var textureSize = new Vector2(_barTexture.Width, _barTexture.Height) / EyeManager.PixelsPerMeter;
@@ -61,58 +66,46 @@ public sealed partial class FishingOverlay : Overlay
         // Define the progress bar's width as a fraction of the texture width
         var barWidth = scaledTextureSize.X * BarWidthFraction;
 
-        // Iterate through all entities with ActiveFisherComponent
-        var enumerator = _ent.AllEntityQueryEnumerator<ActiveFisherComponent, SpriteComponent, TransformComponent>();
-        while (enumerator.MoveNext(out var uid, out var comp, out var sprite, out var xform))
-        {
-            // Skip if the entity is not on the current map, has invalid progress, or is not the local player
-            if (xform.MapID != args.MapId ||
-                comp.TotalProgress == null ||
-                comp.TotalProgress < 0 ||
-                uid != localEnt)
-                continue;
+        // Just incase you are somehow out of your camera bounds..?
+        var worldPosition = _transform.GetWorldPosition(uid);
+        if (!bounds.Contains(worldPosition))
+            return;
 
-            // Get the world position of the entity
-            var worldPosition = _transform.GetWorldPosition(xform, xformQuery);
-            if (!bounds.Contains(worldPosition))
-                continue;
+        // Set up the transformation matrix for rendering
+        var worldMatrix = Matrix3Helpers.CreateTranslation(worldPosition);
+        var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+        var matty = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+        handle.SetTransform(matty);
 
-            // Set up the transformation matrix for rendering
-            var worldMatrix = Matrix3Helpers.CreateTranslation(worldPosition);
-            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
-            var matty = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
-            handle.SetTransform(matty);
+        // Calculate the position of the progress bar relative to the entity
+        var position = new Vector2(
+            sprite.Bounds.Width / 2f,
+            -scaledTextureSize.Y / 2f // Center vertically
+        );
 
-            // Calculate the position of the progress bar relative to the entity
-            var position = new Vector2(
-                sprite.Bounds.Width / 2f,
-                -scaledTextureSize.Y / 2f // Center vertically
-            );
+        // Draw the background texture at the scaled size
+        handle.DrawTextureRect(_barTexture, new Box2(position, position + scaledTextureSize));
 
-            // Draw the background texture at the scaled size
-            handle.DrawTextureRect(_barTexture, new Box2(position, position + scaledTextureSize));
+        // Calculate progress and clamp it to [0, 1]
+        var progress = Math.Clamp(comp.TotalProgress, 0f, 1f);
 
-            // Calculate progress and clamp it to [0, 1]
-            var progress = Math.Clamp(comp.TotalProgress.Value, 0f, 1f);
+        // Calculate the fill height based on progress
+        var startYPixel = scaledTextureSize.Y * StartYFraction;
+        var endYPixel = scaledTextureSize.Y * EndYFraction;
+        var yProgress = (endYPixel - startYPixel) * progress + startYPixel;
 
-            // Calculate the fill height based on progress
-            var startYPixel = scaledTextureSize.Y * StartYFraction;
-            var endYPixel = scaledTextureSize.Y * EndYFraction;
-            var yProgress = (endYPixel - startYPixel) * progress + startYPixel;
+        // Define the fill box with the correct width and height
+        var box = new Box2(
+            new Vector2((scaledTextureSize.X - barWidth) / 2f, startYPixel),
+            new Vector2((scaledTextureSize.X + barWidth) / 2f, yProgress)
+        );
 
-            // Define the fill box with the correct width and height
-            var box = new Box2(
-                new Vector2((scaledTextureSize.X - barWidth) / 2f, startYPixel),
-                new Vector2((scaledTextureSize.X + barWidth) / 2f, yProgress)
-            );
+        // Translate the box to the correct position
+        box = box.Translated(position);
 
-            // Translate the box to the correct position
-            box = box.Translated(position);
-
-            // Draw the progress fill
-            var color = GetProgressColor(progress);
-            handle.DrawRect(box, color);
-        }
+        // Draw the progress fill
+        var color = GetProgressColor(progress);
+        handle.DrawRect(box, color);
 
         // Reset the shader and transform
         handle.UseShader(null);

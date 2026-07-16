@@ -8,13 +8,7 @@ namespace Content.Goobstation.Shared.Surgery.Steps.Parts;
 /// Component for xeno tissue sample, used in the graft issue surgery step.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class TissueSampleComponent : Component, ISurgeryToolComponent
+public sealed partial class TissueSampleComponent : BaseSurgeryToolComponent
 {
-    public string ToolName => "a xeno tissue sample";
-
-    [DataField]
-    public bool? Used { get; set; } = true;
-
-    [DataField]
-    public float Speed { get; set; } = 1f;
+    public override string ToolName => "a xeno tissue sample";
 }

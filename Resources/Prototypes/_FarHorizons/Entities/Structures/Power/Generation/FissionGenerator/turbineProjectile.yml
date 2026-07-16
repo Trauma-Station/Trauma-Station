@@ -36,7 +36,7 @@
     deleteOnCollide: false
     damage:
       types: # hit hard ye
-        Piercing: 25
+        Ballistic: 25
         Slash: 75
         Structural: 400
     soundHit:

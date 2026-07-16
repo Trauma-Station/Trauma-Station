@@ -10836,3 +10836,723 @@ Entries:
   id: 1212
   time: '2026-06-25T14:05:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3338
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed memory leak that raider was usig to kill the server.
+  id: 1213
+  time: '2026-06-26T17:15:00.0000000+00:00'
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed round end summary not listing jobs properly.
+  id: 1214
+  time: '2026-06-27T19:57:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3356
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed colossus not being attacked by NPCs and turrets.
+  id: 1215
+  time: '2026-06-27T20:11:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3359
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed infinite morph glitch.
+  id: 1216
+  time: '2026-06-27T20:15:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3358
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Service borgs now get plant analyzers
+  id: 1217
+  time: '2026-06-27T21:31:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3361
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 3 new chemicals that botanists can make, Check the guidebook for
+      more details
+  id: 1218
+  time: '2026-06-28T21:18:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3364
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reactor control rods are now built in to fuel rods rather than a separate
+      part.
+  - type: Add
+    message: >-
+      Added neutron reflectors that make reactors more powerful for the same
+      fuel use.
+  - type: Tweak
+    message: >-
+      Changed reactor thermal masses to actually reflect a ~15kg part rather
+      than literally half the reactor itself in every part. Parts now heat up
+      and transfer heat much faster.
+  - type: Fix
+    message: Fixed reactor thermal power calculation being wrong.
+  - type: Fix
+    message: Fixed reactor UI having flipped X/Y axes.
+  - type: Tweak
+    message: >-
+      Non-spent fuel rods are no longer radioactive, it makes no sense and
+      allowed lowest effort cheese ever with rad collectors.
+  - type: Tweak
+    message: >-
+      The reactor itself is no longer radioactive at low radiation levels,
+      radiation shielding is a thing.
+  id: 1219
+  time: '2026-06-29T18:28:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3370
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fishing no longer locks others out of fishing in that spot.
+  - type: Tweak
+    message: Fishing is now fully predicted.
+  - type: Fix
+    message: Fixed not being able to sell fish.
+  - type: Remove
+    message: Removed organs from fish, no more lag.
+  id: 1220
+  time: '2026-06-29T19:33:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3360
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed problems with nuclear centrifuge.
+  id: 1221
+  time: '2026-06-29T21:58:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3375
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Tweaked the injection values and what reagents the Clown Spider and Clown
+      Goblin use.
+  - type: Tweak
+    message: Tweaked the bloodstream of clown spiders.
+  id: 1222
+  time: '2026-06-30T17:08:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3345
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Stripping Update is here.
+  - type: Add
+    message: You can now open people's bags, belts and pockets of their outer clothing.
+  - type: Tweak
+    message: You can now strip only as many items at a time as you have free hands.
+  - type: Tweak
+    message: Tweaked strip time on specific clothing slots.
+  - type: Tweak
+    message: Different strip times/opening people's clothes if they are cuffed or dead.
+  - type: Tweak
+    message: >-
+      You can't remove someone's jumpsuit if they have Outer Clothing on. Remove
+      it first.
+  id: 1223
+  time: '2026-07-01T12:07:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3289
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed martial arts damage being split up between all limbs.
+  id: 1224
+  time: '2026-07-01T18:27:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3391
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      xenomorph infection growth has now been changed from a random chance to a
+      flat timer, the larva will always grow every 40 seconds (4 minutes to
+      burst)
+  id: 1225
+  time: '2026-07-01T19:38:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3395
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Shadowlings now only spawn alone.
+  - type: Tweak
+    message: Wraiths are now more common roundstart.
+  id: 1226
+  time: '2026-07-01T19:48:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3383
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed deep fryer disappearing if it lost power while active.
+  id: 1227
+  time: '2026-07-01T19:55:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3397
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Properly implemented CQC's kick move and hell ripte's drop kick / head rip
+      moves.
+  id: 1228
+  time: '2026-07-01T20:37:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3396
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: xeno shove stun has been removed in favor of instant hardgrab
+  id: 1229
+  time: '2026-07-04T00:19:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3340
+- author: assripper.
+  changes:
+  - type: Add
+    message: when someone is crit xenomorph larvas will take twice the time to grow
+  id: 1230
+  time: '2026-07-04T00:21:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3417
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Gutworms are curable with vitamins for now
+  id: 1231
+  time: '2026-07-04T08:53:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3416
+- author: Weax
+  changes:
+  - type: Tweak
+    message: Clown Goblins no longer inject Honk
+  id: 1232
+  time: '2026-07-04T08:53:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3385
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Caveman Accent. Ooga Booga, me want insuls!
+  id: 1233
+  time: '2026-07-04T09:05:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3411
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the amount of plasma needed to make Opporozidone
+  - type: Tweak
+    message: Increased the amount of Unstable Compound you get per reaction
+  id: 1234
+  time: '2026-07-04T09:05:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3418
+- author: Graaves... Brains...
+  changes:
+  - type: Tweak
+    message: >-
+      Adjusted zombie healing and damage resistance, they no longer get 1 tapped
+      by everything but don't have extreme regen.
+  id: 1235
+  time: '2026-07-04T09:15:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3425
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI getting doxxed by unpowered cameras.
+  id: 1236
+  time: '2026-07-04T20:27:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3434
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Lights now have a logic control port for setting it on/off with a single
+      signal's value.
+  id: 1237
+  time: '2026-07-05T03:59:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3435
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being unable to make Rev Ball Bearings, They are now made at the
+      industrial forge
+  id: 1238
+  time: '2026-07-05T09:07:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3441
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Decreased the amount of bluespace crystals needed to make energy chemical
+      dispensers
+  - type: Tweak
+    message: Decreased the amount of brute healing from mitotrophin
+  - type: Tweak
+    message: >-
+      Decreased the threshold on bicardines's OD and increased the damage, Same
+      with dylo which now does more damage
+  - type: Tweak
+    message: Genecides Genetic healing has been increased from 6 to 10
+  - type: Tweak
+    message: Arcryox's Brute/Burn Healing has been increased to 4.5 brute/burn per 0.5u
+  - type: Tweak
+    message: >-
+      Synthmeat's Recipe now is slightly easier to make and now provides 2x more
+      synthflesh from each piece of synthmeat
+  id: 1239
+  time: '2026-07-05T09:12:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3439
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: >-
+      Librarian now has their own caneblade style, with the old igniting
+      caneblade returning to being syndicate only.
+  id: 1240
+  time: '2026-07-05T22:18:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3355
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Syndicate Behonker, you can buy it for 100 TC.
+  - type: Add
+    message: Added the Bomb Collar Kit, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Syndicate Shuttle Crate, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Syndicate Shuttle Console Board, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Syndicate IFF Console Board, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Syndicate Kudzu Greande, you can buy it for 15 TC.
+  - type: Add
+    message: Added the S.L.A.Y.E.R Overcoat, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Syndicate Door Remote, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Sticky Explosive Grenade, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Chemical Utility Knife, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Gorlex Surgical Omnitool, you can buy it for 30 TC.
+  - type: Add
+    message: Added the Appraisal Tool Radio Jammer, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Silent Shoes, you can buy them for 10 TC.
+  - type: Add
+    message: Added the Mute Toxin Auto Injector, you can buy it for 10 TC.
+  - type: Add
+    message: Added the Stealthy Miama Peel, you can buy it for 5 TC.
+  - type: Add
+    message: >-
+      Added the Network Configurator Signaler, you can find it by emagging a
+      Vendomat.
+  - type: Add
+    message: >-
+      Added the Hidden Storage Warning Cone, you can find it by emagging an
+      Engi-Vend.
+  - type: Add
+    message: >-
+      Added Magic and Holo dehydrated carp variants, you can buy them both for 7
+      TC each.
+  - type: Add
+    message: Added the Nukie Mouse, you can buy it for 15 TC.
+  - type: Add
+    message: Added the Nukie Carp, you can buy it for 30 TC.
+  - type: Add
+    message: Added the Nukie Spider, you can buy it for 50 TC.
+  - type: Add
+    message: Added the Saboteur Borg, you can buy it for 300 TC.
+  - type: Add
+    message: Added the Medical Borg, you can buy it for 300 TC.
+  - type: Add
+    message: >-
+      Added Tranquiliser and Poison mags for the Cobra, you can buy them for 20
+      TC and 25 TC respectively.
+  - type: Add
+    message: Added the Observation Kit, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Handheld Records Tablet, you can buy it for 2 TC.
+  - type: Add
+    message: Added the Shrapnel Foam Grenade, you can buy it for 12 TC.
+  - type: Add
+    message: Added the Appraisal Tool Gun, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Sharp Foam Cutlass, you can buy it for 20 TC.
+  - type: Add
+    message: Added the Chameleon Armored Vest, you can buy it for 25 TC.
+  - type: Add
+    message: Added 8 new Syndicate Cyborg Modules. These also include new items.
+  - type: Fix
+    message: Fixed Clown Spiders not being able to break windows.
+  - type: Fix
+    message: Fixed forged kunai not injecting chemicals.
+  - type: Fix
+    message: Fixed Syndicate Cyborgs not having skills.
+  - type: Fix
+    message: Fixed ALL bunny sprites not being centered for clothing.
+  - type: Tweak
+    message: Tweaked Syndicate Cyborg Chassis, 7 max modules, instead of 3.
+  - type: Tweak
+    message: Tweaked the starting modules of ALL Syndicate Cyborgs.
+  - type: Tweak
+    message: The Radio Jammer no longer jams the syndicate frequency.
+  - type: Tweak
+    message: Tweaked naming not being consistent across the uplink.
+  id: 1241
+  time: '2026-07-05T22:21:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3319
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Metal barricades no longer use walls knowledge as required theory skills.
+  id: 1242
+  time: '2026-07-06T00:11:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3448
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Added 11 weapon classes which most weapons are now a part of, you can see
+      the class by examining them.
+  - type: Add
+    message: >-
+      Added skills for training with each weapon class, most can be used in the
+      character editor.
+  - type: Tweak
+    message: >-
+      Replaced melee skill with unarmed combat, it applies to punches and
+      hand-slot punching weapons like boxing gloves to make them stronger.
+  - type: Add
+    message: Added descriptions to skills, shown by hovering over them.
+  - type: Add
+    message: >-
+      Added skillchips for each weapon class to the uplink as well as a skill
+      chips surplus bundle.
+  - type: Add
+    message: >-
+      Most weapon class skillchips are in the sectech for officers to
+      specialize.
+  - type: Add
+    message: Added a mining weapons skillchip to the points vendor.
+  - type: Tweak
+    message: >-
+      Most jobs now have relevant weapon class training, e.g. bartender is good
+      with shotguns not general shooting.
+  - type: Tweak
+    message: You can now use 2 skillchips at once.
+  - type: Fix
+    message: Skillchips now get transferred by polymorphs like bananamen.
+  - type: Remove
+    message: Removed useless slop materials and science skills.
+  id: 1243
+  time: '2026-07-06T00:15:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3436
+- author: Armok
+  changes:
+  - type: Tweak
+    message: Pierce damage is now split into pierce and ballistic damage
+  id: 1244
+  time: '2026-07-06T02:15:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3450
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: Role time requirements have been increased.
+  - type: Add
+    message: NukeOps Commander now requires HoS playtime, lead from the front.
+  id: 1245
+  time: '2026-07-08T08:38:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3483
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Tool Combat Training to Botanist Skillchips
+  id: 1246
+  time: '2026-07-08T09:56:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3484
+- author: Joel
+  changes:
+  - type: Remove
+    message: Removed ling pending rework
+  id: 1247
+  time: '2026-07-08T16:20:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3482
+- author: Graves
+  changes:
+  - type: Add
+    message: Returned zombie bundle to the commander uplink! Go nuts, Gorlex!
+  id: 1248
+  time: '2026-07-10T03:47:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3495
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed changelings and other polymorphs breaking if you have skillchips.
+  id: 1249
+  time: '2026-07-10T09:31:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3497
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: >-
+      Added extra depth to the Stripping Update, you can now unsheathe and draw
+      weapons from people's holsters.
+  - type: Tweak
+    message: >-
+      You are now stealthier with thief gloves, you will make no sound when
+      opening your bag, or when picking up items, or putting them in your bag.
+  - type: Fix
+    message: >-
+      Fixed a bug that allowed you to keep someone's inventory open forever, and
+      allowed you to modify it.
+  - type: Fix
+    message: >-
+      Fixed visual and audio cues that announced that you had stolen from
+      someone.
+  - type: Fix
+    message: Fixed thief gloves not making the doafter of the new verbs faster.
+  - type: Fix
+    message: Fixed a bug that made you need 2 hands to strip someone.
+  id: 1250
+  time: '2026-07-10T10:05:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3400
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Taming xenobio slimes by petting them actually works now...
+  - type: Add
+    message: Added super dwarves...
+  id: 1251
+  time: '2026-07-10T11:36:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3485
+- author: Aviu
+  changes:
+  - type: Add
+    message: Heretic ice spear is now t1 ritual instead of t2 spell.
+  - type: Add
+    message: >-
+      Blade heretic hook and lock burglar spell are now passives that trigger on
+      alt-click on target with blade in combat mode.
+  - type: Add
+    message: >-
+      New lock path knowledge, replacing caretakers last refuge, see guidebook
+      for details.
+  - type: Tweak
+    message: Lock eldritch id now has doafter for linking doors.
+  id: 1252
+  time: '2026-07-10T12:03:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3480
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to heal gunshots with surgery.
+  - type: Fix
+    message: A bunch of things now heal/check for ballistic damage.
+  id: 1253
+  time: '2026-07-10T12:52:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3502
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Xeno queen roar now checks for line of sight.
+  id: 1254
+  time: '2026-07-10T13:31:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3504
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Skillchips now list their skills when examined.
+  id: 1255
+  time: '2026-07-10T14:20:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3506
+- author: deltanedas
+  changes:
+  - type: Add
+    message: rework ling pending Removed.
+  id: 1256
+  time: '2026-07-10T14:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3508
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Plasma is now called phoron
+  id: 1257
+  time: '2026-07-10T14:44:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3505
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Massively nerfed slop frogs so they dont solo wipe med every time
+  id: 1258
+  time: '2026-07-10T15:13:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3510
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Derotated nume station, it was abandoned and needs a lot of work.
+  - type: Remove
+    message: Derotated atlas, amber, cluster, omega and packed temporarily.
+  id: 1259
+  time: '2026-07-10T15:24:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3507
+- author: TurboTrackerss14
+  changes:
+  - type: Tweak
+    message: >-
+      Powersink now has a 30 minute delay before being purchasable from the
+      uplink.
+  id: 1260
+  time: '2026-07-11T01:27:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3512
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Viewcone decrease on masks and helmets lowered.
+  - type: Remove
+    message: Berets no longer increase viewcone.
+  - type: Tweak
+    message: Sec/ert/syndi/swat/half gas masks no longer modify your viewcone.
+  - type: Tweak
+    message: Flesh worm now has 360 degree vision.
+  id: 1261
+  time: '2026-07-11T14:46:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3517
+- author: ImWeax
+  changes:
+  - type: Add
+    message: You can now drink bleach to kill gutworms.
+  - type: Add
+    message: You can also take actual deworming medicine.
+  id: 1262
+  time: '2026-07-11T20:49:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3399
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mail tearing not stopping if you moved the mail away
+  - type: Fix
+    message: IPC battery alert now works, and battery draining is predicted.
+  - type: Fix
+    message: >-
+      Fixed wing fang chu recipe using 83ml of soy sauce (2.9 oz) now its just 1
+      packet's worth.
+  - type: Fix
+    message: Fixed decapoids and plasmamen using human sounds.
+  id: 1263
+  time: '2026-07-12T22:03:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3533
+- author: Aineias1
+  changes:
+  - type: Tweak
+    message: Re-rotated atlas, amber, cluster, omega and packed temporarily.
+  id: 1264
+  time: '2026-07-12T22:09:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3528
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to transform faith/iradomini into other nullrods.
+  id: 1265
+  time: '2026-07-12T23:38:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3539
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed detailed examine items in chat rendering badly.
+  id: 1266
+  time: '2026-07-13T02:03:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3540
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed infinite nullrod glitch from reinforcements
+  id: 1267
+  time: '2026-07-13T02:05:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to toggle night vision goggles, which are also green
+      again.
+  id: 1268
+  time: '2026-07-13T02:12:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3541
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Flashes work now.
+  id: 1269
+  time: '2026-07-13T02:19:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3511
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed memory leak from holoparasite log spamming.
+  id: 1270
+  time: '2026-07-13T18:14:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3545
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a new guidebook entry for Synthflesh in the solids section
+  - type: Tweak
+    message: >-
+      Decreased the metabolism speed for Dermaline, Bicardine and Dylovene down
+      to 0.25u however healing and OD damage has been adjusted to heal the same
+      amount
+  - type: Tweak
+    message: >-
+      Medibots now inject less Tricordrazine and now inject Morphine instead of
+      Chloral Hydrate when Emagged
+  id: 1271
+  time: '2026-07-13T18:46:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3466
+- author: Aviu
+  changes:
+  - type: Add
+    message: Moths got innate tackle (dash) and tackle bonus tied to wings.
+  - type: Fix
+    message: >-
+      Fix tackles and stun baton delayed knockdown hardstunning mobs that can't
+      be knocked down.
+  id: 1272
+  time: '2026-07-13T18:48:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3500
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Freighter Transport was updated once more. Thank you for the feedback.
+  id: 1273
+  time: '2026-07-14T05:57:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3519
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: >-
+      the xenomorph praetorians color palette is now more consistent with the
+      other xenomorphs
+  id: 1274
+  time: '2026-07-14T06:18:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3548
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed your bag getting bricked, and auto closing.
+  - type: Fix
+    message: Fixed the Flesh Shield not having inhand sprites.
+  - type: Fix
+    message: Fixed the Greatshield not having inhand sprites.
+  id: 1275
+  time: '2026-07-15T04:04:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3556
+- author: assripper.
+  changes:
+  - type: Add
+    message: >-
+      chestbursters now make people unrevivable instead of gibbing (you can
+      still clone them)
+  id: 1276
+  time: '2026-07-15T23:29:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3554

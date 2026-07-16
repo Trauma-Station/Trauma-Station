@@ -76,6 +76,7 @@ public sealed partial class LightDetectionDamageComponent : Component
             ["Blunt"] = -10,
             ["Slash"] = -10,
             ["Piercing"] = -10,
+            ["Ballistic"] = -10,
             ["Heat"] = -10,
             ["Cold"] = -10,
             ["Shock"] = -10,

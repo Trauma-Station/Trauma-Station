@@ -113,7 +113,7 @@
       amount: 3
 
 - type: entity
-  parent: OrganBaseFleshy # Shitmed - Fleshy
+  parent: OrganBaseOrganic
   id: OrganHuman
   abstract: true
   suffix: human

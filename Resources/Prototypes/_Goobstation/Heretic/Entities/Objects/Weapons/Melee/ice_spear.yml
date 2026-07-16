@@ -4,16 +4,13 @@
   name: Glacier Spear
   parent: [BaseItem, SolutionSpear, BaseMagicalContraband]
   id: SpearIceHeretic
-  description: When the veil between frost and thought thins, the spear shall bite with the might of the Winter Dawn.
+  description: When the veil between frost and and reality thins, the spear shall bite with the might of the Winter Dawn.
   components:
   - type: EmbeddableProjectile
     offset: -0.15,0.0
   - type: ThrowingAngle
     angle: 225
   - type: LandAtCursor
-  - type: Tag
-    tags:
-    - Spear
   - type: Fixtures
     fixtures:
       fix1:
@@ -29,6 +26,9 @@
         restitution: 0.3
         friction: 0.2
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
   - type: Sprite
     sprite: _Goobstation/Heretic/Entities/ice_spear.rsi
     layers:
@@ -56,17 +56,21 @@
     - back
     - suitStorage
   - type: MeleeChemicalInjector
-    transferAmount: 1
+    transferAmount: 2
     solution: melee
   - type: RefillableSolution
     solution: melee
   - type: InjectableSolution
     solution: melee
   - type: SolutionInjectOnEmbed
-    transferAmount: 5 # Since it is shattered on hit - inject everything
+    transferAmount: 8 # Since it is shattered on hit - inject everything
     solution: melee
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 8
   - type: SolutionTransfer
-    maxTransferAmount: 5
+    maxTransferAmount: 8
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
@@ -76,5 +80,44 @@
   - type: ThrowableBlocked
   - type: ChangeTemperatureOnHit
     heat: -50000
-  - type: IceSpear
-  - type: ReflectiveSurface # Goob
+  - type: ReflectiveSurface
+  - type: RecallableItem
+    actionId: ActionHereticIceSpear
+    userWhitelist:
+      components:
+      - Heretic
+      - Ghoul
+    whitelistCheckMind: true
+  - type: TriggerOnThrowDoHit
+  - type: TriggerOnGotEquippedHand
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: GlassBreak
+    positional: true
+    predicted: false
+  - type: DeleteOnTrigger
+  - type: GenericTriggerCondition
+    checkUser: true
+    condition: !type:AllConditions
+      conditions:
+      - !type:ProtectedByNullRodCondition
+        inverted: true
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - MobState
+      - !type:WhitelistCondition
+        inverted: true
+        checkMind: true
+        whitelist:
+          components:
+          - Ghoul
+          - Heretic
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:AddComponents
+      components:
+      - type: IceCube
+  - type: IgniteOnMeleeHit
+    fireStacks: -5

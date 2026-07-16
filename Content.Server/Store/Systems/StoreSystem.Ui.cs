@@ -288,7 +288,7 @@ public sealed partial class StoreSystem
 
         _admin.Add(LogType.StorePurchase,
             logImpact,
-            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, Proto)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
+            $"{ToPrettyString(buyer):player} purchased listing \"{ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, ProtoMan)}\" from {ToPrettyString(uid)}{logExtraInfo}.");
 
         listing.PurchaseAmount++; //track how many times something has been purchased
         if (msg.SoundSource != null && GetEntity(msg.SoundSource) != null)
@@ -319,7 +319,7 @@ public sealed partial class StoreSystem
     /// This would need to be done should a currency with decimal values need to use it.
     /// not quite sure how to handle that
     /// </remarks>
-    public void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
+    private void OnRequestWithdraw(EntityUid uid, StoreComponent component, StoreRequestWithdrawMessage msg)
     {
         if (msg.Amount <= 0)
             return;
@@ -329,7 +329,7 @@ public sealed partial class StoreSystem
             return;
 
         //make sure a malicious client didn't send us random shit
-        if (!Proto.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
+        if (!ProtoMan.TryIndex<CurrencyPrototype>(msg.Currency, out var proto))
             return;
 
         //we need an actually valid entity to spawn. This check has been done earlier, but just in case.
@@ -356,7 +356,7 @@ public sealed partial class StoreSystem
         UpdateUserInterface(buyer, uid, component);
     }
 
-    public void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
+    private void OnRequestRefund(EntityUid uid, StoreComponent component, StoreRequestRefundMessage args)
     {
         // TODO: Remove guardian/holopara
 
@@ -434,7 +434,7 @@ public sealed partial class StoreSystem
                     refundComp.Data == null || refundComp.StoreEntity != uid || refundComp.Data.DisableRefund)
                     continue;
 
-                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, Proto);
+                var name = ListingLocalisationHelpers.GetLocalisedNameOrEntityName(refundComp.Data, ProtoMan);
                 listings.Add(new RefundListingData(GetNetEntity(bought), name));
             }
 

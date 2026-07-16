@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Tackle;
@@ -14,21 +15,31 @@ public sealed partial class TacklerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextTackle;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan TackleCooldown = TimeSpan.FromSeconds(3);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
 
-    [DataField]
+    /// <summary>
+    /// Setting this to false won't knockdown user on innate tackles
+    /// If you want to disable knockdown for all tackles, set <see cref="KnockdownTime"/> to 0
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool KnockdownUser = true;
+
+    [DataField, AutoNetworkedField]
     public float Range = 3f;
 
-    [DataField]
-    public float Speed = 10f;
+    [DataField, AutoNetworkedField]
+    public float Speed = 6.5f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float MinDistance;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float StaminaCost = 25f;
+
+    [DataField, AutoNetworkedField]
+    public float SkillMod;
 }

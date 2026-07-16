@@ -88,7 +88,14 @@
   id: SupermatterHalberd
   description: The revered weapon of Oblivion Enforcers, used to enforce the Order's will.
   components:
+  - type: WeaponClass
+    class: Polearm
   - type: Sharp
+  - type: Tool
+    qualities:
+    - Slicing
+    useSound:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Sprite
     sprite: _Goobstation/Wizard/Objects/Weapons/smhalberd.rsi
     state: icon
@@ -283,10 +290,10 @@
     price: 50000
 
 - type: entity
-  name: echo katana
-  description: Vibrations are constantly flowing through this sword, like they desperately try to find a way out.
   parent: [ KnifeDurabilitySharpenOnly, LavalandBaseKatana, BaseMagicalContraband ]
   id: EchoKatana
+  name: echo katana
+  description: Vibrations are constantly flowing through this sword, like they desperately try to find a way out.
   components:
   - type: Sprite
     layers:

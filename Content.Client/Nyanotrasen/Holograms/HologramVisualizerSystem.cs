@@ -5,11 +5,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.Nyanotrasen.Holograms;
 
+// TODO: kill or move to modules
 public sealed partial class HologramVisualizerSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _protoMan = default!;
-
-    private readonly ProtoId<ShaderPrototype> _shaderId = "Holographic"; // Goobstation - Start
+    private readonly ProtoId<ShaderPrototype> _shaderId = "Holographic";
     private ShaderPrototype? _shaderProto;
 
     public override void Initialize()
@@ -23,12 +22,12 @@ public sealed partial class HologramVisualizerSystem : EntitySystem
     private void OnComponentInit(EntityUid uid, HologramVisualsComponent component, ComponentInit args)
     {
         if (TryComp<SpriteComponent>(uid, out var sprite))
-            sprite.PostShader = (_shaderProto ??= _protoMan.Index(_shaderId)).InstanceUnique();
+            sprite.PostShader = (_shaderProto ??= ProtoMan.Index(_shaderId)).InstanceUnique();
     }
 
     private void OnComponentShutdown(EntityUid uid, HologramVisualsComponent component, ComponentShutdown args)
     {
         if (TryComp<SpriteComponent>(uid, out var sprite))
             sprite.PostShader = null;
-    } // Goobstation - End
+    }
 }

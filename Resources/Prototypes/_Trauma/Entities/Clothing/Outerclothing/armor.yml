@@ -59,10 +59,11 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.3
+        Piercing: 0.7
+        Ballistic: 0.3
         Heat: 0.8
       flatReductions: # This is done so shotguns are worse against armor
-        Piercing: 3
+        Ballistic: 3
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: ModifyDelayedKnockdown
@@ -141,7 +142,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.7
-        Heat: 0.5
+        Heat: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9

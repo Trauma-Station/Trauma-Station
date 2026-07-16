@@ -566,7 +566,7 @@
     Phalanximine:
       amount: 2 # Goob - Easier recipe so that cloning isn't the only viable anti-rot method
     Plasma:
-      amount: 2
+      amount: 1 # Trauma - Was 2
     Doxarubixadone:
       amount: 1
   products:

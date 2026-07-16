@@ -7,7 +7,7 @@
   components:
   - type: Objective
     difficulty: 1.5
-    issuer: objective-issuer-devil
+    issuer: Devil
 
 - type: entity
   parent: BaseDevilObjective

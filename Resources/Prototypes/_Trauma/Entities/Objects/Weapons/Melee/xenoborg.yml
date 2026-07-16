@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: [BaseMeleeWeaponEnergy, BaseXenoborgContraband]
   id: EnergySwordXenoborg
   name: energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseXenoborgContraband]
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
   suffix: Xenoborg
   components:

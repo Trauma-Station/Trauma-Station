@@ -24,6 +24,10 @@ public sealed partial class MobCallSystem : EntitySystem
 
     private void OnMobCall(Entity<MobCallSourceComponent> ent, ref MobCallActionEvent args)
     {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
         _chat.TryEmoteWithChat(ent, ent.Comp.Emote, forceEmote: false);
         var mapCoord = _transform.GetMapCoordinates(ent);
         var entCoord = Transform(ent).Coordinates;

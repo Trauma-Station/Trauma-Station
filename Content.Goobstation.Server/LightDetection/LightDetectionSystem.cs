@@ -3,7 +3,7 @@
 using Content.Goobstation.Common.CCVar;
 using Content.Goobstation.Shared.LightDetection.Components;
 using Content.Goobstation.Shared.LightDetection.Systems;
-using Content.Server.Disposal.Unit;
+using Content.Shared.Disposal.Unit;
 using Content.Shared.Ghost;
 using Content.Shared.Physics;
 using Robust.Server.GameObjects;

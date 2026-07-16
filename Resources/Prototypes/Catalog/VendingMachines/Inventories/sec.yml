@@ -10,25 +10,33 @@
     Flash: 5
     Tourniquet: 5
     FlashlightSeclite: 5
-    ClothingEyesGlassesSunglasses: 4 # Goobstation
+    ClothingEyesGlassesSunglasses: 4 # Trauma - was 2
     ClothingEyesHudSecurity: 2
     ClothingEyesEyepatchHudSecurity: 2
     ClothingBeltSecurityWebbing: 5
+    CombatKnife: 1 # Trauma - was 3
     Zipties: 12
     RiotShield: 2
     RiotLaserShield: 2
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
-    #Bola: 6 # Goob edit - already have energy bolas
-    CombatKnife: 1 # Goob edit
-    # Goobstation
-    BolaEnergy: 5
+    # <Trauma>
+    BolaEnergy: 5 # was Bola: 6
     PepperSpray: 3
+    SkillChipBludgeon: 2
+    SkillChipKnife: 2
+    SkillChipPolearm: 2
+    SkillChipNonLethal: 2
+    SkillChipPistol: 2
+    SkillChipRifle: 2
+    SkillChipShotgun: 2
+    SkillChipLaser: 2
     SecHypo: 2
     CartridgeEpinephrine: 2
     CartridgeSaline: 2
     CartridgeBicaridine: 2
-    CartridgeDermaline: 2 # Goobstation - end
+    CartridgeDermaline: 2
+    # </Trauma>
   # security officers need to follow a diet regimen!
   contrabandInventory:
     WeaponMeleeNeedle: 2
@@ -39,4 +47,5 @@
   emaggedInventory:
     SarinGasGrenade: 2
     EmpGrenade: 2
+    SkillChipHeavy: 1
   # </Trauma>

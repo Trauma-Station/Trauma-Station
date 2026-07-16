@@ -14,12 +14,13 @@ namespace Content.Shared.Explosion.Components;
 ///     significantly reduce the damage, but shouldn't be silly overpowered in regular combat.
 /// </remarks>
 [NetworkedComponent, RegisterComponent] // Trauma - removed system specific access
+[AutoGenerateComponentState] // Trauma
 public sealed partial class ExplosionResistanceComponent : Component
 {
     /// <summary>
     ///     The explosive resistance coefficient, This fraction is multiplied into the total resistance.
     /// </summary>
-    [DataField("damageCoefficient")]
+    [DataField, AutoNetworkedField] // Trauma - network it
     public float DamageCoefficient = 1;
 
     /// <summary>

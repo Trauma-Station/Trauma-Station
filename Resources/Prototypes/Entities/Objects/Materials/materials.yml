@@ -67,6 +67,7 @@
       types:
         Slash: -0.5
         Piercing: -0.5
+        Ballistic: -0.5 # Trauma
     bloodlossModifier: -4
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"

@@ -17,7 +17,6 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 public sealed partial class SpookSystem : EntitySystem
 {
     [Dependency] private SharedUserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -50,7 +49,7 @@ public sealed partial class SpookSystem : EntitySystem
     private void DoSelectedAction(EntityUid uid, string? action)
     {
         if (action == null
-            || !_prototypeManager.TryIndex(action, out var actionProto)
+            || !ProtoMan.TryIndex(action, out var actionProto)
             || !actionProto.HasComponent<ActionComponent>()
             || !TryComp<ActionsComponent>(uid, out var actions))
             return;

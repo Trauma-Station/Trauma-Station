@@ -18,11 +18,7 @@ namespace Content.Medical.Shared.Wounds;
 /// </summary>
 public partial class WoundSystem
 {
-    private void InitializeHealing()
-    {
-        SubscribeLocalEvent<WoundableComponent, RejuvenateEvent>(OnRejuvenate);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRejuvenate(Entity<WoundableComponent> ent, ref RejuvenateEvent args)
     {
         _container.EmptyContainer(ent.Comp.Wounds); // no more wounds
@@ -188,7 +184,7 @@ public partial class WoundSystem
 
         var woundsToHeal =
             (from wound in component.Wounds.ContainedEntities
-                let woundComp = Comp<WoundComponent>(wound)
+                let woundComp = _query.Comp(wound)
                 where CanHealWound(wound, woundComp, ignoreBlockers)
                 where damageGroup == null || damageGroup == woundComp.DamageGroup
                 select (wound, woundComp)).Select(dummy => (Entity<WoundComponent>) dummy)
@@ -231,7 +227,7 @@ public partial class WoundSystem
 
         var woundsToHeal =
             (from wound in component.Wounds.ContainedEntities
-                let woundComp = Comp<WoundComponent>(wound)
+                let woundComp = _query.Comp(wound)
                 where CanHealWound(wound, woundComp, ignoreBlockers)
                 where damageType == woundComp.DamageType
                 select (wound, woundComp)).Select(dummy => (Entity<WoundComponent>) dummy)
@@ -334,7 +330,7 @@ public partial class WoundSystem
             return FixedPoint2.Zero;
 
         var woundHealingMultiplier =
-            _prototype.Index<DamageTypePrototype>(Comp<WoundComponent>(wound).DamageType).WoundHealingMultiplier;
+            ProtoMan.Index<DamageTypePrototype>(_query.Comp(wound).DamageType).WoundHealingMultiplier;
 
         if (component.HealingMultipliers.Count == 0)
             return severity * woundHealingMultiplier;
@@ -376,7 +372,7 @@ public partial class WoundSystem
         if (ev.Cancelled)
             return false;
 
-        var ev1 = new WoundHealAttemptEvent((holdingWoundable, Comp<WoundableComponent>(holdingWoundable)), ignoreBlockers);
+        var ev1 = new WoundHealAttemptEvent((holdingWoundable, _woundableQuery.Comp(holdingWoundable)), ignoreBlockers);
         RaiseLocalEvent(wound, ref ev1);
 
         return !ev1.Cancelled;

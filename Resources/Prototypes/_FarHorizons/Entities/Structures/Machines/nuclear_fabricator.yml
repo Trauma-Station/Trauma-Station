@@ -25,6 +25,7 @@
       - Sheet
       - RawMaterial
       - Ingot
+      - Ore # for charcoal, graphite parts
   - type: Lathe
     idleState: icon
     runningState: building
@@ -36,7 +37,7 @@
     - GasTurbineStators
     dynamicPacks:
     - ReactorFuelRods
-    - ReactorControlRods
+    - ReactorReflectors
     - ReactorGasChannels
     - ReactorHeatExchangers
   - type: ContainerContainer

@@ -7,7 +7,6 @@
   mastery:
     # Crafting Recipe Skills - 1 is standard unless stated otherwise.
     CookingKnowledge: 0
-    MaterialsKnowledge: 1
     DoorsKnowledge: 1
     AirlocksKnowledge: 1
     ToysKnowledge: 1
@@ -17,7 +16,6 @@
     InfrastructureKnowledge: 1
     ElectronicsKnowledge: 1
     WallsKnowledge: 1
-    ScienceKnowledge: 0 # Not roundstart, blueprint required.
     WindowsKnowledge: 1
     SmokeablesKnowledge: 0 # Not roundstart, blueprint required.
     # Intelectual Skills

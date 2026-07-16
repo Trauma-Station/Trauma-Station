@@ -8,6 +8,8 @@
   description: A mag-fed shotgun designed for neutralizing threats and keeping criminals at bay with overwhelming force.
   suffix: DO NOT MAP # This should be made obtainable at some point.
   components:
+  - type: WeaponClass
+    class: Shotgun
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Shotguns/antelope.rsi
     layers:
@@ -100,6 +102,8 @@
   id: WeaponShotgunHeavy
   description: A 3-round burst magazine-fed heavy shotgun for total extermination. Uses 2 gauge ammunition.
   components:
+  - type: WeaponClass
+    class: Heavy
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Shotguns/magshot.rsi
     layers:

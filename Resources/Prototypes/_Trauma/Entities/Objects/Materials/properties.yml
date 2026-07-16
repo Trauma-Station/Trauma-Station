@@ -203,3 +203,12 @@
     hard: 7
     density: 6
     chemical: 5
+
+- type: entity
+  abstract: true
+  parent: BaseNuclearPropertiesDiamond
+  id: BaseNuclearPropertiesGraphite
+  components:
+  - type: NuclearProperties
+    color: "#404040"
+    density: 4

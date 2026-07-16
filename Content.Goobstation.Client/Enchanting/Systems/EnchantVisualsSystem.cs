@@ -13,7 +13,6 @@ namespace Content.Goobstation.Client.Enchanting.Systems;
 /// </summary>
 public sealed partial class EnchantVisualsSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
     public readonly ProtoId<ShaderPrototype> Shader = "Enchant";
@@ -29,7 +28,7 @@ public sealed partial class EnchantVisualsSystem : EntitySystem
 
         SubscribeLocalEvent<EnchanterComponent, AfterAutoHandleStateEvent>(OnEnchanterHandleState);
 
-        _shader = _proto.Index(Shader).InstanceUnique();
+        _shader = ProtoMan.Index(Shader).InstanceUnique();
     }
 
     private void OnHandleState(Entity<EnchantedComponent> ent, ref AfterAutoHandleStateEvent args)

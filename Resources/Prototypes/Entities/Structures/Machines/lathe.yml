@@ -640,6 +640,7 @@
   - type: OreSiloClient
   #- type: LatheAnnouncing # Trauma - not cherry picked
   #  channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseLathe
@@ -766,7 +767,6 @@
     - type: MaterialStorage
       # <Trauma>
       ignoreMaterialWhiteList: true
-      disallowOreEjection: false
       # </Trauma>
       ignoreColor: true
       whitelist:

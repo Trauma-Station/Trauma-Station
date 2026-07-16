@@ -81,7 +81,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         _gibQueue.Add(user);
     }
 
-    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, System.Random rand, EntityCoordinates oldCoords, Vector2 offset)
+    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, IRobustRandom rand, EntityCoordinates oldCoords, Vector2 offset)
     {
         if (_charges.IsEmpty(ent.Owner))
             return false;
@@ -128,7 +128,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         return false;
     }
 
-    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, System.Random rand, Vector2 offset)
+    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, IRobustRandom rand, Vector2 offset)
     {
         if (ent.Comp.RandomRotations.Count == 0)
             return Vector2.Zero;

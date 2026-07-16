@@ -46,7 +46,6 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private NuclearMachineSystem _machine = default!;
     [Dependency] private RadioSystem _radio = default!;
@@ -103,7 +102,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     #region Prefab
     private void ApplyPrefab(Entity<NuclearReactorComponent> ent)
     {
-        var prefab = ent.Comp.Prefab is { } id ? _proto.Index(id).Parts : GenerateRandomPrefab(ent.Comp);
+        var prefab = ent.Comp.Prefab is { } id ? ProtoMan.Index(id).Parts : GenerateRandomPrefab(ent.Comp);
         var container = ent.Comp.PartsContainerName;
         foreach (var (pos, partId) in prefab)
         {
@@ -123,7 +122,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     private Dictionary<Vector2i, EntProtoId> GenerateRandomPrefab(NuclearReactorComponent comp)
     {
         var parts = new Dictionary<Vector2i, EntProtoId>();
-        var pool = _proto.Index(NuclearReactorRandomParts);
+        var pool = ProtoMan.Index(NuclearReactorRandomParts);
         for (var x = 0; x < comp.GridWidth; x++)
         {
             for (var y = 0; y < comp.GridHeight; y++)
@@ -155,7 +154,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         Appearance.SetData(uid, ReactorVisuals.Output, outlet.Air.TotalMoles > 20);
 
         var tempRads = 0;
-        var tempChange = 0f;
+        var energyChange = 0f;
 
         var transferVolume = CalculateTransferVolume(inlet.Air.Volume, inlet, outlet, args.dt);
         var gasInput = inlet.Air.RemoveVolume(transferVolume);
@@ -183,8 +182,8 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
             GetGridNeighbors(comp, pos.X, pos.Y);
             _part.ProcessHeat(part, ent, _neighbors);
 
-            comp.FluxGrid[i] = _part.ProcessNeutrons((part, part.Comp, props), comp.FluxGrid[i], out var deltaT);
-            tempChange += deltaT;
+            comp.FluxGrid[i] = _part.ProcessNeutrons((part, part.Comp, props), comp.FluxGrid[i], out var deltaE);
+            energyChange += deltaE;
 
             if (_controlQuery.TryComp(part, out var control))
             {
@@ -194,7 +193,8 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
                     control.ConfiguredInsertionLevel = comp.ControlRodInsertion;
                     Dirty(part, control);
                 }
-                avgControlRodInsertion += part.Comp.NeutronCrossSection;
+                // fuel rod cross section is inversely proportional to control rod insertion
+                avgControlRodInsertion += 1f - part.Comp.NeutronCrossSection;
                 controlRods++;
             }
         }
@@ -231,7 +231,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
                     if (x + xmod >= 0 && y + ymod >= 0 && x + xmod <= gridWidth - 1 && y + ymod <= gridHeight - 1)
                         comp.GetFlux(x + xmod, y + ymod).Add(neutron);
                     else
-                        tempRads++; // neutrons hitting the casing get blasted in to the room - have fun with that engineers!
+                        tempRads++; // neutrons hitting the casing become radiation, too much and it will bypass shielding
                     comp.FluxGrid[index].Remove(neutron);
                 }
             }
@@ -244,10 +244,14 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         _atmos.Merge(outlet.Air, gasInput);
 
         comp.RadiationLevel = Math.Max(comp.RadiationLevel + tempRads, 0);
+        DirtyField(uid, comp, nameof(NuclearReactorComponent.RadiationLevel));
 
+        // W = J/s
+        // use a rolling average to not jump erratically
+        var currentPower = energyChange / args.dt;
         if (comp.ThermalPowerCount < comp.ThermalPowerPrecision)
             comp.ThermalPowerCount++;
-        SetThermalPower(ent, comp.ThermalPower + (int) ((tempChange - comp.ThermalPower) / Math.Min(comp.ThermalPowerCount, comp.ThermalPowerPrecision)));
+        SetThermalPower(ent, comp.ThermalPower + (int) ((currentPower - comp.ThermalPower) / Math.Min(comp.ThermalPowerCount, comp.ThermalPowerPrecision)));
 
         if (comp.Temperature > comp.ReactorMeltdownTemp)
         {
@@ -264,14 +268,15 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
 
     private void ProcessCaseRadiation(Entity<NuclearReactorComponent> ent)
     {
-        var reactor = ent.Comp;
-        var comp = EnsureComp<RadiationSourceComponent>(ent.Owner);
+        var (uid, comp) = ent;
+        var source = EnsureComp<RadiationSourceComponent>(uid);
 
-        // Linear scaling up to maximum, logarithmic beyond that
-        _radiation.SetIntensity((ent, comp), (float)Math.Max(reactor.RadiationLevel <= reactor.MaximumRadiation
-            ? reactor.RadiationLevel
-            : reactor.MaximumRadiation + Math.Log(reactor.RadiationLevel - reactor.MaximumRadiation + 1), reactor.Melted ? reactor.MeltdownRadiation : 0));
-        reactor.RadiationLevel /= Math.Max(reactor.RadiationStability, 1);
+        // shielding protects up to MaximumRadiation, linear scaling past that
+        _radiation.SetIntensity((uid, source), MathF.Max(
+            comp.RadiationLevel - comp.MaximumRadiation,
+            comp.Melted ? comp.MeltdownRadiation : 0));
+        comp.RadiationLevel /= comp.RadiationStability;
+        DirtyField(uid, comp, nameof(NuclearReactorComponent.RadiationLevel));
     }
 
     private void GetGridNeighbors(NuclearReactorComponent comp, int x, int y)
@@ -466,7 +471,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         if (comp.Melted)
             return;
 
-        var engi = _proto.Index(ent.Comp.AlertsChannel);
+        var engi = ProtoMan.Index(ent.Comp.AlertsChannel);
         if (comp.Temperature >= comp.ReactorOverheatTemp)
         {
             if (!comp.IsSmoking)

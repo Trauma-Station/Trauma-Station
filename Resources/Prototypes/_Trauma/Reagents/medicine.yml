@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reagent
+  id: Dewormer
+  name: reagent-name-dewormer
+  group: Medicine
+  desc: reagent-desc-dewormer
+  physicalDesc: reagent-physical-desc-chalky
+  flavor: medicine
+  color: "#e0ae7b"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:DiseaseProgressChange
+        affectedType: Parasite
+        progressModifier: -0.10

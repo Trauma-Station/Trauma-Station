@@ -14,9 +14,6 @@
   - UraniumReactorFuelRod
   - PlasmaReactorFuelRod
   - UraniumGlassReactorFuelRod
-  - SilverReactorControlRod
-  - PlasteelReactorControlRod
-  - PlasmaGlassReactorControlRod
   - SilverReactorGasChannel
   - PlasteelReactorGasChannel
   - PlasmaGlassReactorGasChannel
@@ -40,8 +37,9 @@
   - NuclearCentrifugeMachineCircuitboard
   - PlutoniumReactorFuelRod
   - BananiumReactorFuelRod
-  - GoldReactorControlRod
-  - DiamondReactorControlRod
+  - GoldReactorReflector
+  - SilverReactorReflector
+  - GraphiteReactorReflector
   - GoldReactorGasChannel
   - DiamondReactorGasChannel
   - GoldReactorHeatExchanger

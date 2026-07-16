@@ -10,7 +10,6 @@ namespace Content.Trauma.Client.DeepFryer;
 public sealed partial class DeepFriedSystem : EntitySystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
 
     private static readonly ProtoId<ShaderPrototype> ShaderName = "Fried";
     private ShaderInstance _shader = default!;
@@ -19,7 +18,7 @@ public sealed partial class DeepFriedSystem : EntitySystem
     {
         base.Initialize();
 
-        _shader = _protoMan.Index(ShaderName).InstanceUnique();
+        _shader = ProtoMan.Index(ShaderName).InstanceUnique();
 
         SubscribeLocalEvent<DeepFriedComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
         SubscribeLocalEvent<DeepFriedComponent, AppearanceChangeEvent>(OnAppearanceChange);
