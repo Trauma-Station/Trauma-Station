@@ -79,7 +79,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
 
     private void OnTransformSpeechImplant(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<TransformSpeechEvent> args)
     {
-        TransformSpeech(entity, args.Event);
+        TransformSpeech(entity, args.Args);
     }
 
     private void OnTransformSpeakerNameInventory(Entity<VoiceMaskComponent> entity, ref InventoryRelayedEvent<TransformSpeakerNameEvent> args)
@@ -89,7 +89,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
 
     private void OnTransformSpeakerNameImplant(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<TransformSpeakerNameEvent> args)
     {
-        TransformVoice(entity, args.Event);
+        TransformVoice(entity, args.Args);
     }
 
     private void OnSeeIdentityAttemptEvent(Entity<VoiceMaskComponent> entity, ref ImplantRelayEvent<SeeIdentityAttemptEvent> args)
@@ -97,7 +97,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
         if (!entity.Comp.OverrideIdentity || !entity.Comp.Active)
             return;
 
-        args.Event.NameOverride = GetCurrentVoiceName(entity);
+        args.Args.NameOverride = GetCurrentVoiceName(entity);
     }
 
     private void OnImplantImplantedEvent(Entity<VoiceMaskComponent> entity, ref ImplantImplantedEvent ev)

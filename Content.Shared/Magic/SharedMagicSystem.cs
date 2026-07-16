@@ -238,7 +238,7 @@ public abstract partial class SharedMagicSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        _popup.PopupClient(Loc.GetString("spell-requirements-failed-speech"), args.Performer, args.Performer); // Goob edit
+        _popup.PopupEntity(Loc.GetString("spell-requirements-failed-speech"), args.Performer, args.Performer); // Trauma - added -speech
 
         // TODO: Pre-cast do after, either here or in SharedActionsSystem
     }
