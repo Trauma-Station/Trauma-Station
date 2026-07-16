@@ -35,7 +35,6 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
                 continue;
 
             component.AnomalousEntity = null;
-            component.IdGear = null;
             component.Linked = false;
             Dirty(ent, component);
         }

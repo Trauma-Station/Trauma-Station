@@ -32,10 +32,4 @@ public sealed partial class AnomalousEntityContainmentComponent : Component
     /// </summary>
     [DataField]
     public float Range = 1.6f;
-
-    /// <summary>
-    /// Currently assigned I.D. gear to spawn on behaviours
-    /// </summary>
-    [DataField]
-    public EntProtoId? IdGear;
 }

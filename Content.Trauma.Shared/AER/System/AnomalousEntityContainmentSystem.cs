@@ -61,11 +61,6 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         Dirty(ent);
 
         anomalousEntityComponent.ConnectedContainment = ent.Owner;
-        TryComp<AnomalousEntityComponent>(ent.Comp.AnomalousEntity, out var aer);
-        if (aer != null && aer.IdGear.HasValue)
-        {
-            ent.Comp.IdGear = aer.IdGear;
-        }
 
         _popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), ent.Owner);
     }
@@ -106,10 +101,10 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
     //spawns I.D. gear on anom behaviour
     private void OnAerBehaviourSpawnGear(Entity<AnomalousEntityComponent> ent, ref AerBehaviourSpawnGearEvent args)
     {
-        if (ent.Comp.ConnectedContainment == null || ent.Comp.ConnectedContainment == null)
+        if (ent.Comp.ConnectedContainment is not { } aerContainmentId)
             return;
 
-        if (ent.Comp.ConnectedContainment is not { } aerContainmentId)
+        if (ent.Comp.IdGear is not { } idGear)
             return;
 
         //spawn I.D. Gear
@@ -117,7 +112,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         {
             if (ent.Comp.Contained)
             {
-                PredictedSpawnAtPosition(aerSensor.IdGear, Transform(aerContainmentId).Coordinates);
+                PredictedSpawnAtPosition(idGear, Transform(aerContainmentId).Coordinates);
             }
         }
     }

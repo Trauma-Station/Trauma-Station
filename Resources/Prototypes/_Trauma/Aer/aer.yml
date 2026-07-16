@@ -41,7 +41,7 @@
   - type: AnomalousEntityScanner
   - type: Item
     storedRotation: -90
-  - type: PhysicalComposition #Goobstation - Recycle update
+  - type: PhysicalComposition
     materialComposition:
       Steel: 100
       Glass: 25
