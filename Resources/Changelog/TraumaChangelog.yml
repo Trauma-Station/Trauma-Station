@@ -11010,3 +11010,10 @@ Entries:
   id: 1229
   time: '2026-07-12T23:43:01.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/68
+- author: magelfik
+  changes:
+  - type: Tweak
+    message: Changed some Nanotrasen Rep Tasks to be more PC
+  id: 1230
+  time: '2026-07-16T20:04:20.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/80
