@@ -41,6 +41,8 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
 
             component.AnomalousEntity = null;
             component.IDGear = null;
+            component.Linked = false;
+            Dirty(ent, component);
         }
 
         var queryScanner = EntityQueryEnumerator<AnomalousEntityScannerComponent>();

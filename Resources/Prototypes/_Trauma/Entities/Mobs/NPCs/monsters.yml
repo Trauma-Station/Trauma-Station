@@ -355,7 +355,7 @@
     contained: false
     researchOnBehaviour: 100000
     iDGear: SoapHomemadeBanana
-  - type: AerBehaviourWailingHorse
+  - type: AerHorse
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat]

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Anomaly;
+using Content.Shared.Examine;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
-using Content.Shared.Anomaly;
 using Content.Shared.Popups;
-using Content.Shared.Examine;
 
 using Robust.Shared.Audio.Systems;
 
@@ -12,9 +12,8 @@ namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AnomalousEntityScannerSystem : EntitySystem
 {
-    [Dependency] private SharedDoAfterSystem _doAfter = default!;
-
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
@@ -37,13 +36,14 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
 
     private void OnDoAfter(EntityUid uid, AnomalousEntityScannerComponent component, DoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Args.Target == null)
+
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
         _audio.PlayPredicted(component.CompleteSound, uid, args.User);
         _popup.PopupPredicted(Loc.GetString("anomaly-scanner-component-scan-complete"), uid, args.User);
 
-        UpdateScannerWithNewAnomaly(uid, args.Args.Target.Value, component);
+        UpdateScannerWithNewAnomaly(uid, target, component);
     }
 
 

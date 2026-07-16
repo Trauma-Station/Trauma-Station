@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
 namespace Content.Trauma.Shared.AER;
 
@@ -14,7 +13,7 @@ public sealed partial class AnomalousEntityScannerComponent : Component
     /// <summary>
     /// The anomalous entity that was last scanned by this scanner.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid? ScannedAER;
 
     /// <summary>
