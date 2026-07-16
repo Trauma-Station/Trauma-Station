@@ -28,6 +28,16 @@
         {
         	"name": "back",
         	"directions": 4
+        },
+        },
+        {
+        	"name": "earpiece",
+        	"directions": 4
+        },
+        },
+        {
+        	"name": "mask",
+        	"directions": 4
         }
     ]
 }
