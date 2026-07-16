@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 
@@ -39,7 +41,7 @@ public sealed partial class AerMobActiveSystem : EntitySystem
     }
 
     /// <summary>
-    /// helper function returns the active flag value correspondent to state value 
+    /// helper function returns the active flag value correspondent to state value
     /// </summary>
     private bool MobStateToActiveEvent(MobState state)
     {
