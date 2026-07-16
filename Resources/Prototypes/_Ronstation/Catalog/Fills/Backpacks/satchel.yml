@@ -18,7 +18,10 @@
       - id: TelescopicBaton
       - id: SpeedLoaderMagnum
       - id: SpeedLoaderMagnum
-      - id: SkillChipNukie # Ironically the most down-to-earth in terms of value.
+      - id: SkillChipNukie # Ironically the most down-to-earth in terms of value, for an all-rounder character that could assist any department.
+      - id: MedkitCombatFilled
+      - id: MedkitCombatPurpleFilled
+
 # Written by me (Semper) based off of Atakku's original code and my changes to the survival box. Includes some unique extras to assist with the unique role I wish for Semper to take.
 - type: entity
   id: ClothingBackpackSatchelHoldingCentcomOfficerFilled
@@ -45,6 +48,8 @@
       - id: SpeedLoaderMagnum
       - id: SpeedLoaderMagnum
       - id: SkillChipNukie
+      - id: MedkitCombatFilled
+      - id: MedkitCombatPurpleFilled
 # CC 'Insider' Admeme; an undercover CC agent who seeks to make notes about the shift or provide a Point-of-contact outside of the BSO or NTRep for on-CC characters
 # This is mostly meant to be someone who will report misdeeds to Central Command such as law breaks mishandled or not handled at all by security, or similar issues.
 - type: entity
@@ -64,3 +69,4 @@
       - id: RadioImplanterCentcomm
       - id: EncryptionKeyStationMaster
       - id: SkillChipNukie
+      - id: MedkitCombatFilled

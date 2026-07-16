@@ -19,3 +19,8 @@
     sprite: _Ronstation/Clothing/Eyes/Hud/commandvisor.rsi
   - type: Clothing
     sprite: _Ronstation/Clothing/Eyes/Hud/commandvisor.rsi
+- type: entity
+  parent: ClothingEyesGlassesDeathsquad
+  id: ClothingEyesGlassesAgent # The calm before the storm.
+  components:
+    - type: SolutionScanner # Makes this more flexible, extends the list of possible roles to fill to chemist and bartender for example.

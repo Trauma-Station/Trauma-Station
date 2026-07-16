@@ -1,15 +1,16 @@
 - type: startingGear
   id: CentcomInsiderAgentGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitCentcomFormal
+    jumpsuit: ClothingUniformJumpsuitChameleon
     back: ClothingBackpackSatchelLeatherFilledAgent
     shoes: ClothingShoesChameleonNoSlips
     mask: ClothingMaskGasChameleon
-    outerClothing: ClothingOuterArmorInvisibleChameleon
-    eyes: ClothingEyesGlassesDeathsquad # The calm before the storm.
+    outerClothing: ClothingOuterArmourInvisibleChameleon
+    neck: ClothingNeckChameleon
+    eyes: ClothingEyesGlassesAgent
     gloves: ClothingAdmemeHandsChameleonInsulated # Certified NT stolen-and-improved Syndicate technology.
     id: ChameleonAgentPDA
-    ears: ClothingHeadsetChamleon
+    ears: ClothingHeadsetChameleon
     belt: BoxFolderClipboardThreePapers # For potential roleplay/notes taking.
     pocket1: WeaponDisablerAdvanced
     pocket2: TelescopicBatonAdvanced
