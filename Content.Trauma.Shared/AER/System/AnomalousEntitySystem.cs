@@ -1,14 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Wraith.Components.Mobs;
-using Content.Shared.Research.Systems;
-
 namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AnomalousEntitySystem : EntitySystem
 {
-    [Dependency] private SharedResearchSystem _research = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -40,7 +35,7 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
                 continue;
 
             component.AnomalousEntity = null;
-            component.IDGear = null;
+            component.IdGear = null;
             component.Linked = false;
             Dirty(ent, component);
         }

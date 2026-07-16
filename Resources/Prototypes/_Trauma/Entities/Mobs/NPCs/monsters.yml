@@ -354,7 +354,7 @@
     researchPerSecond: 100
     contained: false
     researchOnBehaviour: 100000
-    iDGear: SoapHomemadeBanana
+    idGear: SoapHomemadeBanana
   - type: AerHorse
 
 - type: entity

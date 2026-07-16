@@ -62,9 +62,9 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 
         anomalousEntityComponent.ConnectedContainment = ent.Owner;
         TryComp<AnomalousEntityComponent>(ent.Comp.AnomalousEntity, out var aer);
-        if (aer != null && aer.IDGear.HasValue)
+        if (aer != null && aer.IdGear.HasValue)
         {
-            ent.Comp.IDGear = aer.IDGear;
+            ent.Comp.IdGear = aer.IdGear;
         }
 
         _popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), ent.Owner);
@@ -117,7 +117,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         {
             if (ent.Comp.Contained)
             {
-                PredictedSpawnAtPosition(aerSensor.IDGear, Transform(aerContainmentId).Coordinates);
+                PredictedSpawnAtPosition(aerSensor.IdGear, Transform(aerContainmentId).Coordinates);
             }
         }
     }

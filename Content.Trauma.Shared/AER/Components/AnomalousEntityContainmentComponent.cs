@@ -37,5 +37,5 @@ public sealed partial class AnomalousEntityContainmentComponent : Component
     /// Currently assigned I.D. gear to spawn on behaviours
     /// </summary>
     [DataField]
-    public EntProtoId? IDGear;
+    public EntProtoId? IdGear;
 }

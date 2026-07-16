@@ -77,12 +77,10 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
     {
         if (!args.IsInDetailsRange)
             return;
-        if (component.ScannedAER == null)
-            return;
 
-        args.PushText(component.ScannedAER == null
+        args.PushText(component.ScannedAER is not { } scannedAer
             ? Loc.GetString("anomaly-vessel-component-not-assigned")
-            : (Loc.GetString("anomaly-vessel-component-assigned") + " it contains a scan of " + Name((EntityUid) component.ScannedAER)));
+            : (Loc.GetString("anomaly-vessel-component-assigned") + " it contains a scan of " + Name(scannedAer)));
     }
 
 }

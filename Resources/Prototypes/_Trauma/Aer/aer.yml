@@ -18,7 +18,7 @@
     researchPerSecond: 0
     contained: false
     researchOnBehaviour: 100000
-    iDGear: SoapHomemadeBanana
+    idGear: SoapHomemadeBanana
   - type: AerSoap
 
 
@@ -27,45 +27,21 @@
   parent: BaseItem
   id: AerScanner
   name: AER scanner
-  description: A hand-held scanner built to collect information on AERs.
+  description: A hand-held scanner built to collect informations on AERs.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Aer/aerScanner.rsi
-    layers:
-      - state: icon
-        map: ["enum.AnomalyScannerVisualLayers.Base"]
-      - map: ["enum.AnomalyScannerVisualLayers.Screen"]
-        visible: false
-        shader: unshaded
-      - state: severity_mask
-        map: ["enum.AnomalyScannerVisualLayers.SeverityMask"]
-        visible: false
-        shader: unshaded
-      - map: ["enum.AnomalyScannerVisualLayers.Stability"]
-        visible: false
-        shader: unshaded
-      - visible: false
-        map: ["enum.AnomalyScannerVisualLayers.Pulse"]
-        shader: unshaded
-      - state: supercritical
-        map: ["enum.AnomalyScannerVisualLayers.Supercritical"]
-        shader: unshaded
-        visible: false
-  - type: Appearance
-  - type: AnomalousEntityScanner
-  - type: Item
-    storedRotation: -90
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Steel: 100
       Glass: 25
 
-# Aer sensor machine that must be used in containment chamber it analyses a anomalous entity in range linked with a
+# Aer sensor machine that must be used in containment chamber it analyses a linked anomalous entity in range 
 - type: entity
   id: MachineAERContainmentSensor
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: AER Analysis Sensor
-  description: A sensor able to examine an anomalous entity to produce usable it into research data.
+  description: A sensor able to examine an anomalous entity to produce usable research data.
   components:
   - type: Sprite
     drawdepth: FloorObjects
@@ -104,7 +80,7 @@
   - type: Machine
     board: AerSensorCircuitboard
 
-# Aer sensor board yaml
+# Aer sensor board
 - type: entity
   parent: BaseMachineCircuitboard
   id: AerSensorCircuitboard

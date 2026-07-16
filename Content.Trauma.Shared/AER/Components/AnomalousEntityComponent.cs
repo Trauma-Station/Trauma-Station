@@ -36,7 +36,7 @@ public sealed partial class AnomalousEntityComponent : Component
     /// protoId of the I.D. gear to spawn on behaviours
     /// </summary>
     [DataField]
-    public EntProtoId? IDGear;
+    public EntProtoId? IdGear;
 
     /// <summary>
     /// containment sensor connected to the entity
