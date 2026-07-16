@@ -3,6 +3,7 @@
 using Content.Server.GameTicking;
 using Content.Server.Voting.Managers;
 using Content.Shared.Voting;
+using Content.Shared.CCVar;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 
@@ -26,6 +27,7 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
     private void OnRunLevelChanged(GameRunLevelChangedEvent args)
     {
         if (!_cfg.GetCVar(TraumaCVars.AutomaticMapVote)
+        || !_cfg.GetCVar(TraumaCVars.GameLobbyEnabled)
         || args.New != GameRunLevel.PreRoundLobby) return;
         _vote.CreateStandardVote(null, StandardVoteType.Map);
     }
