@@ -19,6 +19,8 @@
     - id: MagazineMagnum
     - id: MagazineMagnum
     - id: TelescopicBaton
+    - id: SkillChipChiefEngineer
+
 # Filled modsuit for ERT leader admeme, Chester clips
 - type: entity
   parent: ClothingModsuitResponsoryLeader
@@ -41,6 +43,8 @@
       - id: MagazineShotgunLeverRifle
       - id: TelescopicBaton
       - id: JawsOfLife
+      - id: SkillChipNukie
+
 # Filled modsuit for ERT leader admeme, Annie mags
 - type: entity
   parent: ClothingModsuitResponsoryLeader
@@ -63,3 +67,4 @@
       - id: MagazineLightRifle
       - id: TelescopicBaton
       - id: JawsOfLife
+      - id: SkillChipNukie

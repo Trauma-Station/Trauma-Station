@@ -15,7 +15,7 @@
     pocket1: WeaponDisablerAdvanced
     pocket2: WeaponRevolverMateba
   inhand:
-  - MindShieldImplanter
+  - CentcommMindShieldImplanter
   - DeathRattleImplanterCentcomm
 
 - type: startingGear
@@ -54,5 +54,5 @@
     pocket1: WeaponDisablerAdvanced
     pocket2: WeaponRevolverMateba
   inhand:
-  - MindShieldImplanter
+  - CentcommMindShieldImplanter
   - DeathRattleImplanterCentcomm
