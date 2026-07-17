@@ -62,11 +62,11 @@
 - type: entityTable
   id: ExtremeSideJobRewards
   table: !type:GroupSelector
-  children:
-  - id: Telecrystal15
-    weight: 2 # 2/3 of the time you get straight TC (but less value)
-  - !type:NestedSelector
-    tableId: ExtremeSideJobRewardsItems
+    children:
+    - id: Telecrystal15
+      weight: 2 # 2/3 of the time you get straight TC (but less value)
+    - !type:NestedSelector
+      tableId: ExtremeSideJobRewardsItems
 
 - type: entityTable
   id: ExtremeSideJobRewardsItems
