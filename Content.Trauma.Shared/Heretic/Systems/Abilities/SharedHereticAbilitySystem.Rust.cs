@@ -43,24 +43,7 @@ public abstract partial class SharedHereticAbilitySystem
         { "WallReinforced", "WallReinforcedRust" },
     };
 
-    protected virtual void SubscribeRust()
-    {
-        SubscribeLocalEvent<EventHereticRustConstruction>(OnRustConstruction);
-        SubscribeLocalEvent<EventHereticAggressiveSpread>(OnAggressiveSpread);
-        SubscribeLocalEvent<EventHereticEntropicPlume>(OnEntropicPlume);
-
-        SubscribeLocalEvent<RustbringerComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<RustbringerComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
-        SubscribeLocalEvent<RustbringerComponent, BeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
-        SubscribeLocalEvent<RustbringerComponent, SlipAttemptEvent>(OnSlipAttempt);
-        SubscribeLocalEvent<RustbringerComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
-        SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
-        SubscribeLocalEvent<RustbringerComponent, BeforeHarmfulActionEvent>(OnBeforeHarmfulAction);
-        SubscribeLocalEvent<RustbringerComponent, DamageModifyEvent>(OnModifyDamage);
-
-        SubscribeLocalEvent<EventHereticRustCharge>(OnRustCharge);
-    }
-
+    [SubscribeLocalEvent]
     private void OnModifyDamage(Entity<RustbringerComponent> ent, ref DamageModifyEvent args)
     {
         if (!IsOnRust(ent))
@@ -69,6 +52,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.ModifierSet);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeHarmfulAction(Entity<RustbringerComponent> ent, ref BeforeHarmfulActionEvent args)
     {
         if (args.Cancelled || args.Type is HarmfulActionType.Disarm or HarmfulActionType.Grab)
@@ -80,6 +64,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnElectrocuteAttempt(Entity<RustbringerComponent> ent, ref ElectrocutionAttemptEvent args)
     {
         if (!IsTileRust(Transform(ent).Coordinates, out _))
@@ -88,6 +73,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnGetExplosionResists(Entity<RustbringerComponent> ent, ref GetExplosionResistanceEvent args)
     {
         if (!IsOnRust(ent))
@@ -96,22 +82,26 @@ public abstract partial class SharedHereticAbilitySystem
         args.DamageCoefficient *= 0f;
     }
 
+    [SubscribeLocalEvent]
     private void OnSlipAttempt(Entity<RustbringerComponent> ent, ref SlipAttemptEvent args)
     {
         args.NoSlip |= IsOnRust(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnKnockDownAttempt(EntityUid uid, RustbringerComponent comp, ref KnockDownAttemptEvent args)
     {
         args.Cancelled |= IsOnRust(uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStatusEffect(Entity<RustbringerComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
         if (args.Effect == StatusEffectStunned)
             args.Cancelled |= IsOnRust(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeStaminaDamage(Entity<RustbringerComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         args.Cancelled |= IsOnRust(ent);
@@ -133,6 +123,7 @@ public abstract partial class SharedHereticAbilitySystem
     public bool IsOnRust(EntityUid uid)
         => IsTileRust(Transform(uid).Coordinates, out _);
 
+    [SubscribeLocalEvent]
     private void OnEntropicPlume(EventHereticEntropicPlume args)
     {
         var uid = args.Performer;
@@ -189,6 +180,7 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAggressiveSpread(EventHereticAggressiveSpread args)
     {
         if (!TryUseAbility(args))
@@ -328,6 +320,7 @@ public abstract partial class SharedHereticAbilitySystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnRustConstruction(EventHereticRustConstruction args)
     {
         if (!TryUseAbility(args, false))
@@ -381,6 +374,7 @@ public abstract partial class SharedHereticAbilitySystem
         _audio.PlayPredicted(args.Sound, args.Target, args.Performer);
     }
 
+    [SubscribeLocalEvent]
     private void OnRustCharge(EventHereticRustCharge args)
     {
         if (!args.Target.IsValid(EntityManager) || !TryUseAbility(args))

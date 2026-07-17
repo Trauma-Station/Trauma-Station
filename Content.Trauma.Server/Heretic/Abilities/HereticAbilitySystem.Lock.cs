@@ -16,17 +16,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    protected override void SubscribeLock()
-    {
-        base.SubscribeLock();
-
-        SubscribeLocalEvent<EventHereticShapeshift>(OnShapeshift);
-
-        SubscribeLocalEvent<ShapeshiftActionComponent, HereticShapeshiftMessage>(OnShapeshiftMessage);
-
-        SubscribeLocalEvent<HereticComponent, HereticModifySideKnowledgeDraftsEvent>(OnDraftsModify);
-    }
-
+    [SubscribeLocalEvent]
     private void OnDraftsModify(Entity<HereticComponent> ent, ref HereticModifySideKnowledgeDraftsEvent args)
     {
         foreach (var (key, value) in args.SideKnowledgeDrafts)
@@ -38,6 +28,7 @@ public sealed partial class HereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnShapeshiftMessage(Entity<ShapeshiftActionComponent> ent, ref HereticShapeshiftMessage args)
     {
         var key = args.UiKey;
@@ -99,6 +90,7 @@ public sealed partial class HereticAbilitySystem
             });
     }
 
+    [SubscribeLocalEvent]
     private void OnShapeshift(EventHereticShapeshift args)
     {
         if (!HasComp<ShapeshiftActionComponent>(args.Action))
