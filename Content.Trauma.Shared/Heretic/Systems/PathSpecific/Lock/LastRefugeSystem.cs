@@ -121,6 +121,7 @@ public sealed partial class LastRefugeSystem : EntitySystem
         stealth.RevealOnAttack = false;
         stealth.RevealOnDamage = false;
         stealth.ThermalsImmune = true;
+        Dirty(ent, stealth);
 
         _stealth.SetVisibility(ent.Owner, ent.Comp.Visibility, stealth);
         _stealth.SetEnabled(ent.Owner, true, stealth);
