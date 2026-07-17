@@ -3,130 +3,6 @@
 # It's best to use fadeIn and interruptable parameters when creating a new ambientMusic prototype for areas,
 # with a high priority number (e.g. 10) so it has a higher chance to play the music.
 # IMPORTANT, set general department area (e.g. medical) priority to around 5 then set specific areas (e.g. morgue) to around 10 this will give the department general ambience but will allow for sub areas to have its own ambience
-# Rules
-- type: rules
-  id: InServiceArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Service
-
-- type: rules
-  id: InCargoArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Cargo
-
-- type: rules
-  id: InCivilianArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Civilian
-
-- type: rules
-  id: InCommandArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Command
-
-- type: rules
-  id: InEngineeringArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Engineering
-
-- type: rules
-  id: InMedicalArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Medical
-
-- type: rules
-  id: InScienceArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Science
-
-- type: rules
-  id: InSecurityArea
-  rules:
-  - !type:InDepartmentAreaRule
-    department: Security
-
-- type: rules
-  id: InMaintsArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaMaints
-
-- type: rules
-  id: InRadstormArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaRadstorm
-
-- type: rules
-  id: InHolodeckArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaHolodeck
-
-- type: rules
-  id: InMorgueArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaMorgue
-
-- type: rules
-  id: InChapelArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaChapel
-
-- type: rules
-  id: InDetectiveArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaDetective
-
-- type: rules
-  id: InBeachArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaPool
-
-- type: rules
-  id: InColdArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaColdRoom
-
-- type: rules
-  id: InDojoArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaDojo
-
-- type: rules
-  id: InInterrogationArea
-  rules:
-  - !type:InAreaRule
-    areas:
-    - AreaInterrogation
-
-- type: rules
-  id: OnGridRule
-  rules:
-  - !type:GridInRangeRule
-    range: 1
 
 # Specific areas
 
@@ -138,7 +14,10 @@
     collection: AmbienceSpooky
   fadeIn: true
   interruptable: true
-  rules: InMorgueArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaMorgue ]
   priority: 10
 
 - type: ambientMusic
@@ -147,7 +26,11 @@
     params:
       volume: -10
     collection: AmbienceHoly
-  rules: InChapelArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      components:
+      - HolyArea
   fadeIn: true
   interruptable: true
   priority: 10
@@ -158,7 +41,10 @@
     params:
       volume: -10
     collection: AmbienceDetective
-  rules: InDetectiveArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaDetective ]
   fadeIn: true
   interruptable: true
   priority: 10
@@ -169,7 +55,10 @@
     params:
       volume: -10
     collection: AmbienceBeach
-  rules: InBeachArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaBeach ]
   fadeIn: true
   interruptable: true
   priority: 10
@@ -180,7 +69,10 @@
     params:
       volume: -10
     collection: AmbienceCold
-  rules: InColdArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaCold ]
   fadeIn: true
   interruptable: true
   priority: 10
@@ -191,7 +83,10 @@
     params:
       volume: -10
     collection: AmbienceDojo
-  rules: InDojoArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaDojo ]
   fadeIn: true
   interruptable: true
   priority: 10
@@ -202,7 +97,10 @@
     params:
       volume: -10
     collection: AmbienceInterrogation
-  rules: InInterrogationArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaInterrogation ]
   fadeIn: true
   interruptable: true
   priority: 7
@@ -214,7 +112,9 @@
     params:
       volume: -10
     collection: AmbienceMedical
-  rules: InMedicalArea
+  conditions:
+  - !type:InDepartmentArea
+    department: Medical
   fadeIn: true
   interruptable: true
   priority: 5
@@ -225,7 +125,9 @@
     params:
       volume: -10
     collection: AmbienceEngineering
-  rules: InEngineeringArea
+  conditions:
+  - !type:InDepartmentArea
+    department: Engineering
   fadeIn: true
   interruptable: true
   priority: 5
@@ -236,7 +138,9 @@
     params:
       volume: -10
     collection: AmbienceSecurity
-  rules: InSecurityArea
+  conditions:
+  - !type:InDepartmentArea
+    department: Security
   fadeIn: true
   interruptable: true
   priority: 5
@@ -248,7 +152,11 @@
     params:
       volume: -10
     collection: AmbienceMaintenance
-  rules: InMaintsArea
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      components:
+      - MaintsSpawnLocation
   fadeIn: true
   interruptable: true
   priority: 5
