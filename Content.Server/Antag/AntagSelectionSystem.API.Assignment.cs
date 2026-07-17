@@ -178,8 +178,10 @@ public sealed partial class AntagSelectionSystem
         if (!_whitelist.CheckBoth(uid, def.Blacklist, def.Whitelist))
             return false;
 
+        /* <Trauma> - station trait that spawns everyone on arrivals exists
         if (_arrivals.IsOnArrivals((uid.Value, null)))
             return false;
+        </Trauma> */
 
         // No ghosts!!!
         if (HasComp<GhostComponent>(uid))

@@ -11556,3 +11556,75 @@ Entries:
   id: 1276
   time: '2026-07-15T23:29:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3554
+- author: Aviu00
+  changes:
+  - type: Fix
+    message: Fixed Late Arrivals station trait preventing antags from rolling.
+  id: 1277
+  time: '2026-07-17T04:53:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3572
+- author: Aineias1
+  changes:
+  - type: Remove
+    message: Freighter enlisted in chud wars.
+  id: 1278
+  time: '2026-07-17T05:12:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3562
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Fire and barotrauma buffed, explosions nerfed.
+  id: 1279
+  time: '2026-07-17T07:08:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3561
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed changeling fleshmend not healing anything.
+  id: 1280
+  time: '2026-07-17T08:45:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3576
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      Void chill nerfed, void conduit now has 1 charge requiring you to break
+      your blade. Void armor effect made not useless.
+  - type: Add
+    message: You can now fish in reality fractures.
+  - type: Add
+    message: New heretic t3 side knowledge.
+  - type: Add
+    message: >-
+      Lock armor makes you invisible to people far away at cost of lower brute
+      resists.
+  - type: Tweak
+    message: Flesh mimic hp halved, flesh armor now spawns flesh mimics 50% more often.
+  - type: Tweak
+    message: Unfathomable curio and mask of madness buffed, curio is t2 side now.
+  - type: Tweak
+    message: 'Mansus grasp stamina damage: 80 -> 40.'
+  id: 1281
+  time: '2026-07-17T09:26:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3546
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed xenovac emag interaction.
+  id: 1282
+  time: '2026-07-17T09:27:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3559
+- author: TurboTrackerss14
+  changes:
+  - type: Add
+    message: Drones now require the same playtime to unlock as borgs.
+  id: 1283
+  time: '2026-07-17T11:12:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3579
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Armory override key now needs a screwdriver to make
+  id: 1284
+  time: '2026-07-17T13:38:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3583

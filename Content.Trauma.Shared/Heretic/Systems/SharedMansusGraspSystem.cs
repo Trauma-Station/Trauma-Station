@@ -181,7 +181,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!triggerGrasp || !TryComp(target, out StatusEffectsComponent? status))
             return;
 
-        _stun.KnockdownOrStun(target, ent.Comp.KnockdownTime);
+        _stun.TryKnockdown(target, ent.Comp.KnockdownTime);
         _stamina.TakeStaminaDamage(target, ent.Comp.StaminaDamage, source: args.User, ignoreResist: true);
         _language.DoRatvarian(target, ent.Comp.SpeechTime, true, status);
         Status.TryUpdateStatusEffectDuration(target, GraspAffectedStatus, out _, ent.Comp.AffectedTime);

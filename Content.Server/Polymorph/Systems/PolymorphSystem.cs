@@ -642,13 +642,4 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
         AddComp(@new, copy, true);
         return copy;
     }
-
-    // TODO: Kill
-#pragma warning disable CS0108
-#pragma warning disable RA0045
-    private bool TryComp(EntityUid uid, Type type, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out IComponent? comp)
-        => EntityManager.TryGetComponent(uid, type, out comp);
-#pragma warning restore RA0045
-#pragma warning restore CS0108
-    // goob edit end
 }

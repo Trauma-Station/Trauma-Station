@@ -60,6 +60,7 @@ public sealed partial class VoidCurseSystem : SharedVoidCurseSystem
             _temp.ForceChangeTemperature(ent, Math.Clamp(t, Atmospherics.TCMB, Atmospherics.Tmax), temp);
         }
 
-        _statusEffect.TryAddStatusEffect<MutedComponent>(ent, "Muted", TimeSpan.FromSeconds(5), true);
+        if (ent.Comp.Stacks >= ent.Comp.MinStacksToMute)
+            _statusEffect.TryAddStatusEffect<MutedComponent>(ent, "Muted", TimeSpan.FromSeconds(5), true);
     }
 }

@@ -230,6 +230,10 @@ public abstract partial class SharedFishingSystem : EntitySystem
     {
         var position = Transform(lure).Coordinates;
         var fish = PredictedSpawnAtPosition(fishId, position);
+
+        var ev = new FishCaughtEvent(fish, target);
+        RaiseLocalEvent(fish, ref ev);
+
         // Throw da fish back to the player because it looks funny
         var direction = _transform.GetWorldPosition(target) - _transform.ToWorldPosition(position);
         if (direction == Vector2.Zero)

@@ -16,16 +16,7 @@ public abstract partial class SharedHereticAbilitySystem
 {
     [Dependency] private TeleportSystem _teleport = default!;
 
-    protected virtual void SubscribeCosmos()
-    {
-        SubscribeLocalEvent<EventHereticCosmicRune>(OnCosmicRune);
-        SubscribeLocalEvent<StarBlastActionComponent, EventHereticStarBlast>(OnStarBlast);
-        SubscribeLocalEvent<EventHereticCosmicExpansion>(OnExpansion);
-
-        SubscribeLocalEvent<StarBlastComponent, ProjectileHitEvent>(OnHit);
-        SubscribeLocalEvent<StarBlastComponent, EntityTerminatingEvent>(OnEntityTerminating);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExpansion(EventHereticCosmicExpansion args)
     {
         if (!TryUseAbility(args))
@@ -50,6 +41,7 @@ public abstract partial class SharedHereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnStarBlast(Entity<StarBlastActionComponent> ent, ref EventHereticStarBlast args)
     {
         if (!TryUseAbility(args, false))
@@ -103,6 +95,7 @@ public abstract partial class SharedHereticAbilitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnEntityTerminating(Entity<StarBlastComponent> ent, ref EntityTerminatingEvent args)
     {
         if (ent.Comp.Action == EntityUid.Invalid || TerminatingOrDeleted(ent.Comp.Action) ||
@@ -113,6 +106,7 @@ public abstract partial class SharedHereticAbilitySystem
         Dirty(ent.Comp.Action, action);
     }
 
+    [SubscribeLocalEvent]
     private void OnHit(Entity<StarBlastComponent> ent, ref ProjectileHitEvent args)
     {
         var coords = Transform(ent).Coordinates;
@@ -131,6 +125,7 @@ public abstract partial class SharedHereticAbilitySystem
         _starMark.SpawnCosmicFields(coords, 1, strength);
     }
 
+    [SubscribeLocalEvent]
     private void OnCosmicRune(EventHereticCosmicRune args)
     {
         if (!TryComp(args.Action, out HereticCosmicRuneActionComponent? runeAction))

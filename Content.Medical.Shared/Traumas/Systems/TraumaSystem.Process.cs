@@ -296,15 +296,18 @@ public partial class TraumaSystem
         if (!Resolve(target, ref woundable, false))
             return traumaList;
 
-        if (severity > 10 && woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.BoneDamage) &&
+        if (severity < woundInflicter.Comp.MinTraumaSeverityDelta)
+            return traumaList;
+
+        if (woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.BoneDamage) &&
             RandomBoneTraumaChance((target, woundable), woundInflicter))
             traumaList.Add(TraumaType.BoneDamage);
 
-        if (severity > 10 && woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.Dismemberment) &&
+        if (woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.Dismemberment) &&
             RandomDismembermentTraumaChance((target, woundable), woundInflicter))
             traumaList.Add(TraumaType.Dismemberment);
 
-        if (severity > 15 && woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.OrganDamage) &&
+        if (woundInflicter.Comp.AllowedTraumas.Contains(TraumaType.OrganDamage) &&
             RandomOrganTraumaChance((target, woundable), woundInflicter))
             traumaList.Add(TraumaType.OrganDamage);
 
@@ -475,8 +478,7 @@ public partial class TraumaSystem
             _part.GetPartType(target.Owner) is not {} partType ||
             // can't dismember the root part
             !target.Comp.CanRemove ||
-            target.Comp.ParentWoundable is not {} parent ||
-            target.Comp.WoundableSeverity != WoundableSeverity.Mangled) // has to be mangled before possibly dismembering
+            target.Comp.ParentWoundable == null)
             return false;
 
         var deduction = GetTraumaChanceDeduction(

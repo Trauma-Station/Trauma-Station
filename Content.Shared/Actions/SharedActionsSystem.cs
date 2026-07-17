@@ -577,7 +577,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     /// <param name="action">The action being performed</param>
     /// <param name="actionEvent">An event override to perform. If null, uses <see cref="GetEvent"/></param>
     /// <param name="predicted">If false, prevents playing the action's sound on the client</param>
-    public void PerformAction(Entity<ActionsComponent?> performer, Entity<ActionComponent> action, BaseActionEvent? actionEvent = null, bool predicted = true)
+    public bool PerformAction(Entity<ActionsComponent?> performer, Entity<ActionComponent> action, BaseActionEvent? actionEvent = null, bool predicted = true) // Trauma - return a bool
     {
         if (!action.Comp.Predicted) // Goobstation
             predicted = false;
@@ -588,13 +588,13 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (action.Comp.AttachedEntity != null && action.Comp.AttachedEntity != performer)
         {
             Log.Error($"{ToPrettyString(performer)} is attempting to perform an action {ToPrettyString(action)} that is attached to another entity {ToPrettyString(action.Comp.AttachedEntity)}");
-            return;
+            return false; // Trauma - return value
         }
 
         actionEvent ??= GetEvent(action);
 
         if (actionEvent is not {} ev)
-            return;
+            return false; // Trauma - return value
 
         ev.Performer = performer;
 
@@ -616,7 +616,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         handled = ev.Handled;
 
         if (!handled)
-            return; // no interaction occurred.
+            return false; // Trauma - return value, no system handled it
 
         // play sound, start cooldown
         if (ev.Toggle)
@@ -631,6 +631,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         var performed = new ActionPerformedEvent(performer);
         RaiseLocalEvent(action, ref performed);
+        return true;
     }
 
     /// <summary>
@@ -650,8 +651,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
             return false;
 
         // All checks passed. Perform the action!
-        PerformAction((user, component), action);
-        return true;
+        return PerformAction((user, component), action);
     }
 
     /// <summary>

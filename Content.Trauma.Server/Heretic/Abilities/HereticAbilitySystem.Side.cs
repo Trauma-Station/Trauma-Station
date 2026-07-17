@@ -21,24 +21,13 @@ public sealed partial class HereticAbilitySystem
     private readonly List<EntityUid> _bloodStealTargets = new();
     private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
 
-    protected override void SubscribeSide()
-    {
-        base.SubscribeSide();
-
-        SubscribeLocalEvent<EventHereticCleave>(OnCleave);
-        SubscribeLocalEvent<EventHereticSpacePhase>(OnSpacePhase);
-        SubscribeLocalEvent<EventMirrorJaunt>(OnMirrorJaunt);
-
-        SubscribeLocalEvent<HereticComponent, HereticGraspUpgradeEvent>(OnGraspUpgrade);
-        SubscribeLocalEvent<HereticComponent, HereticRemoveActionEvent>(OnRemoveAction);
-        SubscribeLocalEvent<HereticComponent, HereticAddMindComponentsEvent>(OnAddMindComponents);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAddMindComponents(Entity<HereticComponent> ent, ref HereticAddMindComponentsEvent args)
     {
         EntityManager.AddComponents(ent, args.AddedComponents);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemoveAction(Entity<HereticComponent> ent, ref HereticRemoveActionEvent args)
     {
         if (!_actions.TryGetActionById(ent.Owner, args.Action, out var act))
@@ -47,6 +36,7 @@ public sealed partial class HereticAbilitySystem
         _actionContainer.RemoveAction(act.Value.AsNullable());
     }
 
+    [SubscribeLocalEvent]
     private void OnGraspUpgrade(Entity<HereticComponent> ent, ref HereticGraspUpgradeEvent args)
     {
         if (!_actions.TryGetActionById(ent.Owner, args.GraspAction, out var grasp))
@@ -59,6 +49,7 @@ public sealed partial class HereticAbilitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMirrorJaunt(EventMirrorJaunt args)
     {
         var uid = args.Performer;
@@ -73,6 +64,7 @@ public sealed partial class HereticAbilitySystem
         TryPerformJaunt(uid, args, args.Polymorph);
     }
 
+    [SubscribeLocalEvent]
     private void OnSpacePhase(EventHereticSpacePhase args)
     {
         var uid = args.Performer;
@@ -108,6 +100,7 @@ public sealed partial class HereticAbilitySystem
         return true;
     }
 
+    [SubscribeLocalEvent]
     private void OnCleave(EventHereticCleave args)
     {
         if (!TryUseAbility(args))
@@ -115,17 +108,18 @@ public sealed partial class HereticAbilitySystem
 
         args.Handled = true;
 
-        if (!args.Target.IsValid(EntityManager))
+        if (!args.Target.IsValid())
             return;
 
-        Spawn(args.Effect, args.Target);
+        var coords = Transform(args.Target).Coordinates;
+        Spawn(args.Effect, coords);
 
         var hasTargets = false;
 
         TryComp(args.Performer, out DamageableComponent? damageable);
 
         _bloodStealTargets.Clear();
-        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, args.Target))
+        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, coords))
         {
             if (target == args.Performer)
                 continue;

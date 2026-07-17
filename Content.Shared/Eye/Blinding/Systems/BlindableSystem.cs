@@ -145,6 +145,8 @@ public sealed class CanSeeAttemptEvent : CancellableEntityEventArgs, IInventoryR
 
 public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent
 {
+    public EntityUid Target; // Trauma
+
     /// <summary>
     ///     Time to subtract from any temporary blindness sources.
     /// </summary>

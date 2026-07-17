@@ -218,11 +218,12 @@ public sealed partial class WoundSystem
                     continue;
 
                 TryInduceWound(uid,
-                    damageType,
+                    args.Damage.GetWoundId(damageType),
                     damageValue *
                     args.Damage.WoundSeverityMultipliers.GetValueOrDefault(damageType, 1),
                     out _,
-                    component);
+                    component,
+                    damageType: damageType);
             }
         }
 
@@ -294,7 +295,8 @@ public sealed partial class WoundSystem
         FixedPoint2 severity,
         [NotNullWhen(true)] out Entity<WoundComponent>? woundInduced,
         WoundableComponent? woundable = null,
-        ProtoId<DamageGroupPrototype>? damageGroup = null)
+        ProtoId<DamageGroupPrototype>? damageGroup = null,
+        string? damageType = null)
     {
         woundInduced = null;
         if (severity == FixedPoint2.Zero || !Resolve(uid, ref woundable))
@@ -303,9 +305,10 @@ public sealed partial class WoundSystem
         if (TryContinueWound(uid, woundId, severity, out woundInduced, woundable))
             return true;
 
+        damageType ??= woundId;
         var protoId = damageGroup?.Id ??
             (from @group in ProtoMan.EnumeratePrototypes<DamageGroupPrototype>()
-                where @group.DamageTypes.Contains(woundId)
+                where @group.DamageTypes.Contains(damageType)
                 select @group).FirstOrDefault()?.ID;
 
         var wound = protoId != null && TryCreateWound(
@@ -804,7 +807,7 @@ public sealed partial class WoundSystem
             wound,
             bodySeverity - (total - old),
             bodySeverity);
-        RaiseLocalEvent(body, ref ev);
+        RaiseLocalEvent(body, ref bodyEv);
     }
 
     private void DropWoundableOrgans(EntityUid woundable, WoundableComponent? woundableComp)

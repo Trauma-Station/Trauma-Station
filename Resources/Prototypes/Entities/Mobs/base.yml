@@ -239,7 +239,7 @@
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
-        Heat: 0.1 # Trauma, 10% fire damage to fix issues with limb damage, was 1.5
+        Heat: 0.3 # Trauma, was 1.5 - 0.2x multiplier to compensate for limb damage
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning

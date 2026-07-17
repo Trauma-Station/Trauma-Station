@@ -61,8 +61,13 @@
   - type: TargetAction
     checkCanAccess: false
     range: 5
-  - type: WorldTargetAction
+  - type: EntityTargetAction
     event: !type:EventHereticCleave
+    canTargetSelf: false
+    whitelist:
+      components:
+      - MobState
+
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction

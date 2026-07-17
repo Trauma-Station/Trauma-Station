@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Xenobiology.Components;
 using Content.Goobstation.Shared.Xenobiology.Components.Equipment;
 using Content.Shared.Coordinates;
 using Content.Shared.Destructible;
-using Content.Shared.Emag.Components;
-using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
@@ -30,7 +27,6 @@ namespace Content.Goobstation.Shared.Xenobiology;
 /// </summary>
 public abstract partial class SharedXenoVacuumSystem : EntitySystem
 {
-    [Dependency] private EmagSystem _emag = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private ThrowingSystem _throw = default!;
@@ -41,38 +37,20 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<UseDelayComponent> _delayQuery = default!;
+    [Dependency] private EntityQuery<XenoVacuumTankComponent> _tankQuery = default!;
+
     private const string ReleaseDelayId = "release";
     private const string SuctionDelayId = "suction";
 
-    private EntityQuery<EmaggedComponent> _emaggedQuery;
-    private EntityQuery<MobStateComponent> _mobQuery;
-    private EntityQuery<UseDelayComponent> _delayQuery;
-    private EntityQuery<XenoVacuumTankComponent> _tankQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _emaggedQuery = GetEntityQuery<EmaggedComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
-        _delayQuery = GetEntityQuery<UseDelayComponent>();
-        _tankQuery = GetEntityQuery<XenoVacuumTankComponent>();
-
-        SubscribeLocalEvent<XenoVacuumTankComponent, ComponentInit>(OnTankInit);
-        SubscribeLocalEvent<XenoVacuumTankComponent, ExaminedEvent>(OnTankExamined);
-        SubscribeLocalEvent<XenoVacuumTankComponent, DestructionEventArgs>(OnDestruction);
-
-        SubscribeLocalEvent<XenoVacuumComponent, GotEmaggedEvent>(OnGotEmagged);
-        SubscribeLocalEvent<XenoVacuumComponent, GotEquippedHandEvent>(OnEquippedHand);
-        SubscribeLocalEvent<XenoVacuumComponent, GotUnequippedHandEvent>(OnUnequippedHand);
-        SubscribeLocalEvent<XenoVacuumComponent, AfterInteractEvent>(OnAfterInteract);
-    }
-
+    [SubscribeLocalEvent]
     private void OnTankInit(Entity<XenoVacuumTankComponent> ent, ref ComponentInit args)
     {
         ent.Comp.StorageTank = _container.EnsureContainer<Container>(ent, ent.Comp.TankContainerName);
     }
 
+    [SubscribeLocalEvent]
     private void OnTankExamined(Entity<XenoVacuumTankComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -82,12 +60,14 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         args.PushMarkup(text);
     }
 
+    [SubscribeLocalEvent]
     private void OnDestruction(Entity<XenoVacuumTankComponent> ent, ref DestructionEventArgs args)
     {
         // apparently ContainerManager doesn't automatically release them so
         _container.EmptyContainer(ent.Comp.StorageTank);
     }
 
+    [SubscribeLocalEvent]
     private void OnEquippedHand(Entity<XenoVacuumComponent> ent, ref GotEquippedHandEvent args)
     {
         SetTankNozzle(args.User, ent);
@@ -98,21 +78,13 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         Dirty(tank);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnequippedHand(Entity<XenoVacuumComponent> ent, ref GotUnequippedHandEvent args)
     {
         SetTankNozzle(args.User, null);
     }
 
-    private void OnGotEmagged(Entity<XenoVacuumComponent> ent, ref GotEmaggedEvent args)
-    {
-        if (!_emag.CompareFlag(args.Type, EmagType.Interaction) ||
-            _emag.CheckFlag(ent, EmagType.Interaction) ||
-            _emaggedQuery.HasComp(ent))
-            return;
-
-        args.Handled = true;
-    }
-
+    [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<XenoVacuumComponent> ent, ref AfterInteractEvent args)
     {
         var delay = _delayQuery.Comp(ent);
@@ -194,7 +166,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         }
 
         var identity = Identity.Entity(target, EntityManager);
-        if (!_emaggedQuery.HasComp(vacuum) && _whitelist.IsWhitelistFail(vacuum.Comp.EntityWhitelist, target))
+        if (_whitelist.IsWhitelistFail(vacuum.Comp.EntityWhitelist, target))
         {
             var invalidEntityPopup = Loc.GetString("xeno-vacuum-suction-fail-invalid-entity-popup", ("ent", identity));
             _popup.PopupClient(invalidEntityPopup, vacuum, user);

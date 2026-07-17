@@ -323,6 +323,7 @@
       components:
       - CosmosPassive
   - type: VelocityModifierContacts
+    collisionFixture: fix2
     isActive: false
     modifier: 0.05
     whitelist:
