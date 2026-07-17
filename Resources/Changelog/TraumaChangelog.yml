@@ -11628,3 +11628,10 @@ Entries:
   id: 1284
   time: '2026-07-17T13:38:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3583
+- author: EN wizards den lizard US west
+  changes:
+  - type: Remove
+    message: Removed the Inner Peace trait.
+  id: 1285
+  time: '2026-07-17T13:46:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3584
