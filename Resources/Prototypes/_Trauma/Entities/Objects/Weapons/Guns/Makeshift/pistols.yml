@@ -1,0 +1,41 @@
+- type: entity
+  name: Handmade revolver
+  parent: [ BaseWeaponRevolver, BaseMajorContraband ]
+  id: MakeshiftRevolver
+  description: An underpowered handcannon cobbled together from pieces of scrap and cloth. At the very least it won't jam up on you.
+  components:
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/revolver.rsi
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - Cartridge22MagnumMakeshift
+    proto: Cartridge22MagnumMakeshift
+    capacity: 8
+    chambers: [ True, True, True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null, null, null ]
+  - type: Gun
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/Gunshots/revolver_bang.ogg
+
+- type: entity
+  name: Crude pistol
+  parent: [ BaseWeaponRevolver, BaseMajorContraband ]
+  id: MakeshiftRevolver
+  description: An underpowered handcannon cobbled together from pieces of scrap and cloth. At the very least it won't jam up on you.
+  components:
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/revolver.rsi
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - Cartridge22MagnumMakeshift
+    proto: Cartridge22MagnumMakeshift
+    capacity: 8
+    chambers: [ True, True, True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null, null, null ]
+  - type: Gun
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/Gunshots/revolver_bang.ogg

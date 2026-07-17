@@ -1,0 +1,12 @@
+- type: entity
+  parent: [ BaseCartridge, BaseMajorContraband ]
+  id: Cartridge22MagnumMakeshift
+  name: makeshift cartridge (.22 Magnum)
+  description: An old makeshift cartridge that was often used in rifles and pistols.
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet22MagnumMakeshift
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/makeshift_casing.rsi
+  - type: Appearance
+  - type: SpentAmmoVisuals

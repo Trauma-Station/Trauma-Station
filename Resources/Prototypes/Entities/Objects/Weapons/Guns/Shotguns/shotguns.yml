@@ -254,32 +254,34 @@
     node: shotgunsawn
     deconstructionTarget: null
 
-- type: entity
-  name: handmade pistol
-  parent: [BaseWeaponShotgun, BaseMinorContraband]
-  id: WeaponShotgunHandmade
-  description: Looks unreliable. Uses 12 Gauge shotgun shells. # Goob edit
-  components:
-  - type: Item
-    size: Small
-    shape:
-    - 0,0,1,0
-    - 0,1,0,1
-    storedOffset: 0,-5
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
-  - type: Gun
-    fireRate: 4
-  - type: BallisticAmmoProvider
-    capacity: 1
-  - type: Construction
-    graph: ShotgunSawn
-    node: shotgunsawn
-    deconstructionTarget: null
-  - type: StaticPrice
-    price: 0
+# <Trauma> - Remove handmade pistol in favor for EOKA pistol
+# - type: entity
+#  name: handmade pistol
+#  parent: [BaseWeaponShotgun, BaseMinorContraband]
+#  id: WeaponShotgunHandmade
+#  description: Looks unreliable. Uses 12 Gauge shotgun shells. # Goob edit
+#  components:
+#  - type: Item
+#    size: Small
+#    shape:
+#    - 0,0,1,0
+#    - 0,1,0,1
+#    storedOffset: 0,-5
+#  - type: Sprite
+#    sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
+#  - type: Clothing
+#    sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
+#  - type: Gun
+#    fireRate: 4
+#  - type: BallisticAmmoProvider
+#    capacity: 1
+#  - type: Construction
+#    graph: ShotgunSawn
+#    node: shotgunsawn
+#    deconstructionTarget: null
+#  - type: StaticPrice
+#    price: 0
+# </Trauma>
 
 - type: entity
   name: blunderbuss

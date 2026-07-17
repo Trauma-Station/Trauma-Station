@@ -2,3 +2,28 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
   source: "https://github.com/tgstation/tgstation/blob/f05aaca61b60f6cfb0a131be8819267c78df305f/sound/items/weapons/laser2.ogg"
+
+- files: ["revolver_bang.ogg"]
+  license: "CC0-1.0"
+  copyright: "User morganpurkis on freesound.org"
+  source: "https://freesound.org/people/morganpurkis/sounds/391846"
+
+- files: ["battle_rifle.ogg"]
+  license: "CC0-1.0"
+  copyright: "User morganpurkis on freesound.org"
+  source: "https://freesound.org/people/morganpurkis/sounds/391725"
+
+- files: ["custom_smg.ogg"]
+  license: "CC0-1.0"
+  copyright: "User morganpurkis on freesound.org"
+  source: "https://freesound.org/people/morganpurkis/sounds/371041"
+
+- files: ["patented_smg.ogg"]
+  license: "CC0-1.0"
+  copyright: "User morganpurkis on freesound.org"
+  source: "https://freesound.org/people/morganpurkis/sounds/381992"
+
+- files: ["shotgun_blast.ogg"]
+  license: "CC0-1.0"
+  copyright: "User michorvath on freesound.org"
+  source: "https://freesound.org/people/michorvath/sounds/427595"

@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseBullet
+  id: Bullet22MagnumMakeshift
+  name: makeshift bullet (.22 Magnum)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 7

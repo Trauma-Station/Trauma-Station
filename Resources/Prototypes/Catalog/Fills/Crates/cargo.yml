@@ -125,7 +125,7 @@
     - id: ThrowingStar
     - id: WeaponLaserGun
       weight: 0.1
-    - id: WeaponShotgunHandmade
+    # - id: WeaponShotgunHandmade # Trauma - Replace with EOKA pistol once its finished
     - id: WeaponFlareGun
     - id: Bola
     - id: Shovel
