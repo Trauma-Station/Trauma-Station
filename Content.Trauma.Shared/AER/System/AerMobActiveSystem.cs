@@ -7,17 +7,10 @@ namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AerMobActiveSystem : EntitySystem
 {
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<AerMobActiveComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<AerMobActiveComponent, MapInitEvent>(OnMapInit);
-    }
-
     /// <summary>
     /// handling the aer active state on map init
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<AerMobActiveComponent> aerMob, ref MapInitEvent args)
     {
         if (TryComp<MobStateComponent>(aerMob.Owner, out var mobComponent))
@@ -32,6 +25,7 @@ public sealed partial class AerMobActiveSystem : EntitySystem
     /// <summary>
     /// handling of the aer active status for mobs it determines if aer is healty enough to produce rd points
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<AerMobActiveComponent> ent, ref MobStateChangedEvent args)
     {
         bool active = MobStateToActiveEvent(args.NewMobState);

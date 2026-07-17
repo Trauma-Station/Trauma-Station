@@ -10,15 +10,10 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
 {
     [Dependency] private ResearchSystem _research = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<AnomalousEntityComponent, AerBehaviourAddResearchEvent>(OnAerBehaviourResearch);
-    }
-
     /// <summary>
     /// Add a research tantum on AerBehaviourResearchEvents
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnAerBehaviourResearch(Entity<AnomalousEntityComponent> ent, ref AerBehaviourAddResearchEvent args)
     {
         if (ent.Comp.ConnectedContainment is not { } containment)

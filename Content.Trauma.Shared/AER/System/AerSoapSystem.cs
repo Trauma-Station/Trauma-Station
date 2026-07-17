@@ -6,13 +6,7 @@ namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AerSoapSystem : EntitySystem
 {
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<AnomalousEntityComponent, SlipEvent>(OnSlip);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSlip(Entity<AnomalousEntityComponent> ent, ref SlipEvent args)
     {
         if (ent.Comp.Active)

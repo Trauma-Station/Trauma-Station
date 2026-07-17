@@ -4,28 +4,19 @@ namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AnomalousEntitySystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<AnomalousEntityComponent, ComponentShutdown>(OnAnomalousEntityShutdown);
-        SubscribeLocalEvent<AnomalousEntityComponent, AerUpdateActiveStatusEvent>(OnAerActiveUpdate);
-    }
-
     /// <summary>
     /// calculates the pointa value of the AER
     /// Can be null.
     /// </summary>
-    public int GetAnomalousEntityPointValue(EntityUid anomalousEntity, AnomalousEntityComponent? component = null)
+    public int GetAnomalousEntityPointValue(Entity<AnomalousEntityComponent> aer)
     {
-        if (!Resolve(anomalousEntity, ref component, false))
-            return 0;
-
-        return component.ResearchPerSecond;
+        return aer.Comp.ResearchPerSecond;
     }
 
     /// <summary>
     /// removes references to the aer and it's id gear on scanners and containment sensors on anomalous entity component shutdown
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnAnomalousEntityShutdown(Entity<AnomalousEntityComponent> aer, ref ComponentShutdown args)
     {
         var queryContainment = EntityQueryEnumerator<AnomalousEntityContainmentComponent>();
@@ -49,6 +40,10 @@ public sealed partial class AnomalousEntitySystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// updates the active status on event (example not dead, fueled, powered, etc)
+    /// </summary>
+    [SubscribeLocalEvent]
     private void OnAerActiveUpdate(Entity<AnomalousEntityComponent> aer, ref AerUpdateActiveStatusEvent args)
     {
         var component = aer.Comp;

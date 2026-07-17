@@ -7,19 +7,10 @@ namespace Content.Trauma.Shared.AER;
 
 public sealed partial class AerHorseSystem : EntitySystem
 {
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<AerHorseComponent, RepulseEvent>(OnWail);
-        SubscribeLocalEvent<AerHorseComponent, MobStateChangedEvent>(OnMobStateChanged);
-    }
-
     /// <summary>
     /// raises the research and id gear event on the horse wailing
     /// </summary>
-    /// <param name="ent"></param>
-    /// <param name="args"></param>
+    [SubscribeLocalEvent]
     private void OnWail(Entity<AerHorseComponent> ent, ref RepulseEvent args)
     {
         var spawnEvent = new AerBehaviourSpawnGearEvent(ent.Owner);
@@ -31,6 +22,7 @@ public sealed partial class AerHorseSystem : EntitySystem
     /// <summary>
     /// handling of the aer active status for mobs it determines if aer is healty enough to produce rd points
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<AerHorseComponent> ent, ref MobStateChangedEvent args)
     {
         switch (args.NewMobState)

@@ -16,15 +16,6 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AnomalousEntityScannerComponent, ScannerDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<AnomalousEntityScannerComponent, AfterInteractEvent>(OnScannerAfterInteract);
-        SubscribeLocalEvent<AnomalousEntityScannerComponent, ExaminedEvent>(OnExamined);
-    }
-
     /// <summary> Updates device with passed anomaly data. </summary>
     public void UpdateScannerWithNewAnomaly(EntityUid scanner, EntityUid anomaly, AnomalousEntityScannerComponent? scannerComp = null, AnomalousEntityComponent? anomalyComp = null)
     {
@@ -34,20 +25,21 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
         scannerComp.ScannedAER = anomaly;
     }
 
-    private void OnDoAfter(EntityUid uid, AnomalousEntityScannerComponent component, DoAfterEvent args)
+    [SubscribeLocalEvent]
+    private void OnDoAfter(Entity<AnomalousEntityScannerComponent> ent, ref ScannerDoAfterEvent args)
     {
 
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
-        _audio.PlayPredicted(component.CompleteSound, uid, args.User);
-        _popup.PopupPredicted(Loc.GetString("anomaly-scanner-component-scan-complete"), uid, args.User);
+        _audio.PlayPredicted(ent.Comp.CompleteSound, ent.Owner, args.User);
+        _popup.PopupPredicted(Loc.GetString("anomaly-scanner-component-scan-complete"), ent.Owner, args.User);
 
-        UpdateScannerWithNewAnomaly(uid, target, component);
+        UpdateScannerWithNewAnomaly(ent.Owner, target, ent.Comp);
     }
 
-
-    private void OnScannerAfterInteract(EntityUid uid, AnomalousEntityScannerComponent component, AfterInteractEvent args)
+    [SubscribeLocalEvent]
+    private void OnScannerAfterInteract(Entity<AnomalousEntityScannerComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Target is not { } target)
             return;
@@ -61,11 +53,11 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
             args.User,
-            component.ScanDoAfterDuration,
+            ent.Comp.ScanDoAfterDuration,
             new ScannerDoAfterEvent(),
-            uid,
+            ent.Owner,
             target: target,
-            used: uid
+            used: ent.Owner
         )
         {
             DistanceThreshold = 2f
@@ -73,12 +65,13 @@ public sealed partial class AnomalousEntityScannerSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
-    private void OnExamined(EntityUid uid, AnomalousEntityScannerComponent component, ExaminedEvent args)
+    [SubscribeLocalEvent]
+    private void OnExamined(Entity<AnomalousEntityScannerComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
             return;
 
-        args.PushText(component.ScannedAER is not { } scannedAer
+        args.PushText(ent.Comp.ScannedAER is not { } scannedAer
             ? Loc.GetString("anomaly-vessel-component-not-assigned")
             : (Loc.GetString("anomaly-vessel-component-assigned") + " it contains a scan of " + Name(scannedAer)));
     }
