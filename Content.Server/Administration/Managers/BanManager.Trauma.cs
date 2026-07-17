@@ -142,7 +142,7 @@ public sealed partial class BanManager
     {
         var names = new List<string>();
         var jobs = new HashSet<string>();
-        foreach (var role in ban.Roles)
+        foreach (var role in ban.Roles!)
         {
             if (role.RoleType == DbTypeAntag)
                 names.Add(_prototypeManager.TryIndex<AntagPrototype>(role.RoleId, out var antag)
