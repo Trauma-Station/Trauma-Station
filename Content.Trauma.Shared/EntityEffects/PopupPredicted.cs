@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// <summary>
 /// Effect that shows a single predicted popup.
 /// </summary>
-public sealed partial class PopupEntity : EntityEffectBase<PopupEntity>
+public sealed partial class PopupPredicted : EntityEffectBase<PopupPredicted>
 {
     /// <summary>
     /// The popup to show.
@@ -38,11 +38,11 @@ public sealed partial class PopupEntity : EntityEffectBase<PopupEntity>
     public PopupType VisualType = PopupType.Small;
 }
 
-public sealed partial class PopupEntityEffectSystem : EntityEffectSystem<TransformComponent, PopupEntity>
+public sealed partial class PopupPredictedEffectSystem : EntityEffectSystem<TransformComponent, PopupPredicted>
 {
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PopupEntity> args)
+    protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<PopupPredicted> args)
     {
         var effect = args.Effect;
 
