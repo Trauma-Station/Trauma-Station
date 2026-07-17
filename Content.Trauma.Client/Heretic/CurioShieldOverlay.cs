@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Client.Overlays;
+using System.Runtime.InteropServices;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Robust.Shared.Enums;
 using Robust.Shared.Timing;
@@ -11,13 +11,16 @@ public sealed partial class CurioShieldOverlay : Overlay
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly SharedTransformSystem _transform;
-    private readonly ShaderCacheSystem _cache;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
 
     private static readonly ProtoId<ShaderPrototype> Shader = "GridPulse";
+
+    private readonly List<WorldTextureRect> _rects = new();
+    private readonly ShaderInstance _shader;
 
     public CurioShieldOverlay()
     {
@@ -26,7 +29,8 @@ public sealed partial class CurioShieldOverlay : Overlay
         ZIndex = (int) Content.Shared.DrawDepth.DrawDepth.FloorEffects;
 
         _transform = _entMan.System<SharedTransformSystem>();
-        _cache = _entMan.System<ShaderCacheSystem>();
+
+        _shader = _proto.Index(Shader).InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -35,8 +39,10 @@ public sealed partial class CurioShieldOverlay : Overlay
         var bounds = args.WorldAABB.Enlarged(3f);
         var curTime = _timing.CurTime;
 
+        _rects.Clear();
+
         var query = _entMan.EntityQueryEnumerator<UnfathomableCurioShieldComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var shield, out var xform))
+        while (query.MoveNext(out _, out var shield, out var xform))
         {
             var factor = shield.Active
                 ? InverseLerp(shield.ActivateTime,
@@ -52,14 +58,16 @@ public sealed partial class CurioShieldOverlay : Overlay
             if (!bounds.Contains(pos))
                 continue;
 
-            var shader = _cache.GetOrCreateShader(uid, nameof(UnfathomableCurioShieldComponent), Shader);
-            shader.SetParameter("color", shield.Color);
-            shader.SetParameter("radius", factor * 0.5f);
-            handle.UseShader(shader);
-            // We draw texture instead of shape so that shader can actually use UV parameter
-            handle.DrawTextureRect(Texture.White, Box2.CenteredAround(pos, new Vector2(shield.SlowdownRadius * 4f)));
+            var box = Box2.CenteredAround(pos, new Vector2(shield.SlowdownRadius * factor * 4f));
+            _rects.Add(new(new(box), shield.Color));
         }
 
+        if (_rects.Count == 0)
+            return;
+
+        handle.UseShader(_shader);
+        // We draw textures instead of shapes so that shader can actually use UV parameter
+        handle.DrawTextureRectsUnmodulated(Texture.White, CollectionsMarshal.AsSpan(_rects));
         handle.UseShader(null);
     }
 

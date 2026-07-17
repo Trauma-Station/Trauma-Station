@@ -110,7 +110,7 @@ public abstract partial class SharedUnfathomableCurioSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    protected virtual void ResetShield(Entity<UnfathomableCurioShieldComponent> ent, bool playSound, EntityUid? origin, bool resetDeactivateTime = true)
+    private void ResetShield(Entity<UnfathomableCurioShieldComponent> ent, bool playSound, EntityUid? origin, bool resetDeactivateTime = true)
     {
         var now = _timing.CurTime;
         ent.Comp.Active = false;

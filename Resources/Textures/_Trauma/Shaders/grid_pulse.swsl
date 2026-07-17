@@ -1,8 +1,6 @@
 light_mode unshaded;
 
-uniform highp vec4 color;
-uniform highp float radius;
-
+const highp float radius = 0.5;
 const highp float iterations = 4.0;
 const highp float outlineWidth = 0.005;
 const highp float gridDensity = 8.0;
@@ -38,6 +36,11 @@ highp float getShape(highp vec2 uv, highp float r)
 
 void fragment()
 {
+    highp vec4 color = zTexture(UV);
+	if (color.a == 0.0) {
+		discard;
+	}
+
     highp vec2 uv = UV * 2.0 - 1.0;
     highp vec4 finalColor = vec4(0.0);
 
@@ -52,7 +55,7 @@ void fragment()
         finalColor += color * layerGlow;
     }
 
-    highp float mainIntensity = getShape(uv, radius);
+    highp float mainIntensity = getShape(uv, 0.5);
 
     finalColor += color * mainIntensity;
 
