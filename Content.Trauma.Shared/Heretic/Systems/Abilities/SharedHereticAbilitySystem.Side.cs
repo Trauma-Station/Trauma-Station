@@ -16,16 +16,9 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
-    protected virtual void SubscribeSide()
-    {
-        SubscribeLocalEvent<EventHereticCloak>(OnCloak);
-        SubscribeLocalEvent<EventHereticRealignment>(OnRealignment);
-        SubscribeLocalEvent<EventEmp>(OnEmp);
+    private static readonly ProtoId<StatusEffectPrototype> Pacified = "Pacified";
 
-        SubscribeLocalEvent<RealignmentComponent, StatusEffectEndedEvent>(OnStatusEnded);
-        SubscribeLocalEvent<RealignmentComponent, BeforeStaminaDamageEvent>(OnBeforeRealignmentStamina);
-    }
-
+    [SubscribeLocalEvent]
     private void OnCloak(EventHereticCloak args)
     {
         var ent = args.Performer;
@@ -48,15 +41,17 @@ public abstract partial class SharedHereticAbilitySystem
         StatusNew.TryAddStatusEffect(ent, args.Status, out _, args.Lifetime);
     }
 
+    [SubscribeLocalEvent]
     private void OnStatusEnded(Entity<RealignmentComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (args.Key != "Pacified")
+        if (args.Key != Pacified)
             return;
 
         if (!StatusNew.TryRemoveStatusEffect(ent, ent.Comp.RealignmentStatus))
             RemCompDeferred(ent.Owner, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnRealignment(EventHereticRealignment args)
     {
         if (!TryUseAbility(args))
@@ -95,6 +90,7 @@ public abstract partial class SharedHereticAbilitySystem
             StatusNew.TryUpdateStatusEffectDuration(ent, args.RealignmentStatus, out _, args.EffectTime);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeRealignmentStamina(Entity<RealignmentComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         if (args.Value <= 0)
@@ -103,6 +99,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnEmp(EventEmp ev)
     {
         _emp.EmpPulse(Transform(ev.Performer).Coordinates, ev.Range, ev.EnergyConsumption, ev.Duration, ev.Performer);

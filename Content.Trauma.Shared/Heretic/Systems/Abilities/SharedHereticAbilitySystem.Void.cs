@@ -14,16 +14,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
-    protected virtual void SubscribeVoid()
-    {
-        SubscribeLocalEvent<HereticVoidBlinkEvent>(OnVoidBlink);
-        SubscribeLocalEvent<HereticVoidPullEvent>(OnVoidPull);
-        SubscribeLocalEvent<HereticVoidConduitEvent>(OnVoidConduit);
-
-        SubscribeLocalEvent<AristocratComponent, IsWeightlessEvent>(OnIsWeightless);
-        SubscribeLocalEvent<AristocratComponent, RefreshWeightlessModifiersEvent>(OnRefreshFriction);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRefreshFriction(Entity<AristocratComponent> ent, ref RefreshWeightlessModifiersEvent args)
     {
         // Intentionally don't multiply the values to prevent void ascended moths to be extra speedy
@@ -32,12 +23,14 @@ public abstract partial class SharedHereticAbilitySystem
         args.WeightlessModifier = ent.Comp.Modifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnIsWeightless(Entity<AristocratComponent> ent, ref IsWeightlessEvent args)
     {
         args.Handled = true;
         args.IsWeightless = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnVoidConduit(HereticVoidConduitEvent args)
     {
         if (!TryUseAbility(args))
@@ -46,6 +39,7 @@ public abstract partial class SharedHereticAbilitySystem
         PredictedSpawnAtPosition(args.VoidConduit, Transform(args.Performer).Coordinates);
     }
 
+    [SubscribeLocalEvent]
     private void OnVoidBlink(HereticVoidBlinkEvent args)
     {
         if (!TryUseAbility(args, false))
@@ -95,6 +89,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnVoidPull(HereticVoidPullEvent args)
     {
         if (!TryUseAbility(args))

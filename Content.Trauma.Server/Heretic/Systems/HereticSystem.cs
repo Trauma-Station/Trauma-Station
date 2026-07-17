@@ -75,29 +75,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
     public static readonly ProtoId<TagPrototype> AscensionRitualTag = "RitualAscension";
     public static readonly ProtoId<TagPrototype> FeastOfOwlsRitualTag = "RitualFeastOfOwls";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<HereticComponent, ComponentStartup>(OnCompStartup);
-        SubscribeLocalEvent<HereticComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<HereticComponent, EventHereticUpdateTargets>(OnUpdateTargets);
-        SubscribeLocalEvent<HereticComponent, EventHereticRerollTargets>(OnRerollTargets);
-        SubscribeLocalEvent<HereticComponent, EventHereticAscension>(OnAscension);
-        SubscribeLocalEvent<HereticComponent, ListingPurchasedEvent>(OnPurchase);
-
-        SubscribeLocalEvent<HereticComponent, MindGotRemovedEvent>(OnMindRemoved);
-        SubscribeLocalEvent<HereticComponent, MindGotAddedEvent>(OnMindAdded);
-
-        SubscribeLocalEvent<HereticBodyComponent, MindAddedMessage>(OnHereticBodyMindAdded);
-
-        SubscribeLocalEvent<GetVisMaskEvent>(OnGetVisMask);
-        SubscribeLocalEvent<HereticStartupEvent>(OnHereticStartup);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
-        SubscribeLocalEvent<UserShouldTakeHolyEvent>(OnShouldTakeHoly);
-        SubscribeLocalEvent<MobStateChangedEvent>(OnStateChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStateChanged(MobStateChangedEvent args)
     {
         if (!TryGetHereticComponent(args.Target, out var heretic, out var mind))
@@ -116,11 +94,13 @@ public sealed partial class HereticSystem : SharedHereticSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnHereticBodyMindAdded(Entity<HereticBodyComponent> ent, ref MindAddedMessage args)
     {
         RemCompDeferred(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindAdded(Entity<HereticComponent> ent, ref MindGotAddedEvent args)
     {
         if (TerminatingOrDeleted(args.Container))
@@ -167,6 +147,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         RaiseLocalEvent(args.Container, ref ev2);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindRemoved(Entity<HereticComponent> ent, ref MindGotRemovedEvent args)
     {
         if (TerminatingOrDeleted(args.Container) || !HasComp<MobStateComponent>(args.Container))
@@ -229,6 +210,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnHereticStartup(HereticStartupEvent ev)
     {
         foreach (var item in _hands.EnumerateHeld(ev.Heretic))
@@ -254,6 +236,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         _eye.SetVisibilityMask(ev.Heretic, mask, eye);
     }
 
+    [SubscribeLocalEvent]
     private void OnRestart(RoundRestartCleanupEvent ev)
     {
         _timer = 0f;
@@ -342,6 +325,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
             ShowAura(heretic, uid, session, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnCompStartup(Entity<HereticComponent> ent, ref ComponentStartup args)
     {
         foreach (var k in ent.Comp.BaseKnowledge)
@@ -353,6 +337,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         UpdateHereticCostModifiers(ent.AsNullable());
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<HereticComponent> ent, ref ComponentShutdown args)
     {
         if (TryComp(ent, out MindComponent? mind) && mind.CurrentEntity is { } body && !TerminatingOrDeleted(body))
@@ -485,6 +470,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
     }
 
     // notify the crew of how good the person is and play the cool sound :godo:
+    [SubscribeLocalEvent]
     private void OnAscension(Entity<HereticComponent> ent, ref EventHereticAscension args)
     {
         if (!TryComp(ent, out MindComponent? mind) || mind.CurrentEntity is not { } uid)
@@ -535,7 +521,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
             Color.Pink);
     }
 
-
+    [SubscribeLocalEvent]
     private void OnPurchase(Entity<HereticComponent> ent, ref ListingPurchasedEvent args)
     {
         if (!args.Data.IsCostModified || args.Data.Categories.FirstOrNull() is not { } cat)
