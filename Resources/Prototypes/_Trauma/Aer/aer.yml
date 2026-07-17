@@ -104,3 +104,123 @@
         Manipulator: 1
         Cable: 1
         PlasmaGlass: 5
+
+
+- type: entity
+  abstract: true
+  parent: [ MobSpaceBasic, MobCombat ]
+  id: BaseAer
+  name: AER-123
+  description: It came from hell.
+  components:
+  - type: KnowledgeHolder
+  - type: KnowledgeContainer # no skills lol
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4.5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1000: Dead
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
+  - type: ZombieImmune # gibs on death so its not possible to become a zombie
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: ThermalVision
+  - type: Stamina
+    baseCritThreshold: 9999
+  - type: FlashImmunity
+    showInExamine: false
+  - type: Puller
+    needsHands: false
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: GhostTakeoverAvailable
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+  - type: WarpPoint
+  - type: AnomalousEntity
+    researchPerSecond: 1000
+    contained: false
+  - type: AerMobActive
+
+# super shitty test yaml, anti specism ipc
+- type: entity
+  parent: BaseAer
+  id: aerIpc
+  name: AER-193
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/noSpecism.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Silicon
+    entityType: Player
+    batteryPowered: true
+    drainPerSecond: 1.5
+    chargeThresholdMid: 0.80
+    chargeThresholdLow: 0.35
+    chargeThresholdCritical: 0.10
+    speedModifierThresholds:
+      4: 1
+      3: 1
+      2: 0.80
+      1: 0.45
+      0: 0.10
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 1080
+  - type: BatteryDrinker
+    blacklist:
+      tags:
+      - IPCDrinkBlacklist
+  - type: Damageable
+    damageModifierSet: IPC
