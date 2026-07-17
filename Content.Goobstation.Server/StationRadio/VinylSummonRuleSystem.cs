@@ -37,11 +37,15 @@ public sealed partial class VinylSummonRuleSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private StationSystem _station = default!;
 
+    private const string ContainerID = "vinyl";
     private static readonly EntProtoId Ash = "Ash";
 
     [SubscribeLocalEvent]
     private void OnInsertAttempt(Entity<VinylPlayerComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
+        if (args.Container.ID != ContainerID)
+            return;
+
         // Check if vinyl player is on a station
         if (_station.GetOwningStation(ent) == null)
         {
