@@ -2,6 +2,7 @@
 
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Lathe;
+using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Lathe;
