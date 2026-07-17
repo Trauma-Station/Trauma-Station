@@ -54,6 +54,7 @@ public sealed partial class HereticAbilitySystem
     {
         var uid = args.Performer;
         var coords = Transform(uid).Coordinates;
+        _mirrors.Clear();
         Lookup.GetEntitiesInRange(coords, args.LookupRange, _mirrors);
         if (_mirrors.Count == 0)
         {
@@ -92,8 +93,22 @@ public sealed partial class HereticAbilitySystem
         BaseActionEvent args,
         ProtoId<PolymorphPrototype> polymorph)
     {
+        var ourId = Prototype(args.Action)?.ID;
         if (TryComp(uid, out PolymorphedEntityComponent? morphed) && HasComp<SpectralComponent>(uid))
-            _poly.Revert((uid, morphed));
+        {
+            if (_poly.Revert((uid, morphed)) is not { } reverted)
+                return false;
+
+            if (ourId is not { } id1)
+                return true;
+
+            // Reset jaunt cooldown
+            foreach (var action in _actions.GetActions(reverted))
+            {
+                if (Prototype(action)?.ID is { } id2 && id2 == id1)
+                    _actions.StartUseDelay(action.AsNullable());
+            }
+        }
         else if (!TryUseAbility(args) || _poly.PolymorphEntity(uid, polymorph) == null)
             return false;
 

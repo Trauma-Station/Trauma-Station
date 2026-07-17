@@ -116,7 +116,7 @@
   - type: Action
     predicted: false
     checkCanInteract: false
-    useDelay: 6
+    useDelay: 5
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/eldritch_mobs.rsi
