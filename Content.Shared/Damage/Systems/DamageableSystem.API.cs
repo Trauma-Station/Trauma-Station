@@ -274,9 +274,18 @@ public sealed partial class DamageableSystem
     {
         var damageChange = new DamageSpecifier();
 
-        if (!_damageableQuery.Resolve(ent, ref ent.Comp, false) || amount >= 0)
+        if (!_damageableQuery.Resolve(ent, ref ent.Comp, false))
             return damageChange;
-        // <Trauma> - apply healing to each individual part
+        // <Trauma>
+        // log error if amount is non-negative since this API is shit and doesnt support doing group damage, better than just silently failing
+        if (amount >= 0)
+        {
+            var name = group?.Id ?? "all damage";
+            Log.Error($"Tried to evenly heal {ToPrettyString(ent)} with a non-negative amount {amount} of {name}");
+            return damageChange;
+        }
+
+        // apply healing to each individual part
         if (_bodyQuery.TryComp(ent, out var body))
         {
             foreach (var organ in _body.GetExternalOrgans((ent, body)))
