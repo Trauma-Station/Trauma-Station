@@ -28,6 +28,11 @@ public sealed partial class LatheAutomationSystem : EntitySystem
             if (ent.Comp.LastRecipe is not {} recipe)
                 return;
 
+            // ignore low signals
+            var state = SignalState.Momentary;
+            if (args.Data?.TryGetValue("logic_state", out state) && state == SignalState.Low)
+                return;
+
             _lathe.TryAddToQueue(ent.Owner, recipe, quantity: ent.Comp.Quantity);
             _lathe.TryStartProducing(ent.Owner); // Won't do anything otherwise
         }
@@ -53,7 +58,7 @@ public sealed partial class LatheAutomationSystem : EntitySystem
         }
     }
 
-    private void SetRecipe(Entity<LatheAutomationComponent> ent, LatheRecipePrototype recipe)
+    private void SetRecipe(Entity<LatheAutomationComponent> ent, LatheRecipePrototype? recipe)
     {
         if (ent.Comp.LastRecipe == recipe)
             return;
@@ -61,7 +66,7 @@ public sealed partial class LatheAutomationSystem : EntitySystem
         ent.Comp.LastRecipe = recipe;
         var payload = new NetworkPayload()
         {
-            ["logic_string"] = recipe.ID
+            ["logic_string"] = recipe?.ID ?? string.Empty
         };
         _device.InvokePort(ent.Owner, ent.Comp.CurrentRecipePort, payload);
     }
