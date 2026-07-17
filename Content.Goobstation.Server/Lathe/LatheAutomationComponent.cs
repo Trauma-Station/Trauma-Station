@@ -31,5 +31,5 @@ public sealed partial class LatheAutomationComponent : Component
     public ProtoId<SinkPortPrototype> QuantityPort = "LatheQuantity";
 
     [DataField]
-    public ProtoId<SinkPortPrototype> CurrentRecipePort = "LatheCurrentRecipe";
+    public ProtoId<SourcePortPrototype> CurrentRecipePort = "LatheCurrentRecipe";
 }
