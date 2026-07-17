@@ -13,18 +13,13 @@ public abstract partial class SharedHereticAbilitySystem
 {
     [Dependency] private SharedStaminaSystem _stam = default!;
 
-    protected virtual void SubscribeBlade()
+    private void SubscribeBlade()
     {
-        SubscribeLocalEvent<SilverMaelstromComponent, GetClothingStunModifierEvent>(OnBladeStunModify);
         SubscribeLocalEvent<SilverMaelstromComponent, DropHandItemsEvent>(OnBladeDropItems,
-            before: new[] { typeof(SharedHandsSystem) });
-        SubscribeLocalEvent<SilverMaelstromComponent, ComponentStartup>(OnMaelstromStartup);
-        SubscribeLocalEvent<SilverMaelstromComponent, ComponentShutdown>(OnMaelstromShutdown);
-
-        SubscribeLocalEvent<EventHereticSacraments>(OnSacraments);
-        SubscribeLocalEvent<HereticBladePassiveRiposteEvent>(OnRiposte);
+            before: [ typeof(SharedHandsSystem) ]);
     }
 
+    [SubscribeLocalEvent]
     private void OnRiposte(HereticBladePassiveRiposteEvent args)
     {
         TryComp(args.Heretic, out RiposteeComponent? riposte);
@@ -52,6 +47,7 @@ public abstract partial class SharedHereticAbilitySystem
         };
     }
 
+    [SubscribeLocalEvent]
     private void OnMaelstromShutdown(Entity<SilverMaelstromComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
@@ -60,11 +56,13 @@ public abstract partial class SharedHereticAbilitySystem
         StatusNew.TryRemoveStatusEffect(ent, ent.Comp.Status);
     }
 
+    [SubscribeLocalEvent]
     private void OnMaelstromStartup(Entity<SilverMaelstromComponent> ent, ref ComponentStartup args)
     {
         StatusNew.TryUpdateStatusEffectDuration(ent, ent.Comp.Status, out _);
     }
 
+    [SubscribeLocalEvent]
     private void OnSacraments(EventHereticSacraments args)
     {
         if (!TryUseAbility(args))
@@ -78,6 +76,7 @@ public abstract partial class SharedHereticAbilitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBladeStunModify(Entity<SilverMaelstromComponent> ent, ref GetClothingStunModifierEvent args)
     {
         args.Modifier *= 0.5f;

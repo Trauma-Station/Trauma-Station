@@ -24,6 +24,18 @@ public sealed partial class DamageSpecifier
     [DataField]
     public DamageFlags Flags = DamageFlags.None;
 
+    /// <summary>
+    /// Wounds that are induced by damage types.
+    /// If not stated, use damage type as a wound.
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<DamageTypePrototype>, string> WoundTypeOverrides = new();
+
+    public string GetWoundId(ProtoId<DamageTypePrototype> id)
+    {
+        return WoundTypeOverrides.GetValueOrDefault(id, id);
+    }
+
     public DamageSpecifier(float armorPenetration,
         float partVariation,
         Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> severityMultipliers)
@@ -42,6 +54,7 @@ public sealed partial class DamageSpecifier
         PartDamageVariation = src.PartDamageVariation;
         WoundSeverityMultipliers = new(src.WoundSeverityMultipliers);
         Flags = src.Flags;
+        WoundTypeOverrides = new(src.WoundTypeOverrides);
     }
 
     /// <summary>

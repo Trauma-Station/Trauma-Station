@@ -211,13 +211,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
         var cloningEv = new CloningEvent(settings, clone);
         RaiseLocalEvent(original, ref cloningEv); // used for datafields that cannot be directly copied using CopyComp
     }
-    // TODO: Kill
-#pragma warning disable CS0108
-#pragma warning disable RA0045
-    private bool TryComp(EntityUid uid, Type type, [NotNullWhen(true)] out IComponent? comp)
-        => EntityManager.TryGetComponent(uid, type, out comp);
-#pragma warning restore RA0045
-#pragma warning restore CS0108
 
     /// <summary>
     ///     Copies the equipment the original has to the clone.

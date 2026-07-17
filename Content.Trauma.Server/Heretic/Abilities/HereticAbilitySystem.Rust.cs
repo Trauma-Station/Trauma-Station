@@ -7,13 +7,7 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    protected override void SubscribeRust()
-    {
-        base.SubscribeRust();
-
-        SubscribeLocalEvent<RustbringerComponent, FlashAttemptEvent>(OnFlashAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnFlashAttempt(Entity<RustbringerComponent> ent, ref FlashAttemptEvent args)
     {
         if (!IsTileRust(Transform(ent).Coordinates, out _))

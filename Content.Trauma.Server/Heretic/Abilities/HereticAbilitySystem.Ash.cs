@@ -20,19 +20,8 @@ public sealed partial class HereticAbilitySystem
     [Dependency] private TransformSystem _xform = default!;
     [Dependency] private EntityQuery<FlammableComponent> _flamQuery = default!;
 
-    protected override void SubscribeAsh()
-    {
-        base.SubscribeAsh();
-
-        SubscribeLocalEvent<EventHereticAshenShift>(OnJaunt);
-        SubscribeLocalEvent<EventHereticNightwatcherRebirth>(OnNWRebirth);
-        SubscribeLocalEvent<EventHereticFlames>(OnFlames);
-        SubscribeLocalEvent<EventHereticCascade>(OnCascade);
-
-        SubscribeLocalEvent<Shared.Heretic.Components.PathSpecific.Ash.NightwatcherRebirthActionComponent, ActionPerformedEvent>(OnRebirthPerformed);
-    }
-
-    private void OnRebirthPerformed(Entity<Shared.Heretic.Components.PathSpecific.Ash.NightwatcherRebirthActionComponent> ent, ref ActionPerformedEvent args)
+    [SubscribeLocalEvent]
+    private void OnRebirthPerformed(Entity<NightwatcherRebirthActionComponent> ent, ref ActionPerformedEvent args)
     {
         if (ent.Comp.LastTargets == 0 || !TryComp(ent, out ActionComponent? action) || action.Cooldown is not { } cd)
             return;
@@ -49,6 +38,7 @@ public sealed partial class HereticAbilitySystem
         ent.Comp.LastTargets = 0;
     }
 
+    [SubscribeLocalEvent]
     private void OnJaunt(EventHereticAshenShift args)
     {
         if (!TryUseAbility(args))
@@ -121,6 +111,7 @@ public sealed partial class HereticAbilitySystem
         IHateWoundMed(args.Performer, AllDamage * multiplier * toHeal, 0, 0, 0);
     }
 
+    [SubscribeLocalEvent]
     private void OnFlames(EventHereticFlames args)
     {
         if (!TryUseAbility(args))
@@ -129,6 +120,7 @@ public sealed partial class HereticAbilitySystem
         EnsureComp<HereticFlamesComponent>(args.Performer);
     }
 
+    [SubscribeLocalEvent]
     private void OnCascade(EventHereticCascade args)
     {
         if (!Transform(args.Performer).GridUid.HasValue || !TryUseAbility(args))

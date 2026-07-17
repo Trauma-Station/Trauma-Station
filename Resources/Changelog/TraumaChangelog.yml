@@ -11556,3 +11556,24 @@ Entries:
   id: 1276
   time: '2026-07-15T23:29:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3554
+- author: Aviu00
+  changes:
+  - type: Fix
+    message: Fixed Late Arrivals station trait preventing antags from rolling.
+  id: 1277
+  time: '2026-07-17T04:53:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3572
+- author: Aineias1
+  changes:
+  - type: Remove
+    message: Freighter enlisted in chud wars.
+  id: 1278
+  time: '2026-07-17T05:12:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3562
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Fire and barotrauma buffed, explosions nerfed.
+  id: 1279
+  time: '2026-07-17T07:08:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3561
