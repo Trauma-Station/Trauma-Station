@@ -86,6 +86,7 @@ public sealed partial class AnomalousEntityContainmentSystem : EntitySystem
         {
             comp.Contained = false;
         }
+        Dirty(anomalousEntity, comp);
     }
 
     //spawns I.D. gear on anom behaviour

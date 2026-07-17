@@ -18,6 +18,7 @@
   - type: AnomalousEntity
     researchPerSecond: 0
     contained: false
+    active: true
     researchOnBehaviour: 100000
     idGear: SoapHomemadeBanana
   - type: AerSoap
@@ -35,9 +36,6 @@
     layers:
       - state: icon
         map: ["enum.AnomalyScannerVisualLayers.Base"]
-      - map: ["enum.AnomalyScannerVisualLayers.Screen"]
-        visible: false
-        shader: unshaded
   - type: Appearance
   - type: AnomalousEntityScanner
   - type: Item
