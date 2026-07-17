@@ -31,7 +31,8 @@ public sealed partial class LatheAutomationSystem : EntitySystem
 
             // ignore low signals
             var state = SignalState.Momentary;
-            if (args.Data?.TryGetValue("logic_state", out state) && state == SignalState.Low)
+            args.Data?.TryGetValue("logic_state", out state);
+            if (state == SignalState.Low)
                 return;
 
             _lathe.TryAddToQueue(ent.Owner, recipe, quantity: ent.Comp.Quantity);
