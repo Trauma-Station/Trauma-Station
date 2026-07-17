@@ -243,6 +243,7 @@ public sealed partial class JobListingsSystem : EntitySystem
                 // if we are above 0 effective level, try reduce it by 1 and try again to assign
                 if (effectiveLevel > 0)
                 {
+                    jobsAssignedOfCurrentLevel = 0;
                     effectiveLevel -= 1;
                     continue;
                 }
