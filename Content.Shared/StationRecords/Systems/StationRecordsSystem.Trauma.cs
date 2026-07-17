@@ -1,18 +1,19 @@
-namespace Content.Server.StationRecords.Systems;
+using System.Text;
+
+namespace Content.Shared.StationRecords.Systems;
 
 public sealed partial class StationRecordsSystem
 {
-        private bool IsFilterWithSomeCodeValue(string value, string filter)
+    private bool IsFilterWithSomeCodeValue(string value, string filter)
     {
-        // Goob edit start - Partial Prints Feature
-        List<(string, int)> filterletList = ApplyWildcard(filter);
+        var filterletList = ApplyWildcard(filter);
 
         //NOTE TO SELF: IF TRUE, FILTER THIS ENTRY
         //SECOND NOTE TO SELF: ALL FILTERS NEED TO RETURN TRUE, THEN FINALLY RETURN FALSE
         bool allFiltersPassed = true;
         foreach (var (filterlet, cutoff) in filterletList)
         {
-            allFiltersPassed = allFiltersPassed && value.Substring(cutoff).ToLower().StartsWith(filterlet);
+            allFiltersPassed &= value.Substring(cutoff).ToLower().StartsWith(filterlet);
         }
 
         return !allFiltersPassed;
@@ -30,41 +31,40 @@ public sealed partial class StationRecordsSystem
     private List<(string, int)> ApplyWildcard(string filter)
     {
         var filterList = new List<(string, int)>();
-        string filterlet = "";
+        var filterlet = new StringBuilder();
         int segmentStart = 0;
         int index = 0;
 
-        foreach (char c in filter)
+        foreach (var c in filter)
         {
-
             if (c == '#')
             {
-                if (!string.IsNullOrEmpty(filterlet)) // The current filterlet string is finished, so-
+                if (filterlet.Length > 0) // The current filterlet string is finished, so-
                 {
-                    filterList.Add((filterlet, segmentStart)); // -save the filterlet-
-                    filterlet = ""; // -and start search for a new one
+                    filterList.Add((filterlet.ToString(), segmentStart)); // -save the filterlet-
+                    filterlet.Clear(); // -and start search for a new one
                 }
             }
             else
             {
-                if (string.IsNullOrEmpty(filterlet))
+                if (filterlet.Length == 0)
                 {
                     // This is the start of a new segment
                     segmentStart = index;
                 }
 
-                filterlet += c; // ###F##D8
+                filterlet.Append(c); // ###F##D8
             }
 
             index++;
         }
 
         // Don't forget the last segment
-        if (!string.IsNullOrEmpty(filterlet))
+        if (filterlet.Length > 0)
         {
-            filterList.Add((filterlet, segmentStart));
+            filterList.Add((filterlet.ToString(), segmentStart));
         }
 
         return filterList;
-    } // Good edit end - Partial Prints Feature
+    }
 }
