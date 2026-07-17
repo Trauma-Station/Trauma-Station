@@ -65,8 +65,8 @@
         orGroup: Guns
       - id: WeaponShotgunSawn
         orGroup: Guns
-      # - id: WeaponShotgunHandmade # Trauma - Replace with EOKA pistol once its finished, also add other shitty makeshift guns to this list
-      #   orGroup: Guns
+      - id: MakeshiftEOKAPistol # Trauma
+        orGroup: Guns
       - id: WeaponShotgunBlunderbuss
         orGroup: Guns
       - id: WeaponShotgunImprovised
