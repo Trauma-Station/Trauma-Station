@@ -11,7 +11,7 @@
     angleModifier: 1.2
 
 - type: entity
-  parent: BaseStatusEffect
+  parent: MobStatusEffectBase
   id: StatusEffectBlurryVision
   name: blurry vision
   components:
