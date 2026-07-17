@@ -11635,3 +11635,17 @@ Entries:
   id: 1285
   time: '2026-07-17T13:46:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3584
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Removed xenoborgs from Secret.
+  id: 1286
+  time: '2026-07-17T13:50:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3585
+- author: assripper.
+  changes:
+  - type: Tweak
+    message: xenomorphs must make up 50% of alive crew to win (decreased from 70%)
+  id: 1287
+  time: '2026-07-17T15:06:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3588
