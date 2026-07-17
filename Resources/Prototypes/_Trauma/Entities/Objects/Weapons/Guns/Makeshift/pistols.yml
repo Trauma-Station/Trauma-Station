@@ -1,8 +1,8 @@
 - type: entity
-  name: Handmade revolver
-  parent: [ BaseWeaponRevolver, BaseMajorContraband ]
   id: MakeshiftRevolver
-  description: An underpowered handcannon cobbled together from pieces of scrap and cloth. At the very least it won't jam up on you.
+  parent: [ BaseWeaponRevolver, BaseMajorContraband ]
+  name: Handmade revolver
+  description: An underpowered revolver cobbled together from pieces of scrap metal, tied together with cables. At the very least it won't jam up on you.
   components:
   - type: Sprite
     sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/revolver.rsi
@@ -20,10 +20,10 @@
       path: /Audio/_Trauma/Weapons/Guns/Gunshots/revolver_bang.ogg
 
 - type: entity
-  name: Crude pistol
   parent: [ BaseWeaponRevolver, BaseMajorContraband ]
-  id: MakeshiftRevolver
-  description: An underpowered handcannon cobbled together from pieces of scrap and cloth. At the very least it won't jam up on you.
+  id: MakeshiftEOKAPistol
+  name: Decroded pistol
+  description: An extremely decroded handcannon made from an atmospheric pipe tied with electrical cables to a crude wooden handle. Definitely unreliable.
   components:
   - type: Sprite
     sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/revolver.rsi

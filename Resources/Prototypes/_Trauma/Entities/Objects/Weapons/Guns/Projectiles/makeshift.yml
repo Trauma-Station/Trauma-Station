@@ -1,6 +1,6 @@
 - type: entity
-  parent: BaseBullet
   id: Bullet22MagnumMakeshift
+  parent: BaseBullet
   name: makeshift bullet (.22 Magnum)
   categories: [ HideSpawnMenu ]
   components:

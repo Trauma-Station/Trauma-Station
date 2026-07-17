@@ -1,6 +1,6 @@
 - type: entity
-  parent: [ BaseCartridge, BaseMajorContraband ]
   id: Cartridge22MagnumMakeshift
+  parent: [ BaseCartridge, BaseMajorContraband ]
   name: makeshift cartridge (.22 Magnum)
   description: An old makeshift cartridge that was often used in rifles and pistols.
   components:
