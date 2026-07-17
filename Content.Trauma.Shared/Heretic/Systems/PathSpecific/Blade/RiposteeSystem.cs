@@ -225,7 +225,7 @@ public sealed partial class RiposteeSystem : EntitySystem
         _audio.PlayPredicted(sound, user, user);
 
         if (message != null)
-            _popup.PopupClient(Loc.GetString(message), user, user);
+            _popup.PopupEntity(Loc.GetString(message), user, user);
 
         return result;
     }

@@ -118,11 +118,11 @@ public abstract partial class SharedShadowCocoonSystem : EntitySystem
                     var sounds = EnsureComp<RandomIntervalSoundComponent>(ent.Owner);
                     sounds.Sound = ent.Comp.RandomSounds;
 
-                    _popup.PopupClient(Loc.GetString("shadow-cocoon-halluc-activated"), user, user);
+                    _popup.PopupEntity(Loc.GetString("shadow-cocoon-halluc-activated"), user, user);
                     return;
                 }
 
-                _popup.PopupClient(Loc.GetString("shadow-cocoon-halluc-deactivated"), user, user);
+                _popup.PopupEntity(Loc.GetString("shadow-cocoon-halluc-deactivated"), user, user);
                 RemCompDeferred<RandomIntervalSoundComponent>(ent.Owner);
             }
         });

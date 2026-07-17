@@ -62,6 +62,7 @@ public sealed partial class AristocratSystem : EntitySystem
     private static readonly EntProtoId IceWallPrototype = "WallIce";
     private static readonly EntProtoId SnowfallMagic = "WeatherSnowfallMagic";
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
+    private static readonly ProtoId<StatusEffectPrototype> PressureImmunity = "PressureImmunity";
     private static readonly ProtoId<TagPrototype> Window = "Window";
     private static readonly ProtoId<TagPrototype> AirlockAssembly = "AirlockAssembly";
 
@@ -251,7 +252,7 @@ public sealed partial class AristocratSystem : EntitySystem
                     if (_statusQuery.TryComp(ent, out var status))
                     {
                         _status.TryAddStatusEffect<PressureImmunityComponent>(ent,
-                            "PressureImmunity",
+                            PressureImmunity,
                             TimeSpan.FromSeconds(2),
                             true,
                             status);

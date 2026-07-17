@@ -36,7 +36,7 @@ public sealed partial class NeurotoxinGlandSystem : EntitySystem
     {
         // Toggle the active state
         ent.Comp.Active = !ent.Comp.Active;
-        _popup.PopupPredicted(Loc.GetString(ent.Comp.Active ? "neurotoxin-gland-activated" : "neurotoxin-gland-deactivated"), args.Performer, args.Performer);
+        _popup.PopupEntity(Loc.GetString(ent.Comp.Active ? "neurotoxin-gland-activated" : "neurotoxin-gland-deactivated"), args.Performer, args.Performer);
         Dirty(ent);
         args.Handled = true;
     }

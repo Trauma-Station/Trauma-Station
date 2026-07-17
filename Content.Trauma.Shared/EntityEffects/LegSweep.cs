@@ -4,7 +4,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.EntityEffects;
@@ -26,7 +25,6 @@ public sealed partial class LegSweepEffectSystem : EntityEffectSystem<TransformC
     [Dependency] private StandingStateSystem _standing = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<LegSweep> args)
     {
         if (args.User is not { } user)
@@ -43,16 +41,11 @@ public sealed partial class LegSweepEffectSystem : EntityEffectSystem<TransformC
         else
         {
             // Standard sweep chance
-            if (Random(user).NextFloat(0.0f, 1.0f) < Math.Min(0.5f * args.Scale, 1f))
+            var chance = Math.Min(0.5f * args.Scale, 1f);
+            if (SharedRandomExtensions.PredictedProb(_timing, chance, GetNetEntity(user)))
             {
                 _stun.TryKnockdown(ent.Owner, duration, true);
             }
         }
-    }
-
-    public System.Random Random(EntityUid uid)
-    {
-        var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
-        return new System.Random(seed);
     }
 }

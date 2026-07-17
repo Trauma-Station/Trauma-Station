@@ -12,16 +12,16 @@ namespace Content.Goobstation.Server.ManifestListings;
 
 public sealed partial class ManifestListingsSystem : EntitySystem
 {
+    private CompName _actionName;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MindComponent, ListingPurchasedEvent>(OnPurchase);
-
-        SubscribeLocalEvent<MindListingsComponent, PrependObjectivesSummaryTextEvent>(OnPrepend);
+        _actionName = Factory.CompName<ActionComponent>();
     }
 
+    [SubscribeLocalEvent]
     private void OnPurchase(Entity<MindComponent> ent, ref ListingPurchasedEvent args)
     {
         var listings = EnsureComp<MindListingsComponent>(ent);
@@ -37,6 +37,7 @@ public sealed partial class ManifestListingsSystem : EntitySystem
         list.Add(data);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrepend(Entity<MindListingsComponent> ent, ref PrependObjectivesSummaryTextEvent args)
     {
         var sb = new StringBuilder();
@@ -196,7 +197,8 @@ public sealed partial class ManifestListingsSystem : EntitySystem
         sprite = "";
         state = "";
 
-        if (!ProtoMan.Index(proto).TryGetComponent("Action", out ActionComponent? actionComp) || actionComp.Icon == null)
+        // TODO: change to appearance data
+        if (!ProtoMan.Index(proto).TryComp<ActionComponent>(_actionName, out var actionComp) || actionComp.Icon == null)
             return false;
 
         switch (actionComp.Icon)

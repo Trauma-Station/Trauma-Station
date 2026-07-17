@@ -58,12 +58,12 @@ public sealed partial class TourniquetSystem : EntitySystem
         var (partType, _) = _body.ConvertTargetBodyPart(targeting.Target);
         if (tourniquet.BlockedBodyParts.Contains(partType))
         {
-            _popup.PopupClient(Loc.GetString("cant-put-tourniquet-here"), target, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cant-put-tourniquet-here"), target, user, PopupType.MediumCaution);
             return false;
         }
 
         var userIdent = Identity.Entity(user, EntityManager);
-        _popup.PopupPredicted(Loc.GetString("puts-on-a-tourniquet", ("user", userIdent), ("part", partType)), target, user, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("puts-on-a-tourniquet", ("user", userIdent), ("part", partType)), target, user, PopupType.Medium);
         _audio.PlayPredicted(tourniquet.PutOnSound, target, user, AudioParams.Default.WithVariation(0.125f).WithVolume(1f));
 
         var doAfterEventArgs =
@@ -87,7 +87,7 @@ public sealed partial class TourniquetSystem : EntitySystem
 
     private void TakeOffTourniquet(EntityUid target, EntityUid user, EntityUid tourniquetEnt, TourniquetComponent tourniquet)
     {
-        _popup.PopupPredicted(Loc.GetString("takes-off-a-tourniquet",
+        _popup.PopupEntity(Loc.GetString("takes-off-a-tourniquet",
             ("user", user),
             ("part", tourniquet.BodyPartTorniqueted!)),
             target,
@@ -137,7 +137,7 @@ public sealed partial class TourniquetSystem : EntitySystem
         var container = _container.EnsureContainer<ContainerSlot>(target, TourniquetContainerId);
         if (container.ContainedEntity.HasValue)
         {
-            _popup.PopupClient(Loc.GetString("already-tourniqueted"), ent, args.User, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("already-tourniqueted"), ent, args.User, PopupType.Medium);
             return;
         }
 
@@ -148,7 +148,7 @@ public sealed partial class TourniquetSystem : EntitySystem
         {
             if (!_container.Insert(used, container))
             {
-                _popup.PopupClient(Loc.GetString("cant-tourniquet"), ent, args.User, PopupType.Medium);
+                _popup.PopupEntity(Loc.GetString("cant-tourniquet"), ent, args.User, PopupType.Medium);
                 return;
             }
             _bloodstream.TryAddBleedModifier(targetPart, "TourniquetPresent", 100, false, true);
@@ -177,7 +177,7 @@ public sealed partial class TourniquetSystem : EntitySystem
 
         if (tourniquetable == EntityUid.Invalid)
         {
-            _popup.PopupClient(Loc.GetString("missing-body-part"), ent, args.User, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("missing-body-part"), ent, args.User, PopupType.MediumCaution);
             return;
         }
 
@@ -195,7 +195,7 @@ public sealed partial class TourniquetSystem : EntitySystem
         if (tourniquetableWounds.Count <= 0
            || !_container.Insert(used, container))
         {
-            _popup.PopupClient(Loc.GetString("no-wounds-tourniquet"), ent, args.User, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("no-wounds-tourniquet"), ent, args.User, PopupType.Medium);
             return;
         }
 

@@ -124,19 +124,19 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         var user = args.User;
         if (comp.CurrentBlade == null)
         {
-            Popup.PopupClient(Loc.GetString("gas-turbine-repair-fail-blade"), user, user, PopupType.MediumCaution);
+            Popup.PopupEntity(Loc.GetString("gas-turbine-repair-fail-blade"), user, user, PopupType.MediumCaution);
             return;
         }
 
         if (comp.CurrentStator == null)
         {
-            Popup.PopupClient(Loc.GetString("gas-turbine-repair-fail-stator"), user, user, PopupType.MediumCaution);
+            Popup.PopupEntity(Loc.GetString("gas-turbine-repair-fail-stator"), user, user, PopupType.MediumCaution);
             return;
         }
 
         if (comp.BladeHealth >= comp.BladeHealthMax && !comp.Ruined)
         {
-            Popup.PopupClient("The blade is already in perfect condition.", user, user);
+            Popup.PopupEntity("The blade is already in perfect condition.", user, user);
             return;
         }
 
@@ -165,7 +165,7 @@ public abstract partial class SharedTurbineSystem : EntitySystem
             UpdateHealthIndicators(ent, args.User);
         }
 
-        Popup.PopupClient(Loc.GetString("turbine-repair", ("target", ent), ("tool", args.Used!)), ent, args.User);
+        Popup.PopupEntity(Loc.GetString("turbine-repair", ("target", ent), ("tool", args.Used!)), ent, args.User);
         _damage.ClearAllDamage(ent.Owner);
     }
 
@@ -228,7 +228,7 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         if (ent.Comp.RPM < 1)
             return;
 
-        Popup.PopupClient(Loc.GetString("turbine-unanchor-warning"), args.User, args.User, PopupType.LargeCaution);
+        Popup.PopupEntity(Loc.GetString("turbine-unanchor-warning"), args.User, args.User, PopupType.LargeCaution);
         args.Cancel();
     }
 
@@ -254,23 +254,23 @@ public abstract partial class SharedTurbineSystem : EntitySystem
         {
             comp.IsSparking = true;
             Audio.PlayPredicted(new SoundPathSpecifier("/Audio/Effects/PowerSink/electric.ogg"), uid, user, AudioParams.Default.WithPitchScale(0.75f));
-            Popup.PopupPredicted(Loc.GetString("turbine-spark", ("owner", uid)), uid, user, PopupType.MediumCaution);
+            Popup.PopupEntity(Loc.GetString("turbine-spark", ("owner", uid)), uid, user, PopupType.MediumCaution);
         }
         else if (comp.BladeHealth > 0.75 * comp.BladeHealthMax && comp.IsSparking)
         {
             comp.IsSparking = false;
-            Popup.PopupPredicted(Loc.GetString("turbine-spark-stop", ("owner", uid)), uid, user, PopupType.Medium);
+            Popup.PopupEntity(Loc.GetString("turbine-spark-stop", ("owner", uid)), uid, user, PopupType.Medium);
         }
 
         if (comp.BladeHealth <= 0.5 * comp.BladeHealthMax && !comp.IsSmoking)
         {
             comp.IsSmoking = true;
-            Popup.PopupPredicted(Loc.GetString("turbine-smoke", ("owner", uid)), uid, user, PopupType.MediumCaution);
+            Popup.PopupEntity(Loc.GetString("turbine-smoke", ("owner", uid)), uid, user, PopupType.MediumCaution);
         }
         else if (comp.BladeHealth > 0.5 * comp.BladeHealthMax && comp.IsSmoking)
         {
             comp.IsSmoking = false;
-            Popup.PopupPredicted(Loc.GetString("turbine-smoke-stop", ("owner", uid)), uid, user, PopupType.Medium);
+            Popup.PopupEntity(Loc.GetString("turbine-smoke-stop", ("owner", uid)), uid, user, PopupType.Medium);
         }
 
         EnsureComp<ElectrifiedComponent>(uid).Enabled = comp.IsSparking;

@@ -104,7 +104,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         {
             var identity = Identity.Entity(removedEnt, EntityManager);
             var popup = Loc.GetString("xeno-vacuum-clear-popup", ("ent", identity));
-            _popup.PopupClient(popup, ent, args.User);
+            _popup.PopupEntity(popup, ent, args.User);
 
             var coords = args.Target?.ToCoordinates() ?? args.ClickLocation;
             _throw.TryThrow(removedEnt, coords);
@@ -161,7 +161,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         if (GetTank(user) is not {} tank)
         {
             var noTankPopup = Loc.GetString("xeno-vacuum-suction-fail-no-tank-popup");
-            _popup.PopupClient(noTankPopup, vacuum, user);
+            _popup.PopupEntity(noTankPopup, vacuum, user);
             return false;
         }
 
@@ -169,7 +169,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         if (_whitelist.IsWhitelistFail(vacuum.Comp.EntityWhitelist, target))
         {
             var invalidEntityPopup = Loc.GetString("xeno-vacuum-suction-fail-invalid-entity-popup", ("ent", identity));
-            _popup.PopupClient(invalidEntityPopup, vacuum, user);
+            _popup.PopupEntity(invalidEntityPopup, vacuum, user);
 
             return false;
         }
@@ -177,7 +177,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
         if (tank.Comp.StorageTank.ContainedEntities.Count > tank.Comp.MaxEntities)
         {
             var tankFullPopup = Loc.GetString("xeno-vacuum-suction-fail-tank-full-popup");
-            _popup.PopupClient(tankFullPopup, vacuum, user);
+            _popup.PopupEntity(tankFullPopup, vacuum, user);
 
             return false;
         }
@@ -192,7 +192,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
 
         _audio.PlayPredicted(vacuum.Comp.Sound, user, user);
         var successPopup = Loc.GetString("xeno-vacuum-suction-succeed-popup", ("ent", identity));
-        _popup.PopupClient(successPopup, vacuum, user);
+        _popup.PopupEntity(successPopup, vacuum, user);
 
         return true;
     }

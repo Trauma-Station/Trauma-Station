@@ -60,8 +60,11 @@ public abstract partial class SharedBlobCoreSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.Actions));
     }
 
+// want to react to healing not just damage dealt
+#pragma warning disable CS0618
     [SubscribeLocalEvent]
     private void OnDamaged(Entity<BlobCoreComponent> ent, ref DamageChangedEvent args)
+#pragma warning restore CS0618
     {
         UpdateAllAlerts(ent.AsNullable());
     }

@@ -89,9 +89,8 @@
       effectProto: ShadowCloakStatusEffect
       time: 180
       type: Remove
-    - !type:GenericStatusEffect
-      key: BlurryVision
-      component: BlurryVision
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectBlurryVision
       time: 6
     - !type:GenericStatusEffect
       key: Muted

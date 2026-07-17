@@ -11,20 +11,14 @@ public sealed partial class ActionUserWhitelistSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActionUserWhitelistComponent, ActionAttemptEvent>(OnActionAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnActionAttempt(Entity<ActionUserWhitelistComponent> ent, ref ActionAttemptEvent args)
     {
         if (_whitelist.IsWhitelistPass(ent.Comp.Whitelist, args.User))
             return;
 
-        if (ent.Comp.Popup.HasValue)
-            _popup.PopupClient(Loc.GetString(ent.Comp.Popup), args.User, PopupType.MediumCaution);
+        if (ent.Comp.Popup is { } popup)
+            _popup.PopupEntity(popup, args.User, PopupType.MediumCaution);
 
         args.Cancelled = true;
     }

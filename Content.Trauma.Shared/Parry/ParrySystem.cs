@@ -341,7 +341,7 @@ public sealed partial class ParrySystem : EntitySystem
 
     private void PlayAudioAndPopup(SoundSpecifier? sound, EntityUid user, EntityUid? shooter)
     {
-        _popup.PopupPredicted(Loc.GetString("reflect-shot"), user, shooter);
+        _popup.PopupEntity(Loc.GetString("reflect-shot"), user, shooter);
         _audio.PlayPredicted(sound, user, shooter);
     }
 

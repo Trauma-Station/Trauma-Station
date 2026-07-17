@@ -17,6 +17,8 @@ public sealed partial class VoidCurseSystem : SharedVoidCurseSystem
     [Dependency] private TemperatureSystem _temp = default!;
     [Dependency] private StatusEffectsSystem _statusEffect = default!;
 
+    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -61,6 +63,6 @@ public sealed partial class VoidCurseSystem : SharedVoidCurseSystem
         }
 
         if (ent.Comp.Stacks >= ent.Comp.MinStacksToMute)
-            _statusEffect.TryAddStatusEffect<MutedComponent>(ent, "Muted", TimeSpan.FromSeconds(5), true);
+            _statusEffect.TryAddStatusEffect<MutedComponent>(ent, Muted, TimeSpan.FromSeconds(5), true);
     }
 }

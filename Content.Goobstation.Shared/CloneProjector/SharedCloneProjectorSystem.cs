@@ -50,7 +50,7 @@ public abstract partial class SharedCloneProjectorSystem : EntitySystem
             || !hostProjector.Comp.RestrictRangedWeapons)
             return;
 
-        _popupSystem.PopupClient(Loc.GetString("gun-disabled"), ent, ent);
+        _popupSystem.PopupEntity(Loc.GetString("gun-disabled"), ent, ent);
         args.Cancel();
     }
 

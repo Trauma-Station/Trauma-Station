@@ -49,6 +49,7 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
     [Dependency] private TeleportSystem _teleport = default!;
 
     private static readonly EntProtoId AlertEffect = "CarvingAlertedStatusEffect";
+    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
     private HashSet<Entity<HereticCarvingComponent>> _carvings = new();
 
     public override void Initialize()
@@ -121,7 +122,7 @@ public sealed partial class CarvingKnifeSystem : EntitySystem
         _statusNew.TryUpdateStatusEffectDuration(args.Victim, BlindnessSystem.BlindingStatusEffect, ent.Comp.BlindnessTime);
 
         _status.TryAddStatusEffect<MutedComponent>(args.Victim,
-            "Muted",
+            Muted,
             ent.Comp.MuteTime,
             true,
             status);

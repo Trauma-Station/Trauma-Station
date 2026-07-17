@@ -567,7 +567,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Gets the damages currently sustained by an entity.
     /// </summary>
-    [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
+    //[Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")] // Trauma - shush
     public DamageSpecifier GetAllDamage(Entity<DamageableComponent?> ent)
     {
         if (!_damageableQuery.Resolve(ent, ref ent.Comp))
@@ -590,7 +590,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Gets the total amount of damage currently sustained by an entity.
     /// </summary>
-    [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
+    //[Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")] // Trauma - shush
     public FixedPoint2 GetTotalDamage(Entity<DamageableComponent?> ent)
     {
         if (!_damageableQuery.Resolve(ent, ref ent.Comp, false))
@@ -613,7 +613,7 @@ public sealed partial class DamageableSystem
     /// <summary>
     /// Gets the total amount of damage currently sustained by an entity, indexed by damage group.
     /// </summary>
-    [Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")]
+    //[Obsolete("Do not rely on the ability to determine a numerically quantifiable amount of damage")] // Trauma - shush
     public IReadOnlyDictionary<ProtoId<DamageGroupPrototype>, FixedPoint2> GetDamagePerGroup(Entity<DamageableComponent?> ent)
     {
         if (!_damageableQuery.Resolve(ent, ref ent.Comp, false)) // Trauma - no log error

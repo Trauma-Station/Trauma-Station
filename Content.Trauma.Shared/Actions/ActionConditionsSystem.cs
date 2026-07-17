@@ -37,7 +37,7 @@ public sealed partial class ActionConditionsSystem : EntitySystem
         if (!passed)
             return;
 
-        _popup.PopupClient(popup, user, user, PopupType.MediumCaution);
+        _popup.PopupEntity(popup, user, user, PopupType.MediumCaution);
     }
     #endregion
 }

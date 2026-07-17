@@ -20,9 +20,11 @@ public sealed partial class ShadowlingGlareSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedShadowlingSystem _shadowling = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private StatusEffectsSystem _effects = default!;
-    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _effectsNew = default!;
+    [Dependency] private StatusEffectsSystem _statusOld = default!;
+    [Dependency] private Content.Shared.StatusEffectNew.StatusEffectsSystem _status = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+
+    private static readonly ProtoId<StatusEffectPrototype> Muted = "Muted";
 
     public override void Initialize()
     {
@@ -97,8 +99,8 @@ public sealed partial class ShadowlingGlareSystem : EntitySystem
         }
 
         // Glare mutes and slows down the target no matter what.
-        _effects.TryAddStatusEffect<MutedComponent>(target, "Muted", comp.MuteTime, true);
-        _effectsNew.TryUpdateStatusEffectDuration(target, comp.SlowdownStatusEffect, comp.SlowTime);
+        _statusOld.TryAddStatusEffect<MutedComponent>(target, Muted, comp.MuteTime, true);
+        _status.TryUpdateStatusEffectDuration(target, comp.SlowdownStatusEffect, comp.SlowTime);
 
         var effectEnt = PredictedSpawnAtPosition(comp.EffectGlare, Transform(uid).Coordinates);
         _transform.SetParent(effectEnt, uid);
