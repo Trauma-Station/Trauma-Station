@@ -55,7 +55,7 @@ void fragment()
         finalColor += color * layerGlow;
     }
 
-    highp float mainIntensity = getShape(uv, 0.5);
+    highp float mainIntensity = getShape(uv, radius);
 
     finalColor += color * mainIntensity;
 
