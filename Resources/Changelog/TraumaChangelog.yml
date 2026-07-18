@@ -11017,3 +11017,10 @@ Entries:
   id: 1230
   time: '2026-07-16T20:04:20.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/80
+- author: magelfik
+  changes:
+  - type: Fix
+    message: Nested the crime list under space law.
+  id: 1231
+  time: '2026-07-18T09:05:05.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/81
