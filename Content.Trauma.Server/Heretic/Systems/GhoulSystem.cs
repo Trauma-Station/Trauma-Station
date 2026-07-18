@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Fishing.Events;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Antag;
@@ -93,22 +94,23 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
 
         UpdatesAfter.Add(typeof(HolyFlammableSystem));
         SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(InitialBodySystem)]);
-        SubscribeLocalEvent<GhoulComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<GhoulComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<GhoulComponent, MobStateChangedEvent>(OnMobStateChange);
-        SubscribeLocalEvent<GhoulComponent, SetGhoulBoundHereticEvent>(OnBound);
-        SubscribeLocalEvent<GhoulComponent, UserShouldTakeHolyEvent>(OnShouldTakeHoly);
-
-        SubscribeLocalEvent<GhoulRoleComponent, GetBriefingEvent>(OnGetBriefing);
-
-        SubscribeLocalEvent<GhoulWeaponComponent, ExaminedEvent>(OnWeaponExamine);
-
-        SubscribeLocalEvent<HereticMinionComponent, TakeGhostRoleEvent>(OnTakeGhostRole);
-
         SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
-        SubscribeLocalEvent<ShatteredRisenComponent, HandCountChangedEvent>(OnHandCountChanged);
     }
 
+    [SubscribeLocalEvent]
+    private void OnFishCaught(Entity<GhoulComponent> ent, ref FishCaughtEvent args)
+    {
+        if (_heretic.TryGetHereticComponent(args.User, out _, out _))
+        {
+            SetBoundHeretic(ent.Owner, args.User);
+            return;
+        }
+
+        if (TryComp(args.User, out HereticMinionComponent? minion) && Exists(minion.BoundHeretic))
+            SetBoundHeretic(ent.Owner, minion.BoundHeretic.Value);
+    }
+
+    [SubscribeLocalEvent]
     private void OnShouldTakeHoly(Entity<GhoulComponent> ent, ref UserShouldTakeHolyEvent args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
@@ -118,11 +120,13 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         args.ShouldTakeHoly = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBound(Entity<GhoulComponent> ent, ref SetGhoulBoundHereticEvent args)
     {
         SetBoundHeretic(ent.Owner, args.Heretic, args.Ritual);
     }
 
+    [SubscribeLocalEvent]
     private void OnHandCountChanged(Entity<ShatteredRisenComponent> ent, ref HandCountChangedEvent args)
     {
         if (TerminatingOrDeleted(ent))
@@ -188,6 +192,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnGetBriefing(Entity<GhoulRoleComponent> ent, ref GetBriefingEvent args)
     {
         var uid = args.Mind.Comp.OwnedEntity;
@@ -208,6 +213,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         args.Append(Loc.GetString("heretic-ghoul-briefing-end"));
     }
 
+    [SubscribeLocalEvent]
     private void OnWeaponExamine(Entity<GhoulWeaponComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
@@ -457,6 +463,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         GhoulifyEntity(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<GhoulComponent> ent, ref ComponentShutdown args)
     {
         DestroyGhoulWeapon(ent);
@@ -468,11 +475,13 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnTakeGhostRole(Entity<HereticMinionComponent> ent, ref TakeGhostRoleEvent args)
     {
         SendBriefing(ent.AsNullable());
     }
 
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<GhoulComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.ExamineMessage == null)
@@ -505,6 +514,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         QueueDel(ent.Comp.BoundWeapon.Value);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChange(Entity<GhoulComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)

@@ -66,23 +66,36 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        // <Trauma>
-        if (!_timing.IsFirstTimePredicted || _timing.ApplyingState)
-            return;
-        // </Trauma>
-
+        // <Trauma> - moved actual update logic into helper method, client only predicts its own entity
         var curTime = _timing.CurTime;
+        if (_net.IsClient)
+        {
+            if (!_timing.IsFirstTimePredicted ||
+                _timing.ApplyingState ||
+                _player.LocalEntity is not { } uid ||
+                !_query.TryComp(uid, out var comp))
+                return;
+
+            UpdateMob(uid, comp);
+            return; // no predicting other mobs it wastes so much cpu
+        }
+
         var query = EntityQueryEnumerator<BloodstreamComponent>();
         while (query.MoveNext(out var uid, out var bloodstream))
         {
+            UpdateMob(uid, bloodstream);
+        }
+        // </Trauma>
+        void UpdateMob(EntityUid uid, BloodstreamComponent bloodstream)
+        {
             if (curTime < bloodstream.NextUpdate)
-                continue;
+                return; // Trauma - no longer in a loop
 
             bloodstream.NextUpdate += bloodstream.AdjustedUpdateInterval;
             DirtyField(uid, bloodstream, nameof(BloodstreamComponent.NextUpdate)); // needs to be dirtied on the client so it can be rerolled during prediction
 
-            if (!SolutionContainer.ResolveSolution(uid, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution))
-                continue;
+            if (!SolutionContainer.ResolveSolution(uid, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, logMissing: false)) // Trauma - dont log missing
+                return; // Trauma - no longer in a loop
 
             // Blood level regulation. Must be alive.
             if (!_mobStateSystem.IsDead(uid))

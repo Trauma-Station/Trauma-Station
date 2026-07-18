@@ -198,7 +198,7 @@
   parent: BaseRevIndustry
   id: RevTelesphere
   name: telesphere
-  description: An experimental device, it can be used to remotely steal materials from passing trade ships using plasma. Additionally; it can be used as a material silo for the revolution.
+  description: An experimental device, it can be used to remotely steal materials from passing trade ships using phoron. Additionally; it can be used as a material silo for the revolution.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/telesphere.rsi
@@ -359,8 +359,8 @@
 - type: entity
   parent: BaseRevIndustry
   id: RevPlasmaFoundry
-  name: plasma foundry
-  description: An advanced foundry powered by plasma, it melts metals incredibly fast and produces advanced components.
+  name: phoron foundry
+  description: An advanced foundry powered by phoron sheets, it melts metals incredibly fast and produces advanced components.
   components:
   - type: Sprite
     sprite: _Trauma/Structures/Machines/plasmaforge.rsi
@@ -387,7 +387,7 @@
     containers:
       blueprint: !type:Container
   - type: Construction
-    node: plasma foundry
+    node: phoron foundry
 
 - type: entity
   parent: BaseRevIndustry

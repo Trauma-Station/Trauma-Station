@@ -15,6 +15,10 @@
     - !type:AutomatedPorts
       sinks:
       - LathePrint
+      - LatheSetRecipe
+      - LatheQuantity
+      sources:
+      - LatheCurrentRecipe
   - type: LatheAutomation
   - type: DeviceNetwork
     deviceNetId: Wireless

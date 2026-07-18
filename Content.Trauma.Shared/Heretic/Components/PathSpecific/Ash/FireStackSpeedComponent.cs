@@ -6,5 +6,5 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 public sealed partial class FireStackSpeedComponent : Component
 {
     [DataField]
-    public float FireStackSpeedMultiplier = 0.01f;
+    public float FireStackSpeedMultiplier = 0.02f;
 }

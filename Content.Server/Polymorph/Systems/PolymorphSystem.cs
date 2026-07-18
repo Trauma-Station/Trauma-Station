@@ -642,5 +642,4 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
         AddComp(@new, copy, true);
         return copy;
     }
-    // goob edit end
 }

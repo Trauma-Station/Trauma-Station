@@ -7,16 +7,19 @@ namespace Content.Trauma.Shared.Heretic.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VelocityModifierContactsComponent : Component
 {
+    [DataField(required: true), AutoNetworkedField]
+    public string CollisionFixture;
+
     [DataField, AutoNetworkedField]
     public float Modifier = 1.0f;
 
     [DataField, AutoNetworkedField]
     public bool IsActive = true;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityWhitelist? Blacklist;
 }
 

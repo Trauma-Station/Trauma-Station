@@ -9,6 +9,14 @@
     snap:
     - Wall
   components:
+  # <Trauma>
+  - type: Penetratable
+    penetrateDamage: 50
+    damagePenalty: 0.1
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: SoundBlocker
+  # </Trauma>
   - type: Anchorable
     flags:
     - Anchorable
@@ -33,7 +41,7 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageModifierSet: Walls # Trauma, was StructuralMetallic
+    damageModifierSet: Walls # Trauma - was StructuralMetallic
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: Physics
@@ -54,26 +62,18 @@
     price: 75
   - type: BlockWeather
   - type: SunShadowCast
-  # <Trauma>
-  - type: Penetratable
-    penetrateDamage: 50
-    damagePenalty: 0.1
-  - type: ExaminableDamage
-    messages: WindowMessages
-  - type: SoundBlocker
-  # </Trauma>
 
 - type: entity
   abstract: true
   parent: BaseStructureWall
   id: BaseWall
   components:
-  - type: Occluder # Breaks on diagonal walls
     # <Trauma>
   - type: FreezableWall
   - type: Appearance
   - type: BulletHole
     # </Trauma>
+  - type: Occluder # Breaks on diagonal walls
 
 - type: entity
   abstract: true
@@ -113,6 +113,10 @@
   id: WallBrick
   name: brick wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/brick.rsi
   - type: Icon
@@ -137,14 +141,16 @@
   - type: IconSmooth
     key: walls
     base: brick
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallClock
   name: clock wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/clock.rsi
   - type: Icon
@@ -168,14 +174,18 @@
   - type: IconSmooth
     key: walls
     base: clock
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallClown
   name: bananium wall
   components:
+  # <Trauma>
+  - type: RadiationBlocker
+    resistance: 40
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/clown.rsi
   - type: Icon
@@ -187,8 +197,6 @@
     cost: 6
     delay: 8
     fx: EffectRCDDeconstruct8
-  - type: RadiationBlocker # Goobstation
-    resistance: 40
   - type: Destructible
     thresholds:
     - trigger:
@@ -216,8 +224,6 @@
         layer:
         - WallLayer
         density: 8000 # really good ramming wall, bananium is rare so it's probably fine
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
@@ -314,6 +320,10 @@
   id: WallDiamond
   name: diamond wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/diamond.rsi
   - type: Icon
@@ -338,14 +348,18 @@
   - type: IconSmooth
     key: walls
     base: diamond
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
   id: WallGold
   name: gold wall
   components:
+  # <Trauma>
+  - type: RadiationBlocker
+    resistance: 10
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/gold.rsi
   - type: Icon
@@ -353,8 +367,6 @@
   - type: Construction
     graph: Girder
     node: goldWall
-  - type: RadiationBlocker # Goobstation
-    resistance: 10
   - type: RCDDeconstructable
     cost: 6
     delay: 8
@@ -386,14 +398,17 @@
   - type: IconSmooth
     key: walls
     base: gold
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseStructureWall # Trauma - don't inherit FreezableWall
   id: WallIce
   name: ice wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  - type: Occluder # from BaseWall
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/ice.rsi
   - type: Icon
@@ -414,17 +429,16 @@
   - type: IconSmooth
     key: walls
     base: ice
-  # <Trauma>
-  - type: CosmicCorruptible
-    convertTo: WallCosmicCult
-  - type: Occluder # from BaseWall
-  # </Trauma>
 
 - type: entity
   parent: BaseWall
   id: WallPlasma
   name: plasma wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/plasma.rsi
   - type: Icon
@@ -453,15 +467,17 @@
     key: walls
     base: plasma
   - type: RadiationBlocker
-    resistance: 10 # Goobstation - Radiation Overhaul
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
+    resistance: 10 # Trauma - was 5
 
 - type: entity
   parent: BaseWall
   id: WallPlastic
   name: plastic wall
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/plastic.rsi
   - type: Icon
@@ -489,8 +505,6 @@
   - type: IconSmooth
     key: walls
     base: plastic
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: BaseWall
@@ -528,7 +542,7 @@
     - type: Injurable
       damageContainer: StructuralInorganic
     - type: RadiationBlocker
-      resistance: 10
+      resistance: 10 # Trauma - was 5
 
 - type: entity
   parent: WallPlastitaniumIndestructible
@@ -575,7 +589,7 @@
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: RadiationBlocker
-    resistance: 10
+    resistance: 10 # Trauma - was 5
 
 - type: entity
   parent: WallPlastitaniumDiagonalIndestructible
@@ -691,6 +705,11 @@
   id: WallReinforcedRust
   suffix: rusted
   components:
+  # <Trauma>
+  - type: RustedWall
+  - type: CosmicCorruptible
+    convertTo: WallCosmicCult
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/solid_rust.rsi
   - type: Icon
@@ -702,7 +721,6 @@
   - type: IconSmooth
     key: walls
     base: reinf_over
-  - type: RustedWall # Goobstation
   - type: Destructible
     thresholds:
     - trigger:
@@ -716,14 +734,16 @@
         node: girder
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: WallCosmicCult
 
 - type: entity
   parent: WallDiagonalBase
   id: WallReinforcedDiagonal
   name: reinforced wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 7 # Toxic blade
+  # </Trauma>
   - type: Tag
     tags:
     - Wall # Goobstation
@@ -754,8 +774,6 @@
         acts: ["Destruction"]
   - type: RadiationBlocker
     resistance: 5
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 7 # Toxic blade
 
 # Riveting
 - type: entity
@@ -763,6 +781,13 @@
   id: WallRiveted
   name: riveted wall
   components:
+  # <Trauma>
+  - type: RustRequiresPathStage
+    pathStage: 10 # Ascension
+  - type: Penetratable
+    penetrateDamage: 200
+    damagePenalty: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/riveted.rsi
   - type: Icon
@@ -789,11 +814,6 @@
     base: riveted
   - type: StaticPrice
     price: 150
-  - type: RustRequiresPathStage # Goobstation
-    pathStage: 10 # Ascension
-  - type: Penetratable # Goobstation - Better snipers
-    penetrateDamage: 200
-    damagePenalty: 0.5
 
 - type: entity
   parent: BaseWall

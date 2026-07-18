@@ -137,7 +137,7 @@ public sealed partial class LastRefugeSystem : EntitySystem
             if (uid == args.Performer || !_mobState.IsAlive(uid))
                 continue;
 
-            _popup.PopupPredicted(Loc.GetString("heretic-ability-fail-other-minds-nearby"), args.Performer, args.Performer);
+            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-other-minds-nearby"), args.Performer, args.Performer);
             args.Cancelled = true;
             break;
         }

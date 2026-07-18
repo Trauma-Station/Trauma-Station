@@ -76,7 +76,7 @@ public sealed partial class TraumaStrippingSystem
 
                 if (!_transform.InRange(userCoords, Transform(bagEntity).Coordinates, SharedInteractionSystem.InteractionRange))
                 {
-                    _ui.CloseUi(bagEntity, StorageComponent.StorageUiKey.Key);
+                    _ui.CloseUi(bagEntity, StorageComponent.StorageUiKey.Key, uid);
                 }
             }
 

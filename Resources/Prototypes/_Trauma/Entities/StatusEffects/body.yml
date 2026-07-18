@@ -9,3 +9,12 @@
     modifier: 1.15
   - type: ViewconeModifier
     angleModifier: 1.2
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectBlurryVision
+  name: blurry vision
+  components:
+  - type: GrantComponentsStatusEffect
+    components:
+    - type: BlurryVision

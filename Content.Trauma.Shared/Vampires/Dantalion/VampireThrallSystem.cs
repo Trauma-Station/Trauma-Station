@@ -51,7 +51,7 @@ public sealed partial class VampireThrallSystem : EntitySystem
 
         if (ent.Comp.Thralls.Count == cap)
         {
-            _popup.PopupClient($"You can't have more than {cap} thralls!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity($"You can't have more than {cap} thralls!", user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -61,7 +61,7 @@ public sealed partial class VampireThrallSystem : EntitySystem
         {
             // but since HasMind is networked it controls the popup to not mispredict user feedback
             if (TryComp<MindContainerComponent>(target, out var mc) && !mc.HasMind)
-                _popup.PopupClient("The target has no mind!", user, user, PopupType.MediumCaution);
+                _popup.PopupEntity("The target has no mind!", user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -126,7 +126,7 @@ public sealed partial class VampireThrallSystem : EntitySystem
         thralls.Thralls.Remove(user);
         Dirty(vampire, thralls);
 
-        _popup.PopupClient("You are freed from enthrallment!", user, user, PopupType.Large);
+        _popup.PopupEntity("You are freed from enthrallment!", user, user, PopupType.Large);
 
         // Notify the vampire that they lost a thrall
         if (_net.IsServer)

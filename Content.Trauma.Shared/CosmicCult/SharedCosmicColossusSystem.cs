@@ -159,7 +159,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         _appearance.SetData(ent, ColossusVisuals.Sunder, ColossusAction.Stopped);
         _ambientSound.SetAmbience(ent, false);
         _audio.PlayPredicted(ent.Comp.DeathSfx, ent, ent);
-        _popup.PopupPredictedCoordinates(
+        _popup.PopupCoordinates(
             Loc.GetString("ghost-role-colossus-death"),
             Transform(ent).Coordinates,
             ent,
@@ -196,10 +196,9 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         _appearance.SetData(ent, ColossusVisuals.Status, ColossusStatus.Action);
         _appearance.SetData(ent, ColossusVisuals.Hibernation, ColossusAction.Running);
         _statusEffects.TryAddStatusEffectDuration(ent, SleepingSystem.StatusEffectForcedSleeping, comp.HibernationWait);
-        _popup.PopupPredictedCoordinates(
+        _popup.PopupCoordinates(
             Loc.GetString("ghost-role-colossus-hibernate"),
             Transform(ent).Coordinates,
-            ent,
             PopupType.LargeCaution);
 
         var doAfterArgs = new DoAfterArgs(EntityManager, ent, comp.HibernationWait, new CosmicHibernationDoAfter(), ent)
@@ -250,7 +249,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
 
         if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
         {
-            _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-grid"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("ghost-role-colossus-effigy-error-grid"), ent, ent);
             return false;
         }
 
@@ -267,13 +266,13 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         {
             if (_turf.IsSpace(tile))
             {
-                _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-space", ("DISTANCE", spaceDistance)), ent, ent);
+                _popup.PopupEntity(Loc.GetString("ghost-role-colossus-effigy-error-space", ("DISTANCE", spaceDistance)), ent, ent);
                 return false;
             }
 
             if (_turf.IsTileBlocked(tile, mask))
             {
-                _popup.PopupClient(Loc.GetString("ghost-role-colossus-effigy-error-intersection"), ent, ent);
+                _popup.PopupEntity(Loc.GetString("ghost-role-colossus-effigy-error-intersection"), ent, ent);
                 return false;
             }
         }
@@ -299,7 +298,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
     {
         if (TryComp<DoorBoltComponent>(args.Target, out var doorBolt) && doorBolt.BoltsDown)
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-ingress-bolted"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-ingress-bolted"), ent, ent);
             return;
         }
         var doargs = new DoAfterArgs(EntityManager, ent, ent.Comp.IngressDoAfter, new EventCosmicColossusIngressDoAfter(), ent, args.Target)
@@ -321,7 +320,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
             return;
         if (TryComp<DoorBoltComponent>(target, out var doorBolt) && doorBolt.BoltsDown)
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-ingress-bolted"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-ingress-bolted"), ent, ent);
             return;
         }
         args.Handled = true;

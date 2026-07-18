@@ -90,12 +90,12 @@ public sealed partial class SharedChanglingActionSystem : EntitySystem
     #region Helper Methods
     private void DoPopup(EntityUid user, LocId popup, PopupType popupType = PopupType.Small)
     {
-        _popup.PopupClient(Loc.GetString(popup), user, user, popupType);
+        _popup.PopupEntity(Loc.GetString(popup), user, user, popupType);
     }
 
     private void DoPopup(EntityUid user, string popup, PopupType popupType = PopupType.Small)
     {
-        _popup.PopupClient(popup, user, user, popupType);
+        _popup.PopupEntity(popup, user, user, popupType);
     }
 
     private bool OnFire(EntityUid user)

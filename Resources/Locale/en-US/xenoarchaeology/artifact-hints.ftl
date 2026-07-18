@@ -49,7 +49,8 @@ artifact-trigger-hint-death = Life essence
 artifact-trigger-hint-radiation = Radiation
 artifact-trigger-hint-pressure = Extreme pressure
 artifact-trigger-hint-regular-gases = Standard atmospheric gases
-artifact-trigger-hint-plasma = Gaseous plasma
+# Trauma - plasma -> phoron
+artifact-trigger-hint-plasma = Gaseous phoron
 artifact-trigger-hint-land = Active deceleration
 artifact-trigger-hint-examine = Examination
 artifact-trigger-hint-medical = Therapeutic chemicals
@@ -60,7 +61,8 @@ xenoarch-trigger-tip-cold = Low temperature gas
 xenoarch-trigger-tip-no-oxygen = Oxygen-free environment
 xenoarch-trigger-tip-water = Water
 xenoarch-trigger-tip-co2 = Carbon dioxide
-xenoarch-trigger-tip-plasma = Non-solid plasma
+# Trauma - plasma -> phoron
+xenoarch-trigger-tip-plasma = Non-solid phoron
 xenoarch-trigger-tip-tritium = Tritium
 xenoarch-trigger-tip-ammonia = Ammonia
 xenoarch-trigger-tip-n2o = Nitrous oxide

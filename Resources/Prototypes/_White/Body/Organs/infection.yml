@@ -101,6 +101,7 @@
       - !type:HealthChange
         damage:
           types:
-            Blunt: 40
+            Blunt: 1000
+            Piercing: 1000
       - !type:Jitter
         time: 16

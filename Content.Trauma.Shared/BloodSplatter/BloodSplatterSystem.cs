@@ -21,6 +21,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
 
+    private static readonly ProtoId<DamageTypePrototype> BallisticProto = "Ballistic";
     private static readonly ProtoId<DamageTypePrototype> SlashProto = "Slash";
     private static readonly ProtoId<DamageTypePrototype> PierceProto = "Piercing";
 
@@ -72,11 +73,12 @@ public sealed partial class BloodSplatterSystem : EntitySystem
             return;
 
         args.Damage.DamageDict.TryGetValue(PierceProto, out var piercing);
+        args.Damage.DamageDict.TryGetValue(BallisticProto, out var ballistic);
         args.Damage.DamageDict.TryGetValue(SlashProto, out var slash);
+        var relevant = piercing + ballistic * 5 + slash; // getting shot is bad
 
         var total = args.Damage.GetTotal();
-        if (total < ent.Comp.MinimalTriggerDamage
-            || piercing == 0 && slash == 0)
+        if (total < ent.Comp.MinimalTriggerDamage || relevant <= 0)
             return;
 
         if (!TryComp<BloodstreamComponent>(ent.Owner, out var bloodstream)

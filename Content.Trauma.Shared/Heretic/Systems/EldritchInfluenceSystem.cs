@@ -106,7 +106,7 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             Hidden = true,
         };
 
-        _popup.PopupPredicted(Loc.GetString("heretic-influence-start"), influence, user);
+        _popup.PopupEntity(Loc.GetString("heretic-influence-start"), influence, user);
 
         if (!_doafter.TryStartDoAfter(dargs))
             return false;

@@ -8,6 +8,7 @@
   maxPlayers: 10
   ignoredRequiredEntities:
   - MachineMasterMaterialSilo # 1 department silo can probably cover the whole ship be real
+  - SpawnPointExtraAiCore # no AI core
   stations:
     Reach:
       stationProto: StandardNanotrasenStation

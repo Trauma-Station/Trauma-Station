@@ -12,12 +12,12 @@ public abstract partial class BaseSurgeryToolComponent : Component
     ///     Field intended for discardable or non-reusable tools.
     /// </summary>
     [DataField]
-    public bool? Used { get; set; }
+    public bool? Used;
 
     /// <summary>
     ///     Multiply the step's doafter by this value.
-    ///     This is per-type so you can have something that's a good scalpel but a bad retractor.
+    ///     This is per-type so you can have something that's a good scalpel but a bad bonesaw.
     /// </summary>
     [DataField]
-    public float Speed { get; set; }
+    public float Speed = 1f;
 }

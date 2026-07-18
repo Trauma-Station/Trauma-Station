@@ -10,7 +10,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Components;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Trauma.Shared.Heretic.Components;
@@ -90,8 +90,8 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
 
         var now = _timing.CurTime;
 
-        var query = EntityQueryEnumerator<FeastOfOwlsComponent, StatusEffectsComponent, MindContainerComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var status, out var mindContainer))
+        var query = EntityQueryEnumerator<FeastOfOwlsComponent, MindContainerComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var mindContainer))
         {
             if (comp.CurrentStep >= comp.Reward)
             {
@@ -115,7 +115,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
                 continue;
             }
 
-            _jitter.DoJitter(uid, comp.JitterStutterTime, true, 10f, 10f, true, status);
+            _jitter.DoJitter(uid, comp.JitterStutterTime, true, 10f, 10f, true);
             _stutter.DoStutter(uid, comp.JitterStutterTime, refresh: true);
 
             if (_vocalQuery.TryComp(uid, out var vocal))
@@ -132,7 +132,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
             if (comp.CurrentStep < comp.Reward)
                 continue;
 
-            _status.TryRemoveStatusEffect(uid, "Stun", status);
+            _status.TryRemoveStatusEffect(uid, SharedStunSystem.StunId);
             RemComp<KnockedDownComponent>(uid);
             RemCompDeferred(uid, comp);
         }

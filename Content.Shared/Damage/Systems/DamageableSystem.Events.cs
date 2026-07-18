@@ -260,8 +260,12 @@ public sealed partial class DamageableSystem
 ///     Raised before damage is done, so stuff can cancel it if necessary.
 /// </summary>
 [ByRefEvent]
-public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid? Origin = null, bool Cancelled = false,
-    bool CanBeCancelled = false, TargetBodyPart? TargetPart = null); // Shitmed
+public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Origin = null, bool Cancelled = false, // Trauma - added Target
+    bool CanBeCancelled = false, TargetBodyPart? TargetPart = null) : IInventoryRelayEvent // Trauma
+{
+    // Trauma
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+}
 
 /// <summary>
 ///     Raised on an entity when damage is about to be dealt,

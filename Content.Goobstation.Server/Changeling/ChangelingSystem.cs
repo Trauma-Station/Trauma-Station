@@ -124,41 +124,23 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             after: [ typeof(SharedBloodstreamSystem)] ); // needs bloodstream's solution to be set up first
         SubscribeLocalEvent<ChangelingComponent, MapInitEvent>(OnChangelingMapInit,
             after: [ typeof(SharedBloodstreamSystem)] ); // shit subscription ordering system award
-
-        SubscribeLocalEvent<ChangelingIdentityComponent, MobStateChangedEvent>(OnMobStateChange);
-        SubscribeLocalEvent<ChangelingIdentityComponent, UpdateMobStateEvent>(OnUpdateMobState);
-        SubscribeLocalEvent<ChangelingIdentityComponent, DamageChangedEvent>(OnDamageChange);
-        SubscribeLocalEvent<ChangelingIdentityComponent, ComponentRemove>(OnComponentRemove);
-        SubscribeLocalEvent<ChangelingIdentityComponent, TargetBeforeDefibrillatorZapsEvent>(OnDefibZap);
-        SubscribeLocalEvent<ChangelingIdentityComponent, RejuvenateEvent>(OnRejuvenate);
-        SubscribeLocalEvent<ChangelingIdentityComponent, PolymorphedEvent>(OnPolymorphed);
-
-        SubscribeLocalEvent<ChangelingComponent, PolymorphedEvent>(OnPolymorphedTakeTwo);
-        SubscribeLocalEvent<ChangelingComponent, BeforeAmputationDamageEvent>(OnLimbAmputation);
-        SubscribeLocalEvent<ChangelingComponent, BeforeMindSwappedEvent>(OnMindswapAttempt);
-        SubscribeLocalEvent<ChangelingComponent, BeforeConversionEvent>(OnConversionAttempt);
-        SubscribeLocalEvent<ChangelingComponent, BeforeBrainRemovedEvent>(OnBrainRemoveAttempt);
-        SubscribeLocalEvent<ChangelingComponent, BeforeBrainAddedEvent>(OnBrainAddAttempt);
-
-        SubscribeLocalEvent<ChangelingIdentityComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
-
-        SubscribeLocalEvent<ChangelingDartComponent, ProjectileHitEvent>(OnDartHit);
-
-        SubscribeLocalEvent<ChangelingIdentityComponent, AwakenedInstinctPurchasedEvent>(OnAwakenedInstinctPurchased);
-        SubscribeLocalEvent<ChangelingIdentityComponent, AugmentedEyesightPurchasedEvent>(OnAugmentedEyesightPurchased);
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<ChangelingIdentityComponent> ent, ref PolymorphedEvent args)
         => _polymorph.CopyPolymorphComponent<ChangelingIdentityComponent>(ent, args.NewEntity);
 
+    [SubscribeLocalEvent]
     private void OnPolymorphedTakeTwo(Entity<ChangelingComponent> ent, ref PolymorphedEvent args)
         => _polymorph.CopyPolymorphComponent<ChangelingComponent>(ent, args.NewEntity);
 
+    [SubscribeLocalEvent]
     private void OnLimbAmputation(Entity<ChangelingComponent> ent, ref BeforeAmputationDamageEvent args)
     {
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnMindswapAttempt(Entity<ChangelingComponent> ent, ref BeforeMindSwappedEvent args)
     {
         if (args.Cancelled)
@@ -168,22 +150,26 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnConversionAttempt(Entity<ChangelingComponent> ent, ref BeforeConversionEvent args)
     {
         args.Blocked = true;
     }
 
     // stop the changeling from losing control over the body
+    [SubscribeLocalEvent]
     private void OnBrainRemoveAttempt(Entity<ChangelingComponent> ent, ref BeforeBrainRemovedEvent args)
     {
         args.Blocked = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnBrainAddAttempt(Entity<ChangelingComponent> ent, ref BeforeBrainAddedEvent args)
     {
         args.Blocked = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnDartHit(Entity<ChangelingDartComponent> ent, ref ProjectileHitEvent args)
     {
         if (HasComp<ChangelingIdentityComponent>(args.Target))
@@ -205,16 +191,20 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             flashImmunity.Enabled = active;
     }
 
+    [SubscribeLocalEvent]
     private void OnAwakenedInstinctPurchased(Entity<ChangelingIdentityComponent> ent, ref AwakenedInstinctPurchasedEvent args)
     {
+        // TODO: store entity effects, just use AddComponents jesus christ
         EnsureComp<ChangelingBiomassComponent>(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnAugmentedEyesightPurchased(Entity<ChangelingIdentityComponent> ent, ref AugmentedEyesightPurchasedEvent args)
     {
         InitializeAugmentedEyesight(ent);
     }
 
+    [SubscribeLocalEvent]
     public void InitializeAugmentedEyesight(EntityUid uid)
     {
         EnsureComp<FlashImmunityComponent>(uid);
@@ -231,6 +221,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         AddComp(uid, thermalVision);
     }
 
+    [SubscribeLocalEvent]
     private void OnRefreshSpeed(Entity<ChangelingIdentityComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (ent.Comp.StrainedMusclesActive)
@@ -345,22 +336,22 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     {
         Audio.PlayPvs(comp.ShriekSound, uid);
 
-        var center = Transform(uid).MapPosition;
+        var center = _transform.GetMapCoordinates(uid);
         var gamers = Filter.Empty();
         gamers.AddInRange(center, comp.ShriekPower, _player, EntityManager);
 
         foreach (var gamer in gamers.Recipients)
         {
-            if (gamer.AttachedEntity == null)
+            if (gamer.AttachedEntity is not { } mob)
                 continue;
 
-            var pos = Transform(gamer.AttachedEntity!.Value).WorldPosition;
+            var pos = _transform.GetWorldPosition(mob);
             var delta = center.Position - pos;
 
             if (delta.EqualsApprox(Vector2.Zero))
-                delta = new(.01f, 0);
+                continue;
 
-            _recoil.KickCamera(uid, -delta.Normalized());
+            _recoil.KickCamera(mob, -delta.Normalized());
         }
     }
 
@@ -721,19 +712,22 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         ent.Comp.EvolutionsAssigned = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChange(EntityUid uid, ChangelingIdentityComponent comp, ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Dead)
             RemoveAllChangelingEquipment(uid, comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnUpdateMobState(Entity<ChangelingIdentityComponent> ent, ref UpdateMobStateEvent args)
     {
         if (ent.Comp.IsInStasis)
             args.State = MobState.Dead;
     }
 
-    private void OnDamageChange(Entity<ChangelingIdentityComponent> ent, ref DamageChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<ChangelingIdentityComponent> ent, ref DamageDealtEvent args)
     {
         if (ent.Comp.IsInStasis
             || !_mobThreshold.TryGetThresholdForState(ent, MobState.Dead, out var maxThreshold)
@@ -742,11 +736,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var lowestStasisTime = ent.Comp.DefaultStasisTime; // 15 sec
         var highestStasisTime = ent.Comp.MaxStasisTime; // 45 sec
-        var catastrophicStasisTime = ent.Comp.CatastrophicStasisTime; // 1 min
 
-        var damage = args.Damageable;
-        var damageTaken = _damage.GetTotalDamage((ent, damage));
-
+        var damageTaken = _damage.GetTotalDamage(ent.Owner);
         var damageScaled = float.Round((float) (damageTaken / critThreshold.Value * highestStasisTime));
 
         var damageToTime = MathF.Min(damageScaled, highestStasisTime);
@@ -755,14 +746,16 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
         if (damageTaken < maxThreshold)
             ent.Comp.StasisTime = newStasisTime;
         else
-            ent.Comp.StasisTime = catastrophicStasisTime;
+            ent.Comp.StasisTime = ent.Comp.CatastrophicStasisTime;
     }
 
+    [SubscribeLocalEvent]
     private void OnComponentRemove(Entity<ChangelingIdentityComponent> ent, ref ComponentRemove args)
     {
         RemoveAllChangelingEquipment(ent, ent.Comp);
     }
 
+    [SubscribeLocalEvent]
     private void OnDefibZap(Entity<ChangelingIdentityComponent> ent, ref TargetBeforeDefibrillatorZapsEvent args)
     {
         if (ent.Comp.IsInStasis) // so you don't get a free insta-rejuvenate after being defibbed
@@ -773,6 +766,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     }
 
     // triggered by leaving stasis and by admin rejuvenate
+    [SubscribeLocalEvent]
     private void OnRejuvenate(Entity<ChangelingIdentityComponent> ent, ref RejuvenateEvent args)
     {
         if (ent.Comp.IsInStasis) // only triggered if event raised by stasis (or admin rejuv'd in stasis)

@@ -6,6 +6,7 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
+// TODO: kill...
 /// <summary>
 /// Effect that shows a single predicted popup.
 /// </summary>
@@ -47,21 +48,21 @@ public sealed partial class PopupPredictedEffectSystem : EntityEffectSystem<Tran
 
         var msg = effect.Message;
         var method = effect.Method;
-        var type =  effect.Type;
+        var type = effect.Type;
 
         switch ((method, type))
         {
             case (PopupMethod.PopupEntity, PopupRecipients.Local):
-                _popup.PopupClient(msg, ent, ent, args.Effect.VisualType);
+                _popup.PopupEntity(msg, ent, ent, args.Effect.VisualType);
                 break;
             case (PopupMethod.PopupEntity, PopupRecipients.Pvs):
-                _popup.PopupPredicted(msg, ent, ent, args.Effect.VisualType);
+                _popup.PopupEntity(msg, ent, args.Effect.VisualType);
                 break;
             case (PopupMethod.PopupCoordinates, PopupRecipients.Local):
-                _popup.PopupClient(msg, Transform(ent).Coordinates, ent, args.Effect.VisualType);
+                _popup.PopupCoordinates(msg, Transform(ent).Coordinates, ent, args.Effect.VisualType);
                 break;
             case (PopupMethod.PopupCoordinates, PopupRecipients.Pvs):
-                _popup.PopupPredictedCoordinates(msg, Transform(ent).Coordinates, ent, args.Effect.VisualType);
+                _popup.PopupCoordinates(msg, Transform(ent).Coordinates, args.Effect.VisualType);
                 break;
         }
     }

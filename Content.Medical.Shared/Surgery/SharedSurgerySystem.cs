@@ -425,7 +425,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 return true;
         }
 
-        _popup.PopupClient(Loc.GetString("surgery-error-laying"), user, user);
+        _popup.PopupEntity(Loc.GetString("surgery-error-laying"), user, user);
         return false;
     }
 

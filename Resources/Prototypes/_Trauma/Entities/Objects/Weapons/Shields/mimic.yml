@@ -2,7 +2,7 @@
 
 - type: entity
   parent: BaseShield
-  id: ShieldMimic
+  id: FleshShield
   name: flesh shield
   description: A large fleshy closet door, could be used as a shield...
   components:
@@ -12,6 +12,7 @@
   - type: Item
     sprite: _Trauma/Objects/Weapons/Melee/fleshshield.rsi
     size: Ginormous
+    heldPrefix: null
   - type: Blocking
     passiveBlockFraction: .3
     activeBlockFraction: .6

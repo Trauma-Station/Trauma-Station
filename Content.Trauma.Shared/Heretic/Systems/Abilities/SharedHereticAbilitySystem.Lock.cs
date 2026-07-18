@@ -7,17 +7,13 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
-    protected virtual void SubscribeLock()
-    {
-        SubscribeLocalEvent<HereticAscensionLockEvent>(OnAscensionLock);
-        SubscribeLocalEvent<HereticXRayVisionEvent>(OnXray);
-    }
-
+    [SubscribeLocalEvent]
     private void OnXray(HereticXRayVisionEvent args)
     {
         _eye.SetDrawFov(args.Heretic, args.Negative);
     }
 
+    [SubscribeLocalEvent]
     private void OnAscensionLock(HereticAscensionLockEvent args)
     {
         var collectiveMind = EnsureComp<CollectiveMindComponent>(args.Heretic);

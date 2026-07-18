@@ -233,15 +233,6 @@ public abstract partial class SharedFlashSystem : EntitySystem
             if (attempt.Cancelled)
                 return;
         }
-
-        if (used != null)
-        {
-            var dirCheck = new CheckDirectionFlashEvent(target, user);
-            RaiseLocalEvent(used.Value, ref dirCheck);
-
-            if (dirCheck.Cancelled)
-                return;
-        }
         // Goob edit end
 
         // Goobstation start

@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Interaction;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Trauma.Common.Heretic;
+using Content.Trauma.Common.Interaction;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -1140,6 +1141,25 @@ namespace Content.Shared.Interaction
 
             if (checkDeletion && (IsDeleted(user) || IsDeleted(used) || IsDeleted(target)))
                 return false;
+
+            // <Trauma>
+            if (target is { } t)
+            {
+                var afterInteractTargetEvent = new CanBeInteractedWithEvent(user, used, t, clickLocation, canReach);
+                RaiseLocalEvent(t, ref afterInteractTargetEvent);
+                if (afterInteractTargetEvent.Handled)
+                {
+                    DoContactInteraction(user, used, null);
+                    if (canReach)
+                    {
+                        DoContactInteraction(user, t, null);
+                        // Contact interactions are currently only used for forensics, so we don't raise used -> target
+                    }
+
+                    return true;
+                }
+            }
+            // </Trauma>
 
             var afterInteractEvent = new AfterInteractEvent(user, used, target, clickLocation, canReach);
             RaiseLocalEvent(used, afterInteractEvent);

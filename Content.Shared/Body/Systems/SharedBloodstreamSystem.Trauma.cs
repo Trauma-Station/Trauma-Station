@@ -6,6 +6,8 @@ using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Body.Systems;
@@ -16,6 +18,9 @@ namespace Content.Shared.Body.Systems;
 public abstract partial class SharedBloodstreamSystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _query = default!;
 
     private float _bloodlossMultiplier = 4f;
 
@@ -37,7 +42,7 @@ public abstract partial class SharedBloodstreamSystem
         FixedPoint2 quantity,
         params ProtoId<ReagentPrototype>[] excludedReagents)
     {
-        if (!Resolve(ent, ref ent.Comp, logMissing: false)
+        if (!_query.Resolve(ent, ref ent.Comp, logMissing: false)
             || !SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var bloodSolution))
             return null;
 

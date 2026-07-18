@@ -65,7 +65,7 @@ public sealed partial class MasterSiloSystem : EntitySystem
 
         if (!_power.IsPowered(ent.Owner))
         {
-            _popup.PopupClient("It isn't powered!", ent, user);
+            _popup.PopupEntity("It isn't powered!", ent, user);
             return false;
         }
 
