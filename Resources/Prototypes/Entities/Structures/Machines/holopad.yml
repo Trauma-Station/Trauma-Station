@@ -51,10 +51,6 @@
         enum.PowerDeviceVisualLayers.Powered:
           False: { visible: true }
           True: { visible: false }
-      enum.WiresVisuals.MaintenancePanelState:
-        enum.WiresVisualLayers.MaintenancePanel:
-          True: { visible: true } # Trauma - was false
-          False: { visible: false } # Trauma - was true
   - type: Machine
     board: HolopadMachineCircuitboard
   - type: StationAiWhitelist
