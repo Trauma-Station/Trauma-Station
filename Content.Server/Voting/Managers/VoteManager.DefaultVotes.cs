@@ -292,10 +292,17 @@ namespace Content.Server.Voting.Managers
             }
             // Trim the vote options
             var maxCount = _cfg.GetCVar(TraumaCVars.MapVoteOptions);
-            while (maps.Count > maxCount)
-                maps.Remove(_random.Pick(maps.Keys));
+            if (maps.Count > maxCount + 1)
+            {
+                var randomMap = _random.Pick(maps.Keys);
+                options.Options.Add(("Random", randomMap));
+                maps.Remove(randomMap);
+                while (maps.Count > maxCount)
+                {
+                    maps.Remove(_random.Pick(maps.Keys));
+                }
+            }
 
-            options.Options.Add(("Random", "Random")); // This is kinda evil but it's the best way I can think of
             // </Trauma>
 
             foreach (var (k, v) in maps)
@@ -316,15 +323,6 @@ namespace Content.Server.Voting.Managers
                     _chatManager.DispatchServerAnnouncement(
                         Loc.GetString("ui-vote-map-tie", ("picked", maps[picked])));
                 }
-                // <Trauma>
-                else if (args.Winner is string winner && winner == "Random")
-                {
-                    // Random map voted, select random elgigible map
-                    picked = _random.Pick((IReadOnlyList<GameMapPrototype>) _gameMapManager.CurrentlyEligibleMaps());
-                    _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-map-random", ("picked", picked.MapName)));
-                }
-                // </Trauma>
                 else
                 {
                     picked = (GameMapPrototype) args.Winner;
