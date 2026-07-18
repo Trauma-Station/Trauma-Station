@@ -11684,3 +11684,28 @@ Entries:
   id: 1290
   time: '2026-07-17T20:54:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3592
+- author: TraumaTised
+  changes:
+  - type: Tweak
+    message: Urist has had a rough time in hell...
+  id: 1291
+  time: '2026-07-18T06:25:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3601
+- author: Graves
+  changes:
+  - type: Tweak
+    message: >-
+      Hell found out the prideful demon was using steroids. He has been
+      punished.
+  id: 1292
+  time: '2026-07-18T06:28:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3596
+- author: Wizard25671
+  changes:
+  - type: Remove
+    message: >-
+      Removed the guaranteed extra traitor spawns from main gamemode Shadowling,
+      Heretic, Cosmic Cult, and Blob
+  id: 1293
+  time: '2026-07-18T08:44:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3603
