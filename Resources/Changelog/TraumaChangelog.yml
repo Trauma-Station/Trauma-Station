@@ -11024,3 +11024,10 @@ Entries:
   id: 1231
   time: '2026-07-18T09:05:05.0000000+00:00'
   url: https://github.com/RonStation/R.O.N.-Station/pull/81
+- author: magelfik
+  changes:
+  - type: Fix
+    message: Switched default gamemode to Survival to allow some events on lowpop.
+  id: 1232
+  time: '2026-07-18T09:10:52.0000000+00:00'
+  url: https://github.com/RonStation/R.O.N.-Station/pull/83
