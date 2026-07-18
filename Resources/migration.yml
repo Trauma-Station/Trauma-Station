@@ -147,6 +147,10 @@ SodaDispenser: EnergySodaDispenser
 
 # 2026-06-10
 MaterialSilo: MachineMasterMaterialSilo
+
+# 2026-06-21
+GunSafeLaserSpec: GunSafeSurplusBallistics
+
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
@@ -1183,6 +1187,5 @@ CratePartsT3: null
 CratePartsT3T4: null
 CratePartsT4: null
 
-# 6/21/2026
-# Armory tweak
-GunSafeLaserSpec: GunSafeSurplusBallistics
+# 2026-07-17
+WeaponRifleM90GrenadeLauncher: null
