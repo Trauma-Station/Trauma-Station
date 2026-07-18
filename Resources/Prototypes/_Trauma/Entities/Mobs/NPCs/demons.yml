@@ -197,7 +197,8 @@
 - type: entity
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonUrist
-  name: Urist McHands
+  name: Sinner
+  description: A wicked human sent to suffer in hell.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/human.rsi
