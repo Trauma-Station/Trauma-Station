@@ -182,7 +182,7 @@
   color: "#e3fffb"
   # <Trauma>
   tileReactions:
-    - !type:SpillTileReaction
+  - !type:SpillTileReaction
   # <Trauma>
   reactiveEffects:
     Acidic:
