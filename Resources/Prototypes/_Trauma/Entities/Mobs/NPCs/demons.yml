@@ -128,6 +128,7 @@
   parent: BaseDemon
   id: MinorDemonGuy
   name: strange man
+  description: A lower demon trying to imitate the visage of a man... very poorly.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/guy.rsi
@@ -163,6 +164,7 @@
   parent: BaseDemon
   id: MinorDemonIncel
   name: jealousy incarnate
+  description: A horrid creature born in the second layer of Hell, tiringly talkitive.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/incel.rsi
@@ -198,7 +200,7 @@
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonUrist
   name: Sinner
-  description: A wicked human sent to suffer in hell.
+  description: A wicked human sent to suffer forever in Hell.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/human.rsi
@@ -243,6 +245,7 @@
   parent: BaseDemon
   id: MinorDemonIan
   name: Flesh Hound
+  description: After enough time in Hell, some souls begin to revert to more...primal forms.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/ian.rsi
@@ -286,6 +289,7 @@
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonVox
   name: outcast
+  description: Hated even by the most repugnant demons, they roam Hell alone.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/vox.rsi
@@ -382,6 +386,7 @@
   parent: [ BaseDemon, InventoryBase ]
   id: MinorDemonVulp
   name: wrathful beast
+  description: The dominant species of a bygone era, now tortured in Hell for their hubris.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/vulp.rsi
@@ -391,7 +396,7 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 5
+        Slash: 5
     altDisarm: true
     canWideSwing: false
   - type: Destructible
@@ -428,6 +433,7 @@
   parent: BaseDemon
   id: MediumDemonCentifiend
   name: Centifiend
+  description: One of the most common demons in Hell, this oversized arthropod spreads pestilence with its bite.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/centifiend.rsi
@@ -477,6 +483,7 @@
   parent: BaseDemon
   id: MediumDemonChad
   name: prideful demon
+  description: It takes great pride in its mustache. It used to take pride in its skin…
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/chad.rsi
@@ -511,52 +518,9 @@
 
 - type: entity
   parent: BaseDemon
-  id: MediumDemonGhost
-  name: Pun Pun # TODO: let him talk to deadchat
-  components:
-  - type: Sprite
-    sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
-  - type: MeleeWeapon
-    range: 1
-    soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
-    damage:
-      types:
-        Cold: 10
-    altDisarm: false
-    canWideSwing: true
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 25
-      behaviors:
-      - !type:GibBehavior
-        recursive: false
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          BaseDemonSoulFragment:
-            min: 1
-            max: 2
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.1,-0.2,0.1,0.2"
-        hard: false
-        mask:
-        - Opaque
-
-- type: entity
-  parent: [ ControlledDemon, MediumDemonGhost ]
-  id: MediumDemonGhostControlled
-  suffix: Controlled
-
-- type: entity
-  parent: BaseDemon
   id: MediumDemonHamlet
   name: hellmet
+  description: Bred as livestock in hell, they say Hellmets taste like chicken.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hamlet.rsi
@@ -614,6 +578,7 @@
   parent: BaseDemon
   id: MediumDemon64Fat
   name: angel
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel and develop demonic powers.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/fat.rsi
@@ -652,6 +617,7 @@
   parent: BaseDemon
   id: MediumDemon64Buff
   name: angel
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel and develop demonic powers.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/buff.rsi
@@ -690,6 +656,7 @@
   parent: BaseDemon
   id: MediumDemon64
   name: angel
+  description: After consuming a great number of Hellish souls, it's possible a lowly Sinner may become an Angel and develop demonic powers.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/normal.rsi
@@ -728,6 +695,7 @@
   parent: BaseDemon
   id: MajorDemonBosche
   name: bosche
+  description: Born from the dreams of a mad painter, all it knows is to consume.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/bosche.rsi
@@ -737,14 +705,14 @@
       path: /Audio/Effects/demon_attack1.ogg
     damage:
       types:
-        Blunt: 1
+        Blunt: 5
     altDisarm: true
     canWideSwing: false
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1000
+        damage: 1250
       behaviors:
       - !type:GibBehavior
         recursive: false
@@ -780,6 +748,7 @@
   parent: BaseDemon
   id: MajorDemonFeverbird
   name: feverbird
+  description: Your head hurts. Something isn't right. Infinity is not a toy.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/feverbird.rsi
@@ -838,6 +807,7 @@
   parent: BaseDemon
   id: MajorDemonHanged
   name: hanged
+  description: After being sent to the gallows, the souls of criminals enter the flora of Hell, they are back to exact revenge.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hanger.rsi
@@ -890,6 +860,7 @@
   parent: BaseDemon
   id: MajorDemonHiver
   name: hiver
+  description: Weaker demons that formed a symbiotic relationship with hell bees. yes Hell has bees, lots of them.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/hiver.rsi
@@ -940,6 +911,7 @@
   parent: BaseDemon
   id: MajorDemonSteamer
   name: steamer
+  description: Steamers are beings that feed off the suffering of sapient creatures, this agony manifests into red hot necter within the gut.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/steamer.rsi
@@ -995,6 +967,51 @@
 - type: entity
   parent: [ ControlledDemon, MajorDemonSteamer ]
   id: MajorDemonSteamerControlled
+  suffix: Controlled
+
+- type: entity
+  parent: BaseDemon
+  id: MajorDemonGhost
+  name: Spectre # TODO: let him talk to deadchat
+  description: Ripped from their bodies, they seek to warm their hands on the flesh of the living.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Monsters/Demons/ghost.rsi
+  - type: MeleeWeapon
+    range: 1
+    soundHit:
+      path: /Audio/Effects/demon_attack1.ogg
+    damage:
+      types:
+        Cold: 13
+    altDisarm: false
+    canWideSwing: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BaseDemonSoulFragment:
+            min: 2
+            max: 4
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
+
+- type: entity
+  parent: [ ControlledDemon, MajorDemonGhost ]
+  id: MajorDemonGhostControlled
   suffix: Controlled
 
 # Demon spawners
@@ -1258,26 +1275,6 @@
 
 - type: entity
   parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
-  id: SummoningRuneGhost
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonGhost
-  - type: SpawnOnDespawn
-    prototype: MediumDemonGhost
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneFamiliar, BaseMediumSummoningRune ]
-  id: SummoningRuneGhostTame
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: GhostRoleMobSpawner
-    prototype: MediumDemonGhostControlled
-  - type: SpawnOnDespawn
-    prototype: MediumDemonGhostControlled
-
-- type: entity
-  parent: [ BaseDemonSummoningRuneHostile, BaseMediumSummoningRune ]
   id: SummoningRuneHamlet
   categories: [ HideSpawnMenu ]
   components:
@@ -1457,3 +1454,23 @@
     prototype: MajorDemonSteamerControlled
   - type: SpawnOnDespawn
     prototype: MajorDemonSteamerControlled
+
+- type: entity
+  parent: [ BaseDemonSummoningRuneHostile, BaseMajorSummoningRune ]
+  id: SummoningRuneGhost
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonGhost
+  - type: SpawnOnDespawn
+    prototype: MajorDemonGhost
+
+- type: entity
+  parent: [ BaseDemonSummoningRuneFamiliar, BaseMajorSummoningRune ]
+  id: SummoningRuneGhostTame
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GhostRoleMobSpawner
+    prototype: MajorDemonGhostControlled
+  - type: SpawnOnDespawn
+    prototype: MajorDemonGhostControlled
