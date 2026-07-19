@@ -2,7 +2,7 @@
 
 - type: entity
   id: Cartridge22MagnumMakeshift
-  parent: [ BaseCartridgeMagnum, BaseMajorContraband ]
+  parent: [ BaseCartridge, BaseMajorContraband ]
   name: makeshift cartridge (.22 Magnum)
   description: An old makeshift cartridge that was often used in rifles and pistols.
   components:
@@ -21,7 +21,7 @@
 
 - type: entity
   id: Cartridge20GaugeMakeshift
-  parent: [ BaseShellShotgun, BaseMajorContraband ]
+  parent: [ BaseCartridge, BaseMajorContraband ]
   name: makeshift shell (20 Gauge Buckshot)
   description: An old makeshift shotgun shell that was often used for hunting small game and target shooting.
   components:
@@ -29,12 +29,17 @@
     tags:
       - Cartridge20Gauge
   - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+  - type: CartridgeAmmo
     proto: PelletShotgunMakeshift20gSpread
   - type: Sprite
     sprite: _Trauma/Objects/Weapons/Guns/Ammunition/Casings/20g_shell.rsi
+  - type: Appearance
+  - type: SpentAmmoVisuals
 
 - type: entity
-  parent: [ BaseCartridgePistol, BaseMajorContraband ]
+  parent: [ BaseCartridge, BaseMajorContraband ]
   id: Cartridge725Makeshift
   name: makeshift cartridge (7.62x25mm Tokarev)
   description: An old makeshift cartridge that was often used in pistols and SMGs. It was known to boast a high velocity and penetration, unfortunately this one lacks the craftsmanship to share the same qualities.
@@ -48,3 +53,5 @@
     layers:
       - state: base
         map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
