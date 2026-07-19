@@ -1,4 +1,6 @@
-using Content.Trauma.Common.CCVar; // Trauma
+// <Trauma>
+using Content.Trauma.Common.CCVar;
+// </Trauma>
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -292,7 +294,8 @@ namespace Content.Server.Voting.Managers
             }
             // Trim the vote options
             var maxCount = _cfg.GetCVar(TraumaCVars.MapVoteOptions);
-            if (maps.Count > maxCount + 1)
+            if (maps.Count > maxCount + 1
+            && maxCount > 0) // No negative amount of maps in the vote
             {
                 var randomMap = _random.Pick(maps.Keys);
                 options.Options.Add(("Random", randomMap));
@@ -302,7 +305,6 @@ namespace Content.Server.Voting.Managers
                     maps.Remove(_random.Pick(maps.Keys));
                 }
             }
-
             // </Trauma>
 
             foreach (var (k, v) in maps)
