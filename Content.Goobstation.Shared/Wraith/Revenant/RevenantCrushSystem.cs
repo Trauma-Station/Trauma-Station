@@ -20,22 +20,15 @@ namespace Content.Goobstation.Shared.Wraith.Revenant;
 /// </summary>
 public sealed partial class RevenantCrushSystem : EntitySystem
 {
-    [Dependency] private SharedStunSystem _stunSystem = default!;
-    [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RevenantCrushComponent, RevenantCrushEvent>(OnRevenantCrush);
-        SubscribeLocalEvent<RevenantCrushComponent, RevenantCrushDoAfterEvent>(OnRevenantCrushDoAfter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRevenantCrush(Entity<RevenantCrushComponent> ent, ref RevenantCrushEvent args)
     {
         if (ent.Comp.InitialDamage == null)
@@ -43,7 +36,7 @@ public sealed partial class RevenantCrushSystem : EntitySystem
 
         if (HasComp<CurseImmuneComponent>(args.Target))
         {
-            _popup.PopupClient(Loc.GetString("revenant-crush-chaplain"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("revenant-crush-chaplain"), ent.Owner, ent.Owner);
             return;
         }
 
@@ -61,28 +54,27 @@ public sealed partial class RevenantCrushSystem : EntitySystem
             DistanceThreshold = 15f,
         };
 
-        _popup.PopupClient(Loc.GetString("revenant-crush-start"), args.Target, args.Target, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("revenant-crush-start"), args.Target, args.Target, PopupType.MediumCaution);
         _doAfter.TryStartDoAfter(doAftersArgs);
         _audio.PlayPredicted(ent.Comp.CrushSound, args.Target, args.Target);
 
-        _stunSystem.KnockdownOrStun(args.Target, ent.Comp.KnockdownDuration);
-        _damageableSystem.TryChangeDamage(args.Target, ent.Comp.InitialDamage, true);
+        _stun.KnockdownOrStun(args.Target, ent.Comp.KnockdownDuration);
+        _damage.TryChangeDamage(args.Target, ent.Comp.InitialDamage, true);
 
         args.Handled = true;
     }
 
-    // TO DO: Make it so there's a 25% each second that it plays Flesh_Tear1.ogg and picks one of these three pop-ups revenant-crush-crack1, 2 or 3.
-    //TO DO: Deal damage to their chest every second. Theoretically 5 damage, but who knows. Doesn't have to be the chest if you don't wanna deal with that.
+    // TODO: Make it so there's a 25% each second that it plays Flesh_Tear1.ogg and picks one of these three pop-ups revenant-crush-crack1, 2 or 3.
+    // TODO: Deal damage to their chest every second. Theoretically 5 damage, but who knows. Doesn't have to be the chest if you don't wanna deal with that.
+    [SubscribeLocalEvent]
     private void OnRevenantCrushDoAfter(Entity<RevenantCrushComponent> ent, ref RevenantCrushDoAfterEvent args)
     {
-        var target = args.Target;
-
-        if (args.Cancelled || target == null)
+        if (args.Cancelled || args.Target is not { } target)
             return;
 
-        _popup.PopupClient(Loc.GetString("revenant-crush-you"), target.Value, target.Value);
-        _admin.Add(LogType.Gib, LogImpact.High, $"{ent.Owner} gibbed {target.Value} via Crush");
-        _gibbing.Gib(target.Value);
+        _popup.PopupEntity(Loc.GetString("revenant-crush-you"), target, target);
+        _admin.Add(LogType.Gib, LogImpact.High, $"{ent.Owner} gibbed {target} via wraith Crush");
+        _gibbing.Gib(target);
 
         args.Handled = true;
     }

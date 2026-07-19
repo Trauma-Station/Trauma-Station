@@ -178,31 +178,31 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
     {
         if (HasComp<ShadowlingComponent>(target))
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-shadowling"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-shadowling"), uid, uid, PopupType.SmallCaution);
             return false;
         }
 
         if (HasComp<ThrallComponent>(target))
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-already-thrall"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-already-thrall"), uid, uid, PopupType.SmallCaution);
             return false;
         }
 
         if (!TryComp<MindControllableComponent>(target, out var mindControllable) || mindControllable.ControlledBySomeone)
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-cant-be-controlled"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-cant-be-controlled"), uid, uid, PopupType.SmallCaution);
             return false;
         }
 
         if (!TryComp<MindContainerComponent>(target, out var mind) || !mind.HasMind)
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-no-mind"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-no-mind"), uid, uid, PopupType.SmallCaution);
             return false;
         }
 
         if (!HasComp<HumanoidProfileComponent>(target))
         {
-            _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-non-humanoid"), uid, uid, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-non-humanoid"), uid, uid, PopupType.SmallCaution);
             return false;
         }
 
@@ -211,7 +211,7 @@ public abstract partial class SharedShadowlingSystem : EntitySystem
             || !_mobStateSystem.IsCritical(target, mobState) && !_mobStateSystem.IsCritical(target, mobState))
             return true;
 
-        _popup.PopupPredicted(Loc.GetString("shadowling-enthrall-dead"), uid, uid, PopupType.SmallCaution);
+        _popup.PopupEntity(Loc.GetString("shadowling-enthrall-dead"), uid, uid, PopupType.SmallCaution);
         return false;
     }
 

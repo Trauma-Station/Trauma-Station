@@ -108,6 +108,10 @@ public sealed partial class HereticAbilitySystem
 
         if (_solution.TryGetSolution(uid, StomachSystem.DefaultSolutionName, out var sol))
             _solution.SetCapacity(sol.Value, 1984); // hungry
+
+        if (TryComp<StomachComponent>(uid, out var stomachComp))
+            stomachComp.IsSpecialDigestibleExclusive = false;
+
         if (TryComp<InternalOrganComponent>(uid, out var organ))
         {
             organ.IntegrityCap = 1984;

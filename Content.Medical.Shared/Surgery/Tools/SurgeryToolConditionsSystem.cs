@@ -33,7 +33,7 @@ public sealed partial class SurgeryToolConditionsSystem : EntitySystem
         if (ent.Comp.Activated || args.IgnoreToggle)
             return;
 
-        _popup.PopupClient(Loc.GetString("surgery-tool-turn-on"), ent, args.User);
+        _popup.PopupEntity(Loc.GetString("surgery-tool-turn-on"), ent, args.User);
         args.Cancelled = true;
     }
 
@@ -46,7 +46,7 @@ public sealed partial class SurgeryToolConditionsSystem : EntitySystem
         if (ev.Ammo.Count > 0)
             return;
 
-        _popup.PopupClient(Loc.GetString("surgery-tool-reload"), ent, args.User);
+        _popup.PopupEntity(Loc.GetString("surgery-tool-reload"), ent, args.User);
         args.Cancelled = true;
     }
 
@@ -66,7 +66,7 @@ public sealed partial class SurgeryToolConditionsSystem : EntitySystem
             return;
 
         var key = "surgery-tool-match-" + (state == SmokableState.Burnt ? "replace" : "light");
-        _popup.PopupClient(Loc.GetString(key), uid, args.User);
+        _popup.PopupEntity(Loc.GetString(key), uid, args.User);
         args.Cancelled = true;
     }
 }

@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Antag;
+using Robust.Shared.Player;
 using System.Linq;
 
 namespace Content.Trauma.Server.Antag;
@@ -41,11 +42,21 @@ public sealed partial class AntagVerbSystem : EntitySystem
                 Icon = smite.Icon,
                 Act = () =>
                 {
-                    _antag.ForceMakeAntag(session, smite.Rule, smite.RuleComp);
+                    MakeAntag(session, smite);
                 },
                 Impact = LogImpact.High,
                 Message = Loc.GetString("admin-verb-make-antag", ("antag", name))
             });
         }
+    }
+
+    public void MakeAntag(ICommonSession player, [ForbidLiteral] ProtoId<AntagSmitePrototype> id)
+    {
+        MakeAntag(player, ProtoMan.Index(id));
+    }
+
+    public void MakeAntag(ICommonSession player, AntagSmitePrototype smite)
+    {
+        _antag.ForceMakeAntag(player, smite.Rule, smite.RuleComp);
     }
 }

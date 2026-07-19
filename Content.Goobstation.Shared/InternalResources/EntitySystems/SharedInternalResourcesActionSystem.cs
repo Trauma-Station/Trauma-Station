@@ -29,7 +29,7 @@ public sealed partial class SharedInternalResourcesActionSystem : EntitySystem
         {
             var typeName = Loc.GetString(ProtoMan.Index(action.Comp.ResourceProto).Name);
 
-            _popupSystem.PopupClient(Loc.GetString("internal-resources-action-no-resources", ("type", typeName)), args.User, args.User);
+            _popupSystem.PopupEntity(Loc.GetString("internal-resources-action-no-resources", ("type", typeName)), args.User, args.User);
             args.Cancelled = true;
             return;
         }

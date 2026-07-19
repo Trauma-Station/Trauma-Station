@@ -43,7 +43,7 @@ public sealed partial class SlasherSummonMacheteSystem : EntitySystem
         // Fail if the user has no hands.
         if (!TryComp<HandsComponent>(ent.Owner, out var hands) || hands.Hands.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("wieldable-component-no-hands"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wieldable-component-no-hands"), ent.Owner, ent.Owner);
             args.Handled = true;
             return;
         }

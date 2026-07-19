@@ -13,7 +13,7 @@ public partial class XenobiologySystem
         var user = args.User;
         if (ent.Comp.Tamer != null)
         {
-            _popup.PopupClient(Loc.GetString("slime-interaction-tame-fail"), user, user);
+            _popup.PopupEntity(Loc.GetString("slime-interaction-tame-fail"), user, user);
             return;
         }
 
@@ -21,7 +21,7 @@ public partial class XenobiologySystem
         PredictedSpawnAtPosition(ent.Comp.TameEffect, coords);
         ent.Comp.Tamer = user;
 
-        _popup.PopupClient(Loc.GetString("slime-interaction-tame"), user, user);
+        _popup.PopupEntity(Loc.GetString("slime-interaction-tame"), user, user);
         Dirty(ent);
     }
 }

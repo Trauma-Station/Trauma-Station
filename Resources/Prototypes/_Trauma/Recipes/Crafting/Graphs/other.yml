@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: SheetPaper
-  start: start
   graph:
   - node: start
     edges:
@@ -22,7 +21,6 @@
 
 - type: constructionGraph
   id: PowerArmorStand
-  start: start
   graph:
   - node: start
     entity: RevPowerArmorStand
@@ -38,32 +36,23 @@
 
 - type: constructionGraph
   id: ArmoryOverrideKey
-  start: start
   graph:
   - node: start
     entity: ArmoryOverrideKeyComponents
     edges:
     - to: finished
+      conditions:
+      - !type:StackCountCondition
+        count: 3
       steps:
-      - tag: OverrideKeyComponents
+      - tool: Screwing
         doAfter: 5
-        name: construction-graph-tag-overridekeycomponents
-        icon:
-          sprite: _Trauma/Objects/Tools/overridecomponents.rsi
-          state: icon
-      - tag: OverrideKeyComponents
-        doAfter: 5
-        name: construction-graph-tag-overridekeycomponents
-        icon:
-          sprite: _Trauma/Objects/Tools/overridecomponents.rsi
-          state: icon
 
   - node: finished
     entity: ArmoryOverrideKey
 
 - type: constructionGraph
   id: Bracing
-  start: start
   graph:
   - node: start
     edges:
@@ -81,7 +70,6 @@
 
 - type: constructionGraph
   id: Whetstone
-  start: start
   graph:
   - node: start
     edges:
@@ -125,7 +113,6 @@
 
 - type: constructionGraph
   id: TripWire
-  start: start
   graph:
   - node: start
     edges:
@@ -159,7 +146,6 @@
 
 - type: constructionGraph
   id: PipeBombTrap
-  start: start
   graph:
   - node: start
     edges:

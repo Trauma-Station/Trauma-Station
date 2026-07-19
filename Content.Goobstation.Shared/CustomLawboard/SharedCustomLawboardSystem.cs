@@ -59,7 +59,7 @@ public abstract partial class SharedCustomLawboardSystem : EntitySystem
 
         if (args.Popup)
         {
-            _popup.PopupClient(Loc.GetString("custom-lawboard-updated"), args.Actor, args.Actor); // This is entirely to make the UI feel responsive
+            _popup.PopupEntity(Loc.GetString("custom-lawboard-updated"), args.Actor, args.Actor); // This is entirely to make the UI feel responsive
         }
     }
 

@@ -26,7 +26,7 @@ public sealed partial class DecaySystem : EntitySystem
         if (HasComp<HumanoidProfileComponent>(args.Target))
         {
             _stamina.TakeOvertimeStaminaDamage(args.Target, ent.Comp.StaminaDamageAmount);
-            _popup.PopupClient(Loc.GetString("wraith-decay-human-alert"), args.Target, args.Target);
+            _popup.PopupEntity(Loc.GetString("wraith-decay-human-alert"), args.Target, args.Target);
             args.Handled = true;
             return;
         }
@@ -37,6 +37,6 @@ public sealed partial class DecaySystem : EntitySystem
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("wraith-decay-nothing"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("wraith-decay-nothing"), ent.Owner, ent.Owner);
     }
 }

@@ -43,7 +43,7 @@ public partial class TraumaSystem
             || args.NewSeverity < args.OldSeverity)
             return;
 
-        _popup.PopupClient(Loc.GetString($"popup-trauma-OrganDamage-{args.NewSeverity.ToString()}", ("part", bodyPart)),
+        _popup.PopupEntity(Loc.GetString($"popup-trauma-OrganDamage-{args.NewSeverity.ToString()}", ("part", bodyPart)),
             body,
             body,
             PopupType.SmallCaution);

@@ -53,9 +53,14 @@ public sealed partial class HereticAbilitySystem
             Spawn(args.Effect, Transform(uid).Coordinates);
     }
 
+    [SubscribeLocalEvent]
     private void OnNWRebirth(EventHereticNightwatcherRebirth args)
     {
         if (!TryComp(args.Action, out NightwatcherRebirthActionComponent? nwAction))
+            return;
+
+        // Can cast this in soft crit
+        if (_mobstate.IsDead(args.Performer) || _mobstate.IsHardCrit(args.Performer))
             return;
 
         nwAction.LastTargets = 0;

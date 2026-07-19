@@ -85,6 +85,7 @@
       types:
         Heat: 10
   - type: MeleeWeapon
+    angle: 0 # Trauma
     soundHit:
       collection: Punch
     damage:

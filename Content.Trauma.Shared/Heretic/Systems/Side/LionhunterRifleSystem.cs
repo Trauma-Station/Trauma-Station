@@ -213,7 +213,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         if (_wieldableQuery.TryComp(ent.Value, out var wieldable) && !wieldable.Wielded)
         {
-            _popup.PopupClient(Loc.GetString("wieldable-component-requires", ("item", ent.Value)), user, user);
+            _popup.PopupEntity(Loc.GetString("wieldable-component-requires", ("item", ent.Value)), user, user);
             return;
         }
 
@@ -225,7 +225,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         if (distance < comp.MinDistance)
         {
-            _popup.PopupClient(Loc.GetString("heretic-ability-fail-too-close"), user, user);
+            _popup.PopupEntity(Loc.GetString("heretic-ability-fail-too-close"), user, user);
             return;
         }
 
@@ -280,7 +280,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doArgs))
         {
-            _popup.PopupClient(Loc.GetString("lionhunter-rifle-aim-message"), user, user);
+            _popup.PopupEntity(Loc.GetString("lionhunter-rifle-aim-message"), user, user);
             if (comp.ShowMark)
                 EnsureComp<AimedRifleMarkerComponent>(target);
             return;

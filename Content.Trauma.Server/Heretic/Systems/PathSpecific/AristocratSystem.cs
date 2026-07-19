@@ -62,6 +62,7 @@ public sealed partial class AristocratSystem : EntitySystem
     private static readonly EntProtoId IceWallPrototype = "WallIce";
     private static readonly EntProtoId SnowfallMagic = "WeatherSnowfallMagic";
     private static readonly ProtoId<ContentTileDefinition> SnowTilePrototype = "FloorAstroSnow";
+    private static readonly ProtoId<StatusEffectPrototype> PressureImmunity = "PressureImmunity";
     private static readonly ProtoId<TagPrototype> Window = "Window";
     private static readonly ProtoId<TagPrototype> AirlockAssembly = "AirlockAssembly";
 
@@ -70,15 +71,7 @@ public sealed partial class AristocratSystem : EntitySystem
 
     private readonly HashSet<Entity<FreezableWallComponent>> _walls = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AristocratComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<AristocratComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<AristocratComponent, MobStateChangedEvent>(OnMobStateChange);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<AristocratComponent> ent, ref ComponentStartup args)
     {
         if (!HasComp<MobStateComponent>(ent))
@@ -154,6 +147,7 @@ public sealed partial class AristocratSystem : EntitySystem
             _weather.TryRemoveWeather(map, SnowfallMagic);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChange(Entity<AristocratComponent> ent, ref MobStateChangedEvent args)
     {
         var stateComp = args.Component;
@@ -175,6 +169,7 @@ public sealed partial class AristocratSystem : EntitySystem
     }
 
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<AristocratComponent> ent, ref ComponentShutdown args)
     {
         EndWaltz(ent); // its over bros
@@ -257,7 +252,7 @@ public sealed partial class AristocratSystem : EntitySystem
                     if (_statusQuery.TryComp(ent, out var status))
                     {
                         _status.TryAddStatusEffect<PressureImmunityComponent>(ent,
-                            "PressureImmunity",
+                            PressureImmunity,
                             TimeSpan.FromSeconds(2),
                             true,
                             status);
@@ -432,8 +427,8 @@ public sealed partial class AristocratSystem : EntitySystem
 
         foreach (var noob in noobs)
         {
-            // Apply up to 3 void chill stacks
-            _voidcurse.DoCurse(noob, 1, 3);
+            // Apply up to 4 void chill stacks
+            _voidcurse.DoCurse(noob, 1, 4);
         }
     }
 

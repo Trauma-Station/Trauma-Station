@@ -30,7 +30,7 @@ public sealed partial class CosmicLapseSystem : EntitySystem
         if (action.Handled
             || HasComp<CosmicBlankComponent>(action.Target))
         {
-            _popup.PopupClient(Loc.GetString("cosmicability-generic-fail"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-generic-fail"), ent, ent);
             return;
         }
 
@@ -43,7 +43,7 @@ public sealed partial class CosmicLapseSystem : EntitySystem
         if (_net.IsServer) // Predicted spawn looks bad with animations
             PredictedSpawnAtPosition(ent.Comp.LapseVFX, tgtpos);
 
-        _popup.PopupClient(Loc.GetString("cosmicability-lapse-success",
+        _popup.PopupEntity(Loc.GetString("cosmicability-lapse-success",
             ("target", Identity.Entity(action.Target, EntityManager))),
             ent,
             ent);

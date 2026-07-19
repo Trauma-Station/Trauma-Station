@@ -52,7 +52,7 @@ public abstract partial class SharedBlockChargeSystem : EntitySystem
             || !args.CanBeCancelled)
             return;
 
-        _popup.PopupPredicted(Loc.GetString("block-attack-notice", ("user", uid), ("blocked", args.Origin)), uid, null);
+        _popup.PopupEntity(Loc.GetString("block-attack-notice", ("user", uid), ("blocked", args.Origin)), uid);
         blockComp.HasCharge = false;
         blockComp.NextCharge = _timing.CurTime + blockComp.RechargeTime;
         Dirty(component.BlockingWeapon, blockComp);
@@ -67,7 +67,7 @@ public abstract partial class SharedBlockChargeSystem : EntitySystem
         var comp = EnsureComp<BlockChargeUserComponent>(args.User);
         comp.BlockingWeapon = uid;
         if (component.HasCharge)
-            _popup.PopupClient(Loc.GetString("block-charge-startup", ("entity", uid)), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("block-charge-startup", ("entity", uid)), args.User, args.User);
 
         Dirty(args.User, comp);
     }

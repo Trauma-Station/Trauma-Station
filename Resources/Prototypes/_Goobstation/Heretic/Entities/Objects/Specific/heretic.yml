@@ -154,12 +154,27 @@
   description: A flask filled with an unknown substance. Who knows what will happen when you take a sip from it.
   components:
   - type: UnholyItem
+  - type: Openable
+    sound:
+      collection: bottleOpenSounds
+    closeable: true
+    closeSound:
+      collection: bottleCloseSounds
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Sprite
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
-  - type: Icon
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
+    sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi
+    layers:
+    - state: potion
+      map: [ "enum.SolutionContainerLayers.Base" ]
+    - state: closed
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
   - type: Solution
     solution:
         # it's a cryostasis flash filled with healing goodies what could possibly go wrong?
@@ -221,12 +236,14 @@
   - type: Projectile
     impactEffect: BulletImpactEffectKinetic
     ignoreResistances: true
+    increaseOnly: true
     damage:
       types:
         Slash: 25
         Structural: 100
     soundHit:
-      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+      path: /Audio/_Goobstation/Weapons/Effects/guillotine.ogg
+    forceSound: true
   - type: Reflective
     reflective: Magic
 
@@ -477,3 +494,10 @@
   - type: Tag
     tags:
     - HereticItem
+
+- type: entity
+  parent: [PassengerIDCard, BaseMagicalContraband]
+  id: EldritchIdCard
+  suffix: Heretic
+  components:
+  - type: EldritchIdCard

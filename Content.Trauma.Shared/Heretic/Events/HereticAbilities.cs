@@ -419,9 +419,11 @@ public sealed partial class ResetStarGazerConsciousnessEvent : InstantActionEven
 public sealed partial class StarGazerSeekMasterEvent : InstantActionEvent;
 
 // side
+public sealed partial class ToggleAbyssalMaskEvent : InstantActionEvent;
+
 public sealed partial class RecallItemEvent : InstantActionEvent;
 
-public sealed partial class EventHereticCleave : WorldTargetActionEvent
+public sealed partial class EventHereticCleave : EntityTargetActionEvent
 {
     [DataField]
     public float Range = 1f;

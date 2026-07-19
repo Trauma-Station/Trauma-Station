@@ -53,7 +53,7 @@ public sealed partial class EnterBodyPartSystem : EntitySystem
         var targetName = Identity.Entity(target, EntityManager);
         if (_mob.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("enter-body-part-dead", ("target", targetName)), user, user);
+            _popup.PopupEntity(Loc.GetString("enter-body-part-dead", ("target", targetName)), user, user);
             return;
         }
 
@@ -71,7 +71,7 @@ public sealed partial class EnterBodyPartSystem : EntitySystem
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
             return;
 
-        _popup.PopupClient(Loc.GetString("enter-body-part-entering-user", ("target", targetName)), target, user);
+        _popup.PopupEntity(Loc.GetString("enter-body-part-entering-user", ("target", targetName)), target, user);
         _popup.PopupEntity(Loc.GetString("enter-body-part-entering-target", ("user", ent.Owner)), user, target);
     }
 
@@ -89,7 +89,7 @@ public sealed partial class EnterBodyPartSystem : EntitySystem
         if (_body.GetOrgan(target, ent.Comp.Category) is not {} part)
         {
             var partName = ProtoMan.Index(ent.Comp.Category).Name;
-            _popup.PopupClient(Loc.GetString("enter-body-part-no-part", ("target", targetName), ("part", partName)), user, user);
+            _popup.PopupEntity(Loc.GetString("enter-body-part-no-part", ("target", targetName), ("part", partName)), user, user);
             return; // nothing to enter
         }
 
@@ -98,19 +98,19 @@ public sealed partial class EnterBodyPartSystem : EntitySystem
         if (ev.Container is not {} container)
         {
             Log.Error($"{ToPrettyString(ent)} tried to enter part {ToPrettyString(part)} of {ToPrettyString(target)} with no cavity");
-            _popup.PopupClient(Loc.GetString("enter-body-part-no-cavity"), user, user);
+            _popup.PopupEntity(Loc.GetString("enter-body-part-no-cavity"), user, user);
             return; // shitcode
         }
 
         if (!_container.Insert(ent.Owner, container))
         {
-            _popup.PopupClient(Loc.GetString("enter-body-part-cavity-full"), user, user);
+            _popup.PopupEntity(Loc.GetString("enter-body-part-cavity-full"), user, user);
             return;
         }
 
         var you = Loc.GetString("enter-body-part-entered-you", ("target", targetName));
         var others = Loc.GetString("enter-body-part-entered-others", ("user", user), ("target", targetName));
-        _popup.PopupPredicted(you, others, target, user, PopupType.LargeCaution);
+        _popup.PopupEntity(you, others, target, user, PopupType.LargeCaution);
     }
 }
 

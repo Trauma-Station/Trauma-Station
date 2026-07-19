@@ -61,8 +61,13 @@
   - type: TargetAction
     checkCanAccess: false
     range: 5
-  - type: WorldTargetAction
+  - type: EntityTargetAction
     event: !type:EventHereticCleave
+    canTargetSelf: false
+    whitelist:
+      components:
+      - MobState
+
   - type: HereticAction
     requireMagicItem: true
   - type: SpeakOnAction
@@ -111,7 +116,7 @@
   - type: Action
     predicted: false
     checkCanInteract: false
-    useDelay: 6
+    useDelay: 5
     itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Heretic/eldritch_mobs.rsi

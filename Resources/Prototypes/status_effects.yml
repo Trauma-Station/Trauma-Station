@@ -4,9 +4,9 @@
 # Note: We have a new status effect system that needs all of these status effects to be fully ported to.
 # Adding new status effects under the old system is NOT RECOMMENDED.
 
-- type: statusEffect
-  id: Stun
-  alert: Stun
+#- type: statusEffect # Trauma - replaced by new status effects...
+#  id: Stun
+#  alert: Stun
 
 - type: statusEffect
   id: SlowedDown

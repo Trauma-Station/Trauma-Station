@@ -185,7 +185,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
 
         if (!comp.Silent)
         {
-            _popup.PopupClient(Loc.GetString("trap-triggered-message", ("trap", uid)),
+            _popup.PopupEntity(Loc.GetString("trap-triggered-message", ("trap", uid)),
                 args.OtherEntity,
                 PopupType.LargeCaution);
         }
@@ -262,7 +262,7 @@ public abstract partial class SharedWizardTrapsSystem : EntitySystem
         if (!_transform.InRange(uid, args.Examiner, comp.ExamineRange))
             return;
 
-        _popup.PopupClient(Loc.GetString("trap-revealed-message", ("trap", uid)), args.Examiner, PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString("trap-revealed-message", ("trap", uid)), args.Examiner, PopupType.Medium);
         if (_net.IsServer)
             _popup.PopupEntity(Loc.GetString("trap-flare-message", ("trap", uid)), uid, PopupType.MediumCaution);
 

@@ -7,9 +7,14 @@
   description: A mask created from suffering. When you look into its eyes, it looks back.
   components:
   - type: UnholyItem
-  - type: FlashImmunity
-  - type: EyeProtection
   - type: FaceHuggerBlocker
+  - type: NightVision
+    action: ActionToggleAbyssalMask
+    enabled: false
+    relayOverlay: true
+    overlayColor: "#FFFFFF33"
+    noiseAmount: 1
+    noiseMultiplier: 2
   - type: MadnessMask
   - type: Sprite
     sprite: _Goobstation/Heretic/mad_mask.rsi
@@ -22,6 +27,7 @@
     - Mask
     - WhitelistChameleon
     - HereticItem
+    - FlashIgnoreResistances
   - type: HideLayerClothing
     slots:
     - Snout

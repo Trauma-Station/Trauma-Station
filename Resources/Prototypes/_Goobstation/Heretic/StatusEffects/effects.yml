@@ -275,9 +275,12 @@
   name: void camouflage
   components:
   - type: ForcedStealthStatusEffect
-    visibility: 0.1
+    visibility: 0.05
+    revealOnAttack: false
+    revealOnDamage: false
   - type: BlockHereticActionsStatusEffect
   - type: RemoveOnAttackStatusEffect
+    removeThreshold: 0.5
 
 - type: entity
   parent: MobStatusEffectBase

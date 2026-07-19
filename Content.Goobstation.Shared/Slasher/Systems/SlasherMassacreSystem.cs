@@ -157,7 +157,7 @@ public sealed partial class SlasherMassacreSystem : EntitySystem
             if (_body.TryDecapitate(victim, args.User))
             {
                 playedDelimb = true;
-                _popup.PopupPredicted(Loc.GetString("slasher-massacre-decap"), victim, args.User, PopupType.Large);
+                _popup.PopupEntity(Loc.GetString("slasher-massacre-decap"), victim, args.User, PopupType.Large);
             }
             EndChain(args.User, userComp);
         }
