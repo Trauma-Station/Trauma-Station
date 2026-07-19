@@ -105,7 +105,7 @@
         Cable: 1
         PlasmaGlass: 5
 
-
+# super shitty base i need ideas on what to make base
 - type: entity
   abstract: true
   parent: [ MobSpaceBasic, MobCombat ]
@@ -224,3 +224,223 @@
       - IPCDrinkBlacklist
   - type: Damageable
     damageModifierSet: IPC
+
+# lob corp magic bullet at home player version, shoot really fucking slow adds burn stacks on melee
+# todo: add something to make the seventh bullet fuck you over
+#       needs something to stop at walls to not make it the ultimate wall-banger and make 169 more containable
+#       maybe reloading as a verb?
+- type: entity
+  name: Magic Bullet
+  parent: [BaseItem, BaseGunWieldable, BaseSecurityScienceContraband]
+  id: IdGearMagicBullet
+  suffix: I.D. Gear
+  description: I.D. Gear extracted from AER-169, capabable of shooting bullets that can penetrate multiple targets.
+  components:
+  - type: WeaponClass
+    class: Rifle
+  - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Guns/Lever/chester_icon_48x.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _Goobstation/Objects/Weapons/Guns/Lever/chester.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    fireRate: 0.25
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Trauma/Aer/magicBulletSound.ogg
+  - type: Item
+    sprite: _Goobstation/Objects/Weapons/Guns/Lever/chester.rsi
+    size: Large
+    shape:
+    - 0,0,4,1
+  - type: BasicEntityAmmoProvider
+    proto: BulletIdMagicBullet
+    capacity: 7
+    count: 7
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 4.5
+    rechargeSound:
+      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+  - type: AmmoCounter
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: IgniteOnMeleeHit
+    fireStacks: 0.5
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RiflesPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RiflesDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RiflesDrop
+
+# bullet shot by the Magic Bullet rifle needs something to make it not capable of wall-banging
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletKinetic
+  id: BulletIdMagicBullet
+  name: bullet devilish
+  components:
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/magicBullet.rsi
+    layers:
+    - state: arcane_barrage
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 30
+    penetrationThreshold: 300
+  - type: Ammo
+    muzzleFlash: MuzzleFlashEffectOmnilaser
+
+# Aer Version of the rifle shoot at double the fire rat and has a more robust buttstock whack
+# TO DO add pen functionality to the rifle?
+- type: entity
+  name: Magic Bullet
+  parent: IdGearMagicBullet
+  id: AerMagicBullet
+  suffix: Aer Unremovable
+  description: This magical bullet can truly hit anyone, just like you say...
+  components:
+  - type: Gun
+    fireRate: 0.5
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1.9
+  - type: Unremoveable
+    deleteOnDrop: true
+  - type: IgniteOnMeleeHit
+    fireStacks: 1
+
+# aer-169 version of devil contract no soul stealing, keep only gun related positive clauses
+- type: entity
+  name: Aer-169 Contract
+  id: AerContract
+  description: Despite apparently working similarly to \[REDACTED\] contracts, \[REDACTED\] called them a low quality imitation
+  parent: [ BaseScienceContraband, BaseDevilContract ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/freischutzContract.rsi
+    state: contract-written
+  - type: Paper
+    content: default-aer-contract-content
+  - type: DevilContract
+    clauseBlacklist:
+    - soulownership
+    - brokeness
+
+# action for summoning 169 contracts
+- type: entity
+  parent: BaseAction
+  id: ActionCreateContractAer
+  name: Summon contract
+  description: Creates a contract in AER-169's hand.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: NoItem
+    icon:
+      sprite: /Textures/_Trauma/Mobs/Aer/freischutzContract.rsi
+      state: contract-written
+  - type: InstantAction
+    event: !type:CreateContractEventAer {}
+
+# aer-169 freischutz at home mostly copypasted from demon stuff or stuff stolen to base humanoids, has two hand to wield it's rifle 
+- type: entity
+  parent: [MobSpaceBasic, MobCombat, InventoryBase]
+  id: AerFreischutz
+  name: AER-169
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/freischutz.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: LanguageSpeaker
+    speaks: 
+    - TauCetiBasic
+    - Eldritch
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Piercing: -1
+        Slash: -1
+        Toxin: -1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 300
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands: 
+    - hand_right
+    - hand_left
+  - type: HandsFill
+    hands:
+      hand_left: AerMagicBullet
+      hand_right: null
+  - type: ComplexInteraction
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: SoftCrit
+      250: Critical
+      300: Dead
+  - type: ZombieImmune
+  - type: Puller
+    needsHands: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: Freischutz
+  - type: ActionGrant
+    actions:
+    - ActionCreateContractAer

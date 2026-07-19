@@ -228,3 +228,10 @@
     preventAllRevives: true # :trol:
     deathDelay: 300
     deathMessageId: devil-deal-time-ran-out
+
+# test clause for freischutz gonna add more gun themed clauses
+- type: clause
+  id: lackofrifle
+  clauseWeight: -30
+  spawnedItems:
+  - WeaponSniperMosin
