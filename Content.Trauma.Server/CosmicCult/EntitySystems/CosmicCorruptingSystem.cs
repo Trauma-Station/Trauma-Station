@@ -119,9 +119,10 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
                     {
                         ConvertEntity(convertedEnt, conversion);
                     }
-                    else if (TryComp<CosmicCorruptibleComponent>(convertedEnt, out var corruptible))
+                    else if (TryComp<CosmicCorruptibleComponent>(convertedEnt, out var corruptible)
+                    && corruptible.ConvertTo is { } result)
                     {
-                        ConvertEntity(convertedEnt, corruptible.ConvertTo);
+                        ConvertEntity(convertedEnt, result);
                     }
                 }
 
@@ -170,7 +171,7 @@ public sealed partial class CosmicCorruptingSystem : EntitySystem
 
         if (ent.Comp.FloodFillStarting) //todo make this async? it doesn't actually run that much though
         {
-            var convertTile = (ContentTileDefinition)_tileDefinition[ent.Comp.ConversionTile];
+            var convertTile = (ContentTileDefinition) _tileDefinition[ent.Comp.ConversionTile];
             var visitedTiles = new HashSet<Vector2i>();
             var tilesToVisit = new HashSet<Vector2i> { tile.GridIndices };
 

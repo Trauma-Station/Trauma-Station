@@ -1,0 +1,44 @@
+- type: entity
+  id: CosmicStairs
+  parent: RMCStairs
+  description: Somewhat unnvering, yet stll as great as any other stairs.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/stairs.rsi
+    state: stair_full
+  - type: CosmicCorruptible
+    convertTo: null # prevent repeated corrupting
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-forthecult
+
+- type: entity
+  id: CosmicStairsLeft
+  parent: CosmicStairs
+  suffix: Left
+  components:
+  - type: Sprite
+    state: stair_left_cap
+
+- type: entity
+  id: CosmicStairsRight
+  parent: CosmicStairs
+  suffix: Right
+  components:
+  - type: Sprite
+    state: stair_right_cap
+
+- type: entity
+  id: CosmicStairsSolo
+  parent: CosmicStairs
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: stair_solo
+
+- type: entity
+  id: CosmicStairsCorner
+  parent: CosmicStairs
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: stair_corner

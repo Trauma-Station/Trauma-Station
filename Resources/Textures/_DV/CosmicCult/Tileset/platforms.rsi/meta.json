@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Custom item by NoElkaTheGod",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "platform",
+      "directions": 4
+    },
+    {
+      "name": "platform_corner",
+      "directions": 4
+    },
+    {
+      "name": "platform_stair",
+      "directions": 4
+    },
+    {
+      "name": "platform_stair_alt",
+      "directions": 4
+    },
+    {
+      "name": "platform_deco",
+      "directions": 4
+    }
+  ]
+}

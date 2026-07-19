@@ -71,6 +71,10 @@
         acts: [ "Destruction" ]
   - type: Construction
     node: railing
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailing
+  # </Trauma>
 
 - type: entity
   parent: BaseRailing
@@ -126,6 +130,10 @@
         acts: [ "Destruction" ]
   - type: Construction
     node: railingCorner
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailingCorner
+  # </Trauma>
 
 - type: entity
   parent: BaseRailing
@@ -172,6 +180,10 @@
         acts: [ "Destruction" ]
   - type: Construction
     node: railingCornerSmall
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailingCornerSmall
+  # </Trauma>
 
 - type: entity
   parent: BaseRailing
@@ -236,3 +248,7 @@
         acts: [ "Destruction" ]
   - type: Construction
     node: railingRound
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRailingRound
+  # </Trauma>

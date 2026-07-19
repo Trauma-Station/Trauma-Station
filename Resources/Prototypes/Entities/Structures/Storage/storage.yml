@@ -61,3 +61,7 @@
   - type: Climbable
   - type: StaticPrice
     price: 30
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicRack
+  # </Trauma>

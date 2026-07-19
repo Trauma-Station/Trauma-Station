@@ -63,6 +63,10 @@
     noRot: true
   - type: Anchorable
   - type: Pullable
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicBed
+  # </Trauma>
 
 
 - type: entity

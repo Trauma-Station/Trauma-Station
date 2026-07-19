@@ -1,4 +1,5 @@
 materials-entropy = entropy
+stack-malign-tile = malign tile
 
 cosmic-entropy-interact-noncultist = Only a Cosmic Cultist can use this!
 cosmic-entropy-interact-absorb = You absorb the mote.

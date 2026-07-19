@@ -10,5 +10,5 @@ namespace Content.Trauma.Shared.CosmicCult.Components;
 public sealed partial class CosmicCorruptibleComponent : Component
 {
     [DataField(required: true)]
-    public EntProtoId ConvertTo;
+    public EntProtoId? ConvertTo;
 }
