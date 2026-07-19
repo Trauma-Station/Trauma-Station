@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Devil;
 using Content.Goobstation.Shared.Devil.Contract;
 using Content.Server.Hands.Systems;
@@ -13,7 +15,7 @@ namespace Content.Trauma.Server.AER;
 
 /// <summary>
 /// system for Aer-169, lets them summon a restricted devil contract
-/// TO DO: add id gear and research event for spawning player version of Magic Bullet 
+/// TO DO: add id gear and research event for spawning player version of Magic Bullet
 /// </summary>
 public sealed partial class FreischutzSystem : EntitySystem
 {
@@ -64,4 +66,3 @@ public sealed partial class FreischutzSystem : EntitySystem
         _popup.PopupEntity(flavor, devil, PopupType.Medium);
     }
 }
-

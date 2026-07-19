@@ -365,7 +365,7 @@
   - type: InstantAction
     event: !type:CreateContractEventAer {}
 
-# aer-169 freischutz at home mostly copypasted from demon stuff or stuff stolen to base humanoids, has two hand to wield it's rifle 
+# aer-169 freischutz at home mostly copypasted from demon stuff or stuff stolen to base humanoids, has two hand to wield it's rifle
 - type: entity
   parent: [MobSpaceBasic, MobCombat, InventoryBase]
   id: AerFreischutz
@@ -377,7 +377,7 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
   - type: LanguageSpeaker
-    speaks: 
+    speaks:
     - TauCetiBasic
     - Eldritch
   - type: PassiveDamage
@@ -404,7 +404,7 @@
         location: Left
       hand_right:
         location: Right
-    sortedHands: 
+    sortedHands:
     - hand_right
     - hand_left
   - type: HandsFill
