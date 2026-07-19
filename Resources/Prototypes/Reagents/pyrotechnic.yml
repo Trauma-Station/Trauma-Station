@@ -118,6 +118,7 @@
       tags: [ TraumaFire ]
   - !type:FlammableTileReaction
     temperatureMultiplier: 5
+  - !type:SpillTileReaction
   # </Trauma>
   metabolisms:
     Bloodstream:
@@ -176,6 +177,9 @@
   friction: 0.4
   tileReactions:
   - !type:FlammableTileReaction {}
+  # <Trauma>
+  - !type:SpillTileReaction
+  # <Trauma>
   metabolisms:
     Bloodstream:
       effects:
