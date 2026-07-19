@@ -366,8 +366,14 @@ entity-effect-guidebook-extinguish-reaction =
 
 entity-effect-guidebook-flammable-reaction =
     { $chance ->
-        [1] Increases
-        *[other] increase
+        [1] { $direction ->
+                [decrease] Decreases
+                *[increase] Increases
+            }
+        *[other] { $direction ->
+                [decrease] decrease
+                *[increase] increase
+            }
     } flammability
 
 entity-effect-guidebook-ignite =
