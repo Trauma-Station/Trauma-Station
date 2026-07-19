@@ -47,3 +47,6 @@ job-listings-ui-reward-name-SyndicateBombFake = fake syndicate bomb
 job-listings-ui-reward-name-AccessBreaker = access breaker
 job-listings-ui-reward-name-Emag = emag
 job-listings-ui-reward-name-ToolboxElectricalTurretFilled = disposable turret
+
+# final
+job-listings-ui-reward-name-SyndicateFinalReward = syndicate lifetime achievement award

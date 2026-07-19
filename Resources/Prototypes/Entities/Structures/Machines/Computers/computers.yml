@@ -668,6 +668,8 @@
   components:
   # <Trauma>
   - type: StationReportTarget # not given to aghost
+  - type: StealTarget
+    stealGroup: CommsComputer
   # </Trauma>
   - type: Sprite
     layers:

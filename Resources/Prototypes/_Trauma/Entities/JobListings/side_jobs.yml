@@ -223,10 +223,17 @@
 - type: entity
   parent: BaseFinalSideJob
   id: BattlecruiserSideJob
-  name: Call in the syndicate battlecruiser
-  description: You have done great work. The station is weak. Hack the communications console and broadcast out to the whole syndicate. They will come.
   components:
   - type: Objective
     icon:
       sprite: _Trauma/Objects/Syndicate/syndicate_final_reward.rsi
       state: icon
+  - type: SideJob
+    tool: SyndicateBroadcastDevice
+  - type: StealCondition
+    objectiveText: side-job-hack-comms-computer-name
+    objectiveNoOwnerText: side-job-hack-comms-computer-name
+    descriptionText: side-job-hack-comms-computer-description
+    descriptionMultiplyText: side-job-hack-comms-computer-description
+    stealGroup: CommsComputer
+  - type: StealConditionRequireScan

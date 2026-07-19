@@ -62,3 +62,12 @@
   components:
   - type: Scanalyzer
     stealTarget: WeaponAntiqueLaser
+
+- type: entity
+  parent: BaseSyndicateScanalyzer
+  id: SyndicateBroadcastDevice
+  name: syndicate broadcast device
+  description: Capable of hacking a communications computer and broadcasting a message out to the whole syndicate.
+  components:
+  - type: Scanalyzer
+    stealTarget: CommsComputer
