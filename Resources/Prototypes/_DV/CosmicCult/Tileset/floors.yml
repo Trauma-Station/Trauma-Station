@@ -1,16 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: tile
-  id: FloorCosmicGlyph
-  name: tiles-cosmiccult-floor-glyph
-  sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_glyph.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
-
 - type: entity
   name: malign tile
   parent: FloorTileItemBase
@@ -30,6 +19,111 @@
   id: FloorTileCosmicCorruption
   name: stack-malign-tile
   spawn: FloorTileItemCosmicCorruption
+
+- type: tile
+  id: FloorCosmicGlyph
+  name: tiles-cosmiccult-floor-glyph
+  sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_glyph.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCosmic
+  heatCapacity: 10000
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    SouthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    South: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    East: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    North: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    West: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+
+- type: tile
+  id: FloorCosmicSmooth
+  name: tiles-cosmiccult-floor-smooth
+  sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_smooth.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCosmic
+  heatCapacity: 10000
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    SouthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    South: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    East: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    North: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    West: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+
+- type: tile
+  id: FloorCosmicHalf
+  name: tiles-cosmiccult-floor-half
+  sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_half.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCosmic
+  heatCapacity: 10000
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    SouthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    South: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    East: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    North: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    West: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+
+- type: tile
+  id: FloorCosmicSplit
+  name: tiles-cosmiccult-floor-split
+  sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_split.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCosmic
+  heatCapacity: 10000
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    SouthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    South: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    East: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    North: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    West: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+
+- type: tile
+  id: FloorCosmicNotched
+  name: tiles-cosmiccult-floor-notched
+  sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_notched.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCosmic
+  heatCapacity: 10000
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    SouthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    South: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    East: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    North: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    West: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
 
 - type: tile
   id: FloorCosmicCorruption
