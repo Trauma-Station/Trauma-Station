@@ -370,6 +370,7 @@
   parent: [MobSpaceBasic, MobCombat, InventoryBase]
   id: AerFreischutz
   name: AER-169
+  description: AER-169 has a black wispy form with no discernible features besides his eyes, head, arms, and legs. He carries a large gun with them.
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Aer/freischutz.rsi
