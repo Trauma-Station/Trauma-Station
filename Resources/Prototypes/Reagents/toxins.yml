@@ -114,7 +114,7 @@
   physicalDesc: reagent-physical-desc-fuzzy
   # <Trauma>
   tileReactions:
-    - !type:SpillTileReaction
+  - !type:SpillTileReaction
   # <Trauma>
   metabolisms:
     Bloodstream:
@@ -152,7 +152,7 @@
   meltingPoint: -19.4
   # <Trauma>
   tileReactions:
-    - !type:SpillTileReaction
+  - !type:SpillTileReaction
   # <Trauma>
   plantMetabolism:
   - !type:PlantAdjustToxins
@@ -223,7 +223,7 @@
   meltingPoint: -87
   # <Trauma>
   tileReactions:
-    - !type:SpillTileReaction
+  - !type:SpillTileReaction
   # <Trauma>
   reactiveEffects:
     Acidic:
@@ -269,7 +269,7 @@
   meltingPoint: 10.31
   # <Trauma>
   tileReactions:
-    - !type:SpillTileReaction
+  - !type:SpillTileReaction
   # <Trauma>
   plantMetabolism:
   - !type:PlantAdjustToxins
