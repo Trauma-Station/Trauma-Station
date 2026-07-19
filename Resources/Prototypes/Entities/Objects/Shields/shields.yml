@@ -9,7 +9,7 @@
     - type: DisarmMalus
       malus: 1
     - type: CosmicTransmutable
-      transmuteTo: ShieldCosmicCult
+      transmuteTo: CosmicCultShield
     - type: Parry
       parryExhaustionCost: 0.25
       parryMinSkill: 30

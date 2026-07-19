@@ -75,7 +75,7 @@ public sealed partial class EnchanterSystem : EntitySystem
         var user = args.User;
         if (_enchanting.FindEnchanter(item) is not {} enchanter)
         {
-            _popup.PopupClient(Loc.GetString("enchanting-tool-no-enchanter"), user, user);
+            _popup.PopupEntity(Loc.GetString("enchanting-tool-no-enchanter"), user, user);
             return;
         }
 
@@ -100,13 +100,13 @@ public sealed partial class EnchanterSystem : EntitySystem
         GetPossibleEnchants(ent, item);
         if (_pool.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("enchanter-cant-enchant"), item, user);
+            _popup.PopupEntity(Loc.GetString("enchanter-cant-enchant"), item, user);
             return false;
         }
 
         if (_knowledge.GetKnowledge(user, MagicalLiteracy) is not { } skill || _knowledge.GetMastery(skill.Comp) < 1)
         {
-            _popup.PopupClient(Loc.GetString("enchanter-no-skill"), item, user);
+            _popup.PopupEntity(Loc.GetString("enchanter-no-skill"), item, user);
             return false;
         }
 
@@ -123,7 +123,7 @@ public sealed partial class EnchanterSystem : EntitySystem
         }
 
         _audio.PlayPredicted(ent.Comp.Sound, item, user);
-        _popup.PopupPredicted(Loc.GetString("enchanter-enchanted", ("item", item)), item, user, PopupType.Large);
+        _popup.PopupEntity(Loc.GetString("enchanter-enchanted", ("item", item)), item, user, PopupType.Large);
 
         _adminLogger.Add(LogType.EntityDelete, LogImpact.Low, $"{user:player} enchanted {item:item} using {ent:enchanter}");
 

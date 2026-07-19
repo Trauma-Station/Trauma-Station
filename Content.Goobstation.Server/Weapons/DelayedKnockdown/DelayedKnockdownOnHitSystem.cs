@@ -89,7 +89,7 @@ public sealed partial class DelayedKnockdownOnHitSystem : EntitySystem
             if (comp.Time > 0)
                 continue;
 
-            _stun.TryKnockdown(uid, TimeSpan.FromSeconds(comp.KnockdownTime), comp.Refresh);
+            _stun.TryKnockdown(uid, TimeSpan.FromSeconds(comp.KnockdownTime), comp.Refresh, stunOnFail: false);
 
             RemCompDeferred(uid, comp);
         }

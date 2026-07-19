@@ -9,6 +9,7 @@ public record struct TackleEvent(
     float Range,
     float Speed,
     float StaminaCost,
+    float SkillMod,
     TimeSpan KnockdownTime,
     EntityUid User,
     EntityUid? Source = null) : IInventoryRelayEvent

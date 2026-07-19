@@ -45,14 +45,14 @@ public sealed partial class AbductorTaskTabletSystem : EntitySystem
         // have to gizmo + abduct first chud
         if (!HasComp<AbductorVictimComponent>(target))
         {
-            _popup.PopupClient(Loc.GetString("abductor-task-tablet-not-abducted"), target, user);
+            _popup.PopupEntity(Loc.GetString("abductor-task-tablet-not-abducted"), target, user);
             return;
         }
 
         args.Handled = true;
         if (_task.AllTasksCompleted(target))
         {
-            _popup.PopupClient(Loc.GetString("abductor-task-tablet-already-completed"), target, user);
+            _popup.PopupEntity(Loc.GetString("abductor-task-tablet-already-completed"), target, user);
             return;
         }
 
@@ -63,7 +63,7 @@ public sealed partial class AbductorTaskTabletSystem : EntitySystem
         ent.Comp.Target = netTarget;
         Dirty(ent);
 
-        _popup.PopupClient(Loc.GetString("abductor-task-tablet-linked"), target, user);
+        _popup.PopupEntity(Loc.GetString("abductor-task-tablet-linked"), target, user);
         _ui.TryOpenUi(ent.Owner, AbductorTaskTabletUIKey.Key, user);
     }
 
@@ -92,7 +92,7 @@ public sealed partial class AbductorTaskTabletSystem : EntitySystem
         var task = subject.NextTask;
         if (!_task.TryCompleteTask((target, subject)))
         {
-            _popup.PopupClient(Loc.GetString("abductor-task-tablet-incomplete"), user, user);
+            _popup.PopupEntity(Loc.GetString("abductor-task-tablet-incomplete"), user, user);
             return;
         }
 
@@ -105,7 +105,7 @@ public sealed partial class AbductorTaskTabletSystem : EntitySystem
             return;
 
         _audio.PlayPredicted(ent.Comp.FinishSound, ent, user);
-        _popup.PopupClient(Loc.GetString("abductor-task-tablet-finished"), user, user);
+        _popup.PopupEntity(Loc.GetString("abductor-task-tablet-finished"), user, user);
 
         ent.Comp.Target = null;
         Dirty(ent);

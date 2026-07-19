@@ -4,6 +4,24 @@
   name: gas mask
   description: A face-covering mask that can be connected to an air supply.
   components:
+  # <Trauma>
+  - type: Construction
+    graph: GasMaskHalf
+    node: start
+    deconstructionTarget: null
+  - type: DiseaseProtection
+    # higher protection for gas masks
+    incoming:
+      powerModifiers:
+        Aerial: -0.2
+      chanceMultipliers:
+        Aerial: 0.7
+    outgoing:
+      powerModifiers:
+        Aerial: -0.2
+      chanceMultipliers:
+        Aerial: 0.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/gas.rsi
   - type: Clothing
@@ -24,23 +42,6 @@
     layers:
       Snout: Mask
     hideOnToggle: true
-  - type: Construction # Goobstation
-    graph: GasMaskHalf
-    node: start
-    deconstructionTarget: null
-  # Goobstation
-  - type: DiseaseProtection
-    # higher protection for gas masks
-    incoming:
-      powerModifiers:
-        Aerial: -0.2
-      chanceMultipliers:
-        Aerial: 0.7
-    outgoing:
-      powerModifiers:
-        Aerial: -0.2
-      chanceMultipliers:
-        Aerial: 0.5
 
 - type: entity
   parent: [ClothingMaskGas, BaseSecurityContraband]
@@ -48,6 +49,18 @@
   name: security gas mask
   description: A standard issue Security gas mask.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - SecurityBreathMask
+  - type: Hailer
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: ViewconeModifier
+    angleModifier: 1.0
+  # </Trauma>
   - type: Item
     size: Tiny
   - type: Sprite
@@ -63,16 +76,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: Tag # Goobstation - For survial boxes
-    tags:
-    - PetWearable
-    - WhitelistChameleon
-    - SecurityBreathMask
-  - type: Hailer # Goobstation - Hailer
-  - type: IngestionBlocker # Goobstation
-    blockSmokeIngestion: true
-  - type: ViewconeModifier # Trauma
-    angleModifier: 0.90
 
 - type: entity
   parent: [ClothingMaskGas, BaseSyndicateContraband]
@@ -80,6 +83,17 @@
   name: syndicate gas mask
   description: A close-fitting tactical mask that can be connected to an air supply.
   components:
+  # <Trauma>
+  - type: Tag # For survial boxes
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - SyndicateBreathMask
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: ViewconeModifier
+    angleModifier: 1.0
+    # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/gassyndicate.rsi
   - type: Clothing
@@ -95,15 +109,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: Tag  # Goobstation - For survial boxes
-    tags:
-    - PetWearable
-    - WhitelistChameleon
-    - SyndicateBreathMask
-  - type: IngestionBlocker # Goobstation
-    blockSmokeIngestion: true
-  - type: ViewconeModifier # Trauma
-    angleModifier: 0.90
 
 - type: entity
   parent: ClothingMaskGas
@@ -111,6 +116,14 @@
   name: atmospheric gas mask
   description: Improved gas mask utilized by atmospheric technicians. It's flameproof!
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - GasMask
+    - Mask
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/gasatmos.rsi
   - type: Clothing
@@ -121,12 +134,6 @@
     modifiers:
       coefficients:
         Heat: 0.5
-  - type: Tag # Goobstation
-    tags:
-    - HamsterWearable
-    - WhitelistChameleon
-    - GasMask
-    - Mask
 
 - type: entity
   parent: [ClothingMaskGasAtmos, BaseCommandContraband]
@@ -163,6 +170,18 @@
   name: explorer gas mask
   description: A military-grade gas mask that can be connected to an air supply.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - GasMask
+    - Mask
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: ViewconeModifier
+    angleModifier: 0.90
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/gasexplorer.rsi
   - type: Clothing
@@ -176,16 +195,6 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
-  - type: Tag # Goobstation
-    tags:
-    - HamsterWearable
-    - WhitelistChameleon
-    - GasMask
-    - Mask
-  - type: IngestionBlocker # Trauma
-    blockSmokeIngestion: true
-  - type: ViewconeModifier # Trauma
-    angleModifier: 0.90
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -193,6 +202,20 @@
   name: medical mask
   description: A close-fitting sterile mask that can be connected to an air supply.
   components:
+  # <Trauma>
+  - type: DiseaseProtection
+    # full protection if both people are wearing it
+    incoming:
+      powerModifiers:
+        Aerial: -0.4
+      chanceMultipliers:
+        Aerial: 0.5
+    outgoing:
+      powerModifiers:
+        Aerial: -0.6
+      chanceMultipliers:
+        Aerial: 0.5
+  # </Trauma>
   - type: Item
     size: Tiny
   - type: Sprite
@@ -210,19 +233,6 @@
     materialComposition:
       Steel: 50
       Plastic: 50
-  # Goobstation
-  - type: DiseaseProtection
-    # full protection if both people are wearing it
-    incoming:
-      powerModifiers:
-        Aerial: -0.4
-      chanceMultipliers:
-        Aerial: 0.5
-    outgoing:
-      powerModifiers:
-        Aerial: -0.6
-      chanceMultipliers:
-        Aerial: 0.5
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -230,6 +240,21 @@
   name: military-style medical mask
   description: A medical mask with a small layer of protection against damage and viruses, similar to the one used in the medical units of the first corporate war.
   components:
+  # <Trauma>
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: DiseaseProtection
+    incoming:
+      powerModifiers:
+        Aerial: -0.35
+      chanceMultipliers:
+        Aerial: 0.5
+    outgoing:
+      powerModifiers:
+        Aerial: -0.35
+      chanceMultipliers:
+        Aerial: 0.5
+  # </Trauma>
   - type: Item
     size: Tiny
   - type: Sprite
@@ -246,20 +271,6 @@
         Piercing: 0.9
         Heat: 0.9
         Caustic: 0.9
-  - type: IngestionBlocker # Goobstation
-    blockSmokeIngestion: true # Goobstation
-  # Goobstation
-  - type: DiseaseProtection
-    incoming:
-      powerModifiers:
-        Aerial: -0.35
-      chanceMultipliers:
-        Aerial: 0.5
-    outgoing:
-      powerModifiers:
-        Aerial: -0.35
-      chanceMultipliers:
-        Aerial: 0.5
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -436,6 +447,20 @@
   name: sterile mask
   description: A sterile mask designed to help prevent the spread of diseases.
   components:
+  # <Trauma>
+  - type: DiseaseProtection
+    # really strong protection
+    incoming:
+      powerModifiers:
+        Aerial: -0.6
+      chanceMultipliers:
+        Aerial: 0.4
+    outgoing:
+      powerModifiers:
+        Aerial: -0.6
+      chanceMultipliers:
+        Aerial: 0.4
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/sterile.rsi
   - type: Clothing
@@ -451,19 +476,6 @@
       Cloth: 25
   - type: StaticPrice
     price: 5
-  # Goobstation
-  - type: DiseaseProtection
-    # really strong protection
-    incoming:
-      powerModifiers:
-        Aerial: -0.6
-      chanceMultipliers:
-        Aerial: 0.4
-    outgoing:
-      powerModifiers:
-        Aerial: -0.6
-      chanceMultipliers:
-        Aerial: 0.4
 
 - type: entity
   parent: ClothingMaskBase
@@ -471,6 +483,11 @@
   name: muzzle
   description: To stop that awful noise.
   components:
+  # <Trauma>
+  - type: Tag
+    tags:
+    - Muzzle
+  # </Trauma>
   - type: Item
     size: Tiny
   - type: Sprite
@@ -488,9 +505,6 @@
   - type: Construction
     graph: Muzzle
     node: muzzle
-  - type: Tag # Goobstation
-    tags:
-    - Muzzle
 
 - type: entity
   parent: ClothingMaskPullableBase
@@ -498,18 +512,7 @@
   name: plague doctor mask
   description: A bad omen.
   components:
-  - type: Sprite
-    sprite: Clothing/Mask/plaguedoctormask.rsi
-  - type: Clothing
-    sprite: Clothing/Mask/plaguedoctormask.rsi
-  - type: BreathMask
-  - type: IngestionBlocker
-  - type: IdentityBlocker
-  - type: HideLayerClothing
-    slots:
-    - Snout
-    hideOnToggle: true
-  # Goobstation
+  # <Trauma>
   - type: DiseaseProtection
     # really good incoming but bad outgoing protection
     incoming:
@@ -522,6 +525,18 @@
         Aerial: -0.2
       chanceMultipliers:
         Aerial: 0.8
+  # </Trauma>
+  - type: Sprite
+    sprite: Clothing/Mask/plaguedoctormask.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/plaguedoctormask.rsi
+  - type: BreathMask
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Snout
+    hideOnToggle: true
 
 - type: entity
   parent: ClothingMaskClownBase
@@ -544,6 +559,13 @@
   name: swat gas mask
   description: A elite issue Security gas mask.
   components:
+  # <Trauma>
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: Hailer
+  - type: ViewconeModifier
+    angleModifier: 1.0
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/swat.rsi
   - type: Clothing
@@ -567,11 +589,6 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
-  - type: IngestionBlocker # Goobstation
-    blockSmokeIngestion: true
-  - type: Hailer # Trauma
-  - type: ViewconeModifier # Trauma
-    angleModifier: 0.90
 
 - type: entity
   parent: [ ClothingMaskGas, BaseSecurityCargoContraband ]
@@ -579,6 +596,18 @@
   name: mercenary gas mask
   description: Slightly outdated, but reliable military-style gas mask.
   components:
+  # <Trauma>
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - GasMask
+    - Mask
+  - type: ViewconeModifier
+    angleModifier: 0.90
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/merc.rsi
   - type: Clothing
@@ -592,16 +621,6 @@
         Slash: 0.8
         Piercing: 0.8
         Heat: 0.8
-  - type: IngestionBlocker # Goobstation
-    blockSmokeIngestion: true
-  - type: Tag # Goobstation
-    tags:
-    - HamsterWearable
-    - WhitelistChameleon
-    - GasMask
-    - Mask
-  - type: ViewconeModifier # Trauma
-    angleModifier: 0.90
 
 - type: entity
   parent: [ ClothingMaskGas, BaseCentcommContraband ]
@@ -609,6 +628,12 @@
   name: ert gas mask
   description: The gas mask of the elite squad of the ERT.
   components:
+  # <Trauma>
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
+  - type: ViewconeModifier
+    angleModifier: 1.0
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/ert.rsi
   - type: Clothing
@@ -632,10 +657,6 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
-  - type: IngestionBlocker # Goobstation
-    blockSmokeIngestion: true
-  - type: ViewconeModifier # Trauma
-    angleModifier: 0.90
 
 - type: entity
   parent: ClothingMaskGasERT
@@ -643,6 +664,22 @@
   name: death squad gas mask
   description: A unique gas mask for the NT's most elite squad.
   components:
+  # <Trauma>
+  - type: DiseaseProtection
+    # full immunity
+    incoming:
+      powerModifiers:
+        Aerial: -1
+      chanceMultipliers:
+        Aerial: 0
+    outgoing:
+      powerModifiers:
+        Aerial: -1
+      chanceMultipliers:
+        Aerial: 0
+  - type: ViewconeModifier
+    angleModifier: 1.5
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/squadron.rsi
   - type: Clothing
@@ -663,21 +700,6 @@
         Heat: 0.75
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
-  # Goobstation
-  - type: DiseaseProtection
-    # full immunity
-    incoming:
-      powerModifiers:
-        Aerial: -1
-      chanceMultipliers:
-        Aerial: 0
-    outgoing:
-      powerModifiers:
-        Aerial: -1
-      chanceMultipliers:
-        Aerial: 0
-  - type: ViewconeModifier # Trauma
-    angleModifier: 1.5
 
 - type: entity
   parent: ClothingMaskBase

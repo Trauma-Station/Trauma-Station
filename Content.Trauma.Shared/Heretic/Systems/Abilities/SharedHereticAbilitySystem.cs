@@ -103,15 +103,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     {
         base.Initialize();
 
-        // TODO: kill
-        SubscribeAsh();
         SubscribeBlade();
-        SubscribeRust();
-        SubscribeCosmos();
-        SubscribeVoid();
-        SubscribeFlesh();
-        SubscribeSide();
-        SubscribeLock();
 
         CacheDamageTypes();
     }

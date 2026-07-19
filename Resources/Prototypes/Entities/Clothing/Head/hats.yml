@@ -52,7 +52,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Trauma - contraband marking and armor
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeret, BaseSecurityContraband] # Trauma - contraband marking and armor
   id: ClothingHeadHatBeretSecurity
   name: security beret
   description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
@@ -162,7 +162,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseSecurityCommandContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadHatBeretRND, BaseSecurityCommandContraband] # Goob / Trauma edit
   id: ClothingHeadHatBeretHoS
   name: head of security's beret
   description: A black beret with a commander's rank emblem. For officers that are more inclined towards style than safety.
@@ -226,7 +226,7 @@
     - CorgiWearable
 
 - type: entity
-  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseClothingViewconeSmallIncrease ] # Trauma
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase] # Trauma
   id: ClothingHeadHatBeretMerc
   name: mercenary beret
   description: An olive beret with a badge depicting a jackal on a rock.
@@ -761,7 +761,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseSecurityContraband, BaseClothingViewconeSmallIncrease] # Goob / Trauma edit
+  parent: [ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseSecurityContraband] # Goob / Trauma edit
   id: ClothingHeadHatWarden
   name: warden's cap
   description: This hat emphasizes that you are THE LAW.

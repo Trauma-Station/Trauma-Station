@@ -3,8 +3,8 @@
 - type: entity
   parent: BaseWeaponBatterySmall
   id: WeaponPlasmaCutter
-  name: plasma cutter
-  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
+  name: phoron cutter
+  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse. Phoron rounds make it excellent at mining.
   components:
   - type: WeaponClass
     class: Mining

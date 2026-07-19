@@ -331,7 +331,7 @@ namespace Content.Shared.Movement.Systems
         {
             // Relayed movement just uses the same keybinds given we're moving the relayed entity
             // the same as us.
-            if (!MoverQuery.Resolve(entity, ref entity.Comp))
+            if (!MoverQuery.Resolve(entity, ref entity.Comp, false)) // Trauma - dont log error for a non-mover pressing WASD...
                 return;
 
             // TODO: Should move this into HandleMobMovement itself.

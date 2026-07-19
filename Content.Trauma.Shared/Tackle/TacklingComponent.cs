@@ -12,4 +12,7 @@ public sealed partial class TacklingComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid Source;
+
+    [DataField, AutoNetworkedField]
+    public float SkillMod;
 }

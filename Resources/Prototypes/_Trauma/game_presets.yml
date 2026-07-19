@@ -36,7 +36,6 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRuleNoHeretic
   - HereticRoundstart
-  - CalmTraitor
 
 - type: gamePreset
   id: Shadowlings
@@ -55,7 +54,6 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - ShadowlingGamemode
-  - CalmTraitor
 
 - type: gamePreset
   id: Spies

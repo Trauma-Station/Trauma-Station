@@ -24,7 +24,7 @@
   id: HereticSideT1Flask
   name: knowledge-path-side-t1-flask-name
   description: knowledge-path-side-t1-flask-desc
-  icon: { sprite: _Goobstation/Heretic/items.rsi, state: eldritch_flask }
+  icon: { sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi, state: icon }
   raiseProductEventOnMind: true
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
@@ -205,29 +205,6 @@
     stage: 3
 
 - type: listing
-  id: HereticBladeT1Curio
-  name: knowledge-path-side-t1-curio-name
-  description: knowledge-path-side-t1-curio-desc
-  icon: { sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - UnfathomableCurio
-  cost:
-    KnowledgePoint: 1
-    SideKnowledgePoint: 1
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT1
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 3
-
-- type: listing
   id: HereticBladeT1Coin
   name: knowledge-path-side-t1-coin-name
   description: knowledge-path-side-t1-coin-desc
@@ -272,6 +249,29 @@
     stock: 1
   - !type:HereticPathCondition
     stage: 3
+
+- type: listing
+  id: HereticBladeT1Curio
+  name: knowledge-path-side-t2-curio-name
+  description: knowledge-path-side-t2-curio-desc
+  icon: { sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - UnfathomableCurio
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT2
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 4
 
 - type: listing
   id: HereticSideT2RustWalker
@@ -559,6 +559,29 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - ForestAdmonitions
+  cost:
+    KnowledgePoint: 2
+    SideKnowledgePoint: 2
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT3
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 6
+
+- type: listing
+  id: HereticSideT3SharpMedal
+  name: knowledge-path-side-t3-medal-name
+  description: knowledge-path-side-t3-medal-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - SharpMedal
   cost:
     KnowledgePoint: 2
     SideKnowledgePoint: 2

@@ -104,7 +104,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
 
     private void OnUnanchorAttempt(Entity<ActiveFieldGeneratorComponent> ent, ref UnanchorAttemptEvent args)
     {
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("comp-genericfield-anchor-warning"), args.User, args.User, PopupType.LargeCaution);
         args.Cancel();
     }
 
@@ -113,7 +113,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         if (ent.Comp.ConnectedGenerator != null)
             return;
 
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-on"), ent, user);
+        _popup.PopupEntity(Loc.GetString("comp-genericfield-turned-on"), ent, user);
         ent.Comp.Enabled = true;
         EnsureComp<ActiveFieldGeneratorComponent>(ent);
         TryGenerateFieldConnection(ent, user);
@@ -123,7 +123,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
 
     private void TurnOff(Entity<GenericFieldGeneratorComponent> ent, EntityUid? user = null)
     {
-        _popup.PopupPredicted(Loc.GetString("comp-genericfield-turned-off"), ent, user);
+        _popup.PopupEntity(Loc.GetString("comp-genericfield-turned-off"), ent, user);
         ent.Comp.Enabled = false;
         RemComp<ActiveFieldGeneratorComponent>(ent);
         RemoveConnections(ent, user);
@@ -333,7 +333,7 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         ChangeConnectionLightVisualizer(ent);
         UpdateConnectionLights(ent);
 
-        _popup.PopupPredicted(Loc.GetString(state ? "comp-genericfield-connected" : "comp-genericfield-disconnected"), ent, user);
+        _popup.PopupEntity(Loc.GetString(state ? "comp-genericfield-connected" : "comp-genericfield-disconnected"), ent, user);
         _audio.PlayPredicted(state ? ent.Comp.ActivationSound : ent.Comp.DeactivationSound, ent, user);
         if (HasComp<DeviceLinkSourceComponent>(ent))
         {

@@ -138,7 +138,7 @@ public sealed partial class SlaughterDevourSystem : EntitySystem
             amount = component.ToHeal;
         }
 
-        _popup.PopupClient(Loc.GetString(popup), devourer, devourer);
+        _popup.PopupEntity(Loc.GetString(popup), devourer, devourer);
         var damage = component.HealDamage * amount;
         _damageable.ChangeDamage(devourer, damage, true);
     }

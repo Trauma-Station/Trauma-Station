@@ -201,8 +201,8 @@
     damagePenalty: 0.2
   - type: ExaminableCharacter
   - type: Stamina
-    baseCritThreshold: 200
-    animationThreshold: 100
+    baseCritThreshold: 300
+    animationThreshold: 150
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Effects/glass_step.ogg

@@ -22,16 +22,8 @@ public abstract partial class SharedKnowledgeSystem
     {
         SubscribeLocalEvent<LanguageKnowledgeComponent, MapInitEvent>(OnLanguageInit,
             after: [ typeof(InitialBodySystem) ]); // great engine
-        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeAddedEvent>(OnLanguageAdded);
-        SubscribeLocalEvent<LanguageKnowledgeComponent, KnowledgeRemovedEvent>(OnLanguageRemoved);
-
-        SubscribeLocalEvent<LanguageSpeakerComponent, AddLanguageEvent>(OnLanguageAdd);
-        SubscribeLocalEvent<LanguageSpeakerComponent, RemoveLanguageEvent>(OnLanguageRemove);
-        SubscribeLocalEvent<LanguageSpeakerComponent, UpdateLanguageEvent>(OnLanguageUpdate);
         SubscribeLocalEvent<LanguageSpeakerComponent, MapInitEvent>(OnSpeakerMapInit,
             after: [ typeof(InitialBodySystem) ]);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, ChatMessageOverrideInVoiceRangeEvent>(OnLanguageHeard);
     }
 
     private void OnLanguageInit(Entity<LanguageKnowledgeComponent> ent, ref MapInitEvent args)
@@ -40,12 +32,14 @@ public abstract partial class SharedKnowledgeSystem
         _meta.SetEntityName(ent.Owner, _language.GetLanguagePrototype(ent.Comp.LanguageId)!.Name);
     }
 
+    [SubscribeLocalEvent]
     private void OnLanguageAdded(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
     {
         var speaker = EnsureComp<LanguageSpeakerComponent>(args.Holder);
         UpdateEntityLanguages((args.Holder, speaker));
     }
 
+    [SubscribeLocalEvent]
     private void OnLanguageRemoved(Entity<LanguageKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveLanguage == ent.Owner)
@@ -135,7 +129,8 @@ public abstract partial class SharedKnowledgeSystem
         ChangeLanguage(brain, null);
     }
 
-    public void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
+    [SubscribeLocalEvent]
+    private void OnLanguageAdd(Entity<LanguageSpeakerComponent> ent, ref AddLanguageEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
             return;
@@ -157,7 +152,8 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
+    [SubscribeLocalEvent]
+    private void OnLanguageRemove(Entity<LanguageSpeakerComponent> ent, ref RemoveLanguageEvent args)
     {
         var id = LanguageUnit(args.Language);
         if (GetContainer(ent.Owner) is not { } brain ||
@@ -181,12 +177,13 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
-    public void OnLanguageUpdate(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
+    [SubscribeLocalEvent]
+    private void OnLanguageUpdate(Entity<LanguageSpeakerComponent> ent, ref UpdateLanguageEvent args)
     {
         UpdateEntityLanguages(ent);
     }
 
-    public void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
+    private void OnSpeakerMapInit(Entity<LanguageSpeakerComponent> ent, ref MapInitEvent args)
     {
         if (GetContainer(ent.Owner) is not { } brain)
         {
@@ -227,6 +224,7 @@ public abstract partial class SharedKnowledgeSystem
         UpdateEntityLanguages(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnLanguageHeard(Entity<KnowledgeHolderComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
     {
         if (args.Source == ent.Owner)

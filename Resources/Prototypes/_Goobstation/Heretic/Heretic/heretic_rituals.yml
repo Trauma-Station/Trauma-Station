@@ -1816,8 +1816,8 @@
   name: Priest's Ritual
   components:
   - type: Sprite
-    sprite: _Goobstation/Heretic/items.rsi
-    state: eldritch_flask
+    sprite: _Goobstation/Heretic/Entities/eldritch_flask.rsi
+    state: icon
   - type: HereticRitual
     effects:
     - !type:LookupRitualEffect
@@ -2168,48 +2168,6 @@
         ClothingMaskMadHeretic: 1
 
 - type: entity
-  id: RitualUnfathomableCurio
-  name: Unfathomable Curio
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
-    state: icon
-  - type: HereticRitual
-    effects:
-    - !type:LookupRitualEffect
-      applyOn: Platform
-      result: Look
-    - !type:SplitIngredientsRitualEffect
-      applyOn: Split
-      conditions:
-      - !type:ProcessIngredientsCondition
-        applyOn: Look
-        deleteEntitiesKey: Delete
-        splitEntitiesKey: Split
-        ingredients:
-        - whitelist:
-            components:
-            - Lung
-          name: heretic-ritual-ingredient-lung
-        - whitelist:
-            tags:
-            - RodMetal
-          name: heretic-ritual-ingredient-metal-rod
-          amount: 3
-        - whitelist:
-            tags:
-            - UtilityBelt
-          name: heretic-ritual-ingredient-utility-belt
-    - !type:EffectsRitualEffect
-      applyOn: Delete
-      effects:
-      - !type:Delete
-    - !type:SpawnRitualEffect
-      applyOn: Platform
-      output:
-        UnfathomableCurio: 1
-
-- type: entity
   id: RitualEldritchCoin
   name: Eldritch Coin
   components:
@@ -2285,6 +2243,48 @@
         SpearIceHeretic: 1
 
 ## T2
+- type: entity
+  id: RitualUnfathomableCurio
+  name: Unfathomable Curio
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - Lung
+          name: heretic-ritual-ingredient-lung
+        - whitelist:
+            tags:
+            - RodMetal
+          name: heretic-ritual-ingredient-metal-rod
+          amount: 3
+        - whitelist:
+            tags:
+            - UtilityBelt
+          name: heretic-ritual-ingredient-utility-belt
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        UnfathomableCurio: 1
+
 - type: entity
   id: RitualRusted
   name: Rusted Ritual
@@ -2765,3 +2765,45 @@
       applyOn: Platform
       output:
         MobGhoulMirrorMaid: 1
+
+- type: entity
+  id: RitualSharpMedal
+  name: Sharp Medal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi
+    state: icon
+  - type: HereticRitual
+    effects:
+    - !type:LookupRitualEffect
+      applyOn: Platform
+      result: Look
+    - !type:SplitIngredientsRitualEffect
+      applyOn: Split
+      conditions:
+      - !type:ProcessIngredientsCondition
+        applyOn: Look
+        deleteEntitiesKey: Delete
+        splitEntitiesKey: Split
+        ingredients:
+        - whitelist:
+            components:
+            - HandOrgan
+          name: heretic-ritual-ingredient-hand
+          amount: 2
+        - whitelist:
+            components:
+            - Eyes
+          name: heretic-ritual-ingredient-eyes
+        - whitelist:
+            tags:
+            - Knife
+          name: heretic-ritual-ingredient-knife
+    - !type:EffectsRitualEffect
+      applyOn: Delete
+      effects:
+      - !type:Delete
+    - !type:SpawnRitualEffect
+      applyOn: Platform
+      output:
+        ClothingNeckSharpMedal: 1

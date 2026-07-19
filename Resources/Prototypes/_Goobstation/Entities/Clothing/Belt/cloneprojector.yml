@@ -37,7 +37,7 @@
       speechVerb: Robotic
       speechSounds: Borg
     - type: Silicon
-      entityType: enum.SiliconType.Player
+      entityType: Player
       batteryPowered: false
       chargeThresholdMid: null
       chargeThresholdLow: null

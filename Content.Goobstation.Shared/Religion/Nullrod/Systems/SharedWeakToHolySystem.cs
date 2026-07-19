@@ -4,10 +4,9 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Shared.Body;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Interaction;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Goobstation.Shared.Religion.Nullrod.Systems;
 
@@ -16,43 +15,32 @@ public abstract partial class SharedWeakToHolySystem : EntitySystem
     [Dependency] private GoobBibleSystem _goobBible = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShouldTakeHolyComponent, DamageUnholyEvent>(OnUnholyDamage);
-        SubscribeLocalEvent<ShouldTakeHolyComponent, InteractUsingEvent>(AfterBibleUse);
-
-        SubscribeLocalEvent<AlwaysTakeHolyComponent, MapInitEvent>(OnInit);
-        SubscribeLocalEvent<AlwaysTakeHolyComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<AlwaysTakeHolyComponent, UserShouldTakeHolyEvent>(OnUserStatus);
-        SubscribeLocalEvent<AlwaysTakeHolyComponent, BibleSmiteAttemptEvent>(OnSmiteAttempt);
-
-        SubscribeLocalEvent<BodyComponent, DamageModifyEvent>(OnHolyDamageModify);
-    }
-
+    [SubscribeLocalEvent]
     private void OnUnholyDamage(Entity<ShouldTakeHolyComponent> uid, ref DamageUnholyEvent args)
     {
         args.ShouldTakeHoly = true;
     }
 
-    private void AfterBibleUse(Entity<ShouldTakeHolyComponent> ent, ref InteractUsingEvent args)
+    [SubscribeLocalEvent]
+    private void OnMelee(Entity<BibleComponent> ent, ref MeleeHitEvent args)
     {
-        if (!HasComp<BibleComponent>(args.Used) ||
-            !TryComp(args.Used, out UseDelayComponent? useDelay)
-            || _useDelay.IsDelayed((args.Used, useDelay))
-            || !HasComp<BibleUserComponent>(args.User))
+        if (!args.IsHit || args.HitEntities.Count == 0 ||
+            !TryComp(ent, out UseDelayComponent? useDelay) ||
+            _useDelay.IsDelayed((ent, useDelay)) ||
+            !HasComp<BibleUserComponent>(args.User))
             return;
 
-        _goobBible.TryDoSmite(args.Used, args.User, args.Target, useDelay);
+        _goobBible.TryDoSmite(ent, args.User, args.HitEntities[0], useDelay);
     }
 
+    [SubscribeLocalEvent]
     private void OnSmiteAttempt(Entity<AlwaysTakeHolyComponent> ent, ref BibleSmiteAttemptEvent args)
     {
         if (ent.Comp.ShouldBibleSmite)
             args.ShouldSmite = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnUserStatus(Entity<AlwaysTakeHolyComponent> ent, ref UserShouldTakeHolyEvent args)
     {
         if (ent.Comp.LifeStage > ComponentLifeStage.Running)
@@ -62,6 +50,7 @@ public abstract partial class SharedWeakToHolySystem : EntitySystem
         args.ShouldTakeHoly = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<AlwaysTakeHolyComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
@@ -71,6 +60,7 @@ public abstract partial class SharedWeakToHolySystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<AlwaysTakeHolyComponent> ent, ref MapInitEvent args)
     {
         EnsureComp<WeakToHolyComponent>(ent);
@@ -78,6 +68,7 @@ public abstract partial class SharedWeakToHolySystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    [SubscribeLocalEvent]
     private void OnHolyDamageModify(Entity<BodyComponent> ent, ref DamageModifyEvent args)
     {
         var unholyEvent = new DamageUnholyEvent(args.Target, args.Origin);

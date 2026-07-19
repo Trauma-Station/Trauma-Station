@@ -30,9 +30,6 @@ public sealed partial class RecallableItemSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RecallItemEvent>(OnRecall);
-        SubscribeLocalEvent<RecallableItemComponent, GotEquippedHandEvent>(OnEquipped);
-
         _player.PlayerStatusChanged += StatusChanged;
     }
 
@@ -49,6 +46,7 @@ public sealed partial class RecallableItemSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipped(Entity<RecallableItemComponent> ent, ref GotEquippedHandEvent args)
     {
         if (args.User == ent.Comp.User || !ShouldAddAction(ent, args.User))
@@ -57,10 +55,25 @@ public sealed partial class RecallableItemSystem : EntitySystem
         if (ent.Comp.User is { } oldUser && _player.TryGetSessionByEntity(oldUser, out var oldSession))
             _pvsOverride.RemoveSessionOverride(ent, oldSession);
 
+        _player.TryGetSessionByEntity(args.User, out var session);
+
+        foreach (var act in _actions.GetActions(args.User))
+        {
+            if (Prototype(act)?.ID is not { } id || id != ent.Comp.ActionId)
+                continue;
+
+            _actions.RemoveAction(args.User, act.AsNullable());
+
+            if (act.Comp.Container is not { } container || session == null)
+                continue;
+
+            _pvsOverride.RemoveSessionOverride(container, session);
+        }
+
         _actions.AddAction(args.User, ref ent.Comp.Action, ent.Comp.ActionId, ent);
         ent.Comp.User = args.User;
 
-        if (_player.TryGetSessionByEntity(args.User, out var session))
+        if (session != null)
             _pvsOverride.AddSessionOverride(ent, session);
     }
 
@@ -74,6 +87,7 @@ public sealed partial class RecallableItemSystem : EntitySystem
                _whitelist.CheckBoth(mind, blacklist: comp.UserBlacklist, whitelist: comp.UserWhitelist);
     }
 
+    [SubscribeLocalEvent]
     private void OnRecall(RecallItemEvent args)
     {
         if (!Exists(args.Action.Comp.Container))

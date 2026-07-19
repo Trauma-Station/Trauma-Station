@@ -6,5 +6,5 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 public sealed partial class BlurryVisionImmunityComponent : Component
 {
     [DataField]
-    public string Key = "BlurryVision";
+    public EntProtoId Key = "StatusEffectBlurryVision";
 }

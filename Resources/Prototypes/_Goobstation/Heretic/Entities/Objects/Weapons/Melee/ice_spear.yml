@@ -44,10 +44,12 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: DamageOtherOnHit
+    ignoreResistances: true
+    increaseOnly: true
     damage:
       types:
-        Piercing: 25
-        Cold: 5
+        Piercing: 5
+        Cold: 25
   - type: Item
     size: Ginormous
   - type: Clothing

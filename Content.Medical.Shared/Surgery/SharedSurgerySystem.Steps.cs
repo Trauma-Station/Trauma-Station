@@ -317,7 +317,7 @@ public abstract partial class SharedSurgerySystem
         if (_wounds.AmputateWoundableSafely(parent, args.Part))
             _hands.TryPickupAnyHand(args.User, args.Part);
         else
-            _popup.PopupClient(Loc.GetString("surgery-popup-step-SurgeryStepRemovePart-failed"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("surgery-popup-step-SurgeryStepRemovePart-failed"), args.User, args.User);
     }
 
     private void OnRemovePartCheck(Entity<SurgeryRemovePartStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
@@ -384,7 +384,7 @@ public abstract partial class SharedSurgerySystem
         if (_part.RemoveOrgan(args.Part, organ))
             _hands.TryPickupAnyHand(args.User, organ);
         else
-            _popup.PopupClient(Loc.GetString("surgery-popup-step-SurgeryStepRemoveOrgan-failed"), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("surgery-popup-step-SurgeryStepRemoveOrgan-failed"), args.User, args.User);
     }
 
     private void OnRemoveOrganCheck(Entity<SurgeryRemoveOrganStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
@@ -715,7 +715,7 @@ public abstract partial class SharedSurgerySystem
         if (!Loc.TryGetString(locName, out var locResult, ("user", userName), ("target", targetName), ("part", part)))
             locResult = Loc.GetString($"surgery-popup-step-{stepId}", ("user", userName), ("target", targetName), ("part", part));
 
-        _popup.PopupPredicted(locResult, user, user);
+        _popup.PopupEntity(locResult, user, user);
         return true;
     }
 
@@ -842,7 +842,7 @@ public abstract partial class SharedSurgerySystem
             return true;
 
         if (doPopup && check.Popup != null)
-            _popup.PopupClient(check.Popup, user, user, PopupType.SmallCaution);
+            _popup.PopupEntity(check.Popup, user, user, PopupType.SmallCaution);
 
         return false;
     }
@@ -878,12 +878,4 @@ public abstract partial class SharedSurgerySystem
 
     private bool HasSurgeryComp(EntityUid tool, IComponent component) => GetSurgeryComp(tool, component) != null;
     #endregion
-
-    // TODO: Kill
-#pragma warning disable CS0108
-#pragma warning disable RA0045
-    protected bool TryComp(EntityUid uid, Type type, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out IComponent? comp)
-        => EntityManager.TryGetComponent(uid, type, out comp);
-#pragma warning restore RA0045
-#pragma warning restore CS0108
 }

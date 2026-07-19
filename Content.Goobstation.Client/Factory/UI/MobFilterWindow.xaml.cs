@@ -18,6 +18,7 @@ public sealed partial class MobFilterWindow : FancyWindow
         AliveButton.OnPressed += _ => OnToggle?.Invoke(MobState.Alive);
         DeadButton.OnPressed += _ => OnToggle?.Invoke(MobState.Dead);
         CriticalButton.OnPressed += _ => OnToggle?.Invoke(MobState.Critical);
+        SoftCritButton.OnPressed += _ => OnToggle?.Invoke(MobState.SoftCrit);
     }
 
     public void SelectValues(HashSet<MobState> states)
@@ -25,5 +26,6 @@ public sealed partial class MobFilterWindow : FancyWindow
         AliveButton.Pressed = states.Contains(MobState.Alive);
         DeadButton.Pressed = states.Contains(MobState.Dead);
         CriticalButton.Pressed = states.Contains(MobState.Critical);
+        SoftCritButton.Pressed = states.Contains(MobState.SoftCrit);
     }
 }

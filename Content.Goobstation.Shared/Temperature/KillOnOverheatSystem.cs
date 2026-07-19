@@ -28,7 +28,7 @@ public sealed partial class KillOnOverheatSystem : EntitySystem
                 continue;
 
             var msg = Loc.GetString(comp.OverheatPopup, ("name", Identity.Name(uid, EntityManager)));
-            _popup.PopupPredicted(msg, uid, uid, PopupType.LargeCaution);
+            _popup.PopupEntity(msg, uid, uid, PopupType.LargeCaution);
             _mob.ChangeMobState(uid, MobState.Dead, mob);
         }
     }

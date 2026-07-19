@@ -3,7 +3,18 @@
 # Night Vision Goggles
 
 - type: entity
-  parent: ClothingEyesBase
+  abstract: true
+  id: BaseNightVisionGoggles
+  components:
+  - type: NightVision
+    action: ActionToggleNightVision
+    #flashDurationMultiplier: 2
+    relayOverlay: true
+    lightingColor: "#98FB9833"
+    overlayColor: "#98FB98"
+
+- type: entity
+  parent: [ ClothingEyesBase, BaseNightVisionGoggles ]
   id: ClothingEyesNightVisionGoggles
   name: night vision goggles
   description: Now you can see in the dark!
@@ -12,10 +23,6 @@
     sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
   - type: Clothing
     sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
-  - type: NightVision
-    #flashDurationMultiplier: 2
-    relayOverlay: true
-    overlayColor: "#98FB9833"
   - type: IdentityBlocker
     coverage: EYES
 

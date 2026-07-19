@@ -103,7 +103,7 @@ public sealed partial class HauntSystem : EntitySystem
             return;
         }
 
-        _popup.PopupClient(Loc.GetString("wraith-haunt-show"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+        _popup.PopupEntity(Loc.GetString("wraith-haunt-show"), ent.Owner, ent.Owner, PopupType.MediumCaution);
         // flash people nearby
 
         _targets.Clear();

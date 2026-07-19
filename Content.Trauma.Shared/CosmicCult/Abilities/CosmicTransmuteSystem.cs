@@ -58,7 +58,7 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
 
         if (!TryTransmutePulled(ent) && !TryTransmuteHeld(ent)) // That's some slightly less wonky code layout here
         {
-            _popup.PopupClient(Loc.GetString(_message ?? "cosmicability-transmute-no-item"), ent, ent);
+            _popup.PopupEntity(Loc.GetString(_message ?? "cosmicability-transmute-no-item"), ent, ent);
             return;
         }
 
