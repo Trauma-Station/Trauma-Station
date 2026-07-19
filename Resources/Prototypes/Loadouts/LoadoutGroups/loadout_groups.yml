@@ -1,18 +1,40 @@
 # Miscellaneous
 - type: loadoutGroup
+  id: Glasses
+  name: loadout-group-glasses
+  minLimit: 0
+  loadouts:
+  # <Trauma>
+  - Eyepatch # Kept you waiting, huh?
+  - EyepatchFlipped # KIRYU-CHAN! also todo: fix this so it actually covers your fucking eye
+  - CheapSunglasses
+  # </Trauma>
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+
+- type: loadoutGroup
   id: Trinkets
   name: loadout-group-trinkets
   minLimit: 0
   maxLimit: 3
   loadouts:
+  # <Trauma>
+  - PersonalAI
+  - GoldenPersonalAI
+  - CrewCassette
+  - FoodSnackLollypopWrapped
+  - FoodSnackLollypopWrappedRainbow
+  - FoodSnackLollypopWrappedCarp
+  - GoldRing
+  - SilverRing
+  - TapeRecorder
+  # </Trauma>
   - FlowerWreath
   - Hairflower
   - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
-  - PersonalAI # Goobstation
-  - GoldenPersonalAI # Goobstation
-  - CrewCassette # Goobstation
   - ThreeCandles
   - Lighter
   - CigPackGreen
@@ -42,17 +64,6 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
-  # <Goob>
-  - FoodSnackLollypopWrapped
-  - FoodSnackLollypopWrappedRainbow
-  - FoodSnackLollypopWrappedCarp
-  # </Goob>
-  - OffsetCane
-  - OffsetCaneWood
-  - OffsetCaneClown
-  - OffsetCaneMime
-  - OffsetCaneNT
-  - Cane
   - TowelColorWhite
   # <Trauma>
   # upstream gutted towels lol
@@ -71,26 +82,20 @@
   - TowelColorMime
   - TowelColorSilver
   - TowelColorGold
-  - GoldRing
-  - SilverRing
-  - Cane
-  - WhiteCane
-  - TapeRecorder
   # </Trauma>
 
 - type: loadoutGroup
-  id: Glasses
-  name: loadout-group-glasses
+  id: AssistiveItems
+  name: loadout-group-assistive-items
   minLimit: 0
+  maxLimit: 1 # Increase this limit in the future once there's more assistive items than just canes!
   loadouts:
-  - Glasses
-  - GlassesJamjar
-  - GlassesJensen
-  - CheapSunglasses # Goobstation
-  # <Trauma>
-  - Eyepatch # Kept you waiting, huh?
-  - EyepatchFlipped # KIRYU-CHAN! also todo: fix this so it actually covers your fucking eye
-  # </Trauma>
+  - OffsetCane
+  - OffsetCaneWood
+  - OffsetCaneClown
+  - OffsetCaneMime
+  - OffsetCaneNT
+  - Cane
 
 - type: loadoutGroup
   id: GroupTankHarness
