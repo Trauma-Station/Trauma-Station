@@ -150,7 +150,7 @@
   color: "#a1000b"
   boilingPoint: 78.2 # This isn't a real chemical...
   meltingPoint: -19.4
-  # <Trauma> 
+  # <Trauma>
   tileReactions:
     - !type:SpillTileReaction
   # <Trauma>
@@ -221,7 +221,7 @@
   color: "#00ff5f" # Trauma
   boilingPoint: 165
   meltingPoint: -87
-  # <Trauma> 
+  # <Trauma>
   tileReactions:
     - !type:SpillTileReaction
   # <Trauma>
@@ -267,7 +267,7 @@
   recognizable: true
   boilingPoint: 337.0
   meltingPoint: 10.31
-  # <Trauma> 
+  # <Trauma>
   tileReactions:
     - !type:SpillTileReaction
   # <Trauma>

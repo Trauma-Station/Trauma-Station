@@ -180,7 +180,7 @@
   physicalDesc: reagent-physical-desc-reflective
   flavor: sharp
   color: "#e3fffb"
-  # <Trauma> 
+  # <Trauma>
   tileReactions:
     - !type:SpillTileReaction
   # <Trauma>
