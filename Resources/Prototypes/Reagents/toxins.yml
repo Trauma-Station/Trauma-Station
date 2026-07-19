@@ -169,7 +169,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 1.5 # Trauma - Was 0.5
+            Caustic: 1 # Trauma - Was 0.5
       - !type:Emote
         emote: Scream
         probability: 0.3
@@ -233,7 +233,7 @@
         ignoreResistances: false
         damage:
           types:
-            Caustic: 0.9 # Trauma - Was 0.3
+            Caustic: 0.75 # Trauma - Was 0.3
       - !type:Emote
         emote: Scream
         probability: 0.2
