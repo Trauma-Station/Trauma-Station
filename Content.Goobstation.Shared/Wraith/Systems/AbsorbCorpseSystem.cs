@@ -57,14 +57,14 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
 
         if (!_mobState.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-absorb-living"), user, user);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-living"), user, user);
             return;
         }
 
         // user already absorbed, stop there
         if (absorbable.Absorbed)
         {
-            _popup.PopupClient(Loc.GetString("wraith-absorb-already"), ent.Owner, ent.Owner);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-already"), ent.Owner, ent.Owner);
             return;
         }
 
@@ -107,7 +107,7 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
 
         if (_rotting.IsRotten(target))
         {
-            _popup.PopupClient(Loc.GetString("wraith-absorb-too-decomposed"), user, user);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-too-decomposed"), user, user);
             return;
         }
 
@@ -127,7 +127,7 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
         // apply rot
         // EnsureComp<RottingComponent>(target); // TODO Removed until someone figures out how to make it partially rot instead of instant full rot
 
-        _popup.PopupPredicted(Loc.GetString("wraith-absorb-smoke1"), target, target);
+        _popup.PopupEntity(Loc.GetString("wraith-absorb-smoke1"), target, target);
         ent.Comp.CorpsesAbsorbed++;
         Dirty(ent);
 
@@ -156,12 +156,12 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
             _wraithPoints.AdjustWraithPoints(150, ent.Owner);
             _wraithPoints.AdjustWpGenerationRate(0.2, ent.Owner);
 
-            _popup.PopupClient(Loc.GetString("wraith-absorb-rotbonus"), ent.Owner, ent.Owner, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-rotbonus"), ent.Owner, ent.Owner, PopupType.Medium);
 
         }
         else if (toxinDamage < 30 && perish.Stage <= 2)
         {
-            _popup.PopupClient(Loc.GetString("wraith-absorb-fresh"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-fresh"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             args.Cancelled = true;
         }
 
@@ -185,7 +185,7 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
             _solution.RemoveReagent(blood.BloodSolution.Value, reagentId, ent.Comp.ChemToRemove);
 
             _damageable.TryChangeDamage(ent.Owner, ent.Comp.Damage, ignoreResistances: true);
-            _popup.PopupClient(Loc.GetString("wraith-absorb-tainted"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("wraith-absorb-tainted"), ent.Owner, ent.Owner, PopupType.MediumCaution);
             return true;
         }
 

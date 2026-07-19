@@ -26,29 +26,7 @@ public abstract partial class SharedKnowledgeSystem
     [Dependency] private MovementSpeedModifierSystem _speed = default!;
     [Dependency] private EntityQuery<MartialArtsKnowledgeComponent> _artQuery = default!;
 
-    private void InitializeMartialArts()
-    {
-        SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeAddedEvent>(OnMartialArtAdded);
-        SubscribeLocalEvent<MartialArtsKnowledgeComponent, KnowledgeRemovedEvent>(OnMartialArtRemoved);
-
-        SubscribeLocalEvent<ComboActionsComponent, KnowledgeEnabledEvent>(OnComboActionsEnabled);
-        SubscribeLocalEvent<ComboActionsComponent, KnowledgeDisabledEvent>(OnComboActionsDisabled);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, ShotAttemptedEvent>(RelayMartialArt);
-        SubscribeLocalEvent<NoGunComponent, ShotAttemptedEvent>(OnNoGunShotAttempted);
-        SubscribeLocalEvent<KnowledgeHolderComponent, BeforeInteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ComboAttackPerformedEvent>(RelayMartialArt);
-        SubscribeLocalEvent<KnowledgeHolderComponent, MeleeHitEvent>(RelayActiveEvent);
-        SubscribeLocalEvent<KnowledgeHolderComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<KnowledgeHolderComponent, CheckGrabOverridesEvent>(RelayMartialArt);
-        SubscribeLocalEvent<KnowledgeHolderComponent, RefreshMovementSpeedModifiersEvent>(RelayMartialArt);
-        SubscribeLocalEvent<KnowledgeHolderComponent, GetMeleeAttackRateEvent>(RelayActiveEvent);
-        SubscribeLocalEvent<KnowledgeHolderComponent, ProjectileReflectAttemptEvent>(RelayMartialArt);
-        SubscribeLocalEvent<MetaDataComponent, PerformMartialArtComboEvent>(OnComboActionClicked);
-
-        SubscribeAllEvent<KnowledgeUpdateMartialArtsEvent>(OnUpdateMartialArts);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMartialArtAdded(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeAddedEvent args)
     {
         // if you learn a martial art without one active, automatically select it
@@ -58,12 +36,14 @@ public abstract partial class SharedKnowledgeSystem
         ChangeMartialArts(args.Container, args.Holder, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnMartialArtRemoved(Entity<MartialArtsKnowledgeComponent> ent, ref KnowledgeRemovedEvent args)
     {
         if (args.Container.Comp.ActiveMartialArt == ent.Owner)
             ChangeMartialArts(args.Container, args.Holder, null); // disables the skill internally
     }
 
+    [SubscribeLocalEvent]
     private void OnComboActionsEnabled(Entity<ComboActionsComponent> ent, ref KnowledgeEnabledEvent args)
     {
         var user = args.Holder;
@@ -75,6 +55,7 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnComboActionsDisabled(Entity<ComboActionsComponent> ent, ref KnowledgeDisabledEvent args)
     {
         var user = args.Holder;
@@ -86,12 +67,14 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnNoGunShotAttempted(Entity<NoGunComponent> ent, ref ShotAttemptedEvent args)
     {
-        _popup.PopupClient(Loc.GetString("gun-disabled"), args.User, args.User);
+        _popup.PopupEntity(Loc.GetString("gun-disabled"), args.User, args.User);
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnInteract(Entity<KnowledgeHolderComponent> ent, ref BeforeInteractHandEvent args)
     {
         if (ent.Owner == args.Target || !HasComp<MobStateComponent>(args.Target))
@@ -105,20 +88,22 @@ public abstract partial class SharedKnowledgeSystem
         RaiseLocalEvent(skill, ref ev);
     }
 
-    private void OnDamageChanged(Entity<KnowledgeHolderComponent> ent, ref DamageChangedEvent args)
+    [SubscribeLocalEvent]
+    private void OnDamageDealt(Entity<KnowledgeHolderComponent> ent, ref DamageDealtEvent args)
     {
         // ignore healing
-        if (args.DamageDelta is not { } delta || !args.DamageIncreased ||
+        if (!args.Damage.AnyPositive() ||
             // ignore things like radiation
             args.Origin == null || !args.InterruptsDoAfters ||
             // pvs can remove the brain sometimes so dont get trolled
             _timing.ApplyingState || !_timing.IsFirstTimePredicted)
             return;
 
-        var ev = new TookDamageEvent(ent, delta.GetTotal().Int());
+        var ev = new TookDamageEvent(ent, args.Damage.GetTotal().Int());
         RelayActiveEvent(ent, ref ev);
     }
 
+    [SubscribeLocalEvent, SubscribeNetworkEvent]
     private void OnUpdateMartialArts(KnowledgeUpdateMartialArtsEvent ev, EntitySessionEventArgs args)
     {
         if (args.SenderSession.AttachedEntity is not { } player ||
@@ -155,11 +140,11 @@ public abstract partial class SharedKnowledgeSystem
                 $"Tried to use {ToPrettyString(knowledgeUid)} as martial art for {ToPrettyString(user)}!");
             var ev = new KnowledgeEnabledEvent(ent, user);
             RaiseLocalEvent(unit, ref ev);
-            _popup.PopupClient(Loc.GetString("knowledge-martial-art-selected", ("name", Name(unit))), user, user);
+            _popup.PopupEntity(Loc.GetString("knowledge-martial-art-selected", ("name", Name(unit))), user, user);
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("knowledge-martial-art-deselected"), user, user);
+            _popup.PopupEntity(Loc.GetString("knowledge-martial-art-deselected"), user, user);
         }
         _speed.RefreshMovementSpeedModifiers(user);
     }
@@ -167,6 +152,7 @@ public abstract partial class SharedKnowledgeSystem
     public EntityUid? GetActiveMartialArt(EntityUid target)
         => GetContainer(target)?.Comp.ActiveMartialArt;
 
+    [SubscribeLocalEvent]
     private void OnComboActionClicked(Entity<MetaDataComponent> ent, ref PerformMartialArtComboEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
@@ -188,7 +174,7 @@ public abstract partial class SharedKnowledgeSystem
         Dirty(martialArt, comboActions);
 
         // Provide feedback
-        _popup.PopupClient($"You prepare to do a {Name(ent, ent.Comp).ToLower()}...", uid, uid);
+        _popup.PopupEntity($"You prepare to do a {Name(ent, ent.Comp).ToLower()}...", uid, uid);
 
         args.Handled = true; // This starts the cooldown in the UI
     }

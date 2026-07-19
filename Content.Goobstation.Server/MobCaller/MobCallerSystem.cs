@@ -10,7 +10,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System;
 using System.Linq;
 
 namespace Content.Goobstation.Server.MobCaller;
@@ -22,16 +21,11 @@ public sealed partial class MobCallerSystem : EntitySystem
     [Dependency] private PowerReceiverSystem _power = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MobCallerComponent, ExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<MobCallerComponent> ent, ref ExaminedEvent args)
     {
         var occluded = false;
@@ -94,7 +88,7 @@ public sealed partial class MobCallerSystem : EntitySystem
             // we chose a direction so pick a spawn position
             var chosenDir = _random.Pick(candidates);
             var spawnOffset = chosenDir.ToVec() * _random.NextFloat(caller.MinDistance, caller.MaxDistance);
-            var spawnPos = new MapCoordinates(xform.WorldPosition + spawnOffset, xform.MapID);
+            var spawnPos = _transform.GetMapCoordinates(xform).Offset(spawnOffset);
 
             // if we would somehow spawn it on a grid, don't
             if (_map.TryFindGridAt(spawnPos, out _, out _))
@@ -113,6 +107,7 @@ public sealed partial class MobCallerSystem : EntitySystem
     public List<Angle> GetSpawnDirections(Entity<MobCallerComponent, TransformComponent> ent)
     {
         var candidates = new List<Angle>();
+        var center = _transform.GetMapCoordinates(ent.Comp2);
         for (var i = 0; i < ent.Comp1.SpawnDirections; i++)
         {
             var dir = Angle.FromDegrees(360f * (float)i / ent.Comp1.SpawnDirections);
@@ -126,18 +121,18 @@ public sealed partial class MobCallerSystem : EntitySystem
                 // raycast to ensure there's continuously space from OcclusionDistance to GridOcclusionDistance
                 var gridStepVec = stepVec * ent.Comp1.GridOcclusionFidelity;
                 var steps = (int)MathF.Ceiling((ent.Comp1.GridOcclusionDistance - ent.Comp1.OcclusionDistance) / ent.Comp1.GridOcclusionFidelity);
-                var checkPos = ent.Comp2.WorldPosition + stepVec * ent.Comp1.OcclusionDistance;
+                var checkPos = center.Offset(stepVec * ent.Comp1.OcclusionDistance);
                 for (var j = 0; j < steps; j++)
                 {
                     // space isn't continuous, discard direction
-                    if (_map.TryFindGridAt(new MapCoordinates(checkPos, ent.Comp2.MapID), out _, out _))
+                    if (_map.TryFindGridAt(center, out _, out _))
                         return false;
 
-                    checkPos += gridStepVec;
+                    checkPos = checkPos.Offset(gridStepVec);
                 }
 
                 // now also check that there's no obstructions in that direction before the continuous space
-                var ray = new CollisionRay(ent.Comp2.WorldPosition, stepVec, (int)ent.Comp1.OcclusionMask);
+                var ray = new CollisionRay(center.Position, stepVec, (int)ent.Comp1.OcclusionMask);
                 var rayCastResults = _physics.IntersectRay(ent.Comp2.MapID, ray, ent.Comp1.OcclusionDistance, ent);
 
                 return !rayCastResults.Any();

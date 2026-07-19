@@ -47,17 +47,17 @@ public abstract partial class SharedActionLairSystem : EntitySystem
 
         if (!_lairQuery.TryComp(target, out var lair))
         {
-            _popup.PopupClient("This only works on coffins!", user, user, PopupType.Medium);
+            _popup.PopupEntity("This only works on coffins!", user, user, PopupType.Medium);
             return;
         }
 
         if (lair.Vampire is not null)
         {
-            _popup.PopupClient("This coffin serves another and refuses to bend to your will!", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("This coffin serves another and refuses to bend to your will!", user, user, PopupType.MediumCaution);
             return;
         }
 
-        _popup.PopupClient("You begin making the coffin!", user, user, PopupType.Medium);
+        _popup.PopupEntity("You begin making the coffin!", user, user, PopupType.Medium);
         _leecher.CreateBeam(user, target, BeamProto);
 
         _audio.PlayPredicted(ent.Comp.BeforeCreationSound, target, user);

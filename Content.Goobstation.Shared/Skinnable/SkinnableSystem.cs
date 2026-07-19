@@ -85,7 +85,7 @@ public sealed partial class SkinnableSystem : EntitySystem
 
         _audio.PlayPvs(target.Comp.SkinSound, target);
         var popup = Loc.GetString("skinning-start", ("target", target), ("performer", performer));
-        _popups.PopupPredicted(popup, target, performer, PopupType.LargeCaution);
+        _popups.PopupEntity(popup, target, performer, PopupType.LargeCaution);
     }
 
     private void OnSkinningDoAfter(Entity<SkinnableComponent> target, ref SkinningDoAfterEvent args)

@@ -265,7 +265,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         if (attemptEv.Cancelled)
         {
             if (attemptEv.Message is {} msg)
-                _popup.PopupClient(msg, weapon, attacker);
+                _popup.PopupEntity(msg, weapon, attacker);
             return false;
         }
 

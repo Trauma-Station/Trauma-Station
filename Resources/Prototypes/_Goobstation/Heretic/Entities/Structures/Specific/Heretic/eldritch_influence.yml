@@ -122,8 +122,3 @@
     spent: true
   - type: TileEntityEffect
     effects: []
-  - type: FishingSpot
-    fishList: !type:NestedSelector
-      tableId: RealityFractureFishingLootTable
-    fishDefaultTimer: 25.0
-    fishTimerVariety: 5.0

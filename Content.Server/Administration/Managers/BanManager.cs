@@ -51,6 +51,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
     public void Initialize()
     {
+        InitializeTrauma(); // Trauma
         _netManager.RegisterNetMessage<MsgRoleBans>();
 
         _db.SubscribeToJsonNotification<BanNotificationData>(
@@ -125,6 +126,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Server, null);
 
         await _db.AddBanAsync(banDef);
+        SendBanWebhook(banDef); // Trauma
 
         if (_cfg.GetCVar(CCVars.ServerBanResetLastReadRules))
         {
@@ -347,6 +349,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     private async Task AddRoleBan(BanDef banDef)
     {
         banDef = await _db.AddBanAsync(banDef);
+        SendBanWebhook(banDef); // Trauma
 
         foreach (var user in banDef.UserIds)
         {

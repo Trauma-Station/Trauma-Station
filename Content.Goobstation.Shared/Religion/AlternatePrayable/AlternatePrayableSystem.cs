@@ -56,7 +56,7 @@ public sealed partial class AlternatePrayableSystem : EntitySystem
         if (_timing.CurTime > comp.NextPopup)
         {
             var popup = Loc.GetString("alternate-pray-start", ("user", Name(user)), ("item", Name(nullRod)));
-            _popupSystem.PopupPredicted(popup, user, user);
+            _popupSystem.PopupEntity(popup, user, user);
 
             comp.NextPopup = _timing.CurTime + comp.PopupDelay;
         }

@@ -24,7 +24,7 @@ public sealed partial class UnableToShootStatusEffectSystem : EntitySystem
     private void OnAttemptShoot(Entity<UnableToShootStatusEffectComponent> ent, ref StatusEffectRelayedEvent<ShotAttemptedEvent> args)
     {
         var user = args.Args.User;
-        _popup.PopupClient("Your fingers slip!", user, user);
+        _popup.PopupEntity("Your fingers slip!", user, user);
 
         var ev = args.Args;
         ev.Cancel();

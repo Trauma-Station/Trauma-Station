@@ -92,6 +92,9 @@
     - TauCetiBasic
     understands:
     - TauCetiBasic
+  - type: Stamina
+    baseCritThreshold: 300
+    animationThreshold: 150
 
 - type: entity
   id: BaseMobHereticGhoul

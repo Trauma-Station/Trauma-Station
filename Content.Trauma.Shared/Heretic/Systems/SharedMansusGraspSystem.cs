@@ -192,7 +192,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (!Status.HasStatusEffect(args.User, GraspAffectedStatus))
             return;
 
-        _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
+        _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), args.User, args.User);
     }
 
     private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
@@ -200,7 +200,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         if (args.User is { } user && Status.HasStatusEffect(user, GraspAffectedStatus))
         {
             args.Cancelled = true;
-            _popup.PopupClient(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
+            _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), user, user);
         }
         else if (Status.HasStatusEffect(Transform(ent).ParentUid, GraspAffectedStatus))
         {

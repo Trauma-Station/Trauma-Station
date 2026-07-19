@@ -1,6 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-//using Content.Shared.Damage.Components; - <Trauma>
+//using Content.Shared.Damage.Components; // Trauma
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;

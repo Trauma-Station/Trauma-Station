@@ -101,7 +101,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
         if (contract.Comp.IsVictimSigned && user != contract.Comp.ContractOwner)
         {
             var invalidUserPopup = Loc.GetString("devil-sign-invalid-user");
-            _popup.PopupClient(invalidUserPopup, contract, user);
+            _popup.PopupEntity(invalidUserPopup, contract, user);
 
             args.Cancelled = true;
             return;
@@ -113,7 +113,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
 
         if (!IsUserValid(user, out var failReason))
         {
-            _popup.PopupClient(failReason, contract, user, PopupType.MediumCaution);
+            _popup.PopupEntity(failReason, contract, user, PopupType.MediumCaution);
 
             args.Cancelled = true;
             return;
@@ -125,7 +125,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
             var difference = Math.Abs(contract.Comp.ContractWeight);
 
             var unevenOddsPopup = Loc.GetString("contract-uneven-odds", ("number", difference));
-            _popup.PopupClient(unevenOddsPopup, contract, user, PopupType.MediumCaution);
+            _popup.PopupEntity(unevenOddsPopup, contract, user, PopupType.MediumCaution);
 
             args.Cancelled = true;
             return;
@@ -135,7 +135,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
         if (user == contract.Comp.ContractOwner)
         {
             var tooEarlyPopup = Loc.GetString("devil-contract-early-sign-failed");
-            _popup.PopupClient(tooEarlyPopup, contract, user, PopupType.MediumCaution);
+            _popup.PopupEntity(tooEarlyPopup, contract, user, PopupType.MediumCaution);
 
             args.Cancelled = true;
         }
@@ -190,7 +190,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
 
         if (contract.Comp.IsContractFullySigned)
         {
-            _popup.PopupClient(Loc.GetString("burn-contract-popup-fail"), contract, devil, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("burn-contract-popup-fail"), contract, devil, PopupType.MediumCaution);
             return;
         }
 
@@ -210,13 +210,13 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
             Dirty(contract, paper);
         }
 
-        _popup.PopupClient(Loc.GetString("contract-victim-signed"), contract, signer);
+        _popup.PopupEntity(Loc.GetString("contract-victim-signed"), contract, signer);
     }
 
     private void HandleDevilSign(Entity<DevilContractComponent> contract, EntityUid signer)
     {
         contract.Comp.IsDevilSigned = true;
-        _popup.PopupClient(Loc.GetString("contract-devil-signed"), contract, signer);
+        _popup.PopupEntity(Loc.GetString("contract-devil-signed"), contract, signer);
         AdvanceObjective(signer, contract.Comp.ContractWeight);
     }
 

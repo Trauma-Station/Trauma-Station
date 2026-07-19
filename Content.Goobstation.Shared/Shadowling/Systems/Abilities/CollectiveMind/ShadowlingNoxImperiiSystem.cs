@@ -80,7 +80,7 @@ public sealed partial class ShadowlingNoxImperiiSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayGlobal(new SoundPathSpecifier("/Audio/_EinsteinEngines/Effects/ghost.ogg"), Filter.Broadcast(), false, AudioParams.Default.WithVolume(-4f));
 
-        _popups.PopupPredicted(Loc.GetString("shadowling-nox-imperii-done"), uid, uid, PopupType.Medium);
+        _popups.PopupEntity(Loc.GetString("shadowling-nox-imperii-done"), uid, uid, PopupType.Medium);
 
         args.Handled = true;
     }

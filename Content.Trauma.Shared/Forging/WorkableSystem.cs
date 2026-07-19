@@ -40,7 +40,7 @@ public sealed partial class WorkableSystem : EntitySystem
 
         if (!_metal.IsWorkable(ent.Owner))
         {
-            _popup.PopupClient(Loc.GetString("workable-metal-popup-too-cold"), user, user);
+            _popup.PopupEntity(Loc.GetString("workable-metal-popup-too-cold"), user, user);
             return;
         }
 

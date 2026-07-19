@@ -61,20 +61,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         base.Initialize();
 
         InitializeLanguage();
-        InitializeMartialArts();
         InitializeOnWear();
-
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentStartup>(OnContainerStartup);
-        SubscribeLocalEvent<KnowledgeContainerComponent, ComponentShutdown>(OnContainerShutdown);
-        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotInsertedEvent>(OnOrganInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, OrganGotRemovedEvent>(OnOrganRemoved);
-        SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainInsertedEvent>(OnBorgBrainInserted);
-        SubscribeLocalEvent<KnowledgeContainerComponent, BorgBrainRemovedEvent>(OnBorgBrainRemoved);
-        SubscribeLocalEvent<KnowledgeContainerComponent, TransferredToCloneEvent>(OnCloneTransfer);
-
-        SubscribeLocalEvent<KnowledgeHolderComponent, PolymorphedEvent>(OnPolymorphed);
-        SubscribeLocalEvent<KnowledgeHolderComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         Subs.CVar(_cfg, TraumaCVars.SkillGain, x => _skillGain = x, true);
 
@@ -116,11 +103,13 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerStartup(Entity<KnowledgeContainerComponent> ent, ref ComponentStartup args)
     {
         EnsureContainer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnContainerShutdown(Entity<KnowledgeContainerComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Container is { } container)
@@ -167,37 +156,44 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         DirtyField(ent, ent.Comp, nameof(KnowledgeContainerComponent.Holder));
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganInserted(Entity<KnowledgeContainerComponent> ent, ref OrganGotInsertedEvent args)
     {
         LinkContainer(args.Target, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganRemoved(Entity<KnowledgeContainerComponent> ent, ref OrganGotRemovedEvent args)
     {
         UnlinkContainer(args.Target, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBorgBrainInserted(Entity<KnowledgeContainerComponent> ent, ref BorgBrainInsertedEvent args)
     {
         LinkContainer(args.Chassis, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnBorgBrainRemoved(Entity<KnowledgeContainerComponent> ent, ref BorgBrainRemovedEvent args)
     {
         UnlinkContainer(args.Chassis, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnCloneTransfer(Entity<KnowledgeContainerComponent> ent, ref TransferredToCloneEvent args)
     {
         TransferKnowledge(ent, args.Cloned);
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<KnowledgeHolderComponent> ent, ref PolymorphedEvent args)
     {
         if (ent.Owner == args.OldEntity)
             TransferKnowledge(ent, args.NewEntity);
     }
 
+    [SubscribeLocalEvent]
     private void OnMindAdded(Entity<KnowledgeHolderComponent> ent, ref MindAddedMessage args)
     {
         // all player-controlled mobs can use knowledge
@@ -205,6 +201,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         EnsureKnowledgeContainer(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
