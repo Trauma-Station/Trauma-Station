@@ -1,2 +1,81 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entity
+  parent: [ BaseWeaponSubMachineGun, BaseMajorContraband ]
+  id: MakeshiftSMGCustom
+  name: Custom SMG
+  description: A high-firerate innaccurate machine gun made from an atmospheric pipe and hammered steel sheets, for when you need to pepper anything in a general direction. It feeds from 7.62x25 box magazines.
+  components:
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/custom-smg.rsi
+  - type: Gun
+    minAngle: 45
+    maxAngle: 90
+    fireRate: 13
+    burstFireRate: 13
+    angleIncrease: 4
+    angleDecay: 16
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_Trauma/Weapons/Guns/Gunshots/custom_smg.ogg
+    defaultDirection: 1, 0
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -25
+    maxAngle: -20
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+       name: Magazine
+       startingItem: null
+       insertSound: /Audio/Weapons/Guns/MagIn/sfrifle_magin.ogg
+       ejectSound: /Audio/Weapons/Guns/MagOut/sfrifle_magout.ogg
+       priority: 2
+       whitelist:
+        tags:
+        - MagazineCustom725SMG
+       whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+       name: Chamber
+       priority: 1
+       whitelist:
+        tags:
+        - Cartridge725Makeshift
+       proto: null
+
+- type: entity
+  parent: MakeshiftSMGCustom
+  id: MakeshiftPatentedSMG
+  name: Patented SMG
+  description: A makeshift submachine gun based off of an iconic old terra design, it was known for its incredibly high firerate, unfortunately this model lacks the craftsmanship to share the same qualities. It feeds from 7.62x25 curved magazines.
+  components:
+  - type: Sprite
+    sprite: Textures/_Trauma/Objects/Weapons/Guns/Makeshift/patented-smg.rsi
+  - type: Gun
+    minAngle: 30
+    maxAngle: 60
+    fireRate: 3
+    burstFireRate: 3
+    angleIncrease: 3
+    angleDecay: 16
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+     path: /Audio/_Trauma/Weapons/Guns/Gunshots/patented_smg.ogg
+    defaultDirection: 1, 0
+  - type: GunWieldBonus
+    minAngle: -24
+    maxAngle: -20
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+       whitelist:
+        tags:
+        - MagazinePatented725SMG

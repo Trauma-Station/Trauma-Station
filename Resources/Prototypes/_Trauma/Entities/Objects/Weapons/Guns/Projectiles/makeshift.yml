@@ -1,12 +1,33 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: Bullet22MagnumMakeshift
   parent: BaseBullet
+  id: Bullet22MagnumMakeshift
   name: makeshift bullet (.22 Magnum)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Ballistic: 7
+        Ballistic: 9
+
+- type: entity
+  parent: PelletShotgunImprovised
+  id: PelletShotgunMakeshift20gSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunImprovised
+    count: 8
+    spread: 45
+
+- type: entity
+  parent: BaseBullet
+  id: Bullet725Makeshift
+  name: makeshift bullet (7.62x25mm Tokarev)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 4

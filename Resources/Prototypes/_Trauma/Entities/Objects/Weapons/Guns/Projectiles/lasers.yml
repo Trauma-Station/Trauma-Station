@@ -55,6 +55,16 @@
       types:
         Heat: 12 # This is a super shitty ranged weapon it should not be good DPS wise.
 
+- type: entity
+  id: BulletMakeshiftLaser
+  parent: LaserSidearmBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 9
+
 # Longarms
 
 - type: entity
@@ -423,3 +433,14 @@
     layers:
     - state: heavylaser
       shader: unshaded
+
+# Nonlethal
+
+- type: entity
+  name : disabler bolt
+  id: BulletMakeshiftDisabler
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StaminaDamageOnCollide
+    damage: 16
