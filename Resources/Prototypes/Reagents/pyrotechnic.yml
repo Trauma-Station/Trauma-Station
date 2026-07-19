@@ -176,10 +176,10 @@
   meltingPoint: -80.7
   friction: 0.4
   tileReactions:
-  - !type:FlammableTileReaction {}
   # <Trauma>
   - !type:SpillTileReaction
   # <Trauma>
+  - !type:FlammableTileReaction {}
   metabolisms:
     Bloodstream:
       effects:
