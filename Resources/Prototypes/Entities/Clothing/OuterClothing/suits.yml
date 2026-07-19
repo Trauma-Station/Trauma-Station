@@ -353,8 +353,8 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
-  - type: AddAccentClothing
-    accent: BarkAccent
+  - type: BarkAccent
+    relayAccent: true
 
 - type: entity
   parent: [ ClothingOuterBase, ClothingOuterBaseToggleable ]
