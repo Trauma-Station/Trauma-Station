@@ -1217,3 +1217,9 @@ BorgBeaker: Beaker
 CableHVStackLingering10: CableHVStack10
 CableMVStackLingering10: CableMVStack10
 CableApcStackLingering10: CableApcStack10
+
+# 2026-07-19
+BoxHugNitrogen: BoxSurvivalHugNitrogen
+BoxMime: BoxSurvival
+BoxMimeNitrogen: BoxSurvivalNitrogen
+BoxMimeMoth: BoxSurvival
