@@ -11709,3 +11709,31 @@ Entries:
   id: 1293
   time: '2026-07-18T08:44:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3603
+- author: Aviu
+  changes:
+  - type: Add
+    message: Automation no longer needs to be researched.
+  id: 1294
+  time: '2026-07-19T15:42:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3615
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed martial arts not working.
+  id: 1295
+  time: '2026-07-19T17:56:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3621
+- author: bobbble
+  changes:
+  - type: Tweak
+    message: Minor decapoid displacement changes.
+  id: 1296
+  time: '2026-07-19T18:31:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3570
+- author: Graves
+  changes:
+  - type: Tweak
+    message: Resprited some of wraith's summons!
+  id: 1297
+  time: '2026-07-19T20:21:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3624
