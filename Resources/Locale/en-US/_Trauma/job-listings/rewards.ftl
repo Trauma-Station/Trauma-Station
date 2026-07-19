@@ -1,6 +1,5 @@
 # minor
 job-listings-ui-reward-name-Telecrystal7 = 7 telecrystals
-job-listings-ui-reward-name-SupermatterGrenade = supermatter grenade
 job-listings-ui-reward-name-LubeGrenade = lube grenade
 job-listings-ui-reward-name-FoodBoxPizzaBomb = pizza bomb
 job-listings-ui-reward-name-DeathRattleImplanter = death rattle implant
@@ -43,7 +42,6 @@ job-listings-ui-reward-name-ClothingHandsGlovesBoxingRiggedYellow = rigged boxin
 job-listings-ui-reward-name-ClothingHandsGlovesBoxingRiggedBlue = rigged boxing gloves
 job-listings-ui-reward-name-ExperimentalSyndicateTeleporter = experimental syndicate teleporter
 job-listings-ui-reward-name-SupermatterGrenade = supermatter grenade
-job-listings-ui-reward-name-SyndicateBombFake = fake syndicate bomb
 job-listings-ui-reward-name-AccessBreaker = access breaker
 job-listings-ui-reward-name-Emag = emag
 job-listings-ui-reward-name-ToolboxElectricalTurretFilled = disposable turret

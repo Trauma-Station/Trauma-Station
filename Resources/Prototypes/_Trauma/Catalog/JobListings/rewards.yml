@@ -14,7 +14,6 @@
   id: MinorSideJobRewardsItems
   table: !type:GroupSelector
     children:
-    - id: SupermatterGrenade
     - id: LubeGrenade
     - id: FoodBoxPizzaBomb
     - id: DeathRattleImplanter
@@ -79,7 +78,6 @@
       tableId: AnyRiggedGloves
     - id: ExperimentalSyndicateTeleporter
     - id: SupermatterGrenade
-    - id: SyndicateBombFake
     - id: AccessBreaker
     - id: Emag
     - id: ToolboxElectricalTurretFilled
