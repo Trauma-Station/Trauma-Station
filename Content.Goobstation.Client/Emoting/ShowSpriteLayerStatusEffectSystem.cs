@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.StatusEffectNew;
-using Robust.Client.GameObjects;
 
 namespace Content.Goobstation.Client.Emoting;
 
-public sealed class ShowSpriteLayerStatusEffectSystem : EntitySystem
+public sealed partial class ShowSpriteLayerStatusEffectSystem : EntitySystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
