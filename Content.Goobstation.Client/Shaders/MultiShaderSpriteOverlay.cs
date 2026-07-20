@@ -53,7 +53,8 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
             if (!bounds.Contains(pos))
                 continue;
 
-            var multipleDirs = sprite.AllLayers.Any(x => x is SpriteComponent.Layer l && _sprite.LayerGetDirectionCount(l) > 1);
+            var multipleDirs =
+                sprite.AllLayers.Any(x => x is SpriteComponent.Layer l && _sprite.LayerGetDirectionCount(l) > 1);
 
             var rotAdjusted = multipleDirs && !sprite.NoRotation ? -eye.Rotation : Angle.Zero;
             var finalRot = rot + rotAdjusted;
@@ -106,7 +107,8 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
                     if (sprite is { NoRotation: false, SnapCardinals: true })
                         cardinal = angle.RoundToCardinalAngle();
 
-                    var entityMatrix = Matrix3Helpers.CreateTransform(position, sprite.NoRotation ? -eye.Rotation : rotation - cardinal);
+                    var entityMatrix = Matrix3Helpers.CreateTransform(position,
+                        sprite.NoRotation ? -eye.Rotation : rotation - cardinal);
                     Matrix3x2.Invert(entityMatrix, out var invEntityMatrix);
 
                     var invMatrix = target.GetWorldToLocalMatrix(eye, viewport.RenderScale);
@@ -147,13 +149,13 @@ public sealed partial class MultiShaderSpriteOverlay : Overlay
                         postHandle.DrawTextureRectRegion(target.Texture, quad, data.Color);
                     }
 
-                    // if (sprite.PostShader == null)
-                    //     return;
+                    if (sprite.PostShader == null)
+                        return;
 
-                    // postHandle.UseShader(sprite.PostShader);
-                    // if (sprite.RaiseShaderEvent)
-                    //     _entMan.EventBus.RaiseLocalEvent(uid, new BeforePostShaderRenderEvent(sprite, viewport));
-                    // postHandle.DrawTextureRectRegion(target.Texture, quad);
+                    postHandle.UseShader(sprite.PostShader);
+                    if (sprite.RaiseShaderEvent)
+                        _entMan.EventBus.RaiseLocalEvent(uid, new BeforePostShaderRenderEvent(sprite, viewport));
+                    postHandle.DrawTextureRectRegion(target.Texture, quad);
                 },
                 Color.Transparent);
 

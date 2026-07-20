@@ -4,12 +4,14 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Server.Station.Systems;
+using Content.Server.Store.Systems;
 using Content.Server.Traitor.Uplink;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Store;
+using Content.Shared.Store.Components;
 using Content.Trauma.Server.GameTicking.Rules.Components;
 using Content.Trauma.Server.Spy;
 using Content.Trauma.Shared.Areas;
@@ -31,6 +33,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [Dependency] private RoleSystem _role = default!;
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private StationSystem _station = default!;
+    [Dependency] private StoreSystem _store = default!;
 
     protected override void ActiveTick(EntityUid uid,
         SpyRuleComponent component,
@@ -57,17 +60,24 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
             component.StationMaps.Add(Transform(grid).MapID);
         }
 
-        GenerateLootPool(component);
+        GenerateLootPool((uid, component));
         RefreshBounties(uid, component, _timing.CurTime);
     }
 
-    private void GenerateLootPool(SpyRuleComponent comp)
+    private void GenerateLootPool(Entity<SpyRuleComponent, StoreComponent?> ent)
     {
+        var (uid, comp, store) = ent;
+
+        if (!Resolve(uid, ref store))
+            return;
+
+        store.LastAvailableListings = _store.GetAvailableListings(uid, uid, store).ToHashSet();
+
         var tc = UplinkSystem.TelecrystalCurrencyPrototype;
-        foreach (var proto in ProtoMan.EnumeratePrototypes<ListingPrototype>())
+
+        foreach (var listing in store.LastAvailableListings)
         {
-            if (!proto.OriginalCost.TryGetValue(tc, out var cost) ||
-                !proto.Categories.Intersect(comp.ValidCategories).Any())
+            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || listing.ProductEntity == null)
                 continue;
 
             var difficulty = SpyBountyDifficulty.Easy;
@@ -80,8 +90,12 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
                 difficulty = value;
             }
 
-            // TODO change this
-            comp.LootPool.GetOrNew(difficulty)[proto.ID] = 1f;
+            comp.LootPool.GetOrNew(difficulty)[listing.ID] = 1f;
+        }
+
+        foreach (var proto in ProtoMan.EnumeratePrototypes<SpyRewardPrototype>())
+        {
+            comp.LootPool.GetOrNew(proto.Difficulty)[proto.ID] = proto.Weight;
         }
     }
 

@@ -3,15 +3,21 @@ using Content.Shared.DoAfter;
 namespace Content.Trauma.Shared.Spy;
 
 [Serializable, NetSerializable]
-public sealed partial class SpyStealDoAfterEvent(SpyBounty bounty, NetEntity rule) : DoAfterEvent
+public sealed partial class SpyStealDoAfterEvent : DoAfterEvent
 {
     [DataField]
-    public SpyBounty Bounty = bounty;
+    public ProtoId<SpyBountyPrototype> Bounty;
 
     [DataField]
-    public NetEntity Rule = rule;
+    public NetEntity Rule;
 
-    public SpyStealDoAfterEvent() : this(new SpyBounty(), NetEntity.Invalid) { }
+    public SpyStealDoAfterEvent() { }
 
-    public override DoAfterEvent Clone() => new SpyStealDoAfterEvent(Bounty, Rule);
+    public SpyStealDoAfterEvent(ProtoId<SpyBountyPrototype> bounty, NetEntity rule)
+    {
+        Bounty = bounty;
+        Rule = rule;
+    }
+
+    public override DoAfterEvent Clone() => this;
 }

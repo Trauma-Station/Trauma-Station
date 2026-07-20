@@ -1,0 +1,109 @@
+- type: listing
+  id: UplinkSpyBoxMagazineHighCaliber
+  name: spy-uplink-high-caliber-name
+  description: spy-uplink-high-caliber-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_rifle_mags.rsi, state: red }
+  productEntity: BoxMagazineHighCaliberSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxGrenade
+  name: spy-uplink-grenade-name
+  description: spy-uplink-grenade-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi, state: blast }
+  productEntity: BoxGrenadeSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazineShotgun
+  name: spy-uplink-magazine-shotgun-name
+  description: spy-uplink-magazine-shotgun-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/m12.rsi, state: pellets }
+  productEntity: BoxMagazineShotgunSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyMagazineBoxAntiMateriel
+  name: spy-uplink-magazine-sniper-name
+  description: spy-uplink-magazine-sniper-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/sniper_rifle_mag.rsi, state: base }
+  productEntity: MagazineBoxAntiMaterielSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazineLightRifle
+  name: spy-uplink-magazine-light-rifle-name
+  description: spy-uplink-magazine-light-rifle-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi, state: icon }
+  productEntity: BoxMagazineLightRifleSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazineRifle
+  name: spy-uplink-magazine-rifle-name
+  description: spy-uplink-magazine-rifle-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi, state: base }
+  productEntity: BoxMagazineRifleSpy
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazinePistolSubMachineGun
+  name: spy-uplink-magazine-smg-name
+  description: spy-uplink-magazine-smg-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi, state: red-icon }
+  productEntity: BoxMagazinePistolSubMachineGun
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazinePistolHighCapacity
+  name: spy-uplink-magazine-pistol-hicap-name
+  description: spy-uplink-magazine-pistol-hicap-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base-icon }
+  productEntity: BoxMagazinePistolHighCapacity
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazinePistolSubMachineGunTopMounted
+  name: spy-uplink-magazine-smg-topmounted-name
+  description: spy-uplink-magazine-smg-topmounted-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag_top_mounted.rsi, state: base }
+  productEntity: BoxMagazinePistolSubMachineGunTopMounted
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxMagazinePistolCaselessRifle
+  name: spy-uplink-magazine-caseless-name
+  description: spy-uplink-magazine-caseless-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: base }
+  productEntity: BoxMagazinePistolCaselessRifle
+  cost:
+    Telecrystal: 20
+  categories: []
+
+- type: listing
+  id: UplinkSpyBoxSpeedLoaderMagnumAP
+  name: spy-uplink-magazine-magnum-name
+  description: spy-uplink-magazine-magnum-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
+  productEntity: MagazineBoxSpeedloaderMagnumAP
+  cost:
+    Telecrystal: 20
+  categories: []

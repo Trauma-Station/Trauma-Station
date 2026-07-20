@@ -79,6 +79,19 @@
     - !type:NestedEffect
       proto: TraitorSkills
   - type: SpyRule
+  - type: Store
+    categories:
+    - UplinkWeaponry
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkWearables
+    currencyWhitelist:
+    - Telecrystal
+    balance:
+      Telecrystal: 0
   - type: GameRule
     minPlayers: 5
   - type: AntagSelection

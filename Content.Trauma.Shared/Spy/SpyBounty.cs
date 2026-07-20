@@ -31,7 +31,8 @@ public sealed partial class SpyBounty : IEquatable<SpyBounty>
 
     public string Description = string.Empty;
 
-    public ProtoId<SpyRewardPrototype> Reward;
+    // Either ListingPrototype or SpyBountyPrototype
+    public string Reward = string.Empty;
 
     public bool Equals(SpyBounty? other)
     {
@@ -95,7 +96,10 @@ public sealed partial class SpyRewardPrototype : IPrototype
     public LocId? RewardDescriptionOverride;
 
     [DataField]
-    public bool RemoveOnClaim = true;
+    public float Weight = 1f;
+
+    [DataField]
+    public float? RemoveFromPoolChanceOverride;
 }
 
 [ImplicitDataDefinitionForInheritors]

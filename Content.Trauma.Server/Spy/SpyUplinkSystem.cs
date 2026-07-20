@@ -1,5 +1,7 @@
+using System.Linq;
 using Content.Server.DoAfter;
 using Content.Server.GameTicking;
+using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared.DoAfter;
@@ -14,6 +16,7 @@ using Content.Trauma.Shared.Spy.Ui;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Spy;
@@ -21,20 +24,27 @@ namespace Content.Trauma.Server.Spy;
 public sealed partial class SpyUplinkSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private RoleSystem _role = default!;
     [Dependency] private GameTicker _ticker = default!;
     [Dependency] private DoAfterSystem _doAfter = default!;
     [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     [SubscribeLocalEvent]
     private void OnSteal(Entity<SpyUplinkComponent> ent, ref SpyStealDoAfterEvent args)
     {
         RemCompDeferred<ActiveScannerComponent>(ent);
 
+        var protoId = args.Bounty;
+
         if (args.Cancelled || args.Handled || args.Target is not { } target || !TryGetEntity(args.Rule, out var rule) ||
-            !TryComp(rule, out SpyRuleComponent? ruleComp) || !IsStealable(target, args.Bounty))
+            !TryComp(rule, out SpyRuleComponent? ruleComp) ||
+            ruleComp.CurrentBounties.FirstOrDefault(x => x.BountyProto == protoId) is not { } bounty ||
+            !IsStealable(target, bounty) ||
+            TryGetSpyRole(args.User) is not { } role)
             return;
 
         // TODO chance to send it to black market when its real
@@ -44,10 +54,22 @@ public sealed partial class SpyUplinkSystem : EntitySystem
 
         args.Handled = true;
 
-        args.Bounty.Claimed = true;
+        bounty.Claimed = true;
         _audio.PlayPvs(ent.Comp.StealEndSound, ent);
+
+        var reward = bounty.Reward;
+        var difficulty = ProtoMan.Index(protoId).Difficulty;
+        var chanceToRemoveFromPool = ruleComp.ChancesToRemoveRewardFromPool[difficulty];
+        if (ProtoMan.HasIndex<SpyRewardPrototype>(reward) &&
+            ProtoMan.Index<SpyRewardPrototype>(reward).RemoveFromPoolChanceOverride is { } chance)
+            chanceToRemoveFromPool = chance;
+
+        if (_random.Prob(Math.Clamp(chanceToRemoveFromPool, 0f, 1f)))
+            ruleComp.LootPool[difficulty].Remove(reward);
+
+        role.Comp2.AvailableRewards.Add(reward);
+
         RefreshUi(ruleComp.NextRefresh, ruleComp.CurrentBounties);
-        // TODO reward, remove from pool
     }
 
     [SubscribeLocalEvent]
@@ -83,6 +105,32 @@ public sealed partial class SpyUplinkSystem : EntitySystem
             // TODO VERB ICON find a better icon
             Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
         });
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCollectReward(Entity<SpyUplinkComponent> ent, ref SpyRewardSelectedMessage args)
+    {
+        if (TryGetSpyRole(args.Actor) is not { } role || !role.Comp2.AvailableRewards.Contains(args.Id))
+            return;
+
+        EntProtoId? reward = null;
+        if (ProtoMan.HasIndex<SpyRewardPrototype>(args.Id))
+        {
+            if (!ProtoMan.Index<SpyRewardPrototype>(args.Id).RewardSelection.Contains(args.Listing))
+                return;
+
+            reward = ProtoMan.Index(args.Listing).ProductEntity;
+        }
+        else if (args.Id == args.Listing)
+            reward = ProtoMan.Index(args.Listing).ProductEntity;
+
+        role.Comp2.AvailableRewards.Remove(args.Id);
+
+        if (reward is not { } proto)
+            return;
+
+        var product = Spawn(proto, Transform(args.Actor).Coordinates);
+        _hands.PickupOrDrop(args.Actor, product);
     }
 
     [SubscribeLocalEvent]
@@ -124,7 +172,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         var doArgs = new DoAfterArgs(EntityManager,
             user,
             proto.TheftTime,
-            new SpyStealDoAfterEvent(bounty, GetNetEntity(rule)),
+            new SpyStealDoAfterEvent(bounty.BountyProto, GetNetEntity(rule)),
             uplink,
             uid,
             uplink)
@@ -158,19 +206,37 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         if (!_ui.TryOpenUi(uplink, SpyUplinkUiKey.Key, user))
             return;
 
-        var state = new SpyUpdateState(rule.Comp.NextRefresh, rule.Comp.CurrentBounties);
-        _ui.SetUiState(uplink, SpyUplinkUiKey.Key, state);
+        RefreshUplinkUi(uplink, rule.Comp.NextRefresh, rule.Comp.CurrentBounties);
     }
 
     public void RefreshUi(TimeSpan nextRefresh, HashSet<SpyBounty> currentBounties)
     {
-        var state = new SpyUpdateState(nextRefresh, currentBounties);
-
         var query = EntityQueryEnumerator<SpyUplinkComponent, UserInterfaceComponent>();
         while (query.MoveNext(out var uplink, out _, out var ui))
         {
-            _ui.SetUiState((uplink, ui), SpyUplinkUiKey.Key, state);
+            RefreshUplinkUi((uplink, ui), nextRefresh, currentBounties);
         }
+    }
+
+    public void RefreshUplinkUi(Entity<UserInterfaceComponent?> ent,
+        TimeSpan nextRefresh,
+        HashSet<SpyBounty> currentBounties)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        var dict = new Dictionary<NetEntity, List<string>>();
+
+        foreach (var actor in _ui.GetActors(ent, SpyUplinkUiKey.Key))
+        {
+            if (TryGetSpyRole(actor) is not { } role)
+                continue;
+
+            dict[GetNetEntity(actor)] = role.Comp2.AvailableRewards;
+        }
+
+        var state = new SpyUpdateState(nextRefresh, currentBounties, dict);
+        _ui.SetUiState(ent, SpyUplinkUiKey.Key, state);
     }
 
     public Entity<MindRoleComponent, SpyRoleComponent>? TryGetSpyRole(EntityUid user)
@@ -184,6 +250,14 @@ public sealed partial class SpyUplinkSystem : EntitySystem
     public EntityUid? TryGetSpyRule(EntityUid user)
     {
         if (TryGetSpyRole(user) is not { } role || role.Comp2.Rule is not { } rule || !_ticker.IsGameRuleActive(rule))
+            return null;
+
+        return rule;
+    }
+
+    public EntityUid? TryGetSpyRule(SpyRoleComponent role)
+    {
+        if (role.Rule is not { } rule || !_ticker.IsGameRuleActive(rule))
             return null;
 
         return rule;

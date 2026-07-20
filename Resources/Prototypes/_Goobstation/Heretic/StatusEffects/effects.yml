@@ -103,6 +103,7 @@
       SecondSkin:
         color: "#fb793a"
         renderOrder: 1
+        mutable: false
 
 - type: entity
   parent: [MobStatusEffectDebuff, MobStatusEffectBase]

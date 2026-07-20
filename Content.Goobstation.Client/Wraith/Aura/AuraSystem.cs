@@ -43,7 +43,7 @@ public sealed partial class AuraSystem : EntitySystem
 
         if (ent.Comp1.MultiShaderOrder is { } order)
         {
-            var ev = new SetMultiShaderEvent(Shader, enabled, order, null, false, true);
+            var ev = new SetMultiShaderEvent(Shader, enabled, order, RaiseEvent: true);
             RaiseLocalEvent(ent, ref ev);
             return;
         }

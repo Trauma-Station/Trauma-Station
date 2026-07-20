@@ -17,8 +17,9 @@ public sealed partial class SpyBountyControl : Control
         var spriteSys = _entity.System<SpriteSystem>();
 
         var bountyProto = _proto.Index(data.BountyProto);
-        var rewardProto = _proto.Index(data.Reward);
-        var listing = _proto.Index(rewardProto.RewardSelection[0]);
+        var isRewardProto = _proto.HasIndex<SpyRewardPrototype>(data.Reward);
+        var rewardProto = isRewardProto ? _proto.Index<SpyRewardPrototype>(data.Reward) : null;
+        var listing = isRewardProto ? _proto.Index(rewardProto!.RewardSelection[0]) : _proto.Index<ListingPrototype>(data.Reward);
 
         BountyName.Text = data.Name;
         BountyName.SetOnlyStyleClass($"SpyBounty{bountyProto.Difficulty}");
@@ -31,12 +32,12 @@ public sealed partial class SpyBountyControl : Control
 
         BountyReward.Title = Loc.GetString("spy-uplink-reward",
             ("reward",
-                rewardProto.RewardNameOverride is { } overrideName
+                rewardProto?.RewardNameOverride is { } overrideName
                     ? Loc.GetString(overrideName)
                     : ListingLocalisationHelpers.GetLocalisedNameOrEntityName(listing, _proto)));
         BountyRewardDescription.Text = Loc.GetString("spy-uplink-description-label",
             ("desc",
-                rewardProto.RewardDescriptionOverride is { } overrideDesc
+                rewardProto?.RewardDescriptionOverride is { } overrideDesc
                     ? Loc.GetString(overrideDesc)
                     : ListingLocalisationHelpers.GetLocalisedDescriptionOrEntityDescription(listing, _proto)));
 

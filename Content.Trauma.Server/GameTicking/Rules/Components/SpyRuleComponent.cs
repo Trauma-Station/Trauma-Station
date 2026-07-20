@@ -1,6 +1,5 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Random;
-using Content.Shared.Store;
 using Content.Trauma.Shared.Spy;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -44,21 +43,9 @@ public sealed partial class SpyRuleComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextRefresh = TimeSpan.Zero;
 
+    // Difficulty -> ([ListingPrototype.ID OR SpyRewardPrototype.ID] -> weight)
     [DataField]
-    public HashSet<ProtoId<StoreCategoryPrototype>> ValidCategories = new()
-    {
-        "UplinkWeaponry",
-        "UplinkExplosives",
-        "UplinkChemicals",
-        "UplinkDeception",
-        "UplinkDisruption",
-        "UplinkImplants",
-        "UplinkAllies",
-        "UplinkWearables",
-    };
-
-    [DataField]
-    public Dictionary<SpyBountyDifficulty, Dictionary<ProtoId<SpyRewardPrototype>, float>> LootPool = new();
+    public Dictionary<SpyBountyDifficulty, Dictionary<string, float>> LootPool = new();
 
     [DataField]
     public SortedDictionary<FixedPoint2, SpyBountyDifficulty> CostToDifficulty = new()
@@ -66,6 +53,14 @@ public sealed partial class SpyRuleComponent : Component
         {0, SpyBountyDifficulty.Easy},
         {30, SpyBountyDifficulty.Medium},
         {60, SpyBountyDifficulty.Hard},
+    };
+
+    [DataField]
+    public Dictionary<SpyBountyDifficulty, float> ChancesToRemoveRewardFromPool = new()
+    {
+        {SpyBountyDifficulty.Easy, 0.25f},
+        {SpyBountyDifficulty.Medium, 0.5f},
+        {SpyBountyDifficulty.Hard, 1f},
     };
 
     [DataField]

@@ -10,4 +10,8 @@ public sealed partial class SpyRoleComponent : BaseMindRoleComponent
 
     [DataField]
     public EntityUid? Rule;
+
+    // Either SpyRewardPrototype or ListingPrototype
+    [DataField]
+    public List<string> AvailableRewards = new();
 }

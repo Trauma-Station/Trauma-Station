@@ -10,3 +10,11 @@ spy-uplink-flavor = Rewards given on first-come first-serve basis.
 spy-uplink-claimed = 🕵 Claimed!
 spy-uplink-reward = Reward: {$reward}
 spy-uplink-description-label = [font size=10][color=darkcyan]{$desc}[/color][/font]
+spy-uplink-collect-reward = Collect Reward
+spy-uplink-bounties = Bounties
+spy-uplink-rewards = Rewards
+spy-uplink-select-reward = Select Reward
+spy-uplink-no-rewards = No rewards available!
+
+spy-uplink-ammo-name = Ammunition
+spy-uplink-ammo-desc = Some ammo of your choice

@@ -54,7 +54,6 @@ public sealed partial class ScannerSystem : EntitySystem
         var ev = new SetMultiShaderEvent(ScanShader,
             false,
             ent.Comp.MultiShaderOrder,
-            Mutable: false,
             RaiseEvent: true);
         RaiseLocalEvent(ent, ref ev);
     }
@@ -64,7 +63,6 @@ public sealed partial class ScannerSystem : EntitySystem
         var ev = new SetMultiShaderEvent(ScanShader,
             true,
             ent.Comp.MultiShaderOrder,
-            Mutable: false,
             RaiseEvent: true);
         RaiseLocalEvent(ent, ref ev);
     }

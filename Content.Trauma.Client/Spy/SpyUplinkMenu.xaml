@@ -31,6 +31,7 @@
 
             <!-- Rewards -->
             <PanelContainer StyleClasses="BackgroundPanelDark" VerticalExpand="True">
+                <Label Name="NoRewardsLabel" Access="Public" HorizontalAlignment="Center" VerticalAlignment="Top" Text="spy-uplink-no-rewards"/>
                 <ScrollContainer
                     Name="RewardsScroll"
                     HScrollEnabled="False"
